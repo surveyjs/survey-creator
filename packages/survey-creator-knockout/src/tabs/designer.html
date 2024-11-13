@@ -15,7 +15,8 @@
       data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }">
       <!-- ko component: { name: 'svc-surface-placeholder', params: { name: 'designer', placeholderTitleText: $data.placeholderTitleText, placeholderDescriptionText: $data.placeholderDescriptionText } } -->
       <!-- /ko -->
-      <svc-page class=" svc-designer-placeholder-page" params="survey: survey, creator: creator, page: newPage">
+      <svc-page class=" svc-designer-placeholder-page"
+        params="survey: survey, creator: creator, page: newPage, isGhost: true">
       </svc-page>
     </div>
     <!-- /ko -->
@@ -40,18 +41,18 @@
       <!-- ko foreach: survey.pages -->
       <svc-page class="svc-page"
         data-bind="attr: { 'data-sv-drop-target-survey-element': $data.name, 'data-sv-drop-target-page': $data.name }"
-        params="survey: $parent.survey, page: $data, creator: $parent.creator"></svc-page>
+        params="survey: $parent.survey, page: $data, creator: $parent.creator, isGhost: false"></svc-page>
       <!-- /ko -->
       <!-- ko if: showNewPage -->
       <svc-page class="svc-page" data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }"
-        params="survey: survey, creator: creator, page: newPage"></svc-page>
+        params="survey: survey, creator: creator, page: newPage, isGhost: true"></svc-page>
       <!-- /ko -->
       <!-- /ko -->
 
       <!-- ko if: pagesController.page2Display && creator.pageEditMode === 'bypage' -->
       <svc-page class="svc-page"
         data-bind="attr: { 'data-sv-drop-target-survey-element': displayPageDropTarget, 'data-sv-drop-target-page': pagesController.page2Display.name }"
-        params="survey: survey, page: pagesController.page2Display, creator: creator"></svc-page>
+        params="survey: survey, page: pagesController.page2Display, creator: creator, isGhost: pagesController.page2Display == newPage"></svc-page>
       <!-- /ko -->
 
       <!-- ko if: false && survey.isShowProgressBarOnBottom -->
@@ -68,7 +69,7 @@
     <!-- /ko -->
     <!-- ko if: hasToolbar -->
     <div class="svc-tab-designer__toolbar">
-      <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer, handleClick: false } } -->
+      <!-- ko component: { name: 'sv-action-bar', params: { model: surfaceToolbar, handleClick: false } } -->
       <!-- /ko -->
     </div>
     <!-- /ko -->

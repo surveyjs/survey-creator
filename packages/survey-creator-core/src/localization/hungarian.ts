@@ -1018,6 +1018,61 @@ export var huStrings = {
       url: "URL",
       week: "Hét"
     },
+    autocomplete: {
+      name: "Teljes név",
+      "honorific-prefix": "Előképző",
+      "given-name": "Keresztnév",
+      "additional-name": "Középső név",
+      "family-name": "Vezetéknév",
+      "honorific-suffix": "Toldalék",
+      nickname: "Becenév",
+      "organization-title": "Beosztás",
+      username: "Felhasználónév",
+      "new-password": "Új jelszó",
+      "current-password": "Jelenlegi jelszó",
+      organization: "Szervezet neve",
+      "street-address": "Teljes utca és házszám",
+      "address-line1": "Címsor 1",
+      "address-line2": "Címsor 2",
+      "address-line3": "Címsor 3",
+      "address-level4": "4. szintű cím",
+      "address-level3": "3. szintű cím",
+      "address-level2": "2. szintű cím",
+      "address-level1": "1. szintű cím",
+      country: "Országkód",
+      "country-name": "Ország neve",
+      "postal-code": "Irányítószám",
+      "cc-name": "Kártyatulajdonos neve",
+      "cc-given-name": "Kártyabirtokos keresztneve",
+      "cc-additional-name": "Kártyabirtokos középső neve",
+      "cc-family-name": "Kártyabirtokos vezetékneve",
+      "cc-number": "Bankkártya száma",
+      "cc-exp": "Lejárati dátum",
+      "cc-exp-month": "Lejárati hónap",
+      "cc-exp-year": "Lejárati év",
+      "cc-csc": "Kártya biztonsági kód",
+      "cc-type": "Hitelkártya típusa",
+      "transaction-currency": "Tranzakció pénzneme",
+      "transaction-amount": "Tranzakció összege",
+      language: "Választott nyelv",
+      bday: "Születésnap",
+      "bday-day": "Születésnap napja",
+      "bday-month": "Születésnapi hónap",
+      "bday-year": "Születésnapi év",
+      sex: "Nem",
+      url: "Webhely URL-címe",
+      photo: "Profilkép",
+      tel: "Telefonszám",
+      "tel-country-code": "Telefonszám országkódja",
+      "tel-national": "Nemzeti telefonszám",
+      "tel-area-code": "Körzetszám",
+      "tel-local": "Helyi telefonszám",
+      "tel-local-prefix": "Helyi telefon előhívószáma",
+      "tel-local-suffix": "Helyi telefon utótag",
+      "tel-extension": "Telefonbővítmény",
+      email: "E-mail cím",
+      impp: "Azonnali üzenetküldési protokoll"
+    },
     maskType: {
       none: "Egyik sem",
       pattern: "Minta",
@@ -3005,3 +3060,56 @@ editorLocalization.locales["hu"] = huStrings;
 // names.default-contrast: "Contrast" => "Kontraszt"
 // panel.showNumber: "Number this panel" => "A panel számozása"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan továbblépjen a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést. Ez a funkció nem érvényes, ha az oldal utolsó kérdése nyitott végű, vagy több választ is lehetővé tesz."
+// autocomplete.name: "Full Name" => "Teljes név"
+// autocomplete.honorific-prefix: "Prefix" => "Előképző"
+// autocomplete.given-name: "First Name" => "Keresztnév"
+// autocomplete.additional-name: "Middle Name" => "Középső név"
+// autocomplete.family-name: "Last Name" => "Vezetéknév"
+// autocomplete.honorific-suffix: "Suffix" => "Toldalék"
+// autocomplete.nickname: "Nickname" => "Becenév"
+// autocomplete.organization-title: "Job Title" => "Beosztás"
+// autocomplete.username: "User Name" => "Felhasználónév"
+// autocomplete.new-password: "New Password" => "Új jelszó"
+// autocomplete.current-password: "Current Password" => "Jelenlegi jelszó"
+// autocomplete.organization: "Organization Name" => "Szervezet neve"
+// autocomplete.street-address: "Full Street Address" => "Teljes utca és házszám"
+// autocomplete.address-line1: "Address Line 1" => "Címsor 1"
+// autocomplete.address-line2: "Address Line 2" => "Címsor 2"
+// autocomplete.address-line3: "Address Line 3" => "Címsor 3"
+// autocomplete.address-level4: "Level 4 Address" => "4. szintű cím"
+// autocomplete.address-level3: "Level 3 Address" => "3. szintű cím"
+// autocomplete.address-level2: "Level 2 Address" => "2. szintű cím"
+// autocomplete.address-level1: "Level 1 Address" => "1. szintű cím"
+// autocomplete.country: "Country Code" => "Országkód"
+// autocomplete.country-name: "Country Name" => "Ország neve"
+// autocomplete.postal-code: "Postal Code" => "Irányítószám"
+// autocomplete.cc-name: "Cardholder Name" => "Kártyatulajdonos neve"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Kártyabirtokos keresztneve"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Kártyabirtokos középső neve"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Kártyabirtokos vezetékneve"
+// autocomplete.cc-number: "Credit Card Number" => "Bankkártya száma"
+// autocomplete.cc-exp: "Expiration Date" => "Lejárati dátum"
+// autocomplete.cc-exp-month: "Expiration Month" => "Lejárati hónap"
+// autocomplete.cc-exp-year: "Expiration Year" => "Lejárati év"
+// autocomplete.cc-csc: "Card Security Code" => "Kártya biztonsági kód"
+// autocomplete.cc-type: "Credit Card Type" => "Hitelkártya típusa"
+// autocomplete.transaction-currency: "Transaction Currency" => "Tranzakció pénzneme"
+// autocomplete.transaction-amount: "Transaction Amount" => "Tranzakció összege"
+// autocomplete.language: "Preferred Language" => "Választott nyelv"
+// autocomplete.bday: "Birthday" => "Születésnap"
+// autocomplete.bday-day: "Birthday Day" => "Születésnap napja"
+// autocomplete.bday-month: "Birthday Month" => "Születésnapi hónap"
+// autocomplete.bday-year: "Birthday Year" => "Születésnapi év"
+// autocomplete.sex: "Gender" => "Nem"
+// autocomplete.url: "Website URL" => "Webhely URL-címe"
+// autocomplete.photo: "Profile Photo" => "Profilkép"
+// autocomplete.tel: "Telephone Number" => "Telefonszám"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Telefonszám országkódja"
+// autocomplete.tel-national: "National Telephone Number" => "Nemzeti telefonszám"
+// autocomplete.tel-area-code: "Area Code" => "Körzetszám"
+// autocomplete.tel-local: "Local Phone Number" => "Helyi telefonszám"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Helyi telefon előhívószáma"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Helyi telefon utótag"
+// autocomplete.tel-extension: "Phone Extension" => "Telefonbővítmény"
+// autocomplete.email: "Email Address" => "E-mail cím"
+// autocomplete.impp: "Instant Messaging Protocol" => "Azonnali üzenetküldési protokoll"

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Base, getActionDropdownButtonTarget } from "survey-core";
-import { SurveyElementBase, ReactElementFactory, Popup } from "survey-react-ui";
+import { SurveyElementBase, ReactElementFactory, Popup, attachKey2click } from "survey-react-ui";
 import { MenuButton } from "survey-creator-core";
 
 interface ISideBarPropertyGridHeaderProps {
@@ -17,16 +17,20 @@ class SideBarPropertyGridHeader extends SurveyElementBase<ISideBarPropertyGridHe
   }
 
   renderElement(): JSX.Element {
+    const button = attachKey2click(
+      <div className={this.objectSelectionAction.buttonClassName} onClick={() => this.objectSelectionAction.action()}>
+        <div className="svc-sidebar__header-caption">
+          <span className="svc-sidebar__header-title">{this.objectSelectionAction.title}</span>
+          <span className="svc-sidebar__header-subtitle">{this.objectSelectionAction.tooltip}</span>
+        </div>
+      </div>, this.props.model
+    );
+
     return (
       <div className="svc-sidebar__header svc-sidebar__header--tabbed">
         <div className="svc-sidebar__header-container svc-sidebar__header-container--with-subtitle">
-          <div className="svc-sidebar__header-content" onClick={() => this.objectSelectionAction.action()}>
-            <div className={this.objectSelectionAction.buttonClassName}>
-              <div className="svc-sidebar__header-caption">
-                <span className="svc-sidebar__header-title">{this.objectSelectionAction.title}</span>
-                <span className="svc-sidebar__header-subtitle">{this.objectSelectionAction.tooltip}</span>
-              </div>
-            </div>
+          <div className="svc-sidebar__header-content">
+            {button}
             <Popup model={this.objectSelectionAction.popupModel}></Popup>
           </div>
         </div>

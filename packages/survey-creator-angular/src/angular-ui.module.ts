@@ -21,7 +21,7 @@ import { SidebarHeaderComponent } from "./side-bar/side-bar-header.component";
 
 import { ObjectSelectorComponent } from "./side-bar/object-selector.component";
 import { PropertyGridComponent } from "./side-bar/property-grid.component";
-import { SearchComponent } from "./side-bar/search.component";
+import { SearchComponent } from "./components/search.component";
 import { TextareaJsonEditorComponent } from "./tabs/json/json-editor-textarea.component";
 import { AceJsonEditorComponent } from "./tabs/json/json-editor-ace.component";
 import { LogicTabComponent } from "./tabs/logic/logic.component";

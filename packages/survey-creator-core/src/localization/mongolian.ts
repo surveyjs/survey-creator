@@ -1018,6 +1018,61 @@ export var mnStrings = {
       url: "URL",
       week: "Долоо хоног"
     },
+    autocomplete: {
+      name: "Бүтэн нэр",
+      "honorific-prefix": "Угтвар",
+      "given-name": "Овог нэр",
+      "additional-name": "Овгийн нэр",
+      "family-name": "Овгийн нэр",
+      "honorific-suffix": "Суффикс",
+      nickname: "Хоч нэр",
+      "organization-title": "Ажлын нэр",
+      username: "Хэрэглэгчийн нэр",
+      "new-password": "Шинэ нууц үг",
+      "current-password": "Одоогийн нууц үг",
+      organization: "Байгууллагын нэр",
+      "street-address": "Гудамжны бүрэн хаяг",
+      "address-line1": "Хаягийн шугам 1",
+      "address-line2": "Хаягийн мөр 2",
+      "address-line3": "Хаягийн мөр 3",
+      "address-level4": "4-р түвшингийн хаяг",
+      "address-level3": "3-р түвшингийн хаяг",
+      "address-level2": "2-р түвшингийн хаяг",
+      "address-level1": "1-р түвшингийн хаяг",
+      country: "Улсын код",
+      "country-name": "Улсын нэр",
+      "postal-code": "Шуудангийн код",
+      "cc-name": "Карт эзэмшигчийн нэр",
+      "cc-given-name": "Карт эзэмшигчийн нэр",
+      "cc-additional-name": "Карт эзэмшигчийн овгийн нэр",
+      "cc-family-name": "Карт эзэмшигчийн овгийн нэр",
+      "cc-number": "Кредит картын дугаар",
+      "cc-exp": "Хүчингүй болох хугацаа",
+      "cc-exp-month": "Хугацаа дуусах сар",
+      "cc-exp-year": "Хугацаа дуусах жил",
+      "cc-csc": "Картын аюулгүй байдлын код",
+      "cc-type": "Кредит картын төрөл",
+      "transaction-currency": "Транзакцийн валют",
+      "transaction-amount": "Транзакцийн хэмжээ",
+      language: "Санал болгосон хэл",
+      bday: "Төрсөн өдөр",
+      "bday-day": "Төрсөн өдрийн өдөр",
+      "bday-month": "Төрсөн өдрийн сар",
+      "bday-year": "Төрсөн өдөр",
+      sex: "Хүйс",
+      url: "Вэбсайтын URL",
+      photo: "Профайл зураг",
+      tel: "Утасны дугаар",
+      "tel-country-code": "Утасны улсын код",
+      "tel-national": "Үндэсний утасны дугаар",
+      "tel-area-code": "Бүсийн код",
+      "tel-local": "Орон нутгийн утасны дугаар",
+      "tel-local-prefix": "Орон нутгийн утасны угтвар",
+      "tel-local-suffix": "Орон нутгийн утасны суффикс",
+      "tel-extension": "Утасны өргөтгөл",
+      email: "Э-мэйл хаяг",
+      impp: "Мессежийн протокол"
+    },
     maskType: {
       none: "Хэн ч биш",
       pattern: "Загвар",
@@ -2508,3 +2563,56 @@ editorLocalization.locales["mn"] = mnStrings;
 // names.default-contrast: "Contrast" => "Эсрэг тэсрэг байдал"
 // panel.showNumber: "Number this panel" => "Энэ хавсралтыг дугаарлах"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Оролцогч одоогийн хуудсан дээрх бүх асуултад хариулсны дараа судалгааг дараагийн хуудас руу автоматаар шилжүүлэхийг хүсч байгаа эсэхээ сонго. Хуудасны хамгийн сүүлийн асуулт нээлттэй эсвэл олон хариулт өгөх боломж олгодог бол энэ онцлог хэрэгжихгүй."
+// autocomplete.name: "Full Name" => "Бүтэн нэр"
+// autocomplete.honorific-prefix: "Prefix" => "Угтвар"
+// autocomplete.given-name: "First Name" => "Овог нэр"
+// autocomplete.additional-name: "Middle Name" => "Овгийн нэр"
+// autocomplete.family-name: "Last Name" => "Овгийн нэр"
+// autocomplete.honorific-suffix: "Suffix" => "Суффикс"
+// autocomplete.nickname: "Nickname" => "Хоч нэр"
+// autocomplete.organization-title: "Job Title" => "Ажлын нэр"
+// autocomplete.username: "User Name" => "Хэрэглэгчийн нэр"
+// autocomplete.new-password: "New Password" => "Шинэ нууц үг"
+// autocomplete.current-password: "Current Password" => "Одоогийн нууц үг"
+// autocomplete.organization: "Organization Name" => "Байгууллагын нэр"
+// autocomplete.street-address: "Full Street Address" => "Гудамжны бүрэн хаяг"
+// autocomplete.address-line1: "Address Line 1" => "Хаягийн шугам 1"
+// autocomplete.address-line2: "Address Line 2" => "Хаягийн мөр 2"
+// autocomplete.address-line3: "Address Line 3" => "Хаягийн мөр 3"
+// autocomplete.address-level4: "Level 4 Address" => "4-р түвшингийн хаяг"
+// autocomplete.address-level3: "Level 3 Address" => "3-р түвшингийн хаяг"
+// autocomplete.address-level2: "Level 2 Address" => "2-р түвшингийн хаяг"
+// autocomplete.address-level1: "Level 1 Address" => "1-р түвшингийн хаяг"
+// autocomplete.country: "Country Code" => "Улсын код"
+// autocomplete.country-name: "Country Name" => "Улсын нэр"
+// autocomplete.postal-code: "Postal Code" => "Шуудангийн код"
+// autocomplete.cc-name: "Cardholder Name" => "Карт эзэмшигчийн нэр"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Карт эзэмшигчийн нэр"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Карт эзэмшигчийн овгийн нэр"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Карт эзэмшигчийн овгийн нэр"
+// autocomplete.cc-number: "Credit Card Number" => "Кредит картын дугаар"
+// autocomplete.cc-exp: "Expiration Date" => "Хүчингүй болох хугацаа"
+// autocomplete.cc-exp-month: "Expiration Month" => "Хугацаа дуусах сар"
+// autocomplete.cc-exp-year: "Expiration Year" => "Хугацаа дуусах жил"
+// autocomplete.cc-csc: "Card Security Code" => "Картын аюулгүй байдлын код"
+// autocomplete.cc-type: "Credit Card Type" => "Кредит картын төрөл"
+// autocomplete.transaction-currency: "Transaction Currency" => "Транзакцийн валют"
+// autocomplete.transaction-amount: "Transaction Amount" => "Транзакцийн хэмжээ"
+// autocomplete.language: "Preferred Language" => "Санал болгосон хэл"
+// autocomplete.bday: "Birthday" => "Төрсөн өдөр"
+// autocomplete.bday-day: "Birthday Day" => "Төрсөн өдрийн өдөр"
+// autocomplete.bday-month: "Birthday Month" => "Төрсөн өдрийн сар"
+// autocomplete.bday-year: "Birthday Year" => "Төрсөн өдөр"
+// autocomplete.sex: "Gender" => "Хүйс"
+// autocomplete.url: "Website URL" => "Вэбсайтын URL"
+// autocomplete.photo: "Profile Photo" => "Профайл зураг"
+// autocomplete.tel: "Telephone Number" => "Утасны дугаар"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Утасны улсын код"
+// autocomplete.tel-national: "National Telephone Number" => "Үндэсний утасны дугаар"
+// autocomplete.tel-area-code: "Area Code" => "Бүсийн код"
+// autocomplete.tel-local: "Local Phone Number" => "Орон нутгийн утасны дугаар"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Орон нутгийн утасны угтвар"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Орон нутгийн утасны суффикс"
+// autocomplete.tel-extension: "Phone Extension" => "Утасны өргөтгөл"
+// autocomplete.email: "Email Address" => "Э-мэйл хаяг"
+// autocomplete.impp: "Instant Messaging Protocol" => "Мессежийн протокол"

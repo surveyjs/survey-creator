@@ -3,7 +3,7 @@ import { VerticalResponsivityManager } from "survey-core";
 import { ReactElementFactory } from "survey-react-ui";
 import { ISurveyCreatorToolboxProps, Toolbox } from "./Toolbox";
 import { SurveyCreatorToolboxTool } from "./ToolboxItem";
-import { SearchComponent } from "../side-bar/Search";
+import { SearchComponent } from "../components/Search";
 
 export class AdaptiveToolbox extends Toolbox {
   private manager: VerticalResponsivityManager;

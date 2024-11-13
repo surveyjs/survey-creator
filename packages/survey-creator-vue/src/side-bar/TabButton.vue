@@ -4,13 +4,14 @@
       :class="model.buttonClassName"
       :title="model.tooltip"
       @click="model.action()"
+      v-key2click="{ processEsc: false, disableTabStop: model.disableTabStop }"
     >
       <div class="svc-menu-action__icon">
         <div class="svc-menu-action__icon-container">
           <SvComponent
             :is="'sv-svg-icon'"
             :iconName="model.iconName"
-            :size="24"
+            :size="'auto'"
           ></SvComponent>
         </div>
       </div>

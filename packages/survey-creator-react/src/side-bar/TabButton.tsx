@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import { Base } from "survey-core";
-import { SurveyElementBase, SvgIcon } from "survey-react-ui";
+import { attachKey2click, SurveyElementBase, SvgIcon } from "survey-react-ui";
 import { MenuButton } from "survey-creator-core";
 
 export class TabButtonComponent extends SurveyElementBase<{ model: MenuButton }, any> {
@@ -14,19 +14,22 @@ export class TabButtonComponent extends SurveyElementBase<{ model: MenuButton },
   }
 
   protected renderElement(): JSX.Element | null {
-    return (
-      <div className="svc-menu-action">
-        <div
-          className={this.props.model.buttonClassName}
-          title={this.props.model.tooltip}
-          onClick={() => { this.props.model.action(); }}
-        >
-          <div className="svc-menu-action__icon">
-            <div className="svc-menu-action__icon-container">
-              <SvgIcon iconName={this.props.model.iconName} size={24}></SvgIcon>
-            </div>
+    const button = attachKey2click(
+      <div
+        className={this.props.model.buttonClassName}
+        title={this.props.model.tooltip}
+        onClick={() => { this.props.model.action(); }}
+      >
+        <div className="svc-menu-action__icon">
+          <div className="svc-menu-action__icon-container">
+            <SvgIcon iconName={this.props.model.iconName} size={"auto"}></SvgIcon>
           </div>
         </div>
+      </div>, this.props.model
+    );
+    return (
+      <div className="svc-menu-action">
+        {button}
       </div>
     );
   }

@@ -94,11 +94,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
   }
-
+  @property({ defaultValue: true }) needToRenderContent: boolean;
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.renderedCollapsed = val;
+      if (!val) target.needToRenderContent = true;
       if (target.creator.designerStateManager && !target.creator.designerStateManager.isSuspended && target.surveyElement) {
         target.creator.designerStateManager.getElementState(target.surveyElement).collapsed = val;
       }
@@ -164,14 +165,16 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     };
     const afterRunAnimation = (el: HTMLElement, animatingClassName: string) => {
       this.expandCollapseAnimationRunning = false;
-      cleanHtmlElementAfterAnimation(el);
-      const innerAnimatedElements = this.getInnerAnimatedElements();
-      innerAnimatedElements.forEach((elem: HTMLElement) => {
-        cleanHtmlElementAfterAnimation(elem);
-      });
-      innerAnimatedElements.forEach((elem: HTMLElement) => {
-        elem.classList.remove(animatingClassName);
-      });
+      if(this.surveyElement) {
+        cleanHtmlElementAfterAnimation(el);
+        const innerAnimatedElements = this.getInnerAnimatedElements();
+        innerAnimatedElements.forEach((elem: HTMLElement) => {
+          cleanHtmlElementAfterAnimation(elem);
+        });
+        innerAnimatedElements.forEach((elem: HTMLElement) => {
+          elem.classList.remove(animatingClassName);
+        });
+      }
     };
     return {
       getRerenderEvent: () => this.onElementRerendered,
@@ -220,8 +223,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
 
   protected createActionContainer(): ActionContainer {
     const actionContainer = new SurveyElementActionContainer();
-    actionContainer.dotsItem.iconSize = 16;
+    actionContainer.dotsItem.iconSize = "auto" as any;
     actionContainer.dotsItem.popupModel.horizontalPosition = "center";
+    actionContainer.dotsItem.popupModel.cssClass += " svc-creator-popup";
     return actionContainer;
   }
   private dragCollapsedTimer;
@@ -268,6 +272,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   };;
   protected surveyElement: T
+  get element() {
+    return this.surveyElement;
+  }
   constructor(
     public creator: SurveyCreatorModel,
     surveyElement: T
@@ -291,8 +298,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected restoreState(): void {
     if (!!this.surveyElement) {
       const state = this.creator.designerStateManager?.getElementState(this.surveyElement);
-      this.collapsed = state.collapsed;
+      this.collapsed = this.creator.getElementExpandCollapseState(this.surveyElement as any, "loading", state.collapsed);
     }
+    this.needToRenderContent = !this.collapsed;
   }
 
   protected detachElement(surveyElement: T): void {
@@ -354,13 +362,13 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.updateActionsProperties();
   }
   protected getExpandCollapseAction(): IAction {
-    const collapseIcon = "icon-collapse-detail-light_16x16";
-    const expandIcon = "icon-restore_16x16";
+    const collapseIcon = "icon-collapsepanel-16x16";
+    const expandIcon = "icon-expandpanel-16x16";
     return {
       id: "collapse",
-      css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
+      css: "sv-action-bar-item--collapse",
       iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
-      iconSize: 16,
+      iconSize: "auto",
       action: () => {
         this.collapsed = !this.collapsed;
       }
@@ -422,10 +430,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       new Action({
         id: "duplicate",
         iconName: "icon-duplicate_16x16",
-        css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+        css: "svc-action-bar-item--right",
         title: this.creator.getLocString("survey.duplicate"),
         visibleIndex: 10,
-        iconSize: 16,
+        iconSize: "auto",
         action: () => this.duplicate(),
         onFocus: (isMouse: boolean, event: any) => this.disableActionFocusing(isMouse, event)
       })
@@ -435,11 +443,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       new Action({
         id: "settings",
         iconName: "icon-settings_16x16",
-        css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+        css: "svc-action-bar-item--right",
         title: this.creator.getLocString("ed.settings"),
         locTooltipName: "ed.settingsTooltip",
         visibleIndex: 20,
-        iconSize: 16,
+        iconSize: "auto",
         action: () => {
           this.creator.setShowSidebar(true, true);
           if (!this.creator.isMobileView) {
@@ -455,11 +463,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       new Action({
         id: "delete",
         iconName: "icon-delete_16x16",
-        css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+        css: "svc-action-bar-item--right",
         //needSeparator: items.length > 0,
         title: this.creator.getLocString("pe.delete"),
         visibleIndex: 30,
-        iconSize: 16,
+        iconSize: "auto",
         action: () => {
           this.delete();
         },

@@ -1018,6 +1018,61 @@ export var hebrewStrings = {
       url: "כתובת URL",
       week: "שבוע"
     },
+    autocomplete: {
+      name: "שם מלא",
+      "honorific-prefix": "קידומת",
+      "given-name": "שם פרטי",
+      "additional-name": "שם אמצעי",
+      "family-name": "שם משפחה",
+      "honorific-suffix": "סיומת",
+      nickname: "כינוי",
+      "organization-title": "תפקיד",
+      username: "שם משתמש",
+      "new-password": "סיסמה חדשה",
+      "current-password": "סיסמה נוכחית",
+      organization: "שם הארגון",
+      "street-address": "כתובת הרחוב המלאה",
+      "address-line1": "כתובת שורה 1",
+      "address-line2": "כתובת שורה 2",
+      "address-line3": "כתובת שורה 3",
+      "address-level4": "כתובת ברמה 4",
+      "address-level3": "כתובת ברמה 3",
+      "address-level2": "כתובת ברמה 2",
+      "address-level1": "כתובת ברמה 1",
+      country: "קוד מדינה",
+      "country-name": "שם מדינה",
+      "postal-code": "מיקוד",
+      "cc-name": "שם בעל הכרטיס",
+      "cc-given-name": "שם פרטי של בעל הכרטיס",
+      "cc-additional-name": "שם אמצעי של בעל הכרטיס",
+      "cc-family-name": "שם משפחה של בעל הכרטיס",
+      "cc-number": "מספר כרטיס אשראי",
+      "cc-exp": "תאריך תפוגה",
+      "cc-exp-month": "חודש תפוגה",
+      "cc-exp-year": "שנת תפוגה",
+      "cc-csc": "קוד אבטחה של כרטיס",
+      "cc-type": "סוג כרטיס אשראי",
+      "transaction-currency": "מטבע עסקה",
+      "transaction-amount": "סכום העסקה",
+      language: "שפה מועדפת",
+      bday: "יום הולדת",
+      "bday-day": "יום הולדת",
+      "bday-month": "חודש יום הולדת",
+      "bday-year": "שנת יום הולדת",
+      sex: "מין",
+      url: "כתובת אתר אינטרנט",
+      photo: "תמונת פרופיל",
+      tel: "מספר טלפון",
+      "tel-country-code": "קידומת מדינה לטלפון",
+      "tel-national": "מספר טלפון ארצי",
+      "tel-area-code": "אזור חיוג",
+      "tel-local": "מספר טלפון מקומי",
+      "tel-local-prefix": "קידומת טלפון מקומי",
+      "tel-local-suffix": "סיומת טלפון מקומי",
+      "tel-extension": "שלוחת טלפון",
+      email: "כתובת דוא\"ל",
+      impp: "פרוטוקול העברת הודעות מיידיות"
+    },
     maskType: {
       none: "ללא",
       pattern: "תבנית",
@@ -2420,3 +2475,56 @@ editorLocalization.locales["he"] = hebrewStrings;
 // names.default-contrast: "Contrast" => "ניגוד"
 // panel.showNumber: "Number this panel" => "מספר חלונית זו"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "בחר אם ברצונך שהסקר יתקדם אוטומטית לדף הבא לאחר שהמשיב ענה על כל השאלות בדף הנוכחי. תכונה זו לא תחול אם השאלה האחרונה בדף פתוחה או מאפשרת תשובות מרובות."
+// autocomplete.name: "Full Name" => "שם מלא"
+// autocomplete.honorific-prefix: "Prefix" => "קידומת"
+// autocomplete.given-name: "First Name" => "שם פרטי"
+// autocomplete.additional-name: "Middle Name" => "שם אמצעי"
+// autocomplete.family-name: "Last Name" => "שם משפחה"
+// autocomplete.honorific-suffix: "Suffix" => "סיומת"
+// autocomplete.nickname: "Nickname" => "כינוי"
+// autocomplete.organization-title: "Job Title" => "תפקיד"
+// autocomplete.username: "User Name" => "שם משתמש"
+// autocomplete.new-password: "New Password" => "סיסמה חדשה"
+// autocomplete.current-password: "Current Password" => "סיסמה נוכחית"
+// autocomplete.organization: "Organization Name" => "שם הארגון"
+// autocomplete.street-address: "Full Street Address" => "כתובת הרחוב המלאה"
+// autocomplete.address-line1: "Address Line 1" => "כתובת שורה 1"
+// autocomplete.address-line2: "Address Line 2" => "כתובת שורה 2"
+// autocomplete.address-line3: "Address Line 3" => "כתובת שורה 3"
+// autocomplete.address-level4: "Level 4 Address" => "כתובת ברמה 4"
+// autocomplete.address-level3: "Level 3 Address" => "כתובת ברמה 3"
+// autocomplete.address-level2: "Level 2 Address" => "כתובת ברמה 2"
+// autocomplete.address-level1: "Level 1 Address" => "כתובת ברמה 1"
+// autocomplete.country: "Country Code" => "קוד מדינה"
+// autocomplete.country-name: "Country Name" => "שם מדינה"
+// autocomplete.postal-code: "Postal Code" => "מיקוד"
+// autocomplete.cc-name: "Cardholder Name" => "שם בעל הכרטיס"
+// autocomplete.cc-given-name: "Cardholder First Name" => "שם פרטי של בעל הכרטיס"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "שם אמצעי של בעל הכרטיס"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "שם משפחה של בעל הכרטיס"
+// autocomplete.cc-number: "Credit Card Number" => "מספר כרטיס אשראי"
+// autocomplete.cc-exp: "Expiration Date" => "תאריך תפוגה"
+// autocomplete.cc-exp-month: "Expiration Month" => "חודש תפוגה"
+// autocomplete.cc-exp-year: "Expiration Year" => "שנת תפוגה"
+// autocomplete.cc-csc: "Card Security Code" => "קוד אבטחה של כרטיס"
+// autocomplete.cc-type: "Credit Card Type" => "סוג כרטיס אשראי"
+// autocomplete.transaction-currency: "Transaction Currency" => "מטבע עסקה"
+// autocomplete.transaction-amount: "Transaction Amount" => "סכום העסקה"
+// autocomplete.language: "Preferred Language" => "שפה מועדפת"
+// autocomplete.bday: "Birthday" => "יום הולדת"
+// autocomplete.bday-day: "Birthday Day" => "יום הולדת"
+// autocomplete.bday-month: "Birthday Month" => "חודש יום הולדת"
+// autocomplete.bday-year: "Birthday Year" => "שנת יום הולדת"
+// autocomplete.sex: "Gender" => "מין"
+// autocomplete.url: "Website URL" => "כתובת אתר אינטרנט"
+// autocomplete.photo: "Profile Photo" => "תמונת פרופיל"
+// autocomplete.tel: "Telephone Number" => "מספר טלפון"
+// autocomplete.tel-country-code: "Country Code for Phone" => "קידומת מדינה לטלפון"
+// autocomplete.tel-national: "National Telephone Number" => "מספר טלפון ארצי"
+// autocomplete.tel-area-code: "Area Code" => "אזור חיוג"
+// autocomplete.tel-local: "Local Phone Number" => "מספר טלפון מקומי"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "קידומת טלפון מקומי"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "סיומת טלפון מקומי"
+// autocomplete.tel-extension: "Phone Extension" => "שלוחת טלפון"
+// autocomplete.email: "Email Address" => "כתובת דוא\"ל"
+// autocomplete.impp: "Instant Messaging Protocol" => "פרוטוקול העברת הודעות מיידיות"

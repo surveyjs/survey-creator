@@ -1018,6 +1018,61 @@ export var bgStrings = {
       url: "URL",
       week: "Седмица"
     },
+    autocomplete: {
+      name: "Пълно име",
+      "honorific-prefix": "Префикс",
+      "given-name": "Собствено име",
+      "additional-name": "Бащино име",
+      "family-name": "Презиме",
+      "honorific-suffix": "Наставка",
+      nickname: "Прякор",
+      "organization-title": "Длъжност",
+      username: "Потребителско име",
+      "new-password": "Нова парола",
+      "current-password": "Текуща парола",
+      organization: "Име на организацията",
+      "street-address": "Пълен адрес на улицата",
+      "address-line1": "Адресен ред 1",
+      "address-line2": "Адресен ред 2",
+      "address-line3": "Адресен ред 3",
+      "address-level4": "Адрес на ниво 4",
+      "address-level3": "Адрес от ниво 3",
+      "address-level2": "Адрес от ниво 2",
+      "address-level1": "Адрес от ниво 1",
+      country: "Код на държавата",
+      "country-name": "Име на държавата",
+      "postal-code": "Пощенски код",
+      "cc-name": "Име на картодържателя",
+      "cc-given-name": "Име на картодържателя",
+      "cc-additional-name": "Бащино име на картодържателя",
+      "cc-family-name": "Фамилия на картодържателя",
+      "cc-number": "Номер на кредитна карта",
+      "cc-exp": "Срок на годност",
+      "cc-exp-month": "Месец на изтичане",
+      "cc-exp-year": "Година на изтичане",
+      "cc-csc": "Код за сигурност на картата",
+      "cc-type": "Тип кредитна карта",
+      "transaction-currency": "Валута на транзакцията",
+      "transaction-amount": "Сума на транзакцията",
+      language: "Предпочитан език",
+      bday: "Рожден ден",
+      "bday-day": "Рожден ден",
+      "bday-month": "Месец на рождения ден",
+      "bday-year": "Година на рождения ден",
+      sex: "Пол",
+      url: "URL адрес на уебсайта",
+      photo: "Профилна снимка",
+      tel: "Телефонен номер",
+      "tel-country-code": "Код на държавата за телефон",
+      "tel-national": "Национален телефонен номер",
+      "tel-area-code": "Регионален код",
+      "tel-local": "Местен телефонен номер",
+      "tel-local-prefix": "Префикс на местен телефон",
+      "tel-local-suffix": "Суфикс за местен телефон",
+      "tel-extension": "Разширение на телефона",
+      email: "Имейл адрес",
+      impp: "Протокол за незабавни съобщения"
+    },
     maskType: {
       none: "Никой",
       pattern: "Шарка",
@@ -2415,3 +2470,56 @@ editorLocalization.locales["bg"] = bgStrings;
 // names.default-contrast: "Contrast" => "Контраст"
 // panel.showNumber: "Number this panel" => "Номерирайте този панел"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Изберете дали искате проучването автоматично да премине към следващата страница, след като респондентът отговори на всички въпроси на текущата страница. Тази функция няма да се прилага, ако последният въпрос на страницата е отворен или позволява множество отговори."
+// autocomplete.name: "Full Name" => "Пълно име"
+// autocomplete.honorific-prefix: "Prefix" => "Префикс"
+// autocomplete.given-name: "First Name" => "Собствено име"
+// autocomplete.additional-name: "Middle Name" => "Бащино име"
+// autocomplete.family-name: "Last Name" => "Презиме"
+// autocomplete.honorific-suffix: "Suffix" => "Наставка"
+// autocomplete.nickname: "Nickname" => "Прякор"
+// autocomplete.organization-title: "Job Title" => "Длъжност"
+// autocomplete.username: "User Name" => "Потребителско име"
+// autocomplete.new-password: "New Password" => "Нова парола"
+// autocomplete.current-password: "Current Password" => "Текуща парола"
+// autocomplete.organization: "Organization Name" => "Име на организацията"
+// autocomplete.street-address: "Full Street Address" => "Пълен адрес на улицата"
+// autocomplete.address-line1: "Address Line 1" => "Адресен ред 1"
+// autocomplete.address-line2: "Address Line 2" => "Адресен ред 2"
+// autocomplete.address-line3: "Address Line 3" => "Адресен ред 3"
+// autocomplete.address-level4: "Level 4 Address" => "Адрес на ниво 4"
+// autocomplete.address-level3: "Level 3 Address" => "Адрес от ниво 3"
+// autocomplete.address-level2: "Level 2 Address" => "Адрес от ниво 2"
+// autocomplete.address-level1: "Level 1 Address" => "Адрес от ниво 1"
+// autocomplete.country: "Country Code" => "Код на държавата"
+// autocomplete.country-name: "Country Name" => "Име на държавата"
+// autocomplete.postal-code: "Postal Code" => "Пощенски код"
+// autocomplete.cc-name: "Cardholder Name" => "Име на картодържателя"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Име на картодържателя"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Бащино име на картодържателя"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Фамилия на картодържателя"
+// autocomplete.cc-number: "Credit Card Number" => "Номер на кредитна карта"
+// autocomplete.cc-exp: "Expiration Date" => "Срок на годност"
+// autocomplete.cc-exp-month: "Expiration Month" => "Месец на изтичане"
+// autocomplete.cc-exp-year: "Expiration Year" => "Година на изтичане"
+// autocomplete.cc-csc: "Card Security Code" => "Код за сигурност на картата"
+// autocomplete.cc-type: "Credit Card Type" => "Тип кредитна карта"
+// autocomplete.transaction-currency: "Transaction Currency" => "Валута на транзакцията"
+// autocomplete.transaction-amount: "Transaction Amount" => "Сума на транзакцията"
+// autocomplete.language: "Preferred Language" => "Предпочитан език"
+// autocomplete.bday: "Birthday" => "Рожден ден"
+// autocomplete.bday-day: "Birthday Day" => "Рожден ден"
+// autocomplete.bday-month: "Birthday Month" => "Месец на рождения ден"
+// autocomplete.bday-year: "Birthday Year" => "Година на рождения ден"
+// autocomplete.sex: "Gender" => "Пол"
+// autocomplete.url: "Website URL" => "URL адрес на уебсайта"
+// autocomplete.photo: "Profile Photo" => "Профилна снимка"
+// autocomplete.tel: "Telephone Number" => "Телефонен номер"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Код на държавата за телефон"
+// autocomplete.tel-national: "National Telephone Number" => "Национален телефонен номер"
+// autocomplete.tel-area-code: "Area Code" => "Регионален код"
+// autocomplete.tel-local: "Local Phone Number" => "Местен телефонен номер"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Префикс на местен телефон"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Суфикс за местен телефон"
+// autocomplete.tel-extension: "Phone Extension" => "Разширение на телефона"
+// autocomplete.email: "Email Address" => "Имейл адрес"
+// autocomplete.impp: "Instant Messaging Protocol" => "Протокол за незабавни съобщения"

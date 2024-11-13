@@ -79,7 +79,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
           <span
             className="svc-item-value-controls__button svc-item-value-controls__drag"
           >
-            <SvgIcon className="svc-item-value-controls__drag-icon" size={24} iconName={"icon-drag-area-indicator"} title={this.model.dragTooltip}></SvgIcon>
+            <SvgIcon className="svc-item-value-controls__drag-icon" size={"auto"} iconName={"icon-drag-24x24"} title={this.model.dragTooltip}></SvgIcon>
           </span>
         ) : null}
         {this.model.allowRemove ? attachKey2click(<span

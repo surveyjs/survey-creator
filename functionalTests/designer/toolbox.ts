@@ -338,7 +338,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(22)
 
     .click(".svc-question__content--text", { offsetX: 200, offsetY: 20 })
-    .click(Selector(".sv-action-bar-item__title").withText("Save as Toolbox Item"))
+    .click(Selector(".svc-survey-element-toolbar-item__title").withText("Save as Toolbox Item"))
 
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
     .expect(Selector(".svc-toolbox__container").clientHeight).lte(510)
@@ -460,10 +460,10 @@ test("toolbox search in compact mode - clear but do not close", async (t) => {
 
   await t
     .click(".svc-toolbox__search-button")
-    .typeText(".spg-search-editor_input", "d")
-    .expect(Selector(".spg-search-editor_input").value).eql("d")
+    .typeText(".svc-search__input", "d")
+    .expect(Selector(".svc-search__input").value).eql("d")
     .expect(Selector(".svc-toolbox").hasClass("svc-toolbox--flyout")).ok()
     .click(".svc-toolbox #svd-grid-search-close")
-    .expect(Selector(".spg-search-editor_input").value).eql("")
+    .expect(Selector(".svc-search__input").value).eql("")
     .expect(Selector(".svc-toolbox").hasClass("svc-toolbox--flyout")).ok();
 });

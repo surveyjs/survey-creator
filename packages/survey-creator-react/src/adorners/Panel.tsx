@@ -35,7 +35,7 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
             <SvgIcon
               className={"svc-panel__add-new-question-icon"}
               iconName={"icon-add_24x24"}
-              size={24}
+              size={"auto"}
             ></SvgIcon>
             <span className="svc-add-new-item-button__text">
               {this.model.addNewQuestionText}

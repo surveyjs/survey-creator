@@ -42,11 +42,11 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 @keyframes toolboxSeparatorMoveIn {
   from {
-    width: var(--thm-toolbox-separator-width-compact, calcSize(5));
+    width: var(--thm-toolbox-separator-width-compact, calcSize(9));
     overflow: hidden;
   }
   to {
-    width: var(--thm-toolbox-separator-width, calcSize(5));
+    width: var(--thm-toolbox-separator-width, calcSize(9));
     overflow: hidden;
   }
 }
@@ -74,7 +74,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   }
   .svc-toolbox__item-submenu-button,
   .svc-toolbox__item-title,
-  .spg-search-editor_input {
+  .svc-search__input {
     animation-duration: var(--fade-animation-duration);
     animation-delay: var(--fade-animation-delay);
     animation-direction: var(--animation-direction);

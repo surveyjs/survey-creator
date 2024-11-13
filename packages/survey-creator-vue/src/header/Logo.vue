@@ -15,7 +15,7 @@
           v-key2click
         >
           <svg>
-            <use xlink:href="#icon-logo"></use>
+            <use xlink:href="#icon-image-48x48"></use>
           </svg>
         </div>
       </template>
@@ -32,8 +32,8 @@
           >
             <SvComponent
               :is="'sv-svg-icon'"
-              :iconName="'icon-file'"
-              :size="24"
+              :iconName="'icon-choosefile'"
+              :size="'auto'"
             ></SvComponent>
           </span>
           <span
@@ -46,7 +46,7 @@
             <SvComponent
               :is="'sv-svg-icon'"
               :iconName="'icon-clear'"
-              :size="24"
+              :size="'auto'"
             ></SvComponent>
           </span>
         </div>

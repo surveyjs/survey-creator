@@ -13,13 +13,13 @@
       v-if="adorner.showHiddenTitle"
       :class="adorner.cssCollapsedHiddenHeader"
     >
-      <div :class="adorner.cssCollapsedHiddenTitle">
-        <SvComponent
+      <SvComponent
           v-if="!!adorner.element.hasTitle"
-          :is="'survey-string'"
-          :locString="adorner.element.locTitle"
-        />
-        <span v-else class="svc-fake-title">{{ adorner.element.name }}</span>
+          :is="'survey-element-title'"
+          :element="adorner.element"
+      />
+      <div v-else :class="adorner.cssCollapsedHiddenTitle">
+        <span  class="svc-fake-title">{{ adorner.element.name }}</span>
       </div>
     </div>
     <div
@@ -54,7 +54,7 @@
           :is="'sv-svg-icon'"
           class="svc-question__drag-element"
           :iconName="'icon-drag-area-indicator_24x16'"
-          :size="24"
+          :size="'auto'"
         ></SvComponent>
         <div class="svc-question__top-actions">
           <SvComponent
@@ -64,6 +64,7 @@
           ></SvComponent>
         </div>
       </div>
+      <template v-if="adorner.needToRenderContent">
       <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
       <div
         v-if="adorner.isEmptyElement"
@@ -83,7 +84,7 @@
               :is="'sv-svg-icon'"
               class="svc-panel__add-new-question-icon"
               :iconName="'icon-add_24x24'"
-              :size="24"
+              :size="'auto'"
             ></SvComponent>
             <span class="svc-add-new-item-button__text">
               {{ adorner.addNewQuestionText }}
@@ -122,6 +123,7 @@
           :handleClick="false"
         ></SvComponent>
       </div>
+      </template>
     </div>
   </div>
 </template>

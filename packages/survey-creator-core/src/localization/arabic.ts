@@ -1018,6 +1018,61 @@ export var arStrings = {
       url: "الرابط",
       week: "أسبوع"
     },
+    autocomplete: {
+      name: "الاسم الكامل",
+      "honorific-prefix": "بادئه",
+      "given-name": "الاسم الأول",
+      "additional-name": "الاسم الأوسط",
+      "family-name": "اسم العائلة",
+      "honorific-suffix": "لاحقه",
+      nickname: "لقب",
+      "organization-title": "المسمى الوظيفي",
+      username: "اسم المستخدم",
+      "new-password": "كلمة مرور جديدة",
+      "current-password": "كلمة المرور الحالية",
+      organization: "اسم المنظمة",
+      "street-address": "عنوان الشارع بالكامل",
+      "address-line1": "سطر العنوان 1",
+      "address-line2": "سطر العنوان 2",
+      "address-line3": "سطر العنوان 3",
+      "address-level4": "عنوان المستوى 4",
+      "address-level3": "عنوان المستوى 3",
+      "address-level2": "عنوان المستوى 2",
+      "address-level1": "عنوان المستوى 1",
+      country: "رمز البلد",
+      "country-name": "اسم البلد",
+      "postal-code": "الرمز البريدي",
+      "cc-name": "اسم حامل البطاقة",
+      "cc-given-name": "الاسم الأول لحامل البطاقة",
+      "cc-additional-name": "الاسم الأوسط لحامل البطاقة",
+      "cc-family-name": "الاسم الأخير لحامل البطاقة",
+      "cc-number": "رقم بطاقة الائتمان",
+      "cc-exp": "تاريخ انتهاء الصلاحية",
+      "cc-exp-month": "شهر انتهاء الصلاحية",
+      "cc-exp-year": "سنة انتهاء الصلاحية",
+      "cc-csc": "رمز أمان البطاقة",
+      "cc-type": "نوع بطاقة الائتمان",
+      "transaction-currency": "عملة المعاملة",
+      "transaction-amount": "مبلغ المعاملة",
+      language: "اللغة المفضلة",
+      bday: "عيد ميلاد",
+      "bday-day": "عيد ميلاد",
+      "bday-month": "شهر عيد الميلاد",
+      "bday-year": "سنة الميلاد",
+      sex: "جنس",
+      url: "رابط الموقع",
+      photo: "صورة الملف الشخصي",
+      tel: "رقم الهاتف",
+      "tel-country-code": "رمز البلد للهاتف",
+      "tel-national": "رقم الهاتف الوطني",
+      "tel-area-code": "رمز المنطقة",
+      "tel-local": "رقم الهاتف المحلي",
+      "tel-local-prefix": "بادئة الهاتف المحلي",
+      "tel-local-suffix": "لاحقة الهاتف المحلي",
+      "tel-extension": "تحويلة الهاتف",
+      email: "عنوان البريد الإلكتروني",
+      impp: "بروتوكول المراسلة الفورية"
+    },
     maskType: {
       none: "اي",
       pattern: "رسم",
@@ -2766,3 +2821,56 @@ editorLocalization.locales["ar"] = arStrings;
 // tabs.accentColors: "Accent colors" => "ألوان مميزة"
 // tabs.scaling: "Scaling" => "القياس"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "حدد ما إذا كنت تريد أن يتقدم الاستطلاع تلقائيا إلى الصفحة التالية بمجرد إجابة المستجيب على جميع الأسئلة في الصفحة الحالية. لن يتم تطبيق هذه الميزة إذا كان السؤال الأخير على الصفحة مفتوحا أو يسمح بإجابات متعددة."
+// autocomplete.name: "Full Name" => "الاسم الكامل"
+// autocomplete.honorific-prefix: "Prefix" => "بادئه"
+// autocomplete.given-name: "First Name" => "الاسم الأول"
+// autocomplete.additional-name: "Middle Name" => "الاسم الأوسط"
+// autocomplete.family-name: "Last Name" => "اسم العائلة"
+// autocomplete.honorific-suffix: "Suffix" => "لاحقه"
+// autocomplete.nickname: "Nickname" => "لقب"
+// autocomplete.organization-title: "Job Title" => "المسمى الوظيفي"
+// autocomplete.username: "User Name" => "اسم المستخدم"
+// autocomplete.new-password: "New Password" => "كلمة مرور جديدة"
+// autocomplete.current-password: "Current Password" => "كلمة المرور الحالية"
+// autocomplete.organization: "Organization Name" => "اسم المنظمة"
+// autocomplete.street-address: "Full Street Address" => "عنوان الشارع بالكامل"
+// autocomplete.address-line1: "Address Line 1" => "سطر العنوان 1"
+// autocomplete.address-line2: "Address Line 2" => "سطر العنوان 2"
+// autocomplete.address-line3: "Address Line 3" => "سطر العنوان 3"
+// autocomplete.address-level4: "Level 4 Address" => "عنوان المستوى 4"
+// autocomplete.address-level3: "Level 3 Address" => "عنوان المستوى 3"
+// autocomplete.address-level2: "Level 2 Address" => "عنوان المستوى 2"
+// autocomplete.address-level1: "Level 1 Address" => "عنوان المستوى 1"
+// autocomplete.country: "Country Code" => "رمز البلد"
+// autocomplete.country-name: "Country Name" => "اسم البلد"
+// autocomplete.postal-code: "Postal Code" => "الرمز البريدي"
+// autocomplete.cc-name: "Cardholder Name" => "اسم حامل البطاقة"
+// autocomplete.cc-given-name: "Cardholder First Name" => "الاسم الأول لحامل البطاقة"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "الاسم الأوسط لحامل البطاقة"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "الاسم الأخير لحامل البطاقة"
+// autocomplete.cc-number: "Credit Card Number" => "رقم بطاقة الائتمان"
+// autocomplete.cc-exp: "Expiration Date" => "تاريخ انتهاء الصلاحية"
+// autocomplete.cc-exp-month: "Expiration Month" => "شهر انتهاء الصلاحية"
+// autocomplete.cc-exp-year: "Expiration Year" => "سنة انتهاء الصلاحية"
+// autocomplete.cc-csc: "Card Security Code" => "رمز أمان البطاقة"
+// autocomplete.cc-type: "Credit Card Type" => "نوع بطاقة الائتمان"
+// autocomplete.transaction-currency: "Transaction Currency" => "عملة المعاملة"
+// autocomplete.transaction-amount: "Transaction Amount" => "مبلغ المعاملة"
+// autocomplete.language: "Preferred Language" => "اللغة المفضلة"
+// autocomplete.bday: "Birthday" => "عيد ميلاد"
+// autocomplete.bday-day: "Birthday Day" => "عيد ميلاد"
+// autocomplete.bday-month: "Birthday Month" => "شهر عيد الميلاد"
+// autocomplete.bday-year: "Birthday Year" => "سنة الميلاد"
+// autocomplete.sex: "Gender" => "جنس"
+// autocomplete.url: "Website URL" => "رابط الموقع"
+// autocomplete.photo: "Profile Photo" => "صورة الملف الشخصي"
+// autocomplete.tel: "Telephone Number" => "رقم الهاتف"
+// autocomplete.tel-country-code: "Country Code for Phone" => "رمز البلد للهاتف"
+// autocomplete.tel-national: "National Telephone Number" => "رقم الهاتف الوطني"
+// autocomplete.tel-area-code: "Area Code" => "رمز المنطقة"
+// autocomplete.tel-local: "Local Phone Number" => "رقم الهاتف المحلي"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "بادئة الهاتف المحلي"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "لاحقة الهاتف المحلي"
+// autocomplete.tel-extension: "Phone Extension" => "تحويلة الهاتف"
+// autocomplete.email: "Email Address" => "عنوان البريد الإلكتروني"
+// autocomplete.impp: "Instant Messaging Protocol" => "بروتوكول المراسلة الفورية"

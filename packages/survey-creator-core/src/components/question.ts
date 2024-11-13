@@ -34,7 +34,7 @@ import {
   propertyExists,
   toggleHovered
 } from "../utils/utils";
-import { SurveyElementAdornerBase } from "./action-container-view-model";
+import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
 require("./question.scss");
 import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
@@ -82,9 +82,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     StringItemsNavigatorBase.setQuestion(this);
   }
 
-  get element() {
-    return this.surveyElement;
-  }
   protected canSelectElement(): boolean {
     return super.canSelectElement() && this.surveyElement.isInteractiveDesignElement;
   }
@@ -227,7 +224,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return (this.element)?.getPropertyValue("isMessagePanelVisible");
   }
   get cssCollapsedHiddenHeader(): string {
-    return (this.element as PanelModel | Question).cssHeader + " svc-element__header--hidden";
+    const css = new CssClassBuilder()
+      .append((this.element as PanelModel | Question).cssHeader)
+      .append("svc-element__header--hidden")
+      .append("svc-element__header--lazy", !this.needToRenderContent)
+      .toString();
+    return css;
   }
   get cssCollapsedHiddenTitle(): string {
     return this.element.cssTitle + " svc-element__title--hidden";
@@ -293,8 +295,30 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected createActionContainers(): void {
     super.createActionContainers();
+    const defaultCssClasses = {
+      root: "svc-survey-element-toolbar sv-action-bar",
+      item: "svc-survey-element-toolbar__item",
+      itemWithTitle: "svc-survey-element-toolbar__item--with-text",
+      itemAsIcon: "svc-survey-element-toolbar__item--icon",
+      itemActive: "svc-survey-element-toolbar__item--active",
+      itemPressed: "svc-survey-element-toolbar__item--pressed",
+      itemIcon: "svc-survey-element-toolbar-item__icon",
+      itemTitle: "svc-survey-element-toolbar-item__title",
+      itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
+    };
+
     this.actionContainer.sizeMode = "small";
+    this.actionContainer.cssClasses = defaultCssClasses;
+    (<SurveyElementActionContainer>this.actionContainer).dotsItem.css += " svc-survey-element-toolbar__dots-item";
+    (<SurveyElementActionContainer>this.actionContainer).dotsItem.innerCss += " svc-survey-element-toolbar__item";
     this.topActionContainer = new ActionContainer();
+    this.topActionContainer.cssClasses = {
+      root: "svc-survey-element-top-toolbar sv-action-bar",
+      item: "svc-survey-element-top-toolbar__item",
+      itemIcon: "svc-survey-element-toolbar-item__icon",
+      itemTitle: "svc-survey-element-toolbar-item__title",
+      itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
+    };
     this.topActionContainer.sizeMode = "small";
     this.topActionContainer.setItems([this.expandCollapseAction]);
   }
@@ -350,7 +374,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   public get showHiddenTitle() {
-    return (!this.element.hasTitle || this.isTitleLeft) && this.element.isInteractiveDesignElement;
+    return (!this.element.hasTitle || this.isTitleLeft || !this.needToRenderContent) && this.element.isInteractiveDesignElement;
   }
   public get placeholderText(): string {
     if (this.surveyElement instanceof QuestionHtmlModel) {
@@ -472,7 +496,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       enabled: true,
       visibleIndex: 0,
       title: !!currItem ? currItem.title : editorLocalization.getString("qt." + this.currentType),
-      iconName: "icon-chevron_16x16"
+      iconName: "icon-chevron_16x16",
+      iconSize: "auto"
     };
     const newAction = this.createDropdownModel({
       actionData: actionData,
@@ -486,9 +511,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         return this.creator.toolbox.getItemByName(this.element.getType())?.iconName;
       }
       return "icon-chevron_16x16";
-    });
-    newAction.iconSize = <any>new ComputedUpdater(() => {
-      return newAction.mode === "small" ? 24 : 16;
     });
     newAction.disableHide = true;
     return newAction;
@@ -627,9 +649,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private createDropdownModel(options: { actionData: IAction, items: Array<IAction>, updateListModel: (listModel: ListModel) => void }): Action {
     const newAction = createDropdownActionModel({
       id: options.actionData.id,
-      css: "sv-action--convertTo sv-action-bar-item--secondary",
+      css: "svc-dropdown-action--convertTo",
       iconName: options.actionData.iconName,
-      iconSize: 16,
+      iconSize: "auto",
       title: options.actionData.title,
       enabled: options.actionData.enabled,
       visibleIndex: options.actionData.visibleIndex,
@@ -664,12 +686,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: "isrequired",
       ariaChecked: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       ariaRole: "checkbox",
-      css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+      css: "svc-action-bar-item--right",
       innerCss: "svc-required-action",
       title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
       iconName: "icon-required",
-      iconSize: 16,
+      iconSize: "auto",
       active: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       action: () => {
         if (
@@ -706,7 +728,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!!inputTypeConverter) {
       items.push(inputTypeConverter);
     }
-    items[items.length - 1].css += " sv-action--convertTo-last";
+    items[items.length - 1].css += " svc-dropdown-action--convertTo-last";
     if (
       typeof element["isRequired"] !== "undefined" &&
       propertyExists(element, "isRequired") &&

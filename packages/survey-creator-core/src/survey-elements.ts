@@ -1,4 +1,4 @@
-import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
+import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, getIconNameFromProxy, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, renamedIcons, Serializer, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
@@ -123,7 +123,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const span = document.createElement("span");
     span.className = "svc-dragged-element-shortcut__icon";
 
-    const iconName = this.draggedElement.toolboxItemIconName;
+    const iconName = getIconNameFromProxy(this.draggedElement.toolboxItemIconName);
     const svgString = `<svg class="sv-svg-icon" role="img" style="width: 24px; height: 24px;"><use xlink:href="#${iconName}"></use></svg>`;
     span.innerHTML = svgString;
 
@@ -427,8 +427,14 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     if (dragged.isPage && dragged instanceof PageModel) {
       const survey = dragged.survey;
-      survey.pages.splice(survey.pages.indexOf(dragged), 1);
-      survey.pages.splice(survey.pages.indexOf(this.dropTarget) + (this.dragOverLocation === DragTypeOverMeEnum.Top ? 0 : 1), 0, dragged);
+      const indexOfDraggedPage = survey.pages.indexOf(dragged);
+      survey.pages.splice(indexOfDraggedPage, 1);
+      const indexOfDropTarget = survey.pages.indexOf(this.dropTarget) + (this.dragOverLocation === DragTypeOverMeEnum.Top ? 0 : 1);
+      survey.pages.splice(indexOfDropTarget, 0, dragged);
+
+      if(indexOfDraggedPage !== indexOfDropTarget) {
+        dragged["draggedFrom"] = indexOfDraggedPage < indexOfDropTarget ? indexOfDraggedPage : indexOfDraggedPage + 1;
+      }
       return dragged;
     }
 

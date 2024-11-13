@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { SurveyCreatorModel } from 'survey-creator-core';
 const creator = new SurveyCreatorModel({ pageEditMode: "bypage" });
+creator.expandCollapseButtonVisibility = "onhover";
 import { SurveyCreatorComponent } from "survey-creator-vue";
 </script>
 <template>

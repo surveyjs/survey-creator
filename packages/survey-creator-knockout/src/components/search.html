@@ -1,0 +1,15 @@
+<!-- ko if: $data.model.isVisible -->
+<div class="svc-search">
+    <div class="svc-search__search-icon">
+        <!-- ko component: { name: 'sv-svg-icon', params: { iconName: 'icon-search', size: 'auto' }  } -->
+        <!-- /ko -->
+    </div>
+    <input type="text" class="svc-search__input"
+        data-bind="textInput: model.filterString, attr: { placeholder: model.filterStringPlaceholder, 'aria-label': model.filterStringPlaceholder }"></input>
+    <div class="svc-search__toolbar">
+        <div class="svc-search__toolbar-counter" data-bind="text: model.matchCounterText"></div>
+        <!-- ko component: { name: 'sv-action-bar', params: { model: model.searchActionBar } } -->
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->

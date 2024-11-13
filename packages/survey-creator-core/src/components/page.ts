@@ -1,4 +1,4 @@
-import { Action, ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, SurveyElement } from "survey-core";
+import { Action, ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -28,8 +28,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this.isDragMe = this.page?.isDragMe;
     }
   }
-  private updateShowPlaceholder(elements?: Array<IElement>) {
-    this.showPlaceholder = !this.isGhost && (elements || this.page.elements).length === 0;
+  private updateShowPlaceholder(visibleRows?: Array<QuestionRowModel>) {
+    this.showPlaceholder = !this.isGhost && (visibleRows || this.page.visibleRows).length === 0;
   }
 
   constructor(creator: SurveyCreatorModel, page: PageModel) {
@@ -64,17 +64,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement["surveyChangedCallback"] = () => {
         this.isPageLive = !!surveyElement.survey;
       };
-      if (this.calcIsGhostPage(surveyElement)) {
-        this.updateActionsProperties();
-        surveyElement.registerFunctionOnPropertiesValueChanged(
-          ["title", "description"],
-          () => {
-            this.addGhostPage();
-            this.updateShowPlaceholder();
-          },
-          "add_ghost"
-        );
-        this.patchPageForDragDrop(surveyElement, this.addGhostPage);
+      if (this.isGhost) {
+        this.addGhostPageSubsribes(surveyElement);
       }
       surveyElement.registerFunctionOnPropertiesValueChanged(
         ["dragTypeOverMe"],
@@ -88,7 +79,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
           this.updateIsDragMe();
         }
       );
-      surveyElement.registerFunctionOnPropertiesValueChanged(["elements"], (newValue: Array<IElement>) => {
+      surveyElement.registerFunctionOnPropertiesValueChanged(["visibleRows"], (newValue: Array<QuestionRowModel>) => {
         this.updateShowPlaceholder(newValue);
       });
       this.updateShowPlaceholder();
@@ -132,11 +123,27 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       addGhostPage();
     };
   }
-  protected calcIsGhostPage(page: PageModel) {
-    return this.creator.survey.pages.indexOf(page) < 0;
-  }
-  public get isGhost(): boolean {
-    return this.calcIsGhostPage(this.page);
+  @property({
+    onSet(val, target: PageAdorner, prevVal) {
+      if(val != prevVal) {
+        target.updateShowPlaceholder();
+        target.updateActionsProperties();
+        if(val && target.surveyElement) {
+          target.addGhostPageSubsribes(target.surveyElement);
+        }
+      }
+    },
+  }) isGhost: boolean;
+  private addGhostPageSubsribes(surveyElement: PageModel) {
+    surveyElement.registerFunctionOnPropertiesValueChanged(
+      ["title", "description"],
+      () => {
+        this.addGhostPage();
+        this.updateShowPlaceholder();
+      },
+      "add_ghost"
+    );
+    this.patchPageForDragDrop(this.surveyElement, this.addGhostPage);
   }
   public get placeholderText(): string {
     if (this.creator.isMobileView)
@@ -156,6 +163,16 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected createActionContainer(): ActionContainer<Action> {
     const container = new ActionContainer();
     container.sizeMode = "small";
+    container.cssClasses = {
+      root: "svc-page-toolbar sv-action-bar",
+      item: "svc-page-toolbar__item",
+      itemWithTitle: "svc-page-toolbar__item--with-text",
+      itemActive: "svc-page-toolbar__item--active",
+      itemPressed: "svc-page-toolbar__item--pressed",
+      itemIcon: "svc-page-toolbar-item__icon",
+      itemTitle: "svc-page-toolbar-item__title",
+      itemTitleWithIcon: "svc-page-toolbar-item__title--with-icon",
+    };
     return container;
   }
   protected getExpandCollapseAction(): IAction {
@@ -182,6 +199,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   addNewQuestion = (model: PageAdorner, event: IPortableMouseEvent, type?: string) => {
+    const isGhost = this.isGhost;
+    const page = this.page;
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage(false);
       this.creator.survey.currentPage = this.page;
@@ -226,9 +245,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         this.dragOut();
       }
     }
-    if (this.allowExpandCollapse) {
+    if (this.allowExpandCollapse || this.page["isGhost"]) {
       result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
-      if (this.renderedCollapsed) result += (" svc-page__content--collapsed");
+      if (this.renderedCollapsed || this.page["isGhost"]) result += (" svc-page__content--collapsed");
       if (this.expandCollapseAnimationRunning) result += (" svc-page__content--animation-running");
     }
     if (this.isDragMe) {
@@ -292,11 +311,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (cssClasses.pageRow) return [].slice.call(this.rootElement?.querySelectorAll(`:scope .svc-page__footer, :scope ${classesToSelector(this.surveyElement.cssRoot)} > .svc-row`));
     return null;
   }
-  public onPageSelected() {
-    if (this.rootElement) {
-      SurveyHelper.scrollIntoViewIfNeeded(this.rootElement);
-    }
-  }
+  public onPageSelected() {}
   protected getAllowDragging(options: any): boolean {
     return this.creator.allowDragPages && super.getAllowDragging(options);
   }
@@ -312,7 +327,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
     if (this.creator.collapsePagesOnDrag) {
       this.creator.designerStateManager?.suspend();
-      this.creator.collapseAllPages();
+      this.creator.collapseAllElements();
     }
     return true;
   }

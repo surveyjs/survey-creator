@@ -1018,6 +1018,61 @@ export var koreanStrings = {
       url: "URL (영문)",
       week: "주"
     },
+    autocomplete: {
+      name: "성명",
+      "honorific-prefix": "접두사",
+      "given-name": "이름",
+      "additional-name": "중간 이름",
+      "family-name": "성",
+      "honorific-suffix": "접미사",
+      nickname: "별명",
+      "organization-title": "직책",
+      username: "사용자 이름",
+      "new-password": "새 비밀번호",
+      "current-password": "현재 비밀번호",
+      organization: "조직 이름",
+      "street-address": "전체 주소",
+      "address-line1": "주소란 1",
+      "address-line2": "주소란 2",
+      "address-line3": "주소란 3",
+      "address-level4": "레벨 4 주소",
+      "address-level3": "레벨 3 주소",
+      "address-level2": "레벨 2 주소",
+      "address-level1": "레벨 1 주소",
+      country: "국가 코드",
+      "country-name": "국가 이름",
+      "postal-code": "우편번호",
+      "cc-name": "카드 소지자 이름",
+      "cc-given-name": "카드 소지자 이름",
+      "cc-additional-name": "카드 소지자 중간 이름",
+      "cc-family-name": "카드 소지자의 성",
+      "cc-number": "신용 카드 번호",
+      "cc-exp": "만료 날짜",
+      "cc-exp-month": "만료 월",
+      "cc-exp-year": "만료 연도",
+      "cc-csc": "카드 보안 코드",
+      "cc-type": "신용 카드 유형",
+      "transaction-currency": "거래 통화(Transaction Currency)",
+      "transaction-amount": "거래 금액",
+      language: "선호 언어",
+      bday: "생일",
+      "bday-day": "생일 날",
+      "bday-month": "생일의 달",
+      "bday-year": "생일 연도",
+      sex: "성별",
+      url: "웹 사이트 URL",
+      photo: "프로필 사진",
+      tel: "전화번호",
+      "tel-country-code": "전화의 국가 코드",
+      "tel-national": "국내 전화번호",
+      "tel-area-code": "지역 번호",
+      "tel-local": "현지 전화번호",
+      "tel-local-prefix": "로컬 전화 접두사",
+      "tel-local-suffix": "지역 전화 접미사",
+      "tel-extension": "전화 내선 번호",
+      email: "이메일 주소",
+      impp: "인스턴트 메시징 프로토콜"
+    },
     maskType: {
       none: "없음",
       pattern: "무늬",
@@ -3056,3 +3111,56 @@ editorLocalization.locales["ko"] = koreanStrings;
 // names.default-contrast: "Contrast" => "대조"
 // panel.showNumber: "Number this panel" => "이 패널에 번호 매기기"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다."
+// autocomplete.name: "Full Name" => "성명"
+// autocomplete.honorific-prefix: "Prefix" => "접두사"
+// autocomplete.given-name: "First Name" => "이름"
+// autocomplete.additional-name: "Middle Name" => "중간 이름"
+// autocomplete.family-name: "Last Name" => "성"
+// autocomplete.honorific-suffix: "Suffix" => "접미사"
+// autocomplete.nickname: "Nickname" => "별명"
+// autocomplete.organization-title: "Job Title" => "직책"
+// autocomplete.username: "User Name" => "사용자 이름"
+// autocomplete.new-password: "New Password" => "새 비밀번호"
+// autocomplete.current-password: "Current Password" => "현재 비밀번호"
+// autocomplete.organization: "Organization Name" => "조직 이름"
+// autocomplete.street-address: "Full Street Address" => "전체 주소"
+// autocomplete.address-line1: "Address Line 1" => "주소란 1"
+// autocomplete.address-line2: "Address Line 2" => "주소란 2"
+// autocomplete.address-line3: "Address Line 3" => "주소란 3"
+// autocomplete.address-level4: "Level 4 Address" => "레벨 4 주소"
+// autocomplete.address-level3: "Level 3 Address" => "레벨 3 주소"
+// autocomplete.address-level2: "Level 2 Address" => "레벨 2 주소"
+// autocomplete.address-level1: "Level 1 Address" => "레벨 1 주소"
+// autocomplete.country: "Country Code" => "국가 코드"
+// autocomplete.country-name: "Country Name" => "국가 이름"
+// autocomplete.postal-code: "Postal Code" => "우편번호"
+// autocomplete.cc-name: "Cardholder Name" => "카드 소지자 이름"
+// autocomplete.cc-given-name: "Cardholder First Name" => "카드 소지자 이름"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "카드 소지자 중간 이름"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "카드 소지자의 성"
+// autocomplete.cc-number: "Credit Card Number" => "신용 카드 번호"
+// autocomplete.cc-exp: "Expiration Date" => "만료 날짜"
+// autocomplete.cc-exp-month: "Expiration Month" => "만료 월"
+// autocomplete.cc-exp-year: "Expiration Year" => "만료 연도"
+// autocomplete.cc-csc: "Card Security Code" => "카드 보안 코드"
+// autocomplete.cc-type: "Credit Card Type" => "신용 카드 유형"
+// autocomplete.transaction-currency: "Transaction Currency" => "거래 통화(Transaction Currency)"
+// autocomplete.transaction-amount: "Transaction Amount" => "거래 금액"
+// autocomplete.language: "Preferred Language" => "선호 언어"
+// autocomplete.bday: "Birthday" => "생일"
+// autocomplete.bday-day: "Birthday Day" => "생일 날"
+// autocomplete.bday-month: "Birthday Month" => "생일의 달"
+// autocomplete.bday-year: "Birthday Year" => "생일 연도"
+// autocomplete.sex: "Gender" => "성별"
+// autocomplete.url: "Website URL" => "웹 사이트 URL"
+// autocomplete.photo: "Profile Photo" => "프로필 사진"
+// autocomplete.tel: "Telephone Number" => "전화번호"
+// autocomplete.tel-country-code: "Country Code for Phone" => "전화의 국가 코드"
+// autocomplete.tel-national: "National Telephone Number" => "국내 전화번호"
+// autocomplete.tel-area-code: "Area Code" => "지역 번호"
+// autocomplete.tel-local: "Local Phone Number" => "현지 전화번호"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "로컬 전화 접두사"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "지역 전화 접미사"
+// autocomplete.tel-extension: "Phone Extension" => "전화 내선 번호"
+// autocomplete.email: "Email Address" => "이메일 주소"
+// autocomplete.impp: "Instant Messaging Protocol" => "인스턴트 메시징 프로토콜"

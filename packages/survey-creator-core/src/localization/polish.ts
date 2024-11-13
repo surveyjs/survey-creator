@@ -1018,6 +1018,61 @@ var polishStrings = {
       url: "Adres URL",
       week: "Tydzień"
     },
+    autocomplete: {
+      name: "Imię i nazwisko",
+      "honorific-prefix": "Przedrostek",
+      "given-name": "Imię",
+      "additional-name": "Drugie imię",
+      "family-name": "Nazwisko",
+      "honorific-suffix": "Przyrostek",
+      nickname: "Przydomek",
+      "organization-title": "Stanowisko",
+      username: "Nazwa użytkownika",
+      "new-password": "Nowe hasło",
+      "current-password": "Aktualne hasło",
+      organization: "Nazwa organizacji",
+      "street-address": "Pełna ulica i numer domu",
+      "address-line1": "Adres (wiersz 1)",
+      "address-line2": "Wiersz adresu 2",
+      "address-line3": "Adres (wiersz 3)",
+      "address-level4": "Adres poziomu 4",
+      "address-level3": "Adres poziomu 3",
+      "address-level2": "Adres poziomu 2",
+      "address-level1": "Adres poziomu 1",
+      country: "Kod kraju",
+      "country-name": "Nazwa kraju",
+      "postal-code": "Kod pocztowy",
+      "cc-name": "Imię i nazwisko posiadacza karty",
+      "cc-given-name": "Imię posiadacza karty",
+      "cc-additional-name": "Drugie imię posiadacza karty",
+      "cc-family-name": "Nazwisko posiadacza karty",
+      "cc-number": "Numer karty kredytowej",
+      "cc-exp": "Data ważności",
+      "cc-exp-month": "Miesiąc wygaśnięcia",
+      "cc-exp-year": "Rok wygaśnięcia",
+      "cc-csc": "Kod zabezpieczający karty",
+      "cc-type": "Rodzaj karty kredytowej",
+      "transaction-currency": "Waluta transakcji",
+      "transaction-amount": "Kwota transakcji",
+      language: "Preferowany język",
+      bday: "Urodziny",
+      "bday-day": "Dzień urodzin",
+      "bday-month": "Miesiąc urodzin",
+      "bday-year": "Rok urodzin",
+      sex: "Płeć",
+      url: "Adres URL strony internetowej",
+      photo: "Zdjęcie profilowe",
+      tel: "Numer telefonu",
+      "tel-country-code": "Numer kierunkowy kraju do telefonu",
+      "tel-national": "Krajowy numer telefonu",
+      "tel-area-code": "Numer kierunkowy",
+      "tel-local": "Lokalny numer telefonu",
+      "tel-local-prefix": "Prefiks telefonu lokalnego",
+      "tel-local-suffix": "Sufiks telefonu lokalnego",
+      "tel-extension": "Rozszerzenie telefonu",
+      email: "Adres e-mail",
+      impp: "Protokół wiadomości błyskawicznych"
+    },
     maskType: {
       none: "Żaden",
       pattern: "Deseń",
@@ -3119,3 +3174,56 @@ editorLocalization.locales["pl"] = polishStrings;
 // names.default-contrast: "Contrast" => "Kontrast"
 // panel.showNumber: "Number this panel" => "Numeruj ten panel"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony, gdy respondent odpowie na wszystkie pytania na bieżącej stronie. Ta funkcja nie będzie miała zastosowania, jeśli ostatnie pytanie na stronie jest otwarte lub umożliwia udzielenie wielu odpowiedzi."
+// autocomplete.name: "Full Name" => "Imię i nazwisko"
+// autocomplete.honorific-prefix: "Prefix" => "Przedrostek"
+// autocomplete.given-name: "First Name" => "Imię"
+// autocomplete.additional-name: "Middle Name" => "Drugie imię"
+// autocomplete.family-name: "Last Name" => "Nazwisko"
+// autocomplete.honorific-suffix: "Suffix" => "Przyrostek"
+// autocomplete.nickname: "Nickname" => "Przydomek"
+// autocomplete.organization-title: "Job Title" => "Stanowisko"
+// autocomplete.username: "User Name" => "Nazwa użytkownika"
+// autocomplete.new-password: "New Password" => "Nowe hasło"
+// autocomplete.current-password: "Current Password" => "Aktualne hasło"
+// autocomplete.organization: "Organization Name" => "Nazwa organizacji"
+// autocomplete.street-address: "Full Street Address" => "Pełna ulica i numer domu"
+// autocomplete.address-line1: "Address Line 1" => "Adres (wiersz 1)"
+// autocomplete.address-line2: "Address Line 2" => "Wiersz adresu 2"
+// autocomplete.address-line3: "Address Line 3" => "Adres (wiersz 3)"
+// autocomplete.address-level4: "Level 4 Address" => "Adres poziomu 4"
+// autocomplete.address-level3: "Level 3 Address" => "Adres poziomu 3"
+// autocomplete.address-level2: "Level 2 Address" => "Adres poziomu 2"
+// autocomplete.address-level1: "Level 1 Address" => "Adres poziomu 1"
+// autocomplete.country: "Country Code" => "Kod kraju"
+// autocomplete.country-name: "Country Name" => "Nazwa kraju"
+// autocomplete.postal-code: "Postal Code" => "Kod pocztowy"
+// autocomplete.cc-name: "Cardholder Name" => "Imię i nazwisko posiadacza karty"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Imię posiadacza karty"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Drugie imię posiadacza karty"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Nazwisko posiadacza karty"
+// autocomplete.cc-number: "Credit Card Number" => "Numer karty kredytowej"
+// autocomplete.cc-exp: "Expiration Date" => "Data ważności"
+// autocomplete.cc-exp-month: "Expiration Month" => "Miesiąc wygaśnięcia"
+// autocomplete.cc-exp-year: "Expiration Year" => "Rok wygaśnięcia"
+// autocomplete.cc-csc: "Card Security Code" => "Kod zabezpieczający karty"
+// autocomplete.cc-type: "Credit Card Type" => "Rodzaj karty kredytowej"
+// autocomplete.transaction-currency: "Transaction Currency" => "Waluta transakcji"
+// autocomplete.transaction-amount: "Transaction Amount" => "Kwota transakcji"
+// autocomplete.language: "Preferred Language" => "Preferowany język"
+// autocomplete.bday: "Birthday" => "Urodziny"
+// autocomplete.bday-day: "Birthday Day" => "Dzień urodzin"
+// autocomplete.bday-month: "Birthday Month" => "Miesiąc urodzin"
+// autocomplete.bday-year: "Birthday Year" => "Rok urodzin"
+// autocomplete.sex: "Gender" => "Płeć"
+// autocomplete.url: "Website URL" => "Adres URL strony internetowej"
+// autocomplete.photo: "Profile Photo" => "Zdjęcie profilowe"
+// autocomplete.tel: "Telephone Number" => "Numer telefonu"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Numer kierunkowy kraju do telefonu"
+// autocomplete.tel-national: "National Telephone Number" => "Krajowy numer telefonu"
+// autocomplete.tel-area-code: "Area Code" => "Numer kierunkowy"
+// autocomplete.tel-local: "Local Phone Number" => "Lokalny numer telefonu"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Prefiks telefonu lokalnego"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Sufiks telefonu lokalnego"
+// autocomplete.tel-extension: "Phone Extension" => "Rozszerzenie telefonu"
+// autocomplete.email: "Email Address" => "Adres e-mail"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokół wiadomości błyskawicznych"

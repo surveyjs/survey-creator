@@ -9,7 +9,8 @@ import {
   attachKey2click,
   SvgIcon,
   Popup,
-  SurveyElementBase
+  SurveyElementBase,
+  TitleElement
 } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
 
@@ -76,7 +77,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     return true;
   }
   protected renderContent(allowInteractions: boolean): JSX.Element {
-    var content = this.renderElementContent();
+    var content = this.model.needToRenderContent ? this.renderElementContent() : null;
     //if (!allowInteractions) return <>{content}{this.renderFooter()}</>;
     return attachKey2click(
       <div
@@ -89,7 +90,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
         <div className="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
         {allowInteractions ? this.renderHeader() : null}
         {content}
-        {this.renderFooter()}
+        {this.model.needToRenderContent ? this.renderFooter() : null}
       </div>,
       undefined, { disableTabStop: this.disableTabStop() });
   }
@@ -110,14 +111,18 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     if (!this.model.showHiddenTitle) return null;
     const element = this.model.element as Question | PanelModel;
     return (
-      <div className={this.model.cssCollapsedHiddenHeader} >
-        <div
-          ref={node => node && (!this.model.renderedCollapsed ?
-            node.setAttribute("inert", "") : node.removeAttribute("inert")
-          )}
-          className={this.model.cssCollapsedHiddenTitle} >
-          {element.hasTitle ? SurveyElementBase.renderLocString(element.locTitle, null, "q_title") : <span className="svc-fake-title">{element.name}</span>}
-        </div>
+      <div
+        ref={node => node && (!this.model.renderedCollapsed ?
+          node.setAttribute("inert", "") : node.removeAttribute("inert")
+        )} className={this.model.cssCollapsedHiddenHeader} >
+        {(
+          element.hasTitle ?
+            <TitleElement element={element}></TitleElement> :
+            <div
+              className={this.model.cssCollapsedHiddenTitle} >
+              <span className="svc-fake-title">{element.name}</span>
+            </div>
+        )}
       </div>
     );
   }

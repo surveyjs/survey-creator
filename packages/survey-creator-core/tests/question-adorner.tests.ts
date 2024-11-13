@@ -131,10 +131,10 @@ test("Check question adorners expand-collapse - save state", (): any => {
 
   let action = questionAdorner.topActionContainer.getActionById("collapse");
   expect(questionAdorner.collapsed).toBeFalsy();
-  expect(action.iconName).toBe("icon-collapse-detail-light_16x16");
+  expect(action.iconName).toBe("icon-collapsepanel-16x16");
   action.action();
   expect(questionAdorner.collapsed).toBeTruthy();
-  expect(action.iconName).toBe("icon-restore_16x16");
+  expect(action.iconName).toBe("icon-expandpanel-16x16");
 
   let questionAdorner2 = new QuestionAdornerViewModel(
     creator,
@@ -986,13 +986,13 @@ test("Don't reset collapased state for moved question", () => {
   const page1 = creator.survey.pages[0];
   const page2 = creator.survey.pages[1];
   let pageAdorner = new PageAdorner(creator, page1);
-  creator.collapseAllPages();
+  creator.collapseAllElements();
   expect(pageAdorner.collapsed).toBeTruthy();
   creator.designerStateManager.suspend();
   creator.survey.pages.splice(0, 1);
   creator.survey.pages.splice(1, 0, page1);
   pageAdorner = new PageAdorner(creator, page1);
   creator.designerStateManager.release();
-  creator.restorePagesState();
+  creator.restoreElementsState();
   expect(pageAdorner.collapsed).toBeTruthy();
 });

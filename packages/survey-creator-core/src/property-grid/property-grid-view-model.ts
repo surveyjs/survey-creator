@@ -160,7 +160,7 @@ export class PropertyGridViewModel extends Base {
     this.objectSelectionAction = new MenuButton({
       id: "svd-grid-object-selector",
       title: this.selectedElementName,
-      css: "sv-action--object-selector sv-action-bar-item--secondary",
+      css: "sv-action--object-selector",
       component: "sv-action-bar-item-dropdown",
       disableHide: true,
       pressed: false,

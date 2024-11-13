@@ -22,6 +22,7 @@ interface ICreatorSurveyPageComponentProps {
   creator: SurveyCreatorModel;
   survey: SurveyModel;
   page: PageModel;
+  isGhost: boolean;
 }
 
 export class CreatorSurveyPageComponent extends CreatorModelElement<
@@ -40,8 +41,16 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     }
     this.model = new PageAdorner(
       props.creator,
-      props.page
+      props.page,
     );
+    this.model.isGhost = this.props.isGhost;
+  }
+  shouldComponentUpdate(nextProps: any, nextState: any): boolean {
+    const res = super.shouldComponentUpdate(nextProps, nextState);
+    if(this.model) {
+      this.model.isGhost = this.props.isGhost;
+    }
+    return res;
   }
   public componentDidUpdate(prevProps: any, prevState: any): void {
     super.componentDidUpdate(prevProps, prevState);
@@ -55,18 +64,14 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   componentDidMount() {
     super.componentDidMount();
     this.model.attachToUI(this.props.page, this.rootRef.current);
+    this.model.isGhost = this.props.isGhost;
   }
   componentWillUnmount() {
     super.componentWillUnmount();
     this.model.detachFromUI();
   }
   protected canRender(): boolean {
-    return (
-      !!this.model &&
-      this.model.isPageLive &&
-      !!this.model.page &&
-      !!this.model.page.survey
-    );
+    return super.canRender();
   }
   renderElement(): JSX.Element {
     if (!this.props.page) return null;
@@ -116,7 +121,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
       <div className={"svc-question__drag-area"}
         onPointerDown={(event: any) => this.model.onPointerDown(event)}
       >
-        <SvgIcon className="svc-question__drag-element" size={24} iconName={"icon-drag-area-indicator_24x16"}></SvgIcon>
+        <SvgIcon className="svc-question__drag-element" size={"auto"} iconName={"icon-drag-area-indicator_24x16"}></SvgIcon>
         {actions}
       </div>
     );

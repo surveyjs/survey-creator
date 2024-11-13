@@ -75,9 +75,9 @@ export class SurveyPageNavigator extends CreatorModelElement<
     this.model.setScrollableContainer(undefined);
   }
   renderElement(): JSX.Element {
-    let className = "svc-page-navigator__selector";
+    let className = "svc-page-navigator__selector svc-page-navigator__button";
     if (this.model.isPopupOpened)
-      className += " svc-page-navigator__selector--opened";
+      className += " svc-page-navigator__button--pressed";
     return (
       <div className="svc-page-navigator" ref={this.containerRef} style={{ display: this.model.visible ? "flex" : "none" }}>
         {attachKey2click(<div
@@ -86,9 +86,9 @@ export class SurveyPageNavigator extends CreatorModelElement<
           title={this.model.pageSelectorCaption}
         >
           <SvgIcon
-            className="svc-page-navigator__navigator-icon"
+            className="svc-page-navigator__button-icon"
             iconName={this.model.icon}
-            size={24}
+            size={"auto"}
             title={this.model.pageSelectorCaption}
           ></SvgIcon>
 

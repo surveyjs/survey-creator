@@ -32,8 +32,8 @@
         >
           <SvComponent
             :is="'sv-svg-icon'"
-            :iconName="'icon-drag-area-indicator'"
-            :size="24"
+            :iconName="'icon-drag-24x24'"
+            :size="'auto'"
           ></SvComponent>
         </span>
         <div
@@ -50,8 +50,8 @@
             <SvComponent
               :is="'sv-svg-icon'"
               role="button"
-              :iconName="'icon-file'"
-              :size="24"
+              :iconName="'icon-choosefile'"
+              :size="'auto'"
               :title="adorner.selectFileTitle"
             ></SvComponent>
           </span>
@@ -66,7 +66,7 @@
               :is="'sv-svg-icon'"
               role="button"
               :iconName="'icon-delete'"
-              :size="24"
+              :size="'auto'"
               :title="adorner.removeFileTitle"
             ></SvComponent>
           </span>
@@ -109,7 +109,7 @@
             <SvComponent
               :is="'sv-svg-icon'"
               :iconName="'icon-add-lg'"
-              :size="24"
+              :size="'auto'"
               :title="adorner.addFileTitle"
             ></SvComponent>
           </span>

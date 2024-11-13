@@ -5,7 +5,8 @@ import {
   EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
-  CssClassBuilder
+  CssClassBuilder,
+  SvgRegistry
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -50,13 +51,16 @@ import {
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
   TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
-  PageAddingEvent, DragStartEndEvent
+  PageAddingEvent, DragStartEndEvent,
+  ElementGetExpandCollapseStateEvent,
+  ElementGetExpandCollapseStateEventReason
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/action-container-view-model";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
+import { svgBundle } from "./svgbundle";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
@@ -431,6 +435,10 @@ export class SurveyCreatorModel extends Base
    */
   public onHtmlToMarkdown: EventBase<SurveyCreatorModel, HtmlToMarkdownEvent> = this.addCreatorEvent<SurveyCreatorModel, HtmlToMarkdownEvent>();
 
+  /*
+   * An event that is raised when Survey Creator obtains the expand/collapse state of a survey element on the design surface. Handle this event to set a required state.
+   */
+  public onElementGetExpandCollapseState: EventBase<SurveyCreatorModel, ElementGetExpandCollapseStateEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetExpandCollapseStateEvent>();
   /**
    * An event that is raised when Survey Creator obtains permitted operations for a survey element. Use this event to disable user interactions with a question, panel, or page on the design surface.
    *
@@ -1197,15 +1205,11 @@ export class SurveyCreatorModel extends Base
     const chaningOptions = { tabName: viewName, allow: allow, model: this.currentPlugin?.model };
     this.onActiveTabChanging.fire(this, chaningOptions);
     if (!chaningOptions.allow) return;
-    if (!this.canSwitchViewType()) return false;
+    if (!!this.currentPlugin?.deactivate && !this.currentPlugin.deactivate()) return;
     const plugin = this.activatePlugin(viewName);
     this.viewType = viewName;
     this.onActiveTabChanged.fire(this, { tabName: viewName, plugin: plugin, model: !!plugin ? plugin.model : undefined });
     return true;
-  }
-  private canSwitchViewType(): boolean {
-    const plugin: ICreatorPlugin = this.currentPlugin;
-    return !plugin || !plugin.deactivate || plugin.deactivate();
   }
   private activatePlugin(newType: string): ICreatorPlugin {
     const plugin: ICreatorPlugin = this.getPlugin(newType);
@@ -1248,6 +1252,7 @@ export class SurveyCreatorModel extends Base
     this.tabbedMenu.locOwner = this;
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.sidebar = new SidebarModel(this);
+    this.registerIcons();
     this.setOptions(this.options);
     this.patchMetadata();
     this.initSurveyWithJSON(undefined, false);
@@ -1564,6 +1569,20 @@ export class SurveyCreatorModel extends Base
   }
   public getOptions(): ICreatorOptions {
     return this.options || {};
+  }
+  protected registerIcons() {
+    let path;
+    if (settings.useLegacyIcons) {
+      SurveySettings.useLegacyIcons = true;
+      path = svgBundle.V1;
+    } else {
+      SurveySettings.useLegacyIcons = false;
+      path = svgBundle.V2;
+    }
+
+    if (!path) return;
+
+    SvgRegistry.registerIconsFromFolder(path);
   }
   protected setOptions(options: ICreatorOptions): void {
     if (!options) options = {};
@@ -1910,27 +1929,55 @@ export class SurveyCreatorModel extends Base
       this.stopUndoRedoTransaction();
       if (this.collapsePagesOnDrag) {
         this.designerStateManager?.release();
-        this.restorePagesState();
+        this.restoreElementsState();
       }
     });
   }
   public get designerStateManager() {
     return (this.getPlugin("designer") as TabDesignerPlugin).designerStateManager;
   }
-  public collapseAllPages(): void {
-    this.survey.pages.forEach(page => {
-      const pageAdorner = SurveyElementAdornerBase.GetAdorner(page);
-      if (pageAdorner) {
-        pageAdorner.collapsed = true;
+
+  private getCollapsableElements() {
+    return this.survey.pages;
+  }
+
+  public collapseAllElements(): void {
+    this.getCollapsableElements().forEach(element => {
+      const elementAdorner = SurveyElementAdornerBase.GetAdorner(element);
+      if (elementAdorner) {
+        elementAdorner.collapsed = this.getElementExpandCollapseState(element as Question | PageModel | PanelModel, "drag-start", true);
       }
     });
   }
-  public restorePagesState(): void {
-    setTimeout(() => {
-      this.survey.pages.forEach(page => {
-        SurveyElementAdornerBase.RestoreStateFor(page);
-      });
-    }, 10);
+
+  public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
+    const options: ElementGetExpandCollapseStateEvent = {
+      element: element,
+      reason: reason,
+      collapsed: defaultValue
+    };
+    this.onElementGetExpandCollapseState.fire(this, options);
+    return options.collapsed;
+  }
+
+  private restoreState(element: SurveyElement) {
+    const state = this.getElementExpandCollapseState(element as any, "drag-end", undefined);
+    if (state !== undefined) {
+      SurveyElementAdornerBase.GetAdorner(element).collapsed = state;
+    }
+    SurveyElementAdornerBase.RestoreStateFor(element);
+  }
+  public restoreElementsState(): void {
+    this.getCollapsableElements().forEach(element => {
+      if (element["draggedFrom"] !== undefined) {
+        const adorner = SurveyElementAdornerBase.GetAdorner(element);
+        adorner?.blockAnimations();
+        this.restoreState(element);
+        adorner?.releaseAnimations();
+      } else {
+        this.restoreState(element);
+      }
+    });
   }
   private initDragDropChoices() {
     this.dragDropChoices = new DragDropChoices(null, this);
@@ -2077,7 +2124,8 @@ export class SurveyCreatorModel extends Base
   private doOnPageAdded(page: PageModel) {
     var options = { page: page };
     this.onPageAdded.fire(this, options);
-    this.setModified({ type: "PAGE_ADDED", newValue: options.page });
+    const pType = this.isCopyingPage ? "ELEMENT_COPIED" : "PAGE_ADDED";
+    this.setModified({ type: pType, newValue: options.page });
   }
   private getPageByElement(obj: Base): PageModel {
     return this.survey.getPageByElement(<IElement>(<any>obj));
@@ -2137,20 +2185,31 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  public changeText(value: string, clearState = false): void {
+  public changeText(value: string, clearState = false, trustJSON?: boolean): void {
     this.setTextValue(value);
     if (!value) {
       this.initSurveyWithJSON(undefined, clearState);
     } else {
-      const textWorker = new SurveyTextWorker(value);
-      if (textWorker.isJsonCorrect || !!textWorker.survey) {
-        this.initSurveyWithJSON(textWorker.survey.toJSON(), clearState);
+      let jsonValue = trustJSON ? this.parseJSON(value) : undefined;
+      if (!trustJSON) {
+        const textWorker = new SurveyTextWorker(value);
+        if (textWorker.isJsonCorrect) {
+          jsonValue = this.parseJSON(value);
+        }
+        else if (!!textWorker.survey) {
+          jsonValue = textWorker.survey.toJSON();
+        }
+      }
+      if (!!jsonValue) {
+        this.initSurveyWithJSON(jsonValue, clearState);
       } else {
         this.viewType = "editor";
       }
     }
   }
-
+  private parseJSON(val: string): any {
+    return new SurveyJSON5().parse(val);
+  }
   /**
    * A survey JSON schema as a string.
    * 
@@ -2646,6 +2705,7 @@ export class SurveyCreatorModel extends Base
    * @see onPageAdded
    */
   public copyPage(page: PageModel): PageModel {
+    this.isCopyingPage = true;
     var newPage = <PageModel>(<any>this.copyElement(page));
     var index = this.survey.pages.indexOf(page);
     if (index > -1) {
@@ -2653,6 +2713,7 @@ export class SurveyCreatorModel extends Base
     } else {
       this.survey.pages.push(newPage);
     }
+    this.isCopyingPage = false;
     newPage.questions.forEach(q => {
       this.addNewElementReason = "ELEMENT_COPIED";
       this.doOnQuestionAdded(q, q.parent);
@@ -2662,6 +2723,7 @@ export class SurveyCreatorModel extends Base
     this.addNewElementReason = "";
     return newPage;
   }
+  private isCopyingPage: boolean;
 
   protected deleteObjectCore(obj: any) {
     if (obj.isPage) {
@@ -3723,6 +3785,7 @@ export class SurveyCreatorModel extends Base
       title: item.title,
       id: item.name,
       iconName: item.iconName,
+      iconSize: "auto",
       visible: item.visible,
       enabled: item.enabled,
       needSeparator: needSeparator
@@ -3917,7 +3980,7 @@ export class SurveyCreatorModel extends Base
     this.syncTheme(theme);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
     if (designerPlugin) {
-      designerPlugin.updateThemeSettings();
+      designerPlugin.setTheme();
     }
   }
   public syncTheme(theme: ICreatorTheme): void {

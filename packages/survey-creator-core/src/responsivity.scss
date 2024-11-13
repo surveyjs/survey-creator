@@ -117,24 +117,24 @@
   .svc-question__content-actions {
     width: calc(100% + 3 * #{$base-unit});
 
-    .sv-action-bar-item {
+    .svc-survey-element-toolbar__item {
       border: 0;
     }
   }
 
   .svc-page__content-actions {
-    .sv-action-bar {
+    .svc-page-toolbar {
       padding-right: calcSize(1);
 
       .sv-action {
         .sv-action__content {
           padding-right: 0;
-
-          .sv-action-bar-item__title--with-icon {
-            display: none;
-          }
         }
       }
     }
+  }
+
+  .svc-page-toolbar-item__title--with-icon {
+    display: none;
   }
 }

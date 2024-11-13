@@ -29,7 +29,11 @@
           class="svc-designer__placeholder-container"
           :data-sv-drop-target-survey-element="'newGhostPage'"
         >
-          <SurfacePlaceholder :name="'designer'" :placeholderTitleText="model.placeholderTitleText" :placeholderDescriptionText="model.placeholderDescriptionText" />
+          <SurfacePlaceholder
+            :name="'designer'"
+            :placeholderTitleText="model.placeholderTitleText"
+            :placeholderDescriptionText="model.placeholderDescriptionText"
+          />
           <div
             className="svc-designer-placeholder-page"
             data-sv-drop-target-survey-element="newGhostPage"
@@ -39,6 +43,7 @@
               :survey="model.creator.survey"
               :creator="model.creator"
               :page="model.newPage"
+              :isGhost="true"
             />
           </div>
         </div>
@@ -58,16 +63,9 @@
           >
             <SvComponent :is="'survey-header'" :survey="model.creator.survey" />
           </div>
-          <!--
-          <SvComponent
-            v-if="survey.isShowProgressBarOnTop"
-            :name="model.creator.survey.getProgressTypeComponent()"
-            :survey="model.creator.survey"
-          ></SvComponent>
-          -->
           <template v-if="model.creator.pageEditMode !== 'bypage'">
             <div
-              v-for="page in pages"
+              v-for="page in model.pages"
               :key="page.id"
               class="svc-page"
               :data-sv-drop-target-survey-element="
@@ -80,6 +78,7 @@
                 :survey="model.creator.survey"
                 :creator="model.creator"
                 :page="page"
+                :isGhost="page == model.newPage"
               />
             </div>
           </template>
@@ -96,15 +95,9 @@
               :is="'svc-page'"
               :page="model.pagesController.page2Display"
               :creator="model.creator"
+              :isGhost="model.pagesController.page2Display == model.newPage"
             />
           </div>
-          <!--
-          <SvComponent
-            v-if="survey.isShowProgressBarOnBottom"
-            :name="model.creator.survey.getProgressTypeComponent()"
-            :survey="model.creator.survey"
-          ></SvComponent>
-          -->
         </div>
         <div
           v-if="model.creator.showPageNavigator"
@@ -117,7 +110,7 @@
           />
         </div>
         <div v-if="model.hasToolbar" class="svc-tab-designer__toolbar">
-          <SvComponent :is="'sv-action-bar'" :model="model.actionContainer" />
+          <SvComponent :is="'sv-action-bar'" :model="model.surfaceToolbar" />
         </div>
       </template>
     </div>
@@ -133,8 +126,4 @@ const props = defineProps<{ model: TabDesignerViewModel }>();
 const survey = computed(() => props.model.survey);
 useBase(() => props.model);
 useBase(() => survey.value);
-const pages = computed(() => {
-  const model = props.model;
-  return survey.value.pages.concat(model.showNewPage ? [model.newPage] : []);
-});
 </script>

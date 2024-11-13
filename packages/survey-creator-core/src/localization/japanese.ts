@@ -1018,6 +1018,61 @@ export var jaStrings = {
       url: "リンク",
       week: "週"
     },
+    autocomplete: {
+      name: "フルネーム",
+      "honorific-prefix": "接頭辞",
+      "given-name": "名前",
+      "additional-name": "ミドルネーム",
+      "family-name": "名字",
+      "honorific-suffix": "接尾辞",
+      nickname: "ニックネーム",
+      "organization-title": "役職",
+      username: "ユーザー名",
+      "new-password": "新しいパスワード",
+      "current-password": "現在のパスワード",
+      organization: "組織名",
+      "street-address": "フルストリートアドレス",
+      "address-line1": "住所1",
+      "address-line2": "住所2",
+      "address-line3": "住所3",
+      "address-level4": "レベル4アドレス",
+      "address-level3": "レベル3アドレス",
+      "address-level2": "レベル2アドレス",
+      "address-level1": "レベル1アドレス",
+      country: "国コード",
+      "country-name": "国名",
+      "postal-code": "郵便番号",
+      "cc-name": "カード名義人氏名",
+      "cc-given-name": "カード所有者の名",
+      "cc-additional-name": "カード名義人のミドルネーム",
+      "cc-family-name": "カード名義人の姓",
+      "cc-number": "クレジットカード番号",
+      "cc-exp": "有効期限",
+      "cc-exp-month": "有効期限月",
+      "cc-exp-year": "有効期限",
+      "cc-csc": "カードセキュリティコード",
+      "cc-type": "クレジットカードの種類",
+      "transaction-currency": "取引通貨",
+      "transaction-amount": "取引金額",
+      language: "優先言語",
+      bday: "誕生日",
+      "bday-day": "誕生日",
+      "bday-month": "誕生日月",
+      "bday-year": "誕生日の年",
+      sex: "ジェンダー",
+      url: "ウェブサイトURL",
+      photo: "プロフィール写真",
+      tel: "電話番号",
+      "tel-country-code": "電話の国番号",
+      "tel-national": "国内電話番号",
+      "tel-area-code": "市外局番",
+      "tel-local": "市内電話番号",
+      "tel-local-prefix": "ローカル電話プレフィックス",
+      "tel-local-suffix": "ローカル電話サフィックス",
+      "tel-extension": "内線",
+      email: "アドレス",
+      impp: "インスタントメッセージングプロトコル"
+    },
     maskType: {
       none: "何一つ",
       pattern: "パターン",
@@ -2851,3 +2906,56 @@ editorLocalization.locales["ja"] = jaStrings;
 // names.default-contrast: "Contrast" => "対照"
 // panel.showNumber: "Number this panel" => "このパネルに番号を付ける"
 // pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "回答者が現在のページのすべての質問に答えると、アンケートが自動的に次のページに進むようにする場合に選択します。この機能は、ページの最後の質問が自由回答形式の場合、または複数の回答が許可されている場合には適用されません。"
+// autocomplete.name: "Full Name" => "フルネーム"
+// autocomplete.honorific-prefix: "Prefix" => "接頭辞"
+// autocomplete.given-name: "First Name" => "名前"
+// autocomplete.additional-name: "Middle Name" => "ミドルネーム"
+// autocomplete.family-name: "Last Name" => "名字"
+// autocomplete.honorific-suffix: "Suffix" => "接尾辞"
+// autocomplete.nickname: "Nickname" => "ニックネーム"
+// autocomplete.organization-title: "Job Title" => "役職"
+// autocomplete.username: "User Name" => "ユーザー名"
+// autocomplete.new-password: "New Password" => "新しいパスワード"
+// autocomplete.current-password: "Current Password" => "現在のパスワード"
+// autocomplete.organization: "Organization Name" => "組織名"
+// autocomplete.street-address: "Full Street Address" => "フルストリートアドレス"
+// autocomplete.address-line1: "Address Line 1" => "住所1"
+// autocomplete.address-line2: "Address Line 2" => "住所2"
+// autocomplete.address-line3: "Address Line 3" => "住所3"
+// autocomplete.address-level4: "Level 4 Address" => "レベル4アドレス"
+// autocomplete.address-level3: "Level 3 Address" => "レベル3アドレス"
+// autocomplete.address-level2: "Level 2 Address" => "レベル2アドレス"
+// autocomplete.address-level1: "Level 1 Address" => "レベル1アドレス"
+// autocomplete.country: "Country Code" => "国コード"
+// autocomplete.country-name: "Country Name" => "国名"
+// autocomplete.postal-code: "Postal Code" => "郵便番号"
+// autocomplete.cc-name: "Cardholder Name" => "カード名義人氏名"
+// autocomplete.cc-given-name: "Cardholder First Name" => "カード所有者の名"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "カード名義人のミドルネーム"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "カード名義人の姓"
+// autocomplete.cc-number: "Credit Card Number" => "クレジットカード番号"
+// autocomplete.cc-exp: "Expiration Date" => "有効期限"
+// autocomplete.cc-exp-month: "Expiration Month" => "有効期限月"
+// autocomplete.cc-exp-year: "Expiration Year" => "有効期限"
+// autocomplete.cc-csc: "Card Security Code" => "カードセキュリティコード"
+// autocomplete.cc-type: "Credit Card Type" => "クレジットカードの種類"
+// autocomplete.transaction-currency: "Transaction Currency" => "取引通貨"
+// autocomplete.transaction-amount: "Transaction Amount" => "取引金額"
+// autocomplete.language: "Preferred Language" => "優先言語"
+// autocomplete.bday: "Birthday" => "誕生日"
+// autocomplete.bday-day: "Birthday Day" => "誕生日"
+// autocomplete.bday-month: "Birthday Month" => "誕生日月"
+// autocomplete.bday-year: "Birthday Year" => "誕生日の年"
+// autocomplete.sex: "Gender" => "ジェンダー"
+// autocomplete.url: "Website URL" => "ウェブサイトURL"
+// autocomplete.photo: "Profile Photo" => "プロフィール写真"
+// autocomplete.tel: "Telephone Number" => "電話番号"
+// autocomplete.tel-country-code: "Country Code for Phone" => "電話の国番号"
+// autocomplete.tel-national: "National Telephone Number" => "国内電話番号"
+// autocomplete.tel-area-code: "Area Code" => "市外局番"
+// autocomplete.tel-local: "Local Phone Number" => "市内電話番号"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "ローカル電話プレフィックス"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "ローカル電話サフィックス"
+// autocomplete.tel-extension: "Phone Extension" => "内線"
+// autocomplete.email: "Email Address" => "アドレス"
+// autocomplete.impp: "Instant Messaging Protocol" => "インスタントメッセージングプロトコル"

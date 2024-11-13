@@ -11,13 +11,13 @@
     data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
   >
     <div v-if="model.showHiddenTitle" :class="model.cssCollapsedHiddenHeader">
-      <div :class="model.cssCollapsedHiddenTitle">
-        <SvComponent
+      <SvComponent
           v-if="!!element.hasTitle"
-          :is="'survey-string'"
-          :locString="element.locTitle"
-        />
-        <span v-else class="svc-fake-title">{{ element.name }}</span>
+          :is="'survey-element-title'"
+          :element="element"
+      />
+      <div v-else :class="model.cssCollapsedHiddenTitle">
+        <span class="svc-fake-title">{{ element.name }}</span>
       </div>
     </div>
     <div
@@ -53,7 +53,7 @@
           v-bind="{
             css: 'svc-question__drag-element',
             iconName: 'icon-drag-area-indicator_24x16',
-            size: 24,
+            size: 'auto',
           }"
         ></SvComponent>
         <div class="svc-question__top-actions">
@@ -64,7 +64,7 @@
           ></SvComponent>
         </div>
       </div>
-
+      <template v-if="model.needToRenderContent">
       <SvComponent
         :is="'sv-template-renderer'"
         :componentName="componentName"
@@ -87,17 +87,6 @@
           getPlaceholderComponentData && getPlaceholderComponentData(model)
         "
       ></SvComponent>
-      <!-- ko if: koIsEmptyElement() && !!$data.placeholderComponentData -->
-      <!-- ko let: { question: placeholderComponentData.data }  -->
-      <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: placeholderComponentData } } -->
-      <!-- /ko -->
-      <!-- /ko -->
-      <!-- /ko -->
-
-      <!-- ko if: adornerComponent -->
-      <!-- ko component: { name: adornerComponent, params: { model: $data } } -->
-      <!-- /ko -->
-      <!-- /ko -->
       <SvComponent
         v-if="adornerComponent"
         :is="adornerComponent"
@@ -124,7 +113,8 @@
           :handleClick="false"
         ></SvComponent>
       </div>
-    </div>
+    </template>
+  </div>
   </div>
 </template>
 <script lang="ts" setup>

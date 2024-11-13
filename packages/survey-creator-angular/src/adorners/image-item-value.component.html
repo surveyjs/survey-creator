@@ -14,17 +14,18 @@
         <span *ngIf="adorner.isDraggable && adorner.canRenderControls"
           class="svc-context-button svc-image-item-value-controls__drag-area-indicator"
           (pointerdown)="adorner.onPointerDown($event)" [attr.title]="undefined" [attr.aria-label]="undefined">
-          <svg [iconName]="'icon-drag-area-indicator'" [size]="24" sv-ng-svg-icon></svg>
+          <svg [iconName]="'icon-drag-24x24'" [size]="'auto'" sv-ng-svg-icon></svg>
         </span>
         <div *ngIf="adorner.canRenderControls" class="svc-context-container svc-image-item-value-controls">
           <ng-container *ngIf="adorner.allowRemove && !adorner.isUploading">
             <span class="svc-context-button" (click)="adorner.chooseFile(adorner)" [key2click] [attr.title]="undefined"
               [attr.aria-label]="undefined">
-              <svg role="button" [iconName]="'icon-file'" [size]="24" [title]="adorner.selectFileTitle" sv-ng-svg-icon></svg>
+              <svg role="button" [iconName]="'icon-choosefile'" [size]="'auto'" [title]="adorner.selectFileTitle" sv-ng-svg-icon></svg>
             </span>
             <span class="svc-context-button svc-context-button--danger" (click)="adorner.remove(adorner)" [key2click]
               [attr.title]="undefined" [attr.aria-label]="undefined">
-              <svg role="button" [iconName]="'icon-delete'" [size]="24" [title]="adorner.removeFileTitle" sv-ng-svg-icon></svg>
+              <svg role="button" [iconName]="'icon-delete'" [size]="'auto'" [title]="adorner.removeFileTitle"
+                sv-ng-svg-icon></svg>
             </span>
           </ng-container>
         </div>
@@ -48,7 +49,7 @@
           <span class="svc-context-button svc-image-item-value-controls__add"
             *ngIf="adorner.allowAdd && !adorner.isUploading" [key2click] (click)="adorner.chooseNewFile(adorner)"
             [attr.title]="undefined" [attr.aria-label]="undefined">
-            <svg [iconName]="'icon-add-lg'" [size]="24" sv-ng-svg-icon [title]="adorner.addFileTitle"></svg>
+            <svg [iconName]="'icon-add-lg'" [size]="'auto'" sv-ng-svg-icon [title]="adorner.addFileTitle"></svg>
           </span>
         </div>
       </ng-container>
