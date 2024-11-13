@@ -35,7 +35,7 @@
         ><SvComponent
           :is="'sv-svg-icon'"
           :iconName="'icon-add_16x16'"
-          :size="16"
+          :size="'auto'"
           :title="undefined"
         ></SvComponent
       ></span>
@@ -49,7 +49,7 @@
         ><SvComponent
           :is="'sv-svg-icon'"
           :iconName="'icon-remove_16x16'"
-          :size="16"
+          :size="'auto'"
           :title="undefined"
         ></SvComponent
       ></span>
