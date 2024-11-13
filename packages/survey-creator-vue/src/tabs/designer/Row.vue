@@ -27,10 +27,10 @@ const model = useCreatorModel(
 );
 
 onMounted(() => {
-  model.subscribeElementChanges();
+  model.value && model.value.subscribeElementChanges();
 });
 onUnmounted(() => {
-  model.unsubscribeElementChanges();
+  model.value && model.value.unsubscribeElementChanges();
 });
 
 </script>
