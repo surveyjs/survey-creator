@@ -51,6 +51,7 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
   constructor(private creator: CreatorBase) {
     super();
     this.dotsItem.popupModel.horizontalPosition = "center";
+    this.dotsItem.popupModel.cssClass += " svc-tabbed-menu-item__popup svc-creator-popup";
     this.minVisibleItemsCount = 1;
   }
   public addTab(name: string,

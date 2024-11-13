@@ -110,7 +110,7 @@
           />
         </div>
         <div v-if="model.hasToolbar" class="svc-tab-designer__toolbar">
-          <SvComponent :is="'sv-action-bar'" :model="model.actionContainer" />
+          <SvComponent :is="'sv-action-bar'" :model="model.surfaceToolbar" />
         </div>
       </template>
     </div>
