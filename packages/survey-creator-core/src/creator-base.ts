@@ -3749,6 +3749,7 @@ export class SurveyCreatorModel extends Base
       horizontalPosition: "center",
       displayMode: this.isTouch ? "overlay" : "popup"
     });
+    newAction.popupModel.getTargetCallback = undefined;
 
     return newAction;
   }
