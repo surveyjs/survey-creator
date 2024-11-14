@@ -231,6 +231,22 @@ export interface ICreatorOptions {
    */
   allowChangeThemeInPreview?: boolean;
   /**
+   * Specifies a default device for survey preview in the Preview tab.
+   *
+   * Possible values:
+   * 
+   * - `"desktop"` (default)
+   * - `"iPhoneSE"`
+   * - `"iPhone15"`
+   * - `"iPhone15Plus"`
+   * - `"iPad"`
+   * - `"iPadMini"`
+   * - `"androidPhone"`
+   * - `"androidTablet"`
+   * - `"microsoftSurface"`
+   */
+  previewDevice?: string;
+  /**
    * Specifies the orientation of the selected device in the Preview tab.
    * 
    * Possible values:

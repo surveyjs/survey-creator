@@ -372,13 +372,13 @@ export var simulatorDevices: {
   //   title: "Windows 10 Phone",
   //   cssClass: "svd-simulator-win10phone",
   // },
-  msSurface: {
+  microsoftSurface: {
     cssPixelRatio: 1,
     ppi: 148,
     width: 768,
     height: 1366,
     deviceType: "tablet",
-    title: "MS Surface",
+    title: "Microsoft Surface",
     cssClass: "svd-simulator-mssurface",
   },
   genericPhone: {
