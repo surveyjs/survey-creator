@@ -44,6 +44,9 @@ package-lock.json
 
 visualRegressionTests/screenshots
 visualRegressionTests/artifacts
+visualRegressionTests-V2/screenshots
+visualRegressionTests-V2/artifacts
+
 .angular
 
 junit.xml
