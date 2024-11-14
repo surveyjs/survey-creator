@@ -396,3 +396,24 @@ test("Check page adorner state is restored after shrink and stretch", async (t) 
   await t.resizeWindow(1920, 1080);
   await t.expect(Selector(".svc-page__content-actions #duplicate .svc-page-toolbar-item__title--with-icon").visible).ok();
 });
+test.skip("Popup position", async (t) => {
+  const setCreatorTop = ClientFunction((top) => {
+    const el = document.querySelector(".svc-creator") as HTMLElement;
+    el.style.marginTop = top;
+  });
+  await setCreatorTop("200px");
+
+  await t.resizeWindow(1400, 900);
+  await setJSON({
+    "elements": [
+      {
+        "type": "text",
+        "name": "q1"
+      }
+    ]
+  });
+  await t.click('button[title="Survey settings"]');
+  await t.click('[data-name="locale"]');
+  await t.expect(ClientFunction(() => { return document.querySelector('[data-name="locale"] .sv-popup__container')?.getBoundingClientRect().top; })()).gte(200);
+  await setCreatorTop("");
+});

@@ -240,9 +240,26 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: true }) generateValidJSON: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   /**
+   * Specifies a default device for survey preview in the Preview tab.
+   *
+   * Possible values:
+   * 
+   * - `"desktop"` (default)
+   * - `"iPhoneSE"`
+   * - `"iPhone15"`
+   * - `"iPhone15Plus"`
+   * - `"iPad"`
+   * - `"iPadMini"`
+   * - `"androidPhone"`
+   * - `"androidTablet"`
+   * - `"microsoftSurface"`
+   */
+  previewDevice: string;
+  /**
    * Specifies the orientation of the selected device in the Preview tab.
    *
    * Possible values:
+   * 
    * - `"landscape"` (default)
    * - `"portrait"`
    */
@@ -1245,6 +1262,7 @@ export class SurveyCreatorModel extends Base
       this.options = !!options2 ? options2 : {};
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
+    this.previewDevice = options.previewDevice ?? "desktop";
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
     this.toolbarValue.locOwner = this;
@@ -2295,6 +2313,10 @@ export class SurveyCreatorModel extends Base
     if (reason === "test" || reason === "theme") {
       this.onPreviewSurveyCreated.fire(this, { survey: survey });
     }
+
+    survey.onPopupVisibleChanged.add((_, options) => {
+      if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.rootElement; };
+    });
     return survey;
   }
   private getSurveyInstanceCreatedArea(reason: string): string {
@@ -3748,6 +3770,7 @@ export class SurveyCreatorModel extends Base
       horizontalPosition: "center",
       displayMode: this.isTouch ? "overlay" : "popup"
     });
+    newAction.popupModel.getTargetCallback = undefined;
 
     return newAction;
   }

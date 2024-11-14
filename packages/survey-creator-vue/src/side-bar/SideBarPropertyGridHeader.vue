@@ -14,7 +14,7 @@
             <span class="svc-sidebar__header-subtitle">{{ model.tooltip }}</span>
           </div>
         </div>
-        <SvComponent :is="'sv-popup'" :model="model.popupModel"></SvComponent>
+        <SvComponent :is="'sv-popup'"></SvComponent>
       </div>
     </div>
   </div>
