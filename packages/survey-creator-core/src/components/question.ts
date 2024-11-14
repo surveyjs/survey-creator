@@ -82,9 +82,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     StringItemsNavigatorBase.setQuestion(this);
   }
 
-  get element() {
-    return this.surveyElement;
-  }
   protected canSelectElement(): boolean {
     return super.canSelectElement() && this.surveyElement.isInteractiveDesignElement;
   }

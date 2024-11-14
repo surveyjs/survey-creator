@@ -2,7 +2,7 @@ import { CreatorBase } from "./creator-base";
 import { SurveyElementAdornerBase } from "./components/action-container-view-model";
 
 export class ExpandCollapseManager {
-  constructor(creator: CreatorBase) {
+  constructor(private creator: CreatorBase) {
     creator.onSurfaceToolbarActionExecuted.add((_, options) => {
       const isCollapseAction = options.action.id == "collapseAll";
       const isExpandAction = options.action.id == "expandAll";
@@ -15,7 +15,8 @@ export class ExpandCollapseManager {
   public updateCollapsed(isCollapsed: boolean) {
     for (let i = this.adorners.length - 1; i >= 0; i--) {
       if (this.adorners[i].allowExpandCollapse) {
-        this.adorners[i].collapsed = isCollapsed;
+        const reason = isCollapsed ? "collapse-all" : "expand-all";
+        this.adorners[i].collapsed = this.creator.getElementExpandCollapseState(this.adorners[i].element as any, reason, isCollapsed);
       }
     }
   }
