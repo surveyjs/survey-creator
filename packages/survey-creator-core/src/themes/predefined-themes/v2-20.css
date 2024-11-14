@@ -78,6 +78,7 @@
   --ctr-text-decor-padding-top: 0px;
   --ctr-text-decor-padding-bottom: 0px;
   --ctr-caption-with-actions-description-text-opacity-disabled: 25px;
+  --ctr-data-table-cell-gap: 0px;
   --ctr-data-table-cell-drop-down-arrow-opacity: 50px;
   --ctr-data-table-cell-padding-top-header: 0px;
   --ctr-data-table-cell-padding-bottom-header: 0px;
@@ -329,6 +330,10 @@
   --ctr-corner-radius-unit: 8px;
   --ctr-stroke-unit: 1px;
   --ctr-size-unit: 8px;
+  --ctr-data-table-cell-padding-right-drop-down: 0px;
+  --ctr-image-gallery-item-image-opacity-hovered: 50px;
+  --ctr-image-gallery-item-image-opacity-disabled: 25px;
+  --ctr-image-gallery-item-image-opacity-selected: 50px;
 }
 
  /* Aliases  */
@@ -861,7 +866,7 @@
   --ctr-property-grid-header-padding-bottom: var(--sjs-spacing-x150);
   --ctr-property-grid-header-border-color: var(--sjs-primary-background-500);
   --ctr-property-grid-header-border-width-bottom: var(--sjs-stroke-x2);
-  --ctr-caption-with-actions-padding-right: var(--sjs-spacing-x0125);
+  --ctr-caption-with-actions-padding-right: var(--sjs-spacing-x05);
   --ctr-caption-with-actions-description-button-margin-left: var(--sjs-spacing-x05);
   --ctr-caption-with-actions-description-text-color: var(--sjs-layer-3-foreground-50);
   --ctr-caption-with-actions-description-padding-bottom: var(--sjs-spacing-x2);
@@ -870,11 +875,10 @@
   --ctr-data-table-cell-padding-right: var(--sjs-spacing-x1);
   --ctr-data-table-cell-padding-top: var(--sjs-spacing-x1);
   --ctr-data-table-cell-padding-bottom: var(--sjs-spacing-x1);
-  --ctr-data-table-cell-gap: var(--sjs-spacing-x1);
   --ctr-data-table-cell-text-color: var(--sjs-layer-1-foreground-100);
   --ctr-data-table-cell-drop-down-arrow-color: var(--sjs-layer-1-foreground-50);
-  --ctr-data-table-cell-drop-down-arrow-width: var(--sjs-size-x2);
-  --ctr-data-table-cell-drop-down-arrow-height: var(--sjs-size-x2);
+  --ctr-data-table-cell-drop-down-arrow-width: var(--sjs-size-x3);
+  --ctr-data-table-cell-drop-down-arrow-height: var(--sjs-size-x3);
   --ctr-data-table-cell-text-color-placeholder: var(--sjs-layer-1-foreground-50);
   --ctr-data-table-cell-text-color-disabled: var(--sjs-layer-1-foreground-100);
   --ctr-data-table-cell-text-color-header: var(--sjs-layer-2-foreground-50);
@@ -3259,5 +3263,20 @@
   --lbr-slider-margin-top: var(--sjs-spacing-x1);
   --lbr-button-padding-right-mobile: var(--sjs-spacing-x3);
   --lbr-button-padding-left-mobile: var(--sjs-spacing-x3);
+  --ctr-image-gallery-item-height: var(--sjs-size-x18);
+  --ctr-image-gallery-item-min-width: var(--sjs-size-x28);
+  --ctr-image-gallery-item-title-margin-top: var(--sjs-spacing-x05);
+  --ctr-image-gallery-item-title-color: var(--sjs-layer-3-foreground-100);
+  --ctr-image-gallery-gap: var(--sjs-spacing-x2);
+  --ctr-image-gallery-item-corner-radius: var(--sjs-corner-radius-x05);
+  --ctr-image-gallery-item-border-color: var(--sjs-border-25-overlay);
+  --ctr-image-gallery-item-border-width: var(--sjs-stroke-x1);
+  --ctr-image-gallery-item-checkmark-background-color: var(--sjs-primary-foreground-100);
+  --ctr-image-gallery-item-checkmark-icon-color: var(--sjs-primary-background-500);
+  --ctr-image-gallery-item-checkmark-icon-width: var(--sjs-size-x4);
+  --ctr-image-gallery-item-checkmark-icon-height: var(--sjs-size-x4);
+  --ctr-image-gallery-item-checkmark-corner-radius: var(--sjs-corner-radius-round);
+  --ctr-image-gallery-item-checkmark-padding: var(--sjs-spacing-x1);
+  --ctr-image-gallery-item-background-color-selected: var(--sjs-primary-background-500);
 }
 
