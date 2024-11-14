@@ -175,6 +175,11 @@ svc-page {
   fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
 }
 
+.svc-page-toolbar__item:active .svc-page-toolbar-item__icon use {
+  fill: black;
+  opacity: 0.5;
+}
+
 .svc-page-toolbar-item__title {
   @include ctrSmallBoldFont;
   color: var(--ctr-survey-page-toolbar-item-text-color, $foreground);
