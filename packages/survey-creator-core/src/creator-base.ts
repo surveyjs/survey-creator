@@ -240,17 +240,26 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: true }) generateValidJSON: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   /**
-   * Specifies the device to show in the Preview tab.
+   * Specifies a default device for survey preview in the Preview tab.
    *
    * Possible values:
+   * 
    * - `"desktop"` (default)
-   * - device name in simulatorDevices table
+   * - `"iPhoneSE"`
+   * - `"iPhone15"`
+   * - `"iPhone15Plus"`
+   * - `"iPad"`
+   * - `"iPadMini"`
+   * - `"androidPhone"`
+   * - `"androidTablet"`
+   * - `"microsoftSurface"`
    */
   previewDevice: string;
   /**
    * Specifies the orientation of the selected device in the Preview tab.
    *
    * Possible values:
+   * 
    * - `"landscape"` (default)
    * - `"portrait"`
    */
