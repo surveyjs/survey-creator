@@ -119,6 +119,9 @@ export function getPropertyGridCategory(categoryName) {
 export function getBarItemByTitle(text: string) {
   return Selector(".sv-action-bar-item[title=\"" + text + "\"]");
 }
+export function getQuestionBarItemByTitle(text: string) {
+  return Selector(".svc-survey-element-toolbar__item[title=\"" + text + "\"]");
+}
 export function getListItemByText(text) {
   return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text).filterVisible();
 }

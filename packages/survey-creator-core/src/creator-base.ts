@@ -51,7 +51,9 @@ import {
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
   TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
-  PageAddingEvent, DragStartEndEvent
+  PageAddingEvent, DragStartEndEvent,
+  ElementGetExpandCollapseStateEvent,
+  ElementGetExpandCollapseStateEventReason
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -450,6 +452,10 @@ export class SurveyCreatorModel extends Base
    */
   public onHtmlToMarkdown: EventBase<SurveyCreatorModel, HtmlToMarkdownEvent> = this.addCreatorEvent<SurveyCreatorModel, HtmlToMarkdownEvent>();
 
+  /*
+   * An event that is raised when Survey Creator obtains the expand/collapse state of a survey element on the design surface. Handle this event to set a required state.
+   */
+  public onElementGetExpandCollapseState: EventBase<SurveyCreatorModel, ElementGetExpandCollapseStateEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetExpandCollapseStateEvent>();
   /**
    * An event that is raised when Survey Creator obtains permitted operations for a survey element. Use this event to disable user interactions with a question, panel, or page on the design surface.
    *
@@ -1941,30 +1947,53 @@ export class SurveyCreatorModel extends Base
       this.stopUndoRedoTransaction();
       if (this.collapsePagesOnDrag) {
         this.designerStateManager?.release();
-        this.restorePagesState();
+        this.restoreElementsState();
       }
     });
   }
   public get designerStateManager() {
     return (this.getPlugin("designer") as TabDesignerPlugin).designerStateManager;
   }
-  public collapseAllPages(): void {
-    this.survey.pages.forEach(page => {
-      const pageAdorner = SurveyElementAdornerBase.GetAdorner(page);
-      if (pageAdorner) {
-        pageAdorner.collapsed = true;
+
+  private getCollapsableElements() {
+    return this.survey.pages;
+  }
+
+  public collapseAllElements(): void {
+    this.getCollapsableElements().forEach(element => {
+      const elementAdorner = SurveyElementAdornerBase.GetAdorner(element);
+      if (elementAdorner) {
+        elementAdorner.collapsed = this.getElementExpandCollapseState(element as Question | PageModel | PanelModel, "drag-start", true);
       }
     });
   }
-  public restorePagesState(): void {
-    this.survey.pages.forEach(page => {
-      if (page["draggedFrom"] !== undefined) {
-        const adorner = SurveyElementAdornerBase.GetAdorner(page);
+
+  public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
+    const options: ElementGetExpandCollapseStateEvent = {
+      element: element,
+      reason: reason,
+      collapsed: defaultValue
+    };
+    this.onElementGetExpandCollapseState.fire(this, options);
+    return options.collapsed;
+  }
+
+  private restoreState(element: SurveyElement) {
+    const state = this.getElementExpandCollapseState(element as any, "drag-end", undefined);
+    if (state !== undefined) {
+      SurveyElementAdornerBase.GetAdorner(element).collapsed = state;
+    }
+    SurveyElementAdornerBase.RestoreStateFor(element);
+  }
+  public restoreElementsState(): void {
+    this.getCollapsableElements().forEach(element => {
+      if (element["draggedFrom"] !== undefined) {
+        const adorner = SurveyElementAdornerBase.GetAdorner(element);
         adorner?.blockAnimations();
-        SurveyElementAdornerBase.RestoreStateFor(page);
+        this.restoreState(element);
         adorner?.releaseAnimations();
       } else {
-        SurveyElementAdornerBase.RestoreStateFor(page);
+        this.restoreState(element);
       }
     });
   }
@@ -3772,6 +3801,7 @@ export class SurveyCreatorModel extends Base
       title: item.title,
       id: item.name,
       iconName: item.iconName,
+      iconSize: "auto",
       visible: item.visible,
       enabled: item.enabled,
       needSeparator: needSeparator

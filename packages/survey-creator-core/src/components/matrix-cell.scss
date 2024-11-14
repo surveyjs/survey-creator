@@ -53,19 +53,7 @@
 }
 
 .svc-matrix-cell__question-controls-button {
-  display: block;
-  width: calcSize(6);
-  height: calcSize(6);
-  background: $background;
   border: 1px solid $border;
-  box-sizing: border-box;
-  border-radius: 50%;
-  padding: calcSize(1.5);
-  cursor: pointer;
-
-  use {
-    fill: $foreground-light;
-  }
 }
 
 .svc-matrix-cell:hover .svc-matrix-cell__question-controls {

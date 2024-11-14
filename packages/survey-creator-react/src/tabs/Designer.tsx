@@ -166,7 +166,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       }
       {this.model.hasToolbar ?
         <div className="svc-tab-designer__toolbar">
-          <SurveyActionBar model={this.model.actionContainer} handleClick={false}></SurveyActionBar></div>
+          <SurveyActionBar model={this.model.surfaceToolbar} handleClick={false}></SurveyActionBar></div>
         : null
       }
     </React.Fragment>);

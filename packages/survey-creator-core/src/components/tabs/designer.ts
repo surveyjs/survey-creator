@@ -20,7 +20,7 @@ export class TabDesignerViewModel extends Base {
   @property() showPlaceholder: boolean;
   public creator: SurveyCreatorModel;
 
-  public actionContainer: ActionContainer;
+  public surfaceToolbar: ActionContainer;
 
   public get displayPageDropTarget() {
     return this.pagesController.page2Display === this.newPage ? "newGhostPage" : this.pagesController.page2Display.name;
@@ -75,32 +75,34 @@ export class TabDesignerViewModel extends Base {
     this.initSurvey();
   }
   private initToolbar() {
-    this.actionContainer = new ActionContainer();
+    this.surfaceToolbar = new ActionContainer();
     const action = (action) => { this.creator.onSurfaceToolbarActionExecuted.fire(this.creator, { action: action }); };
 
     let defaultActionBarCss = {
-      root: "sv-action-bar",
+      root: "sv-action-bar svc-tab-designer__surface-toolbar",
       defaultSizeMode: "",
       smallSizeMode: "",
-      item: "svc-page-navigator__selector",
+      item: "svc-page-navigator__button",
       itemWithTitle: "",
       itemAsIcon: "",
       itemActive: "",
       itemPressed: "",
-      itemIcon: "svc-page-navigator__navigator-icon",
+      itemIcon: "svc-page-navigator__button-icon",
       itemTitleWithIcon: "",
     };
-    this.actionContainer.cssClasses = defaultActionBarCss;
+    this.surfaceToolbar.cssClasses = defaultActionBarCss;
 
-    this.actionContainer.setItems([{
+    this.surfaceToolbar.setItems([{
       id: "collapseAll",
       locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
+      iconSize: "auto",
       action: action
     }, {
       id: "expandAll",
       locTooltipName: "ed.expandAllTooltip",
       iconName: "icon-expandall-24x24",
+      iconSize: "auto",
       action: action
     }]);
   }

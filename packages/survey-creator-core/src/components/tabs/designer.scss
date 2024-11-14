@@ -127,10 +127,12 @@ svc-tab-designer {
   position: absolute;
   bottom: calcSize(0);
   right: 0;
+}
 
-  .sv-action-bar {
-    padding: calcSize(1.5);
-    gap: calcSize(1);
-    flex-direction: column;
-  }
+.svc-tab-designer__surface-toolbar {
+  padding: var(--ctr-surface-toolbar-padding-top, calcSize(1.5))
+    var(--ctr-surface-toolbar-padding-right, calcSize(1.5)) var(--ctr-surface-toolbar-padding-bottom, calcSize(1.5))
+    var(--ctr-surface-toolbar-padding-left, calcSize(1.5));
+  gap: var(--ctr-surface-toolbar-gap, calcSize(1));
+  flex-direction: column;
 }

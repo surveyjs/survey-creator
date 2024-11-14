@@ -37,11 +37,10 @@ svc-toolbox {
     var(--ctr-toolbox-item-padding-left-no-text)
   );
 
-  --thm-toolbox-separator-width: calc(var(--ctr-toolbox-min-width) - var(--ctr-toolbox-separator-padding-right));
-
+  --thm-toolbox-separator-width: var(--ctr-toolbox-min-width);
   --toolbox-width: var(--ctr-toolbox-min-width, 224.984375px /*calcSize(28)*/);
   --toolbox-width-compact: var(--thm-toolbox-width-compact, var(--dft-toolbox-width-compact));
-
+  
   width: auto;
   height: 100%;
   display: flex;
@@ -145,6 +144,7 @@ svc-toolbox {
   }
   .svc-toolbox__category-separator {
     width: var(--thm-toolbox-separator-width-compact, calcSize(5));
+    box-sizing: content-box;
     padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, calcSize(2));
     padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, calcSize(2));
     margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right-compact, 12px) - var(--ctr-toolbox-item-margin-horizontal-no-text, 4px));
@@ -223,7 +223,8 @@ svc-toolbox {
 }
 
 .svc-toolbox__category-separator {
-  width: var(--thm-toolbox-separator-width, calcSize(5));
+  width: var(--thm-toolbox-separator-width, calcSize(9));
+  box-sizing: border-box;
   padding-top: var(--ctr-toolbox-separator-padding-top, calcSize(1.5));
   padding-inline-end: var(--ctr-toolbox-separator-padding-right, calcSize(2));
   padding-bottom: var(--ctr-toolbox-separator-padding-bottom, calcSize(1));

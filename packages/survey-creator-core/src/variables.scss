@@ -83,6 +83,18 @@ $tab-min-height: var(--tab-min-height, auto);
   text-overflow: ellipsis;
 }
 
+@mixin defaultActionButtonSettings {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  display: flex;
+  box-sizing: border-box;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
 @mixin disableUserSelect {
   -moz-user-select: none;
   -webkit-user-select: none;

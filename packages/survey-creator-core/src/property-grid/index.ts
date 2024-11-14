@@ -373,7 +373,6 @@ export class PropertyGridTitleActionsCreator {
     if (!!helpAction) {
       actions.unshift(helpAction);
       question.getTitleToolbar().containerCss += " spg-title-toolbar--single-help-action";
-      helpAction.iconSize = 16;
     }
     if (actions.length > 0) {
       options.titleActions = actions;
@@ -390,6 +389,7 @@ export class PropertyGridTitleActionsCreator {
       title: getLocString("pe.clear"),
       showTitle: false,
       iconName: "icon-clear",
+      iconSize: "auto",
       innerCss: "spg-action-button--danger",
       enabled: enabled,
       visible: <any>new ComputedUpdater<boolean>(() => {
@@ -428,6 +428,7 @@ export class PropertyGridTitleActionsCreator {
     var setupAction = {
       id: "property-grid-setup",
       iconName: property.isArray ? "icon-fast-entry" : "icon-wizard",
+      iconSize: "auto",
       enabled: enabled,
       title: getLocString("pe.edit"),
       showTitle: false,
@@ -444,6 +445,7 @@ export class PropertyGridTitleActionsCreator {
       tooltip: question.description,
       id: "property-grid-help",
       iconName: this.getHelpActionIconName(question),
+      iconSize: "auto",
       css: "spg-help-action",
       showTitle: false,
       action: () => {

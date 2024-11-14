@@ -288,6 +288,14 @@ export interface ICreatorOptions {
    */
   pageEditMode?: "standard" | "single" | "bypage";
   enableLinkFileEditor?: boolean;
-
+  /*
+   * Specifies the visibility of the buttons that expand and collapse survey elements on the design surface.
+   * 
+   * Possible values:
+   * 
+   * - `"onhover"` (default) - Displays an expand/collapse button when a survey element is hovered over or selected.
+   * - `"always"` - Displays the expand/collapse buttons permanently.
+   * - `"never"` - Hides the expand/collapse buttons.
+   */
   expandCollapseButtonVisibility?: "never" | "onhover" | "always";
 }

@@ -390,9 +390,9 @@ test("Check page adorner state is restored after shrink and stretch", async (t) 
   };
   await setJSON(json);
   await t.click(".svc-page", { offsetX: 3, offsetY: 3 });
-  await t.expect(Selector(".svc-page__content-actions #duplicate .sv-action-bar-item__title--with-icon").visible).ok();
+  await t.expect(Selector(".svc-page__content-actions #duplicate .svc-page-toolbar-item__title--with-icon").visible).ok();
   await t.resizeWindow(500, 1080);
-  await t.expect(Selector(".svc-page__content-actions #duplicate .sv-action-bar-item__title--with-icon").visible).notOk();
+  await t.expect(Selector(".svc-page__content-actions #duplicate .svc-page-toolbar-item__title--with-icon").visible).notOk();
   await t.resizeWindow(1920, 1080);
-  await t.expect(Selector(".svc-page__content-actions #duplicate .sv-action-bar-item__title--with-icon").visible).ok();
+  await t.expect(Selector(".svc-page__content-actions #duplicate .svc-page-toolbar-item__title--with-icon").visible).ok();
 });

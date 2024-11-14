@@ -17,6 +17,18 @@
       data-bind="clickBubble: false"
     >
       <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--left"
+      ></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--right"
+      ></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--top"
+      ></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--bottom"
+      ></div>
+      <div
         v-if="model.allowDragging"
         class="svc-question__drag-area"
         @pointerdown="model.onPointerDown($event)"
@@ -25,7 +37,7 @@
           :is="'sv-svg-icon'"
           class="svc-question__drag-element"
           :iconName="'icon-drag-area-indicator_24x16'"
-          :size="24"
+          :size="'auto'"
         ></SvComponent>
       </div>
       <div class="svc-widget__content">
