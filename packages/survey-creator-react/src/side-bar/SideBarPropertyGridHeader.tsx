@@ -31,7 +31,7 @@ class SideBarPropertyGridHeader extends SurveyElementBase<ISideBarPropertyGridHe
         <div className="svc-sidebar__header-container svc-sidebar__header-container--with-subtitle">
           <div className="svc-sidebar__header-content">
             {button}
-            <Popup model={this.objectSelectionAction.popupModel} getTarget={getActionDropdownButtonTarget}></Popup>
+            <Popup model={this.objectSelectionAction.popupModel}></Popup>
           </div>
         </div>
       </div>

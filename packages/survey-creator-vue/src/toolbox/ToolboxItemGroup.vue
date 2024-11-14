@@ -11,7 +11,6 @@
     <SvComponent
       :is="'sv-popup'"
       :model="item.popupModel"
-      :getArea="item.getArea"
     ></SvComponent>
   </div>
 </template>
@@ -19,7 +18,6 @@
 import { SvComponent } from "survey-vue3-ui";
 import type {
   SurveyCreatorModel,
-  IQuestionToolboxItem,
   ToolboxToolViewModel,
   QuestionToolboxItem,
 } from "survey-creator-core";
