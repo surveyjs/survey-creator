@@ -398,11 +398,10 @@ test("Check page adorner state is restored after shrink and stretch", async (t) 
 });
 test("Popup position", async (t) => {
   const setCreatorTop = ClientFunction((top) => {
-    const el = document.getElementById("survey-creator") as HTMLElement;
-    el.style.top = top;
-    document.body.insertBefore(el, document.body.firstChild);
+    const el = document.querySelector(".svc-creator") as HTMLElement;
+    el.style.marginTop = top;
   });
-  await setCreatorTop("400px");
+  await setCreatorTop("200px");
 
   await t.resizeWindow(1400, 900);
   await setJSON({
@@ -415,6 +414,6 @@ test("Popup position", async (t) => {
   });
   await t.click('button[title="Survey settings"]');
   await t.click('[data-name="locale"]');
-  await t.expect(ClientFunction(() => { return document.querySelector('[data-name="locale"] .sv-popup__container')?.getBoundingClientRect().top; })()).gte(400);
-  await setCreatorTop(0);
+  await t.expect(ClientFunction(() => { return document.querySelector('[data-name="locale"] .sv-popup__container')?.getBoundingClientRect().top; })()).gte(200);
+  await setCreatorTop("");
 });
