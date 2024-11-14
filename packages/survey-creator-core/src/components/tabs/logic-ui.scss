@@ -52,7 +52,6 @@
 
   border: none;
   outline: none;
-  color: var(--ctr-expression-item-text-color-parameter-empty, $foreground-light);
   cursor: pointer;
 
   option {
@@ -65,9 +64,6 @@
   outline: 1px dotted $primary;
 }
 
-.sl-question.svc-logic-question--answered .svc-logic-operator {
-  color: var(--ctr-expression-item-text-color-parameter, $foreground);
-}
 
 .svc-logic-operator.svc-logic-operator {
   transition: background-color $creator-transition-duration, color $creator-transition-duration;
@@ -82,7 +78,7 @@
 
 .svc-logic-operator.svc-logic-operator--question {
   background-color: var(--ctr-expression-item-background-color-parameter, $blue-light);
-  color: var(--ctr-expression-item-text-color-parameter, $foreground);
+  color: var(--ctr-expression-item-text-color-parameter-empty, $foreground-light);
 
   &:hover,
   &:focus {
@@ -93,7 +89,7 @@
 
 .svc-logic-operator.svc-logic-operator--conjunction {
   background-color: var(--ctr-expression-item-background-color-conjunction, $yellow-light);
-  color: var(--ctr-expression-item-text-color-conjunction, $foreground);
+  color: var(--ctr-expression-item-text-color-parameter-empty, $foreground-light);
 
   &:hover,
   &:focus {
@@ -104,7 +100,7 @@
 
 .svc-logic-operator.svc-logic-operator--operator {
   background-color: var(--ctr-expression-item-background-color-operator, $yellow-light);
-  color: var(--ctr-expression-item-text-color-operator, $foreground);
+  color: var(--ctr-expression-item-text-color-parameter-empty, $foreground-light);
 
   &:hover,
   &:focus {
@@ -115,13 +111,16 @@
 
 .svc-logic-operator.svc-logic-operator--action {
   background-color: var(--ctr-expression-item-background-color-action, $red-light);
-  color: var(--ctr-expression-item-text-color-action, $foreground);
+  color: var(--ctr-expression-item-text-color-parameter-empty, $foreground-light);
 
   &:hover,
   &:focus {
     background-color: var(--ctr-expression-item-background-color-action-hovered, $red);
     color: var(--ctr-expression-item-text-color-action-hovered, $primary-foreground);
   }
+}
+.svc-logic-question--answered .svc-logic-operator {
+  color: var(--ctr-expression-item-text-color-parameter, $foreground);
 }
 
 .svc-logic-operator.svc-logic-operator--error {
@@ -198,13 +197,7 @@
 
 .svc-logic-operator--action.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn,
 .svc-logic-operator--operator.sl-paneldynamic__add-btn.sl-paneldynamic__add-btn {
-  color: var(--ctr-expression-item-text-color-operator-empty, $foreground-light);
   margin-top: calcSize(2);
-
-  &:hover,
-  &:focus {
-    color: var(--ctr-expression-item-background-color-operator-hovered, $primary-foreground);
-  }
 }
 
 .svc-logic-tab__content {
@@ -242,7 +235,7 @@
 
     &:focus,
     &:hover {
-      background-color: var(--ctr-button-background-color-hovered, $background);
+      background-color: var(--ctr-button-background-color, $background);
       box-shadow: $shadow-small;
     }
   }
