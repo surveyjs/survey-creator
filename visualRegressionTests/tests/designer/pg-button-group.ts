@@ -6,7 +6,7 @@ const title = "Button group Screenshot";
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
-test("Check section", async (t) => {
+test("Check styles", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await ClientFunction(() => window["creator"].showOneCategoryInPropertyGrid = true)();
     await t.resizeWindow(1920, 1080);
@@ -22,5 +22,17 @@ test("Check section", async (t) => {
     await takeElementScreenshot("button-group-selected-hovered.png", buttongroup, t, comparer);
     await t.hover(Selector("span").withExactText("Bottom").filterVisible());
     await takeElementScreenshot("button-group-unselected-hovered.png", buttongroup, t, comparer);
+  });
+});
+
+test("Check long texts", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => window["creator"].showOneCategoryInPropertyGrid = true)();
+    await t.resizeWindow(1920, 1080);
+
+    await t.click(Selector('[title="Logo in the Survey Header"]'));
+    await t.drag(Selector(".svc-resizer-west"), 200, 0);
+    const buttongroup = Selector('[data-name="logoFit"] .spg-button-group').filterVisible();
+    await takeElementScreenshot("button-group-ellipsis.png", buttongroup, t, comparer);
   });
 });
