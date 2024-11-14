@@ -2292,6 +2292,10 @@ export class SurveyCreatorModel extends Base
     if (reason === "test" || reason === "theme") {
       this.onPreviewSurveyCreated.fire(this, { survey: survey });
     }
+
+    survey.onPopupVisibleChanged.add((_, options) => {
+      if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.rootElement; };
+    });
     return survey;
   }
   private getSurveyInstanceCreatedArea(reason: string): string {
@@ -3745,6 +3749,7 @@ export class SurveyCreatorModel extends Base
       horizontalPosition: "center",
       displayMode: this.isTouch ? "overlay" : "popup"
     });
+    newAction.popupModel.getTargetCallback = undefined;
 
     return newAction;
   }
