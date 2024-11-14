@@ -254,6 +254,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     if (!items || items.length < 1) return;
 
     this.setSubItems({ items: items });
+    this.popupModel.getAreaCallback = this.getArea;
     this.component = QuestionToolbox.defaultItemGroupComponent;
   }
   /**
@@ -599,7 +600,7 @@ export class QuestionToolbox
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
       }
     };
-    this.dotsItem.popupModel.cssClass = "svc-toolbox-popup";
+    this.dotsItem.popupModel.cssClass += " svc-toolbox-popup svc-creator-popup";
   }
   private getDefaultQuestionCategories() {
     const questionCategoryMap = {};

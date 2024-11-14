@@ -38,7 +38,7 @@ export class SurveyCreatorToolboxItemGroup extends CreatorModelElement<ISurveyCr
         onMouseLeave={(event: any) => this.model.onMouseLeave(this.item, event)}
       >
         <SvgIcon size={"auto"} iconName={this.item.subitemsButtonIcon} ></SvgIcon>
-        <Popup model={this.item.popupModel} getArea={this.item.getArea} />
+        <Popup model={this.item.popupModel} />
       </div>
     </>;
   }

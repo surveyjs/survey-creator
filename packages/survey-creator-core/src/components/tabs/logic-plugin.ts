@@ -146,6 +146,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
       this.fastEntryAction = new Action({
         id: "svc-logic-fast-entry",
         iconName: "icon-fast-entry",
+        iconSize: "auto",
         locTitleName: "pe.fastEntry",
         visible: false,
         component: "sv-action-bar-item",

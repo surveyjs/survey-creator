@@ -16,7 +16,7 @@
       class="svc-element__question-type-selector-icon"
       v-bind="{
         iconName: questionTypeSelectorModel.iconName,
-        size: 24,
+        size: 'auto',
         title: questionTypeSelectorModel.title,
       }"
     ></SvComponent>

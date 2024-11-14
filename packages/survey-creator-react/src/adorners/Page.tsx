@@ -121,7 +121,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
       <div className={"svc-question__drag-area"}
         onPointerDown={(event: any) => this.model.onPointerDown(event)}
       >
-        <SvgIcon className="svc-question__drag-element" size={24} iconName={"icon-drag-area-indicator_24x16"}></SvgIcon>
+        <SvgIcon className="svc-question__drag-element" size={"auto"} iconName={"icon-drag-area-indicator_24x16"}></SvgIcon>
         {actions}
       </div>
     );

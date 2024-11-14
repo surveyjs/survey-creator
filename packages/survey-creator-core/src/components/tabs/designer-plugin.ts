@@ -161,8 +161,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     const settingsAction = new MenuButton({
       id: "theme-settings",
-      locTooltipName: "pe.tabs.creatorSettingTitle",
-      iconName: "icon-config",
+      locTooltipName: "ed.creatorSettingTitle",
+      iconName: "gear-24x24",
+      iconSize: "auto",
       pressed: false,
       action: () => {
         this.creator.sidebar.expandSidebar();
@@ -245,6 +246,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
           id: p.name,
           tooltip: p.title,
           iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
+          iconSize: "auto",
           active: this.activePageIsPropertyGrid && p.name === this.propertyGrid.survey.currentPage.name,
           pressed: false,
           action: () => {
@@ -314,6 +316,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     const toolboxAction = new Action({
       id: "svd-toolbox",
       iconName: "icon-toolbox",
+      iconSize: "auto",
       needSeparator: true,
       action: () => {
         if (!this.creator.showSidebar) {
@@ -332,6 +335,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.surveySettingsAction = new Action({
       id: "svd-settings",
       iconName: "icon-settings",
+      iconSize: "auto",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return notShortCircuitAnd(this.creator.toolboxLocation !== "sidebar", !this.creator.isMobileView);
       }),
@@ -354,6 +358,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.saveSurveyAction = new Action({
       id: "svd-save",
       iconName: "icon-save",
+      iconSize: "auto",
       action: () => this.creator.saveSurveyActionHandler(),
       active: false,
       enabled: false,
@@ -368,6 +373,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.designerAction = new Action({
       id: "svd-designer",
       iconName: "icon-config",
+      iconSize: "auto",
       visible: this.createVisibleUpdater(),
       active: true,
       locTitleName: "ed.designer",
@@ -378,6 +384,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.previewAction = new Action({
       id: "svd-preview",
       iconName: "icon-preview",
+      iconSize: "auto",
       action: () => {
         this.creator.makeNewViewActive(this.creator.showThemeTab ? "theme" : "test");
       },

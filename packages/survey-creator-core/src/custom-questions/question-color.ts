@@ -142,6 +142,7 @@ export class QuestionColorModel extends QuestionTextModel {
     popupModel.displayMode = IsTouch ? "overlay" : "popup";
     popupModel.setWidthByTarget = true;
     popupModel.positionMode = "fixed";
+    popupModel.getTargetCallback = undefined;
     listModel.isItemSelected = (itemValue: ItemValue) => itemValue.value == this.value;
     return action;
   }
@@ -151,6 +152,7 @@ export class QuestionColorModel extends QuestionTextModel {
     const dropdownAction = this.dropdownAction;
     dropdownAction.cssClasses = { item: classes.colorDropdown };
     dropdownAction.iconName = classes.colorDropdownIcon;
+    dropdownAction.iconSize = "auto" as any;
     const listModel = <ListModel<ItemValue>>dropdownAction.popupModel.contentComponentData.model;
     listModel.cssClasses = {};
     listModel.cssClasses = {
