@@ -171,6 +171,7 @@ const Theme = {
     "--ctr-button-group-item-border-width-selected": "var(--sjs-stroke-x1)",
     "--ctr-button-group-item-padding-horizontal": "var(--sjs-spacing-x2)",
     "--ctr-button-group-item-padding-vertical": "var(--sjs-spacing-x1)",
+    "--ctr-button-group-background-color-disabled": "var(--sjs-layer-1-background-500)",
     "--ctr-button-group-border-color-focused": "var(--sjs-primary-background-500)",
     "--ctr-button-group-border-width-focused": "var(--sjs-stroke-x2)",
     "--ctr-button-group-item-text-color-disabled": "var(--sjs-layer-3-foreground-100)",
