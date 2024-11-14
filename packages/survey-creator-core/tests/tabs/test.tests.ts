@@ -946,12 +946,12 @@ test("devices selector dropdown items default order", (): any => {
   expect(dropdownDeviceActions[0].visibleIndex).toBe(Number.MAX_VALUE);
   expect(dropdownDeviceActions[7].id).toBe("androidTablet");
   expect(dropdownDeviceActions[7].visibleIndex).toBe(Number.MAX_VALUE);
-  expect(dropdownDeviceActions[8].id).toBe("msSurface");
+  expect(dropdownDeviceActions[8].id).toBe("microsoftSurface");
   expect(dropdownDeviceActions[8].visibleIndex).toBe(Number.MAX_VALUE);
 });
 test("change devices selector dropdown items order", (): any => {
   try {
-    simulatorDevices.msSurface.visibleIndex = 0;
+    simulatorDevices.microsoftSurface.visibleIndex = 0;
     simulatorDevices.androidTablet.visibleIndex = 1;
 
     const creator: CreatorTester = new CreatorTester({ previewShowResults: false });
@@ -969,7 +969,7 @@ test("change devices selector dropdown items order", (): any => {
     const deviceSelectorAction = testPlugin["deviceSelectorAction"];
     const dropdownDeviceActions = deviceSelectorAction.data.actions as IAction[];
     expect(dropdownDeviceActions.length).toBe(9);
-    expect(dropdownDeviceActions[0].id).toBe("msSurface");
+    expect(dropdownDeviceActions[0].id).toBe("microsoftSurface");
     expect(dropdownDeviceActions[0].visibleIndex).toBe(0);
     expect(dropdownDeviceActions[1].id).toBe("androidTablet");
     expect(dropdownDeviceActions[1].visibleIndex).toBe(1);
@@ -979,7 +979,7 @@ test("change devices selector dropdown items order", (): any => {
     expect(dropdownDeviceActions[8].visibleIndex).toBe(Number.MAX_VALUE);
   }
   finally {
-    simulatorDevices.msSurface.visibleIndex = undefined;
+    simulatorDevices.microsoftSurface.visibleIndex = undefined;
     simulatorDevices.androidTablet.visibleIndex = undefined;
   }
 });
@@ -1102,7 +1102,7 @@ test("The Preview Survey button text is not translated Bug#6016", (): any => {
   const deText = "Testumfrage wiederholen";
   const loc: any = editorLocalization.getLocale("de");
   expect(loc).toBeTruthy();
-  if(!loc.ed) loc.ed = {};
+  if (!loc.ed) loc.ed = {};
   loc.ed.testSurveyAgain = deText;
   editorLocalization.currentLocale = "en";
   const creator: CreatorTester = new CreatorTester();
@@ -1116,4 +1116,32 @@ test("The Preview Survey button text is not translated Bug#6016", (): any => {
   expect(getLocString("ed.testSurveyAgain")).toBe(deText);
   expect(testPlugin.model.testAgainAction.title).toBe(deText);
   creator.locale = "";
+});
+test("Preview tab: default device and save current device", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+
+  expect(creator.previewDevice).toBe("desktop");
+  expect(testPlugin.previewDevice).toBe("");
+
+  testPlugin.activate();
+  expect(testPlugin.previewDevice).toBe("desktop");
+  expect(testPlugin.model.simulator.device).toBe("desktop");
+
+  testPlugin.model.simulator.device = "iPhone15";
+  expect(testPlugin.previewDevice).toBe("iPhone15");
+
+  testPlugin.deactivate();
+  expect(testPlugin.previewDevice).toBe("iPhone15");
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.device).toBe("iPhone15");
+  expect(testPlugin.previewDevice).toBe("iPhone15");
+
+  testPlugin.deactivate();
+  testPlugin.previewDevice = "iPhone15Plus";
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.device).toBe("iPhone15Plus");
 });

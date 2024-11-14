@@ -22,14 +22,28 @@ export class TabTestPlugin implements ICreatorPlugin {
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
 
   public model: TestSurveyTabViewModel;
+  private _previewDevice: string = "";
+  public get previewDevice(): string {
+    if (!!this.model) {
+      this._previewDevice = this.model.simulator.device;
+    }
+    return this._previewDevice;
+  }
+  public set previewDevice(newValue: string) {
+    this.setDevice(newValue);
+  }
 
-  private setDevice(newVal: string) {
-    this.model.simulator.device = newVal;
-    this.model.simulator.resetZoomParameters();
-    let currentType = simulatorDevices[this.model.simulator.device].deviceType;
+  private setDevice(newValue: string) {
+    this._previewDevice = newValue || "desktop";
+    if (!!this.model) {
+      this.model.simulator.device = newValue;
+      this.model.simulator.resetZoomParameters();
+    }
+    let currentType = simulatorDevices[this._previewDevice].deviceType;
     this.orientationSelectorAction.enabled = currentType != "desktop";
     this.deviceSelectorAction.iconName = "icon-device-" + currentType;
     this.deviceSelectorAction.title = getLocString("pe.simulator");
+    this.deviceSelectorAction.data.selectedItem = { id: this._previewDevice };
   }
   private setDefaultLanguageOption(opt: boolean | string) {
     const vis: boolean = opt === true || opt === "all" || (opt === "auto" && this.model.survey.getUsedLocales().length > 1);
@@ -81,8 +95,10 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
-    this.model = new TestSurveyTabViewModel(this.creator, this.simulatorTheme);
-    this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
+    const tabModel = new TestSurveyTabViewModel(this.creator, this.simulatorTheme);
+    tabModel.simulator.device = this.previewDevice || this.creator.previewDevice || "desktop";
+    tabModel.simulator.landscape = this.creator.previewOrientation != "portrait";
+    this.model = tabModel;
     this.update();
   }
   public update(): void {
@@ -108,6 +124,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     if (this.model) {
+      this._previewDevice = this.model.simulator.device;
       this.simulatorTheme = this.model.simulator.survey.css;
       this.model.onSurveyCreatedCallback = undefined;
       this.model.dispose();

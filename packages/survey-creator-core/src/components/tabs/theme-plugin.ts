@@ -275,8 +275,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
     creator.onPropertyChanged.add(this.creatorPropertyChanged);
   }
+
+  private previewDevice: string = "desktop";
+
   public activate(): void {
     this.model = new ThemeTabViewModel(this.creator, this.simulatorCssClasses);
+    this.model.simulator.device = this.previewDevice;
     this.themeModel.initialize(this.creator.theme, this.creator.survey);
     this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
     this.update();
@@ -453,6 +457,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     if (this.model) {
+      this.previewDevice = this.model.simulator.device;
       this.simulatorCssClasses = this.model.survey.css;
       this.model.onPropertyChanged.clear();
       this.themeModel.onThemeSelected.clear();
