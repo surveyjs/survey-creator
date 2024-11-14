@@ -51,7 +51,7 @@
   height: calcSize(4);
   box-sizing: border-box;
   flex-shrink: 0;
-  min-width: 72px;
+  min-width: calcSize(9);
   justify-content: flex-end;
   align-self: flex-start;
 }
@@ -99,7 +99,8 @@
 
 .svc-item-value-controls__drag {
   padding: calcSize(0.5) calcSize(1);
-
+  height: auto;
+  width: auto;
   cursor: move;
   opacity: var(--ctr-survey-item-actionbar-drag-indicator-opacity, 0.25);
 
@@ -276,7 +277,7 @@
   background: $background-dim;
   border-radius: var(--ctr-survey-radio-button-group-item-corner-radius-floating, calcSize(12.5));
   width: calcSize(25);
-  height: 40px;
+  height: calcSize(5);
   z-index: 11;
   position: absolute;
   left: 35px;
