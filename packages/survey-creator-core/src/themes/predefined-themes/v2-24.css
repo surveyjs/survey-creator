@@ -2,7 +2,6 @@
  :root {
   --ctr-toolbox-group-header-margin-left: 0px;
   --ctr-button-group-item-border-width: 0px;
-  --ctr-button-group-gap: 0px;
   --ctr-popup-menu-padding-left: 0px;
   --ctr-popup-menu-padding-right: 0px;
   --ctr-popup-menu-padding-top: 0px;
@@ -29,7 +28,7 @@
   --ctr-shadow-x-large-offset-y: 32px;
   --ctr-shadow-x-large-blur: 64px;
   --ctr-shadow-x-large-spread: 0px;
-  --ctr-property-grid-placeholder-text-max-width: 256px;
+  --ctr-property-grid-placeholder-text-max-width: 320px;
   --ctr-surface-placeholder-padding-top: 0px;
   --ctr-toolbox-group-header-margin-right: 0px;
   --ctr-property-grid-placeholder-padding-bottom: 0px;
@@ -69,6 +68,7 @@
   --ctr-text-decor-padding-top: 0px;
   --ctr-text-decor-padding-bottom: 0px;
   --ctr-caption-with-actions-description-text-opacity-disabled: 25px;
+  --ctr-data-table-cell-gap: 0px;
   --ctr-data-table-cell-drop-down-arrow-opacity: 50px;
   --ctr-data-table-cell-padding-top-header: 0px;
   --ctr-data-table-cell-padding-bottom-header: 0px;
@@ -312,6 +312,10 @@
   --ctr-corner-radius-unit: 8px;
   --ctr-stroke-unit: 1px;
   --ctr-size-unit: 8px;
+  --ctr-data-table-cell-padding-right-drop-down: 0px;
+  --ctr-image-gallery-item-image-opacity-hovered: 50px;
+  --ctr-image-gallery-item-image-opacity-disabled: 25px;
+  --ctr-image-gallery-item-image-opacity-selected: 50px;
 }
 
  /* Aliases  */
@@ -334,7 +338,7 @@
   --ctr-property-grid-form-background-color: var(--sjs-layer-1-background-500);
   --ctr-list-item-corner-radius: var(--sjs-corner-radius-x075);
   --ctr-button-group-item-border-color: var(--sjs-border-10);
-  --ctr-button-group-item-corner-radius: var(--sjs-corner-radius-x075);
+  --ctr-button-group-item-corner-radius: var(--sjs-corner-radius-x05);
   --ctr-button-group-item-background-color: var(--sjs-layer-3-background-500);
   --ctr-button-group-item-text-color: var(--sjs-layer-3-foreground-100);
   --ctr-menu-item-icon-color: var(--sjs-layer-1-foreground-75);
@@ -342,6 +346,7 @@
   --ctr-button-group-item-background-color-hovered: var(--sjs-layer-3-background-400);
   --ctr-button-group-item-text-color-selected: var(--sjs-primary-background-500);
   --ctr-button-group-item-icon-color-selected: var(--sjs-primary-background-500);
+  --ctr-button-group-gap: var(--sjs-spacing-x05);
   --ctr-editor-corner-radius: var(--sjs-corner-radius-x075);
   --ctr-editor-background-color: var(--sjs-layer-3-background-500);
   --ctr-editor-border-color: var(--sjs-border-10);
@@ -647,7 +652,7 @@
   --ctr-button-background-color: var(--sjs-layer-1-background-500);
   --ctr-button-text-color: var(--sjs-primary-background-500);
   --ctr-button-gap: var(--sjs-spacing-x4);
-  --ctr-button-background-color-hovered: var(--sjs-layer-1-background-400);
+  --ctr-button-background-color-hovered: var(--sjs-primary-background-10);
   --ctr-button-text-color-disabled: var(--sjs-layer-1-foreground-100);
   --ctr-button-background-color-danger: var(--sjs-semantic-red-background-500);
   --ctr-button-background-color-danger-hovered: var(--sjs-semantic-red-background-500);
@@ -853,20 +858,19 @@
   --ctr-property-grid-header-padding-bottom: var(--sjs-spacing-x150);
   --ctr-property-grid-header-border-color: var(--sjs-primary-background-500);
   --ctr-property-grid-header-border-width-bottom: var(--sjs-stroke-x2);
-  --ctr-caption-with-actions-padding-right: var(--sjs-spacing-x0125);
+  --ctr-caption-with-actions-padding-right: var(--sjs-spacing-x05);
   --ctr-caption-with-actions-description-button-margin-left: var(--sjs-spacing-x05);
-  --ctr-caption-with-actions-description-text-color: var(--sjs-layer-1-foreground-50);
+  --ctr-caption-with-actions-description-text-color: var(--sjs-layer-1-foreground-75);
   --ctr-caption-with-actions-description-padding-bottom: var(--sjs-spacing-x2);
   --ctr-caption-with-actions-description-text-color-disabled: var(--sjs-layer-1-foreground-100);
   --ctr-data-table-cell-padding-left: var(--sjs-spacing-x1);
   --ctr-data-table-cell-padding-right: var(--sjs-spacing-x1);
   --ctr-data-table-cell-padding-top: var(--sjs-spacing-x1);
   --ctr-data-table-cell-padding-bottom: var(--sjs-spacing-x1);
-  --ctr-data-table-cell-gap: var(--sjs-spacing-x1);
   --ctr-data-table-cell-text-color: var(--sjs-layer-1-foreground-100);
   --ctr-data-table-cell-drop-down-arrow-color: var(--sjs-layer-1-foreground-50);
-  --ctr-data-table-cell-drop-down-arrow-width: var(--sjs-size-x2);
-  --ctr-data-table-cell-drop-down-arrow-height: var(--sjs-size-x2);
+  --ctr-data-table-cell-drop-down-arrow-width: var(--sjs-size-x3);
+  --ctr-data-table-cell-drop-down-arrow-height: var(--sjs-size-x3);
   --ctr-data-table-cell-text-color-placeholder: var(--sjs-layer-1-foreground-50);
   --ctr-data-table-cell-text-color-disabled: var(--sjs-layer-1-foreground-100);
   --ctr-data-table-cell-text-color-header: var(--sjs-layer-3-foreground-50);
@@ -938,7 +942,7 @@
   --ctr-button-contextual-button-padding-right: var(--sjs-spacing-x1);
   --ctr-button-contextual-button-padding-top: var(--sjs-spacing-x1);
   --ctr-button-contextual-button-padding-bottom: var(--sjs-spacing-x1);
-  --ctr-button-contextual-button-background-color-hovered: var(--sjs-layer-3-background-500);
+  --ctr-button-contextual-button-background-color-hovered: var(--sjs-primary-background-10);
   --ctr-button-contextual-button-icon-width: var(--sjs-size-x3);
   --ctr-button-contextual-button-icon-height: var(--sjs-size-x3);
   --ctr-button-contextual-button-background-color-focused: var(--sjs-primary-background-10);
@@ -1178,7 +1182,7 @@
   --ctr-survey-action-button-padding-top: var(--sjs-spacing-x1);
   --ctr-survey-action-button-padding-bottom: var(--sjs-spacing-x1);
   --ctr-survey-action-button-gap: var(--sjs-spacing-x1);
-  --ctr-survey-action-button-corner-radius: var(--sjs-corner-radius-round);
+  --ctr-survey-action-button-corner-radius: var(--sjs-corner-radius-x1);
   --ctr-survey-action-button-icon-width: var(--sjs-size-x3);
   --ctr-survey-action-button-icon-height: var(--sjs-size-x3);
   --ctr-survey-action-button-icon-width-small: var(--sjs-size-x2);
@@ -2566,7 +2570,7 @@
   --lbr-contextual-button-background-color-hovered-negative: var(--sjs-semantic-red-background-10);
   --lbr-contextual-button-icon-color-negative: var(--sjs-semantic-red-background-500);
   --ctr-survey-contextual-button-background-color-hovered-negative: var(--sjs-semantic-red-background-10);
-  --ctr-list-search-padding-left: var(--sjs-spacing-x2);
+  --ctr-list-search-padding-left: var(--sjs-spacing-x3);
   --ctr-list-search-padding-right: var(--sjs-spacing-x2);
   --ctr-list-search-padding-top: var(--sjs-spacing-x250);
   --ctr-list-search-padding-bottom: var(--sjs-spacing-x250);
@@ -3259,5 +3263,20 @@
   --lbr-slider-margin-top: var(--sjs-spacing-x1);
   --lbr-button-padding-right-mobile: var(--sjs-spacing-x3);
   --lbr-button-padding-left-mobile: var(--sjs-spacing-x3);
+  --ctr-image-gallery-item-height: var(--sjs-size-x18);
+  --ctr-image-gallery-item-min-width: var(--sjs-size-x28);
+  --ctr-image-gallery-item-title-margin-top: var(--sjs-spacing-x05);
+  --ctr-image-gallery-item-title-color: var(--sjs-layer-1-foreground-100);
+  --ctr-image-gallery-gap: var(--sjs-spacing-x2);
+  --ctr-image-gallery-item-corner-radius: var(--sjs-corner-radius-x075);
+  --ctr-image-gallery-item-border-color: var(--sjs-border-25-overlay);
+  --ctr-image-gallery-item-border-width: var(--sjs-stroke-x1);
+  --ctr-image-gallery-item-checkmark-background-color: var(--sjs-primary-foreground-100);
+  --ctr-image-gallery-item-checkmark-icon-color: var(--sjs-primary-background-500);
+  --ctr-image-gallery-item-checkmark-icon-width: var(--sjs-size-x4);
+  --ctr-image-gallery-item-checkmark-icon-height: var(--sjs-size-x4);
+  --ctr-image-gallery-item-checkmark-corner-radius: var(--sjs-corner-radius-round);
+  --ctr-image-gallery-item-checkmark-padding: var(--sjs-spacing-x1);
+  --ctr-image-gallery-item-background-color-selected: var(--sjs-primary-background-500);
 }
 
