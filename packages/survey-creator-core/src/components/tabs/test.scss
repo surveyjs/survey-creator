@@ -138,3 +138,9 @@ svc-tab-test {
   display: flex;
   flex-direction: column;
 }
+
+.svc-pages-toolbar__icon {
+  padding: 0;
+  width: var(--ctr-survey-question-panel-toolbar-item-icon-container-width, calcSize(3));
+  height: var(--ctr-survey-question-panel-toolbar-item-icon-container-height, calcSize(3));
+}

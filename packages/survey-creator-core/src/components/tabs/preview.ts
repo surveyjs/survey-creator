@@ -75,9 +75,9 @@ export class PreviewViewModel extends Base {
     this.simulator = new SurveySimulatorModel(surveyProvider);
     this.pages.cssClasses = {
       root: "sv-action-bar svc-pages-toolbar",
-      item: "sv-action-bar-item svc-survey-element-toolbar__item",
-      itemAsIcon: "svc-survey-element-toolbar__item--icon",
-      itemIcon: "sv-action-bar-item__icon svc-survey-element-toolbar-item__icon",
+      item: "sv-action-bar-item svc-pages-toolbar__item",
+      itemAsIcon: "svc-pages-toolbar__item--icon",
+      itemIcon: "sv-action-bar-item__icon svc-pages-toolbar__icon",
     };
   }
 
