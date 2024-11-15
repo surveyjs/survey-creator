@@ -169,6 +169,10 @@ svc-question {
 .svc-survey-element-toolbar__item--pressed:not(.svc-survey-element-toolbar__item--active) {
   background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-pressed, $background-dim);
   opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 50%);
+  use {
+    fill: black;
+    opacity: 0.45;
+  }
 }
 
 .svc-survey-element-toolbar__item--active:not(.svc-survey-element-toolbar__item--pressed):enabled:hover,
@@ -194,7 +198,7 @@ svc-question {
   height: var(--ctr-survey-question-toolbar-item-icon-height, calcSize(2));
 }
 
-.svc-survey-element-toolbar .svc-survey-element-toolbar-item__icon use {
+.svc-survey-element-toolbar-item__icon use {
   fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
 }
 
