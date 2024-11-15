@@ -135,10 +135,14 @@ svc-question {
   }
 }
 
-//hovered state
-.svc-survey-element-toolbar__item:not(.svc-survey-element-toolbar__item--pressed):hover:enabled,
-.svc-survey-element-toolbar__item:not(.svc-survey-element-toolbar__item--pressed):focus:enabled {
-  background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+//hovered and focused state
+.svc-survey-element-toolbar__item:not(.svc-survey-element-toolbar__item--pressed){
+  &:hover:enabled {
+    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+  }
+  &:focus:enabled {
+    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, $background-dim);
+  }
 }
 
 //pressed state
@@ -158,7 +162,7 @@ svc-question {
 }
 
 .svc-survey-element-toolbar__item--pressed:not(.svc-survey-element-toolbar__item--active) {
-  background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, $background-dim);
+  background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-pressed, $background-dim);
   opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 50%);
 }
 
@@ -477,11 +481,11 @@ svc-question {
 
 .svc-question__content:focus,
 .svc-hovered > .svc-question__content {
-  box-shadow: 0 0 0 2px $secondary-light;
+  box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-hovered, 2px) var(--ctr-survey-question-panel-border-color-hovered, $secondary-light);
 }
 
 .svc-question__content--selected:not(.svc-question__content--dragged) {
-  box-shadow: 0 0 0 2px $secondary;
+  box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-selected, 2px) var(--ctr-survey-question-panel-border-color-selected, $secondary);
 }
 
 .svc-question__content--collapsed-drag-over-inside:not(.svc-question__content--dragged) {
