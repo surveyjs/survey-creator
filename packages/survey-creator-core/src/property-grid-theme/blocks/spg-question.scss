@@ -224,4 +224,8 @@ sv-question-error {
     outline: 2px solid $secondary;
     outline-offset: -2px;
   }
+
+  .spg-button-group::after {
+    box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, 2px) $secondary;
+  }
 }

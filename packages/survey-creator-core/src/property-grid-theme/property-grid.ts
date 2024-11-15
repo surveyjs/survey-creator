@@ -207,6 +207,7 @@ export var propertyGridCss = {
     itemSelected: "spg-button-group__item--selected",
     itemDisabled: "spg-button-group__item--disabled",
     itemControl: "sv-visuallyhidden",
+    disabled: "spg-question--disabled"
   },
   imagepicker: {
     root: "spg-imagepicker",
