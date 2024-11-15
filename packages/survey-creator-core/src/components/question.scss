@@ -600,7 +600,7 @@ svc-question {
   //min-width: 100px;
   height: auto;
   border-radius: calcSize(12.5);
-  background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
+  background-color: var(--ctr-toolbox-item-background-color-floating, $background);
   color: var(--ctr-toolbox-item-text-color-hovered, $foreground);
   padding: calcSize(1.5) calcSize(2);
   cursor: grabbing;
@@ -616,7 +616,7 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut .sv-svg-icon use {
-  fill: var(--ctr-toolbox-item-icon-color-hovered, $primary);
+  fill: var(--ctr-toolbox-item-icon-color-floating, $primary);
 }
 
 .svc-dragged-element-shortcut--selected {
