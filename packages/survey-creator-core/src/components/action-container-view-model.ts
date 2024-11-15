@@ -131,7 +131,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   private hoverTimeout: any;
   @property({ defaultValue: false }) private isHovered: boolean;
 
-  protected get hoverDelay():number {
+  protected get hoverDelay(): number {
     return this.creator.pageHoverDelay;
   }
 
@@ -261,16 +261,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     event.stopPropagation();
   }
   private allowEditOption: boolean;
-  private selectedPropPageFunc: (sender: Base, options: any) => void = (_, options) => {
-    if (options.name === "isSelectedInDesigner") {
-      this.onElementSelectedChanged(options.newValue);
-    }
-  };
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void = (_, options) => {
     if (options.name === "flyoutMode") {
       this.updateActionsProperties();
     }
-  };;
+  };
   protected surveyElement: T
   get element() {
     return this.surveyElement;
@@ -308,14 +303,18 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       if (surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) === this && !surveyElement.isDisposed) {
         surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, null);
       }
-      surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+      surveyElement.unRegisterFunctionOnPropertyValueChanged("isSelectedInDesigner", "questionSelected");
       this.cleanActionsContainer();
     }
   }
   protected attachElement(surveyElement: T): void {
     if (surveyElement) {
       this.creator?.designerStateManager?.initForElement(surveyElement);
-      surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
+      surveyElement.registerFunctionOnPropertyValueChanged("isSelectedInDesigner",
+        (newValue: any) => {
+          this.onElementSelectedChanged(newValue);
+        }, "questionSelected"
+      );
       this.restoreState();
       this.updateActionsContainer(surveyElement);
       this.updateActionsProperties();
@@ -334,10 +333,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }
   public attachToUI(surveyElement: T, rootElement?: HTMLElement) {
-    if(!!rootElement) {
+    if (!!rootElement) {
       this.rootElement = rootElement;
     }
-    if(this.surveyElement != surveyElement) {
+    if (this.surveyElement != surveyElement) {
       this.setSurveyElement(surveyElement);
       this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
       this.creator.expandCollapseManager.add(this);
@@ -356,6 +355,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.actionContainer.dispose();
     }
     super.dispose();
+    this.sidebarFlyoutModeChangedFunc = undefined;
+    this.animationCollapsed = undefined;
   }
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
