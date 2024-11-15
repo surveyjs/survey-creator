@@ -1,4 +1,4 @@
-import { Base, SurveyModel, property, PopupModel, Action, CssClassBuilder } from "survey-core";
+import { Base, SurveyModel, property, PopupModel, Action, CssClassBuilder, getActionDropdownButtonTarget } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
 import { SurveyHelper } from "../survey-helper";
@@ -149,6 +149,7 @@ export class PropertyGridViewModel extends Base {
     );
     this.selectorPopupModel.cssClass += " svc-object-selector";
     this.selectorPopupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
+    this.selectorPopupModel.getTargetCallback = getActionDropdownButtonTarget;
     this.selectorPopupModel.registerPropertyChangedHandlers(["isVisible"], () => {
       if (!this.selectorPopupModel.isVisible) {
         this.objectSelectionAction.pressed = false;
