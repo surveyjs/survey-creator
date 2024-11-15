@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getVisibleElement, changeToolboxSearchEnabled, getToolboxItemByAriaLabel } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getVisibleElement, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, getQuestionBarItemByTitle } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -830,7 +830,7 @@ test("popup overlay in property grid", async (t) => {
 
     await t
       .click("div[data-sv-drop-target-survey-element='question1']", { offsetX: 200, offsetY: 30 })
-      .click(getVisibleElement(".sv-action-bar-item[title='Open settings']"))
+      .click(getQuestionBarItemByTitle("Open settings"))
       .click(Selector(".spg-dropdown[aria-label='Input type']"));
 
     await takeElementScreenshot("pg-overlay-popup.png", getVisibleElement(".sv-popup .sv-popup__container"), t, comparer);
