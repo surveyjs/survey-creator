@@ -135,6 +135,10 @@ svc-question {
   }
 }
 
+.svc-survey-element-toolbar .svc-survey-element-toolbar-item__icon use {
+  fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+}
+
 //hovered and focused state
 .svc-survey-element-toolbar__item:not(.svc-survey-element-toolbar__item--pressed){
   &:hover:enabled {
@@ -198,9 +202,6 @@ svc-question {
   height: var(--ctr-survey-question-toolbar-item-icon-height, calcSize(2));
 }
 
-.svc-survey-element-toolbar-item__icon use {
-  fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
-}
 
 .svc-survey-element-toolbar-item__title {
   @include ctrSmallBoldFont;
