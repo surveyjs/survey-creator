@@ -235,7 +235,11 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       macOsHotkey: {
         keyCode: 46,
       },
-      execute: () => this.creator.deleteCurrentElement()
+      execute: () => {
+        if(!this.creator.readOnly) {
+          this.creator.deleteCurrentElement();
+        }
+      }
     });
   }
 
