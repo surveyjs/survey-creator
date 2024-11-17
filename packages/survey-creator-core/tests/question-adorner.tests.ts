@@ -28,7 +28,8 @@ test("Check required action", (): any => {
   expect(requiredAction.active).toBe(false);
   expect(requiredAction.title).toBe("Required");
 
-  const requiredActionInPopup = new Action(requiredAction.innerItem);
+  const requiredActionInPopup = requiredAction.innerItem;
+  expect(requiredActionInPopup instanceof Action).toBeTruthy();
   expect(requiredActionInPopup.title).toBe("Mark as required");
   question.isRequired = true;
   expect(requiredActionInPopup.title).toBe("Remove the required mark");
@@ -96,7 +97,8 @@ test("Check question adorners location", (): any => {
     if (options.obj.isPage) return;
     const objToAdd = options.obj;
     options.items.unshift({
-      id: "addtosharedrepo"
+      id: "addtosharedrepo",
+      visibleIndex: 0
     });
   });
 
