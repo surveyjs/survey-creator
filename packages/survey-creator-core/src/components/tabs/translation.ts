@@ -773,6 +773,7 @@ export class Translation extends Base implements ITranslationLocales {
             iconName: "icon-language",
             iconSize: "auto",
             locTooltipName: "ed.translateUsigAI",
+            visibleIndex: 5,
             location: "end",
             action: () => this.showTranslationEditor(locale)
           }));

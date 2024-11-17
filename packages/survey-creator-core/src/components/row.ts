@@ -17,11 +17,17 @@ export class RowViewModel extends Base {
   ) {
     super();
     this.dragTypeOverMe = this.row.dragTypeOverMe;
-    this.row.onPropertyChanged.add((s, o) => {
-      if (o.name == "dragTypeOverMe") this.dragTypeOverMe = o.newValue;
-    });
+  }
+  public subscribeElementChanges() {
+    this.row.onPropertyChanged.add(this.rowDragTypeOverMeChanged);
+  }
+  public unsubscribeElementChanges() {
+    this.row.onPropertyChanged.remove(this.rowDragTypeOverMeChanged);
   }
   @property() dragTypeOverMe: DragTypeOverMeEnum;
+  private rowDragTypeOverMeChanged: (sender: Base, options: any) => any = (s, o) => {
+    if (o.name == "dragTypeOverMe") this.dragTypeOverMe = o.newValue;
+  };
   public get cssClasses() {
     let result = "svc-row";
     let ghostClass = " svc-row--ghost";
@@ -41,5 +47,10 @@ export class RowViewModel extends Base {
     }
 
     return result;
+  }
+  public dispose() {
+    super.dispose();
+    this.unsubscribeElementChanges();
+    this.rowDragTypeOverMeChanged = undefined;
   }
 }

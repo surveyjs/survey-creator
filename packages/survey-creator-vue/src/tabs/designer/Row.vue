@@ -9,7 +9,7 @@
 import { useCreatorModel } from "@/creator-model";
 import type { QuestionRowModel } from "survey-core";
 import { SurveyCreatorModel, RowViewModel } from "survey-creator-core";
-import { computed } from "vue";
+import { computed, onMounted, onUnmounted } from "vue";
 
 const props = defineProps<{
   componentData: { creator: SurveyCreatorModel; row: QuestionRowModel };
@@ -25,4 +25,12 @@ const model = useCreatorModel(
     value.dispose();
   }
 );
+
+onMounted(() => {
+  model.value && model.value.subscribeElementChanges();
+});
+onUnmounted(() => {
+  model.value && model.value.unsubscribeElementChanges();
+});
+
 </script>
