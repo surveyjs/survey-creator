@@ -264,7 +264,7 @@ export var propertyGridCss = {
     detailButtonExpanded: "spg-table__cell--detail-button--expanded",
     detailIcon: "spg-detail-panel__icon",
     detailIconExpanded: "spg-detail-panel__icon--expanded",
-    detailPanelCell: "spg-table__cell--detail-panel",
+    detailPanelCell: "spg-table__cell spg-table__cell--detail-panel",
     actionsCell: "spg-table__cell spg-table__cell--actions",
     buttonAdd: "spg-matrixdynamic__add-btn spg-action-button spg-action-button--large",
     buttonRemove: "spg-matrixdynamic__remove-btn",
