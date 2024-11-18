@@ -732,11 +732,11 @@ export class Translation extends Base implements ITranslationLocales {
       this.reset();
     }
     if (!this.root) return;
-    this.options.suspendUndoRedoTransaction();
+    this.options.startUndoRedoTransaction("Delete strings for locale: " + locale);
     this.root.deleteLocaleStrings(locale);
-    this.options.resumeUndoRedoTransaction();
     this.removeLocale(locale);
     this.reset();
+    this.options.stopUndoRedoTransaction();
   }
   private removingLocale: string;
   protected createSettingsSurvey(): SurveyModel {

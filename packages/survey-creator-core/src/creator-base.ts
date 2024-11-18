@@ -1406,17 +1406,11 @@ export class SurveyCreatorModel extends Base
     const plugin = this.getPlugin<UndoRedoPlugin>("undoredo");
     return plugin && plugin.model;
   }
-  startUndoRedoTransaction(name: string = ""): void {
+  startUndoRedoTransaction(name?: string): void {
     this.undoRedoController && this.undoRedoController.startTransaction(name);
   }
   stopUndoRedoTransaction(): void {
     this.undoRedoController && this.undoRedoController.stopTransaction();
-  }
-  suspendUndoRedoTransaction(): void {
-    this.undoRedoController?.undoRedoManager?.suspend();
-  }
-  resumeUndoRedoTransaction(): void {
-    this.undoRedoController?.undoRedoManager?.resume();
   }
   /**
    * Returns `true` if an undo or redo operation is in progress.
