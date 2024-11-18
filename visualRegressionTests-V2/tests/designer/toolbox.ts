@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, changeToolboxSearchEnabled, changeToolboxLocation, getTabbedMenuItemByText, takeElementScreenshot, setJSON, collapseButtonSelector, wrapVisualTest, changeToolboxScrolling, getToolboxItemByText } from "../../helper";
+import { url, changeToolboxSearchEnabled, changeToolboxLocation, getTabbedMenuItemByText, takeElementScreenshot, setJSON, collapseButtonSelector, wrapVisualTest, changeToolboxScrolling, getToolboxItemByText, setAllowEditSurveyTitle, setShowAddQuestionButton } from "../../helper";
 
 const title = "Toolbox Screenshot";
 
@@ -12,13 +12,18 @@ test("Left toolbox", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
     await changeToolboxSearchEnabled(false);
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+
     const toolboxItem = Selector(".svc-toolbox__item");
     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
     const toolboxElement = Selector(".svc-toolbox");
     const creatorTabElement = Selector(".svc-creator-tab");
 
     await setJSON({ pages: [{ name: "page1" }] });
-    await t.resizeWindow(2560, 1440);
+    await t
+      .resizeWindow(2560, 1440)
+      .click(collapseButtonSelector);
     await takeElementScreenshot("toolbox-left.png", toolboxElement, t, comparer);
 
     await t.hover(toolboxItem);
@@ -51,6 +56,9 @@ test("Right toolbox", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
     await changeToolboxSearchEnabled(false);
+    await setShowAddQuestionButton(false);
+    await setAllowEditSurveyTitle(false);
+
     const toolboxItem = Selector(".svc-toolbox__item");
     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
 
@@ -92,6 +100,9 @@ test("Right toolbox (rtl)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
     await changeToolboxSearchEnabled(false);
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+
     const toolboxItem = Selector(".svc-toolbox__item");
     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
 
@@ -172,6 +183,7 @@ test("designer tab view with page navigator", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
     await changeToolboxSearchEnabled(false);
+    await setAllowEditSurveyTitle(false);
     await setJSON({
       pages: [
         {
