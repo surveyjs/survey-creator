@@ -57,6 +57,15 @@
       }
     }
   }
+
+  .spg-matrixdynamic__dragged-row {
+    @include ctrDefaultFont;
+    color: var(--ctr-checkbox-text-color, $foreground-dim);
+
+    .spg-table__cell:nth-child(3) {
+      flex: 1;
+    }
+  }
 }
 
 .st-content {
