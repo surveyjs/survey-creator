@@ -55,11 +55,10 @@
 .svc-search__toolbar .svc-search__bar-item {
   height: min-content;
   margin: 0;
-  border-radius: var(--ctr-search-button-corner-radius);
+  border-radius: var(--ctr-search-button-corner-radius, 100px);
   padding: var(--ctr-search-button-padding-vertical, calcSize(0.5))
     var(--ctr-search-button-padding-horizontal, calcSize(0.5)) var(--ctr-search-button-padding-vertical, calcSize(0.5))
     var(--ctr-search-button-padding-horizontal, calcSize(0.5));
-  border-radius: 100px;
 
   .sv-svg-icon {
     width: var(--ctr-search-button-icon-width, calcSize(2));
