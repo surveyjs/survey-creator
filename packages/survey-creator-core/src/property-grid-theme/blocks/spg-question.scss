@@ -205,6 +205,7 @@ sv-question-error {
   .spg-matrixdynamic__content.spg-text__content {
     outline: 2px solid $secondary;
     outline-offset: -2px;
+    border-radius: var(--ctr-data-table-corner-radius, 0px);
 
     .spg-input {
       box-shadow: none;
