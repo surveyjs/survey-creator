@@ -63,7 +63,7 @@ import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { SvComponent } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import { SurveyCreatorModel, LogoImageViewModel } from "survey-creator-core";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 const props = defineProps<{ data: SurveyCreatorModel }>();
 const creator = computed(() => props.data);
 const survey = computed(() => creator.value.survey);
@@ -90,6 +90,11 @@ watch(
 onMounted(() => {
   if (root.value) {
     model.value.root = root.value;
+  }
+});
+onUnmounted(() => {
+  if (model.value) {
+    model.value.root = undefined as any;
   }
 });
 </script>
