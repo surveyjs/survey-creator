@@ -97,8 +97,7 @@ test("Check question adorners location", (): any => {
     if (options.obj.isPage) return;
     const objToAdd = options.obj;
     options.items.unshift({
-      id: "addtosharedrepo",
-      visibleIndex: 0
+      id: "addtosharedrepo"
     });
   });
 
