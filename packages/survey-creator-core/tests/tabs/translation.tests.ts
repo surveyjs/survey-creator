@@ -2271,3 +2271,29 @@ test("Translate matrix cells, Bug#8759", () => {
   expect(locstr).toBeTruthy();
   expect(locstr.getLocaleText("de")).toBe("de_row2_col2");
 });
+test("Do not activate undo/redo for deleting locale", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: {
+              default: "question 1",
+              de: "question de",
+            }
+          }
+        ]
+      }
+    ]
+  };
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  translation.deleteLocaleStrings("de");
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+});
