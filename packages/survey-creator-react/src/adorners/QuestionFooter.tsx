@@ -1,15 +1,9 @@
 import { QuestionAdornerViewModel, toggleHovered } from "survey-creator-core";
 import * as React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
-import { Base, Question } from "survey-core";
 import {
   SurveyActionBar,
   ReactElementFactory,
-  SurveyElementBase,
-  SurveyQuestion,
-  attachKey2click,
-  SvgIcon,
-  Popup
 } from "survey-react-ui";
 
 export interface QuestionWrapperFooterProps {

@@ -132,18 +132,22 @@ class PageAdornerTester extends PageAdorner {
     this.onPageSelectedCallback && this.onPageSelectedCallback();
   }
 }
-test("PageAdorner", (): any => {
+test("PageAdorner and selection", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
+  const getSubscriptions = () => (creator.currentPage as any).onPropChangeFunctions.filter(f => f.name == "isSelectedInDesigner");
   expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
+  expect(getSubscriptions().length == 0).toBeTruthy();
   const pageModel = new PageAdornerTester(creator, creator.survey.currentPage);
   let counter = 0;
   pageModel.onPageSelectedCallback = (): any => {
     counter++;
   };
-  expect(creator.currentPage.onPropertyChanged.isEmpty).toBeFalsy();
+  // expect(creator.currentPage.onPropertyChanged.isEmpty).toBeFalsy();
+  expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
+  expect(getSubscriptions().length == 0).toBeFalsy();
   expect(pageModel.isSelected).toBeFalsy();
   creator.selectElement(creator.survey.getQuestionByName("question1"));
   expect(pageModel.isSelected).toBeFalsy();
@@ -156,6 +160,7 @@ test("PageAdorner", (): any => {
   expect(counter).toEqual(1);
   pageModel.dispose();
   expect(creator.currentPage.onPropertyChanged.isEmpty).toBeTruthy();
+  expect(getSubscriptions().length == 0).toBeTruthy();
 });
 test("PageAdorner - remove page if: it is the last page, there is no elements and there is no properties set", (): any => {
   const creator = new CreatorTester();
@@ -3022,6 +3027,23 @@ test("process shortcut for text inputs", (): any => {
   expect(log).toEqual("->execute->execute->execute");
   creator["onKeyDownHandler"](<any>{ keyCode: 46, target: { tagName: "span", isContentEditable: true } });
   expect(log).toEqual("->execute->execute->execute");
+});
+test("Do not delete for read-only creator, Bug#6078", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  };
+  creator.readOnly = true;
+  creator.selectQuestionByName("q2");
+  creator["onKeyDownHandler"](<any>{ keyCode: 46, target: {} });
+  expect(creator.selectedElementName).toBe("q2");
+  creator.readOnly = false;
+  creator.selectQuestionByName("q2");
+  creator["onKeyDownHandler"](<any>{ keyCode: 46, target: {} });
+  expect(creator.selectedElementName).toBe("q1");
 });
 
 test("process undo-redo shortcut for text inputs", (): any => {
