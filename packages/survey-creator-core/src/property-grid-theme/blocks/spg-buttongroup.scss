@@ -38,6 +38,7 @@
   align-self: stretch;
   flex-basis: 0;
   flex-grow: 1;
+  width: 0;
 
   border-radius: var(--ctr-button-group-item-corner-radius, 0px);
   box-shadow: inset 0 0 0 var(--ctr-button-group-item-border-width, 1px) var(--ctr-button-group-item-border-color, $border);
@@ -68,10 +69,21 @@
   .spg-button-group__item-icon use {
     fill: var(--ctr-button-group-item-icon-color-selected, $primary);
   }
+}
 
-  &:hover {
-    background-color: var(--ctr-button-group-item-background-color-hovered, $background);
-  }
+.spg-button-group__item-decorator {
+  max-width: 100%;
+}
+
+.spg-button-group__item-caption {
+  display: block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.spg-question--disabled .spg-button-group {
+  background: var(--ctr-button-group-background-color-disabled);
 }
 
 .spg-button-group__item--disabled {
