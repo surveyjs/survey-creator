@@ -180,6 +180,22 @@ export async function setShowSidebar(newVal: boolean) {
     window["creator"].showSidebar = newVal;
   })(newVal);
 }
+export async function setShowAddQuestionButton(newVal: boolean) {
+  await ClientFunction((newVal) => {
+    window["creator"].showAddQuestionButton = newVal;
+  })(newVal);
+}
+export async function setAllowEditSurveyTitle(newVal: boolean) {
+  await ClientFunction((newVal) => {
+    window["creator"].allowEditSurveyTitle = newVal;
+  })(newVal);
+}
+export async function setExpandCollapseButtonVisibility(newVal: string) {
+  await ClientFunction((newVal) => {
+    window["creator"].expandCollapseButtonVisibility = newVal;
+  })(newVal);
+}
+
 export const explicitErrorHandler = ClientFunction(() => {
   window.addEventListener("error", e => {
     if (e.message === "ResizeObserver loop completed with undelivered notifications." ||
