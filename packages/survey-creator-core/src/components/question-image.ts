@@ -101,8 +101,10 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
       .append("svc-question__content--loading", this.isUploading).toString();
   }
   public dispose(): void {
-    this.surveyElement.unRegisterFunctionOnPropertyValueChanged("imageLink", "imageLinkValueChanged");
-    (this.surveyElement as QuestionImageModel).locImageLink.onStringChanged.remove(this.imageLinkValueChangedHandler);
+    if (this.surveyElement) {
+      this.surveyElement.unRegisterFunctionOnPropertyValueChanged("imageLink", "imageLinkValueChanged");
+      (this.surveyElement as QuestionImageModel).locImageLink.onStringChanged.remove(this.imageLinkValueChangedHandler);
+    }
     super.dispose();
   }
 }
