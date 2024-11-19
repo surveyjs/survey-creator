@@ -452,6 +452,8 @@ const Theme = {
     "--ctr-data-table-cell-padding-top": "var(--sjs-spacing-x1)",
     "--ctr-data-table-cell-padding-bottom": "var(--sjs-spacing-x1)",
     "--ctr-data-table-cell-drop-down-arrow-color": "var(--sjs-layer-1-foreground-50)",
+    "--ctr-data-table-cell-drop-down-arrow-width": "var(--sjs-size-x3)",
+    "--ctr-data-table-cell-drop-down-arrow-height": "var(--sjs-size-x3)",
     "--ctr-data-table-cell-text-color-header": "var(--sjs-layer-3-foreground-50)",
     "--ctr-data-table-cell-border-color-focused": "var(--sjs-primary-background-500)",
     "--ctr-data-table-cell-corner-radius-focused": "var(--sjs-corner-radius-x075)",
