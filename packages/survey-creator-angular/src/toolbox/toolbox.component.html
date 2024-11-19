@@ -1,6 +1,6 @@
 <ng-template #template>
   <div class="svc-toolbox">
-    <div class="svc-toolbox__container">
+    <div class="svc-scroll__container">
       <ng-container *ngIf="!(toolbox.categories.length == 1 || !toolbox.showCategoryTitles)">
         <svc-toolbox-category *ngFor="let category of toolbox.categories" [category]="category" [toolbox]="toolbox"></svc-toolbox-category>
       </ng-container>

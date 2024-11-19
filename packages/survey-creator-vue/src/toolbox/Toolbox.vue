@@ -1,6 +1,6 @@
 <template>
   <div class="svc-toolbox">
-    <div class="svc-toolbox__container">
+    <div class="svc-scroll__container">
       <template
         v-if="!(toolbox.categories.length == 1 || !toolbox.showCategoryTitles)"
       >

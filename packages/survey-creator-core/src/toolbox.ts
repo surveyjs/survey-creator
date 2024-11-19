@@ -377,7 +377,7 @@ export class QuestionToolbox
     return ".svc-toolbox__category>.svc-toolbox__tool--action";
   }
   public get containerSelector(): string {
-    return ".svc-toolbox__scroller";
+    return ".svc-scroll__scroller";
   }
 
   public static getQuestionDefaultSettings(questionType: string): any {
@@ -639,25 +639,6 @@ export class QuestionToolbox
   public setRootElement(element: HTMLElement) {
     this._rootElementValue = element;
     this._containerElementValue = element?.querySelector(this.containerSelector);
-    this._scrollbarElement = element?.querySelector(".svc-toolbox__scrollbar");
-    this._scrollbarSizerElement = element?.querySelector(".svc-toolbox__scrollbar-sizer");
-    this._containerBodyElement = element?.querySelector(".svc-toolbox__container");
-    if (!element) return;
-    this._containerBodyResizeObserver = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        const height = entry.contentBoxSize
-          ? entry.contentBoxSize[0].blockSize
-          : entry.contentRect.width;
-        this._scrollbarSizerElement.style.height = height + "px";
-      }
-    });
-    this._containerBodyResizeObserver.observe(this._containerBodyElement);
-  }
-  public unsubscribeRootElement() {
-    if (!!this._containerBodyResizeObserver) {
-      this._containerBodyResizeObserver.disconnect();
-      this._containerBodyResizeObserver = undefined;
-    }
   }
   public get containerElement() {
     return this._containerElementValue;
@@ -1428,10 +1409,6 @@ export class QuestionToolbox
   }
   public onScroll(model, event) {
     this.hideAllInnerPopups();
-    this._scrollbarElement.scrollTop = this._containerElementValue.scrollTop;
-  }
-  public onScrollbarScroll(event) {
-    this._containerElementValue.scrollTop = this._scrollbarElement.scrollTop;
   }
 
   //public dispose(): void { } Don't we need to dispose toolbox?

@@ -20,9 +20,9 @@
             class="svc-toolbox__category-separator svc-toolbox__category-separator--search"
           ></div>
       </div>
-      <div @focusout="(e) => toolbox.focusOut(e)" class="svc-toolbox__scroll-wrapper">
+      <div @focusout="(e) => toolbox.focusOut(e)" class="svc-scroll__wrapper">
         <div
-          class="svc-toolbox__scroller sv-drag-target-skipped"
+          class="svc-scroll__scroller sv-drag-target-skipped"
           @scroll="
             (e) => {
               toolbox.onScroll(toolbox, e);
@@ -32,7 +32,7 @@
           <div v-if="toolbox.showPlaceholder" class="svc-toolbox__placeholder">
             {{ toolbox.toolboxNoResultsFound }}
           </div>
-          <div class="svc-toolbox__container">
+          <div class="svc-scroll__container">
             <template v-if="!toolbox.showInSingleCategory">
               <SvComponent
                 :is="'svc-toolbox-category'"
@@ -57,12 +57,12 @@
             </template>
           </div>
         </div>
-        <div class="svc-toolbox__scrollbar" @scroll="
+        <div class="svc-scroll__scrollbar" @scroll="
             (e) => {
               toolbox.onScrollbarScroll(e);
             }
           ">
-          <div class="svc-toolbox__scrollbar-sizer">
+          <div class="svc-scroll__scrollbar-sizer">
           </div>
         </div>
       </div>

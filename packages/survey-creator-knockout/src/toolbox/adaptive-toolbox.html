@@ -11,13 +11,13 @@
       <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
     </div>
     <!-- /ko -->
-    <div class="svc-toolbox__scroll-wrapper">
-      <div class="svc-toolbox__scroller sv-drag-target-skipped"
+    <div class="svc-scroll__wrapper">
+      <div class="svc-scroll__scroller sv-drag-target-skipped"
         data-bind="event:{ scroll: function(model, event) { $data.toolbox.onScroll(model, event); return true; } }">
         <!-- ko if: $data.toolbox.showPlaceholder-->
         <div class="svc-toolbox__placeholder" data-bind="text:$data.toolbox.toolboxNoResultsFound"></div>
         <!-- /ko -->
-        <div class="svc-toolbox__container">
+        <div class="svc-scroll__container">
           <!-- ko ifnot: $data.toolbox.showInSingleCategory -->
           <!-- ko foreach: categories -->
           <div class="svc-toolbox__category"
@@ -58,9 +58,9 @@
             <!-- /ko -->
         </div>
         </div>
-        <div class="svc-toolbox__scrollbar"
+        <div class="svc-scroll__scrollbar"
           data-bind="event:{ scroll: function(model, event) { $data.toolbox.onScrollbarScroll(model, event); return true; } }">
-          <div class="svc-toolbox__scrollbar-sizer">
+          <div class="svc-scroll__scrollbar-sizer">
           </div>
       </div>
     </div>

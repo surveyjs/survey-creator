@@ -261,7 +261,7 @@ test.skip("Toolbox with subtypes (wrap)", async (t) => {
 
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(1775, 500)
-      .scrollBy(".svc-toolbox__scroller", 2, 300)
+      .scrollBy(".svc-toolbox .svc-scroll__scroller", 2, 300)
       .hover(getToolboxItemByText("Single-Line Input"))
       .expect(subtypesPopup.visible).ok();
     await takeElementScreenshot("toolbox-wrap-subtypes.png", subtypesPopup, t, comparer);
@@ -400,7 +400,7 @@ test("Toolbox with search", async (t) => {
     await t.typeText(Selector(".svc-toolbox input"), "qwerty");
     await takeElementScreenshot("toolbox-search-placeholder.png", toolboxElement, t, comparer);
     await t.click("#svd-grid-search-close");
-    await ClientFunction(() => (document.querySelector(".svc-toolbox__scroller") as HTMLDivElement).style.background = "red")();
+    await ClientFunction(() => (document.querySelector(".svc-toolbox .svc-scroll__scroller") as HTMLDivElement).style.background = "red")();
     await takeElementScreenshot("toolbox-search-background.png", toolboxElement, t, comparer);
   });
 });
@@ -504,7 +504,7 @@ test("Toolbox RTL with search compact", async (t) => {
 
 test("Toolbox disabled items", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    const toolboxElement = Selector(".svc-toolbox .svc-toolbox__container");
+    const toolboxElement = Selector(".svc-toolbox .svc-scroll__container");
 
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;

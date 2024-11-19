@@ -333,7 +333,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
 
   await t
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
-    .expect(Selector(".svc-toolbox__container").clientHeight).lte(510)
+    .expect(Selector(".svc-scroll__container").clientHeight).lte(510)
     .expect(visibleToolboxItems.count).eql(11)
     .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(22)
 
@@ -341,7 +341,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .click(Selector(".svc-survey-element-toolbar-item__title").withText("Save as Toolbox Item"))
 
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
-    .expect(Selector(".svc-toolbox__container").clientHeight).lte(510)
+    .expect(Selector(".svc-scroll__container").clientHeight).lte(510)
     .expect(visibleToolboxItems.count).eql(11)
     .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(23);
 });
@@ -451,7 +451,7 @@ test("toolbox subTypes: hide subTypes popup", async (t) => {
     .wait(400)
     .expect(toolboxSubTypesPopup.visible).ok()
 
-    .scrollBy(".svc-toolbox__scroller", 2, 100)
+    .scrollBy(".svc-scroll__scroller", 2, 100)
     .expect(toolboxSubTypesPopup.visible).notOk();
 });
 

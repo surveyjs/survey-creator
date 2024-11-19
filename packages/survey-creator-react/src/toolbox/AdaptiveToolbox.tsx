@@ -4,6 +4,7 @@ import { ReactElementFactory } from "survey-react-ui";
 import { ISurveyCreatorToolboxProps, Toolbox } from "./Toolbox";
 import { SurveyCreatorToolboxTool } from "./ToolboxItem";
 import { SearchComponent } from "../components/Search";
+import { ScrollComponent } from "../components/Scroll";
 
 export class AdaptiveToolbox extends Toolbox {
   private manager: VerticalResponsivityManager;
@@ -30,7 +31,6 @@ export class AdaptiveToolbox extends Toolbox {
   }
   componentWillUnmount() {
     this.manager && (this.manager.dispose());
-    this.toolbox.unsubscribeRootElement();
     this.toolbox.setRootElement(undefined);
     super.componentWillUnmount();
   }
@@ -56,23 +56,15 @@ export class AdaptiveToolbox extends Toolbox {
       <div ref={this.rootRef} className={this.toolbox.classNames}>
         <div onBlur={(e) => this.toolbox.focusOut(e)} className="svc-toolbox__panel">
           {search}
-          <div onBlur={(e) => this.toolbox.focusOut(e)} className="svc-toolbox__scroll-wrapper">
-            <div className="svc-toolbox__scroller sv-drag-target-skipped" onScroll={(event) => this.toolbox.onScroll(this.toolbox, event)}>
-              {placeholder}
-              <div className="svc-toolbox__container">
-                {(this.toolbox.showInSingleCategory) ?
-                  (<div className="svc-toolbox__category">
-                    {this.renderItems(this.toolbox.renderedActions, this.toolbox.isCompactRendered)}
-                  </div>)
-                  : this.renderCategories()
-                }
-              </div>
-            </div>
-            <div className="svc-toolbox__scrollbar" onScroll={(event) => this.toolbox.onScrollbarScroll(event.nativeEvent)}>
-              <div className="svc-toolbox__scrollbar-sizer">
-              </div>
-            </div>
-          </div>
+          {placeholder}
+          <ScrollComponent>
+            {(this.toolbox.showInSingleCategory) ?
+              (<div className="svc-toolbox__category">
+                {this.renderItems(this.toolbox.renderedActions, this.toolbox.isCompactRendered)}
+              </div>)
+              : this.renderCategories()
+            }
+          </ScrollComponent>
         </div>
       </div>
     );

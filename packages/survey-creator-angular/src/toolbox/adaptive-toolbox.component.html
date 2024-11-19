@@ -9,10 +9,10 @@
         <svc-search [model]="model.searchManager"></svc-search>
         <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
       </div>
-      <div class="svc-toolbox__scroll-wrapper">
-        <div class="svc-toolbox__scroller sv-drag-target-skipped" (scroll)="model.onScroll(model, $event)">
+      <div class="svc-scroll__wrapper">
+        <div class="svc-scroll__scroller sv-drag-target-skipped" (scroll)="model.onScroll(model, $event)">
           <div *ngIf="model.showPlaceholder" class="svc-toolbox__placeholder">{{model.toolboxNoResultsFound}}</div>
-          <div class="svc-toolbox__container">
+          <div class="svc-scroll__container">
             <ng-container *ngIf="!model.showInSingleCategory">
               <svc-toolbox-category *ngFor="let category of model.categories" [category]="category"
                 [toolbox]="model"></svc-toolbox-category>
@@ -27,8 +27,8 @@
             </ng-container>
           </div>
         </div>
-        <div class="svc-toolbox__scrollbar" (scroll)="model.onScrollbarScroll($event)">
-          <div class="svc-toolbox__scrollbar-sizer">
+        <div class="svc-scroll__scrollbar" (scroll)="model.onScrollbarScroll($event)">
+          <div class="svc-scroll__scrollbar-sizer">
           </div>
         </div>
       </div>
