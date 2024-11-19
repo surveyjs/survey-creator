@@ -1401,15 +1401,5 @@ export class QuestionToolbox
     }
     return questions;
   }
-
-  public hideAllInnerPopups() {
-    this.actions.forEach(action => {
-      action.hidePopup();
-    });
-  }
-  public onScroll(model, event) {
-    this.hideAllInnerPopups();
-  }
-
   //public dispose(): void { } Don't we need to dispose toolbox?
 }

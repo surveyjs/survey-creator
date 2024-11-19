@@ -4,7 +4,6 @@ import { ScrollViewModel } from "survey-creator-core";
 import { ReactElementFactory, SurveyActionBar, SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 interface IScrollComponentProps {
-  onScroll?: React.UIEventHandler;
   children: React.ReactNode;
 }
 export class ScrollComponent extends React.Component<IScrollComponentProps, any> {
