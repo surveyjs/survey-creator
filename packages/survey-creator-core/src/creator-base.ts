@@ -1406,10 +1406,10 @@ export class SurveyCreatorModel extends Base
     const plugin = this.getPlugin<UndoRedoPlugin>("undoredo");
     return plugin && plugin.model;
   }
-  startUndoRedoTransaction(name: string = "") {
+  startUndoRedoTransaction(name?: string): void {
     this.undoRedoController && this.undoRedoController.startTransaction(name);
   }
-  stopUndoRedoTransaction() {
+  stopUndoRedoTransaction(): void {
     this.undoRedoController && this.undoRedoController.stopTransaction();
   }
   /**

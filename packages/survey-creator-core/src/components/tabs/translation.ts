@@ -8,7 +8,8 @@ import {
   CssClassBuilder,
   createPopupModelWithListModel,
   MatrixCells,
-  QuestionMatrixModel
+  QuestionMatrixModel,
+  MatrixDynamicRowModel
 } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization, getLocString } from "../../editorLocalization";
@@ -731,15 +732,17 @@ export class Translation extends Base implements ITranslationLocales {
       this.reset();
     }
     if (!this.root) return;
+    this.options.startUndoRedoTransaction("Delete strings for locale: " + locale);
     this.root.deleteLocaleStrings(locale);
     this.removeLocale(locale);
     this.reset();
+    this.options.stopUndoRedoTransaction();
   }
   private removingLocale: string;
   protected createSettingsSurvey(): SurveyModel {
-    var json = this.getSettingsSurveyJSON();
+    const json = this.getSettingsSurveyJSON();
     setSurveyJSONForPropertyGrid(json);
-    var res = this.options.createSurvey(json, "translation_settings", this, (survey: SurveyModel): void => {
+    const res = this.options.createSurvey(json, "translation_settings", this, (survey: SurveyModel): void => {
       survey.css = propertyGridCss;
       survey.css.root += " st-properties";
       survey.rootCss += " st-properties";
@@ -762,7 +765,7 @@ export class Translation extends Base implements ITranslationLocales {
       options.titleActions = [this.addLanguageAction];
     });
     res.onGetMatrixRowActions.add((sender, options) => {
-      updateMatrixRemoveAction(options.question, options.actions, options.row);
+      updateMatrixRemoveAction(<QuestionMatrixDynamicModel>options.question, options.actions, <MatrixDynamicRowModel>options.row);
       if (this.options.getHasMachineTranslation() && findAction(options.actions, "remove-row") &&
         Array.isArray(options.question.value)) {
         const q = options.question;
@@ -773,6 +776,7 @@ export class Translation extends Base implements ITranslationLocales {
             iconName: "icon-language",
             iconSize: "auto",
             locTooltipName: "ed.translateUsigAI",
+            visibleIndex: 5,
             location: "end",
             action: () => this.showTranslationEditor(locale)
           }));

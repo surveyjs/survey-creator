@@ -235,7 +235,11 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       macOsHotkey: {
         keyCode: 46,
       },
-      execute: () => this.creator.deleteCurrentElement()
+      execute: () => {
+        if(!this.creator.readOnly) {
+          this.creator.deleteCurrentElement();
+        }
+      }
     });
   }
 
@@ -297,7 +301,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     this.creator.sidebar.sideAreaComponentName = undefined;
     this.creator.sidebar.sideAreaComponentData = undefined;
+    this.creator.sidebar.onPropertyChanged.clear();
     this.creator.sidebar.header.reset();
+    this.creator.expandCollapseManager.clear();
     return true;
   }
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {

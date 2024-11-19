@@ -2271,3 +2271,34 @@ test("Translate matrix cells, Bug#8759", () => {
   expect(locstr).toBeTruthy();
   expect(locstr.getLocaleText("de")).toBe("de_row2_col2");
 });
+test("Merge undo/redo into one transaction", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        title: { de: "Page title de" },
+        description: { de: "De" },
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: {
+              default: "question 1",
+              de: "question de",
+            },
+            description: { de: "DE" }
+          }
+        ]
+      }
+    ]
+  };
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  translation.deleteLocaleStrings("de");
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  creator.undoRedoManager.undo();
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+});

@@ -99,9 +99,11 @@ svc-page {
 }
 
 //hovered state
-.svc-page-toolbar__item:not(.svc-page-toolbar__item--pressed):hover:enabled,
+.svc-page-toolbar__item:not(.svc-page-toolbar__item--pressed):hover:enabled {
+  background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, $background-dim);
+}
 .svc-page-toolbar__item:not(.svc-page-toolbar__item--pressed):focus:enabled {
-  background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+  background-color: var(--ctr-survey-page-toolbar-item-background-color-selectedd, $background-dim);
 }
 
 //pressed state
@@ -134,6 +136,11 @@ svc-page {
   fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
 }
 
+.svc-page-toolbar__item:active .svc-page-toolbar-item__icon use {
+  fill: black;
+  opacity: 0.5;
+}
+
 .svc-page-toolbar-item__title {
   @include ctrSmallBoldFont;
   color: var(--ctr-survey-page-toolbar-item-text-color, $foreground);
@@ -148,7 +155,7 @@ svc-page {
 
 .svc-page__content:focus,
 .svc-hovered.svc-page__content {
-  box-shadow: 0 0 0 2px $secondary-light;
+  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-hovered, 2px) var(--ctr-survey-page-border-color-hovered, $secondary-light);
   background: var(--ctr-survey-page-background-color-hovered, $secondary-backcolor-semi-light);
 }
 
@@ -175,8 +182,8 @@ svc-page {
 }
 
 .svc-page__content--selected.svc-page__content--selected {
-  box-shadow: 0 0 0 2px $secondary;
-  background: $secondary-backcolor-semi-light;
+  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-selected, 2px) var(--ctr-survey-page-border-color-selected, $secondary);
+  background: var(--ctr-survey-page-background-color-selected, $secondary-backcolor-semi-light);
 }
 
 .svc-page__content--animation-running {
