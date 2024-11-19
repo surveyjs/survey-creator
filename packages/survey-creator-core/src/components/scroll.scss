@@ -35,6 +35,8 @@
   margin-inline-start: -1px;
   display: none;
   z-index: 30;
+  inset-inline-end: 0;
+  inset-inline-start: initial;
   @-moz-document url-prefix() {
     scrollbar-width: thin;
     scrollbar-color: $border transparent;
@@ -51,4 +53,7 @@
 
 .svc-scroll__container {
   width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }

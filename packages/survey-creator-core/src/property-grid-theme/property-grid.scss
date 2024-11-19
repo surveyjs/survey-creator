@@ -37,8 +37,8 @@
 
 .spg-root-modern {
   height: 0;
+  min-height: fit-content;
   flex-grow: 1;
-  overflow: auto;
 }
 
 .spg-root-modern.spg-root--one-category {
