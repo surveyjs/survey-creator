@@ -63,7 +63,7 @@ export var settings = {
       checkbox: "allof",
       tagbox: "allof"
     },
-    showContainerQuestions: false,
+    includeComplexQuestions: false,
     visibleActions: [],
     logicItemTitleMaxChars: 50,
     openBracket: "{",

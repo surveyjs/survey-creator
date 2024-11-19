@@ -659,7 +659,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         const question = questions[i];
         if (contextObject == question) continue;
         const context = contextObject ? contextObject : (!this.context || this.context === question);
-        if(settings.logic.showContainerQuestions && question.isContainer) {
+        if(settings.logic.includeComplexQuestions && question.isContainer) {
           res.push(question);
         }
         question.addConditionObjectsByContext(res, context);

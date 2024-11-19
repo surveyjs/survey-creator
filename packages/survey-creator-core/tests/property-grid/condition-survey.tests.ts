@@ -1128,7 +1128,7 @@ test("Show complex question in the condition builder", () => {
   let qName = <QuestionCheckboxModel>panel.getQuestionByName("questionName");
   expect(qName.choices).toHaveLength(4);
 
-  settings.logic.showContainerQuestions = true;
+  settings.logic.includeComplexQuestions = true;
 
   editor = new ConditionEditor(survey, question, options, "visibleIf");
   expect(editor.allConditionQuestions).toHaveLength(4 + 3);
@@ -1144,7 +1144,7 @@ test("Show complex question in the condition builder", () => {
   expect(ItemValue.getItemByValue(qOperator.visibleChoices, "empty").isVisible).toBeTruthy();
   expect(ItemValue.getItemByValue(qOperator.visibleChoices, "notempty").isVisible).toBeTruthy();
 
-  settings.logic.showContainerQuestions = false;
+  settings.logic.includeComplexQuestions = false;
 });
 test("file question type should not set operator to 'equal'", () => {
   var survey = new SurveyModel({
