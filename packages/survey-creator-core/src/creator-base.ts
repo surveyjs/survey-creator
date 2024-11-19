@@ -1590,7 +1590,7 @@ export class SurveyCreatorModel extends Base
   }
   protected registerIcons() {
     let path;
-    if (settings.useLegacyIcons) {
+    if (settings.useLegacyIcons || !this.creatorTheme) {
       SurveySettings.useLegacyIcons = true;
       path = svgBundle.V1;
     } else {
@@ -4003,6 +4003,7 @@ export class SurveyCreatorModel extends Base
     if (designerPlugin) {
       designerPlugin.setTheme();
     }
+    this.registerIcons();
   }
   public syncTheme(theme: ICreatorTheme): void {
     if (!theme) return;
