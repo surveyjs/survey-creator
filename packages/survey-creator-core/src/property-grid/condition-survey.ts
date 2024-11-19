@@ -527,6 +527,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       const condQuestion = this.getConditionQuestion(questionName);
       opt.choices.forEach((choice, index) => {
         let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
+        if(condQuestion?.isContainer) {
+          isOperatorEnabled = choice.value === "empty" || choice.value === "notempty";
+        }
         isOperatorEnabled = this.options.isConditionOperatorEnabled(questionName, condQuestion, choice.value, isOperatorEnabled);
         choice.setIsEnabled(isOperatorEnabled);
         choice.setIsVisible(isOperatorEnabled);
@@ -656,6 +659,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         const question = questions[i];
         if (contextObject == question) continue;
         const context = contextObject ? contextObject : (!this.context || this.context === question);
+        if(settings.logic.showContainerQuestions && question.isContainer) {
+          res.push(question);
+        }
         question.addConditionObjectsByContext(res, context);
       }
     }

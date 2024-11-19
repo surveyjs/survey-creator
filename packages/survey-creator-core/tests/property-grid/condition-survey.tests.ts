@@ -1098,6 +1098,54 @@ test("Change operators via callback", () => {
   expect(ItemValue.getItemByValue(qOperator.visibleChoices, "equal").isVisible).toBeTruthy();
   expect(evnt_questionType).toBe("checkbox");
 });
+test("Show complex question in the condition builder", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text", visibleIf: "{q2} = 'a'" },
+      { name: "q2", type: "text" },
+      {
+        name: "q3",
+        type: "paneldynamic",
+        templateElements: [{ type: "text", name: "q2_q1" }]
+      },
+      {
+        name: "q4",
+        type: "matrixdynamic",
+        columns: [{ cellType: "text", name: "col1" }]
+      },
+      {
+        name: "q5",
+        type: "multipletext",
+        items: [{ name: "item1" }]
+      }
+    ]
+  });
+  const question = survey.getQuestionByName("q1");
+  const options = new EmptySurveyCreatorOptions();
+  let editor = new ConditionEditor(survey, question, options, "visibleIf");
+  expect(editor.allConditionQuestions).toHaveLength(4);
+  let panel = editor.panel.panels[0];
+  let qName = <QuestionCheckboxModel>panel.getQuestionByName("questionName");
+  expect(qName.choices).toHaveLength(4);
+
+  settings.logic.showContainerQuestions = true;
+
+  editor = new ConditionEditor(survey, question, options, "visibleIf");
+  expect(editor.allConditionQuestions).toHaveLength(4 + 3);
+  panel = editor.panel.panels[0];
+  qName = <QuestionCheckboxModel>panel.getQuestionByName("questionName");
+  expect(qName.choices).toHaveLength(4 + 3);
+  qName.value = "q4";
+  const qOperator = <QuestionDropdownModel>panel.getQuestionByName("operator");
+  qOperator.onOpenedCallBack();
+  expect(ItemValue.getItemByValue(qOperator.visibleChoices, "anyof").isVisible).toBeFalsy();
+  expect(ItemValue.getItemByValue(qOperator.visibleChoices, "contains").isVisible).toBeFalsy();
+  expect(ItemValue.getItemByValue(qOperator.visibleChoices, "equal").isVisible).toBeFalsy();
+  expect(ItemValue.getItemByValue(qOperator.visibleChoices, "empty").isVisible).toBeTruthy();
+  expect(ItemValue.getItemByValue(qOperator.visibleChoices, "notempty").isVisible).toBeTruthy();
+
+  settings.logic.showContainerQuestions = false;
+});
 test("file question type should not set operator to 'equal'", () => {
   var survey = new SurveyModel({
     elements: [
