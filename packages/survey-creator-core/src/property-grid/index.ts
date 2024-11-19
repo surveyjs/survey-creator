@@ -1583,7 +1583,7 @@ export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
   }
 
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition) {
-    question.valueFromDataCallback = (val: boolean | undefined) => { return val === undefined ? "auto" : val.toString(); };
+    question.valueFromDataCallback = (val: boolean | undefined) => { return val === undefined || val === null ? "auto" : val.toString(); };
     question.valueToDataCallback = (val: string) => { return val === "auto" ? undefined : val === "true"; };
   }
   onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
