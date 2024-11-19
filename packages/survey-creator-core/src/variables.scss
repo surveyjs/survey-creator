@@ -57,6 +57,7 @@ $blue-light: var(--sjs-special-blue-light, var(--blue-light, rgba(67, 127, 217, 
 $blue-forecolor: var(--sjs-special-blue-forecolor, #ffffff);
 
 $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
+$surface-font-size: var(--sjs-font-size, 16px);
 
 $sd-panel-normal-min-width: 496px;
 $sd-panel-medium-min-width: 176px;
@@ -69,6 +70,26 @@ $sd-panel-medium-min-width: 176px;
 
   @else {
     $result: calc(#{$multiplier} * (#{$base-unit}));
+    @return $result;
+  }
+}
+
+@function calcSurfaceFontSize($multiplier) {
+  @if $multiplier ==1 {
+    $result: #{$surface-font-size};
+    @return $result;
+  } @else {
+    $result: calc(#{$multiplier} * (#{$surface-font-size}));
+    @return $result;
+  }
+}
+
+@function calcSurfaceLineHeight($multiplier) {
+  @if $multiplier ==1 {
+    $result: #{$surface-font-size};
+    @return $result;
+  } @else {
+    $result: calc(#{$multiplier} * (#{$surface-font-size}));
     @return $result;
   }
 }

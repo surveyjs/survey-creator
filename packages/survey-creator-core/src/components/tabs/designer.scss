@@ -40,8 +40,6 @@ svc-tab-designer {
 
 .svc-surface-header {
   .sd-title {
-    @include ctrLargeBoldFont;
-
     .sv-string-editor {
       &[aria-placeholder]:empty:before {
         color: var(--ctr-survey-header-text-title-color-placeholder, $foreground-light);
@@ -49,7 +47,6 @@ svc-tab-designer {
     }
   }
   .sd-description {
-    @include ctrDefaultFont;
     color: var(--ctr-survey-header-text-description-color-placeholder, #909090);
   }
 }

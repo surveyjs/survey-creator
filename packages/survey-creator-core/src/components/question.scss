@@ -153,9 +153,10 @@ svc-question {
   height: calcSize(2);
 }
 
-
 .svc-survey-element-toolbar-item__title {
   @include ctrSmallBoldFont;
+  font-size: calcSurfaceFontSize(0.75);
+  line-height: calcSurfaceLineHeight(1);
   color: var(--ctr-survey-question-panel-toolbar-item-text-color, $foreground);
   transition: color $creator-transition-duration;
 }
@@ -333,6 +334,8 @@ svc-question {
   color: $foreground-light;
   text-wrap: wrap;
   text-align: center;
+  font-size: calcSurfaceFontSize(1);
+  line-height: calcSurfaceLineHeight(1.5);
 }
 
 .svc-question__content-actions {
@@ -1075,7 +1078,7 @@ svc-question,
       flex-grow: 1;
       justify-content: center;
       margin: calcSize(1) calcSize(3);
-      line-height: var(--sjs-line-height-x2, #{calcSize(2)});
+      line-height: calcSurfaceLineHeight(1);
       color: var(--ctr-survey-action-button-text-color-positive, $primary);
       text-wrap: nowrap;
     }
@@ -1151,7 +1154,7 @@ svc-question,
     flex-grow: 1;
     justify-content: center;
     margin: calcSize(1) calcSize(3);
-    line-height: var(--sjs-line-height-x2, #{calcSize(2)});
+    line-height: calcSurfaceLineHeight(1);
     color: var(--ctr-survey-action-button-text-color-positive, $primary);
     text-wrap: nowrap;
   }
