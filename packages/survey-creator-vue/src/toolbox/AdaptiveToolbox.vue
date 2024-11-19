@@ -20,19 +20,10 @@
             class="svc-toolbox__category-separator svc-toolbox__category-separator--search"
           ></div>
       </div>
-      <div @focusout="(e) => toolbox.focusOut(e)" class="svc-scroll__wrapper">
-        <div
-          class="svc-scroll__scroller sv-drag-target-skipped"
-          @scroll="
-            (e) => {
-              toolbox.onScroll(toolbox, e);
-            }
-          "
-        >
           <div v-if="toolbox.showPlaceholder" class="svc-toolbox__placeholder">
             {{ toolbox.toolboxNoResultsFound }}
           </div>
-          <div class="svc-scroll__container">
+          <Scroll>
             <template v-if="!toolbox.showInSingleCategory">
               <SvComponent
                 :is="'svc-toolbox-category'"
@@ -55,17 +46,7 @@
                 </template>
               </div>
             </template>
-          </div>
-        </div>
-        <div class="svc-scroll__scrollbar" @scroll="
-            (e) => {
-              toolbox.onScrollbarScroll(e);
-            }
-          ">
-          <div class="svc-scroll__scrollbar-sizer">
-          </div>
-        </div>
-      </div>
+          </Scroll>
     </div>
   </div>
 </template>
@@ -75,6 +56,7 @@ import { VerticalResponsivityManager } from "survey-core";
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed, onMounted, onUnmounted, ref } from "vue";
+import Scroll from "@/components/Scroll.vue";
 const props = defineProps<{ creator: SurveyCreatorModel }>();
 const toolbox = computed(() => {
   return props.creator.toolbox;
@@ -95,7 +77,6 @@ onMounted(() => {
 onUnmounted(() => {
   responsivityManager?.dispose();
   toolbox.value.setRootElement(undefined as any);
-  toolbox.value.unsubscribeRootElement();
 });
 const renderedActions = computed(() => toolbox.value.renderedActions);
 </script>

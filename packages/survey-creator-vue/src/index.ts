@@ -76,6 +76,7 @@ import ImageItemValue from "./adorners/ImageItemValue.vue";
 import QuestionEditor from "./QuestionEditor.vue";
 import Logo from "./header/Logo.vue";
 import Search from "./components/Search.vue";
+import Scroll from "./components/Scroll.vue";
 import PageNavigator from "./page-navigator/PageNavigator.vue";
 import PageNavigatorItem from "./page-navigator/PageNavigatorItem.vue";
 import Dropdown from "./adorners/Dropdown.vue";
@@ -116,6 +117,7 @@ function registerComponents(
   registerComponent("svc-property-grid", PropertyGrid);
   registerComponent("svc-object-selector", ObjectSelector);
   registerComponent("svc-search", Search);
+  registerComponent("svc-scroll", Scroll);
   registerComponent("svc-switcher", Switcher);
 
   registerComponent("svc-action-button", ActionButton);
