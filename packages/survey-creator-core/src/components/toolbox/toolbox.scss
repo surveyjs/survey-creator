@@ -290,7 +290,7 @@ svc-toolbox {
 
 .svc-toolbox__placeholder {
   @include ctrSmallFont;
-  padding-top: calcSize(12);
+  padding-top: calcSize(13.5);
   margin-inline-start: auto;
   margin-inline-end: auto;
   color: var(--ctr-property-grid-placeholder-text-description-color, $foreground-light);
