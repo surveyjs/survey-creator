@@ -93,7 +93,9 @@
   }
   .sd-drag-element__svg {
     width: calcSize(2);
-    height: calcSize(3);
+    height: calcSize(2);
+    visibility: visible;
+    cursor: initial;
     use {
       fill: $foreground-light;
     }
