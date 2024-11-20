@@ -183,6 +183,10 @@
             {
               "Name": "end-user-guide-numbering-within-form",
               "Title": "Numbering within a Form"
+            },
+            {
+              "Name": "end-user-guide-how-to-randomize-questions-within-form",
+              "Title": "Randomize Form Fields"
             }
           ]
         },
