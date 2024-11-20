@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { SurveyCreatorModel, QuestionToolbox } from "survey-creator-core";
 import { Action, VerticalResponsivityManager } from "survey-core";
-import { BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 
 @Component({
-  selector: "svc-adaptive-toolbox",
+  selector: "svc-toolbox",
   templateUrl: "./adaptive-toolbox.component.html",
   styles: [":host { display: none; }"]
 })
@@ -33,3 +33,4 @@ export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> imple
     super.ngOnDestroy();
   }
 }
+AngularComponentFactory.Instance.registerComponent("svc-toolbox", AdaptiveToolboxComponent);

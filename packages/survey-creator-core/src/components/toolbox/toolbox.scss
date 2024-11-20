@@ -1,11 +1,5 @@
 @import "../../variables.scss";
 
-svc-toolbox {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-}
-
 .svc-toolbox {
   --dft-toolbox-item-padding-top: calc(1 * #{$base-unit});
   --dft-toolbox-group-padding-right: calc(2 * #{$base-unit});

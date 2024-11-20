@@ -1,6 +1,6 @@
 <ng-template #template>
   <div class="svc-flex-column">
-    <svc-adaptive-toolbox *ngIf="model.isToolboxVisible" [creator]="creator"></svc-adaptive-toolbox>
+    <svc-toolbox *ngIf="model.isToolboxVisible" [creator]="creator"></svc-toolbox>
   </div>
   <div class="svc-tab-designer" [class]="model.getRootCss()" (click)="model.clickDesigner()">
     <div class="svc-tab-designer_content">

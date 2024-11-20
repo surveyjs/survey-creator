@@ -1,12 +1,15 @@
 import * as React from "react";
-import { VerticalResponsivityManager } from "survey-core";
-import { ReactElementFactory } from "survey-react-ui";
-import { ISurveyCreatorToolboxProps, Toolbox } from "./Toolbox";
+import { Base, VerticalResponsivityManager } from "survey-core";
+import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 import { SurveyCreatorToolboxTool } from "./ToolboxItem";
 import { SearchComponent } from "../components/Search";
 import { ScrollComponent } from "../components/Scroll";
-
-export class AdaptiveToolbox extends Toolbox {
+import { SurveyCreatorToolboxCategory } from "./ToolboxCategory";
+import { SurveyCreatorModel } from "survey-creator-core";
+export interface ISurveyCreatorToolboxProps {
+  model: SurveyCreatorModel;
+}
+export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> {
   private manager: VerticalResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
 
@@ -34,7 +37,30 @@ export class AdaptiveToolbox extends Toolbox {
     this.toolbox.setRootElement(undefined);
     super.componentWillUnmount();
   }
+  public get creator() {
+    return this.props.model;
+  }
+  public get toolbox() {
+    return this.creator.toolbox;
+  }
+  protected getStateElement(): Base {
+    return this.toolbox;
+  }
 
+  renderItems(items: Array<any>, isCompact = false): Array<JSX.Element> {
+    const result = [];
+    items.forEach((item, itemIndex) => {
+      const tool = <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} parentModel={this.toolbox} isCompact={isCompact} key={"item" + itemIndex} ></SurveyCreatorToolboxTool>;
+      result.push(tool);
+    });
+    return result;
+  }
+
+  renderCategories() {
+    return this.toolbox.categories.map((category, index) => {
+      return <SurveyCreatorToolboxCategory category={category} toolbox={this.toolbox} key={"category" + index} ></SurveyCreatorToolboxCategory>;
+    });
+  }
   renderSearch() {
     const searchButton = this.toolbox.isCompactRendered ?
       <>
@@ -71,6 +97,6 @@ export class AdaptiveToolbox extends Toolbox {
   }
 }
 
-ReactElementFactory.Instance.registerElement("svc-adaptive-toolbox", (props) => {
+ReactElementFactory.Instance.registerElement("svc-toolbox", (props) => {
   return React.createElement(AdaptiveToolbox, props);
 });

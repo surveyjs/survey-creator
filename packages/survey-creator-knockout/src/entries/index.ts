@@ -66,7 +66,6 @@ export * from "../tabs/test-complete";
 export * from "../tabs/theme";
 export * from "../tabbed-menu/tabbed-menu";
 export * from "../tabbed-menu/tabbed-menu-item";
-export * from "../toolbox/toolbox";
 export * from "../toolbox/adaptive-toolbox";
 export * from "../toolbox/toolbox-item";
 export * from "../toolbox/toolbox-item-group";

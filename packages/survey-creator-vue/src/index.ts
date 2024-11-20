@@ -56,7 +56,6 @@ import ToolboxTool from "./toolbox/ToolboxTool.vue";
 import ToolboxItem from "./toolbox/ToolboxItem.vue";
 import ToolboxItemGroup from "./toolbox/ToolboxItemGroup.vue";
 import ToolboxCategory from "./toolbox/ToolboxCategory.vue";
-import Toolbox from "./toolbox/Toolbox.vue";
 import ToolboxList from "./toolbox/ToolboxList.vue";
 
 import Designer from "./tabs/designer/Designer.vue";
@@ -153,8 +152,7 @@ function registerComponents(
 
   registerComponent("svc-tab-theme", Theme);
 
-  registerComponent("svc-adaptive-toolbox", AdaptiveToolbox);
-  registerComponent("svc-toolbox", Toolbox);
+  registerComponent("svc-toolbox", AdaptiveToolbox);
   registerComponent("svc-toolbox-list", ToolboxList);
   registerComponent("svc-toolbox-category", ToolboxCategory);
   registerComponent("svc-toolbox-tool", ToolboxTool);

@@ -66,7 +66,6 @@ export * from "./tabs/designer/designer-pages.component";
 export * from "./tabs/designer/designer-survey.component";
 export * from "./adorners/cell-question.component";
 export * from "./question-widget.component";
-export * from "./toolbox/toolbox.component";
 export * from "./adorners/question-rating.component";
 export * from "./header/logo-image.component";
 export * from "./tabs/json/json-error-item.component";
