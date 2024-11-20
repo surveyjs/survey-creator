@@ -32,16 +32,11 @@
 }
 
 .spg-input:disabled,
-.spg-input:disabled::placeholder {
-  color: var(--ctr-editor-content-text-color-disabled, $foreground);
-  opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
-  background-color: var(--ctr-editor-background-color-disabled, $background);
-}
-
+.spg-input:disabled::placeholder,
 input.spg-input:read-only,
 input.spg-input:read-only::placeholder {
-  color: $foreground;
-  opacity: 0.25;
+  color: color-mix(in srgb, var(--ctr-editor-content-text-color-disabled, $foreground-dim), transparent 75%);
+  background-color: var(--ctr-editor-background-color-disabled, $background-dim);
 }
 
 .spg-input[type="color"] {

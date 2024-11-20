@@ -487,7 +487,7 @@
   --ctr-editor-button-icon-color-disabled: var(--sjs-layer-3-foreground-75);
   --ctr-radio-button-text-color: var(--sjs-layer-1-foreground-100);
   --ctr-checkbox-text-color: var(--sjs-layer-1-foreground-100);
-  --ctr-checkbox-description-text-color: var(--sjs-layer-1-foreground-75);
+  --ctr-checkbox-description-text-color: var(--sjs-layer-1-foreground-50);
   --ctr-checkbox-description-text-color-disabled: var(--sjs-layer-1-foreground-100);
   --ctr-actionbar-button-gap: var(--sjs-spacing-x1);
   --ctr-actionbar-button-padding-left-large-icon: var(--sjs-spacing-x1);
@@ -543,7 +543,7 @@
   --ctr-list-item-color-swatch-border-color-selected-item: var(--sjs-primary-foreground-100);
   --ctr-list-background-color: var(--sjs-layer-1-background-500);
   --ctr-editor-color-swatch-background-color-primary: var(--sjs-primary-background-500);
-  --ctr-editor-color-swatch-corner-radius: var(--sjs-corner-radius-x0375);
+  --ctr-editor-color-swatch-corner-radius: var(--sjs-corner-radius-x05);
   --ctr-editor-color-swatch-border-color: var(--sjs-border-25-overlay);
   --ctr-editor-color-swatch-border-width: var(--sjs-stroke-x1);
   --ctr-editor-color-swatch-padding-horizontal: var(--sjs-spacing-x1);
@@ -860,7 +860,7 @@
   --ctr-property-grid-header-border-width-bottom: var(--sjs-stroke-x2);
   --ctr-caption-with-actions-padding-right: var(--sjs-spacing-x05);
   --ctr-caption-with-actions-description-button-margin-left: var(--sjs-spacing-x05);
-  --ctr-caption-with-actions-description-text-color: var(--sjs-layer-1-foreground-75);
+  --ctr-caption-with-actions-description-text-color: var(--sjs-layer-1-foreground-50);
   --ctr-caption-with-actions-description-padding-bottom: var(--sjs-spacing-x2);
   --ctr-caption-with-actions-description-text-color-disabled: var(--sjs-layer-1-foreground-100);
   --ctr-data-table-cell-padding-left: var(--sjs-spacing-x1);
@@ -3278,5 +3278,19 @@
   --ctr-image-gallery-item-checkmark-corner-radius: var(--sjs-corner-radius-round);
   --ctr-image-gallery-item-checkmark-padding: var(--sjs-spacing-x1);
   --ctr-image-gallery-item-background-color-selected: var(--sjs-primary-background-500);
+  --ctr-survey-radio-button-group-item-background-color-drop-spot: var(--sjs-layer-1-background-400);
+  --ctr-survey-radio-button-group-item-corner-radius-drop-spot: var(--sjs-corner-radius-x1);
+  --ctr-survey-radio-button-group-item-height-drop-spot: var(--sjs-size-x6);
+  --ctr-image-gallery-item-background-height-drop-spot: var(--sjs-size-x6);
+  --ctr-image-gallery-item-background-corner-radius-drop-spot: var(--sjs-corner-radius-x1);
+  --ctr-image-gallery-item-background-height-drop-spot-2: var(--sjs-size-x6);
+  --ctr-image-gallery-item-background-corner-radius-drop-spot-2: var(--sjs-corner-radius-x1);
+  --ctr-survey-checkboxes-item-height-drop-spot: var(--sjs-size-x6);
+  --ctr-survey-checkboxes-item-corner-radius-drop-spot: var(--sjs-corner-radius-x1);
+  --ctr-survey-checkboxes-item-background-color-drop-spot: var(--sjs-layer-2-background-500);
+  --ctr-survey-ranking-item-background-color-drop-spot: var(--sjs-layer-2-background-500);
+  --ctr-survey-ranking-item-height-drop-spot: var(--sjs-size-x6);
+  --ctr-survey-ranking-item-corner-radius-drop-spot: var(--sjs-corner-radius-x1);
+  --ctr-checkbox-description-text-margin-top: var(--sjs-spacing-x1);
 }
 

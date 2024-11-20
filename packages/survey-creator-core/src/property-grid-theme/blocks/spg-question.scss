@@ -28,7 +28,7 @@
   box-sizing: border-box;
 }
 .spg-question__title.sd-element__title--disabled {
-  color: var(--ctr-editor-label-color-disabled, $foreground-dim);
+  color: var(--ctr-caption-with-actions-text-color-disabled, $foreground-dim);
 }
 
 .spg-question__content {

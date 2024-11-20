@@ -247,7 +247,7 @@ const Theme = {
     "--ctr-editor-button-icon-color-disabled": "var(--sjs-layer-3-foreground-75)",
     "--ctr-radio-button-text-color": "var(--sjs-layer-1-foreground-100)",
     "--ctr-checkbox-text-color": "var(--sjs-layer-1-foreground-100)",
-    "--ctr-checkbox-description-text-color": "var(--sjs-layer-1-foreground-75)",
+    "--ctr-checkbox-description-text-color": "var(--sjs-layer-1-foreground-50)",
     "--ctr-actionbar-button-padding-left-large-icon": "var(--sjs-spacing-x1)",
     "--ctr-actionbar-button-padding-right-large-icon": "var(--sjs-spacing-x1)",
     "--ctr-actionbar-button-padding-top-large-icon": "var(--sjs-spacing-x1)",
@@ -279,6 +279,7 @@ const Theme = {
     "--ctr-list-item-color-swatch-corner-radius": "var(--sjs-corner-radius-x05)",
     "--ctr-list-item-color-swatch-width": "var(--sjs-spacing-x4)",
     "--ctr-list-item-color-swatch-height": "var(--sjs-spacing-x3)",
+    "--ctr-editor-color-swatch-corner-radius": "var(--sjs-corner-radius-x05)",
     "--ctr-editor-button-padding-top": "var(--sjs-spacing-x1)",
     "--ctr-editor-button-padding-bottom": "var(--sjs-spacing-x1)",
     "--ctr-editor-button-padding-left": "var(--sjs-spacing-x1)",
@@ -446,7 +447,7 @@ const Theme = {
     "--ctr-property-grid-header-padding-bottom": "var(--sjs-spacing-x150)",
     "--ctr-property-grid-header-border-color": "var(--sjs-primary-background-500)",
     "--ctr-property-grid-header-border-width-bottom": "var(--sjs-stroke-x2)",
-    "--ctr-caption-with-actions-description-text-color": "var(--sjs-layer-1-foreground-75)",
+    "--ctr-caption-with-actions-description-text-color": "var(--sjs-layer-1-foreground-50)",
     "--ctr-caption-with-actions-description-text-color-disabled": "var(--sjs-layer-1-foreground-100)",
     "--ctr-data-table-cell-padding-left": "var(--sjs-spacing-x1)",
     "--ctr-data-table-cell-padding-right": "var(--sjs-spacing-x1)",
@@ -878,7 +879,21 @@ const Theme = {
     "--ctr-menu-item-padding-top": "var(--sjs-spacing-x250)",
     "--ctr-scrollbar-padding-vertical-hovered": "var(--sjs-spacing-x025)",
     "--ctr-image-gallery-item-title-color": "var(--sjs-layer-1-foreground-100)",
-    "--ctr-image-gallery-item-corner-radius": "var(--sjs-corner-radius-x075)"
+    "--ctr-image-gallery-item-corner-radius": "var(--sjs-corner-radius-x075)",
+    "--ctr-survey-radio-button-group-item-background-color-drop-spot": "var(--sjs-layer-1-background-400)",
+    "--ctr-survey-radio-button-group-item-corner-radius-drop-spot": "var(--sjs-corner-radius-x1)",
+    "--ctr-survey-radio-button-group-item-height-drop-spot": "var(--sjs-size-x6)",
+    "--ctr-image-gallery-item-background-height-drop-spot": "var(--sjs-size-x6)",
+    "--ctr-image-gallery-item-background-corner-radius-drop-spot": "var(--sjs-corner-radius-x1)",
+    "--ctr-image-gallery-item-background-height-drop-spot-2": "var(--sjs-size-x6)",
+    "--ctr-image-gallery-item-background-corner-radius-drop-spot-2": "var(--sjs-corner-radius-x1)",
+    "--ctr-survey-checkboxes-item-height-drop-spot": "var(--sjs-size-x6)",
+    "--ctr-survey-checkboxes-item-corner-radius-drop-spot": "var(--sjs-corner-radius-x1)",
+    "--ctr-survey-checkboxes-item-background-color-drop-spot": "var(--sjs-layer-2-background-500)",
+    "--ctr-survey-ranking-item-background-color-drop-spot": "var(--sjs-layer-2-background-500)",
+    "--ctr-survey-ranking-item-height-drop-spot": "var(--sjs-size-x6)",
+    "--ctr-survey-ranking-item-corner-radius-drop-spot": "var(--sjs-corner-radius-x1)",
+    "--ctr-checkbox-description-text-margin-top": "var(--sjs-spacing-x1)"
   }
 };
 export default Theme;
