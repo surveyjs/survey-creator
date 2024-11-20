@@ -10,7 +10,7 @@ export class TabControlModel extends Base {
   private updateExpandCollapseAction() {
     this.expandCollapseAction.iconName = this.sidePanel.visible ? "icon-collapse-panel" : "icon-expand-panel";
     this.expandCollapseAction.css = this.sidePanel.visible ? "svd-grid-hide" : "svd-grid-expand";
-    this.expandCollapseAction.locTitleName = this.sidePanel.visible ? "ed.hidePanel" : "ed.showPanel";
+    this.expandCollapseAction.locTooltipName = this.sidePanel.visible ? "ed.hidePanel" : "ed.showPanel";
   }
 
   private createToggleAction() {

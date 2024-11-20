@@ -36,7 +36,7 @@
 .svc-logo-image-placeholder {
   @include ctrLargeFont;
   color: $foreground-light;
-  opacity: 0.25;
+  opacity: var(--ctr-survey-header-logo-placeholder-icon-opacity, 0.25);
   white-space: nowrap;
   word-break: keep-all;
   padding: 0;
@@ -46,7 +46,7 @@
   justify-content: center;
   align-items: center;
   margin-right: calcSize(-2);
-  border-radius: calcSize(4);
+  border-radius: var(--ctr-survey-header-logo-placeholder-corner-radius, calcSize(4));
   transition: background-color $creator-transition-duration, opacity $creator-transition-duration;
 
   &:hover {
@@ -59,8 +59,8 @@
   }
 
   svg {
-    width: calcSize(6);
-    height: calcSize(6);
+    width: var(--ctr-survey-header-logo-placeholder-icon-width, calcSize(6));
+    height: var(--ctr-survey-header-logo-placeholder-icon-height, calcSize(6));
   }
 }
 
