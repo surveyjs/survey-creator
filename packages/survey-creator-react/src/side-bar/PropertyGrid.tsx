@@ -3,7 +3,7 @@ import { PropertyGridViewModel, SearchManager } from "survey-creator-core";
 import { Base, SurveyModel, settings } from "survey-core";
 import { Survey, SurveyElementBase, ReactQuestionFactory, SurveyQuestionButtonGroup, ReactElementFactory, SvgIcon, SurveyActionBar } from "survey-react-ui";
 import { SearchComponent } from "../components/Search";
-import { ScrollComponent } from "src/components/Scroll";
+import { ScrollComponent } from "../components/Scroll";
 
 interface IPropertyGridComponentProps {
   model: PropertyGridViewModel;
