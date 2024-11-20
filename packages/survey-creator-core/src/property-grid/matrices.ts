@@ -1,7 +1,7 @@
 import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, renamedIcons, Serializer, SurveyElement } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
-import { ISurveyCreatorOptions } from "../creator-settings";
+import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { getAcceptedTypesByContentMode, getNextItemText, getNextValue, getQuestionFromObj } from "../utils/utils";
 import { FastEntryEditor, FastEntryEditorBase } from "./fast-entry";
 import {
@@ -868,7 +868,12 @@ export class PropertyGridEditorMatrixValidators extends PropertyGridEditorMatrix
 
 export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMultipleTypes {
   private getAvailableTriggers(): Array<JsonMetadataClass> {
-    return Serializer.getChildrenClasses("surveytrigger", true).filter(classObj => classObj.name !== "visibletrigger");
+    return Serializer.getChildrenClasses("surveytrigger", true).filter(classObj => this.isTriggerVisible(classObj.name));
+  }
+  private isTriggerVisible(name: string): boolean {
+    const postfix = "trigger";
+    const pureName = name.substring(0, name.length - postfix.length);
+    return name !== "visibletrigger" && settings.logic.invisibleTriggers.indexOf(pureName) < 0;
   }
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "triggers";
