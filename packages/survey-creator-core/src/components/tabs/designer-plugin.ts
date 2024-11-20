@@ -202,7 +202,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         this.updateTabControlActions();
       }
     });
-    this.toolboxTab = this.creator.sidebar.addPage("toolbox", "svc-toolbox", creator);
+    this.toolboxTab = this.creator.sidebar.addPage("toolbox", "svc-adaptive-toolbox", creator);
 
     this.propertyGridPlaceholderPage = this.creator.sidebar.addPage("propertyGridPlaceholder", "svc-property-grid-placeholder", this.propertyGridViewModel);
     this.propertyGridPlaceholderPage.caption = "Survey Settings";

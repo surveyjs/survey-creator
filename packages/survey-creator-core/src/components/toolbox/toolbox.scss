@@ -74,11 +74,6 @@ svc-toolbox {
   }
 }
 
-.svc-side-bar {
-  .svc-toolbox .svc-scroll__scroller {
-    direction: initial;
-  }
-}
 .svc-toolbox--scrollable {
   --toolbox-width: var(--ctr-toolbox-min-width, 236.984375px);
 }
