@@ -54,6 +54,7 @@ import { SurveyQuestionEditorDefinition } from "../../src/question-editor/defini
 import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
 import { enStrings } from "../../src/localization/english";
 import { CreatorTester } from "../creator-tester";
+import { QuestionButtonGroupModel } from "survey-core";
 
 test("Check property grid survey options", () => {
   const oldValue = Serializer.findProperty(
@@ -3583,4 +3584,19 @@ test("tagbox as property & required", () => {
   expect(question.errors).toHaveLength(0);
 
   Serializer.removeProperty("survey", "prop1");
+});
+test("Use undefined boolean editor, Bug#6099", () => {
+  const survey = new SurveyModel({
+    elements: [{ type: "comment", name: "q1" }]
+  });
+  const q1 = <QuestionCommentModel>survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  const question = propertyGrid.survey.getQuestionByName("allowResize");
+  expect(q1.allowResize).toStrictEqual(undefined);
+  question.value = "false";
+  expect(q1.allowResize).toStrictEqual(false);
+  question.value = "true";
+  expect(q1.allowResize).toStrictEqual(true);
+  question.value = "auto";
+  expect(q1.allowResize).toStrictEqual(null);
 });
