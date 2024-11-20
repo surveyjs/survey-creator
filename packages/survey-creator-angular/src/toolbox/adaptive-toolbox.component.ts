@@ -20,9 +20,9 @@ export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> imple
   }
   ngAfterViewInit() {
     this.model.setRootElement(this.container.nativeElement as HTMLDivElement);
-    // this.responsivityManager =
-    //   new VerticalResponsivityManager(this.model.containerElement as HTMLDivElement,
-    //     this.model, this.model.itemSelector);
+    this.responsivityManager =
+      new VerticalResponsivityManager(this.model.containerElement as HTMLDivElement,
+        this.model, this.model.itemSelector);
   }
   protected getModel(): QuestionToolbox {
     return this.model;
