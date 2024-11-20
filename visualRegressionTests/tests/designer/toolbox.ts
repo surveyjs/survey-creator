@@ -514,11 +514,10 @@ test("Toolbox disabled items", async (t) => {
       checkbox.enabled = false;
     })();
 
-    await t.resizeWindow(1920, 1440);
+    await t.resizeWindow(1920, 1161);
     await takeElementScreenshot("toolbox-disabled-items.png", toolboxElement, t, comparer);
-    await t.resizeWindow(1240, 1440);
+    await t.resizeWindow(1240, 1161);
     await takeElementScreenshot("toolbox-compact-disabled-items.png", toolboxElement, t, comparer);
-
     await t
       .click(Selector("button.svc-element__question-type-selector"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
