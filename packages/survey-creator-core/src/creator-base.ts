@@ -3754,10 +3754,6 @@ export class SurveyCreatorModel extends Base
       title: this.getLocString("ed.addNewQuestion"),
     }, {
       items: [],
-      onShow: () => {
-        const listModel = newAction.popupModel.contentComponentData.model;
-        listModel.setItems(getActions());
-      },
       allowSelection: false,
       cssClass: "svc-creator-popup",
       verticalPosition: "bottom",
@@ -3765,7 +3761,12 @@ export class SurveyCreatorModel extends Base
       displayMode: this.isTouch ? "overlay" : "popup"
     });
     newAction.popupModel.getTargetCallback = undefined;
-
+    newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
+      if(opt.isVisible) {
+        const listModel = newAction.popupModel.contentComponentData.model;
+        listModel.setItems(getActions());
+      }
+    });
     return newAction;
   }
 
