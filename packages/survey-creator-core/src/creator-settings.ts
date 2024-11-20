@@ -64,7 +64,8 @@ export var settings = {
       tagbox: "allof"
     },
     includeComplexQuestions: false,
-    visibleActions: [],
+    visibleActions: new Array<string>(),
+    invisibleTriggers: new Array<string>(),
     logicItemTitleMaxChars: 50,
     openBracket: "{",
     closeBracket: "}",

@@ -1,9 +1,10 @@
 import { CalculatedValue, ExpressionValidator, HtmlConditionItem, QuestionCheckboxBase, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionMatrixDynamicModel,
   QuestionMatrixModel, QuestionMultipleTextModel, QuestionRatingModel, QuestionTextModel, QuestionBooleanModel, Serializer, SurveyModel,
-  SurveyTriggerRunExpression, UrlConditionItem, settings as surveySettings } from "survey-core";
+  SurveyTriggerRunExpression, UrlConditionItem, settings as surveySettings,
+  ItemValue } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
-import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
+import { EmptySurveyCreatorOptions, settings as settingsCreator } from "../../src/creator-settings";
 import { SurveyTriggerComplete } from "survey-core";
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/bindings";
@@ -192,6 +193,23 @@ test("Triggers property editor after remove trigger class", () => {
   expect(triggerTypeQuestion.choices).toHaveLength(4);
 
   Serializer.addClass(runexpressiontriggerClass.name, runexpressiontriggerClass.properties, runexpressiontriggerClass.creator, runexpressiontriggerClass.parentName);
+});
+
+test("Hide triggers based on settings.logic.invisibleTriggers, #6031", () => {
+  settingsCreator.logic.invisibleTriggers = ["skip", "complete"];
+
+  const survey = new SurveyModel();
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const triggersQuestion = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("triggers"));
+  triggersQuestion.addRow();
+  expect(triggersQuestion.visibleRows).toHaveLength(1);
+  const triggerTypeQuestion = triggersQuestion.visibleRows[0].cells[0].question;
+  expect(triggerTypeQuestion.getType()).toEqual("dropdown");
+  expect(ItemValue.getItemByValue(triggerTypeQuestion.choices, "runexpressiontrigger")).toBeTruthy();
+  expect(ItemValue.getItemByValue(triggerTypeQuestion.choices, "completetrigger")).toBeFalsy();
+  expect(ItemValue.getItemByValue(triggerTypeQuestion.choices, "skiptrigger")).toBeFalsy();
+
+  settingsCreator.logic.invisibleTriggers = [];
 });
 
 test("calculatedValues property editor", () => {
