@@ -9,29 +9,21 @@
         <svc-search [model]="model.searchManager"></svc-search>
         <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
       </div>
-      <div class="svc-scroll__wrapper">
-        <div class="svc-scroll__scroller sv-drag-target-skipped" (scroll)="model.onScroll(model, $event)">
-          <div *ngIf="model.showPlaceholder" class="svc-toolbox__placeholder">{{model.toolboxNoResultsFound}}</div>
-          <div class="svc-scroll__container">
-            <ng-container *ngIf="!model.showInSingleCategory">
-              <svc-toolbox-category *ngFor="let category of model.categories" [category]="category"
-                [toolbox]="model"></svc-toolbox-category>
-            </ng-container>
-            <ng-container *ngIf="model.showInSingleCategory">
-              <div class="svc-toolbox__category">
-                <ng-container *ngFor="let item of model.renderedActions">
-                  <svc-toolbox-tool [creator]="creator" [item]="item" [parentModel]="model"
-                    [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
-                </ng-container>
-              </div>
+      <div *ngIf="model.showPlaceholder" class="svc-toolbox__placeholder">{{model.toolboxNoResultsFound}}</div>
+      <svc-scroll>
+        <ng-container *ngIf="!model.showInSingleCategory">
+          <svc-toolbox-category *ngFor="let category of model.categories" [category]="category"
+            [toolbox]="model"></svc-toolbox-category>
+        </ng-container>
+        <ng-container *ngIf="model.showInSingleCategory">
+          <div class="svc-toolbox__category">
+            <ng-container *ngFor="let item of model.renderedActions">
+              <svc-toolbox-tool [creator]="creator" [item]="item" [parentModel]="model"
+                [isCompact]="model.isCompactRendered"></svc-toolbox-tool>
             </ng-container>
           </div>
-        </div>
-        <div class="svc-scroll__scrollbar" (scroll)="model.onScrollbarScroll($event)">
-          <div class="svc-scroll__scrollbar-sizer">
-          </div>
-        </div>
-      </div>
+        </ng-container>
+      </svc-scroll>
     </div>
   </div>
 </ng-template>
