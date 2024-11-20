@@ -8,11 +8,14 @@ ko.components.register("svc-adaptive-toolbox", {
     createViewModel: (params: any, componentInfo: any) => {
       const model: ToolboxViewModel = new ToolboxViewModel(params.model);
       const container = componentInfo.element;
-      model.toolbox.setRootElement(container);
-      const manager: VerticalResponsivityManager = new VerticalResponsivityManager(model.toolbox.containerElement as HTMLDivElement, params.model.toolbox, params.model.toolbox.itemSelector);
+      let manager: VerticalResponsivityManager;
+      setTimeout(() => {
+        model.toolbox.setRootElement(container);
+        manager = new VerticalResponsivityManager(model.toolbox.containerElement as HTMLDivElement, params.model.toolbox, params.model.toolbox.itemSelector);
+      }, 1);
+
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        manager.dispose();
-        model.toolbox.unsubscribeRootElement();
+        if (manager) manager.dispose();
         model.toolbox.setRootElement(undefined);
         model.dispose();
       });

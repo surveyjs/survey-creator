@@ -46,6 +46,7 @@ export * from "../page-navigator/page-navigator";
 export * from "../page-navigator/page-navigator-item";
 export * from "../side-bar/object-selector";
 export * from "../components/search";
+export * from "../components/scroll";
 export * from "../side-bar/property-grid";
 export * from "../side-bar/side-bar";
 export * from "../side-bar/side-bar-default-header";
