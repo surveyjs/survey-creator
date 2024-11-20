@@ -104,6 +104,12 @@ export class TabDesignerViewModel extends Base {
       iconName: "icon-expandall-24x24",
       iconSize: "auto",
       action: action
+    }, {
+      id: "expandAllQuestions",
+      locTooltipName: "ed.lockQuestionsTooltip",
+      iconName: "icon-lockquestions-24x24",
+      iconSize: "auto",
+      action: action
     }]);
   }
 
