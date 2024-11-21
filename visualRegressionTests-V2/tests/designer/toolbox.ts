@@ -149,7 +149,6 @@ test("toolbox inside sidebar", async (t) => {
     const toolboxButtonSelector = Selector(".sv-action-bar-item[title=\"Toolbox\"]");
 
     await changeToolboxLocation("sidebar");
-    await changeToolboxSearchEnabled(false);
     await t
       .resizeWindow(1240, 870)
       .click(toolboxButtonSelector)
@@ -504,7 +503,7 @@ test("Toolbox RTL with search compact", async (t) => {
 
 test("Toolbox disabled items", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    const toolboxElement = Selector(".svc-toolbox .svc-scroll__container");
+    const toolboxElement = Selector(".svc-toolbox .svc-scroll__wrapper");
 
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
@@ -514,9 +513,9 @@ test("Toolbox disabled items", async (t) => {
       checkbox.enabled = false;
     })();
 
-    await t.resizeWindow(1920, 1440);
+    await t.resizeWindow(1920, 1161);
     await takeElementScreenshot("toolbox-disabled-items.png", toolboxElement, t, comparer);
-    await t.resizeWindow(1240, 1440);
+    await t.resizeWindow(1240, 1161);
     await takeElementScreenshot("toolbox-compact-disabled-items.png", toolboxElement, t, comparer);
 
     await t

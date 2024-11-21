@@ -348,8 +348,6 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, 8px) + var(--ctr-m
   }
   .svc-toolbox .svc-scroll__scroller {
     direction: initial;
-    padding-inline-start: calcSize(0.5);
-    padding-inline-end: calcSize(0.5);
   }
   .svc-toolbox .svc-scroll__scrollbar {
     inset-inline-end: 0;
@@ -360,5 +358,6 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, 8px) + var(--ctr-m
   }
   .svc-toolbox__panel {
     width: unset;
+    border: none;
   }
 }

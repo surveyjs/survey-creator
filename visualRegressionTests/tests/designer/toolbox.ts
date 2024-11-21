@@ -149,7 +149,6 @@ test("toolbox inside sidebar", async (t) => {
     const toolboxButtonSelector = Selector(".sv-action-bar-item[title=\"Toolbox\"]");
 
     await changeToolboxLocation("sidebar");
-    await changeToolboxSearchEnabled(false);
     await t
       .resizeWindow(1240, 870)
       .click(toolboxButtonSelector)
@@ -504,7 +503,7 @@ test("Toolbox RTL with search compact", async (t) => {
 
 test("Toolbox disabled items", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    const toolboxElement = Selector(".svc-toolbox .svc-scroll__container");
+    const toolboxElement = Selector(".svc-toolbox .svc-scroll__wrapper");
 
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
