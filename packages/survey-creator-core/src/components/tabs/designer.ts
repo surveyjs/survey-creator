@@ -85,7 +85,7 @@ export class TabDesignerViewModel extends Base {
       item: "svc-page-navigator__button",
       itemWithTitle: "",
       itemAsIcon: "",
-      itemActive: "",
+      itemActive: "svc-page-navigator__button--active",
       itemPressed: "",
       itemIcon: "svc-page-navigator__button-icon",
       itemTitleWithIcon: "",
@@ -105,7 +105,7 @@ export class TabDesignerViewModel extends Base {
       iconSize: "auto",
       action: action
     }, {
-      id: "expandAllQuestions",
+      id: "lockQuestions",
       locTooltipName: "ed.lockQuestionsTooltip",
       iconName: "icon-lockquestions-24x24",
       iconSize: "auto",

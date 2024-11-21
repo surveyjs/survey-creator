@@ -41,8 +41,7 @@ svc-page-navigator,
   cursor: pointer;
   border: none;
   background-color: transparent;
-  &:hover,
-  &:focus {
+  &:hover {
     outline: none;
 
     .svc-page-navigator__button-icon {
@@ -55,11 +54,20 @@ svc-page-navigator,
   }
 }
 
-.svc-page-navigator__button--pressed {
+.svc-page-navigator__button--pressed, .svc-page-navigator__button:active {
   .svc-page-navigator__button-icon {
     background: var(--ctr-page-navigator-button-background-color-pressed, $primary-light);
     opacity: var(--ctr-page-navigator-button-opacity-pressed, 0.5);
 
+    use {
+      fill: var(--ctr-page-navigator-button-icon-color-hovered, $primary);
+    }
+  }
+}
+
+.svc-page-navigator__button--active {
+  .svc-page-navigator__button-icon {
+    background: var(--ctr-page-navigator-button-background-color-hovered, $primary-light);
     use {
       fill: var(--ctr-page-navigator-button-icon-color-hovered, $primary);
     }
