@@ -3,7 +3,7 @@
     <SvComponent
       :is="'svc-toolbox'"
       v-if="model.isToolboxVisible"
-      :creator="model.creator"
+      :model="model.creator"
     />
   </div>
   <div

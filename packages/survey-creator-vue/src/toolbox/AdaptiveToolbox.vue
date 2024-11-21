@@ -5,7 +5,7 @@
         <template v-if="toolbox.isCompactRendered">
           <SvComponent
             :is="'svc-toolbox-tool'"
-            :creator="creator"
+            :creator="model"
             key="searchitem"
             :item="toolbox.searchItem"
             :parentModel="toolbox"
@@ -38,7 +38,7 @@
                 <template v-for="(item, index) in renderedActions" :key="index">
                   <SvComponent
                     :is="'svc-toolbox-tool'"
-                    :creator="creator"
+                    :creator="model"
                     :item="item"
                     :parentModel="toolbox"
                     :isCompact="toolbox.isCompactRendered"
@@ -57,9 +57,9 @@ import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import Scroll from "@/components/Scroll.vue";
-const props = defineProps<{ creator: SurveyCreatorModel }>();
+const props = defineProps<{ model: SurveyCreatorModel }>();
 const toolbox = computed(() => {
-  return props.creator.toolbox;
+  return props.model.toolbox;
 });
 
 const root = ref<HTMLDivElement>();
