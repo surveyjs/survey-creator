@@ -35,7 +35,7 @@ ko.components.register("svc-toolbox", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const model: ToolboxViewModel = new ToolboxViewModel(params.model);
-      const container = componentInfo.element;
+      const container = componentInfo.element.nextElementSibling;
       let manager: VerticalResponsivityManager;
       setTimeout(() => {
         model.toolbox.setRootElement(container);
