@@ -69,6 +69,62 @@ test("Creator theme: sync css variables", (): any => {
   expect(surfaceBackgroundColor.value).toEqual(newValue);
 });
 
+test("Creator theme: reset color variables after change theme", (): any => {
+  CreatorThemes["dark"] = <any>{
+    "themeName": "dark",
+    "isLight": false,
+    "cssVariables": {
+      "--sjs-special-haze": "#000000BF",
+      "--sjs-special-background": "#0C0C0CFF",
+      "--sjs-special-glow": "#000000BF",
+      "--sjs-primary-background-500": "#3EDFD5FF",
+      "--sjs-primary-background-10": "#3EDFD51A",
+      "--sjs-primary-background-400": "#29DCD1FF",
+      "--sjs-secondary-background-500": "#EDA925FF",
+      "--sjs-secondary-background-25": "#EDA92540",
+      "--sjs-secondary-background-10": "#EDA9251A",
+    }
+  };
+
+  try {
+    const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
+    const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
+    const themeModel = designerPlugin["themeModel"];
+    const themeName = designerPlugin["themePropertyGrid"].survey.findQuestionByName("themeName");
+    const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-special-background");
+    const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-primary-background-500");
+    const secondaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-secondary-background-500");
+
+    expect(themeName.value).toEqual("sc2020");
+    expect(surfaceBackgroundColor.value).toEqual("#F3F3F3FF");
+    expect(primaryBackgroundColor.value).toEqual("#19B394FF");
+    expect(secondaryBackgroundColor.value).toEqual("#FF9814FF");
+
+    surfaceBackgroundColor.value = "rgba(10, 10, 10, 1)";
+    primaryBackgroundColor.value = "rgba(20, 20, 20, 1)";
+    secondaryBackgroundColor.value = "rgba(30, 30, 30, 0.1)";
+    expect(themeModel.themeCssVariablesChanges).toStrictEqual({
+      "--sjs-primary-background-10": "rgba(20, 20, 20, 0.1)",
+      "--sjs-primary-background-400": "rgba(5, 5, 5, 1)",
+      "--sjs-primary-background-500": "#141414",
+      "--sjs-secondary-background-10": "rgba(30, 30, 30, 0.1)",
+      "--sjs-secondary-background-25": "rgba(30, 30, 30, 0.25)",
+      "--sjs-secondary-background-500": "#1e1e1e",
+      "--sjs-special-background": "#0a0a0a",
+      "--sjs-special-glow": "rgba(10, 10, 10, 1)",
+      "--sjs-special-haze": "rgba(10, 10, 10, 1)",
+    });
+
+    themeName.value = "dark";
+    expect(surfaceBackgroundColor.value).toEqual("#0C0C0CFF");
+    expect(primaryBackgroundColor.value).toEqual("#3EDFD5FF");
+    expect(secondaryBackgroundColor.value).toEqual("#EDA925FF");
+    expect(Object.keys(themeModel.themeCssVariablesChanges).length).toEqual(0);
+  } finally {
+    delete CreatorThemes["dark"];
+  }
+});
+
 test("creator.applyTheme", () => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
   const themeJson: ICreatorTheme = {
