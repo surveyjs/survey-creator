@@ -108,10 +108,18 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.onThemePropertyChanged.fire(this, { name, value });
     }
   }
+  private resetColorThemeCssVariablesChanges(): void {
+    Object.keys(this.themeCssVariablesChanges).forEach(key => {
+      if(key.indexOf("--sjs-") === 0) {
+        delete this.themeCssVariablesChanges[key];
+      }
+    });
+  }
   private onThemePropertyValueChangedCallback(name: string, oldValue: any, newValue: any, sender: Base, arrayChanges: ArrayChanges) {
     if (this.blockThemeChangedNotifications > 0) return;
 
     if (name === "themeName") {
+      this.resetColorThemeCssVariablesChanges();
       this.loadTheme({ themeName: newValue });
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
     } else if (name === "--sjs-primary-background-500") {
