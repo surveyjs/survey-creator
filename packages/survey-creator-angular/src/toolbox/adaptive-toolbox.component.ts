@@ -9,27 +9,30 @@ import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
   styles: [":host { display: none; }"]
 })
 export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> implements AfterViewInit {
-  @Input() creator!: SurveyCreatorModel;
+  @Input() model!: SurveyCreatorModel;
   @ViewChild("container") container!: ElementRef<HTMLElement>;
   private responsivityManager: VerticalResponsivityManager | undefined;
-  public get model() {
-    return this.creator.toolbox;
+  public get toolbox() {
+    return this.model.toolbox;
+  }
+  public get creator() {
+    return this.model;
   }
   public get searchItem() {
-    return this.model.searchItem as Action;
+    return this.toolbox.searchItem as Action;
   }
   ngAfterViewInit() {
-    this.model.setRootElement(this.container.nativeElement as HTMLDivElement);
+    this.toolbox.setRootElement(this.container.nativeElement as HTMLDivElement);
     this.responsivityManager =
-      new VerticalResponsivityManager(this.model.containerElement as HTMLDivElement,
-        this.model, this.model.itemSelector);
+      new VerticalResponsivityManager(this.toolbox.containerElement as HTMLDivElement,
+        this.toolbox, this.toolbox.itemSelector);
   }
   protected getModel(): QuestionToolbox {
-    return this.model;
+    return this.toolbox;
   }
   override ngOnDestroy(): void {
     this.responsivityManager?.dispose();
-    this.model.setRootElement(undefined as any);
+    this.toolbox.setRootElement(undefined as any);
     super.ngOnDestroy();
   }
 }
