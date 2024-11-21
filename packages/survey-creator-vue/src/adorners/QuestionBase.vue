@@ -100,12 +100,7 @@
       ></SvComponent>
       <div
         class="svc-question__content-actions"
-        v-on:focusin="
-          (e) => {
-            model.select(model, e);
-            e.stopPropagation();
-          }
-        "
+        v-on:focusin="onFocusIn"
       >
         <SvComponent
           :is="'sv-action-bar'"
@@ -155,4 +150,8 @@ onMounted(() => {
     model.value.rootElement = root.value;
   }
 });
+const onFocusIn = (e: any) => {
+  model.value.select(model.value, e);
+  e.stopPropagation();
+}
 </script>
