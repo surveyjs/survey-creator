@@ -18,8 +18,8 @@
     <div>
       <SvComponent
         :is="'svc-page-navigator-item'"
-        v-for="(item, index) in model.visibleItems"
-        :key="index"
+        v-for="item in model.visibleItems"
+        :key="item.id"
         :model="item"
       ></SvComponent>
     </div>
@@ -34,7 +34,7 @@ import {
   PageNavigatorViewModel,
   type PagesController,
 } from "survey-creator-core";
-import { onMounted, onUnmounted, ref } from "vue";
+import { onBeforeUnmount, onMounted, onUnmounted, ref } from "vue";
 
 const props = defineProps<{
   pagesController: PagesController;
@@ -64,13 +64,16 @@ onMounted(() => {
   }
 });
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
   const el = root.value;
   const modelValue = model.value;
   if (!!el && !!el.parentElement?.parentElement?.parentElement) {
     el.parentElement.parentElement.parentElement.onscroll = undefined as any;
   }
   modelValue.stopItemsContainerHeightObserver();
+});
+onUnmounted(() => {
+  const modelValue = model.value;
   modelValue.dispose();
 });
 </script>

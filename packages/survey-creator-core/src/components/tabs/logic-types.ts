@@ -203,7 +203,7 @@ export class SurveyLogicType {
     if (!this.logicType.supportContext) return false;
     return this.logicType.supportContext(context);
   }
-  private get isTrigger(): boolean {
+  public get isTrigger(): boolean {
     return !!this.baseClass && this.baseClass.indexOf("trigger") > -1;
   }
 }

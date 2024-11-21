@@ -23,7 +23,8 @@ import {
   Helpers,
   PanelModel,
   classesToSelector,
-  QuestionFactory
+  QuestionFactory,
+  PopupModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -669,13 +670,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       allowSelection: true,
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
-      onShow: () => {
+    });
+    newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
+      if(opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         options.updateListModel(listModel);
-        setTimeout(() => {
-          newAction.popupModel.recalculatePosition(true);
-        }, 1);
-      },
+      }
     });
     const listModel = newAction.popupModel.contentComponentData.model;
     // options.updateListModel(listModel);

@@ -27,5 +27,6 @@ onMounted(() => {
 });
 onUnmounted(() => {
   responsivityManager.dispose();
+  responsivityManager = undefined as any;
 });
 </script>
