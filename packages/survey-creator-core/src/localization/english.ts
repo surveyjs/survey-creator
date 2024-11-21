@@ -1775,7 +1775,7 @@ export var enStrings = {
     "--sjs-primary-background-500": "Primary",
     "--sjs-secondary-background-500": "Secondary",
     "surfaceScale": "Surface",
-    "userInterfaceBaseUnit": "User interface",
+    "userInterfaceBaseUnit": "UI elements",
     "fontScale": "Font",
 
     names: {
