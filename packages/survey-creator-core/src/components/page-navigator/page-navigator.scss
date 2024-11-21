@@ -41,7 +41,8 @@ svc-page-navigator,
   cursor: pointer;
   border: none;
   background-color: transparent;
-  &:hover {
+  &:hover,
+  &:focus {
     outline: none;
 
     .svc-page-navigator__button-icon {
