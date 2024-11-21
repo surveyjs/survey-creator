@@ -1406,10 +1406,10 @@ export class SurveyCreatorModel extends Base
     const plugin = this.getPlugin<UndoRedoPlugin>("undoredo");
     return plugin && plugin.model;
   }
-  startUndoRedoTransaction(name: string = "") {
+  startUndoRedoTransaction(name?: string): void {
     this.undoRedoController && this.undoRedoController.startTransaction(name);
   }
-  stopUndoRedoTransaction() {
+  stopUndoRedoTransaction(): void {
     this.undoRedoController && this.undoRedoController.stopTransaction();
   }
   /**
@@ -3754,13 +3754,6 @@ export class SurveyCreatorModel extends Base
       title: this.getLocString("ed.addNewQuestion"),
     }, {
       items: [],
-      onShow: () => {
-        const listModel = newAction.popupModel.contentComponentData.model;
-        listModel.setItems(getActions());
-        setTimeout(() => {
-          newAction.popupModel.recalculatePosition(true);
-        }, 1);
-      },
       allowSelection: false,
       cssClass: "svc-creator-popup",
       verticalPosition: "bottom",
@@ -3768,7 +3761,12 @@ export class SurveyCreatorModel extends Base
       displayMode: this.isTouch ? "overlay" : "popup"
     });
     newAction.popupModel.getTargetCallback = undefined;
-
+    newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
+      if(opt.isVisible) {
+        const listModel = newAction.popupModel.contentComponentData.model;
+        listModel.setItems(getActions());
+      }
+    });
     return newAction;
   }
 

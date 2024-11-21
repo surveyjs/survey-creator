@@ -300,9 +300,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
 
   protected detachElement(surveyElement: T): void {
     if (surveyElement) {
-      if (surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) === this && !surveyElement.isDisposed) {
-        surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, null);
-      }
+      surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, null);
       surveyElement.unRegisterFunctionOnPropertyValueChanged("isSelectedInDesigner", "questionSelected");
       this.cleanActionsContainer();
     }
@@ -322,7 +320,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }
   protected setSurveyElement(surveyElement: T): void {
-    this.detachElement(this.surveyElement);
+    this.detachOnlyMyElement();
     this.surveyElement = surveyElement;
     this.attachElement(this.surveyElement);
   }
@@ -342,9 +340,14 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.creator.expandCollapseManager.add(this);
     }
   }
+  private detachOnlyMyElement() {
+    if (this.surveyElement && this.surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) === this && !this.surveyElement.isDisposed) {
+      this.detachElement(this.surveyElement);
+    }
+  }
   public detachFromUI() {
     this.rootElement = undefined;
-    this.detachElement(this.surveyElement);
+    this.detachOnlyMyElement();
     this.surveyElement = undefined;
     this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
     this.creator.expandCollapseManager.remove(this);

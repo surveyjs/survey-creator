@@ -42,6 +42,7 @@
 
 .spg-boolean-switch__button--checked {
   background: var(--ctr-toggle-button-background-color-checked, #19b394);
+  box-shadow: none;
 
   .spg-boolean-switch__thumb--left {
     background: none;
