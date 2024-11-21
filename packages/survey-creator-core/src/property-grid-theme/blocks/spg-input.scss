@@ -24,10 +24,10 @@
   color: var(--ctr-editor-content-text-color-placeholder, $foreground-light);
 }
 
-.spg-input:focus,
-.spg-input.spg-dropdown:focus,
-.spg-input.spg-dropdown:focus-within,
-.spg-input-container:focus-within {
+.spg-input:focus:not(:disabled):not(:read-only),
+.spg-input.spg-dropdown:focus:not(:disabled):not(:read-only),
+.spg-input.spg-dropdown:focus-within:not(:disabled):not(:read-only),
+.spg-input-container:focus-within:not(:disabled):not(:read-only) {
   box-shadow: inset 0 0 0 var(--ctr-editor-border-width-focused, 2px) var(--ctr-editor-border-color-focused, $primary);
 }
 
@@ -35,7 +35,7 @@
 .spg-input:disabled::placeholder,
 input.spg-input:read-only,
 input.spg-input:read-only::placeholder {
-  color: color-mix(in srgb, var(--ctr-editor-content-text-color-disabled, $foreground-dim), transparent 75%);
+  color: color-mix(in srgb, var(--ctr-editor-content-text-color-disabled, $foreground-dim), transparent calc(100% - 100%*var(--ctr-editor-content-text-opacity-disabled, 0.25)));
   background-color: var(--ctr-editor-background-color-disabled, $background-dim);
 }
 
