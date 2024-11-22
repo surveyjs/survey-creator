@@ -62,8 +62,8 @@
   cursor: pointer;
   display: inline-block;
   outline: none;
-  height: calcSize(2);
-  width: calcSize(2);
+  width: var(--ctr-survey-action-button-icon-width-small, calcSize(2));
+  height: var(--ctr-survey-action-button-icon-height-small, calcSize(2));
   box-sizing: content-box;
   transition:
     background $creator-transition-duration,
@@ -71,8 +71,8 @@
 
   .sv-svg-icon {
     display: block;
-    width: calcSize(2);
-    height: calcSize(2);
+    width: var(--ctr-survey-action-button-icon-width-small, calcSize(2));
+    height: var(--ctr-survey-action-button-icon-height-small, calcSize(2));
   }
 }
 
@@ -111,8 +111,6 @@
 
   .svc-item-value-controls__drag-icon {
     opacity: 0;
-    width: var(--ctr-survey-item-actionbar-drag-indicator-width, calcSize(3));
-    height: var(--ctr-survey-item-actionbar-drag-indicator-height, calcSize(3));
   }
 
   use {
