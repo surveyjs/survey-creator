@@ -24,7 +24,9 @@ function copyFiles(srcPath, destPath) {
       copyFolder(item.name, srcPath, destPath);
     } else {
       console.log("source file " + srcPath + item.name);
-      fs.copyFileSync(srcPath + item.name, destPath + item.name);
+      if (item.name !== "helper.ts") {
+        fs.copyFileSync(srcPath + item.name, destPath + item.name);
+      }
     }
   });
 }
