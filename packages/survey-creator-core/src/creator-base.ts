@@ -6,7 +6,9 @@ import {
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
   CssClassBuilder,
-  SvgRegistry
+  SvgRegistry,
+  addIconsToThemeSet,
+  SvgThemeSets
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -60,11 +62,17 @@ import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/action-container-view-model";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
-import { svgBundle } from "./svgbundle";
+
+import { iconsV1, iconsV2 } from "./svgbundle";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
+
+addIconsToThemeSet("v1", iconsV1);
+addIconsToThemeSet("v2", iconsV2);
+
+SvgRegistry.registerIcons(settings.useLegacyIcons ? iconsV1 : iconsV2);
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -1270,7 +1278,6 @@ export class SurveyCreatorModel extends Base
     this.tabbedMenu.locOwner = this;
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.sidebar = new SidebarModel(this);
-    this.registerIcons();
     this.setOptions(this.options);
     this.patchMetadata();
     this.initSurveyWithJSON(undefined, false);
@@ -1587,20 +1594,6 @@ export class SurveyCreatorModel extends Base
   }
   public getOptions(): ICreatorOptions {
     return this.options || {};
-  }
-  protected registerIcons() {
-    let path;
-    if (settings.useLegacyIcons) {
-      SurveySettings.useLegacyIcons = true;
-      path = svgBundle.V1;
-    } else {
-      SurveySettings.useLegacyIcons = false;
-      path = svgBundle.V2;
-    }
-
-    if (!path) return;
-
-    SvgRegistry.registerIconsFromFolder(path);
   }
   protected setOptions(options: ICreatorOptions): void {
     if (!options) options = {};
@@ -4001,6 +3994,7 @@ export class SurveyCreatorModel extends Base
     if (designerPlugin) {
       designerPlugin.setTheme();
     }
+
   }
   public syncTheme(theme: ICreatorTheme): void {
     if (!theme) return;
@@ -4009,6 +4003,8 @@ export class SurveyCreatorModel extends Base
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables);
     this.themeVariables = newCssVariable;
+    const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v1";
+    SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);
   }
 
   public allowDragPages = false;
