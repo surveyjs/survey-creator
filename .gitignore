@@ -56,3 +56,6 @@ packages/survey-creator-core/src/themes/default-contrast.ts
 packages/survey-creator-core/src/themes/default-dark.ts
 packages/survey-creator-core/src/themes/default-light.ts
 packages/survey-creator-core/src/themes/index.ts
+visualRegressionTests-V2/helper.ts
+visualRegressionTests-V2/tests/designer/surveys/large-survey.ts
+visualRegressionTests-V2/tests/designer/*.ts
