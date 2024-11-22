@@ -111,7 +111,7 @@ export var enStrings = {
     redoTooltip: "Redo the change",
     expandAllTooltip: "Expand All",
     collapseAllTooltip: "Collapse All",
-    lockQuestionsTooltip: "Lock Questions",
+    lockQuestionsTooltip: "Lock expand/collapse state for questions",
     showMoreChoices: "Show more",
     showLessChoices: "Show less",
     copy: "Copy",

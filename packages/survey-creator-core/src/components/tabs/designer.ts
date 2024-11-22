@@ -107,7 +107,7 @@ export class TabDesignerViewModel extends Base {
     }, {
       id: "lockQuestions",
       locTooltipName: "ed.lockQuestionsTooltip",
-      iconName: "icon-lockquestions-24x24",
+      iconName: "icon-questionlock-24x24",
       iconSize: "auto",
       action: action
     }]);
