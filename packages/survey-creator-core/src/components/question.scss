@@ -982,8 +982,8 @@ svc-question,
   width: 100%;
   opacity: 0;
   transition: opacity $creator-transition-duration;
-  width: calcSize(3);
-  height: calcSize(2);
+  width: var(--ctr-survey-question-panel-drag-area-drag-indicator-width, calcSize(3));
+  height: var(--ctr-survey-question-panel-drag-area-drag-indicator-height, calcSize(2));
 
   use {
     fill: var(--ctr-survey-question-panel-drag-area-drag-indicator-color, $foreground-light);

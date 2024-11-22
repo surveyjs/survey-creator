@@ -215,8 +215,8 @@ svc-page {
     z-index: 1;
 
     .svc-question__drag-element {
-      width: calcSize(3);
-      height: calcSize(2);
+      width: var(--ctr-survey-page-drag-indicator-width, calcSize(3));
+      height: var(--ctr-survey-page-drag-indicator-height, calcSize(2));
       opacity: var(--ctr-survey-page-drag-indicator-opacity, 0.5);
     }
   }
@@ -340,13 +340,17 @@ svc-page {
 .svc-element__question-type-selector {
   appearance: none;
   display: flex;
-  padding: calcSize(1);
+  padding: var(--ctr-button-contextual-button-padding-top, calcSize(1))
+    var(--ctr-button-contextual-button-padding-right, calcSize(1))
+    var(--ctr-button-contextual-button-padding-bottom, calcSize(1))
+    var(--ctr-button-contextual-button-padding-left, calcSize(1));
   border-radius: var(--ctr-button-contextual-button-corner-radius, 2px);
   box-sizing: border-box;
   border: none;
   background-color: transparent;
   cursor: pointer;
-  margin: calcSize(1);
+  margin: var(--ctr-button-contextual-button-margin-vertical, calcSize(1))
+    var(--ctr-button-contextual-button-margin-horizontal, calcSize(1));
   margin-inline-start: 0; // TODO
   outline: none;
   transition: background-color $creator-transition-duration;
@@ -361,12 +365,12 @@ svc-page {
 }
 
 .svc-element__question-type-selector-icon {
-  width: calcSize(3);
-  height: calcSize(3);
+  width: var(--ctr-button-contextual-button-icon-width, calcSize(3));
+  height: var(--ctr-button-contextual-button-icon-height, calcSize(3));
 
   .sv-svg-icon {
-    width: calcSize(3);
-    height: calcSize(3);
+    width: var(--ctr-button-contextual-button-icon-width, calcSize(3));
+    height: var(--ctr-button-contextual-button-icon-height, calcSize(3));
   }
 
   use {
