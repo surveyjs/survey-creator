@@ -520,7 +520,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private getIsOperatorEnabled(qName: string, qType: string, op: string, condQuestion: Question, isContainer: boolean): boolean {
     if(isContainer) return op === "empty" || op === "notempty";
     let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[op]);
-    return this.options.isConditionOperatorEnabled(qName, condQuestion, op, isOperatorEnabled);
+    return !!condQuestion ? this.options.isConditionOperatorEnabled(qName, condQuestion, op, isOperatorEnabled) : isOperatorEnabled;
   }
   private isContainerQuestion(questionName: string): boolean {
     if(!settings.logic.includeComplexQuestions || !questionName) return false;
