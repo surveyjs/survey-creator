@@ -23,8 +23,8 @@ function copyFiles(srcPath, destPath) {
     if(item.isDirectory()) {
       copyFolder(item.name, srcPath, destPath);
     } else {
-      console.log("source file " + srcPath + item.name);
       if (item.name !== "helper.ts") {
+        console.log("source file " + srcPath + item.name);
         fs.copyFileSync(srcPath + item.name, destPath + item.name);
       }
     }
