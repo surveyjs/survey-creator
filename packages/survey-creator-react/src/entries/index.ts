@@ -30,7 +30,6 @@ export * from "../Results";
 export * from "../toolbox/ToolboxItem";
 export * from "../toolbox/ToolboxItemGroup";
 export * from "../toolbox/ToolboxCategory";
-export * from "../toolbox/Toolbox";
 export * from "../toolbox/ToolboxList";
 export * from "../toolbox/AdaptiveToolbox";
 export * from "../TabbedMenu";

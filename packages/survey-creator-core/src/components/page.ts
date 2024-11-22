@@ -99,6 +99,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["elements"], "updatePlaceholder");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["dragTypeOverMe", "isDragMe"], "dragOver");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["visibleRows"], "updatePlaceholder");
       surveyElement["surveyChangedCallback"] = undefined;
     }
     super.detachElement(surveyElement);

@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="adorner"
+    v-if="adorner && !adorner.isDisposed"
     class="svc-question__adorner"
     :class="adorner.rootCss()"
     @dblclick="(e) => adorner.dblclick(e)"
@@ -14,12 +14,12 @@
       :class="adorner.cssCollapsedHiddenHeader"
     >
       <SvComponent
-          v-if="!!adorner.element.hasTitle"
-          :is="'survey-element-title'"
-          :element="adorner.element"
+        v-if="!!adorner.element.hasTitle"
+        :is="'survey-element-title'"
+        :element="adorner.element"
       />
       <div v-else :class="adorner.cssCollapsedHiddenTitle">
-        <span  class="svc-fake-title">{{ adorner.element.name }}</span>
+        <span class="svc-fake-title">{{ adorner.element.name }}</span>
       </div>
     </div>
     <div
@@ -65,64 +65,64 @@
         </div>
       </div>
       <template v-if="adorner.needToRenderContent">
-      <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
-      <div
-        v-if="adorner.isEmptyElement"
-        class="svc-panel__placeholder_frame-wrapper"
-      >
-        <div class="svc-panel__placeholder_frame">
-          <div class="svc-panel__placeholder">
-            {{ adorner.placeholderText }}
+        <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
+        <div
+          v-if="adorner.isEmptyElement"
+          class="svc-panel__placeholder_frame-wrapper"
+        >
+          <div class="svc-panel__placeholder_frame">
+            <div class="svc-panel__placeholder">
+              {{ adorner.placeholderText }}
+            </div>
+            <div
+              v-if="adorner.showAddQuestionButton"
+              class="svc-panel__add-new-question svc-action-button"
+              v-key2click
+              @click="addNewQuestion"
+            >
+              <SvComponent
+                :is="'sv-svg-icon'"
+                class="svc-panel__add-new-question-icon"
+                :iconName="'icon-add_24x24'"
+                :size="'auto'"
+              ></SvComponent>
+              <span class="svc-add-new-item-button__text">
+                {{ adorner.addNewQuestionText }}
+              </span>
+            </div>
           </div>
-          <div
-            v-if="adorner.showAddQuestionButton"
-            class="svc-panel__add-new-question svc-action-button"
-            v-key2click
-            @click="addNewQuestion"
-          >
+        </div>
+        <div
+          v-if="!adorner.isEmptyElement && adorner.showAddQuestionButton"
+          class="svc-panel__add-new-question-container"
+        >
+          <div class="svc-panel__question-type-selector-popup">
             <SvComponent
-              :is="'sv-svg-icon'"
-              class="svc-panel__add-new-question-icon"
-              :iconName="'icon-add_24x24'"
-              :size="'auto'"
+              :is="'sv-popup'"
+              :model="adorner.questionTypeSelectorModel.popupModel"
             ></SvComponent>
-            <span class="svc-add-new-item-button__text">
-              {{ adorner.addNewQuestionText }}
-            </span>
+          </div>
+          <div class="svc-panel__add-new-question-wrapper">
+            <SvComponent
+              :is="'svc-add-new-question-btn'"
+              :item="{ data: adorner }"
+              :buttonClass="'svc-action-button'"
+              :renderPopup="false"
+            ></SvComponent>
           </div>
         </div>
-      </div>
-      <div
-        v-if="!adorner.isEmptyElement && adorner.showAddQuestionButton"
-        class="svc-panel__add-new-question-container"
-      >
-        <div class="svc-panel__question-type-selector-popup">
-          <SvComponent
-            :is="'sv-popup'"
-            :model="adorner.questionTypeSelectorModel.popupModel"
-          ></SvComponent>
-        </div>
-        <div class="svc-panel__add-new-question-wrapper">
-          <SvComponent
-            :is="'svc-add-new-question-btn'"
-            :item="{ data: adorner }"
-            :buttonClass="'svc-action-button'"
-            :renderPopup="false"
-          ></SvComponent>
-        </div>
-      </div>
 
-      <div
-        v-if="adorner.element.isInteractiveDesignElement"
-        class="svc-question__content-actions"
-        @focusin="adorner.select(adorner, $event)"
-      >
-        <SvComponent
-          :is="'sv-action-bar'"
-          :model="adorner.actionContainer"
-          :handleClick="false"
-        ></SvComponent>
-      </div>
+        <div
+          v-if="adorner.element.isInteractiveDesignElement"
+          class="svc-question__content-actions"
+          @focusin="adorner.select(adorner, $event)"
+        >
+          <SvComponent
+            :is="'sv-action-bar'"
+            :model="adorner.actionContainer"
+            :handleClick="false"
+          ></SvComponent>
+        </div>
       </template>
     </div>
   </div>

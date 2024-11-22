@@ -69,7 +69,14 @@ import {
   ItemValueWrapperViewModel,
   type SurveyCreatorModel,
 } from "survey-creator-core";
-import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import {
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  onUnmounted,
+  ref,
+  watch,
+} from "vue";
 
 const root = ref<HTMLElement>();
 const props = defineProps<{
@@ -102,6 +109,9 @@ onMounted(() => {
     item.value.setRootElement(root.value);
   }
 });
+onUnmounted(() => {
+  item.value.setRootElement(undefined as any);
+});
 const adorner = useCreatorModel(
   () =>
     new ItemValueWrapperViewModel(creator.value, question.value, item.value),
@@ -113,6 +123,5 @@ const adorner = useCreatorModel(
 
 onBeforeUnmount(() => {
   stopWatch();
-  item.value.setRootElement(undefined as any);
 });
 </script>

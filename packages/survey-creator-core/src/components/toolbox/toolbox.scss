@@ -1,11 +1,5 @@
 @import "../../variables.scss";
 
-svc-toolbox {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-}
-
 .svc-toolbox {
   --dft-toolbox-item-padding-top: calc(1 * #{$base-unit});
   --dft-toolbox-group-padding-right: calc(2 * #{$base-unit});
@@ -59,64 +53,21 @@ svc-toolbox {
   width: var(--toolbox-width);
 }
 
-.svc-toolbox__scroll-wrapper {
-  position: relative;
-  flex-grow: 1;
-  flex-shrink: 1;
-  height: 0;
-  display: flex;
-  flex-direction: column;
-}
+.svc-toolbox {
 
-.svc-toolbox__scroller {
-  padding: var(--ctr-toolbox-padding-top, calcSize(1.5)) var(--ctr-toolbox-group-padding-right, calcSize(1.5))
-    var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left, calcSize(1.5));
-  box-sizing: border-box;
-  flex-grow: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
+  .svc-scroll__scroller {
+    padding: var(--ctr-toolbox-padding-top, calcSize(1.5)) var(--ctr-toolbox-group-padding-right, calcSize(1.5))
+      var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left, calcSize(1.5));
+    align-items: var(--ctr-toolbox-scroller-align-items, flex-end);
 
-  display: flex;
-  flex-direction: column;
-  align-items: var(--ctr-toolbox-scroller-align-items, flex-end);
-
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  &::-webkit-scrollbar {
-    display: none;
+  }
+  .svc-scroll__scrollbar {
+    inset-inline-end: var(--ctr-toolbox-scrollbar-right, initial);
+    inset-inline-start: var(--ctr-toolbox-scrollbar-left, 0);
+    padding: var(--ctr-toolbox-padding-top, calcSize(1)) 0 var(--ctr-toolbox-padding-bottom, calcSize(2)) 0;
   }
 }
 
-.svc-toolbox__scrollbar {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  inset-inline-end: var(--ctr-toolbox-scrollbar-right, initial);
-  inset-inline-start: var(--ctr-toolbox-scrollbar-left, 0);
-  overflow-y: scroll;
-  overflow-x: hidden;
-  width: fit-content;
-  margin-inline-start: -1px;
-  display: none;
-  z-index: 30;
-  padding: var(--ctr-toolbox-padding-top, calcSize(1)) 0 var(--ctr-toolbox-padding-bottom, calcSize(2)) 0;
-  @-moz-document url-prefix() {
-    scrollbar-width: thin;
-    scrollbar-color: $border transparent;
-  }
-}
-.svc-toolbox__scrollbar-sizer {
-  width: 1px;
-}
-
-.svc-toolbox:hover .svc-toolbox__scrollbar {
-  display: block;
-}
-.svc-side-bar {
-  .svc-toolbox__scroller {
-    direction: initial;
-  }
-}
 .svc-toolbox--scrollable {
   --toolbox-width: var(--ctr-toolbox-min-width, 236.984375px);
 }
@@ -126,7 +77,7 @@ svc-toolbox {
     overflow: visible;
     width: var(--toolbox-width-compact);
   }
-  .svc-toolbox__scroller {
+  .svc-scroll__scroller {
     width: 100vw;
     padding: var(--ctr-toolbox-padding-top, calcSize(1.5)) var(--ctr-toolbox-group-padding-right-compact, calcSize(1.5))
       var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left-compact, calcSize(1.5));
@@ -197,11 +148,6 @@ svc-toolbox {
     display: flex;
   }
 }
-
-.svc-toolbox__container {
-  width: 100%;
-}
-
 .svc-toolbox__search-container {
   position: sticky;
   top: 0;
@@ -333,7 +279,7 @@ svc-toolbox {
 
 .svc-toolbox__placeholder {
   @include ctrSmallFont;
-  padding-top: calcSize(12);
+  padding-top: calcSize(13.5);
   margin-inline-start: auto;
   margin-inline-end: auto;
   color: var(--ctr-property-grid-placeholder-text-description-color, $foreground-light);

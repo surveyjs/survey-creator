@@ -34,6 +34,7 @@ import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { wrapTextByCurlyBraces } from "../../src/utils/utils";
 import { settings } from "../../src/creator-settings";
 import { editorLocalization } from "../../src/editorLocalization";
+import { SurveyLogicType } from "../../src/components/tabs/logic-types";
 
 export * from "../../src/components/link-value";
 export * from "../../src/custom-questions/question-text-with-reset";
@@ -3533,3 +3534,29 @@ class LocationTrigger extends SurveyTrigger {
     this.setPropertyValue("city", val);
   }
 }
+test("Limit the number of trigger types, #6031", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ]
+  });
+  const hasType = (types: Array<SurveyLogicType>, name: string): boolean => {
+    for(let i = 0; i < types.length; i ++) {
+      if(types[i].name === name) return true;
+    }
+    return false;
+  };
+  let logic = new SurveyLogic(survey);
+  expect(hasType(logic.logicTypes, "trigger_skip")).toBeTruthy();
+  expect(hasType(logic.logicTypes, "trigger_complete")).toBeTruthy();
+
+  settings.logic.invisibleTriggers = ["skip", "complete"];
+
+  logic = new SurveyLogic(survey);
+  expect(hasType(logic.logicTypes, "trigger_skip")).toBeFalsy();
+  expect(hasType(logic.logicTypes, "trigger_complete")).toBeFalsy();
+
+  expect(logic.logicTypes.length > 4).toBeTruthy();
+});
