@@ -65,7 +65,9 @@
   height: calcSize(2);
   width: calcSize(2);
   box-sizing: content-box;
-  transition: background $creator-transition-duration, background-color $creator-transition-duration;
+  transition:
+    background $creator-transition-duration,
+    background-color $creator-transition-duration;
 
   .sv-svg-icon {
     display: block;
@@ -81,12 +83,12 @@
 .svc-item-value-controls__drag-icon {
   display: block;
   transition: opacity $creator-transition-duration;
-  width: calcSize(3);
-  height: calcSize(3);
+  width: var(--ctr-survey-item-actionbar-drag-indicator-width, calcSize(3));
+  height: var(--ctr-survey-item-actionbar-drag-indicator-height, calcSize(3));
 
   .sv-svg-icon {
-    width: calcSize(3);
-    height: calcSize(3);
+    width: var(--ctr-survey-item-actionbar-drag-indicator-width, calcSize(3));
+    height: var(--ctr-survey-item-actionbar-drag-indicator-height, calcSize(3));
   }
 }
 
@@ -98,7 +100,10 @@
 }
 
 .svc-item-value-controls__drag {
-  padding: calcSize(0.5) calcSize(1);
+  padding: var(--ctr-survey-item-actionbar-drag-indicator-padding-top, calcSize(0.5))
+    var(--ctr-survey-item-actionbar-drag-indicator-padding-right, calcSize(1))
+    var(--ctr-survey-item-actionbar-drag-indicator-padding-bottom, calcSize(0.5))
+    var(--ctr-survey-item-actionbar-drag-indicator-padding-left, calcSize(1));
   height: auto;
   width: auto;
   cursor: move;
@@ -106,8 +111,8 @@
 
   .svc-item-value-controls__drag-icon {
     opacity: 0;
-    width: calcSize(3);
-    height: calcSize(3);
+    width: var(--ctr-survey-item-actionbar-drag-indicator-width, calcSize(3));
+    height: var(--ctr-survey-item-actionbar-drag-indicator-height, calcSize(3));
   }
 
   use {
