@@ -2334,6 +2334,7 @@ test("Collapse all and expand all toolbar", async (t) => {
     await setAllowEditSurveyTitle(false);
     await setExpandCollapseButtonVisibility("onhover");
     await setJSON(json);
+    await t.click("#lockQuestions");
     await t.hover("#collapseAll");
     await takeElementScreenshot("design-surface-toolbar.png", Selector(".svc-tab-designer"), t, comparer);
   });

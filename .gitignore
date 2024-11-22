@@ -51,3 +51,8 @@ visualRegressionTests-V2/artifacts
 
 junit.xml
 packages/survey-creator-core/.vscode/launch.json
+packages/survey-creator-core/src/themes/default.ts
+packages/survey-creator-core/src/themes/default-contrast.ts
+packages/survey-creator-core/src/themes/default-dark.ts
+packages/survey-creator-core/src/themes/default-light.ts
+packages/survey-creator-core/src/themes/index.ts

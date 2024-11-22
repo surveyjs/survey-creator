@@ -1,9 +1,9 @@
 <template>
   <div class="svc-flex-column">
     <SvComponent
-      :is="'svc-adaptive-toolbox'"
+      :is="'svc-toolbox'"
       v-if="model.isToolboxVisible"
-      :creator="model.creator"
+      :model="model.creator"
     />
   </div>
   <div
