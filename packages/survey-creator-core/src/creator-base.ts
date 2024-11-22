@@ -3994,8 +3994,7 @@ export class SurveyCreatorModel extends Base
     if (designerPlugin) {
       designerPlugin.setTheme();
     }
-    const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v1";
-    SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);
+
   }
   public syncTheme(theme: ICreatorTheme): void {
     if (!theme) return;
@@ -4004,6 +4003,8 @@ export class SurveyCreatorModel extends Base
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables);
     this.themeVariables = newCssVariable;
+    const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v1";
+    SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);
   }
 
   public allowDragPages = false;
