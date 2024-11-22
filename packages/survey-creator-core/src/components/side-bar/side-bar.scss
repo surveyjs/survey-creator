@@ -344,7 +344,20 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, 8px) + var(--ctr-m
 
 .svc-side-bar {
   .svc-toolbox {
-    padding-top: calcSize(0.5);
     width: 100%;
+  }
+  .svc-toolbox .svc-scroll__scroller {
+    direction: initial;
+  }
+  .svc-toolbox .svc-scroll__scrollbar {
+    inset-inline-end: 0;
+    inset-inline-start: initial;
+  }
+  .svc-toolbox__category-separator--search {
+    display: none
+  }
+  .svc-toolbox__panel {
+    width: unset;
+    border: none;
   }
 }
