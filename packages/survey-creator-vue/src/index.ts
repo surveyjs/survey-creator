@@ -56,7 +56,6 @@ import ToolboxTool from "./toolbox/ToolboxTool.vue";
 import ToolboxItem from "./toolbox/ToolboxItem.vue";
 import ToolboxItemGroup from "./toolbox/ToolboxItemGroup.vue";
 import ToolboxCategory from "./toolbox/ToolboxCategory.vue";
-import Toolbox from "./toolbox/Toolbox.vue";
 import ToolboxList from "./toolbox/ToolboxList.vue";
 
 import Designer from "./tabs/designer/Designer.vue";
@@ -76,6 +75,7 @@ import ImageItemValue from "./adorners/ImageItemValue.vue";
 import QuestionEditor from "./QuestionEditor.vue";
 import Logo from "./header/Logo.vue";
 import Search from "./components/Search.vue";
+import Scroll from "./components/Scroll.vue";
 import PageNavigator from "./page-navigator/PageNavigator.vue";
 import PageNavigatorItem from "./page-navigator/PageNavigatorItem.vue";
 import Dropdown from "./adorners/Dropdown.vue";
@@ -116,6 +116,7 @@ function registerComponents(
   registerComponent("svc-property-grid", PropertyGrid);
   registerComponent("svc-object-selector", ObjectSelector);
   registerComponent("svc-search", Search);
+  registerComponent("svc-scroll", Scroll);
   registerComponent("svc-switcher", Switcher);
 
   registerComponent("svc-action-button", ActionButton);
@@ -151,8 +152,7 @@ function registerComponents(
 
   registerComponent("svc-tab-theme", Theme);
 
-  registerComponent("svc-adaptive-toolbox", AdaptiveToolbox);
-  registerComponent("svc-toolbox", Toolbox);
+  registerComponent("svc-toolbox", AdaptiveToolbox);
   registerComponent("svc-toolbox-list", ToolboxList);
   registerComponent("svc-toolbox-category", ToolboxCategory);
   registerComponent("svc-toolbox-tool", ToolboxTool);
