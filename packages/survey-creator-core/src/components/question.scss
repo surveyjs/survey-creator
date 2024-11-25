@@ -613,7 +613,7 @@ svc-question {
 .svc-dragged-element-shortcut {
   //min-width: 100px;
   height: auto;
-  border-radius: var(--ctr-toolbox-item-corner-radius, 8px);
+  border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
   background-color: var(--ctr-toolbox-item-background-color-floating, $background);
   color: var(--ctr-toolbox-item-text-color-hovered, $foreground);
   padding: calcSize(1.5) calcSize(2);
