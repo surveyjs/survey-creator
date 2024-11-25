@@ -4,6 +4,8 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { Translation, createImportCSVAction, createExportCSVAction } from "./translation";
+import { TabControlModel } from "../side-bar/tab-control-model";
+import { MenuButton } from "../../utils/actions";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
   private filterStringsAction: Action;
@@ -12,18 +14,40 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private importCsvAction: Action;
   private exportCsvAction: Action;
   private sidebarTab: SidebarPageModel;
+  private _showOneCategoryInPropertyGrid: boolean = false;
+  private tabControlModel: TabControlModel;
 
   public model: Translation;
 
+  public get showOneCategoryInPropertyGrid(): boolean {
+    return this._showOneCategoryInPropertyGrid;
+  }
+  public set showOneCategoryInPropertyGrid(newValue) {
+    if (this._showOneCategoryInPropertyGrid !== newValue) {
+      this._showOneCategoryInPropertyGrid = newValue;
+      this.creator.sidebar.hideSideBarVisibilityControlActions = newValue;
+      if (this.creator.activeTab === "translation") {
+        this.updateTabControl();
+      }
+    }
+  }
+
+  private updateSettingsSurvey(): void {
+    this.model.settingsSurvey.locale = this.creator.locale;
+    this.model.settingsSurvey.css.root += (this.showOneCategoryInPropertyGrid ? " spg-root--one-category" : "");
+    this.model.settingsSurvey.rootCss += (this.showOneCategoryInPropertyGrid ? " spg-root--one-category" : "");
+  }
+
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("translation", this);
+    this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.sidebarTab = this.creator.sidebar.addPage("translation");
     this.sidebarTab.caption = editorLocalization.getString("ed.translationPropertyGridTitle");
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
-    this.model.settingsSurvey.locale = this.creator.locale;
+    this.updateSettingsSurvey();
     this.model.readOnly = this.creator.readOnly;
     this.model.translationStringVisibilityCallback = (obj: Base, propertyName: string, visible: boolean) => {
       const options = { obj: obj, propertyName: propertyName, visible: visible };
@@ -84,12 +108,15 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
 
     this.model.reset();
+    this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
+    this.updateTabControl();
   }
   public update(): void {
     if (!this.model) return;
     this.model.survey = this.creator.survey;
     this.model.filteredPage = null;
     this.updateFilterPageAction(true);
+    this.updateTabControl();
   }
   public deactivate(): boolean {
     if (!!this.model) {
@@ -104,7 +131,42 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.visible = false;
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
+    this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     return true;
+  }
+  private updateTabControl() {
+    if (this.showOneCategoryInPropertyGrid) {
+      this.updateTabControlActions();
+      this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
+      this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
+      this.creator.sidebar.header.componentName = "svc-side-bar-header";
+      this.creator.sidebar.header.componentData = this.creator.sidebar.header;
+    } else {
+      this.creator.sidebar.sideAreaComponentName = "";
+      this.creator.sidebar.sideAreaComponentData = undefined;
+      this.creator.sidebar.header.componentName = "";
+      this.creator.sidebar.header.componentData = undefined;
+    }
+  }
+  private updateTabControlActions() {
+    if (this.showOneCategoryInPropertyGrid) {
+      const languagesString = editorLocalization.getString("ed.translationLanguages");
+      const action = new MenuButton({
+        id: "pg-languages",
+        tooltip: languagesString,
+        iconName: "pg-general-24x24",
+        active: true,
+        pressed: false,
+        action: () => {
+          this.creator.sidebar.expandSidebar();
+          this.creator.sidebar.header.subTitle = languagesString;
+          action.active = true;
+        }
+      });
+
+      this.tabControlModel.topToolbar.setItems([action]);
+      this.creator.sidebar.header.subTitle = languagesString;
+    }
   }
   private createMergeLocaleWithDefaultActionTitleUpdater(): any {
     return <any>new ComputedUpdater<string>(() => {
