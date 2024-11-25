@@ -111,6 +111,7 @@ export var enStrings = {
     redoTooltip: "Redo the change",
     expandAllTooltip: "Expand All",
     collapseAllTooltip: "Collapse All",
+    lockQuestionsTooltip: "Lock expand/collapse state for questions",
     showMoreChoices: "Show more",
     showLessChoices: "Show less",
     copy: "Copy",
@@ -1775,7 +1776,7 @@ export var enStrings = {
     "--sjs-primary-background-500": "Primary",
     "--sjs-secondary-background-500": "Secondary",
     "surfaceScale": "Surface",
-    "userInterfaceBaseUnit": "User interface",
+    "userInterfaceBaseUnit": "UI elements",
     "fontScale": "Font",
 
     names: {

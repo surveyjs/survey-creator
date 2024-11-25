@@ -4,9 +4,15 @@
         var(--ctr-editor-buttons-gap, 4px) + var(--ctr-editor-button-padding-right, 8px) +
             var(--ctr-editor-button-padding-left, 8px) + var(--ctr-editor-button-icon-width, 24px)
     ); // dropdown_chevron-button offset
+    min-height: calc(
+        var(--ctr-editor-button-icon-height) + var(--ctr-editor-button-padding-top) +
+            var(--ctr-editor-button-padding-bottom) + var(--ctr-editor-padding-top) + var(--ctr-editor-padding-bottom)
+    );
 }
 .spg-dropdown__value {
     @include ctrDefaultFont;
+    display: flex;
+    align-items: center;
 }
 .spg-dropdown__filter-string-input {
     @include ctrDefaultFont;

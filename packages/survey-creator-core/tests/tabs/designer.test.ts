@@ -526,3 +526,49 @@ test("expand/collapse event - loading", () => {
   expect(questionAdorner.collapsed).toBeTruthy();
   expect(panelAdorner.collapsed).toBeFalsy();
 });
+
+test("Check adorners lock questions for expand/collapse all", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
+  const designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+  let pageAdorner = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageAdorner.addNewQuestion(pageAdorner, null);
+
+  let question1 = creator.survey.getQuestionByName("question1");
+  let questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question1,
+    <any>undefined
+  );
+
+  const collapseAll = designerPlugin.model.surfaceToolbar.getActionById("collapseAll");
+  const expandAll = designerPlugin.model.surfaceToolbar.getActionById("expandAll");
+  const lockQuestions = designerPlugin.model.surfaceToolbar.getActionById("lockQuestions");
+
+  expect(pageAdorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeFalsy();
+
+  collapseAll.action(collapseAll);
+
+  expect(pageAdorner.collapsed).toBeTruthy();
+  expect(questionAdorner.collapsed).toBeTruthy();
+
+  lockQuestions.action(lockQuestions);
+  expandAll.action(expandAll);
+  expect(pageAdorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeTruthy();
+
+  questionAdorner.collapsed = false;
+  collapseAll.action(collapseAll);
+  expect(pageAdorner.collapsed).toBeTruthy();
+  expect(questionAdorner.collapsed).toBeFalsy();
+
+  questionAdorner.collapsed = true;
+  lockQuestions.action(lockQuestions);
+  expandAll.action(expandAll);
+  expect(pageAdorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeFalsy();
+});

@@ -61,7 +61,7 @@
 
 .spg-question__description {
   @include ctrSmallFont;
-  color: $foreground-dim-light;
+  color: var(--ctr-caption-with-actions-description-text-color, $foreground-dim-light);
   padding-bottom: calcSize(2);
   white-space: normal;
 }
@@ -205,6 +205,7 @@ sv-question-error {
   .spg-matrixdynamic__content.spg-text__content {
     outline: 2px solid $secondary;
     outline-offset: -2px;
+    border-radius: var(--ctr-data-table-corner-radius, 0px);
 
     .spg-input {
       box-shadow: none;

@@ -3028,6 +3028,23 @@ test("process shortcut for text inputs", (): any => {
   creator["onKeyDownHandler"](<any>{ keyCode: 46, target: { tagName: "span", isContentEditable: true } });
   expect(log).toEqual("->execute->execute->execute");
 });
+test("Do not delete for read-only creator, Bug#6078", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  };
+  creator.readOnly = true;
+  creator.selectQuestionByName("q2");
+  creator["onKeyDownHandler"](<any>{ keyCode: 46, target: {} });
+  expect(creator.selectedElementName).toBe("q2");
+  creator.readOnly = false;
+  creator.selectQuestionByName("q2");
+  creator["onKeyDownHandler"](<any>{ keyCode: 46, target: {} });
+  expect(creator.selectedElementName).toBe("q1");
+});
 
 test("process undo-redo shortcut for text inputs", (): any => {
   const creator = new CreatorTester({ showDesignerTab: false });

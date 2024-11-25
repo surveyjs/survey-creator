@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, changeToolboxSearchEnabled, changeToolboxLocation, getTabbedMenuItemByText, takeElementScreenshot, setJSON, collapseButtonSelector, wrapVisualTest, changeToolboxScrolling, getToolboxItemByText } from "../../helper";
+import { url, changeToolboxSearchEnabled, changeToolboxLocation, getTabbedMenuItemByText, takeElementScreenshot, setJSON, collapseButtonSelector, wrapVisualTest, changeToolboxScrolling, getToolboxItemByText, setAllowEditSurveyTitle, setShowAddQuestionButton } from "../../helper";
 
 const title = "Toolbox Screenshot";
 
@@ -12,13 +12,18 @@ test("Left toolbox", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
     await changeToolboxSearchEnabled(false);
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+
     const toolboxItem = Selector(".svc-toolbox__item");
     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
     const toolboxElement = Selector(".svc-toolbox");
     const creatorTabElement = Selector(".svc-creator-tab");
 
     await setJSON({ pages: [{ name: "page1" }] });
-    await t.resizeWindow(2560, 1440);
+    await t
+      .resizeWindow(2560, 1440)
+      .click(collapseButtonSelector);
     await takeElementScreenshot("toolbox-left.png", toolboxElement, t, comparer);
 
     await t.hover(toolboxItem);
@@ -51,6 +56,9 @@ test("Right toolbox", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
     await changeToolboxSearchEnabled(false);
+    await setShowAddQuestionButton(false);
+    await setAllowEditSurveyTitle(false);
+
     const toolboxItem = Selector(".svc-toolbox__item");
     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
 
@@ -92,6 +100,9 @@ test("Right toolbox (rtl)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
     await changeToolboxSearchEnabled(false);
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+
     const toolboxItem = Selector(".svc-toolbox__item");
     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
 
@@ -138,7 +149,6 @@ test("toolbox inside sidebar", async (t) => {
     const toolboxButtonSelector = Selector(".sv-action-bar-item[title=\"Toolbox\"]");
 
     await changeToolboxLocation("sidebar");
-    await changeToolboxSearchEnabled(false);
     await t
       .resizeWindow(1240, 870)
       .click(toolboxButtonSelector)
@@ -172,6 +182,7 @@ test("designer tab view with page navigator", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);
     await changeToolboxSearchEnabled(false);
+    await setAllowEditSurveyTitle(false);
     await setJSON({
       pages: [
         {
@@ -249,7 +260,7 @@ test.skip("Toolbox with subtypes (wrap)", async (t) => {
 
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(1775, 500)
-      .scrollBy(".svc-toolbox__scroller", 2, 300)
+      .scrollBy(".svc-toolbox .svc-scroll__scroller", 2, 300)
       .hover(getToolboxItemByText("Single-Line Input"))
       .expect(subtypesPopup.visible).ok();
     await takeElementScreenshot("toolbox-wrap-subtypes.png", subtypesPopup, t, comparer);
@@ -388,7 +399,7 @@ test("Toolbox with search", async (t) => {
     await t.typeText(Selector(".svc-toolbox input"), "qwerty");
     await takeElementScreenshot("toolbox-search-placeholder.png", toolboxElement, t, comparer);
     await t.click("#svd-grid-search-close");
-    await ClientFunction(() => (document.querySelector(".svc-toolbox__scroller") as HTMLDivElement).style.background = "red")();
+    await ClientFunction(() => (document.querySelector(".svc-toolbox .svc-scroll__scroller") as HTMLDivElement).style.background = "red")();
     await takeElementScreenshot("toolbox-search-background.png", toolboxElement, t, comparer);
   });
 });
@@ -492,7 +503,7 @@ test("Toolbox RTL with search compact", async (t) => {
 
 test("Toolbox disabled items", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    const toolboxElement = Selector(".svc-toolbox .svc-toolbox__container");
+    const toolboxElement = Selector(".svc-toolbox .svc-scroll__wrapper");
 
     await ClientFunction(() => {
       window["creator"].toolbox.searchEnabled = true;
@@ -502,11 +513,10 @@ test("Toolbox disabled items", async (t) => {
       checkbox.enabled = false;
     })();
 
-    await t.resizeWindow(1920, 1440);
+    await t.resizeWindow(1920, 1161);
     await takeElementScreenshot("toolbox-disabled-items.png", toolboxElement, t, comparer);
-    await t.resizeWindow(1240, 1440);
+    await t.resizeWindow(1240, 1161);
     await takeElementScreenshot("toolbox-compact-disabled-items.png", toolboxElement, t, comparer);
-
     await t
       .click(Selector("button.svc-element__question-type-selector"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
