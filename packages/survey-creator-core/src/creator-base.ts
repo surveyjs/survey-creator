@@ -2241,6 +2241,12 @@ export class SurveyCreatorModel extends Base
     assign(cssVariables, designTabSurveyThemeJSON.cssVariables, {
       "--sjs-base-unit": "var(--ctr-surface-base-unit)",
       "--sjs-font-size": "calc(2 * var(--ctr-surface-base-unit))",
+      "--lbr-font-unit": "var(--ctr-surface-base-unit)",
+      "--lbr-line-height-unit": "var(--ctr-surface-base-unit)",
+      "--lbr-size-unit": "var(--ctr-surface-base-unit)",
+      "--lbr-spacing-unit": "var(--ctr-surface-base-unit)",
+      "--lbr-corner-radius-unit": "var(--ctr-surface-base-unit)",
+      "--lbr-stroke-unit": "var(--ctr-surface-base-unit)",
     });
     return cssVariables;
   }

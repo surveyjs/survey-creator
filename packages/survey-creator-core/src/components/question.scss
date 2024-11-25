@@ -203,9 +203,7 @@ svc-question {
 }
 
 .svc-survey-element-toolbar-item__title {
-  @include ctrSmallBoldFont;
-  font-size: calcSurfaceFontSize(0.75);
-  line-height: calcSurfaceLineHeight(1);
+  @include lbrSmallBoldFont;
   color: var(--ctr-survey-question-panel-toolbar-item-text-color, $foreground);
   transition: color $creator-transition-duration;
 }
@@ -379,12 +377,10 @@ svc-question {
 }
 
 .svc-panel__placeholder {
-  @include ctrDefaultFont;
-  color: $foreground-light;
+  @include lbrDefaultFont;
+  color: var(--ctr-survey-placeholder-text-color, $foreground-light);
   text-wrap: wrap;
   text-align: center;
-  font-size: calcSurfaceFontSize(1);
-  line-height: calcSurfaceLineHeight(1.5);
 }
 
 .svc-question__content-actions {
@@ -1122,12 +1118,12 @@ svc-question,
     }
 
     .svc-add-new-item-button__text {
+      @include lbrDefaultBoldFont;
       display: flex;
       align-items: center;
       flex-grow: 1;
       justify-content: center;
       margin: calcSize(1) calcSize(3);
-      line-height: calcSurfaceLineHeight(1);
       color: var(--ctr-survey-action-button-text-color-positive, $primary);
       text-wrap: nowrap;
     }
@@ -1198,12 +1194,12 @@ svc-question,
   }
 
   .svc-add-new-item-button__text {
+    @include lbrDefaultBoldFont;
     display: flex;
     align-items: center;
     flex-grow: 1;
     justify-content: center;
     margin: calcSize(1) calcSize(3);
-    line-height: calcSurfaceLineHeight(1);
     color: var(--ctr-survey-action-button-text-color-positive, $primary);
     text-wrap: nowrap;
   }

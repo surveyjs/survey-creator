@@ -18,6 +18,7 @@ svc-page {
   }
 
   .svc-panel__placeholder {
+    @include lbrDefaultFont;
     color: var(--ctr-survey-page-placeholder-text-color, $foreground-light);
   }
 }
@@ -181,9 +182,7 @@ svc-page {
 }
 
 .svc-page-toolbar-item__title {
-  @include ctrSmallBoldFont;
-  font-size: calcSurfaceFontSize(0.75);
-  line-height: calcSurfaceLineHeight(1);
+  @include lbrSmallBoldFont;
   color: var(--ctr-survey-page-toolbar-item-text-color, $foreground);
 }
 
@@ -331,10 +330,8 @@ svc-page {
 }
 
 .svc-add-new-item-button__text {
-  @include ctrDefaultBoldFont;
+  @include lbrDefaultFont;
   color: $foreground;
-  font-size: calcSurfaceFontSize(1);
-  line-height: calcSurfaceLineHeight(1.5);
 }
 
 .svc-element__question-type-selector {

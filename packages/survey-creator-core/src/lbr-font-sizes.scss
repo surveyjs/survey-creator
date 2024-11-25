@@ -21,3 +21,28 @@ $line-height-unit: var(--lbr-line-height-unit, 8px);
   --lbr-font-size-x1: calc(#{$font-unit} * 1);
   --lbr-font-size-x150: calc(#{$font-unit} * 1.5);
 }
+
+@mixin lbrDefaultFont {
+  font-family: $font-family;
+  font-size: var(--lbr-font-default-size, 16px);
+  font-style: normal;
+  font-weight: 600;
+  line-height: var(--lbr-font-default-line-height, 24px); /* 150% */
+}
+
+@mixin lbrDefaultBoldFont {
+  @include lbrDefaultFont;
+  font-weight: 600;
+}
+
+@mixin lbrSmallFont {
+  font-family: $font-family;
+  font-size: var(--lbr-font-small-size, 12px);
+  font-style: normal;
+  line-height: var(--lbr-font-small-line-height, 16px); /* 133.333% */
+}
+
+@mixin lbrSmallBoldFont {
+  @include lbrSmallFont;
+  font-weight: 600;
+}

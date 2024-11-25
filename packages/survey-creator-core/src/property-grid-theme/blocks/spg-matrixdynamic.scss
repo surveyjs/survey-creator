@@ -68,7 +68,7 @@
 }
 
 .spg-matrixdynamic__placeholder-text {
-  @include ctrDefaultFont;
+  @include lbrDefaultFont;
   color: var(--ctr-survey-placeholder-text-color, $foreground-light);
   text-align: center;
 }
