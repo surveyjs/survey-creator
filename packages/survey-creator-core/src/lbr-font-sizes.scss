@@ -1,0 +1,23 @@
+$font-unit: var(--lbr-font-unit, 8px);
+$line-height-unit: var(--lbr-line-height-unit, 8px);
+
+.svc-creator {
+  --lbr-line-height-x8: calc(#{$line-height-unit} * 8);
+  --lbr-line-height-x7: calc(#{$line-height-unit} * 7);
+  --lbr-line-height-x6: calc(#{$line-height-unit} * 6);
+  --lbr-line-height-x5: calc(#{$line-height-unit} * 5);
+  --lbr-line-height-x4: calc(#{$line-height-unit} * 4);
+  --lbr-line-height-x3: calc(#{$line-height-unit} * 3);
+  --lbr-line-height-x2: calc(#{$line-height-unit} * 2);
+  --lbr-line-height-x150: calc(#{$line-height-unit} * 1.5);
+  --lbr-line-height-x1: calc(#{$line-height-unit} * 1);
+  --lbr-font-size-x8: calc(#{$font-unit} * 8);
+  --lbr-font-size-x7: calc(#{$font-unit} * 7);
+  --lbr-font-size-x6: calc(#{$font-unit} * 6);
+  --lbr-font-size-x5: calc(#{$font-unit} * 5);
+  --lbr-font-size-x4: calc(#{$font-unit} * 4);
+  --lbr-font-size-x3: calc(#{$font-unit} * 3);
+  --lbr-font-size-x2: calc(#{$font-unit} * 2);
+  --lbr-font-size-x1: calc(#{$font-unit} * 1);
+  --lbr-font-size-x150: calc(#{$font-unit} * 1.5);
+}
