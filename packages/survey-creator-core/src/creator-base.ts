@@ -193,14 +193,12 @@ export class SurveyCreatorModel extends Base
   }
   set showOneCategoryInPropertyGrid(newValue: boolean) {
     this._showOneCategoryInPropertyGrid = newValue;
-    const designerPlugin = this.getPlugin("designer");
-    if (designerPlugin) {
-      designerPlugin.showOneCategoryInPropertyGrid = newValue;
-    }
-    const themePlugin = this.getPlugin("theme");
-    if (themePlugin) {
-      themePlugin.showOneCategoryInPropertyGrid = newValue;
-    }
+    Object.keys(this.plugins).forEach(name => {
+      const plugin = this.plugins[name];
+      if(!!plugin && "showOneCategoryInPropertyGrid" in plugin) {
+        plugin.showOneCategoryInPropertyGrid = newValue;
+      }
+    });
   }
 
   get allowEditSurveyTitle(): boolean {
