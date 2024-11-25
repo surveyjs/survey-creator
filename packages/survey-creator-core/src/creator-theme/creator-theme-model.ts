@@ -263,6 +263,12 @@ Serializer.addClass(
       type: "dropdown",
       name: "themeName",
       choices: PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) })),
+    },
+    {
+      type: "string",
+      visible: false,
+      name: "iconsSet",
+      default: "v1"
     }
   ],
   (json) => { return new CreatorThemeModel(); }
