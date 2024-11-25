@@ -57,6 +57,7 @@ export * from "../components/string-editor";
 export * from "../components/embedded-survey";
 export * from "../components/link-value";
 export * from "../components/search-manager";
+export * from "../components/scroll";
 export * from "../editorLocalization";
 export * from "../json5";
 
@@ -108,6 +109,7 @@ export * from "../presets/presets-toolbox";
 export * from "../survey-elements";
 
 require("../components/search.scss");
+require("../components/scroll.scss");
 require("../components/property-panel/property-panel-item.scss");
 require("../components/property-panel/property-panel.scss");
 require("../components/tabbed-menu/tabbed-menu-item.scss");

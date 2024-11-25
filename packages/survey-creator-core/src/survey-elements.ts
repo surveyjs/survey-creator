@@ -1,4 +1,4 @@
-import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, getIconNameFromProxy, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, renamedIcons, Serializer, SurveyModel } from "survey-core";
+import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, getIconNameFromProxy, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, renamedIcons, Serializer, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
@@ -238,9 +238,13 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       return false;
     }
     if (this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
+      const pnl: any = <PanelModel>this.draggedElement;
+      if(pnl.deepNested === undefined) {
+        pnl.deepNested = this.getMaximumNestedPanelCount(pnl, 0);
+      }
       let len = SurveyHelper.getElementDeepLength(dropTarget);
       if (dragOverLocation !== DragTypeOverMeEnum.InsideEmptyPanel && dropTarget.isPanel) len--;
-      if (this.maxNestedPanels < len) return false;
+      if (this.maxNestedPanels < len + pnl.deepNested) return false;
     }
 
     if (
@@ -251,6 +255,18 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
 
     return true;
+  }
+  private getMaximumNestedPanelCount(panel: PanelModel, deep: number): number {
+    let max = deep;
+    panel.elements.forEach(el => {
+      if(el.isPanel) {
+        const pDeep = this.getMaximumNestedPanelCount(<PanelModel>el, deep + 1);
+        if(pDeep > max) {
+          max = pDeep;
+        }
+      }
+    });
+    return max;
   }
 
   protected doBanDropHere = () => {
