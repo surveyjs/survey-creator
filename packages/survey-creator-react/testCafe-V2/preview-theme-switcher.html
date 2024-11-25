@@ -27,6 +27,7 @@
 <script>
   window.surveyJSFramework = "react";
   const creator = new SurveyCreator.SurveyCreator();
+  creator.applyTheme(SurveyCreatorTheme.DefaultLight);
   window.creator = creator;
   const root = ReactDOM.createRoot(document.getElementById("survey-creator"));
   root.render(React.createElement(React.StrictMode, {
