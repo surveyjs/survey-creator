@@ -65,10 +65,10 @@
       var(--ctr-popup-menu-shadow-1-color, rgba(0, 0, 0, 0.1)), 
 
       var(--ctr-popup-menu-shadow-2-offset-x, 0px) 
-      var(--ctr-popup-menu-shadow-2-offset-y, 0px) 
-      var(--ctr-popup-menu-shadow-2-blur, 0px) 
+      var(--ctr-popup-menu-shadow-2-offset-y, 8px) 
+      var(--ctr-popup-menu-shadow-2-blur, 16px) 
       var(--ctr-popup-menu-shadow-2-spread, 0px) 
-      var(--ctr-popup-menu-shadow-2-color, transparent);
+      var(--ctr-popup-menu-shadow-2-color, rgba(0, 0, 0, 0.1));
   }
 
   .sv-popup__body-header {
