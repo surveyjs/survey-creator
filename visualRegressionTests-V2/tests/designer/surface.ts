@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setShowAddQuestionButton, setAllowEditSurveyTitle, setExpandCollapseButtonVisibility } from "../../helper";
 
 const title = "Designer surface";
 
@@ -68,7 +68,7 @@ test("Test question type converter", async (t) => {
     await takeElementScreenshot("convert-to-popup.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
 });
-test("Test question type converter on page for panel", async (t) => {
+test("Test question type converter on page for panel - 1", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1000, 800);
 
@@ -97,7 +97,7 @@ test("Test question type converter on page for panel", async (t) => {
   });
 });
 
-test("Test question type converter on page for panel", async (t) => {
+test("Test question type converter on page for panel - 2", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1000, 800);
 
@@ -495,6 +495,7 @@ test("Page and question borders", async (t) => {
       ]
     };
     await setJSON(json);
+    await setAllowEditSurveyTitle(false);
     await ClientFunction(() => {
       (<any>window).creator.toolbox.isCompact = true;
     })();
@@ -2144,9 +2145,7 @@ test("Question adorner - collapsed", async (t) => {
         }
       ]
     };
-    await ClientFunction(() => {
-      window["creator"].expandCollapseButtonVisibility = "onhover";
-    })();
+    await setExpandCollapseButtonVisibility("onhover");
     await setJSON(json);
     const qContent = Selector(".svc-question__content");
     const qCollapseButton = Selector(".svc-question__content #collapse");
@@ -2198,9 +2197,7 @@ test("Question adorner - no title collapsed", async (t) => {
         }
       ]
     };
-    await ClientFunction(() => {
-      window["creator"].expandCollapseButtonVisibility = "onhover";
-    })();
+    await setExpandCollapseButtonVisibility("onhover");
     await setJSON(json);
     const qContent = Selector(".svc-question__content");
     const qCollapseButton = Selector(".svc-question__content #collapse");
@@ -2221,7 +2218,7 @@ test("Question adorner - no title collapsed", async (t) => {
 
 test("Page adorner - collapsed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1652, 500);
+    await t.resizeWindow(1000, 500);
     const json = {
       elements: [
         {
@@ -2230,9 +2227,9 @@ test("Page adorner - collapsed", async (t) => {
         }
       ]
     };
-    await ClientFunction(() => {
-      window["creator"].expandCollapseButtonVisibility = "onhover";
-    })();
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+    await setExpandCollapseButtonVisibility("onhover");
     await setJSON(json);
     const qContent = Selector(".svc-page__content");
     const qCollapseButton = Selector(".svc-page__content #collapse");
@@ -2241,7 +2238,7 @@ test("Page adorner - collapsed", async (t) => {
     await takeElementScreenshot("page-adorner-expanded.png", ".svc-tab-designer_content", t, comparer);
     await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
     await t.click(qCollapseButton.filterVisible());
-    await t.hover(".svc-toolbox", { speed: 0.1 });
+    await resetHoverToCreator(t);
     await takeElementScreenshot("page-adorner-collapsed-selected.png", ".svc-tab-designer_content", t, comparer);
     await t.click(".svc-tab-designer_content", { offsetX: 1, offsetY: 1 });
     await takeElementScreenshot("page-adorner-collapsed.png", ".svc-tab-designer_content", t, comparer);
@@ -2263,9 +2260,7 @@ test("Question adorner - collapsed mobile", async (t) => {
         }
       ]
     };
-    await ClientFunction(() => {
-      window["creator"].expandCollapseButtonVisibility = "onhover";
-    })();
+    await setExpandCollapseButtonVisibility("onhover");
     await setJSON(json);
     const qContent = Selector(".svc-question__content");
     const qCollapseButton = Selector(".svc-question__content #collapse");
@@ -2314,6 +2309,7 @@ test("Check page selection when width mode is responsive", async (t) => {
       ]
     };
     await setJSON(json);
+    await setAllowEditSurveyTitle(false);
     const rootSelector = Selector(".svc-tab-designer");
     await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
     await takeElementScreenshot("page-selected-responsive.png", rootSelector, t, comparer);
@@ -2335,10 +2331,10 @@ test("Collapse all and expand all toolbar", async (t) => {
         }
       ]
     };
-    await ClientFunction(() => {
-      window["creator"].expandCollapseButtonVisibility = "onhover";
-    })();
+    await setAllowEditSurveyTitle(false);
+    await setExpandCollapseButtonVisibility("onhover");
     await setJSON(json);
+    await t.click("#lockQuestions");
     await t.hover("#collapseAll");
     await takeElementScreenshot("design-surface-toolbar.png", Selector(".svc-tab-designer"), t, comparer);
   });

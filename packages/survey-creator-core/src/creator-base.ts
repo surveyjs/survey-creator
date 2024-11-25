@@ -6,7 +6,9 @@ import {
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
   CssClassBuilder,
-  SvgRegistry
+  SvgRegistry,
+  addIconsToThemeSet,
+  SvgThemeSets
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -60,11 +62,17 @@ import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/action-container-view-model";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
-import { svgBundle } from "./svgbundle";
+
+import { iconsV1, iconsV2 } from "./svgbundle";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
+
+addIconsToThemeSet("v1", iconsV1);
+addIconsToThemeSet("v2", iconsV2);
+
+SvgRegistry.registerIcons(settings.useLegacyIcons ? iconsV1 : iconsV2);
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -240,9 +248,26 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: true }) generateValidJSON: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   /**
+   * Specifies a default device for survey preview in the Preview tab.
+   *
+   * Possible values:
+   * 
+   * - `"desktop"` (default)
+   * - `"iPhoneSE"`
+   * - `"iPhone15"`
+   * - `"iPhone15Plus"`
+   * - `"iPad"`
+   * - `"iPadMini"`
+   * - `"androidPhone"`
+   * - `"androidTablet"`
+   * - `"microsoftSurface"`
+   */
+  previewDevice: string;
+  /**
    * Specifies the orientation of the selected device in the Preview tab.
    *
    * Possible values:
+   * 
    * - `"landscape"` (default)
    * - `"portrait"`
    */
@@ -1245,6 +1270,7 @@ export class SurveyCreatorModel extends Base
       this.options = !!options2 ? options2 : {};
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
+    this.previewDevice = options.previewDevice ?? "desktop";
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
     this.toolbarValue.locOwner = this;
@@ -1252,7 +1278,6 @@ export class SurveyCreatorModel extends Base
     this.tabbedMenu.locOwner = this;
     this.selectionHistoryControllerValue = new SelectionHistory(this);
     this.sidebar = new SidebarModel(this);
-    this.registerIcons();
     this.setOptions(this.options);
     this.patchMetadata();
     this.initSurveyWithJSON(undefined, false);
@@ -1388,10 +1413,10 @@ export class SurveyCreatorModel extends Base
     const plugin = this.getPlugin<UndoRedoPlugin>("undoredo");
     return plugin && plugin.model;
   }
-  startUndoRedoTransaction(name: string = "") {
+  startUndoRedoTransaction(name?: string): void {
     this.undoRedoController && this.undoRedoController.startTransaction(name);
   }
-  stopUndoRedoTransaction() {
+  stopUndoRedoTransaction(): void {
     this.undoRedoController && this.undoRedoController.stopTransaction();
   }
   /**
@@ -1569,20 +1594,6 @@ export class SurveyCreatorModel extends Base
   }
   public getOptions(): ICreatorOptions {
     return this.options || {};
-  }
-  protected registerIcons() {
-    let path;
-    if (settings.useLegacyIcons) {
-      SurveySettings.useLegacyIcons = true;
-      path = svgBundle.V1;
-    } else {
-      SurveySettings.useLegacyIcons = false;
-      path = svgBundle.V2;
-    }
-
-    if (!path) return;
-
-    SvgRegistry.registerIconsFromFolder(path);
   }
   protected setOptions(options: ICreatorOptions): void {
     if (!options) options = {};
@@ -3736,13 +3747,6 @@ export class SurveyCreatorModel extends Base
       title: this.getLocString("ed.addNewQuestion"),
     }, {
       items: [],
-      onShow: () => {
-        const listModel = newAction.popupModel.contentComponentData.model;
-        listModel.setItems(getActions());
-        setTimeout(() => {
-          newAction.popupModel.recalculatePosition(true);
-        }, 1);
-      },
       allowSelection: false,
       cssClass: "svc-creator-popup",
       verticalPosition: "bottom",
@@ -3750,7 +3754,12 @@ export class SurveyCreatorModel extends Base
       displayMode: this.isTouch ? "overlay" : "popup"
     });
     newAction.popupModel.getTargetCallback = undefined;
-
+    newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
+      if(opt.isVisible) {
+        const listModel = newAction.popupModel.contentComponentData.model;
+        listModel.setItems(getActions());
+      }
+    });
     return newAction;
   }
 
@@ -3985,6 +3994,7 @@ export class SurveyCreatorModel extends Base
     if (designerPlugin) {
       designerPlugin.setTheme();
     }
+
   }
   public syncTheme(theme: ICreatorTheme): void {
     if (!theme) return;
@@ -3993,6 +4003,8 @@ export class SurveyCreatorModel extends Base
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables);
     this.themeVariables = newCssVariable;
+    const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v1";
+    SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);
   }
 
   public allowDragPages = false;

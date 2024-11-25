@@ -816,23 +816,15 @@ QUnit.test("PagesEditor change question's page", function (assert) {
       },
     ],
   });
-  var creator = new SurveyCreator();
+  const creator = new SurveyCreator();
   creator.text = jsonText;
-  var pagesEditor = new PagesEditorViewModel(
-    creator.pagesEditorModel,
-    document.createElement("div")
-  );
 
-  assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[0]);
+  assert.equal(creator.pagesEditorModel.selectedPage().name, creator.survey.pages[0].name);
 
   var question = <Survey.Question>creator.survey.pages[0].elements[0];
   question.page = creator.survey.pages[1];
-  creator.onPropertyValueChanged(
-    <any>{ name: "page", isDefaultValue: () => false },
-    question,
-    creator.survey.pages[1]
-  );
-  assert.equal(pagesEditor.model.selectedPage(), creator.survey.pages[1]);
+  creator["onPropertyChanged"](question, Survey.Serializer.findProperty("question", "page"), creator.survey.pages[1]);
+  assert.equal(creator.pagesEditorModel.selectedPage().name, creator.survey.pages[1].name);
 });
 
 QUnit.test("pagesEditor.canAddPage", function (assert) {
@@ -1227,16 +1219,8 @@ QUnit.test("Change elemenent page", function (assert) {
   var objEditor = editor.propertyGridObjectEditorModel.koElementEditor();
   var propertyEditor = objEditor.getPropertyEditorByName("page");
   propertyEditor.editor.koValue("page2");
-  assert.equal(
-    editor.selectedElement.name,
-    "question1",
-    "question1 is still selected"
-  );
-  assert.equal(
-    editor.selectedElement.page.name,
-    "page2",
-    "question1 has page2 now"
-  );
+  assert.equal(editor.selectedElement.name, "question1", "question1 is still selected");
+  assert.equal(editor.selectedElement.page.name, "page2", "question1 has page2 now");
   assert.equal(editor.survey.currentPage.name, "page2", "page2 is current");
 });
 

@@ -71,17 +71,19 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         ["dragTypeOverMe"],
         () => {
           this.updateDragTypeOverMe();
-        }
+        },
+        "dragOver"
       );
       surveyElement.registerFunctionOnPropertiesValueChanged(
         ["isDragMe"],
         () => {
           this.updateIsDragMe();
-        }
+        },
+        "dragOver"
       );
       surveyElement.registerFunctionOnPropertiesValueChanged(["visibleRows"], (newValue: Array<QuestionRowModel>) => {
         this.updateShowPlaceholder(newValue);
-      });
+      }, "updatePlaceholder");
       this.updateShowPlaceholder();
       surveyElement.onFirstRendering();
       surveyElement.updateCustomWidgets();
@@ -94,8 +96,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   protected detachElement(surveyElement: PageModel): void {
     if (!!surveyElement) {
-      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["dragTypeOverMe", "isDragMe"]);
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["elements"], "updatePlaceholder");
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["dragTypeOverMe", "isDragMe"], "dragOver");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["visibleRows"], "updatePlaceholder");
       surveyElement["surveyChangedCallback"] = undefined;
     }
     super.detachElement(surveyElement);

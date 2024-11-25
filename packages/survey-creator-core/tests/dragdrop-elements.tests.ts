@@ -337,6 +337,37 @@ test("SurveyElements: isDropTargetValid && maxNestedPanels", () => {
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(false);
   expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel2"), undefined, DragTypeOverMeEnum.InsideEmptyPanel)).toBe(false);
 });
+test("SurveyElements: isDropTargetValid && maxNestedPanels, #6109", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "panel",
+        name: "panel1",
+        elements: [
+          { type: "text", name: "q2" }
+        ]
+      },
+      {
+        type: "text",
+        name: "q1",
+      },
+      {
+        type: "panel",
+        name: "panel2",
+        elements: [
+          { type: "panel", name: "panel3" }
+        ]
+      }
+    ],
+  });
+  const pd = survey.getPanelByName("panel2");
+  const ddHelper: any = new DragDropSurveyElements(survey);
+
+  ddHelper.draggedElement = pd;
+  expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(true);
+  ddHelper.onGetMaxNestedPanels = (): number => { return 1; };
+  expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(false);
+});
 
 // test("surveyelement: calcTargetRowMultiple for paneldynamic", () => {
 //   const survey = new SurveyModel({

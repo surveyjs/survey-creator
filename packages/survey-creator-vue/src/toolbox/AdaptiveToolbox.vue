@@ -5,7 +5,7 @@
         <template v-if="toolbox.isCompactRendered">
           <SvComponent
             :is="'svc-toolbox-tool'"
-            :creator="creator"
+            :creator="model"
             key="searchitem"
             :item="toolbox.searchItem"
             :parentModel="toolbox"
@@ -20,19 +20,10 @@
             class="svc-toolbox__category-separator svc-toolbox__category-separator--search"
           ></div>
       </div>
-      <div @focusout="(e) => toolbox.focusOut(e)" class="svc-toolbox__scroll-wrapper">
-        <div
-          class="svc-toolbox__scroller sv-drag-target-skipped"
-          @scroll="
-            (e) => {
-              toolbox.onScroll(toolbox, e);
-            }
-          "
-        >
           <div v-if="toolbox.showPlaceholder" class="svc-toolbox__placeholder">
             {{ toolbox.toolboxNoResultsFound }}
           </div>
-          <div class="svc-toolbox__container">
+          <Scroll>
             <template v-if="!toolbox.showInSingleCategory">
               <SvComponent
                 :is="'svc-toolbox-category'"
@@ -47,7 +38,7 @@
                 <template v-for="(item, index) in renderedActions" :key="index">
                   <SvComponent
                     :is="'svc-toolbox-tool'"
-                    :creator="creator"
+                    :creator="model"
                     :item="item"
                     :parentModel="toolbox"
                     :isCompact="toolbox.isCompactRendered"
@@ -55,17 +46,7 @@
                 </template>
               </div>
             </template>
-          </div>
-        </div>
-        <div class="svc-toolbox__scrollbar" @scroll="
-            (e) => {
-              toolbox.onScrollbarScroll(e);
-            }
-          ">
-          <div class="svc-toolbox__scrollbar-sizer">
-          </div>
-        </div>
-      </div>
+          </Scroll>
     </div>
   </div>
 </template>
@@ -75,9 +56,10 @@ import { VerticalResponsivityManager } from "survey-core";
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed, onMounted, onUnmounted, ref } from "vue";
-const props = defineProps<{ creator: SurveyCreatorModel }>();
+import Scroll from "@/components/Scroll.vue";
+const props = defineProps<{ model: SurveyCreatorModel }>();
 const toolbox = computed(() => {
-  return props.creator.toolbox;
+  return props.model.toolbox;
 });
 
 const root = ref<HTMLDivElement>();
@@ -94,7 +76,7 @@ onMounted(() => {
 });
 onUnmounted(() => {
   responsivityManager?.dispose();
-  toolbox.value.unsubscribeRootElement();
+  toolbox.value.setRootElement(undefined as any);
 });
 const renderedActions = computed(() => toolbox.value.renderedActions);
 </script>

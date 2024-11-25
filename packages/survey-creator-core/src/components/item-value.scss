@@ -271,7 +271,7 @@
 
 .svc-item-value__ghost {
   display: none;
-  background: $background-dim;
+  background: var(--ctr-survey-radio-button-group-item-background-color-drop-spot, $background-dim);
   border-radius: var(--ctr-survey-radio-button-group-item-corner-radius-floating, calcSize(12.5));
   width: calcSize(25);
   height: 40px;

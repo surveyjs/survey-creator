@@ -22,6 +22,7 @@ class KnockoutRowViewModel extends RowViewModel {
     public templateData: any
   ) {
     super(creator, row, templateData);
+    this.subscribeElementChanges();
   }
 }
 

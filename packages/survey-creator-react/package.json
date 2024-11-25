@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-react",
-  "version": "1.12.10",
+  "version": "1.12.11",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -27,6 +27,7 @@
     "visual-regression-tests": "testcafe ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal  --config-file .testcaferc.dev.js",
     "visual-regression-tests:ci": "testcafe ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
     "visual-regression-tests:file": "testcafe --app \"http-server\" ../../visualRegressionTests/tests/designer/pg-editors.ts --screenshots ../../ --reporter minimal --selector-timeout 1500  --config-file .testcaferc.dev.js",
+    "vrt:v2": "testcafe ../../visualRegressionTests-V2/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal  --config-file .testcaferc.dev.js",
     "vrt:v2:ci": "testcafe ../../visualRegressionTests-V2/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
     "remove-package-lock": "rimraf package-lock.json",
