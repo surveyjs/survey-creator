@@ -14,9 +14,12 @@
     color: var(--ctr-checkbox-text-color-disabled, $foreground-light);
   }
 
-  .spg-checkbox__rectangle {
+  .spg-checkbox__rectangle,
+  &.spg-checkbox:active .spg-checkbox__rectangle,
+  &.spg-checkbox__control:focus+.spg-checkbox__rectangle {
     border: var(--ctr-checkbox-border-width, 1px) solid var(--ctr-checkbox-border-color-disabled, $border-inside);
     background: var(--ctr-checkbox-background-color-disabled, $background-dim);
+    outline: none;
   }
 }
 
@@ -52,7 +55,7 @@
 }
 
 .spg-checkbox:active .spg-checkbox__rectangle,
-.spg-checkbox__control:focus+.spg-checkbox__rectangle {
+.spg-checkbox__control:focus:not(:disabled):not(:read-only)+.spg-checkbox__rectangle {
   outline: 2px solid var(--ctr-checkbox-border-color-focused, $primary);
   outline-offset: -2px;
 }

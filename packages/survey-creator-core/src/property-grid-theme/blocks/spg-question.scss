@@ -204,7 +204,7 @@ sv-question-error {
   .spg-input-container,
   .spg-question--location--left,
   .spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
-    box-shadow: 0 0 0 2px $secondary;
+    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-highlighed, 2px) var(--ctr-editor-border-color-highlighted, $secondary);
   }
 
   .spg-checkbox__control:focus + .spg-checkbox__rectangle,
