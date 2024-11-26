@@ -98,13 +98,17 @@ export class UndoRedoController extends Base {
     if(act1Del === act1Ins || (act1Del !== act2Ins && act1Ins !== act2Del)) return false;
     const indexFrom = act1Del ? act1.getIndex() : act2.getIndex();
     const indexTo = act1Ins ? act1.getIndex() : act2.getIndex();
-    this.creator.notifySurveyItemMoved({
-      arrayName: changes1.propertyName,
-      parent: changes1.object,
-      element: act1Del ? act1Del : act1Ins,
-      indexFrom: !isUndo ? indexFrom : indexTo,
-      indexTo: !isUndo ? indexTo : indexFrom
-    });
+    if(indexFrom === indexTo && !!act1Del && !!act2Ins && !act1Ins && !act2Del) {
+      this.creator.notifySurveyItemConverted(!isUndo ? act2Ins: act1Del, !isUndo ? act1Del : act2Ins);
+    } else {
+      this.creator.notifySurveyItemMoved({
+        arrayName: changes1.propertyName,
+        parent: changes1.object,
+        element: act1Del ? act1Del : act1Ins,
+        indexFrom: !isUndo ? indexFrom : indexTo,
+        indexTo: !isUndo ? indexTo : indexFrom
+      });
+    }
     return true;
   }
   private selectElementAfterUndo() {

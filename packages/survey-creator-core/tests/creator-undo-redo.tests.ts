@@ -449,3 +449,23 @@ test("Undo changing property on deleting question", (): any => {
   question = creator.survey.getQuestionByName("q1");
   expect(question.title).toBe("Question 1");
 });
+test("undo/redo with events", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ name: "q1", type: "dropdown" }]
+  };
+  const mOptions: Array<any> = [];
+  creator.onModified.add(function (sender, options) {
+    mOptions.push({ type: options.type, className: options.className, oldType: options.oldValue.getType(), newType: options.newValue.getType() });
+  });
+
+  creator.selectQuestionByName("q1");
+  creator.convertCurrentQuestion("checkbox");
+  expect(mOptions).toHaveLength(1);
+  creator.undo();
+  expect(mOptions).toHaveLength(2);
+  expect(mOptions).toStrictEqual([
+    { type: "QUESTION_CONVERTED", className: "checkbox", oldType: "dropdown", newType: "checkbox" },
+    { type: "QUESTION_CONVERTED", className: "dropdown", oldType: "checkbox", newType: "dropdown" }
+  ]);
+});
