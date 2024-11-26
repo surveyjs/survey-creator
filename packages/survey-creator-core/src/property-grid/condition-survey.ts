@@ -1,4 +1,5 @@
-import { SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue, PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel, QuestionMatrixDropdownModelBase } from "survey-core";
+import { SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue,
+  PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
@@ -516,25 +517,45 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
   }
   private isSettingPanelValues = false;
+  private getIsOperatorEnabled(qName: string, qType: string, op: string, condQuestion: Question, isContainer: boolean): boolean {
+    if(isContainer) return op === "empty" || op === "notempty";
+    let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[op]);
+    return !!condQuestion ? this.options.isConditionOperatorEnabled(qName, condQuestion, op, isOperatorEnabled) : isOperatorEnabled;
+  }
+  private isContainerQuestion(questionName: string): boolean {
+    if(!settings.logic.includeComplexQuestions || !questionName) return false;
+    for(let key in this.addConditionQuestionsHash) {
+      if(key.indexOf(questionName + ".") === 0 || key.indexOf(questionName + "[") === 0) return true;
+    }
+    return false;
+  }
   private setupConditionOperator(item: ConditionEditorItem, panel: PanelModel) {
     const questionOperator = <QuestionDropdownModel>panel.getQuestionByName("operator");
     questionOperator.choices = this.getOperators();
     questionOperator.value = item.operator;
     questionOperator.onOpened.add((_, opt) => {
-      const questionName = panel.getQuestionByName("questionName").value;
-      const json = this.getQuestionConditionJson(questionName);
-      const qType = !!json ? json.type : null;
-      const condQuestion = this.getConditionQuestion(questionName);
-      opt.choices.forEach((choice, index) => {
-        let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
-        if(condQuestion?.isContainer) {
-          isOperatorEnabled = choice.value === "empty" || choice.value === "notempty";
-        }
-        isOperatorEnabled = this.options.isConditionOperatorEnabled(questionName, condQuestion, choice.value, isOperatorEnabled);
-        choice.setIsEnabled(isOperatorEnabled);
-        choice.setIsVisible(isOperatorEnabled);
-      });
+      this.updateConditionChoices(panel, opt.choices);
     });
+  }
+  private updateConditionChoices(panel: PanelModel, choices: Array<ItemValue>, questionOperator?: Question): void {
+    let isCurrentOperatorEnabled = true;
+    const op = questionOperator?.value;
+    const questionName = panel.getQuestionByName("questionName").value;
+    const json = this.getQuestionConditionJson(questionName);
+    const qType = !!json ? json.type : null;
+    const isContainer = this.isContainerQuestion(questionName);
+    const condQuestion = this.getConditionQuestion(questionName);
+    choices.forEach((choice) => {
+      const isOperatorEnabled = this.getIsOperatorEnabled(questionName, qType, choice.value, condQuestion, isContainer);
+      choice.setIsEnabled(isOperatorEnabled);
+      choice.setIsVisible(isOperatorEnabled);
+      if (!!questionOperator && choice.value == op) {
+        isCurrentOperatorEnabled = isOperatorEnabled;
+      }
+    });
+    if (!isCurrentOperatorEnabled) {
+      questionOperator.value = this.getFirstEnabledOperator(choices);
+    }
   }
   private setupConditionQuestionName(item: ConditionEditorItem, panel: PanelModel) {
     const panelQuestionName = <QuestionDropdownModel>panel.getQuestionByName("questionName");
@@ -648,6 +669,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     name = name.substring(0, indexInfo.index);
     return <Question>this.survey.getQuestionByValueName(name);
   }
+  private getConditionQuestionText(question: Question, name: string): string {
+    return this.options.getObjectDisplayName(question, "condition-editor", "condition", name);
+  }
   private createAllConditionQuestions(): Array<ItemValue> {
     if (!this.survey) return [];
     const res = [];
@@ -660,7 +684,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         if (contextObject == question) continue;
         const context = contextObject ? contextObject : (!this.context || this.context === question);
         if(settings.logic.includeComplexQuestions && question.isContainer) {
-          res.push(question);
+          res.push({ question: question, name: question.name, text: question.title });
         }
         question.addConditionObjectsByContext(res, context);
       }
@@ -681,7 +705,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         }
         const unwrappedValueText = "-unwrapped";
         name = name.replace(unwrappedValueText, "");
-        res[i].text = this.options.getObjectDisplayName(question, "condition-editor", "condition", name);
+        res[i].text = this.getConditionQuestionText(question, name);
       }
       this.addConditionQuestionsHash[res[i].name] = question;
     }
@@ -860,26 +884,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
   }
   private updateOperatorEnables(panel: PanelModel) {
-    const questionName = panel.getQuestionByName("questionName");
-    if (!questionName) return;
-    const json = this.getQuestionConditionJson(questionName.value);
-    const qType = !!json ? json.type : null;
     const questionOperator = <QuestionDropdownModel>panel.getQuestionByName("operator");
     if (!questionOperator) return;
-    const choices = questionOperator.choices;
-    let isCurrentOperatorEnabled = true;
-    const op = questionOperator.value;
-    for (let i = 0; i < choices.length; i++) {
-      const isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choices[i].value]);
-      choices[i].setIsEnabled(isOperatorEnabled);
-      choices[i].setIsVisible(isOperatorEnabled);
-      if (choices[i].value == op) {
-        isCurrentOperatorEnabled = choices[i].isEnabled;
-      }
-    }
-    if (!isCurrentOperatorEnabled) {
-      questionOperator.value = this.getFirstEnabledOperator(choices);
-    }
+    this.updateConditionChoices(panel, questionOperator.choices, questionOperator);
   }
   private updateQuestionsWidth(panel: PanelModel) {
     const valueQuestion = panel.getQuestionByName("questionValue");
