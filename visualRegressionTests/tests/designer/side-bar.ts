@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, takeElementScreenshot, wrapVisualTest, pageNavigator, getListItemByText, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText } from "../../helper";
+import { url, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, takeElementScreenshot, wrapVisualTest, pageNavigator, getListItemByText, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName } from "../../helper";
 import { largeSurvey } from "./surveys/large-survey";
 
 const title = "Sidebar Screenshot";
@@ -140,5 +140,17 @@ test.page(themeTabUrl)("tabbed mode", async (t) => {
     await t.hover(Selector(".svc-side-bar .svc-scroll__wrapper").filterVisible());
     await t.expect(Selector(".svc-side-bar .svc-scroll__scrollbar").visible).ok();
     await takeElementScreenshot("side-bar-tabbed-property-grid-theme-appearance-advanced-hover.png", ".svc-side-bar", t, comparer);
+  });
+});
+
+test("translation tab tabbed property grid", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1200);
+    await ClientFunction(() => {
+      window["creator"].showOneCategoryInPropertyGrid = true;
+    })();
+
+    await t.click(getTabbedMenuItemByText(creatorTabTranslationName));
+    await takeElementScreenshot("side-bar-tabbed-property-grid-translation-general.png", ".svc-side-bar", t, comparer);
   });
 });

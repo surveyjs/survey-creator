@@ -3,7 +3,8 @@ import {
   objectSelectorButton, objectSelectorPopup, propertyGridSelector, url,
   pageNavigator, creatorTabDesignerName, creatorTabPreviewName, changeToolboxLocation, SingleInputToolboxItem, surveySettingsButtonSelector,
   changeToolboxScrolling,
-  changeToolboxSearchEnabled
+  changeToolboxSearchEnabled,
+  creatorTabTranslationName
 } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Side bar";
@@ -65,7 +66,7 @@ test("SelectObject", async (t: TestController) => {
   await setJSON({ pages: [{ name: "page1" }] });
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
-    .click(getTabbedMenuItemByText("Translation"))
+    .click(getTabbedMenuItemByText(creatorTabTranslationName))
     .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .expect(objectSelectorPopup.exists).notOk()
 
