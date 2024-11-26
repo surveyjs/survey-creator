@@ -505,8 +505,6 @@ svc-question {
     var(--ctr-survey-question-panel-border-color-selected, $secondary);
 
   border-radius: var(--lbr-question-panel-corner-radius, 2px);
-  border: var(--ctr-survey-question-panel-border-width-selected, 2px) solid
-    var(--ctr-survey-question-panel-border-color-selected, #ff9814);
   background: var(--lbr-question-panel-background-color, #fff);
 }
 
@@ -1110,13 +1108,12 @@ svc-question,
   justify-content: center;
 
   .svc-element__add-new-question {
-    align-items: center;
-    margin-top: calcSize(2);
+    margin-top: var(--ctr-survey-panel-add-button-margin-top, calcSize(2));
     margin-left: 0;
     margin-right: 0;
     width: auto;
-    height: calcSize(5);
-    line-height: calcSize(5);
+    // height: calcSize(5);
+    // line-height: calcSize(5);
     vertical-align: baseline;
     text-align: center;
     cursor: pointer;
@@ -1124,7 +1121,13 @@ svc-question,
 
     border: none;
     box-shadow: none;
-    padding: calcSize(0.5) calcSize(2);
+    padding: var(--ctr-survey-action-button-padding-top, calcSize(1))
+    var(--ctr-survey-action-button-padding-right, calcSize(3))
+    var(--ctr-survey-action-button-padding-bottom, calcSize(1))
+    var(--ctr-survey-action-button-padding-left, calcSize(3));
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
       outline: none;
@@ -1132,11 +1135,12 @@ svc-question,
 
     .svc-add-new-item-button__text {
       @include lbrDefaultBoldFont;
-      display: flex;
-      align-items: center;
-      flex-grow: 1;
-      justify-content: center;
-      margin: calcSize(1) calcSize(3);
+      // display: flex;
+      // align-items: center;
+      // flex-grow: 1;
+      // justify-content: center;
+      // margin: calcSize(1) calcSize(3);
+      margin: 0;
       color: var(--ctr-survey-action-button-text-color-positive, $primary);
       text-wrap: nowrap;
     }
@@ -1183,13 +1187,17 @@ svc-question,
 }
 
 .svc-panel__add-new-question {
-  align-items: center;
-  margin-top: calcSize(2);
+  margin-top: var(--ctr-survey-placeholder-gap, calcSize(2));
   margin-left: 0;
   margin-right: 0;
   width: auto;
-  height: calcSize(5);
-  line-height: calcSize(5);
+  padding: var(--ctr-survey-action-button-padding-top, calcSize(1))
+    var(--ctr-survey-action-button-padding-right, calcSize(3))
+    var(--ctr-survey-action-button-padding-bottom, calcSize(1))
+    var(--ctr-survey-action-button-padding-left, calcSize(3));
+  justify-content: center;
+  align-items: center;
+
   vertical-align: baseline;
   text-align: center;
   cursor: pointer;
@@ -1200,7 +1208,6 @@ svc-question,
 
   border: none;
   box-shadow: none;
-  padding: calcSize(0.5) calcSize(2);
 
   &:hover {
     outline: none;
@@ -1208,11 +1215,6 @@ svc-question,
 
   .svc-add-new-item-button__text {
     @include lbrDefaultBoldFont;
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    justify-content: center;
-    margin: calcSize(1) calcSize(3);
     color: var(--ctr-survey-action-button-text-color-positive, $primary);
     text-wrap: nowrap;
   }

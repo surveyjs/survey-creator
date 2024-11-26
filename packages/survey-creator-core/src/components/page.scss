@@ -332,11 +332,11 @@ svc-page {
 }
 
 .svc-element__add-new-question:focus {
-  border: var(--ctr-button-border-width-focused, 2px) solid var(--ctr-button-border-color-focused, $primary);
+  box-shadow: 0 0 0 var(--ctr-button-border-width-focused, 2px) var(--ctr-button-border-color-focused, $primary);
 }
 
 .svc-add-new-item-button__text {
-  @include lbrDefaultFont;
+  @include lbrDefaultBoldFont;
   color: $foreground;
 }
 

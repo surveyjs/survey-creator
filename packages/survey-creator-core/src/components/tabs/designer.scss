@@ -36,6 +36,8 @@ svc-tab-designer {
 
 .svc-designer-header .svc-surface-header {
   background-color: transparent;
+  padding: var(--lbr-header-padding-top, calcSize(3)) var(--ctr-survey-header-padding-right-logo-placeholder, calcSize(1))
+    var(--lbr-page-header-padding-bottom, calcSize(3)) var(--lbr-header-padding-left, calcSize(3));
 }
 
 .svc-surface-header {
