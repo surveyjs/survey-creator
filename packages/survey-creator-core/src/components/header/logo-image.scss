@@ -2,7 +2,7 @@
 
 .svc-designer-header .sd-container-modern__title {
   gap: 0;
-  column-gap: calcSize(6);
+  column-gap: var(--lbr-header-gap, 32px);
 }
 
 .svc-logo-image {

@@ -503,9 +503,6 @@ svc-question {
 .svc-question__content--selected:not(.svc-question__content--dragged) {
   box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-selected, 2px)
     var(--ctr-survey-question-panel-border-color-selected, $secondary);
-
-  border-radius: var(--lbr-question-panel-corner-radius, 2px);
-  background: var(--lbr-question-panel-background-color, #fff);
 }
 
 .svc-question__content--collapsed-drag-over-inside:not(.svc-question__content--dragged) {
@@ -1109,41 +1106,6 @@ svc-question,
 
   .svc-element__add-new-question {
     margin-top: var(--ctr-survey-panel-add-button-margin-top, calcSize(2));
-    margin-left: 0;
-    margin-right: 0;
-    width: auto;
-    // height: calcSize(5);
-    // line-height: calcSize(5);
-    vertical-align: baseline;
-    text-align: center;
-    cursor: pointer;
-    user-select: none;
-
-    border: none;
-    box-shadow: none;
-    padding: var(--ctr-survey-action-button-padding-top, calcSize(1))
-    var(--ctr-survey-action-button-padding-right, calcSize(3))
-    var(--ctr-survey-action-button-padding-bottom, calcSize(1))
-    var(--ctr-survey-action-button-padding-left, calcSize(3));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &:hover {
-      outline: none;
-    }
-
-    .svc-add-new-item-button__text {
-      @include lbrDefaultBoldFont;
-      // display: flex;
-      // align-items: center;
-      // flex-grow: 1;
-      // justify-content: center;
-      // margin: calcSize(1) calcSize(3);
-      margin: 0;
-      color: var(--ctr-survey-action-button-text-color-positive, $primary);
-      text-wrap: nowrap;
-    }
   }
 
   .svc-element__add-new-question-icon {
@@ -1156,45 +1118,23 @@ svc-question,
   }
 
   .svc-element__question-type-selector {
-    appearance: none;
-    display: flex;
-    height: calcSize(5);
-    padding: calcSize(1);
-    box-sizing: border-box;
-    border: none;
-    border-radius: 2px;
-    background-color: transparent;
-    cursor: pointer;
-    margin-right: calcSize(1);
-    outline: none;
-    top: calcSize(2);
-    margin: 0;
     position: absolute;
-    right: 0;
-
-    use {
-      fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);
-    }
-
-    &:hover {
-      background-color: $background-dim;
-    }
-
-    &:focus {
-      background-color: $primary-light;
-    }
+    inset-inline-end: 0px;
+    bottom: 0px;
+    margin: 0;
   }
 }
 
-.svc-panel__add-new-question {
+.svc-panel__add-new-question,
+.svc-panel__add-new-question-wrapper .svc-element__add-new-question {
   margin-top: var(--ctr-survey-placeholder-gap, calcSize(2));
   margin-left: 0;
   margin-right: 0;
   width: auto;
   padding: var(--ctr-survey-action-button-padding-top, calcSize(1))
-    var(--ctr-survey-action-button-padding-right, calcSize(3))
+    var(--ctr-survey-action-button-padding-right, calcSize(5))
     var(--ctr-survey-action-button-padding-bottom, calcSize(1))
-    var(--ctr-survey-action-button-padding-left, calcSize(3));
+    var(--ctr-survey-action-button-padding-left, calcSize(5));
   justify-content: center;
   align-items: center;
 
@@ -1217,6 +1157,7 @@ svc-question,
     @include lbrDefaultBoldFont;
     color: var(--ctr-survey-action-button-text-color-positive, $primary);
     text-wrap: nowrap;
+    margin: 0;
   }
 }
 
@@ -1236,36 +1177,6 @@ svc-question,
   right: 0;
   bottom: 0;
 }
-
-// .svc-panel__question-type-selector {
-//   appearance: none;
-//   display: flex;
-//   height: calcSize(5);
-//   padding: calcSize(1);
-//   box-sizing: border-box;
-//   border: none;
-//   border-radius: 2px;
-//   background-color: transparent;
-//   cursor: pointer;
-//   margin-right: calcSize(1);
-//   outline: none;
-//   top: calcSize(2);
-//   margin: 0;
-//   position: absolute;
-//   right: 0;
-
-//   use {
-//     fill: var(--ctr-library-contextual-button-icon-color, $foreground-light);
-//   }
-
-//   &:hover {
-//     background-color: $background-dim;
-//   }
-
-//   &:focus {
-//     background-color: $primary-light;
-//   }
-// }
 
 @container (max-width: #{$sd-panel-normal-min-width}) {
   .svc-panel__placeholder_frame {
@@ -1456,10 +1367,27 @@ svc-question,
 
 .svc-survey-element-top-toolbar__item {
   @include defaultActionButtonSettings;
-  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top-small, calcSize(0.5))
-    var(--ctr-survey-question-panel-toolbar-item-padding-right-small, calcSize(0.5))
-    var(--ctr-survey-question-panel-toolbar-item-padding-bottom-small, calcSize(0.5))
-    var(--ctr-survey-question-panel-toolbar-item-padding-left-small, calcSize(0.5));
+  --thm-survey-question-panel-toolbar-item-padding-top-small: calc(
+    var(--ctr-survey-question-panel-toolbar-item-padding-top-small) +
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-top)
+  );
+  --thm-survey-question-panel-toolbar-item-padding-right-small: calc(
+    var(--ctr-survey-question-panel-toolbar-item-padding-right-small) +
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-right)
+  );
+  --thm-survey-question-panel-toolbar-item-padding-bottom-small: calc(
+    var(--ctr-survey-question-panel-toolbar-item-padding-bottom-small) +
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom)
+  );
+  --thm-survey-question-panel-toolbar-item-padding-left-small: calc(
+    var(--ctr-survey-question-panel-toolbar-item-padding-left-small) +
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-left)
+  );
+
+  padding: var(--thm-survey-question-panel-toolbar-item-padding-top-small, calcSize(0.5))
+    var(--thm-survey-question-panel-toolbar-item-padding-right-small, calcSize(0.5))
+    var(--thm-survey-question-panel-toolbar-item-padding-bottom-small, calcSize(0.5))
+    var(--thm-survey-question-panel-toolbar-item-padding-left-small, calcSize(0.5));
   border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, 2px);
   opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-muted, 0.5);
   background-color: transparent;

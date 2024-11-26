@@ -80,7 +80,7 @@
   display: block;
 }
 
-.svc-item-value-controls__drag-icon {
+.svc-item-value-controls__drag .svc-item-value-controls__drag-icon {
   display: block;
   transition: opacity $creator-transition-duration;
   width: var(--ctr-survey-item-actionbar-drag-indicator-width, calcSize(3));
