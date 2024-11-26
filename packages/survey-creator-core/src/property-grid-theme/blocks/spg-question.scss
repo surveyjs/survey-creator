@@ -82,15 +82,21 @@
 
 .spg-question--location--left {
   flex-direction: row;
-  background: $background;
-  box-shadow: inset 0 0 0 1px $border-inside;
+  background: var(--ctr-editor-background-color, $background);
+  box-shadow: inset 0 0 0 var(--ctr-editor-border-width, 1px) var(--ctr-editor-border-color, $border-inside);
   line-height: calcSize(6);
   vertical-align: middle;
   align-items: stretch;
+  border-radius: var(--ctr-editor-corner-radius, 0px);
+
 
   &:focus-within {
-    box-shadow: inset 0 0 0 2px $primary;
+    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-focused, 2px) var(--ctr-editor-border-color-focused, $primary);
   }
+}
+
+.spg-question--disabled.spg-question--location--left .spg-question__title {
+  color: var(--ctr-editor-content-text-color-disabled, $foreground-dim);
 }
 
 .spg-question__header--location--left {
