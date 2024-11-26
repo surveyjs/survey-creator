@@ -91,14 +91,21 @@
       height: var(--ctr-menu-toolbar-button-height, calcSize(5));
     }
 
-    .sv-action .sv-action-bar-item {
-      --ctr-menu-toolbar-button-gap: calc(var(--ctr-menu-toolbar-gap) / 2);
-      margin: 0 var(--ctr-menu-toolbar-button-gap, calcSize(1));
-      padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1))
-        var(--ctr-menu-toolbar-button-padding-right, calcSize(1))
-        var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1))
-        var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
+    .sv-action {
+
+      .sv-action-bar-item {
+        --ctr-menu-toolbar-button-gap: calc(var(--ctr-menu-toolbar-gap) / 2);
+        margin: 0 var(--ctr-menu-toolbar-button-gap, calcSize(1));
+        padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1))
+          var(--ctr-menu-toolbar-button-padding-right, calcSize(1))
+          var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1))
+          var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
+      }
+      .sv-action-bar-item--active {
+        background: var(--ctr-menu-toolbar-button-background-color-selected, transparent);
+      }
     }
+
   }
 
   .sv-action-bar-separator {

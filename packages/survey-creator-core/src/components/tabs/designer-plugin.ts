@@ -245,7 +245,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
-      const pgTabs = this.propertyGrid.survey.pages.map(p => {
+      const pgTabs = [];
+      this.propertyGrid.survey.pages.forEach(p => {
+        if(p.elements.length === 0) return;
+
         const action = new MenuButton({
           id: p.name,
           tooltip: p.title,
@@ -262,7 +265,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
             action.active = true;
           }
         });
-        return action;
+        pgTabs.push(action);
       });
       this.tabControlModel.topToolbar.setItems(pgTabs);
       this.propertyGridTab.deactivateCallback = () => {
