@@ -98,8 +98,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
-      target.renderedCollapsed = val;
-      if (!val) target.needToRenderContent = true;
+      const actualCollapsed = target.surveyElement && target.surveyElement.isInteractiveDesignElement && val;
+      target.renderedCollapsed = actualCollapsed;
+      target.needToRenderContent = !actualCollapsed;
       if (target.creator.designerStateManager && !target.creator.designerStateManager.isSuspended && target.surveyElement) {
         target.creator.designerStateManager.getElementState(target.surveyElement).collapsed = val;
       }
@@ -165,7 +166,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     };
     const afterRunAnimation = (el: HTMLElement, animatingClassName: string) => {
       this.expandCollapseAnimationRunning = false;
-      if(this.surveyElement) {
+      if (this.surveyElement) {
         cleanHtmlElementAfterAnimation(el);
         const innerAnimatedElements = this.getInnerAnimatedElements();
         innerAnimatedElements.forEach((elem: HTMLElement) => {
@@ -295,7 +296,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       const state = this.creator.designerStateManager?.getElementState(this.surveyElement);
       this.collapsed = this.creator.getElementExpandCollapseState(this.surveyElement as any, "loading", state.collapsed);
     }
-    this.needToRenderContent = !this.collapsed;
   }
 
   protected detachElement(surveyElement: T): void {
