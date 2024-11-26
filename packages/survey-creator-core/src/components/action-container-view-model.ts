@@ -98,9 +98,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
-      const actualCollapsed = target.surveyElement && target.surveyElement.isInteractiveDesignElement && val;
-      target.renderedCollapsed = actualCollapsed;
-      target.needToRenderContent = !actualCollapsed;
+      target.renderedCollapsed = val;
+      if (!val) target.needToRenderContent = true;
       if (target.creator.designerStateManager && !target.creator.designerStateManager.isSuspended && target.surveyElement) {
         target.creator.designerStateManager.getElementState(target.surveyElement).collapsed = val;
       }
@@ -295,6 +294,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     if (!!this.surveyElement) {
       const state = this.creator.designerStateManager?.getElementState(this.surveyElement);
       this.collapsed = this.creator.getElementExpandCollapseState(this.surveyElement as any, "loading", state.collapsed);
+    }
+    if (!this.surveyElement || this.surveyElement.isInteractiveDesignElement) {
+      this.needToRenderContent = !this.collapsed;
     }
   }
 

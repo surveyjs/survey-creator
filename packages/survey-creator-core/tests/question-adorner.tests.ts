@@ -1032,12 +1032,17 @@ test("Panel dynamic template panel shouldn't render collapsed", (): any => {
     question.template,
     <any>undefined
   );
+
   expect(questionAdorner.collapsed).toBeFalsy();
-  expect(questionAdorner.renderedCollapsed).toBeFalsy();
   expect(questionAdorner.needToRenderContent).toBeTruthy();
+
   questionAdorner.collapsed = true;
   expect(questionAdorner.collapsed).toBeTruthy();
-  expect(questionAdorner.renderedCollapsed).toBeFalsy();
   expect(questionAdorner.needToRenderContent).toBeTruthy();
+
+  questionAdorner["restoreState"]();
+  expect(questionAdorner.collapsed).toBeTruthy();
+  expect(questionAdorner.needToRenderContent).toBeTruthy();
+
   surveySettings.animationEnabled = true;
 });
