@@ -12,6 +12,7 @@ svc-page-navigator,
   height: var(--ctr-page-navigator-button-icon-height, calcSize(3));
   padding: var(--ctr-page-navigator-button-padding, calcSize(1.25));
   border-radius: var(--ctr-page-navigator-button-corner-radius, 50%);
+  overflow: visible;
   cursor: pointer;
   transition: background-color $creator-transition-duration;
 
@@ -55,11 +56,20 @@ svc-page-navigator,
   }
 }
 
-.svc-page-navigator__button--pressed {
+.svc-page-navigator__button--pressed, .svc-page-navigator__button:active {
   .svc-page-navigator__button-icon {
     background: var(--ctr-page-navigator-button-background-color-pressed, $primary-light);
     opacity: var(--ctr-page-navigator-button-opacity-pressed, 0.5);
 
+    use {
+      fill: var(--ctr-page-navigator-button-icon-color-hovered, $primary);
+    }
+  }
+}
+
+.svc-page-navigator__button--active {
+  .svc-page-navigator__button-icon {
+    background: var(--ctr-page-navigator-button-background-color-hovered, $primary-light);
     use {
       fill: var(--ctr-page-navigator-button-icon-color-hovered, $primary);
     }

@@ -87,7 +87,7 @@ function isLightTheme(themeName) {
 }
 
 function writeTheme(themeName, cssVariables, variableName) {
-  const theme = { themeName, cssVariables };
+  const theme = { themeName, iconsSet: "v2", cssVariables };
   const themeJson = JSON.stringify(theme, null, 2);
   const result = `const Theme = ${themeJson};\nexport default Theme;\nexport const ${variableName} = Theme;`;
   fs.writeFileSync(_dirPath + themeName + ".ts", result);
@@ -99,7 +99,7 @@ function writeThemePalette(themeName, paletteName, cssVariables) {
   const variableName = [baseThemeVariable, capitalizedFirstLetter(paletteName)].join("");
   const isLight = isLightTheme(fileName);
 
-  const theme = { themeName: fileName, isLight: isLight, cssVariables: cssVariables };
+  const theme = { themeName: fileName, iconsSet: "v2", isLight: isLight, cssVariables: cssVariables };
   const themeJson = JSON.stringify(theme, null, 2);
   const importsString = `import { assign } from "./utils";\nimport { ${baseThemeVariable} } from "./${themeName}";\n`;
   const useImportString = `const themeCssVariables = {};\nassign(themeCssVariables, ${baseThemeVariable}.cssVariables, Theme.cssVariables);\nassign(Theme, { cssVariables: themeCssVariables });\n`;

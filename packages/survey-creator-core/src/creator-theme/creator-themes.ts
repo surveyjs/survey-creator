@@ -3,6 +3,7 @@ import designTabSurveyThemeJSON from "../designTabSurveyThemeJSON";
 
 export interface ICreatorTheme {
   themeName?: string;
+  iconsSet?: string;
   cssVariables?: { [index: string]: string };
 }
 
@@ -23,6 +24,7 @@ assign(sc2020CssVariables, designTabSurveyThemeJSON.cssVariables, {
 export const CreatorThemes: { [index: string]: ICreatorTheme } = {
   "sc2020": {
     themeName: "sc2020",
-    cssVariables: sc2020CssVariables
+    cssVariables: sc2020CssVariables,
+    iconsSet: "v1"
   }
 };

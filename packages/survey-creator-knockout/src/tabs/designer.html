@@ -1,6 +1,7 @@
 <!-- ko using: model -->
 <!-- ko if: isToolboxVisible -->
-<svc-adaptive-toolbox params="model: creator"></svc-adaptive-toolbox>
+<!-- ko component: { name: 'svc-toolbox', params: { model: creator }} -->
+<!-- /ko -->
 <!-- /ko -->
 <div class="svc-tab-designer" data-bind="css: getRootCss(), click: clickDesigner">
   <div class="svc-tab-designer_content">
