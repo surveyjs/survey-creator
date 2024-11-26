@@ -13,6 +13,7 @@ import {
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
+import { title } from "process";
 
 export * from "../../src/components/link-value";
 
@@ -1106,6 +1107,7 @@ test("Show complex question in the condition builder", () => {
       {
         name: "q3",
         type: "paneldynamic",
+        title: "abc q3",
         templateElements: [{ type: "text", name: "q2_q1" }]
       },
       {
@@ -1122,6 +1124,7 @@ test("Show complex question in the condition builder", () => {
   });
   const question = survey.getQuestionByName("q1");
   const options = new EmptySurveyCreatorOptions();
+  options.showTitlesInExpressions = true;
   let editor = new ConditionEditor(survey, question, options, "visibleIf");
   expect(editor.allConditionQuestions).toHaveLength(4);
   let panel = editor.panel.panels[0];
@@ -1135,8 +1138,11 @@ test("Show complex question in the condition builder", () => {
   panel = editor.panel.panels[0];
   qName = <QuestionCheckboxModel>panel.getQuestionByName("questionName");
   expect(qName.choices).toHaveLength(4 + 3);
+  expect(qName.choices[0].value).toBe("q3");
+  expect(qName.choices[0].text).toBe("abc q3");
   qName.value = "q4";
   const qOperator = <QuestionDropdownModel>panel.getQuestionByName("operator");
+  expect(qOperator.value).toBe("empty");
   qOperator.onOpenedCallBack();
   expect(ItemValue.getItemByValue(qOperator.visibleChoices, "anyof").isVisible).toBeFalsy();
   expect(ItemValue.getItemByValue(qOperator.visibleChoices, "contains").isVisible).toBeFalsy();
