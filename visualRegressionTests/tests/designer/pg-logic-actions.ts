@@ -66,11 +66,13 @@ test("Check list item styles into logic popup", async (t) => {
     await t.click(getPropertyGridCategory(logicGroupName));
 
     const sectionContentElement = Selector("h4[aria-label=Conditions]").parent().nextSibling();
+
     await t.click(sectionContentElement.find(".spg-action-button").nth(2))
-      .expect(Selector(".sl-dropdown").visible).ok()
-      .click(Selector(".sl-dropdown").nth(0))
+      .click(Selector(".sl-dropdown"))
       .click(getListItemByText("region"))
-      .click(Selector(".sl-dropdown").nth(1))
+      .pressKey("tab")
+      .pressKey("tab")
+      .pressKey("down")
       .pressKey("down");
     await takeElementScreenshot("pg-logic-popup-dropdown-list-item--focused.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
   });
