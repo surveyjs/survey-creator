@@ -19,6 +19,10 @@
     .svc-matrix-cell {
       padding: calcSize(1.5) calcSize(1);
     }
+
+    &.sd-table__cell--drag {
+      padding-right: 0;
+    }
   }
 }
 
@@ -86,14 +90,10 @@
 
   .sd-table__cell.sd-table__cell--drag {
     >div {
-      display: block;
-      margin-left: 0;
       width: initial;
     }
   }
   .sd-drag-element__svg {
-    width: calcSize(2);
-    height: calcSize(2);
     visibility: visible;
     cursor: initial;
     use {
