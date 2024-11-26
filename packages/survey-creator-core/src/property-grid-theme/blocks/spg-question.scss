@@ -61,7 +61,7 @@
 
 .spg-question__description {
   @include ctrSmallFont;
-  color: $foreground-dim-light;
+  color: var(--ctr-caption-with-actions-description-text-color, $foreground-dim-light);
   padding-bottom: calcSize(2);
   white-space: normal;
 }
