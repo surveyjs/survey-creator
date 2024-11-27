@@ -33,7 +33,9 @@ If you are looking for a quick-start application that includes all SurveyJS comp
 
 ## Add Survey Creator to a Vue 3 Application
 
-### Install the `survey-creator-vue` npm Package
+<div id="install-the-survey-creator-vue-npm-package"></div>
+
+### Install the Vue Form Builder npm Package
 
 Survey Creator for Vue 3 consists of two npm packages: [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) (platform-independent code) and [`survey-creator-vue`](https://www.npmjs.com/package/survey-creator-vue) (rendering code). Run the following command to install `survey-creator-vue`. The `survey-creator-core` package will be installed automatically as a dependency.
 
@@ -479,7 +481,9 @@ creator.saveSurveyFunc = (saveNo: number, callback: Function) => {
 
 ## Add Survey Creator to a Vue 2 Application
 
-### Install the `survey-creator-knockout` npm Package
+<div id="install-the-survey-creator-knockout-npm-package"></div>
+
+### Install the Knockout Form Builder npm Package
 
 Survey Creator does not provide a native implementation for Vue 2. However, you can integrate the version for Knockout into your Vue 2 application. Run the following command to install the <a href="https://www.npmjs.com/package/survey-creator-knockout" target="_blank">survey-creator-knockout</a> package:
 
