@@ -159,6 +159,10 @@
           "Title": "Form Calculations",
           "Items": [
             {
+              "Name": "end-user-guide-expression-syntax",
+              "Title": "Expression Syntax"
+            },
+            {
               "Name": "end-user-guide-how-to-calculate-duration-between-dates-within-form",
               "Title": "Calculate Duration Between Dates"
             },

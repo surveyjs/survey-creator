@@ -24,8 +24,14 @@
   padding: calcSize(1.5);
   transition: background-color $creator-transition-duration;
 
+  &:focus:enabled {
+    background-color: transparent;
+  }
+  use {
+    transition: fill $creator-transition-duration;
+  }
   &:hover:enabled,
-  &.sv-focused--by-key {
+  &.sv-focused--by-key.sv-focused--by-key {
     background-color: var(--ctr-collapse-button-background-color-hovered, $primary-light);
     outline: none;
 
@@ -40,8 +46,14 @@
   padding: calcSize(1);
   cursor: pointer;
 
+  &:focus:enabled {
+    background-color: transparent;
+  }
+  use {
+    fill: var(--lbr-action-button-icon-color-negative, $red);
+  }
   &:hover:enabled,
-  &.sv-focused--by-key {
+  &.sv-focused--by-key.sv-focused--by-key  {
     background-color: var(--ctr-library-action-button-background-color-negative-hovered, $red-light);
     outline: none;
 

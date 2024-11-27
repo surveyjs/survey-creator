@@ -19,7 +19,9 @@ If you are looking for a quick-start application that includes all SurveyJS comp
 
 > In this guide, the terms "Form Builder" and "Survey Creator" are used interchangeably and both refer to the SurveyJS form building component for Angular.
 
-## Install the `survey-creator-angular` npm Package
+<div id="install-the-survey-creator-angular-npm-package"></div>
+
+## Install the Angular Form Builder npm Package
 
 Survey Creator for Angular consists of two npm packages: [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) (platform-independent code) and [`survey-creator-angular`](https://www.npmjs.com/package/survey-creator-angular) (rendering code). Run the following command to install `survey-creator-angular`. The `survey-creator-core` package will be installed automatically as a dependency.
 
