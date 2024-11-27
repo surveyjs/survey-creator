@@ -23,6 +23,7 @@
 
     & > .sv-popup__body-content {
       background-color: var(--ctr-popup-background-color, $background-dim-light);
+      border-radius: var(--ctr-popup-corner-radius, var(--sjs-corner-radius, 4px));
 
       padding: var(--ctr-popup-padding-top, calcSize(4)) var(--ctr-popup-padding-right, calcSize(4))
         var(--ctr-popup-padding-bottom, calcSize(4)) var(--ctr-popup-padding-left, calcSize(4));
