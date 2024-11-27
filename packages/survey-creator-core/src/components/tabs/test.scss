@@ -39,14 +39,6 @@ svc-tab-test {
     margin-bottom: calcSize(12);
     margin-top: 8px;
   }
-  .svc-preview-test-again__text {
-    @include ctrDefaultBoldFont;
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    justify-content: center;
-    color: var(--ctr-button-text-color, $primary);
-  }
 }
 
 .svc-creator-tab__content--with-toolbar.svc-test-tab__content .svc-plugin-tab__content {

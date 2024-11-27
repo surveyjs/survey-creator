@@ -1119,8 +1119,8 @@ svc-question,
 
   .svc-element__question-type-selector {
     position: absolute;
-    inset-inline-end: 0px;
-    bottom: 0px;
+    inset-inline-end: 0;
+    bottom: 0;
     margin: 0;
   }
 }
@@ -1157,7 +1157,6 @@ svc-question,
     @include lbrDefaultBoldFont;
     color: var(--ctr-survey-action-button-text-color-positive, $primary);
     text-wrap: nowrap;
-    margin: 0;
   }
 }
 

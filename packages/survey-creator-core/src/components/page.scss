@@ -319,15 +319,17 @@ svc-page {
   }
 }
 
-.svc-element__add-new-question {
-  .svc-add-new-item-button__text {
-    margin-left: calcSize(6);
-  }
+.svc-add-new-item-button__text {
+  @include lbrDefaultBoldFont;
+  color: var(--ctr-button-text-color, $primary);
+  text-align: center;
 }
 
 .svc-element__add-new-question {
   -webkit-tap-highlight-color: transparent;
   height: auto;
+  padding: var(--ctr-surface-button-padding-vertical, calcSize(2))
+    var(--ctr-surface-button-padding-horizontal-contextual-button, calcSize(10));
 }
 
 .svc-element__add-new-question:focus {
@@ -335,6 +337,9 @@ svc-page {
 }
 
 .svc-element__question-type-selector {
+  position: absolute;
+  inset-inline-end: 0;
+
   appearance: none;
   display: flex;
   padding: var(--ctr-surface-button-contextual-button-padding-top, calcSize(1))
@@ -349,7 +354,6 @@ svc-page {
 
   margin: var(--ctr-surface-button-contextual-button-margin-vertical, calcSize(1))
     var(--ctr-surface-button-contextual-button-margin-horizontal, calcSize(1));
-  margin-inline-start: 0; // TODO
   outline: none;
   transition: background-color $creator-transition-duration;
 

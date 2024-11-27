@@ -224,7 +224,7 @@
     gap: 0px;
 
     .svc-logic-tab__content-action {
-      width: calcSize(33);
+      // width: calcSize(33);
       margin-top: calcSize(1);
     }
   }
@@ -247,7 +247,7 @@
     }
   }
 
-  .svc-logic-tab__content-action--disabled .svc-add-new-item-button__text {
+  .svc-logic-tab__content-action--disabled .svc-btn__text {
     color: var(--ctr-button-text-color-disabled, $foreground);
     opacity: var(--ctr-button-text-opacity-disabled, 0.25);
   }
@@ -259,7 +259,7 @@
 }
 
 .svc-logic-tab__content-empty {
-  .svc-add-new-item-button__text {
+  .svc-btn__text {
     color: var(--ctr-surface-placeholder-text-description-color, $foreground);
   }
 }
