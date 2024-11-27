@@ -2394,6 +2394,12 @@ export class SurveyCreatorModel extends Base
     options.type = "ELEMENT_REORDERED";
     this.setModified(options);
   }
+  public notifySurveyItemConverted(newElement: Base, oldElement: Base): void {
+    const options: any = { oldValue: oldElement, newValue: newElement };
+    options.type = "QUESTION_CONVERTED";
+    options.className = newElement.getType();
+    this.setModified(options);
+  }
   /**
    * Displays a toast notification with a specified message.
    * 
@@ -2419,12 +2425,6 @@ export class SurveyCreatorModel extends Base
     };
     this.onQuestionConverting.fire(this, options);
     const newQuestion = <Question>QuestionConverter.convertObject(obj, className, options.json, this.getDefaultElementJSON(className), defaultJSON);
-    this.setModified({
-      type: "QUESTION_CONVERTED",
-      className: className,
-      oldValue: obj,
-      newValue: newQuestion
-    });
     return newQuestion;
   }
   private getDefaultElementJSON(elType: string): any {

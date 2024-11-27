@@ -12,6 +12,7 @@
   <script src="../node_modules/survey-core/survey.core.js"></script>
   <script src="../node_modules/survey-core/survey.i18n.js"></script>
   <script src="../node_modules/survey-core/themes/index.js"></script>
+  <script src="../node_modules/survey-creator-core/themes/index.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js"></script>
   <script src="../node_modules/survey-react-ui/survey-react-ui.js"></script>
@@ -25,6 +26,7 @@
 <script>
   window.surveyJSFramework = "react";
   const creator = new SurveyCreator.SurveyCreator({ showThemeTab: true });
+  creator.applyTheme(SurveyCreatorTheme.DefaultLight);
   window.creator = creator;
   const root = ReactDOM.createRoot(document.getElementById("survey-creator"));
   root.render(React.createElement(React.StrictMode, {
