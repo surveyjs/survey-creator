@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { Action, ComponentCollection, PopupDropdownViewModel, QuestionRadiogroupModel, settings, SurveyElement, SurveyModel, settings as surveySettings } from "survey-core";
+import { Action, ComponentCollection, PopupDropdownViewModel, QuestionPanelDynamicModel, QuestionRadiogroupModel, settings, SurveyElement, SurveyModel, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -996,4 +996,53 @@ test("Don't reset collapased state for moved question", () => {
   creator.designerStateManager.release();
   creator.restoreElementsState();
   expect(pageAdorner.collapsed).toBeTruthy();
+});
+
+test("Panel dynamic template panel shouldn't render collapsed", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "paneldynamic",
+            "name": "paneldynamic1",
+            "state": "expanded",
+            "visible": false,
+            "templateElements": [
+              {
+                "type": "text",
+                "name": "question1"
+              }
+            ],
+            "panelCount": 1,
+            "minPanelCount": 1,
+            "panelsState": "firstExpanded"
+          }
+        ]
+      }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("paneldynamic1") as QuestionPanelDynamicModel;
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question.template,
+    <any>undefined
+  );
+
+  expect(questionAdorner.collapsed).toBeFalsy();
+  expect(questionAdorner.needToRenderContent).toBeTruthy();
+
+  questionAdorner.collapsed = true;
+  expect(questionAdorner.collapsed).toBeTruthy();
+  expect(questionAdorner.needToRenderContent).toBeTruthy();
+
+  questionAdorner["restoreState"]();
+  expect(questionAdorner.collapsed).toBeTruthy();
+  expect(questionAdorner.needToRenderContent).toBeTruthy();
+
+  surveySettings.animationEnabled = true;
 });

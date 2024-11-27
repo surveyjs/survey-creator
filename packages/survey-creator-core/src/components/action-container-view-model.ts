@@ -165,7 +165,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     };
     const afterRunAnimation = (el: HTMLElement, animatingClassName: string) => {
       this.expandCollapseAnimationRunning = false;
-      if(this.surveyElement) {
+      if (this.surveyElement) {
         cleanHtmlElementAfterAnimation(el);
         const innerAnimatedElements = this.getInnerAnimatedElements();
         innerAnimatedElements.forEach((elem: HTMLElement) => {
@@ -295,7 +295,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       const state = this.creator.designerStateManager?.getElementState(this.surveyElement);
       this.collapsed = this.creator.getElementExpandCollapseState(this.surveyElement as any, "loading", state.collapsed);
     }
-    this.needToRenderContent = !this.collapsed;
+    if (!this.surveyElement || this.surveyElement.isInteractiveDesignElement) {
+      this.needToRenderContent = !this.collapsed;
+    }
   }
 
   protected detachElement(surveyElement: T): void {
