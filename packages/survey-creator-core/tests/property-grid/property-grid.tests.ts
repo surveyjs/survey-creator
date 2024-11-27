@@ -3600,3 +3600,28 @@ test("Use undefined boolean editor, Bug#6099", () => {
   question.value = "auto";
   expect(q1.allowResize).toStrictEqual(null);
 });
+test("Depends on & defaultFunc, Bug#6143", () => {
+  Serializer.addProperty("question", { name: "secondName", dependsOn: ["name"], defaultFunc: (obj: any) => { return (obj?.name || "") + "_second"; } });
+  const survey = new SurveyModel({
+    elements: [{ type: "text", name: "q1" }]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  const questionName = propertyGrid.survey.getQuestionByName("name");
+  const questionSecondName = propertyGrid.survey.getQuestionByName("secondName");
+
+  expect(questionSecondName.value).toBe("q1_second");
+  questionName.value = "q2";
+  expect(q1.secondName).toBe("q2_second");
+  expect(questionSecondName.value).toBe("q2_second");
+
+  q1.secondName = "test";
+  questionName.value = "q3";
+  expect(questionSecondName.value).toBe("test");
+
+  q1.resetPropertyValue("secondName");
+  expect(q1.secondName).toBe("q3_second");
+  expect(questionSecondName.value).toBe("q3_second");
+
+  Serializer.removeProperty("question", "secondName");
+});
