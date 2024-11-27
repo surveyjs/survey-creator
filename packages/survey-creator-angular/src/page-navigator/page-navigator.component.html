@@ -1,6 +1,6 @@
 <ng-template #template>
   <div class="svc-page-navigator" #container [visible]="model.visible">
-      <div class="svc-page-navigator__selector svc-page-navigator__button"
+      <div role="button" class="svc-page-navigator__selector svc-page-navigator__button"
           (click)="model.togglePageSelector($event)" [key2click] [attr.title]="model.pageSelectorCaption" [class.svc-page-navigator__button--pressed]="model.isPopupOpened">
           <svg class="svc-page-navigator__button-icon" [iconName]="model.icon" [size]="'auto'" sv-ng-svg-icon></svg>
           <sv-ng-popup [popupModel]="model.popupModel"></sv-ng-popup>
