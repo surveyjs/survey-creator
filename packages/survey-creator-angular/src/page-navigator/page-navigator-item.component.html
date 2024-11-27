@@ -1,6 +1,6 @@
 <ng-template #template>
   <div class="svc-page-navigator-item">
-    <div class="svc-page-navigator-item-content" (click)="click($event)" [key2click]
+    <button class="svc-page-navigator-item-content" (click)="click($event)" [key2click]
       [class.svc-page-navigator-item--selected]="model.active"
       [class.svc-page-navigator-item--disabled]="anyModel.disabled">
       <div class="svc-page-navigator-item__dot" [attr.title]="model.title"></div>
@@ -9,6 +9,6 @@
         <span class="svc-page-navigator-item__text">{{ model.title }}</span>
         <span class="svc-page-navigator-item__dot"></span>
       </div>
-    </div>
+    </button>
   </div>
 </ng-template>
