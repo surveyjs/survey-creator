@@ -29,10 +29,6 @@
       }
     }
 
-    .spg-question__header--location--left {
-      min-width: auto;
-    }
-
     & > div {
       flex-grow: 1;
       flex-shrink: 1;
@@ -58,20 +54,6 @@
     overflow: hidden;
   }
 
-  .spg-question__header--location--left {
-    width: max-content;
-    flex: 0 0;
-
-    .spg-question__title {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      .sv-string-viewer {
-        white-space: nowrap;
-      }
-    }
-  }
 
   //2 level nested
   .spg-panel-by-page,
