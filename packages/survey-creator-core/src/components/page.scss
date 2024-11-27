@@ -334,6 +334,15 @@ svc-page {
   padding: var(--ctr-surface-button-padding-vertical, calcSize(2))
     var(--ctr-surface-button-padding-horizontal-contextual-button, calcSize(10));
   border-radius: var(--ctr-surface-button-corner-radius, calcSize(0.5));
+  align-items: stretch;
+
+  button:first-of-type {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    flex: 1;
+  }
 }
 
 .svc-element__add-new-question:focus {
