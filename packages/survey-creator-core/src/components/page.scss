@@ -330,6 +330,7 @@ svc-page {
   height: auto;
   padding: var(--ctr-surface-button-padding-vertical, calcSize(2))
     var(--ctr-surface-button-padding-horizontal-contextual-button, calcSize(10));
+  border-radius: var(--ctr-surface-button-corner-radius, calcSize(0.5));
 }
 
 .svc-element__add-new-question:focus {
@@ -368,10 +369,14 @@ svc-page {
 .svc-element__question-type-selector-icon {
   width: var(--ctr-surface-button-contextual-button-icon-width, calcSize(3));
   height: var(--ctr-surface-button-contextual-button-icon-height, calcSize(3));
+  display: flex;
+  align-items: center;
 
   .sv-svg-icon {
     width: var(--ctr-surface-button-contextual-button-icon-width, calcSize(3));
     height: var(--ctr-surface-button-contextual-button-icon-height, calcSize(3));
+    display: flex;
+    align-items: center;
   }
 
   use {

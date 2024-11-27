@@ -9,8 +9,8 @@
 .svc-context-button {
   display: block;
   box-sizing: border-box;
-  background-color: $background;
-  border-radius: 50%;
+  background-color: var(--ctr-survey-contextual-button-background-color, $background);
+  border-radius: var(--ctr-survey-contextual-button-corner-radius, 50%);
   width: var(--ctr-survey-contextual-button-width, calcSize(6));
   height: var(--ctr-survey-contextual-button-height, calcSize(6));
   padding: var(--ctr-survey-contextual-button-padding-top, calcSize(1.5))
@@ -22,8 +22,16 @@
   outline: none;
 
   .sv-svg-icon {
-    width: var(--ctr-button-contextual-button-icon-width, calcSize(3));
-    height: var(--ctr-button-contextual-button-icon-height, calcSize(3));
+    --thm-button-contextual-button-icon-width: calc(
+      var(--ctr-survey-contextual-button-width) - var(--ctr-survey-contextual-button-padding-right) -
+        var(--ctr-survey-contextual-button-padding-left)
+    );
+    --thm-button-contextual-button-icon-height: calc(
+      var(--ctr-survey-contextual-button-height) - var(--ctr-survey-contextual-button-padding-top) -
+        var(--ctr-survey-contextual-button-padding-bottom)
+    );
+    width: var(--thm-button-contextual-button-icon-width, calcSize(3));
+    height: var(--thm-button-contextual-button-icon-height, calcSize(3));
   }
 
   use {

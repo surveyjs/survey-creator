@@ -1127,6 +1127,7 @@ svc-question,
 
 .svc-panel__add-new-question,
 .svc-panel__add-new-question-wrapper .svc-element__add-new-question {
+  display: flex;
   margin-top: var(--ctr-survey-placeholder-gap, calcSize(2));
   margin-left: 0;
   margin-right: 0;
@@ -1135,6 +1136,7 @@ svc-question,
     var(--ctr-survey-action-button-padding-right, calcSize(5))
     var(--ctr-survey-action-button-padding-bottom, calcSize(1))
     var(--ctr-survey-action-button-padding-left, calcSize(5));
+  border-radius: var(--ctr-survey-action-button-corner-radius, 1024px);
   justify-content: center;
   align-items: center;
 

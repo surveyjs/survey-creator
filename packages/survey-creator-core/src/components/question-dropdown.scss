@@ -32,8 +32,14 @@
   }
 
   .svc-action-button {
+    @include lbrDefaultBoldFont;
     margin-left: calcSize(6.75);
     margin-top: calcSize(1);
+    padding: var(--ctr-survey-action-button-padding-top, calcSize(1))
+      var(--ctr-survey-action-button-padding-right, calcSize(5))
+      var(--ctr-survey-action-button-padding-bottom, calcSize(1))
+      var(--ctr-survey-action-button-padding-left, calcSize(5));
+    border-radius: var(--ctr-survey-action-button-corner-radius, 1024px);
 
     cursor: pointer;
   }

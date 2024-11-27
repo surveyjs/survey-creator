@@ -130,3 +130,86 @@ svc-tab-test {
   display: flex;
   flex-direction: column;
 }
+
+.svc-preview-pager__item {
+  @include defaultActionButtonSettings;
+
+  display: flex;
+  padding: var(--ctr-preview-pager-item-padding-top-with-text, calcSize(1))
+    var(--ctr-preview-pager-item-padding-right-with-text, calcSize(1))
+    var(--ctr-preview-pager-item-padding-bottom-with-text, calcSize(1))
+    var(--ctr-preview-pager-item-padding-left-with-text, calcSize(1));
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--ctr-preview-pager-item-corner-radius, calcSize(0.5));
+  background-color: transparent;
+
+  &:hover {
+    background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+  }
+  &:disabled {
+    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-disabled, 0.25);
+  }
+
+  &.svc-preview-pager__item--pressed {
+    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
+    background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+  }
+  &.svc-preview-pager__item--active {
+    background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, $secondary-light);
+  }
+}
+
+.svc-preview-pager__item--icon {
+  padding: var(--ctr-preview-pager-item-padding-top, calcSize(0.5))
+    var(--ctr-preview-pager-item-padding-right, calcSize(0.5))
+    var(--ctr-preview-pager-item-padding-bottom, calcSize(0.5))
+    var(--ctr-preview-pager-item-padding-left, calcSize(0.5));
+
+  &:hover {
+    background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+  }
+
+  &:disabled {
+    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-disabled, 0.25);
+
+    use {
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color-disabled, $foreground-dim-light);
+    }
+  }
+
+  &.svc-preview-pager__item--pressed {
+    opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
+    background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+
+    use {
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color-pressed, $foreground-dim-light);
+    }
+  }
+
+  &.svc-preview-pager__item--active {
+    background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, $secondary-light);
+  }
+}
+
+.svc-preview-pager-item__icon {
+  box-sizing: border-box;
+  display: flex;
+  width: var(--ctr-preview-pager-item-icon-container-width, calcSize(3));
+  height: var(--ctr-preview-pager-item-icon-container-height, calcSize(3));
+  padding: var(--ctr-preview-pager-item-icon-padding-top, calcSize(0.5))
+    var(--ctr-preview-pager-item-icon-padding-right, calcSize(0.5))
+    var(--ctr-preview-pager-item-icon-padding-bottom, calcSize(0.5))
+    var(--ctr-preview-pager-item-icon-padding-left, calcSize(0.5));
+  justify-content: center;
+  align-items: center;
+
+  use {
+    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+  }
+}
+
+.svc-preview-pager-item__title {
+  @include ctrSmallBoldFont;
+  color: var(--ctr-survey-question-panel-toolbar-item-text-color, $foreground);
+}

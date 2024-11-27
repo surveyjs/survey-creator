@@ -16,7 +16,7 @@
     var(--ctr-button-shadow-color, var(--ctr-shadow-small-color, rgba(0, 0, 0, 0.15)));
 }
 .svc-btn__text {
-  @include lbrDefaultBoldFont;
+  @include ctrDefaultBoldFont;
   display: flex;
   align-items: center;
   flex-grow: 1;
