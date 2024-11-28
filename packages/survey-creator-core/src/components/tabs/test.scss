@@ -34,6 +34,7 @@ svc-tab-test {
 
   .svc-preview__test-again {
     width: calcSize(33);
+    box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: calcSize(12);
