@@ -136,6 +136,7 @@ svc-tab-test {
   @include defaultActionButtonSettings;
 
   display: flex;
+  max-width: 100%;
   padding: var(--ctr-preview-pager-item-padding-top-with-text, calcSize(1))
     var(--ctr-preview-pager-item-padding-right-with-text, calcSize(1))
     var(--ctr-preview-pager-item-padding-bottom-with-text, calcSize(1))
@@ -212,6 +213,7 @@ svc-tab-test {
 
 .svc-preview-pager-item__title {
   @include ctrSmallBoldFont;
+  @include textEllipsis;
   color: var(--ctr-survey-question-panel-toolbar-item-text-color, $foreground);
 }
 
