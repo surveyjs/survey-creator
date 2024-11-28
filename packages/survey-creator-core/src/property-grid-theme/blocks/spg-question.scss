@@ -100,10 +100,10 @@
 }
 
 .spg-question__header--location--left {
-  width: auto;
+  width: max-content;
   box-sizing: border-box;
   max-width: 50%;
-  flex: 1;
+  flex: 0 0;
   display: flex;
   align-items: center;
 
@@ -112,6 +112,12 @@
     border-right: 1px solid $border;
     display: inline-block;
     color: var(--ctr-editor-label-color, $foreground-dim-light);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    .sv-string-viewer {
+      white-space: nowrap;
+    }
   }
 }
 
@@ -138,10 +144,6 @@
   & > div {
     flex-grow: 1;
     min-width: calcSize(25.5);
-
-    .spg-question__header--location--left {
-      min-width: calcSize(8);
-    }
 
     input {
       min-width: calc(max(17 * #{$base-unit}, 100%));

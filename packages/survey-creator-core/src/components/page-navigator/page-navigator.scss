@@ -82,8 +82,9 @@ svc-page-navigator,
 
 .svc-tab-designer--with-page-navigator {
   .svc-tab-designer_content {
+    margin-left: calcSize(6.5);
     margin-right: calcSize(6.5);
-    width: calc(100% - calcSize(6.5));
+    width: calc(100% - calcSize(13));
   }
 }
 
@@ -104,13 +105,6 @@ svc-page-navigator,
 [dir="rtl"],
 [style*="direction:rtl"],
 [style*="direction: rtl"] {
-  .svc-tab-designer--with-page-navigator {
-    .svc-tab-designer_content {
-      margin-right: 0;
-      margin-left: calcSize(6.5);
-    }
-  }
-
   .svc-tab-designer__page-navigator {
     right: unset;
     left: var(--ctr-page-navigator-padding-left, calcSize(1.5));
