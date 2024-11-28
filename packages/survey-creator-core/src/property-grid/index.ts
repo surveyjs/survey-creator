@@ -1635,7 +1635,7 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
         obj.resetPropertyValue(prop.name);
       };
       question.resetValueAdorner.caption = editorLocalization.getString("pe.resetToDefaultCaption");
-      const isDefaultValue = () => !prop.isDefaultValue(prop.getValue(obj));
+      const isDefaultValue = () => !prop.isDefaultValueByObj(obj, prop.getValue(obj));
       question.resetValueAdorner.allowResetValue = isDefaultValue();
       obj.registerFunctionOnPropertyValueChanged(prop.name, () => {
         question.resetValueAdorner.allowResetValue = isDefaultValue();
