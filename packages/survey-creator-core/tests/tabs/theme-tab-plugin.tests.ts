@@ -1438,7 +1438,7 @@ test("Theme tab: use theme palatte corresponding cretor theme palette if theme i
     themeName: "my",
     colorPalette: "dark",
     cssVariables: {}
-  }
+  };
   creator.syncTheme({ cssVariables: {} }, true);
   expect(creator.preferredColorPalette).toBe("light");
 

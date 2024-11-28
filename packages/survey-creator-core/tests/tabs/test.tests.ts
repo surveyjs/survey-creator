@@ -1170,7 +1170,7 @@ test("Preview tab: use theme palatte corresponding cretor theme palette if theme
     themeName: "my",
     colorPalette: "dark",
     cssVariables: {}
-  }
+  };
   creator.syncTheme({ cssVariables: {} }, true);
   expect(creator.preferredColorPalette).toBe("light");
 
