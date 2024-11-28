@@ -1,8 +1,9 @@
 import { SurveySimulatorModel } from "../simulator";
-import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, surveyLocalization } from "survey-core";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, surveyLocalization, ITheme } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
+import { findSuitableTheme, isThemeEmpty } from "./theme-model";
 
 export class PreviewViewModel extends Base {
   static tagRegex = /(<([^>]+)>)/ig;
@@ -90,7 +91,11 @@ export class PreviewViewModel extends Base {
 
   public updateSimulatorSurvey(json: any, theme: any) {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, this.getTabName(), this, (survey: SurveyModel): void => {
-      survey.applyTheme(this.surveyProvider.theme);
+      let preferredTheme: ITheme = undefined;
+      if (isThemeEmpty(this.surveyProvider.theme)) {
+        preferredTheme = findSuitableTheme(undefined, this.surveyProvider.preferredColorPalette, undefined, undefined);
+      }
+      survey.applyTheme(preferredTheme || this.surveyProvider.theme);
       survey.setCss(theme, false);
       survey.fitToContainer = true;
       survey.addLayoutElement({

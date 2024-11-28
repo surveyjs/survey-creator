@@ -465,7 +465,7 @@ test("Keep background image in theme modifications", (): any => {
 
   expect(creator.theme.backgroundImage).toBe(undefined);
   expect(themeModel.backgroundImage).toBe("");
-  expect(themeTabViewModel.survey.backgroundImage).toBe("");
+  expect(themeTabViewModel.survey.backgroundImage).toBe(undefined);
 
   backgroundImageEditor.value = lionImage;
   expect(creator.theme.backgroundImage).toBe(lionImage);
@@ -1410,4 +1410,40 @@ test("Theme tab: default device and save current device", (): any => {
 
   themePlugin.activate();
   expect(themePlugin.model.simulator.device).toBe("iPhone15Plus");
+});
+
+test("Theme tab: use theme palatte corresponding cretor theme palette if theme is not selected", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+
+  expect(creator.preferredColorPalette).toBe("light");
+
+  themePlugin.activate();
+  expect(themePlugin.themeModel.colorPalette).toBe("light");
+  expect(themePlugin.model.simulator.survey["themeName"]).toBe("default");
+  expect(themePlugin.model.simulator.survey["colorPalette"]).toBe("light");
+
+  themePlugin.deactivate();
+  creator.syncTheme({ cssVariables: {} }, false);
+  expect(creator.preferredColorPalette).toBe("dark");
+
+  themePlugin.activate();
+  expect(themePlugin.themeModel.colorPalette).toBe("dark");
+  expect(themePlugin.model.simulator.survey["themeName"]).toBe("default");
+  expect(themePlugin.model.simulator.survey["colorPalette"]).toBe("dark");
+
+  themePlugin.deactivate();
+  creator.theme = {
+    themeName: "my",
+    colorPalette: "dark",
+    cssVariables: {}
+  }
+  creator.syncTheme({ cssVariables: {} }, true);
+  expect(creator.preferredColorPalette).toBe("light");
+
+  themePlugin.activate();
+  expect(themePlugin.themeModel.colorPalette).toBe("dark");
+  expect(themePlugin.model.simulator.survey["themeName"]).toBe("my");
+  expect(themePlugin.model.simulator.survey["colorPalette"]).toBe("dark");
 });
