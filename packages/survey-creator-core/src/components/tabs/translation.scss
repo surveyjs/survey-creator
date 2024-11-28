@@ -38,6 +38,7 @@
     .spg-table__question-wrapper {
       @include ctrDefaultFont;
       padding: calcSize(1.5) calcSize(1);
+      color: var(--ctr-checkbox-text-color, $foreground-dim);
 
       .spg-checkbox {
         margin: 0;
@@ -54,6 +55,15 @@
       .spg-checkbox__rectangle:hover {
         background: $background-dim;
       }
+    }
+  }
+
+  .spg-matrixdynamic__dragged-row {
+    @include ctrDefaultFont;
+    color: var(--ctr-checkbox-text-color, $foreground-dim);
+
+    .spg-table__cell:nth-child(3) {
+      flex: 1;
     }
   }
 }
