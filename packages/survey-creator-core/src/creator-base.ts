@@ -1879,6 +1879,7 @@ export class SurveyCreatorModel extends Base
     });
 
     this.setSurvey(survey);
+    this.setCollapsedInStateManager(this.getCollapsableElements(), "loading");
     this.updatePlugin(this.activeTab);
     if (this.activeTab !== "designer") {
       this.updatePlugin("designer");
@@ -1943,20 +1944,35 @@ export class SurveyCreatorModel extends Base
     });
   }
   public get designerStateManager() {
-    return (this.getPlugin("designer") as TabDesignerPlugin).designerStateManager;
+    return (this.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
   }
 
   private getCollapsableElements() {
-    return this.survey.pages;
+    return (this.survey.pages as SurveyElement[])
+      .concat(this.survey.getAllPanels() as unknown as SurveyElement[])
+      .concat(this.survey.getAllQuestions() as SurveyElement[]);
   }
 
-  public collapseAllElements(): void {
-    this.getCollapsableElements().forEach(element => {
-      const elementAdorner = SurveyElementAdornerBase.GetAdorner(element);
-      if (elementAdorner) {
-        elementAdorner.collapsed = this.getElementExpandCollapseState(element as Question | PageModel | PanelModel, "drag-start", true);
+  private setCollapsedInStateManager(elements: SurveyElement[], reason: ElementGetExpandCollapseStateEventReason) {
+    elements.forEach(element => {
+      if (this.designerStateManager) {
+        this.designerStateManager.getElementState(element).collapsed =
+          this.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, false);
       }
     });
+  }
+
+  private setCollapsedForAdorners(elements: SurveyElement[], reason: ElementGetExpandCollapseStateEventReason) {
+    elements.forEach(element => {
+      const elementAdorner = SurveyElementAdornerBase.GetAdorner(element);
+      if (elementAdorner) {
+        elementAdorner.collapsed = this.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, true);
+      }
+    });
+  }
+
+  public collapseAllPagesOnDragStart(): void {
+    this.setCollapsedForAdorners(this.survey.pages, "drag-start");
   }
 
   public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
@@ -1977,7 +1993,7 @@ export class SurveyCreatorModel extends Base
     SurveyElementAdornerBase.RestoreStateFor(element);
   }
   public restoreElementsState(): void {
-    this.getCollapsableElements().forEach(element => {
+    this.survey.pages.forEach(element => {
       if (element["draggedFrom"] !== undefined) {
         const adorner = SurveyElementAdornerBase.GetAdorner(element);
         adorner?.blockAnimations();

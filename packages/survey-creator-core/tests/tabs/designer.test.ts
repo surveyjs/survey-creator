@@ -514,7 +514,7 @@ test("expand/collapse event - loading", () => {
   expect(questionAdorner.collapsed).toBeTruthy();
   expect(panelAdorner.collapsed).toBeFalsy();
 
-  creator.collapseAllElements();
+  creator.collapseAllPagesOnDragStart();
   expect(page1Adorner.collapsed).toBeTruthy();
   expect(page2Adorner.collapsed).toBeFalsy();
   expect(questionAdorner.collapsed).toBeTruthy();
@@ -577,6 +577,16 @@ test("expand/collapse event and expand all", () => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
   creator.expandCollapseButtonVisibility = "onhover";
+  var designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+
+  creator.onElementGetExpandCollapseState.add((_, o) => {
+    if (o.reason == "loading") {
+      o.collapsed = true;
+    }
+  });
+
   creator.JSON = {
     "pages": [
       {
@@ -596,15 +606,6 @@ test("expand/collapse event and expand all", () => {
       }
     ]
   };
-  var designerPlugin = <TabDesignerPlugin>(
-    creator.getPlugin("designer")
-  );
-
-  creator.onElementGetExpandCollapseState.add((_, o) => {
-    if (o.reason == "loading") {
-      o.collapsed = true;
-    }
-  });
 
   const page1Adorner = new PageAdorner(creator, creator.survey.pages[0]);
   const panelAdorner = new QuestionAdornerViewModel(creator, creator.survey.getAllPanels()[0] as any, undefined);
