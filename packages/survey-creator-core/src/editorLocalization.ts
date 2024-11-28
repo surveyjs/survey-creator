@@ -269,8 +269,7 @@ export class EditorLocalization {
   }
   public getLocale(locale?: string): any {
     if (!locale) locale = this.currentLocale;
-    const defStrs = this.getDefaultStrings();
-    return (locale ? this.getLocaleStrings(locale) : defStrs) || defStrs;
+    return (locale ? this.getLocaleStrings(locale) : this.getDefaultStrings()) || this.getDefaultStrings();
   }
   public getLocaleStrings(loc: string): any {
     return this.locales[loc];
