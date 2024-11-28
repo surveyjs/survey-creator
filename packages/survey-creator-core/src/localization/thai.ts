@@ -109,6 +109,7 @@ export const thStrings = {
     redoTooltip: "ทำซ้ำการเปลี่ยนแปลง",
     expandAllTooltip: "ขยายทั้งหมด",
     collapseAllTooltip: "ยุบทั้งหมด",
+    lockQuestionsTooltip: "ล็อคสถานะขยาย/ยุบสําหรับคําถาม",
     showMoreChoices: "แสดงเพิ่มเติม",
     showLessChoices: "แสดงน้อยลง",
     copy: "คัดลอก",
@@ -507,6 +508,7 @@ export const thStrings = {
     "listIsEmpty@calculatedValues": "คุณยังไม่มีตัวแปรใดๆ",
     "listIsEmpty@triggers": "คุณยังไม่มีทริกเกอร์ใดๆ",
     "listIsEmpty@navigateToUrlOnCondition": "คุณยังไม่มีลิงก์ใดๆ",
+    "listIsEmpty@pages": "คุณยังไม่มีหน้าใด ๆ",
     "addNew@choices": "เพิ่มตัวเลือกใหม่",
     "addNew@columns": "เพิ่มคอลัมน์ใหม่",
     "addNew@rows": "เพิ่มแถวใหม่",
@@ -514,6 +516,7 @@ export const thStrings = {
     "addNew@calculatedValues": "เพิ่มตัวแปรใหม่",
     "addNew@triggers": "เพิ่มทริกเกอร์ใหม่",
     "addNew@navigateToUrlOnCondition": "เพิ่ม URL ใหม่",
+    "addNew@pages": "เพิ่มหน้าใหม่",
     expressionIsEmpty: "นิพจน์ว่างเปล่า",
     value: "ค่า",
     text: "ข้อความ",
@@ -1897,3 +1900,6 @@ editorLocalization.locales["th"] = thStrings;
 // autocomplete.tel-extension: "Phone Extension" => "ส่วนขยายโทรศัพท์"
 // autocomplete.email: "Email Address" => "ที่อยู่อีเมล"
 // autocomplete.impp: "Instant Messaging Protocol" => "โปรโตคอลการส่งข้อความโต้ตอบแบบทันที"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "ล็อคสถานะขยาย/ยุบสําหรับคําถาม"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "คุณยังไม่มีหน้าใด ๆ"
+// pe.addNew@pages: "Add new page" => "เพิ่มหน้าใหม่"

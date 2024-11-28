@@ -109,6 +109,7 @@ export var turkishStrings = {
     redoTooltip: "Son değişikliği ileri al",
     expandAllTooltip: "Tümünü Genişlet",
     collapseAllTooltip: "Tümünü Daralt",
+    lockQuestionsTooltip: "Sorular için genişletme/daraltma durumunu kilitle",
     showMoreChoices: "Daha fazlasını göster",
     showLessChoices: "Daha az göster",
     copy: "Kopya etmek",
@@ -507,6 +508,7 @@ export var turkishStrings = {
     "listIsEmpty@calculatedValues": "Henüz özelleştirilebilen değişkeniniz yok",
     "listIsEmpty@triggers": "Henüz herhangi bir tetikleyiciniz yok",
     "listIsEmpty@navigateToUrlOnCondition": "Henüz bağlantınız yok",
+    "listIsEmpty@pages": "Henüz hiç sayfanız yok",
     "addNew@choices": "Bir seçenek ekleyin",
     "addNew@columns": "Yeni sütun ekle",
     "addNew@rows": "Yeni satır ekle",
@@ -514,6 +516,7 @@ export var turkishStrings = {
     "addNew@calculatedValues": "Yeni değişken ekle",
     "addNew@triggers": "Yeni tetikleyici ekle",
     "addNew@navigateToUrlOnCondition": "Yeni URL ekle",
+    "addNew@pages": "Yeni sayfa ekle",
     expressionIsEmpty: "Mantıksal ifade boş",
     value: "Değer",
     text: "Yazı",
@@ -2955,3 +2958,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // autocomplete.tel-extension: "Phone Extension" => "Telefon Uzantısı"
 // autocomplete.email: "Email Address" => "E-posta Adresi"
 // autocomplete.impp: "Instant Messaging Protocol" => "Anlık Mesajlaşma Protokolü"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Sorular için genişletme/daraltma durumunu kilitle"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Henüz hiç sayfanız yok"
+// pe.addNew@pages: "Add new page" => "Yeni sayfa ekle"

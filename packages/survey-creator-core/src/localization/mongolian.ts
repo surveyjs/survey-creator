@@ -109,6 +109,7 @@ export var mnStrings = {
     redoTooltip: "Сүүлин өөрчлөлтийг дахих ",
     expandAllTooltip: "Бүх хүрээгээ тэлнэ",
     collapseAllTooltip: "Бүх нуралт",
+    lockQuestionsTooltip: "Асуултын үед lock/expand/collapse state",
     showMoreChoices: "Дэлгэрэнгүй харуулах",
     showLessChoices: "Бага мэдээлэл харуулах",
     copy: "Хуулах",
@@ -507,6 +508,7 @@ export var mnStrings = {
     "listIsEmpty@calculatedValues": "Танд ямар ч хувийн хувьсагч байхгүй",
     "listIsEmpty@triggers": "Танд ямар ч өдөөгч байхгүй",
     "listIsEmpty@navigateToUrlOnCondition": "Танд ямар ч холбоос байхгүй",
+    "listIsEmpty@pages": "Танд одоохондоо хуудас байхгүй байна",
     "addNew@choices": "Сонголт оруулах",
     "addNew@columns": "Шинэ багана нэмэх",
     "addNew@rows": "Шинэ мөр нэмэх",
@@ -514,6 +516,7 @@ export var mnStrings = {
     "addNew@calculatedValues": "Шинэ хувьсагч нэмэх",
     "addNew@triggers": "Шинэ триггер нэмэх",
     "addNew@navigateToUrlOnCondition": "Шинэ URL нэмэх",
+    "addNew@pages": "Шинэ хуудас нэмж",
     expressionIsEmpty: "Томъёо хоосон байна",
     value: "Утга",
     text: "Текст",
@@ -2616,3 +2619,6 @@ editorLocalization.locales["mn"] = mnStrings;
 // autocomplete.tel-extension: "Phone Extension" => "Утасны өргөтгөл"
 // autocomplete.email: "Email Address" => "Э-мэйл хаяг"
 // autocomplete.impp: "Instant Messaging Protocol" => "Мессежийн протокол"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Асуултын үед lock/expand/collapse state"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Танд одоохондоо хуудас байхгүй байна"
+// pe.addNew@pages: "Add new page" => "Шинэ хуудас нэмж"
