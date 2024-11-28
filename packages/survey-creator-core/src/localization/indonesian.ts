@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export var indonesianStrings = {
   // survey templates
@@ -1771,7 +1771,7 @@ export var indonesianStrings = {
   }
 };
 
-editorLocalization.locales["id"] = indonesianStrings;
+setupLocale({ localeCode: "id", strings: indonesianStrings });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

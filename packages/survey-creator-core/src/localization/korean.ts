@@ -1,4 +1,4 @@
-import { editorLocalization, defaultStrings } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export var koreanStrings = {
   // survey templates
@@ -1770,7 +1770,7 @@ export var koreanStrings = {
     }
   }
 };
-editorLocalization.locales["ko"] = koreanStrings;
+setupLocale({ localeCode: "ko", strings: koreanStrings });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

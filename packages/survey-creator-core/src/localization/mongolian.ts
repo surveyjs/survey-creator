@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export var mnStrings = {
   // survey templates
@@ -1771,10 +1771,7 @@ export var mnStrings = {
   }
 };
 
-// Uncomment the line below if you create a custom dictionary.
-// Replace "en" with a custom locale code (for example, "fr" or "de"),
-// Replace `enStrings` with the name of the variable that contains the custom dictionary.
-editorLocalization.locales["mn"] = mnStrings;
+setupLocale({ localeCode: "mn", strings: mnStrings });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

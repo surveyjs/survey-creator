@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export const thStrings = {
   // survey templates
@@ -1771,7 +1771,8 @@ export const thStrings = {
   }
 };
 
-editorLocalization.locales["th"] = thStrings;
+setupLocale({ localeCode: "th", strings: thStrings });
+
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
 // pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "ตรวจสอบฟิลด์ว่างเมื่อเสียโฟกัส"

@@ -11,7 +11,7 @@ import {
   SvgThemeSets
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
-import { editorLocalization } from "./editorLocalization";
+import { editorLocalization, setupLocale } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";

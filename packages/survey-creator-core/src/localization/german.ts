@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 var germanTranslation = {
   // survey templates
@@ -1771,7 +1771,7 @@ var germanTranslation = {
   }
 };
 
-editorLocalization.locales["de"] = germanTranslation;
+setupLocale({ localeCode: "de", strings: germanTranslation });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

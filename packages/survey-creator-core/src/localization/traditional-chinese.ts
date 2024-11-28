@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 var traditionalChineseTranslation = {
   // survey templates
@@ -1771,7 +1771,7 @@ var traditionalChineseTranslation = {
   }
 };
 
-editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
+setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

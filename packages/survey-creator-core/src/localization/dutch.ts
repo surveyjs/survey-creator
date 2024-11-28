@@ -1,4 +1,4 @@
-import { editorLocalization, defaultStrings } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export var nlStrings = {
   // survey templates
@@ -1770,8 +1770,7 @@ export var nlStrings = {
     }
   }
 };
-//Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.
-editorLocalization.locales["nl"] = nlStrings;
+setupLocale({ localeCode: "nl", strings: nlStrings });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
