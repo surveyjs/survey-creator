@@ -109,6 +109,7 @@ var polishStrings = {
     redoTooltip: "Ponowne wprowadzanie zmian",
     expandAllTooltip: "Rozwiń wszystko",
     collapseAllTooltip: "Zwiń wszystko",
+    lockQuestionsTooltip: "Zablokuj stan rozwijania/zwijania dla pytań",
     showMoreChoices: "Pokaż więcej",
     showLessChoices: "Pokaż mniej",
     copy: "Kopiować",
@@ -507,6 +508,7 @@ var polishStrings = {
     "listIsEmpty@calculatedValues": "Nie masz jeszcze żadnych zmiennych niestandardowych",
     "listIsEmpty@triggers": "Nie masz jeszcze żadnych wyzwalaczy",
     "listIsEmpty@navigateToUrlOnCondition": "Nie masz jeszcze żadnych linków",
+    "listIsEmpty@pages": "Nie masz jeszcze żadnych stron",
     "addNew@choices": "Dodaj wybór",
     "addNew@columns": "Dodaj nową kolumnę",
     "addNew@rows": "Dodaj nowy wiersz",
@@ -514,6 +516,7 @@ var polishStrings = {
     "addNew@calculatedValues": "Dodaj nową zmienną",
     "addNew@triggers": "Dodaj nowy wyzwalacz",
     "addNew@navigateToUrlOnCondition": "Dodaj nowy adres URL",
+    "addNew@pages": "Dodaj nową stronę",
     expressionIsEmpty: "Wyrażenie jest puste",
     value: "Wartość",
     text: "Etykieta",
@@ -3227,3 +3230,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // autocomplete.tel-extension: "Phone Extension" => "Rozszerzenie telefonu"
 // autocomplete.email: "Email Address" => "Adres e-mail"
 // autocomplete.impp: "Instant Messaging Protocol" => "Protokół wiadomości błyskawicznych"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Zablokuj stan rozwijania/zwijania dla pytań"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Nie masz jeszcze żadnych stron"
+// pe.addNew@pages: "Add new page" => "Dodaj nową stronę"

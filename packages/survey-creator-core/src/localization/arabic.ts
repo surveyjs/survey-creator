@@ -109,6 +109,7 @@ export var arStrings = {
     redoTooltip: "Redo the change",
     expandAllTooltip: "توسيع الكل",
     collapseAllTooltip: "طي الكل",
+    lockQuestionsTooltip: "تأمين حالة التوسيع/الطي للأسئلة",
     showMoreChoices: "استعراض المزيد",
     showLessChoices: "عرض أقل",
     copy: "Copy",
@@ -507,6 +508,7 @@ export var arStrings = {
     "listIsEmpty@calculatedValues": "ليس لديك أي متغيرات مخصصة حتى الآن",
     "listIsEmpty@triggers": "ليس لديك أي محفزات حتى الآن",
     "listIsEmpty@navigateToUrlOnCondition": "ليس لديك أي روابط حتى الآن",
+    "listIsEmpty@pages": "ليس لديك أي صفحات حتى الآن",
     "addNew@choices": "إضافة خيار",
     "addNew@columns": "إضافة عمود جديد",
     "addNew@rows": "إضافة صف جديد",
@@ -514,6 +516,7 @@ export var arStrings = {
     "addNew@calculatedValues": "إضافة متغير جديد",
     "addNew@triggers": "إضافة مشغل جديد",
     "addNew@navigateToUrlOnCondition": "إضافة عنوان URL جديد",
+    "addNew@pages": "إضافة صفحة جديدة",
     expressionIsEmpty: "Expression is empty",
     value: "القيمة",
     text: "النص",
@@ -2874,3 +2877,6 @@ editorLocalization.locales["ar"] = arStrings;
 // autocomplete.tel-extension: "Phone Extension" => "تحويلة الهاتف"
 // autocomplete.email: "Email Address" => "عنوان البريد الإلكتروني"
 // autocomplete.impp: "Instant Messaging Protocol" => "بروتوكول المراسلة الفورية"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "تأمين حالة التوسيع/الطي للأسئلة"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "ليس لديك أي صفحات حتى الآن"
+// pe.addNew@pages: "Add new page" => "إضافة صفحة جديدة"

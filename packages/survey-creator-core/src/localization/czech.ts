@@ -109,6 +109,7 @@ export var czStrings = {
     redoTooltip: "Znovu provést změnu",
     expandAllTooltip: "Rozbalit vše",
     collapseAllTooltip: "Sbalit vše",
+    lockQuestionsTooltip: "Uzamknout stav rozbalení/sbalení pro otázky",
     showMoreChoices: "Zobrazit více",
     showLessChoices: "Zobrazit méně",
     copy: "Kopírovat",
@@ -507,6 +508,7 @@ export var czStrings = {
     "listIsEmpty@calculatedValues": "Zatím nemáte žádné vlastní proměnné.",
     "listIsEmpty@triggers": "Zatím nemáte žádné spouštěče",
     "listIsEmpty@navigateToUrlOnCondition": "Zatím nemáte žádné odkazy",
+    "listIsEmpty@pages": "Zatím nemáte žádné stránky",
     "addNew@choices": "Přidat volbu",
     "addNew@columns": "Přidat nový sloupec",
     "addNew@rows": "Přidat nový řádek",
@@ -514,6 +516,7 @@ export var czStrings = {
     "addNew@calculatedValues": "Přidat novou proměnnou",
     "addNew@triggers": "Přidání nového triggeru",
     "addNew@navigateToUrlOnCondition": "Přidat novou adresu URL",
+    "addNew@pages": "Přidat novou stránku",
     expressionIsEmpty: "Výraz je prázdný",
     value: "Hodnota",
     text: "Text",
@@ -2534,3 +2537,6 @@ editorLocalization.locales["cs"] = czStrings;
 // autocomplete.tel-extension: "Phone Extension" => "Telefonní linka"
 // autocomplete.email: "Email Address" => "E-mailová adresa"
 // autocomplete.impp: "Instant Messaging Protocol" => "Protokol pro rychlé zasílání zpráv"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Uzamknout stav rozbalení/sbalení pro otázky"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Zatím nemáte žádné stránky"
+// pe.addNew@pages: "Add new page" => "Přidat novou stránku"
