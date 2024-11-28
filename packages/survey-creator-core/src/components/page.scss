@@ -435,6 +435,10 @@ svc-page {
   & > .sv-action-bar {
     display: none;
   }
+  
+  .sd-page__title {
+    margin-bottom: 0;
+  }
 
   .svc-page__placeholder_frame {
     display: none;
