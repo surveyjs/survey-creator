@@ -27,7 +27,7 @@
 .spg-input:focus:not(:disabled):not(:read-only),
 .spg-input.spg-dropdown:focus:not(:disabled):not(:read-only),
 .spg-input.spg-dropdown:focus-within:not(:disabled):not(:read-only),
-.spg-input-container:focus-within:not(:disabled):not(:read-only) {
+.spg-input-container:focus-within {
   box-shadow: inset 0 0 0 var(--ctr-editor-border-width-focused, 2px) var(--ctr-editor-border-color-focused, $primary);
 }
 
