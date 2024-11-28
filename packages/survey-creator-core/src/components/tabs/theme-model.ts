@@ -11,7 +11,7 @@ import * as LibraryThemes from "survey-core/themes";
 import { ColorCalculator, assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
-import { SurveyCreatorModel } from "src/creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 
 export * from "./header-model";
 
