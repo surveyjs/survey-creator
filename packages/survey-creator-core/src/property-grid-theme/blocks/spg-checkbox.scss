@@ -68,9 +68,15 @@
   transition: opacity $creator-transition-duration, fill $creator-transition-duration;
 }
 
-.spg-checkbox--checked .spg-checkbox__svg {
-  opacity: 1;
-  fill: var(--ctr-checkbox-button-check-mark-color, $primary);
+.spg-checkbox--checked {
+  .spg-checkbox__rectangle {
+    background: var(--ctr-checkbox-background-color-selected, $background);
+  }
+
+  .spg-checkbox__svg {
+    opacity: 1;
+    fill: var(--ctr-checkbox-button-check-mark-color, $primary);
+  }
 }
 
 .spg-checkbox--disabled.spg-checkbox--checked .spg-checkbox__svg {

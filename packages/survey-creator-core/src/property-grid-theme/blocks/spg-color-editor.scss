@@ -30,7 +30,7 @@
   width: var(--ctr-list-item-color-swatch-width, calcSize(4));
   height: var(--ctr-list-item-color-swatch-height, calcSize(3));
   box-sizing: border-box;
-  border: 1px solid $border-inside;
+  border: 1px solid var(--ctr-list-item-color-swatch-border-color, $border-inside);
   margin-left: var(--ctr-editor-color-swatch-margin-left, calcSize(1.5));
 
   .sv-svg-icon {

@@ -620,14 +620,14 @@ svc-question {
 .svc-dragged-element-shortcut {
   //min-width: 100px;
   height: auto;
-  border-radius: calcSize(12.5);
-  background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
+  border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
+  background-color: var(--ctr-toolbox-item-background-color-floating, $background);
   color: var(--ctr-toolbox-item-text-color-hovered, $foreground);
   padding: calcSize(1.5) calcSize(2);
   cursor: grabbing;
   position: absolute;
   z-index: 1000;
-  box-shadow: $shadow-large;
+  box-shadow: var(--ctr-toolbox-item-shadow-floating-1-offset-x, 0px) var(--ctr-toolbox-item-shadow-floating-1-offset-y, 8px) var(--ctr-toolbox-item-shadow-floating-1-blur, 16px) var(--ctr-toolbox-item-shadow-floating-1-spread, 0px) var(--ctr-toolbox-item-shadow-floating-1-color, rgba(0, 76, 68, 0.10)), var(--ctr-toolbox-item-shadow-floating-2-offset-x, 0px) var(--ctr-toolbox-item-shadow-floating-2-offset-y, 16px) var(--ctr-toolbox-item-shadow-floating-2-blur, 32px) var(--ctr-toolbox-item-shadow-floating-2-spread, 0px) var(--ctr-toolbox-item-shadow-floating-2-color, var(--ctr-shadow-large-color, rgba(0, 0, 0, 0.10)));
   @include disableUserSelect;
   //max-width: 500px;
   overflow: hidden;

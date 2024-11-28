@@ -30,6 +30,9 @@
         border-radius: var(--ctr-editor-button-corner-radius);
         background: var(--ctr-editor-button-background-color-hovered, $background-dim);
     }
+    .spg-dropdown_chevron-button-svg use {
+        fill: var(--ctr-editor-button-icon-color, $foreground-light);
+    }
 }
 .spg-dropdown_chevron-button-svg {
     width: var(--ctr-editor-button-icon-width, calcSize(3));
