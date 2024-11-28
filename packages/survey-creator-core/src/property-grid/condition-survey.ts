@@ -953,7 +953,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private onUpdateQuestionCssClasses(options: any) {
     const cssClasses = options.cssClasses;
     const question = options.question;
-    cssClasses.answered = "svc-logic-question--answered";
+    if(question.getType() !== "paneldynamic") {
+      cssClasses.answered = "svc-logic-question--answered";
+    }
     if(question.name === "textEditor") {
       cssClasses.root += " svc-logic-question-text-editor";
     }

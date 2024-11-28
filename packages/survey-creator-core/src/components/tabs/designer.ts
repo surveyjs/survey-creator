@@ -53,6 +53,7 @@ export class TabDesignerViewModel extends Base {
     newPage.num = this.survey.pages.length + 1;
     newPage.onPropertyChanged.add(checkNewElementHandler);
     DragDropSurveyElements.newGhostPage = newPage;
+    delete newPage["ignoreUndoRedo"];
     return newPage;
   }
   private get canShowNewPage(): boolean {
