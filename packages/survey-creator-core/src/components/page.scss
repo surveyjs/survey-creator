@@ -359,7 +359,7 @@ svc-page {
   transition: background-color $creator-transition-duration;
 
   &:hover {
-    background-color: var(--ctr-button-background-color-hovered, $background-dim);
+    background-color: var(--ctr-button-contextual-button-background-color-hovered, $background-dim);
   }
   &:focus {
     background: var(--ctr-button-contextual-button-background-color-focused, $primary-light);
