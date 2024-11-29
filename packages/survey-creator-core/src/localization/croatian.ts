@@ -109,6 +109,7 @@ export var hrStrings = {
     redoTooltip: "Preusmjeti promjenu",
     expandAllTooltip: "Proširi sve",
     collapseAllTooltip: "Sažmi sve",
+    lockQuestionsTooltip: "Zaključavanje stanja proširenja/sažimanja za pitanja",
     showMoreChoices: "Pokaži više",
     showLessChoices: "Pokaži manje",
     copy: "Kopirati",
@@ -507,6 +508,7 @@ export var hrStrings = {
     "listIsEmpty@calculatedValues": "Još nemate prilagođene varijable",
     "listIsEmpty@triggers": "Još nemaš okidača",
     "listIsEmpty@navigateToUrlOnCondition": "Još nemate poveznice",
+    "listIsEmpty@pages": "Još nemate stranice",
     "addNew@choices": "Dodavanje izbora",
     "addNew@columns": "Dodaj novi stupac",
     "addNew@rows": "Dodaj novi redak",
@@ -514,6 +516,7 @@ export var hrStrings = {
     "addNew@calculatedValues": "Dodaj novu varijablu",
     "addNew@triggers": "Dodaj novi okidač",
     "addNew@navigateToUrlOnCondition": "Dodaj novi URL",
+    "addNew@pages": "Dodaj novu stranicu",
     expressionIsEmpty: "Izraz je prazan",
     value: "Vrijednost",
     text: "tekst",
@@ -2954,3 +2957,6 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // autocomplete.tel-extension: "Phone Extension" => "Proširenje telefona"
 // autocomplete.email: "Email Address" => "Adresa e-pošte"
 // autocomplete.impp: "Instant Messaging Protocol" => "Protokol za razmjenu izravnih poruka"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Zaključavanje stanja proširenja/sažimanja za pitanja"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Još nemate stranice"
+// pe.addNew@pages: "Add new page" => "Dodaj novu stranicu"

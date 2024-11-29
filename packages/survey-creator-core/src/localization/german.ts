@@ -109,6 +109,7 @@ var germanTranslation = {
     redoTooltip: "Letzte Änderung wiederherstellen",
     expandAllTooltip: "Alle aufklappen",
     collapseAllTooltip: "Alle einklappen",
+    lockQuestionsTooltip: "Sperren des Erweiterungs-/Einklappenzustands für Fragen",
     showMoreChoices: "Zeige mehr",
     showLessChoices: "Zeige weniger",
     copy: "Kopieren",
@@ -507,6 +508,7 @@ var germanTranslation = {
     "listIsEmpty@calculatedValues": "Sie haben noch keine benutzerdefinierten Variablen",
     "listIsEmpty@triggers": "Sie haben noch keine Auslöser",
     "listIsEmpty@navigateToUrlOnCondition": "Sie haben noch keine Links",
+    "listIsEmpty@pages": "Sie haben noch keine Seiten",
     "addNew@choices": "Auswahlmöglichkeit hinzufügen",
     "addNew@columns": "Neue Spalte hinzufügen",
     "addNew@rows": "Neue Zeile hinzufügen",
@@ -514,6 +516,7 @@ var germanTranslation = {
     "addNew@calculatedValues": "Neue Variable hinzufügen",
     "addNew@triggers": "Neuen Auslöser hinzufügen",
     "addNew@navigateToUrlOnCondition": "Neue URL hinzufügen",
+    "addNew@pages": "Neue Seite hinzufügen",
     expressionIsEmpty: "Keinen Ausdruck definiert",
     value: "Wert",
     text: "Text",
@@ -2669,3 +2672,6 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // autocomplete.tel-extension: "Phone Extension" => "Telefon-Durchwahl"
 // autocomplete.email: "Email Address" => "E-Mail-Adresse"
 // autocomplete.impp: "Instant Messaging Protocol" => "Instant-Messaging-Protokoll"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Sperren des Erweiterungs-/Einklappenzustands für Fragen"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Sie haben noch keine Seiten"
+// pe.addNew@pages: "Add new page" => "Neue Seite hinzufügen"

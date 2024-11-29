@@ -109,6 +109,7 @@ var portugueseTranslation = {
     redoTooltip: "Refazer a alteração",
     expandAllTooltip: "Expandir tudo",
     collapseAllTooltip: "Recolher tudo",
+    lockQuestionsTooltip: "Bloquear estado de expansão/recolhimento para perguntas",
     showMoreChoices: "Mostrar mais",
     showLessChoices: "Mostrar menos",
     copy: "Copiar",
@@ -507,6 +508,7 @@ var portugueseTranslation = {
     "listIsEmpty@calculatedValues": "Você ainda não tem nenhuma variável personalizada",
     "listIsEmpty@triggers": "Você ainda não tem nenhum gatilho",
     "listIsEmpty@navigateToUrlOnCondition": "Você ainda não tem nenhum link",
+    "listIsEmpty@pages": "Você ainda não tem páginas",
     "addNew@choices": "Adicionar uma opção",
     "addNew@columns": "Adicionar nova coluna",
     "addNew@rows": "Adicionar nova linha",
@@ -514,6 +516,7 @@ var portugueseTranslation = {
     "addNew@calculatedValues": "Adicionar nova variável",
     "addNew@triggers": "Adicionar novo gatilho",
     "addNew@navigateToUrlOnCondition": "Adicionar novo URL",
+    "addNew@pages": "Adicionar nova página",
     expressionIsEmpty: "Expressão está vazia",
     value: "Valor",
     text: "Texto",
@@ -2626,3 +2629,6 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // autocomplete.tel-extension: "Phone Extension" => "Ramal telefônico"
 // autocomplete.email: "Email Address" => "Endereço eletrônico"
 // autocomplete.impp: "Instant Messaging Protocol" => "Protocolo de mensagens instantâneas"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Bloquear estado de expansão/recolhimento para perguntas"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Você ainda não tem páginas"
+// pe.addNew@pages: "Add new page" => "Adicionar nova página"

@@ -109,6 +109,7 @@ export var bgStrings = {
     redoTooltip: "Повтаряне на последната промяна",
     expandAllTooltip: "Разширете всички",
     collapseAllTooltip: "Свиване на всички",
+    lockQuestionsTooltip: "Заключване на състояние на разгъване/свиване за въпроси",
     showMoreChoices: "Покажи повече.",
     showLessChoices: "Покажи по-малко.",
     copy: "Копиране",
@@ -507,6 +508,7 @@ export var bgStrings = {
     "listIsEmpty@calculatedValues": "Все още нямате никакви персонализирани променливи",
     "listIsEmpty@triggers": "Все още нямате никакви тригери",
     "listIsEmpty@navigateToUrlOnCondition": "Все още нямате връзки",
+    "listIsEmpty@pages": "Все още нямате страници",
     "addNew@choices": "Добавяне на възможност за избор",
     "addNew@columns": "Добавяне на нова колона",
     "addNew@rows": "Добавяне на нов ред",
@@ -514,6 +516,7 @@ export var bgStrings = {
     "addNew@calculatedValues": "Добавяне на нова променлива",
     "addNew@triggers": "Добавяне на нов превключвател",
     "addNew@navigateToUrlOnCondition": "Добавяне на нов URL адрес",
+    "addNew@pages": "Добавяне на нова страница",
     expressionIsEmpty: "Изразът е празен.",
     value: "Стойност",
     text: "Текст",
@@ -2520,3 +2523,6 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // autocomplete.tel-extension: "Phone Extension" => "Разширение на телефона"
 // autocomplete.email: "Email Address" => "Имейл адрес"
 // autocomplete.impp: "Instant Messaging Protocol" => "Протокол за незабавни съобщения"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Заключване на състояние на разгъване/свиване за въпроси"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Все още нямате страници"
+// pe.addNew@pages: "Add new page" => "Добавяне на нова страница"

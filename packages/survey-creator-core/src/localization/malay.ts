@@ -109,6 +109,7 @@ export var msStrings = {
     redoTooltip: "Buat semula perubahan",
     expandAllTooltip: "Kembangkan Semua",
     collapseAllTooltip: "Runtuhkan Semua",
+    lockQuestionsTooltip: "Kunci keadaan kembangkan/runtuhkan untuk soalan",
     showMoreChoices: "Tunjuk lebih banyak",
     showLessChoices: "Tunjukkan kurang",
     copy: "Salin",
@@ -507,6 +508,7 @@ export var msStrings = {
     "listIsEmpty@calculatedValues": "Anda belum mempunyai sebarang pemboleh ubah tersuai",
     "listIsEmpty@triggers": "Anda belum mempunyai sebarang pencetus",
     "listIsEmpty@navigateToUrlOnCondition": "Anda belum mempunyai pautan",
+    "listIsEmpty@pages": "Anda belum mempunyai sebarang halaman lagi",
     "addNew@choices": "Tambah pilihan",
     "addNew@columns": "Menambah lajur baru",
     "addNew@rows": "Menambah baris baru",
@@ -514,6 +516,7 @@ export var msStrings = {
     "addNew@calculatedValues": "Menambah pemboleh ubah baru",
     "addNew@triggers": "Tambah pencetus baharu",
     "addNew@navigateToUrlOnCondition": "Tambah URL baru",
+    "addNew@pages": "Tambah halaman baru",
     expressionIsEmpty: "Ekspresi kosong",
     value: "Nilai",
     text: "Teks",
@@ -2913,3 +2916,6 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // autocomplete.tel-extension: "Phone Extension" => "Sambungan Telefon"
 // autocomplete.email: "Email Address" => "Alamat Emel"
 // autocomplete.impp: "Instant Messaging Protocol" => "Protokol Pemesejan Segera"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Kunci keadaan kembangkan/runtuhkan untuk soalan"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Anda belum mempunyai sebarang halaman lagi"
+// pe.addNew@pages: "Add new page" => "Tambah halaman baru"

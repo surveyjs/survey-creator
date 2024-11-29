@@ -109,6 +109,7 @@ export var jaStrings = {
     redoTooltip: "変更をやり直す",
     expandAllTooltip: "すべて展開",
     collapseAllTooltip: "すべて折りたたむ",
+    lockQuestionsTooltip: "質問の展開/折りたたみ状態のロック",
     showMoreChoices: "さらに表示",
     showLessChoices: "表示を減らす",
     copy: "コピー",
@@ -507,6 +508,7 @@ export var jaStrings = {
     "listIsEmpty@calculatedValues": "カスタム変数はまだありません",
     "listIsEmpty@triggers": "トリガーはまだありません",
     "listIsEmpty@navigateToUrlOnCondition": "リンクはまだありません",
+    "listIsEmpty@pages": "まだページがありません",
     "addNew@choices": "選択肢を追加する",
     "addNew@columns": "新しい列を追加",
     "addNew@rows": "新しい行を追加",
@@ -514,6 +516,7 @@ export var jaStrings = {
     "addNew@calculatedValues": "新しい変数を追加",
     "addNew@triggers": "新しいトリガーを追加する",
     "addNew@navigateToUrlOnCondition": "新しい URL を追加",
+    "addNew@pages": "新しいページを追加",
     expressionIsEmpty: "表現が空白です",
     value: "値",
     text: "テキスト",
@@ -2959,3 +2962,6 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // autocomplete.tel-extension: "Phone Extension" => "内線"
 // autocomplete.email: "Email Address" => "アドレス"
 // autocomplete.impp: "Instant Messaging Protocol" => "インスタントメッセージングプロトコル"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "質問の展開/折りたたみ状態のロック"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "まだページがありません"
+// pe.addNew@pages: "Add new page" => "新しいページを追加"

@@ -70,7 +70,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
           this.model.isNew = false;
         }}
       >
-        <SvgIcon size={16} iconName={"icon-add_16x16"} title={this.model.tooltip}></SvgIcon>
+        <SvgIcon size={"auto"} iconName={"icon-add_16x16"} title={this.model.tooltip}></SvgIcon>
       </span>)
     ) : (
       <>
@@ -87,7 +87,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
           aria-label={this.model.tooltip}
           onClick={() => this.model.remove(this.model)}
         >
-          <SvgIcon size={16} iconName={"icon-remove_16x16"} title={this.model.tooltip}></SvgIcon>
+          <SvgIcon size={"auto"} iconName={"icon-remove_16x16"} title={this.model.tooltip}></SvgIcon>
         </span>) : null}
       </>
     );

@@ -22,13 +22,19 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   private backgroundColorCalculator = new ColorCalculator();
 
   unitDictionary: { [index: string]: number } = {
+    "--ctr-surface-base-unit": 8,
     "--ctr-font-unit": 8,
     "--ctr-line-height-unit": 8,
     "--ctr-size-unit": 8,
     "--ctr-spacing-unit": 8,
     "--ctr-corner-radius-unit": 8,
     "--ctr-stroke-unit": 1,
-    "--ctr-surface-base-unit": 8,
+    "--lbr-font-unit": 8,
+    "--lbr-line-height-unit": 8,
+    "--lbr-size-unit": 8,
+    "--lbr-spacing-unit": 8,
+    "--lbr-corner-radius-unit": 8,
+    "--lbr-stroke-unit": 1,
   }
 
   @property() themeName: string = CreatorThemeModel.defautlThemeName;
@@ -145,6 +151,12 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
     } else if (propertyName == "surfaceScale") {
       this.scalingProperties("--ctr-surface-base-unit", newValue);
+      this.scalingProperties("--lbr-font-unit", newValue);
+      this.scalingProperties("--lbr-line-height-unit", newValue);
+      this.scalingProperties("--lbr-size-unit", newValue);
+      this.scalingProperties("--lbr-spacing-unit", newValue);
+      this.scalingProperties("--lbr-corner-radius-unit", newValue);
+      this.scalingProperties("--lbr-stroke-unit", newValue);
     }
   }
   private scalingProperties(cssName: string, newValue: number) {
@@ -167,6 +179,12 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     }
     if (this.surfaceScale !== undefined) {
       this.scaleValue("--ctr-surface-base-unit", this.surfaceScale);
+      this.scaleValue("--lbr-font-unit", this.surfaceScale);
+      this.scaleValue("--lbr-line-height-unit", this.surfaceScale);
+      this.scaleValue("--lbr-size-unit", this.surfaceScale);
+      this.scaleValue("--lbr-spacing-unit", this.surfaceScale);
+      this.scaleValue("--lbr-corner-radius-unit", this.surfaceScale);
+      this.scaleValue("--lbr-stroke-unit", this.surfaceScale);
     }
   }
   private getScaleFactor(cssName: string): number {
@@ -341,6 +359,30 @@ Serializer.addProperties("creatortheme", [
     visible: false,
   }, {
     name: "--ctr-corner-radius-unit",
+    default: "8px",
+    visible: false,
+  }, {
+    name: "--lbr-font-unit",
+    default: "8px",
+    visible: false,
+  }, {
+    name: "--lbr-line-height-unit",
+    default: "8px",
+    visible: false,
+  }, {
+    name: "--lbr-size-unit",
+    default: "8px",
+    visible: false,
+  }, {
+    name: "--lbr-spacing-unit",
+    default: "8px",
+    visible: false,
+  }, {
+    name: "--lbr-corner-radius-unit",
+    default: "8px",
+    visible: false,
+  }, {
+    name: "--lbr-size-unit",
     default: "8px",
     visible: false,
   }, {

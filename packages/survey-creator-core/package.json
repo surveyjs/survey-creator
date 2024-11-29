@@ -51,6 +51,7 @@
     "jest-canvas-mock": "^2.3.1",
     "jest-environment-jsdom": "^29.7.0",
     "jest-junit": "^16.0.0",
+    "nwsapi": "2.2.13",
     "merge-files": "^0.1.2",
     "mini-css-extract-plugin": "^2.9.0",
     "postcss": "8.4.31",

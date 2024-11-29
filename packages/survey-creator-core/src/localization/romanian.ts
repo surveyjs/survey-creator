@@ -109,6 +109,7 @@ export const roStrings = {
     redoTooltip: "Refă modificarea",
     expandAllTooltip: "Extindeți tot",
     collapseAllTooltip: "Restrângeți tot",
+    lockQuestionsTooltip: "Blocați starea de extindere/restrângere pentru întrebări",
     showMoreChoices: "Afișează mai multe",
     showLessChoices: "Afișează mai puține",
     copy: "Copiază",
@@ -507,6 +508,7 @@ export const roStrings = {
     "listIsEmpty@calculatedValues": "Nu aveți încă nicio variabilă personalizată",
     "listIsEmpty@triggers": "Nu aveți încă niciun declanșator",
     "listIsEmpty@navigateToUrlOnCondition": "Nu aveți încă niciun link",
+    "listIsEmpty@pages": "Nu aveți încă nicio pagină",
     "addNew@choices": "Adăugați o alegere nouă",
     "addNew@columns": "Adăugați o coloană nouă",
     "addNew@rows": "Adăugați un rând nou",
@@ -514,6 +516,7 @@ export const roStrings = {
     "addNew@calculatedValues": "Adăugați o variabilă nouă",
     "addNew@triggers": "Adăugați un declanșator nou",
     "addNew@navigateToUrlOnCondition": "Adăugați un URL nou",
+    "addNew@pages": "Adaugă o pagină nouă",
     expressionIsEmpty: "Expresia este goală",
     value: "Valoare",
     text: "Text",
@@ -1898,3 +1901,6 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // autocomplete.tel-extension: "Phone Extension" => "Extensie de telefon"
 // autocomplete.email: "Email Address" => "Adresa de e-mail"
 // autocomplete.impp: "Instant Messaging Protocol" => "Protocol de mesagerie instantanee"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Blocați starea de extindere/restrângere pentru întrebări"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Nu aveți încă nicio pagină"
+// pe.addNew@pages: "Add new page" => "Adaugă o pagină nouă"

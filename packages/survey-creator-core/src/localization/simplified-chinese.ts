@@ -109,6 +109,7 @@ var simplifiedChineseTranslation = {
     redoTooltip: "重做更改",
     expandAllTooltip: "全部展开",
     collapseAllTooltip: "全部折叠",
+    lockQuestionsTooltip: "锁定问题的展开/折叠状态",
     showMoreChoices: "显示更多",
     showLessChoices: "显示更少",
     copy: "复制",
@@ -507,6 +508,7 @@ var simplifiedChineseTranslation = {
     "listIsEmpty@calculatedValues": "您还没有任何自定义变量",
     "listIsEmpty@triggers": "您还没有任何触发器",
     "listIsEmpty@navigateToUrlOnCondition": "您还没有任何链接",
+    "listIsEmpty@pages": "您还没有任何页面",
     "addNew@choices": "添加选项",
     "addNew@columns": "添加新列",
     "addNew@rows": "添加新行",
@@ -514,6 +516,7 @@ var simplifiedChineseTranslation = {
     "addNew@calculatedValues": "添加新变量",
     "addNew@triggers": "添加新触发器",
     "addNew@navigateToUrlOnCondition": "添加新 URL",
+    "addNew@pages": "添加新页面",
     expressionIsEmpty: "表达式为空",
     value: "值",
     text: "显示文本",
@@ -3102,3 +3105,6 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // autocomplete.tel-extension: "Phone Extension" => "电话分机"
 // autocomplete.email: "Email Address" => "电子邮件地址"
 // autocomplete.impp: "Instant Messaging Protocol" => "即时通讯协议"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "锁定问题的展开/折叠状态"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "您还没有任何页面"
+// pe.addNew@pages: "Add new page" => "添加新页面"

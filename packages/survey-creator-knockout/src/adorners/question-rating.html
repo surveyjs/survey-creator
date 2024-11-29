@@ -3,12 +3,12 @@
     <!-- ko if: allowRemove -->
     <sv-svg-icon
       data-bind="class: removeClassNames, click: removeItem, key2click, attr: { 'aria-label': removeTooltip }"
-      params="iconName: 'icon-remove_16x16', size: 16, title: removeTooltip">
+      params="iconName: 'icon-remove_16x16', size: 'auto', title: removeTooltip">
     </sv-svg-icon>
     <!-- /ko -->
     <!-- ko if: allowAdd -->
     <sv-svg-icon data-bind="class: addClassNames, click: addItem, key2click, attr: { 'aria-label': addTooltip }"
-      params="iconName: 'icon-add_16x16', size: 16, title: addTooltip">
+      params="iconName: 'icon-add_16x16', size: 'auto', title: addTooltip">
     </sv-svg-icon>
     <!-- /ko -->
   </div>

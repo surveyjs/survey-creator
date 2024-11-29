@@ -109,6 +109,7 @@ export var indonesianStrings = {
     redoTooltip: "Mengulangi perubahan",
     expandAllTooltip: "Perluas Semua",
     collapseAllTooltip: "Ciutkan Semua",
+    lockQuestionsTooltip: "Kunci status perluasan/ciutkan untuk pertanyaan",
     showMoreChoices: "Tampilkan lebih banyak",
     showLessChoices: "Tampilkan lebih sedikit",
     copy: "Menyalin",
@@ -507,6 +508,7 @@ export var indonesianStrings = {
     "listIsEmpty@calculatedValues": "Anda belum memiliki variabel khusus",
     "listIsEmpty@triggers": "Anda belum memiliki pemicu apa pun",
     "listIsEmpty@navigateToUrlOnCondition": "Anda belum memiliki tautan apa pun",
+    "listIsEmpty@pages": "Anda belum memiliki halaman apa pun",
     "addNew@choices": "Menambahkan pilihan",
     "addNew@columns": "Tambahkan kolom baru",
     "addNew@rows": "Menambahkan baris baru",
@@ -514,6 +516,7 @@ export var indonesianStrings = {
     "addNew@calculatedValues": "Tambahkan variabel baru",
     "addNew@triggers": "Tambahkan pemicu baru",
     "addNew@navigateToUrlOnCondition": "Tambahkan URL baru",
+    "addNew@pages": "Tambahkan halaman baru",
     expressionIsEmpty: "Ekspresi kosong",
     value: "Nilai",
     text: "Teks",
@@ -3114,3 +3117,6 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // autocomplete.tel-extension: "Phone Extension" => "Ekstensi Telepon"
 // autocomplete.email: "Email Address" => "Alamat Email"
 // autocomplete.impp: "Instant Messaging Protocol" => "Protokol Pesan Instan"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Kunci status perluasan/ciutkan untuk pertanyaan"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Anda belum memiliki halaman apa pun"
+// pe.addNew@pages: "Add new page" => "Tambahkan halaman baru"

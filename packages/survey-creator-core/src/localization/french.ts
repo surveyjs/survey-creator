@@ -109,6 +109,7 @@ var frenchTranslation = {
     redoTooltip: "Rétablir la modification",
     expandAllTooltip: "Tout afficher",
     collapseAllTooltip: "Réduire tout",
+    lockQuestionsTooltip: "Verrouiller l’état d’expansion/réduction pour les questions",
     showMoreChoices: "Afficher plus",
     showLessChoices: "Afficher moins",
     copy: "Copier",
@@ -507,6 +508,7 @@ var frenchTranslation = {
     "listIsEmpty@calculatedValues": "Vous n’avez pas encore de variables personnalisées",
     "listIsEmpty@triggers": "Vous n’avez pas encore de déclencheurs",
     "listIsEmpty@navigateToUrlOnCondition": "Vous n’avez pas encore de liens",
+    "listIsEmpty@pages": "Vous n’avez pas encore de pages",
     "addNew@choices": "Ajouter un choix",
     "addNew@columns": "Ajouter une nouvelle colonne",
     "addNew@rows": "Ajouter une nouvelle ligne",
@@ -514,6 +516,7 @@ var frenchTranslation = {
     "addNew@calculatedValues": "Ajouter une nouvelle variable",
     "addNew@triggers": "Ajouter un nouveau déclencheur",
     "addNew@navigateToUrlOnCondition": "Ajouter une nouvelle URL",
+    "addNew@pages": "Ajouter une nouvelle page",
     expressionIsEmpty: "La condition est vide",
     value: "Valeur",
     text: "Texte",
@@ -3021,3 +3024,6 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // autocomplete.tel-extension: "Phone Extension" => "Extension téléphonique"
 // autocomplete.email: "Email Address" => "Adresse courriel"
 // autocomplete.impp: "Instant Messaging Protocol" => "Protocole de messagerie instantanée"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Verrouiller l’état d’expansion/réduction pour les questions"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Vous n’avez pas encore de pages"
+// pe.addNew@pages: "Add new page" => "Ajouter une nouvelle page"

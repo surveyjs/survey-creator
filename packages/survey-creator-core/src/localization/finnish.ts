@@ -109,6 +109,7 @@ export var fiStrings = {
     redoTooltip: "Tee muutos uudelleen",
     expandAllTooltip: "Laajenna kaikki",
     collapseAllTooltip: "Kutista kaikki",
+    lockQuestionsTooltip: "Lukitse laajenna/kutista tila kysymyksiä varten",
     showMoreChoices: "Näytä lisää",
     showLessChoices: "Näytä vähemmän",
     copy: "Kopioi",
@@ -507,6 +508,7 @@ export var fiStrings = {
     "listIsEmpty@calculatedValues": "Sinulla ei ole vielä mukautettuja muuttujia",
     "listIsEmpty@triggers": "Sinulla ei ole vielä käynnistimiä",
     "listIsEmpty@navigateToUrlOnCondition": "Sinulla ei ole vielä linkkejä",
+    "listIsEmpty@pages": "Sinulla ei ole vielä sivuja",
     "addNew@choices": "Lisää vaihtoehto",
     "addNew@columns": "Lisää uusi sarake",
     "addNew@rows": "Lisää uusi rivi",
@@ -514,6 +516,7 @@ export var fiStrings = {
     "addNew@calculatedValues": "Lisää uusi muuttuja",
     "addNew@triggers": "Lisää uusi käynnistin",
     "addNew@navigateToUrlOnCondition": "Lisää uusi URL-osoite",
+    "addNew@pages": "Lisää uusi sivu",
     expressionIsEmpty: "Lauseke on tyhjä",
     value: "Arvo",
     text: "Teksti",
@@ -2932,3 +2935,6 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // autocomplete.tel-extension: "Phone Extension" => "Puhelimen laajennus"
 // autocomplete.email: "Email Address" => "Sähköpostiosoite"
 // autocomplete.impp: "Instant Messaging Protocol" => "Pikaviestiprotokolla"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lukitse laajenna/kutista tila kysymyksiä varten"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Sinulla ei ole vielä sivuja"
+// pe.addNew@pages: "Add new page" => "Lisää uusi sivu"

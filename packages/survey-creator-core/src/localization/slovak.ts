@@ -109,6 +109,7 @@ export var skStrings = {
     redoTooltip: "Opakovať zmenu",
     expandAllTooltip: "Rozbaliť všetko",
     collapseAllTooltip: "Zbaliť všetko",
+    lockQuestionsTooltip: "Uzamknutie stavu rozbalenia/zbalenia otázok",
     showMoreChoices: "Zobraziť viac",
     showLessChoices: "Zobraziť menej",
     copy: "Kopírovať",
@@ -507,6 +508,7 @@ export var skStrings = {
     "listIsEmpty@calculatedValues": "Zatiaľ nemáte žiadne vlastné premenné",
     "listIsEmpty@triggers": "Zatiaľ nemáte žiadne spúšťače",
     "listIsEmpty@navigateToUrlOnCondition": "Zatiaľ nemáte žiadne odkazy",
+    "listIsEmpty@pages": "Zatiaľ nemáte žiadne stránky",
     "addNew@choices": "Pridať výber",
     "addNew@columns": "Pridať nový stĺpec",
     "addNew@rows": "Pridať nový riadok",
@@ -514,6 +516,7 @@ export var skStrings = {
     "addNew@calculatedValues": "Pridanie novej premennej",
     "addNew@triggers": "Pridať nový spúšťač",
     "addNew@navigateToUrlOnCondition": "Pridať novú URL adresu",
+    "addNew@pages": "Pridať novú stránku",
     expressionIsEmpty: "Výraz je prázdny",
     value: "Hodnota",
     text: "Text",
@@ -2913,3 +2916,6 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // autocomplete.tel-extension: "Phone Extension" => "Rozšírenie telefónu"
 // autocomplete.email: "Email Address" => "E-mailová adresa"
 // autocomplete.impp: "Instant Messaging Protocol" => "Protokol okamžitých správ"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Uzamknutie stavu rozbalenia/zbalenia otázok"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Zatiaľ nemáte žiadne stránky"
+// pe.addNew@pages: "Add new page" => "Pridať novú stránku"
