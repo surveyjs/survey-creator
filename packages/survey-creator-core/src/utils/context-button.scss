@@ -7,7 +7,7 @@
 }
 
 .svc-context-button {
-  display: block;
+  display: flex;
   box-sizing: border-box;
   background-color: var(--ctr-survey-contextual-button-background-color, $background);
   border-radius: var(--ctr-survey-contextual-button-corner-radius, 50%);
