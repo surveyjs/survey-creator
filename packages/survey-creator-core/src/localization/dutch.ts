@@ -109,6 +109,7 @@ export var nlStrings = {
     redoTooltip: "Voer de wijziging opnieuw uit",
     expandAllTooltip: "Alles uitvouwen",
     collapseAllTooltip: "Alles inklappen",
+    lockQuestionsTooltip: "Vergrendel de uitvouw-/samenvouwstatus voor vragen",
     showMoreChoices: "Toon meer",
     showLessChoices: "Toon minder",
     copy: "Kopiëren",
@@ -507,6 +508,7 @@ export var nlStrings = {
     "listIsEmpty@calculatedValues": "Je hebt nog geen aangepaste variabelen",
     "listIsEmpty@triggers": "Je hebt nog geen triggers",
     "listIsEmpty@navigateToUrlOnCondition": "Je hebt nog geen links",
+    "listIsEmpty@pages": "Je hebt nog geen pagina's",
     "addNew@choices": "Een keuze toevoegen",
     "addNew@columns": "Nieuwe kolom toevoegen",
     "addNew@rows": "Nieuwe rij toevoegen",
@@ -514,6 +516,7 @@ export var nlStrings = {
     "addNew@calculatedValues": "Nieuwe variabele toevoegen",
     "addNew@triggers": "Nieuwe trigger toevoegen",
     "addNew@navigateToUrlOnCondition": "Nieuwe URL toevoegen",
+    "addNew@pages": "Nieuwe pagina toevoegen",
     expressionIsEmpty: "Expressie is leeg",
     value: "Waarde",
     text: "Tekst",
@@ -2941,3 +2944,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // autocomplete.tel-extension: "Phone Extension" => "Telefoon extensie"
 // autocomplete.email: "Email Address" => "E-mailadres"
 // autocomplete.impp: "Instant Messaging Protocol" => "Instant Messaging Protocol"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Vergrendel de uitvouw-/samenvouwstatus voor vragen"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Je hebt nog geen pagina's"
+// pe.addNew@pages: "Add new page" => "Nieuwe pagina toevoegen"

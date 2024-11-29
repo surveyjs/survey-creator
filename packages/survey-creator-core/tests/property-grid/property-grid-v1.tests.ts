@@ -1179,7 +1179,7 @@ test("SurveyPropertyPagesEditor custom loc item for 'add item'.", () => {
   var pagesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("pages")
   );
-  expect(pagesQuestion.addRowText).toEqual("Add New");
+  expect(pagesQuestion.addRowText).toEqual("Add new page");
 
   defaultStrings.pe["addNew@pages"] = "Add New Page";
   propertyGrid = new PropertyGridModelTester(survey);
