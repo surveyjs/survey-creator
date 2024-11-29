@@ -109,6 +109,7 @@ export let svStrings = {
     redoTooltip: "Gör om ändringen",
     expandAllTooltip: "Expandera alla",
     collapseAllTooltip: "Komprimera alla",
+    lockQuestionsTooltip: "Lås expandera/komprimera tillstånd för frågor",
     showMoreChoices: "Visa mer",
     showLessChoices: "Visa mindre",
     copy: "Kopia",
@@ -507,6 +508,7 @@ export let svStrings = {
     "listIsEmpty@calculatedValues": "Du har inga anpassade variabler ännu",
     "listIsEmpty@triggers": "Du har inga utlösare ännu",
     "listIsEmpty@navigateToUrlOnCondition": "Du har inga länkar ännu",
+    "listIsEmpty@pages": "Du har inga sidor ännu",
     "addNew@choices": "Lägg till ett val",
     "addNew@columns": "Lägg till ny kolumn",
     "addNew@rows": "Lägg till ny rad",
@@ -514,6 +516,7 @@ export let svStrings = {
     "addNew@calculatedValues": "Lägg till ny variabel",
     "addNew@triggers": "Lägga till ny utlösare",
     "addNew@navigateToUrlOnCondition": "Lägg till ny URL",
+    "addNew@pages": "Lägg till ny sida",
     expressionIsEmpty: "Uttrycket är tomt",
     value: "Värde",
     text: "Text",
@@ -3137,3 +3140,6 @@ editorLocalization.locales["sv"] = svStrings;
 // autocomplete.tel-extension: "Phone Extension" => "Telefonanknytning"
 // autocomplete.email: "Email Address" => "E-postadress"
 // autocomplete.impp: "Instant Messaging Protocol" => "Protokoll för snabbmeddelanden"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lås expandera/komprimera tillstånd för frågor"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har inga sidor ännu"
+// pe.addNew@pages: "Add new page" => "Lägg till ny sida"

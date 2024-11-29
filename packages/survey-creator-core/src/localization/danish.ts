@@ -109,6 +109,7 @@ export var danishStrings = {
     redoTooltip: "Fortryd ændringen",
     expandAllTooltip: "Udvid alle",
     collapseAllTooltip: "Skjul alle",
+    lockQuestionsTooltip: "Lås udvid/skjul tilstand for spørgsmål",
     showMoreChoices: "Vis mere",
     showLessChoices: "Vis mindre",
     copy: "Eksemplar",
@@ -507,6 +508,7 @@ export var danishStrings = {
     "listIsEmpty@calculatedValues": "Du har endnu ingen tilpassede variabler",
     "listIsEmpty@triggers": "Du har ingen udløsere endnu",
     "listIsEmpty@navigateToUrlOnCondition": "Du har ingen links endnu",
+    "listIsEmpty@pages": "Du har ingen sider endnu",
     "addNew@choices": "Tilføj et valg",
     "addNew@columns": "Tilføj ny kolonne",
     "addNew@rows": "Tilføj ny række",
@@ -514,6 +516,7 @@ export var danishStrings = {
     "addNew@calculatedValues": "Tilføj ny variabel",
     "addNew@triggers": "Tilføj ny udløser",
     "addNew@navigateToUrlOnCondition": "Tilføj ny webadresse",
+    "addNew@pages": "Tilføj ny side",
     expressionIsEmpty: "Udtrykket er tomt",
     value: "Værdi",
     text: "Tekst",
@@ -3145,3 +3148,6 @@ editorLocalization.locales["da"] = danishStrings;
 // autocomplete.tel-extension: "Phone Extension" => "Telefon Lokalnummer"
 // autocomplete.email: "Email Address" => "E-mailadresse"
 // autocomplete.impp: "Instant Messaging Protocol" => "Protokol til onlinemeddelelser"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lås udvid/skjul tilstand for spørgsmål"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har ingen sider endnu"
+// pe.addNew@pages: "Add new page" => "Tilføj ny side"

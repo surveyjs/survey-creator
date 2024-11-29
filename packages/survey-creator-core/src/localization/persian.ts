@@ -109,6 +109,7 @@ var persianStrings = {
     redoTooltip: "انجام دادن تغییر",
     expandAllTooltip: "گسترش همه",
     collapseAllTooltip: "جمع کردن همه",
+    lockQuestionsTooltip: "قفل کردن وضعیت expand/collapse برای سوالات",
     showMoreChoices: "نمایش بیشتر",
     showLessChoices: "نمایش کمتر",
     copy: "کپی",
@@ -507,6 +508,7 @@ var persianStrings = {
     "listIsEmpty@calculatedValues": "شما هنوز هیچ متغیر سفارشی ندارید",
     "listIsEmpty@triggers": "شما هنوز هیچ محرکی ندارید",
     "listIsEmpty@navigateToUrlOnCondition": "شما هنوز هیچ لینکی ندارید",
+    "listIsEmpty@pages": "شما هنوز هیچ صفحه ای ندارید",
     "addNew@choices": "اضافه کردن یک انتخاب",
     "addNew@columns": "افزودن ستون جدید",
     "addNew@rows": "افزودن سطر جدید",
@@ -514,6 +516,7 @@ var persianStrings = {
     "addNew@calculatedValues": "افزودن متغیر جدید",
     "addNew@triggers": "افزودن ماشه جدید",
     "addNew@navigateToUrlOnCondition": "افزودن نشانی وب جدید",
+    "addNew@pages": "افزودن صفحه جدید",
     expressionIsEmpty: "عبارت خالی است",
     value: "مقدار",
     text: "متن",
@@ -2916,3 +2919,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // autocomplete.tel-extension: "Phone Extension" => "پسوند تلفن"
 // autocomplete.email: "Email Address" => "آدرس ایمیل"
 // autocomplete.impp: "Instant Messaging Protocol" => "پروتکل پیام رسانی فوری"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "قفل کردن وضعیت expand/collapse برای سوالات"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "شما هنوز هیچ صفحه ای ندارید"
+// pe.addNew@pages: "Add new page" => "افزودن صفحه جدید"
