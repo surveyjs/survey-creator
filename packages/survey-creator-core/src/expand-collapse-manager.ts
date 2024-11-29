@@ -1,33 +1,45 @@
 import { CreatorBase } from "./creator-base";
 import { SurveyElementAdornerBase } from "./components/action-container-view-model";
+import { PageModel, PanelModel, Question, SurveyElement } from "survey-core";
+import { ElementGetExpandCollapseStateEventReason } from "./creator-events-api";
 
 export class ExpandCollapseManager {
-  private lockQuestions: boolean = false;
+  private _lockQuestions: boolean = false;
   constructor(private creator: CreatorBase) {
-    creator.onSurfaceToolbarActionExecuted.add((_, options) => {
-      const isCollapseAction = options.action.id == "collapseAll";
-      const isExpandAction = options.action.id == "expandAll";
-      if (options.action.id == "lockQuestions") {
-        options.action.active = !options.action.active;
-        this.lockQuestions = options.action.active;
-      }
-      if (isCollapseAction || isExpandAction) {
-        if (isCollapseAction) this.creator.collapseAllWithButton();
-        if (isExpandAction) this.creator.expandAllWithButton();
-        this.updateCollapsed(isCollapseAction);
+  }
+
+  public expandCollapseElements(reason: ElementGetExpandCollapseStateEventReason, isCollapsed: boolean, elements: SurveyElement[] = null) {
+    this.updateCollapsed(elements || this.getCollapsableElements(), isCollapsed, reason);
+  }
+
+  public lockQuestions(locked: boolean) {
+    this._lockQuestions = locked;
+  }
+  private getCollapsableElements() {
+    return (this.creator.survey.pages as SurveyElement[])
+      .concat(this.creator.survey.getAllPanels() as unknown as SurveyElement[])
+      .concat(this.creator.survey.getAllQuestions() as SurveyElement[]);
+  }
+
+  private updateCollapsed(elements: SurveyElement[], value: boolean, reason: ElementGetExpandCollapseStateEventReason) {
+    elements.forEach(element => {
+      if (element.isQuestion && this._lockQuestions) return;
+
+      if (this.creator.designerStateManager) {
+        this.creator.designerStateManager.getElementState(element).collapsed =
+          this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
       }
     });
-  }
-  private adorners: Array<SurveyElementAdornerBase> = [];
-  public updateCollapsed(isCollapsed: boolean) {
     for (let i = this.adorners.length - 1; i >= 0; i--) {
+      const element = this.adorners[i].element;
+      if (element.isQuestion && this._lockQuestions) continue;
+      if (elements.indexOf(element) == -1) continue;
       if (this.adorners[i].allowExpandCollapse) {
-        const reason = isCollapsed ? "collapse-all" : "expand-all";
-        const toCollapse = this.adorners[i].element.isQuestion && this.lockQuestions ? this.adorners[i].collapsed : isCollapsed;
-        this.adorners[i].collapsed = this.creator.getElementExpandCollapseState(this.adorners[i].element as any, reason, toCollapse);
+        this.adorners[i].collapsed = this.creator.getElementExpandCollapseState(this.adorners[i].element as any, reason, value);
       }
     }
   }
+  private adorners: Array<SurveyElementAdornerBase> = [];
 
   public add(adorner: SurveyElementAdornerBase) {
     this.adorners.push(adorner);
