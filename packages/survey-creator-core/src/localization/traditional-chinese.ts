@@ -109,6 +109,7 @@ var traditionalChineseTranslation = {
     redoTooltip: "重做更改",
     expandAllTooltip: "全部展開",
     collapseAllTooltip: "全部摺疊",
+    lockQuestionsTooltip: "鎖定問題的展開/摺疊狀態",
     showMoreChoices: "顯示更多",
     showLessChoices: "顯示更少",
     copy: "複製",
@@ -507,6 +508,7 @@ var traditionalChineseTranslation = {
     "listIsEmpty@calculatedValues": "您還沒有任何自訂變數",
     "listIsEmpty@triggers": "您還沒有任何觸發器",
     "listIsEmpty@navigateToUrlOnCondition": "您還沒有任何連結",
+    "listIsEmpty@pages": "您還沒有任何頁面",
     "addNew@choices": "添加選項",
     "addNew@columns": "添加新列",
     "addNew@rows": "添加新行",
@@ -514,6 +516,7 @@ var traditionalChineseTranslation = {
     "addNew@calculatedValues": "添加新變數",
     "addNew@triggers": "添加新觸發器",
     "addNew@navigateToUrlOnCondition": "添加新 URL",
+    "addNew@pages": "添加新頁面",
     expressionIsEmpty: "表達式為空",
     value: "值",
     text: "顯示文本",
@@ -3232,3 +3235,6 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // autocomplete.tel-extension: "Phone Extension" => "電話分機"
 // autocomplete.email: "Email Address" => "電子郵件位址"
 // autocomplete.impp: "Instant Messaging Protocol" => "即時通訊協定"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "鎖定問題的展開/摺疊狀態"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "您還沒有任何頁面"
+// pe.addNew@pages: "Add new page" => "添加新頁面"

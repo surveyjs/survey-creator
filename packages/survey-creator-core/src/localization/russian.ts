@@ -109,6 +109,7 @@ export var ruStrings = {
     redoTooltip: "Повторите изменение",
     expandAllTooltip: "Развернуть все",
     collapseAllTooltip: "Свернуть все",
+    lockQuestionsTooltip: "Блокировка состояния развертывания/свертывания для вопросов",
     showMoreChoices: "Развернуть",
     showLessChoices: "Показать меньше",
     copy: "Копировать",
@@ -507,6 +508,7 @@ export var ruStrings = {
     "listIsEmpty@calculatedValues": "У вас еще нет пользовательских переменных",
     "listIsEmpty@triggers": "У вас еще нет триггеров",
     "listIsEmpty@navigateToUrlOnCondition": "У вас еще нет ссылок",
+    "listIsEmpty@pages": "У вас еще нет страниц",
     "addNew@choices": "Добавить выбор",
     "addNew@columns": "Добавить новый столбец",
     "addNew@rows": "Добавить новую строку",
@@ -514,6 +516,7 @@ export var ruStrings = {
     "addNew@calculatedValues": "Добавить новую переменную",
     "addNew@triggers": "Добавить новый триггер",
     "addNew@navigateToUrlOnCondition": "Добавить новый URL-адрес",
+    "addNew@pages": "Добавить новую страницу",
     expressionIsEmpty: "Выражение - пустое",
     value: "Значение",
     text: "Текст",
@@ -3020,3 +3023,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // autocomplete.tel-extension: "Phone Extension" => "Добавочный номер телефона"
 // autocomplete.email: "Email Address" => "Адрес электронной почты"
 // autocomplete.impp: "Instant Messaging Protocol" => "Протокол обмена мгновенными сообщениями"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Блокировка состояния развертывания/свертывания для вопросов"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "У вас еще нет страниц"
+// pe.addNew@pages: "Add new page" => "Добавить новую страницу"
