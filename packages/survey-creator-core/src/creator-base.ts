@@ -2232,7 +2232,10 @@ export class SurveyCreatorModel extends Base
 
   public get designTabSurveyThemeVariables(): {} {
     const cssVariables = {};
-    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, { "--sjs-base-unit": "var(--ctr-surface-base-unit)" });
+    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, {
+      "--sjs-base-unit": "var(--ctr-surface-base-unit)",
+      "--sjs-font-size": "calc(2 * var(--ctr-surface-base-unit))",
+    });
     return cssVariables;
   }
 

@@ -30,7 +30,7 @@ export class TabPreviewTestSurveyAgainComponent extends SurveyElementBase<any, a
       className={buttonClassName}
       title={this.model.title}
     >
-      <span className="svc-preview-test-again__text">
+      <span className="svc-btn__text">
         {this.model.title}
       </span>
     </div>);
