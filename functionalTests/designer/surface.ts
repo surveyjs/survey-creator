@@ -418,3 +418,29 @@ test("Popup position", async (t) => {
   await t.expect(ClientFunction(() => { return document.querySelector('[data-name="locale"] .sv-popup__container')?.getBoundingClientRect().top; })()).gte(200);
   await setCreatorTop("");
 });
+
+test("Diabled Input issue", async (t) => {
+  //https://github.com/surveyjs/survey-creator/issues/6138
+  const qName = "question1";
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": qName
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const questionContentClass = "svc-question__content";
+  const QuestionContent = Selector(`[data-sv-drop-target-survey-element=${qName}]`).find(`.${questionContentClass}`);
+  const QuestionInput = QuestionContent.find("input.sd-input:disabled");
+
+  await t.click(QuestionInput);
+  await t.expect(QuestionContent.hasClass(questionContentClass + "--selected")).ok();
+});
