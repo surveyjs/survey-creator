@@ -436,28 +436,7 @@ test("expand/collapse event - loading", () => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
   creator.expandCollapseButtonVisibility = "onhover";
-  creator.JSON = {
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          {
-            "type": "text",
-            "name": "question1"
-          }
-        ]
-      },
-      {
-        "name": "page2",
-        "elements": [
-          {
-            "type": "panel",
-            "name": "panel1"
-          }
-        ]
-      }
-    ]
-  };
+
   var designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
@@ -487,6 +466,29 @@ test("expand/collapse event - loading", () => {
       if (o.element.name == "panel1") o.collapsed = true;
     }
   });
+
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1"
+          }
+        ]
+      }
+    ]
+  };
 
   const page1Adorner = new PageAdorner(creator, creator.survey.pages[0]);
   const page2Adorner = new PageAdorner(creator, creator.survey.pages[1]);

@@ -12,6 +12,8 @@ export class ExpandCollapseManager {
         this.lockQuestions = options.action.active;
       }
       if (isCollapseAction || isExpandAction) {
+        if (isCollapseAction) this.creator.collapseAllWithButton();
+        if (isExpandAction) this.creator.expandAllWithButton();
         this.updateCollapsed(isCollapseAction);
       }
     });
