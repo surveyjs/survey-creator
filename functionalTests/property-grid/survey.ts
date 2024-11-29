@@ -221,3 +221,18 @@ test("Drop-down menus do not close on second click", async (t) => {
     .click(panel.find(".spg-panel__content"), { offsetX: 10, offsetY: 10 })
     .expect(popupContainer.visible).notOk();
 });
+
+test("tabbed mode", async (t) => {
+  const json = {
+    elements: [
+      {
+        type: "dropdown",
+        name: "q1",
+        title: "title"
+      }
+    ]
+  };
+  await setJSON(json);
+  await t.hover(Selector(".svc-side-bar .svc-scroll__wrapper").filterVisible());
+  await t.expect(Selector(".svc-side-bar .svc-scroll__scrollbar").visible).notOk();
+});
