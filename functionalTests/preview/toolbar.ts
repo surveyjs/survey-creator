@@ -103,7 +103,7 @@ test("Page switcher", async (t) => {
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(true)
 
-    .click(getBarItemByTitle("Page 3"))
+    .click(Selector(".svc-preview-pager__item[title='Page 3']"))
     .expect(getListItemByText("Second page").visible).ok()
     .expect(getListItemByText("First page").hasClass("sv-list__item--selected")).notOk()
     .expect(getListItemByText("Second page").hasClass("sv-list__item--selected")).notOk()
@@ -113,7 +113,7 @@ test("Page switcher", async (t) => {
     .expect(Selector("#pageSelector").textContent).contains("Second page")
     .expect(Selector("#prevPage button").hasAttribute("disabled")).eql(false)
     .expect(Selector("#nextPage button").hasAttribute("disabled")).eql(false)
-    .click(getBarItemByTitle("Second page"))
+    .click(Selector(".svc-preview-pager__item[title='Second page']"))
     .expect(getListItemByText("First page").hasClass("sv-list__item--selected")).notOk()
     .expect(getListItemByText("Second page").hasClass("sv-list__item--selected")).ok()
     .expect(getListItemByText("Page 3").hasClass("sv-list__item--selected")).notOk()

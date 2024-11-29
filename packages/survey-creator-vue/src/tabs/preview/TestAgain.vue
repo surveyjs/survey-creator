@@ -5,7 +5,7 @@
     @click="action.action()"
     v-key2click
   >
-    <span class="svc-preview-test-again__text">
+    <span class="svc-btn__text">
       {{ action.title }}
     </span>
   </div>

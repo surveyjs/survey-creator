@@ -244,14 +244,14 @@ test("test tab for mobile devices", async (t) => {
     .expect(creatorFooterToolbarActions.nth(0).id).eql("svd-designer")
     .expect(creatorFooterToolbarActions.nth(1).id).eql("svd-preview")
     .expect(creatorFooterToolbarActions.nth(2).id).eql("prevPage")
-    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(2).hasAttribute("disabled")).eql(true)
+    .expect(creatorFooterToolbarActions.find(".svc-preview-pager__item").nth(0).hasAttribute("disabled")).eql(true)
     .expect(creatorFooterToolbarActions.nth(3).id).eql("nextPage")
-    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(3).hasAttribute("disabled")).eql(false)
+    .expect(creatorFooterToolbarActions.find(".svc-preview-pager__item").nth(1).hasAttribute("disabled")).eql(false)
     .expect(creatorFooterToolbarActions.nth(4).id).eql("showInvisible")
 
     .click(creatorFooterToolbarActions.nth(3))
-    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(2).hasAttribute("disabled")).eql(false)
-    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(3).hasAttribute("disabled")).eql(true)
+    .expect(creatorFooterToolbarActions.find(".svc-preview-pager__item").nth(0).hasAttribute("disabled")).eql(false)
+    .expect(creatorFooterToolbarActions.find(".svc-preview-pager__item").nth(1).hasAttribute("disabled")).eql(true)
 
     .resizeWindow(1920, 900)
     .expect(testTabToolbar.exists).ok()

@@ -1,25 +1,27 @@
 .svc-btn {
   display: flex;
+  padding: var(--ctr-button-padding-vertical, calcSize(2)) var(--ctr-button-padding-horizontal, calcSize(6));
+  justify-content: center;
   align-items: center;
-  height: calcSize(7);
-  line-height: calcSize(7);
-  vertical-align: baseline;
-  text-align: center;
+
   background-color: var(--ctr-button-background-color, $background);
-  box-shadow: $shadow-small;
   border-radius: var(--ctr-button-corner-radius, calcSize(0.5));
   cursor: pointer;
   user-select: none;
   outline: solid calcSize(0.25) transparent;
   transition: background-color $creator-transition-duration;
 
-  .svc-add-new-item-button__text {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    justify-content: center;
-    color: var(--ctr-button-text-color, $primary);
-  }
+  box-shadow: var(--ctr-button-shadow-offset-x, 0px) var(--ctr-button-shadow-offset-y, 1px)
+    var(--ctr-button-shadow-blur, 2px) var(--ctr-button-shadow-spread, 0px)
+    var(--ctr-button-shadow-color, var(--ctr-shadow-small-color, rgba(0, 0, 0, 0.15)));
+}
+.svc-btn__text {
+  @include ctrDefaultBoldFont;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
+  color: var(--ctr-button-text-color, $primary);
 }
 
 .svc-btn:hover {
@@ -27,5 +29,5 @@
 }
 
 .svc-btn:focus {
-  box-shadow: 0 0 0 2px var(--ctr-button-border-color-focused, $primary);
+  box-shadow: 0 0 0 var(--ctr-button-border-width-focused, 2px) var(--ctr-button-border-color-focused, $primary);
 }
