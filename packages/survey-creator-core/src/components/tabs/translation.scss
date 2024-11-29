@@ -38,6 +38,7 @@
     .spg-table__question-wrapper {
       @include ctrDefaultFont;
       padding: calcSize(1.5) calcSize(1);
+      color: var(--ctr-checkbox-text-color, $foreground-dim);
 
       .spg-checkbox {
         margin: 0;
@@ -58,6 +59,15 @@
         border: var(--ctr-checkbox-border-width, 1px) solid var(--ctr-checkbox-border-color-disabled, rgba(0, 0, 0, 0.16));
         background: var(--ctr-checkbox-background-color-disabled, #f3f3f3);
       }
+    }
+  }
+
+  .spg-matrixdynamic__dragged-row {
+    @include ctrDefaultFont;
+    color: var(--ctr-checkbox-text-color, $foreground-dim);
+
+    .spg-table__cell:nth-child(3) {
+      flex: 1;
     }
   }
 }
