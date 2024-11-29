@@ -1,2 +1,26 @@
 $font-unit: var(--lbr-font-unit, 8px);
 $line-height-unit: var(--lbr-line-height-unit, 8px);
+
+@mixin lbrDefaultFont {
+  font-family: $font-family;
+  font-size: var(--lbr-font-default-size, 16px);
+  font-style: normal;
+  line-height: var(--lbr-font-default-line-height, 24px); /* 150% */
+}
+
+@mixin lbrDefaultBoldFont {
+  @include lbrDefaultFont;
+  font-weight: 600;
+}
+
+@mixin lbrSmallFont {
+  font-family: $font-family;
+  font-size: var(--lbr-font-small-size, 12px);
+  font-style: normal;
+  line-height: var(--lbr-font-small-line-height, 16px); /* 133.333% */
+}
+
+@mixin lbrSmallBoldFont {
+  @include lbrSmallFont;
+  font-weight: 600;
+}

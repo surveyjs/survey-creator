@@ -44,7 +44,7 @@ import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
 import { DragDropSurveyElements } from "./survey-elements";
 import { PageAdorner } from "./components/page";
 import {
-  ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, HtmlToMarkdownEvent, ElementAllowOperationsEvent,
+  ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, ElementAllowOperationsEvent,
   ElementGetActionsEvent, PropertyAddingEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent,
   PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, FastEntryItemsEvent as FastEntryFinishedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
   PropertyDisplayCustomErrorEvent, PropertyValueChangingEvent, PropertyValueChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
@@ -195,7 +195,7 @@ export class SurveyCreatorModel extends Base
     this._showOneCategoryInPropertyGrid = newValue;
     Object.keys(this.plugins).forEach(name => {
       const plugin = this.plugins[name];
-      if(!!plugin && "showOneCategoryInPropertyGrid" in plugin) {
+      if (!!plugin && "showOneCategoryInPropertyGrid" in plugin) {
         plugin.showOneCategoryInPropertyGrid = newValue;
       }
     });
@@ -452,11 +452,7 @@ export class SurveyCreatorModel extends Base
    * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`showObjectTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showObjectTitles) property instead of handling this event.
    */
   public onGetObjectDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetDisplayNameEvent>();
-
-  /**
-   * An event that is raised after a user has edited a text value on the design surface. This value may include HTML markup. You can handle the `onHtmlToMarkdown` event to convert the HTML markup to Markdown.
-   */
-  public onHtmlToMarkdown: EventBase<SurveyCreatorModel, HtmlToMarkdownEvent> = this.addCreatorEvent<SurveyCreatorModel, HtmlToMarkdownEvent>();
+  public onHtmlToMarkdown: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
   /*
    * An event that is raised when Survey Creator obtains the expand/collapse state of a survey element on the design surface. Handle this event to set a required state.
@@ -2236,7 +2232,10 @@ export class SurveyCreatorModel extends Base
 
   public get designTabSurveyThemeVariables(): {} {
     const cssVariables = {};
-    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, { "--sjs-base-unit": "var(--ctr-surface-base-unit)" });
+    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, {
+      "--sjs-base-unit": "var(--ctr-surface-base-unit)",
+      "--sjs-font-size": "calc(2 * var(--ctr-surface-base-unit))",
+    });
     return cssVariables;
   }
 
@@ -3753,7 +3752,7 @@ export class SurveyCreatorModel extends Base
     });
     newAction.popupModel.getTargetCallback = undefined;
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
-      if(opt.isVisible) {
+      if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         listModel.setItems(getActions());
       }

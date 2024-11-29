@@ -24,7 +24,7 @@ export class TabLogicAddButtonComponent extends SurveyElementBase<any, any> {
       className={buttonClassName}
       title={this.model.title}
     >
-      <span className="svc-add-new-item-button__text">
+      <span className="svc-btn__text">
         {this.model.title}
       </span>
     </div>);
