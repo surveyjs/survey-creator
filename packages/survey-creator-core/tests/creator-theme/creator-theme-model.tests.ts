@@ -139,6 +139,11 @@ test("creator.applyTheme", () => {
       "--ctr-corner-radius-unit": "6px",
       "--ctr-spacing-unit": "6px",
       "--ctr-surface-base-unit": "10px",
+      "--lbr-corner-radius-unit": "10px",
+      "--lbr-font-unit": "10px",
+      "--lbr-line-height-unit": "10px",
+      "--lbr-size-unit": "10px",
+      "--lbr-spacing-unit": "10px",
       "--sjs-test": "green"
     }
   };

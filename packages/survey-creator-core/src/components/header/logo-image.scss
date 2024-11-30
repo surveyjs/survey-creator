@@ -2,7 +2,7 @@
 
 .svc-designer-header .sd-container-modern__title {
   gap: 0;
-  column-gap: calcSize(6);
+  column-gap: var(--lbr-header-gap, 32px);
 }
 
 .svc-logo-image {
@@ -40,12 +40,16 @@
   white-space: nowrap;
   word-break: keep-all;
   padding: 0;
-  width: calcSize(8);
-  height: calcSize(8);
+  // width: calcSize(8);
+  // height: calcSize(8);
+  padding: var(--ctr-survey-header-logo-placeholder-padding-top, calcSize(1))
+    var(--ctr-survey-header-logo-placeholder-padding-right, calcSize(1))
+    var(--ctr-survey-header-logo-placeholder-padding-bottom, calcSize(1))
+    var(--ctr-survey-header-logo-placeholder-padding-left, calcSize(1));
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: calcSize(-2);
+  // margin-right: calcSize(-2);
   border-radius: var(--ctr-survey-header-logo-placeholder-corner-radius, calcSize(4));
   transition: background-color $creator-transition-duration, opacity $creator-transition-duration;
 
