@@ -35,7 +35,7 @@ export class ExpandCollapseManager {
       if (element.isQuestion && this._lockQuestions) continue;
       if (elements.indexOf(element) == -1) continue;
       if (this.adorners[i].allowExpandCollapse) {
-        this.adorners[i].collapsed = this.creator.getElementExpandCollapseState(this.adorners[i].element as any, reason, value);
+        this.adorners[i].collapsed = this.creator.designerStateManager.getElementState(element).collapsed;
       }
     }
   }

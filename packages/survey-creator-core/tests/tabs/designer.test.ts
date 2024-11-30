@@ -536,8 +536,8 @@ test("Check adorners lock questions for expand/collapse all", (): any => {
   const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
-  let pageAdorner = new PageAdorner(creator, designerPlugin.model.newPage);
-  pageAdorner.addNewQuestion(pageAdorner, null);
+  let newPageAdorner = new PageAdorner(creator, designerPlugin.model.newPage);
+  newPageAdorner.addNewQuestion(newPageAdorner, null);
 
   let question1 = creator.survey.getQuestionByName("question1");
   let questionAdorner = new QuestionAdornerViewModel(
@@ -545,6 +545,9 @@ test("Check adorners lock questions for expand/collapse all", (): any => {
     question1,
     <any>undefined
   );
+
+  let page1 = creator.survey.pages[0];
+  let pageAdorner = new PageAdorner(creator, page1);
 
   const collapseAll = designerPlugin.model.surfaceToolbar.getActionById("collapseAll");
   const expandAll = designerPlugin.model.surfaceToolbar.getActionById("expandAll");

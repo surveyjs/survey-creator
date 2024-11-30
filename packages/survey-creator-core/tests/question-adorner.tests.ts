@@ -971,6 +971,7 @@ test("Check panel getAnimatedElement methods", () => {
 
 test("Don't reset collapased state for moved question", () => {
   const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
   creator.JSON = {
     "logoPosition": "right",
     "pages": [
