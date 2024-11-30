@@ -109,6 +109,7 @@ export var nbStrings = {
     redoTooltip: "Gjør om siste endring",
     expandAllTooltip: "Utvid alle",
     collapseAllTooltip: "Skjul alle",
+    lockQuestionsTooltip: "Lås utvidelses-/skjuletilstand for spørsmål",
     showMoreChoices: "Vis mer",
     showLessChoices: "Vis mindre",
     copy: "Kopier",
@@ -507,6 +508,7 @@ export var nbStrings = {
     "listIsEmpty@calculatedValues": "Du har ingen egendefinerte variabler ennå",
     "listIsEmpty@triggers": "Du har ingen utløsere ennå",
     "listIsEmpty@navigateToUrlOnCondition": "Du har ingen koblinger ennå",
+    "listIsEmpty@pages": "Du har ingen sider ennå",
     "addNew@choices": "Legg til et valg",
     "addNew@columns": "Legg til ny kolonne",
     "addNew@rows": "Legg til ny rad",
@@ -514,6 +516,7 @@ export var nbStrings = {
     "addNew@calculatedValues": "Legg til ny variabel",
     "addNew@triggers": "Legg til ny utløser",
     "addNew@navigateToUrlOnCondition": "Legg til ny URL-adresse",
+    "addNew@pages": "Legg til ny side",
     expressionIsEmpty: "Formelen er tom",
     value: "Verdi",
     text: "Tekst",
@@ -2963,3 +2966,6 @@ editorLocalization.locales["nb"] = nbStrings;
 // autocomplete.tel-extension: "Phone Extension" => "Utvidelse av telefon"
 // autocomplete.email: "Email Address" => "E-postadresse"
 // autocomplete.impp: "Instant Messaging Protocol" => "Protokoll for direktemeldinger"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lås utvidelses-/skjuletilstand for spørsmål"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har ingen sider ennå"
+// pe.addNew@pages: "Add new page" => "Legg til ny side"

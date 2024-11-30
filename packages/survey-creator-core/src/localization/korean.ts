@@ -109,6 +109,7 @@ export var koreanStrings = {
     redoTooltip: "변경 내용 다시 실행",
     expandAllTooltip: "모두 확장",
     collapseAllTooltip: "모두 축소",
+    lockQuestionsTooltip: "질문의 확장/축소 상태 잠금",
     showMoreChoices: "더 보기",
     showLessChoices: "간략하게 표시",
     copy: "복사",
@@ -507,6 +508,7 @@ export var koreanStrings = {
     "listIsEmpty@calculatedValues": "아직 맞춤 변수가 없습니다.",
     "listIsEmpty@triggers": "아직 트리거가 없습니다.",
     "listIsEmpty@navigateToUrlOnCondition": "아직 링크가 없습니다.",
+    "listIsEmpty@pages": "아직 페이지가 없습니다.",
     "addNew@choices": "선택 항목 추가",
     "addNew@columns": "새 열 추가",
     "addNew@rows": "새 행 추가",
@@ -514,6 +516,7 @@ export var koreanStrings = {
     "addNew@calculatedValues": "새 변수 추가",
     "addNew@triggers": "새 트리거 추가",
     "addNew@navigateToUrlOnCondition": "새 URL 추가",
+    "addNew@pages": "새 페이지 추가",
     expressionIsEmpty: "식이 비어 있습니다.",
     value: "값",
     text: "텍스트",
@@ -3164,3 +3167,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // autocomplete.tel-extension: "Phone Extension" => "전화 내선 번호"
 // autocomplete.email: "Email Address" => "이메일 주소"
 // autocomplete.impp: "Instant Messaging Protocol" => "인스턴트 메시징 프로토콜"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "질문의 확장/축소 상태 잠금"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "아직 페이지가 없습니다."
+// pe.addNew@pages: "Add new page" => "새 페이지 추가"

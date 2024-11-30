@@ -109,6 +109,7 @@ export var hebrewStrings = {
     redoTooltip: "בצע מחדש את השינוי",
     expandAllTooltip: "הרחב הכל",
     collapseAllTooltip: "כווץ הכל",
+    lockQuestionsTooltip: "נעילת מצב הרחבה/כיווץ עבור שאלות",
     showMoreChoices: "הצג עוד",
     showLessChoices: "הצג פחות",
     copy: "העתק",
@@ -507,6 +508,7 @@ export var hebrewStrings = {
     "listIsEmpty@calculatedValues": "עדיין אין לך משתנים מותאמים אישית",
     "listIsEmpty@triggers": "עדיין אין לך טריגרים",
     "listIsEmpty@navigateToUrlOnCondition": "עדיין אין לך קישורים",
+    "listIsEmpty@pages": "עדיין אין לך דפים",
     "addNew@choices": "הוסף ברירת בחירה",
     "addNew@columns": "הוספת עמודה חדשה",
     "addNew@rows": "הוספת שורה חדשה",
@@ -514,6 +516,7 @@ export var hebrewStrings = {
     "addNew@calculatedValues": "הוספת משתנה חדש",
     "addNew@triggers": "הוספת גורם מפעיל חדש",
     "addNew@navigateToUrlOnCondition": "הוספת כתובת URL חדשה",
+    "addNew@pages": "הוספת עמוד חדש",
     expressionIsEmpty: "הביטוי ריק",
     value: "ערך",
     text: "טקסט",
@@ -2528,3 +2531,6 @@ editorLocalization.locales["he"] = hebrewStrings;
 // autocomplete.tel-extension: "Phone Extension" => "שלוחת טלפון"
 // autocomplete.email: "Email Address" => "כתובת דוא\"ל"
 // autocomplete.impp: "Instant Messaging Protocol" => "פרוטוקול העברת הודעות מיידיות"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "נעילת מצב הרחבה/כיווץ עבור שאלות"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "עדיין אין לך דפים"
+// pe.addNew@pages: "Add new page" => "הוספת עמוד חדש"

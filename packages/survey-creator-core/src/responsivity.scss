@@ -5,7 +5,8 @@
     overflow-y: overlay;
   }
 
-  .sd-root-modern {
+  .sd-root-modern,
+  .sd-container-modern {
     --sd-base-padding: calc(3 * #{$base-unit});
     --sd-base-vertical-padding: calc(2 * #{$base-unit});
     --sd-page-vertical-padding: calc(2 * #{$base-unit});

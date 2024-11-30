@@ -109,6 +109,7 @@ export var huStrings = {
     redoTooltip: "Ismételje meg a módosítást",
     expandAllTooltip: "Összes kibontása",
     collapseAllTooltip: "Az összes összecsukása",
+    lockQuestionsTooltip: "Kibontási/összecsukási állapot zárolása kérdések esetén",
     showMoreChoices: "Bővebben",
     showLessChoices: "Rövidebben",
     copy: "Másolat",
@@ -507,6 +508,7 @@ export var huStrings = {
     "listIsEmpty@calculatedValues": "Még nincsenek egyéni változói",
     "listIsEmpty@triggers": "Még nincsenek triggerek",
     "listIsEmpty@navigateToUrlOnCondition": "Még nincsenek linkek",
+    "listIsEmpty@pages": "Még nincsenek oldalai",
     "addNew@choices": "Választási lehetőség hozzáadása",
     "addNew@columns": "Új oszlop hozzáadása",
     "addNew@rows": "Új sor hozzáadása",
@@ -514,6 +516,7 @@ export var huStrings = {
     "addNew@calculatedValues": "Új változó hozzáadása",
     "addNew@triggers": "Új eseményindító hozzáadása",
     "addNew@navigateToUrlOnCondition": "Új URL hozzáadása",
+    "addNew@pages": "Új oldal hozzáadása",
     expressionIsEmpty: "A kifejezés üres",
     value: "Érték",
     text: "Szöveg",
@@ -3113,3 +3116,6 @@ editorLocalization.locales["hu"] = huStrings;
 // autocomplete.tel-extension: "Phone Extension" => "Telefonbővítmény"
 // autocomplete.email: "Email Address" => "E-mail cím"
 // autocomplete.impp: "Instant Messaging Protocol" => "Azonnali üzenetküldési protokoll"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Kibontási/összecsukási állapot zárolása kérdések esetén"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Még nincsenek oldalai"
+// pe.addNew@pages: "Add new page" => "Új oldal hozzáadása"
