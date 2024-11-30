@@ -3,6 +3,7 @@ import { getLocString } from "../editorLocalization";
 import { assign, roundTo2Decimals, ColorCalculator } from "../utils/utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import * as Themes from "survey-creator-core/themes";
+import { getPredefinedBackgoundColorsChoices } from "../components/tabs/themes";
 
 Object.keys(Themes || {}).forEach(themeName => {
   const theme: ICreatorTheme = Themes[themeName];
@@ -116,7 +117,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
   private resetColorThemeCssVariablesChanges(): void {
     Object.keys(this.themeCssVariablesChanges).forEach(key => {
-      if(key.indexOf("--sjs-") === 0) {
+      if (key.indexOf("--sjs-") === 0) {
         delete this.themeCssVariablesChanges[key];
       }
     });
@@ -296,7 +297,14 @@ Serializer.addProperties("creatortheme", [
   {
     type: "color",
     name: "--sjs-special-background",
-    default: "#F3F3F3FF",
+    // default: "#F3F3F3FF",
+    defaultFunc: (obj: any) => {
+      obj.name + "_second";
+      return "#F3F3F3FF";
+    },
+    choices: function (obj: any) {
+      return getPredefinedBackgoundColorsChoices();
+    },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.title = getLocString("creatortheme.--sjs-special-background");
