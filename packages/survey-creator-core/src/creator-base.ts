@@ -3985,6 +3985,8 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: {} }) themeVariables: { [index: string]: string } = {};
   @property() creatorTheme: ICreatorTheme;
 
+  public preferredColorPalette: string = "light";
+
   public applyTheme(theme: ICreatorTheme): void {
     this.syncTheme(theme);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
@@ -3993,7 +3995,7 @@ export class SurveyCreatorModel extends Base
     }
 
   }
-  public syncTheme(theme: ICreatorTheme): void {
+  public syncTheme(theme: ICreatorTheme, isLight?: boolean): void {
     if (!theme) return;
     this.creatorTheme = theme;
 
@@ -4002,6 +4004,10 @@ export class SurveyCreatorModel extends Base
     this.themeVariables = newCssVariable;
     const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v1";
     SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);
+
+    if (isLight !== undefined) {
+      this.preferredColorPalette = isLight ? "light" : "dark";
+    }
   }
 
   public allowDragPages = false;
