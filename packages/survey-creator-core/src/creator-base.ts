@@ -1875,6 +1875,7 @@ export class SurveyCreatorModel extends Base
     });
 
     this.setSurvey(survey);
+    this.expandCollapseManager.expandCollapseElements("loading", false);
     this.updatePlugin(this.activeTab);
     if (this.activeTab !== "designer") {
       this.updatePlugin("designer");
@@ -1939,22 +1940,11 @@ export class SurveyCreatorModel extends Base
     });
   }
   public get designerStateManager() {
-    return (this.getPlugin("designer") as TabDesignerPlugin).designerStateManager;
+    return (this.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
   }
-
-  private getCollapsableElements() {
-    return this.survey.pages;
+  public collapseAllPagesOnDragStart(): void {
+    this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages);
   }
-
-  public collapseAllElements(): void {
-    this.getCollapsableElements().forEach(element => {
-      const elementAdorner = SurveyElementAdornerBase.GetAdorner(element);
-      if (elementAdorner) {
-        elementAdorner.collapsed = this.getElementExpandCollapseState(element as Question | PageModel | PanelModel, "drag-start", true);
-      }
-    });
-  }
-
   public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
     const options: ElementGetExpandCollapseStateEvent = {
       element: element,
@@ -1973,7 +1963,7 @@ export class SurveyCreatorModel extends Base
     SurveyElementAdornerBase.RestoreStateFor(element);
   }
   public restoreElementsState(): void {
-    this.getCollapsableElements().forEach(element => {
+    this.survey.pages.forEach(element => {
       if (element["draggedFrom"] !== undefined) {
         const adorner = SurveyElementAdornerBase.GetAdorner(element);
         adorner?.blockAnimations();
@@ -2352,7 +2342,6 @@ export class SurveyCreatorModel extends Base
   }
   public onStateChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
-  public onSurfaceToolbarActionExecuted: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   public expandCollapseManager = new ExpandCollapseManager(this);
 
   notifier = new Notifier({
