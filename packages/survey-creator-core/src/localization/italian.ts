@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 var italianTranslation = {
   // survey templates
@@ -1774,7 +1774,7 @@ var italianTranslation = {
   }
 };
 
-editorLocalization.locales["it"] = italianTranslation;
+setupLocale({ localeCode: "it", strings: italianTranslation });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

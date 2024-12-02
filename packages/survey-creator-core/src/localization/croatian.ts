@@ -1,4 +1,4 @@
-import { editorLocalization, defaultStrings } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export var hrStrings = {
   // survey templates
@@ -1773,7 +1773,7 @@ export var hrStrings = {
     }
   }
 };
-editorLocalization.locales["hr"] = hrStrings;
+setupLocale({ localeCode: "hr", strings: hrStrings });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export const roStrings = {
   // survey templates
@@ -1774,7 +1774,8 @@ export const roStrings = {
   }
 };
 
-editorLocalization.locales["ro"] = roStrings;
+setupLocale({ localeCode: "ro", strings: roStrings });
+
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
 // pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Validarea câmpurilor goale pentru focalizarea pierdută"

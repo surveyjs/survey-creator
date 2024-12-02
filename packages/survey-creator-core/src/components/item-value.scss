@@ -51,23 +51,28 @@
   height: calcSize(4);
   box-sizing: border-box;
   flex-shrink: 0;
-  min-width: 72px;
+  min-width: calcSize(9);
   justify-content: flex-end;
   align-self: flex-start;
 }
 
 .svc-item-value-controls__button {
-  border-radius: 50%;
+  border-radius: var(--ctr-survey-action-button-corner-radius, 50%);
   padding: calcSize(1);
   cursor: pointer;
   display: inline-block;
   outline: none;
-  height: calcSize(2);
+  width: var(--ctr-survey-action-button-icon-width-small, calcSize(2));
+  height: var(--ctr-survey-action-button-icon-height-small, calcSize(2));
   box-sizing: content-box;
-  transition: background $creator-transition-duration, background-color $creator-transition-duration;
+  transition:
+    background $creator-transition-duration,
+    background-color $creator-transition-duration;
 
   .sv-svg-icon {
     display: block;
+    width: var(--ctr-survey-action-button-icon-width-small, calcSize(2));
+    height: var(--ctr-survey-action-button-icon-height-small, calcSize(2));
   }
 }
 
@@ -75,7 +80,7 @@
   display: block;
 }
 
-.svc-item-value-controls__drag-icon {
+.svc-item-value-controls__drag .svc-item-value-controls__drag-icon {
   display: block;
   transition: opacity $creator-transition-duration;
   width: var(--ctr-survey-item-actionbar-drag-indicator-width, calcSize(3));
@@ -96,12 +101,13 @@
 
 .svc-item-value-controls__drag {
   padding: var(--ctr-survey-item-actionbar-drag-indicator-padding-top, calcSize(0.5))
-    var(--ctr-survey-item-actionbar-drag-indicator-padding-right,  calcSize(1))
+    var(--ctr-survey-item-actionbar-drag-indicator-padding-right, calcSize(1))
     var(--ctr-survey-item-actionbar-drag-indicator-padding-bottom, calcSize(0.5))
-    var(--ctr-survey-item-actionbar-drag-indicator-padding-left,  calcSize(1));
-
+    var(--ctr-survey-item-actionbar-drag-indicator-padding-left, calcSize(1));
+  height: auto;
+  width: auto;
   cursor: move;
-  opacity: 0.25;
+  opacity: var(--ctr-survey-item-actionbar-drag-indicator-opacity, 0.25);
 
   .svc-item-value-controls__drag-icon {
     opacity: 0;
@@ -274,7 +280,7 @@
   background: var(--ctr-survey-radio-button-group-item-background-color-drop-spot, $background-dim);
   border-radius: var(--ctr-survey-radio-button-group-item-corner-radius-floating, calcSize(12.5));
   width: calcSize(25);
-  height: 40px;
+  height: calcSize(5);
   z-index: 11;
   position: absolute;
   left: 35px;

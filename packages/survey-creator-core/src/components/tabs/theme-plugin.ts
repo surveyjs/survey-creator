@@ -9,7 +9,7 @@ import { getPredefinedColorsItemValues, PredefinedColors, PredefinedThemes, Them
 import { assign, notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
-import { ThemeModel, getThemeChanges, getThemeFullName } from "./theme-model";
+import { ThemeModel, findSuitableTheme, getThemeChanges, getThemeFullName, isThemeEmpty } from "./theme-model";
 import { Switcher } from "../switcher/switcher";
 import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
@@ -276,12 +276,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     creator.onPropertyChanged.add(this.creatorPropertyChanged);
   }
 
-  private previewDevice: string = "desktop";
+  public previewDevice: string = "desktop";
 
   public activate(): void {
     this.model = new ThemeTabViewModel(this.creator, this.simulatorCssClasses);
     this.model.simulator.device = this.previewDevice;
-    this.themeModel.initialize(this.creator.theme, this.creator.survey);
+    this.themeModel.initialize(this.creator.theme, this.creator.survey, this.creator);
     this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
     this.update();
     this.propertyGrid.survey.onOpenFileChooser.clear();
@@ -390,7 +390,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
     };
     this.model.initialize(this.creator.JSON, options);
-    this.updateSimulatorTheme();
+    this.updateSimulatorTheme(this.creator.theme);
 
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
       this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
@@ -423,7 +423,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.updatePropertyGridColorEditorWithPredefinedColors();
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
-      this.syncTheme();
+      this.syncTheme(this.themeModel.toJSON());
       if (options.name == "--sjs-base-unit") {
         this.model.survey.triggerResponsiveness(true);
       }
@@ -721,14 +721,19 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.creator.footerToolbar.actions.push(this.themeSettingsAction);
   }
 
-  private syncTheme(theme?: ITheme) {
+  private syncTheme(theme: ITheme) {
     const newTheme = theme || this.themeModel.toJSON();
     this.creator.theme = newTheme;
     this.updateSimulatorTheme(newTheme);
   }
-  private updateSimulatorTheme(theme?: ITheme) {
+  private updateSimulatorTheme(theme: ITheme) {
     if (!!this.model.survey) {
-      this.model.survey.applyTheme(theme || this.themeModel.toJSON());
+      if (isThemeEmpty(theme)) {
+        const preferredTheme = findSuitableTheme(undefined, this.creator.preferredColorPalette, undefined, undefined);
+        this.model.survey.applyTheme(preferredTheme || this.themeModel.toJSON());
+      } else {
+        this.model.survey.applyTheme(theme);
+      }
     }
   }
 

@@ -77,7 +77,6 @@ export class TabDesignerViewModel extends Base {
   }
   private initToolbar() {
     this.surfaceToolbar = new ActionContainer();
-    const action = (action) => { this.creator.onSurfaceToolbarActionExecuted.fire(this.creator, { action: action }); };
 
     let defaultActionBarCss = {
       root: "sv-action-bar svc-tab-designer__surface-toolbar",
@@ -98,19 +97,22 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
       iconSize: "auto",
-      action: action
+      action: () => this.creator.expandCollapseManager.expandCollapseElements("collapse-all", true)
     }, {
       id: "expandAll",
       locTooltipName: "ed.expandAllTooltip",
       iconName: "icon-expandall-24x24",
       iconSize: "auto",
-      action: action
+      action: () => this.creator.expandCollapseManager.expandCollapseElements("expand-all", false)
     }, {
       id: "lockQuestions",
       locTooltipName: "ed.lockQuestionsTooltip",
       iconName: "icon-questionlock-24x24",
       iconSize: "auto",
-      action: action
+      action: (action) => {
+        action.active = !action.active;
+        this.creator.expandCollapseManager.lockQuestions(action.active);
+      }
     }]);
   }
 

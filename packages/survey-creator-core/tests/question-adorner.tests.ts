@@ -971,6 +971,7 @@ test("Check panel getAnimatedElement methods", () => {
 
 test("Don't reset collapased state for moved question", () => {
   const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
   creator.JSON = {
     "logoPosition": "right",
     "pages": [
@@ -987,7 +988,7 @@ test("Don't reset collapased state for moved question", () => {
   const page1 = creator.survey.pages[0];
   const page2 = creator.survey.pages[1];
   let pageAdorner = new PageAdorner(creator, page1);
-  creator.collapseAllElements();
+  creator.collapseAllPagesOnDragStart();
   expect(pageAdorner.collapsed).toBeTruthy();
   creator.designerStateManager.suspend();
   creator.survey.pages.splice(0, 1);

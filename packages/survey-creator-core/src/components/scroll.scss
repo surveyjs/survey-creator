@@ -33,7 +33,7 @@
   overflow-x: hidden;
   width: fit-content;
   margin-inline-start: -1px;
-  display: none;
+  visibility: hidden;
   z-index: 30;
   inset-inline-end: 0;
   inset-inline-start: initial;
@@ -44,7 +44,7 @@
 }
 
 .svc-scroll__wrapper:hover .svc-scroll__scrollbar {
-  display: block;
+  visibility: visible;
 }
 
 .svc-scroll__scrollbar-sizer {
