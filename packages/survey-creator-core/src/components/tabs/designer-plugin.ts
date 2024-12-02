@@ -117,7 +117,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private updatePredefinedColorChoices() {
     this.themePropertyGrid.survey.getAllQuestions().forEach(question => {
       if (question.name === "--sjs-special-background") {
-        (question as any).choices = getPredefinedBackgoundColorsChoices();
+        (question as any).choices = this.themeModel && this.themeModel.isLight ? getPredefinedBackgoundColorsChoices() : [];
       }
       if (question.name === "--sjs-primary-background-500" || question.name === "--sjs-secondary-background-500") {
         (question as any).choices = getPredefinedColorsItemValues(this.themeModel.isLight === false ? "dark" : "light");
