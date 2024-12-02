@@ -1,0 +1,106 @@
+$size-unit: var(--ctr-size-unit, 8px);
+$spacing-unit: var(--ctr-spacing-unit, 8px);
+$corner-radius-unit: var(--ctr-corner-radius-unit, 8px);
+$stroke-unit: var(--ctr-stroke-unit, 1px);
+$font-unit: var(--ctr-font-unit, 8px);
+$line-height-unit: var(--ctr-line-height-unit, 8px);
+$font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family)));
+
+@mixin ctrLargeFont {
+  font-family: $font-family;
+  font-size: var(--ctr-font-large-size, 32px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-large-line-height, 40px);
+}
+
+@mixin ctrLargeBoldFont {
+  @include ctrLargeFont;
+  font-weight: 700;
+}
+
+@mixin ctrMediumFont {
+  --ctr-medium-bold-font-size: calc(3 * #{$base-unit});
+  --ctr-medium-bold-line-height: calc(4 * #{$base-unit});
+
+  font-family: $font-family;
+  font-size: var(--ctr-font-medium-size, var(--ctr-medium-bold-font-size, 24px));
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-medium-line-height, var(--ctr-medium-bold-line-height, 32px));
+}
+
+@mixin ctrMediumBoldFont {
+  @include ctrMediumFont;
+  font-weight: 700;
+}
+
+@mixin ctrDefaultFont {
+  --default-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
+  --ctr-default-line-height: calc(1.5 * var(--default-font-size));
+
+  font-family: $font-family;
+  font-size: var(--ctr-font-default-size, var(--default-font-size, 16px));
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-default-line-height, var(--ctr-default-line-height, 24px));
+}
+
+@mixin ctrDefaultBoldFont {
+  @include ctrDefaultFont;
+  font-weight: 600;
+}
+
+@mixin ctrDefaultBoldUnderlineFont {
+  @include ctrDefaultBoldFont;
+  font-weight: 600;
+  text-decoration-line: underline;
+}
+
+@mixin ctrDefaultUnderlineFont {
+  @include ctrDefaultFont;
+  text-decoration-line: underline;
+}
+
+@mixin ctrDefaultAllCapsFont {
+  @include ctrDefaultFont;
+  font-weight: 600;
+  line-height: var(--ctr-font-default-line-height-all-caps, 16px);
+  text-transform: uppercase;
+}
+
+@mixin ctrSmallFont {
+  --small-bold-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
+  --ctr-small-bold-font-size: calc(0.75 * var(--small-bold-font-size));
+  --ctr-small-bold-line-height: var(--small-bold-font-size);
+
+  font-family: $font-family;
+  font-size: var(--ctr-font-small-size, var(--ctr-small-bold-font-size, 12px));
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-small-line-height, var(--ctr-small-bold-line-height, 16px));
+}
+
+@mixin ctrSmallBoldFont {
+  @include ctrSmallFont;
+  font-weight: 600;
+}
+
+@mixin ctrSmallUnderlineFont {
+  @include ctrSmallFont;
+  text-decoration-line: underline;
+}
+
+@mixin ctrSmallAllCapsFont {
+  @include ctrSmallFont;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@mixin ctrCodeFont {
+  font-family: var(--ctr-font-family-code, "DM Mono");
+  font-size: var(--ctr-font-code-size, 16px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--ctr-font-code-line-height, 24px);
+}
