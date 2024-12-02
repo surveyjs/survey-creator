@@ -293,7 +293,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected restoreState(): void {
     if (!!this.surveyElement) {
       const state = this.creator.designerStateManager?.getElementState(this.surveyElement);
-      this.collapsed = this.creator.getElementExpandCollapseState(this.surveyElement as any, "loading", state.collapsed);
+      this.collapsed = state.collapsed;
     }
     if (!this.surveyElement || this.surveyElement.isInteractiveDesignElement) {
       this.needToRenderContent = !this.collapsed;

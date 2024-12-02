@@ -11,6 +11,7 @@ import * as LibraryThemes from "survey-core/themes";
 import { ColorCalculator, assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
+import { SurveyCreatorModel } from "../../creator-base";
 
 export * from "./header-model";
 
@@ -31,6 +32,14 @@ export function getThemeFullName(theme: ITheme) {
     fullThemeName += "-panelless";
   }
   return fullThemeName;
+}
+
+export function isThemeEmpty(theme: ITheme) {
+  if (!theme) {
+    return true;
+  }
+  const themeProperties = Object.keys(theme);
+  return themeProperties.length == 0 || themeProperties.length == 1 && themeProperties[0] == "cssVariables" && Object.keys(theme.cssVariables).length == 0;
 }
 
 export function findSuitableTheme(themeName: string, colorPalette: string, isPanelless: boolean, probeThemeFullName: string) {
@@ -281,13 +290,13 @@ export class ThemeModel extends Base implements ITheme {
     };
   }
 
-  initialize(surveyTheme: ITheme = {}, survey?: SurveyModel) {
+  initialize(surveyTheme: ITheme = {}, survey?: SurveyModel, creator?: SurveyCreatorModel) {
     this._defaultSessionTheme = ThemeModel.DefaultTheme;
     this.backgroundImage = "backgroundImage" in surveyTheme ? surveyTheme.backgroundImage : survey?.backgroundImage;
     this.backgroundImageFit = surveyTheme.backgroundImageFit !== undefined ? surveyTheme.backgroundImageFit : survey?.backgroundImageFit;
     this.backgroundImageAttachment = surveyTheme.backgroundImageAttachment !== undefined ? surveyTheme.backgroundImageAttachment : survey?.backgroundImageAttachment;
     this.backgroundOpacity = ((surveyTheme.backgroundOpacity !== undefined ? surveyTheme.backgroundOpacity : survey?.backgroundOpacity) || 1) * 100;
-    this.loadTheme(surveyTheme);
+    this.loadTheme(surveyTheme, creator && creator.preferredColorPalette);
     this.header["logoPosition"] = survey?.logoPosition;
     this.undoRedoManager = new UndoRedoManager();
   }
@@ -325,11 +334,11 @@ export class ThemeModel extends Base implements ITheme {
   public onAllowModifyTheme = new EventBase<ThemeModel, { theme: ITheme, allow: boolean }>();
 
   private blockThemeChangedNotifications = 0;
-  public loadTheme(theme: ITheme) {
+  public loadTheme(theme: ITheme, preferredColorPalette?: string) {
     this.blockThemeChangedNotifications += 1;
     try {
-      let probeThemeFullName = getThemeFullName(theme);
-      const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette, theme.isPanelless, probeThemeFullName);
+      let probeThemeFullName = getThemeFullName({ themeName: theme.themeName, colorPalette: theme.colorPalette || preferredColorPalette, isPanelless: theme.isPanelless });
+      const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette || preferredColorPalette, theme.isPanelless, probeThemeFullName);
       const themeChanges = getThemeChanges(theme, baseTheme);
       this.themeName = themeChanges.themeName;
       this.colorPalette = themeChanges.colorPalette as any;

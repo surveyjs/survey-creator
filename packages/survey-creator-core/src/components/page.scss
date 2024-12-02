@@ -8,9 +8,12 @@ svc-page {
   margin-top: calcSize(2);
 
   .sd-page__title {
-    margin: calcSize(3) 0 0 0;
-    color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-dim);
+    margin-top: calcSize(3);
     gap: calcSize(0.5);
+  }
+
+  .sd-page__description {
+    margin-bottom: calcSize(1);
   }
 
   .sd-page__num {
@@ -441,6 +444,10 @@ svc-page {
 .svc-page__content--collapsed {
   & > .sv-action-bar {
     display: none;
+  }
+  
+  .sd-page__title {
+    margin-bottom: 0;
   }
 
   .svc-page__placeholder_frame {
