@@ -313,7 +313,7 @@ test("sjs-special-background calculations on primary background changed", (): an
   expect(themeModel["--sjs-primary-background-500"]).toEqual("#19B394FF");
   expect(themeModel["--sjs-special-background"]).toEqual("#F3F3F3FF");
 
-  themeModel.loadTheme(PredefinedCreatorThemes["sc2020"])
+  themeModel.loadTheme(PredefinedCreatorThemes["sc2020"]);
   expect(themeModel["--sjs-primary-background-500"]).toEqual("#19B394FF");
   expect(themeModel["--sjs-special-background"]).toEqual("#F3F3F3FF");
 
