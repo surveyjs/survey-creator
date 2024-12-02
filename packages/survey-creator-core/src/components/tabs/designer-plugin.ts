@@ -112,12 +112,12 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private syncTheme(theme?: ICreatorTheme) {
     const newTheme = theme || this.themeModel.toJSON();
-    this.creator.syncTheme(newTheme);
+    this.creator.syncTheme(newTheme, this.themeModel.isLight);
   }
   private updatePredefinedColorChoices() {
     this.themePropertyGrid.survey.getAllQuestions().forEach(question => {
       if (question.name === "--sjs-primary-background-500" || question.name === "--sjs-secondary-background-500") {
-        (question as any).choices = getPredefinedColorsItemValues(this.themeModel["isLight"] === false ? "dark" : "light");
+        (question as any).choices = getPredefinedColorsItemValues(this.themeModel.isLight === false ? "dark" : "light");
       }
     });
   }

@@ -11,7 +11,7 @@ import {
   SvgThemeSets
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
-import { editorLocalization } from "./editorLocalization";
+import { editorLocalization, setupLocale } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
@@ -44,7 +44,7 @@ import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
 import { DragDropSurveyElements } from "./survey-elements";
 import { PageAdorner } from "./components/page";
 import {
-  ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, HtmlToMarkdownEvent, ElementAllowOperationsEvent,
+  ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, ElementAllowOperationsEvent,
   ElementGetActionsEvent, PropertyAddingEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent,
   PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, FastEntryItemsEvent as FastEntryFinishedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
   PropertyDisplayCustomErrorEvent, PropertyValueChangingEvent, PropertyValueChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
@@ -195,7 +195,7 @@ export class SurveyCreatorModel extends Base
     this._showOneCategoryInPropertyGrid = newValue;
     Object.keys(this.plugins).forEach(name => {
       const plugin = this.plugins[name];
-      if(!!plugin && "showOneCategoryInPropertyGrid" in plugin) {
+      if (!!plugin && "showOneCategoryInPropertyGrid" in plugin) {
         plugin.showOneCategoryInPropertyGrid = newValue;
       }
     });
@@ -452,11 +452,7 @@ export class SurveyCreatorModel extends Base
    * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`showObjectTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showObjectTitles) property instead of handling this event.
    */
   public onGetObjectDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetDisplayNameEvent>();
-
-  /**
-   * An event that is raised after a user has edited a text value on the design surface. This value may include HTML markup. You can handle the `onHtmlToMarkdown` event to convert the HTML markup to Markdown.
-   */
-  public onHtmlToMarkdown: EventBase<SurveyCreatorModel, HtmlToMarkdownEvent> = this.addCreatorEvent<SurveyCreatorModel, HtmlToMarkdownEvent>();
+  public onHtmlToMarkdown: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
   /*
    * An event that is raised when Survey Creator obtains the expand/collapse state of a survey element on the design surface. Handle this event to set a required state.
@@ -1879,6 +1875,7 @@ export class SurveyCreatorModel extends Base
     });
 
     this.setSurvey(survey);
+    this.expandCollapseManager.expandCollapseElements("loading", false);
     this.updatePlugin(this.activeTab);
     if (this.activeTab !== "designer") {
       this.updatePlugin("designer");
@@ -1943,22 +1940,11 @@ export class SurveyCreatorModel extends Base
     });
   }
   public get designerStateManager() {
-    return (this.getPlugin("designer") as TabDesignerPlugin).designerStateManager;
+    return (this.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
   }
-
-  private getCollapsableElements() {
-    return this.survey.pages;
+  public collapseAllPagesOnDragStart(): void {
+    this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages);
   }
-
-  public collapseAllElements(): void {
-    this.getCollapsableElements().forEach(element => {
-      const elementAdorner = SurveyElementAdornerBase.GetAdorner(element);
-      if (elementAdorner) {
-        elementAdorner.collapsed = this.getElementExpandCollapseState(element as Question | PageModel | PanelModel, "drag-start", true);
-      }
-    });
-  }
-
   public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
     const options: ElementGetExpandCollapseStateEvent = {
       element: element,
@@ -1977,7 +1963,7 @@ export class SurveyCreatorModel extends Base
     SurveyElementAdornerBase.RestoreStateFor(element);
   }
   public restoreElementsState(): void {
-    this.getCollapsableElements().forEach(element => {
+    this.survey.pages.forEach(element => {
       if (element["draggedFrom"] !== undefined) {
         const adorner = SurveyElementAdornerBase.GetAdorner(element);
         adorner?.blockAnimations();
@@ -2236,7 +2222,10 @@ export class SurveyCreatorModel extends Base
 
   public get designTabSurveyThemeVariables(): {} {
     const cssVariables = {};
-    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, { "--sjs-base-unit": "var(--ctr-surface-base-unit)" });
+    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, {
+      "--sjs-base-unit": "var(--ctr-surface-base-unit)",
+      "--sjs-font-size": "calc(2 * var(--ctr-surface-base-unit))",
+    });
     return cssVariables;
   }
 
@@ -2353,7 +2342,6 @@ export class SurveyCreatorModel extends Base
   }
   public onStateChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
-  public onSurfaceToolbarActionExecuted: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   public expandCollapseManager = new ExpandCollapseManager(this);
 
   notifier = new Notifier({
@@ -3753,7 +3741,7 @@ export class SurveyCreatorModel extends Base
     });
     newAction.popupModel.getTargetCallback = undefined;
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
-      if(opt.isVisible) {
+      if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         listModel.setItems(getActions());
       }
@@ -3986,6 +3974,8 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: {} }) themeVariables: { [index: string]: string } = {};
   @property() creatorTheme: ICreatorTheme;
 
+  public preferredColorPalette: string = "light";
+
   public applyTheme(theme: ICreatorTheme): void {
     this.syncTheme(theme);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
@@ -3994,7 +3984,7 @@ export class SurveyCreatorModel extends Base
     }
 
   }
-  public syncTheme(theme: ICreatorTheme): void {
+  public syncTheme(theme: ICreatorTheme, isLight?: boolean): void {
     if (!theme) return;
     this.creatorTheme = theme;
 
@@ -4003,6 +3993,10 @@ export class SurveyCreatorModel extends Base
     this.themeVariables = newCssVariable;
     const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v1";
     SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);
+
+    if (isLight !== undefined) {
+      this.preferredColorPalette = isLight ? "light" : "dark";
+    }
   }
 
   public allowDragPages = false;

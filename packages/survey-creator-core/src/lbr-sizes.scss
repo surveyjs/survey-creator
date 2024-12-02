@@ -1,8 +1,3 @@
-$lbr-size-unit: var(--lbr-size-unit, 8px);
-$lbr-spacing-unit: var(--lbr-spacing-unit, 8px);
-$lbr-corner-radius-unit: var(--lbr-corner-radius-unit, 8px);
-$lbr-stroke-unit: var(--lbr-stroke-unit, 1px);
-
 .svc-creator {
   --lbr-spacing-x16: calc(#{$lbr-spacing-unit} * 16);
   --lbr-spacing-x15: calc(#{$lbr-spacing-unit} * 15);

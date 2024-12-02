@@ -1,6 +1,6 @@
 // This dictionary contains 1114 untranslated or inherited localization strings.
 // These strings are commented out. Uncomment and edit them if you want to add your translations.
-import { editorLocalization, defaultStrings } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export var tgStrings = {
   // survey templates
@@ -1762,6 +1762,6 @@ export var tgStrings = {
   }
 };
 
-editorLocalization.locales["tg"] = tgStrings;
+setupLocale({ localeCode: "tg", strings: tgStrings });
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually

@@ -1145,3 +1145,36 @@ test("Preview tab: default device and save current device", (): any => {
   testPlugin.activate();
   expect(testPlugin.model.simulator.device).toBe("iPhone15Plus");
 });
+
+test("Preview tab: use theme palatte corresponding cretor theme palette if theme is not selected", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+
+  expect(creator.preferredColorPalette).toBe("light");
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.survey["themeName"]).toBe("default");
+  expect(testPlugin.model.simulator.survey["colorPalette"]).toBe("light");
+
+  testPlugin.deactivate();
+  creator.syncTheme({ cssVariables: {} }, false);
+  expect(creator.preferredColorPalette).toBe("dark");
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.survey["themeName"]).toBe("default");
+  expect(testPlugin.model.simulator.survey["colorPalette"]).toBe("dark");
+
+  testPlugin.deactivate();
+  creator.theme = {
+    themeName: "my",
+    colorPalette: "dark",
+    cssVariables: {}
+  };
+  creator.syncTheme({ cssVariables: {} }, true);
+  expect(creator.preferredColorPalette).toBe("light");
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.survey["themeName"]).toBe("my");
+  expect(testPlugin.model.simulator.survey["colorPalette"]).toBe("dark");
+});

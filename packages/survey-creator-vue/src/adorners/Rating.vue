@@ -5,7 +5,7 @@
         :is="'sv-svg-icon'"
         v-if="model?.allowRemove"
         :iconName="'icon-remove_16x16'"
-        :size="16"
+        :size="'auto'"
         v-key2click
         @click="model?.removeItem(model)"
         :class="model?.removeClassNames"
@@ -16,7 +16,7 @@
         :is="'sv-svg-icon'"
         v-if="model?.allowAdd"
         :iconName="'icon-add_16x16'"
-        :size="16"
+        :size="'auto'"
         v-key2click
         @click="model?.addItem(model)"
         :class="model?.addClassNames"

@@ -1,6 +1,3 @@
-$font-unit: var(--lbr-font-unit, 8px);
-$line-height-unit: var(--lbr-line-height-unit, 8px);
-
 .svc-creator {
   --lbr-line-height-x8: calc(#{$line-height-unit} * 8);
   --lbr-line-height-x7: calc(#{$line-height-unit} * 7);

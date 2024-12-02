@@ -59,6 +59,7 @@
         "jest": "^29.7.0",
         "jest-canvas-mock": "^2.3.1",
         "jest-environment-jsdom": "^29.7.0",
+        "nwsapi": "2.2.13",
         "live-server": "^1.2.1",
         "mini-css-extract-plugin": "^2.9.0",
         "node-uuid": "1.4.7",
