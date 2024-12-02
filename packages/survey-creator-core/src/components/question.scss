@@ -558,11 +558,8 @@ svc-question {
 }
 
 .svc-question__content--dragged {
-  background: $background-dim-light;
+  opacity: var(--ctr-survey-question-panel-opacity-hidden, 0.25);
 
-  .sd-question__title {
-    color: $foreground-light;
-  }
   & > .svc-question__content-actions {
       opacity: 0;
     }
