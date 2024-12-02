@@ -51,7 +51,7 @@ svc-tab-test {
 
   .sv-action-bar {
     padding: var(--ctr-preview-pager-padding-top, calcSize(1)) var(--ctr-preview-pager-padding-right, 0px) var(--ctr-preview-pager-padding-bottom, calcSize(1)) var(--ctr-preview-pager-padding-left, 0px);
-    border-top: 1px solid var(--ctr-preview-pager-border-color, $border);
+    box-shadow: inset 0 var(--ctr-preview-pager-border-width-top, 1px) 0 0 var(--ctr-preview-pager-border-color, $border);
     background: var(--ctr-preview-pager-background-color, $background);
     width: 100%;
   }
