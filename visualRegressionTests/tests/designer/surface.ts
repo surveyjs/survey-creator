@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setAllowEditSurveyTitle, setShowAddQuestionButton, setExpandCollapseButtonVisibility } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setAllowEditSurveyTitle, setShowAddQuestionButton, setExpandCollapseButtonVisibility, setShowToolbox, setShowSidebar } from "../../helper";
 
 const title = "Designer surface";
 
@@ -495,7 +495,10 @@ test("Page and question borders", async (t) => {
       ]
     };
     await setJSON(json);
+    await setShowToolbox(false);
     await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+    await setShowSidebar(false);
     await ClientFunction(() => {
       (<any>window).creator.toolbox.isCompact = true;
     })();
@@ -991,8 +994,8 @@ test("Check survey layout in mobile mode", async (t) => {
 
 test("Check property grid flyout", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    changeToolboxScrolling(false);
-    await changeToolboxSearchEnabled(false);
+    await setShowToolbox(false);
+    await setShowAddQuestionButton(false);
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});
@@ -1297,8 +1300,9 @@ test("Question actions", async (t) => {
 
 test("Keep scroll to selected on tab changed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    changeToolboxScrolling(false);
-    await changeToolboxSearchEnabled(false);
+    await setShowToolbox(false);
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
     await t.resizeWindow(1600, 900);
     const json = {
       "logoPosition": "right",
@@ -1316,6 +1320,7 @@ test("Keep scroll to selected on tab changed", async (t) => {
     await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
     await t.click(getTabbedMenuItemByText(creatorTabDesignerName));
     const root = Selector(".svc-creator");
+    await setShowSidebar(false);
     await takeElementScreenshot("question-5-selected-in-view.png", root, t, comparer);
   });
 });
@@ -1674,6 +1679,7 @@ test("Question adorners - popup", async (t) => {
         }
       ]
     };
+    await setShowAddQuestionButton(false);
     await setJSON(json);
     await ClientFunction(() => {
       (<any>window).creator.toolbox.isCompact = true;
@@ -2331,7 +2337,10 @@ test("Collapse all and expand all toolbar", async (t) => {
         }
       ]
     };
+    await setShowToolbox(false);
     await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+    await setShowSidebar(false);
     await setExpandCollapseButtonVisibility("onhover");
     await setJSON(json);
     await t.click("#lockQuestions");
