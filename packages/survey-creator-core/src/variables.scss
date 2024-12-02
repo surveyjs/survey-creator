@@ -1,7 +1,5 @@
-@import "./lbr-font-sizes.scss";
-@import "./lbr-sizes.scss";
-@import "./ctr-font-sizes.scss";
-@import "./ctr-sizes.scss";
+@import "./lbr-variables.scss";
+@import "./ctr-variables.scss";
 
 $primary: var(--sjs-primary-backcolor, var(--primary, #19b394));
 $primary-light: var(--sjs-primary-backcolor-light, var(--primary-light, rgba(25, 179, 148, 0.1)));
