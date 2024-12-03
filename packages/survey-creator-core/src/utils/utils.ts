@@ -480,3 +480,11 @@ export function saveToFileHandler(fileName: string, blob: Blob) {
     document.body.removeChild(elem);
   }
 }
+
+export function colorsAreEqual(color1: string, color2: string) {
+  const color1Value = parseColor(color1);
+  color1Value.color = color1Value.color.substring(0, 7).toUpperCase();
+  const color2Value = parseColor(color2);
+  color2Value.color = color2Value.color.substring(0, 7).toUpperCase();
+  return color1Value.color === color2Value.color && color1Value.opacity === color2Value.opacity;
+}
