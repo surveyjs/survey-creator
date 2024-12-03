@@ -196,11 +196,11 @@ test("designer tab view with page navigator", async (t) => {
       ]
     });
     const designerTab = Selector(".svc-creator-tab");
-    await t.resizeWindow(1450, 600);
-    await setShowSidebar(false);
+    await t.resizeWindow(950, 600);
     await takeElementScreenshot("designer-tab-page-navigator-toolbox-left.png", designerTab, t, comparer);
 
     await changeToolboxLocation("right");
+    await t.resizeWindow(949, 600);
     await takeElementScreenshot("designer-tab-page-navigator-toolbox-right.png", designerTab, t, comparer);
   });
 });
@@ -497,7 +497,7 @@ test("Toolbox RTL with search compact", async (t) => {
     await setShowSidebar(false);
     await setJSON({ pages: [{ name: "page1" }] });
 
-    await t.resizeWindow(789, 870);
+    await t.resizeWindow(950, 870);
     await changeToolboxSearchEnabled(true);
     await takeElementScreenshot("toolbox-search-rtl-compact.png", creatorTabElement, t, comparer);
     await t.click(Selector(".svc-toolbox__search-button"));
