@@ -383,7 +383,7 @@ export class SurveyCreatorModel extends Base
    * [View Demo](https://surveyjs.io/survey-creator/examples/modify-tab-bar/ (linkStyle))
    * @param name A unique tab ID. 
    * @param plugin An object that allows you to handle user interactions with the tab.
-   * @param title A tab caption. If `title` is undefined, the `name` argument value is displayed instead. To localize the caption, add its translations to the `ed` object within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization) and pass `ed.propertyName` as the `title` argument.
+   * @param title A tab caption. If `title` is undefined, the `name` argument value is displayed instead. To localize the caption, add its translations to the `ed` object within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization) and pass `ed.propertyName` as the `title` argument.
    * @param componentName The name of the component that renders tab markup. Default value: `"svc-tab-" + name`.
    * @param index A zero-based index that specifies the tab's position relative to other tabs.
    */
@@ -1045,7 +1045,7 @@ export class SurveyCreatorModel extends Base
    * Never display the language selector.
    *
    * - `"all"`        
-   * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization).
+   * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization).
    *
    * [Localization & Globalization](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages (linkStyle))
    */

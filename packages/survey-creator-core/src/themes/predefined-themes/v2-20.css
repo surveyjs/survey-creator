@@ -343,6 +343,7 @@
   --lbr-line-height-unit: 8px;
   --ctr-text-decor-padding-bottom-code: 0px;
   --ctr-text-decor-padding-top-code: 0px;
+  --ctr-surface-padding-left-designer: 0px;
 }
 
  /* Aliases  */
@@ -2602,7 +2603,7 @@
   --ctr-toolbox-search-icon-width: var(--sjs-size-x3);
   --ctr-toolbox-search-icon-height: var(--sjs-size-x3);
   --ctr-button-padding-horizontal-contextual-button: var(--sjs-spacing-x10);
-  --ctr-survey-header-width: var(--lbr-size-x86);
+  --ctr-survey-header-width: var(--lbr-size-x90);
   --ctr-surface-gap: var(--sjs-spacing-x5);
   --ctr-surface-padding-top: var(--sjs-spacing-x5);
   --ctr-expression-item-padding-left-button: var(--sjs-spacing-x4);
@@ -3310,7 +3311,7 @@
   --lbr-popup-menu-search-clear-button-icon-height: var(--lbr-size-x2);
   --lbr-popup-menu-search-clear-button-icon-width: var(--lbr-size-x2);
   --ctr-page-navigator-button-icon-color-checked: var(--sjs-primary-background-500);
-  --ctr-page-navigator-button-background-color-checked: var(--sjs-primary-background-10);
+  --ctr-page-navigator-button-background-color-checked: var(--sjs-layer-3-background-500);
   --ctr-surface-button-corner-radius: var(--lbr-corner-radius-x05);
   --ctr-surface-button-gap: var(--lbr-spacing-x4);
   --ctr-surface-button-padding-horizontal-contextual-button: var(--lbr-spacing-x10);
@@ -3345,5 +3346,14 @@
   --lbr-matching-connector-height: var(--lbr-size-x150);
   --lbr-tag-box-item-remove-button-icon-width: var(--lbr-font-size-x2);
   --lbr-tag-box-item-remove-button-icon-height: var(--lbr-font-size-x2);
+  --ctr-editor-border-color-highlighted: var(--sjs-secondary-background-500);
+  --ctr-editor-border-width-highlighed: var(--sjs-stroke-x2);
+  --ctr-survey-header-margin-left: var(--lbr-spacing-x2);
+  --ctr-survey-header-margin-right: var(--lbr-spacing-x2);
+  --ctr-survey-page-content-margin-top-no-header: var(--lbr-spacing-x1);
+  --ctr-survey-question-panel-toolbar-item-background-color-pressed: var(--sjs-layer-3-background-500);
+  --ctr-survey-page-toolbar-item-background-color-pressed: var(--sjs-layer-3-background-400);
+  --ctr-survey-page-toolbar-item-icon-color-disabled: var(--sjs-layer-1-foreground-50);
+  --ctr-survey-page-toolbar-item-icon-color: var(--sjs-secondary-background-500);
 }
 

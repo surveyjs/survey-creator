@@ -272,6 +272,7 @@
   --lbr-shadow-inner-offset-y: 1px;
   --lbr-shadow-inner-blur: 2px;
   --lbr-shadow-inner-spread: 0px;
+  --ctr-page-navigator-margin-top: 0px;
   --lbr-progress-bar-pager-label-opacity-floating: 75px;
   --ctr-survey-question-panel-floating-toolbar-opacity-no-focus: 25px;
   --lbr-page-loading-background-opacity: 75px;
@@ -448,7 +449,7 @@
   --ctr-shadow-small-color: var(--sjs-special-shadow);
   --ctr-shadow-x-large-color: var(--sjs-special-glow);
   --ctr-actionbar-button-icon-color: var(--sjs-layer-1-foreground-75);
-  --ctr-actionbar-button-icon-color-hovered: var(--sjs-primary-background-500);
+  --ctr-actionbar-button-icon-color-hovered: var(--sjs-layer-1-foreground-75);
   --ctr-actionbar-button-icon-color-selected: var(--sjs-primary-background-500);
   --ctr-actionbar-button-icon-color-with-text: var(--sjs-primary-background-500);
   --ctr-actionbar-button-icon-color-with-text-hovered: var(--sjs-primary-background-500);
@@ -456,7 +457,7 @@
   --ctr-list-item-submenu-arrow-color: var(--sjs-layer-1-foreground-75);
   --ctr-list-item-submenu-arrow-color-selected-item: var(--sjs-primary-foreground-100);
   --ctr-page-navigator-button-icon-color: var(--sjs-layer-3-foreground-75);
-  --ctr-page-navigator-button-icon-color-hovered: var(--sjs-primary-background-500);
+  --ctr-page-navigator-button-icon-color-hovered: var(--sjs-layer-3-foreground-75);
   --ctr-list-border-width: var(--sjs-stroke-x1);
   --ctr-property-grid-tabs-padding-left: var(--sjs-spacing-x150);
   --ctr-property-grid-tabs-padding-bottom: var(--sjs-spacing-x150);
@@ -503,7 +504,7 @@
   --ctr-actionbar-button-padding-top-large-icon: var(--sjs-spacing-x1);
   --ctr-actionbar-button-padding-bottom-large-icon: var(--sjs-spacing-x1);
   --ctr-actionbar-button-text-color: var(--sjs-primary-background-500);
-  --ctr-actionbar-button-background-color-hovered: var(--sjs-primary-background-10);
+  --ctr-actionbar-button-background-color-hovered: var(--sjs-layer-1-background-400);
   --ctr-actionbar-button-padding-left-small-icon: var(--sjs-spacing-x05);
   --ctr-actionbar-button-padding-right-small-icon: var(--sjs-spacing-x05);
   --ctr-actionbar-button-padding-top-small-icon: var(--sjs-spacing-x05);
@@ -526,7 +527,7 @@
   --ctr-list-item-padding-left-second-level: var(--sjs-spacing-x4);
   --ctr-list-item-padding-bottom-with-icon: var(--sjs-spacing-x150);
   --ctr-list-item-padding-top-with-icon: var(--sjs-spacing-x150);
-  --ctr-list-item-background-color-hovered: var(--sjs-layer-1-background-400);
+  --ctr-list-item-background-color-hovered: var(--sjs-primary-background-10);
   --ctr-list-item-background-color-selected: var(--sjs-primary-background-500);
   --ctr-list-item-text-color-selected: var(--sjs-primary-foreground-100);
   --ctr-list-item-text-color-placeholder: var(--sjs-layer-1-foreground-50);
@@ -639,19 +640,19 @@
   --ctr-page-navigator-item-background-color-hovered: var(--sjs-layer-1-background-500);
   --ctr-page-navigator-item-text-color-hovered: var(--sjs-layer-1-foreground-100);
   --ctr-page-navigator-item-padding-left-hovered: var(--sjs-spacing-x2);
-  --ctr-page-navigator-item-padding-right: var(--sjs-spacing-x150);
+  --ctr-page-navigator-item-padding-right: var(--sjs-spacing-x125);
   --ctr-page-navigator-item-padding-top: var(--sjs-spacing-x1);
   --ctr-page-navigator-item-padding-bottom: var(--sjs-spacing-x1);
   --ctr-page-navigator-item-gap: var(--sjs-spacing-x1);
   --ctr-page-navigator-item-corner-radius: var(--sjs-corner-radius-x075);
   --ctr-page-navigator-item-padding-left: var(--sjs-spacing-x150);
-  --ctr-page-navigator-button-padding: var(--sjs-spacing-x125);
+  --ctr-page-navigator-button-padding: var(--sjs-spacing-x1);
   --ctr-page-navigator-button-icon-width: var(--sjs-size-x3);
   --ctr-page-navigator-button-icon-height: var(--sjs-size-x3);
   --ctr-page-navigator-button-corner-radius: var(--sjs-corner-radius-x1);
   --ctr-page-navigator-button-background-color-hovered: var(--sjs-primary-background-10);
   --ctr-page-navigator-button-background-color-pressed: var(--sjs-primary-background-10);
-  --ctr-page-navigator-button-icon-color-pressed: var(--sjs-primary-background-500);
+  --ctr-page-navigator-button-icon-color-pressed: var(--sjs-layer-3-foreground-75);
   --ctr-popup-menu-background-color: var(--sjs-layer-1-background-500);
   --ctr-popup-menu-pointer-width: var(--sjs-size-x2);
   --ctr-popup-menu-pointer-height: var(--sjs-size-x1);
@@ -677,7 +678,7 @@
   --ctr-collapse-button-padding: var(--sjs-spacing-x150);
   --ctr-collapse-button-corner-radius: var(--sjs-corner-radius-x1);
   --ctr-collapse-button-icon-color: var(--sjs-layer-3-foreground-75);
-  --ctr-collapse-button-icon-color-hovered: var(--sjs-primary-background-500);
+  --ctr-collapse-button-icon-color-hovered: var(--sjs-layer-3-foreground-75);
   --ctr-collapse-button-background-color-hovered: var(--sjs-primary-background-10);
   --ctr-property-grid-switcher-text-color: var(--sjs-layer-1-foreground-75);
   --ctr-property-grid-switcher-gap: var(--sjs-spacing-x1);
@@ -978,7 +979,7 @@
   --ctr-survey-question-panel-toolbar-item-padding-right: var(--lbr-spacing-x05);
   --ctr-survey-question-panel-toolbar-item-padding-top: var(--lbr-spacing-x05);
   --ctr-survey-question-panel-toolbar-item-padding-bottom: var(--lbr-spacing-x05);
-  --ctr-survey-question-panel-toolbar-item-background-color-hovered: var(--sjs-layer-1-background-400);
+  --ctr-survey-question-panel-toolbar-item-background-color-hovered: var(--sjs-secondary-background-10);
   --ctr-survey-question-panel-toolbar-item-icon-container-width: var(--lbr-size-x3);
   --ctr-survey-question-panel-toolbar-item-icon-container-height: var(--lbr-size-x3);
   --ctr-survey-question-panel-toolbar-item-icon-padding-left: var(--lbr-spacing-x05);
@@ -988,8 +989,8 @@
   --ctr-survey-question-panel-toolbar-item-icon-color: var(--sjs-secondary-background-500);
   --ctr-survey-question-panel-toolbar-item-text-color: var(--sjs-layer-1-foreground-100);
   --ctr-survey-question-panel-toolbar-item-background-color-selected: var(--sjs-secondary-background-10);
-  --ctr-survey-question-panel-toolbar-item-icon-color-pressed: var(--sjs-layer-1-foreground-50);
-  --ctr-survey-page-toolbar-item-icon-color-pressed: var(--sjs-layer-3-foreground-50);
+  --ctr-survey-question-panel-toolbar-item-icon-color-pressed: var(--sjs-layer-1-foreground-75);
+  --ctr-survey-page-toolbar-item-icon-color-pressed: var(--sjs-layer-3-foreground-75);
   --ctr-survey-page-toolbar-item-text-color: var(--sjs-layer-3-foreground-100);
   --ctr-survey-question-panel-toolbar-item-padding-left-with-text: var(--lbr-spacing-x1);
   --ctr-survey-question-panel-toolbar-item-padding-right-with-text: var(--lbr-spacing-x1);
@@ -1377,10 +1378,10 @@
   --ctr-property-grid-form-border-color: var(--sjs-border-25);
   --ctr-property-grid-form-padding-top-no-label: var(--sjs-spacing-x4);
   --ctr-property-grid-form-gap: var(--sjs-spacing-x2);
-  --ctr-page-navigator-padding-left: var(--sjs-spacing-x150);
-  --ctr-page-navigator-padding-right: var(--sjs-spacing-x150);
-  --ctr-page-navigator-padding-top: var(--sjs-spacing-x150);
-  --ctr-page-navigator-padding-bottom: var(--sjs-spacing-x150);
+  --ctr-page-navigator-padding-left: var(--sjs-spacing-x2);
+  --ctr-page-navigator-padding-right: var(--sjs-spacing-x2);
+  --ctr-page-navigator-padding-top: var(--sjs-spacing-x2);
+  --ctr-page-navigator-padding-bottom: var(--sjs-spacing-x2);
   --ctr-page-navigator-gap: var(--sjs-spacing-x2);
   --ctr-toolbox-search-padding-left: var(--sjs-spacing-x3);
   --ctr-toolbox-search-padding-right: var(--sjs-spacing-x2);
@@ -2594,7 +2595,7 @@
   --ctr-toolbox-search-icon-width: var(--sjs-size-x3);
   --ctr-toolbox-search-icon-height: var(--sjs-size-x3);
   --ctr-button-padding-horizontal-contextual-button: var(--sjs-spacing-x10);
-  --ctr-survey-header-width: var(--lbr-size-x86);
+  --ctr-survey-header-width: var(--lbr-size-x90);
   --ctr-surface-gap: var(--sjs-spacing-x5);
   --ctr-surface-padding-top: var(--sjs-spacing-x5);
   --ctr-expression-item-padding-left-button: var(--sjs-spacing-x4);
@@ -2788,7 +2789,6 @@
   --ctr-popup-menu-margin-right-tablet: var(--sjs-spacing-x3);
   --ctr-popup-menu-max-width-tablet: var(--sjs-size-x40);
   --ctr-font-default-line-height-all-caps: var(--sjs-line-height-x2);
-  --ctr-page-navigator-margin-top: var(--sjs-spacing-x12);
   --lbr-progress-bar-height-large: var(--lbr-size-x05);
   --lbr-progress-bar-margin-vertical: var(--lbr-spacing-x6n);
   --lbr-progress-bar-margin-vertical-with-titles: var(--lbr-spacing-x3n);
@@ -2945,7 +2945,7 @@
   --ctr-toolbox-submenu-shadow-2-spread: var(--ctr-shadow-large-spread);
   --ctr-toolbox-submenu-shadow-2-color: var(--ctr-shadow-large-color);
   --ctr-toolbox-submenu-margin-top: var(--sjs-spacing-x1n);
-  --ctr-list-item-background-color-selected-submenu: var(--sjs-primary-background-10);
+  --ctr-list-item-background-color-selected-submenu: var(--sjs-layer-1-background-400);
   --ctr-list-item-text-color-selected-submenu: var(--sjs-layer-1-foreground-100);
   --ctr-list-item-icon-color-selected-submenu: var(--sjs-primary-background-500);
   --ctr-list-item-submenu-arrow-color-selected-item-submenu: var(--sjs-layer-1-foreground-75);
@@ -3017,10 +3017,10 @@
   --lbr-footer-padding-right-transparent-mobile: var(--lbr-spacing-x3);
   --lbr-footer-padding-top-transparent-mobile: var(--lbr-spacing-x3);
   --lbr-footer-padding-bottom-transparent-mobile: var(--lbr-spacing-x3);
-  --ctr-surface-toolbar-padding-left: var(--sjs-spacing-x150);
-  --ctr-surface-toolbar-padding-right: var(--sjs-spacing-x150);
-  --ctr-surface-toolbar-padding-top: var(--sjs-spacing-x150);
-  --ctr-surface-toolbar-padding-bottom: var(--sjs-spacing-x150);
+  --ctr-surface-toolbar-padding-left: var(--sjs-spacing-x2);
+  --ctr-surface-toolbar-padding-right: var(--sjs-spacing-x2);
+  --ctr-surface-toolbar-padding-top: var(--sjs-spacing-x2);
+  --ctr-surface-toolbar-padding-bottom: var(--sjs-spacing-x2);
   --ctr-surface-toolbar-gap: var(--sjs-spacing-x1);
   --ctr-toggle-button-thumb-background-color-active: var(--sjs-layer-3-foreground-75);
   --ctr-toggle-button-thumb-corner-radius: var(--sjs-corner-radius-round);
@@ -3345,5 +3345,15 @@
   --lbr-matching-connector-height: var(--lbr-size-x150);
   --lbr-tag-box-item-remove-button-icon-width: var(--lbr-font-size-x2);
   --lbr-tag-box-item-remove-button-icon-height: var(--lbr-font-size-x2);
+  --ctr-editor-border-color-highlighted: var(--sjs-secondary-background-500);
+  --ctr-editor-border-width-highlighed: var(--sjs-stroke-x2);
+  --ctr-survey-header-margin-left: var(--lbr-spacing-x2);
+  --ctr-survey-header-margin-right: var(--lbr-spacing-x2);
+  --ctr-surface-padding-left-designer: var(--sjs-spacing-x925);
+  --ctr-survey-page-content-margin-top-no-header: var(--lbr-spacing-x1);
+  --ctr-survey-question-panel-toolbar-item-background-color-pressed: var(--sjs-layer-1-background-400);
+  --ctr-survey-page-toolbar-item-background-color-pressed: var(--sjs-primary-background-10);
+  --ctr-survey-page-toolbar-item-icon-color-disabled: var(--sjs-layer-3-foreground-50);
+  --ctr-survey-page-toolbar-item-icon-color: var(--sjs-primary-background-500);
 }
 
