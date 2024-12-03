@@ -31,6 +31,10 @@
   box-shadow: inset 0 0 0 var(--ctr-editor-border-width-focused, 2px) var(--ctr-editor-border-color-focused, $primary);
 }
 
+input.spg-input:focus:read-only {
+  box-shadow: inset 0 0 0 var(--ctr-editor-border-width, 1px) var(--ctr-editor-border-color, $border-inside);
+}
+
 .spg-input:disabled,
 .spg-input:disabled::placeholder,
 input.spg-input:read-only,
