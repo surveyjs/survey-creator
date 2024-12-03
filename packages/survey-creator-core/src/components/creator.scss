@@ -120,11 +120,22 @@ survey-creator,
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .svc-plugin-tab__content {
-  height: 100%;
+  flex-basis: 0;
+  max-height: 100%;
   overflow-y: auto;
+  flex-grow: 1;
+}
+
+.sv-popup__content {
+  .svc-plugin-tab__content {
+    flex-basis: 100%;
+    height: 100%;
+  }
 }
 
 .svc-plugin-tab__content-actions {
