@@ -118,10 +118,11 @@ svc-page-navigator-item,
 [style*='direction:rtl'],
 [style*='direction: rtl'] {
   .svc-page-navigator-item__banner {
-    .svc-page-navigator-item__dot {
-      right: unset;
-      left: 0;
-    }
+    right: unset;
+    left: 0;
+    padding: var(--ctr-page-navigator-item-padding-top, calcSize(1)) var(--ctr-page-navigator-item-padding-left-hovered, calcSize(2)) var(--ctr-page-navigator-item-padding-bottom, calcSize(1)) var(--ctr-page-navigator-item-padding-left, calcSize(1.5));
+
+    .svc-page-navigator-item__dot {}
   }
 
   .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):hover,
