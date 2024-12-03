@@ -215,7 +215,7 @@ svc-question {
 }
 
 .svc-question__adorner {
-  input.sd-input:disabled {
+  .sd-input:disabled {
     pointer-events: none;
   }
 }
