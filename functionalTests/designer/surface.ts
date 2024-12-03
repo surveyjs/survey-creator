@@ -439,7 +439,34 @@ test("Diabled Input issue", async (t) => {
 
   const questionContentClass = "svc-question__content";
   const QuestionContent = Selector(`[data-sv-drop-target-survey-element=${qName}]`).find(`.${questionContentClass}`);
-  const QuestionInput = QuestionContent.find("input.sd-input:disabled");
+  const QuestionInput = QuestionContent.find(".sd-input:disabled");
+
+  await t.click(QuestionInput);
+  await t.expect(QuestionContent.hasClass(questionContentClass + "--selected")).ok();
+});
+
+test("Diabled Textarea issue", async (t) => {
+  //https://github.com/surveyjs/survey-creator/issues/6138
+  const qName = "question1";
+
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "comment",
+            "name": qName
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const questionContentClass = "svc-question__content";
+  const QuestionContent = Selector(`[data-sv-drop-target-survey-element=${qName}]`).find(`.${questionContentClass}`);
+  const QuestionInput = QuestionContent.find(".sd-input:disabled");
 
   await t.click(QuestionInput);
   await t.expect(QuestionContent.hasClass(questionContentClass + "--selected")).ok();
