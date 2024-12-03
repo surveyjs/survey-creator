@@ -9,13 +9,13 @@
         'svc-page-navigator-item--disabled': model.disabled,
       }"
     >
-      <div class="svc-page-navigator-item__dot" :title="model.title"></div>
+      <div class="svc-page-navigator-item__dot" :title="model.title"><div className="svc-page-navigator-item__dot-content"></div></div>
 
       <div class="svc-page-navigator-item__banner">
         <span class="svc-page-navigator-item__text">{{
           model.title
         }}</span>
-        <span class="svc-page-navigator-item__dot"></span>
+        <span class="svc-page-navigator-item__dot"><span className="svc-page-navigator-item__dot-content"></span></span>
       </div>
     </div>
   </div>
