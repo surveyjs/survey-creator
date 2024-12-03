@@ -54,11 +54,11 @@ test("On the right side (default)", async (t) => {
 
 test("On the right side opened popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await setShowToolbox(false);
     await setAllowEditSurveyTitle(false);
     await setShowAddQuestionButton(false);
 
     await t.resizeWindow(1920, 500);
+    await setShowToolbox(false);
     await setJSON(json);
 
     await t.click(".svc-page-navigator__selector");
