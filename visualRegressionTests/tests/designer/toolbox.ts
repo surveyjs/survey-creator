@@ -196,9 +196,7 @@ test("designer tab view with page navigator", async (t) => {
       ]
     });
     const designerTab = Selector(".svc-creator-tab");
-    await t
-      .click(".sd-page__title")
-      .resizeWindow(1450, 600);
+    await t.resizeWindow(1450, 600);
     await setShowSidebar(false);
     await takeElementScreenshot("designer-tab-page-navigator-toolbox-left.png", designerTab, t, comparer);
 

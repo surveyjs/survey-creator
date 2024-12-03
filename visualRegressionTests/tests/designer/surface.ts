@@ -479,7 +479,7 @@ test("Placeholder with survey header", async (t) => {
 
 test("Page and question borders", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1767, 900);
+    await t.resizeWindow(1232, 900);
     const json = {
       "logoPosition": "right",
       "pages": [
@@ -2324,7 +2324,7 @@ test("Check page selection when width mode is responsive", async (t) => {
 
 test("Collapse all and expand all toolbar", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1600, 1080);
+    await t.resizeWindow(912, 1080);
     const json = {
       elements: [
         {
