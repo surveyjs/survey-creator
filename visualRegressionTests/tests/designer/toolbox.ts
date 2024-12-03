@@ -120,7 +120,9 @@ test("Right toolbox (rtl)", async (t) => {
     await t.hover(toolboxItem);
     await takeElementScreenshot("toolbox-right-rtl-hover-item.png", toolboxElement, t, comparer);
 
-    await t.hover(translationTab); // move cursor from toolboxItem
+    await t
+      .hover(translationTab) // move cursor from toolboxItem
+      .resizeWindow(1510, 870);
     await takeElementScreenshot("toolbox-right-rtl-adaptive.png", toolboxElement, t, comparer);
 
     await t.hover(toolboxItemDots);
@@ -385,11 +387,11 @@ test("Toolbox with search", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const toolboxElement = Selector(".svc-toolbox");
 
-    await setJSON({ pages: [{ name: "page1" }] });
     await changeToolboxScrolling(false);
     await setAllowEditSurveyTitle(false);
     await setShowAddQuestionButton(false);
     await changeToolboxSearchEnabled(true);
+    await setJSON({ pages: [{ name: "page1" }] });
 
     await t.resizeWindow(2560, 1440);
     await setShowSidebar(false);
@@ -429,10 +431,11 @@ test("Toolbox with search compact", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const toolboxElement = Selector(".svc-toolbox");
 
-    await setJSON({ pages: [{ name: "page1" }] });
     await setAllowEditSurveyTitle(false);
     await setShowAddQuestionButton(false);
     await changeToolboxSearchEnabled(true);
+    await setJSON({ pages: [{ name: "page1" }] });
+
     await t.resizeWindow(1240, 870);
     await setShowSidebar(false);
     await takeElementScreenshot("toolbox-search-compact.png", toolboxElement, t, comparer);
@@ -448,12 +451,12 @@ test("Toolbox right with search", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const toolboxElement = Selector(".svc-toolbox");
 
-    await setJSON({ pages: [{ name: "page1" }] });
     await changeToolboxScrolling(false);
     await setAllowEditSurveyTitle(false);
     await setShowAddQuestionButton(false);
     await changeToolboxSearchEnabled(true);
     await changeToolboxLocation("right");
+    await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(2560, 1440);
     await setShowSidebar(false);
     await takeElementScreenshot("toolbox-search-right.png", toolboxElement, t, comparer);
@@ -469,12 +472,12 @@ test("Toolbox RTL with search", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const toolboxElement = Selector(".svc-toolbox");
 
-    await setJSON({ pages: [{ name: "page1" }] });
     await changeToolboxScrolling(false);
     await setAllowEditSurveyTitle(false);
     await setShowAddQuestionButton(false);
     await changeToolboxSearchEnabled(true);
     await setDirRTL();
+    await setJSON({ pages: [{ name: "page1" }] });
 
     await t.resizeWindow(2560, 1440);
     await setShowSidebar(false);
@@ -490,14 +493,14 @@ test("Toolbox RTL with search compact", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const toolboxElement = Selector(".svc-toolbox");
     const creatorTabElement = Selector(".svc-creator-tab");
-    await setJSON({ pages: [{ name: "page1" }] });
-    await changeToolboxSearchEnabled(true);
+    await setDirRTL();
     await setAllowEditSurveyTitle(false);
     await setShowAddQuestionButton(false);
-    await setDirRTL();
+    await setShowSidebar(false);
+    await setJSON({ pages: [{ name: "page1" }] });
 
     await t.resizeWindow(1240, 870);
-    await setShowSidebar(false);
+    await changeToolboxSearchEnabled(true);
     await takeElementScreenshot("toolbox-search-rtl-compact.png", creatorTabElement, t, comparer);
     await t.click(Selector(".svc-toolbox__search-button"));
     await t.click(Selector(".svc-toolbox input"));

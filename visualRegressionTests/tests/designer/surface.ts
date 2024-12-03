@@ -494,10 +494,10 @@ test("Page and question borders", async (t) => {
         }
       ]
     };
-    await setJSON(json);
     await setShowToolbox(false);
     await setAllowEditSurveyTitle(false);
     await setShowAddQuestionButton(false);
+    await setJSON(json);
     await setShowSidebar(false);
     await ClientFunction(() => {
       (<any>window).creator.toolbox.isCompact = true;
@@ -2314,8 +2314,8 @@ test("Check page selection when width mode is responsive", async (t) => {
         }
       ]
     };
-    await setJSON(json);
     await setAllowEditSurveyTitle(false);
+    await setJSON(json);
     const rootSelector = Selector(".svc-tab-designer");
     await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
     await takeElementScreenshot("page-selected-responsive.png", rootSelector, t, comparer);
