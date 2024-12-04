@@ -31,7 +31,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     this.rootRef = React.createRef();
   }
   protected createModel(props: QuestionAdornerComponentProps): void {
-    if(this.model) {
+    if (this.model) {
       this.model.attachToUI(props.question, this.rootRef.current);
     } else {
       this.modelValue = this.createQuestionViewModel(props);
@@ -82,7 +82,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     return attachKey2click(
       <div
         className={this.model.css()}
-        onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
+        onClickCapture={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
       >
         <div className="svc-question__drop-indicator svc-question__drop-indicator--left"></div>
         <div className="svc-question__drop-indicator svc-question__drop-indicator--right"></div>

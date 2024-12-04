@@ -1,8 +1,9 @@
 import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptions, ISaveToJSONOptions } from "survey-core";
 import { getLocString } from "../editorLocalization";
-import { assign, roundTo2Decimals, ColorCalculator } from "../utils/utils";
+import { assign, roundTo2Decimals, ColorCalculator, colorsAreEqual } from "../utils/utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import * as Themes from "survey-creator-core/themes";
+import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
 
 Object.keys(Themes || {}).forEach(themeName => {
   const theme: ICreatorTheme = Themes[themeName];
@@ -74,6 +75,30 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     this.setThemeCssVariablesChanges(lightColorName, calculator.colorSettings.newColorLight);
     this.setThemeCssVariablesChanges(darkColorName, calculator.colorSettings.newColorDark);
   }
+  private isSpecialBackgroundFromCurrentTheme() {
+    const currentTheme = CreatorThemes[this.themeName];
+    return colorsAreEqual(currentTheme && currentTheme.cssVariables && currentTheme.cssVariables["--sjs-special-background"], this["--sjs-special-background"]);
+  }
+  private findAppropriateSpecialBackground(primaryColorValue: string) {
+    let primaryColorName: string;
+    const colorsDict = PredefinedColors["light"];
+    Object.keys(colorsDict).forEach(colorName => {
+      if (colorsAreEqual(colorsDict[colorName], primaryColorValue)) {
+        primaryColorName = colorName;
+      }
+    });
+    return PredefinedBackgroundColors["light"][primaryColorName];
+  }
+  private updateBackgroundColor(primaryColorNewValue: any, primaryColorOldValue: any) {
+    if (!this.isLight) {
+      return;
+    }
+    const canCalculateSpecialBackgroundColor = this.isSpecialBackgroundFromCurrentTheme() || colorsAreEqual(this.findAppropriateSpecialBackground(primaryColorOldValue), this["--sjs-special-background"]);
+    if (canCalculateSpecialBackgroundColor) {
+      const newSpecialBackgroundColor = this.findAppropriateSpecialBackground(primaryColorNewValue);
+      this["--sjs-special-background"] = newSpecialBackgroundColor || PredefinedBackgroundColors["light"]["gray"];
+    }
+  }
 
   constructor() {
     super();
@@ -116,7 +141,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
   private resetColorThemeCssVariablesChanges(): void {
     Object.keys(this.themeCssVariablesChanges).forEach(key => {
-      if(key.indexOf("--sjs-") === 0) {
+      if (key.indexOf("--sjs-") === 0) {
         delete this.themeCssVariablesChanges[key];
       }
     });
@@ -130,6 +155,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
     } else if (name === "--sjs-primary-background-500") {
       this.updateColorPropertiesDependentOnBaseColor(this.primaryColorCalculator, newValue, "--sjs-primary-background-500", "--sjs-primary-background-10", "--sjs-primary-background-400");
+      this.updateBackgroundColor(newValue, oldValue);
     } else if (name === "--sjs-secondary-background-500") {
       this.updateColorPropertiesDependentOnBaseColor(this.secondaryColorCalculator, newValue, "--sjs-secondary-background-500", "--sjs-secondary-background-10", "--sjs-secondary-background-25");
     } else if (name === "--sjs-special-background") {

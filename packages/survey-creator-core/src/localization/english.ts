@@ -1770,7 +1770,8 @@ export var enStrings = {
       orchid: "Orchid",
       tulip: "Tulip",
       brown: "Brown",
-      green: "Green"
+      green: "Green",
+      gray: "Gray"
     },
   },
   creatortheme: {
