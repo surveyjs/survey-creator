@@ -1,6 +1,6 @@
 <template>
   <div class="svc-page-navigator" v-show="model.visible" ref="root">
-    <div
+    <button
       class="svc-page-navigator__selector svc-page-navigator__button"
       @click="model.togglePageSelector($event)"
       v-key2click
@@ -14,7 +14,7 @@
         :size="'auto'"
       ></SvComponent>
       <SvComponent :is="'sv-popup'" :model="model.popupModel"></SvComponent>
-    </div>
+    </button>
     <div>
       <SvComponent
         :is="'svc-page-navigator-item'"

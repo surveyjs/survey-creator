@@ -57,7 +57,7 @@ export class SurveyPageNavigator extends CreatorModelElement<
       const el = this.containerRef.current as HTMLDivElement;
       if (!!el) {
         const self = this;
-        el.parentElement.parentElement.parentElement.onscroll = function (this: GlobalEventHandlers, ev: Event) {
+        el.parentElement.parentElement.parentElement.onscroll = function(this: GlobalEventHandlers, ev: Event) {
           return self.model.onContainerScroll(ev.currentTarget as HTMLDivElement);
         };
         self.model.setItemsContainer(el.parentElement as HTMLDivElement);
@@ -80,7 +80,7 @@ export class SurveyPageNavigator extends CreatorModelElement<
       className += " svc-page-navigator__button--pressed";
     return (
       <div className="svc-page-navigator" ref={this.containerRef} style={{ display: this.model.visible ? "flex" : "none" }}>
-        {attachKey2click(<div
+        {attachKey2click(<button
           className={className}
           onClick={() => this.model.togglePageSelector()}
           title={this.model.pageSelectorCaption}
@@ -96,7 +96,7 @@ export class SurveyPageNavigator extends CreatorModelElement<
             model={this.model.popupModel}
           //className="svc-page-navigator__popup"
           ></Popup>
-        </div>)}
+        </button>)}
         <div>
           {this.model.visibleItems.map((item) => (
             <SurveyPageNavigatorItem
@@ -124,7 +124,7 @@ export class SurveyPageNavigatorItem extends CreatorModelElement<any, any> {
     }
     return (
       <div className="svc-page-navigator-item">
-        {attachKey2click(<div
+        {attachKey2click(<button
           className={className}
           onClick={(e) => {
             item.action(item);
@@ -136,7 +136,7 @@ export class SurveyPageNavigatorItem extends CreatorModelElement<any, any> {
             <span className="svc-page-navigator-item__text">{item.title}</span>
             <span className="svc-page-navigator-item__dot"></span>
           </div>
-        </div>)}
+        </button>)}
       </div>
     );
   }

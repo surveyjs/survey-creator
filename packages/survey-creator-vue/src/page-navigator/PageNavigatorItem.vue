@@ -1,6 +1,6 @@
 <template>
   <div class="svc-page-navigator-item">
-    <div
+    <button
       class="svc-page-navigator-item-content"
       @click="click($event)"
       v-key2click
@@ -17,7 +17,7 @@
         }}</span>
         <span class="svc-page-navigator-item__dot"></span>
       </div>
-    </div>
+    </button>
   </div>
 </template>
 <script lang="ts" setup>
