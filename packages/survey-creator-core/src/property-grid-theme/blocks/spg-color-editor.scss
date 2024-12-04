@@ -57,5 +57,5 @@
 }
 
 .spg-color-editor .spg-input__edit-button+* {
-  margin-inline-end: calcSize(-0.5);
+  margin-inline-end: calc(0px - var(--ctr-editor-gap, 4px));
 }
