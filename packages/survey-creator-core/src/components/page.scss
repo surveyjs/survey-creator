@@ -387,7 +387,7 @@ svc-page {
   }
 }
 
-.svc-page--drag-over-empty:after {
+.svc-page--drag-over-empty .svc-page__footer:after {
   content: " ";
   position: absolute;
   background: $secondary;
@@ -395,6 +395,7 @@ svc-page {
   bottom: calcSize(11.5);
   width: calc(100% - 48px);
   height: 2px;
+  height: calcSize(0.25);
 }
 
 .svc-page--drag-over-empty-no-add-button:after {
