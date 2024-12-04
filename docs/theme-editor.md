@@ -52,7 +52,7 @@ An incremental number of the current change. Since web services are asynchronous
 - `callback`        
 A callback function. Call it and pass `saveNo` as the first argument. Set the second argument to `true` or `false` based on whether the server applied or rejected the change.
 
-The following code shows how to use the `saveThemeFunc` function to save a survey model schema in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
+The following code shows how to use the `saveThemeFunc` function to save a survey model schema in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
 
 ```js
 import { SurveyCreatorModel } from "survey-creator-core";
@@ -64,7 +64,7 @@ const creator = new SurveyCreatorModel(creatorOptions);
 
 creator.saveThemeFunc = (saveNo, callback) => { 
   // If you use localStorage:
-  window.localStorage.setItem("survey-theme-json", creator.theme);
+  window.localStorage.setItem("survey-theme-json", JSON.stringify(creator.theme));
   callback(saveNo, true);
 
   // If you use a web service:
@@ -98,10 +98,13 @@ function saveThemeJson(url, json, saveNo, callback) {
 }
 ```
 
-To load a theme JSON object into Theme Editor, assign the object to Survey Creator's [`theme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#theme) property. The following code takes a theme JSON object from `localStorage`:
+To load a theme JSON object into Theme Editor, assign the object to Survey Creator's [`theme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#theme) property. The following code takes a theme JSON object from the `localStorage`:
 
 ```js
-creator.theme = window.localStorage.getItem("survey-theme-json");
+const savedTheme = window.localStorage.getItem("survey-theme-json");
+if (savedTheme) {
+    creator.theme = JSON.parse(savedTheme); 
+}
 ```
 
 You can also add UI elements that allow users to save, apply, and reuse custom themes. To implement this advanced functionality, refer to the following demo:
