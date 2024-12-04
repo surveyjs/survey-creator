@@ -617,7 +617,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!this.surveyElement || this.surveyElement.isPanel) {
       return null;
     }
-    const listModel = new ListModel(<IListModel>{
+    const listModel = new ListModel({
       items: [],
       cssClasses: listComponentCss,
     });
