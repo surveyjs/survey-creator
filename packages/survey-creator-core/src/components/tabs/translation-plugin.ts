@@ -6,6 +6,7 @@ import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { Translation, createImportCSVAction, createExportCSVAction } from "./translation";
 import { TabControlModel } from "../side-bar/tab-control-model";
 import { MenuButton } from "../../utils/actions";
+import { listComponentCss } from "../list-theme";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
   private filterStringsAction: Action;
@@ -238,6 +239,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       },
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
+      cssClasses: listComponentCss,
     });
   }
   private createFilterStringsAction() {
@@ -254,6 +256,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       },
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
+      cssClasses: listComponentCss,
     });
   }
   private updateFilterStrigsAction(updateSelectedItem: boolean = false) {

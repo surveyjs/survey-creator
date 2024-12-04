@@ -4,6 +4,7 @@ import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, pro
 require("./page-navigator.scss");
 require("./page-navigator-item.scss");
 import { getLocString } from "../../editorLocalization";
+import { listComponentCss } from "../list-theme";
 
 export class PageNavigatorViewModel extends Base {
   public icon: string;
@@ -38,6 +39,7 @@ export class PageNavigatorViewModel extends Base {
         this.pagesController.selectPage(item.data);
         this.popupModel.hide();
       },
+      cssClasses: listComponentCss,
       allowSelection: true
     });
     this.popupModel = new PopupModel("sv-list", { model: this.pageListModel }, { cssClass: "svc-creator-popup" });

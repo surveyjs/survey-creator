@@ -4,6 +4,7 @@ import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
 import { findSuitableTheme, isThemeEmpty } from "./theme-model";
+import { listComponentCss } from "../list-theme";
 
 export class PreviewViewModel extends Base {
   static tagRegex = /(<([^>]+)>)/ig;
@@ -273,6 +274,7 @@ export class PreviewViewModel extends Base {
         }
       },
       cssClass: "svc-creator-popup",
+      cssClasses: listComponentCss,
       verticalPosition: "top",
       horizontalPosition: "center"
     });

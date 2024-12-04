@@ -58,6 +58,7 @@ export * from "../components/embedded-survey";
 export * from "../components/link-value";
 export * from "../components/search-manager";
 export * from "../components/scroll";
+export * from "../components/list-theme";
 export * from "../editorLocalization";
 export * from "../json5";
 

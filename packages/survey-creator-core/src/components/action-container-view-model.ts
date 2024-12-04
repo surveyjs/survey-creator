@@ -14,6 +14,7 @@ import {
 import { SurveyCreatorModel } from "../creator-base";
 import { isPanelDynamic } from "../survey-elements";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
+import { listComponentCss } from "./list-theme";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
@@ -39,6 +40,13 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
       return item.minDimension;
     }
     return item.maxDimension;
+  }
+
+  constructor() {
+    super();
+    this.dotsItem.iconSize = "auto" as any;
+    this.dotsItem.popupModel.cssClass += " svc-creator-popup";
+    this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
 
   public fit(dimension: number, dotsItemSize: number) {
@@ -223,9 +231,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
 
   protected createActionContainer(): ActionContainer {
     const actionContainer = new SurveyElementActionContainer();
-    actionContainer.dotsItem.iconSize = "auto" as any;
     actionContainer.dotsItem.popupModel.horizontalPosition = "center";
-    actionContainer.dotsItem.popupModel.cssClass += " svc-creator-popup";
     return actionContainer;
   }
   private dragCollapsedTimer;
