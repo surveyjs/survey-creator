@@ -82,7 +82,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     return attachKey2click(
       <div
         className={this.model.css()}
-        onClickCapture={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
+        onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
       >
         <div className="svc-question__drop-indicator svc-question__drop-indicator--left"></div>
         <div className="svc-question__drop-indicator svc-question__drop-indicator--right"></div>
