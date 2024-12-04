@@ -2339,3 +2339,43 @@ test("Collapse all and expand all toolbar", async (t) => {
     await takeElementScreenshot("design-surface-toolbar.png", Selector(".svc-tab-designer"), t, comparer);
   });
 });
+
+test("Matrix Dynamiv with rows drad-drop", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1600, 1080);
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "matrixdynamic",
+              "name": "question1",
+              "columns": [
+                {
+                  "name": "Column 1"
+                },
+                {
+                  "name": "Column 2"
+                },
+                {
+                  "name": "Column 3"
+                }
+              ],
+              "choices": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "allowRowsDragAndDrop": true
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await takeElementScreenshot("design-surface-matrixdynamic-with-drag-drop.png", Selector(".svc-tab-designer .sd-table-wrapper"), t, comparer);
+  });
+});
