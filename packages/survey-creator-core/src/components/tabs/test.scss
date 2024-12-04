@@ -120,6 +120,11 @@ svc-tab-test {
   margin-inline-end: calcSize(0.5);
 }
 
+.icon-invisible-items {
+  width: calcSize(3);
+  height: calcSize(3);
+}
+
 .svc-test-tab__content .sd-body--empty {
   @include ctrDefaultFont;
   color: $foreground;
