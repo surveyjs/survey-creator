@@ -91,6 +91,7 @@
   &.sv-popup--dropdown {
     .sv-popup__body-content {
       background-color: var(--ctr-popup-menu-background-color, $background);
+      padding: 0;
     }
   }
 

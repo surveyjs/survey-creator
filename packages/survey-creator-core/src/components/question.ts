@@ -588,7 +588,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           subactions.unshift(defaultSubaction);
           if (selectedAction == action && !selectedSubactionLocal) selectedSubactionLocal = defaultSubaction;
         }
-        action.setSubItems({ items: subactions });
+        action.setSubItems({ items: subactions, cssClasses: listComponentCss });
         if (selectedSubactionLocal) {
           selectedAction = action;
           selectedSubaction = selectedSubactionLocal;

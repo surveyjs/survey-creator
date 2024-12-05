@@ -3803,7 +3803,7 @@ export class SurveyCreatorModel extends Base
           onSelectQuestionType(item.typeName, i.json);
         }
       }));
-      action.setSubItems({ items: innerItems });
+      action.setSubItems({ items: innerItems, cssClasses: listComponentCss });
     }
     return action;
   }

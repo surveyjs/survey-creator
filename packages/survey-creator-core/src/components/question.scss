@@ -478,7 +478,7 @@ svc-question {
     margin-left: 0;
   }
 
-  .sv-list__item-icon {
+  .svc-list__item-icon {
     --ctr-survey-question-toolbar-item-icon-width: calc(
       var(--ctr-survey-question-panel-toolbar-item-icon-container-width) -
         var(--ctr-survey-question-panel-toolbar-item-icon-padding-right) -
@@ -494,7 +494,7 @@ svc-question {
     height: var(--ctr-survey-question-toolbar-item-icon-height, calcSize(2));
   }
 
-  .sv-list__item:hover > .sv-list__item-body .sv-svg-icon use,
+  .svc-list__item:hover > .svc-list__item-body .sv-svg-icon use,
   .sv-svg-icon use {
     fill: $secondary;
   }

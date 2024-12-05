@@ -3,16 +3,16 @@ require("./list.scss");
 export var listComponentCss = {
   root: "svc-list__container",
   itemsContainer: "svc-list",
+  itemsContainerFiltering: "svc-list--filtering",
+  emptyContainer: "svc-list__empty-container",
+  emptyText: "svc-list__empty-text",
 
-  // itemsContainerFiltering: "svc-list--filtering",
+  filter: "svc-list__filter",
+  filterIcon: "svc-list__filter-icon",
+  filterInput: "svc-list__input",
+  searchClearButtonIcon: "svc-list__filter-clear-button",
 
-  // filter: "svc-list__filter",
-  // filterIcon: "svc-list__filter-icon",
-  // filterInput: "svc-list__input",
-  // searchClearButtonIcon: "svc-list__filter-clear-button",
-
-  // loadingIndicator: "svc-list__loading-indicator",
-
+  loadingIndicator: "svc-list__loading-indicator",
   item: "svc-list__item",
   itemSelected: "svc-list__item--selected",
   itemGroup: "svc-list__item--group",
@@ -26,7 +26,4 @@ export var listComponentCss = {
   itemMarkerIcon: "svc-list-item__marker-icon",
   itemSeparator: "svc-list__item-separator",
   itemBody: "svc-list__item-body",
-
-  emptyContainer: "svc-list__empty-container",
-  emptyText: "svc-list__empty-text"
 };
