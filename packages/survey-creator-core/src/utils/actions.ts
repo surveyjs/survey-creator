@@ -24,7 +24,7 @@ export function updateMatrixLogicExpandAction(question: QuestionMatrixDynamicMod
   action.component = "sv-action-bar-item";
   action.iconName = "icon-logic-expand";
   action.innerCss = "sl-table__action-button sl-table__detail-button";
-  action.iconSize = 24;
+  action.iconSize = "auto";
   action.showTitle = false;
   action.action = () => {
     row.showHideDetailPanelClick();
@@ -37,6 +37,7 @@ export function updateMatrixLogicExpandAction(question: QuestionMatrixDynamicMod
 export function updateMatrixLogicRemoveAction(question: QuestionMatrixDynamicModel, actions: Array<IAction>, row: MatrixDynamicRowModel) {
   updateMatrixRemoveAction(question, actions, row);
   const action = findAction(actions, "remove-row");
+  action.iconSize = "auto";
   if (!action) return;
   action.css = "sl-table__action-button sl-table__remove-button";
 }

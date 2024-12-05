@@ -241,7 +241,7 @@
   .svc-logic-tab__content-action {
     margin-left: 25%;
     margin-right: 25%;
-    margin-top: calcSize(5);
+    margin-top: var(--ctr-surface-gap, calcSize(5));
     margin-bottom: calcSize(8);
   }
 

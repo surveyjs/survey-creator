@@ -17,11 +17,9 @@
 }
 
 .sl-table .sl-table__detail-button.sl-table__detail-button {
-  width: calcSize(6);
-  height: calcSize(6);
   box-sizing: border-box;
   border-radius: var(--ctr-collapse-button-corner-radius, calcSize(12.5));
-  padding: calcSize(1.5);
+  padding: var(--ctr-collapse-button-padding, calcSize(1.5));
   transition: background-color $creator-transition-duration;
 
   &:focus:enabled {
@@ -39,12 +37,17 @@
       fill: var(--ctr-collapse-button-icon-color-hovered, $primary);
     }
   }
+  .sv-action-bar-item__icon {
+    width: var(--ctr-collapse-button-icon-width, calcSize(3));
+    height: var(--ctr-collapse-button-icon-height, calcSize(3));
+  }
 }
 
 .sl-table__remove-button .sv-action-bar-item {
   border-radius: calcSize(12.5);
-  padding: calcSize(1);
+  padding: var(--ctr-survey-action-button-padding-top, calcSize(1)) var(--ctr-survey-action-button-padding-right-icon-only, calcSize(1)) var(--ctr-survey-action-button-padding-bottom, calcSize(1)) var(--ctr-survey-action-button-padding-left-icon-only, calcSize(1));
   cursor: pointer;
+  border: none;
 
   &:focus:enabled {
     background-color: transparent;
@@ -61,6 +64,10 @@
       fill: var(--lbr-action-button-icon-color-negative, $red);
     }
   }
+  .sv-action-bar-item__icon {
+    width: var(--ctr-survey-action-button-icon-width, calcSize(3));
+    height: var(--ctr-survey-action-button-icon-height, calcSize(3));     
+  }
 }
 
 .sl-table__cell .sv-action-bar-item__icon {
@@ -71,18 +78,6 @@
 .sl-table__row:hover .sl-table__cell .sv-action-bar-item__icon,
 .sl-table__cell .sv-action-bar-item.sv-focused--by-key .sv-action-bar-item__icon {
   opacity: 1;
-}
-
-.sl-table__row #remove-row {
-  .sv-action-bar-item {
-    border: none;
-    width: calcSize(5);
-    height: calcSize(5);
-  }
-
-  .sv-action-bar-item__icon use {
-    fill: var(--lbr-action-button-icon-color-negative, $red);
-  }
 }
 
 .sl-table__row.sl-table__row--additional .sl-table__cell .svc-action-button {
