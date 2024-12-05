@@ -27,15 +27,7 @@ export class PageNavigatorComponent extends CreatorModelComponent<PageNavigatorV
   public ngAfterViewInit(): void {
     if (this.pageEditMode !== "bypage") {
       const el = this.container.nativeElement;
-      if (!!el && !!el.parentElement?.parentElement?.parentElement) {
-        const self = this;
-        const scrollableViewPort = el.parentElement.parentElement.parentElement;
-        scrollableViewPort.onscroll = function (this: GlobalEventHandlers, ev: Event) {
-          return self.model.onContainerScroll(ev.currentTarget as HTMLDivElement);
-        };
-        self.model.setScrollableContainer(scrollableViewPort);
-        self.model.setItemsContainer(el.parentElement);
-      }
+      this.model.attachToUI(el);
     }
   }
   public override ngOnDestroy(): void {

@@ -50,17 +50,7 @@ onMounted(() => {
   if (props.pageEditMode !== "bypage") {
     const el = root.value;
     const modelValue = model.value;
-    if (!!el && !!el.parentElement?.parentElement?.parentElement) {
-      const scrollableViewPort = el.parentElement.parentElement.parentElement;
-      scrollableViewPort.onscroll = function (
-        this: GlobalEventHandlers,
-        ev: Event
-      ) {
-        return modelValue.onContainerScroll(ev.currentTarget as HTMLDivElement);
-      };
-      modelValue.setScrollableContainer(scrollableViewPort);
-      modelValue.setItemsContainer(el.parentElement);
-    }
+    modelValue.attachToUI(componentInfo.element);
   }
 });
 
