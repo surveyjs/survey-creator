@@ -50,10 +50,12 @@ svc-tab-designer {
       }
     }
   }
+
   .sd-description {
     color: var(--ctr-survey-header-text-description-color-placeholder, #909090);
   }
 }
+
 .svc-tab-designer {
   .svc-designer-header {
     border-bottom: 2px solid transparent;
@@ -63,6 +65,7 @@ svc-tab-designer {
   .svc-tab-designer_content {
     width: 100%;
   }
+
   .sd-title {
     display: flex;
   }
@@ -124,17 +127,12 @@ svc-tab-designer {
   }
 
   .svc-element__add-new-question {
-    padding: var(--ctr-button-padding-vertical, calcSize(2))
-      var(--ctr-button-padding-horizontal-contextual-button, calcSize(10));
+    padding: var(--ctr-button-padding-vertical, calcSize(2)) var(--ctr-button-padding-horizontal-contextual-button, calcSize(10));
 
     .svc-element__question-type-selector {
-      padding: var(--ctr-button-contextual-button-padding-top, calcSize(1))
-        var(--ctr-button-contextual-button-padding-right, calcSize(1))
-        var(--ctr-button-contextual-button-padding-bottom, calcSize(1))
-        var(--ctr-button-contextual-button-padding-left, calcSize(1));
+      padding: var(--ctr-button-contextual-button-padding-top, calcSize(1)) var(--ctr-button-contextual-button-padding-right, calcSize(1)) var(--ctr-button-contextual-button-padding-bottom, calcSize(1)) var(--ctr-button-contextual-button-padding-left, calcSize(1));
 
-      margin: var(--ctr-button-contextual-button-margin-vertical, calcSize(1))
-        var(--ctr-button-contextual-button-margin-horizontal, calcSize(1));
+      margin: var(--ctr-button-contextual-button-margin-vertical, calcSize(1)) var(--ctr-button-contextual-button-margin-horizontal, calcSize(1));
 
       border-radius: var(--ctr-button-contextual-button-corner-radius, calcSize(0.5));
     }
@@ -167,9 +165,20 @@ svc-tab-designer {
   right: 0;
 }
 
+.svc-creator__toolbox--right,
+[dir="rtl"],
+[style*="direction:rtl"],
+[style*="direction: rtl"] {
+  .svc-tab-designer__toolbar {
+    position: absolute;
+    bottom: calcSize(0);
+    right: unset;
+    left: 0;
+  }
+}
+
 .svc-tab-designer__surface-toolbar {
-  padding: var(--ctr-surface-toolbar-padding-top, calcSize(1.5)) var(--ctr-surface-toolbar-padding-right, calcSize(1.5))
-    var(--ctr-surface-toolbar-padding-bottom, calcSize(1.5)) var(--ctr-surface-toolbar-padding-left, calcSize(1.5));
+  padding: var(--ctr-surface-toolbar-padding-top, calcSize(1.5)) var(--ctr-surface-toolbar-padding-right, calcSize(1.5)) var(--ctr-surface-toolbar-padding-bottom, calcSize(1.5)) var(--ctr-surface-toolbar-padding-left, calcSize(1.5));
   gap: var(--ctr-surface-toolbar-gap, calcSize(1));
   flex-direction: column;
 }
