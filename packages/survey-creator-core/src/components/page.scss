@@ -393,9 +393,10 @@ svc-page {
   background: $secondary;
   left: calcSize(3);
   bottom: calcSize(11.5);
-  width: calc(100% - 48px);
-  height: 2px;
+  width: 100%;
   height: calcSize(0.25);
+  left: 0;
+  top: calc(calcSize(-1) - (calcSize(0.25) / 2));
 }
 
 .svc-page--drag-over-empty-no-add-button:after {
