@@ -32,11 +32,8 @@ export class PageNavigatorComponent extends CreatorModelComponent<PageNavigatorV
   }
   public override ngOnDestroy(): void {
     super.ngOnDestroy();
-    const el = this.container.nativeElement;
-    if (!!el && !!el.parentElement?.parentElement?.parentElement) {
-      el.parentElement.parentElement.parentElement.onscroll = <any>undefined;
-    }
     this.model.stopItemsContainerHeightObserver();
+    this.model.setScrollableContainer(undefined as any);
     this.model.dispose();
   }
 }

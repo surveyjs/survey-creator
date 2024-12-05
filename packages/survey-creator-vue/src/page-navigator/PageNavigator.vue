@@ -50,17 +50,15 @@ onMounted(() => {
   if (props.pageEditMode !== "bypage") {
     const el = root.value;
     const modelValue = model.value;
-    modelValue.attachToUI(componentInfo.element);
+    modelValue.attachToUI(el);
   }
 });
 
 onBeforeUnmount(() => {
   const el = root.value;
   const modelValue = model.value;
-  if (!!el && !!el.parentElement?.parentElement?.parentElement) {
-    el.parentElement.parentElement.parentElement.onscroll = undefined as any;
-  }
   modelValue.stopItemsContainerHeightObserver();
+  modelValue.setScrollableContainer(undefined as any);
 });
 onUnmounted(() => {
   const modelValue = model.value;
