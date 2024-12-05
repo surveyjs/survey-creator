@@ -1,20 +1,13 @@
 @import "../variables.scss";
 
 .svc-list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  align-self: stretch;
   width: 100%;
-
-  // padding: 0;
+  padding: var(--ctr-list-padding-top, calcSize(1)) var(--ctr-list-padding-right, 0)
+    var(--ctr-list-padding-bottom, calcSize(1)) var(--ctr-list-padding-left, 0);
   margin: 0;
   overflow-y: auto;
   list-style-type: none;
 
-  display: flex;
-  padding: var(--ctr-list-padding-top, 8px) var(--ctr-list-padding-right, 8px) var(--ctr-list-padding-bottom, 8px)
-    var(--ctr-list-padding-left, 8px);
   box-sizing: border-box;
 }
 
@@ -29,10 +22,11 @@
   @include textEllipsis;
   display: flex;
   flex: 1 0 0;
-  padding-block-start: var(--ctr-list-item-padding-top, calcSize(1));
-  padding-block-end: var(--ctr-list-item-padding-bottom, calcSize(1));
+  padding-block-start: var(--ctr-list-item-padding-top-with-icon, calcSize(1));
+  padding-block-end: var(--ctr-list-item-padding-bottom-with-icon, calcSize(1));
   padding-inline-start: var(--ctr-list-item-padding-left, calcSize(2));
-  padding-inline-end: var(--ctr-list-item-padding-right, calcSize(1));
+  padding-inline-end: var(--ctr-list-item-padding-right, calcSize(8));
+
   align-items: center;
   gap: var(--ctr-list-item-gap, calcSize(2));
   border-radius: var(--ctr-list-item-corner-radius, 0px);
@@ -49,18 +43,23 @@
   }
 }
 
+.svc-list__item--disabled {
+  opacity: var(--ctr-list-item-opacity-disabled, 0.25);
+  pointer-events: none;
+}
+
 .svc-list__item:focus,
 .svc-list__item:hover,
 .svc-list__item--focused,
 .svc-list__item--hovered {
   & > .svc-list__item-body {
-    background: var(--ctr-list-item-background-color-hovered, $background);
+    background: var(--ctr-list-item-background-color-hovered, $background-dark);
 
     .svc-list__item-icon use {
       fill: var(--ctr-list-item-icon-color-hovered, $foreground-light);
     }
 
-    span {
+    & > span {
       color: var(--ctr-list-item-text-color-hovered, $foreground);
     }
 
@@ -81,7 +80,7 @@
       fill: var(--ctr-list-item-icon-color-selected, $background);
     }
 
-    span {
+    & > span {
       @include ctrDefaultBoldFont;
       color: var(--ctr-list-item-text-color-selected, $primary-foreground);
     }
@@ -94,13 +93,13 @@
   & > .svc-list__item-body {
     background: var(--ctr-list-item-background-color-selected-submenu, $primary-light);
 
-    span {
-      @include ctrDefaultFont;
-      color: var(--ctr-list-item-text-color-selected-submenu, $foreground);
-    }
-
     .svc-list__item-icon use {
       fill: var(--ctr-list-item-icon-color-selected-submenu, $foreground-light);
+    }
+
+    & > span {
+      @include ctrDefaultFont;
+      color: var(--ctr-list-item-text-color-selected-submenu, $foreground);
     }
 
     .svc-list-item__marker-icon use {
@@ -141,6 +140,8 @@
   box-sizing: content-box;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  inset-inline-end: var(--ctr-list-item-padding-right, calcSize(1));
 
   use {
     fill: var(--ctr-list-item-submenu-arrow-color, $foreground-light);
@@ -148,15 +149,10 @@
 }
 
 .svc-list__container {
-  -position: relative;
-  -display: flex;
-  -height: 100%;
-  -flex-direction: column;
-  -display: flex;
-  -min-height: 0;
-}
-
-.svc-list--filtering {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
 }
 
 .svc-list__filter {
@@ -226,4 +222,27 @@
   width: 100%;
   box-sizing: border-box;
   padding: calcSize(1.5);
+}
+
+.sv-popup--overlay {
+  .svc-list-item__marker-icon {
+    display: none;
+  }
+
+  .svc-list__item-body {
+    pointer-events: none;
+  }
+
+  .svc-list__item--group-selected > .svc-list__item-body {
+    background-color: $primary;
+
+    use {
+      fill: $background;
+    }
+
+    > span {
+      @include ctrDefaultBoldFont;
+      color: $primary-foreground;
+    }
+  }
 }

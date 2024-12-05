@@ -1,3 +1,5 @@
+import { listComponentCss } from "../components/list-theme";
+
 export var propertyGridCss = {
   root: "spg-root-modern",
   container: "spg-container-modern",
@@ -365,6 +367,7 @@ export var propertyGridCss = {
       buttonCollapsed: ""
     }
   },
+  list: JSON.parse(JSON.stringify(listComponentCss)),
   actionBar: {
     root: "spg-action-bar",
     item: "spg-action-button",
@@ -390,7 +393,6 @@ export var propertyGridCss = {
     control: "spg-color-editor__input spg-input-container__input",
     colorDropdown: "spg-input__edit-button",
     colorDropdownIcon: "icon-drop-down-arrow",
-    colorItem: "spg-color-editor__color-item",
     swatchIcon: "icon-color-picker"
   },
   textwithreset: {

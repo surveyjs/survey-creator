@@ -413,39 +413,11 @@ svc-page {
   }
 }
 
-.svc-element__add-new-question,
-.svc-question__adorner {
-  .sv-list__item.sv-list__item--disabled {
-    opacity: 0.25;
-    pointer-events: none;
-  }
-
-  .sv-popup--overlay {
-    .sv-list-item__marker-icon {
-      display: none;
-    }
-
-    .sv-list__item-body {
-      pointer-events: none;
-    }
-
-    .sv-list__item.sv-list__item--group-selected > .sv-list__item-body {
-      @include ctrDefaultBoldFont;
-      background-color: $primary;
-      color: $primary-foreground;
-    }
-
-    .sv-list__item.sv-list__item--group-selected > .sv-list__item-body use {
-      fill: $background;
-    }
-  }
-}
-
 .svc-page__content--collapsed {
   & > .sv-action-bar {
     display: none;
   }
-  
+
   .sd-page__title {
     margin-bottom: 0;
   }
