@@ -23,6 +23,10 @@
         {
           "Name": "get-started-html-css-javascript",
           "Title": "HTML/CSS/JavaScript"
+        },
+        {
+          "Name": "supported-browsers",
+          "Title": "Supported Browsers"
         }
       ]
     },
@@ -151,6 +155,10 @@
             {
               "Name": "end-user-guide-how-to-vertically-align-input-fields-in-survey",
               "Title": "Vertically Align Input Fields"
+            },
+            {
+              "Name": "end-user-guide-reposition-form-elements",
+              "Title": "Reposition Form Elements"
             }
           ]
         },
@@ -229,11 +237,6 @@
           ]
         }
       ]
-    },
-    {
-      "Name": "BuilderOverview",
-      "Title": "Overview",
-      "IsHidden": true
     },
     {
       "Name": "api",

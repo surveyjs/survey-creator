@@ -19,6 +19,11 @@
     .svc-matrix-cell {
       padding: calcSize(1.5) calcSize(1);
     }
+
+    &.sd-table__cell--drag {
+      padding-right: 0;
+      padding-left: 0;
+    }
   }
 }
 
@@ -79,5 +84,15 @@
 .svc-question__content {
   .sd-table__cell--detail-panel {
     padding-left: calcSize(6);
+  }
+}
+
+.svc-question__content {
+  .sd-drag-element__svg {
+    visibility: visible;
+    cursor: initial;
+    use {
+      fill: $foreground-light;
+    }
   }
 }
