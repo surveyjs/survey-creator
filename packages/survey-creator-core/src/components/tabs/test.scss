@@ -116,13 +116,10 @@ svc-tab-test {
   --sjs-general-forecolor-light: rgba(0, 0, 0, 0.45);
 
   padding: 0;
-  opacity: 0.5;
-  margin-inline-end: calcSize(0.5);
-}
-
-.icon-invisible-items {
   width: calcSize(3);
   height: calcSize(3);
+  opacity: 0.5;
+  margin-inline-end: calcSize(0.5);
 }
 
 .svc-test-tab__content .sd-body--empty {
