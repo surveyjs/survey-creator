@@ -24,7 +24,7 @@ pool:
 
 jobs:
 
-- job: CreatorV2Core
+- job: Core
   steps:
   - checkout: self
   - checkout: EmptyRepo
@@ -118,8 +118,8 @@ jobs:
       ArtifactName: 'SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)'
       publishLocation: 'Container'  
 
-- job: CreatorV2React
-  dependsOn: CreatorV2Core
+- job: React
+  dependsOn: Core
   steps:
   - checkout: self
   - checkout: EmptyRepo
