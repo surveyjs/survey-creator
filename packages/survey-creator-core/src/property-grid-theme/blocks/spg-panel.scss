@@ -68,7 +68,8 @@
 }
 .svc-side-bar--mobile {
   .spg-panel__content {
-    padding: 0 calcSize(2) calcSize(5);
+    padding-inline-end: var(--ctr-property-grid-form-padding-right, calcSize(2));
+    padding-inline-start: var(--ctr-property-grid-form-padding-left, calcSize(2));
   }
 }
 
