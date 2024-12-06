@@ -90,15 +90,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
 
   private setActivePage(id: string): void {
-    const sidebar = this.creator.sidebar;
-    if(sidebar.activePage !== id) {
-      sidebar.activePage = id;
-    } {
-      const page = sidebar.getActivePage();
-      if(!!page) {
-        sidebar.setActivePage(page);
-      }
-    }
+    this.creator.sidebar.activePage = id;
     this.updateHeaderComponent();
   }
 
