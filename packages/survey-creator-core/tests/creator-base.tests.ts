@@ -2579,6 +2579,18 @@ test("convertInputType, check locale", (): any => {
   const action: any = questionModel.getActionById("convertInputType");
   expect(action.data.locOwner.locale).toBe("de");
 });
+test("change locale & creator.sidebar.hasVisiblePages", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1" },
+      { type: "text", name: "q2" },
+    ]
+  };
+  expect(creator.sidebar.hasVisiblePages).toBeTruthy();
+  creator.locale = "de";
+  expect(creator.sidebar.hasVisiblePages).toBeTruthy();
+});
 test("QuestionAdornerViewModel for selectbase and creator.minimumChoicesCount", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
