@@ -431,13 +431,13 @@ svc-page {
       pointer-events: none;
     }
 
-    .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body {
+    .sv-list__item.sv-list__item--group-selected > .sv-list__item-body {
       @include ctrDefaultBoldFont;
       background-color: $primary;
       color: $primary-foreground;
     }
 
-    .sv-list__item.sv-list__item--selected.sv-list__item--group > .sv-list__item-body use {
+    .sv-list__item.sv-list__item--group-selected > .sv-list__item-body use {
       fill: $background;
     }
   }
