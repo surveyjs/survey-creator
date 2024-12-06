@@ -325,6 +325,7 @@
   --lbr-line-height-unit: 8px;
   --ctr-text-decor-padding-bottom-code: 0px;
   --ctr-text-decor-padding-top-code: 0px;
+  --ctr-survey-header-padding-bottom-no-underline: 0px;
 }
 
  /* Aliases  */
@@ -521,8 +522,8 @@
   --ctr-actionbar-button-padding-right-large-icon-text: var(--sjs-spacing-x2);
   --ctr-list-item-padding-left: var(--sjs-spacing-x2);
   --ctr-list-item-padding-right: var(--sjs-spacing-x2);
-  --ctr-list-item-padding-top: var(--sjs-spacing-x1);
-  --ctr-list-item-padding-bottom: var(--sjs-spacing-x1);
+  --ctr-list-item-padding-top: var(--sjs-spacing-x150);
+  --ctr-list-item-padding-bottom: var(--sjs-spacing-x150);
   --ctr-list-item-padding-right-submenu: var(--sjs-spacing-x1);
   --ctr-list-item-padding-left-second-level: var(--sjs-spacing-x4);
   --ctr-list-item-padding-bottom-with-icon: var(--sjs-spacing-x150);
@@ -673,8 +674,8 @@
   --ctr-button-text-color-cta: var(--sjs-primary-foreground-100);
   --ctr-button-text-color-danger-focused: var(--sjs-semantic-red-background-500);
   --ctr-button-border-color-danger-focused: var(--sjs-semantic-red-background-500);
-  --ctr-collapse-button-icon-width: var(--sjs-size-x3);
-  --ctr-collapse-button-icon-height: var(--sjs-size-x3);
+  --ctr-collapse-button-icon-width: var(--sjs-font-size-x3);
+  --ctr-collapse-button-icon-height: var(--sjs-font-size-x3);
   --ctr-collapse-button-padding: var(--sjs-spacing-x150);
   --ctr-collapse-button-corner-radius: var(--sjs-corner-radius-x1);
   --ctr-collapse-button-icon-color: var(--sjs-layer-3-foreground-75);
@@ -1169,7 +1170,7 @@
   --ctr-search-count-text-color: var(--sjs-layer-1-foreground-50);
   --ctr-search-count-text-margin-right: var(--sjs-spacing-x1);
   --ctr-property-grid-search-count-text-color: var(--sjs-layer-3-foreground-50);
-  --ctr-scrollbar-background-color: var(--sjs-border-10);
+  --ctr-scrollbar-background-color: var(--sjs-border-25-overlay);
   --ctr-scrollbar-corner-radius: var(--sjs-corner-radius-round);
   --ctr-scrollbar-padding-horizontal: var(--sjs-spacing-x05);
   --ctr-scrollbar-padding-vertical: var(--sjs-spacing-x05);
@@ -2274,9 +2275,9 @@
   --lbr-page-header-title-color: var(--sjs-layer-3-foreground-100);
   --lbr-page-header-description-color: var(--sjs-layer-3-foreground-50);
   --lbr-page-header-title-color-not-completed-rule: var(--sjs-secondary-background-500);
-  --lbr-page-header-title-gap: var(--lbr-spacing-x2);
+  --ctr-survey-page-header-title-gap: var(--sjs-spacing-x1);
   --lbr-page-header-gap: var(--lbr-spacing-x05);
-  --lbr-page-header-padding-vertical-with-button: var(--lbr-spacing-x05);
+  --ctr-survey-page-header-padding-vertical-with-button: var(--sjs-spacing-x05);
   --lbr-toc-menu-button-background-color-page: var(--lbr-background-color);
   --lbr-background-color: var(--sjs-layer-3-background-500);
   --lbr-popup-menu-corner-radius: var(--lbr-corner-radius-x05);
@@ -3300,7 +3301,6 @@
   --ctr-survey-ranking-item-height-drop-spot: var(--lbr-size-x6);
   --ctr-survey-ranking-item-corner-radius-drop-spot: var(--lbr-corner-radius-x1);
   --ctr-checkbox-description-text-margin-top: var(--sjs-spacing-x1);
-  --ctr-survey-header-gap-2: var(--lbr-spacing-x1);
   --lbr-dynamic-panel-footer-pager-margin-left: var(--lbr-spacing-x2);
   --lbr-dynamic-panel-footer-pager-margin-right: var(--lbr-spacing-x2);
   --lbr-dynamic-panel-footer-pager-margin-top: var(--lbr-spacing-x05);
@@ -3345,15 +3345,23 @@
   --lbr-matching-connector-height: var(--lbr-size-x150);
   --lbr-tag-box-item-remove-button-icon-width: var(--lbr-font-size-x2);
   --lbr-tag-box-item-remove-button-icon-height: var(--lbr-font-size-x2);
-  --ctr-editor-border-color-highlighted: var(--sjs-secondary-background-500);
+  --ctr-editor-border-color-highlighted: var(--sjs-layer-1-foreground-75);
   --ctr-editor-border-width-highlighed: var(--sjs-stroke-x2);
-  --ctr-survey-header-margin-left: var(--lbr-spacing-x2);
-  --ctr-survey-header-margin-right: var(--lbr-spacing-x2);
-  --ctr-surface-padding-left-designer: var(--sjs-spacing-x925);
   --ctr-survey-page-content-margin-top-no-header: var(--lbr-spacing-x1);
   --ctr-survey-question-panel-toolbar-item-background-color-pressed: var(--sjs-layer-1-background-400);
   --ctr-survey-page-toolbar-item-background-color-pressed: var(--sjs-primary-background-10);
   --ctr-survey-page-toolbar-item-icon-color-disabled: var(--sjs-layer-3-foreground-50);
   --ctr-survey-page-toolbar-item-icon-color: var(--sjs-primary-background-500);
+  --ctr-survey-page-margin-left-with-toolbar: var(--sjs-spacing-x925);
+  --ctr-survey-page-margin-right-with-toolbar: var(--sjs-spacing-x925);
+  --ctr-expression-item-padding-left-icon-only: var(--sjs-spacing-x1);
+  --ctr-expression-item-padding-right-icon-only: var(--sjs-spacing-x1);
+  --ctr-expression-item-icon-width: var(--sjs-font-size-x3);
+  --ctr-expression-item-icon-height: var(--sjs-font-size-x3);
+  --ctr-expression-item-icon-color: var(--sjs-semantic-red-background-500);
+  --ctr-expression-item-background-color-remove-button-hovered: var(--sjs-semantic-red-background-10);
+  --ctr-survey-header-padding-top-no-underline: var(--lbr-spacing-x6);
+  --ctr-collapse-button-margin-top: var(--sjs-spacing-x05n);
+  --ctr-collapse-button-margin-right: var(--sjs-spacing-x2);
 }
 
