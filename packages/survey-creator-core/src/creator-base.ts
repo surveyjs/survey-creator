@@ -3871,6 +3871,11 @@ export class SurveyCreatorModel extends Base
       this.responsivityManager = undefined;
     }
   }
+  public setDesignerSurveyScale(scale: number) {
+    if (scale <= 0) return;
+    this.responsivityManager.updateSurveyActualWidth();
+    this.survey.widthScale = scale;
+  }
   @property({ defaultValue: false }) showHeaderInEmptySurvey;
   @property({ defaultValue: true }) public allowShowPageNavigator;
   @property({ defaultValue: true }) private showPageNavigatorValue;

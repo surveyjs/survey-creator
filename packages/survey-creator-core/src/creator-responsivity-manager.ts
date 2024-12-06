@@ -75,10 +75,11 @@ export class CreatorResponsivityManager {
 
   }
   process(isFirst: boolean = false) {
-    if(isFirst) {
+    if (isFirst) {
       this.creator.sidebar.blockAnimations();
       this.creator.toolbox.blockAnimations();
     }
+    this.updateSurveyActualWidth();
     this.currentWidth = this.getScreenWidth();
     if (this.currentWidth === "xl" || this.currentWidth === "xxl") {
       this._process(false, true, false);
@@ -98,6 +99,12 @@ export class CreatorResponsivityManager {
     if (isFirst) {
       this.creator.sidebar.releaseAnimations();
       this.creator.toolbox.releaseAnimations();
+    }
+  }
+  updateSurveyActualWidth() {
+    const surveyContainer = this.container.querySelector(".svc-tab-designer_content > div") as HTMLDivElement;
+    if (!!surveyContainer) {
+      this.creator.survey.setResponsiveStartWidth(surveyContainer.offsetWidth);
     }
   }
 
