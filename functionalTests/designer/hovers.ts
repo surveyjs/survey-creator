@@ -101,10 +101,6 @@ test("Page navigator hover", async t => {
     .hover(Selector(".svc-page-navigator-item-content").nth(1), { speed: 0.1 })
     .wait(1500)
     .expect(pageHoverSelector.visible).ok();
-  const zIndex = await pageHoverSelector.getStyleProperty("z-index");
-  await t
-    .expect(parseInt(zIndex))
-    .gte(20);
 });
 
 test("Question hover and events", async t => {

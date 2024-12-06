@@ -14,7 +14,7 @@ import { editorLocalization } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
 import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
 import { ICreatorTheme } from "../../creator-theme/creator-themes";
-import { getPredefinedColorsItemValues } from "./themes";
+import { getPredefinedBackgoundColorsChoices, getPredefinedColorsItemValues } from "./themes";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
@@ -116,6 +116,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
   private updatePredefinedColorChoices() {
     this.themePropertyGrid.survey.getAllQuestions().forEach(question => {
+      if (question.name === "--sjs-special-background") {
+        (question as any).choices = this.themeModel && this.themeModel.isLight ? getPredefinedBackgoundColorsChoices() : [];
+      }
       if (question.name === "--sjs-primary-background-500" || question.name === "--sjs-secondary-background-500") {
         (question as any).choices = getPredefinedColorsItemValues(this.themeModel.isLight === false ? "dark" : "light");
       }
@@ -236,7 +239,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         keyCode: 46,
       },
       execute: () => {
-        if(!this.creator.readOnly) {
+        if (!this.creator.readOnly) {
           this.creator.deleteCurrentElement();
         }
       }
@@ -247,7 +250,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     if (this.showOneCategoryInPropertyGrid) {
       const pgTabs = [];
       this.propertyGrid.survey.pages.forEach(p => {
-        if(p.elements.length === 0) return;
+        if (p.elements.length === 0) return;
 
         const action = new MenuButton({
           id: p.name,

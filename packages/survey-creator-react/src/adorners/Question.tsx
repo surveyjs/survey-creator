@@ -31,7 +31,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     this.rootRef = React.createRef();
   }
   protected createModel(props: QuestionAdornerComponentProps): void {
-    if(this.model) {
+    if (this.model) {
       this.model.attachToUI(props.question, this.rootRef.current);
     } else {
       this.modelValue = this.createQuestionViewModel(props);

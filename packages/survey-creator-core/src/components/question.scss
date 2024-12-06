@@ -703,59 +703,59 @@ svc-question {
 }
 
 .svc-question__drop-indicator--left {
-  left: -9px;
+  left: calc(calcSize(-1) - (calcSize(0.25) / 2));
 }
 
 .svc-question__drop-indicator--right {
-  right: -9px;
+  right: calc(calcSize(-1) - (calcSize(0.25) / 2));
 }
 
 .svc-question__drop-indicator--top {
-  top: -9px;
+  top: calc(calcSize(-1) - (calcSize(0.25) / 2));
 }
 
 .svc-question__drop-indicator--bottom {
-  bottom: -9px;
+  bottom: calc(calcSize(-1) - (calcSize(0.25) / 2));
 }
 
 .svc-question__content--drag-over-left {
   > .svc-question__drop-indicator--left {
     opacity: 1;
-    width: 2px;
+    width: calcSize(0.25);
   }
 }
 
 .svc-question__content--drag-over-right {
   > .svc-question__drop-indicator--right {
     opacity: 1;
-    width: 2px;
+    width: calcSize(0.25);
   }
 }
 
 .svc-question__content--drag-over-top {
   > .svc-question__drop-indicator--top {
     opacity: 1;
-    height: 2px;
+    height: calcSize(0.25);
   }
 }
 
 .svc-question__content--drag-over-bottom {
   > .svc-question__drop-indicator--bottom {
     opacity: 1;
-    height: 2px;
+    height: calcSize(0.25);
   }
 }
 
 .sd-panel {
   .svc-question__content--drag-over-left {
     .svc-question__drop-indicator--left {
-      left: -6px;
+      left: calc(calcSize(-1) + calcSize(0.25));
     }
   }
 
   .svc-question__content--drag-over-right {
     .svc-question__drop-indicator--right {
-      right: -6px;
+      right: calc(calcSize(-1) + calcSize(0.25));
     }
   }
 }
@@ -778,13 +778,13 @@ svc-question {
 
   .svc-question__content--drag-over-top {
     .svc-question__drop-indicator--top {
-      top: -6px;
+      top: calc(calcSize(-1) + calcSize(0.25));
     }
   }
 
   .svc-question__content--drag-over-bottom {
     .svc-question__drop-indicator--bottom {
-      bottom: -6px;
+      bottom: calc(calcSize(-1) + calcSize(0.25));
     }
   }
 }

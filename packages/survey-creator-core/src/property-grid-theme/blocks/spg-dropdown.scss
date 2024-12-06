@@ -9,10 +9,15 @@
             var(--ctr-editor-button-padding-bottom) + var(--ctr-editor-padding-top) + var(--ctr-editor-padding-bottom)
     );
 }
+.spg-dropdown--empty .spg-dropdown__value {
+    min-height: var(--ctr-font-default-line-height, var(--ctr-default-line-height, 24px));
+}
+
 .spg-dropdown__value {
     @include ctrDefaultFont;
     display: flex;
     align-items: center;
+    min-height: var(--ctr-font-default-line-height, var(--ctr-default-line-height, 24px));
 }
 .spg-dropdown__filter-string-input {
     @include ctrDefaultFont;

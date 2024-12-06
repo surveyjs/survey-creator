@@ -1,9 +1,11 @@
 import { CreatorTester } from "../creator-tester";
 import { CreatorThemeModel } from "../../src/creator-theme/creator-theme-model";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
-import { CreatorThemes, ICreatorTheme } from "../../src/creator-theme/creator-themes";
+import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "../../src/creator-theme/creator-themes";
 
 import "survey-core/survey.i18n";
+import { PredefinedBackgroundColors, PredefinedColors } from "../../src/components/tabs/themes";
+import { colorsAreEqual } from "../../src/utils/utils";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
 
@@ -100,9 +102,9 @@ test("Creator theme: reset color variables after change theme", (): any => {
     expect(primaryBackgroundColor.value).toEqual("#19B394FF");
     expect(secondaryBackgroundColor.value).toEqual("#FF9814FF");
 
-    surfaceBackgroundColor.value = "rgba(10, 10, 10, 1)";
     primaryBackgroundColor.value = "rgba(20, 20, 20, 1)";
     secondaryBackgroundColor.value = "rgba(30, 30, 30, 0.1)";
+    surfaceBackgroundColor.value = "rgba(10, 10, 10, 1)";
     expect(themeModel.themeCssVariablesChanges).toStrictEqual({
       "--sjs-primary-background-10": "rgba(20, 20, 20, 0.1)",
       "--sjs-primary-background-400": "rgba(5, 5, 5, 1)",
@@ -303,4 +305,28 @@ test("Creator theme: apply custom theme", (): any => {
 
   expect(secondaryBackgroundColor.value).toEqual("#0b864b");
   expect(themeModel["--sjs-secondary-background-500"]).toBe("#0b864b");
+});
+
+test("sjs-special-background calculations on primary background changed", (): any => {
+  const themeModel = new CreatorThemeModel();
+
+  expect(themeModel["--sjs-primary-background-500"]).toEqual("#19B394FF");
+  expect(themeModel["--sjs-special-background"]).toEqual("#F3F3F3FF");
+
+  themeModel.loadTheme(PredefinedCreatorThemes["sc2020"]);
+  expect(themeModel["--sjs-primary-background-500"]).toEqual("#19B394FF");
+  expect(themeModel["--sjs-special-background"]).toEqual("#F3F3F3FF");
+
+  themeModel["--sjs-primary-background-500"] = PredefinedColors["light"]["teal"];
+  themeModel["--sjs-primary-background-500"] = PredefinedColors["light"]["teal"];
+  expect(colorsAreEqual(themeModel["--sjs-primary-background-500"], PredefinedColors["light"]["teal"])).toBeTruthy();
+  expect(colorsAreEqual(themeModel["--sjs-special-background"], PredefinedBackgroundColors["light"]["teal"])).toBeTruthy();
+
+  themeModel["--sjs-primary-background-500"] = PredefinedColors["light"]["orchid"];
+  expect(colorsAreEqual(themeModel["--sjs-primary-background-500"], PredefinedColors["light"]["orchid"])).toBeTruthy();
+  expect(colorsAreEqual(themeModel["--sjs-special-background"], PredefinedBackgroundColors["light"]["orchid"])).toBeTruthy();
+
+  themeModel["--sjs-primary-background-500"] = "#fefefe";
+  expect(colorsAreEqual(themeModel["--sjs-primary-background-500"], "#fefefe")).toBeTruthy();
+  expect(colorsAreEqual(themeModel["--sjs-special-background"], PredefinedBackgroundColors["light"]["gray"])).toBeTruthy();
 });

@@ -24,24 +24,23 @@
   color: var(--ctr-editor-content-text-color-placeholder, $foreground-light);
 }
 
-.spg-input:focus,
-.spg-input.spg-dropdown:focus,
-.spg-input.spg-dropdown:focus-within,
+.spg-input:focus:not(:disabled),
+.spg-input.spg-dropdown:focus:not(:disabled),
+.spg-input.spg-dropdown:focus-within:not(:disabled),
 .spg-input-container:focus-within {
   box-shadow: inset 0 0 0 var(--ctr-editor-border-width-focused, 2px) var(--ctr-editor-border-color-focused, $primary);
 }
 
-.spg-input:disabled,
-.spg-input:disabled::placeholder {
-  color: var(--ctr-editor-content-text-color-disabled, $foreground);
-  opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
-  background-color: var(--ctr-editor-background-color-disabled, $background);
+input.spg-input:focus:read-only {
+  box-shadow: inset 0 0 0 var(--ctr-editor-border-width, 1px) var(--ctr-editor-border-color, $border-inside);
 }
 
+.spg-input:disabled,
+.spg-input:disabled::placeholder,
 input.spg-input:read-only,
 input.spg-input:read-only::placeholder {
-  color: $foreground;
-  opacity: 0.25;
+  color: color-mix(in srgb, var(--ctr-editor-content-text-color-disabled, $foreground-dim), transparent calc(100% - 100%*var(--ctr-editor-content-text-opacity-disabled, 0.25)));
+  background-color: var(--ctr-editor-background-color-disabled, $background-dim);
 }
 
 .spg-input[type="color"] {
@@ -137,11 +136,15 @@ input.spg-input:read-only::placeholder {
   }
 }
 
-.spg-input-container__input:disabled {
+.spg-input-container__input:disabled,
+.spg-input-container__input:disabled::placeholder {
   opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
+  color: var(--ctr-editor-content-text-color-disabled, $foreground-dim);
+  background-color: var(--ctr-editor-background-color-disabled, $background-dim);
 }
 
 .spg-input-container__buttons-container {
   display: flex;
   gap: var(--ctr-editor-buttons-gap, calcSize(0.5));
+  align-self: stretch;
 }
