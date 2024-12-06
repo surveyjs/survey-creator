@@ -1109,6 +1109,36 @@ svc-question,
 
   .svc-element__add-new-question {
     margin-top: var(--ctr-survey-panel-add-button-margin-top, calcSize(2));
+    display:flex;
+    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
+    width: auto;
+    height: calcSize(5);
+    line-height: calcSize(5);
+    vertical-align: baseline;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+
+    border: none;
+    box-shadow: none;
+    padding: calcSize(0.5) calcSize(2);
+
+    &:hover {
+      outline: none;
+    }
+
+    .svc-add-new-item-button__text {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      justify-content: center;
+      margin: calcSize(1) calcSize(3);
+      line-height: var(--sjs-line-height-x2, #{calcSize(2)});
+      color: var(--ctr-survey-action-button-text-color-positive, $primary);
+      text-wrap: nowrap;
+    }
   }
 
   .svc-element__add-new-question-icon {
