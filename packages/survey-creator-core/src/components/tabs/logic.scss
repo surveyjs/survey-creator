@@ -98,7 +98,7 @@
 .sl-table__cell .svc-action-button:hover:enabled,
 .sl-table__cell .svc-action-button:focus:enabled {
   @include ctrMediumBoldFont;
-
+  --thm-logic-header-max-height: var(--ctr-font-medium-line-height, var(--ctr-medium-bold-line-height, calcSize(4)));
   background: transparent;
   //color: $foreground;
   outline: none;
@@ -107,7 +107,7 @@
   border-radius: 0;
   color: $foreground-dim;
   box-sizing: content-box;
-  max-height: calc(3 * var(--ctr-font-medium-line-height, var(--ctr-medium-bold-line-height, #{calcSize(4)})));;
+  max-height: calc(3 * var(--thm-logic-header-max-height));;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
