@@ -49,6 +49,7 @@ export function updateMatrixRemoveAction(
   if (!action) return;
   action.component = "sv-action-bar-item";
   action.iconName = "icon-delete";
+  action.iconSize = "auto";
   action.innerCss = "spg-action-button spg-action-button--danger";
   action.title = question.removeRowText;
   action.showTitle = false;
