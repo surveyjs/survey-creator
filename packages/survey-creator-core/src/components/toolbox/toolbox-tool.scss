@@ -136,6 +136,8 @@
   padding-inline-end: calcSize(1.5);
   white-space: nowrap;
   color: var(--ctr-toolbox-item-text-color, $foreground-light);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .svc-toolbox__tool:hover,
