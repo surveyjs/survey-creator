@@ -106,10 +106,15 @@
   flex: 0 0;
   display: flex;
   align-items: center;
+  padding-inline-start: var(--ctr-editor-padding-left, 0);
 
   .spg-question__title {
-    padding: calcSize(1) calcSize(2);
-    border-right: 1px solid $border;
+    padding: 
+      var(--ctr-editor-label-padding-top, calcSize(1)) 
+      var(--ctr-editor-label-padding-right, calcSize(2)) 
+      var(--ctr-editor-label-padding-bottom, calcSize(1)) 
+      var(--ctr-editor-label-padding-left, calcSize(2));
+    border-inline-end: 1px solid $border;
     display: inline-block;
     color: var(--ctr-editor-label-color, $foreground-dim-light);
     white-space: nowrap;
