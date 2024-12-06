@@ -61,6 +61,10 @@ input.spg-input:read-only::placeholder {
     var(--ctr-editor-button-padding-bottom, calcSize(1)) var(--ctr-editor-button-padding-left, calcSize(1));
   line-height: 0;
   transition: background $creator-transition-duration, opacity $creator-transition-duration;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:focus,
   &:hover {
