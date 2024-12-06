@@ -111,6 +111,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!!showDetailAction) {
       showDetailAction.component = "sv-action-bar-item";
       showDetailAction.iconName = this.getShowDetailActionIconName(row);
+      showDetailAction.iconSize = "auto";
       showDetailAction.showTitle = false;
       showDetailAction.location = "end";
       showDetailAction.ariaExpanded = row.isDetailPanelShowing;
@@ -138,6 +139,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     options.titleActions.push({
       id: "add-item",
       iconName: "icon-add",
+      iconSize: "auto",
       title: question.addRowText,
       showTitle: false,
       action: () => this.addItem(creator, obj, question),

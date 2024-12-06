@@ -146,4 +146,5 @@ input.spg-input:read-only::placeholder {
 .spg-input-container__buttons-container {
   display: flex;
   gap: var(--ctr-editor-buttons-gap, calcSize(0.5));
+  align-self: stretch;
 }
