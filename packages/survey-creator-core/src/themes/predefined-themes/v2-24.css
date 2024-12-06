@@ -1170,7 +1170,7 @@
   --ctr-search-count-text-color: var(--sjs-layer-1-foreground-50);
   --ctr-search-count-text-margin-right: var(--sjs-spacing-x1);
   --ctr-property-grid-search-count-text-color: var(--sjs-layer-3-foreground-50);
-  --ctr-scrollbar-background-color: var(--sjs-border-25-overlay);
+  --ctr-scrollbar-background-color: var(--sjs-border-10);
   --ctr-scrollbar-corner-radius: var(--sjs-corner-radius-round);
   --ctr-scrollbar-padding-horizontal: var(--sjs-spacing-x05);
   --ctr-scrollbar-padding-vertical: var(--sjs-spacing-x05);
