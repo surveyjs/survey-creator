@@ -1,4 +1,4 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
@@ -12,6 +12,8 @@ require("./designer.scss");
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
 
 export class TabDesignerViewModel extends Base {
+  private minSurfaceScaling = 20;
+  private maxSurfaceScaling = 200;
   private cssUpdater: ComputedUpdater;
   private pagesControllerValue: PagesController;
   private scaleCssVariables = {};
@@ -123,55 +125,56 @@ export class TabDesignerViewModel extends Base {
     };
     this.surfaceToolbar.cssClasses = defaultActionBarCss;
 
-    const surfaceToolbarItems = [];
+    const surfaceToolbarItems: Array<IAction> = [];
     if (this.creator.showCreatorThemeSettings) {
-      surfaceToolbarItems.push({
+      surfaceToolbarItems.push(<IAction>{
         id: "zoomIn",
         locTooltipName: "ed.zoomInTooltip",
         iconName: "icon-zoomin-24x24",
         iconSize: "auto",
         action: () => { this.scalingSurface(this.surfaceScale + 10); }
       });
-      surfaceToolbarItems.push({
-        id: "zoomIn",
+      surfaceToolbarItems.push(<IAction>{
+        id: "zoomOut",
         locTooltipName: "ed.zoomOutTooltip",
         iconName: "icon-zoomout-24x24",
         iconSize: "auto",
         action: () => { this.scalingSurface(this.surfaceScale - 10); }
       });
     }
-    if (this.creator.expandCollapseButtonVisibility != "never") {
-      surfaceToolbarItems.push({
-        id: "collapseAll",
-        locTooltipName: "ed.collapseAllTooltip",
-        iconName: "icon-collapseall-24x24",
-        iconSize: "auto",
-        // needSeparator: this.creator.showCreatorThemeSettings,
-        action: () => this.creator.expandCollapseManager.expandCollapseElements("collapse-all", true)
-      });
-      surfaceToolbarItems.push({
-        id: "expandAll",
-        locTooltipName: "ed.expandAllTooltip",
-        iconName: "icon-expandall-24x24",
-        iconSize: "auto",
-        action: () => this.creator.expandCollapseManager.expandCollapseElements("expand-all", false)
-      });
-      surfaceToolbarItems.push({
-        id: "lockQuestions",
-        locTooltipName: "ed.lockQuestionsTooltip",
-        iconName: "icon-questionlock-24x24",
-        iconSize: "auto",
-        action: (action) => {
-          action.active = !action.active;
-          this.creator.expandCollapseManager.lockQuestions(action.active);
-        }
-      });
-    }
+    surfaceToolbarItems.push({
+      id: "collapseAll",
+      locTooltipName: "ed.collapseAllTooltip",
+      iconName: "icon-collapseall-24x24",
+      iconSize: "auto",
+      needSeparator: this.creator.showCreatorThemeSettings,
+      visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
+      action: () => this.creator.expandCollapseManager.expandCollapseElements("collapse-all", true)
+    });
+    surfaceToolbarItems.push({
+      id: "expandAll",
+      locTooltipName: "ed.expandAllTooltip",
+      iconName: "icon-expandall-24x24",
+      iconSize: "auto",
+      visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
+      action: () => this.creator.expandCollapseManager.expandCollapseElements("expand-all", false)
+    });
+    surfaceToolbarItems.push({
+      id: "lockQuestions",
+      locTooltipName: "ed.lockQuestionsTooltip",
+      iconName: "icon-questionlock-24x24",
+      iconSize: "auto",
+      visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
+      action: (action) => {
+        action.active = !action.active;
+        this.creator.expandCollapseManager.lockQuestions(action.active);
+      }
+    });
     this.surfaceToolbar.setItems(surfaceToolbarItems);
   }
 
   private scalingSurface(scaleFactor: number): void {
-    if (scaleFactor <= 20 || scaleFactor > 200) return;
+    if (scaleFactor <= this.minSurfaceScaling || scaleFactor >= this.maxSurfaceScaling) return;
 
     this.surfaceScale = scaleFactor;
     Object.keys(this.unitDictionary).forEach(key => {
