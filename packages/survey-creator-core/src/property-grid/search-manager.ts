@@ -107,7 +107,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
       component: "sv-action-bar-item",
       title: getLocString("ed.nextFocus"),
       showTitle: false,
-      iconSize: 16,
+      iconSize: "auto",
       innerCss: "svc-search__bar-item",
       visible: <any>new ComputedUpdater(() => this.allMatches.length > 1),
       action: () => {
@@ -123,7 +123,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
       component: "sv-action-bar-item",
       title: getLocString("ed.prevFocus"),
       showTitle: false,
-      iconSize: 16,
+      iconSize: "auto",
       innerCss: "svc-search__bar-item",
       visible: <any>new ComputedUpdater(() => this.allMatches.length > 1),
       action: () => {
