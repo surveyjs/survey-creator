@@ -201,7 +201,7 @@ export class PreviewViewModel extends Base {
       if (!page.isVisible) {
         pageItem.css = "svc-page-invisible";
         pageItem.markerIconName = "icon-invisible-items";
-        pageItem.markerIconSize = 24;
+        (pageItem as any).markerIconSize = 24;
       }
       pages.push(pageItem);
     }

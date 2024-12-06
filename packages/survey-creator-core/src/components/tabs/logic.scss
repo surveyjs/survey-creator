@@ -70,6 +70,11 @@
   }
 }
 
+.sl-table__remove-button .sv-action-bar-item__icon {
+  width: var(--ctr-survey-action-button-icon-width, calcSize(3));
+  height: var(--ctr-survey-action-button-icon-height, calcSize(3));
+}
+
 .sl-table__cell .sv-action-bar-item__icon {
   opacity: 0;
   transition: opacity $creator-transition-duration;
