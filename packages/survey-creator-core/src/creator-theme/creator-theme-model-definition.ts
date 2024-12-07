@@ -9,7 +9,6 @@ const creatorThemeModelProperties: ISurveyPropertiesDefinition = {
       { name: "--sjs-secondary-background-500", index: 20, tab: "accentColors" },
       { name: "fontScale", index: 40, tab: "scaling" },
       { name: "scale", index: 50, tab: "scaling" },
-      { name: "surfaceScale", index: 60, tab: "scaling" },
     ],
     tabs: [
       { name: "accentColors", "parent": "general", index: 20 },
