@@ -1307,6 +1307,11 @@ svc-question,
     overflow-x: auto;
   }
 
+  .sd-question--description-under-input .sd-question__content {
+    margin-bottom: calcSize(-1);
+    padding-bottom: calcSize(1);
+  }
+
   .sd-composite {
     .sd-question__content {
       margin-left: 0;

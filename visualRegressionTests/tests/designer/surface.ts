@@ -2379,3 +2379,31 @@ test("Matrix Dynamiv with rows drad-drop", async (t) => {
     await takeElementScreenshot("design-surface-matrixdynamic-with-drag-drop.png", Selector(".svc-tab-designer .sd-table-wrapper"), t, comparer);
   });
 });
+
+test("Question description bottom", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1024, 800);
+
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1",
+              "description": "Description",
+              "descriptionLocation": "underInput"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    await t.click(Selector(".sv-string-editor").withText("Description"));
+    const QRoot = Selector(".svc-question__adorner").filterVisible();
+    await takeElementScreenshot("surface-question-bottom-description.png", QRoot, t, comparer);
+  });
+});
