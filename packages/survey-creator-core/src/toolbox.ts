@@ -480,7 +480,8 @@ export class QuestionToolbox
       },
       getEnterOptions: () => {
         return {
-          cssClass: "svc-toolbox__panel--enter"
+          cssClass: "svc-toolbox__panel--enter",
+          onBeforeRunAnimation: (el) => { el.style.setProperty("--animation-width", getComputedStyle(el).width); }
         };
       }
     };

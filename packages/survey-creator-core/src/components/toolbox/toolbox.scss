@@ -50,7 +50,7 @@
   flex-direction: column;
   border-inline-end: var(--ctr-toolbox-border-width-right, 0px) solid var(--ctr-toolbox-border-color, transparent);
   background: var(--ctr-toolbox-background-color, $background-dim);
-  min-width: var(--toolbox-width);
+  width: var(--toolbox-width);
 }
 
 .svc-toolbox {
@@ -76,7 +76,6 @@
   .svc-toolbox__panel {
     overflow: visible;
     width: var(--toolbox-width-compact);
-    min-width: var(--toolbox-width-compact);
   }
   .svc-scroll__scroller {
     width: 100vw;
@@ -134,7 +133,7 @@
   .svc-toolbox__panel {
     z-index: 200;
     width: fit-content;
-    min-width: var(--ctr-toolbox-min-width, calcSize(32));
+    //min-width: var(--ctr-toolbox-min-width, calcSize(32));
     position: relative;
     box-shadow:
       var(--ctr-toolbox-shadow-floating-2-offset-x, 0px) var(--ctr-toolbox-shadow-floating-2-offset-y, 8px)

@@ -1,9 +1,9 @@
 @import "../../variables.scss";
-$svc-toolbox-fade-in-duration: var(--sjs-svc-toolbox-fade-in-duration, 250ms);
-$svc-toolbox-move-in-duration: var(--sjs-svc-toolbox-move-in-duration, 250ms);
-$svc-toolbox-fade-in-delay: var(--sjs-svc-toolbox-fade-in-delay, 100ms);
-$svc-toolbox-fade-out-duration: var(--sjs-svc-toolbox-fade-out-duration, 250ms);
-$svc-toolbox-move-out-duration: var(--sjs-svc-toolbox-move-out-duration, 250ms);
+$svc-toolbox-fade-in-duration: var(--sjs-svc-toolbox-fade-in-duration, 2500ms);
+$svc-toolbox-move-in-duration: var(--sjs-svc-toolbox-move-in-duration, 2500ms);
+$svc-toolbox-fade-in-delay: var(--sjs-svc-toolbox-fade-in-delay, 1000ms);
+$svc-toolbox-fade-out-duration: var(--sjs-svc-toolbox-fade-out-duration, 2500ms);
+$svc-toolbox-move-out-duration: var(--sjs-svc-toolbox-move-out-duration, 2500ms);
 $svc-toolbox-move-out-delay: var(--sjs-svc-toolbox-move-out-delay, 0ms);
 
 $cubic-ease-out: cubic-bezier(0.33, 1, 0.68, 1);
@@ -24,7 +24,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     overflow: hidden;
   }
   to {
-    width: var(--toolbox-width);
+    width: var(--animation-width);
     overflow: hidden;
   }
 }
