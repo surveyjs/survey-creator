@@ -12,10 +12,6 @@ export class QuestionColorModel extends QuestionTextModel {
       this.updateChoices();
     });
   }
-  protected setNewValue(newValue: any): void {
-    this.resetRenderedValue();
-    super.setNewValue(this.getCorrectedValue(newValue));
-  }
   private getCorrectedValue(newValue: string): string {
     if(newValue == undefined || newValue == null || (this.allowEmptyValue && !newValue)) return newValue;
     newValue = parseColor(newValue ?? "").color;
@@ -44,6 +40,10 @@ export class QuestionColorModel extends QuestionTextModel {
   protected isNewValueEqualsToValue(newValue: any): boolean {
     if (super.isNewValueEqualsToValue(newValue) || this.isTwoValueEquals(newValue, this.value, true, true)) return true;
     else return false;
+  }
+  protected setNewValue(newValue: any): void {
+    this.resetRenderedValue();
+    super.setNewValue(this.getCorrectedValue(newValue));
   }
   protected setPropertyValueDirectly(name: string, val: any): void {
     super.setPropertyValueDirectly(name, val);
@@ -93,9 +93,6 @@ export class QuestionColorModel extends QuestionTextModel {
   }
   public get isInputTextUpdate(): boolean {
     return false;
-  }
-  public onSurveyValueChanged(newValue: any): void {
-    super.onSurveyValueChanged(newValue);
   }
   private _dropdownAction: Action;
 
