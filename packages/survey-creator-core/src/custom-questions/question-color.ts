@@ -47,7 +47,7 @@ export class QuestionColorModel extends QuestionTextModel {
   }
   protected setPropertyValueDirectly(name: string, val: any): void {
     super.setPropertyValueDirectly(name, val);
-    if(name === "value") {
+    if(["value", "isReadOnly", "allowEmptyValue", "readOnly"].indexOf(name) >= 0) {
       this.resetRenderedValue();
     }
   }
