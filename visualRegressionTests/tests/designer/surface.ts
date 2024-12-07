@@ -2402,7 +2402,7 @@ test("Question description bottom", async (t) => {
     };
     await setJSON(json);
 
-    await t.click(Selector("span").withText("Description"));
+    await t.click(Selector(".sv-string-editor").withText("Description"));
     const QRoot = Selector(".svc-question__adorner").filterVisible();
     await takeElementScreenshot("surface-question-bottom-description.png", QRoot, t, comparer);
   });
