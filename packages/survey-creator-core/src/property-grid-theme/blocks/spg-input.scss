@@ -82,6 +82,10 @@ input.spg-input:read-only::placeholder {
   }
 }
 
+.spg-input-container--multiline .spg-input__edit-button {
+  align-self: flex-end;
+}
+
 .spg-input__edit-button--disabled,
 .spg-input__edit-button:disabled {
   opacity: var(--ctr-editor-button-icon-opacity-disabled, 0.25);
