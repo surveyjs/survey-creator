@@ -45,13 +45,14 @@ test("Check custom color question", () => {
 
   let renderValueChangedLog = "";
   question.onPropertyChanged.add((sender, options) => {
-    if(options.name === "_renderedValue") {
+    if(options.name === "renderedValue") {
       renderValueChangedLog += `-> ${options.newValue}`;
     }
   });
   question.value = "#fea123123";
-  expect(renderValueChangedLog).toBe("-> undefined-> #fea123");
   expect(question.renderedValue).toBe("#FEA123");
+  //expect(renderValueChangedLog).toBe("-> undefined-> #fea123");
+  expect(renderValueChangedLog).toBe("-> undefined");
 });
 
 test("Check custom color question with allowEmptyValue:true", () => {
@@ -116,6 +117,7 @@ test("Check custom color question with survey mergeData", () => {
   question.value = "#FFFFFF";
   expect(question.renderedValue).toBe("#FFFFFF");
   survey.mergeData({ "q1": "#9A2828" });
+  expect(question.value).toBe("#9A2828");
   expect(question.renderedValue).toBe("#9A2828");
 });
 
@@ -168,12 +170,12 @@ test("QuestionColorModel renderedValue always HEX (value from survey)", () => {
   expect(q.renderedValue).toEqual("#010203");
 });
 
-test("QuestionColorModel renderedValue when _renderedValue and value are empty", () => {
+test("QuestionColorModel renderedValue when renderedValue and value are empty", () => {
   let q = new QuestionColorModel("q1");
-  q._renderedValue = "";
+  q.renderedValue = "";
   expect(q.renderedColorValue).toBe("#FFFFFF");
   q = new QuestionColorModel("q1");
-  q._renderedValue = "";
+  q.renderedValue = "";
   q.value = "";
   expect(q.renderedValue).toBe("#000000");
 });

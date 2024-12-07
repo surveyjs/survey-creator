@@ -12,8 +12,11 @@ export class QuestionColorModel extends QuestionTextModel {
       this.updateChoices();
     });
   }
-
-  private getCorrectedValue(newValue: string): string {
+  protected setNewValue(newValue: any): void {
+    super.setNewValue(newValue);
+    this.resetRenderedValue();
+  }
+  protected convertToCorrectValue(newValue: any): any {
     if(newValue == undefined || newValue == null || (this.allowEmptyValue && !newValue)) return newValue;
     newValue = parseColor(newValue ?? "").color;
     if(newValue.indexOf("#") < 0) {
@@ -35,14 +38,18 @@ export class QuestionColorModel extends QuestionTextModel {
     }
     return newValue;
   }
+  private resetRenderedValue(): void {
+    this.resetPropertyValue("renderedValue");
+  }
   protected isNewValueEqualsToValue(newValue: any): boolean {
     if (super.isNewValueEqualsToValue(newValue) || this.isTwoValueEquals(newValue, this.value, true, true)) return true;
     else return false;
   }
-  protected setNewValue(newValue: string): void {
-    this.resetRenderedValue();
-    super.setNewValue(this.getCorrectedValue(newValue));
-    this.updateRenderedValue();
+  protected setPropertyValueDirectly(name: string, val: any): void {
+    super.setPropertyValueDirectly(name, val);
+    if(name === "value") {
+      this.resetRenderedValue();
+    }
   }
   public onBeforeInput(event: InputEvent): void {
     if(!!event.data && !/[\d\w(),#]/.test(event.data)) {
@@ -55,25 +62,21 @@ export class QuestionColorModel extends QuestionTextModel {
   public getType(): string {
     return "color";
   }
-  @property() _renderedValue: string;
-  private resetRenderedValue(): void {
-    this._renderedValue = undefined;
-  }
-  private updateRenderedValue(): void {
-    if(this.value) {
-      const color = parseColor(this.value || "");
-      this._renderedValue = color.color;
-    } else if (this.allowEmptyValue) {
-      this._renderedValue = "";
-    } else {
-      this._renderedValue = DEFAULT_COLOR;
-    }
-  }
   public get renderedValue(): string {
-    if(!this._renderedValue && this._renderedValue !== "") {
-      this.updateRenderedValue();
-    }
-    return this._renderedValue.toUpperCase();
+    const func = (): string => {
+      let res = "";
+      if(this.value) {
+        const color = parseColor(this.value || "");
+        res = color.color || "";
+      } else if (!this.allowEmptyValue) {
+        res = DEFAULT_COLOR;
+      }
+      return res.toUpperCase();
+    };
+    return this.getPropertyValue("renderedValue", undefined, func);
+  }
+  public set renderedValue(val: string) {
+    this.setPropertyValue("renderedValue", val);
   }
   public getSwatchCss() {
     return new CssClassBuilder()
@@ -93,7 +96,6 @@ export class QuestionColorModel extends QuestionTextModel {
   }
   public onSurveyValueChanged(newValue: any): void {
     super.onSurveyValueChanged(newValue);
-    this.updateRenderedValue();
   }
   private _dropdownAction: Action;
 
