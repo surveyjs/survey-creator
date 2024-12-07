@@ -13,10 +13,10 @@ export class QuestionColorModel extends QuestionTextModel {
     });
   }
   protected setNewValue(newValue: any): void {
-    super.setNewValue(newValue);
     this.resetRenderedValue();
+    super.setNewValue(this.getCorrectedValue(newValue));
   }
-  protected convertToCorrectValue(newValue: any): any {
+  private getCorrectedValue(newValue: string): string {
     if(newValue == undefined || newValue == null || (this.allowEmptyValue && !newValue)) return newValue;
     newValue = parseColor(newValue ?? "").color;
     if(newValue.indexOf("#") < 0) {
