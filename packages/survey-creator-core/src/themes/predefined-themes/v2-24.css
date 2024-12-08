@@ -3345,7 +3345,7 @@
   --lbr-matching-connector-height: var(--lbr-size-x150);
   --lbr-tag-box-item-remove-button-icon-width: var(--lbr-font-size-x2);
   --lbr-tag-box-item-remove-button-icon-height: var(--lbr-font-size-x2);
-  --ctr-editor-border-color-highlighted: var(--sjs-layer-1-foreground-75);
+  --ctr-editor-border-color-highlighted: var(--sjs-secondary-background-500);
   --ctr-editor-border-width-highlighed: var(--sjs-stroke-x2);
   --ctr-survey-page-content-margin-top-no-header: var(--lbr-spacing-x1);
   --ctr-survey-question-panel-toolbar-item-background-color-pressed: var(--sjs-layer-1-background-400);
