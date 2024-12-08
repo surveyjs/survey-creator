@@ -5,7 +5,7 @@
       [value]="model.renderedColorValue" (change)="model.onColorInputChange($event)" tabindex="-1" />
   </label>
   <input autocomplete="off" [disabled]="model.isInputReadOnly" [attr.id]="model.inputId"
-    [placeholder]="model.renderedPlaceholder||''" [attr.aria-required]="model.ariaRequired"
+    [attr.placeholder]="model.renderedPlaceholder" [attr.aria-required]="model.ariaRequired"
     [attr.aria-label]="model.ariaLabel" [attr.aria-invalid]="model.ariaInvalid"
     [attr.aria-describedby]="model.ariaDescribedBy" (change)="model.onChange($event)" (keyup)="model.onKeyUp($event)"
     (blur)="model.onBlur($event)" (beforeinput)="model.onBeforeInput($event)" [value]="model.renderedValue"
