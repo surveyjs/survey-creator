@@ -4,6 +4,7 @@
 <!-- /ko -->
 <!-- /ko -->
 <div class="svc-tab-designer" data-bind="css: getRootCss(), click: clickDesigner">
+  <!-- ko component: { name: 'svc-scroll' } -->
   <div class="svc-tab-designer_content">
     <!-- ko if: showPlaceholder -->
     <!-- ko if: (creator.showHeaderInEmptySurvey && creator.allowEditSurveyTitle) -->
@@ -23,7 +24,6 @@
     <!-- /ko -->
 
     <!-- ko if: !showPlaceholder -->
-
     <div
       data-bind="css: designerCss, style:{maxWidth: survey.renderedWidth}, creatorStyle: creator.designTabSurveyThemeVariables">
       <!-- ko if: creator.allowEditSurveyTitle -->
@@ -62,19 +62,25 @@
       <!-- /ko -->
     </div>
 
-    <!-- ko if: creator.showPageNavigator -->
-    <div class="svc-tab-designer__page-navigator">
-      <svc-page-navigator params="controller: pagesController, pageEditMode: creator.pageEditMode">
-      </svc-page-navigator>
-    </div>
-    <!-- /ko -->
-    <!-- ko if: hasToolbar -->
-    <div class="svc-tab-designer__toolbar">
-      <!-- ko component: { name: 'sv-action-bar', params: { model: surfaceToolbar, handleClick: false } } -->
+    <!-- ko ifnot: creator.isMobileView -->
+    <div class="svc-tab-designer__tools">
+      <!-- ko if: creator.showPageNavigator -->
+      <div class="svc-tab-designer__page-navigator">
+        <svc-page-navigator params="controller: pagesController, pageEditMode: creator.pageEditMode">
+        </svc-page-navigator>
+      </div>
+      <!-- /ko -->
+      <!-- ko if: hasToolbar -->
+      <div class="svc-tab-designer__toolbar">
+        <!-- ko component: { name: 'sv-action-bar', params: { model: surfaceToolbar, handleClick: false } } -->
+        <!-- /ko -->
+      </div>
       <!-- /ko -->
     </div>
     <!-- /ko -->
     <!-- /ko -->
   </div>
+  <!-- /ko -->
+
 </div>
 <!-- /ko -->

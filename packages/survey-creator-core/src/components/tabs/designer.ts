@@ -250,7 +250,8 @@ export class TabDesignerViewModel extends Base {
         return {
           onBeforeRunAnimation: prepareElementForVerticalAnimation,
           cssClass: "svc-page--leave",
-          onAfterRunAnimation: cleanHtmlElementAfterAnimation };
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation
+        };
       },
       isAnimationEnabled: () => {
         return this.animationAllowed;
@@ -262,7 +263,7 @@ export class TabDesignerViewModel extends Base {
       getRerenderEvent: () => this.onElementRerendered,
       onCompareArrays(options) {
         const droppedPage = options.mergedItems.filter(page => page["draggedFrom"] !== undefined)[0];
-        if(droppedPage) {
+        if (droppedPage) {
           options.reorderedItems = [];
           options.addedItems = [droppedPage];
           const ghostPage = new PageModel();
@@ -282,7 +283,7 @@ export class TabDesignerViewModel extends Base {
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;
-    if (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage" || this.hasToolbar) {
+    if (!this.creator.isMobileView && (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage" || this.hasToolbar)) {
       rootCss += " svc-tab-designer--with-page-navigator";
     }
     if (this.showPlaceholder) {
