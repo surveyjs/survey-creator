@@ -130,8 +130,6 @@ svc-question {
 
   .svc-survey-element-toolbar-item__icon {
     padding: 0;
-    width: var(--ctr-survey-question-panel-toolbar-item-icon-container-width, calcSize(3));
-    height: var(--ctr-survey-question-panel-toolbar-item-icon-container-height, calcSize(3));
   }
 }
 
