@@ -31,22 +31,28 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 @keyframes toolboxSeparatorSearchMoveIn {
   from {
-    width: var(--thm-toolbox-separator-width-compact, calcSize(5));
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, calcSize(2));
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, calcSize(2));
+
     overflow: hidden;
   }
   to {
-    width: var(--toolbox-width);
+    padding-inline-end: 0;
+    padding-inline-start: 0;
     overflow: hidden;
   }
 }
 
 @keyframes toolboxSeparatorMoveIn {
   from {
-    width: var(--thm-toolbox-separator-width-compact, calcSize(9));
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, calcSize(2));
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, calcSize(2));
     overflow: hidden;
   }
   to {
-    width: var(--thm-toolbox-separator-width, calcSize(9));
+    //width: var(--thm-toolbox-separator-width, calcSize(9));
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right, calc(100% - 4 * #{$base-unit}));
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left, calcSize(2));
     overflow: hidden;
   }
 }
