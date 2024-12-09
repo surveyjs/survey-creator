@@ -177,6 +177,7 @@ export class TabDesignerViewModel extends Base {
     if (scaleFactor <= this.minSurfaceScaling || scaleFactor >= this.maxSurfaceScaling) return;
 
     this.surfaceScale = scaleFactor;
+    this.creator.setDesignerSurveyScale(scaleFactor);
     Object.keys(this.unitDictionary).forEach(key => {
       this.scaleCssVariables[key] = (this.unitDictionary[key] * scaleFactor / 100) + "px";
     });
