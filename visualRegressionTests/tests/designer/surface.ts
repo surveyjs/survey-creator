@@ -2407,3 +2407,52 @@ test("Question description bottom", async (t) => {
     await takeElementScreenshot("surface-question-bottom-description.png", QRoot, t, comparer);
   });
 });
+
+test("Scaling design surface", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => {
+      window["creator"].showCreatorThemeSettings = true;
+      window["creator"].showToolbox = false;
+      window["creator"].showSidebar = false;
+    })();
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            { "type": "rating", "name": "question1" },
+            {
+              "type": "dropdown",
+              "name": "question2",
+              "choices": ["Item 1", "Item 2", "Item 3"]
+            },
+            { "type": "boolean", "name": "question3" },
+            { "type": "file", "name": "question4" },
+            {
+              "type": "imagepicker",
+              "name": "question5",
+              "choices": [{ "value": "Image 1", "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg" }],
+              "imageFit": "cover"
+            },
+            {
+              "type": "panel",
+              "name": "panel1"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    const surfaceSelector = Selector(".svc-tab-designer_content > div");
+    const qContent = Selector(".svc-question__content");
+    await t.click(qContent, { offsetX: 5, offsetY: 5 });
+
+    await t.resizeWindow(1024, 3700);
+    for (let i = 0; i < 3; i++) { await t.click(Selector("#zoomIn").find("button")); }
+    await takeElementScreenshot("design-surface-zoom-in.png", surfaceSelector, t, comparer);
+
+    for (let i = 0; i < 8; i++) { await t.click(Selector("#zoomOut").find("button")); }
+    await t.resizeWindow(600, 1900);
+    await takeElementScreenshot("design-surface-zoom-out.png", surfaceSelector, t, comparer);
+  });
+});

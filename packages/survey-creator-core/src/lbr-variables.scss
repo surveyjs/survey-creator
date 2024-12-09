@@ -2,8 +2,8 @@ $lbr-size-unit: var(--lbr-size-unit, 8px);
 $lbr-spacing-unit: var(--lbr-spacing-unit, 8px);
 $lbr-corner-radius-unit: var(--lbr-corner-radius-unit, 8px);
 $lbr-stroke-unit: var(--lbr-stroke-unit, 1px);
-$font-unit: var(--lbr-font-unit, 8px);
-$line-height-unit: var(--lbr-line-height-unit, 8px);
+$lbr-font-unit: var(--lbr-font-unit, 8px);
+$lbr-line-height-unit: var(--lbr-line-height-unit, 8px);
 
 @mixin lbrDefaultFont {
   font-family: $font-family;
