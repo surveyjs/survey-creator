@@ -23,25 +23,17 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   private backgroundColorCalculator = new ColorCalculator();
 
   unitDictionary: { [index: string]: number } = {
-    "--ctr-surface-base-unit": 8,
     "--ctr-font-unit": 8,
     "--ctr-line-height-unit": 8,
     "--ctr-size-unit": 8,
     "--ctr-spacing-unit": 8,
     "--ctr-corner-radius-unit": 8,
     "--ctr-stroke-unit": 1,
-    "--lbr-font-unit": 8,
-    "--lbr-line-height-unit": 8,
-    "--lbr-size-unit": 8,
-    "--lbr-spacing-unit": 8,
-    "--lbr-corner-radius-unit": 8,
-    "--lbr-stroke-unit": 1,
   }
 
   @property() themeName: string = CreatorThemeModel.defautlThemeName;
   @property() scale: number;
   @property() fontScale: number;
-  @property() surfaceScale: number;
   @property() isLight: boolean = true;
 
   public onThemeSelected = new EventBase<CreatorThemeModel, { theme: ICreatorTheme }>();
@@ -162,7 +154,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.updateColorPropertiesDependentOnBaseColor(this.backgroundColorCalculator, newValue, "--sjs-special-background", "--sjs-special-haze", "--sjs-special-glow");
     } else if (name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(name, newValue);
-    } else if (name == "fontScale" || name == "scale" || name == "surfaceScale") {
+    } else if (name == "fontScale" || name == "scale") {
       this.scalePropertiesChanged(name, newValue);
     }
   }
@@ -174,15 +166,6 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.scalingProperties("--ctr-size-unit", newValue);
       this.scalingProperties("--ctr-spacing-unit", newValue);
       this.scalingProperties("--ctr-corner-radius-unit", newValue);
-
-    } else if (propertyName == "surfaceScale") {
-      this.scalingProperties("--ctr-surface-base-unit", newValue);
-      this.scalingProperties("--lbr-font-unit", newValue);
-      this.scalingProperties("--lbr-line-height-unit", newValue);
-      this.scalingProperties("--lbr-size-unit", newValue);
-      this.scalingProperties("--lbr-spacing-unit", newValue);
-      this.scalingProperties("--lbr-corner-radius-unit", newValue);
-      this.scalingProperties("--lbr-stroke-unit", newValue);
     }
   }
   private scalingProperties(cssName: string, newValue: number) {
@@ -203,15 +186,6 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.scaleValue("--ctr-spacing-unit", this.scale);
       this.scaleValue("--ctr-corner-radius-unit", this.scale);
     }
-    if (this.surfaceScale !== undefined) {
-      this.scaleValue("--ctr-surface-base-unit", this.surfaceScale);
-      this.scaleValue("--lbr-font-unit", this.surfaceScale);
-      this.scaleValue("--lbr-line-height-unit", this.surfaceScale);
-      this.scaleValue("--lbr-size-unit", this.surfaceScale);
-      this.scaleValue("--lbr-spacing-unit", this.surfaceScale);
-      this.scaleValue("--lbr-corner-radius-unit", this.surfaceScale);
-      this.scaleValue("--lbr-stroke-unit", this.surfaceScale);
-    }
   }
   private getScaleFactor(cssName: string): number {
     return !!this[cssName] ? roundTo2Decimals(parseFloat(this[cssName]) * 100 / this.unitDictionary[cssName]) : undefined;
@@ -221,7 +195,6 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     try {
       this.fontScale = this.getScaleFactor("--ctr-font-unit");
       this.scale = this.getScaleFactor("--ctr-size-unit");
-      this.surfaceScale = this.getScaleFactor("--ctr-surface-base-unit");
     } finally {
       this.blockThemeChangedNotifications -= 1;
     }
@@ -425,28 +398,6 @@ Serializer.addProperties("creatortheme", [
         editor.min = 0;
         editor.step = 5;
         editor.title = getLocString("creatortheme.userInterfaceBaseUnit");
-        editor.titleLocation = "left";
-        editor.descriptionLocation = "hidden";
-      }
-    }
-  }, {
-    name: "--ctr-surface-base-unit",
-    default: "8px",
-    visible: false,
-  }, {
-    type: "spinedit",
-    name: "surfaceScale",
-    isSerializable: false,
-    default: 100,
-    enableIf: (obj: CreatorThemeModel): boolean => {
-      return !obj || obj.themeName !== CreatorThemeModel.defautlThemeName;
-    },
-    onPropertyEditorUpdate: function (obj: any, editor: any) {
-      if (!!editor) {
-        editor.unit = "%";
-        editor.min = 0;
-        editor.step = 5;
-        editor.title = getLocString("creatortheme.surfaceScale");
         editor.titleLocation = "left";
         editor.descriptionLocation = "hidden";
       }
