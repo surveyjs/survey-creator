@@ -26,6 +26,17 @@
               :survey="model.creator.survey"
             ></SvComponent>
           </div>
+        </div>
+      </template>
+
+      <template v-if="!model.showPlaceholder">
+        <div
+          :class="model.designerCss"
+          :style="[
+            { maxWidth: model.survey.renderedWidth },
+            model.surveyThemeVariables,
+          ]"
+        >
           <div
             class="svc-designer__placeholder-container"
             :data-sv-drop-target-survey-element="'newGhostPage'"

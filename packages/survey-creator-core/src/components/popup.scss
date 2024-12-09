@@ -158,21 +158,23 @@
     .sv-list__item-icon use {
       fill: var(--ctr-list-item-icon-color-selected, $background);
     }
+  }
 
-    &.sv-list__item--group {
-      & > .sv-list__item-body {
-        background: var(--ctr-list-item-background-color-selected-submenu, $primary-light);
-        color: var(--ctr-list-item-text-color-selected-submenu, $foreground);
-        font-weight: 400;
-      }
+  .sv-list__item--group-selected,
+  .sv-list__item--group-selected:hover,
+  .sv-list__item--group-selected:focus {
+    & > .sv-list__item-body {
+      background: var(--ctr-list-item-background-color-selected-submenu, $primary-light);
+      color: var(--ctr-list-item-text-color-selected-submenu, $foreground);
+      font-weight: 400;
+    }
 
-      .sv-list__item-icon use {
-        fill: var(--ctr-list-item-icon-color-selected-submenu, $foreground-light);
-      }
+    .sv-list__item-icon use {
+      fill: var(--ctr-list-item-icon-color-selected-submenu, $foreground-light);
+    }
 
-      .sv-list-item__marker-icon use {
-        fill: var(--ctr-list-item-submenu-arrow-color-selected-item-submenu, $foreground-light);
-      }
+    .sv-list-item__marker-icon use {
+      fill: var(--ctr-list-item-submenu-arrow-color-selected-item-submenu, $foreground-light);
     }
   }
 

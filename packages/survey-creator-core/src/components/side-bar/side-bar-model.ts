@@ -24,11 +24,6 @@ export class SidebarModel extends Base {
   @property({ defaultValue: false }) expandedManually: boolean;
   @property() hasVisiblePages: boolean;
   @property({ defaultValue: false }) flyoutMode: boolean;
-  @property({
-    onSet: (val, target: SidebarModel) => {
-      target.setActivePage(target.pages.filter(page => page.id === val)[0]);
-    }
-  }) activePage: string;
   @property() hideSideBarVisibilityControlActions: boolean;
 
   @property() sideAreaComponentName: string;
@@ -186,7 +181,11 @@ export class SidebarModel extends Base {
     this.visible = this.creator.showSidebar;
     this.createActions();
   }
-
+  public get activePage(): string { return this.getPropertyValue("activePage"); }
+  public set activePage(val: string) {
+    this.setPropertyValue("activePage", val);
+    this.setActivePage(this.pages.filter(page => page.id === val)[0]);
+  }
   public getActivePage(): SidebarPageModel {
     return this._activePage;
   }

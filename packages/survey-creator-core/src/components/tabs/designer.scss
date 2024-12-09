@@ -205,4 +205,17 @@ svc-tab-designer {
 .svc-tab-designer__surface-toolbar {
   gap: var(--ctr-surface-toolbar-gap, calcSize(1));
   flex-direction: column;
+
+  .sv-action-bar-separator {
+    background: var(--ctr-separator-color, $border);
+    height: var(--ctr-separator-width, 1px);
+    width: var(--ctr-page-navigator-button-icon-width, calcSize(1));
+    padding: 0px var(--ctr-separator-margin-vertical-small, calcSize(1));
+    margin-bottom: var(--ctr-surface-toolbar-gap, calcSize(1));
+    margin-right: 0;
+  }
+
+  .sv-action__content {
+    flex-direction: column;
+  }
 }

@@ -24,8 +24,8 @@
     <!-- /ko -->
 
     <!-- ko if: !showPlaceholder -->
-    <div
-      data-bind="css: designerCss, style:{maxWidth: survey.renderedWidth}, creatorStyle: creator.designTabSurveyThemeVariables">
+
+    <div data-bind="css: designerCss, style:{maxWidth: survey.renderedWidth}, creatorStyle: surveyThemeVariables">
       <!-- ko if: creator.allowEditSurveyTitle -->
       <div class="svc-designer-header">
         <!-- ko template: { name: 'survey-header', data: survey } -->
