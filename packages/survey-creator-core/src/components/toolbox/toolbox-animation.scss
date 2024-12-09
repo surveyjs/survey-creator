@@ -82,7 +82,9 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     animation-name: toolboxFadeIn;
     animation-fill-mode: forwards;
     opacity: 0;
+    text-overflow: initial;
   }
+  min-width: 0;
 }
 .svc-toolbox__panel--enter {
   --fade-animation-duration: #{$svc-toolbox-fade-in-duration};

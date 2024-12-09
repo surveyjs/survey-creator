@@ -50,7 +50,7 @@
   flex-direction: column;
   border-inline-end: var(--ctr-toolbox-border-width-right, 0px) solid var(--ctr-toolbox-border-color, transparent);
   background: var(--ctr-toolbox-background-color, $background-dim);
-  width: var(--toolbox-width);
+  min-width: var(--toolbox-width);
 }
 
 .svc-toolbox {
