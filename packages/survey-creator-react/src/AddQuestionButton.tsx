@@ -1,15 +1,12 @@
 import * as React from "react";
-import { Action, Base, IAction, PageModel, SurveyModel } from "survey-core";
+import { Action } from "survey-core";
 import {
   attachKey2click,
   Popup,
-  SurveyActionBar,
   ReactElementFactory,
-  SurveyPage,
   SvgIcon,
   SurveyElementBase
 } from "survey-react-ui";
-import { ReactMouseEvent } from "./events";
 
 export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action, buttonClass?: string, renderPopup?: boolean }, any> {
   public get model() {
@@ -41,24 +38,28 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
   protected renderElement(): JSX.Element {
     const addButtonClass = this.props.buttonClass || "svc-btn";
     return <>
-      {attachKey2click(<div
+      <div
         className={"svc-element__add-new-question " + addButtonClass}
-        onClick={(e) => {
-          e.stopPropagation();
-          this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
-        }}
         onMouseOver={(e) => this.model.hoverStopper && this.model.hoverStopper(e.nativeEvent, e.currentTarget)}
       >
-        <SvgIcon
-          className={"svc-panel__add-new-question-icon"}
-          iconName={"icon-add_24x24"}
-          size={"auto"}
-        ></SvgIcon>
-        <span className="svc-add-new-item-button__text">
-          {this.model.addNewQuestionText}
-        </span>
+        {attachKey2click(<button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            this.model.addNewQuestion(this.model, e);
+          }}
+        >
+          <SvgIcon
+            className={"svc-panel__add-new-question-icon"}
+            iconName={"icon-add_24x24"}
+            size={"auto"}
+          ></SvgIcon>
+          <span className="svc-add-new-item-button__text">
+            {this.model.addNewQuestionText}
+          </span>
+        </button>)}
         {this.props.renderPopup !== false ? this.renderTypeSelector() : null}
-      </div>)}
+      </div>
       {this.props.renderPopup === false ? this.renderTypeSelector() : null}
     </>;
   }
