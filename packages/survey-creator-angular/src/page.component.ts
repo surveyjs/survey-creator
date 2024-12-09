@@ -7,7 +7,7 @@ import { CreatorModelComponent } from "./creator-model.component";
 @Component({
   selector: "svc-page",
   templateUrl: "./page.component.html",
-  styles: []
+  styles: [":host { display: none; }"]
 })
 export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   @Input() model!: PageModel;
