@@ -3859,7 +3859,7 @@ export class SurveyCreatorModel extends Base
   }
   public setDesignerSurveyScale(scale: number) {
     if (scale <= 0) return;
-    this.responsivityManager.updateSurveyActualWidth();
+    this.responsivityManager?.updateSurveyActualWidth();
     this.survey.widthScale = scale;
   }
   @property({ defaultValue: false }) showHeaderInEmptySurvey;
