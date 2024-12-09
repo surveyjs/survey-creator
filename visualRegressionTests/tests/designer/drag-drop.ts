@@ -815,3 +815,46 @@ test("Drag indicator for custom widget", async (t) => {
     await takeElementScreenshot("drag-drop-over-custom-widget.png", Selector(".svc-page").nth(0), t, comparer);
   });
 });
+
+test("Drag Drop Indicator: Inside Panel: Rows", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 500);
+
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel1",
+              "elements": [
+                {
+                  "type": "text",
+                  "name": "question1"
+                },
+                {
+                  "type": "text",
+                  "name": "question2",
+                  "startWithNewLine": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    await patchDragDropToDisableDrop();
+
+    const panelRow = Selector(".sd-row__panel");
+    const CheckboxItem = Selector("[aria-label='Checkboxes']");
+    await t
+      .hover(CheckboxItem)
+      .dragToElement(CheckboxItem, panelRow, { speed: 0.5, destinationOffsetY: 0, destinationOffsetX: 50 });
+
+    await takeElementScreenshot("drag-drop-indicator-inside-panel-rows.png", Selector(".svc-question__content--panel"), t, comparer);
+  });
+});
