@@ -177,6 +177,7 @@ export class TabDesignerViewModel extends Base {
     if (scaleFactor <= this.minSurfaceScaling || scaleFactor >= this.maxSurfaceScaling) return;
 
     this.surfaceScale = scaleFactor;
+    this.creator.setDesignerSurveyScale(scaleFactor);
     Object.keys(this.unitDictionary).forEach(key => {
       this.scaleCssVariables[key] = (this.unitDictionary[key] * scaleFactor / 100) + "px";
     });
@@ -317,7 +318,8 @@ export class TabDesignerViewModel extends Base {
         return {
           onBeforeRunAnimation: prepareElementForVerticalAnimation,
           cssClass: "svc-page--leave",
-          onAfterRunAnimation: cleanHtmlElementAfterAnimation };
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation
+        };
       },
       isAnimationEnabled: () => {
         return this.animationAllowed;
@@ -329,7 +331,7 @@ export class TabDesignerViewModel extends Base {
       getRerenderEvent: () => this.onElementRerendered,
       onCompareArrays(options) {
         const droppedPage = options.mergedItems.filter(page => page["draggedFrom"] !== undefined)[0];
-        if(droppedPage) {
+        if (droppedPage) {
           options.reorderedItems = [];
           options.addedItems = [droppedPage];
           const ghostPage = new PageModel();

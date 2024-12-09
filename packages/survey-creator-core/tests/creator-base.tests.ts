@@ -846,7 +846,7 @@ test("Create new page on changing title/description in ghost & creator.onModifie
   newPage.description = "desc1";
   newPage.title = "title1";
   expect(logs).toStrictEqual([{ type: "PROPERTY_CHANGED", name: "description" },
-    { type: "PROPERTY_CHANGED", name: "title" }]);
+  { type: "PROPERTY_CHANGED", name: "title" }]);
 });
 test("Don't add extra subscriptions and fully unsubscribe title/description changes in ghost page", (): any => {
   const creator = new CreatorTester();
@@ -4746,11 +4746,14 @@ test("ZoomIn/ZoomOut designer surface", (): any => {
 
   designerTab["scalingSurface"](10);
   expect(designerTab["surfaceScale"]).toBe(100);
+  expect(creator.survey.widthScale).toBe(100);
 
   designerTab["scalingSurface"](200);
   expect(designerTab["surfaceScale"]).toBe(100);
+  expect(creator.survey.widthScale).toBe(100);
 
   designerTab["scalingSurface"](150);
+  expect(creator.survey.widthScale).toBe(150);
   expect(designerTab["surfaceScale"]).toBe(150);
   expect(designerTab["scaleCssVariables"]).toStrictEqual({
     "--ctr-surface-base-unit": "12px",
