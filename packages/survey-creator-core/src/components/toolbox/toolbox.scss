@@ -25,13 +25,6 @@
     var(--ctr-tooltip-pointer-height) * 2
   );
 
-  --thm-toolbox-separator-width-compact: calc(
-    var(--ctr-toolbox-item-icon-width) +
-    var(--ctr-toolbox-item-padding-right-no-text) +
-    var(--ctr-toolbox-item-padding-left-no-text)
-  );
-
-  --thm-toolbox-separator-width: var(--thm-toolbox-separator-width-compact);
   --toolbox-width: var(--ctr-toolbox-min-width, 224.984375px /*calcSize(28)*/);
   --toolbox-width-compact: var(--thm-toolbox-width-compact, var(--dft-toolbox-width-compact));
   
@@ -95,8 +88,6 @@
     padding-bottom: calc(var(--ctr-toolbox-separator-padding-top, 8px) + var(--ctr-toolbox-gap, 4px));
   }
   .svc-toolbox__category-separator {
-    //width: var(--thm-toolbox-separator-width-compact, calcSize(5));
-    //min-width: var(--thm-toolbox-separator-width-compact, calcSize(5));
     box-sizing: content-box;
     padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, calcSize(2));
     padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, calcSize(2));
@@ -138,7 +129,6 @@
   .svc-toolbox__panel {
     z-index: 200;
     width: fit-content;
-    //min-width: var(--ctr-toolbox-min-width, calcSize(32));
     position: relative;
     box-shadow:
       var(--ctr-toolbox-shadow-floating-2-offset-x, 0px) var(--ctr-toolbox-shadow-floating-2-offset-y, 8px)
@@ -176,7 +166,6 @@
 }
 
 .svc-toolbox__category-separator {
- //width: var(--thm-toolbox-separator-width, calcSize(9));
   box-sizing: border-box;
   padding-top: var(--ctr-toolbox-separator-padding-top, calcSize(1.5));
   padding-inline-end: var(--ctr-toolbox-separator-padding-right, calcSize(2));
@@ -199,7 +188,6 @@
   top: 100%;
   left: 0;
   right: 0;
-  //min-width: var(--toolbox-width);
   align-self: center;
   margin-left: auto;
   margin-right: auto;
