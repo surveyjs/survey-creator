@@ -61,6 +61,10 @@ input.spg-input:read-only::placeholder {
     var(--ctr-editor-button-padding-bottom, calcSize(1)) var(--ctr-editor-button-padding-left, calcSize(1));
   line-height: 0;
   transition: background $creator-transition-duration, opacity $creator-transition-duration;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:focus,
   &:hover {
@@ -76,6 +80,10 @@ input.spg-input:read-only::placeholder {
     height: var(--ctr-editor-button-icon-height, 24px);
     fill: var(--ctr-editor-button-icon-color, $foreground-dim-light);
   }
+}
+
+.spg-input-container--multiline .spg-input__edit-button {
+  align-self: flex-end;
 }
 
 .spg-input__edit-button--disabled,
