@@ -3,23 +3,26 @@
     <svc-toolbox *ngIf="model.isToolboxVisible" [model]="creator"></svc-toolbox>
   </div>
   <div class="svc-tab-designer" [class]="model.getRootCss()" (click)="model.clickDesigner()">
-    <div class="svc-tab-designer_content">
-      <ng-container *ngIf="model.showPlaceholder">
-        <div *ngIf="creator.showHeaderInEmptySurvey && creator.allowEditSurveyTitle" class="svc-designer-header">
-          <div *ngIf="survey.renderedHasHeader" [class]="survey.css.header" [survey]="survey" sv-ng-survey-header></div>
-        </div>
-        <div class="svc-designer__placeholder-container" [attr.data-sv-drop-target-survey-element]="'newGhostPage'">
-          <svc-surface-placeholder [name]="'designer'" [placeholderTitleText]="model.placeholderTitleText"
-            [placeholderDescriptionText]="model.placeholderDescriptionText">
-          </svc-surface-placeholder>
-          <svc-page class="svc-designer-placeholder-page" [model]="model.newPage" [survey]="survey" [creator]="creator"
-            [isGhost]="true"></svc-page>
-        </div>
-      </ng-container>
+    <svc-scroll>
+      <div class="svc-tab-designer_content">
+        <ng-container *ngIf="model.showPlaceholder">
+          <div *ngIf="creator.showHeaderInEmptySurvey && creator.allowEditSurveyTitle" class="svc-designer-header">
+            <div *ngIf="survey.renderedHasHeader" [class]="survey.css.header" [survey]="survey" sv-ng-survey-header>
+            </div>
+          </div>
+          <div class="svc-designer__placeholder-container" [attr.data-sv-drop-target-survey-element]="'newGhostPage'">
+            <svc-surface-placeholder [name]="'designer'" [placeholderTitleText]="model.placeholderTitleText"
+              [placeholderDescriptionText]="model.placeholderDescriptionText">
+            </svc-surface-placeholder>
+            <svc-page class="svc-designer-placeholder-page" [model]="model.newPage" [survey]="survey"
+              [creator]="creator" [isGhost]="true"></svc-page>
+          </div>
+        </ng-container>
 
-      <ng-container *ngIf="!model.showPlaceholder">
-        <svc-designer-survey [model]="model"></svc-designer-survey>
-      </ng-container>
-    </div>
+        <ng-container *ngIf="!model.showPlaceholder">
+          <svc-designer-survey [model]="model"></svc-designer-survey>
+        </ng-container>
+      </div>
+    </svc-scroll>
   </div>
 </ng-template>

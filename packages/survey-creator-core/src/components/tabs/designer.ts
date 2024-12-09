@@ -351,7 +351,7 @@ export class TabDesignerViewModel extends Base {
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;
-    if (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage" || this.hasToolbar) {
+    if (!this.creator.isMobileView && (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage" || this.hasToolbar)) {
       rootCss += " svc-tab-designer--with-page-navigator";
     }
     if (this.showPlaceholder) {
