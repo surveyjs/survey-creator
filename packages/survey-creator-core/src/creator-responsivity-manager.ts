@@ -102,7 +102,7 @@ export class CreatorResponsivityManager {
     }
   }
   updateSurveyActualWidth() {
-    const surveyContainer = this.container.querySelector(".svc-tab-designer_content > div") as HTMLDivElement;
+    const surveyContainer = this.container?.querySelector(".svc-tab-designer_content > div") as HTMLDivElement;
     if (!!surveyContainer) {
       this.creator.survey.setResponsiveStartWidth(surveyContainer.offsetWidth);
     }
