@@ -181,4 +181,17 @@ svc-tab-designer {
   padding: var(--ctr-surface-toolbar-padding-top, calcSize(1.5)) var(--ctr-surface-toolbar-padding-right, calcSize(1.5)) var(--ctr-surface-toolbar-padding-bottom, calcSize(1.5)) var(--ctr-surface-toolbar-padding-left, calcSize(1.5));
   gap: var(--ctr-surface-toolbar-gap, calcSize(1));
   flex-direction: column;
+
+  .sv-action-bar-separator {
+    background: var(--ctr-separator-color, $border);
+    height: var(--ctr-separator-width, 1px);
+    width: var(--ctr-page-navigator-button-icon-width, calcSize(1));
+    padding: 0px var(--ctr-separator-margin-vertical-small, calcSize(1));
+    margin-bottom: var(--ctr-surface-toolbar-gap, calcSize(1));
+    margin-right: 0;
+  }
+
+  .sv-action__content {
+    flex-direction: column;
+  }
 }
