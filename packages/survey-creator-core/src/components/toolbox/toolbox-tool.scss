@@ -136,6 +136,8 @@
   padding-inline-end: calcSize(1.5);
   white-space: nowrap;
   color: var(--ctr-toolbox-item-text-color, $foreground-light);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .svc-toolbox__tool:hover,
@@ -212,6 +214,7 @@
   inset-inline-end: var(--ctr-toolbox-item-padding-right, calcSize(1.5));
   margin-inline-end: var(--ctr-toolbox-item-submenu-button-margin-right, 0);
   top: calc(var(--ctr-toolbox-item-padding-top, var(--dft-toolbox-item-padding-top)) + var(--ctr-toolbox-gap, var(--dft-toolbox-gap)));
+  bottom: var(--ctr-toolbox-item-padding-bottom, var(--dft-toolbox-item-padding-bottom));
   display: inline-flex;
   padding: var(--ctr-toolbox-item-submenu-button-padding-top, calcSize(0.5))
     var(--ctr-toolbox-item-submenu-button-padding-right, calcSize(0.5)) 
@@ -389,6 +392,11 @@
     padding-inline-end: var(--ctr-toolbox-item-padding-right-no-text, calcSize(1));
     box-sizing: border-box;
     align-self: flex-start;
+    &:after {
+      content:"\a0";
+      @include ctrSmallBoldFont;
+      width: 0;
+    }
   }
   .svc-toolbox__tool--dots {
     padding-inline-end: 0;
