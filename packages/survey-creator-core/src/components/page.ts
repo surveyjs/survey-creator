@@ -264,7 +264,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       result += " svc-page__content--selected";
     }
     if (SurveySettings.designMode.showEmptyTitles === false) {
-      result += " svc-page__content--hidden-empty-titles";
+      result += " svc-page__content--no-header";
     }
     return result.trim();
   }
