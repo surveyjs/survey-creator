@@ -1,3 +1,4 @@
+<ng-template #template>
 <div *ngIf="model && adorner" class="svc-page__content" [class]="adorner.css" [key2click]
   (click)="adorner.select(adorner, $event)" (dblclick)="adorner.dblclick($event)"
   (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.target)"
@@ -23,3 +24,4 @@
   </div>
   <sv-action-bar [model]="adorner.footerActionsBar"></sv-action-bar>
 </div>
+</ng-template>
