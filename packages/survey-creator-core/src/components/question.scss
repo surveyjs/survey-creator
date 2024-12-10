@@ -182,7 +182,7 @@ svc-question {
 .svc-survey-element-toolbar__item--active:not(.svc-survey-element-toolbar__item--pressed):enabled:hover,
 .svc-survey-element-toolbar__item--active:not(.svc-survey-element-toolbar__item--pressed):enabled:focus,
 .svc-survey-element-toolbar__item--active {
-  background-color: $secondary-backcolor-semi-light;
+  background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, $secondary-backcolor-semi-light);
 }
 
 .svc-survey-element-toolbar-item__icon,
