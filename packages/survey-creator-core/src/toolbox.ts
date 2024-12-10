@@ -467,6 +467,9 @@ export class QuestionToolbox
   @property({ defaultValue: false }) isFlyoutToCompactRunning: boolean;
 
   private getAnimationOptions(): IAnimationConsumer {
+    const onBeforeRunAnimation = (el: HTMLElement) => {
+      el.style.setProperty("--animation-width", getComputedStyle(el).width);
+    };
     return {
       getAnimatedElement: () => {
         return this.rootElement?.querySelector(".svc-toolbox__panel");
@@ -476,12 +479,14 @@ export class QuestionToolbox
       getLeaveOptions: () => {
         return {
           cssClass: "svc-toolbox__panel--leave",
-          onAfterRunAnimation: () => { this.isFlyoutToCompactRunning = false; }
+          onAfterRunAnimation: () => { this.isFlyoutToCompactRunning = false; },
+          onBeforeRunAnimation: onBeforeRunAnimation
         };
       },
       getEnterOptions: () => {
         return {
-          cssClass: "svc-toolbox__panel--enter"
+          cssClass: "svc-toolbox__panel--enter",
+          onBeforeRunAnimation: onBeforeRunAnimation
         };
       }
     };

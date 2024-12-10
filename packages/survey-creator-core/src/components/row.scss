@@ -91,24 +91,31 @@
 }
 
 .svc-row__drop-indicator--top {
-  top: 7px;
+  top: calc(calcSize(1) - (calcSize(0.25) / 2));
 }
 
 .svc-row__drop-indicator--bottom {
-  bottom: -9px;
+  bottom: calc(calcSize(-1) - (calcSize(-0.25) / 2));
 }
 
 .svc-row--drag-over-top {
   >.svc-row__drop-indicator--top {
     opacity: 1;
-    height: 2px;
+    height: calcSize(0.25);
   }
 }
 
 .svc-row--drag-over-bottom {
   >.svc-row__drop-indicator--bottom {
     opacity: 1;
-    height: 2px;
+    height: calcSize(0.25);
+  }
+}
+
+.svc-question__content--panel,
+.sd-panel__content {
+  .svc-row__drop-indicator--top {
+    top: calc(calcSize(-1) - (calcSize(0.25) / 2));
   }
 }
 

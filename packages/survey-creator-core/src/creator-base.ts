@@ -1278,8 +1278,8 @@ export class SurveyCreatorModel extends Base
     this.initSurveyWithJSON(undefined, false);
     this.toolbox = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null, this, true);
     this.updateToolboxIsCompact();
-    this.initTabs();
     this.initDragDrop();
+    this.initTabs();
     this.syncSaveButtons = this.options.saveSurveyAndTheme !== undefined ? this.options.saveSurveyAndTheme : this.options.syncSaveButtons;
     this.isTouch = IsTouch;
     const expandAction = this.sidebar.getExpandAction();
@@ -1984,11 +1984,6 @@ export class SurveyCreatorModel extends Base
       this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false);
     });
-    this.dragDropChoices.onShortcutCreated = (shortcut: HTMLElement) => {
-      Object.keys(this.designTabSurveyThemeVariables).forEach((key) => {
-        shortcut.style.setProperty(key, this.designTabSurveyThemeVariables[key]);
-      });
-    };
   }
 
   public updateElementsOnLocaleChanged(obj: Base, propertyName: string): void {
@@ -2219,15 +2214,6 @@ export class SurveyCreatorModel extends Base
   }
   public set text(value: string) {
     this.changeText(value, true);
-  }
-
-  public get designTabSurveyThemeVariables(): {} {
-    const cssVariables = {};
-    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, {
-      "--sjs-base-unit": "var(--ctr-surface-base-unit)",
-      "--sjs-font-size": "calc(2 * var(--ctr-surface-base-unit))",
-    });
-    return cssVariables;
   }
 
   public getSurveyJSON(): any {
@@ -3872,6 +3858,11 @@ export class SurveyCreatorModel extends Base
       this.responsivityManager.dispose();
       this.responsivityManager = undefined;
     }
+  }
+  public setDesignerSurveyScale(scale: number) {
+    if (scale <= 0) return;
+    this.responsivityManager?.updateSurveyActualWidth();
+    this.survey.widthScale = scale;
   }
   @property({ defaultValue: false }) showHeaderInEmptySurvey;
   @property({ defaultValue: true }) public allowShowPageNavigator;

@@ -2579,6 +2579,18 @@ test("convertInputType, check locale", (): any => {
   const action: any = questionModel.getActionById("convertInputType");
   expect(action.data.locOwner.locale).toBe("de");
 });
+test("change locale & creator.sidebar.hasVisiblePages", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1" },
+      { type: "text", name: "q2" },
+    ]
+  };
+  expect(creator.sidebar.hasVisiblePages).toBeTruthy();
+  creator.locale = "de";
+  expect(creator.sidebar.hasVisiblePages).toBeTruthy();
+});
 test("QuestionAdornerViewModel for selectbase and creator.minimumChoicesCount", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -4723,4 +4735,34 @@ test("onModified options, on adding page and on copying page", () => {
   expect(modifiedOptions[0].newValue.name).toBe("page2");
   expect(modifiedOptions[2].type).toBe("ELEMENT_COPIED");
   expect(modifiedOptions[2].newValue.name).toBe("page3");
+});
+
+test("ZoomIn/ZoomOut designer surface", (): any => {
+  const creator = new CreatorTester();
+  const designerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(designerTab["surfaceScale"]).toBe(100);
+  expect(designerTab["scaleCssVariables"]).toStrictEqual({});
+  expect(designerTab.surveyThemeVariables["--ctr-surface-base-unit"]).toBe(undefined);
+
+  designerTab["scalingSurface"](10);
+  expect(designerTab["surfaceScale"]).toBe(100);
+  expect(creator.survey.widthScale).toBe(100);
+
+  designerTab["scalingSurface"](200);
+  expect(designerTab["surfaceScale"]).toBe(100);
+  expect(creator.survey.widthScale).toBe(100);
+
+  designerTab["scalingSurface"](150);
+  expect(creator.survey.widthScale).toBe(150);
+  expect(designerTab["surfaceScale"]).toBe(150);
+  expect(designerTab["scaleCssVariables"]).toStrictEqual({
+    "--ctr-surface-base-unit": "12px",
+    "--lbr-corner-radius-unit": "12px",
+    "--lbr-font-unit": "12px",
+    "--lbr-line-height-unit": "12px",
+    "--lbr-size-unit": "12px",
+    "--lbr-spacing-unit": "12px",
+    "--lbr-stroke-unit": "1.5px"
+  });
+  expect(designerTab.surveyThemeVariables["--ctr-surface-base-unit"]).toBe("12px");
 });

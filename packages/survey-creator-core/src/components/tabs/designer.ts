@@ -1,23 +1,40 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
 import { DragDropSurveyElements } from "../../survey-elements";
 import { SurveyElementAdornerBase } from "../action-container-view-model";
+import { assign } from "../../utils/utils";
+import designTabSurveyThemeJSON from "../../designTabSurveyThemeJSON";
 require("./designer.scss");
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
 
 export class TabDesignerViewModel extends Base {
+  private minSurfaceScaling = 20;
+  private maxSurfaceScaling = 200;
   private cssUpdater: ComputedUpdater;
   private pagesControllerValue: PagesController;
+  private scaleCssVariables = {};
+  private surfaceScale = 100;
+
+  unitDictionary: { [index: string]: number } = {
+    "--ctr-surface-base-unit": 8,
+    "--lbr-font-unit": 8,
+    "--lbr-line-height-unit": 8,
+    "--lbr-size-unit": 8,
+    "--lbr-spacing-unit": 8,
+    "--lbr-corner-radius-unit": 8,
+    "--lbr-stroke-unit": 1,
+  }
 
   @property() newPage: PageModel;
   @property({ defaultValue: false }) showNewPage: boolean;
   @property() pageCount: number;
   @property() designerCss: string;
   @property() showPlaceholder: boolean;
+  @property({ defaultValue: {} }) surveyThemeVariables: { [index: string]: string } = {};
   public creator: SurveyCreatorModel;
 
   public surfaceToolbar: ActionContainer;
@@ -67,15 +84,31 @@ export class TabDesignerViewModel extends Base {
     return Object.keys(page.toJSON()).filter(key => key !== "name").length > 0;
   }
 
+  private updateDesignTabSurveyThemeVariables(): void {
+    const cssVariables: { [index: string]: string } = {};
+    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, this.scaleCssVariables, {
+      "--sjs-base-unit": "var(--ctr-surface-base-unit)",
+      "--sjs-font-size": "calc(2 * var(--ctr-surface-base-unit))",
+    });
+    this.surveyThemeVariables = cssVariables;
+  }
+
   constructor(creator: SurveyCreatorModel) {
     super();
     this.creator = creator;
     this.pagesControllerValue = new PagesController(creator);
 
-    this.initToolbar();
+    this.creator.dragDropChoices.onShortcutCreated = (shortcut: HTMLElement) => {
+      Object.keys(this.surveyThemeVariables).forEach((key) => {
+        shortcut.style.setProperty(key, this.surveyThemeVariables[key]);
+      });
+    };
+
+    this.initSurfaceToolbar();
     this.initSurvey();
+    this.updateDesignTabSurveyThemeVariables();
   }
-  private initToolbar() {
+  private initSurfaceToolbar() {
     this.surfaceToolbar = new ActionContainer();
 
     let defaultActionBarCss = {
@@ -92,28 +125,63 @@ export class TabDesignerViewModel extends Base {
     };
     this.surfaceToolbar.cssClasses = defaultActionBarCss;
 
-    this.surfaceToolbar.setItems([{
+    const surfaceToolbarItems: Array<IAction> = [];
+    if (this.creator.showCreatorThemeSettings) {
+      surfaceToolbarItems.push(<IAction>{
+        id: "zoomIn",
+        locTooltipName: "ed.zoomInTooltip",
+        iconName: "icon-zoomin-24x24",
+        iconSize: "auto",
+        action: () => { this.scalingSurface(this.surfaceScale + 10); }
+      });
+      surfaceToolbarItems.push(<IAction>{
+        id: "zoomOut",
+        locTooltipName: "ed.zoomOutTooltip",
+        iconName: "icon-zoomout-24x24",
+        iconSize: "auto",
+        action: () => { this.scalingSurface(this.surfaceScale - 10); }
+      });
+    }
+    surfaceToolbarItems.push({
       id: "collapseAll",
       locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
       iconSize: "auto",
+      needSeparator: this.creator.showCreatorThemeSettings,
+      visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
       action: () => this.creator.expandCollapseManager.expandCollapseElements("collapse-all", true)
-    }, {
+    });
+    surfaceToolbarItems.push({
       id: "expandAll",
       locTooltipName: "ed.expandAllTooltip",
       iconName: "icon-expandall-24x24",
       iconSize: "auto",
+      visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
       action: () => this.creator.expandCollapseManager.expandCollapseElements("expand-all", false)
-    }, {
+    });
+    surfaceToolbarItems.push({
       id: "lockQuestions",
       locTooltipName: "ed.lockQuestionsTooltip",
       iconName: "icon-questionlock-24x24",
       iconSize: "auto",
+      visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
       action: (action) => {
         action.active = !action.active;
         this.creator.expandCollapseManager.lockQuestions(action.active);
       }
-    }]);
+    });
+    this.surfaceToolbar.setItems(surfaceToolbarItems);
+  }
+
+  private scalingSurface(scaleFactor: number): void {
+    if (scaleFactor <= this.minSurfaceScaling || scaleFactor >= this.maxSurfaceScaling) return;
+
+    this.surfaceScale = scaleFactor;
+    this.creator.setDesignerSurveyScale(scaleFactor);
+    Object.keys(this.unitDictionary).forEach(key => {
+      this.scaleCssVariables[key] = (this.unitDictionary[key] * scaleFactor / 100) + "px";
+    });
+    this.updateDesignTabSurveyThemeVariables();
   }
 
   get survey() {
@@ -141,7 +209,7 @@ export class TabDesignerViewModel extends Base {
     return getLocString("ed.surveyPlaceholderDescription");
   }
   public get hasToolbar() {
-    return this.creator.expandCollapseButtonVisibility != "never";
+    return this.creator.expandCollapseButtonVisibility != "never" || this.creator.showCreatorThemeSettings;
   }
   private isUpdatingNewPage: boolean;
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {
@@ -250,7 +318,8 @@ export class TabDesignerViewModel extends Base {
         return {
           onBeforeRunAnimation: prepareElementForVerticalAnimation,
           cssClass: "svc-page--leave",
-          onAfterRunAnimation: cleanHtmlElementAfterAnimation };
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation
+        };
       },
       isAnimationEnabled: () => {
         return this.animationAllowed;
@@ -262,7 +331,7 @@ export class TabDesignerViewModel extends Base {
       getRerenderEvent: () => this.onElementRerendered,
       onCompareArrays(options) {
         const droppedPage = options.mergedItems.filter(page => page["draggedFrom"] !== undefined)[0];
-        if(droppedPage) {
+        if (droppedPage) {
           options.reorderedItems = [];
           options.addedItems = [droppedPage];
           const ghostPage = new PageModel();

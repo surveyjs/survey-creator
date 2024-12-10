@@ -9,21 +9,26 @@
             var(--ctr-editor-button-padding-bottom) + var(--ctr-editor-padding-top) + var(--ctr-editor-padding-bottom)
     );
 }
+.spg-dropdown--empty .spg-dropdown__value {
+    min-height: var(--ctr-font-default-line-height, var(--ctr-default-line-height, 24px));
+}
+
 .spg-dropdown__value {
     @include ctrDefaultFont;
     display: flex;
     align-items: center;
+    min-height: var(--ctr-font-default-line-height, var(--ctr-default-line-height, 24px));
 }
 .spg-dropdown__filter-string-input {
     @include ctrDefaultFont;
 }
 .spg-dropdown_chevron-button {
     width: var(--ctr-editor-button-icon-width, calcSize(3));
-    height: var(--ctr-editor-button-icon-height, calcSize(3));
     padding: var(--ctr-editor-button-padding-top, calcSize(1)) var(--ctr-editor-button-padding-right, calcSize(1))
         var(--ctr-editor-button-padding-bottom, calcSize(1)) var(--ctr-editor-button-padding-left, calcSize(1));
     inset-block-start: var(--ctr-editor-padding-top, calcSize(0.5));
     inset-inline-end: var(--ctr-editor-padding-right, calcSize(0.5));
+    inset-block-end: var(--ctr-editor-padding-bottom, calcSize(0.5));
 
     &:hover,
     &:focus {
