@@ -24,29 +24,34 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     overflow: hidden;
   }
   to {
-    width: var(--toolbox-width);
+    width: var(--animation-width);
     overflow: hidden;
   }
 }
 
 @keyframes toolboxSeparatorSearchMoveIn {
   from {
-    width: var(--thm-toolbox-separator-width-compact, calcSize(5));
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, calcSize(2));
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, calcSize(2));
+
     overflow: hidden;
   }
   to {
-    width: var(--toolbox-width);
+    padding-inline-end: 0;
+    padding-inline-start: 0;
     overflow: hidden;
   }
 }
 
 @keyframes toolboxSeparatorMoveIn {
   from {
-    width: var(--thm-toolbox-separator-width-compact, calcSize(9));
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, calcSize(2));
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, calcSize(2));
     overflow: hidden;
   }
   to {
-    width: var(--thm-toolbox-separator-width, calcSize(9));
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right, calcSize(2));
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left, calcSize(2));
     overflow: hidden;
   }
 }
@@ -82,7 +87,9 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     animation-name: toolboxFadeIn;
     animation-fill-mode: forwards;
     opacity: 0;
+    text-overflow: initial;
   }
+  min-width: 0;
 }
 .svc-toolbox__panel--enter {
   --fade-animation-duration: #{$svc-toolbox-fade-in-duration};
