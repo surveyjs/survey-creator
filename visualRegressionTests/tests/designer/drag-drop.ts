@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, changeToolboxScrolling, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength, RatingToolboxItem } from "../../helper";
+import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, changeToolboxScrolling, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength, RatingToolboxItem, setShowAddQuestionButton, setAllowEditSurveyTitle } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
@@ -502,6 +502,7 @@ test("Drag Drop to Multiline styles", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await explicitErrorHandler();
     await t.resizeWindow(832, 600);
+    await setShowAddQuestionButton(false);
 
     const json = {
       "logoPosition": "right",
@@ -675,6 +676,8 @@ test("Drag Drop (choices): scroll", async (t) => {
 
 test("Drag Drop to collapsed panel", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
     await ClientFunction(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
@@ -722,7 +725,8 @@ test("Drag Drop to collapsed page", async (t) => {
       window["creator"].expandOnDragTimeOut = 1000000;
       document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
     })();
-
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
     await t.resizeWindow(1652, 500);
     const json = {
       pages: [
@@ -799,6 +803,7 @@ test("Drag indicator for custom widget", async (t) => {
       document.body.appendChild(widgetTemplateForKo);
     })();
     await t.resizeWindow(1252, 900);
+    await setShowAddQuestionButton(false);
 
     const json = {
       elements: [{ type: "peoplepicker", name: "q1" }, { type: "peoplepicker", name: "q2" }]

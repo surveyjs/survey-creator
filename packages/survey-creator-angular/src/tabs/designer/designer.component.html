@@ -12,8 +12,9 @@
           <svc-surface-placeholder [name]="'designer'" [placeholderTitleText]="model.placeholderTitleText"
             [placeholderDescriptionText]="model.placeholderDescriptionText">
           </svc-surface-placeholder>
-          <svc-page class="svc-designer-placeholder-page" [model]="model.newPage" [survey]="survey" [creator]="creator"
-            [isGhost]="true"></svc-page>
+          <div class="svc-designer-placeholder-page">
+            <svc-page [model]="model.newPage" [survey]="survey" [creator]="creator" [isGhost]="true"></svc-page>
+          </div>
         </div>
       </ng-container>
 
