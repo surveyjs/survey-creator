@@ -31,7 +31,7 @@ To use a question value in an expression, specify the **Question name** property
 
 > For questions with a specified **Data** > **Join identifier** setting, use its value instead of the **Question name** value.
 
-Complex question types (Multiple Textboxes, Dynamic Panel, matrices) support advanced syntax for accessing the values of their inner elements (individual textboxes, panels, rows, columns).
+Complex question types (Multiple Textboxes, Dynamic Panel, matrices) and multi-select questions (Checkboxes, Image Picker, Ranking) support advanced syntax for accessing the values of their inner elements (individual textboxes, items, panels, rows, columns).
 
 <div class="v2-class---doc-table-container">
   <table class="v2-class---doc-table-container__table">
@@ -43,6 +43,14 @@ Complex question types (Multiple Textboxes, Dynamic Panel, matrices) support adv
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td colspan="3"><b>Checkboxes</b>, <b>Image Picker</b>, <b>Multiple Textboxes</b>, <b>Ranking</b></td>
+      </tr>
+      <tr>
+        <td><code>{questionid[index]}</code></td>
+        <td>Use a zero-based index to access a selected item.</td>
+        <td><code>{question1[0]}</code></td>
+      </tr>
       <tr>
         <td colspan="3"><b>Multiple Textboxes</b></td>
       </tr>

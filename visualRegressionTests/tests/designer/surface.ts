@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setAllowEditSurveyTitle, setShowAddQuestionButton, setExpandCollapseButtonVisibility } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setAllowEditSurveyTitle, setShowAddQuestionButton, setExpandCollapseButtonVisibility, setShowToolbox, setShowSidebar } from "../../helper";
 
 const title = "Designer surface";
 
@@ -477,9 +477,9 @@ test("Placeholder with survey header", async (t) => {
   });
 });
 
-test("Page and question borders", async (t) => {
+test("Question borders", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1767, 900);
+    await t.resizeWindow(1232, 900);
     const json = {
       "logoPosition": "right",
       "pages": [
@@ -494,26 +494,63 @@ test("Page and question borders", async (t) => {
         }
       ]
     };
-    await setJSON(json);
+    await setShowToolbox(false);
     await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+    await setJSON(json);
+    await setShowSidebar(false);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
+    const qContent = Selector(".svc-question__content");
+    await takeElementScreenshot("question-content.png", pageContent, t, comparer);
+
+    await t.hover(qContent, { offsetX: 5, offsetY: 5 }).wait(300);
+    await takeElementScreenshot("question-content-hover.png", pageContent, t, comparer);
+
+    await t.click(qContent, { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-content-click.png", pageContent, t, comparer);
+  });
+});
+
+test("Page borders", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1232, 900);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    };
+    await setShowToolbox(false);
+    await setAllowEditSurveyTitle(false);
+    await setJSON(json);
+    await setShowSidebar(false);
     await ClientFunction(() => {
       (<any>window).creator.toolbox.isCompact = true;
     })();
     const designerTabContent = Selector(".svc-tab-designer");
     const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
-    const qContent = Selector(".svc-question__content");
+
     await takeElementScreenshot("page-content.png", designerTabContent, t, comparer);
-    await takeElementScreenshot("question-content.png", pageContent, t, comparer);
     await t.hover(pageContent, { offsetX: 5, offsetY: 5 }).wait(300);
     await takeElementScreenshot("page-content-hover.png", designerTabContent, t, comparer);
-    await t.hover(qContent, { offsetX: 5, offsetY: 5 }).wait(300);
-    await takeElementScreenshot("question-content-hover.png", pageContent, t, comparer);
+
     await t.hover(pageContent.find(".svc-element__add-new-question"));
     await takeElementScreenshot("question-add-hover.png", pageContent, t, comparer);
-    await t.click(qContent, { offsetX: 5, offsetY: 5 });
-    await takeElementScreenshot("question-content-click.png", pageContent, t, comparer);
+
     await t.click(pageContent, { offsetX: 5, offsetY: 5 });
     await takeElementScreenshot("page-content-click.png", designerTabContent, t, comparer);
+
     await t.click(pageContent.find(".sd-page__title"), { offsetX: 5, offsetY: 5 });
     await takeElementScreenshot("page-title-click.png", designerTabContent, t, comparer);
 
@@ -991,8 +1028,8 @@ test("Check survey layout in mobile mode", async (t) => {
 
 test("Check property grid flyout", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    changeToolboxScrolling(false);
-    await changeToolboxSearchEnabled(false);
+    await setShowToolbox(false);
+    await setShowAddQuestionButton(false);
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});
@@ -1270,6 +1307,7 @@ test("Check string editor on isRequired", async (t) => {
 test("Question actions", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(400, 900);
+    await setShowAddQuestionButton(false);
     const json = {
       "logoPosition": "right",
       "pages": [
@@ -1297,8 +1335,9 @@ test("Question actions", async (t) => {
 
 test("Keep scroll to selected on tab changed", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    changeToolboxScrolling(false);
-    await changeToolboxSearchEnabled(false);
+    await setShowToolbox(false);
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
     await t.resizeWindow(1600, 900);
     const json = {
       "logoPosition": "right",
@@ -1316,12 +1355,14 @@ test("Keep scroll to selected on tab changed", async (t) => {
     await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
     await t.click(getTabbedMenuItemByText(creatorTabDesignerName));
     const root = Selector(".svc-creator");
+    await setShowSidebar(false);
     await takeElementScreenshot("question-5-selected-in-view.png", root, t, comparer);
   });
 });
 test("Question actions on hover in mobile mode", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(400, 900);
+    await setShowAddQuestionButton(false);
     const json = {
       "logoPosition": "right",
       "pages": [
@@ -2280,6 +2321,7 @@ test("Question adorner - collapsed mobile", async (t) => {
 test("Question types with subtypes", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1000, 700);
+    await setShowToolbox(false);
 
     await t
       .click(Selector(".svc-element__question-type-selector"))
@@ -2308,8 +2350,8 @@ test("Check page selection when width mode is responsive", async (t) => {
         }
       ]
     };
-    await setJSON(json);
     await setAllowEditSurveyTitle(false);
+    await setJSON(json);
     const rootSelector = Selector(".svc-tab-designer");
     await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
     await takeElementScreenshot("page-selected-responsive.png", rootSelector, t, comparer);
@@ -2318,7 +2360,7 @@ test("Check page selection when width mode is responsive", async (t) => {
 
 test("Collapse all and expand all toolbar", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1600, 1080);
+    await t.resizeWindow(912, 1080);
     const json = {
       elements: [
         {
@@ -2331,7 +2373,10 @@ test("Collapse all and expand all toolbar", async (t) => {
         }
       ]
     };
+    await setShowToolbox(false);
     await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+    await setShowSidebar(false);
     await setExpandCollapseButtonVisibility("onhover");
     await setJSON(json);
     await t.click("#lockQuestions");
