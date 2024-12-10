@@ -2429,12 +2429,6 @@ test("Scaling design surface", async (t) => {
             { "type": "boolean", "name": "question3" },
             { "type": "file", "name": "question4" },
             {
-              "type": "imagepicker",
-              "name": "question5",
-              "choices": [{ "value": "Image 1", "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg" }],
-              "imageFit": "cover"
-            },
-            {
               "type": "panel",
               "name": "panel1"
             }

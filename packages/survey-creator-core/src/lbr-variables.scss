@@ -6,10 +6,13 @@ $lbr-font-unit: var(--lbr-font-unit, 8px);
 $lbr-line-height-unit: var(--lbr-line-height-unit, 8px);
 
 @mixin lbrDefaultFont {
+  --thm-default-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
+  --thm-default-line-height: calc(1.5 * var(--thm-default-font-size));
+
   font-family: $font-family;
-  font-size: var(--lbr-font-default-size, 16px);
+  font-size: var(--lbr-font-default-size, var(--thm-default-font-size, 16px));
   font-style: normal;
-  line-height: var(--lbr-font-default-line-height, 24px); /* 150% */
+  line-height: var(--lbr-font-default-line-height, var(--thm-default-line-height, 24px));
 }
 
 @mixin lbrDefaultBoldFont {
@@ -18,10 +21,13 @@ $lbr-line-height-unit: var(--lbr-line-height-unit, 8px);
 }
 
 @mixin lbrSmallFont {
+  --thm-small-line-height: var(--sjs-font-size, calc(2 * #{$base-unit}));
+  --thm-small-font-size: calc(0.75 * var(--thm-small-line-height));
+
   font-family: $font-family;
-  font-size: var(--lbr-font-small-size, 12px);
+  font-size: var(--lbr-font-small-size, var(--thm-small-font-size, 12px));
   font-style: normal;
-  line-height: var(--lbr-font-small-line-height, 16px); /* 133.333% */
+  line-height: var(--lbr-font-small-line-height, var(--thm-small-line-height, 16px));
 }
 
 @mixin lbrSmallBoldFont {
