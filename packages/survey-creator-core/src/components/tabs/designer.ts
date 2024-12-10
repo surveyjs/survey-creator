@@ -17,7 +17,7 @@ export class TabDesignerViewModel extends Base {
   private cssUpdater: ComputedUpdater;
   private pagesControllerValue: PagesController;
   private scaleCssVariables = {};
-  private surfaceScale = 100;
+  public surfaceScale = 100;
 
   unitDictionary: { [index: string]: number } = {
     "--ctr-surface-base-unit": 8,
@@ -132,14 +132,14 @@ export class TabDesignerViewModel extends Base {
         locTooltipName: "ed.zoomInTooltip",
         iconName: "icon-zoomin-24x24",
         iconSize: "auto",
-        action: () => { this.scalingSurface(this.surfaceScale + 10); }
+        action: () => { this.scaleSurface(this.surfaceScale + 10); }
       });
       surfaceToolbarItems.push(<IAction>{
         id: "zoomOut",
         locTooltipName: "ed.zoomOutTooltip",
         iconName: "icon-zoomout-24x24",
         iconSize: "auto",
-        action: () => { this.scalingSurface(this.surfaceScale - 10); }
+        action: () => { this.scaleSurface(this.surfaceScale - 10); }
       });
     }
     surfaceToolbarItems.push({
@@ -173,11 +173,15 @@ export class TabDesignerViewModel extends Base {
     this.surfaceToolbar.setItems(surfaceToolbarItems);
   }
 
-  private scalingSurface(scaleFactor: number): void {
+  private scaleSurface(scaleFactor: number): void {
     if (scaleFactor <= this.minSurfaceScaling || scaleFactor >= this.maxSurfaceScaling) return;
 
     this.surfaceScale = scaleFactor;
-    this.creator.setDesignerSurveyScale(scaleFactor);
+    if (!this.creator.survey.responsiveStartWidth) {
+      this.creator.responsivityManager?.updateSurveyActualWidth();
+    }
+    this.creator.survey.widthScale = scaleFactor;
+
     Object.keys(this.unitDictionary).forEach(key => {
       this.scaleCssVariables[key] = (this.unitDictionary[key] * scaleFactor / 100) + "px";
     });
@@ -240,7 +244,11 @@ export class TabDesignerViewModel extends Base {
     this.survey.registerFunctionOnPropertyValueChanged("pages", () => {
       this.checkNewPage(true);
       this.updatePages();
-    });
+    }, "__designer_tab_model__");
+    this.survey.registerFunctionOnPropertyValueChanged("widthMode", () => {
+      this.survey.responsiveStartWidth = undefined;
+      setTimeout(() => this.scaleSurface(this.surfaceScale), 1);
+    }, "__designer_tab_model__");
     this.designerCss = <any>this.cssUpdater;
     this.pagesController.onSurveyChanged();
   }
@@ -278,6 +286,8 @@ export class TabDesignerViewModel extends Base {
   public dispose(): void {
     super.dispose();
     this.cssUpdater && this.cssUpdater.dispose();
+    this.survey.unRegisterFunctionOnPropertyValueChanged("pages", "__designer_tab_model__");
+    this.survey.unRegisterFunctionOnPropertyValueChanged("widthMode", "__designer_tab_model__");
   }
   private checkLastPageToDelete(): boolean {
     if (this.survey.pageCount === 0 || this.survey.isQuestionDragging) return false;
