@@ -12,6 +12,9 @@ export class ExpandCollapseManager {
     this.updateCollapsed(elements || this.getCollapsableElements(), isCollapsed, reason);
   }
 
+  public get questionsLocked() {
+    return this._lockQuestions;
+  }
   public lockQuestions(locked: boolean) {
     this._lockQuestions = locked;
   }
