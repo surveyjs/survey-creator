@@ -125,11 +125,6 @@ svc-page-navigator-item,
 
     .svc-page-navigator-item__dot {}
   }
-
-  .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):hover,
-  .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):focus {
-    .svc-page-navigator-item__banner {}
-  }
 }
 
 .svc-page-navigator-item--disabled {

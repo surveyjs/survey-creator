@@ -45,10 +45,7 @@
   -webkit-appearance: none;
   appearance: none;
   border-radius: var(--ctr-expression-item-corner-radius, calcSize(12.5));
-  padding: var(--ctr-expression-item-padding-top, calcSize(1))
-    var(--ctr-expression-item-padding-right, calcSize(2))
-    var(--ctr-expression-item-padding-bottom, calcSize(1))
-    var(--ctr-expression-item-padding-left, calcSize(2));
+  padding: var(--ctr-expression-item-padding-top, calcSize(1)) var(--ctr-expression-item-padding-right, calcSize(2)) var(--ctr-expression-item-padding-bottom, calcSize(1)) var(--ctr-expression-item-padding-left, calcSize(2));
 
   border: none;
   outline: none;
@@ -124,21 +121,27 @@
 .svc-logic-operator--operator.sl-paneldynamic__add-btn {
   margin-top: var(--ctr-expression-rows-gap, calcSize(2));
 }
+
 .svc-logic-operator--action.sl-paneldynamic__add-btn {
   color: var(--ctr-expression-item-text-color-action, $foreground);
 }
+
 .svc-logic-operator--operator.sl-paneldynamic__add-btn {
   color: var(--ctr-expression-item-text-color-operator, $foreground);
 }
+
 .svc-logic-question--answered .svc-logic-operator--question {
   color: var(--ctr-expression-item-text-color-parameter, $foreground);
 }
+
 .svc-logic-question--answered .svc-logic-operator--conjunction {
   color: var(--ctr-expression-item-text-color-conjunction, $foreground);
 }
+
 .svc-logic-question--answered .svc-logic-operator--operator {
   color: var(--ctr-expression-item-text-color-operator, $foreground);
 }
+
 .svc-logic-question--answered .svc-logic-operator--action {
   color: var(--ctr-expression-item-text-color-action, $foreground);
 }
@@ -169,23 +172,25 @@
   justify-content: center;
   align-items: center;
   outline: none;
-
+  border: none;
 
   .sv-svg-icon {
     width: var(--ctr-expression-item-icon-width, 24px);
     height: var(--ctr-expression-item-icon-height, 24px);
   }
+
   use {
     fill: var(--ctr-expression-item-icon-color, $red);
   }
+
   &:focus,
   &:hover {
     background-color: var(--ctr-expression-item-background-color-remove-button-hovered, $red-light);
   }
+
   &.svc-action-button--disabled {
     fill: var(--ctr-survey-action-button-icon-color-disabled, $foreground-dim-light);
   }
-  border: none;
 }
 
 .sl-panel-wrapper--in-row:hover .svc-icon-remove,
