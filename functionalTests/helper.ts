@@ -176,6 +176,17 @@ export async function changeToolboxSearchEnabled(enabled: boolean) {
   })(enabled);
 }
 
+export async function setDirRTL() {
+  await ClientFunction(() => {
+    document.body.setAttribute("dir", "rtl");
+  })();
+}
+
+export async function setShowToolbox(newVal: boolean) {
+  await ClientFunction((newVal) => {
+    window["creator"].showToolbox = newVal;
+  })(newVal);
+}
 export async function setShowSidebar(newVal: boolean) {
   await ClientFunction((newVal) => {
     window["creator"].showSidebar = newVal;
