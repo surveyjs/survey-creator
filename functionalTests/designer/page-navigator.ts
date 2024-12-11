@@ -7,10 +7,10 @@ export function getAddNewQuestionButton(n = 0) {
 }
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
-  await t.resizeWindow(1920, 900);
 });
 
 test("Check page navigator track scrolling", async (t) => {
+  await t.resizeWindow(1600, 700);
   await ClientFunction(() => {
     window["creator"].JSON = {
       "logoPosition": "right",
@@ -61,14 +61,14 @@ test("Check page navigator track scrolling", async (t) => {
   await t
     .expect(Selector(firstPageNavigatorItem).exists).ok()
     .expect(Selector(lastPageNavigatorItem).exists).notOk()
-    .scroll(Selector(".svc-tab-designer--with-page-navigator"), "bottomRight")
-    .scroll(Selector(".svc-tab-designer--with-page-navigator"), "bottomRight")
+    .scroll(Selector(".svc-tab-designer--with-page-navigator .svc-scroll__scroller"), "bottomRight")
+    .scroll(Selector(".svc-tab-designer--with-page-navigator .svc-scroll__scroller"), "bottomRight")
     .expect(Selector(firstPageNavigatorItem).exists).notOk()
     .expect(Selector(lastPageNavigatorItem).exists).ok();
 });
 
 test("PageNavigator shown if scrolling exists", async t => {
-  await t.resizeWindow(1600, 1300);
+  await t.resizeWindow(1600, 1400);
   await t
     .expect(getAddNewQuestionButton().visible).ok()
     .click(getAddNewQuestionButton())
@@ -81,9 +81,9 @@ test("PageNavigator shown if scrolling exists", async t => {
     .click(getAddNewQuestionButton(2))
     .expect(Selector("span").withText("question3").visible).ok()
     .expect(Selector(".svc-page-navigator").visible).ok()
-    .resizeWindow(1600, 1700)
+    .resizeWindow(1600, 1750)
     .expect(Selector(".svc-page-navigator").visible).notOk()
-    .resizeWindow(1600, 1300)
+    .resizeWindow(1600, 1400)
     .expect(Selector(".svc-page-navigator").visible).ok()
     .click(Selector(".svc-question__content--selected span").withText("Delete"))
     .expect(Selector("span").withText("question3").visible).notOk()

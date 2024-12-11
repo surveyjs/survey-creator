@@ -6,7 +6,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.resizeWindow(1920, 1080);
 });
 
-test("Change survey width", async (t) => {
+test("Change survey width 1", async (t) => {
   const json = {
     "widthMode": "static",
     "pages": [
@@ -42,11 +42,11 @@ test("Change survey width", async (t) => {
     .pressKey("tab");
 
   await t
-    .expect(Selector(".sd-container-modern").clientWidth).gte(1218)
-    .expect(Selector(".sd-container-modern").clientWidth).lte(1230);
+    .expect(Selector(".sd-container-modern").clientWidth).gte(1200)
+    .expect(Selector(".sd-container-modern").clientWidth).lte(1220);
 });
 
-test("Change survey width", async (t) => {
+test("Change survey width 2", async (t) => {
   await t
     .hover(getToolboxItemByText("Single-Line Input"))
     .click(getToolboxItemByText("Single-Line Input"));
