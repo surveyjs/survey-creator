@@ -26,37 +26,37 @@
               :survey="model.creator.survey"
             ></SvComponent>
           </div>
-        </div>
-      </template>
+        </template>
 
-      <template v-if="!model.showPlaceholder">
-        <div
-          :class="model.designerCss"
-          :style="[
-            { maxWidth: model.survey.renderedWidth },
-            model.surveyThemeVariables,
-          ]"
-        >
+        <template v-if="!model.showPlaceholder">
           <div
-            class="svc-designer__placeholder-container"
-            :data-sv-drop-target-survey-element="'newGhostPage'"
+            :class="model.designerCss"
+            :style="[
+              { maxWidth: model.survey.renderedWidth },
+              model.surveyThemeVariables,
+            ]"
           >
-            <SurfacePlaceholder
-              :name="'designer'"
-              :placeholderTitleText="model.placeholderTitleText"
-              :placeholderDescriptionText="model.placeholderDescriptionText"
-            />
             <div
-              className="svc-designer-placeholder-page"
-              data-sv-drop-target-survey-element="newGhostPage"
+              class="svc-designer__placeholder-container"
+              :data-sv-drop-target-survey-element="'newGhostPage'"
             >
-              <SvComponent
-                :is="'svc-page'"
-                :survey="model.creator.survey"
-                :creator="model.creator"
-                :page="model.newPage"
-                :isGhost="true"
+              <SurfacePlaceholder
+                :name="'designer'"
+                :placeholderTitleText="model.placeholderTitleText"
+                :placeholderDescriptionText="model.placeholderDescriptionText"
               />
+              <div
+                className="svc-designer-placeholder-page"
+                data-sv-drop-target-survey-element="newGhostPage"
+              >
+                <SvComponent
+                  :is="'svc-page'"
+                  :survey="model.creator.survey"
+                  :creator="model.creator"
+                  :page="model.newPage"
+                  :isGhost="true"
+                />
+              </div>
             </div>
           </div>
         </template>
@@ -111,7 +111,7 @@
               />
             </div>
           </div>
-              <!-- ko ifnot:  -->
+
           <div v-if="!model.creator.isMobileView" class="svc-tab-designer__tools">
             <div
               v-if="model.creator.showPageNavigator"
