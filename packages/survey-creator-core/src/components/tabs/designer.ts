@@ -164,6 +164,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.lockQuestionsTooltip",
       iconName: "icon-questionlock-24x24",
       iconSize: "auto",
+      active: this.creator.expandCollapseManager.questionsLocked,
       visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
       action: (action) => {
         action.active = !action.active;
