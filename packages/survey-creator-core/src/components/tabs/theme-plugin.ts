@@ -616,7 +616,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           this.creator.setShowSidebar(true, true);
         }
       },
-      visible: this.createVisibleUpdater(),
+      visible: <any>new ComputedUpdater<boolean>(() => {
+        const isMobileView = this.creator.isMobileView;
+        const isShowOneCategoryInPropertyGrid = this.creator.showOneCategoryInPropertyGrid;
+        return this.creator.activeTab === "theme" && (isMobileView || !isShowOneCategoryInPropertyGrid);
+      }),
       active: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
       pressed: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
       locTitleName: "ed.themeSettings",
