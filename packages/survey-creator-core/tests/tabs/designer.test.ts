@@ -578,6 +578,22 @@ test("Check adorners lock questions for expand/collapse all", (): any => {
   expect(questionAdorner.collapsed).toBeFalsy();
 });
 
+test("Check lock questions action on tab change", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
+  const designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+  const lockQuestions = designerPlugin.model.surfaceToolbar.getActionById("lockQuestions");
+  lockQuestions.action(lockQuestions);
+  expect(lockQuestions.active).toBeTruthy();
+  designerPlugin.deactivate();
+  designerPlugin.activate();
+  const lockQuestionsNew = designerPlugin.model.surfaceToolbar.getActionById("lockQuestions");
+  expect(lockQuestionsNew.active).toBeTruthy();
+});
+
 test("expand/collapse event and expand all", () => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
