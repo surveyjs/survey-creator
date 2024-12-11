@@ -333,13 +333,13 @@ test("expand all and collapse all", () => {
   expect(questionAdorner.collapsed).toBeFalsy();
   expect(panelAdorner.collapsed).toBeFalsy();
 
-  designerPlugin.model.surfaceToolbar.actions[0].action(designerPlugin.model.surfaceToolbar.actions[0]);
+  designerPlugin.model.surfaceToolbar.getActionById("collapseAll").action();
   expect(page1Adorner.collapsed).toBeTruthy();
   expect(page2Adorner.collapsed).toBeTruthy();
   expect(questionAdorner.collapsed).toBeTruthy();
   expect(panelAdorner.collapsed).toBeTruthy();
 
-  designerPlugin.model.surfaceToolbar.actions[1].action(designerPlugin.model.surfaceToolbar.actions[1]);
+  designerPlugin.model.surfaceToolbar.getActionById("expandAll").action();
   expect(page1Adorner.collapsed).toBeFalsy();
   expect(page2Adorner.collapsed).toBeFalsy();
   expect(questionAdorner.collapsed).toBeFalsy();

@@ -143,9 +143,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     const survey: SurveyModel = this.creator.survey;
     const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle);
     const style: any = { ...this.model.surveyThemeVariables };
-    if (!!survey.width) {
-      style.maxWidth = survey.renderedWidth;
-    }
+    style.maxWidth = survey.renderedWidth;
 
     return (<React.Fragment>
       <div className={this.model.designerCss} style={style} >
