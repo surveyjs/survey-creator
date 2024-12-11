@@ -48,7 +48,7 @@
   transition: background $creator-transition-duration, background-color $creator-transition-duration, outline $creator-transition-duration;
 }
 
-.spg-checkbox:hover {
+.spg-checkbox:not(.spg-checkbox--checked):hover {
   .spg-checkbox__rectangle {
     background-color: var(--ctr-checkbox-background-color-hovered, $background-dim);
   }
