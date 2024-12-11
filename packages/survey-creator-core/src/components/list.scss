@@ -18,11 +18,12 @@
 
 .svc-list__item-body {
   @include textEllipsis;
+  --thm-list-item-padding-left: calc(var(--sjs-list-item-level) * var(--ctr-list-item-padding-left));
   display: flex;
   flex: 1 0 0;
   padding-block-start: var(--ctr-list-item-padding-top, calcSize(1));
   padding-block-end: var(--ctr-list-item-padding-bottom, calcSize(1));
-  padding-inline-start: var(--ctr-list-item-padding-left, calcSize(2));
+  padding-inline-start: var(--thm-list-item-padding-left, calcSize(2));
   padding-inline-end: var(--ctr-list-item-padding-right, calcSize(8));
 
   align-items: center;
@@ -108,23 +109,29 @@
 }
 
 .svc-list__item--with-icon > .svc-list__item-body {
+  --thm-list-item-padding-left: calc(var(--sjs-list-item-level) * var(--ctr-list-item-padding-left));
+
   padding-block-start: var(--ctr-list-item-padding-top-with-icon, calcSize(1.5));
   padding-block-end: var(--ctr-list-item-padding-bottom-with-icon, calcSize(1.5));
-  padding-inline-start: var(--ctr-list-item-padding-left, calcSize(2));
+  padding-inline-start: var(--thm-list-item-padding-left, calcSize(2));
   padding-inline-end: var(--ctr-list-item-padding-right, calcSize(8));
 }
 
 .svc-list__item--group > .svc-list__item-body {
+  --thm-list-item-padding-left: calc(var(--sjs-list-item-level) * var(--ctr-list-item-padding-left));
+
   padding-block-start: var(--ctr-list-item-padding-top, calcSize(1));
   padding-block-end: var(--ctr-list-item-padding-bottom, calcSize(1));
-  padding-inline-start: var(--ctr-list-item-padding-left, calcSize(1));
+  padding-inline-start: var(--thm-list-item-padding-left, calcSize(1));
   padding-inline-end: var(--ctr-list-item-padding-right-submenu, calcSize(1));
 }
 
 .svc-list__item--with-icon.svc-list__item--group > .svc-list__item-body {
+  --thm-list-item-padding-left: calc(var(--sjs-list-item-level) * var(--ctr-list-item-padding-left));
+
   padding-block-start: var(--ctr-list-item-padding-top-with-icon, calcSize(1.5));
   padding-block-end: var(--ctr-list-item-padding-bottom-with-icon, calcSize(1.5));
-  padding-inline-start: var(--ctr-list-item-padding-left, calcSize(1));
+  padding-inline-start: var(--thm-list-item-padding-left, calcSize(1));
   padding-inline-end: var(--ctr-list-item-padding-right-submenu, calcSize(1));
 }
 
