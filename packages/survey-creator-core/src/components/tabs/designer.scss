@@ -13,10 +13,6 @@ svc-tab-designer {
   overflow-y: scroll;
   position: static;
   background: var(--ctr-surface-background-color, $background-dim);
-
-  .svc-text {
-    color: var(--ctr-surface-placeholder-text-title-color, $foreground);
-  }
 }
 
 .svc-tab-designer--with-place-holder .svc-tab-designer_content {
