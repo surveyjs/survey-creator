@@ -838,6 +838,7 @@ export var enStrings = {
       background: "Background",
       appearance: "Appearance",
       accentColors: "Accent colors",
+      surfaceBackground: "Surface Background",
       scaling: "Scaling",
       others: "Others"
     },
