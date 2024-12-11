@@ -235,16 +235,15 @@
 }
 
 .svc-list__empty-container {
-  @include ctrDefaultFont;
-  @include textEllipsis;
-  text-align: center;
-  color: $foreground-light;
+  padding: var(--ctr-list-padding-top-no-data, calcSize(1.5)) var(--ctr-list-padding-right-no-data, calcSize(1.5))
+    var(--ctr-list-padding-bottom-no-data, calcSize(1.5)) var(--ctr-list-padding-left-no-data, calcSize(1.5));
 }
 
 .svc-list__empty-text {
-  width: 100%;
-  box-sizing: border-box;
-  padding: calcSize(1.5);
+  @include ctrDefaultFont;
+  @include textEllipsis;
+  text-align: center;
+  color: var(--ctr-list-no-data-text-color, $foreground-light);
 }
 
 .sv-popup--overlay {
