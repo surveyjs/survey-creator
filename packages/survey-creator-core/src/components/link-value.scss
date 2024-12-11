@@ -8,7 +8,8 @@
   cursor: pointer;
 }
 .svc-link-value-button {
-  margin-inline-start: calc(-1 * var(--ctr-actionbar-button-padding-left-medium-text, calcSize(2)));
+  --thm-margin-inline-start: calc(-1 * var(--ctr-actionbar-button-padding-left-medium-text));
+  margin-inline-start: var(--thm-margin-inline-start, calcSize(-2));
   border-radius: var(--ctr-actionbar-button-corner-radius, calcSize(12.5));
 }
 .svc-question-link__clear-button {
