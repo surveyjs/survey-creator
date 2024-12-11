@@ -693,7 +693,6 @@ test("Drag Drop (choices): scroll", async (t) => {
 
 test("Drag Drop to collapsed panel", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await hideAllAdornerActions();
     await setAllowEditSurveyTitle(false);
     await setShowAddQuestionButton(false);
     await ClientFunction(() => {
@@ -738,7 +737,6 @@ test("Drag Drop to collapsed panel", async (t) => {
 
 test("Drag Drop to collapsed page", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await hideAllAdornerActions();
     await ClientFunction(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
