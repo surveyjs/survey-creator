@@ -143,7 +143,7 @@
 
 .spg-row--multiple {
   display: flex;
-  gap: calcSize(1);
+  gap: var(--ctr-editor-layout-gap, calcSize(1));
   flex-wrap: wrap;
 
   & > div {

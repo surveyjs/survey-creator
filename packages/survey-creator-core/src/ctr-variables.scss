@@ -20,14 +20,14 @@ $font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family)))
 }
 
 @mixin ctrMediumFont {
-  --ctr-medium-bold-font-size: calc(3 * #{$base-unit});
-  --ctr-medium-bold-line-height: calc(4 * #{$base-unit});
+  --thm-medium-bold-font-size: calc(3 * #{$base-unit});
+  --thm-medium-bold-line-height: calc(4 * #{$base-unit});
 
   font-family: $font-family;
-  font-size: var(--ctr-font-medium-size, var(--ctr-medium-bold-font-size, 24px));
+  font-size: var(--ctr-font-medium-size, var(--thm-medium-bold-font-size, 24px));
   font-style: normal;
   font-weight: 400;
-  line-height: var(--ctr-font-medium-line-height, var(--ctr-medium-bold-line-height, 32px));
+  line-height: var(--ctr-font-medium-line-height, var(--thm-medium-bold-line-height, 32px));
 }
 
 @mixin ctrMediumBoldFont {
@@ -36,14 +36,14 @@ $font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family)))
 }
 
 @mixin ctrDefaultFont {
-  --default-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
-  --ctr-default-line-height: calc(1.5 * var(--default-font-size));
+  --thm-default-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
+  --thm-default-line-height: calc(1.5 * var(--thm-default-font-size));
 
   font-family: $font-family;
-  font-size: var(--ctr-font-default-size, var(--default-font-size, 16px));
+  font-size: var(--ctr-font-default-size, var(--thm-default-font-size, 16px));
   font-style: normal;
   font-weight: 400;
-  line-height: var(--ctr-font-default-line-height, var(--ctr-default-line-height, 24px));
+  line-height: var(--ctr-font-default-line-height, var(--thm-default-line-height, 24px));
 }
 
 @mixin ctrDefaultBoldFont {
