@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, changeToolboxScrolling, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength, RatingToolboxItem, setShowAddQuestionButton, setAllowEditSurveyTitle } from "../../helper";
+import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, changeToolboxScrolling, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength, RatingToolboxItem, setShowAddQuestionButton, setAllowEditSurveyTitle, hideAllAdornerActions } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
@@ -8,6 +8,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 
 test("Ghost Survey Element", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(2560, 1440);
     await setJSON({ pages: [{ name: "page1" }] });
@@ -31,6 +32,7 @@ test("Ghost Survey Element", async (t) => {
 
 test("Empty page", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(2560, 1440);
     await setJSON({ pages: [{ name: "page1" }] });
@@ -54,6 +56,7 @@ test("Empty page", async (t) => {
 
 test("Ghost Survey Element after several drops", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(2560, 1440);
     await setJSON({ pages: [{ name: "page1" }] });
@@ -99,6 +102,7 @@ test("Ghost Survey Element after several drops", async (t) => {
 
 test("Toolbox Item State After Drag", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await setJSON({ pages: [{ name: "page1" }] });
     await t.resizeWindow(2560, 1440);
     await setJSON({ pages: [{ name: "page1" }] });
@@ -116,6 +120,7 @@ test("Toolbox Item State After Drag", async (t) => {
 
 test("Empty Panel Styles", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(2560, 1440);
 
     const json = {
@@ -147,6 +152,7 @@ test("Empty Panel Styles", async (t) => {
 
 test("Empty Panel Dynamic Styles", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(2560, 1440);
 
     const json = {
@@ -177,6 +183,7 @@ test("Empty Panel Dynamic Styles", async (t) => {
 
 test("Choices: Ranking", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(2560, 1440);
 
     const json = {
@@ -214,6 +221,7 @@ test("Choices: Ranking", async (t) => {
 
 test("Choices: Mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(390, 844);
 
     const json = {
@@ -241,6 +249,7 @@ test("Choices: Mobile", async (t) => {
 });
 
 test("Choices: Ranking: Mobile", async (t) => {
+  await hideAllAdornerActions();
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(390, 844);
 
@@ -270,6 +279,7 @@ test("Choices: Ranking: Mobile", async (t) => {
 
 test("Choices: DropDown: Mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(390, 844);
 
     const json = {
@@ -298,6 +308,7 @@ test("Choices: DropDown: Mobile", async (t) => {
 
 test("Matrix: Property Grid: Choices", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(2560, 1440);
 
     const patchMatrixDragDropToDisableDrop = ClientFunction(() => {
@@ -403,6 +414,7 @@ test("Matrix: Property Grid: Choices: Scroll", async (t) => {
 test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await explicitErrorHandler();
+    await hideAllAdornerActions();
     await t.resizeWindow(2560, 1440);
 
     const json = {
@@ -457,6 +469,7 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
 // https://github.com/surveyjs/survey-creator/issues/3234
 test("Drag Drop to Multiline from Toolbox", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     changeToolboxScrolling(false);
     await explicitErrorHandler();
     await t.resizeWindow(2584, 1440);
@@ -500,6 +513,7 @@ test("Drag Drop to Multiline from Toolbox", async (t) => {
 
 test("Drag Drop to Multiline styles", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await explicitErrorHandler();
     await t.resizeWindow(832, 600);
     await setShowAddQuestionButton(false);
@@ -558,6 +572,7 @@ test("Drag Drop to Multiline styles", async (t) => {
 
 test("Drag Drop inside panel dynamic top indicator", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await explicitErrorHandler();
     await t.resizeWindow(832, 600);
 
@@ -605,6 +620,7 @@ test("Drag Drop inside panel dynamic top indicator", async (t) => {
 
 test("Toolbox Custom Component Icon", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(2560, 1440);
 
     const changeIconRatingForToolbox = ClientFunction((iconName) => {
@@ -644,6 +660,7 @@ test("Toolbox Custom Component Icon", async (t) => {
 
 test("Drag Drop (choices): scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(1000, 500);
 
     const json = {
@@ -802,6 +819,7 @@ test("Drag indicator for custom widget", async (t) => {
                 `;
       document.body.appendChild(widgetTemplateForKo);
     })();
+    await hideAllAdornerActions();
     await t.resizeWindow(1252, 900);
     await setShowAddQuestionButton(false);
 
@@ -823,6 +841,7 @@ test("Drag indicator for custom widget", async (t) => {
 
 test("Drag Drop Indicator: Inside Panel: Rows", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(1000, 500);
 
     const json = {
