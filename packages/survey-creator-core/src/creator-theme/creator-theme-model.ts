@@ -298,7 +298,8 @@ Serializer.addProperties("creatortheme", [
     default: "#F3F3F3FF",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
-        editor.title = getLocString("creatortheme.--sjs-special-background");
+        editor.titleLocation = "hidden";
+        // editor.title = getLocString("creatortheme.--sjs-special-background");
       }
     }
   }, {
