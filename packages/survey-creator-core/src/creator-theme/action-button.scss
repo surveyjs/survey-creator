@@ -14,10 +14,6 @@
 
   border: calcSize(0.25) solid transparent;
 
-  .svc-text {
-    color: var(--ctr-survey-action-button-text-color-positive, $primary);
-  }
-
   &:focus,
   &:hover {
     background-color: var(--ctr-survey-action-button-background-color-hovered-positive, $primary-light);
