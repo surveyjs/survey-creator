@@ -182,7 +182,7 @@ svc-question {
 .svc-survey-element-toolbar__item--active:not(.svc-survey-element-toolbar__item--pressed):enabled:hover,
 .svc-survey-element-toolbar__item--active:not(.svc-survey-element-toolbar__item--pressed):enabled:focus,
 .svc-survey-element-toolbar__item--active {
-  background-color: $secondary-backcolor-semi-light;
+  background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, $secondary-backcolor-semi-light);
 }
 
 .svc-survey-element-toolbar-item__icon,
@@ -1015,18 +1015,30 @@ svc-question,
 
   .svc-question__content {
     border-radius: 0;
-    border: 1px dashed $border;
     box-shadow: none;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: var(--ctr-survey-question-panel-border-width-nested, 1px) dashed var(--ctr-survey-question-panel-border-color-nested, $border);
+    }
   }
 
   .svc-hovered .svc-question__content:not(.svc-question__content--dragged) {
-    border: 1px solid $secondary-light;
-    box-shadow: 0 0 0 1px $secondary-light inset;
+    box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-hovered, 2px) var(--ctr-survey-question-panel-border-color-hovered, $secondary-light) inset;
+    &:after {
+      content: initial;
+    }
   }
 
   .svc-question__content.svc-question__content--selected:not(.svc-question__content--dragged) {
-    border: 1px solid $secondary;
-    box-shadow: 0 0 0 1px $secondary inset;
+    box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-selected, 2px) var(--ctr-survey-question-panel-border-color-selected, $secondary) inset;
+    &:after {
+      content: initial;
+    }
   }
 }
 

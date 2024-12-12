@@ -1447,3 +1447,22 @@ test("Theme tab: use theme palatte corresponding cretor theme palette if theme i
   expect(themePlugin.model.simulator.survey["themeName"]).toBe("my");
   expect(themePlugin.model.simulator.survey["colorPalette"]).toBe("dark");
 });
+
+test("Theme settings action visibility", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  expect(themePlugin["themeSettingsAction"].visible).toBeFalsy();
+
+  creator.activeTab = "theme";
+  expect(themePlugin["themeSettingsAction"].visible).toBeTruthy();
+
+  expect(creator.isMobileView).toBeFalsy();
+  expect(creator.showOneCategoryInPropertyGrid).toBeFalsy();
+
+  creator.showOneCategoryInPropertyGrid = true;
+  expect(themePlugin["themeSettingsAction"].visible).toBeFalsy();
+
+  creator.isMobileView = true;
+  expect(themePlugin["themeSettingsAction"].visible).toBeTruthy();
+});

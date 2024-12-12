@@ -188,7 +188,7 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: true }) previewShowResults: boolean;
 
-  private _showOneCategoryInPropertyGrid: boolean;
+  @property({ defaultValue: false }) private _showOneCategoryInPropertyGrid: boolean;
   get showOneCategoryInPropertyGrid(): boolean {
     return this._showOneCategoryInPropertyGrid;
   }
@@ -3983,6 +3983,10 @@ export class SurveyCreatorModel extends Base
 
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables);
+    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    if (designerPlugin) {
+      assign(newCssVariable, designerPlugin.model.scaleCssVariables || {});
+    }
     this.themeVariables = newCssVariable;
     const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v1";
     SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);

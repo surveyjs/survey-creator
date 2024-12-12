@@ -231,3 +231,13 @@ export function getDropdownValue(selector: string | Selector = ".sd-input.sd-dro
 export async function resetHoverToCreator(t: TestController): Promise<void> {
   await t.hover(Selector("#survey-creator"), { offsetX: 0, offsetY: 0 });
 }
+
+export const hideAllAdornerActions = ClientFunction(() => {
+  (<any>window).creator.onElementAllowOperations.add((_, options) => {
+    Object.keys(options).forEach(key => {
+      if (key !== "allowDragging" && key !== "allowEdit") {
+        options[key] = false;
+      }
+    });
+  });
+});
