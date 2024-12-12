@@ -13,6 +13,7 @@ svc-tab-designer {
   flex-direction: column;
   position: static;
   background: var(--ctr-surface-background-color, $background-dim);
+  width: 0;
 }
 
 .svc-tab-designer--with-place-holder .svc-designer-header {
