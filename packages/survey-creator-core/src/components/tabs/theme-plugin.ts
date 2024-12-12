@@ -393,7 +393,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.updateSimulatorTheme(this.creator.theme);
 
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
-      this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
+      this.invisibleToggleAction.active = this.model.showInvisibleElements;
       this.invisibleToggleAction.visible = this.model.isRunning;
     }
 
@@ -681,7 +681,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         visible: false,
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
-          this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
+          this.invisibleToggleAction.active = !this.invisibleToggleAction.active;
           this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
         }
       });
