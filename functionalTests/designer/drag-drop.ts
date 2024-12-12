@@ -1,4 +1,4 @@
-import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, patchDragDropToDisableDrop, RatingToolboxItem, SingleInputToolboxItem, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled } from "../helper";
+import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, patchDragDropToDisableDrop, RatingToolboxItem, SingleInputToolboxItem, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getListItemByText } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop";
 
@@ -238,10 +238,9 @@ test("Drag Drop Toolbox Responsivity", async (t) => {
     .click(".svc-toolbox__tool--dots");
 
   const PopupSelector = Selector(".sv-popup .sv-popup__container").filterVisible();
-  const DynamicPanelItem = PopupSelector.find(".sv-list__item").withText("Dynamic Panel");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
-  await t.dragToElement(DynamicPanelItem, EmptyPage, { speed: 0.5 });
+  await t.dragToElement(getListItemByText("Dynamic Panel"), EmptyPage, { speed: 0.5 });
 
   const name = await getQuestionNameByIndex(0);
   await t.expect(name).eql("question1");

@@ -208,7 +208,7 @@ test("add question from toolbox popup items", async (t) => {
     .click(".svc-toolbox__tool--dots")
     .expect(popup.visible).ok()
 
-    .click(popup.find(".sv-list__item"))
+    .click(popup.find(".svc-list__item"))
     .expect(Selector(".svc-question__content").exists).ok()
     .resizeWindow(1900, 600);
 });

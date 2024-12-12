@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, changeToolboxLocation, changeToolboxScrolling, wrapVisualTest, takeElementScreenshot, changeToolboxSearchEnabled, setAllowEditSurveyTitle, setShowAddQuestionButton, setDirRTL, setShowToolbox, setShowSidebar } from "../../helper";
+import { url, setJSON, changeToolboxLocation, changeToolboxScrolling, wrapVisualTest, takeElementScreenshot, changeToolboxSearchEnabled, setAllowEditSurveyTitle, setShowAddQuestionButton, setDirRTL, setShowToolbox, setShowSidebar, getListItemByText } from "../../helper";
 
 const title = "Page Navigator Screenshot";
 
@@ -695,10 +695,9 @@ test("Page navigator scrolls to top of long page and centers small page", async 
     });
     const designSurface = Selector(".svc-creator");
     const pageSelector = Selector(".svc-page-navigator__selector");
-    const listItemSelector = Selector(".sv-list__item-body");
-    await t.click(pageSelector).click(listItemSelector.withText("page4")).wait(500);
+    await t.click(pageSelector).click(getListItemByText("page4")).wait(500);
     await takeElementScreenshot("page-navigator-select-long-page.png", designSurface, t, comparer);
-    await t.click(pageSelector).click(listItemSelector.withText("page2")).wait(500);
+    await t.click(pageSelector).click(getListItemByText("page2")).wait(500);
     await takeElementScreenshot("page-navigator-select-short-page.png", designSurface, t, comparer);
   });
 });

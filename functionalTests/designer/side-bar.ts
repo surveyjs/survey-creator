@@ -72,7 +72,7 @@ test("SelectObject", async (t: TestController) => {
 
     .click(objectSelectorButton)
     .expect(objectSelectorPopup.visible).ok()
-    .expect(objectSelectorPopup.find(".sv-list__item").nth(0).focused).ok()
+    .expect(objectSelectorPopup.find(".svc-list__item").nth(0).focused).ok()
     .expect(Selector(".svc-page__content").classNames).notContains("svc-page__content--selected")
 
     .click(objectSelectorPopup.find("span").withText("page1"))
@@ -160,13 +160,13 @@ test("toolboxLocation left", async (t) => {
     .expect(popup.visible).ok()
     .expect(popup.offsetTop).gte(0)
     .expect(popup.offsetLeft).gte(0)
-    .click(popup.find(".sv-list__item"))
+    .click(popup.find(".svc-list__item"))
 
     .click(pageNavigator)
     .expect(popup.visible).ok()
     .expect(popup.offsetTop).gte(0)
     .expect(popup.offsetLeft).lt(1500 - 100) // window width - popup width
-    .click(popup.find(".sv-list__item").withText("page2"));
+    .click(popup.find(".svc-list__item").withText("page2"));
 
   await changeToolboxLocation("right");
   await t
@@ -174,13 +174,13 @@ test("toolboxLocation left", async (t) => {
     .expect(popup.visible).ok()
     .expect(popup.offsetTop).gte(0)
     .expect(popup.offsetLeft).lt(1500 - 100) // window width - popup width
-    .click(popup.find(".sv-list__item"))
+    .click(popup.find(".svc-list__item"))
 
     .click(pageNavigator)
     .expect(popup.visible).ok()
     .expect(popup.offsetTop).gte(0)
     .expect(popup.offsetLeft).gte(0)
-    .click(popup.find(".sv-list__item"))
+    .click(popup.find(".svc-list__item"))
 
     .resizeWindow(1920, 900); // reset window size
 });

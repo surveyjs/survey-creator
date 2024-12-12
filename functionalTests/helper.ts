@@ -79,7 +79,7 @@ export const surveySettingsButtonSelector = Selector(".sv-action-bar-item[title=
 export const themeSettingsButtonSelector = Selector(".sv-action-bar-item[title=\"Theme settings\"]");
 export const propertyGridSelector = Selector(".svc-side-bar__container");
 export const objectSelectorButton = Selector(".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item");
-export const objectSelectorPopup = Selector(".sv-popup.svc-object-selector .sv-list__container");
+export const objectSelectorPopup = Selector(".sv-popup.svc-object-selector .svc-list__container");
 export const selectedObjectTextSelector = ".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item__title";
 
 export const questions = Selector(".svc-question__content");
@@ -124,7 +124,7 @@ export function getQuestionBarItemByTitle(text: string) {
   return Selector(".svc-survey-element-toolbar__item[title=\"" + text + "\"]");
 }
 export function getListItemByText(text) {
-  return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text).filterVisible();
+  return Selector(".sv-popup__content .svc-list .svc-list__item").withText(text).filterVisible();
 }
 export function getAddNewQuestionButton() {
   return Selector(".svc-element__add-new-question > span").withText("Add Question");
@@ -145,7 +145,7 @@ export function getSubToolboxItemByText(text: string) {
 export async function addQuestionByAddQuestionButton(t: TestController, text: string) {
   await t
     .click(Selector(".svc-element__add-new-question .svc-element__question-type-selector"))
-    .click(Selector(".sv-list__item span").withExactText(text).filterVisible());
+    .click(Selector(".svc-list__item span").withExactText(text).filterVisible());
 }
 
 function selectorIsVisibleFilter(selector: Selector) {

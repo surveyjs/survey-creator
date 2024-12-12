@@ -533,8 +533,8 @@ test("Availability of items", async (t) => {
       }
     ]
   };
-  const visibleListItems = Selector(".sv-list__item").filterVisible();
-  const visibleDisabledListItems = Selector(".sv-list__item.sv-list__item--disabled").filterVisible();
+  const visibleListItems = Selector(".svc-list__item").filterVisible();
+  const visibleDisabledListItems = Selector(".svc-list__item.svc-list__item--disabled").filterVisible();
   await setJSON(json);
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
@@ -589,7 +589,7 @@ test("Could not change 'and' on 'or' in logic tab or in condition editor", async
       }
     ]
   };
-  const visibleListItems = Selector(".sv-list__item").filterVisible();
+  const visibleListItems = Selector(".svc-list__item").filterVisible();
 
   await setJSON(json);
   await t
@@ -738,5 +738,5 @@ test("Logic Tab - The Search option is available", async (t) => {
 
     .click(logicQuestionSelector)
     .expect(logicQuestionSelector.parent().find(".sv-popup").visible).ok()
-    .expect(logicQuestionSelector.parent().find(".sv-popup .sv-list__filter").visible).ok();
+    .expect(logicQuestionSelector.parent().find(".sv-popup .svc-list__filter").visible).ok();
 });

@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, takeElementScreenshot, wrapVisualTest, urlLocalized_de } from "../../helper";
+import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, takeElementScreenshot, wrapVisualTest, urlLocalized_de, getListItemByText } from "../../helper";
 
 const title = "Translation tab Screenshot";
 
@@ -59,7 +59,7 @@ test("strings view", async (t) => {
 
     await t.resizeWindow(2560, 1440);
     await t.click(getBarItemByTitle("Used Strings Only"));
-    await t.click(Selector(".sv-list__item").withText("All Strings"));
+    await t.click(getListItemByText("All Strings"));
     await takeElementScreenshot("translation-tab-show-all-strings.png", stringsView, t, comparer);
   });
 });
