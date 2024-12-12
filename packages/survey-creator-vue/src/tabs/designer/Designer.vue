@@ -26,37 +26,26 @@
               :survey="model.creator.survey"
             ></SvComponent>
           </div>
-        </template>
-
-        <template v-if="!model.showPlaceholder">
           <div
-            :class="model.designerCss"
-            :style="[
-              { maxWidth: model.survey.renderedWidth },
-              model.surveyThemeVariables,
-            ]"
+            class="svc-designer__placeholder-container"
+            :data-sv-drop-target-survey-element="'newGhostPage'"
           >
+            <SurfacePlaceholder
+              :name="'designer'"
+              :placeholderTitleText="model.placeholderTitleText"
+              :placeholderDescriptionText="model.placeholderDescriptionText"
+            />
             <div
-              class="svc-designer__placeholder-container"
-              :data-sv-drop-target-survey-element="'newGhostPage'"
+              className="svc-designer-placeholder-page"
+              data-sv-drop-target-survey-element="newGhostPage"
             >
-              <SurfacePlaceholder
-                :name="'designer'"
-                :placeholderTitleText="model.placeholderTitleText"
-                :placeholderDescriptionText="model.placeholderDescriptionText"
+              <SvComponent
+                :is="'svc-page'"
+                :survey="model.creator.survey"
+                :creator="model.creator"
+                :page="model.newPage"
+                :isGhost="true"
               />
-              <div
-                className="svc-designer-placeholder-page"
-                data-sv-drop-target-survey-element="newGhostPage"
-              >
-                <SvComponent
-                  :is="'svc-page'"
-                  :survey="model.creator.survey"
-                  :creator="model.creator"
-                  :page="model.newPage"
-                  :isGhost="true"
-                />
-              </div>
             </div>
           </div>
         </template>
@@ -111,7 +100,6 @@
               />
             </div>
           </div>
-
           <div v-if="!model.creator.isMobileView" class="svc-tab-designer__tools">
             <div
               v-if="model.creator.showPageNavigator"
@@ -122,11 +110,11 @@
                 :pagesController="model.pagesController"
                 :pageEditMode="model.creator.pageEditMode"
               />
+              </div>
+              <div v-if="model.hasToolbar" class="svc-tab-designer__toolbar">
+                <SvComponent :is="'sv-action-bar'" :model="model.surfaceToolbar" />
+              </div>
             </div>
-            <div v-if="model.hasToolbar" class="svc-tab-designer__toolbar">
-              <SvComponent :is="'sv-action-bar'" :model="model.surfaceToolbar" />
-            </div>
-          </div>
         </template>
       </div>
     </Scroll>
