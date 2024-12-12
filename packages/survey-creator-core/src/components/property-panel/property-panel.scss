@@ -94,9 +94,7 @@
   height: 86px;
 }
 
-[dir="rtl"],
-[style*="direction:rtl"],
-[style*="direction: rtl"],
+:dir(rtl),
 .svc-creator__side-bar--left {
   .svc-property-grid-placeholder__image {
     transform: rotateY(180deg);

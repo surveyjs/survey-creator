@@ -1,8 +1,6 @@
 @import "../../variables.scss";
 .svc-creator__toolbox--right,
-[dir="rtl"],
-[style*="direction:rtl"],
-[style*="direction: rtl"] {
+:dir(rtl) {
   .svc-toolbox {
     direction: rtl;
   }

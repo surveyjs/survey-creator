@@ -166,9 +166,7 @@ svc-tab-designer {
 }
 
 .svc-creator__toolbox--right,
-[dir="rtl"],
-[style*="direction:rtl"],
-[style*="direction: rtl"] {
+:dir(rtl) {
   .svc-tab-designer__toolbar {
     position: absolute;
     bottom: calcSize(0);

@@ -308,9 +308,7 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, 8px) + var(--ctr-m
   }
 }
 
-[dir="rtl"],
-[style*="direction:rtl"],
-[style*="direction: rtl"],
+:dir(rtl),
 .svc-full-container.svc-creator__side-bar--left {
   .svd-grid-hide .sv-svg-icon,
   .svd-grid-expand .sv-svg-icon {

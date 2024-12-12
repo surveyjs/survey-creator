@@ -114,9 +114,7 @@ svc-page-navigator-item,
 }
 
 .svc-creator__toolbox--right,
-[dir='rtl'],
-[style*='direction:rtl'],
-[style*='direction: rtl'] {
+:dir(rtl) {
   .svc-page-navigator-item__banner {
     right: unset;
     left: 0;

@@ -24,9 +24,7 @@
   align-items: center;
 }
 
-[dir="rtl"],
-[style*="direction:rtl"],
-[style*="direction: rtl"],
+:dir(rtl),
 .svc-creator__side-bar--left {
   .svc-sidebar-tabs__collapse-button .sv-svg-icon {
     transform: rotateY(180deg);

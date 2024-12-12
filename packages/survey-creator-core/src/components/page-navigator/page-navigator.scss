@@ -102,9 +102,7 @@ svc-page-navigator,
 }
 
 .svc-creator__toolbox--right,
-[dir="rtl"],
-[style*="direction:rtl"],
-[style*="direction: rtl"] {
+:dir(rtl)  {
   .svc-tab-designer__page-navigator {
     right: unset;
     left: var(--ctr-page-navigator-padding-left, calcSize(1.5));
