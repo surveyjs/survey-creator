@@ -71,7 +71,7 @@
     display: flex;
 
     .sv-action-bar {
-      padding: var(--ctr-menu-toolbar-padding-vertical, 0) var(--ctr-menu-toolbar-padding-horizontal, calcSize(1));
+      padding: var(--ctr-menu-toolbar-padding-vertical, 0) var(--ctr-menu-toolbar-padding-horizontal, calcSize(2));
       justify-content: flex-end;
     }
 
@@ -80,22 +80,19 @@
     }
 
     .sv-action-bar > .sv-action:not(.sv-action--hidden) ~ .sv-action .sv-action-bar-separator {
-      --thm-menu-toolbar-button-gap: calc(var(--ctr-menu-toolbar-gap) / 2);
       --thm-menu-toolbar-button-height: calc(
         var(--ctr-menu-toolbar-button-padding-top) + var(--ctr-menu-toolbar-button-padding-bottom) +
           var(--ctr-menu-toolbar-button-icon-width)
       );
 
       display: inline-block;
-      margin: 0 var(--thm-menu-toolbar-button-gap, calcSize(1));
+      margin: 0 0 0 var(--ctr-menu-toolbar-gap, calcSize(2));
       height: var(--thm-menu-toolbar-button-height, calcSize(5));
     }
 
     .sv-action {
-
       .sv-action-bar-item {
-        --thm-menu-toolbar-button-gap: calc(var(--ctr-menu-toolbar-gap) / 2);
-        margin: 0 var(--thm-menu-toolbar-button-gap, calcSize(1));
+        margin: 0;
         padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1))
           var(--ctr-menu-toolbar-button-padding-right, calcSize(1))
           var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1))
@@ -103,6 +100,11 @@
       }
       .sv-action-bar-item--active {
         background: var(--ctr-menu-toolbar-button-background-color-selected, transparent);
+      }
+    }
+    .sv-action:not(.sv-action--hidden) ~ .sv-action:not(.sv-action--hidden) {
+      .sv-action-bar-item {
+         margin-left: var(--ctr-menu-toolbar-gap, calcSize(2))
       }
     }
 
