@@ -4741,21 +4741,22 @@ test("ZoomIn/ZoomOut designer surface", (): any => {
   const creator = new CreatorTester();
   const designerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(designerTab["surfaceScale"]).toBe(100);
-  expect(designerTab["scaleCssVariables"]).toStrictEqual({});
-  expect(designerTab.surveyThemeVariables["--ctr-surface-base-unit"]).toBe(undefined);
+  expect(creator.themeVariables).toStrictEqual({});
 
   designerTab["scalingSurface"](10);
   expect(designerTab["surfaceScale"]).toBe(100);
+  expect(creator.themeVariables).toStrictEqual({});
   expect(creator.survey.widthScale).toBe(100);
 
   designerTab["scalingSurface"](200);
   expect(designerTab["surfaceScale"]).toBe(100);
+  expect(creator.themeVariables).toStrictEqual({});
   expect(creator.survey.widthScale).toBe(100);
 
   designerTab["scalingSurface"](150);
   expect(creator.survey.widthScale).toBe(150);
   expect(designerTab["surfaceScale"]).toBe(150);
-  expect(designerTab["scaleCssVariables"]).toStrictEqual({
+  expect(creator.themeVariables).toStrictEqual({
     "--ctr-surface-base-unit": "12px",
     "--lbr-corner-radius-unit": "12px",
     "--lbr-font-unit": "12px",
@@ -4764,5 +4765,4 @@ test("ZoomIn/ZoomOut designer surface", (): any => {
     "--lbr-spacing-unit": "12px",
     "--lbr-stroke-unit": "1.5px"
   });
-  expect(designerTab.surveyThemeVariables["--ctr-surface-base-unit"]).toBe("12px");
 });

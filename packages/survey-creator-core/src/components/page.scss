@@ -144,7 +144,7 @@ svc-page {
   background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, $background-dim);
 }
 .svc-page-toolbar__item:not(.svc-page-toolbar__item--pressed):focus:enabled {
-  background-color: var(--ctr-survey-page-toolbar-item-background-color-selectedd, $background-dim);
+  background-color: var(--ctr-survey-page-toolbar-item-background-color-selected, $background-dim);
 }
 
 //pressed state
