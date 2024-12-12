@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setAllowEditSurveyTitle, setShowAddQuestionButton, setExpandCollapseButtonVisibility, setShowToolbox, setShowSidebar } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setAllowEditSurveyTitle, setShowAddQuestionButton, setExpandCollapseButtonVisibility, setShowToolbox, setShowSidebar, getSurveyListItemByText } from "../../helper";
 
 const title = "Designer surface";
 
@@ -413,8 +413,8 @@ test("Choices (Tagbox): Layout", async (t) => {
       .click(getPropertyGridCategory("Data"))
       .click(Selector("span").withExactText("Set Default Answer"))
       .click(Selector(".sv-popup--modal .sd-dropdown__filter-string-input"))
-      .click(getListItemByText("Item 2"))
-      .click(getListItemByText("Item 3"))
+      .click(getSurveyListItemByText("Item 2"))
+      .click(getSurveyListItemByText("Item 3"))
       .click(Selector(".sv-popup--modal button").withExactText("Apply"));
 
     const QRoot = Selector(".svc-question__adorner").filterVisible();

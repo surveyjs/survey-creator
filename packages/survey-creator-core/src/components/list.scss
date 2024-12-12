@@ -19,9 +19,8 @@
 .svc-list__item-body {
   @include textEllipsis;
   --thm-list-item-padding-left-default: calc(2 * #{$base-unit});
-  --thm-list-item-padding-left: calc(
-    var(--sjs-list-item-level) * var(--ctr-list-item-padding-left, var(--thm-list-item-padding-left-default))
-  );
+  --thm-list-item-padding-delta: var(--ctr-list-item-padding-left, var(--thm-list-item-padding-left-default));
+  --thm-list-item-padding-left: calc(var(--sjs-list-item-level) * var(--thm-list-item-padding-delta));
   display: flex;
   flex: 1 0 0;
   padding-block-start: var(--ctr-list-item-padding-top, calcSize(1));
@@ -166,7 +165,8 @@
 }
 
 .svc-list-item__marker-icon + * {
-  margin-inline-end: calc(0px - var(--ctr-list-item-gap, calcSize(2)));
+  --thm-list-item-gap: var(--ctr-list-item-gap, calc(2 * #{$base-unit}));
+  margin-inline-end: calc(0px - var(--thm-list-item-gap));
 }
 
 .svc-list__container {
