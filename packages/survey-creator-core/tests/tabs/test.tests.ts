@@ -1,7 +1,7 @@
 import { CreatorTester } from "../creator-tester";
 import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components/results";
-import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, StylesManager, _setIsTouch } from "survey-core";
+import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, StylesManager, _setIsTouch, Action } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 import { SurveySimulatorModel, simulatorDevices } from "../../src/components/simulator";
 import { editorLocalization, getLocString } from "../../src/editorLocalization";
@@ -466,6 +466,22 @@ test("invisibleToggleAction title", (): any => {
   creator.makeNewViewActive("test");
   const action = creator.getActionBarItem("showInvisible");
   expect(action.title).toEqual("Show invisible elements");
+});
+test("invisibleToggleAction state change", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  creator.makeNewViewActive("test");
+  const action = creator.getActionBarItem("showInvisible") as Action;
+  expect(action.active).toBeFalsy();
+  action.action();
+  expect(action.active).toBeTruthy();
 });
 
 test("Test correct survey results node levels", (): any => {
