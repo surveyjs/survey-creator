@@ -59,20 +59,26 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
   }
   private increaseTimer: NodeJS.Timer;
   private decreaseTimer: NodeJS.Timer;
+
+  private clearTimers() {
+    clearTimeout(this.decreaseTimer);
+    clearTimeout(this.increaseTimer);
+  }
   public onUpButtonMouseDown = () => {
     this.increase();
+    this.clearTimers();
     this.increaseTimer = setTimeout(this.onUpButtonMouseDown, 200);
   }
   public onDownButtonMouseDown = () => {
     this.decrease();
+    this.clearTimers();
     this.decreaseTimer = setTimeout(this.onDownButtonMouseDown, 200);
   }
   public onButtonMouseLeave = () => {
     this.onButtonMouseUp();
   }
   public onButtonMouseUp = () => {
-    clearTimeout(this.decreaseTimer);
-    clearTimeout(this.increaseTimer);
+    this.clearTimers();
   }
   public onKeyDown = (event: KeyboardEvent) => {
     switch (event.key) {
