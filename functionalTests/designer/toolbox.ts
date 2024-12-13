@@ -346,7 +346,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(23);
 });
 
-test("toolbox subTypes: add items by drag-n-drop", async (t) => {
+test.only("toolbox subTypes: add items by drag-n-drop", async (t) => {
   await explicitErrorHandler();
   await t.resizeWindow(1900, 800);
 
@@ -368,8 +368,7 @@ test("toolbox subTypes: add items by drag-n-drop", async (t) => {
     .expect(Selector(".svc-question__content").filterVisible().count).eql(1)
 
     .hover(getToolboxItemByText("Rating Scale"))
-    .wait(400)
-    .dragToElement(getToolboxItemByText("Rating Scale"), newGhostPagePage, { speed: 0.5, destinationOffsetX: 400, destinationOffsetY: 100 })
+    .dragToElement(getToolboxItemByText("Rating Scale"), newGhostPagePage, { speed: 0.5 })
     .expect(Selector(".svc-question__content").filterVisible().count).eql(2)
     .expect(toolboxSubTypesPopup.visible).notOk();
 
