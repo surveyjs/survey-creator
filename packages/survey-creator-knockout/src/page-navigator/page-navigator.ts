@@ -26,17 +26,11 @@ ko.components.register("svc-page-navigator", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const model = new PageNavigatorView(params.controller, params.pageEditMode);
-      model.setItemsContainer(componentInfo.element.parentElement);
       const implementor = new ImplementorBase(model);
-      const scrollableViewPort = componentInfo.element.parentElement.parentElement.parentElement;
-      model.setScrollableContainer(scrollableViewPort);
       if (params.pageEditMode !== "bypage") {
-        scrollableViewPort.onscroll = function (this: GlobalEventHandlers, ev: Event) {
-          return model.onContainerScroll(ev.currentTarget as HTMLDivElement);
-        };
+        model.attachToUI(componentInfo.element);
       }
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
-        scrollableViewPort.onscroll = undefined;
         model.dispose();
         implementor.dispose();
       });

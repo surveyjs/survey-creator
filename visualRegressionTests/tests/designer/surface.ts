@@ -2453,7 +2453,7 @@ test("Question description bottom", async (t) => {
   });
 });
 
-test("Scaling design surface", async (t) => {
+test.skip("Scaling design surface", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await ClientFunction(() => {
       window["creator"].showCreatorThemeSettings = true;

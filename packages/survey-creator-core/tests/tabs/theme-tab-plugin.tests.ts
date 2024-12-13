@@ -6,7 +6,7 @@ export { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme
 export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/header-settings";
 
-import { ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionFileModel, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
+import { Action, ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionFileModel, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "../creator-tester";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
@@ -58,6 +58,24 @@ test("Creator footer action bar: only theme tab", (): any => {
 
   creator.activeTab = "logic";
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
+});
+
+test("Theme invisibleToggleAction state change", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showDesignerTab: false, showPreviewTab: false, showThemeTab: true, showLogicTab: true });
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  creator.showInvisibleElementsInTestSurveyTab = true;
+  creator.makeNewViewActive("theme");
+  const action = creator.footerToolbar.getActionById("showInvisible") as Action;
+  expect(action.active).toBeFalsy();
+  action.action();
+  expect(action.active).toBeTruthy();
 });
 
 test("Creator footer action bar: all tabs", (): any => {

@@ -36,9 +36,11 @@
       }
     }
   }
+
   .svc-question__drag-area {
     height: calcSize(3);
   }
+
   .svc-question__content--selected {
     .svc-rating-question-controls {
       bottom: calcSize(10);
@@ -70,6 +72,7 @@
     margin-right: calcSize(3);
     margin-top: calcSize(3);
   }
+
   .svc-designer-placeholder-page {
     .svc-page__footer {
       margin-top: 0;
@@ -106,7 +109,6 @@
 
   .svc-tab-designer {
     .sd-container-modern {
-      min-width: calcSize(43);
       padding: 0;
     }
   }
