@@ -14,6 +14,7 @@ export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShow
 export class TabDesignerViewModel extends Base {
   private minSurfaceScaling = 20;
   private maxSurfaceScaling = 200;
+  private stepSurfaceScaling = 10;
   private cssUpdater: ComputedUpdater;
   private pagesControllerValue: PagesController;
   public surfaceScale = 100;
@@ -131,7 +132,15 @@ export class TabDesignerViewModel extends Base {
       iconName: "icon-zoomin-24x24",
       iconSize: "auto",
       visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
-      action: () => { this.scaleSurface(this.surfaceScale + 10); }
+      action: () => { this.scaleSurface(this.surfaceScale + this.stepSurfaceScaling); }
+    });
+    surfaceToolbarItems.push(<IAction>{
+      id: "zoom100",
+      locTooltipName: "ed.zoom100Tooltip",
+      iconName: "icon-actual-size-24x24",
+      iconSize: "auto",
+      visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
+      action: () => { this.scaleSurface(100); }
     });
     surfaceToolbarItems.push(<IAction>{
       id: "zoomOut",
@@ -139,7 +148,7 @@ export class TabDesignerViewModel extends Base {
       iconName: "icon-zoomout-24x24",
       iconSize: "auto",
       visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
-      action: () => { this.scaleSurface(this.surfaceScale - 10); }
+      action: () => { this.scaleSurface(this.surfaceScale - this.stepSurfaceScaling); }
     });
 
     surfaceToolbarItems.push({
