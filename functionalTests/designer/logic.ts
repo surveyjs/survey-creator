@@ -247,7 +247,7 @@ test("Edit Logic rule", async (t) => {
 
     .expect(logicQuestionSelector.nth(-1).textContent).contains("q2")
     .click(logicQuestionSelector.nth(-1))
-    .click(getSurveyListItemByText("q3"))
+    .click(getListItemByText("q3"))
 
     .click(doneButton)
     .expect(tableRulesSelector.count).eql(1)
