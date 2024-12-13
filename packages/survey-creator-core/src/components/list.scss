@@ -131,6 +131,12 @@
   padding-inline-end: var(--ctr-list-item-padding-right-submenu, calcSize(1));
 }
 
+.svc-list__item--with-icon.svc-list__item--group .sv-popup-inner > .sv-popup__container {
+  --thm-inner-popup-margin-top: calc(var(--ctr-list-item-padding-top) - var(--ctr-list-item-padding-top-with-icon) - var(--ctr-list-padding-top));
+  --thm-inner-popup-margin-top-default: calc(-0.5 * #{$base-unit});
+  margin-top: var(--thm-inner-popup-margin-top, var(--thm-inner-popup-margin-top-default, -4px));
+}
+
 .svc-list__item-separator {
   width: 100%;
   height: var(--ctr-separator-width, 1px);
@@ -166,7 +172,7 @@
 
 .svc-list-item__marker-icon + * {
   --thm-list-item-gap: var(--ctr-list-item-gap, calc(2 * #{$base-unit}));
-  margin-inline-end: calc(0px - var(--thm-list-item-gap));
+  margin-inline-start: calc(0px - var(--thm-list-item-gap));
 }
 
 .svc-list__container {
@@ -182,8 +188,10 @@
   align-items: center;
   gap: var(--ctr-list-search-gap, calcSize(2));
 
-  padding: var(--ctr-list-search-padding-top, 20px) var(--ctr-list-search-padding-right, 16px)
-    var(--ctr-list-search-padding-bottom, 20px) var(--ctr-list-search-padding-left, 24px);
+  padding-inline-start: var(--ctr-list-search-padding-left, calcSize(2));
+  padding-inline-end: var(--ctr-list-search-padding-right, calcSize(2));
+  padding-block-start: var(--ctr-list-search-padding-top, calcSize(1.5));
+  padding-block-end: var(--ctr-list-search-padding-bottom, calcSize(1.5));
 
   border-radius: var(--ctr-toolbox-search-corner-radius, 0px);
   border-bottom: var(--ctr-list-search-border-width-bottom, 1px) solid
