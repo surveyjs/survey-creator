@@ -74,7 +74,7 @@ export class CreatorResponsivityManager {
     this.creator.sidebar.flyoutMode = flyoutSidebar;
 
   }
-  process(isFirst: boolean = false) {
+  public process(isFirst: boolean = false) {
     if (isFirst) {
       this.creator.sidebar.blockAnimations();
       this.creator.toolbox.blockAnimations();
@@ -101,11 +101,18 @@ export class CreatorResponsivityManager {
       this.creator.toolbox.releaseAnimations();
     }
   }
-  updateSurveyActualWidth() {
+  public updateSurveyActualWidth() {
     if (!!this.container && !!this.container.querySelector) {
-      const surveyContainer = this.container?.querySelector(".svc-tab-designer_content > div") as HTMLDivElement;
-      if (!!surveyContainer) {
-        this.creator.survey.setResponsiveStartWidth(surveyContainer.offsetWidth);
+      const surveyContainer = this.container?.querySelector(".svc-tab-designer_content") as HTMLDivElement;
+      if (!!surveyContainer && window && typeof window.getComputedStyle === "function") {
+        const conputedStyles = getComputedStyle(surveyContainer);
+        let paddingLeft = 0;
+        let paddingRight = 0;
+        try {
+          paddingLeft = parseFloat((conputedStyles.paddingLeft || "").replace("px", ""));
+          paddingRight = parseFloat((conputedStyles.paddingRight || "").replace("px", ""));
+        } catch (e) { }
+        this.creator.survey.setResponsiveStartWidth(surveyContainer.offsetWidth - paddingLeft - paddingRight);
       }
     }
   }

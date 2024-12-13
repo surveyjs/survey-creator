@@ -43,34 +43,15 @@ export class SurveyPageNavigator extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
-  private get scrollableContainer(): HTMLElement {
-    const el = this.containerRef.current as HTMLDivElement;
-    if (!!el) {
-      const self = this;
-      return el.parentElement.parentElement.parentElement;
-    }
-    return el;
-  }
   componentDidMount() {
     super.componentDidMount();
     if (this.props.pageEditMode !== "bypage") {
       const el = this.containerRef.current as HTMLDivElement;
-      if (!!el) {
-        const self = this;
-        el.parentElement.parentElement.parentElement.onscroll = function (this: GlobalEventHandlers, ev: Event) {
-          return self.model.onContainerScroll(ev.currentTarget as HTMLDivElement);
-        };
-        self.model.setItemsContainer(el.parentElement as HTMLDivElement);
-        self.model.setScrollableContainer(el.parentElement.parentElement.parentElement as HTMLDivElement);
-      }
+      this.model.attachToUI(el);
     }
   }
   componentWillUnmount() {
     super.componentWillUnmount();
-    const el = this.containerRef.current;
-    if (!!el) {
-      el.parentElement.parentElement.parentElement.onscroll = undefined;
-    }
     this.model.stopItemsContainerHeightObserver();
     this.model.setScrollableContainer(undefined);
   }

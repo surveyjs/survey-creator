@@ -14,10 +14,10 @@ export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShow
 export class TabDesignerViewModel extends Base {
   private minSurfaceScaling = 20;
   private maxSurfaceScaling = 200;
+  private stepSurfaceScaling = 10;
   private cssUpdater: ComputedUpdater;
   private pagesControllerValue: PagesController;
-  private scaleCssVariables = {};
-  private surfaceScale = 100;
+  public surfaceScale = 100;
 
   unitDictionary: { [index: string]: number } = {
     "--ctr-surface-base-unit": 8,
@@ -34,7 +34,7 @@ export class TabDesignerViewModel extends Base {
   @property() pageCount: number;
   @property() designerCss: string;
   @property() showPlaceholder: boolean;
-  @property({ defaultValue: {} }) surveyThemeVariables: { [index: string]: string } = {};
+  public scaleCssVariables: { [index: string]: string } = {};
   public creator: SurveyCreatorModel;
 
   public surfaceToolbar: ActionContainer;
@@ -84,15 +84,6 @@ export class TabDesignerViewModel extends Base {
     return Object.keys(page.toJSON()).filter(key => key !== "name").length > 0;
   }
 
-  private updateDesignTabSurveyThemeVariables(): void {
-    const cssVariables: { [index: string]: string } = {};
-    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, this.scaleCssVariables, {
-      "--sjs-base-unit": "var(--ctr-surface-base-unit)",
-      "--sjs-font-size": "calc(2 * var(--ctr-surface-base-unit))",
-    });
-    this.surveyThemeVariables = cssVariables;
-  }
-
   constructor(creator: SurveyCreatorModel) {
     super();
     this.creator = creator;
@@ -106,8 +97,16 @@ export class TabDesignerViewModel extends Base {
 
     this.initSurfaceToolbar();
     this.initSurvey();
-    this.updateDesignTabSurveyThemeVariables();
   }
+  public get surveyThemeVariables(): {} {
+    const cssVariables = {};
+    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, {
+      "--sjs-base-unit": "var(--ctr-surface-base-unit)",
+      "--sjs-font-size": "calc(2 * var(--ctr-surface-base-unit))",
+    });
+    return cssVariables;
+  }
+
   private initSurfaceToolbar() {
     this.surfaceToolbar = new ActionContainer();
 
@@ -126,22 +125,32 @@ export class TabDesignerViewModel extends Base {
     this.surfaceToolbar.cssClasses = defaultActionBarCss;
 
     const surfaceToolbarItems: Array<IAction> = [];
-    if (this.creator.showCreatorThemeSettings) {
-      surfaceToolbarItems.push(<IAction>{
-        id: "zoomIn",
-        locTooltipName: "ed.zoomInTooltip",
-        iconName: "icon-zoomin-24x24",
-        iconSize: "auto",
-        action: () => { this.scalingSurface(this.surfaceScale + 10); }
-      });
-      surfaceToolbarItems.push(<IAction>{
-        id: "zoomOut",
-        locTooltipName: "ed.zoomOutTooltip",
-        iconName: "icon-zoomout-24x24",
-        iconSize: "auto",
-        action: () => { this.scalingSurface(this.surfaceScale - 10); }
-      });
-    }
+
+    surfaceToolbarItems.push(<IAction>{
+      id: "zoomIn",
+      locTooltipName: "ed.zoomInTooltip",
+      iconName: "icon-zoomin-24x24",
+      iconSize: "auto",
+      visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
+      action: () => { this.scaleSurface(this.surfaceScale + this.stepSurfaceScaling); }
+    });
+    surfaceToolbarItems.push(<IAction>{
+      id: "zoom100",
+      locTooltipName: "ed.zoom100Tooltip",
+      iconName: "icon-actual-size-24x24",
+      iconSize: "auto",
+      visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
+      action: () => { this.scaleSurface(100); }
+    });
+    surfaceToolbarItems.push(<IAction>{
+      id: "zoomOut",
+      locTooltipName: "ed.zoomOutTooltip",
+      iconName: "icon-zoomout-24x24",
+      iconSize: "auto",
+      visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
+      action: () => { this.scaleSurface(this.surfaceScale - this.stepSurfaceScaling); }
+    });
+
     surfaceToolbarItems.push({
       id: "collapseAll",
       locTooltipName: "ed.collapseAllTooltip",
@@ -174,15 +183,22 @@ export class TabDesignerViewModel extends Base {
     this.surfaceToolbar.setItems(surfaceToolbarItems);
   }
 
-  private scalingSurface(scaleFactor: number): void {
+  private scaleSurface(scaleFactor: number): void {
     if (scaleFactor <= this.minSurfaceScaling || scaleFactor >= this.maxSurfaceScaling) return;
 
     this.surfaceScale = scaleFactor;
-    this.creator.setDesignerSurveyScale(scaleFactor);
+    if (!this.creator.survey.responsiveStartWidth) {
+      this.creator.responsivityManager?.updateSurveyActualWidth();
+    }
+    this.creator.survey.widthScale = scaleFactor;
+
     Object.keys(this.unitDictionary).forEach(key => {
       this.scaleCssVariables[key] = (this.unitDictionary[key] * scaleFactor / 100) + "px";
     });
-    this.updateDesignTabSurveyThemeVariables();
+
+    const newCssVariable = {};
+    assign(newCssVariable, this.creator.themeVariables, this.scaleCssVariables);
+    this.creator.themeVariables = newCssVariable;
   }
 
   get survey() {
@@ -241,7 +257,11 @@ export class TabDesignerViewModel extends Base {
     this.survey.registerFunctionOnPropertyValueChanged("pages", () => {
       this.checkNewPage(true);
       this.updatePages();
-    });
+    }, "__designer_tab_model__");
+    this.survey.registerFunctionOnPropertyValueChanged("widthMode", () => {
+      this.survey.responsiveStartWidth = undefined;
+      setTimeout(() => this.scaleSurface(this.surfaceScale), 1);
+    }, "__designer_tab_model__");
     this.designerCss = <any>this.cssUpdater;
     this.pagesController.onSurveyChanged();
   }
@@ -279,6 +299,8 @@ export class TabDesignerViewModel extends Base {
   public dispose(): void {
     super.dispose();
     this.cssUpdater && this.cssUpdater.dispose();
+    this.survey.unRegisterFunctionOnPropertyValueChanged("pages", "__designer_tab_model__");
+    this.survey.unRegisterFunctionOnPropertyValueChanged("widthMode", "__designer_tab_model__");
   }
   private checkLastPageToDelete(): boolean {
     if (this.survey.pageCount === 0 || this.survey.isQuestionDragging) return false;
@@ -352,7 +374,7 @@ export class TabDesignerViewModel extends Base {
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;
-    if (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage" || this.hasToolbar) {
+    if (!this.creator.isMobileView && (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage" || this.hasToolbar)) {
       rootCss += " svc-tab-designer--with-page-navigator";
     }
     if (this.showPlaceholder) {
