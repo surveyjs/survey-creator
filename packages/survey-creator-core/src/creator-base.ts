@@ -280,8 +280,8 @@ export class SurveyCreatorModel extends Base
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
-  private responsivityManager: CreatorResponsivityManager;
-  footerToolbar: ActionContainer;
+  public responsivityManager: CreatorResponsivityManager;
+  public footerToolbar: ActionContainer;
 
   private changePageModifications(allow = false) {
     this.setPropertyVisibility("survey", allow, "pages");
@@ -3856,11 +3856,6 @@ export class SurveyCreatorModel extends Base
       this.responsivityManager.dispose();
       this.responsivityManager = undefined;
     }
-  }
-  public setDesignerSurveyScale(scale: number) {
-    if (scale <= 0) return;
-    this.responsivityManager?.updateSurveyActualWidth();
-    this.survey.widthScale = scale;
   }
   @property({ defaultValue: false }) showHeaderInEmptySurvey;
   @property({ defaultValue: true }) public allowShowPageNavigator;

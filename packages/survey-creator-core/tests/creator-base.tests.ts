@@ -4743,17 +4743,17 @@ test("ZoomIn/ZoomOut designer surface", (): any => {
   expect(designerTab["surfaceScale"]).toBe(100);
   expect(creator.themeVariables).toStrictEqual({});
 
-  designerTab["scalingSurface"](10);
+  designerTab["scaleSurface"](10);
   expect(designerTab["surfaceScale"]).toBe(100);
   expect(creator.themeVariables).toStrictEqual({});
   expect(creator.survey.widthScale).toBe(100);
 
-  designerTab["scalingSurface"](200);
+  designerTab["scaleSurface"](200);
   expect(designerTab["surfaceScale"]).toBe(100);
   expect(creator.themeVariables).toStrictEqual({});
   expect(creator.survey.widthScale).toBe(100);
 
-  designerTab["scalingSurface"](150);
+  designerTab["scaleSurface"](150);
   expect(creator.survey.widthScale).toBe(150);
   expect(designerTab["surfaceScale"]).toBe(150);
   expect(creator.themeVariables).toStrictEqual({
