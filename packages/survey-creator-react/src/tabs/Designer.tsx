@@ -9,6 +9,7 @@ import {
 import { SurveyCreatorModel, TabDesignerViewModel } from "survey-creator-core";
 import { SurveyPageNavigator } from "../PageNavigator";
 import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
+import { ScrollComponent } from "../components/Scroll";
 
 interface ITabDesignerComponentProps {
   data: TabDesignerViewModel;
@@ -107,9 +108,11 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           {this.model.isToolboxVisible ? ReactElementFactory.Instance.createElement("svc-toolbox", { model: this.creator }) : null}
         </div>
         <div className={designerTabClassName} onClick={() => this.model.clickDesigner()}>
-          <div className="svc-tab-designer_content">
-            {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
-          </div>
+          <ScrollComponent>
+            <div className="svc-tab-designer_content">
+              {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
+            </div>
+          </ScrollComponent>
         </div>
       </React.Fragment>
     );
@@ -156,16 +159,20 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           css={survey.css}
         /> */}
       </div>
-      {this.creator.showPageNavigator ?
-        <div className="svc-tab-designer__page-navigator"><SurveyPageNavigator
-          pagesController={this.model.pagesController} pageEditMode={this.model.creator.pageEditMode}
-        ></SurveyPageNavigator></div>
-        : null
-      }
-      {this.model.hasToolbar ?
-        <div className="svc-tab-designer__toolbar">
-          <SurveyActionBar model={this.model.surfaceToolbar} handleClick={false}></SurveyActionBar></div>
-        : null
+      {
+        !this.creator.isMobileView ? <div className="svc-tab-designer__tools">
+          {[
+            this.creator.showPageNavigator ?
+              <div key={1} className="svc-tab-designer__page-navigator"><SurveyPageNavigator
+                pagesController={this.model.pagesController} pageEditMode={this.model.creator.pageEditMode}
+              ></SurveyPageNavigator></div>
+              : null,
+            this.model.hasToolbar ?
+              <div key={2} className="svc-tab-designer__toolbar">
+                <SurveyActionBar model={this.model.surfaceToolbar} handleClick={false}></SurveyActionBar></div>
+              : null
+          ]}
+        </div> : null
       }
     </React.Fragment>);
   }

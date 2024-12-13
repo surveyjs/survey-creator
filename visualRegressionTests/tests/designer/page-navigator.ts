@@ -46,7 +46,7 @@ test("On the right side (default)", async (t) => {
     await t.wait(1000);
     await takeElementScreenshot("page-navigator-right-hovered.png", pageNavigatorContainer, t, comparer);
 
-    await t.resizeWindow(1920, 1300);
+    await t.resizeWindow(1920, 1400);
     await t.wait(1000);
     await t.expect(pageNavigatorElement.visible).notOk();
   });
@@ -87,7 +87,7 @@ test("On the left side", async (t) => {
     await t.wait(1000);
     await takeElementScreenshot("page-navigator-left-hovered.png", pageNavigatorContainer, t, comparer);
 
-    await t.resizeWindow(1920, 1300);
+    await t.resizeWindow(1920, 1400);
     await t.wait(1000);
     await t.expect(pageNavigatorElement.visible).notOk();
   });

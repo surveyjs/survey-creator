@@ -17,7 +17,7 @@ export class TabDesignerViewModel extends Base {
   private stepSurfaceScaling = 10;
   private cssUpdater: ComputedUpdater;
   private pagesControllerValue: PagesController;
-  private surfaceScale = 100;
+  public surfaceScale = 100;
 
   unitDictionary: { [index: string]: number } = {
     "--ctr-surface-base-unit": 8,
@@ -125,13 +125,14 @@ export class TabDesignerViewModel extends Base {
     this.surfaceToolbar.cssClasses = defaultActionBarCss;
 
     const surfaceToolbarItems: Array<IAction> = [];
+
     surfaceToolbarItems.push(<IAction>{
       id: "zoomIn",
       locTooltipName: "ed.zoomInTooltip",
       iconName: "icon-zoomin-24x24",
       iconSize: "auto",
       visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
-      action: () => { this.scalingSurface(this.surfaceScale + this.stepSurfaceScaling); }
+      action: () => { this.scaleSurface(this.surfaceScale + this.stepSurfaceScaling); }
     });
     surfaceToolbarItems.push(<IAction>{
       id: "zoom100",
@@ -139,7 +140,7 @@ export class TabDesignerViewModel extends Base {
       iconName: "icon-actual-size-24x24",
       iconSize: "auto",
       visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
-      action: () => { this.scalingSurface(100); }
+      action: () => { this.scaleSurface(100); }
     });
     surfaceToolbarItems.push(<IAction>{
       id: "zoomOut",
@@ -147,7 +148,7 @@ export class TabDesignerViewModel extends Base {
       iconName: "icon-zoomout-24x24",
       iconSize: "auto",
       visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
-      action: () => { this.scalingSurface(this.surfaceScale - this.stepSurfaceScaling); }
+      action: () => { this.scaleSurface(this.surfaceScale - this.stepSurfaceScaling); }
     });
 
     surfaceToolbarItems.push({
@@ -182,11 +183,15 @@ export class TabDesignerViewModel extends Base {
     this.surfaceToolbar.setItems(surfaceToolbarItems);
   }
 
-  private scalingSurface(scaleFactor: number): void {
+  private scaleSurface(scaleFactor: number): void {
     if (scaleFactor <= this.minSurfaceScaling || scaleFactor >= this.maxSurfaceScaling) return;
 
     this.surfaceScale = scaleFactor;
-    this.creator.setDesignerSurveyScale(scaleFactor);
+    if (!this.creator.survey.responsiveStartWidth) {
+      this.creator.responsivityManager?.updateSurveyActualWidth();
+    }
+    this.creator.survey.widthScale = scaleFactor;
+
     Object.keys(this.unitDictionary).forEach(key => {
       this.scaleCssVariables[key] = (this.unitDictionary[key] * scaleFactor / 100) + "px";
     });
@@ -252,7 +257,11 @@ export class TabDesignerViewModel extends Base {
     this.survey.registerFunctionOnPropertyValueChanged("pages", () => {
       this.checkNewPage(true);
       this.updatePages();
-    });
+    }, "__designer_tab_model__");
+    this.survey.registerFunctionOnPropertyValueChanged("widthMode", () => {
+      this.survey.responsiveStartWidth = undefined;
+      setTimeout(() => this.scaleSurface(this.surfaceScale), 1);
+    }, "__designer_tab_model__");
     this.designerCss = <any>this.cssUpdater;
     this.pagesController.onSurveyChanged();
   }
@@ -290,6 +299,8 @@ export class TabDesignerViewModel extends Base {
   public dispose(): void {
     super.dispose();
     this.cssUpdater && this.cssUpdater.dispose();
+    this.survey.unRegisterFunctionOnPropertyValueChanged("pages", "__designer_tab_model__");
+    this.survey.unRegisterFunctionOnPropertyValueChanged("widthMode", "__designer_tab_model__");
   }
   private checkLastPageToDelete(): boolean {
     if (this.survey.pageCount === 0 || this.survey.isQuestionDragging) return false;
@@ -363,7 +374,7 @@ export class TabDesignerViewModel extends Base {
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;
-    if (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage" || this.hasToolbar) {
+    if (!this.creator.isMobileView && (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage" || this.hasToolbar)) {
       rootCss += " svc-tab-designer--with-page-navigator";
     }
     if (this.showPlaceholder) {

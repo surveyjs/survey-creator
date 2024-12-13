@@ -170,6 +170,7 @@
   .sv-svg-icon {
     width: var(--ctr-menu-toolbar-button-icon-width, 24px);
     height: var(--ctr-menu-toolbar-button-icon-height, 24px);
+    display: block;
   }
 
   use {
