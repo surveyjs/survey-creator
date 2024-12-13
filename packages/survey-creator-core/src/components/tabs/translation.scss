@@ -35,6 +35,10 @@
       width: calcSize(5);
     }
 
+    .spg-table__cell:nth-of-type(2) {
+      width: calcSize(5);
+    }
+
     .spg-table__question-wrapper {
       @include ctrDefaultFont;
       padding: calcSize(1.5) calcSize(1);
