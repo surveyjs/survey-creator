@@ -346,7 +346,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
     .expect(Selector(".svc-toolbox__category>.svc-toolbox__tool").count).eql(23);
 });
 
-test.only("toolbox subTypes: add items by drag-n-drop", async (t) => {
+test("toolbox subTypes: add items by drag-n-drop", async (t) => {
   await explicitErrorHandler();
   await t.resizeWindow(1900, 800);
 
