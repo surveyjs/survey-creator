@@ -36,6 +36,7 @@
       window.updateCreatorModel = (options, json) => {
         window.prevCreator = window.creator;
         const creator = new SurveyCreator.SurveyCreator(options);
+        creator.applyTheme(SurveyCreatorTheme.DefaultLight);
         creator.JSON = json;
         this.setState({ creator });
         window.creator = creator;
