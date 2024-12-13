@@ -369,7 +369,7 @@ test("toolbox subTypes: add items by drag-n-drop", async (t) => {
 
     .hover(getToolboxItemByText("Rating Scale"))
     .wait(400)
-    .dragToElement(getToolboxItemByText("Rating Scale"), newGhostPagePage, { speed: 0.5, destinationOffsetX: 50, destinationOffsetY: 50 })
+    .dragToElement(getToolboxItemByText("Rating Scale"), newGhostPagePage, { speed: 0.5, destinationOffsetX: 400, destinationOffsetY: 100 })
     .expect(Selector(".svc-question__content").filterVisible().count).eql(2)
     .expect(toolboxSubTypesPopup.visible).notOk();
 
