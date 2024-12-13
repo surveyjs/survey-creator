@@ -4,7 +4,7 @@ import { ReactElementFactory } from "survey-react-ui";
 
 export class PropertyGridPlaceholderComponent extends React.Component<any, any> {
 
-  render(): JSX.Element | null {
+  render(): React.JSX.Element | null {
     return (
       <div className="svc-property-grid-placeholder">
         <div className="svc-property-grid-placeholder__header">

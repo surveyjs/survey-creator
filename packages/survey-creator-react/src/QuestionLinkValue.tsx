@@ -10,7 +10,7 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
   protected get question(): QuestionLinkValueModel {
     return this.questionBase as QuestionLinkValueModel;
   }
-  protected renderClear(): JSX.Element {
+  protected renderClear(): React.JSX.Element {
     const showClear = (this.questionBase as any).showClear;
     if (!this.questionBase.isReadOnly && showClear) {
       return (
@@ -26,7 +26,7 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
       return null;
     }
   }
-  protected renderElement(): JSX.Element {
+  protected renderElement(): React.JSX.Element {
     return (
       <>
         <ActionButton

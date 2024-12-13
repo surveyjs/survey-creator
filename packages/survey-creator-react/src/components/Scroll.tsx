@@ -24,7 +24,7 @@ export class ScrollComponent extends React.Component<IScrollComponentProps, any>
     this.model.setRootElement(undefined);
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     return <div ref={this.rootRef} className="svc-scroll__wrapper">
       <div className="svc-scroll__scroller sv-drag-target-skipped" onScroll={() => this.model.onScrollContainer()}>
         <div className="svc-scroll__container">

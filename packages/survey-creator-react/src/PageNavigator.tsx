@@ -74,7 +74,7 @@ export class SurveyPageNavigator extends CreatorModelElement<
     this.model.stopItemsContainerHeightObserver();
     this.model.setScrollableContainer(undefined);
   }
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     let className = "svc-page-navigator__selector svc-page-navigator__button";
     if (this.model.isPopupOpened)
       className += " svc-page-navigator__button--pressed";
@@ -113,7 +113,7 @@ export class SurveyPageNavigatorItem extends CreatorModelElement<any, any> {
   protected getStateElement(): Base {
     return this.props.item as Base;
   }
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const item = this.props.item;
     let className: string = "svc-page-navigator-item-content";
     if (unwrap(item.active)) {

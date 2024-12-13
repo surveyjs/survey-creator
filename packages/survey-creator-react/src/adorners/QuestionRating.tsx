@@ -30,7 +30,7 @@ export class QuestionRatingAdornerComponent extends CreatorModelElement<Question
   protected getStateElement(): Base {
     return this.model;
   }
-  protected renderElement(): JSX.Element {
+  protected renderElement(): React.JSX.Element {
     const model = this.ratingModel;
     return (<>
       <div className="svc-rating-question-content">

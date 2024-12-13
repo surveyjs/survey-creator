@@ -8,7 +8,7 @@ import {
 import { CreatorModelElement } from "./ModelElement";
 
 interface ImageItemValueAdornerComponentProps {
-  element: JSX.Element;
+  element: React.JSX.Element;
   componentData: any;
   question: QuestionSelectBase;
   item: ImageItemValue;
@@ -62,7 +62,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     return <div className="svc-image-item-value__loading"><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     this.model.item = this.props.item;
     const isNew = !this.props.question.isItemInList(this.props.item);
     this.model.isNew = isNew;

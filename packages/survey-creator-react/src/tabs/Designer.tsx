@@ -55,7 +55,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     return [this.model, this.model.survey, this.model.pagesController];
   }
 
-  protected getRenderedPages(): JSX.Element[] {
+  protected getRenderedPages(): React.JSX.Element[] {
     const renderedPages = [];
 
     if (this.creator.pageEditMode !== "bypage") {
@@ -95,10 +95,10 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
         </div>
       </React.Fragment>);
   }
-  protected renderPage(pageV: PageModel, isGhost: boolean): JSX.Element {
+  protected renderPage(pageV: PageModel, isGhost: boolean): React.JSX.Element {
     return ReactElementFactory.Instance.createElement("svc-page", { survey: this.creator.survey, page: pageV, creator: this.creator, isGhost });
   }
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();
 
     return (
@@ -115,7 +115,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     );
   }
 
-  renderHeader(condition: boolean): JSX.Element {
+  renderHeader(condition: boolean): React.JSX.Element {
     if (!condition) return null;
 
     const survey: SurveyModel = this.creator.survey;
@@ -125,7 +125,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       </div>
     </React.Fragment>);
   }
-  renderPlaceHolder(): JSX.Element {
+  renderPlaceHolder(): React.JSX.Element {
     const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle && this.creator.showHeaderInEmptySurvey);
 
     return (<React.Fragment>
@@ -136,10 +136,10 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       </div>
     </React.Fragment>);
   }
-  renderPlaceHolderContent(): JSX.Element {
+  renderPlaceHolderContent(): React.JSX.Element {
     return <SurfacePlaceholder name={"designer"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />;
   }
-  renderTabContent(): JSX.Element {
+  renderTabContent(): React.JSX.Element {
     const survey: SurveyModel = this.creator.survey;
     const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle);
     const style: any = { ...this.model.surveyThemeVariables };

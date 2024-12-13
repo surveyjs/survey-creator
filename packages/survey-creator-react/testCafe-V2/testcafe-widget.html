@@ -8,15 +8,24 @@
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/defaultV2.css" />
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/survey-creator-core.css" />
-  <!-- <link rel="stylesheet" type="text/css" href="../build/survey-creator-react.min.css" /> -->
-  <script src="../node_modules/survey-core/survey.core.js"></script>
-  <script src="../node_modules/survey-core/survey.i18n.js"></script>
-  <script src="../node_modules/survey-core/themes/index.js"></script>
-  <script src="../node_modules/survey-creator-core/survey-creator-core.js"></script>
-  <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js"></script>
-  <script src="../node_modules/survey-react-ui/survey-react-ui.js"></script>
 
-  <script src="../build/survey-creator-react.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="../build/survey-creator-react.min.css" /> -->
+  <script defer type="module">
+    import React from "https://esm.sh/react@19/?dev";
+    import ReactDOMClient from "https://esm.sh/react-dom@19/client?dev";
+    import ReactDOM from "https://esm.sh/react-dom@19.0.0?dev";
+    window.ReactDOMClient = ReactDOMClient;
+    window.React = React;
+    window.ReactDOM = ReactDOM;
+  </script>
+  <script src="../node_modules/survey-core/survey.core.js" defer></script>
+  <script src="../node_modules/survey-core/survey.i18n.js" defer></script>
+  <script src="../node_modules/survey-core/themes/index.js" defer></script>
+  <script src="../node_modules/survey-creator-core/survey-creator-core.js" defer></script>
+  <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js" defer></script>
+  <script src="../node_modules/survey-react-ui/survey-react-ui.js" defer></script>
+  <script src="../build/survey-creator-react.js" defer></script>
+
   <script src="https://unpkg.com/jquery"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/ace.min.js" type="text/javascript"
     charset="utf-8"></script>
@@ -38,7 +47,7 @@
   <script src="https://unpkg.com/inputmask@5.0.3/dist/inputmask.js"></script>
   <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
   <script src="https://unpkg.com/jquery-bar-rating"></script>
-  <script src="./sc.js"></script>
+  <script src="./sc.js" defer></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
   <!-- Themes -->
   <link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/bars-1to10.css" />
@@ -51,7 +60,7 @@
   <link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/fontawesome-stars-o.css" />
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-  <script src="https://unpkg.com/surveyjs-widgets@1.8.70/surveyjs-widgets.min.js"></script>
+  <script src="https://unpkg.com/surveyjs-widgets@1.8.70/surveyjs-widgets.min.js" defer></script>
 
 </head>
 
@@ -59,16 +68,18 @@
   <div id="survey-creator" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;"></div>
 </body>
 <script>
-  const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
-  window.creator = creator;
-  const root = ReactDOM.createRoot(document.getElementById("survey-creator"));
-  root.render(React.createElement(React.StrictMode, {
-    children: React.createElement(
-      SurveyCreator.SurveyCreatorComponent,
-      { creator: creator },
-      null
-    )
-  }))
+  window.addEventListener("DOMContentLoaded", () => {
+    const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
+    window.creator = creator;
+    const root = ReactDOMClient.createRoot(document.getElementById("survey-creator"));
+    root.render(React.createElement(React.StrictMode, {
+      children: React.createElement(
+        SurveyCreator.SurveyCreatorComponent,
+        { creator: creator },
+        null
+      )
+    }));
+  });
 </script>
 
 </html>

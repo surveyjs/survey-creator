@@ -11,7 +11,7 @@ export class SurfacePlaceholder extends React.Component<ISurfacePlaceholderProps
   constructor(props: ISurfacePlaceholderProps) {
     super(props);
   }
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     return (
       <div className="svc-surface-placeholder" >
         <div className={"svc-surface-placeholder__image svc-surface-placeholder__image--" + this.props.name}></div >

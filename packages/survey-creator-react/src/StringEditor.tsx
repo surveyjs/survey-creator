@@ -122,13 +122,14 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   private get className() {
     return this.baseModel.className(this.locString.renderedHtml);
   }
-  public render(): JSX.Element {
+  public render(): React.JSX.Element {
     if (!this.locString) {
       return null;
     }
     let control = null;
     if (this.locString.hasHtml) {
-      const htmlValue = { __html: this.locString.renderedHtml };
+      const showText = this.baseModel.focused && this.baseModel.editAsText;
+      const htmlValue = { __html: showText ? null : this.locString.renderedHtml };
       control = (
         <span
           role="textbox"
@@ -146,7 +147,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           onKeyDown={this.onKeyDown}
           onMouseUp={this.onMouseUp}
           onClick={this.edit}
-        />
+        >{showText ? this.locString.calculatedText : null}</span>
       );
     } else {
       control = (

@@ -26,7 +26,7 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
     return this.dropdownModel.question as QuestionSelectBase;
   }
 
-  renderElementPlaceholder(): JSX.Element {
+  renderElementPlaceholder(): React.JSX.Element {
     const textStyle = (this.question as any).textStyle;
     return (
       <div

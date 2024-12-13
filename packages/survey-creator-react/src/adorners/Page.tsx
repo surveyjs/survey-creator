@@ -47,7 +47,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   }
   shouldComponentUpdate(nextProps: any, nextState: any): boolean {
     const res = super.shouldComponentUpdate(nextProps, nextState);
-    if(this.model) {
+    if (this.model) {
       this.model.isGhost = this.props.isGhost;
     }
     return res;
@@ -73,7 +73,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   protected canRender(): boolean {
     return super.canRender();
   }
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     if (!this.props.page) return null;
     return (
       attachKey2click(<div
@@ -97,7 +97,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
       </div>)
     );
   }
-  protected renderPlaceholder(): JSX.Element {
+  protected renderPlaceholder(): React.JSX.Element {
     if (!this.model.showPlaceholder) return null;
     return (
       <div className="svc-page__placeholder_frame">
@@ -107,10 +107,10 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
       </div>
     );
   }
-  protected renderContent(): JSX.Element {
+  protected renderContent(): React.JSX.Element {
     return (<SurveyPage page={this.props.page} survey={this.props.survey} creator={this.props.creator} css={this.model.css}></SurveyPage>);
   }
-  protected renderHeader(): JSX.Element {
+  protected renderHeader(): React.JSX.Element {
     const actions = (<div className="svc-page__content-actions">
       <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
     </div>);
@@ -126,7 +126,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
       </div>
     );
   }
-  protected renderFooter(): JSX.Element {
+  protected renderFooter(): React.JSX.Element {
     return <SurveyActionBar model={this.model.footerActionsBar}></SurveyActionBar>;
   }
 }

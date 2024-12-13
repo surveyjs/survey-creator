@@ -16,7 +16,7 @@ class SideBarPropertyGridHeader extends SurveyElementBase<ISideBarPropertyGridHe
     return this.objectSelectionAction;
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const button = attachKey2click(
       <div className={this.objectSelectionAction.buttonClassName} onClick={() => this.objectSelectionAction.action()}>
         <div className="svc-sidebar__header-caption">
