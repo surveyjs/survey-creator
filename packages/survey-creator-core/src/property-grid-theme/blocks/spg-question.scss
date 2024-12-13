@@ -216,8 +216,8 @@ sv-question-error {
 
   .spg-checkbox__control:focus + .spg-checkbox__rectangle,
   .spg-matrixdynamic__content.spg-text__content {
-    outline: 2px solid $secondary;
-    outline-offset: -2px;
+    outline: var(--ctr-editor-border-width-highlighed, 2px) solid var(--ctr-editor-border-color-highlighted, $secondary);
+    outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, 2px));
     border-radius: var(--ctr-data-table-corner-radius, 0px);
 
     .spg-input {
@@ -230,16 +230,16 @@ sv-question-error {
   }
 
   .sv-button-group {
-    box-shadow: 0 0 0 1px $secondary;
-    border-color: $secondary;
+    box-shadow: 0 0 0 1px var(--ctr-editor-border-color-highlighted, $secondary);
+    border-color: var(--ctr-editor-border-color-highlighted, $secondary);
   }
 
   .spg-checkbox__control + .spg-checkbox__rectangle {
-    outline: 2px solid $secondary;
-    outline-offset: -2px;
+    outline: var(--ctr-editor-border-width-highlighed, 2px) solid var(--ctr-editor-border-color-highlighted, $secondary);
+    outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, 2px));
   }
 
   .spg-button-group::after {
-    box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, 2px) $secondary;
+    box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, 2px) var(--ctr-editor-border-color-highlighted, $secondary);
   }
 }
