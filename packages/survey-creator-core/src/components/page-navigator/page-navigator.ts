@@ -258,6 +258,9 @@ export class PageNavigatorViewModel extends Base {
   @property({ defaultValue: Number.MAX_VALUE }) visibleItemsCount: number;
   private _scrollableContainer: HTMLDivElement;
   public setScrollableContainer(scrollableContainer: HTMLDivElement | any) {
+    if (!!this._scrollableContainer) {
+      this._scrollableContainer.onscroll = undefined;
+    }
     this._scrollableContainer = scrollableContainer;
   }
   private _itemsContainer: HTMLDivElement;
@@ -303,5 +306,16 @@ export class PageNavigatorViewModel extends Base {
       return this.items;
     }
     return this.items.slice(this.visibleItemsStartIndex, this.visibleItemsStartIndex + this.visibleItemsCount);
+  }
+  public attachToUI(el: HTMLDivElement) {
+    if (!!el) {
+      const scrollableContainer = el.parentElement.parentElement.parentElement.parentElement.parentElement as HTMLDivElement;
+      const self = this;
+      scrollableContainer.onscroll = function (this: GlobalEventHandlers, ev: Event) {
+        return self.onContainerScroll(ev.currentTarget as HTMLDivElement);
+      };
+      this.setItemsContainer(el.parentElement as HTMLDivElement);
+      this.setScrollableContainer(scrollableContainer);
+    }
   }
 }
