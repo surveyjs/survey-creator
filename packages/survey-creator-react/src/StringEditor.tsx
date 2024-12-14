@@ -122,14 +122,18 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   private get className() {
     return this.baseModel.className(this.locString.renderedHtml);
   }
+  private htmlValue = {
+    __html: this.locString?.renderedHtml
+  };
   public render(): React.JSX.Element {
     if (!this.locString) {
       return null;
     }
     let control = null;
     if (this.locString.hasHtml) {
-      const showText = this.baseModel.focused && this.baseModel.editAsText;
-      const htmlValue = { __html: showText ? null : this.locString.renderedHtml };
+      if(this.htmlValue.__html !== this.locString.renderedHtml) {
+        this.htmlValue = { __html: this.locString.renderedHtml };
+      }
       control = (
         <span
           role="textbox"
@@ -141,13 +145,13 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           aria-label={this.placeholder || "content editable"}
           suppressContentEditableWarning={true}
           // style={this.style}
-          dangerouslySetInnerHTML={htmlValue}
+          dangerouslySetInnerHTML={this.htmlValue}
           onBlur={this.onBlur}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
           onMouseUp={this.onMouseUp}
           onClick={this.edit}
-        >{showText ? this.locString.calculatedText : null}</span>
+        ></span>
       );
     } else {
       control = (
