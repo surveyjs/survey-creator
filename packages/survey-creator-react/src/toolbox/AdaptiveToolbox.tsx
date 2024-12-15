@@ -29,7 +29,11 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
       this.toolbox.itemSelector,
       null,
       undefined,
-      (callback) => setTimeout(callback, 10)
+      (callback) => setTimeout(() => { 
+        if(!this.toolbox.isResponsivenessDisabled) {
+          callback();
+        }
+      }, 10)
     );
   }
   componentWillUnmount() {
