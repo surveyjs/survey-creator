@@ -985,7 +985,7 @@ export var nlStrings = {
     password: "wachtwoord",
     range: "bereik",
     tel: "Tel",
-    text: "Sms",
+    text: "Text",
     time: "Tijd",
     url: "Url",
     week: "week",
@@ -1016,7 +1016,7 @@ export var nlStrings = {
       password: "Wachtwoord",
       range: "Bereik",
       tel: "Telefoonnummer",
-      text: "Sms",
+      text: "Text",
       time: "Tijd",
       url: "Url",
       week: "Week"
@@ -2011,7 +2011,6 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pv.password: "password" => "wachtwoord"
 // pv.range: "range" => "bereik"
 // pv.tel: "tel" => "Tel"
-// pv.text: "text" => "Sms"
 // pv.time: "time" => "Tijd"
 // pv.url: "url" => "Url"
 // pv.week: "week" => "week"
@@ -2026,7 +2025,6 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // inputType.password: "Password" => "Wachtwoord"
 // inputType.range: "Range" => "Bereik"
 // inputType.tel: "Phone Number" => "Telefoonnummer"
-// inputType.text: "Text" => "Sms"
 // inputType.time: "Time" => "Tijd"
 // inputType.url: "URL" => "Url"
 // inputType.week: "Week" => "Week"
