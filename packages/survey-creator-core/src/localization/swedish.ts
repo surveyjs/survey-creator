@@ -90,7 +90,7 @@ export let svStrings = {
     newPageName: "sida",
     newQuestionName: "fråga",
     newPanelName: "panel",
-    newTextItemName: "SMS",
+    newTextItemName: "text",
     defaultV2Theme: "Standard",
     modernTheme: "Modern",
     defaultTheme: "Standard (äldre)",
@@ -985,7 +985,7 @@ export let svStrings = {
     password: "lösenord",
     range: "sortiment",
     tel: "Tel",
-    text: "SMS",
+    text: "Text",
     time: "Tid",
     url: "URL",
     week: "vecka",
@@ -1016,7 +1016,7 @@ export let svStrings = {
       password: "Lösenord",
       range: "Sortiment",
       tel: "Telefonnummer",
-      text: "SMS",
+      text: "Text",
       time: "Tid",
       url: "URL",
       week: "Vecka"
@@ -1799,7 +1799,6 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // ed.panelTypeName: "Panel" => "Panel"
 // ed.questionTypeName: "Question" => "Fråga"
 // ed.columnTypeName: "Column" => "Spalt"
-// ed.newTextItemName: "text" => "SMS"
 // ed.themeSurvey: "Themes" => "Teman"
 // ed.defaultV2Theme: "Default" => "Standard"
 // ed.modernTheme: "Modern" => "Modern"
@@ -2185,7 +2184,6 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pv.password: "password" => "lösenord"
 // pv.range: "range" => "sortiment"
 // pv.tel: "tel" => "Tel"
-// pv.text: "text" => "SMS"
 // pv.time: "time" => "Tid"
 // pv.url: "url" => "URL"
 // pv.week: "week" => "vecka"
@@ -2200,7 +2198,6 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // inputType.password: "Password" => "Lösenord"
 // inputType.range: "Range" => "Sortiment"
 // inputType.tel: "Phone Number" => "Telefonnummer"
-// inputType.text: "Text" => "SMS"
 // inputType.time: "Time" => "Tid"
 // inputType.url: "URL" => "URL"
 // inputType.week: "Week" => "Vecka"
