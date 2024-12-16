@@ -794,7 +794,6 @@ export class QuestionToolbox
       return innerItem;
     });
     if (newItems) {
-      parentItem.json[propName] = property.defaultValue;
       parentItem.addSubitems(newItems);
     }
   }
