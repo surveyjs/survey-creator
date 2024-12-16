@@ -120,6 +120,7 @@ jobs:
 
 - job: React
   dependsOn: Core
+  timeoutInMinutes: 90
   steps:
   - checkout: self
   - checkout: EmptyRepo

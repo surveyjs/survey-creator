@@ -15,7 +15,7 @@ import { QuestionAdornerComponent, QuestionAdornerComponentProps } from "./Quest
 import { AddQuestionButtonComponent } from "../AddQuestionButton";
 
 export class PanelAdornerComponent extends QuestionAdornerComponent {
-  renderElementPlaceholder(): JSX.Element {
+  renderElementPlaceholder(): React.JSX.Element {
     if (!this.model.isEmptyElement) {
       return null;
     }
@@ -48,7 +48,7 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
   protected disableTabStop() {
     return true;
   }
-  protected renderFooter(): JSX.Element {
+  protected renderFooter(): React.JSX.Element {
     return (<React.Fragment>
       {!this.model.isEmptyElement && this.model.element.isPanel && this.model.showAddQuestionButton ? (
         <div className="svc-panel__add-new-question-container">

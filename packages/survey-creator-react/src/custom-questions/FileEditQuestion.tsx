@@ -22,13 +22,13 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
           ref={(input) => (this.setControl(input))}
           autoComplete="off"
           type="text"
-          onBlur={(event) => this.questionFile.onInputBlur(event.nativeEvent) }
+          onBlur={(event) => this.questionFile.onInputBlur(event.nativeEvent)}
           onChange={(event) => this.questionFile.onInputChange(event.nativeEvent)}
         />
       </>
     );
   }
-  protected renderFileInput(): JSX.Element {
+  protected renderFileInput(): React.JSX.Element {
     return (
       <input
         type="file"
@@ -42,10 +42,10 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
         multiple={false} title={this.questionFile.inputTitle}
         accept={this.questionFile.acceptedTypes}
         tabIndex={-1}
-        onChange={(event) => this.questionFile.onFileInputChange(event.nativeEvent) }/>
+        onChange={(event) => this.questionFile.onFileInputChange(event.nativeEvent)} />
     );
   }
-  protected renderButtons(): JSX.Element {
+  protected renderButtons(): React.JSX.Element {
     return (
       <div className={this.questionFile.cssClasses.buttonsContainer}>
         {this.renderClearButton()}
@@ -53,17 +53,17 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
       </div>
     );
   }
-  protected renderClearButton(): JSX.Element {
+  protected renderClearButton(): React.JSX.Element {
     return attachKey2click((
       <button type="button"
         className={this.questionFile.cssClasses.clearButton}
         disabled={this.questionFile.getIsClearButtonDisabled()}
-        onClick={ this.questionFile.doClean}>
+        onClick={this.questionFile.doClean}>
         <SvgIcon iconName={this.questionFile.cssClasses.clearButtonIcon} size={"auto"} title={this.questionFile.clearButtonCaption}></SvgIcon>
       </button>
     ));
   }
-  protected renderChooseButton(): JSX.Element {
+  protected renderChooseButton(): React.JSX.Element {
     return (
       attachKey2click(
         <label role="button"
@@ -76,7 +76,7 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
       )
     );
   }
-  protected renderElement(): JSX.Element {
+  protected renderElement(): React.JSX.Element {
     return (
       <div
         className={this.questionFile.cssClasses.root}
@@ -86,9 +86,9 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
         onDrop={this.questionFile.onDrop}
         onDragLeave={this.questionFile.onDragLeave}
         onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
-        { this.renderInput() }
-        { this.renderFileInput() }
-        { this.renderButtons() }
+        {this.renderInput()}
+        {this.renderFileInput()}
+        {this.renderButtons()}
       </div>
     );
   }

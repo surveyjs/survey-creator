@@ -59,7 +59,7 @@ class TabsComponent extends SurveyElementBase<{ model: ActionContainer }, any> {
     return this.props.model;
   }
 
-  protected renderElement(): JSX.Element | null {
+  protected renderElement(): React.JSX.Element | null {
     return <>{this.props.model.actions.map(
       (item: Action, itemIndex: number) => <TabButtonComponent model={item as MenuButton} key={"item" + itemIndex}></TabButtonComponent>
     )}</>;

@@ -20,7 +20,7 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
   public get imageModel(): QuestionImageAdornerViewModel {
     return this.model as QuestionImageAdornerViewModel;
   }
-  protected renderHeader(): JSX.Element {
+  protected renderHeader(): React.JSX.Element {
     return (<React.Fragment>
       <input
         type="file"
@@ -40,14 +40,14 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
       {super.renderHeader()}
     </React.Fragment>);
   }
-  renderLoadingPlaceholder(): JSX.Element {
+  renderLoadingPlaceholder(): React.JSX.Element {
     return (<div className="svc-image-question__loading-placeholder">
       <div className="svc-image-question__loading">
         <LoadingIndicatorComponent></LoadingIndicatorComponent>
       </div>
     </div>);
   }
-  renderChooseButton(): JSX.Element {
+  renderChooseButton(): React.JSX.Element {
     return (<div className="svc-image-question-controls">
       {this.model.allowEdit ? attachKey2click(<span
         className="svc-context-button"
@@ -57,14 +57,14 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
       </span>) : null}
     </div>);
   }
-  renderElementPlaceholder(): JSX.Element {
+  renderElementPlaceholder(): React.JSX.Element {
     return this.imageModel.isUploading ? this.renderLoadingPlaceholder() : this.renderChooseButton();
   }
   protected getStateElements(): Array<Base> {
     return [this.model, this.imageModel.filePresentationModel];
   }
 
-  protected renderElementContent(): JSX.Element {
+  protected renderElementContent(): React.JSX.Element {
     if (this.imageModel.isEmptyImageLink) {
       const fileQuestion = ReactQuestionFactory.Instance.createQuestion("file", {
         creator: this.imageModel.question.survey,

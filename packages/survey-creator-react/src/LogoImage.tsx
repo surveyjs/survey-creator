@@ -69,8 +69,8 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
   renderLoadingIndicator() {
     return <div className="svc-logo-image__loading"><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
   }
-  render(): JSX.Element {
-    let content: JSX.Element = null;
+  render(): React.JSX.Element {
+    let content: React.JSX.Element = null;
     if (this.model.survey.locLogo.renderedHtml && !this.model.isUploading) {
       content = this.renderImage();
     }

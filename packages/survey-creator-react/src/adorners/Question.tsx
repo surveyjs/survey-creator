@@ -15,7 +15,7 @@ import {
 import { CreatorModelElement } from "../ModelElement";
 
 export interface QuestionAdornerComponentProps {
-  element: JSX.Element;
+  element: React.JSX.Element;
   question: Question;
   componentData: any;
 }
@@ -54,7 +54,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     return this.model;
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const allowInteractions = this.model.element
       .isInteractiveDesignElement;
     const titleForCollapsedState = this.renderQuestionTitle();
@@ -76,7 +76,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   protected disableTabStop() {
     return true;
   }
-  protected renderContent(allowInteractions: boolean): JSX.Element {
+  protected renderContent(allowInteractions: boolean): React.JSX.Element {
     var content = this.model.needToRenderContent ? this.renderElementContent() : null;
     //if (!allowInteractions) return <>{content}{this.renderFooter()}</>;
     return attachKey2click(
@@ -94,20 +94,20 @@ export class QuestionAdornerComponent extends CreatorModelElement<
       </div>,
       undefined, { disableTabStop: this.disableTabStop() });
   }
-  protected renderHeader(): JSX.Element {
+  protected renderHeader(): React.JSX.Element {
     return ReactElementFactory.Instance.createElement("svc-question-header", { model: this.model });
   }
-  protected renderFooter(): JSX.Element {
+  protected renderFooter(): React.JSX.Element {
     const allowInteractions = this.model.element
       .isInteractiveDesignElement;
     return allowInteractions ? ReactElementFactory.Instance.createElement("svc-question-footer", { className: "svc-question__content-actions", model: this.model }) : null;
   }
-  protected renderCarryForwardBanner(): JSX.Element {
+  protected renderCarryForwardBanner(): React.JSX.Element {
     if (!this.model.isBannerShowing) return null;
     return ReactElementFactory.Instance.createElement("svc-question-banner", this.model.createBannerParams());
   }
 
-  protected renderQuestionTitle(): JSX.Element {
+  protected renderQuestionTitle(): React.JSX.Element {
     if (!this.model.showHiddenTitle) return null;
     const element = this.model.element as Question | PanelModel;
     return (
@@ -127,7 +127,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     );
   }
 
-  protected renderElementContent(): JSX.Element {
+  protected renderElementContent(): React.JSX.Element {
     return (
       <>
         {this.props.element}
@@ -140,7 +140,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     super.componentDidMount();
     this.model.attachToUI(this.props.question, this.rootRef.current);
   }
-  renderElementPlaceholder(): JSX.Element {
+  renderElementPlaceholder(): React.JSX.Element {
     if (!this.model.isEmptyElement) {
       return null;
     }
