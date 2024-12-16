@@ -262,8 +262,13 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }
 
+  protected allowExpandCollapseByDblClick(element: any) {
+    return true;
+  }
   public dblclick(event) {
-    if (this.allowExpandCollapse) this.collapsed = !this.collapsed;
+    if (this.allowExpandCollapseByDblClick(event.target)) {
+      if (this.allowExpandCollapse) this.collapsed = !this.collapsed;
+    }
     event.stopPropagation();
   }
   private allowEditOption: boolean;

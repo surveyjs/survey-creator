@@ -5,7 +5,7 @@ import { ReactElementFactory } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
 
 interface RowWrapperComponentProps {
-  element: JSX.Element;
+  element: React.JSX.Element;
   componentData: any;
   row: QuestionRowModel;
 }
@@ -44,7 +44,7 @@ export class RowWrapper extends CreatorModelElement<
     super.componentWillUnmount();
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     return (
       <div
         key={"svc-row-" + this.props.row.id}

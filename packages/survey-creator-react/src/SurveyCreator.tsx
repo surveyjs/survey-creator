@@ -190,7 +190,7 @@ export class SurveyCreator extends SurveyCreatorModel {
   }
 
   //ISurveyCreator
-  public createQuestionElement(question: Question): JSX.Element {
+  public createQuestionElement(question: Question): React.JSX.Element {
     return ReactQuestionFactory.Instance.createQuestion(
       question.isDefaultRendering()
         ? question.getTemplate()
@@ -206,7 +206,7 @@ export class SurveyCreator extends SurveyCreatorModel {
     key: string,
     error: SurveyError,
     cssClasses: any
-  ): JSX.Element {
+  ): React.JSX.Element {
     return (
       <div key={key}>
         <span className={cssClasses.error.icon} aria-hidden="true" />

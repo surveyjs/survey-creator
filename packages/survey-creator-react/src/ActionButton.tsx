@@ -13,7 +13,7 @@ interface IActionButtonProps {
   allowBubble?: boolean;
 }
 export class ActionButton extends SurveyElementBase<IActionButtonProps, any> {
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const classes = new CssClassBuilder()
       .append(this.props.classes)
       .append("svc-action-button")
@@ -26,7 +26,7 @@ export class ActionButton extends SurveyElementBase<IActionButtonProps, any> {
     return this.renderButtonText(classes);
   }
 
-  renderButtonText(classes): JSX.Element {
+  renderButtonText(classes): React.JSX.Element {
     if (this.props.disabled) {
       return <span className={classes}>{this.props.text}</span>;
     }
@@ -50,7 +50,7 @@ export class ActionButton extends SurveyElementBase<IActionButtonProps, any> {
       </>
     );
   }
-  renderIcon(classes): JSX.Element {
+  renderIcon(classes): React.JSX.Element {
     classes += " svc-action-button--icon";
     if (this.props.disabled) {
       return <span className={classes}><SvgIcon size={"auto"} iconName={this.props.iconName}></SvgIcon></span>;

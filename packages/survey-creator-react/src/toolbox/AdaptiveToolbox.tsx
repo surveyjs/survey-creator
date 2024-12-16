@@ -29,7 +29,11 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
       this.toolbox.itemSelector,
       null,
       undefined,
-      (callback) => setTimeout(callback)
+      (callback) => setTimeout(() => {
+        if (!this.toolbox.isResponsivenessDisabled) {
+          callback();
+        }
+      }, 10)
     );
   }
   componentWillUnmount() {
@@ -47,7 +51,7 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
     return this.toolbox;
   }
 
-  renderItems(items: Array<any>, isCompact = false): Array<JSX.Element> {
+  renderItems(items: Array<any>, isCompact = false): Array<React.JSX.Element> {
     const result = [];
     items.forEach((item, itemIndex) => {
       const tool = <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} parentModel={this.toolbox} isCompact={isCompact} key={"item" + itemIndex} ></SurveyCreatorToolboxTool>;
@@ -74,7 +78,7 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
     </div>);
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     if (!this.toolbox.hasActions) return null;
     const search = this.toolbox.showSearch ? this.renderSearch() : null;
     const placeholder = this.toolbox.showPlaceholder ? <div className="svc-toolbox__placeholder">{this.toolbox.toolboxNoResultsFound}</div> : null;

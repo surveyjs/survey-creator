@@ -12,7 +12,7 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
     return this.model;
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const mainSimulatorClass = this.model.getRootCss();
     if (!this.model.survey) {
       return <div className={mainSimulatorClass}></div>;

@@ -9,7 +9,7 @@ import {
 import { CreatorModelElement } from "./ModelElement";
 
 interface ItemValueAdornerComponentProps {
-  element: JSX.Element;
+  element: React.JSX.Element;
   componentData: any;
   question: QuestionSelectBase;
   item: ItemValue;
@@ -59,7 +59,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
     this.props.item.setRootElement(undefined);
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     this.model.item = this.props.item;
     const button = this.model.allowAdd ? (
       attachKey2click(<span
