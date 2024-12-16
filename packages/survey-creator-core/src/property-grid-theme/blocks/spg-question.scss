@@ -226,7 +226,7 @@ sv-question-error {
   }
 
   .svc-action-button {
-    background-color: $secondary-light;
+    border: var(--ctr-actionbar-button-border-width-highlighed, 2px) solid var(--ctr-actionbar-button-border-color-highlighted, $secondary);
   }
 
   .sv-button-group {
