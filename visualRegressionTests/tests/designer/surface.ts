@@ -2493,3 +2493,33 @@ test.skip("Scaling design surface", async (t) => {
     await takeElementScreenshot("design-surface-zoom-out.png", surfaceSelector, t, comparer);
   });
 });
+
+test("Page hidden header and top toolbar", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t
+      .resizeWindow(1920, 1080);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    };
+
+    await ClientFunction((json) => {
+      (window as any).Survey.settings.designMode.showEmptyTitles = false;
+      (window as any).updateCreatorModel({ }, json);
+    })(json);
+
+    const rootSelector = Selector(".svc-tab-designer");
+    await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("page-selected-hidden-header.png", rootSelector, t, comparer);
+  });
+});

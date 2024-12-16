@@ -52,6 +52,13 @@ svc-page {
   }
 }
 
+.svc-page__content.svc-page__content--no-header {
+  .sd-page {
+    margin-top:  calcSize(2);
+    padding-top: var(--ctr-survey-page-content-margin-top-no-header, calcSize(1));
+  }
+}
+
 .svc-page__content--dragged {
   opacity: 0.25;
 }
