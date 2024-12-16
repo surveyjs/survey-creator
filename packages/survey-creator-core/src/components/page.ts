@@ -1,4 +1,4 @@
-import { Action, ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement } from "survey-core";
+import { Action, ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement, settings as SurveySettings } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -179,6 +179,14 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     };
     return container;
   }
+
+  protected allowExpandCollapseByDblClick(element: any) {
+    return element.classList.contains("svc-page__content") ||
+      element.classList.contains("sd-page") ||
+      element.closest(".svc-question__drag-area") && !element.closest(".svc-page__content-actions") ||
+      (element.closest(".sd-page__title") || element.closest(".sd-page__description")) && !element.closest(".svc-string-editor");
+  }
+
   protected getExpandCollapseAction(): IAction {
     const action = super.getExpandCollapseAction();
     action.needSeparator = true;
@@ -262,6 +270,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
     if (this.creator.isElementSelected(this.page)) {
       result += " svc-page__content--selected";
+    }
+    if (SurveySettings.designMode.showEmptyTitles === false) {
+      result += " svc-page__content--no-header";
     }
     return result.trim();
   }

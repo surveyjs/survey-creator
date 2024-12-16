@@ -63,7 +63,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
     return (this.item as any);
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     const item = this.item;
     const itemComponent = ReactElementFactory.Instance.createElement(
       this.model.itemComponent,
@@ -96,7 +96,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
 export class SurveyCreatorToolboxItem extends CreatorModelElement<
   ISurveyCreatorToolboxItemProps,
   any
-  > {
+> {
   constructor(props) {
     super(props);
   }
@@ -115,7 +115,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     const banner = (this.props.isCompact ?
       <span className="svc-toolbox__item-banner"
         onClick={(event: any) => {

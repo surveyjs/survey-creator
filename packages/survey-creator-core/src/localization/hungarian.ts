@@ -985,7 +985,7 @@ export var huStrings = {
     password: "jelszó",
     range: "tartomány",
     tel: "Tel",
-    text: "SMS",
+    text: "Text",
     time: "Idő",
     url: "URL-cím",
     week: "hét",
@@ -1016,7 +1016,7 @@ export var huStrings = {
       password: "Jelszó",
       range: "Tartomány",
       tel: "Telefonszám",
-      text: "SMS",
+      text: "Text",
       time: "Idő",
       url: "URL",
       week: "Hét"
@@ -2161,7 +2161,6 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pv.password: "password" => "jelszó"
 // pv.range: "range" => "tartomány"
 // pv.tel: "tel" => "Tel"
-// pv.text: "text" => "SMS"
 // pv.time: "time" => "Idő"
 // pv.url: "url" => "URL-cím"
 // pv.week: "week" => "hét"
@@ -2176,7 +2175,6 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // inputType.password: "Password" => "Jelszó"
 // inputType.range: "Range" => "Tartomány"
 // inputType.tel: "Phone Number" => "Telefonszám"
-// inputType.text: "Text" => "SMS"
 // inputType.time: "Time" => "Idő"
 // inputType.url: "URL" => "URL"
 // inputType.week: "Week" => "Hét"

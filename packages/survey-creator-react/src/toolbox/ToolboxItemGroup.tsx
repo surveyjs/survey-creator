@@ -30,7 +30,7 @@ export class SurveyCreatorToolboxItemGroup extends CreatorModelElement<ISurveyCr
   protected getStateElement(): Base {
     return this.item;
   }
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     return <>
       <SurveyCreatorToolboxItem item={this.item} creator={this.creator} model={this.model} parentModel={this.parentModel} isCompact={this.isCompact} ></SurveyCreatorToolboxItem >
       <div className="svc-toolbox__item-submenu-button"

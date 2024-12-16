@@ -471,3 +471,101 @@ test("Diabled Textarea issue", async (t) => {
   await t.click(QuestionInput);
   await t.expect(QuestionContent.hasClass(questionContentClass + "--selected")).ok();
 });
+
+test("Question adorner double click", async (t) => {
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "comment",
+            "name": "q"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await ClientFunction(() => {
+    window["creator"].expandCollapseButtonVisibility = "always";
+  })();
+  function isCollapsed() {
+    return Selector(".svc-question__content").hasClass("svc-question__content--collapsed");
+  }
+  await t.doubleClick(Selector(".svc-question__content"));
+  await t.expect(isCollapsed()).notOk();
+
+  await t.doubleClick(Selector(".svc-required-action"));
+  await t.expect(isCollapsed()).notOk();
+
+  await t.doubleClick(Selector(".sv-action-bar-item--collapse button"));
+  await t.expect(isCollapsed()).notOk();
+
+  await t.doubleClick(Selector(".svc-question__content .sv-string-editor"));
+  await t.expect(isCollapsed()).notOk();
+
+  await t.doubleClick(Selector(".svc-question__content"), { offsetX: 5, offsetY: -5 });
+  await t.expect(isCollapsed()).ok();
+  await t.doubleClick(Selector(".svc-question__content"), { offsetX: 5, offsetY: -5 });
+  await t.expect(isCollapsed()).notOk();
+
+  await t.doubleClick(Selector(".sd-question__title"));
+  await t.expect(isCollapsed()).ok();
+  await t.doubleClick(Selector(".sd-question__title"));
+  await t.expect(isCollapsed()).notOk();
+
+  await t.doubleClick(Selector(".svc-question__drag-area"));
+  await t.expect(isCollapsed()).ok();
+  await t.doubleClick(Selector(".svc-question__drag-area"));
+  await t.expect(isCollapsed()).notOk();
+
+});
+
+test("Page adorner double click", async (t) => {
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "comment",
+            "name": "q"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await ClientFunction(() => {
+    window["creator"].expandCollapseButtonVisibility = "always";
+    window["creator"].allowDragPages = true;
+  })();
+  function isCollapsed() {
+    return Selector(".svc-page__content").hasClass("svc-page__content--collapsed");
+  }
+  await t.doubleClick(Selector(".svc-page__content"));
+  await t.expect(isCollapsed()).notOk();
+
+  await t.doubleClick(Selector(".sv-action-bar-item--collapse button"));
+  await t.expect(isCollapsed()).notOk();
+
+  await t.doubleClick(Selector(".svc-page__content .sv-string-editor"));
+  await t.expect(isCollapsed()).notOk();
+
+  await t.doubleClick(Selector(".svc-page__content"), { offsetX: 5, offsetY: -5 });
+  await t.expect(isCollapsed()).ok();
+  await t.doubleClick(Selector(".svc-page__content"), { offsetX: 5, offsetY: -5 });
+  await t.expect(isCollapsed()).notOk();
+
+  await t.doubleClick(Selector(".sd-body__page"), { offsetY: 5 });
+  await t.expect(isCollapsed()).ok();
+  await t.doubleClick(Selector(".sd-body__page"), { offsetY: 5 });
+  await t.expect(isCollapsed()).notOk();
+
+  await t.doubleClick(Selector(".svc-page__content > .svc-question__drag-area"));
+  await t.expect(isCollapsed()).ok();
+  await t.doubleClick(Selector(".svc-page__content > .svc-question__drag-area"));
+  await t.expect(isCollapsed()).notOk();
+
+});

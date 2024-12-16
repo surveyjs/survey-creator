@@ -9,7 +9,7 @@ export class SurveyElementEmbeddedSurvey extends SurveyQuestionElementBase {
   protected get creator(): ISurveyCreator {
     return this.props.creator;
   }
-  public render(): JSX.Element {
+  public render(): React.JSX.Element {
     if (!this.embeddedSurvey) return null;
     const survey = this.embeddedSurvey.embeddedSurvey;
     if (!survey || !survey.currentPage) return null;

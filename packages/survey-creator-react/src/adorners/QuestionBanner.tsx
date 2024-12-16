@@ -4,7 +4,7 @@ import { ReactElementFactory } from "survey-react-ui";
 import { ActionButton } from "../ActionButton";
 
 export class QuestionBanner extends React.Component<QuestionBannerParams, any> {
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     return (
       <div className="svc-carry-forward-panel-wrapper"><div className="svc-carry-forward-panel">
         <span>{this.props.text}{" "}</span>

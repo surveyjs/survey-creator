@@ -82,6 +82,7 @@ export class UndoRedoController extends Base {
     this.undoRedoManager.canUndoRedoCallback = () => {
       this.updateUndeRedoActions();
     };
+    this.updateUndeRedoActions();
   }
   private notifySurveyMoveItem(actions: UndoRedoAction[], isUndo: boolean): boolean {
     if(actions.length !== 2) false;
@@ -184,8 +185,10 @@ export class UndoRedoController extends Base {
     return items;
   }
   private updateUndeRedoActions() {
-    this.undoAction.enabled = this.undoRedoManager.canUndo();
-    this.redoAction.enabled = this.undoRedoManager.canRedo();
+    if(!!this.undoAction) {
+      this.undoAction.enabled = this.undoRedoManager.canUndo();
+      this.redoAction.enabled = this.undoRedoManager.canRedo();
+    }
   }
 
   /**

@@ -15,7 +15,7 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
   protected getStateElement(): Base {
     return this.model;
   }
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     if (!this.model) return null;
     return (
       <div className={"svc-creator-tab__content svc-translation-tab" + (this.model.isEmpty ? " svc-translation-tab--empty" : "")}>
@@ -23,7 +23,7 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
       </div>
     );
   }
-  renderElementContent(): JSX.Element {
+  renderElementContent(): React.JSX.Element {
     if (this.model.isEmpty) {
       return <SurfacePlaceholder name={"translation"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />;
     } else {
