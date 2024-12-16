@@ -18,6 +18,10 @@
 
 .svc-list__item-body {
   @include textEllipsis;
+  @include ctrDefaultFont;
+  text-align: start;
+  color: var(--ctr-list-item-text-color, $foreground-dim);
+  transition: color $creator-transition-duration;
   --thm-list-item-padding-left-default: calc(2 * #{$base-unit});
   --thm-list-item-padding-delta: var(--ctr-list-item-padding-left, var(--thm-list-item-padding-left-default));
   --thm-list-item-padding-left: calc(var(--sjs-list-item-level) * var(--thm-list-item-padding-delta));
@@ -37,11 +41,7 @@
 
   & > span,
   & > sv-ng-string {
-    @include ctrDefaultFont;
     flex: 1 0 0;
-    text-align: start;
-    color: var(--ctr-list-item-text-color, $foreground-dim);
-    transition: color $creator-transition-duration;
   }
 }
 
@@ -57,13 +57,10 @@
 .svc-list__item--hovered {
   & > .svc-list__item-body {
     background: var(--ctr-list-item-background-color-hovered, $background-dark);
+    color: var(--ctr-list-item-text-color-hovered, $foreground);
 
     .svc-list__item-icon use {
       fill: var(--ctr-list-item-icon-color-hovered, $foreground-light);
-    }
-
-    & > span {
-      color: var(--ctr-list-item-text-color-hovered, $foreground);
     }
 
     .svc-list-item__marker-icon use {
@@ -77,15 +74,12 @@
 .svc-list__item--selected:focus,
 .svc-list__item.svc-list__item--selected:hover {
   & > .svc-list__item-body {
+    @include ctrDefaultBoldFont;
+    color: var(--ctr-list-item-text-color-selected, $primary-foreground);
     background: var(--ctr-list-item-background-color-selected, $primary);
 
     .svc-list__item-icon use {
       fill: var(--ctr-list-item-icon-color-selected, $background);
-    }
-
-    & > span {
-      @include ctrDefaultBoldFont;
-      color: var(--ctr-list-item-text-color-selected, $primary-foreground);
     }
   }
 }
@@ -94,15 +88,12 @@
 .svc-list__item--group-selected:hover,
 .svc-list__item--group-selected:focus {
   & > .svc-list__item-body {
+    @include ctrDefaultFont;
+    color: var(--ctr-list-item-text-color-selected-submenu, $foreground);
     background: var(--ctr-list-item-background-color-selected-submenu, $primary-light);
 
     .svc-list__item-icon use {
       fill: var(--ctr-list-item-icon-color-selected-submenu, $foreground-light);
-    }
-
-    & > span {
-      @include ctrDefaultFont;
-      color: var(--ctr-list-item-text-color-selected-submenu, $foreground);
     }
 
     .svc-list-item__marker-icon use {
@@ -269,15 +260,12 @@
   }
 
   .svc-list__item--group-selected > .svc-list__item-body {
+    @include ctrDefaultBoldFont;
+    color: $primary-foreground;
     background-color: $primary;
 
     use {
       fill: $background;
-    }
-
-    > span {
-      @include ctrDefaultBoldFont;
-      color: $primary-foreground;
     }
   }
 }
