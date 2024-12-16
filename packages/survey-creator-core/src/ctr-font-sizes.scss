@@ -1,4 +1,6 @@
 .svc-creator {
+  --sjs-font-size-x05: calc(#{$font-unit} * 0.5);
+  --sjs-font-size-x075: calc(#{$font-unit} * 0.75);
   --sjs-font-size-x1: calc(#{$font-unit} * 1);
   --sjs-font-size-x150: calc(#{$font-unit} * 1.5);
   --sjs-font-size-x2: calc(#{$font-unit} * 2);
