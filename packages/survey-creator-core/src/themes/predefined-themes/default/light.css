@@ -10,8 +10,8 @@
   --sjs-layer-2-background-500: #F8F8F8FF;
   --sjs-layer-2-background-400: #EEEEEEFF;
   --sjs-special-haze: #CCEEEE59;
-  --sjs-border-25: #DCDCDCFF;
-  --sjs-border-10: #E6E6E6FF;
+  --sjs-border-25: #D4D4D4FF;
+  --sjs-border-10: #DCDCDCFF;
   --sjs-primary-background-500: #19B394FF;
   --sjs-primary-background-10: #19B3941A;
   --sjs-primary-background-400: #14A48BFF;
@@ -47,7 +47,7 @@
   --sjs-layer-1-foreground-75: #000000BF;
   --sjs-layer-3-background-400: #EAEAEAFF;
   --sjs-special-glow: #004C441A;
-  --sjs-special-shadow: #00000026;
+  --sjs-special-shadow: #00000040;
   --sjs-layer-3-foreground-75: #000000BF;
   --sjs-layer-2-foreground-100: #000000E6;
   --sjs-layer-2-foreground-75: #000000BF;

@@ -280,8 +280,8 @@ export class SurveyCreatorModel extends Base
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
-  private responsivityManager: CreatorResponsivityManager;
-  footerToolbar: ActionContainer;
+  public responsivityManager: CreatorResponsivityManager;
+  public footerToolbar: ActionContainer;
 
   private changePageModifications(allow = false) {
     this.setPropertyVisibility("survey", allow, "pages");
@@ -3857,11 +3857,6 @@ export class SurveyCreatorModel extends Base
       this.responsivityManager = undefined;
     }
   }
-  public setDesignerSurveyScale(scale: number) {
-    if (scale <= 0) return;
-    this.responsivityManager?.updateSurveyActualWidth();
-    this.survey.widthScale = scale;
-  }
   @property({ defaultValue: false }) showHeaderInEmptySurvey;
   @property({ defaultValue: true }) public allowShowPageNavigator;
   @property({ defaultValue: true }) private showPageNavigatorValue;
@@ -3981,6 +3976,10 @@ export class SurveyCreatorModel extends Base
 
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables);
+    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    if (designerPlugin) {
+      assign(newCssVariable, designerPlugin.model.scaleCssVariables || {});
+    }
     this.themeVariables = newCssVariable;
     const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v1";
     SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);

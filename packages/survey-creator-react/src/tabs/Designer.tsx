@@ -9,6 +9,7 @@ import {
 import { SurveyCreatorModel, TabDesignerViewModel } from "survey-creator-core";
 import { SurveyPageNavigator } from "../PageNavigator";
 import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
+import { ScrollComponent } from "../components/Scroll";
 
 interface ITabDesignerComponentProps {
   data: TabDesignerViewModel;
@@ -55,7 +56,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     return [this.model, this.model.survey, this.model.pagesController];
   }
 
-  protected getRenderedPages(): JSX.Element[] {
+  protected getRenderedPages(): React.JSX.Element[] {
     const renderedPages = [];
 
     if (this.creator.pageEditMode !== "bypage") {
@@ -95,10 +96,10 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
         </div>
       </React.Fragment>);
   }
-  protected renderPage(pageV: PageModel, isGhost: boolean): JSX.Element {
+  protected renderPage(pageV: PageModel, isGhost: boolean): React.JSX.Element {
     return ReactElementFactory.Instance.createElement("svc-page", { survey: this.creator.survey, page: pageV, creator: this.creator, isGhost });
   }
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();
 
     return (
@@ -107,15 +108,17 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           {this.model.isToolboxVisible ? ReactElementFactory.Instance.createElement("svc-toolbox", { model: this.creator }) : null}
         </div>
         <div className={designerTabClassName} onClick={() => this.model.clickDesigner()}>
-          <div className="svc-tab-designer_content">
-            {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
-          </div>
+          <ScrollComponent>
+            <div className="svc-tab-designer_content">
+              {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
+            </div>
+          </ScrollComponent>
         </div>
       </React.Fragment>
     );
   }
 
-  renderHeader(condition: boolean): JSX.Element {
+  renderHeader(condition: boolean): React.JSX.Element {
     if (!condition) return null;
 
     const survey: SurveyModel = this.creator.survey;
@@ -125,7 +128,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       </div>
     </React.Fragment>);
   }
-  renderPlaceHolder(): JSX.Element {
+  renderPlaceHolder(): React.JSX.Element {
     const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle && this.creator.showHeaderInEmptySurvey);
 
     return (<React.Fragment>
@@ -136,16 +139,14 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       </div>
     </React.Fragment>);
   }
-  renderPlaceHolderContent(): JSX.Element {
+  renderPlaceHolderContent(): React.JSX.Element {
     return <SurfacePlaceholder name={"designer"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />;
   }
-  renderTabContent(): JSX.Element {
+  renderTabContent(): React.JSX.Element {
     const survey: SurveyModel = this.creator.survey;
     const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle);
     const style: any = { ...this.model.surveyThemeVariables };
-    if (!!survey.width) {
-      style.maxWidth = survey.renderedWidth;
-    }
+    style.maxWidth = survey.renderedWidth;
 
     return (<React.Fragment>
       <div className={this.model.designerCss} style={style} >
@@ -158,16 +159,20 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           css={survey.css}
         /> */}
       </div>
-      {this.creator.showPageNavigator ?
-        <div className="svc-tab-designer__page-navigator"><SurveyPageNavigator
-          pagesController={this.model.pagesController} pageEditMode={this.model.creator.pageEditMode}
-        ></SurveyPageNavigator></div>
-        : null
-      }
-      {this.model.hasToolbar ?
-        <div className="svc-tab-designer__toolbar">
-          <SurveyActionBar model={this.model.surfaceToolbar} handleClick={false}></SurveyActionBar></div>
-        : null
+      {
+        !this.creator.isMobileView ? <div className="svc-tab-designer__tools">
+          {[
+            this.creator.showPageNavigator ?
+              <div key={1} className="svc-tab-designer__page-navigator"><SurveyPageNavigator
+                pagesController={this.model.pagesController} pageEditMode={this.model.creator.pageEditMode}
+              ></SurveyPageNavigator></div>
+              : null,
+            this.model.hasToolbar ?
+              <div key={2} className="svc-tab-designer__toolbar">
+                <SurveyActionBar model={this.model.surfaceToolbar} handleClick={false}></SurveyActionBar></div>
+              : null
+          ]}
+        </div> : null
       }
     </React.Fragment>);
   }

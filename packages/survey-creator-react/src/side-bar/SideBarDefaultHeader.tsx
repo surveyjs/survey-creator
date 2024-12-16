@@ -16,7 +16,7 @@ export class SideBarDefaultHeader extends SurveyElementBase<ISideBarHeaderProps,
     return this.model;
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const title = !!this.model.title ? (
       <div className="svc-side-bar__container-title">{this.model.title}</div>
     ) : null;

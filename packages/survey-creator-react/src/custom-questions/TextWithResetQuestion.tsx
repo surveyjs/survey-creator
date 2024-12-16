@@ -6,7 +6,7 @@ export class SurveyQuestionTextWithReset extends SurveyQuestionElementBase {
   protected get question(): QuestionTextWithResetModel | QuestionCommentWithResetModel {
     return this.questionBase as unknown as (QuestionTextWithResetModel | QuestionCommentWithResetModel);
   }
-  protected renderElement(): JSX.Element {
+  protected renderElement(): React.JSX.Element {
     const textElement = this.renderInput();
     const resetButton = this.renderResetButton();
     return (
@@ -30,7 +30,7 @@ export class SurveyQuestionTextWithReset extends SurveyQuestionElementBase {
       className={this.question.cssClasses.resetButton}
       disabled={this.question.resetValueAdorner.isDisabled}
       title={this.question.resetValueAdorner.caption}
-      onClick={ () => this.question.resetValueAdorner.resetValue()}>
+      onClick={() => this.question.resetValueAdorner.resetValue()}>
       <SvgIcon iconName={this.question.cssClasses.resetButtonIcon} size={"auto"}></SvgIcon>
     </button>);
   }

@@ -21,7 +21,7 @@ export class SearchComponent extends SurveyElementBase<ISearchComponentProps, an
     };
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     if (!this.model.isVisible) return null;
 
     const onChange = (e: any) => {

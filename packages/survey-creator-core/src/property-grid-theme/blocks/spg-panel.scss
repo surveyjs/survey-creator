@@ -143,6 +143,7 @@
   }
   .spg-panel__title {
     @include ctrDefaultFont;
+    color: var(--ctr-label-text-color, $foreground-light);
     box-shadow: none;
     background-color: transparent;
     padding-top: var(--ctr-label-padding-top, calcSize(1));

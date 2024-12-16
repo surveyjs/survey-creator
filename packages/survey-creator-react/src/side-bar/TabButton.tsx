@@ -13,7 +13,7 @@ export class TabButtonComponent extends SurveyElementBase<{ model: MenuButton },
     return this.props.model;
   }
 
-  protected renderElement(): JSX.Element | null {
+  protected renderElement(): React.JSX.Element | null {
     const button = attachKey2click(
       <div
         className={this.props.model.buttonClassName}
