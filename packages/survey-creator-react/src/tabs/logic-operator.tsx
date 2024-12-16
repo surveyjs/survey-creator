@@ -8,7 +8,7 @@ export class SurveyLogicOpertor extends SurveyQuestionDropdown {
     super(props);
   }
 
-  protected renderInput(): JSX.Element {
+  protected renderInput(): React.JSX.Element {
     const q = this.question as QuestionDropdownModel;
     initLogicOperator(q);
     const text = (q.selectedItemLocText) ? this.renderLocString(q.selectedItemLocText) : "";

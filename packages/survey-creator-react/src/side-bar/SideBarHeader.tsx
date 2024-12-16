@@ -16,7 +16,7 @@ class SideBarHeader extends SurveyElementBase<ISideBarHeaderProps, any> {
     return this.model;
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     return (
       <div className="svc-side-bar__container-header svc-sidebar__header-container">
         {(this.model.subTitle) ?

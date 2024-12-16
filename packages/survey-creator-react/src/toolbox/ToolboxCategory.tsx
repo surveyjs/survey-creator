@@ -27,7 +27,7 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
     return (this.category as any);
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     const header = this.renderCategoryHeader();
     const items = this.renderCategoryContent();
     return (
@@ -40,7 +40,7 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
     );
   }
 
-  renderCategoryHeader(): JSX.Element {
+  renderCategoryHeader(): React.JSX.Element {
     let className = "svc-toolbox__category-header";
     if (this.toolbox.canCollapseCategories) {
       className += " svc-toolbox__category-header--collapsed";
@@ -53,7 +53,7 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
     );
   }
 
-  renderButton(): JSX.Element {
+  renderButton(): React.JSX.Element {
     if (!this.toolbox.canCollapseCategories) return null;
 
     const iconName = this.category.collapsed ? "arrow-down" : "arrow-up";

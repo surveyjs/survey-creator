@@ -15,7 +15,7 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
   public get model() {
     return this.props.item.data;
   }
-  protected renderTypeSelector(): JSX.Element {
+  protected renderTypeSelector(): React.JSX.Element {
     const questionTypeSelectorModel = this.model.questionTypeSelectorModel;
     return attachKey2click(<button
       type="button"
@@ -38,7 +38,7 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
         : null}
     </button>);
   }
-  protected renderElement(): JSX.Element {
+  protected renderElement(): React.JSX.Element {
     const addButtonClass = this.props.buttonClass || "svc-btn";
     return <>
       {attachKey2click(<div

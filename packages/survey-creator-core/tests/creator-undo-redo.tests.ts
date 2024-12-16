@@ -469,3 +469,15 @@ test("undo/redo with events", (): any => {
     { type: "QUESTION_CONVERTED", className: "dropdown", oldType: "checkbox", newType: "dropdown" }
   ]);
 });
+test("Clear undo/redo transactions on settings creator.JSON, bug#6208", (): any => {
+  const creator = new CreatorTester();
+  const undoAction = creator.toolbar.getActionById("action-undo");
+  creator.survey.title = "My title";
+  creator.addNewQuestionInPage(() => { });
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  expect(undoAction).toBeTruthy();
+  expect(undoAction.enabled).toBeTruthy();
+  creator.JSON = {};
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(undoAction.enabled).toBeFalsy();
+});

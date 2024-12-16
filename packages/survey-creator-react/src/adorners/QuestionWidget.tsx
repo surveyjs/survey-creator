@@ -19,7 +19,7 @@ export class QuestionWidgetAdornerComponent extends QuestionAdornerComponent {
   public get widgetModel(): QuestionAdornerViewModel {
     return this.model as QuestionAdornerViewModel;
   }
-  protected renderElementContent(): JSX.Element {
+  protected renderElementContent(): React.JSX.Element {
     return (
       <div
         className={"svc-widget__content"}

@@ -13,7 +13,7 @@ export class TabLogicAddButtonComponent extends SurveyElementBase<any, any> {
     return this.model;
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const buttonClassName = "svc-logic-tab__content-action svc-btn" + ((this.model.enabled !== undefined && !this.model.enabled) ? " svc-logic-tab__content-action--disabled" : "");
     return attachKey2click(<div
       role="button"
@@ -42,13 +42,13 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
     return this.model;
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     var logic = this.model;
     var rootClass = "svc-creator-tab__content svc-logic-tab";
     var content = this.renderViewContent();
     return <div className={rootClass}>{content}</div>;
   }
-  private renderViewContent(): JSX.Element {
+  private renderViewContent(): React.JSX.Element {
     const logicTabClassName = "svc-plugin-tab__content svc-logic-tab svc-logic-tab__content " + (this.model.hasItems ? "" : "svc-logic-tab--empty");
     const addLogic = !this.model.readOnly ? <TabLogicAddButtonComponent button={this.model.addNewButton} /> : undefined;
     return (

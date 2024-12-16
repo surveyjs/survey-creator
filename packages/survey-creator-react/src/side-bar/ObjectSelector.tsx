@@ -13,7 +13,7 @@ class ObjectSelectorComponent extends SurveyElementBase<IObjectSelectorComponent
   protected getStateElement(): Base {
     return this.model;
   }
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     if (!this.model.isVisible) return null;
 
     return (<List model={this.model.list}></List>);

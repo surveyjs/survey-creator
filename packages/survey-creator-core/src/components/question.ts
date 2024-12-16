@@ -551,7 +551,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     delete json.name;
     return json;
   }
-
+  protected allowExpandCollapseByDblClick(element: any) {
+    return element.classList.contains("svc-question__content") ||
+      element.closest(".svc-question__drag-area") && !element.closest(".svc-question__top-actions") ||
+      element.closest(".sd-element__header") && !element.closest(".svc-string-editor");
+  }
   protected updateQuestionTypeOrSubtypeListModel(listModel: ListModel, subtypeOnly: boolean) {
     const availableItems = this.getConvertToTypes();
     const defaultJsons = this.buildDefaultJsonMap(availableItems);

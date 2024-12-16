@@ -36,7 +36,7 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
     return super.canRender();
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const style = { display: this.model.renderRoot ? "" : "none" };
     const containerStyle = { display: this.model.renderContainer ? "" : "none" };
     const items = this.model.pages.map((page) => <SidebarPage page={page} key={page.id} />);
@@ -72,7 +72,7 @@ class SidebarPage extends SurveyElementBase<any, any> {
     return this.page;
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     if (!this.page.visible) return null;
 
     const component = ReactElementFactory.Instance.createElement(this.page.componentName, { model: this.page.componentData });
