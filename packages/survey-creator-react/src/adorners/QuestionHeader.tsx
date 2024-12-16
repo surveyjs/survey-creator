@@ -18,7 +18,7 @@ export interface QuestionWrapperHeaderProps {
 }
 
 export class QuestionWrapperHeader extends React.Component<QuestionWrapperHeaderProps, any> {
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     if (!this.props.model.allowDragging) return null;
     return (
       <div className={"svc-question__drag-area"}

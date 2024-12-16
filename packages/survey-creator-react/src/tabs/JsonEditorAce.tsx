@@ -26,7 +26,7 @@ export class TabJsonEditorAceComponent extends SurveyElementBase<
   componentDidMount() {
     this.model.init(ace.edit(this.aceEditorrRef.current as HTMLElement));
   }
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const errors = <TabJsonEditorErrorsComponent data={this.model} />;
     return (
       <div className="svc-creator-tab__content">

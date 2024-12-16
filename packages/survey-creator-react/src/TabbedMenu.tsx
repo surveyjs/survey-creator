@@ -34,7 +34,7 @@ export class TabbedMenuComponent extends SurveyElementBase<
     this.rootRef = React.createRef();
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const items = this.model.renderedActions.map((item) => <TabbedMenuItemWrapper item={item} key={item.id} />);
     return (
       <div ref={this.rootRef} className="svc-tabbed-menu">
@@ -72,7 +72,7 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
     return this.item;
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     let css: string = "svc-tabbed-menu-item-container";
     if (this.item.css) {
       css += " " + this.item.css;
@@ -108,7 +108,7 @@ export class TabbedMenuItemComponent extends SurveyElementBase<
     return this.item;
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     const item = this.item;
     return (attachKey2click(
       <div className={item.getRootCss()} onClick={() => item.action(item)}>

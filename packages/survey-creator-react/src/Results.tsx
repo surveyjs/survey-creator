@@ -24,7 +24,7 @@ export class SurveyResults extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     if (!this.model) {
       return null;
     }
@@ -52,7 +52,7 @@ export class SurveyResults extends CreatorModelElement<
       </div>
     );
   }
-  renderResultAsText(): JSX.Element {
+  renderResultAsText(): React.JSX.Element {
     if (this.model.resultViewType !== "text") {
       return null;
     }
@@ -62,7 +62,7 @@ export class SurveyResults extends CreatorModelElement<
       </div>
     );
   }
-  renderResultAsTable(): JSX.Element {
+  renderResultAsTable(): React.JSX.Element {
     if (this.model.resultViewType !== "table") {
       return null;
     }
@@ -84,7 +84,7 @@ export class SurveyResults extends CreatorModelElement<
       </div>
     );
   }
-  static renderRows(data: Array<any>): Array<JSX.Element> {
+  static renderRows(data: Array<any>): Array<React.JSX.Element> {
     const rows = [];
     for (var i = 0; i < data.length; i++) {
       rows.push(<SurveyResultsByRow key={i + 1} row={data[i]} />);
@@ -102,7 +102,7 @@ export class SurveyResultsByRow extends CreatorModelElement<any, any> {
     return this.row;
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     return (
       <>
         {attachKey2click(<tr onClick={() => this.row.toggle()}>

@@ -54,7 +54,7 @@ export class SurveyNavigation extends SurveyElementBase<any, any> {
       ? this.survey.isShowProgressBarOnTop
       : this.survey.isShowProgressBarOnBottom;
   }
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     return ReactElementFactory.Instance.createElement(
       this.survey.getProgressTypeComponent(),
       { survey: this.survey, css: this.survey.css, isTop: this.isTop }
