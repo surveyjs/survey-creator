@@ -35,7 +35,8 @@
 
   transition: background-color $creator-transition-duration;
 
-  & > span {
+  & > span,
+  & > sv-ng-string {
     @include ctrDefaultFont;
     flex: 1 0 0;
     text-align: start;
