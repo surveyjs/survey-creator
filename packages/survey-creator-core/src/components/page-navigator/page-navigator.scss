@@ -4,6 +4,7 @@ svc-page-navigator,
 .svc-page-navigator {
   display: flex;
   flex-direction: column;
+  gap: var(--ctr-page-navigator-gap, calcSize(2));
 }
 
 .svc-page-navigator__button-icon {
