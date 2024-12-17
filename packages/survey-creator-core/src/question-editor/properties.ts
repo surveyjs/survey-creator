@@ -60,7 +60,9 @@ export class SurveyQuestionProperties {
   public getAllVisiblePropertiesNames(includeUnused: boolean): Array<string> {
     const res = [];
     this.tabs.forEach(tab => {
-      tab.properties.forEach(prop => res.push(prop.name));
+      if(tab.visible !== false) {
+        tab.properties.forEach(prop => res.push(prop.name));
+      }
     });
     if(includeUnused) {
       this.unusedProperties.forEach(prop => res.push(prop.name));

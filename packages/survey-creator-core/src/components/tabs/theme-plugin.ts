@@ -139,7 +139,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.setCoverPropertiesFromSurvey(headerViewContainer, simulatorSurvey);
     }
     const pageTitleQuestion = this.propertyGrid.survey.getQuestionByName("pageTitle");
-    let pageElements = simulatorSurvey.isSinglePage ? simulatorSurvey.pages[0].elements : simulatorSurvey.pages;
+    //TODO replace vs
+    //let pageElements = simulatorSurvey.pages;
+    let pageElements: Array<any> = simulatorSurvey.isSinglePage ? simulatorSurvey.visiblePages[0].elements : simulatorSurvey.pages;
     if (!!pageTitleQuestion) {
       pageTitleQuestion.readOnly = !pageElements.some(p => !!p.title);
     }

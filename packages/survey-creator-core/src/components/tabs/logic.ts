@@ -395,10 +395,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       var lt = this.logicTypes[i];
       if (lt.showInUI !== showInUI) continue;
       var expression = element[lt.propertyName];
-      if (
-        types.indexOf(lt.baseClass) > -1 &&
-        !Helpers.isValueEmpty(expression)
-      ) {
+      if (lt.hasNeededTypes(types) && !Helpers.isValueEmpty(expression)) {
         var key = this.getLogicItemHashKey(expression, element);
         var item = hash[key];
         if (!item) {
