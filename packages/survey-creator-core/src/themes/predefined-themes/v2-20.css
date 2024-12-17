@@ -3371,5 +3371,9 @@
   --ctr-list-padding-bottom-no-data: var(--sjs-spacing-x4);
   --ctr-list-no-data-text-color: var(--sjs-layer-1-foreground-50);
   --ctr-page-navigator-button-icon-color-disabled: var(--sjs-layer-3-foreground-100);
+  --ctr-actionbar-button-border-color-highlighted: var(--sjs-secondary-background-500);
+  --ctr-actionbar-button-border-width-highlighed: var(--sjs-stroke-x2);
+  --ctr-survey-question-panel-toolbar-item-text-color-selected: var(--sjs-layer-1-foreground-100);
+  --ctr-survey-question-panel-toolbar-item-icon-color-selected: var(--sjs-secondary-background-500);
 }
 
