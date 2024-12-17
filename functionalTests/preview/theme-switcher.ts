@@ -40,7 +40,7 @@ test.skip("Test theme switcher with 3 themes", async (t) => {
   const clickAndCheck = async (listID, themeName, visibleSelector, notVisibleSelector_1, notVisibleSelector_2) => {
     await t
       .click(Selector("#themeSwitcher"))
-      .click(Selector(".sv-popup__container .sv-list .sv-list__item").filterVisible().nth(listID));
+      .click(Selector(".sv-popup__container .svc-list .svc-list__item").filterVisible().nth(listID));
     await checkVisibility(themeName, visibleSelector, notVisibleSelector_1, notVisibleSelector_2);
   };
 

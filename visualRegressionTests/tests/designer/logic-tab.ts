@@ -201,7 +201,7 @@ test("Check logic dropdown", async (t) => {
       .click(Selector(".svc-logic-operator--question"));
     await takeElementScreenshot("logic-dropdown.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
     await t
-      .click(Selector(".sv-list__item").withText("q1").filterVisible())
+      .click(getListItemByText("q1").filterVisible())
       .click(Selector(".svc-logic-operator--question"));
     await takeElementScreenshot("logic-dropdown-full.png", Selector(".sl-body").filterVisible(), t, comparer);
   });

@@ -26,6 +26,7 @@ import { editorLocalization, getLocString } from "./editorLocalization";
 import { settings } from "./creator-settings";
 import { DragDropSurveyElements } from "./survey-elements";
 import { SearchManagerToolbox } from "./components/toolbox/toolbox-search-manager";
+import { listComponentCss } from "./components/list-theme";
 
 export type overflowBehaviorType = "hideInMenu" | "scroll";
 
@@ -606,6 +607,7 @@ export class QuestionToolbox
       }
     };
     this.dotsItem.popupModel.cssClass += " svc-toolbox-popup svc-creator-popup";
+    this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
   private getDefaultQuestionCategories() {
     const questionCategoryMap = {};
@@ -763,15 +765,11 @@ export class QuestionToolbox
     else {
       item.iconName = item.iconName ? item.iconName : QuestionToolbox.defaultIconName;
       const newItem = new QuestionToolboxItem(item);
-      const newItems = this.createSubTypes(newItem);
-      if (newItems) {
-        newItem.addSubitems(newItems);
-      }
-
+      this.createSubTypes(newItem);
       return newItem;
     }
   }
-  private createSubTypes(parentItem: QuestionToolboxItem): Array<QuestionToolboxItem> {
+  private createSubTypes(parentItem: QuestionToolboxItem): void {
     let property = null;
     const propName = QuestionToolbox.getSubTypePropertyName(parentItem.id);
     if (propName) property = Serializer.findProperty(parentItem.id, propName);
@@ -797,7 +795,9 @@ export class QuestionToolbox
       innerItem.propValue = ch;
       return innerItem;
     });
-    return newItems;
+    if (newItems) {
+      parentItem.addSubitems(newItems);
+    }
   }
   /**
    * Adds a new item to the Toolbox.

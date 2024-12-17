@@ -1,4 +1,4 @@
-import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName, logicQuestionSelector, logicOperatorSelector, logicActionSelector, logicQuestionValueSelector, logicOperatorConjuction, logicActionTriggerEditorElement, logicDetailButtonElement, logicDropdownValueSelector, getListItemByText, getBarItemByText, logicActionTriggerQuestionsElement, tableRulesSelector, logicAddNewRuleButton, getDropdownValue } from "../helper";
+import { url, getTabbedMenuItemByText, setJSON, creatorTabDesignerName, creatorTabLogicName, logicQuestionSelector, logicOperatorSelector, logicActionSelector, logicQuestionValueSelector, logicOperatorConjuction, logicActionTriggerEditorElement, logicDetailButtonElement, logicDropdownValueSelector, getListItemByText, getBarItemByText, logicActionTriggerQuestionsElement, tableRulesSelector, logicAddNewRuleButton, getDropdownValue, getSurveyListItemByText } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 
 const title = "Logic tab";
@@ -243,7 +243,7 @@ test("Edit Logic rule", async (t) => {
 
     .expect(getDropdownValue(logicDropdownValueSelector)).eql("Item 1")
     .click(logicDropdownValueSelector)
-    .click(getListItemByText("Item 2"))
+    .click(getSurveyListItemByText("Item 2"))
 
     .expect(logicQuestionSelector.nth(-1).textContent).contains("q2")
     .click(logicQuestionSelector.nth(-1))
@@ -411,7 +411,7 @@ test("Modified rules without saving", async (t) => {
     .click(logicQuestionSelector)
     .click(getListItemByText("q1"))
     .click(logicDropdownValueSelector)
-    .click(getListItemByText("Item 2"))
+    .click(getSurveyListItemByText("Item 2"))
     .click(logicActionSelector)
     .click(getListItemByText("Show/hide question"))
     .click(logicQuestionSelector.nth(1))
@@ -533,8 +533,8 @@ test("Availability of items", async (t) => {
       }
     ]
   };
-  const visibleListItems = Selector(".sv-list__item").filterVisible();
-  const visibleDisabledListItems = Selector(".sv-list__item.sv-list__item--disabled").filterVisible();
+  const visibleListItems = Selector(".svc-list__item").filterVisible();
+  const visibleDisabledListItems = Selector(".svc-list__item.svc-list__item--disabled").filterVisible();
   await setJSON(json);
   await t
     .click(getTabbedMenuItemByText(creatorTabLogicName))
@@ -589,7 +589,7 @@ test("Could not change 'and' on 'or' in logic tab or in condition editor", async
       }
     ]
   };
-  const visibleListItems = Selector(".sv-list__item").filterVisible();
+  const visibleListItems = Selector(".svc-list__item").filterVisible();
 
   await setJSON(json);
   await t
@@ -738,5 +738,5 @@ test("Logic Tab - The Search option is available", async (t) => {
 
     .click(logicQuestionSelector)
     .expect(logicQuestionSelector.parent().find(".sv-popup").visible).ok()
-    .expect(logicQuestionSelector.parent().find(".sv-popup .sv-list__filter").visible).ok();
+    .expect(logicQuestionSelector.parent().find(".sv-popup .svc-list__filter").visible).ok();
 });

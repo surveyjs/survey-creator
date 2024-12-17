@@ -1,5 +1,6 @@
 import { Action, ComputedUpdater, CssClassBuilder, IAction, IsTouch, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
 import { parseColor } from "../utils/utils";
+import { listComponentCss } from "../components/list-theme";
 
 const DEFAULT_COLOR: string = "#000000";
 const DEFAULT_SWATCH_COLOR: string = "#FFFFFF";
@@ -129,7 +130,8 @@ export class QuestionColorModel extends QuestionTextModel {
       onSelectionChanged: (item) => {
         this.value = (<ItemValue><unknown>item).value;
       },
-      items: this.choices
+      items: this.choices,
+      cssClasses: listComponentCss,
     }, {
       showPointer: false,
       verticalPosition: "bottom",
@@ -153,11 +155,6 @@ export class QuestionColorModel extends QuestionTextModel {
     dropdownAction.cssClasses = { item: classes.colorDropdown };
     dropdownAction.iconName = classes.colorDropdownIcon;
     dropdownAction.iconSize = "auto" as any;
-    const listModel = <ListModel<ItemValue>>dropdownAction.popupModel.contentComponentData.model;
-    listModel.cssClasses = {};
-    listModel.cssClasses = {
-      itemBody: listModel.cssClasses.itemBody + " " + classes.colorItem
-    };
     return classes;
   }
 

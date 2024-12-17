@@ -112,16 +112,20 @@ svc-tab-test {
   }
 }
 
-.svc-page-invisible .sv-list-item__marker-icon {
-  --sjs-general-forecolor-light: rgba(0, 0, 0, 0.45);
-
-  padding: 0;
-  width: calcSize(3);
-  height: calcSize(3);
-  opacity: 0.5;
-  margin-inline-end: calcSize(0.5);
+.svc-page-invisible {
+  .svc-list__item-body {
+    padding-block-start: var(--ctr-list-item-padding-top, calcSize(1));
+    padding-block-end: var(--ctr-list-item-padding-bottom, calcSize(1));
+    padding-inline-start: var(--ctr-list-item-padding-left, calcSize(2));
+    padding-inline-end: var(--ctr-list-item-padding-right-with-label-icon, calcSize(1.5));
+  }
+  .svc-list-item__marker-icon {
+    padding: 0;
+    opacity: var(--ctr-list-item-icon-opacity-label, 0.5);
+    width: var(--ctr-list-item-icon-width, calcSize(3));
+    height: var(--ctr-list-item-icon-height, calcSize(3));
+  }
 }
-
 .svc-test-tab__content .sd-body--empty {
   @include ctrDefaultFont;
   color: $foreground;
