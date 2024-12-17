@@ -1,4 +1,4 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction, activateLazyRenderingChecks } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
@@ -148,7 +148,10 @@ export class TabDesignerViewModel extends Base {
       iconName: "icon-zoomout-24x24",
       iconSize: "auto",
       visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
-      action: () => { this.scaleSurface(this.surfaceScale - this.stepSurfaceScaling); }
+      action: () => {
+        this.scaleSurface(this.surfaceScale - this.stepSurfaceScaling);
+        this.forceLazyRendering();
+      }
     });
 
     surfaceToolbarItems.push({
@@ -181,6 +184,9 @@ export class TabDesignerViewModel extends Base {
       }
     });
     this.surfaceToolbar.setItems(surfaceToolbarItems);
+  }
+  private forceLazyRendering() {
+    this.creator.survey.pages.forEach(page => activateLazyRenderingChecks(page.id));
   }
 
   private scaleSurface(scaleFactor: number): void {

@@ -3,7 +3,8 @@ import {
   collapseButtonSelector, expandButtonSelector, getBarItemByTitle,
   getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions,
   setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton, selectedObjectTextSelector, surveySettingsButtonSelector,
-  changeToolboxScrolling
+  changeToolboxScrolling,
+  getListItemByText
 } from "../helper";
 const title = "Responsiveness";
 
@@ -21,7 +22,7 @@ test("Check base responsiveness for tabbed menu", async (t) => {
     .click(".svc-tabbed-menu-item-container.sv-dots");
   const popupSelector = Selector(".sv-popup .sv-popup__container").filterVisible();
   await t
-    .expect(popupSelector.find(".sv-list__item").withText("Translation").visible).ok()
+    .expect(getListItemByText("Translation").visible).ok()
     .pressKey("esc")
     .expect(popupSelector.visible).notOk()
     .resizeWindow(1920, 900)
@@ -39,7 +40,7 @@ test("Check base responsiveness for toolbox", async (t) => {
     .click(".svc-toolbox__tool--dots");
   const popupSelector = Selector(".sv-popup .sv-popup__container").filterVisible();
   await t
-    .expect(popupSelector.find(".sv-list__item").withText("Dynamic Panel").visible).ok()
+    .expect(getListItemByText("Dynamic Panel").visible).ok()
     .pressKey("esc")
     .expect(popupSelector.visible).notOk()
     .resizeWindow(1920, 1200)

@@ -120,12 +120,14 @@ test("Check custom color question with survey mergeData", () => {
 });
 
 test("Check custom color question popup", () => {
-  const survey = new SurveyModel({ elements: [{
-    type: "color",
-    name: "q1",
-    choices: ["#f1b505", "#359ba7", "#6a3bff"]
-  }] });
-  survey.css = { color: { colorItem: "colorItemTest", colorDropdownIcon: "colorDropdownIconTest", colorDropdown: "colorDropdownTest" } };
+  const survey = new SurveyModel({
+    elements: [{
+      type: "color",
+      name: "q1",
+      choices: ["#f1b505", "#359ba7", "#6a3bff"]
+    }]
+  });
+  survey.css = { color: { colorDropdownIcon: "colorDropdownIconTest", colorDropdown: "colorDropdownTest" } };
   const question = <QuestionColorModel>survey.getAllQuestions()[0];
   question.cssClasses;
   const dropdownAction = question.dropdownAction;
@@ -136,7 +138,6 @@ test("Check custom color question popup", () => {
   expect(dropdownAction.iconName).toBe("colorDropdownIconTest");
   expect(popupModel.setWidthByTarget).toBeTruthy();
   expect(popupModel.positionMode).toBe("fixed");
-  expect(listModel.cssClasses.itemBody).toBe("sv-list__item-body colorItemTest");
 
   expect(listModel.actions.map((item => item.value))).toEqual(["#f1b505", "#359ba7", "#6a3bff"]);
   question.choices = <Array<ItemValue>><unknown>["#94a500", "#6a3bff", "#359ba7"];

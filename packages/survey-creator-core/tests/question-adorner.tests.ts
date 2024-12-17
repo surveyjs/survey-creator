@@ -1047,3 +1047,29 @@ test("Panel dynamic template panel shouldn't render collapsed", (): any => {
 
   surveySettings.animationEnabled = true;
 });
+
+test("Check question converter subitems", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  // create subitems from new items (the same type, different json)
+  const booleans = creator.toolbox.getItemByName("boolean") as QuestionToolboxItem;
+
+  creator.JSON = {
+    elements: [
+      { type: "boolean", name: "q1" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  const subitems = getQuestionConverterList(creator, "q1").getActionById("rating").items;
+  expect(subitems.length).toBe(3);
+
+  surveySettings.animationEnabled = true;
+});

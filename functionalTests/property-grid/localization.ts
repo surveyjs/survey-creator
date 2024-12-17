@@ -1,4 +1,4 @@
-import { url, setJSON } from "../helper";
+import { url, setJSON, getListItemByText } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid";
 
@@ -39,7 +39,6 @@ test("visibleIf property in de localization", async (t) => {
   const editVisibleIf = Selector("button").withExactText("Bearbeiten");
   const popup = Selector(".sv-popup__body-content");
   const chooseQuestion = popup.find(".sl-dropdown__value");
-  const chooseQuestion2 = popup.find(".sl-list__item-body");
   const question2Text = popup.find(".sd-input");
   const applyBtn = Selector("button").withExactText("Anwenden");
   await t
@@ -48,7 +47,7 @@ test("visibleIf property in de localization", async (t) => {
     .click(logicTab)
     .click(editVisibleIf)
     .click(chooseQuestion)
-    .click(chooseQuestion2)
+    .click(getListItemByText("question2"))
     .typeText(question2Text, "val1")
     .click(applyBtn);
 });

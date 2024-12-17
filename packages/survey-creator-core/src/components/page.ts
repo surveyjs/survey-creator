@@ -1,4 +1,4 @@
-import { Action, ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement } from "survey-core";
+import { Action, ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement, settings as SurveySettings } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -270,6 +270,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
     if (this.creator.isElementSelected(this.page)) {
       result += " svc-page__content--selected";
+    }
+    if (SurveySettings.designMode.showEmptyTitles === false) {
+      result += " svc-page__content--no-header";
     }
     return result.trim();
   }

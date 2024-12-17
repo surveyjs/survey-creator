@@ -1,0 +1,271 @@
+@import "../variables.scss";
+
+.svc-list {
+  width: 100%;
+  padding: var(--ctr-list-padding-top, calcSize(1)) var(--ctr-list-padding-right, 0)
+    var(--ctr-list-padding-bottom, calcSize(1)) var(--ctr-list-padding-left, 0);
+  margin: 0;
+  overflow-y: auto;
+  list-style-type: none;
+
+  box-sizing: border-box;
+}
+
+.svc-list__item {
+  width: 100%;
+  outline: none;
+}
+
+.svc-list__item-body {
+  @include textEllipsis;
+  @include ctrDefaultFont;
+  text-align: start;
+  color: var(--ctr-list-item-text-color, $foreground-dim);
+  transition: color $creator-transition-duration;
+  --thm-list-item-padding-left-default: calc(2 * #{$base-unit});
+  --thm-list-item-padding-delta: var(--ctr-list-item-padding-left, var(--thm-list-item-padding-left-default));
+  --thm-list-item-padding-left: calc(var(--sjs-list-item-level) * var(--thm-list-item-padding-delta));
+  display: flex;
+  flex: 1 0 0;
+  padding-block-start: var(--ctr-list-item-padding-top, calcSize(1));
+  padding-block-end: var(--ctr-list-item-padding-bottom, calcSize(1));
+  padding-inline-start: var(--thm-list-item-padding-left, calcSize(2));
+  padding-inline-end: var(--ctr-list-item-padding-right, calcSize(8));
+
+  align-items: center;
+  gap: var(--ctr-list-item-gap, calcSize(2));
+  border-radius: var(--ctr-list-item-corner-radius, 0px);
+  cursor: pointer;
+
+  transition: background-color $creator-transition-duration;
+
+  & > span,
+  & > sv-ng-string {
+    flex: 1 0 0;
+  }
+}
+
+.svc-list__item:disabled,
+.svc-list__item--disabled {
+  opacity: var(--ctr-list-item-opacity-disabled, 0.25);
+  pointer-events: none;
+}
+
+.svc-list__item:focus,
+.svc-list__item:hover,
+.svc-list__item--focused,
+.svc-list__item--hovered {
+  & > .svc-list__item-body {
+    background: var(--ctr-list-item-background-color-hovered, $background-dark);
+    color: var(--ctr-list-item-text-color-hovered, $foreground);
+
+    .svc-list__item-icon use {
+      fill: var(--ctr-list-item-icon-color-hovered, $foreground-light);
+    }
+
+    .svc-list-item__marker-icon use {
+      fill: var(--ctr-list-item-submenu-arrow-color-hovered-item, $foreground-light);
+    }
+  }
+}
+
+.svc-list__item--selected,
+.svc-list__item--selected:hover,
+.svc-list__item--selected:focus,
+.svc-list__item.svc-list__item--selected:hover {
+  & > .svc-list__item-body {
+    @include ctrDefaultBoldFont;
+    color: var(--ctr-list-item-text-color-selected, $primary-foreground);
+    background: var(--ctr-list-item-background-color-selected, $primary);
+
+    .svc-list__item-icon use {
+      fill: var(--ctr-list-item-icon-color-selected, $background);
+    }
+  }
+}
+
+.svc-list__item--group-selected,
+.svc-list__item--group-selected:hover,
+.svc-list__item--group-selected:focus {
+  & > .svc-list__item-body {
+    @include ctrDefaultFont;
+    color: var(--ctr-list-item-text-color-selected-submenu, $foreground);
+    background: var(--ctr-list-item-background-color-selected-submenu, $primary-light);
+
+    .svc-list__item-icon use {
+      fill: var(--ctr-list-item-icon-color-selected-submenu, $foreground-light);
+    }
+
+    .svc-list-item__marker-icon use {
+      fill: var(--ctr-list-item-submenu-arrow-color-selected-item-submenu, $foreground-light);
+    }
+  }
+}
+
+.svc-list__item--with-icon > .svc-list__item-body {
+  padding-block-start: var(--ctr-list-item-padding-top-with-icon, calcSize(1.5));
+  padding-block-end: var(--ctr-list-item-padding-bottom-with-icon, calcSize(1.5));
+  padding-inline-start: var(--thm-list-item-padding-left, calcSize(2));
+  padding-inline-end: var(--ctr-list-item-padding-right, calcSize(8));
+}
+
+.svc-list__item--group > .svc-list__item-body {
+  padding-block-start: var(--ctr-list-item-padding-top, calcSize(1));
+  padding-block-end: var(--ctr-list-item-padding-bottom, calcSize(1));
+  padding-inline-start: var(--thm-list-item-padding-left, calcSize(1));
+  padding-inline-end: var(--ctr-list-item-padding-right-submenu, calcSize(1));
+}
+
+.svc-list__item--with-icon.svc-list__item--group > .svc-list__item-body {
+  padding-block-start: var(--ctr-list-item-padding-top-with-icon, calcSize(1.5));
+  padding-block-end: var(--ctr-list-item-padding-bottom-with-icon, calcSize(1.5));
+  padding-inline-start: var(--thm-list-item-padding-left, calcSize(1));
+  padding-inline-end: var(--ctr-list-item-padding-right-submenu, calcSize(1));
+}
+
+.svc-list__item--with-icon.svc-list__item--group .sv-popup-inner > .sv-popup__container {
+  --thm-inner-popup-margin-top: calc(var(--ctr-list-item-padding-top) - var(--ctr-list-item-padding-top-with-icon) - var(--ctr-list-padding-top));
+  --thm-inner-popup-margin-top-default: calc(-0.5 * #{$base-unit});
+  margin-top: var(--thm-inner-popup-margin-top, var(--thm-inner-popup-margin-top-default, -4px));
+}
+
+.svc-list__item-separator {
+  width: 100%;
+  height: var(--ctr-separator-width, 1px);
+  margin: var(--ctr-separator-margin-vertical-small, calcSize(1)) 0px;
+  background-color: var(--ctr-separator-color, $border);
+}
+
+.svc-list__item-icon {
+  display: flex;
+  width: var(--ctr-list-item-icon-width, calcSize(3));
+  height: var(--ctr-list-item-icon-height, calcSize(3));
+  justify-content: center;
+  align-items: center;
+
+  use {
+    fill: var(--ctr-list-item-icon-color, $foreground-light);
+  }
+}
+
+.svc-list-item__marker-icon {
+  display: flex;
+  padding: var(--ctr-list-item-submenu-arrow-padding, calcSize(0.5));
+  align-items: flex-start;
+  width: var(--ctr-list-item-submenu-arrow-width, calcSize(2));
+  height: var(--ctr-list-item-submenu-arrow-height, calcSize(2));
+  box-sizing: content-box;
+  justify-content: center;
+
+  use {
+    fill: var(--ctr-list-item-submenu-arrow-color, $foreground-light);
+  }
+}
+
+.svc-list-item__marker-icon + * {
+  --thm-list-item-gap: var(--ctr-list-item-gap, calc(2 * #{$base-unit}));
+  margin-inline-start: calc(0px - var(--thm-list-item-gap));
+}
+
+.svc-list__container {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+}
+
+.svc-list__filter {
+  display: flex;
+  align-items: flex-start;
+  align-items: center;
+  gap: var(--ctr-list-search-gap, calcSize(2));
+
+  padding-inline-start: var(--ctr-list-search-padding-left, calcSize(2));
+  padding-inline-end: var(--ctr-list-search-padding-right, calcSize(2));
+  padding-block-start: var(--ctr-list-search-padding-top, calcSize(1.5));
+  padding-block-end: var(--ctr-list-search-padding-bottom, calcSize(1.5));
+
+  border-radius: var(--ctr-toolbox-search-corner-radius, 0px);
+  border-bottom: var(--ctr-list-search-border-width-bottom, 1px) solid
+    var(--ctr-list-search-border-color, rgba(0, 0, 0, 0.16));
+}
+
+.svc-list__filter-icon {
+  opacity: var(--ctr-list-search-icon-opacity, 1);
+  display: flex;
+  width: var(--ctr-list-search-icon-width, calcSize(3));
+  height: var(--ctr-list-search-icon-height, calcSize(3));
+  align-items: center;
+
+  .sv-svg-icon {
+    width: var(--ctr-list-search-icon-width, calcSize(3));
+    height: var(--ctr-list-search-icon-height, calcSize(3));
+  }
+
+  use {
+    fill: var(--ctr-list-search-icon-color, $foreground-light);
+  }
+}
+
+.svc-list__input {
+  @include ctrDefaultFont;
+  color: var(--ctr-list-search-text-color, $foreground-dim);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border: none;
+
+  &::placeholder {
+    color: var(--ctr-list-search-text-color-placeholder, $foreground-dim-light);
+  }
+}
+
+.svc-list__filter-clear-button {
+  display: flex;
+  padding: var(--ctr-search-button-padding-vertical, calcSize(0.5))
+    var(--ctr-search-button-padding-horizontal, calcSize(0.5));
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--ctr-search-button-corner-radius, 1024px);
+
+  &:hover {
+    background: var(--ctr-search-button-background-color-clear-hovered, $red-light);
+
+    use {
+      fill: var(--ctr-search-button-icon-color-clear-hovered, $red);
+    }
+  }
+}
+
+.svc-list__empty-container {
+  padding: var(--ctr-list-padding-top-no-data, calcSize(1.5)) var(--ctr-list-padding-right-no-data, calcSize(1.5))
+    var(--ctr-list-padding-bottom-no-data, calcSize(1.5)) var(--ctr-list-padding-left-no-data, calcSize(1.5));
+}
+
+.svc-list__empty-text {
+  @include ctrDefaultFont;
+  @include textEllipsis;
+  text-align: center;
+  color: var(--ctr-list-no-data-text-color, $foreground-light);
+}
+
+.sv-popup--overlay {
+  .svc-list-item__marker-icon {
+    display: none;
+  }
+
+  .svc-list__item-body {
+    pointer-events: none;
+  }
+
+  .svc-list__item--group-selected > .svc-list__item-body {
+    @include ctrDefaultBoldFont;
+    color: $primary-foreground;
+    background-color: $primary;
+
+    use {
+      fill: $background;
+    }
+  }
+}

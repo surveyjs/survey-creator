@@ -70,10 +70,10 @@
 }
 .svc-tabbed-menu-item-container 
 {
-  .sv-list__item-icon {
+  .svc-list__item-icon {
     display: none;
   }
-  .sv-list__item--with-icon.sv-list__item--with-icon > .sv-list__item-body {
-    padding-block: calcSize(1);
-  }
+  // .sv-list__item--with-icon.sv-list__item--with-icon > .sv-list__item-body {
+  //   padding-block: calcSize(1);
+  // }
 }

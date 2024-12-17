@@ -290,6 +290,9 @@ export function copyCssClasses(dest: any, source: any) {
 export function assignDefaultV2Classes(destination: any, questionType: string) {
   copyCssClasses(destination, defaultV2Css.question);
   copyCssClasses(destination, defaultV2Css[questionType]);
+  if (destination.list) {
+    copyCssClasses(destination.list, defaultV2Css.list);
+  }
   destination.hasErrorTop = "";
   destination.hasErrorBottom = "";
 }

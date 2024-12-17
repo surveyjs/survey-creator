@@ -1,9 +1,9 @@
 import { ClientFunction, Selector } from "testcafe";
-import { getPropertyGridCategory, getTabbedMenuItemByText, setJSON, takeElementScreenshot, themeSettingsButtonSelector, wrapVisualTest } from "../../helper";
+import { getPropertyGridCategory, getTabbedMenuItemByText, setJSON, takeElementScreenshot, themeSettingsButtonSelector, wrapVisualTest, url } from "../../helper";
 
-const url = "http://127.0.0.1:8080/testCafe/testcafe-theme-tab";
+const themeTabUrl = url.replace(/\/testcafe$/, "/testcafe-theme-tab");
 const title = "Themes tab";
-fixture`${title}`.page`${url}`.beforeEach(async (t) => {
+fixture`${title}`.page`${themeTabUrl}`.beforeEach(async (t) => {
   await t.maximizeWindow();
 });
 

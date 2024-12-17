@@ -5,6 +5,7 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
 import { TestSurveyTabViewModel } from "./test";
+import { listComponentCss } from "../list-theme";
 
 export class TabTestPlugin implements ICreatorPlugin {
   private languageSelectorAction: Action;
@@ -178,6 +179,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         onSelectionChanged: (item: any) => { this.setDevice(item.id); },
         horizontalPosition: "center",
         cssClass: "svc-creator-popup",
+        cssClasses: listComponentCss,
         onHide: () => { this.deviceSelectorAction.enabled = true; },
         onShow: () => { this.deviceSelectorAction.enabled = false; }
       });
@@ -239,6 +241,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         true
       );
       this.changeThemeModel.locOwner = this.creator;
+      this.changeThemeModel.cssClasses = listComponentCss;
 
       this.changeThemePopupModel = new PopupModel(
         "sv-list",
@@ -289,6 +292,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       },
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
+      cssClasses: listComponentCss,
       onHide: () => { this.languageSelectorAction.enabled = true; },
       onShow: () => { this.languageSelectorAction.enabled = false; }
     });
