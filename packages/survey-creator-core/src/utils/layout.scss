@@ -86,7 +86,8 @@
       );
 
       display: inline-block;
-      margin: 0 0 0 var(--ctr-menu-toolbar-gap, calcSize(2));
+      margin: 0;
+      margin-inline-start: var(--ctr-menu-toolbar-gap, calcSize(2));
       height: var(--thm-menu-toolbar-button-height, calcSize(5));
     }
 
@@ -104,7 +105,7 @@
     }
     .sv-action:not(.sv-action--hidden) ~ .sv-action:not(.sv-action--hidden) {
       .sv-action-bar-item {
-         margin-left: var(--ctr-menu-toolbar-gap, calcSize(2))
+         margin-inline-start: var(--ctr-menu-toolbar-gap, calcSize(2))
       }
     }
 
