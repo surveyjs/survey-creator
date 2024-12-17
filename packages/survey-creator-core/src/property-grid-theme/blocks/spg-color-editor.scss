@@ -44,7 +44,9 @@
     fill: $background;
   }
 }
-
+.spg-question--disabled .spg-color-editor {
+  background-color: var(--ctr-editor-background-color-disabled, $background-dim);
+}
 .spg-color-editor__color-swatch--disabled {
   .sv-svg-icon {
     opacity: 0.25;
