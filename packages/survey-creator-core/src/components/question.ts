@@ -525,7 +525,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private jsonsAreCompatible(objJson, json) {
     let jsonIsCorresponded = true;
     Object.keys(json).forEach(p => {
-      const propertyValue = objJson[p] === undefined ? this.element.getDefaultPropertyValue(p) : objJson[p];
+      const question = QuestionFactory.Instance.createQuestion(objJson.type, "question") || this.element;
+      const propertyValue = objJson[p] === undefined ? question.getDefaultPropertyValue(p) : objJson[p];
       if (p != "type" && !Helpers.isTwoValueEquals(json[p], propertyValue)) jsonIsCorresponded = false;
     });
     return jsonIsCorresponded;
