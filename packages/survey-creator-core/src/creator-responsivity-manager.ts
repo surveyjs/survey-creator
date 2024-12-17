@@ -113,6 +113,10 @@ export class CreatorResponsivityManager {
           paddingRight = parseFloat((conputedStyles.paddingRight || "").replace("px", ""));
         } catch (e) { }
         this.creator.survey.setResponsiveStartWidth(surveyContainer.offsetWidth - paddingLeft - paddingRight);
+        const surveyContent = surveyContainer.querySelector("div") as HTMLDivElement;
+        if (!!surveyContent) {
+          this.creator.survey.setStaticStartWidth(surveyContent.clientWidth / this.creator.survey.widthScale * 100);
+        }
       }
     }
   }
