@@ -85,6 +85,7 @@ svc-question {
 }
 
 .svc-dropdown-action--convertTo .svc-survey-element-toolbar__item--with-text {
+  padding-inline-end: var(--ctr-survey-question-panel-toolbar-item-padding-right, 4px);
   padding-inline-start: var(--ctr-survey-question-panel-toolbar-item-padding-left-with-text, calcSize(1));
   flex-direction: row-reverse;
   gap: var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(0.5));
@@ -92,6 +93,7 @@ svc-question {
 
 .svc-dropdown-action--convertTo .svc-survey-element-toolbar__item--icon {
   .svc-survey-element-toolbar-item__icon {
+    padding: 0;
     width: var(--ctr-survey-question-panel-toolbar-item-icon-container-width, calcSize(3));
     height: var(--ctr-survey-question-panel-toolbar-item-icon-container-height, calcSize(3));
     box-sizing: border-box;
