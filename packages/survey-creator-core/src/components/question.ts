@@ -42,6 +42,7 @@ import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor
 import { DragDropSurveyElements, isPanelDynamic } from "../survey-elements";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 import { isUndefined } from "lodash";
+import { listComponentCss } from "./list-theme";
 
 export interface QuestionBannerParams {
   text: string;
@@ -592,7 +593,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           subactions.unshift(defaultSubaction);
           if (selectedAction == action && !selectedSubactionLocal) selectedSubactionLocal = defaultSubaction;
         }
-        action.setSubItems({ items: subactions });
+        action.setSubItems({ items: subactions, cssClasses: listComponentCss });
         if (selectedSubactionLocal) {
           selectedAction = action;
           selectedSubaction = selectedSubactionLocal;
@@ -621,7 +622,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!this.surveyElement || this.surveyElement.isPanel) {
       return null;
     }
-    const listModel = new ListModel([]);
+    const listModel = new ListModel({
+      items: [],
+      cssClasses: listComponentCss,
+    });
     this.updateQuestionTypeOrSubtypeListModel(listModel, true);
     if (listModel.actions.length == 0) return null;
 
@@ -675,6 +679,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       allowSelection: true,
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
+      cssClasses: listComponentCss,
     });
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
       if(opt.isVisible) {

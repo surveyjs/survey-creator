@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setAllowEditSurveyTitle, setShowAddQuestionButton, setExpandCollapseButtonVisibility, setShowToolbox, setShowSidebar } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setAllowEditSurveyTitle, setShowAddQuestionButton, setExpandCollapseButtonVisibility, setShowToolbox, setShowSidebar, getSurveyListItemByText } from "../../helper";
 
 const title = "Designer surface";
 
@@ -413,8 +413,8 @@ test("Choices (Tagbox): Layout", async (t) => {
       .click(getPropertyGridCategory("Data"))
       .click(Selector("span").withExactText("Set Default Answer"))
       .click(Selector(".sv-popup--modal .sd-dropdown__filter-string-input"))
-      .click(getListItemByText("Item 2"))
-      .click(getListItemByText("Item 3"))
+      .click(getSurveyListItemByText("Item 2"))
+      .click(getSurveyListItemByText("Item 3"))
       .click(Selector(".sv-popup--modal button").withExactText("Apply"));
 
     const QRoot = Selector(".svc-question__adorner").filterVisible();
@@ -1351,7 +1351,7 @@ test("Keep scroll to selected on tab changed", async (t) => {
     };
     await setJSON(json);
     await t.click(Selector("button.sv-action-bar-item[title=\"Survey\"]"), { offsetX: 5, offsetY: 5 });
-    await t.click(Selector(".sv-list__item span").withExactText("question5").filterVisible(), { offsetX: 5, offsetY: 5 });
+    await t.click(getListItemByText("question5").filterVisible(), { offsetX: 5, offsetY: 5 });
     await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
     await t.click(getTabbedMenuItemByText(creatorTabDesignerName));
     const root = Selector(".svc-creator");
@@ -1723,16 +1723,14 @@ test("Question adorners - popup", async (t) => {
     const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
     const qContent = Selector(".svc-question__content");
     const qDots = Selector(".svc-question__content .sv-dots");
-    const markRequiredItem = Selector(".sv-list__item").withText("Mark as required");
-    const removeRequiredItem = Selector(".sv-list__item").withText("Remove the required mark");
     await t.click(qContent, { offsetX: 5, offsetY: 5 });
     await t.click(qDots);
     await takeElementScreenshot("question-tiny-dots-popup.png", pageContent, t, comparer);
-    await t.click(markRequiredItem);
+    await t.click(getListItemByText("Mark as required"));
 
     await t.click(qDots);
     await takeElementScreenshot("question-tiny-dots-popup-required.png", pageContent, t, comparer);
-    await t.click(removeRequiredItem);
+    await t.click(getListItemByText("Remove the required mark"));
   });
 });
 test("Question adorners for different sizes", async (t) => {
@@ -2162,7 +2160,7 @@ test("Check adorner actions responsivity after convert", async (t) => {
       ]
     });
     await t.hover(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector("#convertTo").nth(2))
-      .click(Selector("div[data-sv-drop-target-survey-element='question3'] .sv-list__item-body[title='Yes/No (Boolean)']"))
+      .click(getListItemByText("Yes/No (Boolean)"))
       .hover(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 })
       .hover(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 });
     await ClientFunction(() => { document.body.focus(); })();
