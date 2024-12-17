@@ -728,7 +728,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "questionsOrder", tab: "questionSettings" },
       { name: "navigationButtonsVisibility", tab: "navigation" }
     ],
-    tabs: [{ name: "navigation", index: 350 }]
+    tabs: [{ name: "navigation", index: 350 }, { name: "layout", visible: false }]
   },
   survey: {
     properties: [

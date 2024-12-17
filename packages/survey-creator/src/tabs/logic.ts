@@ -20,6 +20,7 @@ var templateHtml = require("./logic.html");
 export interface ISurveyLogicType {
   name: string;
   baseClass: string;
+  incorrectClasses?: Array<string>;
   propertyName: string;
   templateName?: string;
   showInUI?: boolean;
@@ -63,6 +64,16 @@ export class SurveyLogicType {
   }
   public get baseClass(): string {
     return this.logicType.baseClass;
+  }
+  public hasNeededTypes(types: Array<string>): boolean {
+    if(types.indexOf(this.baseClass) < 0) return false;
+    const inCls = this.logicType.incorrectClasses;
+    if(Array.isArray(inCls)) {
+      for(let i = 0; i < inCls.length; i ++) {
+        if(types.indexOf(inCls[i]) > -1) return false;
+      }
+    }
+    return true;
   }
   public get propertyName(): string {
     return this.logicType.propertyName;
@@ -544,6 +555,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     {
       name: "panel_visibility",
       baseClass: "panel",
+      incorrectClasses: ["page"],
       propertyName: "visibleIf",
       showIf: function (survey: Survey.SurveyModel) {
         return survey.getAllPanels().length > 0;
@@ -552,6 +564,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
     {
       name: "panel_enable",
       baseClass: "panel",
+      incorrectClasses: ["page"],
       propertyName: "enableIf",
       showIf: function (survey: Survey.SurveyModel) {
         return survey.getAllPanels().length > 0;
@@ -1208,10 +1221,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
       var lt = this.logicTypes[i];
       if (lt.showInUI !== showInUI) continue;
       var expression = element[lt.propertyName];
-      if (
-        types.indexOf(lt.baseClass) > -1 &&
-        !Survey.Helpers.isValueEmpty(expression)
-      ) {
+      if (lt.hasNeededTypes(types) && !Survey.Helpers.isValueEmpty(expression)) {
         var key = this.getExpressionHashKey(expression);
         var item = hash[key];
         if (!item) {
