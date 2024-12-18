@@ -207,7 +207,7 @@
       }
 
       .sv-action-bar-item__icon use {
-        fill: var(--ctr-menu-toolbar-button-icon-color-selected);
+        fill: var(--ctr-menu-toolbar-button-icon-color-selected, $primary);
       }
     }
 
@@ -216,7 +216,7 @@
       height: var(--ctr-menu-toolbar-button-icon-height, calcSize(3));
       
       use {
-        fill: var(--ctr-menu-toolbar-button-icon-color);
+        fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
       }
     }
   }
