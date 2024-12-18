@@ -232,7 +232,7 @@ export class TabDesignerViewModel extends Base {
     return getLocString("ed.surveyPlaceholderDescription");
   }
   public get hasToolbar() {
-    return this.creator.expandCollapseButtonVisibility != "never" || this.creator.showCreatorThemeSettings;
+    return this.creator.allowShowSurfaceToolbar;
   }
   private isUpdatingNewPage: boolean;
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {
