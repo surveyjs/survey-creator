@@ -171,7 +171,7 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: false }) showLogicTab: boolean;
   @property({ defaultValue: false }) useTableViewInLogicTab: boolean;
-  @property({ defaultValue: 200 }) pageHoverDelay: number;
+  @property({ defaultValue: 0 }) pageHoverDelay: number;
   /**
    * Allows users to edit choice values instead of choice texts on the design surface.
    * 
