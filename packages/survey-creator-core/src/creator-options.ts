@@ -288,7 +288,7 @@ export interface ICreatorOptions {
    */
   pageEditMode?: "standard" | "single" | "bypage";
   enableLinkFileEditor?: boolean;
-  /*
+  /**
    * Specifies the visibility of the buttons that expand and collapse survey elements on the design surface.
    * 
    * Possible values:
@@ -296,10 +296,35 @@ export interface ICreatorOptions {
    * - `"onhover"` (default) - Displays an expand/collapse button when a survey element is hovered over or selected.
    * - `"always"` - Displays the expand/collapse buttons permanently.
    * - `"never"` - Hides the expand/collapse buttons.
-   */
+   * @see [SurveyCreatorModel.onElementGetExpandCollapseState](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementGetExpandCollapseState)
+  */
   expandCollapseButtonVisibility?: "never" | "onhover" | "always";
 
+  /**
+   * Specifies whether survey pages appear collapsed on the design surface by default.
+   * 
+   * Default value: `false`
+   * 
+   * This property specifies the expand/collapse state of all survey pages at once. To adjust the state of individual pages, handle the [`onElementGetExpandCollapseState`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementGetExpandCollapseState) event.
+   * @see expandCollapseButtonVisibility
+   */
   collapsePages?: boolean;
+  /**
+   * Specifies whether panels appear collapsed on the design surface by default.
+   * 
+   * Default value: `false`
+   * 
+   * This property specifies the expand/collapse state of all panels at once. To adjust the state of individual panels, handle the [`onElementGetExpandCollapseState`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementGetExpandCollapseState) event.
+   * @see expandCollapseButtonVisibility
+   */
   collapsePanels?: boolean;
+  /**
+   * Specifies whether survey questions appear collapsed on the design surface by default.
+   * 
+   * Default value: `false`
+   * 
+   * This property specifies the expand/collapse state of all survey questions at once. To adjust the state of individual questions, handle the [`onElementGetExpandCollapseState`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementGetExpandCollapseState) event.
+   * @see expandCollapseButtonVisibility
+   */
   collapseQuestions?: boolean;
 }
