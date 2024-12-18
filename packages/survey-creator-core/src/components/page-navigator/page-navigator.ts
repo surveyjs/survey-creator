@@ -105,7 +105,7 @@ export class PageNavigatorViewModel extends Base {
   }
   private patchContainerOffset(el: HTMLElement) {
     while (!!el) {
-      if (el.className.indexOf("svc-tab-designer--with-page-navigator") !== -1) {
+      if (el.className.indexOf("svc-tab-designer--with-surface-tools") !== -1) {
         el.offsetParent.scrollTop = 0;
         return;
       }
