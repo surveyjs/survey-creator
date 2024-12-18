@@ -298,4 +298,8 @@ export interface ICreatorOptions {
    * - `"never"` - Hides the expand/collapse buttons.
    */
   expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+
+  collapsePages?: boolean;
+  collapsePanels?: boolean;
+  collapseQuestions?: boolean;
 }

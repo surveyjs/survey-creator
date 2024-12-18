@@ -529,6 +529,81 @@ test("expand/collapse event - loading", () => {
   expect(panelAdorner.collapsed).toBeFalsy();
 });
 
+test("expand/collapse properties - loading", () => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
+
+  var designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          },
+          {
+            "type": "panel",
+            "name": "panel1"
+          }
+        ]
+      }
+    ]
+  };
+  creator.JSON = json;
+  expect(new PageAdorner(creator, creator.survey.pages[0]).collapsed).toBeFalsy();
+  expect(new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined).collapsed).toBeFalsy();
+  expect(new QuestionAdornerViewModel(creator, creator.survey.getAllPanels()[0] as any, undefined).collapsed).toBeFalsy();
+
+  creator.collapsePages = true;
+  creator.collapsePanels = false;
+  creator.collapseQuestions = false;
+  creator.JSON = json;
+  expect(new PageAdorner(creator, creator.survey.pages[0]).collapsed).toBeTruthy();
+  expect(new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined).collapsed).toBeFalsy();
+  expect(new QuestionAdornerViewModel(creator, creator.survey.getAllPanels()[0] as any, undefined).collapsed).toBeFalsy();
+
+  creator.collapsePages = false;
+  creator.collapseQuestions = true;
+  creator.collapsePanels = false;
+  creator.JSON = json;
+  expect(new PageAdorner(creator, creator.survey.pages[0]).collapsed).toBeFalsy();
+  expect(new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined).collapsed).toBeTruthy();
+  expect(new QuestionAdornerViewModel(creator, creator.survey.getAllPanels()[0] as any, undefined).collapsed).toBeFalsy();
+
+  creator.collapsePages = false;
+  creator.collapseQuestions = false;
+  creator.collapsePanels = true;
+  creator.JSON = json;
+  expect(new PageAdorner(creator, creator.survey.pages[0]).collapsed).toBeFalsy();
+  expect(new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined).collapsed).toBeFalsy();
+  expect(new QuestionAdornerViewModel(creator, creator.survey.getAllPanels()[0] as any, undefined).collapsed).toBeTruthy();
+
+  creator.expandCollapseButtonVisibility = "never";
+  creator.collapsePages = true;
+  creator.collapseQuestions = true;
+  creator.collapsePanels = true;
+  creator.JSON = json;
+  expect(new PageAdorner(creator, creator.survey.pages[0]).collapsed).toBeFalsy();
+  expect(new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined).collapsed).toBeFalsy();
+  expect(new QuestionAdornerViewModel(creator, creator.survey.getAllPanels()[0] as any, undefined).collapsed).toBeFalsy();
+
+  creator.expandCollapseButtonVisibility = "always";
+  creator.collapsePages = false;
+  creator.collapseQuestions = false;
+  creator.collapsePanels = false;
+  const collapseAll = designerPlugin.model.surfaceToolbar.getActionById("collapseAll");
+  collapseAll.action(collapseAll);
+  expect(new PageAdorner(creator, creator.survey.pages[0]).collapsed).toBeTruthy();
+  expect(new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined).collapsed).toBeTruthy();
+  expect(new QuestionAdornerViewModel(creator, creator.survey.getAllPanels()[0] as any, undefined).collapsed).toBeTruthy();
+});
+
 test("Check adorners lock questions for expand/collapse all", (): any => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();

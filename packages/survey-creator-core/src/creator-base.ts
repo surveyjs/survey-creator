@@ -1947,6 +1947,12 @@ export class SurveyCreatorModel extends Base
     this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages);
   }
   public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
+    if (this.expandCollapseButtonVisibility == "never") return false;
+    if (reason === "loading") {
+      if (element instanceof Question) defaultValue = this.collapseQuestions;
+      if (element instanceof PanelModel) defaultValue = this.collapsePanels;
+      if (element instanceof PageModel) defaultValue = this.collapsePages;
+    }
     const options: ElementGetExpandCollapseStateEvent = {
       element: element,
       reason: reason,
@@ -3922,6 +3928,10 @@ export class SurveyCreatorModel extends Base
    * - `"never"` - Hides the expand/collapse buttons.
    */
   @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+
+  collapsePages = false;
+  collapsePanels = false;
+  collapseQuestions = false;
 
   expandOnDragTimeOut: number = 1000;
 
