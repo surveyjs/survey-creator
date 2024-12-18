@@ -22,6 +22,7 @@ export function getLogicString(name: string) {
 export interface ISurveyLogicType {
   name: string;
   baseClass: string;
+  incorrectClasses?: Array<string>;
   propertyName: string;
   dynamicPropertyName?: string;
   dependedOnPropertyName?: string;
@@ -68,6 +69,16 @@ export class SurveyLogicType {
         this.logicType[key] = baseClass[key];
       }
     }
+  }
+  public hasNeededTypes(types: Array<string>): boolean {
+    if(types.indexOf(this.baseClass) < 0) return false;
+    const inCls = this.logicType.incorrectClasses;
+    if(Array.isArray(inCls)) {
+      for(let i = 0; i < inCls.length; i ++) {
+        if(types.indexOf(inCls[i]) > -1) return false;
+      }
+    }
+    return true;
   }
   public get name(): string {
     return this.logicType.name;
@@ -328,16 +339,19 @@ export class SurveyLogicTypes {
     {
       name: "panel_visibility",
       baseClass: "panel",
+      incorrectClasses: ["page"],
       propertyName: "visibleIf",
     },
     {
       name: "panel_enable",
       baseClass: "panel",
+      incorrectClasses: ["page"],
       propertyName: "enableIf",
     },
     {
       name: "panel_require",
       baseClass: "panel",
+      incorrectClasses: ["page"],
       propertyName: "requiredIf",
     },
     {
