@@ -9,8 +9,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   flex-direction: column;
   display: flex;
   position: relative;
-  min-width: 370px;
-  width: 450px;
+  width: var(--ctr-property-grid-width, 450px);
+  min-width: var(--ctr-property-grid-min-width, 370px);
   height: 100%;
   border-inline-start: 1px solid var(--ctr-property-grid-border-color, $border);
 }
