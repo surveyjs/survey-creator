@@ -2523,3 +2523,63 @@ test("Page hidden header and top toolbar", async (t) => {
     await takeElementScreenshot("page-selected-hidden-header.png", rootSelector, t, comparer);
   });
 });
+
+test("Check question button states", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await setJSON({
+      "logoPosition": "right",
+      "elements": [
+        {
+          type: "text",
+          name: "q1",
+          title: "Question Title"
+        }
+      ]
+    });
+    const button = Selector(".svc-required-action");
+    await t.click(Selector(".svc-question__content"));
+    await takeElementScreenshot("question-button.png", button, t, comparer);
+    await t.hover(button);
+    await takeElementScreenshot("question-button-hover.png", button, t, comparer);
+    await t.click(button);
+    await takeElementScreenshot("question-button-checked.png", button, t, comparer);
+    await t.click(button);
+    await takeElementScreenshot("question-button-focused.png", button, t, comparer);
+    await ClientFunction(() => {
+      const question = window["creator"].survey.getQuestionByName("q1");
+      const adorner = window["SurveyCreatorCore"].QuestionAdornerViewModel.GetAdorner(question);
+      adorner.getActionById("isrequired").pressed = true;
+    })();
+    await takeElementScreenshot("question-button-pressed.png", button, t, comparer);
+  });
+});
+
+test("Check page button states", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await setJSON({
+      "logoPosition": "right",
+      "elements": [
+        {
+          type: "text",
+          name: "q1",
+          title: "Question Title"
+        }
+      ]
+    });
+    const button = Selector(".svc-page-toolbar__item");
+    await t.click(Selector(".svc-page__content"), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("page-button.png", button, t, comparer);
+    await t.hover(button);
+    await takeElementScreenshot("page-button-hover.png", button, t, comparer);
+    await t.pressKey("tab");
+    await takeElementScreenshot("page-button-focused.png", button, t, comparer);
+    await ClientFunction(() => {
+      const page = window["creator"].survey.getPageByName("page1");
+      const adorner = window["SurveyCreatorCore"].PageAdorner.GetAdorner(page);
+      adorner.actionContainer.actions[0].pressed = true;
+    })();
+    await takeElementScreenshot("page-button-pressed.png", button, t, comparer);
+  });
+});
