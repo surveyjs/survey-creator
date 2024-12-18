@@ -1349,27 +1349,7 @@ svc-question,
 
 .svc-survey-element-top-toolbar__item {
   @include defaultActionButtonSettings;
-  --thm-survey-question-panel-toolbar-item-padding-top-small: calc(
-    var(--ctr-survey-question-panel-toolbar-item-padding-top-small) +
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-top)
-  );
-  --thm-survey-question-panel-toolbar-item-padding-right-small: calc(
-    var(--ctr-survey-question-panel-toolbar-item-padding-right-small) +
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-right)
-  );
-  --thm-survey-question-panel-toolbar-item-padding-bottom-small: calc(
-    var(--ctr-survey-question-panel-toolbar-item-padding-bottom-small) +
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom)
-  );
-  --thm-survey-question-panel-toolbar-item-padding-left-small: calc(
-    var(--ctr-survey-question-panel-toolbar-item-padding-left-small) +
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-left)
-  );
-
-  padding: var(--thm-survey-question-panel-toolbar-item-padding-top-small, calcSize(0.5))
-    var(--thm-survey-question-panel-toolbar-item-padding-right-small, calcSize(0.5))
-    var(--thm-survey-question-panel-toolbar-item-padding-bottom-small, calcSize(0.5))
-    var(--thm-survey-question-panel-toolbar-item-padding-left-small, calcSize(0.5));
+  padding: 0;
   border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, 2px);
   opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-muted, 0.5);
   background-color: transparent;
