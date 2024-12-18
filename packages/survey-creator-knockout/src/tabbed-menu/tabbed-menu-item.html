@@ -1,4 +1,8 @@
-<div class="svc-tabbed-menu-item" data-bind="click: action, key2click, css: getRootCss()">
+<div
+  class="svc-tabbed-menu-item"
+  data-bind="click: action, key2click, css: getRootCss(), attr: {id: 'tab-' + id, 'aria-controls': 'scrollableDiv-' + id, 'aria-selected': active}"
+  role="tab"
+>
   <!-- ko if: hasTitle -->
   <span data-bind="text: title, css: getTitleCss()"></span>
   <!-- /ko -->
