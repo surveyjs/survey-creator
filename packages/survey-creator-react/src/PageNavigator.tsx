@@ -62,6 +62,7 @@ export class SurveyPageNavigator extends CreatorModelElement<
     return (
       <div className="svc-page-navigator" ref={this.containerRef} style={{ display: this.model.visible ? "flex" : "none" }}>
         {attachKey2click(<div
+          role="button"
           className={className}
           onClick={() => this.model.togglePageSelector()}
           title={this.model.pageSelectorCaption}
@@ -106,6 +107,7 @@ export class SurveyPageNavigatorItem extends CreatorModelElement<any, any> {
     return (
       <div className="svc-page-navigator-item">
         {attachKey2click(<div
+          role="button"
           className={className}
           onClick={(e) => {
             item.action(item);
