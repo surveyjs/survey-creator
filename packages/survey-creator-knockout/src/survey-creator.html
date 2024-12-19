@@ -27,7 +27,8 @@
             <!-- ko foreach: creator.tabs -->
             <!-- ko if: $parent.creator.viewType == id && ($data.visible === undefined || $data.visible) -->
             <div class="svc-creator-tab"
-              data-bind="attr: { id: 'scrollableDiv-' + id }, css: { 'svc-creator__toolbox--right': $parent.creator.toolboxLocation == 'right' }">
+              role="tabpanel"
+              data-bind="attr: { id: 'scrollableDiv-' + id, 'aria-labelledby': 'tab-' + id }, css: { 'svc-creator__toolbox--right': $parent.creator.toolboxLocation == 'right' }">
               <!-- ko component: { name: componentContent, params: { creator: $parent.creator, data: data } } -->
               <!-- /ko -->
             </div>
