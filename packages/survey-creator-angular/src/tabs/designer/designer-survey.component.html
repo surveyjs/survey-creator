@@ -19,12 +19,12 @@
 
   </div>
 
-  <div *ngIf="!creator.isMobileView" class="svc-tab-designer__tools">
+  <div *ngIf="model.showSurfaceTools" class="svc-tab-designer__tools">
     <div *ngIf="creator.showPageNavigator" class="svc-tab-designer__page-navigator">
       <svc-page-navigator [pagesController]="model.pagesController" [pageEditMode]="creator.pageEditMode">
       </svc-page-navigator>
     </div>
-    <div *ngIf="model.hasToolbar" class="svc-tab-designer__toolbar">
+    <div *ngIf="model.showSurfaceToolbar" class="svc-tab-designer__toolbar">
       <sv-action-bar [model]="model.surfaceToolbar"></sv-action-bar>
     </div>
   </div>

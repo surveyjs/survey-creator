@@ -1,6 +1,6 @@
 import { url, setJSON, getJSON, getToolboxItemByText } from "../helper";
 import { Selector } from "testcafe";
-const title = "Property Grid";
+const title = "Width of survey on the designer surface";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.resizeWindow(1920, 1080);
