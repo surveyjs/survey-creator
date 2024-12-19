@@ -150,6 +150,7 @@
     padding-inline-end: var(--ctr-label-padding-right, 0px);
     padding-bottom: var(--ctr-label-padding-bottom, calcSize(1));
     padding-inline-start: var(--ctr-label-padding-left, 0px);
+    color: var(--ctr-label-text-color, $foreground-light);
   }
   .spg-row {
     margin-top: var(--ctr-editor-layout-gap, calcSize(1));

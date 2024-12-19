@@ -71,7 +71,8 @@
 }
 
 .spg-row-narrow__question {
-  margin-top: calcSize(-2);
+  --thm-ctr-property-grid-form-gap: var(--ctr-property-grid-form-gap, #{calcSize(2)});
+  margin-top: calc(-1 * var(--thm-ctr-property-grid-form-gap));
 }
 
 .spg-row--multiple {
