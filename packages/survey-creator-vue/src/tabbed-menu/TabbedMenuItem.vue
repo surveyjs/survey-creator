@@ -1,5 +1,9 @@
 <template>
   <div
+    role="tab"
+    :id="'tab-' + item.id"
+    :aria-selected="item.active"
+    :aria-controls="'scrollableDiv-' + item.id"
     class="svc-tabbed-menu-item"
     :class="item.getRootCss()"
     @click="item.action"
