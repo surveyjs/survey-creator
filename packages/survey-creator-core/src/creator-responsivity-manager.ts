@@ -36,9 +36,6 @@ export class CreatorResponsivityManager {
   private procesShowPageNavigator(pageNavigatorVisibility: boolean) {
     this.creator.allowShowPageNavigator = this.creator.pageEditMode === "bypage" || pageNavigatorVisibility;
   }
-  private procesShowSurfaceToolbar(toolboxVisible: boolean) {
-    this.creator.allowShowSurfaceToolbar = toolboxVisible;
-  }
 
   private findCorrectParent(container: HTMLElement) {
     if (!!window?.getComputedStyle) {
@@ -64,7 +61,6 @@ export class CreatorResponsivityManager {
     this.creator.updateToolboxIsCompact(toolboxIsCompact);
     this.procesShowToolbox(toolboxVisible);
     this.procesShowPageNavigator(toolboxVisible);
-    this.procesShowSurfaceToolbar(toolboxVisible);
 
     if (this.creator.sidebar.visible && !flyoutSidebar) {
       this.creator.sidebar.collapsedManually = false;

@@ -3861,7 +3861,6 @@ export class SurveyCreatorModel extends Base
   }
   @property({ defaultValue: false }) showHeaderInEmptySurvey;
   @property({ defaultValue: true }) public allowShowPageNavigator;
-  @property({ defaultValue: true }) public allowShowSurfaceToolbar;
   @property({ defaultValue: true }) private showPageNavigatorValue;
 
   public get showPageNavigator() {
