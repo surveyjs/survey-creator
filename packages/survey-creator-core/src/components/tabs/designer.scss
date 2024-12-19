@@ -202,7 +202,6 @@ svc-tab-designer {
   flex-direction: column;
 
   .sv-action-bar-separator {
-    background: var(--ctr-separator-color, $border);
     height: var(--ctr-separator-width, 1px);
     width: var(--ctr-page-navigator-button-icon-width, calcSize(1));
     padding: 0px var(--ctr-separator-margin-vertical-small, calcSize(1));
@@ -213,4 +212,8 @@ svc-tab-designer {
   .sv-action__content {
     flex-direction: column;
   }
+}
+
+.sv-action-bar-separator {
+  background: var(--ctr-separator-color, $border);
 }

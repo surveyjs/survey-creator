@@ -29,9 +29,9 @@ export class SearchManagerPropertyGrid extends SearchManager {
     this.currentMatchIndex = index;
     const prevMatch = this.currentMatch;
     this.currentMatch = this.allMatches[index];
-    prevMatch?.updateElementCss();
+    prevMatch?.updateElementCss(true);
     if (!!this.currentMatch && prevMatch !== this.currentMatch) {
-      this.currentMatch.updateElementCss();
+      this.currentMatch.updateElementCss(true);
       this.expandAllParents(this.currentMatch);
       setTimeout(() => {
         const elementId = this.currentMatch?.id;
@@ -94,7 +94,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
     this.currentMatchIndex = -1;
     const prevMatch = this.currentMatch;
     this.currentMatch = undefined;
-    prevMatch?.updateElementCss();
+    prevMatch?.updateElementCss(true);
     this.updatedMatchCounterText(-1);
   }
 

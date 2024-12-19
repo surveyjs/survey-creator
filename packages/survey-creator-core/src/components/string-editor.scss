@@ -127,7 +127,7 @@
 .svc-string-editor:hover:not(.svc-string-editor--readonly):not(:focus-within) {
   .svc-string-editor__border--hover {
     opacity: 1;
-    transition-delay: 200ms;
+    transition-delay: 0ms;
   }
 
   .svc-string-editor__border--focus {
