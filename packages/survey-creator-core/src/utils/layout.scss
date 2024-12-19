@@ -189,21 +189,21 @@
     }
 
     .sv-action-bar-item {
-      border-radius: var(--ctr-menu-toolbar-button-corner-radius);
-      padding: var(--ctr-menu-toolbar-button-padding-top) var(--ctr-menu-toolbar-button-padding-right) var(--ctr-menu-toolbar-button-padding-bottom) var(--ctr-menu-toolbar-button-padding-left);
+      border-radius: var(--ctr-menu-toolbar-button-corner-radius, calcSize(0.25));
+      padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1)) var(--ctr-menu-toolbar-button-padding-right, calcSize(1)) var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1)) var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
     }
     
     .sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
     .sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
-      background-color: var(--ctr-menu-toolbar-button-background-color-hovered);
+      background-color: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
     }
 
     .sv-action-bar-item--active {
-      background-color: var(--ctr-menu-toolbar-button-background-color-selected);
+      background-color: var(--ctr-menu-toolbar-button-background-color-selected, $primary-light);
 
       &.sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
       &.sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
-        background-color: var(--ctr-menu-toolbar-button-background-color-selected);
+        background-color: var(--ctr-menu-toolbar-button-background-color-selected, $primary-light);
       }
 
       .sv-action-bar-item__icon use {
