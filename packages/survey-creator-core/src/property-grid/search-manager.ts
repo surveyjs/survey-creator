@@ -10,6 +10,8 @@ export class SearchManagerPropertyGrid extends SearchManager {
   protected getFilterStringPlaceholder(): string { return getLocString("ed.propertyGridFilteredTextPlaceholder"); }
   public get propertyGridNoResultsFound(): string { return getLocString("ed.propertyGridNoResultsFound"); }
 
+  public scrollElementToViewTimeout = 10;
+
   @property() survey: SurveyModel;
   @property() isVisible: boolean;
   @property({ defaultValue: [] }) allMatches: Array<Question>;
@@ -36,7 +38,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
       setTimeout(() => {
         const elementId = this.currentMatch?.id;
         scrollElementIntoView(elementId);
-      }, 10);
+      }, this.scrollElementToViewTimeout);
     }
     this.updatedMatchCounterText(index);
   }

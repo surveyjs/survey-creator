@@ -72,6 +72,7 @@ export class PropertyGridViewModel extends Base {
   }
 
   private onSurveyChanged() {
+    if (this.creator["animationEnabled"]) this.searchManager.scrollElementToViewTimeout = 400;
     this.survey = this.propertyGridModel.survey;
     this.searchManager.setSurvey(this.survey);
     if (!!this.survey) {
