@@ -604,7 +604,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           if (confirm) {
             this.themeModel.resetTheme();
           }
-        }, getLocString("ed.themeResetConfirmationOk"), editorLocalization.currentLocale);
+        }, {
+          applyTitle: getLocString("ed.themeResetConfirmationOk"),
+          locale: editorLocalization.currentLocale
+        });
       }
     });
     items.push(this.resetTheme);
