@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@use "../../variables" as *;
 $svc-toolbox-fade-in-duration: var(--sjs-svc-toolbox-fade-in-duration, 250ms);
 $svc-toolbox-move-in-duration: var(--sjs-svc-toolbox-move-in-duration, 250ms);
 $svc-toolbox-fade-in-delay: var(--sjs-svc-toolbox-fade-in-delay, 100ms);

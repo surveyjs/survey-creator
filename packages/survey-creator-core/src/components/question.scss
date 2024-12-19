@@ -1,5 +1,5 @@
-@import "../variables.scss";
-@import "./carry-forward-panel.scss";
+@use "../variables" as *;
+@use "./carry-forward-panel.scss" as *;
 
 svc-question {
   display: block;

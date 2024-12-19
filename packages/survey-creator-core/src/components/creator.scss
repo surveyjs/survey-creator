@@ -1,12 +1,12 @@
-@import "../variables.scss";
-@import "./notifier.scss";
-@import "./popup.scss";
-@import "./button.scss";
-@import "./surface-placeholder.scss";
-@import "../lbr-font-sizes.scss";
-@import "../lbr-sizes.scss";
-@import "../ctr-font-sizes.scss";
-@import "../ctr-sizes.scss";
+@use "../variables" as *;
+@forward "./notifier.scss";
+@forward "./popup.scss";
+@forward "./button.scss";
+@forward "./surface-placeholder.scss";
+@forward "../lbr-font-sizes.scss";
+@forward "../lbr-sizes.scss";
+@forward "../ctr-font-sizes.scss";
+@forward "../ctr-sizes.scss";
 
 survey-creator,
 .svc-creator {

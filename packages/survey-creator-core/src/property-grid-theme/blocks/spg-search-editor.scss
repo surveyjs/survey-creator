@@ -1,4 +1,5 @@
-@import "../variables.scss";
+@use "../../variables.scss" as *;
+
 .svc-side-bar {
   .svc-search {
     border-bottom: 1px solid var(--ctr-property-grid-search-border-color, $border);

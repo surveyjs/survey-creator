@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@use "../../variables" as *;
 
 $side-bar-enter-duration: var(--svc-side-bar-enter-duration, 500ms);
 $side-bar-leave-duration: var(--svc-side-bar-leave-duration, 500ms);

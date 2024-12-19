@@ -1,5 +1,5 @@
-@import "../../variables.scss";
-@import "../../variables-layer.scss";
+@use "../../variables" as *;
+@use "../../variables-layer.scss" as *;
 
 .svc-toolbox__item {
   display: flex;
