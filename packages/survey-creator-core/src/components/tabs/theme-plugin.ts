@@ -600,14 +600,18 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       mode: "small",
       visible: this.createVisibleUpdater(),
       action: () => {
-        surveySettings.confirmActionAsync(getLocString("ed.themeResetConfirmation"), (confirm) => {
-          if (confirm) {
-            this.themeModel.resetTheme();
+        surveySettings.confirmActionAsync(getLocString("ed.themeResetConfirmation"),
+          (confirm) => {
+            if (confirm) {
+              this.themeModel.resetTheme();
+            }
+          },
+          {
+            applyTitle: getLocString("ed.themeResetConfirmationOk"),
+            locale: editorLocalization.currentLocale,
+            cssClass: "sv-popup--confirm svc-creator-popup"
           }
-        }, {
-          applyTitle: getLocString("ed.themeResetConfirmationOk"),
-          locale: editorLocalization.currentLocale
-        });
+        );
       }
     });
     items.push(this.resetTheme);
