@@ -171,7 +171,7 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: false }) showLogicTab: boolean;
   @property({ defaultValue: false }) useTableViewInLogicTab: boolean;
-  @property({ defaultValue: 200 }) pageHoverDelay: number;
+  @property({ defaultValue: 0 }) pageHoverDelay: number;
   /**
    * Allows users to edit choice values instead of choice texts on the design surface.
    * 
@@ -455,8 +455,12 @@ export class SurveyCreatorModel extends Base
   public onGetObjectDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetDisplayNameEvent>();
   public onHtmlToMarkdown: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
-  /*
+  /**
    * An event that is raised when Survey Creator obtains the expand/collapse state of a survey element on the design surface. Handle this event to set a required state.
+   * @see [ICreatorOptions.collapseQuestions](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#collapseQuestions)
+   * @see [ICreatorOptions.collapsePanels](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#collapsePanels)
+   * @see [ICreatorOptions.collapsePages](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#collapsePages)
+   * @see expandCollapseButtonVisibility
    */
   public onElementGetExpandCollapseState: EventBase<SurveyCreatorModel, ElementGetExpandCollapseStateEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetExpandCollapseStateEvent>();
   /**
@@ -1947,6 +1951,12 @@ export class SurveyCreatorModel extends Base
     this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages);
   }
   public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
+    if (this.expandCollapseButtonVisibility == "never") return false;
+    if (reason === "loading") {
+      if (element instanceof Question) defaultValue = this.collapseQuestions;
+      if (element instanceof PanelModel) defaultValue = this.collapsePanels;
+      if (element instanceof PageModel) defaultValue = this.collapsePages;
+    }
     const options: ElementGetExpandCollapseStateEvent = {
       element: element,
       reason: reason,
@@ -3913,7 +3923,7 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
 
-  /*
+  /**
    * Specifies the visibility of the buttons that expand and collapse survey elements on the design surface.
    * 
    * Possible values:
@@ -3921,8 +3931,13 @@ export class SurveyCreatorModel extends Base
    * - `"onhover"` (default) - Displays an expand/collapse button when a survey element is hovered over or selected.
    * - `"always"` - Displays the expand/collapse buttons permanently.
    * - `"never"` - Hides the expand/collapse buttons.
+   * @see onElementGetExpandCollapseState
    */
   @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+
+  collapsePages = false;
+  collapsePanels = false;
+  collapseQuestions = false;
 
   expandOnDragTimeOut: number = 1000;
 

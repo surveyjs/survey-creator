@@ -105,7 +105,8 @@ export var propertyGridCss = {
     footer: "spg-question__footer",
     formGroup: "spg-question__form-group",
     hasError: "",
-    disabled: "spg-question--disabled"
+    disabled: "spg-question--disabled",
+    confirmDialog: "spg-popup--confirm sv-popup--confirm svc-creator-popup"
   },
   image: { root: "spg-image", image: "sv_image_image" },
   error: {

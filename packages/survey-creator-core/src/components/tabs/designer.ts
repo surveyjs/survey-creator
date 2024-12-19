@@ -54,7 +54,7 @@ export class TabDesignerViewModel extends Base {
     newPage.updateCustomWidgets();
     newPage.setWasShown(true);
     newPage.setSurveyImpl(this.survey);
-    newPage.updateElementCss();
+    newPage.updateElementCss(true);
     var checkNewElementHandler = (sender: SurveyModel, options: any) => {
       if (options.name === "elements" && newPage.elements.length > 0) {
         // if (this.survey.pages.indexOf(newPage) > -1) return;

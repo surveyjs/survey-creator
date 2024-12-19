@@ -593,9 +593,12 @@ test("Question borders in panels", async (t) => {
     })();
 
     const qContent = Selector("[data-name=question7]");
+    const panelContent = Selector(".svc-question__content--panel .svc-question__content--panel");
     const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
     await t.hover(qContent, { offsetX: 5, offsetY: 5 }).wait(300);
     await takeElementScreenshot("question-panel-content-hover.png", pageContent, t, comparer);
+    await t.hover(panelContent, { offsetX: 5, offsetY: 5 }).wait(300);
+    await takeElementScreenshot("question-panel-inner-hover.png", pageContent, t, comparer);
   });
 });
 

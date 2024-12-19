@@ -106,7 +106,8 @@ export var logicCss = {
     footer: "",
     formGroup: "",
     hasError: "",
-    disabled: ""
+    disabled: "",
+    confirmDialog: "sl-popup--confirm sv-popup--confirm svc-creator-popup"
   },
   image: { root: "" },
   error: {
