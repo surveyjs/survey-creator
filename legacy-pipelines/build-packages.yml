@@ -117,7 +117,7 @@ jobs:
     inputs:
       buildType: 'specific'
       project: '44ed9012-3b38-49f8-a488-0e764469a04f'
-      pipeline: '42'
+      pipeline: '99'
       specificBuildWithTriggering: true
       buildVersionToDownload: 'latest'
       downloadType: 'single'
