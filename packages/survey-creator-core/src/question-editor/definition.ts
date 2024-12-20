@@ -689,6 +689,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "questionTitleWidth", tab: "questionSettings" },
       { name: "questionErrorLocation", tab: "questionSettings" },
       { name: "layoutColumns", tab: "questionSettings" },
+      { name: "gridLayoutColumns", tab: "questionSettings" },
     ],
     tabs: [
       { name: "questionSettings", index: 100 },
