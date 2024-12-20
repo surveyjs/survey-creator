@@ -52,6 +52,10 @@
     background: var(--ctr-toggle-button-thumb-background-color-checked, #ffffff);
   }
 
+  &:hover {
+    background: var(--ctr-toggle-button-background-color-checked, #19b394);
+  }
+
   &:focus {
     background: var(--ctr-toggle-button-background-color-checked-focused,
         #ffffff);

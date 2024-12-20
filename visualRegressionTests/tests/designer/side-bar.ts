@@ -143,6 +143,28 @@ test.page(themeTabUrl)("tabbed mode", async (t) => {
   });
 });
 
+test.page(themeTabUrl)("boolean switch", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1200);
+    await ClientFunction(() => {
+      window["creator"].showOneCategoryInPropertyGrid = true;
+    })();
+
+    await t.click(getTabbedMenuItemByText("Themes"));
+
+    await t.click(Selector(".svc-menu-action__button").filterVisible().nth(4));
+    await takeElementScreenshot("boolean-switch-default.png", ".spg-boolean-switch", t, comparer);
+    await t.hover(Selector(".spg-boolean-switch__button").filterVisible());
+    await takeElementScreenshot("boolean-switch-hover.png", ".spg-boolean-switch", t, comparer);
+    await t.click(Selector(".spg-boolean-switch__button").filterVisible());
+    await takeElementScreenshot("boolean-switch-focus.png", ".spg-boolean-switch", t, comparer);
+    await t.pressKey("tab");
+    await takeElementScreenshot("boolean-switch-checked.png", ".spg-boolean-switch", t, comparer);
+    await t.hover(Selector(".spg-boolean-switch__button").filterVisible());
+    await takeElementScreenshot("boolean-switch-checked-hover.png", ".spg-boolean-switch", t, comparer);
+  });
+});
+
 test("translation tab tabbed property grid", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1200);
