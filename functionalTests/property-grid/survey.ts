@@ -236,3 +236,45 @@ test("tabbed mode", async (t) => {
   await t.hover(Selector(".svc-side-bar .svc-scroll__wrapper").filterVisible());
   await t.expect(Selector(".svc-side-bar .svc-scroll__scrollbar").visible).notOk();
 });
+
+test("Search correctly scrolls to element", async (t) => {
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "checkbox",
+            "name": "question1",
+            "title": "question1",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await ClientFunction(() => {
+    window["creator"].animationEnabled = true;
+  })();
+  await setJSON(json);
+  await t.resizeWindow(1600, 600);
+
+  const isElementInViewport = ClientFunction(() => {
+    const getBoundValues = document.querySelector("[data-name=logo] input").getBoundingClientRect();
+
+    const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
+
+    return getBoundValues.bottom > 0 && getBoundValues.right > 0 && getBoundValues.left < (windowWidth || document.documentElement.clientWidth) && getBoundValues.top < (windowHeight || document.documentElement.clientHeight);
+  });
+
+  await t
+    .click(".spg-container_search .svc-search input")
+    .typeText(".spg-container_search .svc-search input", "log", { paste: true })
+    .wait(500)
+    .expect(isElementInViewport()).ok();
+});
