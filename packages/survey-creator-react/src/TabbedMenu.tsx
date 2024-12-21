@@ -103,7 +103,6 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
         }
         callback(mode, this.ref.current);
       });
-      this.item.mode = mode;
     };
     this.item.afterRender();
   }
