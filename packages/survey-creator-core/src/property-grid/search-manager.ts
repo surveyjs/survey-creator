@@ -14,12 +14,14 @@ export class SearchManagerPropertyGrid extends SearchManager {
   @property() isVisible: boolean;
   @property({ defaultValue: [] }) allMatches: Array<Question>;
 
+  private lastCollapsedElement: IElement;
   private expandAllParents(element: IElement) {
     if (!element) return;
     if ((<any>element).page && (<any>element).survey) {
       (<any>element).survey.currentPage = (<any>element).page;
     }
     if (element.isCollapsed) {
+      this.lastCollapsedElement = element;
       (element as any).expand(false);
     }
     this.expandAllParents((<any>element).parent);
@@ -32,11 +34,13 @@ export class SearchManagerPropertyGrid extends SearchManager {
     prevMatch?.updateElementCss(true);
     if (!!this.currentMatch && prevMatch !== this.currentMatch) {
       this.currentMatch.updateElementCss(true);
+      const lastCollapsedElement = this.lastCollapsedElement;
       this.expandAllParents(this.currentMatch);
+      const newPanelExpanded = this.lastCollapsedElement != lastCollapsedElement;
       setTimeout(() => {
         const elementId = this.currentMatch?.id;
         scrollElementIntoView(elementId);
-      }, 10);
+      }, newPanelExpanded ? 400 : 10);
     }
     this.updatedMatchCounterText(index);
   }

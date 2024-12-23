@@ -529,6 +529,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "questionTitleWidth", tab: "layout" },
         { name: "questionErrorLocation", tab: "layout" },
         { name: "layoutColumns", tab: "layout" },
+        { name: "gridLayoutColumns", tab: "layout" },
       ],
       tabs: [
         { name: "logic", index: 100 },

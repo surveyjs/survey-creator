@@ -122,6 +122,37 @@
     color: var(--ctr-menu-toolbar-button-text-color, $foreground);
     transition: background-color $creator-transition-duration;
     height: auto;
+
+    //hovered and focused state
+    &:hover,
+    &:focus {
+      background-color: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
+    }
+
+    //pressed state
+    &:active,
+    &.sv-action-bar-item--pressed {
+      opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
+      background-color: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
+      use {
+        fill: black;
+        opacity: 0.45;
+      }
+    }
+
+    //checked state
+    &.sv-action-bar-item--active {
+      background-color: var(--ctr-menu-toolbar-button-background-color-selected, $background);
+      use {
+        fill: var(--ctr-menu-toolbar-button-text-color-selected, $primary);
+      }
+    }
+
+    //disabled state
+    &:disabled {
+      background-color: transparent;
+      opacity: var(--ctr-menu-toolbar-button-opacity-disabled, 0.25);
+    }
   }
 
   .sv-action-bar-item--icon {
@@ -141,38 +172,9 @@
     }
   }
 
-  //hovered state
-  .sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
-  .sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
-    background-color: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
-  }
-
-  //pressed state
-  .sv-action-bar-item:not(.sv-action-bar-item--pressed):active:enabled {
-    opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
-    background-color: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
-  }
-
-  //disabled state
-  .sv-action-bar-item:disabled {
-    opacity: var(--ctr-menu-toolbar-button-opacity-disabled, 0.25);
-  }
-
-
-  .sv-action-bar-item--active {
-    .sv-action-bar-item__icon use {
-      fill: var(--ctr-menu-toolbar-button-text-color-selected, $primary);
-    }
-  }
-
   .sv-action-bar-item-dropdown {
     border-radius: calcCornerRadius(0.5);
     background-color: transparent;
-  }
-
-  .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
-    background-color: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
-    opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 50%);
   }
 }
 
