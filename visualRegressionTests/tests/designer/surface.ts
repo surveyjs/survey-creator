@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setAllowEditSurveyTitle, setShowAddQuestionButton, setExpandCollapseButtonVisibility, setShowToolbox, setShowSidebar, getSurveyListItemByText } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setAllowEditSurveyTitle, setShowAddQuestionButton, setExpandCollapseButtonVisibility, setShowToolbox, setShowSidebar, getSurveyListItemByText, upArrowImageLink } from "../../helper";
 
 const title = "Designer surface";
 
@@ -974,7 +974,7 @@ test("Logo image adorners", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1900);
     const json = {
-      logo: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
+      logo: upArrowImageLink,
       elements: [
         {
           type: "text",
