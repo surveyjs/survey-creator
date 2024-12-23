@@ -124,7 +124,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     span.className = "svc-dragged-element-shortcut__icon";
 
     const iconName = getIconNameFromProxy(this.draggedElement.toolboxItemIconName);
-    const svgString = `<svg class="sv-svg-icon" role="img" style="width: 24px; height: 24px;"><use xlink:href="#${iconName}"></use></svg>`;
+    const svgString = `<svg class="sv-svg-icon" role="img"><use xlink:href="#${iconName}"></use></svg>`;
     span.innerHTML = svgString;
 
     return span;
