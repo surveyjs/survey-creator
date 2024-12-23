@@ -19,11 +19,7 @@ let responsivityManager: ResponsivityManager = undefined as any;
 const container = ref();
 useBase(() => props.model);
 onMounted(() => {
-  responsivityManager = new ResponsivityManager(
-    container.value,
-    props.model,
-    ".svc-tabbed-menu-item-container:not(.sv-dots)>.sv-action__content"
-  );
+  responsivityManager = new ResponsivityManager(container.value, props.model);
 });
 onUnmounted(() => {
   responsivityManager.dispose();
