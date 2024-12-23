@@ -40,6 +40,15 @@ test("Top menu on designer tab", async (t) => {
       .click(Selector("#action-undo .sv-action-bar-item"))
       .click(Selector(".svc-side-bar .spg-row").nth(1));
     await takeElementScreenshot("top-menu-redo-active.png", topBarElement, t, comparer);
+
+    await t
+      .hover(Selector("[title='Survey settings']"));
+    await takeElementScreenshot("top-menu-settings-checked-hovered.png", topBarElement, t, comparer);
+
+    await ClientFunction(() => {
+      window["creator"].toolbar.actions.map(a => a.pressed = true);
+    })();
+    await takeElementScreenshot("top-menu-pressed-buttons.png", topBarElement, t, comparer);
   });
 });
 test("Top menu with single item", async (t) => {
