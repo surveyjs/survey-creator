@@ -232,10 +232,10 @@ export class TabDesignerViewModel extends Base {
     return getLocString("ed.surveyPlaceholderDescription");
   }
   public get showSurfaceToolbar(): boolean {
-    return this.creator.allowShowSurfaceToolbar;
+    return this.creator.allowShowSurfaceToolbar && !this.surfaceToolbar.isEmpty;
   }
   public get showSurfaceTools(): boolean {
-    return !this.creator.isMobileView && (this.showSurfaceToolbar || this.creator.showPageNavigator);
+    return !this.creator.isMobileView && (this.showSurfaceToolbar || (this.creator.showPageNavigator && this.survey.pageCount > 1));
   }
 
   private isUpdatingNewPage: boolean;
@@ -384,7 +384,7 @@ export class TabDesignerViewModel extends Base {
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;
-    if (this.creator.showPageNavigator || (this.showSurfaceToolbar && !this.surfaceToolbar.isEmpty)) {
+    if (this.showSurfaceTools) {
       rootCss += " svc-tab-designer--with-surface-tools";
     }
     if (this.showPlaceholder) {
