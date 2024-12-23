@@ -18,9 +18,7 @@ export class TabbledMenuComponent extends BaseAngular<TabbedMenuContainer> imple
   ngAfterViewInit(): void {
     this.responsivityManager = new ResponsivityManager(
       this.container.nativeElement,
-      this.model,
-      ".svc-tabbed-menu-item-container:not(.sv-dots)>.sv-action__content"
-    );
+      this.model);
   }
   override ngOnDestroy(): void {
     super.ngOnDestroy();

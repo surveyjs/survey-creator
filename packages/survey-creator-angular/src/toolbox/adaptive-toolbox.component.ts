@@ -25,7 +25,7 @@ export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> imple
     this.toolbox.setRootElement(this.container.nativeElement as HTMLDivElement);
     this.responsivityManager =
       new VerticalResponsivityManager(this.toolbox.containerElement as HTMLDivElement,
-        this.toolbox, this.toolbox.itemSelector);
+        this.toolbox);
   }
   protected getModel(): QuestionToolbox {
     return this.toolbox;

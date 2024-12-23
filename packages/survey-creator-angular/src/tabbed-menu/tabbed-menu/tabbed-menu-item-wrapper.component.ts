@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, AfterViewInit, ViewChild, ElementRef } from "@angular/core";
 import { BaseAngular } from "survey-angular-ui";
 import { TabbedMenuItem } from "survey-creator-core";
 
@@ -7,9 +7,27 @@ import { TabbedMenuItem } from "survey-creator-core";
   templateUrl: "./tabbed-menu-item-wrapper.component.html",
   styles: [":host { display: none; }"]
 })
-export class TabbedMenuItemWrapperComponent extends BaseAngular<TabbedMenuItem> {
+export class TabbedMenuItemWrapperComponent extends BaseAngular<TabbedMenuItem> implements AfterViewInit {
   @Input() model!: TabbedMenuItem;
+  @ViewChild("container") container!: ElementRef<HTMLElement>;
   protected getModel(): TabbedMenuItem {
     return this.model;
   }
+  protected override getPropertiesToUpdateSync(): Array<string> {
+    return ["model"];
+  }
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.model.updateCallback = undefined as any;
+  }
+  ngAfterViewInit(): void {
+    if(this.model) {
+      this.model.updateModeCallback = (mode, callback) => {
+        this.model.mode = mode;
+        callback(mode, this.container?.nativeElement);
+      };
+      this.model.afterRender();
+    }
+  }
+
 }
