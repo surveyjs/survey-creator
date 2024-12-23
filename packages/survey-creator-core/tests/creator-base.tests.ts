@@ -4739,23 +4739,24 @@ test("onModified options, on adding page and on copying page", () => {
 
 test("ZoomIn/ZoomOut designer surface", (): any => {
   const creator = new CreatorTester();
-  const designerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
-  expect(designerTab["surfaceScale"]).toBe(100);
+  const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(designerTabModel["surfaceScale"]).toBe(100);
   expect(creator.themeVariables).toStrictEqual({});
 
-  designerTab["scaleSurface"](10);
-  expect(designerTab["surfaceScale"]).toBe(100);
-  expect(creator.themeVariables).toStrictEqual({});
-  expect(creator.survey.widthScale).toBe(100);
-
-  designerTab["scaleSurface"](200);
-  expect(designerTab["surfaceScale"]).toBe(100);
+  designerTabModel["scaleSurface"](10);
+  expect(designerTabModel["surfaceScale"]).toBe(100);
   expect(creator.themeVariables).toStrictEqual({});
   expect(creator.survey.widthScale).toBe(100);
 
-  designerTab["scaleSurface"](150);
+  designerTabModel["scaleSurface"](200);
+  expect(designerTabModel["surfaceScale"]).toBe(100);
+  expect(creator.themeVariables).toStrictEqual({});
+  expect(creator.survey.widthScale).toBe(100);
+
+  designerTabModel["maxSurfaceScaling"] = 200;
+  designerTabModel["scaleSurface"](150);
   expect(creator.survey.widthScale).toBe(150);
-  expect(designerTab["surfaceScale"]).toBe(150);
+  expect(designerTabModel["surfaceScale"]).toBe(150);
   expect(creator.themeVariables).toStrictEqual({
     "--ctr-surface-base-unit": "12px",
     "--lbr-corner-radius-unit": "12px",
@@ -4765,4 +4766,44 @@ test("ZoomIn/ZoomOut designer surface", (): any => {
     "--lbr-spacing-unit": "12px",
     "--lbr-stroke-unit": "1.5px"
   });
+});
+
+test("ZoomIn/ZoomOut actions limits", (): any => {
+  const creator = new CreatorTester();
+  const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
+  const zoomInAction = designerTabModel.surfaceToolbar.getActionById("zoomIn");
+  const zoomOutAction = designerTabModel.surfaceToolbar.getActionById("zoomOut");
+  const zoom100Action = designerTabModel.surfaceToolbar.getActionById("zoom100");
+
+  expect(designerTabModel["surfaceScale"]).toBe(100);
+  expect(creator.survey.widthScale).toBe(100);
+
+  zoomInAction.action();
+  expect(designerTabModel["surfaceScale"]).toBe(100);
+  expect(creator.survey.widthScale).toBe(100);
+
+  zoomOutAction.action();
+  expect(designerTabModel["surfaceScale"]).toBe(90);
+  expect(creator.survey.widthScale).toBe(90);
+
+  zoomOutAction.action();
+  zoomOutAction.action();
+  zoomOutAction.action();
+  zoomOutAction.action();
+  zoomOutAction.action();
+  zoomOutAction.action();
+  expect(designerTabModel["surfaceScale"]).toBe(30);
+  expect(creator.survey.widthScale).toBe(30);
+
+  zoomOutAction.action();
+  expect(designerTabModel["surfaceScale"]).toBe(20);
+  expect(creator.survey.widthScale).toBe(20);
+
+  zoomOutAction.action();
+  expect(designerTabModel["surfaceScale"]).toBe(20);
+  expect(creator.survey.widthScale).toBe(20);
+
+  zoom100Action.action();
+  expect(designerTabModel["surfaceScale"]).toBe(100);
+  expect(creator.survey.widthScale).toBe(100);
 });
