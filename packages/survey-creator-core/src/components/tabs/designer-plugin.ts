@@ -361,7 +361,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         }
       },
       active: this.isSettingsActive,
-      pressed: this.isSettingsActive,
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.surveySettings",
       locTooltipName: "ed.surveySettingsTooltip",
@@ -411,11 +410,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     items.push(this.surveySettingsAction);
     this.creator.onSelectedElementChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
-      this.surveySettingsAction.pressed = this.isSettingsActive;
     });
     this.creator.onShowSidebarVisibilityChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
-      this.surveySettingsAction.pressed = this.isSettingsActive;
     });
     return items;
   }
