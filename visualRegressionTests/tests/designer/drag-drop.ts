@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, changeToolboxScrolling, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength, RatingToolboxItem, setShowAddQuestionButton, setAllowEditSurveyTitle, hideAllAdornerActions } from "../../helper";
+import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, changeToolboxScrolling, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength, RatingToolboxItem, setShowAddQuestionButton, setAllowEditSurveyTitle, hideAllAdornerActions, upArrowImageLink, downArrowImageLink, leftArrowImageLink } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
@@ -428,7 +428,7 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
               "choices": [
                 {
                   "value": "up",
-                  "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAACFCAYAAAAenrcsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAK5SURBVHhe7dtLbhpBGIVRyFaynnixYT2shRC5pdgELv2s6q46Z0J7hn7dz+CBz7e7E/DUj+EVeEIgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEPiX2x35+fvX8HQ6XT8uwxM1+QTZia9x/PX4M3UIZAdexSCS+gRS2bsIRFKXQCoaO36R1COQSqaOXiR1CKSCuWMXSXkCKWzpyEVSlkAKWmvcIilHIIWsPWqRlCGQArYas0i2J5CNbT1ikWxLIBsqNV6RbEcgGyk9WpFsQyAbqDVWkaxPICurPVKRrEsgK9rLOEWyHoGsZG+jFMk6BLKCvY5RJMsJZKG9j1AkywhkgaOMTyTzCWSmo41OJPMIZIajjk0k0wlkoqOPTCTTCGSCVsYlkvEEMlJroxLJOAIZodUxieQ9gbzR+ohEkgkk6GU8InlNIC/0NhqRPCeQJ3odi0j+J5AHvY9EJN8J5Avj+OQO/whkYBTfuccngdwZw3PuIhAjeKP3+3QdiDjG6flO3QYijml6vVeXgYhjnh7v1l0g4limt/t1FYg41tHTHbsJRBzr6uWeXQQijm30cNfmAxHHtlq/b9OBiKOMlu/cbCDiKKvVezcZiDjqaPHuXfyRDnMJBIImA7l+XIYnSmrx7ufb3fDMCC18z/YLZDxfsSAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgE10/LsPTMR39/Zd2vt0Nz8ADnyAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAReOp3+AJ6KhqcfMnIzAAAAAElFTkSuQmCC"
+                  "imageLink": upArrowImageLink
                 },
                 {
                   "value": "giraffe",
@@ -436,11 +436,11 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
                 },
                 {
                   "value": "down",
-                  "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAACFCAYAAAAenrcsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAALBSURBVHhe7dtBUttAFEVRnK2wHlgsrIe1OFahSoJjP0tyqyV1nzNBQ9evd0v2gNP54gW46df4F7hBIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBD4l9sFXj/exqfj+Xr/HJ+YwhtkpiPHMTj6569NIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQHA6X4zPTXn9eBufqOXr/XN8akeTbxBxbKPFu/uKBYFAIGgykBa/Cx+B3yAHIpK6Wr1301+xRFJHy3du/jeISNbV+n27+JEuknX0cNcuAhmIpKxe7tlNIAORlNHTHbsKZCCS5/R2v+4CGYhkmR7v1mUgA5HM0+u9ug1kIJJper5T14EMRJL1fp/uAxmI5DZ3EcgfxvCTe3wTyD+M4ps7/CWQK72PQxw/CeSGXkcijv8J5I7exiKO2wQS9DIacdwnkAdaH484MoFM0OqIxPGYQCZqbUzimEYgM7QyKnFMJ5CZjj4uccwjkAWOOjJxzCeQhY42NnEsI5AnHGV04lhOIE/a+/jE8RyBFLDXEYrjeQIpZG9jFEcZAiloL6MURzkCKWzrcYqjLIGsYKuRiqM8gayk9ljFsQ6BrKjWaMWxHoGsbO3ximNdAqlgrRGLY30CqaT0mMVRh0AqKjVqcdQjkMqeHbc46hLIBpaOXBz1CWQjc8cujm0IZENTRy+O7QhkY4/GL45tCWQH7kUgju0JZCeuYxDHPpzOF+MzcMUbBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBwF0vL78BaeXHR9mlVzEAAAAASUVORK5CYII="
+                  "imageLink": downArrowImageLink
                 },
                 {
                   "value": "left",
-                  "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAACFCAYAAAAenrcsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAALBSURBVHhe7dzNjdtADIBRb1pJPUmxST2pZbMCvIAhSLT+NUO+d/H4KvgDNQfz4/PLA5j04/kJTBAIBAQCAYFAQCAQEAgEBAIBgUBAIBAQCAQEAgGBQEAgEBAIBAQCAYFAQCAQ8I/Chvz88+t5ejz+/f77PHEnE6QRr3EMxt+5h0AaIIZ2CeRm4mibQG4kjvYJ5Cbi6INAbiCOfgjkYuLoi0AuJI7+COQi4uiTQC4gjn4J5GTi6JtATiSO/gnkJOLIQSAnEEceAjmYOHIRyIHEkY9ADiKOnARyAHHkJZCdxJGbQHYQR34C2UgcNQhkA3HUYe3PSuKYl3FVkQmygjhiGZ+PQBYSR00CWUAcdQnkDXHUJpCAOBDIDHEwEMgEcfBNICPi4JVAXoiDMYE8iYMpAvkiDuaUD0QcREoHIg7eKRuIOFiiZCDiYKlygYiDNUoFIg7WKhOIONiiRCDiYKv0gYiDPVIHIg72ShuIODhCykDEwVFKXNJhK4FAIGUgGTf8cY+0E0QkHCH1K5ZI2Cv9HUQk7FHiki4StioRyEAkbFEmkIFIWKtUIAORsEa5QAYiYamSgQxEwhJlAxmIhHdKBzIQCZHygQxEwhyBPImEKQJ5IRLGBDIiEl4JZIJI+CaQGSJhIJCASBDIGyKpTSALiKQugSwkkpoEsoJIYhmfz8fnl+eZha7a3CjI+5kgG/jh1iGQjURSg0B2EEl+AtlJJLkJ5AAiyUsgBxFJTgI5kEjyEcjBRJKLQE4gkjwEchKR5CCQE4mkfwI5mUj6JpALiKRfArmISPokkAuJpD8CuZhI+iKQG4ikHwK5iUj6IJAbiaR9ArmZSNomkAaIpF0CacQ4EtG0wdofCJggEBAIBAQCAYFAQCAQEAgEBAIBgUBAIBAQCAQEAgGBQEAgEBAIBAQCAYFAQCAQEAgEBAKzHo//Qjyq8mzlYTkAAAAASUVORK5CYII="
+                  "imageLink": leftArrowImageLink
                 }
               ]
             }
