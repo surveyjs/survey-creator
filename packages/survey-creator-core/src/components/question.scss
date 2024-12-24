@@ -602,8 +602,9 @@ svc-question {
 
   .svc-dragged-element-shortcut__text {
     line-height: calcSize(3);
-    margin-inline-start: calcSize(4);
-    margin-inline-start: calc(var(--ctr-toolbox-item-icon-width, calcSize(3)) + var(--ctr-toolbox-item-gap, calcSize(1)));
+    //https://github.com/postcss/postcss-calc/issues/77
+    //margin-inline-start: calc(var(--ctr-toolbox-item-icon-width, calcSize(3)) + var(--ctr-toolbox-item-gap, calcSize(1)));
+    margin-inline-start: calc(var(--ctr-toolbox-item-icon-width, 24px) + var(--ctr-toolbox-item-gap, 8px));
   }
 }
 
