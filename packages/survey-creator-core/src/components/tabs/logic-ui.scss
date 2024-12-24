@@ -351,3 +351,9 @@
 .svc-logic-tab__leave-apply-button {
   background-color: var(--ctr-button-background-color-danger, $red);
 }
+
+.svc-logic-question-value.sd-element--with-frame {
+  box-shadow: var(--lbr-question-panel-shadow-offset-x, 0px) var(--lbr-question-panel-shadow-offset-y, 1px)
+    var(--lbr-question-panel-shadow-blur, 2px) var(--lbr-question-panel-shadow-spread, 0px)
+    var(--lbr-question-panel-shadow-color, rgba(0, 0, 0, 0.15));
+}

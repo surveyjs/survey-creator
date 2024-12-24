@@ -74,17 +74,17 @@ button.spg-action-button--large {
 }
 
 .spg-action-button:disabled {
-  opacity: var(--ctr-library-action-button-opacity-disabled, 0.25);
+  opacity: var(--ctr-actionbar-button-opacity-disabled, 0.25);
   pointer-events: none;
   cursor: default;
 }
 
 .spg-action-button--muted {
-  opacity: 0.5;
+  opacity: var(--ctr-actionbar-button-opacity-muted, 0.5);
 }
 
 .spg-action-button:active {
-  opacity: 0.5;
+  opacity: var(--ctr-actionbar-button-opacity-pressed, 0.5);
 }
 
 .spg-action-button--text {

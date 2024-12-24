@@ -14,7 +14,6 @@
 }
 .svc-property-grid-placeholder__header {
   display: flex;
-  width: var(--ctr-property-grid-placeholder-text-max-width, 256px);
   max-width: var(--ctr-property-grid-placeholder-text-max-width, 256px);
   flex-direction: column;
   justify-content: center;
