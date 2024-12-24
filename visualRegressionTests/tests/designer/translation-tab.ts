@@ -64,6 +64,96 @@ test("strings view", async (t) => {
   });
 });
 
+test("strings view background (scrollbar)", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1400, 600);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            },
+            {
+              "type": "text",
+              "name": "question2"
+            },
+            {
+              "type": "text",
+              "name": "question3"
+            },
+            {
+              "type": "text",
+              "name": "question4"
+            },
+            {
+              "type": "text",
+              "name": "question5"
+            },
+            {
+              "type": "text",
+              "name": "question6"
+            },
+            {
+              "type": "text",
+              "name": "question7"
+            },
+            {
+              "type": "text",
+              "name": "question8"
+            }
+          ]
+        },
+        {
+          "name": "page2",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question9"
+            },
+            {
+              "type": "text",
+              "name": "question10"
+            },
+            {
+              "type": "text",
+              "name": "question11"
+            },
+            {
+              "type": "text",
+              "name": "question12"
+            },
+            {
+              "type": "text",
+              "name": "question13"
+            },
+            {
+              "type": "text",
+              "name": "question14"
+            },
+            {
+              "type": "text",
+              "name": "question15"
+            },
+            {
+              "type": "text",
+              "name": "question16"
+            }
+          ]
+        }
+      ]
+    });
+
+    const stringsView = Selector(".svc-creator-tab__content.svc-translation-tab");
+
+    await t.click(getTabbedMenuItemByText("Translation"));
+    await takeElementScreenshot("translation-tab-scrolled.png", stringsView, t, comparer);
+  });
+});
+
 test("tranlation property grid", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
