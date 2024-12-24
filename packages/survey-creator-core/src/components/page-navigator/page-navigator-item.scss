@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@use "../../variables" as *;
 
 svc-page-navigator-item,
 .svc-page-navigator-item {

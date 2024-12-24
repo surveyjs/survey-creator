@@ -1,3 +1,5 @@
+@use "../../variables" as *;
+
 .spg-dropdown {
     display: flex;
     padding-right: calc(
@@ -45,4 +47,14 @@
 }
 .spg-dropdown-popup:not(.sv-popup--dropdown-overlay) {
     height: 0;
+}
+
+.spg-dropdown__clean-button {
+    --thm-ctr-editor-content-margin-top: var(--ctr-editor-content-margin-top, #{calcSize(1)});
+    --thm-ctr-editor-content-margin-bottom: var(--ctr-editor-content-margin-bottom, #{calcSize(1)});
+    margin-top: calc(-1 * var(--thm-ctr-editor-content-margin-top));
+    margin-bottom: calc(-1 * var(--thm-ctr-editor-content-margin-bottom));
+    use {
+        fill: inherit;
+    }
 }

@@ -1,5 +1,4 @@
-@import "../variables.scss";
-
+@use "../variables" as *;
 
 .svc-question__dropdown-choices {
   margin-top: calcSize(2);

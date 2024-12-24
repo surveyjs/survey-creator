@@ -209,6 +209,10 @@
             {
               "Name": "end-user-guide-prevent-duplicate-forms-submissions",
               "Title": "Prevent Duplicate Form Submissions"
+            },
+            {
+              "Name": "end-user-guide-customize-validation-messages",
+              "Title": "Customize Validation Messages"
             }
           ]
         },

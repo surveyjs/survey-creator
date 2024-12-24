@@ -1,3 +1,5 @@
+@use "./ctr-variables.scss" as *;
+
 .svc-creator {
   --sjs-font-size-x05: calc(#{$font-unit} * 0.5);
   --sjs-font-size-x075: calc(#{$font-unit} * 0.75);

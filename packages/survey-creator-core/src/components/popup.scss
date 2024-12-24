@@ -1,3 +1,5 @@
+@use "../variables" as *;
+
 .svc-creator-popup {
   &.sv-popup--modal {
     background-color: var(--ctr-popup-haze-background-color, $background-semitransparent);
