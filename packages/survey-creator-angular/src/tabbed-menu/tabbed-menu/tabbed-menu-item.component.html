@@ -1,9 +1,23 @@
 <ng-template #template>
-  <div [class]="model.getRootCss()" (click)="model.action()" [key2click]>
+  <div
+    [class]="model.getRootCss()"
+    (click)="model.action()"
+    [key2click]
+    role="tab"
+    [attr.id]="'tab-' + model.id"
+    [attr.aria-selected]="model.active"
+    [attr.aria-controls]="'scrollableDiv-' + model.id"
+  >
     <span *ngIf="model.hasTitle" [class]="model.getTitleCss()">
-      {{model.title}}
+      {{ model.title }}
     </span>
-    <svg *ngIf="model.hasIcon" [iconName]="model.iconName" [size]="'auto'" [class]="model.getIconCss()"
-      [title]="model.tooltip || model.title" sv-ng-svg-icon></svg>
+    <svg
+      *ngIf="model.hasIcon"
+      [iconName]="model.iconName"
+      [size]="'auto'"
+      [class]="model.getIconCss()"
+      [title]="model.tooltip || model.title"
+      sv-ng-svg-icon
+    ></svg>
   </div>
 </ng-template>

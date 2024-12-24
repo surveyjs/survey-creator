@@ -48,9 +48,11 @@
               <div class="svc-creator__content-holder svc-flex-column">
                 <template v-for="tab in model.tabs">
                   <div
+                    role="tabpanel"
                     class="svc-creator-tab"
                     v-bind:key="tab.id"
                     v-if="model.viewType == tab.id && tab.visible"
+                    :aria-labelledby="'tab-' + tab.id"
                     :id="'scrollableDiv-' + tab.id"
                     :class="{
                       'svc-creator__toolbox--right':
