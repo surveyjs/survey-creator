@@ -1,3 +1,5 @@
+@use "../../variables.scss" as *;
+
 .spg-question {
   display: flex;
   flex-direction: column;
@@ -77,7 +79,8 @@
 
 .spg-row--multiple {
   & > div > .spg-row-narrow__question {
-    margin-top: calcSize(-1);
+    --thm-ctr-editor-layout-gap: var(--ctr-editor-layout-gap, #{calcSize(1)});
+    margin-top: calc(-1 * var(--thm-ctr-editor-layout-gap));
   }
 }
 

@@ -1,3 +1,6 @@
+@use "../../variables.scss" as *;
+@use "./variables.scss" as *;
+
 .spg-panel {
 }
 .spg-panel__title {
@@ -60,7 +63,7 @@
   }
 
   .spg-row--multiple {
-    margin-top: calcSize(1);
+    margin-top: var(--ctr-editor-layout-gap, calcSize(1));
   }
 }
 .spg-panel__content > .spg-row:first-of-type {

@@ -1,3 +1,5 @@
+@use "../variables" as *;
+
 .svc-action-button {
   @include ctrDefaultBoldFont;
   display: inline-block;

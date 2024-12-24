@@ -1,3 +1,5 @@
+@use "./lbr-variables.scss" as *;
+
 .svc-creator {
   --lbr-spacing-x16: calc(#{$lbr-spacing-unit} * 16);
   --lbr-spacing-x15: calc(#{$lbr-spacing-unit} * 15);
