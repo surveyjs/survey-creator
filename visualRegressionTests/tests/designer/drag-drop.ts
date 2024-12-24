@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, changeToolboxScrolling, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength, RatingToolboxItem, setShowAddQuestionButton, setAllowEditSurveyTitle, hideAllAdornerActions } from "../../helper";
+import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, changeToolboxScrolling, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength, RatingToolboxItem, setShowAddQuestionButton, setAllowEditSurveyTitle, hideAllAdornerActions, upArrowImageLink, downArrowImageLink, leftArrowImageLink } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
@@ -427,20 +427,20 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
               "name": "question1",
               "choices": [
                 {
-                  "value": "lion",
-                  "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+                  "value": "up",
+                  "imageLink": upArrowImageLink
                 },
                 {
                   "value": "giraffe",
                   "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
                 },
                 {
-                  "value": "panda",
-                  "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+                  "value": "down",
+                  "imageLink": downArrowImageLink
                 },
                 {
-                  "value": "camel",
-                  "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+                  "value": "left",
+                  "imageLink": leftArrowImageLink
                 }
               ]
             }

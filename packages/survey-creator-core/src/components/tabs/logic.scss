@@ -248,6 +248,10 @@
   flex-flow: row wrap;
 }
 
+.svc-creator-popup .sl-panel-wrapper:first-child .sl-question {
+  margin-top: 0;
+}
+
 .sl-row--multiple {
   .sl-panel {
     padding-bottom: 0;
