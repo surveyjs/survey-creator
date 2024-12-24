@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@use "./variables" as *;
 
 $primary-background-500: var(--sjs-primary-background-500, #{$primary});
 $primary-background-400: var(--sjs-primary-background-400, #{$primary-background-dark});

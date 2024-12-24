@@ -1,3 +1,5 @@
+@use "../../variables" as *;
+
 .spg-checkbox {
   cursor: pointer;
   margin-top: var(--ctr-checkbox-list-gap-vertical, calcSize(2));
