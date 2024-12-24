@@ -1,19 +1,20 @@
 @import "../variables.scss";
 
 .svd-test-results {
-  border-radius: 4px;
-  box-shadow: inset 0px 1px 0px 0px var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16)));
+  border-radius: var(--ctr-string-table-corner-radius, calcSize(0.5));
+  box-shadow: inset 0px 1px 0px 0px  var(--ctr-string-table-shadow-color, rgba(0, 0, 0, 0.16));
   padding: calc(12 * var(--sjs-base-unit, var(--base-unit, 8px)));
+  background: var(--ctr-string-table-title-background-color, $background);
 
   .svd-test-results__header {
     @include ctrDefaultFont;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: calcSize(2) calcSize(3);
-    color: $foreground-light;
-    border-bottom: 2px solid $border-light;
-    background-color: $background;
+    padding: var(--ctr-string-table-title-padding-top, calcSize(2)) var(--ctr-string-table-title-padding-right, calcSize(3)) var(--ctr-string-table-title-padding-bottom, calcSize(2)) var(--ctr-string-table-title-padding-left, calcSize(3));
+    color: var(--ctr-string-table-title-caption-color, $foreground-light);
+    border-bottom: var(--ctr-string-table-title-border-width-bottom, 2px) solid var(--ctr-string-table-title-border-color, $border-light);
+    background: var(--ctr-string-table-title-background-color, $background);
 
     .svd-test-results__header-text {
       margin: 0;
@@ -21,23 +22,38 @@
 
     .svd-test-results__header-types {
       display: flex;
-      gap: calcSize(1);
+      gap: var(--ctr-string-table-title-actionbar-gap, calcSize(1));
+    }
+
+    .svc-action-button {
+      padding: var(--ctr-actionbar-button-padding-top-large-icon, calcSize(1))
+      var(--ctr-actionbar-button-padding-right-large-icon, calcSize(1))
+      var(--ctr-actionbar-button-padding-bottom-large-icon, calcSize(1))
+      var(--ctr-actionbar-button-padding-left-large-icon, calcSize(1));
+      box-sizing: border-box;
+      color: var(--ctr-actionbar-button-text-color, $primary);
+      border-radius: var(--ctr-actionbar-button-corner-radius, calcSize(12.5));
+      background-color: transparent;
+    }
+
+    .svc-action-button.svc-action-button--selected {
+      border: var(--ctr-actionbar-button-border-width-selected, calcSize(0.25)) solid var(--ctr-actionbar-button-border-color-selected, $primary);
     }
   }
 
   .svd-test-results__text {
     @include ctrDefaultFont;
     display: flex;
-    padding: calcSize(2) calcSize(3);
+    padding: var(--ctr-code-viewer-text-margin-top-results-table, calcSize(2)) var(--ctr-code-viewer-text-margin-right-results-table, calcSize(3)) var(--ctr-code-viewer-text-margin-bottom-results-table, calcSize(2)) var(--ctr-code-viewer-text-margin-left-results-table, calcSize(3));
     width: calc(100% - calcSize(6));
     overflow: auto;
     user-select: text;
     white-space: pre-wrap;
-    background-color: $background;
+    background: var(--ctr-code-viewer-background-color, $background);
+    color: var(--ctr-code-viewer-text-color, rgb(0, 0, 0));
   }
 
   .svd-test-results__table {
-    background-color: $background;
     width: 100%;
     box-shadow: $shadow-small;
 
@@ -53,7 +69,7 @@
           transition: transform 0.2s ease-in-out;
 
           use {
-            fill: $foreground-light;
+            fill: var(--ctr-string-table-row-expand-button-icon-color-default, $foreground-light);
           }
         }
 
@@ -65,22 +81,22 @@
 
       th {
         @include ctrSmallBoldFont;
-        padding: calcSize(1) calcSize(1);
-        background-color: $background-dim;
+        padding: var(--ctr-string-table-row-padding-top, calcSize(1)) var(--ctr-string-table-row-padding-right, calcSize(1)) var(--ctr-string-table-row-padding-bottom, calcSize(1)) var(--ctr-string-table-row-padding-left, calcSize(1));
+        background: var(--ctr-string-table-header-background-color, $background-dim);
         text-align: left;
-        color: $foreground-light;
+        color: var(--ctr-string-table-header-text-color, $foreground-light);
 
         &:nth-child(1) {
-          padding-left: calcSize(3);
+          padding-left: var(--ctr-string-table-row-padding-left, calcSize(3));
         }
       }
 
       td {
         @include ctrDefaultFont;
-        padding: calcSize(1) calcSize(1);
+        padding: var(--ctr-string-table-row-padding-top, calcSize(1)) var(--ctr-string-table-row-padding-right, calcSize(1)) var(--ctr-string-table-row-padding-bottom, calcSize(1)) var(--ctr-string-table-row-padding-left, calcSize(1));
         max-width: calcSize(50);
         overflow: auto;
-        border-top: 2px solid $border-light;
+        border-top: var(--ctr-string-table-row-border-width-top, 2px) solid var(--ctr-string-table-row-border-color, $border-light);
         user-select: text;
 
         &:nth-child(1) {
@@ -91,7 +107,7 @@
 
         &:nth-child(2) {
           width: 50%;
-          padding-right: calcSize(3);
+          padding-right: var(--ctr-string-table-row-padding-right, calcSize(3));
         }
       }
 
@@ -103,9 +119,13 @@
         vertical-align: top;
 
         .svd-test-results__node-value {
-          color: $foreground-light;
+          color: var(--ctr-string-table-row-text-color, $foreground-light);
         }
       }
     }
+  }
+
+  .svd-dark-border-color {
+    color: var(--ctr-string-table-row-text-color-title, rgb(0, 0, 0));
   }
 }
