@@ -138,6 +138,8 @@ test("showOneCategoryInPropertyGrid: switch tabs by search", () => {
 });
 
 test("showOneCategoryInPropertyGrid: switch designer tab and update subTitle", () => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
   const creator = new CreatorTester({ showTranslationTab: true }, undefined, false);
   creator.showOneCategoryInPropertyGrid = true;
 
@@ -155,4 +157,5 @@ test("showOneCategoryInPropertyGrid: switch designer tab and update subTitle", (
   expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-header");
   expect(creator.sidebar.header.title).toEqual("Survey Settings");
   expect(creator.sidebar.header.subTitle).toEqual("");
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
