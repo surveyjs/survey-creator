@@ -1328,7 +1328,7 @@ svc-question,
   background-color: transparent;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     opacity: initial;
     background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
   }
