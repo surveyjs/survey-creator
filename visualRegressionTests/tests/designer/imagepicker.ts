@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, explicitErrorHandler, wrapVisualTest, takeElementScreenshot, upArrowImageLink, rigthArrowImageLink, downArrowImageLink, leftArrowImageLink } from "../../helper";
+import { url, setJSON, explicitErrorHandler, wrapVisualTest, takeElementScreenshot } from "../../helper";
 
 const title = "ImagePicker Screenshot";
 
@@ -17,22 +17,22 @@ const json = {
           "name": "question1",
           "choices": [
             {
-              "value": "left",
-              "imageLink": leftArrowImageLink
+              "value": "lion",
+              "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
             },
             {
-              "value": "down",
-              "imageLink": downArrowImageLink
+              "value": "giraffe",
+              "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
             },
             {
-              "value": "up",
-              "imageLink": upArrowImageLink
+              "value": "panda",
+              "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
             },
             {
-              "value": "right",
-              "imageLink": rigthArrowImageLink
-            },
-          ],
+              "value": "camel",
+              "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+            }
+          ]
         }
       ]
     }

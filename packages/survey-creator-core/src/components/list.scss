@@ -140,7 +140,6 @@
   display: flex;
   width: var(--ctr-list-item-icon-width, calcSize(3));
   height: var(--ctr-list-item-icon-height, calcSize(3));
-  flex-shrink: 0;
   justify-content: center;
   align-items: center;
 

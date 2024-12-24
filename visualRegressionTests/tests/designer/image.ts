@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, explicitErrorHandler, wrapVisualTest, takeElementScreenshot, upArrowImageLink } from "../../helper";
+import { url, setJSON, explicitErrorHandler, wrapVisualTest, takeElementScreenshot } from "../../helper";
 
 const title = "Image Screenshot";
 
@@ -19,7 +19,7 @@ const json = {
         {
           "type": "image",
           "name": "question2",
-          "imageLink": upArrowImageLink
+          "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
         }
       ]
     }
