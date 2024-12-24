@@ -3625,3 +3625,44 @@ test("Depends on & defaultFunc, Bug#6143", () => {
 
   Serializer.removeProperty("question", "secondName");
 });
+test("Undo for deleting validator in text, Bug#6295", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1", validators: [{ type: "expression" }] }]
+  };
+  const q1 = creator.survey.getQuestionByName("q1");
+  expect(q1.validators).toHaveLength(1);
+  creator.selectQuestionByName("q1");
+  const propGridSurvey = creator.propertyGrid;
+  const matrix = propGridSurvey.getQuestionByName("validators");
+  expect(matrix).toBeTruthy();
+  matrix.focus();
+  expect(matrix.visibleRows).toHaveLength(1);
+  matrix.removeRow(0);
+  expect(matrix.visibleRows).toHaveLength(0);
+  expect(q1.validators).toHaveLength(0);
+  creator.undo();
+  expect(q1.validators).toHaveLength(1);
+  expect(matrix.visibleRows).toHaveLength(1);
+});
+test("Undo for deleting validator in multiple text item, Bug#6295", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "multipletext", name: "q1", items: [{ name: "item1", validators: [{ type: "expression" }] }] }]
+  };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const item1: Question = q1.items[0];
+  expect(item1.validators).toHaveLength(1);
+  creator.selectElement(item1);
+  const propGridSurvey = creator.propertyGrid;
+  const matrix = propGridSurvey.getQuestionByName("validators");
+  expect(matrix).toBeTruthy();
+  matrix.focus();
+  expect(matrix.visibleRows).toHaveLength(1);
+  matrix.removeRow(0);
+  expect(matrix.visibleRows).toHaveLength(0);
+  expect(item1.validators).toHaveLength(0);
+  creator.undo();
+  expect(item1.validators).toHaveLength(1);
+  expect(matrix.visibleRows).toHaveLength(1);
+});
