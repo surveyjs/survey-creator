@@ -107,7 +107,7 @@ svc-page {
   }
   //hovered and focused state
   &:hover,
-  &:focus {
+  &:focus-visible {
     background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, $background-dim);
   }
 
