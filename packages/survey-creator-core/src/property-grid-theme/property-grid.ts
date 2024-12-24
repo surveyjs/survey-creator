@@ -200,6 +200,7 @@ export var propertyGridCss = {
     chevronButton: "sd-dropdown_chevron-button spg-dropdown_chevron-button",
     chevronButtonSvg: "sd-dropdown_chevron-button-svg spg-dropdown_chevron-button-svg",
     chevronButtonIconId: "icon-chevron",
+    cleanButton: "spg-dropdown__clean-button spg-input__edit-button"
   },
   buttongroup: {
     root: "spg-button-group",
