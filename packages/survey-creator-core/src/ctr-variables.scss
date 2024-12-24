@@ -98,7 +98,7 @@ $font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family)))
 }
 
 @mixin ctrCodeFont {
-  font-family: var(--ctr-font-family-code, "DM Mono");
+  font-family: var(--ctr-font-family-code, monospace);
   font-size: var(--ctr-font-code-size, 16px);
   font-style: normal;
   font-weight: 400;

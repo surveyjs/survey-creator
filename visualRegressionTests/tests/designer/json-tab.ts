@@ -2,7 +2,7 @@ import { ClientFunction, Selector } from "testcafe";
 import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, takeElementScreenshot, logicQuestionSelector, logicActionSelector, tableRulesSelector, logicAddNewRuleButton, getListItemByText, wrapVisualTest, resetHoverToCreator } from "../../helper";
 
 const title = "Json tab Screenshot";
-
+const widgetUrl = url.replace(/\/testcafe$/, "/testcafe-widget");
 fixture`${title}`.page`${url}`;
 
 const jsonWithErrors = {
@@ -72,5 +72,35 @@ test("one rule view", async (t) => {
       .click(getTabbedMenuItemByText("JSON Editor")).typeText(Selector(".svc-json-editor-tab__content-area"), JSON.stringify(jsonWithErrors, null, 2), { replace: true, paste: true });
     const tabContent = Selector(".svc-creator-tab__content");
     await takeElementScreenshot("json-tab-with-errors.png", tabContent, t, comparer);
+  });
+});
+
+fixture`${title}`.page`${widgetUrl}`;
+test("JSON Ace editor", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await t
+      .click(getTabbedMenuItemByText("JSON Editor"));
+    const tabContent = Selector(".svc-creator-tab__content");
+    await takeElementScreenshot("json-tab-ace.png", tabContent, t, comparer);
+
+    await ClientFunction(() => {
+      window["creator"].preferredColorPalette = "dark";
+    })();
+    await takeElementScreenshot("json-tab-ace.png", tabContent, t, comparer);
   });
 });
