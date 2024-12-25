@@ -25,14 +25,15 @@
     }
 
     .svc-action-button {
-      padding: var(--ctr-actionbar-button-padding-top-large-icon, calcSize(1))
-      var(--ctr-actionbar-button-padding-right-large-icon, calcSize(1))
-      var(--ctr-actionbar-button-padding-bottom-large-icon, calcSize(1))
-      var(--ctr-actionbar-button-padding-left-large-icon, calcSize(1));
       box-sizing: border-box;
       color: var(--ctr-actionbar-button-text-color, $primary);
       border-radius: var(--ctr-actionbar-button-corner-radius, calcSize(12.5));
       background-color: transparent;
+
+      &:focus, &:hover {
+        background-color: var(--ctr-survey-action-button-background-color-hovered-positive, $primary-light);
+        outline: none;
+      }
     }
 
     .svc-action-button.svc-action-button--selected {
