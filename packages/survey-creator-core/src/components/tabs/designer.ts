@@ -232,11 +232,11 @@ export class TabDesignerViewModel extends Base {
     return getLocString("ed.surveyPlaceholderDescription");
   }
   public get showSurfaceToolbar(): boolean {
-    return this.creator.allowShowSurfaceToolbar;
+    const hasVisibleItems = this.surfaceToolbar.actions.some((action) => action.visible);
+    return this.creator.allowShowSurfaceToolbar && hasVisibleItems;
   }
   public get showSurfaceTools(): boolean {
-    const hasVisibleItems = this.surfaceToolbar.actions.some((action) => action.visible);
-    return !this.creator.isMobileView && ((this.showSurfaceToolbar && hasVisibleItems) || (this.creator.showPageNavigator && this.survey.pageCount > 1) || this.creator.pageEditMode === "bypage");
+    return !this.creator.isMobileView && (this.showSurfaceToolbar || (this.creator.showPageNavigator && (this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage")));
   }
 
   private isUpdatingNewPage: boolean;
