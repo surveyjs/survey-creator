@@ -166,10 +166,10 @@ export class SurveyCreatorModel extends Base
   /**
    * Specifies whether to display the Logic tab.
    *
-   * Default value: `false`
+   * Default value: `true`
    * @see activeTab
    */
-  @property({ defaultValue: false }) showLogicTab: boolean;
+  @property({ defaultValue: true }) showLogicTab: boolean;
   @property({ defaultValue: false }) useTableViewInLogicTab: boolean;
   @property({ defaultValue: 0 }) pageHoverDelay: number;
   /**
