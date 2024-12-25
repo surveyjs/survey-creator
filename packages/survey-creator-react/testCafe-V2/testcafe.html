@@ -33,7 +33,7 @@
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
     const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
-    creator.applyTheme(SurveyCreatorTheme.DefaultLight);
+    creator.applyCreatorTheme(SurveyCreatorTheme.DefaultLight);
     window.creator = creator;
 
     class SurveyCreatorRenderComponent extends React.Component {
@@ -43,7 +43,7 @@
         window.updateCreatorModel = (options, json) => {
           window.prevCreator = window.creator;
           const creator = new SurveyCreator.SurveyCreator(options);
-          creator.applyTheme(SurveyCreatorTheme.DefaultLight);
+          creator.applyCreatorTheme(SurveyCreatorTheme.DefaultLight);
           creator.JSON = json;
           this.setState({ creator });
           window.creator = creator;

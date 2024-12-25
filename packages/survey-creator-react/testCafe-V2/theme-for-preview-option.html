@@ -18,6 +18,7 @@
   <script src="../node_modules/survey-core/survey.core.js" defer></script>
   <script src="../node_modules/survey-core/survey.i18n.js" defer></script>
   <script src="../node_modules/survey-core/themes/index.js" defer></script>
+  <script src="../node_modules/survey-creator-core/themes/index.js" defer></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.js" defer></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js" defer></script>
   <script src="../node_modules/survey-react-ui/survey-react-ui.js" defer></script>
@@ -32,6 +33,7 @@
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
     const creator = new SurveyCreator.SurveyCreator({ themeForPreview: "modern" });
+    creator.applyCreatorTheme(SurveyCreatorTheme.DefaultLight);
     window.creator = creator;
     const root = ReactDOMClient.createRoot(document.getElementById("survey-creator"));
     root.render(React.createElement(React.StrictMode, {
