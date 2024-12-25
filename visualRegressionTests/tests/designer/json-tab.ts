@@ -77,6 +77,11 @@ test("one rule view", async (t) => {
 
 fixture`${title}`.page`${widgetUrl}`;
 test("JSON Ace editor", async (t) => {
+  var skipIfNotReact = ClientFunction(() => {
+    return window["creator"].survey.platformName != "react";
+  });
+  // skip test fo non-react - core code
+  if (await skipIfNotReact()) return;
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
     const json = {
