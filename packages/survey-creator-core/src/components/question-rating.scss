@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables" as *;
 
 .svc-rating-question-controls {
   position: absolute;

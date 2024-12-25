@@ -13,7 +13,7 @@ export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShow
 
 export class TabDesignerViewModel extends Base {
   private minSurfaceScaling = 20;
-  private maxSurfaceScaling = 200;
+  private maxSurfaceScaling = 100;
   private stepSurfaceScaling = 10;
   private cssUpdater: ComputedUpdater;
   private pagesControllerValue: PagesController;
@@ -190,7 +190,7 @@ export class TabDesignerViewModel extends Base {
   }
 
   private scaleSurface(scaleFactor: number): void {
-    if (scaleFactor <= this.minSurfaceScaling || scaleFactor >= this.maxSurfaceScaling) return;
+    if (scaleFactor < this.minSurfaceScaling || scaleFactor > this.maxSurfaceScaling) return;
 
     this.surfaceScale = scaleFactor;
     if (!this.creator.survey.responsiveStartWidth) {

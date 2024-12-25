@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables" as *;
 
 .svd-test-results {
   border-radius: var(--ctr-string-table-corner-radius, calcSize(0.5));

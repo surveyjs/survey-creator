@@ -1,5 +1,5 @@
-@import "../variables.scss";
-@import "./carry-forward-panel.scss";
+@use "../variables" as *;
+@use "./carry-forward-panel.scss" as *;
 
 svc-question {
   display: block;
@@ -72,7 +72,7 @@ svc-question {
   }
   //hovered and focused state
   &:hover,
-  &:focus {
+  &:focus-visible {
     background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
   }
 
@@ -1335,7 +1335,7 @@ svc-question,
   background-color: transparent;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     opacity: initial;
     background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
   }

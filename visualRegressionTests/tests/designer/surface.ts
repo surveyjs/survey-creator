@@ -2548,6 +2548,9 @@ test("Check question button states", async (t) => {
     await t.click(button);
     await takeElementScreenshot("question-button-checked.png", button, t, comparer);
     await t.click(button);
+    await t.hover(Selector(".svc-question__content"));
+    await takeElementScreenshot("question-button-after-click.png", button, t, comparer);
+    await t.pressKey("tab shift+tab");
     await takeElementScreenshot("question-button-focused.png", button, t, comparer);
     await ClientFunction(() => {
       const question = window["creator"].survey.getQuestionByName("q1");

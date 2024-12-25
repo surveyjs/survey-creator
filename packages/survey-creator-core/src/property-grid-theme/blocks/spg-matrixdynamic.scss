@@ -1,3 +1,5 @@
+@use "../../variables.scss" as *;
+
 .spg-matrixdynamic__drag-element {
   padding: calcSize(2);
 

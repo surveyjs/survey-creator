@@ -1,3 +1,5 @@
+@use "../variables" as *;
+
 .svc-btn {
   display: flex;
   padding: var(--ctr-button-padding-vertical, calcSize(2)) var(--ctr-button-padding-horizontal, calcSize(6));

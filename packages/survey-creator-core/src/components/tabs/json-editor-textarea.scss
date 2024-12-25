@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@use "../../variables" as *;
 
 svc-tab-json-editor-textarea {
   width: 100%;

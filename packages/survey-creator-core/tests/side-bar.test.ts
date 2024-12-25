@@ -136,3 +136,26 @@ test("showOneCategoryInPropertyGrid: switch tabs by search", () => {
   expect(tabs[4].active).toBe(true);
   expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("pages");
 });
+
+test("showOneCategoryInPropertyGrid: switch designer tab and update subTitle", () => {
+  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
+  creatorSetting.defaultNewSurveyJSON = {};
+  const creator = new CreatorTester({ showTranslationTab: true }, undefined, false);
+  creator.showOneCategoryInPropertyGrid = true;
+
+  expect(creator.sidebar.activePage).toEqual("propertyGridPlaceholder");
+  expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-header");
+  expect(creator.sidebar.header.title).toEqual("Survey Settings");
+  expect(creator.sidebar.header.subTitle).toEqual(undefined);
+
+  creator.activeTab = "translation";
+  expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-header");
+  expect(creator.sidebar.header.title).toEqual("Language Settings");
+  expect(creator.sidebar.header.subTitle).toEqual("Languages");
+
+  creator.activeTab = "designer";
+  expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-header");
+  expect(creator.sidebar.header.title).toEqual("Survey Settings");
+  expect(creator.sidebar.header.subTitle).toEqual("");
+  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
+});
