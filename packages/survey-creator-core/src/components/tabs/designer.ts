@@ -236,7 +236,7 @@ export class TabDesignerViewModel extends Base {
   }
   public get showSurfaceTools(): boolean {
     const hasVisibleItems = this.surfaceToolbar.actions.some((action) => action.visible);
-    return !this.creator.isMobileView && ((this.showSurfaceToolbar && hasVisibleItems) || (this.creator.showPageNavigator && this.survey.pageCount > 1));
+    return !this.creator.isMobileView && ((this.showSurfaceToolbar && hasVisibleItems) || (this.creator.showPageNavigator && this.survey.pageCount > 1) || this.creator.pageEditMode === "bypage");
   }
 
   private isUpdatingNewPage: boolean;
