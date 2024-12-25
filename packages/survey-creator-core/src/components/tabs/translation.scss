@@ -89,6 +89,7 @@
 .st-strings-wrapper {
   flex-grow: 1;
 }
+
 .st-property-panel {
   flex-shrink: 0;
   flex-grow: 0;
@@ -113,6 +114,7 @@
 
 .st-root-modern {
   width: 100%;
+  height: fit-content;
   max-height: 100%;
   overflow-y: auto;
   background-color: var(--ctr-string-table-background-color, $background-dim); 
