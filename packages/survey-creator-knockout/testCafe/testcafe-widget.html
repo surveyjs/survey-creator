@@ -58,7 +58,7 @@
     <survey-creator params="creator: creator"></survey-creator>
   </div>
   <script>
-    const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
+      const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
     window.creator = creator;
     ko.applyBindings({ creator: creator });
   </script>

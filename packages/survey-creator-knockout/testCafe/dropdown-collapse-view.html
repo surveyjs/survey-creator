@@ -26,7 +26,7 @@
   </div>
   <script>
     window.surveyJSFramework = "ko";
-    const creator = new SurveyCreator.SurveyCreator({ maxVisibleChoices: 5 });
+      const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", maxVisibleChoices: 5 });
     window.creator = creator;
     ko.applyBindings({ creator: creator });
   </script>

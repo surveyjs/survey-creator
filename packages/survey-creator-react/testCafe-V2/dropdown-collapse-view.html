@@ -31,7 +31,7 @@
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
-    const creator = new SurveyCreator.SurveyCreator({ maxVisibleChoices: 5 });
+    const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", maxVisibleChoices: 5 });
     window.creator = creator;
     const root = ReactDOMClient.createRoot(document.getElementById("survey-creator"));
     root.render(React.createElement(React.StrictMode, {

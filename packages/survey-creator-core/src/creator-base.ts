@@ -3932,7 +3932,7 @@ export class SurveyCreatorModel extends Base
    * - `"never"` - Hides the expand/collapse buttons.
    * @see onElementGetExpandCollapseState
    */
-  @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+  @property({ defaultValue: "onhover" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
 
   collapsePages = false;
   collapsePanels = false;

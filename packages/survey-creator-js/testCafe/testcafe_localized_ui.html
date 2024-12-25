@@ -26,7 +26,7 @@
   const loc = SurveyCreatorCore.localization.getLocale("de");
   loc.ed.logic = "Miner Logik";
   SurveyCreatorCore.localization.currentLocale = "de";
-  const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
+    const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
   window.creator = creator;
   SurveyCreator.renderSurveyCreator(creator, document.getElementById("survey-creator"));
 </script>
