@@ -78,6 +78,7 @@ test("one rule view", async (t) => {
 fixture`${title}`.page`${widgetUrl}`;
 test("JSON Ace editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
     const json = {
       "logoPosition": "right",
       "pages": [
@@ -96,11 +97,16 @@ test("JSON Ace editor", async (t) => {
     await t
       .click(getTabbedMenuItemByText("JSON Editor"));
     const tabContent = Selector(".svc-creator-tab__content");
+    await t.click(tabContent);
     await takeElementScreenshot("json-tab-ace.png", tabContent, t, comparer);
 
     await ClientFunction(() => {
       window["creator"].preferredColorPalette = "dark";
     })();
-    await takeElementScreenshot("json-tab-ace.png", tabContent, t, comparer);
+    await t
+      .click(getTabbedMenuItemByText("Logic"))
+      .click(getTabbedMenuItemByText("JSON Editor"));
+
+    await takeElementScreenshot("json-tab-ace-dark.png", tabContent, t, comparer);
   });
 });
