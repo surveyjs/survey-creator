@@ -12,6 +12,6 @@ export class ThemePreviewComponent extends TestDefaultComponent {
     super();
   }
   protected override createCreator(): void {
-    this.creator = new SurveyCreatorModel({ themeForPreview: "modern" });
+    this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", themeForPreview: "modern" });
   }
 }

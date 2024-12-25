@@ -1123,6 +1123,7 @@ test("Page duplicate and check actions visibility", (): any => {
 });
 test("Check action container for new added page", (): any => {
   const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "never";
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
@@ -1208,6 +1209,7 @@ test("pageEditMode='single'", (): any => {
 });
 test("Check page actions for pageEditMode is 'single'", (): any => {
   const creator = new CreatorTester({ pageEditMode: "single" });
+  creator.expandCollapseButtonVisibility = "never";
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
