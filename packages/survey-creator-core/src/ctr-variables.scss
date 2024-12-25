@@ -99,7 +99,7 @@ $-base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin ctrCodeFont {
-  font-family: var(--ctr-font-family-code, "DM Mono");
+  font-family: var(--ctr-font-family-code, monospace);
   font-size: var(--ctr-font-code-size, 16px);
   font-style: normal;
   font-weight: 400;

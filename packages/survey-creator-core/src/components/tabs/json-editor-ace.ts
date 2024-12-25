@@ -53,6 +53,15 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
       this.aceEditor.session.doc.getNewLineCharacter();
     this.onPluginActivate();
   }
+
+  public onPluginActivate(): void {
+    super.onPluginActivate();
+    this.aceEditor.setFontSize(14);
+    if (this.creator.preferredColorPalette === "dark") {
+      this.aceEditor.setTheme("ace/theme/clouds_midnight");
+    }
+  }
+
   private updateUndoRedoState(): void {
     const undoManager: any = this.aceEditor
       .getSession()
