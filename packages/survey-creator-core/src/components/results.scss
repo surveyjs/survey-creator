@@ -2,9 +2,8 @@
 
 .svd-test-results {
   border-radius: var(--ctr-string-table-corner-radius, calcSize(0.5));
-  box-shadow: inset 0px 1px 0px 0px  var(--ctr-string-table-shadow-color, rgba(0, 0, 0, 0.16));
+  box-shadow: inset 0px 1px 0px 0px var(--ctr-string-table-shadow-color, var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16))));
   padding: calc(12 * var(--sjs-base-unit, var(--base-unit, 8px)));
-  background: var(--ctr-string-table-title-background-color, $background);
 
   .svd-test-results__header {
     @include ctrDefaultFont;
@@ -14,7 +13,7 @@
     padding: var(--ctr-string-table-title-padding-top, calcSize(2)) var(--ctr-string-table-title-padding-right, calcSize(3)) var(--ctr-string-table-title-padding-bottom, calcSize(2)) var(--ctr-string-table-title-padding-left, calcSize(3));
     color: var(--ctr-string-table-title-caption-color, $foreground-light);
     border-bottom: var(--ctr-string-table-title-border-width-bottom, 2px) solid var(--ctr-string-table-title-border-color, $border-light);
-    background: var(--ctr-string-table-title-background-color, $background);
+    background-color: var(--ctr-string-table-title-background-color, $background);
 
     .svd-test-results__header-text {
       margin: 0;
@@ -98,6 +97,7 @@
         overflow: auto;
         border-top: var(--ctr-string-table-row-border-width-top, 2px) solid var(--ctr-string-table-row-border-color, $border-light);
         user-select: text;
+        background: var(--ctr-string-table-row-background-color, $background);
 
         &:nth-child(1) {
           @include ctrDefaultBoldFont;
