@@ -4807,3 +4807,16 @@ test("ZoomIn/ZoomOut actions limits", (): any => {
   expect(designerTabModel["surfaceScale"]).toBe(100);
   expect(creator.survey.widthScale).toBe(100);
 });
+
+test("propertyGridNavigationMode property", (): any => {
+  const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "buttons";
+  expect(creator.showOneCategoryInPropertyGrid).toBeTruthy();
+  creator.propertyGridNavigationMode = "accordion";
+  expect(creator.showOneCategoryInPropertyGrid).toBeFalsy();
+
+  creator.showOneCategoryInPropertyGrid = true;
+  expect(creator.propertyGridNavigationMode).toBe("buttons");
+  creator.showOneCategoryInPropertyGrid = false;
+  expect(creator.propertyGridNavigationMode).toBe("accordion");
+});

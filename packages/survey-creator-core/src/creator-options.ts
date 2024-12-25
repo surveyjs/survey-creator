@@ -327,4 +327,9 @@ export interface ICreatorOptions {
    * @see expandCollapseButtonVisibility
    */
   collapseQuestions?: boolean;
+  /**
+   * 
+   * 
+   */
+  propertyGridNavigationMode?: "buttons" | "accordion";
 }

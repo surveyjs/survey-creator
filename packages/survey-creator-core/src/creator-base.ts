@@ -201,6 +201,16 @@ export class SurveyCreatorModel extends Base
       }
     });
   }
+  /**
+   * 
+   * 
+   */
+  get propertyGridNavigationMode(): "buttons" | "accordion" {
+    return this.showOneCategoryInPropertyGrid ? "buttons" : "accordion";
+  }
+  set propertyGridNavigationMode(newValue: "buttons" | "accordion") {
+    this.showOneCategoryInPropertyGrid = newValue === "buttons";
+  }
 
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
