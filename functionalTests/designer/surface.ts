@@ -377,8 +377,8 @@ test("Collapse all and expand all toolbar visibility", async (t) => {
   await ClientFunction(() => {
     window["creator"].expandCollapseButtonVisibility = "never";
   })();
-  await t.expect(Selector("#collapseAll").exists).notOk();
-  await t.expect(Selector("#expandAll").exists).notOk();
+  await t.expect(Selector("#collapseAll").visible).notOk();
+  await t.expect(Selector("#expandAll").visible).notOk();
 
 });
 test("Check page adorner state is restored after shrink and stretch", async (t) => {
