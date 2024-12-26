@@ -233,7 +233,7 @@ export interface ICreatorOptions {
   /**
    * Specifies a default device for survey preview in the Preview tab.
    *
-   * Possible values:
+   * Accepted values:
    * 
    * - `"desktop"` (default)
    * - `"iPhoneSE"`
@@ -249,7 +249,7 @@ export interface ICreatorOptions {
   /**
    * Specifies the orientation of the selected device in the Preview tab.
    * 
-   * Possible values:
+   * Accepted values:
    * - `"landscape"` (default)
    * - `"portrait"`
    */
@@ -291,7 +291,7 @@ export interface ICreatorOptions {
   /**
    * Specifies the visibility of the buttons that expand and collapse survey elements on the design surface.
    * 
-   * Possible values:
+   * Accepted values:
    * 
    * - `"onhover"` (default) - Displays an expand/collapse button when a survey element is hovered over or selected.
    * - `"always"` - Displays the expand/collapse buttons permanently.
@@ -328,8 +328,15 @@ export interface ICreatorOptions {
    */
   collapseQuestions?: boolean;
   /**
+   * Specifies how users navigate categories in the Property Grid.
    * 
+   * Accepted values:
    * 
+   * - `"accordion"` (default)        
+   * The Property Grid displays a stacked list of categories that users can expand or collapse to reveal nested properties.
+   * 
+   * - `"buttons"`      
+   * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid. 
    */
   propertyGridNavigationMode?: "buttons" | "accordion";
 }
