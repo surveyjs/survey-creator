@@ -24,7 +24,9 @@
 <script>
   window.surveyJSFramework = "react";
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
-  window.creator = creator;
+    creator.tabResponsivenessMode = "menu";
+    creator["animationEnabled"] = false;
+    window.creator = creator;
 
   class SurveyCreatorRenderComponent extends SurveyUI.Component {
     constructor(props) {

@@ -21,6 +21,8 @@ const creator = shallowRef(new SurveyCreatorModel(props.options));
   const newCreator = new SurveyCreatorModel(options);
   newCreator.JSON = json;
   creator.value = newCreator;
+  creator.value.tabResponsivenessMode = "menu";
+  creator.value["animationEnabled"] = false;
   (window as any).creator = creator.value;
 }
 </script>

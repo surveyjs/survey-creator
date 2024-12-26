@@ -26,6 +26,8 @@
 <script>
   window.surveyJSFramework = "react";
   const creator = new SurveyCreator.SurveyCreator();
+    creator.tabResponsivenessMode = "menu";
+    creator["animationEnabled"] = false;
   window.creator = creator;
   SurveyCreator.renderSurveyCreator(creator, document.getElementById("survey-creator"));
 </script>

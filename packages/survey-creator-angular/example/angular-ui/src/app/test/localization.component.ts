@@ -13,5 +13,7 @@ export class TestLocalizationComponent extends TestDefaultComponent {
     loc.tabs.logic = "Miner Logik";
     localization.currentLocale = "de";
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
+    this.creator.tabResponsivenessMode = "menu";
+    this.creator["animationEnabled"] = false;
   }
 }

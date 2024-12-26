@@ -1075,7 +1075,7 @@ export class SurveyCreatorModel extends Base
    * @see themeForPreview
    */
   public allowChangeThemeInPreview = true;
-  private _tabResponsivenessMode: "menu" | "icons" = "menu";
+  private _tabResponsivenessMode: "menu" | "icons" = "icons";
   public get tabResponsivenessMode(): "menu" | "icons" {
     return this._tabResponsivenessMode;
   }
@@ -2251,7 +2251,7 @@ export class SurveyCreatorModel extends Base
     this.onGetObjectDisplayName.fire(this, options);
     return options.displayName;
   }
-  private animationEnabled = false;
+  private animationEnabled = true;
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
     if (reason !== "designer" && reason !== "test" && reason !== "theme") {

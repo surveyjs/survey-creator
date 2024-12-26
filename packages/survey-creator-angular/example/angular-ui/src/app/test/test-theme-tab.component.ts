@@ -12,5 +12,7 @@ export class ThemeTabComponent extends TestDefaultComponent {
   }
   protected override createCreator(): void {
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showThemeTab: true });
+    this.creator.tabResponsivenessMode = "menu";
+    this.creator["animationEnabled"] = false;
   }
 }

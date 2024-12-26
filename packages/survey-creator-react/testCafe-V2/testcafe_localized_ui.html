@@ -37,6 +37,8 @@
     SurveyCreatorCore.localization.currentLocale = "de";
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
     creator.applyCreatorTheme(SurveyCreatorTheme.DefaultLight);
+    creator.tabResponsivenessMode = "menu";
+    creator["animationEnabled"] = false;
     window.creator = creator;
     const root = ReactDOMClient.createRoot(document.getElementById("survey-creator"));
     root.render(React.createElement(React.StrictMode, {
