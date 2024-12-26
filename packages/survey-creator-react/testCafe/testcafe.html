@@ -33,6 +33,9 @@
     window.surveyJSFramework = "react";
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
     window.creator = creator;
+    creator.tabResponsivenessMode = "menu";
+    creator["animationEnabled"] = false;
+    creator.showOneCategoryInPropertyGrid = false;
 
     class SurveyCreatorRenderComponent extends React.Component {
       constructor(props) {
