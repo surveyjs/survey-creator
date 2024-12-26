@@ -570,7 +570,7 @@ svc-question {
   border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
   background-color: var(--ctr-toolbox-item-background-color-floating, $background);
   color: var(--ctr-toolbox-item-text-color-hovered, $foreground);
-  padding: var(--ctr-toolbox-item-padding-top, calcSize(1.5)) var(--ctr-toolbox-item-padding-right, calcSize(2)) var(--ctr-toolbox-item-padding-bottom, calcSize(1.5)) var(--ctr-toolbox-item-padding-left, calcSize(2));
+  padding: var(--ctr-toolbox-item-padding-top-submenu, calcSize(1.5)) var(--ctr-toolbox-item-padding-right, calcSize(2)) var(--ctr-toolbox-item-padding-bottom-submenu, calcSize(1.5)) var(--ctr-toolbox-item-padding-left-submenu, calcSize(2));
   cursor: grabbing;
   position: absolute;
   z-index: 1000;
