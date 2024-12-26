@@ -845,8 +845,16 @@ test("Create new page on changing title/description in ghost & creator.onModifie
   });
   newPage.description = "desc1";
   newPage.title = "title1";
-  expect(logs).toStrictEqual([{ type: "PROPERTY_CHANGED", name: "description" },
-    { type: "PROPERTY_CHANGED", name: "title" }]);
+  expect(logs).toStrictEqual([
+    {
+      type: "PROPERTY_CHANGED",
+      name: "description"
+    },
+    {
+      type: "PROPERTY_CHANGED",
+      name: "title"
+    }
+  ]);
 });
 test("Don't add extra subscriptions and fully unsubscribe title/description changes in ghost page", (): any => {
   const creator = new CreatorTester();
