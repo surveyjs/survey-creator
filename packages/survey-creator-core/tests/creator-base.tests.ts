@@ -4812,6 +4812,7 @@ test("ZoomIn/ZoomOut actions limits", (): any => {
 
 test("showSurfaceTools", (): any => {
   const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "never";
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(designerTabModel.showSurfaceTools).toBeFalsy();
 
@@ -4835,6 +4836,7 @@ test("Designer surface css classes", (): any => {
   const savedNewJSON = settings.defaultNewSurveyJSON;
   settings.defaultNewSurveyJSON = {};
   const creator = new CreatorTester(undefined, undefined, false);
+  creator.expandCollapseButtonVisibility = "never";
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-placeholder svc-tab-designer--standard-mode");
 
