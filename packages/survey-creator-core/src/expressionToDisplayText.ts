@@ -1,6 +1,6 @@
 import * as Survey from "survey-core";
 import { editorLocalization } from "./editorLocalization";
-import { wrapTextByCurlyBraces } from "./utils/utils";
+import { wrapTextByCurlyBraces } from "./utils/creator-utils";
 
 export class ExpressionToDisplayText {
   private currentQuestion: Survey.Question;
