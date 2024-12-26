@@ -12,5 +12,6 @@ export class TestDropdownCollapseComponent extends TestDefaultComponent {
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", maxVisibleChoices: 5 });
     this.creator.tabResponsivenessMode = "menu";
     this.creator["animationEnabled"] = false;
+    this.creator.showOneCategoryInPropertyGrid = false;
   }
 }

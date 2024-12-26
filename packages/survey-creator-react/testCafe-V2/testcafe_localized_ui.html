@@ -39,6 +39,7 @@
     creator.applyCreatorTheme(SurveyCreatorTheme.DefaultLight);
     creator.tabResponsivenessMode = "menu";
     creator["animationEnabled"] = false;
+    creator.showOneCategoryInPropertyGrid = false;
     window.creator = creator;
     const root = ReactDOMClient.createRoot(document.getElementById("survey-creator"));
     root.render(React.createElement(React.StrictMode, {

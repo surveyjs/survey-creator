@@ -188,7 +188,7 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: true }) previewShowResults: boolean;
 
-  @property({ defaultValue: false }) private _showOneCategoryInPropertyGrid: boolean;
+  @property({ defaultValue: true }) private _showOneCategoryInPropertyGrid: boolean;
   get showOneCategoryInPropertyGrid(): boolean {
     return this._showOneCategoryInPropertyGrid;
   }

@@ -36,6 +36,7 @@
     creator.applyCreatorTheme(SurveyCreatorTheme.DefaultLight);
     creator.tabResponsivenessMode = "menu";
     creator["animationEnabled"] = false;
+    creator.showOneCategoryInPropertyGrid = false;
     window.creator = creator;
 
     class SurveyCreatorRenderComponent extends React.Component {
@@ -50,6 +51,7 @@
           this.setState({ creator });
           creator.tabResponsivenessMode = "menu";
           creator["animationEnabled"] = false;
+          creator.showOneCategoryInPropertyGrid = false;
           window.creator = creator;
         }
       }

@@ -23,6 +23,7 @@ const creator = shallowRef(new SurveyCreatorModel(props.options));
   creator.value = newCreator;
   creator.value.tabResponsivenessMode = "menu";
   creator.value["animationEnabled"] = false;
+  creator.value.showOneCategoryInPropertyGrid = false;
   (window as any).creator = creator.value;
 }
 </script>

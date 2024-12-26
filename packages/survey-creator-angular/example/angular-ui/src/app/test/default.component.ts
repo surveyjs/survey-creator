@@ -35,5 +35,6 @@ export class TestDefaultComponent implements OnInit {
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
     this.creator.tabResponsivenessMode = "menu";
     this.creator["animationEnabled"] = false;
+    this.creator.showOneCategoryInPropertyGrid = false;
   }
 }

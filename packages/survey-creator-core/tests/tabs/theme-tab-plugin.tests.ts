@@ -26,7 +26,7 @@ test("Creator top action bar: only theme tab", (): any => {
     ]
   };
   expect(creator.activeTab).toEqual("theme");
-
+  creator.showOneCategoryInPropertyGrid = false;
   expect(creator.toolbar.visibleActions.length).toEqual(6);
   let receivedOrder = creator.toolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(themeBuilderButtonOrder);
@@ -1473,6 +1473,7 @@ test("Theme settings action visibility", (): any => {
   expect(themePlugin["themeSettingsAction"].visible).toBeFalsy();
 
   creator.activeTab = "theme";
+  creator.showOneCategoryInPropertyGrid = false;
   expect(themePlugin["themeSettingsAction"].visible).toBeTruthy();
 
   expect(creator.isMobileView).toBeFalsy();

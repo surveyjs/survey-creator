@@ -13,5 +13,6 @@ export class TestByPageComponent extends TestDefaultComponent {
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, pageEditMode: "bypage" });
     this.creator.tabResponsivenessMode = "menu";
     this.creator["animationEnabled"] = false;
+    this.creator.showOneCategoryInPropertyGrid = false;
   }
 }

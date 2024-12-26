@@ -28,6 +28,7 @@
       const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
       creator.tabResponsivenessMode = "menu";
       creator["animationEnabled"] = false;
+  creator.showOneCategoryInPropertyGrid = false;
   window.creator = creator;
     ko.applyBindings({ creator: creator });
   </script>

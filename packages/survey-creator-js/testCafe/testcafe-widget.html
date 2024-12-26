@@ -61,6 +61,7 @@
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
     creator.tabResponsivenessMode = "menu";
     creator["animationEnabled"] = false;
+  creator.showOneCategoryInPropertyGrid = false;
     window.creator = creator;
   SurveyCreator.renderSurveyCreator(creator, document.getElementById("survey-creator"));
 </script>

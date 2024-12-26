@@ -15,5 +15,6 @@ export class ThemePreviewComponent extends TestDefaultComponent {
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", themeForPreview: "modern" });
     this.creator.tabResponsivenessMode = "menu";
     this.creator["animationEnabled"] = false;
+    this.creator.showOneCategoryInPropertyGrid = false;
   }
 }
