@@ -3888,6 +3888,7 @@ export class SurveyCreatorModel extends Base
   }
   @property({ defaultValue: false }) showHeaderInEmptySurvey;
   @property({ defaultValue: true }) public allowShowPageNavigator;
+  @property({ defaultValue: true }) public allowShowSurfaceToolbar;
   @property({ defaultValue: true }) private showPageNavigatorValue;
 
   public get showPageNavigator() {
@@ -3996,7 +3997,7 @@ export class SurveyCreatorModel extends Base
 
   public preferredColorPalette: string = "light";
 
-  public applyTheme(theme: ICreatorTheme): void {
+  public applyCreatorTheme(theme: ICreatorTheme): void {
     this.syncTheme(theme);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
     if (designerPlugin) {

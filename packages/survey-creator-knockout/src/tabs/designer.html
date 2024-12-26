@@ -62,7 +62,7 @@
       <!-- /ko -->
     </div>
 
-    <!-- ko ifnot: creator.isMobileView -->
+    <!-- ko if: showSurfaceTools -->
     <div class="svc-tab-designer__tools">
       <!-- ko if: creator.showPageNavigator -->
       <div class="svc-tab-designer__page-navigator">
@@ -70,7 +70,7 @@
         </svc-page-navigator>
       </div>
       <!-- /ko -->
-      <!-- ko if: hasToolbar -->
+      <!-- ko if: showSurfaceToolbar -->
       <div class="svc-tab-designer__toolbar">
         <!-- ko component: { name: 'sv-action-bar', params: { model: surfaceToolbar, handleClick: false } } -->
         <!-- /ko -->

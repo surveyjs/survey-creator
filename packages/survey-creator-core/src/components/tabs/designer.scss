@@ -16,7 +16,7 @@ svc-tab-designer {
   width: 0;
 }
 
-.svc-tab-designer--with-place-holder .svc-designer-header {
+.svc-tab-designer--with-placeholder .svc-designer-header {
   min-width: calcSize(84);
 }
 
@@ -87,7 +87,7 @@ svc-tab-designer {
   padding-inline-end: var(--ctr-survey-page-margin-left, calcSize(2));
 }
 
-.svc-tab-designer--with-place-holder {
+.svc-tab-designer--with-placeholder {
   .svc-tab-designer_content {
     display: flex;
     justify-content: center;
@@ -96,7 +96,7 @@ svc-tab-designer {
   }
 }
 
-.svc-tab-designer--with-page-navigator {
+.svc-tab-designer--with-surface-tools {
   .svc-tab-designer_content {
     padding-inline-start: var(--ctr-survey-page-margin-right-with-toolbar, calcSize(9));
     padding-inline-end: var(--ctr-survey-page-margin-left-with-toolbar, calcSize(9));

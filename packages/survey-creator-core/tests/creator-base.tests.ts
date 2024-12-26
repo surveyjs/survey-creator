@@ -4820,3 +4820,43 @@ test("propertyGridNavigationMode property", (): any => {
   creator.showOneCategoryInPropertyGrid = false;
   expect(creator.propertyGridNavigationMode).toBe("accordion");
 });
+test("showSurfaceTools", (): any => {
+  const creator = new CreatorTester();
+  const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(designerTabModel.showSurfaceTools).toBeFalsy();
+
+  creator.JSON = { pages: [{ name: "page1" }, { name: "page2" }] };
+  expect(designerTabModel.showSurfaceTools).toBeTruthy();
+
+  creator.isMobileView = true;
+  expect(designerTabModel.showSurfaceTools).toBeFalsy();
+
+  creator.isMobileView = false;
+  expect(designerTabModel.showSurfaceTools).toBeTruthy();
+
+  creator.JSON = { pages: [{ name: "page1" }] };
+  expect(designerTabModel.showSurfaceTools).toBeFalsy();
+
+  creator.expandCollapseButtonVisibility = "always";
+  expect(designerTabModel.showSurfaceTools).toBeTruthy();
+});
+
+test("Designer surface css classes", (): any => {
+  const savedNewJSON = settings.defaultNewSurveyJSON;
+  settings.defaultNewSurveyJSON = {};
+  const creator = new CreatorTester(undefined, undefined, false);
+  const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-placeholder svc-tab-designer--standard-mode");
+
+  creator.JSON = { pages: [{ name: "page1" }] };
+  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--standard-mode");
+
+  creator.expandCollapseButtonVisibility = "always";
+  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-surface-tools svc-tab-designer--standard-mode");
+
+  creator.expandCollapseButtonVisibility = "never";
+  creator.JSON = { pages: [{ name: "page1" }, { name: "page2" }] };
+  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-surface-tools svc-tab-designer--standard-mode");
+
+  settings.defaultNewSurveyJSON = savedNewJSON;
+});
