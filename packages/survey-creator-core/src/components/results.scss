@@ -4,129 +4,132 @@
   border-radius: var(--ctr-string-table-corner-radius, calcSize(0.5));
   box-shadow: inset 0px 1px 0px 0px var(--ctr-string-table-shadow-color, var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16))));
   padding: calc(12 * var(--sjs-base-unit, var(--base-unit, 8px)));
+}
 
-  .svd-test-results__header {
-    @include ctrDefaultFont;
+.svd-test-results__content {
+  box-shadow: var(--ctr-string-table-shadow-offset-x, 0px) var(--ctr-string-table-shadow-offset-y, 0px) var(--ctr-string-table-shadow-blur, 0px) var(--ctr-string-table-shadow-spread, 0px) var(--ctr-string-table-shadow-color, transparent);
+}
+
+.svd-test-results__header {
+  @include ctrDefaultFont;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--ctr-string-table-title-padding-top, calcSize(2)) var(--ctr-string-table-title-padding-right, calcSize(3)) var(--ctr-string-table-title-padding-bottom, calcSize(2)) var(--ctr-string-table-title-padding-left, calcSize(3));
+  color: var(--ctr-string-table-title-caption-color, $foreground-light);
+  border-bottom: var(--ctr-string-table-title-border-width-bottom, 2px) solid var(--ctr-string-table-title-border-color, $border-light);
+  background-color: var(--ctr-string-table-title-background-color, $background);
+
+  .svd-test-results__header-text {
+    margin: 0;
+  }
+
+  .svd-test-results__header-types {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--ctr-string-table-title-padding-top, calcSize(2)) var(--ctr-string-table-title-padding-right, calcSize(3)) var(--ctr-string-table-title-padding-bottom, calcSize(2)) var(--ctr-string-table-title-padding-left, calcSize(3));
-    color: var(--ctr-string-table-title-caption-color, $foreground-light);
-    border-bottom: var(--ctr-string-table-title-border-width-bottom, 2px) solid var(--ctr-string-table-title-border-color, $border-light);
-    background-color: var(--ctr-string-table-title-background-color, $background);
+    gap: var(--ctr-string-table-title-actionbar-gap, calcSize(1));
+  }
 
-    .svd-test-results__header-text {
-      margin: 0;
-    }
+  .svc-action-button {
+    color: var(--ctr-actionbar-button-text-color, $primary);
+    border-radius: var(--ctr-actionbar-button-corner-radius, calcSize(12.5));
+    background-color: transparent;
 
-    .svd-test-results__header-types {
-      display: flex;
-      gap: var(--ctr-string-table-title-actionbar-gap, calcSize(1));
-    }
-
-    .svc-action-button {
-      box-sizing: border-box;
-      color: var(--ctr-actionbar-button-text-color, $primary);
-      border-radius: var(--ctr-actionbar-button-corner-radius, calcSize(12.5));
-      background-color: transparent;
-
-      &:focus, &:hover {
-        background-color: var(--ctr-survey-action-button-background-color-hovered-positive, $primary-light);
-        outline: none;
-      }
-    }
-
-    .svc-action-button.svc-action-button--selected {
-      border: var(--ctr-actionbar-button-border-width-selected, calcSize(0.25)) solid var(--ctr-actionbar-button-border-color-selected, $primary);
+    &:focus, &:hover {
+      background-color: var(--ctr-survey-action-button-background-color-hovered-positive, $primary-light);
+      outline: none;
     }
   }
 
-  .svd-test-results__text {
-    @include ctrDefaultFont;
-    display: flex;
-    padding: var(--ctr-code-viewer-text-margin-top-results-table, calcSize(2)) var(--ctr-code-viewer-text-margin-right-results-table, calcSize(3)) var(--ctr-code-viewer-text-margin-bottom-results-table, calcSize(2)) var(--ctr-code-viewer-text-margin-left-results-table, calcSize(3));
-    width: calc(100% - calcSize(6));
-    overflow: auto;
-    user-select: text;
-    white-space: pre-wrap;
-    background: var(--ctr-code-viewer-background-color, $background);
-    color: var(--ctr-code-viewer-text-color, rgb(0, 0, 0));
+  .svc-action-button.svc-action-button--selected {
+    border: var(--ctr-actionbar-button-border-width-selected, calcSize(0.25)) solid var(--ctr-actionbar-button-border-color-selected, $primary);
   }
+}
 
-  .svd-test-results__table {
+.svd-test-results__text {
+  @include ctrDefaultFont;
+  display: flex;
+  padding: var(--ctr-code-viewer-text-margin-top-results-table, calcSize(2)) var(--ctr-code-viewer-text-margin-right-results-table, calcSize(3)) var(--ctr-code-viewer-text-margin-bottom-results-table, calcSize(2)) var(--ctr-code-viewer-text-margin-left-results-table, calcSize(3));
+  width: calc(100% - calcSize(6));
+  overflow: auto;
+  user-select: text;
+  white-space: pre-wrap;
+  background: var(--ctr-code-viewer-background-color, $background);
+  color: var(--ctr-code-viewer-text-color, rgb(0, 0, 0));
+}
+
+.svd-test-results__table {
+  width: 100%;
+  box-shadow: $shadow-small;
+
+  table {
     width: 100%;
-    box-shadow: $shadow-small;
+    border-collapse: collapse;
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .svd-test-results__marker {
+      position: absolute;
+      top: calcSize(1.5);
 
-      .svd-test-results__marker {
-        position: absolute;
-        top: calcSize(1.5);
+      .sv-svg-icon {
+        transition: transform 0.2s ease-in-out;
 
-        .sv-svg-icon {
-          transition: transform 0.2s ease-in-out;
-
-          use {
-            fill: var(--ctr-string-table-row-expand-button-icon-color-default, $foreground-light);
-          }
-        }
-
-        &.svd-test-results__marker--expanded .sv-svg-icon {
-          transform-origin: center;
-          transform: rotate(90deg);
+        use {
+          fill: var(--ctr-string-table-row-expand-button-icon-color-default, $foreground-light);
         }
       }
 
-      th {
-        @include ctrSmallBoldFont;
-        padding: var(--ctr-string-table-row-padding-top, calcSize(1)) var(--ctr-string-table-row-padding-right, calcSize(1)) var(--ctr-string-table-row-padding-bottom, calcSize(1)) var(--ctr-string-table-row-padding-left, calcSize(1));
-        background: var(--ctr-string-table-header-background-color, $background-dim);
-        text-align: left;
-        color: var(--ctr-string-table-header-text-color, $foreground-light);
+      &.svd-test-results__marker--expanded .sv-svg-icon {
+        transform-origin: center;
+        transform: rotate(90deg);
+      }
+    }
 
-        &:nth-child(1) {
-          padding-left: var(--ctr-string-table-row-padding-left, calcSize(3));
-        }
+    th {
+      @include ctrSmallBoldFont;
+      padding: var(--ctr-string-table-row-padding-top, calcSize(1)) var(--ctr-string-table-row-padding-right, calcSize(1)) var(--ctr-string-table-row-padding-bottom, calcSize(1)) var(--ctr-string-table-row-padding-left, calcSize(1));
+      background: var(--ctr-string-table-header-background-color, $background-dim);
+      text-align: left;
+      color: var(--ctr-string-table-header-text-color, $foreground-light);
+
+      &:nth-child(1) {
+        padding-left: var(--ctr-string-table-row-padding-left, calcSize(3));
+      }
+    }
+
+    td {
+      @include ctrDefaultFont;
+      padding: var(--ctr-string-table-row-padding-top, calcSize(1)) var(--ctr-string-table-row-padding-right, calcSize(1)) var(--ctr-string-table-row-padding-bottom, calcSize(1)) var(--ctr-string-table-row-padding-left, calcSize(1));
+      max-width: calcSize(50);
+      overflow: auto;
+      border-top: var(--ctr-string-table-row-border-width-top, 2px) solid var(--ctr-string-table-row-border-color, $border-light);
+      user-select: text;
+      background: var(--ctr-string-table-row-background-color, $background);
+
+      &:nth-child(1) {
+        @include ctrDefaultBoldFont;
+        position: relative;
+        width: 50%;
       }
 
-      td {
-        @include ctrDefaultFont;
-        padding: var(--ctr-string-table-row-padding-top, calcSize(1)) var(--ctr-string-table-row-padding-right, calcSize(1)) var(--ctr-string-table-row-padding-bottom, calcSize(1)) var(--ctr-string-table-row-padding-left, calcSize(1));
-        max-width: calcSize(50);
-        overflow: auto;
-        border-top: var(--ctr-string-table-row-border-width-top, 2px) solid var(--ctr-string-table-row-border-color, $border-light);
-        user-select: text;
-        background: var(--ctr-string-table-row-background-color, $background);
-
-        &:nth-child(1) {
-          @include ctrDefaultBoldFont;
-          position: relative;
-          width: 50%;
-        }
-
-        &:nth-child(2) {
-          width: 50%;
-          padding-right: var(--ctr-string-table-row-padding-right, calcSize(3));
-        }
+      &:nth-child(2) {
+        width: 50%;
+        padding-right: var(--ctr-string-table-row-padding-right, calcSize(3));
       }
+    }
 
-      .survey-result-value {
-        word-break: break-all;
-      }
+    .survey-result-value {
+      word-break: break-all;
+    }
 
-      tr {
-        vertical-align: top;
+    tr {
+      vertical-align: top;
 
-        .svd-test-results__node-value {
-          color: var(--ctr-string-table-row-text-color, $foreground-light);
-        }
+      .svd-test-results__node-value {
+        color: var(--ctr-string-table-row-text-color, $foreground-light);
       }
     }
   }
+}
 
-  .svd-dark-border-color {
-    color: var(--ctr-string-table-row-text-color-title, rgb(0, 0, 0));
-  }
+.svd-dark-border-color {
+  color: var(--ctr-string-table-row-text-color-title, rgb(0, 0, 0));
 }
