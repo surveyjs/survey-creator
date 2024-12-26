@@ -107,6 +107,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
   protected createDraggedElementShortcut(text: string, draggedElementNode?: HTMLElement, event?: PointerEvent): HTMLElement {
     const draggedElementShortcut = document.createElement("div");
+    draggedElementShortcut.style.display = "flex";
     const textSpan = document.createElement("span");
 
     textSpan.className = "svc-dragged-element-shortcut__text";

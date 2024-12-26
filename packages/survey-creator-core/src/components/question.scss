@@ -597,22 +597,18 @@ svc-question {
 
 .svc-dragged-element-shortcut--has-icon {
   padding: var(--ctr-toolbox-item-padding-top, calcSize(1)) var(--ctr-toolbox-item-padding-right, calcSize(3.5)) var(--ctr-toolbox-item-padding-bottom, calcSize(1)) var(--ctr-toolbox-item-padding-left, calcSize(1.5));
+  display: flex;
+  gap: var(--ctr-toolbox-item-gap, calcSize(1));
+  justify-content: center;
+  align-items: center;
 
   .svc-dragged-element-shortcut__text {
-    //https://github.com/postcss/postcss-calc/issues/77
-    //margin-inline-start: calc(var(--ctr-toolbox-item-icon-width, calcSize(3)) + var(--ctr-toolbox-item-gap, calcSize(1)));
-    margin-inline-start: calc(var(--ctr-toolbox-item-icon-width, 24px) + var(--ctr-toolbox-item-gap, 8px));
     display: block;
   }
 }
 
 .svc-dragged-element-shortcut__icon {
-  position: absolute;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  top: 0;
 
   svg {
     width: var(--ctr-toolbox-item-icon-width, calcSize(3));
