@@ -1,4 +1,5 @@
-import { ColorCalculator, HSBToRGB, RGBToHSB, capitalize } from "../src/utils/utils";
+import { capitalize } from "../src/utils/utils";
+import { ColorCalculator, HSBToRGB, RGBToHSB } from "../src/utils/color-utils";
 
 test("check capitalize function", () => {
   expect(capitalize("test str first")).toEqual("Test Str First");

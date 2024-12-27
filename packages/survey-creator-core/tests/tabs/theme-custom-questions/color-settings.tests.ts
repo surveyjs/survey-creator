@@ -1,6 +1,6 @@
 import { ComponentCollection, Serializer, SurveyModel } from "survey-core";
 import { createColor } from "../../../src/components/tabs/theme-custom-questions/color-alpha";
-import { parseColor } from "../../../src/utils/utils";
+import { parseColor } from "../../../src/utils/color-utils";
 
 export { QuestionFileEditorModel } from "../../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../../src/custom-questions/question-spin-editor";
