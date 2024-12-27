@@ -202,6 +202,23 @@ export class SurveyCreatorModel extends Base
       }
     });
   }
+  /**
+   * Specifies how users navigate categories in the Property Grid.
+   * 
+   * Accepted values:
+   * 
+   * - `"accordion"` (default)        
+   * The Property Grid displays a stacked list of categories that users can expand or collapse to reveal nested properties.
+   * 
+   * - `"buttons"`      
+   * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid. 
+   */
+  get propertyGridNavigationMode(): "buttons" | "accordion" {
+    return this.showOneCategoryInPropertyGrid ? "buttons" : "accordion";
+  }
+  set propertyGridNavigationMode(newValue: "buttons" | "accordion") {
+    this.showOneCategoryInPropertyGrid = newValue === "buttons";
+  }
 
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
@@ -250,7 +267,7 @@ export class SurveyCreatorModel extends Base
   /**
    * Specifies a default device for survey preview in the Preview tab.
    *
-   * Possible values:
+   * Accepted values:
    * 
    * - `"desktop"` (default)
    * - `"iPhoneSE"`
@@ -266,7 +283,7 @@ export class SurveyCreatorModel extends Base
   /**
    * Specifies the orientation of the selected device in the Preview tab.
    *
-   * Possible values:
+   * Accepted values:
    * 
    * - `"landscape"` (default)
    * - `"portrait"`
@@ -1189,7 +1206,7 @@ export class SurveyCreatorModel extends Base
   /**
    * Gets or sets the currently displayed tab.
    * 
-   * Possible values:
+   * Accepted values:
    * 
    * - [`"designer"`](#showDesignerTab)
    * - [`"test"`](#showPreviewTab)
@@ -2319,7 +2336,7 @@ export class SurveyCreatorModel extends Base
   /**
    * Indicates the state of Survey Creator.
    * 
-   * Possible values:
+   * Accepted values:
    * 
    * - `""` - Survey Creator doesn't have unsaved changes.
    * - `"modified"` - Survey Creator has unsaved changes.
@@ -3896,7 +3913,7 @@ export class SurveyCreatorModel extends Base
   /**
    * Specifies the Toolbox location.
    * 
-   * Possible values:
+   * Accepted values:
    * 
    * - `"left"` (default) - Displays the Toolbox on the left side of the design surface.
    * - `"right"` - Displays the Toolbox on the right side of the design surface.
@@ -3916,7 +3933,7 @@ export class SurveyCreatorModel extends Base
   /**
    * Specifies the position of the sidebar that displays the Property Grid. Applies only when [`showSidebar`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSidebar) is `true`.
    * 
-   * Possible values:
+   * Accepted values:
    * 
    * - `"right"` (default) - Displays the sidebar on the right side of the design surface.
    * - `"left"` - Displays the sidebar on the left side of the design surface.
@@ -3927,7 +3944,7 @@ export class SurveyCreatorModel extends Base
   /**
    * Specifies the visibility of the buttons that expand and collapse survey elements on the design surface.
    * 
-   * Possible values:
+   * Accepted values:
    * 
    * - `"onhover"` (default) - Displays an expand/collapse button when a survey element is hovered over or selected.
    * - `"always"` - Displays the expand/collapse buttons permanently.
