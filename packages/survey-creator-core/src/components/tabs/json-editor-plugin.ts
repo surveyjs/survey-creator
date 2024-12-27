@@ -2,7 +2,7 @@ import { Base, property, ListModel, Action, ComputedUpdater } from "survey-core"
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
-import { saveToFileHandler } from "../../utils/utils";
+import { saveToFileHandler } from "../../utils/html-element-utils";
 import { settings } from "../../creator-settings";
 
 const maxErrorLength = 150;
