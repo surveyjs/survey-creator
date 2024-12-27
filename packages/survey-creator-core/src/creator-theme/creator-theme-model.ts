@@ -1,7 +1,7 @@
 import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptions, ISaveToJSONOptions } from "survey-core";
 import { getLocString } from "../editorLocalization";
 import { assign, roundTo2Decimals } from "../utils/utils";
-import { ColorCalculator, colorsAreEqual } from "../utils/color-utils";
+import { ColorCalculator, colorsAreEqual, HueColorCalculator } from "../utils/color-utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import * as Themes from "survey-creator-core/themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
@@ -21,7 +21,8 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   themeCssVariablesChanges?: { [index: string]: string } = {};
   private primaryColorCalculator = new ColorCalculator();
   private secondaryColorCalculator = new ColorCalculator();
-  private backgroundColorCalculator = new ColorCalculator();
+  private specialGlowColorCalculator = new HueColorCalculator();
+  private specialHazeColorCalculator = new HueColorCalculator();
 
   unitDictionary: { [index: string]: number } = {
     "--ctr-font-unit": 8,
@@ -43,7 +44,13 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   private initializeColorCalculators(cssVariables: { [index: string]: string }) {
     this.initializeColorCalculator(this.primaryColorCalculator, cssVariables, "--sjs-primary-background-500", "--sjs-primary-background-10", "--sjs-primary-background-400");
     this.initializeColorCalculator(this.secondaryColorCalculator, cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-10", "--sjs-secondary-background-25");
-    this.initializeColorCalculator(this.backgroundColorCalculator, cssVariables, "--sjs-special-background", "--sjs-special-haze", "--sjs-special-glow");
+
+    if (!!cssVariables["--sjs-special-haze"]) {
+      this.specialHazeColorCalculator.initialize(cssVariables["--sjs-special-haze"]);
+    }
+    if (!!cssVariables["--sjs-special-glow"]) {
+      this.specialGlowColorCalculator.initialize(cssVariables["--sjs-special-glow"]);
+    }
   }
   private initializeColorCalculator(calculator: ColorCalculator, cssVariables: { [index: string]: string }, baseColorName: string, lightColorName: string, darkColorName: string) {
     if (!cssVariables[baseColorName] ||
@@ -67,6 +74,17 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     this.setPropertyValue(darkColorName, calculator.colorSettings.newColorDark);
     this.setThemeCssVariablesChanges(lightColorName, calculator.colorSettings.newColorLight);
     this.setThemeCssVariablesChanges(darkColorName, calculator.colorSettings.newColorDark);
+  }
+  private updateHueColorPropertiesDependentOnBackgroundColor(value: string, baseColorName: string, hazeColorName: string, glowColorName: string) {
+    this.setPropertyValue(baseColorName, value);
+    this.setThemeCssVariablesChanges(baseColorName, value);
+
+    const newSpecialHazeColor = this.specialHazeColorCalculator.calculateNewColor(value);
+    const newSpecialGlowColor = this.specialGlowColorCalculator.calculateNewColor(value);
+    this.setPropertyValue(hazeColorName, newSpecialHazeColor);
+    this.setPropertyValue(glowColorName, newSpecialGlowColor);
+    this.setThemeCssVariablesChanges(hazeColorName, newSpecialHazeColor);
+    this.setThemeCssVariablesChanges(glowColorName, newSpecialGlowColor);
   }
   private isSpecialBackgroundFromCurrentTheme() {
     const currentTheme = CreatorThemes[this.themeName];
@@ -152,7 +170,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     } else if (name === "--sjs-secondary-background-500") {
       this.updateColorPropertiesDependentOnBaseColor(this.secondaryColorCalculator, newValue, "--sjs-secondary-background-500", "--sjs-secondary-background-10", "--sjs-secondary-background-25");
     } else if (name === "--sjs-special-background") {
-      this.updateColorPropertiesDependentOnBaseColor(this.backgroundColorCalculator, newValue, "--sjs-special-background", "--sjs-special-haze", "--sjs-special-glow");
+      this.updateHueColorPropertiesDependentOnBackgroundColor(newValue, "--sjs-special-background", "--sjs-special-haze", "--sjs-special-glow");
     } else if (name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(name, newValue);
     } else if (name == "fontScale" || name == "scale") {

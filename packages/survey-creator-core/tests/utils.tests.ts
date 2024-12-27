@@ -1,5 +1,5 @@
 import { capitalize } from "../src/utils/utils";
-import { ColorCalculator, HSBToRGB, RGBToHSB } from "../src/utils/color-utils";
+import { ColorCalculator, HSBToRGB, HueColorCalculator, RGBToHSB } from "../src/utils/color-utils";
 
 test("check capitalize function", () => {
   expect(capitalize("test str first")).toEqual("Test Str First");
@@ -85,4 +85,15 @@ test("ColorCalculator hex", (): any => {
     newColorDark: "rgba(23, 164, 136, 1)",
     newColorLight: "rgba(25, 179, 148, 0.1)"
   });
+});
+
+test("HueColorCalculator hex", (): any => {
+  const glowColor = "#004C441A"; // HSB 174, 100, 30
+  const tealColor = "#EFF9F9";
+  const purpleColor = "#F8F4FE";
+  const colorCalculator = new HueColorCalculator();
+
+  colorCalculator.initialize(glowColor);
+  expect(colorCalculator.calculateNewColor(purpleColor)).toEqual("rgba(30, 0, 76, 0.1)");
+  expect(colorCalculator.calculateNewColor(tealColor)).toEqual("rgba(0, 76, 76, 0.1)");
 });
