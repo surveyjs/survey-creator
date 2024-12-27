@@ -887,36 +887,62 @@ export class SurveyCreatorModel extends Base
   /**
    * Limits the number of columns that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel), and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumColumnsCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxColumns`)
    */
-  public maximumColumnsCount: number =
-    settings.propertyGrid.maximumColumnsCount;
+  public maxColumns: number =
+    settings.propertyGrid.maximumColumnsCount || settings.propertyGrid.maxColumns;
+  /**
+   * Obsolete. Use `maxColumns` instead.
+   */
+  public get maximumColumnsCount() { return this.maxColumns; }
+  public set maximumColumnsCount(val) { this.maxColumns = val; }
   /**
    * Limits the number of choices that users can add to [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumChoicesCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxChoices`)
    */
-  public maximumChoicesCount: number =
-    settings.propertyGrid.maximumChoicesCount;
+  public maxChoices: number =
+    settings.propertyGrid.maximumChoicesCount || settings.propertyGrid.maxChoices;
+  /**
+   * Obsolete. Use `maxChoices` instead.
+   */
+  public get maximumChoicesCount() { return this.maxChoices; }
+  public set maximumChoicesCount(val) { this.maxChoices = val; }
+
   /**
    * Limits the minimum number of choices in [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions. Set this property if users should not delete choices below the specified limit.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.minimumChoicesCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.minChoices`)
    */
-  public minimumChoicesCount: number =
-    settings.propertyGrid.minimumChoicesCount;
+  public minChoices: number =
+    settings.propertyGrid.minimumChoicesCount || settings.propertyGrid.minChoices;
+  /**
+   * Obsolete. Use `minChoices` instead.
+   */
+  public get minimumChoicesCount() { return this.minChoices; }
+  public set minimumChoicesCount(val) { this.minChoices = val; }
   /**
    * Limits the number of rows that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRowsCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxRows`)
    */
-  public maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
+  public maxRows: number = settings.propertyGrid.maximumRowsCount || settings.propertyGrid.maxRows;
+  /**
+   * Obsolete. Use `maxRows` instead.
+   */
+  public get maximumRowsCount() { return this.maxRows; }
+  public set maximumRowsCount(val) { this.maxRows = val; }
   /**
    * Limits the number of rate values that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxRateValues`)
    */
-  public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+  public maxRateValues: number = settings.propertyGrid.maximumRateValues || settings.propertyGrid.maxRateValues;
+  /**
+   * Obsolete. Use `maxRateValues` instead.
+   */
+  public get maximumRateValues() { return this.maxRateValues; }
+  public set maximumRateValues(val) { this.maxRateValues = val; }
 
   /**
    * Limits the number of nested panels within a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element.
