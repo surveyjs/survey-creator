@@ -999,6 +999,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         panel.getQuestionByName("removeAction").visible = options.value.length !== 1;
       });
     }
+    this.title = this.isReady ? this.text : editorLocalization.getString("pe.ruleIsNotSet");
   }
   private showTextEditor(expression: string) {
     this.panel.visible = false;
