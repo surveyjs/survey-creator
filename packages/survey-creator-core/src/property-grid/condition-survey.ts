@@ -999,13 +999,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         panel.getQuestionByName("removeAction").visible = options.value.length !== 1;
       });
     }
-    this.setTitle();
   }
-  private setTitle() {
-    const text = this.isReady ? this.text : "";
-    this.title = this.options.onConditionGetTitleCallback(text, text || editorLocalization.getString("pe.ruleIsNotSet"));
-  }
-
   private showTextEditor(expression: string) {
     this.panel.visible = false;
     this.textEditor.value = expression;

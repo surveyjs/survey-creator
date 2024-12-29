@@ -3437,17 +3437,6 @@ export class SurveyCreatorModel extends Base
     }
     return options.sortOrder;
   }
-  onConditionGetTitleCallback(
-    expression: string,
-    title: string
-  ): string {
-    var options = {
-      expression: expression,
-      title: title,
-    };
-    this.onConditionGetTitle.fire(this, options);
-    return options.title;
-  }
   isConditionOperatorEnabled(questionName: string, question: Question, operator: string, isEnabled: boolean): boolean {
     if (this.onGetConditionOperator.isEmpty) return isEnabled;
     const options = {
