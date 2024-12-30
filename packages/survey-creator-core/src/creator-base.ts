@@ -916,7 +916,8 @@ export class SurveyCreatorModel extends Base
   public get previewAllowSelectPage(): boolean { return this.showPagesInTestSurveyTab; }
   public set previewAllowSelectPage(val: boolean) { this.showPagesInTestSurveyTab = val; }
   /**
-   * Obsolete. Use `previewAllowSelectPage` instead.
+   * Obsolete. Use the [`previewAllowSelectPage`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewAllowSelectPage) property instead.
+   * @deprecated
    */
   public get showPagesInPreviewTab(): boolean { return this.showPagesInTestSurveyTab; }
   public set showPagesInPreviewTab(val: boolean) { this.showPagesInTestSurveyTab = val; }
@@ -930,7 +931,8 @@ export class SurveyCreatorModel extends Base
   public get previewAllowSimulateDevices(): boolean { return this.showSimulatorInTestSurveyTab; }
   public set previewAllowSimulateDevices(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
   /**
-   * Obsolete. Use `previewAllowSimulateDevices` instead.
+   * Obsolete. Use the [`previewAllowSimulateDevices`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewAllowSimulateDevices) property instead.
+   * @deprecated
    */
   public get showSimulatorInPreviewTab(): boolean { return this.showSimulatorInTestSurveyTab; }
   public set showSimulatorInPreviewTab(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
@@ -943,7 +945,10 @@ export class SurveyCreatorModel extends Base
    * @see previewAllowSelectTheme
    */
   public previewTheme: string = "defaultV2";
-
+  /**
+   * Obsolete. Use the [`previewTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewTheme) property instead.
+   * @deprecated
+   */
   public get themeForPreview() { return this.previewTheme; }
   public set themeForPreview(val) { this.previewTheme = val; }
 
@@ -1069,7 +1074,8 @@ export class SurveyCreatorModel extends Base
   public get previewAllowSelectLanguage(): boolean | string { return this.showDefaultLanguageInTestSurveyTab; }
   public set previewAllowSelectLanguage(val: boolean | string) { this.showDefaultLanguageInTestSurveyTab = val; }
   /**
-   * Obsolete. Use `previewAllowSelectLanguage` instead.
+   * Obsolete. Use the [`previewAllowSelectLanguage`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewAllowSelectLanguage) property instead.
+   * @deprecated
    */
   public get showDefaultLanguageInPreviewTab(): boolean | string { return this.showDefaultLanguageInTestSurveyTab; }
   public set showDefaultLanguageInPreviewTab(val: boolean | string) { this.showDefaultLanguageInTestSurveyTab = val; }
@@ -1083,7 +1089,8 @@ export class SurveyCreatorModel extends Base
   public get previewAllowHiddenElements(): boolean { return this.showInvisibleElementsInTestSurveyTab; }
   public set previewAllowHiddenElements(val: boolean) { this.showInvisibleElementsInTestSurveyTab = val; }
   /**
-   * Obsolete. Use `previewAllowHiddenElements` instead.
+   * Obsolete. Use the [`previewAllowHiddenElements`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewAllowHiddenElements) property instead.
+   * @deprecated
    */
   public get showInvisibleElementsInPreviewTab(): boolean { return this.showInvisibleElementsInTestSurveyTab; }
   public set showInvisibleElementsInPreviewTab(val: boolean) { this.showInvisibleElementsInTestSurveyTab = val; }
@@ -1098,7 +1105,8 @@ export class SurveyCreatorModel extends Base
    */
   public previewAllowSelectTheme = true;
   /**
-   * Obsolete. Use `previewAllowSelectTheme` instead.
+   * Obsolete. Use the [`previewAllowSelectTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewAllowSelectTheme) property instead.
+   * @deprecated
    */
   get allowChangeThemeInPreview() { return this.previewAllowSelectTheme; }
   set allowChangeThemeInPreview(val) { this.previewAllowSelectTheme = val; }

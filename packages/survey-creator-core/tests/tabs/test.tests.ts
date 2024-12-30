@@ -701,7 +701,7 @@ test("Change theme action hidden", (): any => {
   let testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();
   expect(testPlugin["changeThemeAction"]).toBeDefined();
-  creator = new CreatorTester({ allowChangeThemeInPreview: false });
+  creator = new CreatorTester({ previewAllowSelectTheme: false });
   testPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();
   expect(testPlugin["changeThemeAction"]).toBeUndefined();

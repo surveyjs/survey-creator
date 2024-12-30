@@ -114,7 +114,8 @@ export interface ICreatorOptions {
    */
   previewAllowSelectPage?: boolean;
   /**
-   * Obsolete. Use `previewAllowSelectPage` instead.
+   * Obsolete. Use the [`previewAllowSelectPage`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectPage) property instead.
+   * @deprecated
    */
   showPagesInPreviewTab?: boolean;
   /**
@@ -126,7 +127,8 @@ export interface ICreatorOptions {
    */
   previewTheme?: string;
   /**
-   * Obsolete. Use `previewTheme` instead.
+   * Obsolete. Use the [`previewTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewTheme) property instead.
+   * @deprecated
    */
   themeForPreview?: string;
   /**
@@ -136,7 +138,8 @@ export interface ICreatorOptions {
    */
   previewAllowSimulateDevices?: boolean;
   /**
-   * Obsolete. Use `previewAllowSimulateDevices` instead.
+   * Obsolete. Use the [`previewAllowSimulateDevices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSimulateDevices) property instead.
+   * @deprecated
    */
   showSimulatorInPreviewTab?: boolean;
   /**
@@ -160,7 +163,8 @@ export interface ICreatorOptions {
    */
   previewAllowSelectLanguage?: boolean | string;
   /**
-   * Obsolete. Use `previewAllowSelectLanguage` instead.
+   * Obsolete. Use the [`previewAllowSelectLanguage`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectLanguage) property instead.
+   * @deprecated
    */
   showDefaultLanguageInPreviewTab?: boolean | string;
   /**
@@ -170,7 +174,8 @@ export interface ICreatorOptions {
    */
   previewAllowHiddenElements?: boolean;
   /**
-   * Obsolete. Use `previewAllowHiddenElements` instead.
+   * Obsolete. Use the [`previewAllowHiddenElements`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowHiddenElements) property instead.
+   * @deprecated
    */
   showInvisibleElementsInPreviewTab?: boolean;
   /**
@@ -248,6 +253,11 @@ export interface ICreatorOptions {
    * Default value: `true`
    *
    * [View Demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
+   */
+  previewAllowSelectTheme?: boolean;
+  /**
+   * Obsolete. Use the [`previewAllowSelectTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectTheme) property instead.
+   * @deprecated
    */
   allowChangeThemeInPreview?: boolean;
   /**
