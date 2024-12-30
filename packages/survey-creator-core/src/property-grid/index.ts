@@ -279,8 +279,8 @@ export var PropertyGridEditorCollection = {
     var row = options.row;
     if (!!row) {
       const questions = row.questions;
-      for(let i = 0; i < questions.length; i ++) {
-        if(questions[i].errors.length > 0) return;
+      for (let i = 0; i < questions.length; i++) {
+        if (questions[i].errors.length > 0) return;
       }
       var cellQuestion = row.getQuestionByName(options.columnName);
       if (!!cellQuestion) {
@@ -2082,7 +2082,7 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     if (!survey) return [];
     var questions = this.getQuestions(survey, obj);
     if (!questions) questions = [];
-    var showTitles = !!options && options.showTitlesInExpressions;
+    var showTitles = !!options && (options.useElementTitles || options.showTitlesInExpressions);
     var qItems = questions.map((q) => {
       let text = showTitles ? (<any>q).locTitle.renderedHtml : q.name;
       if (!!options) text = options.getObjectDisplayName(q, "property-grid:property-editor", "property-editor", text);
