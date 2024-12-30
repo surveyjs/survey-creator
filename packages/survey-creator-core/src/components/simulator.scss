@@ -11,7 +11,6 @@
   top: 50%;
   left: 50%;
   transform: scale(1.26) translate(-50%, -50%);
-  overflow: overlay;
   border: 2px solid $border-inside;
 }
 
@@ -63,14 +62,6 @@
   // border-bottom: 1px solid $border-inside;
   box-shadow: inset 0px -1px 0px 0px $border-inside;
   position: relative;
-}
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-
-  ::i-block-chrome,
-  .svd-simulator-content {
-    overflow-y: scroll;
-  }
 }
 
 .svd-simulator .sv-popup--overlay {
