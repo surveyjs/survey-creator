@@ -500,7 +500,7 @@ test("Page navigator has enough space to be shown", async (t) => {
     });
     await ClientFunction(() => { document.body.focus(); })();
     await t.hover(Selector(".svc-designer-header"), { offsetX: 1, offsetY: 1 }).wait(500);
-    const designSurface = Selector(".svc-tab-designer--with-page-navigator");
+    const designSurface = Selector(".svc-tab-designer--with-surface-tools");
     await t.expect(designSurface.visible).ok();
     await takeElementScreenshot("page-navigator-not-overlaped.png", designSurface, t, comparer);
   });
@@ -591,7 +591,7 @@ test("Page navigator in by-page mode has enough space to be shown", async (t) =>
     });
     await ClientFunction(() => { document.body.focus(); })();
     await t.hover(Selector(".svc-designer-header"), { offsetX: 1, offsetY: 1 }).wait(500);
-    const designSurface = Selector(".svc-tab-designer--with-page-navigator");
+    const designSurface = Selector(".svc-tab-designer--with-surface-tools");
     await t.expect(designSurface.visible).ok();
     await takeElementScreenshot("page-navigator-by-page-not-overlaped.png", designSurface, t, comparer);
   });

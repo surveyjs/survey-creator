@@ -13,7 +13,7 @@ import {
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionToDisplayText } from "../../expressionToDisplayText";
 import { ISurveyCreatorOptions } from "../../creator-settings";
-import { wrapTextByCurlyBraces } from "../../utils/utils";
+import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 
 export function getLogicString(name: string) {
   return editorLocalization.getString("ed.lg." + name);

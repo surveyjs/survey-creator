@@ -8,7 +8,8 @@ import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVaria
 import { createBoxShadowReset, trimBoxShadowValue } from "./theme-custom-questions/shadow-effects";
 import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
-import { ColorCalculator, assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
+import { assign, roundTo2Decimals } from "../../utils/utils";
+import { ColorCalculator, ingectAlpha, parseColor } from "../../utils/color-utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import { SurveyCreatorModel } from "../../creator-base";

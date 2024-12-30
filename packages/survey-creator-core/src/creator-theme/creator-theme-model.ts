@@ -1,6 +1,7 @@
 import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptions, ISaveToJSONOptions } from "survey-core";
 import { getLocString } from "../editorLocalization";
-import { assign, roundTo2Decimals, ColorCalculator, colorsAreEqual } from "../utils/utils";
+import { assign, roundTo2Decimals } from "../utils/utils";
+import { ColorCalculator, colorsAreEqual } from "../utils/color-utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import * as Themes from "survey-creator-core/themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";

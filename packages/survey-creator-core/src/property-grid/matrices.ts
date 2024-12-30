@@ -2,7 +2,7 @@ import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, J
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
-import { getAcceptedTypesByContentMode, getNextItemText, getNextValue, getQuestionFromObj } from "../utils/utils";
+import { getNextItemText, getNextValue, getQuestionFromObj } from "../utils/creator-utils";
 import { FastEntryEditor, FastEntryEditorBase } from "./fast-entry";
 import {
   IPropertyEditorSetup,
