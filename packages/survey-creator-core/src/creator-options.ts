@@ -112,6 +112,10 @@ export interface ICreatorOptions {
    *
    * Default value: `true`
    */
+  previewAllowSelectPage?: boolean;
+  /**
+   * Obsolete. Use `previewAllowSelectPage` instead.
+   */
   showPagesInPreviewTab?: boolean;
   /**
    * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
@@ -120,11 +124,19 @@ export interface ICreatorOptions {
    *
    * Default value: `"defaultV2"`
    */
+  previewTheme?: string;
+  /**
+   * Obsolete. Use `previewTheme` instead.
+   */
   themeForPreview?: string;
   /**
    * Specifies whether the Preview tab displays the Device button that allows users to preview the survey on different device types.
    *
    * Default value: `true`
+   */
+  previewAllowSimulateDevices?: boolean;
+  /**
+   * Obsolete. Use `previewAllowSimulateDevices` instead.
    */
   showSimulatorInPreviewTab?: boolean;
   /**
@@ -146,11 +158,19 @@ export interface ICreatorOptions {
    *
    * **See also**: [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
    */
+  previewAllowSelectLanguage?: boolean | string;
+  /**
+   * Obsolete. Use `previewAllowSelectLanguage` instead.
+   */
   showDefaultLanguageInPreviewTab?: boolean | string;
   /**
    * Specifies whether the Preview tab displays a checkbox that allows users to show or hide invisible survey elements.
    *
    * Default value: `true`
+   */
+  previewAllowHiddenElements?: boolean;
+  /**
+   * Obsolete. Use `previewAllowHiddenElements` instead.
    */
   showInvisibleElementsInPreviewTab?: boolean;
   /**

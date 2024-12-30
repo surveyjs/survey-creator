@@ -92,7 +92,7 @@ export class TabTestPlugin implements ICreatorPlugin {
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("test", this);
-    this.setPreviewTheme(this.creator.themeForPreview);
+    this.setPreviewTheme(this.creator.previewTheme);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
@@ -227,7 +227,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     });
     let availableThemesToItems = this.getAvailableThemes(themeMapper);
 
-    if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1 && !this.creator.showThemeTab) {
+    if (this.creator.previewAllowSelectTheme && availableThemesToItems.length > 1 && !this.creator.showThemeTab) {
       this.changeThemeModel = new ListModel(
         availableThemesToItems,
         (item: any) => {

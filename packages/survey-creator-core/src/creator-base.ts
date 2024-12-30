@@ -913,6 +913,11 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `true`
    */
+  public get previewAllowSelectPage(): boolean { return this.showPagesInTestSurveyTab; }
+  public set previewAllowSelectPage(val: boolean) { this.showPagesInTestSurveyTab = val; }
+  /**
+   * Obsolete. Use `previewAllowSelectPage` instead.
+   */
   public get showPagesInPreviewTab(): boolean { return this.showPagesInTestSurveyTab; }
   public set showPagesInPreviewTab(val: boolean) { this.showPagesInTestSurveyTab = val; }
 
@@ -922,18 +927,25 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `true`
    */
+  public get previewAllowSimulateDevices(): boolean { return this.showSimulatorInTestSurveyTab; }
+  public set previewAllowSimulateDevices(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
+  /**
+   * Obsolete. Use `previewAllowSimulateDevices` instead.
+   */
   public get showSimulatorInPreviewTab(): boolean { return this.showSimulatorInTestSurveyTab; }
   public set showSimulatorInPreviewTab(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
-
   /**
    * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
    *
    * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
    *
    * Default value: `"defaultV2"`
-   * @see allowChangeThemeInPreview
+   * @see previewAllowSelectTheme
    */
-  public themeForPreview: string = "defaultV2";
+  public previewTheme: string = "defaultV2";
+
+  public get themeForPreview() { return this.previewTheme; }
+  public set themeForPreview(val) { this.previewTheme = val; }
 
   //#region Theme
 
@@ -1054,6 +1066,11 @@ export class SurveyCreatorModel extends Base
    *
    * [Localization & Globalization](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages (linkStyle))
    */
+  public get previewAllowSelectLanguage(): boolean | string { return this.showDefaultLanguageInTestSurveyTab; }
+  public set previewAllowSelectLanguage(val: boolean | string) { this.showDefaultLanguageInTestSurveyTab = val; }
+  /**
+   * Obsolete. Use `previewAllowSelectLanguage` instead.
+   */
   public get showDefaultLanguageInPreviewTab(): boolean | string { return this.showDefaultLanguageInTestSurveyTab; }
   public set showDefaultLanguageInPreviewTab(val: boolean | string) { this.showDefaultLanguageInTestSurveyTab = val; }
 
@@ -1062,6 +1079,11 @@ export class SurveyCreatorModel extends Base
    * Specifies whether the Preview tab displays a toggle that allows users to show or hide invisible survey elements.
    *
    * Default value: `true`
+   */
+  public get previewAllowHiddenElements(): boolean { return this.showInvisibleElementsInTestSurveyTab; }
+  public set previewAllowHiddenElements(val: boolean) { this.showInvisibleElementsInTestSurveyTab = val; }
+  /**
+   * Obsolete. Use `previewAllowHiddenElements` instead.
    */
   public get showInvisibleElementsInPreviewTab(): boolean { return this.showInvisibleElementsInTestSurveyTab; }
   public set showInvisibleElementsInPreviewTab(val: boolean) { this.showInvisibleElementsInTestSurveyTab = val; }
@@ -1072,9 +1094,15 @@ export class SurveyCreatorModel extends Base
    * Default value: `true`
    *
    * [View Demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
-   * @see themeForPreview
+   * @see previewTheme
    */
-  public allowChangeThemeInPreview = true;
+  public previewAllowSelectTheme = true;
+  /**
+   * Obsolete. Use `previewAllowSelectTheme` instead.
+   */
+  get allowChangeThemeInPreview() { return this.previewAllowSelectTheme; }
+  set allowChangeThemeInPreview(val) { this.previewAllowSelectTheme = val; }
+
   private _tabResponsivenessMode: "menu" | "icons" = "menu";
   public get tabResponsivenessMode(): "menu" | "icons" {
     return this._tabResponsivenessMode;
