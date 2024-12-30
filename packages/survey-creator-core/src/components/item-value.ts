@@ -13,7 +13,7 @@ import { SurveyCreatorModel } from "../creator-base";
 import { DragDropChoices } from "survey-core";
 require("./item-value.scss");
 import { getLocString } from "../editorLocalization";
-import { getNextItemText } from "../utils/utils";
+import { getNextItemText } from "../utils/creator-utils";
 import { ICollectionItemAllowOperations } from "../creator-settings";
 import { StringEditorConnector } from "./string-editor";
 

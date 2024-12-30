@@ -28,7 +28,7 @@
     }
   }
 
-  .sv-popup__button--cancel {
+  .sv-popup__button {
     background: var(--ctr-button-background-color, $background);
     color: var(--ctr-button-text-color, $primary);
 
@@ -43,6 +43,15 @@
 
     &:hover {
       background: var(--ctr-button-background-color-cta-hovered, $primary-background-dark);
+    }
+  }
+
+  .sd-btn--danger {
+    background: var(--ctr-button-background-color-danger, $red);
+    color: var(--ctr-button-text-color-danger, $red-forecolor);
+
+    &:hover {
+      background: var(--ctr-button-background-color-danger-hovered, $red);
     }
   }
 }

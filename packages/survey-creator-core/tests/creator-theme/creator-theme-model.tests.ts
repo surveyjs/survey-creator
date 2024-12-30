@@ -5,7 +5,7 @@ import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "../../src
 
 import "survey-core/survey.i18n";
 import { PredefinedBackgroundColors, PredefinedColors } from "../../src/components/tabs/themes";
-import { colorsAreEqual } from "../../src/utils/utils";
+import { colorsAreEqual } from "../../src/utils/color-utils";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
 
