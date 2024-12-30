@@ -1,5 +1,5 @@
 <template>
-        <Common :options="{ showLogicTab: true, showTranslationTab: true }" :use-slk="true"></Common>
+        <Common :options="{ expandCollapseButtonVisibility: 'never',  showLogicTab: true, showTranslationTab: true }" :use-slk="true"></Common>
 </template>
 <script lang="ts" setup>
 import { localization } from 'survey-creator-core';

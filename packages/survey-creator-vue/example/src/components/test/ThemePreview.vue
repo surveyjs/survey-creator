@@ -1,5 +1,5 @@
 <template>
-        <Common :options="{ themeForPreview: 'modern' }" :use-slk="true"></Common>
+        <Common :options="{ expandCollapseButtonVisibility: 'never',  themeForPreview: 'modern' }" :use-slk="true"></Common>
 </template>
 <script lang="ts" setup>
 import Common from './Common.vue';

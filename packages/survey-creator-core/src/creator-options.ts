@@ -35,7 +35,7 @@ export interface ICreatorOptions {
   /**
    * Specifies whether to display the Logic tab.
    *
-   * Default value: `false`
+   * Default value: `true`
    */
   showLogicTab?: boolean;
   /**

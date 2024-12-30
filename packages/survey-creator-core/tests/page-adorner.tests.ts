@@ -6,6 +6,7 @@ import { CreatorTester } from "./creator-tester";
 
 test("Check page adorner css on drag over", (): any => {
   const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "never";
   creator.JSON = {
     pages: [
       { name: "page1" },
@@ -27,6 +28,7 @@ test("Check page adorner css on drag over", (): any => {
 
 test("Check page adorner css on drag over", (): any => {
   const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "never";
   creator.JSON = {
     pages: [
       { name: "page1" },
@@ -82,6 +84,7 @@ test("Check page getAnimatedElement methods", () => {
 });
 test("Check css when dragging page over top/bottom", () => {
   const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "never";
   creator.JSON = {
     pages: [
       { name: "page1" },

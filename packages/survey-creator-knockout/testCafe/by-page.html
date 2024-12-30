@@ -25,8 +25,12 @@
   </div>
   <script>
     window.surveyJSFramework = "ko";
-    const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true, pageEditMode: "bypage" });
-    window.creator = creator;
+      const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, pageEditMode: "bypage" });
+      creator.tabResponsivenessMode = "menu";
+      creator["animationEnabled"] = false;
+  creator.showOneCategoryInPropertyGrid = false;
+
+      window.creator = creator;
     ko.applyBindings({ creator: creator });
   </script>
 </body>

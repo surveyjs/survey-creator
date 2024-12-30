@@ -31,8 +31,11 @@
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
-    const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
+    const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
     window.creator = creator;
+    creator.tabResponsivenessMode = "menu";
+    creator["animationEnabled"] = false;
+    creator.showOneCategoryInPropertyGrid = false;
 
     class SurveyCreatorRenderComponent extends React.Component {
       constructor(props) {
@@ -43,6 +46,9 @@
           const creator = new SurveyCreator.SurveyCreator(options);
           creator.JSON = json;
           this.setState({ creator });
+          creator.tabResponsivenessMode = "menu";
+          creator["animationEnabled"] = false;
+          creator.showOneCategoryInPropertyGrid = false;
           window.creator = creator;
         }
       }

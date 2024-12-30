@@ -26,7 +26,10 @@
   </div>
   <script>
     window.surveyJSFramework = "ko";
-    const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
+      const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
+        creator.tabResponsivenessMode = "menu";
+        creator["animationEnabled"] = false;
+  creator.showOneCategoryInPropertyGrid = false;
     window.creator = creator;
     ko.applyBindings({ creator: creator });
     window.updateCreatorModel = (options, json) => {
@@ -35,6 +38,9 @@
       ko.cleanNode(document.body);
       const creator = new SurveyCreator.SurveyCreator(options);
       creator.JSON = json;
+      creator.tabResponsivenessMode = "menu";
+      creator["animationEnabled"] = false;
+      creator.showOneCategoryInPropertyGrid = false;
       window.creator = creator;
       ko.applyBindings({ creator: creator });
     }
