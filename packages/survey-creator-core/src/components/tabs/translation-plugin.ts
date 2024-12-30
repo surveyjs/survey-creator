@@ -133,6 +133,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
     this.creator.sidebar.hideSideBarVisibilityControlActions = false;
+    this.creator.sidebar.header.reset();
     return true;
   }
   private updateTabControl() {

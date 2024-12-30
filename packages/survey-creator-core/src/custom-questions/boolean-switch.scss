@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables" as *;
 
 .spg-boolean-switch,
 .spg-boolean-switch * {
@@ -50,6 +50,10 @@
 
   .spg-boolean-switch__thumb--right {
     background: var(--ctr-toggle-button-thumb-background-color-checked, #ffffff);
+  }
+
+  &:hover {
+    background: var(--ctr-toggle-button-background-color-checked, #19b394);
   }
 
   &:focus {

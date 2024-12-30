@@ -16,7 +16,7 @@ import {
   ItemValue,
   QuestionPanelDynamicModel
 } from "survey-core";
-import { getNextValue, getNextItemText } from "../src/utils/utils";
+import { getNextValue, getNextItemText } from "../src/utils/creator-utils";
 import { editorLocalization } from "../src/editorLocalization";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
 import { CreatorTester } from "./creator-tester";

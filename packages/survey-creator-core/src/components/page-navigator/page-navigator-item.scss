@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@use "../../variables" as *;
 
 svc-page-navigator-item,
 .svc-page-navigator-item {
@@ -60,7 +60,6 @@ svc-page-navigator-item,
 }
 
 .svc-page-navigator-item__banner {
-  display: flex;
   @include textEllipsis;
   padding: var(--ctr-page-navigator-item-padding-top, calcSize(1)) var(--ctr-page-navigator-item-padding-right, calcSize(1.5)) var(--ctr-page-navigator-item-padding-bottom, calcSize(1)) var(--ctr-page-navigator-item-padding-left-hovered, calcSize(2));
   justify-content: flex-end;
@@ -78,6 +77,8 @@ svc-page-navigator-item,
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 1;
+  display: none;
 
   .svc-page-navigator-item__dot-content {
     width: var(--ctr-page-navigator-item-dot-radius-large, calcSize(1));
@@ -109,6 +110,7 @@ svc-page-navigator-item,
 .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):focus {
 
   .svc-page-navigator-item__banner {
+    display: flex;
     opacity: 1;
   }
 }

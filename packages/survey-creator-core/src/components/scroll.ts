@@ -17,6 +17,8 @@ export class ScrollViewModel {
   private _scrollbarSizerElement: HTMLElement;
   private _containerBodyResizeObserver: ResizeObserver;
 
+  private _lockScroll = false;
+
   constructor() {
     //this.dragTypeOverMe = this.row.dragTypeOverMe;
   }
@@ -40,10 +42,15 @@ export class ScrollViewModel {
   }
 
   public onScrollContainer() {
+    this._lockScroll = true;
     this._scrollbarElement.scrollTop = this._containerElementValue.scrollTop;
   }
 
   public onScrollScrollbar() {
+    if (this._lockScroll) {
+      this._lockScroll = false;
+      return;
+    }
     this._containerElementValue.scrollTop = this._scrollbarElement.scrollTop;
   }
 

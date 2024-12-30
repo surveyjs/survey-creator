@@ -13,7 +13,7 @@ export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShow
 
 export class TabDesignerViewModel extends Base {
   private minSurfaceScaling = 20;
-  private maxSurfaceScaling = 200;
+  private maxSurfaceScaling = 100;
   private stepSurfaceScaling = 10;
   private cssUpdater: ComputedUpdater;
   private pagesControllerValue: PagesController;
@@ -190,7 +190,7 @@ export class TabDesignerViewModel extends Base {
   }
 
   private scaleSurface(scaleFactor: number): void {
-    if (scaleFactor <= this.minSurfaceScaling || scaleFactor >= this.maxSurfaceScaling) return;
+    if (scaleFactor < this.minSurfaceScaling || scaleFactor > this.maxSurfaceScaling) return;
 
     this.surfaceScale = scaleFactor;
     if (!this.creator.survey.responsiveStartWidth) {
@@ -231,9 +231,14 @@ export class TabDesignerViewModel extends Base {
       return getLocString("ed.surveyPlaceholderDescriptionMobile");
     return getLocString("ed.surveyPlaceholderDescription");
   }
-  public get hasToolbar() {
-    return this.creator.expandCollapseButtonVisibility != "never" || this.creator.showCreatorThemeSettings;
+  public get showSurfaceToolbar(): boolean {
+    const hasVisibleItems = this.surfaceToolbar.actions.some((action) => action.visible);
+    return this.creator.allowShowSurfaceToolbar && hasVisibleItems;
   }
+  public get showSurfaceTools(): boolean {
+    return !this.creator.isMobileView && (this.showSurfaceToolbar || (this.creator.showPageNavigator && (this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage")));
+  }
+
   private isUpdatingNewPage: boolean;
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {
     if (!obj || this.isUpdatingNewPage) return;
@@ -380,11 +385,11 @@ export class TabDesignerViewModel extends Base {
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;
-    if (!this.creator.isMobileView && (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage" || this.hasToolbar)) {
-      rootCss += " svc-tab-designer--with-page-navigator";
+    if (this.showSurfaceTools) {
+      rootCss += " svc-tab-designer--with-surface-tools";
     }
     if (this.showPlaceholder) {
-      rootCss += " svc-tab-designer--with-place-holder";
+      rootCss += " svc-tab-designer--with-placeholder";
     }
     rootCss += " svc-tab-designer--" + this.creator.pageEditMode + "-mode";
     return rootCss;

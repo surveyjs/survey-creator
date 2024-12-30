@@ -12,7 +12,7 @@ import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabViewModel } from "../../src/components/tabs/theme-builder";
 import { settings } from "../../src/creator-settings";
-import { assign, parseColor } from "../../src/utils/utils";
+import { assign } from "../../src/utils/utils";
 import { PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 
 test("Creator top action bar: only theme tab", (): any => {
