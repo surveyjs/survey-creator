@@ -315,10 +315,6 @@ export interface ISurveyCreatorOptions {
     list: any[],
     variables: string[]
   ): string;
-  onConditionGetTitleCallback(
-    expression: string,
-    title: string
-  ): string;
   isConditionOperatorEnabled(questionName: string, question: Question, operator: string, isEnabled: boolean): boolean;
   onLogicGetTitleCallback(
     expression: string,
@@ -488,12 +484,6 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     list: any[],
     variables: string[]
   ): string { return "asc"; }
-  onConditionGetTitleCallback(
-    expression: string,
-    title: string
-  ): string {
-    return title;
-  }
   isConditionOperatorEnabled(questionName: string, question: Question, operator: string, isEnabled: boolean): boolean { return isEnabled; }
   onLogicGetTitleCallback(
     expression: string,
