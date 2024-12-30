@@ -103,6 +103,7 @@ export class ThemeModel extends Base implements ITheme {
   public undoRedoManager: UndoRedoManager;
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();
+  private dependentColorNames = ["--sjs-primary-backcolor-light", "--sjs-primary-backcolor-dark"];
 
   @property() backgroundImage: string;
   @property() backgroundImageFit: "auto" | "contain" | "cover";
@@ -198,25 +199,24 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   private initializeColorCalculator(cssVariables: { [index: string]: string }) {
-    if (!cssVariables["--sjs-primary-backcolor"] ||
-      !cssVariables["--sjs-primary-backcolor-light"] ||
-      !cssVariables["--sjs-primary-backcolor-dark"]) {
+    const baseColorName = "--sjs-primary-backcolor";
+    const cssValuesExists = this.dependentColorNames.every(name => !!cssVariables[name]);
+    if (!cssVariables[baseColorName] || !cssValuesExists) {
       return;
     }
 
-    this.colorCalculator.initialize(
-      cssVariables["--sjs-primary-backcolor"],
-      cssVariables["--sjs-primary-backcolor-light"],
-      cssVariables["--sjs-primary-backcolor-dark"]
-    );
+    const dependentColorValues = this.dependentColorNames.map(name => { return cssVariables[name]; });
+    this.colorCalculator.initializeColorSettings(cssVariables[baseColorName], dependentColorValues);
   }
 
   private updatePropertiesDependentOnPrimaryColor(value: string) {
-    this.colorCalculator.calculateColors(value);
-    this.setPropertyValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
-    this.setPropertyValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
-    this.setThemeCssVariablesChanges("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
-    this.setThemeCssVariablesChanges("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+    if (!this.colorCalculator.isInitialized) return;
+
+    const newDependentColors = this.colorCalculator.calculateDependentColorValues(value);
+    this.dependentColorNames.forEach((name, index) => {
+      this.setPropertyValue(name, newDependentColors[index]);
+      this.setThemeCssVariablesChanges(name, newDependentColors[index]);
+    });
   }
   private cssVariablePropertiesChanged(name: string, value: any, property: JsonObjectProperty) {
     let nameProcessed = true;
