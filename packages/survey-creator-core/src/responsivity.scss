@@ -1,10 +1,6 @@
 @use "./variables" as *;
 
 .svc-creator--mobile {
-  .svc-tab-designer {
-    overflow-y: overlay;
-  }
-
   .sd-root-modern,
   .sd-container-modern {
     --sd-base-padding: calc(3 * #{$base-unit});
