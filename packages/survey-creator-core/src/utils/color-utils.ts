@@ -1,67 +1,49 @@
 import { roundTo2Decimals } from "./utils";
 
 export class ColorCalculator {
-  colorSetting = { colorAlpha: 1, deltaColor: 0 };
-  colorSettings = { baseColorAlpha: 1, darkColorAlpha: 1, lightColorAlpha: 1, deltaDarkColor: 0, deltaLightColor: 0, newColorLight: "", newColorDark: "" };
+  colorSettings: Array<{ colorAlpha: number, colorDelta: number }> = [];
+  isInitialized = false;
 
-  initialize(baseColor: string, lightColor: string, darkColor: string) {
-    const primaryColorRgba = getRGBaChannelValues(baseColor);
-    const primaryColorDarkRgba = getRGBaChannelValues(darkColor);
-    const primaryColorLightRgba = getRGBaChannelValues(lightColor);
-
-    this.colorSettings.baseColorAlpha = primaryColorRgba[3];
-    this.colorSettings.darkColorAlpha = primaryColorDarkRgba[3];
-    this.colorSettings.lightColorAlpha = primaryColorLightRgba[3];
-
-    const primaryColorHSB = RGBToHSB(primaryColorRgba[0], primaryColorRgba[1], primaryColorRgba[2]);
-    const primaryColorDarkHSB = RGBToHSB(primaryColorDarkRgba[0], primaryColorDarkRgba[1], primaryColorDarkRgba[2]);
-    const primaryColorLightHSB = RGBToHSB(primaryColorLightRgba[0], primaryColorLightRgba[1], primaryColorLightRgba[2]);
-
-    this.colorSettings.deltaDarkColor = primaryColorHSB[2] - primaryColorDarkHSB[2];
-    this.colorSettings.deltaLightColor = primaryColorHSB[2] - primaryColorLightHSB[2];
-  }
-
-  calculateColors(newColor: string) {
-    const newColorRbg = getRGBaChannelValues(newColor);
-    const newColorHsb = RGBToHSB(newColorRbg[0], newColorRbg[1], newColorRbg[2]);
-    const newPrimaryColorDarkRGB = HSBToRGB(newColorHsb[0], newColorHsb[1], newColorHsb[2] - this.colorSettings.deltaDarkColor);
-    const newPrimaryColorLightRGB = HSBToRGB(newColorHsb[0], newColorHsb[1], newColorHsb[2] - this.colorSettings.deltaLightColor);
-
-    this.colorSettings.newColorLight = convertRgbaToString(newPrimaryColorLightRGB, this.colorSettings.lightColorAlpha);
-    this.colorSettings.newColorDark = convertRgbaToString(newPrimaryColorDarkRGB, this.colorSettings.darkColorAlpha);
-  }
-
-  initializeColorSetting(baseColor: string, dependentСolor: string) {
+  initializeColorSettings(baseColor: string, dependentСolorValues: Array<string>) {
     const baseColorRgba = getRGBaChannelValues(baseColor);
-    const dependentСolorRgba = getRGBaChannelValues(dependentСolor);
-    this.colorSetting.colorAlpha = dependentСolorRgba[3];
+    dependentСolorValues.forEach((dependentСolor: string) => {
+      const dependentСolorRgba = getRGBaChannelValues(dependentСolor);
+      const colorAlpha = dependentСolorRgba[3];
 
-    const baseColorHSB = RGBToHSB(baseColorRgba[0], baseColorRgba[1], baseColorRgba[2]);
-    const colorHSB = RGBToHSB(dependentСolorRgba[0], dependentСolorRgba[1], dependentСolorRgba[2]);
-
-    this.colorSetting.deltaColor = baseColorHSB[2] - colorHSB[2];
+      const baseColorHSB = RGBToHSB(baseColorRgba[0], baseColorRgba[1], baseColorRgba[2]);
+      const colorHSB = RGBToHSB(dependentСolorRgba[0], dependentСolorRgba[1], dependentСolorRgba[2]);
+      const colorDelta = baseColorHSB[2] - colorHSB[2];
+      this.colorSettings.push({ colorAlpha, colorDelta });
+    });
+    this.isInitialized = !!this.colorSettings.length;
   }
 
-  calculateNewColor(newColor: string): string {
-    let newColorRbg = getRGBaChannelValues(newColor);
-    const newColorHsb = RGBToHSB(newColorRbg[0], newColorRbg[1], newColorRbg[2]);
-    const newColorLightRGB = HSBToRGB(newColorHsb[0], newColorHsb[1], newColorHsb[2] - this.colorSetting.deltaColor);
-    const resultColor = convertRgbaToString(newColorLightRGB, this.colorSetting.colorAlpha);
-    return resultColor;
+  calculateDependentColorValues(newBaseColor: string): Array<string> {
+    let newBaseColorRbg = getRGBaChannelValues(newBaseColor);
+    const newBaseColorHsb = RGBToHSB(newBaseColorRbg[0], newBaseColorRbg[1], newBaseColorRbg[2]);
+    const result = this.colorSettings.map(setting => {
+      const newColorLightRGB = HSBToRGB(newBaseColorHsb[0], newBaseColorHsb[1], newBaseColorHsb[2] - setting.colorDelta);
+      return convertRgbaToString(newColorLightRGB, setting.colorAlpha);
+    });
+    return result;
   }
 }
 
 export class HueColorCalculator {
   colorHsb: Array<number>;
   colorAlpha: number;
+  isInitialized = false;
 
   initialize(baseColor: string): void {
     const colorRbg = getRGBaChannelValues(baseColor);
-    this.colorHsb = RGBToHSB(colorRbg[0], colorRbg[1], colorRbg[2]);
-    this.colorAlpha = colorRbg[3];
+    this.isInitialized = !!colorRbg.length;
+    if (this.isInitialized) {
+      this.colorHsb = RGBToHSB(colorRbg[0], colorRbg[1], colorRbg[2]);
+      this.colorAlpha = colorRbg[3];
+    }
   }
 
-  calculateNewColor(baseColor: string): string {
+  calculateDependentColorValue(baseColor: string): string {
     const baseColorRbg = getRGBaChannelValues(baseColor);
     const baseColorHsb = RGBToHSB(baseColorRbg[0], baseColorRbg[1], baseColorRbg[2]);
     const newColorRGB = HSBToRGB(baseColorHsb[0], this.colorHsb[1], this.colorHsb[2]);

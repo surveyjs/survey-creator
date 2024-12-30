@@ -43,7 +43,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
   private initializeColorCalculators(cssVariables: { [index: string]: string }) {
     this.initializeColorCalculator(this.primaryColorCalculator, cssVariables, "--sjs-primary-background-500", "--sjs-primary-background-10", "--sjs-primary-background-400");
-    this.initializeColorCalculator(this.secondaryColorCalculator, cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-10", "--sjs-secondary-background-25");
+    this.initializeColorCalculator(this.secondaryColorCalculator, cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-10", "--sjs-secondary-background-25", "--sjs-secondary-background-400");
 
     if (!!cssVariables["--sjs-special-haze"]) {
       this.specialHazeColorCalculator.initialize(cssVariables["--sjs-special-haze"]);
@@ -52,39 +52,41 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.specialGlowColorCalculator.initialize(cssVariables["--sjs-special-glow"]);
     }
   }
-  private initializeColorCalculator(calculator: ColorCalculator, cssVariables: { [index: string]: string }, baseColorName: string, lightColorName: string, darkColorName: string) {
-    if (!cssVariables[baseColorName] ||
-      !cssVariables[lightColorName] ||
-      !cssVariables[darkColorName]) {
+  private initializeColorCalculator(calculator: ColorCalculator, cssVariables: { [index: string]: string }, baseColorName: string, ...dependentColorNames: Array<string>) {
+    const cssValuesExist = dependentColorNames.every(name => !!cssVariables[name]);
+    if (!cssVariables[baseColorName] || !cssValuesExist) {
       return;
     }
 
-    calculator.initialize(
-      cssVariables[baseColorName],
-      cssVariables[lightColorName],
-      cssVariables[darkColorName]
-    );
+    const dependentColorValues = dependentColorNames.map(name => { return cssVariables[name]; });
+    calculator.initializeColorSettings(cssVariables[baseColorName], dependentColorValues);
   }
 
-  private updateColorPropertiesDependentOnBaseColor(calculator: ColorCalculator, value: string, baseColorName: string, lightColorName: string, darkColorName: string) {
+  private updateColorPropertiesDependentOnBaseColor(calculator: ColorCalculator, value: string, baseColorName: string, ...dependentColorNames: Array<string>) {
     this.setPropertyValue(baseColorName, value);
     this.setThemeCssVariablesChanges(baseColorName, value);
-    calculator.calculateColors(value);
-    this.setPropertyValue(lightColorName, calculator.colorSettings.newColorLight);
-    this.setPropertyValue(darkColorName, calculator.colorSettings.newColorDark);
-    this.setThemeCssVariablesChanges(lightColorName, calculator.colorSettings.newColorLight);
-    this.setThemeCssVariablesChanges(darkColorName, calculator.colorSettings.newColorDark);
+
+    if (!calculator.isInitialized) return;
+    const newDependentColorsValues = calculator.calculateDependentColorValues(value);
+    dependentColorNames.forEach((name, index) => {
+      this.setPropertyValue(name, newDependentColorsValues[index]);
+      this.setThemeCssVariablesChanges(name, newDependentColorsValues[index]);
+    });
   }
   private updateHueColorPropertiesDependentOnBackgroundColor(value: string, baseColorName: string, hazeColorName: string, glowColorName: string) {
     this.setPropertyValue(baseColorName, value);
     this.setThemeCssVariablesChanges(baseColorName, value);
 
-    const newSpecialHazeColor = this.specialHazeColorCalculator.calculateNewColor(value);
-    const newSpecialGlowColor = this.specialGlowColorCalculator.calculateNewColor(value);
-    this.setPropertyValue(hazeColorName, newSpecialHazeColor);
-    this.setPropertyValue(glowColorName, newSpecialGlowColor);
-    this.setThemeCssVariablesChanges(hazeColorName, newSpecialHazeColor);
-    this.setThemeCssVariablesChanges(glowColorName, newSpecialGlowColor);
+    if (this.specialHazeColorCalculator.isInitialized) {
+      const newSpecialHazeColor = this.specialHazeColorCalculator.calculateDependentColorValue(value);
+      this.setPropertyValue(hazeColorName, newSpecialHazeColor);
+      this.setThemeCssVariablesChanges(hazeColorName, newSpecialHazeColor);
+    }
+    if (this.specialGlowColorCalculator.isInitialized) {
+      const newSpecialGlowColor = this.specialGlowColorCalculator.calculateDependentColorValue(value);
+      this.setPropertyValue(glowColorName, newSpecialGlowColor);
+      this.setThemeCssVariablesChanges(glowColorName, newSpecialGlowColor);
+    }
   }
   private isSpecialBackgroundFromCurrentTheme() {
     const currentTheme = CreatorThemes[this.themeName];
@@ -168,7 +170,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.updateColorPropertiesDependentOnBaseColor(this.primaryColorCalculator, newValue, "--sjs-primary-background-500", "--sjs-primary-background-10", "--sjs-primary-background-400");
       this.updateBackgroundColor(newValue, oldValue);
     } else if (name === "--sjs-secondary-background-500") {
-      this.updateColorPropertiesDependentOnBaseColor(this.secondaryColorCalculator, newValue, "--sjs-secondary-background-500", "--sjs-secondary-background-10", "--sjs-secondary-background-25");
+      this.updateColorPropertiesDependentOnBaseColor(this.secondaryColorCalculator, newValue, "--sjs-secondary-background-500", "--sjs-secondary-background-10", "--sjs-secondary-background-25", "--sjs-secondary-background-400");
     } else if (name === "--sjs-special-background") {
       this.updateHueColorPropertiesDependentOnBackgroundColor(newValue, "--sjs-special-background", "--sjs-special-haze", "--sjs-special-glow");
     } else if (name.indexOf("--") === 0) {
