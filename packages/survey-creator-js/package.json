@@ -85,8 +85,8 @@
     "puppeteer": "22.13.1"
   },
   "dependencies": {
-    "survey-core": "../../../survey-library/build/survey-core",
-    "survey-creator-core": "../survey-creator-core/build",
-    "survey-js-ui": "../../../survey-library/build/survey-js-ui"
+    "survey-core": "../../../survey-library/packages/survey-core/build",
+    "survey-js-ui": "../../../survey-library/packages/survey-js-ui/build",
+    "survey-creator-core": "../survey-creator-core/build"
   }
 }
