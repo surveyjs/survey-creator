@@ -96,7 +96,7 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: $(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
+          SourceFolder: $(Build.SourcesDirectory)/survey-library/packages/survey-core/build
           Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules/survey-core"
           OverWrite: true
