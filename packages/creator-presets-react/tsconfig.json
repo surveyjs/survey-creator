@@ -27,6 +27,12 @@
       ],
       "creator-presets-react": [
         "./src/entries/index.ts"
+      ],
+      "react": [
+        "./node_modules/@types/react"
+      ],
+      "react-dom": [
+        "./node_modules/@types/react-dom"
       ]
     }
   },
