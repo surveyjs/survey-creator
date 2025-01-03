@@ -16,6 +16,12 @@
       ],
       "survey-creator-core": [
         "./node_modules/survey-creator-core"
+      ],
+      "react": [
+        "./node_modules/@types/react"
+      ],
+      "react-dom": [
+        "./node_modules/@types/react-dom"
       ]
     },
     "declaration": true,
