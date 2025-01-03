@@ -11,7 +11,7 @@ import {
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { ISurveyCreatorOptions } from "./creator-settings";
-import { wrapTextByCurlyBraces } from "./utils/utils";
+import { wrapTextByCurlyBraces } from "./utils/creator-utils";
 
 export enum ObjType {
   Unknown = "unknown",

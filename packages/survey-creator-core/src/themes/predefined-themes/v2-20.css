@@ -829,8 +829,8 @@
   --ctr-string-table-row-border-width-bottom: var(--sjs-stroke-x1);
   --ctr-string-table-row-text-color-placeholder: var(--sjs-layer-1-foreground-50);
   --ctr-string-table-row-text-color-title: var(--sjs-layer-1-foreground-100);
-  --ctr-string-table-row-expand-button-icon-width: var(--sjs-font-size-x3);
-  --ctr-string-table-row-expand-button-icon-height: var(--sjs-font-size-x3);
+  --ctr-string-table-row-expand-button-icon-width: var(--sjs-font-size-x2);
+  --ctr-string-table-row-expand-button-icon-height: var(--sjs-font-size-x2);
   --ctr-string-table-row-expand-button-margin-right: var(--sjs-spacing-x1);
   --ctr-string-table-row-expand-button-icon-color-default: var(--sjs-layer-1-foreground-50);
   --ctr-string-table-header-background-color: var(--sjs-layer-3-background-500);
@@ -3375,5 +3375,11 @@
   --ctr-actionbar-button-border-width-highlighed: var(--sjs-stroke-x2);
   --ctr-survey-question-panel-toolbar-item-text-color-selected: var(--sjs-layer-1-foreground-100);
   --ctr-survey-question-panel-toolbar-item-icon-color-selected: var(--sjs-secondary-background-500);
+  --ctr-actionbar-button-background-color-hovered-colorful: var(--sjs-primary-background-10);
+  --ctr-actionbar-button-background-color-hovered-negative: var(--sjs-semantic-red-background-10);
+  --ctr-actionbar-button-text-color-negative: var(--sjs-semantic-red-background-500);
+  --ctr-actionbar-button-icon-color-negative: var(--sjs-semantic-red-background-500);
+  --ctr-actionbar-button-icon-color-with-text-hovered-negative: var(--sjs-semantic-red-background-500);
+  --ctr-actionbar-button-icon-color-with-text-negative: var(--sjs-semantic-red-background-500);
 }
 

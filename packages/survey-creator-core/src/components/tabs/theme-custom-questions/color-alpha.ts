@@ -1,6 +1,6 @@
 import { ComponentCollection, Question, QuestionCompositeModel, Serializer } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
-import { ingectAlpha, parseColor, parseRgbaFromString } from "../../../utils/utils";
+import { ingectAlpha, parseColor, parseRgbaFromString } from "../../../utils/color-utils";
 function getElementsJSON() {
   return [
     {

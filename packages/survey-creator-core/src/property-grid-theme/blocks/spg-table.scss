@@ -1,3 +1,6 @@
+@use "../../variables.scss" as *;
+@use "./variables.scss" as *;
+
 .spg-table-wrapper {
   border: var(--ctr-data-table-border-width, 1px) solid var(--ctr-data-table-border-color, $border);
   border-radius: var(--ctr-data-table-corner-radius, 0px);

@@ -30,25 +30,27 @@ export class SurveyResults extends CreatorModelElement<
     }
     return (
       <div className="svd-test-results">
-        <div className="svd-test-results__header">
-          <div className="svd-test-results__header-text">{this.model.surveyResultsText}</div>
-          <div className="svd-test-results__header-types">
-            <ActionButton
-              click={() => this.model.selectTableClick()}
-              text={this.model.surveyResultsTableText}
-              selected={this.model.isTableSelected}
-              disabled={false}
-            ></ActionButton>
-            <ActionButton
-              click={() => this.model.selectJsonClick()}
-              text={this.model.surveyResultsJsonText}
-              selected={this.model.isJsonSelected}
-              disabled={false}
-            ></ActionButton>
+        <div className="svd-test-results__content">
+          <div className="svd-test-results__header">
+            <div className="svd-test-results__header-text">{this.model.surveyResultsText}</div>
+            <div className="svd-test-results__header-types">
+              <ActionButton
+                click={() => this.model.selectTableClick()}
+                text={this.model.surveyResultsTableText}
+                selected={this.model.isTableSelected}
+                disabled={false}
+              ></ActionButton>
+              <ActionButton
+                click={() => this.model.selectJsonClick()}
+                text={this.model.surveyResultsJsonText}
+                selected={this.model.isJsonSelected}
+                disabled={false}
+              ></ActionButton>
+            </div>
           </div>
+          {this.renderResultAsText()}
+          {this.renderResultAsTable()}
         </div>
-        {this.renderResultAsText()}
-        {this.renderResultAsTable()}
       </div>
     );
   }

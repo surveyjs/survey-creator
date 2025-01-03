@@ -79,7 +79,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private updateActivePage() {
     if (this.showOneCategoryInPropertyGrid) {
       this.setActivePage(this.creator.survey.pageCount ? this.propertyGridTab.id : this.propertyGridPlaceholderPage.id);
-      this.updateHeaderComponent();
     } else {
       this.setPropertyGridIsActivePage();
     }

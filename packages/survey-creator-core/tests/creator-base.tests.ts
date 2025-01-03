@@ -845,8 +845,16 @@ test("Create new page on changing title/description in ghost & creator.onModifie
   });
   newPage.description = "desc1";
   newPage.title = "title1";
-  expect(logs).toStrictEqual([{ type: "PROPERTY_CHANGED", name: "description" },
-    { type: "PROPERTY_CHANGED", name: "title" }]);
+  expect(logs).toStrictEqual([
+    {
+      type: "PROPERTY_CHANGED",
+      name: "description"
+    },
+    {
+      type: "PROPERTY_CHANGED",
+      name: "title"
+    }
+  ]);
 });
 test("Don't add extra subscriptions and fully unsubscribe title/description changes in ghost page", (): any => {
   const creator = new CreatorTester();
@@ -4739,23 +4747,24 @@ test("onModified options, on adding page and on copying page", () => {
 
 test("ZoomIn/ZoomOut designer surface", (): any => {
   const creator = new CreatorTester();
-  const designerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
-  expect(designerTab["surfaceScale"]).toBe(100);
+  const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(designerTabModel["surfaceScale"]).toBe(100);
   expect(creator.themeVariables).toStrictEqual({});
 
-  designerTab["scaleSurface"](10);
-  expect(designerTab["surfaceScale"]).toBe(100);
-  expect(creator.themeVariables).toStrictEqual({});
-  expect(creator.survey.widthScale).toBe(100);
-
-  designerTab["scaleSurface"](200);
-  expect(designerTab["surfaceScale"]).toBe(100);
+  designerTabModel["scaleSurface"](10);
+  expect(designerTabModel["surfaceScale"]).toBe(100);
   expect(creator.themeVariables).toStrictEqual({});
   expect(creator.survey.widthScale).toBe(100);
 
-  designerTab["scaleSurface"](150);
+  designerTabModel["scaleSurface"](200);
+  expect(designerTabModel["surfaceScale"]).toBe(100);
+  expect(creator.themeVariables).toStrictEqual({});
+  expect(creator.survey.widthScale).toBe(100);
+
+  designerTabModel["maxSurfaceScaling"] = 200;
+  designerTabModel["scaleSurface"](150);
   expect(creator.survey.widthScale).toBe(150);
-  expect(designerTab["surfaceScale"]).toBe(150);
+  expect(designerTabModel["surfaceScale"]).toBe(150);
   expect(creator.themeVariables).toStrictEqual({
     "--ctr-surface-base-unit": "12px",
     "--lbr-corner-radius-unit": "12px",
@@ -4765,4 +4774,97 @@ test("ZoomIn/ZoomOut designer surface", (): any => {
     "--lbr-spacing-unit": "12px",
     "--lbr-stroke-unit": "1.5px"
   });
+});
+
+test("ZoomIn/ZoomOut actions limits", (): any => {
+  const creator = new CreatorTester();
+  const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
+  const zoomInAction = designerTabModel.surfaceToolbar.getActionById("zoomIn");
+  const zoomOutAction = designerTabModel.surfaceToolbar.getActionById("zoomOut");
+  const zoom100Action = designerTabModel.surfaceToolbar.getActionById("zoom100");
+
+  expect(designerTabModel["surfaceScale"]).toBe(100);
+  expect(creator.survey.widthScale).toBe(100);
+
+  zoomInAction.action();
+  expect(designerTabModel["surfaceScale"]).toBe(100);
+  expect(creator.survey.widthScale).toBe(100);
+
+  zoomOutAction.action();
+  expect(designerTabModel["surfaceScale"]).toBe(90);
+  expect(creator.survey.widthScale).toBe(90);
+
+  zoomOutAction.action();
+  zoomOutAction.action();
+  zoomOutAction.action();
+  zoomOutAction.action();
+  zoomOutAction.action();
+  zoomOutAction.action();
+  expect(designerTabModel["surfaceScale"]).toBe(30);
+  expect(creator.survey.widthScale).toBe(30);
+
+  zoomOutAction.action();
+  expect(designerTabModel["surfaceScale"]).toBe(20);
+  expect(creator.survey.widthScale).toBe(20);
+
+  zoomOutAction.action();
+  expect(designerTabModel["surfaceScale"]).toBe(20);
+  expect(creator.survey.widthScale).toBe(20);
+
+  zoom100Action.action();
+  expect(designerTabModel["surfaceScale"]).toBe(100);
+  expect(creator.survey.widthScale).toBe(100);
+});
+
+test("propertyGridNavigationMode property", (): any => {
+  const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "buttons";
+  expect(creator.showOneCategoryInPropertyGrid).toBeTruthy();
+  creator.propertyGridNavigationMode = "accordion";
+  expect(creator.showOneCategoryInPropertyGrid).toBeFalsy();
+
+  creator.showOneCategoryInPropertyGrid = true;
+  expect(creator.propertyGridNavigationMode).toBe("buttons");
+  creator.showOneCategoryInPropertyGrid = false;
+  expect(creator.propertyGridNavigationMode).toBe("accordion");
+});
+test("showSurfaceTools", (): any => {
+  const creator = new CreatorTester();
+  const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(designerTabModel.showSurfaceTools).toBeFalsy();
+
+  creator.JSON = { pages: [{ name: "page1" }, { name: "page2" }] };
+  expect(designerTabModel.showSurfaceTools).toBeTruthy();
+
+  creator.isMobileView = true;
+  expect(designerTabModel.showSurfaceTools).toBeFalsy();
+
+  creator.isMobileView = false;
+  expect(designerTabModel.showSurfaceTools).toBeTruthy();
+
+  creator.JSON = { pages: [{ name: "page1" }] };
+  expect(designerTabModel.showSurfaceTools).toBeFalsy();
+
+  creator.expandCollapseButtonVisibility = "always";
+  expect(designerTabModel.showSurfaceTools).toBeTruthy();
+});
+
+test("Designer surface css classes", (): any => {
+  const savedNewJSON = settings.defaultNewSurveyJSON;
+  settings.defaultNewSurveyJSON = {};
+  const creator = new CreatorTester(undefined, undefined, false);
+  const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-placeholder svc-tab-designer--standard-mode");
+
+  creator.JSON = { pages: [{ name: "page1" }] };
+  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--standard-mode");
+
+  creator.expandCollapseButtonVisibility = "always";
+  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-surface-tools svc-tab-designer--standard-mode");
+
+  creator.expandCollapseButtonVisibility = "never";
+  creator.JSON = { pages: [{ name: "page1" }, { name: "page2" }] };
+  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-surface-tools svc-tab-designer--standard-mode");
+
+  settings.defaultNewSurveyJSON = savedNewJSON;
 });

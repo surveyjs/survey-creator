@@ -1,5 +1,5 @@
 import { Action, ComputedUpdater, CssClassBuilder, IAction, IsTouch, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
-import { parseColor } from "../utils/utils";
+import { parseColor } from "../utils/color-utils";
 import { listComponentCss } from "../components/list-theme";
 
 const DEFAULT_COLOR: string = "#000000";

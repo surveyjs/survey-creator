@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@use "../../variables" as *;
 
 .svc-tab-translation {
   width: 100%;
@@ -114,6 +114,10 @@
 
 .st-root-modern {
   width: 100%;
+  height: fit-content;
+  max-height: 100%;
+  overflow-y: auto;
+  background-color: var(--ctr-string-table-background-color, $background-dim); 
 }
 
 .st-title.st-panel__title,

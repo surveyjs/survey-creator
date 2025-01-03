@@ -741,6 +741,21 @@ test("Dropdown input in property grid", async (t) => {
     await takeElementScreenshot("pg-dropdown-editor-input.png", Selector(".spg-dropdown[aria-label='Select a survey language']"), t, comparer);
   });
 });
+test("Dropdown clean button in property grid", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1240, 870);
+    const dropdownSelector = Selector(".spg-dropdown[aria-label='Select a survey language']");
+    await t
+      .click(surveySettingsButtonSelector)
+      .click(dropdownSelector)
+      .pressKey("I t a l i a n o")
+      .pressKey("enter");
+
+    await takeElementScreenshot("pg-dropdown-clean-button.png", dropdownSelector, t, comparer);
+    await t.hover(Selector(".spg-dropdown__clean-button"));
+    await takeElementScreenshot("pg-dropdown-clean-button-hover.png", dropdownSelector, t, comparer);
+  });
+});
 
 test("Property grid checkbox with description", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {

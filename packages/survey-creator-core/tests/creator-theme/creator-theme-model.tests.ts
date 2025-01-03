@@ -5,7 +5,7 @@ import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "../../src
 
 import "survey-core/survey.i18n";
 import { PredefinedBackgroundColors, PredefinedColors } from "../../src/components/tabs/themes";
-import { colorsAreEqual } from "../../src/utils/utils";
+import { colorsAreEqual } from "../../src/utils/color-utils";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
 
@@ -127,7 +127,7 @@ test("Creator theme: reset color variables after change theme", (): any => {
   }
 });
 
-test("creator.applyTheme", () => {
+test("creator.applyCreatorTheme", () => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
   const themeJson: ICreatorTheme = {
     themeName: "custom",
@@ -144,7 +144,7 @@ test("creator.applyTheme", () => {
     }
   };
 
-  creator.applyTheme(themeJson);
+  creator.applyCreatorTheme(themeJson);
 
   const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
   const themeModel = designerPlugin["themeModel"];
@@ -285,7 +285,7 @@ test("Creator theme: apply custom theme", (): any => {
       "--sjs-test": "green"
     }
   };
-  creator.applyTheme(themeJson);
+  creator.applyCreatorTheme(themeJson);
 
   const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-special-background");
   const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-primary-background-500");
