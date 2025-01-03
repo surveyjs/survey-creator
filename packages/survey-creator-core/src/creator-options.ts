@@ -182,33 +182,54 @@ export interface ICreatorOptions {
   /**
    * Limits the number of columns that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel), and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumColumnsCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxColumns`)
    */
-  maximumColumnsCount?: number;
+  maxColumns?: number;
   /**
    * Limits the minimum number of choices in [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions. Set this property if users should not delete choices below the specified limit.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.minimumChoicesCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.minChoices`)
    */
-  minimumChoicesCount?: number;
+  minChoices?: number;
   /**
    * Limits the number of choices that users can add to [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumChoicesCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxChoices`)
    */
-  maximumChoicesCount?: number;
+  maxChoices?: number;
   /**
    * Limits the number of rows that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRowsCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxRows`)
    */
-  maximumRowsCount?: number;
+  maxRows?: number;
   /**
    * Limits the number of rate values that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxRateValues`)
+   */
+  maxRateValues?: number;
+  /**
+   * Obsolete. Use `maxColumns` instead.
+   */
+  maximumColumnsCount?: number;
+  /**
+   * Obsolete. Use `minChoices` instead.
+   */
+  minimumChoicesCount?: number;
+  /**
+   * Obsolete. Use `maxChoices` instead.
+   */
+  maximumChoicesCount?: number;
+  /**
+   * Obsolete. Use `maxRows` instead.
+   */
+  maximumRowsCount?: number;
+  /**
+   * Obsolete. Use `maxRateValues` instead.
    */
   maximumRateValues?: number;
+
   /**
    * Limits the number of items in a logical expression.
    *
