@@ -69,12 +69,12 @@ jobs:
           specificBuildWithTriggering: true
           buildVersionToDownload: "latest"
           downloadType: "single"
-          artifactName: "SurveyJSLibraryBuildCoreAngularJquery"
+          artifactName: "SurveyJSLibraryBuildCore"
           downloadPath: "$(System.ArtifactsDirectory)"
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages"
           Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
           OverWrite: true
@@ -112,7 +112,7 @@ jobs:
       # set release specific version
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/"
           Contents: "version.txt"
           TargetFolder: "$(Build.SourcesDirectory)/"
           OverWrite: true
@@ -281,12 +281,12 @@ jobs:
           specificBuildWithTriggering: true
           buildVersionToDownload: "latest"
           downloadType: "single"
-          artifactName: "SurveyJSLibraryBuildCoreAngularJquery"
+          artifactName: "SurveyJSLibraryBuildCore"
           downloadPath: "$(System.ArtifactsDirectory)"
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages"
           Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
           OverWrite: true
@@ -354,7 +354,7 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
+          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core"
           OverWrite: true
         condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -384,7 +384,7 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core"
           Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core"
           OverWrite: true
@@ -409,7 +409,7 @@ jobs:
       # set release specific version
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/"
           Contents: "version.txt"
           TargetFolder: "$(Build.SourcesDirectory)/"
           OverWrite: true
@@ -495,12 +495,12 @@ jobs:
           specificBuildWithTriggering: true
           buildVersionToDownload: "latest"
           downloadType: "single"
-          artifactName: "SurveyJSLibraryBuildCoreAngularJquery"
+          artifactName: "SurveyJSLibraryBuildCore"
           downloadPath: "$(System.ArtifactsDirectory)"
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages"
           Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
           OverWrite: true
@@ -546,7 +546,7 @@ jobs:
       # set release specific version
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/"
           Contents: "version.txt"
           TargetFolder: "$(Build.SourcesDirectory)/"
           OverWrite: true
@@ -637,12 +637,12 @@ jobs:
           specificBuildWithTriggering: true
           buildVersionToDownload: "latest"
           downloadType: "single"
-          artifactName: "SurveyJSLibraryBuildCoreAngularJquery"
+          artifactName: "SurveyJSLibraryBuildCore"
           downloadPath: "$(System.ArtifactsDirectory)"
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages"
           Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
           OverWrite: true
@@ -693,7 +693,7 @@ jobs:
       # set release specific version
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/"
           Contents: "version.txt"
           TargetFolder: "$(Build.SourcesDirectory)/"
           OverWrite: true
@@ -793,12 +793,12 @@ jobs:
           specificBuildWithTriggering: true
           buildVersionToDownload: "latest"
           downloadType: "single"
-          artifactName: "SurveyJSLibraryBuildCoreAngularJquery"
+          artifactName: "SurveyJSLibraryBuildCore"
           downloadPath: "$(System.ArtifactsDirectory)"
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages"
           Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
           OverWrite: true
@@ -866,7 +866,7 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
+          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-core"
           OverWrite: true
         condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -896,7 +896,7 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core"
           Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-core"
           OverWrite: true
@@ -921,7 +921,7 @@ jobs:
       # set release specific version
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/"
           Contents: "version.txt"
           TargetFolder: "$(Build.SourcesDirectory)/"
           OverWrite: true
