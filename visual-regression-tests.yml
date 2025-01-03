@@ -65,7 +65,7 @@ jobs:
         inputs:
           SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core"
           Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/survey-core/packages/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
           OverWrite: true
 
       - task: Npm@1
@@ -79,7 +79,7 @@ jobs:
       # update 'file' npm dependencies in case of cache
       - task: CopyFiles@2
         inputs:
-          SourceFolder: $(Build.SourcesDirectory)/survey-library/survey-core/packages/build
+          SourceFolder: $(Build.SourcesDirectory)/survey-library/packages/survey-core/build
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules/survey-core"
           OverWrite: true
         condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -205,7 +205,7 @@ jobs:
         inputs:
           SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildReact/packages/survey-react-ui"
           Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-react-ui"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-react-ui/build"
           OverWrite: true
 
       - task: CopyFiles@2
@@ -658,9 +658,9 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildSurveyUI/packages/survey-vue3-ui"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildSurveyUI/packages/survey-js-ui"
           Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-vue3-ui/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-js-ui/build"
           OverWrite: true
 
       - task: CopyFiles@2
