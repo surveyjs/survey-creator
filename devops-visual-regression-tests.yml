@@ -63,9 +63,9 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core"
           Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/survey-core/packages/build"
           OverWrite: true
 
       - task: Npm@1
@@ -79,7 +79,7 @@ jobs:
       # update 'file' npm dependencies in case of cache
       - task: CopyFiles@2
         inputs:
-          SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-core
+          SourceFolder: $(Build.SourcesDirectory)/survey-library/survey-core/packages/build
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules/survey-core"
           OverWrite: true
         condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -196,27 +196,28 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core"
           Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
           OverWrite: true
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildReact/packages"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildReact/packages/survey-react-ui"
           Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-react-ui"
           OverWrite: true
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
-          sed -i 's/"survey-core": .*"/"survey-core": "latest"/g' package.json
-        displayName: "Change survey-core dependency version from release next ver to local dependency"
 
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
+          Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
+
+      # - script: |
+      #     cd $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
+      #     sed -i 's/"survey-core": .*"/"survey-core": "latest"/g' package.json
+      #   displayName: "Change survey-core dependency version from release next ver to local dependency"
 
       - task: Npm@1
         displayName: "Npm install root"
@@ -244,21 +245,11 @@ jobs:
           workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
         condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
-      - task: DownloadBuildArtifacts@0
-        inputs:
-          buildType: "specific"
-          project: "af2804d2-859a-4705-9ef5-cdf46d1d5d4f"
-          pipeline: "56"
-          specificBuildWithTriggering: true
-          buildVersionToDownload: "latest"
-          downloadType: "single"
-          artifactName: "SurveyJSLibraryBuildCore"
-          downloadPath: "$(System.ArtifactsDirectory)"
-
       # update 'file' npm dependencies in case of cache
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core
+          Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core"
           OverWrite: true
         condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -266,7 +257,8 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
+          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildReact/packages/survey-react-ui
+          Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui"
           OverWrite: true
         condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -275,6 +267,7 @@ jobs:
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
+          Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-creator-core"
           OverWrite: true
         condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -285,29 +278,6 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
           npm run remove-package-lock
         displayName: "npm run remove-package-lock"
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core"
-          OverWrite: true
-        displayName: "copy build from library for f-f tests"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildReact/packages/survey-react-ui"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui"
-          OverWrite: true
-        displayName: "copy build from library for f-f tests"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/@types"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/node_modules/@types"
-          OverWrite: true
-        displayName: "copy @types into library directory"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
@@ -378,13 +348,6 @@ jobs:
           artifactName: "SurveyJSLibraryBuildCore"
           downloadPath: "$(System.ArtifactsDirectory)"
 
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
-          OverWrite: true
-
       - task: DownloadBuildArtifacts@0
         inputs:
           buildType: "current"
@@ -394,9 +357,16 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildAngular/packages"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core"
           Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
+          OverWrite: true
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildAngular/packages/survey-angular-ui"
+          Contents: "**"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-angular-ui/build"
           OverWrite: true
 
       - task: CopyFiles@2
@@ -511,13 +481,6 @@ jobs:
           artifactName: "SurveyJSLibraryBuildCore"
           downloadPath: "$(System.ArtifactsDirectory)"
 
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
-          OverWrite: true
-
       - task: DownloadBuildArtifacts@0
         inputs:
           buildType: "current"
@@ -527,9 +490,16 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildVue3/packages"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core"
           Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
+          OverWrite: true
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildVue3/packages/survey-vue3-ui"
+          Contents: "**"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-vue3-ui/build"
           OverWrite: true
 
       - task: CopyFiles@2
@@ -681,27 +651,27 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core"
           Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
           OverWrite: true
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildSurveyUI/packages"
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildSurveyUI/packages/survey-vue3-ui"
           Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/build"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-vue3-ui/build"
           OverWrite: true
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-library/build/survey-js-ui
-          sed -i 's/"survey-core": .*"/"survey-core": "latest"/g' package.json
-        displayName: "Change survey-core dependency version from release next ver to local dependency"
 
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
+
+      # - script: |
+      #     cd $(Build.SourcesDirectory)/survey-library/build/survey-js-ui
+      #     sed -i 's/"survey-core": .*"/"survey-core": "latest"/g' package.json
+      #   displayName: "Change survey-core dependency version from release next ver to local dependency"
 
       - task: Npm@1
         displayName: "Npm install root"
@@ -729,21 +699,11 @@ jobs:
           npx puppeteer browsers install chrome
         displayName: "install chrome"
 
-      - task: DownloadBuildArtifacts@0
-        inputs:
-          buildType: "specific"
-          project: "af2804d2-859a-4705-9ef5-cdf46d1d5d4f"
-          pipeline: "56"
-          specificBuildWithTriggering: true
-          buildVersionToDownload: "latest"
-          downloadType: "single"
-          artifactName: "SurveyJSLibraryBuildCore"
-          downloadPath: "$(System.ArtifactsDirectory)"
-
       # update 'file' npm dependencies in case of cache
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core
+          Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-core"
           OverWrite: true
         condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -751,7 +711,8 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-js-ui
+          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildSurveyUI/packages/survey-js-ui
+          Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-js-ui"
           OverWrite: true
         condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -760,6 +721,7 @@ jobs:
       - task: CopyFiles@2
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
+          Contents: "**"
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-creator-core"
           OverWrite: true
         condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -770,29 +732,6 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
           npm run remove-package-lock
         displayName: "npm run remove-package-lock"
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-core"
-          OverWrite: true
-        displayName: "copy build from library for f-f tests"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildSurveyUI/packages/survey-js-ui"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-js-ui"
-          OverWrite: true
-        displayName: "copy build from library for f-f tests"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/@types"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/node_modules/@types"
-          OverWrite: true
-        displayName: "copy @types into library directory"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
