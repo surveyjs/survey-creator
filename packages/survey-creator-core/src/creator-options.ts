@@ -173,21 +173,17 @@ export interface ICreatorOptions {
    */
   showInvisibleElementsInPreviewTab?: boolean;
   /**
-   * Specifies whether UI elements display survey, page, and question titles instead of their names.
-   *
-   * Default value: `false`
+   * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#useElementTitles) property instead.
    * @deprecated
    */
   showObjectTitles?: boolean;
   /**
-   * Specifies whether to display question titles instead of names when users edit logical expressions.
-   *
-   * Default value: `false`
+   * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#useElementTitles) property instead.
    * @deprecated
    */
   showTitlesInExpressions?: boolean;
   /**
-   * Specifies whether UI elements display survey, page, and question titles instead of their names.
+   * Specifies whether Survey Creator UI elements display survey, page, and question titles instead of their names.
    *
    * Default value: `false`
    */

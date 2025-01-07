@@ -850,26 +850,19 @@ export class SurveyCreatorModel extends Base
   public maxLogicItemsInCondition: number = -1;
 
   /**
-   * Specifies whether drop-down menus and other UI elements display survey, page, and question titles instead of their names.
-   *
-   * Default value: `false`
-   * @see onGetObjectDisplayName
+   * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
    * @deprecated
    */
   public showObjectTitles = false;
 
   /**
-   * Specifies whether to display question titles instead of names when users edit logical expressions.
-   *
-   * Default value: `false`
-   * @see showObjectTitles
-   * @see onGetObjectDisplayName
+   * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
    * @deprecated
    */
   public showTitlesInExpressions = false;
 
   /**
-   * Specifies whether drop-down menus and other UI elements display survey, page, and question titles instead of their names.
+   * Specifies whether Survey Creator UI elements display survey, page, and question titles instead of their names.
    *
    * Default value: `false`
    * @see onGetObjectDisplayName
