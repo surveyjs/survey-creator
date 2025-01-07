@@ -113,7 +113,7 @@ export interface ElementAllowOperationsEvent {
    */
   element: Base;
   /**
-   * Obsolete. Use `element` instead.
+   * Obsolete. Use `options.element` instead.
    */
   obj?: Base;
   /**
@@ -141,7 +141,7 @@ export interface ElementAllowOperationsEvent {
    */
   allowDrag: boolean;
   /**
-   * Obsolete. Use `allowDrag` instead.
+   * Obsolete. Use `options.allowDrag` instead.
    */
   allowDragging?: boolean;
   /**
@@ -160,11 +160,11 @@ export interface ElementAllowOperationsEvent {
 
 export interface DefineElementMenuItemsEvent {
   /**
-   * A survey element (question, panel, or page) whose adorners you can customize.
+   * Obsolete. Use `options.element` instead.
    */
   obj?: Base;
   /**
-   * An array of adorner actions. You can add, modify, or remove actions from this array.
+   * Obsolete. Use `options.actions` instead.
    */
   items?: IAction[];
 }
@@ -691,7 +691,7 @@ export interface ElementFocusingEvent {
 }
 export interface ElementSelectingEvent extends ElementFocusingEvent {
   /**
-   * An element that is going to be focused.
+   * An element that is going to be selected.
    */
   element: Base;
 }
@@ -704,7 +704,7 @@ export interface ElementFocusedEvent {
 }
 export interface ElementSelectedEvent extends ElementFocusedEvent {
   /**
-   * The [focused element](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#selectedElement).
+   * The [selected element](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#selectedElement).
    */
   element: Base;
 }
