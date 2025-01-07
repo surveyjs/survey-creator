@@ -693,78 +693,7 @@ test("Prev/Next actions enabled/disabled", (): any => {
   expect(model.prevPageAction.enabled).toBeTruthy();
   expect(model.nextPageAction.enabled).toBeFalsy();
 });
-test("Change theme action hidden", (): any => {
-  TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
-  var oldF = StylesManager.getIncludedThemeCss;
-  StylesManager.getIncludedThemeCss = (): Array<any> => { return StylesManager.getAvailableThemes(); };
-  let creator: CreatorTester = new CreatorTester();
-  let testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
-  expect(testPlugin["changeThemeAction"]).toBeDefined();
-  creator = new CreatorTester({ allowChangeThemeInPreview: false });
-  testPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
-  expect(testPlugin["changeThemeAction"]).toBeUndefined();
 
-  StylesManager.getIncludedThemeCss = oldF;
-});
-
-test("Themes switcher list actions", (): any => {
-  TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
-  var oldF = StylesManager.getIncludedThemeCss;
-  StylesManager.getIncludedThemeCss = (): Array<any> => { return StylesManager.getAvailableThemes(); };
-
-  const creator = new CreatorTester();
-  const themeAction = creator.toolbar.getActionById("themeSwitcher");
-  expect(themeAction).toBeTruthy();
-  expect(themeAction.title).toEqual("Default");
-  const listModel = <ListModel>themeAction.popupModel.contentComponentData.model;
-  const actions = listModel.actions;
-  expect(actions).toHaveLength(3);
-  expect(actions[0].title).toEqual("Default");
-  expect(actions[1].title).toEqual("Modern");
-  expect(actions[2].title).toEqual("Default (legacy)");
-
-  StylesManager.getIncludedThemeCss = oldF;
-});
-
-test("Change test themes list actions titles on changing locale", (): any => {
-  TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
-  var oldF = StylesManager.getIncludedThemeCss;
-  StylesManager.getIncludedThemeCss = (): Array<any> => { return StylesManager.getAvailableThemes(); };
-  const deutschStrings: any = {
-    ed: {
-      defaultV2Theme: "Default de",
-      modernTheme: "Modern de"
-    }
-  };
-  editorLocalization.locales["de"] = deutschStrings;
-  const creator = new CreatorTester();
-  const themeAction = creator.toolbar.getActionById("themeSwitcher");
-  expect(themeAction).toBeTruthy();
-  expect(themeAction.title).toEqual("Default");
-  const listModel = <ListModel>themeAction.popupModel.contentComponentData.model;
-  const actions = listModel.actions;
-  expect(actions).toHaveLength(3);
-  const modernAction = actions.filter(act => act.id === "modern_themeSwitcher")[0];
-  expect(modernAction.title).toEqual("Modern");
-  creator.locale = "de";
-  expect(themeAction.title).toEqual("Default de");
-  expect(modernAction.getLocale()).toEqual("de");
-  expect(modernAction.title).toEqual("Modern de");
-  creator.locale = "";
-  expect(themeAction.title).toEqual("Default");
-  expect(modernAction.title).toEqual("Modern");
-
-  listModel.onItemClick(modernAction);
-  expect(themeAction.title).toEqual("Modern");
-  creator.locale = "de";
-  expect(themeAction.title).toEqual("Modern de");
-  creator.locale = "";
-  expect(themeAction.title).toEqual("Modern");
-
-  StylesManager.getIncludedThemeCss = oldF;
-});
 test("Default mobile orientation", (): any => {
   const creator: CreatorTester = new CreatorTester();
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");

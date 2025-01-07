@@ -1,7 +1,0 @@
-<!-- ko component: { name: 'svc-toolbox-item', params: { model: $data.model, item: $data.item, creator: $data.creator, isCompact: $data.isCompact } } -->
-<!-- /ko -->
-<div class="svc-toolbox__item-submenu-button"
-  data-bind="event: { mouseover: onMouseOver, mouseleave: onMouseLeave }">
-  <!-- ko component: { name: 'sv-svg-icon', params: { iconName: item.subitemsButtonIcon, size: 'auto' } } --><!-- /ko -->
-  <sv-popup params="{ model: $data.item.popupModel }"></sv-popup>
-</div>

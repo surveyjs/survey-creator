@@ -1,5 +1,4 @@
-import {
-  StylesManager, Base, IAction, ItemValue,
+import { Base, IAction, ItemValue,
   JsonObjectProperty, MatrixDropdownColumn, Question,
   SurveyModel, ILocalizableString, PopupBaseViewModel, SurveyElement
 } from "survey-core";
@@ -313,10 +312,6 @@ export interface ISurveyCreatorOptions {
     list: any[],
     variables: string[]
   ): string;
-  onConditionGetTitleCallback(
-    expression: string,
-    title: string
-  ): string;
   isConditionOperatorEnabled(questionName: string, question: Question, operator: string, isEnabled: boolean): boolean;
   onLogicGetTitleCallback(
     expression: string,
@@ -479,12 +474,6 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     list: any[],
     variables: string[]
   ): string { return "asc"; }
-  onConditionGetTitleCallback(
-    expression: string,
-    title: string
-  ): string {
-    return title;
-  }
   isConditionOperatorEnabled(questionName: string, question: Question, operator: string, isEnabled: boolean): boolean { return isEnabled; }
   onLogicGetTitleCallback(
     expression: string,
@@ -503,5 +492,3 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void { }
   translationLocalesOrder: Array<string> = [];
 }
-
-StylesManager.applyTheme("defaultV2");

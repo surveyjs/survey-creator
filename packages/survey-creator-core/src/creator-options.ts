@@ -112,6 +112,11 @@ export interface ICreatorOptions {
    *
    * Default value: `true`
    */
+  previewAllowSelectPage?: boolean;
+  /**
+   * Obsolete. Use the [`previewAllowSelectPage`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectPage) property instead.
+   * @deprecated
+   */
   showPagesInPreviewTab?: boolean;
   /**
    * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
@@ -120,11 +125,21 @@ export interface ICreatorOptions {
    *
    * Default value: `"defaultV2"`
    */
+  previewTheme?: string;
+  /**
+   * Obsolete. Use the [`previewTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewTheme) property instead.
+   * @deprecated
+   */
   themeForPreview?: string;
   /**
    * Specifies whether the Preview tab displays the Device button that allows users to preview the survey on different device types.
    *
    * Default value: `true`
+   */
+  previewAllowSimulateDevices?: boolean;
+  /**
+   * Obsolete. Use the [`previewAllowSimulateDevices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSimulateDevices) property instead.
+   * @deprecated
    */
   showSimulatorInPreviewTab?: boolean;
   /**
@@ -146,11 +161,21 @@ export interface ICreatorOptions {
    *
    * **See also**: [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
    */
+  previewAllowSelectLanguage?: boolean | string;
+  /**
+   * Obsolete. Use the [`previewAllowSelectLanguage`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectLanguage) property instead.
+   * @deprecated
+   */
   showDefaultLanguageInPreviewTab?: boolean | string;
   /**
    * Specifies whether the Preview tab displays a checkbox that allows users to show or hide invisible survey elements.
    *
    * Default value: `true`
+   */
+  previewAllowHiddenElements?: boolean;
+  /**
+   * Obsolete. Use the [`previewAllowHiddenElements`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowHiddenElements) property instead.
+   * @deprecated
    */
   showInvisibleElementsInPreviewTab?: boolean;
   /**
@@ -254,6 +279,11 @@ export interface ICreatorOptions {
    * Default value: `true`
    *
    * [View Demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
+   */
+  previewAllowSelectTheme?: boolean;
+  /**
+   * Obsolete. Use the [`previewAllowSelectTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectTheme) property instead.
+   * @deprecated
    */
   allowChangeThemeInPreview?: boolean;
   /**
