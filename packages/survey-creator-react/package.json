@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-react",
-  "version": "1.12.16",
+  "version": "2.0.0",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -92,9 +92,9 @@
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "survey-core": "../../../survey-library/build/survey-core",
-    "survey-creator-core": "../survey-creator-core/build",
-    "survey-react-ui": "../../../survey-library/build/survey-react-ui"
+    "survey-core": "../../../survey-library/packages/survey-core/build",
+    "survey-react-ui": "../../../survey-library/packages/survey-react-ui/build",
+    "survey-creator-core": "../survey-creator-core/build"
   },
   "standard-version": {
     "skip": {
