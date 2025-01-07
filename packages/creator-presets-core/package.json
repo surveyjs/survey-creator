@@ -20,7 +20,7 @@
     "lint": "eslint ./src"
   },
   "dependencies": {
-    "survey-core": "../../../survey-library/build/survey-core",
+    "survey-core": "../../../survey-library/packages/survey-core/build",
     "survey-creator-core": "../survey-creator-core/build"
   },
   "devDependencies": {

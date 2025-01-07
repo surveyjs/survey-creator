@@ -106,6 +106,11 @@ export interface ICreatorOptions {
    *
    * Default value: `true`
    */
+  previewAllowSelectPage?: boolean;
+  /**
+   * Obsolete. Use the [`previewAllowSelectPage`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectPage) property instead.
+   * @deprecated
+   */
   showPagesInPreviewTab?: boolean;
   /**
    * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
@@ -114,11 +119,21 @@ export interface ICreatorOptions {
    *
    * Default value: `"defaultV2"`
    */
+  previewTheme?: string;
+  /**
+   * Obsolete. Use the [`previewTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewTheme) property instead.
+   * @deprecated
+   */
   themeForPreview?: string;
   /**
    * Specifies whether the Preview tab displays the Device button that allows users to preview the survey on different device types.
    *
    * Default value: `true`
+   */
+  previewAllowSimulateDevices?: boolean;
+  /**
+   * Obsolete. Use the [`previewAllowSimulateDevices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSimulateDevices) property instead.
+   * @deprecated
    */
   showSimulatorInPreviewTab?: boolean;
   /**
@@ -140,11 +155,21 @@ export interface ICreatorOptions {
    *
    * **See also**: [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
    */
+  previewAllowSelectLanguage?: boolean | string;
+  /**
+   * Obsolete. Use the [`previewAllowSelectLanguage`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectLanguage) property instead.
+   * @deprecated
+   */
   showDefaultLanguageInPreviewTab?: boolean | string;
   /**
    * Specifies whether the Preview tab displays a checkbox that allows users to show or hide invisible survey elements.
    *
    * Default value: `true`
+   */
+  previewAllowHiddenElements?: boolean;
+  /**
+   * Obsolete. Use the [`previewAllowHiddenElements`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowHiddenElements) property instead.
+   * @deprecated
    */
   showInvisibleElementsInPreviewTab?: boolean;
   /**
@@ -188,35 +213,61 @@ export interface ICreatorOptions {
    */
   allowModifyPages?: boolean;
   /**
-   * Limits the number of columns that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel), and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
+   * Limits the number of columns that users can add to [Single-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Multi-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel), and [Dynamic Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel) questions.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumColumnsCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxColumns`)
+   */
+  maxColumns?: number;
+  /**
+   * Limits the minimum number of choices in [Checkboxes](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radio Button Group](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions. Set this property if users should not delete choices below the specified limit.
+   *
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.minChoices`)
+   */
+  minChoices?: number;
+  /**
+   * Limits the number of choices that users can add to [Checkboxes](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radio Button Group](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
+   *
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxChoices`)
+   */
+  maxChoices?: number;
+  /**
+   * Limits the number of rows that users can add to [Single-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Multi-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
+   *
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxRows`)
+   */
+  maxRows?: number;
+  /**
+   * Limits the number of rate values that users can add to [Rating Scale](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
+   *
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxRateValues`)
+   */
+  maxRateValues?: number;
+  /**
+   * Obsolete. Use the [`maxColumns`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxColumns) property instead.
+   * @deprecated
    */
   maximumColumnsCount?: number;
   /**
-   * Limits the minimum number of choices in [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions. Set this property if users should not delete choices below the specified limit.
-   *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.minimumChoicesCount`)
+   * Obsolete. Use the [`minChoices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#minChoices) property instead.
+   * @deprecated
    */
   minimumChoicesCount?: number;
   /**
-   * Limits the number of choices that users can add to [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
-   *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumChoicesCount`)
+   * Obsolete. Use the [`maxChoices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxChoices) property instead.
+   * @deprecated
    */
   maximumChoicesCount?: number;
   /**
-   * Limits the number of rows that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
-   *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRowsCount`)
+   * Obsolete. Use the [`maxRows`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxRows) property instead.
+   * @deprecated
    */
   maximumRowsCount?: number;
   /**
-   * Limits the number of rate values that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
-   *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
+   * Obsolete. Use the [`maxRateValues`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxRateValues) property instead.
+   * @deprecated
    */
   maximumRateValues?: number;
+
   /**
    * Limits the number of items in a logical expression.
    *
@@ -236,6 +287,11 @@ export interface ICreatorOptions {
    * Default value: `true`
    *
    * [View Demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
+   */
+  previewAllowSelectTheme?: boolean;
+  /**
+   * Obsolete. Use the [`previewAllowSelectTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectTheme) property instead.
+   * @deprecated
    */
   allowChangeThemeInPreview?: boolean;
   /**
