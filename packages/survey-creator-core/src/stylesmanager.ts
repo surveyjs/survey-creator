@@ -1,5 +1,3 @@
-import * as Survey from "survey-core";
-
 export class StylesManager {
   public static ThemeVariablesMap = {
     "$primary-color": "--primary-color",
@@ -129,7 +127,6 @@ export class StylesManager {
 
   public static applyTheme(themeName: string = "default") {
     StylesManager.currentTheme = themeName;
-    Survey.StylesManager.applyTheme(themeName);
 
     if (!document || !document.body || !document.body.style) {
       return;

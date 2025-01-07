@@ -1,5 +1,4 @@
-import {
-  StylesManager, Base, IAction, ItemValue,
+import { Base, IAction, ItemValue,
   JsonObjectProperty, MatrixDropdownColumn, Question,
   SurveyModel, ILocalizableString, PopupBaseViewModel, SurveyElement
 } from "survey-core";
@@ -93,6 +92,11 @@ export var settings = {
     maxCharsInButtonGroup: 25,
     showNavigationButtons: false,
     enableSearch: true,
+    maxColumns: 0,
+    minChoices: 0,
+    maxChoices: 0,
+    maxRows: 0,
+    maxRateValues: 0,
     maximumColumnsCount: 0,
     minimumChoicesCount: 0,
     maximumChoicesCount: 0,
@@ -488,5 +492,3 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void { }
   translationLocalesOrder: Array<string> = [];
 }
-
-StylesManager.applyTheme("defaultV2");
