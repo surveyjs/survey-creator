@@ -104,7 +104,7 @@ export class SurveyLogicType {
     return true;
   }
   public get showTitlesInExpression(): boolean {
-    return !!this.options && this.options.showTitlesInExpressions;
+    return !!this.options && (this.options.useElementTitles || this.options.showTitlesInExpressions);
   }
   public createNewObj(srcObj: Base): Base {
     const obj = <Base>Serializer.createClass(this.baseClass);

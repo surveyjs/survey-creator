@@ -210,8 +210,15 @@ export interface ISurveyCreatorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
   maxLogicItemsInCondition: number;
-  showTitlesInExpressions: boolean;
+  /**
+   * @deprecated
+   */
   showObjectTitles: boolean;
+  /**
+   * @deprecated
+   */
+  showTitlesInExpressions: boolean;
+  useElementTitles: boolean;
   allowEditExpressionsInTextEditor: boolean;
   maximumColumnsCount: number;
   minimumChoicesCount: number;
@@ -350,8 +357,15 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
   maxLogicItemsInCondition: number;
-  showTitlesInExpressions: boolean;
+  /**
+   * @deprecated
+   */
   showObjectTitles: boolean;
+  /**
+   * @deprecated
+   */
+  showTitlesInExpressions: boolean;
+  useElementTitles: boolean;
   allowEditExpressionsInTextEditor: boolean = true;
   maximumColumnsCount: number = settings.propertyGrid.maximumColumnsCount;
   minimumChoicesCount: number = settings.propertyGrid.minimumChoicesCount;

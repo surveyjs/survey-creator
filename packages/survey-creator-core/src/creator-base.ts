@@ -179,7 +179,7 @@ export class SurveyCreatorModel extends Base
    * Default value: `false` (users edit choice texts)
    * 
    * If you enable this property, users cannot edit choice texts because the Property Grid hides the Text column for choices, rate values, columns and rows in [Single-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model), and rows in [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) questions.
-   * @see showObjectTitles
+   * @see useElementTitles
    */
   @property({ defaultValue: false }) inplaceEditForValues: boolean;
   /**
@@ -468,7 +468,7 @@ export class SurveyCreatorModel extends Base
   /**
    * An event that is raised when Survey Creator obtains a survey element name to display it in the UI.
    * 
-   * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`showObjectTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showObjectTitles) property instead of handling this event.
+   * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead of handling this event.
    */
   public onGetObjectDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetDisplayNameEvent>();
   public onHtmlToMarkdown: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
@@ -850,12 +850,24 @@ export class SurveyCreatorModel extends Base
   public maxLogicItemsInCondition: number = -1;
 
   /**
-   * Specifies whether drop-down menus and other UI elements display survey, page, and question titles instead of their names.
+   * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
+   * @deprecated
+   */
+  public showObjectTitles = false;
+
+  /**
+   * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
+   * @deprecated
+   */
+  public showTitlesInExpressions = false;
+
+  /**
+   * Specifies whether Survey Creator UI elements display survey, page, and question titles instead of their names.
    *
    * Default value: `false`
    * @see onGetObjectDisplayName
    */
-  public showObjectTitles = false;
+  public useElementTitles = false;
 
   /**
    * Limits the number of visible choices. Users can click "Show more" to view hidden choices.
@@ -866,14 +878,6 @@ export class SurveyCreatorModel extends Base
    */
   public maxVisibleChoices: number = 10;
 
-  /**
-   * Specifies whether to display question titles instead of names when users edit logical expressions.
-   *
-   * Default value: `false`
-   * @see showObjectTitles
-   * @see onGetObjectDisplayName
-   */
-  public showTitlesInExpressions = false;
   /**
    * Specifies whether users can edit expressions in the Logic tab as plain text.
    *
@@ -2330,7 +2334,7 @@ export class SurveyCreatorModel extends Base
     displayName: string = undefined
   ): string {
     if (!displayName) {
-      displayName = SurveyHelper.getObjectName(obj, this.showObjectTitles);
+      displayName = SurveyHelper.getObjectName(obj, this.useElementTitles || this.showObjectTitles);
     }
     var options = { obj: obj, displayName: displayName, area: area, reason: reason };
     this.onGetObjectDisplayName.fire(this, options);
