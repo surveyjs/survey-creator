@@ -178,6 +178,12 @@ export interface PropertyAddingEvent {
    */
   canShow: boolean;
 }
+export interface PropertyShowingEvent extends PropertyAddingEvent {
+  /**
+   * A Boolean property that you can set to `false` if you do not want to add the property.
+   */
+  show: boolean;
+}
 
 export interface PropertyGridSurveyCreatedEvent {
   /**
