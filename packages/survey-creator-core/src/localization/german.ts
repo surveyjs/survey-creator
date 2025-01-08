@@ -109,6 +109,9 @@ var germanTranslation = {
     redoTooltip: "Letzte Änderung wiederherstellen",
     expandAllTooltip: "Alle aufklappen",
     collapseAllTooltip: "Alle einklappen",
+    zoomInTooltip: "Vergrößern",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Verkleinern",
     lockQuestionsTooltip: "Sperren des Erweiterungs-/Einklappenzustands für Fragen",
     showMoreChoices: "Zeige mehr",
     showLessChoices: "Zeige weniger",
@@ -832,6 +835,7 @@ var germanTranslation = {
       background: "Hintergrund",
       appearance: "Erscheinungsbild",
       accentColors: "Akzentfarben",
+      surfaceBackground: "Oberflächen-Hintergrund",
       scaling: "Skalierung",
       others: "Weiteres"
     },
@@ -842,6 +846,7 @@ var germanTranslation = {
     columnsEnableIf: "Spalten sichtbar machen, wenn",
     rowsEnableIf: "Zeilen sichtbar machen, wenn",
     innerIndent: "Inneren Einzug vergrößern",
+    copyDefaultValueFromLastEntry: "Antworten aus dem letzten Eintrag als Standard verwenden",
     enterNewValue: "Bitte einen Wert eingeben.",
     noquestions: "Die Umfrage enthält keine Fragen.",
     createtrigger: "Bitte einen Auslöser eingeben.",
@@ -1374,6 +1379,7 @@ var germanTranslation = {
       copyDefaultValueFromLastEntry: "Dupliziert die Antworten aus dem letzten Bereich und weist sie dem nächsten hinzugefügten dynamischen Bereich zu.",
       keyName: "Verweisen Sie auf einen Fragenamen, um einen Benutzer aufzufordern, in jedem Bereich eine eindeutige Antwort auf diese Frage zu geben."
     },
+    copyDefaultValueFromLastEntry: "Dupliziert Antworten aus der letzten Zeile und weist sie der nächsten hinzugefügten dynamischen Zeile zu.",
     defaultValueExpression: "Mit dieser Einstellung können Sie einen Standardantwortwert basierend auf einem Ausdruck zuweisen. Der Ausdruck kann grundlegende Berechnungen enthalten - '{q1_id} + {q2_id}', boolesche Ausdrücke wie '{age} > 60' und Funktionen: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw. Der durch diesen Ausdruck ermittelte Wert dient als anfänglicher Standardwert, der durch die manuelle Eingabe eines Befragten überschrieben werden kann.",
     resetValueIf: "Verwenden Sie das Zauberstabsymbol, um eine Bedingungsregel festzulegen, die bestimmt, wann die Eingabe eines Befragten auf den Wert zurückgesetzt wird, der auf dem Wert \"Standardwertausdruck\" oder \"Wertausdruck festlegen\" oder auf dem Wert \"Standardantwort\" (falls einer dieser Werte festgelegt ist) basiert.",
     setValueIf: "Verwenden Sie das Zauberstabsymbol, um eine Bedingungsregel festzulegen, die bestimmt, wann der \"Wertausdruck festlegen\" ausgeführt werden soll, und weisen Sie den resultierenden Wert dynamisch als Antwort zu.",
@@ -1476,7 +1482,6 @@ var germanTranslation = {
     keyDuplicationError: "Wenn die Eigenschaft \"Doppelte Beantwortungen verhindern\" aktiviert ist, erhält ein Befragter, der versucht, einen doppelten Beitrag einzureichen, die folgende Fehlermeldung.",
     totalExpression: "Hiermit können Sie Gesamtwerte basierend auf einem Ausdruck berechnen. Der Ausdruck kann grundlegende Berechnungen ('{q1_id} + {q2_id}'), boolesche Ausdrücke ('{age} > 60') und Funktionen ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw.) enthalten.",
     confirmDelete: "Löst eine Eingabeaufforderung aus, in der Sie aufgefordert werden, das Löschen der Zeile zu bestätigen.",
-    copyDefaultValueFromLastEntry: "Dupliziert Antworten aus der letzten Zeile und weist sie der nächsten hinzugefügten dynamischen Zeile zu.",
     keyName: "Wenn die angegebene Spalte identische Werte enthält, löst die Umfrage den Fehler \"Nicht eindeutiger Schlüsselwert\" aus.",
     description: "Geben Sie einen Untertitel ein.",
     locale: "Wählen Sie eine Sprache aus, um mit der Erstellung Ihrer Umfrage zu beginnen. Um eine Übersetzung hinzuzufügen, wechseln Sie in eine neue Sprache und übersetzen Sie den Originaltext hier oder auf dem Tab \"Übersetzungen\".",
@@ -1752,7 +1757,8 @@ var germanTranslation = {
       orchid: "Orchidee",
       tulip: "Tulpe",
       brown: "Braun",
-      green: "Grün"
+      green: "Grün",
+      gray: "Grau"
     }
   },
   creatortheme: {
@@ -2672,3 +2678,9 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Sperren des Erweiterungs-/Einklappenzustands für Fragen"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Sie haben noch keine Seiten"
 // pe.addNew@pages: "Add new page" => "Neue Seite hinzufügen"
+// ed.zoomInTooltip: "Zoom In" => "Vergrößern"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Verkleinern"
+// tabs.surfaceBackground: "Surface Background" => "Oberflächen-Hintergrund"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Antworten aus dem letzten Eintrag als Standard verwenden"
+// colors.gray: "Gray" => "Grau"

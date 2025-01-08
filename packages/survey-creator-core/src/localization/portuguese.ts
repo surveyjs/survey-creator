@@ -109,6 +109,9 @@ var portugueseTranslation = {
     redoTooltip: "Refazer a alteração",
     expandAllTooltip: "Expandir tudo",
     collapseAllTooltip: "Recolher tudo",
+    zoomInTooltip: "Ampliar",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Diminuir o zoom",
     lockQuestionsTooltip: "Bloquear estado de expansão/recolhimento para perguntas",
     showMoreChoices: "Mostrar mais",
     showLessChoices: "Mostrar menos",
@@ -832,6 +835,7 @@ var portugueseTranslation = {
       background: "Fundo",
       appearance: "Aparência",
       accentColors: "Cores de destaque",
+      surfaceBackground: "Fundo da superfície",
       scaling: "Escala",
       others: "Outros"
     },
@@ -842,6 +846,7 @@ var portugueseTranslation = {
     columnsEnableIf: "Colunas estão visiveis se",
     rowsEnableIf: "Linhas estão visiveis se",
     innerIndent: "Adicionar recuos internos",
+    copyDefaultValueFromLastEntry: "Usar respostas da última entrada como padrão",
     enterNewValue: "Por favor, informe o valor.",
     noquestions: "Não há nenhuma pergunta na pesquisa.",
     createtrigger: "Por favor, crie uma condição",
@@ -1374,6 +1379,7 @@ var portugueseTranslation = {
       copyDefaultValueFromLastEntry: "Duplica as respostas do último painel e as atribui ao próximo painel dinâmico adicionado.",
       keyName: "Faça referência a um nome de pergunta para exigir que um usuário forneça uma resposta exclusiva para essa pergunta em cada painel."
     },
+    copyDefaultValueFromLastEntry: "Duplica as respostas da última linha e as atribui à próxima linha dinâmica adicionada.",
     defaultValueExpression: "Essa configuração permite atribuir um valor de resposta padrão com base em uma expressão. A expressão pode incluir cálculos básicos - '{q1_id} + {q2_id}', expressões booleanas, como '{age} > 60', e funções: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. O valor determinado por essa expressão serve como o valor padrão inicial que pode ser substituído pela entrada manual de um respondente.",
     resetValueIf: "Use o ícone de varinha mágica para definir uma regra condicional que determina quando a entrada de um respondente é redefinida para o valor com base no valor \"Expressão de valor padrão\" ou \"Definir expressão de valor\" ou no valor \"Resposta padrão\" (se um dos dois estiver definido).",
     setValueIf: "Use o ícone de varinha mágica para definir uma regra condicional que determine quando executar a expressão \"Definir valor\" e atribuir dinamicamente o valor resultante como resposta.",
@@ -1476,7 +1482,6 @@ var portugueseTranslation = {
     keyDuplicationError: "Quando a propriedade \"Impedir respostas duplicadas\" está habilitada, um respondente tentando enviar uma entrada duplicada receberá a seguinte mensagem de erro.",
     totalExpression: "Permite calcular valores totais com base em uma expressão. A expressão pode incluir cálculos básicos ('{q1_id} + {q2_id}'), expressões booleanas ('{age} > 60') e funções ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     confirmDelete: "Aciona um prompt pedindo para confirmar a exclusão da linha.",
-    copyDefaultValueFromLastEntry: "Duplica as respostas da última linha e as atribui à próxima linha dinâmica adicionada.",
     keyName: "Se a coluna especifica contiver valores idênticos, o questionário lançará o \"Valor de chave não exclusivo\" erro.",
     description: "Digite uma legenda.",
     locale: "Escolha um idioma para começar a criar seu questionário. Para adicionar uma tradução, alterne para um novo idioma e traduza o texto original aqui ou na guia Traduções.",
@@ -1752,7 +1757,8 @@ var portugueseTranslation = {
       orchid: "Orquídea",
       tulip: "Tulipa",
       brown: "Marrom",
-      green: "Verde"
+      green: "Verde",
+      gray: "Cinza"
     }
   },
   creatortheme: {
@@ -2629,3 +2635,9 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Bloquear estado de expansão/recolhimento para perguntas"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Você ainda não tem páginas"
 // pe.addNew@pages: "Add new page" => "Adicionar nova página"
+// ed.zoomInTooltip: "Zoom In" => "Ampliar"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Diminuir o zoom"
+// tabs.surfaceBackground: "Surface Background" => "Fundo da superfície"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Usar respostas da última entrada como padrão"
+// colors.gray: "Gray" => "Cinza"

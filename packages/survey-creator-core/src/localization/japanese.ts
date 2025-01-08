@@ -109,6 +109,9 @@ export var jaStrings = {
     redoTooltip: "変更をやり直す",
     expandAllTooltip: "すべて展開",
     collapseAllTooltip: "すべて折りたたむ",
+    zoomInTooltip: "ズームインする",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "ズームアウト",
     lockQuestionsTooltip: "質問の展開/折りたたみ状態のロック",
     showMoreChoices: "さらに表示",
     showLessChoices: "表示を減らす",
@@ -832,6 +835,7 @@ export var jaStrings = {
       background: "バックグラウンド",
       appearance: "様子",
       accentColors: "アクセントカラー",
+      surfaceBackground: "サーフェスの背景",
       scaling: "スケーリング",
       others: "その他"
     },
@@ -842,6 +846,7 @@ export var jaStrings = {
     columnsEnableIf: "列は次の場合に表示されます。",
     rowsEnableIf: "行は次の場合に表示されます。",
     innerIndent: "内側のインデントを追加する",
+    copyDefaultValueFromLastEntry: "最後のエントリの回答をデフォルトとして使用する",
     enterNewValue: "値を入力してください。",
     noquestions: "アンケートに質問はありません。",
     createtrigger: "トリガーを作成してください。",
@@ -1374,6 +1379,7 @@ export var jaStrings = {
       copyDefaultValueFromLastEntry: "最後のパネルから回答を複製し、次に追加された動的パネルに割り当てます。",
       keyName: "質問名を参照して、各パネルでこの質問に対して一意の回答を提供するようユーザーに要求します。"
     },
+    copyDefaultValueFromLastEntry: "最後の行から回答を複製し、次に追加された動的行に割り当てます。",
     defaultValueExpression: "この設定では、式に基づいてデフォルトの回答値を割り当てることができます。式には、基本的な計算 - '{q1_id} + {q2_id}'、'{age} > 60' などのブール式、関数 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などを含めることができます。この式によって決定される値は、回答者の手動入力で上書きできる初期デフォルト値として機能します。",
     resetValueIf: "魔法の杖アイコンを使用して、回答者の入力を「デフォルト値式」または「値式の設定」に基づく値、または「デフォルト回答」値(どちらかが設定されている場合)にリセットするタイミングを決定する条件付きルールを設定します。",
     setValueIf: "魔法の杖アイコンを使用して、「値の設定式」をいつ実行するかを決定し、結果の値を応答として動的に割り当てる条件付きルールを設定します。",
@@ -1476,7 +1482,6 @@ export var jaStrings = {
     keyDuplicationError: "「重複回答の防止」プロパティが有効な場合、重複したエントリを送信しようとする回答者は、次のエラーメッセージを受け取ります。",
     totalExpression: "式に基づいて合計値を計算できます。式には、基本的な計算 ('{q1_id} + {q2_id}')、ブール式 ('{age} > 60')、関数 ('iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' など) を含めることができます。",
     confirmDelete: "行の削除を確認するプロンプトをトリガーします。",
-    copyDefaultValueFromLastEntry: "最後の行から回答を複製し、次に追加された動的行に割り当てます。",
     keyName: "指定した列に同じ値が含まれている場合、調査は「一意でないキー値」エラーをスローします。",
     description: "字幕を入力します。",
     locale: "言語を選択してアンケートの作成を開始します。翻訳を追加するには、新しい言語に切り替えて、ここまたは [翻訳] タブで元のテキストを翻訳します。",
@@ -1752,7 +1757,8 @@ export var jaStrings = {
       orchid: "蘭",
       tulip: "チューリップ",
       brown: "褐色",
-      green: "緑"
+      green: "緑",
+      gray: "灰色"
     }
   },
   creatortheme: {
@@ -2960,3 +2966,9 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "質問の展開/折りたたみ状態のロック"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "まだページがありません"
 // pe.addNew@pages: "Add new page" => "新しいページを追加"
+// ed.zoomInTooltip: "Zoom In" => "ズームインする"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "ズームアウト"
+// tabs.surfaceBackground: "Surface Background" => "サーフェスの背景"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "最後のエントリの回答をデフォルトとして使用する"
+// colors.gray: "Gray" => "灰色"

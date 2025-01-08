@@ -109,6 +109,9 @@ export var indonesianStrings = {
     redoTooltip: "Mengulangi perubahan",
     expandAllTooltip: "Perluas Semua",
     collapseAllTooltip: "Ciutkan Semua",
+    zoomInTooltip: "Perbesar",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Perkecil",
     lockQuestionsTooltip: "Kunci status perluasan/ciutkan untuk pertanyaan",
     showMoreChoices: "Tampilkan lebih banyak",
     showLessChoices: "Tampilkan lebih sedikit",
@@ -832,6 +835,7 @@ export var indonesianStrings = {
       background: "Latar",
       appearance: "Rupa",
       accentColors: "Warna aksen",
+      surfaceBackground: "Latar Belakang Permukaan",
       scaling: "Scaling",
       others: "Lain"
     },
@@ -842,6 +846,7 @@ export var indonesianStrings = {
     columnsEnableIf: "Kolom terlihat jika",
     rowsEnableIf: "Baris terlihat jika",
     innerIndent: "Menambahkan inden dalam",
+    copyDefaultValueFromLastEntry: "Gunakan jawaban dari entri terakhir sebagai default",
     enterNewValue: "Silahkan masukkan nilai",
     noquestions: "Tidak ada pertanyaan dalam survei.",
     createtrigger: "Silahkan buat sebuah trigger",
@@ -1374,6 +1379,7 @@ export var indonesianStrings = {
       copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari panel terakhir dan menetapkannya ke panel dinamis tambahan berikutnya.",
       keyName: "Rujuk nama pertanyaan untuk mengharuskan pengguna memberikan respons unik untuk pertanyaan ini di setiap panel."
     },
+    copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari baris terakhir dan menetapkannya ke baris dinamis berikutnya yang ditambahkan.",
     defaultValueExpression: "Pengaturan ini memungkinkan Anda menetapkan nilai jawaban default berdasarkan ekspresi. Ekspresi dapat mencakup perhitungan dasar - '{q1_id} + {q2_id}', ekspresi Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll. Nilai yang ditentukan oleh ekspresi ini berfungsi sebagai nilai default awal yang dapat ditimpa oleh input manual responden.",
     resetValueIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menentukan kapan input responden diatur ulang ke nilai berdasarkan \"Ekspresi nilai default\" atau \"Atur ekspresi nilai\" atau ke nilai \"Jawaban default\" (jika salah satu diatur).",
     setValueIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menentukan kapan harus menjalankan \"Atur ekspresi nilai\" dan secara dinamis menetapkan nilai yang dihasilkan sebagai respons.",
@@ -1476,7 +1482,6 @@ export var indonesianStrings = {
     keyDuplicationError: "Ketika properti \"mencegah duplikat respons\" diaktifkan, responden mencoba untuk mengirimkan entri duplikat akan menerima pesan galat berikut.",
     totalExpression: "Memungkinkan Anda menghitung nilai total berdasarkan ekspresi. Ekspresi dapat mencakup perhitungan dasar ('{q1_id} + {q2_id}'), ekspresi Boolean ('{age} > 60') dan fungsi ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll.).",
     confirmDelete: "Memicu prompt yang meminta konfirmasi penghapusan baris.",
-    copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari baris terakhir dan menetapkannya ke baris dinamis berikutnya yang ditambahkan.",
     keyName: "Jika kolom yang ditentukan berisi nilai yang identik, survei akan memunculkan kesalahan \"Nilai kunci tidak unik\".",
     description: "Ketik subtitle.",
     locale: "Pilih bahasa untuk mulai membuat survei. Untuk menambahkan terjemahan, beralihlah ke bahasa baru dan terjemahkan teks asli di sini atau di tab Terjemahan.",
@@ -1752,7 +1757,8 @@ export var indonesianStrings = {
       orchid: "Anggrek",
       tulip: "Tulip",
       brown: "Coklat",
-      green: "Hijau"
+      green: "Hijau",
+      gray: "Abu-abu"
     }
   },
   creatortheme: {
@@ -3114,3 +3120,9 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Kunci status perluasan/ciutkan untuk pertanyaan"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Anda belum memiliki halaman apa pun"
 // pe.addNew@pages: "Add new page" => "Tambahkan halaman baru"
+// ed.zoomInTooltip: "Zoom In" => "Perbesar"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Perkecil"
+// tabs.surfaceBackground: "Surface Background" => "Latar Belakang Permukaan"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gunakan jawaban dari entri terakhir sebagai default"
+// colors.gray: "Gray" => "Abu-abu"

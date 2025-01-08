@@ -109,6 +109,9 @@ var frenchTranslation = {
     redoTooltip: "Rétablir la modification",
     expandAllTooltip: "Tout afficher",
     collapseAllTooltip: "Réduire tout",
+    zoomInTooltip: "Zoom avant",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Zoom arrière",
     lockQuestionsTooltip: "Verrouiller l’état d’expansion/réduction pour les questions",
     showMoreChoices: "Afficher plus",
     showLessChoices: "Afficher moins",
@@ -832,6 +835,7 @@ var frenchTranslation = {
       background: "Arrière-plan",
       appearance: "Apparence",
       accentColors: "Couleurs d’accentuation",
+      surfaceBackground: "Arrière-plan de surface",
       scaling: "Détartrage",
       others: "Autres"
     },
@@ -842,6 +846,7 @@ var frenchTranslation = {
     columnsEnableIf: "Les colonnes sont visibles si",
     rowsEnableIf: "Les lignes sont visibles si",
     innerIndent: "Ajouter des tabulations internes",
+    copyDefaultValueFromLastEntry: "Utiliser les réponses de la dernière entrée par défaut",
     enterNewValue: "Veuillez saisir la valeur.",
     noquestions: "Il n'y a aucune question dans le sondage.",
     createtrigger: "Veuillez créer un déclencheur",
@@ -1374,6 +1379,7 @@ var frenchTranslation = {
       copyDefaultValueFromLastEntry: "Duplique les réponses du dernier panneau et les attribue au panneau dynamique suivant.",
       keyName: "Faites référence à un nom de question pour demander à un utilisateur de fournir une réponse unique à cette question dans chaque panneau."
     },
+    copyDefaultValueFromLastEntry: "Duplique les réponses de la dernière ligne et les attribue à la ligne dynamique suivante ajoutée.",
     defaultValueExpression: "Ce paramètre vous permet d’attribuer une valeur de réponse par défaut en fonction d’une expression. L’expression peut inclure des calculs de base - '{q1_id} + {q2_id}', des expressions booléennes, telles que '{age} > 60', et des fonctions : 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. La valeur déterminée par cette expression sert de valeur par défaut initiale qui peut être remplacée par la saisie manuelle d’une personne interrogée.",
     resetValueIf: "Utilisez l’icône de la baguette magique pour définir une règle conditionnelle qui détermine le moment où l’entrée d’une personne interrogée est réinitialisée à la valeur basée sur l’expression de valeur par défaut ou l’expression de valeur définie ou à la valeur de la réponse par défaut (si l’une ou l’autre est définie).",
     setValueIf: "Utilisez l’icône de la baguette magique pour définir une règle conditionnelle qui détermine quand exécuter l’expression « Définir la valeur » et attribuer dynamiquement la valeur résultante en tant que réponse.",
@@ -1476,7 +1482,6 @@ var frenchTranslation = {
     keyDuplicationError: "Lorsque la propriété « Empêcher les réponses en double » est activée, un répondant qui tente de soumettre une entrée en double recevra le message d’erreur suivant.",
     totalExpression: "Permet de calculer des valeurs totales en fonction d’une expression. L’expression peut inclure des calculs de base ('{q1_id} + {q2_id}'), des expressions booléennes ('{age} > 60') et des fonctions ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     confirmDelete: "Déclenche une invite vous demandant de confirmer la suppression de ligne.",
-    copyDefaultValueFromLastEntry: "Duplique les réponses de la dernière ligne et les attribue à la ligne dynamique suivante ajoutée.",
     keyName: "Si la colonne spécifiée contient des valeurs identiques, le sondage renvoie l’erreur « Valeur de clé non unique ».",
     description: "Saisissez un sous-titre.",
     locale: "Choisissez une langue pour commencer à créer votre sondage. Pour ajouter une traduction, passez à une nouvelle langue et traduisez le texte original ici ou dans l’onglet Traductions.",
@@ -1752,7 +1757,8 @@ var frenchTranslation = {
       orchid: "Orchidée",
       tulip: "Tulipe",
       brown: "Marron",
-      green: "Vert"
+      green: "Vert",
+      gray: "Gris"
     }
   },
   creatortheme: {
@@ -3019,3 +3025,9 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Verrouiller l’état d’expansion/réduction pour les questions"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Vous n’avez pas encore de pages"
 // pe.addNew@pages: "Add new page" => "Ajouter une nouvelle page"
+// ed.zoomInTooltip: "Zoom In" => "Zoom avant"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Zoom arrière"
+// tabs.surfaceBackground: "Surface Background" => "Arrière-plan de surface"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Utiliser les réponses de la dernière entrée par défaut"
+// colors.gray: "Gray" => "Gris"

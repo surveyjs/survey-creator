@@ -109,6 +109,9 @@ var traditionalChineseTranslation = {
     redoTooltip: "重做更改",
     expandAllTooltip: "全部展開",
     collapseAllTooltip: "全部摺疊",
+    zoomInTooltip: "放大",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "縮小",
     lockQuestionsTooltip: "鎖定問題的展開/摺疊狀態",
     showMoreChoices: "顯示更多",
     showLessChoices: "顯示更少",
@@ -832,6 +835,7 @@ var traditionalChineseTranslation = {
       background: "背景",
       appearance: "外觀",
       accentColors: "強調色",
+      surfaceBackground: "表面背景",
       scaling: "縮放",
       others: "別人"
     },
@@ -842,6 +846,7 @@ var traditionalChineseTranslation = {
     columnsEnableIf: "在以下情況下，列可見",
     rowsEnableIf: "在以下情況下，行可見",
     innerIndent: "添加內部縮進",
+    copyDefaultValueFromLastEntry: "使用最後一個條目中的答案作為預設值",
     enterNewValue: "請設定值",
     noquestions: "問卷中還沒有創建任何問題",
     createtrigger: "請創建觸發器",
@@ -1374,6 +1379,7 @@ var traditionalChineseTranslation = {
       copyDefaultValueFromLastEntry: "複製上一個面板中的答案，並將其分配給下一個添加的動態面板。",
       keyName: "引用問題名稱以要求使用者在每個面板中為此問題提供唯一的答案。"
     },
+    copyDefaultValueFromLastEntry: "複製最後一行的答案，並將其分配給下一個添加的動態行。",
     defaultValueExpression: "此設定允許您根據表示式分配預設答案值。表達式可以包括基本計算 - '{q1_id} + {q2_id}'、布爾表達式，例如 '{age} > 60'，以及函數：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。此表達式確定的值用作初始預設值，可由回應者的手動輸入覆蓋。",
     resetValueIf: "使用魔杖圖示設置條件規則，該規則確定何時將受訪者的輸入重置為基於“預設值表達式”或“設置值表達式”的值，或重置為“預設答案”值（如果設置了其中任何一個）。",
     setValueIf: "使用魔杖圖示設置條件規則，該規則確定何時運行「設置值表達式」 ，並將結果值動態分配為回應。",
@@ -1476,7 +1482,6 @@ var traditionalChineseTranslation = {
     keyDuplicationError: "啟用「防止重複響應」屬性後，嘗試提交重複條目的受訪者將收到以下錯誤消息。",
     totalExpression: "允許您根據表達式計算總值。表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、布爾表達式 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
     confirmDelete: "觸發提示，要求確認刪除行。",
-    copyDefaultValueFromLastEntry: "複製最後一行的答案，並將其分配給下一個添加的動態行。",
     keyName: "如果指定的列包含相同的值，則調查將引發「非唯一鍵值」錯誤。",
     description: "鍵入副標題。",
     locale: "選擇一種語言以開始創建調查。要添加翻譯，請切換到新語言，然後在此處或“翻譯”選項卡中翻譯原始文本。",
@@ -1752,7 +1757,8 @@ var traditionalChineseTranslation = {
       orchid: "蘭花",
       tulip: "鬱金香",
       brown: "棕色",
-      green: "綠"
+      green: "綠",
+      gray: "灰色"
     }
   },
   creatortheme: {
@@ -3232,3 +3238,9 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "鎖定問題的展開/摺疊狀態"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "您還沒有任何頁面"
 // pe.addNew@pages: "Add new page" => "添加新頁面"
+// ed.zoomInTooltip: "Zoom In" => "放大"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "縮小"
+// tabs.surfaceBackground: "Surface Background" => "表面背景"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "使用最後一個條目中的答案作為預設值"
+// colors.gray: "Gray" => "灰色"

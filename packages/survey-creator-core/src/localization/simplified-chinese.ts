@@ -109,6 +109,9 @@ var simplifiedChineseTranslation = {
     redoTooltip: "重做更改",
     expandAllTooltip: "全部展开",
     collapseAllTooltip: "全部折叠",
+    zoomInTooltip: "放大",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "缩小",
     lockQuestionsTooltip: "锁定问题的展开/折叠状态",
     showMoreChoices: "显示更多",
     showLessChoices: "显示更少",
@@ -832,6 +835,7 @@ var simplifiedChineseTranslation = {
       background: "背景",
       appearance: "外观",
       accentColors: "强调色",
+      surfaceBackground: "表面背景",
       scaling: "缩放",
       others: "别人"
     },
@@ -842,6 +846,7 @@ var simplifiedChineseTranslation = {
     columnsEnableIf: "在以下情况下，列可见",
     rowsEnableIf: "在以下情况下，行可见",
     innerIndent: "添加内部缩进",
+    copyDefaultValueFromLastEntry: "使用最后一个条目中的答案作为默认值",
     enterNewValue: "请设定值",
     noquestions: "问卷中还没有创建任何问题",
     createtrigger: "请创建触发器",
@@ -1374,6 +1379,7 @@ var simplifiedChineseTranslation = {
       copyDefaultValueFromLastEntry: "复制上一个面板中的答案，并将其分配给下一个添加的动态面板。",
       keyName: "引用问题名称以要求用户在每个面板中为此问题提供唯一的答案。"
     },
+    copyDefaultValueFromLastEntry: "复制最后一行的答案，并将其分配给下一个添加的动态行。",
     defaultValueExpression: "此设置允许您根据表达式分配默认答案值。表达式可以包括基本计算 - '{q1_id} + {q2_id}'、布尔表达式，例如 '{age} > 60'，以及函数：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。此表达式确定的值用作初始默认值，可由响应者的手动输入覆盖。",
     resetValueIf: "使用魔杖图标设置条件规则，该规则确定何时将受访者的输入重置为基于“默认值表达式”或“设置值表达式”的值，或重置为“默认答案”值（如果设置了其中任何一个）。",
     setValueIf: "使用魔杖图标设置条件规则，该规则确定何时运行“设置值表达式”，并将结果值动态分配为响应。",
@@ -1476,7 +1482,6 @@ var simplifiedChineseTranslation = {
     keyDuplicationError: "启用“防止重复响应”属性后，尝试提交重复条目的受访者将收到以下错误消息。",
     totalExpression: "允许您根据表达式计算总值。表达式可以包括基本计算 （'{q1_id} + {q2_id}'）、布尔表达式 （'{age} > 60'） 和函数 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
     confirmDelete: "触发提示，要求确认删除行。",
-    copyDefaultValueFromLastEntry: "复制最后一行的答案，并将其分配给下一个添加的动态行。",
     keyName: "如果指定的列包含相同的值，则调查将引发“非唯一键值”错误。",
     description: "键入副标题。",
     locale: "选择一种语言以开始创建调查。要添加翻译，请切换到新语言，然后在此处或“翻译”选项卡中翻译原始文本。",
@@ -1752,7 +1757,8 @@ var simplifiedChineseTranslation = {
       orchid: "兰花",
       tulip: "郁金香",
       brown: "棕色",
-      green: "绿"
+      green: "绿",
+      gray: "灰色"
     }
   },
   creatortheme: {
@@ -3102,3 +3108,9 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "锁定问题的展开/折叠状态"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "您还没有任何页面"
 // pe.addNew@pages: "Add new page" => "添加新页面"
+// ed.zoomInTooltip: "Zoom In" => "放大"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "缩小"
+// tabs.surfaceBackground: "Surface Background" => "表面背景"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "使用最后一个条目中的答案作为默认值"
+// colors.gray: "Gray" => "灰色"

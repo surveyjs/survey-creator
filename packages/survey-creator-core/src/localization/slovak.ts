@@ -109,6 +109,9 @@ export var skStrings = {
     redoTooltip: "Opakovať zmenu",
     expandAllTooltip: "Rozbaliť všetko",
     collapseAllTooltip: "Zbaliť všetko",
+    zoomInTooltip: "Priblížiť",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Oddialiť",
     lockQuestionsTooltip: "Uzamknutie stavu rozbalenia/zbalenia otázok",
     showMoreChoices: "Zobraziť viac",
     showLessChoices: "Zobraziť menej",
@@ -832,6 +835,7 @@ export var skStrings = {
       background: "Pozadie",
       appearance: "Vzhľad",
       accentColors: "Akcentové farby",
+      surfaceBackground: "Pozadie povrchu",
       scaling: "Škálovanie",
       others: "Iné"
     },
@@ -842,6 +846,7 @@ export var skStrings = {
     columnsEnableIf: "Stĺpce sú viditeľné, ak",
     rowsEnableIf: "Riadky sú viditeľné, ak",
     innerIndent: "Pridanie vnútorných zarážok",
+    copyDefaultValueFromLastEntry: "Predvolené použitie odpovedí z posledného záznamu",
     enterNewValue: "Zadajte hodnotu.",
     noquestions: "V prieskume nie je žiadna otázka.",
     createtrigger: "Vytvorte aktivátor",
@@ -1374,6 +1379,7 @@ export var skStrings = {
       copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného panela a priradí ich ďalšiemu pridanému dynamickému panelu.",
       keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli."
     },
+    copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku.",
     defaultValueExpression: "Toto nastavenie vám umožňuje priradiť predvolenú hodnotu odpovede na základe výrazu. Výraz môže obsahovať základné výpočty - '{q1_id} + {q2_id}', boolovské výrazy, ako napríklad '{age} > 60', a funkcie: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atď. Hodnota určená týmto výrazom slúži ako počiatočná predvolená hodnota, ktorú je možné prepísať manuálnym vstupom respondenta.",
     resetValueIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje, kedy sa vstup respondenta obnoví na hodnotu na základe hodnoty \"Výraz predvolenej hodnoty\" alebo \"Výraz nastavenej hodnoty\" alebo hodnoty \"Predvolená odpoveď\" (ak je nastavená).",
     setValueIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje, kedy spustiť \"Nastaviť výraz hodnoty\" a dynamicky priradiť výslednú hodnotu ako odpoveď.",
@@ -1476,7 +1482,6 @@ export var skStrings = {
     keyDuplicationError: "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie.",
     totalExpression: "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.).",
     confirmDelete: "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka.",
-    copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku.",
     keyName: "Ak zadaný stĺpec obsahuje rovnaké hodnoty, prieskum vyhodí chybu \"Nejedinečná hodnota kľúča\".",
     description: "Zadajte podnadpis.",
     locale: "Vyberte jazyk a začnite vytvárať prieskum. Ak chcete pridať preklad, prepnite na nový jazyk a preložte pôvodný text tu alebo na karte Preklady.",
@@ -1752,7 +1757,8 @@ export var skStrings = {
       orchid: "Orchidea",
       tulip: "Tulipán",
       brown: "Hnedý",
-      green: "Zelený"
+      green: "Zelený",
+      gray: "Sivý"
     }
   },
   creatortheme: {
@@ -2914,3 +2920,9 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Uzamknutie stavu rozbalenia/zbalenia otázok"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Zatiaľ nemáte žiadne stránky"
 // pe.addNew@pages: "Add new page" => "Pridať novú stránku"
+// ed.zoomInTooltip: "Zoom In" => "Priblížiť"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Oddialiť"
+// tabs.surfaceBackground: "Surface Background" => "Pozadie povrchu"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Predvolené použitie odpovedí z posledného záznamu"
+// colors.gray: "Gray" => "Sivý"

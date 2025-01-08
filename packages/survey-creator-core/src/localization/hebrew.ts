@@ -109,6 +109,9 @@ export var hebrewStrings = {
     redoTooltip: "בצע מחדש את השינוי",
     expandAllTooltip: "הרחב הכל",
     collapseAllTooltip: "כווץ הכל",
+    zoomInTooltip: "התקרבות",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "הקטנת התצוגה",
     lockQuestionsTooltip: "נעילת מצב הרחבה/כיווץ עבור שאלות",
     showMoreChoices: "הצג עוד",
     showLessChoices: "הצג פחות",
@@ -832,6 +835,7 @@ export var hebrewStrings = {
       background: "רקע",
       appearance: "מראה",
       accentColors: "צבעי הדגשה",
+      surfaceBackground: "רקע פני השטח",
       scaling: "שינוי גודל",
       others: "אחרים"
     },
@@ -842,7 +846,6 @@ export var hebrewStrings = {
     columnsEnableIf: "העמודות יוצגו אם",
     rowsEnableIf: "השורות יוצגו אם",
     innerIndent: "הוסף כניסות פנימיות",
-    copyDefaultValueFromLastEntry: "קבל ערכי ברירת מחדל מהשורה האחרונה",
     copyDefaultValueFromLastEntry: "קבל ערכי ברירת מחדל מהפאנל האחרון",
     enterNewValue: "נא להזין את הערך.",
     noquestions: "אין שאלות בשאלון.",
@@ -1376,6 +1379,7 @@ export var hebrewStrings = {
       copyDefaultValueFromLastEntry: "משכפל תשובות מהחלונית האחרונה ומקצה אותן לחלונית הדינמית הבאה שנוספה.",
       keyName: "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית."
     },
+    copyDefaultValueFromLastEntry: "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה.",
     defaultValueExpression: "הגדרה זו מאפשרת לך להקצות ערך ברירת מחדל לתשובה בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים - '{q1_id} + {q2_id}', ביטויים בוליאניים, כגון '{age} > 60', ופונקציות: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו'. הערך שנקבע על-ידי ביטוי זה משמש כערך ברירת המחדל הראשוני שניתן לעקוף באמצעות קלט ידני של משיב.",
     resetValueIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל מותנה הקובע מתי הקלט של המשיב יאופס לערך בהתבסס על \"ביטוי ערך ברירת מחדל\" או \"הגדר ביטוי ערך\" או על הערך \"תשובת ברירת מחדל\" (אם אחד מהם מוגדר).",
     setValueIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל מותנה הקובע מתי להפעיל את \"Set value expression\" ולהקצות באופן דינמי את הערך המתקבל כתגובה.",
@@ -1478,7 +1482,6 @@ export var hebrewStrings = {
     keyDuplicationError: "כאשר המאפיין \"מנע תגובות כפולות\" מופעל, משיב שינסה לשלוח ערך כפול יקבל את הודעת השגיאה הבאה.",
     totalExpression: "מאפשר לחשב ערכים כוללים בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים ('{q1_id} + {q2_id}'), ביטויים בוליאניים ('{age} > 60') ופונקציות ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו').",
     confirmDelete: "מפעיל בקשה המבקשת לאשר את מחיקת השורות.",
-    copyDefaultValueFromLastEntry: "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה.",
     keyName: "אם העמודה שצוינה מכילה ערכים זהים, הסקר יזרוק את השגיאה \"ערך מפתח לא ייחודי\".",
     description: "הקלד כותרת משנה.",
     locale: "בחר שפה כדי להתחיל ליצור את הסקר. כדי להוסיף תרגום, עבור לשפה חדשה ותרגם את הטקסט המקורי כאן או בכרטיסיה תרגומים.",
@@ -1754,7 +1757,8 @@ export var hebrewStrings = {
       orchid: "אורכידיה",
       tulip: "טוליפ",
       brown: "חום",
-      green: "ירוק"
+      green: "ירוק",
+      gray: "אפור"
     }
   },
   creatortheme: {
@@ -2530,3 +2534,8 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "נעילת מצב הרחבה/כיווץ עבור שאלות"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "עדיין אין לך דפים"
 // pe.addNew@pages: "Add new page" => "הוספת עמוד חדש"
+// ed.zoomInTooltip: "Zoom In" => "התקרבות"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "הקטנת התצוגה"
+// tabs.surfaceBackground: "Surface Background" => "רקע פני השטח"
+// colors.gray: "Gray" => "אפור"

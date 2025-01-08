@@ -109,6 +109,9 @@ export var danishStrings = {
     redoTooltip: "Fortryd ændringen",
     expandAllTooltip: "Udvid alle",
     collapseAllTooltip: "Skjul alle",
+    zoomInTooltip: "Zoom ind",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Zoom ud",
     lockQuestionsTooltip: "Lås udvid/skjul tilstand for spørgsmål",
     showMoreChoices: "Vis mere",
     showLessChoices: "Vis mindre",
@@ -832,6 +835,7 @@ export var danishStrings = {
       background: "Baggrund",
       appearance: "Udseende",
       accentColors: "Accentfarver",
+      surfaceBackground: "Overflade baggrund",
       scaling: "Skalering",
       others: "Andre"
     },
@@ -842,6 +846,7 @@ export var danishStrings = {
     columnsEnableIf: "Kolonner er synlige, hvis",
     rowsEnableIf: "Rækker er synlige, hvis",
     innerIndent: "Tilføj indre indrykninger",
+    copyDefaultValueFromLastEntry: "Brug svar fra sidste post som standard",
     enterNewValue: "Indtast værdien.",
     noquestions: "Der er ingen spørgsmål i undersøgelsen.",
     createtrigger: "Opret en trigger",
@@ -1374,6 +1379,7 @@ export var danishStrings = {
       copyDefaultValueFromLastEntry: "Duplikerer svar fra det sidste panel og tildeler dem til det næste tilføjede dynamiske panel.",
       keyName: "Henvis til et spørgsmålsnavn for at kræve, at en bruger giver et entydigt svar på dette spørgsmål i hvert panel."
     },
+    copyDefaultValueFromLastEntry: "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række.",
     defaultValueExpression: "Med denne indstilling kan du tildele en standardsvarværdi baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger - '{q1_id} + {q2_id}', booleske udtryk, såsom '{alder} > 60' og funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Den værdi, der bestemmes af dette udtryk, fungerer som den oprindelige standardværdi, der kan tilsidesættes af svarpersonens manuelle input.",
     resetValueIf: "Brug tryllestavsikonet til at angive en betinget regel, der bestemmer, hvornår en svarpersons input nulstilles til værdien baseret på værdien \"Standardværdiudtryk\" eller \"Angiv værdiudtryk\" eller til værdien \"Standardsvar\" (hvis en af dem er angivet).",
     setValueIf: "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer, hvornår \"Indstil værdiudtryk\" skal køres, og tildele den resulterende værdi dynamisk som et svar.",
@@ -1476,7 +1482,6 @@ export var danishStrings = {
     keyDuplicationError: "Når egenskaben \"Undgå dublerede svar\" er aktiveret, modtager en svarperson, der forsøger at sende en dubletpost, følgende fejlmeddelelse.",
     totalExpression: "Giver dig mulighed for at beregne samlede værdier baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger ('{q1_id} + {q2_id}'), booleske udtryk ('{alder} > 60') og funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv.).",
     confirmDelete: "Udløser en prompt, der beder om at bekræfte sletningen af rækken.",
-    copyDefaultValueFromLastEntry: "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række.",
     keyName: "Hvis den angivne kolonne indeholder identiske værdier, kaster undersøgelsen fejlen \"Ikke-unik nøgleværdi\".",
     description: "Skriv en undertekst.",
     locale: "Vælg et sprog for at begynde at oprette undersøgelsen. Hvis du vil tilføje en oversættelse, skal du skifte til et nyt sprog og oversætte den oprindelige tekst her eller på fanen Oversættelser.",
@@ -1752,7 +1757,8 @@ export var danishStrings = {
       orchid: "Orkide",
       tulip: "Tulipan",
       brown: "Brun",
-      green: "Grøn"
+      green: "Grøn",
+      gray: "Grå"
     }
   },
   creatortheme: {
@@ -3144,3 +3150,9 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lås udvid/skjul tilstand for spørgsmål"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har ingen sider endnu"
 // pe.addNew@pages: "Add new page" => "Tilføj ny side"
+// ed.zoomInTooltip: "Zoom In" => "Zoom ind"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Zoom ud"
+// tabs.surfaceBackground: "Surface Background" => "Overflade baggrund"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Brug svar fra sidste post som standard"
+// colors.gray: "Gray" => "Grå"

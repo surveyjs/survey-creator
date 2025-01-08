@@ -109,6 +109,9 @@ export var koreanStrings = {
     redoTooltip: "변경 내용 다시 실행",
     expandAllTooltip: "모두 확장",
     collapseAllTooltip: "모두 축소",
+    zoomInTooltip: "확대",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "축소",
     lockQuestionsTooltip: "질문의 확장/축소 상태 잠금",
     showMoreChoices: "더 보기",
     showLessChoices: "간략하게 표시",
@@ -742,7 +745,6 @@ export var koreanStrings = {
     keyDuplicationError: "\"고유하지 않은 키 값\" 오류 메시지",
     minSelectedChoices: "선택한 최소 선택 항목",
     maxSelectedChoices: "선택한 최대 선택 항목 수",
-    allowClear: "지우기 단추 표시",
     logoWidth: "로고 너비(CSS에서 허용하는 값)",
     logoHeight: "로고 높이(CSS에서 허용하는 값)",
     readOnly: "읽기 전용",
@@ -833,6 +835,7 @@ export var koreanStrings = {
       background: "배경",
       appearance: "외관",
       accentColors: "강조 색상",
+      surfaceBackground: "표면 배경",
       scaling: "스케일링",
       others: "다른"
     },
@@ -843,6 +846,7 @@ export var koreanStrings = {
     columnsEnableIf: "다음과 같은 경우 열이 표시됩니다.",
     rowsEnableIf: "다음과 같은 경우 행이 표시됩니다.",
     innerIndent: "내부 들여쓰기 추가",
+    copyDefaultValueFromLastEntry: "마지막 항목의 답변을 기본값으로 사용",
     enterNewValue: "값을 입력하십시오.",
     noquestions: "설문 조사에는 어떤 질문도 없습니다.",
     createtrigger: "트리거를 만드십시오",
@@ -1375,6 +1379,7 @@ export var koreanStrings = {
       copyDefaultValueFromLastEntry: "마지막 패널의 답변을 복제하여 다음에 추가된 동적 패널에 할당합니다.",
       keyName: "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다."
     },
+    copyDefaultValueFromLastEntry: "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다.",
     defaultValueExpression: "이 설정을 사용하면 표현식에 따라 기본 답안 값을 할당할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식(예: '{age} > 60') 및 함수 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등이 포함될 수 있습니다. 이 표현식에 의해 결정된 값은 응답자의 수동 입력으로 재정의할 수 있는 초기 기본값으로 사용됩니다.",
     resetValueIf: "마술 지팡이 아이콘을 사용하여 응답자의 입력이 \"기본값 표현식\" 또는 \"설정 값 표현식\" 또는 \"기본 답변\" 값(둘 중 하나가 설정된 경우)에 기반한 값으로 재설정되는 시점을 결정하는 조건부 규칙을 설정합니다.",
     setValueIf: "마술 지팡이 아이콘을 사용하여 \"값 설정 표현식\"을 실행할 시기를 결정하는 조건부 규칙을 설정하고 결과 값을 응답으로 동적으로 할당합니다.",
@@ -1477,7 +1482,6 @@ export var koreanStrings = {
     keyDuplicationError: "\"중복 응답 방지\" 속성이 활성화된 경우, 중복 항목을 제출하려는 응답자는 다음과 같은 오류 메시지를 받게 됩니다.",
     totalExpression: "표현식을 기준으로 합계 값을 계산할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식('{age} > 60') 및 함수('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등)이 포함될 수 있습니다.",
     confirmDelete: "행 삭제를 확인하라는 프롬프트를 트리거합니다.",
-    copyDefaultValueFromLastEntry: "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다.",
     keyName: "지정된 열에 동일한 값이 포함되어 있으면 현장조사에서 \"고유하지 않은 키 값\" 오류가 발생합니다.",
     description: "자막을 입력합니다.",
     locale: "설문조사 만들기를 시작할 언어를 선택합니다. 번역을 추가하려면 새 언어로 전환하고 여기 또는 번역 탭에서 원본 텍스트를 번역합니다.",
@@ -1753,7 +1757,8 @@ export var koreanStrings = {
       orchid: "난초",
       tulip: "튤립",
       brown: "갈색",
-      green: "녹색"
+      green: "녹색",
+      gray: "회색"
     }
   },
   creatortheme: {
@@ -3165,3 +3170,9 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "질문의 확장/축소 상태 잠금"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "아직 페이지가 없습니다."
 // pe.addNew@pages: "Add new page" => "새 페이지 추가"
+// ed.zoomInTooltip: "Zoom In" => "확대"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "축소"
+// tabs.surfaceBackground: "Surface Background" => "표면 배경"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "마지막 항목의 답변을 기본값으로 사용"
+// colors.gray: "Gray" => "회색"

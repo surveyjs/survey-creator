@@ -109,6 +109,9 @@ export var nlStrings = {
     redoTooltip: "Voer de wijziging opnieuw uit",
     expandAllTooltip: "Alles uitvouwen",
     collapseAllTooltip: "Alles inklappen",
+    zoomInTooltip: "Inzoomen",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Uitzoomen",
     lockQuestionsTooltip: "Vergrendel de uitvouw-/samenvouwstatus voor vragen",
     showMoreChoices: "Toon meer",
     showLessChoices: "Toon minder",
@@ -832,6 +835,7 @@ export var nlStrings = {
       background: "Achtergrond",
       appearance: "Uiterlijk",
       accentColors: "Accent kleuren",
+      surfaceBackground: "Oppervlakte Achtergrond",
       scaling: "Schalen",
       others: "Anderen"
     },
@@ -842,6 +846,7 @@ export var nlStrings = {
     columnsEnableIf: "Kolommen zijn zichtbaar als",
     rowsEnableIf: "Rijen zijn zichtbaar als",
     innerIndent: "Binnenste inspringingen toevoegen",
+    copyDefaultValueFromLastEntry: "Gebruik antwoorden van de laatste invoer als standaard",
     enterNewValue: "Voer de waarde in.",
     noquestions: "Er is geen enkele vraag in de enquête.",
     createtrigger: "Maak een trigger",
@@ -1374,6 +1379,7 @@ export var nlStrings = {
       copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit het laatste deelvenster en wijst ze toe aan het volgende toegevoegde dynamische deelvenster.",
       keyName: "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag."
     },
+    copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij.",
     defaultValueExpression: "Met deze instelling kunt u een standaardantwoordwaarde toewijzen op basis van een expressie. De expressie kan basisberekeningen bevatten - '{q1_id} + {q2_id}', Booleaanse expressies, zoals '{age} > 60', en functies: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', enz. De waarde die door deze expressie wordt bepaald, dient als de oorspronkelijke standaardwaarde die kan worden overschreven door de handmatige invoer van een respondent.",
     resetValueIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die bepaalt wanneer de invoer van een respondent wordt teruggezet naar de waarde op basis van de \"Standaardwaarde-expressie\" of \"Waarde-expressie instellen\" of naar de waarde \"Standaardantwoord\" (als een van beide is ingesteld).",
     setValueIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die bepaalt wanneer de expressie 'Waarde instellen' moet worden uitgevoerd en wijs de resulterende waarde dynamisch toe als antwoord.",
@@ -1476,7 +1482,6 @@ export var nlStrings = {
     keyDuplicationError: "Wanneer de eigenschap 'Dubbele antwoorden voorkomen' is ingeschakeld, ontvangt een respondent die een dubbele vermelding probeert in te dienen, het volgende foutbericht.",
     totalExpression: "Hiermee kunt u totale waarden berekenen op basis van een expressie. De expressie kan basisberekeningen ('{q1_id} + {q2_id}'), Booleaanse expressies ('{age} > 60') en functies ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.) bevatten.",
     confirmDelete: "Hiermee wordt gevraagd om het verwijderen van de rij te bevestigen.",
-    copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij.",
     keyName: "Als de opgegeven kolom identieke waarden bevat, genereert de enquête de fout 'Niet-unieke sleutelwaarde'.",
     description: "Typ een ondertitel.",
     locale: "Kies een taal om te beginnen met het maken van uw enquête. Als u een vertaling wilt toevoegen, schakelt u over naar een nieuwe taal en vertaalt u de originele tekst hier of op het tabblad Vertalingen.",
@@ -1752,7 +1757,8 @@ export var nlStrings = {
       orchid: "Orchidee",
       tulip: "Tulp",
       brown: "Bruin",
-      green: "Groen"
+      green: "Groen",
+      gray: "Grijs"
     }
   },
   creatortheme: {
@@ -2938,3 +2944,9 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Vergrendel de uitvouw-/samenvouwstatus voor vragen"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Je hebt nog geen pagina's"
 // pe.addNew@pages: "Add new page" => "Nieuwe pagina toevoegen"
+// ed.zoomInTooltip: "Zoom In" => "Inzoomen"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Uitzoomen"
+// tabs.surfaceBackground: "Surface Background" => "Oppervlakte Achtergrond"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gebruik antwoorden van de laatste invoer als standaard"
+// colors.gray: "Gray" => "Grijs"

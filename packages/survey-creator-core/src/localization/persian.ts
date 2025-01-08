@@ -109,6 +109,9 @@ var persianStrings = {
     redoTooltip: "انجام دادن تغییر",
     expandAllTooltip: "گسترش همه",
     collapseAllTooltip: "جمع کردن همه",
+    zoomInTooltip: "بزرگنمایی",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "کوچک نمایی",
     lockQuestionsTooltip: "قفل کردن وضعیت expand/collapse برای سوالات",
     showMoreChoices: "نمایش بیشتر",
     showLessChoices: "نمایش کمتر",
@@ -832,6 +835,7 @@ var persianStrings = {
       background: "پس زمینه",
       appearance: "ظاهر",
       accentColors: "رنگ های تاکیدی",
+      surfaceBackground: "زمینه سطح",
       scaling: "توزین",
       others: "باقی موارد"
     },
@@ -842,6 +846,7 @@ var persianStrings = {
     columnsEnableIf: "ستونها مرئی هستند اگر",
     rowsEnableIf: "سطرها مرئی هستند اگر",
     innerIndent: "اضافه کردن تورفتات داخلی",
+    copyDefaultValueFromLastEntry: "از پاسخ های آخرین ورودی به عنوان پیش فرض استفاده کنید",
     enterNewValue: "لطفا یک مقدار وارد کنید",
     noquestions: "سوالی در پرسشنامه درج نشده",
     createtrigger: "اجرا کننده ای بسازید",
@@ -1374,6 +1379,7 @@ var persianStrings = {
       copyDefaultValueFromLastEntry: "پاسخ ها را از اخرین پانل تکرار می کند و انها را به پانل پویا اضافه شده بعدی اختصاص می دهد.",
       keyName: "مرجع یک نام سوال نیاز به یک کاربر برای ارائه یک پاسخ منحصر به فرد برای این سوال در هر پانل."
     },
+    copyDefaultValueFromLastEntry: "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند.",
     defaultValueExpression: "این تنظیم به شما اجازه می دهد تا یک مقدار پاسخ پیش فرض را بر اساس یک عبارت اختصاص دهید. این عبارت می تواند شامل محاسبات اساسی - \"{q1_id} + {q2_id}'، عبارات بولی مانند \"{age} > 60\" و توابع: \"iif()\"، \"today()\"، \"age()\"، \"min()\"، \"max()\"، \"avg()\" و غیره باشد. مقدار تعیین شده توسط این عبارت به عنوان مقدار پیش فرض اولیه عمل می کند که می تواند توسط ورودی دستی پاسخ دهنده لغو شود.",
     resetValueIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که تعیین می کند چه زمانی ورودی پاسخ دهنده به مقدار بر اساس \"بیان مقدار پیش فرض\" یا \"تنظیم مقدار بیان\" یا \"پاسخ پیش فرض\" مقدار (اگر هر کدام تنظیم شده است) تنظیم مجدد شود.",
     setValueIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که تعیین می کند چه زمانی \"Set value expression\" را اجرا کنید و به صورت پویا مقدار حاصل را به عنوان یک پاسخ اختصاص دهید.",
@@ -1476,7 +1482,6 @@ var persianStrings = {
     keyDuplicationError: "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند.",
     totalExpression: "به شما اجازه می دهد تا مقادیر کل را بر اساس یک عبارت محاسبه کنید. این عبارت می تواند شامل محاسبات اساسی ('{q1_id} + {q2_id}')، عبارات بولی ('{age} > 60') و توابع ('iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()'، و غیره باشد.",
     confirmDelete: "یک درخواست فوری برای تایید حذف ردیف ایجاد می کند.",
-    copyDefaultValueFromLastEntry: "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند.",
     keyName: "اگر ستون مشخص شده حاوی مقادیر یکسان باشد، نظرسنجی خطای \"مقدار کلیدی غیر منحصر به فرد\" را پرتاب می کند.",
     description: "یک زیرنویس تایپ کنید.",
     locale: "یک زبان را برای شروع ایجاد نظرسنجی خود انتخاب کنید. برای اضافه کردن ترجمه، به یک زبان جدید بروید و متن اصلی را در اینجا یا در زبانه ترجمه ترجمه ترجمه کنید.",
@@ -1752,7 +1757,8 @@ var persianStrings = {
       orchid: "ارکیده",
       tulip: "لاله",
       brown: "قهوه ای",
-      green: "سبز"
+      green: "سبز",
+      gray: "خاکستری"
     }
   },
   creatortheme: {
@@ -2916,3 +2922,9 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "قفل کردن وضعیت expand/collapse برای سوالات"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "شما هنوز هیچ صفحه ای ندارید"
 // pe.addNew@pages: "Add new page" => "افزودن صفحه جدید"
+// ed.zoomInTooltip: "Zoom In" => "بزرگنمایی"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "کوچک نمایی"
+// tabs.surfaceBackground: "Surface Background" => "زمینه سطح"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "از پاسخ های آخرین ورودی به عنوان پیش فرض استفاده کنید"
+// colors.gray: "Gray" => "خاکستری"

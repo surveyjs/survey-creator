@@ -109,6 +109,9 @@ export var fiStrings = {
     redoTooltip: "Tee muutos uudelleen",
     expandAllTooltip: "Laajenna kaikki",
     collapseAllTooltip: "Kutista kaikki",
+    zoomInTooltip: "Lähennä",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Loitonna",
     lockQuestionsTooltip: "Lukitse laajenna/kutista tila kysymyksiä varten",
     showMoreChoices: "Näytä lisää",
     showLessChoices: "Näytä vähemmän",
@@ -832,6 +835,7 @@ export var fiStrings = {
       background: "Tausta",
       appearance: "Ulkonäkö",
       accentColors: "Korostusvärit",
+      surfaceBackground: "Surfacen tausta",
       scaling: "Skaalaus",
       others: "Muut"
     },
@@ -842,6 +846,7 @@ export var fiStrings = {
     columnsEnableIf: "Sarakkeet ovat näkyvissä, jos",
     rowsEnableIf: "Rivit ovat näkyvissä, jos",
     innerIndent: "Sisäisten sisennysten lisääminen",
+    copyDefaultValueFromLastEntry: "Käytä viimeisen merkinnän vastauksia oletuksena",
     enterNewValue: "Anna arvo.",
     noquestions: "Kyselyssä ei ole yhtään kysymystä.",
     createtrigger: "Luo triggeri",
@@ -1374,6 +1379,7 @@ export var fiStrings = {
       copyDefaultValueFromLastEntry: "Monistaa edellisen paneelin vastaukset ja määrittää ne seuraavaan lisättyyn dynaamiseen paneeliin.",
       keyName: "Viittaa kysymyksen nimeen, jos haluat edellyttää, että käyttäjä antaa yksilöllisen vastauksen tähän kysymykseen kussakin paneelissa."
     },
+    copyDefaultValueFromLastEntry: "Monistaa vastaukset viimeiseltä riviltä ja määrittää ne seuraavalle lisätylle dynaamiselle riville.",
     defaultValueExpression: "Tämän asetuksen avulla voit määrittää oletusarvoisen vastausarvon lausekkeen perusteella. Lauseke voi sisältää peruslaskutoimituksia - '{q1_id} + {q2_id}', totuusarvolausekkeita, kuten '{age} > 60', ja funktioita: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' jne. Tämän lausekkeen määrittämä arvo toimii alkuperäisenä oletusarvona, jonka vastaajan manuaalinen syöttö voi ohittaa.",
     resetValueIf: "Käytä taikasauvakuvaketta asettaaksesi ehdollisen säännön, joka määrittää, milloin vastaajan syöte palautetaan arvoon \"Oletusarvolauseke\" tai \"Aseta arvolauseke\" tai \"Oletusvastaus\" -arvoon (jos jompikumpi on asetettu).",
     setValueIf: "Käytä taikasauvakuvaketta asettaaksesi ehdollisen säännön, joka määrittää, milloin \"Aseta arvolauseke\" suoritetaan, ja määritä tuloksena oleva arvo dynaamisesti vastauksena.",
@@ -1476,7 +1482,6 @@ export var fiStrings = {
     keyDuplicationError: "Kun Estä päällekkäiset vastaukset -ominaisuus on käytössä, vastaaja, joka yrittää lähettää merkinnän kaksoiskappaleen, saa seuraavan virhesanoman.",
     totalExpression: "Voit laskea kokonaisarvot lausekkeen perusteella. Lauseke voi sisältää peruslaskutoimituksia ('{q1_id} + {q2_id}'), totuusarvolausekkeita ('{age} > 60') ja funktioita ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' jne.).",
     confirmDelete: "Käynnistää kehotteen, jossa pyydetään vahvistamaan rivin poisto.",
-    copyDefaultValueFromLastEntry: "Monistaa vastaukset viimeiseltä riviltä ja määrittää ne seuraavalle lisätylle dynaamiselle riville.",
     keyName: "Jos määritetty sarake sisältää samat arvot, kysely heittää \"Ei-yksilöllinen avainarvo\" -virheen.",
     description: "Kirjoita tekstitys.",
     locale: "Aloita kyselyn luominen valitsemalla kieli. Jos haluat lisätä käännöksen, vaihda uuteen kieleen ja käännä alkuperäinen teksti täällä tai Käännökset-välilehdessä.",
@@ -1752,7 +1757,8 @@ export var fiStrings = {
       orchid: "Orkidea",
       tulip: "Tulppaani",
       brown: "Ruskea",
-      green: "Vihreä"
+      green: "Vihreä",
+      gray: "Harmaa"
     }
   },
   creatortheme: {
@@ -2932,3 +2938,9 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lukitse laajenna/kutista tila kysymyksiä varten"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Sinulla ei ole vielä sivuja"
 // pe.addNew@pages: "Add new page" => "Lisää uusi sivu"
+// ed.zoomInTooltip: "Zoom In" => "Lähennä"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Loitonna"
+// tabs.surfaceBackground: "Surface Background" => "Surfacen tausta"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Käytä viimeisen merkinnän vastauksia oletuksena"
+// colors.gray: "Gray" => "Harmaa"

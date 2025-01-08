@@ -109,6 +109,9 @@ export const roStrings = {
     redoTooltip: "Refă modificarea",
     expandAllTooltip: "Extindeți tot",
     collapseAllTooltip: "Restrângeți tot",
+    zoomInTooltip: "Măriți",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Micșorare",
     lockQuestionsTooltip: "Blocați starea de extindere/restrângere pentru întrebări",
     showMoreChoices: "Afișează mai multe",
     showLessChoices: "Afișează mai puține",
@@ -832,6 +835,7 @@ export const roStrings = {
       background: "Fundal",
       appearance: "Aspect",
       accentColors: "Culori de accent",
+      surfaceBackground: "Fundal de suprafață",
       scaling: "Scalare",
       others: "Altele"
     },
@@ -842,6 +846,7 @@ export const roStrings = {
     columnsEnableIf: "Fă coloanele vizibile dacă",
     rowsEnableIf: "Fă rândurile vizibile dacă",
     innerIndent: "Crește indentarea internă",
+    copyDefaultValueFromLastEntry: "Utilizați răspunsurile de la ultima intrare ca implicit",
     enterNewValue: "Vă rugăm să introduceți o valoare.",
     noquestions: "Nu există întrebări în chestionar.",
     createtrigger: "Vă rugăm să creați un declanșator",
@@ -1374,6 +1379,7 @@ export const roStrings = {
       copyDefaultValueFromLastEntry: "Duplică răspunsurile din ultimul panou și le atribuie următorului panou dinamic adăugat.",
       keyName: "Faceți referire la un nume de întrebare pentru a solicita unui utilizator să furnizeze un răspuns unic pentru această întrebare în fiecare panou."
     },
+    copyDefaultValueFromLastEntry: "Duplică răspunsurile din ultimul rând și le atribuie următorului rând dinamic adăugat.",
     defaultValueExpression: "Această setare vă permite să atribuiți o valoare implicită a răspunsului pe baza unei expresii. Expresia poate include calcule de bază - `{q1_id} + {q2_id}`, expresii booleene, cum ar fi `{age} > 60`, și funcții: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. Valoarea determinată de această expresie servește ca valoare implicită inițială care poate fi suprascrisă de o intrare manuală a respondentului.",
     resetValueIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină când o intrare a respondentului este resetată la valoarea pe baza „Expresiei valorii implicite” sau „Expresiei de setare a valorii” sau la valoarea „Răspuns implicit” (dacă oricare este setată).",
     setValueIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină când să rulați „Expresia de setare a valorii” și să atribuiți dinamic valoarea rezultată ca răspuns.",
@@ -1476,7 +1482,6 @@ export const roStrings = {
     keyDuplicationError: "Când proprietatea „Împiedică răspunsurile duplicate” este activată, un respondent care încearcă să trimită o intrare duplicat va primi următorul mesaj de eroare.",
     totalExpression: "Vă permite să calculați valorile totale pe baza unei expresii. Expresia poate include calcule de bază (`{q1_id} + {q2_id}`), expresii booleene (`{age} > 60`) și funcții (`iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
     confirmDelete: "Declanșează un prompt care solicită confirmarea ștergerii rândului.",
-    copyDefaultValueFromLastEntry: "Duplică răspunsurile din ultimul rând și le atribuie următorului rând dinamic adăugat.",
     keyName: "Faceți referire la un ID al coloanei pentru a solicita unui utilizator să furnizeze un răspuns unic pentru fiecare întrebare din coloana specificată.",
     description: "Introduceți un subtitlu.",
     locale: "Alegeți o limbă pentru a începe să creați chestionarul. Pentru a adăuga o traducere, comutați la o limbă nouă și traduceți textul original aici sau în fila Traduceri.",
@@ -1752,7 +1757,8 @@ export const roStrings = {
       orchid: "Orhidee",
       tulip: "Lalea",
       brown: "Maro",
-      green: "Verde"
+      green: "Verde",
+      gray: "Gri"
     }
   },
   creatortheme: {
@@ -1901,3 +1907,9 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Blocați starea de extindere/restrângere pentru întrebări"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Nu aveți încă nicio pagină"
 // pe.addNew@pages: "Add new page" => "Adaugă o pagină nouă"
+// ed.zoomInTooltip: "Zoom In" => "Măriți"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Micșorare"
+// tabs.surfaceBackground: "Surface Background" => "Fundal de suprafață"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Utilizați răspunsurile de la ultima intrare ca implicit"
+// colors.gray: "Gray" => "Gri"

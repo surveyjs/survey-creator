@@ -109,6 +109,9 @@ export var mnStrings = {
     redoTooltip: "Сүүлин өөрчлөлтийг дахих ",
     expandAllTooltip: "Бүх хүрээгээ тэлнэ",
     collapseAllTooltip: "Бүх нуралт",
+    zoomInTooltip: "Томруулах",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Томруулах",
     lockQuestionsTooltip: "Асуултын үед lock/expand/collapse state",
     showMoreChoices: "Дэлгэрэнгүй харуулах",
     showLessChoices: "Бага мэдээлэл харуулах",
@@ -832,6 +835,7 @@ export var mnStrings = {
       background: "Ар талын",
       appearance: "Харагдах байдал",
       accentColors: "Акцентын өнгө",
+      surfaceBackground: "Гадаргуугийн фон",
       scaling: "Масштаблах",
       others: "Бусад"
     },
@@ -842,6 +846,7 @@ export var mnStrings = {
     columnsEnableIf: "Баганууд харагдана хэрэв",
     rowsEnableIf: "Мөрнүүд харагдана хэрэв",
     innerIndent: "Дотоод догол мөр нэмэх",
+    copyDefaultValueFromLastEntry: "Сүүлийн тайлбарын хариултуудыг стандарт болгон ашигла",
     enterNewValue: "Утга оруулна уу.",
     noquestions: "Санал асуулгад асуулт оруулна уу.",
     createtrigger: "Схем устгана уу.",
@@ -1374,6 +1379,7 @@ export var mnStrings = {
       copyDefaultValueFromLastEntry: "Сүүлийн панелын хариултыг хувилж, дараагийн нэмэлт динамик хавтанд хуваарилна.",
       keyName: "Энэ асуултад хэрэглэгчээс панел бүрт өвөрмөц хариулт өгөхийг шаардахын тулд асуултын нэрийг эш тат."
     },
+    copyDefaultValueFromLastEntry: "Сүүлийн мөрнөөс хариултуудыг хуулбарлаж, дараагийн нэмэлт динамик мөрөнд хуваарилна.",
     defaultValueExpression: "Энэ тохиргоо нь илэрхийллийн үндсэн дээр дефолт хариултын үнэ цэнийг даалгах боломжийг олгодог. Илэрхийлэл нь үндсэн тооцоо - '{q1_id} + {q2_id}', Бөүлийн илэрхийллүүд, тухайлбал '{age} > 60', функц: 'iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м. Энэ илэрхийлэлээр тодорхойлогддог үнэ цэнэ нь хариулагчийн гарын авлагын оролтоор давхардуулан авч болох анхны дефолтын үнэ цэнэ болж өгдөг.",
     resetValueIf: "\"Default value expression\" эсвэл \"Set value expression\" эсвэл \"Default answer\" value (хэрэв аль нэгийг нь тогтоосон бол) үнэ цэнэд үндэслэн хариулагчийн оруулсан хувь нэмрийг үнэ цэнэд хэзээ дахин тохируулахыг тодорхойлох нөхцөлтэй дүрмийг тогтоохын тулд шидэт wand зургыг ашигла.",
     setValueIf: "Ид шидийн wand зургыг ашиглан \"Set value expression\"-ийг хэзээ ажиллуулахыг тодорхойлох нөхцөлтэй дүрмийг тогтоож, үр дүнд хүрсэн үнэ цэнийг хариу болгон динамикаар даалга.",
@@ -1476,7 +1482,6 @@ export var mnStrings = {
     keyDuplicationError: "\"Хуулбарласан хариу арга хэмжээ авахаас урьдчилан сэргийлье\" өмчийг боломжтой болгоход хуулбарлан оруулахыг оролдсон хариулагч дараах алдааны мэдээг хүлээн авна.",
     totalExpression: "Илэрхийллийн үндсэн дээр нийт үнэт зүйлсийг тооцох боломжийг танд олгож байна. Илэрхийлэл нь үндсэн тооцоо ('{q1_id} + {q2_id}'), Бөүлийн илэрхийллүүд ('{нас} > 60') функцууд ('iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м.",
     confirmDelete: "Дарааллыг арилгахыг батлахыг хүссэн өдөөлтийг өдөөв.",
-    copyDefaultValueFromLastEntry: "Сүүлийн мөрнөөс хариултуудыг хуулбарлаж, дараагийн нэмэлт динамик мөрөнд хуваарилна.",
     keyName: "Хэрэв өгөгдсөн багана адил утгатай бол санал асуулга \"Давтагдсан утга\" гэсэн алдааг харуулна.",
     description: "Дэд гарчиг бичнэ.",
     locale: "Судалгаагаа хийж эхлэх хэл сонго. Орчуулга нэмэхийн тулд шинэ хэл рүү шилжиж, эх бичвэрийг энд эсвэл Translations tab-д орчуулна.",
@@ -1752,7 +1757,8 @@ export var mnStrings = {
       orchid: "Орхон",
       tulip: "Тюлип",
       brown: "Браун",
-      green: "Ногоон"
+      green: "Ногоон",
+      gray: "Саарал"
     }
   },
   creatortheme: {
@@ -2616,3 +2622,9 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Асуултын үед lock/expand/collapse state"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Танд одоохондоо хуудас байхгүй байна"
 // pe.addNew@pages: "Add new page" => "Шинэ хуудас нэмж"
+// ed.zoomInTooltip: "Zoom In" => "Томруулах"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Томруулах"
+// tabs.surfaceBackground: "Surface Background" => "Гадаргуугийн фон"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Сүүлийн тайлбарын хариултуудыг стандарт болгон ашигла"
+// colors.gray: "Gray" => "Саарал"

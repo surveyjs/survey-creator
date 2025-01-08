@@ -109,6 +109,9 @@ var polishStrings = {
     redoTooltip: "Ponowne wprowadzanie zmian",
     expandAllTooltip: "Rozwiń wszystko",
     collapseAllTooltip: "Zwiń wszystko",
+    zoomInTooltip: "Powiększenie",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Pomniejszanie",
     lockQuestionsTooltip: "Zablokuj stan rozwijania/zwijania dla pytań",
     showMoreChoices: "Pokaż więcej",
     showLessChoices: "Pokaż mniej",
@@ -832,6 +835,7 @@ var polishStrings = {
       background: "Tło",
       appearance: "Wygląd",
       accentColors: "Akcenty kolorystyczne",
+      surfaceBackground: "Tło powierzchni",
       scaling: "Skalowanie",
       others: "Inni"
     },
@@ -842,6 +846,7 @@ var polishStrings = {
     columnsEnableIf: "Kolumny są widoczne, jeśli",
     rowsEnableIf: "Wiersze są widoczne, jeśli",
     innerIndent: "Dodawanie wcięć wewnętrznych",
+    copyDefaultValueFromLastEntry: "Domyślnie używaj odpowiedzi z ostatniego wpisu",
     enterNewValue: "Please, enter the value.",
     noquestions: "There is no any question in the survey.",
     createtrigger: "Please create a trigger",
@@ -1374,6 +1379,7 @@ var polishStrings = {
       copyDefaultValueFromLastEntry: "Duplikuje odpowiedzi z ostatniego panelu i przypisuje je do następnego dodanego panelu dynamicznego.",
       keyName: "Odwołaj się do nazwy pytania, aby wymagać od użytkownika podania unikatowej odpowiedzi na to pytanie w każdym panelu."
     },
+    copyDefaultValueFromLastEntry: "Duplikuje odpowiedzi z ostatniego wiersza i przypisuje je do następnego dodanego wiersza dynamicznego.",
     defaultValueExpression: "To ustawienie umożliwia przypisanie domyślnej wartości odpowiedzi na podstawie wyrażenia. Wyrażenie może zawierać podstawowe obliczenia - '{q1_id} + {q2_id}', wyrażenia logiczne, takie jak '{wiek} > 60' oraz funkcje: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' itp. Wartość określona przez to wyrażenie służy jako początkowa wartość domyślna, która może zostać zastąpiona przez ręczne wprowadzanie danych przez respondenta.",
     resetValueIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która określa, kiedy dane wejściowe respondenta są resetowane do wartości na podstawie \"Wyrażenia wartości domyślnej\" lub \"Wyrażenia wartości domyślnej\" lub wartości \"Odpowiedź domyślna\" (jeśli którakolwiek z nich jest ustawiona).",
     setValueIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która określa, kiedy uruchomić \"Wyrażenie wartości zestawu\" i dynamicznie przypisać wynikową wartość jako odpowiedź.",
@@ -1476,7 +1482,6 @@ var polishStrings = {
     keyDuplicationError: "Gdy właściwość \"Zapobiegaj zduplikowanym odpowiedziom\" jest włączona, respondent próbujący przesłać zduplikowany wpis otrzyma następujący komunikat o błędzie.",
     totalExpression: "Umożliwia obliczanie wartości całkowitych na podstawie wyrażenia. Wyrażenie może zawierać podstawowe obliczenia ('{q1_id} + {q2_id}'), wyrażenia logiczne ('{age} > 60') i funkcje ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' itp.).",
     confirmDelete: "Wyzwala monit z prośbą o potwierdzenie usunięcia wiersza.",
-    copyDefaultValueFromLastEntry: "Duplikuje odpowiedzi z ostatniego wiersza i przypisuje je do następnego dodanego wiersza dynamicznego.",
     keyName: "Jeśli określona kolumna zawiera identyczne wartości, ankieta zgłasza błąd \"Nieunikalna wartość klucza\".",
     description: "Wpisz napisy.",
     locale: "Wybierz język, aby rozpocząć tworzenie ankiety. Aby dodać tłumaczenie, przełącz się na nowy język i przetłumacz oryginalny tekst tutaj lub na karcie Tłumaczenia.",
@@ -1752,7 +1757,8 @@ var polishStrings = {
       orchid: "Orchidea",
       tulip: "Tulipan",
       brown: "Brązowy",
-      green: "Zielony"
+      green: "Zielony",
+      gray: "Szary"
     }
   },
   creatortheme: {
@@ -3227,3 +3233,9 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Zablokuj stan rozwijania/zwijania dla pytań"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Nie masz jeszcze żadnych stron"
 // pe.addNew@pages: "Add new page" => "Dodaj nową stronę"
+// ed.zoomInTooltip: "Zoom In" => "Powiększenie"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Pomniejszanie"
+// tabs.surfaceBackground: "Surface Background" => "Tło powierzchni"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Domyślnie używaj odpowiedzi z ostatniego wpisu"
+// colors.gray: "Gray" => "Szary"

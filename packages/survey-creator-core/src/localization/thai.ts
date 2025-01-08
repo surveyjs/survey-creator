@@ -109,6 +109,9 @@ export const thStrings = {
     redoTooltip: "ทำซ้ำการเปลี่ยนแปลง",
     expandAllTooltip: "ขยายทั้งหมด",
     collapseAllTooltip: "ยุบทั้งหมด",
+    zoomInTooltip: "ซูมเข้า",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "ซูมออก",
     lockQuestionsTooltip: "ล็อคสถานะขยาย/ยุบสําหรับคําถาม",
     showMoreChoices: "แสดงเพิ่มเติม",
     showLessChoices: "แสดงน้อยลง",
@@ -832,6 +835,7 @@ export const thStrings = {
       background: "พื้นหลัง",
       appearance: "การปรากฏ",
       accentColors: "สีเน้นเสียง",
+      surfaceBackground: "พื้นหลังพื้นผิว",
       scaling: "มาตรา ส่วน",
       others: "อื่นๆ"
     },
@@ -842,6 +846,7 @@ export const thStrings = {
     columnsEnableIf: "ทำให้คอลัมน์มองเห็นได้ถ้า",
     rowsEnableIf: "ทำให้แถวมองเห็นได้ถ้า",
     innerIndent: "เพิ่มการเว้นวรรคภายใน",
+    copyDefaultValueFromLastEntry: "ใช้คําตอบจากรายการสุดท้ายเป็นค่าเริ่มต้น",
     enterNewValue: "กรุณาป้อนค่า",
     noquestions: "ไม่มีคำถามในแบบสำรวจ",
     createtrigger: "กรุณาสร้างทริกเกอร์",
@@ -1374,6 +1379,7 @@ export const thStrings = {
       copyDefaultValueFromLastEntry: "คัดลอกคำตอบจากแผงสุดท้ายและตั้งเป็นค่าเริ่มต้นสำหรับแผงไดนามิกถัดไป",
       keyName: "อ้างอิงชื่อคำถามเพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันในแต่ละแผง"
     },
+    copyDefaultValueFromLastEntry: "คัดลอกคำตอบจากแถวสุดท้ายและตั้งเป็นค่าเริ่มต้นสำหรับแถวไดนามิกถัดไป",
     defaultValueExpression: "การตั้งค่านี้ช่วยให้คุณตั้งค่าคำตอบเริ่มต้นตามนิพจน์ นิพจน์สามารถประกอบด้วยการคำนวณพื้นฐาน {q1_id} + {q2_id}, นิพจน์บูลีน เช่น {age} > 60, และฟังก์ชัน: iif(), today(), age(), min(), max(), avg() เป็นต้น ค่าที่กำหนดโดยนิพจน์นี้จะเป็นค่าเริ่มต้นที่สามารถถูกแทนที่ได้โดยการป้อนของผู้ตอบ",
     resetValueIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่กำหนดเมื่อค่าคำตอบของผู้ตอบจะถูกรีเซ็ตตาม \"นิพจน์ค่าเริ่มต้น\" หรือ \"นิพจน์ตั้งค่า\" หรือค่าเริ่มต้นถ้ามีการตั้งค่า",
     setValueIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่กำหนดเมื่อรัน \"นิพจน์ตั้งค่า\" และตั้งค่าที่ได้เป็นคำตอบ",
@@ -1476,7 +1482,6 @@ export const thStrings = {
     keyDuplicationError: "เมื่อเปิดใช้คุณสมบัติ \"ป้องกันคำตอบซ้ำกัน\" ผู้ตอบที่พยายามส่งการตอบซ้ำจะได้รับข้อความข้อผิดพลาดต่อไปนี้",
     totalExpression: "ช่วยให้คุณคำนวณค่ารวมตามนิพจน์ นิพจน์สามารถประกอบด้วยการคำนวณพื้นฐาน ({q1_id} + {q2_id}), นิพจน์บูลีน ({age} > 60) และฟังก์ชัน ('iif(), today(), age(), min(), max(), avg(), ฯลฯ)",
     confirmDelete: "เรียกใช้งานพร้อมท์เพื่อยืนยันการลบแถว",
-    copyDefaultValueFromLastEntry: "คัดลอกคำตอบจากแถวสุดท้ายและตั้งเป็นค่าเริ่มต้นสำหรับแถวไดนามิกถัดไป",
     keyName: "อ้างอิง ID คอลัมน์เพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันสำหรับแต่ละคำถามในคอลัมน์ที่ระบุ",
     description: "พิมพ์คำบรรยาย",
     locale: "เลือกภาษาสำหรับการสร้างแบบสำรวจของคุณ ในการเพิ่มการแปล สลับไปยังภาษาใหม่และแปลข้อความดั้งเดิมที่นี่หรือในแท็บการแปล",
@@ -1752,7 +1757,8 @@ export const thStrings = {
       orchid: "กล้วยไม้",
       tulip: "ทิวลิป",
       brown: "น้ำตาล",
-      green: "เขียว"
+      green: "เขียว",
+      gray: "เทา"
     }
   },
   creatortheme: {
@@ -1901,3 +1907,9 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "ล็อคสถานะขยาย/ยุบสําหรับคําถาม"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "คุณยังไม่มีหน้าใด ๆ"
 // pe.addNew@pages: "Add new page" => "เพิ่มหน้าใหม่"
+// ed.zoomInTooltip: "Zoom In" => "ซูมเข้า"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "ซูมออก"
+// tabs.surfaceBackground: "Surface Background" => "พื้นหลังพื้นผิว"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "ใช้คําตอบจากรายการสุดท้ายเป็นค่าเริ่มต้น"
+// colors.gray: "Gray" => "เทา"

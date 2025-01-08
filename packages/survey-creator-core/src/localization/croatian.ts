@@ -109,6 +109,9 @@ export var hrStrings = {
     redoTooltip: "Preusmjeti promjenu",
     expandAllTooltip: "Proširi sve",
     collapseAllTooltip: "Sažmi sve",
+    zoomInTooltip: "Zumiranje",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Smanji",
     lockQuestionsTooltip: "Zaključavanje stanja proširenja/sažimanja za pitanja",
     showMoreChoices: "Pokaži više",
     showLessChoices: "Pokaži manje",
@@ -832,6 +835,7 @@ export var hrStrings = {
       background: "Pozadina",
       appearance: "Izgled",
       accentColors: "Naglašavajuće boje",
+      surfaceBackground: "Pozadina površine",
       scaling: "Skaliranje",
       others: "Drugi"
     },
@@ -842,6 +846,7 @@ export var hrStrings = {
     columnsEnableIf: "Stupci su vidljivi ako",
     rowsEnableIf: "Reci su vidljivi ako",
     innerIndent: "Dodavanje unutarnjih uvlaka",
+    copyDefaultValueFromLastEntry: "Koristite odgovore iz posljednjeg unosa kao standardne",
     enterNewValue: "Unesite vrijednost.",
     noquestions: "U anketi nema nikakvog pitanja.",
     createtrigger: "Izradite okidač",
@@ -1374,6 +1379,7 @@ export var hrStrings = {
       copyDefaultValueFromLastEntry: "Duplicira odgovore s posljednje ploče i dodjeljuje ih sljedećoj dodanoj dinamičkoj ploči.",
       keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči."
     },
+    copyDefaultValueFromLastEntry: "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku.",
     defaultValueExpression: "Ova postavka omogućuje dodjeljivanje zadane vrijednosti odgovora na temelju izraza. Izraz može uključivati osnovne izračune - '{q1_id} + {q2_id}', Booleove izraze, kao što su '{age} > 60', i funkcije: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd. Vrijednost određena ovim izrazom služi kao početna zadana vrijednost koja se može nadjačati ručnim unosom ispitanika.",
     resetValueIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje kada se unos ispitanika vraća na vrijednost na temelju \"Zadani izraz vrijednosti\" ili \"Postavi izraz vrijednosti\" ili na vrijednost \"Zadani odgovor\" (ako je postavljena).",
     setValueIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje kada pokrenuti \"Postavi izraz vrijednosti\" i dinamički dodijelite dobivenu vrijednost kao odgovor.",
@@ -1476,7 +1482,6 @@ export var hrStrings = {
     keyDuplicationError: "Kada je omogućeno svojstvo \"Spriječi duplicirane odgovore\", ispitanik koji pokuša poslati duplikat unosa primit će sljedeću poruku o pogrešci.",
     totalExpression: "Omogućuje izračunavanje ukupnih vrijednosti na temelju izraza. Izraz može uključivati osnovne izračune ('{q1_id} + {q2_id}'), Booleove izraze ('{age} > 60') i funkcije ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd.).",
     confirmDelete: "Pokreće upit u kojem se traži potvrda brisanja retka.",
-    copyDefaultValueFromLastEntry: "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku.",
     keyName: "Ako navedeni stupac sadrži identične vrijednosti, anketa odbacuje pogrešku \"Nejedinstvena vrijednost ključa\".",
     description: "Upišite podnaslov.",
     locale: "Odaberite jezik za početak stvaranja upitnika. Da biste dodali prijevod, prijeđite na novi jezik i prevedite izvorni tekst ovdje ili na kartici Prijevodi.",
@@ -1752,7 +1757,8 @@ export var hrStrings = {
       orchid: "Orhideja",
       tulip: "Lala",
       brown: "Smeđ",
-      green: "Zelen"
+      green: "Zelen",
+      gray: "Siv"
     }
   },
   creatortheme: {
@@ -2954,3 +2960,9 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Zaključavanje stanja proširenja/sažimanja za pitanja"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Još nemate stranice"
 // pe.addNew@pages: "Add new page" => "Dodaj novu stranicu"
+// ed.zoomInTooltip: "Zoom In" => "Zumiranje"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Smanji"
+// tabs.surfaceBackground: "Surface Background" => "Pozadina površine"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Koristite odgovore iz posljednjeg unosa kao standardne"
+// colors.gray: "Gray" => "Siv"

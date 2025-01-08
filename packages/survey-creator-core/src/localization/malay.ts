@@ -109,6 +109,9 @@ export var msStrings = {
     redoTooltip: "Buat semula perubahan",
     expandAllTooltip: "Kembangkan Semua",
     collapseAllTooltip: "Runtuhkan Semua",
+    zoomInTooltip: "Zum Masuk",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Zum Keluar",
     lockQuestionsTooltip: "Kunci keadaan kembangkan/runtuhkan untuk soalan",
     showMoreChoices: "Tunjuk lebih banyak",
     showLessChoices: "Tunjukkan kurang",
@@ -832,6 +835,7 @@ export var msStrings = {
       background: "Latar belakang",
       appearance: "Penampilan",
       accentColors: "Warna aksen",
+      surfaceBackground: "Latar Belakang Permukaan",
       scaling: "Penskalaan",
       others: "Lain-lain"
     },
@@ -842,6 +846,7 @@ export var msStrings = {
     columnsEnableIf: "Lajur kelihatan jika",
     rowsEnableIf: "Baris boleh dilihat jika",
     innerIndent: "Menambah inden dalaman",
+    copyDefaultValueFromLastEntry: "Gunakan jawapan daripada entri terakhir sebagai lalai",
     enterNewValue: "Sila masukkan nilai.",
     noquestions: "Tiada soalan lain dalam tinjauan.",
     createtrigger: "Sila cipta pencetus",
@@ -1374,6 +1379,7 @@ export var msStrings = {
       copyDefaultValueFromLastEntry: "Pendua jawapan daripada panel terakhir dan memberikannya kepada panel dinamik tambahan seterusnya.",
       keyName: "Rujukan nama soalan untuk memerlukan pengguna memberikan jawapan yang unik untuk soalan ini dalam setiap panel."
     },
+    copyDefaultValueFromLastEntry: "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya.",
     defaultValueExpression: "Seting ini membolehkan anda memperuntukkan nilai jawapan lalai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas - '{q1_id} + {q2_id}', ungkapan Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dsb. Nilai yang ditentukan oleh ungkapan ini berfungsi sebagai nilai lalai awal yang boleh diubah oleh input manual responden.",
     resetValueIf: "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menentukan masa input responden ditetapkan semula kepada nilai berdasarkan \"Ungkapan nilai lalai\" atau \"Setkan ungkapan nilai\" atau kepada nilai \"Jawapan lalai\" (jika sama ada ditetapkan).",
     setValueIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan masa untuk menjalankan \"Tetapkan ungkapan nilai\" dan secara dinamik memperuntukkan nilai yang terhasil sebagai respons.",
@@ -1476,7 +1482,6 @@ export var msStrings = {
     keyDuplicationError: "Apabila sifat \"Mencegah respons pendua\" didayakan, responden yang cuba menyerahkan entri pendua akan menerima mesej ralat berikut.",
     totalExpression: "Membolehkan anda mengira jumlah nilai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), Ungkapan Boolean ('{age} > 60') dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dll.).",
     confirmDelete: "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman baris.",
-    copyDefaultValueFromLastEntry: "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya.",
     keyName: "Jika lajur yang ditentukan mengandungi nilai yang sama, tinjauan akan membuang ralat \"Nilai kunci bukan unik\".",
     description: "Taipkan sari kata.",
     locale: "Pilih bahasa untuk mula mencipta tinjauan anda. Untuk menambah terjemahan, tukar kepada bahasa baru dan terjemahkan teks asal di sini atau dalam tab Terjemahan.",
@@ -1752,7 +1757,8 @@ export var msStrings = {
       orchid: "Orchid",
       tulip: "Tulip",
       brown: "Brown",
-      green: "Hijau"
+      green: "Hijau",
+      gray: "Kelabu"
     }
   },
   creatortheme: {
@@ -2914,3 +2920,9 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Kunci keadaan kembangkan/runtuhkan untuk soalan"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Anda belum mempunyai sebarang halaman lagi"
 // pe.addNew@pages: "Add new page" => "Tambah halaman baru"
+// ed.zoomInTooltip: "Zoom In" => "Zum Masuk"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Zum Keluar"
+// tabs.surfaceBackground: "Surface Background" => "Latar Belakang Permukaan"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gunakan jawapan daripada entri terakhir sebagai lalai"
+// colors.gray: "Gray" => "Kelabu"

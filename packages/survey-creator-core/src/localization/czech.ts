@@ -109,6 +109,9 @@ export var czStrings = {
     redoTooltip: "Znovu provést změnu",
     expandAllTooltip: "Rozbalit vše",
     collapseAllTooltip: "Sbalit vše",
+    zoomInTooltip: "Přiblížit",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Oddálit",
     lockQuestionsTooltip: "Uzamknout stav rozbalení/sbalení pro otázky",
     showMoreChoices: "Zobrazit více",
     showLessChoices: "Zobrazit méně",
@@ -832,6 +835,7 @@ export var czStrings = {
       background: "Pozadí",
       appearance: "Vzhled",
       accentColors: "Zvýraznění barev",
+      surfaceBackground: "Pozadí povrchu",
       scaling: "Změna velikosti",
       others: "Ostatní"
     },
@@ -842,6 +846,7 @@ export var czStrings = {
     columnsEnableIf: "Sloupce jsou viditelné, pokud",
     rowsEnableIf: "Řádky jsou viditelné, pokud",
     innerIndent: "Přidat vnitřní odsazení",
+    copyDefaultValueFromLastEntry: "Použít odpovědi z posledního záznamu jako výchozí",
     enterNewValue: "Zadejte hodnotu.",
     noquestions: "V průzkumu není žádná otázka.",
     createtrigger: "Vytvořte spouštěč",
@@ -1374,6 +1379,7 @@ export var czStrings = {
       copyDefaultValueFromLastEntry: "Duplikuje odpovědi z posledního panelu a přiřadí je dalšímu přidanému dynamickému panelu.",
       keyName: "Odkazujte na název otázky, chcete-li vyžadovat, aby uživatel na tuto otázku v každém panelu poskytl jedinečnou odpověď."
     },
+    copyDefaultValueFromLastEntry: "Duplikuje odpovědi z posledního řádku a přiřadí je k dalšímu přidanému dynamickému řádku.",
     defaultValueExpression: "Toto nastavení umožňuje přiřadit výchozí hodnotu odpovědi na základě výrazu. Výraz může obsahovat základní výpočty - '{q1_id} + {q2_id}', logické výrazy, například '{age} > 60', a funkce: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atd. Hodnota určená tímto výrazem slouží jako počáteční výchozí hodnota, kterou lze přepsat ručním zadáním respondenta.",
     resetValueIf: "Pomocí ikony kouzelné hůlky můžete nastavit podmíněné pravidlo, které určuje, kdy se vstup respondenta resetuje na hodnotu na základě \"Výrazu výchozí hodnoty\" nebo \"Výrazu nastavit hodnotu\" nebo na hodnotu \"Výchozí odpověď\" (pokud je nastavena kterákoli z nich).",
     setValueIf: "Pomocí ikony kouzelné hůlky můžete nastavit podmíněné pravidlo, které určuje, kdy se má spustit výraz \"Nastavit hodnotu\", a dynamicky přiřadit výslednou hodnotu jako odpověď.",
@@ -1476,7 +1482,6 @@ export var czStrings = {
     keyDuplicationError: "Pokud je povolena vlastnost \"Zabránit duplicitním odpovědím\", respondentovi, který se pokouší odeslat duplicitní záznam, se zobrazí následující chybová zpráva.",
     totalExpression: "Umožňuje vypočítat celkové hodnoty na základě výrazu. Výraz může obsahovat základní výpočty ('{q1_id} + {q2_id}'), logické výrazy ('{age} > 60') a funkce ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atd.).",
     confirmDelete: "Spustí výzvu s žádostí o potvrzení odstranění řádku.",
-    copyDefaultValueFromLastEntry: "Duplikuje odpovědi z posledního řádku a přiřadí je k dalšímu přidanému dynamickému řádku.",
     keyName: "Pokud zadaný sloupec obsahuje totožné hodnoty, průzkum vyhodí chybu „Klíč není unikátní“.",
     description: "Zadejte titulky.",
     locale: "Vyberte jazyk a začněte vytvářet průzkum. Chcete-li přidat překlad, přepněte do nového jazyka a přeložte původní text zde nebo na kartě Překlady.",
@@ -1752,7 +1757,8 @@ export var czStrings = {
       orchid: "Orchidea",
       tulip: "Tulipán",
       brown: "Hnědý",
-      green: "Zelený"
+      green: "Zelený",
+      gray: "Šedý"
     }
   },
   creatortheme: {
@@ -2537,3 +2543,9 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Uzamknout stav rozbalení/sbalení pro otázky"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Zatím nemáte žádné stránky"
 // pe.addNew@pages: "Add new page" => "Přidat novou stránku"
+// ed.zoomInTooltip: "Zoom In" => "Přiblížit"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Oddálit"
+// tabs.surfaceBackground: "Surface Background" => "Pozadí povrchu"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Použít odpovědi z posledního záznamu jako výchozí"
+// colors.gray: "Gray" => "Šedý"

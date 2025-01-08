@@ -109,6 +109,9 @@ export var huStrings = {
     redoTooltip: "Ismételje meg a módosítást",
     expandAllTooltip: "Összes kibontása",
     collapseAllTooltip: "Az összes összecsukása",
+    zoomInTooltip: "Nagyítás",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Kicsinyítés",
     lockQuestionsTooltip: "Kibontási/összecsukási állapot zárolása kérdések esetén",
     showMoreChoices: "Bővebben",
     showLessChoices: "Rövidebben",
@@ -832,6 +835,7 @@ export var huStrings = {
       background: "Háttér",
       appearance: "Megjelenés",
       accentColors: "Kiemelő színek",
+      surfaceBackground: "Felület háttér",
       scaling: "Rétegképződés",
       others: "Mások"
     },
@@ -842,6 +846,7 @@ export var huStrings = {
     columnsEnableIf: "Az oszlopok akkor láthatók, ha",
     rowsEnableIf: "A sorok akkor láthatók, ha",
     innerIndent: "Belső behúzások hozzáadása",
+    copyDefaultValueFromLastEntry: "Az utolsó bejegyzés válaszainak használata alapértelmezettként",
     enterNewValue: "Kérem, adja meg az értéket.",
     noquestions: "Nincsenek kérdések a kérdőívben.",
     createtrigger: "Kérem hozzon létre egy eseményvezérlőt",
@@ -1374,6 +1379,7 @@ export var huStrings = {
       copyDefaultValueFromLastEntry: "Megkettőzi a válaszokat az utolsó panelről, és hozzárendeli őket a következő hozzáadott dinamikus panelhez.",
       keyName: "Hivatkozzon egy kérdés nevére, hogy a felhasználónak egyedi választ kell adnia erre a kérdésre minden panelen."
     },
+    copyDefaultValueFromLastEntry: "Megkettőzi a válaszokat az utolsó sorból, és hozzárendeli őket a következő hozzáadott dinamikus sorhoz.",
     defaultValueExpression: "Ezzel a beállítással alapértelmezett válaszértéket rendelhet hozzá egy kifejezés alapján. A kifejezés tartalmazhat alapvető számításokat - '{q1_id} + {q2_id}', logikai kifejezéseket, például \"{age} > 60\" és függvényeket: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb. A kifejezés által meghatározott érték a kezdeti alapértelmezett érték, amelyet a válaszadó kézi bevitele felülbírálhat.",
     resetValueIf: "A varázspálca ikonnal feltételes szabályt állíthat be, amely meghatározza, hogy a válaszadó bemenete mikor áll vissza az \"Alapértelmezett érték kifejezés\" vagy az \"Értékkifejezés beállítása\" vagy az \"Alapértelmezett válasz\" érték alapján (ha bármelyik be van állítva).",
     setValueIf: "A varázspálca ikonnal beállíthat egy feltételes szabályt, amely meghatározza, hogy mikor kell futtatni az \"Érték beállítása kifejezést\", és dinamikusan hozzárendelni az eredményül kapott értéket válaszként.",
@@ -1476,7 +1482,6 @@ export var huStrings = {
     keyDuplicationError: "Ha az \"Ismétlődő válaszok megakadályozása\" tulajdonság engedélyezve van, az ismétlődő bejegyzést beküldeni próbáló válaszadó a következő hibaüzenetet kapja.",
     totalExpression: "Lehetővé teszi az összesített értékek kiszámítását egy kifejezés alapján. A kifejezés tartalmazhat alapvető számításokat ('{q1_id} + {q2_id}'), logikai kifejezéseket ('{age} > 60') és függvényeket ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb.).",
     confirmDelete: "Elindít egy kérést, amely a sor törlésének megerősítését kéri.",
-    copyDefaultValueFromLastEntry: "Megkettőzi a válaszokat az utolsó sorból, és hozzárendeli őket a következő hozzáadott dinamikus sorhoz.",
     keyName: "Ha a megadott oszlop azonos értékeket tartalmaz, a felmérés a \"Nem egyedi kulcsérték\" hibát adja vissza.",
     description: "Írjon be egy feliratot.",
     locale: "Válassza ki a nyelvet a felmérés létrehozásának megkezdéséhez. Fordítás hozzáadásához váltson új nyelvre, és fordítsa le az eredeti szöveget itt vagy a Fordítások lapon.",
@@ -1752,7 +1757,8 @@ export var huStrings = {
       orchid: "Orchidea",
       tulip: "Tulipán",
       brown: "Barna",
-      green: "Zöld"
+      green: "Zöld",
+      gray: "Szürke"
     }
   },
   creatortheme: {
@@ -3111,3 +3117,9 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Kibontási/összecsukási állapot zárolása kérdések esetén"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Még nincsenek oldalai"
 // pe.addNew@pages: "Add new page" => "Új oldal hozzáadása"
+// ed.zoomInTooltip: "Zoom In" => "Nagyítás"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Kicsinyítés"
+// tabs.surfaceBackground: "Surface Background" => "Felület háttér"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Az utolsó bejegyzés válaszainak használata alapértelmezettként"
+// colors.gray: "Gray" => "Szürke"

@@ -109,6 +109,9 @@ export let svStrings = {
     redoTooltip: "Gör om ändringen",
     expandAllTooltip: "Expandera alla",
     collapseAllTooltip: "Komprimera alla",
+    zoomInTooltip: "Zooma in",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Zooma ut",
     lockQuestionsTooltip: "Lås expandera/komprimera tillstånd för frågor",
     showMoreChoices: "Visa mer",
     showLessChoices: "Visa mindre",
@@ -832,6 +835,7 @@ export let svStrings = {
       background: "Bakgrund",
       appearance: "Utseende",
       accentColors: "Accentfärger",
+      surfaceBackground: "Yta Bakgrund",
       scaling: "Skalning",
       others: "Andra"
     },
@@ -842,6 +846,7 @@ export let svStrings = {
     columnsEnableIf: "Kolumner visas om",
     rowsEnableIf: "Raderna visas om",
     innerIndent: "Lägga till inre indrag",
+    copyDefaultValueFromLastEntry: "Använd svar från den senaste posten som standard",
     enterNewValue: "Vänligen skriv in ett värde.",
     noquestions: "Det finns ingen fråga i enkäten.",
     createtrigger: "Vänligen skapa en trigger",
@@ -1374,6 +1379,7 @@ export let svStrings = {
       copyDefaultValueFromLastEntry: "Duplicerar svar från den sista panelen och tilldelar dem till nästa tillagda dynamiska panel.",
       keyName: "Referera till ett frågenamn för att kräva att en användare anger ett unikt svar för den här frågan i varje panel."
     },
+    copyDefaultValueFromLastEntry: "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad.",
     defaultValueExpression: "Med den här inställningen kan du tilldela ett standardsvarsvärde baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar – {q1_id} + {q2_id}, booleska uttryck, till exempel {age} > 60 och funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Värdet som bestäms av detta uttryck fungerar som det initiala standardvärdet som kan åsidosättas av en svarandes manuella inmatning.",
     resetValueIf: "Använd trollstavsikonen för att ställa in en villkorsregel som avgör när en respondents inmatning återställs till värdet baserat på \"Standardvärdesuttryck\" eller \"Ange värdeuttryck\" eller till värdet \"Standardsvar\" (om något av dem är inställt).",
     setValueIf: "Använd trollstavsikonen för att ställa in en villkorsregel som avgör när \"Ange värdeuttryck\" ska köras och dynamiskt tilldela det resulterande värdet som ett svar.",
@@ -1476,7 +1482,6 @@ export let svStrings = {
     keyDuplicationError: "När egenskapen \"Förhindra dubblettsvar\" är aktiverad kommer en svarande som försöker skicka in en dubblett att få följande felmeddelande.",
     totalExpression: "Gör att du kan beräkna totalvärden baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar ('{q1_id} + {q2_id}'), booleska uttryck ('{age} > 60') och funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     confirmDelete: "Utlöser en uppmaning där du uppmanas att bekräfta borttagningen av raden.",
-    copyDefaultValueFromLastEntry: "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad.",
     keyName: "Om den angivna kolumnen innehåller identiska värden genereras felet \"Icke-unikt nyckelvärde\".",
     description: "Skriv en undertext.",
     locale: "Välj ett språk för att börja skapa din undersökning. Om du vill lägga till en översättning byter du till ett nytt språk och översätter originaltexten här eller på fliken Översättningar.",
@@ -1752,7 +1757,8 @@ export let svStrings = {
       orchid: "Orkidé",
       tulip: "Tulpan",
       brown: "Brun",
-      green: "Grön"
+      green: "Grön",
+      gray: "Grå"
     }
   },
   creatortheme: {
@@ -3135,3 +3141,9 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lås expandera/komprimera tillstånd för frågor"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har inga sidor ännu"
 // pe.addNew@pages: "Add new page" => "Lägg till ny sida"
+// ed.zoomInTooltip: "Zoom In" => "Zooma in"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Zooma ut"
+// tabs.surfaceBackground: "Surface Background" => "Yta Bakgrund"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Använd svar från den senaste posten som standard"
+// colors.gray: "Gray" => "Grå"

@@ -109,6 +109,9 @@ export var arStrings = {
     redoTooltip: "Redo the change",
     expandAllTooltip: "توسيع الكل",
     collapseAllTooltip: "طي الكل",
+    zoomInTooltip: "تكبير",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "التصغير",
     lockQuestionsTooltip: "تأمين حالة التوسيع/الطي للأسئلة",
     showMoreChoices: "استعراض المزيد",
     showLessChoices: "عرض أقل",
@@ -697,6 +700,7 @@ export var arStrings = {
     autocomplete: "نوع الإكمال التلقائي",
     labelTrue: "تسمية \"صحيح\"",
     labelFalse: "تسمية \"خطأ\"",
+    allowClear: "إظهار الزر مسح",
     searchMode: "وضع البحث",
     displayStyle: "نمط عرض القيمة",
     format: "سلسلة منسقة",
@@ -741,7 +745,6 @@ export var arStrings = {
     keyDuplicationError: "رسالة الخطأ \"قيمة مفتاح غير فريدة\"",
     minSelectedChoices: "الحد الأدنى من الخيارات المحددة",
     maxSelectedChoices: "الحد الأقصى للخيارات المحددة",
-    allowClear: "إظهار الزر مسح",
     logoWidth: "عرض الشعار (بالقيم المقبولة من CSS)",
     logoHeight: "ارتفاع الشعار (بالقيم المقبولة من CSS)",
     readOnly: "للقراءة فقط",
@@ -832,6 +835,7 @@ export var arStrings = {
       background: "خلفية",
       appearance: "مظهر",
       accentColors: "ألوان مميزة",
+      surfaceBackground: "خلفية السطح",
       scaling: "القياس",
       others: "غير ذلك"
     },
@@ -842,6 +846,7 @@ export var arStrings = {
     columnsEnableIf: "تكون الأعمدة مرئية إذا",
     rowsEnableIf: "تكون الصفوف مرئية إذا",
     innerIndent: "إضافة مسافات بادئة داخلية",
+    copyDefaultValueFromLastEntry: "استخدام الإجابات من الإدخال الأخير كإعداد افتراضي",
     enterNewValue: "Please, enter the value.",
     noquestions: "There is no any question in the survey.",
     createtrigger: "Please create a trigger",
@@ -1374,6 +1379,7 @@ export var arStrings = {
       copyDefaultValueFromLastEntry: "يضاعف الإجابات من اللوحة الأخيرة ويعينها إلى اللوحة الديناميكية المضافة التالية.",
       keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة."
     },
+    copyDefaultValueFromLastEntry: "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي.",
     defaultValueExpression: "يسمح لك هذا الإعداد بتعيين قيمة إجابة افتراضية استنادا إلى تعبير. يمكن أن يتضمن التعبير حسابات أساسية - '{q1_id} + {q2_id}' ، والتعبيرات المنطقية ، مثل '{age} > 60' ، والدوالات: 'iif ()' ، 'today ()' ، 'age ()' ، 'min ()' ، 'max ()' ، 'avg ()' ، إلخ. تعمل القيمة التي يحددها هذا التعبير كقيمة افتراضية أولية يمكن تجاوزها بواسطة الإدخال اليدوي للمستجيب.",
     resetValueIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد متى تتم إعادة تعيين إدخال المستجيب إلى القيمة استنادا إلى \"تعبير القيمة الافتراضية\" أو \"تعيين تعبير القيمة\" أو إلى قيمة \"الإجابة الافتراضية\" (إذا تم تعيين أي منهما).",
     setValueIf: "استخدم رمز العصا السحرية لتعيين قاعدة شرطية تحدد وقت تشغيل \"تعيين تعبير القيمة\" وتعيين القيمة الناتجة ديناميكيا كاستجابة.",
@@ -1476,7 +1482,6 @@ export var arStrings = {
     keyDuplicationError: "عند تمكين الخاصية \"منع الاستجابات المكررة\"، سيتلقى مستجيب يحاول إرسال إدخال مكرر رسالة الخطأ التالية.",
     totalExpression: "يسمح لك بحساب القيم الإجمالية استنادا إلى تعبير. يمكن أن يتضمن التعبير العمليات الحسابية الأساسية ('{q1_id} + {q2_id}') والتعبيرات المنطقية ('{age} > 60') والوظائف ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', إلخ).",
     confirmDelete: "يؤدي إلى تشغيل مطالبة تطلب تأكيد حذف الصف.",
-    copyDefaultValueFromLastEntry: "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي.",
     keyName: "إذا كان العمود المحدد يحتوي على قيم متطابقة ، فإن الاستطلاع يلقي الخطأ \"قيمة مفتاح غير فريدة\".",
     description: "اكتب عنوانا فرعيا.",
     locale: "اختر لغة لبدء إنشاء الاستطلاع. لإضافة ترجمة، قم بالتبديل إلى لغة جديدة وترجمة النص الأصلي هنا أو في علامة التبويب الترجمات.",
@@ -1752,7 +1757,8 @@ export var arStrings = {
       orchid: "السحلب",
       tulip: "توليب",
       brown: "أسمر",
-      green: "أخضر"
+      green: "أخضر",
+      gray: "رمادي"
     }
   },
   creatortheme: {
@@ -2875,3 +2881,9 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "تأمين حالة التوسيع/الطي للأسئلة"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "ليس لديك أي صفحات حتى الآن"
 // pe.addNew@pages: "Add new page" => "إضافة صفحة جديدة"
+// ed.zoomInTooltip: "Zoom In" => "تكبير"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "التصغير"
+// tabs.surfaceBackground: "Surface Background" => "خلفية السطح"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "استخدام الإجابات من الإدخال الأخير كإعداد افتراضي"
+// colors.gray: "Gray" => "رمادي"

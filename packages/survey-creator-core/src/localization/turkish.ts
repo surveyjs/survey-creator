@@ -109,6 +109,9 @@ export var turkishStrings = {
     redoTooltip: "Son değişikliği ileri al",
     expandAllTooltip: "Tümünü Genişlet",
     collapseAllTooltip: "Tümünü Daralt",
+    zoomInTooltip: "Yakınlaştırma",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Uzaklaştırma",
     lockQuestionsTooltip: "Sorular için genişletme/daraltma durumunu kilitle",
     showMoreChoices: "Daha fazlasını göster",
     showLessChoices: "Daha az göster",
@@ -832,6 +835,7 @@ export var turkishStrings = {
       background: "Arka plan",
       appearance: "Görünüş",
       accentColors: "Vurgu renkleri",
+      surfaceBackground: "Yüzey Arka Planı",
       scaling: "Ölçekleme",
       others: "Diğer"
     },
@@ -842,6 +846,7 @@ export var turkishStrings = {
     columnsEnableIf: "Sütunlar şu durumlarda görünür:",
     rowsEnableIf: "Satırlar şu durumlarda görünür:",
     innerIndent: "İç girintiler ekleme",
+    copyDefaultValueFromLastEntry: "Varsayılan olarak son girişteki yanıtları kullan",
     enterNewValue: "Lütfen, değer girin.",
     noquestions: "Ankette herhangi bir soru yok.",
     createtrigger: "Lütfen bir tetikleyici oluşturun",
@@ -1374,6 +1379,7 @@ export var turkishStrings = {
       copyDefaultValueFromLastEntry: "Son paneldeki yanıtları çoğaltır ve bir sonraki eklenen dinamik panele atar.",
       keyName: "Kullanıcının her panelde bu soruya benzersiz bir yanıt vermesini zorunlu kılmak için bir soru adına başvurun."
     },
+    copyDefaultValueFromLastEntry: "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar.",
     defaultValueExpression: "Bu ayar, bir ifadeye göre varsayılan bir yanıt değeri atamanıza olanak tanır. İfade temel hesaplamaları içerebilir - '{q1_id} + {q2_id}', '{age} > 60' gibi Boole ifadeleri ve işlevler: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb. Bu ifade tarafından belirlenen değer, yanıtlayanın manuel girişi tarafından geçersiz kılınabilecek ilk varsayılan değer olarak işlev görür.",
     resetValueIf: "Yanıtlayanın girişinin ne zaman \"Varsayılan değer ifadesi\" veya \"Değer ifadesi ayarla\" ya da \"Varsayılan yanıt\" değerine (ayarlanmışsa) dayalı değere ne zaman sıfırlanacağını belirleyen bir koşullu kural ayarlamak için sihirli değnek simgesini kullanın.",
     setValueIf: "\"Değer ayarla ifadesinin\" ne zaman çalıştırılacağını belirleyen koşullu bir kural belirlemek ve elde edilen değeri yanıt olarak dinamik olarak atamak için sihirli değnek simgesini kullanın.",
@@ -1476,7 +1482,6 @@ export var turkishStrings = {
     keyDuplicationError: "\"Yinelenen yanıtları engelle\" özelliği etkinleştirildiğinde, yinelenen bir girdi göndermeye çalışan yanıtlayan aşağıdaki hata iletisini alır.",
     totalExpression: "Bir ifadeye dayalı olarak toplam değerleri hesaplamanıza olanak tanır. İfade, temel hesaplamaları ('{q1_id} + {q2_id}'), Boole ifadelerini ('{age} > 60') ve işlevleri ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb.) içerebilir.",
     confirmDelete: "Satır silme işlemini onaylamanızı isteyen bir istemi tetikler.",
-    copyDefaultValueFromLastEntry: "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar.",
     keyName: "Belirtilen sütun aynı değerleri içeriyorsa, anket \"Benzersiz olmayan anahtar değeri\" hatasını atar.",
     description: "Bir altyazı yazın.",
     locale: "Anketinizi oluşturmaya başlamak için bir dil seçin. Çeviri eklemek için yeni bir dile geçin ve orijinal metni buradan veya Çeviriler sekmesinden çevirin.",
@@ -1752,7 +1757,8 @@ export var turkishStrings = {
       orchid: "Orkide",
       tulip: "Lale",
       brown: "Kahverengi",
-      green: "Yeşil"
+      green: "Yeşil",
+      gray: "Gri"
     }
   },
   creatortheme: {
@@ -2956,3 +2962,9 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Sorular için genişletme/daraltma durumunu kilitle"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Henüz hiç sayfanız yok"
 // pe.addNew@pages: "Add new page" => "Yeni sayfa ekle"
+// ed.zoomInTooltip: "Zoom In" => "Yakınlaştırma"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Uzaklaştırma"
+// tabs.surfaceBackground: "Surface Background" => "Yüzey Arka Planı"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Varsayılan olarak son girişteki yanıtları kullan"
+// colors.gray: "Gray" => "Gri"
