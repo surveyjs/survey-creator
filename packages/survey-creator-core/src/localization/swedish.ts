@@ -843,8 +843,6 @@ export let svStrings = {
     columnsEnableIf: "Kolumner visas om",
     rowsEnableIf: "Raderna visas om",
     innerIndent: "Lägga till inre indrag",
-    defaultValueFromLastRow: "Ta standardvärden från den sista raden",
-    defaultValueFromLastPanel: "Ta standardvärden från den sista panelen",
     enterNewValue: "Vänligen skriv in ett värde.",
     noquestions: "Det finns ingen fråga i enkäten.",
     createtrigger: "Vänligen skapa en trigger",
@@ -1374,7 +1372,7 @@ export let svStrings = {
       titleLocation: "Den här inställningen ärvs automatiskt av alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard).",
       descriptionLocation: "Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Under panelrubriken\" som standard).",
       newPanelPosition: "Definierar placeringen av en nyligen tillagd panel. Som standard läggs nya paneler till i slutet. Välj \"Nästa\" för att infoga en ny panel efter den nuvarande.",
-      defaultValueFromLastPanel: "Duplicerar svar från den sista panelen och tilldelar dem till nästa tillagda dynamiska panel.",
+      copyDefaultValueFromLastEntry: "Duplicerar svar från den sista panelen och tilldelar dem till nästa tillagda dynamiska panel.",
       keyName: "Referera till ett frågenamn för att kräva att en användare anger ett unikt svar för den här frågan i varje panel."
     },
     defaultValueExpression: "Med den här inställningen kan du tilldela ett standardsvarsvärde baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar – {q1_id} + {q2_id}, booleska uttryck, till exempel {age} > 60 och funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Värdet som bestäms av detta uttryck fungerar som det initiala standardvärdet som kan åsidosättas av en svarandes manuella inmatning.",
@@ -1479,7 +1477,7 @@ export let svStrings = {
     keyDuplicationError: "När egenskapen \"Förhindra dubblettsvar\" är aktiverad kommer en svarande som försöker skicka in en dubblett att få följande felmeddelande.",
     totalExpression: "Gör att du kan beräkna totalvärden baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar ('{q1_id} + {q2_id}'), booleska uttryck ('{age} > 60') och funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     confirmDelete: "Utlöser en uppmaning där du uppmanas att bekräfta borttagningen av raden.",
-    defaultValueFromLastRow: "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad.",
+    copyDefaultValueFromLastEntry: "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad.",
     keyName: "Om den angivna kolumnen innehåller identiska värden genereras felet \"Icke-unikt nyckelvärde\".",
     description: "Skriv en undertext.",
     locale: "Välj ett språk för att börja skapa din undersökning. Om du vill lägga till en översättning byter du till ett nytt språk och översätter originaltexten här eller på fliken Översättningar.",
@@ -2144,8 +2142,6 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pe.indent: "Add indents" => "Lägga till indrag"
 // panel.indent: "Add outer indents" => "Lägga till yttre indrag"
 // pe.innerIndent: "Add inner indents" => "Lägga till inre indrag"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Ta standardvärden från den sista raden"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Ta standardvärden från den sista panelen"
 // pe.titleKeyboardAdornerTip: "Press enter button to edit" => "Tryck på enter-knappen för att redigera"
 // pe.keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item" => "Tryck på enter-knappen för att redigera objektet, tryck på raderingsknappen för att radera objektet, tryck på alt plus pil uppåt eller pil nedåt för att flytta objektet"
 // pe.triggerGotoName: "Go to the question" => "Gå till frågan"
@@ -2729,7 +2725,7 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Den här inställningen ärvs automatiskt av alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Under panelrubriken\" som standard)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Definierar placeringen av en nyligen tillagd panel. Som standard läggs nya paneler till i slutet. Välj \"Nästa\" för att infoga en ny panel efter den nuvarande."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplicerar svar från den sista panelen och tilldelar dem till nästa tillagda dynamiska panel."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplicerar svar från den sista panelen och tilldelar dem till nästa tillagda dynamiska panel."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Referera till ett frågenamn för att kräva att en användare anger ett unikt svar för den här frågan i varje panel."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Med den här inställningen kan du tilldela ett standardsvarsvärde baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar – {q1_id} + {q2_id}, booleska uttryck, till exempel {age} > 60 och funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Värdet som bestäms av detta uttryck fungerar som det initiala standardvärdet som kan åsidosättas av en svarandes manuella inmatning."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Använd trollstavsikonen för att ställa in en villkorsregel som avgör när en respondents inmatning återställs till värdet baserat på \"Standardvärdesuttryck\" eller \"Ange värdeuttryck\" eller till värdet \"Standardsvar\" (om något av dem är inställt)."
@@ -2801,7 +2797,7 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "När egenskapen \"Förhindra dubblettsvar\" är aktiverad kommer en svarande som försöker skicka in en dubblett att få följande felmeddelande."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Gör att du kan beräkna totalvärden baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar ('{q1_id} + {q2_id}'), booleska uttryck ('{age} > 60') och funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Utlöser en uppmaning där du uppmanas att bekräfta borttagningen av raden."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad."
 // pehelp.description: "Type a subtitle." => "Skriv en undertext."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Välj ett språk för att börja skapa din undersökning. Om du vill lägga till en översättning byter du till ett nytt språk och översätter originaltexten här eller på fliken Översättningar."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Anger platsen för ett detaljavsnitt i förhållande till en rad. Välj mellan: \"Ingen\" - ingen expansion läggs till; \"Under raden\" - en radexpansion placeras under varje rad i matrisen; \"Visa endast en radexpansion under raden\" - en expansion visas endast under en enda rad, de återstående radexpansionerna är komprimerade."

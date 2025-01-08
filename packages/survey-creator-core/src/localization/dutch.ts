@@ -843,8 +843,6 @@ export var nlStrings = {
     columnsEnableIf: "Kolommen zijn zichtbaar als",
     rowsEnableIf: "Rijen zijn zichtbaar als",
     innerIndent: "Binnenste inspringingen toevoegen",
-    defaultValueFromLastRow: "Standaardwaarden uit de laatste rij nemen",
-    defaultValueFromLastPanel: "Standaardwaarden uit het laatste deelvenster overnemen",
     enterNewValue: "Voer de waarde in.",
     noquestions: "Er is geen enkele vraag in de enquête.",
     createtrigger: "Maak een trigger",
@@ -1374,7 +1372,7 @@ export var nlStrings = {
       titleLocation: "Deze instelling wordt automatisch overgenomen door alle vragen in dit paneel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
       descriptionLocation: "De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe (\"Standaard onder de paneeltitel\").",
       newPanelPosition: "Definieert de positie van een nieuw toegevoegd deelvenster. Standaard worden er nieuwe panelen aan het einde toegevoegd. Selecteer \"Volgende\" om een nieuw paneel in te voegen na het huidige.",
-      defaultValueFromLastPanel: "Dupliceert antwoorden uit het laatste deelvenster en wijst ze toe aan het volgende toegevoegde dynamische deelvenster.",
+      copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit het laatste deelvenster en wijst ze toe aan het volgende toegevoegde dynamische deelvenster.",
       keyName: "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag."
     },
     defaultValueExpression: "Met deze instelling kunt u een standaardantwoordwaarde toewijzen op basis van een expressie. De expressie kan basisberekeningen bevatten - '{q1_id} + {q2_id}', Booleaanse expressies, zoals '{age} > 60', en functies: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', enz. De waarde die door deze expressie wordt bepaald, dient als de oorspronkelijke standaardwaarde die kan worden overschreven door de handmatige invoer van een respondent.",
@@ -1479,7 +1477,7 @@ export var nlStrings = {
     keyDuplicationError: "Wanneer de eigenschap 'Dubbele antwoorden voorkomen' is ingeschakeld, ontvangt een respondent die een dubbele vermelding probeert in te dienen, het volgende foutbericht.",
     totalExpression: "Hiermee kunt u totale waarden berekenen op basis van een expressie. De expressie kan basisberekeningen ('{q1_id} + {q2_id}'), Booleaanse expressies ('{age} > 60') en functies ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.) bevatten.",
     confirmDelete: "Hiermee wordt gevraagd om het verwijderen van de rij te bevestigen.",
-    defaultValueFromLastRow: "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij.",
+    copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij.",
     keyName: "Als de opgegeven kolom identieke waarden bevat, genereert de enquête de fout 'Niet-unieke sleutelwaarde'.",
     description: "Typ een ondertitel.",
     locale: "Kies een taal om te beginnen met het maken van uw enquête. Als u een vertaling wilt toevoegen, schakelt u over naar een nieuwe taal en vertaalt u de originele tekst hier of op het tabblad Vertalingen.",
@@ -1978,8 +1976,6 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.indent: "Add indents" => "Inspringingen toevoegen"
 // panel.indent: "Add outer indents" => "Buitenste streepjes toevoegen"
 // pe.innerIndent: "Add inner indents" => "Binnenste inspringingen toevoegen"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Standaardwaarden uit de laatste rij nemen"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Standaardwaarden uit het laatste deelvenster overnemen"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "Typ hier expressie..."
 // pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "Wis de waarde als de vraag verborgen wordt"
 // pe.valuePropertyName: "Value property name" => "Naam van de eigenschap Value"
@@ -2531,7 +2527,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Deze instelling wordt automatisch overgenomen door alle vragen in dit paneel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe (\"Standaard onder de paneeltitel\")."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Definieert de positie van een nieuw toegevoegd deelvenster. Standaard worden er nieuwe panelen aan het einde toegevoegd. Selecteer \"Volgende\" om een nieuw paneel in te voegen na het huidige."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Dupliceert antwoorden uit het laatste deelvenster en wijst ze toe aan het volgende toegevoegde dynamische deelvenster."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Dupliceert antwoorden uit het laatste deelvenster en wijst ze toe aan het volgende toegevoegde dynamische deelvenster."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Met deze instelling kunt u een standaardantwoordwaarde toewijzen op basis van een expressie. De expressie kan basisberekeningen bevatten - '{q1_id} + {q2_id}', Booleaanse expressies, zoals '{age} > 60', en functies: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', enz. De waarde die door deze expressie wordt bepaald, dient als de oorspronkelijke standaardwaarde die kan worden overschreven door de handmatige invoer van een respondent."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die bepaalt wanneer de invoer van een respondent wordt teruggezet naar de waarde op basis van de \"Standaardwaarde-expressie\" of \"Waarde-expressie instellen\" of naar de waarde \"Standaardantwoord\" (als een van beide is ingesteld)."
@@ -2603,7 +2599,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Wanneer de eigenschap 'Dubbele antwoorden voorkomen' is ingeschakeld, ontvangt een respondent die een dubbele vermelding probeert in te dienen, het volgende foutbericht."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Hiermee kunt u totale waarden berekenen op basis van een expressie. De expressie kan basisberekeningen ('{q1_id} + {q2_id}'), Booleaanse expressies ('{age} > 60') en functies ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.) bevatten."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Hiermee wordt gevraagd om het verwijderen van de rij te bevestigen."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij."
 // pehelp.description: "Type a subtitle." => "Typ een ondertitel."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Kies een taal om te beginnen met het maken van uw enquête. Als u een vertaling wilt toevoegen, schakelt u over naar een nieuwe taal en vertaalt u de originele tekst hier of op het tabblad Vertalingen."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Hiermee stelt u de locatie van een detailsectie ten opzichte van een rij in. Kies uit: \"Geen\" - er wordt geen uitbreiding toegevoegd; \"Onder de rij\" - onder elke rij van de matrix wordt een rij-uitbreiding geplaatst; \"Onder de rij, slechts één rij-uitbreiding weergeven\" - een uitbreiding wordt alleen onder een enkele rij weergegeven, de resterende rij-uitbreidingen zijn samengevouwen."

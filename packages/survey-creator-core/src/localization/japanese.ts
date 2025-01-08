@@ -843,8 +843,6 @@ export var jaStrings = {
     columnsEnableIf: "列は次の場合に表示されます。",
     rowsEnableIf: "行は次の場合に表示されます。",
     innerIndent: "内側のインデントを追加する",
-    defaultValueFromLastRow: "最後の行からデフォルト値を取得する",
-    defaultValueFromLastPanel: "最後のパネルからデフォルト値を取得する",
     enterNewValue: "値を入力してください。",
     noquestions: "アンケートに質問はありません。",
     createtrigger: "トリガーを作成してください。",
@@ -1374,7 +1372,7 @@ export var jaStrings = {
       titleLocation: "この設定は、このパネル内のすべての質問に自動的に継承されます。この設定を上書きする場合は、個々の質問のタイトル配置ルールを定義します。「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「上」)を適用します。",
       descriptionLocation: "「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「パネルタイトルの下」)を適用します。",
       newPanelPosition: "新しく追加されたパネルの位置を定義します。デフォルトでは、新しいパネルが最後に追加されます。「次へ」を選択して、現在のパネルの後に新しいパネルを挿入します。",
-      defaultValueFromLastPanel: "最後のパネルから回答を複製し、次に追加された動的パネルに割り当てます。",
+      copyDefaultValueFromLastEntry: "最後のパネルから回答を複製し、次に追加された動的パネルに割り当てます。",
       keyName: "質問名を参照して、各パネルでこの質問に対して一意の回答を提供するようユーザーに要求します。"
     },
     defaultValueExpression: "この設定では、式に基づいてデフォルトの回答値を割り当てることができます。式には、基本的な計算 - '{q1_id} + {q2_id}'、'{age} > 60' などのブール式、関数 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などを含めることができます。この式によって決定される値は、回答者の手動入力で上書きできる初期デフォルト値として機能します。",
@@ -1479,7 +1477,7 @@ export var jaStrings = {
     keyDuplicationError: "「重複回答の防止」プロパティが有効な場合、重複したエントリを送信しようとする回答者は、次のエラーメッセージを受け取ります。",
     totalExpression: "式に基づいて合計値を計算できます。式には、基本的な計算 ('{q1_id} + {q2_id}')、ブール式 ('{age} > 60')、関数 ('iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' など) を含めることができます。",
     confirmDelete: "行の削除を確認するプロンプトをトリガーします。",
-    defaultValueFromLastRow: "最後の行から回答を複製し、次に追加された動的行に割り当てます。",
+    copyDefaultValueFromLastEntry: "最後の行から回答を複製し、次に追加された動的行に割り当てます。",
     keyName: "指定した列に同じ値が含まれている場合、調査は「一意でないキー値」エラーをスローします。",
     description: "字幕を入力します。",
     locale: "言語を選択してアンケートの作成を開始します。翻訳を追加するには、新しい言語に切り替えて、ここまたは [翻訳] タブで元のテキストを翻訳します。",
@@ -1982,8 +1980,6 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pe.indent: "Add indents" => "インデントを追加する"
 // panel.indent: "Add outer indents" => "外側のインデントを追加する"
 // pe.innerIndent: "Add inner indents" => "内側のインデントを追加する"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "最後の行からデフォルト値を取得する"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "最後のパネルからデフォルト値を取得する"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "ここに式を入力してください..."
 // pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "質問が非表示になった場合は値をクリアする"
 // pe.valuePropertyName: "Value property name" => "値プロパティ名"
@@ -2553,7 +2549,7 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "この設定は、このパネル内のすべての質問に自動的に継承されます。この設定を上書きする場合は、個々の質問のタイトル配置ルールを定義します。「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「上」)を適用します。"
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「パネルタイトルの下」)を適用します。"
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "新しく追加されたパネルの位置を定義します。デフォルトでは、新しいパネルが最後に追加されます。「次へ」を選択して、現在のパネルの後に新しいパネルを挿入します。"
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "最後のパネルから回答を複製し、次に追加された動的パネルに割り当てます。"
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "最後のパネルから回答を複製し、次に追加された動的パネルに割り当てます。"
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "質問名を参照して、各パネルでこの質問に対して一意の回答を提供するようユーザーに要求します。"
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "この設定では、式に基づいてデフォルトの回答値を割り当てることができます。式には、基本的な計算 - '{q1_id} + {q2_id}'、'{age} > 60' などのブール式、関数 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などを含めることができます。この式によって決定される値は、回答者の手動入力で上書きできる初期デフォルト値として機能します。"
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "魔法の杖アイコンを使用して、回答者の入力を「デフォルト値式」または「値式の設定」に基づく値、または「デフォルト回答」値(どちらかが設定されている場合)にリセットするタイミングを決定する条件付きルールを設定します。"
@@ -2625,7 +2621,7 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "「重複回答の防止」プロパティが有効な場合、重複したエントリを送信しようとする回答者は、次のエラーメッセージを受け取ります。"
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "式に基づいて合計値を計算できます。式には、基本的な計算 ('{q1_id} + {q2_id}')、ブール式 ('{age} > 60')、関数 ('iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' など) を含めることができます。"
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "行の削除を確認するプロンプトをトリガーします。"
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "最後の行から回答を複製し、次に追加された動的行に割り当てます。"
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "最後の行から回答を複製し、次に追加された動的行に割り当てます。"
 // pehelp.description: "Type a subtitle." => "字幕を入力します。"
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "言語を選択してアンケートの作成を開始します。翻訳を追加するには、新しい言語に切り替えて、ここまたは [翻訳] タブで元のテキストを翻訳します。"
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "行を基準にした詳細セクションの位置を設定します。次から選択します: \"None\" - 展開は追加されません。\"Under the row\" - 行列の各行の下に行展開が配置されます。\"Under the row, display one row expansion only\" - 展開は 1 行の下にのみ表示され、残りの行展開は折りたたまれます。"

@@ -843,8 +843,6 @@ export var danishStrings = {
     columnsEnableIf: "Kolonner er synlige, hvis",
     rowsEnableIf: "Rækker er synlige, hvis",
     innerIndent: "Tilføj indre indrykninger",
-    defaultValueFromLastRow: "Tag standardværdier fra den sidste række",
-    defaultValueFromLastPanel: "Tag standardværdier fra det sidste panel",
     enterNewValue: "Indtast værdien.",
     noquestions: "Der er ingen spørgsmål i undersøgelsen.",
     createtrigger: "Opret en trigger",
@@ -1374,7 +1372,7 @@ export var danishStrings = {
       titleLocation: "Denne indstilling nedarves automatisk af alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard).",
       descriptionLocation: "Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Under paneltitlen\" som standard).",
       newPanelPosition: "Definerer placeringen af et nyligt tilføjet panel. Som standard tilføjes nye paneler til slutningen. Vælg \"Næste\" for at indsætte et nyt panel efter det aktuelle.",
-      defaultValueFromLastPanel: "Duplikerer svar fra det sidste panel og tildeler dem til det næste tilføjede dynamiske panel.",
+      copyDefaultValueFromLastEntry: "Duplikerer svar fra det sidste panel og tildeler dem til det næste tilføjede dynamiske panel.",
       keyName: "Henvis til et spørgsmålsnavn for at kræve, at en bruger giver et entydigt svar på dette spørgsmål i hvert panel."
     },
     defaultValueExpression: "Med denne indstilling kan du tildele en standardsvarværdi baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger - '{q1_id} + {q2_id}', booleske udtryk, såsom '{alder} > 60' og funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Den værdi, der bestemmes af dette udtryk, fungerer som den oprindelige standardværdi, der kan tilsidesættes af svarpersonens manuelle input.",
@@ -1479,7 +1477,7 @@ export var danishStrings = {
     keyDuplicationError: "Når egenskaben \"Undgå dublerede svar\" er aktiveret, modtager en svarperson, der forsøger at sende en dubletpost, følgende fejlmeddelelse.",
     totalExpression: "Giver dig mulighed for at beregne samlede værdier baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger ('{q1_id} + {q2_id}'), booleske udtryk ('{alder} > 60') og funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv.).",
     confirmDelete: "Udløser en prompt, der beder om at bekræfte sletningen af rækken.",
-    defaultValueFromLastRow: "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række.",
+    copyDefaultValueFromLastEntry: "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række.",
     keyName: "Hvis den angivne kolonne indeholder identiske værdier, kaster undersøgelsen fejlen \"Ikke-unik nøgleværdi\".",
     description: "Skriv en undertekst.",
     locale: "Vælg et sprog for at begynde at oprette undersøgelsen. Hvis du vil tilføje en oversættelse, skal du skifte til et nyt sprog og oversætte den oprindelige tekst her eller på fanen Oversættelser.",
@@ -2150,8 +2148,6 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pe.indent: "Add indents" => "Tilføj indrykninger"
 // panel.indent: "Add outer indents" => "Tilføj ydre indrykninger"
 // pe.innerIndent: "Add inner indents" => "Tilføj indre indrykninger"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Tag standardværdier fra den sidste række"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Tag standardværdier fra det sidste panel"
 // pe.titleKeyboardAdornerTip: "Press enter button to edit" => "Tryk på enter-knappen for at redigere"
 // pe.keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item" => "Tryk på enter-knappen for at redigere elementet, tryk på slet-knappen for at slette elementet, tryk på alt plus pil op eller pil ned for at flytte elementet"
 // pe.triggerGotoName: "Go to the question" => "Gå til spørgsmålet"
@@ -2738,7 +2734,7 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Denne indstilling nedarves automatisk af alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Under paneltitlen\" som standard)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Definerer placeringen af et nyligt tilføjet panel. Som standard tilføjes nye paneler til slutningen. Vælg \"Næste\" for at indsætte et nyt panel efter det aktuelle."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplikerer svar fra det sidste panel og tildeler dem til det næste tilføjede dynamiske panel."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplikerer svar fra det sidste panel og tildeler dem til det næste tilføjede dynamiske panel."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Henvis til et spørgsmålsnavn for at kræve, at en bruger giver et entydigt svar på dette spørgsmål i hvert panel."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Med denne indstilling kan du tildele en standardsvarværdi baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger - '{q1_id} + {q2_id}', booleske udtryk, såsom '{alder} > 60' og funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Den værdi, der bestemmes af dette udtryk, fungerer som den oprindelige standardværdi, der kan tilsidesættes af svarpersonens manuelle input."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Brug tryllestavsikonet til at angive en betinget regel, der bestemmer, hvornår en svarpersons input nulstilles til værdien baseret på værdien \"Standardværdiudtryk\" eller \"Angiv værdiudtryk\" eller til værdien \"Standardsvar\" (hvis en af dem er angivet)."
@@ -2810,7 +2806,7 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Når egenskaben \"Undgå dublerede svar\" er aktiveret, modtager en svarperson, der forsøger at sende en dubletpost, følgende fejlmeddelelse."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Giver dig mulighed for at beregne samlede værdier baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger ('{q1_id} + {q2_id}'), booleske udtryk ('{alder} > 60') og funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv.)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Udløser en prompt, der beder om at bekræfte sletningen af rækken."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række."
 // pehelp.description: "Type a subtitle." => "Skriv en undertekst."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Vælg et sprog for at begynde at oprette undersøgelsen. Hvis du vil tilføje en oversættelse, skal du skifte til et nyt sprog og oversætte den oprindelige tekst her eller på fanen Oversættelser."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Angiver placeringen af en detaljesektion i forhold til en række. Vælg mellem: \"Ingen\" - ingen udvidelse tilføjes; \"Under rækken\" - en rækkeudvidelse placeres under hver række i matrixen; \"Vis kun én rækkeudvidelse under rækken\" - en udvidelse vises kun under en enkelt række, de resterende rækkeudvidelser skjules."

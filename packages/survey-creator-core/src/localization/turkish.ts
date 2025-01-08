@@ -843,8 +843,6 @@ export var turkishStrings = {
     columnsEnableIf: "Sütunlar şu durumlarda görünür:",
     rowsEnableIf: "Satırlar şu durumlarda görünür:",
     innerIndent: "İç girintiler ekleme",
-    defaultValueFromLastRow: "Son satırdaki varsayılan değerleri alma",
-    defaultValueFromLastPanel: "Son panelden varsayılan değerleri alma",
     enterNewValue: "Lütfen, değer girin.",
     noquestions: "Ankette herhangi bir soru yok.",
     createtrigger: "Lütfen bir tetikleyici oluşturun",
@@ -1374,7 +1372,7 @@ export var turkishStrings = {
       titleLocation: "Bu ayar, bu paneldeki tüm sorular tarafından otomatik olarak devralınır. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular.",
       descriptionLocation: "\"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Panel başlığı altında\") uygular.",
       newPanelPosition: "Yeni eklenen panelin konumunu tanımlar. Varsayılan olarak, sonuna yeni paneller eklenir. Geçerli panelden sonra yeni bir panel eklemek için \"İleri\" yi seçin.",
-      defaultValueFromLastPanel: "Son paneldeki yanıtları çoğaltır ve bir sonraki eklenen dinamik panele atar.",
+      copyDefaultValueFromLastEntry: "Son paneldeki yanıtları çoğaltır ve bir sonraki eklenen dinamik panele atar.",
       keyName: "Kullanıcının her panelde bu soruya benzersiz bir yanıt vermesini zorunlu kılmak için bir soru adına başvurun."
     },
     defaultValueExpression: "Bu ayar, bir ifadeye göre varsayılan bir yanıt değeri atamanıza olanak tanır. İfade temel hesaplamaları içerebilir - '{q1_id} + {q2_id}', '{age} > 60' gibi Boole ifadeleri ve işlevler: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb. Bu ifade tarafından belirlenen değer, yanıtlayanın manuel girişi tarafından geçersiz kılınabilecek ilk varsayılan değer olarak işlev görür.",
@@ -1479,7 +1477,7 @@ export var turkishStrings = {
     keyDuplicationError: "\"Yinelenen yanıtları engelle\" özelliği etkinleştirildiğinde, yinelenen bir girdi göndermeye çalışan yanıtlayan aşağıdaki hata iletisini alır.",
     totalExpression: "Bir ifadeye dayalı olarak toplam değerleri hesaplamanıza olanak tanır. İfade, temel hesaplamaları ('{q1_id} + {q2_id}'), Boole ifadelerini ('{age} > 60') ve işlevleri ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb.) içerebilir.",
     confirmDelete: "Satır silme işlemini onaylamanızı isteyen bir istemi tetikler.",
-    defaultValueFromLastRow: "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar.",
+    copyDefaultValueFromLastEntry: "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar.",
     keyName: "Belirtilen sütun aynı değerleri içeriyorsa, anket \"Benzersiz olmayan anahtar değeri\" hatasını atar.",
     description: "Bir altyazı yazın.",
     locale: "Anketinizi oluşturmaya başlamak için bir dil seçin. Çeviri eklemek için yeni bir dile geçin ve orijinal metni buradan veya Çeviriler sekmesinden çevirin.",
@@ -1990,8 +1988,6 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.indent: "Add indents" => "Girinti ekleme"
 // panel.indent: "Add outer indents" => "Dış girintiler ekleme"
 // pe.innerIndent: "Add inner indents" => "İç girintiler ekleme"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Son satırdaki varsayılan değerleri alma"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Son panelden varsayılan değerleri alma"
 // pe.titleKeyboardAdornerTip: "Press enter button to edit" => "Düzenlemek için enter düğmesine basın"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "İfadeyi buraya yazın..."
 // pe.noFile: "No file choosen" => "Hiçbir dosya seçilmedi"
@@ -2549,7 +2545,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Bu ayar, bu paneldeki tüm sorular tarafından otomatik olarak devralınır. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "\"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Panel başlığı altında\") uygular."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Yeni eklenen panelin konumunu tanımlar. Varsayılan olarak, sonuna yeni paneller eklenir. Geçerli panelden sonra yeni bir panel eklemek için \"İleri\" yi seçin."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Son paneldeki yanıtları çoğaltır ve bir sonraki eklenen dinamik panele atar."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Son paneldeki yanıtları çoğaltır ve bir sonraki eklenen dinamik panele atar."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Kullanıcının her panelde bu soruya benzersiz bir yanıt vermesini zorunlu kılmak için bir soru adına başvurun."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Bu ayar, bir ifadeye göre varsayılan bir yanıt değeri atamanıza olanak tanır. İfade temel hesaplamaları içerebilir - '{q1_id} + {q2_id}', '{age} > 60' gibi Boole ifadeleri ve işlevler: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb. Bu ifade tarafından belirlenen değer, yanıtlayanın manuel girişi tarafından geçersiz kılınabilecek ilk varsayılan değer olarak işlev görür."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Yanıtlayanın girişinin ne zaman \"Varsayılan değer ifadesi\" veya \"Değer ifadesi ayarla\" ya da \"Varsayılan yanıt\" değerine (ayarlanmışsa) dayalı değere ne zaman sıfırlanacağını belirleyen bir koşullu kural ayarlamak için sihirli değnek simgesini kullanın."
@@ -2621,7 +2617,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "\"Yinelenen yanıtları engelle\" özelliği etkinleştirildiğinde, yinelenen bir girdi göndermeye çalışan yanıtlayan aşağıdaki hata iletisini alır."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Bir ifadeye dayalı olarak toplam değerleri hesaplamanıza olanak tanır. İfade, temel hesaplamaları ('{q1_id} + {q2_id}'), Boole ifadelerini ('{age} > 60') ve işlevleri ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb.) içerebilir."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Satır silme işlemini onaylamanızı isteyen bir istemi tetikler."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar."
 // pehelp.description: "Type a subtitle." => "Bir altyazı yazın."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Anketinizi oluşturmaya başlamak için bir dil seçin. Çeviri eklemek için yeni bir dile geçin ve orijinal metni buradan veya Çeviriler sekmesinden çevirin."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Ayrıntılar bölümünün bir satıra göre konumunu ayarlar. Şunlar arasından seçim yapın: \"Yok\" - genişletme eklenmez; \"Satırın altında\" - matrisin her satırının altına bir satır genişletmesi yerleştirilir; \"Satırın altında, yalnızca bir satır genişletmesi görüntüle\" - yalnızca tek bir satırın altında bir genişletme görüntülenir, kalan satır genişletmeleri daraltılır."

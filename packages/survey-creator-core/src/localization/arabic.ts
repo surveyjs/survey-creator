@@ -843,8 +843,6 @@ export var arStrings = {
     columnsEnableIf: "تكون الأعمدة مرئية إذا",
     rowsEnableIf: "تكون الصفوف مرئية إذا",
     innerIndent: "إضافة مسافات بادئة داخلية",
-    defaultValueFromLastRow: "خذ القيم الافتراضية من الصف الأخير",
-    defaultValueFromLastPanel: "خذ القيم الافتراضية من اللوحة الأخيرة",
     enterNewValue: "Please, enter the value.",
     noquestions: "There is no any question in the survey.",
     createtrigger: "Please create a trigger",
@@ -1374,7 +1372,7 @@ export var arStrings = {
       titleLocation: "يتم توريث هذا الإعداد تلقائيا من خلال جميع الأسئلة داخل هذه اللوحة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا).",
       descriptionLocation: "يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"تحت عنوان اللوحة\" افتراضيا).",
       newPanelPosition: "يحدد موضع اللوحة المضافة حديثا. بشكل افتراضي ، تتم إضافة لوحات جديدة إلى النهاية. حدد \"التالي\" لإدراج لوحة جديدة بعد اللوحة الحالية.",
-      defaultValueFromLastPanel: "يضاعف الإجابات من اللوحة الأخيرة ويعينها إلى اللوحة الديناميكية المضافة التالية.",
+      copyDefaultValueFromLastEntry: "يضاعف الإجابات من اللوحة الأخيرة ويعينها إلى اللوحة الديناميكية المضافة التالية.",
       keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة."
     },
     defaultValueExpression: "يسمح لك هذا الإعداد بتعيين قيمة إجابة افتراضية استنادا إلى تعبير. يمكن أن يتضمن التعبير حسابات أساسية - '{q1_id} + {q2_id}' ، والتعبيرات المنطقية ، مثل '{age} > 60' ، والدوالات: 'iif ()' ، 'today ()' ، 'age ()' ، 'min ()' ، 'max ()' ، 'avg ()' ، إلخ. تعمل القيمة التي يحددها هذا التعبير كقيمة افتراضية أولية يمكن تجاوزها بواسطة الإدخال اليدوي للمستجيب.",
@@ -1479,7 +1477,7 @@ export var arStrings = {
     keyDuplicationError: "عند تمكين الخاصية \"منع الاستجابات المكررة\"، سيتلقى مستجيب يحاول إرسال إدخال مكرر رسالة الخطأ التالية.",
     totalExpression: "يسمح لك بحساب القيم الإجمالية استنادا إلى تعبير. يمكن أن يتضمن التعبير العمليات الحسابية الأساسية ('{q1_id} + {q2_id}') والتعبيرات المنطقية ('{age} > 60') والوظائف ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', إلخ).",
     confirmDelete: "يؤدي إلى تشغيل مطالبة تطلب تأكيد حذف الصف.",
-    defaultValueFromLastRow: "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي.",
+    copyDefaultValueFromLastEntry: "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي.",
     keyName: "إذا كان العمود المحدد يحتوي على قيم متطابقة ، فإن الاستطلاع يلقي الخطأ \"قيمة مفتاح غير فريدة\".",
     description: "اكتب عنوانا فرعيا.",
     locale: "اختر لغة لبدء إنشاء الاستطلاع. لإضافة ترجمة، قم بالتبديل إلى لغة جديدة وترجمة النص الأصلي هنا أو في علامة التبويب الترجمات.",
@@ -1944,8 +1942,6 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pe.indent: "Add indents" => "إضافة مسافات بادئة"
 // panel.indent: "Add outer indents" => "إضافة مسافات بادئة خارجية"
 // pe.innerIndent: "Add inner indents" => "إضافة مسافات بادئة داخلية"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "خذ القيم الافتراضية من الصف الأخير"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "خذ القيم الافتراضية من اللوحة الأخيرة"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "اكتب التعبير هنا..."
 // pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "مسح القيمة إذا أصبح السؤال مخفيا"
 // pe.valuePropertyName: "Value property name" => "اسم خاصية القيمة"
@@ -2465,7 +2461,7 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "يتم توريث هذا الإعداد تلقائيا من خلال جميع الأسئلة داخل هذه اللوحة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"تحت عنوان اللوحة\" افتراضيا)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "يحدد موضع اللوحة المضافة حديثا. بشكل افتراضي ، تتم إضافة لوحات جديدة إلى النهاية. حدد \"التالي\" لإدراج لوحة جديدة بعد اللوحة الحالية."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "يضاعف الإجابات من اللوحة الأخيرة ويعينها إلى اللوحة الديناميكية المضافة التالية."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "يضاعف الإجابات من اللوحة الأخيرة ويعينها إلى اللوحة الديناميكية المضافة التالية."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "يسمح لك هذا الإعداد بتعيين قيمة إجابة افتراضية استنادا إلى تعبير. يمكن أن يتضمن التعبير حسابات أساسية - '{q1_id} + {q2_id}' ، والتعبيرات المنطقية ، مثل '{age} > 60' ، والدوالات: 'iif ()' ، 'today ()' ، 'age ()' ، 'min ()' ، 'max ()' ، 'avg ()' ، إلخ. تعمل القيمة التي يحددها هذا التعبير كقيمة افتراضية أولية يمكن تجاوزها بواسطة الإدخال اليدوي للمستجيب."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد متى تتم إعادة تعيين إدخال المستجيب إلى القيمة استنادا إلى \"تعبير القيمة الافتراضية\" أو \"تعيين تعبير القيمة\" أو إلى قيمة \"الإجابة الافتراضية\" (إذا تم تعيين أي منهما)."
@@ -2537,7 +2533,7 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "عند تمكين الخاصية \"منع الاستجابات المكررة\"، سيتلقى مستجيب يحاول إرسال إدخال مكرر رسالة الخطأ التالية."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "يسمح لك بحساب القيم الإجمالية استنادا إلى تعبير. يمكن أن يتضمن التعبير العمليات الحسابية الأساسية ('{q1_id} + {q2_id}') والتعبيرات المنطقية ('{age} > 60') والوظائف ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', إلخ)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "يؤدي إلى تشغيل مطالبة تطلب تأكيد حذف الصف."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي."
 // pehelp.description: "Type a subtitle." => "اكتب عنوانا فرعيا."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "اختر لغة لبدء إنشاء الاستطلاع. لإضافة ترجمة، قم بالتبديل إلى لغة جديدة وترجمة النص الأصلي هنا أو في علامة التبويب الترجمات."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "يضبط موقع قسم التفاصيل بالنسبة إلى صف. اختر من بين: \"لا شيء\" - لم تتم إضافة أي توسيع ؛ \"تحت الصف\" - يتم وضع توسيع الصف تحت كل صف من المصفوفة ؛ \"أسفل الصف ، اعرض توسيع صف واحد فقط\" - يتم عرض توسيع أسفل صف واحد فقط ، ويتم طي توسعات الصف المتبقية."

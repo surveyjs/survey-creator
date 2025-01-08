@@ -843,8 +843,6 @@ export var koreanStrings = {
     columnsEnableIf: "다음과 같은 경우 열이 표시됩니다.",
     rowsEnableIf: "다음과 같은 경우 행이 표시됩니다.",
     innerIndent: "내부 들여쓰기 추가",
-    defaultValueFromLastRow: "마지막 행에서 기본값 가져오기",
-    defaultValueFromLastPanel: "마지막 패널에서 기본값 가져 오기",
     enterNewValue: "값을 입력하십시오.",
     noquestions: "설문 조사에는 어떤 질문도 없습니다.",
     createtrigger: "트리거를 만드십시오",
@@ -1374,7 +1372,7 @@ export var koreanStrings = {
       titleLocation: "이 설정은 이 패널 내의 모든 질문에 자동으로 상속됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       descriptionLocation: "\"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"패널 제목 아래\")을 적용합니다.",
       newPanelPosition: "새로 추가된 패널의 위치를 정의합니다. 기본적으로 새 패널이 끝에 추가됩니다. \"다음\"을 선택하여 현재 패널 뒤에 새 패널을 삽입합니다.",
-      defaultValueFromLastPanel: "마지막 패널의 답변을 복제하여 다음에 추가된 동적 패널에 할당합니다.",
+      copyDefaultValueFromLastEntry: "마지막 패널의 답변을 복제하여 다음에 추가된 동적 패널에 할당합니다.",
       keyName: "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다."
     },
     defaultValueExpression: "이 설정을 사용하면 표현식에 따라 기본 답안 값을 할당할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식(예: '{age} > 60') 및 함수 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등이 포함될 수 있습니다. 이 표현식에 의해 결정된 값은 응답자의 수동 입력으로 재정의할 수 있는 초기 기본값으로 사용됩니다.",
@@ -1479,7 +1477,7 @@ export var koreanStrings = {
     keyDuplicationError: "\"중복 응답 방지\" 속성이 활성화된 경우, 중복 항목을 제출하려는 응답자는 다음과 같은 오류 메시지를 받게 됩니다.",
     totalExpression: "표현식을 기준으로 합계 값을 계산할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식('{age} > 60') 및 함수('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등)이 포함될 수 있습니다.",
     confirmDelete: "행 삭제를 확인하라는 프롬프트를 트리거합니다.",
-    defaultValueFromLastRow: "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다.",
+    copyDefaultValueFromLastEntry: "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다.",
     keyName: "지정된 열에 동일한 값이 포함되어 있으면 현장조사에서 \"고유하지 않은 키 값\" 오류가 발생합니다.",
     description: "자막을 입력합니다.",
     locale: "설문조사 만들기를 시작할 언어를 선택합니다. 번역을 추가하려면 새 언어로 전환하고 여기 또는 번역 탭에서 원본 텍스트를 번역합니다.",
@@ -2164,8 +2162,6 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.indent: "Add indents" => "들여쓰기 추가"
 // panel.indent: "Add outer indents" => "바깥쪽 들여쓰기 추가"
 // pe.innerIndent: "Add inner indents" => "내부 들여쓰기 추가"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "마지막 행에서 기본값 가져오기"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "마지막 패널에서 기본값 가져 오기"
 // pe.titleKeyboardAdornerTip: "Press enter button to edit" => "Enter 버튼을 눌러 편집합니다."
 // pe.keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item" => "항목을 편집하려면 Enter 버튼을 누르고, 항목을 삭제하려면 삭제 버튼을 누르고, 항목을 이동하려면 alt 더하기 화살표 위쪽 또는 아래쪽 화살표를 누릅니다."
 // pe.triggerFromName: "Copy value from: " => "다음에서 값 복사: "
@@ -2758,7 +2754,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "이 설정은 이 패널 내의 모든 질문에 자동으로 상속됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "\"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"패널 제목 아래\")을 적용합니다."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "새로 추가된 패널의 위치를 정의합니다. 기본적으로 새 패널이 끝에 추가됩니다. \"다음\"을 선택하여 현재 패널 뒤에 새 패널을 삽입합니다."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "마지막 패널의 답변을 복제하여 다음에 추가된 동적 패널에 할당합니다."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "마지막 패널의 답변을 복제하여 다음에 추가된 동적 패널에 할당합니다."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "이 설정을 사용하면 표현식에 따라 기본 답안 값을 할당할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식(예: '{age} > 60') 및 함수 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등이 포함될 수 있습니다. 이 표현식에 의해 결정된 값은 응답자의 수동 입력으로 재정의할 수 있는 초기 기본값으로 사용됩니다."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "마술 지팡이 아이콘을 사용하여 응답자의 입력이 \"기본값 표현식\" 또는 \"설정 값 표현식\" 또는 \"기본 답변\" 값(둘 중 하나가 설정된 경우)에 기반한 값으로 재설정되는 시점을 결정하는 조건부 규칙을 설정합니다."
@@ -2830,7 +2826,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "\"중복 응답 방지\" 속성이 활성화된 경우, 중복 항목을 제출하려는 응답자는 다음과 같은 오류 메시지를 받게 됩니다."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "표현식을 기준으로 합계 값을 계산할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식('{age} > 60') 및 함수('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등)이 포함될 수 있습니다."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "행 삭제를 확인하라는 프롬프트를 트리거합니다."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다."
 // pehelp.description: "Type a subtitle." => "자막을 입력합니다."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "설문조사 만들기를 시작할 언어를 선택합니다. 번역을 추가하려면 새 언어로 전환하고 여기 또는 번역 탭에서 원본 텍스트를 번역합니다."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "행을 기준으로 세부 정보 섹션의 위치를 설정합니다. 다음 중에서 선택: \"없음\" - 확장이 추가되지 않습니다. \"행 아래\" - 행 확장이 행렬의 각 행 아래에 배치됩니다. \"행 아래에 한 행 확장만 표시\" - 확장은 단일 행 아래에만 표시되고 나머지 행 확장은 축소됩니다."

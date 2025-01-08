@@ -843,8 +843,8 @@ export var hebrewStrings = {
     columnsEnableIf: "העמודות יוצגו אם",
     rowsEnableIf: "השורות יוצגו אם",
     innerIndent: "הוסף כניסות פנימיות",
-    defaultValueFromLastRow: "קבל ערכי ברירת מחדל מהשורה האחרונה",
-    defaultValueFromLastPanel: "קבל ערכי ברירת מחדל מהפאנל האחרון",
+    copyDefaultValueFromLastEntry: "קבל ערכי ברירת מחדל מהשורה האחרונה",
+    copyDefaultValueFromLastEntry: "קבל ערכי ברירת מחדל מהפאנל האחרון",
     enterNewValue: "נא להזין את הערך.",
     noquestions: "אין שאלות בשאלון.",
     createtrigger: "יש ליצור מפעיל",
@@ -1374,7 +1374,7 @@ export var hebrewStrings = {
       titleLocation: "הגדרה זו עוברת בירושה אוטומטית לכל השאלות בחלונית זו. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
       descriptionLocation: "האפשרות \"הירושה\" מחילה את ההגדרה ברמת העמוד (אם הוגדרה) או ברמת הסקר (\"תחת כותרת החלונית\" כברירת מחדל).",
       newPanelPosition: "מגדיר את המיקום של חלונית חדשה שנוספה. כברירת מחדל, חלוניות חדשות מתווספות לסוף. בחר \"הבא\" כדי להוסיף חלונית חדשה אחרי הנוכחית.",
-      defaultValueFromLastPanel: "משכפל תשובות מהחלונית האחרונה ומקצה אותן לחלונית הדינמית הבאה שנוספה.",
+      copyDefaultValueFromLastEntry: "משכפל תשובות מהחלונית האחרונה ומקצה אותן לחלונית הדינמית הבאה שנוספה.",
       keyName: "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית."
     },
     defaultValueExpression: "הגדרה זו מאפשרת לך להקצות ערך ברירת מחדל לתשובה בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים - '{q1_id} + {q2_id}', ביטויים בוליאניים, כגון '{age} > 60', ופונקציות: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו'. הערך שנקבע על-ידי ביטוי זה משמש כערך ברירת המחדל הראשוני שניתן לעקוף באמצעות קלט ידני של משיב.",
@@ -1479,7 +1479,7 @@ export var hebrewStrings = {
     keyDuplicationError: "כאשר המאפיין \"מנע תגובות כפולות\" מופעל, משיב שינסה לשלוח ערך כפול יקבל את הודעת השגיאה הבאה.",
     totalExpression: "מאפשר לחשב ערכים כוללים בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים ('{q1_id} + {q2_id}'), ביטויים בוליאניים ('{age} > 60') ופונקציות ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו').",
     confirmDelete: "מפעיל בקשה המבקשת לאשר את מחיקת השורות.",
-    defaultValueFromLastRow: "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה.",
+    copyDefaultValueFromLastEntry: "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה.",
     keyName: "אם העמודה שצוינה מכילה ערכים זהים, הסקר יזרוק את השגיאה \"ערך מפתח לא ייחודי\".",
     description: "הקלד כותרת משנה.",
     locale: "בחר שפה כדי להתחיל ליצור את הסקר. כדי להוסיף תרגום, עבור לשפה חדשה ותרגם את הטקסט המקורי כאן או בכרטיסיה תרגומים.",
@@ -2119,7 +2119,7 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "הגדרה זו עוברת בירושה אוטומטית לכל השאלות בחלונית זו. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "האפשרות \"הירושה\" מחילה את ההגדרה ברמת העמוד (אם הוגדרה) או ברמת הסקר (\"תחת כותרת החלונית\" כברירת מחדל)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "מגדיר את המיקום של חלונית חדשה שנוספה. כברירת מחדל, חלוניות חדשות מתווספות לסוף. בחר \"הבא\" כדי להוסיף חלונית חדשה אחרי הנוכחית."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "משכפל תשובות מהחלונית האחרונה ומקצה אותן לחלונית הדינמית הבאה שנוספה."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "משכפל תשובות מהחלונית האחרונה ומקצה אותן לחלונית הדינמית הבאה שנוספה."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "הגדרה זו מאפשרת לך להקצות ערך ברירת מחדל לתשובה בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים - '{q1_id} + {q2_id}', ביטויים בוליאניים, כגון '{age} > 60', ופונקציות: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו'. הערך שנקבע על-ידי ביטוי זה משמש כערך ברירת המחדל הראשוני שניתן לעקוף באמצעות קלט ידני של משיב."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "השתמש בסמל מטה הקסם כדי להגדיר כלל מותנה הקובע מתי הקלט של המשיב יאופס לערך בהתבסס על \"ביטוי ערך ברירת מחדל\" או \"הגדר ביטוי ערך\" או על הערך \"תשובת ברירת מחדל\" (אם אחד מהם מוגדר)."
@@ -2191,7 +2191,7 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "כאשר המאפיין \"מנע תגובות כפולות\" מופעל, משיב שינסה לשלוח ערך כפול יקבל את הודעת השגיאה הבאה."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "מאפשר לחשב ערכים כוללים בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים ('{q1_id} + {q2_id}'), ביטויים בוליאניים ('{age} > 60') ופונקציות ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו')."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "מפעיל בקשה המבקשת לאשר את מחיקת השורות."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה."
 // pehelp.description: "Type a subtitle." => "הקלד כותרת משנה."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "בחר שפה כדי להתחיל ליצור את הסקר. כדי להוסיף תרגום, עבור לשפה חדשה ותרגם את הטקסט המקורי כאן או בכרטיסיה תרגומים."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "הגדרת המיקום של מקטע פרטים ביחס לשורה. בחר מתוך: \"ללא\" - לא נוספה הרחבה; \"מתחת לשורה\" - הרחבת שורה ממוקמת מתחת לכל שורה של המטריצה; \"מתחת לשורה, הצג הרחבת שורה אחת בלבד\" - הרחבה מוצגת תחת שורה אחת בלבד, הרחבות השורה הנותרות מכווצות."

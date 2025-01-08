@@ -843,8 +843,6 @@ export var hrStrings = {
     columnsEnableIf: "Stupci su vidljivi ako",
     rowsEnableIf: "Reci su vidljivi ako",
     innerIndent: "Dodavanje unutarnjih uvlaka",
-    defaultValueFromLastRow: "Uzimanje zadanih vrijednosti iz posljednjeg retka",
-    defaultValueFromLastPanel: "Preuzimanje zadanih vrijednosti s posljednje ploče",
     enterNewValue: "Unesite vrijednost.",
     noquestions: "U anketi nema nikakvog pitanja.",
     createtrigger: "Izradite okidač",
@@ -1374,7 +1372,7 @@ export var hrStrings = {
       titleLocation: "Ovu postavku automatski nasljeđuju sva pitanja unutar ove ploče. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       descriptionLocation: "Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Pod naslovom ploče\" prema zadanim postavkama).",
       newPanelPosition: "Definira položaj novododane ploče. Prema zadanim postavkama na kraj se dodaju nove ploče. Odaberite \"Dalje\" da biste umetnuli novu ploču nakon trenutne.",
-      defaultValueFromLastPanel: "Duplicira odgovore s posljednje ploče i dodjeljuje ih sljedećoj dodanoj dinamičkoj ploči.",
+      copyDefaultValueFromLastEntry: "Duplicira odgovore s posljednje ploče i dodjeljuje ih sljedećoj dodanoj dinamičkoj ploči.",
       keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči."
     },
     defaultValueExpression: "Ova postavka omogućuje dodjeljivanje zadane vrijednosti odgovora na temelju izraza. Izraz može uključivati osnovne izračune - '{q1_id} + {q2_id}', Booleove izraze, kao što su '{age} > 60', i funkcije: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd. Vrijednost određena ovim izrazom služi kao početna zadana vrijednost koja se može nadjačati ručnim unosom ispitanika.",
@@ -1479,7 +1477,7 @@ export var hrStrings = {
     keyDuplicationError: "Kada je omogućeno svojstvo \"Spriječi duplicirane odgovore\", ispitanik koji pokuša poslati duplikat unosa primit će sljedeću poruku o pogrešci.",
     totalExpression: "Omogućuje izračunavanje ukupnih vrijednosti na temelju izraza. Izraz može uključivati osnovne izračune ('{q1_id} + {q2_id}'), Booleove izraze ('{age} > 60') i funkcije ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd.).",
     confirmDelete: "Pokreće upit u kojem se traži potvrda brisanja retka.",
-    defaultValueFromLastRow: "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku.",
+    copyDefaultValueFromLastEntry: "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku.",
     keyName: "Ako navedeni stupac sadrži identične vrijednosti, anketa odbacuje pogrešku \"Nejedinstvena vrijednost ključa\".",
     description: "Upišite podnaslov.",
     locale: "Odaberite jezik za početak stvaranja upitnika. Da biste dodali prijevod, prijeđite na novi jezik i prevedite izvorni tekst ovdje ili na kartici Prijevodi.",
@@ -1984,8 +1982,6 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pe.indent: "Add indents" => "Dodavanje uvlaka"
 // panel.indent: "Add outer indents" => "Dodavanje vanjskih uvlaka"
 // pe.innerIndent: "Add inner indents" => "Dodavanje unutarnjih uvlaka"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Uzimanje zadanih vrijednosti iz posljednjeg retka"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Preuzimanje zadanih vrijednosti s posljednje ploče"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "Ovdje upišite izraz..."
 // pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "Očisti vrijednost ako pitanje postane skriveno"
 // pe.valuePropertyName: "Value property name" => "Naziv svojstva Vrijednost"
@@ -2548,7 +2544,7 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Ovu postavku automatski nasljeđuju sva pitanja unutar ove ploče. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Pod naslovom ploče\" prema zadanim postavkama)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Definira položaj novododane ploče. Prema zadanim postavkama na kraj se dodaju nove ploče. Odaberite \"Dalje\" da biste umetnuli novu ploču nakon trenutne."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplicira odgovore s posljednje ploče i dodjeljuje ih sljedećoj dodanoj dinamičkoj ploči."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplicira odgovore s posljednje ploče i dodjeljuje ih sljedećoj dodanoj dinamičkoj ploči."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Ova postavka omogućuje dodjeljivanje zadane vrijednosti odgovora na temelju izraza. Izraz može uključivati osnovne izračune - '{q1_id} + {q2_id}', Booleove izraze, kao što su '{age} > 60', i funkcije: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd. Vrijednost određena ovim izrazom služi kao početna zadana vrijednost koja se može nadjačati ručnim unosom ispitanika."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje kada se unos ispitanika vraća na vrijednost na temelju \"Zadani izraz vrijednosti\" ili \"Postavi izraz vrijednosti\" ili na vrijednost \"Zadani odgovor\" (ako je postavljena)."
@@ -2620,7 +2616,7 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Kada je omogućeno svojstvo \"Spriječi duplicirane odgovore\", ispitanik koji pokuša poslati duplikat unosa primit će sljedeću poruku o pogrešci."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Omogućuje izračunavanje ukupnih vrijednosti na temelju izraza. Izraz može uključivati osnovne izračune ('{q1_id} + {q2_id}'), Booleove izraze ('{age} > 60') i funkcije ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd.)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Pokreće upit u kojem se traži potvrda brisanja retka."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku."
 // pehelp.description: "Type a subtitle." => "Upišite podnaslov."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Odaberite jezik za početak stvaranja upitnika. Da biste dodali prijevod, prijeđite na novi jezik i prevedite izvorni tekst ovdje ili na kartici Prijevodi."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Postavlja mjesto sekcije s detaljima u odnosu na redak. Odaberite između: \"Nema\" - ne dodaje se proširenje; \"Ispod reda\" - proširenje retka nalazi se ispod svakog retka matrice; \"Ispod retka prikaži samo proširenje jednog retka\" - proširenje se prikazuje samo ispod jednog retka, preostala proširenja retka su sažeta."

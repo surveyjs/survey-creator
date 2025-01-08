@@ -843,8 +843,6 @@ var persianStrings = {
     columnsEnableIf: "ستونها مرئی هستند اگر",
     rowsEnableIf: "سطرها مرئی هستند اگر",
     innerIndent: "اضافه کردن تورفتات داخلی",
-    defaultValueFromLastRow: "گرفتن مقادیر پیشفرض از اخرین سطر",
-    defaultValueFromLastPanel: "گرفتن مقادیر پیشفرض از اخرین تابلو",
     enterNewValue: "لطفا یک مقدار وارد کنید",
     noquestions: "سوالی در پرسشنامه درج نشده",
     createtrigger: "اجرا کننده ای بسازید",
@@ -1374,7 +1372,7 @@ var persianStrings = {
       titleLocation: "این تنظیم به طور خودکار توسط تمام سوالات موجود در این پنل به ارث برده می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند).",
       descriptionLocation: "گزینه \"Inherit\" سطح صفحه (در صورت تنظیم) یا تنظیم سطح نظرسنجی (\"زیر عنوان پانل\" به طور پیش فرض) اعمال می شود.",
       newPanelPosition: "موقعیت یک پانل تازه اضافه شده را تعریف می کند. به طور پیش فرض، پانل های جدید به پایان اضافه می شوند. \"Next\" را انتخاب کنید تا یک پانل جدید پس از پانل فعلی وارد شود.",
-      defaultValueFromLastPanel: "پاسخ ها را از اخرین پانل تکرار می کند و انها را به پانل پویا اضافه شده بعدی اختصاص می دهد.",
+      copyDefaultValueFromLastEntry: "پاسخ ها را از اخرین پانل تکرار می کند و انها را به پانل پویا اضافه شده بعدی اختصاص می دهد.",
       keyName: "مرجع یک نام سوال نیاز به یک کاربر برای ارائه یک پاسخ منحصر به فرد برای این سوال در هر پانل."
     },
     defaultValueExpression: "این تنظیم به شما اجازه می دهد تا یک مقدار پاسخ پیش فرض را بر اساس یک عبارت اختصاص دهید. این عبارت می تواند شامل محاسبات اساسی - \"{q1_id} + {q2_id}'، عبارات بولی مانند \"{age} > 60\" و توابع: \"iif()\"، \"today()\"، \"age()\"، \"min()\"، \"max()\"، \"avg()\" و غیره باشد. مقدار تعیین شده توسط این عبارت به عنوان مقدار پیش فرض اولیه عمل می کند که می تواند توسط ورودی دستی پاسخ دهنده لغو شود.",
@@ -1479,7 +1477,7 @@ var persianStrings = {
     keyDuplicationError: "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند.",
     totalExpression: "به شما اجازه می دهد تا مقادیر کل را بر اساس یک عبارت محاسبه کنید. این عبارت می تواند شامل محاسبات اساسی ('{q1_id} + {q2_id}')، عبارات بولی ('{age} > 60') و توابع ('iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()'، و غیره باشد.",
     confirmDelete: "یک درخواست فوری برای تایید حذف ردیف ایجاد می کند.",
-    defaultValueFromLastRow: "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند.",
+    copyDefaultValueFromLastEntry: "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند.",
     keyName: "اگر ستون مشخص شده حاوی مقادیر یکسان باشد، نظرسنجی خطای \"مقدار کلیدی غیر منحصر به فرد\" را پرتاب می کند.",
     description: "یک زیرنویس تایپ کنید.",
     locale: "یک زبان را برای شروع ایجاد نظرسنجی خود انتخاب کنید. برای اضافه کردن ترجمه، به یک زبان جدید بروید و متن اصلی را در اینجا یا در زبانه ترجمه ترجمه ترجمه کنید.",
@@ -1945,8 +1943,6 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.indent: "Add indents" => "افزودن تورفتهای"
 // panel.indent: "Add outer indents" => "اضافه کردن تورفتات بیرونی"
 // pe.innerIndent: "Add inner indents" => "اضافه کردن تورفتات داخلی"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "گرفتن مقادیر پیشفرض از اخرین سطر"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "گرفتن مقادیر پیشفرض از اخرین تابلو"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "عبارت را در اینجا تایپ کنید..."
 // pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "پاک کردن مقدار اگر سؤال مخفی شود"
 // pe.valuePropertyName: "Value property name" => "ارزش نام ملک"
@@ -2509,7 +2505,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "این تنظیم به طور خودکار توسط تمام سوالات موجود در این پنل به ارث برده می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "گزینه \"Inherit\" سطح صفحه (در صورت تنظیم) یا تنظیم سطح نظرسنجی (\"زیر عنوان پانل\" به طور پیش فرض) اعمال می شود."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "موقعیت یک پانل تازه اضافه شده را تعریف می کند. به طور پیش فرض، پانل های جدید به پایان اضافه می شوند. \"Next\" را انتخاب کنید تا یک پانل جدید پس از پانل فعلی وارد شود."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "پاسخ ها را از اخرین پانل تکرار می کند و انها را به پانل پویا اضافه شده بعدی اختصاص می دهد."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "پاسخ ها را از اخرین پانل تکرار می کند و انها را به پانل پویا اضافه شده بعدی اختصاص می دهد."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "مرجع یک نام سوال نیاز به یک کاربر برای ارائه یک پاسخ منحصر به فرد برای این سوال در هر پانل."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "این تنظیم به شما اجازه می دهد تا یک مقدار پاسخ پیش فرض را بر اساس یک عبارت اختصاص دهید. این عبارت می تواند شامل محاسبات اساسی - \"{q1_id} + {q2_id}'، عبارات بولی مانند \"{age} > 60\" و توابع: \"iif()\"، \"today()\"، \"age()\"، \"min()\"، \"max()\"، \"avg()\" و غیره باشد. مقدار تعیین شده توسط این عبارت به عنوان مقدار پیش فرض اولیه عمل می کند که می تواند توسط ورودی دستی پاسخ دهنده لغو شود."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که تعیین می کند چه زمانی ورودی پاسخ دهنده به مقدار بر اساس \"بیان مقدار پیش فرض\" یا \"تنظیم مقدار بیان\" یا \"پاسخ پیش فرض\" مقدار (اگر هر کدام تنظیم شده است) تنظیم مجدد شود."
@@ -2582,7 +2578,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "به شما اجازه می دهد تا مقادیر کل را بر اساس یک عبارت محاسبه کنید. این عبارت می تواند شامل محاسبات اساسی ('{q1_id} + {q2_id}')، عبارات بولی ('{age} > 60') و توابع ('iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()'، و غیره باشد."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "یک درخواست فوری برای تایید حذف ردیف ایجاد می کند."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند."
 // pehelp.description: "Type a subtitle." => "یک زیرنویس تایپ کنید."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "یک زبان را برای شروع ایجاد نظرسنجی خود انتخاب کنید. برای اضافه کردن ترجمه، به یک زبان جدید بروید و متن اصلی را در اینجا یا در زبانه ترجمه ترجمه ترجمه کنید."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "مکان یک بخش جزئیات را در رابطه با یک ردیف تنظیم می کند. انتخاب از: \"هیچ\" - هیچ گسترش اضافه شده است؛ \"زیر ردیف\" - گسترش ردیف در زیر هر ردیف ماتریس قرار می گیرد؛ \"زیر ردیف، فقط یک ردیف را نمایش می دهد\" - یک گسترش فقط در زیر یک ردیف نمایش داده می شود، گسترش ردیف باقی مانده سقوط می کند."

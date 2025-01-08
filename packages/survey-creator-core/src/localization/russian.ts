@@ -843,8 +843,6 @@ export var ruStrings = {
     columnsEnableIf: "Столбцы видны, если",
     rowsEnableIf: "Строки видны, если",
     innerIndent: "Добавление внутренних отступов",
-    defaultValueFromLastRow: "Взять значения по умолчанию из последней строки",
-    defaultValueFromLastPanel: "Возьмите значения по умолчанию с последней панели",
     enterNewValue: "Пожалуйста, введите значение.",
     noquestions: "В опроснике нет ни одного вопроса",
     createtrigger: "Пожалуйста, создайте триггер",
@@ -1374,7 +1372,7 @@ export var ruStrings = {
       titleLocation: "Этот параметр автоматически наследуется всеми вопросами на этой панели. Если вы хотите переопределить этот параметр, определите правила выравнивания заголовков для отдельных вопросов. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию).",
       descriptionLocation: "Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Под заголовком панели» по умолчанию).",
       newPanelPosition: "Определяет положение вновь добавляемой панели. По умолчанию новые панели добавляются в конец. Выберите «Далее», чтобы вставить новую панель после текущей.",
-      defaultValueFromLastPanel: "Дублирует ответы с последней панели и назначает их следующей добавленной динамической панели.",
+      copyDefaultValueFromLastEntry: "Дублирует ответы с последней панели и назначает их следующей добавленной динамической панели.",
       keyName: "Укажите имя вопроса, чтобы пользователь мог предоставить уникальный ответ на этот вопрос на каждой панели."
     },
     defaultValueExpression: "Этот параметр позволяет назначить значение ответа по умолчанию на основе выражения. Выражение может включать в себя базовые вычисления - '{q1_id} + {q2_id}', логические выражения, такие как '{age} > 60', и функции: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д. Значение, определяемое этим выражением, служит начальным значением по умолчанию, которое может быть переопределено ручным вводом респондентом.",
@@ -1479,7 +1477,7 @@ export var ruStrings = {
     keyDuplicationError: "Если включено свойство «Не допускать дублирования ответов», респондент, пытающийся отправить дублирующуюся запись, получит следующее сообщение об ошибке.",
     totalExpression: "Позволяет вычислять итоговые значения на основе выражения. Выражение может включать базовые вычисления ('{q1_id} + {q2_id}'), логические выражения ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д.).",
     confirmDelete: "Запускает запрос на подтверждение удаления строки.",
-    defaultValueFromLastRow: "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке.",
+    copyDefaultValueFromLastEntry: "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке.",
     keyName: "Если указанный столбец содержит одинаковые значения, опрос выдает ошибку «Неуникальное значение ключа».",
     description: "Введите субтитры.",
     locale: "Выберите язык, чтобы начать создание опроса. Чтобы добавить перевод, переключитесь на новый язык и переведите исходный текст здесь или во вкладке «Переводы».",
@@ -2034,8 +2032,6 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.indent: "Add indents" => "Добавление отступов"
 // panel.indent: "Add outer indents" => "Добавление внешних отступов"
 // pe.innerIndent: "Add inner indents" => "Добавление внутренних отступов"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Взять значения по умолчанию из последней строки"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Возьмите значения по умолчанию с последней панели"
 // pe.titleKeyboardAdornerTip: "Press enter button to edit" => "Нажмите кнопку ввода, чтобы отредактировать"
 // pe.keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item" => "Нажмите кнопку ввода, чтобы отредактировать элемент, нажмите кнопку удаления, чтобы удалить элемент, нажмите alt со стрелкой вверх или со стрелкой вниз, чтобы переместить элемент"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "Введите выражение здесь..."
@@ -2614,7 +2610,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Этот параметр автоматически наследуется всеми вопросами на этой панели. Если вы хотите переопределить этот параметр, определите правила выравнивания заголовков для отдельных вопросов. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Под заголовком панели» по умолчанию)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Определяет положение вновь добавляемой панели. По умолчанию новые панели добавляются в конец. Выберите «Далее», чтобы вставить новую панель после текущей."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Дублирует ответы с последней панели и назначает их следующей добавленной динамической панели."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Дублирует ответы с последней панели и назначает их следующей добавленной динамической панели."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Укажите имя вопроса, чтобы пользователь мог предоставить уникальный ответ на этот вопрос на каждой панели."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Этот параметр позволяет назначить значение ответа по умолчанию на основе выражения. Выражение может включать в себя базовые вычисления - '{q1_id} + {q2_id}', логические выражения, такие как '{age} > 60', и функции: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д. Значение, определяемое этим выражением, служит начальным значением по умолчанию, которое может быть переопределено ручным вводом респондентом."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Используйте значок волшебной палочки, чтобы задать условное правило, определяющее, когда входные данные респондента сбрасываются до значения, основанного на «Выражении значения по умолчанию» или «Выражении заданного значения» или на значении «Ответ по умолчанию» (если оно задано)."
@@ -2686,7 +2682,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Если включено свойство «Не допускать дублирования ответов», респондент, пытающийся отправить дублирующуюся запись, получит следующее сообщение об ошибке."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Позволяет вычислять итоговые значения на основе выражения. Выражение может включать базовые вычисления ('{q1_id} + {q2_id}'), логические выражения ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д.)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Запускает запрос на подтверждение удаления строки."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке."
 // pehelp.description: "Type a subtitle." => "Введите субтитры."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Выберите язык, чтобы начать создание опроса. Чтобы добавить перевод, переключитесь на новый язык и переведите исходный текст здесь или во вкладке «Переводы»."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Задает расположение раздела сведений по отношению к строке. Выберите один из вариантов: \"Нет\" - расширение не добавляется; \"Под строкой\" - под каждой строкой матрицы помещается расширение строки; \"Под строкой отображать только одну строку\" - расширение отображается только под одной строкой, остальные расширения строк сворачиваются."

@@ -843,8 +843,6 @@ export var indonesianStrings = {
     columnsEnableIf: "Kolom terlihat jika",
     rowsEnableIf: "Baris terlihat jika",
     innerIndent: "Menambahkan inden dalam",
-    defaultValueFromLastRow: "Mengambil nilai default dari baris terakhir",
-    defaultValueFromLastPanel: "Mengambil nilai default dari panel terakhir",
     enterNewValue: "Silahkan masukkan nilai",
     noquestions: "Tidak ada pertanyaan dalam survei.",
     createtrigger: "Silahkan buat sebuah trigger",
@@ -1374,7 +1372,7 @@ export var indonesianStrings = {
       titleLocation: "Setelan ini secara otomatis diwarisi oleh semua pertanyaan dalam panel ini. Jika Anda ingin mengganti setelan ini, tentukan aturan perataan judul untuk masing-masing pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Teratas\" secara default).",
       descriptionLocation: "Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Di bawah judul panel\" secara default).",
       newPanelPosition: "Menentukan posisi panel yang baru ditambahkan. Secara default, panel baru ditambahkan ke akhir. Pilih \"Next\" untuk memasukkan panel baru setelah yang sekarang.",
-      defaultValueFromLastPanel: "Menduplikasi jawaban dari panel terakhir dan menetapkannya ke panel dinamis tambahan berikutnya.",
+      copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari panel terakhir dan menetapkannya ke panel dinamis tambahan berikutnya.",
       keyName: "Rujuk nama pertanyaan untuk mengharuskan pengguna memberikan respons unik untuk pertanyaan ini di setiap panel."
     },
     defaultValueExpression: "Pengaturan ini memungkinkan Anda menetapkan nilai jawaban default berdasarkan ekspresi. Ekspresi dapat mencakup perhitungan dasar - '{q1_id} + {q2_id}', ekspresi Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll. Nilai yang ditentukan oleh ekspresi ini berfungsi sebagai nilai default awal yang dapat ditimpa oleh input manual responden.",
@@ -1479,7 +1477,7 @@ export var indonesianStrings = {
     keyDuplicationError: "Ketika properti \"mencegah duplikat respons\" diaktifkan, responden mencoba untuk mengirimkan entri duplikat akan menerima pesan galat berikut.",
     totalExpression: "Memungkinkan Anda menghitung nilai total berdasarkan ekspresi. Ekspresi dapat mencakup perhitungan dasar ('{q1_id} + {q2_id}'), ekspresi Boolean ('{age} > 60') dan fungsi ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll.).",
     confirmDelete: "Memicu prompt yang meminta konfirmasi penghapusan baris.",
-    defaultValueFromLastRow: "Menduplikasi jawaban dari baris terakhir dan menetapkannya ke baris dinamis berikutnya yang ditambahkan.",
+    copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari baris terakhir dan menetapkannya ke baris dinamis berikutnya yang ditambahkan.",
     keyName: "Jika kolom yang ditentukan berisi nilai yang identik, survei akan memunculkan kesalahan \"Nilai kunci tidak unik\".",
     description: "Ketik subtitle.",
     locale: "Pilih bahasa untuk mulai membuat survei. Untuk menambahkan terjemahan, beralihlah ke bahasa baru dan terjemahkan teks asli di sini atau di tab Terjemahan.",
@@ -2122,8 +2120,6 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pe.indent: "Add indents" => "Menambahkan inden"
 // panel.indent: "Add outer indents" => "Menambahkan inden luar"
 // pe.innerIndent: "Add inner indents" => "Menambahkan inden dalam"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Mengambil nilai default dari baris terakhir"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Mengambil nilai default dari panel terakhir"
 // pe.titleKeyboardAdornerTip: "Press enter button to edit" => "Tekan tombol enter untuk mengedit"
 // pe.keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item" => "Tekan tombol enter untuk mengedit item, tekan tombol hapus untuk menghapus item, tekan alt plus panah ke atas atau panah ke bawah untuk memindahkan item"
 // pe.triggerGotoName: "Go to the question" => "Pergi ke pertanyaan"
@@ -2708,7 +2704,7 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Setelan ini secara otomatis diwarisi oleh semua pertanyaan dalam panel ini. Jika Anda ingin mengganti setelan ini, tentukan aturan perataan judul untuk masing-masing pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Teratas\" secara default)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Di bawah judul panel\" secara default)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Menentukan posisi panel yang baru ditambahkan. Secara default, panel baru ditambahkan ke akhir. Pilih \"Next\" untuk memasukkan panel baru setelah yang sekarang."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Menduplikasi jawaban dari panel terakhir dan menetapkannya ke panel dinamis tambahan berikutnya."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Menduplikasi jawaban dari panel terakhir dan menetapkannya ke panel dinamis tambahan berikutnya."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Rujuk nama pertanyaan untuk mengharuskan pengguna memberikan respons unik untuk pertanyaan ini di setiap panel."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Pengaturan ini memungkinkan Anda menetapkan nilai jawaban default berdasarkan ekspresi. Ekspresi dapat mencakup perhitungan dasar - '{q1_id} + {q2_id}', ekspresi Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll. Nilai yang ditentukan oleh ekspresi ini berfungsi sebagai nilai default awal yang dapat ditimpa oleh input manual responden."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menentukan kapan input responden diatur ulang ke nilai berdasarkan \"Ekspresi nilai default\" atau \"Atur ekspresi nilai\" atau ke nilai \"Jawaban default\" (jika salah satu diatur)."
@@ -2780,7 +2776,7 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Ketika properti \"mencegah duplikat respons\" diaktifkan, responden mencoba untuk mengirimkan entri duplikat akan menerima pesan galat berikut."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Memungkinkan Anda menghitung nilai total berdasarkan ekspresi. Ekspresi dapat mencakup perhitungan dasar ('{q1_id} + {q2_id}'), ekspresi Boolean ('{age} > 60') dan fungsi ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll.)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Memicu prompt yang meminta konfirmasi penghapusan baris."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Menduplikasi jawaban dari baris terakhir dan menetapkannya ke baris dinamis berikutnya yang ditambahkan."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Menduplikasi jawaban dari baris terakhir dan menetapkannya ke baris dinamis berikutnya yang ditambahkan."
 // pehelp.description: "Type a subtitle." => "Ketik subtitle."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Pilih bahasa untuk mulai membuat survei. Untuk menambahkan terjemahan, beralihlah ke bahasa baru dan terjemahkan teks asli di sini atau di tab Terjemahan."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Mengatur lokasi bagian detail dalam kaitannya dengan baris. Pilih dari: \"Tidak ada\" - tidak ada ekspansi yang ditambahkan; \"Di bawah baris\" - ekspansi baris ditempatkan di bawah setiap baris matriks; \"Di bawah baris, tampilkan satu baris ekspansi saja\" - ekspansi ditampilkan di bawah satu baris saja, ekspansi baris yang tersisa diciutkan."

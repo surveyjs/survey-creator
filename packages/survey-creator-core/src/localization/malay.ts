@@ -843,8 +843,6 @@ export var msStrings = {
     columnsEnableIf: "Lajur kelihatan jika",
     rowsEnableIf: "Baris boleh dilihat jika",
     innerIndent: "Menambah inden dalaman",
-    defaultValueFromLastRow: "Mengambil nilai lalai daripada baris terakhir",
-    defaultValueFromLastPanel: "Mengambil nilai lalai daripada panel terakhir",
     enterNewValue: "Sila masukkan nilai.",
     noquestions: "Tiada soalan lain dalam tinjauan.",
     createtrigger: "Sila cipta pencetus",
@@ -1374,7 +1372,7 @@ export var msStrings = {
       titleLocation: "Tetapan ini diwarisi secara automatik oleh semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai).",
       descriptionLocation: "Opsyen \"Warisan\" menggunakan aras halaman (jika ditetapkan) atau seting aras tinjauan (\"Di bawah tajuk panel\" secara lalai).",
       newPanelPosition: "Mentakrifkan kedudukan panel yang baru ditambah. Secara lalai, panel baru ditambahkan ke hujungnya. Pilih \"Seterusnya\" untuk memasukkan panel baru selepas yang semasa.",
-      defaultValueFromLastPanel: "Pendua jawapan daripada panel terakhir dan memberikannya kepada panel dinamik tambahan seterusnya.",
+      copyDefaultValueFromLastEntry: "Pendua jawapan daripada panel terakhir dan memberikannya kepada panel dinamik tambahan seterusnya.",
       keyName: "Rujukan nama soalan untuk memerlukan pengguna memberikan jawapan yang unik untuk soalan ini dalam setiap panel."
     },
     defaultValueExpression: "Seting ini membolehkan anda memperuntukkan nilai jawapan lalai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas - '{q1_id} + {q2_id}', ungkapan Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dsb. Nilai yang ditentukan oleh ungkapan ini berfungsi sebagai nilai lalai awal yang boleh diubah oleh input manual responden.",
@@ -1479,7 +1477,7 @@ export var msStrings = {
     keyDuplicationError: "Apabila sifat \"Mencegah respons pendua\" didayakan, responden yang cuba menyerahkan entri pendua akan menerima mesej ralat berikut.",
     totalExpression: "Membolehkan anda mengira jumlah nilai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), Ungkapan Boolean ('{age} > 60') dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dll.).",
     confirmDelete: "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman baris.",
-    defaultValueFromLastRow: "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya.",
+    copyDefaultValueFromLastEntry: "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya.",
     keyName: "Jika lajur yang ditentukan mengandungi nilai yang sama, tinjauan akan membuang ralat \"Nilai kunci bukan unik\".",
     description: "Taipkan sari kata.",
     locale: "Pilih bahasa untuk mula mencipta tinjauan anda. Untuk menambah terjemahan, tukar kepada bahasa baru dan terjemahkan teks asal di sini atau dalam tab Terjemahan.",
@@ -1982,8 +1980,6 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pe.indent: "Add indents" => "Menambah inden"
 // panel.indent: "Add outer indents" => "Menambah inden luaran"
 // pe.innerIndent: "Add inner indents" => "Menambah inden dalaman"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Mengambil nilai lalai daripada baris terakhir"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Mengambil nilai lalai daripada panel terakhir"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "Taip ungkapan di sini..."
 // pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "Kosongkan nilai jika soalan menjadi tersembunyi"
 // pe.valuePropertyName: "Value property name" => "Nama sifat nilai"
@@ -2507,7 +2503,7 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Tetapan ini diwarisi secara automatik oleh semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Opsyen \"Warisan\" menggunakan aras halaman (jika ditetapkan) atau seting aras tinjauan (\"Di bawah tajuk panel\" secara lalai)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Mentakrifkan kedudukan panel yang baru ditambah. Secara lalai, panel baru ditambahkan ke hujungnya. Pilih \"Seterusnya\" untuk memasukkan panel baru selepas yang semasa."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Pendua jawapan daripada panel terakhir dan memberikannya kepada panel dinamik tambahan seterusnya."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Pendua jawapan daripada panel terakhir dan memberikannya kepada panel dinamik tambahan seterusnya."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Rujukan nama soalan untuk memerlukan pengguna memberikan jawapan yang unik untuk soalan ini dalam setiap panel."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Seting ini membolehkan anda memperuntukkan nilai jawapan lalai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas - '{q1_id} + {q2_id}', ungkapan Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dsb. Nilai yang ditentukan oleh ungkapan ini berfungsi sebagai nilai lalai awal yang boleh diubah oleh input manual responden."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menentukan masa input responden ditetapkan semula kepada nilai berdasarkan \"Ungkapan nilai lalai\" atau \"Setkan ungkapan nilai\" atau kepada nilai \"Jawapan lalai\" (jika sama ada ditetapkan)."
@@ -2579,7 +2575,7 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Apabila sifat \"Mencegah respons pendua\" didayakan, responden yang cuba menyerahkan entri pendua akan menerima mesej ralat berikut."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Membolehkan anda mengira jumlah nilai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), Ungkapan Boolean ('{age} > 60') dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dll.)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman baris."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya."
 // pehelp.description: "Type a subtitle." => "Taipkan sari kata."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Pilih bahasa untuk mula mencipta tinjauan anda. Untuk menambah terjemahan, tukar kepada bahasa baru dan terjemahkan teks asal di sini atau dalam tab Terjemahan."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Mengesetkan lokasi seksyen butiran berhubung dengan baris. Pilih daripada: \"Tiada\" - tiada pengembangan ditambah; \"Di bawah baris\" - pengembangan baris diletakkan di bawah setiap baris matriks; \"Di bawah baris, paparkan pengembangan satu baris sahaja\" - pengembangan dipaparkan di bawah satu baris sahaja, pengembangan baris yang tinggal runtuh."

@@ -843,8 +843,6 @@ var simplifiedChineseTranslation = {
     columnsEnableIf: "在以下情况下，列可见",
     rowsEnableIf: "在以下情况下，行可见",
     innerIndent: "添加内部缩进",
-    defaultValueFromLastRow: "从最后一行获取默认值",
-    defaultValueFromLastPanel: "从最后一个面板中获取默认值",
     enterNewValue: "请设定值",
     noquestions: "问卷中还没有创建任何问题",
     createtrigger: "请创建触发器",
@@ -1374,7 +1372,7 @@ var simplifiedChineseTranslation = {
       titleLocation: "此面板中的所有问题都会自动继承此设置。如果要覆盖此设置，请为单个问题定义标题对齐规则。“继承”选项应用页面级别（如果已设置）或调查级别设置（默认为“顶部”）。",
       descriptionLocation: "“继承”选项应用页面级别（如果已设置）或调查级别设置（默认为“在面板标题下”）。",
       newPanelPosition: "定义新添加的面板的位置。默认情况下，新面板将添加到末尾。选择“下一步”以在当前面板之后插入新面板。",
-      defaultValueFromLastPanel: "复制上一个面板中的答案，并将其分配给下一个添加的动态面板。",
+      copyDefaultValueFromLastEntry: "复制上一个面板中的答案，并将其分配给下一个添加的动态面板。",
       keyName: "引用问题名称以要求用户在每个面板中为此问题提供唯一的答案。"
     },
     defaultValueExpression: "此设置允许您根据表达式分配默认答案值。表达式可以包括基本计算 - '{q1_id} + {q2_id}'、布尔表达式，例如 '{age} > 60'，以及函数：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。此表达式确定的值用作初始默认值，可由响应者的手动输入覆盖。",
@@ -1479,7 +1477,7 @@ var simplifiedChineseTranslation = {
     keyDuplicationError: "启用“防止重复响应”属性后，尝试提交重复条目的受访者将收到以下错误消息。",
     totalExpression: "允许您根据表达式计算总值。表达式可以包括基本计算 （'{q1_id} + {q2_id}'）、布尔表达式 （'{age} > 60'） 和函数 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
     confirmDelete: "触发提示，要求确认删除行。",
-    defaultValueFromLastRow: "复制最后一行的答案，并将其分配给下一个添加的动态行。",
+    copyDefaultValueFromLastEntry: "复制最后一行的答案，并将其分配给下一个添加的动态行。",
     keyName: "如果指定的列包含相同的值，则调查将引发“非唯一键值”错误。",
     description: "键入副标题。",
     locale: "选择一种语言以开始创建调查。要添加翻译，请切换到新语言，然后在此处或“翻译”选项卡中翻译原始文本。",
@@ -2112,8 +2110,6 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pe.indent: "Add indents" => "添加缩进"
 // panel.indent: "Add outer indents" => "添加外部缩进"
 // pe.innerIndent: "Add inner indents" => "添加内部缩进"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "从最后一行获取默认值"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "从最后一个面板中获取默认值"
 // pe.titleKeyboardAdornerTip: "Press enter button to edit" => "按回车键编辑"
 // pe.keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item" => "按回车键编辑项目，按删除按钮删除项目，按 Alt 加向上箭头或向下箭头移动项目"
 // pe.triggerGotoName: "Go to the question" => "转到问题"
@@ -2696,7 +2692,7 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "此面板中的所有问题都会自动继承此设置。如果要覆盖此设置，请为单个问题定义标题对齐规则。“继承”选项应用页面级别（如果已设置）或调查级别设置（默认为“顶部”）。"
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "“继承”选项应用页面级别（如果已设置）或调查级别设置（默认为“在面板标题下”）。"
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "定义新添加的面板的位置。默认情况下，新面板将添加到末尾。选择“下一步”以在当前面板之后插入新面板。"
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "复制上一个面板中的答案，并将其分配给下一个添加的动态面板。"
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "复制上一个面板中的答案，并将其分配给下一个添加的动态面板。"
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "引用问题名称以要求用户在每个面板中为此问题提供唯一的答案。"
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "此设置允许您根据表达式分配默认答案值。表达式可以包括基本计算 - '{q1_id} + {q2_id}'、布尔表达式，例如 '{age} > 60'，以及函数：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。此表达式确定的值用作初始默认值，可由响应者的手动输入覆盖。"
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "使用魔杖图标设置条件规则，该规则确定何时将受访者的输入重置为基于“默认值表达式”或“设置值表达式”的值，或重置为“默认答案”值（如果设置了其中任何一个）。"
@@ -2768,7 +2764,7 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "启用“防止重复响应”属性后，尝试提交重复条目的受访者将收到以下错误消息。"
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "允许您根据表达式计算总值。表达式可以包括基本计算 （'{q1_id} + {q2_id}'）、布尔表达式 （'{age} > 60'） 和函数 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。"
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "触发提示，要求确认删除行。"
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "复制最后一行的答案，并将其分配给下一个添加的动态行。"
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "复制最后一行的答案，并将其分配给下一个添加的动态行。"
 // pehelp.description: "Type a subtitle." => "键入副标题。"
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "选择一种语言以开始创建调查。要添加翻译，请切换到新语言，然后在此处或“翻译”选项卡中翻译原始文本。"
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "设置详细信息部分相对于行的位置。从中选择：“无” - 不添加扩展;“Under the row” - 矩阵的每一行下都放置一个行扩展;“在行下，仅显示一行扩展” - 仅在单行下显示扩展，其余行展开将折叠。"

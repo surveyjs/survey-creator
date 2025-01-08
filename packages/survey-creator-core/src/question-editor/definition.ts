@@ -183,7 +183,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "hideColumnsIfEmpty", tab: "columns" },
       { name: "noRowsText", tab: "columns" },
       { name: "defaultRowValue", tab: "data" },
-      { name: "defaultValueFromLastRow", tab: "data" },
+      { name: "copyDefaultValueFromLastEntry", tab: "data" },
       { name: "keyName", tab: "validation" },
       { name: "keyDuplicationError", tab: "validation" }
     ]
@@ -667,7 +667,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "showProgressBar",
       "progressBarLocation",
       { name: "defaultPanelValue", tab: "data" },
-      { name: "defaultValueFromLastPanel", tab: "data" },
+      { name: "copyDefaultValueFromLastEntry", tab: "data" },
       { name: "templateQuestionTitleLocation", tab: "questionSettings" },
       { name: "templateErrorLocation", tab: "questionSettings" },
       { name: "panelRemoveButtonLocation", tab: "layout" },

@@ -843,8 +843,6 @@ export var skStrings = {
     columnsEnableIf: "Stĺpce sú viditeľné, ak",
     rowsEnableIf: "Riadky sú viditeľné, ak",
     innerIndent: "Pridanie vnútorných zarážok",
-    defaultValueFromLastRow: "Prevzatie predvolených hodnôt z posledného riadka",
-    defaultValueFromLastPanel: "Prevzatie predvolených hodnôt z posledného panela",
     enterNewValue: "Zadajte hodnotu.",
     noquestions: "V prieskume nie je žiadna otázka.",
     createtrigger: "Vytvorte aktivátor",
@@ -1374,7 +1372,7 @@ export var skStrings = {
       titleLocation: "Toto nastavenie sa automaticky dedí všetkými otázkami na tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\").",
       descriptionLocation: "Možnosť \"Dediť\" použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene pod názvom panela\").",
       newPanelPosition: "Definuje pozíciu novo pridaného panela. V predvolenom nastavení sa na koniec pridávajú nové panely. Výberom položky \"Ďalej\" vložíte nový panel za aktuálny.",
-      defaultValueFromLastPanel: "Duplikuje odpovede z posledného panela a priradí ich ďalšiemu pridanému dynamickému panelu.",
+      copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného panela a priradí ich ďalšiemu pridanému dynamickému panelu.",
       keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli."
     },
     defaultValueExpression: "Toto nastavenie vám umožňuje priradiť predvolenú hodnotu odpovede na základe výrazu. Výraz môže obsahovať základné výpočty - '{q1_id} + {q2_id}', boolovské výrazy, ako napríklad '{age} > 60', a funkcie: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atď. Hodnota určená týmto výrazom slúži ako počiatočná predvolená hodnota, ktorú je možné prepísať manuálnym vstupom respondenta.",
@@ -1479,7 +1477,7 @@ export var skStrings = {
     keyDuplicationError: "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie.",
     totalExpression: "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.).",
     confirmDelete: "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka.",
-    defaultValueFromLastRow: "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku.",
+    copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku.",
     keyName: "Ak zadaný stĺpec obsahuje rovnaké hodnoty, prieskum vyhodí chybu \"Nejedinečná hodnota kľúča\".",
     description: "Zadajte podnadpis.",
     locale: "Vyberte jazyk a začnite vytvárať prieskum. Ak chcete pridať preklad, prepnite na nový jazyk a preložte pôvodný text tu alebo na karte Preklady.",
@@ -1982,8 +1980,6 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pe.indent: "Add indents" => "Pridanie zarážok"
 // panel.indent: "Add outer indents" => "Pridanie vonkajších zarážok"
 // pe.innerIndent: "Add inner indents" => "Pridanie vnútorných zarážok"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Prevzatie predvolených hodnôt z posledného riadka"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Prevzatie predvolených hodnôt z posledného panela"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "Sem zadajte výraz..."
 // pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "Ak sa otázka skryje, vymažte hodnotu"
 // pe.valuePropertyName: "Value property name" => "Názov vlastnosti Value"
@@ -2507,7 +2503,7 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Toto nastavenie sa automaticky dedí všetkými otázkami na tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\")."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Možnosť \"Dediť\" použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene pod názvom panela\")."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Definuje pozíciu novo pridaného panela. V predvolenom nastavení sa na koniec pridávajú nové panely. Výberom položky \"Ďalej\" vložíte nový panel za aktuálny."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplikuje odpovede z posledného panela a priradí ich ďalšiemu pridanému dynamickému panelu."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplikuje odpovede z posledného panela a priradí ich ďalšiemu pridanému dynamickému panelu."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Toto nastavenie vám umožňuje priradiť predvolenú hodnotu odpovede na základe výrazu. Výraz môže obsahovať základné výpočty - '{q1_id} + {q2_id}', boolovské výrazy, ako napríklad '{age} > 60', a funkcie: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atď. Hodnota určená týmto výrazom slúži ako počiatočná predvolená hodnota, ktorú je možné prepísať manuálnym vstupom respondenta."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje, kedy sa vstup respondenta obnoví na hodnotu na základe hodnoty \"Výraz predvolenej hodnoty\" alebo \"Výraz nastavenej hodnoty\" alebo hodnoty \"Predvolená odpoveď\" (ak je nastavená)."
@@ -2579,7 +2575,7 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku."
 // pehelp.description: "Type a subtitle." => "Zadajte podnadpis."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Vyberte jazyk a začnite vytvárať prieskum. Ak chcete pridať preklad, prepnite na nový jazyk a preložte pôvodný text tu alebo na karte Preklady."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Nastaví umiestnenie sekcie podrobností vo vzťahu k riadku. Vyberte si z: \"Žiadne\" - nie je pridané žiadne rozšírenie; \"Pod riadkom\" - pod každým riadkom matice je umiestnené rozšírenie riadku; \"Pod riadkom zobraziť iba rozšírenie jedného riadka\" - rozšírenie sa zobrazí iba pod jedným riadkom, zvyšné rozšírenia riadkov sa zbalia."
