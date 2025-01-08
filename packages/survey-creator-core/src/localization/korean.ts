@@ -742,7 +742,6 @@ export var koreanStrings = {
     keyDuplicationError: "\"고유하지 않은 키 값\" 오류 메시지",
     minSelectedChoices: "선택한 최소 선택 항목",
     maxSelectedChoices: "선택한 최대 선택 항목 수",
-    allowClear: "지우기 단추 표시",
     logoWidth: "로고 너비(CSS에서 허용하는 값)",
     logoHeight: "로고 높이(CSS에서 허용하는 값)",
     readOnly: "읽기 전용",
