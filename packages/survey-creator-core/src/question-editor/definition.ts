@@ -170,20 +170,20 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       "allowAddRows",
       "allowRemoveRows",
-      "allowRowsDragAndDrop",
+      "allowRowReorder",
       "rowCount",
       "minRowCount",
       "maxRowCount",
-      "addRowLocation",
+      "addRowButtonLocation",
       "addRowText",
       "removeRowText",
       "confirmDelete",
       "confirmDeleteText",
       "placeholder",
       { name: "hideColumnsIfEmpty", tab: "columns" },
-      { name: "emptyRowsText", tab: "columns" },
+      { name: "noRowsText", tab: "columns" },
       { name: "defaultRowValue", tab: "data" },
-      { name: "defaultValueFromLastRow", tab: "data" },
+      { name: "copyDefaultValueFromLastEntry", tab: "data" },
       { name: "keyName", tab: "validation" },
       { name: "keyDuplicationError", tab: "validation" }
     ]
@@ -199,13 +199,13 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   matrix: {
     properties: [
-      { name: "isAllRowRequired", tab: "validation" },
+      { name: "eachRowRequired", tab: "validation" },
       { name: "eachRowUnique", tab: "validation" },
       { name: "showHeader", tab: "layout" },
       { name: "showColumnHeader", tab: "layout" },
       { name: "verticalAlign", tab: "layout" },
       { name: "alternateRows", tab: "layout" },
-      { name: "rowsOrder", tab: "rows" },
+      { name: "rowOrder", tab: "rows" },
       { name: "hideIfRowsEmpty", tab: "rows" },
       { name: "columnsVisibleIf", tab: "logic" },
       { name: "rowsVisibleIf", tab: "logic" },
@@ -221,7 +221,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   multipletext: {
     properties: [
       { name: "colCount", tab: "layout" },
-      { name: "itemSize", tab: "layout" },
+      { name: "inputSize", tab: "layout" },
       { name: "itemErrorLocation", tab: "layout" }
     ],
     tabs: [{ name: "items", index: 10 }]
@@ -288,7 +288,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   radiogroup: {
     properties: [
-      { name: "showClearButton", tab: "choices" },
+      { name: "allowClear", tab: "choices" },
       { name: "separateSpecialChoices", tab: "choices" },
     ]
   },
@@ -667,8 +667,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "showProgressBar",
       "progressBarLocation",
       { name: "defaultPanelValue", tab: "data" },
-      { name: "defaultValueFromLastPanel", tab: "data" },
-      { name: "templateTitleLocation", tab: "questionSettings" },
+      { name: "copyDefaultValueFromLastEntry", tab: "data" },
+      { name: "templateQuestionTitleLocation", tab: "questionSettings" },
       { name: "templateErrorLocation", tab: "questionSettings" },
       { name: "panelRemoveButtonLocation", tab: "layout" },
       { name: "keyName", tab: "validation" },
@@ -701,7 +701,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   panel: {
     properties: [
       "isRequired",
-      { name: "questionsOrder", tab: "questionSettings" },
+      { name: "questionOrder", tab: "questionSettings" },
       { name: "innerIndent", tab: "questionSettings" },
       { name: "requiredErrorText", tab: "validation" },
       { name: "page", tab: "layout" },
@@ -726,7 +726,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "navigationDescription",
       "timeLimit",
       "maxTimeToFinish",
-      { name: "questionsOrder", tab: "questionSettings" },
+      { name: "questionOrder", tab: "questionSettings" },
       { name: "navigationButtonsVisibility", tab: "navigation" }
     ],
     tabs: [{ name: "navigation", index: 350 }, { name: "layout", visible: false }]
@@ -744,9 +744,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "fitToContainer",
 
       { name: "questionsOnPageMode", tab: "navigation" },
-      { name: "firstPageIsStarted", tab: "navigation" },
-      { name: "goNextPageAutomatic", tab: "navigation" },
-      { name: "allowCompleteSurveyAutomatic", tab: "navigation" },
+      { name: "firstPageIsStartPage", tab: "navigation" },
+      { name: "autoAdvanceEnabled", tab: "navigation" },
+      { name: "autoAdvanceAllowComplete", tab: "navigation" },
       { name: "showNavigationButtons", tab: "navigation" },
       { name: "showPrevButton", tab: "navigation" },
       { name: "showProgressBar", tab: "navigation" },
@@ -763,20 +763,20 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "pageNextText", tab: "navigation" },
       { name: "completeText", tab: "navigation" },
 
-      { name: "questionsOrder", tab: "question" },
+      { name: "questionOrder", tab: "question" },
       { name: "questionTitleLocation", tab: "question" },
       { name: "questionDescriptionLocation", tab: "question" },
       { name: "showQuestionNumbers", tab: "question" },
       { name: "questionTitlePattern", tab: "question" },
-      { name: "requiredText", tab: "question" },
+      { name: "requiredMark", tab: "question" },
       { name: "questionStartIndex", tab: "question" },
       { name: "questionErrorLocation", tab: "question" },
       {
-        name: "focusFirstQuestionAutomatic",
+        name: "autoFocusFirstQuestion",
         tab: "question"
       },
       { name: "maxTextLength", tab: "question" },
-      { name: "maxOthersLength", tab: "question" },
+      { name: "maxCommentLength", tab: "question" },
       { name: "commentAreaRows", tab: "question" },
       { name: "autoGrowComment", tab: "question" },
       { name: "allowResizeComment", tab: "question" },
@@ -789,16 +789,16 @@ const defaultProperties: ISurveyPropertiesDefinition = {
 
       { name: "clearInvisibleValues", tab: "data" },
       { name: "textUpdateMode", tab: "data" },
-      { name: "sendResultOnPageNext", tab: "data" },
+      { name: "partialSendEnabled", tab: "data" },
       { name: "storeOthersAsComment", tab: "data" },
 
-      { name: "focusOnFirstError", tab: "validation" },
+      { name: "autoFocusFirstError", tab: "validation" },
       { name: "checkErrorsMode", tab: "validation" },
       { name: "validateVisitedEmptyFields", tab: "validation" },
 
       { name: "navigateToUrl", tab: "showOnCompleted" },
       { name: "navigateToUrlOnCondition", tab: "showOnCompleted" },
-      { name: "showCompletedPage", tab: "showOnCompleted" },
+      { name: "showCompletePage", tab: "showOnCompleted" },
       { name: "completedHtml", tab: "showOnCompleted" },
       { name: "completedHtmlOnCondition", tab: "showOnCompleted" },
       { name: "loadingHtml", tab: "showOnCompleted" },

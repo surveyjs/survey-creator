@@ -109,6 +109,9 @@ var persianStrings = {
     redoTooltip: "انجام دادن تغییر",
     expandAllTooltip: "گسترش همه",
     collapseAllTooltip: "جمع کردن همه",
+    zoomInTooltip: "بزرگنمایی",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "کوچک نمایی",
     lockQuestionsTooltip: "قفل کردن وضعیت expand/collapse برای سوالات",
     showMoreChoices: "نمایش بیشتر",
     showLessChoices: "نمایش کمتر",
@@ -296,7 +299,7 @@ var persianStrings = {
       description: "توضیحات پنل",
       visibleIf: "تابلو را مرئی کنید اگر",
       requiredIf: "ایجاد پنل مورد نیاز اگر",
-      questionsOrder: "سفارش سوال در داخل پنل",
+      questionOrder: "سفارش سوال در داخل پنل",
       page: "صفحه اصلی",
       startWithNewLine: "نمایش تابلو در یک خط جدید",
       state: "دولت فروپاشی پانل",
@@ -327,7 +330,7 @@ var persianStrings = {
       hideNumber: "مخفی کردن شمارهی تابلو",
       titleLocation: "ترازبندی عنوان پنل",
       descriptionLocation: "ترازبندی توضیحات پنل",
-      templateTitleLocation: "هم ترازی عنوان پرسش",
+      templateQuestionTitleLocation: "هم ترازی عنوان پرسش",
       templateErrorLocation: "همترازسازی پیام خطا",
       newPanelPosition: "محل جدید پنل",
       showRangeInProgress: "نمایش نوار پیشرفت",
@@ -394,7 +397,7 @@ var persianStrings = {
       visibleIf: "صفحه را مرئی کنید اگر",
       requiredIf: "ایجاد صفحه مورد نیاز اگر",
       timeLimit: "محدودیت زمانی برای تمام کردن صفحه (به ثانیه)",
-      questionsOrder: "سفارش سوال در صفحه"
+      questionOrder: "سفارش سوال در صفحه"
     },
     matrixdropdowncolumn: {
       name: "نام ستون",
@@ -560,7 +563,7 @@ var persianStrings = {
     isRequired: "ضروری است؟",
     markRequired: "علامت گذاری به عنوان مورد نیاز",
     removeRequiredMark: "حذف علامت مورد نیاز",
-    isAllRowRequired: "نیاز به پاسخ برای همه سطرها",
+    eachRowRequired: "نیاز به پاسخ برای همه سطرها",
     eachRowUnique: "جلوگیری از پاسخ های تکراری در ردیف ها",
     requiredErrorText: "متن خطای موردنیاز",
     startWithNewLine: "با سطر جدید شروع شود؟",
@@ -572,7 +575,7 @@ var persianStrings = {
     maxSize: "حداکثر سایز به بایت",
     rowCount: "تعداد سطر",
     columnLayout: "قالب ستون ها",
-    addRowLocation: "اضافه کردن موقعیت دکمه سطری",
+    addRowButtonLocation: "اضافه کردن موقعیت دکمه سطری",
     transposeData: "جابهجا کردن سطرها به ستونها",
     addRowText: "متن دکمه درج سطر",
     removeRowText: "متن دکمه حذف سطر",
@@ -611,7 +614,7 @@ var persianStrings = {
     mode: "حالت (ویرایش/خواندن)",
     clearInvisibleValues: "پاکسازی مقادیر پنهان",
     cookieName: "نام کوکی (به منظور جلوگیری از اجرای دوباره نظرسنجی)",
-    sendResultOnPageNext: "ارسال نتایج نظرسنجی در صفحه بعدی",
+    partialSendEnabled: "ارسال نتایج نظرسنجی در صفحه بعدی",
     storeOthersAsComment: "ذخیره مقدار 'سایر' در فیلد جداگانه",
     showPageTitles: "نمایش عنوان صفحات",
     showPageNumbers: "نمایش شماره صفحات",
@@ -623,18 +626,18 @@ var persianStrings = {
     startSurveyText: "متن دکمه شروع نظرسنجی",
     showNavigationButtons: "نمایش دکمه های ناوبری (ناوبری پیش فرض)",
     showPrevButton: "نمایش دکمه قبلی (کاربر ممکن است به صفحه قبل برگردد)",
-    firstPageIsStarted: "صفحه اول در نظرسنجی نقطه آغازین آن است.",
-    showCompletedPage: "نمایش صفحه اتمام نظرسنجی در پایان (completedHtml)",
-    goNextPageAutomatic: "با پاسخگویی به تمام سوالات، به صورت اتوماتیک به صفحه بعد برود",
-    allowCompleteSurveyAutomatic: "بررسی را به طور خودکار تکمیل کنید",
+    firstPageIsStartPage: "صفحه اول در نظرسنجی نقطه آغازین آن است.",
+    showCompletePage: "نمایش صفحه اتمام نظرسنجی در پایان (completedHtml)",
+    autoAdvanceEnabled: "با پاسخگویی به تمام سوالات، به صورت اتوماتیک به صفحه بعد برود",
+    autoAdvanceAllowComplete: "بررسی را به طور خودکار تکمیل کنید",
     showProgressBar: "نمایش نشانگر پیشرفت",
     questionTitleLocation: "محل عنوان سوال",
     questionTitleWidth: "عرض عنوان سوال",
-    requiredText: "سوالات نشان دار اجباری هستند",
+    requiredMark: "سوالات نشان دار اجباری هستند",
     questionTitleTemplate: "قالب عنوان سوال، به صورت پیش فرض: '{no}. {require} {title}'",
     questionErrorLocation: "محل خطای سوال",
-    focusFirstQuestionAutomatic: "تمرکز بر روی اولین سوال با تغییر صفحه",
-    questionsOrder: "ترتیب المان ها در صفحه",
+    autoFocusFirstQuestion: "تمرکز بر روی اولین سوال با تغییر صفحه",
+    questionOrder: "ترتیب المان ها در صفحه",
     timeLimit: "نهایت زمان برای اتمام نظرسنجی",
     timeLimitPerPage: "نهایت زمان برای اتمام این صفحه نظرسنجی",
     showTimer: "از تایمر استفاده کنید",
@@ -651,7 +654,7 @@ var persianStrings = {
     dataFormat: "قالب تصویر",
     allowAddRows: "اجازه اضافه کردن سطرها",
     allowRemoveRows: "اجازه حذف سطرها",
-    allowRowsDragAndDrop: "اجازه دادن به کشیدن و رها کردن ردیف",
+    allowRowReorder: "اجازه دادن به کشیدن و رها کردن ردیف",
     responsiveImageSizeHelp: "اگر عرض یا ارتفاع تصویر دقیق را مشخص کنید اعمال نمی شود.",
     minImageWidth: "حداقل عرض تصویر",
     maxImageWidth: "حداکثر عرض تصویر",
@@ -678,13 +681,13 @@ var persianStrings = {
     logo: "لوگو (URL یا رشته کدگذاری شده base64)",
     questionsOnPageMode: "ساختار نظرسنجی",
     maxTextLength: "حداکثر طول پاسخ (در کاراکترها)",
-    maxOthersLength: "حداکثر طول توضیحات (در نویسهها)",
+    maxCommentLength: "حداکثر طول توضیحات (در نویسهها)",
     commentAreaRows: "ارتفاع منطقه نظر (در خطوط)",
     autoGrowComment: "گسترش خودکار منطقه نظر در صورت لزوم",
     allowResizeComment: "اجازه دادن به کاربران برای تغییر اندازه مناطق متن",
     textUpdateMode: "بههنگامسازی مقدار سؤال متن",
     maskType: "نوع ماسک ورودی",
-    focusOnFirstError: "تنظیم تمرکز روی اولین پاسخ نامعتبر",
+    autoFocusFirstError: "تنظیم تمرکز روی اولین پاسخ نامعتبر",
     checkErrorsMode: "اجرای اعتبارسنجی",
     validateVisitedEmptyFields: "اعتبارسنجی فیلدهای خالی در فوکوس از دست رفته",
     navigateToUrl: "حرکت به نشانی وب",
@@ -742,12 +745,11 @@ var persianStrings = {
     keyDuplicationError: "پیام خطای \"مقدار کلید غیر منحصر به فرد\"",
     minSelectedChoices: "حداقل انتخاب های انتخاب شده",
     maxSelectedChoices: "حداکثر انتخابهای انتخاب شده",
-    showClearButton: "نشان دادن دکمهی Clear",
     logoWidth: "عرض لوگو (در مقادیر پذیرفته شده CSS)",
     logoHeight: "ارتفاع لوگو (در مقادیر پذیرفته شده CSS)",
     readOnly: "فقط خواندنی",
     enableIf: "قابل ویرایش اگر",
-    emptyRowsText: "پیام \"بدون ردیف\"",
+    noRowsText: "پیام \"بدون ردیف\"",
     separateSpecialChoices: "انتخاب های ویژه جداگانه (هیچ کدام، دیگر، همه را انتخاب کنید)",
     choicesFromQuestion: "کپی کردن انتخابها از سؤال زیر",
     choicesFromQuestionMode: "کدام گزینه ها را کپی کنید؟",
@@ -756,7 +758,7 @@ var persianStrings = {
     showCommentArea: "نمایش ناحیهی نظرات",
     commentPlaceholder: "ذی نفع منطقه نظر",
     displayRateDescriptionsAsExtremeItems: "نمایش توضیحات نرخ به عنوان مقادیر شدید",
-    rowsOrder: "سفارش ردیف",
+    rowOrder: "سفارش ردیف",
     columnsLayout: "طرحبندی ستون",
     columnColCount: "تعداد ستون های تو در تو",
     correctAnswer: "پاسخ صحیح",
@@ -833,6 +835,7 @@ var persianStrings = {
       background: "پس زمینه",
       appearance: "ظاهر",
       accentColors: "رنگ های تاکیدی",
+      surfaceBackground: "زمینه سطح",
       scaling: "توزین",
       others: "باقی موارد"
     },
@@ -843,8 +846,7 @@ var persianStrings = {
     columnsEnableIf: "ستونها مرئی هستند اگر",
     rowsEnableIf: "سطرها مرئی هستند اگر",
     innerIndent: "اضافه کردن تورفتات داخلی",
-    defaultValueFromLastRow: "گرفتن مقادیر پیشفرض از اخرین سطر",
-    defaultValueFromLastPanel: "گرفتن مقادیر پیشفرض از اخرین تابلو",
+    copyDefaultValueFromLastEntry: "از پاسخ های آخرین ورودی به عنوان پیش فرض استفاده کنید",
     enterNewValue: "لطفا یک مقدار وارد کنید",
     noquestions: "سوالی در پرسشنامه درج نشده",
     createtrigger: "اجرا کننده ای بسازید",
@@ -1120,7 +1122,7 @@ var persianStrings = {
     timerInfoMode: {
       combined: "هر دو"
     },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "بستگی به طرح ماتریس دارد"
     },
     panelsState: {
@@ -1191,10 +1193,10 @@ var persianStrings = {
       percent: "درصد",
       date: "تاریخ"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "اصلی"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "اصلی"
     },
     showProgressBar: {
@@ -1345,7 +1347,7 @@ var persianStrings = {
       questionTitleLocation: "برای تمام سوالات در این پنل اعمال می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند).",
       questionTitleWidth: "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
       questionErrorLocation: "مکان یک پیام خطا را در رابطه با تمام سوالات درون پانل تنظیم می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است.",
-      questionsOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است.",
+      questionOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است.",
       page: "پانل را به انتهای صفحه انتخاب شده تغییر می دهد.",
       innerIndent: "اضافه کردن فضا یا حاشیه بین محتوای پانل و مرز سمت چپ جعبه پانل.",
       startWithNewLine: "عدم انتخاب برای نمایش پانل در یک خط با سوال قبلی یا پانل. تنظیمات اعمال نمی شود اگر پانل اولین عنصر در فرم شما باشد.",
@@ -1359,7 +1361,7 @@ var persianStrings = {
       visibleIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی که دید پانل را تعیین می کند استفاده کنید.",
       enableIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که حالت فقط خواندنی را برای پانل غیرفعال می کند.",
       requiredIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد.",
-      templateTitleLocation: "برای تمام سوالات در این پنل اعمال می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند).",
+      templateQuestionTitleLocation: "برای تمام سوالات در این پنل اعمال می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند).",
       templateErrorLocation: "محل یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم میکند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند).",
       errorLocation: "مکان یک پیام خطا را در رابطه با تمام سوالات درون پانل تنظیم می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است.",
       page: "پانل را به انتهای صفحه انتخاب شده تغییر می دهد.",
@@ -1374,9 +1376,10 @@ var persianStrings = {
       titleLocation: "این تنظیم به طور خودکار توسط تمام سوالات موجود در این پنل به ارث برده می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند).",
       descriptionLocation: "گزینه \"Inherit\" سطح صفحه (در صورت تنظیم) یا تنظیم سطح نظرسنجی (\"زیر عنوان پانل\" به طور پیش فرض) اعمال می شود.",
       newPanelPosition: "موقعیت یک پانل تازه اضافه شده را تعریف می کند. به طور پیش فرض، پانل های جدید به پایان اضافه می شوند. \"Next\" را انتخاب کنید تا یک پانل جدید پس از پانل فعلی وارد شود.",
-      defaultValueFromLastPanel: "پاسخ ها را از اخرین پانل تکرار می کند و انها را به پانل پویا اضافه شده بعدی اختصاص می دهد.",
+      copyDefaultValueFromLastEntry: "پاسخ ها را از اخرین پانل تکرار می کند و انها را به پانل پویا اضافه شده بعدی اختصاص می دهد.",
       keyName: "مرجع یک نام سوال نیاز به یک کاربر برای ارائه یک پاسخ منحصر به فرد برای این سوال در هر پانل."
     },
+    copyDefaultValueFromLastEntry: "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند.",
     defaultValueExpression: "این تنظیم به شما اجازه می دهد تا یک مقدار پاسخ پیش فرض را بر اساس یک عبارت اختصاص دهید. این عبارت می تواند شامل محاسبات اساسی - \"{q1_id} + {q2_id}'، عبارات بولی مانند \"{age} > 60\" و توابع: \"iif()\"، \"today()\"، \"age()\"، \"min()\"، \"max()\"، \"avg()\" و غیره باشد. مقدار تعیین شده توسط این عبارت به عنوان مقدار پیش فرض اولیه عمل می کند که می تواند توسط ورودی دستی پاسخ دهنده لغو شود.",
     resetValueIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که تعیین می کند چه زمانی ورودی پاسخ دهنده به مقدار بر اساس \"بیان مقدار پیش فرض\" یا \"تنظیم مقدار بیان\" یا \"پاسخ پیش فرض\" مقدار (اگر هر کدام تنظیم شده است) تنظیم مجدد شود.",
     setValueIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که تعیین می کند چه زمانی \"Set value expression\" را اجرا کنید و به صورت پویا مقدار حاصل را به عنوان یک پاسخ اختصاص دهید.",
@@ -1449,19 +1452,19 @@ var persianStrings = {
     logoWidth: "عرض لوگو را در واحدهای CSS تنظیم می کند (px، ٪، in، pt و غیره).",
     logoHeight: "ارتفاع لوگو را در واحدهای CSS تنظیم می کند (px، ٪، in، pt و غیره).",
     logoFit: "انتخاب از: \"هیچ\" - تصویر اندازه اصلی خود را حفظ می کند؛ \"شامل\" - تصویر تغییر اندازه به جا در حالی که حفظ نسبت ابعاد ان؛ \"Cover\" - تصویر کل جعبه را پر می کند در حالی که نسبت ابعاد ان را حفظ می کند. \"Fill\" - تصویر برای پر کردن جعبه بدون حفظ نسبت ابعاد ان کشیده می شود.",
-    goNextPageAutomatic: "انتخاب کنید که آیا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش برود پس از اینکه پاسخ دهنده به همه سؤالات موجود در صفحه فعلی پاسخ داد. اگر آخرین سؤال در صفحه باز باشد یا اجازه پاسخ های متعدد را بدهد، این ویژگی اعمال نمی شود.",
-    allowCompleteSurveyAutomatic: "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار پس از پاسخ دادن به تمام سوالات پاسخ دهد.",
+    autoAdvanceEnabled: "انتخاب کنید که آیا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش برود پس از اینکه پاسخ دهنده به همه سؤالات موجود در صفحه فعلی پاسخ داد. اگر آخرین سؤال در صفحه باز باشد یا اجازه پاسخ های متعدد را بدهد، این ویژگی اعمال نمی شود.",
+    autoAdvanceAllowComplete: "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار پس از پاسخ دادن به تمام سوالات پاسخ دهد.",
     showNavigationButtons: "قابلیت مشاهده و مکان دکمه های پیمایش را در یک صفحه تنظیم می کند.",
     showProgressBar: "دید و مکان یک نوار پیشرفت را تنظیم می کند. مقدار \"Auto\" نوار پیشرفت را در بالا یا پایین هدر نظرسنجی نشان می دهد.",
     showPreviewBeforeComplete: "صفحه پیش نمایش را فقط با تمام سوالات یا پاسخ داده شده فعال کنید.",
     questionTitleLocation: "به تمام سوالات در نظرسنجی اعمال می شود. این تنظیم را می توان با قوانین هم ترازی عنوان در سطوح پایین تر لغو کرد: پانل، صفحه یا سوال. یک تنظیم سطح پایین تر، کسانی را که در سطح بالاتری قرار دارند، نادیده می گیرد.",
-    requiredText: "یک نماد یا دنباله ای از نمادها نشان می دهد که یک پاسخ مورد نیاز است.",
+    requiredMark: "یک نماد یا دنباله ای از نمادها نشان می دهد که یک پاسخ مورد نیاز است.",
     questionStartIndex: "یک شماره یا حرف را وارد کنید که می خواهید با ان شروع به شماره گیری کنید.",
     questionErrorLocation: "مکان یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم می کند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد.",
-    focusFirstQuestionAutomatic: "انتخاب کنید که ایا می خواهید اولین فیلد ورودی در هر صفحه اماده برای ورود متن باشد.",
-    questionsOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
+    autoFocusFirstQuestion: "انتخاب کنید که ایا می خواهید اولین فیلد ورودی در هر صفحه اماده برای ورود متن باشد.",
+    questionOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
     maxTextLength: "فقط برای سوالات ورودی متن.",
-    maxOthersLength: "فقط برای نظرات سوال.",
+    maxCommentLength: "فقط برای نظرات سوال.",
     commentAreaRows: "تعداد خطوط نمایش داده شده در ناحیههای متن را برای نظرات سؤال تنظیم میکند. در ورودی طول می کشد تا خطوط بیشتر، نوار اسکرول به نظر می رسد.",
     autoGrowComment: "انتخاب کنید اگر شما می خواهید نظرات سوال و سوالات متن بلند به رشد خودکار در ارتفاع بر اساس طول متن وارد شده است.",
     allowResizeComment: "برای نظرات سوال و سوالات طولانی متن تنها.",
@@ -1479,7 +1482,6 @@ var persianStrings = {
     keyDuplicationError: "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند.",
     totalExpression: "به شما اجازه می دهد تا مقادیر کل را بر اساس یک عبارت محاسبه کنید. این عبارت می تواند شامل محاسبات اساسی ('{q1_id} + {q2_id}')، عبارات بولی ('{age} > 60') و توابع ('iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()'، و غیره باشد.",
     confirmDelete: "یک درخواست فوری برای تایید حذف ردیف ایجاد می کند.",
-    defaultValueFromLastRow: "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند.",
     keyName: "اگر ستون مشخص شده حاوی مقادیر یکسان باشد، نظرسنجی خطای \"مقدار کلیدی غیر منحصر به فرد\" را پرتاب می کند.",
     description: "یک زیرنویس تایپ کنید.",
     locale: "یک زبان را برای شروع ایجاد نظرسنجی خود انتخاب کنید. برای اضافه کردن ترجمه، به یک زبان جدید بروید و متن اصلی را در اینجا یا در زبانه ترجمه ترجمه ترجمه کنید.",
@@ -1498,7 +1500,7 @@ var persianStrings = {
       questionTitleLocation: "به تمام سوالات موجود در این صفحه اعمال می شود. اگر می خواهید این تنظیمات را لغو کنید، قوانین تراز عنوان را برای سوالات یا پانل های فردی تعریف کنید. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند.",
       questionTitleWidth: "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
       questionErrorLocation: "مکان یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم می کند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند.",
-      questionsOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"اصلی\" به طور پیش فرض) را اعمال می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
+      questionOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"اصلی\" به طور پیش فرض) را اعمال می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
       navigationButtonsVisibility: "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است."
     },
     timerLocation: "مکان یک تایمر را در یک صفحه تنظیم می کند.",
@@ -1535,7 +1537,7 @@ var persianStrings = {
     needConfirmRemoveFile: "یک اعلان برای تایید حذف پرونده ایجاد می کند.",
     selectToRankEnabled: "فقط گزینه های انتخاب شده را رتبه بندی کنید. کاربران موارد انتخاب شده را از لیست انتخاب می کنند تا انها را در منطقه رتبه بندی سفارش دهند.",
     dataList: "لیستی از انتخاب هایی را وارد کنید که در طول ورودی به مخاطب پیشنهاد می شود.",
-    itemSize: "تنظیم فقط زمینه های ورودی را تغییر می دهد و بر عرض جعبه سوال تاثیر نمی گذارد.",
+    inputSize: "تنظیم فقط زمینه های ورودی را تغییر می دهد و بر عرض جعبه سوال تاثیر نمی گذارد.",
     itemTitleWidth: "عرض سازگار را برای همۀ برچسبهای فقره به تصویردانه تنظیم میکند",
     inputTextAlignment: "نحوه تراز کردن مقدار ورودی در فیلد را انتخاب کنید. تنظیم پیش فرض \"خودکار\" مقدار ورودی را در صورت اعمال پوشش ارز یا عددی به سمت راست و در صورت عدم اعمال به سمت چپ تراز می کند.",
     altText: "به عنوان یک جایگزین زمانی که تصویر نمی تواند بر روی دستگاه کاربر و برای اهداف دسترسی نمایش داده شود.",
@@ -1653,7 +1655,7 @@ var persianStrings = {
     maxValueExpression: "عبارت بیشینه مقدار",
     step: "گام",
     dataList: "لیست داده ها",
-    itemSize: "ابعاد مورد",
+    inputSize: "ابعاد مورد",
     itemTitleWidth: "عرض برچسب مورد (در پیکسل)",
     inputTextAlignment: "تراز مقدار ورودی",
     elements: "عناصر",
@@ -1755,7 +1757,8 @@ var persianStrings = {
       orchid: "ارکیده",
       tulip: "لاله",
       brown: "قهوه ای",
-      green: "سبز"
+      green: "سبز",
+      gray: "خاکستری"
     }
   },
   creatortheme: {
@@ -1837,7 +1840,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.dataFormat: "Image format" => "قالب تصویر"
 // pe.allowAddRows: "Allow adding rows" => "اجازه اضافه کردن سطرها"
 // pe.allowRemoveRows: "Allow removing rows" => "اجازه حذف سطرها"
-// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "اجازه دادن به کشیدن و رها کردن ردیف"
+// pe.allowRowReorder: "Allow row drag and drop" => "اجازه دادن به کشیدن و رها کردن ردیف"
 // pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "اگر عرض یا ارتفاع تصویر دقیق را مشخص کنید اعمال نمی شود."
 // pe.minImageWidth: "Minimum image width" => "حداقل عرض تصویر"
 // pe.maxImageWidth: "Maximum image width" => "حداکثر عرض تصویر"
@@ -1848,11 +1851,11 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.logo: "Logo (URL or base64-encoded string)" => "لوگو (URL یا رشته کدگذاری شده base64)"
 // pe.questionsOnPageMode: "Survey structure" => "ساختار نظرسنجی"
 // pe.maxTextLength: "Maximum answer length (in characters)" => "حداکثر طول پاسخ (در کاراکترها)"
-// pe.maxOthersLength: "Maximum comment length (in characters)" => "حداکثر طول توضیحات (در نویسهها)"
+// pe.maxCommentLength: "Maximum comment length (in characters)" => "حداکثر طول توضیحات (در نویسهها)"
 // pe.autoGrowComment: "Auto-expand comment area if necessary" => "گسترش خودکار منطقه نظر در صورت لزوم"
 // pe.allowResizeComment: "Allow users to resize text areas" => "اجازه دادن به کاربران برای تغییر اندازه مناطق متن"
 // pe.textUpdateMode: "Update text question value" => "بههنگامسازی مقدار سؤال متن"
-// pe.focusOnFirstError: "Set focus on the first invalid answer" => "تنظیم تمرکز روی اولین پاسخ نامعتبر"
+// pe.autoFocusFirstError: "Set focus on the first invalid answer" => "تنظیم تمرکز روی اولین پاسخ نامعتبر"
 // pe.checkErrorsMode: "Run validation" => "اجرای اعتبارسنجی"
 // pe.navigateToUrl: "Navigate to URL" => "حرکت به نشانی وب"
 // pe.navigateToUrlOnCondition: "Dynamic URL" => "نشانی وب پویا"
@@ -1890,7 +1893,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.panelPrevText: "Previous Panel button tooltip" => "قبلی دکمه پنل tooltip"
 // pe.panelNextText: "Next Panel button tooltip" => "بعدی دکمه پنل tooltip"
 // pe.showRangeInProgress: "Show progress bar" => "نمایش نوار پیشرفت"
-// pe.templateTitleLocation: "Question title location" => "عنوان سوال محل"
+// pe.templateQuestionTitleLocation: "Question title location" => "عنوان سوال محل"
 // pe.panelRemoveButtonLocation: "Remove Panel button location" => "حذف محل دکمه پنل"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "مخفی کردن سؤال اگر سطری وجود نداشته باشد"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "مخفی کردن ستونها اگر سطری وجود نداشته باشد"
@@ -1914,13 +1917,12 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "پیام خطای \"مقدار کلید غیر منحصر به فرد\""
 // pe.minSelectedChoices: "Minimum selected choices" => "حداقل انتخاب های انتخاب شده"
 // pe.maxSelectedChoices: "Maximum selected choices" => "حداکثر انتخابهای انتخاب شده"
-// pe.showClearButton: "Show the Clear button" => "نشان دادن دکمهی Clear"
 // pe.showNumber: "Show panel number" => "نمایش شماره پانل"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "عرض لوگو (در مقادیر پذیرفته شده CSS)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "ارتفاع لوگو (در مقادیر پذیرفته شده CSS)"
 // pe.readOnly: "Read-only" => "فقط خواندنی"
 // pe.enableIf: "Editable if" => "قابل ویرایش اگر"
-// pe.emptyRowsText: "\"No rows\" message" => "پیام \"بدون ردیف\""
+// pe.noRowsText: "\"No rows\" message" => "پیام \"بدون ردیف\""
 // pe.size: "Input field size (in characters)" => "اندازه فیلد ورودی (در نویسه ها)"
 // pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "انتخاب های ویژه جداگانه (هیچ کدام، دیگر، همه را انتخاب کنید)"
 // pe.choicesFromQuestion: "Copy choices from the following question" => "کپی کردن انتخابها از سؤال زیر"
@@ -1928,7 +1930,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.showCommentArea: "Show the comment area" => "نمایش ناحیهی نظرات"
 // pe.commentPlaceholder: "Comment area placeholder" => "ذی نفع منطقه نظر"
 // pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "نمایش توضیحات نرخ به عنوان مقادیر شدید"
-// pe.rowsOrder: "Row order" => "سفارش ردیف"
+// pe.rowOrder: "Row order" => "سفارش ردیف"
 // pe.columnsLayout: "Column layout" => "طرحبندی ستون"
 // pe.columnColCount: "Nested column count" => "تعداد ستون های تو در تو"
 // pe.state: "Panel expand state" => "پنل گسترش دولت"
@@ -1945,8 +1947,6 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.indent: "Add indents" => "افزودن تورفتهای"
 // panel.indent: "Add outer indents" => "اضافه کردن تورفتات بیرونی"
 // pe.innerIndent: "Add inner indents" => "اضافه کردن تورفتات داخلی"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "گرفتن مقادیر پیشفرض از اخرین سطر"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "گرفتن مقادیر پیشفرض از اخرین تابلو"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "عبارت را در اینجا تایپ کنید..."
 // pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "پاک کردن مقدار اگر سؤال مخفی شود"
 // pe.valuePropertyName: "Value property name" => "ارزش نام ملک"
@@ -2015,7 +2015,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // showTimerPanel.none: "Hidden" => "پنهان"
 // showTimerPanelMode.all: "Both" => "هر دو"
 // detailPanelMode.none: "Hidden" => "پنهان"
-// addRowLocation.default: "Depends on matrix layout" => "بستگی به طرح ماتریس دارد"
+// addRowButtonLocation.default: "Depends on matrix layout" => "بستگی به طرح ماتریس دارد"
 // panelsState.default: "Users cannot expand or collapse panels" => "کاربران نمی توانند پانل ها را گسترش یا سقوط کنند"
 // panelsState.collapsed: "All panels are collapsed" => "تمام پانل ها سقوط می کنند"
 // panelsState.expanded: "All panels are expanded" => "تمام پانل ها گسترش یافته اند"
@@ -2334,7 +2334,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // panel.description: "Panel description" => "توضیحات پنل"
 // panel.visibleIf: "Make the panel visible if" => "تابلو را مرئی کنید اگر"
 // panel.requiredIf: "Make the panel required if" => "ایجاد پنل مورد نیاز اگر"
-// panel.questionsOrder: "Question order within the panel" => "سفارش سوال در داخل پنل"
+// panel.questionOrder: "Question order within the panel" => "سفارش سوال در داخل پنل"
 // panel.startWithNewLine: "Display the panel on a new line" => "نمایش تابلو در یک خط جدید"
 // panel.state: "Panel collapse state" => "دولت فروپاشی پانل"
 // panel.width: "Inline panel width" => "عرض پانل درون خطی"
@@ -2359,7 +2359,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // paneldynamic.hideNumber: "Hide the panel number" => "مخفی کردن شمارهی تابلو"
 // paneldynamic.titleLocation: "Panel title alignment" => "ترازبندی عنوان پنل"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "ترازبندی توضیحات پنل"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "هم ترازی عنوان پرسش"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "هم ترازی عنوان پرسش"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "همترازسازی پیام خطا"
 // paneldynamic.newPanelPosition: "New panel location" => "محل جدید پنل"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "جلوگیری از پاسخ های تکراری در سوال زیر"
@@ -2392,7 +2392,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // page.description: "Page description" => "توضیحات صفحه"
 // page.visibleIf: "Make the page visible if" => "صفحه را مرئی کنید اگر"
 // page.requiredIf: "Make the page required if" => "ایجاد صفحه مورد نیاز اگر"
-// page.questionsOrder: "Question order on the page" => "سفارش سوال در صفحه"
+// page.questionOrder: "Question order on the page" => "سفارش سوال در صفحه"
 // matrixdropdowncolumn.name: "Column name" => "نام ستون"
 // matrixdropdowncolumn.title: "Column title" => "عنوان ستون"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "جلوگیری از پاسخ های تکراری"
@@ -2466,8 +2466,8 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // totalDisplayStyle.currency: "Currency" => "ارز"
 // totalDisplayStyle.percent: "Percentage" => "درصد"
 // totalDisplayStyle.date: "Date" => "تاریخ"
-// rowsOrder.initial: "Original" => "اصلی"
-// questionsOrder.initial: "Original" => "اصلی"
+// rowOrder.initial: "Original" => "اصلی"
+// questionOrder.initial: "Original" => "اصلی"
 // showProgressBar.aboveheader: "Above the header" => "بالای سرصفحه"
 // showProgressBar.belowheader: "Below the header" => "زیر سرایند"
 // pv.sum: "Sum" => "مجموع"
@@ -2484,7 +2484,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "برای تمام سوالات در این پنل اعمال می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند)."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "مکان یک پیام خطا را در رابطه با تمام سوالات درون پانل تنظیم می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است."
 // panel.page: "Repositions the panel to the end of a selected page." => "پانل را به انتهای صفحه انتخاب شده تغییر می دهد."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "اضافه کردن فضا یا حاشیه بین محتوای پانل و مرز سمت چپ جعبه پانل."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "عدم انتخاب برای نمایش پانل در یک خط با سوال قبلی یا پانل. تنظیمات اعمال نمی شود اگر پانل اولین عنصر در فرم شما باشد."
@@ -2495,7 +2495,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "از نماد چوب جادویی برای تنظیم یک قانون شرطی که دید پانل را تعیین می کند استفاده کنید."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که حالت فقط خواندنی را برای پانل غیرفعال می کند."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "برای تمام سوالات در این پنل اعمال می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند)."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "برای تمام سوالات در این پنل اعمال می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند)."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "محل یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم میکند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند)."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "مکان یک پیام خطا را در رابطه با تمام سوالات درون پانل تنظیم می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "پانل را به انتهای صفحه انتخاب شده تغییر می دهد."
@@ -2509,7 +2509,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "این تنظیم به طور خودکار توسط تمام سوالات موجود در این پنل به ارث برده می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "گزینه \"Inherit\" سطح صفحه (در صورت تنظیم) یا تنظیم سطح نظرسنجی (\"زیر عنوان پانل\" به طور پیش فرض) اعمال می شود."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "موقعیت یک پانل تازه اضافه شده را تعریف می کند. به طور پیش فرض، پانل های جدید به پایان اضافه می شوند. \"Next\" را انتخاب کنید تا یک پانل جدید پس از پانل فعلی وارد شود."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "پاسخ ها را از اخرین پانل تکرار می کند و انها را به پانل پویا اضافه شده بعدی اختصاص می دهد."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "پاسخ ها را از اخرین پانل تکرار می کند و انها را به پانل پویا اضافه شده بعدی اختصاص می دهد."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "مرجع یک نام سوال نیاز به یک کاربر برای ارائه یک پاسخ منحصر به فرد برای این سوال در هر پانل."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "این تنظیم به شما اجازه می دهد تا یک مقدار پاسخ پیش فرض را بر اساس یک عبارت اختصاص دهید. این عبارت می تواند شامل محاسبات اساسی - \"{q1_id} + {q2_id}'، عبارات بولی مانند \"{age} > 60\" و توابع: \"iif()\"، \"today()\"، \"age()\"، \"min()\"، \"max()\"، \"avg()\" و غیره باشد. مقدار تعیین شده توسط این عبارت به عنوان مقدار پیش فرض اولیه عمل می کند که می تواند توسط ورودی دستی پاسخ دهنده لغو شود."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که تعیین می کند چه زمانی ورودی پاسخ دهنده به مقدار بر اساس \"بیان مقدار پیش فرض\" یا \"تنظیم مقدار بیان\" یا \"پاسخ پیش فرض\" مقدار (اگر هر کدام تنظیم شده است) تنظیم مجدد شود."
@@ -2560,13 +2560,13 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "دید و مکان یک نوار پیشرفت را تنظیم می کند. مقدار \"Auto\" نوار پیشرفت را در بالا یا پایین هدر نظرسنجی نشان می دهد."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "صفحه پیش نمایش را فقط با تمام سوالات یا پاسخ داده شده فعال کنید."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "به تمام سوالات در نظرسنجی اعمال می شود. این تنظیم را می توان با قوانین هم ترازی عنوان در سطوح پایین تر لغو کرد: پانل، صفحه یا سوال. یک تنظیم سطح پایین تر، کسانی را که در سطح بالاتری قرار دارند، نادیده می گیرد."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "یک نماد یا دنباله ای از نمادها نشان می دهد که یک پاسخ مورد نیاز است."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "یک نماد یا دنباله ای از نمادها نشان می دهد که یک پاسخ مورد نیاز است."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "یک شماره یا حرف را وارد کنید که می خواهید با ان شروع به شماره گیری کنید."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "مکان یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم می کند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "انتخاب کنید که ایا می خواهید اولین فیلد ورودی در هر صفحه اماده برای ورود متن باشد."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "انتخاب کنید که ایا می خواهید اولین فیلد ورودی در هر صفحه اماده برای ورود متن باشد."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است."
 // pehelp.maxTextLength: "For text entry questions only." => "فقط برای سوالات ورودی متن."
-// pehelp.maxOthersLength: "For question comments only." => "فقط برای نظرات سوال."
+// pehelp.maxCommentLength: "For question comments only." => "فقط برای نظرات سوال."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "انتخاب کنید اگر شما می خواهید نظرات سوال و سوالات متن بلند به رشد خودکار در ارتفاع بر اساس طول متن وارد شده است."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "برای نظرات سوال و سوالات طولانی متن تنها."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "متغیرهای سفارشی به عنوان متغیرهای متوسط یا کمکی مورد استفاده در محاسبات فرم عمل می کنند. انها ورودی های پاسخ دهنده را به عنوان مقادیر منبع می گیرند. هر متغیر سفارشی دارای یک نام منحصر به فرد و یک عبارت است که بر اساس ان است."
@@ -2582,7 +2582,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "به شما اجازه می دهد تا مقادیر کل را بر اساس یک عبارت محاسبه کنید. این عبارت می تواند شامل محاسبات اساسی ('{q1_id} + {q2_id}')، عبارات بولی ('{age} > 60') و توابع ('iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()'، و غیره باشد."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "یک درخواست فوری برای تایید حذف ردیف ایجاد می کند."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند."
 // pehelp.description: "Type a subtitle." => "یک زیرنویس تایپ کنید."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "یک زبان را برای شروع ایجاد نظرسنجی خود انتخاب کنید. برای اضافه کردن ترجمه، به یک زبان جدید بروید و متن اصلی را در اینجا یا در زبانه ترجمه ترجمه ترجمه کنید."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "مکان یک بخش جزئیات را در رابطه با یک ردیف تنظیم می کند. انتخاب از: \"هیچ\" - هیچ گسترش اضافه شده است؛ \"زیر ردیف\" - گسترش ردیف در زیر هر ردیف ماتریس قرار می گیرد؛ \"زیر ردیف، فقط یک ردیف را نمایش می دهد\" - یک گسترش فقط در زیر یک ردیف نمایش داده می شود، گسترش ردیف باقی مانده سقوط می کند."
@@ -2597,7 +2597,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "به تمام سوالات موجود در این صفحه اعمال می شود. اگر می خواهید این تنظیمات را لغو کنید، قوانین تراز عنوان را برای سوالات یا پانل های فردی تعریف کنید. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "مکان یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم می کند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"اصلی\" به طور پیش فرض) را اعمال می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"اصلی\" به طور پیش فرض) را اعمال می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "انتخاب از: \"قفل شده\" - کاربران نمی توانند پانل ها را گسترش یا سقوط دهند؛ \"سقوط همه\" - تمام پانل ها در یک حالت فروپاشی شروع می شوند؛ \"گسترش همه\" - تمام پانل ها در یک حالت گسترش یافته شروع می شوند؛ \"اولین گسترش\" - تنها پانل اول در ابتدا گسترش یافته است."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "یک نام خصوصیت مشترک را درون ارایۀ اشیایی که حاوی نشانیهای اینترنتی پرونده تصویر یا ویدئویی است که میخواهید در فهرست انتخاب نمایش داده شود، وارد کنید."
@@ -2626,7 +2626,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "یک اعلان برای تایید حذف پرونده ایجاد می کند."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "فقط گزینه های انتخاب شده را رتبه بندی کنید. کاربران موارد انتخاب شده را از لیست انتخاب می کنند تا انها را در منطقه رتبه بندی سفارش دهند."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "لیستی از انتخاب هایی را وارد کنید که در طول ورودی به مخاطب پیشنهاد می شود."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "تنظیم فقط زمینه های ورودی را تغییر می دهد و بر عرض جعبه سوال تاثیر نمی گذارد."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "تنظیم فقط زمینه های ورودی را تغییر می دهد و بر عرض جعبه سوال تاثیر نمی گذارد."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "عرض سازگار را برای همۀ برچسبهای فقره به تصویردانه تنظیم میکند"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "گزینه \"Auto\" به طور خودکار حالت مناسب برای نمایش - تصویر، ویدئو یا یوتیوب - را بر اساس URL منبع ارائه شده تعیین می کند."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "به عنوان یک جایگزین زمانی که تصویر نمی تواند بر روی دستگاه کاربر و برای اهداف دسترسی نمایش داده شود."
@@ -2639,8 +2639,8 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // p.itemTitleWidth: "Item label width (in px)" => "عرض برچسب مورد (در پیکسل)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "متن برای نشان دادن اینکه ایا همه گزینهها انتخاب شدهاند"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "متن نگهدارنده برای منطقه رتبه بندی"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "بررسی را به طور خودکار تکمیل کنید"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار پس از پاسخ دادن به تمام سوالات پاسخ دهد."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "بررسی را به طور خودکار تکمیل کنید"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار پس از پاسخ دادن به تمام سوالات پاسخ دهد."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "ذخیره مقدار ماسک در نتایج نظرسنجی"
 // patternmask.pattern: "Value pattern" => "الگوی ارزش"
 // datetimemask.min: "Minimum value" => "حداقل مقدار"
@@ -2865,7 +2865,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // names.default-dark: "Dark" => "تاریک"
 // names.default-contrast: "Contrast" => "کنتراست"
 // panel.showNumber: "Number this panel" => "شماره گذاری این پانل"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "انتخاب کنید که آیا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش برود پس از اینکه پاسخ دهنده به همه سؤالات موجود در صفحه فعلی پاسخ داد. اگر آخرین سؤال در صفحه باز باشد یا اجازه پاسخ های متعدد را بدهد، این ویژگی اعمال نمی شود."
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "انتخاب کنید که آیا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش برود پس از اینکه پاسخ دهنده به همه سؤالات موجود در صفحه فعلی پاسخ داد. اگر آخرین سؤال در صفحه باز باشد یا اجازه پاسخ های متعدد را بدهد، این ویژگی اعمال نمی شود."
 // autocomplete.name: "Full Name" => "نام و نام خانوادگی"
 // autocomplete.honorific-prefix: "Prefix" => "پیشوند"
 // autocomplete.given-name: "First Name" => "نام و نام خانوادگی"
@@ -2922,3 +2922,9 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "قفل کردن وضعیت expand/collapse برای سوالات"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "شما هنوز هیچ صفحه ای ندارید"
 // pe.addNew@pages: "Add new page" => "افزودن صفحه جدید"
+// ed.zoomInTooltip: "Zoom In" => "بزرگنمایی"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "کوچک نمایی"
+// tabs.surfaceBackground: "Surface Background" => "زمینه سطح"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "از پاسخ های آخرین ورودی به عنوان پیش فرض استفاده کنید"
+// colors.gray: "Gray" => "خاکستری"

@@ -36,7 +36,7 @@ export var logicCss = {
     icon: "",
     iconExpanded: "",
     footer: "sl-panel__footer",
-    requiredText: "sl-panel__required-text"
+    requiredMark: "sl-panel__required-text"
   },
   paneldynamic: {
     mainRoot: "",
@@ -95,7 +95,7 @@ export var logicCss = {
     enter: "sl-element-wrapper--enter",
     leave: "sl-element-wrapper--leave",
     title: "sl-question__title",
-    requiredText: "sl-question__required-text",
+    requiredMark: "sl-question__required-text",
     number: "",
     description: "",
     descriptionUnderInput: "",
