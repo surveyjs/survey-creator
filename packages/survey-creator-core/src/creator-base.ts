@@ -1943,7 +1943,7 @@ export class SurveyCreatorModel extends Base
       survey.css = this.getSurfaceCss();
       survey.setIsMobile(!!this.isMobileView);
       survey.setDesignMode(true);
-      survey.lazyRendering = true;
+      survey.lazyRenderEnabled = true;
       survey.setJsonObject(json);
       if (survey.isEmpty) {
         survey.setJsonObject(this.getDefaultSurveyJson());
@@ -3083,7 +3083,7 @@ export class SurveyCreatorModel extends Base
       if (newElement["getType"] === undefined) {
         newElement = this.createNewElement(newElement);
       }
-      this.survey.lazyRendering = false;
+      this.survey.lazyRenderEnabled = false;
       this.doClickQuestionCore(newElement, modifiedType, -1, panel);
       this.selectElement(newElement, null, !this.toolbox.searchManager.filterString, this.startEditTitleOnQuestionAdded);
     }

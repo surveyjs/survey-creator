@@ -296,7 +296,7 @@ export var koreanStrings = {
       description: "패널 설명",
       visibleIf: "다음과 같은 경우 패널을 표시합니다.",
       requiredIf: "다음과 같은 경우 패널을 필수로 만듭니다.",
-      questionsOrder: "패널 내의 질문 순서",
+      questionOrder: "패널 내의 질문 순서",
       page: "상위 페이지",
       startWithNewLine: "새 줄에 패널 표시",
       state: "패널 축소 상태",
@@ -327,7 +327,7 @@ export var koreanStrings = {
       hideNumber: "패널 번호 숨기기",
       titleLocation: "패널 제목 정렬",
       descriptionLocation: "패널 설명 정렬",
-      templateTitleLocation: "질문 제목 정렬",
+      templateQuestionTitleLocation: "질문 제목 정렬",
       templateErrorLocation: "오류 메시지 맞춤",
       newPanelPosition: "새 패널 위치",
       showRangeInProgress: "진행률 표시줄 표시",
@@ -394,7 +394,7 @@ export var koreanStrings = {
       visibleIf: "다음과 같은 경우 페이지를 표시합니다.",
       requiredIf: "다음과 같은 경우 페이지를 필수로 만듭니다.",
       timeLimit: "페이지 완료 시간 제한(초)",
-      questionsOrder: "페이지의 질문 순서"
+      questionOrder: "페이지의 질문 순서"
     },
     matrixdropdowncolumn: {
       name: "열 이름",
@@ -560,7 +560,7 @@ export var koreanStrings = {
     isRequired: "필수입니까?",
     markRequired: "필요에 따라 표시",
     removeRequiredMark: "필요한 표시를 제거하십시오",
-    isAllRowRequired: "모든 행에 대한 응답 필요",
+    eachRowRequired: "모든 행에 대한 응답 필요",
     eachRowUnique: "행의 중복 응답 방지",
     requiredErrorText: "\"필수\" 오류 메시지",
     startWithNewLine: "새 줄로 시작하겠습니까?",
@@ -572,7 +572,7 @@ export var koreanStrings = {
     maxSize: "최대 파일 크기(bytes)",
     rowCount: "행 수",
     columnLayout: "열 위치",
-    addRowLocation: "행 버튼 위치 추가",
+    addRowButtonLocation: "행 버튼 위치 추가",
     transposeData: "행을 열로 바꾸기",
     addRowText: "행 버튼 텍스트 추가",
     removeRowText: "행 버튼 텍스트 제거",
@@ -611,7 +611,7 @@ export var koreanStrings = {
     mode: "모드(편집/읽기전용)",
     clearInvisibleValues: "보이지 않는 값 지우기",
     cookieName: "쿠키 이름(로컬에서 설문 조사를 두 번 사용하지 않도록 설정)",
-    sendResultOnPageNext: "다음 페이지에서 설문 조사 결과 보내기",
+    partialSendEnabled: "다음 페이지에서 설문 조사 결과 보내기",
     storeOthersAsComment: "다른 사용자의 값을 별도의 필드에 저장",
     showPageTitles: "페이지 제목 표시",
     showPageNumbers: "페이지 번호 표시",
@@ -623,18 +623,18 @@ export var koreanStrings = {
     startSurveyText: "시작 버튼 텍스트",
     showNavigationButtons: "탐색 버튼 표시 (기본 탐색)",
     showPrevButton: "이전 버튼 표시 (사용자가 이전 페이지로 돌아갈 수 있음)",
-    firstPageIsStarted: "설문지의 첫 번째 페이지는 시작 페이지입니다",
-    showCompletedPage: "끝 부분에 완료된 페이지 표시 (완료된 HTML)",
-    goNextPageAutomatic: "모든 질문에 응답 후 자동으로 다음 페이지로 이동",
-    allowCompleteSurveyAutomatic: "설문조사 자동 완성",
+    firstPageIsStartPage: "설문지의 첫 번째 페이지는 시작 페이지입니다",
+    showCompletePage: "끝 부분에 완료된 페이지 표시 (완료된 HTML)",
+    autoAdvanceEnabled: "모든 질문에 응답 후 자동으로 다음 페이지로 이동",
+    autoAdvanceAllowComplete: "설문조사 자동 완성",
     showProgressBar: "진행률 막대 표시",
     questionTitleLocation: "질문 제목 위치",
     questionTitleWidth: "질문 제목 너비",
-    requiredText: "질문에 필요한 기호",
+    requiredMark: "질문에 필요한 기호",
     questionTitleTemplate: "질문 제목 템플릿입니다. 기본값: '{no}. {require} {title}'",
     questionErrorLocation: "질문 위치 오류",
-    focusFirstQuestionAutomatic: "페이지 변경시 첫 번째 질문에 초점",
-    questionsOrder: "페이지의 요소 순서",
+    autoFocusFirstQuestion: "페이지 변경시 첫 번째 질문에 초점",
+    questionOrder: "페이지의 요소 순서",
     timeLimit: "설문 조사를 마칠 수있는 최대 시간",
     timeLimitPerPage: "설문 조사에서 페이지를 마칠 수있는 최대 시간",
     showTimer: "타이머 사용",
@@ -651,7 +651,7 @@ export var koreanStrings = {
     dataFormat: "이미지 형식",
     allowAddRows: "행 추가 허용",
     allowRemoveRows: "행 제거 허용",
-    allowRowsDragAndDrop: "행 끌어서 놓기 허용",
+    allowRowReorder: "행 끌어서 놓기 허용",
     responsiveImageSizeHelp: "정확한 이미지 너비 또는 높이를 지정하는 경우에는 적용되지 않습니다.",
     minImageWidth: "최소 이미지 너비",
     maxImageWidth: "최대 이미지 너비",
@@ -678,13 +678,13 @@ export var koreanStrings = {
     logo: "로고(URL 또는 base64로 인코딩된 문자열)",
     questionsOnPageMode: "설문조사 구조",
     maxTextLength: "최대 답변 길이(문자 단위)",
-    maxOthersLength: "최대 주석 길이(문자)",
+    maxCommentLength: "최대 주석 길이(문자)",
     commentAreaRows: "주석 영역 높이(줄)",
     autoGrowComment: "필요한 경우 주석 영역 자동 확장",
     allowResizeComment: "사용자가 텍스트 영역의 크기를 조정할 수 있도록 허용",
     textUpdateMode: "텍스트 질문 값 업데이트",
     maskType: "입력 마스크 유형",
-    focusOnFirstError: "첫 번째 오답에 포커스 설정",
+    autoFocusFirstError: "첫 번째 오답에 포커스 설정",
     checkErrorsMode: "유효성 검사 실행",
     validateVisitedEmptyFields: "초점이 손실된 빈 필드 유효성 검사",
     navigateToUrl: "URL로 이동합니다.",
@@ -742,12 +742,12 @@ export var koreanStrings = {
     keyDuplicationError: "\"고유하지 않은 키 값\" 오류 메시지",
     minSelectedChoices: "선택한 최소 선택 항목",
     maxSelectedChoices: "선택한 최대 선택 항목 수",
-    showClearButton: "지우기 단추 표시",
+    allowClear: "지우기 단추 표시",
     logoWidth: "로고 너비(CSS에서 허용하는 값)",
     logoHeight: "로고 높이(CSS에서 허용하는 값)",
     readOnly: "읽기 전용",
     enableIf: "다음과 같은 경우 편집 가능",
-    emptyRowsText: "'행 없음' 메시지",
+    noRowsText: "'행 없음' 메시지",
     separateSpecialChoices: "별도의 특수 선택(없음, 기타, 모두 선택)",
     choicesFromQuestion: "다음 질문에서 선택 항목을 복사합니다.",
     choicesFromQuestionMode: "어떤 선택 항목을 복사해야 합니까?",
@@ -756,7 +756,7 @@ export var koreanStrings = {
     showCommentArea: "주석 영역 표시",
     commentPlaceholder: "주석 영역 자리 표시자",
     displayRateDescriptionsAsExtremeItems: "속도 설명을 극한 값으로 표시",
-    rowsOrder: "행 순서",
+    rowOrder: "행 순서",
     columnsLayout: "열 레이아웃",
     columnColCount: "중첩된 열 개수",
     correctAnswer: "정답",
@@ -1120,7 +1120,7 @@ export var koreanStrings = {
     timerInfoMode: {
       combined: "둘다"
     },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "행렬 레이아웃에 따라 다름"
     },
     panelsState: {
@@ -1191,10 +1191,10 @@ export var koreanStrings = {
       percent: "백분율",
       date: "날짜"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "원문 언어"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "원문 언어"
     },
     showProgressBar: {
@@ -1345,7 +1345,7 @@ export var koreanStrings = {
       questionTitleLocation: "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       questionTitleWidth: "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       questionErrorLocation: "패널 내의 모든 질문과 관련된 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다.",
-      questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다.",
+      questionOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다.",
       page: "선택한 페이지의 끝으로 패널의 위치를 변경합니다.",
       innerIndent: "패널 내용과 패널 상자의 왼쪽 테두리 사이에 공백 또는 여백을 추가합니다.",
       startWithNewLine: "이전 질문 또는 패널과 함께 한 줄로 패널을 표시하려면 선택을 취소합니다. 패널이 양식의 첫 번째 요소인 경우에는 설정이 적용되지 않습니다.",
@@ -1359,7 +1359,7 @@ export var koreanStrings = {
       visibleIf: "마술 지팡이 아이콘을 사용하여 패널 가시성을 결정하는 조건부 규칙을 설정합니다.",
       enableIf: "마술 지팡이 아이콘을 사용하여 패널에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
-      templateTitleLocation: "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
+      templateQuestionTitleLocation: "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       templateErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       errorLocation: "패널 내의 모든 질문과 관련된 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다.",
       page: "선택한 페이지의 끝으로 패널의 위치를 변경합니다.",
@@ -1449,19 +1449,19 @@ export var koreanStrings = {
     logoWidth: "로고 너비를 CSS 단위(px, %, in, pt 등)로 설정합니다.",
     logoHeight: "로고 높이를 CSS 단위(px, %, in, pt 등)로 설정합니다.",
     logoFit: "다음 중에서 선택: \"없음\" - 이미지가 원래 크기를 유지합니다. \"Contain\" - 가로 세로 비율을 유지하면서 이미지의 크기가 조정됩니다. \"표지\" - 이미지가 종횡비를 유지하면서 전체 상자를 채웁니다. \"채우기\" - 가로 세로 비율을 유지하지 않고 상자를 채우기 위해 이미지가 늘어납니다.",
-    goNextPageAutomatic: "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다.",
-    allowCompleteSurveyAutomatic: "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다.",
+    autoAdvanceEnabled: "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다.",
+    autoAdvanceAllowComplete: "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다.",
     showNavigationButtons: "페이지에서 탐색 단추의 표시 여부와 위치를 설정합니다.",
     showProgressBar: "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다.",
     showPreviewBeforeComplete: "모든 질문 또는 답변된 질문만 있는 미리보기 페이지를 활성화합니다.",
     questionTitleLocation: "설문조사 내의 모든 질문에 적용됩니다. 이 설정은 하위 수준(패널, 페이지 또는 질문)의 제목 정렬 규칙으로 재정의할 수 있습니다. 낮은 수준의 설정은 더 높은 수준의 설정보다 우선합니다.",
-    requiredText: "답변이 필요함을 나타내는 기호 또는 일련의 기호입니다.",
+    requiredMark: "답변이 필요함을 나타내는 기호 또는 일련의 기호입니다.",
     questionStartIndex: "번호 매기기를 시작할 숫자 또는 문자를 입력합니다.",
     questionErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다.",
-    focusFirstQuestionAutomatic: "각 페이지의 첫 번째 입력 필드를 텍스트 입력에 사용할 수 있도록 준비하려면 선택합니다.",
-    questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
+    autoFocusFirstQuestion: "각 페이지의 첫 번째 입력 필드를 텍스트 입력에 사용할 수 있도록 준비하려면 선택합니다.",
+    questionOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
     maxTextLength: "텍스트 입력 질문에만 해당됩니다.",
-    maxOthersLength: "질문 댓글에만 해당됩니다.",
+    maxCommentLength: "질문 댓글에만 해당됩니다.",
     commentAreaRows: "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다.",
     autoGrowComment: "질문 댓글과 긴 텍스트 질문의 높이가 입력한 텍스트 길이에 따라 자동으로 커지도록 하려면 선택합니다.",
     allowResizeComment: "질문 댓글 및 긴 텍스트 질문에만 해당됩니다.",
@@ -1498,7 +1498,7 @@ export var koreanStrings = {
       questionTitleLocation: "이 페이지 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문 또는 패널에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       questionTitleWidth: "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       questionErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
-      questionsOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
+      questionOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
       navigationButtonsVisibility: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
     },
     timerLocation: "페이지에서 타이머의 위치를 설정합니다.",
@@ -1535,7 +1535,7 @@ export var koreanStrings = {
     needConfirmRemoveFile: "파일 삭제를 확인하는 프롬프트를 트리거합니다.",
     selectToRankEnabled: "선택한 선택 항목만 순위를 지정할 수 있습니다. 사용자는 선택 목록에서 선택한 항목을 끌어 순위 영역 내에서 정렬합니다.",
     dataList: "입력 시 응답자에게 제안될 선택 사항 목록을 입력합니다.",
-    itemSize: "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다.",
+    inputSize: "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다.",
     itemTitleWidth: "모든 항목 레이블에 대해 일관된 너비를 픽셀 단위로 설정합니다.",
     inputTextAlignment: "필드 내에서 입력 값을 정렬하는 방법을 선택합니다. 기본 설정인 \"Auto\"는 통화 또는 숫자 마스킹이 적용된 경우 입력 값을 오른쪽에 정렬하고 그렇지 않은 경우 왼쪽에 정렬합니다.",
     altText: "사용자의 장치에 이미지를 표시할 수 없는 경우 접근성을 위해 대신 사용할 수 있습니다.",
@@ -1653,7 +1653,7 @@ export var koreanStrings = {
     maxValueExpression: "최대값 표현식",
     step: "걸음",
     dataList: "데이터 목록",
-    itemSize: "항목 크기",
+    inputSize: "항목 크기",
     itemTitleWidth: "항목 레이블 너비(px)",
     inputTextAlignment: "입력 값 정렬",
     elements: "요소",
@@ -1983,7 +1983,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.choicesMin: "Minimum value for auto-generated items" => "자동 생성된 항목의 최소값"
 // pe.choicesMax: "Maximum value for auto-generated items" => "자동 생성된 항목의 최대값"
 // pe.choicesStep: "Step for auto-generated items" => "자동 생성된 항목에 대한 단계"
-// pe.isAllRowRequired: "Require answer for all rows" => "모든 행에 대한 응답 필요"
+// pe.eachRowRequired: "Require answer for all rows" => "모든 행에 대한 응답 필요"
 // pe.requiredErrorText: "\"Required\" error message" => "\"필수\" 오류 메시지"
 // pe.cols: "Columns" => "열"
 // pe.rateMin: "Minimum rate value" => "최소 요금 값"
@@ -2021,7 +2021,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.dataFormat: "Image format" => "이미지 형식"
 // pe.allowAddRows: "Allow adding rows" => "행 추가 허용"
 // pe.allowRemoveRows: "Allow removing rows" => "행 제거 허용"
-// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "행 끌어서 놓기 허용"
+// pe.allowRowReorder: "Allow row drag and drop" => "행 끌어서 놓기 허용"
 // pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "정확한 이미지 너비 또는 높이를 지정하는 경우에는 적용되지 않습니다."
 // pe.minImageWidth: "Minimum image width" => "최소 이미지 너비"
 // pe.maxImageWidth: "Maximum image width" => "최대 이미지 너비"
@@ -2045,11 +2045,11 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.logo: "Logo (URL or base64-encoded string)" => "로고(URL 또는 base64로 인코딩된 문자열)"
 // pe.questionsOnPageMode: "Survey structure" => "설문조사 구조"
 // pe.maxTextLength: "Maximum answer length (in characters)" => "최대 답변 길이(문자 단위)"
-// pe.maxOthersLength: "Maximum comment length (in characters)" => "최대 주석 길이(문자)"
+// pe.maxCommentLength: "Maximum comment length (in characters)" => "최대 주석 길이(문자)"
 // pe.autoGrowComment: "Auto-expand comment area if necessary" => "필요한 경우 주석 영역 자동 확장"
 // pe.allowResizeComment: "Allow users to resize text areas" => "사용자가 텍스트 영역의 크기를 조정할 수 있도록 허용"
 // pe.textUpdateMode: "Update text question value" => "텍스트 질문 값 업데이트"
-// pe.focusOnFirstError: "Set focus on the first invalid answer" => "첫 번째 오답에 포커스 설정"
+// pe.autoFocusFirstError: "Set focus on the first invalid answer" => "첫 번째 오답에 포커스 설정"
 // pe.checkErrorsMode: "Run validation" => "유효성 검사 실행"
 // pe.navigateToUrl: "Navigate to URL" => "URL로 이동합니다."
 // pe.navigateToUrlOnCondition: "Dynamic URL" => "동적 URL"
@@ -2087,7 +2087,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.panelPrevText: "Previous Panel button tooltip" => "이전 패널 단추 도구 설명"
 // pe.panelNextText: "Next Panel button tooltip" => "다음 패널 단추 도구 설명"
 // pe.showRangeInProgress: "Show progress bar" => "진행률 표시줄 표시"
-// pe.templateTitleLocation: "Question title location" => "질문 제목 위치"
+// pe.templateQuestionTitleLocation: "Question title location" => "질문 제목 위치"
 // pe.panelRemoveButtonLocation: "Remove Panel button location" => "패널 단추 위치 제거"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "행이 없는 경우 질문 숨기기"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "행이 없는 경우 열 숨기기"
@@ -2111,13 +2111,13 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "\"고유하지 않은 키 값\" 오류 메시지"
 // pe.minSelectedChoices: "Minimum selected choices" => "선택한 최소 선택 항목"
 // pe.maxSelectedChoices: "Maximum selected choices" => "선택한 최대 선택 항목 수"
-// pe.showClearButton: "Show the Clear button" => "지우기 단추 표시"
+// pe.allowClear: "Show the Clear button" => "지우기 단추 표시"
 // pe.showNumber: "Show panel number" => "패널 번호 표시"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "로고 너비(CSS에서 허용하는 값)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "로고 높이(CSS에서 허용하는 값)"
 // pe.readOnly: "Read-only" => "읽기 전용"
 // pe.enableIf: "Editable if" => "다음과 같은 경우 편집 가능"
-// pe.emptyRowsText: "\"No rows\" message" => "'행 없음' 메시지"
+// pe.noRowsText: "\"No rows\" message" => "'행 없음' 메시지"
 // pe.size: "Input field size (in characters)" => "입력 필드 크기(문자)"
 // pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "별도의 특수 선택(없음, 기타, 모두 선택)"
 // pe.choicesFromQuestion: "Copy choices from the following question" => "다음 질문에서 선택 항목을 복사합니다."
@@ -2125,7 +2125,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.showCommentArea: "Show the comment area" => "주석 영역 표시"
 // pe.commentPlaceholder: "Comment area placeholder" => "주석 영역 자리 표시자"
 // pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "속도 설명을 극한 값으로 표시"
-// pe.rowsOrder: "Row order" => "행 순서"
+// pe.rowOrder: "Row order" => "행 순서"
 // pe.columnsLayout: "Column layout" => "열 레이아웃"
 // pe.columnColCount: "Nested column count" => "중첩된 열 개수"
 // pe.state: "Panel expand state" => "패널 확장 상태"
@@ -2248,7 +2248,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // showTimerPanel.none: "Hidden" => "숨겨진"
 // showTimerPanelMode.all: "Both" => "둘다"
 // detailPanelMode.none: "Hidden" => "숨겨진"
-// addRowLocation.default: "Depends on matrix layout" => "행렬 레이아웃에 따라 다름"
+// addRowButtonLocation.default: "Depends on matrix layout" => "행렬 레이아웃에 따라 다름"
 // panelsState.default: "Users cannot expand or collapse panels" => "사용자는 패널을 확장하거나 축소할 수 없습니다."
 // panelsState.collapsed: "All panels are collapsed" => "모든 패널이 축소됩니다"
 // panelsState.expanded: "All panels are expanded" => "모든 패널이 확장됩니다."
@@ -2583,7 +2583,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // panel.description: "Panel description" => "패널 설명"
 // panel.visibleIf: "Make the panel visible if" => "다음과 같은 경우 패널을 표시합니다."
 // panel.requiredIf: "Make the panel required if" => "다음과 같은 경우 패널을 필수로 만듭니다."
-// panel.questionsOrder: "Question order within the panel" => "패널 내의 질문 순서"
+// panel.questionOrder: "Question order within the panel" => "패널 내의 질문 순서"
 // panel.startWithNewLine: "Display the panel on a new line" => "새 줄에 패널 표시"
 // panel.state: "Panel collapse state" => "패널 축소 상태"
 // panel.width: "Inline panel width" => "인라인 패널 너비"
@@ -2608,7 +2608,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // paneldynamic.hideNumber: "Hide the panel number" => "패널 번호 숨기기"
 // paneldynamic.titleLocation: "Panel title alignment" => "패널 제목 정렬"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "패널 설명 정렬"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "질문 제목 정렬"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "질문 제목 정렬"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "오류 메시지 맞춤"
 // paneldynamic.newPanelPosition: "New panel location" => "새 패널 위치"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "다음 질문에서 중복 응답 방지"
@@ -2641,7 +2641,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // page.description: "Page description" => "페이지 설명"
 // page.visibleIf: "Make the page visible if" => "다음과 같은 경우 페이지를 표시합니다."
 // page.requiredIf: "Make the page required if" => "다음과 같은 경우 페이지를 필수로 만듭니다."
-// page.questionsOrder: "Question order on the page" => "페이지의 질문 순서"
+// page.questionOrder: "Question order on the page" => "페이지의 질문 순서"
 // matrixdropdowncolumn.name: "Column name" => "열 이름"
 // matrixdropdowncolumn.title: "Column title" => "열 제목"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "중복 응답 방지"
@@ -2715,8 +2715,8 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // totalDisplayStyle.currency: "Currency" => "통화"
 // totalDisplayStyle.percent: "Percentage" => "백분율"
 // totalDisplayStyle.date: "Date" => "날짜"
-// rowsOrder.initial: "Original" => "원문 언어"
-// questionsOrder.initial: "Original" => "원문 언어"
+// rowOrder.initial: "Original" => "원문 언어"
+// questionOrder.initial: "Original" => "원문 언어"
 // showProgressBar.aboveheader: "Above the header" => "머리글 위"
 // showProgressBar.belowheader: "Below the header" => "머리글 아래"
 // pv.sum: "Sum" => "합계"
@@ -2733,7 +2733,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "패널 내의 모든 질문과 관련된 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다."
 // panel.page: "Repositions the panel to the end of a selected page." => "선택한 페이지의 끝으로 패널의 위치를 변경합니다."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "패널 내용과 패널 상자의 왼쪽 테두리 사이에 공백 또는 여백을 추가합니다."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "이전 질문 또는 패널과 함께 한 줄로 패널을 표시하려면 선택을 취소합니다. 패널이 양식의 첫 번째 요소인 경우에는 설정이 적용되지 않습니다."
@@ -2744,7 +2744,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "마술 지팡이 아이콘을 사용하여 패널 가시성을 결정하는 조건부 규칙을 설정합니다."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "마술 지팡이 아이콘을 사용하여 패널에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "패널 내의 모든 질문과 관련된 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "선택한 페이지의 끝으로 패널의 위치를 변경합니다."
@@ -2808,13 +2808,13 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "모든 질문 또는 답변된 질문만 있는 미리보기 페이지를 활성화합니다."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "설문조사 내의 모든 질문에 적용됩니다. 이 설정은 하위 수준(패널, 페이지 또는 질문)의 제목 정렬 규칙으로 재정의할 수 있습니다. 낮은 수준의 설정은 더 높은 수준의 설정보다 우선합니다."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "답변이 필요함을 나타내는 기호 또는 일련의 기호입니다."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "답변이 필요함을 나타내는 기호 또는 일련의 기호입니다."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "번호 매기기를 시작할 숫자 또는 문자를 입력합니다."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "각 페이지의 첫 번째 입력 필드를 텍스트 입력에 사용할 수 있도록 준비하려면 선택합니다."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "각 페이지의 첫 번째 입력 필드를 텍스트 입력에 사용할 수 있도록 준비하려면 선택합니다."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다."
 // pehelp.maxTextLength: "For text entry questions only." => "텍스트 입력 질문에만 해당됩니다."
-// pehelp.maxOthersLength: "For question comments only." => "질문 댓글에만 해당됩니다."
+// pehelp.maxCommentLength: "For question comments only." => "질문 댓글에만 해당됩니다."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "질문 댓글과 긴 텍스트 질문의 높이가 입력한 텍스트 길이에 따라 자동으로 커지도록 하려면 선택합니다."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "질문 댓글 및 긴 텍스트 질문에만 해당됩니다."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "사용자 지정 변수는 양식 계산에 사용되는 중간 또는 보조 변수 역할을 합니다. 응답자 입력을 소스 값으로 사용합니다. 각 맞춤 변수에는 고유한 이름과 기준이 되는 표현식이 있습니다."
@@ -2845,7 +2845,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "이 페이지 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문 또는 패널에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "다음 중에서 선택: \"잠김\" - 사용자가 패널을 확장하거나 축소할 수 없습니다. \"모두 축소\" - 모든 패널이 축소된 상태에서 시작됩니다. \"모두 확장\" - 모든 패널이 확장된 상태에서 시작됩니다. \"첫 번째 확장\" - 첫 번째 패널만 처음에 확장됩니다."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "선택 목록에 표시할 이미지 또는 비디오 파일 URL이 포함된 객체 배열 내에 공유 속성 이름을 입력합니다."
@@ -2874,7 +2874,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "파일 삭제를 확인하는 프롬프트를 트리거합니다."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "선택한 선택 항목만 순위를 지정할 수 있습니다. 사용자는 선택 목록에서 선택한 항목을 끌어 순위 영역 내에서 정렬합니다."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "입력 시 응답자에게 제안될 선택 사항 목록을 입력합니다."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "모든 항목 레이블에 대해 일관된 너비를 픽셀 단위로 설정합니다."
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"자동\" 옵션은 제공된 소스 URL을 기반으로 표시에 적합한 모드(이미지, 비디오 또는 YouTube)를 자동으로 결정합니다."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "사용자의 장치에 이미지를 표시할 수 없는 경우 접근성을 위해 대신 사용할 수 있습니다."
@@ -2887,8 +2887,8 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // p.itemTitleWidth: "Item label width (in px)" => "항목 레이블 너비(px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "모든 옵션이 선택된 경우 표시할 텍스트"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "순위 영역의 자리 표시자 텍스트"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "설문조사 자동 완성"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "설문조사 자동 완성"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "설문조사 결과에 마스킹된 값 저장"
 // patternmask.pattern: "Value pattern" => "값 패턴"
 // datetimemask.min: "Minimum value" => "최솟값"
@@ -3113,7 +3113,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // names.default-dark: "Dark" => "어둠"
 // names.default-contrast: "Contrast" => "대조"
 // panel.showNumber: "Number this panel" => "이 패널에 번호 매기기"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다."
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다."
 // autocomplete.name: "Full Name" => "성명"
 // autocomplete.honorific-prefix: "Prefix" => "접두사"
 // autocomplete.given-name: "First Name" => "이름"

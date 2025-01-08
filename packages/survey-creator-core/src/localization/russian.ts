@@ -296,7 +296,7 @@ export var ruStrings = {
       description: "Описание панели",
       visibleIf: "Сделать панель видимой, если",
       requiredIf: "Сделайте панель обязательной, если",
-      questionsOrder: "Порядок вопросов на панели",
+      questionOrder: "Порядок вопросов на панели",
       page: "Родительская страница",
       startWithNewLine: "Отображение панели на новой строке",
       state: "Состояние свертывания панели",
@@ -327,7 +327,7 @@ export var ruStrings = {
       hideNumber: "Скрытие номера панели",
       titleLocation: "Выравнивание заголовков панелей",
       descriptionLocation: "Выравнивание описания панели",
-      templateTitleLocation: "Выравнивание заголовка вопроса",
+      templateQuestionTitleLocation: "Выравнивание заголовка вопроса",
       templateErrorLocation: "Выравнивание сообщений об ошибках",
       newPanelPosition: "Новое расположение панели",
       showRangeInProgress: "Отображение индикатора выполнения",
@@ -394,7 +394,7 @@ export var ruStrings = {
       visibleIf: "Сделайте страницу видимой, если",
       requiredIf: "Сделайте страницу обязательной, если",
       timeLimit: "Ограничение по времени завершения страницы (в секундах)",
-      questionsOrder: "Порядок вопросов на странице"
+      questionOrder: "Порядок вопросов на странице"
     },
     matrixdropdowncolumn: {
       name: "Имя столбца",
@@ -560,7 +560,7 @@ export var ruStrings = {
     isRequired: "Обязательный?",
     markRequired: "Отметьте как обязательный",
     removeRequiredMark: "Снимите нужную отметку",
-    isAllRowRequired: "Все строки обязательны для заполнения",
+    eachRowRequired: "Все строки обязательны для заполнения",
     eachRowUnique: "Предотвращение дублирования ответов в строках",
     requiredErrorText: "Это поле обязательное для заполнения",
     startWithNewLine: "Начинать с новой строки?",
@@ -572,7 +572,7 @@ export var ruStrings = {
     maxSize: "Максимальный размер файла (в байтах)",
     rowCount: "Количество строк",
     columnLayout: "Макет столбцов",
-    addRowLocation: "Добавить расположение кнопки строки",
+    addRowButtonLocation: "Добавить расположение кнопки строки",
     transposeData: "Транспонирование строк в столбцы",
     addRowText: "Добавить текст кнопки строки",
     removeRowText: "Удалить кнопку строки текста",
@@ -611,7 +611,7 @@ export var ruStrings = {
     mode: "Режим (редактирование/просмотр)",
     clearInvisibleValues: "Очистить невидимые значения",
     cookieName: "Имя Cookie (отключить повторное прохождение опроса локально)",
-    sendResultOnPageNext: "Показать результаты опроса на странице рядом",
+    partialSendEnabled: "Показать результаты опроса на странице рядом",
     storeOthersAsComment: "Хранить занчение 'Другое' в отдельном поле",
     showPageTitles: "Показывать заголовки страниц",
     showPageNumbers: "Показывать номера страниц",
@@ -623,18 +623,18 @@ export var ruStrings = {
     startSurveyText: "Текст в кнопке 'Начать'",
     showNavigationButtons: "Показывать кнопки навигации (навигация по умолчанию)",
     showPrevButton: "Показывать кнопки 'Предыдущая страница' (пользователь может вернуться на предыдущую страницу)",
-    firstPageIsStarted: "Первая страница опросника является стартовой страницей.",
-    showCompletedPage: "Показывать страницу с текстом по завершению заполнения (HTML финальной страницы)",
-    goNextPageAutomatic: "Переходить на следующую страницу автоматически при заполнении всех вопросов",
-    allowCompleteSurveyAutomatic: "Автоматическое заполнение опроса",
+    firstPageIsStartPage: "Первая страница опросника является стартовой страницей.",
+    showCompletePage: "Показывать страницу с текстом по завершению заполнения (HTML финальной страницы)",
+    autoAdvanceEnabled: "Переходить на следующую страницу автоматически при заполнении всех вопросов",
+    autoAdvanceAllowComplete: "Автоматическое заполнение опроса",
     showProgressBar: "Показывать прогресс заполнения",
     questionTitleLocation: "Расположение заголовка вопроса",
     questionTitleWidth: "Ширина заголовка вопроса",
-    requiredText: "Символ для обязательного вопроса",
+    requiredMark: "Символ для обязательного вопроса",
     questionTitleTemplate: "Шаблон названия опроса, по умолчанию: {не} {требует} {текста}.",
     questionErrorLocation: "Размещение ошибки опроса",
-    focusFirstQuestionAutomatic: "Фокусирование на первом вопросе при изменении страницы",
-    questionsOrder: "Сортировка элементов на странице",
+    autoFocusFirstQuestion: "Фокусирование на первом вопросе при изменении страницы",
+    questionOrder: "Сортировка элементов на странице",
     timeLimit: "Максимальное время в секундах, чтобы заполнить опросник",
     timeLimitPerPage: "Максимальное время в секундах, чтобы заполнить страницу опросника",
     showTimer: "Используйте таймер",
@@ -651,7 +651,7 @@ export var ruStrings = {
     dataFormat: "Формат изображения",
     allowAddRows: "Разрешить добавление строк",
     allowRemoveRows: "Разрешить удаление строк",
-    allowRowsDragAndDrop: "Разрешить перетаскивание строк",
+    allowRowReorder: "Разрешить перетаскивание строк",
     responsiveImageSizeHelp: "Не применяется, если указана точная ширина или высота изображения.",
     minImageWidth: "Минимальная ширина изображения",
     maxImageWidth: "Максимальная ширина изображения",
@@ -678,13 +678,13 @@ export var ruStrings = {
     logo: "Логотип (URL-адрес или строка в кодировке base64)",
     questionsOnPageMode: "Структура опроса",
     maxTextLength: "Максимальная длина ответа (в символах)",
-    maxOthersLength: "Максимальная длина комментария (в символах)",
+    maxCommentLength: "Максимальная длина комментария (в символах)",
     commentAreaRows: "Высота области комментариев (в строках)",
     autoGrowComment: "При необходимости автоматически разверните область комментариев",
     allowResizeComment: "Разрешить пользователям изменять размер текстовых областей",
     textUpdateMode: "Обновление значения текстового вопроса",
     maskType: "Тип входной маски",
-    focusOnFirstError: "Установка фокуса на первом недопустимом ответе",
+    autoFocusFirstError: "Установка фокуса на первом недопустимом ответе",
     checkErrorsMode: "Запуск проверки",
     validateVisitedEmptyFields: "Проверка пустых полей при потере фокуса",
     navigateToUrl: "Перейдите по URL-адресу",
@@ -742,12 +742,12 @@ export var ruStrings = {
     keyDuplicationError: "Сообщение об ошибке \"Неуникальное значение ключа\"",
     minSelectedChoices: "Минимальное количество выбранных вариантов",
     maxSelectedChoices: "Максимальное количество выбранных вариантов",
-    showClearButton: "Показать кнопку «Очистить»",
+    allowClear: "Показать кнопку «Очистить»",
     logoWidth: "Ширина логотипа (в значениях, принимаемых CSS)",
     logoHeight: "Высота логотипа (в значениях, принимаемых CSS)",
     readOnly: "Только для чтения",
     enableIf: "Редактируется, если",
-    emptyRowsText: "Сообщение \"Нет строк\"",
+    noRowsText: "Сообщение \"Нет строк\"",
     separateSpecialChoices: "Отдельные специальные варианты («Нет», «Другое», «Выбрать все»)",
     choicesFromQuestion: "Копирование вариантов из следующего вопроса",
     choicesFromQuestionMode: "Какие варианты скопировать?",
@@ -756,7 +756,7 @@ export var ruStrings = {
     showCommentArea: "Показать область комментариев",
     commentPlaceholder: "Заполнитель области комментариев",
     displayRateDescriptionsAsExtremeItems: "Отображение описаний скоростей в виде экстремальных значений",
-    rowsOrder: "Порядок строк",
+    rowOrder: "Порядок строк",
     columnsLayout: "Расположение столбцов",
     columnColCount: "Количество вложенных столбцов",
     correctAnswer: "Правильный ответ",
@@ -1120,7 +1120,7 @@ export var ruStrings = {
     timerInfoMode: {
       combined: "Оба"
     },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "Зависит от компоновки матрицы"
     },
     panelsState: {
@@ -1191,10 +1191,10 @@ export var ruStrings = {
       percent: "Процент",
       date: "Дата"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "Исходный текст"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "Исходный текст"
     },
     showProgressBar: {
@@ -1345,7 +1345,7 @@ export var ruStrings = {
       questionTitleLocation: "Применяется ко всем вопросам в этой панели. Если вы хотите переопределить этот параметр, определите правила выравнивания заголовков для отдельных вопросов. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию).",
       questionTitleWidth: "Задает одинаковую ширину заголовков вопросов, если они выровнены по левому краю полей вопросов. Принимает значения CSS (px, %, in, pt и т. д.).",
       questionErrorLocation: "Задает расположение сообщения об ошибке по отношению ко всем вопросам на панели. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса.",
-      questionsOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса.",
+      questionOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса.",
       page: "Перемещает панель в конец выбранной страницы.",
       innerIndent: "Добавляет пространство или поле между содержимым панели и левой границей рамки панели.",
       startWithNewLine: "Снимите флажок, чтобы отобразить панель в одной строке с предыдущим вопросом или панелью. Этот параметр не применяется, если панель является первым элементом формы.",
@@ -1359,7 +1359,7 @@ export var ruStrings = {
       visibleIf: "Используйте значок волшебной палочки, чтобы задать условное правило, определяющее видимость панели.",
       enableIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое отключает режим только для чтения для панели.",
       requiredIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа.",
-      templateTitleLocation: "Применяется ко всем вопросам в этой панели. Если вы хотите переопределить этот параметр, определите правила выравнивания заголовков для отдельных вопросов. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию).",
+      templateQuestionTitleLocation: "Применяется ко всем вопросам в этой панели. Если вы хотите переопределить этот параметр, определите правила выравнивания заголовков для отдельных вопросов. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию).",
       templateErrorLocation: "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию).",
       errorLocation: "Задает расположение сообщения об ошибке по отношению ко всем вопросам на панели. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса.",
       page: "Перемещает панель в конец выбранной страницы.",
@@ -1449,19 +1449,19 @@ export var ruStrings = {
     logoWidth: "Задает ширину логотипа в единицах CSS (px, %, in, pt и т. д.).",
     logoHeight: "Задает высоту логотипа в единицах CSS (px, %, in, pt и т. д.).",
     logoFit: "Выберите один из следующих вариантов: \"Нет\" - изображение сохраняет свой первоначальный размер; \"Contain\" - размер изображения изменяется по размеру с сохранением его пропорций; «Обложка» - изображение заполняет всю коробку, сохраняя при этом соотношение сторон; \"Заливка\" - изображение растягивается для заполнения поля без сохранения его пропорций.",
-    goNextPageAutomatic: "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответил на все вопросы на текущей странице. Эта функция не будет работать, если последний вопрос на странице является открытым или допускает несколько ответов.",
-    allowCompleteSurveyAutomatic: "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы.",
+    autoAdvanceEnabled: "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответил на все вопросы на текущей странице. Эта функция не будет работать, если последний вопрос на странице является открытым или допускает несколько ответов.",
+    autoAdvanceAllowComplete: "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы.",
     showNavigationButtons: "Задает видимость и расположение кнопок навигации на странице.",
     showProgressBar: "Задает видимость и расположение индикатора выполнения. Значение «Авто» отображает индикатор выполнения над или под заголовком опроса.",
     showPreviewBeforeComplete: "Включите страницу предварительного просмотра, на которой отображаются все вопросы или только ответы на них.",
     questionTitleLocation: "Применяется ко всем вопросам в опросе. Этот параметр может быть переопределен правилами выравнивания заголовков на более низких уровнях: панели, странице или вопросе. Настройки более низкого уровня будут переопределять настройки на более высоком уровне.",
-    requiredText: "Символ или последовательность символов, указывающие на то, что требуется ответ.",
+    requiredMark: "Символ или последовательность символов, указывающие на то, что требуется ответ.",
     questionStartIndex: "Введите цифру или букву, с которой вы хотите начать нумерацию.",
     questionErrorLocation: "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса.",
-    focusFirstQuestionAutomatic: "Выберите, если вы хотите, чтобы первое поле ввода на каждой странице было готово для ввода текста.",
-    questionsOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
+    autoFocusFirstQuestion: "Выберите, если вы хотите, чтобы первое поле ввода на каждой странице было готово для ввода текста.",
+    questionOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
     maxTextLength: "Только для вопросов с вводом текста.",
-    maxOthersLength: "Только для комментариев к вопросам.",
+    maxCommentLength: "Только для комментариев к вопросам.",
     commentAreaRows: "Задает количество отображаемых строк в текстовых областях для комментариев к вопросам. При вводе занимает больше строк, появляется полоса прокрутки.",
     autoGrowComment: "Выберите, хотите ли вы, чтобы комментарии к вопросам и вопросы с длинным текстом автоматически увеличивались в высоту в зависимости от введенной длины текста.",
     allowResizeComment: "Только для комментариев к вопросам и вопросов с длинным текстом.",
@@ -1498,7 +1498,7 @@ export var ruStrings = {
       questionTitleLocation: "Относится ко всем вопросам на этой странице. Если вы хотите переопределить этот параметр, задайте правила выравнивания заголовков для отдельных вопросов или панелей. Опция «Наследовать» применяет настройку уровня опроса («Сверху» по умолчанию).",
       questionTitleWidth: "Задает одинаковую ширину заголовков вопросов, если они выровнены по левому краю полей вопросов. Принимает значения CSS (px, %, in, pt и т. д.).",
       questionErrorLocation: "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса. Опция «Наследовать» применяет настройку уровня опроса («Сверху» по умолчанию).",
-      questionsOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку уровня опроса («Оригинал» по умолчанию). Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
+      questionOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку уровня опроса («Оригинал» по умолчанию). Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
       navigationButtonsVisibility: "Задает видимость кнопок навигации на странице. Опция \"Наследовать\" применяет настройку уровня опроса, которая по умолчанию имеет значение \"Видимый\"."
     },
     timerLocation: "Задает расположение таймера на странице.",
@@ -1535,7 +1535,7 @@ export var ruStrings = {
     needConfirmRemoveFile: "Запускает запрос на подтверждение удаления файла.",
     selectToRankEnabled: "Включите этот параметр, чтобы ранжировать только выбранные варианты. Пользователи будут перетаскивать выбранные элементы из списка вариантов, чтобы упорядочить их в области ранжирования.",
     dataList: "Введите список вариантов, которые будут предложены респонденту во время ввода.",
-    itemSize: "Этот параметр изменяет только размер полей ввода и не влияет на ширину поля вопроса.",
+    inputSize: "Этот параметр изменяет только размер полей ввода и не влияет на ширину поля вопроса.",
     itemTitleWidth: "Устанавливает одинаковую ширину для всех меток элементов в пикселях",
     inputTextAlignment: "Выберите способ выравнивания вводимого значения в поле. Настройка по умолчанию \"Auto\" выравнивает вводимое значение по правому краю, если применяется маскирование валюты или число, то по левому краю.",
     altText: "Служит заменой, когда изображение не может быть отображено на устройстве пользователя, а также в целях обеспечения доступности.",
@@ -1653,7 +1653,7 @@ export var ruStrings = {
     maxValueExpression: "Выражение максимального значения",
     step: "Шаг",
     dataList: "Список данных",
-    itemSize: "Размер элементов",
+    inputSize: "Размер элементов",
     itemTitleWidth: "Ширина метки элемента (в пикселях)",
     inputTextAlignment: "Выравнивание вводимого значения",
     elements: "Азы",
@@ -1921,7 +1921,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.dataFormat: "Image format" => "Формат изображения"
 // pe.allowAddRows: "Allow adding rows" => "Разрешить добавление строк"
 // pe.allowRemoveRows: "Allow removing rows" => "Разрешить удаление строк"
-// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "Разрешить перетаскивание строк"
+// pe.allowRowReorder: "Allow row drag and drop" => "Разрешить перетаскивание строк"
 // pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "Не применяется, если указана точная ширина или высота изображения."
 // pe.minImageWidth: "Minimum image width" => "Минимальная ширина изображения"
 // pe.maxImageWidth: "Maximum image width" => "Максимальная ширина изображения"
@@ -1933,11 +1933,11 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.logo: "Logo (URL or base64-encoded string)" => "Логотип (URL-адрес или строка в кодировке base64)"
 // pe.questionsOnPageMode: "Survey structure" => "Структура опроса"
 // pe.maxTextLength: "Maximum answer length (in characters)" => "Максимальная длина ответа (в символах)"
-// pe.maxOthersLength: "Maximum comment length (in characters)" => "Максимальная длина комментария (в символах)"
+// pe.maxCommentLength: "Maximum comment length (in characters)" => "Максимальная длина комментария (в символах)"
 // pe.autoGrowComment: "Auto-expand comment area if necessary" => "При необходимости автоматически разверните область комментариев"
 // pe.allowResizeComment: "Allow users to resize text areas" => "Разрешить пользователям изменять размер текстовых областей"
 // pe.textUpdateMode: "Update text question value" => "Обновление значения текстового вопроса"
-// pe.focusOnFirstError: "Set focus on the first invalid answer" => "Установка фокуса на первом недопустимом ответе"
+// pe.autoFocusFirstError: "Set focus on the first invalid answer" => "Установка фокуса на первом недопустимом ответе"
 // pe.checkErrorsMode: "Run validation" => "Запуск проверки"
 // pe.navigateToUrl: "Navigate to URL" => "Перейдите по URL-адресу"
 // pe.navigateToUrlOnCondition: "Dynamic URL" => "Динамический URL-адрес"
@@ -1975,7 +1975,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.panelPrevText: "Previous Panel button tooltip" => "Предыдущая всплывающая подсказка кнопки «Панель»"
 // pe.panelNextText: "Next Panel button tooltip" => "Всплывающая подсказка кнопки «Следующая панель»"
 // pe.showRangeInProgress: "Show progress bar" => "Показать индикатор выполнения"
-// pe.templateTitleLocation: "Question title location" => "Местоположение заголовка вопроса"
+// pe.templateQuestionTitleLocation: "Question title location" => "Местоположение заголовка вопроса"
 // pe.panelRemoveButtonLocation: "Remove Panel button location" => "Удалить расположение кнопки «Панель»"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Скрыть вопрос, если нет строк"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Скрытие столбцов, если строк нет"
@@ -1999,13 +1999,13 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Сообщение об ошибке \"Неуникальное значение ключа\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Минимальное количество выбранных вариантов"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Максимальное количество выбранных вариантов"
-// pe.showClearButton: "Show the Clear button" => "Показать кнопку «Очистить»"
+// pe.allowClear: "Show the Clear button" => "Показать кнопку «Очистить»"
 // pe.showNumber: "Show panel number" => "Показать номер панели"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Ширина логотипа (в значениях, принимаемых CSS)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Высота логотипа (в значениях, принимаемых CSS)"
 // pe.readOnly: "Read-only" => "Только для чтения"
 // pe.enableIf: "Editable if" => "Редактируется, если"
-// pe.emptyRowsText: "\"No rows\" message" => "Сообщение \"Нет строк\""
+// pe.noRowsText: "\"No rows\" message" => "Сообщение \"Нет строк\""
 // pe.size: "Input field size (in characters)" => "Размер поля ввода (в символах)"
 // pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "Отдельные специальные варианты («Нет», «Другое», «Выбрать все»)"
 // pe.choicesFromQuestion: "Copy choices from the following question" => "Копирование вариантов из следующего вопроса"
@@ -2013,7 +2013,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.showCommentArea: "Show the comment area" => "Показать область комментариев"
 // pe.commentPlaceholder: "Comment area placeholder" => "Заполнитель области комментариев"
 // pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "Отображение описаний скоростей в виде экстремальных значений"
-// pe.rowsOrder: "Row order" => "Порядок строк"
+// pe.rowOrder: "Row order" => "Порядок строк"
 // pe.columnsLayout: "Column layout" => "Расположение столбцов"
 // pe.columnColCount: "Nested column count" => "Количество вложенных столбцов"
 // pe.state: "Panel expand state" => "Состояние развертывания панели"
@@ -2114,7 +2114,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // showTimerPanel.none: "Hidden" => "Скрытый"
 // showTimerPanelMode.all: "Both" => "Оба"
 // detailPanelMode.none: "Hidden" => "Скрытый"
-// addRowLocation.default: "Depends on matrix layout" => "Зависит от компоновки матрицы"
+// addRowButtonLocation.default: "Depends on matrix layout" => "Зависит от компоновки матрицы"
 // panelsState.default: "Users cannot expand or collapse panels" => "Пользователи не могут разворачивать или сворачивать панели"
 // panelsState.collapsed: "All panels are collapsed" => "Все панели свернуты"
 // panelsState.expanded: "All panels are expanded" => "Все панели расширены"
@@ -2439,7 +2439,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // panel.description: "Panel description" => "Описание панели"
 // panel.visibleIf: "Make the panel visible if" => "Сделать панель видимой, если"
 // panel.requiredIf: "Make the panel required if" => "Сделайте панель обязательной, если"
-// panel.questionsOrder: "Question order within the panel" => "Порядок вопросов на панели"
+// panel.questionOrder: "Question order within the panel" => "Порядок вопросов на панели"
 // panel.startWithNewLine: "Display the panel on a new line" => "Отображение панели на новой строке"
 // panel.state: "Panel collapse state" => "Состояние свертывания панели"
 // panel.width: "Inline panel width" => "Встроенная ширина панели"
@@ -2464,7 +2464,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // paneldynamic.hideNumber: "Hide the panel number" => "Скрытие номера панели"
 // paneldynamic.titleLocation: "Panel title alignment" => "Выравнивание заголовков панелей"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "Выравнивание описания панели"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "Выравнивание заголовка вопроса"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "Выравнивание заголовка вопроса"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "Выравнивание сообщений об ошибках"
 // paneldynamic.newPanelPosition: "New panel location" => "Новое расположение панели"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "Предотвращение дублирования ответов в следующем вопросе"
@@ -2497,7 +2497,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // page.description: "Page description" => "Описание страницы"
 // page.visibleIf: "Make the page visible if" => "Сделайте страницу видимой, если"
 // page.requiredIf: "Make the page required if" => "Сделайте страницу обязательной, если"
-// page.questionsOrder: "Question order on the page" => "Порядок вопросов на странице"
+// page.questionOrder: "Question order on the page" => "Порядок вопросов на странице"
 // matrixdropdowncolumn.name: "Column name" => "Имя столбца"
 // matrixdropdowncolumn.title: "Column title" => "Заголовок столбца"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "Предотвращение дублирования ответов"
@@ -2571,8 +2571,8 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // totalDisplayStyle.currency: "Currency" => "Валюта"
 // totalDisplayStyle.percent: "Percentage" => "Процент"
 // totalDisplayStyle.date: "Date" => "Дата"
-// rowsOrder.initial: "Original" => "Исходный текст"
-// questionsOrder.initial: "Original" => "Исходный текст"
+// rowOrder.initial: "Original" => "Исходный текст"
+// questionOrder.initial: "Original" => "Исходный текст"
 // showProgressBar.aboveheader: "Above the header" => "Над заголовком"
 // showProgressBar.belowheader: "Below the header" => "Под заголовком"
 // pv.sum: "Sum" => "Сумма"
@@ -2589,7 +2589,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Применяется ко всем вопросам в этой панели. Если вы хотите переопределить этот параметр, определите правила выравнивания заголовков для отдельных вопросов. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию)."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Задает расположение сообщения об ошибке по отношению ко всем вопросам на панели. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса."
 // panel.page: "Repositions the panel to the end of a selected page." => "Перемещает панель в конец выбранной страницы."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "Добавляет пространство или поле между содержимым панели и левой границей рамки панели."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "Снимите флажок, чтобы отобразить панель в одной строке с предыдущим вопросом или панелью. Этот параметр не применяется, если панель является первым элементом формы."
@@ -2600,7 +2600,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "Используйте значок волшебной палочки, чтобы задать условное правило, определяющее видимость панели."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "Используйте значок волшебной палочки, чтобы задать условное правило, которое отключает режим только для чтения для панели."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Применяется ко всем вопросам в этой панели. Если вы хотите переопределить этот параметр, определите правила выравнивания заголовков для отдельных вопросов. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию)."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Применяется ко всем вопросам в этой панели. Если вы хотите переопределить этот параметр, определите правила выравнивания заголовков для отдельных вопросов. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию)."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Сверху» по умолчанию)."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Задает расположение сообщения об ошибке по отношению ко всем вопросам на панели. Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "Перемещает панель в конец выбранной страницы."
@@ -2664,13 +2664,13 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Задает видимость и расположение индикатора выполнения. Значение «Авто» отображает индикатор выполнения над или под заголовком опроса."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Включите страницу предварительного просмотра, на которой отображаются все вопросы или только ответы на них."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "Применяется ко всем вопросам в опросе. Этот параметр может быть переопределен правилами выравнивания заголовков на более низких уровнях: панели, странице или вопросе. Настройки более низкого уровня будут переопределять настройки на более высоком уровне."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "Символ или последовательность символов, указывающие на то, что требуется ответ."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "Символ или последовательность символов, указывающие на то, что требуется ответ."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "Введите цифру или букву, с которой вы хотите начать нумерацию."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "Выберите, если вы хотите, чтобы первое поле ввода на каждой странице было готово для ввода текста."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Сохраняет исходный порядок вопросов или рандомизирует их. Эффект этого параметра виден только на вкладке «Предварительный просмотр»."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "Выберите, если вы хотите, чтобы первое поле ввода на каждой странице было готово для ввода текста."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Сохраняет исходный порядок вопросов или рандомизирует их. Эффект этого параметра виден только на вкладке «Предварительный просмотр»."
 // pehelp.maxTextLength: "For text entry questions only." => "Только для вопросов с вводом текста."
-// pehelp.maxOthersLength: "For question comments only." => "Только для комментариев к вопросам."
+// pehelp.maxCommentLength: "For question comments only." => "Только для комментариев к вопросам."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "Выберите, хотите ли вы, чтобы комментарии к вопросам и вопросы с длинным текстом автоматически увеличивались в высоту в зависимости от введенной длины текста."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "Только для комментариев к вопросам и вопросов с длинным текстом."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "Пользовательские переменные служат промежуточными или вспомогательными переменными, используемыми в вычислениях формы. Они принимают входные данные респондента в качестве исходных значений. Каждая пользовательская переменная имеет уникальное имя и выражение, на котором она основана."
@@ -2701,7 +2701,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Относится ко всем вопросам на этой странице. Если вы хотите переопределить этот параметр, задайте правила выравнивания заголовков для отдельных вопросов или панелей. Опция «Наследовать» применяет настройку уровня опроса («Сверху» по умолчанию)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса. Опция «Наследовать» применяет настройку уровня опроса («Сверху» по умолчанию)."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку уровня опроса («Оригинал» по умолчанию). Эффект этого параметра виден только на вкладке «Предварительный просмотр»."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку уровня опроса («Оригинал» по умолчанию). Эффект этого параметра виден только на вкладке «Предварительный просмотр»."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Задает видимость кнопок навигации на странице. Опция \"Наследовать\" применяет настройку уровня опроса, которая по умолчанию имеет значение \"Видимый\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Выберите один из следующих вариантов: \"Заблокировано\" - пользователи не могут разворачивать или сворачивать панели; \"Свернуть все\" - все панели запускаются в свернутом состоянии; \"Развернуть все\" - все панели запускаются в развернутом состоянии; \"First expanded\" - изначально разворачивается только первая панель."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Введите имя общего свойства в массиве объектов, содержащем URL-адреса изображений или видеофайлов, которые необходимо отобразить в списке вариантов."
@@ -2730,7 +2730,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "Запускает запрос на подтверждение удаления файла."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Включите этот параметр, чтобы ранжировать только выбранные варианты. Пользователи будут перетаскивать выбранные элементы из списка вариантов, чтобы упорядочить их в области ранжирования."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Введите список вариантов, которые будут предложены респонденту во время ввода."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Этот параметр изменяет только размер полей ввода и не влияет на ширину поля вопроса."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Этот параметр изменяет только размер полей ввода и не влияет на ширину поля вопроса."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Устанавливает одинаковую ширину для всех меток элементов в пикселях"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Опция \"Авто\" автоматически определяет подходящий режим отображения - Изображение, Видео или YouTube - на основе предоставленного исходного URL-адреса."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Служит заменой, когда изображение не может быть отображено на устройстве пользователя, а также в целях обеспечения доступности."
@@ -2743,8 +2743,8 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // p.itemTitleWidth: "Item label width (in px)" => "Ширина метки элемента (в пикселях)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Текст, показывающий, если выбраны все параметры"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Замещающий текст для области ранжирования"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Автоматическое заполнение опроса"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Автоматическое заполнение опроса"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "Сохранение замаскированного значения в результатах опроса"
 // patternmask.pattern: "Value pattern" => "Шаблон значения"
 // datetimemask.min: "Minimum value" => "Минимальное значение"
@@ -2969,7 +2969,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // names.default-dark: "Dark" => "Темный"
 // names.default-contrast: "Contrast" => "Контраст"
 // panel.showNumber: "Number this panel" => "Пронумеруйте эту панель"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответил на все вопросы на текущей странице. Эта функция не будет работать, если последний вопрос на странице является открытым или допускает несколько ответов."
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответил на все вопросы на текущей странице. Эта функция не будет работать, если последний вопрос на странице является открытым или допускает несколько ответов."
 // autocomplete.name: "Full Name" => "Полное имя"
 // autocomplete.honorific-prefix: "Prefix" => "Приставка"
 // autocomplete.given-name: "First Name" => "Имя"

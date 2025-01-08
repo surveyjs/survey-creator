@@ -296,7 +296,7 @@ export var turkishStrings = {
       description: "Panel açıklaması",
       visibleIf: "Aşağıdaki durumlarda paneli görünür hale getirin",
       requiredIf: "Aşağıdaki durumlarda paneli gerekli hale getirin",
-      questionsOrder: "Panel içinde soru sırası",
+      questionOrder: "Panel içinde soru sırası",
       page: "Ana sayfa",
       startWithNewLine: "Paneli yeni bir satırda görüntüleme",
       state: "Panel çökme durumu",
@@ -327,7 +327,7 @@ export var turkishStrings = {
       hideNumber: "Panel numarasını gizleme",
       titleLocation: "Panel başlığı hizalaması",
       descriptionLocation: "Panel açıklaması hizalaması",
-      templateTitleLocation: "Soru başlığı hizalaması",
+      templateQuestionTitleLocation: "Soru başlığı hizalaması",
       templateErrorLocation: "Hata iletisi hizalaması",
       newPanelPosition: "Yeni panel konumu",
       showRangeInProgress: "İlerleme çubuğunu gösterme",
@@ -394,7 +394,7 @@ export var turkishStrings = {
       visibleIf: "Aşağıdaki durumlarda sayfayı görünür hale getirin",
       requiredIf: "Aşağıdaki durumlarda sayfayı gerekli hale getirin",
       timeLimit: "Sayfayı bitirmek için zaman sınırı (saniye cinsinden)",
-      questionsOrder: "Sayfadaki soru sırası"
+      questionOrder: "Sayfadaki soru sırası"
     },
     matrixdropdowncolumn: {
       name: "Sütun adı",
@@ -560,7 +560,7 @@ export var turkishStrings = {
     isRequired: "Zorunlu?",
     markRequired: "Gerektiği gibi işaretleyin",
     removeRequiredMark: "Gerekli işareti kaldırın",
-    isAllRowRequired: "Tüm satırlar zorunlu",
+    eachRowRequired: "Tüm satırlar zorunlu",
     eachRowUnique: "Satırlarda yinelenen yanıtları önleme",
     requiredErrorText: "Zorunlu hata yazısı",
     startWithNewLine: "Yeni satırla başla?",
@@ -572,7 +572,7 @@ export var turkishStrings = {
     maxSize: "Bayt cinsinden maksimum dosya boyutu",
     rowCount: "Satır sayısı",
     columnLayout: "Kolon yerleşimi",
-    addRowLocation: "Satır butonu konumu ekle",
+    addRowButtonLocation: "Satır butonu konumu ekle",
     transposeData: "Satırları sütunlara dönüştürme",
     addRowText: "Satır butonu yazısı ekle",
     removeRowText: "Satır butonu yazısını kaldır",
@@ -611,7 +611,7 @@ export var turkishStrings = {
     mode: "Mod (düzenlebilir/düzenlenemez)",
     clearInvisibleValues: "Görünmez değerleri sil",
     cookieName: "Çerez adı (anketi yerel olarak iki kez devre dışı bırakmak için)",
-    sendResultOnPageNext: "Bir sonraki sayfada anket sonuçlarını gönder",
+    partialSendEnabled: "Bir sonraki sayfada anket sonuçlarını gönder",
     storeOthersAsComment: "'Diğerleri' değerini ayrı alanda depolayın",
     showPageTitles: "Sayfa başlıklarını göster",
     showPageNumbers: "Sayfa numaralarını göster",
@@ -623,18 +623,18 @@ export var turkishStrings = {
     startSurveyText: "Başla butonu yazısı",
     showNavigationButtons: "Gezinme butonlarını göster (varsayılan gezinme)",
     showPrevButton: "Önceki butonu göster (kullanıcı önceki sayfaya dönebilir)",
-    firstPageIsStarted: "Anketteki ilk sayfa bir başlangıç sayfasıdır.",
-    showCompletedPage: "Tamamlanan sayfayı en sonunda göster (HTML)",
-    goNextPageAutomatic: "Tüm soruları cevaplarken otomatik olarak sonraki sayfaya git",
-    allowCompleteSurveyAutomatic: "Anketi otomatik olarak tamamlama",
+    firstPageIsStartPage: "Anketteki ilk sayfa bir başlangıç sayfasıdır.",
+    showCompletePage: "Tamamlanan sayfayı en sonunda göster (HTML)",
+    autoAdvanceEnabled: "Tüm soruları cevaplarken otomatik olarak sonraki sayfaya git",
+    autoAdvanceAllowComplete: "Anketi otomatik olarak tamamlama",
     showProgressBar: "İlerleme çubuğunu göster",
     questionTitleLocation: "Soru başlığı konumu",
     questionTitleWidth: "Soru başlığı genişliği",
-    requiredText: "Zorunlu soru sembolü",
+    requiredMark: "Zorunlu soru sembolü",
     questionTitleTemplate: "Soru başlığı şablonu, varsayılan değer: '{no}. {require} {title}'",
     questionErrorLocation: "Soru hatası konumu",
-    focusFirstQuestionAutomatic: "İlk soruyu sayfayı değiştirmeye odakla",
-    questionsOrder: "Sayfadaki öğelerin sırası",
+    autoFocusFirstQuestion: "İlk soruyu sayfayı değiştirmeye odakla",
+    questionOrder: "Sayfadaki öğelerin sırası",
     timeLimit: "Anketi bitirmek için maksimum süre",
     timeLimitPerPage: "Ankette bir sayfayı bitirmek için maksimum süre",
     showTimer: "Bir zamanlayıcı kullanın",
@@ -651,7 +651,7 @@ export var turkishStrings = {
     dataFormat: "Görüntü formatı",
     allowAddRows: "Satır eklemeye izin ver",
     allowRemoveRows: "Satırların kaldırılmasına izin ver",
-    allowRowsDragAndDrop: "Satır sürükleyip bırakmaya izin ver",
+    allowRowReorder: "Satır sürükleyip bırakmaya izin ver",
     responsiveImageSizeHelp: "Tam görüntü genişliğini veya yüksekliğini belirtirseniz uygulanmaz.",
     minImageWidth: "Minimum görüntü genişliği",
     maxImageWidth: "Maksimum görüntü genişliği",
@@ -678,13 +678,13 @@ export var turkishStrings = {
     logo: "Logo (URL veya base64 kodlu dize)",
     questionsOnPageMode: "Anket yapısı",
     maxTextLength: "Maksimum metin uzunluğu",
-    maxOthersLength: "Maksimum diğerleri uzunluğu",
+    maxCommentLength: "Maksimum diğerleri uzunluğu",
     commentAreaRows: "Yorum alanı yüksekliği (satırlar halinde)",
     autoGrowComment: "Gerekirse yorum alanını otomatik olarak genişletin",
     allowResizeComment: "Kullanıcıların metin alanlarını yeniden boyutlandırmasına izin verme",
     textUpdateMode: "Metin sorusu değerini güncelleme",
     maskType: "Giriş maskesi türü",
-    focusOnFirstError: "İlk hataya odaklan",
+    autoFocusFirstError: "İlk hataya odaklan",
     checkErrorsMode: "Çalıştırma doğrulaması",
     validateVisitedEmptyFields: "Kayıp odakta boş alanları doğrulayın",
     navigateToUrl: "URL'ye gidin",
@@ -742,12 +742,12 @@ export var turkishStrings = {
     keyDuplicationError: "\"Benzersiz olmayan anahtar değeri\" hata iletisi",
     minSelectedChoices: "Seçilen minimum seçenekler",
     maxSelectedChoices: "Seçilen maksimum seçenek sayısı",
-    showClearButton: "Temizleme butonunu göster",
+    allowClear: "Temizleme butonunu göster",
     logoWidth: "Logo genişlik",
     logoHeight: "Logo uzunluk",
     readOnly: "Salt okunur",
     enableIf: "Şu durumlarda düzenlenebilir",
-    emptyRowsText: "\"Satır yok\" iletisi",
+    noRowsText: "\"Satır yok\" iletisi",
     separateSpecialChoices: "Ayrı özel seçenekler (Yok, Diğer, Tümünü Seç)",
     choicesFromQuestion: "Aşağıdaki sorudan seçenekleri kopyalama",
     choicesFromQuestionMode: "Hangi seçenekleri kopyalamalıyım?",
@@ -756,7 +756,7 @@ export var turkishStrings = {
     showCommentArea: "Yorumu var",
     commentPlaceholder: "Yorum alanı yer tutucusu",
     displayRateDescriptionsAsExtremeItems: "Hız açıklamalarını aşırı değerler olarak görüntüleme",
-    rowsOrder: "Satır sırası",
+    rowOrder: "Satır sırası",
     columnsLayout: "Sütun düzeni",
     columnColCount: "İç içe geçmiş sütun sayısı",
     correctAnswer: "Doğru Cevap",
@@ -1120,7 +1120,7 @@ export var turkishStrings = {
     timerInfoMode: {
       combined: "Her ikisi"
     },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "Matris düzenine bağlıdır"
     },
     panelsState: {
@@ -1191,10 +1191,10 @@ export var turkishStrings = {
       percent: "Yüzde",
       date: "Tarih"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "Özgün"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "Özgün"
     },
     showProgressBar: {
@@ -1345,7 +1345,7 @@ export var turkishStrings = {
       questionTitleLocation: "Bu paneldeki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular.",
       questionTitleWidth: "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       questionErrorLocation: "Paneldeki tüm sorularla ilgili olarak bir hata mesajının konumunu ayarlar. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular.",
-      questionsOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular.",
+      questionOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular.",
       page: "Paneli seçili sayfanın sonuna yeniden konumlandırır.",
       innerIndent: "Panel içeriği ile panel kutusunun sol kenarlığı arasına boşluk veya kenar boşluğu ekler.",
       startWithNewLine: "Panelin önceki soru veya panelle aynı satırda görüntülenmesi için seçimi kaldırın. Panel formunuzdaki ilk öğeyse bu ayar uygulanmaz.",
@@ -1359,7 +1359,7 @@ export var turkishStrings = {
       visibleIf: "Panel görünürlüğünü belirleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       enableIf: "Panelin salt okunur modunu devre dışı bırakan koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       requiredIf: "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
-      templateTitleLocation: "Bu paneldeki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular.",
+      templateQuestionTitleLocation: "Bu paneldeki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular.",
       templateErrorLocation: "Geçersiz girişi olan bir soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular.",
       errorLocation: "Paneldeki tüm sorularla ilgili olarak bir hata mesajının konumunu ayarlar. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular.",
       page: "Paneli seçili sayfanın sonuna yeniden konumlandırır.",
@@ -1449,19 +1449,19 @@ export var turkishStrings = {
     logoWidth: "CSS birimlerinde bir logo genişliği ayarlar (px, %, in, pt, vb.).",
     logoHeight: "CSS birimlerinde (px, %, in, pt, vb.) bir logo yüksekliği ayarlar.",
     logoFit: "Şunlar arasından seçim yapın: \"Yok\" - görüntü orijinal boyutunu korur; \"İçer\" - görüntü, en boy oranı korunurken sığacak şekilde yeniden boyutlandırılır; \"Kapak\" - görüntü, en boy oranını korurken tüm kutuyu doldurur; \"Doldur\" - görüntü, en boy oranını korumadan kutuyu dolduracak şekilde uzatılır.",
-    goNextPageAutomatic: "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Bu özellik, sayfadaki son soru açık uçluysa veya birden fazla yanıta izin veriyorsa uygulanmaz.",
-    allowCompleteSurveyAutomatic: "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin.",
+    autoAdvanceEnabled: "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Bu özellik, sayfadaki son soru açık uçluysa veya birden fazla yanıta izin veriyorsa uygulanmaz.",
+    autoAdvanceAllowComplete: "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin.",
     showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar.",
     showProgressBar: "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler.",
     showPreviewBeforeComplete: "Önizleme sayfasını tüm sorularla veya yalnızca yanıtlanmış sorularla etkinleştirin.",
     questionTitleLocation: "Anketteki tüm sorular için geçerlidir. Bu ayar, panel, sayfa veya soru gibi daha düşük düzeylerdeki başlık hizalama kuralları tarafından geçersiz kılınabilir. Daha düşük düzeydeki bir ayar, daha yüksek düzeydeki ayarları geçersiz kılar.",
-    requiredText: "Bir yanıtın gerekli olduğunu gösteren bir sembol veya sembol dizisi.",
+    requiredMark: "Bir yanıtın gerekli olduğunu gösteren bir sembol veya sembol dizisi.",
     questionStartIndex: "Numaralandırmaya başlamak istediğiniz sayıyı veya harfi girin.",
     questionErrorLocation: "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir.",
-    focusFirstQuestionAutomatic: "Her sayfadaki ilk giriş alanının metin girişi için hazır olmasını istiyorsanız seçin.",
-    questionsOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
+    autoFocusFirstQuestion: "Her sayfadaki ilk giriş alanının metin girişi için hazır olmasını istiyorsanız seçin.",
+    questionOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
     maxTextLength: "Yalnızca metin girişi soruları için.",
-    maxOthersLength: "Yalnızca soru yorumları içindir.",
+    maxCommentLength: "Yalnızca soru yorumları içindir.",
     commentAreaRows: "Soru yorumları için metin alanlarında görüntülenen satır sayısını ayarlar. Girişte daha fazla satır alır, kaydırma çubuğu görünür.",
     autoGrowComment: "Soru yorumlarının ve Uzun Metin sorularının yüksekliğinin girilen metin uzunluğuna göre otomatik olarak büyümesini istiyorsanız seçin.",
     allowResizeComment: "Yalnızca soru yorumları ve Uzun Metin soruları için.",
@@ -1498,7 +1498,7 @@ export var turkishStrings = {
       questionTitleLocation: "Bu sayfadaki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular veya paneller için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\").",
       questionTitleWidth: "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       questionErrorLocation: "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\").",
-      questionsOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
+      questionOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
       navigationButtonsVisibility: "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
     },
     timerLocation: "Sayfadaki bir zamanlayıcının konumunu ayarlar.",
@@ -1535,7 +1535,7 @@ export var turkishStrings = {
     needConfirmRemoveFile: "Dosya silme işlemini onaylamanızı isteyen bir istemi tetikler.",
     selectToRankEnabled: "Yalnızca seçilen seçenekleri sıralamak için etkinleştirin. Kullanıcılar, sıralama alanı içinde sıralamak için seçim listesinden seçilen öğeleri sürükleyecektir.",
     dataList: "Giriş sırasında yanıtlayana önerilecek seçeneklerin bir listesini girin.",
-    itemSize: "Bu ayar yalnızca giriş alanlarını yeniden boyutlandırır ve soru kutusunun genişliğini etkilemez.",
+    inputSize: "Bu ayar yalnızca giriş alanlarını yeniden boyutlandırır ve soru kutusunun genişliğini etkilemez.",
     itemTitleWidth: "Piksel cinsinden tüm öğe etiketleri için tutarlı genişlik ayarlar",
     inputTextAlignment: "Alan içinde giriş değerinin nasıl hizalanacağını seçin. Varsayılan ayar olan \"Otomatik\", para birimi veya sayısal maskeleme uygulanmışsa giriş değerini sağa, uygulanmıyorsa sola hizalar.",
     altText: "Görüntü, kullanıcının cihazında görüntülenemediğinde ve erişilebilirlik amacıyla yedek olarak görev yapar.",
@@ -1653,7 +1653,7 @@ export var turkishStrings = {
     maxValueExpression: "Maksimum değer ifadesi",
     step: "Adım",
     dataList: "Veri listesi",
-    itemSize: "Öğe boyutu",
+    inputSize: "Öğe boyutu",
     itemTitleWidth: "Öğe etiketi genişliği (piksel cinsinden)",
     inputTextAlignment: "Giriş değeri hizalaması",
     elements: "Öğe",
@@ -1889,7 +1889,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.dataFormat: "Image format" => "Görüntü formatı"
 // pe.allowAddRows: "Allow adding rows" => "Satır eklemeye izin ver"
 // pe.allowRemoveRows: "Allow removing rows" => "Satırların kaldırılmasına izin ver"
-// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "Satır sürükleyip bırakmaya izin ver"
+// pe.allowRowReorder: "Allow row drag and drop" => "Satır sürükleyip bırakmaya izin ver"
 // pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "Tam görüntü genişliğini veya yüksekliğini belirtirseniz uygulanmaz."
 // pe.minImageWidth: "Minimum image width" => "Minimum görüntü genişliği"
 // pe.maxImageWidth: "Maximum image width" => "Maksimum görüntü genişliği"
@@ -1938,7 +1938,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.panelPrevText: "Previous Panel button tooltip" => "Önceki Panel düğmesi araç ipucu"
 // pe.panelNextText: "Next Panel button tooltip" => "Sonraki Panel düğmesi araç ipucu"
 // pe.showRangeInProgress: "Show progress bar" => "İlerleme çubuğunu göster"
-// pe.templateTitleLocation: "Question title location" => "Soru başlığı konumu"
+// pe.templateQuestionTitleLocation: "Question title location" => "Soru başlığı konumu"
 // pe.panelRemoveButtonLocation: "Remove Panel button location" => "Panel düğmesinin konumunu kaldır"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Satır yoksa soruyu gizleme"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Satır yoksa sütunları gizleme"
@@ -1965,14 +1965,14 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.showNumber: "Show panel number" => "Panel numarasını göster"
 // pe.readOnly: "Read-only" => "Salt okunur"
 // pe.enableIf: "Editable if" => "Şu durumlarda düzenlenebilir"
-// pe.emptyRowsText: "\"No rows\" message" => "\"Satır yok\" iletisi"
+// pe.noRowsText: "\"No rows\" message" => "\"Satır yok\" iletisi"
 // pe.size: "Input field size (in characters)" => "Giriş alanı boyutu (karakter cinsinden)"
 // pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "Ayrı özel seçenekler (Yok, Diğer, Tümünü Seç)"
 // pe.choicesFromQuestion: "Copy choices from the following question" => "Aşağıdaki sorudan seçenekleri kopyalama"
 // pe.choicesFromQuestionMode: "Which choices to copy?" => "Hangi seçenekleri kopyalamalıyım?"
 // pe.commentPlaceholder: "Comment area placeholder" => "Yorum alanı yer tutucusu"
 // pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "Hız açıklamalarını aşırı değerler olarak görüntüleme"
-// pe.rowsOrder: "Row order" => "Satır sırası"
+// pe.rowOrder: "Row order" => "Satır sırası"
 // pe.columnsLayout: "Column layout" => "Sütun düzeni"
 // pe.columnColCount: "Nested column count" => "İç içe geçmiş sütun sayısı"
 // pe.state: "Panel expand state" => "Panel genişletme durumu"
@@ -2056,7 +2056,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // showTimerPanel.none: "Hidden" => "Gizli"
 // showTimerPanelMode.all: "Both" => "Her ikisi"
 // detailPanelMode.none: "Hidden" => "Gizli"
-// addRowLocation.default: "Depends on matrix layout" => "Matris düzenine bağlıdır"
+// addRowButtonLocation.default: "Depends on matrix layout" => "Matris düzenine bağlıdır"
 // panelsState.default: "Users cannot expand or collapse panels" => "Kullanıcılar panelleri genişletemez veya daraltamaz"
 // panelsState.collapsed: "All panels are collapsed" => "Tüm paneller daraltıldı"
 // panelsState.expanded: "All panels are expanded" => "Tüm paneller genişletildi"
@@ -2374,7 +2374,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // panel.description: "Panel description" => "Panel açıklaması"
 // panel.visibleIf: "Make the panel visible if" => "Aşağıdaki durumlarda paneli görünür hale getirin"
 // panel.requiredIf: "Make the panel required if" => "Aşağıdaki durumlarda paneli gerekli hale getirin"
-// panel.questionsOrder: "Question order within the panel" => "Panel içinde soru sırası"
+// panel.questionOrder: "Question order within the panel" => "Panel içinde soru sırası"
 // panel.startWithNewLine: "Display the panel on a new line" => "Paneli yeni bir satırda görüntüleme"
 // panel.state: "Panel collapse state" => "Panel çökme durumu"
 // panel.width: "Inline panel width" => "Satır içi panel genişliği"
@@ -2399,7 +2399,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // paneldynamic.hideNumber: "Hide the panel number" => "Panel numarasını gizleme"
 // paneldynamic.titleLocation: "Panel title alignment" => "Panel başlığı hizalaması"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "Panel açıklaması hizalaması"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "Soru başlığı hizalaması"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "Soru başlığı hizalaması"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "Hata iletisi hizalaması"
 // paneldynamic.newPanelPosition: "New panel location" => "Yeni panel konumu"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "Aşağıdaki soruda yinelenen yanıtları önleyin"
@@ -2432,7 +2432,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // page.description: "Page description" => "Sayfa açıklaması"
 // page.visibleIf: "Make the page visible if" => "Aşağıdaki durumlarda sayfayı görünür hale getirin"
 // page.requiredIf: "Make the page required if" => "Aşağıdaki durumlarda sayfayı gerekli hale getirin"
-// page.questionsOrder: "Question order on the page" => "Sayfadaki soru sırası"
+// page.questionOrder: "Question order on the page" => "Sayfadaki soru sırası"
 // matrixdropdowncolumn.name: "Column name" => "Sütun adı"
 // matrixdropdowncolumn.title: "Column title" => "Sütun başlığı"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "Yinelenen yanıtları önleyin"
@@ -2506,8 +2506,8 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // totalDisplayStyle.currency: "Currency" => "Para birimi"
 // totalDisplayStyle.percent: "Percentage" => "Yüzde"
 // totalDisplayStyle.date: "Date" => "Tarih"
-// rowsOrder.initial: "Original" => "Özgün"
-// questionsOrder.initial: "Original" => "Özgün"
+// rowOrder.initial: "Original" => "Özgün"
+// questionOrder.initial: "Original" => "Özgün"
 // showProgressBar.aboveheader: "Above the header" => "Başlığın üstünde"
 // showProgressBar.belowheader: "Below the header" => "Başlığın altında"
 // pv.sum: "Sum" => "Toplam"
@@ -2524,7 +2524,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Bu paneldeki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Paneldeki tüm sorularla ilgili olarak bir hata mesajının konumunu ayarlar. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular."
 // panel.page: "Repositions the panel to the end of a selected page." => "Paneli seçili sayfanın sonuna yeniden konumlandırır."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "Panel içeriği ile panel kutusunun sol kenarlığı arasına boşluk veya kenar boşluğu ekler."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "Panelin önceki soru veya panelle aynı satırda görüntülenmesi için seçimi kaldırın. Panel formunuzdaki ilk öğeyse bu ayar uygulanmaz."
@@ -2535,7 +2535,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "Panel görünürlüğünü belirleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "Panelin salt okunur modunu devre dışı bırakan koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Bu paneldeki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Bu paneldeki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Geçersiz girişi olan bir soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Paneldeki tüm sorularla ilgili olarak bir hata mesajının konumunu ayarlar. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "Paneli seçili sayfanın sonuna yeniden konumlandırır."
@@ -2599,13 +2599,13 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Önizleme sayfasını tüm sorularla veya yalnızca yanıtlanmış sorularla etkinleştirin."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "Anketteki tüm sorular için geçerlidir. Bu ayar, panel, sayfa veya soru gibi daha düşük düzeylerdeki başlık hizalama kuralları tarafından geçersiz kılınabilir. Daha düşük düzeydeki bir ayar, daha yüksek düzeydeki ayarları geçersiz kılar."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "Bir yanıtın gerekli olduğunu gösteren bir sembol veya sembol dizisi."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "Bir yanıtın gerekli olduğunu gösteren bir sembol veya sembol dizisi."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "Numaralandırmaya başlamak istediğiniz sayıyı veya harfi girin."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "Her sayfadaki ilk giriş alanının metin girişi için hazır olmasını istiyorsanız seçin."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Soruların orijinal sırasını korur veya rastgele hale getirir. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "Her sayfadaki ilk giriş alanının metin girişi için hazır olmasını istiyorsanız seçin."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Soruların orijinal sırasını korur veya rastgele hale getirir. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür."
 // pehelp.maxTextLength: "For text entry questions only." => "Yalnızca metin girişi soruları için."
-// pehelp.maxOthersLength: "For question comments only." => "Yalnızca soru yorumları içindir."
+// pehelp.maxCommentLength: "For question comments only." => "Yalnızca soru yorumları içindir."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "Soru yorumlarının ve Uzun Metin sorularının yüksekliğinin girilen metin uzunluğuna göre otomatik olarak büyümesini istiyorsanız seçin."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "Yalnızca soru yorumları ve Uzun Metin soruları için."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "Özelleştirilebilir değişkenler, form hesaplamalarında kullanılan ara veya yardımcı değişkenler olarak işlev görür. Yanıtlayan girdilerini kaynak değerler olarak alırlar. Her özelleştirilebilen değişkenin benzersiz bir adı ve temel aldığı bir ifadesi vardır."
@@ -2636,7 +2636,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Bu sayfadaki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular veya paneller için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\")."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\")."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Şunlar arasından seçim yapın: \"Kilitli\" - kullanıcılar panelleri genişletemez veya daraltamaz; \"Tümünü daralt\" - tüm paneller daraltılmış durumda başlar; \"Tümünü genişlet\" - tüm paneller genişletilmiş bir durumda başlar; \"İlk genişletildi\" - başlangıçta yalnızca ilk panel genişletilir."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Seçim listesinde görüntülemek istediğiniz görüntü veya video dosyası URL'lerini içeren nesne dizisi içinde paylaşılan bir özellik adı girin."
@@ -2665,7 +2665,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "Dosya silme işlemini onaylamanızı isteyen bir istemi tetikler."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Yalnızca seçilen seçenekleri sıralamak için etkinleştirin. Kullanıcılar, sıralama alanı içinde sıralamak için seçim listesinden seçilen öğeleri sürükleyecektir."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Giriş sırasında yanıtlayana önerilecek seçeneklerin bir listesini girin."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Bu ayar yalnızca giriş alanlarını yeniden boyutlandırır ve soru kutusunun genişliğini etkilemez."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Bu ayar yalnızca giriş alanlarını yeniden boyutlandırır ve soru kutusunun genişliğini etkilemez."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Piksel cinsinden tüm öğe etiketleri için tutarlı genişlik ayarlar"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"Otomatik\" seçeneği, sağlanan kaynak URL'ye göre görüntüleme için uygun modu (Resim, Video veya YouTube) otomatik olarak belirler."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Görüntü, kullanıcının cihazında görüntülenemediğinde ve erişilebilirlik amacıyla yedek olarak görev yapar."
@@ -2678,8 +2678,8 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // p.itemTitleWidth: "Item label width (in px)" => "Öğe etiketi genişliği (piksel cinsinden)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tüm seçeneklerin seçili olup olmadığını gösteren metin"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Derecelendirme alanı için yer tutucu metin"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Anketi otomatik olarak tamamlama"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Anketi otomatik olarak tamamlama"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "Anket sonuçlarında maskelenmiş değeri kaydetme"
 // patternmask.pattern: "Value pattern" => "Değer örüntüsü"
 // datetimemask.min: "Minimum value" => "Minimum değer"
@@ -2904,7 +2904,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // names.default-dark: "Dark" => "Koyu"
 // names.default-contrast: "Contrast" => "Karşıtlık"
 // panel.showNumber: "Number this panel" => "Bu paneli numaralandırın"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Bu özellik, sayfadaki son soru açık uçluysa veya birden fazla yanıta izin veriyorsa uygulanmaz."
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Bu özellik, sayfadaki son soru açık uçluysa veya birden fazla yanıta izin veriyorsa uygulanmaz."
 // autocomplete.name: "Full Name" => "Adınız ve Soyadınız"
 // autocomplete.honorific-prefix: "Prefix" => "Önek"
 // autocomplete.given-name: "First Name" => "Ad"

@@ -296,7 +296,7 @@ export var mnStrings = {
       description: "Панел дүрслэл",
       visibleIf: "Хэрэв панелыг ил гаргах",
       requiredIf: "Шаардлагатай бол панел хий",
-      questionsOrder: "Хяналтын шатны доторх асуултын дараалал",
+      questionOrder: "Хяналтын шатны доторх асуултын дараалал",
       page: "Эх хуудас",
       startWithNewLine: "Самбарыг шинэ шугам дээр үзүүл",
       state: "Панел нурах байдал",
@@ -327,7 +327,7 @@ export var mnStrings = {
       hideNumber: "Хавтангийн дугаарыг нуух",
       titleLocation: "Панел цолны зохицуулалт",
       descriptionLocation: "Панел дүрслэлийн зохицуулалт",
-      templateTitleLocation: "Асуулт нэрийн уялдаа",
+      templateQuestionTitleLocation: "Асуулт нэрийн уялдаа",
       templateErrorLocation: "Алдааны мессежийн зохицуулалт",
       newPanelPosition: "Шинэ панелийн байршил",
       showRangeInProgress: "Хөгжил дэвшлийн барыг харуул",
@@ -394,7 +394,7 @@ export var mnStrings = {
       visibleIf: "Хуудсыг ил тод болгох",
       requiredIf: "Шаардлагатай хуудсыг хий",
       timeLimit: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)",
-      questionsOrder: "Асуулт самбар хуудсан дээр"
+      questionOrder: "Асуулт самбар хуудсан дээр"
     },
     matrixdropdowncolumn: {
       name: "Баганын нэр",
@@ -560,7 +560,7 @@ export var mnStrings = {
     isRequired: "Заавал бөглөх",
     markRequired: "Шаардлагын дагуу тэмдэглэгээ хийх",
     removeRequiredMark: "Шаардлагатай тэмдэглэгээг хасах",
-    isAllRowRequired: "Бүх мөрөнд хариулт шаардах",
+    eachRowRequired: "Бүх мөрөнд хариулт шаардах",
     eachRowUnique: "Дараалалд хувилж хариу үйлдэл үзүүлэхээс сэргийлнэ",
     requiredErrorText: "Заавал бөглөх талбарыг бөглөөгүй байна",
     startWithNewLine: "Асуултыг шинэ мөрөнд харуулах",
@@ -572,7 +572,7 @@ export var mnStrings = {
     maxSize: "Файлын дээд хэмжээ (байтаар)",
     rowCount: "Мөрний тоо",
     columnLayout: "Баганы зохион байгуулалт",
-    addRowLocation: "Мөр нэмэх товчны байршил",
+    addRowButtonLocation: "Мөр нэмэх товчны байршил",
     transposeData: "Багануудад транспозын эгнээ",
     addRowText: "Мөр нэмэх",
     removeRowText: "Мөр устгах",
@@ -611,7 +611,7 @@ export var mnStrings = {
     mode: "Засах боломжтой эсвэл зөвхөн унших",
     clearInvisibleValues: "Харагдахгүй утгыг цэвэрлэх",
     cookieName: "Cookie name",
-    sendResultOnPageNext: "Хэсэгчилсэн санал асуулгын явцыг хадгалах",
+    partialSendEnabled: "Хэсэгчилсэн санал асуулгын явцыг хадгалах",
     storeOthersAsComment: "Бусад утгыг тусдаа талбарт хадгалах",
     showPageTitles: "Хуудасны гарчиг харуулах",
     showPageNumbers: "Хуудасны тоо харуулах",
@@ -623,18 +623,18 @@ export var mnStrings = {
     startSurveyText: "Санал асуулга эхлэх үед харагдах бичиг",
     showNavigationButtons: "Чиглүүлгийн товчийн байрлал",
     showPrevButton: "Өмнөх хуудасны товч харуулах",
-    firstPageIsStarted: "Эхлэх хуудас нь эхний хуудас байна",
-    showCompletedPage: "Санал асуулга амжилттай бөглөгдсөн хуудсыг харуулах",
-    goNextPageAutomatic: "Дараагийн хуудас руу автоматаар шилжих",
-    allowCompleteSurveyAutomatic: "Судалгааг автоматаар дуусгах",
+    firstPageIsStartPage: "Эхлэх хуудас нь эхний хуудас байна",
+    showCompletePage: "Санал асуулга амжилттай бөглөгдсөн хуудсыг харуулах",
+    autoAdvanceEnabled: "Дараагийн хуудас руу автоматаар шилжих",
+    autoAdvanceAllowComplete: "Судалгааг автоматаар дуусгах",
     showProgressBar: "Явцын мөрний байршил",
     questionTitleLocation: "Асуултын гарчгийн байршил",
     questionTitleWidth: "Асуулт нэрийн өргөн",
-    requiredText: "Шаардлагатай тэмдэг(үүд)",
+    requiredMark: "Шаардлагатай тэмдэг(үүд)",
     questionTitleTemplate: "Асуултын гарчигны загвар, үндсэн нь: '{үгүй}. {шаардах} {гарчиг}'",
     questionErrorLocation: "Алдааны мэдэгдлийн байршил",
-    focusFirstQuestionAutomatic: "Эхний асуултыг шинэ хуудсанд төвлөрүүлэх",
-    questionsOrder: "Хуудас дээрх элементийн дараалал",
+    autoFocusFirstQuestion: "Эхний асуултыг шинэ хуудсанд төвлөрүүлэх",
+    questionOrder: "Хуудас дээрх элементийн дараалал",
     timeLimit: "Санал асуулга бөглөж дуусах хугацаа (секундээр)",
     timeLimitPerPage: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)",
     showTimer: "Цаг хэмжигч ашигла",
@@ -651,7 +651,7 @@ export var mnStrings = {
     dataFormat: "Зургийн формат",
     allowAddRows: "Мөр нэмэхийг зөвшөөрөх",
     allowRemoveRows: "Мөр хасахыг зөвшөөрөх",
-    allowRowsDragAndDrop: "Мөр чирэхийг зөвшөөрөх",
+    allowRowReorder: "Мөр чирэхийг зөвшөөрөх",
     responsiveImageSizeHelp: "Зургийн өндөр, өргөнийг зааж өгсөн үед хамаарахгүй.",
     minImageWidth: "Зургийн өргөний хамгийн бага хэмжээ",
     maxImageWidth: "Зургийн өргөний хамгийн их хэмжээ",
@@ -678,13 +678,13 @@ export var mnStrings = {
     logo: "Лого (URL эсвэл base64 кодлосон мөр)",
     questionsOnPageMode: "Санал асуулгын бүтэц",
     maxTextLength: "Хариултын хамгийн их урт(тэмдэгтээр)",
-    maxOthersLength: "Хариултын хамгийн бага урт(тэмдэгтээр)",
+    maxCommentLength: "Хариултын хамгийн бага урт(тэмдэгтээр)",
     commentAreaRows: "Тайлбар хэсгийн өндөр (мөрөнд)",
     autoGrowComment: "Шаардлагатай үед санал сэтгэгдлийн хэсгийг өргөсгөх",
     allowResizeComment: "Хэрэглэгчдэд текстийн газруудыг дахин ашиглах боломж олго",
     textUpdateMode: "Текст асуултын утгыг шинэчлэх",
     maskType: "Оролтын багны төрөл",
-    focusOnFirstError: "Анхны буруу хариулт руу чиглүүлэх",
+    autoFocusFirstError: "Анхны буруу хариулт руу чиглүүлэх",
     checkErrorsMode: "Баталгаажуулалт ажиллуулах",
     validateVisitedEmptyFields: "Алдагдсан фокус дээр хоосон талбайг баталгаажуулах",
     navigateToUrl: "URL-рүү чиглүүлэх",
@@ -742,12 +742,12 @@ export var mnStrings = {
     keyDuplicationError: "Давтагдсан утга! алдааны мэдэгдэл",
     minSelectedChoices: "Хамгийн бага сонгосон сонголт",
     maxSelectedChoices: "Хамгийн ихдээ сонгох боломжийн тоо",
-    showClearButton: "Цэвэрлэх товч харуулах",
+    allowClear: "Цэвэрлэх товч харуулах",
     logoWidth: "Логоны өргөн (CSS хүлээн зөвшөөрсөн утга)",
     logoHeight: "Логөны өндөр (CSS хүлээн зөвшөөрсөн утга)",
     readOnly: "Зөвхөн унших",
     enableIf: "Засах боломжтой хэрэв",
-    emptyRowsText: "\"Мөр байхгүй байна!\" мэдэгдэл",
+    noRowsText: "\"Мөр байхгүй байна!\" мэдэгдэл",
     separateSpecialChoices: "Тусгай сонголтуудыг салгах (Аль нь ч биш, Бусад, Бүгдийг сонгох)",
     choicesFromQuestion: "Дараах асуултаас сонголтуудыг хуулах.",
     choicesFromQuestionMode: "Аль сонголтуудыг хуулах вэ?",
@@ -756,7 +756,7 @@ export var mnStrings = {
     showCommentArea: "Санал хүсэлтийн хэсэг харуулах",
     commentPlaceholder: "Санал хүсэлтийн хэсэг",
     displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values",
-    rowsOrder: "Мөрний дараалал",
+    rowOrder: "Мөрний дараалал",
     columnsLayout: "Баганы зохион байгуулалт",
     columnColCount: "Шаталсан баганын тоо",
     correctAnswer: "Зөв хариулт",
@@ -1120,7 +1120,7 @@ export var mnStrings = {
     timerInfoMode: {
       combined: "Аль аль нь"
     },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "Матрицын загвараас шалтгаалах"
     },
     panelsState: {
@@ -1191,10 +1191,10 @@ export var mnStrings = {
       percent: "Хувь",
       date: "Огноо"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "Оргил"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "Оргил"
     },
     showProgressBar: {
@@ -1345,7 +1345,7 @@ export var mnStrings = {
       questionTitleLocation: "Энэ хэлэлцүүлгийн бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуултуудад зориулсан нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг.",
       questionTitleWidth: "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
       questionErrorLocation: "Хяналтын шатны бүх асуулттай холбогдуулан алдааны мессежийн байршлыг тогтооно. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
-      questionsOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
+      questionOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
       page: "Сонгосон хуудасны төгсгөлд панелийг дахин байршуулах.",
       innerIndent: "Панелийн агуулга болон панелийн хайрцагны зүүн хилийн хооронд зай эсвэл зай нэмнэ.",
       startWithNewLine: "Өмнөх асуулт эсвэл панелтай нэг мөрт үзүүлэхээр сонгогдоогүй. Хэрэв панел нь таны маягт дахь анхны элемент бол тохиргоо хамаарахгүй.",
@@ -1359,7 +1359,7 @@ export var mnStrings = {
       visibleIf: "Ид шидийн wand зургыг ашиглан панелийн харагдах байдлыг тодорхойлох нөхцөлийн дүрмийг тогтоо.",
       enableIf: "Зөвхөн унших хэв маягийг хаах нөхцөлтэй дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
       requiredIf: "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
-      templateTitleLocation: "Энэ хэлэлцүүлгийн бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуултуудад зориулсан нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг.",
+      templateQuestionTitleLocation: "Энэ хэлэлцүүлгийн бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуултуудад зориулсан нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг.",
       templateErrorLocation: "Алдааны мессежийн байршлыг хүчингүй оруулсан асуулттай холбон тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг.",
       errorLocation: "Хяналтын шатны бүх асуулттай холбогдуулан алдааны мессежийн байршлыг тогтооно. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
       page: "Сонгосон хуудасны төгсгөлд панелийг дахин байршуулах.",
@@ -1449,19 +1449,19 @@ export var mnStrings = {
     logoWidth: "CSS нэгж (px, %, in, pt, гэх мэт) дээр логоны өргөнийг тогтооно.",
     logoHeight: "CSS нэгж (px, %, in, pt г.м) дээр логоны өндрийг тогтооно.",
     logoFit: "Сонгоно уу: \"None\" - зураг анхны хэмжээгээ хадгалдаг; \"Агуулах\" - дүрсийг тал харьцаагаа хадгалахын зэрэгцээ тохируулахын тулд дахин тохируулдаг; \"Cover\" - дүрс нь тал харьцаагаа хадгалахын зэрэгцээ хайрцгийг бүхэлд нь дүүргэдэг; \"Fill\" - дүрс нь тал харьцаагаа хадгалахгүйгээр хайрцгийг дүүргэхийн тулд сунаж тогтсон.",
-    goNextPageAutomatic: "Оролцогч одоогийн хуудсан дээрх бүх асуултад хариулсны дараа судалгааг дараагийн хуудас руу автоматаар шилжүүлэхийг хүсч байгаа эсэхээ сонго. Хуудасны хамгийн сүүлийн асуулт нээлттэй эсвэл олон хариулт өгөх боломж олгодог бол энэ онцлог хэрэгжихгүй.",
-    allowCompleteSurveyAutomatic: "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго.",
+    autoAdvanceEnabled: "Оролцогч одоогийн хуудсан дээрх бүх асуултад хариулсны дараа судалгааг дараагийн хуудас руу автоматаар шилжүүлэхийг хүсч байгаа эсэхээ сонго. Хуудасны хамгийн сүүлийн асуулт нээлттэй эсвэл олон хариулт өгөх боломж олгодог бол энэ онцлог хэрэгжихгүй.",
+    autoAdvanceAllowComplete: "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго.",
     showNavigationButtons: "Хуудас дээр навигацийн товчны харагдах байдал, байршлыг тогтооно.",
     showProgressBar: "Хэмжилтийн тавцангийн харагдах байдал, байршлыг тогтооно. \"Авто\" үнэ цэнэ нь судалгааны толгой гарчгийн дээр эсвэл түүнээс доош хөгжил дэвшлийн барыг харуулдаг.",
     showPreviewBeforeComplete: "Зөвхөн бүх асуултаар эсвэл хариулт бүхий урьдчилан харах хуудсыг боломжтой болго.",
     questionTitleLocation: "Судалгааны бүх асуултад хамаарна. Энэ тохиргоог доод түвшний нэрийн зохицуулах дүрмээр давамгайлах боломжтой: panel, хуудас, эсвэл асуулт. Доод түвшний тохиргоо нь илүү өндөр түвшинд байгаа хүмүүсийг хүчингүй болгоно.",
-    requiredText: "Хариу шаардлагатайг заасан бэлгэдэл буюу бэлгэ тэмдгийн дараалал.",
+    requiredMark: "Хариу шаардлагатайг заасан бэлгэдэл буюу бэлгэ тэмдгийн дараалал.",
     questionStartIndex: "Дугаарлахыг хүссэн дугаар эсвэл захидлаа оруул.",
     questionErrorLocation: "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна.",
-    focusFirstQuestionAutomatic: "Текст оруулахад бэлэн болсон хуудас бүр дээрх эхний оролтын талбарыг хүсвэл сонгоно уу.",
-    questionsOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
+    autoFocusFirstQuestion: "Текст оруулахад бэлэн болсон хуудас бүр дээрх эхний оролтын талбарыг хүсвэл сонгоно уу.",
+    questionOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
     maxTextLength: "Зөвхөн текст оруулах асуултуудад зориулна.",
-    maxOthersLength: "Асуулт хариултын хувьд зөвхөн.",
+    maxCommentLength: "Асуулт хариултын хувьд зөвхөн.",
     commentAreaRows: "Асуулт хариултын текст хэсэгт үзүүлсэн мөрүүдийн тоог тогтоо. Хуйлмал бичиг нь илүү олон мөртэй байдаг.",
     autoGrowComment: "Асуулт хариулт болон Урт Текст асуултыг орсон текст урт дээр үндэслэн өндрөөс автоматаар өсгөхийг хүсвэл сонгоно уу.",
     allowResizeComment: "Асуулт хариулт болон Урт текстийн асуултуудад зөвхөн.",
@@ -1498,7 +1498,7 @@ export var mnStrings = {
       questionTitleLocation: "Энэ хуудсан дахь бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуулт эсвэл панелуудын нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг.",
       questionTitleWidth: "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
       questionErrorLocation: "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг.",
-      questionsOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
+      questionOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
       navigationButtonsVisibility: "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
     },
     timerLocation: "Хуудас дээрх цаг хэмжигчийн байрлалыг тогтооно.",
@@ -1535,7 +1535,7 @@ export var mnStrings = {
     needConfirmRemoveFile: "Файлын устгалыг батлахыг хүссэн өдөөлтийг өдөөж байна.",
     selectToRankEnabled: "Зөвхөн сонгосон сонголтуудыг зэрэгцүүлэх боломжийг олгоно. Хэрэглэгчид сонгосон зүйлсийг сонгосон жагсаалтаас чирч, зэрэглэлийн бүс дотор тушаана.",
     dataList: "Санал болгох сонголтуудын жагсаалтыг оруулах үед хариулагчид санал болгох болно.",
-    itemSize: "Тохиргоо нь зөвхөн оролтын талбаруудыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй.",
+    inputSize: "Тохиргоо нь зөвхөн оролтын талбаруудыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй.",
     itemTitleWidth: "Пикселд бүх зүйлийн шошгоны тогтмол өргөнийг тогтоох",
     inputTextAlignment: "Талбар доторх оролтын үнэ цэнийг хэрхэн уялдуулахыг сонго. \"Авто\" гэсэн дефолт тохиргоо нь валют эсвэл тоон маск хэрэглэх бол оролтын үнэ цэнийг баруун тийш, хэрэв үгүй бол зүүн тийш нь уялдуулна.",
     altText: "Хэрэглэгчийн төхөөрөмж дээр болон хүртээмжийн зорилгоор дүрсийг харуулах боломжгүй үед орлуулагчаар үйлчилнэ.",
@@ -1653,7 +1653,7 @@ export var mnStrings = {
     maxValueExpression: "Хамгийн их утгын илэрхийлэл",
     step: "Алхам",
     dataList: "Өгөгдлийн жагсаалт",
-    itemSize: "Элементийн хэмжээ",
+    inputSize: "Элементийн хэмжээ",
     itemTitleWidth: "Барааны шошгоны өргөн (px-д)",
     inputTextAlignment: "Оролтын үнэ цэнийн зохицуулалт",
     elements: "Элементүүд",
@@ -2032,7 +2032,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // panel.description: "Panel description" => "Панел дүрслэл"
 // panel.visibleIf: "Make the panel visible if" => "Хэрэв панелыг ил гаргах"
 // panel.requiredIf: "Make the panel required if" => "Шаардлагатай бол панел хий"
-// panel.questionsOrder: "Question order within the panel" => "Хяналтын шатны доторх асуултын дараалал"
+// panel.questionOrder: "Question order within the panel" => "Хяналтын шатны доторх асуултын дараалал"
 // panel.startWithNewLine: "Display the panel on a new line" => "Самбарыг шинэ шугам дээр үзүүл"
 // panel.state: "Panel collapse state" => "Панел нурах байдал"
 // panel.width: "Inline panel width" => "Инлин хавтан өргөн"
@@ -2057,7 +2057,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // paneldynamic.hideNumber: "Hide the panel number" => "Хавтангийн дугаарыг нуух"
 // paneldynamic.titleLocation: "Panel title alignment" => "Панел цолны зохицуулалт"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "Панел дүрслэлийн зохицуулалт"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "Асуулт нэрийн уялдаа"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "Асуулт нэрийн уялдаа"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "Алдааны мессежийн зохицуулалт"
 // paneldynamic.newPanelPosition: "New panel location" => "Шинэ панелийн байршил"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "Дараах асуултад хувилж хариулахаас сэргийлье"
@@ -2090,7 +2090,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // page.description: "Page description" => "Хуудасны тодорхойлолт"
 // page.visibleIf: "Make the page visible if" => "Хуудсыг ил тод болгох"
 // page.requiredIf: "Make the page required if" => "Шаардлагатай хуудсыг хий"
-// page.questionsOrder: "Question order on the page" => "Асуулт самбар хуудсан дээр"
+// page.questionOrder: "Question order on the page" => "Асуулт самбар хуудсан дээр"
 // matrixdropdowncolumn.name: "Column name" => "Баганын нэр"
 // matrixdropdowncolumn.title: "Column title" => "Баганын нэр"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "Хуулбарласан хариу үйлдэл үзүүлэхээс сэргийлье"
@@ -2164,8 +2164,8 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // totalDisplayStyle.currency: "Currency" => "Валютын ханш"
 // totalDisplayStyle.percent: "Percentage" => "Хувь"
 // totalDisplayStyle.date: "Date" => "Огноо"
-// rowsOrder.initial: "Original" => "Оргил"
-// questionsOrder.initial: "Original" => "Оргил"
+// rowOrder.initial: "Original" => "Оргил"
+// questionOrder.initial: "Original" => "Оргил"
 // showProgressBar.aboveheader: "Above the header" => "Толгой дээгүүр"
 // showProgressBar.belowheader: "Below the header" => "Гарчигны доор"
 // pv.sum: "Sum" => "Сум"
@@ -2182,7 +2182,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Энэ хэлэлцүүлгийн бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуултуудад зориулсан нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Хяналтын шатны бүх асуулттай холбогдуулан алдааны мессежийн байршлыг тогтооно. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг."
 // panel.page: "Repositions the panel to the end of a selected page." => "Сонгосон хуудасны төгсгөлд панелийг дахин байршуулах."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "Панелийн агуулга болон панелийн хайрцагны зүүн хилийн хооронд зай эсвэл зай нэмнэ."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "Өмнөх асуулт эсвэл панелтай нэг мөрт үзүүлэхээр сонгогдоогүй. Хэрэв панел нь таны маягт дахь анхны элемент бол тохиргоо хамаарахгүй."
@@ -2193,7 +2193,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "Ид шидийн wand зургыг ашиглан панелийн харагдах байдлыг тодорхойлох нөхцөлийн дүрмийг тогтоо."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "Зөвхөн унших хэв маягийг хаах нөхцөлтэй дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Энэ хэлэлцүүлгийн бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуултуудад зориулсан нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Энэ хэлэлцүүлгийн бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуултуудад зориулсан нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Алдааны мессежийн байршлыг хүчингүй оруулсан асуулттай холбон тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Хяналтын шатны бүх асуулттай холбогдуулан алдааны мессежийн байршлыг тогтооно. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "Сонгосон хуудасны төгсгөлд панелийг дахин байршуулах."
@@ -2257,13 +2257,13 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Хэмжилтийн тавцангийн харагдах байдал, байршлыг тогтооно. \"Авто\" үнэ цэнэ нь судалгааны толгой гарчгийн дээр эсвэл түүнээс доош хөгжил дэвшлийн барыг харуулдаг."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Зөвхөн бүх асуултаар эсвэл хариулт бүхий урьдчилан харах хуудсыг боломжтой болго."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "Судалгааны бүх асуултад хамаарна. Энэ тохиргоог доод түвшний нэрийн зохицуулах дүрмээр давамгайлах боломжтой: panel, хуудас, эсвэл асуулт. Доод түвшний тохиргоо нь илүү өндөр түвшинд байгаа хүмүүсийг хүчингүй болгоно."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "Хариу шаардлагатайг заасан бэлгэдэл буюу бэлгэ тэмдгийн дараалал."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "Хариу шаардлагатайг заасан бэлгэдэл буюу бэлгэ тэмдгийн дараалал."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "Дугаарлахыг хүссэн дугаар эсвэл захидлаа оруул."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "Текст оруулахад бэлэн болсон хуудас бүр дээрх эхний оролтын талбарыг хүсвэл сонгоно уу."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "Текст оруулахад бэлэн болсон хуудас бүр дээрх эхний оролтын талбарыг хүсвэл сонгоно уу."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана."
 // pehelp.maxTextLength: "For text entry questions only." => "Зөвхөн текст оруулах асуултуудад зориулна."
-// pehelp.maxOthersLength: "For question comments only." => "Асуулт хариултын хувьд зөвхөн."
+// pehelp.maxCommentLength: "For question comments only." => "Асуулт хариултын хувьд зөвхөн."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "Асуулт хариулт болон Урт Текст асуултыг орсон текст урт дээр үндэслэн өндрөөс автоматаар өсгөхийг хүсвэл сонгоно уу."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "Асуулт хариулт болон Урт текстийн асуултуудад зөвхөн."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "Үйлчилгээний хувьсагчид нь форм тооцоололд хэрэглэгддэг дундын буюу туслах хувьсагчид болж үйлчилдэг. Тэд хариулагчийн оруулсан хувь нэмрийг эх сурвалжийн үнэт зүйлс гэж үздэг. Custom хувьсагч бүр өвөрмөц нэртэй, дээр нь суурилсан илэрхийлэлтэй байдаг."
@@ -2294,7 +2294,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Энэ хуудсан дахь бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуулт эсвэл панелуудын нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Сонгоно уу: \"Locked\" - хэрэглэгчид панелуудыг өргөтгөх, нураах боломжгүй; \"Бүх нуралт\" - бүх панел нурсан байдлаас эхэлнэ; \"Бүх хүрээг өргөтгөнө\" - бүх панелууд өргөтгөсөн байдлаас эхэлнэ; \"First expanded\" - зөвхөн эхний панел нь эхэндээ өргөжсөн."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Сонгосон жагсаалтанд харуулахыг хүссэн зураг эсвэл видео файл URL-уудыг агуулсан олон тооны эд зүйлсийн дотор хуваалцсан өмчийн нэрийг оруулна уу."
@@ -2323,7 +2323,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "Файлын устгалыг батлахыг хүссэн өдөөлтийг өдөөж байна."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Зөвхөн сонгосон сонголтуудыг зэрэгцүүлэх боломжийг олгоно. Хэрэглэгчид сонгосон зүйлсийг сонгосон жагсаалтаас чирч, зэрэглэлийн бүс дотор тушаана."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Санал болгох сонголтуудын жагсаалтыг оруулах үед хариулагчид санал болгох болно."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Тохиргоо нь зөвхөн оролтын талбаруудыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Тохиргоо нь зөвхөн оролтын талбаруудыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Пикселд бүх зүйлийн шошгоны тогтмол өргөнийг тогтоох"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"Авто\" сонголт нь эх сурвалж URL-д суурилсан зураг, видео, эсвэл YouTube - харуулах тохиромжтой хэв маягийг автоматаар тодорхойлдог."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Хэрэглэгчийн төхөөрөмж дээр болон хүртээмжийн зорилгоор дүрсийг харуулах боломжгүй үед орлуулагчаар үйлчилнэ."
@@ -2336,8 +2336,8 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // p.itemTitleWidth: "Item label width (in px)" => "Барааны шошгоны өргөн (px-д)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Бүх сонголтыг сонгосон эсэхийг харуулах текст"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Хаягийн бүсэд байрлах газар эзэмшигчийн текст"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Судалгааг автоматаар дуусгах"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Судалгааг автоматаар дуусгах"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "Судалгааны үр дүнд багласан үнэ цэнийг хэмнэх"
 // patternmask.pattern: "Value pattern" => "Үнэ цэнийн загвар"
 // datetimemask.min: "Minimum value" => "Хамгийн бага үнэ цэнэ"
@@ -2562,7 +2562,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // names.default-dark: "Dark" => "Харанхуй"
 // names.default-contrast: "Contrast" => "Эсрэг тэсрэг байдал"
 // panel.showNumber: "Number this panel" => "Энэ хавсралтыг дугаарлах"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Оролцогч одоогийн хуудсан дээрх бүх асуултад хариулсны дараа судалгааг дараагийн хуудас руу автоматаар шилжүүлэхийг хүсч байгаа эсэхээ сонго. Хуудасны хамгийн сүүлийн асуулт нээлттэй эсвэл олон хариулт өгөх боломж олгодог бол энэ онцлог хэрэгжихгүй."
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Оролцогч одоогийн хуудсан дээрх бүх асуултад хариулсны дараа судалгааг дараагийн хуудас руу автоматаар шилжүүлэхийг хүсч байгаа эсэхээ сонго. Хуудасны хамгийн сүүлийн асуулт нээлттэй эсвэл олон хариулт өгөх боломж олгодог бол энэ онцлог хэрэгжихгүй."
 // autocomplete.name: "Full Name" => "Бүтэн нэр"
 // autocomplete.honorific-prefix: "Prefix" => "Угтвар"
 // autocomplete.given-name: "First Name" => "Овог нэр"

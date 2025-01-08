@@ -2415,7 +2415,7 @@ test("Matrix Dynamiv with rows drad-drop", async (t) => {
                 4,
                 5
               ],
-              "allowRowsDragAndDrop": true
+              "allowRowReorder": true
             }
           ]
         }
@@ -2518,7 +2518,7 @@ test("Page hidden header and top toolbar", async (t) => {
 
     await ClientFunction((json) => {
       (window as any).Survey.settings.designMode.showEmptyTitles = false;
-      (window as any).updateCreatorModel({ }, json);
+      (window as any).updateCreatorModel({}, json);
     })(json);
 
     const rootSelector = Selector(".svc-tab-designer");

@@ -75,7 +75,7 @@ export function setSurveyJSONForPropertyGrid(
 ) {
   json.showNavigationButtons = "none";
   json.showPageTitles = false;
-  json.focusFirstQuestionAutomatic = false;
+  json.autoFocusFirstQuestion = false;
   json.showQuestionNumbers = "off";
   if (titleLocationLeft) {
     json.questionTitleLocation = "left";
@@ -84,7 +84,7 @@ export function setSurveyJSONForPropertyGrid(
   if (updateOnTyping) {
     json.textUpdateMode = "onTyping";
   }
-  json.requiredText = "";
+  json.requiredMark = "";
 }
 
 export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
