@@ -742,7 +742,6 @@ export var czStrings = {
     keyDuplicationError: "Zpráva pro chybu \"Klíč není unikátní\"",
     minSelectedChoices: "Minimální vybrané volby",
     maxSelectedChoices: "Maximální počet vybraných možností",
-    allowClear: "Zobrazit tlačítko \"Vymazat\"",
     logoWidth: "Šířka loga (v hodnotách akceptovaných CSS)",
     logoHeight: "Výška loga (v hodnotách akceptovaných CSS)",
     readOnly: "Pouze pro čtení",

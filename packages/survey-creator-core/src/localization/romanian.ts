@@ -742,7 +742,6 @@ export const roStrings = {
     keyDuplicationError: "Mesaj de eroare pentru răspunsuri duplicate",
     minSelectedChoices: "Alegere minimă pentru selectare",
     maxSelectedChoices: "Alegere maximă pentru selectare",
-    allowClear: "Afișează butonul de ștergere",
     logoWidth: "Lățimea logo-ului",
     logoHeight: "Înălțimea logo-ului",
     readOnly: "Doar citire",

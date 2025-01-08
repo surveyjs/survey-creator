@@ -742,7 +742,6 @@ export var turkishStrings = {
     keyDuplicationError: "\"Benzersiz olmayan anahtar değeri\" hata iletisi",
     minSelectedChoices: "Seçilen minimum seçenekler",
     maxSelectedChoices: "Seçilen maksimum seçenek sayısı",
-    allowClear: "Temizleme butonunu göster",
     logoWidth: "Logo genişlik",
     logoHeight: "Logo uzunluk",
     readOnly: "Salt okunur",

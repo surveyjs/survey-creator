@@ -742,7 +742,6 @@ var traditionalChineseTranslation = {
     keyDuplicationError: "“非唯一鍵值”錯誤消息",
     minSelectedChoices: "最少選擇的選項",
     maxSelectedChoices: "最大選定選項數",
-    allowClear: "顯示“清除”按鈕",
     logoWidth: "徽標寬度（以 CSS 接受的值為單位）",
     logoHeight: "徽標高度（以 CSS 接受的值為單位）",
     readOnly: "唯讀",
@@ -2126,7 +2125,6 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "“非唯一鍵值”錯誤消息"
 // pe.minSelectedChoices: "Minimum selected choices" => "最少選擇的選項"
 // pe.maxSelectedChoices: "Maximum selected choices" => "最大選定選項數"
-// pe.allowClear: "Show the Clear button" => "顯示“清除”按鈕"
 // pe.showNumber: "Show panel number" => "顯示面板編號"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "徽標寬度（以 CSS 接受的值為單位）"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "徽標高度（以 CSS 接受的值為單位）"

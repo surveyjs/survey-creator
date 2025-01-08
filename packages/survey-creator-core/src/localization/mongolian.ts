@@ -742,7 +742,6 @@ export var mnStrings = {
     keyDuplicationError: "Давтагдсан утга! алдааны мэдэгдэл",
     minSelectedChoices: "Хамгийн бага сонгосон сонголт",
     maxSelectedChoices: "Хамгийн ихдээ сонгох боломжийн тоо",
-    allowClear: "Цэвэрлэх товч харуулах",
     logoWidth: "Логоны өргөн (CSS хүлээн зөвшөөрсөн утга)",
     logoHeight: "Логөны өндөр (CSS хүлээн зөвшөөрсөн утга)",
     readOnly: "Зөвхөн унших",

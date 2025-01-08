@@ -742,7 +742,6 @@ var simplifiedChineseTranslation = {
     keyDuplicationError: "“非唯一键值”错误消息",
     minSelectedChoices: "最少选择的选项",
     maxSelectedChoices: "最大选定选项数",
-    allowClear: "显示“清除”按钮",
     logoWidth: "徽标宽度（以 CSS 接受的值为单位）",
     logoHeight: "徽标高度（以 CSS 接受的值为单位）",
     readOnly: "只读",
@@ -2054,7 +2053,6 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "“非唯一键值”错误消息"
 // pe.minSelectedChoices: "Minimum selected choices" => "最少选择的选项"
 // pe.maxSelectedChoices: "Maximum selected choices" => "最大选定选项数"
-// pe.allowClear: "Show the Clear button" => "显示“清除”按钮"
 // pe.showNumber: "Show panel number" => "显示面板编号"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "徽标宽度（以 CSS 接受的值为单位）"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "徽标高度（以 CSS 接受的值为单位）"

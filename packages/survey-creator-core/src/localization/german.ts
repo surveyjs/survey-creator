@@ -742,7 +742,6 @@ var germanTranslation = {
     keyDuplicationError: "Fehlermeldung bei doppelter Beantwortung",
     minSelectedChoices: "Mindestanzahl an Auswahlmöglichkeiten",
     maxSelectedChoices: "Maximum an Auswahlmöglichkeiten",
-    allowClear: "Schaltfläche \"Löschen\" anzeigen",
     logoWidth: "Logobreite",
     logoHeight: "Logohöhe",
     readOnly: "Schreibgeschützt",

@@ -742,7 +742,6 @@ export var hebrewStrings = {
     keyDuplicationError: "הודעת שגיאה: 'ערך המפתח אינו ייחודי'",
     minSelectedChoices: "מספר הבחירות המינימלי",
     maxSelectedChoices: "מספר הבחירות המקסימלי",
-    allowClear: "הצג את לחצן הניקוי",
     logoWidth: "רוחב הלוגו (בערכים שמקובלים ב- CSS)",
     logoHeight: "גובה הלוגו (בערכים שמקובלים ב- CSS)",
     readOnly: "קריאה בלבד",

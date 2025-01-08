@@ -697,7 +697,6 @@ export var arStrings = {
     autocomplete: "نوع الإكمال التلقائي",
     labelTrue: "تسمية \"صحيح\"",
     labelFalse: "تسمية \"خطأ\"",
-    allowClear: "Show options caption",
     searchMode: "وضع البحث",
     displayStyle: "نمط عرض القيمة",
     format: "سلسلة منسقة",

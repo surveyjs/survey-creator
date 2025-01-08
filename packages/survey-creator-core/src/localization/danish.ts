@@ -742,7 +742,6 @@ export var danishStrings = {
     keyDuplicationError: "Fejlmeddelelsen \"Ikke-entydig nøgleværdi\"",
     minSelectedChoices: "Minimum valgte valg",
     maxSelectedChoices: "Maksimalt antal valgte valg",
-    allowClear: "Vis knappen Ryd",
     logoWidth: "Logobredde (i CSS-accepterede værdier)",
     logoHeight: "Logohøjde (i CSS-accepterede værdier)",
     readOnly: "Skrivebeskyttet",
@@ -2095,7 +2094,6 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Fejlmeddelelsen \"Ikke-entydig nøgleværdi\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Minimum valgte valg"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maksimalt antal valgte valg"
-// pe.allowClear: "Show the Clear button" => "Vis knappen Ryd"
 // pe.showNumber: "Show panel number" => "Vis panelnummer"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Logobredde (i CSS-accepterede værdier)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Logohøjde (i CSS-accepterede værdier)"

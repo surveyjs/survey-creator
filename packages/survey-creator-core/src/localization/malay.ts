@@ -742,7 +742,6 @@ export var msStrings = {
     keyDuplicationError: "Mesej ralat \"Nilai kunci bukan unik\"",
     minSelectedChoices: "Pilihan minimum yang dipilih",
     maxSelectedChoices: "Pilihan maksimum yang dipilih",
-    allowClear: "Tunjukkan butang Kosongkan",
     logoWidth: "Lebar logo (dalam nilai diterima CSS)",
     logoHeight: "Ketinggian logo (dalam nilai diterima CSS)",
     readOnly: "Baca sahaja",

@@ -742,7 +742,6 @@ export var jaStrings = {
     keyDuplicationError: "\"一意でないキー値\" エラー メッセージ",
     minSelectedChoices: "選択される最小選択肢",
     maxSelectedChoices: "最大選択選択肢数",
-    allowClear: "[クリア] ボタンを表示する",
     logoWidth: "ロゴの幅 (CSS で受け入れられる値)",
     logoHeight: "ロゴの高さ (CSS で受け入れられる値)",
     readOnly: "読み取り専用",

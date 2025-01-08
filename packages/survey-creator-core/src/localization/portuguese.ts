@@ -742,7 +742,6 @@ var portugueseTranslation = {
     keyDuplicationError: "\"Valor de chave não exclusivo\" mensagem de erro",
     minSelectedChoices: "Mínimo de opções selecionadas",
     maxSelectedChoices: "Máximo de escolhas selecionadas",
-    allowClear: "Mostrar o botão Limpar",
     logoWidth: "Largura do logotipo (em valores aceitos pelo CSS)",
     logoHeight: "Altura do logotipo (em valores aceitos pelo CSS)",
     readOnly: "Apenas para leitura",

@@ -742,7 +742,6 @@ var spanishTranslation = {
     keyDuplicationError: "Mensaje de error \"Valor de clave no único\"",
     minSelectedChoices: "Opciones mínimas seleccionadas",
     maxSelectedChoices: "Número máximo de opciones seleccionadas",
-    allowClear: "Mostrar el botón Limpiar",
     logoWidth: "Ancho de Logo (en valores aceptados CSS)",
     logoHeight: "Alto de Logo (en valores aceptados CSS)",
     readOnly: "Sólo-lectura",

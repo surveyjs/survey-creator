@@ -742,7 +742,6 @@ export var ruStrings = {
     keyDuplicationError: "Сообщение об ошибке \"Неуникальное значение ключа\"",
     minSelectedChoices: "Минимальное количество выбранных вариантов",
     maxSelectedChoices: "Максимальное количество выбранных вариантов",
-    allowClear: "Показать кнопку «Очистить»",
     logoWidth: "Ширина логотипа (в значениях, принимаемых CSS)",
     logoHeight: "Высота логотипа (в значениях, принимаемых CSS)",
     readOnly: "Только для чтения",
@@ -1997,7 +1996,6 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Сообщение об ошибке \"Неуникальное значение ключа\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Минимальное количество выбранных вариантов"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Максимальное количество выбранных вариантов"
-// pe.allowClear: "Show the Clear button" => "Показать кнопку «Очистить»"
 // pe.showNumber: "Show panel number" => "Показать номер панели"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Ширина логотипа (в значениях, принимаемых CSS)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Высота логотипа (в значениях, принимаемых CSS)"

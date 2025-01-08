@@ -742,7 +742,6 @@ export var bgStrings = {
     keyDuplicationError: "\"Неуникална стойност на ключ\" съобщение за грешка",
     minSelectedChoices: "Минимален избор",
     maxSelectedChoices: "Максимален брой избрани",
-    allowClear: "Показване на бутона Изчистване (Clear)",
     logoWidth: "Широчина на логото (в CSS-допустими стойности)",
     logoHeight: "Височина на логото (в CSS-допустими стойности)",
     readOnly: "Само за четене",

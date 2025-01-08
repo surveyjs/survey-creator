@@ -742,7 +742,6 @@ export var nbStrings = {
     keyDuplicationError: "Feilmeldingen \"Ikke-unik nøkkelverdi\"",
     minSelectedChoices: "Minimum valgte valg",
     maxSelectedChoices: "Maksimalt antall merkede valg",
-    allowClear: "Vis Fjern-knappen",
     logoWidth: "Logobredde (i CSS-godkjente verdier)",
     logoHeight: "Logohøyde (i CSS-godkjente verdier)",
     readOnly: "Skrivebeskyttet",
@@ -1953,7 +1952,6 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Feilmeldingen \"Ikke-unik nøkkelverdi\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Minimum valgte valg"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maksimalt antall merkede valg"
-// pe.allowClear: "Show the Clear button" => "Vis Fjern-knappen"
 // pe.showNumber: "Show panel number" => "Vis panelnummer"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Logobredde (i CSS-godkjente verdier)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Logohøyde (i CSS-godkjente verdier)"

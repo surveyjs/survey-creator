@@ -742,7 +742,6 @@ var persianStrings = {
     keyDuplicationError: "پیام خطای \"مقدار کلید غیر منحصر به فرد\"",
     minSelectedChoices: "حداقل انتخاب های انتخاب شده",
     maxSelectedChoices: "حداکثر انتخابهای انتخاب شده",
-    allowClear: "نشان دادن دکمهی Clear",
     logoWidth: "عرض لوگو (در مقادیر پذیرفته شده CSS)",
     logoHeight: "ارتفاع لوگو (در مقادیر پذیرفته شده CSS)",
     readOnly: "فقط خواندنی",
@@ -1912,7 +1911,6 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "پیام خطای \"مقدار کلید غیر منحصر به فرد\""
 // pe.minSelectedChoices: "Minimum selected choices" => "حداقل انتخاب های انتخاب شده"
 // pe.maxSelectedChoices: "Maximum selected choices" => "حداکثر انتخابهای انتخاب شده"
-// pe.allowClear: "Show the Clear button" => "نشان دادن دکمهی Clear"
 // pe.showNumber: "Show panel number" => "نمایش شماره پانل"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "عرض لوگو (در مقادیر پذیرفته شده CSS)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "ارتفاع لوگو (در مقادیر پذیرفته شده CSS)"

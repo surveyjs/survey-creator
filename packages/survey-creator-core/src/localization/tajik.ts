@@ -739,7 +739,6 @@ export var tgStrings = {
     // keyDuplicationError: "Error message for duplicate responses",
     // minSelectedChoices: "Minimum choices to select",
     // maxSelectedChoices: "Maximum choices to select",
-    // allowClear: "Show the Clear button",
     // logoWidth: "Logo width",
     // logoHeight: "Logo height",
     // readOnly: "Read-only",

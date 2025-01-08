@@ -742,7 +742,6 @@ export var nlStrings = {
     keyDuplicationError: "Foutbericht 'Niet-unieke sleutelwaarde'",
     minSelectedChoices: "Minimaal geselecteerde keuzes",
     maxSelectedChoices: "Maximum aantal geselecteerde keuzes",
-    allowClear: "De knop Wissen weergeven",
     logoWidth: "Breedte logo",
     logoHeight: "Hoogte logo",
     readOnly: "Alleen-lezen",
@@ -1947,7 +1946,6 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Foutbericht 'Niet-unieke sleutelwaarde'"
 // pe.minSelectedChoices: "Minimum selected choices" => "Minimaal geselecteerde keuzes"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maximum aantal geselecteerde keuzes"
-// pe.allowClear: "Show the Clear button" => "De knop Wissen weergeven"
 // pe.showNumber: "Show panel number" => "Toon paneelnummer"
 // pe.readOnly: "Read-only" => "Alleen-lezen"
 // pe.enableIf: "Editable if" => "Bewerkbaar als"

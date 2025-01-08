@@ -742,7 +742,6 @@ var frenchTranslation = {
     keyDuplicationError: "Message d’erreur « Valeur de clé non unique »",
     minSelectedChoices: "Nombre minimum de choix sélectionnables",
     maxSelectedChoices: "Nombre maximal de choix sélectionnables",
-    allowClear: "Afficher le bouton Effacer",
     logoWidth: "Largeur du logo (en valeurs acceptées par CSS)",
     logoHeight: "Hauteur du logo (en valeurs acceptées par CSS)",
     readOnly: "Lecture seule",
@@ -1989,7 +1988,6 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Message d’erreur « Valeur de clé non unique »"
 // pe.minSelectedChoices: "Minimum selected choices" => "Choix minimum sélectionnés"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Nombre maximal de choix sélectionnés"
-// pe.allowClear: "Show the Clear button" => "Afficher le bouton Effacer"
 // pe.showNumber: "Show panel number" => "Afficher le numéro du panneau"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Largeur du logo (en valeurs acceptées par CSS)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Hauteur du logo (en valeurs acceptées par CSS)"

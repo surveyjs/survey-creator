@@ -742,7 +742,6 @@ var italianTranslation = {
     keyDuplicationError: "\"Valore chiave non univoco\" messaggio di errore",
     minSelectedChoices: "Numero minimo di scelte selezionate",
     maxSelectedChoices: "Max. scelte selezionabili",
-    allowClear: "Mostra il tasto Cancella",
     logoWidth: "Larghezza logo (in valori accettati da CSS)",
     logoHeight: "Altezza logo (in valori accettati da CSS)",
     readOnly: "Sola lettura",

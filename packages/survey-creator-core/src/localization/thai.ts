@@ -742,7 +742,6 @@ export const thStrings = {
     keyDuplicationError: "ข้อความข้อผิดพลาดสำหรับการตอบซ้ำ",
     minSelectedChoices: "ตัวเลือกขั้นต่ำที่ต้องเลือก",
     maxSelectedChoices: "ตัวเลือกสูงสุดที่ต้องเลือก",
-    allowClear: "แสดงปุ่มลบ",
     logoWidth: "ความกว้างของโลโก้",
     logoHeight: "ความสูงของโลโก้",
     readOnly: "อ่านอย่างเดียว",

@@ -742,7 +742,6 @@ export let svStrings = {
     keyDuplicationError: "Felmeddelandet \"Icke-unikt nyckelvärde\"",
     minSelectedChoices: "Minsta valda val",
     maxSelectedChoices: "Maximalt antal valda val",
-    allowClear: "Visa knappen Rensa",
     logoWidth: "Logotypbredd (i CSS-godkända värden)",
     logoHeight: "Logotypens höjd (i CSS-godkända värden)",
     readOnly: "Skrivskyddad",
@@ -2089,7 +2088,6 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Felmeddelandet \"Icke-unikt nyckelvärde\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Minsta valda val"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maximalt antal valda val"
-// pe.allowClear: "Show the Clear button" => "Visa knappen Rensa"
 // pe.showNumber: "Show panel number" => "Visa panelnummer"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Logotypbredd (i CSS-godkända värden)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Logotypens höjd (i CSS-godkända värden)"

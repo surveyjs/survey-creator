@@ -742,7 +742,6 @@ var polishStrings = {
     keyDuplicationError: "Komunikat o błędzie \"Nieunikalna wartość klucza\"",
     minSelectedChoices: "Minimalna wybrana opcja",
     maxSelectedChoices: "Maksymalna liczba wybranych opcji",
-    allowClear: "Pokaż przycisk Wyczyść",
     logoWidth: "Szerokość logo (w wartościach akceptowanych przez CSS)",
     logoHeight: "Wysokość logo (w wartościach akceptowanych przez CSS)",
     readOnly: "Tylko do odczytu",
@@ -2121,7 +2120,6 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Komunikat o błędzie \"Nieunikalna wartość klucza\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Minimalna wybrana opcja"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maksymalna liczba wybranych opcji"
-// pe.allowClear: "Show the Clear button" => "Pokaż przycisk Wyczyść"
 // pe.showNumber: "Show panel number" => "Pokaż numer panelu"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Szerokość logo (w wartościach akceptowanych przez CSS)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Wysokość logo (w wartościach akceptowanych przez CSS)"

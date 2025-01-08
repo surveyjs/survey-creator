@@ -742,7 +742,6 @@ export var skStrings = {
     keyDuplicationError: "Chybové hlásenie \"Nejedinečná kľúčová hodnota\"",
     minSelectedChoices: "Minimálny počet vybraných možností",
     maxSelectedChoices: "Maximálny počet vybraných možností",
-    allowClear: "Zobrazenie tlačidla Vymazať",
     logoWidth: "Šírka loga (v akceptovaných hodnotách CSS)",
     logoHeight: "Výška loga (v hodnotách akceptovaných CSS)",
     readOnly: "Iba na čítanie",

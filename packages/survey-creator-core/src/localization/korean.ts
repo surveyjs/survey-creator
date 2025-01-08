@@ -2109,7 +2109,6 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "\"고유하지 않은 키 값\" 오류 메시지"
 // pe.minSelectedChoices: "Minimum selected choices" => "선택한 최소 선택 항목"
 // pe.maxSelectedChoices: "Maximum selected choices" => "선택한 최대 선택 항목 수"
-// pe.allowClear: "Show the Clear button" => "지우기 단추 표시"
 // pe.showNumber: "Show panel number" => "패널 번호 표시"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "로고 너비(CSS에서 허용하는 값)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "로고 높이(CSS에서 허용하는 값)"

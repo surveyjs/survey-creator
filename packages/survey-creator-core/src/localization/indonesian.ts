@@ -742,7 +742,6 @@ export var indonesianStrings = {
     keyDuplicationError: "Pesan galat \"Nilai kunci tidak unik\"",
     minSelectedChoices: "Pilihan minimum yang dipilih",
     maxSelectedChoices: "Pilihan maksimum yang dipilih",
-    allowClear: "Tampilkan tombol Hapus",
     logoWidth: "Lebar logo (dalam nilai yang diterima CSS)",
     logoHeight: "Tinggi logo (dalam nilai yang diterima CSS)",
     readOnly: "Baca-saja",
@@ -2069,7 +2068,6 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Pesan galat \"Nilai kunci tidak unik\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Pilihan minimum yang dipilih"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Pilihan maksimum yang dipilih"
-// pe.allowClear: "Show the Clear button" => "Tampilkan tombol Hapus"
 // pe.showNumber: "Show panel number" => "Tampilkan nomor panel"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Lebar logo (dalam nilai yang diterima CSS)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Tinggi logo (dalam nilai yang diterima CSS)"

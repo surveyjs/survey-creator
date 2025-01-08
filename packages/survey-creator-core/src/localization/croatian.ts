@@ -742,7 +742,6 @@ export var hrStrings = {
     keyDuplicationError: "Poruka o pogrešci \"Nejedinstvena vrijednost ključa\"",
     minSelectedChoices: "Minimalno odabrani odabiri",
     maxSelectedChoices: "Maksimalan broj odabranih izbora",
-    allowClear: "Prikaz gumba Očisti",
     logoWidth: "Širina logotipa (u CSS-prihvaćenim vrijednostima)",
     logoHeight: "Visina logotipa (u CSS-prihvaćenim vrijednostima)",
     readOnly: "Samo za čitanje",
@@ -1951,7 +1950,6 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Poruka o pogrešci \"Nejedinstvena vrijednost ključa\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Minimalno odabrani odabiri"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maksimalan broj odabranih izbora"
-// pe.allowClear: "Show the Clear button" => "Prikaz gumba Očisti"
 // pe.showNumber: "Show panel number" => "Pokaži broj ploče"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Širina logotipa (u CSS-prihvaćenim vrijednostima)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Visina logotipa (u CSS-prihvaćenim vrijednostima)"

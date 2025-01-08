@@ -742,7 +742,6 @@ export var huStrings = {
     keyDuplicationError: "\"Nem egyedi kulcsérték\" hibaüzenet",
     minSelectedChoices: "Minimálisan kiválasztott választási lehetőségek",
     maxSelectedChoices: "Maximális kijelölt választási lehetőségek",
-    allowClear: "A Törlés gomb megjelenítése",
     logoWidth: "Embléma szélessége (CSS által elfogadott értékekben)",
     logoHeight: "Logó magassága (CSS által elfogadott értékekben)",
     readOnly: "Csak olvasható",
@@ -2067,7 +2066,6 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "\"Nem egyedi kulcsérték\" hibaüzenet"
 // pe.minSelectedChoices: "Minimum selected choices" => "Minimálisan kiválasztott választási lehetőségek"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maximális kijelölt választási lehetőségek"
-// pe.allowClear: "Show the Clear button" => "A Törlés gomb megjelenítése"
 // pe.showNumber: "Show panel number" => "Panelszám megjelenítése"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Embléma szélessége (CSS által elfogadott értékekben)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Logó magassága (CSS által elfogadott értékekben)"

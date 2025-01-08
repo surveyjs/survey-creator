@@ -742,7 +742,6 @@ export var fiStrings = {
     keyDuplicationError: "Ei-yksilöllinen avainarvo -virhesanoma",
     minSelectedChoices: "Valitut valinnat vähintään:",
     maxSelectedChoices: "Valittujen vaihtoehtojen enimmäismäärä",
-    allowClear: "Näytä Tyhjennä-painike",
     logoWidth: "Logon leveys (CSS-hyväksytyissä arvoissa)",
     logoHeight: "Logon korkeus (CSS:n hyväksymissä arvoissa)",
     readOnly: "Vain luku -tilassa",
@@ -1954,7 +1953,6 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Ei-yksilöllinen avainarvo -virhesanoma"
 // pe.minSelectedChoices: "Minimum selected choices" => "Valitut valinnat vähintään:"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Valittujen vaihtoehtojen enimmäismäärä"
-// pe.allowClear: "Show the Clear button" => "Näytä Tyhjennä-painike"
 // pe.showNumber: "Show panel number" => "Näytä paneelin numero"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Logon leveys (CSS-hyväksytyissä arvoissa)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Logon korkeus (CSS:n hyväksymissä arvoissa)"
