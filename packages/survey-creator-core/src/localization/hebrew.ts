@@ -846,10 +846,7 @@ export var hebrewStrings = {
     columnsEnableIf: "העמודות יוצגו אם",
     rowsEnableIf: "השורות יוצגו אם",
     innerIndent: "הוסף כניסות פנימיות",
-<<<<<<< HEAD
     copyDefaultValueFromLastEntry: "קבל ערכי ברירת מחדל מהפאנל האחרון",
-=======
->>>>>>> 854da160a4d21687fa7297cd08728cb5ad997b21
     enterNewValue: "נא להזין את הערך.",
     noquestions: "אין שאלות בשאלון.",
     createtrigger: "יש ליצור מפעיל",
