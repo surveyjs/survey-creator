@@ -48,7 +48,7 @@ import {
   ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, ElementAllowOperationsEvent,
   ElementGetActionsEvent, PropertyAddingEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent,
   PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, FastEntryItemsEvent as FastEntryFinishedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
-  PropertyDisplayCustomErrorEvent, PropertyValueChangingEvent, PropertyValueChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
+  PropertyDisplayCustomErrorEvent, PropertyValueChangingEvent as PropertyChangingEvent, PropertyValueChangedEvent as PropertyChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
   LogicRuleGetDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent, PageAddedEvent, QuestionConvertingEvent,
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
@@ -56,7 +56,9 @@ import {
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
   PageAddingEvent, DragStartEndEvent,
   ElementGetExpandCollapseStateEvent,
-  ElementGetExpandCollapseStateEventReason
+  ElementGetExpandCollapseStateEventReason,
+  PropertyValueChangedEvent,
+  PropertyValueChangingEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -470,7 +472,11 @@ export class SurveyCreatorModel extends Base
    * 
    * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead of handling this event.
    */
-  public onGetObjectDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetDisplayNameEvent>();
+  public onElementGetDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetDisplayNameEvent>();
+  /*
+   * Obsolete
+   */
+  public onGetObjectDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.onElementGetDisplayName;
   public onHtmlToMarkdown: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
   /**
@@ -577,22 +583,34 @@ export class SurveyCreatorModel extends Base
   public onGenerateNewName: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   /**
    * An event that is raised when Survey Creator validates a modified value of a survey element property. Use this event to display a custom error message when the value is incorrect.
-   * @see onPropertyValueChanging
-   * @see onSurveyPropertyValueChanged
+   * @see onPropertyChanging
+   * @see onPropertyChanged
    */
-  public onPropertyValidationCustomError: EventBase<SurveyCreatorModel, PropertyDisplayCustomErrorEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyDisplayCustomErrorEvent>();
+  public onPropertyDisplayCustomError: EventBase<SurveyCreatorModel, PropertyDisplayCustomErrorEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyDisplayCustomErrorEvent>();
+  /*
+   * Obsolete
+   */
+  public onPropertyValidationCustomError: EventBase<SurveyCreatorModel, PropertyDisplayCustomErrorEvent> = this.onPropertyDisplayCustomError;
   /**
    * An event that is raised each time a user modifies a survey element property. Use this event to validate or correct a property value while the user changes it.
-   * @see onPropertyValidationCustomError
-   * @see onSurveyPropertyValueChanged
+   * @see onPropertyDisplayCustomError
+   * @see onPropertyChanged
    */
-  public onPropertyValueChanging: EventBase<SurveyCreatorModel, PropertyValueChangingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyValueChangingEvent>();
+  public onPropertyChanging: EventBase<SurveyCreatorModel, PropertyChangingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyChangingEvent>();
+  /*
+   * Obsolete
+   */
+  public onPropertyValueChanging: EventBase<SurveyCreatorModel, PropertyValueChangingEvent> = this.onPropertyChanging;
   /**
    * An event that is raised after a survey element property has changed.
-   * @see onPropertyValidationCustomError
-   * @see onPropertyValueChanging
+   * @see onPropertyDisplayCustomError
+   * @see onPropertyChanging
    */
-  public onSurveyPropertyValueChanged: EventBase<SurveyCreatorModel, PropertyValueChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyValueChangedEvent>();
+  public onPropertyChanged: EventBase<SurveyCreatorModel, PropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyChangedEvent>();
+  /**
+   * Obsolete
+   */
+  public onSurveyPropertyValueChanged: EventBase<SurveyCreatorModel, PropertyValueChangedEvent> = this.onPropertyChanged;
   /**
    * An event that is raised when a condition editor renders a list of questions and variables available for selection. Use this event to modify this list.
    */
@@ -865,7 +883,7 @@ export class SurveyCreatorModel extends Base
    * Specifies whether Survey Creator UI elements display survey, page, and question titles instead of their names.
    *
    * Default value: `false`
-   * @see onGetObjectDisplayName
+   * @see onElementGetDisplayName
    */
   public useElementTitles = false;
 
@@ -2337,7 +2355,7 @@ export class SurveyCreatorModel extends Base
       displayName = SurveyHelper.getObjectName(obj, this.useElementTitles || this.showObjectTitles);
     }
     var options = { obj: obj, displayName: displayName, area: area, reason: reason };
-    this.onGetObjectDisplayName.fire(this, options);
+    this.onElementGetDisplayName.fire(this, options);
     return options.displayName;
   }
   private animationEnabled = false;
@@ -2452,11 +2470,12 @@ export class SurveyCreatorModel extends Base
     if (!!plugin && !!plugin.onDesignerSurveyPropertyChanged) {
       plugin.onDesignerSurveyPropertyChanged(options.target, options.name);
     }
-    if (!this.onSurveyPropertyValueChanged.isEmpty) {
+    if (!this.onPropertyChanged.isEmpty) {
       options.propertyName = options.name;
       options.obj = options.target;
+      options.element = options.target;
       options.value = options.newValue;
-      this.onSurveyPropertyValueChanged.fire(this, options);
+      this.onPropertyChanged.fire(this, options);
     }
     options.type = "PROPERTY_CHANGED";
     this.setModified(options);
@@ -3492,11 +3511,14 @@ export class SurveyCreatorModel extends Base
       value: value,
       error: ""
     };
-    this.onPropertyValidationCustomError.fire(this, options);
+    this.onPropertyDisplayCustomError.fire(this, options);
     return options.error;
   }
   onValueChangingCallback(options: any) {
-    this.onPropertyValueChanging.fire(this, options);
+    options.name = options.propertyName;
+    options.element = options.obj;
+    options.oldValue = options.value;
+    this.onPropertyChanging.fire(this, options);
   }
   onGetElementEditorTitleCallback(obj: Base, title: string): string {
     return title;

@@ -380,36 +380,60 @@ export interface PropertyDisplayCustomErrorEvent {
 
 export interface PropertyValueChangingEvent {
   /**
-   * A survey element (question, panel, page, or the survey itself) whose property is being edited.
+   * Obsolete
    */
-  obj: Base;
+  obj?: Base;
   /**
-   * The name of a property being modified.
+   * Obsolete
    */
-  propertyName: string;
+  propertyName?: string;
   /**
-   * An old property value.
+   * Obsolete
    */
-  value: any;
+  value?: any;
   /**
    * A new property value. Modify this parameter if you want to override the property value.
    */
   newValue: any;
 }
+export interface PropertyChangingEvent extends PropertyValueChangingEvent {
+  /**
+   * A survey element (question, panel, page, or the survey itself) whose property is being edited.
+   */
+  element: Base;
+  /**
+   * The name of a property being modified.
+   */
+  name: string;
+  /**
+   * An old property value.
+   */
+  oldValue: any;
+}
 
 export interface PropertyValueChangedEvent {
   /**
-   * A survey element (question, panel, page, or the survey itself) whose property has changed.
+   * Obsolete
    */
-  obj: Base;
+  obj?: Base;
   /**
-   * The name of the modified property.
+   * Obsolete
    */
-  propertyName: string;
+  propertyName?: string;
   /**
    * A new property value.
    */
   value: any;
+}
+export interface PropertyChangedEvent extends PropertyValueChangedEvent {
+  /**
+   * A survey element (question, panel, page, or the survey itself) whose property has changed.
+   */
+  element: Base;
+  /**
+   * The name of the modified property.
+   */
+  name: string;
 }
 
 export interface ConditionGetQuestionListEvent {
