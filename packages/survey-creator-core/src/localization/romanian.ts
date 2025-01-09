@@ -109,6 +109,9 @@ export const roStrings = {
     redoTooltip: "Refă modificarea",
     expandAllTooltip: "Extindeți tot",
     collapseAllTooltip: "Restrângeți tot",
+    zoomInTooltip: "Măriți",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Micșorare",
     lockQuestionsTooltip: "Blocați starea de extindere/restrângere pentru întrebări",
     showMoreChoices: "Afișează mai multe",
     showLessChoices: "Afișează mai puține",
@@ -296,7 +299,7 @@ export const roStrings = {
       description: "Descrierea panoului",
       visibleIf: "Fă panoul vizibil dacă",
       requiredIf: "Fă panoul obligatoriu dacă",
-      questionsOrder: "Ordinea întrebărilor în panou",
+      questionOrder: "Ordinea întrebărilor în panou",
       page: "Mută panoul la pagina",
       startWithNewLine: "Afișează panoul pe un rând nou",
       state: "Starea de colaps a panoului",
@@ -327,7 +330,7 @@ export const roStrings = {
       hideNumber: "Ascunde numărul panoului",
       titleLocation: "Alinierea titlului panoului",
       descriptionLocation: "Alinierea descrierii panoului",
-      templateTitleLocation: "Alinierea titlului întrebării",
+      templateQuestionTitleLocation: "Alinierea titlului întrebării",
       templateErrorLocation: "Alinierea mesajului de eroare",
       newPanelPosition: "Locația noului panou",
       showRangeInProgress: "Afișați bara de progres",
@@ -394,7 +397,7 @@ export const roStrings = {
       visibleIf: "Fă pagina vizibilă dacă",
       requiredIf: "Fă pagina obligatorie dacă",
       timeLimit: "Limită de timp pentru finalizarea paginii",
-      questionsOrder: "Ordinea întrebărilor pe pagină"
+      questionOrder: "Ordinea întrebărilor pe pagină"
     },
     matrixdropdowncolumn: {
       name: "Numele coloanei",
@@ -560,7 +563,7 @@ export const roStrings = {
     isRequired: "Obligatoriu",
     markRequired: "Marchează ca obligatoriu",
     removeRequiredMark: "Elimină marcajul obligatoriu",
-    isAllRowRequired: "Necesită un răspuns în fiecare rând",
+    eachRowRequired: "Necesită un răspuns în fiecare rând",
     eachRowUnique: "Prevenirea răspunsurilor duplicate în rânduri",
     requiredErrorText: "Mesaj de eroare pentru întrebările obligatorii",
     startWithNewLine: "Afișează întrebarea pe un rând nou",
@@ -572,7 +575,7 @@ export const roStrings = {
     maxSize: "Dimensiunea maximă a fișierului (în octeți)",
     rowCount: "Număr de rânduri",
     columnLayout: "Aspect coloane",
-    addRowLocation: "Alinierea butonului „Adaugă rând”",
+    addRowButtonLocation: "Alinierea butonului „Adaugă rând”",
     transposeData: "Transpune rândurile în coloane",
     addRowText: "Textul butonului „Adaugă rând”",
     removeRowText: "Textul butonului „Elimină rând”",
@@ -611,7 +614,7 @@ export const roStrings = {
     mode: "Modul de afișare a chestionarului",
     clearInvisibleValues: "Ștergeți valorile întrebărilor ascunse",
     cookieName: "Limitează la un singur răspuns",
-    sendResultOnPageNext: "Auto-salvați progresul chestionarului la schimbarea paginii",
+    partialSendEnabled: "Auto-salvați progresul chestionarului la schimbarea paginii",
     storeOthersAsComment: "Salvați valoarea opțiunii „Altul” ca proprietate separată",
     showPageTitles: "Afișați titlurile paginilor",
     showPageNumbers: "Afișați numerele paginilor",
@@ -623,18 +626,18 @@ export const roStrings = {
     startSurveyText: "Textul butonului „Începe chestionarul”",
     showNavigationButtons: "Afișați/ascundeți butoanele de navigare",
     showPrevButton: "Afișați butonul „Pagina anterioară”",
-    firstPageIsStarted: "Prima pagină este o pagină de început",
-    showCompletedPage: "Afișați pagina de „Mulțumire”",
-    goNextPageAutomatic: "Trecerea automată la pagina următoare",
-    allowCompleteSurveyAutomatic: "Finalizați chestionarul automat",
+    firstPageIsStartPage: "Prima pagină este o pagină de început",
+    showCompletePage: "Afișați pagina de „Mulțumire”",
+    autoAdvanceEnabled: "Trecerea automată la pagina următoare",
+    autoAdvanceAllowComplete: "Finalizați chestionarul automat",
     showProgressBar: "Alinierea barei de progres",
     questionTitleLocation: "Alinierea titlului întrebării",
     questionTitleWidth: "Lățimea titlului întrebării",
-    requiredText: "Simbol(uri) obligatoriu(e)",
+    requiredMark: "Simbol(uri) obligatoriu(e)",
     questionTitleTemplate: "Șablon titlu întrebare, implicit este: '{no}. {require} {title}'",
     questionErrorLocation: "Alinierea mesajului de eroare",
-    focusFirstQuestionAutomatic: "Focalizați pe prima întrebare la o pagină nouă",
-    questionsOrder: "Ordinea întrebărilor",
+    autoFocusFirstQuestion: "Focalizați pe prima întrebare la o pagină nouă",
+    questionOrder: "Ordinea întrebărilor",
     timeLimit: "Limită de timp pentru finalizarea chestionarului",
     timeLimitPerPage: "Limită de timp pentru finalizarea unei pagini",
     showTimer: "Utilizarea unui cronometru",
@@ -651,7 +654,7 @@ export const roStrings = {
     dataFormat: "Format de stocare",
     allowAddRows: "Permite adăugarea rândului",
     allowRemoveRows: "Permite eliminarea rândului",
-    allowRowsDragAndDrop: "Permite reordonarea rândurilor",
+    allowRowReorder: "Permite reordonarea rândurilor",
     responsiveImageSizeHelp: "Nu se aplică dacă specificați lățimea sau înălțimea exactă a zonei de afișare.",
     minImageWidth: "Lățimea minimă a zonei de afișare",
     maxImageWidth: "Lățimea maximă a zonei de afișare",
@@ -678,13 +681,13 @@ export const roStrings = {
     logo: "Logo-ul chestionarului",
     questionsOnPageMode: "Aspectul chestionarului",
     maxTextLength: "Restricționează lungimea răspunsului",
-    maxOthersLength: "Restricționează lungimea comentariului",
+    maxCommentLength: "Restricționează lungimea comentariului",
     commentAreaRows: "Înălțimea zonei de comentarii (în linii)",
     autoGrowComment: "Auto-extindere a zonelor de text",
     allowResizeComment: "Permite utilizatorilor să redimensioneze zonele de text",
     textUpdateMode: "Actualizează valorile câmpurilor de intrare",
     maskType: "Tip mască de intrare",
-    focusOnFirstError: "Focalizați pe primul răspuns invalid",
+    autoFocusFirstError: "Focalizați pe primul răspuns invalid",
     checkErrorsMode: "Rulați validarea",
     validateVisitedEmptyFields: "Validarea câmpurilor goale pentru focalizarea pierdută",
     navigateToUrl: "Redirecționare către un link extern după trimitere",
@@ -742,12 +745,11 @@ export const roStrings = {
     keyDuplicationError: "Mesaj de eroare pentru răspunsuri duplicate",
     minSelectedChoices: "Alegere minimă pentru selectare",
     maxSelectedChoices: "Alegere maximă pentru selectare",
-    showClearButton: "Afișează butonul de ștergere",
     logoWidth: "Lățimea logo-ului",
     logoHeight: "Înălțimea logo-ului",
     readOnly: "Doar citire",
     enableIf: "Dezactivează modul doar citire dacă",
-    emptyRowsText: "Mesaj „Nu sunt rânduri”",
+    noRowsText: "Mesaj „Nu sunt rânduri”",
     separateSpecialChoices: "Separă alegerile speciale",
     choicesFromQuestion: "Copiază alegerile din următoarea întrebare",
     choicesFromQuestionMode: "Care opțiuni de alegere să fie copiate",
@@ -756,7 +758,7 @@ export const roStrings = {
     showCommentArea: "Adaugă o casetă de comentarii",
     commentPlaceholder: "Text locaș pentru caseta de comentarii",
     displayRateDescriptionsAsExtremeItems: "Afișați etichetele ca valori extreme",
-    rowsOrder: "Ordinea rândurilor",
+    rowOrder: "Ordinea rândurilor",
     columnsLayout: "Aspect coloane",
     columnColCount: "Număr coloane imbricate",
     correctAnswer: "Răspuns corect",
@@ -833,6 +835,7 @@ export const roStrings = {
       background: "Fundal",
       appearance: "Aspect",
       accentColors: "Culori de accent",
+      surfaceBackground: "Fundal de suprafață",
       scaling: "Scalare",
       others: "Altele"
     },
@@ -843,8 +846,7 @@ export const roStrings = {
     columnsEnableIf: "Fă coloanele vizibile dacă",
     rowsEnableIf: "Fă rândurile vizibile dacă",
     innerIndent: "Crește indentarea internă",
-    defaultValueFromLastRow: "Utilizează răspunsurile din ultimul rând ca implicite",
-    defaultValueFromLastPanel: "Utilizează răspunsurile din ultimul panou ca implicite",
+    copyDefaultValueFromLastEntry: "Utilizați răspunsurile de la ultima intrare ca implicit",
     enterNewValue: "Vă rugăm să introduceți o valoare.",
     noquestions: "Nu există întrebări în chestionar.",
     createtrigger: "Vă rugăm să creați un declanșator",
@@ -1120,7 +1122,7 @@ export const roStrings = {
     timerInfoMode: {
       combined: "Ambele"
     },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "Pe baza aspectului matricei"
     },
     panelsState: {
@@ -1191,10 +1193,10 @@ export const roStrings = {
       percent: "Procent",
       date: "Dată"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "Original"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "Original"
     },
     showProgressBar: {
@@ -1345,7 +1347,7 @@ export const roStrings = {
       questionTitleLocation: "Se aplică tuturor întrebărilor din acest panou. Dacă doriți să înlocuiți această setare, definiți reguli de aliniere a titlului pentru întrebările individuale. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
       questionTitleWidth: "Setează lățimea titlurilor întrebărilor atunci când sunt aliniate la stânga casetelor de întrebări. Acceptă valori CSS (px, %, in, pt etc.).",
       questionErrorLocation: "Setează locația unui mesaj de eroare în raport cu toate întrebările din panou. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar.",
-      questionsOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar.",
+      questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar.",
       page: "Repoziționează panoul la sfârșitul unei pagini selectate.",
       innerIndent: "Adaugă spațiu sau margine între conținutul panoului și marginea stângă a casetei panoului.",
       startWithNewLine: "Deselectați pentru a afișa panoul pe un rând cu întrebarea sau panoul anterior. Setarea nu se aplică dacă panoul este primul element din formular.",
@@ -1359,7 +1361,7 @@ export const roStrings = {
       visibleIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină vizibilitatea panoului.",
       enableIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care dezactivează modul doar citire pentru panou.",
       requiredIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
-      templateTitleLocation: "Se aplică tuturor întrebărilor din acest panou. Dacă doriți să înlocuiți această setare, definiți reguli de aliniere a titlului pentru întrebările individuale. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
+      templateQuestionTitleLocation: "Se aplică tuturor întrebărilor din acest panou. Dacă doriți să înlocuiți această setare, definiți reguli de aliniere a titlului pentru întrebările individuale. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
       templateErrorLocation: "Setează locația unui mesaj de eroare în raport cu o întrebare cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
       errorLocation: "Setează locația unui mesaj de eroare în raport cu toate întrebările din panou. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar.",
       page: "Repoziționează panoul la sfârșitul unei pagini selectate.",
@@ -1374,9 +1376,10 @@ export const roStrings = {
       titleLocation: "Această setare este moștenită automat de toate întrebările din acest panou. Dacă doriți să înlocuiți această setare, definiți reguli de aliniere a titlului pentru întrebările individuale. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
       descriptionLocation: "Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sub titlul panoului” implicit).",
       newPanelPosition: "Definește poziția unui panou nou adăugat. În mod implicit, panourile noi sunt adăugate la sfârșit. Selectați „Următor” pentru a introduce un nou panou după cel curent.",
-      defaultValueFromLastPanel: "Duplică răspunsurile din ultimul panou și le atribuie următorului panou dinamic adăugat.",
+      copyDefaultValueFromLastEntry: "Duplică răspunsurile din ultimul panou și le atribuie următorului panou dinamic adăugat.",
       keyName: "Faceți referire la un nume de întrebare pentru a solicita unui utilizator să furnizeze un răspuns unic pentru această întrebare în fiecare panou."
     },
+    copyDefaultValueFromLastEntry: "Duplică răspunsurile din ultimul rând și le atribuie următorului rând dinamic adăugat.",
     defaultValueExpression: "Această setare vă permite să atribuiți o valoare implicită a răspunsului pe baza unei expresii. Expresia poate include calcule de bază - `{q1_id} + {q2_id}`, expresii booleene, cum ar fi `{age} > 60`, și funcții: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. Valoarea determinată de această expresie servește ca valoare implicită inițială care poate fi suprascrisă de o intrare manuală a respondentului.",
     resetValueIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină când o intrare a respondentului este resetată la valoarea pe baza „Expresiei valorii implicite” sau „Expresiei de setare a valorii” sau la valoarea „Răspuns implicit” (dacă oricare este setată).",
     setValueIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină când să rulați „Expresia de setare a valorii” și să atribuiți dinamic valoarea rezultată ca răspuns.",
@@ -1449,19 +1452,19 @@ export const roStrings = {
     logoWidth: "Setează o lățime a logo-ului în unități CSS (px, %, in, pt etc.).",
     logoHeight: "Setează o înălțime a logo-ului în unități CSS (px, %, in, pt etc.).",
     logoFit: "Alegeți dintre: „Niciunul” - imaginea își menține dimensiunea originală; „Conține” - imaginea este redimensionată pentru a se potrivi păstrând aspectul său; „Acoperă” - imaginea umple întreaga casetă păstrând aspectul său; „Umple” - imaginea este întinsă pentru a umple caseta fără a păstra aspectul său.",
-    goNextPageAutomatic: "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent a răspuns la toate întrebările de pe pagina curentă. Această funcție nu se va aplica dacă ultima întrebare de pe pagină este deschisă sau permite răspunsuri multiple.",
-    allowCompleteSurveyAutomatic: "Selectați dacă doriți ca chestionarul să se completeze automat după ce un respondent răspunde la toate întrebările.",
+    autoAdvanceEnabled: "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent a răspuns la toate întrebările de pe pagina curentă. Această funcție nu se va aplica dacă ultima întrebare de pe pagină este deschisă sau permite răspunsuri multiple.",
+    autoAdvanceAllowComplete: "Selectați dacă doriți ca chestionarul să se completeze automat după ce un respondent răspunde la toate întrebările.",
     showNavigationButtons: "Setează vizibilitatea și locația butoanelor de navigare pe o pagină.",
     showProgressBar: "Setează vizibilitatea și locația unei bare de progres. Valoarea „Auto” afișează bara de progres deasupra sau dedesubtul antetului chestionarului.",
     showPreviewBeforeComplete: "Activează pagina de previzualizare cu toate sau doar întrebările la care s-a răspuns.",
     questionTitleLocation: "Se aplică tuturor întrebărilor din chestionar. Această setare poate fi înlocuită de regulile de aliniere a titlului la niveluri inferioare: panou, pagină sau întrebare. O setare de nivel inferior va înlocui setările de nivel superior.",
-    requiredText: "Un simbol sau o secvență de simboluri care indică faptul că este necesar un răspuns.",
+    requiredMark: "Un simbol sau o secvență de simboluri care indică faptul că este necesar un răspuns.",
     questionStartIndex: "Introduceți un număr sau o literă cu care doriți să începeți numerotarea.",
     questionErrorLocation: "Setează locația unui mesaj de eroare în raport cu întrebarea cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării.",
-    focusFirstQuestionAutomatic: "Selectați dacă doriți ca primul câmp de intrare de pe fiecare pagină să fie pregătit pentru introducerea textului.",
-    questionsOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Efectul acestei setări este vizibil doar în fila Previzualizare.",
+    autoFocusFirstQuestion: "Selectați dacă doriți ca primul câmp de intrare de pe fiecare pagină să fie pregătit pentru introducerea textului.",
+    questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Efectul acestei setări este vizibil doar în fila Previzualizare.",
     maxTextLength: "Doar pentru întrebările de introducere a textului.",
-    maxOthersLength: "Doar pentru comentariile întrebărilor.",
+    maxCommentLength: "Doar pentru comentariile întrebărilor.",
     commentAreaRows: "Setează numărul de linii afișate în zonele de text pentru comentariile întrebărilor. Dacă introducerea ocupă mai multe linii, va apărea bara de derulare.",
     autoGrowComment: "Selectați dacă doriți ca comentariile întrebărilor și întrebările de Text lung să se extindă automat în funcție de lungimea textului introdus.",
     allowResizeComment: "Doar pentru comentariile întrebărilor și întrebările de Text lung.",
@@ -1479,7 +1482,6 @@ export const roStrings = {
     keyDuplicationError: "Când proprietatea „Împiedică răspunsurile duplicate” este activată, un respondent care încearcă să trimită o intrare duplicat va primi următorul mesaj de eroare.",
     totalExpression: "Vă permite să calculați valorile totale pe baza unei expresii. Expresia poate include calcule de bază (`{q1_id} + {q2_id}`), expresii booleene (`{age} > 60`) și funcții (`iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
     confirmDelete: "Declanșează un prompt care solicită confirmarea ștergerii rândului.",
-    defaultValueFromLastRow: "Duplică răspunsurile din ultimul rând și le atribuie următorului rând dinamic adăugat.",
     keyName: "Faceți referire la un ID al coloanei pentru a solicita unui utilizator să furnizeze un răspuns unic pentru fiecare întrebare din coloana specificată.",
     description: "Introduceți un subtitlu.",
     locale: "Alegeți o limbă pentru a începe să creați chestionarul. Pentru a adăuga o traducere, comutați la o limbă nouă și traduceți textul original aici sau în fila Traduceri.",
@@ -1498,7 +1500,7 @@ export const roStrings = {
       questionTitleLocation: "Se aplică tuturor întrebărilor din această pagină. Dacă doriți să înlocuiți această setare, definiți reguli de aliniere a titlului pentru întrebările individuale sau panouri. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Sus” implicit).",
       questionTitleWidth: "Setează lățimea titlurilor întrebărilor atunci când sunt aliniate la stânga casetelor de întrebări. Acceptă valori CSS (px, %, in, pt etc.).",
       questionErrorLocation: "Setează locația unui mesaj de eroare în raport cu întrebarea cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar.",
-      questionsOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Original” implicit). Efectul acestei setări este vizibil doar în fila Previzualizare.",
+      questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Original” implicit). Efectul acestei setări este vizibil doar în fila Previzualizare.",
       navigationButtonsVisibility: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”."
     },
     timerLocation: "Setează locația unui cronometru pe o pagină.",
@@ -1535,7 +1537,7 @@ export const roStrings = {
     needConfirmRemoveFile: "Declanșează un prompt care solicită confirmarea ștergerii fișierului.",
     selectToRankEnabled: "Activați pentru a clasifica doar opțiunile selectate. Utilizatorii vor trage elementele selectate din lista de opțiuni pentru a le ordona în zona de clasificare.",
     dataList: "Introduceți o listă de opțiuni care vor fi sugerate respondentului în timpul introducerii.",
-    itemSize: "Setarea redimensionează doar câmpurile de intrare și nu afectează lățimea casetei întrebării.",
+    inputSize: "Setarea redimensionează doar câmpurile de intrare și nu afectează lățimea casetei întrebării.",
     itemTitleWidth: "Setează o lățime consistentă pentru toate etichetele elementelor în pixeli",
     inputTextAlignment: "Selectați modul de aliniere a valorii de intrare în câmp. Setarea implicită \"Auto\" aliniază valoarea de intrare la dreapta dacă se aplică mascare monedară sau numerică și la stânga dacă nu.",
     altText: "Servește ca un substitut atunci când imaginea nu poate fi afișată pe dispozitivul utilizatorului și pentru scopuri de accesibilitate.",
@@ -1653,7 +1655,7 @@ export const roStrings = {
     maxValueExpression: "Expresia valorii maxime",
     step: "Pas",
     dataList: "Elemente pentru sugestii automate",
-    itemSize: "Lățimea câmpului de intrare (în caractere)",
+    inputSize: "Lățimea câmpului de intrare (în caractere)",
     itemTitleWidth: "Lățimea etichetei elementului (în px)",
     inputTextAlignment: "Alinierea valorilor de intrare",
     elements: "Elemente",
@@ -1755,7 +1757,8 @@ export const roStrings = {
       orchid: "Orhidee",
       tulip: "Lalea",
       brown: "Maro",
-      green: "Verde"
+      green: "Verde",
+      gray: "Gri"
     }
   },
   creatortheme: {
@@ -1847,7 +1850,7 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // names.default-dark: "Dark" => "Întunecat"
 // names.default-contrast: "Contrast" => "Contrast"
 // panel.showNumber: "Number this panel" => "Numerotați acest panou"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent a răspuns la toate întrebările de pe pagina curentă. Această funcție nu se va aplica dacă ultima întrebare de pe pagină este deschisă sau permite răspunsuri multiple."
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent a răspuns la toate întrebările de pe pagina curentă. Această funcție nu se va aplica dacă ultima întrebare de pe pagină este deschisă sau permite răspunsuri multiple."
 // autocomplete.name: "Full Name" => "Nume complet"
 // autocomplete.honorific-prefix: "Prefix" => "Prefix"
 // autocomplete.given-name: "First Name" => "Prenume"
@@ -1904,3 +1907,9 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Blocați starea de extindere/restrângere pentru întrebări"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Nu aveți încă nicio pagină"
 // pe.addNew@pages: "Add new page" => "Adaugă o pagină nouă"
+// ed.zoomInTooltip: "Zoom In" => "Măriți"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Micșorare"
+// tabs.surfaceBackground: "Surface Background" => "Fundal de suprafață"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Utilizați răspunsurile de la ultima intrare ca implicit"
+// colors.gray: "Gray" => "Gri"

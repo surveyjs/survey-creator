@@ -43,7 +43,7 @@ test("Reason of question Added from toolbox, onclicking add question button, on 
   expect(reason).toHaveLength(9);
   expect(reason[8]).toEqual("ELEMENT_CONVERTED");
 });
-test("Click on toolbox and cancel survey.lazyRendering", (): any => {
+test("Click on toolbox and cancel survey.lazyRenderEnabled", (): any => {
   const creator = new CreatorTester();
   expect(creator.survey.isLazyRendering).toEqual(true);
   creator.clickToolboxItem({ type: "text" });

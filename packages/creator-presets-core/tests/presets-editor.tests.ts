@@ -138,11 +138,11 @@ test("Preset edit model, page component", () => {
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(editor.creator.tabs).toHaveLength(2);
   expect(editor.creator.tabs[0].title).toEqual("Designer Edit");
-/* TODO reset the page
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
-  expect(editor.creator.tabs).toHaveLength(3);
-  expect(editor.creator.tabs[0].title).toEqual("Designer");
-*/
+  /* TODO reset the page
+    expect(editor.applyFromSurveyModel()).toBeTruthy();
+    expect(editor.creator.tabs).toHaveLength(3);
+    expect(editor.creator.tabs[0].title).toEqual("Designer");
+  */
 });
 test("Preset edit model, toolbox definition page, default values", () => {
   const presetJson = {
@@ -334,13 +334,15 @@ test("Preset edit model, property grid, apply", () => {
   let propGridCreator = getPropGridCreator(survey);
   propGridCreator.JSON = {
     elements: [
-      { type: "panel", "name": "general",
+      {
+        type: "panel", "name": "general",
         elements: [
           { type: "text", name: "locale" },
           { type: "comment", name: "title" },
         ]
       },
-      { type: "panel", "name": "second1",
+      {
+        type: "panel", "name": "second1",
         elements: [
           { type: "matrixdynamic", name: "pages" },
           { type: "matrixdynamic", name: "triggers" },
@@ -367,7 +369,8 @@ test("Preset edit model, property grid, apply", () => {
   survey.setValue("propertyGrid_definition_selector", "page");
   propGridCreator.JSON = {
     elements: [
-      { type: "panel", "name": "general",
+      {
+        type: "panel", "name": "general",
         elements: [
           { type: "text", name: "name" },
           { type: "comment", name: "title" },
@@ -399,13 +402,15 @@ test("Preset edit model, make general tab as second tab", () => {
   const propGridCreator = getPropGridCreator(survey);
   propGridCreator.JSON = {
     elements: [
-      { type: "panel", "name": "logic",
+      {
+        type: "panel", "name": "logic",
         elements: [
           { type: "comment", name: "visibleIf" },
           { type: "comment", name: "enableIf" }
         ]
       },
-      { type: "panel", "name": "general",
+      {
+        type: "panel", "name": "general",
         elements: [
           { type: "text", name: "name" },
           { type: "dropdown", name: "inputType" },
@@ -454,13 +459,15 @@ test("Preset edit model, property grid & matrixdropdowncolumn@checkbox", () => {
   const propGridCreator = getPropGridCreator(survey);
   propGridCreator.JSON = {
     elements: [
-      { type: "panel", "name": "general",
+      {
+        type: "panel", "name": "general",
         elements: [
           { type: "text", name: "name" },
           { type: "comment", name: "title" }
         ]
       },
-      { type: "panel", "name": "choices",
+      {
+        type: "panel", "name": "choices",
         elements: [
           { type: "matrixdynamic", name: "choices" },
           { type: "boolean", name: "showSelectAllItem" }
@@ -638,7 +645,8 @@ test("Preset edit model, Change localization strings title&description", () => {
   const propGridCreator = getPropGridCreator(survey);
   propGridCreator.JSON = {
     elements: [
-      { type: "panel", "name": "general",
+      {
+        type: "panel", "name": "general",
         elements: [
           { type: "text", name: "name" },
           { type: "dropdown", name: "inputType" },
@@ -732,9 +740,9 @@ test("Preset edit model, Property grid toolbox", () => {
   expect(newPanel2).toBeTruthy();
   expect(newPanel1.title).toEqual("New Category");
   propGridCreator.selectElement(newPanel2);
-  propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("focusOnFirstError").json);
+  propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("autoFocusFirstError").json);
   expect(newPanel2.elements).toHaveLength(1);
-  expect(newPanel2.questions[0].name).toEqual("focusOnFirstError");
+  expect(newPanel2.questions[0].name).toEqual("autoFocusFirstError");
   expect(propGridCreator.toolbox.actions).toHaveLength(3);
 });
 test("Preset edit model, Property grid change the new category name", () => {
@@ -798,14 +806,14 @@ test("Preset edit model, Property grid change the new category title and then na
   expect(categoryPanel.title).toBe("My Category");
 });
 function addLocale(name: string): void {
-  if(!surveyLocalization.locales[name]) {
+  if (!surveyLocalization.locales[name]) {
     surveyLocalization.locales[name] = {};
     surveyLocalization["localeNames"][name] = name.toUpperCase();
     surveyLocalization["localeNamesInEnglish"][name] = name.toUpperCase() + "-English";
   }
 }
 function addLocales(): void {
-  if(!editorLocalization.locales["de"]) {
+  if (!editorLocalization.locales["de"]) {
     editorLocalization.locales["de"] = { survey: { edit: "Bearbeiten" }, tabs: { designer: "Designer" } };
   }
   addLocale("de");

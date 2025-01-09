@@ -1132,6 +1132,13 @@ test("getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380", () =>
   const model = new PageNavigatorViewModel(new PagesController(creator), "");
   expect(model.items[0].title).toEqual("Page 1");
 });
+test("getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380", () => {
+  const creator = new CreatorTester();
+  creator.useElementTitles = true;
+  creator.JSON = getSurveyJson();
+  const model = new PageNavigatorViewModel(new PagesController(creator), "");
+  expect(model.items[0].title).toEqual("Page 1");
+});
 test(
   "creator getMenuItems should respect property visibility (e.g. for image question) - https://github.com/surveyjs/survey-creator/issues/897",
   () => {

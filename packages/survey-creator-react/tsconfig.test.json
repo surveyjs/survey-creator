@@ -11,7 +11,15 @@
       "survey-creator-core": [
         "./node_modules/survey-creator-core"
       ],
-      "tslib" : ["./node_modules/tslib/tslib.d.ts"]
+      "react": [
+        "./node_modules/@types/react"
+      ],
+      "react-dom": [
+        "./node_modules/@types/react-dom"
+      ],
+      "tslib": [
+        "./node_modules/tslib/tslib.d.ts"
+      ]
     }
   }
 }

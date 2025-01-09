@@ -181,7 +181,7 @@ export class SurveyCreatorModel extends Base
    * Default value: `false` (users edit choice texts)
    * 
    * If you enable this property, users cannot edit choice texts because the Property Grid hides the Text column for choices, rate values, columns and rows in [Single-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model), and rows in [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) questions.
-   * @see showObjectTitles
+   * @see useElementTitles
    */
   @property({ defaultValue: false }) inplaceEditForValues: boolean;
   /**
@@ -474,7 +474,7 @@ export class SurveyCreatorModel extends Base
   /**
    * An event that is raised when Survey Creator obtains a survey element name to display it in the UI.
    * 
-   * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`showObjectTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showObjectTitles) property instead of handling this event.
+   * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead of handling this event.
    */
   public onGetObjectDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetDisplayNameEvent>();
   public onHtmlToMarkdown: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
@@ -862,12 +862,24 @@ export class SurveyCreatorModel extends Base
   public maxLogicItemsInCondition: number = -1;
 
   /**
-   * Specifies whether drop-down menus and other UI elements display survey, page, and question titles instead of their names.
+   * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
+   * @deprecated
+   */
+  public showObjectTitles = false;
+
+  /**
+   * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
+   * @deprecated
+   */
+  public showTitlesInExpressions = false;
+
+  /**
+   * Specifies whether Survey Creator UI elements display survey, page, and question titles instead of their names.
    *
    * Default value: `false`
    * @see onGetObjectDisplayName
    */
-  public showObjectTitles = false;
+  public useElementTitles = false;
 
   /**
    * Limits the number of visible choices. Users can click "Show more" to view hidden choices.
@@ -879,14 +891,6 @@ export class SurveyCreatorModel extends Base
   public maxVisibleChoices: number = 10;
 
   /**
-   * Specifies whether to display question titles instead of names when users edit logical expressions.
-   *
-   * Default value: `false`
-   * @see showObjectTitles
-   * @see onGetObjectDisplayName
-   */
-  public showTitlesInExpressions = false;
-  /**
    * Specifies whether users can edit expressions in the Logic tab as plain text.
    *
    * If you set this property to `false`, users can only use UI elements to edit logical expressions.
@@ -897,38 +901,69 @@ export class SurveyCreatorModel extends Base
   public allowEditExpressionsInTextEditor = true;
 
   /**
-   * Limits the number of columns that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel), and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
+   * Limits the number of columns that users can add to [Single-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Multi-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel), and [Dynamic Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel) questions.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumColumnsCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxColumns`)
    */
-  public maximumColumnsCount: number =
-    settings.propertyGrid.maximumColumnsCount;
+  public maxColumns: number =
+    settings.propertyGrid.maximumColumnsCount || settings.propertyGrid.maxColumns;
   /**
-   * Limits the number of choices that users can add to [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
-   *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumChoicesCount`)
+   * Obsolete. Use the [`maxColumns`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#maxColumns) property instead.
+   * @deprecated
    */
-  public maximumChoicesCount: number =
-    settings.propertyGrid.maximumChoicesCount;
+  public get maximumColumnsCount() { return this.maxColumns; }
+  public set maximumColumnsCount(val) { this.maxColumns = val; }
   /**
-   * Limits the minimum number of choices in [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions. Set this property if users should not delete choices below the specified limit.
+   * Limits the number of choices that users can add to [Checkboxes](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radio Button Group](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.minimumChoicesCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxChoices`)
    */
-  public minimumChoicesCount: number =
-    settings.propertyGrid.minimumChoicesCount;
+  public maxChoices: number =
+    settings.propertyGrid.maximumChoicesCount || settings.propertyGrid.maxChoices;
   /**
-   * Limits the number of rows that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
-   *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRowsCount`)
+   * Obsolete. Use the [`maxChoices`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#maxChoices) property instead.
+   * @deprecated
    */
-  public maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
+  public get maximumChoicesCount() { return this.maxChoices; }
+  public set maximumChoicesCount(val) { this.maxChoices = val; }
+
   /**
-   * Limits the number of rate values that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
+   * Limits the minimum number of choices in [Checkboxes](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radio Button Group](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions. Set this property if users should not delete choices below the specified limit.
    *
-   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.minChoices`)
    */
-  public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+  public minChoices: number =
+    settings.propertyGrid.minimumChoicesCount || settings.propertyGrid.minChoices;
+  /**
+   * Obsolete. Use the [`minChoices`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#minChoices) property instead.
+   * @deprecated
+   */
+  public get minimumChoicesCount() { return this.minChoices; }
+  public set minimumChoicesCount(val) { this.minChoices = val; }
+  /**
+   * Limits the number of rows that users can add to [Single-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Multi-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
+   *
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxRows`)
+   */
+  public maxRows: number = settings.propertyGrid.maximumRowsCount || settings.propertyGrid.maxRows;
+  /**
+   * Obsolete. Use the [`maxRows`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#maxRows) property instead.
+   * @deprecated
+   */
+  public get maximumRowsCount() { return this.maxRows; }
+  public set maximumRowsCount(val) { this.maxRows = val; }
+  /**
+   * Limits the number of rate values that users can add to [Rating Scale](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
+   *
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxRateValues`)
+   */
+  public maxRateValues: number = settings.propertyGrid.maximumRateValues || settings.propertyGrid.maxRateValues;
+  /**
+   * Obsolete. Use the [`maxRateValues`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#maxRateValues) property instead.
+   * @deprecated
+   */
+  public get maximumRateValues() { return this.maxRateValues; }
+  public set maximumRateValues(val) { this.maxRateValues = val; }
 
   /**
    * Limits the number of nested panels within a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element.
@@ -943,6 +978,12 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `true`
    */
+  public get previewAllowSelectPage(): boolean { return this.showPagesInTestSurveyTab; }
+  public set previewAllowSelectPage(val: boolean) { this.showPagesInTestSurveyTab = val; }
+  /**
+   * Obsolete. Use the [`previewAllowSelectPage`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewAllowSelectPage) property instead.
+   * @deprecated
+   */
   public get showPagesInPreviewTab(): boolean { return this.showPagesInTestSurveyTab; }
   public set showPagesInPreviewTab(val: boolean) { this.showPagesInTestSurveyTab = val; }
 
@@ -952,18 +993,29 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `true`
    */
+  public get previewAllowSimulateDevices(): boolean { return this.showSimulatorInTestSurveyTab; }
+  public set previewAllowSimulateDevices(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
+  /**
+   * Obsolete. Use the [`previewAllowSimulateDevices`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewAllowSimulateDevices) property instead.
+   * @deprecated
+   */
   public get showSimulatorInPreviewTab(): boolean { return this.showSimulatorInTestSurveyTab; }
   public set showSimulatorInPreviewTab(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
-
   /**
    * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
    *
    * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
    *
    * Default value: `"defaultV2"`
-   * @see allowChangeThemeInPreview
+   * @see previewAllowSelectTheme
    */
-  public themeForPreview: string = "defaultV2";
+  public previewTheme: string = "defaultV2";
+  /**
+   * Obsolete. Use the [`previewTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewTheme) property instead.
+   * @deprecated
+   */
+  public get themeForPreview() { return this.previewTheme; }
+  public set themeForPreview(val) { this.previewTheme = val; }
 
   //#region Theme
 
@@ -1084,6 +1136,12 @@ export class SurveyCreatorModel extends Base
    *
    * [Localization & Globalization](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages (linkStyle))
    */
+  public get previewAllowSelectLanguage(): boolean | string { return this.showDefaultLanguageInTestSurveyTab; }
+  public set previewAllowSelectLanguage(val: boolean | string) { this.showDefaultLanguageInTestSurveyTab = val; }
+  /**
+   * Obsolete. Use the [`previewAllowSelectLanguage`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewAllowSelectLanguage) property instead.
+   * @deprecated
+   */
   public get showDefaultLanguageInPreviewTab(): boolean | string { return this.showDefaultLanguageInTestSurveyTab; }
   public set showDefaultLanguageInPreviewTab(val: boolean | string) { this.showDefaultLanguageInTestSurveyTab = val; }
 
@@ -1092,6 +1150,12 @@ export class SurveyCreatorModel extends Base
    * Specifies whether the Preview tab displays a toggle that allows users to show or hide invisible survey elements.
    *
    * Default value: `true`
+   */
+  public get previewAllowHiddenElements(): boolean { return this.showInvisibleElementsInTestSurveyTab; }
+  public set previewAllowHiddenElements(val: boolean) { this.showInvisibleElementsInTestSurveyTab = val; }
+  /**
+   * Obsolete. Use the [`previewAllowHiddenElements`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewAllowHiddenElements) property instead.
+   * @deprecated
    */
   public get showInvisibleElementsInPreviewTab(): boolean { return this.showInvisibleElementsInTestSurveyTab; }
   public set showInvisibleElementsInPreviewTab(val: boolean) { this.showInvisibleElementsInTestSurveyTab = val; }
@@ -1102,9 +1166,16 @@ export class SurveyCreatorModel extends Base
    * Default value: `true`
    *
    * [View Demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
-   * @see themeForPreview
+   * @see previewTheme
    */
-  public allowChangeThemeInPreview = true;
+  public previewAllowSelectTheme = true;
+  /**
+   * Obsolete. Use the [`previewAllowSelectTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewAllowSelectTheme) property instead.
+   * @deprecated
+   */
+  get allowChangeThemeInPreview() { return this.previewAllowSelectTheme; }
+  set allowChangeThemeInPreview(val) { this.previewAllowSelectTheme = val; }
+
   private _tabResponsivenessMode: "menu" | "icons" = "menu";
   public get tabResponsivenessMode(): "menu" | "icons" {
     return this._tabResponsivenessMode;
@@ -1886,7 +1957,7 @@ export class SurveyCreatorModel extends Base
       survey.css = this.getSurfaceCss();
       survey.setIsMobile(!!this.isMobileView);
       survey.setDesignMode(true);
-      survey.lazyRendering = true;
+      survey.lazyRenderEnabled = true;
       survey.setJsonObject(json);
       if (survey.isEmpty) {
         survey.setJsonObject(this.getDefaultSurveyJson());
@@ -2277,7 +2348,7 @@ export class SurveyCreatorModel extends Base
     displayName: string = undefined
   ): string {
     if (!displayName) {
-      displayName = SurveyHelper.getObjectName(obj, this.showObjectTitles);
+      displayName = SurveyHelper.getObjectName(obj, this.useElementTitles || this.showObjectTitles);
     }
     var options = { obj: obj, displayName: displayName, area: area, reason: reason };
     this.onGetObjectDisplayName.fire(this, options);
@@ -3026,7 +3097,7 @@ export class SurveyCreatorModel extends Base
       if (newElement["getType"] === undefined) {
         newElement = this.createNewElement(newElement);
       }
-      this.survey.lazyRendering = false;
+      this.survey.lazyRenderEnabled = false;
       this.doClickQuestionCore(newElement, modifiedType, -1, panel);
       this.selectElement(newElement, null, !this.toolbox.searchManager.filterString, this.startEditTitleOnQuestionAdded);
     }

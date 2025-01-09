@@ -109,6 +109,9 @@ export var bgStrings = {
     redoTooltip: "Повтаряне на последната промяна",
     expandAllTooltip: "Разширете всички",
     collapseAllTooltip: "Свиване на всички",
+    zoomInTooltip: "Увеличете",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Намаляване на мащаба",
     lockQuestionsTooltip: "Заключване на състояние на разгъване/свиване за въпроси",
     showMoreChoices: "Покажи повече.",
     showLessChoices: "Покажи по-малко.",
@@ -296,7 +299,7 @@ export var bgStrings = {
       description: "Описание на панела",
       visibleIf: "Направете панела видим, ако",
       requiredIf: "Направете панела необходим, ако",
-      questionsOrder: "Ред на въпросите в рамките на панела",
+      questionOrder: "Ред на въпросите в рамките на панела",
       page: "Родителска страница",
       startWithNewLine: "Показване на панела на нов ред",
       state: "Състояние на свиване на панела",
@@ -327,7 +330,7 @@ export var bgStrings = {
       hideNumber: "Скриване на номера на панела",
       titleLocation: "Подравняване на заглавието на панела",
       descriptionLocation: "Подравняване на описанието на панела",
-      templateTitleLocation: "Подравняване на заглавието на въпроса",
+      templateQuestionTitleLocation: "Подравняване на заглавието на въпроса",
       templateErrorLocation: "Подравняване на съобщение за грешка",
       newPanelPosition: "Ново местоположение на панела",
       showRangeInProgress: "Показване на лентата за напредъка",
@@ -394,7 +397,7 @@ export var bgStrings = {
       visibleIf: "Направете страницата видима, ако",
       requiredIf: "Направете страницата задължителна, ако",
       timeLimit: "Времево ограничение за завършване на страницата (в секунди)",
-      questionsOrder: "Ред на въпросите на страницата"
+      questionOrder: "Ред на въпросите на страницата"
     },
     matrixdropdowncolumn: {
       name: "Име на колона",
@@ -560,7 +563,7 @@ export var bgStrings = {
     isRequired: "Задължителен",
     markRequired: "Маркирай както се изисква",
     removeRequiredMark: "Премахване на необходимия знак",
-    isAllRowRequired: "Изискване за отговор на всички редове",
+    eachRowRequired: "Изискване за отговор на всички редове",
     eachRowUnique: "Предотвратяване на дублиращи се отговори в редове",
     requiredErrorText: "\"Задължително\" съобщение за грешка",
     startWithNewLine: "Показване на въпроса на нов ред",
@@ -572,7 +575,7 @@ export var bgStrings = {
     maxSize: "Максимален размер на файла (в байтове)",
     rowCount: "Брой редове",
     columnLayout: "Разположение на колоните",
-    addRowLocation: "Добавяне на местоположение на бутона за ред",
+    addRowButtonLocation: "Добавяне на местоположение на бутона за ред",
     transposeData: "Транспониране на редове в колони",
     addRowText: "Добавяне на текст на бутона за ред",
     removeRowText: "Премахване на текста на бутона за ред",
@@ -611,7 +614,7 @@ export var bgStrings = {
     mode: "Редактируемо или само за четене",
     clearInvisibleValues: "Изчистване на невидими стойности",
     cookieName: "Име на бисквитката",
-    sendResultOnPageNext: "Запазване на частични резултати от анкетата в процес на изпълнение",
+    partialSendEnabled: "Запазване на частични резултати от анкетата в процес на изпълнение",
     storeOthersAsComment: "Съхранявай стойността на Други в отделно поле",
     showPageTitles: "Показване на заглавия на страници",
     showPageNumbers: "Показване на номера на страници",
@@ -623,18 +626,18 @@ export var bgStrings = {
     startSurveyText: "Текст на бутона за стартиране на анкетата",
     showNavigationButtons: "Разположение на навигационните бутони",
     showPrevButton: "Показване на бутона Предишна страница",
-    firstPageIsStarted: "Първата страница е начална.",
-    showCompletedPage: "Показване на страницата Завършена анкета",
-    goNextPageAutomatic: "Продължи автоматично към следващата страница.",
-    allowCompleteSurveyAutomatic: "Попълване на анкетата автоматично",
+    firstPageIsStartPage: "Първата страница е начална.",
+    showCompletePage: "Показване на страницата Завършена анкета",
+    autoAdvanceEnabled: "Продължи автоматично към следващата страница.",
+    autoAdvanceAllowComplete: "Попълване на анкетата автоматично",
     showProgressBar: "Местоположение на лентата за напредък",
     questionTitleLocation: "Местоположение на заглавието на въпроса",
     questionTitleWidth: "Ширина на заглавието на въпроса",
-    requiredText: "Задължителен символ(и)",
+    requiredMark: "Задължителен символ(и)",
     questionTitleTemplate: "Шаблонът за заглавие на въпрос по подразбиране е:: '{no}. {require} {title}'",
     questionErrorLocation: "Местоположение на съобщението за грешка",
-    focusFirstQuestionAutomatic: "Постави първия въпрос на нова страница",
-    questionsOrder: "Подреждане на елементите на страницата",
+    autoFocusFirstQuestion: "Постави първия въпрос на нова страница",
+    questionOrder: "Подреждане на елементите на страницата",
     timeLimit: "Време за завършване на анкетата (в секунди)",
     timeLimitPerPage: "Времево ограничение за завършване на една страница (в секунди)",
     showTimer: "Използване на таймер",
@@ -651,7 +654,7 @@ export var bgStrings = {
     dataFormat: "Формат на изображението",
     allowAddRows: "Разрешаване добавянето на редове",
     allowRemoveRows: "Разрешаване изтриването на редове",
-    allowRowsDragAndDrop: "Разрешаване плъзгането и пускане на ред",
+    allowRowReorder: "Разрешаване плъзгането и пускане на ред",
     responsiveImageSizeHelp: "Не се прилага, ако се посочи точна широчина или височина на изображението.",
     minImageWidth: "Минимална широчина на изображението",
     maxImageWidth: "Максимална широчина на изображението",
@@ -678,13 +681,13 @@ export var bgStrings = {
     logo: "Лого (URL или base64-кодиран низ)",
     questionsOnPageMode: "Структура на анкетата",
     maxTextLength: "Максимална дължина на отговора (в символи)",
-    maxOthersLength: "Максимална дължина на коментара (в символи)",
+    maxCommentLength: "Максимална дължина на коментара (в символи)",
     commentAreaRows: "Височина на областта за коментари (в редове)",
     autoGrowComment: "Автоматично разширяване на областта за коментари, ако е необходимо",
     allowResizeComment: "Позволява на потребителите да преоразмеряват текстови области",
     textUpdateMode: "Актуализиране стойността на текстовия въпрос",
     maskType: "Тип маска за въвеждане",
-    focusOnFirstError: "Фокусиране върху първия невалиден отговор",
+    autoFocusFirstError: "Фокусиране върху първия невалиден отговор",
     checkErrorsMode: "Стартиране на валидацията",
     validateVisitedEmptyFields: "Проверка на празни полета при загубен фокус",
     navigateToUrl: "Навигирай до URL",
@@ -742,12 +745,11 @@ export var bgStrings = {
     keyDuplicationError: "\"Неуникална стойност на ключ\" съобщение за грешка",
     minSelectedChoices: "Минимален избор",
     maxSelectedChoices: "Максимален брой избрани",
-    showClearButton: "Показване на бутона Изчистване (Clear)",
     logoWidth: "Широчина на логото (в CSS-допустими стойности)",
     logoHeight: "Височина на логото (в CSS-допустими стойности)",
     readOnly: "Само за четене",
     enableIf: "Може да се редактира",
-    emptyRowsText: "\"Без редове\" съобщение",
+    noRowsText: "\"Без редове\" съобщение",
     separateSpecialChoices: "Разделяне със специален избор (Не, Други, Избери всички)",
     choicesFromQuestion: "Копиране изборите от следния въпрос",
     choicesFromQuestionMode: "Кои избори да се копират?",
@@ -756,7 +758,7 @@ export var bgStrings = {
     showCommentArea: "Показване на областта за коментари",
     commentPlaceholder: "Заместител на областта за коментари",
     displayRateDescriptionsAsExtremeItems: "Показване описанията на скоростта като екстремни стойности",
-    rowsOrder: "Поредност на редовете",
+    rowOrder: "Поредност на редовете",
     columnsLayout: "Поредност на колоните",
     columnColCount: "Брой вложени колони",
     correctAnswer: "Правилен отговор",
@@ -833,6 +835,7 @@ export var bgStrings = {
       background: "Фон",
       appearance: "Външен вид",
       accentColors: "Акцентни цветове",
+      surfaceBackground: "Повърхностен фон",
       scaling: "Мащабиране",
       others: "Други"
     },
@@ -843,8 +846,7 @@ export var bgStrings = {
     columnsEnableIf: "Колоните са видими, ако",
     rowsEnableIf: "Редовете са видими, ако",
     innerIndent: "Добавяне на вътрешни отстъпи",
-    defaultValueFromLastRow: "Вземане стойностите по подразбиране от последния ред",
-    defaultValueFromLastPanel: "Вземане стойностите по подразбиране от последния панел",
+    copyDefaultValueFromLastEntry: "Използване на отговорите от последния запис по подразбиране",
     enterNewValue: "Моля, въведете стойността.",
     noquestions: "В анкетата няма въпроси.",
     createtrigger: "Моля, създайте тригер.",
@@ -1120,7 +1122,7 @@ export var bgStrings = {
     timerInfoMode: {
       combined: "И двете"
     },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "Зависи от оформлението на матрицата."
     },
     panelsState: {
@@ -1191,10 +1193,10 @@ export var bgStrings = {
       percent: "Процент",
       date: "Дата"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "Оригинален"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "Оригинален"
     },
     showProgressBar: {
@@ -1345,7 +1347,7 @@ export var bgStrings = {
       questionTitleLocation: "Отнася се за всички въпроси в рамките на този панел. Ако искате да заместите тази настройка, определете правила за подравняване на заглавията за отделни въпроси. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране).",
       questionTitleWidth: "Задава еднаква ширина за заглавията на въпросите, когато те са подравнени отляво на техните полета за въпроси. Приема CSS стойности (px, %, in, pt и т.н.).",
       questionErrorLocation: "Задава местоположението на съобщение за грешка във връзка с всички въпроси в панела. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване.",
-      questionsOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване.",
+      questionOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване.",
       page: "Премества панела в края на избрана страница.",
       innerIndent: "Добавя интервал или поле между съдържанието на панела и лявата граница на панелното поле.",
       startWithNewLine: "Премахнете отметката, за да покажете панела в един ред с предишния въпрос или панел. Настройката не се прилага, ако панелът е първият елемент във вашия формуляр.",
@@ -1359,7 +1361,7 @@ export var bgStrings = {
       visibleIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя видимостта на панела.",
       enableIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което забранява режима само за четене за панела.",
       requiredIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор.",
-      templateTitleLocation: "Отнася се за всички въпроси в рамките на този панел. Ако искате да заместите тази настройка, определете правила за подравняване на заглавията за отделни въпроси. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране).",
+      templateQuestionTitleLocation: "Отнася се за всички въпроси в рамките на този панел. Ако искате да заместите тази настройка, определете правила за подравняване на заглавията за отделни въпроси. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране).",
       templateErrorLocation: "Задава местоположението на съобщение за грешка във връзка с въпрос с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране).",
       errorLocation: "Задава местоположението на съобщение за грешка във връзка с всички въпроси в панела. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване.",
       page: "Премества панела в края на избрана страница.",
@@ -1374,9 +1376,10 @@ export var bgStrings = {
       titleLocation: "Тази настройка се наследява автоматично от всички въпроси в този панел. Ако искате да заместите тази настройка, определете правила за подравняване на заглавията за отделни въпроси. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране).",
       descriptionLocation: "Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Под заглавието на панела\" по подразбиране).",
       newPanelPosition: "Определя позицията на новодобавен панел. По подразбиране в края се добавят нови панели. Изберете \"Напред\", за да вмъкнете нов панел след текущия.",
-      defaultValueFromLastPanel: "Дублира отговорите от последния панел и ги присвоява на следващия добавен динамичен панел.",
+      copyDefaultValueFromLastEntry: "Дублира отговорите от последния панел и ги присвоява на следващия добавен динамичен панел.",
       keyName: "Препратка към име на въпрос, за да се изисква от потребителя да предостави уникален отговор на този въпрос във всеки панел."
     },
+    copyDefaultValueFromLastEntry: "Дублира отговорите от последния ред и ги присвоява на следващия добавен динамичен ред.",
     defaultValueExpression: "Тази настройка ви позволява да присвоите стойност за отговор по подразбиране на базата на израз. Изразът може да включва основни изчисления - '{q1_id} + {q2_id}', булеви изрази, като '{age} > 60', и функции: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др. Стойността, определена от този израз, служи като начална стойност по подразбиране, която може да бъде заместена от ръчното въвеждане на респондента.",
     resetValueIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя кога входът на респондента се връща към стойността въз основа на \"Израз за стойност по подразбиране\" или \"Задаване на израз за стойност\" или към стойността \"Отговор по подразбиране\" (ако е зададена такава).",
     setValueIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя кога да изпълните \"Задаване на израз за стойност\" и динамично да зададете получената стойност като отговор.",
@@ -1449,19 +1452,19 @@ export var bgStrings = {
     logoWidth: "Задава ширина на логото в CSS единици (px, %, in, pt и т.н.).",
     logoHeight: "Задава височина на логото в CSS единици (px, %, in, pt и т.н.).",
     logoFit: "Изберете от: \"Няма\" - изображението запазва оригиналния си размер; \"Съдържа\" - изображението се преоразмерява, за да се побере, като същевременно се запазва съотношението на страните; \"Cover\" - изображението запълва цялата кутия, като същевременно запазва съотношението на страните; \"Fill\" - изображението се разтяга, за да запълни кутията, без да се поддържа съотношението на страните.",
-    goNextPageAutomatic: "Изберете дали искате проучването автоматично да премине към следващата страница, след като респондентът отговори на всички въпроси на текущата страница. Тази функция няма да се прилага, ако последният въпрос на страницата е отворен или позволява множество отговори.",
-    allowCompleteSurveyAutomatic: "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси.",
+    autoAdvanceEnabled: "Изберете дали искате проучването автоматично да премине към следващата страница, след като респондентът отговори на всички въпроси на текущата страница. Тази функция няма да се прилага, ако последният въпрос на страницата е отворен или позволява множество отговори.",
+    autoAdvanceAllowComplete: "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси.",
     showNavigationButtons: "Задава видимостта и местоположението на бутоните за навигация на дадена страница.",
     showProgressBar: "Задава видимостта и местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването.",
     showPreviewBeforeComplete: "Разрешете страницата за визуализация само с всички въпроси или само с отговор.",
     questionTitleLocation: "Отнася се за всички въпроси в рамките на проучването. Тази настройка може да бъде заместена от правилата за подравняване на заглавията на по-ниските нива: панел, страница или въпрос. Настройката от по-ниско ниво ще замени тези на по-високо ниво.",
-    requiredText: "Символ или поредица от символи, показващи, че е необходим отговор.",
+    requiredMark: "Символ или поредица от символи, показващи, че е необходим отговор.",
     questionStartIndex: "Въведете число или буква, с които искате да започнете номерирането.",
     questionErrorLocation: "Задава местоположението на съобщение за грешка във връзка с въпроса с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка.",
-    focusFirstQuestionAutomatic: "Изберете дали искате първото поле за въвеждане на всяка страница да е готово за въвеждане на текст.",
-    questionsOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Ефектът от тази настройка се вижда само в раздела Визуализация .",
+    autoFocusFirstQuestion: "Изберете дали искате първото поле за въвеждане на всяка страница да е готово за въвеждане на текст.",
+    questionOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Ефектът от тази настройка се вижда само в раздела Визуализация .",
     maxTextLength: "Само за въпроси за въвеждане на текст.",
-    maxOthersLength: "Само за въпросителни коментари.",
+    maxCommentLength: "Само за въпросителни коментари.",
     commentAreaRows: "Задава броя на показваните редове в текстовите области за коментари на въпроси. Във входа заема повече редове, плъзгачът се появява.",
     autoGrowComment: "Изберете дали искате коментарите за въпроси и въпросите с дълъг текст автоматично да нарастват на височина въз основа на въведената дължина на текста.",
     allowResizeComment: "Само за коментари с въпроси и въпроси с дълъг текст.",
@@ -1479,7 +1482,6 @@ export var bgStrings = {
     keyDuplicationError: "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено, респондентът, който се опитва да подаде дублиран запис, ще получи следното съобщение за грешка.",
     totalExpression: "Позволява ви да изчислявате общи стойности на базата на израз. Изразът може да включва основни изчисления ('{q1_id} + {q2_id}'), булеви изрази ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.н.).",
     confirmDelete: "Задейства подкана с молба за потвърждаване на изтриването на реда.",
-    defaultValueFromLastRow: "Дублира отговорите от последния ред и ги присвоява на следващия добавен динамичен ред.",
     keyName: "Ако указаната колона съдържа идентични стойности, анкетата отговаря с \"Неуникална стойност на ключ\" грешка.",
     description: "Въведете субтитри.",
     locale: "Изберете език, за да започнете да създавате проучването си. За да добавите превод, превключете на нов език и преведете оригиналния текст тук или в раздела Преводи.",
@@ -1498,7 +1500,7 @@ export var bgStrings = {
       questionTitleLocation: "Отнася се за всички въпроси в тази страница. Ако искате да замените тази настройка, определете правила за подравняване на заглавията за отделни въпроси или панели. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране).",
       questionTitleWidth: "Задава еднаква ширина за заглавията на въпросите, когато те са подравнени отляво на техните полета за въпроси. Приема CSS стойности (px, %, in, pt и т.н.).",
       questionErrorLocation: "Задава местоположението на съобщение за грешка във връзка с въпроса с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране).",
-      questionsOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"Оригинал\" по подразбиране). Ефектът от тази настройка се вижда само в раздела Визуализация .",
+      questionOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"Оригинал\" по подразбиране). Ефектът от тази настройка се вижда само в раздела Визуализация .",
       navigationButtonsVisibility: "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
     },
     timerLocation: "Задава местоположението на таймер на страница.",
@@ -1535,7 +1537,7 @@ export var bgStrings = {
     needConfirmRemoveFile: "Задейства подкана с молба за потвърждаване на изтриването на файла.",
     selectToRankEnabled: "Разреши да се класират само избраните възможности за избор. Потребителите ще плъзгат избраните елементи от списъка за избор, за да ги подредят в областта за класиране.",
     dataList: "Въведете списък с възможности за избор, които ще бъдат предложени на респондента по време на въвеждането.",
-    itemSize: "Настройката само преоразмерява входните полета и не влияе на ширината на полето за въпроси.",
+    inputSize: "Настройката само преоразмерява входните полета и не влияе на ширината на полето за въпроси.",
     itemTitleWidth: "Задава еднаква ширина за всички етикети на елементи в пиксели",
     inputTextAlignment: "Изберете как да подравните входната стойност в полето. Настройката по подразбиране \"Автоматично\" подравнява входната стойност надясно, ако е приложено валутно или цифрово маскиране, и наляво, ако не.",
     altText: "Служи като заместител, когато изображението не може да бъде показано на устройството на потребителя и за целите на достъпността.",
@@ -1653,7 +1655,7 @@ export var bgStrings = {
     maxValueExpression: "Максимална стойност на израза",
     step: "Стъпка",
     dataList: "Списък с данни",
-    itemSize: "Размер на елемента",
+    inputSize: "Размер на елемента",
     itemTitleWidth: "Ширина на етикета на елемента (в пиксели)",
     inputTextAlignment: "Подравняване на входните стойности",
     elements: "Елементи",
@@ -1755,7 +1757,8 @@ export var bgStrings = {
       orchid: "Орхидея",
       tulip: "Лале",
       brown: "Кафяв",
-      green: "Зелен"
+      green: "Зелен",
+      gray: "Сив"
     }
   },
   creatortheme: {
@@ -1939,7 +1942,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // panel.description: "Panel description" => "Описание на панела"
 // panel.visibleIf: "Make the panel visible if" => "Направете панела видим, ако"
 // panel.requiredIf: "Make the panel required if" => "Направете панела необходим, ако"
-// panel.questionsOrder: "Question order within the panel" => "Ред на въпросите в рамките на панела"
+// panel.questionOrder: "Question order within the panel" => "Ред на въпросите в рамките на панела"
 // panel.startWithNewLine: "Display the panel on a new line" => "Показване на панела на нов ред"
 // panel.state: "Panel collapse state" => "Състояние на свиване на панела"
 // panel.width: "Inline panel width" => "Ширина на вградения панел"
@@ -1964,7 +1967,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // paneldynamic.hideNumber: "Hide the panel number" => "Скриване на номера на панела"
 // paneldynamic.titleLocation: "Panel title alignment" => "Подравняване на заглавието на панела"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "Подравняване на описанието на панела"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "Подравняване на заглавието на въпроса"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "Подравняване на заглавието на въпроса"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "Подравняване на съобщение за грешка"
 // paneldynamic.newPanelPosition: "New panel location" => "Ново местоположение на панела"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "Предотвратяване на дублиращи се отговори в следния въпрос"
@@ -1997,7 +2000,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // page.description: "Page description" => "Описание на страницата"
 // page.visibleIf: "Make the page visible if" => "Направете страницата видима, ако"
 // page.requiredIf: "Make the page required if" => "Направете страницата задължителна, ако"
-// page.questionsOrder: "Question order on the page" => "Ред на въпросите на страницата"
+// page.questionOrder: "Question order on the page" => "Ред на въпросите на страницата"
 // matrixdropdowncolumn.name: "Column name" => "Име на колона"
 // matrixdropdowncolumn.title: "Column title" => "Заглавие на колоната"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "Предотвратяване на дублиращи се отговори"
@@ -2071,8 +2074,8 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // totalDisplayStyle.currency: "Currency" => "Валута"
 // totalDisplayStyle.percent: "Percentage" => "Процент"
 // totalDisplayStyle.date: "Date" => "Дата"
-// rowsOrder.initial: "Original" => "Оригинален"
-// questionsOrder.initial: "Original" => "Оригинален"
+// rowOrder.initial: "Original" => "Оригинален"
+// questionOrder.initial: "Original" => "Оригинален"
 // showProgressBar.aboveheader: "Above the header" => "Над горния колонтитул"
 // showProgressBar.belowheader: "Below the header" => "Под заглавката"
 // pv.sum: "Sum" => "Сума"
@@ -2089,7 +2092,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Отнася се за всички въпроси в рамките на този панел. Ако искате да заместите тази настройка, определете правила за подравняване на заглавията за отделни въпроси. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране)."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Задава местоположението на съобщение за грешка във връзка с всички въпроси в панела. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване."
 // panel.page: "Repositions the panel to the end of a selected page." => "Премества панела в края на избрана страница."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "Добавя интервал или поле между съдържанието на панела и лявата граница на панелното поле."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "Премахнете отметката, за да покажете панела в един ред с предишния въпрос или панел. Настройката не се прилага, ако панелът е първият елемент във вашия формуляр."
@@ -2100,7 +2103,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя видимостта на панела."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "Използвайте иконата на магическа пръчка, за да зададете условно правило, което забранява режима само за четене за панела."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Отнася се за всички въпроси в рамките на този панел. Ако искате да заместите тази настройка, определете правила за подравняване на заглавията за отделни въпроси. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране)."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Отнася се за всички въпроси в рамките на този панел. Ако искате да заместите тази настройка, определете правила за подравняване на заглавията за отделни въпроси. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране)."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Задава местоположението на съобщение за грешка във връзка с въпрос с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране)."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Задава местоположението на съобщение за грешка във връзка с всички въпроси в панела. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "Премества панела в края на избрана страница."
@@ -2114,7 +2117,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Тази настройка се наследява автоматично от всички въпроси в този панел. Ако искате да заместите тази настройка, определете правила за подравняване на заглавията за отделни въпроси. Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Горе\" по подразбиране)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Под заглавието на панела\" по подразбиране)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Определя позицията на новодобавен панел. По подразбиране в края се добавят нови панели. Изберете \"Напред\", за да вмъкнете нов панел след текущия."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Дублира отговорите от последния панел и ги присвоява на следващия добавен динамичен панел."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Дублира отговорите от последния панел и ги присвоява на следващия добавен динамичен панел."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Препратка към име на въпрос, за да се изисква от потребителя да предостави уникален отговор на този въпрос във всеки панел."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Тази настройка ви позволява да присвоите стойност за отговор по подразбиране на базата на израз. Изразът може да включва основни изчисления - '{q1_id} + {q2_id}', булеви изрази, като '{age} > 60', и функции: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др. Стойността, определена от този израз, служи като начална стойност по подразбиране, която може да бъде заместена от ръчното въвеждане на респондента."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя кога входът на респондента се връща към стойността въз основа на \"Израз за стойност по подразбиране\" или \"Задаване на израз за стойност\" или към стойността \"Отговор по подразбиране\" (ако е зададена такава)."
@@ -2164,13 +2167,13 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Задава видимостта и местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Разрешете страницата за визуализация само с всички въпроси или само с отговор."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "Отнася се за всички въпроси в рамките на проучването. Тази настройка може да бъде заместена от правилата за подравняване на заглавията на по-ниските нива: панел, страница или въпрос. Настройката от по-ниско ниво ще замени тези на по-високо ниво."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "Символ или поредица от символи, показващи, че е необходим отговор."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "Символ или поредица от символи, показващи, че е необходим отговор."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "Въведете число или буква, с които искате да започнете номерирането."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "Задава местоположението на съобщение за грешка във връзка с въпроса с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "Изберете дали искате първото поле за въвеждане на всяка страница да е готово за въвеждане на текст."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Запазва първоначалния ред на въпросите или ги рандомизира. Ефектът от тази настройка се вижда само в раздела Визуализация ."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "Изберете дали искате първото поле за въвеждане на всяка страница да е готово за въвеждане на текст."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Запазва първоначалния ред на въпросите или ги рандомизира. Ефектът от тази настройка се вижда само в раздела Визуализация ."
 // pehelp.maxTextLength: "For text entry questions only." => "Само за въпроси за въвеждане на текст."
-// pehelp.maxOthersLength: "For question comments only." => "Само за въпросителни коментари."
+// pehelp.maxCommentLength: "For question comments only." => "Само за въпросителни коментари."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "Изберете дали искате коментарите за въпроси и въпросите с дълъг текст автоматично да нарастват на височина въз основа на въведената дължина на текста."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "Само за коментари с въпроси и въпроси с дълъг текст."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "Персонализираните променливи служат като междинни или спомагателни променливи, използвани в изчисленията на формуляра. Те приемат входните данни на респондентите като изходни стойности. Всяка персонализирана променлива има уникално име и израз, на който се базира."
@@ -2186,7 +2189,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено, респондентът, който се опитва да подаде дублиран запис, ще получи следното съобщение за грешка."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Позволява ви да изчислявате общи стойности на базата на израз. Изразът може да включва основни изчисления ('{q1_id} + {q2_id}'), булеви изрази ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.н.)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Задейства подкана с молба за потвърждаване на изтриването на реда."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Дублира отговорите от последния ред и ги присвоява на следващия добавен динамичен ред."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Дублира отговорите от последния ред и ги присвоява на следващия добавен динамичен ред."
 // pehelp.description: "Type a subtitle." => "Въведете субтитри."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Изберете език, за да започнете да създавате проучването си. За да добавите превод, превключете на нов език и преведете оригиналния текст тук или в раздела Преводи."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Задава местоположението на раздел с подробни данни по отношение на ред. Изберете от: \"Няма\" - не се добавя разширение; \"Под реда\" - под всеки ред на матрицата се поставя разширение на реда; \"Под реда покажете само разширение на един ред\" - разширение се показва само под един ред, останалите разширения на реда са свити."
@@ -2201,7 +2204,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Отнася се за всички въпроси в тази страница. Ако искате да замените тази настройка, определете правила за подравняване на заглавията за отделни въпроси или панели. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Задава местоположението на съобщение за грешка във връзка с въпроса с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране)."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"Оригинал\" по подразбиране). Ефектът от тази настройка се вижда само в раздела Визуализация ."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"Оригинал\" по подразбиране). Ефектът от тази настройка се вижда само в раздела Визуализация ."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Изберете от: \"Заключени\" - потребителите не могат да разширяват или свиват панели; \"Свиване на всички\" - всички панели започват в срутено състояние; \"Разширяване на всички\" - всички панели започват в разширено състояние; \"Първо разширен\" - само първият панел първоначално се разширява."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Въведете име на споделено свойство в масива от обекти, съдържащ URL адресите на изображения или видеофайлове, които искате да покажете в списъка за избор."
@@ -2230,7 +2233,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "Задейства подкана с молба за потвърждаване на изтриването на файла."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Разреши да се класират само избраните възможности за избор. Потребителите ще плъзгат избраните елементи от списъка за избор, за да ги подредят в областта за класиране."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Въведете списък с възможности за избор, които ще бъдат предложени на респондента по време на въвеждането."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Настройката само преоразмерява входните полета и не влияе на ширината на полето за въпроси."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Настройката само преоразмерява входните полета и не влияе на ширината на полето за въпроси."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Задава еднаква ширина за всички етикети на елементи в пиксели"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Опцията \"Auto\" автоматично определя подходящия режим за показване - Image, Video или YouTube - въз основа на предоставения URL адрес на източника."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Служи като заместител, когато изображението не може да бъде показано на устройството на потребителя и за целите на достъпността."
@@ -2243,8 +2246,8 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // p.itemTitleWidth: "Item label width (in px)" => "Ширина на етикета на елемента (в пиксели)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Текст, който да се показва, ако са избрани всички опции"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Текст в контейнер за областта за класиране"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Попълване на анкетата автоматично"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Попълване на анкетата автоматично"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "Запазване на маскирана стойност в резултатите от проучването"
 // patternmask.pattern: "Value pattern" => "Шаблон на стойност"
 // datetimemask.min: "Minimum value" => "Минимална стойност"
@@ -2469,7 +2472,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // names.default-dark: "Dark" => "Тъмен"
 // names.default-contrast: "Contrast" => "Контраст"
 // panel.showNumber: "Number this panel" => "Номерирайте този панел"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Изберете дали искате проучването автоматично да премине към следващата страница, след като респондентът отговори на всички въпроси на текущата страница. Тази функция няма да се прилага, ако последният въпрос на страницата е отворен или позволява множество отговори."
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Изберете дали искате проучването автоматично да премине към следващата страница, след като респондентът отговори на всички въпроси на текущата страница. Тази функция няма да се прилага, ако последният въпрос на страницата е отворен или позволява множество отговори."
 // autocomplete.name: "Full Name" => "Пълно име"
 // autocomplete.honorific-prefix: "Prefix" => "Префикс"
 // autocomplete.given-name: "First Name" => "Собствено име"
@@ -2526,3 +2529,9 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Заключване на състояние на разгъване/свиване за въпроси"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Все още нямате страници"
 // pe.addNew@pages: "Add new page" => "Добавяне на нова страница"
+// ed.zoomInTooltip: "Zoom In" => "Увеличете"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Намаляване на мащаба"
+// tabs.surfaceBackground: "Surface Background" => "Повърхностен фон"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Използване на отговорите от последния запис по подразбиране"
+// colors.gray: "Gray" => "Сив"

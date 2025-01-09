@@ -1,7 +1,9 @@
-import { CalculatedValue, ExpressionValidator, HtmlConditionItem, QuestionCheckboxBase, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionMatrixDynamicModel,
+import {
+  CalculatedValue, ExpressionValidator, HtmlConditionItem, QuestionCheckboxBase, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionMatrixDynamicModel,
   QuestionMatrixModel, QuestionMultipleTextModel, QuestionRatingModel, QuestionTextModel, QuestionBooleanModel, Serializer, SurveyModel,
   SurveyTriggerRunExpression, UrlConditionItem, settings as surveySettings,
-  ItemValue } from "survey-core";
+  ItemValue
+} from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
 import { EmptySurveyCreatorOptions, settings as settingsCreator } from "../../src/creator-settings";
@@ -220,7 +222,7 @@ test("calculatedValues property editor", () => {
     propertyGrid.survey.getQuestionByName("calculatedValues")
   );
   expect(calcValuesQuestion).toBeTruthy();
-  expect(calcValuesQuestion.isUniqueCaseSensitive).toEqual(false);
+  expect(calcValuesQuestion.useCaseSensitiveComparison).toEqual(false);
   expect(calcValuesQuestion.visibleRows).toHaveLength(1);
   expect(calcValuesQuestion.columns).toHaveLength(2);
   expect(calcValuesQuestion.columns[0].cellType).toEqual("text");

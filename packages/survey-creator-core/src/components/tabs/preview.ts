@@ -36,7 +36,7 @@ export class PreviewViewModel extends Base {
     onSet: (val: PageModel, target: PreviewViewModel) => {
       if (!!val) {
         const survey = target.simulator.survey;
-        if (survey.firstPageIsStarted) {
+        if (survey.firstPageIsStartPage) {
           if (val === survey.pages[0]) {
             survey.clear(false, true);
           } else {
@@ -235,7 +235,7 @@ export class PreviewViewModel extends Base {
         newIndex = 0;
       }
       let nearPage: PageModel = this.showInvisibleElements ? this.survey.pages[newIndex] : this.survey.visiblePages[newIndex];
-      if (!isNext && currentIndex === 0 && this.survey.firstPageIsStarted
+      if (!isNext && currentIndex === 0 && this.survey.firstPageIsStartPage
         && this.survey.pages.length > 0) {
         nearPage = this.survey.pages[0];
       }
@@ -341,8 +341,8 @@ export class PreviewViewModel extends Base {
   }
   private updatePrevNextPageActionState() {
     if (!this.prevPageAction || !this.survey) return;
-    const isPrevEnabled = this.survey.firstPageIsStarted && this.survey.state !== "starting"
-      || (!this.survey.firstPageIsStarted && !this.survey.isFirstPage);
+    const isPrevEnabled = this.survey.firstPageIsStartPage && this.survey.state !== "starting"
+      || (!this.survey.firstPageIsStartPage && !this.survey.isFirstPage);
     this.prevPageAction.enabled = isPrevEnabled;
     const isNextEnabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
     this.nextPageAction.enabled = isNextEnabled;
