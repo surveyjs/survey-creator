@@ -166,23 +166,31 @@ export interface PropertyAddingEvent {
    */
   parentProperty: JsonObjectProperty;
   /**
-   * A survey element that contains `options.property`: page, panel, question, the survey itself, item value (choice option), matrix column, etc.
+   * Obsolete
    */
-  obj: Base;
+  obj?: Base;
   /**
-   * A survey element that contains `options.parentProperty`. `options.parentObj` has a value only for nested properties.
+   * Obsolete
    */
-  parentObj: Base;
+  parentObj?: Base;
   /**
-   * A Boolean property that you can set to `false` if you do not want to add the property.
+   * Obsolete
    */
-  canShow: boolean;
+  canShow?: boolean;
 }
 export interface PropertyShowingEvent extends PropertyAddingEvent {
   /**
    * A Boolean property that you can set to `false` if you do not want to add the property.
    */
   show: boolean;
+  /**
+   * A survey element that contains `options.property`: page, panel, question, the survey itself, item value (choice option), matrix column, etc.
+   */
+  element: Base;
+  /**
+   * A survey element that contains `options.parentProperty`. `options.parentElement` has a value only for nested properties.
+   */
+  parentElement: Base;
 }
 
 export interface PropertyGridSurveyCreatedEvent {

@@ -56,7 +56,8 @@ import {
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
   PageAddingEvent, DragStartEndEvent,
   ElementGetExpandCollapseStateEvent,
-  ElementGetExpandCollapseStateEventReason
+  ElementGetExpandCollapseStateEventReason,
+  PropertyAddingEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -512,7 +513,7 @@ export class SurveyCreatorModel extends Base
    */
   public onPropertyShowing: EventBase<SurveyCreatorModel, PropertyShowingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyShowingEvent>();
   public onCanShowProperty: EventBase<SurveyCreatorModel, any> = this.onPropertyShowing;
-  public onCanShowProperty1: EventBase<SurveyCreatorModel, PropertyAddingEvent1> = this.onPropertyShowing;
+  public onShowingProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.onPropertyShowing;
   /**
    * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
    * @deprecated
@@ -3171,14 +3172,17 @@ export class SurveyCreatorModel extends Base
     if (this.hiddenProperties[property.id]) return false;
     var options = {
       obj: object,
+      element: object,
       property: property,
       canShow: true,
+      show: true,
       showMode: showMode,
       parentObj: parentObj,
+      parentElement: parentObj,
       parentProperty: parentProperty
     };
     this.onCanShowProperty.fire(this, options);
-    return options.canShow;
+    return options.canShow && options.show;
   }
   protected canDeleteItem(
     object: any,
