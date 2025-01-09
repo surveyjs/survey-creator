@@ -3015,7 +3015,7 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   panel.getQuestionByName("elementSelector").value = "q4";
 
   creator.makeNewViewActive("test");
-  expect(creator.activeTab).toBe("test");
+  expect(creator.activeTab).toBe("preview");
 
   const q4 = creator.survey.getQuestionByName("q4");
   expect(q4.enableIf).toBe("{q1} = 4");
@@ -3543,8 +3543,8 @@ test("Limit the number of trigger types, #6031", () => {
     ]
   });
   const hasType = (types: Array<SurveyLogicType>, name: string): boolean => {
-    for(let i = 0; i < types.length; i ++) {
-      if(types[i].name === name) return true;
+    for (let i = 0; i < types.length; i++) {
+      if (types[i].name === name) return true;
     }
     return false;
   };

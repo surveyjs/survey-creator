@@ -89,7 +89,7 @@ export class TabJsonEditorTextareaPlugin
   implements ICreatorPlugin {
   constructor(creator: SurveyCreatorModel) {
     super(creator);
-    creator.addPluginTab("editor", this, undefined, "svc-tab-json-editor-textarea");
+    creator.addPluginTab("json", this, undefined, "svc-tab-json-editor-textarea");
   }
   protected createModel(
     creator: SurveyCreatorModel

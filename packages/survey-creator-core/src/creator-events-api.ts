@@ -896,7 +896,7 @@ export interface CreateCustomMessagePanelEvent {
 
 export interface ActiveTabChangingEvent {
   /**
-   * A tab that is going to become active: `"designer"`, `"test"`, `"theme"`, `"editor"`, `"logic"`, or `"translation"`. 
+   * A tab that is going to become active: `"designer"`, `"preview"`, `"theme"`, `"json"`, `"logic"`, or `"translation"`. 
    */
   tabName: string;
   /**
@@ -907,7 +907,7 @@ export interface ActiveTabChangingEvent {
 
 export interface ActiveTabChangedEvent {
   /**
-   * A tab that has become active: `"designer"`, `"test"`, `"theme"`, `"editor"`, `"logic"`, or `"translation"`.
+   * A tab that has become active: `"designer"`, `"preview"`, `"theme"`, `"json"`, `"logic"`, or `"translation"`.
    */
   tabName: string;
   plugin: ICreatorPlugin;

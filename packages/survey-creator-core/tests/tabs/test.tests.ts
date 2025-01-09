@@ -199,7 +199,7 @@ test("Page action title when the preview shows only, Bug#5277", (): any => {
       }
     ]
   };
-  expect(creator.activeTab).toEqual("test");
+  expect(creator.activeTab).toEqual("preview");
   const model: TestSurveyTabViewModel = getTestModel(creator);
   const pageSelectorAction = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0];
   expect(pageSelectorAction.title).toEqual("Page 1");
@@ -769,7 +769,7 @@ test("Creator footer action bar: only preview tab", (): any => {
       { elements: [{ type: "text", name: "question2" }] }
     ]
   };
-  expect(creator.activeTab).toEqual("test");
+  expect(creator.activeTab).toEqual("preview");
 
   creator.isMobileView = true;
   expect(creator.footerToolbar.actions.length).toEqual(7);
@@ -784,7 +784,7 @@ test("Creator footer action bar: only preview tab", (): any => {
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 });
 
-test("Update theme in active test/preview tab", (): any => {
+test("Update theme in active test/preview tab 1", (): any => {
   const creator = new CreatorTester({ showDesignerTab: false, showPreviewTab: true, showJSONEditorTab: false, showThemeTab: false, showLogicTab: false });
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   creator.JSON = {
@@ -798,10 +798,10 @@ test("Update theme in active test/preview tab", (): any => {
       test: "testVarValue"
     },
   };
-  expect(creator.activeTab).toEqual("test");
+  expect(creator.activeTab).toEqual("preview");
   expect(testPlugin.model.survey.themeVariables["test"]).toBe("testVarValue");
 });
-test("Update theme in active test/preview tab", (): any => {
+test("Update theme in active test/preview tab 2", (): any => {
   const creator = new CreatorTester();
   let testBodyCss = "";
   let previewBodyCss = "";
@@ -814,7 +814,7 @@ test("Update theme in active test/preview tab", (): any => {
     previewBodyCss = options.survey.css.body;
   });
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if (options.reason === "test") {
+    if (options.reason === "preview" || options.reason === "test") {
       instanceBodyCss = options.survey.css.body;
       instanceArea = options.area;
     }
