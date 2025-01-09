@@ -20,7 +20,7 @@ export interface ElementDeletingEvent {
   allowing: boolean;
 }
 
-export interface PropertyGetReadOnlyEvent {
+export interface GetPropertyReadOnlyEvent {
   /**
    * A property whose read-only status you can change.
    */
@@ -30,17 +30,24 @@ export interface PropertyGetReadOnlyEvent {
    */
   parentProperty: JsonObjectProperty;
   /**
+   * Obsolete
+   */
+  obj?: Base;
+  /**
+   * Obsolete
+   */
+  parentObj?: Base;
+  readOnly: boolean;
+}
+export interface PropertyGetReadOnlyEvent extends GetPropertyReadOnlyEvent {
+  /**
    * A survey element (question, panel, page, or the survey itself) for which you can change the read-only status. 
    */
-  obj: Base;
+  element: Base;
   /**
    * A survey element that contains `options.parentProperty`. `options.parentObj` has a value only for nested properties.
    */
-  parentObj: Base;
-  /**
-   * A Boolean value that specifies the property's read-only status.
-   */
-  readOnly: boolean;
+  parentElement: Base;
 }
 
 export interface ElementGetDisplayNameEvent {

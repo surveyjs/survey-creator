@@ -4570,7 +4570,7 @@ test("New ghost page shouldn't be created if onPageAdding sets allow to false", 
 });
 test("Do not raise error on undefined property in onIsPropertyReadOnlyCallback", (): any => {
   const creator = new CreatorTester();
-  creator.onGetPropertyReadOnly.add((_, options) => { });
+  creator.onPropertyGetReadOnly.add((_, options) => { });
   let counter = 0;
   expect(creator.onIsPropertyReadOnlyCallback(creator.survey, undefined, false, undefined, undefined)).toBeFalsy();
 });
