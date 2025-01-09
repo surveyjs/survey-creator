@@ -530,7 +530,11 @@ export class SurveyCreatorModel extends Base
   /**
    * An event that is raised before Survey Creator displays a pop-up window called from the Property Grid. This window allows users to edit choices, conditions, etc. Use this event to customize the pop-up window, for example, add custom action buttons.
    */
-  public onPropertyGridShowModal: EventBase<SurveyCreatorModel, PropertyGridShowPopupEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGridShowPopupEvent>();
+  public onPropertyGridShowPopup: EventBase<SurveyCreatorModel, PropertyGridShowPopupEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGridShowPopupEvent>();
+  /**
+   * Obsolete
+   */
+  public onPropertyGridShowModal: EventBase<SurveyCreatorModel, PropertyGridShowPopupEvent> = this.onPropertyGridShowPopup;
   public onCanDeleteItem: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   public onCollectionItemDeleting: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   /**
@@ -847,7 +851,17 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: -1 (unlimited)
    */
-  public maxLogicItemsInCondition: number = -1;
+  public logicMaxItemsInCondition: number = -1;
+  /**
+   * Obsolete. Use the [`logicMaxItemsInCondition`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#logicMaxItemsInCondition) property instead.
+   * @deprecated
+   */
+  public get maxLogicItemsInCondition() {
+    return this.logicMaxItemsInCondition;
+  }
+  public set maxLogicItemsInCondition(val) {
+    this.logicMaxItemsInCondition = val;
+  }
 
   /**
    * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
@@ -886,8 +900,16 @@ export class SurveyCreatorModel extends Base
    * Default value: `true`
    * @see showLogicTab
    */
-  public allowEditExpressionsInTextEditor = true;
-
+  public logicAllowTextEditExpressions = true;
+  /**
+   * Obsolete
+   */
+  get allowEditExpressionsInTextEditor() {
+    return this.logicAllowTextEditExpressions;
+  }
+  set allowEditExpressionsInTextEditor(val) {
+    this.logicAllowTextEditExpressions = val;
+  }
   /**
    * Limits the number of columns that users can add to [Single-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Multi-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel), and [Dynamic Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel) questions.
    *
@@ -3375,7 +3397,7 @@ export class SurveyCreatorModel extends Base
     popupEditor: any,
     popupModel: PopupBaseViewModel): void {
     const options = { obj: object, property: property, editor: editor, popupEditor: popupEditor, popupModel: popupModel };
-    this.onPropertyGridShowModal.fire(this, options);
+    this.onPropertyGridShowPopup.fire(this, options);
   }
   onCanDeleteItemCallback(
     object: any,
