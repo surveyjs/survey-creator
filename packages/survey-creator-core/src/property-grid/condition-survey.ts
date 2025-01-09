@@ -697,7 +697,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     for (let i = 0; i < res.length; i++) {
       res[i].value = res[i].name;
       let question = !!res[i].question ? res[i].question : res[i];
-      if (!this.options.showTitlesInExpressions) {
+      if (!(this.options.useElementTitles || this.options.showTitlesInExpressions)) {
         let name = res[i].name;
         let valueName = question.valueName;
         if (!!valueName && name.indexOf(valueName) == 0) {

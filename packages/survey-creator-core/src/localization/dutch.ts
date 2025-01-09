@@ -109,6 +109,9 @@ export var nlStrings = {
     redoTooltip: "Voer de wijziging opnieuw uit",
     expandAllTooltip: "Alles uitvouwen",
     collapseAllTooltip: "Alles inklappen",
+    zoomInTooltip: "Inzoomen",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Uitzoomen",
     lockQuestionsTooltip: "Vergrendel de uitvouw-/samenvouwstatus voor vragen",
     showMoreChoices: "Toon meer",
     showLessChoices: "Toon minder",
@@ -296,7 +299,7 @@ export var nlStrings = {
       description: "Beschrijving van het paneel",
       visibleIf: "Maak het paneel zichtbaar als",
       requiredIf: "Maak het paneel vereist als",
-      questionsOrder: "Volgorde van de vragen binnen het panel",
+      questionOrder: "Volgorde van de vragen binnen het panel",
       page: "Bovenliggende pagina",
       startWithNewLine: "Het paneel op een nieuwe regel weergeven",
       state: "Status van paneel samenvouwen",
@@ -327,7 +330,7 @@ export var nlStrings = {
       hideNumber: "Het paneelnummer verbergen",
       titleLocation: "Uitlijning van paneeltitels",
       descriptionLocation: "Uitlijning van paneelbeschrijving",
-      templateTitleLocation: "Uitlijning van vraagtitels",
+      templateQuestionTitleLocation: "Uitlijning van vraagtitels",
       templateErrorLocation: "Uitlijning van foutmeldingen",
       newPanelPosition: "Nieuwe paneellocatie",
       showRangeInProgress: "De voortgangsbalk weergeven",
@@ -394,7 +397,7 @@ export var nlStrings = {
       visibleIf: "Maak de pagina zichtbaar als",
       requiredIf: "Maak de pagina vereist als",
       timeLimit: "Tijdslimiet om de pagina te voltooien (in seconden)",
-      questionsOrder: "Volgorde van vragen op de pagina"
+      questionOrder: "Volgorde van vragen op de pagina"
     },
     matrixdropdowncolumn: {
       name: "Naam van de kolom",
@@ -560,7 +563,7 @@ export var nlStrings = {
     isRequired: "Is verplicht?",
     markRequired: "Markeren zoals vereist",
     removeRequiredMark: "Verwijder de vereiste markering",
-    isAllRowRequired: "Antwoord vereisen voor alle rijen",
+    eachRowRequired: "Antwoord vereisen voor alle rijen",
     eachRowUnique: "Voorkom dubbele antwoorden in rijen",
     requiredErrorText: "Tekst bij niet-ingevulde verplichte vraag",
     startWithNewLine: "Beginnen met een nieuwe regel?",
@@ -572,7 +575,7 @@ export var nlStrings = {
     maxSize: "Maximale bestandsgrootte in bytes",
     rowCount: "Aantal rijen",
     columnLayout: "Kolommen layout",
-    addRowLocation: "Voeg de locatie van de rijknop toe",
+    addRowButtonLocation: "Voeg de locatie van de rijknop toe",
     transposeData: "Rijen transponeren naar kolommen",
     addRowText: "Voeg tekst van de rijknop toe",
     removeRowText: "Verwijder de tekst van de rijknop",
@@ -611,7 +614,7 @@ export var nlStrings = {
     mode: "Modus (bewerken/alleen lezen)",
     clearInvisibleValues: "Wis onzichtbare waarden",
     cookieName: "Cookienaam (zodat enquête slechts éénmalig wordt ingevuld)",
-    sendResultOnPageNext: "Antwoorden opslaan bij pagina-overgang",
+    partialSendEnabled: "Antwoorden opslaan bij pagina-overgang",
     storeOthersAsComment: "Sla de waarde van 'anderen' op in een apart veld",
     showPageTitles: "Toon paginatitels",
     showPageNumbers: "Toon paginanummers",
@@ -623,18 +626,18 @@ export var nlStrings = {
     startSurveyText: "Knoptitel 'Starten'",
     showNavigationButtons: "Navigatieknoppen weergeven (standaardnavigatie)",
     showPrevButton: "Toon knop 'Vorige pagina' (gebruiker kan terugkeren)",
-    firstPageIsStarted: "De eerste pagina in de enquête is een startpagina",
-    showCompletedPage: "Toon bij afronden deze HTML-code",
-    goNextPageAutomatic: "Na alle vragen automatisch naar volgende pagina gaan",
-    allowCompleteSurveyAutomatic: "Vul de enquête automatisch in",
+    firstPageIsStartPage: "De eerste pagina in de enquête is een startpagina",
+    showCompletePage: "Toon bij afronden deze HTML-code",
+    autoAdvanceEnabled: "Na alle vragen automatisch naar volgende pagina gaan",
+    autoAdvanceAllowComplete: "Vul de enquête automatisch in",
     showProgressBar: "Toon voortgangsbalk",
     questionTitleLocation: "Plek vraagtitel",
     questionTitleWidth: "Breedte van de vraagtitel",
-    requiredText: "Symbool(en) verplichte vraag",
+    requiredMark: "Symbool(en) verplichte vraag",
     questionTitleTemplate: "Vraagtitelsjabloon, standaard is: '{no}. {vereisen} {titel}'",
     questionErrorLocation: "Plek vraagfoutmelding",
-    focusFirstQuestionAutomatic: "Op volgende pagina focus op de eerste vraag zetten",
-    questionsOrder: "Volgorde elementen op pagina",
+    autoFocusFirstQuestion: "Op volgende pagina focus op de eerste vraag zetten",
+    questionOrder: "Volgorde elementen op pagina",
     timeLimit: "Maximale tijd om de enquête te voltooien",
     timeLimitPerPage: "Maximale tijd om een pagina in de enquête te voltooien",
     showTimer: "Gebruik een timer",
@@ -651,7 +654,7 @@ export var nlStrings = {
     dataFormat: "Beeldformaat",
     allowAddRows: "Het toevoegen van rijen toestaan",
     allowRemoveRows: "Het verwijderen van rijen toestaan",
-    allowRowsDragAndDrop: "Rij slepen en neerzetten toestaan",
+    allowRowReorder: "Rij slepen en neerzetten toestaan",
     responsiveImageSizeHelp: "Is niet van toepassing als u de exacte breedte of hoogte van de afbeelding opgeeft.",
     minImageWidth: "Minimale afbeeldingsbreedte",
     maxImageWidth: "Maximale afbeeldingsbreedte",
@@ -678,13 +681,13 @@ export var nlStrings = {
     logo: "Logo (URL of base64-gecodeerde tekenreeks)",
     questionsOnPageMode: "Structuur van de enquête",
     maxTextLength: "Maximale tekstlengte",
-    maxOthersLength: "Maximale tekstlengte optie 'Anders:'",
+    maxCommentLength: "Maximale tekstlengte optie 'Anders:'",
     commentAreaRows: "Hoogte commentaargebied (in lijnen)",
     autoGrowComment: "Commentaargebied indien nodig automatisch uitvouwen",
     allowResizeComment: "Gebruikers toestaan het formaat van tekstgebieden te wijzigen",
     textUpdateMode: "Modus tekstvernieuwing",
     maskType: "Type invoermasker",
-    focusOnFirstError: "Focus op eerste fout zetten",
+    autoFocusFirstError: "Focus op eerste fout zetten",
     checkErrorsMode: "Validatie uitvoeren",
     validateVisitedEmptyFields: "Lege velden valideren bij verloren focus",
     navigateToUrl: "Navigeer naar URL",
@@ -742,12 +745,11 @@ export var nlStrings = {
     keyDuplicationError: "Foutbericht 'Niet-unieke sleutelwaarde'",
     minSelectedChoices: "Minimaal geselecteerde keuzes",
     maxSelectedChoices: "Maximum aantal geselecteerde keuzes",
-    showClearButton: "De knop Wissen weergeven",
     logoWidth: "Breedte logo",
     logoHeight: "Hoogte logo",
     readOnly: "Alleen-lezen",
     enableIf: "Bewerkbaar als",
-    emptyRowsText: "Bericht 'Geen rijen'",
+    noRowsText: "Bericht 'Geen rijen'",
     separateSpecialChoices: "Speciale keuzes afzonderlijk (Geen, Overig, Alles selecteren)",
     choicesFromQuestion: "Kopieer keuzes uit de volgende vraag",
     choicesFromQuestionMode: "Welke keuzes kopiëren?",
@@ -756,7 +758,7 @@ export var nlStrings = {
     showCommentArea: "Het opmerkingenveld weergeven",
     commentPlaceholder: "Tijdelijke aanduiding voor het opmerkingengebied",
     displayRateDescriptionsAsExtremeItems: "Beschrijvingen van tarieven weergeven als extreme waarden",
-    rowsOrder: "Rijvolgorde",
+    rowOrder: "Rijvolgorde",
     columnsLayout: "Kolomindeling",
     columnColCount: "Aantal geneste kolommen",
     correctAnswer: "Juist antwoord",
@@ -833,6 +835,7 @@ export var nlStrings = {
       background: "Achtergrond",
       appearance: "Uiterlijk",
       accentColors: "Accent kleuren",
+      surfaceBackground: "Oppervlakte Achtergrond",
       scaling: "Schalen",
       others: "Anderen"
     },
@@ -843,8 +846,7 @@ export var nlStrings = {
     columnsEnableIf: "Kolommen zijn zichtbaar als",
     rowsEnableIf: "Rijen zijn zichtbaar als",
     innerIndent: "Binnenste inspringingen toevoegen",
-    defaultValueFromLastRow: "Standaardwaarden uit de laatste rij nemen",
-    defaultValueFromLastPanel: "Standaardwaarden uit het laatste deelvenster overnemen",
+    copyDefaultValueFromLastEntry: "Gebruik antwoorden van de laatste invoer als standaard",
     enterNewValue: "Voer de waarde in.",
     noquestions: "Er is geen enkele vraag in de enquête.",
     createtrigger: "Maak een trigger",
@@ -1120,7 +1122,7 @@ export var nlStrings = {
     timerInfoMode: {
       combined: "Beide"
     },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "Afhankelijk van de matrixindeling"
     },
     panelsState: {
@@ -1191,10 +1193,10 @@ export var nlStrings = {
       percent: "Percentage",
       date: "Datum"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "Origineel"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "Origineel"
     },
     showProgressBar: {
@@ -1345,7 +1347,7 @@ export var nlStrings = {
       questionTitleLocation: "Geldt voor alle vragen binnen dit panel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
       questionTitleWidth: "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in met betrekking tot alle vragen in het panel. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe.",
-      questionsOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe.",
+      questionOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe.",
       page: "Hiermee verplaatst u het deelvenster naar het einde van een geselecteerde pagina.",
       innerIndent: "Hiermee voegt u ruimte of marge toe tussen de inhoud van het deelvenster en de linkerrand van het deelvenstervak.",
       startWithNewLine: "Schakel de optie uit om het deelvenster op één regel weer te geven met de vorige vraag of het vorige deelvenster. De instelling is niet van toepassing als het deelvenster het eerste element in uw formulier is.",
@@ -1359,7 +1361,7 @@ export var nlStrings = {
       visibleIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die de zichtbaarheid van het deelvenster bepaalt.",
       enableIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die de alleen-lezen modus voor het deelvenster uitschakelt.",
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
-      templateTitleLocation: "Geldt voor alle vragen binnen dit panel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
+      templateQuestionTitleLocation: "Geldt voor alle vragen binnen dit panel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
       templateErrorLocation: "Hiermee stelt u de locatie in van een foutmelding met betrekking tot een vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
       errorLocation: "Hiermee stelt u de locatie van een foutmelding in met betrekking tot alle vragen in het panel. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe.",
       page: "Hiermee verplaatst u het deelvenster naar het einde van een geselecteerde pagina.",
@@ -1374,9 +1376,10 @@ export var nlStrings = {
       titleLocation: "Deze instelling wordt automatisch overgenomen door alle vragen in dit paneel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
       descriptionLocation: "De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe (\"Standaard onder de paneeltitel\").",
       newPanelPosition: "Definieert de positie van een nieuw toegevoegd deelvenster. Standaard worden er nieuwe panelen aan het einde toegevoegd. Selecteer \"Volgende\" om een nieuw paneel in te voegen na het huidige.",
-      defaultValueFromLastPanel: "Dupliceert antwoorden uit het laatste deelvenster en wijst ze toe aan het volgende toegevoegde dynamische deelvenster.",
+      copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit het laatste deelvenster en wijst ze toe aan het volgende toegevoegde dynamische deelvenster.",
       keyName: "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag."
     },
+    copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij.",
     defaultValueExpression: "Met deze instelling kunt u een standaardantwoordwaarde toewijzen op basis van een expressie. De expressie kan basisberekeningen bevatten - '{q1_id} + {q2_id}', Booleaanse expressies, zoals '{age} > 60', en functies: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', enz. De waarde die door deze expressie wordt bepaald, dient als de oorspronkelijke standaardwaarde die kan worden overschreven door de handmatige invoer van een respondent.",
     resetValueIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die bepaalt wanneer de invoer van een respondent wordt teruggezet naar de waarde op basis van de \"Standaardwaarde-expressie\" of \"Waarde-expressie instellen\" of naar de waarde \"Standaardantwoord\" (als een van beide is ingesteld).",
     setValueIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die bepaalt wanneer de expressie 'Waarde instellen' moet worden uitgevoerd en wijs de resulterende waarde dynamisch toe als antwoord.",
@@ -1449,19 +1452,19 @@ export var nlStrings = {
     logoWidth: "Hiermee stelt u de breedte van het logo in CSS-eenheden in (px, %, in, pt, enz.).",
     logoHeight: "Hiermee stelt u de hoogte van een logo in CSS-eenheden in (px, %, in, pt, enz.).",
     logoFit: "Kies uit: \"Geen\" - afbeelding behoudt zijn oorspronkelijke grootte; \"Bevatten\" - het formaat van de afbeelding wordt aangepast aan de beeldverhouding met behoud van de beeldverhouding; \"Omslag\" - afbeelding vult het hele vak met behoud van de beeldverhouding; \"Vullen\" - de afbeelding wordt uitgerekt om het vak te vullen zonder de beeldverhouding te behouden.",
-    goNextPageAutomatic: "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina gaat zodra een respondent alle vragen op de huidige pagina heeft beantwoord. Deze functie is niet van toepassing als de laatste vraag op de pagina een open einde heeft of meerdere antwoorden toestaat.",
-    allowCompleteSurveyAutomatic: "Selecteer of u wilt dat de enquête automatisch wordt ingevuld nadat een respondent alle vragen heeft beantwoord.",
+    autoAdvanceEnabled: "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina gaat zodra een respondent alle vragen op de huidige pagina heeft beantwoord. Deze functie is niet van toepassing als de laatste vraag op de pagina een open einde heeft of meerdere antwoorden toestaat.",
+    autoAdvanceAllowComplete: "Selecteer of u wilt dat de enquête automatisch wordt ingevuld nadat een respondent alle vragen heeft beantwoord.",
     showNavigationButtons: "Hiermee stelt u de zichtbaarheid en locatie van navigatieknoppen op een pagina in.",
     showProgressBar: "Hiermee stelt u de zichtbaarheid en locatie van een voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer.",
     showPreviewBeforeComplete: "Schakel de voorbeeldpagina in met alleen alle of beantwoorde vragen.",
     questionTitleLocation: "Geldt voor alle vragen in de enquête. Deze instelling kan worden overschreven door regels voor titeluitlijning op lagere niveaus: deelvenster, pagina of vraag. Een instelling op een lager niveau heeft voorrang op die op een hoger niveau.",
-    requiredText: "Een symbool of een reeks symbolen die aangeven dat een antwoord vereist is.",
+    requiredMark: "Een symbool of een reeks symbolen die aangeven dat een antwoord vereist is.",
     questionStartIndex: "Voer een cijfer of letter in waarmee u wilt beginnen met nummeren.",
     questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst.",
-    focusFirstQuestionAutomatic: "Selecteer of u het eerste invoerveld op elke pagina klaar wilt maken voor tekstinvoer.",
-    questionsOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
+    autoFocusFirstQuestion: "Selecteer of u het eerste invoerveld op elke pagina klaar wilt maken voor tekstinvoer.",
+    questionOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
     maxTextLength: "Alleen voor vragen over tekstinvoer.",
-    maxOthersLength: "Alleen voor opmerkingen over vragen.",
+    maxCommentLength: "Alleen voor opmerkingen over vragen.",
     commentAreaRows: "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. In de invoer neemt meer regels in beslag, de schuifbalk verschijnt.",
     autoGrowComment: "Selecteer of u wilt dat vraagopmerkingen en lange tekstvragen automatisch in hoogte groeien op basis van de ingevoerde tekstlengte.",
     allowResizeComment: "Alleen voor vraagopmerkingen en lange tekstvragen.",
@@ -1479,7 +1482,6 @@ export var nlStrings = {
     keyDuplicationError: "Wanneer de eigenschap 'Dubbele antwoorden voorkomen' is ingeschakeld, ontvangt een respondent die een dubbele vermelding probeert in te dienen, het volgende foutbericht.",
     totalExpression: "Hiermee kunt u totale waarden berekenen op basis van een expressie. De expressie kan basisberekeningen ('{q1_id} + {q2_id}'), Booleaanse expressies ('{age} > 60') en functies ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.) bevatten.",
     confirmDelete: "Hiermee wordt gevraagd om het verwijderen van de rij te bevestigen.",
-    defaultValueFromLastRow: "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij.",
     keyName: "Als de opgegeven kolom identieke waarden bevat, genereert de enquête de fout 'Niet-unieke sleutelwaarde'.",
     description: "Typ een ondertitel.",
     locale: "Kies een taal om te beginnen met het maken van uw enquête. Als u een vertaling wilt toevoegen, schakelt u over naar een nieuwe taal en vertaalt u de originele tekst hier of op het tabblad Vertalingen.",
@@ -1498,7 +1500,7 @@ export var nlStrings = {
       questionTitleLocation: "Geldt voor alle vragen op deze pagina. Als je deze instelling wilt overschrijven, definieer je regels voor titeluitlijning voor afzonderlijke vragen of panelen. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard).",
       questionTitleWidth: "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard).",
-      questionsOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overerven\" past de instelling op enquêteniveau toe (\"Standaard Origineel\"). Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
+      questionOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overerven\" past de instelling op enquêteniveau toe (\"Standaard Origineel\"). Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
       navigationButtonsVisibility: "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat."
     },
     timerLocation: "Hiermee stelt u de locatie van een timer op een pagina in.",
@@ -1535,7 +1537,7 @@ export var nlStrings = {
     needConfirmRemoveFile: "Hiermee wordt een prompt geactiveerd waarin wordt gevraagd om het verwijderen van het bestand te bevestigen.",
     selectToRankEnabled: "Schakel in om alleen geselecteerde keuzes te rangschikken. Gebruikers slepen geselecteerde items uit de keuzelijst om ze binnen het rangschikkingsgebied te rangschikken.",
     dataList: "Voer een lijst met keuzes in die tijdens de invoer aan de respondent worden voorgesteld.",
-    itemSize: "De instelling wijzigt alleen de grootte van de invoervelden en heeft geen invloed op de breedte van het vraagvak.",
+    inputSize: "De instelling wijzigt alleen de grootte van de invoervelden en heeft geen invloed op de breedte van het vraagvak.",
     itemTitleWidth: "Hiermee stelt u een consistente breedte in voor alle artikellabels in pixels",
     inputTextAlignment: "Selecteer hoe u de invoerwaarde binnen het veld wilt uitlijnen. De standaardinstelling \"Auto\" lijnt de invoerwaarde uit aan de rechterkant als valuta- of numerieke maskering wordt toegepast en aan de linkerkant als dat niet het geval is.",
     altText: "Dient als vervanging wanneer de afbeelding niet kan worden weergegeven op het apparaat van een gebruiker en voor toegankelijkheidsdoeleinden.",
@@ -1653,7 +1655,7 @@ export var nlStrings = {
     maxValueExpression: "Maximale waarde-expressie",
     step: "Stap",
     dataList: "Gegevenslijst",
-    itemSize: "Item grootte",
+    inputSize: "Item grootte",
     itemTitleWidth: "Breedte artikellabel (in px)",
     inputTextAlignment: "Uitlijning van invoerwaarden",
     elements: "Elementen",
@@ -1755,7 +1757,8 @@ export var nlStrings = {
       orchid: "Orchidee",
       tulip: "Tulp",
       brown: "Bruin",
-      green: "Groen"
+      green: "Groen",
+      gray: "Grijs"
     }
   },
   creatortheme: {
@@ -1876,7 +1879,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.dataFormat: "Image format" => "Beeldformaat"
 // pe.allowAddRows: "Allow adding rows" => "Het toevoegen van rijen toestaan"
 // pe.allowRemoveRows: "Allow removing rows" => "Het verwijderen van rijen toestaan"
-// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "Rij slepen en neerzetten toestaan"
+// pe.allowRowReorder: "Allow row drag and drop" => "Rij slepen en neerzetten toestaan"
 // pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "Is niet van toepassing als u de exacte breedte of hoogte van de afbeelding opgeeft."
 // pe.minImageWidth: "Minimum image width" => "Minimale afbeeldingsbreedte"
 // pe.maxImageWidth: "Maximum image width" => "Maximale afbeeldingsbreedte"
@@ -1925,7 +1928,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.panelPrevText: "Previous Panel button tooltip" => "Knopinfo vorige deelvensterknop"
 // pe.panelNextText: "Next Panel button tooltip" => "knopinfo voor het volgende deelvenster"
 // pe.showRangeInProgress: "Show progress bar" => "Voortgangsbalk weergeven"
-// pe.templateTitleLocation: "Question title location" => "Locatie van de vraagtitel"
+// pe.templateQuestionTitleLocation: "Question title location" => "Locatie van de vraagtitel"
 // pe.panelRemoveButtonLocation: "Remove Panel button location" => "Locatie van de knop Deelvenster verwijderen"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Verberg de vraag als er geen rijen zijn"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Kolommen verbergen als er geen rijen zijn"
@@ -1949,11 +1952,10 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Foutbericht 'Niet-unieke sleutelwaarde'"
 // pe.minSelectedChoices: "Minimum selected choices" => "Minimaal geselecteerde keuzes"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maximum aantal geselecteerde keuzes"
-// pe.showClearButton: "Show the Clear button" => "De knop Wissen weergeven"
 // pe.showNumber: "Show panel number" => "Toon paneelnummer"
 // pe.readOnly: "Read-only" => "Alleen-lezen"
 // pe.enableIf: "Editable if" => "Bewerkbaar als"
-// pe.emptyRowsText: "\"No rows\" message" => "Bericht 'Geen rijen'"
+// pe.noRowsText: "\"No rows\" message" => "Bericht 'Geen rijen'"
 // pe.size: "Input field size (in characters)" => "Grootte invoerveld (in tekens)"
 // pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "Speciale keuzes afzonderlijk (Geen, Overig, Alles selecteren)"
 // pe.choicesFromQuestion: "Copy choices from the following question" => "Kopieer keuzes uit de volgende vraag"
@@ -1961,7 +1963,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.showCommentArea: "Show the comment area" => "Het opmerkingenveld weergeven"
 // pe.commentPlaceholder: "Comment area placeholder" => "Tijdelijke aanduiding voor het opmerkingengebied"
 // pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "Beschrijvingen van tarieven weergeven als extreme waarden"
-// pe.rowsOrder: "Row order" => "Rijvolgorde"
+// pe.rowOrder: "Row order" => "Rijvolgorde"
 // pe.columnsLayout: "Column layout" => "Kolomindeling"
 // pe.columnColCount: "Nested column count" => "Aantal geneste kolommen"
 // pe.state: "Panel expand state" => "Uitvouwstatus deelvenster"
@@ -1978,8 +1980,6 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.indent: "Add indents" => "Inspringingen toevoegen"
 // panel.indent: "Add outer indents" => "Buitenste streepjes toevoegen"
 // pe.innerIndent: "Add inner indents" => "Binnenste inspringingen toevoegen"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Standaardwaarden uit de laatste rij nemen"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Standaardwaarden uit het laatste deelvenster overnemen"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "Typ hier expressie..."
 // pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "Wis de waarde als de vraag verborgen wordt"
 // pe.valuePropertyName: "Value property name" => "Naam van de eigenschap Value"
@@ -2041,7 +2041,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // showTimerPanel.none: "Hidden" => "Verborgen"
 // showTimerPanelMode.all: "Both" => "Beide"
 // detailPanelMode.none: "Hidden" => "Verborgen"
-// addRowLocation.default: "Depends on matrix layout" => "Afhankelijk van de matrixindeling"
+// addRowButtonLocation.default: "Depends on matrix layout" => "Afhankelijk van de matrixindeling"
 // panelsState.default: "Users cannot expand or collapse panels" => "Gebruikers kunnen deelvensters niet uitvouwen of samenvouwen"
 // panelsState.collapsed: "All panels are collapsed" => "Alle panelen zijn samengevouwen"
 // panelsState.expanded: "All panels are expanded" => "Alle panelen zijn uitgebreid"
@@ -2356,7 +2356,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // panel.description: "Panel description" => "Beschrijving van het paneel"
 // panel.visibleIf: "Make the panel visible if" => "Maak het paneel zichtbaar als"
 // panel.requiredIf: "Make the panel required if" => "Maak het paneel vereist als"
-// panel.questionsOrder: "Question order within the panel" => "Volgorde van de vragen binnen het panel"
+// panel.questionOrder: "Question order within the panel" => "Volgorde van de vragen binnen het panel"
 // panel.startWithNewLine: "Display the panel on a new line" => "Het paneel op een nieuwe regel weergeven"
 // panel.state: "Panel collapse state" => "Status van paneel samenvouwen"
 // panel.width: "Inline panel width" => "Inline paneelbreedte"
@@ -2381,7 +2381,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // paneldynamic.hideNumber: "Hide the panel number" => "Het paneelnummer verbergen"
 // paneldynamic.titleLocation: "Panel title alignment" => "Uitlijning van paneeltitels"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "Uitlijning van paneelbeschrijving"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "Uitlijning van vraagtitels"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "Uitlijning van vraagtitels"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "Uitlijning van foutmeldingen"
 // paneldynamic.newPanelPosition: "New panel location" => "Nieuwe paneellocatie"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "Voorkom dubbele antwoorden in de volgende vraag"
@@ -2414,7 +2414,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // page.description: "Page description" => "Pagina beschrijving"
 // page.visibleIf: "Make the page visible if" => "Maak de pagina zichtbaar als"
 // page.requiredIf: "Make the page required if" => "Maak de pagina vereist als"
-// page.questionsOrder: "Question order on the page" => "Volgorde van vragen op de pagina"
+// page.questionOrder: "Question order on the page" => "Volgorde van vragen op de pagina"
 // matrixdropdowncolumn.name: "Column name" => "Naam van de kolom"
 // matrixdropdowncolumn.title: "Column title" => "Titel van de kolom"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "Voorkom dubbele reacties"
@@ -2488,8 +2488,8 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // totalDisplayStyle.currency: "Currency" => "Valuta"
 // totalDisplayStyle.percent: "Percentage" => "Percentage"
 // totalDisplayStyle.date: "Date" => "Datum"
-// rowsOrder.initial: "Original" => "Origineel"
-// questionsOrder.initial: "Original" => "Origineel"
+// rowOrder.initial: "Original" => "Origineel"
+// questionOrder.initial: "Original" => "Origineel"
 // showProgressBar.aboveheader: "Above the header" => "Boven de koptekst"
 // showProgressBar.belowheader: "Below the header" => "Onder de kop"
 // pv.sum: "Sum" => "Som"
@@ -2506,7 +2506,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Geldt voor alle vragen binnen dit panel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Hiermee stelt u de locatie van een foutmelding in met betrekking tot alle vragen in het panel. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe."
 // panel.page: "Repositions the panel to the end of a selected page." => "Hiermee verplaatst u het deelvenster naar het einde van een geselecteerde pagina."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "Hiermee voegt u ruimte of marge toe tussen de inhoud van het deelvenster en de linkerrand van het deelvenstervak."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "Schakel de optie uit om het deelvenster op één regel weer te geven met de vorige vraag of het vorige deelvenster. De instelling is niet van toepassing als het deelvenster het eerste element in uw formulier is."
@@ -2517,7 +2517,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die de zichtbaarheid van het deelvenster bepaalt."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die de alleen-lezen modus voor het deelvenster uitschakelt."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Geldt voor alle vragen binnen dit panel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Geldt voor alle vragen binnen dit panel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Hiermee stelt u de locatie in van een foutmelding met betrekking tot een vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Hiermee stelt u de locatie van een foutmelding in met betrekking tot alle vragen in het panel. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "Hiermee verplaatst u het deelvenster naar het einde van een geselecteerde pagina."
@@ -2531,7 +2531,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Deze instelling wordt automatisch overgenomen door alle vragen in dit paneel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe (\"Standaard onder de paneeltitel\")."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Definieert de positie van een nieuw toegevoegd deelvenster. Standaard worden er nieuwe panelen aan het einde toegevoegd. Selecteer \"Volgende\" om een nieuw paneel in te voegen na het huidige."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Dupliceert antwoorden uit het laatste deelvenster en wijst ze toe aan het volgende toegevoegde dynamische deelvenster."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Dupliceert antwoorden uit het laatste deelvenster en wijst ze toe aan het volgende toegevoegde dynamische deelvenster."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Met deze instelling kunt u een standaardantwoordwaarde toewijzen op basis van een expressie. De expressie kan basisberekeningen bevatten - '{q1_id} + {q2_id}', Booleaanse expressies, zoals '{age} > 60', en functies: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', enz. De waarde die door deze expressie wordt bepaald, dient als de oorspronkelijke standaardwaarde die kan worden overschreven door de handmatige invoer van een respondent."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die bepaalt wanneer de invoer van een respondent wordt teruggezet naar de waarde op basis van de \"Standaardwaarde-expressie\" of \"Waarde-expressie instellen\" of naar de waarde \"Standaardantwoord\" (als een van beide is ingesteld)."
@@ -2581,13 +2581,13 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Hiermee stelt u de zichtbaarheid en locatie van een voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Schakel de voorbeeldpagina in met alleen alle of beantwoorde vragen."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "Geldt voor alle vragen in de enquête. Deze instelling kan worden overschreven door regels voor titeluitlijning op lagere niveaus: deelvenster, pagina of vraag. Een instelling op een lager niveau heeft voorrang op die op een hoger niveau."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "Een symbool of een reeks symbolen die aangeven dat een antwoord vereist is."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "Een symbool of een reeks symbolen die aangeven dat een antwoord vereist is."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "Voer een cijfer of letter in waarmee u wilt beginnen met nummeren."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "Selecteer of u het eerste invoerveld op elke pagina klaar wilt maken voor tekstinvoer."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "Selecteer of u het eerste invoerveld op elke pagina klaar wilt maken voor tekstinvoer."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld."
 // pehelp.maxTextLength: "For text entry questions only." => "Alleen voor vragen over tekstinvoer."
-// pehelp.maxOthersLength: "For question comments only." => "Alleen voor opmerkingen over vragen."
+// pehelp.maxCommentLength: "For question comments only." => "Alleen voor opmerkingen over vragen."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "Selecteer of u wilt dat vraagopmerkingen en lange tekstvragen automatisch in hoogte groeien op basis van de ingevoerde tekstlengte."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "Alleen voor vraagopmerkingen en lange tekstvragen."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "Aangepaste variabelen dienen als tussenliggende of hulpvariabelen die worden gebruikt in formulierberekeningen. Ze nemen de input van respondenten als bronwaarden. Elke aangepaste variabele heeft een unieke naam en een expressie waarop deze is gebaseerd."
@@ -2603,7 +2603,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Wanneer de eigenschap 'Dubbele antwoorden voorkomen' is ingeschakeld, ontvangt een respondent die een dubbele vermelding probeert in te dienen, het volgende foutbericht."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Hiermee kunt u totale waarden berekenen op basis van een expressie. De expressie kan basisberekeningen ('{q1_id} + {q2_id}'), Booleaanse expressies ('{age} > 60') en functies ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.) bevatten."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Hiermee wordt gevraagd om het verwijderen van de rij te bevestigen."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij."
 // pehelp.description: "Type a subtitle." => "Typ een ondertitel."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Kies een taal om te beginnen met het maken van uw enquête. Als u een vertaling wilt toevoegen, schakelt u over naar een nieuwe taal en vertaalt u de originele tekst hier of op het tabblad Vertalingen."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Hiermee stelt u de locatie van een detailsectie ten opzichte van een rij in. Kies uit: \"Geen\" - er wordt geen uitbreiding toegevoegd; \"Onder de rij\" - onder elke rij van de matrix wordt een rij-uitbreiding geplaatst; \"Onder de rij, slechts één rij-uitbreiding weergeven\" - een uitbreiding wordt alleen onder een enkele rij weergegeven, de resterende rij-uitbreidingen zijn samengevouwen."
@@ -2618,7 +2618,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Geldt voor alle vragen op deze pagina. Als je deze instelling wilt overschrijven, definieer je regels voor titeluitlijning voor afzonderlijke vragen of panelen. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard)."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overerven\" past de instelling op enquêteniveau toe (\"Standaard Origineel\"). Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overerven\" past de instelling op enquêteniveau toe (\"Standaard Origineel\"). Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Kies uit: \"Vergrendeld\" - gebruikers kunnen panelen niet uitvouwen of samenvouwen; \"Alles samenvouwen\" - alle deelvensters beginnen in een samengevouwen toestand; \"Alles uitvouwen\" - alle deelvensters beginnen in een uitgevouwen staat; \"Eerst uitgevouwen\" - alleen het eerste paneel wordt in eerste instantie uitgevouwen."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Voer de naam van een gedeelde eigenschap in binnen de matrix met objecten die de URL's van afbeeldings- of videobestanden bevat die u in de keuzelijst wilt weergeven."
@@ -2647,7 +2647,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "Hiermee wordt een prompt geactiveerd waarin wordt gevraagd om het verwijderen van het bestand te bevestigen."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Schakel in om alleen geselecteerde keuzes te rangschikken. Gebruikers slepen geselecteerde items uit de keuzelijst om ze binnen het rangschikkingsgebied te rangschikken."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Voer een lijst met keuzes in die tijdens de invoer aan de respondent worden voorgesteld."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "De instelling wijzigt alleen de grootte van de invoervelden en heeft geen invloed op de breedte van het vraagvak."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "De instelling wijzigt alleen de grootte van de invoervelden en heeft geen invloed op de breedte van het vraagvak."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Hiermee stelt u een consistente breedte in voor alle artikellabels in pixels"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "De optie \"Auto\" bepaalt automatisch de geschikte modus voor weergave - Afbeelding, Video of YouTube - op basis van de opgegeven bron-URL."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Dient als vervanging wanneer de afbeelding niet kan worden weergegeven op het apparaat van een gebruiker en voor toegankelijkheidsdoeleinden."
@@ -2660,8 +2660,8 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // p.itemTitleWidth: "Item label width (in px)" => "Breedte artikellabel (in px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst om aan te geven of alle opties zijn geselecteerd"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Tijdelijke tekst voor het rangschikkingsgebied"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Vul de enquête automatisch in"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Selecteer of u wilt dat de enquête automatisch wordt ingevuld nadat een respondent alle vragen heeft beantwoord."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Vul de enquête automatisch in"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Selecteer of u wilt dat de enquête automatisch wordt ingevuld nadat een respondent alle vragen heeft beantwoord."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "Gemaskeerde waarde opslaan in enquêteresultaten"
 // patternmask.pattern: "Value pattern" => "Waardepatroon"
 // datetimemask.min: "Minimum value" => "Minimumwaarde"
@@ -2887,7 +2887,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // names.default-dark: "Dark" => "Donker"
 // names.default-contrast: "Contrast" => "Tegenstelling"
 // panel.showNumber: "Number this panel" => "Nummer dit paneel"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina gaat zodra een respondent alle vragen op de huidige pagina heeft beantwoord. Deze functie is niet van toepassing als de laatste vraag op de pagina een open einde heeft of meerdere antwoorden toestaat."
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina gaat zodra een respondent alle vragen op de huidige pagina heeft beantwoord. Deze functie is niet van toepassing als de laatste vraag op de pagina een open einde heeft of meerdere antwoorden toestaat."
 // autocomplete.name: "Full Name" => "Voor- en achternaam"
 // autocomplete.honorific-prefix: "Prefix" => "Voorvoegsel"
 // autocomplete.given-name: "First Name" => "Voornaam"
@@ -2944,3 +2944,9 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Vergrendel de uitvouw-/samenvouwstatus voor vragen"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Je hebt nog geen pagina's"
 // pe.addNew@pages: "Add new page" => "Nieuwe pagina toevoegen"
+// ed.zoomInTooltip: "Zoom In" => "Inzoomen"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Uitzoomen"
+// tabs.surfaceBackground: "Surface Background" => "Oppervlakte Achtergrond"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gebruik antwoorden van de laatste invoer als standaard"
+// colors.gray: "Gray" => "Grijs"

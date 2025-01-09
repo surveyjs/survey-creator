@@ -82,12 +82,6 @@ export interface ICreatorOptions {
    */
   allowEditExpressionsInTextEditor?: boolean;
   /**
-   * Specifies whether to display question titles instead of names when users edit logical expressions.
-   *
-   * Default value: `false`
-   */
-  showTitlesInExpressions?: boolean;
-  /**
    * Specifies whether to show an error message if a survey is not saved in the database.
    *
    * Default value: `true`
@@ -179,11 +173,21 @@ export interface ICreatorOptions {
    */
   showInvisibleElementsInPreviewTab?: boolean;
   /**
-   * Specifies whether UI elements display survey, page, and question titles instead of their names.
+   * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#useElementTitles) property instead.
+   * @deprecated
+   */
+  showObjectTitles?: boolean;
+  /**
+   * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#useElementTitles) property instead.
+   * @deprecated
+   */
+  showTitlesInExpressions?: boolean;
+  /**
+   * Specifies whether Survey Creator UI elements display survey, page, and question titles instead of their names.
    *
    * Default value: `false`
    */
-  showObjectTitles?: boolean;
+  useElementTitles?: boolean;
   /**
    * Limits the number of visible choices. Users can click "Show more" to view hidden choices.
    * 

@@ -116,7 +116,7 @@ test("create locales question", () => {
   const translation = new Translation(survey);
   translation.reset();
   expect(translation.locales).toHaveLength(4);
-  expect(translation.localesQuestion.allowRowsDragAndDrop).toBeTruthy();
+  expect(translation.localesQuestion.allowRowReorder).toBeTruthy();
   const visChoices = translation.getVisibleLocales();
   expect(visChoices).toHaveLength(3);
   expect(visChoices[0]).toEqual("fr");
@@ -1390,7 +1390,7 @@ test("Import from array, onTraslationItemImport", () => {
   ]);
   expect(counter).toEqual(1);
   expect(translation.localesQuestion.visibleRows).toHaveLength(1 + 1);
-  expect(translation.localesQuestion.allowRowsDragAndDrop).toBeFalsy();
+  expect(translation.localesQuestion.allowRowReorder).toBeFalsy();
   const page = creator.survey.pages[0];
   const question = creator.survey.getQuestionByName("q1");
   expect(page.locTitle.getLocaleText("")).toEqual("page en");
@@ -2025,7 +2025,7 @@ test("Translation: readOnly & onMachineTranslate", () => {
   creator.onActiveTabChanging.add((sender, options) => {
     creator.readOnly = options.tabName !== "translation";
   });
-  creator.onMachineTranslate.add((sender, options) => {});
+  creator.onMachineTranslate.add((sender, options) => { });
   creator.JSON = {
     pages: [
       {
@@ -2220,7 +2220,7 @@ test("onTranslationStringVisibility for imageLink, Issue #5734", (): void => {
   let isFiredCorrectly = false;
   creator.onTranslationStringVisibility.add((sender, options) => {
     if (options.propertyName === "imageLink") {
-      if(!options.visible) isFiredCorrectly = true;
+      if (!options.visible) isFiredCorrectly = true;
       options.visible = true;
     }
   });

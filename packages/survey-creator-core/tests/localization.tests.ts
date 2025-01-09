@@ -83,8 +83,8 @@ test("Get property placeholder", () => {
 test("Get value name from pv. based on property name", () => {
   const pv: any = defaultStrings.pv;
   pv.testValue = "All";
-  pv.questionsOrder = { testValue: "Question" };
-  expect(editorLocalization.getPropertyValueInEditor("questionsOrder", "testValue")).toEqual("Question");
+  pv.questionOrder = { testValue: "Question" };
+  expect(editorLocalization.getPropertyValueInEditor("questionOrder", "testValue")).toEqual("Question");
   expect(editorLocalization.getPropertyValueInEditor("noQuestionOrder", "testValue")).toEqual("All");
 });
 test("getProperty function breaks on word automatically", () => {

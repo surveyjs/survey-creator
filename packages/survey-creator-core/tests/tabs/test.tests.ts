@@ -595,7 +595,7 @@ test("Show the start page and apply navigation for it", (): any => {
         ]
       }
     ],
-    "firstPageIsStarted": true
+    "firstPageIsStartPage": true
   };
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();
