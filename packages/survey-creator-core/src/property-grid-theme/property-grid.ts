@@ -281,7 +281,7 @@ export var propertyGridCss = {
     footer: "",
     dragDropGhostPositionTop: "spg-matrixdynamic__drag-drop-ghost-position-top",
     dragDropGhostPositionBottom: "spg-matrixdynamic__drag-drop-ghost-position-bottom",
-    emptyRowsSection: "spg-matrixdynamic__placeholder",
+    noRowsSection: "spg-matrixdynamic__placeholder",
     noRowsText: "spg-matrixdynamic__placeholder-text",
     cellQuestionWrapper: "spg-table__question-wrapper",
     draggedRow: "spg-matrixdynamic__dragged-row",
