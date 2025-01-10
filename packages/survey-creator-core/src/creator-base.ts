@@ -1345,7 +1345,7 @@ export class SurveyCreatorModel extends Base
    * @deprecated
    */
   public makeNewViewActive(tabName: string) {
-    this.switchTab(tabName);
+    return this.switchTab(tabName);
   }
   private switchViewType(viewName: string): boolean {
     let allow = true;
