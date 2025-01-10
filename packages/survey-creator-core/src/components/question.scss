@@ -953,11 +953,11 @@ svc-question,
 
   .svc-question__content {
     .sd-table-wrapper::before {
-      left: calc(calc(-1 * var(--sd-base-padding)) + 1px);
+      left: calc(calc(-1 * var(--sd-base-padding)) + 2px);
     }
 
     .sd-table-wrapper::after {
-      right: calc(calc(-1 * var(--sd-base-padding)) + 1px);
+      right: calc(calc(-1 * var(--sd-base-padding)) + 2px);
     }
   }
 
