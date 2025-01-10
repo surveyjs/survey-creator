@@ -70,7 +70,7 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
       componentContent: componentName ? componentName : "svc-tab-" + name,
       data: plugin,
       iconName: tabsIcons[tabName] || tabsIcons["default"],
-      action: () => { this.creator.makeNewViewActive(name); },
+      action: () => { this.creator.switchTab(name); },
       active: this.creator.viewType === name,
       disableHide: this.creator.viewType === name
     });
