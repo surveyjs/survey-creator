@@ -1,5 +1,5 @@
 import { setupLocale } from "survey-creator-core";
-
+// 1123
 export var ruStrings = {
   // survey templates
   survey: {
