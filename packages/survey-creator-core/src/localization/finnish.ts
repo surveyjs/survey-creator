@@ -22,7 +22,7 @@ export var fiStrings = {
     theme: "Teemoja",
     translation: "Käännös",
     designer: "Kyselyn suunnittelija",
-    editor: "JSON Editori",
+    json: "JSON Editori",
     logic: "Kyselyn logiikka"
   },
   // Question types

@@ -22,7 +22,7 @@ export var nbStrings = {
     theme: "Temaer",
     translation: "Oversettelse",
     designer: "Skjemadesigner",
-    editor: "JSON-redigering",
+    json: "JSON-redigering",
     logic: "Skjemalogikk"
   },
   // Question types

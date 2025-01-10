@@ -22,7 +22,7 @@ var spanishTranslation = {
     theme: "Temas",
     translation: "Traducción",
     designer: "Diseñador de la encuesta",
-    editor: "Editor de JSON",
+    json: "Editor de JSON",
     logic: "Lógica de la encuesta"
   },
   // Question types

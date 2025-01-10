@@ -22,7 +22,7 @@ export var msStrings = {
     theme: "Tema",
     translation: "Terjemahan",
     designer: "Pereka Bentuk Tinjauan",
-    editor: "Editor JSON",
+    json: "Editor JSON",
     logic: "Logik Tinjauan"
   },
   // Question types

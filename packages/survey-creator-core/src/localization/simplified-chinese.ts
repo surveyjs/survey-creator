@@ -22,7 +22,7 @@ var simplifiedChineseTranslation = {
     theme: "主题",
     translation: "转换",
     designer: "问卷设计器",
-    editor: "JSON 编辑器",
+    json: "JSON 编辑器",
     logic: "逻辑"
   },
   // Question types

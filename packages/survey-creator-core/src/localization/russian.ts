@@ -22,7 +22,7 @@ export var ruStrings = {
     theme: "Темы",
     translation: "Перевод",
     designer: "Обзор конструктора",
-    editor: "JSON редактор",
+    json: "JSON редактор",
     logic: "Логика опросника"
   },
   // Question types

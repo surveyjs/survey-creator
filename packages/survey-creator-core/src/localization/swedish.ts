@@ -22,7 +22,7 @@ export let svStrings = {
     theme: "Teman",
     translation: "Översättning",
     designer: "Enkät Designer",
-    editor: "JSON Redigering",
+    json: "JSON Redigering",
     logic: "Logik"
   },
   // Question types

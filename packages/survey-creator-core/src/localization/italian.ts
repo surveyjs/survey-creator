@@ -22,7 +22,7 @@ var italianTranslation = {
     theme: "Temi",
     translation: "Traduzione",
     designer: "Progetta il sondaggio",
-    editor: "Modifica JSON",
+    json: "Modifica JSON",
     logic: "Logica"
   },
   // Question types

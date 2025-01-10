@@ -22,7 +22,7 @@ var traditionalChineseTranslation = {
     theme: "主題",
     translation: "譯本",
     designer: "問卷設計器",
-    editor: "JSON 編輯器",
+    json: "JSON 編輯器",
     logic: "邏輯"
   },
   // Question types
