@@ -231,7 +231,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       id: "svd-designer",
       iconName: "icon-config",
       iconSize: "auto",
-      action: () => { this.creator.makeNewViewActive("designer"); },
+      action: () => { this.creator.switchTab("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
       showTitle: false
