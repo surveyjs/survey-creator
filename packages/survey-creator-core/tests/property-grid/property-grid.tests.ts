@@ -236,8 +236,10 @@ test("dropdown property editor, get choices on callback", () => {
   Serializer.removeProperty("survey", "region");
 });
 test("Serializer.addpropery, type: 'dropdown' cuts the text before dots, provided into choices. Bug#5787", (): any => {
-  Serializer.addProperty("survey", { name: "prop1:dropdown", type: "dropdown",
-    choices: ["Gemini 1.5 Pro", "Claude 3.5 Sonnet"] });
+  Serializer.addProperty("survey", {
+    name: "prop1:dropdown", type: "dropdown",
+    choices: ["Gemini 1.5 Pro", "Claude 3.5 Sonnet"]
+  });
   const survey = new SurveyModel();
   const propertyGrid = new PropertyGridModelTester(survey);
   const question = propertyGrid.survey.getQuestionByName("prop1");
@@ -2546,7 +2548,7 @@ test("Show empty rows template if there is no rows", () => {
   );
   expect(propEditorQuestion.hideColumnsIfEmpty).toBeTruthy();
   expect(propEditorQuestion.renderedTable.showTable).toBeFalsy();
-  expect(propEditorQuestion.emptyRowsText).toEqual("You don't have any triggers yet");
+  expect(propEditorQuestion.noRowsText).toEqual("You don't have any triggers yet");
   expect(propEditorQuestion.addRowText).toEqual("Add new trigger");
 
   propertyGrid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
@@ -2555,7 +2557,7 @@ test("Show empty rows template if there is no rows", () => {
   );
   expect(propEditorQuestion.hideColumnsIfEmpty).toBeTruthy();
   expect(propEditorQuestion.renderedTable.showTable).toBeFalsy();
-  expect(propEditorQuestion.emptyRowsText).toEqual("You don't have any choices yet");
+  expect(propEditorQuestion.noRowsText).toEqual("You don't have any choices yet");
   expect(propEditorQuestion.addRowText).toEqual("Add new choice");
 });
 test("Different property editors for trigger value", () => {
@@ -2619,13 +2621,13 @@ test("AllowRowsDragDrop and property readOnly", () => {
     propertyGrid.survey.getQuestionByName("choices")
   );
   expect(choicesQuestion).toBeTruthy();
-  expect(choicesQuestion.allowRowsDragAndDrop).toBeTruthy();
+  expect(choicesQuestion.allowRowReorder).toBeTruthy();
   Serializer.findProperty("selectbase", "choices").readOnly = true;
   propertyGrid = new PropertyGridModelTester(question);
   choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
-  expect(choicesQuestion.allowRowsDragAndDrop).toBeFalsy();
+  expect(choicesQuestion.allowRowReorder).toBeFalsy();
   Serializer.findProperty("selectbase", "choices").readOnly = false;
 });
 
@@ -2903,7 +2905,7 @@ test("PropertyGridEditorQuestionValue without nonvalue questions", () => {
   const propertyGrid = new PropertyGridModelTester(survey);
   const triggersQuestion = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("triggers"));
   expect(triggersQuestion).toBeTruthy();
-  expect(triggersQuestion.isUniqueCaseSensitive).toEqual(false);
+  expect(triggersQuestion.useCaseSensitiveComparison).toEqual(false);
   expect(triggersQuestion.visibleRows).toHaveLength(1);
   triggersQuestion.visibleRows[0].showDetailPanel();
   const setToValue = triggersQuestion.visibleRows[0].detailPanel.getQuestionByName("setToName");
@@ -3624,4 +3626,45 @@ test("Depends on & defaultFunc, Bug#6143", () => {
   expect(questionSecondName.value).toBe("q3_second");
 
   Serializer.removeProperty("question", "secondName");
+});
+test("Undo for deleting validator in text, Bug#6295", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1", validators: [{ type: "expression" }] }]
+  };
+  const q1 = creator.survey.getQuestionByName("q1");
+  expect(q1.validators).toHaveLength(1);
+  creator.selectQuestionByName("q1");
+  const propGridSurvey = creator.propertyGrid;
+  const matrix = propGridSurvey.getQuestionByName("validators");
+  expect(matrix).toBeTruthy();
+  matrix.focus();
+  expect(matrix.visibleRows).toHaveLength(1);
+  matrix.removeRow(0);
+  expect(matrix.visibleRows).toHaveLength(0);
+  expect(q1.validators).toHaveLength(0);
+  creator.undo();
+  expect(q1.validators).toHaveLength(1);
+  expect(matrix.visibleRows).toHaveLength(1);
+});
+test("Undo for deleting validator in multiple text item, Bug#6295", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "multipletext", name: "q1", items: [{ name: "item1", validators: [{ type: "expression" }] }] }]
+  };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const item1: Question = q1.items[0];
+  expect(item1.validators).toHaveLength(1);
+  creator.selectElement(item1);
+  const propGridSurvey = creator.propertyGrid;
+  const matrix = propGridSurvey.getQuestionByName("validators");
+  expect(matrix).toBeTruthy();
+  matrix.focus();
+  expect(matrix.visibleRows).toHaveLength(1);
+  matrix.removeRow(0);
+  expect(matrix.visibleRows).toHaveLength(0);
+  expect(item1.validators).toHaveLength(0);
+  creator.undo();
+  expect(item1.validators).toHaveLength(1);
+  expect(matrix.visibleRows).toHaveLength(1);
 });

@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setAllowEditSurveyTitle, setShowAddQuestionButton, setExpandCollapseButtonVisibility, setShowToolbox, setShowSidebar, getSurveyListItemByText } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, setAllowEditSurveyTitle, setShowAddQuestionButton, setExpandCollapseButtonVisibility, setShowToolbox, setShowSidebar, getSurveyListItemByText, upArrowImageLink } from "../../helper";
 
 const title = "Designer surface";
 
@@ -974,7 +974,7 @@ test("Logo image adorners", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1900);
     const json = {
-      logo: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
+      logo: upArrowImageLink,
       elements: [
         {
           type: "text",
@@ -2415,7 +2415,7 @@ test("Matrix Dynamiv with rows drad-drop", async (t) => {
                 4,
                 5
               ],
-              "allowRowsDragAndDrop": true
+              "allowRowReorder": true
             }
           ]
         }
@@ -2518,7 +2518,7 @@ test("Page hidden header and top toolbar", async (t) => {
 
     await ClientFunction((json) => {
       (window as any).Survey.settings.designMode.showEmptyTitles = false;
-      (window as any).updateCreatorModel({ }, json);
+      (window as any).updateCreatorModel({}, json);
     })(json);
 
     const rootSelector = Selector(".svc-tab-designer");
@@ -2548,6 +2548,9 @@ test("Check question button states", async (t) => {
     await t.click(button);
     await takeElementScreenshot("question-button-checked.png", button, t, comparer);
     await t.click(button);
+    await t.hover(Selector(".svc-question__content"));
+    await takeElementScreenshot("question-button-after-click.png", button, t, comparer);
+    await t.pressKey("tab shift+tab");
     await takeElementScreenshot("question-button-focused.png", button, t, comparer);
     await ClientFunction(() => {
       const question = window["creator"].survey.getQuestionByName("q1");

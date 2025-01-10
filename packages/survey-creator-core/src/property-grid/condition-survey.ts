@@ -4,7 +4,7 @@ import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
-import { assignDefaultV2Classes, wrapTextByCurlyBraces } from "../utils/utils";
+import { assignDefaultV2Classes, wrapTextByCurlyBraces } from "../utils/creator-utils";
 import { logicCss } from "../components/tabs/logic-theme";
 import { getLogicString } from "../components/tabs/logic-types";
 import { CreatorBase } from "../creator-base";
@@ -697,7 +697,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     for (let i = 0; i < res.length; i++) {
       res[i].value = res[i].name;
       let question = !!res[i].question ? res[i].question : res[i];
-      if (!this.options.showTitlesInExpressions) {
+      if (!(this.options.useElementTitles || this.options.showTitlesInExpressions)) {
         let name = res[i].name;
         let valueName = question.valueName;
         if (!!valueName && name.indexOf(valueName) == 0) {
@@ -999,13 +999,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         panel.getQuestionByName("removeAction").visible = options.value.length !== 1;
       });
     }
-    this.setTitle();
+    this.title = this.isReady ? this.text : editorLocalization.getString("pe.ruleIsNotSet");
   }
-  private setTitle() {
-    const text = this.isReady ? this.text : "";
-    this.title = this.options.onConditionGetTitleCallback(text, text || editorLocalization.getString("pe.ruleIsNotSet"));
-  }
-
   private showTextEditor(expression: string) {
     this.panel.visible = false;
     this.textEditor.value = expression;

@@ -16,7 +16,7 @@ import {
   ItemValue,
   QuestionPanelDynamicModel
 } from "survey-core";
-import { getNextValue, getNextItemText } from "../src/utils/utils";
+import { getNextValue, getNextItemText } from "../src/utils/creator-utils";
 import { editorLocalization } from "../src/editorLocalization";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
 import { CreatorTester } from "./creator-tester";
@@ -1128,6 +1128,13 @@ test("onModified options", () => {
 test("getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380", () => {
   const creator = new CreatorTester();
   creator.showObjectTitles = true;
+  creator.JSON = getSurveyJson();
+  const model = new PageNavigatorViewModel(new PagesController(creator), "");
+  expect(model.items[0].title).toEqual("Page 1");
+});
+test("getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380", () => {
+  const creator = new CreatorTester();
+  creator.useElementTitles = true;
   creator.JSON = getSurveyJson();
   const model = new PageNavigatorViewModel(new PagesController(creator), "");
   expect(model.items[0].title).toEqual("Page 1");

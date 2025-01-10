@@ -33,8 +33,7 @@ import { IPortableDragEvent, IPortableEvent, IPortableMouseEvent } from "../util
 import {
   isPropertyVisible,
   propertyExists,
-  toggleHovered
-} from "../utils/utils";
+} from "../utils/creator-utils";
 import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
 require("./question.scss");
 import { settings } from "../creator-settings";

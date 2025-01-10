@@ -235,6 +235,7 @@ For date calculations, you can use the following functions:
 | `day`| Day of the month for a given date as a value from 1 to 31. | `"day('2000-01-30')"` (30) |
 | `weekday`| Day of the week for a given date as a value from 0 (Sunday) to 6 (Saturday). | `"weekday('2000-01-01')"` (6) |
 | `dateDiff`| Difference between two given dates in full days (default), months, or years. | `"dateDiff('2000-01-01', '2000-02-01', "days")"` (31)<br>`"dateDiff('2000-01-01', '2000-04-01', "months")"` (3)<br>`"dateDiff('2000-01-01', '2009-02-01', "years")"` (9) |
+| `dateAdd`| A `Date` value with an added or subtracted number of full days (default), months, or years. | `"dateAdd('2000-01-01', 10, "days")"` (`new Date(2000-01-11)`)<br>`"dateAdd('2000-01-01', 4, "months")"` (`new Date(2000-05-01)`)<br>`"dateAdd('2000-01-01', -5, "years")"` (`new Date(1995-01-01)`) |
 
 [How to Calculate Duration Between Dates and Prefill a Form Field with the Duration Value](https://surveyjs.io/survey-creator/documentation/end-user-guide/how-to-calculate-duration-between-dates-within-form (linkStyle))
 

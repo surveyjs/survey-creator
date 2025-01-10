@@ -1,5 +1,5 @@
 import { notShortCircuitAnd } from "../../utils/utils";
-import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName, IAction, ListModel, PopupModel, surveyLocalization, SurveyModel, StylesManager } from "survey-core";
+import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName, IAction, ListModel, PopupModel, surveyLocalization } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
@@ -9,8 +9,6 @@ import { listComponentCss } from "../list-theme";
 
 export class TabTestPlugin implements ICreatorPlugin {
   private languageSelectorAction: Action;
-  private changeThemePopupModel: PopupModel;
-  private changeThemeModel: ListModel;
   protected changeThemeAction: Action;
   private deviceSelectorAction: Action;
   private orientationSelectorAction: Action;
@@ -92,7 +90,7 @@ export class TabTestPlugin implements ICreatorPlugin {
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("test", this);
-    this.setPreviewTheme(this.creator.themeForPreview);
+    this.setPreviewTheme(this.creator.previewTheme);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
@@ -135,19 +133,6 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
     return true;
-  }
-  private getAvailableThemes(themeMapper: Array<any>): Array<Action> {
-    const availableThemesToItems = [];
-    for (var i = 0; i < themeMapper.length; i++) {
-      const item = themeMapper[i];
-      const action = new Action({ id: item.name + "_themeSwitcher", locTitleName: this.getThemeLocName(item.name) });
-      (<any>action).value = item.name;
-      availableThemesToItems.push(action);
-    }
-    return availableThemesToItems;
-  }
-  private getThemeLocName(name: string): string {
-    return "ed." + name + "Theme";
   }
   public createActions(): Array<Action> {
     const items: Array<Action> = [];
@@ -220,62 +205,6 @@ export class TabTestPlugin implements ICreatorPlugin {
       items.push(this.invisibleToggleAction);
     }
 
-    let themeMapper = StylesManager.getIncludedThemeCss() as Array<any>;
-    const sequence = ["defaultV2", "modern", "default"];
-    themeMapper = themeMapper.sort((theme1, theme2) => {
-      return sequence.indexOf(theme1.name) > sequence.indexOf(theme2.name) ? 1 : -1;
-    });
-    let availableThemesToItems = this.getAvailableThemes(themeMapper);
-
-    if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1 && !this.creator.showThemeTab) {
-      this.changeThemeModel = new ListModel(
-        availableThemesToItems,
-        (item: any) => {
-          if (!!this.model) {
-            this.model.setTheme(item.value, themeMapper);
-          }
-          this.changeThemeAction.locTitleName = this.getThemeLocName(item.value);
-          this.changeThemeAction.locStrsChanged();
-          this.changeThemePopupModel.toggleVisibility();
-        },
-        true
-      );
-      this.changeThemeModel.locOwner = this.creator;
-      this.changeThemeModel.cssClasses = listComponentCss;
-
-      this.changeThemePopupModel = new PopupModel(
-        "sv-list",
-        { model: this.changeThemeModel },
-        {
-          verticalPosition: "bottom",
-          horizontalPosition: "center",
-          cssClass: "svc-creator-popup",
-        }
-      );
-      const getStartThemeName = (): string => {
-        const availableThemes = themeMapper.filter(item => item.theme.root === this.simulatorTheme.root);
-        return availableThemes.length > 0 ? availableThemes[0].name : "defaultV2";
-      };
-      this.changeThemeAction = new Action({
-        id: "themeSwitcher",
-        iconName: "icon-theme",
-        iconSize: "auto",
-        component: "sv-action-bar-item-dropdown",
-        mode: "large",
-        locTitleName: this.getThemeLocName(getStartThemeName()),
-        needSeparator: true,
-        visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.showSimulatorInTestSurveyTab, this.creator.activeTab === "test");
-        }),
-        action: () => {
-          this.changeThemePopupModel.toggleVisibility();
-        },
-        popupModel: this.changeThemePopupModel
-      });
-
-      items.push(this.changeThemeAction);
-    }
-
     this.languageSelectorAction = createDropdownActionModel({
       id: "languageSelector",
       iconName: "icon-language",
@@ -302,7 +231,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       id: "svd-designer",
       iconName: "icon-config",
       iconSize: "auto",
-      action: () => { this.creator.makeNewViewActive("designer"); },
+      action: () => { this.creator.switchTab("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
       showTitle: false

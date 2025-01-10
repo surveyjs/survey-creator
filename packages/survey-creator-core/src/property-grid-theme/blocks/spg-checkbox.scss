@@ -1,3 +1,5 @@
+@use "../../variables" as *;
+
 .spg-checkbox {
   cursor: pointer;
   margin-top: var(--ctr-checkbox-list-gap-vertical, calcSize(2));
@@ -115,6 +117,7 @@
 .spg-checkbox {
   .spg-question__description {
     padding: 0;
+    padding-top: var(--ctr-checkbox-description-text-margin-top, calcSize(0.75));
     padding-inline-start: var(--ctr-checkbox-description-text-margin-left, calcSize(4));
     color: var(--ctr-checkbox-description-text-color, $foreground-dim-light);
   }

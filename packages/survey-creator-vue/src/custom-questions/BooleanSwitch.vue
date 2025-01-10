@@ -1,28 +1,33 @@
 <template>
-  <div class="spg-boolean-switch" role="checkbox"
-      :aria-required="question.ariaRequired"
-      :aria-label="question.ariaLabel"
-      :aria-invalid="question.ariaInvalid"
-      :aria-errormessage="question.ariaErrormessage"
-      @click="question.value = !question.value"
-    >
-    <div class="spg-boolean-switch__button" tabindex="0"
+  <div
+    class="spg-boolean-switch"
+    role="checkbox"
+    :aria-required="question.ariaRequired"
+    :aria-label="question.ariaLabel"
+    :aria-invalid="question.ariaInvalid"
+    :aria-errormessage="question.ariaErrormessage"
+    @click="question.value = !question.value"
+  >
+    <div
+      class="spg-boolean-switch__button"
+      tabindex="0"
       :class="question.value ? 'spg-boolean-switch__button--checked' : ''"
       v-key2click="{ disableTabStop: true }"
-      >
+    >
       <div class="spg-boolean-switch__thumb">
-        <div class="spg-boolean-switch__thumb-circle spg-boolean-switch__thumb--left"></div>
+        <div
+          class="spg-boolean-switch__thumb-circle spg-boolean-switch__thumb--left"
+        ></div>
       </div>
       <div class="spg-boolean-switch__thumb">
-        <div class="spg-boolean-switch__thumb-circle spg-boolean-switch__thumb--right"></div>
+        <div
+          class="spg-boolean-switch__thumb-circle spg-boolean-switch__thumb--right"
+        ></div>
       </div>
     </div>
     <div class="spg-boolean-switch__caption">
       <div class="spg-boolean-switch__title">
-        <SvComponent
-            :is="'survey-string'"
-            :locString="question.locTitle"
-          />
+        <SvComponent :is="'survey-string'" :locString="question.locTitle" />
       </div>
     </div>
   </div>

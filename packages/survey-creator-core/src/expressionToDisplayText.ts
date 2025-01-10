@@ -1,6 +1,6 @@
 import * as Survey from "survey-core";
 import { editorLocalization } from "./editorLocalization";
-import { wrapTextByCurlyBraces } from "./utils/utils";
+import { wrapTextByCurlyBraces } from "./utils/creator-utils";
 
 export class ExpressionToDisplayText {
   private currentQuestion: Survey.Question;
@@ -9,7 +9,7 @@ export class ExpressionToDisplayText {
   public toDisplayText(expression: string): string {
     if (!this.survey) return expression;
     this.showTitles =
-      !!this.options && this.options.showTitlesInExpressions == true;
+      !!this.options && (this.options.useElementTitles == true || this.options.showTitlesInExpressions == true);
     var parser = new Survey.ConditionsParser();
     var node = parser.parseExpression(expression);
     if (!node) return expression;
@@ -151,7 +151,7 @@ export class ExpressionToDisplayText {
     return expression.replace(wrapTextByCurlyBraces(variable), wrapTextByCurlyBraces(question.title));
   }
   private getQuestionByName(name: string): Survey.Question {
-    if(!this.survey) return null;
+    if (!this.survey) return null;
     return <Survey.Question>this.survey.getQuestionByValueName(name);
   }
 }

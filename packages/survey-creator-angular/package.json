@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-angular",
-  "version": "1.12.15",
+  "version": "2.0.0",
   "description": "Use SurveyJS Creator to create or edit JSON for SurveyJS Form Library.",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "https://surveyjs.io/Licenses#SurveyCreator",
@@ -63,8 +63,8 @@
     "testcafe": "3.3.0",
     "get-func-name": "2.0.0",
     "@types/lodash": "4.14.186",
-    "survey-angular-ui": "../../../survey-library/build/survey-angular-ui",
-    "survey-core": "../../../survey-library/build/survey-core",
+    "survey-angular-ui": "../../../survey-library/packages/survey-angular-ui/build",
+    "survey-core": "../../../survey-library/packages/survey-core/build",
     "survey-creator-core": "../survey-creator-core/build",
     "standard-version": "^8.0.2",
     "puppeteer": "22.13.1"

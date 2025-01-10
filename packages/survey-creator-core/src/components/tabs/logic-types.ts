@@ -13,7 +13,7 @@ import {
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionToDisplayText } from "../../expressionToDisplayText";
 import { ISurveyCreatorOptions } from "../../creator-settings";
-import { wrapTextByCurlyBraces } from "../../utils/utils";
+import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 
 export function getLogicString(name: string) {
   return editorLocalization.getString("ed.lg." + name);
@@ -104,7 +104,7 @@ export class SurveyLogicType {
     return true;
   }
   public get showTitlesInExpression(): boolean {
-    return !!this.options && this.options.showTitlesInExpressions;
+    return !!this.options && (this.options.useElementTitles || this.options.showTitlesInExpressions);
   }
   public createNewObj(srcObj: Base): Base {
     const obj = <Base>Serializer.createClass(this.baseClass);

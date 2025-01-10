@@ -11,7 +11,7 @@ import {
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { ISurveyCreatorOptions } from "./creator-settings";
-import { wrapTextByCurlyBraces } from "./utils/utils";
+import { wrapTextByCurlyBraces } from "./utils/creator-utils";
 
 export enum ObjType {
   Unknown = "unknown",
@@ -24,9 +24,9 @@ export enum ObjType {
 export class SurveyHelper {
   public static getNewElementName(el: ISurveyElement): string {
     const survey: SurveyModel = (<any>el).getSurvey();
-    if(!survey) return el.name;
-    if(el.isPage) return this.getNewPageName(survey.pages);
-    if(el.isPanel) return this.getNewPanelName(survey.getAllPanels());
+    if (!survey) return el.name;
+    if (el.isPage) return this.getNewPageName(survey.pages);
+    if (el.isPanel) return this.getNewPanelName(survey.getAllPanels());
     return this.getNewQuestionName(survey.getAllQuestions(false, false, true));
   }
   public static getNewPageName(objs: Array<any>) {
@@ -276,8 +276,8 @@ export class SurveyHelper {
     delete json["maxWidth"];
   }
   private static deleteRandomProperties(json: any) {
-    ["choicesOrder", "rowsOrder"].forEach(prop => {
-      if(json[prop] === "random") {
+    ["choicesOrder", "rowOrder"].forEach(prop => {
+      if (json[prop] === "random") {
         delete json[prop];
       }
     });
@@ -293,7 +293,7 @@ export class SurveyHelper {
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.rates);
   }
   private static deleteConditionPropertiesFromArray(jsonArray: Array<any>): void {
-    if(!Array.isArray(jsonArray)) return;
+    if (!Array.isArray(jsonArray)) return;
     jsonArray.forEach(item => {
       SurveyHelper.deleteConditionProperties(item);
     });

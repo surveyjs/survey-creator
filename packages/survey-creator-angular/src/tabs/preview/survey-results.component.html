@@ -1,29 +1,31 @@
 <ng-template #template>
 <div class="svd-test-results">
-  <div class="svd-test-results__header">
-      <div class="svd-test-results__header-text">{{model.surveyResultsText}}</div>
-      <div class="svd-test-results__header-types">
-        <svc-action-button [text]="model.surveyResultsTableText" [click]="model.selectTableClick" [disabled]="false" [selected]="model.isTableSelected"></svc-action-button>
-        <svc-action-button [text]="model.surveyResultsJsonText" [click]="model.selectJsonClick" [disabled]="false" [selected]="model.isJsonSelected"></svc-action-button>
-      </div>
-  </div>
-  <div class="svd-test-results__text svd-light-bg-color" [visible]="model.resultViewType === 'text'">
-      <div>{{model.resultText}}</div>
-  </div>
-  <div class="svd-test-results__table svd-light-bg-color" [visible]="model.resultViewType === 'table'">
-      <table>
-          <thead>
-              <tr class="svd-light-background-color">
-                  <th class="svd-dark-border-color">{{model.resultsTitle}}</th>
-                  <th class="svd-dark-border-color">{{model.resultsDisplayValue}}</th>
-              </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngFor="let row of model.resultData">
-              <survey-results-table-row [model]="row"></survey-results-table-row>
-            </ng-container>
-          </tbody>
-      </table>
+  <div class="svd-test-results__content">
+    <div class="svd-test-results__header">
+        <div class="svd-test-results__header-text">{{model.surveyResultsText}}</div>
+        <div class="svd-test-results__header-types">
+          <svc-action-button [text]="model.surveyResultsTableText" [click]="model.selectTableClick" [disabled]="false" [selected]="model.isTableSelected"></svc-action-button>
+          <svc-action-button [text]="model.surveyResultsJsonText" [click]="model.selectJsonClick" [disabled]="false" [selected]="model.isJsonSelected"></svc-action-button>
+        </div>
+    </div>
+    <div class="svd-test-results__text svd-light-bg-color" [visible]="model.resultViewType === 'text'">
+        <div>{{model.resultText}}</div>
+    </div>
+    <div class="svd-test-results__table svd-light-bg-color" [visible]="model.resultViewType === 'table'">
+        <table>
+            <thead>
+                <tr class="svd-light-background-color">
+                    <th class="svd-dark-border-color">{{model.resultsTitle}}</th>
+                    <th class="svd-dark-border-color">{{model.resultsDisplayValue}}</th>
+                </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let row of model.resultData">
+                <survey-results-table-row [model]="row"></survey-results-table-row>
+              </ng-container>
+            </tbody>
+        </table>
+    </div>
   </div>
 </div>
 </ng-template>

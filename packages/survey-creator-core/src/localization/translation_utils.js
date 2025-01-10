@@ -27,12 +27,8 @@ module.exports = {
   },
   getLocale: function(name) {
     const text = this.readFile(name);
-    let subStr = "surveyLocalization.locales[\"";
+    let subStr = "localeCode: \"";
     let index = text.indexOf(subStr);
-    if(index < 0) {
-      subStr = "editorLocalization.locales[\"";
-      index = text.indexOf(subStr);
-    }
     if(index < 0) return undefined;
     index += subStr.length;
     const endIndex = text.indexOf("\"", index);

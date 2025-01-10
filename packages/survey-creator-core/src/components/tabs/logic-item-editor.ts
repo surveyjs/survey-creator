@@ -6,7 +6,8 @@ import { SurveyLogicType, getLogicString } from "./logic-types";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyHelper } from "../../survey-helper";
 import { logicCss } from "./logic-theme";
-import { assignDefaultV2Classes, copyCssClasses } from "../../utils/utils";
+import { copyCssClasses } from "../../utils/utils";
+import { assignDefaultV2Classes } from "../../utils/creator-utils";
 import { QuestionLinkValueModel } from "../../components/link-value";
 import { LogicActionModelBase, LogicActionModel, LogicActionTriggerModel } from "./logic-actions-model";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
@@ -493,7 +494,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (!logicType.hasSelectorChoices) return [];
     const elements = logicType.getSelectorChoices(this.survey, this.context);
     const res = [];
-    const showTitles = this.options.showTitlesInExpressions;
+    const showTitles = this.options.useElementTitles || this.options.showTitlesInExpressions;
     for (let i = 0; i < elements.length; i++) {
       let namePrefix = "";
       let textPrefix = "";

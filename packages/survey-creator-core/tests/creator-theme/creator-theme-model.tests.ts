@@ -5,7 +5,7 @@ import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "../../src
 
 import "survey-core/survey.i18n";
 import { PredefinedBackgroundColors, PredefinedColors } from "../../src/components/tabs/themes";
-import { colorsAreEqual } from "../../src/utils/utils";
+import { colorsAreEqual } from "../../src/utils/color-utils";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
 
@@ -83,6 +83,7 @@ test("Creator theme: reset color variables after change theme", (): any => {
       "--sjs-primary-background-10": "#3EDFD51A",
       "--sjs-primary-background-400": "#29DCD1FF",
       "--sjs-secondary-background-500": "#EDA925FF",
+      "--sjs-secondary-background-400": "#EDBE1E",
       "--sjs-secondary-background-25": "#EDA92540",
       "--sjs-secondary-background-10": "#EDA9251A",
     }
@@ -111,10 +112,11 @@ test("Creator theme: reset color variables after change theme", (): any => {
       "--sjs-primary-background-500": "#141414",
       "--sjs-secondary-background-10": "rgba(30, 30, 30, 0.1)",
       "--sjs-secondary-background-25": "rgba(30, 30, 30, 0.25)",
+      "--sjs-secondary-background-400": "rgba(22, 22, 22, 1)",
       "--sjs-secondary-background-500": "#1e1e1e",
       "--sjs-special-background": "#0a0a0a",
-      "--sjs-special-glow": "rgba(10, 10, 10, 1)",
-      "--sjs-special-haze": "rgba(10, 10, 10, 1)",
+      "--sjs-special-glow": "rgba(0, 0, 0, 0.1)",
+      "--sjs-special-haze": "rgba(144, 144, 144, 0.5)",
     });
 
     themeName.value = "dark";
@@ -127,7 +129,7 @@ test("Creator theme: reset color variables after change theme", (): any => {
   }
 });
 
-test("creator.applyTheme", () => {
+test("creator.applyCreatorTheme", () => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
   const themeJson: ICreatorTheme = {
     themeName: "custom",
@@ -144,7 +146,7 @@ test("creator.applyTheme", () => {
     }
   };
 
-  creator.applyTheme(themeJson);
+  creator.applyCreatorTheme(themeJson);
 
   const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
   const themeModel = designerPlugin["themeModel"];
@@ -216,13 +218,14 @@ test("Update --sjs-primary-background-10 && --sjs-primary-background-400", (): a
   });
 });
 
-test("Update --sjs-secondary-background-25 && --sjs-secondary-background-10", (): any => {
+test("Update --sjs-secondary-background-500 dependent properties", (): any => {
   const fefefeColor = "#fefefe"; // rgba(254, 254, 254, 1)
   const themeModel = new CreatorThemeModel();
   themeModel.loadTheme({
     themeName: "custom",
     cssVariables: {
       "--sjs-secondary-background-500": "#FF9814FF",
+      "--sjs-secondary-background-400": "#F78A00",
       "--sjs-secondary-background-25": "#FF981440",
       "--sjs-secondary-background-10": "#FF98141A",
     }
@@ -236,6 +239,7 @@ test("Update --sjs-secondary-background-25 && --sjs-secondary-background-10", ()
   themeModel["--sjs-secondary-background-500"] = fefefeColor;
   expect(themeModel.themeCssVariablesChanges).toStrictEqual({
     "--sjs-secondary-background-500": fefefeColor,
+    "--sjs-secondary-background-400": "rgba(246, 246, 246, 1)",
     "--sjs-secondary-background-25": "rgba(254, 254, 254, 0.25)",
     "--sjs-secondary-background-10": "rgba(254, 254, 254, 0.1)",
   });
@@ -261,8 +265,8 @@ test("Update --sjs-special-haze && --sjs-special-glow", (): any => {
   themeModel["--sjs-special-background"] = fefefeColor;
   expect(themeModel.themeCssVariablesChanges).toStrictEqual({
     "--sjs-special-background": fefefeColor,
-    "--sjs-special-haze": "rgba(243, 243, 243, 0.35)",
-    "--sjs-special-glow": "rgba(81, 81, 81, 0.1)",
+    "--sjs-special-haze": "rgba(238, 204, 204, 0.35)",
+    "--sjs-special-glow": "rgba(76, 0, 0, 0.1)",
   });
 });
 
@@ -285,7 +289,7 @@ test("Creator theme: apply custom theme", (): any => {
       "--sjs-test": "green"
     }
   };
-  creator.applyTheme(themeJson);
+  creator.applyCreatorTheme(themeJson);
 
   const surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-special-background");
   const primaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-primary-background-500");

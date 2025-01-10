@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables" as *;
 
 .svc-image-item-value-wrapper {
   display: inline-block;

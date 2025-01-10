@@ -38,7 +38,7 @@ export var propertyGridCss = {
     icon: "spg-panel__icon",
     iconExpanded: "spg-panel__icon--expanded",
     footer: "spg-panel__footer",
-    requiredText: "spg-panel__required-text"
+    requiredMark: "spg-panel__required-text"
   },
   paneldynamic: {
     mainRoot: "spg-question spg-row__question",
@@ -94,7 +94,7 @@ export var propertyGridCss = {
     titleOnError: "spg-question__title--error",
     title: "spg-title spg-question__title",
     titleBar: "sd-action-title-bar spg-action-title-bar",
-    requiredText: "spg-question__required-text",
+    requiredMark: "spg-question__required-text",
     number: "spg-question__num",
     description: "spg-description spg-question__description",
     descriptionUnderInput: "spg-description spg-question__description",
@@ -200,6 +200,7 @@ export var propertyGridCss = {
     chevronButton: "sd-dropdown_chevron-button spg-dropdown_chevron-button",
     chevronButtonSvg: "sd-dropdown_chevron-button-svg spg-dropdown_chevron-button-svg",
     chevronButtonIconId: "icon-chevron",
+    cleanButton: "spg-dropdown__clean-button spg-input__edit-button"
   },
   buttongroup: {
     root: "spg-button-group",
@@ -280,8 +281,8 @@ export var propertyGridCss = {
     footer: "",
     dragDropGhostPositionTop: "spg-matrixdynamic__drag-drop-ghost-position-top",
     dragDropGhostPositionBottom: "spg-matrixdynamic__drag-drop-ghost-position-bottom",
-    emptyRowsSection: "spg-matrixdynamic__placeholder",
-    emptyRowsText: "spg-matrixdynamic__placeholder-text",
+    noRowsSection: "spg-matrixdynamic__placeholder",
+    noRowsText: "spg-matrixdynamic__placeholder-text",
     cellQuestionWrapper: "spg-table__question-wrapper",
     draggedRow: "spg-matrixdynamic__dragged-row",
     emptyCell: "spg-table__cell--empty",
