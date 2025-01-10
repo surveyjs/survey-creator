@@ -75,7 +75,7 @@ export function setSurveyJSONForPropertyGrid(
 ) {
   json.showNavigationButtons = "none";
   json.showPageTitles = false;
-  json.focusFirstQuestionAutomatic = false;
+  json.autoFocusFirstQuestion = false;
   json.showQuestionNumbers = "off";
   if (titleLocationLeft) {
     json.questionTitleLocation = "left";
@@ -84,7 +84,7 @@ export function setSurveyJSONForPropertyGrid(
   if (updateOnTyping) {
     json.textUpdateMode = "onTyping";
   }
-  json.requiredText = "";
+  json.requiredMark = "";
 }
 
 export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
@@ -279,8 +279,8 @@ export var PropertyGridEditorCollection = {
     var row = options.row;
     if (!!row) {
       const questions = row.questions;
-      for(let i = 0; i < questions.length; i ++) {
-        if(questions[i].errors.length > 0) return;
+      for (let i = 0; i < questions.length; i++) {
+        if (questions[i].errors.length > 0) return;
       }
       var cellQuestion = row.getQuestionByName(options.columnName);
       if (!!cellQuestion) {
@@ -2082,7 +2082,7 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     if (!survey) return [];
     var questions = this.getQuestions(survey, obj);
     if (!questions) questions = [];
-    var showTitles = !!options && options.showTitlesInExpressions;
+    var showTitles = !!options && (options.useElementTitles || options.showTitlesInExpressions);
     var qItems = questions.map((q) => {
       let text = showTitles ? (<any>q).locTitle.renderedHtml : q.name;
       if (!!options) text = options.getObjectDisplayName(q, "property-grid:property-editor", "property-editor", text);

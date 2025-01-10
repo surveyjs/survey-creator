@@ -32,7 +32,7 @@ export var translationCss = {
     icon: "st-panel__icon",
     iconExpanded: "st-panel__icon--expanded",
     footer: "st-panel__footer",
-    requiredText: "st-panel__required-text"
+    requiredMark: "st-panel__required-text"
   },
   paneldynamic: {
     root: "st-paneldynamic",
@@ -79,7 +79,7 @@ export var translationCss = {
     titleOnAnswer: "st-question__title--answer",
     titleOnError: "st-question__title--error",
     title: "st-title st-question__title",
-    requiredText: "st-question__required-text",
+    requiredMark: "st-question__required-text",
     number: "st-question__num",
     description: "st-description st-question__description",
     descriptionUnderInput: "st-description st-question__description",

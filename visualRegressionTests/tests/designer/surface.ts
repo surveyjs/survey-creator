@@ -2415,7 +2415,7 @@ test("Matrix Dynamiv with rows drad-drop", async (t) => {
                 4,
                 5
               ],
-              "allowRowsDragAndDrop": true
+              "allowRowReorder": true
             }
           ]
         }

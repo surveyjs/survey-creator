@@ -249,15 +249,15 @@ test("Put elements into end of the JSON", () => {
   expect(elementsPos > titlePos).toBeTruthy();
 });
 test("We should have one SurveyTextWorker.fromJSON/toJSON", () => {
-  const json = { requiredText: "###" };
+  const json = { requiredMark: "###" };
   const creator = new CreatorTester();
-  creator.activeTab ="editor";
+  creator.activeTab = "editor";
   const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
   editorPlugin.model.text = JSON.stringify(json);
   let counter = 0;
   SurveyTextWorker.onProcessJson = (json: any): void => {
-    if(json?.requiredText === "###") {
-      counter ++;
+    if (json?.requiredMark === "###") {
+      counter++;
     }
   };
   creator.activeTab = "designer";
