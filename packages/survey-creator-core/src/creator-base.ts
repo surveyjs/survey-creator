@@ -596,7 +596,12 @@ export class SurveyCreatorModel extends Base
   /**
    * An event that is raised when a condition editor renders a list of questions and variables available for selection. Use this event to modify this list.
    */
-  public onConditionQuestionsGetList: EventBase<SurveyCreatorModel, ConditionGetQuestionListEvent> = this.addCreatorEvent<SurveyCreatorModel, ConditionGetQuestionListEvent>();
+  public onConditionGetQuestionList: EventBase<SurveyCreatorModel, ConditionGetQuestionListEvent> = this.addCreatorEvent<SurveyCreatorModel, ConditionGetQuestionListEvent>();
+  /**
+   * This event is obsolete. Use the [`onConditionGetQuestionList`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onConditionGetQuestionList) event instead.
+   * @deprecated
+   */
+  public onConditionQuestionsGetList: EventBase<SurveyCreatorModel, ConditionGetQuestionListEvent> = this.onConditionGetQuestionList;
 
   public onConditionGetTitle: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   /**
@@ -606,7 +611,12 @@ export class SurveyCreatorModel extends Base
   /**
    * An event that is raised when the Logic tab constructs a user-friendly display text for a logic rule. Use this event to modify this display text.
    */
-  public onLogicItemDisplayText: EventBase<SurveyCreatorModel, LogicRuleGetDisplayTextEvent> = this.addCreatorEvent<SurveyCreatorModel, LogicRuleGetDisplayTextEvent>();
+  public onLogicRuleGetDisplayText: EventBase<SurveyCreatorModel, LogicRuleGetDisplayTextEvent> = this.addCreatorEvent<SurveyCreatorModel, LogicRuleGetDisplayTextEvent>();
+  /**
+   * This event is obsolete. Use the [`onLogicRuleGetDisplayText`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onLogicRuleGetDisplayText) event instead.
+   * @deprecated
+   */
+  public onLogicItemDisplayText: EventBase<SurveyCreatorModel, LogicRuleGetDisplayTextEvent> = this.onLogicRuleGetDisplayText;
   /**
     * An event that is raised when users modify survey or theme settings.
     * @see state
@@ -2729,7 +2739,7 @@ export class SurveyCreatorModel extends Base
    * @param selectCopy *(Optional)* Pass `true` if you want to select the copy on the design surface. Default value: `false`.
    * @returns The instance of a new question.
    */
-  public fastCopyQuestion(question: Base, selectCopy?: boolean): IElement {
+  public copyQuestion(question: Base, selectCopy?: boolean): IElement {
     var newElement = this.copyElement(question);
     var index = !!question["parent"]
       ? question["parent"].elements.indexOf(question) + 1
@@ -2746,6 +2756,14 @@ export class SurveyCreatorModel extends Base
     }
     return newElement;
   }
+  /**
+   * Obsolete. Use the [`copyQuestion`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#copyQuestion) method instead.
+   * @deprecated
+   */
+  public fastCopyQuestion(question: Base, selectCopy?: boolean): IElement {
+    return this.copyQuestion(question, selectCopy);
+  }
+
   /**
    * Gets or sets the focused survey element: a question, panel, page, or the survey itself.
    * @see onSelectedElementChanging
@@ -3508,7 +3526,7 @@ export class SurveyCreatorModel extends Base
     list: any[],
     variables: string[]
   ): string {
-    if (this.onConditionQuestionsGetList.isEmpty) return settings.logic.questionSortOrder;
+    if (this.onConditionGetQuestionList.isEmpty) return settings.logic.questionSortOrder;
     var options = {
       propertyName: propertyName,
       obj: obj,
@@ -3517,7 +3535,7 @@ export class SurveyCreatorModel extends Base
       list: list,
       variables: variables
     };
-    this.onConditionQuestionsGetList.fire(this, options);
+    this.onConditionGetQuestionList.fire(this, options);
     if (options.list !== list) {
       list.splice(0, list.length);
       for (var i = 0; i < options.list.length; i++) {
@@ -3544,14 +3562,14 @@ export class SurveyCreatorModel extends Base
     text: string,
     logicItem: any
   ): string {
-    if (this.onLogicItemDisplayText.isEmpty) return text;
+    if (this.onLogicRuleGetDisplayText.isEmpty) return text;
     var options = {
       expression: expression,
       expressionText: expressionText,
       text: text,
       logicItem: logicItem
     };
-    this.onLogicItemDisplayText.fire(this, options);
+    this.onLogicRuleGetDisplayText.fire(this, options);
     return options.text;
   }
   getProcessedTranslationItemText(locale: string, locString: ILocalizableString, newText: string, obj: any): string {
