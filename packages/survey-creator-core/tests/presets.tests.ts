@@ -6,11 +6,11 @@ export * from "../src/localization/german";
 
 test("show/hidetabs", () => {
   const creator = new CreatorTester();
-  expect(creator.tabs).toHaveLength(3);
+  expect(creator.tabs).toHaveLength(4);
   new CreatorPreset({}).apply(creator);
-  expect(creator.tabs).toHaveLength(3);
+  expect(creator.tabs).toHaveLength(4);
   new CreatorPreset({ tabs: { items: [] } }).apply(creator);
-  expect(creator.tabs).toHaveLength(3);
+  expect(creator.tabs).toHaveLength(4);
   expect(creator.activeTab).toBe("designer");
   const preset = new CreatorPreset({
     tabs: {

@@ -1131,6 +1131,7 @@ test("Page duplicate and check actions visibility", (): any => {
 });
 test("Check action container for new added page", (): any => {
   const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "never";
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
@@ -1216,6 +1217,7 @@ test("pageEditMode='single'", (): any => {
 });
 test("Check page actions for pageEditMode is 'single'", (): any => {
   const creator = new CreatorTester({ pageEditMode: "single" });
+  creator.expandCollapseButtonVisibility = "never";
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
@@ -4830,6 +4832,7 @@ test("propertyGridNavigationMode property", (): any => {
 });
 test("showSurfaceTools", (): any => {
   const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "never";
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(designerTabModel.showSurfaceTools).toBeFalsy();
 
@@ -4853,6 +4856,7 @@ test("Designer surface css classes", (): any => {
   const savedNewJSON = settings.defaultNewSurveyJSON;
   settings.defaultNewSurveyJSON = {};
   const creator = new CreatorTester(undefined, undefined, false);
+  creator.expandCollapseButtonVisibility = "never";
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-placeholder svc-tab-designer--standard-mode");
 

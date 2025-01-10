@@ -167,10 +167,10 @@ export class SurveyCreatorModel extends Base
   /**
    * Specifies whether to display the Logic tab.
    *
-   * Default value: `false`
+   * Default value: `true`
    * @see activeTab
    */
-  @property({ defaultValue: false }) showLogicTab: boolean;
+  @property({ defaultValue: true }) showLogicTab: boolean;
   @property({ defaultValue: false }) useTableViewInLogicTab: boolean;
   @property({ defaultValue: 0 }) pageHoverDelay: number;
   /**
@@ -200,7 +200,7 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: true }) previewShowResults: boolean;
 
-  @property({ defaultValue: false }) private _showOneCategoryInPropertyGrid: boolean;
+  @property({ defaultValue: true }) private _showOneCategoryInPropertyGrid: boolean;
   get showOneCategoryInPropertyGrid(): boolean {
     return this._showOneCategoryInPropertyGrid;
   }
@@ -218,10 +218,10 @@ export class SurveyCreatorModel extends Base
    * 
    * Accepted values:
    * 
-   * - `"accordion"` (default)        
+   * - `"accordion"`     
    * The Property Grid displays a stacked list of categories that users can expand or collapse to reveal nested properties.
    * 
-   * - `"buttons"`      
+   * - `"buttons"` (default)     
    * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid. 
    */
   get propertyGridNavigationMode(): "buttons" | "accordion" {
@@ -2394,7 +2394,7 @@ export class SurveyCreatorModel extends Base
     this.onGetObjectDisplayName.fire(this, options);
     return options.displayName;
   }
-  private animationEnabled = false;
+  private animationEnabled = true;
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
     if (reason !== "designer" && reason !== "preview" && reason !== "theme") {
@@ -4066,7 +4066,7 @@ export class SurveyCreatorModel extends Base
    * - `"never"` - Hides the expand/collapse buttons.
    * @see onElementGetExpandCollapseState
    */
-  @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+  @property({ defaultValue: "onhover" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
 
   collapsePages = false;
   collapsePanels = false;
