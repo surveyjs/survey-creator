@@ -397,7 +397,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       iconName: "icon-preview",
       iconSize: "auto",
       action: () => {
-        this.creator.makeNewViewActive(this.creator.showThemeTab ? "theme" : "test");
+        this.creator.switchTab(this.creator.showThemeTab ? "theme" : "test");
       },
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",

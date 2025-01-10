@@ -16,11 +16,17 @@ if (props.useSlk) {
 }
 const creator = shallowRef(new SurveyCreatorModel(props.options));
 (window as any).creator = creator.value;
+creator.value.tabResponsivenessMode = "menu";
+creator.value["animationEnabled"] = false;
+creator.value.showOneCategoryInPropertyGrid = false;
 (window as any).updateCreatorModel = (options: any, json: any) => {
   (window as any).prevCreator = creator.value;
   const newCreator = new SurveyCreatorModel(options);
   newCreator.JSON = json;
   creator.value = newCreator;
+  creator.value.tabResponsivenessMode = "menu";
+  creator.value["animationEnabled"] = false;
+  creator.value.showOneCategoryInPropertyGrid = false;
   (window as any).creator = creator.value;
 }
 </script>
