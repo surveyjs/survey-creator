@@ -1344,7 +1344,9 @@ export class SurveyCreatorModel extends Base
    * Obsolete. Use the [`switchTab`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#switchTab) method instead.
    * @deprecated
    */
-  public makeNewViewActive = this.switchTab;
+  public makeNewViewActive(tabName: string) {
+    this.switchTab(tabName);
+  }
   private switchViewType(viewName: string): boolean {
     let allow = true;
     if (!!this.currentPlugin?.defaultAllowingDeactivate) {
