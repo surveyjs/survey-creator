@@ -942,14 +942,24 @@ export interface BeforeUndoEvent {
   /**
    * A Boolean value that you can set to `false` if you want to prevent the undo operation.
    */
-  canUndo: boolean;
+  allow: boolean;
+  /**
+   * Obsolete. Use `options.allow` instead.
+   * @deprecated
+   */
+  canUndo?: boolean;
 }
 
 export interface BeforeRedoEvent {
   /**
    * A Boolean value that you can set to `false` if you want to prevent the redo operation.
    */
-  canRedo: boolean;
+  allow: boolean;
+  /**
+   * Obsolete. Use `options.allow` instead.
+   * @deprecated
+   */
+  canRedo?: boolean;
 }
 
 export interface PageAddingEvent {
