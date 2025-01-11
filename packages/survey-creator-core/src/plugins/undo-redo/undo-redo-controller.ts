@@ -130,7 +130,8 @@ export class UndoRedoController extends Base {
   public undo() {
     if (!this.undoRedoManager) return;
     this.undoRedoManager.suspend();
-    var options = { canUndo: this.undoRedoManager.canUndo() };
+    const canUndo = this.undoRedoManager.canUndo();
+    var options = { canUndo: canUndo, allow: canUndo };
     this.onBeforeUndo.fire(this.creator, options);
     this.creator.onBeforeUndo.fire(this.creator, options);
     if (options.canUndo) {
@@ -141,7 +142,8 @@ export class UndoRedoController extends Base {
   }
   public redo() {
     if (!this.undoRedoManager) return;
-    const options = { canRedo: this.undoRedoManager.canRedo() };
+    const canRedo = this.undoRedoManager.canRedo();
+    const options = { canRedo: canRedo, allow: canRedo };
     this.onBeforeRedo.fire(this.creator, options);
     this.creator.onBeforeRedo.fire(this.creator, options);
     if (options.canRedo) {

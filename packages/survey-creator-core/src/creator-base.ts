@@ -167,10 +167,10 @@ export class SurveyCreatorModel extends Base
   /**
    * Specifies whether to display the Logic tab.
    *
-   * Default value: `false`
+   * Default value: `true`
    * @see activeTab
    */
-  @property({ defaultValue: false }) showLogicTab: boolean;
+  @property({ defaultValue: true }) showLogicTab: boolean;
   @property({ defaultValue: false }) useTableViewInLogicTab: boolean;
   @property({ defaultValue: 0 }) pageHoverDelay: number;
   /**
@@ -181,7 +181,18 @@ export class SurveyCreatorModel extends Base
    * If you enable this property, users cannot edit choice texts because the Property Grid hides the Text column for choices, rate values, columns and rows in [Single-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model), and rows in [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) questions.
    * @see useElementTitles
    */
-  @property({ defaultValue: false }) inplaceEditForValues: boolean;
+  @property({ defaultValue: false }) inplaceEditChoiceValues: boolean;
+  /**
+   * Obsolete. Use the [`inplaceEditChoiceValues`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#inplaceEditChoiceValues) property instead.
+   * @deprecated
+   */
+  get inplaceEditForValues() {
+    return this.inplaceEditChoiceValues;
+  }
+  set inplaceEditForValues(val) {
+    this.inplaceEditChoiceValues = val;
+  }
+
   /**
    * Specifies whether to display a table with survey results after completing a survey in the Preview tab.
    * 
@@ -189,7 +200,7 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: true }) previewShowResults: boolean;
 
-  @property({ defaultValue: false }) private _showOneCategoryInPropertyGrid: boolean;
+  @property({ defaultValue: true }) private _showOneCategoryInPropertyGrid: boolean;
   get showOneCategoryInPropertyGrid(): boolean {
     return this._showOneCategoryInPropertyGrid;
   }
@@ -207,10 +218,10 @@ export class SurveyCreatorModel extends Base
    * 
    * Accepted values:
    * 
-   * - `"accordion"` (default)        
+   * - `"accordion"`     
    * The Property Grid displays a stacked list of categories that users can expand or collapse to reveal nested properties.
    * 
-   * - `"buttons"`      
+   * - `"buttons"` (default)     
    * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid. 
    */
   get propertyGridNavigationMode(): "buttons" | "accordion" {
@@ -232,6 +243,16 @@ export class SurveyCreatorModel extends Base
    * Specifies whether users can see and edit the survey header and related survey properties.
    *
    * Default value: `true`
+   */
+  get showSurveyHeader(): boolean {
+    return this.allowEditSurveyTitle;
+  }
+  set showSurveyHeader(val: boolean) {
+    this.allowEditSurveyTitle = val;
+  }
+  /**
+   * Obsolete. Use the [`showSurveyHeader`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSurveyHeader) property instead.
+   * @deprecated
    */
   get showSurveyTitle(): boolean {
     return this.allowEditSurveyTitle;
@@ -259,7 +280,17 @@ export class SurveyCreatorModel extends Base
    * 
    * If you enable this property, Survey Creator calls the [`saveSurveyFunc`](#saveSurveyFunc) or [`saveThemeFunc`](#saveThemeFunc) function to save the survey or theme JSON schema. The schemas are saved with a 500-millisecond delay after users change settings. You can specify the [`autoSaveDelay`](#autoSaveDelay) property to increase or decrease the delay.
    */
-  @property({ defaultValue: false }) isAutoSave: boolean;
+  @property({ defaultValue: false }) autoSaveEnabled: boolean;
+  /**
+   * Obsolete. Use the [`autoSaveEnabled`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#autoSaveEnabled) property instead.
+   * @deprecated
+   */
+  get isAutoSave() {
+    return this.autoSaveEnabled;
+  }
+  set isAutoSave(val) {
+    this.autoSaveEnabled = val;
+  }
   @property() showOptions: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
@@ -1027,7 +1058,7 @@ export class SurveyCreatorModel extends Base
   }
 
   /**
-   * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
+   * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#autoSaveEnabled) is triggered to save a theme JSON object.
    * 
    * For more information, refer to the [Save and Load Custom Themes](https://surveyjs.io/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
    * @see showThemeTab
@@ -1275,13 +1306,13 @@ export class SurveyCreatorModel extends Base
   }
   /**
    * An event that is raised before the [active tab](#activeTab) is switched. Use this event to allow or cancel the switch.
-   * @see makeNewViewActive
+   * @see switchTab
    */
   public onActiveTabChanging: EventBase<SurveyCreatorModel, ActiveTabChangingEvent> = this.addCreatorEvent<SurveyCreatorModel, ActiveTabChangingEvent>();
 
   /**
    * An event that is raised after the [active tab](#activeTab) is switched.
-   * @see makeNewViewActive
+   * @see switchTab
    */
   public onActiveTabChanged: EventBase<SurveyCreatorModel, ActiveTabChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, ActiveTabChangedEvent>();
   /**
@@ -1295,20 +1326,20 @@ export class SurveyCreatorModel extends Base
    * - [`"editor"`](#showJSONEditorTab)
    * - [`"logic"`](#showLogicTab)
    * - [`"translation"`](#showLogicTab)
-   * @see makeNewViewActive
+   * @see switchTab
    */
   public get activeTab(): string {
     return this.viewType;
   }
   public set activeTab(val: string) {
-    this.makeNewViewActive(val);
+    this.switchTab(val);
   }
   /**
    * Switches the [active tab](#activeTab). Returns `false` if the tab cannot be switched.
    * @param tabName A tab that you want to make active: `"designer"`, `"test"`, `"theme"`, `"editor"`, `"logic"`, or `"translation"`.
    * @returns `false` if the active tab cannot be switched, `true` otherwise.
    */
-  public makeNewViewActive(tabName: string): boolean {
+  public switchTab(tabName: string): boolean {
     if (tabName == this.viewType) return false;
     const plugin: ICreatorPlugin = this.currentPlugin;
     if (!!plugin && !!plugin.canDeactivateAsync) {
@@ -1318,6 +1349,13 @@ export class SurveyCreatorModel extends Base
       return undefined;
     }
     return this.switchViewType(tabName);
+  }
+  /**
+   * Obsolete. Use the [`switchTab`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#switchTab) method instead.
+   * @deprecated
+   */
+  public makeNewViewActive(tabName: string) {
+    return this.switchTab(tabName);
   }
   private switchViewType(viewName: string): boolean {
     let allow = true;
@@ -1653,7 +1691,7 @@ export class SurveyCreatorModel extends Base
       }
     }
     if (this.tabs.length > 0) {
-      this.makeNewViewActive(this.tabs[0].id);
+      this.switchTab(this.tabs[0].id);
     }
   }
   private initPlugins(): void {
@@ -2350,7 +2388,7 @@ export class SurveyCreatorModel extends Base
     this.onGetObjectDisplayName.fire(this, options);
     return options.displayName;
   }
-  private animationEnabled = false;
+  private animationEnabled = true;
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
     if (reason !== "designer" && reason !== "test" && reason !== "theme") {
@@ -2523,7 +2561,17 @@ export class SurveyCreatorModel extends Base
         delete json.pages;
       }
     }
+    if(this.storeSjsVersion) {
+      json["sjsVersion"] = SurveySettings.version;
+    }
     return json;
+  }
+  private storeSjsVersionValue: boolean;
+  public get storeSjsVersion(): boolean {
+    return this.storeSjsVersionValue === true;
+  }
+  public set storeSjsVersion(val: boolean) {
+    this.storeSjsVersionValue = val;
   }
   /**
    * A survey JSON schema.
@@ -3607,7 +3655,7 @@ export class SurveyCreatorModel extends Base
   }
   translationLocalesOrder: Array<string> = [];
   /**
-   * A delay between changing survey settings and saving the survey JSON schema, measured in milliseconds. Applies only when the [`isAutoSave`](#isAutoSave) property is `true`.
+   * A delay between changing survey settings and saving the survey JSON schema, measured in milliseconds. Applies only when the [`autoSaveEnabled`](#autoSaveEnabled) property is `true`.
    * 
    * Default value: 500 (inherited from `settings.autoSave.delay`)
    * 
@@ -3749,13 +3797,13 @@ export class SurveyCreatorModel extends Base
    * Specifies whether to display a button that saves the survey or theme (executes the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) or [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) function).
    * 
    * Default value: `false`
-   * @see isAutoSave
+   * @see autoSaveEnabled
    * @see syncSaveButtons
    */
   @property({ defaultValue: false }) showSaveButton: boolean;
 
   /**
-   * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a survey JSON schema.
+   * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#autoSaveEnabled) is triggered to save a survey JSON schema.
    * 
    * For more information, refer to the Save and Load Survey Model Schemas help topic for your framework: [Angular](https://surveyjs.io/survey-creator/documentation/get-started-angular#save-and-load-survey-model-schemas) | [Vue](https://surveyjs.io/survey-creator/documentation/get-started-vue#save-and-load-survey-model-schemas) | [React](https://surveyjs.io/survey-creator/documentation/get-started-react#save-and-load-survey-model-schemas) | [HTML/CSS/JavaScript](https://surveyjs.io/survey-creator/documentation/get-started-html-css-javascript#save-and-load-survey-model-schemas).
    * @see saveThemeFunc
@@ -4029,7 +4077,7 @@ export class SurveyCreatorModel extends Base
    * - `"never"` - Hides the expand/collapse buttons.
    * @see onElementGetExpandCollapseState
    */
-  @property({ defaultValue: "never" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+  @property({ defaultValue: "onhover" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
 
   collapsePages = false;
   collapsePanels = false;
