@@ -95,10 +95,5 @@
     "survey-core": "../../../survey-library/packages/survey-core/build",
     "survey-react-ui": "../../../survey-library/packages/survey-react-ui/build",
     "survey-creator-core": "../survey-creator-core/build"
-  },
-  "standard-version": {
-    "skip": {
-      "tag": true
-    }
   }
 }

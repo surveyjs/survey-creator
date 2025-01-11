@@ -87,10 +87,5 @@
     "karma-webpack": {
       "webpack": "^4.43.0"
     }
-  },
-  "standard-version": {
-    "skip": {
-      "tag": true
-    }
   }
 }
