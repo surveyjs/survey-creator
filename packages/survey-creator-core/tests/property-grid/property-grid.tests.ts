@@ -64,7 +64,7 @@ test("Check property grid survey options", () => {
   Serializer.findProperty("survey", "showProgressBar").defaultValue = "top";
   var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
-  expect(propertyGrid.survey.showNavigationButtons).toEqual("none");
+  expect(propertyGrid.survey.showNavigationButtons).toEqual(false);
   expect(propertyGrid.survey.showProgressBar).toEqual("off");
   Serializer.findProperty("survey", "showProgressBar").defaultValue = oldValue;
 });
@@ -156,10 +156,10 @@ test("dropdown property editor localization", (): any => {
     "Under the input field"
   );
 
-  var showPreviewQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("showPreviewBeforeComplete");
+  var showPreviewQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("previewMode");
   expect(showPreviewQuestion.getType()).toEqual("dropdown"); //"correct property editor is created" a lot of text
-  expect(showPreviewQuestion.choices[0].value).toEqual("noPreview");
-  expect(showPreviewQuestion.choices[0].text).toEqual("No preview");
+  expect(showPreviewQuestion.choices[0].value).toEqual("allQuestions");
+  expect(showPreviewQuestion.choices[0].text).toEqual("Show all questions");
 
   var localeQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("locale");
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"

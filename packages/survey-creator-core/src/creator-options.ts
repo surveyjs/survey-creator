@@ -35,7 +35,7 @@ export interface ICreatorOptions {
   /**
    * Specifies whether to display the Logic tab.
    *
-   * Default value: `false`
+   * Default value: `true`
    */
   showLogicTab?: boolean;
   /**
@@ -58,6 +58,11 @@ export interface ICreatorOptions {
    *
    * Default value: `false`
    */
+  autoSaveEnabled?: boolean;
+  /**
+   * Obsolete. Use the [`autoSaveEnabled`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#autoSaveEnabled) property instead.
+   * @deprecated
+   */
   isAutoSave?: boolean;
   /**
    * Specifies whether to enable support for right-to-left languages.
@@ -66,9 +71,14 @@ export interface ICreatorOptions {
    */
   isRTL?: boolean;
   /**
-   * Specifies whether users can see and edit the survey title and related survey properties.
+   * Specifies whether users can see and edit the survey header and related survey properties.
    *
    * Default value: `true`
+   */
+  showSurveyHeader?: boolean;
+  /**
+   * Obsolete. Use the [`showSurveyHeader`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showSurveyHeader) property instead.
+   * @deprecated
    */
   showSurveyTitle?: boolean;
   /**
