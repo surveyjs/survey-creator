@@ -81,10 +81,5 @@
     "survey-creator-core": "../survey-creator-core/build",
     "creator-presets-core": "../creator-presets-core/build",
     "survey-creator-react": "../survey-creator-react/build"
-  },
-  "standard-version": {
-    "skip": {
-      "tag": true
-    }
   }
 }

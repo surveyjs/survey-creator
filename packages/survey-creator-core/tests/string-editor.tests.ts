@@ -993,7 +993,18 @@ test("StringEditor multiline paste for matrix questions", (): any => {
   connectorItemRow.onTextChanging.fire(null, { value: "a\nb\r\nc" });
   expect(question.rows.map(c => c.text)).toEqual(["a", "b", "c", "Row 2"]);
 });
-
+test("Support for creator.storeSjsVersion", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.JSON["sjsVersion"]).toBeFalsy();
+  expect(creator.text.indexOf("sjsVersion") > 0).toBeFalsy();
+  creator.storeSjsVersion = true;
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(creator.JSON["sjsVersion"]).toBeTruthy();
+  expect(creator.text.indexOf("sjsVersion") > 0).toBeTruthy();
+  creator.storeSjsVersion = false;
+  expect(creator.JSON["sjsVersion"]).toBeFalsy();
+  expect(creator.text.indexOf("sjsVersion") > 0).toBeFalsy();
+});
 test("StringEditor Navigator - supported types", (): any => {
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionTextModel("q") })).toBeFalsy();
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionMultipleTextModel("q") })).toBeTruthy();

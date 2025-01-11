@@ -2551,7 +2551,17 @@ export class SurveyCreatorModel extends Base
         delete json.pages;
       }
     }
+    if(this.storeSjsVersion) {
+      json["sjsVersion"] = SurveySettings.version;
+    }
     return json;
+  }
+  private storeSjsVersionValue: boolean;
+  public get storeSjsVersion(): boolean {
+    return this.storeSjsVersionValue === true;
+  }
+  public set storeSjsVersion(val: boolean) {
+    this.storeSjsVersionValue = val;
   }
   /**
    * A survey JSON schema.
