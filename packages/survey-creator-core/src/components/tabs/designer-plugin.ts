@@ -198,7 +198,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       return result;
     });
 
-    creator.onSelectedElementChanged.add((sender, options) => {
+    creator.onElementSelected.add((sender, options) => {
       if (this.showOneCategoryInPropertyGrid && this.creator.activeTab === "designer") {
         this.setPropertyGridIsActivePage();
         this.updateTabControlActions();
@@ -407,7 +407,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     items.push(this.saveSurveyAction);
     items.push(toolboxAction);
     items.push(this.surveySettingsAction);
-    this.creator.onSelectedElementChanged.add((sender, options) => {
+    this.creator.onElementSelected.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
     });
     this.creator.onShowSidebarVisibilityChanged.add((sender, options) => {

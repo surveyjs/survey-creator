@@ -238,7 +238,7 @@ export async function resetHoverToCreator(t: TestController): Promise<void> {
 export const hideAllAdornerActions = ClientFunction(() => {
   (<any>window).creator.onElementAllowOperations.add((_, options) => {
     Object.keys(options).forEach(key => {
-      if (key !== "allowDragging" && key !== "allowEdit") {
+      if (key !== "allowDragging" && key !== "allowDrag" && key !== "allowEdit") {
         options[key] = false;
       }
     });
