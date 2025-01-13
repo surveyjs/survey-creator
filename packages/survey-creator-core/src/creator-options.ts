@@ -82,7 +82,8 @@ export interface ICreatorOptions {
    */
   logicAllowTextEditExpressions?: boolean;
   /*
-   * Obsolete
+   * Obsolete. Use the [`logicAllowTextEditExpressions`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicAllowTextEditExpressions) property instead.
+   * @deprecated
    */
   allowEditExpressionsInTextEditor?: boolean;
   /**

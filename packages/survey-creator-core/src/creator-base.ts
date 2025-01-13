@@ -902,7 +902,7 @@ export class SurveyCreatorModel extends Base
    */
   public logicAllowTextEditExpressions = true;
   /**
-   * Obsolete
+   * Obsolete. Use the [`logicAllowTextEditExpressions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#logicAllowTextEditExpressions) property instead.
    */
   get allowEditExpressionsInTextEditor() {
     return this.logicAllowTextEditExpressions;
