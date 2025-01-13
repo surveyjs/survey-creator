@@ -1495,7 +1495,7 @@ export var mmStrings = {
       visibleIf: "စာမျက်နှာမြင်သာမှုကို သတ်မှတ်ရန် Magic Wand icon ကို အသုံးပြုပါ။",
       enableIf: "စာမျက်နှာကို Read-only mode မဟုတ်စေရန် Magic Wand icon ကို အသုံးပြုပါ။",
       questionTitleLocation: "စာမျက်နှာတွင်း မေးခွန်းများအတွက် Title Alignment ကို သတ်မှတ်ပါ။",
-      navigationButtonsVisibility: "စာမျက်နှာပေါ်တွင် Navigation Buttons ၏ မြင်သာမှုကို သတ်မှတ်ပါ။"
+      showNavigationButtons: "စာမျက်နှာပေါ်တွင် Navigation Buttons ၏ မြင်သာမှုကို သတ်မှတ်ပါ။"
     },
     timerLocation: "စာမျက်နှာတစ်ခုအတွင်း Timer ၏ တည်နေရာကို သတ်မှတ်ပါ။",
     panelsState: "\"Locked\", \"Collapse all\", \"Expand all\", \"First expanded\" တို့ထဲမှ Panel State ကိုရွေးချယ်ပါ။",
@@ -1653,7 +1653,6 @@ export var mmStrings = {
     inputTextAlignment: "အဝင်တန်ဖိုး alignment",
     elements: "အချက်အလက်များ",
     content: "အကြောင်းအရာ",
-    navigationButtonsVisibility: "လမ်းညွှန်ခလုတ်များကိုပြ/ဖျောက်ပါ",
     navigationTitle: "လမ်းညွှန်ခေါင်းစဉ်",
     navigationDescription: "လမ်းညွှန်ဖော်ပြချက်",
     longTap: "ကြာရှည်ထိပါ",
