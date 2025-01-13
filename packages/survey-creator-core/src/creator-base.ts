@@ -46,7 +46,7 @@ import { DragDropSurveyElements } from "./survey-elements";
 import { PageAdorner } from "./components/page";
 import {
   ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, ElementAllowOperationsEvent,
-  ElementGetActionsEvent, PropertyAddingEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent,
+  ElementGetActionsEvent, PropertyShowingEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent,
   PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, FastEntryItemsEvent as FastEntryFinishedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
   PropertyDisplayCustomErrorEvent, PropertyValueChangingEvent, PropertyValueChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
   LogicRuleGetDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent, PageAddedEvent, QuestionConvertingEvent,
@@ -57,6 +57,8 @@ import {
   PageAddingEvent, DragStartEndEvent,
   ElementGetExpandCollapseStateEvent,
   ElementGetExpandCollapseStateEventReason,
+  PropertyAddingEvent,
+  GetPropertyReadOnlyEvent,
   ElementSelectingEvent,
   ElementSelectedEvent,
   DefineElementMenuItemsEvent
@@ -483,7 +485,12 @@ export class SurveyCreatorModel extends Base
   /**
    * An event that is raised when Survey Creator sets the read-only status for a survey element property. Use this event to change the read-only status for individual properties.
    */
-  public onGetPropertyReadOnly: EventBase<SurveyCreatorModel, PropertyGetReadOnlyEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGetReadOnlyEvent>();
+  public onPropertyGetReadOnly: EventBase<SurveyCreatorModel, PropertyGetReadOnlyEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGetReadOnlyEvent>();
+  /**
+   * Obsolete. Use the [`onPropertyGetReadOnly`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPropertyGetReadOnly) event instead.
+   * @deprecated
+   */
+  public onGetPropertyReadOnly: EventBase<SurveyCreatorModel, GetPropertyReadOnlyEvent> = this.onPropertyGetReadOnly;
 
   /**
    * An event that is raised when Survey Creator [instantiates a survey to display a UI element](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys). Handle this event to customize the UI element by modifying the survey.
@@ -533,7 +540,7 @@ export class SurveyCreatorModel extends Base
    * 
    * [View Demo](https://surveyjs.io/survey-creator/examples/create-custom-adorners/ (linkStyle))
    * @see onElementAllowOperations
-   * @see onGetPageActions
+   * @see onPageGetFooterActions
    */
   public onElementGetActions: EventBase<SurveyCreatorModel, ElementGetActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetActionsEvent>();
   /**
@@ -548,8 +555,13 @@ export class SurveyCreatorModel extends Base
    * 
    * [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/ (linkStyle))
    */
-  public onShowingProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyAddingEvent>();
-  public onCanShowProperty: EventBase<SurveyCreatorModel, any> = this.onShowingProperty;
+  public onPropertyShowing: EventBase<SurveyCreatorModel, PropertyShowingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyShowingEvent>();
+  public onCanShowProperty: EventBase<SurveyCreatorModel, any> = this.onPropertyShowing;
+  /**
+   * Obsolete. Use the [`onPropertyShowing`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPropertyShowing) event instead.
+   * @deprecated
+   */
+  public onShowingProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.onPropertyShowing;
   /**
    * Obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
    * @deprecated
@@ -683,7 +695,12 @@ export class SurveyCreatorModel extends Base
    * An event that is raised when Survey Creator renders action buttons under each page on the design surface. Use this event to add, remove, or modify the buttons.
    * @see onElementGetActions
    */
-  public onGetPageActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, PageGetFooterActionsEvent>();
+  public onPageGetFooterActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, PageGetFooterActionsEvent>();
+  /**
+   * Оbsolete. Use the [`onPageGetFooterActions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPageGetFooterActions) event instead.
+   * @deprecated
+   */
+  public onGetPageActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.onPageGetFooterActions;
 
   /**
    * Obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
@@ -1857,16 +1874,18 @@ export class SurveyCreatorModel extends Base
       creatorReadOnly = this.readOnly;
     }
     const proposedValue = creatorReadOnly || readOnly;
-    if (this.onGetPropertyReadOnly.isEmpty) return proposedValue;
+    if (this.onPropertyGetReadOnly.isEmpty) return proposedValue;
     const options = {
       obj: obj,
+      element: obj,
       property: property,
       readOnly: proposedValue,
       propertyName: property.name,
       parentObj: parentObj,
+      parentElement: parentObj,
       parentProperty: parentProperty
     };
-    this.onGetPropertyReadOnly.fire(this, options);
+    this.onPropertyGetReadOnly.fire(this, options);
     return options.readOnly;
   }
 
@@ -2569,7 +2588,7 @@ export class SurveyCreatorModel extends Base
         delete json.pages;
       }
     }
-    if(this.storeSjsVersion) {
+    if (this.storeSjsVersion) {
       json["sjsVersion"] = SurveySettings.version;
     }
     return json;
@@ -3305,14 +3324,17 @@ export class SurveyCreatorModel extends Base
     if (this.hiddenProperties[property.id]) return false;
     var options = {
       obj: object,
+      element: object,
       property: property,
       canShow: true,
+      show: true,
       showMode: showMode,
       parentObj: parentObj,
+      parentElement: parentObj,
       parentProperty: parentProperty
     };
     this.onCanShowProperty.fire(this, options);
-    return options.canShow;
+    return options.canShow && options.show;
   }
   protected canDeleteItem(
     object: any,
@@ -3900,7 +3922,7 @@ export class SurveyCreatorModel extends Base
       addNewQuestion: (type: string) => { pageAdorner.addNewQuestion(pageAdorner, undefined, type); },
       actions
     };
-    this.onGetPageActions.fire(this, options);
+    this.onPageGetFooterActions.fire(this, options);
     return options.actions;
   }
 
