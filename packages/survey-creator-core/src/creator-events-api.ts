@@ -15,9 +15,13 @@ export interface ElementDeletingEvent {
    */
   elementType: string;
   /**
+   * Obsolete. Use `options.allow` instead.
+   */
+  allowing?: boolean;
+  /**
    * A Boolean property that you can set to `false` if you want to cancel element deletion.
    */
-  allowing: boolean;
+  allow: boolean;
 }
 
 export interface GetPropertyReadOnlyEvent {
@@ -114,7 +118,11 @@ export interface ElementAllowOperationsEvent {
   /**
    * A survey element (question or panel) for which you can disable user interactions.
    */
-  obj: Base;
+  element: Base;
+  /**
+   * Obsolete. Use `options.element` instead.
+   */
+  obj?: Base;
   /**
    * Allows users to mark the survey element as required.
    */
@@ -138,7 +146,11 @@ export interface ElementAllowOperationsEvent {
   /**
    * Allows users to drag and drop the survey element.
    */
-  allowDragging: boolean;
+  allowDrag: boolean;
+  /**
+   * Obsolete. Use `options.allowDrag` instead.
+   */
+  allowDragging?: boolean;
   /**
    * Allows users to edit survey element properties on the design surface. If you disable this property, users can edit the properties only in the Property Grid.
    */
@@ -153,15 +165,26 @@ export interface ElementAllowOperationsEvent {
   allowShowSettings: boolean | undefined;
 }
 
-export interface ElementGetActionsEvent {
+export interface DefineElementMenuItemsEvent {
+  /**
+   * Obsolete. Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
+   * Obsolete. Use `options.actions` instead.
+   */
+  items?: IAction[];
+}
+
+export interface ElementGetActionsEvent extends DefineElementMenuItemsEvent {
   /**
    * A survey element (question, panel, or page) whose adorners you can customize.
    */
-  obj: Base;
+  element: Base;
   /**
    * An array of adorner actions. You can add, modify, or remove actions from this array.
    */
-  items: IAction[];
+  actions: IAction[];
 }
 export interface PropertyAddingEvent {
   /**
@@ -683,16 +706,28 @@ export interface NotifyEvent {
 
 export interface ElementFocusingEvent {
   /**
-   * An element that is going to be focused.
+   * Obsolete. Use `options.element` instead.
    */
-  newSelectedElement: Base;
+  newSelectedElement?: Base;
+}
+export interface ElementSelectingEvent extends ElementFocusingEvent {
+  /**
+   * An element that is going to be selected.
+   */
+  element: Base;
 }
 
 export interface ElementFocusedEvent {
   /**
-   * The [focused element](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#selectedElement).
+   * Obsolete. Use `options.element` instead.
    */
-  newSelectedElement: Base;
+  newSelectedElement?: Base;
+}
+export interface ElementSelectedEvent extends ElementFocusedEvent {
+  /**
+   * The [selected element](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#selectedElement).
+   */
+  element: Base;
 }
 
 export interface OpenFileChooserEvent {

@@ -58,7 +58,10 @@ import {
   ElementGetExpandCollapseStateEvent,
   ElementGetExpandCollapseStateEventReason,
   PropertyAddingEvent,
-  GetPropertyReadOnlyEvent
+  GetPropertyReadOnlyEvent,
+  ElementSelectingEvent,
+  ElementSelectedEvent,
+  DefineElementMenuItemsEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -479,7 +482,6 @@ export class SurveyCreatorModel extends Base
    * @see deleteElement
    */
   public onElementDeleting: EventBase<SurveyCreatorModel, ElementDeletingEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementDeletingEvent>();
-
   /**
    * An event that is raised when Survey Creator sets the read-only status for a survey element property. Use this event to change the read-only status for individual properties.
    */
@@ -539,7 +541,12 @@ export class SurveyCreatorModel extends Base
    * @see onElementAllowOperations
    * @see onPageGetFooterActions
    */
-  public onDefineElementMenuItems: EventBase<SurveyCreatorModel, ElementGetActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetActionsEvent>();
+  public onElementGetActions: EventBase<SurveyCreatorModel, ElementGetActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetActionsEvent>();
+  /**
+   * Obsolete. Use the [`onElementGetActions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementGetActions) event instead.
+   * @deprecated
+   */
+  public onDefineElementMenuItems: EventBase<SurveyCreatorModel, DefineElementMenuItemsEvent> = this.onElementGetActions;
   /**
    * An event that is raised when Survey Creator adds properties to a survey element selected on the design surface. Handle this event if you cancel the addition of certain properties and thus [hide them from the Property Grid](https://surveyjs.io/survey-creator/documentation/property-grid-customization#hide-properties-from-the-property-grid).
    * 
@@ -551,7 +558,7 @@ export class SurveyCreatorModel extends Base
   public onCanShowProperty: EventBase<SurveyCreatorModel, any> = this.onPropertyShowing;
   public onShowingProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.onPropertyShowing;
   /**
-   * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
+   * Obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
    * @deprecated
    */
   public onPropertyGridSurveyCreated: EventBase<SurveyCreatorModel, PropertyGridSurveyCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGridSurveyCreatedEvent>();
@@ -602,7 +609,7 @@ export class SurveyCreatorModel extends Base
    */
   public onMatrixColumnAdded: EventBase<SurveyCreatorModel, MatrixColumnAddedEvent> = this.addCreatorEvent<SurveyCreatorModel, MatrixColumnAddedEvent>();
   /**
-   * This event is obsolete. Use the [`onConfigureTablePropertyEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onConfigureTablePropertyEditor) event instead.
+   * Obsolete. Use the [`onConfigureTablePropertyEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onConfigureTablePropertyEditor) event instead.
    * @deprecated
    */
   public onSetPropertyEditorOptions: EventBase<SurveyCreatorModel, ConfigureTablePropertyEditorEvent> = this.addCreatorEvent<SurveyCreatorModel, ConfigureTablePropertyEditorEvent>();
@@ -681,7 +688,7 @@ export class SurveyCreatorModel extends Base
 
   /**
    * An event that is raised when Survey Creator renders action buttons under each page on the design surface. Use this event to add, remove, or modify the buttons.
-   * @see onDefineElementMenuItems
+   * @see onElementGetActions
    */
   public onPageGetFooterActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, PageGetFooterActionsEvent>();
   /**
@@ -691,12 +698,12 @@ export class SurveyCreatorModel extends Base
   public onGetPageActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.onPageGetFooterActions;
 
   /**
-   * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
+   * Obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
    * @deprecated
    */
   public onDesignerSurveyCreated: EventBase<SurveyCreatorModel, DesignerSurveyCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, DesignerSurveyCreatedEvent>();
   /**
-   * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
+   * Obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
    * @deprecated
    */
   public onPreviewSurveyCreated: EventBase<SurveyCreatorModel, PreviewSurveyCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, PreviewSurveyCreatedEvent>();
@@ -707,16 +714,27 @@ export class SurveyCreatorModel extends Base
    */
   public onNotify: EventBase<SurveyCreatorModel, NotifyEvent> = this.addCreatorEvent<SurveyCreatorModel, NotifyEvent>();
   /**
-   * An event that is raised before a survey element (question, panel, page, or the survey itself) is focused. Use this event to move focus to a different survey element.
-   * @see onSelectedElementChanged
+   * An event that is raised before a survey element (question, panel, page, or the survey itself) is selected. Use this event if you want to select a different survey element.
+   * @see onElementSelected
    * @see selectedElement
    */
-  public onSelectedElementChanging: EventBase<SurveyCreatorModel, ElementFocusingEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementFocusingEvent>();
+  public onElementSelecting: EventBase<SurveyCreatorModel, ElementSelectingEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementSelectingEvent>();
   /**
-   * An event that is raised after a survey element (a question, panel, page, or the survey itself) is focused.
-   * @see onSelectedElementChanging
+   * Obsolete. Use the [`onElementSelecting`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementSelecting) event instead.
+   * @deprecated
    */
-  public onSelectedElementChanged: EventBase<SurveyCreatorModel, ElementFocusedEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementFocusedEvent>();
+  public onSelectedElementChanging: EventBase<SurveyCreatorModel, ElementFocusingEvent> = this.onElementSelecting;
+  /**
+   * An event that is raised after a survey element (a question, panel, page, or the survey itself) is selected.
+   * @see onElementSelecting
+   */
+  public onElementSelected: EventBase<SurveyCreatorModel, ElementSelectedEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementSelectedEvent>();
+  /**
+   * Obsolete. Use the [`onElementSelected`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementSelected) event instead.
+   * @deprecated
+   */
+  public onSelectedElementChanged: EventBase<SurveyCreatorModel, ElementFocusedEvent> = this.onElementSelected;
+
   /**
    * An event that is raised when Survey Creator opens a dialog window for users to select files.
    * @see onUploadFile
@@ -2809,9 +2827,9 @@ export class SurveyCreatorModel extends Base
     return newElement;
   }
   /**
-   * Gets or sets the focused survey element: a question, panel, page, or the survey itself.
-   * @see onSelectedElementChanging
-   * @see onSelectedElementChanged
+   * Gets or sets the selected survey element: a question, panel, page, or the survey itself.
+   * @see onElementSelecting
+   * @see onElementSelected
    */
   public get selectedElement(): Base {
     return this.selectedElementValue;
@@ -2925,10 +2943,11 @@ export class SurveyCreatorModel extends Base
     const options = {
       element: obj,
       elementType: SurveyHelper.getObjectType(obj),
-      allowing: true
+      allowing: true,
+      allow: true
     };
     this.onElementDeleting.fire(this, options);
-    return options.allowing;
+    return options.allowing && options.allow;
   }
   public isElementSelected(element: Base): boolean {
     if (!element || element.isDisposed) return false;
@@ -3005,9 +3024,11 @@ export class SurveyCreatorModel extends Base
     return sel.isInteractiveDesignElement && sel.id ? sel : null;
   }
   private onSelectingElement(val: Base): Base {
-    var options = { newSelectedElement: val };
-    this.onSelectedElementChanging.fire(this, options);
-    return options.newSelectedElement;
+    var options = { element: val, newSelectedElement: val };
+    this.onElementSelecting.fire(this, options);
+    if (options.element != val) return options.element;
+    if (options.newSelectedElement != val) return options.newSelectedElement;
+    return val;
   }
 
   //#region Obsolete designerPropertyGrid
@@ -3074,8 +3095,8 @@ export class SurveyCreatorModel extends Base
   /**
    * Validates the property values of the [focused element](#selectedElement).
    * @returns `true` if all property values of the focused element are valid or if no element is focused, `false` otherwise.
-   * @see onSelectedElementChanging
-   * @see onSelectedElementChanged
+   * @see onElementSelecting
+   * @see onElementSelected
    */
   public validateSelectedElement(): boolean {
     var isValid = true;
@@ -3130,8 +3151,8 @@ export class SurveyCreatorModel extends Base
       this.expandCategoryIfNeeded();
       this.selectFromStringEditor = false;
     }
-    var options = { newSelectedElement: element };
-    this.onSelectedElementChanged.fire(this, options);
+    var options = { newSelectedElement: element, element: element };
+    this.onElementSelected.fire(this, options);
   }
   private getCurrentPageByElement(element: Base): PageModel {
     if (!element) return undefined;
@@ -3948,9 +3969,11 @@ export class SurveyCreatorModel extends Base
   }
 
   public onElementMenuItemsChanged(element: any, items: Action[]) {
-    this.onDefineElementMenuItems.fire(this, {
+    this.onElementGetActions.fire(this, {
       obj: element,
-      items: items
+      element: element,
+      items: items,
+      actions: items
     });
   }
   public getElementAllowOperations(element: SurveyElement): any {
@@ -3960,6 +3983,7 @@ export class SurveyCreatorModel extends Base
       allowDelete: true,
       allowCopy: true,
       allowDragging: true,
+      allowDrag: true,
       allowChangeType: true,
       allowChangeInputType: true,
       allowChangeRequired: true,
@@ -3968,6 +3992,7 @@ export class SurveyCreatorModel extends Base
       allowExpandCollapse: undefined
     };
     this.onElementAllowOperations.fire(this, options);
+    options.allowDrag = options.allowDragging = options.allowDrag && options.allowDragging;
     return options;
   }
 
