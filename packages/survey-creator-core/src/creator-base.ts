@@ -92,7 +92,22 @@ export interface IKeyboardShortcut {
 export class CreatorAction extends Action {
 }
 
-export class ToolbarActionContainer extends ActionContainer {
+export class FooterToolbarActionContainer extends ActionContainer {
+  protected getDefaultCssClasses() {
+    return {
+      root: "svc-toolbar sv-action-bar",
+      item: "svc-toolbar__item",
+      itemWithTitle: "svc-toolbar__item--with-text",
+      itemAsIcon: "svc-toolbar__item--icon",
+      itemActive: "svc-toolbar__item--active",
+      itemPressed: "svc-toolbar__item--pressed",
+      itemIcon: "svc-toolbar-item__icon",
+      itemTitle: "svc-toolbar-item__title",
+      itemTitleWithIcon: "svc-toolbar-item__title--with-icon",
+    };
+  }
+}
+export class ToolbarActionContainer extends FooterToolbarActionContainer {
   constructor(private creator: SurveyCreatorModel) {
     super();
   }
@@ -1770,7 +1785,7 @@ export class SurveyCreatorModel extends Base
   }
   private initFooterToolbar(): void {
     if (!this.footerToolbar) {
-      this.footerToolbar = new ActionContainer();
+      this.footerToolbar = new FooterToolbarActionContainer();
       ["designer", "undoredo", "preview", "theme"].forEach((pluginKey: string) => {
         const plugin = this.getPlugin(pluginKey);
         if (!!plugin && !!plugin["addFooterActions"]) {
