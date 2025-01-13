@@ -1,4 +1,4 @@
-import { Action, ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement, settings as SurveySettings } from "survey-core";
+import { Action, ActionContainer, AdaptiveActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement, settings as SurveySettings } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -165,7 +165,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   protected createActionContainer(): ActionContainer<Action> {
-    const container = new ActionContainer();
+    const container = new AdaptiveActionContainer();
     container.sizeMode = "small";
     container.cssClasses = {
       root: "svc-page-toolbar sv-action-bar",

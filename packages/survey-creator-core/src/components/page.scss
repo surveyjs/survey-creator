@@ -68,7 +68,11 @@ svc-page {
   opacity: 0;
   top: calcSize(1);
   inset-inline-end: 0; // right
-  padding: 0 calcSize(1.5) 0 calcSize(1);
+  inset-inline-start: 50%;
+  display: flex;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  padding: 0 calcSize(1.5) 0 var(--ctr-survey-page-drag-indicator-width, calcSize(3));
   z-index: 1;
   transition: opacity $creator-transition-duration;
 
