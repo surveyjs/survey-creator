@@ -396,7 +396,7 @@ export interface PropertyValueChangingEvent {
    */
   newValue: any;
 }
-export interface PropertyChangingEvent extends PropertyValueChangingEvent {
+export interface BeforePropertyChangedEvent extends PropertyValueChangingEvent {
   /**
    * A survey element (question, panel, page, or the survey itself) whose property is being edited.
    */
@@ -425,7 +425,7 @@ export interface PropertyValueChangedEvent {
    */
   value: any;
 }
-export interface PropertyChangedEvent extends PropertyValueChangedEvent {
+export interface AfterPropertyChangedEvent extends PropertyValueChangedEvent {
   /**
    * A survey element (question, panel, page, or the survey itself) whose property has changed.
    */

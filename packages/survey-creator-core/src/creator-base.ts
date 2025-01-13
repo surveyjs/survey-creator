@@ -48,7 +48,7 @@ import {
   ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, ElementAllowOperationsEvent,
   ElementGetActionsEvent, PropertyAddingEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent,
   PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, FastEntryItemsEvent as FastEntryFinishedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
-  PropertyDisplayCustomErrorEvent, PropertyChangingEvent, PropertyChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
+  PropertyDisplayCustomErrorEvent, BeforePropertyChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
   LogicRuleGetDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent, PageAddedEvent, QuestionConvertingEvent,
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
@@ -57,8 +57,9 @@ import {
   PageAddingEvent, DragStartEndEvent,
   ElementGetExpandCollapseStateEvent,
   ElementGetExpandCollapseStateEventReason,
-  PropertyValueChangedEvent,
-  PropertyValueChangingEvent
+  AfterPropertyChangedEvent,
+  PropertyValueChangingEvent,
+  PropertyValueChangedEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -627,21 +628,21 @@ export class SurveyCreatorModel extends Base
    * @see onPropertyDisplayCustomError
    * @see onPropertyChanged
    */
-  public onPropertyChanging: EventBase<SurveyCreatorModel, PropertyChangingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyChangingEvent>();
+  public onBeforePropertyChanged: EventBase<SurveyCreatorModel, BeforePropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, BeforePropertyChangedEvent>();
   /*
    * Obsolete
    */
-  public onPropertyValueChanging: EventBase<SurveyCreatorModel, PropertyValueChangingEvent> = this.onPropertyChanging;
+  public onPropertyValueChanging: EventBase<SurveyCreatorModel, PropertyValueChangingEvent> = this.onBeforePropertyChanged;
   /**
    * An event that is raised after a survey element property has changed.
    * @see onPropertyDisplayCustomError
    * @see onPropertyChanging
    */
-  public onPropertyChanged: EventBase<SurveyCreatorModel, PropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyChangedEvent>();
+  public onAfterPropertyChanged: EventBase<SurveyCreatorModel, AfterPropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, AfterPropertyChangedEvent>();
   /**
    * Obsolete
    */
-  public onSurveyPropertyValueChanged: EventBase<SurveyCreatorModel, PropertyValueChangedEvent> = this.onPropertyChanged;
+  public onSurveyPropertyValueChanged: EventBase<SurveyCreatorModel, PropertyValueChangedEvent> = this.onAfterPropertyChanged;
   /**
    * An event that is raised when a condition editor renders a list of questions and variables available for selection. Use this event to modify this list.
    */
@@ -3566,7 +3567,7 @@ export class SurveyCreatorModel extends Base
     options.name = options.propertyName;
     options.element = options.obj;
     options.oldValue = options.value;
-    this.onPropertyChanging.fire(this, options);
+    this.onBeforePropertyChanged.fire(this, options);
   }
   onGetElementEditorTitleCallback(obj: Base, title: string): string {
     return title;
