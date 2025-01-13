@@ -135,7 +135,7 @@ function registerComponents(
   registerComponent("survey-commentwithreset", TextWithReset);
   registerComponent("survey-widget", SurveyComponent);
   registerComponent("survey-simulator", Simulator);
-  registerComponent("svc-tab-test", Test);
+  registerComponent("svc-tab-preview", Test);
   registerComponent("svc-complete-page", TestAgain);
   registerComponent("survey-results", SurveyResults);
   registerComponent("survey-results-table-row", SurveyResultsRow);
