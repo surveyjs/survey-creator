@@ -1108,6 +1108,8 @@ export var enStrings = {
     noPreview: "No preview",
     showAllQuestions: "Show all questions",
     showAnsweredQuestions: "Show answered questions only",
+    allQuestions: "Show all questions",
+    answeredQuestions: "Show answered questions only",
     pages: "Completed pages",
     questions: "Answered questions",
     requiredQuestions: "Answered required questions",

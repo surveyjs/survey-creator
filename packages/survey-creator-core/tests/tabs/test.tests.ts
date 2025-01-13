@@ -259,7 +259,7 @@ test("Check popup viewType", (): any => {
     expect(options.menuType).toEqual("popup");
   });
 
-  question.dropdownListModel.popupModel.toggleVisibility();
+  question.dropdownListModel.popupModel.show();
   expect(question.dropdownListModel.popupModel.isVisible).toBeTruthy();
   _setIsTouch(false);
 });
@@ -751,7 +751,7 @@ test("Check that popups inside survey are closed when scrolling container", (): 
 
   const model: TestSurveyTabViewModel = testPlugin.model;
   const question = <QuestionDropdownModel>model.survey.getAllQuestions()[0];
-  question.dropdownListModel.popupModel.toggleVisibility();
+  question.dropdownListModel.popupModel.show();
   expect(model.survey["onScrollCallback"]).toBeDefined();
   expect(question.dropdownListModel.popupModel.isVisible).toBeTruthy();
   model.onScroll();

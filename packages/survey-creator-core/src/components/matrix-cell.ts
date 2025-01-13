@@ -75,7 +75,7 @@ export class MatrixCellWrapperViewModel extends Base {
     // if(!question && !!this.templateData.data) {
     //   this.question = this.templateData.data;
     // }
-    creator.onSelectedElementChanged.add(this.onSelectionChanged);
+    creator.onElementSelected.add(this.onSelectionChanged);
   }
   @property() isSelected: boolean;
 
@@ -146,7 +146,7 @@ export class MatrixCellWrapperViewModel extends Base {
     }
   }
   public dispose(): void {
-    this.creator.onSelectedElementChanged.remove(this.onSelectionChanged);
+    this.creator.onElementSelected.remove(this.onSelectionChanged);
     super.dispose();
   }
 }
