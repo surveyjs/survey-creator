@@ -461,6 +461,43 @@ test("StringEditorConnector for selectbase questions", (): any => {
   connectorItem3.onBackspaceEmptyString.fire(null, {});
   expect(question.choices.map(c => c.value)).toEqual([]);
 });
+
+test("StringEditor backspace and strings with new lines only ", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
+  creator.selectElement(question);
+
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const itemValue = question.choices[0];
+  var seChoice = new StringEditorViewModelBase(itemValue.locText, creator);
+  var connectorItem1 = StringEditorConnector.get(itemValue.locText);
+  seChoice.setLocString(itemValue.locText);
+  var event = {
+    keyCode: 8,
+    target: {
+      innerText: "a"
+    },
+    preventDefault: () => { },
+    stopImmediatePropagation: () => { },
+    stopPropagation: () => { }
+  };
+  seChoice.onKeyDown(event as any);
+  expect(question.choices.map(c => c.value)).toEqual(["item1", "item2"]);
+
+  event.target.innerText = "\n";
+  seChoice.onKeyDown(event as any);
+  expect(question.choices.map(c => c.value)).toEqual(["item2"]);
+});
+
 test("StringEditorConnector for new choice, Bug#4292", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
