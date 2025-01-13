@@ -89,12 +89,12 @@ export class HeaderModel extends Base implements IHeader {
     } else if (this["backgroundColorSwitch"] === "custom") {
       cssVariables["--sjs-header-backcolor"] = this["backgroundColor"] ?? "transparent";
     } else {
-      cssVariables["--sjs-header-backcolor"] = undefined;
+      cssVariables["--sjs-header-backcolor"] = "var(--sjs-primary-backcolor)";
     }
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
-    if (!backgroundColor) return "accentColor";
+    if (backgroundColor === "var(--sjs-primary-backcolor)") return "accentColor";
     if (backgroundColor === "transparent") return "none";
     return "custom";
   }
