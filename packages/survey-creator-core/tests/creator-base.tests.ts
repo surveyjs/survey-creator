@@ -4833,6 +4833,7 @@ test("propertyGridNavigationMode property", (): any => {
 test("showSurfaceTools", (): any => {
   const creator = new CreatorTester();
   creator.expandCollapseButtonVisibility = "never";
+  creator.allowZoom = false;
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(designerTabModel.showSurfaceTools).toBeFalsy();
 
