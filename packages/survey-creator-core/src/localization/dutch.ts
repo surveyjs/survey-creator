@@ -22,7 +22,7 @@ export var nlStrings = {
     theme: "Thema 's",
     translation: "Vertaling",
     designer: "Enquête-ontwerper",
-    editor: "JSON-editor",
+    json: "JSON-editor",
     logic: "Onderzoekslogica"
   },
   // Question types

@@ -22,7 +22,7 @@ export var hebrewStrings = {
     theme: "ערכות נושא",
     translation: "תרגום",
     designer: "מעצב",
-    editor: "עורך JSON",
+    json: "עורך JSON",
     logic: "לוגיקה"
   },
   // Question types

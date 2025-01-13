@@ -22,7 +22,7 @@ export var bgStrings = {
     theme: "Теми",
     translation: "Превод",
     designer: "Дизайнер",
-    editor: "JSON редактор",
+    json: "JSON редактор",
     logic: "Логика"
   },
   // Question types

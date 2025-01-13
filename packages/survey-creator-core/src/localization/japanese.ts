@@ -22,7 +22,7 @@ export var jaStrings = {
     theme: "テーマ",
     translation: "翻訳",
     designer: "編集",
-    editor: "JSONエディタ",
+    json: "JSONエディタ",
     logic: "アンケートのロジック"
   },
   // Question types

@@ -84,6 +84,6 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
   }
 }
 
-ReactElementFactory.Instance.registerElement("svc-tab-test", (props) => {
+ReactElementFactory.Instance.registerElement("svc-tab-preview", (props) => {
   return React.createElement(TabPreviewSurveyComponent, props);
 });

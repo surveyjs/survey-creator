@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 
 @Component({
-  selector: "svc-tab-test",
+  selector: "svc-tab-preview",
   templateUrl: "./test.component.html",
   styles: [":host { display: none; }"]
 })
@@ -13,4 +13,4 @@ export class TestTabComponent extends BaseAngular<TestSurveyTabViewModel> {
     return this.model;
   }
 }
-AngularComponentFactory.Instance.registerComponent("svc-tab-test", TestTabComponent);
+AngularComponentFactory.Instance.registerComponent("svc-tab-preview", TestTabComponent);

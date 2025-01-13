@@ -82,10 +82,10 @@ test("do not deactivate/activate tabs on selecting the active tab", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   expect(creator.activeTab).toEqual("designer");
-  expect(creator.makeNewViewActive("test")).toBeTruthy();
-  creator.activeTab = "test";
-  expect(creator.makeNewViewActive("test")).toBeFalsy();
-  creator.activeTab = "test";
+  expect(creator.makeNewViewActive("preview")).toBeTruthy();
+  creator.activeTab = "preview";
+  expect(creator.makeNewViewActive("preview")).toBeFalsy();
+  creator.activeTab = "preview";
 });
 test("Select new added question", (): any => {
   const creator = new CreatorTester();
@@ -1701,7 +1701,7 @@ test("Test plug-ins in creator", (): any => {
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model).toBeTruthy();
-  const testPlugin = <TabTestPlugin>creator.getPlugin("test");
+  const testPlugin = <TabTestPlugin>creator.getPlugin("preview");
   expect(testPlugin.model).toBeFalsy();
   creator.makeNewViewActive("test");
   expect(designerPlugin.model).toBeFalsy();
@@ -1731,9 +1731,9 @@ test("Test plug-ins JSON-Text in creator", (): any => {
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model).toBeTruthy();
-  const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
+  const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   expect(textPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("editor");
+  creator.makeNewViewActive("json");
   expect(textPlugin.model).toBeTruthy();
   expect(designerPlugin.model).toBeFalsy();
   creator.makeNewViewActive("designer");
@@ -1758,13 +1758,13 @@ test("Test plug-ins JSON-Text in creator, autosave", (): any => {
     changedType = options.type;
   });
   expect(creator.viewType).toEqual("designer");
-  const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
+  const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   expect(textPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("editor");
+  creator.makeNewViewActive("json");
   expect(textPlugin.model).toBeTruthy();
   creator.makeNewViewActive("designer");
   expect(counter).toEqual(0);
-  creator.makeNewViewActive("editor");
+  creator.makeNewViewActive("json");
   json.pages[0].elements[0].name = "question1";
   textPlugin.model.text = JSON.stringify(json);
   textPlugin.model.isJSONChanged = true;
@@ -1785,9 +1785,9 @@ test("Test plug-ins JSON-Ace in creator", (): any => {
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model).toBeTruthy();
-  const textPlugin = <TabJsonEditorAcePlugin>creator.getPlugin("editor");
+  const textPlugin = <TabJsonEditorAcePlugin>creator.getPlugin("json");
   expect(textPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("editor");
+  creator.makeNewViewActive("json");
   expect(textPlugin.model).toBeTruthy();
   expect(designerPlugin.model).toBeFalsy();
   creator.makeNewViewActive("designer");
@@ -2795,10 +2795,10 @@ test("creator.onActiveTabChanged", (): any => {
   });
   expect(creator.viewType).toEqual("designer");
   creator.makeNewViewActive("test");
-  expect(tabName).toEqual("test");
+  expect(tabName).toEqual("preview");
   expect(plugin).toEqual(creator.getPlugin("test"));
   expect(model).toEqual(plugin.model);
-  expect(creator.activeTab).toEqual("test");
+  expect(creator.activeTab).toEqual("preview");
   creator.makeNewViewActive("logic");
   expect(tabName).toEqual("logic");
   expect(plugin).toEqual(creator.getPlugin("logic"));
@@ -2818,12 +2818,12 @@ test("creator.onActiveTabChaning", (): any => {
   });
   expect(creator.viewType).toEqual("designer");
   creator.makeNewViewActive("test");
-  expect(tabName).toEqual("test");
-  expect(creator.activeTab).toEqual("test");
+  expect(tabName).toEqual("preview");
+  expect(creator.activeTab).toEqual("preview");
   allow = false;
   creator.makeNewViewActive("logic");
   expect(tabName).toEqual("logic");
-  expect(creator.activeTab).toEqual("test");
+  expect(creator.activeTab).toEqual("preview");
 });
 test("active tab disableHide", (): any => {
   const creator = new CreatorTester({
@@ -2872,7 +2872,7 @@ test("update tab content", (): any => {
 
   creator.JSON = {};
   creator.makeNewViewActive("test");
-  expect(creator.viewType).toEqual("test");
+  expect(creator.viewType).toEqual("preview");
   const testPlugin = <TabTestPlugin>creator.getPlugin("test");
   expect(hasQ1(testPlugin.model.survey)).toBeFalsy();
   creator.JSON = newJson;

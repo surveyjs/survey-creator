@@ -24,7 +24,7 @@ export var enStrings = {
     theme: "Themes",
     translation: "Translations",
     designer: "Designer",
-    editor: "JSON Editor",
+    json: "JSON Editor",
     logic: "Logic"
   },
   // Question types

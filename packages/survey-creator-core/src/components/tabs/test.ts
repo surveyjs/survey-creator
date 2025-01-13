@@ -8,7 +8,7 @@ export class TestSurveyTabViewModel extends PreviewViewModel {
   }
 
   protected getTabName(): string {
-    return "test";
+    return "preview";
   }
   protected getShowResults() {
     return this.surveyProvider.previewShowResults && !this.isRunning && !this.isMobileView;

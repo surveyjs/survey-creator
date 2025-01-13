@@ -22,7 +22,7 @@ export var indonesianStrings = {
     theme: "Tema",
     translation: "Terjemahan",
     designer: "Rancangan Survei",
-    editor: "Pengubah JSON",
+    json: "Pengubah JSON",
     logic: "Logika"
   },
   // Question types

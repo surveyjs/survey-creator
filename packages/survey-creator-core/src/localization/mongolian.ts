@@ -22,7 +22,7 @@ export var mnStrings = {
     theme: "Сэдвүүд",
     translation: "Орчуулга",
     designer: "Удирдлага",
-    editor: "JSON засварлагч",
+    json: "JSON засварлагч",
     logic: "Логик"
   },
   // Question types

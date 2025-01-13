@@ -22,7 +22,7 @@ export const thStrings = {
     theme: "ธีม",
     translation: "การแปล",
     designer: "นักออกแบบ",
-    editor: "ตัวแก้ไข JSON",
+    json: "ตัวแก้ไข JSON",
     logic: "ตรรกะ"
   },
   // Question types

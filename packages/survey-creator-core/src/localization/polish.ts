@@ -22,7 +22,7 @@ var polishStrings = {
     theme: "Tematy",
     translation: "Tłumaczenie",
     designer: "Projektant ankiety",
-    editor: "JSON Editor",
+    json: "JSON Editor",
     logic: "Logika"
   },
   // Question types
