@@ -22,7 +22,7 @@ export var huStrings = {
     theme: "Témák",
     translation: "Fordítás",
     designer: "Kérdőívtervező",
-    editor: "JSON szerkesztő",
+    json: "JSON szerkesztő",
     logic: "Logika"
   },
   // Question types

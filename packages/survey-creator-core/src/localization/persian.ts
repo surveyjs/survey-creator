@@ -22,7 +22,7 @@ var persianStrings = {
     theme: "تم",
     translation: "ترجمه",
     designer: "طراح نظرسنجی",
-    editor: "ویرایشگر JSON",
+    json: "ویرایشگر JSON",
     logic: "منطق نظرسنجی"
   },
   // Question types

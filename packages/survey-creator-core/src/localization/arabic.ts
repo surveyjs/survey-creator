@@ -22,7 +22,7 @@ export var arStrings = {
     theme: "المواضيع",
     translation: "Translation",
     designer: "تصميم الإستبيان",
-    editor: "JSON Editor",
+    json: "JSON Editor",
     logic: "منطق الإستبيان"
   },
   // Question types

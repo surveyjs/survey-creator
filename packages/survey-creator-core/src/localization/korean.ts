@@ -22,7 +22,7 @@ export var koreanStrings = {
     theme: "테마",
     translation: "번역",
     designer: "설문지 디자인",
-    editor: "JSON 편집기",
+    json: "JSON 편집기",
     logic: "논리학"
   },
   // Question types

@@ -22,7 +22,7 @@ export const roStrings = {
     theme: "Teme",
     translation: "Traduceri",
     designer: "Designer",
-    editor: "Editor JSON",
+    json: "Editor JSON",
     logic: "Logică"
   },
   // Question types

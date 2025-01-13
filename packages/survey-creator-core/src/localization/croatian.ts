@@ -22,7 +22,7 @@ export var hrStrings = {
     theme: "Teme",
     translation: "Prijevod",
     designer: "Dizajner ankete",
-    editor: "JSON urednik",
+    json: "JSON urednik",
     logic: "Logika ankete"
   },
   // Question types

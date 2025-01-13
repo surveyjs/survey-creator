@@ -22,7 +22,7 @@ export var czStrings = {
     theme: "Motivy",
     translation: "Překlad",
     designer: "Návrhář průzkumů",
-    editor: "Editor JSON",
+    json: "Editor JSON",
     logic: "Logika průzkumu"
   },
   // Question types

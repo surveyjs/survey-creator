@@ -22,7 +22,7 @@ export var turkishStrings = {
     theme: "Temalar",
     translation: "Çeviri",
     designer: "Anket Tasarımı",
-    editor: "JSON Editor",
+    json: "JSON Editor",
     logic: "Mantıksal Anket"
   },
   // Question types

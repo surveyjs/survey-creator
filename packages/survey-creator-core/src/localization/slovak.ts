@@ -22,7 +22,7 @@ export var skStrings = {
     theme: "Témy",
     translation: "Preklad",
     designer: "Návrhár prieskumov",
-    editor: "Editor JSON",
+    json: "Editor JSON",
     logic: "Logika prieskumu"
   },
   // Question types

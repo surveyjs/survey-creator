@@ -20,6 +20,7 @@ const keysToUpdate = [
   { src: "ed.translation", dest: "tabs.translation" },
   { src: "ed.designer", dest: "tabs.designer" },
   { src: "ed.jsonEditor", dest: "tabs.editor" },
+  { src: "tabs.editor", dest: "tabs.json" },
   { src: "ed.logic", dest: "tabs.logic" }
 ];
 

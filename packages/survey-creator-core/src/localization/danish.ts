@@ -22,7 +22,7 @@ export var danishStrings = {
     theme: "Temaer",
     translation: "Oversættelse",
     designer: "Undersøgelsesdesigner",
-    editor: "JSON Editor",
+    json: "JSON Editor",
     logic: "Logik"
   },
   // Question types

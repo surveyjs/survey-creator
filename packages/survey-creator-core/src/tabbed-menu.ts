@@ -11,7 +11,7 @@ export interface ITabbedMenuItem extends IAction {
 const tabsIcons = {
   designer: "icon-config",
   theme: "icon-theme",
-  editor: "icon-codeeditor-24x24",
+  json: "icon-codeeditor-24x24",
   translation: "icon-language",
   preview: "icon-preview",
   logic: "icon-logic-24x24",

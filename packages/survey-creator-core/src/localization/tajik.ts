@@ -24,7 +24,7 @@ export var tgStrings = {
     // theme: "Themes",
     translation: "Тарҷума",
     designer: "Дида баромадани конструктор",
-    editor: "Тағйиркунаки JSON",
+    json: "Тағйиркунаки JSON",
     logic: "Мантиқи саволнома"
   },
   // Question types

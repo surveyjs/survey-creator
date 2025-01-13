@@ -12,7 +12,7 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   @property({ defaultValue: "", onSet: (_, target) => target.onTextChanged() })
   protected _text: string;
   @propertyArray() private _errors: any[];
-  public ariaLabel: string = getLocString("tabs.editor");
+  public ariaLabel: string = getLocString("tabs.json");
   public textElement: HTMLTextAreaElement;
   @property({ defaultValue: false }) canShowErrors: boolean;
 
@@ -89,7 +89,7 @@ export class TabJsonEditorTextareaPlugin
   implements ICreatorPlugin {
   constructor(creator: SurveyCreatorModel) {
     super(creator);
-    creator.addPluginTab("editor", this, undefined, "svc-tab-json-editor-textarea");
+    creator.addPluginTab("json", this, undefined, "svc-tab-json-editor-textarea");
   }
   protected createModel(
     creator: SurveyCreatorModel

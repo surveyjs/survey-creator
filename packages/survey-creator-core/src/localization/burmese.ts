@@ -24,8 +24,8 @@ export var mmStrings = {
     theme: "အပိုဒ်",
     translation: "ဘာသာစကား",
     designer: "ပံ့ပိုးသူ",
-    editor: "တည်းဖြတ်သူ",
-    logic: "စစ်တမ်း"
+    json: "တည်းဖြတ်သူ",
+    logic: "စစ်တမ်း",
   },
   // Question types
   qt: {

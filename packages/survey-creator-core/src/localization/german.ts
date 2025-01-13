@@ -22,7 +22,7 @@ var germanTranslation = {
     theme: "Themen",
     translation: "Übersetzung",
     designer: "Designer",
-    editor: "JSON",
+    json: "JSON",
     logic: "Logik"
   },
   // Question types

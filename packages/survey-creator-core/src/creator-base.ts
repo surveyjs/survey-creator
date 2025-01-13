@@ -406,7 +406,13 @@ export class SurveyCreatorModel extends Base
     onSaveCallback: (no: number, isSuccess: boolean) => void
   ) => void;
 
-  @property() viewType: string;
+  get viewType(): string {
+    return this.getPropertyValue("viewType");
+  }
+  set viewType(val: string) {
+    val = this.fixPluginName(val);
+    this.setPropertyValue("viewType", val);
+  }
 
   public get showingViewName(): string {
     return this.activeTab;
@@ -422,13 +428,13 @@ export class SurveyCreatorModel extends Base
     return this.isPreviewShowing;
   }
   public get isPreviewShowing(): boolean {
-    return this.activeTab === "test";
+    return this.activeTab === "preview";
   }
   public showTestSurvey() {
     this.showPreview();
   }
   public showPreview() {
-    this.activeTab = "test";
+    this.activeTab = "preview";
   }
 
   protected plugins: { [name: string]: ICreatorPlugin } = {};
@@ -474,7 +480,17 @@ export class SurveyCreatorModel extends Base
     return -1;
   }
   public getPlugin<P extends ICreatorPlugin = ICreatorPlugin>(name: string): P {
-    return this.plugins[name] as P;
+    const pluginName = this.fixPluginName(name);
+    return this.plugins[pluginName] as P;
+  }
+
+  private fixPluginName(pluginName: string) {
+    if (pluginName === "test") {
+      return "preview";
+    } else if (pluginName === "editor") {
+      return "json";
+    }
+    return pluginName;
   }
 
   /**
@@ -1356,9 +1372,9 @@ export class SurveyCreatorModel extends Base
    * Accepted values:
    * 
    * - [`"designer"`](#showDesignerTab)
-   * - [`"test"`](#showPreviewTab)
+   * - [`"preview"`](#showPreviewTab)
    * - [`"theme"`](#showThemeTab)
-   * - [`"editor"`](#showJSONEditorTab)
+   * - [`"json"`](#showJSONEditorTab)
    * - [`"logic"`](#showLogicTab)
    * - [`"translation"`](#showLogicTab)
    * @see switchTab
@@ -1371,7 +1387,7 @@ export class SurveyCreatorModel extends Base
   }
   /**
    * Switches the [active tab](#activeTab). Returns `false` if the tab cannot be switched.
-   * @param tabName A tab that you want to make active: `"designer"`, `"test"`, `"theme"`, `"editor"`, `"logic"`, or `"translation"`.
+   * @param tabName A tab that you want to make active: `"designer"`, `"preview"`, `"theme"`, `"json"`, `"logic"`, or `"translation"`.
    * @returns `false` if the active tab cannot be switched, `true` otherwise.
    */
   public switchTab(tabName: string): boolean {
@@ -1393,6 +1409,7 @@ export class SurveyCreatorModel extends Base
     return this.switchTab(tabName);
   }
   private switchViewType(viewName: string): boolean {
+    viewName = this.fixPluginName(viewName);
     let allow = true;
     if (!!this.currentPlugin?.defaultAllowingDeactivate) {
       allow = this.currentPlugin.defaultAllowingDeactivate();
@@ -1673,7 +1690,7 @@ export class SurveyCreatorModel extends Base
       preview: () => new TabTestPlugin(this),
       theme: () => new ThemeTabPlugin(this), //TODO change name
       logic: () => new TabLogicPlugin(this),
-      editor: () => TabJsonEditorAcePlugin.hasAceEditor() ? new TabJsonEditorAcePlugin(this) : new TabJsonEditorTextareaPlugin(this),
+      json: () => TabJsonEditorAcePlugin.hasAceEditor() ? new TabJsonEditorAcePlugin(this) : new TabJsonEditorTextareaPlugin(this),
       translation: () => new TabTranslationPlugin(this)
     };
   }
@@ -1689,7 +1706,7 @@ export class SurveyCreatorModel extends Base
     const tabNames = this.getAvailableTabNames();
     const res = [];
     this.tabs.forEach(tab => {
-      const name = tab.id === "test" ? "preview" : tab.id;
+      const name = this.fixPluginName(tab.id);
       if (tabNames.indexOf(name) > -1) {
         res.push(name);
       }
@@ -1706,14 +1723,13 @@ export class SurveyCreatorModel extends Base
     if (tabNames.length === 0) return;
     for (let i = this.tabs.length - 1; i >= 0; i--) {
       const tabId = this.tabs[i].id;
-      const id = tabId === "test" ? "preview" : tabId;
+      const id = this.fixPluginName(tabId);
       if (tabNames.indexOf(id) < 0) {
         this.removePlugin(tabId);
       }
     }
     tabNames.forEach(id => {
-      const tabId = id === "preview" ? "test" : id;
-      if (tabInfo[id] && this.getTabIndex(tabId) < 0) {
+      if (tabInfo[id] && this.getTabIndex(id) < 0) {
         tabInfo[id]();
       }
     });
@@ -1745,7 +1761,7 @@ export class SurveyCreatorModel extends Base
       tabs.push("logic");
     }
     if (this.showJSONEditorTab) {
-      tabs.push("editor");
+      tabs.push("json");
     }
     if (this.showTranslationTab) {
       tabs.push("translation");
@@ -1755,7 +1771,7 @@ export class SurveyCreatorModel extends Base
   private initFooterToolbar(): void {
     if (!this.footerToolbar) {
       this.footerToolbar = new ActionContainer();
-      ["designer", "undoredo", "test", "theme"].forEach((pluginKey: string) => {
+      ["designer", "undoredo", "preview", "theme"].forEach((pluginKey: string) => {
         const plugin = this.getPlugin(pluginKey);
         if (!!plugin && !!plugin["addFooterActions"]) {
           plugin["addFooterActions"]();
@@ -2378,7 +2394,7 @@ export class SurveyCreatorModel extends Base
       if (!!jsonValue) {
         this.initSurveyWithJSON(jsonValue, clearState);
       } else {
-        this.viewType = "editor";
+        this.viewType = "json";
       }
     }
   }
@@ -2401,7 +2417,7 @@ export class SurveyCreatorModel extends Base
   }
 
   public getSurveyJSON(): any {
-    if (this.viewType != "editor") {
+    if (this.viewType != "json") {
       return new JsonObject().toJsonObject(this.survey);
     }
     var surveyJsonText = this.text;
@@ -2428,7 +2444,7 @@ export class SurveyCreatorModel extends Base
   private animationEnabled = true;
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
-    if (reason !== "designer" && reason !== "test" && reason !== "theme") {
+    if (reason !== "designer" && reason !== "preview" && reason !== "theme") {
       survey.fitToContainer = false;
       survey.applyTheme(designTabSurveyThemeJSON);
       survey.gridLayoutEnabled = false;
@@ -2438,7 +2454,7 @@ export class SurveyCreatorModel extends Base
       initializeDesignTimeSurveyModel(survey, this);
     }
     survey["needRenderIcons"] = false;
-    if (reason != "designer" && reason != "test" && reason !== "theme") {
+    if (reason != "designer" && reason != "preview" && reason !== "theme") {
       survey.locale = editorLocalization.currentLocale;
       if (!json["clearInvisibleValues"]) {
         survey.clearInvisibleValues = "onComplete";
@@ -2458,7 +2474,7 @@ export class SurveyCreatorModel extends Base
     if (reason === "designer") {
       this.onDesignerSurveyCreated.fire(this, { survey: survey });
     }
-    if (reason === "test" || reason === "theme") {
+    if (reason === "preview" || reason === "theme") {
       this.onPreviewSurveyCreated.fire(this, { survey: survey });
     }
 
@@ -2471,6 +2487,7 @@ export class SurveyCreatorModel extends Base
     const hash: any = {};
     hash["designer"] = "designer-tab";
     hash["test"] = "preview-tab";
+    hash["preview"] = "preview-tab";
     hash["default-value"] = "default-value-popup-editor";
     hash["condition-builder"] = "logic-rule:condition-editor";
     hash["logic-item-editor"] = "logic-rule:action-editor";
@@ -2620,7 +2637,7 @@ export class SurveyCreatorModel extends Base
     return this.singlePageJSON(json);
   }
   public set JSON(val: any) {
-    if (this.viewType == "editor") {
+    if (this.viewType == "json") {
       this.setTextValue(JSON.stringify(val));
     } else {
       this.initSurveyWithJSON(val, true);
