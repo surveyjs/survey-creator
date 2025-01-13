@@ -625,6 +625,7 @@ var portugueseTranslation = {
     editText: "Editar o texto do botão Responder Answer button text",
     startSurveyText: "Texto para botão de começar",
     showNavigationButtons: "Mostrar botões de navegação (navegação default)",
+    navigationButtonsLocation: "Alinhamento dos botões de navegação",
     showPrevButton: "Mostrar botão de voltar (usuário pode retornar para página anterior)",
     firstPageIsStartPage: "Primeira página da pesquisa é a página de início.",
     showCompletePage: "Mostrar a página de conclusão no final (completedHtml)",
@@ -1104,6 +1105,8 @@ var portugueseTranslation = {
     noPreview: "Sem pré-visualização",
     showAllQuestions: "Mostrar todas as questões",
     showAnsweredQuestions: "Mostrar apenas perguntas respondidas",
+    allQuestions: "Mostrar todas as perguntas",
+    answeredQuestions: "Mostrar apenas perguntas respondidas",
     pages: "Páginas completas",
     questions: "Questões respondidas",
     requiredQuestions: "Perguntas obrigatórias respondidas",
@@ -1455,6 +1458,7 @@ var portugueseTranslation = {
     autoAdvanceEnabled: "Selecione se deseja que o questionário avance automaticamente para a próxima página depois que o respondente responder a todas as perguntas na página atual. Esse recurso não se aplicará se a última pergunta da página for aberta ou permitir várias respostas.",
     autoAdvanceAllowComplete: "Selecione se você deseja que o questionário seja concluído automaticamente depois que um respondente responder a todas as perguntas.",
     showNavigationButtons: "Define a visibilidade e a localização dos botões de navegação em uma página.",
+    navigationButtonsLocation: "Define a localização dos botões de navegação em uma página.",
     showProgressBar: "Define a visibilidade e o local de uma barra de progresso. O valor \"Auto\" exibe a barra de progresso acima ou abaixo do cabeçalho do questionário.",
     showPreviewBeforeComplete: "Habilite a página de visualização apenas com todas as perguntas ou com as respostas respondidas.",
     questionTitleLocation: "Aplica-se a todas as perguntas do questionário. Essa configuração pode ser substituída por regras de alinhamento de título em níveis inferiores: painel, página ou pergunta. Uma configuração de nível inferior substituirá as de nível superior.",
@@ -1501,7 +1505,7 @@ var portugueseTranslation = {
       questionTitleWidth: "Define largura consistente para títulos de perguntas quando eles estão alinhados à esquerda de suas caixas de perguntas. Aceita valores CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Define o local de uma mensagem de erro em relação à pergunta com entrada inválida. Escolha entre: \"Top\" - um texto de erro é colocado na parte superior da caixa de perguntas; \"Inferior\" - um texto de erro é colocado na parte inferior da caixa de perguntas. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Superior\" por padrão).",
       questionOrder: "Mantém a ordem original das perguntas ou as randomiza. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Original\" por padrão). O efeito dessa configuração só é visível na guia Visualização.",
-      navigationButtonsVisibility: "Define a visibilidade dos botões de navegação na página. A opção \"Herdar\" aplica a configuração de nível de pesquisa, que tem como padrão \"Visível\"."
+      showNavigationButtons: "Define a visibilidade dos botões de navegação na página. A opção \"Herdar\" aplica a configuração de nível de pesquisa, que tem como padrão \"Visível\"."
     },
     timerLocation: "Define a localização de um cronômetro em uma página.",
     panelsState: "Escolha entre: \"Bloqueado\" - os usuários não podem expandir ou recolher painéis; \"Recolher tudo\" - todos os painéis começam em estado colapsado; \"Expandir tudo\" - todos os painéis começam em um estado expandido; \"Primeiro expandido\" - apenas o primeiro painel é inicialmente expandido.",
@@ -1660,7 +1664,6 @@ var portugueseTranslation = {
     inputTextAlignment: "Alinhamento de valor de entrada",
     elements: "elementos",
     content: "conteúdo",
-    navigationButtonsVisibility: "Visibilidade dos botões de navegação",
     navigationTitle: "Título de navegação",
     navigationDescription: "Descrição de navegação",
     longTap: "Toque longo",
@@ -2311,7 +2314,7 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Aplica-se a todas as perguntas dentro desta página. Se você quiser substituir essa configuração, defina regras de alinhamento de título para perguntas ou painéis individuais. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Superior\" por padrão)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Define o local de uma mensagem de erro em relação à pergunta com entrada inválida. Escolha entre: \"Top\" - um texto de erro é colocado na parte superior da caixa de perguntas; \"Inferior\" - um texto de erro é colocado na parte inferior da caixa de perguntas. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Superior\" por padrão)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Mantém a ordem original das perguntas ou as randomiza. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Original\" por padrão). O efeito dessa configuração só é visível na guia Visualização."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Define a visibilidade dos botões de navegação na página. A opção \"Herdar\" aplica a configuração de nível de pesquisa, que tem como padrão \"Visível\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Define a visibilidade dos botões de navegação na página. A opção \"Herdar\" aplica a configuração de nível de pesquisa, que tem como padrão \"Visível\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Escolha entre: \"Bloqueado\" - os usuários não podem expandir ou recolher painéis; \"Recolher tudo\" - todos os painéis começam em estado colapsado; \"Expandir tudo\" - todos os painéis começam em um estado expandido; \"Primeiro expandido\" - apenas o primeiro painel é inicialmente expandido."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Insira um nome de propriedade compartilhada na matriz de objetos que contém as URLs de arquivo de imagem ou vídeo que você deseja exibir na lista de opções."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "O valor esquerdo serve como um ID de item usado em regras condicionais, o valor direito é exibido aos respondentes."
@@ -2641,3 +2644,7 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // tabs.surfaceBackground: "Surface Background" => "Fundo da superfície"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Usar respostas da última entrada como padrão"
 // colors.gray: "Gray" => "Cinza"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Alinhamento dos botões de navegação"
+// pv.allQuestions: "Show all questions" => "Mostrar todas as perguntas"
+// pv.answeredQuestions: "Show answered questions only" => "Mostrar apenas perguntas respondidas"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Define a localização dos botões de navegação em uma página."

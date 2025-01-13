@@ -440,7 +440,7 @@ export var msStrings = {
     imageWidth: "Lebar imej",
     valueName: "Nama nilai",
     rateDescriptionLocation: "Penjajaran label",
-    size: "Saiz medan input (dalam aksara)",
+    size: "Lebar medan input (dalam aksara)",
     cellErrorLocation: "Penjajaran mesej ralat sel",
     enabled: "Didayakan",
     disabled: "Kurang upaya",
@@ -625,6 +625,7 @@ export var msStrings = {
     editText: "Edit teks butang",
     startSurveyText: "Teks butang mulakan",
     showNavigationButtons: "Tunjukkan butang navigasi (navigasi lalai)",
+    navigationButtonsLocation: "Penjajaran butang navigasi",
     showPrevButton: "Tunjukkan butang sebelumnya (pengguna boleh kembali ke halaman seterusnya)",
     firstPageIsStartPage: "Halaman pertama dalam tinjauan ialah halaman permulaan.",
     showCompletePage: "Tunjukkan halaman lengkap pada hujung (HTML dilengkapkan)",
@@ -1104,6 +1105,8 @@ export var msStrings = {
     noPreview: "tiada pratonton",
     showAllQuestions: "tunjukkan pratonton dengan semua soalan",
     showAnsweredQuestions: "tunjukkan pratonton dengan soalan dijawab",
+    allQuestions: "Tunjukkan semua soalan",
+    answeredQuestions: "Tunjukkan soalan yang dijawab sahaja",
     pages: "halaman",
     questions: "soalan",
     requiredQuestions: "soalan diperlukan",
@@ -1455,6 +1458,7 @@ export var msStrings = {
     autoAdvanceEnabled: "Pilih jika anda mahu tinjauan maju secara automatik ke halaman seterusnya sebaik sahaja responden telah menjawab semua soalan pada halaman semasa. Ciri ini tidak akan digunakan jika soalan terakhir pada halaman adalah terbuka atau membenarkan berbilang jawapan.",
     autoAdvanceAllowComplete: "Pilih jika anda mahu tinjauan selesai secara automatik selepas responden menjawab semua soalan.",
     showNavigationButtons: "Mengesetkan kebolehlihatan dan lokasi butang navigasi pada halaman.",
+    navigationButtonsLocation: "Menetapkan lokasi butang navigasi pada halaman.",
     showProgressBar: "Menetapkan kebolehlihatan dan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan.",
     showPreviewBeforeComplete: "Dayakan halaman pratonton dengan semua atau menjawab soalan sahaja.",
     questionTitleLocation: "Digunakan untuk semua soalan dalam tinjauan. Tetapan ini boleh diubah oleh peraturan penjajaran tajuk pada tahap yang lebih rendah: panel, halaman atau soalan. Tetapan peringkat rendah akan mengatasi mereka yang berada pada tahap yang lebih tinggi.",
@@ -1501,7 +1505,7 @@ export var msStrings = {
       questionTitleWidth: "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia dijajarkan di sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.).",
       questionErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai).",
       questionOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Asal\" secara lalai). Kesan seting ini hanya kelihatan dalam tab Pratonton.",
-      navigationButtonsVisibility: "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\"."
+      showNavigationButtons: "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\"."
     },
     timerLocation: "Menetapkan lokasi pemasa pada halaman.",
     panelsState: "Pilih daripada: \"Dikunci\" - pengguna tidak boleh mengembangkan atau meruntuhkan panel; \"Runtuhkan semua\" - semua panel bermula dalam keadaan runtuh; \"Kembangkan semua\" - semua panel bermula dalam keadaan yang diperluaskan; \"Pertama diperluaskan\" - hanya panel pertama yang pada mulanya diperluaskan.",
@@ -1660,7 +1664,6 @@ export var msStrings = {
     inputTextAlignment: "Penjajaran nilai input",
     elements: "Unsur",
     content: "Kandungan",
-    navigationButtonsVisibility: "Kebolehlihatan butang navigasi",
     navigationTitle: "Tajuk navigasi",
     navigationDescription: "Perihalan navigasi",
     longTap: "Ketuk panjang",
@@ -2596,7 +2599,7 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Digunakan untuk semua soalan dalam halaman ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan atau panel individu. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Mengekalkan susunan soalan asal atau rawak mereka. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Asal\" secara lalai). Kesan seting ini hanya kelihatan dalam tab Pratonton."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Pilih daripada: \"Dikunci\" - pengguna tidak boleh mengembangkan atau meruntuhkan panel; \"Runtuhkan semua\" - semua panel bermula dalam keadaan runtuh; \"Kembangkan semua\" - semua panel bermula dalam keadaan yang diperluaskan; \"Pertama diperluaskan\" - hanya panel pertama yang pada mulanya diperluaskan."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Masukkan nama sifat dikongsi dalam tatasusunan objek yang mengandungi URL fail imej atau video yang anda ingin paparkan dalam senarai pilihan."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Nilai kiri berfungsi sebagai ID item yang digunakan dalam peraturan bersyarat, nilai yang betul dipaparkan kepada responden."
@@ -2926,3 +2929,8 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // tabs.surfaceBackground: "Surface Background" => "Latar Belakang Permukaan"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gunakan jawapan daripada entri terakhir sebagai lalai"
 // colors.gray: "Gray" => "Kelabu"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Penjajaran butang navigasi"
+// pv.allQuestions: "Show all questions" => "Tunjukkan semua soalan"
+// pv.answeredQuestions: "Show answered questions only" => "Tunjukkan soalan yang dijawab sahaja"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Menetapkan lokasi butang navigasi pada halaman."
+// pe.size: "Input field width (in characters)" => "Lebar medan input (dalam aksara)"

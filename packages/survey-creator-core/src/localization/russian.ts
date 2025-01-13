@@ -625,6 +625,7 @@ export var ruStrings = {
     editText: "Редактировать текст кнопки «Ответ»",
     startSurveyText: "Текст в кнопке 'Начать'",
     showNavigationButtons: "Показывать кнопки навигации (навигация по умолчанию)",
+    navigationButtonsLocation: "Выравнивание кнопок навигации",
     showPrevButton: "Показывать кнопки 'Предыдущая страница' (пользователь может вернуться на предыдущую страницу)",
     firstPageIsStartPage: "Первая страница опросника является стартовой страницей.",
     showCompletePage: "Показывать страницу с текстом по завершению заполнения (HTML финальной страницы)",
@@ -1104,6 +1105,8 @@ export var ruStrings = {
     noPreview: "Без предварительного просмотра",
     showAllQuestions: "Показать все вопросы",
     showAnsweredQuestions: "Показывать только ответы на вопросы",
+    allQuestions: "Показать все вопросы",
+    answeredQuestions: "Показать только отвеченные вопросы",
     pages: "Заполненные страницы",
     questions: "Ответы на вопросы",
     requiredQuestions: "Ответы на необходимые вопросы",
@@ -1455,6 +1458,7 @@ export var ruStrings = {
     autoAdvanceEnabled: "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответил на все вопросы на текущей странице. Эта функция не будет работать, если последний вопрос на странице является открытым или допускает несколько ответов.",
     autoAdvanceAllowComplete: "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы.",
     showNavigationButtons: "Задает видимость и расположение кнопок навигации на странице.",
+    navigationButtonsLocation: "Задает расположение кнопок навигации на странице.",
     showProgressBar: "Задает видимость и расположение индикатора выполнения. Значение «Авто» отображает индикатор выполнения над или под заголовком опроса.",
     showPreviewBeforeComplete: "Включите страницу предварительного просмотра, на которой отображаются все вопросы или только ответы на них.",
     questionTitleLocation: "Применяется ко всем вопросам в опросе. Этот параметр может быть переопределен правилами выравнивания заголовков на более низких уровнях: панели, странице или вопросе. Настройки более низкого уровня будут переопределять настройки на более высоком уровне.",
@@ -1501,7 +1505,7 @@ export var ruStrings = {
       questionTitleWidth: "Задает одинаковую ширину заголовков вопросов, если они выровнены по левому краю полей вопросов. Принимает значения CSS (px, %, in, pt и т. д.).",
       questionErrorLocation: "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса. Опция «Наследовать» применяет настройку уровня опроса («Сверху» по умолчанию).",
       questionOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку уровня опроса («Оригинал» по умолчанию). Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
-      navigationButtonsVisibility: "Задает видимость кнопок навигации на странице. Опция \"Наследовать\" применяет настройку уровня опроса, которая по умолчанию имеет значение \"Видимый\"."
+      showNavigationButtons: "Задает видимость кнопок навигации на странице. Опция \"Наследовать\" применяет настройку уровня опроса, которая по умолчанию имеет значение \"Видимый\"."
     },
     timerLocation: "Задает расположение таймера на странице.",
     panelsState: "Выберите один из следующих вариантов: \"Заблокировано\" - пользователи не могут разворачивать или сворачивать панели; \"Свернуть все\" - все панели запускаются в свернутом состоянии; \"Развернуть все\" - все панели запускаются в развернутом состоянии; \"First expanded\" - изначально разворачивается только первая панель.",
@@ -1660,7 +1664,6 @@ export var ruStrings = {
     inputTextAlignment: "Выравнивание вводимого значения",
     elements: "Азы",
     content: "Содержание",
-    navigationButtonsVisibility: "Отображение навигационных кнопок",
     navigationTitle: "Навигационный заголовок",
     navigationDescription: "Навигационное описание",
     longTap: "Длительное нажатие",
@@ -2702,7 +2705,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Относится ко всем вопросам на этой странице. Если вы хотите переопределить этот параметр, задайте правила выравнивания заголовков для отдельных вопросов или панелей. Опция «Наследовать» применяет настройку уровня опроса («Сверху» по умолчанию)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса. Опция «Наследовать» применяет настройку уровня опроса («Сверху» по умолчанию)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Сохраняет исходный порядок вопросов или рандомизирует их. Опция «Наследовать» применяет настройку уровня опроса («Оригинал» по умолчанию). Эффект этого параметра виден только на вкладке «Предварительный просмотр»."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Задает видимость кнопок навигации на странице. Опция \"Наследовать\" применяет настройку уровня опроса, которая по умолчанию имеет значение \"Видимый\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Задает видимость кнопок навигации на странице. Опция \"Наследовать\" применяет настройку уровня опроса, которая по умолчанию имеет значение \"Видимый\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Выберите один из следующих вариантов: \"Заблокировано\" - пользователи не могут разворачивать или сворачивать панели; \"Свернуть все\" - все панели запускаются в свернутом состоянии; \"Развернуть все\" - все панели запускаются в развернутом состоянии; \"First expanded\" - изначально разворачивается только первая панель."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Введите имя общего свойства в массиве объектов, содержащем URL-адреса изображений или видеофайлов, которые необходимо отобразить в списке вариантов."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Левое значение служит идентификатором элемента, используемым в условных правилах, правое значение отображается респондентам."
@@ -3032,3 +3035,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // tabs.surfaceBackground: "Surface Background" => "Фон поверхности"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Используйте ответы из последней записи по умолчанию"
 // colors.gray: "Gray" => "Серый"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Выравнивание кнопок навигации"
+// pv.allQuestions: "Show all questions" => "Показать все вопросы"
+// pv.answeredQuestions: "Show answered questions only" => "Показать только отвеченные вопросы"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Задает расположение кнопок навигации на странице."

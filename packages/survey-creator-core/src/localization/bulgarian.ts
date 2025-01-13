@@ -440,7 +440,7 @@ export var bgStrings = {
     imageWidth: "Широчина на изображението",
     valueName: "Съхранявай отговорите в следното JSON поле.",
     rateDescriptionLocation: "Подравняване на етикети",
-    size: "Размер на въвеждане (в знаци)",
+    size: "Ширина на полето за въвеждане (в знаци)",
     cellErrorLocation: "Подравняване на съобщение за грешка в клетка",
     enabled: "Разрешено",
     disabled: "Инвалид",
@@ -625,6 +625,7 @@ export var bgStrings = {
     editText: "Редактиране текста на бутона за отговор",
     startSurveyText: "Текст на бутона за стартиране на анкетата",
     showNavigationButtons: "Разположение на навигационните бутони",
+    navigationButtonsLocation: "Подравняване на бутоните за навигация",
     showPrevButton: "Показване на бутона Предишна страница",
     firstPageIsStartPage: "Първата страница е начална.",
     showCompletePage: "Показване на страницата Завършена анкета",
@@ -1104,6 +1105,8 @@ export var bgStrings = {
     noPreview: "Без визуализация",
     showAllQuestions: "Показване на всички въпроси",
     showAnsweredQuestions: "Показване само на въпроси с отговор",
+    allQuestions: "Покажи всички въпроси",
+    answeredQuestions: "Показване само на отговори на въпроси",
     pages: "Завършени страници",
     questions: "Отговорени въпроси",
     requiredQuestions: "Отговорени задължителни въпроси",
@@ -1455,6 +1458,7 @@ export var bgStrings = {
     autoAdvanceEnabled: "Изберете дали искате проучването автоматично да премине към следващата страница, след като респондентът отговори на всички въпроси на текущата страница. Тази функция няма да се прилага, ако последният въпрос на страницата е отворен или позволява множество отговори.",
     autoAdvanceAllowComplete: "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси.",
     showNavigationButtons: "Задава видимостта и местоположението на бутоните за навигация на дадена страница.",
+    navigationButtonsLocation: "Задава местоположението на бутоните за навигация на страница.",
     showProgressBar: "Задава видимостта и местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването.",
     showPreviewBeforeComplete: "Разрешете страницата за визуализация само с всички въпроси или само с отговор.",
     questionTitleLocation: "Отнася се за всички въпроси в рамките на проучването. Тази настройка може да бъде заместена от правилата за подравняване на заглавията на по-ниските нива: панел, страница или въпрос. Настройката от по-ниско ниво ще замени тези на по-високо ниво.",
@@ -1501,7 +1505,7 @@ export var bgStrings = {
       questionTitleWidth: "Задава еднаква ширина за заглавията на въпросите, когато те са подравнени отляво на техните полета за въпроси. Приема CSS стойности (px, %, in, pt и т.н.).",
       questionErrorLocation: "Задава местоположението на съобщение за грешка във връзка с въпроса с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране).",
       questionOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"Оригинал\" по подразбиране). Ефектът от тази настройка се вижда само в раздела Визуализация .",
-      navigationButtonsVisibility: "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
+      showNavigationButtons: "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
     },
     timerLocation: "Задава местоположението на таймер на страница.",
     panelsState: "Изберете от: \"Заключени\" - потребителите не могат да разширяват или свиват панели; \"Свиване на всички\" - всички панели започват в срутено състояние; \"Разширяване на всички\" - всички панели започват в разширено състояние; \"Първо разширен\" - само първият панел първоначално се разширява.",
@@ -1660,7 +1664,6 @@ export var bgStrings = {
     inputTextAlignment: "Подравняване на входните стойности",
     elements: "Елементи",
     content: "Съдържание",
-    navigationButtonsVisibility: "Видимост на бутоните за навигация",
     navigationTitle: "Навигационно заглавие",
     navigationDescription: "Описание на навигацията",
     longTap: "Дълго докосване",
@@ -2205,7 +2208,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Отнася се за всички въпроси в тази страница. Ако искате да замените тази настройка, определете правила за подравняване на заглавията за отделни въпроси или панели. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Задава местоположението на съобщение за грешка във връзка с въпроса с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"Оригинал\" по подразбиране). Ефектът от тази настройка се вижда само в раздела Визуализация ."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Изберете от: \"Заключени\" - потребителите не могат да разширяват или свиват панели; \"Свиване на всички\" - всички панели започват в срутено състояние; \"Разширяване на всички\" - всички панели започват в разширено състояние; \"Първо разширен\" - само първият панел първоначално се разширява."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Въведете име на споделено свойство в масива от обекти, съдържащ URL адресите на изображения или видеофайлове, които искате да покажете в списъка за избор."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Лявата стойност служи като ИД на артикул, използван в условни правила, дясната стойност се показва на респондентите."
@@ -2535,3 +2538,8 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // tabs.surfaceBackground: "Surface Background" => "Повърхностен фон"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Използване на отговорите от последния запис по подразбиране"
 // colors.gray: "Gray" => "Сив"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Подравняване на бутоните за навигация"
+// pv.allQuestions: "Show all questions" => "Покажи всички въпроси"
+// pv.answeredQuestions: "Show answered questions only" => "Показване само на отговори на въпроси"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Задава местоположението на бутоните за навигация на страница."
+// pe.size: "Input field width (in characters)" => "Ширина на полето за въвеждане (в знаци)"

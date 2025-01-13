@@ -625,6 +625,7 @@ export var turkishStrings = {
     editText: "Düğme metnini düzenle",
     startSurveyText: "Başla butonu yazısı",
     showNavigationButtons: "Gezinme butonlarını göster (varsayılan gezinme)",
+    navigationButtonsLocation: "Gezinme düğmeleri hizalaması",
     showPrevButton: "Önceki butonu göster (kullanıcı önceki sayfaya dönebilir)",
     firstPageIsStartPage: "Anketteki ilk sayfa bir başlangıç sayfasıdır.",
     showCompletePage: "Tamamlanan sayfayı en sonunda göster (HTML)",
@@ -1104,6 +1105,8 @@ export var turkishStrings = {
     noPreview: "Önizleme yok",
     showAllQuestions: "Tüm soruları göster",
     showAnsweredQuestions: "Cevaplanan soruları göster",
+    allQuestions: "Tüm soruları göster",
+    answeredQuestions: "Yalnızca yanıtlanmış soruları göster",
     pages: "Tamamlanan sayfalar",
     questions: "Sorular",
     requiredQuestions: "Gerekli sorular",
@@ -1455,6 +1458,7 @@ export var turkishStrings = {
     autoAdvanceEnabled: "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Bu özellik, sayfadaki son soru açık uçluysa veya birden fazla yanıta izin veriyorsa uygulanmaz.",
     autoAdvanceAllowComplete: "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin.",
     showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar.",
+    navigationButtonsLocation: "Sayfadaki gezinme düğmelerinin konumunu ayarlar.",
     showProgressBar: "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler.",
     showPreviewBeforeComplete: "Önizleme sayfasını tüm sorularla veya yalnızca yanıtlanmış sorularla etkinleştirin.",
     questionTitleLocation: "Anketteki tüm sorular için geçerlidir. Bu ayar, panel, sayfa veya soru gibi daha düşük düzeylerdeki başlık hizalama kuralları tarafından geçersiz kılınabilir. Daha düşük düzeydeki bir ayar, daha yüksek düzeydeki ayarları geçersiz kılar.",
@@ -1501,7 +1505,7 @@ export var turkishStrings = {
       questionTitleWidth: "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       questionErrorLocation: "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\").",
       questionOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
-      navigationButtonsVisibility: "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
+      showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
     },
     timerLocation: "Sayfadaki bir zamanlayıcının konumunu ayarlar.",
     panelsState: "Şunlar arasından seçim yapın: \"Kilitli\" - kullanıcılar panelleri genişletemez veya daraltamaz; \"Tümünü daralt\" - tüm paneller daraltılmış durumda başlar; \"Tümünü genişlet\" - tüm paneller genişletilmiş bir durumda başlar; \"İlk genişletildi\" - başlangıçta yalnızca ilk panel genişletilir.",
@@ -1660,7 +1664,6 @@ export var turkishStrings = {
     inputTextAlignment: "Giriş değeri hizalaması",
     elements: "Öğe",
     content: "İçerik",
-    navigationButtonsVisibility: "Navigasyon butonları görünürlüğü",
     navigationTitle: "Gezinme başlığı",
     navigationDescription: "Navigasyon açıklaması",
     longTap: "Uzun musluk",
@@ -2638,7 +2641,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Bu sayfadaki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular veya paneller için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\")."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\")."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Şunlar arasından seçim yapın: \"Kilitli\" - kullanıcılar panelleri genişletemez veya daraltamaz; \"Tümünü daralt\" - tüm paneller daraltılmış durumda başlar; \"Tümünü genişlet\" - tüm paneller genişletilmiş bir durumda başlar; \"İlk genişletildi\" - başlangıçta yalnızca ilk panel genişletilir."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Seçim listesinde görüntülemek istediğiniz görüntü veya video dosyası URL'lerini içeren nesne dizisi içinde paylaşılan bir özellik adı girin."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Soldaki değer, koşullu kurallarda kullanılan bir öğe kimliği görevi görür, sağdaki değer yanıtlayanlara gösterilir."
@@ -2968,3 +2971,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // tabs.surfaceBackground: "Surface Background" => "Yüzey Arka Planı"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Varsayılan olarak son girişteki yanıtları kullan"
 // colors.gray: "Gray" => "Gri"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Gezinme düğmeleri hizalaması"
+// pv.allQuestions: "Show all questions" => "Tüm soruları göster"
+// pv.answeredQuestions: "Show answered questions only" => "Yalnızca yanıtlanmış soruları göster"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Sayfadaki gezinme düğmelerinin konumunu ayarlar."

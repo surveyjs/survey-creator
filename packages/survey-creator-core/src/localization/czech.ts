@@ -440,7 +440,7 @@ export var czStrings = {
     imageWidth: "Šířka obrázku",
     valueName: "Název hodnoty",
     rateDescriptionLocation: "Zarovnání štítků",
-    size: "Velikost vstupu (v počtu znaků)",
+    size: "Šířka vstupního pole (ve znacích)",
     cellErrorLocation: "Zarovnání chybové zprávy buňky",
     enabled: "Zpřístupněný",
     disabled: "Invalidní",
@@ -625,6 +625,7 @@ export var czStrings = {
     editText: "Text tlačítka úpravy",
     startSurveyText: "Text tlačítka zahájení",
     showNavigationButtons: "Zobrazit navigační tlačítka (výchozí navigace)",
+    navigationButtonsLocation: "Zarovnání navigačních tlačítek",
     showPrevButton: "Zobrazit předchozí tlačítko (uživatel se může vrátit na předchozí stránku)",
     firstPageIsStartPage: "První stránka průzkumu je úvodní stránka.",
     showCompletePage: "Zobrazení dokončené stránky na konci (completedHtml)",
@@ -1104,6 +1105,8 @@ export var czStrings = {
     noPreview: "bez náhledu",
     showAllQuestions: "zobrazit náhled se všemi otázkami",
     showAnsweredQuestions: "zobrazit náhled se zodpovězenými otázkami",
+    allQuestions: "Zobrazit všechny otázky",
+    answeredQuestions: "Zobrazit pouze zodpovězené otázky",
     pages: "stránky",
     questions: "otázky",
     requiredQuestions: "Odpovězené povinné otázky",
@@ -1455,6 +1458,7 @@ export var czStrings = {
     autoAdvanceEnabled: "Vyberte, zda chcete, aby průzkum automaticky přešel na další stránku, jakmile respondent odpoví na všechny otázky na aktuální stránce. Tato funkce se nepoužije, pokud je poslední otázka na stránce otevřená nebo umožňuje více odpovědí.",
     autoAdvanceAllowComplete: "Vyberte, zda chcete, aby se průzkum vyplnil automaticky poté, co respondent odpoví na všechny otázky.",
     showNavigationButtons: "Nastaví viditelnost a umístění navigačních tlačítek na stránce.",
+    navigationButtonsLocation: "Nastaví umístění navigačních tlačítek na stránce.",
     showProgressBar: "Nastaví viditelnost a umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu.",
     showPreviewBeforeComplete: "Povolte stránku náhledu pouze se všemi nebo zodpovězenými otázkami.",
     questionTitleLocation: "Platí pro všechny otázky v rámci průzkumu. Toto nastavení lze přepsat pravidly zarovnání nadpisů na nižších úrovních: panel, stránka nebo otázka. Nastavení nižší úrovně přepíše nastavení na vyšší úrovni.",
@@ -1501,7 +1505,7 @@ export var czStrings = {
       questionTitleWidth: "Nastaví konzistentní šířku názvů otázek, pokud jsou zarovnány nalevo od polí s otázkami. Přijímá hodnoty CSS (px, %, in, pt atd.).",
       questionErrorLocation: "Nastaví umístění chybové zprávy ve vztahu k otázce s neplatným vstupem. Vyberte si mezi: \"Nahoře\" - text chyby je umístěn v horní části pole s otázkou; \"Bottom\" - text chyby je umístěn ve spodní části pole s otázkou. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Nahoře\").",
       questionOrder: "Zachová původní pořadí otázek nebo je náhodně vybere. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Původní\"). Účinek tohoto nastavení je viditelný pouze na kartě Náhled.",
-      navigationButtonsVisibility: "Nastaví viditelnost navigačních tlačítek na stránce. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu, které je ve výchozím nastavení \"Viditelné\"."
+      showNavigationButtons: "Nastaví viditelnost navigačních tlačítek na stránce. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu, které je ve výchozím nastavení \"Viditelné\"."
     },
     timerLocation: "Nastaví umístění časovače na stránce.",
     panelsState: "Vyberte si z těchto možností: \"Uzamčeno\" - uživatelé nemohou rozbalit nebo sbalit panely; \"Sbalit vše\" - všechny panely začínají ve sbaleném stavu; \"Rozbalit vše\" - všechny panely začínají v rozbaleném stavu; \"První rozbalený\" - zpočátku se rozbalí pouze první panel.",
@@ -1660,7 +1664,6 @@ export var czStrings = {
     inputTextAlignment: "Zarovnání vstupní hodnoty",
     elements: "Prvky",
     content: "Obsah",
-    navigationButtonsVisibility: "Viditelnost navigačních tlačítek",
     navigationTitle: "Napids navigace",
     navigationDescription: "Popis navigace",
     longTap: "Dlouhé poklepání",
@@ -2219,7 +2222,7 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Platí pro všechny otázky na této stránce. Chcete-li toto nastavení přepsat, definujte pravidla zarovnání nadpisů pro jednotlivé otázky nebo panely. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Nahoře\")."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Nastaví umístění chybové zprávy ve vztahu k otázce s neplatným vstupem. Vyberte si mezi: \"Nahoře\" - text chyby je umístěn v horní části pole s otázkou; \"Bottom\" - text chyby je umístěn ve spodní části pole s otázkou. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Nahoře\")."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Zachová původní pořadí otázek nebo je náhodně vybere. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Původní\"). Účinek tohoto nastavení je viditelný pouze na kartě Náhled."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Nastaví viditelnost navigačních tlačítek na stránce. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu, které je ve výchozím nastavení \"Viditelné\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Nastaví viditelnost navigačních tlačítek na stránce. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu, které je ve výchozím nastavení \"Viditelné\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Vyberte si z těchto možností: \"Uzamčeno\" - uživatelé nemohou rozbalit nebo sbalit panely; \"Sbalit vše\" - všechny panely začínají ve sbaleném stavu; \"Rozbalit vše\" - všechny panely začínají v rozbaleném stavu; \"První rozbalený\" - zpočátku se rozbalí pouze první panel."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Zadejte název sdílené vlastnosti v poli objektů, které obsahuje adresy URL souborů obrázků nebo videí, které chcete zobrazit v seznamu voleb."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Levá hodnota slouží jako ID položky používané v podmíněných pravidlech, pravá hodnota se zobrazuje respondentům."
@@ -2549,3 +2552,8 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // tabs.surfaceBackground: "Surface Background" => "Pozadí povrchu"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Použít odpovědi z posledního záznamu jako výchozí"
 // colors.gray: "Gray" => "Šedý"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Zarovnání navigačních tlačítek"
+// pv.allQuestions: "Show all questions" => "Zobrazit všechny otázky"
+// pv.answeredQuestions: "Show answered questions only" => "Zobrazit pouze zodpovězené otázky"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Nastaví umístění navigačních tlačítek na stránce."
+// pe.size: "Input field width (in characters)" => "Šířka vstupního pole (ve znacích)"

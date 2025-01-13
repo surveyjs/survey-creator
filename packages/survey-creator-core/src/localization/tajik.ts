@@ -1434,7 +1434,6 @@ export var tgStrings = {
       // questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       // questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       // questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
-      // navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
     },
     // timerLocation: "Sets the location of a timer on a page.",
     // panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded. Applies if \"Panel display mode\" is set to \"List\" and the \"Panel title pattern\" property is specified.",
@@ -1593,7 +1592,6 @@ export var tgStrings = {
     // inputTextAlignment: "Input value alignment",
     // elements: "Elements",
     // content: "Content",
-    navigationButtonsVisibility: "Нишон додани тугмаҳои новбарӣ",
     // navigationTitle: "Navigation title",
     // navigationDescription: "Navigation description",
     // longTap: "Long tap",
