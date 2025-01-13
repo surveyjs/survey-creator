@@ -567,7 +567,7 @@ test("SurveyLogicUI: Test creator onLogicItemDisplayText event", () => {
       { type: "text", name: "q5" }
     ]
   };
-  creator.onLogicItemDisplayText.add((sender, options) => {
+  creator.onLogicRuleGetDisplayText.add((sender, options) => {
     let text = options.expressionText;
     text = text.replace(new RegExp("({|})", "gm"), "'");
     options.text = text;
