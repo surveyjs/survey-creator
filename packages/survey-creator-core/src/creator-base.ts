@@ -161,7 +161,8 @@ export class SurveyCreatorModel extends Base
    * @see saveThemeFunc
    */
   @property({ defaultValue: false }) showThemeTab: boolean;
-  @property({ defaultValue: false }) showCreatorThemeSettings: boolean;
+  @property({ defaultValue: true }) showCreatorThemeSettings: boolean;
+  @property({ defaultValue: true }) allowZoom: boolean;
   /**
    * Specifies whether to display the Translation tab.
    *
