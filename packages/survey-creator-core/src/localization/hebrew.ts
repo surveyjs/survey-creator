@@ -440,7 +440,7 @@ export var hebrewStrings = {
     imageWidth: "רוחב התמונה",
     valueName: "אחסן תשובות בשדה JSON הבא",
     rateDescriptionLocation: "יישור תוויות",
-    size: "גודל שדה הקלט (בתווים)",
+    size: "רוחב שדה קלט (בתווים)",
     cellErrorLocation: "יישור הודעת שגיאה של תא",
     enabled: "מופעלת",
     disabled: "נכים",
@@ -2546,3 +2546,4 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pv.allQuestions: "Show all questions" => "הצג את כל השאלות"
 // pv.answeredQuestions: "Show answered questions only" => "הצג שאלות שנענו בלבד"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "הגדרת המיקום של לחצני ניווט בעמוד."
+// pe.size: "Input field width (in characters)" => "רוחב שדה קלט (בתווים)"

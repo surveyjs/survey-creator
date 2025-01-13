@@ -440,7 +440,7 @@ export var arStrings = {
     imageWidth: "عرض الصورة",
     valueName: "اسم القيمة",
     rateDescriptionLocation: "محاذاة التسمية",
-    size: "حجم حقل الإدخال (بالأحرف)",
+    size: "عرض حقل الإدخال (بالأحرف)",
     cellErrorLocation: "محاذاة رسالة خطأ الخلية",
     enabled: "تمكين",
     disabled: "ذوي الاحتياجات الخاصه",
@@ -2893,3 +2893,4 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pv.allQuestions: "Show all questions" => "عرض جميع الأسئلة"
 // pv.answeredQuestions: "Show answered questions only" => "إظهار الأسئلة التي تمت الإجابة عليها فقط"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "لتعيين موقع أزرار التنقل على الصفحة."
+// pe.size: "Input field width (in characters)" => "عرض حقل الإدخال (بالأحرف)"

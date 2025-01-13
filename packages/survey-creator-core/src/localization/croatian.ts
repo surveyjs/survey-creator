@@ -440,7 +440,7 @@ export var hrStrings = {
     imageWidth: "Širina slike",
     valueName: "Naziv vrijednosti",
     rateDescriptionLocation: "Poravnanje natpisa",
-    size: "Veličina polja unosa (u znakovima)",
+    size: "Širina polja za unos (u znakovima)",
     cellErrorLocation: "Poravnanje poruke o pogrešci ćelije",
     enabled: "Omogućen",
     disabled: "Onemogućen",
@@ -2973,3 +2973,4 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pv.allQuestions: "Show all questions" => "Prikaži sva pitanja"
 // pv.answeredQuestions: "Show answered questions only" => "Prikaži samo odgovorena pitanja"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Postavlja mjesto navigacijskih gumba na stranici."
+// pe.size: "Input field width (in characters)" => "Širina polja za unos (u znakovima)"

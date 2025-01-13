@@ -440,7 +440,7 @@ export var msStrings = {
     imageWidth: "Lebar imej",
     valueName: "Nama nilai",
     rateDescriptionLocation: "Penjajaran label",
-    size: "Saiz medan input (dalam aksara)",
+    size: "Lebar medan input (dalam aksara)",
     cellErrorLocation: "Penjajaran mesej ralat sel",
     enabled: "Didayakan",
     disabled: "Kurang upaya",
@@ -2933,3 +2933,4 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pv.allQuestions: "Show all questions" => "Tunjukkan semua soalan"
 // pv.answeredQuestions: "Show answered questions only" => "Tunjukkan soalan yang dijawab sahaja"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Menetapkan lokasi butang navigasi pada halaman."
+// pe.size: "Input field width (in characters)" => "Lebar medan input (dalam aksara)"

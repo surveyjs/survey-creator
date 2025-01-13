@@ -440,7 +440,7 @@ export var huStrings = {
     imageWidth: "Kép szélessége",
     valueName: "Érték megnevezése",
     rateDescriptionLocation: "Feliratigazítás",
-    size: "Beviteli mező mérete (karakterben)",
+    size: "Beviteli mező szélessége (karakterben)",
     cellErrorLocation: "Cellahibaüzenet igazítása",
     enabled: "Engedélyezve",
     disabled: "Fogyatékos",
@@ -3130,3 +3130,4 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pv.allQuestions: "Show all questions" => "Az összes kérdés megjelenítése"
 // pv.answeredQuestions: "Show answered questions only" => "Csak a megválaszolt kérdések megjelenítése"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Beállítja a navigációs gombok helyét az oldalon."
+// pe.size: "Input field width (in characters)" => "Beviteli mező szélessége (karakterben)"

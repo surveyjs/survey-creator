@@ -440,7 +440,7 @@ export var czStrings = {
     imageWidth: "Šířka obrázku",
     valueName: "Název hodnoty",
     rateDescriptionLocation: "Zarovnání štítků",
-    size: "Velikost vstupu (v počtu znaků)",
+    size: "Šířka vstupního pole (ve znacích)",
     cellErrorLocation: "Zarovnání chybové zprávy buňky",
     enabled: "Zpřístupněný",
     disabled: "Invalidní",
@@ -2556,3 +2556,4 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // pv.allQuestions: "Show all questions" => "Zobrazit všechny otázky"
 // pv.answeredQuestions: "Show answered questions only" => "Zobrazit pouze zodpovězené otázky"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Nastaví umístění navigačních tlačítek na stránce."
+// pe.size: "Input field width (in characters)" => "Šířka vstupního pole (ve znacích)"

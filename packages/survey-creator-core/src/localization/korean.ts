@@ -440,7 +440,7 @@ export var koreanStrings = {
     imageWidth: "이미지 너비",
     valueName: "값 이름",
     rateDescriptionLocation: "레이블 정렬",
-    size: "입력 필드 크기(문자)",
+    size: "입력 필드 너비(문자 단위)",
     cellErrorLocation: "셀 오류 메시지 맞춤",
     enabled: "사용",
     disabled: "비활성화",
@@ -3183,3 +3183,4 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pv.allQuestions: "Show all questions" => "모든 질문 보기"
 // pv.answeredQuestions: "Show answered questions only" => "답변된 질문만 표시"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "페이지에서 탐색 단추의 위치를 설정합니다."
+// pe.size: "Input field width (in characters)" => "입력 필드 너비(문자 단위)"

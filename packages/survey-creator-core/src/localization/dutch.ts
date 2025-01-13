@@ -440,7 +440,7 @@ export var nlStrings = {
     imageWidth: "Afbeelding breedte",
     valueName: "Waardenaam",
     rateDescriptionLocation: "Etiket uitlijnen",
-    size: "Grootte invoerveld (in tekens)",
+    size: "Breedte invoerveld (in tekens)",
     cellErrorLocation: "Uitlijning van celfoutmeldingen",
     enabled: "Ingeschakeld",
     disabled: "Invalide",
@@ -2957,3 +2957,4 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pv.allQuestions: "Show all questions" => "Toon alle vragen"
 // pv.answeredQuestions: "Show answered questions only" => "Alleen beantwoorde vragen weergeven"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Hiermee stelt u de locatie van navigatieknoppen op een pagina in."
+// pe.size: "Input field width (in characters)" => "Breedte invoerveld (in tekens)"

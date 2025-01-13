@@ -440,7 +440,7 @@ var frenchTranslation = {
     imageWidth: "Largeur de l'image",
     valueName: "Variable de stockage",
     rateDescriptionLocation: "Alignement des étiquettes",
-    size: "Taille du champ de saisie (en caractères)",
+    size: "Largeur du champ de saisie (en caractères)",
     cellErrorLocation: "Alignement des messages d’erreur de cellule",
     enabled: "Activé",
     disabled: "Handicapé",
@@ -3038,3 +3038,4 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pv.allQuestions: "Show all questions" => "Afficher toutes les questions"
 // pv.answeredQuestions: "Show answered questions only" => "Afficher uniquement les questions répondues"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Définit l’emplacement des boutons de navigation sur une page."
+// pe.size: "Input field width (in characters)" => "Largeur du champ de saisie (en caractères)"

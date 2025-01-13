@@ -440,7 +440,7 @@ export var danishStrings = {
     imageWidth: "Billedbredde",
     valueName: "Værdiens navn",
     rateDescriptionLocation: "Justering af etiketter",
-    size: "Inputfeltstørrelse (i tegn)",
+    size: "Bredde på inputfelt (i tegn)",
     cellErrorLocation: "Justering af cellefejlmeddelelse",
     enabled: "Aktiveret",
     disabled: "Handicappet",
@@ -3163,3 +3163,4 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pv.allQuestions: "Show all questions" => "Vis alle spørgsmål"
 // pv.answeredQuestions: "Show answered questions only" => "Vis kun besvarede spørgsmål"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Angiver placeringen af navigationsknapper på en side."
+// pe.size: "Input field width (in characters)" => "Bredde på inputfelt (i tegn)"

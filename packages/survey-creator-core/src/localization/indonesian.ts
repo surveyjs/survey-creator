@@ -440,7 +440,7 @@ export var indonesianStrings = {
     imageWidth: "Lebar gambar",
     valueName: "Nama nilai",
     rateDescriptionLocation: "Perataan label",
-    size: "Ukuran bidang input (dalam karakter)",
+    size: "Lebar bidang input (dalam karakter)",
     cellErrorLocation: "Perataan pesan kesalahan sel",
     enabled: "Diaktifkan",
     disabled: "Cacat",
@@ -3133,3 +3133,4 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pv.allQuestions: "Show all questions" => "Tampilkan semua pertanyaan"
 // pv.answeredQuestions: "Show answered questions only" => "Tampilkan pertanyaan yang dijawab saja"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Mengatur lokasi tombol navigasi pada halaman."
+// pe.size: "Input field width (in characters)" => "Lebar bidang input (dalam karakter)"

@@ -440,7 +440,7 @@ export var jaStrings = {
     imageWidth: "イメージの幅",
     valueName: "値名",
     rateDescriptionLocation: "ラベルの配置",
-    size: "入力フィールドのサイズ (文字数)",
+    size: "入力フィールドの幅 (文字単位)",
     cellErrorLocation: "セル・エラー・メッセージの配置",
     enabled: "有効",
     disabled: "無効",
@@ -2978,3 +2978,4 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pv.allQuestions: "Show all questions" => "すべての質問を表示"
 // pv.answeredQuestions: "Show answered questions only" => "回答済みの質問のみを表示する"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "ページ上のナビゲーション ボタンの位置を設定します。"
+// pe.size: "Input field width (in characters)" => "入力フィールドの幅 (文字単位)"

@@ -440,7 +440,7 @@ export var fiStrings = {
     imageWidth: "Kuvan leveys",
     valueName: "Arvon nimi",
     rateDescriptionLocation: "Otsikon tasaus",
-    size: "Syöttökentän koko (merkkeinä)",
+    size: "Syöttökentän leveys (merkkeinä)",
     cellErrorLocation: "Solun virhesanoman tasaus",
     enabled: "Käytössä",
     disabled: "Pois käytöstä",
@@ -2951,3 +2951,4 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pv.allQuestions: "Show all questions" => "Näytä kaikki kysymykset"
 // pv.answeredQuestions: "Show answered questions only" => "Näytä vain vastatut kysymykset"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Määrittää navigointipainikkeiden sijainnin sivulla."
+// pe.size: "Input field width (in characters)" => "Syöttökentän leveys (merkkeinä)"

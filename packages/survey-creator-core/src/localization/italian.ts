@@ -440,7 +440,7 @@ var italianTranslation = {
     imageWidth: "Larghezza immagine",
     valueName: "Nome Valore",
     rateDescriptionLocation: "Allineamento delle etichette",
-    size: "Dimensione dell'input (in caratteri)",
+    size: "Larghezza del campo di input (in caratteri)",
     cellErrorLocation: "Allineamento dei messaggi di errore delle celle",
     enabled: "Abilitato",
     disabled: "Disabile",
@@ -2740,3 +2740,4 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // pv.allQuestions: "Show all questions" => "Mostra tutte le domande"
 // pv.answeredQuestions: "Show answered questions only" => "Mostra solo le domande con risposta"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Imposta la posizione dei pulsanti di navigazione in una pagina."
+// pe.size: "Input field width (in characters)" => "Larghezza del campo di input (in caratteri)"

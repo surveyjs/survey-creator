@@ -440,7 +440,7 @@ export var bgStrings = {
     imageWidth: "Широчина на изображението",
     valueName: "Съхранявай отговорите в следното JSON поле.",
     rateDescriptionLocation: "Подравняване на етикети",
-    size: "Размер на въвеждане (в знаци)",
+    size: "Ширина на полето за въвеждане (в знаци)",
     cellErrorLocation: "Подравняване на съобщение за грешка в клетка",
     enabled: "Разрешено",
     disabled: "Инвалид",
@@ -2542,3 +2542,4 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pv.allQuestions: "Show all questions" => "Покажи всички въпроси"
 // pv.answeredQuestions: "Show answered questions only" => "Показване само на отговори на въпроси"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Задава местоположението на бутоните за навигация на страница."
+// pe.size: "Input field width (in characters)" => "Ширина на полето за въвеждане (в знаци)"

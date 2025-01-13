@@ -440,7 +440,7 @@ var germanTranslation = {
     imageWidth: "Bildbreite",
     valueName: "Name der Antwort",
     rateDescriptionLocation: "Ausrichtung der Beschriftung",
-    size: "Größe des Eingabefeldes (in Zeichen)",
+    size: "Breite des Eingabefeldes (in Zeichen)",
     cellErrorLocation: "Ausrichtung von Zellenfehlermeldungen",
     enabled: "Ermöglichte",
     disabled: "Arbeitsunfähig",
@@ -2691,3 +2691,4 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pv.allQuestions: "Show all questions" => "Alle Fragen anzeigen"
 // pv.answeredQuestions: "Show answered questions only" => "Nur beantwortete Fragen anzeigen"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Legt die Position der Navigationsschaltflächen auf einer Seite fest."
+// pe.size: "Input field width (in characters)" => "Breite des Eingabefeldes (in Zeichen)"
