@@ -754,6 +754,8 @@ var germanTranslation = {
     separateSpecialChoices: "Spezielle Auswahlmöglichkeiten separieren",
     choicesFromQuestion: "Auswahlmöglichkeiten aus folgender Frage kopieren",
     choicesFromQuestionMode: "Auswahlmöglichkeiten, die kopiert werden sollen",
+    choiceValuesFromQuestion: "Verwenden Sie Werte aus der folgenden Matrixspalte oder Bereichsfrage als Auswahl-IDs",
+    choiceTextsFromQuestion: "Verwenden Sie Werte aus der folgenden Matrixspalte oder Panelfrage als Auswahltexte",
     progressBarShowPageTitles: "Seitentitel in der Fortschrittsbalke anzeigen",
     progressBarShowPageNumbers: "Seitenzahlen in der Fortschrittsbalke anzeigen",
     showCommentArea: "Kommentarbereich anzeigen",
@@ -1520,6 +1522,8 @@ var germanTranslation = {
     useDisplayValuesInDynamicTexts: "Bei Fragetypen mit einfacher und mehrfacher Auswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Wenn diese Einstellung aktiviert ist, wird in HTML-Fragen und dynamischen Titeln und Beschreibungen von Umfrageelementen ein Anzeigewert anstelle eines ID-Werts angezeigt.",
     clearIfInvisible: "Wählen Sie aus, ob und wann Fragenwerte, die durch bedingte Logik ausgeblendet werden, gelöscht werden sollen. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (standardmäßig \"Nach Abschluss der Umfrage\").",
     choicesFromQuestionMode: "Wählen Sie aus: \"Alle\" - kopiert alle Auswahloptionen aus der ausgewählten Frage; \"Ausgewählt\" - kopiert dynamisch nur ausgewählte Auswahloptionen; \"Nicht ausgewählt\" - kopiert dynamisch nur nicht ausgewählte Auswahloptionen. Die Optionen \"Keine\" und \"Sonstiges\" werden standardmäßig kopiert, wenn sie in der Quellfrage aktiviert sind.",
+    choiceValuesFromQuestion: "Bei Fragetypen mit Einzel- und Mehrfachauswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Diese Einstellung gibt an, welche Matrixspalten- oder Bereichsfrage die IDs bereitstellen soll.",
+    choiceTextsFromQuestion: "Bei Fragetypen mit Einzel- und Mehrfachauswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Diese Einstellung legt fest, welche Matrix-, Spalten- oder Bereichsfrage die Anzeigetexte bereitstellen soll.",
     showOtherItem: "Wenn diese Option ausgewählt ist, können Benutzer zusätzliche Eingaben in ein separates Kommentarfeld einfügen.",
     separateSpecialChoices: "Zeigt jede spezielle Auswahloption (\"Keine\", \"Andere\", \"Alle auswählen\") in einer neuen Zeile an, auch wenn ein mehrspaltiges Layout verwendet wird.",
     path: "Geben Sie die Position innerhalb des Service-Datasets an, an der sich das Ziel-Array von Objekten befindet. Lassen Sie das Feld leer, wenn die URL bereits auf das Array verweist.",
@@ -2692,3 +2696,7 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pv.answeredQuestions: "Show answered questions only" => "Nur beantwortete Fragen anzeigen"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Legt die Position der Navigationsschaltflächen auf einer Seite fest."
 // pe.size: "Input field width (in characters)" => "Breite des Eingabefeldes (in Zeichen)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Verwenden Sie Werte aus der folgenden Matrixspalte oder Bereichsfrage als Auswahl-IDs"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Verwenden Sie Werte aus der folgenden Matrixspalte oder Panelfrage als Auswahltexte"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Bei Fragetypen mit Einzel- und Mehrfachauswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Diese Einstellung gibt an, welche Matrixspalten- oder Bereichsfrage die IDs bereitstellen soll."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Bei Fragetypen mit Einzel- und Mehrfachauswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Diese Einstellung legt fest, welche Matrix-, Spalten- oder Bereichsfrage die Anzeigetexte bereitstellen soll."

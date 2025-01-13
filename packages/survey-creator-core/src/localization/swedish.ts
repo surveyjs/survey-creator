@@ -754,6 +754,8 @@ export let svStrings = {
     separateSpecialChoices: "Avgränsa specialval (Ingen, Annat, Markera alla)",
     choicesFromQuestion: "Kopiera alternativ från följande fråga",
     choicesFromQuestionMode: "Vilka val ska du kopiera?",
+    choiceValuesFromQuestion: "Använd värden från följande matriskolumn eller panelfråga som val-ID:t",
+    choiceTextsFromQuestion: "Använd värden från följande matriskolumn eller panelfråga som valtexter",
     progressBarShowPageTitles: "Visa sidrubriker i förloppsindikatorn",
     progressBarShowPageNumbers: "Visa sidnummer i förloppsindikatorn",
     showCommentArea: "Visa kommentarsområdet",
@@ -1520,6 +1522,8 @@ export let svStrings = {
     useDisplayValuesInDynamicTexts: "I frågetyperna med ett eller flera val har varje alternativ ett ID och ett visningsvärde. När du väljer det här alternativet visar den här inställningen ett visningsvärde i stället för ett ID-värde i HTML-frågor och dynamiska rubriker och beskrivningar av undersökningselement.",
     clearIfInvisible: "Välj om du vill rensa frågevärden som döljs av villkorslogik och när du vill göra det. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"När undersökningen är klar\" som standard).",
     choicesFromQuestionMode: "Välj mellan: \"Alla\" - kopierar alla valalternativ från den valda frågan; \"Markerad\" - kopierar dynamiskt endast valda alternativ; \"Omarkerad\" - kopierar endast omarkerade alternativ dynamiskt. Alternativen \"Ingen\" och \"Annat\" kopieras som standard om de är aktiverade i källfrågan.",
+    choiceValuesFromQuestion: "I frågetyper med ett eller flera val har varje alternativ ett ID och ett visningsvärde. Den här inställningen anger vilken matriskolumn eller panelfråga som ska ange ID:n.",
+    choiceTextsFromQuestion: "I frågetyper med ett eller flera val har varje alternativ ett ID och ett visningsvärde. Den här inställningen anger vilken matris-, kolumn- eller panelfråga som ska tillhandahålla visningstexterna.",
     showOtherItem: "När du väljer det här alternativet kan användarna inkludera ytterligare indata i en separat kommentarsruta.",
     separateSpecialChoices: "Visar varje specialalternativ (\"Ingen\", \"Annan\", \"Markera alla\") på en ny rad, även när du använder en layout med flera kolumner.",
     path: "Ange den plats i tjänstdatauppsättningen där målmatrisen med objekt finns. Lämna tomt om URL:en redan pekar på matrisen.",
@@ -3154,3 +3158,7 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pv.allQuestions: "Show all questions" => "Visa alla frågor"
 // pv.answeredQuestions: "Show answered questions only" => "Visa endast besvarade frågor"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Anger placeringen av navigeringsknapparna på en sida."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Använd värden från följande matriskolumn eller panelfråga som val-ID:t"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Använd värden från följande matriskolumn eller panelfråga som valtexter"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "I frågetyper med ett eller flera val har varje alternativ ett ID och ett visningsvärde. Den här inställningen anger vilken matriskolumn eller panelfråga som ska ange ID:n."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "I frågetyper med ett eller flera val har varje alternativ ett ID och ett visningsvärde. Den här inställningen anger vilken matris-, kolumn- eller panelfråga som ska tillhandahålla visningstexterna."

@@ -754,6 +754,8 @@ export var nlStrings = {
     separateSpecialChoices: "Speciale keuzes afzonderlijk (Geen, Overig, Alles selecteren)",
     choicesFromQuestion: "Kopieer keuzes uit de volgende vraag",
     choicesFromQuestionMode: "Welke keuzes kopiëren?",
+    choiceValuesFromQuestion: "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuze-ID's",
+    choiceTextsFromQuestion: "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuzeteksten",
     progressBarShowPageTitles: "Paginatitels weergeven in de voortgangsbalk",
     progressBarShowPageNumbers: "Paginanummers weergeven in de voortgangsbalk",
     showCommentArea: "Het opmerkingenveld weergeven",
@@ -1520,6 +1522,8 @@ export var nlStrings = {
     useDisplayValuesInDynamicTexts: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Als deze instelling is geselecteerd, wordt een weergavewaarde weergegeven in plaats van een ID-waarde in HTML-vragen en dynamische titels en beschrijvingen van enquête-elementen.",
     clearIfInvisible: "Kies of vraagwaarden die verborgen zijn door voorwaardelijke logica al dan niet moeten worden gewist en wanneer u dit wilt doen. Met de optie \"Overnemen\" wordt de instelling op enquêteniveau toegepast (\"Na voltooiing van de enquête\" standaard).",
     choicesFromQuestionMode: "Kies uit: \"Alle\" - kopieert alle keuzemogelijkheden van de geselecteerde vraag; \"Geselecteerd\" - kopieert dynamisch alleen geselecteerde keuzeopties; \"Niet geselecteerd\" - kopieert dynamisch alleen niet-geselecteerde keuzeopties. De opties \"Geen\" en \"Overig\" worden standaard gekopieerd als deze zijn ingeschakeld in de bronvraag.",
+    choiceValuesFromQuestion: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de ID's moeten bevatten.",
+    choiceTextsFromQuestion: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de weergaveteksten moet opleveren.",
     showOtherItem: "Als deze optie is geselecteerd, kunnen gebruikers extra invoer invullen in een apart invulveld.",
     separateSpecialChoices: "Geeft elke speciale keuzeoptie ('Geen', 'Overig', 'Alles selecteren') weer op een nieuwe regel, zelfs bij gebruik van een lay-out met meerdere kolommen.",
     path: "Geef de locatie binnen de servicegegevensset op waar de doelmatrix met objecten zich bevindt. Laat leeg als de URL al naar de array verwijst.",
@@ -2958,3 +2962,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pv.answeredQuestions: "Show answered questions only" => "Alleen beantwoorde vragen weergeven"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Hiermee stelt u de locatie van navigatieknoppen op een pagina in."
 // pe.size: "Input field width (in characters)" => "Breedte invoerveld (in tekens)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuze-ID's"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuzeteksten"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de ID's moeten bevatten."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de weergaveteksten moet opleveren."

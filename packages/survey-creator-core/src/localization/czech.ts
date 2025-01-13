@@ -754,6 +754,8 @@ export var czStrings = {
     separateSpecialChoices: "Oddělit speciální volby (žádná, ostatní, vybrat vše)",
     choicesFromQuestion: "Kopírovat volby z následující otázky",
     choicesFromQuestionMode: "Které volby zkopírovat?",
+    choiceValuesFromQuestion: "Jako ID voleb použijte hodnoty z následujícího sloupce matice nebo otázky panelu",
+    choiceTextsFromQuestion: "Jako texty voleb použijte hodnoty z následujícího sloupce matice nebo otázky panelu",
     progressBarShowPageTitles: "Zobrazení názvů stránek na ukazateli průběhu",
     progressBarShowPageNumbers: "Zobrazení čísel stránek na indikátoru průběhu",
     showCommentArea: "Zobrazit komentář",
@@ -1520,6 +1522,8 @@ export var czStrings = {
     useDisplayValuesInDynamicTexts: "V typech otázek s jedním a vícenásobným výběrem má každá možnost volby ID a zobrazovanou hodnotu. Pokud je tato možnost vybrána, zobrazí se v otázkách HTML a dynamických názvech a popisech prvků průzkumu zobrazená hodnota místo hodnoty ID.",
     clearIfInvisible: "Zvolte, zda chcete vymazat hodnoty otázek skryté podmíněnou logikou a kdy to udělat. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu (ve výchozím nastavení \"Po dokončení průzkumu\").",
     choicesFromQuestionMode: "Vyberte si z: \"Vše\" - zkopíruje všechny možnosti výběru z vybrané otázky; \"Vybrané\" - dynamicky kopíruje pouze vybrané možnosti volby; \"Nevybráno\" - dynamicky zkopíruje pouze nevybrané možnosti výběru. Možnosti \"Žádné\" a \"Jiné\" jsou ve výchozím nastavení zkopírovány, pokud jsou povoleny ve zdrojové otázce.",
+    choiceValuesFromQuestion: "U otázek s jedním a více výběry má každá možnost volby ID a zobrazovanou hodnotu. Toto nastavení určuje, která matice, sloupec nebo otázka panelu by měla ID poskytovat.",
+    choiceTextsFromQuestion: "U otázek s jedním a více výběry má každá možnost volby ID a zobrazovanou hodnotu. Toto nastavení určuje, který sloupec matice nebo otázka panelu by měla poskytovat zobrazované texty.",
     showOtherItem: "Pokud je tato možnost vybraná, mohou uživatelé zahrnout další vstup do samostatného pole pro komentář.",
     separateSpecialChoices: "Zobrazí každou speciální volbu (\"Žádná\", \"Jiné\", \"Vybrat vše\") na novém řádku, a to i při použití rozložení s více sloupci.",
     path: "Zadejte umístění v datové sadě služby, kde se nachází cílové pole objektů. Ponechte prázdné, pokud adresa URL již odkazuje na pole.",
@@ -2557,3 +2561,7 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // pv.answeredQuestions: "Show answered questions only" => "Zobrazit pouze zodpovězené otázky"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Nastaví umístění navigačních tlačítek na stránce."
 // pe.size: "Input field width (in characters)" => "Šířka vstupního pole (ve znacích)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Jako ID voleb použijte hodnoty z následujícího sloupce matice nebo otázky panelu"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Jako texty voleb použijte hodnoty z následujícího sloupce matice nebo otázky panelu"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "U otázek s jedním a více výběry má každá možnost volby ID a zobrazovanou hodnotu. Toto nastavení určuje, která matice, sloupec nebo otázka panelu by měla ID poskytovat."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "U otázek s jedním a více výběry má každá možnost volby ID a zobrazovanou hodnotu. Toto nastavení určuje, který sloupec matice nebo otázka panelu by měla poskytovat zobrazované texty."

@@ -754,6 +754,8 @@ export var turkishStrings = {
     separateSpecialChoices: "Ayrı özel seçenekler (Yok, Diğer, Tümünü Seç)",
     choicesFromQuestion: "Aşağıdaki sorudan seçenekleri kopyalama",
     choicesFromQuestionMode: "Hangi seçenekleri kopyalamalıyım?",
+    choiceValuesFromQuestion: "Aşağıdaki matris sütunundaki veya panel sorusundaki değerleri seçim kimlikleri olarak kullanın",
+    choiceTextsFromQuestion: "Aşağıdaki matris sütununda veya panel sorusunda yer alan değerleri seçim metinleri olarak kullanın",
     progressBarShowPageTitles: "Sayfa başlıklarını ilerleme çubuğunda görüntüleme",
     progressBarShowPageNumbers: "İlerleme çubuğunda sayfa numaralarını görüntüleme",
     showCommentArea: "Yorumu var",
@@ -1520,6 +1522,8 @@ export var turkishStrings = {
     useDisplayValuesInDynamicTexts: "Tekli ve çoktan seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Seçildiğinde, bu ayar HTML sorularında ve anket öğelerinin dinamik başlıklarında ve açıklamalarında kimlik değeri yerine bir görünen değer gösterir.",
     clearIfInvisible: "Koşullu mantık tarafından gizlenen soru değerlerinin temizlenip temizlenmeyeceğini ve ne zaman yapılacağını seçin. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Anket tamamlandıktan sonra\").",
     choicesFromQuestionMode: "Şunlar arasından seçim yapın: \"Tümü\" - seçilen sorudaki tüm seçim seçeneklerini kopyalar; \"Seçili\" - yalnızca seçilen seçim seçeneklerini dinamik olarak kopyalar; \"Seçilmemiş\" - yalnızca seçilmemiş seçim seçeneklerini dinamik olarak kopyalar. \"Yok\" ve \"Diğer\" seçenekleri, kaynak soruda etkinleştirilmişse varsayılan olarak kopyalanır.",
+    choiceValuesFromQuestion: "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, kimlikleri hangi matris, sütun veya panel sorusunun sağlaması gerektiğini belirtir.",
+    choiceTextsFromQuestion: "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, hangi matris sütun veya panel sorusunun görüntü metinlerini sağlaması gerektiğini belirtir.",
     showOtherItem: "Seçildiğinde, kullanıcılar ayrı bir yorum kutusuna ek girdi ekleyebilir.",
     separateSpecialChoices: "Her özel seçim seçeneğini (\"Yok\", \"Diğer\", \"Tümünü Seç\") çok sütunlu bir düzen kullanırken bile yeni bir satırda görüntüler.",
     path: "Hizmet veri kümesinde, hedef nesne dizisinin bulunduğu konumu belirtin. URL zaten diziye işaret ediyorsa boş bırakın.",
@@ -2975,3 +2979,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pv.allQuestions: "Show all questions" => "Tüm soruları göster"
 // pv.answeredQuestions: "Show answered questions only" => "Yalnızca yanıtlanmış soruları göster"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Sayfadaki gezinme düğmelerinin konumunu ayarlar."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Aşağıdaki matris sütunundaki veya panel sorusundaki değerleri seçim kimlikleri olarak kullanın"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Aşağıdaki matris sütununda veya panel sorusunda yer alan değerleri seçim metinleri olarak kullanın"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, kimlikleri hangi matris, sütun veya panel sorusunun sağlaması gerektiğini belirtir."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, hangi matris sütun veya panel sorusunun görüntü metinlerini sağlaması gerektiğini belirtir."

@@ -754,6 +754,8 @@ export var mnStrings = {
     separateSpecialChoices: "Тусгай сонголтуудыг салгах (Аль нь ч биш, Бусад, Бүгдийг сонгох)",
     choicesFromQuestion: "Дараах асуултаас сонголтуудыг хуулах.",
     choicesFromQuestionMode: "Аль сонголтуудыг хуулах вэ?",
+    choiceValuesFromQuestion: "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын ID болгон ашигла",
+    choiceTextsFromQuestion: "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын текст болгон ашигла",
     progressBarShowPageTitles: "Хөгжил дэвшлийн тавцан дахь хуудасны гарчгыг харуул",
     progressBarShowPageNumbers: "Хуудасны дугааруудыг progress bar-д харуулах",
     showCommentArea: "Санал хүсэлтийн хэсэг харуулах",
@@ -1520,6 +1522,8 @@ export var mnStrings = {
     useDisplayValuesInDynamicTexts: "Ганц болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон харуулах үнэ цэнэтэй байдаг. Энэ тохиргоо нь сонгогдсон тохиолдолд HTML асуулт болон динамик гарчиг, судалгааны элементүүдийн тодорхойлолтод ID үнэ цэнийн оронд харуулах үнэ цэнийг харуулдаг.",
     clearIfInvisible: "Нөхцөл байдлын логикоор нуусан үнэт зүйлсийг тодорхой болгох уу, хэзээ хийх вэ гэдгийг сонго. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Upon survey completion\" -ийг дефолтоор) хэрэгжүүлдэг.",
     choicesFromQuestionMode: "Сонгоно уу: \"Бүгд\" - сонгосон асуултаас сонголт хийх бүх сонголтыг хуулбарласан; \"Сонгосон\" - динамикаар зөвхөн сонгосон сонголтын хувилбаруудыг хуулбарласан; \"Сонгогдоогүй\" - динамикаар зөвхөн сонгогдоогүй сонголтыг хувилдаг. \"None\" болон \"Бусад\" сонголтууд нь эх сурвалжийн асуулгад боломжтой бол default-ээр хуулагддаг.",
+    choiceValuesFromQuestion: "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт ID-г өгөхийг тодорхойлдог.",
+    choiceTextsFromQuestion: "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт үзүүлбэрийн текстийг хангахыг тодорхойлдог.",
     showOtherItem: "Сонгогдсон тохиолдолд хэрэглэгчид тусад нь тайлбарын хайрцагт нэмэлт оруулах боломжтой.",
     separateSpecialChoices: "Тусгай сонголт бүрийг (\"None\", \"Other\", \"Select All\") шинэ мөр дээр, бүр олон баганатай загварыг ашиглахдаа ч үзүүлдэг.",
     path: "Зорилтот олон тооны объект байрладаг үйлчилгээний мэдээллийн сан доторх байршлыг тодорхойл. URL аль хэдийн багц руу зааж байгаа бол хоосон орхи.",
@@ -2635,3 +2639,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pv.allQuestions: "Show all questions" => "Бүх асуултыг үзүүл"
 // pv.answeredQuestions: "Show answered questions only" => "Зөвхөн хариулсан асуултуудыг үзүүлэх"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Хуудас дээрх навигацийн товчлууруудын байрлалыг тогтооно."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын ID болгон ашигла"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын текст болгон ашигла"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт ID-г өгөхийг тодорхойлдог."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт үзүүлбэрийн текстийг хангахыг тодорхойлдог."
