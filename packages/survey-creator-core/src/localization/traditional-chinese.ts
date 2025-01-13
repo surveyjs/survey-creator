@@ -625,6 +625,7 @@ var traditionalChineseTranslation = {
     editText: "編輯應答按鈕文本",
     startSurveyText: "開始按鈕文本",
     showNavigationButtons: "顯示導航按鈕 (默認導航)",
+    navigationButtonsLocation: "導航按鈕對齊",
     showPrevButton: "顯示前一頁按鈕 (用戶可返回至前一頁面)",
     firstPageIsStartPage: "調查的第一頁面為起始頁.",
     showCompletePage: "結尾展示完成後的頁面 (completedHtml)",
@@ -1104,6 +1105,8 @@ var traditionalChineseTranslation = {
     noPreview: "無預覽",
     showAllQuestions: "顯示所有問題",
     showAnsweredQuestions: "僅顯示已回答的問題",
+    allQuestions: "顯示所有問題",
+    answeredQuestions: "僅顯示已回答的問題",
     pages: "已完成的頁面",
     questions: "已回答的問題",
     requiredQuestions: "回答必填問題",
@@ -1455,6 +1458,7 @@ var traditionalChineseTranslation = {
     autoAdvanceEnabled: "選擇是否希望調查在受訪者回答了當前頁面上的所有問題後自動前進到下一頁。如果頁面上的最後一個問題是開放式的或允許多個答案，則此功能將不適用。",
     autoAdvanceAllowComplete: "選擇是否希望在受訪者回答所有問題後自動完成調查。",
     showNavigationButtons: "設置導航按鈕在頁面上的可見性和位置。",
+    navigationButtonsLocation: "設置頁面上導航按鈕的位置。",
     showProgressBar: "設置進度條的可見性和位置。“自動”值顯示測量標題上方或下方的進度條。",
     showPreviewBeforeComplete: "啟用僅包含所有問題或已回答問題的預覽頁面。",
     questionTitleLocation: "適用於調查中的所有問題。此設置可以被較低級別的標題對齊規則覆蓋：面板、頁面或問題。較低級別的設置將覆蓋較高級別的設置。",
@@ -3242,3 +3246,7 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // tabs.surfaceBackground: "Surface Background" => "表面背景"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "使用最後一個條目中的答案作為預設值"
 // colors.gray: "Gray" => "灰色"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "導航按鈕對齊"
+// pv.allQuestions: "Show all questions" => "顯示所有問題"
+// pv.answeredQuestions: "Show answered questions only" => "僅顯示已回答的問題"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "設置頁面上導航按鈕的位置。"

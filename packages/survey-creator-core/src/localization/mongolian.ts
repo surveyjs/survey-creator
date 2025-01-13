@@ -625,6 +625,7 @@ export var mnStrings = {
     editText: "Хариулт засах харагдах бичиг",
     startSurveyText: "Санал асуулга эхлэх үед харагдах бичиг",
     showNavigationButtons: "Чиглүүлгийн товчийн байрлал",
+    navigationButtonsLocation: "Навигацийн товчлууруудын байрлал",
     showPrevButton: "Өмнөх хуудасны товч харуулах",
     firstPageIsStartPage: "Эхлэх хуудас нь эхний хуудас байна",
     showCompletePage: "Санал асуулга амжилттай бөглөгдсөн хуудсыг харуулах",
@@ -1104,6 +1105,8 @@ export var mnStrings = {
     noPreview: "Урьдчилан харах боломжгүй",
     showAllQuestions: "Бүх асуултыг харуулах.",
     showAnsweredQuestions: "Зөвхөн хариулсан асуултуудыг харуулах.",
+    allQuestions: "Бүх асуултыг үзүүл",
+    answeredQuestions: "Зөвхөн хариулсан асуултуудыг үзүүлэх",
     pages: "Бөглөгдсөн хуудсууд",
     questions: "Хариулсан асуултууд",
     requiredQuestions: "Заавал бөглөх асуултууд",
@@ -1455,6 +1458,7 @@ export var mnStrings = {
     autoAdvanceEnabled: "Оролцогч одоогийн хуудсан дээрх бүх асуултад хариулсны дараа судалгааг дараагийн хуудас руу автоматаар шилжүүлэхийг хүсч байгаа эсэхээ сонго. Хуудасны хамгийн сүүлийн асуулт нээлттэй эсвэл олон хариулт өгөх боломж олгодог бол энэ онцлог хэрэгжихгүй.",
     autoAdvanceAllowComplete: "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго.",
     showNavigationButtons: "Хуудас дээр навигацийн товчны харагдах байдал, байршлыг тогтооно.",
+    navigationButtonsLocation: "Хуудас дээрх навигацийн товчлууруудын байрлалыг тогтооно.",
     showProgressBar: "Хэмжилтийн тавцангийн харагдах байдал, байршлыг тогтооно. \"Авто\" үнэ цэнэ нь судалгааны толгой гарчгийн дээр эсвэл түүнээс доош хөгжил дэвшлийн барыг харуулдаг.",
     showPreviewBeforeComplete: "Зөвхөн бүх асуултаар эсвэл хариулт бүхий урьдчилан харах хуудсыг боломжтой болго.",
     questionTitleLocation: "Судалгааны бүх асуултад хамаарна. Энэ тохиргоог доод түвшний нэрийн зохицуулах дүрмээр давамгайлах боломжтой: panel, хуудас, эсвэл асуулт. Доод түвшний тохиргоо нь илүү өндөр түвшинд байгаа хүмүүсийг хүчингүй болгоно.",
@@ -2627,3 +2631,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // tabs.surfaceBackground: "Surface Background" => "Гадаргуугийн фон"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Сүүлийн тайлбарын хариултуудыг стандарт болгон ашигла"
 // colors.gray: "Gray" => "Саарал"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Навигацийн товчлууруудын байрлал"
+// pv.allQuestions: "Show all questions" => "Бүх асуултыг үзүүл"
+// pv.answeredQuestions: "Show answered questions only" => "Зөвхөн хариулсан асуултуудыг үзүүлэх"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Хуудас дээрх навигацийн товчлууруудын байрлалыг тогтооно."

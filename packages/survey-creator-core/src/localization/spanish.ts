@@ -625,6 +625,7 @@ var spanishTranslation = {
     editText: "Editar botón de texto",
     startSurveyText: "Texto de inicio de la encuesta",
     showNavigationButtons: "Mostrar botones de navegación (navegación predeterminada)",
+    navigationButtonsLocation: "Alineación de los botones de navegación",
     showPrevButton: "Mostrar botón anterior (el usuario puede volver a la página anterior)",
     firstPageIsStartPage: "La primera página en la encuesta es una página iniciada",
     showCompletePage: "Mostrar la página completa al final (HTML finalizado)",
@@ -1104,6 +1105,8 @@ var spanishTranslation = {
     noPreview: "sin vista previa",
     showAllQuestions: "Mostrar vista previa con todas las preguntas",
     showAnsweredQuestions: "Mostrar vista previa con preguntas contestadas",
+    allQuestions: "Mostrar todas las preguntas",
+    answeredQuestions: "Mostrar solo las preguntas respondidas",
     pages: "páginas",
     questions: "preguntas",
     requiredQuestions: "preguntas requeridas",
@@ -1455,6 +1458,7 @@ var spanishTranslation = {
     autoAdvanceEnabled: "Seleccione si desea que la encuesta avance automáticamente a la página siguiente una vez que un encuestado haya respondido todas las preguntas en la página actual. Esta función no se aplicará si la última pregunta de la página es abierta o permite varias respuestas.",
     autoAdvanceAllowComplete: "Seleccione si desea que la encuesta se complete automáticamente después de que un encuestado responda todas las preguntas.",
     showNavigationButtons: "Establece la visibilidad y la ubicación de los botones de navegación en una página.",
+    navigationButtonsLocation: "Establece la ubicación de los botones de navegación en una página.",
     showProgressBar: "Establece la visibilidad y la ubicación de una barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta.",
     showPreviewBeforeComplete: "Habilite la página de vista previa con todas las preguntas o solo las respondidas.",
     questionTitleLocation: "Se aplica a todas las preguntas de la encuesta. Esta configuración se puede anular mediante reglas de alineación de títulos en niveles inferiores: panel, página o pregunta. Una configuración de nivel inferior anulará las de un nivel superior.",
@@ -2748,3 +2752,7 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // tabs.surfaceBackground: "Surface Background" => "Fondo de superficie"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Usar las respuestas de la última entrada como predeterminadas"
 // colors.gray: "Gray" => "Gris"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Alineación de los botones de navegación"
+// pv.allQuestions: "Show all questions" => "Mostrar todas las preguntas"
+// pv.answeredQuestions: "Show answered questions only" => "Mostrar solo las preguntas respondidas"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Establece la ubicación de los botones de navegación en una página."

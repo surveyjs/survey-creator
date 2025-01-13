@@ -625,6 +625,7 @@ export var hrStrings = {
     editText: "Uređivanje teksta gumba",
     startSurveyText: "Tekst gumba za pokretanje",
     showNavigationButtons: "Prikakanje navigacijskih tipki (zadana navigacija)",
+    navigationButtonsLocation: "Poravnanje navigacijskih gumba",
     showPrevButton: "Prikagnite prethodni gumb (korisnik se može vratiti na prethodnu stranicu)",
     firstPageIsStartPage: "Prva stranica u anketi je početna stranica.",
     showCompletePage: "Prikagušite dovršenu stranicu na kraju (completedHtml)",
@@ -1104,6 +1105,8 @@ export var hrStrings = {
     noPreview: "no preview",
     showAllQuestions: "show preview with all questions",
     showAnsweredQuestions: "show preview with answered questions",
+    allQuestions: "Prikaži sva pitanja",
+    answeredQuestions: "Prikaži samo odgovorena pitanja",
     pages: "Dovršene stranice",
     questions: "Odgovorena pitanja",
     requiredQuestions: "Odgovoreno na obavezna pitanja",
@@ -1455,6 +1458,7 @@ export var hrStrings = {
     autoAdvanceEnabled: "Odaberite želite li da se upitnik automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici. Ova se značajka neće primijeniti ako je posljednje pitanje na stranici otvoreno ili dopušta više odgovora.",
     autoAdvanceAllowComplete: "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja.",
     showNavigationButtons: "Postavlja vidljivost i mjesto navigacijskih gumba na stranici.",
+    navigationButtonsLocation: "Postavlja mjesto navigacijskih gumba na stranici.",
     showProgressBar: "Postavlja vidljivost i mjesto trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja upitnika.",
     showPreviewBeforeComplete: "Omogućite stranicu pretpregleda samo sa svim ili odgovorenim pitanjima.",
     questionTitleLocation: "Odnosi se na sva pitanja unutar ankete. Ova postavka može se nadjačati pravilima poravnanja naslova na nižim razinama: ploča, stranica ili pitanje. Postavka niže razine nadjačat će one na višoj razini.",
@@ -2965,3 +2969,7 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // tabs.surfaceBackground: "Surface Background" => "Pozadina površine"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Koristite odgovore iz posljednjeg unosa kao standardne"
 // colors.gray: "Gray" => "Siv"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Poravnanje navigacijskih gumba"
+// pv.allQuestions: "Show all questions" => "Prikaži sva pitanja"
+// pv.answeredQuestions: "Show answered questions only" => "Prikaži samo odgovorena pitanja"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Postavlja mjesto navigacijskih gumba na stranici."

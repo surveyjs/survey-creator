@@ -625,6 +625,7 @@ var frenchTranslation = {
     editText: "Modifier le texte du bouton de réponse",
     startSurveyText: "Texte bouton commencer",
     showNavigationButtons: "Afficher les boutons de navigation (navigation par défaut)",
+    navigationButtonsLocation: "Alignement des boutons de navigation",
     showPrevButton: "Afficher le bouton précédent (l'utilisateur pourra retourner sur la page précédente)",
     firstPageIsStartPage: "La première page du sondage est une page de démarrage.",
     showCompletePage: "Afficher la page de fin une fois le sondage terminé",
@@ -1104,6 +1105,8 @@ var frenchTranslation = {
     noPreview: "Pas d’aperçu",
     showAllQuestions: "Afficher toutes les questions",
     showAnsweredQuestions: "Afficher uniquement les questions complétées",
+    allQuestions: "Afficher toutes les questions",
+    answeredQuestions: "Afficher uniquement les questions répondues",
     pages: "Pages complétées",
     questions: "Questions complétées",
     requiredQuestions: "Questions obligatoires complétées",
@@ -1455,6 +1458,7 @@ var frenchTranslation = {
     autoAdvanceEnabled: "Indiquez si vous souhaitez que le sondage passe automatiquement à la page suivante une fois qu’une personne interrogée a répondu à toutes les questions de la page actuelle. Cette fonctionnalité ne s’applique pas si la dernière question de la page est ouverte ou permet plusieurs réponses.",
     autoAdvanceAllowComplete: "Sélectionnez cette option si vous souhaitez que l’enquête se termine automatiquement une fois qu’une personne interrogée a répondu à toutes les questions.",
     showNavigationButtons: "Définit la visibilité et l’emplacement des boutons de navigation sur une page.",
+    navigationButtonsLocation: "Définit l’emplacement des boutons de navigation sur une page.",
     showProgressBar: "Définit la visibilité et l’emplacement d’une barre de progression. La valeur « Auto » affiche la barre de progression au-dessus ou au-dessous de l’en-tête de l’enquête.",
     showPreviewBeforeComplete: "Activez la page d’aperçu avec toutes les questions ou les questions auxquelles on a répondu uniquement.",
     questionTitleLocation: "S’applique à toutes les questions de l’enquête. Ce paramètre peut être remplacé par des règles d’alignement des titres aux niveaux inférieurs : panneau, page ou question. Un paramètre de niveau inférieur remplacera ceux d’un niveau supérieur.",
@@ -3030,3 +3034,7 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // tabs.surfaceBackground: "Surface Background" => "Arrière-plan de surface"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Utiliser les réponses de la dernière entrée par défaut"
 // colors.gray: "Gray" => "Gris"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Alignement des boutons de navigation"
+// pv.allQuestions: "Show all questions" => "Afficher toutes les questions"
+// pv.answeredQuestions: "Show answered questions only" => "Afficher uniquement les questions répondues"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Définit l’emplacement des boutons de navigation sur une page."

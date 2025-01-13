@@ -625,6 +625,7 @@ export var arStrings = {
     editText: "نص زر التعديل",
     startSurveyText: "نص زر بدء المشاركة بالإستبيان",
     showNavigationButtons: "إظهار أزرار الإنتقال (التنقل الإفتراضي)",
+    navigationButtonsLocation: "محاذاة أزرار التنقل",
     showPrevButton: "إظهار زر التنقل السابق (السماح للمستخدم من العودة للصفحة السابقة في الإستبيان)",
     firstPageIsStartPage: "الصفحة الأولى في الإستبيان هي صفحة البدء",
     showCompletePage: "إظهار الصفحة المكتملة في النهاية (صفحة ويب مكتملة)",
@@ -1104,6 +1105,8 @@ export var arStrings = {
     noPreview: "بلا عرض",
     showAllQuestions: "المعاينة مع جميع الأسئلة",
     showAnsweredQuestions: "المعاينة مع الأسئلة المجٌابة",
+    allQuestions: "عرض جميع الأسئلة",
+    answeredQuestions: "إظهار الأسئلة التي تمت الإجابة عليها فقط",
     pages: "الصفحات",
     questions: "الأسئلة",
     requiredQuestions: "الأسئلة المطلوبة",
@@ -1455,6 +1458,7 @@ export var arStrings = {
     autoAdvanceEnabled: "حدد ما إذا كنت تريد أن يتقدم الاستطلاع تلقائيا إلى الصفحة التالية بمجرد إجابة المستجيب على جميع الأسئلة في الصفحة الحالية. لن يتم تطبيق هذه الميزة إذا كان السؤال الأخير على الصفحة مفتوحا أو يسمح بإجابات متعددة.",
     autoAdvanceAllowComplete: "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة.",
     showNavigationButtons: "يضبط رؤية وموقع أزرار التنقل على الصفحة.",
+    navigationButtonsLocation: "لتعيين موقع أزرار التنقل على الصفحة.",
     showProgressBar: "يضبط رؤية شريط التقدم وموقعه. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله.",
     showPreviewBeforeComplete: "قم بتمكين صفحة المعاينة مع جميع الأسئلة أو الإجابة عليها فقط.",
     questionTitleLocation: "ينطبق على جميع الأسئلة داخل الاستطلاع. يمكن تجاوز هذا الإعداد من خلال قواعد محاذاة العنوان في المستويات الأدنى: اللوحة أو الصفحة أو السؤال. سيتجاوز إعداد المستوى الأدنى تلك الموجودة في المستوى الأعلى.",
@@ -2885,3 +2889,7 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // tabs.surfaceBackground: "Surface Background" => "خلفية السطح"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "استخدام الإجابات من الإدخال الأخير كإعداد افتراضي"
 // colors.gray: "Gray" => "رمادي"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "محاذاة أزرار التنقل"
+// pv.allQuestions: "Show all questions" => "عرض جميع الأسئلة"
+// pv.answeredQuestions: "Show answered questions only" => "إظهار الأسئلة التي تمت الإجابة عليها فقط"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "لتعيين موقع أزرار التنقل على الصفحة."

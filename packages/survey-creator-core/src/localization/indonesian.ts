@@ -625,6 +625,7 @@ export var indonesianStrings = {
     editText: "Teks tombol Edit Jawaban",
     startSurveyText: "Teks tombol mulai",
     showNavigationButtons: "Tampilkan tombol navigasi (navigasi standar)",
+    navigationButtonsLocation: "Perataan tombol navigasi",
     showPrevButton: "Tampilkan tombol sebelumnya (pengguna mungkin kembali ke halaman sebelumnya)",
     firstPageIsStartPage: "Halaman pertama pada survei adalah halaman yang telah dimulai.",
     showCompletePage: "Tampilkan keseluruhan halaman di akhir (completedHtml)",
@@ -1104,6 +1105,8 @@ export var indonesianStrings = {
     noPreview: "Tidak ada pratinjau",
     showAllQuestions: "Tampilkan semua pertanyaan",
     showAnsweredQuestions: "Tampilkan pertanyaan yang sudah terjawab saja",
+    allQuestions: "Tampilkan semua pertanyaan",
+    answeredQuestions: "Tampilkan pertanyaan yang dijawab saja",
     pages: "Halaman lengkap",
     questions: "Pertanyaan yang dijawab",
     requiredQuestions: "Menjawab pertanyaan yang diperlukan",
@@ -1455,6 +1458,7 @@ export var indonesianStrings = {
     autoAdvanceEnabled: "Pilih apakah Anda ingin survei maju secara otomatis ke halaman berikutnya setelah responden menjawab semua pertanyaan di halaman saat ini. Fitur ini tidak akan berlaku jika pertanyaan terakhir di halaman bersifat terbuka atau mengizinkan banyak jawaban.",
     autoAdvanceAllowComplete: "Pilih apakah Anda ingin survei selesai secara otomatis setelah responden menjawab semua pertanyaan.",
     showNavigationButtons: "Mengatur visibilitas dan lokasi tombol navigasi pada halaman.",
+    navigationButtonsLocation: "Mengatur lokasi tombol navigasi pada halaman.",
     showProgressBar: "Mengatur visibilitas dan lokasi bilah kemajuan. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei.",
     showPreviewBeforeComplete: "Aktifkan halaman pratinjau hanya dengan semua atau pertanyaan yang dijawab.",
     questionTitleLocation: "Berlaku untuk semua pertanyaan dalam survei. Setelan ini dapat diganti dengan aturan penyelarasan judul di tingkat yang lebih rendah: panel, halaman, atau pertanyaan. Pengaturan tingkat yang lebih rendah akan menggantikan pengaturan tingkat yang lebih tinggi.",
@@ -3125,3 +3129,7 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // tabs.surfaceBackground: "Surface Background" => "Latar Belakang Permukaan"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gunakan jawaban dari entri terakhir sebagai default"
 // colors.gray: "Gray" => "Abu-abu"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Perataan tombol navigasi"
+// pv.allQuestions: "Show all questions" => "Tampilkan semua pertanyaan"
+// pv.answeredQuestions: "Show answered questions only" => "Tampilkan pertanyaan yang dijawab saja"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Mengatur lokasi tombol navigasi pada halaman."

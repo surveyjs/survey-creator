@@ -625,6 +625,7 @@ export const thStrings = {
     editText: "ข้อความปุ่ม \"แก้ไขคำตอบ\"",
     startSurveyText: "ข้อความปุ่ม \"เริ่มแบบสำรวจ\"",
     showNavigationButtons: "แสดง/ซ่อนปุ่มนำทาง",
+    navigationButtonsLocation: "การจัดตําแหน่งปุ่มนําทาง",
     showPrevButton: "แสดงปุ่ม \"หน้าก่อนหน้า\"",
     firstPageIsStartPage: "หน้าแรกเป็นหน้าที่เริ่ม",
     showCompletePage: "แสดงหน้า \"ขอบคุณ\"",
@@ -1104,6 +1105,8 @@ export const thStrings = {
     noPreview: "ไม่มีการแสดงตัวอย่าง",
     showAllQuestions: "แสดงคำถามทั้งหมด",
     showAnsweredQuestions: "แสดงเฉพาะคำถามที่ตอบแล้ว",
+    allQuestions: "แสดงคําถามทั้งหมด",
+    answeredQuestions: "แสดงเฉพาะคําถามที่ตอบแล้ว",
     pages: "หน้าที่เสร็จสมบูรณ์",
     questions: "คำถามที่ตอบแล้ว",
     requiredQuestions: "คำถามที่จำเป็นที่ตอบแล้ว",
@@ -1455,6 +1458,7 @@ export const thStrings = {
     autoAdvanceEnabled: "เลือกว่าคุณต้องการให้แบบสํารวจเลื่อนไปยังหน้าถัดไปโดยอัตโนมัติเมื่อผู้ตอบคําถามทั้งหมดในหน้าปัจจุบันแล้ว ฟีเจอร์นี้จะไม่มีผลหากคําถามสุดท้ายในหน้าเป็นคําถามปลายเปิดหรืออนุญาตให้มีคําตอบหลายข้อ",
     autoAdvanceAllowComplete: "เลือกถ้าคุณต้องการให้แบบสำรวจเสร็จสิ้นโดยอัตโนมัติหลังจากผู้ตอบตอบคำถามทั้งหมด",
     showNavigationButtons: "ตั้งการมองเห็นและตำแหน่งของปุ่มนำทางในหน้า",
+    navigationButtonsLocation: "ตั้งค่าตําแหน่งของปุ่มนําทางบนหน้า",
     showProgressBar: "ตั้งการมองเห็นและตำแหน่งของแถบความคืบหน้า ตัวเลือก \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าเหนือหรือใต้หัวเรื่องแบบสำรวจ",
     showPreviewBeforeComplete: "เปิดใช้งานหน้าพรีวิวที่มีคำถามทั้งหมดหรือที่ตอบแล้ว",
     questionTitleLocation: "ใช้กับคำถามทั้งหมดในแบบสำรวจ การตั้งค่านี้สามารถถูกแทนที่ได้โดยกฎการจัดตำแหน่งชื่อเรื่องที่ระดับต่ำกว่า: แผง, หน้า หรือคำถาม การตั้งค่าระดับต่ำกว่าจะยกเลิกการตั้งค่าระดับสูง",
@@ -1912,3 +1916,7 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // tabs.surfaceBackground: "Surface Background" => "พื้นหลังพื้นผิว"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "ใช้คําตอบจากรายการสุดท้ายเป็นค่าเริ่มต้น"
 // colors.gray: "Gray" => "เทา"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "การจัดตําแหน่งปุ่มนําทาง"
+// pv.allQuestions: "Show all questions" => "แสดงคําถามทั้งหมด"
+// pv.answeredQuestions: "Show answered questions only" => "แสดงเฉพาะคําถามที่ตอบแล้ว"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "ตั้งค่าตําแหน่งของปุ่มนําทางบนหน้า"

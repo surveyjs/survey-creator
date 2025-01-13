@@ -625,6 +625,7 @@ export var bgStrings = {
     editText: "Редактиране текста на бутона за отговор",
     startSurveyText: "Текст на бутона за стартиране на анкетата",
     showNavigationButtons: "Разположение на навигационните бутони",
+    navigationButtonsLocation: "Подравняване на бутоните за навигация",
     showPrevButton: "Показване на бутона Предишна страница",
     firstPageIsStartPage: "Първата страница е начална.",
     showCompletePage: "Показване на страницата Завършена анкета",
@@ -1104,6 +1105,8 @@ export var bgStrings = {
     noPreview: "Без визуализация",
     showAllQuestions: "Показване на всички въпроси",
     showAnsweredQuestions: "Показване само на въпроси с отговор",
+    allQuestions: "Покажи всички въпроси",
+    answeredQuestions: "Показване само на отговори на въпроси",
     pages: "Завършени страници",
     questions: "Отговорени въпроси",
     requiredQuestions: "Отговорени задължителни въпроси",
@@ -1455,6 +1458,7 @@ export var bgStrings = {
     autoAdvanceEnabled: "Изберете дали искате проучването автоматично да премине към следващата страница, след като респондентът отговори на всички въпроси на текущата страница. Тази функция няма да се прилага, ако последният въпрос на страницата е отворен или позволява множество отговори.",
     autoAdvanceAllowComplete: "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси.",
     showNavigationButtons: "Задава видимостта и местоположението на бутоните за навигация на дадена страница.",
+    navigationButtonsLocation: "Задава местоположението на бутоните за навигация на страница.",
     showProgressBar: "Задава видимостта и местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването.",
     showPreviewBeforeComplete: "Разрешете страницата за визуализация само с всички въпроси или само с отговор.",
     questionTitleLocation: "Отнася се за всички въпроси в рамките на проучването. Тази настройка може да бъде заместена от правилата за подравняване на заглавията на по-ниските нива: панел, страница или въпрос. Настройката от по-ниско ниво ще замени тези на по-високо ниво.",
@@ -2534,3 +2538,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // tabs.surfaceBackground: "Surface Background" => "Повърхностен фон"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Използване на отговорите от последния запис по подразбиране"
 // colors.gray: "Gray" => "Сив"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Подравняване на бутоните за навигация"
+// pv.allQuestions: "Show all questions" => "Покажи всички въпроси"
+// pv.answeredQuestions: "Show answered questions only" => "Показване само на отговори на въпроси"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Задава местоположението на бутоните за навигация на страница."

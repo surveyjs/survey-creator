@@ -625,6 +625,7 @@ var italianTranslation = {
     editText: "Testo del tasto Modifica risposta",
     startSurveyText: "Testo del tasto Inizia sondaggio",
     showNavigationButtons: "Visualizza tasti di navigazione (navigazione di default)",
+    navigationButtonsLocation: "Allineamento dei pulsanti di navigazione",
     showPrevButton: "Visualizza tasto Pagina Precedente (l'utente può tornare alla pagina precedente)",
     firstPageIsStartPage: "La prima pagina nel sondaggio è la pagina iniziale",
     showCompletePage: "Mostra la pagina sondaggio Completo",
@@ -1104,6 +1105,8 @@ var italianTranslation = {
     noPreview: "No anteprima",
     showAllQuestions: "Mostra tutte le domande",
     showAnsweredQuestions: "Mostra solo le domande con risposta",
+    allQuestions: "Mostra tutte le domande",
+    answeredQuestions: "Mostra solo le domande con risposta",
     pages: "Pagine completate",
     questions: "Domande con risposte",
     requiredQuestions: "Domande obbligatorie con risposta",
@@ -1455,6 +1458,7 @@ var italianTranslation = {
     autoAdvanceEnabled: "Seleziona questa opzione se desideri che l'indagine passi automaticamente alla pagina successiva una volta che un rispondente ha risposto a tutte le domande della pagina corrente. Questa funzione non si applica se l'ultima domanda della pagina è aperta o consente risposte multiple.",
     autoAdvanceAllowComplete: "Seleziona questa opzione se desideri che l'indagine venga completata automaticamente dopo che un rispondente ha risposto a tutte le domande.",
     showNavigationButtons: "Imposta la visibilità e la posizione dei pulsanti di navigazione in una pagina.",
+    navigationButtonsLocation: "Imposta la posizione dei pulsanti di navigazione in una pagina.",
     showProgressBar: "Imposta la visibilità e la posizione di una barra di avanzamento. Il valore \"Auto\" mostra la barra di avanzamento sopra o sotto l'intestazione del sondaggio.",
     showPreviewBeforeComplete: "Abilita la pagina di anteprima con tutte le domande o solo con risposta.",
     questionTitleLocation: "Si applica a tutte le domande all'interno dell'indagine. Questa impostazione può essere sostituita dalle regole di allineamento del titolo ai livelli inferiori: pannello, pagina o domanda. Un'impostazione di livello inferiore sostituirà quelle di livello superiore.",
@@ -2732,3 +2736,7 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // tabs.surfaceBackground: "Surface Background" => "Sfondo della superficie"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Usa le risposte dell'ultima voce come impostazione predefinita"
 // colors.gray: "Gray" => "Grigio"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Allineamento dei pulsanti di navigazione"
+// pv.allQuestions: "Show all questions" => "Mostra tutte le domande"
+// pv.answeredQuestions: "Show answered questions only" => "Mostra solo le domande con risposta"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Imposta la posizione dei pulsanti di navigazione in una pagina."

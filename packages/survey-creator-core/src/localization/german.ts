@@ -625,6 +625,7 @@ var germanTranslation = {
     editText: "Text für die Schaltfläche \"Antwort bearbeiten\"",
     startSurveyText: "Text für die Schaltfläche \"Umfrage starten\"",
     showNavigationButtons: "Navigationsschaltflächen anzeigen",
+    navigationButtonsLocation: "Ausrichtung der Navigationsschaltflächen",
     showPrevButton: "Schaltfläche \"Vorherige Seite\" anzeigen (Benutzer können auf die vorherige Seite zurückkehren)",
     firstPageIsStartPage: "Die erste Seite der Umfrage ist die Startseite",
     showCompletePage: "Nach Abschluss die Seite \"Umfrage abgeschlossen\" anzeigen",
@@ -1104,6 +1105,8 @@ var germanTranslation = {
     noPreview: "Keine Vorschau",
     showAllQuestions: "Vorschau mit allen Fragen anzeigen",
     showAnsweredQuestions: "Vorschau mit beantworteten Fragen anzeigen",
+    allQuestions: "Alle Fragen anzeigen",
+    answeredQuestions: "Nur beantwortete Fragen anzeigen",
     pages: "Seiten",
     questions: "Fragen",
     requiredQuestions: "Erforderliche Fragen",
@@ -1455,6 +1458,7 @@ var germanTranslation = {
     autoAdvanceEnabled: "Wählen Sie aus, ob die Umfrage automatisch zur nächsten Seite wechseln soll, sobald ein Befragter alle Fragen auf der aktuellen Seite beantwortet hat. Diese Funktion wird nicht angewendet, wenn die letzte Frage auf der Seite offen ist oder mehrere Antworten zulässt.",
     autoAdvanceAllowComplete: "Wählen Sie diese Option aus, wenn die Umfrage automatisch abgeschlossen werden soll, nachdem ein Befragter alle Fragen beantwortet hat.",
     showNavigationButtons: "Legt die Sichtbarkeit und Position von Navigationsschaltflächen auf einer Seite fest.",
+    navigationButtonsLocation: "Legt die Position der Navigationsschaltflächen auf einer Seite fest.",
     showProgressBar: "Legt die Sichtbarkeit und Position einer Statusanzeige fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an.",
     showPreviewBeforeComplete: "Aktivieren Sie die Vorschauseite nur mit allen oder beantworteten Fragen.",
     questionTitleLocation: "Gilt für alle Fragen innerhalb der Umfrage. Diese Einstellung kann durch Regeln für die Titelausrichtung auf niedrigeren Ebenen außer Kraft gesetzt werden: Bereich, Seite oder Frage. Eine Einstellung auf niedrigerer Ebene überschreibt die Einstellung auf einer höheren Ebene.",
@@ -2683,3 +2687,7 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // tabs.surfaceBackground: "Surface Background" => "Oberflächen-Hintergrund"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Antworten aus dem letzten Eintrag als Standard verwenden"
 // colors.gray: "Gray" => "Grau"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Ausrichtung der Navigationsschaltflächen"
+// pv.allQuestions: "Show all questions" => "Alle Fragen anzeigen"
+// pv.answeredQuestions: "Show answered questions only" => "Nur beantwortete Fragen anzeigen"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Legt die Position der Navigationsschaltflächen auf einer Seite fest."

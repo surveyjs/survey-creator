@@ -625,6 +625,7 @@ export var jaStrings = {
     editText: "「編集」ボタンのテキスト",
     startSurveyText: "「開始」ボタンのテキスト",
     showNavigationButtons: "ナビゲーションボタンを表示する（デフォルトのナビゲーション）",
+    navigationButtonsLocation: "ナビゲーション ボタンの配置",
     showPrevButton: "「前へ」ボタンを表示する（ユーザーは前のページに戻ることができます）",
     firstPageIsStartPage: "アンケートの最初のページは、開始ページです。",
     showCompletePage: "完了したページを最後に表示する（completedHtml）",
@@ -1104,6 +1105,8 @@ export var jaStrings = {
     noPreview: "プレビューなし",
     showAllQuestions: "すべての質問を含むプレビューを表示",
     showAnsweredQuestions: "回答された質問を含むプレビューを表示",
+    allQuestions: "すべての質問を表示",
+    answeredQuestions: "回答済みの質問のみを表示する",
     pages: "ページ",
     questions: "質問",
     requiredQuestions: "必須の質問",
@@ -1455,6 +1458,7 @@ export var jaStrings = {
     autoAdvanceEnabled: "回答者が現在のページのすべての質問に答えると、アンケートが自動的に次のページに進むようにする場合に選択します。この機能は、ページの最後の質問が自由回答形式の場合、または複数の回答が許可されている場合には適用されません。",
     autoAdvanceAllowComplete: "回答者がすべての質問に回答した後にアンケートを自動的に完了する場合に選択します。",
     showNavigationButtons: "ページ上のナビゲーションボタンの表示と位置を設定します。",
+    navigationButtonsLocation: "ページ上のナビゲーション ボタンの位置を設定します。",
     showProgressBar: "プログレスバーの表示と位置を設定します。「自動」の値は、アンケートヘッダーの上または下に進行状況バーを表示します。",
     showPreviewBeforeComplete: "すべての質問または回答済みの質問のみを含むプレビューページを有効にします。",
     questionTitleLocation: "アンケート内のすべての質問に適用されます。この設定は、下位レベル(パネル、ページ、または質問)のタイトル配置ルールによって上書きできます。下位レベルの設定は、上位レベルの設定よりも優先されます。",
@@ -2970,3 +2974,7 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // tabs.surfaceBackground: "Surface Background" => "サーフェスの背景"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "最後のエントリの回答をデフォルトとして使用する"
 // colors.gray: "Gray" => "灰色"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "ナビゲーション ボタンの配置"
+// pv.allQuestions: "Show all questions" => "すべての質問を表示"
+// pv.answeredQuestions: "Show answered questions only" => "回答済みの質問のみを表示する"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "ページ上のナビゲーション ボタンの位置を設定します。"

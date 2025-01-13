@@ -625,6 +625,7 @@ var portugueseTranslation = {
     editText: "Editar o texto do botão Responder Answer button text",
     startSurveyText: "Texto para botão de começar",
     showNavigationButtons: "Mostrar botões de navegação (navegação default)",
+    navigationButtonsLocation: "Alinhamento dos botões de navegação",
     showPrevButton: "Mostrar botão de voltar (usuário pode retornar para página anterior)",
     firstPageIsStartPage: "Primeira página da pesquisa é a página de início.",
     showCompletePage: "Mostrar a página de conclusão no final (completedHtml)",
@@ -1104,6 +1105,8 @@ var portugueseTranslation = {
     noPreview: "Sem pré-visualização",
     showAllQuestions: "Mostrar todas as questões",
     showAnsweredQuestions: "Mostrar apenas perguntas respondidas",
+    allQuestions: "Mostrar todas as perguntas",
+    answeredQuestions: "Mostrar apenas perguntas respondidas",
     pages: "Páginas completas",
     questions: "Questões respondidas",
     requiredQuestions: "Perguntas obrigatórias respondidas",
@@ -1455,6 +1458,7 @@ var portugueseTranslation = {
     autoAdvanceEnabled: "Selecione se deseja que o questionário avance automaticamente para a próxima página depois que o respondente responder a todas as perguntas na página atual. Esse recurso não se aplicará se a última pergunta da página for aberta ou permitir várias respostas.",
     autoAdvanceAllowComplete: "Selecione se você deseja que o questionário seja concluído automaticamente depois que um respondente responder a todas as perguntas.",
     showNavigationButtons: "Define a visibilidade e a localização dos botões de navegação em uma página.",
+    navigationButtonsLocation: "Define a localização dos botões de navegação em uma página.",
     showProgressBar: "Define a visibilidade e o local de uma barra de progresso. O valor \"Auto\" exibe a barra de progresso acima ou abaixo do cabeçalho do questionário.",
     showPreviewBeforeComplete: "Habilite a página de visualização apenas com todas as perguntas ou com as respostas respondidas.",
     questionTitleLocation: "Aplica-se a todas as perguntas do questionário. Essa configuração pode ser substituída por regras de alinhamento de título em níveis inferiores: painel, página ou pergunta. Uma configuração de nível inferior substituirá as de nível superior.",
@@ -2640,3 +2644,7 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // tabs.surfaceBackground: "Surface Background" => "Fundo da superfície"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Usar respostas da última entrada como padrão"
 // colors.gray: "Gray" => "Cinza"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Alinhamento dos botões de navegação"
+// pv.allQuestions: "Show all questions" => "Mostrar todas as perguntas"
+// pv.answeredQuestions: "Show answered questions only" => "Mostrar apenas perguntas respondidas"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Define a localização dos botões de navegação em uma página."

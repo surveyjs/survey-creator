@@ -625,6 +625,7 @@ export var fiStrings = {
     editText: "Muokkaa -painikkeen teksti",
     startSurveyText: "Aloita -painikkeen teksti",
     showNavigationButtons: "Näytä navigointipainikkeet (oletusnavigointi)",
+    navigationButtonsLocation: "Siirtymispainikkeiden tasaus",
     showPrevButton: "Näytä edellinen -painike (käyttäjä voi palata edelliselle sivulle)",
     firstPageIsStartPage: "Kyselyn ensimmäinen sivu on aloitussivu.",
     showCompletePage: "Näytä valmis sivu lopussa (completeHtml)",
@@ -1104,6 +1105,8 @@ export var fiStrings = {
     noPreview: "Ei esikatselua",
     showAllQuestions: "Näytä esikatselu kaikilla kysymyksillä",
     showAnsweredQuestions: "Näytä esikatselu vastatuilla kysymyksillä",
+    allQuestions: "Näytä kaikki kysymykset",
+    answeredQuestions: "Näytä vain vastatut kysymykset",
     pages: "Valmiit sivut",
     questions: "Vastatut kysymykset",
     requiredQuestions: "Vastatut vaaditut kysymykset",
@@ -1455,6 +1458,7 @@ export var fiStrings = {
     autoAdvanceEnabled: "Valitse tämä, jos haluat, että kysely siirtyy automaattisesti seuraavalle sivulle, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin. Tätä ominaisuutta ei käytetä, jos sivun viimeinen kysymys on avoin tai sallii useita vastauksia.",
     autoAdvanceAllowComplete: "Valitse, haluatko kyselyn täyttyvän automaattisesti, kun vastaaja on vastannut kaikkiin kysymyksiin.",
     showNavigationButtons: "Määrittää sivun navigointipainikkeiden näkyvyyden ja sijainnin.",
+    navigationButtonsLocation: "Määrittää navigointipainikkeiden sijainnin sivulla.",
     showProgressBar: "Määrittää edistymispalkin näkyvyyden ja sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella.",
     showPreviewBeforeComplete: "Ota esikatselusivu käyttöön vain kaikilla kysymyksillä tai vastatuilla kysymyksillä.",
     questionTitleLocation: "Koskee kaikkia kyselyn kysymyksiä. Tämä asetus voidaan ohittaa otsikon tasaussäännöillä alemmilla tasoilla: paneeli, sivu tai kysymys. Alemman tason asetus ohittaa korkeammalla tasolla olevat.",
@@ -2943,3 +2947,7 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // tabs.surfaceBackground: "Surface Background" => "Surfacen tausta"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Käytä viimeisen merkinnän vastauksia oletuksena"
 // colors.gray: "Gray" => "Harmaa"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Siirtymispainikkeiden tasaus"
+// pv.allQuestions: "Show all questions" => "Näytä kaikki kysymykset"
+// pv.answeredQuestions: "Show answered questions only" => "Näytä vain vastatut kysymykset"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Määrittää navigointipainikkeiden sijainnin sivulla."

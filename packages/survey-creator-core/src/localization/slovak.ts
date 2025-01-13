@@ -625,6 +625,7 @@ export var skStrings = {
     editText: "Text tlačidla úpravy",
     startSurveyText: "Text tlačidla spustenia",
     showNavigationButtons: "Zobraziť navigačné tlačidlá (predvolená navigácia)",
+    navigationButtonsLocation: "Zarovnanie navigačných tlačidiel",
     showPrevButton: "Zobraziť tlačidlo predchádzajúce (používateľ sa môže vráiť na predchádzajúcu stránku)",
     firstPageIsStartPage: "Prvá stránka v prieskume je úvodná stránka.",
     showCompletePage: "Na konci zobraziť stránku s dokončením (completedHtml)",
@@ -1104,6 +1105,8 @@ export var skStrings = {
     noPreview: "žiadna ukážka",
     showAllQuestions: "zobraziť ukážku so všetkými otázkami",
     showAnsweredQuestions: "zobraziť ukážku so zodpovedanými otázkami",
+    allQuestions: "Zobraziť všetky otázky",
+    answeredQuestions: "Zobraziť len zodpovedané otázky",
     pages: "stránky",
     questions: "otázky",
     requiredQuestions: "povinné otázky",
@@ -1455,6 +1458,7 @@ export var skStrings = {
     autoAdvanceEnabled: "Vyberte, či chcete, aby sa prieskum automaticky posunul na ďalšiu stránku, keď respondent odpovie na všetky otázky na aktuálnej stránke. Táto funkcia sa nepoužije, ak je posledná otázka na stránke otvorená alebo umožňuje viacero odpovedí.",
     autoAdvanceAllowComplete: "Vyberte, či chcete, aby sa prieskum dokončil automaticky po tom, čo respondent odpovie na všetky otázky.",
     showNavigationButtons: "Nastavuje viditeľnosť a umiestnenie navigačných tlačidiel na stránke.",
+    navigationButtonsLocation: "Nastaví umiestnenie navigačných tlačidiel na stránke.",
     showProgressBar: "Nastavuje viditeľnosť a umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu.",
     showPreviewBeforeComplete: "Povoľte stránku ukážky so všetkými alebo iba zodpovedanými otázkami.",
     questionTitleLocation: "Vzťahuje sa na všetky otázky v rámci prieskumu. Toto nastavenie je možné prepísať pravidlami zarovnania názvov na nižších úrovniach: panel, stránka alebo otázka. Nastavenie nižšej úrovne prepíše nastavenia na vyššej úrovni.",
@@ -2925,3 +2929,7 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // tabs.surfaceBackground: "Surface Background" => "Pozadie povrchu"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Predvolené použitie odpovedí z posledného záznamu"
 // colors.gray: "Gray" => "Sivý"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Zarovnanie navigačných tlačidiel"
+// pv.allQuestions: "Show all questions" => "Zobraziť všetky otázky"
+// pv.answeredQuestions: "Show answered questions only" => "Zobraziť len zodpovedané otázky"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Nastaví umiestnenie navigačných tlačidiel na stránke."

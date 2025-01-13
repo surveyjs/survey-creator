@@ -625,6 +625,7 @@ export var nlStrings = {
     editText: "Knoptitel 'Bewerken'",
     startSurveyText: "Knoptitel 'Starten'",
     showNavigationButtons: "Navigatieknoppen weergeven (standaardnavigatie)",
+    navigationButtonsLocation: "Uitlijning van navigatieknoppen",
     showPrevButton: "Toon knop 'Vorige pagina' (gebruiker kan terugkeren)",
     firstPageIsStartPage: "De eerste pagina in de enquête is een startpagina",
     showCompletePage: "Toon bij afronden deze HTML-code",
@@ -1104,6 +1105,8 @@ export var nlStrings = {
     noPreview: "Geen preview",
     showAllQuestions: "Toon voorbeeld met alle vragen",
     showAnsweredQuestions: "Toon voorbeeld met beantwoorde vragen",
+    allQuestions: "Toon alle vragen",
+    answeredQuestions: "Alleen beantwoorde vragen weergeven",
     pages: "Voltooide pagina's",
     questions: "Beantwoorde vragen",
     requiredQuestions: "Vereiste vragen beantwoord",
@@ -1455,6 +1458,7 @@ export var nlStrings = {
     autoAdvanceEnabled: "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina gaat zodra een respondent alle vragen op de huidige pagina heeft beantwoord. Deze functie is niet van toepassing als de laatste vraag op de pagina een open einde heeft of meerdere antwoorden toestaat.",
     autoAdvanceAllowComplete: "Selecteer of u wilt dat de enquête automatisch wordt ingevuld nadat een respondent alle vragen heeft beantwoord.",
     showNavigationButtons: "Hiermee stelt u de zichtbaarheid en locatie van navigatieknoppen op een pagina in.",
+    navigationButtonsLocation: "Hiermee stelt u de locatie van navigatieknoppen op een pagina in.",
     showProgressBar: "Hiermee stelt u de zichtbaarheid en locatie van een voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer.",
     showPreviewBeforeComplete: "Schakel de voorbeeldpagina in met alleen alle of beantwoorde vragen.",
     questionTitleLocation: "Geldt voor alle vragen in de enquête. Deze instelling kan worden overschreven door regels voor titeluitlijning op lagere niveaus: deelvenster, pagina of vraag. Een instelling op een lager niveau heeft voorrang op die op een hoger niveau.",
@@ -2949,3 +2953,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // tabs.surfaceBackground: "Surface Background" => "Oppervlakte Achtergrond"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gebruik antwoorden van de laatste invoer als standaard"
 // colors.gray: "Gray" => "Grijs"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Uitlijning van navigatieknoppen"
+// pv.allQuestions: "Show all questions" => "Toon alle vragen"
+// pv.answeredQuestions: "Show answered questions only" => "Alleen beantwoorde vragen weergeven"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Hiermee stelt u de locatie van navigatieknoppen op een pagina in."

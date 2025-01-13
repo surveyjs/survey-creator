@@ -625,6 +625,7 @@ export var turkishStrings = {
     editText: "Düğme metnini düzenle",
     startSurveyText: "Başla butonu yazısı",
     showNavigationButtons: "Gezinme butonlarını göster (varsayılan gezinme)",
+    navigationButtonsLocation: "Gezinme düğmeleri hizalaması",
     showPrevButton: "Önceki butonu göster (kullanıcı önceki sayfaya dönebilir)",
     firstPageIsStartPage: "Anketteki ilk sayfa bir başlangıç sayfasıdır.",
     showCompletePage: "Tamamlanan sayfayı en sonunda göster (HTML)",
@@ -1104,6 +1105,8 @@ export var turkishStrings = {
     noPreview: "Önizleme yok",
     showAllQuestions: "Tüm soruları göster",
     showAnsweredQuestions: "Cevaplanan soruları göster",
+    allQuestions: "Tüm soruları göster",
+    answeredQuestions: "Yalnızca yanıtlanmış soruları göster",
     pages: "Tamamlanan sayfalar",
     questions: "Sorular",
     requiredQuestions: "Gerekli sorular",
@@ -1455,6 +1458,7 @@ export var turkishStrings = {
     autoAdvanceEnabled: "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Bu özellik, sayfadaki son soru açık uçluysa veya birden fazla yanıta izin veriyorsa uygulanmaz.",
     autoAdvanceAllowComplete: "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin.",
     showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar.",
+    navigationButtonsLocation: "Sayfadaki gezinme düğmelerinin konumunu ayarlar.",
     showProgressBar: "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler.",
     showPreviewBeforeComplete: "Önizleme sayfasını tüm sorularla veya yalnızca yanıtlanmış sorularla etkinleştirin.",
     questionTitleLocation: "Anketteki tüm sorular için geçerlidir. Bu ayar, panel, sayfa veya soru gibi daha düşük düzeylerdeki başlık hizalama kuralları tarafından geçersiz kılınabilir. Daha düşük düzeydeki bir ayar, daha yüksek düzeydeki ayarları geçersiz kılar.",
@@ -2967,3 +2971,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // tabs.surfaceBackground: "Surface Background" => "Yüzey Arka Planı"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Varsayılan olarak son girişteki yanıtları kullan"
 // colors.gray: "Gray" => "Gri"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Gezinme düğmeleri hizalaması"
+// pv.allQuestions: "Show all questions" => "Tüm soruları göster"
+// pv.answeredQuestions: "Show answered questions only" => "Yalnızca yanıtlanmış soruları göster"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Sayfadaki gezinme düğmelerinin konumunu ayarlar."

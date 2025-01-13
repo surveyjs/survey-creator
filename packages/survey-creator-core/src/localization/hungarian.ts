@@ -625,6 +625,7 @@ export var huStrings = {
     editText: "A Válasz gomb szövegének szerkesztése",
     startSurveyText: "'Kezdés' gomb felirata",
     showNavigationButtons: "Navigációs gombok mutatása (alapértelmezett navigáció)",
+    navigationButtonsLocation: "Navigációs gombok igazítása",
     showPrevButton: "'Előző lap' gomb mutatása",
     firstPageIsStartPage: "Az megkezdett lap a kérdőív első oldala.",
     showCompletePage: "Befejező szöveg mutatása a kérdőív befejezésekor",
@@ -1104,6 +1105,8 @@ export var huStrings = {
     noPreview: "Nincs előnézet",
     showAllQuestions: "Az összes kérdés megjelenítése",
     showAnsweredQuestions: "Csak a megválaszolt kérdések megjelenítése",
+    allQuestions: "Az összes kérdés megjelenítése",
+    answeredQuestions: "Csak a megválaszolt kérdések megjelenítése",
     pages: "Befejezett oldalak",
     questions: "Megválaszolt kérdések",
     requiredQuestions: "Megválaszolt kötelező kérdések",
@@ -1455,6 +1458,7 @@ export var huStrings = {
     autoAdvanceEnabled: "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan továbblépjen a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést. Ez a funkció nem érvényes, ha az oldal utolsó kérdése nyitott végű, vagy több választ is lehetővé tesz.",
     autoAdvanceAllowComplete: "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan kitöltődjön, miután a válaszadó megválaszolta az összes kérdést.",
     showNavigationButtons: "Beállítja a navigációs gombok láthatóságát és helyét az oldalon.",
+    navigationButtonsLocation: "Beállítja a navigációs gombok helyét az oldalon.",
     showProgressBar: "Beállítja a folyamatjelző sáv láthatóságát és helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt.",
     showPreviewBeforeComplete: "Engedélyezze az előnézeti oldalt csak az összes vagy megválaszolt kérdéssel.",
     questionTitleLocation: "A felmérésben szereplő összes kérdésre vonatkozik. Ezt a beállítást felülbírálhatják az alacsonyabb szinteken lévő címigazítási szabályok: panel, oldal vagy kérdés. Az alacsonyabb szintű beállítás felülírja a magasabb szinten lévőket.",
@@ -3122,3 +3126,7 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // tabs.surfaceBackground: "Surface Background" => "Felület háttér"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Az utolsó bejegyzés válaszainak használata alapértelmezettként"
 // colors.gray: "Gray" => "Szürke"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Navigációs gombok igazítása"
+// pv.allQuestions: "Show all questions" => "Az összes kérdés megjelenítése"
+// pv.answeredQuestions: "Show answered questions only" => "Csak a megválaszolt kérdések megjelenítése"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Beállítja a navigációs gombok helyét az oldalon."

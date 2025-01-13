@@ -625,6 +625,7 @@ var polishStrings = {
     editText: "Tekst przycisku Edytuj odpowiedź",
     startSurveyText: "Start button text",
     showNavigationButtons: "Show navigation buttons (default navigation)",
+    navigationButtonsLocation: "Wyrównanie przycisków nawigacyjnych",
     showPrevButton: "Show previous button (user may return on previous page)",
     firstPageIsStartPage: "The first page in the survey is a started page.",
     showCompletePage: "Show the completed page at the end (completedHtml)",
@@ -1104,6 +1105,8 @@ var polishStrings = {
     noPreview: "Brak podglądu",
     showAllQuestions: "Pokaż wszystkie pytania",
     showAnsweredQuestions: "Pokaż tylko odpowiedzi na pytania",
+    allQuestions: "Pokaż wszystkie pytania",
+    answeredQuestions: "Pokaż tylko pytania, na które udzielono odpowiedzi",
     pages: "Ukończone strony",
     questions: "Odpowiedzi na pytania",
     requiredQuestions: "Odpowiedzi na wymagane pytania",
@@ -1455,6 +1458,7 @@ var polishStrings = {
     autoAdvanceEnabled: "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony, gdy respondent odpowie na wszystkie pytania na bieżącej stronie. Ta funkcja nie będzie miała zastosowania, jeśli ostatnie pytanie na stronie jest otwarte lub umożliwia udzielenie wielu odpowiedzi.",
     autoAdvanceAllowComplete: "Wybierz, jeśli chcesz, aby ankieta była wypełniana automatycznie po udzieleniu odpowiedzi respondenta na wszystkie pytania.",
     showNavigationButtons: "Ustawia widoczność i położenie przycisków nawigacyjnych na stronie.",
+    navigationButtonsLocation: "Określa położenie przycisków nawigacyjnych na stronie.",
     showProgressBar: "Ustawia widoczność i położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu nad lub pod nagłówkiem ankiety.",
     showPreviewBeforeComplete: "Włącz stronę podglądu ze wszystkimi pytaniami lub tylko odpowiedziami.",
     questionTitleLocation: "Dotyczy wszystkich pytań w ankiecie. To ustawienie może zostać zastąpione przez reguły wyrównania tytułu na niższych poziomach: panelu, strony lub pytania. Ustawienie niższego poziomu zastąpi ustawienia wyższego poziomu.",
@@ -3237,3 +3241,7 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // tabs.surfaceBackground: "Surface Background" => "Tło powierzchni"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Domyślnie używaj odpowiedzi z ostatniego wpisu"
 // colors.gray: "Gray" => "Szary"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Wyrównanie przycisków nawigacyjnych"
+// pv.allQuestions: "Show all questions" => "Pokaż wszystkie pytania"
+// pv.answeredQuestions: "Show answered questions only" => "Pokaż tylko pytania, na które udzielono odpowiedzi"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Określa położenie przycisków nawigacyjnych na stronie."

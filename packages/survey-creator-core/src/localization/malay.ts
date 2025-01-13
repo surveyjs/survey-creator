@@ -625,6 +625,7 @@ export var msStrings = {
     editText: "Edit teks butang",
     startSurveyText: "Teks butang mulakan",
     showNavigationButtons: "Tunjukkan butang navigasi (navigasi lalai)",
+    navigationButtonsLocation: "Penjajaran butang navigasi",
     showPrevButton: "Tunjukkan butang sebelumnya (pengguna boleh kembali ke halaman seterusnya)",
     firstPageIsStartPage: "Halaman pertama dalam tinjauan ialah halaman permulaan.",
     showCompletePage: "Tunjukkan halaman lengkap pada hujung (HTML dilengkapkan)",
@@ -1104,6 +1105,8 @@ export var msStrings = {
     noPreview: "tiada pratonton",
     showAllQuestions: "tunjukkan pratonton dengan semua soalan",
     showAnsweredQuestions: "tunjukkan pratonton dengan soalan dijawab",
+    allQuestions: "Tunjukkan semua soalan",
+    answeredQuestions: "Tunjukkan soalan yang dijawab sahaja",
     pages: "halaman",
     questions: "soalan",
     requiredQuestions: "soalan diperlukan",
@@ -1455,6 +1458,7 @@ export var msStrings = {
     autoAdvanceEnabled: "Pilih jika anda mahu tinjauan maju secara automatik ke halaman seterusnya sebaik sahaja responden telah menjawab semua soalan pada halaman semasa. Ciri ini tidak akan digunakan jika soalan terakhir pada halaman adalah terbuka atau membenarkan berbilang jawapan.",
     autoAdvanceAllowComplete: "Pilih jika anda mahu tinjauan selesai secara automatik selepas responden menjawab semua soalan.",
     showNavigationButtons: "Mengesetkan kebolehlihatan dan lokasi butang navigasi pada halaman.",
+    navigationButtonsLocation: "Menetapkan lokasi butang navigasi pada halaman.",
     showProgressBar: "Menetapkan kebolehlihatan dan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan.",
     showPreviewBeforeComplete: "Dayakan halaman pratonton dengan semua atau menjawab soalan sahaja.",
     questionTitleLocation: "Digunakan untuk semua soalan dalam tinjauan. Tetapan ini boleh diubah oleh peraturan penjajaran tajuk pada tahap yang lebih rendah: panel, halaman atau soalan. Tetapan peringkat rendah akan mengatasi mereka yang berada pada tahap yang lebih tinggi.",
@@ -2925,3 +2929,7 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // tabs.surfaceBackground: "Surface Background" => "Latar Belakang Permukaan"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gunakan jawapan daripada entri terakhir sebagai lalai"
 // colors.gray: "Gray" => "Kelabu"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Penjajaran butang navigasi"
+// pv.allQuestions: "Show all questions" => "Tunjukkan semua soalan"
+// pv.answeredQuestions: "Show answered questions only" => "Tunjukkan soalan yang dijawab sahaja"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Menetapkan lokasi butang navigasi pada halaman."

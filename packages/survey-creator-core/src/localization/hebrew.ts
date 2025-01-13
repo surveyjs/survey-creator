@@ -625,6 +625,7 @@ export var hebrewStrings = {
     editText: "טקסט לכפתור 'ערוך תשובה'",
     startSurveyText: "טקסט לכפתור 'התחל סקר'",
     showNavigationButtons: "מיקום לכפתורי ניווט",
+    navigationButtonsLocation: "יישור לחצני ניווט",
     showPrevButton: "הצג את לחצן 'עמוד קודם'",
     firstPageIsStartPage: "העמוד הראשון הוא עמוד התחלה",
     showCompletePage: "הצג עמוד 'סקר הושלם'",
@@ -1104,6 +1105,8 @@ export var hebrewStrings = {
     noPreview: "אין תצוגה מקדימה",
     showAllQuestions: "הצג את כל השאלות",
     showAnsweredQuestions: "הצג רק שאלות עם תשובות",
+    allQuestions: "הצג את כל השאלות",
+    answeredQuestions: "הצג שאלות שנענו בלבד",
     pages: "עמודים שהושלמו",
     questions: "שאלות שקיבלו תשובה",
     requiredQuestions: "שאלות חובה שקיבלו תשובה",
@@ -1455,6 +1458,7 @@ export var hebrewStrings = {
     autoAdvanceEnabled: "בחר אם ברצונך שהסקר יתקדם אוטומטית לדף הבא לאחר שהמשיב ענה על כל השאלות בדף הנוכחי. תכונה זו לא תחול אם השאלה האחרונה בדף פתוחה או מאפשרת תשובות מרובות.",
     autoAdvanceAllowComplete: "בחר אם ברצונך שהסקר יושלם באופן אוטומטי לאחר שמשיב עונה על כל השאלות.",
     showNavigationButtons: "מגדיר את התצוגה והמיקום של לחצני ניווט בעמוד.",
+    navigationButtonsLocation: "הגדרת המיקום של לחצני ניווט בעמוד.",
     showProgressBar: "הגדרת הניראות והמיקום של מד התקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר.",
     showPreviewBeforeComplete: "הפעל את דף התצוגה המקדימה עם כל השאלות או שאלות שנענו בלבד.",
     questionTitleLocation: "חל על כל השאלות בסקר. ניתן לדרוס הגדרה זו באמצעות כללי יישור כותרות ברמות נמוכות יותר: חלונית, עמוד או שאלה. הגדרה ברמה נמוכה יותר תעקוף את אלה ברמה גבוהה יותר.",
@@ -2538,3 +2542,7 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // ed.zoomOutTooltip: "Zoom Out" => "הקטנת התצוגה"
 // tabs.surfaceBackground: "Surface Background" => "רקע פני השטח"
 // colors.gray: "Gray" => "אפור"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "יישור לחצני ניווט"
+// pv.allQuestions: "Show all questions" => "הצג את כל השאלות"
+// pv.answeredQuestions: "Show answered questions only" => "הצג שאלות שנענו בלבד"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "הגדרת המיקום של לחצני ניווט בעמוד."

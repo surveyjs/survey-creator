@@ -625,6 +625,7 @@ export const roStrings = {
     editText: "Textul butonului „Editează răspunsul”",
     startSurveyText: "Textul butonului „Începe chestionarul”",
     showNavigationButtons: "Afișați/ascundeți butoanele de navigare",
+    navigationButtonsLocation: "Alinierea butoanelor de navigare",
     showPrevButton: "Afișați butonul „Pagina anterioară”",
     firstPageIsStartPage: "Prima pagină este o pagină de început",
     showCompletePage: "Afișați pagina de „Mulțumire”",
@@ -1104,6 +1105,8 @@ export const roStrings = {
     noPreview: "Fără previzualizare",
     showAllQuestions: "Afișați toate întrebările",
     showAnsweredQuestions: "Afișați doar întrebările la care s-a răspuns",
+    allQuestions: "Afișează toate întrebările",
+    answeredQuestions: "Afișați numai întrebările la care au răspuns",
     pages: "Pagini completate",
     questions: "Întrebări cu răspuns",
     requiredQuestions: "Întrebări obligatorii cu răspuns",
@@ -1455,6 +1458,7 @@ export const roStrings = {
     autoAdvanceEnabled: "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent a răspuns la toate întrebările de pe pagina curentă. Această funcție nu se va aplica dacă ultima întrebare de pe pagină este deschisă sau permite răspunsuri multiple.",
     autoAdvanceAllowComplete: "Selectați dacă doriți ca chestionarul să se completeze automat după ce un respondent răspunde la toate întrebările.",
     showNavigationButtons: "Setează vizibilitatea și locația butoanelor de navigare pe o pagină.",
+    navigationButtonsLocation: "Setează locația butoanelor de navigare dintr-o pagină.",
     showProgressBar: "Setează vizibilitatea și locația unei bare de progres. Valoarea „Auto” afișează bara de progres deasupra sau dedesubtul antetului chestionarului.",
     showPreviewBeforeComplete: "Activează pagina de previzualizare cu toate sau doar întrebările la care s-a răspuns.",
     questionTitleLocation: "Se aplică tuturor întrebărilor din chestionar. Această setare poate fi înlocuită de regulile de aliniere a titlului la niveluri inferioare: panou, pagină sau întrebare. O setare de nivel inferior va înlocui setările de nivel superior.",
@@ -1912,3 +1916,7 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // tabs.surfaceBackground: "Surface Background" => "Fundal de suprafață"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Utilizați răspunsurile de la ultima intrare ca implicit"
 // colors.gray: "Gray" => "Gri"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Alinierea butoanelor de navigare"
+// pv.allQuestions: "Show all questions" => "Afișează toate întrebările"
+// pv.answeredQuestions: "Show answered questions only" => "Afișați numai întrebările la care au răspuns"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Setează locația butoanelor de navigare dintr-o pagină."

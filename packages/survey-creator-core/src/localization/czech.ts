@@ -625,6 +625,7 @@ export var czStrings = {
     editText: "Text tlačítka úpravy",
     startSurveyText: "Text tlačítka zahájení",
     showNavigationButtons: "Zobrazit navigační tlačítka (výchozí navigace)",
+    navigationButtonsLocation: "Zarovnání navigačních tlačítek",
     showPrevButton: "Zobrazit předchozí tlačítko (uživatel se může vrátit na předchozí stránku)",
     firstPageIsStartPage: "První stránka průzkumu je úvodní stránka.",
     showCompletePage: "Zobrazení dokončené stránky na konci (completedHtml)",
@@ -1104,6 +1105,8 @@ export var czStrings = {
     noPreview: "bez náhledu",
     showAllQuestions: "zobrazit náhled se všemi otázkami",
     showAnsweredQuestions: "zobrazit náhled se zodpovězenými otázkami",
+    allQuestions: "Zobrazit všechny otázky",
+    answeredQuestions: "Zobrazit pouze zodpovězené otázky",
     pages: "stránky",
     questions: "otázky",
     requiredQuestions: "Odpovězené povinné otázky",
@@ -1455,6 +1458,7 @@ export var czStrings = {
     autoAdvanceEnabled: "Vyberte, zda chcete, aby průzkum automaticky přešel na další stránku, jakmile respondent odpoví na všechny otázky na aktuální stránce. Tato funkce se nepoužije, pokud je poslední otázka na stránce otevřená nebo umožňuje více odpovědí.",
     autoAdvanceAllowComplete: "Vyberte, zda chcete, aby se průzkum vyplnil automaticky poté, co respondent odpoví na všechny otázky.",
     showNavigationButtons: "Nastaví viditelnost a umístění navigačních tlačítek na stránce.",
+    navigationButtonsLocation: "Nastaví umístění navigačních tlačítek na stránce.",
     showProgressBar: "Nastaví viditelnost a umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu.",
     showPreviewBeforeComplete: "Povolte stránku náhledu pouze se všemi nebo zodpovězenými otázkami.",
     questionTitleLocation: "Platí pro všechny otázky v rámci průzkumu. Toto nastavení lze přepsat pravidly zarovnání nadpisů na nižších úrovních: panel, stránka nebo otázka. Nastavení nižší úrovně přepíše nastavení na vyšší úrovni.",
@@ -2548,3 +2552,7 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // tabs.surfaceBackground: "Surface Background" => "Pozadí povrchu"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Použít odpovědi z posledního záznamu jako výchozí"
 // colors.gray: "Gray" => "Šedý"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Zarovnání navigačních tlačítek"
+// pv.allQuestions: "Show all questions" => "Zobrazit všechny otázky"
+// pv.answeredQuestions: "Show answered questions only" => "Zobrazit pouze zodpovězené otázky"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Nastaví umístění navigačních tlačítek na stránce."

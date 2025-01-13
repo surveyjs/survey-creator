@@ -625,6 +625,7 @@ var simplifiedChineseTranslation = {
     editText: "编辑应答按钮文本",
     startSurveyText: "开始按钮文本",
     showNavigationButtons: "显示导航按钮 (默认导航)",
+    navigationButtonsLocation: "导航按钮对齐",
     showPrevButton: "显示前一页按钮 (用户可返回至前一页面)",
     firstPageIsStartPage: "调查的第一页面为起始页.",
     showCompletePage: "结尾展示完成后的页面 (completedHtml)",
@@ -1104,6 +1105,8 @@ var simplifiedChineseTranslation = {
     noPreview: "无预览",
     showAllQuestions: "显示所有问题",
     showAnsweredQuestions: "仅显示已回答的问题",
+    allQuestions: "显示所有问题",
+    answeredQuestions: "仅显示已回答的问题",
     pages: "已完成的页面",
     questions: "已回答的问题",
     requiredQuestions: "回答必填问题",
@@ -1455,6 +1458,7 @@ var simplifiedChineseTranslation = {
     autoAdvanceEnabled: "选择是否希望调查在受访者回答了当前页面上的所有问题后自动前进到下一页。如果页面上的最后一个问题是开放式的或允许多个答案，则此功能将不适用。",
     autoAdvanceAllowComplete: "选择是否希望在受访者回答所有问题后自动完成调查。",
     showNavigationButtons: "设置导航按钮在页面上的可见性和位置。",
+    navigationButtonsLocation: "设置页面上导航按钮的位置。",
     showProgressBar: "设置进度条的可见性和位置。“自动”值显示测量标题上方或下方的进度条。",
     showPreviewBeforeComplete: "启用仅包含所有问题或已回答问题的预览页面。",
     questionTitleLocation: "适用于调查中的所有问题。此设置可以被较低级别的标题对齐规则覆盖：面板、页面或问题。较低级别的设置将覆盖较高级别的设置。",
@@ -3113,3 +3117,7 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // tabs.surfaceBackground: "Surface Background" => "表面背景"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "使用最后一个条目中的答案作为默认值"
 // colors.gray: "Gray" => "灰色"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "导航按钮对齐"
+// pv.allQuestions: "Show all questions" => "显示所有问题"
+// pv.answeredQuestions: "Show answered questions only" => "仅显示已回答的问题"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "设置页面上导航按钮的位置。"

@@ -625,6 +625,7 @@ export var koreanStrings = {
     editText: "답변 편집 단추 텍스트",
     startSurveyText: "시작 버튼 텍스트",
     showNavigationButtons: "탐색 버튼 표시 (기본 탐색)",
+    navigationButtonsLocation: "탐색 단추 정렬",
     showPrevButton: "이전 버튼 표시 (사용자가 이전 페이지로 돌아갈 수 있음)",
     firstPageIsStartPage: "설문지의 첫 번째 페이지는 시작 페이지입니다",
     showCompletePage: "끝 부분에 완료된 페이지 표시 (완료된 HTML)",
@@ -1104,6 +1105,8 @@ export var koreanStrings = {
     noPreview: "미리보기 없음",
     showAllQuestions: "모든 질문 표시",
     showAnsweredQuestions: "답변된 질문만 표시",
+    allQuestions: "모든 질문 보기",
+    answeredQuestions: "답변된 질문만 표시",
     pages: "완성된 페이지",
     questions: "답변된 질문",
     requiredQuestions: "필수 질문에 답변했습니다.",
@@ -1455,6 +1458,7 @@ export var koreanStrings = {
     autoAdvanceEnabled: "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다.",
     autoAdvanceAllowComplete: "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다.",
     showNavigationButtons: "페이지에서 탐색 단추의 표시 여부와 위치를 설정합니다.",
+    navigationButtonsLocation: "페이지에서 탐색 단추의 위치를 설정합니다.",
     showProgressBar: "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다.",
     showPreviewBeforeComplete: "모든 질문 또는 답변된 질문만 있는 미리보기 페이지를 활성화합니다.",
     questionTitleLocation: "설문조사 내의 모든 질문에 적용됩니다. 이 설정은 하위 수준(패널, 페이지 또는 질문)의 제목 정렬 규칙으로 재정의할 수 있습니다. 낮은 수준의 설정은 더 높은 수준의 설정보다 우선합니다.",
@@ -3175,3 +3179,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // tabs.surfaceBackground: "Surface Background" => "표면 배경"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "마지막 항목의 답변을 기본값으로 사용"
 // colors.gray: "Gray" => "회색"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "탐색 단추 정렬"
+// pv.allQuestions: "Show all questions" => "모든 질문 보기"
+// pv.answeredQuestions: "Show answered questions only" => "답변된 질문만 표시"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "페이지에서 탐색 단추의 위치를 설정합니다."

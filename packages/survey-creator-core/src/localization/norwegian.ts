@@ -625,6 +625,7 @@ export var nbStrings = {
     editText: "Rediger knapp tekst",
     startSurveyText: "Start knapp tekst",
     showNavigationButtons: "Vis navigasjonsknapper (standard navigering)",
+    navigationButtonsLocation: "Justering av navigasjonsknapper",
     showPrevButton: "Vis forrige knapp (bruker kan gå til forrige side)",
     firstPageIsStartPage: "Den første siden i skjema er startside.",
     showCompletePage: "Vis ferdigsiden på slutten (completedHtml)",
@@ -1104,6 +1105,8 @@ export var nbStrings = {
     noPreview: "no preview",
     showAllQuestions: "show preview with all questions",
     showAnsweredQuestions: "show preview with answered questions",
+    allQuestions: "Vis alle spørsmål",
+    answeredQuestions: "Vis kun besvarte spørsmål",
     pages: "Fullførte sider",
     questions: "Besvarte spørsmål",
     requiredQuestions: "Besvarte nødvendige spørsmål",
@@ -1455,6 +1458,7 @@ export var nbStrings = {
     autoAdvanceEnabled: "Velg om du vil at evalueringen automatisk skal gå videre til neste side når en respondent har svart på alle spørsmålene på gjeldende side. Denne funksjonen gjelder ikke hvis det siste spørsmålet på siden er åpent eller tillater flere svar.",
     autoAdvanceAllowComplete: "Velg om du vil at evalueringen skal fullføres automatisk etter at en svarperson har svart på alle spørsmålene.",
     showNavigationButtons: "Angir synligheten og plasseringen av navigasjonsknapper på en side.",
+    navigationButtonsLocation: "Angir plasseringen av navigasjonsknapper på en side.",
     showProgressBar: "Angir synligheten og plasseringen til en fremdriftsindikator. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelseshodet.",
     showPreviewBeforeComplete: "Aktiver forhåndsvisningssiden med alle eller besvarte spørsmål.",
     questionTitleLocation: "Gjelder alle spørsmålene i undersøkelsen. Denne innstillingen kan overstyres av titteljusteringsregler på lavere nivåer: panel, side eller spørsmål. En innstilling på lavere nivå vil overstyre de på et høyere nivå.",
@@ -2974,3 +2978,7 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // tabs.surfaceBackground: "Surface Background" => "Overflate bakgrunn"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Bruk svar fra siste oppføring som standard"
 // colors.gray: "Gray" => "Grå"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Justering av navigasjonsknapper"
+// pv.allQuestions: "Show all questions" => "Vis alle spørsmål"
+// pv.answeredQuestions: "Show answered questions only" => "Vis kun besvarte spørsmål"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Angir plasseringen av navigasjonsknapper på en side."

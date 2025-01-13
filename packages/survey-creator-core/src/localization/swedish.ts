@@ -625,6 +625,7 @@ export let svStrings = {
     editText: "Text för knappen Redigera svar",
     startSurveyText: "Start knapp text",
     showNavigationButtons: "Visa navigationsknappar (standard navigering)",
+    navigationButtonsLocation: "Justering av navigeringsknappar",
     showPrevButton: "Visa föregående knapp (användaren kan gå återgå till föregående sida)",
     firstPageIsStartPage: "Den första sidan i enkäten är startsidan.",
     showCompletePage: "Visa den slutförda sidan på slutet (completedHtml)",
@@ -1104,6 +1105,8 @@ export let svStrings = {
     noPreview: "Ingen förhandsgranskning",
     showAllQuestions: "Visa alla frågor",
     showAnsweredQuestions: "Visa endast besvarade frågor",
+    allQuestions: "Visa alla frågor",
+    answeredQuestions: "Visa endast besvarade frågor",
     pages: "Avslutade sidor",
     questions: "Besvarade frågor",
     requiredQuestions: "Besvarade obligatoriska frågor",
@@ -1455,6 +1458,7 @@ export let svStrings = {
     autoAdvanceEnabled: "Välj om du vill att undersökningen automatiskt ska gå vidare till nästa sida när en svarande har svarat på alla frågor på den aktuella sidan. Den här funktionen gäller inte om den sista frågan på sidan är öppen eller tillåter flera svar.",
     autoAdvanceAllowComplete: "Välj om du vill att undersökningen ska slutföras automatiskt efter att en svarande har svarat på alla frågor.",
     showNavigationButtons: "Anger synlighet och placering av navigeringsknappar på en sida.",
+    navigationButtonsLocation: "Anger placeringen av navigeringsknapparna på en sida.",
     showProgressBar: "Anger synlighet och plats för en förloppsindikator. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet.",
     showPreviewBeforeComplete: "Aktivera förhandsgranskningssidan med alla eller endast besvarade frågor.",
     questionTitleLocation: "Gäller alla frågor i undersökningen. Den här inställningen kan åsidosättas av regler för justering av rubriker på lägre nivåer: panel, sida eller fråga. En inställning på lägre nivå åsidosätter de på en högre nivå.",
@@ -3146,3 +3150,7 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // tabs.surfaceBackground: "Surface Background" => "Yta Bakgrund"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Använd svar från den senaste posten som standard"
 // colors.gray: "Gray" => "Grå"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Justering av navigeringsknappar"
+// pv.allQuestions: "Show all questions" => "Visa alla frågor"
+// pv.answeredQuestions: "Show answered questions only" => "Visa endast besvarade frågor"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Anger placeringen av navigeringsknapparna på en sida."

@@ -625,6 +625,7 @@ export var danishStrings = {
     editText: "Tekst til knappen Rediger svar",
     startSurveyText: "Start knaptekst",
     showNavigationButtons: "Vis navigationsknapper (standard navigation)",
+    navigationButtonsLocation: "Justering af navigationsknapper",
     showPrevButton: "Vis forrige knap (brugeren må gå tilbage til forrige side)",
     firstPageIsStartPage: "Den første side in undersøgelsen er starten på undersøgelsen.",
     showCompletePage: "Vis afslutningssiden til slut (completedHtml)",
@@ -1104,6 +1105,8 @@ export var danishStrings = {
     noPreview: "Ingen forhåndsvisning",
     showAllQuestions: "Vis alle spørgsmål",
     showAnsweredQuestions: "Vis kun besvarede spørgsmål",
+    allQuestions: "Vis alle spørgsmål",
+    answeredQuestions: "Vis kun besvarede spørgsmål",
     pages: "Afsluttede sider",
     questions: "Besvarede spørgsmål",
     requiredQuestions: "Besvarede nødvendige spørgsmål",
@@ -1455,6 +1458,7 @@ export var danishStrings = {
     autoAdvanceEnabled: "Vælg, om undersøgelsen automatisk skal gå videre til næste side, når en svarperson har besvaret alle spørgsmål på den aktuelle side. Denne funktion gælder ikke, hvis det sidste spørgsmål på siden er åbent eller tillader flere svar.",
     autoAdvanceAllowComplete: "Vælg, om undersøgelsen skal fuldføres automatisk, når svarpersonen har besvaret alle spørgsmål.",
     showNavigationButtons: "Angiver synligheden og placeringen af navigationsknapper på en side.",
+    navigationButtonsLocation: "Angiver placeringen af navigationsknapper på en side.",
     showProgressBar: "Indstiller synligheden og placeringen af en statuslinje. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften.",
     showPreviewBeforeComplete: "Aktivér eksempelsiden med alle eller kun besvarede spørgsmål.",
     questionTitleLocation: "Gælder for alle spørgsmål i undersøgelsen. Denne indstilling kan tilsidesættes af titeljusteringsregler på lavere niveauer: panel, side eller spørgsmål. En indstilling på lavere niveau tilsidesætter dem på et højere niveau.",
@@ -3155,3 +3159,7 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // tabs.surfaceBackground: "Surface Background" => "Overflade baggrund"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Brug svar fra sidste post som standard"
 // colors.gray: "Gray" => "Grå"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Justering af navigationsknapper"
+// pv.allQuestions: "Show all questions" => "Vis alle spørgsmål"
+// pv.answeredQuestions: "Show answered questions only" => "Vis kun besvarede spørgsmål"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Angiver placeringen af navigationsknapper på en side."

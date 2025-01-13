@@ -625,6 +625,7 @@ var persianStrings = {
     editText: "ویرایش متن دکمه",
     startSurveyText: "متن دکمه شروع نظرسنجی",
     showNavigationButtons: "نمایش دکمه های ناوبری (ناوبری پیش فرض)",
+    navigationButtonsLocation: "تراز کردن دکمه های ناوبری",
     showPrevButton: "نمایش دکمه قبلی (کاربر ممکن است به صفحه قبل برگردد)",
     firstPageIsStartPage: "صفحه اول در نظرسنجی نقطه آغازین آن است.",
     showCompletePage: "نمایش صفحه اتمام نظرسنجی در پایان (completedHtml)",
@@ -1104,6 +1105,8 @@ var persianStrings = {
     noPreview: "پیش نمایش ندارد",
     showAllQuestions: "فعال سازی پیش نمایش با تمام سوالات",
     showAnsweredQuestions: "فعال سازی پیش نمایش به سوالات پاسخ داده شده",
+    allQuestions: "نمایش همه سوالات",
+    answeredQuestions: "فقط سوالات پاسخ داده شده را نشان دهید",
     pages: "صفحات تکمیل شده",
     questions: "سوالات پاسخ داده شده",
     requiredQuestions: "پاسخ به سوالات مورد نیاز",
@@ -1455,6 +1458,7 @@ var persianStrings = {
     autoAdvanceEnabled: "انتخاب کنید که آیا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش برود پس از اینکه پاسخ دهنده به همه سؤالات موجود در صفحه فعلی پاسخ داد. اگر آخرین سؤال در صفحه باز باشد یا اجازه پاسخ های متعدد را بدهد، این ویژگی اعمال نمی شود.",
     autoAdvanceAllowComplete: "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار پس از پاسخ دادن به تمام سوالات پاسخ دهد.",
     showNavigationButtons: "قابلیت مشاهده و مکان دکمه های پیمایش را در یک صفحه تنظیم می کند.",
+    navigationButtonsLocation: "مکان دکمه های پیمایش را در یک صفحه تنظیم می کند.",
     showProgressBar: "دید و مکان یک نوار پیشرفت را تنظیم می کند. مقدار \"Auto\" نوار پیشرفت را در بالا یا پایین هدر نظرسنجی نشان می دهد.",
     showPreviewBeforeComplete: "صفحه پیش نمایش را فقط با تمام سوالات یا پاسخ داده شده فعال کنید.",
     questionTitleLocation: "به تمام سوالات در نظرسنجی اعمال می شود. این تنظیم را می توان با قوانین هم ترازی عنوان در سطوح پایین تر لغو کرد: پانل، صفحه یا سوال. یک تنظیم سطح پایین تر، کسانی را که در سطح بالاتری قرار دارند، نادیده می گیرد.",
@@ -2927,3 +2931,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // tabs.surfaceBackground: "Surface Background" => "زمینه سطح"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "از پاسخ های آخرین ورودی به عنوان پیش فرض استفاده کنید"
 // colors.gray: "Gray" => "خاکستری"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "تراز کردن دکمه های ناوبری"
+// pv.allQuestions: "Show all questions" => "نمایش همه سوالات"
+// pv.answeredQuestions: "Show answered questions only" => "فقط سوالات پاسخ داده شده را نشان دهید"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "مکان دکمه های پیمایش را در یک صفحه تنظیم می کند."

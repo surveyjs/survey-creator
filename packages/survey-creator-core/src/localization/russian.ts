@@ -625,6 +625,7 @@ export var ruStrings = {
     editText: "Редактировать текст кнопки «Ответ»",
     startSurveyText: "Текст в кнопке 'Начать'",
     showNavigationButtons: "Показывать кнопки навигации (навигация по умолчанию)",
+    navigationButtonsLocation: "Выравнивание кнопок навигации",
     showPrevButton: "Показывать кнопки 'Предыдущая страница' (пользователь может вернуться на предыдущую страницу)",
     firstPageIsStartPage: "Первая страница опросника является стартовой страницей.",
     showCompletePage: "Показывать страницу с текстом по завершению заполнения (HTML финальной страницы)",
@@ -1104,6 +1105,8 @@ export var ruStrings = {
     noPreview: "Без предварительного просмотра",
     showAllQuestions: "Показать все вопросы",
     showAnsweredQuestions: "Показывать только ответы на вопросы",
+    allQuestions: "Показать все вопросы",
+    answeredQuestions: "Показать только отвеченные вопросы",
     pages: "Заполненные страницы",
     questions: "Ответы на вопросы",
     requiredQuestions: "Ответы на необходимые вопросы",
@@ -1455,6 +1458,7 @@ export var ruStrings = {
     autoAdvanceEnabled: "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответил на все вопросы на текущей странице. Эта функция не будет работать, если последний вопрос на странице является открытым или допускает несколько ответов.",
     autoAdvanceAllowComplete: "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы.",
     showNavigationButtons: "Задает видимость и расположение кнопок навигации на странице.",
+    navigationButtonsLocation: "Задает расположение кнопок навигации на странице.",
     showProgressBar: "Задает видимость и расположение индикатора выполнения. Значение «Авто» отображает индикатор выполнения над или под заголовком опроса.",
     showPreviewBeforeComplete: "Включите страницу предварительного просмотра, на которой отображаются все вопросы или только ответы на них.",
     questionTitleLocation: "Применяется ко всем вопросам в опросе. Этот параметр может быть переопределен правилами выравнивания заголовков на более низких уровнях: панели, странице или вопросе. Настройки более низкого уровня будут переопределять настройки на более высоком уровне.",
@@ -3031,3 +3035,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // tabs.surfaceBackground: "Surface Background" => "Фон поверхности"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Используйте ответы из последней записи по умолчанию"
 // colors.gray: "Gray" => "Серый"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Выравнивание кнопок навигации"
+// pv.allQuestions: "Show all questions" => "Показать все вопросы"
+// pv.answeredQuestions: "Show answered questions only" => "Показать только отвеченные вопросы"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Задает расположение кнопок навигации на странице."
