@@ -22,7 +22,7 @@ export var huStrings = {
     theme: "Témák",
     translation: "Fordítás",
     designer: "Kérdőívtervező",
-    editor: "JSON szerkesztő",
+    json: "JSON szerkesztő",
     logic: "Logika"
   },
   // Question types
@@ -440,7 +440,7 @@ export var huStrings = {
     imageWidth: "Kép szélessége",
     valueName: "Érték megnevezése",
     rateDescriptionLocation: "Feliratigazítás",
-    size: "Beviteli mező mérete (karakterben)",
+    size: "Beviteli mező szélessége (karakterben)",
     cellErrorLocation: "Cellahibaüzenet igazítása",
     enabled: "Engedélyezve",
     disabled: "Fogyatékos",
@@ -625,6 +625,7 @@ export var huStrings = {
     editText: "A Válasz gomb szövegének szerkesztése",
     startSurveyText: "'Kezdés' gomb felirata",
     showNavigationButtons: "Navigációs gombok mutatása (alapértelmezett navigáció)",
+    navigationButtonsLocation: "Navigációs gombok igazítása",
     showPrevButton: "'Előző lap' gomb mutatása",
     firstPageIsStartPage: "Az megkezdett lap a kérdőív első oldala.",
     showCompletePage: "Befejező szöveg mutatása a kérdőív befejezésekor",
@@ -1104,6 +1105,8 @@ export var huStrings = {
     noPreview: "Nincs előnézet",
     showAllQuestions: "Az összes kérdés megjelenítése",
     showAnsweredQuestions: "Csak a megválaszolt kérdések megjelenítése",
+    allQuestions: "Az összes kérdés megjelenítése",
+    answeredQuestions: "Csak a megválaszolt kérdések megjelenítése",
     pages: "Befejezett oldalak",
     questions: "Megválaszolt kérdések",
     requiredQuestions: "Megválaszolt kötelező kérdések",
@@ -1455,6 +1458,7 @@ export var huStrings = {
     autoAdvanceEnabled: "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan továbblépjen a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést. Ez a funkció nem érvényes, ha az oldal utolsó kérdése nyitott végű, vagy több választ is lehetővé tesz.",
     autoAdvanceAllowComplete: "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan kitöltődjön, miután a válaszadó megválaszolta az összes kérdést.",
     showNavigationButtons: "Beállítja a navigációs gombok láthatóságát és helyét az oldalon.",
+    navigationButtonsLocation: "Beállítja a navigációs gombok helyét az oldalon.",
     showProgressBar: "Beállítja a folyamatjelző sáv láthatóságát és helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt.",
     showPreviewBeforeComplete: "Engedélyezze az előnézeti oldalt csak az összes vagy megválaszolt kérdéssel.",
     questionTitleLocation: "A felmérésben szereplő összes kérdésre vonatkozik. Ezt a beállítást felülbírálhatják az alacsonyabb szinteken lévő címigazítási szabályok: panel, oldal vagy kérdés. Az alacsonyabb szintű beállítás felülírja a magasabb szinten lévőket.",
@@ -1501,7 +1505,7 @@ export var huStrings = {
       questionTitleWidth: "Egységes szélességet állít be a kérdéscímekhez, ha azok a kérdésmezőktől balra vannak igazítva. CSS-értékeket fogad el (px, %, in, pt stb.).",
       questionErrorLocation: "Beállítja az érvénytelen bevitelű kérdéssel kapcsolatos hibaüzenet helyét. Válasszon a következők közül: \"Felső\" - egy hibaüzenet kerül a kérdésmező tetejére; \"Alsó\" - egy hibaüzenet kerül a kérdésmező aljára. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Felül\" alapértelmezés szerint).",
       questionOrder: "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. Az \"Öröklés\" opció a felmérési szintű beállítást alkalmazza (\"Eredeti\" alapértelmezés szerint). A beállítás hatása csak az Előnézet lapon látható.",
-      navigationButtonsVisibility: "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\"."
+      showNavigationButtons: "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\"."
     },
     timerLocation: "Beállítja az időzítő helyét az oldalon.",
     panelsState: "Válasszon a következők közül: \"Zárolt\" - a felhasználók nem bonthatják ki vagy csukhatják össze a paneleket; \"Az összes összecsukása\" - minden panel összecsukott állapotban indul; \"Összes kibontása\" - minden panel kibővített állapotban indul; \"Először bővített\" - csak az első panel bővül.",
@@ -1660,7 +1664,6 @@ export var huStrings = {
     inputTextAlignment: "Bemeneti érték igazítása",
     elements: "Elemek",
     content: "Tartalom",
-    navigationButtonsVisibility: "Navigációs gombok láthatósága",
     navigationTitle: "Navigációs cím",
     navigationDescription: "Navigáció leírása",
     longTap: "Hosszú koppintás",
@@ -2793,7 +2796,7 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Az ezen az oldalon található összes kérdésre vonatkozik. Ha felül szeretné bírálni ezt a beállítást, határozzon meg címigazítási szabályokat az egyes kérdésekhez vagy panelekhez. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Felül\" alapértelmezés szerint)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Beállítja az érvénytelen bevitelű kérdéssel kapcsolatos hibaüzenet helyét. Válasszon a következők közül: \"Felső\" - egy hibaüzenet kerül a kérdésmező tetejére; \"Alsó\" - egy hibaüzenet kerül a kérdésmező aljára. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Felül\" alapértelmezés szerint)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. Az \"Öröklés\" opció a felmérési szintű beállítást alkalmazza (\"Eredeti\" alapértelmezés szerint). A beállítás hatása csak az Előnézet lapon látható."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Válasszon a következők közül: \"Zárolt\" - a felhasználók nem bonthatják ki vagy csukhatják össze a paneleket; \"Az összes összecsukása\" - minden panel összecsukott állapotban indul; \"Összes kibontása\" - minden panel kibővített állapotban indul; \"Először bővített\" - csak az első panel bővül."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Adjon meg egy megosztott tulajdonságnevet az objektumok tömbjében, amely tartalmazza az adatválaszték-listában megjeleníteni kívánt kép- vagy videofájl URL-címeit."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "A bal oldali érték a feltételes szabályokban használt elemazonosítóként szolgál, a jobb oldali érték megjelenik a válaszadók számára."
@@ -3123,3 +3126,8 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // tabs.surfaceBackground: "Surface Background" => "Felület háttér"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Az utolsó bejegyzés válaszainak használata alapértelmezettként"
 // colors.gray: "Gray" => "Szürke"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Navigációs gombok igazítása"
+// pv.allQuestions: "Show all questions" => "Az összes kérdés megjelenítése"
+// pv.answeredQuestions: "Show answered questions only" => "Csak a megválaszolt kérdések megjelenítése"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Beállítja a navigációs gombok helyét az oldalon."
+// pe.size: "Input field width (in characters)" => "Beviteli mező szélessége (karakterben)"

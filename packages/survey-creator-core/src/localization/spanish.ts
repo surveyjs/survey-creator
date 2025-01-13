@@ -22,7 +22,7 @@ var spanishTranslation = {
     theme: "Temas",
     translation: "Traducción",
     designer: "Diseñador de la encuesta",
-    editor: "Editor de JSON",
+    json: "Editor de JSON",
     logic: "Lógica de la encuesta"
   },
   // Question types
@@ -625,6 +625,7 @@ var spanishTranslation = {
     editText: "Editar botón de texto",
     startSurveyText: "Texto de inicio de la encuesta",
     showNavigationButtons: "Mostrar botones de navegación (navegación predeterminada)",
+    navigationButtonsLocation: "Alineación de los botones de navegación",
     showPrevButton: "Mostrar botón anterior (el usuario puede volver a la página anterior)",
     firstPageIsStartPage: "La primera página en la encuesta es una página iniciada",
     showCompletePage: "Mostrar la página completa al final (HTML finalizado)",
@@ -1104,6 +1105,8 @@ var spanishTranslation = {
     noPreview: "sin vista previa",
     showAllQuestions: "Mostrar vista previa con todas las preguntas",
     showAnsweredQuestions: "Mostrar vista previa con preguntas contestadas",
+    allQuestions: "Mostrar todas las preguntas",
+    answeredQuestions: "Mostrar solo las preguntas respondidas",
     pages: "páginas",
     questions: "preguntas",
     requiredQuestions: "preguntas requeridas",
@@ -1455,6 +1458,7 @@ var spanishTranslation = {
     autoAdvanceEnabled: "Seleccione si desea que la encuesta avance automáticamente a la página siguiente una vez que un encuestado haya respondido todas las preguntas en la página actual. Esta función no se aplicará si la última pregunta de la página es abierta o permite varias respuestas.",
     autoAdvanceAllowComplete: "Seleccione si desea que la encuesta se complete automáticamente después de que un encuestado responda todas las preguntas.",
     showNavigationButtons: "Establece la visibilidad y la ubicación de los botones de navegación en una página.",
+    navigationButtonsLocation: "Establece la ubicación de los botones de navegación en una página.",
     showProgressBar: "Establece la visibilidad y la ubicación de una barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta.",
     showPreviewBeforeComplete: "Habilite la página de vista previa con todas las preguntas o solo las respondidas.",
     questionTitleLocation: "Se aplica a todas las preguntas de la encuesta. Esta configuración se puede anular mediante reglas de alineación de títulos en niveles inferiores: panel, página o pregunta. Una configuración de nivel inferior anulará las de un nivel superior.",
@@ -1501,7 +1505,7 @@ var spanishTranslation = {
       questionTitleWidth: "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntas. Acepta valores CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Establece la ubicación de un mensaje de error en relación con la pregunta con entrada no válida. Elija entre: \"Arriba\": se coloca un texto de error en la parte superior del cuadro de pregunta; \"Abajo\": se coloca un texto de error en la parte inferior del cuadro de pregunta. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Superior\" de forma predeterminada).",
       questionOrder: "Mantiene el orden original de las preguntas o las aleatoriza. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Original\" de forma predeterminada). El efecto de esta configuración solo es visible en la pestaña Vista previa.",
-      navigationButtonsVisibility: "Establece la visibilidad de los botones de navegación en la página. La opción \"Heredar\" aplica la configuración de nivel de encuesta, que por defecto es \"Visible\"."
+      showNavigationButtons: "Establece la visibilidad de los botones de navegación en la página. La opción \"Heredar\" aplica la configuración de nivel de encuesta, que por defecto es \"Visible\"."
     },
     timerLocation: "Establece la ubicación de un temporizador en una página.",
     panelsState: "Elija entre: \"Bloqueado\": los usuarios no pueden expandir ni contraer paneles; \"Contraer todo\": todos los paneles comienzan en un estado contraído; \"Expandir todo\": todos los paneles comienzan en un estado expandido; \"Primero expandido\": solo el primer panel se expande inicialmente.",
@@ -1660,7 +1664,6 @@ var spanishTranslation = {
     inputTextAlignment: "Alineación de valores de entrada",
     elements: "Elementos",
     content: "Contenido",
-    navigationButtonsVisibility: "Navegación botones visibilidad",
     navigationTitle: "Título de navegación",
     navigationDescription: "Descripción de navegación",
     longTap: "Toque largo",
@@ -2419,7 +2422,7 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Se aplica a todas las preguntas de esta página. Si desea anular esta configuración, defina reglas de alineación de títulos para preguntas o paneles individuales. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Superior\" de forma predeterminada)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Establece la ubicación de un mensaje de error en relación con la pregunta con entrada no válida. Elija entre: \"Arriba\": se coloca un texto de error en la parte superior del cuadro de pregunta; \"Abajo\": se coloca un texto de error en la parte inferior del cuadro de pregunta. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Superior\" de forma predeterminada)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Mantiene el orden original de las preguntas o las aleatoriza. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Original\" de forma predeterminada). El efecto de esta configuración solo es visible en la pestaña Vista previa."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Establece la visibilidad de los botones de navegación en la página. La opción \"Heredar\" aplica la configuración de nivel de encuesta, que por defecto es \"Visible\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Establece la visibilidad de los botones de navegación en la página. La opción \"Heredar\" aplica la configuración de nivel de encuesta, que por defecto es \"Visible\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Elija entre: \"Bloqueado\": los usuarios no pueden expandir ni contraer paneles; \"Contraer todo\": todos los paneles comienzan en un estado contraído; \"Expandir todo\": todos los paneles comienzan en un estado expandido; \"Primero expandido\": solo el primer panel se expande inicialmente."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Introduzca un nombre de propiedad compartida dentro de la matriz de objetos que contiene las direcciones URL de los archivos de imagen o vídeo que desea mostrar en la lista de opciones."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "El valor de la izquierda sirve como un identificador de elemento utilizado en las reglas condicionales, el valor de la derecha se muestra a los encuestados."
@@ -2749,3 +2752,7 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // tabs.surfaceBackground: "Surface Background" => "Fondo de superficie"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Usar las respuestas de la última entrada como predeterminadas"
 // colors.gray: "Gray" => "Gris"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Alineación de los botones de navegación"
+// pv.allQuestions: "Show all questions" => "Mostrar todas las preguntas"
+// pv.answeredQuestions: "Show answered questions only" => "Mostrar solo las preguntas respondidas"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Establece la ubicación de los botones de navegación en una página."

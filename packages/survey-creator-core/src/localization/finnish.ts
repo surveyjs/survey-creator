@@ -22,7 +22,7 @@ export var fiStrings = {
     theme: "Teemoja",
     translation: "Käännös",
     designer: "Kyselyn suunnittelija",
-    editor: "JSON Editori",
+    json: "JSON Editori",
     logic: "Kyselyn logiikka"
   },
   // Question types
@@ -440,7 +440,7 @@ export var fiStrings = {
     imageWidth: "Kuvan leveys",
     valueName: "Arvon nimi",
     rateDescriptionLocation: "Otsikon tasaus",
-    size: "Syöttökentän koko (merkkeinä)",
+    size: "Syöttökentän leveys (merkkeinä)",
     cellErrorLocation: "Solun virhesanoman tasaus",
     enabled: "Käytössä",
     disabled: "Pois käytöstä",
@@ -625,6 +625,7 @@ export var fiStrings = {
     editText: "Muokkaa -painikkeen teksti",
     startSurveyText: "Aloita -painikkeen teksti",
     showNavigationButtons: "Näytä navigointipainikkeet (oletusnavigointi)",
+    navigationButtonsLocation: "Siirtymispainikkeiden tasaus",
     showPrevButton: "Näytä edellinen -painike (käyttäjä voi palata edelliselle sivulle)",
     firstPageIsStartPage: "Kyselyn ensimmäinen sivu on aloitussivu.",
     showCompletePage: "Näytä valmis sivu lopussa (completeHtml)",
@@ -1104,6 +1105,8 @@ export var fiStrings = {
     noPreview: "Ei esikatselua",
     showAllQuestions: "Näytä esikatselu kaikilla kysymyksillä",
     showAnsweredQuestions: "Näytä esikatselu vastatuilla kysymyksillä",
+    allQuestions: "Näytä kaikki kysymykset",
+    answeredQuestions: "Näytä vain vastatut kysymykset",
     pages: "Valmiit sivut",
     questions: "Vastatut kysymykset",
     requiredQuestions: "Vastatut vaaditut kysymykset",
@@ -1455,6 +1458,7 @@ export var fiStrings = {
     autoAdvanceEnabled: "Valitse tämä, jos haluat, että kysely siirtyy automaattisesti seuraavalle sivulle, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin. Tätä ominaisuutta ei käytetä, jos sivun viimeinen kysymys on avoin tai sallii useita vastauksia.",
     autoAdvanceAllowComplete: "Valitse, haluatko kyselyn täyttyvän automaattisesti, kun vastaaja on vastannut kaikkiin kysymyksiin.",
     showNavigationButtons: "Määrittää sivun navigointipainikkeiden näkyvyyden ja sijainnin.",
+    navigationButtonsLocation: "Määrittää navigointipainikkeiden sijainnin sivulla.",
     showProgressBar: "Määrittää edistymispalkin näkyvyyden ja sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella.",
     showPreviewBeforeComplete: "Ota esikatselusivu käyttöön vain kaikilla kysymyksillä tai vastatuilla kysymyksillä.",
     questionTitleLocation: "Koskee kaikkia kyselyn kysymyksiä. Tämä asetus voidaan ohittaa otsikon tasaussäännöillä alemmilla tasoilla: paneeli, sivu tai kysymys. Alemman tason asetus ohittaa korkeammalla tasolla olevat.",
@@ -1501,7 +1505,7 @@ export var fiStrings = {
       questionTitleWidth: "Määrittää kysymysten otsikoiden tasaisen leveyden, kun ne tasataan kysymysruutujen vasemmalle puolelle. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
       questionErrorLocation: "Määrittää virhesanoman sijainnin suhteessa kysymykseen, jonka syöte on virheellinen. Valitse seuraavista: \"Top\" - virheteksti sijoitetaan kysymysruudun yläosaan; \"Pohja\" - virheteksti sijoitetaan kysymysruudun alaosaan. \"Peri\"-vaihtoehto käyttää kyselytason asetusta (\"Ylin\" oletuksena).",
       questionOrder: "Säilyttää kysymysten alkuperäisen järjestyksen tai satunnaistaa ne. \"Peri\" -vaihtoehto käyttää kyselytason asetusta (\"Alkuperäinen\" oletuksena). Tämän asetuksen vaikutus näkyy vain Esikatselu-välilehdessä.",
-      navigationButtonsVisibility: "Määrittää navigointipainikkeiden näkyvyyden sivulla. \"Peri\" -vaihtoehto käyttää kyselytason asetusta, jonka oletusarvo on \"Näkyvä\"."
+      showNavigationButtons: "Määrittää navigointipainikkeiden näkyvyyden sivulla. \"Peri\" -vaihtoehto käyttää kyselytason asetusta, jonka oletusarvo on \"Näkyvä\"."
     },
     timerLocation: "Määrittää ajastimen sijainnin sivulla.",
     panelsState: "Valitse seuraavista: \"Lukittu\" - käyttäjät eivät voi laajentaa tai kutistaa paneeleja; \"Kutista kaikki\" - kaikki paneelit alkavat romahtaneessa tilassa; \"Laajenna kaikki\" - kaikki paneelit alkavat laajennetussa tilassa; \"Ensimmäinen laajennettu\" - vain ensimmäistä paneelia laajennetaan aluksi.",
@@ -1660,7 +1664,6 @@ export var fiStrings = {
     inputTextAlignment: "Syöttöarvon tasaus",
     elements: "Elementit",
     content: "Sisältö",
-    navigationButtonsVisibility: "Navigointikuvakkeen näkyvyys",
     navigationTitle: "Navigoinnin otsikko",
     navigationDescription: "Navigoinnin kuvaus",
     longTap: "Pitkä napautus",
@@ -2616,7 +2619,7 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Koskee kaikkia tämän sivun kysymyksiä. Jos haluat ohittaa tämän asetuksen, määritä otsikon tasaussäännöt yksittäisille kysymyksille tai paneeleille. \"Peri\"-vaihtoehto käyttää kyselytason asetusta (\"Ylin\" oletuksena)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Määrittää virhesanoman sijainnin suhteessa kysymykseen, jonka syöte on virheellinen. Valitse seuraavista: \"Top\" - virheteksti sijoitetaan kysymysruudun yläosaan; \"Pohja\" - virheteksti sijoitetaan kysymysruudun alaosaan. \"Peri\"-vaihtoehto käyttää kyselytason asetusta (\"Ylin\" oletuksena)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Säilyttää kysymysten alkuperäisen järjestyksen tai satunnaistaa ne. \"Peri\" -vaihtoehto käyttää kyselytason asetusta (\"Alkuperäinen\" oletuksena). Tämän asetuksen vaikutus näkyy vain Esikatselu-välilehdessä."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Määrittää navigointipainikkeiden näkyvyyden sivulla. \"Peri\" -vaihtoehto käyttää kyselytason asetusta, jonka oletusarvo on \"Näkyvä\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Määrittää navigointipainikkeiden näkyvyyden sivulla. \"Peri\" -vaihtoehto käyttää kyselytason asetusta, jonka oletusarvo on \"Näkyvä\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Valitse seuraavista: \"Lukittu\" - käyttäjät eivät voi laajentaa tai kutistaa paneeleja; \"Kutista kaikki\" - kaikki paneelit alkavat romahtaneessa tilassa; \"Laajenna kaikki\" - kaikki paneelit alkavat laajennetussa tilassa; \"Ensimmäinen laajennettu\" - vain ensimmäistä paneelia laajennetaan aluksi."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Kirjoita jaetun ominaisuuden nimi objektiryhmään, joka sisältää valintaluettelossa näytettävät kuvan tai videotiedoston URL-osoitteet."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Vasen arvo toimii ehdollisissa säännöissä käytettynä kohteen tunnuksena, oikea arvo näytetään vastaajille."
@@ -2944,3 +2947,8 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // tabs.surfaceBackground: "Surface Background" => "Surfacen tausta"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Käytä viimeisen merkinnän vastauksia oletuksena"
 // colors.gray: "Gray" => "Harmaa"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Siirtymispainikkeiden tasaus"
+// pv.allQuestions: "Show all questions" => "Näytä kaikki kysymykset"
+// pv.answeredQuestions: "Show answered questions only" => "Näytä vain vastatut kysymykset"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Määrittää navigointipainikkeiden sijainnin sivulla."
+// pe.size: "Input field width (in characters)" => "Syöttökentän leveys (merkkeinä)"

@@ -82,10 +82,10 @@ test("do not deactivate/activate tabs on selecting the active tab", (): any => {
     elements: [{ type: "text", name: "q1" }]
   };
   expect(creator.activeTab).toEqual("designer");
-  expect(creator.makeNewViewActive("test")).toBeTruthy();
-  creator.activeTab = "test";
-  expect(creator.makeNewViewActive("test")).toBeFalsy();
-  creator.activeTab = "test";
+  expect(creator.makeNewViewActive("preview")).toBeTruthy();
+  creator.activeTab = "preview";
+  expect(creator.makeNewViewActive("preview")).toBeFalsy();
+  creator.activeTab = "preview";
 });
 test("Select new added question", (): any => {
   const creator = new CreatorTester();
@@ -1343,7 +1343,7 @@ test("Question type custom widgets", (): any => {
   expect(creator.addNewQuestionText).toEqual("Add Question");
   const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
   const listModel: ListModel = selectorModel.popupModel.contentComponentData.model;
-  selectorModel.popupModel.toggleVisibility();
+  selectorModel.popupModel.show();
   const actionPopupViewModel = new PopupDropdownViewModel(selectorModel.popupModel); // need for popupModel.onShow
   selectorModel.popupModel.show();
   const customItem = listModel.actions.filter((item) => item.id == "test_widget")[0];
@@ -1701,7 +1701,7 @@ test("Test plug-ins in creator", (): any => {
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model).toBeTruthy();
-  const testPlugin = <TabTestPlugin>creator.getPlugin("test");
+  const testPlugin = <TabTestPlugin>creator.getPlugin("preview");
   expect(testPlugin.model).toBeFalsy();
   creator.makeNewViewActive("test");
   expect(designerPlugin.model).toBeFalsy();
@@ -1731,9 +1731,9 @@ test("Test plug-ins JSON-Text in creator", (): any => {
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model).toBeTruthy();
-  const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
+  const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   expect(textPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("editor");
+  creator.makeNewViewActive("json");
   expect(textPlugin.model).toBeTruthy();
   expect(designerPlugin.model).toBeFalsy();
   creator.makeNewViewActive("designer");
@@ -1758,13 +1758,13 @@ test("Test plug-ins JSON-Text in creator, autosave", (): any => {
     changedType = options.type;
   });
   expect(creator.viewType).toEqual("designer");
-  const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
+  const textPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   expect(textPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("editor");
+  creator.makeNewViewActive("json");
   expect(textPlugin.model).toBeTruthy();
   creator.makeNewViewActive("designer");
   expect(counter).toEqual(0);
-  creator.makeNewViewActive("editor");
+  creator.makeNewViewActive("json");
   json.pages[0].elements[0].name = "question1";
   textPlugin.model.text = JSON.stringify(json);
   textPlugin.model.isJSONChanged = true;
@@ -1785,9 +1785,9 @@ test("Test plug-ins JSON-Ace in creator", (): any => {
     creator.getPlugin("designer")
   );
   expect(designerPlugin.model).toBeTruthy();
-  const textPlugin = <TabJsonEditorAcePlugin>creator.getPlugin("editor");
+  const textPlugin = <TabJsonEditorAcePlugin>creator.getPlugin("json");
   expect(textPlugin.model).toBeFalsy();
-  creator.makeNewViewActive("editor");
+  creator.makeNewViewActive("json");
   expect(textPlugin.model).toBeTruthy();
   expect(designerPlugin.model).toBeFalsy();
   creator.makeNewViewActive("designer");
@@ -2295,7 +2295,7 @@ test("ConvertTo, show the current question type selected", (): any => {
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
@@ -2324,7 +2324,7 @@ test("ConvertTo, show it for a panel", (): any => {
   const popup = panelModel.getActionById("convertTo").popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   expect(list.selectedItem).toBeTruthy();
@@ -2428,23 +2428,23 @@ test("ConvertTo & addNewQuestion refresh items", (): any => {
   expect(convertToAction.data.actions.length).toBe(0);
   expect(questionTypeSelectorListModel.actions.length).toBe(0);
 
-  convertToAction.popupModel.toggleVisibility();
+  convertToAction.popupModel.show();
   expect(convertToAction.data.actions.length).toBe(21);
-  convertToAction.popupModel.toggleVisibility();
+  convertToAction.popupModel.hide();
 
-  questionTypeSelectorModel.popupModel.toggleVisibility();
+  questionTypeSelectorModel.popupModel.show();
   expect(questionTypeSelectorListModel.actions.length).toBe(21);
-  questionTypeSelectorModel.popupModel.toggleVisibility();
+  questionTypeSelectorModel.popupModel.hide();
 
   pageModel.addNewQuestion("text", "q2");
 
-  convertToAction.popupModel.toggleVisibility();
+  convertToAction.popupModel.show();
   expect(convertToAction.data.actions.length).toBe(20);
-  convertToAction.popupModel.toggleVisibility();
+  convertToAction.popupModel.hide();
 
-  questionTypeSelectorModel.popupModel.toggleVisibility();
+  questionTypeSelectorModel.popupModel.show();
   expect(questionTypeSelectorListModel.actions.length).toBe(20);
-  questionTypeSelectorModel.popupModel.toggleVisibility();
+  questionTypeSelectorModel.popupModel.hide();
 
   const q2AdornerModel = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q2"), undefined);
   const convertToAction2 = q2AdornerModel.actionContainer.actions.filter(action => action.id === "convertTo")[0];
@@ -2795,10 +2795,10 @@ test("creator.onActiveTabChanged", (): any => {
   });
   expect(creator.viewType).toEqual("designer");
   creator.makeNewViewActive("test");
-  expect(tabName).toEqual("test");
+  expect(tabName).toEqual("preview");
   expect(plugin).toEqual(creator.getPlugin("test"));
   expect(model).toEqual(plugin.model);
-  expect(creator.activeTab).toEqual("test");
+  expect(creator.activeTab).toEqual("preview");
   creator.makeNewViewActive("logic");
   expect(tabName).toEqual("logic");
   expect(plugin).toEqual(creator.getPlugin("logic"));
@@ -2818,12 +2818,12 @@ test("creator.onActiveTabChaning", (): any => {
   });
   expect(creator.viewType).toEqual("designer");
   creator.makeNewViewActive("test");
-  expect(tabName).toEqual("test");
-  expect(creator.activeTab).toEqual("test");
+  expect(tabName).toEqual("preview");
+  expect(creator.activeTab).toEqual("preview");
   allow = false;
   creator.makeNewViewActive("logic");
   expect(tabName).toEqual("logic");
-  expect(creator.activeTab).toEqual("test");
+  expect(creator.activeTab).toEqual("preview");
 });
 test("active tab disableHide", (): any => {
   const creator = new CreatorTester({
@@ -2872,7 +2872,7 @@ test("update tab content", (): any => {
 
   creator.JSON = {};
   creator.makeNewViewActive("test");
-  expect(creator.viewType).toEqual("test");
+  expect(creator.viewType).toEqual("preview");
   const testPlugin = <TabTestPlugin>creator.getPlugin("test");
   expect(hasQ1(testPlugin.model.survey)).toBeFalsy();
   creator.JSON = newJson;
@@ -3285,7 +3285,7 @@ test("Add new question to Panel and Page", (): any => {
   const selectorModelPage = pageAdornerModel.questionTypeSelectorModel;
   const listModelPage: ListModel = selectorModelPage.popupModel.contentComponentData.model;
   actionPopupViewModel = new PopupDropdownViewModel(selectorModelPage.popupModel); // need for popupModel.onShow
-  selectorModelPage.popupModel.toggleVisibility();
+  selectorModelPage.popupModel.show();
   const rankingItem = listModelPage.actions.filter((item) => item.id == "ranking")[0];
   listModelPage.onItemClick(rankingItem);
 
@@ -3297,7 +3297,7 @@ test("Add new question to Panel and Page", (): any => {
   const selectorModelPage2 = pageAdornerModel2.questionTypeSelectorModel;
   const listModelPage2: ListModel = selectorModelPage2.popupModel.contentComponentData.model;
   actionPopupViewModel = new PopupDropdownViewModel(selectorModelPage2.popupModel); // need for popupModel.onShow
-  selectorModelPage2.popupModel.toggleVisibility();
+  selectorModelPage2.popupModel.show();
   const htmlItem = listModelPage2.actions.filter((item) => item.id == "html")[0];
   listModelPage2.onItemClick(htmlItem);
 
@@ -4572,7 +4572,7 @@ test("New ghost page shouldn't be created if onPageAdding sets allow to false", 
 });
 test("Do not raise error on undefined property in onIsPropertyReadOnlyCallback", (): any => {
   const creator = new CreatorTester();
-  creator.onGetPropertyReadOnly.add((_, options) => { });
+  creator.onPropertyGetReadOnly.add((_, options) => { });
   let counter = 0;
   expect(creator.onIsPropertyReadOnlyCallback(creator.survey, undefined, false, undefined, undefined)).toBeFalsy();
 });

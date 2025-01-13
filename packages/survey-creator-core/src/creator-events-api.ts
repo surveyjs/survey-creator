@@ -15,12 +15,16 @@ export interface ElementDeletingEvent {
    */
   elementType: string;
   /**
+   * Obsolete. Use `options.allow` instead.
+   */
+  allowing?: boolean;
+  /**
    * A Boolean property that you can set to `false` if you want to cancel element deletion.
    */
-  allowing: boolean;
+  allow: boolean;
 }
 
-export interface PropertyGetReadOnlyEvent {
+export interface GetPropertyReadOnlyEvent {
   /**
    * A property whose read-only status you can change.
    */
@@ -30,17 +34,29 @@ export interface PropertyGetReadOnlyEvent {
    */
   parentProperty: JsonObjectProperty;
   /**
-   * A survey element (question, panel, page, or the survey itself) for which you can change the read-only status. 
+   * Obsolete. Use `options.element` instead.
+   * @deprecated
    */
-  obj: Base;
+  obj?: Base;
   /**
-   * A survey element that contains `options.parentProperty`. `options.parentObj` has a value only for nested properties.
+   * Obsolete. Use `options.parentElement` instead.
+   * @deprecated
    */
-  parentObj: Base;
+  parentObj?: Base;
   /**
    * A Boolean value that specifies the property's read-only status.
    */
   readOnly: boolean;
+}
+export interface PropertyGetReadOnlyEvent extends GetPropertyReadOnlyEvent {
+  /**
+   * A survey element (question, panel, page, or the survey itself) for which you can change the read-only status. 
+   */
+  element: Base;
+  /**
+   * A survey element that contains `options.parentProperty`. `options.parentObj` has a value only for nested properties.
+   */
+  parentElement: Base;
 }
 
 export interface ElementGetDisplayNameEvent {
@@ -107,7 +123,11 @@ export interface ElementAllowOperationsEvent {
   /**
    * A survey element (question or panel) for which you can disable user interactions.
    */
-  obj: Base;
+  element: Base;
+  /**
+   * Obsolete. Use `options.element` instead.
+   */
+  obj?: Base;
   /**
    * Allows users to mark the survey element as required.
    */
@@ -131,7 +151,11 @@ export interface ElementAllowOperationsEvent {
   /**
    * Allows users to drag and drop the survey element.
    */
-  allowDragging: boolean;
+  allowDrag: boolean;
+  /**
+   * Obsolete. Use `options.allowDrag` instead.
+   */
+  allowDragging?: boolean;
   /**
    * Allows users to edit survey element properties on the design surface. If you disable this property, users can edit the properties only in the Property Grid.
    */
@@ -146,15 +170,26 @@ export interface ElementAllowOperationsEvent {
   allowShowSettings: boolean | undefined;
 }
 
-export interface ElementGetActionsEvent {
+export interface DefineElementMenuItemsEvent {
+  /**
+   * Obsolete. Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
+   * Obsolete. Use `options.actions` instead.
+   */
+  items?: IAction[];
+}
+
+export interface ElementGetActionsEvent extends DefineElementMenuItemsEvent {
   /**
    * A survey element (question, panel, or page) whose adorners you can customize.
    */
-  obj: Base;
+  element: Base;
   /**
    * An array of adorner actions. You can add, modify, or remove actions from this array.
    */
-  items: IAction[];
+  actions: IAction[];
 }
 export interface PropertyAddingEvent {
   /**
@@ -166,17 +201,34 @@ export interface PropertyAddingEvent {
    */
   parentProperty: JsonObjectProperty;
   /**
-   * A survey element that contains `options.property`: page, panel, question, the survey itself, item value (choice option), matrix column, etc.
+   * Obsolete. Use `options.element` instead.
+   * @deprecated
    */
-  obj: Base;
+  obj?: Base;
   /**
-   * A survey element that contains `options.parentProperty`. `options.parentObj` has a value only for nested properties.
+   * Obsolete. Use `options.parentElement` instead.
+   * @deprecated
    */
-  parentObj: Base;
+  parentObj?: Base;
+  /**
+   * Obsolete. Use `options.show` instead.
+   * @deprecated
+   */
+  canShow?: boolean;
+}
+export interface PropertyShowingEvent extends PropertyAddingEvent {
   /**
    * A Boolean property that you can set to `false` if you do not want to add the property.
    */
-  canShow: boolean;
+  show: boolean;
+  /**
+   * A survey element that contains `options.property`: page, panel, question, the survey itself, item value (choice option), matrix column, etc.
+   */
+  element: Base;
+  /**
+   * A survey element that contains `options.parentProperty`. `options.parentElement` has a value only for nested properties.
+   */
+  parentElement: Base;
 }
 
 export interface PropertyGridSurveyCreatedEvent {
@@ -686,16 +738,28 @@ export interface NotifyEvent {
 
 export interface ElementFocusingEvent {
   /**
-   * An element that is going to be focused.
+   * Obsolete. Use `options.element` instead.
    */
-  newSelectedElement: Base;
+  newSelectedElement?: Base;
+}
+export interface ElementSelectingEvent extends ElementFocusingEvent {
+  /**
+   * An element that is going to be selected.
+   */
+  element: Base;
 }
 
 export interface ElementFocusedEvent {
   /**
-   * The [focused element](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#selectedElement).
+   * Obsolete. Use `options.element` instead.
    */
-  newSelectedElement: Base;
+  newSelectedElement?: Base;
+}
+export interface ElementSelectedEvent extends ElementFocusedEvent {
+  /**
+   * The [selected element](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#selectedElement).
+   */
+  element: Base;
 }
 
 export interface OpenFileChooserEvent {
@@ -920,7 +984,7 @@ export interface CreateCustomMessagePanelEvent {
 
 export interface ActiveTabChangingEvent {
   /**
-   * A tab that is going to become active: `"designer"`, `"test"`, `"theme"`, `"editor"`, `"logic"`, or `"translation"`. 
+   * A tab that is going to become active: `"designer"`, `"preview"`, `"theme"`, `"json"`, `"logic"`, or `"translation"`. 
    */
   tabName: string;
   /**
@@ -931,7 +995,7 @@ export interface ActiveTabChangingEvent {
 
 export interface ActiveTabChangedEvent {
   /**
-   * A tab that has become active: `"designer"`, `"test"`, `"theme"`, `"editor"`, `"logic"`, or `"translation"`.
+   * A tab that has become active: `"designer"`, `"preview"`, `"theme"`, `"json"`, `"logic"`, or `"translation"`.
    */
   tabName: string;
   plugin: ICreatorPlugin;

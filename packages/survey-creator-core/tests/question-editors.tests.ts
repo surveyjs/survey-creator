@@ -44,7 +44,7 @@ test("MatrixCellWrapperViewModel select context", () => {
     selectedElement: undefined,
     selectedProperty: undefined,
     selectElement: undefined,
-    onSelectedElementChanged: new Event()
+    onElementSelected: new Event()
   };
   creator.selectElement = (element: any, property?: string, focus?: boolean) => {
     creator.selectedElement = element;
@@ -91,7 +91,7 @@ test("MatrixCellWrapperViewModel.isSupportCellEditor", () => {
     selectedElement: undefined,
     selectedProperty: undefined,
     selectElement: undefined,
-    onSelectedElementChanged: new Event()
+    onElementSelected: new Event()
   };
   creator.selectElement = (element: any, property?: string, focus?: boolean) => {
     creator.selectedElement = element;
