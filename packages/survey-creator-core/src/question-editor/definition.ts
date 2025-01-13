@@ -562,13 +562,11 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "maskSettings", tab: "mask" },
     ],
     tabs: [
-      { name: "mask", index: 20 },
-      { name: "validators", index: 25 }
+      { name: "mask", index: 20 }
     ]
   },
   "matrixdropdowncolumn@comment": {
-    properties: ["rows", "placeholder", "maxLength"],
-    tabs: [{ name: "validators", index: 25 }]
+    properties: ["rows", "placeholder ", "maxLength"]
   },
   "matrixdropdowncolumn@boolean": {
     properties: [
