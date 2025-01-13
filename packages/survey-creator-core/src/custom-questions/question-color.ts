@@ -3,7 +3,6 @@ import { parseColor } from "../utils/color-utils";
 import { listComponentCss } from "../components/list-theme";
 
 const DEFAULT_COLOR: string = "#000000";
-const DEFAULT_SWATCH_COLOR: string = "#FFFFFF";
 export class QuestionColorModel extends QuestionTextModel {
   @property() allowEmptyValue: boolean = false;
   constructor(name: string) {
@@ -84,10 +83,10 @@ export class QuestionColorModel extends QuestionTextModel {
       .toString();
   }
   public getSwatchStyle(): {[index: string]: string} {
-    return { backgroundColor: this.renderedValue || DEFAULT_SWATCH_COLOR };
+    return { backgroundColor: this.renderedValue };
   }
   public get renderedColorValue() {
-    return this.renderedValue || DEFAULT_SWATCH_COLOR;
+    return this.renderedValue;
   }
   public get isInputTextUpdate(): boolean {
     return false;
