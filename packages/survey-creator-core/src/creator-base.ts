@@ -487,7 +487,8 @@ export class SurveyCreatorModel extends Base
    */
   public onPropertyGetReadOnly: EventBase<SurveyCreatorModel, PropertyGetReadOnlyEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGetReadOnlyEvent>();
   /**
-   * Obsolete
+   * Obsolete. Use the [`onPropertyGetReadOnly`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPropertyGetReadOnly) event instead.
+   * @deprecated
    */
   public onGetPropertyReadOnly: EventBase<SurveyCreatorModel, GetPropertyReadOnlyEvent> = this.onPropertyGetReadOnly;
 
@@ -556,6 +557,10 @@ export class SurveyCreatorModel extends Base
    */
   public onPropertyShowing: EventBase<SurveyCreatorModel, PropertyShowingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyShowingEvent>();
   public onCanShowProperty: EventBase<SurveyCreatorModel, any> = this.onPropertyShowing;
+  /**
+   * Obsolete. Use the [`onPropertyShowing`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPropertyShowing) event instead.
+   * @deprecated
+   */
   public onShowingProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.onPropertyShowing;
   /**
    * Obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
@@ -692,7 +697,7 @@ export class SurveyCreatorModel extends Base
    */
   public onPageGetFooterActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, PageGetFooterActionsEvent>();
   /**
-   * This event is obsolete. Use the [`onPageGetFooterActions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPageGetFooterActions) event instead.
+   * Оbsolete. Use the [`onPageGetFooterActions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPageGetFooterActions) event instead.
    * @deprecated
    */
   public onGetPageActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.onPageGetFooterActions;
@@ -2583,7 +2588,7 @@ export class SurveyCreatorModel extends Base
         delete json.pages;
       }
     }
-    if(this.storeSjsVersion) {
+    if (this.storeSjsVersion) {
       json["sjsVersion"] = SurveySettings.version;
     }
     return json;

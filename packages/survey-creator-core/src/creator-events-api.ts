@@ -34,13 +34,18 @@ export interface GetPropertyReadOnlyEvent {
    */
   parentProperty: JsonObjectProperty;
   /**
-   * Obsolete
+   * Obsolete. Use `options.element` instead.
+   * @deprecated
    */
   obj?: Base;
   /**
-   * Obsolete
+   * Obsolete. Use `options.parentElement` instead.
+   * @deprecated
    */
   parentObj?: Base;
+  /**
+   * A Boolean value that specifies the property's read-only status.
+   */
   readOnly: boolean;
 }
 export interface PropertyGetReadOnlyEvent extends GetPropertyReadOnlyEvent {
@@ -196,15 +201,18 @@ export interface PropertyAddingEvent {
    */
   parentProperty: JsonObjectProperty;
   /**
-   * Obsolete
+   * Obsolete. Use `options.element` instead.
+   * @deprecated
    */
   obj?: Base;
   /**
-   * Obsolete
+   * Obsolete. Use `options.parentElement` instead.
+   * @deprecated
    */
   parentObj?: Base;
   /**
-   * Obsolete
+   * Obsolete. Use `options.show` instead.
+   * @deprecated
    */
   canShow?: boolean;
 }
