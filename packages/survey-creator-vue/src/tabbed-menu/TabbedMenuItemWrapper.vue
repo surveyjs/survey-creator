@@ -25,8 +25,8 @@ onMounted(() => {
   item.updateModeCallback = (mode, callback) => {
     item.mode = mode;
     nextTick(() => callback(mode, root.value as HTMLDivElement));
-    item.afterRender();
   };
+  item.afterRender();
 });
 onUnmounted(() => {
   const item = props.item;
