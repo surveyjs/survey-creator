@@ -532,7 +532,8 @@ export class SurveyCreatorModel extends Base
    */
   public onPropertyGridShowPopup: EventBase<SurveyCreatorModel, PropertyGridShowPopupEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGridShowPopupEvent>();
   /**
-   * Obsolete
+   * Obsolete. Use the [`onPropertyGridShowPopup`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPropertyGridShowPopup) event instead.
+   * @deprecated
    */
   public onPropertyGridShowModal: EventBase<SurveyCreatorModel, PropertyGridShowPopupEvent> = this.onPropertyGridShowPopup;
   public onCanDeleteItem: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
@@ -3396,7 +3397,7 @@ export class SurveyCreatorModel extends Base
     editor: Question,
     popupEditor: any,
     popupModel: PopupBaseViewModel): void {
-    const options = { obj: object, property: property, editor: editor, popupEditor: popupEditor, popupModel: popupModel };
+    const options = { obj: object, element: object, property: property, editor: editor, popupEditor: popupEditor, popupModel: popupModel };
     this.onPropertyGridShowPopup.fire(this, options);
   }
   onCanDeleteItemCallback(

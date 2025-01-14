@@ -81,8 +81,8 @@ export interface ICreatorOptions {
    * @see showLogicTab
    */
   logicAllowTextEditExpressions?: boolean;
-  /*
-   * Obsolete. Use the [`logicAllowTextEditExpressions`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicAllowTextEditExpressions) property instead.
+  /**
+   * Obsolete. Use the[`logicAllowTextEditExpressions`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicAllowTextEditExpressions) property instead.
    * @deprecated
    */
   allowEditExpressionsInTextEditor?: boolean;
@@ -270,7 +270,7 @@ export interface ICreatorOptions {
   maximumRateValues?: number;
 
   /**
-   * Limits the number of items in a logical expression.
+   * Limits the number of items in a logical condition.
    *
    * Default value: -1 (unlimited)
    */
