@@ -17,18 +17,18 @@ svc-page {
   }
 
   .sd-page__num {
-    color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-light);
+    color: var(--ctr-survey-page-header-title-color-placeholder, #00000080);
   }
 
   .svc-panel__placeholder {
     @include lbrDefaultFont;
-    color: var(--ctr-survey-page-placeholder-text-color, $foreground-light);
+    color: var(--ctr-survey-page-placeholder-text-color, #00000080);
   }
 }
 
 .svc-page__content {
   position: relative;
-  border-radius: var(--ctr-survey-page-corner-radius, calcSize(1));
+  border-radius: var(--ctr-survey-page-corner-radius, var(--lbr-corner-radius-x1));
   padding: calcSize(1) calcSize(0) calcSize(3);
 
   box-sizing: border-box;
@@ -55,7 +55,7 @@ svc-page {
 .svc-page__content.svc-page__content--no-header {
   .sd-page {
     margin-top:  calcSize(2);
-    padding-top: var(--ctr-survey-page-content-margin-top-no-header, calcSize(1));
+    padding-top: var(--ctr-survey-page-content-margin-top-no-header, var(--lbr-spacing-x1));
   }
 }
 
@@ -79,7 +79,7 @@ svc-page {
   h4.sd-title {
     .sv-string-editor {
       &[aria-placeholder]:empty:before {
-        color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-light);
+        color: var(--ctr-survey-page-header-title-color-placeholder, #00000080);
       }
     }
   }
@@ -94,7 +94,7 @@ svc-page {
 
   --thm-survey-question-panel-toolbar-button-gap: calc(var(--ctr-survey-question-panel-toolbar-gap) / 2);
   margin: 0 var(--thm-survey-question-panel-toolbar-button-gap, calcSize(0.5));
-  border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, calcSize(0.5));
+  border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, var(--lbr-corner-radius-x05));
   padding: var(--thm-survey-question-panel-toolbar-item-padding-top, calcSize(1)) var(--thm-survey-question-panel-toolbar-item-padding-right, calcSize(1)) var(--thm-survey-question-panel-toolbar-item-padding-bottom, calcSize(1)) var(--thm-survey-question-panel-toolbar-item-padding-left, calcSize(1));
   justify-content: center;
   align-items: center;
@@ -103,18 +103,18 @@ svc-page {
   transition: background-color $creator-transition-duration;
 
   use {
-    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, #19b394ff);
   }
   //hovered and focused state
   &:hover,
   &:focus-visible {
-    background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, $background-dim);
+    background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, #19b3941a);
   }
 
   //pressed state
   &:active,
   &.svc-page-toolbar__item--pressed {
-    background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, $background-dim);
+    background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, #19b3941a);
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
     use {
       fill: black;
@@ -124,7 +124,7 @@ svc-page {
 
   //checked state
   &.svc-survey-element-toolbar__item--active {
-    background-color: var(--ctr-survey-page-toolbar-item-background-color-selected, $secondary-backcolor-semi-light);
+    background-color: var(--ctr-survey-page-toolbar-item-background-color-selected, #19b3941a);
     .svc-survey-element-toolbar-item__title {
       color: var(--ctr-survey-page-toolbar-item-text-color-selected, $foreground);
     }
@@ -164,7 +164,7 @@ svc-page {
 
 .svc-page-toolbar-item__title {
   @include lbrSmallBoldFont;
-  color: var(--ctr-survey-page-toolbar-item-text-color, $foreground);
+  color: var(--ctr-survey-page-toolbar-item-text-color, #000000e6);
 }
 
 .svc-page__content-actions {
@@ -176,15 +176,15 @@ svc-page {
 
 .svc-page__content:focus,
 .svc-hovered.svc-page__content {
-  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-hovered, 2px) var(--ctr-survey-page-border-color-hovered, $secondary-light);
-  background: var(--ctr-survey-page-background-color-hovered, $secondary-backcolor-semi-light);
+  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-hovered, var(--lbr-stroke-x2)) var(--ctr-survey-page-border-color-hovered, #19b39440);
+  background: var(--ctr-survey-page-background-color-hovered, #edf9f7ff);
 }
 
 .svc-page__content--new.svc-page__content--new {
   box-shadow: none;
   background-color: transparent;
-  padding-top: var(--ctr-survey-page-margin-top, calcSize(2));
-  padding-bottom: var(--ctr-survey-page-margin-bottom-new-page, calcSize(9));
+  padding-top: var(--ctr-survey-page-margin-top, var(--lbr-spacing-x2));
+  padding-bottom: var(--ctr-survey-page-margin-bottom-new-page, var(--lbr-spacing-x9));
 }
 
 .svc-page__content--selected,
@@ -197,16 +197,16 @@ svc-page {
     z-index: 1;
 
     .svc-question__drag-element {
-      width: var(--ctr-survey-page-drag-indicator-width, calcSize(3));
-      height: var(--ctr-survey-page-drag-indicator-height, calcSize(2));
+      width: var(--ctr-survey-page-drag-indicator-width, var(--lbr-size-x3));
+      height: var(--ctr-survey-page-drag-indicator-height, var(--lbr-size-x2));
       opacity: var(--ctr-survey-page-drag-indicator-opacity, 0.5);
     }
   }
 }
 
 .svc-page__content--selected.svc-page__content--selected {
-  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-selected, 2px) var(--ctr-survey-page-border-color-selected, $secondary);
-  background: var(--ctr-survey-page-background-color-selected, $secondary-backcolor-semi-light);
+  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-selected, var(--lbr-stroke-x2)) var(--ctr-survey-page-border-color-selected, #19b394ff);
+  background: var(--ctr-survey-page-background-color-selected, #edf9f7ff);
 }
 
 .svc-page__content--animation-running {
@@ -269,8 +269,8 @@ svc-page {
     &.svc-page__content--selected {
       box-shadow: 0 0 0 2px inset $secondary;
 
-      box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-selected, $secondary);
-      background: var(--ctr-survey-page-background-color-selected, $secondary-backcolor-semi-light);
+      box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-selected, #19b394ff);
+      background: var(--ctr-survey-page-background-color-selected, #edf9f7ff);
 
       .svc-page__content-actions {
         display: block;
@@ -303,19 +303,19 @@ svc-page {
 
 .svc-add-new-item-button__text {
   @include lbrDefaultBoldFont;
-  color: var(--ctr-button-text-color, $primary);
+  color: var(--ctr-button-text-color, #19b394ff);
   text-align: center;
 }
 
 .svc-element__add-new-question {
   -webkit-tap-highlight-color: transparent;
   height: auto;
-  padding: var(--ctr-surface-button-padding-vertical, calcSize(2)) var(--ctr-surface-button-padding-horizontal-contextual-button, calcSize(10));
-  border-radius: var(--ctr-surface-button-corner-radius, calcSize(0.5));
+  padding: var(--ctr-surface-button-padding-vertical, var(--lbr-spacing-x2)) var(--ctr-surface-button-padding-horizontal-contextual-button, var(--lbr-spacing-x10));
+  border-radius: var(--ctr-surface-button-corner-radius, var(--lbr-corner-radius-x05));
 }
 
 .svc-element__add-new-question:focus {
-  box-shadow: 0 0 0 var(--ctr-button-border-width-focused, 2px) var(--ctr-button-border-color-focused, $primary);
+  box-shadow: 0 0 0 var(--ctr-button-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-button-border-color-focused, #19b394ff);
 }
 
 .svc-element__question-type-selector {
@@ -324,41 +324,41 @@ svc-page {
 
   appearance: none;
   display: flex;
-  padding: var(--ctr-surface-button-contextual-button-padding-top, calcSize(1)) var(--ctr-surface-button-contextual-button-padding-right, calcSize(1)) var(--ctr-surface-button-contextual-button-padding-bottom, calcSize(1)) var(--ctr-surface-button-contextual-button-padding-left, calcSize(1));
-  border-radius: var(--ctr-surface-button-contextual-button-corner-radius, calcSize(0.5));
+  padding: var(--ctr-surface-button-contextual-button-padding-top, var(--lbr-spacing-x1)) var(--ctr-surface-button-contextual-button-padding-right, var(--lbr-spacing-x1)) var(--ctr-surface-button-contextual-button-padding-bottom, var(--lbr-spacing-x1)) var(--ctr-surface-button-contextual-button-padding-left, var(--lbr-spacing-x1));
+  border-radius: var(--ctr-surface-button-contextual-button-corner-radius, var(--lbr-corner-radius-x05));
   box-sizing: border-box;
   border: none;
   background: transparent;
   cursor: pointer;
 
-  margin: var(--ctr-surface-button-contextual-button-margin-vertical, calcSize(1)) var(--ctr-surface-button-contextual-button-margin-horizontal, calcSize(1));
+  margin: var(--ctr-surface-button-contextual-button-margin-vertical, var(--lbr-spacing-x1)) var(--ctr-surface-button-contextual-button-margin-horizontal, var(--lbr-spacing-x1));
   outline: none;
   transition: background-color $creator-transition-duration;
 
   &:hover {
-    background-color: var(--ctr-button-contextual-button-background-color-hovered, $background-dim);
+    background-color: var(--ctr-button-contextual-button-background-color-hovered, #19b3941a);
   }
 
   &:focus {
-    background: var(--ctr-button-contextual-button-background-color-focused, $primary-light);
+    background: var(--ctr-button-contextual-button-background-color-focused, #19b3941a);
   }
 }
 
 .svc-element__question-type-selector-icon {
-  width: var(--ctr-surface-button-contextual-button-icon-width, calcSize(3));
-  height: var(--ctr-surface-button-contextual-button-icon-height, calcSize(3));
+  width: var(--ctr-surface-button-contextual-button-icon-width, var(--lbr-size-x3));
+  height: var(--ctr-surface-button-contextual-button-icon-height, var(--lbr-size-x3));
   display: flex;
   align-items: center;
 
   .sv-svg-icon {
-    width: var(--ctr-surface-button-contextual-button-icon-width, calcSize(3));
-    height: var(--ctr-surface-button-contextual-button-icon-height, calcSize(3));
+    width: var(--ctr-surface-button-contextual-button-icon-width, var(--lbr-size-x3));
+    height: var(--ctr-surface-button-contextual-button-icon-height, var(--lbr-size-x3));
     display: flex;
     align-items: center;
   }
 
   use {
-    fill: var(--ctr-button-contextual-button-icon-color, $foreground-light);
+    fill: var(--ctr-button-contextual-button-icon-color, #00000080);
   }
 }
 

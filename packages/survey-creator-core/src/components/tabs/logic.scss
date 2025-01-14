@@ -12,14 +12,14 @@
 }
 
 .sl-table__cell.st-table__cell--actions:first-of-type .sv-action-bar {
-  margin-top: var(--ctr-collapse-button-margin-top, calcSize(-0.5));
-  padding-right: var(--ctr-collapse-button-margin-right, calcSize(4));
+  margin-top: var(--ctr-collapse-button-margin-top, var(--sjs-spacing-x05n));
+  padding-right: var(--ctr-collapse-button-margin-right, var(--sjs-spacing-x2));
 }
 
 .sl-table .sl-table__detail-button.sl-table__detail-button {
   box-sizing: border-box;
-  border-radius: var(--ctr-collapse-button-corner-radius, calcSize(12.5));
-  padding: var(--ctr-collapse-button-padding, calcSize(1.5));
+  border-radius: var(--ctr-collapse-button-corner-radius, var(--sjs-corner-radius-x1));
+  padding: var(--ctr-collapse-button-padding, var(--sjs-spacing-x150));
   transition: background-color $creator-transition-duration;
 
   &:focus:enabled {
@@ -30,48 +30,48 @@
   }
   &:hover:enabled,
   &.sv-focused--by-key.sv-focused--by-key {
-    background-color: var(--ctr-collapse-button-background-color-hovered, $primary-light);
+    background-color: var(--ctr-collapse-button-background-color-hovered, #19b3941a);
     outline: none;
 
     use {
-      fill: var(--ctr-collapse-button-icon-color-hovered, $primary);
+      fill: var(--ctr-collapse-button-icon-color-hovered, #000000bf);
     }
   }
   .sv-action-bar-item__icon {
-    width: var(--ctr-collapse-button-icon-width, calcSize(3));
-    height: var(--ctr-collapse-button-icon-height, calcSize(3));
+    width: var(--ctr-collapse-button-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-collapse-button-icon-height, var(--sjs-font-size-x3));
   }
 }
 
 .sl-table__remove-button .sv-action-bar-item {
-  padding: var(--ctr-expression-item-padding-top, calcSize(1)) var(--ctr-expression-item-padding-right-icon-only, calcSize(1)) var(--ctr-expression-item-padding-bottom, calcSize(1)) var(--ctr-expression-item-padding-left-icon-only, calcSize(1));
+  padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-right-icon-only, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-left-icon-only, var(--sjs-spacing-x1));
   cursor: pointer;
   border: none;
-  border-radius: var(--ctr-expression-item-corner-radius, calcSize(12.5));
+  border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
   &:focus:enabled {
     background-color: transparent;
   }
   use {
-    fill: var(--ctr-expression-item-icon-color, $red);
+    fill: var(--ctr-expression-item-icon-color, #e50a3eff);
   }
   &:hover:enabled,
   &.sv-focused--by-key.sv-focused--by-key  {
-    background-color: var(--ctr-expression-item-background-color-remove-button-hovered, $red-light);
+    background-color: var(--ctr-expression-item-background-color-remove-button-hovered, #e50a3e1a);
     outline: none;
 
     use {
-      fill: var(--ctr-expression-item-icon-color, $red);
+      fill: var(--ctr-expression-item-icon-color, #e50a3eff);
     }
   }
   .sv-action-bar-item__icon {
-    width: var(--ctr-expression-item-icon-width, 24px);
-    height: var(--ctr-expression-item-icon-height, 24px);
+    width: var(--ctr-expression-item-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-expression-item-icon-height, var(--sjs-font-size-x3));
   }
 }
 
 .sl-table__remove-button .sv-action-bar-item__icon {
-  width: var(--ctr-survey-action-button-icon-width, calcSize(3));
-  height: var(--ctr-survey-action-button-icon-height, calcSize(3));
+  width: var(--ctr-survey-action-button-icon-width, var(--lbr-size-x3));
+  height: var(--ctr-survey-action-button-icon-height, var(--lbr-size-x3));
 }
 
 .sl-table__cell .sv-action-bar-item__icon {
@@ -88,7 +88,7 @@
   color: $secondary;
 }
 .sl-table .svc-action-button {
-  padding: var(--ctr-survey-page-header-padding-vertical-with-button, calcSize(0.5)) 0px;
+  padding: var(--ctr-survey-page-header-padding-vertical-with-button, var(--sjs-spacing-x05)) 0px;
   margin-left: 0;
 }
 
@@ -199,13 +199,13 @@
   button.sl-panel__done-button {
     @include ctrDefaultBoldFont;
     width: auto;
-    margin: var(--ctr-expression-rows-gap, calcSize(2)) 0 0 0;
-    color: var(--ctr-expression-item-text-color-button, $primary);
-    background-color: var(--ctr-expression-item-background-color-button, $primary-light);
-    border-radius: var(--ctr-expression-item-corner-radius, calcSize(12.5));
-    padding: var(--ctr-expression-item-padding-top, calcSize(1))
-      var(--ctr-expression-item-padding-right-button, calcSize(4))
-      var(--ctr-expression-item-padding-bottom, calcSize(1)) var(--ctr-expression-item-padding-left-button, calcSize(4));
+    margin: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2)) 0 0 0;
+    color: var(--ctr-expression-item-text-color-button, #19b394ff);
+    background-color: var(--ctr-expression-item-background-color-button, #19b3941a);
+    border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
+    padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1))
+      var(--ctr-expression-item-padding-right-button, var(--sjs-spacing-x4))
+      var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-left-button, var(--sjs-spacing-x4));
 
     display: flex;
     align-items: center;
@@ -218,8 +218,8 @@
   }
 
   button:hover:enabled {
-    background-color: var(--ctr-expression-item-background-color-button-hovered, $primary);
-    color: var(--ctr-expression-item-text-color-button-hovered, $primary-foreground);
+    background-color: var(--ctr-expression-item-background-color-button-hovered, #19b394ff);
+    color: var(--ctr-expression-item-text-color-button-hovered, #ffffffff);
   }
 
   .sv-action-bar-item__title {
@@ -239,7 +239,7 @@
 .sl-question {
   display: flex;
   align-items: center;
-  margin-top: var(--ctr-expression-rows-gap, calcSize(2));
+  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
 }
 
 .sl-row {
@@ -259,7 +259,7 @@
 }
 
 .sl-question__header--left {
-  margin-right: var(--ctr-expression-items-gap, calcSize(1));
+  margin-right: var(--ctr-expression-items-gap, var(--sjs-spacing-x1));
 }
 
 .sl-row {
@@ -272,7 +272,7 @@
 
 .sl-question__title {
   @include ctrDefaultBoldFont;
-  color: var(--ctr-expression-item-text-color-function, $foreground);
+  color: var(--ctr-expression-item-text-color-function, #000000e6);
   margin: 0;
 
   span+span {
@@ -281,21 +281,21 @@
 }
 
 .sl-row--multiple .sl-question {
-  padding-right: var(--ctr-expression-items-gap, calcSize(1));
+  padding-right: var(--ctr-expression-items-gap, var(--sjs-spacing-x1));
 }
 .svc-logic-question-text-editor {
-  margin-top: var(--ctr-expression-rows-gap, calcSize(2));
+  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
 }
 .svc-logic-question-value {
   --sd-base-padding: calc(5 * #{$base-unit});
   --sd-base-vertical-padding: calc(4 * #{$base-unit});
   --sd-page-vertical-padding: calc(3 * #{$base-unit});
   padding-right: calcSize(5);
-  margin-top: var(--ctr-expression-rows-gap, calcSize(2));
+  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
 }
 
 .svc-logic_trigger-editor {
-  margin-top: var(--ctr-expression-rows-gap, calcSize(2));
+  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
 }
 
 .svc-logic_trigger-editor .svc-logic-question-value {

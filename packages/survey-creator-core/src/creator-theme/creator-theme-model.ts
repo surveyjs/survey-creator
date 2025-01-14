@@ -15,7 +15,7 @@ Object.keys(Themes || {}).forEach(themeName => {
 });
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
-  static defautlThemeName = "sc2020";
+  static defautlThemeName = "default-light";
 
   initialCssVariables: { [index: string]: string } = {};
   themeCssVariablesChanges?: { [index: string]: string } = {};

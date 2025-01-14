@@ -2,7 +2,7 @@
 
 .svc-link__button {
   @include ctrDefaultBoldFont;
-  border-radius: var(--ctr-actionbar-button-corner-radius, calcSize(12.5));
+  border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
 }
 
 .svc-question-link__set-button {

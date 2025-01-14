@@ -56,11 +56,11 @@ svc-question {
   @include defaultActionButtonSettings;
   --thm-survey-question-panel-toolbar-button-gap: calc(var(--ctr-survey-question-panel-toolbar-gap) / 2);
   margin: 0 var(--thm-survey-question-panel-toolbar-button-gap, calcSize(0.5));
-  border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, calcSize(0.25));
-  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, calcSize(0.5))
-           var(--ctr-survey-question-panel-toolbar-item-padding-right, calcSize(0.5))
-           var(--ctr-survey-question-panel-toolbar-item-padding-bottom, calcSize(0.5))
-           var(--ctr-survey-question-panel-toolbar-item-padding-left, calcSize(0.5));
+  border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, var(--lbr-corner-radius-x075));
+  padding: var(--ctr-survey-question-panel-toolbar-item-padding-top, var(--lbr-spacing-x05))
+           var(--ctr-survey-question-panel-toolbar-item-padding-right, var(--lbr-spacing-x05))
+           var(--ctr-survey-question-panel-toolbar-item-padding-bottom, var(--lbr-spacing-x05))
+           var(--ctr-survey-question-panel-toolbar-item-padding-left, var(--lbr-spacing-x05));
 
   justify-content: center;
   align-items: center;
@@ -68,19 +68,19 @@ svc-question {
   background-color: transparent;
   transition: background $creator-transition-duration, opacity $creator-transition-duration;
   use {
-    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, $secondary);
+    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, #19b394ff);
   }
   //hovered and focused state
   &:hover,
   &:focus-visible {
-    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, #19b3941a);
   }
 
   //pressed state
   &:active,
   &.svc-survey-element-toolbar__item--pressed {
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
-    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-pressed, $background-dim);
+    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-pressed, #f5f5f5ff);
     use {
       fill: black;
       opacity: 0.45;
@@ -89,12 +89,12 @@ svc-question {
 
   //checked state
   &.svc-survey-element-toolbar__item--active {
-    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, $secondary-backcolor-semi-light);
+    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, #19b3941a);
     .svc-survey-element-toolbar-item__title {
-      color: var(--ctr-survey-question-panel-toolbar-item-text-color-selected, $foreground);
+      color: var(--ctr-survey-question-panel-toolbar-item-text-color-selected, #14a48bff);
     }
     use {
-      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color-selected, $secondary);
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color-selected, #19b394ff);
     }
   }
 
@@ -105,8 +105,8 @@ svc-question {
 }
 
 .svc-survey-element-toolbar__item--with-text {
-  padding-inline-end: var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text, calcSize(1));
-  gap: var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(0.5));
+  padding-inline-end: var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text, var(--lbr-spacing-x1));
+  gap: var(--ctr-survey-question-panel-toolbar-item-gap, var(--lbr-spacing-x05));
 }
 
 .svc-survey-element-toolbar .sv-action:last-of-type .svc-survey-element-toolbar__item {
@@ -118,17 +118,17 @@ svc-question {
 }
 
 .svc-dropdown-action--convertTo .svc-survey-element-toolbar__item--with-text {
-  padding-inline-end: var(--ctr-survey-question-panel-toolbar-item-padding-right, 4px);
-  padding-inline-start: var(--ctr-survey-question-panel-toolbar-item-padding-left-with-text, calcSize(1));
+  padding-inline-end: var(--ctr-survey-question-panel-toolbar-item-padding-right, var(--lbr-spacing-x05));
+  padding-inline-start: var(--ctr-survey-question-panel-toolbar-item-padding-left-with-text, var(--lbr-spacing-x1));
   flex-direction: row-reverse;
-  gap: var(--ctr-survey-question-panel-toolbar-item-gap, calcSize(0.5));
+  gap: var(--ctr-survey-question-panel-toolbar-item-gap, var(--lbr-spacing-x05));
 }
 
 .svc-dropdown-action--convertTo .svc-survey-element-toolbar__item--icon {
   .svc-survey-element-toolbar-item__icon {
     padding: 0;
-    width: var(--ctr-survey-question-panel-toolbar-item-icon-container-width, calcSize(3));
-    height: var(--ctr-survey-question-panel-toolbar-item-icon-container-height, calcSize(3));
+    width: var(--ctr-survey-question-panel-toolbar-item-icon-container-width, var(--lbr-size-x3));
+    height: var(--ctr-survey-question-panel-toolbar-item-icon-container-height, var(--lbr-size-x3));
     box-sizing: border-box;
     display: block;
   }
@@ -139,17 +139,17 @@ svc-question {
 .svc-survey-element-toolbar__dots-item .sv-svg-icon.sv-action-bar-item__icon {
   box-sizing: border-box;
   display: block;
-  padding: var(--ctr-survey-question-panel-toolbar-item-icon-padding-top, calcSize(0.5)) 
-           var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, calcSize(0.5)) 
-           var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom, calcSize(0.5)) 
-           var(--ctr-survey-question-panel-toolbar-item-icon-padding-left, calcSize(0.5));
-  width: var(--ctr-survey-question-panel-toolbar-item-icon-container-width, calcSize(3));
-  height: var(--ctr-survey-question-panel-toolbar-item-icon-container-height, calcSize(3));
+  padding: var(--ctr-survey-question-panel-toolbar-item-icon-padding-top, var(--lbr-spacing-x05)) 
+           var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05)) 
+           var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom, var(--lbr-spacing-x05)) 
+           var(--ctr-survey-question-panel-toolbar-item-icon-padding-left, var(--lbr-spacing-x05));
+  width: var(--ctr-survey-question-panel-toolbar-item-icon-container-width, var(--lbr-size-x3));
+  height: var(--ctr-survey-question-panel-toolbar-item-icon-container-height, var(--lbr-size-x3));
 }
 
 .svc-survey-element-toolbar-item__title {
   @include lbrSmallBoldFont;
-  color: var(--ctr-survey-question-panel-toolbar-item-text-color, $foreground);
+  color: var(--ctr-survey-question-panel-toolbar-item-text-color, #000000e6);
   transition: color $creator-transition-duration;
 }
 
@@ -184,13 +184,13 @@ svc-question {
 
   box-sizing: border-box;
 
-  padding: var(--lbr-question-panel-padding-top, calcSize(4)) var(--lbr-question-panel-padding-right, calcSize(5))
-    var(--ctr-survey-question-panel-padding-bottom-selected, calcSize(2)) var(--lbr-question-panel-padding-left, calcSize(5));
-  border-radius: var(--lbr-question-panel-corner-radius, calcSize(0.5));
-  background: var(--lbr-question-panel-background-color, $background);
-  box-shadow: var(--lbr-question-panel-shadow-offset-x, 0px) var(--lbr-question-panel-shadow-offset-y, 1px)
-    var(--lbr-question-panel-shadow-blur, 2px) var(--lbr-question-panel-shadow-spread, 0px)
-    var(--lbr-question-panel-shadow-color, rgba(0, 0, 0, 0.15));
+  padding: var(--lbr-question-panel-padding-top, var(--lbr-spacing-x4)) var(--lbr-question-panel-padding-right, var(--lbr-spacing-x5))
+    var(--ctr-survey-question-panel-padding-bottom-selected, var(--lbr-spacing-x2)) var(--lbr-question-panel-padding-left, var(--lbr-spacing-x5));
+  border-radius: var(--lbr-question-panel-corner-radius, var(--lbr-corner-radius-x05));
+  background: var(--lbr-question-panel-background-color, #ffffffff);
+  box-shadow: var(--lbr-question-panel-shadow-offset-x, var(--lbr-shadow-small-offset-x)) var(--lbr-question-panel-shadow-offset-y, var(--lbr-shadow-small-offset-y))
+    var(--lbr-question-panel-shadow-blur, var(--lbr-shadow-small-blur)) var(--lbr-question-panel-shadow-spread, var(--lbr-shadow-small-spread))
+    var(--lbr-question-panel-shadow-color, var(--lbr-shadow-small-color));
 
   outline: none;
   transition:
@@ -335,7 +335,7 @@ svc-question {
 
 .svc-panel__placeholder {
   @include lbrDefaultFont;
-  color: var(--ctr-survey-placeholder-text-color, $foreground-light);
+  color: var(--ctr-survey-placeholder-text-color, #00000080);
   text-wrap: wrap;
   text-align: center;
 }
@@ -447,13 +447,13 @@ svc-question {
 
 .svc-question__content:focus,
 .svc-hovered > .svc-question__content {
-  box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-hovered, 2px)
-    var(--ctr-survey-question-panel-border-color-hovered, $secondary-light);
+  box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-hovered, var(--lbr-stroke-x2))
+    var(--ctr-survey-question-panel-border-color-hovered, #19b39440);
 }
 
 .svc-question__content--selected:not(.svc-question__content--dragged) {
-  box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-selected, 2px)
-    var(--ctr-survey-question-panel-border-color-selected, $secondary);
+  box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-selected, var(--lbr-stroke-x2))
+    var(--ctr-survey-question-panel-border-color-selected, #19b394ff);
 }
 
 .svc-question__content--collapsed-drag-over-inside:not(.svc-question__content--dragged) {
@@ -567,14 +567,15 @@ svc-question {
 
 .svc-dragged-element-shortcut {
   //min-width: 100px;
-  border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
-  background-color: var(--ctr-toolbox-item-background-color-floating, $background);
-  color: var(--ctr-toolbox-item-text-color-hovered, $foreground);
-  padding: var(--ctr-toolbox-item-padding-top-submenu, calcSize(1.5)) var(--ctr-toolbox-item-padding-right, calcSize(2)) var(--ctr-toolbox-item-padding-bottom-submenu, calcSize(1.5)) var(--ctr-toolbox-item-padding-left-submenu, calcSize(2));
+  border-radius: var(--ctr-toolbox-item-corner-radius, var(--sjs-corner-radius-x1));
+  background-color: var(--ctr-toolbox-item-background-color-floating, #ffffffff);
+  color: var(--ctr-toolbox-item-text-color-hovered, #000000e6);
+  padding: var(--ctr-toolbox-item-padding-top-submenu, var(--sjs-spacing-x150)) var(--ctr-toolbox-item-padding-right, var(--sjs-spacing-x2)) var(--ctr-toolbox-item-padding-bottom-submenu, var(--sjs-spacing-x150)) var(--ctr-toolbox-item-padding-left-submenu, var(--sjs-spacing-x2));
   cursor: grabbing;
   position: absolute;
   z-index: 1000;
-  box-shadow: var(--ctr-toolbox-item-shadow-floating-1-offset-x, 0px) var(--ctr-toolbox-item-shadow-floating-1-offset-y, 8px) var(--ctr-toolbox-item-shadow-floating-1-blur, 16px) var(--ctr-toolbox-item-shadow-floating-1-spread, 0px) var(--ctr-toolbox-item-shadow-floating-1-color, rgba(0, 76, 68, 0.10)), var(--ctr-toolbox-item-shadow-floating-2-offset-x, 0px) var(--ctr-toolbox-item-shadow-floating-2-offset-y, 16px) var(--ctr-toolbox-item-shadow-floating-2-blur, 32px) var(--ctr-toolbox-item-shadow-floating-2-spread, 0px) var(--ctr-toolbox-item-shadow-floating-2-color, var(--ctr-shadow-large-color, rgba(0, 0, 0, 0.10)));
+  box-shadow: var(--ctr-toolbox-item-shadow-floating-1-offset-x, var(--ctr-shadow-medium-offset-x)) var(--ctr-toolbox-item-shadow-floating-1-offset-y, var(--ctr-shadow-medium-offset-y)) var(--ctr-toolbox-item-shadow-floating-1-blur, var(--ctr-shadow-medium-blur)) var(--ctr-toolbox-item-shadow-floating-1-spread, var(--ctr-shadow-medium-spread)) var(--ctr-toolbox-item-shadow-floating-1-color, #004c441a), 
+  var(--ctr-toolbox-item-shadow-floating-2-offset-x, var(--ctr-shadow-large-offset-x)) var(--ctr-toolbox-item-shadow-floating-2-offset-y, var(--ctr-shadow-large-offset-y)) var(--ctr-toolbox-item-shadow-floating-2-blur, var(--ctr-shadow-large-blur)) var(--ctr-toolbox-item-shadow-floating-2-spread, var(--ctr-shadow-large-spread)) var(--ctr-toolbox-item-shadow-floating-2-color, #004c441a);
   @include disableUserSelect;
   //max-width: 500px;
   overflow: hidden;
@@ -584,11 +585,11 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut .sv-svg-icon use {
-  fill: var(--ctr-toolbox-item-icon-color-hovered, $primary);
+  fill: var(--ctr-toolbox-item-icon-color-hovered, #19b394ff);
 }
 
 .svc-dragged-element-shortcut--selected {
-  border: 2px solid var(--ctr-toolbox-item-border-color-floating, $secondary);
+  border: 2px solid var(--ctr-toolbox-item-border-color-floating, #19b394ff);
 }
 
 .svc-dragged-element-shortcut__text {
@@ -596,9 +597,9 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut--has-icon {
-  padding: var(--ctr-toolbox-item-padding-top, calcSize(1)) var(--ctr-toolbox-item-padding-right, calcSize(3.5)) var(--ctr-toolbox-item-padding-bottom, calcSize(1)) var(--ctr-toolbox-item-padding-left, calcSize(1.5));
+  padding: var(--ctr-toolbox-item-padding-top, var(--sjs-spacing-x1)) var(--ctr-toolbox-item-padding-right, var(--sjs-spacing-x2)) var(--ctr-toolbox-item-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-toolbox-item-padding-left, var(--sjs-spacing-x150));
   display: flex;
-  gap: var(--ctr-toolbox-item-gap, calcSize(1));
+  gap: var(--ctr-toolbox-item-gap, var(--sjs-spacing-x1));
   justify-content: center;
   align-items: center;
 
@@ -611,8 +612,8 @@ svc-question {
   display: flex;
 
   svg {
-    width: var(--ctr-toolbox-item-icon-width, calcSize(3));
-    height: var(--ctr-toolbox-item-icon-height, calcSize(3));
+    width: var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-toolbox-item-icon-height, var(--sjs-font-size-x3));
   }
 }
 
@@ -937,11 +938,11 @@ svc-question,
   width: 100%;
   opacity: 0;
   transition: opacity $creator-transition-duration;
-  width: var(--ctr-survey-question-panel-drag-area-drag-indicator-width, calcSize(3));
-  height: var(--ctr-survey-question-panel-drag-area-drag-indicator-height, calcSize(2));
+  width: var(--ctr-survey-question-panel-drag-area-drag-indicator-width, var(--lbr-size-x3));
+  height: var(--ctr-survey-question-panel-drag-area-drag-indicator-height, var(--lbr-size-x2));
 
   use {
-    fill: var(--ctr-survey-question-panel-drag-area-drag-indicator-color, $foreground-light);
+    fill: var(--ctr-survey-question-panel-drag-area-drag-indicator-color, #00000080);
   }
 }
 
@@ -964,17 +965,17 @@ svc-question,
   .svc-question__content {
     border-radius: 0;
     box-shadow: none;
-    outline: var(--ctr-survey-question-panel-border-width-nested, 1px) dashed var(--ctr-survey-question-panel-border-color-nested, $border);
-    outline-offset: calc(-1 * var(--ctr-survey-question-panel-border-width-nested, 1px));
+    outline: var(--ctr-survey-question-panel-border-width-nested, var(--lbr-stroke-x1)) dashed var(--ctr-survey-question-panel-border-color-nested, #d4d4d4ff);
+    outline-offset: calc(-1 * var(--ctr-survey-question-panel-border-width-nested, var(--lbr-stroke-x1)));
   }
 
   .svc-hovered > .svc-question__content:not(.svc-question__content--dragged) {
-    box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-hovered, 2px) var(--ctr-survey-question-panel-border-color-hovered, $secondary-light) inset;
+    box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-hovered, var(--lbr-stroke-x2)) var(--ctr-survey-question-panel-border-color-hovered, #19b39440) inset;
     outline: none;
   }
 
   .svc-question__content.svc-question__content--selected:not(.svc-question__content--dragged) {
-    box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-selected, 2px) var(--ctr-survey-question-panel-border-color-selected, $secondary) inset;
+    box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-selected, var(--lbr-stroke-x2)) var(--ctr-survey-question-panel-border-color-selected, #19b394ff) inset;
     outline: none;
   }
 }
@@ -1057,7 +1058,7 @@ svc-question,
   justify-content: center;
 
   .svc-element__add-new-question {
-    margin-top: var(--ctr-survey-panel-add-button-margin-top, calcSize(2));
+    margin-top: var(--ctr-survey-panel-add-button-margin-top, var(--lbr-spacing-x1));
   }
 
   .svc-element__add-new-question-icon {
@@ -1080,15 +1081,15 @@ svc-question,
 .svc-panel__add-new-question,
 .svc-panel__add-new-question-wrapper .svc-element__add-new-question {
   display: flex;
-  margin-top: var(--ctr-survey-placeholder-gap, calcSize(2));
+  margin-top: var(--ctr-survey-placeholder-gap, var(--lbr-spacing-x05));
   margin-left: 0;
   margin-right: 0;
   width: auto;
-  padding: var(--ctr-survey-action-button-padding-top, calcSize(1))
-    var(--ctr-survey-action-button-padding-right, calcSize(5))
-    var(--ctr-survey-action-button-padding-bottom, calcSize(1))
-    var(--ctr-survey-action-button-padding-left, calcSize(5));
-  border-radius: var(--ctr-survey-action-button-corner-radius, 1024px);
+  padding: var(--ctr-survey-action-button-padding-top, var(--lbr-spacing-x1))
+    var(--ctr-survey-action-button-padding-right, var(--lbr-spacing-x3))
+    var(--ctr-survey-action-button-padding-bottom, var(--lbr-spacing-x1))
+    var(--ctr-survey-action-button-padding-left, var(--lbr-spacing-x3));
+  border-radius: var(--ctr-survey-action-button-corner-radius, var(--lbr-corner-radius-x1));
   justify-content: center;
   align-items: center;
 
@@ -1109,7 +1110,7 @@ svc-question,
 
   .svc-add-new-item-button__text {
     @include lbrDefaultBoldFont;
-    color: var(--ctr-survey-action-button-text-color-positive, $primary);
+    color: var(--ctr-survey-action-button-text-color-positive, #19b394ff);
     text-wrap: nowrap;
   }
 }
@@ -1155,8 +1156,8 @@ svc-question,
   .svc-panel__add-new-question-container {
     .svc-panel__add-new-question-icon {
       display: block;
-      width: var(--ctr-button-contextual-button-icon-width, calcSize(3));
-      height: var(--ctr-button-contextual-button-icon-height, calcSize(3));
+      width: var(--ctr-button-contextual-button-icon-width, var(--sjs-font-size-x3));
+      height: var(--ctr-button-contextual-button-icon-height, var(--sjs-font-size-x3));
     }
 
     .svc-element__question-type-selector {
@@ -1326,14 +1327,14 @@ svc-question,
 .svc-survey-element-top-toolbar__item {
   @include defaultActionButtonSettings;
   padding: 0;
-  border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, 2px);
+  border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, var(--lbr-corner-radius-x075));
   opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-muted, 0.5);
   background-color: transparent;
 
   &:hover,
   &:focus-visible {
     opacity: initial;
-    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, $background-dim);
+    background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, #19b3941a);
   }
 
   use {

@@ -7,7 +7,7 @@
 .svc-flex-row {
   display: flex;
   flex-direction: row;
-  background: var(--ctr-surface-background-color, $background-dim);
+  background: var(--ctr-surface-background-color, #edf9f7ff);
 }
 
 .svc-full-container {
@@ -57,21 +57,21 @@
 .sv-action-bar--small-size-mode .sv-action-bar-item {
   @include ctrSmallBoldFont;
   align-items: center;
-  border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, 2px);
+  border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, var(--lbr-corner-radius-x075));
 }
 
 .svc-top-bar {
   display: flex;
-  background: var(--ctr-menu-item-background-color, $background);
+  background: var(--ctr-menu-item-background-color, #ffffffff);
   box-sizing: border-box;
-  box-shadow: inset 0px -1px 0px var(--ctr-menu-border-color, $border);
+  box-shadow: inset 0px -1px 0px var(--ctr-menu-border-color, #d4d4d4ff);
 
   .svc-toolbar-wrapper {
     flex: 0 0 auto;
     display: flex;
 
     .sv-action-bar {
-      padding: var(--ctr-menu-toolbar-padding-vertical, 0) var(--ctr-menu-toolbar-padding-horizontal, calcSize(2));
+      padding: var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150)) var(--ctr-menu-toolbar-padding-horizontal, var(--sjs-spacing-x2));
       justify-content: flex-end;
     }
 
@@ -87,53 +87,53 @@
 
       display: inline-block;
       margin: 0;
-      margin-inline-start: var(--ctr-menu-toolbar-gap, calcSize(2));
+      margin-inline-start: var(--ctr-menu-toolbar-gap, var(--sjs-spacing-x2));
       height: var(--thm-menu-toolbar-button-height, calcSize(5));
     }
 
     .sv-action {
       .sv-action-bar-item {
         margin: 0;
-        padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1))
-          var(--ctr-menu-toolbar-button-padding-right, calcSize(1))
-          var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1))
-          var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
+        padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
+          var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
+          var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
+          var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
       }
       .sv-action-bar-item--active {
-        background: var(--ctr-menu-toolbar-button-background-color-selected, transparent);
+        background: var(--ctr-menu-toolbar-button-background-color-selected, #19b3941a);
       }
     }
     .sv-action:not(.sv-action--hidden) ~ .sv-action:not(.sv-action--hidden) {
       .sv-action-bar-item {
-         margin-inline-start: var(--ctr-menu-toolbar-gap, calcSize(2))
+         margin-inline-start: var(--ctr-menu-toolbar-gap, var(--sjs-spacing-x2))
       }
     }
 
   }
 
   .sv-action-bar-separator {
-    background-color: var(--ctr-separator-color, $border);
+    background-color: var(--ctr-separator-color, #d4d4d4ff);
   }
 
   .sv-action-bar-item {
     @include ctrDefaultFont;
-    border-radius: var(--ctr-menu-toolbar-button-corner-radius, 2px);
+    border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
     background-color: transparent;
-    color: var(--ctr-menu-toolbar-button-text-color, $foreground);
+    color: var(--ctr-menu-toolbar-button-text-color, #000000e6);
     transition: background-color $creator-transition-duration;
     height: auto;
 
     //hovered and focused state
     &:hover,
     &:focus {
-      background-color: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
+      background-color: var(--ctr-menu-toolbar-button-background-color-hovered, #f5f5f5ff);
     }
 
     //pressed state
     &:active,
     &.sv-action-bar-item--pressed {
       opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
-      background-color: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
+      background-color: var(--ctr-menu-toolbar-button-background-color-pressed, #f5f5f5ff);
       use {
         fill: black;
         opacity: 0.45;
@@ -142,9 +142,9 @@
 
     //checked state
     &.sv-action-bar-item--active {
-      background-color: var(--ctr-menu-toolbar-button-background-color-selected, $background);
+      background-color: var(--ctr-menu-toolbar-button-background-color-selected, #19b3941a);
       use {
-        fill: var(--ctr-menu-toolbar-button-text-color-selected, $primary);
+        fill: var(--ctr-menu-toolbar-button-text-color-selected, #19b394ff);
       }
     }
 
@@ -156,19 +156,19 @@
   }
 
   .sv-action-bar-item--icon {
-    padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1))
-      var(--ctr-menu-toolbar-button-padding-right, calcSize(1))
-      var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1))
-      var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
-    border-radius: var(--ctr-menu-toolbar-button-corner-radius, 0);
+    padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
+      var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
+      var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
+      var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
+    border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
   }
 
   .sv-action-bar-item__icon {
-    width: var(--ctr-menu-toolbar-button-icon-width, calcSize(3));
-    height: var(--ctr-menu-toolbar-button-icon-height, calcSize(3));
+    width: var(--ctr-menu-toolbar-button-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3));
 
     use {
-      fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
+      fill: var(--ctr-menu-toolbar-button-icon-color, #000000bf);
     }
   }
 
@@ -188,40 +188,40 @@
       width: 100%;
 
       height: calc(6 * #{$base-unit});
-      background:  var(--ctr-menu-background-color, $background);
-      border-top: var(--ctr-menu-border-width, 1px) solid var(--ctr-menu-border-color, $border);
+      background:  var(--ctr-menu-background-color, #ffffffff);
+      border-top: var(--ctr-menu-border-width, var(--sjs-stroke-x1)) solid var(--ctr-menu-border-color, #d4d4d4ff);
       box-sizing: border-box;
     }
 
     .sv-action-bar-item {
-      border-radius: var(--ctr-menu-toolbar-button-corner-radius, calcSize(0.25));
-      padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1)) var(--ctr-menu-toolbar-button-padding-right, calcSize(1)) var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1)) var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
+      border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
+      padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
     }
     
     .sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
     .sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
-      background-color: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
+      background-color: var(--ctr-menu-toolbar-button-background-color-hovered, #f5f5f5ff);
     }
 
     .sv-action-bar-item--active {
-      background-color: var(--ctr-menu-toolbar-button-background-color-selected, $primary-light);
+      background-color: var(--ctr-menu-toolbar-button-background-color-selected, #19b3941a);
 
       &.sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
       &.sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
-        background-color: var(--ctr-menu-toolbar-button-background-color-selected, $primary-light);
+        background-color: var(--ctr-menu-toolbar-button-background-color-selected, #19b3941a);
       }
 
       .sv-action-bar-item__icon use {
-        fill: var(--ctr-menu-toolbar-button-icon-color-selected, $primary);
+        fill: var(--ctr-menu-toolbar-button-icon-color-selected, #19b394ff);
       }
     }
 
     .sv-action-bar-item__icon {
-      width: var(--ctr-menu-toolbar-button-icon-width, calcSize(3));
-      height: var(--ctr-menu-toolbar-button-icon-height, calcSize(3));
+      width: var(--ctr-menu-toolbar-button-icon-width, var(--sjs-font-size-x3));
+      height: var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3));
       
       use {
-        fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
+        fill: var(--ctr-menu-toolbar-button-icon-color, #000000bf);
       }
     }
   }

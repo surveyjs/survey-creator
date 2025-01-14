@@ -11,12 +11,12 @@
   position: absolute;
   bottom: calcSize(1);
   left: calcSize(1);
-  background: var(--ctr-notification-background-color, $background);
+  background: var(--ctr-notification-background-color, #ffffffff);
   opacity: 0;
   padding: calcSize(1) calcSize(2);
   box-shadow: $shadow-medium;
   border-radius: calcSize(0.5);
-  color: var(--ctr-notification-text-color, $foreground);
+  color: var(--ctr-notification-text-color, #000000e6);
   min-width: calcSize(30);
   text-align: center;
   z-index: 1600; //todo: should overlap popup
@@ -25,8 +25,8 @@
 }
 
 .svc-notifier.svc-notifier--error {
-  background-color: var(--ctr-notification-background-color-error, $red);
-  color: var(--ctr-notification-text-color-error, $red-forecolor);
+  background-color: var(--ctr-notification-background-color-error, #e50a3eff);
+  color: var(--ctr-notification-text-color-error, #ffffffff);
   opacity: var(--ctr-notification-opacity-error, 1);
 }
 
