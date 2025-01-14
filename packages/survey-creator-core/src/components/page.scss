@@ -89,6 +89,11 @@ svc-page {
   }
 }
 
+.svc-page-toolbar {
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
 .svc-page-toolbar__item {
   @include defaultActionButtonSettings;
   --thm-survey-question-panel-toolbar-item-padding-top: calc(var(--ctr-survey-question-panel-toolbar-item-padding-top) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-top));
