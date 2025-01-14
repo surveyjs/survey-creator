@@ -104,7 +104,7 @@
       }
     }
     .sv-action:not(.sv-action--hidden) ~ .sv-action:not(.sv-action--hidden) {
-      .sv-action-bar-item {
+      .svc-toolbar__item {
          margin-inline-start: var(--ctr-menu-toolbar-gap, calcSize(2))
       }
     }
@@ -115,68 +115,71 @@
     background-color: var(--ctr-separator-color, $border);
   }
 
-  .sv-action-bar-item {
-    @include ctrDefaultFont;
-    border-radius: var(--ctr-menu-toolbar-button-corner-radius, 2px);
-    background-color: transparent;
-    color: var(--ctr-menu-toolbar-button-text-color, $foreground);
-    transition: background-color $creator-transition-duration;
-    height: auto;
-
-    //hovered and focused state
-    &:hover,
-    &:focus {
-      background-color: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
-    }
-
-    //pressed state
-    &:active,
-    &.sv-action-bar-item--pressed {
-      opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
-      background-color: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
-      use {
-        fill: black;
-        opacity: 0.45;
-      }
-    }
-
-    //checked state
-    &.sv-action-bar-item--active {
-      background-color: var(--ctr-menu-toolbar-button-background-color-selected, $background);
-      use {
-        fill: var(--ctr-menu-toolbar-button-text-color-selected, $primary);
-      }
-    }
-
-    //disabled state
-    &:disabled {
-      background-color: transparent;
-      opacity: var(--ctr-menu-toolbar-button-opacity-disabled, 0.25);
-    }
-  }
-
-  .sv-action-bar-item--icon {
-    padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1))
-      var(--ctr-menu-toolbar-button-padding-right, calcSize(1))
-      var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1))
-      var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
-    border-radius: var(--ctr-menu-toolbar-button-corner-radius, 0);
-  }
-
-  .sv-action-bar-item__icon {
-    width: var(--ctr-menu-toolbar-button-icon-width, calcSize(3));
-    height: var(--ctr-menu-toolbar-button-icon-height, calcSize(3));
-
-    use {
-      fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
-    }
-  }
-
   .sv-action-bar-item-dropdown {
     border-radius: calcCornerRadius(0.5);
     background-color: transparent;
   }
 }
+
+.svc-toolbar__item {
+  @include ctrDefaultFont;
+  border-radius: var(--ctr-menu-toolbar-button-corner-radius, 2px);
+  background-color: transparent;
+  color: var(--ctr-menu-toolbar-button-text-color, $foreground);
+  transition: background-color $creator-transition-duration;
+  height: auto;
+  appearance: none;
+  display: flex;
+  border: none;
+  //hovered and focused state
+  &:hover,
+  &:focus {
+    background-color: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
+  }
+
+  //pressed state
+  &:active,
+  &.svc-toolbar__item--pressed {
+    opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
+    background-color: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
+    use {
+      fill: black;
+      opacity: 0.45;
+    }
+  }
+
+  //checked state
+  &.svc-toolbar__item--active {
+    background-color: var(--ctr-menu-toolbar-button-background-color-selected, $background);
+    use {
+      fill: var(--ctr-menu-toolbar-button-text-color-selected, $primary);
+    }
+  }
+
+  //disabled state
+  &:disabled {
+    background-color: transparent;
+    opacity: var(--ctr-menu-toolbar-button-opacity-disabled, 0.25);
+  }
+}
+
+.svc-toolbar__item--icon {
+  padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1))
+    var(--ctr-menu-toolbar-button-padding-right, calcSize(1))
+    var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1))
+    var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
+  border-radius: var(--ctr-menu-toolbar-button-corner-radius, 0);
+}
+
+.svc-toolbar-item__icon {
+  width: var(--ctr-menu-toolbar-button-icon-width, calcSize(3));
+  height: var(--ctr-menu-toolbar-button-icon-height, calcSize(3));
+
+  use {
+    fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
+  }
+}
+
 
 .svc-footer-bar {
   .svc-toolbar-wrapper {
@@ -193,36 +196,8 @@
       box-sizing: border-box;
     }
 
-    .sv-action-bar-item {
-      border-radius: var(--ctr-menu-toolbar-button-corner-radius, calcSize(0.25));
-      padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1)) var(--ctr-menu-toolbar-button-padding-right, calcSize(1)) var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1)) var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
-    }
-    
-    .sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
-    .sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
-      background-color: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
-    }
-
-    .sv-action-bar-item--active {
-      background-color: var(--ctr-menu-toolbar-button-background-color-selected, $primary-light);
-
-      &.sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
-      &.sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
-        background-color: var(--ctr-menu-toolbar-button-background-color-selected, $primary-light);
-      }
-
-      .sv-action-bar-item__icon use {
-        fill: var(--ctr-menu-toolbar-button-icon-color-selected, $primary);
-      }
-    }
-
-    .sv-action-bar-item__icon {
-      width: var(--ctr-menu-toolbar-button-icon-width, calcSize(3));
-      height: var(--ctr-menu-toolbar-button-icon-height, calcSize(3));
-      
-      use {
-        fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
-      }
+    .svc-toolbar__item {
+      margin: 0 calcSize(1);
     }
   }
 }
