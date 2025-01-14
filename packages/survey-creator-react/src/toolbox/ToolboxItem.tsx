@@ -6,7 +6,7 @@ import {
 } from "survey-creator-core";
 import { CSSProperties, createElement } from "react";
 import * as React from "react";
-import ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom";
 import { ToolboxToolViewModel } from "survey-creator-core";
 import {
   Action,
@@ -108,7 +108,9 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
         } else {
           this.item.mode = mode;
         }
-        callback(mode, this.rootRef.current);
+        queueMicrotask(() => {
+          callback(mode, this.rootRef.current);
+        });
       });
     };
     this.item.afterRender();

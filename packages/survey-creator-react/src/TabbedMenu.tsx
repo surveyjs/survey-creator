@@ -1,8 +1,8 @@
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { TabbedMenuItem, TabbedMenuContainer } from "survey-creator-core";
 import { Base, ResponsivityManager } from "survey-core";
 import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
-import ReactDOM from "react-dom";
 
 export interface ITabbedMenuComponentProps {
   model: TabbedMenuContainer;
@@ -101,7 +101,9 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
         } else {
           this.item.mode = mode;
         }
-        callback(mode, this.ref.current);
+        queueMicrotask(() => {
+          callback(mode, this.ref.current);
+        });
       });
     };
     this.item.afterRender();
