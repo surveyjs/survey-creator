@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 import { ResponsivityManager } from "survey-core";
-import { TabbedMenuContainer } from "survey-creator-core";
+import { TabbedMenuContainer, TabbedMenuItem } from "survey-creator-core";
 
 @Component({
   selector: "svc-tabbed-menu",
@@ -23,6 +23,9 @@ export class TabbledMenuComponent extends BaseAngular<TabbedMenuContainer> imple
   override ngOnDestroy(): void {
     super.ngOnDestroy();
     this.responsivityManager.dispose();
+  }
+  trackItemBy(_: number, item: TabbedMenuItem) {
+    return item.renderedId;
   }
 
 }

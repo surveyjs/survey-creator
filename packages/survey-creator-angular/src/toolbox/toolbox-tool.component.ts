@@ -33,7 +33,7 @@ export class ToolboxToolComponent extends CreatorModelComponent<Action> implemen
   override ngOnDestroy(): void {
     super.ngOnDestroy();
     this.model.dispose();
-    this.item.updateCallback = undefined as any;
+    this.item.updateModeCallback = undefined as any;
   }
   ngAfterViewInit(): void {
     if(this.item) {

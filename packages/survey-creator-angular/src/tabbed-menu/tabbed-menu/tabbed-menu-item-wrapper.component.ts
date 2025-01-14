@@ -13,18 +13,17 @@ export class TabbedMenuItemWrapperComponent extends BaseAngular<TabbedMenuItem> 
   protected getModel(): TabbedMenuItem {
     return this.model;
   }
-  protected override getPropertiesToUpdateSync(): Array<string> {
-    return ["model"];
-  }
   override ngOnDestroy(): void {
     super.ngOnDestroy();
-    this.model.updateCallback = undefined as any;
+    this.model.updateModeCallback = undefined as any;
   }
   ngAfterViewInit(): void {
     if(this.model) {
       this.model.updateModeCallback = (mode, callback) => {
         this.model.mode = mode;
-        callback(mode, this.container?.nativeElement);
+        queueMicrotask(() => {
+          callback(mode, this.container?.nativeElement);
+        });
       };
       this.model.afterRender();
     }
