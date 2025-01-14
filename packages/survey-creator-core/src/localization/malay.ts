@@ -754,6 +754,8 @@ export var msStrings = {
     separateSpecialChoices: "Pilihan khas berasingan (Tiada, Lain-lain, Pilih Semua)",
     choicesFromQuestion: "Salin pilihan daripada soalan berikut",
     choicesFromQuestionMode: "Pilihan mana yang hendak disalin?",
+    choiceValuesFromQuestion: "Gunakan nilai daripada lajur matriks atau soalan panel berikut sebagai ID pilihan",
+    choiceTextsFromQuestion: "Gunakan nilai daripada lajur matriks atau soalan panel berikut sebagai teks pilihan",
     progressBarShowPageTitles: "Paparkan tajuk halaman dalam bar kemajuan",
     progressBarShowPageNumbers: "Paparkan nombor halaman dalam bar kemajuan",
     showCommentArea: "Tunjukkan kawasan komen",
@@ -1520,6 +1522,8 @@ export var msStrings = {
     useDisplayValuesInDynamicTexts: "Dalam jenis soalan pilihan tunggal dan berbilang pilihan, setiap pilihan pilihan mempunyai ID dan nilai paparan. Apabila dipilih, seting ini menunjukkan nilai paparan dan bukannya nilai ID dalam soalan HTML dan tajuk dinamik serta perihalan unsur tinjauan.",
     clearIfInvisible: "Pilih sama ada untuk mengosongkan nilai soalan yang tersembunyi oleh logik bersyarat dan bila untuk melakukannya. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Setelah selesai tinjauan\" secara lalai).",
     choicesFromQuestionMode: "Pilih daripada: \"Semua\" - menyalin semua pilihan pilihan daripada soalan yang dipilih; \"Dipilih\" - secara dinamik hanya menyalin pilihan pilihan yang dipilih; \"Tidak dipilih\" - secara dinamik menyalin hanya pilihan pilihan yang tidak dipilih. Pilihan \"Tiada\" dan \"Lain-lain\" disalin secara lalai jika didayakan dalam soalan sumber.",
+    choiceValuesFromQuestion: "Dalam jenis soalan pilihan tunggal dan berbilang pilihan, setiap pilihan pilihan mempunyai ID dan nilai paparan. Seting ini menentukan lajur matriks atau soalan panel yang harus menyediakan ID.",
+    choiceTextsFromQuestion: "Dalam jenis soalan pilihan tunggal dan berbilang pilihan, setiap pilihan pilihan mempunyai ID dan nilai paparan. Seting ini menentukan lajur matriks atau soalan panel yang harus menyediakan teks paparan.",
     showOtherItem: "Apabila dipilih, pengguna boleh memasukkan input tambahan dalam kotak komen berasingan.",
     separateSpecialChoices: "Memaparkan setiap pilihan pilihan khas (\"Tiada\", \"Lain\", \"Pilih Semua\") pada baris baru, walaupun menggunakan tataletak berbilang lajur.",
     path: "Tentukan lokasi dalam set data perkhidmatan yang lokasi tatasusunan sasaran objek. Biarkan kosong jika URL telah menuding ke tatasusunan.",
@@ -2934,3 +2938,7 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pv.answeredQuestions: "Show answered questions only" => "Tunjukkan soalan yang dijawab sahaja"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Menetapkan lokasi butang navigasi pada halaman."
 // pe.size: "Input field width (in characters)" => "Lebar medan input (dalam aksara)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Gunakan nilai daripada lajur matriks atau soalan panel berikut sebagai ID pilihan"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Gunakan nilai daripada lajur matriks atau soalan panel berikut sebagai teks pilihan"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Dalam jenis soalan pilihan tunggal dan berbilang pilihan, setiap pilihan pilihan mempunyai ID dan nilai paparan. Seting ini menentukan lajur matriks atau soalan panel yang harus menyediakan ID."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Dalam jenis soalan pilihan tunggal dan berbilang pilihan, setiap pilihan pilihan mempunyai ID dan nilai paparan. Seting ini menentukan lajur matriks atau soalan panel yang harus menyediakan teks paparan."
