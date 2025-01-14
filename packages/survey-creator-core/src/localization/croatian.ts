@@ -22,7 +22,7 @@ export var hrStrings = {
     theme: "Teme",
     translation: "Prijevod",
     designer: "Dizajner ankete",
-    editor: "JSON urednik",
+    json: "JSON urednik",
     logic: "Logika ankete"
   },
   // Question types
@@ -440,7 +440,7 @@ export var hrStrings = {
     imageWidth: "Širina slike",
     valueName: "Naziv vrijednosti",
     rateDescriptionLocation: "Poravnanje natpisa",
-    size: "Veličina polja unosa (u znakovima)",
+    size: "Širina polja za unos (u znakovima)",
     cellErrorLocation: "Poravnanje poruke o pogrešci ćelije",
     enabled: "Omogućen",
     disabled: "Onemogućen",
@@ -625,6 +625,7 @@ export var hrStrings = {
     editText: "Uređivanje teksta gumba",
     startSurveyText: "Tekst gumba za pokretanje",
     showNavigationButtons: "Prikakanje navigacijskih tipki (zadana navigacija)",
+    navigationButtonsLocation: "Poravnanje navigacijskih gumba",
     showPrevButton: "Prikagnite prethodni gumb (korisnik se može vratiti na prethodnu stranicu)",
     firstPageIsStartPage: "Prva stranica u anketi je početna stranica.",
     showCompletePage: "Prikagušite dovršenu stranicu na kraju (completedHtml)",
@@ -1104,6 +1105,8 @@ export var hrStrings = {
     noPreview: "no preview",
     showAllQuestions: "show preview with all questions",
     showAnsweredQuestions: "show preview with answered questions",
+    allQuestions: "Prikaži sva pitanja",
+    answeredQuestions: "Prikaži samo odgovorena pitanja",
     pages: "Dovršene stranice",
     questions: "Odgovorena pitanja",
     requiredQuestions: "Odgovoreno na obavezna pitanja",
@@ -1455,6 +1458,7 @@ export var hrStrings = {
     autoAdvanceEnabled: "Odaberite želite li da se upitnik automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici. Ova se značajka neće primijeniti ako je posljednje pitanje na stranici otvoreno ili dopušta više odgovora.",
     autoAdvanceAllowComplete: "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja.",
     showNavigationButtons: "Postavlja vidljivost i mjesto navigacijskih gumba na stranici.",
+    navigationButtonsLocation: "Postavlja mjesto navigacijskih gumba na stranici.",
     showProgressBar: "Postavlja vidljivost i mjesto trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja upitnika.",
     showPreviewBeforeComplete: "Omogućite stranicu pretpregleda samo sa svim ili odgovorenim pitanjima.",
     questionTitleLocation: "Odnosi se na sva pitanja unutar ankete. Ova postavka može se nadjačati pravilima poravnanja naslova na nižim razinama: ploča, stranica ili pitanje. Postavka niže razine nadjačat će one na višoj razini.",
@@ -1501,7 +1505,7 @@ export var hrStrings = {
       questionTitleWidth: "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       questionErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       questionOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Original\" prema zadanim postavkama). Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
-      navigationButtonsVisibility: "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
+      showNavigationButtons: "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
     },
     timerLocation: "Postavlja lokaciju mjerača vremena na stranici.",
     panelsState: "Odaberite između: \"Zaključano\" - korisnici ne mogu proširiti ili sažeti ploče; \"Sažmite sve\" - sve ploče počinju u urušenom stanju; \"Proširite sve\" - sve ploče počinju u proširenom stanju; \"Prvo prošireno\" - samo je prva ploča u početku proširena.",
@@ -1660,7 +1664,6 @@ export var hrStrings = {
     inputTextAlignment: "Usklađivanje ulaznih vrijednosti",
     elements: "Elemenata",
     content: "Sadržaj",
-    navigationButtonsVisibility: "navigationButtonsVisibility",
     navigationTitle: "Naslov navigacije",
     navigationDescription: "Opis navigacije",
     longTap: "Dugi dodir",
@@ -2636,7 +2639,7 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Odnosi se na sva pitanja unutar ove stranice. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja ili ploče. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Zadržava izvorni redoslijed pitanja ili ih randomizira. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Original\" prema zadanim postavkama). Efekt ove postavke vidljiv je samo na kartici Pretpregled."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Odaberite između: \"Zaključano\" - korisnici ne mogu proširiti ili sažeti ploče; \"Sažmite sve\" - sve ploče počinju u urušenom stanju; \"Proširite sve\" - sve ploče počinju u proširenom stanju; \"Prvo prošireno\" - samo je prva ploča u početku proširena."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Unesite naziv zajedničkog svojstva unutar polja objekata koje sadrži URL-ove slike ili videodatoteke koje želite prikazati na popisu izbora."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Lijeva vrijednost služi kao ID artikla koji se koristi u uvjetnim pravilima, a ispitanicima se prikazuje prava vrijednost."
@@ -2966,3 +2969,8 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // tabs.surfaceBackground: "Surface Background" => "Pozadina površine"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Koristite odgovore iz posljednjeg unosa kao standardne"
 // colors.gray: "Gray" => "Siv"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Poravnanje navigacijskih gumba"
+// pv.allQuestions: "Show all questions" => "Prikaži sva pitanja"
+// pv.answeredQuestions: "Show answered questions only" => "Prikaži samo odgovorena pitanja"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Postavlja mjesto navigacijskih gumba na stranici."
+// pe.size: "Input field width (in characters)" => "Širina polja za unos (u znakovima)"

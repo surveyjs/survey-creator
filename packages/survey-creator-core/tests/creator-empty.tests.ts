@@ -113,8 +113,8 @@ test("Create new ghost on adding a question", (): any => {
   );
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
-  creator.activeTab = "editor";
-  const editorPlugin = <TabJsonEditorTextareaPlugin>(creator.getPlugin("editor"));
+  creator.activeTab = "json";
+  const editorPlugin = <TabJsonEditorTextareaPlugin>(creator.getPlugin("json"));
   expect(editorPlugin.model).toBeTruthy();
   editorPlugin.model.text = "";
   creator.activeTab = "designer";
@@ -132,7 +132,7 @@ test("setting empty JSON into creator do not update undo/redo survey and onModif
   const creator = new CreatorTester();
   let counter = 0;
   creator.onModified.add((sender, options) => {
-    counter ++;
+    counter++;
   });
   settings.defaultNewSurveyJSON = {};
   creator.JSON = {};
