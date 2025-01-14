@@ -1,6 +1,6 @@
 <template>
   <div class="svc-tabbed-menu" ref="container">
-    <template v-for="action in model.renderedActions" :key="action.id">
+    <template v-for="action in model.renderedActions" :key="action.renderedId">
       <SvComponent
         :is="'svc-tabbed-menu-item-wrapper'"
         :item="action"
@@ -19,11 +19,7 @@ let responsivityManager: ResponsivityManager = undefined as any;
 const container = ref();
 useBase(() => props.model);
 onMounted(() => {
-  responsivityManager = new ResponsivityManager(
-    container.value,
-    props.model,
-    ".svc-tabbed-menu-item-container:not(.sv-dots)>.sv-action__content"
-  );
+  responsivityManager = new ResponsivityManager(container.value, props.model);
 });
 onUnmounted(() => {
   responsivityManager.dispose();

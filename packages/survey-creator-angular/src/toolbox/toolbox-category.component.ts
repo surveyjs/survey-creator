@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { BaseAngular } from "survey-angular-ui";
-import { QuestionToolbox, QuestionToolboxCategory } from "survey-creator-core";
+import { QuestionToolbox, QuestionToolboxCategory, QuestionToolboxItem } from "survey-creator-core";
 
 @Component({
   selector: "svc-toolbox-category ",
@@ -12,5 +12,8 @@ export class ToolboxCategoryComponent extends BaseAngular<QuestionToolboxCategor
   @Input() toolbox!: QuestionToolbox;
   getModel() {
     return this.category;
+  }
+  trackItemBy(_: number, item: QuestionToolboxItem) {
+    return item.renderedId;
   }
 }

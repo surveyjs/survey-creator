@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, SurveyContentComponent } from "survey-angular-ui";
-import { SurveyCreatorModel } from "survey-creator-core";
+import { SurveyCreatorModel, TabbedMenuItem } from "survey-creator-core";
 
 @Component({
   selector: "survey-creator",
@@ -39,6 +39,12 @@ export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements
   public override ngOnDestroy(): void {
     this.creator.unsubscribeRootElement();
     super.ngOnDestroy();
+  }
+  public get visibleTabs(): Array<TabbedMenuItem> {
+    return this.creator.tabs.filter(tab => this.creator.viewType == tab.id && tab.visible);
+  }
+  trackTabBy(_: number, tab: TabbedMenuItem) {
+    return tab.id;
   }
 }
 

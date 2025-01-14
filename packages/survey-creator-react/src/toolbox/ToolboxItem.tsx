@@ -6,6 +6,7 @@ import {
 } from "survey-creator-core";
 import { CSSProperties, createElement } from "react";
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { ToolboxToolViewModel } from "survey-creator-core";
 import {
   Action,
@@ -39,9 +40,10 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
   any
 > {
   model: ToolboxToolViewModel;
-
+  rootRef: React.RefObject<HTMLDivElement>;
   constructor(props) {
     super(props);
+    this.rootRef = React.createRef();
   }
   protected createModel(props: any): void {
     this.model = new ToolboxToolViewModel(props.item, props.creator, props.parentModel);
@@ -76,7 +78,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
       }
     );
     return (
-      <div className={item.css} key={item.id}>
+      <div className={item.css} key={item.id} ref={this.rootRef}>
         {(item.needSeparator && !this.creator.toolbox.showCategoryTitles) ? (
           <div className="svc-toolbox__category-separator"></div>
         ) : null}
@@ -90,6 +92,28 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
         </div>
       </div>
     );
+  }
+  componentWillUnmount(): void {
+    super.componentWillUnmount();
+    this.item.updateModeCallback = undefined;
+  }
+  componentDidMount(): void {
+    super.componentDidMount();
+    this.item.updateModeCallback = (mode, callback) => {
+      queueMicrotask(() => {
+        if((ReactDOM as any)["flushSync"]) {
+          (ReactDOM as any)["flushSync"](() => {
+            this.item.mode = mode;
+          });
+        } else {
+          this.item.mode = mode;
+        }
+        queueMicrotask(() => {
+          callback(mode, this.rootRef.current);
+        });
+      });
+    };
+    this.item.afterRender();
   }
 }
 

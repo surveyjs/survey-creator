@@ -1,5 +1,5 @@
 <ng-template #template>
-    <div [class]="itemCssClasses">
+    <div [class]="itemCssClasses" #container>
         <div class="svc-toolbox__category-separator" *ngIf="item.needSeparator && !creator.toolbox.showCategoryTitles">
         </div>
         <div class="svc-toolbox__tool-content sv-action__content" (pointerdown)="model.onPointerDown($event)">
