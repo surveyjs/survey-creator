@@ -24,5 +24,6 @@
     "editor.formatOnSave": true,
     "eslint.format.enable": true,
     "editor.accessibilitySupport": "off",
-    "testing.openTesting": "neverOpen"
+    "testing.openTesting": "neverOpen",
+    "testing.automaticallyOpenTestResults": "neverOpen"
 }

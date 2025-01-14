@@ -754,6 +754,8 @@ export const roStrings = {
     separateSpecialChoices: "Separă alegerile speciale",
     choicesFromQuestion: "Copiază alegerile din următoarea întrebare",
     choicesFromQuestionMode: "Care opțiuni de alegere să fie copiate",
+    choiceValuesFromQuestion: "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca ID-uri de alegere",
+    choiceTextsFromQuestion: "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca texte de alegere",
     progressBarShowPageTitles: "Afișează titlurile paginilor în bara de progres",
     progressBarShowPageNumbers: "Afișează numerele paginilor în bara de progres",
     showCommentArea: "Adaugă o casetă de comentarii",
@@ -1520,6 +1522,8 @@ export const roStrings = {
     useDisplayValuesInDynamicTexts: "În tipurile de întrebări de selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare de afișare. Când este selectată, această setare afișează o valoare de afișare în loc de o valoare ID în întrebările HTML și în titlurile și descrierile dinamice ale elementelor chestionarului.",
     clearIfInvisible: "Alegeți dacă doriți sau nu să ștergeți valorile întrebărilor ascunse prin logica condițională și când să o faceți. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („La finalizarea chestionarului” implicit).",
     choicesFromQuestionMode: "Alegeți dintre: „Toate” - copiază toate opțiunile de alegere din întrebarea selectată; „Selectate” - copiază dinamic doar opțiunile de alegere selectate; „Neselectate” - copiază dinamic doar opțiunile de alegere neselectate. Opțiunile „Niciuna” și „Altele” sunt copiate implicit dacă sunt activate în întrebarea sursă.",
+    choiceValuesFromQuestion: "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze ID-urile.",
+    choiceTextsFromQuestion: "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze textele afișate.",
     showOtherItem: "Când este selectat, utilizatorii pot include intrare suplimentară într-o casetă de comentarii separată.",
     separateSpecialChoices: "Afișează fiecare opțiune de alegere specială („Niciuna”, „Altele”, „Selectează toate”) pe un rând nou, chiar și atunci când utilizați un layout pe mai multe coloane.",
     path: "Specificați locația din cadrul setului de date al serviciului unde se află array-ul de obiecte țintă. Lăsați gol dacă URL-ul indică deja către array.",
@@ -1920,3 +1924,7 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // pv.allQuestions: "Show all questions" => "Afișează toate întrebările"
 // pv.answeredQuestions: "Show answered questions only" => "Afișați numai întrebările la care au răspuns"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Setează locația butoanelor de navigare dintr-o pagină."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca ID-uri de alegere"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca texte de alegere"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze ID-urile."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze textele afișate."

@@ -287,6 +287,7 @@ creator.saveSurveyFunc = (no, callback) => {
     callback(no, true);
   }, 1000);
 };
+creator.propertyGridNavigationMode = "accordion"
 
 ReactDOM.render(
   <React.StrictMode>
