@@ -16,6 +16,7 @@ export interface ElementDeletingEvent {
   elementType: string;
   /**
    * Obsolete. Use `options.allow` instead.
+   * @deprecated
    */
   allowing?: boolean;
   /**
@@ -126,6 +127,7 @@ export interface ElementAllowOperationsEvent {
   element: Base;
   /**
    * Obsolete. Use `options.element` instead.
+   * @deprecated
    */
   obj?: Base;
   /**
@@ -154,6 +156,7 @@ export interface ElementAllowOperationsEvent {
   allowDrag: boolean;
   /**
    * Obsolete. Use `options.allowDrag` instead.
+   * @deprecated
    */
   allowDragging?: boolean;
   /**
@@ -173,10 +176,12 @@ export interface ElementAllowOperationsEvent {
 export interface DefineElementMenuItemsEvent {
   /**
    * Obsolete. Use `options.element` instead.
+   * @deprecated
    */
   obj?: Base;
   /**
    * Obsolete. Use `options.actions` instead.
+   * @deprecated
    */
   items?: IAction[];
 }
@@ -407,6 +412,7 @@ export interface ConfigureTablePropertyEditorEvent {
   allowBatchEdit: boolean;
   /**
    * Obsolete. Use `options.allowAddRemoveItems`, `options.allowRemoveAllItems`, and `options.allowBatchEdit` instead.
+   * @deprecated
    */
   editorOptions: TablePropertyEditorOptions;
 }
@@ -415,7 +421,12 @@ export interface PropertyDisplayCustomErrorEvent {
   /**
    * A survey element (survey, page, panel, question) whose property is being validated.
    */
-  obj: Base;
+  element: Base;
+  /**
+   * Obsolete. Use `options.element` instead.
+   * @deprecated
+   */
+  obj?: Base;
   /**
    * The name of a property being validated.
    */
@@ -432,15 +443,17 @@ export interface PropertyDisplayCustomErrorEvent {
 
 export interface PropertyValueChangingEvent {
   /**
-   * Obsolete
+   * Obsolete. Use `options.element` instead.
+   * @deprecated
    */
   obj?: Base;
   /**
-   * Obsolete
+   * The name of a property being modified.
    */
-  propertyName?: string;
+  propertyName: string;
   /**
-   * Obsolete
+   * Obsolete. Use `options.oldValue` instead.
+   * @deprecated
    */
   value?: any;
   /**
@@ -454,10 +467,6 @@ export interface BeforePropertyChangedEvent extends PropertyValueChangingEvent {
    */
   element: Base;
   /**
-   * The name of a property being modified.
-   */
-  name: string;
-  /**
    * An old property value.
    */
   oldValue: any;
@@ -465,13 +474,14 @@ export interface BeforePropertyChangedEvent extends PropertyValueChangingEvent {
 
 export interface PropertyValueChangedEvent {
   /**
-   * Obsolete
+   * Obsolete. Use `options.element` instead.
+   * @deprecated
    */
   obj?: Base;
   /**
-   * Obsolete
+   * The name of the modified property.
    */
-  propertyName?: string;
+  propertyName: string;
   /**
    * A new property value.
    */
@@ -482,10 +492,6 @@ export interface AfterPropertyChangedEvent extends PropertyValueChangedEvent {
    * A survey element (question, panel, page, or the survey itself) whose property has changed.
    */
   element: Base;
-  /**
-   * The name of the modified property.
-   */
-  name: string;
 }
 
 export interface ConditionGetQuestionListEvent {
@@ -706,6 +712,7 @@ export interface SurveyInstanceCreatedEvent {
   obj?: Base;
   /**
    * Obsolete. Use `options.area` instead.
+   * @deprecated
    */
   reason: string;
   model?: Base;
@@ -739,6 +746,7 @@ export interface NotifyEvent {
 export interface ElementFocusingEvent {
   /**
    * Obsolete. Use `options.element` instead.
+   * @deprecated
    */
   newSelectedElement?: Base;
 }
@@ -752,6 +760,7 @@ export interface ElementSelectingEvent extends ElementFocusingEvent {
 export interface ElementFocusedEvent {
   /**
    * Obsolete. Use `options.element` instead.
+   * @deprecated
    */
   newSelectedElement?: Base;
 }
@@ -817,6 +826,7 @@ export interface UploadFileEvent {
   callback: (status: string, fileUrl?: string) => void;
   /**
    * Obsolete. Use `options.element` instead.
+   * @deprecated
    */
   question: Question;
 }
@@ -955,10 +965,12 @@ export interface DragDropAllowEvent {
   allow: boolean;
   /**
    * Obsolete. Use `options.draggedElement` instead.
+   * @deprecated
    */
   target?: IElement;
   /**
    * Obsolete. Use `options.toElement` instead.
+   * @deprecated
    */
   source?: IElement;
 }

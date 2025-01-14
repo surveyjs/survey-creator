@@ -530,8 +530,9 @@ export class SurveyCreatorModel extends Base
    * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead of handling this event.
    */
   public onElementGetDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetDisplayNameEvent>();
-  /*
-   * Obsolete
+  /**
+   * Obsolete. Use the [`onElementGetDisplayName`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementGetDisplayName) event instead.
+   * @deprecated
    */
   public onGetObjectDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.onElementGetDisplayName;
   public onHtmlToMarkdown: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
@@ -650,32 +651,35 @@ export class SurveyCreatorModel extends Base
   public onGenerateNewName: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   /**
    * An event that is raised when Survey Creator validates a modified value of a survey element property. Use this event to display a custom error message when the value is incorrect.
-   * @see onPropertyChanging
-   * @see onPropertyChanged
+   * @see onBeforePropertyChanged
+   * @see onAfterPropertyChanged
    */
   public onPropertyDisplayCustomError: EventBase<SurveyCreatorModel, PropertyDisplayCustomErrorEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyDisplayCustomErrorEvent>();
-  /*
-   * Obsolete
+  /**
+   * Obsolete. Use the [`onPropertyDisplayCustomError`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPropertyDisplayCustomError) event instead.
+   * @deprecated
    */
   public onPropertyValidationCustomError: EventBase<SurveyCreatorModel, PropertyDisplayCustomErrorEvent> = this.onPropertyDisplayCustomError;
   /**
    * An event that is raised each time a user modifies a survey element property. Use this event to validate or correct a property value while the user changes it.
    * @see onPropertyDisplayCustomError
-   * @see onPropertyChanged
+   * @see onAfterPropertyChanged
    */
   public onBeforePropertyChanged: EventBase<SurveyCreatorModel, BeforePropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, BeforePropertyChangedEvent>();
-  /*
-   * Obsolete
+  /**
+   * Obsolete. Use the [`onBeforePropertyChanged`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onBeforePropertyChanged) event instead.
+   * @deprecated
    */
   public onPropertyValueChanging: EventBase<SurveyCreatorModel, PropertyValueChangingEvent> = this.onBeforePropertyChanged;
   /**
    * An event that is raised after a survey element property has changed.
    * @see onPropertyDisplayCustomError
-   * @see onPropertyChanging
+   * @see onBeforePropertyChanged
    */
   public onAfterPropertyChanged: EventBase<SurveyCreatorModel, AfterPropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, AfterPropertyChangedEvent>();
   /**
-   * Obsolete
+   * Obsolete. Use the [`onAfterPropertyChanged`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onAfterPropertyChanged) event instead.
+   * @deprecated
    */
   public onSurveyPropertyValueChanged: EventBase<SurveyCreatorModel, PropertyValueChangedEvent> = this.onAfterPropertyChanged;
   /**
@@ -2573,12 +2577,12 @@ export class SurveyCreatorModel extends Base
     if (!!plugin && !!plugin.onDesignerSurveyPropertyChanged) {
       plugin.onDesignerSurveyPropertyChanged(options.target, options.name);
     }
-    if (!this.onPropertyChanged.isEmpty) {
+    if (!this.onAfterPropertyChanged.isEmpty) {
       options.propertyName = options.name;
       options.obj = options.target;
       options.element = options.target;
       options.value = options.newValue;
-      this.onPropertyChanged.fire(this, options);
+      this.onAfterPropertyChanged.fire(this, options);
     }
     options.type = "PROPERTY_CHANGED";
     this.setModified(options);
@@ -3635,6 +3639,7 @@ export class SurveyCreatorModel extends Base
     var options = {
       propertyName: propertyName,
       obj: obj,
+      element: obj,
       value: value,
       error: ""
     };
@@ -3642,7 +3647,6 @@ export class SurveyCreatorModel extends Base
     return options.error;
   }
   onValueChangingCallback(options: any) {
-    options.name = options.propertyName;
     options.element = options.obj;
     options.oldValue = options.value;
     this.onBeforePropertyChanged.fire(this, options);
