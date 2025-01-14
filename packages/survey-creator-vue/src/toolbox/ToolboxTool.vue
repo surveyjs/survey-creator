@@ -54,6 +54,7 @@ onMounted(() => {
     item.mode = mode;
     nextTick(() => callback(mode, root.value as HTMLDivElement));
   };
+  item.afterRender();
 });
 onUnmounted(() => {
   const item = props.item;

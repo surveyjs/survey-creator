@@ -1,6 +1,6 @@
 <template>
   <div class="svc-tabbed-menu" ref="container">
-    <template v-for="action in model.renderedActions" :key="action.id">
+    <template v-for="action in model.renderedActions" :key="action.renderedId">
       <SvComponent
         :is="'svc-tabbed-menu-item-wrapper'"
         :item="action"

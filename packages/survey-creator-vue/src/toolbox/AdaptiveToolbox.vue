@@ -35,7 +35,7 @@
         </template>
         <template v-if="toolbox.showInSingleCategory">
           <div class="svc-toolbox__category">
-            <template v-for="(item, index) in renderedActions" :key="index">
+            <template v-for="item in renderedActions" :key="item.renderedId">
               <SvComponent
                 :is="'svc-toolbox-tool'"
                 :creator="model"
