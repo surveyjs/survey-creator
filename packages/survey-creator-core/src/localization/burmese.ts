@@ -1,3 +1,5 @@
+// This dictionary contains 90 untranslated or inherited localization strings.
+// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { setupLocale } from "survey-creator-core";
 
 export var mmStrings = {
@@ -15,7 +17,6 @@ export var mmStrings = {
     deleteQuestion: "မေးခွန်းကိုဖျက်ပါ",
     convertTo: "သို့ပြောင်းပါ",
     drag: "အရာဝတ္ထုကိုဆွဲပါ",
-    license: "ကျွန်ုပ်တို့၏စာကြည့်တိုက်ကိုအသုံးပြုရန် <a href='https://surveyjs.io/licensing'>developer license</a> တစ်ခုလိုအပ်ပါသည်။ သင့်တွင်တက်ကြွသောလိုင်စင်ရှိပါက <a href='https://surveyjs.io/remove-alert-banner'>သင့်လိုင်စင် key ကို set up</a> ပြုလုပ်ပြီး သင်နောက်ဆုံးဗားရှင်းကိုအသုံးပြုနေကြောင်းသေချာပါစေ။"
   },
   // Creator tabs
   tabs: {
@@ -23,7 +24,7 @@ export var mmStrings = {
     theme: "အပိုဒ်",
     translation: "ဘာသာစကား",
     designer: "ပံ့ပိုးသူ",
-    editor: "တည်းဖြတ်သူ",
+    json: "တည်းဖြတ်သူ",
     logic: "စစ်တမ်း",
   },
   // Question types
@@ -259,7 +260,7 @@ export var mmStrings = {
       question_enableText: "မေးခွန်း {0} ကိုဖွင့်ထားပါ", //{0} question name
       question_requireText: "မေးခွန်း {0} ကိုလိုအပ်အဖြစ်ပြုလုပ်ပါ", //{0} question name
       question_resetValueText: "မေးခွန်း: {0} အတွက်တန်ဖိုးကိုပြန်စဉ်ဆင်ပါ", //{0} question name.
-      question_setValueText: "မေးခွန်း: {0} သို့တန်ဖိုး: {1} ကိုထည့်ပါ", //{0} question name and {1} setValueExpression
+      question_setValueText: "မေးခွန်း: {0} သို့တန်ဖိုး: {1} ကိုထည့်ပါ",
       column_visibilityText: "မေးခွန်း {1} ၏ကော်လံ {0} ကိုမြင်နိုင်စေပါ", //{0} column name, {1} question name
       column_enableText: "မေးခွန်း {1} ၏ကော်လံ {0} ကိုဖွင့်ထားပါ", //{0} column name, {1} question name
       column_requireText: "မေးခွန်း {1} ၏ကော်လံ {0} ကိုလိုအပ်အဖြစ်ပြုလုပ်ပါ", //{0} column name, {1} question name
@@ -300,7 +301,7 @@ export var mmStrings = {
       description: "ပန်းနယ်ဖော်ပြချက်",
       visibleIf: "ပန်းနယ်ကိုမြင်သာစေပါ",
       requiredIf: "ပန်းနယ်လိုအပ်မှုအခြေအနေ",
-      questionsOrder: "ပန်းနယ်အတွင်းမေးခွန်းများ၏အဆင့်",
+      // questionOrder: "Question order within the panel",
       page: "ပန်းနယ်ကိုစာမျက်နှာသို့ရွှေ့ပါ",
       startWithNewLine: "ပန်းနယ်ကိုလိုင်းအသစ်တွင်ပြသပါ",
       state: "ပန်းနယ်အတိုးအကျိုးအခြေအနေ",
@@ -331,7 +332,7 @@ export var mmStrings = {
       hideNumber: "ပန်းနယ်နံပါတ်ကိုဖျောက်ပါ",
       titleLocation: "ပန်းနယ်ခေါင်းစဉ်တည်နေရာ",
       descriptionLocation: "ပန်းနယ်ဖော်ပြချက်တည်နေရာ",
-      templateTitleLocation: "မေးခွန်းခေါင်းစဉ်တည်နေရာ",
+      // templateQuestionTitleLocation: "Question title alignment",
       templateErrorLocation: "အမှားစာစောင်တည်နေရာ",
       newPanelPosition: "ပန်းနယ်အသစ်တည်နေရာ",
       showRangeInProgress: "တိုးတက်မှုဘားကိုပြပါ",
@@ -386,6 +387,7 @@ export var mmStrings = {
     calculatedvalue: {
       expression: "ဖော်ပြချက်"
     },
+    // survey templates
     survey: {
       title: "စစ်တမ်းခေါင်းစဉ်",
       description: "စစ်တမ်းဖော်ပြချက်"
@@ -397,7 +399,7 @@ export var mmStrings = {
       visibleIf: "စာမျက်နှာကိုမြင်သာစေပါ",
       requiredIf: "စာမျက်နှာလိုအပ်မှုအခြေအနေ",
       timeLimit: "စာမျက်နှာကိုပြီးစီးရန်အချိန်ကန့်သတ်",
-      questionsOrder: "စာမျက်နှာပေါ်မေးခွန်းများအဆင့်"
+      // questionOrder: "Question order on the page"
     },
     matrixdropdowncolumn: {
       name: "ကော်လံအမည်",
@@ -440,7 +442,6 @@ export var mmStrings = {
     imageWidth: "ပုံအကျယ်",
     valueName: "တန်ဖိုးအမည်",
     rateDescriptionLocation: "အချက်အလက်ဖော်ပြချက်တည်နေရာ",
-    size: "အဝင်အကွက်အကျယ် (အက္ခရာများဖြင့်)",
     cellErrorLocation: "အကွက်အမှားစာတန်းတည်နေရာ",
     enabled: "ဖွင့်ထားသည်",
     disabled: "ပိတ်ထားသည်",
@@ -563,7 +564,7 @@ export var mmStrings = {
     isRequired: "လိုအပ်သည်",
     markRequired: "လိုအပ်သည်ဟုအမှတ်အသားပြုရန်",
     removeRequiredMark: "လိုအပ်သည်အမှတ်အသားကိုဖယ်ရှားပါ",
-    isAllRowRequired: "အတန်းတိုင်းတွင်ဖြေဆိုမှုလိုအပ်သည်",
+    eachRowRequired: "အတန်းတိုင်းတွင်ဖြေဆိုမှုလိုအပ်သည်",
     eachRowUnique: "အတန်းများတွင်ထပ်တူဖြေဆိုမှုကိုတားဆီးပါ",
     requiredErrorText: "လိုအပ်သောမေးခွန်းများအတွက်အမှားစာသား",
     startWithNewLine: "မေးခွန်းကိုလိုင်းအသစ်တွင်ပြသပါ",
@@ -575,7 +576,7 @@ export var mmStrings = {
     maxSize: "ဖိုင်အရွယ်အစားအများဆုံး (bytes)",
     rowCount: "အတန်းအရေအတွက်",
     columnLayout: "ကော်လံအစီအစဉ်",
-    addRowLocation: "\"အတန်းထည့်ပါ\" ခလုတ်တည်နေရာ",
+    addRowButtonLocation: "\"အတန်းထည့်ပါ\" ခလုတ်တည်နေရာ",
     transposeData: "အတန်းများကိုကော်လံများသို့ပြောင်းလဲပါ",
     addRowText: "\"အတန်းထည့်ပါ\" ခလုတ်စာသား",
     removeRowText: "\"အတန်းဖျက်ပါ\" ခလုတ်စာသား",
@@ -614,7 +615,7 @@ export var mmStrings = {
     mode: "စစ်တမ်းပြသမှု mode",
     clearInvisibleValues: "မမြင်သာသောမေးခွန်းတန်ဖိုးများကိုရှင်းလင်းပါ",
     cookieName: "တစ်ဖြေဆိုသူအပေါ်ကန့်သတ်",
-    sendResultOnPageNext: "စာမျက်နှာပြောင်းလဲမှုတွင်စစ်တမ်းတိုးတက်မှုကိုအလိုအလျောက်သိမ်းဆည်းပါ",
+    partialSendEnabled: "စာမျက်နှာပြောင်းလဲမှုတွင်စစ်တမ်းတိုးတက်မှုကိုအလိုအလျောက်သိမ်းဆည်းပါ",
     storeOthersAsComment: "\"အခြား\" ရွေးချယ်မှုတန်ဖိုးကိုအခြား property အနေဖြင့်သိမ်းဆည်းပါ",
     showPageTitles: "စာမျက်နှာခေါင်းစဉ်များကိုပြပါ",
     showPageNumbers: "စာမျက်နှာနံပါတ်များကိုပြပါ",
@@ -625,19 +626,20 @@ export var mmStrings = {
     editText: "\"ဖြေဆိုမှုကိုတည်းဖြတ်ပါ\" ခလုတ်စာသား",
     startSurveyText: "\"စစ်တမ်းစတင်ပါ\" ခလုတ်စာသား",
     showNavigationButtons: "တည်ဆောင်ခလုတ်များကိုပြ/ဖျောက်ပါ",
+    // navigationButtonsLocation: "Navigation buttons alignment",
     showPrevButton: "\"ယခင်စာမျက်နှာ\" ခလုတ်ကိုပြပါ",
-    firstPageIsStarted: "ပထမစာမျက်နှာသည်စတင်စာမျက်နှာဖြစ်သည်",
-    showCompletedPage: "\"ကျေးဇူးတင်\" စာမျက်နှာကိုပြပါ",
-    goNextPageAutomatic: "နောက်စာမျက်နှာသို့အလိုအလျောက်ဆက်လက်သွားပါ",
-    allowCompleteSurveyAutomatic: "စစ်တမ်းကိုအလိုအလျောက်ပြီးစီးစေပါ",
+    firstPageIsStartPage: "ပထမစာမျက်နှာသည်စတင်စာမျက်နှာဖြစ်သည်",
+    showCompletePage: "\"ကျေးဇူးတင်\" စာမျက်နှာကိုပြပါ",
+    autoAdvanceEnabled: "နောက်စာမျက်နှာသို့အလိုအလျောက်ဆက်လက်သွားပါ",
+    autoAdvanceAllowComplete: "စစ်တမ်းကိုအလိုအလျောက်ပြီးစီးစေပါ",
     showProgressBar: "တိုးတက်မှုဘားတည်နေရာ",
     questionTitleLocation: "မေးခွန်းခေါင်းစဉ်တည်နေရာ",
     questionTitleWidth: "မေးခွန်းခေါင်းစဉ်အကျယ်",
-    requiredText: "လိုအပ်သည့်အမှတ်အသားများ",
+    requiredMark: "လိုအပ်သည့်အမှတ်အသားများ",
     questionTitleTemplate: "မေးခွန်းခေါင်းစဉ်ပုံစံ, ပုံမှန်မှာ: '{no}. {require} {title}'",
     questionErrorLocation: "အမှားစာတန်းတည်နေရာ",
-    focusFirstQuestionAutomatic: "စာမျက်နှာအသစ်တွင်ပထမဆုံးမေးခွန်းကိုအာရုံစိုက်ပါ",
-    questionsOrder: "မေးခွန်းအစီအစဉ်",
+    autoFocusFirstQuestion: "စာမျက်နှာအသစ်တွင်ပထမဆုံးမေးခွန်းကိုအာရုံစိုက်ပါ",
+    questionOrder: "မေးခွန်းအစီအစဉ်",
     timeLimit: "စစ်တမ်းပြီးစီးရန်အချိန်ကန့်သတ်",
     timeLimitPerPage: "စာမျက်နှာတစ်ခုပြီးစီးရန်အချိန်ကန့်သတ်",
     showTimer: "အချိန်တိုင်းကိရိယာကိုအသုံးပြုပါ",
@@ -654,7 +656,7 @@ export var mmStrings = {
     dataFormat: "သိမ်းဆည်းမှုပုံစံ",
     allowAddRows: "အတန်းထည့်ရန်ဖွင့်ပါ",
     allowRemoveRows: "အတန်းဖျက်ရန်ဖွင့်ပါ",
-    allowRowsDragAndDrop: "အတန်းများကိုပြောင်းရွှေ့နိုင်သည်",
+    allowRowReorder: "အတန်းများကိုပြောင်းရွှေ့နိုင်သည်",
     responsiveImageSizeHelp: "သင့်တိတိအကျယ် သို့မဟုတ်အမြင့်ကိုသတ်မှတ်မထားလျှင်လက်ခံမည်မဟုတ်ပါ။",
     minImageWidth: "အနည်းဆုံးပုံအကျယ်",
     maxImageWidth: "အများဆုံးပုံအကျယ်",
@@ -681,13 +683,13 @@ export var mmStrings = {
     logo: "စစ်တမ်းလိုဂို",
     questionsOnPageMode: "စစ်တမ်းအကွာအဝေး",
     maxTextLength: "ဖြေဆိုမှုအရှည်ကိုကန့်သတ်ပါ",
-    maxOthersLength: "မှတ်ချက်အရှည်ကိုကန့်သတ်ပါ",
+    maxCommentLength: "မှတ်ချက်အရှည်ကိုကန့်သတ်ပါ",
     commentAreaRows: "မှတ်ချက်ဧရိယာအမြင့် (လိုင်းများဖြင့်)",
     autoGrowComment: "မှတ်ချက်ဧရိယာကိုအလိုအလျောက်ချဲ့ပါ",
     allowResizeComment: "အသုံးပြုသူများအားမှတ်ချက်ဧရိယာအရွယ်အစားပြောင်းနိုင်ခွင့်ပြုပါ",
     textUpdateMode: "အကွက်တန်ဖိုးများကိုမွမ်းမံပါ",
     maskType: "အဝင် mask အမျိုးအစား",
-    focusOnFirstError: "ပထမဆုံးမမှန်ကန်သောဖြေဆိုမှုကိုအာရုံစိုက်ပါ",
+    autoFocusFirstError: "ပထမဆုံးမမှန်ကန်သောဖြေဆိုမှုကိုအာရုံစိုက်ပါ",
     checkErrorsMode: "စစ်မှန်မှုပြုလုပ်ပါ",
     validateVisitedEmptyFields: "လွတ်လပ်သောအကွက်များကိုအာရုံစိုက်မှုဆုံးရှုံးပြီးနောက်စစ်ဆေးပါ",
     navigateToUrl: "တင်သွင်းပြီးနောက်ပြင်ပလင့်သို့ပြောင်းရွှေ့ပါ",
@@ -745,12 +747,11 @@ export var mmStrings = {
     keyDuplicationError: "ထပ်တူဖြေဆိုမှုအတွက်အမှားစာသား",
     minSelectedChoices: "ရွေးချယ်မှုအနည်းဆုံးအရေအတွက်",
     maxSelectedChoices: "ရွေးချယ်မှုအများဆုံးအရေအတွက်",
-    showClearButton: "ရှင်းလင်းမှုခလုတ်ကိုပြပါ",
     logoWidth: "လိုဂိုအကျယ်",
     logoHeight: "လိုဂိုအမြင့်",
     readOnly: "ဖတ်ရုံသာ",
     enableIf: "ဖတ်ရုံသာ mode ကိုပိတ်ပါ",
-    emptyRowsText: "\"အတန်းမရှိ\" စာသား",
+    noRowsText: "\"အတန်းမရှိ\" စာသား",
     separateSpecialChoices: "အထူးရွေးချယ်မှုများကိုခွဲခြားပါ",
     choicesFromQuestion: "အောက်ပါမေးခွန်းမှရွေးချယ်မှုများကိုကူးပါ",
     choicesFromQuestionMode: "မည်သည့်ရွေးချယ်မှုများကိုကူးမည်",
@@ -759,7 +760,7 @@ export var mmStrings = {
     showCommentArea: "မှတ်ချက်ဘူးထည့်ပါ",
     commentPlaceholder: "မှတ်ချက်ဘူးအတွက် placeholder စာသား",
     displayRateDescriptionsAsExtremeItems: "တန်းလုံးများကိုအဆုံးဆုံးတန်ဖိုးအဖြစ်ပြပါ",
-    rowsOrder: "အတန်းအစီအစဉ်",
+    rowOrder: "အတန်းအစီအစဉ်",
     columnsLayout: "ကော်လံအစီအစဉ်",
     columnColCount: "nested ကော်လံအရေအတွက်",
     correctAnswer: "မှန်ကန်သောဖြေဆိုမှု",
@@ -788,6 +789,7 @@ export var mmStrings = {
       top: "အပေါ်တွင်",
       bottom: "အောက်တွင်"
     },
+    // Creator tabs
     tabs: {
       panel: {
         layout: "ပန်းနယ်ပုံစံ"
@@ -846,8 +848,7 @@ export var mmStrings = {
     columnsEnableIf: "ကော်လံများကိုမြင်သာစေပါ",
     rowsEnableIf: "အတန်းများကိုမြင်သာစေပါ",
     innerIndent: "အတွင်းအကွာအဝေးတိုးရန်",
-    defaultValueFromLastRow: "နောက်ဆုံးအတန်းမှဖြေဆိုမှုများကိုပုံမှန်အဖြေနှုန်းထားပါ",
-    defaultValueFromLastPanel: "နောက်ဆုံးပန်းနယ်မှဖြေဆိုမှုများကိုပုံမှန်အဖြေနှုန်းထားပါ",
+    copyDefaultValueFromLastEntry: "နောက်ဆုံးအတန်းမှဖြေဆိုမှုများကိုပုံမှန်အဖြေနှုန်းထားပါ",
     enterNewValue: "တန်ဖိုးအသစ်ရိုက်ထည့်ပါ။",
     noquestions: "စစ်တမ်းတွင်မေးခွန်းမရှိပါ။",
     createtrigger: "လှုံ့ဆော်မှုတစ်ခုဖန်တီးပါ",
@@ -933,8 +934,10 @@ export var mmStrings = {
       logoPositionX: "လိုဂိုတည်နေရာ",
       titlePositionX: "စစ်တမ်းခေါင်းစဉ်တည်နေရာ",
       descriptionPositionX: "စစ်တမ်းဖော်ပြချက်တည်နေရာ"
-    }
+    },
+    inputSize: "အဝင်အကွက်အကျယ် (အက္ခရာများဖြင့်)"
   },
+  // Property values
   pv: {
     "true": "မှန်",
     "false": "မမှန်",
@@ -1024,18 +1027,18 @@ export var mmStrings = {
       week: "အပတ်"
     },
     autocomplete: {
-      "name": "အမည်အပြည့်အစုံ",
+      name: "အမည်အပြည့်အစုံ",
       "honorific-prefix": "ဆက်ဆံကိန်း (Prefix)",
       "given-name": "နာမည်",
       "additional-name": "အလယ်နာမည်",
       "family-name": "မျိုးနွယ်နာမည်",
       "honorific-suffix": "ဆက်ဆံကိန်း (Suffix)",
-      "nickname": "အခေါ်အမည်",
+      nickname: "အခေါ်အမည်",
       "organization-title": "အလုပ်အကိုင်",
-      "username": "အသုံးပြုသူအမည်",
+      username: "အသုံးပြုသူအမည်",
       "new-password": "စကားဝှက်အသစ်",
       "current-password": "လက်ရှိစကားဝှက်",
-      "organization": "အဖွဲ့အစည်းအမည်",
+      organization: "အဖွဲ့အစည်းအမည်",
       "street-address": "လမ်းလိပ်စာအပြည့်အစုံ",
       "address-line1": "လိပ်စာလိုင်း ၁",
       "address-line2": "လိပ်စာလိုင်း ၂",
@@ -1044,7 +1047,7 @@ export var mmStrings = {
       "address-level3": "အဆင့် ၃ လိပ်စာ",
       "address-level2": "အဆင့် ၂ လိပ်စာ",
       "address-level1": "အဆင့် ၁ လိပ်စာ",
-      "country": "နိုင်ငံကုဒ်",
+      country: "နိုင်ငံကုဒ်",
       "country-name": "နိုင်ငံအမည်",
       "postal-code": "စာတိုက်ကုဒ်",
       "cc-name": "ကတ်ကိုင်ရှင်အမည်",
@@ -1059,15 +1062,15 @@ export var mmStrings = {
       "cc-type": "ခရက်ဒစ်ကတ်အမျိုးအစား",
       "transaction-currency": "ငွေလဲနှုန်း",
       "transaction-amount": "ငွေပမာဏ",
-      "language": "နှစ်သက်သောဘာသာစကား",
-      "bday": "မွေးနေ့",
+      language: "နှစ်သက်သောဘာသာစကား",
+      bday: "မွေးနေ့",
       "bday-day": "မွေးနေ့ရက်",
       "bday-month": "မွေးနေ့လ",
       "bday-year": "မွေးနေ့နှစ်",
-      "sex": "ကျား/မ",
-      "url": "ဝဘ်ဆိုက် URL",
-      "photo": "ပရိုဖိုင်ပုံ",
-      "tel": "တယ်လီဖုန်းနံပါတ်",
+      sex: "ကျား/မ",
+      url: "ဝဘ်ဆိုက် URL",
+      photo: "ပရိုဖိုင်ပုံ",
+      tel: "တယ်လီဖုန်းနံပါတ်",
       "tel-country-code": "နိုင်ငံကုဒ်",
       "tel-national": "နိုင်ငံရေးတယ်လီဖုန်းနံပါတ်",
       "tel-area-code": "ဒေသကုဒ်",
@@ -1075,8 +1078,8 @@ export var mmStrings = {
       "tel-local-prefix": "ဒေသကုဒ် Prefix",
       "tel-local-suffix": "ဒေသကုဒ် Suffix",
       "tel-extension": "တယ်လီဖုန်း Extension",
-      "email": "အီးမေးလ်လိပ်စာ",
-      "impp": "ယာယီမက်ဆေ့ချ်ပို့စနစ်"
+      email: "အီးမေးလ်လိပ်စာ",
+      impp: "ယာယီမက်ဆေ့ချ်ပို့စနစ်"
     },
     maskType: {
       none: "မရှိ",
@@ -1104,6 +1107,8 @@ export var mmStrings = {
     noPreview: "ကြိုတင်ကြည့်ရှုမှုမရှိပါ",
     showAllQuestions: "မေးခွန်းအားလုံးကိုပြပါ",
     showAnsweredQuestions: "ဖြေဆိုထားသောမေးခွန်းများကိုသာပြပါ",
+    // allQuestions: "Show all questions",
+    // answeredQuestions: "Show answered questions only",
     pages: "ပြီးစီးသောစာမျက်နှာများ",
     questions: "ဖြေဆိုထားသောမေးခွန်းများ",
     requiredQuestions: "လိုအပ်သောမေးခွန်းများကိုဖြေဆိုထားသည်",
@@ -1122,8 +1127,8 @@ export var mmStrings = {
     timerInfoMode: {
       combined: "နှစ်ခုလုံး"
     },
-    addRowLocation: {
-      default: "Matrix layout အပေါ်မူတည်သည်"
+    addRowButtonLocation: {
+      // default: "Based on matrix layout"
     },
     panelsState: {
       default: "ချုပ်ထားသည်",
@@ -1193,11 +1198,11 @@ export var mmStrings = {
       percent: "ရာခိုင်နှုန်း",
       date: "ရက်စွဲ"
     },
-    rowsOrder: {
-      initial: "မူလ"
+    rowOrder: {
+      // initial: "Original"
     },
-    questionsOrder: {
-      initial: "မူလ"
+    questionOrder: {
+      // initial: "Original"
     },
     showProgressBar: {
       off: "ဖျောက်ထားသည်",
@@ -1206,9 +1211,9 @@ export var mmStrings = {
       belowheader: "ခေါင်းစဉ်အောက်"
     },
     progressBarLocation: {
-      "top": "အပေါ်",
-      "bottom": "အောက်",
-      "topBottom": "အပေါ်နှင့်အောက်"
+      top: "အပေါ်",
+      bottom: "အောက်",
+      topBottom: "အပေါ်နှင့်အောက်"
     },
     sum: "ပေါင်း",
     count: "ရေတွက်",
@@ -1248,13 +1253,13 @@ export var mmStrings = {
       dark: "အမည်း"
     },
     isPanelless: {
-      false: "ပုံမှန်",
-      true: "ပန်းနယ်မပါဘဲ"
+      "false": "ပုံမှန်",
+      "true": "ပန်းနယ်မပါဘဲ"
     },
     progressBarInheritWidthFrom: {
       survey: "စစ်တမ်းနှင့်တူညီသည်",
       container: "ကွန်တိန်နာနှင့်တူညီသည်"
-    },
+    }
   },
   // Operators
   op: {
@@ -1273,6 +1278,7 @@ export var mmStrings = {
     and: "နှင့်",
     or: "သို့မဟုတ်"
   },
+  // Embed window
   ew: {
     angular: "Angular ဗားရှင်းကိုအသုံးပြုပါ",
     jquery: "jQuery ဗားရှင်းကိုအသုံးပြုပါ",
@@ -1295,6 +1301,7 @@ export var mmStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
   },
+  // Preview (Survey)
   ts: {
     selectPage: "စမ်းသပ်ရန်စာမျက်နှာကိုရွေးချယ်ပါ",
     showInvisibleElements: "မြင်မရသောအရာများကိုပြပါ",
@@ -1345,7 +1352,7 @@ export var mmStrings = {
       questionTitleLocation: "ဒီ Panel အတွင်းမေးခွန်းများအတွက်ပြဿနာတစ်ခုဖြစ်သည်",
       questionTitleWidth: "CSS တန်ဖိုး (px, %, in, pt, စသည်ဖြင့်) များကိုလက်ခံပါ",
       questionErrorLocation: "Panel အတွင်းမေးခွန်းများနှင့်ဆက်စပ်သောအမှားစာသားတည်နေရာကိုသတ်မှတ်ပါ",
-      questionsOrder: "မူလမေးခွန်းအစီအစဉ်ကိုထားသို့မဟုတ် randomize လုပ်ပါ",
+      // questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       page: "ရွေးချယ်ထားသောစာမျက်နှာ၏အဆုံးသို့ Panel ကိုပြောင်းသွားပါ",
       innerIndent: "Panel content နှင့် Panel box ဘောင်ဘေးကြားတွင် Margin ထည့်ပါ",
       startWithNewLine: "မေးခွန်းတစ်ခုသို့မဟုတ် Panel တစ်ခုနှင့်တစ်လိုင်းအတွင်းတွဲဖက်ပြပါ",
@@ -1359,7 +1366,7 @@ export var mmStrings = {
       visibleIf: "Panel မြင်သာမှုကိုသတ်မှတ်သည့်အခြေအနေစည်းကမ်းကို Magic Wand နိုင်ငံကိစ္စပုံစံကိုအသုံးပြုပါ",
       enableIf: "Panel ကို Read-only mode မဟုတ်စေရန်အခြေအနေစည်းကမ်းကို Magic Wand နိုင်ငံကိစ္စပုံစံကိုအသုံးပြုပါ",
       requiredIf: "Nested မေးခွန်းများတွင်ဖြေဆိုမှုမရှိပါက စစ်တမ်းတင်သွင်းမှုကိုတားဆီးရန်အခြေအနေစည်းကမ်းကို Magic Wand နိုင်ငံကိစ္စပုံစံကိုအသုံးပြုပါ",
-      templateTitleLocation: "ဒီ Panel အတွင်းရှိမေးခွန်းများအားလုံးအတွက် သတ်မှတ်ချက်ကိုအလိုအလျောက် သက်ဆိုင်သည်။",
+      // templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
       templateErrorLocation: "မမှန်သောအဝင်ရှိသောမေးခွန်းနှင့်ဆက်စပ်သော အမှားစာသားတည်နေရာကို သတ်မှတ်ပါ။",
       errorLocation: "Panel အတွင်းမေးခွန်းများနှင့်ဆက်စပ်သော အမှားစာသားတည်နေရာကို သတ်မှတ်ပါ။",
       page: "ရွေးချယ်ထားသောစာမျက်နှာ၏ အဆုံးသို့ Panel ကိုပြောင်းသွားပါ",
@@ -1374,9 +1381,10 @@ export var mmStrings = {
       titleLocation: "ဒီ Panel အတွင်းရှိမေးခွန်းအားလုံးအတွက် title alignment ကိုအလိုအလျောက် သက်ဆိုင်သည်။",
       descriptionLocation: "Page-level သို့မဟုတ် Survey-level သတ်မှတ်ချက်ကို သက်ဆိုင်သည်",
       newPanelPosition: "အသစ်ထည့်သွင်းထားသော panel ၏တည်နေရာကို သတ်မှတ်ပါ",
-      defaultValueFromLastPanel: "နောက်ဆုံး panel မှ ဖြေဆိုမှုများကို ထပ်တူယူပြီး အသစ်ထည့်ထားသော panel ကို သတ်မှတ်ပါ",
+      // copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel.",
       keyName: "အသုံးပြုသူကို တစ်ခုချင်း panel တွင် unique ဖြေဆိုမှုပေးရန် ပြုလုပ်ရန် question name ကိုဖော်ပြပါ"
     },
+    // copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row.",
     defaultValueExpression: "Expression အရ default ဖြေဆိုမှုတန်ဖိုးကို သတ်မှတ်နိုင်သည်။",
     resetValueIf: "Reset value ချိန်ညှိမှုကို Magic Wand icon ဖြင့်သတ်မှတ်ပါ။",
     setValueIf: "Magic Wand icon ကိုအသုံးပြု၍ စည်းမျဉ်းချမှတ်ပါ။",
@@ -1449,19 +1457,20 @@ export var mmStrings = {
     logoWidth: "CSS တန်ဖိုးများဖြင့် Logo ၏အကျယ်ကို သတ်မှတ်ပါ (px, %, in, pt, စသည်ဖြင့်)။",
     logoHeight: "CSS တန်ဖိုးများဖြင့် Logo ၏အမြင့်ကို သတ်မှတ်ပါ (px, %, in, pt, စသည်ဖြင့်)။",
     logoFit: "\"None\", \"Contain\", \"Cover\", \"Fill\" တို့ထဲမှ Logo ၏ မည်သည့်တပ်ဆင်မှုကို ရွေးချယ်ပါ။",
-    goNextPageAutomatic: "တုံ့ပြန်သူသည် မရှိသေးသောမေးခွန်းအားလုံးကို ဖြေဆိုပြီးလျှင် စစ်တမ်းကို အလိုအလျောက် နောက်စာမျက်နှာသို့ ရောက်စေပါ။",
-    allowCompleteSurveyAutomatic: "တုံ့ပြန်သူသည် မေးခွန်းအားလုံးကို ဖြေဆိုပြီးလျှင် စစ်တမ်းကို အလိုအလျောက်ပြီးစေပါ။",
+    // autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers.",
+    // autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions.",
     showNavigationButtons: "စာမျက်နှာတစ်ခုတွင် Navigation Buttons ၏ မြင်သာမှုနှင့် တည်နေရာကို သတ်မှတ်ပါ။",
+    // navigationButtonsLocation: "Sets the location of navigation buttons on a page.",
     showProgressBar: "Progress Bar ၏ မြင်သာမှုနှင့် တည်နေရာကို သတ်မှတ်ပါ။",
     showPreviewBeforeComplete: "တုံ့ပြန်မှုအားလုံး သို့မဟုတ် ဖြေဆိုပြီးသော မေးခွန်းများကို Preview စာမျက်နှာပေါ်တွင်ပြပါ။",
     questionTitleLocation: "Survey အတွင်းမေးခွန်းများအားလုံးအတွက် Title Alignment ကို သတ်မှတ်ပါ။",
-    requiredText: "ဖြေဆိုမှုမလိုအပ်သောအနေဖြင့် အထိန်းလက္ခဏာ သို့မဟုတ် စာလုံးများကို ရွေးချယ်ပါ။",
+    // requiredMark: "A symbol or a sequence of symbols indicating that an answer is required.",
     questionStartIndex: "နံပါတ် သို့မဟုတ် စာလုံးတစ်ခုကို ရိုက်ထည့်ပါ။",
     questionErrorLocation: "မေးခွန်း၏ အမှားစာသားတည်နေရာကို သတ်မှတ်ပါ။",
-    focusFirstQuestionAutomatic: "တစ်မျက်နှာလျှင် ပထမဦးစွာ ဖြည့်စွက်ရန် input field ကို Auto-Ready ပြုလုပ်ပါ။",
-    questionsOrder: "မေးခွန်းများ၏ မူလအစီအစဉ်ကို ထိန်းသိမ်းပါ သို့မဟုတ် Randomize လုပ်ပါ။",
+    // autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry.",
+    // questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab.",
     maxTextLength: "Text Entry မေးခွန်းများအတွက်သာဖြစ်သည်။",
-    maxOthersLength: "Comment များအတွက်သာဖြစ်သည်။",
+    // maxCommentLength: "For question comments only.",
     commentAreaRows: "Comment များအတွက် Text Area ၏ Row အရေအတွက်ကို သတ်မှတ်ပါ။",
     autoGrowComment: "Comment များနှင့် Long Text မေးခွန်းများအတွက် Auto-Grow Feature ကို ဖွင့်ပါ။",
     allowResizeComment: "Comment များနှင့် Long Text မေးခွန်းများအတွက် အရွယ်အစားကို ပြောင်းလဲနိုင်ရန် ဖွင့်ပါ။",
@@ -1479,7 +1488,6 @@ export var mmStrings = {
     keyDuplicationError: "\"Prevent Duplicate Responses\" သတ်မှတ်ချက် ဖွင့်ထားပါက Duplicate Entries အတွက် အမှားစာသားကို ဖော်ပြပါ။",
     totalExpression: "Expression တစ်ခုအပေါ်မူတည်ပြီး Total Values ကိုတွက်ချက်ပါ။",
     confirmDelete: "Row ဖျက်ပစ်မှုကို အတည်ပြုရန် Prompt ကို ဖော်ပြပါ။",
-    defaultValueFromLastRow: "နောက်ဆုံး Row ၏ ဖြေဆိုမှုများကိုထပ်တူယူပြီး နောက်ထပ် Row တွင် သတ်မှတ်ပါ။",
     keyName: "ရပ်ဆိုင်းထားသော Column ID ကို သုံးပြီး တူညီသောဖြေဆိုမှုများကို တားဆီးပါ။",
     description: "အခေါင်းစဉ်ခွဲစာသားကို ရိုက်ထည့်ပါ။",
     locale: "Survey Language ကို ရွေးချယ်ပြီး သင့် Survey ကိုစတင်ဖန်တီးပါ။",
@@ -1494,8 +1502,12 @@ export var mmStrings = {
       timeLimit: "စာမျက်နှာတစ်ခုစီအတွက် အချိန်ကန့်သတ်ချက်ကို စက္ကန့်အနေနဲ့သတ်မှတ်ပါ။",
       visibleIf: "စာမျက်နှာမြင်သာမှုကို သတ်မှတ်ရန် Magic Wand icon ကို အသုံးပြုပါ။",
       enableIf: "စာမျက်နှာကို Read-only mode မဟုတ်စေရန် Magic Wand icon ကို အသုံးပြုပါ။",
+      // requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
       questionTitleLocation: "စာမျက်နှာတွင်း မေးခွန်းများအတွက် Title Alignment ကို သတ်မှတ်ပါ။",
-      navigationButtonsVisibility: "စာမျက်နှာပေါ်တွင် Navigation Buttons ၏ မြင်သာမှုကို သတ်မှတ်ပါ။"
+      // questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
+      // questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
+      // questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
+      showNavigationButtons: "စာမျက်နှာပေါ်တွင် Navigation Buttons ၏ မြင်သာမှုကို သတ်မှတ်ပါ။"
     },
     timerLocation: "စာမျက်နှာတစ်ခုအတွင်း Timer ၏ တည်နေရာကို သတ်မှတ်ပါ။",
     panelsState: "\"Locked\", \"Collapse all\", \"Expand all\", \"First expanded\" တို့ထဲမှ Panel State ကိုရွေးချယ်ပါ။",
@@ -1531,7 +1543,7 @@ export var mmStrings = {
     needConfirmRemoveFile: "ဖိုင်ဖျက်ပစ်မှုကို အတည်ပြုရန် Prompt ကို ဖော်ပြပါ။",
     selectToRankEnabled: "ရွေးချယ်ထားသောရွေးချယ်မှုများကိုသာ Rank ပြုလုပ်ရန် Enable လုပ်ပါ။",
     dataList: "Input များတွင် ပြသမည့် Choices စာရင်းကို ထည့်သွင်းပါ။",
-    itemSize: "Input Fields များ၏အရွယ်အစားကိုသာ ပြောင်းလဲပြီး Question Box ၏အကျယ်ကို မထိခိုက်ပါ။",
+    // inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box.",
     itemTitleWidth: "Item Labels အားလုံးအတွက် Width ကို Pixels အနေနဲ့ သတ်မှတ်ပါ။",
     inputTextAlignment: "Input Field အတွင်း Input Value ကို Alignment လုပ်ရန် ရွေးချယ်ပါ။",
     altText: "Image မမြင်ရသောအခါသို့မဟုတ် Accessibility အတွက် Substitute အဖြစ် အသုံးပြုပါ။",
@@ -1573,7 +1585,8 @@ export var mmStrings = {
       primaryColor: "စစ်တမ်းအရေးပါသော အချက်အလက်များကို အလင်းပြထားသည့် အရောင်ကို သတ်မှတ်ပါ။",
       panelBackgroundTransparency: "စစ်တမ်းနောက်ခံနှင့် Panel များ၏ Transparency ကိုညှိပါ။",
       questionBackgroundTransparency: "Input Element များ၏ Transparency ကို စစ်တမ်းနောက်ခံနှင့်ညှိပါ။",
-      cornerRadius: "လျားရိုးပုံစံအတွက် အနားအလျားကို သတ်မှတ်ပါ။"
+      cornerRadius: "လျားရိုးပုံစံအတွက် အနားအလျားကို သတ်မှတ်ပါ။",
+      // "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
     },
     header: {
       inheritWidthFrom: "\"Same as container\" သည် စစ်တမ်းထားရှိသည့် HTML Element နှင့် ကိုက်ညီသော Header Content အကျယ်ကို အလိုအလျောက်ညှိပေးသည်။",
@@ -1648,12 +1661,11 @@ export var mmStrings = {
     maxValueExpression: "အများဆုံးတန်ဖိုးဖော်ပြချက်",
     step: "အဆင့်",
     dataList: "အလိုအလျောက်အကြံပြုချက်များ",
-    itemSize: "အဝင်အကွက်အကျယ် (စာလုံးများ)",
+    // inputSize: "Input field width (in characters)",
     itemTitleWidth: "အချက်အလက်ခေါင်းစဉ်အကျယ် (px)",
     inputTextAlignment: "အဝင်တန်ဖိုး alignment",
     elements: "အချက်အလက်များ",
     content: "အကြောင်းအရာ",
-    navigationButtonsVisibility: "လမ်းညွှန်ခလုတ်များကိုပြ/ဖျောက်ပါ",
     navigationTitle: "လမ်းညွှန်ခေါင်းစဉ်",
     navigationDescription: "လမ်းညွှန်ဖော်ပြချက်",
     longTap: "ကြာရှည်ထိပါ",
@@ -1693,6 +1705,69 @@ export var mmStrings = {
     copyDisplayValue: "ပြသမှုတန်ဖိုးကိုကူးယူပါ",
     effectiveColSpan: "အကျိုးရှိသောကော်လံ span",
     progressBarInheritWidthFrom: "တိုးတက်မှုဘားအကျယ်",
+    // state: "state",
+    // colSpan: "colSpan",
+    // indent: "indent",
+    // titleLocation: "titleLocation",
+    // descriptionLocation: "descriptionLocation",
+    // showNumber: "showNumber",
+    // hideNumber: "hideNumber",
+    // errorLocation: "errorLocation",
+    // isUnique: "isUnique",
+    // showInMultipleColumns: "showInMultipleColumns",
+    // totalAlignment: "totalAlignment",
+    // detailErrorLocation: "detailErrorLocation",
+    // inheritWidthFrom: "inheritWidthFrom",
+    // textAreaWidth: "textAreaWidth",
+    // textGlowEnabled: "textGlowEnabled",
+    // overlapEnabled: "overlapEnabled",
+    // backgroundImageOpacity: "backgroundImageOpacity",
+    // logoPositionX: "logoPositionX",
+    // logoPositionY: "logoPositionY",
+    // titlePositionX: "titlePositionX",
+    // titlePositionY: "titlePositionY",
+    // descriptionPositionX: "descriptionPositionX",
+    // descriptionPositionY: "descriptionPositionY",
+    // effectiveWidth: "effectiveWidth",
+    // gridLayoutColumns: "gridLayoutColumns",
+    // sjsVersion: "sjsVersion",
+    // previewMode: "previewMode",
+    // showTimerPanel: "showTimerPanel",
+    // gridLayoutEnabled: "gridLayoutEnabled",
+    // headerView: "headerView",
+    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
+    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
+    // refuseText: "refuseText",
+    // dontKnowText: "dontKnowText",
+    // cellComponent: "cellComponent",
+    // maskSettings: "maskSettings",
+    // itemErrorLocation: "itemErrorLocation",
+    // selectToRankSwapAreas: "selectToRankSwapAreas",
+    // signatureWidth: "signatureWidth",
+    // signatureHeight: "signatureHeight",
+    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
+    // penMinWidth: "penMinWidth",
+    // penMaxWidth: "penMaxWidth",
+    // showPlaceholder: "showPlaceholder",
+    // placeholderReadOnly: "placeholderReadOnly",
+    // templateTitle: "templateTitle",
+    // templateTabTitle: "templateTabTitle",
+    // tabTitlePlaceholder: "tabTitlePlaceholder",
+    // templateDescription: "templateDescription",
+    // noEntriesText: "noEntriesText",
+    // newPanelPosition: "newPanelPosition",
+    // showRangeInProgress: "showRangeInProgress",
+    // progressBarLocation: "progressBarLocation",
+    // templateQuestionTitleLocation: "templateQuestionTitleLocation",
+    // templateErrorLocation: "templateErrorLocation",
+    // templateVisibleIf: "templateVisibleIf",
+    // saveMaskedValue: "saveMaskedValue",
+    // pattern: "pattern",
+    // allowNegativeValues: "allowNegativeValues",
+    // decimalSeparator: "decimalSeparator",
+    // thousandsSeparator: "thousandsSeparator",
+    // prefix: "prefix",
+    // suffix: "suffix"
   },
   theme: {
     advancedMode: "အဆင့်မြင့် mode",
@@ -1700,26 +1775,21 @@ export var mmStrings = {
     questionTitle: "မေးခွန်း box",
     editorPanel: "အဝင်အချက်အလက်",
     lines: "လိုင်းများ",
-
     primaryDefaultColor: "ပုံမှန်",
     primaryDarkColor: "Hover",
     primaryLightColor: "ရွေးချယ်ထားသော",
     backgroundDimColor: "နောက်ခံအရောင်",
-
     cornerRadius: "ထောင့်အချိုး",
     backcolor: "ပုံမှန်နောက်ခံ",
     hovercolor: "Hover နောက်ခံ",
     borderDecoration: "စက်ဝိုင်းအလှဆင်မှု",
-
     fontColor: "ဖောင့်အရောင်",
     backgroundColor: "နောက်ခံအရောင်",
-
     primaryForecolor: "ပုံမှန်အရောင်",
     primaryForecolorLight: "ပိတ်ထားသောအရောင်",
     font: "ဖောင့်",
     borderDefault: "မှောင်သော",
     borderLight: "အလင်းသော",
-
     fontFamily: "ဖောင့်မိသားစု",
     fontWeightRegular: "ပုံမှန်",
     fontWeightHeavy: "ထူသော",
@@ -1728,7 +1798,6 @@ export var mmStrings = {
     color: "အရောင်",
     placeholderColor: "Placeholder အရောင်",
     size: "အရွယ်အစား",
-
     opacity: "Opacity",
     boxShadowX: "X",
     boxShadowY: "Y",
@@ -1737,7 +1806,6 @@ export var mmStrings = {
     boxShadowSpread: "ပြန့်",
     boxShadowDrop: "Drop",
     boxShadowInner: "Inner",
-
     names: {
       default: "ပုံမှန်",
       sharp: "ထက်သော",
@@ -1759,22 +1827,21 @@ export var mmStrings = {
       brown: "အညိုရောင်",
       green: "အစိမ်းရောင်",
       gray: "မီးခိုးရောင်"
-    },
+    }
   },
   creatortheme: {
     "--sjs-special-background": "မျက်နှာပြင်နောက်ခံ",
     "--sjs-primary-background-500": "Primary",
     "--sjs-secondary-background-500": "Secondary",
-    "surfaceScale": "မျက်နှာပြင်",
-    "userInterfaceBaseUnit": "UI အချက်အလက်များ",
-    "fontScale": "ဖောင့်",
-
+    surfaceScale: "မျက်နှာပြင်",
+    userInterfaceBaseUnit: "UI အချက်အလက်များ",
+    fontScale: "ဖောင့်",
     names: {
-      "sc2020": "Survey Creator 2020",
+      sc2020: "Survey Creator 2020",
       "default-light": "အလင်း",
       "default-dark": "မှောင်",
       "default-contrast": "Contrast"
-    },
+    }
   }
 };
 

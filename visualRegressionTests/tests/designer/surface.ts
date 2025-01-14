@@ -2518,7 +2518,7 @@ test("Page hidden header and top toolbar", async (t) => {
 
     await ClientFunction((json) => {
       (window as any).Survey.settings.designMode.showEmptyTitles = false;
-      (window as any).updateCreatorModel({}, json);
+      (window as any).updateCreatorModel({ expandCollapseButtonVisibility: "never" }, json);
     })(json);
 
     const rootSelector = Selector(".svc-tab-designer");
@@ -2587,5 +2587,44 @@ test("Check page button states", async (t) => {
       adorner.actionContainer.actions[0].pressed = true;
     })();
     await takeElementScreenshot("page-button-pressed.png", button, t, comparer);
+  });
+});
+
+test("Selected matrix-in-panel", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel1",
+              "elements": [
+                {
+                  "type": "matrix",
+                  "name": "question1",
+                  "columns": [
+                    "Column 1",
+                    "Column 2"
+                  ],
+                  "rows": [
+                    "Row 1",
+                    "Row 2"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "widthMode": "static",
+      "width": "600px"
+    });
+    const button = Selector(".svc-page-toolbar__item");
+    await t.click(Selector(".svc-question__content--matrix"));
+    await takeElementScreenshot("question-matrix-in-panel-selected", Selector(".svc-question__content--matrix"), t, comparer);
   });
 });
