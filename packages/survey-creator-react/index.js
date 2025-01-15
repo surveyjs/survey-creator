@@ -202,6 +202,7 @@ creator.onMachineTranslate.add((_, options) => {
 // creator.locale = "de";
 window.creator = creator;
 creator.showOneCategoryInPropertyGrid = true;
+creator.propertyGridNavigationMode = "buttons";
 // creator.getPlugin("designer").showOneCategoryInPropertyGrid = true;
 // creator.getPlugin("theme").showOneCategoryInPropertyGrid = true;
 
@@ -287,7 +288,6 @@ creator.saveSurveyFunc = (no, callback) => {
     callback(no, true);
   }, 1000);
 };
-creator.propertyGridNavigationMode = "accordion"
 
 ReactDOM.render(
   <React.StrictMode>
