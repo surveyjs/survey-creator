@@ -754,6 +754,8 @@ export var skStrings = {
     separateSpecialChoices: "Samostatné špeciálne možnosti (Žiadne, Iné, Vybrať všetko)",
     choicesFromQuestion: "Skopírujte voľby z nasledujúcej otázky",
     choicesFromQuestionMode: "Aké možnosti kopírovať?",
+    choiceValuesFromQuestion: "Použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky ako ID výberu",
+    choiceTextsFromQuestion: "Ako texty výberu použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky",
     progressBarShowPageTitles: "Zobrazenie prebiehajúcich názvov stránok",
     progressBarShowPageNumbers: "Zobrazenie prebiehajúcich čísel strán",
     showCommentArea: "Zobrazenie oblasti komentárov",
@@ -1520,6 +1522,8 @@ export var skStrings = {
     useDisplayValuesInDynamicTexts: "V prípade otázok s jedným a viacerými výbermi má každá možnosť výberu identifikátor a zobrazenú hodnotu. Ak je táto voľba vybratá, toto nastavenie zobrazuje zobrazenú hodnotu namiesto hodnoty ID v otázkach HTML a dynamických názvoch a popisoch prvkov prieskumu.",
     clearIfInvisible: "Vyberte, či chcete vymazať hodnoty otázok skryté podmienenou logikou a kedy to chcete urobiť. Možnosť \"Dediť\" použije nastavenie na úrovni prieskumu (\"Po dokončení prieskumu predvolene\").",
     choicesFromQuestionMode: "Vyberte si z: \"Všetko\" - skopíruje všetky možnosti výberu z vybranej otázky; \"Vybraté\" - dynamicky kopíruje iba vybrané možnosti výberu; \"Nevybraté\" - dynamicky kopíruje iba nevybraté možnosti výberu. Možnosti \"Žiadne\" a \"Iné\" sa predvolene kopírujú, ak sú povolené v otázke zdroja.",
+    choiceValuesFromQuestion: "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo panelová otázka má poskytnúť ID.",
+    choiceTextsFromQuestion: "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo otázka panela by mala poskytovať zobrazované texty.",
     showOtherItem: "Ak je táto voľba vybratá, používatelia môžu zahrnúť ďalšie vstupy do samostatného poľa komentára.",
     separateSpecialChoices: "Zobrazí každú možnosť špeciálnej voľby (\"Žiadne\", \"Iné\", \"Vybrať všetko\") na novom riadku, a to aj pri použití rozloženia s viacerými stĺpcami.",
     path: "Zadajte umiestnenie v množine údajov služby, kde sa nachádza cieľové pole objektov. Ak URL adresa už odkazuje na pole, nechajte prázdne.",
@@ -2933,3 +2937,7 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pv.allQuestions: "Show all questions" => "Zobraziť všetky otázky"
 // pv.answeredQuestions: "Show answered questions only" => "Zobraziť len zodpovedané otázky"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Nastaví umiestnenie navigačných tlačidiel na stránke."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky ako ID výberu"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Ako texty výberu použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo panelová otázka má poskytnúť ID."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo otázka panela by mala poskytovať zobrazované texty."

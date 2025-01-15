@@ -754,6 +754,8 @@ export var arStrings = {
     separateSpecialChoices: "خيارات خاصة منفصلة (لا شيء، أخرى، تحديد الكل)",
     choicesFromQuestion: "نسخ الاختيارات من السؤال التالي",
     choicesFromQuestionMode: "ما هي الخيارات التي تريد نسخها؟",
+    choiceValuesFromQuestion: "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كمعرفات اختيار",
+    choiceTextsFromQuestion: "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كنصوص اختيار",
     progressBarShowPageTitles: "عرض عناوين الصفحات في شريط التقدم",
     progressBarShowPageNumbers: "عرض أرقام الصفحات في شريط التقدم",
     showCommentArea: "إظهار منطقة التعليق",
@@ -1520,6 +1522,8 @@ export var arStrings = {
     useDisplayValuesInDynamicTexts: "في أنواع الأسئلة ذات التحديد الفردي والمتعدد، يكون لكل خيار اختيار معرف وقيمة عرض. عند تحديده، يعرض هذا الإعداد قيمة عرض بدلا من قيمة معرف في أسئلة HTML والعناوين الديناميكية وأوصاف عناصر الاستطلاع.",
     clearIfInvisible: "اختر ما إذا كنت تريد مسح قيم الأسئلة المخفية بواسطة المنطق الشرطي أم لا ومتى تفعل ذلك. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"عند اكتمال الاستطلاع\" افتراضيا).",
     choicesFromQuestionMode: "اختر من بين: \"الكل\" - نسخ جميع خيارات الاختيار من السؤال المحدد ؛ \"محدد\" - ينسخ ديناميكيا خيارات الاختيار المحددة فقط ؛ \"غير محدد\" - ينسخ ديناميكيا خيارات الاختيار غير المحددة فقط. يتم نسخ الخيارين \"بلا\" و \"أخرى\" افتراضيا إذا تم تمكينهما في السؤال المصدر.",
+    choiceValuesFromQuestion: "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر معرفات.",
+    choiceTextsFromQuestion: "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر نصوص العرض.",
     showOtherItem: "عند تحديده، يمكن للمستخدمين تضمين مدخلات إضافية في مربع تعليق منفصل.",
     separateSpecialChoices: "يعرض كل خيار اختيار خاص (\"بلا\" ، \"أخرى\" ، \"تحديد الكل\") على سطر جديد ، حتى عند استخدام تخطيط متعدد الأعمدة.",
     path: "حدد الموقع داخل مجموعة بيانات الخدمة حيث يوجد الصفيف الهدف من الكائنات. اتركه فارغا إذا كان عنوان URL يشير بالفعل إلى المصفوفة.",
@@ -2894,3 +2898,7 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pv.answeredQuestions: "Show answered questions only" => "إظهار الأسئلة التي تمت الإجابة عليها فقط"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "لتعيين موقع أزرار التنقل على الصفحة."
 // pe.size: "Input field width (in characters)" => "عرض حقل الإدخال (بالأحرف)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كمعرفات اختيار"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كنصوص اختيار"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر معرفات."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر نصوص العرض."

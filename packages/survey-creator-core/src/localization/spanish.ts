@@ -754,6 +754,8 @@ var spanishTranslation = {
     separateSpecialChoices: "Opciones de separación especiales (None, Other, Select All)",
     choicesFromQuestion: "Copiar opciones de la siguiente pregunta",
     choicesFromQuestionMode: "Qué opciones a copiar?",
+    choiceValuesFromQuestion: "Utilice los valores de la siguiente columna de matriz o pregunta de panel como ID de opción",
+    choiceTextsFromQuestion: "Utilice los valores de la siguiente columna de matriz o pregunta de panel como textos de elección",
     progressBarShowPageTitles: "Mostrar los títulos de las páginas en la barra de progreso",
     progressBarShowPageNumbers: "Mostrar números de página en la barra de progreso",
     showCommentArea: "Mostrar el área de comentarios",
@@ -1520,6 +1522,8 @@ var spanishTranslation = {
     useDisplayValuesInDynamicTexts: "En los tipos de preguntas de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Cuando se selecciona, esta configuración muestra un valor de visualización en lugar de un valor de ID en las preguntas HTML y en los títulos dinámicos y las descripciones de los elementos de la encuesta.",
     clearIfInvisible: "Elija si desea o no borrar los valores de las preguntas ocultos por la lógica condicional y cuándo hacerlo. La opción \"Heredar\" aplica la configuración de nivel de encuesta (\"Al finalizar la encuesta\" de forma predeterminada).",
     choicesFromQuestionMode: "Elija entre: \"Todas\": copia todas las opciones de elección de la pregunta seleccionada; \"Seleccionado\": copia dinámicamente solo las opciones de elección seleccionadas; \"No seleccionado\": copia dinámicamente solo las opciones de elección no seleccionadas. Las opciones \"Ninguno\" y \"Otro\" se copian de forma predeterminada si están habilitadas en la pregunta de origen.",
+    choiceValuesFromQuestion: "En los tipos de preguntas de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Esta configuración especifica qué columna de matriz o pregunta de panel debe proporcionar los identificadores.",
+    choiceTextsFromQuestion: "En los tipos de preguntas de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Esta configuración especifica qué columna de matriz o pregunta de panel debe proporcionar los textos de visualización.",
     showOtherItem: "Cuando se selecciona, los usuarios pueden incluir entradas adicionales en un cuadro de comentarios independiente.",
     separateSpecialChoices: "Muestra cada opción de opción especial (\"Ninguno\", \"Otro\", \"Seleccionar todo\") en una nueva línea, incluso cuando se utiliza un diseño de varias columnas.",
     path: "Especifique la ubicación dentro del dataset de servicio donde se encuentra la matriz de objetos de destino. Déjelo en vacío si la dirección URL ya apunta a la matriz.",
@@ -2756,3 +2760,7 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pv.allQuestions: "Show all questions" => "Mostrar todas las preguntas"
 // pv.answeredQuestions: "Show answered questions only" => "Mostrar solo las preguntas respondidas"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Establece la ubicación de los botones de navegación en una página."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Utilice los valores de la siguiente columna de matriz o pregunta de panel como ID de opción"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Utilice los valores de la siguiente columna de matriz o pregunta de panel como textos de elección"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "En los tipos de preguntas de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Esta configuración especifica qué columna de matriz o pregunta de panel debe proporcionar los identificadores."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "En los tipos de preguntas de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Esta configuración especifica qué columna de matriz o pregunta de panel debe proporcionar los textos de visualización."

@@ -1,13 +1,7 @@
 import * as React from "react";
-import { CSSProperties } from "react";
-import { ITabbedMenuItem, TabbedMenuItem, TabbedMenuContainer } from "survey-creator-core";
-import {
-  Base,
-  IAction,
-  Action,
-  ResponsivityManager,
-  AdaptiveActionContainer
-} from "survey-core";
+import * as ReactDOM from "react-dom";
+import { TabbedMenuItem, TabbedMenuContainer } from "survey-creator-core";
+import { Base, ResponsivityManager } from "survey-core";
 import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 export interface ITabbedMenuComponentProps {
@@ -35,7 +29,7 @@ export class TabbedMenuComponent extends SurveyElementBase<
   }
 
   renderElement(): React.JSX.Element {
-    const items = this.model.renderedActions.map((item) => <TabbedMenuItemWrapper item={item} key={item.id} />);
+    const items = this.model.renderedActions.map((item) => <TabbedMenuItemWrapper item={item} key={item.renderedId} />);
     return (
       <div ref={this.rootRef} className="svc-tabbed-menu">
         {items}
@@ -49,8 +43,7 @@ export class TabbedMenuComponent extends SurveyElementBase<
     if (!container) return;
     this.manager = new ResponsivityManager(
       container,
-      this.model,
-      ".svc-tabbed-menu-item-container:not(.sv-dots)>.sv-action__content"
+      this.model
     );
   }
   componentWillUnmount() {
@@ -63,8 +56,13 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
   any,
   any
 > {
+  private ref: React.RefObject<HTMLDivElement>;
+  constructor(props) {
+    super(props);
+    this.ref = React.createRef();
+  }
 
-  private get item() {
+  private get item(): TabbedMenuItem {
     return this.props.item;
   }
 
@@ -85,12 +83,34 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
     );
 
     return (
-      <span key={this.item.id} className={css}>
+      <span key={this.item.id} className={css} ref={this.ref}>
         <div className="sv-action__content">
           {component}
         </div>
       </span>
     );
+  }
+  componentDidMount(): void {
+    super.componentDidMount();
+    this.item.updateModeCallback = (mode, callback) => {
+      queueMicrotask(() => {
+        if((ReactDOM as any)["flushSync"]) {
+          (ReactDOM as any)["flushSync"](() => {
+            this.item.mode = mode;
+          });
+        } else {
+          this.item.mode = mode;
+        }
+        queueMicrotask(() => {
+          callback(mode, this.ref.current);
+        });
+      });
+    };
+    this.item.afterRender();
+  }
+  componentWillUnmount(): void {
+    super.componentWillUnmount();
+    this.item.updateModeCallback = undefined;
   }
 }
 

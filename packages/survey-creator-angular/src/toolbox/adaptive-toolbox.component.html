@@ -17,7 +17,7 @@
         </ng-container>
         <ng-container *ngIf="toolbox.showInSingleCategory">
           <div class="svc-toolbox__category">
-            <ng-container *ngFor="let item of toolbox.renderedActions">
+            <ng-container *ngFor="let item of toolbox.renderedActions;  trackBy: trackItemBy">
               <svc-toolbox-tool [creator]="creator" [item]="item" [parentModel]="toolbox"
                 [isCompact]="toolbox.isCompactRendered"></svc-toolbox-tool>
             </ng-container>

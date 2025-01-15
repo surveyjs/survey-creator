@@ -754,6 +754,8 @@ export var indonesianStrings = {
     separateSpecialChoices: "Pisahkan pilihan khusus (Tidak Ada, Lainnya, Pilih Semua)",
     choicesFromQuestion: "Salin pilihan dari pertanyaan berikut",
     choicesFromQuestionMode: "Pilihan mana yang harus disalin?",
+    choiceValuesFromQuestion: "Gunakan nilai dari matriks, kolom atau pertanyaan panel berikut sebagai ID pilihan",
+    choiceTextsFromQuestion: "Gunakan nilai dari kolom matriks atau pertanyaan panel berikut sebagai teks pilihan",
     progressBarShowPageTitles: "Menampilkan judul halaman di bilah kemajuan",
     progressBarShowPageNumbers: "Menampilkan nomor halaman di bilah kemajuan",
     showCommentArea: "Tampilkan area komentar",
@@ -1520,6 +1522,8 @@ export var indonesianStrings = {
     useDisplayValuesInDynamicTexts: "Dalam tipe pertanyaan pilihan tunggal dan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Saat dipilih, setelan ini akan menampilkan nilai tampilan, bukan nilai ID dalam pertanyaan HTML serta judul dinamis dan deskripsi elemen survei.",
     clearIfInvisible: "Pilih apakah akan menghapus nilai pertanyaan yang disembunyikan oleh logika kondisional atau tidak dan kapan melakukannya. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Setelah survei selesai\" secara default).",
     choicesFromQuestionMode: "Pilih dari: \"Semua\" - menyalin semua opsi pilihan dari pertanyaan yang dipilih; \"Dipilih\" - secara dinamis menyalin hanya opsi pilihan yang dipilih; \"Tidak dipilih\" - secara dinamis hanya menyalin opsi pilihan yang tidak dipilih. Opsi \"Tidak Ada\" dan \"Lainnya\" disalin secara default jika diaktifkan dalam pertanyaan sumber.",
+    choiceValuesFromQuestion: "Dalam jenis pertanyaan pilihan tunggal dan pilihan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Pengaturan ini menentukan kolom matriks atau pertanyaan panel mana yang harus memberikan ID.",
+    choiceTextsFromQuestion: "Dalam jenis pertanyaan pilihan tunggal dan pilihan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Pengaturan ini menentukan kolom matriks atau pertanyaan panel mana yang harus menyediakan teks tampilan.",
     showOtherItem: "Saat dipilih, pengguna dapat menyertakan input tambahan di kotak komentar terpisah.",
     separateSpecialChoices: "Menampilkan setiap opsi pilihan khusus (\"Tidak Ada\", \"Lainnya\", \"Pilih Semua\") pada baris baru, bahkan saat menggunakan tata letak beberapa kolom.",
     path: "Tentukan lokasi dalam himpunan data layanan tempat array objek target berada. Biarkan kosong jika URL sudah menunjuk ke array.",
@@ -3134,3 +3138,7 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pv.answeredQuestions: "Show answered questions only" => "Tampilkan pertanyaan yang dijawab saja"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Mengatur lokasi tombol navigasi pada halaman."
 // pe.size: "Input field width (in characters)" => "Lebar bidang input (dalam karakter)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Gunakan nilai dari matriks, kolom atau pertanyaan panel berikut sebagai ID pilihan"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Gunakan nilai dari kolom matriks atau pertanyaan panel berikut sebagai teks pilihan"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Dalam jenis pertanyaan pilihan tunggal dan pilihan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Pengaturan ini menentukan kolom matriks atau pertanyaan panel mana yang harus memberikan ID."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Dalam jenis pertanyaan pilihan tunggal dan pilihan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Pengaturan ini menentukan kolom matriks atau pertanyaan panel mana yang harus menyediakan teks tampilan."

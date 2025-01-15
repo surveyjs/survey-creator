@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-      <ng-container *ngFor="let item of category.items">
+      <ng-container *ngFor="let item of category.items; trackBy: trackItemBy">
         <svc-toolbox-tool [item]="item" [creator]="toolbox.creator" [parentModel]="toolbox" [isCompact]="false" ></svc-toolbox-tool>
       </ng-container>
   </div>

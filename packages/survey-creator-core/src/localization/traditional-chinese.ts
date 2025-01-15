@@ -754,6 +754,8 @@ var traditionalChineseTranslation = {
     separateSpecialChoices: "單獨的特殊選項（無、其他、全選）",
     choicesFromQuestion: "複製以下問題的選項",
     choicesFromQuestionMode: "要複製哪些選項？",
+    choiceValuesFromQuestion: "使用以下矩陣、列或面板問題中的值作為選項ID",
+    choiceTextsFromQuestion: "使用以下矩陣、列或面板問題中的值作為選擇文本",
     progressBarShowPageTitles: "在進度條中顯示頁面標題",
     progressBarShowPageNumbers: "在進度條中顯示頁碼",
     showCommentArea: "顯示評論區域",
@@ -1520,6 +1522,8 @@ var traditionalChineseTranslation = {
     useDisplayValuesInDynamicTexts: "在單選題和多選題類型中，每個選項都有一個 ID 和顯示值。選中此設置后，將在 HTML 問題以及調查元素的動態標題和描述中顯示顯示值，而不是 ID 值。",
     clearIfInvisible: "選擇是否清除條件邏輯隱藏的問題值以及何時清除。“繼承”選項應用調查級別設置（預設為“完成調查後”）。",
     choicesFromQuestionMode: "從以下選項中選擇：「全部」 - 複製所選問題中的所有選項;“Selected” - 僅動態複製選定的選項選項;“未選擇” - 僅動態複製未選擇的選項。默認情況下，如果在源問題中啟用了“無”和“其他”選項，則會複製該選項。",
+    choiceValuesFromQuestion: "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣、列或面板問題應提供ID。",
+    choiceTextsFromQuestion: "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣列或面板問題應提供顯示文本。",
     showOtherItem: "選取後，使用者可以在單獨的註釋框中包含其他輸入。",
     separateSpecialChoices: "在新行上顯示每個特殊選項（“無”、“其他”、“全選”），即使使用多列佈局也是如此。",
     path: "指定服務數據集中目標物件陣列所在的位置。如果 URL 已指向陣列，則留空。",
@@ -3250,3 +3254,7 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pv.allQuestions: "Show all questions" => "顯示所有問題"
 // pv.answeredQuestions: "Show answered questions only" => "僅顯示已回答的問題"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "設置頁面上導航按鈕的位置。"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "使用以下矩陣、列或面板問題中的值作為選項ID"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "使用以下矩陣、列或面板問題中的值作為選擇文本"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣、列或面板問題應提供ID。"
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣列或面板問題應提供顯示文本。"

@@ -754,6 +754,8 @@ export var jaStrings = {
     separateSpecialChoices: "個別の特別な選択肢 (なし、その他、すべて選択)",
     choicesFromQuestion: "次の質問から選択肢をコピーする",
     choicesFromQuestionMode: "どの選択肢をコピーするか?",
+    choiceValuesFromQuestion: "次の行列列またはパネルの質問の値を選択肢IDとして使用します",
+    choiceTextsFromQuestion: "次の行列の列またはパネルの質問の値を選択テキストとして使用します",
     progressBarShowPageTitles: "プログレスバーにページタイトルを表示する",
     progressBarShowPageNumbers: "プログレスバーにページ番号を表示する",
     showCommentArea: "コメント領域を表示する",
@@ -1520,6 +1522,8 @@ export var jaStrings = {
     useDisplayValuesInDynamicTexts: "単一選択および複数選択の質問タイプでは、各選択肢にIDと表示値があります。この設定を選択すると、HTML の質問やアンケート エレメントの動的なタイトルと説明に ID 値ではなく表示値が表示されます。",
     clearIfInvisible: "条件付きロジックで非表示にした質問値をクリアするかどうか、およびいつクリアするかを選択します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「アンケート完了時」)を適用します。",
     choicesFromQuestionMode: "選択元: 「すべて」 - 選択した質問からすべての選択肢をコピーします。\"Selected\" - 選択した選択肢オプションのみを動的にコピーします。「未選択」 - 選択されていない選択肢オプションのみを動的にコピーします。「なし」と「その他」のオプションは、ソースの質問で有効になっている場合、デフォルトでコピーされます。",
+    choiceValuesFromQuestion: "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、どの行列列またはパネルの質問がIDを提供するかを指定します。",
+    choiceTextsFromQuestion: "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、表示テキストを提供する行列列またはパネルの質問を指定します。",
     showOtherItem: "選択すると、ユーザーは別のコメント ボックスに追加の入力を含めることができます。",
     separateSpecialChoices: "各特殊選択オプション(「なし」、「その他」、「すべて選択」)を、複数列のレイアウトを使用している場合でも、新しい行に表示します。",
     path: "サービス データセット内で、オブジェクトのターゲット配列が配置されている場所を指定します。URL が既に配列を指している場合は、空のままにします。",
@@ -2979,3 +2983,7 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pv.answeredQuestions: "Show answered questions only" => "回答済みの質問のみを表示する"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "ページ上のナビゲーション ボタンの位置を設定します。"
 // pe.size: "Input field width (in characters)" => "入力フィールドの幅 (文字単位)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "次の行列列またはパネルの質問の値を選択肢IDとして使用します"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "次の行列の列またはパネルの質問の値を選択テキストとして使用します"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、どの行列列またはパネルの質問がIDを提供するかを指定します。"
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、表示テキストを提供する行列列またはパネルの質問を指定します。"

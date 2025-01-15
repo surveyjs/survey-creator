@@ -754,6 +754,8 @@ var frenchTranslation = {
     separateSpecialChoices: "Afficher séparément les choix spéciaux (Aucun, Autre, Sélectionner tout)",
     choicesFromQuestion: "Copier les choix à partir de la question",
     choicesFromQuestionMode: "Quels choix copier ?",
+    choiceValuesFromQuestion: "Utilisez les valeurs de la question de la matrice, de la colonne ou du panneau suivant comme ID de choix",
+    choiceTextsFromQuestion: "Utilisez les valeurs de la question matricielle, de la colonne ou du panneau suivant comme textes de choix",
     progressBarShowPageTitles: "Afficher les titres des pages dans la barre de progression",
     progressBarShowPageNumbers: "Afficher les numéros de page dans la barre de progression",
     showCommentArea: "Afficher la zone de commentaire",
@@ -1520,6 +1522,8 @@ var frenchTranslation = {
     useDisplayValuesInDynamicTexts: "Dans les types de questions à sélection unique et multiple, chaque option de choix a un ID et une valeur d’affichage. Lorsqu’il est sélectionné, ce paramètre affiche une valeur d’affichage au lieu d’une valeur d’ID dans les questions HTML et les titres et descriptions dynamiques des éléments d’enquête.",
     clearIfInvisible: "Choisissez d’effacer ou non les valeurs de question masquées par la logique conditionnelle et quand le faire. L’option « Hériter » applique le paramètre au niveau de l’enquête (« À la fin de l’enquête » par défaut).",
     choicesFromQuestionMode: "Choisissez parmi : « Tous » - copie toutes les options de choix de la question sélectionnée ; « Sélectionné » - copie dynamiquement uniquement les options de choix sélectionnées ; « Non sélectionné » - copie dynamiquement uniquement les options de choix non sélectionnées. Les options « Aucun » et « Autre » sont copiées par défaut si elles sont activées dans la question source.",
+    choiceValuesFromQuestion: "Dans les types de questions à sélection unique et à sélection multiple, chaque option de choix a un ID et une valeur d’affichage. Ce paramètre spécifie la question de matrice, de colonne ou de panneau qui doit fournir les ID.",
+    choiceTextsFromQuestion: "Dans les types de questions à sélection unique et à sélection multiple, chaque option de choix a un ID et une valeur d’affichage. Ce paramètre spécifie la question de matrice, de colonne ou de panneau qui doit fournir les textes d’affichage.",
     showOtherItem: "Lorsque cette option est sélectionnée, les utilisateurs peuvent inclure des entrées supplémentaires dans une zone de commentaire distincte.",
     separateSpecialChoices: "Affiche chaque option de choix spécial (« Aucun », « Autre », « Tout sélectionner ») sur une nouvelle ligne, même en cas d’utilisation d’une mise en page à plusieurs colonnes.",
     path: "Spécifiez l’emplacement dans le jeu de données de service où se trouve le tableau cible d’objets. Laissez vide si l’URL pointe déjà vers le tableau.",
@@ -3039,3 +3043,7 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pv.answeredQuestions: "Show answered questions only" => "Afficher uniquement les questions répondues"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Définit l’emplacement des boutons de navigation sur une page."
 // pe.size: "Input field width (in characters)" => "Largeur du champ de saisie (en caractères)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Utilisez les valeurs de la question de la matrice, de la colonne ou du panneau suivant comme ID de choix"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Utilisez les valeurs de la question matricielle, de la colonne ou du panneau suivant comme textes de choix"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Dans les types de questions à sélection unique et à sélection multiple, chaque option de choix a un ID et une valeur d’affichage. Ce paramètre spécifie la question de matrice, de colonne ou de panneau qui doit fournir les ID."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Dans les types de questions à sélection unique et à sélection multiple, chaque option de choix a un ID et une valeur d’affichage. Ce paramètre spécifie la question de matrice, de colonne ou de panneau qui doit fournir les textes d’affichage."

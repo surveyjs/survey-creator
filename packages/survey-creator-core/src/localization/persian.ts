@@ -754,6 +754,8 @@ var persianStrings = {
     separateSpecialChoices: "انتخاب های ویژه جداگانه (هیچ کدام، دیگر، همه را انتخاب کنید)",
     choicesFromQuestion: "کپی کردن انتخابها از سؤال زیر",
     choicesFromQuestionMode: "کدام گزینه ها را کپی کنید؟",
+    choiceValuesFromQuestion: "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان شناسه های انتخاب استفاده کنید.",
+    choiceTextsFromQuestion: "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان متن انتخابی استفاده کنید",
     progressBarShowPageTitles: "نمایش عناوین صفحه در نوار پیشرفت",
     progressBarShowPageNumbers: "نمایش شمارههای صفحه در نوار پیشرفت",
     showCommentArea: "نمایش ناحیهی نظرات",
@@ -1520,6 +1522,8 @@ var persianStrings = {
     useDisplayValuesInDynamicTexts: "در انواع سوالات تک و چند انتخاب، هر گزینه انتخاب دارای یک شناسه و مقدار نمایش است. هنگامی که انتخاب می شود، این تنظیم یک مقدار نمایش را به جای یک مقدار ID در سوالات HTML و عناوین پویا و توصیف عناصر بررسی نشان می دهد.",
     clearIfInvisible: "انتخاب کنید که ایا برای پاک کردن یا نه ارزش سوال پنهان شده توسط منطق شرطی و زمانی که به ان را انجام دهد. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"پس از اتمام نظرسنجی\" به طور پیش فرض) اعمال می شود.",
     choicesFromQuestionMode: "انتخاب از: \"همه\" - کپی تمام گزینه های انتخاب از سوال انتخاب شده؛ \"انتخاب شده\" - به صورت پویا فقط گزینه های انتخاب شده را کپی می کند؛ \"Unselected\" - به صورت پویا تنها گزینه های انتخاب نشده را کپی می کند. گزینه های \"None\" و \"Other\" در صورت فعال شدن در سؤال منبع به طور پیش فرض کپی می شوند.",
+    choiceValuesFromQuestion: "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید شناسه ها را ارائه دهد.",
+    choiceTextsFromQuestion: "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید متون نمایش داده شده را ارائه دهد.",
     showOtherItem: "هنگامی که انتخاب می شوند، کاربران می توانند ورودی های اضافی را در یک جعبه نظر جداگانه قرار دهند.",
     separateSpecialChoices: "نمایش هر گزینه انتخاب خاص (\"هیچ\"، \"دیگر\"، \"انتخاب همه\") در یک خط جدید، حتی در هنگام استفاده از یک طرح چند ستون.",
     path: "مشخص کردن محل در مجموعه داده های سرویس که در ان ارایه هدف از اشیاء واقع شده است. ترک خالی اگر URL در حال حاضر به ارایه اشاره می کند.",
@@ -2935,3 +2939,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pv.allQuestions: "Show all questions" => "نمایش همه سوالات"
 // pv.answeredQuestions: "Show answered questions only" => "فقط سوالات پاسخ داده شده را نشان دهید"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "مکان دکمه های پیمایش را در یک صفحه تنظیم می کند."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان شناسه های انتخاب استفاده کنید."
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان متن انتخابی استفاده کنید"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید شناسه ها را ارائه دهد."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید متون نمایش داده شده را ارائه دهد."

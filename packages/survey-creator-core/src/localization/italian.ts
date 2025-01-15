@@ -754,6 +754,8 @@ var italianTranslation = {
     separateSpecialChoices: "Scelte speciali separate (Nessuno, Altro, Seleziona tutti)",
     choicesFromQuestion: "Copia le scelte dalla domanda seguente:",
     choicesFromQuestionMode: "Quale scelta copiare?",
+    choiceValuesFromQuestion: "Utilizza i valori della colonna matrice seguente o della domanda del pannello come ID di scelta",
+    choiceTextsFromQuestion: "Usa i valori della seguente colonna matrice o domanda del pannello come testi di scelta",
     progressBarShowPageTitles: "Visualizzare i titoli delle pagine nella barra di avanzamento",
     progressBarShowPageNumbers: "Visualizzare i numeri di pagina nella barra di avanzamento",
     showCommentArea: "Mostra l'area commento",
@@ -1520,6 +1522,8 @@ var italianTranslation = {
     useDisplayValuesInDynamicTexts: "Nei tipi di domande a selezione singola e multipla, ogni opzione di scelta ha un ID e un valore di visualizzazione. Quando questa opzione è selezionata, questa impostazione mostra un valore di visualizzazione anziché un valore ID nelle domande HTML e nei titoli dinamici e nelle descrizioni degli elementi dell'indagine.",
     clearIfInvisible: "Scegli se cancellare o meno i valori delle domande nascosti dalla logica condizionale e quando farlo. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"Al completamento dell'indagine\" per impostazione predefinita).",
     choicesFromQuestionMode: "Scegli tra: \"Tutte\" - copia tutte le opzioni di scelta dalla domanda selezionata; \"Selezionato\" - copia dinamicamente solo le opzioni di scelta selezionate; \"Non selezionato\" - copia dinamicamente solo le opzioni di scelta non selezionate. Le opzioni \"Nessuna\" e \"Altro\" vengono copiate per impostazione predefinita se abilitate nella domanda di origine.",
+    choiceValuesFromQuestion: "Nei tipi di domande a selezione singola e multipla, ogni opzione di scelta ha un ID e un valore visualizzato. Questa impostazione specifica quale colonna matrice o domanda del pannello deve fornire gli ID.",
+    choiceTextsFromQuestion: "Nei tipi di domande a selezione singola e multipla, ogni opzione di scelta ha un ID e un valore visualizzato. Questa impostazione specifica quale colonna matrice o domanda del pannello deve fornire i testi visualizzati.",
     showOtherItem: "Quando questa opzione è selezionata, gli utenti possono includere input aggiuntivi in una casella di commento separata.",
     separateSpecialChoices: "Visualizza ogni opzione di scelta speciale (\"Nessuna\", \"Altro\", \"Seleziona tutto\") su una nuova riga, anche quando si utilizza un layout a più colonne.",
     path: "Specificare la posizione all'interno del set di dati del servizio in cui si trova la matrice di oggetti di destinazione. Lasciare vuoto se l'URL punta già all'array.",
@@ -2741,3 +2745,7 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // pv.answeredQuestions: "Show answered questions only" => "Mostra solo le domande con risposta"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Imposta la posizione dei pulsanti di navigazione in una pagina."
 // pe.size: "Input field width (in characters)" => "Larghezza del campo di input (in caratteri)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Utilizza i valori della colonna matrice seguente o della domanda del pannello come ID di scelta"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Usa i valori della seguente colonna matrice o domanda del pannello come testi di scelta"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Nei tipi di domande a selezione singola e multipla, ogni opzione di scelta ha un ID e un valore visualizzato. Questa impostazione specifica quale colonna matrice o domanda del pannello deve fornire gli ID."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Nei tipi di domande a selezione singola e multipla, ogni opzione di scelta ha un ID e un valore visualizzato. Questa impostazione specifica quale colonna matrice o domanda del pannello deve fornire i testi visualizzati."
