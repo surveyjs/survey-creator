@@ -283,9 +283,13 @@ export interface PropertyEditorUpdateTitleActionsEvent {
 
 export interface PropertyGridShowPopupEvent {
   /**
+   * Obsolete. Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * The instance of a survey element (question or panel) that users are configuring in the Property Grid.
    */
-  obj: Base;
+  element: Base;
   /**
    * A property being edited.
    */
