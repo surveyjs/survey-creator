@@ -4872,3 +4872,21 @@ test("Designer surface css classes", (): any => {
 
   settings.defaultNewSurveyJSON = savedNewJSON;
 });
+
+test("Update showPlaceholder calls updateSurveyScaleStartDimensions and resets scale start dimensions", (): any => {
+  const creator = new CreatorTester(undefined, undefined, false);
+  const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
+  designerPlugin.activate();
+  const model = designerPlugin.model;
+  expect(model.showPlaceholder).toBeTruthy();
+
+  creator.survey.setResponsiveStartWidth(1000);
+  creator.survey.setStaticStartWidth(1000);
+  expect(creator.survey.responsiveStartWidth).toBe(1000);
+  expect(creator.survey.staticStartWidth).toBe(1000);
+
+  creator.survey.addNewPage();
+  expect(model.showPlaceholder).toBeFalsy();
+  expect(creator.survey.responsiveStartWidth).toBeUndefined();
+  expect(creator.survey.staticStartWidth).toBeUndefined();
+});
