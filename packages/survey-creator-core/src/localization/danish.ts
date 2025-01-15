@@ -22,7 +22,7 @@ export var danishStrings = {
     theme: "Temaer",
     translation: "Oversættelse",
     designer: "Undersøgelsesdesigner",
-    editor: "JSON Editor",
+    json: "JSON Editor",
     logic: "Logik"
   },
   // Question types
@@ -440,7 +440,7 @@ export var danishStrings = {
     imageWidth: "Billedbredde",
     valueName: "Værdiens navn",
     rateDescriptionLocation: "Justering af etiketter",
-    size: "Inputfeltstørrelse (i tegn)",
+    size: "Bredde på inputfelt (i tegn)",
     cellErrorLocation: "Justering af cellefejlmeddelelse",
     enabled: "Aktiveret",
     disabled: "Handicappet",
@@ -625,6 +625,7 @@ export var danishStrings = {
     editText: "Tekst til knappen Rediger svar",
     startSurveyText: "Start knaptekst",
     showNavigationButtons: "Vis navigationsknapper (standard navigation)",
+    navigationButtonsLocation: "Justering af navigationsknapper",
     showPrevButton: "Vis forrige knap (brugeren må gå tilbage til forrige side)",
     firstPageIsStartPage: "Den første side in undersøgelsen er starten på undersøgelsen.",
     showCompletePage: "Vis afslutningssiden til slut (completedHtml)",
@@ -753,6 +754,8 @@ export var danishStrings = {
     separateSpecialChoices: "Adskil særlige valg (Ingen, Andet, Vælg alle)",
     choicesFromQuestion: "Kopiér valg fra følgende spørgsmål",
     choicesFromQuestionMode: "Hvilke valgmuligheder skal kopieres?",
+    choiceValuesFromQuestion: "Bruge værdier fra følgende matrixkolonne eller panelspørgsmål som valg-id'er",
+    choiceTextsFromQuestion: "Brug værdier fra følgende matrixkolonne eller panelspørgsmål som valgtekster",
     progressBarShowPageTitles: "Vis sidetitler på statuslinjen",
     progressBarShowPageNumbers: "Vis sidetal på statuslinjen",
     showCommentArea: "Vis kommentarområdet",
@@ -1104,6 +1107,8 @@ export var danishStrings = {
     noPreview: "Ingen forhåndsvisning",
     showAllQuestions: "Vis alle spørgsmål",
     showAnsweredQuestions: "Vis kun besvarede spørgsmål",
+    allQuestions: "Vis alle spørgsmål",
+    answeredQuestions: "Vis kun besvarede spørgsmål",
     pages: "Afsluttede sider",
     questions: "Besvarede spørgsmål",
     requiredQuestions: "Besvarede nødvendige spørgsmål",
@@ -1455,6 +1460,7 @@ export var danishStrings = {
     autoAdvanceEnabled: "Vælg, om undersøgelsen automatisk skal gå videre til næste side, når en svarperson har besvaret alle spørgsmål på den aktuelle side. Denne funktion gælder ikke, hvis det sidste spørgsmål på siden er åbent eller tillader flere svar.",
     autoAdvanceAllowComplete: "Vælg, om undersøgelsen skal fuldføres automatisk, når svarpersonen har besvaret alle spørgsmål.",
     showNavigationButtons: "Angiver synligheden og placeringen af navigationsknapper på en side.",
+    navigationButtonsLocation: "Angiver placeringen af navigationsknapper på en side.",
     showProgressBar: "Indstiller synligheden og placeringen af en statuslinje. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften.",
     showPreviewBeforeComplete: "Aktivér eksempelsiden med alle eller kun besvarede spørgsmål.",
     questionTitleLocation: "Gælder for alle spørgsmål i undersøgelsen. Denne indstilling kan tilsidesættes af titeljusteringsregler på lavere niveauer: panel, side eller spørgsmål. En indstilling på lavere niveau tilsidesætter dem på et højere niveau.",
@@ -1501,7 +1507,7 @@ export var danishStrings = {
       questionTitleWidth: "Angiver ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsbokse. Accepterer CSS-værdier (px, %, in, pt osv.).",
       questionErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til spørgsmålet med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard).",
       questionOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau (\"Original\" som standard). Effekten af denne indstilling er kun synlig under fanen Eksempel.",
-      navigationButtonsVisibility: "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
+      showNavigationButtons: "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
     },
     timerLocation: "Indstiller placeringen af en timer på en side.",
     panelsState: "Vælg mellem: \"Låst\" - brugere kan ikke udvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Udvid alle\" - alle paneler starter i udvidet tilstand; \"Først udvidet\" - kun det første panel udvides oprindeligt.",
@@ -1516,6 +1522,8 @@ export var danishStrings = {
     useDisplayValuesInDynamicTexts: "I spørgsmålstyper med et enkelt og flere valg har hver valgmulighed et id og en visningsværdi. Når denne indstilling er valgt, vises der en visningsværdi i stedet for en id-værdi i HTML-spørgsmål og dynamiske titler og beskrivelser af undersøgelseselementer.",
     clearIfInvisible: "Vælg, om du vil rydde spørgsmålsværdier, der er skjult af betinget logik, og hvornår det skal gøres. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Ved afslutning af undersøgelsen\" som standard).",
     choicesFromQuestionMode: "Vælg mellem: \"Alle\" - kopierer alle valgmuligheder fra det valgte spørgsmål; \"Valgt\" - kopierer dynamisk kun valgte valgindstillinger; \"Ikke valgt\" - kopierer dynamisk kun ikke-valgte valgindstillinger. Indstillingerne \"Ingen\" og \"Andre\" kopieres som standard, hvis de er aktiveret i kildespørgsmålet.",
+    choiceValuesFromQuestion: "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal angive id'erne.",
+    choiceTextsFromQuestion: "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal indeholde visningsteksterne.",
     showOtherItem: "Når denne indstilling er valgt, kan brugerne medtage yderligere input i et separat kommentarfelt.",
     separateSpecialChoices: "Viser hver indstilling for særlige valgmuligheder (\"Ingen\", \"Andet\", \"Vælg alle\") på en ny linje, selv når du bruger et layout med flere kolonner.",
     path: "Angiv placeringen i tjenestedatasættet, hvor målmatrixen af objekter er placeret. Lad feltet stå tomt, hvis URL-adressen allerede peger på arrayet.",
@@ -1660,7 +1668,6 @@ export var danishStrings = {
     inputTextAlignment: "Justering af inputværdi",
     elements: "Elementer",
     content: "Indhold",
-    navigationButtonsVisibility: "navigationButtonsVisibility",
     navigationTitle: "Navigation titel",
     navigationDescription: "Beskrivelse af navigation",
     longTap: "Langt tryk",
@@ -2826,7 +2833,7 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Gælder for alle spørgsmål på denne side. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål eller paneler. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Angiver placeringen af en fejlmeddelelse i forhold til spørgsmålet med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau (\"Original\" som standard). Effekten af denne indstilling er kun synlig under fanen Eksempel."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Vælg mellem: \"Låst\" - brugere kan ikke udvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Udvid alle\" - alle paneler starter i udvidet tilstand; \"Først udvidet\" - kun det første panel udvides oprindeligt."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Angiv et delt egenskabsnavn i den række objekter, der indeholder de URL-adresser til billeder eller videofiler, du vil have vist på valglisten."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Den venstre værdi fungerer som et vare-id, der bruges i betingede regler, den rigtige værdi vises for respondenterne."
@@ -3156,3 +3163,12 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // tabs.surfaceBackground: "Surface Background" => "Overflade baggrund"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Brug svar fra sidste post som standard"
 // colors.gray: "Gray" => "Grå"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Justering af navigationsknapper"
+// pv.allQuestions: "Show all questions" => "Vis alle spørgsmål"
+// pv.answeredQuestions: "Show answered questions only" => "Vis kun besvarede spørgsmål"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Angiver placeringen af navigationsknapper på en side."
+// pe.size: "Input field width (in characters)" => "Bredde på inputfelt (i tegn)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Bruge værdier fra følgende matrixkolonne eller panelspørgsmål som valg-id'er"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Brug værdier fra følgende matrixkolonne eller panelspørgsmål som valgtekster"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal angive id'erne."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal indeholde visningsteksterne."

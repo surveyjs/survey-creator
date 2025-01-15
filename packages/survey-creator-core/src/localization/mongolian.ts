@@ -22,7 +22,7 @@ export var mnStrings = {
     theme: "Сэдвүүд",
     translation: "Орчуулга",
     designer: "Удирдлага",
-    editor: "JSON засварлагч",
+    json: "JSON засварлагч",
     logic: "Логик"
   },
   // Question types
@@ -625,6 +625,7 @@ export var mnStrings = {
     editText: "Хариулт засах харагдах бичиг",
     startSurveyText: "Санал асуулга эхлэх үед харагдах бичиг",
     showNavigationButtons: "Чиглүүлгийн товчийн байрлал",
+    navigationButtonsLocation: "Навигацийн товчлууруудын байрлал",
     showPrevButton: "Өмнөх хуудасны товч харуулах",
     firstPageIsStartPage: "Эхлэх хуудас нь эхний хуудас байна",
     showCompletePage: "Санал асуулга амжилттай бөглөгдсөн хуудсыг харуулах",
@@ -753,6 +754,8 @@ export var mnStrings = {
     separateSpecialChoices: "Тусгай сонголтуудыг салгах (Аль нь ч биш, Бусад, Бүгдийг сонгох)",
     choicesFromQuestion: "Дараах асуултаас сонголтуудыг хуулах.",
     choicesFromQuestionMode: "Аль сонголтуудыг хуулах вэ?",
+    choiceValuesFromQuestion: "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын ID болгон ашигла",
+    choiceTextsFromQuestion: "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын текст болгон ашигла",
     progressBarShowPageTitles: "Хөгжил дэвшлийн тавцан дахь хуудасны гарчгыг харуул",
     progressBarShowPageNumbers: "Хуудасны дугааруудыг progress bar-д харуулах",
     showCommentArea: "Санал хүсэлтийн хэсэг харуулах",
@@ -1104,6 +1107,8 @@ export var mnStrings = {
     noPreview: "Урьдчилан харах боломжгүй",
     showAllQuestions: "Бүх асуултыг харуулах.",
     showAnsweredQuestions: "Зөвхөн хариулсан асуултуудыг харуулах.",
+    allQuestions: "Бүх асуултыг үзүүл",
+    answeredQuestions: "Зөвхөн хариулсан асуултуудыг үзүүлэх",
     pages: "Бөглөгдсөн хуудсууд",
     questions: "Хариулсан асуултууд",
     requiredQuestions: "Заавал бөглөх асуултууд",
@@ -1455,6 +1460,7 @@ export var mnStrings = {
     autoAdvanceEnabled: "Оролцогч одоогийн хуудсан дээрх бүх асуултад хариулсны дараа судалгааг дараагийн хуудас руу автоматаар шилжүүлэхийг хүсч байгаа эсэхээ сонго. Хуудасны хамгийн сүүлийн асуулт нээлттэй эсвэл олон хариулт өгөх боломж олгодог бол энэ онцлог хэрэгжихгүй.",
     autoAdvanceAllowComplete: "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго.",
     showNavigationButtons: "Хуудас дээр навигацийн товчны харагдах байдал, байршлыг тогтооно.",
+    navigationButtonsLocation: "Хуудас дээрх навигацийн товчлууруудын байрлалыг тогтооно.",
     showProgressBar: "Хэмжилтийн тавцангийн харагдах байдал, байршлыг тогтооно. \"Авто\" үнэ цэнэ нь судалгааны толгой гарчгийн дээр эсвэл түүнээс доош хөгжил дэвшлийн барыг харуулдаг.",
     showPreviewBeforeComplete: "Зөвхөн бүх асуултаар эсвэл хариулт бүхий урьдчилан харах хуудсыг боломжтой болго.",
     questionTitleLocation: "Судалгааны бүх асуултад хамаарна. Энэ тохиргоог доод түвшний нэрийн зохицуулах дүрмээр давамгайлах боломжтой: panel, хуудас, эсвэл асуулт. Доод түвшний тохиргоо нь илүү өндөр түвшинд байгаа хүмүүсийг хүчингүй болгоно.",
@@ -1501,7 +1507,7 @@ export var mnStrings = {
       questionTitleWidth: "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
       questionErrorLocation: "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг.",
       questionOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
-      navigationButtonsVisibility: "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
+      showNavigationButtons: "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
     },
     timerLocation: "Хуудас дээрх цаг хэмжигчийн байрлалыг тогтооно.",
     panelsState: "Сонгоно уу: \"Locked\" - хэрэглэгчид панелуудыг өргөтгөх, нураах боломжгүй; \"Бүх нуралт\" - бүх панел нурсан байдлаас эхэлнэ; \"Бүх хүрээг өргөтгөнө\" - бүх панелууд өргөтгөсөн байдлаас эхэлнэ; \"First expanded\" - зөвхөн эхний панел нь эхэндээ өргөжсөн.",
@@ -1516,6 +1522,8 @@ export var mnStrings = {
     useDisplayValuesInDynamicTexts: "Ганц болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон харуулах үнэ цэнэтэй байдаг. Энэ тохиргоо нь сонгогдсон тохиолдолд HTML асуулт болон динамик гарчиг, судалгааны элементүүдийн тодорхойлолтод ID үнэ цэнийн оронд харуулах үнэ цэнийг харуулдаг.",
     clearIfInvisible: "Нөхцөл байдлын логикоор нуусан үнэт зүйлсийг тодорхой болгох уу, хэзээ хийх вэ гэдгийг сонго. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Upon survey completion\" -ийг дефолтоор) хэрэгжүүлдэг.",
     choicesFromQuestionMode: "Сонгоно уу: \"Бүгд\" - сонгосон асуултаас сонголт хийх бүх сонголтыг хуулбарласан; \"Сонгосон\" - динамикаар зөвхөн сонгосон сонголтын хувилбаруудыг хуулбарласан; \"Сонгогдоогүй\" - динамикаар зөвхөн сонгогдоогүй сонголтыг хувилдаг. \"None\" болон \"Бусад\" сонголтууд нь эх сурвалжийн асуулгад боломжтой бол default-ээр хуулагддаг.",
+    choiceValuesFromQuestion: "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт ID-г өгөхийг тодорхойлдог.",
+    choiceTextsFromQuestion: "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт үзүүлбэрийн текстийг хангахыг тодорхойлдог.",
     showOtherItem: "Сонгогдсон тохиолдолд хэрэглэгчид тусад нь тайлбарын хайрцагт нэмэлт оруулах боломжтой.",
     separateSpecialChoices: "Тусгай сонголт бүрийг (\"None\", \"Other\", \"Select All\") шинэ мөр дээр, бүр олон баганатай загварыг ашиглахдаа ч үзүүлдэг.",
     path: "Зорилтот олон тооны объект байрладаг үйлчилгээний мэдээллийн сан доторх байршлыг тодорхойл. URL аль хэдийн багц руу зааж байгаа бол хоосон орхи.",
@@ -1660,7 +1668,6 @@ export var mnStrings = {
     inputTextAlignment: "Оролтын үнэ цэнийн зохицуулалт",
     elements: "Элементүүд",
     content: "Контент",
-    navigationButtonsVisibility: "Чиглүүлэх товчны харагдац",
     navigationTitle: "Чиглүүлэгчийн гарчиг",
     navigationDescription: "Чиглүүлэгчийн тайлбар",
     longTap: "Long tap",
@@ -2298,7 +2305,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Энэ хуудсан дахь бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуулт эсвэл панелуудын нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Сонгоно уу: \"Locked\" - хэрэглэгчид панелуудыг өргөтгөх, нураах боломжгүй; \"Бүх нуралт\" - бүх панел нурсан байдлаас эхэлнэ; \"Бүх хүрээг өргөтгөнө\" - бүх панелууд өргөтгөсөн байдлаас эхэлнэ; \"First expanded\" - зөвхөн эхний панел нь эхэндээ өргөжсөн."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Сонгосон жагсаалтанд харуулахыг хүссэн зураг эсвэл видео файл URL-уудыг агуулсан олон тооны эд зүйлсийн дотор хуваалцсан өмчийн нэрийг оруулна уу."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Зүүн үнэ цэнэ нь нөхцөлийн дүрэмд хэрэглэгддэг зүйл ID, зөв үнэ цэнийг хариулагчдад үзүүлдэг."
@@ -2628,3 +2635,11 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // tabs.surfaceBackground: "Surface Background" => "Гадаргуугийн фон"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Сүүлийн тайлбарын хариултуудыг стандарт болгон ашигла"
 // colors.gray: "Gray" => "Саарал"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Навигацийн товчлууруудын байрлал"
+// pv.allQuestions: "Show all questions" => "Бүх асуултыг үзүүл"
+// pv.answeredQuestions: "Show answered questions only" => "Зөвхөн хариулсан асуултуудыг үзүүлэх"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Хуудас дээрх навигацийн товчлууруудын байрлалыг тогтооно."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын ID болгон ашигла"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын текст болгон ашигла"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт ID-г өгөхийг тодорхойлдог."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт үзүүлбэрийн текстийг хангахыг тодорхойлдог."

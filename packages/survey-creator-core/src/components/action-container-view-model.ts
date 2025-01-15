@@ -49,28 +49,28 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
     this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
 
-  public fit(dimension: number, dotsItemSize: number) {
-    if (dimension <= 0) return;
+  public fit(options: { availableSpace: number, gap?: number }) {
+    if (options.availableSpace <= 0) return;
 
     this.dotsItem.visible = false;
     const items = this.visibleActions;
 
-    if (dimension >= items.reduce((sum, i) => sum += i.maxDimension, 0)) {
+    if (options.availableSpace >= items.reduce((sum, i) => sum += i.maxDimension, 0)) {
       items.forEach(i => i.mode = "large");
       return;
     }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false), 0)) {
+    if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, false), 0)) {
       this.setModeForActions(false);
       return;
     }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, ["convertInputType"]), 0)) {
+    if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, ["convertInputType"]), 0)) {
       this.setModeForActions(false, ["convertInputType"]);
       return;
     }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, true), 0)) {
+    if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, true), 0)) {
       this.setModeForActions(true);
       return;
     }

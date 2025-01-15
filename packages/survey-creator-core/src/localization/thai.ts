@@ -22,7 +22,7 @@ export const thStrings = {
     theme: "ธีม",
     translation: "การแปล",
     designer: "นักออกแบบ",
-    editor: "ตัวแก้ไข JSON",
+    json: "ตัวแก้ไข JSON",
     logic: "ตรรกะ"
   },
   // Question types
@@ -625,6 +625,7 @@ export const thStrings = {
     editText: "ข้อความปุ่ม \"แก้ไขคำตอบ\"",
     startSurveyText: "ข้อความปุ่ม \"เริ่มแบบสำรวจ\"",
     showNavigationButtons: "แสดง/ซ่อนปุ่มนำทาง",
+    navigationButtonsLocation: "การจัดตําแหน่งปุ่มนําทาง",
     showPrevButton: "แสดงปุ่ม \"หน้าก่อนหน้า\"",
     firstPageIsStartPage: "หน้าแรกเป็นหน้าที่เริ่ม",
     showCompletePage: "แสดงหน้า \"ขอบคุณ\"",
@@ -753,6 +754,8 @@ export const thStrings = {
     separateSpecialChoices: "แยกตัวเลือกพิเศษ",
     choicesFromQuestion: "คัดลอกตัวเลือกจากคำถามต่อไปนี้",
     choicesFromQuestionMode: "ตัวเลือกใดที่จะคัดลอก",
+    choiceValuesFromQuestion: "ใช้ค่าจากคอลัมน์เมทริกซ์ต่อไปนี้หรือคําถามแผงเป็น ID ตัวเลือก",
+    choiceTextsFromQuestion: "ใช้ค่าจากคอลัมน์เมทริกซ์หรือคําถามแผงต่อไปนี้เป็นข้อความตัวเลือก",
     progressBarShowPageTitles: "แสดงชื่อหน้าในแถบความคืบหน้า",
     progressBarShowPageNumbers: "แสดงหมายเลขหน้าในแถบความคืบหน้า",
     showCommentArea: "เพิ่มกล่องความคิดเห็น",
@@ -1104,6 +1107,8 @@ export const thStrings = {
     noPreview: "ไม่มีการแสดงตัวอย่าง",
     showAllQuestions: "แสดงคำถามทั้งหมด",
     showAnsweredQuestions: "แสดงเฉพาะคำถามที่ตอบแล้ว",
+    allQuestions: "แสดงคําถามทั้งหมด",
+    answeredQuestions: "แสดงเฉพาะคําถามที่ตอบแล้ว",
     pages: "หน้าที่เสร็จสมบูรณ์",
     questions: "คำถามที่ตอบแล้ว",
     requiredQuestions: "คำถามที่จำเป็นที่ตอบแล้ว",
@@ -1455,6 +1460,7 @@ export const thStrings = {
     autoAdvanceEnabled: "เลือกว่าคุณต้องการให้แบบสํารวจเลื่อนไปยังหน้าถัดไปโดยอัตโนมัติเมื่อผู้ตอบคําถามทั้งหมดในหน้าปัจจุบันแล้ว ฟีเจอร์นี้จะไม่มีผลหากคําถามสุดท้ายในหน้าเป็นคําถามปลายเปิดหรืออนุญาตให้มีคําตอบหลายข้อ",
     autoAdvanceAllowComplete: "เลือกถ้าคุณต้องการให้แบบสำรวจเสร็จสิ้นโดยอัตโนมัติหลังจากผู้ตอบตอบคำถามทั้งหมด",
     showNavigationButtons: "ตั้งการมองเห็นและตำแหน่งของปุ่มนำทางในหน้า",
+    navigationButtonsLocation: "ตั้งค่าตําแหน่งของปุ่มนําทางบนหน้า",
     showProgressBar: "ตั้งการมองเห็นและตำแหน่งของแถบความคืบหน้า ตัวเลือก \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าเหนือหรือใต้หัวเรื่องแบบสำรวจ",
     showPreviewBeforeComplete: "เปิดใช้งานหน้าพรีวิวที่มีคำถามทั้งหมดหรือที่ตอบแล้ว",
     questionTitleLocation: "ใช้กับคำถามทั้งหมดในแบบสำรวจ การตั้งค่านี้สามารถถูกแทนที่ได้โดยกฎการจัดตำแหน่งชื่อเรื่องที่ระดับต่ำกว่า: แผง, หน้า หรือคำถาม การตั้งค่าระดับต่ำกว่าจะยกเลิกการตั้งค่าระดับสูง",
@@ -1501,7 +1507,7 @@ export const thStrings = {
       questionTitleWidth: "ตั้งความกว้างที่สม่ำเสมอสำหรับชื่อคำถามเมื่อจัดเรียงทางซ้ายของกล่องคำถาม รับค่าของ CSS (px, %, in, pt, ฯลฯ)",
       questionErrorLocation: "ตั้งตำแหน่งของข้อความข้อผิดพลาดเมื่อเทียบกับคำถามที่มีอินพุตที่ไม่ถูกต้อง เลือกระหว่าง: \"ด้านบน\" - ข้อความข้อผิดพลาดจะวางที่ด้านบนของกล่องคำถาม; \"ด้านล่าง\" - ข้อความข้อผิดพลาดจะวางที่ด้านล่างของกล่องคำถาม ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"ด้านบน\")",
       questionOrder: "รักษาลำดับดั้งเดิมของคำถามหรือตั้งค่าให้สุ่ม ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"ดั้งเดิม\") ผลของการตั้งค่านี้จะแสดงในแท็บพรีวิวเท่านั้น",
-      navigationButtonsVisibility: "ตั้งการมองเห็นของปุ่มนำทางในหน้า ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจซึ่งค่าเริ่มต้นคือ \"มองเห็นได้\""
+      showNavigationButtons: "ตั้งการมองเห็นของปุ่มนำทางในหน้า ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจซึ่งค่าเริ่มต้นคือ \"มองเห็นได้\""
     },
     timerLocation: "ตั้งค่าตําแหน่งของตัวจับเวลาบนหน้า",
     panelsState: "เลือกจาก: \"ล็อก\" - ผู้ใช้ไม่สามารถขยายหรือยุบแผง; \"ยุบทั้งหมด\" - แผงทั้งหมดเริ่มในสภาพยุบ; \"ขยายทั้งหมด\" - แผงทั้งหมดเริ่มในสภาพขยาย; \"แผงแรกขยาย\" - เฉพาะแผงแรกเท่านั้นที่ขยายเริ่มต้น ใช้เมื่อ \"โหมดแสดงแผง\" ตั้งเป็น \"รายการ\" และกำหนดคุณสมบัติ \"รูปแบบชื่อแผง\"",
@@ -1516,6 +1522,8 @@ export const thStrings = {
     useDisplayValuesInDynamicTexts: "ในประเภทคำถามเลือกเดียวและเลือกหลายแต่ละตัวเลือกมี ID และค่าที่แสดง เมื่อเลือก การตั้งค่านี้จะแสดงค่าที่แสดงแทนที่จะเป็นค่า ID ในคำถาม HTML และชื่อเรื่องและคำอธิบายแบบไดนามิกขององค์ประกอบแบบสำรวจ",
     clearIfInvisible: "เลือกว่าจะล้างค่าคำถามที่ซ่อนโดยตรรกะเงื่อนไขหรือไม่และเมื่อใด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"เมื่อเสร็จสิ้นแบบสำรวจ\")",
     choicesFromQuestionMode: "เลือกจาก: \"ทั้งหมด\" - คัดลอกตัวเลือกทั้งหมดจากคำถามที่เลือก; \"เลือกแล้ว\" - คัดลอกเฉพาะตัวเลือกที่เลือกแบบไดนามิก; \"ไม่ได้เลือก\" - คัดลอกเฉพาะตัวเลือกที่ไม่ได้เลือกแบบไดนามิก ตัวเลือก \"ไม่มี\" และ \"อื่น\" จะคัดลอกตามค่าเริ่มต้นถ้าเปิดในคำถามต้นทาง",
+    choiceValuesFromQuestion: "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดควรให้รหัส",
+    choiceTextsFromQuestion: "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดที่ควรให้ข้อความที่แสดง",
     showOtherItem: "เมื่อเลือก ผู้ใช้สามารถป้อนข้อมูลเพิ่มเติมในกล่องความคิดเห็นแยก",
     separateSpecialChoices: "แสดงตัวเลือกพิเศษแต่ละตัวเลือก (\"ไม่มี\", \"อื่น\", \"เลือกทั้งหมด\") ในบรรทัดใหม่ แม้ว่าจะใช้การจัดเรียงหลายคอลัมน์",
     path: "ระบุที่ตั้งในชุดข้อมูลบริการที่มีอาร์เรย์ของวัตถุเป้าหมาย อยู่ถ้าลิงก์ URL ชี้ไปที่อาร์เรย์",
@@ -1660,7 +1668,6 @@ export const thStrings = {
     inputTextAlignment: "การจัดตําแหน่งค่าอินพุต",
     elements: "องค์ประกอบ",
     content: "เนื้อหา",
-    navigationButtonsVisibility: "แสดง/ซ่อนปุ่มนำทาง",
     navigationTitle: "ชื่อเรื่องนำทาง",
     navigationDescription: "คำอธิบายนำทาง",
     longTap: "แตะค้าง",
@@ -1913,3 +1920,11 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // tabs.surfaceBackground: "Surface Background" => "พื้นหลังพื้นผิว"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "ใช้คําตอบจากรายการสุดท้ายเป็นค่าเริ่มต้น"
 // colors.gray: "Gray" => "เทา"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "การจัดตําแหน่งปุ่มนําทาง"
+// pv.allQuestions: "Show all questions" => "แสดงคําถามทั้งหมด"
+// pv.answeredQuestions: "Show answered questions only" => "แสดงเฉพาะคําถามที่ตอบแล้ว"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "ตั้งค่าตําแหน่งของปุ่มนําทางบนหน้า"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "ใช้ค่าจากคอลัมน์เมทริกซ์ต่อไปนี้หรือคําถามแผงเป็น ID ตัวเลือก"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "ใช้ค่าจากคอลัมน์เมทริกซ์หรือคําถามแผงต่อไปนี้เป็นข้อความตัวเลือก"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดควรให้รหัส"
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดที่ควรให้ข้อความที่แสดง"

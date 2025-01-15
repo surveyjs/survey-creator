@@ -22,7 +22,7 @@ export var jaStrings = {
     theme: "テーマ",
     translation: "翻訳",
     designer: "編集",
-    editor: "JSONエディタ",
+    json: "JSONエディタ",
     logic: "アンケートのロジック"
   },
   // Question types
@@ -440,7 +440,7 @@ export var jaStrings = {
     imageWidth: "イメージの幅",
     valueName: "値名",
     rateDescriptionLocation: "ラベルの配置",
-    size: "入力フィールドのサイズ (文字数)",
+    size: "入力フィールドの幅 (文字単位)",
     cellErrorLocation: "セル・エラー・メッセージの配置",
     enabled: "有効",
     disabled: "無効",
@@ -625,6 +625,7 @@ export var jaStrings = {
     editText: "「編集」ボタンのテキスト",
     startSurveyText: "「開始」ボタンのテキスト",
     showNavigationButtons: "ナビゲーションボタンを表示する（デフォルトのナビゲーション）",
+    navigationButtonsLocation: "ナビゲーション ボタンの配置",
     showPrevButton: "「前へ」ボタンを表示する（ユーザーは前のページに戻ることができます）",
     firstPageIsStartPage: "アンケートの最初のページは、開始ページです。",
     showCompletePage: "完了したページを最後に表示する（completedHtml）",
@@ -753,6 +754,8 @@ export var jaStrings = {
     separateSpecialChoices: "個別の特別な選択肢 (なし、その他、すべて選択)",
     choicesFromQuestion: "次の質問から選択肢をコピーする",
     choicesFromQuestionMode: "どの選択肢をコピーするか?",
+    choiceValuesFromQuestion: "次の行列列またはパネルの質問の値を選択肢IDとして使用します",
+    choiceTextsFromQuestion: "次の行列の列またはパネルの質問の値を選択テキストとして使用します",
     progressBarShowPageTitles: "プログレスバーにページタイトルを表示する",
     progressBarShowPageNumbers: "プログレスバーにページ番号を表示する",
     showCommentArea: "コメント領域を表示する",
@@ -1104,6 +1107,8 @@ export var jaStrings = {
     noPreview: "プレビューなし",
     showAllQuestions: "すべての質問を含むプレビューを表示",
     showAnsweredQuestions: "回答された質問を含むプレビューを表示",
+    allQuestions: "すべての質問を表示",
+    answeredQuestions: "回答済みの質問のみを表示する",
     pages: "ページ",
     questions: "質問",
     requiredQuestions: "必須の質問",
@@ -1455,6 +1460,7 @@ export var jaStrings = {
     autoAdvanceEnabled: "回答者が現在のページのすべての質問に答えると、アンケートが自動的に次のページに進むようにする場合に選択します。この機能は、ページの最後の質問が自由回答形式の場合、または複数の回答が許可されている場合には適用されません。",
     autoAdvanceAllowComplete: "回答者がすべての質問に回答した後にアンケートを自動的に完了する場合に選択します。",
     showNavigationButtons: "ページ上のナビゲーションボタンの表示と位置を設定します。",
+    navigationButtonsLocation: "ページ上のナビゲーション ボタンの位置を設定します。",
     showProgressBar: "プログレスバーの表示と位置を設定します。「自動」の値は、アンケートヘッダーの上または下に進行状況バーを表示します。",
     showPreviewBeforeComplete: "すべての質問または回答済みの質問のみを含むプレビューページを有効にします。",
     questionTitleLocation: "アンケート内のすべての質問に適用されます。この設定は、下位レベル(パネル、ページ、または質問)のタイトル配置ルールによって上書きできます。下位レベルの設定は、上位レベルの設定よりも優先されます。",
@@ -1501,7 +1507,7 @@ export var jaStrings = {
       questionTitleWidth: "質問タイトルが質問ボックスの左側に配置されている場合に、質問タイトルの幅を一定に設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
       questionErrorLocation: "無効な入力を含む質問に関連するエラーメッセージの場所を設定します。次から選択します: \"Top\" - 質問ボックスの上部にエラーテキストが配置されます。\"Bottom\" - 質問ボックスの下部にエラーテキストが配置されます。「継承」オプションは、アンケートレベルの設定(デフォルトでは「トップ」)を適用します。",
       questionOrder: "質問の元の順序を維持するか、ランダム化します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「オリジナル」)を適用します。この設定の効果は、「プレビュー」タブにのみ表示されます。",
-      navigationButtonsVisibility: "ページ上のナビゲーションボタンの表示を設定します。「継承」オプションは、アンケートレベルの設定を適用し、デフォルトは「表示」です。"
+      showNavigationButtons: "ページ上のナビゲーションボタンの表示を設定します。「継承」オプションは、アンケートレベルの設定を適用し、デフォルトは「表示」です。"
     },
     timerLocation: "ページ上のタイマーの位置を設定します。",
     panelsState: "次から選択します: 「ロック」 - ユーザーはパネルを展開または折りたたむことはできません。\"Collapse all\" - すべてのパネルが折りたたまれた状態で開始されます。\"Expand all\" - すべてのパネルが展開された状態で開始されます。\"First expanded\" - 最初のパネルのみが最初に展開されます。",
@@ -1516,6 +1522,8 @@ export var jaStrings = {
     useDisplayValuesInDynamicTexts: "単一選択および複数選択の質問タイプでは、各選択肢にIDと表示値があります。この設定を選択すると、HTML の質問やアンケート エレメントの動的なタイトルと説明に ID 値ではなく表示値が表示されます。",
     clearIfInvisible: "条件付きロジックで非表示にした質問値をクリアするかどうか、およびいつクリアするかを選択します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「アンケート完了時」)を適用します。",
     choicesFromQuestionMode: "選択元: 「すべて」 - 選択した質問からすべての選択肢をコピーします。\"Selected\" - 選択した選択肢オプションのみを動的にコピーします。「未選択」 - 選択されていない選択肢オプションのみを動的にコピーします。「なし」と「その他」のオプションは、ソースの質問で有効になっている場合、デフォルトでコピーされます。",
+    choiceValuesFromQuestion: "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、どの行列列またはパネルの質問がIDを提供するかを指定します。",
+    choiceTextsFromQuestion: "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、表示テキストを提供する行列列またはパネルの質問を指定します。",
     showOtherItem: "選択すると、ユーザーは別のコメント ボックスに追加の入力を含めることができます。",
     separateSpecialChoices: "各特殊選択オプション(「なし」、「その他」、「すべて選択」)を、複数列のレイアウトを使用している場合でも、新しい行に表示します。",
     path: "サービス データセット内で、オブジェクトのターゲット配列が配置されている場所を指定します。URL が既に配列を指している場合は、空のままにします。",
@@ -1660,7 +1668,6 @@ export var jaStrings = {
     inputTextAlignment: "入力値の配置",
     elements: "元素",
     content: "コンテンツ",
-    navigationButtonsVisibility: "ナビゲーションボタンの可視性",
     navigationTitle: "ナビゲーション タイトル",
     navigationDescription: "ナビゲーションの説明",
     longTap: "ロングタップ",
@@ -2140,7 +2147,6 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // p.inputSize: "Item size" => "アイテムサイズ"
 // p.elements: "Elements" => "元素"
 // p.content: "Content" => "コンテンツ"
-// p.navigationButtonsVisibility: "Navigation buttons visibility" => "ナビゲーションボタンの可視性"
 // p.navigationTitle: "Navigation title" => "ナビゲーション タイトル"
 // p.navigationDescription: "Navigation description" => "ナビゲーションの説明"
 // p.longTap: "Long tap" => "ロングタップ"
@@ -2642,7 +2648,7 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "このページ内のすべての質問に適用されます。この設定を上書きする場合は、個々の質問またはパネルのタイトル配置ルールを定義します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「トップ」)を適用します。"
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "無効な入力を含む質問に関連するエラーメッセージの場所を設定します。次から選択します: \"Top\" - 質問ボックスの上部にエラーテキストが配置されます。\"Bottom\" - 質問ボックスの下部にエラーテキストが配置されます。「継承」オプションは、アンケートレベルの設定(デフォルトでは「トップ」)を適用します。"
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "質問の元の順序を維持するか、ランダム化します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「オリジナル」)を適用します。この設定の効果は、「プレビュー」タブにのみ表示されます。"
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "ページ上のナビゲーションボタンの表示を設定します。「継承」オプションは、アンケートレベルの設定を適用し、デフォルトは「表示」です。"
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "ページ上のナビゲーションボタンの表示を設定します。「継承」オプションは、アンケートレベルの設定を適用し、デフォルトは「表示」です。"
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "次から選択します: 「ロック」 - ユーザーはパネルを展開または折りたたむことはできません。\"Collapse all\" - すべてのパネルが折りたたまれた状態で開始されます。\"Expand all\" - すべてのパネルが展開された状態で開始されます。\"First expanded\" - 最初のパネルのみが最初に展開されます。"
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "選択リストに表示する画像またはビデオ ファイルの URL を含むオブジェクトの配列内に共有プロパティ名を入力します。"
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "左の値は条件付きルールで使用される項目IDとして機能し、右の値は回答者に表示されます。"
@@ -2972,3 +2978,12 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // tabs.surfaceBackground: "Surface Background" => "サーフェスの背景"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "最後のエントリの回答をデフォルトとして使用する"
 // colors.gray: "Gray" => "灰色"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "ナビゲーション ボタンの配置"
+// pv.allQuestions: "Show all questions" => "すべての質問を表示"
+// pv.answeredQuestions: "Show answered questions only" => "回答済みの質問のみを表示する"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "ページ上のナビゲーション ボタンの位置を設定します。"
+// pe.size: "Input field width (in characters)" => "入力フィールドの幅 (文字単位)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "次の行列列またはパネルの質問の値を選択肢IDとして使用します"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "次の行列の列またはパネルの質問の値を選択テキストとして使用します"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、どの行列列またはパネルの質問がIDを提供するかを指定します。"
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、表示テキストを提供する行列列またはパネルの質問を指定します。"

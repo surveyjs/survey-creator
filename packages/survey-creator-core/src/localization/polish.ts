@@ -22,7 +22,7 @@ var polishStrings = {
     theme: "Tematy",
     translation: "Tłumaczenie",
     designer: "Projektant ankiety",
-    editor: "JSON Editor",
+    json: "JSON Editor",
     logic: "Logika"
   },
   // Question types
@@ -625,6 +625,7 @@ var polishStrings = {
     editText: "Tekst przycisku Edytuj odpowiedź",
     startSurveyText: "Start button text",
     showNavigationButtons: "Show navigation buttons (default navigation)",
+    navigationButtonsLocation: "Wyrównanie przycisków nawigacyjnych",
     showPrevButton: "Show previous button (user may return on previous page)",
     firstPageIsStartPage: "The first page in the survey is a started page.",
     showCompletePage: "Show the completed page at the end (completedHtml)",
@@ -753,6 +754,8 @@ var polishStrings = {
     separateSpecialChoices: "Oddzielne opcje specjalne (Brak, Inne, Wybierz wszystko)",
     choicesFromQuestion: "Kopiowanie opcji z następującego pytania",
     choicesFromQuestionMode: "Które opcje skopiować?",
+    choiceValuesFromQuestion: "Użyj wartości z poniższego pytania typu matrix, kolumna lub pytanie panelowe jako identyfikatory wyborów",
+    choiceTextsFromQuestion: "Użyj wartości z poniższego pytania macierzowego, kolumnowego lub panelowego jako tekstów wyboru",
     progressBarShowPageTitles: "Wyświetlanie tytułów stron na pasku postępu",
     progressBarShowPageNumbers: "Wyświetlanie numerów stron na pasku postępu",
     showCommentArea: "Pokaż obszar komentarza",
@@ -1104,6 +1107,8 @@ var polishStrings = {
     noPreview: "Brak podglądu",
     showAllQuestions: "Pokaż wszystkie pytania",
     showAnsweredQuestions: "Pokaż tylko odpowiedzi na pytania",
+    allQuestions: "Pokaż wszystkie pytania",
+    answeredQuestions: "Pokaż tylko pytania, na które udzielono odpowiedzi",
     pages: "Ukończone strony",
     questions: "Odpowiedzi na pytania",
     requiredQuestions: "Odpowiedzi na wymagane pytania",
@@ -1455,6 +1460,7 @@ var polishStrings = {
     autoAdvanceEnabled: "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony, gdy respondent odpowie na wszystkie pytania na bieżącej stronie. Ta funkcja nie będzie miała zastosowania, jeśli ostatnie pytanie na stronie jest otwarte lub umożliwia udzielenie wielu odpowiedzi.",
     autoAdvanceAllowComplete: "Wybierz, jeśli chcesz, aby ankieta była wypełniana automatycznie po udzieleniu odpowiedzi respondenta na wszystkie pytania.",
     showNavigationButtons: "Ustawia widoczność i położenie przycisków nawigacyjnych na stronie.",
+    navigationButtonsLocation: "Określa położenie przycisków nawigacyjnych na stronie.",
     showProgressBar: "Ustawia widoczność i położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu nad lub pod nagłówkiem ankiety.",
     showPreviewBeforeComplete: "Włącz stronę podglądu ze wszystkimi pytaniami lub tylko odpowiedziami.",
     questionTitleLocation: "Dotyczy wszystkich pytań w ankiecie. To ustawienie może zostać zastąpione przez reguły wyrównania tytułu na niższych poziomach: panelu, strony lub pytania. Ustawienie niższego poziomu zastąpi ustawienia wyższego poziomu.",
@@ -1501,7 +1507,7 @@ var polishStrings = {
       questionTitleWidth: "Ustawia spójną szerokość tytułów pytań, gdy są one wyrównane do lewej strony pól pytań. Akceptuje wartości CSS (px, %, in, pt itp.).",
       questionErrorLocation: "Ustawia lokalizację komunikatu o błędzie w odniesieniu do pytania z nieprawidłowymi danymi wejściowymi. Wybierz pomiędzy: \"Góra\" - tekst błędu jest umieszczany w górnej części pola pytania; \"Na dole\" — tekst błędu jest umieszczany u dołu pola pytania. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Góra\").",
       questionOrder: "Zachowuje pierwotną kolejność pytań lub losuje je. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Oryginalne\"). Efekt tego ustawienia jest widoczny tylko na karcie Podgląd.",
-      navigationButtonsVisibility: "Ustawia widoczność przycisków nawigacyjnych na stronie. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety, które domyślnie ma wartość \"Widoczny\"."
+      showNavigationButtons: "Ustawia widoczność przycisków nawigacyjnych na stronie. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety, które domyślnie ma wartość \"Widoczny\"."
     },
     timerLocation: "Ustawia położenie czasomierza na stronie.",
     panelsState: "Do wyboru: \"Zablokowany\" - użytkownicy nie mogą rozwijać ani zwijać paneli; \"Zwiń wszystko\" - wszystkie panele rozpoczynają się w stanie zwiniętym; \"Rozwiń wszystko\" - wszystkie panele rozpoczynają się w stanie rozwiniętym; \"Pierwszy rozwinięty\" - początkowo rozwijany jest tylko pierwszy panel.",
@@ -1516,6 +1522,8 @@ var polishStrings = {
     useDisplayValuesInDynamicTexts: "W pytaniach typu jednokrotnego i wielokrotnego wyboru każda opcja wyboru ma identyfikator i wartość wyświetlaną. Po wybraniu tej opcji w pytaniach HTML oraz dynamicznych tytułach i opisach elementów ankiety wyświetlana jest wartość wyświetlana zamiast wartości identyfikatora.",
     clearIfInvisible: "Wybierz, czy chcesz wyczyścić wartości pytań ukryte przez logikę warunkową i kiedy to zrobić. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Po zakończeniu ankiety\").",
     choicesFromQuestionMode: "Wybierz spośród: \"Wszystkie\" - kopiuje wszystkie opcje wyboru z wybranego pytania; \"Wybrane\" - dynamicznie kopiuje tylko wybrane opcje wyboru; \"Niewybrane\" - dynamicznie kopiuje tylko niezaznaczone opcje wyboru. Opcje \"Brak\" i \"Inne\" są domyślnie kopiowane, jeśli są włączone w pytaniu źródłowym.",
+    choiceValuesFromQuestion: "W pytaniach jednokrotnego i wielokrotnego wyboru każda opcja wyboru ma identyfikator i wartość wyświetlaną. To ustawienie określa, która kolumna macierzy lub pytanie typu panel powinno zawierać identyfikatory.",
+    choiceTextsFromQuestion: "W pytaniach jednokrotnego i wielokrotnego wyboru każda opcja wyboru ma identyfikator i wartość wyświetlaną. To ustawienie określa, która kolumna macierzy lub pytanie typu panel powinno zawierać tekst wyświetlany.",
     showOtherItem: "Po wybraniu tej opcji użytkownicy mogą uwzględnić dodatkowe dane wejściowe w osobnym polu komentarza.",
     separateSpecialChoices: "Wyświetla każdą opcję wyboru specjalnego (\"Brak\", \"Inne\", \"Zaznacz wszystko\") w nowym wierszu, nawet w przypadku korzystania z układu wielokolumnowego.",
     path: "Określ lokalizację w zestawie danych usługi, w której znajduje się docelowa tablica obiektów. Pozostaw puste, jeśli adres URL wskazuje już tablicę.",
@@ -1660,7 +1668,6 @@ var polishStrings = {
     inputTextAlignment: "Wyrównanie wartości wejściowej",
     elements: "Pierwiastki",
     content: "Zawartość",
-    navigationButtonsVisibility: "Widoczność przycisków nawigacyjnych",
     navigationTitle: "Tytuł nawigacji",
     navigationDescription: "Opis nawigacji",
     longTap: "Długie dotknięcie",
@@ -2407,7 +2414,6 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // p.inputSize: "Item size" => "Rozmiar produktu"
 // p.elements: "Elements" => "Pierwiastki"
 // p.content: "Content" => "Zawartość"
-// p.navigationButtonsVisibility: "Navigation buttons visibility" => "Widoczność przycisków nawigacyjnych"
 // p.navigationTitle: "Navigation title" => "Tytuł nawigacji"
 // p.navigationDescription: "Navigation description" => "Opis nawigacji"
 // p.longTap: "Long tap" => "Długie dotknięcie"
@@ -2909,7 +2915,7 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Dotyczy wszystkich pytań na tej stronie. Jeśli chcesz zastąpić to ustawienie, zdefiniuj reguły wyrównania tytułów dla poszczególnych pytań lub paneli. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Góra\")."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Ustawia lokalizację komunikatu o błędzie w odniesieniu do pytania z nieprawidłowymi danymi wejściowymi. Wybierz pomiędzy: \"Góra\" - tekst błędu jest umieszczany w górnej części pola pytania; \"Na dole\" — tekst błędu jest umieszczany u dołu pola pytania. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Góra\")."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Zachowuje pierwotną kolejność pytań lub losuje je. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Oryginalne\"). Efekt tego ustawienia jest widoczny tylko na karcie Podgląd."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Ustawia widoczność przycisków nawigacyjnych na stronie. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety, które domyślnie ma wartość \"Widoczny\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Ustawia widoczność przycisków nawigacyjnych na stronie. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety, które domyślnie ma wartość \"Widoczny\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Do wyboru: \"Zablokowany\" - użytkownicy nie mogą rozwijać ani zwijać paneli; \"Zwiń wszystko\" - wszystkie panele rozpoczynają się w stanie zwiniętym; \"Rozwiń wszystko\" - wszystkie panele rozpoczynają się w stanie rozwiniętym; \"Pierwszy rozwinięty\" - początkowo rozwijany jest tylko pierwszy panel."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Wprowadź nazwę właściwości współużytkowanej w tablicy obiektów zawierających adresy URL obrazów lub plików wideo, które mają być wyświetlane na liście wyborów."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Lewa wartość służy jako identyfikator elementu używany w regułach warunkowych, prawa wartość jest wyświetlana respondentom."
@@ -3239,3 +3245,11 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // tabs.surfaceBackground: "Surface Background" => "Tło powierzchni"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Domyślnie używaj odpowiedzi z ostatniego wpisu"
 // colors.gray: "Gray" => "Szary"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Wyrównanie przycisków nawigacyjnych"
+// pv.allQuestions: "Show all questions" => "Pokaż wszystkie pytania"
+// pv.answeredQuestions: "Show answered questions only" => "Pokaż tylko pytania, na które udzielono odpowiedzi"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Określa położenie przycisków nawigacyjnych na stronie."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Użyj wartości z poniższego pytania typu matrix, kolumna lub pytanie panelowe jako identyfikatory wyborów"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Użyj wartości z poniższego pytania macierzowego, kolumnowego lub panelowego jako tekstów wyboru"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "W pytaniach jednokrotnego i wielokrotnego wyboru każda opcja wyboru ma identyfikator i wartość wyświetlaną. To ustawienie określa, która kolumna macierzy lub pytanie typu panel powinno zawierać identyfikatory."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "W pytaniach jednokrotnego i wielokrotnego wyboru każda opcja wyboru ma identyfikator i wartość wyświetlaną. To ustawienie określa, która kolumna macierzy lub pytanie typu panel powinno zawierać tekst wyświetlany."

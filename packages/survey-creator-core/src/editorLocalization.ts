@@ -8,6 +8,7 @@ renamedKeys["tabs.theme"] = "ed.themeSurvey";
 renamedKeys["tabs.translation"] = "ed.translation";
 renamedKeys["tabs.designer"] = "ed.designer";
 renamedKeys["tabs.editor"] = "ed.jsonEditor";
+renamedKeys["tabs.json"] = "tabs.editor";
 renamedKeys["tabs.logic"] = "ed.logic";
 
 export class EditorLocalization {

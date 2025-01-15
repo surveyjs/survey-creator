@@ -22,7 +22,7 @@ var frenchTranslation = {
     theme: "Thèmes",
     translation: "Traduction",
     designer: "Éditeur de sondage",
-    editor: "Éditeur JSON",
+    json: "Éditeur JSON",
     logic: "Condition"
   },
   // Question types
@@ -440,7 +440,7 @@ var frenchTranslation = {
     imageWidth: "Largeur de l'image",
     valueName: "Variable de stockage",
     rateDescriptionLocation: "Alignement des étiquettes",
-    size: "Taille du champ de saisie (en caractères)",
+    size: "Largeur du champ de saisie (en caractères)",
     cellErrorLocation: "Alignement des messages d’erreur de cellule",
     enabled: "Activé",
     disabled: "Handicapé",
@@ -625,6 +625,7 @@ var frenchTranslation = {
     editText: "Modifier le texte du bouton de réponse",
     startSurveyText: "Texte bouton commencer",
     showNavigationButtons: "Afficher les boutons de navigation (navigation par défaut)",
+    navigationButtonsLocation: "Alignement des boutons de navigation",
     showPrevButton: "Afficher le bouton précédent (l'utilisateur pourra retourner sur la page précédente)",
     firstPageIsStartPage: "La première page du sondage est une page de démarrage.",
     showCompletePage: "Afficher la page de fin une fois le sondage terminé",
@@ -753,6 +754,8 @@ var frenchTranslation = {
     separateSpecialChoices: "Afficher séparément les choix spéciaux (Aucun, Autre, Sélectionner tout)",
     choicesFromQuestion: "Copier les choix à partir de la question",
     choicesFromQuestionMode: "Quels choix copier ?",
+    choiceValuesFromQuestion: "Utilisez les valeurs de la question de la matrice, de la colonne ou du panneau suivant comme ID de choix",
+    choiceTextsFromQuestion: "Utilisez les valeurs de la question matricielle, de la colonne ou du panneau suivant comme textes de choix",
     progressBarShowPageTitles: "Afficher les titres des pages dans la barre de progression",
     progressBarShowPageNumbers: "Afficher les numéros de page dans la barre de progression",
     showCommentArea: "Afficher la zone de commentaire",
@@ -1104,6 +1107,8 @@ var frenchTranslation = {
     noPreview: "Pas d’aperçu",
     showAllQuestions: "Afficher toutes les questions",
     showAnsweredQuestions: "Afficher uniquement les questions complétées",
+    allQuestions: "Afficher toutes les questions",
+    answeredQuestions: "Afficher uniquement les questions répondues",
     pages: "Pages complétées",
     questions: "Questions complétées",
     requiredQuestions: "Questions obligatoires complétées",
@@ -1455,6 +1460,7 @@ var frenchTranslation = {
     autoAdvanceEnabled: "Indiquez si vous souhaitez que le sondage passe automatiquement à la page suivante une fois qu’une personne interrogée a répondu à toutes les questions de la page actuelle. Cette fonctionnalité ne s’applique pas si la dernière question de la page est ouverte ou permet plusieurs réponses.",
     autoAdvanceAllowComplete: "Sélectionnez cette option si vous souhaitez que l’enquête se termine automatiquement une fois qu’une personne interrogée a répondu à toutes les questions.",
     showNavigationButtons: "Définit la visibilité et l’emplacement des boutons de navigation sur une page.",
+    navigationButtonsLocation: "Définit l’emplacement des boutons de navigation sur une page.",
     showProgressBar: "Définit la visibilité et l’emplacement d’une barre de progression. La valeur « Auto » affiche la barre de progression au-dessus ou au-dessous de l’en-tête de l’enquête.",
     showPreviewBeforeComplete: "Activez la page d’aperçu avec toutes les questions ou les questions auxquelles on a répondu uniquement.",
     questionTitleLocation: "S’applique à toutes les questions de l’enquête. Ce paramètre peut être remplacé par des règles d’alignement des titres aux niveaux inférieurs : panneau, page ou question. Un paramètre de niveau inférieur remplacera ceux d’un niveau supérieur.",
@@ -1501,7 +1507,7 @@ var frenchTranslation = {
       questionTitleWidth: "Définit une largeur cohérente pour les titres de questions lorsqu’ils sont alignés à gauche de leurs zones de questions. Accepte les valeurs CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Définit l’emplacement d’un message d’erreur par rapport à la question dont l’entrée n’est pas valide. Choisissez entre : « Haut » - un texte d’erreur est placé en haut de la zone de question ; « Bas » - un texte d’erreur est placé en bas de la zone de question. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Top » par défaut).",
       questionOrder: "Conserve l’ordre d’origine des questions ou les rend aléatoires. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Original » par défaut). L’effet de ce paramètre n’est visible que dans l’onglet Aperçu.",
-      navigationButtonsVisibility: "Définit la visibilité des boutons de navigation sur la page. L’option « Hériter » applique le paramètre au niveau de l’enquête, qui est par défaut « Visible »."
+      showNavigationButtons: "Définit la visibilité des boutons de navigation sur la page. L’option « Hériter » applique le paramètre au niveau de l’enquête, qui est par défaut « Visible »."
     },
     timerLocation: "Définit l’emplacement d’un minuteur sur une page.",
     panelsState: "Choisissez parmi : « Verrouillé » - les utilisateurs ne peuvent pas développer ou réduire les panneaux ; « Réduire tout » - tous les panneaux commencent dans un état réduit ; « Développer tout » - tous les panneaux commencent dans un état développé ; « Premier développé » - seul le premier panneau est initialement développé.",
@@ -1516,6 +1522,8 @@ var frenchTranslation = {
     useDisplayValuesInDynamicTexts: "Dans les types de questions à sélection unique et multiple, chaque option de choix a un ID et une valeur d’affichage. Lorsqu’il est sélectionné, ce paramètre affiche une valeur d’affichage au lieu d’une valeur d’ID dans les questions HTML et les titres et descriptions dynamiques des éléments d’enquête.",
     clearIfInvisible: "Choisissez d’effacer ou non les valeurs de question masquées par la logique conditionnelle et quand le faire. L’option « Hériter » applique le paramètre au niveau de l’enquête (« À la fin de l’enquête » par défaut).",
     choicesFromQuestionMode: "Choisissez parmi : « Tous » - copie toutes les options de choix de la question sélectionnée ; « Sélectionné » - copie dynamiquement uniquement les options de choix sélectionnées ; « Non sélectionné » - copie dynamiquement uniquement les options de choix non sélectionnées. Les options « Aucun » et « Autre » sont copiées par défaut si elles sont activées dans la question source.",
+    choiceValuesFromQuestion: "Dans les types de questions à sélection unique et à sélection multiple, chaque option de choix a un ID et une valeur d’affichage. Ce paramètre spécifie la question de matrice, de colonne ou de panneau qui doit fournir les ID.",
+    choiceTextsFromQuestion: "Dans les types de questions à sélection unique et à sélection multiple, chaque option de choix a un ID et une valeur d’affichage. Ce paramètre spécifie la question de matrice, de colonne ou de panneau qui doit fournir les textes d’affichage.",
     showOtherItem: "Lorsque cette option est sélectionnée, les utilisateurs peuvent inclure des entrées supplémentaires dans une zone de commentaire distincte.",
     separateSpecialChoices: "Affiche chaque option de choix spécial (« Aucun », « Autre », « Tout sélectionner ») sur une nouvelle ligne, même en cas d’utilisation d’une mise en page à plusieurs colonnes.",
     path: "Spécifiez l’emplacement dans le jeu de données de service où se trouve le tableau cible d’objets. Laissez vide si l’URL pointe déjà vers le tableau.",
@@ -1660,7 +1668,6 @@ var frenchTranslation = {
     inputTextAlignment: "Alignement des valeurs d’entrée",
     elements: "Éléments",
     content: "Contenu",
-    navigationButtonsVisibility: "Visibilité des boutons de navigation",
     navigationTitle: "Titre de la navigation",
     navigationDescription: "Description de la navigation",
     longTap: "Appuyez longuement",
@@ -2700,7 +2707,7 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "S’applique à toutes les questions de cette page. Si vous souhaitez remplacer ce paramètre, définissez des règles d’alignement des titres pour des questions ou des panneaux individuels. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Top » par défaut)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Définit l’emplacement d’un message d’erreur par rapport à la question dont l’entrée n’est pas valide. Choisissez entre : « Haut » - un texte d’erreur est placé en haut de la zone de question ; « Bas » - un texte d’erreur est placé en bas de la zone de question. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Top » par défaut)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Conserve l’ordre d’origine des questions ou les rend aléatoires. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Original » par défaut). L’effet de ce paramètre n’est visible que dans l’onglet Aperçu."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Définit la visibilité des boutons de navigation sur la page. L’option « Hériter » applique le paramètre au niveau de l’enquête, qui est par défaut « Visible »."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Définit la visibilité des boutons de navigation sur la page. L’option « Hériter » applique le paramètre au niveau de l’enquête, qui est par défaut « Visible »."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Choisissez parmi : « Verrouillé » - les utilisateurs ne peuvent pas développer ou réduire les panneaux ; « Réduire tout » - tous les panneaux commencent dans un état réduit ; « Développer tout » - tous les panneaux commencent dans un état développé ; « Premier développé » - seul le premier panneau est initialement développé."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Entrez un nom de propriété partagée dans le tableau d’objets qui contient les URL de fichier image ou vidéo que vous souhaitez afficher dans la liste de choix."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "La valeur de gauche sert d’ID d’élément utilisé dans les règles conditionnelles, la valeur de droite est affichée aux personnes interrogées."
@@ -3031,3 +3038,12 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // tabs.surfaceBackground: "Surface Background" => "Arrière-plan de surface"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Utiliser les réponses de la dernière entrée par défaut"
 // colors.gray: "Gray" => "Gris"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Alignement des boutons de navigation"
+// pv.allQuestions: "Show all questions" => "Afficher toutes les questions"
+// pv.answeredQuestions: "Show answered questions only" => "Afficher uniquement les questions répondues"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Définit l’emplacement des boutons de navigation sur une page."
+// pe.size: "Input field width (in characters)" => "Largeur du champ de saisie (en caractères)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Utilisez les valeurs de la question de la matrice, de la colonne ou du panneau suivant comme ID de choix"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Utilisez les valeurs de la question matricielle, de la colonne ou du panneau suivant comme textes de choix"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Dans les types de questions à sélection unique et à sélection multiple, chaque option de choix a un ID et une valeur d’affichage. Ce paramètre spécifie la question de matrice, de colonne ou de panneau qui doit fournir les ID."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Dans les types de questions à sélection unique et à sélection multiple, chaque option de choix a un ID et une valeur d’affichage. Ce paramètre spécifie la question de matrice, de colonne ou de panneau qui doit fournir les textes d’affichage."

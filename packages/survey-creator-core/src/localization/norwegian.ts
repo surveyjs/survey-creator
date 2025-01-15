@@ -22,7 +22,7 @@ export var nbStrings = {
     theme: "Temaer",
     translation: "Oversettelse",
     designer: "Skjemadesigner",
-    editor: "JSON-redigering",
+    json: "JSON-redigering",
     logic: "Skjemalogikk"
   },
   // Question types
@@ -625,6 +625,7 @@ export var nbStrings = {
     editText: "Rediger knapp tekst",
     startSurveyText: "Start knapp tekst",
     showNavigationButtons: "Vis navigasjonsknapper (standard navigering)",
+    navigationButtonsLocation: "Justering av navigasjonsknapper",
     showPrevButton: "Vis forrige knapp (bruker kan gå til forrige side)",
     firstPageIsStartPage: "Den første siden i skjema er startside.",
     showCompletePage: "Vis ferdigsiden på slutten (completedHtml)",
@@ -753,6 +754,8 @@ export var nbStrings = {
     separateSpecialChoices: "Skille spesialvalg (Ingen, Annet, Merk alt)",
     choicesFromQuestion: "Kopier valg fra følgende spørsmål",
     choicesFromQuestionMode: "Hvilke valg å kopiere?",
+    choiceValuesFromQuestion: "Bruk verdier fra følgende matrisekolonne eller panelspørsmål som valg-ID-er",
+    choiceTextsFromQuestion: "Bruk verdier fra følgende matrisekolonne eller paneloppgave som valgtekster",
     progressBarShowPageTitles: "Vise sidetitler på fremdriftslinjen",
     progressBarShowPageNumbers: "Vise sidetall på fremdriftslinjen",
     showCommentArea: "Vis kommentarfeltet",
@@ -1104,6 +1107,8 @@ export var nbStrings = {
     noPreview: "no preview",
     showAllQuestions: "show preview with all questions",
     showAnsweredQuestions: "show preview with answered questions",
+    allQuestions: "Vis alle spørsmål",
+    answeredQuestions: "Vis kun besvarte spørsmål",
     pages: "Fullførte sider",
     questions: "Besvarte spørsmål",
     requiredQuestions: "Besvarte nødvendige spørsmål",
@@ -1455,6 +1460,7 @@ export var nbStrings = {
     autoAdvanceEnabled: "Velg om du vil at evalueringen automatisk skal gå videre til neste side når en respondent har svart på alle spørsmålene på gjeldende side. Denne funksjonen gjelder ikke hvis det siste spørsmålet på siden er åpent eller tillater flere svar.",
     autoAdvanceAllowComplete: "Velg om du vil at evalueringen skal fullføres automatisk etter at en svarperson har svart på alle spørsmålene.",
     showNavigationButtons: "Angir synligheten og plasseringen av navigasjonsknapper på en side.",
+    navigationButtonsLocation: "Angir plasseringen av navigasjonsknapper på en side.",
     showProgressBar: "Angir synligheten og plasseringen til en fremdriftsindikator. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelseshodet.",
     showPreviewBeforeComplete: "Aktiver forhåndsvisningssiden med alle eller besvarte spørsmål.",
     questionTitleLocation: "Gjelder alle spørsmålene i undersøkelsen. Denne innstillingen kan overstyres av titteljusteringsregler på lavere nivåer: panel, side eller spørsmål. En innstilling på lavere nivå vil overstyre de på et høyere nivå.",
@@ -1501,7 +1507,7 @@ export var nbStrings = {
       questionTitleWidth: "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, i, pt osv.).",
       questionErrorLocation: "Angir plasseringen til en feilmelding i forhold til spørsmålet med ugyldige inndata. Velg mellom: \"Topp\" - en feiltekst plasseres øverst i spørsmålsboksen; \"Bunn\" - en feiltekst er plassert nederst i spørsmålsboksen. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Topp\" som standard).",
       questionOrder: "Beholder den opprinnelige rekkefølgen på spørsmål eller randomiserer dem. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Original\" som standard). Effekten av denne innstillingen er bare synlig i kategorien Forhåndsvisning.",
-      navigationButtonsVisibility: "Angir synligheten til navigasjonsknapper på siden. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå, som som standard er \"Synlig\"."
+      showNavigationButtons: "Angir synligheten til navigasjonsknapper på siden. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå, som som standard er \"Synlig\"."
     },
     timerLocation: "Angir plasseringen av en tidtaker på en side.",
     panelsState: "Velg mellom: \"Låst\" - brukere kan ikke utvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Utvid alle\" - alle paneler starter i utvidet tilstand; \"Først utvidet\" - bare det første panelet er i utgangspunktet utvidet.",
@@ -1516,6 +1522,8 @@ export var nbStrings = {
     useDisplayValuesInDynamicTexts: "I enkeltvalgs- og flervalgsspørsmålstyper har hvert valgalternativ en ID og visningsverdi. Når denne innstillingen er valgt, vises en visningsverdi i stedet for en ID-verdi i HTML-spørsmål og dynamiske titler og beskrivelser av evalueringselementer.",
     clearIfInvisible: "Velg om du vil fjerne spørsmålsverdier skjult av betinget logikk, og når du vil gjøre det. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Når undersøkelsen er fullført\" som standard).",
     choicesFromQuestionMode: "Velg mellom: \"Alle\" - kopierer alle valgalternativer fra det valgte spørsmålet; \"Valgt\" - kopierer dynamisk bare valgte valgalternativer; \"Unselected\" - kopierer dynamisk bare uvalgte valgalternativer. Alternativene \"Ingen\" og \"Annet\" kopieres som standard hvis de er aktivert i kildespørsmålet.",
+    choiceValuesFromQuestion: "I spørsmålstyper med ett eller flere valg har hvert valgalternativ en ID og visningsverdi. Denne innstillingen angir hvilken matrisekolonne eller hvilket panelspørsmål som skal gi ID-ene.",
+    choiceTextsFromQuestion: "I spørsmålstyper med ett eller flere valg har hvert valgalternativ en ID og visningsverdi. Denne innstillingen angir hvilken matrisekolonne eller hvilket panelspørsmål som skal inneholde visningstekstene.",
     showOtherItem: "Når dette alternativet er valgt, kan brukerne inkludere flere inndata i et eget kommentarfelt.",
     separateSpecialChoices: "Viser hvert spesialvalgalternativ (\"Ingen\", \"Annet\", \"Merk alt\") på en ny linje, selv når du bruker et oppsett med flere kolonner.",
     path: "Angi plasseringen i tjenestedatasettet der målmatrisen med objekter er plassert. La stå tom hvis URL-adressen allerede peker på matrisen.",
@@ -1660,7 +1668,6 @@ export var nbStrings = {
     inputTextAlignment: "Justering av inngangsverdi",
     elements: "Elementer",
     content: "Innhold",
-    navigationButtonsVisibility: "navigationButtonsVisibility",
     navigationTitle: "Navigasjon tittel",
     navigationDescription: "Beskrivelse av navigasjon",
     longTap: "Langt trykk",
@@ -2645,7 +2652,7 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Gjelder alle spørsmål på denne siden. Hvis du vil overstyre denne innstillingen, definerer du regler for titteljustering for enkeltspørsmål eller paneler. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Topp\" som standard)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Angir plasseringen til en feilmelding i forhold til spørsmålet med ugyldige inndata. Velg mellom: \"Topp\" - en feiltekst plasseres øverst i spørsmålsboksen; \"Bunn\" - en feiltekst er plassert nederst i spørsmålsboksen. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Topp\" som standard)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Beholder den opprinnelige rekkefølgen på spørsmål eller randomiserer dem. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Original\" som standard). Effekten av denne innstillingen er bare synlig i kategorien Forhåndsvisning."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Angir synligheten til navigasjonsknapper på siden. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå, som som standard er \"Synlig\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Angir synligheten til navigasjonsknapper på siden. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå, som som standard er \"Synlig\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Velg mellom: \"Låst\" - brukere kan ikke utvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Utvid alle\" - alle paneler starter i utvidet tilstand; \"Først utvidet\" - bare det første panelet er i utgangspunktet utvidet."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Skriv inn et navn på en delt egenskap i matrisen med objekter som inneholder URL-adressene til bildet eller videofilen du vil vise i valglisten."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Den venstre verdien fungerer som en vare-ID som brukes i betingede regler, den riktige verdien vises for respondentene."
@@ -2975,3 +2982,11 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // tabs.surfaceBackground: "Surface Background" => "Overflate bakgrunn"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Bruk svar fra siste oppføring som standard"
 // colors.gray: "Gray" => "Grå"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Justering av navigasjonsknapper"
+// pv.allQuestions: "Show all questions" => "Vis alle spørsmål"
+// pv.answeredQuestions: "Show answered questions only" => "Vis kun besvarte spørsmål"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Angir plasseringen av navigasjonsknapper på en side."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Bruk verdier fra følgende matrisekolonne eller panelspørsmål som valg-ID-er"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Bruk verdier fra følgende matrisekolonne eller paneloppgave som valgtekster"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "I spørsmålstyper med ett eller flere valg har hvert valgalternativ en ID og visningsverdi. Denne innstillingen angir hvilken matrisekolonne eller hvilket panelspørsmål som skal gi ID-ene."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "I spørsmålstyper med ett eller flere valg har hvert valgalternativ en ID og visningsverdi. Denne innstillingen angir hvilken matrisekolonne eller hvilket panelspørsmål som skal inneholde visningstekstene."

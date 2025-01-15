@@ -22,7 +22,7 @@ export var skStrings = {
     theme: "Témy",
     translation: "Preklad",
     designer: "Návrhár prieskumov",
-    editor: "Editor JSON",
+    json: "Editor JSON",
     logic: "Logika prieskumu"
   },
   // Question types
@@ -625,6 +625,7 @@ export var skStrings = {
     editText: "Text tlačidla úpravy",
     startSurveyText: "Text tlačidla spustenia",
     showNavigationButtons: "Zobraziť navigačné tlačidlá (predvolená navigácia)",
+    navigationButtonsLocation: "Zarovnanie navigačných tlačidiel",
     showPrevButton: "Zobraziť tlačidlo predchádzajúce (používateľ sa môže vráiť na predchádzajúcu stránku)",
     firstPageIsStartPage: "Prvá stránka v prieskume je úvodná stránka.",
     showCompletePage: "Na konci zobraziť stránku s dokončením (completedHtml)",
@@ -753,6 +754,8 @@ export var skStrings = {
     separateSpecialChoices: "Samostatné špeciálne možnosti (Žiadne, Iné, Vybrať všetko)",
     choicesFromQuestion: "Skopírujte voľby z nasledujúcej otázky",
     choicesFromQuestionMode: "Aké možnosti kopírovať?",
+    choiceValuesFromQuestion: "Použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky ako ID výberu",
+    choiceTextsFromQuestion: "Ako texty výberu použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky",
     progressBarShowPageTitles: "Zobrazenie prebiehajúcich názvov stránok",
     progressBarShowPageNumbers: "Zobrazenie prebiehajúcich čísel strán",
     showCommentArea: "Zobrazenie oblasti komentárov",
@@ -1104,6 +1107,8 @@ export var skStrings = {
     noPreview: "žiadna ukážka",
     showAllQuestions: "zobraziť ukážku so všetkými otázkami",
     showAnsweredQuestions: "zobraziť ukážku so zodpovedanými otázkami",
+    allQuestions: "Zobraziť všetky otázky",
+    answeredQuestions: "Zobraziť len zodpovedané otázky",
     pages: "stránky",
     questions: "otázky",
     requiredQuestions: "povinné otázky",
@@ -1455,6 +1460,7 @@ export var skStrings = {
     autoAdvanceEnabled: "Vyberte, či chcete, aby sa prieskum automaticky posunul na ďalšiu stránku, keď respondent odpovie na všetky otázky na aktuálnej stránke. Táto funkcia sa nepoužije, ak je posledná otázka na stránke otvorená alebo umožňuje viacero odpovedí.",
     autoAdvanceAllowComplete: "Vyberte, či chcete, aby sa prieskum dokončil automaticky po tom, čo respondent odpovie na všetky otázky.",
     showNavigationButtons: "Nastavuje viditeľnosť a umiestnenie navigačných tlačidiel na stránke.",
+    navigationButtonsLocation: "Nastaví umiestnenie navigačných tlačidiel na stránke.",
     showProgressBar: "Nastavuje viditeľnosť a umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu.",
     showPreviewBeforeComplete: "Povoľte stránku ukážky so všetkými alebo iba zodpovedanými otázkami.",
     questionTitleLocation: "Vzťahuje sa na všetky otázky v rámci prieskumu. Toto nastavenie je možné prepísať pravidlami zarovnania názvov na nižších úrovniach: panel, stránka alebo otázka. Nastavenie nižšej úrovne prepíše nastavenia na vyššej úrovni.",
@@ -1501,7 +1507,7 @@ export var skStrings = {
       questionTitleWidth: "Nastavuje konzistentnú šírku názvov otázok, keď sú zarovnané naľavo od polí otázok. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
       questionErrorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Predvolene hore\").",
       questionOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Originál\" v predvolenom nastavení). Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
-      navigationButtonsVisibility: "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\"."
+      showNavigationButtons: "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\"."
     },
     timerLocation: "Nastaví umiestnenie časovača na strane.",
     panelsState: "Vyberte si z: \"Zamknuté\" - používatelia nemôžu rozširovať ani zbaliť panely; \"Zbaliť všetko\" - všetky panely začínajú v zbalenom stave; \"Rozbaliť všetko\" - všetky panely začínajú v rozšírenom stave; \"Prvý rozšírený\" - pôvodne sa rozšíril iba prvý panel.",
@@ -1516,6 +1522,8 @@ export var skStrings = {
     useDisplayValuesInDynamicTexts: "V prípade otázok s jedným a viacerými výbermi má každá možnosť výberu identifikátor a zobrazenú hodnotu. Ak je táto voľba vybratá, toto nastavenie zobrazuje zobrazenú hodnotu namiesto hodnoty ID v otázkach HTML a dynamických názvoch a popisoch prvkov prieskumu.",
     clearIfInvisible: "Vyberte, či chcete vymazať hodnoty otázok skryté podmienenou logikou a kedy to chcete urobiť. Možnosť \"Dediť\" použije nastavenie na úrovni prieskumu (\"Po dokončení prieskumu predvolene\").",
     choicesFromQuestionMode: "Vyberte si z: \"Všetko\" - skopíruje všetky možnosti výberu z vybranej otázky; \"Vybraté\" - dynamicky kopíruje iba vybrané možnosti výberu; \"Nevybraté\" - dynamicky kopíruje iba nevybraté možnosti výberu. Možnosti \"Žiadne\" a \"Iné\" sa predvolene kopírujú, ak sú povolené v otázke zdroja.",
+    choiceValuesFromQuestion: "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo panelová otázka má poskytnúť ID.",
+    choiceTextsFromQuestion: "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo otázka panela by mala poskytovať zobrazované texty.",
     showOtherItem: "Ak je táto voľba vybratá, používatelia môžu zahrnúť ďalšie vstupy do samostatného poľa komentára.",
     separateSpecialChoices: "Zobrazí každú možnosť špeciálnej voľby (\"Žiadne\", \"Iné\", \"Vybrať všetko\") na novom riadku, a to aj pri použití rozloženia s viacerými stĺpcami.",
     path: "Zadajte umiestnenie v množine údajov služby, kde sa nachádza cieľové pole objektov. Ak URL adresa už odkazuje na pole, nechajte prázdne.",
@@ -1660,7 +1668,6 @@ export var skStrings = {
     inputTextAlignment: "Zarovnanie vstupných hodnôt",
     elements: "Prvky",
     content: "Obsah",
-    navigationButtonsVisibility: "Viditeľnosť navigačných tlačidiel",
     navigationTitle: "Navigácia –​ titul",
     navigationDescription: "Navigácia – opis",
     longTap: "Dlhé klepnutie",
@@ -2596,7 +2603,7 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Vzťahuje sa na všetky otázky na tejto stránke. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky alebo panely. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Predvolene hore\")."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Predvolene hore\")."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Originál\" v predvolenom nastavení). Efekt tohto nastavenia je viditeľný iba na karte Ukážka."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Vyberte si z: \"Zamknuté\" - používatelia nemôžu rozširovať ani zbaliť panely; \"Zbaliť všetko\" - všetky panely začínajú v zbalenom stave; \"Rozbaliť všetko\" - všetky panely začínajú v rozšírenom stave; \"Prvý rozšírený\" - pôvodne sa rozšíril iba prvý panel."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Zadajte zdieľaný názov vlastnosti do poľa objektov obsahujúceho URL adresy obrázkov alebo videosúborov, ktoré chcete zobraziť v zozname výberu."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Ľavá hodnota slúži ako ID položky používané v podmienených pravidlách, pravá hodnota sa zobrazuje respondentom."
@@ -2926,3 +2933,11 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // tabs.surfaceBackground: "Surface Background" => "Pozadie povrchu"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Predvolené použitie odpovedí z posledného záznamu"
 // colors.gray: "Gray" => "Sivý"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Zarovnanie navigačných tlačidiel"
+// pv.allQuestions: "Show all questions" => "Zobraziť všetky otázky"
+// pv.answeredQuestions: "Show answered questions only" => "Zobraziť len zodpovedané otázky"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Nastaví umiestnenie navigačných tlačidiel na stránke."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky ako ID výberu"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Ako texty výberu použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo panelová otázka má poskytnúť ID."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo otázka panela by mala poskytovať zobrazované texty."

@@ -22,7 +22,7 @@ var italianTranslation = {
     theme: "Temi",
     translation: "Traduzione",
     designer: "Progetta il sondaggio",
-    editor: "Modifica JSON",
+    json: "Modifica JSON",
     logic: "Logica"
   },
   // Question types
@@ -440,7 +440,7 @@ var italianTranslation = {
     imageWidth: "Larghezza immagine",
     valueName: "Nome Valore",
     rateDescriptionLocation: "Allineamento delle etichette",
-    size: "Dimensione dell'input (in caratteri)",
+    size: "Larghezza del campo di input (in caratteri)",
     cellErrorLocation: "Allineamento dei messaggi di errore delle celle",
     enabled: "Abilitato",
     disabled: "Disabile",
@@ -625,6 +625,7 @@ var italianTranslation = {
     editText: "Testo del tasto Modifica risposta",
     startSurveyText: "Testo del tasto Inizia sondaggio",
     showNavigationButtons: "Visualizza tasti di navigazione (navigazione di default)",
+    navigationButtonsLocation: "Allineamento dei pulsanti di navigazione",
     showPrevButton: "Visualizza tasto Pagina Precedente (l'utente può tornare alla pagina precedente)",
     firstPageIsStartPage: "La prima pagina nel sondaggio è la pagina iniziale",
     showCompletePage: "Mostra la pagina sondaggio Completo",
@@ -753,6 +754,8 @@ var italianTranslation = {
     separateSpecialChoices: "Scelte speciali separate (Nessuno, Altro, Seleziona tutti)",
     choicesFromQuestion: "Copia le scelte dalla domanda seguente:",
     choicesFromQuestionMode: "Quale scelta copiare?",
+    choiceValuesFromQuestion: "Utilizza i valori della colonna matrice seguente o della domanda del pannello come ID di scelta",
+    choiceTextsFromQuestion: "Usa i valori della seguente colonna matrice o domanda del pannello come testi di scelta",
     progressBarShowPageTitles: "Visualizzare i titoli delle pagine nella barra di avanzamento",
     progressBarShowPageNumbers: "Visualizzare i numeri di pagina nella barra di avanzamento",
     showCommentArea: "Mostra l'area commento",
@@ -1104,6 +1107,8 @@ var italianTranslation = {
     noPreview: "No anteprima",
     showAllQuestions: "Mostra tutte le domande",
     showAnsweredQuestions: "Mostra solo le domande con risposta",
+    allQuestions: "Mostra tutte le domande",
+    answeredQuestions: "Mostra solo le domande con risposta",
     pages: "Pagine completate",
     questions: "Domande con risposte",
     requiredQuestions: "Domande obbligatorie con risposta",
@@ -1455,6 +1460,7 @@ var italianTranslation = {
     autoAdvanceEnabled: "Seleziona questa opzione se desideri che l'indagine passi automaticamente alla pagina successiva una volta che un rispondente ha risposto a tutte le domande della pagina corrente. Questa funzione non si applica se l'ultima domanda della pagina è aperta o consente risposte multiple.",
     autoAdvanceAllowComplete: "Seleziona questa opzione se desideri che l'indagine venga completata automaticamente dopo che un rispondente ha risposto a tutte le domande.",
     showNavigationButtons: "Imposta la visibilità e la posizione dei pulsanti di navigazione in una pagina.",
+    navigationButtonsLocation: "Imposta la posizione dei pulsanti di navigazione in una pagina.",
     showProgressBar: "Imposta la visibilità e la posizione di una barra di avanzamento. Il valore \"Auto\" mostra la barra di avanzamento sopra o sotto l'intestazione del sondaggio.",
     showPreviewBeforeComplete: "Abilita la pagina di anteprima con tutte le domande o solo con risposta.",
     questionTitleLocation: "Si applica a tutte le domande all'interno dell'indagine. Questa impostazione può essere sostituita dalle regole di allineamento del titolo ai livelli inferiori: pannello, pagina o domanda. Un'impostazione di livello inferiore sostituirà quelle di livello superiore.",
@@ -1501,7 +1507,7 @@ var italianTranslation = {
       questionTitleWidth: "Imposta una larghezza coerente per i titoli delle domande quando sono allineati a sinistra delle caselle delle domande. Accetta valori CSS (px, %, in, pt, ecc.).",
       questionErrorLocation: "Imposta la posizione di un messaggio di errore in relazione alla domanda con input non valido. Scegli tra: \"In alto\" - un testo di errore viene posizionato nella parte superiore della casella della domanda; \"In basso\": un testo di errore viene inserito nella parte inferiore della casella della domanda. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"In alto\" per impostazione predefinita).",
       questionOrder: "Mantiene l'ordine originale delle domande o le rende casuali. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"Originale\" per impostazione predefinita). L'effetto di questa impostazione è visibile solo nella scheda Anteprima.",
-      navigationButtonsVisibility: "Imposta la visibilità dei pulsanti di navigazione nella pagina. L'opzione \"Eredita\" applica l'impostazione a livello di indagine, che per impostazione predefinita è \"Visibile\"."
+      showNavigationButtons: "Imposta la visibilità dei pulsanti di navigazione nella pagina. L'opzione \"Eredita\" applica l'impostazione a livello di indagine, che per impostazione predefinita è \"Visibile\"."
     },
     timerLocation: "Imposta la posizione di un timer su una pagina.",
     panelsState: "Scegli tra: \"Bloccato\" - gli utenti non possono espandere o comprimere i pannelli; \"Comprimi tutto\": tutti i pannelli iniziano in uno stato compresso; \"Espandi tutto\": tutti i pannelli iniziano in uno stato espanso; \"Prima espansa\": inizialmente viene espanso solo il primo pannello.",
@@ -1516,6 +1522,8 @@ var italianTranslation = {
     useDisplayValuesInDynamicTexts: "Nei tipi di domande a selezione singola e multipla, ogni opzione di scelta ha un ID e un valore di visualizzazione. Quando questa opzione è selezionata, questa impostazione mostra un valore di visualizzazione anziché un valore ID nelle domande HTML e nei titoli dinamici e nelle descrizioni degli elementi dell'indagine.",
     clearIfInvisible: "Scegli se cancellare o meno i valori delle domande nascosti dalla logica condizionale e quando farlo. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"Al completamento dell'indagine\" per impostazione predefinita).",
     choicesFromQuestionMode: "Scegli tra: \"Tutte\" - copia tutte le opzioni di scelta dalla domanda selezionata; \"Selezionato\" - copia dinamicamente solo le opzioni di scelta selezionate; \"Non selezionato\" - copia dinamicamente solo le opzioni di scelta non selezionate. Le opzioni \"Nessuna\" e \"Altro\" vengono copiate per impostazione predefinita se abilitate nella domanda di origine.",
+    choiceValuesFromQuestion: "Nei tipi di domande a selezione singola e multipla, ogni opzione di scelta ha un ID e un valore visualizzato. Questa impostazione specifica quale colonna matrice o domanda del pannello deve fornire gli ID.",
+    choiceTextsFromQuestion: "Nei tipi di domande a selezione singola e multipla, ogni opzione di scelta ha un ID e un valore visualizzato. Questa impostazione specifica quale colonna matrice o domanda del pannello deve fornire i testi visualizzati.",
     showOtherItem: "Quando questa opzione è selezionata, gli utenti possono includere input aggiuntivi in una casella di commento separata.",
     separateSpecialChoices: "Visualizza ogni opzione di scelta speciale (\"Nessuna\", \"Altro\", \"Seleziona tutto\") su una nuova riga, anche quando si utilizza un layout a più colonne.",
     path: "Specificare la posizione all'interno del set di dati del servizio in cui si trova la matrice di oggetti di destinazione. Lasciare vuoto se l'URL punta già all'array.",
@@ -1660,7 +1668,6 @@ var italianTranslation = {
     inputTextAlignment: "Allineamento dei valori di input",
     elements: "Elementi",
     content: "Contenuto",
-    navigationButtonsVisibility: "Visibilità Pulsanti di navigazione",
     navigationTitle: "Titolo navigazione",
     navigationDescription: "Descrizione navigazione",
     longTap: "Tocco prolungato",
@@ -2403,7 +2410,7 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Si applica a tutte le domande all'interno di questa pagina. Se si desidera ignorare questa impostazione, definire le regole di allineamento dei titoli per le singole domande o pannelli. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"In alto\" per impostazione predefinita)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Imposta la posizione di un messaggio di errore in relazione alla domanda con input non valido. Scegli tra: \"In alto\" - un testo di errore viene posizionato nella parte superiore della casella della domanda; \"In basso\": un testo di errore viene inserito nella parte inferiore della casella della domanda. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"In alto\" per impostazione predefinita)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Mantiene l'ordine originale delle domande o le rende casuali. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"Originale\" per impostazione predefinita). L'effetto di questa impostazione è visibile solo nella scheda Anteprima."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Imposta la visibilità dei pulsanti di navigazione nella pagina. L'opzione \"Eredita\" applica l'impostazione a livello di indagine, che per impostazione predefinita è \"Visibile\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Imposta la visibilità dei pulsanti di navigazione nella pagina. L'opzione \"Eredita\" applica l'impostazione a livello di indagine, che per impostazione predefinita è \"Visibile\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Scegli tra: \"Bloccato\" - gli utenti non possono espandere o comprimere i pannelli; \"Comprimi tutto\": tutti i pannelli iniziano in uno stato compresso; \"Espandi tutto\": tutti i pannelli iniziano in uno stato espanso; \"Prima espansa\": inizialmente viene espanso solo il primo pannello."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Immettere un nome di proprietà condivisa all'interno della matrice di oggetti che contiene gli URL del file di immagine o video che si desidera visualizzare nell'elenco di scelta."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Il valore a sinistra funge da ID elemento utilizzato nelle regole condizionali, mentre il valore a destra viene visualizzato dai rispondenti."
@@ -2733,3 +2740,12 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // tabs.surfaceBackground: "Surface Background" => "Sfondo della superficie"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Usa le risposte dell'ultima voce come impostazione predefinita"
 // colors.gray: "Gray" => "Grigio"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Allineamento dei pulsanti di navigazione"
+// pv.allQuestions: "Show all questions" => "Mostra tutte le domande"
+// pv.answeredQuestions: "Show answered questions only" => "Mostra solo le domande con risposta"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Imposta la posizione dei pulsanti di navigazione in una pagina."
+// pe.size: "Input field width (in characters)" => "Larghezza del campo di input (in caratteri)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Utilizza i valori della colonna matrice seguente o della domanda del pannello come ID di scelta"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Usa i valori della seguente colonna matrice o domanda del pannello come testi di scelta"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Nei tipi di domande a selezione singola e multipla, ogni opzione di scelta ha un ID e un valore visualizzato. Questa impostazione specifica quale colonna matrice o domanda del pannello deve fornire gli ID."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Nei tipi di domande a selezione singola e multipla, ogni opzione di scelta ha un ID e un valore visualizzato. Questa impostazione specifica quale colonna matrice o domanda del pannello deve fornire i testi visualizzati."
