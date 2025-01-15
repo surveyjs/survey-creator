@@ -159,7 +159,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
       iconSize: "auto",
-      needSeparator: this.creator.allowZoom,
+      needSeparator: <any>new ComputedUpdater<boolean>(() => this.creator.allowZoom),
       visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
       action: () => this.creator.expandCollapseManager.expandCollapseElements("collapse-all", true)
     });
