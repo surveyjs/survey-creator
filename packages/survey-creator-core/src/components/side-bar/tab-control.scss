@@ -113,9 +113,9 @@
 .svc-sidebar__header--tabbed,
 .svc-sidebar__header-container {
   min-height: calc(
-    var(--ctr-menu-toolbar-button-icon-height) + var(--ctr-menu-toolbar-button-padding-top) +
-      var(--ctr-menu-toolbar-button-padding-bottom) + var(--ctr-menu-toolbar-padding-vertical) +
-      var(--ctr-menu-toolbar-padding-vertical)
+    var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3)) + var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1)) +
+      var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1)) + var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150)) +
+      var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150))
   );
 }
 

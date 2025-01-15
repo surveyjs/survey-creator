@@ -10,7 +10,7 @@
   box-sizing: border-box;
   width: 100%;
   border: none;
-  border-radius: var(--ctr-editor-corner-radius);
+  border-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
   box-shadow: inset 0 0 0 var(--ctr-editor-border-width, var(--sjs-stroke-x1)) var(--ctr-editor-border-color, #dcdcdcff);
   transition: box-shadow $creator-transition-duration;
 
@@ -58,7 +58,7 @@ input.spg-input:read-only::placeholder {
   background: transparent;
   border: none;
   outline: none;
-  border-radius: var(--ctr-editor-button-corner-radius);
+  border-radius: var(--ctr-editor-button-corner-radius, var(--sjs-corner-radius-x05));
   padding: var(--ctr-editor-button-padding-top, var(--sjs-spacing-x1)) var(--ctr-editor-button-padding-right, var(--sjs-spacing-x1))
     var(--ctr-editor-button-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-editor-button-padding-left, var(--sjs-spacing-x1));
   line-height: 0;

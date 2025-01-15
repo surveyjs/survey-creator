@@ -8,7 +8,7 @@ export interface ICreatorTheme {
 }
 
 export const PredefinedCreatorThemes: string[] = ["default-light"];
-// const sc2020CssVariables = {};
+const defaultVariables = {};
 // assign(sc2020CssVariables, designTabSurveyThemeJSON.cssVariables, {
 //   "--sjs-special-background": "#F3F3F3FF",
 //   "--sjs-special-glow": "#0000001a",
@@ -25,9 +25,9 @@ export const PredefinedCreatorThemes: string[] = ["default-light"];
 // });
 
 export const CreatorThemes: { [index: string]: ICreatorTheme } = {
-  // "sc2020": {
-  //   themeName: "sc2020",
-  //   cssVariables: sc2020CssVariables,
-  //   iconsSet: "v1"
-  // }
+  "default-light": {
+    themeName: "default-light",
+    cssVariables: defaultVariables,
+    iconsSet: "v2"
+  }
 };

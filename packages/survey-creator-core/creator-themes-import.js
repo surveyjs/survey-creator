@@ -18,15 +18,15 @@ var palettes = {
   "dark": ["default-dark"],
 };
 var themeConstants = {
-  "default": {
-    "--ctr-toolbox-scrollbar-left": "auto",
-    "--ctr-toolbox-scrollbar-right": "0",
-    "--ctr-toolbox-scroller-align-items": "flex-start",
-    "--ctr-toolbox-item-align": "stretch",
-    "--ctr-toolbox-margin-left-compact": "0px",
-    "--ctr-toolbox-item-banner-icon-display": "none",
-    "--ctr-toolbox-item-banner-beak-display": "block",
-    "--ctr-toolbox-submenu-item-min-width": "calc(17 * 8px)",
+  "sc2020": {
+    "--ctr-toolbox-scrollbar-left": "0",
+    "--ctr-toolbox-scrollbar-right": "initial",
+    "--ctr-toolbox-scroller-align-items": "flex-end",
+    "--ctr-toolbox-item-align": "flex-start",
+    "--ctr-toolbox-margin-left-compact": "12px",
+    "--ctr-toolbox-item-banner-icon-display": "block",
+    "--ctr-toolbox-item-banner-beak-display": "none",
+    "--ctr-toolbox-submenu-item-min-width": "initial",
   }
 };
 

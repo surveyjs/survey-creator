@@ -4,9 +4,9 @@ const baseThemeName = "v2-24";
 const themeSourcePath = "./src/themes/predefined-themes/";
 const defaultLightPaletteSourcePath = "default/light.css";
 
-const singleVariableRegExp = /var\((?<variable>--\w*(-+\w*)*)/gi;
 const regularExpression = /(?<var1>--\w*(-+\w*)*)\s?:\s?(?<var2>.*[^;]);/gi;
 const cssVariableFallbackRegExp = /var\((?<variable>--\w*(-+\w*)*)\,\s*(?<fallback>((?!var\().)*)\)/gi
+const cssVariableWithOutFallbackRegExp = /var\((?<variable>--\w*(-+\w*)*)\)/gi;
 const newLineRegExp = /\r?\n/gi;
 
 
@@ -19,24 +19,26 @@ function getCorrectValue(variableKey, value) {
   if(variableKey.indexOf("-opacity") > -1) {
     return parseInt(value) / 100;
   } else {
-    const colorValue = findColorConstantValue(value);
+    const colorValue = findConstantValue(value);
     return colorValue || value;
   }
 }
 
-function findColorConstantValue(value) {
+function findConstantValue(value) {
   const varName = findVariableName(value);
-  if(!!varName && !!colorPalleteLightCssVariable[varName]) {
+  if(!varName) return value;
+
+  if(!!baseThemeCssVariable[varName]) {
+    return findConstantValue(baseThemeCssVariable[varName]);
+  } else if(!!colorPalleteLightCssVariable[varName]) {
     const colorValue = colorPalleteLightCssVariable[varName];
     if(colorValue.indexOf("#") === 0) return colorValue.toLowerCase();
-  } else if(!!varName && !!baseThemeCssVariable[varName]) {
-    return findColorConstantValue(baseThemeCssVariable[varName]);
-  }
+  } 
   return undefined;
 }
 
 function findVariableName(str) {
-  const iteratorResult = str.matchAll(singleVariableRegExp);
+  const iteratorResult = str.matchAll(cssVariableWithOutFallbackRegExp);
   const matches = [...iteratorResult]; 
   if(matches.length > 0) {
     const varName = matches[0].groups["variable"];
@@ -59,16 +61,25 @@ function replaceFallbacks(path) {
       const newLines = lines.map(line => {
         // console.log("line " + line);
 
-        const newLine = line.replaceAll(cssVariableFallbackRegExp, function(match, variable) {
-            // console.log("variable " + variable + " " + match);
+        let newLine = line.replaceAll(cssVariableFallbackRegExp, function(match, variable) {
             const newValue = getCorrectValue(variable, baseThemeCssVariable[variable]);
             if(newValue === undefined) return match;
             
             hasChanges = true;
             const newStr = `var(${variable}, ${newValue})`;
             return newStr;
-          });
-          return newLine;
+          }
+        );
+        newLine = line.replaceAll(cssVariableWithOutFallbackRegExp, function(match, variable) {
+          const newValue = getCorrectValue(variable, baseThemeCssVariable[variable]);
+          if(newValue === undefined) return match;
+          
+          hasChanges = true;
+          const newStr = `var(${variable}, ${newValue})`;
+          return newStr;
+        }
+      );
+        return newLine;
       })
 
       if(hasChanges) {

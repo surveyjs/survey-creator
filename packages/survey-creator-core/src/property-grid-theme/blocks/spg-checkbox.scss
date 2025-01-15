@@ -33,7 +33,7 @@
 .spg-checkbox__rectangle {
   background: var(--ctr-checkbox-background-color, #f4f4f4ff);
   border: var(--ctr-checkbox-border-width, var(--sjs-stroke-x1)) solid var(--ctr-checkbox-border-color, #dcdcdcff);
-  border-radius: var(--ctr-checkbox-corner-radius);
+  border-radius: var(--ctr-checkbox-corner-radius, var(--sjs-corner-radius-x05));
   box-sizing: border-box;
   width: var(--ctr-checkbox-button-width, var(--sjs-font-size-x3));
   height: var(--ctr-checkbox-button-height, var(--sjs-font-size-x3));

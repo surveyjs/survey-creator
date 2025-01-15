@@ -221,8 +221,8 @@ svc-tab-preview {
 
 .svc-footer-bar {
   .svc-preview-pager__item {
-    --thm-menu-toolbar-button-gap: calc(var(--ctr-menu-toolbar-gap) / 2);
-    margin: 0 var(--thm-menu-toolbar-button-gap, calcSize(1));
+    --thm-menu-toolbar-button-gap: calc(var(--ctr-menu-toolbar-gap, var(--sjs-spacing-x2)) / 2);
+    margin: 0 var(--thm-menu-toolbar-button-gap);
   }
 
   .svc-preview-pager-item__icon {

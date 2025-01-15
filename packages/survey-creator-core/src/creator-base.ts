@@ -4257,7 +4257,7 @@ export class SurveyCreatorModel extends Base
       assign(newCssVariable, designerPlugin.model.scaleCssVariables || {});
     }
     this.themeVariables = newCssVariable;
-    const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v1";
+    const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v2";
     SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);
 
     if (isLight !== undefined) {

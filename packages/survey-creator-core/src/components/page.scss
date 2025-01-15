@@ -87,15 +87,15 @@ svc-page {
 
 .svc-page-toolbar__item {
   @include defaultActionButtonSettings;
-  --thm-survey-question-panel-toolbar-item-padding-top: calc(var(--ctr-survey-question-panel-toolbar-item-padding-top) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-top));
-  --thm-survey-question-panel-toolbar-item-padding-right: calc(var(--ctr-survey-question-panel-toolbar-item-padding-right) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-right));
-  --thm-survey-question-panel-toolbar-item-padding-bottom: calc(var(--ctr-survey-question-panel-toolbar-item-padding-bottom) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom));
-  --thm-survey-question-panel-toolbar-item-padding-left: calc(var(--ctr-survey-question-panel-toolbar-item-padding-left) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-left));
+  --thm-survey-question-panel-toolbar-item-padding-top: calc(var(--ctr-survey-question-panel-toolbar-item-padding-top, var(--lbr-spacing-x05)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-top, var(--lbr-spacing-x05)));
+  --thm-survey-question-panel-toolbar-item-padding-right: calc(var(--ctr-survey-question-panel-toolbar-item-padding-right, var(--lbr-spacing-x05)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05)));
+  --thm-survey-question-panel-toolbar-item-padding-bottom: calc(var(--ctr-survey-question-panel-toolbar-item-padding-bottom, var(--lbr-spacing-x05)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom, var(--lbr-spacing-x05)));
+  --thm-survey-question-panel-toolbar-item-padding-left: calc(var(--ctr-survey-question-panel-toolbar-item-padding-left, var(--lbr-spacing-x05)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-left, var(--lbr-spacing-x05)));
 
-  --thm-survey-question-panel-toolbar-button-gap: calc(var(--ctr-survey-question-panel-toolbar-gap) / 2);
-  margin: 0 var(--thm-survey-question-panel-toolbar-button-gap, calcSize(0.5));
+  --thm-survey-question-panel-toolbar-button-gap: calc(var(--ctr-survey-question-panel-toolbar-gap, var(--lbr-spacing-x1)) / 2);
+  margin: 0 var(--thm-survey-question-panel-toolbar-button-gap);
   border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, var(--lbr-corner-radius-x05));
-  padding: var(--thm-survey-question-panel-toolbar-item-padding-top, calcSize(1)) var(--thm-survey-question-panel-toolbar-item-padding-right, calcSize(1)) var(--thm-survey-question-panel-toolbar-item-padding-bottom, calcSize(1)) var(--thm-survey-question-panel-toolbar-item-padding-left, calcSize(1));
+  padding: var(--thm-survey-question-panel-toolbar-item-padding-top) var(--thm-survey-question-panel-toolbar-item-padding-right) var(--thm-survey-question-panel-toolbar-item-padding-bottom) var(--thm-survey-question-panel-toolbar-item-padding-left);
   justify-content: center;
   align-items: center;
 
@@ -117,7 +117,7 @@ svc-page {
     background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, #19b3941a);
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
     use {
-      fill: var(--ctr-menu-toolbar-button-icon-color, black);
+      fill: var(--ctr-menu-toolbar-button-icon-color, #000000bf);
       opacity: 0.5;
     }
   }
@@ -140,11 +140,11 @@ svc-page {
 }
 
 .svc-page-toolbar__item--with-text {
-  --thm-survey-question-panel-toolbar-item-padding-right: calc(var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-right));
-  --thm-survey-question-panel-toolbar-item-gap: calc(var(--ctr-survey-question-panel-toolbar-item-gap) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-right));
+  --thm-survey-question-panel-toolbar-item-padding-right: calc(var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text, var(--lbr-spacing-x1)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05)));
+  --thm-survey-question-panel-toolbar-item-gap: calc(var(--ctr-survey-question-panel-toolbar-item-gap, var(--lbr-spacing-x05)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05)));
 
-  padding-inline-end: var(--thm-survey-question-panel-toolbar-item-padding-right-with-text, calcSize(1));
-  gap: var(--thm-survey-question-panel-toolbar-item-gap, calcSize(0.5));
+  padding-inline-end: var(--thm-survey-question-panel-toolbar-item-padding-right);
+  gap: var(--thm-survey-question-panel-toolbar-item-gap);
 }
 
 .svc-page-toolbar .sv-action:last-of-type .svc-page-toolbar__item {
@@ -156,10 +156,16 @@ svc-page {
 }
 
 .svc-page-toolbar-item__icon {
-  --thm-survey-page-toolbar-item-icon-width: calc(var(--ctr-survey-question-panel-toolbar-item-icon-container-width) - var(--ctr-survey-question-panel-toolbar-item-icon-padding-right) - var(--ctr-survey-question-panel-toolbar-item-icon-padding-left));
-  --thm-survey-page-toolbar-item-icon-height: calc(var(--ctr-survey-question-panel-toolbar-item-icon-container-height) - var(--ctr-survey-question-panel-toolbar-item-icon-padding-top) - var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom));
-  width: var(--thm-survey-page-toolbar-item-icon-width, calcSize(2));
-  height: var(--thm-survey-page-toolbar-item-icon-height, calcSize(2));
+  width: calc(
+    var(--ctr-survey-question-panel-toolbar-item-icon-container-width, var(--lbr-size-x3)) -
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05)) -
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-left, var(--lbr-spacing-x05))
+  );
+  height: calc(
+    var(--ctr-survey-question-panel-toolbar-item-icon-container-height, var(--lbr-size-x3)) -
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-top, var(--lbr-spacing-x05)) -
+      var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom, var(--lbr-spacing-x05))
+  );
 }
 
 .svc-page-toolbar-item__title {

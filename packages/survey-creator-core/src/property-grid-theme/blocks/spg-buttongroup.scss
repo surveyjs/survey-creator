@@ -85,7 +85,7 @@
   text-overflow: ellipsis;
 }
 .spg-question--disabled .spg-button-group {
-  background: var(--ctr-button-group-background-color-disabled);
+  background: var(--ctr-button-group-background-color-disabled, #ffffffff);
 }
 
 .spg-button-group__item--disabled {

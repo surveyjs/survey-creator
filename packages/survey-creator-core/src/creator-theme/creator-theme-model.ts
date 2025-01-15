@@ -314,7 +314,7 @@ Serializer.addClass(
       type: "string",
       visible: false,
       name: "iconsSet",
-      default: "v1"
+      default: "v2"
     }
   ],
   (json) => { return new CreatorThemeModel(); }

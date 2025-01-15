@@ -5,11 +5,11 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  border-radius: var(--ctr-editor-corner-radius);
+  border-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
 }
 
 .spg-question.spg-question--disabled {
-  background-color: var(--ctr-editor-background-color-disabled);
+  background-color: var(--ctr-editor-background-color-disabled, #ffffffff);
 }
 
 .spg-question__header {

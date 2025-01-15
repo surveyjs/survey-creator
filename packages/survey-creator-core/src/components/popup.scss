@@ -9,20 +9,20 @@
     background-color: var(--ctr-popup-background-color, #ffffffff);
     border-radius: var(--ctr-popup-corner-radius, var(--sjs-corner-radius-x2));
     box-shadow:
-      var(--ctr-popup-shadow-1-offset-x, var(--ctr-shadow-medium-offset-x))
-        var(--ctr-popup-shadow-1-offset-y, var(--ctr-shadow-medium-offset-y))
-        var(--ctr-popup-shadow-1-blur, var(--ctr-shadow-medium-blur))
-        var(--ctr-popup-shadow-1-spread, var(--ctr-shadow-medium-spread)) 
+      var(--ctr-popup-shadow-1-offset-x, 0px)
+        var(--ctr-popup-shadow-1-offset-y, 2px)
+        var(--ctr-popup-shadow-1-blur, 8px)
+        var(--ctr-popup-shadow-1-spread, 0px) 
         var(--ctr-popup-shadow-1-color, #004c441a),
-      var(--ctr-popup-shadow-2-offset-x, var(--ctr-shadow-large-offset-x))
-        var(--ctr-popup-shadow-2-offset-y, var(--ctr-shadow-large-offset-y))
-        var(--ctr-popup-shadow-2-blur, var(--ctr-shadow-large-blur))
-        var(--ctr-popup-shadow-2-spread, var(--ctr-shadow-large-spread))
+      var(--ctr-popup-shadow-2-offset-x, 0px)
+        var(--ctr-popup-shadow-2-offset-y, 16px)
+        var(--ctr-popup-shadow-2-blur, 32px)
+        var(--ctr-popup-shadow-2-spread, 0px)
         var(--ctr-popup-shadow-2-color, #004c441a),
-      var(--ctr-popup-shadow-3-offset-x, var(--ctr-shadow-x-large-offset-x))
-        var(--ctr-popup-shadow-3-offset-y, var(--ctr-shadow-x-large-offset-y))
-        var(--ctr-popup-shadow-3-blur, var(--ctr-shadow-x-large-blur))
-        var(--ctr-popup-shadow-3-spread, var(--ctr-shadow-x-large-spread))
+      var(--ctr-popup-shadow-3-offset-x, 0px)
+        var(--ctr-popup-shadow-3-offset-y, 32px)
+        var(--ctr-popup-shadow-3-blur, 64px)
+        var(--ctr-popup-shadow-3-spread, 0px)
         var(--ctr-popup-shadow-3-color, #004c441a);
 
     .sv-footer-action-bar {
@@ -75,15 +75,15 @@
     background-color: transparent;
     border-radius: var(--ctr-popup-menu-corner-radius, var(--sjs-corner-radius-x1));
     box-shadow:
-      var(--ctr-popup-menu-shadow-1-offset-x, var(--ctr-shadow-medium-offset-x))
-        var(--ctr-popup-menu-shadow-1-offset-y, var(--ctr-shadow-medium-offset-y))
-        var(--ctr-popup-menu-shadow-1-blur, var(--ctr-shadow-medium-blur))
-        var(--ctr-popup-menu-shadow-1-spread, var(--ctr-shadow-medium-spread))
+      var(--ctr-popup-menu-shadow-1-offset-x, 0px)
+        var(--ctr-popup-menu-shadow-1-offset-y, 2px)
+        var(--ctr-popup-menu-shadow-1-blur, 8px)
+        var(--ctr-popup-menu-shadow-1-spread, 0px)
         var(--ctr-popup-menu-shadow-1-color, #004c441a),
-      var(--ctr-popup-menu-shadow-2-offset-x, var(--ctr-shadow-large-offset-x))
-        var(--ctr-popup-menu-shadow-2-offset-y, var(--ctr-shadow-large-offset-y))
-        var(--ctr-popup-menu-shadow-2-blur, var(--ctr-shadow-large-blur))
-        var(--ctr-popup-menu-shadow-2-spread, var(--ctr-shadow-large-spread))
+      var(--ctr-popup-menu-shadow-2-offset-x, 0px)
+        var(--ctr-popup-menu-shadow-2-offset-y, 16px)
+        var(--ctr-popup-menu-shadow-2-blur, 32px)
+        var(--ctr-popup-menu-shadow-2-spread, 0px)
         var(--ctr-popup-menu-shadow-2-color, #004c441a);
   }
 

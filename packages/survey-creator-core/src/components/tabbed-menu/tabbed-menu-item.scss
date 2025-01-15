@@ -3,7 +3,7 @@
 .svc-tabbed-menu-item {
   display: flex;
   align-items: center;
-  min-height: calc(var(--ctr-menu-toolbar-button-icon-height) + var(--ctr-menu-item-padding-top) + var(--ctr-menu-item-padding-bottom));
+  min-height: calc(var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3)) + var(--ctr-menu-item-padding-top, var(--sjs-spacing-x250)) + var(--ctr-menu-item-padding-bottom, var(--sjs-spacing-x250)));
   padding: var(--ctr-menu-item-padding-top, var(--sjs-spacing-x250)) var(--ctr-menu-item-padding-right, var(--sjs-spacing-x3)) var(--ctr-menu-item-padding-bottom, var(--sjs-spacing-x250)) var(--ctr-menu-item-padding-left, var(--sjs-spacing-x3)) ;
   box-sizing: border-box;
   cursor: pointer;

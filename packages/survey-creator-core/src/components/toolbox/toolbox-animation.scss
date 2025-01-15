@@ -120,7 +120,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 .svc-toolbox--flyout-to-compact-running {
   width: var(--toolbox-width-compact);
-  margin-inline-end: var(--ctr-toolbox-margin-left-compact, calcSize(1.5));
+  margin-inline-end: var(--ctr-toolbox-margin-left-compact, 0);
   z-index: 200;
   border-inline-end: var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1)) solid transparent;
 }

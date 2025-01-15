@@ -77,7 +77,7 @@
   }
 
   .spg-dropdown_chevron-button {
-    --tmp-dropdown-button-margin: calc(-1 * var(--ctr-data-table-cell-drop-down-arrow-width));
+    --tmp-dropdown-button-margin: calc(-1 * var(--ctr-data-table-cell-drop-down-arrow-width, var(--sjs-font-size-x3)));
     width: var(--ctr-data-table-cell-drop-down-arrow-width, var(--sjs-font-size-x3));
     height: var(--ctr-data-table-cell-drop-down-arrow-height, var(--sjs-font-size-x3));
     margin-inline-start: var(--tmp-dropdown-button-margin, calcSize(-3));

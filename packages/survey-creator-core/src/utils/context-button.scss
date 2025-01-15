@@ -23,12 +23,12 @@
 
   .sv-svg-icon {
     --thm-button-contextual-button-icon-width: calc(
-      var(--ctr-survey-contextual-button-width) - var(--ctr-survey-contextual-button-padding-right) -
-        var(--ctr-survey-contextual-button-padding-left)
+      var(--ctr-survey-contextual-button-width, var(--lbr-size-x6)) - var(--ctr-survey-contextual-button-padding-right, var(--lbr-spacing-x150)) -
+        var(--ctr-survey-contextual-button-padding-left, var(--lbr-spacing-x150))
     );
     --thm-button-contextual-button-icon-height: calc(
-      var(--ctr-survey-contextual-button-height) - var(--ctr-survey-contextual-button-padding-top) -
-        var(--ctr-survey-contextual-button-padding-bottom)
+      var(--ctr-survey-contextual-button-height, var(--lbr-size-x6)) - var(--ctr-survey-contextual-button-padding-top, var(--lbr-spacing-x150)) -
+        var(--ctr-survey-contextual-button-padding-bottom, var(--lbr-spacing-x150))
     );
     width: var(--thm-button-contextual-button-icon-width, calcSize(3));
     height: var(--thm-button-contextual-button-icon-height, calcSize(3));

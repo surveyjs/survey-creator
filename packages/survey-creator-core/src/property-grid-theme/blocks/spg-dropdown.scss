@@ -7,8 +7,8 @@
             var(--ctr-editor-button-padding-left, var(--sjs-spacing-x1)) + var(--ctr-editor-button-icon-width, var(--sjs-font-size-x3))
     ); // dropdown_chevron-button offset
     min-height: calc(
-        var(--ctr-editor-button-icon-height) + var(--ctr-editor-button-padding-top) +
-            var(--ctr-editor-button-padding-bottom) + var(--ctr-editor-padding-top) + var(--ctr-editor-padding-bottom)
+        var(--ctr-editor-button-icon-height, var(--sjs-font-size-x3)) + var(--ctr-editor-button-padding-top, var(--sjs-spacing-x1)) +
+            var(--ctr-editor-button-padding-bottom, var(--sjs-spacing-x1)) + var(--ctr-editor-padding-top, var(--sjs-spacing-x05)) + var(--ctr-editor-padding-bottom, var(--sjs-spacing-x05))
     );
 }
 .spg-dropdown--empty .spg-dropdown__value {
@@ -34,7 +34,7 @@
 
     &:hover,
     &:focus {
-        border-radius: var(--ctr-editor-button-corner-radius);
+        border-radius: var(--ctr-editor-button-corner-radius, var(--sjs-corner-radius-x05));
         background: var(--ctr-editor-button-background-color-hovered, #eaeaeaff);
     }
     .spg-dropdown_chevron-button-svg use {

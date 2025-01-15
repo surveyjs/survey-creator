@@ -29,11 +29,11 @@ svc-page-navigator,
 }
 
 .svc-page-navigator__button {
-  --ctr-page-navigator-button-double-padding: calc(2 * var(--ctr-page-navigator-button-padding));
-  --ctr-page-navigator-button-width: calc(var(--ctr-page-navigator-button-icon-width) + var(--ctr-page-navigator-button-double-padding));
-  --ctr-page-navigator-button-height: calc(var(--ctr-page-navigator-button-icon-height) + var(--ctr-page-navigator-button-double-padding));
-  width: var(--ctr-page-navigator-button-width, calcSize(5));
-  height: var(--ctr-page-navigator-button-height, calcSize(5));
+  --ctr-page-navigator-button-double-padding: calc(2 * var(--ctr-page-navigator-button-padding, var(--sjs-spacing-x1)));
+  --ctr-page-navigator-button-width: calc(var(--ctr-page-navigator-button-icon-width, var(--sjs-font-size-x3)) + var(--ctr-page-navigator-button-double-padding));
+  --ctr-page-navigator-button-height: calc(var(--ctr-page-navigator-button-icon-height, var(--sjs-font-size-x3)) + var(--ctr-page-navigator-button-double-padding));
+  width: var(--ctr-page-navigator-button-width);
+  height: var(--ctr-page-navigator-button-height);
 
   padding: 0;
   cursor: pointer;
