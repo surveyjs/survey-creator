@@ -2457,6 +2457,7 @@ test("Question description bottom", async (t) => {
 test("Scaling design surface", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await ClientFunction(() => {
+      window["creator"].allowZoom = true;
       window["creator"].showToolbox = false;
       window["creator"].showSidebar = false;
     })();
