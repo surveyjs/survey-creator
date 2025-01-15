@@ -2754,33 +2754,10 @@ export class SurveyCreatorModel extends Base
       parent = panel;
     }
     this.addNewElementReason = modifiedType;
-    const currentRow = this.findRowByElement(selectedElement, parent);
     element.setVisibleIndex(-1);
-    if (currentRow && this.isRowMultiline(currentRow)) {
-      this.addElemenMultiline(parent, element, index, currentRow);
-    } else {
-      parent.addElement(element, index);
-    }
+    parent.addElement(element, index);
     this.addNewElementReason = "";
     this.setModified({ type: modifiedType, question: element });
-  }
-
-  private isRowMultiline(row) {
-    return row.elements.length > 1;
-  }
-
-  private findRowByElement(element, parent) {
-    if (!element) return null;
-    if (element.isPage) return element.rows[element.rows.length - 1];
-    return parent.rows.find(row => row.elements.indexOf(element) !== -1);
-  }
-
-  private addElemenMultiline(parent: any, element: any, index, currentRow: any) {
-    const elsCount = currentRow.elements.length;
-    const prevElement = currentRow.elements[elsCount - 1];
-    prevElement.startWithNewLine = true;
-    parent.addElement(element, index);
-    prevElement.startWithNewLine = false;
   }
 
   public setNewNames(element: ISurveyElement) {
