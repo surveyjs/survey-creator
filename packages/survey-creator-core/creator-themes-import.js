@@ -92,7 +92,7 @@ function isLightTheme(themeName) {
 function writeTheme2020(themeName, cssVars, variableName) {
   const curPaletteCssVariables = getCssVariablesFormFile(themeName + "/v2.css");
   const cssVariables = { ...cssVars, ...curPaletteCssVariables };
-  const theme = { themeName, iconsSet: "v1", cssVariables };
+  const theme = { themeName, iconsSet: "v1", isLight: true, cssVariables };
   const themeJson = JSON.stringify(theme, null, 2);
   const result = `const Theme = ${themeJson};\nexport default Theme;\nexport const ${variableName} = Theme;`;
   fs.writeFileSync(_dirPath + themeName + ".ts", result);
@@ -109,7 +109,7 @@ function writeTheme(themeName, cssVariables, variableName) {
   return `import ${variableName}Theme from "./${themeName}";\nexport const ${variableName} = ${variableName}Theme;\n`;
 }
 
-function writeThemePalette(themeName, paletteName, cssVariables, isDefaultTheme) {
+function writeThemePalette(themeName, paletteName, cssVariables) {
   const fileName = [themeName, paletteName].join("-");
   const baseThemeVariable = capitalizedFirstLetter(themeName);
   const variableName = [baseThemeVariable, capitalizedFirstLetter(paletteName)].join("");
@@ -117,12 +117,8 @@ function writeThemePalette(themeName, paletteName, cssVariables, isDefaultTheme)
 
   const theme = { themeName: fileName, iconsSet: "v2", isLight: isLight, cssVariables: cssVariables };
   const themeJson = JSON.stringify(theme, null, 2);
-  let importsString = "";
-  let useImportString = "";
-  if(!isDefaultTheme) {
-    importsString = `import { assign } from "./utils";\nimport { ${baseThemeVariable} } from "./${themeName}";\n\n`;
-    useImportString = `const themeCssVariables = {};\nassign(themeCssVariables, ${baseThemeVariable}.cssVariables, Theme.cssVariables);\nassign(Theme, { cssVariables: themeCssVariables });\n\n`;
-  }
+  const importsString = `import { assign } from "./utils";\nimport { ${baseThemeVariable} } from "./${themeName}";\n\n`;
+  const useImportString = `const themeCssVariables = {};\nassign(themeCssVariables, ${baseThemeVariable}.cssVariables, Theme.cssVariables);\nassign(Theme, { cssVariables: themeCssVariables });\n\n`;
   const result = `${importsString}const Theme = ${themeJson};\n${useImportString}export default Theme;\nexport const ${variableName} = Theme;`;
   fs.writeFileSync(_dirPath + fileName + ".ts", result);
 
@@ -133,7 +129,7 @@ const usedCssVariablesList = [];
 getUsedCssVariables("./src/");
 
 Object.keys(themeNameMap).forEach(themeName => {
-  if(themeName !== baseThemeName && !!baseThemeCssVariable) {
+  if(!!baseThemeCssVariable) {
     const curThemeCssVariables = getCssVariablesFormFile(themeName + ".css");
     const distinctions = themeConstants[themeNameMap[themeName]] || {};
     Object.keys(curThemeCssVariables || {}).forEach(variableKey => {
@@ -151,19 +147,22 @@ Object.keys(themeNameMap).forEach(themeName => {
 let indexFileContent = "";
 Object.keys(themeNameMap).forEach(themeName => {
   const currentTheme = themeNameMap[themeName];
-  const isDefaultTheme = themeName === baseThemeName;
   console.log("Theme - " + currentTheme);
+  let strImportTheme = "";
   if(legacyDefaultThemeName === themeName) {
-    indexFileContent += writeTheme2020(currentTheme, themeDistinctions[currentTheme], capitalizedFirstLetter(currentTheme));
-  } else if(!isDefaultTheme) {
-    indexFileContent += writeTheme(currentTheme, themeDistinctions[currentTheme], capitalizedFirstLetter(currentTheme));
+    strImportTheme = writeTheme2020(currentTheme, themeDistinctions[currentTheme], "SC2020");
+  } else {
+    strImportTheme = writeTheme(currentTheme, themeDistinctions[currentTheme], capitalizedFirstLetter(currentTheme));
+    if(themeName === baseThemeName) strImportTheme = "";
   }
+  indexFileContent += strImportTheme;
 
   const palettes = creatorThemePalettes[currentTheme];
   (palettes || []).forEach(paletteName => {
     console.log("Palette - " + paletteName);
     const curPaletteCssVariables = getCssVariablesFormFile(currentTheme + "/" + paletteName + ".css");
-    indexFileContent += writeThemePalette(currentTheme, paletteName, curPaletteCssVariables, isDefaultTheme);
+    strImportTheme = writeThemePalette(currentTheme, paletteName, curPaletteCssVariables);
+    indexFileContent += strImportTheme;
   });
 });
 fs.writeFileSync(_dirPath + "index.ts", indexFileContent);
