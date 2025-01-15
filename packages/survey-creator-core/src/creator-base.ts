@@ -94,16 +94,17 @@ export class CreatorAction extends Action {
 
 export class FooterToolbarActionContainer extends ActionContainer {
   protected getDefaultCssClasses() {
+    const defaultCss = super.getDefaultCssClasses();
     return {
-      root: "svc-toolbar sv-action-bar",
-      item: "svc-toolbar__item",
-      itemWithTitle: "svc-toolbar__item--with-text",
-      itemAsIcon: "svc-toolbar__item--icon",
-      itemActive: "svc-toolbar__item--active",
-      itemPressed: "svc-toolbar__item--pressed",
-      itemIcon: "svc-toolbar-item__icon",
-      itemTitle: "svc-toolbar-item__title",
-      itemTitleWithIcon: "svc-toolbar-item__title--with-icon",
+      root: defaultCss.root + " svc-toolbar sv-action-bar",
+      item: defaultCss.item + " svc-toolbar__item",
+      itemWithTitle: defaultCss.itemWithTitle + " svc-toolbar__item--with-text",
+      itemAsIcon: defaultCss.itemAsIcon + " svc-toolbar__item--icon",
+      itemActive: defaultCss.itemActive + " svc-toolbar__item--active",
+      itemPressed: defaultCss.itemPressed + " svc-toolbar__item--pressed",
+      itemIcon: defaultCss.itemIcon + " svc-toolbar-item__icon",
+      itemTitle: defaultCss.itemTitle + " svc-toolbar-item__title",
+      itemTitleWithIcon: defaultCss.itemTitleWithIcon + " svc-toolbar-item__title--with-icon",
     };
   }
 }
