@@ -82,7 +82,7 @@ svc-question {
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
     background-color: var(--ctr-survey-question-panel-toolbar-item-background-color-pressed, #f5f5f5ff);
     use {
-      fill: black;
+      fill: var(--ctr-menu-toolbar-button-icon-color, black);
       opacity: 0.45;
     }
   }

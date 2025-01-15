@@ -13,40 +13,40 @@
           ></SvComponent>
         </template>
         <SvComponent
-            :is="'svc-search'"
-            :model="toolbox.searchManager"
+          :is="'svc-search'"
+          :model="toolbox.searchManager"
         ></SvComponent>
         <div
-            class="svc-toolbox__category-separator svc-toolbox__category-separator--search"
-          ></div>
+          class="svc-toolbox__category-separator svc-toolbox__category-separator--search"
+        ></div>
       </div>
-          <div v-if="toolbox.showPlaceholder" class="svc-toolbox__placeholder">
-            {{ toolbox.toolboxNoResultsFound }}
-          </div>
-          <Scroll>
-            <template v-if="!toolbox.showInSingleCategory">
+      <div v-if="toolbox.showPlaceholder" class="svc-toolbox__placeholder">
+        {{ toolbox.toolboxNoResultsFound }}
+      </div>
+      <Scroll>
+        <template v-if="!toolbox.showInSingleCategory">
+          <SvComponent
+            :is="'svc-toolbox-category'"
+            v-for="(category, index) in toolbox.categories"
+            :key="index"
+            :category="category"
+            :toolbox="toolbox"
+          ></SvComponent>
+        </template>
+        <template v-if="toolbox.showInSingleCategory">
+          <div class="svc-toolbox__category">
+            <template v-for="item in renderedActions" :key="item.renderedId">
               <SvComponent
-                :is="'svc-toolbox-category'"
-                v-for="(category, index) in toolbox.categories"
-                :key="index"
-                :category="category"
-                :toolbox="toolbox"
+                :is="'svc-toolbox-tool'"
+                :creator="model"
+                :item="item"
+                :parentModel="toolbox"
+                :isCompact="toolbox.isCompactRendered"
               ></SvComponent>
             </template>
-            <template v-if="toolbox.showInSingleCategory">
-              <div class="svc-toolbox__category">
-                <template v-for="(item, index) in renderedActions" :key="index">
-                  <SvComponent
-                    :is="'svc-toolbox-tool'"
-                    :creator="model"
-                    :item="item"
-                    :parentModel="toolbox"
-                    :isCompact="toolbox.isCompactRendered"
-                  ></SvComponent>
-                </template>
-              </div>
-            </template>
-          </Scroll>
+          </div>
+        </template>
+      </Scroll>
     </div>
   </div>
 </template>
@@ -70,8 +70,7 @@ onMounted(() => {
   toolbox.value.setRootElement(root.value as HTMLDivElement);
   responsivityManager = new VerticalResponsivityManager(
     toolbox.value.containerElement as HTMLDivElement,
-    toolbox.value,
-    toolbox.value.itemSelector
+    toolbox.value
   );
 });
 onUnmounted(() => {

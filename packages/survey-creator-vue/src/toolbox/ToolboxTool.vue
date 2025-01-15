@@ -1,5 +1,5 @@
 <template>
-  <div :class="item.css">
+  <div :class="item.css" ref="root">
     <div
       class="svc-toolbox__category-separator"
       v-if="item.needSeparator && !creator.toolbox.showCategoryTitles"
@@ -28,6 +28,7 @@ import {
 import type { ActionContainer } from "survey-core";
 import { useCreatorModel } from "@/creator-model";
 import { useBase } from "survey-vue3-ui";
+import { nextTick, onMounted, onUnmounted, ref } from "vue";
 const props = defineProps<{
   creator: SurveyCreatorModel;
   item: QuestionToolboxItem;
@@ -46,5 +47,18 @@ const model = useCreatorModel(
     model.dispose();
   }
 );
+const root = ref<HTMLDivElement>();
+onMounted(() => {
+  const item = props.item;
+  item.updateModeCallback = (mode, callback) => {
+    item.mode = mode;
+    nextTick(() => callback(mode, root.value as HTMLDivElement));
+  };
+  item.afterRender();
+});
+onUnmounted(() => {
+  const item = props.item;
+  item.updateModeCallback = undefined as any;
+});
 useBase(() => props.item);
 </script>

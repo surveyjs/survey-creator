@@ -117,7 +117,7 @@ svc-page {
     background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, #19b3941a);
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
     use {
-      fill: black;
+      fill: var(--ctr-menu-toolbar-button-icon-color, black);
       opacity: 0.5;
     }
   }

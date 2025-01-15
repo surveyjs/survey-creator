@@ -90,6 +90,11 @@ export interface ICreatorOptions {
    *
    * @see showLogicTab
    */
+  logicAllowTextEditExpressions?: boolean;
+  /**
+   * Obsolete. Use the[`logicAllowTextEditExpressions`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicAllowTextEditExpressions) property instead.
+   * @deprecated
+   */
   allowEditExpressionsInTextEditor?: boolean;
   /**
    * Specifies whether to show an error message if a survey is not saved in the database.
@@ -275,9 +280,14 @@ export interface ICreatorOptions {
   maximumRateValues?: number;
 
   /**
-   * Limits the number of items in a logical expression.
+   * Limits the number of items in a logical condition.
    *
    * Default value: -1 (unlimited)
+   */
+  logicMaxItemsInCondition?: number;
+  /**
+   * Obsolete. Use the [`logicMaxItemsInCondition`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicMaxItemsInCondition) property instead.
+   * @deprecated
    */
   maxLogicItemsInCondition?: number;
 

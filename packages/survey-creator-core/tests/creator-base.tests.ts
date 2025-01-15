@@ -3821,9 +3821,9 @@ test("onSurveyPropertyValueChanged event", () => {
   let propertyValue;
   let objType;
   let counter = 0;
-  creator.onSurveyPropertyValueChanged.add((sender, options) => {
+  creator.onAfterPropertyChanged.add((sender, options) => {
     counter++;
-    objType = options.obj.getType();
+    objType = options.element.getType();
     propertyName = options.propertyName;
     propertyValue = options.value;
   });

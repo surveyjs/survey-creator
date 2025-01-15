@@ -275,12 +275,12 @@ td.st-table__cell:first-of-type {
 }
 
 .st-body__footer {
+  box-sizing: border-box;
   padding: calcSize(2);
   padding-left: calcSize(3);
   background: $background;
   border-bottom: 1px solid var(--ctr-string-table-row-border-color, #dcdcdcff);
 }
-
 .st-translation-dialog .st-strings-wrapper {
   border-radius: 4px;
   box-shadow: $shadow-small;
