@@ -2,6 +2,7 @@ import { settings as creatorSetting } from "../src/creator-settings";
 import { SidebarModel } from "../src/components/side-bar/side-bar-model";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { CreatorTester } from "./creator-tester";
+import { Serializer } from "survey-core";
 
 test("Sidebar tabs initial", () => {
   const creator = new CreatorTester();
@@ -77,6 +78,42 @@ test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if surve
   expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("general");
 
   creatorSetting.defaultNewSurveyJSON = savedNewJSON;
+});
+test("showOneCategoryInPropertyGrid: property grid actions - on removing/adding/on changing obj from propgrid", () => {
+  const creator = new CreatorTester(undefined, undefined, false);
+  creator.JSON = { elements: [{ type: "matrixdynamic", name: "question1", columns: [{ name: "col1" }] }] };
+  const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
+  designerPlugin.showOneCategoryInPropertyGrid = true;
+  const col = creator.survey.getQuestionByName("question1").columns[0];
+  creator.selectElement(col);
+
+  let tabs = designerPlugin["tabControlModel"].topToolbar.actions;
+  expect(tabs.length).toBe(4);
+  expect(tabs.map(t => t.id).join(",")).toBe("general,logic,totals,validation");
+  col.cellType = "dropdown";
+  tabs = designerPlugin["tabControlModel"].topToolbar.actions;
+  expect(tabs.length).toBe(6);
+  expect(tabs.map(t => t.id).join(",")).toBe("general,choices,choicesByUrl,logic,totals,validation");
+});
+test("showOneCategoryInPropertyGrid: property grid actions - on removing/adding/visible-changed", () => {
+  Serializer.addProperty("text", { name: "test", category: "test", visibleIf: (obj) => obj.name !== "q1", dependsOn: "name" });
+  const creator = new CreatorTester(undefined, undefined, false);
+  creator.JSON = { elements: [{ type: "text", name: "question1" }] };
+  const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
+  designerPlugin.showOneCategoryInPropertyGrid = true;
+  const q = creator.survey.getQuestionByName("question1");
+  creator.selectElement(q);
+
+  let tabs = designerPlugin["tabControlModel"].topToolbar.actions;
+  expect(tabs.length).toBe(7);
+  expect(tabs.map(t => t.id).join(",")).toBe("general,test,layout,logic,mask,data,validation");
+  expect(tabs[1].visible).toBeTruthy();
+  q.name = "q1";
+  expect(tabs[1].visible).toBeFalsy();
+  q.name = "q2";
+  expect(tabs[1].visible).toBeTruthy();
+
+  Serializer.removeProperty("text", "test");
 });
 
 test("showOneCategoryInPropertyGrid: tab control", () => {
