@@ -817,6 +817,7 @@ export class PropertyGridModel {
   currentlySelectedProperty: string;
   currentlySelectedPanel: PanelModel;
   currentlySelectedPage: PageModel;
+  public onSetNewObjectCallback: () => void;
 
   public objValueChangedCallback: () => void;
   public changedFromActionCallback: (obj: Base, propertyName: string) => void;
@@ -1203,6 +1204,9 @@ export class PropertyGridModel {
       this.classNameValue !== options.value
     ) {
       this.setObj(this.obj);
+      if(this.onSetNewObjectCallback) {
+        this.onSetNewObjectCallback();
+      }
       if (!!this.survey) {
         const question = this.survey.getQuestionByName(options.name);
         if (!!question) {

@@ -1,4 +1,4 @@
-import { Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent } from "survey-core";
+import { Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent, PageVisibleChangedEvent } from "survey-core";
 import { notShortCircuitAnd } from "../../utils/utils";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -180,6 +180,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     creator.addPluginTab("designer", this);
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.propertyGrid = new PropertyGridModel(creator.survey as any as Base, creator, creator.getPropertyGridDefinition());
+    this.propertyGrid.onSetNewObjectCallback = () => {
+      this.updateTabControlActions();
+    };
     this.propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridTab = this.creator.sidebar.addPage("propertyGrid", "svc-property-grid", this.propertyGridViewModel, () => {
       const result = [];
@@ -247,42 +250,56 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
-      const pgTabs = [];
-      this.propertyGrid.survey.pages.forEach(p => {
-        if (p.elements.length === 0) return;
-
-        const action = new MenuButton({
-          id: p.name,
-          tooltip: p.title,
-          iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
-          iconSize: "auto",
-          active: this.activePageIsPropertyGrid && p.name === this.propertyGrid.survey.currentPage.name,
-          pressed: false,
-          action: () => {
-            this.creator.sidebar.expandSidebar();
-            this.setPropertyGridIsActivePage();
-            this.propertyGrid.survey.currentPage = p;
-            this.propertyGridViewModel.objectSelectionAction.tooltip = p.title;
-            pgTabs.forEach(i => i.active = false);
-            action.active = true;
-          }
-        });
-        pgTabs.push(action);
-      });
-      this.tabControlModel.topToolbar.setItems(pgTabs);
-      this.propertyGridTab.deactivateCallback = () => {
-        pgTabs.forEach(tab => tab.active = false);
-      };
-
+      this.setupPropertyGridTabActions();
       this.propertyGrid.survey.onCurrentPageChanged.add((sender: SurveyModel, options: CurrentPageChangedEvent) => {
+        const pgTabs = this.tabControlModel.topToolbar.actions;
         pgTabs.forEach(action => {
           action.active = action.id === options.newCurrentPage.name;
         });
         this.propertyGridViewModel.objectSelectionAction.tooltip = options.newCurrentPage.title;
       });
+      this.propertyGrid.survey.onPageVisibleChanged.add((sender: SurveyModel, options: PageVisibleChangedEvent) => {
+        const action = this.tabControlModel.topToolbar.getActionById(options.page.name);
+        if(!!action) {
+          action.visible = options.page.isVisible;
+        }
+      });
 
       this.propertyGridViewModel.objectSelectionAction.tooltip = this.propertyGrid.survey.currentPage?.title;
     }
+  }
+  private setupPropertyGridTabActions() {
+    const pgTabs = this.getPropertyGridTabActions();
+    this.tabControlModel.topToolbar.setItems(pgTabs);
+    this.propertyGridTab.deactivateCallback = () => {
+      pgTabs.forEach(tab => tab.active = false);
+    };
+  }
+  private getPropertyGridTabActions() {
+    const pgTabs = [];
+    this.propertyGrid.survey.pages.forEach(p => {
+      if (p.elements.length === 0) return;
+
+      const action = new MenuButton({
+        id: p.name,
+        tooltip: p.title,
+        iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
+        iconSize: "auto",
+        active: this.activePageIsPropertyGrid && p.name === this.propertyGrid.survey.currentPage.name,
+        pressed: false,
+        visible: p.isVisible,
+        action: () => {
+          this.creator.sidebar.expandSidebar();
+          this.setPropertyGridIsActivePage();
+          this.propertyGrid.survey.currentPage = p;
+          this.propertyGridViewModel.objectSelectionAction.tooltip = p.title;
+          pgTabs.forEach(i => i.active = false);
+          action.active = true;
+        }
+      });
+      pgTabs.push(action);
+    });
+    return pgTabs;
   }
 
   public activate(): void {
