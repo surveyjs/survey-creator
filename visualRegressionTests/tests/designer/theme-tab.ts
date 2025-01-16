@@ -43,6 +43,7 @@ test("toolbar view", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1280, 900);
     await setJSON({
+      showQuestionNumbers: "on",
       pages: [
         { elements: [{ type: "text", name: "question1" }] },
         { elements: [{ type: "text", name: "question2" }] }
@@ -61,6 +62,7 @@ test("theme setting property grid", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1280, 4000);
     await setJSON({
+      showQuestionNumbers: "on",
       title: "Title",
       pages: [
         { elements: [{ type: "text", name: "question1" }] },
@@ -104,6 +106,7 @@ test("theme setting property grid mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(400, 600);
     await setJSON({
+      showQuestionNumbers: "on",
       pages: [
         { elements: [{ type: "text", name: "question1" }] },
         { elements: [{ type: "text", name: "question2" }] }

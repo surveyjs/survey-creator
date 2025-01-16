@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -46,6 +47,7 @@ test("Check states", async (t) => {
 test("Check list item styles into logic popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json2 = {
+      showQuestionNumbers: "on",
       "elements": [
         {
           "type": "text",
