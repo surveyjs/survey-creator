@@ -17,12 +17,12 @@ svc-page {
   }
 
   .sd-page__num {
-    color: var(--ctr-survey-page-header-title-color-placeholder, #00000080);
+    color: var(--ctr-survey-page-header-title-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
   }
 
   .svc-panel__placeholder {
     @include lbrDefaultFont;
-    color: var(--ctr-survey-page-placeholder-text-color, #00000080);
+    color: var(--ctr-survey-page-placeholder-text-color, var(--sjs-layer-3-foreground-50, #00000080));
   }
 }
 
@@ -79,7 +79,7 @@ svc-page {
   h4.sd-title {
     .sv-string-editor {
       &[aria-placeholder]:empty:before {
-        color: var(--ctr-survey-page-header-title-color-placeholder, #00000080);
+        color: var(--ctr-survey-page-header-title-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
       }
     }
   }
@@ -103,28 +103,28 @@ svc-page {
   transition: background-color $creator-transition-duration;
 
   use {
-    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, #19b394ff);
+    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, var(--sjs-secondary-background-500, #19b394ff));
   }
   //hovered and focused state
   &:hover,
   &:focus-visible {
-    background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, #19b3941a);
+    background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
   }
 
   //pressed state
   &:active,
   &.svc-page-toolbar__item--pressed {
-    background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, #19b3941a);
+    background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
     use {
-      fill: var(--ctr-menu-toolbar-button-icon-color, #000000bf);
+      fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
       opacity: 0.5;
     }
   }
 
   //checked state
   &.svc-survey-element-toolbar__item--active {
-    background-color: var(--ctr-survey-page-toolbar-item-background-color-selected, #19b3941a);
+    background-color: var(--ctr-survey-page-toolbar-item-background-color-selected, var(--sjs-primary-background-10, #19b3941a));
     .svc-survey-element-toolbar-item__title {
       color: var(--ctr-survey-page-toolbar-item-text-color-selected, $foreground);
     }
@@ -170,7 +170,7 @@ svc-page {
 
 .svc-page-toolbar-item__title {
   @include lbrSmallBoldFont;
-  color: var(--ctr-survey-page-toolbar-item-text-color, #000000e6);
+  color: var(--ctr-survey-page-toolbar-item-text-color, var(--sjs-layer-3-foreground-100, #000000e6));
 }
 
 .svc-page__content-actions {
@@ -182,8 +182,8 @@ svc-page {
 
 .svc-page__content:focus,
 .svc-hovered.svc-page__content {
-  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-hovered, var(--lbr-stroke-x2)) var(--ctr-survey-page-border-color-hovered, #19b39440);
-  background: var(--ctr-survey-page-background-color-hovered, #edf9f7ff);
+  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-hovered, var(--lbr-stroke-x2)) var(--ctr-survey-page-border-color-hovered, var(--sjs-secondary-background-25, #19b39440));
+  background: var(--ctr-survey-page-background-color-hovered, var(--sjs-special-background, #edf9f7ff));
 }
 
 .svc-page__content--new.svc-page__content--new {
@@ -211,8 +211,8 @@ svc-page {
 }
 
 .svc-page__content--selected.svc-page__content--selected {
-  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-selected, var(--lbr-stroke-x2)) var(--ctr-survey-page-border-color-selected, #19b394ff);
-  background: var(--ctr-survey-page-background-color-selected, #edf9f7ff);
+  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-selected, var(--lbr-stroke-x2)) var(--ctr-survey-page-border-color-selected, var(--sjs-secondary-background-500, #19b394ff));
+  background: var(--ctr-survey-page-background-color-selected, var(--sjs-special-background, #edf9f7ff));
 }
 
 .svc-page__content--animation-running {
@@ -275,8 +275,8 @@ svc-page {
     &.svc-page__content--selected {
       box-shadow: 0 0 0 2px inset $secondary;
 
-      box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-selected, #19b394ff);
-      background: var(--ctr-survey-page-background-color-selected, #edf9f7ff);
+      box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-selected, var(--sjs-secondary-background-500, #19b394ff));
+      background: var(--ctr-survey-page-background-color-selected, var(--sjs-special-background, #edf9f7ff));
 
       .svc-page__content-actions {
         display: block;
@@ -309,7 +309,7 @@ svc-page {
 
 .svc-add-new-item-button__text {
   @include lbrDefaultBoldFont;
-  color: var(--ctr-button-text-color, #19b394ff);
+  color: var(--ctr-button-text-color, var(--sjs-primary-background-500, #19b394ff));
   text-align: center;
 }
 
@@ -321,7 +321,7 @@ svc-page {
 }
 
 .svc-element__add-new-question:focus {
-  box-shadow: 0 0 0 var(--ctr-button-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-button-border-color-focused, #19b394ff);
+  box-shadow: 0 0 0 var(--ctr-button-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-button-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
 }
 
 .svc-element__question-type-selector {
@@ -342,11 +342,11 @@ svc-page {
   transition: background-color $creator-transition-duration;
 
   &:hover {
-    background-color: var(--ctr-button-contextual-button-background-color-hovered, #19b3941a);
+    background-color: var(--ctr-button-contextual-button-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
   }
 
   &:focus {
-    background: var(--ctr-button-contextual-button-background-color-focused, #19b3941a);
+    background: var(--ctr-button-contextual-button-background-color-focused, var(--sjs-primary-background-10, #19b3941a));
   }
 }
 
@@ -364,7 +364,7 @@ svc-page {
   }
 
   use {
-    fill: var(--ctr-button-contextual-button-icon-color, #00000080);
+    fill: var(--ctr-button-contextual-button-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
   }
 }
 

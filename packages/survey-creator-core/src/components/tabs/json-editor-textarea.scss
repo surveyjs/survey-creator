@@ -13,8 +13,8 @@ svc-tab-json-editor-textarea {
 
 .svc-json-editor-tab__content-area {
   @include ctrCodeFont;
-  color: var(--ctr-code-viewer-text-color, #505050ff);
-  background: var(--ctr-code-viewer-background-color, #ffffffff);
+  color: var(--ctr-code-viewer-text-color, var(--sjs-code-gray-300, #505050ff));
+  background: var(--ctr-code-viewer-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   width: 100%;
   height: 100%;
   border: none;

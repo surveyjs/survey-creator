@@ -33,7 +33,7 @@
   width: var(--ctr-list-item-color-swatch-width, var(--sjs-font-size-x4));
   height: var(--ctr-list-item-color-swatch-height, var(--sjs-font-size-x3));
   box-sizing: border-box;
-  border: 1px solid var(--ctr-list-item-color-swatch-border-color, #00000026);
+  border: 1px solid var(--ctr-list-item-color-swatch-border-color, var(--sjs-border-25-overlay, #00000026));
   margin-left: var(--ctr-editor-color-swatch-margin-left, var(--sjs-spacing-x150));
 
   .sv-svg-icon {
@@ -47,7 +47,7 @@
   }
 }
 .spg-question--disabled .spg-color-editor {
-  background-color: var(--ctr-editor-background-color-disabled, #ffffffff);
+  background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
 }
 .spg-color-editor__color-swatch--disabled {
   .sv-svg-icon {

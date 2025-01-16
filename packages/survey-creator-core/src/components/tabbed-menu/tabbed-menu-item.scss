@@ -11,8 +11,8 @@
 
   &:hover,
   &:focus {
-    background-color: var(--ctr-menu-item-background-color-hovered, #f5f5f5ff);
-    box-shadow: inset 0px -1px 0px var(--ctr-menu-border-color, #d4d4d4ff);
+    background-color: var(--ctr-menu-item-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
+    box-shadow: inset 0px -1px 0px var(--ctr-menu-border-color, var(--sjs-border-25, #d4d4d4ff));
     outline: none;
   }
 }
@@ -25,13 +25,13 @@
 }
 
 .svc-tabbed-menu-item--selected {
-  background: var(--ctr-menu-item-background-color, #ffffffff);
-  box-shadow: inset 0px -2px 0px var(--ctr-menu-item-border-color-selected, #19b394ff);
+  background: var(--ctr-menu-item-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  box-shadow: inset 0px -2px 0px var(--ctr-menu-item-border-color-selected, var(--sjs-primary-background-500, #19b394ff));
 
   &:hover,
   &:focus {
-    background: var(--ctr-menu-item-background-color, #ffffffff);
-    box-shadow: inset 0px -2px 0px var(--ctr-menu-item-border-color-selected, #19b394ff);
+    background: var(--ctr-menu-item-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+    box-shadow: inset 0px -2px 0px var(--ctr-menu-item-border-color-selected, var(--sjs-primary-background-500, #19b394ff));
   }
 }
 
@@ -40,7 +40,7 @@
   opacity: var(--ctr-menu-item-opacity-disabled, 0.25);
 
   &:hover {
-    background-color: var(--ctr-menu-item-background-color, #ffffffff);
+    background-color: var(--ctr-menu-item-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   }
 }
 
@@ -52,7 +52,7 @@
   @include ctrDefaultFont;
   white-space: nowrap;
   display: block;
-  color: var(--ctr-menu-item-text-color, #000000e6);
+  color: var(--ctr-menu-item-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
 }
 
 .svc-tabbed-menu-item--selected .svc-tabbed-menu-item__text {
@@ -62,7 +62,7 @@
 .svc-tabbed-menu-item__icon {
   width: var(--ctr-menu-item-icon-width, var(--sjs-font-size-x3));
   height: var(--ctr-menu-item-icon-height, var(--sjs-font-size-x3));
-  fill: var(--ctr-menu-item-icon-color, #000000bf);
+  fill: var(--ctr-menu-item-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
 }
 
 .svc-tabbed-menu-item-container .sv-dots__item {

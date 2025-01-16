@@ -32,7 +32,7 @@ function findConstantValue(value) {
     return findConstantValue(baseThemeCssVariable[varName]);
   } else if(!!colorPalleteLightCssVariable[varName]) {
     const colorValue = colorPalleteLightCssVariable[varName];
-    if(colorValue.indexOf("#") === 0) return colorValue.toLowerCase();
+    if(colorValue.indexOf("#") === 0) return `var(${varName}, ${colorValue.toLowerCase()})`;
   } 
   return undefined;
 }
@@ -70,17 +70,16 @@ function replaceFallbacks(path) {
             return newStr;
           }
         );
-        newLine = line.replaceAll(cssVariableWithOutFallbackRegExp, function(match, variable) {
+        /*newLine = line.replaceAll(cssVariableWithOutFallbackRegExp, function(match, variable) {
           const newValue = getCorrectValue(variable, baseThemeCssVariable[variable]);
           if(newValue === undefined) return match;
           
           hasChanges = true;
           const newStr = `var(${variable}, ${newValue})`;
           return newStr;
-        }
-      );
+        });*/
         return newLine;
-      })
+      });
 
       if(hasChanges) {
         const result = newLines.join("\r\n");

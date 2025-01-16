@@ -10,7 +10,7 @@
   gap: var(--ctr-property-grid-placeholder-image-margin-top, var(--sjs-spacing-x3));
   flex: 1 0 0;
   align-self: stretch;
-  background: var(--ctr-property-grid-form-background-color, #ffffffff);
+  background: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 }
 .svc-property-grid-placeholder__header {
   display: flex;
@@ -22,13 +22,13 @@
 }
 .svc-property-grid-placeholder__title {
   @include ctrDefaultBoldFont;
-  color: var(--ctr-property-grid-placeholder-text-title-color, #000000e6);
+  color: var(--ctr-property-grid-placeholder-text-title-color, var(--sjs-layer-1-foreground-100, #000000e6));
   text-align: center;
   display: inline-block;
 }
 .svc-property-grid-placeholder__description {
   @include ctrSmallFont;
-  color: var(--ctr-property-grid-placeholder-text-description-color, #00000080);
+  color: var(--ctr-property-grid-placeholder-text-description-color, var(--sjs-layer-1-foreground-50, #00000080));
   text-align: center;
   display: inline-block;
 }

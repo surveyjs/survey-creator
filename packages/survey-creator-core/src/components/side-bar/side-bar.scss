@@ -12,7 +12,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   width: var(--ctr-property-grid-width, var(--sjs-size-x60));
   min-width: var(--ctr-property-grid-min-width, var(--sjs-size-x40));
   height: 100%;
-  border-inline-start: 1px solid var(--ctr-property-grid-border-color, #d4d4d4ff);
+  border-inline-start: 1px solid var(--ctr-property-grid-border-color, var(--sjs-border-25, #d4d4d4ff));
 }
 
 .svc-side-bar__wrapper {
@@ -38,8 +38,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 }
 
 .svc-side-bar__container-header {
-  background: var(--ctr-property-grid-header-background-color, #ffffffff);
-  box-shadow: inset 0px -2px 0px var(--ctr-property-grid-header-border-color, #19b394ff);
+  background: var(--ctr-property-grid-header-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  box-shadow: inset 0px -2px 0px var(--ctr-property-grid-header-border-color, var(--sjs-primary-background-500, #19b394ff));
   // text-align: right;
   display: flex;
   padding: var(--ctr-property-grid-header-padding-top, var(--sjs-spacing-x150)) var(--ctr-property-grid-header-padding-right, var(--sjs-spacing-x2))
@@ -52,7 +52,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   align-items: flex-start;
   height: 100%;
   overflow-y: auto;
-  background-color: var(--ctr-property-grid-background-color, #ffffffff);
+  background-color: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 .svc-side-bar__container-container {
@@ -76,7 +76,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
     var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
     var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
-  color: var(--ctr-menu-toolbar-button-text-color, #000000e6);
+  color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
 }
 
 .svc-side-bar__container-actions {
@@ -95,24 +95,24 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
 
     &:focus {
-      background: var(--ctr-menu-toolbar-button-background-color-pressed, #f5f5f5ff);
+      background: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
     }
     
     &:hover {
-      background: var(--ctr-menu-toolbar-button-background-color-hovered, #f5f5f5ff);
+      background: var(--ctr-menu-toolbar-button-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
     }
   }
   
   .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
-    background: var(--ctr-menu-toolbar-button-background-color-pressed, #f5f5f5ff);
+    background: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
   }
   
   .sv-action-bar-item__title {
-    color: var(--ctr-menu-toolbar-button-text-color, #000000e6);
+    color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   }
   
   .sv-action-bar-item__icon use {
-    fill: var(--ctr-menu-toolbar-button-icon-color, #000000bf);
+    fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 }
 
@@ -122,7 +122,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   background-color: transparent;
 }
 .svc-side-bar__container {
-  background-color: var(--ctr-property-grid-form-background-color, #ffffffff);
+  background-color: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 .svc-side-bar {
@@ -133,7 +133,7 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-
 
 .svc-side-bar--flyout {
   .svc-side-bar__shadow {
-    background-color: var(--ctr-popup-haze-background-color, #cceeee59);
+    background-color: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));
     position: absolute;
     top: 0;
     bottom: 0;

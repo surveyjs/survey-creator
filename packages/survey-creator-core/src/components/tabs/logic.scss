@@ -30,11 +30,11 @@
   }
   &:hover:enabled,
   &.sv-focused--by-key.sv-focused--by-key {
-    background-color: var(--ctr-collapse-button-background-color-hovered, #19b3941a);
+    background-color: var(--ctr-collapse-button-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
     outline: none;
 
     use {
-      fill: var(--ctr-collapse-button-icon-color-hovered, #000000bf);
+      fill: var(--ctr-collapse-button-icon-color-hovered, var(--sjs-layer-3-foreground-75, #000000bf));
     }
   }
   .sv-action-bar-item__icon {
@@ -52,15 +52,15 @@
     background-color: transparent;
   }
   use {
-    fill: var(--ctr-expression-item-icon-color, #e50a3eff);
+    fill: var(--ctr-expression-item-icon-color, var(--sjs-semantic-red-background-500, #e50a3eff));
   }
   &:hover:enabled,
   &.sv-focused--by-key.sv-focused--by-key  {
-    background-color: var(--ctr-expression-item-background-color-remove-button-hovered, #e50a3e1a);
+    background-color: var(--ctr-expression-item-background-color-remove-button-hovered, var(--sjs-semantic-red-background-10, #e50a3e1a));
     outline: none;
 
     use {
-      fill: var(--ctr-expression-item-icon-color, #e50a3eff);
+      fill: var(--ctr-expression-item-icon-color, var(--sjs-semantic-red-background-500, #e50a3eff));
     }
   }
   .sv-action-bar-item__icon {
@@ -200,8 +200,8 @@
     @include ctrDefaultBoldFont;
     width: auto;
     margin: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2)) 0 0 0;
-    color: var(--ctr-expression-item-text-color-button, #19b394ff);
-    background-color: var(--ctr-expression-item-background-color-button, #19b3941a);
+    color: var(--ctr-expression-item-text-color-button, var(--sjs-primary-background-500, #19b394ff));
+    background-color: var(--ctr-expression-item-background-color-button, var(--sjs-primary-background-10, #19b3941a));
     border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
     padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1))
       var(--ctr-expression-item-padding-right-button, var(--sjs-spacing-x4))
@@ -218,8 +218,8 @@
   }
 
   button:hover:enabled {
-    background-color: var(--ctr-expression-item-background-color-button-hovered, #19b394ff);
-    color: var(--ctr-expression-item-text-color-button-hovered, #ffffffff);
+    background-color: var(--ctr-expression-item-background-color-button-hovered, var(--sjs-primary-background-500, #19b394ff));
+    color: var(--ctr-expression-item-text-color-button-hovered, var(--sjs-primary-foreground-100, #ffffffff));
   }
 
   .sv-action-bar-item__title {
@@ -272,7 +272,7 @@
 
 .sl-question__title {
   @include ctrDefaultBoldFont;
-  color: var(--ctr-expression-item-text-color-function, #000000e6);
+  color: var(--ctr-expression-item-text-color-function, var(--sjs-layer-3-foreground-100, #000000e6));
   margin: 0;
 
   span+span {

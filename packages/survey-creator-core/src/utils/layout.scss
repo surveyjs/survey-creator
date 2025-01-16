@@ -7,7 +7,7 @@
 .svc-flex-row {
   display: flex;
   flex-direction: row;
-  background: var(--ctr-surface-background-color, #edf9f7ff);
+  background: var(--ctr-surface-background-color, var(--sjs-special-background, #edf9f7ff));
 }
 
 .svc-full-container {
@@ -62,9 +62,9 @@
 
 .svc-top-bar {
   display: flex;
-  background: var(--ctr-menu-item-background-color, #ffffffff);
+  background: var(--ctr-menu-item-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   box-sizing: border-box;
-  box-shadow: inset 0px -1px 0px var(--ctr-menu-border-color, #d4d4d4ff);
+  box-shadow: inset 0px -1px 0px var(--ctr-menu-border-color, var(--sjs-border-25, #d4d4d4ff));
 
   .svc-toolbar-wrapper {
     flex: 0 0 auto;
@@ -100,7 +100,7 @@
           var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
       }
       .sv-action-bar-item--active {
-        background: var(--ctr-menu-toolbar-button-background-color-selected, #19b3941a);
+        background: var(--ctr-menu-toolbar-button-background-color-selected, var(--sjs-primary-background-10, #19b3941a));
       }
     }
     .sv-action:not(.sv-action--hidden) ~ .sv-action:not(.sv-action--hidden) {
@@ -112,28 +112,28 @@
   }
 
   .sv-action-bar-separator {
-    background-color: var(--ctr-separator-color, #d4d4d4ff);
+    background-color: var(--ctr-separator-color, var(--sjs-border-25, #d4d4d4ff));
   }
 
   .sv-action-bar-item {
     @include ctrDefaultFont;
     border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
     background-color: transparent;
-    color: var(--ctr-menu-toolbar-button-text-color, #000000e6);
+    color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
     transition: background-color $creator-transition-duration;
     height: auto;
 
     //hovered and focused state
     &:hover,
     &:focus {
-      background-color: var(--ctr-menu-toolbar-button-background-color-hovered, #f5f5f5ff);
+      background-color: var(--ctr-menu-toolbar-button-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
     }
 
     //pressed state
     &:active,
     &.sv-action-bar-item--pressed {
       opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
-      background-color: var(--ctr-menu-toolbar-button-background-color-pressed, #f5f5f5ff);
+      background-color: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
       use {
         fill: black;
         opacity: 0.45;
@@ -142,9 +142,9 @@
 
     //checked state
     &.sv-action-bar-item--active {
-      background-color: var(--ctr-menu-toolbar-button-background-color-selected, #19b3941a);
+      background-color: var(--ctr-menu-toolbar-button-background-color-selected, var(--sjs-primary-background-10, #19b3941a));
       use {
-        fill: var(--ctr-menu-toolbar-button-text-color-selected, #19b394ff);
+        fill: var(--ctr-menu-toolbar-button-text-color-selected, var(--sjs-primary-background-500, #19b394ff));
       }
     }
 
@@ -168,7 +168,7 @@
     height: var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3));
 
     use {
-      fill: var(--ctr-menu-toolbar-button-icon-color, #000000bf);
+      fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
     }
   }
 
@@ -188,8 +188,8 @@
       width: 100%;
 
       height: calc(6 * #{$base-unit});
-      background:  var(--ctr-menu-background-color, #ffffffff);
-      border-top: var(--ctr-menu-border-width, var(--sjs-stroke-x1)) solid var(--ctr-menu-border-color, #d4d4d4ff);
+      background:  var(--ctr-menu-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+      border-top: var(--ctr-menu-border-width, var(--sjs-stroke-x1)) solid var(--ctr-menu-border-color, var(--sjs-border-25, #d4d4d4ff));
       box-sizing: border-box;
     }
 
@@ -200,19 +200,19 @@
     
     .sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
     .sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
-      background-color: var(--ctr-menu-toolbar-button-background-color-hovered, #f5f5f5ff);
+      background-color: var(--ctr-menu-toolbar-button-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
     }
 
     .sv-action-bar-item--active {
-      background-color: var(--ctr-menu-toolbar-button-background-color-selected, #19b3941a);
+      background-color: var(--ctr-menu-toolbar-button-background-color-selected, var(--sjs-primary-background-10, #19b3941a));
 
       &.sv-action-bar-item:not(.sv-action-bar-item--pressed):hover:enabled,
       &.sv-action-bar-item:not(.sv-action-bar-item--pressed):focus:enabled {
-        background-color: var(--ctr-menu-toolbar-button-background-color-selected, #19b3941a);
+        background-color: var(--ctr-menu-toolbar-button-background-color-selected, var(--sjs-primary-background-10, #19b3941a));
       }
 
       .sv-action-bar-item__icon use {
-        fill: var(--ctr-menu-toolbar-button-icon-color-selected, #19b394ff);
+        fill: var(--ctr-menu-toolbar-button-icon-color-selected, var(--sjs-primary-background-500, #19b394ff));
       }
     }
 
@@ -221,7 +221,7 @@
       height: var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3));
       
       use {
-        fill: var(--ctr-menu-toolbar-button-icon-color, #000000bf);
+        fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
       }
     }
   }

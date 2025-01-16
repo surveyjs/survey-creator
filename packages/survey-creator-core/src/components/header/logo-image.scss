@@ -54,11 +54,11 @@
   transition: background-color $creator-transition-duration, opacity $creator-transition-duration;
 
   &:hover {
-    background-color: var(--ctr-survey-header-logo-placeholder-background-color-hovered, #19b3941a);
+    background-color: var(--ctr-survey-header-logo-placeholder-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
     opacity: unset;
 
     use {
-      fill: var(--ctr-survey-header-logo-placeholder-icon-color-hovered, #19b394ff);
+      fill: var(--ctr-survey-header-logo-placeholder-icon-color-hovered, var(--sjs-primary-background-500, #19b394ff));
     }
   }
 
@@ -70,7 +70,7 @@
 
 .svc-logo-image-placeholder use {
   transition: fill $creator-transition-duration;
-  fill: var(--ctr-survey-header-logo-placeholder-icon-color, #00000080);
+  fill: var(--ctr-survey-header-logo-placeholder-icon-color, var(--sjs-layer-3-foreground-50, #00000080));
 }
 
 .svc-logo-image-container {

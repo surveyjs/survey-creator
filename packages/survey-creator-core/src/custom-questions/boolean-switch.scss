@@ -16,10 +16,10 @@
 }
 
 .spg-boolean-switch__button {
-  background: var(--ctr-toggle-button-background-color, #f4f4f4ff);
+  background: var(--ctr-toggle-button-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
   outline: none;
   border-radius: var(--ctr-toggle-button-corner-radius, var(--sjs-corner-radius-round));
-  box-shadow: 0px 0px 0px 1px var(--ctr-toggle-button-border-color, #dcdcdcff);
+  box-shadow: 0px 0px 0px 1px var(--ctr-toggle-button-border-color, var(--sjs-border-10, #dcdcdcff));
   padding: var(--ctr-toggle-button-padding-top, var(--sjs-font-size-x075)) var(--ctr-toggle-button-padding-right, var(--sjs-font-size-x075))
     var(--ctr-toggle-button-padding-bottom, var(--sjs-font-size-x075)) var(--ctr-toggle-button-padding-left, var(--sjs-font-size-x075));
   display: flex;
@@ -32,16 +32,16 @@
 
   &:focus,
   &:focus-visible {
-    box-shadow: 0px 0px 0px 2px var(--ctr-toggle-button-border-color-focused, #19b394ff);
+    box-shadow: 0px 0px 0px 2px var(--ctr-toggle-button-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
   }
 
   &:hover {
-    background: var(--ctr-toggle-button-background-color-hovered, #eaeaeaff);
+    background: var(--ctr-toggle-button-background-color-hovered, var(--sjs-layer-3-background-400, #eaeaeaff));
   }
 }
 
 .spg-boolean-switch__button--checked {
-  background: var(--ctr-toggle-button-background-color-checked, #19b394ff);
+  background: var(--ctr-toggle-button-background-color-checked, var(--sjs-primary-background-500, #19b394ff));
   box-shadow: none;
 
   .spg-boolean-switch__thumb--left {
@@ -49,11 +49,11 @@
   }
 
   .spg-boolean-switch__thumb--right {
-    background: var(--ctr-toggle-button-thumb-background-color-checked, #ffffffff);
+    background: var(--ctr-toggle-button-thumb-background-color-checked, var(--sjs-primary-foreground-100, #ffffffff));
   }
 
   &:hover {
-    background: var(--ctr-toggle-button-background-color-checked, #19b394ff);
+    background: var(--ctr-toggle-button-background-color-checked, var(--sjs-primary-background-500, #19b394ff));
   }
 
   &:focus {
@@ -79,7 +79,7 @@
 
 .spg-boolean-switch__thumb-circle {
   border-radius: var(--ctr-toggle-button-thumb-corner-radius, var(--sjs-corner-radius-round));
-  border: var(--ctr-toggle-button-thumb-border-width, 0px) solid var(--ctr-toggle-button-thumb-border-color, #dcdcdcff);
+  border: var(--ctr-toggle-button-thumb-border-width, 0px) solid var(--ctr-toggle-button-thumb-border-color, var(--sjs-border-10, #dcdcdcff));
   display: flex;
   flex-direction: row;
   gap: 0px;
@@ -112,7 +112,7 @@
 .spg-boolean-switch__title {
   @include ctrDefaultFont;
 
-  color: var(--ctr-toggle-button-label-text-color, #000000e6);
+  color: var(--ctr-toggle-button-label-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   text-align: left;
   position: relative;
   display: flex;

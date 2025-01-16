@@ -73,14 +73,14 @@
 
 .svc-surface-placeholder__title {
   @include ctrMediumBoldFont;
-  color: var(--ctr-surface-placeholder-text-title-color, #000000e6);
+  color: var(--ctr-surface-placeholder-text-title-color, var(--sjs-layer-3-foreground-100, #000000e6));
   text-align: center;
   align-self: stretch;
 }
 
 .svc-surface-placeholder__description {
   @include ctrDefaultFont;
-  color: var(--ctr-surface-placeholder-text-description-color, #00000080);
+  color: var(--ctr-surface-placeholder-text-description-color, var(--sjs-layer-3-foreground-50, #00000080));
   text-align: center;
   align-self: stretch;
 }

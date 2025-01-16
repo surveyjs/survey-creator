@@ -69,7 +69,7 @@
       top: calc(5 * #{$base-unit});
       width: calc(8 * #{$base-unit} + 100%);
       height: 1px;
-      background-color: var(--ctr-editor-border-color, #dcdcdcff);
+      background-color: var(--ctr-editor-border-color, var(--sjs-border-10, #dcdcdcff));
     }
   }
 
@@ -96,7 +96,7 @@
 
   .spg-theme-group-caption {
     @include ctrDefaultBoldFont;
-    color: var(--ctr-property-grid-group-caption-text-color, #000000e6);
+    color: var(--ctr-property-grid-group-caption-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
 
     position: relative;
     top: calc(4 * #{$base-unit});

@@ -9,7 +9,7 @@
 .svc-context-button {
   display: flex;
   box-sizing: border-box;
-  background-color: var(--ctr-survey-contextual-button-background-color, #ffffffff);
+  background-color: var(--ctr-survey-contextual-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   border-radius: var(--ctr-survey-contextual-button-corner-radius, var(--lbr-corner-radius-round));
   width: var(--ctr-survey-contextual-button-width, var(--lbr-size-x6));
   height: var(--ctr-survey-contextual-button-height, var(--lbr-size-x6));

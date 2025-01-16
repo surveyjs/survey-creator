@@ -9,7 +9,7 @@
 }
 
 .spg-question.spg-question--disabled {
-  background-color: var(--ctr-editor-background-color-disabled, #ffffffff);
+  background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 .spg-question__header {
@@ -26,11 +26,11 @@
   margin: 0;
   padding: var(--ctr-label-padding-top, var(--sjs-spacing-x1)) var(--ctr-label-padding-right, 0px)
     var(--ctr-label-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-label-padding-left, 0px);
-  color: var(--ctr-label-text-color, #00000080);
+  color: var(--ctr-label-text-color, var(--sjs-layer-1-foreground-50, #00000080));
   box-sizing: border-box;
 }
 .spg-question__title.sd-element__title--disabled {
-  color: var(--ctr-caption-with-actions-text-color-disabled, #000000e6);
+  color: var(--ctr-caption-with-actions-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
 }
 
 .spg-question__content {
@@ -63,13 +63,13 @@
 
 .spg-question__description {
   @include ctrSmallFont;
-  color: var(--ctr-caption-with-actions-description-text-color, #00000080);
+  color: var(--ctr-caption-with-actions-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
   padding-bottom: calcSize(2);
   white-space: normal;
 }
 
 .spg-question--disabled .spg-question__description {
-  color: var(--ctr-caption-with-actions-description-text-color, #00000080);
+  color: var(--ctr-caption-with-actions-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
 }
 
 .spg-row-narrow__question {
@@ -86,8 +86,8 @@
 
 .spg-question--location--left {
   flex-direction: row;
-  background: var(--ctr-editor-background-color, #f4f4f4ff);
-  box-shadow: inset 0 0 0 var(--ctr-editor-border-width, var(--sjs-stroke-x1)) var(--ctr-editor-border-color, #dcdcdcff);
+  background: var(--ctr-editor-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
+  box-shadow: inset 0 0 0 var(--ctr-editor-border-width, var(--sjs-stroke-x1)) var(--ctr-editor-border-color, var(--sjs-border-10, #dcdcdcff));
   line-height: calcSize(6);
   vertical-align: middle;
   align-items: stretch;
@@ -95,12 +95,12 @@
 
 
   &:focus-within {
-    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-focused, #19b394ff);
+    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
   }
 }
 
 .spg-question--disabled.spg-question--location--left .spg-question__title {
-  color: var(--ctr-editor-content-text-color-disabled, #000000e6);
+  color: var(--ctr-editor-content-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
 }
 
 .spg-question__header--location--left {
@@ -120,7 +120,7 @@
       var(--ctr-editor-label-padding-left, var(--sjs-spacing-x150));
     border-inline-end: 1px solid $border;
     display: inline-block;
-    color: var(--ctr-editor-label-color, #00000080);
+    color: var(--ctr-editor-label-color, var(--sjs-layer-3-foreground-50, #00000080));
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -166,8 +166,8 @@
   padding: var(--ctr-error-message-padding-top, var(--sjs-spacing-x1)) var(--ctr-error-message-padding-right, var(--sjs-spacing-x150))
     var(--ctr-error-message-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-error-message-padding-left, var(--sjs-spacing-x150));
 
-  color: var(--ctr-error-message-text-color, #000000e6);
-  background-color: var(--ctr-error-message-background-color, #e50a3e1a);
+  color: var(--ctr-error-message-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  background-color: var(--ctr-error-message-background-color, var(--sjs-semantic-red-background-10, #e50a3e1a));
   border-radius: var(--ctr-error-message-corner-radius, var(--sjs-corner-radius-x05));
 }
 
@@ -191,7 +191,7 @@ sv-question-error {
   }
 
   use {
-    fill: var(--ctr-error-message-icon-color, #e50a3eff);
+    fill: var(--ctr-error-message-icon-color, var(--sjs-semantic-red-background-500, #e50a3eff));
   }
 }
 
@@ -215,12 +215,12 @@ sv-question-error {
   .spg-input-container,
   .spg-question--location--left,
   .spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
-    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-highlighted, #000000bf);
+    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 
   .spg-checkbox__control:focus + .spg-checkbox__rectangle,
   .spg-matrixdynamic__content.spg-text__content {
-    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-editor-border-color-highlighted, #000000bf);
+    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
     outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)));
     border-radius: var(--ctr-data-table-corner-radius, var(--sjs-corner-radius-x075));
 
@@ -230,20 +230,20 @@ sv-question-error {
   }
 
   .svc-action-button {
-    border: var(--ctr-actionbar-button-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-actionbar-button-border-color-highlighted, #000000bf);
+    border: var(--ctr-actionbar-button-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-actionbar-button-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 
   .sv-button-group {
-    box-shadow: 0 0 0 1px var(--ctr-editor-border-color-highlighted, #000000bf);
-    border-color: var(--ctr-editor-border-color-highlighted, #000000bf);
+    box-shadow: 0 0 0 1px var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    border-color: var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 
   .spg-checkbox__control + .spg-checkbox__rectangle {
-    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-editor-border-color-highlighted, #000000bf);
+    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
     outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)));
   }
 
   .spg-button-group::after {
-    box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-highlighted, #000000bf);
+    box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 }

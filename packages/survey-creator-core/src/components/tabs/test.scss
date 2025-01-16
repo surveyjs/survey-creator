@@ -49,8 +49,8 @@ svc-tab-preview {
 
   .sv-action-bar {
     padding: var(--ctr-preview-pager-padding-top, var(--sjs-spacing-x1)) var(--ctr-preview-pager-padding-right, 0px) var(--ctr-preview-pager-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-preview-pager-padding-left, 0px);
-    box-shadow: inset 0 var(--ctr-preview-pager-border-width-top, var(--sjs-stroke-x1)) 0 0 var(--ctr-preview-pager-border-color, #d4d4d4ff);
-    background: var(--ctr-preview-pager-background-color, #ffffffff);
+    box-shadow: inset 0 var(--ctr-preview-pager-border-width-top, var(--sjs-stroke-x1)) 0 0 var(--ctr-preview-pager-border-color, var(--sjs-border-25, #d4d4d4ff));
+    background: var(--ctr-preview-pager-background-color, var(--sjs-layer-1-background-500, #ffffffff));
     width: 100%;
   }
 
@@ -68,26 +68,26 @@ svc-tab-preview {
       margin: 0;
 
       use {
-        fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, #19b394ff);
+        fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, var(--sjs-secondary-background-500, #19b394ff));
       }
     }
 
     .sv-action-bar-item:not(.sv-action-bar-item--pressed):enabled {
       &:focus {
-        background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, #19b3941a);
+        background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, var(--sjs-secondary-background-10, #19b3941a));
       }
 
       &:hover {
-        background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, #19b3941a);
+        background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, var(--sjs-secondary-background-10, #19b3941a));
       }
     }
 
     .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
-      background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, #19b3941a);
+      background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, var(--sjs-secondary-background-10, #19b3941a));
     }
 
     .sv-action-bar-item__title {
-      color: var(--ctr-survey-question-panel-toolbar-item-text-color, #000000e6);
+      color: var(--ctr-survey-question-panel-toolbar-item-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
     }
   }
 
@@ -149,7 +149,7 @@ svc-tab-preview {
   background-color: transparent;
 
   &:hover {
-    background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, #19b3941a);
+    background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, var(--sjs-secondary-background-10, #19b3941a));
   }
   &:disabled {
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-disabled, 0.25);
@@ -157,10 +157,10 @@ svc-tab-preview {
 
   &.svc-preview-pager__item--pressed {
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
-    background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, #19b3941a);
+    background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, var(--sjs-secondary-background-10, #19b3941a));
   }
   &.svc-preview-pager__item--active {
-    background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, #19b3941a);
+    background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, var(--sjs-secondary-background-10, #19b3941a));
   }
 }
 
@@ -171,28 +171,28 @@ svc-tab-preview {
     var(--ctr-preview-pager-item-padding-left, var(--sjs-spacing-x1));
 
   &:hover {
-    background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, #19b3941a);
+    background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, var(--sjs-secondary-background-10, #19b3941a));
   }
 
   &:disabled {
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-disabled, 0.25);
 
     use {
-      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color-disabled, #00000080);
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color-disabled, var(--sjs-layer-1-foreground-50, #00000080));
     }
   }
 
   &.svc-preview-pager__item--pressed {
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
-    background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, #19b3941a);
+    background: var(--ctr-survey-question-panel-toolbar-item-background-color-hovered, var(--sjs-secondary-background-10, #19b3941a));
 
     use {
-      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color-pressed, #000000bf);
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color-pressed, var(--sjs-layer-1-foreground-75, #000000bf));
     }
   }
 
   &.svc-preview-pager__item--active {
-    background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, #19b3941a);
+    background: var(--ctr-survey-question-panel-toolbar-item-background-color-selected, var(--sjs-secondary-background-10, #19b3941a));
   }
 }
 
@@ -209,14 +209,14 @@ svc-tab-preview {
   align-items: center;
 
   use {
-    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, #19b394ff);
+    fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, var(--sjs-secondary-background-500, #19b394ff));
   }
 }
 
 .svc-preview-pager-item__title {
   @include ctrSmallBoldFont;
   @include textEllipsis;
-  color: var(--ctr-survey-question-panel-toolbar-item-text-color, #000000e6);
+  color: var(--ctr-survey-question-panel-toolbar-item-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
 }
 
 .svc-footer-bar {
@@ -231,7 +231,7 @@ svc-tab-preview {
     box-sizing: content-box;
 
     use {
-      fill: var(--ctr-menu-toolbar-button-icon-color, #000000bf);
+      fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
     }
   }
 }

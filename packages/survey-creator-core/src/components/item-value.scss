@@ -114,39 +114,39 @@
   }
 
   use {
-    fill: var(--ctr-survey-item-actionbar-drag-indicator-color, #00000080);
+    fill: var(--ctr-survey-item-actionbar-drag-indicator-color, var(--sjs-layer-1-foreground-50, #00000080));
   }
 }
 
 .svc-item-value-controls__button--disabled {
-  fill: var(--ctr-survey-action-button-icon-color-disabled, #00000080);
+  fill: var(--ctr-survey-action-button-icon-color-disabled, var(--sjs-layer-1-foreground-50, #00000080));
   opacity: 0.25;
   cursor: default;
 }
 
 .svc-item-value-controls__remove:not(.svc-item-value-controls__button--disabled) {
   use {
-    fill: var(--ctr-survey-action-button-icon-color-negative, #e50a3eff);
+    fill: var(--ctr-survey-action-button-icon-color-negative, var(--sjs-semantic-red-background-500, #e50a3eff));
   }
 }
 
 .svc-item-value-controls__add:not(.svc-item-value-controls__button--disabled) {
   use {
-    fill: var(--ctr-survey-action-button-icon-color-positive, #19b394ff);
+    fill: var(--ctr-survey-action-button-icon-color-positive, var(--sjs-primary-background-500, #19b394ff));
   }
 }
 
 .svc-item-value-controls__add:not(.svc-item-value-controls__button--disabled) {
   &:hover,
   &:focus {
-    background-color: var(--ctr-survey-action-button-background-color-hovered-positive, #19b3941a);
+    background-color: var(--ctr-survey-action-button-background-color-hovered-positive, var(--sjs-primary-background-10, #19b3941a));
   }
 }
 
 .svc-item-value-controls__remove:not(.svc-item-value-controls__button--disabled) {
   &:hover,
   &:focus {
-    background-color: var(--ctr-survey-action-button-background-color-hovered-negative, #e50a3e1a);
+    background-color: var(--ctr-survey-action-button-background-color-hovered-negative, var(--sjs-semantic-red-background-10, #e50a3e1a));
   }
 }
 
@@ -277,7 +277,7 @@
 
 .svc-item-value__ghost {
   display: none;
-  background: var(--ctr-survey-radio-button-group-item-background-color-drop-spot, #f5f5f5ff);
+  background: var(--ctr-survey-radio-button-group-item-background-color-drop-spot, var(--sjs-layer-1-background-400, #f5f5f5ff));
   border-radius: var(--ctr-survey-radio-button-group-item-corner-radius-floating, var(--lbr-corner-radius-x1));
   width: calcSize(25);
   height: calcSize(5);

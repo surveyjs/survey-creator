@@ -23,7 +23,7 @@
     var(--ctr-actionbar-button-padding-left-large-icon, var(--sjs-spacing-x1));
   box-sizing: border-box;
   border: none;
-  color: var(--ctr-actionbar-button-text-color, #19b394ff);
+  color: var(--ctr-actionbar-button-text-color, var(--sjs-primary-background-500, #19b394ff));
   border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
   background-color: transparent;
   cursor: pointer;
@@ -33,10 +33,10 @@
   &:focus {
     opacity: 1;
     outline: none;
-    background-color: var(--ctr-actionbar-button-background-color-hovered, #f5f5f5ff);
+    background-color: var(--ctr-actionbar-button-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
 
     use {
-      fill: var(--ctr-actionbar-button-icon-color-hovered, #000000bf);
+      fill: var(--ctr-actionbar-button-icon-color-hovered, var(--sjs-layer-1-foreground-75, #000000bf));
     }
   }
 }
@@ -53,7 +53,7 @@
   height: var(--ctr-actionbar-button-icon-height, var(--sjs-font-size-x3));
 
   use {
-    fill: var(--ctr-actionbar-button-icon-color, #000000bf);
+    fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
     transition: fill $creator-transition-duration;
   }
 }

@@ -12,7 +12,7 @@ svc-tab-designer {
   height: 100%;
   flex-direction: column;
   position: static;
-  background: var(--ctr-surface-background-color, #edf9f7ff);
+  background: var(--ctr-surface-background-color, var(--sjs-special-background, #edf9f7ff));
   width: 0;
 }
 
@@ -37,13 +37,13 @@ svc-tab-designer {
   .sd-title {
     .sv-string-editor {
       &[aria-placeholder]:empty:before {
-        color: var(--ctr-survey-header-text-title-color-placeholder, #00000080);
+        color: var(--ctr-survey-header-text-title-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
       }
     }
   }
 
   .sd-description {
-    color: var(--ctr-survey-header-text-description-color-placeholder, #00000080);
+    color: var(--ctr-survey-header-text-description-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
   }
 }
 
@@ -159,13 +159,13 @@ svc-tab-designer {
       }
 
       use {
-        fill: var(--ctr-button-contextual-button-icon-color, #00000080);
+        fill: var(--ctr-button-contextual-button-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
       }
     }
 
     .svc-add-new-item-button__text {
       @include ctrDefaultBoldFont;
-      color: var(--ctr-button-text-color, #19b394ff);
+      color: var(--ctr-button-text-color, var(--sjs-primary-background-500, #19b394ff));
       text-align: center;
     }
   }
@@ -215,5 +215,5 @@ svc-tab-designer {
 }
 
 .sv-action-bar-separator {
-  background: var(--ctr-separator-color, #d4d4d4ff);
+  background: var(--ctr-separator-color, var(--sjs-border-25, #d4d4d4ff));
 }
