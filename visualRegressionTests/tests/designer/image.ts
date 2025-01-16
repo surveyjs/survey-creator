@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -45,6 +46,7 @@ test("empty imageLink", async (t) => {
     await explicitErrorHandler();
     await t.resizeWindow(2560, 1440);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -75,6 +77,7 @@ test("broken imageLink", async (t) => {
     await explicitErrorHandler();
     await t.resizeWindow(2560, 1440);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -103,6 +106,7 @@ test("Check image loading indicator", async (t) => {
     await explicitErrorHandler();
     await t.resizeWindow(2560, 1440);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {

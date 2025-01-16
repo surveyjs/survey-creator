@@ -24,7 +24,7 @@ export var enStrings = {
     theme: "Themes",
     translation: "Translations",
     designer: "Designer",
-    editor: "JSON Editor",
+    json: "JSON Editor",
     logic: "Logic"
   },
   // Question types
@@ -626,7 +626,8 @@ export var enStrings = {
     previewText: "\"Review Answers\" button text",
     editText: "\"Edit Answer\" button text",
     startSurveyText: "\"Start Survey\" button text",
-    showNavigationButtons: "Show/hide navigation buttons",
+    showNavigationButtons: "Show navigation buttons",
+    navigationButtonsLocation: "Navigation buttons alignment",
     showPrevButton: "Show the \"Previous Page\" button",
     firstPageIsStartPage: "First page is a start page",
     showCompletePage: "Show the \"Thank You\" page",
@@ -755,6 +756,8 @@ export var enStrings = {
     separateSpecialChoices: "Separate special choices",
     choicesFromQuestion: "Copy choices from the following question",
     choicesFromQuestionMode: "Which choice options to copy",
+    choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs",
+    choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts",
     progressBarShowPageTitles: "Display page titles in progress bar",
     progressBarShowPageNumbers: "Display page numbers in progress bar",
     showCommentArea: "Add a comment box",
@@ -1108,6 +1111,8 @@ export var enStrings = {
     noPreview: "No preview",
     showAllQuestions: "Show all questions",
     showAnsweredQuestions: "Show answered questions only",
+    allQuestions: "Show all questions",
+    answeredQuestions: "Show answered questions only",
     pages: "Completed pages",
     questions: "Answered questions",
     requiredQuestions: "Answered required questions",
@@ -1461,7 +1466,8 @@ export var enStrings = {
     logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
     autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers.",
     autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions.",
-    showNavigationButtons: "Sets the visibility and location of navigation buttons on a page.",
+    showNavigationButtons: "Sets the visibility of navigation buttons on a page.",
+    navigationButtonsLocation: "Sets the location of navigation buttons on a page.",
     showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header.",
     showPreviewBeforeComplete: "Enable the preview page with all or answered questions only.",
     questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level.",
@@ -1509,7 +1515,7 @@ export var enStrings = {
       questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
-      navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
+      showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
     },
     timerLocation: "Sets the location of a timer on a page.",
     panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded. Applies if \"Panel display mode\" is set to \"List\" and the \"Panel title pattern\" property is specified.",
@@ -1524,6 +1530,8 @@ export var enStrings = {
     useDisplayValuesInDynamicTexts: "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements.",
     clearIfInvisible: "Choose whether or not to clear question values hidden by conditional logic and when to do it. The \"Inherit\" option applies the survey-level setting (\"Upon survey completion\" by default).",
     choicesFromQuestionMode: "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question.",
+    choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs.",
+    choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts.",
     showOtherItem: "When selected, users can include additional input in a separate comment box.",
     separateSpecialChoices: "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout.",
     path: "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array.",
@@ -1668,7 +1676,6 @@ export var enStrings = {
     inputTextAlignment: "Input value alignment",
     elements: "Elements", // Auto-generated string
     content: "Content", // Auto-generated string
-    navigationButtonsVisibility: "Show/hide navigation buttons",
     navigationTitle: "Navigation title", // Auto-generated string
     navigationDescription: "Navigation description", // Auto-generated string
     longTap: "Long tap", // Auto-generated string

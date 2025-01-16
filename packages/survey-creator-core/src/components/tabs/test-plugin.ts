@@ -85,11 +85,11 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.simulatorTheme = surveyCss[themeName] || surveyCss[defaultV2ThemeName];
   }
   private createVisibleUpdater() {
-    return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "test"; });
+    return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "preview"; });
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab("test", this);
+    creator.addPluginTab("preview", this);
     this.setPreviewTheme(this.creator.previewTheme);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
@@ -156,7 +156,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconSize: "auto",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
+          return notShortCircuitAnd(this.creator.activeTab === "preview", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
         }),
       }, {
         items: deviceSelectorItems,
@@ -176,7 +176,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconSize: "auto",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
+          return notShortCircuitAnd(this.creator.activeTab === "preview", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
         }),
         action: () => {
           this.model.simulator.landscape = !this.model.simulator.landscape;
@@ -231,7 +231,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       id: "svd-designer",
       iconName: "icon-config",
       iconSize: "auto",
-      action: () => { this.creator.makeNewViewActive("designer"); },
+      action: () => { this.creator.switchTab("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
       showTitle: false

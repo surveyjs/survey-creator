@@ -31,8 +31,10 @@
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
-    const creator = new SurveyCreator.SurveyCreator({ showThemeTab: true });
+    const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showThemeTab: true });
     window.creator = creator;
+    creator.showOneCategoryInPropertyGrid = false;
+    creator.allowZoom = false;
     const root = ReactDOMClient.createRoot(document.getElementById("survey-creator"));
     root.render(React.createElement(React.StrictMode, {
       children: React.createElement(

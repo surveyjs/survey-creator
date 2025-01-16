@@ -11,7 +11,7 @@ export interface ITabbedMenuItem extends IAction {
 const tabsIcons = {
   designer: "icon-config",
   theme: "icon-theme",
-  editor: "icon-codeeditor-24x24",
+  json: "icon-codeeditor-24x24",
   translation: "icon-language",
   preview: "icon-preview",
   logic: "icon-logic-24x24",
@@ -70,7 +70,7 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
       componentContent: componentName ? componentName : "svc-tab-" + name,
       data: plugin,
       iconName: tabsIcons[tabName] || tabsIcons["default"],
-      action: () => { this.creator.makeNewViewActive(name); },
+      action: () => { this.creator.switchTab(name); },
       active: this.creator.viewType === name,
       disableHide: this.creator.viewType === name
     });

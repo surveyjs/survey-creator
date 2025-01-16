@@ -32,8 +32,12 @@
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
-    const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
+    const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
     creator.applyCreatorTheme(SurveyCreatorTheme.DefaultLight);
+    creator.tabResponsivenessMode = "menu";
+    creator["animationEnabled"] = false;
+    creator.showOneCategoryInPropertyGrid = false;
+    creator.allowZoom = false;
     window.creator = creator;
 
     class SurveyCreatorRenderComponent extends React.Component {
@@ -46,6 +50,10 @@
           creator.applyCreatorTheme(SurveyCreatorTheme.DefaultLight);
           creator.JSON = json;
           this.setState({ creator });
+          creator.tabResponsivenessMode = "menu";
+          creator["animationEnabled"] = false;
+          creator.showOneCategoryInPropertyGrid = false;
+          creator.allowZoom = false;
           window.creator = creator;
         }
       }

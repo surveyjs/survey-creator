@@ -23,7 +23,11 @@
 </body>
 <script>
   window.surveyJSFramework = "react";
-  const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true, pageEditMode: "bypage" });
+    const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, pageEditMode: "bypage" });
+      creator.tabResponsivenessMode = "menu";
+      creator["animationEnabled"] = false;
+  creator.showOneCategoryInPropertyGrid = false;
+  creator.allowZoom = false;
   window.creator = creator;
   SurveyCreator.renderSurveyCreator(creator, document.getElementById("survey-creator"));
 </script>

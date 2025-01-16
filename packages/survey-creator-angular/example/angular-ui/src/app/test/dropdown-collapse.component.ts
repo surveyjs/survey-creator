@@ -9,6 +9,10 @@ import { TestDefaultComponent } from "./default.component";
 export class TestDropdownCollapseComponent extends TestDefaultComponent {
   protected override getSlk(): boolean { return false; }
   protected override createCreator(): void {
-    this.creator = new SurveyCreatorModel({ maxVisibleChoices: 5 });
+    this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", maxVisibleChoices: 5 });
+    this.creator.tabResponsivenessMode = "menu";
+    this.creator["animationEnabled"] = false;
+    this.creator.showOneCategoryInPropertyGrid = false;
+    this.creator.allowZoom = false;
   }
 }

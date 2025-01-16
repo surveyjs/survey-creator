@@ -523,7 +523,7 @@ export class StringEditorViewModelBase extends Base {
       this.blurEditor();
       this.done(event);
     }
-    if (event.keyCode === 8 && !(event.target as any).innerText) {
+    if (event.keyCode === 8 && !clearNewLines((event.target as any).innerText)) {
       this.done(event);
       this.connector.onBackspaceEmptyString.fire(this, {});
     }

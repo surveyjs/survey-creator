@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -123,7 +124,9 @@ test("Page Navigator works with - scroll-behavior: smooth;", async (t) => {
       document.documentElement.style["scroll-behavior"] = "smooth";
     })();
 
-    await setJSON({ pages: [{ name: "page1", questions: [{ type: "radiogroup", choices: [1, 2, 3] }] }, { name: "page2" }, { name: "page3" }, { name: "page4" }, { name: "page5" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1", questions: [{ type: "radiogroup", choices: [1, 2, 3] }] }, { name: "page2" }, { name: "page3" }, { name: "page4" }, { name: "page5" }]
+    });
 
     const firstPageNavigatorItem = "svc-page-navigator-item:nth-child(1) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(1) > .svc-page-navigator-item--selected";
     const thirdPageNavigatorItem = "svc-page-navigator-item:nth-child(3) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(3) > .svc-page-navigator-item--selected";
@@ -421,81 +424,60 @@ test("Page navigator has enough space to be shown", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1508, 800);
     await setJSON({
-      title: "NPS Survey Question",
-      pages: [
+      showQuestionNumbers: "on",
+      "title": "NPS Survey Question",
+      "widthMode": "responsive",
+      "pages": [
         {
-          name: "page1",
-          elements: [
+          "name": "page1",
+          "elements": [
             {
-              type: "rating",
-              name: "nps_score",
-              title:
-                "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
-              isRequired: true,
-              rateCount: 11,
-              rateMin: 0,
-              rateMax: 10,
-              minRateDescription: "(Most unlikely)",
-              maxRateDescription: "(Most likely)",
+              "type": "comment",
+              "name": "nps_score",
+              "title": "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
+              "isRequired": true
             },
             {
-              type: "checkbox",
-              name: "promoter_features",
-              visibleIf: "{nps_score} >= 9",
-              title: "Which of the following features do you value the most?",
-              description: "Please select no more than three features.",
-              isRequired: true,
-              validators: [
-                {
-                  type: "answercount",
-                  text: "Please select no more than three features.",
-                  maxCount: 3,
-                },
-              ],
-              choices: [
-                "Performance",
-                "Stability",
-                "User interface",
-                "Complete functionality",
-                "Learning materials (documentation, demos, code examples)",
-                "Quality support",
-              ],
-              showOtherItem: true,
-              otherText: "Other features:",
-              colCount: 2,
+              "type": "comment",
+              "name": "promoter_features",
+              "visibleIf": "{nps_score} >= 9",
+              "title": "Which of the following features do you value the most?",
+              "description": "Please select no more than three features.",
+              "isRequired": true,
+              "rows": 6
             },
             {
-              type: "comment",
-              name: "passive_experience",
-              visibleIf: "{nps_score} >= 7  and {nps_score} <= 8",
-              title: "What can we do to make your experience more satisfying?",
+              "type": "comment",
+              "name": "passive_experience",
+              "visibleIf": "{nps_score} >= 7  and {nps_score} <= 8",
+              "title": "What can we do to make your experience more satisfying?",
+              "rows": 6
             },
             {
-              type: "comment",
-              name: "disappointing_experience",
-              visibleIf: "{nps_score} <= 6",
-              title:
-                "Please let us know why you had such a disappointing experience with our product",
-            },
-          ],
+              "type": "comment",
+              "name": "disappointing_experience",
+              "visibleIf": "{nps_score} <= 6",
+              "title": "Please let us know why you had such a disappointing experience with our product"
+            }
+          ]
         },
         {
-          name: "page2",
-          elements: [
+          "name": "page2",
+          "elements": [
             {
-              type: "text",
-              name: "question1",
+              "type": "text",
+              "name": "question1"
             },
             {
-              type: "text",
-              name: "question2",
+              "type": "text",
+              "name": "question2"
             },
             {
-              type: "text",
-              name: "question3",
-            },
-          ],
-        },
+              "type": "text",
+              "name": "question3"
+            }
+          ]
+        }
       ],
     });
     await ClientFunction(() => { document.body.focus(); })();
@@ -512,81 +494,60 @@ test("Page navigator in by-page mode has enough space to be shown", async (t) =>
       window["creator"].pageEditMode = "bypage";
     })();
     await setJSON({
-      title: "NPS Survey Question",
-      pages: [
+      showQuestionNumbers: "on",
+      "title": "NPS Survey Question",
+      "widthMode": "responsive",
+      "pages": [
         {
-          name: "page1",
-          elements: [
+          "name": "page1",
+          "elements": [
             {
-              type: "rating",
-              name: "nps_score",
-              title:
-                "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
-              isRequired: true,
-              rateCount: 11,
-              rateMin: 0,
-              rateMax: 10,
-              minRateDescription: "(Most unlikely)",
-              maxRateDescription: "(Most likely)",
+              "type": "comment",
+              "name": "nps_score",
+              "title": "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
+              "isRequired": true
             },
             {
-              type: "checkbox",
-              name: "promoter_features",
-              visibleIf: "{nps_score} >= 9",
-              title: "Which of the following features do you value the most?",
-              description: "Please select no more than three features.",
-              isRequired: true,
-              validators: [
-                {
-                  type: "answercount",
-                  text: "Please select no more than three features.",
-                  maxCount: 3,
-                },
-              ],
-              choices: [
-                "Performance",
-                "Stability",
-                "User interface",
-                "Complete functionality",
-                "Learning materials (documentation, demos, code examples)",
-                "Quality support",
-              ],
-              showOtherItem: true,
-              otherText: "Other features:",
-              colCount: 2,
+              "type": "comment",
+              "name": "promoter_features",
+              "visibleIf": "{nps_score} >= 9",
+              "title": "Which of the following features do you value the most?",
+              "description": "Please select no more than three features.",
+              "isRequired": true,
+              "rows": 6
             },
             {
-              type: "comment",
-              name: "passive_experience",
-              visibleIf: "{nps_score} >= 7  and {nps_score} <= 8",
-              title: "What can we do to make your experience more satisfying?",
+              "type": "comment",
+              "name": "passive_experience",
+              "visibleIf": "{nps_score} >= 7  and {nps_score} <= 8",
+              "title": "What can we do to make your experience more satisfying?",
+              "rows": 6
             },
             {
-              type: "comment",
-              name: "disappointing_experience",
-              visibleIf: "{nps_score} <= 6",
-              title:
-                "Please let us know why you had such a disappointing experience with our product",
-            },
-          ],
+              "type": "comment",
+              "name": "disappointing_experience",
+              "visibleIf": "{nps_score} <= 6",
+              "title": "Please let us know why you had such a disappointing experience with our product"
+            }
+          ]
         },
         {
-          name: "page2",
-          elements: [
+          "name": "page2",
+          "elements": [
             {
-              type: "text",
-              name: "question1",
+              "type": "text",
+              "name": "question1"
             },
             {
-              type: "text",
-              name: "question2",
+              "type": "text",
+              "name": "question2"
             },
             {
-              type: "text",
-              name: "question3",
-            },
-          ],
-        },
+              "type": "text",
+              "name": "question3"
+            }
+          ]
+        }
       ],
     });
     await ClientFunction(() => { document.body.focus(); })();
@@ -604,6 +565,7 @@ test("Page navigator scrolls to top of long page and centers small page", async 
     await t.resizeWindow(1500, 800);
     await setShowSidebar(false);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {

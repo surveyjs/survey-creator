@@ -508,7 +508,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       id: "svd-designer",
       iconName: "icon-config",
       iconSize: "auto",
-      action: () => { this.creator.makeNewViewActive("designer"); },
+      action: () => { this.creator.switchTab("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
       showTitle: false
@@ -756,7 +756,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     onSaveCallback: (no: number, isSuccess: boolean) => void
   ) => void;
   /**
-   * A function that is called [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
+   * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#autoSaveEnabled) is triggered to save a theme JSON object.
    * 
    * For more information, refer to the [Save and Load Custom Themes](https://surveyjs.io/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
    */

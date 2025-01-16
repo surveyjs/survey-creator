@@ -40,9 +40,9 @@
     </div>
     <SvComponent
       :is="'svc-toolbox-tool'"
-      v-for="(item, index) in category.items"
+      v-for="item in category.items"
       :item="item"
-      :key="index"
+      :key="item.renderedId"
       :creator="toolbox.creator"
       :parentModel="toolbox"
       :isCompact="false"

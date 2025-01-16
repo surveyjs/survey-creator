@@ -25,15 +25,7 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
     if (!container) return;
     this.manager = new VerticalResponsivityManager(
       this.toolbox.containerElement as HTMLDivElement,
-      this.toolbox,
-      this.toolbox.itemSelector,
-      null,
-      undefined,
-      (callback) => setTimeout(() => {
-        if (!this.toolbox.isResponsivenessDisabled) {
-          callback();
-        }
-      }, 10)
+      this.toolbox
     );
   }
   componentWillUnmount() {
@@ -52,12 +44,9 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
   }
 
   renderItems(items: Array<any>, isCompact = false): Array<React.JSX.Element> {
-    const result = [];
-    items.forEach((item, itemIndex) => {
-      const tool = <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} parentModel={this.toolbox} isCompact={isCompact} key={"item" + itemIndex} ></SurveyCreatorToolboxTool>;
-      result.push(tool);
+    return items.map((item, itemIndex) => {
+      return <SurveyCreatorToolboxTool item={(item as any)} creator={this.creator} parentModel={this.toolbox} isCompact={isCompact} key={item.renderedId} ></SurveyCreatorToolboxTool>;
     });
-    return result;
   }
 
   renderCategories() {

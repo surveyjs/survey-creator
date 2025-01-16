@@ -653,7 +653,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       },
       "inputTypeAdorner"
     );
-    newAction.removePriority = 1;
     return newAction;
   }
   private getSelectedItem(actions: IAction[], id: string): IAction {
@@ -760,7 +759,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected duplicate(): void {
     setTimeout(() => {
-      this.creator.fastCopyQuestion(this.surveyElement, true);
+      this.creator.copyQuestion(this.surveyElement, true);
     }, 1);
   }
   addNewQuestion = () => {

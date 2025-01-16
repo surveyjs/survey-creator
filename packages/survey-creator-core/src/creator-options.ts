@@ -35,7 +35,7 @@ export interface ICreatorOptions {
   /**
    * Specifies whether to display the Logic tab.
    *
-   * Default value: `false`
+   * Default value: `true`
    */
   showLogicTab?: boolean;
   /**
@@ -53,10 +53,16 @@ export interface ICreatorOptions {
    */
   showThemeTab?: boolean;
   showCreatorThemeSettings?: boolean;
+  allowZoom?: boolean;
   /**
    * Specifies whether to call the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) and [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) functions each time survey or theme settings are changed.
    *
    * Default value: `false`
+   */
+  autoSaveEnabled?: boolean;
+  /**
+   * Obsolete. Use the [`autoSaveEnabled`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#autoSaveEnabled) property instead.
+   * @deprecated
    */
   isAutoSave?: boolean;
   /**
@@ -66,9 +72,14 @@ export interface ICreatorOptions {
    */
   isRTL?: boolean;
   /**
-   * Specifies whether users can see and edit the survey title and related survey properties.
+   * Specifies whether users can see and edit the survey header and related survey properties.
    *
    * Default value: `true`
+   */
+  showSurveyHeader?: boolean;
+  /**
+   * Obsolete. Use the [`showSurveyHeader`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showSurveyHeader) property instead.
+   * @deprecated
    */
   showSurveyTitle?: boolean;
   /**
@@ -79,6 +90,11 @@ export interface ICreatorOptions {
    * Default value: `true`
    *
    * @see showLogicTab
+   */
+  logicAllowTextEditExpressions?: boolean;
+  /**
+   * Obsolete. Use the[`logicAllowTextEditExpressions`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicAllowTextEditExpressions) property instead.
+   * @deprecated
    */
   allowEditExpressionsInTextEditor?: boolean;
   /**
@@ -265,9 +281,14 @@ export interface ICreatorOptions {
   maximumRateValues?: number;
 
   /**
-   * Limits the number of items in a logical expression.
+   * Limits the number of items in a logical condition.
    *
    * Default value: -1 (unlimited)
+   */
+  logicMaxItemsInCondition?: number;
+  /**
+   * Obsolete. Use the [`logicMaxItemsInCondition`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicMaxItemsInCondition) property instead.
+   * @deprecated
    */
   maxLogicItemsInCondition?: number;
 

@@ -22,7 +22,7 @@ export const roStrings = {
     theme: "Teme",
     translation: "Traduceri",
     designer: "Designer",
-    editor: "Editor JSON",
+    json: "Editor JSON",
     logic: "Logică"
   },
   // Question types
@@ -625,6 +625,7 @@ export const roStrings = {
     editText: "Textul butonului „Editează răspunsul”",
     startSurveyText: "Textul butonului „Începe chestionarul”",
     showNavigationButtons: "Afișați/ascundeți butoanele de navigare",
+    navigationButtonsLocation: "Alinierea butoanelor de navigare",
     showPrevButton: "Afișați butonul „Pagina anterioară”",
     firstPageIsStartPage: "Prima pagină este o pagină de început",
     showCompletePage: "Afișați pagina de „Mulțumire”",
@@ -753,6 +754,8 @@ export const roStrings = {
     separateSpecialChoices: "Separă alegerile speciale",
     choicesFromQuestion: "Copiază alegerile din următoarea întrebare",
     choicesFromQuestionMode: "Care opțiuni de alegere să fie copiate",
+    choiceValuesFromQuestion: "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca ID-uri de alegere",
+    choiceTextsFromQuestion: "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca texte de alegere",
     progressBarShowPageTitles: "Afișează titlurile paginilor în bara de progres",
     progressBarShowPageNumbers: "Afișează numerele paginilor în bara de progres",
     showCommentArea: "Adaugă o casetă de comentarii",
@@ -1104,6 +1107,8 @@ export const roStrings = {
     noPreview: "Fără previzualizare",
     showAllQuestions: "Afișați toate întrebările",
     showAnsweredQuestions: "Afișați doar întrebările la care s-a răspuns",
+    allQuestions: "Afișează toate întrebările",
+    answeredQuestions: "Afișați numai întrebările la care au răspuns",
     pages: "Pagini completate",
     questions: "Întrebări cu răspuns",
     requiredQuestions: "Întrebări obligatorii cu răspuns",
@@ -1455,6 +1460,7 @@ export const roStrings = {
     autoAdvanceEnabled: "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent a răspuns la toate întrebările de pe pagina curentă. Această funcție nu se va aplica dacă ultima întrebare de pe pagină este deschisă sau permite răspunsuri multiple.",
     autoAdvanceAllowComplete: "Selectați dacă doriți ca chestionarul să se completeze automat după ce un respondent răspunde la toate întrebările.",
     showNavigationButtons: "Setează vizibilitatea și locația butoanelor de navigare pe o pagină.",
+    navigationButtonsLocation: "Setează locația butoanelor de navigare dintr-o pagină.",
     showProgressBar: "Setează vizibilitatea și locația unei bare de progres. Valoarea „Auto” afișează bara de progres deasupra sau dedesubtul antetului chestionarului.",
     showPreviewBeforeComplete: "Activează pagina de previzualizare cu toate sau doar întrebările la care s-a răspuns.",
     questionTitleLocation: "Se aplică tuturor întrebărilor din chestionar. Această setare poate fi înlocuită de regulile de aliniere a titlului la niveluri inferioare: panou, pagină sau întrebare. O setare de nivel inferior va înlocui setările de nivel superior.",
@@ -1501,7 +1507,7 @@ export const roStrings = {
       questionTitleWidth: "Setează lățimea titlurilor întrebărilor atunci când sunt aliniate la stânga casetelor de întrebări. Acceptă valori CSS (px, %, in, pt etc.).",
       questionErrorLocation: "Setează locația unui mesaj de eroare în raport cu întrebarea cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar.",
       questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Original” implicit). Efectul acestei setări este vizibil doar în fila Previzualizare.",
-      navigationButtonsVisibility: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”."
+      showNavigationButtons: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”."
     },
     timerLocation: "Setează locația unui cronometru pe o pagină.",
     panelsState: "Alegeți dintre: „Blocat” - utilizatorii nu pot extinde sau colapsa panouri; „Colapsați toate” - toate panourile încep într-o stare colapsată; „Extindeți toate” - toate panourile încep într-o stare extinsă; „Primul extins” - doar primul panou este extins inițial. Se aplică dacă „Modul de afișare a panoului” este setat la „Listă” și proprietatea „Șablon titlu panou” este specificată.",
@@ -1516,6 +1522,8 @@ export const roStrings = {
     useDisplayValuesInDynamicTexts: "În tipurile de întrebări de selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare de afișare. Când este selectată, această setare afișează o valoare de afișare în loc de o valoare ID în întrebările HTML și în titlurile și descrierile dinamice ale elementelor chestionarului.",
     clearIfInvisible: "Alegeți dacă doriți sau nu să ștergeți valorile întrebărilor ascunse prin logica condițională și când să o faceți. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („La finalizarea chestionarului” implicit).",
     choicesFromQuestionMode: "Alegeți dintre: „Toate” - copiază toate opțiunile de alegere din întrebarea selectată; „Selectate” - copiază dinamic doar opțiunile de alegere selectate; „Neselectate” - copiază dinamic doar opțiunile de alegere neselectate. Opțiunile „Niciuna” și „Altele” sunt copiate implicit dacă sunt activate în întrebarea sursă.",
+    choiceValuesFromQuestion: "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze ID-urile.",
+    choiceTextsFromQuestion: "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze textele afișate.",
     showOtherItem: "Când este selectat, utilizatorii pot include intrare suplimentară într-o casetă de comentarii separată.",
     separateSpecialChoices: "Afișează fiecare opțiune de alegere specială („Niciuna”, „Altele”, „Selectează toate”) pe un rând nou, chiar și atunci când utilizați un layout pe mai multe coloane.",
     path: "Specificați locația din cadrul setului de date al serviciului unde se află array-ul de obiecte țintă. Lăsați gol dacă URL-ul indică deja către array.",
@@ -1660,7 +1668,6 @@ export const roStrings = {
     inputTextAlignment: "Alinierea valorilor de intrare",
     elements: "Elemente",
     content: "Conținut",
-    navigationButtonsVisibility: "Arată/ascunde butoanele de navigare",
     navigationTitle: "Titlul navigării",
     navigationDescription: "Descrierea navigării",
     longTap: "Apăsare lungă",
@@ -1913,3 +1920,11 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // tabs.surfaceBackground: "Surface Background" => "Fundal de suprafață"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Utilizați răspunsurile de la ultima intrare ca implicit"
 // colors.gray: "Gray" => "Gri"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Alinierea butoanelor de navigare"
+// pv.allQuestions: "Show all questions" => "Afișează toate întrebările"
+// pv.answeredQuestions: "Show answered questions only" => "Afișați numai întrebările la care au răspuns"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Setează locația butoanelor de navigare dintr-o pagină."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca ID-uri de alegere"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca texte de alegere"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze ID-urile."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze textele afișate."

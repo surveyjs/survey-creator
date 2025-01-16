@@ -22,7 +22,7 @@ var traditionalChineseTranslation = {
     theme: "主題",
     translation: "譯本",
     designer: "問卷設計器",
-    editor: "JSON 編輯器",
+    json: "JSON 編輯器",
     logic: "邏輯"
   },
   // Question types
@@ -625,6 +625,7 @@ var traditionalChineseTranslation = {
     editText: "編輯應答按鈕文本",
     startSurveyText: "開始按鈕文本",
     showNavigationButtons: "顯示導航按鈕 (默認導航)",
+    navigationButtonsLocation: "導航按鈕對齊",
     showPrevButton: "顯示前一頁按鈕 (用戶可返回至前一頁面)",
     firstPageIsStartPage: "調查的第一頁面為起始頁.",
     showCompletePage: "結尾展示完成後的頁面 (completedHtml)",
@@ -753,6 +754,8 @@ var traditionalChineseTranslation = {
     separateSpecialChoices: "單獨的特殊選項（無、其他、全選）",
     choicesFromQuestion: "複製以下問題的選項",
     choicesFromQuestionMode: "要複製哪些選項？",
+    choiceValuesFromQuestion: "使用以下矩陣、列或面板問題中的值作為選項ID",
+    choiceTextsFromQuestion: "使用以下矩陣、列或面板問題中的值作為選擇文本",
     progressBarShowPageTitles: "在進度條中顯示頁面標題",
     progressBarShowPageNumbers: "在進度條中顯示頁碼",
     showCommentArea: "顯示評論區域",
@@ -1104,6 +1107,8 @@ var traditionalChineseTranslation = {
     noPreview: "無預覽",
     showAllQuestions: "顯示所有問題",
     showAnsweredQuestions: "僅顯示已回答的問題",
+    allQuestions: "顯示所有問題",
+    answeredQuestions: "僅顯示已回答的問題",
     pages: "已完成的頁面",
     questions: "已回答的問題",
     requiredQuestions: "回答必填問題",
@@ -1455,6 +1460,7 @@ var traditionalChineseTranslation = {
     autoAdvanceEnabled: "選擇是否希望調查在受訪者回答了當前頁面上的所有問題後自動前進到下一頁。如果頁面上的最後一個問題是開放式的或允許多個答案，則此功能將不適用。",
     autoAdvanceAllowComplete: "選擇是否希望在受訪者回答所有問題後自動完成調查。",
     showNavigationButtons: "設置導航按鈕在頁面上的可見性和位置。",
+    navigationButtonsLocation: "設置頁面上導航按鈕的位置。",
     showProgressBar: "設置進度條的可見性和位置。“自動”值顯示測量標題上方或下方的進度條。",
     showPreviewBeforeComplete: "啟用僅包含所有問題或已回答問題的預覽頁面。",
     questionTitleLocation: "適用於調查中的所有問題。此設置可以被較低級別的標題對齊規則覆蓋：面板、頁面或問題。較低級別的設置將覆蓋較高級別的設置。",
@@ -1501,7 +1507,7 @@ var traditionalChineseTranslation = {
       questionTitleWidth: "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。",
       questionErrorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。",
       questionOrder: "保持問題的原始順序或隨機化問題。繼承「選項應用調查級別設置（預設為」原始」。）。此設置的效果僅在「預覽」選項卡中可見。",
-      navigationButtonsVisibility: "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。"
+      showNavigationButtons: "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。"
     },
     timerLocation: "設置計時器在頁面上的位置。",
     panelsState: "從以下選項中選擇：「鎖定」 - 使用者無法展開或摺疊面板;“全部摺疊” - 所有面板都以摺疊狀態啟動;“全部展開” - 所有面板都以展開狀態啟動;“首先展開” - 最初只有第一個面板被展開。",
@@ -1516,6 +1522,8 @@ var traditionalChineseTranslation = {
     useDisplayValuesInDynamicTexts: "在單選題和多選題類型中，每個選項都有一個 ID 和顯示值。選中此設置后，將在 HTML 問題以及調查元素的動態標題和描述中顯示顯示值，而不是 ID 值。",
     clearIfInvisible: "選擇是否清除條件邏輯隱藏的問題值以及何時清除。“繼承”選項應用調查級別設置（預設為“完成調查後”）。",
     choicesFromQuestionMode: "從以下選項中選擇：「全部」 - 複製所選問題中的所有選項;“Selected” - 僅動態複製選定的選項選項;“未選擇” - 僅動態複製未選擇的選項。默認情況下，如果在源問題中啟用了“無”和“其他”選項，則會複製該選項。",
+    choiceValuesFromQuestion: "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣、列或面板問題應提供ID。",
+    choiceTextsFromQuestion: "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣列或面板問題應提供顯示文本。",
     showOtherItem: "選取後，使用者可以在單獨的註釋框中包含其他輸入。",
     separateSpecialChoices: "在新行上顯示每個特殊選項（“無”、“其他”、“全選”），即使使用多列佈局也是如此。",
     path: "指定服務數據集中目標物件陣列所在的位置。如果 URL 已指向陣列，則留空。",
@@ -1660,7 +1668,6 @@ var traditionalChineseTranslation = {
     inputTextAlignment: "輸入值對齊",
     elements: "元素",
     content: "內容",
-    navigationButtonsVisibility: "導航按鈕可見性",
     navigationTitle: "導航標題",
     navigationDescription: "導航說明",
     longTap: "長按",
@@ -2412,7 +2419,6 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // p.inputSize: "Item size" => "專案大小"
 // p.elements: "Elements" => "元素"
 // p.content: "Content" => "內容"
-// p.navigationButtonsVisibility: "Navigation buttons visibility" => "導航按鈕可見性"
 // p.navigationTitle: "Navigation title" => "導航標題"
 // p.navigationDescription: "Navigation description" => "導航說明"
 // p.longTap: "Long tap" => "長按"
@@ -2914,7 +2920,7 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "適用於本頁中的所有問題。如果要覆蓋此設置，請為單個問題或面板定義標題對齊規則。“繼承”選項將應用調查級別設置（預設為“頂部”）。"
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。"
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "保持問題的原始順序或隨機化問題。繼承「選項應用調查級別設置（預設為」原始」。）。此設置的效果僅在「預覽」選項卡中可見。"
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。"
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。"
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "從以下選項中選擇：「鎖定」 - 使用者無法展開或摺疊面板;“全部摺疊” - 所有面板都以摺疊狀態啟動;“全部展開” - 所有面板都以展開狀態啟動;“首先展開” - 最初只有第一個面板被展開。"
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "在物件陣列中輸入共用屬性名稱，該數位包含要在選項清單中顯示的圖像或視頻檔URL。"
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "左邊的值用作條件規則中使用的專案ID，右邊的值顯示給受訪者。"
@@ -3244,3 +3250,11 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // tabs.surfaceBackground: "Surface Background" => "表面背景"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "使用最後一個條目中的答案作為預設值"
 // colors.gray: "Gray" => "灰色"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "導航按鈕對齊"
+// pv.allQuestions: "Show all questions" => "顯示所有問題"
+// pv.answeredQuestions: "Show answered questions only" => "僅顯示已回答的問題"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "設置頁面上導航按鈕的位置。"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "使用以下矩陣、列或面板問題中的值作為選項ID"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "使用以下矩陣、列或面板問題中的值作為選擇文本"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣、列或面板問題應提供ID。"
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣列或面板問題應提供顯示文本。"

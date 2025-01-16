@@ -22,7 +22,7 @@ export var koreanStrings = {
     theme: "테마",
     translation: "번역",
     designer: "설문지 디자인",
-    editor: "JSON 편집기",
+    json: "JSON 편집기",
     logic: "논리학"
   },
   // Question types
@@ -440,7 +440,7 @@ export var koreanStrings = {
     imageWidth: "이미지 너비",
     valueName: "값 이름",
     rateDescriptionLocation: "레이블 정렬",
-    size: "입력 필드 크기(문자)",
+    size: "입력 필드 너비(문자 단위)",
     cellErrorLocation: "셀 오류 메시지 맞춤",
     enabled: "사용",
     disabled: "비활성화",
@@ -625,6 +625,7 @@ export var koreanStrings = {
     editText: "답변 편집 단추 텍스트",
     startSurveyText: "시작 버튼 텍스트",
     showNavigationButtons: "탐색 버튼 표시 (기본 탐색)",
+    navigationButtonsLocation: "탐색 단추 정렬",
     showPrevButton: "이전 버튼 표시 (사용자가 이전 페이지로 돌아갈 수 있음)",
     firstPageIsStartPage: "설문지의 첫 번째 페이지는 시작 페이지입니다",
     showCompletePage: "끝 부분에 완료된 페이지 표시 (완료된 HTML)",
@@ -753,6 +754,8 @@ export var koreanStrings = {
     separateSpecialChoices: "별도의 특수 선택(없음, 기타, 모두 선택)",
     choicesFromQuestion: "다음 질문에서 선택 항목을 복사합니다.",
     choicesFromQuestionMode: "어떤 선택 항목을 복사해야 합니까?",
+    choiceValuesFromQuestion: "다음 행렬 열 또는 패널 질문의 값을 선택 ID로 사용합니다.",
+    choiceTextsFromQuestion: "다음 행렬 열 또는 패널 질문의 값을 선택 텍스트로 사용합니다.",
     progressBarShowPageTitles: "진행률 표시줄에 페이지 제목 표시",
     progressBarShowPageNumbers: "진행률 표시줄에 페이지 번호 표시",
     showCommentArea: "주석 영역 표시",
@@ -1104,6 +1107,8 @@ export var koreanStrings = {
     noPreview: "미리보기 없음",
     showAllQuestions: "모든 질문 표시",
     showAnsweredQuestions: "답변된 질문만 표시",
+    allQuestions: "모든 질문 보기",
+    answeredQuestions: "답변된 질문만 표시",
     pages: "완성된 페이지",
     questions: "답변된 질문",
     requiredQuestions: "필수 질문에 답변했습니다.",
@@ -1455,6 +1460,7 @@ export var koreanStrings = {
     autoAdvanceEnabled: "응답자가 현재 페이지의 모든 질문에 답변한 후 설문조사가 다음 페이지로 자동 진행되도록 하려면 선택합니다. 페이지의 마지막 질문이 서술형이거나 여러 답변을 허용하는 경우에는 이 기능이 적용되지 않습니다.",
     autoAdvanceAllowComplete: "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다.",
     showNavigationButtons: "페이지에서 탐색 단추의 표시 여부와 위치를 설정합니다.",
+    navigationButtonsLocation: "페이지에서 탐색 단추의 위치를 설정합니다.",
     showProgressBar: "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다.",
     showPreviewBeforeComplete: "모든 질문 또는 답변된 질문만 있는 미리보기 페이지를 활성화합니다.",
     questionTitleLocation: "설문조사 내의 모든 질문에 적용됩니다. 이 설정은 하위 수준(패널, 페이지 또는 질문)의 제목 정렬 규칙으로 재정의할 수 있습니다. 낮은 수준의 설정은 더 높은 수준의 설정보다 우선합니다.",
@@ -1501,7 +1507,7 @@ export var koreanStrings = {
       questionTitleWidth: "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       questionErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       questionOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
-      navigationButtonsVisibility: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
+      showNavigationButtons: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
     },
     timerLocation: "페이지에서 타이머의 위치를 설정합니다.",
     panelsState: "다음 중에서 선택: \"잠김\" - 사용자가 패널을 확장하거나 축소할 수 없습니다. \"모두 축소\" - 모든 패널이 축소된 상태에서 시작됩니다. \"모두 확장\" - 모든 패널이 확장된 상태에서 시작됩니다. \"첫 번째 확장\" - 첫 번째 패널만 처음에 확장됩니다.",
@@ -1516,6 +1522,8 @@ export var koreanStrings = {
     useDisplayValuesInDynamicTexts: "단답형 및 다중선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정을 선택하면 HTML 질문과 동적 제목 및 현장조사 요소에 대한 설명에서 ID 값 대신 표시 값이 표시됩니다.",
     clearIfInvisible: "조건부 논리에 의해 숨겨진 질문 값을 지울지 여부와 지울 시기를 선택합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"설문조사 완료 시\")을 적용합니다.",
     choicesFromQuestionMode: "다음 중에서 선택: \"모두\" - 선택한 질문의 모든 선택 옵션을 복사합니다. \"선택됨\" - 선택한 선택 옵션만 동적으로 복사합니다. \"선택되지 않음\" - 선택되지 않은 선택 옵션만 동적으로 복사합니다. \"없음\" 및 \"기타\" 옵션은 원본 질문에서 활성화된 경우 기본적으로 복사됩니다.",
+    choiceValuesFromQuestion: "단일 선택 및 다중 선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정은 ID를 제공해야 하는 행렬 열 또는 패널 질문을 지정합니다.",
+    choiceTextsFromQuestion: "단일 선택 및 다중 선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정은 표시 텍스트를 제공해야 하는 행렬 열 또는 패널 질문을 지정합니다.",
     showOtherItem: "이 옵션을 선택하면 사용자가 별도의 주석 상자에 추가 입력을 포함할 수 있습니다.",
     separateSpecialChoices: "각 특수 선택 옵션(\"없음\", \"기타\", \"모두 선택\")을 새 줄에 표시합니다(여러 열 레이아웃을 사용하는 경우에도 마찬가지임).",
     path: "서비스 데이터 세트 내에서 대상 객체 배열이 있는 위치를 지정합니다. URL이 이미 배열을 가리키는 경우 비워 둡니다.",
@@ -1660,7 +1668,6 @@ export var koreanStrings = {
     inputTextAlignment: "입력 값 정렬",
     elements: "요소",
     content: "콘텐츠",
-    navigationButtonsVisibility: "탐색 버튼 선명도",
     navigationTitle: "탐색 제목",
     navigationDescription: "탐색 설명",
     longTap: "길게 탭하기",
@@ -2846,7 +2853,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "이 페이지 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문 또는 패널에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "다음 중에서 선택: \"잠김\" - 사용자가 패널을 확장하거나 축소할 수 없습니다. \"모두 축소\" - 모든 패널이 축소된 상태에서 시작됩니다. \"모두 확장\" - 모든 패널이 확장된 상태에서 시작됩니다. \"첫 번째 확장\" - 첫 번째 패널만 처음에 확장됩니다."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "선택 목록에 표시할 이미지 또는 비디오 파일 URL이 포함된 객체 배열 내에 공유 속성 이름을 입력합니다."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "왼쪽 값은 조건부 규칙에 사용되는 항목 ID 역할을 하며, 오른쪽 값은 응답자에게 표시됩니다."
@@ -3176,3 +3183,12 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // tabs.surfaceBackground: "Surface Background" => "표면 배경"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "마지막 항목의 답변을 기본값으로 사용"
 // colors.gray: "Gray" => "회색"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "탐색 단추 정렬"
+// pv.allQuestions: "Show all questions" => "모든 질문 보기"
+// pv.answeredQuestions: "Show answered questions only" => "답변된 질문만 표시"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "페이지에서 탐색 단추의 위치를 설정합니다."
+// pe.size: "Input field width (in characters)" => "입력 필드 너비(문자 단위)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "다음 행렬 열 또는 패널 질문의 값을 선택 ID로 사용합니다."
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "다음 행렬 열 또는 패널 질문의 값을 선택 텍스트로 사용합니다."
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "단일 선택 및 다중 선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정은 ID를 제공해야 하는 행렬 열 또는 패널 질문을 지정합니다."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "단일 선택 및 다중 선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정은 표시 텍스트를 제공해야 하는 행렬 열 또는 패널 질문을 지정합니다."

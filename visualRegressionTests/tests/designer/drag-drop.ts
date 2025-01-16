@@ -9,9 +9,13 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 test("Ghost Survey Element", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await hideAllAdornerActions();
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
       window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
@@ -33,9 +37,13 @@ test("Ghost Survey Element", async (t) => {
 test("Empty page", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await hideAllAdornerActions();
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
       window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
@@ -57,9 +65,13 @@ test("Empty page", async (t) => {
 test("Ghost Survey Element after several drops", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await hideAllAdornerActions();
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
     const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
@@ -103,9 +115,13 @@ test("Ghost Survey Element after several drops", async (t) => {
 test("Toolbox Item State After Drag", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await hideAllAdornerActions();
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 

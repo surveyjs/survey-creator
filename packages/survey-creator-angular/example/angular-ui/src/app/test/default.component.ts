@@ -21,6 +21,8 @@ export class TestDefaultComponent implements OnInit {
       this.zone && this.zone.run(() => {
         (<any>window).prevCreator = this.creator;
         this.creator = new SurveyCreatorModel(options);
+        this.creator.showOneCategoryInPropertyGrid = false;
+        this.creator.allowZoom = false;
         this.creator.JSON = json;
         (<any>window).creator = this.creator;
       });
@@ -32,6 +34,10 @@ export class TestDefaultComponent implements OnInit {
   }
   protected getSlk(): boolean { return true; }
   protected createCreator(): void {
-    this.creator = new SurveyCreatorModel({ showLogicTab: true, showTranslationTab: true });
+    this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
+    this.creator.tabResponsivenessMode = "menu";
+    this.creator["animationEnabled"] = false;
+    this.creator.showOneCategoryInPropertyGrid = false;
+    this.creator.allowZoom = false;
   }
 }
