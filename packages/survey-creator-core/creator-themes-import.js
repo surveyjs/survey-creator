@@ -4,7 +4,7 @@ const legacyDefaultThemeName = "v2-20";
 const baseThemeName = "v2-24";
 const sourcePath = "./src/themes/predefined-themes/";
 const _dirPath = "./src/themes/";
-const regularExpression = /(?<var1>--\w*(-+\w*)*)\s?:\s?(?<var2>.*[^;]);/gi;
+const regularExpression = /(?<var1>--\w*(?:-\w*)*)\s?:\s?(?<var2>.*[^;]);/gi;
 const cssVariablesRegExp = /(?<variable>--\w*(-+\w*)*)/gi;
 var themeNameMap = {
   "v2-20": "sc2020",
