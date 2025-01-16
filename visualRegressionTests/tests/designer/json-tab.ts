@@ -6,7 +6,6 @@ const widgetUrl = url.replace(/\/testcafe$/, "/testcafe-widget");
 fixture`${title}`.page`${url}`;
 
 const jsonWithErrors = {
-  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
