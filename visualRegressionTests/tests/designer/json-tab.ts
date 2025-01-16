@@ -86,7 +86,6 @@ test("JSON Ace editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
     const json = {
-      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
