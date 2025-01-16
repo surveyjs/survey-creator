@@ -6,6 +6,7 @@ const widgetUrl = url.replace(/\/testcafe$/, "/testcafe-widget");
 fixture`${title}`.page`${url}`;
 
 const jsonWithErrors = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -85,6 +86,7 @@ test("JSON Ace editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
     const json = {
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
