@@ -1160,7 +1160,7 @@ export class PropertyGridModel {
   }
   private onValidateQuestion(options: any) {
     var q = options.question;
-    if (!q || !q.property) return;
+    if (!q || !q.property || options.errors.length > 0) return;
     options.error = this.validateQuestionValue(this.obj, q, q.property, options.value);
   }
   private onValueChanging(options: any) {
@@ -1204,7 +1204,7 @@ export class PropertyGridModel {
       this.classNameValue !== options.value
     ) {
       this.setObj(this.obj);
-      if(this.onSetNewObjectCallback) {
+      if (this.onSetNewObjectCallback) {
         this.onSetNewObjectCallback();
       }
       if (!!this.survey) {

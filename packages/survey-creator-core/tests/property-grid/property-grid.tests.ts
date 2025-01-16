@@ -57,16 +57,13 @@ import { CreatorTester } from "../creator-tester";
 import { QuestionButtonGroupModel } from "survey-core";
 
 test("Check property grid survey options", () => {
-  const oldValue = Serializer.findProperty(
-    "survey",
-    "showProgressBar"
-  ).defaultValue;
-  Serializer.findProperty("survey", "showProgressBar").defaultValue = "top";
+  const oldValue = Serializer.findProperty("survey", "progressBarLocation").defaultValue;
+  Serializer.findProperty("survey", "progressBarLocation").defaultValue = "aboveheader";
   var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
   expect(propertyGrid.survey.showNavigationButtons).toEqual(false);
-  expect(propertyGrid.survey.showProgressBar).toEqual("off");
-  Serializer.findProperty("survey", "showProgressBar").defaultValue = oldValue;
+  expect(propertyGrid.survey.progressBarLocation).toEqual("auto");
+  Serializer.findProperty("survey", "progressBarLocation").defaultValue = oldValue;
 });
 
 test("Create survey with editingObj", () => {
