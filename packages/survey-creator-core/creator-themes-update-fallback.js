@@ -5,7 +5,7 @@ const themeSourcePath = "./src/themes/predefined-themes/";
 const defaultLightPaletteSourcePath = "default/light.css";
 
 const regularExpression = /(?<var1>--\w*(?:-\w*)*)\s?:\s?(?<var2>.*[^;]);/gi;
-const cssVariableFallbackRegExp = /var\((?<variable>--\w*(-+\w*)*)\,\s*(?<fallback>((?!var\().)*)\)/gi
+const cssVariableFallbackRegExp = /var\((?<variable>--\w*(?:-\w+)*)\,\s*(?<fallback>((?!var\().)*)\)/gi
 const cssVariableWithOutFallbackRegExp = /var\((?<variable>--\w*(?:-\w*)*)\)/gi;
 const newLineRegExp = /\r?\n/gi;
 
