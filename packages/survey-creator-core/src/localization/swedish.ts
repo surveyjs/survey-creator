@@ -386,7 +386,8 @@ export let svStrings = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Beskrivning av undersökningen"
+      description: "Beskrivning av undersökningen",
+      readOnly: "Gör undersökningen skrivskyddad"
     },
     page: {
       name: "Sidans namn",
@@ -609,7 +610,6 @@ export let svStrings = {
     simulator: "Välj enhetstyp",
     landscapeOrientation: "Växla till liggande orientering",
     portraitOrientation: "Växla till stående orientering",
-    mode: "Läge (redigera/läsa enbart)",
     clearInvisibleValues: "Rensa osynliga värden",
     cookieName: "Kaknamn (för att inaktivera kör enkäten två gånger lokalt)",
     partialSendEnabled: "Skicka enkät resultatet till nästa sida",
@@ -1434,7 +1434,7 @@ export let svStrings = {
     },
     // survey templates
     survey: {
-      mode: "Välj mellan: \"Redigerbar\" - gör det möjligt för respondenterna att fylla i din undersökning; \"Skrivskyddad\" - inaktiverar formulärredigering.",
+      readOnly: "Välj om du vill hindra respondenterna från att fylla i din undersökning.",
       progressBarLocation: "Ställer in platsen för förloppsindikatorn. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
     },
     matrixdropdowncolumn: {
@@ -3164,3 +3164,5 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // progressBarLocation.belowheader: "Below the header" => "Nedanför sidhuvudet"
 // progressBarLocation.off: "Hidden" => "Dold"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Ställer in platsen för förloppsindikatorn. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
+// survey.readOnly: "Make the survey read-only" => "Gör undersökningen skrivskyddad"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Välj om du vill hindra respondenterna från att fylla i din undersökning."

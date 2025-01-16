@@ -386,7 +386,8 @@ export var arStrings = {
     // survey templates
     survey: {
       title: "عنوان",
-      description: "وصف المسح"
+      description: "وصف المسح",
+      readOnly: "جعل الاستطلاع للقراءة فقط"
     },
     page: {
       name: "اسم الصفحة",
@@ -609,7 +610,6 @@ export var arStrings = {
     simulator: "Choose device",
     landscapeOrientation: "Landscape",
     portraitOrientation: "Portrait",
-    mode: "النمط (التعديل، القرائة فقط)",
     clearInvisibleValues: "إمسح القيم الغير مرئية",
     cookieName: "أدخل إسم ملف تعريف الإرتباط (لتعطيل المشاركة بالإستبيان أكثر من مرة)",
     partialSendEnabled: "إرسال نتائج الإستبيان على الصفحة التالية",
@@ -1434,7 +1434,7 @@ export var arStrings = {
     },
     // survey templates
     survey: {
-      mode: "اختر بين: \"قابل للتحرير\" - يمكن المستجيبين من ملء الاستبيان الخاص بك ؛ \"للقراءة فقط\" - تعطيل تحرير النموذج.",
+      readOnly: "حدد ما إذا كنت تريد منع المستجيبين من ملء الاستطلاع الخاص بك.",
       progressBarLocation: "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
     },
     matrixdropdowncolumn: {
@@ -2904,3 +2904,5 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // progressBarLocation.belowheader: "Below the header" => "أسفل العنوان"
 // progressBarLocation.off: "Hidden" => "مخفي"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
+// survey.readOnly: "Make the survey read-only" => "جعل الاستطلاع للقراءة فقط"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "حدد ما إذا كنت تريد منع المستجيبين من ملء الاستطلاع الخاص بك."

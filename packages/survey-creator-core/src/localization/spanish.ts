@@ -386,7 +386,8 @@ var spanishTranslation = {
     // survey templates
     survey: {
       title: "Título",
-      description: "Descripción de la encuesta"
+      description: "Descripción de la encuesta",
+      readOnly: "Hacer que la encuesta sea de solo lectura"
     },
     page: {
       name: "Nombre de la página",
@@ -609,7 +610,6 @@ var spanishTranslation = {
     simulator: "Elige dispositivo",
     landscapeOrientation: "Orientación horizontal ",
     portraitOrientation: "Cambiar a orientatión retrato",
-    mode: "Modo (editar / leer solamente)",
     clearInvisibleValues: "Claros valores invisibles",
     cookieName: "Nombre de la cookie (para deshabilitar la encuesta de ejecución dos veces localmente)",
     partialSendEnabled: "Enviar resultados de encuestas en la página Siguiente",
@@ -1434,7 +1434,7 @@ var spanishTranslation = {
     },
     // survey templates
     survey: {
-      mode: "Elija entre: \"Editable\": permite a los encuestados completar su encuesta; \"Solo lectura\": deshabilita la edición de formularios.",
+      readOnly: "Seleccione si desea evitar que los encuestados completen su encuesta.",
       progressBarLocation: "Establece la ubicación de la barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta."
     },
     matrixdropdowncolumn: {
@@ -2766,3 +2766,5 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // progressBarLocation.belowheader: "Below the header" => "Debajo del encabezado"
 // progressBarLocation.off: "Hidden" => "Escondido"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Establece la ubicación de la barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta."
+// survey.readOnly: "Make the survey read-only" => "Hacer que la encuesta sea de solo lectura"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Seleccione si desea evitar que los encuestados completen su encuesta."

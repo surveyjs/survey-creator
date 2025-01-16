@@ -386,7 +386,8 @@ var persianStrings = {
     // survey templates
     survey: {
       title: "عنوان",
-      description: "توضیحات نظرسنجی"
+      description: "توضیحات نظرسنجی",
+      readOnly: "نظرسنجی را فقط خواندنی کنید"
     },
     page: {
       name: "نام صفحه",
@@ -609,7 +610,6 @@ var persianStrings = {
     simulator: "انتخاب دستگاه",
     landscapeOrientation: "افقی",
     portraitOrientation: "تغییر جهت به جهت تصویر",
-    mode: "حالت (ویرایش/خواندن)",
     clearInvisibleValues: "پاکسازی مقادیر پنهان",
     cookieName: "نام کوکی (به منظور جلوگیری از اجرای دوباره نظرسنجی)",
     partialSendEnabled: "ارسال نتایج نظرسنجی در صفحه بعدی",
@@ -1434,7 +1434,7 @@ var persianStrings = {
     },
     // survey templates
     survey: {
-      mode: "انتخاب بین: \"قابل ویرایش\" - پاسخ دهندگان را قادر می سازد تا نظرسنجی خود را پر کنند. \"فقط خواندنی\" - ویرایش فرم را غیرفعال می کند.",
+      readOnly: "اگر می خواهید از پر کردن نظرسنجی پاسخ دهندگان جلوگیری کنید، انتخاب کنید.",
       progressBarLocation: "مکان نوار پیشرفت را تنظیم می کند. مقدار \"خودکار\" نوار پیشرفت را در بالا یا پایین سربرگ نظرسنجی نشان می دهد."
     },
     matrixdropdowncolumn: {
@@ -2945,3 +2945,5 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // progressBarLocation.belowheader: "Below the header" => "در زیر سرصفحه"
 // progressBarLocation.off: "Hidden" => "پنهان"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "مکان نوار پیشرفت را تنظیم می کند. مقدار \"خودکار\" نوار پیشرفت را در بالا یا پایین سربرگ نظرسنجی نشان می دهد."
+// survey.readOnly: "Make the survey read-only" => "نظرسنجی را فقط خواندنی کنید"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "اگر می خواهید از پر کردن نظرسنجی پاسخ دهندگان جلوگیری کنید، انتخاب کنید."

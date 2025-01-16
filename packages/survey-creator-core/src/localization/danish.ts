@@ -386,7 +386,8 @@ export var danishStrings = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Beskrivelse af undersøgelsen"
+      description: "Beskrivelse af undersøgelsen",
+      readOnly: "Gør undersøgelsen skrivebeskyttet"
     },
     page: {
       name: "Sidenavn",
@@ -609,7 +610,6 @@ export var danishStrings = {
     simulator: "Vælg enhedstype",
     landscapeOrientation: "Skift til liggende retning",
     portraitOrientation: "Skift til stående format",
-    mode: "Mode (rediger/skrivebeskyttet)",
     clearInvisibleValues: "Fjern usynlige værdier",
     cookieName: "Cookienavn (for at undgå at afvikle undersøgelsen to gange lokalt)",
     partialSendEnabled: "Send undersøgelsesresultatet ved næste side",
@@ -1434,7 +1434,7 @@ export var danishStrings = {
     },
     // survey templates
     survey: {
-      mode: "Vælg mellem: \"Redigerbar\" - gør det muligt for respondenter at udfylde din undersøgelse; \"Skrivebeskyttet\" - deaktiverer formularredigering.",
+      readOnly: "Vælg, hvis du vil forhindre respondenter i at udfylde din undersøgelse.",
       progressBarLocation: "Angiver placeringen af statuslinjen. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
     },
     matrixdropdowncolumn: {
@@ -3174,3 +3174,5 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // progressBarLocation.belowheader: "Below the header" => "Under overskriften"
 // progressBarLocation.off: "Hidden" => "Skjult"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Angiver placeringen af statuslinjen. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
+// survey.readOnly: "Make the survey read-only" => "Gør undersøgelsen skrivebeskyttet"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Vælg, hvis du vil forhindre respondenter i at udfylde din undersøgelse."

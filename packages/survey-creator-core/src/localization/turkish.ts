@@ -386,7 +386,8 @@ export var turkishStrings = {
     // survey templates
     survey: {
       title: "Başlık",
-      description: "Anket açıklaması"
+      description: "Anket açıklaması",
+      readOnly: "Anketi salt okunur hale getirin"
     },
     page: {
       name: "Sayfa adı",
@@ -609,7 +610,6 @@ export var turkishStrings = {
     simulator: "Cihaz seçin",
     landscapeOrientation: "Yatay",
     portraitOrientation: "Dikey yöne geçme",
-    mode: "Mod (düzenlebilir/düzenlenemez)",
     clearInvisibleValues: "Görünmez değerleri sil",
     cookieName: "Çerez adı (anketi yerel olarak iki kez devre dışı bırakmak için)",
     partialSendEnabled: "Bir sonraki sayfada anket sonuçlarını gönder",
@@ -1434,7 +1434,7 @@ export var turkishStrings = {
     },
     // survey templates
     survey: {
-      mode: "Şunlar arasından seçim yapın: \"Düzenlenebilir\" - yanıtlayanların anketinizi doldurmasını sağlar; \"Salt okunur\" - form düzenlemeyi devre dışı bırakır.",
+      readOnly: "Yanıtlayanların anketinizi doldurmasını engellemek isteyip istemediğinizi seçin.",
       progressBarLocation: "İlerleme çubuğunun konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
     },
     matrixdropdowncolumn: {
@@ -2985,3 +2985,5 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // progressBarLocation.belowheader: "Below the header" => "Başlığın altında"
 // progressBarLocation.off: "Hidden" => "Gizli"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "İlerleme çubuğunun konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
+// survey.readOnly: "Make the survey read-only" => "Anketi salt okunur hale getirin"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Yanıtlayanların anketinizi doldurmasını engellemek isteyip istemediğinizi seçin."

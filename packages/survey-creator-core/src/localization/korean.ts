@@ -386,7 +386,8 @@ export var koreanStrings = {
     // survey templates
     survey: {
       title: "타이틀",
-      description: "설문조사 설명"
+      description: "설문조사 설명",
+      readOnly: "설문조사를 읽기 전용으로 설정"
     },
     page: {
       name: "페이지 이름",
@@ -609,7 +610,6 @@ export var koreanStrings = {
     simulator: "장치 유형 선택",
     landscapeOrientation: "가로 방향으로 전환",
     portraitOrientation: "세로 방향으로 전환",
-    mode: "모드(편집/읽기전용)",
     clearInvisibleValues: "보이지 않는 값 지우기",
     cookieName: "쿠키 이름(로컬에서 설문 조사를 두 번 사용하지 않도록 설정)",
     partialSendEnabled: "다음 페이지에서 설문 조사 결과 보내기",
@@ -1434,7 +1434,7 @@ export var koreanStrings = {
     },
     // survey templates
     survey: {
-      mode: "다음 중 하나를 선택합니다. \"수정 가능\" - 응답자가 설문조사를 작성할 수 있습니다. \"읽기 전용\" - 양식 편집을 비활성화합니다.",
+      readOnly: "응답자가 설문조사를 작성하지 못하도록 하려면 선택합니다.",
       progressBarLocation: "진행률 표시줄의 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
     },
     matrixdropdowncolumn: {
@@ -3194,3 +3194,5 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // progressBarLocation.belowheader: "Below the header" => "헤더 아래"
 // progressBarLocation.off: "Hidden" => "숨겨진"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "진행률 표시줄의 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
+// survey.readOnly: "Make the survey read-only" => "설문조사를 읽기 전용으로 설정"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "응답자가 설문조사를 작성하지 못하도록 하려면 선택합니다."

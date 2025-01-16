@@ -386,7 +386,8 @@ var frenchTranslation = {
     // survey templates
     survey: {
       title: "Titre du questionnaire",
-      description: "Description de l’enquête"
+      description: "Description de l’enquête",
+      readOnly: "Rendre l’enquête en lecture seule"
     },
     page: {
       name: "Nom de la page",
@@ -609,7 +610,6 @@ var frenchTranslation = {
     simulator: "Choisir l'appareil",
     landscapeOrientation: "Paysage",
     portraitOrientation: "Passer en orientation portrait",
-    mode: "Mode (édition/lecture seule)",
     clearInvisibleValues: "Effacer les valeurs invisibles",
     cookieName: "Nom du cookie (pour empêcher de compléter 2 fois le sondage localement)",
     partialSendEnabled: "Envoyer les résultats au changement de page",
@@ -1434,7 +1434,7 @@ var frenchTranslation = {
     },
     // survey templates
     survey: {
-      mode: "Choisissez entre : « Modifiable » - permet aux personnes interrogées de remplir votre sondage ; « Lecture seule » - désactive l’édition de formulaire.",
+      readOnly: "Sélectionnez cette option si vous souhaitez empêcher les personnes interrogées de remplir votre sondage.",
       progressBarLocation: "Définit l’emplacement de la barre de progression. La valeur « Auto » affiche la barre de progression au-dessus ou en dessous de l’en-tête de l’enquête."
     },
     matrixdropdowncolumn: {
@@ -3049,3 +3049,5 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // progressBarLocation.belowheader: "Below the header" => "Sous l’en-tête"
 // progressBarLocation.off: "Hidden" => "Caché"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Définit l’emplacement de la barre de progression. La valeur « Auto » affiche la barre de progression au-dessus ou en dessous de l’en-tête de l’enquête."
+// survey.readOnly: "Make the survey read-only" => "Rendre l’enquête en lecture seule"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Sélectionnez cette option si vous souhaitez empêcher les personnes interrogées de remplir votre sondage."

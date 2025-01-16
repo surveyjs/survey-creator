@@ -386,7 +386,8 @@ export var huStrings = {
     // survey templates
     survey: {
       title: "Cím",
-      description: "A felmérés leírása"
+      description: "A felmérés leírása",
+      readOnly: "A felmérés írásvédetté tétele"
     },
     page: {
       name: "Oldal neve",
@@ -609,7 +610,6 @@ export var huStrings = {
     simulator: "Válassza ki az eszköz típusát",
     landscapeOrientation: "Váltás fekvő tájolásra",
     portraitOrientation: "Váltás álló tájolásra",
-    mode: "Mód (szerkesztés/megtekintés)",
     clearInvisibleValues: "Nemlátható értékek törlése",
     cookieName: "Süti megnevezése (a kérdőív csak egyszer kitölthető)",
     partialSendEnabled: "Kérdőív értékének küldése a következő lapra lépéskor",
@@ -1434,7 +1434,7 @@ export var huStrings = {
     },
     // survey templates
     survey: {
-      mode: "Válasszon a következők közül: \"Szerkeszthető\" - lehetővé teszi a válaszadók számára a felmérés kitöltését; \"Csak olvasható\" - letiltja az űrlapszerkesztést.",
+      readOnly: "Válassza ki, ha meg szeretné akadályozni, hogy a válaszadók kitöltsék a felmérést.",
       progressBarLocation: "Beállítja a folyamatjelző sáv helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt."
     },
     matrixdropdowncolumn: {
@@ -3141,3 +3141,5 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // progressBarLocation.belowheader: "Below the header" => "A fejléc alatt"
 // progressBarLocation.off: "Hidden" => "Rejtett"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Beállítja a folyamatjelző sáv helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt."
+// survey.readOnly: "Make the survey read-only" => "A felmérés írásvédetté tétele"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Válassza ki, ha meg szeretné akadályozni, hogy a válaszadók kitöltsék a felmérést."

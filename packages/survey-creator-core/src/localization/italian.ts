@@ -386,7 +386,8 @@ var italianTranslation = {
     // survey templates
     survey: {
       title: "Titolo",
-      description: "Descrizione dell'indagine"
+      description: "Descrizione dell'indagine",
+      readOnly: "Rendere l'indagine di sola lettura"
     },
     page: {
       name: "Nome della pagina",
@@ -609,7 +610,6 @@ var italianTranslation = {
     simulator: "Scegli il dispositivo",
     landscapeOrientation: "Orizzontale",
     portraitOrientation: "Verticale",
-    mode: "Modalità (editabile/sola lettura)",
     clearInvisibleValues: "Cancella i valori invisibili",
     cookieName: "Nome cookie (per disabilitare esegui il sondaggio due volte in locale)",
     partialSendEnabled: "Invia i risultati del sondaggio alla pagina successiva",
@@ -1434,7 +1434,7 @@ var italianTranslation = {
     },
     // survey templates
     survey: {
-      mode: "Scegli tra: \"Modificabile\" - consente ai rispondenti di compilare la tua indagine; \"Sola lettura\": disabilita la modifica del modulo.",
+      readOnly: "Seleziona se vuoi impedire ai rispondenti di compilare la tua indagine.",
       progressBarLocation: "Imposta la posizione della barra di avanzamento. Il valore \"Auto\" visualizza la barra di avanzamento sopra o sotto l'intestazione del rilevamento."
     },
     matrixdropdowncolumn: {
@@ -2751,3 +2751,5 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // progressBarLocation.belowheader: "Below the header" => "Sotto l'intestazione"
 // progressBarLocation.off: "Hidden" => "Nascosto"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Imposta la posizione della barra di avanzamento. Il valore \"Auto\" visualizza la barra di avanzamento sopra o sotto l'intestazione del rilevamento."
+// survey.readOnly: "Make the survey read-only" => "Rendere l'indagine di sola lettura"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Seleziona se vuoi impedire ai rispondenti di compilare la tua indagine."

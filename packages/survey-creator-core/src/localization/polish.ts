@@ -386,7 +386,8 @@ var polishStrings = {
     // survey templates
     survey: {
       title: "Tytuł",
-      description: "Opis ankiety"
+      description: "Opis ankiety",
+      readOnly: "Ustawianie ankiety jako tylko do odczytu"
     },
     page: {
       name: "Nazwa strony",
@@ -609,7 +610,6 @@ var polishStrings = {
     simulator: "Wybierz typ urządzenia",
     landscapeOrientation: "Przełączanie na orientację poziomą",
     portraitOrientation: "Przełączanie na orientację pionową",
-    mode: "Tryb (edycja/podgląd)",
     clearInvisibleValues: "Usuń niewidoczne odpowiedzi",
     cookieName: "Cookie name (to disable run survey two times locally)",
     partialSendEnabled: "Send survey results on page next",
@@ -1434,7 +1434,7 @@ var polishStrings = {
     },
     // survey templates
     survey: {
-      mode: "Wybierz pomiędzy: \"Edytowalne\" - umożliwia respondentom wypełnienie ankiety; \"Tylko do odczytu\" - wyłącza edycję formularza.",
+      readOnly: "Wybierz, czy chcesz uniemożliwić respondentom wypełnianie ankiety.",
       progressBarLocation: "Ustawia położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu powyżej lub poniżej nagłówka ankiety."
     },
     matrixdropdowncolumn: {
@@ -3255,3 +3255,5 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // progressBarLocation.belowheader: "Below the header" => "Pod nagłówkiem"
 // progressBarLocation.off: "Hidden" => "Ukryty"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Ustawia położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu powyżej lub poniżej nagłówka ankiety."
+// survey.readOnly: "Make the survey read-only" => "Ustawianie ankiety jako tylko do odczytu"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Wybierz, czy chcesz uniemożliwić respondentom wypełnianie ankiety."

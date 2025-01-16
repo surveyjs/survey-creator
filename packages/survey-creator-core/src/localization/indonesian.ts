@@ -386,7 +386,8 @@ export var indonesianStrings = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Deskripsi survei"
+      description: "Deskripsi survei",
+      readOnly: "Membuat survei hanya baca"
     },
     page: {
       name: "Nama halaman",
@@ -609,7 +610,6 @@ export var indonesianStrings = {
     simulator: "Pilih jenis perangkat",
     landscapeOrientation: "Beralih ke orientasi lanskap",
     portraitOrientation: "Beralih ke orientasi potret",
-    mode: "Mode (ubah/baca saja)",
     clearInvisibleValues: "Bersihkan nilai tak terlihat",
     cookieName: "Nama cookie (untuk menonaktifkan menjalankan survei dua kali secara lokal)",
     partialSendEnabled: "Kirim hasil survei pada halaman selanjutnya",
@@ -1434,7 +1434,7 @@ export var indonesianStrings = {
     },
     // survey templates
     survey: {
-      mode: "Pilih antara: \"Dapat Diedit\" - memungkinkan responden mengisi survei Anda; \"Read-only\" - menonaktifkan pengeditan formulir.",
+      readOnly: "Pilih jika Anda ingin mencegah responden mengisi survei Anda.",
       progressBarLocation: "Mengatur lokasi bilah progres. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
     },
     matrixdropdowncolumn: {
@@ -3144,3 +3144,5 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // progressBarLocation.belowheader: "Below the header" => "Di bawah header"
 // progressBarLocation.off: "Hidden" => "Sembunyi"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Mengatur lokasi bilah progres. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
+// survey.readOnly: "Make the survey read-only" => "Membuat survei hanya baca"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Pilih jika Anda ingin mencegah responden mengisi survei Anda."

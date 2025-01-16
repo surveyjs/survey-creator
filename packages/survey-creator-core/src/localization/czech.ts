@@ -386,7 +386,8 @@ export var czStrings = {
     // survey templates
     survey: {
       title: "Titul",
-      description: "Popis průzkumu"
+      description: "Popis průzkumu",
+      readOnly: "Nastavení průzkumu pouze ke čtení"
     },
     page: {
       name: "Název stránky",
@@ -609,7 +610,6 @@ export var czStrings = {
     simulator: "Vybrat zařízení",
     landscapeOrientation: "Na šířku",
     portraitOrientation: "Přepnout orientaci na výšku",
-    mode: "Režim (pouze pro úpravy/čtení)",
     clearInvisibleValues: "Vymazat neviditelné hodnoty",
     cookieName: "Název souboru cookie (pro zakázání dvojího lokálního spuštění průzkumu)",
     partialSendEnabled: "Odeslání výsledků průzkumu na další straně",
@@ -1434,7 +1434,7 @@ export var czStrings = {
     },
     // survey templates
     survey: {
-      mode: "Vyberte si mezi: \"Upravitelné\" - umožňuje respondentům vyplnit váš průzkum; \"Read-only\" - zakáže editaci formulářů.",
+      readOnly: "Vyberte, zda chcete respondentům zabránit ve vyplnění průzkumu.",
       progressBarLocation: "Nastaví umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu."
     },
     matrixdropdowncolumn: {
@@ -2567,3 +2567,5 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // progressBarLocation.belowheader: "Below the header" => "Pod záhlavím"
 // progressBarLocation.off: "Hidden" => "Schovaný"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Nastaví umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu."
+// survey.readOnly: "Make the survey read-only" => "Nastavení průzkumu pouze ke čtení"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Vyberte, zda chcete respondentům zabránit ve vyplnění průzkumu."

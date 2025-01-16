@@ -386,7 +386,8 @@ export const roStrings = {
     // survey templates
     survey: {
       title: "Titlul chestionarului",
-      description: "Descrierea chestionarului"
+      description: "Descrierea chestionarului",
+      readOnly: "Faceți chestionarul doar în citire"
     },
     page: {
       name: "Numele paginii",
@@ -609,7 +610,6 @@ export const roStrings = {
     simulator: "Selectați tipul de dispozitiv",
     landscapeOrientation: "Comutați la orientarea peisaj",
     portraitOrientation: "Comutați la orientarea portret",
-    mode: "Modul de afișare a chestionarului",
     clearInvisibleValues: "Ștergeți valorile întrebărilor ascunse",
     cookieName: "Limitează la un singur răspuns",
     partialSendEnabled: "Auto-salvați progresul chestionarului la schimbarea paginii",
@@ -1434,7 +1434,7 @@ export const roStrings = {
     },
     // survey templates
     survey: {
-      mode: "Alegeți între: „Editabil” - permite respondenților să completeze chestionarul dvs.; „Doar citire” - dezactivează editarea formularului.",
+      readOnly: "Selectați dacă doriți să împiedicați respondenții să completeze chestionarul.",
       progressBarLocation: "Setează locația barei de progres. Valoarea \"Auto\" afișează bara de progres deasupra sau dedesubtul antetului sondajului."
     },
     matrixdropdowncolumn: {
@@ -1930,3 +1930,5 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // progressBarLocation.belowheader: "Below the header" => "Sub antet"
 // progressBarLocation.off: "Hidden" => "Ascuns"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Setează locația barei de progres. Valoarea \"Auto\" afișează bara de progres deasupra sau dedesubtul antetului sondajului."
+// survey.readOnly: "Make the survey read-only" => "Faceți chestionarul doar în citire"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Selectați dacă doriți să împiedicați respondenții să completeze chestionarul."

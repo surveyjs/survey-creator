@@ -386,7 +386,8 @@ export var ruStrings = {
     // survey templates
     survey: {
       title: "Титул",
-      description: "Описание опроса"
+      description: "Описание опроса",
+      readOnly: "Сделайте опрос доступным только для чтения"
     },
     page: {
       name: "Название страницы",
@@ -609,7 +610,6 @@ export var ruStrings = {
     simulator: "Выберите устройство",
     landscapeOrientation: "Альбомная",
     portraitOrientation: "Переключение в книжную ориентацию",
-    mode: "Режим (редактирование/просмотр)",
     clearInvisibleValues: "Очистить невидимые значения",
     cookieName: "Имя Cookie (отключить повторное прохождение опроса локально)",
     partialSendEnabled: "Показать результаты опроса на странице рядом",
@@ -1434,7 +1434,7 @@ export var ruStrings = {
     },
     // survey templates
     survey: {
-      mode: "Выберите один из следующих вариантов: «Редактируемый» - позволяет респондентам заполнять Ваш опрос; \"Только для чтения\" - отключает редактирование формы.",
+      readOnly: "Выберите, хотите ли вы запретить респондентам заполнять ваш опрос.",
       progressBarLocation: "Задает расположение индикатора выполнения. Значение \"Auto\" отображает индикатор выполнения над или под заголовком опроса."
     },
     matrixdropdowncolumn: {
@@ -3045,3 +3045,5 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // progressBarLocation.belowheader: "Below the header" => "Под заголовком"
 // progressBarLocation.off: "Hidden" => "Скрытый"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Задает расположение индикатора выполнения. Значение \"Auto\" отображает индикатор выполнения над или под заголовком опроса."
+// survey.readOnly: "Make the survey read-only" => "Сделайте опрос доступным только для чтения"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Выберите, хотите ли вы запретить респондентам заполнять ваш опрос."

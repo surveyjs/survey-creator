@@ -386,7 +386,8 @@ export var jaStrings = {
     // survey templates
     survey: {
       title: "タイトル",
-      description: "調査内容"
+      description: "調査内容",
+      readOnly: "調査を読み取り専用にする"
     },
     page: {
       name: "ページ名",
@@ -609,7 +610,6 @@ export var jaStrings = {
     simulator: "デバイスを選択する",
     landscapeOrientation: "横向き",
     portraitOrientation: "縦向きに切り替える",
-    mode: "モード（編集/読み取り専用）",
     clearInvisibleValues: "非表示の値をクリアする",
     cookieName: "Cookie名（ローカルで2回アンケートを実行しないようにするため）",
     partialSendEnabled: "次のページにアンケート結果を送信する",
@@ -1434,7 +1434,7 @@ export var jaStrings = {
     },
     // survey templates
     survey: {
-      mode: "次から選択します。 「編集可能」 - 回答者がアンケートに回答できるようにします。「読み取り専用」 - フォームの編集を無効にします。",
+      readOnly: "回答者がアンケートに回答できないようにする場合に選択します。",
       progressBarLocation: "プログレスバーの位置を設定します。「自動」の値は、調査ヘッダーの上または下に進行状況バーを表示します。"
     },
     matrixdropdowncolumn: {
@@ -2989,3 +2989,5 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // progressBarLocation.belowheader: "Below the header" => "ヘッダーの下"
 // progressBarLocation.off: "Hidden" => "隠れた"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "プログレスバーの位置を設定します。「自動」の値は、調査ヘッダーの上または下に進行状況バーを表示します。"
+// survey.readOnly: "Make the survey read-only" => "調査を読み取り専用にする"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "回答者がアンケートに回答できないようにする場合に選択します。"

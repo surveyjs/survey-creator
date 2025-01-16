@@ -386,7 +386,8 @@ export var fiStrings = {
     // survey templates
     survey: {
       title: "Kyselyn otsikko",
-      description: "Kyselyn kuvaus"
+      description: "Kyselyn kuvaus",
+      readOnly: "Tee kyselystä vain luku -muotoinen"
     },
     page: {
       name: "Sivun nimi",
@@ -609,7 +610,6 @@ export var fiStrings = {
     simulator: "Valitse laite",
     landscapeOrientation: "Vaakasuunta",
     portraitOrientation: "Pystysuuntaan vaihtaminen",
-    mode: "Tila (vain muokkaus / vain luku)",
     clearInvisibleValues: "Tyhjennä näkymättömät arvot",
     cookieName: "Evästeen nimi (poistaaksesi kysely käytöstä suorita kysely kaksi kertaa paikallisesti)",
     partialSendEnabled: "Lähetä kyselyn tulokset seuraavalla sivulla",
@@ -1434,7 +1434,7 @@ export var fiStrings = {
     },
     // survey templates
     survey: {
-      mode: "Valitse jompikumpi seuraavista: \"Muokattavissa\" - vastaajat voivat täyttää kyselysi; \"Vain luku\" - poistaa lomakkeen muokkauksen käytöstä.",
+      readOnly: "Valitse tämä, jos haluat estää vastaajia vastaamasta kyselyyn.",
       progressBarLocation: "Määrittää edistymispalkin sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella."
     },
     matrixdropdowncolumn: {
@@ -2962,3 +2962,5 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // progressBarLocation.belowheader: "Below the header" => "Otsikon alapuolella"
 // progressBarLocation.off: "Hidden" => "Piilevä"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Määrittää edistymispalkin sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella."
+// survey.readOnly: "Make the survey read-only" => "Tee kyselystä vain luku -muotoinen"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Valitse tämä, jos haluat estää vastaajia vastaamasta kyselyyn."

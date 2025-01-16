@@ -386,7 +386,8 @@ export var mnStrings = {
     // survey templates
     survey: {
       title: "Нүүр",
-      description: "Судалгааны тодорхойлолт"
+      description: "Судалгааны тодорхойлолт",
+      readOnly: "Судалгааг зөвхөн унших хэлбэртэй болго"
     },
     page: {
       name: "Хуудасны нэр",
@@ -609,7 +610,6 @@ export var mnStrings = {
     simulator: "Төхөөрөмжийн төрөл сонгоно уу",
     landscapeOrientation: "Хэвтээ байрлалд шилжих",
     portraitOrientation: "Босоо байрлалд шилжих",
-    mode: "Засах боломжтой эсвэл зөвхөн унших",
     clearInvisibleValues: "Харагдахгүй утгыг цэвэрлэх",
     cookieName: "Cookie name",
     partialSendEnabled: "Хэсэгчилсэн санал асуулгын явцыг хадгалах",
@@ -1434,7 +1434,7 @@ export var mnStrings = {
     },
     // survey templates
     survey: {
-      mode: "Аль нэгийг нь сонгох: \"Editable\" - таны судалгааг бөглөх боломжийг санал асуулгад оролцогчдын хувьд олгодог; \"Зөвхөн уншлага\" - хөгжлийн бэрхшээлтэй хүмүүс редакци үүсгэнэ.",
+      readOnly: "Хэрэв та хариулагчдыг таны судалгааг бөглөхөд саад болохыг хүсвэл сонго.",
       progressBarLocation: "Явцын барын байршлыг тогтооно. \"Auto\" value нь судалгааны гарчгийн дээр эсвэл доод тал дахь явцын барыг харуулна."
     },
     matrixdropdowncolumn: {
@@ -2645,3 +2645,5 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // progressBarLocation.belowheader: "Below the header" => "Гарчгийн доод талд"
 // progressBarLocation.off: "Hidden" => "Нуугдмал"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Явцын барын байршлыг тогтооно. \"Auto\" value нь судалгааны гарчгийн дээр эсвэл доод тал дахь явцын барыг харуулна."
+// survey.readOnly: "Make the survey read-only" => "Судалгааг зөвхөн унших хэлбэртэй болго"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Хэрэв та хариулагчдыг таны судалгааг бөглөхөд саад болохыг хүсвэл сонго."

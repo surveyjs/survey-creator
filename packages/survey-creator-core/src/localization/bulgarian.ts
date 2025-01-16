@@ -386,7 +386,8 @@ export var bgStrings = {
     // survey templates
     survey: {
       title: "Заглавие",
-      description: "Описание на проучването"
+      description: "Описание на проучването",
+      readOnly: "Направете проучването само за четене"
     },
     page: {
       name: "Име на страница",
@@ -609,7 +610,6 @@ export var bgStrings = {
     simulator: "Изберете тип устройство",
     landscapeOrientation: "Превключване към пейзажна ориентация",
     portraitOrientation: "Превключване към портретна ориентация",
-    mode: "Редактируемо или само за четене",
     clearInvisibleValues: "Изчистване на невидими стойности",
     cookieName: "Име на бисквитката",
     partialSendEnabled: "Запазване на частични резултати от анкетата в процес на изпълнение",
@@ -1434,7 +1434,7 @@ export var bgStrings = {
     },
     // survey templates
     survey: {
-      mode: "Изберете между: \"Редактируем\" - дава възможност на респондентите да попълнят анкетата Ви; \"Само за четене\" - забранява редактирането на формуляри.",
+      readOnly: "Изберете дали искате да попречите на респондентите да попълват анкетата ви.",
       progressBarLocation: "Задава местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването."
     },
     matrixdropdowncolumn: {
@@ -2553,3 +2553,5 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // progressBarLocation.belowheader: "Below the header" => "Под заглавката"
 // progressBarLocation.off: "Hidden" => "Скрит"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Задава местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването."
+// survey.readOnly: "Make the survey read-only" => "Направете проучването само за четене"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Изберете дали искате да попречите на респондентите да попълват анкетата ви."

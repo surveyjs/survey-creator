@@ -386,7 +386,8 @@ export const thStrings = {
     // survey templates
     survey: {
       title: "ชื่อแบบสำรวจ",
-      description: "คำอธิบายแบบสำรวจ"
+      description: "คำอธิบายแบบสำรวจ",
+      readOnly: "ทําให้แบบสํารวจเป็นแบบอ่านอย่างเดียว"
     },
     page: {
       name: "ชื่อหน้า",
@@ -609,7 +610,6 @@ export const thStrings = {
     simulator: "เลือกประเภทอุปกรณ์",
     landscapeOrientation: "เปลี่ยนเป็นแนวนอน",
     portraitOrientation: "เปลี่ยนเป็นแนวตั้ง",
-    mode: "โหมดการแสดงผลแบบสำรวจ",
     clearInvisibleValues: "ล้างค่าคำถามที่ซ่อนอยู่",
     cookieName: "จำกัดการตอบหนึ่งครั้ง",
     partialSendEnabled: "บันทึกความคืบหน้าแบบสำรวจอัตโนมัติเมื่อเปลี่ยนหน้า",
@@ -1434,7 +1434,7 @@ export const thStrings = {
     },
     // survey templates
     survey: {
-      mode: "เลือกจาก: \"แก้ไขได้\" - อนุญาตให้ผู้ตอบกรอกแบบสำรวจของคุณ; \"อ่านอย่างเดียว\" - ปิดการแก้ไขแบบฟอร์ม",
+      readOnly: "เลือกว่าคุณต้องการป้องกันไม่ให้ผู้ตอบแบบสอบถามกรอกแบบสํารวจหรือไม่",
       progressBarLocation: "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"
     },
     matrixdropdowncolumn: {
@@ -1930,3 +1930,5 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // progressBarLocation.belowheader: "Below the header" => "ด้านล่างส่วนหัว"
 // progressBarLocation.off: "Hidden" => "ซ่อน"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"
+// survey.readOnly: "Make the survey read-only" => "ทําให้แบบสํารวจเป็นแบบอ่านอย่างเดียว"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "เลือกว่าคุณต้องการป้องกันไม่ให้ผู้ตอบแบบสอบถามกรอกแบบสํารวจหรือไม่"

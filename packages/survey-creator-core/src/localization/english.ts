@@ -388,7 +388,8 @@ export var enStrings = {
     // survey templates
     survey: {
       title: "Survey title",
-      description: "Survey description"
+      description: "Survey description",
+      readOnly: "Make the survey read-only"
     },
     page: {
       name: "Page name",
@@ -611,7 +612,6 @@ export var enStrings = {
     simulator: "Select device type",
     landscapeOrientation: "Switch to landscape orientation",
     portraitOrientation: "Switch to portrait orientation",
-    mode: "Survey display mode",
     clearInvisibleValues: "Clear hidden question values",
     cookieName: "Limit to one response",
     partialSendEnabled: "Auto-save survey progress on page change",
@@ -1441,7 +1441,7 @@ export var enStrings = {
     },
     // survey templates
     survey: {
-      mode: "Choose between: \"Editable\" - enables respondents to fill out your survey; \"Read-only\" - disables form editing.",
+      readOnly: "Select if you want to prevent respondents from filling out your survey.",
       progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
     },
     matrixdropdowncolumn: {

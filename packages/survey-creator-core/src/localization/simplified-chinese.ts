@@ -386,7 +386,8 @@ var simplifiedChineseTranslation = {
     // survey templates
     survey: {
       title: "标题",
-      description: "调查说明"
+      description: "调查说明",
+      readOnly: "将调查设为只读"
     },
     page: {
       name: "页面名称",
@@ -609,7 +610,6 @@ var simplifiedChineseTranslation = {
     simulator: "选择设备类型",
     landscapeOrientation: "切换到横向",
     portraitOrientation: "切换到纵向",
-    mode: "模式 (编辑/只读)",
     clearInvisibleValues: "清除隐藏值",
     cookieName: "Cookie名，避免多次运行)",
     partialSendEnabled: "切换页时保存结果",
@@ -1434,7 +1434,7 @@ var simplifiedChineseTranslation = {
     },
     // survey templates
     survey: {
-      mode: "选择：“可编辑” - 使受访者能够填写您的调查;“只读” - 禁用表单编辑。",
+      readOnly: "选择是否要阻止受访者填写您的调查。",
       progressBarLocation: "设置进度条的位置。“自动”值在调查标题的上方或下方显示进度条。"
     },
     matrixdropdowncolumn: {
@@ -3131,3 +3131,5 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // progressBarLocation.belowheader: "Below the header" => "标题下方"
 // progressBarLocation.off: "Hidden" => "隐藏"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "设置进度条的位置。“自动”值在调查标题的上方或下方显示进度条。"
+// survey.readOnly: "Make the survey read-only" => "将调查设为只读"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "选择是否要阻止受访者填写您的调查。"

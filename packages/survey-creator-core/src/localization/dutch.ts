@@ -386,7 +386,8 @@ export var nlStrings = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Beschrijving van de enquête"
+      description: "Beschrijving van de enquête",
+      readOnly: "De enquête alleen-lezen maken"
     },
     page: {
       name: "Paginanaam",
@@ -609,7 +610,6 @@ export var nlStrings = {
     simulator: "Kies apparaat",
     landscapeOrientation: "Landschap",
     portraitOrientation: "Overschakelen naar staande stand",
-    mode: "Modus (bewerken/alleen lezen)",
     clearInvisibleValues: "Wis onzichtbare waarden",
     cookieName: "Cookienaam (zodat enquête slechts éénmalig wordt ingevuld)",
     partialSendEnabled: "Antwoorden opslaan bij pagina-overgang",
@@ -1434,7 +1434,7 @@ export var nlStrings = {
     },
     // survey templates
     survey: {
-      mode: "Kies tussen: \"Bewerkbaar\" - stelt respondenten in staat uw enquête in te vullen; \"Alleen-lezen\" - schakelt het bewerken van formulieren uit.",
+      readOnly: "Selecteer deze optie als u wilt voorkomen dat respondenten uw enquête invullen.",
       progressBarLocation: "Hiermee stelt u de locatie van de voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
     },
     matrixdropdowncolumn: {
@@ -2968,3 +2968,5 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // progressBarLocation.belowheader: "Below the header" => "Onder de kop"
 // progressBarLocation.off: "Hidden" => "Verborgen"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Hiermee stelt u de locatie van de voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
+// survey.readOnly: "Make the survey read-only" => "De enquête alleen-lezen maken"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Selecteer deze optie als u wilt voorkomen dat respondenten uw enquête invullen."

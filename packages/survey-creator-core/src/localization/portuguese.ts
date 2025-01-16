@@ -386,7 +386,8 @@ var portugueseTranslation = {
     // survey templates
     survey: {
       title: "Título",
-      description: "Descrição da pesquisa"
+      description: "Descrição da pesquisa",
+      readOnly: "Tornar a pesquisa somente leitura"
     },
     page: {
       name: "Nome da página",
@@ -609,7 +610,6 @@ var portugueseTranslation = {
     simulator: "Selecione o tipo de dispositivo",
     landscapeOrientation: "Alternar para orientação paisagem",
     portraitOrientation: "Altrar para orientação de moldura",
-    mode: "Modo (editável/somente leitura)",
     clearInvisibleValues: "Limpar valores invisíveis",
     cookieName: "Nome do cookie (para desativar rode a pesquisa duas vezes localmente)",
     partialSendEnabled: "Enviar resultado da pesquisa na página seguinte",
@@ -1434,7 +1434,7 @@ var portugueseTranslation = {
     },
     // survey templates
     survey: {
-      mode: "Escolha entre: \"Editável\" - permite que os respondentes preencham seu questionário; \"Somente leitura\" - desabilita a edição de formulários.",
+      readOnly: "Selecione se deseja impedir que os respondentes preencham seu questionário.",
       progressBarLocation: "Define a localização da barra de progresso. O valor \"Auto\" exibe a barra de progresso acima ou abaixo do cabeçalho da pesquisa."
     },
     matrixdropdowncolumn: {
@@ -2658,3 +2658,5 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // progressBarLocation.belowheader: "Below the header" => "Abaixo do cabeçalho"
 // progressBarLocation.off: "Hidden" => "Escondido"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Define a localização da barra de progresso. O valor \"Auto\" exibe a barra de progresso acima ou abaixo do cabeçalho da pesquisa."
+// survey.readOnly: "Make the survey read-only" => "Tornar a pesquisa somente leitura"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Selecione se deseja impedir que os respondentes preencham seu questionário."

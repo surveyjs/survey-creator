@@ -386,7 +386,8 @@ var traditionalChineseTranslation = {
     // survey templates
     survey: {
       title: "標題",
-      description: "調查說明"
+      description: "調查說明",
+      readOnly: "將調查設為唯讀"
     },
     page: {
       name: "頁面名稱",
@@ -609,7 +610,6 @@ var traditionalChineseTranslation = {
     simulator: "選擇設備類型",
     landscapeOrientation: "切換到橫向",
     portraitOrientation: "切換到縱向",
-    mode: "模式 (編輯/只讀)",
     clearInvisibleValues: "清除隱藏值",
     cookieName: "Cookie name (to disable run survey two times locally)",
     partialSendEnabled: "Send survey results on page next",
@@ -1434,7 +1434,7 @@ var traditionalChineseTranslation = {
     },
     // survey templates
     survey: {
-      mode: "選擇：「可編輯」 - 使受訪者能夠填寫您的調查;“只讀” - 禁用表單編輯。",
+      readOnly: "選擇是否要阻止受訪者填寫您的調查。",
       progressBarLocation: "設置進度條的位置。“自動”值在調查標題的上方或下方顯示進度條。"
     },
     matrixdropdowncolumn: {
@@ -3260,3 +3260,5 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // progressBarLocation.belowheader: "Below the header" => "標題下方"
 // progressBarLocation.off: "Hidden" => "隱藏"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "設置進度條的位置。“自動”值在調查標題的上方或下方顯示進度條。"
+// survey.readOnly: "Make the survey read-only" => "將調查設為唯讀"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "選擇是否要阻止受訪者填寫您的調查。"

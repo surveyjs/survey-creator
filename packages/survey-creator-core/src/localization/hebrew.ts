@@ -386,7 +386,8 @@ export var hebrewStrings = {
     // survey templates
     survey: {
       title: "כותר",
-      description: "תיאור הסקר"
+      description: "תיאור הסקר",
+      readOnly: "הפוך את הסקר לקריאה בלבד"
     },
     page: {
       name: "שם הדף",
@@ -609,7 +610,6 @@ export var hebrewStrings = {
     simulator: "בחר סוג מכשיר",
     landscapeOrientation: "עבור לתצוגה אופקית",
     portraitOrientation: "עבור לתצוגה אנכית",
-    mode: "עריכה או לקריאה בלבד",
     clearInvisibleValues: "נקה ערכים בלתי נראים",
     cookieName: "שם העוגיה",
     partialSendEnabled: "שמור תוצאות סקר חלקיות בתהליך",
@@ -1434,7 +1434,7 @@ export var hebrewStrings = {
     },
     // survey templates
     survey: {
-      mode: "בחר בין: \"ניתן לעריכה\" - מאפשר למשיבים למלא את הסקר שלך; \"לקריאה בלבד\" - משבית עריכת טפסים.",
+      readOnly: "בחר אם ברצונך למנוע מהמשיבים למלא את הסקר שלך.",
       progressBarLocation: "מגדיר את המיקום של מד ההתקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר."
     },
     matrixdropdowncolumn: {
@@ -2557,3 +2557,5 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // progressBarLocation.belowheader: "Below the header" => "מתחת לכותרת העליונה"
 // progressBarLocation.off: "Hidden" => "מוסתרים"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "מגדיר את המיקום של מד ההתקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר."
+// survey.readOnly: "Make the survey read-only" => "הפוך את הסקר לקריאה בלבד"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "בחר אם ברצונך למנוע מהמשיבים למלא את הסקר שלך."

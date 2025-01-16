@@ -386,7 +386,8 @@ var germanTranslation = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Beschreibung der Umfrage"
+      description: "Beschreibung der Umfrage",
+      readOnly: "Machen Sie die Umfrage schreibgeschützt"
     },
     page: {
       name: "Name der Seite",
@@ -609,7 +610,6 @@ var germanTranslation = {
     simulator: "Gerät auswählen",
     landscapeOrientation: "Querformat",
     portraitOrientation: "Hochformat",
-    mode: "Modus (editierbar/schreibgeschützt)",
     clearInvisibleValues: "Alle unsichtbaren Werte leeren",
     cookieName: "Cookie-Name (um zu unterdrücken, dass die Umfrage lokal zwei Mal ausgefüllt werden kann)",
     partialSendEnabled: "Umfrageergebnisse beim Seitenwechsel automatisch speichern",
@@ -1434,7 +1434,7 @@ var germanTranslation = {
     },
     // survey templates
     survey: {
-      mode: "Wählen Sie zwischen: \"Bearbeiten\" - ermöglicht es den Befragten, Ihre Umfrage auszufüllen; \"Anzeigen\" - deaktiviert die Formularbearbeitung.",
+      readOnly: "Wählen Sie diese Option aus, wenn Sie verhindern möchten, dass die Befragten Ihre Umfrage ausfüllen.",
       progressBarLocation: "Legt die Position des Fortschrittsbalkens fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an."
     },
     matrixdropdowncolumn: {
@@ -2702,3 +2702,5 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // progressBarLocation.belowheader: "Below the header" => "Unterhalb der Kopfzeile"
 // progressBarLocation.off: "Hidden" => "Versteckt"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Legt die Position des Fortschrittsbalkens fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an."
+// survey.readOnly: "Make the survey read-only" => "Machen Sie die Umfrage schreibgeschützt"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Wählen Sie diese Option aus, wenn Sie verhindern möchten, dass die Befragten Ihre Umfrage ausfüllen."

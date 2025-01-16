@@ -386,7 +386,8 @@ export var msStrings = {
     // survey templates
     survey: {
       title: "Tajuk",
-      description: "Penerangan tinjauan"
+      description: "Penerangan tinjauan",
+      readOnly: "Jadikan tinjauan baca sahaja"
     },
     page: {
       name: "Nama halaman",
@@ -609,7 +610,6 @@ export var msStrings = {
     simulator: "Pilih peranti",
     landscapeOrientation: "Landskap",
     portraitOrientation: "Bertukar kepada orientasi potret",
-    mode: "Mod (edit/baca sahaja)",
     clearInvisibleValues: "Kosongkan nilai tersembunyi",
     cookieName: "Nama kuki (untuk melumpuhkan perlaksanaan tinjauan dua kali secara setempat)",
     partialSendEnabled: "Hantar keputusan tinjauan pada halaman seterusnya",
@@ -1434,7 +1434,7 @@ export var msStrings = {
     },
     // survey templates
     survey: {
-      mode: "Pilih antara: \"Boleh diedit\" - membolehkan responden mengisi tinjauan anda; \"Baca sahaja\" - melumpuhkan penyuntingan borang.",
+      readOnly: "Pilih jika anda mahu menghalang responden daripada mengisi tinjauan anda.",
       progressBarLocation: "Menetapkan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan."
     },
     matrixdropdowncolumn: {
@@ -2944,3 +2944,5 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // progressBarLocation.belowheader: "Below the header" => "Di bawah pengepala"
 // progressBarLocation.off: "Hidden" => "Tersembunyi"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Menetapkan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan."
+// survey.readOnly: "Make the survey read-only" => "Jadikan tinjauan baca sahaja"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Pilih jika anda mahu menghalang responden daripada mengisi tinjauan anda."

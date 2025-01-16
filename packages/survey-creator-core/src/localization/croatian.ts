@@ -386,7 +386,8 @@ export var hrStrings = {
     // survey templates
     survey: {
       title: "Naslov",
-      description: "Opis upitnika"
+      description: "Opis upitnika",
+      readOnly: "Neka anketa bude samo za čitanje"
     },
     page: {
       name: "Naziv stranice",
@@ -609,7 +610,6 @@ export var hrStrings = {
     simulator: "Odaberite uređaj",
     landscapeOrientation: "Krajolik",
     portraitOrientation: "Prebacivanje na okomito usmjerenje",
-    mode: "Način rada (samo uređivanje/čitanje)",
     clearInvisibleValues: "Jasne nevidljive vrijednosti",
     cookieName: "Naziv kolačića (onemogućiti anketu dva puta lokalno)",
     partialSendEnabled: "Pošaljite rezultate ankete na sljedeću stranicu",
@@ -1434,7 +1434,7 @@ export var hrStrings = {
     },
     // survey templates
     survey: {
-      mode: "Odaberite između: \"Može se uređivati\" - omogućuje ispitanicima da ispune vašu anketu; \"Samo za čitanje\" - onemogućuje uređivanje obrazaca.",
+      readOnly: "Odaberite želite li ispitanicima onemogućiti ispunjavanje upitnika.",
       progressBarLocation: "Postavlja lokaciju trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja ankete."
     },
     matrixdropdowncolumn: {
@@ -2984,3 +2984,5 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // progressBarLocation.belowheader: "Below the header" => "Ispod zaglavlja"
 // progressBarLocation.off: "Hidden" => "Skriven"
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Postavlja lokaciju trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja ankete."
+// survey.readOnly: "Make the survey read-only" => "Neka anketa bude samo za čitanje"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Odaberite želite li ispitanicima onemogućiti ispunjavanje upitnika."
