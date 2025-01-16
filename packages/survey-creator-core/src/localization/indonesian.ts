@@ -334,8 +334,6 @@ export var indonesianStrings = {
       templateErrorLocation: "Perataan pesan kesalahan",
       newPanelPosition: "Lokasi panel baru",
       showRangeInProgress: "Menampilkan bilah kemajuan",
-      showProgressBar: "Menampilkan bilah kemajuan",
-      progressBarLocation: "Perataan bilah kemajuan",
       keyName: "Cegah respons duplikat dalam pertanyaan berikut"
     },
     question: {
@@ -632,6 +630,7 @@ export var indonesianStrings = {
     autoAdvanceEnabled: "Setelah menjawa seluruh pertanyaan, pergi ke halaman berikutnya secara otomatis",
     autoAdvanceAllowComplete: "Selesaikan survei secara otomatis",
     showProgressBar: "Tampilkan progress bar",
+    progressBarLocation: "Perataan bilah kemajuan",
     questionTitleLocation: "Lokasi judul pertanyaan",
     questionTitleWidth: "Lebar judul pertanyaan",
     requiredMark: "Simbil pertanyaan wajib",
@@ -1204,16 +1203,13 @@ export var indonesianStrings = {
     questionOrder: {
       initial: "Asli"
     },
-    showProgressBar: {
-      off: "Sembunyi",
-      topbottom: "atas dan bawah",
-      aboveheader: "Di atas header",
-      belowheader: "Di bawah header"
-    },
     progressBarLocation: {
       top: "Puncak",
       bottom: "Dasar",
-      topBottom: "Atas dan bawah"
+      topbottom: "Atas dan bawah",
+      aboveheader: "Di atas header",
+      belowheader: "Di bawah header",
+      off: "Sembunyi"
     },
     sum: "Jumlah",
     count: "Hitung",
@@ -1438,7 +1434,8 @@ export var indonesianStrings = {
     },
     // survey templates
     survey: {
-      mode: "Pilih antara: \"Dapat Diedit\" - memungkinkan responden mengisi survei Anda; \"Read-only\" - menonaktifkan pengeditan formulir."
+      mode: "Pilih antara: \"Dapat Diedit\" - memungkinkan responden mengisi survei Anda; \"Read-only\" - menonaktifkan pengeditan formulir.",
+      progressBarLocation: "Mengatur lokasi bilah progres. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
     },
     matrixdropdowncolumn: {
       name: "ID kolom yang tidak terlihat oleh responden.",
@@ -1461,7 +1458,6 @@ export var indonesianStrings = {
     autoAdvanceAllowComplete: "Pilih apakah Anda ingin survei selesai secara otomatis setelah responden menjawab semua pertanyaan.",
     showNavigationButtons: "Mengatur visibilitas dan lokasi tombol navigasi pada halaman.",
     navigationButtonsLocation: "Mengatur lokasi tombol navigasi pada halaman.",
-    showProgressBar: "Mengatur visibilitas dan lokasi bilah kemajuan. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei.",
     showPreviewBeforeComplete: "Aktifkan halaman pratinjau hanya dengan semua atau pertanyaan yang dijawab.",
     questionTitleLocation: "Berlaku untuk semua pertanyaan dalam survei. Setelan ini dapat diganti dengan aturan penyelarasan judul di tingkat yang lebih rendah: panel, halaman, atau pertanyaan. Pengaturan tingkat yang lebih rendah akan menggantikan pengaturan tingkat yang lebih tinggi.",
     requiredMark: "Simbol atau urutan simbol yang menunjukkan bahwa jawaban diperlukan.",
@@ -3142,3 +3138,9 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Gunakan nilai dari kolom matriks atau pertanyaan panel berikut sebagai teks pilihan"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Dalam jenis pertanyaan pilihan tunggal dan pilihan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Pengaturan ini menentukan kolom matriks atau pertanyaan panel mana yang harus memberikan ID."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Dalam jenis pertanyaan pilihan tunggal dan pilihan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Pengaturan ini menentukan kolom matriks atau pertanyaan panel mana yang harus menyediakan teks tampilan."
+// pe.progressBarLocation: "Progress bar alignment" => "Perataan bilah kemajuan"
+// progressBarLocation.topbottom: "Top and bottom" => "Atas dan bawah"
+// progressBarLocation.aboveheader: "Above the header" => "Di atas header"
+// progressBarLocation.belowheader: "Below the header" => "Di bawah header"
+// progressBarLocation.off: "Hidden" => "Sembunyi"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Mengatur lokasi bilah progres. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."

@@ -334,8 +334,6 @@ export const thStrings = {
       templateErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
       newPanelPosition: "ตำแหน่งแผงใหม่",
       showRangeInProgress: "แสดงแถบความคืบหน้า",
-      showProgressBar: "แสดงแถบความคืบหน้า",
-      progressBarLocation: "การจัดตําแหน่งแถบความคืบหน้า",
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
     question: {
@@ -632,6 +630,7 @@ export const thStrings = {
     autoAdvanceEnabled: "ไปหน้าถัดไปอัตโนมัติ",
     autoAdvanceAllowComplete: "เสร็จสิ้นแบบสำรวจอัตโนมัติ",
     showProgressBar: "การจัดตำแหน่งแถบความคืบหน้า",
+    progressBarLocation: "การจัดตําแหน่งแถบความคืบหน้า",
     questionTitleLocation: "การจัดตำแหน่งชื่อคำถาม",
     questionTitleWidth: "ความกว้างของชื่อคำถาม",
     requiredMark: "สัญลักษณ์ที่จำเป็น",
@@ -1204,16 +1203,13 @@ export const thStrings = {
     questionOrder: {
       initial: "ดั้งเดิม"
     },
-    showProgressBar: {
-      off: "ซ่อน",
-      topbottom: "ด้านบนและล่าง",
-      aboveheader: "เหนือหัวเรื่อง",
-      belowheader: "ใต้หัวเรื่อง"
-    },
     progressBarLocation: {
       top: "ด้านบน",
       bottom: "ก้น",
-      topBottom: "ด้านบนและด้านล่าง"
+      topbottom: "ด้านบนและด้านล่าง",
+      aboveheader: "เหนือส่วนหัว",
+      belowheader: "ด้านล่างส่วนหัว",
+      off: "ซ่อน"
     },
     sum: "รวม",
     count: "นับ",
@@ -1438,7 +1434,8 @@ export const thStrings = {
     },
     // survey templates
     survey: {
-      mode: "เลือกจาก: \"แก้ไขได้\" - อนุญาตให้ผู้ตอบกรอกแบบสำรวจของคุณ; \"อ่านอย่างเดียว\" - ปิดการแก้ไขแบบฟอร์ม"
+      mode: "เลือกจาก: \"แก้ไขได้\" - อนุญาตให้ผู้ตอบกรอกแบบสำรวจของคุณ; \"อ่านอย่างเดียว\" - ปิดการแก้ไขแบบฟอร์ม",
+      progressBarLocation: "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"
     },
     matrixdropdowncolumn: {
       name: "ID คอลัมน์ที่ไม่มองเห็นได้สำหรับผู้ตอบแบบสำรวจ",
@@ -1461,7 +1458,6 @@ export const thStrings = {
     autoAdvanceAllowComplete: "เลือกถ้าคุณต้องการให้แบบสำรวจเสร็จสิ้นโดยอัตโนมัติหลังจากผู้ตอบตอบคำถามทั้งหมด",
     showNavigationButtons: "ตั้งการมองเห็นและตำแหน่งของปุ่มนำทางในหน้า",
     navigationButtonsLocation: "ตั้งค่าตําแหน่งของปุ่มนําทางบนหน้า",
-    showProgressBar: "ตั้งการมองเห็นและตำแหน่งของแถบความคืบหน้า ตัวเลือก \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าเหนือหรือใต้หัวเรื่องแบบสำรวจ",
     showPreviewBeforeComplete: "เปิดใช้งานหน้าพรีวิวที่มีคำถามทั้งหมดหรือที่ตอบแล้ว",
     questionTitleLocation: "ใช้กับคำถามทั้งหมดในแบบสำรวจ การตั้งค่านี้สามารถถูกแทนที่ได้โดยกฎการจัดตำแหน่งชื่อเรื่องที่ระดับต่ำกว่า: แผง, หน้า หรือคำถาม การตั้งค่าระดับต่ำกว่าจะยกเลิกการตั้งค่าระดับสูง",
     requiredMark: "สัญลักษณ์หรือชุดของสัญลักษณ์ที่ระบุว่าจำเป็นต้องตอบ",
@@ -1928,3 +1924,9 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "ใช้ค่าจากคอลัมน์เมทริกซ์หรือคําถามแผงต่อไปนี้เป็นข้อความตัวเลือก"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดควรให้รหัส"
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดที่ควรให้ข้อความที่แสดง"
+// pe.progressBarLocation: "Progress bar alignment" => "การจัดตําแหน่งแถบความคืบหน้า"
+// progressBarLocation.topbottom: "Top and bottom" => "ด้านบนและด้านล่าง"
+// progressBarLocation.aboveheader: "Above the header" => "เหนือส่วนหัว"
+// progressBarLocation.belowheader: "Below the header" => "ด้านล่างส่วนหัว"
+// progressBarLocation.off: "Hidden" => "ซ่อน"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"

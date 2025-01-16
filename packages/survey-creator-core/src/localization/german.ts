@@ -334,8 +334,6 @@ var germanTranslation = {
       templateErrorLocation: "Ausrichtung von Fehlermeldungen",
       newPanelPosition: "Neue Panel-Position",
       showRangeInProgress: "Zeigen Sie den Fortschrittsbalken an",
-      showProgressBar: "Zeigen Sie den Fortschrittsbalken an",
-      progressBarLocation: "Ausrichtung der Fortschrittsleiste",
       keyName: "Doppelte Antworten in der folgenden Frage verhindern"
     },
     question: {
@@ -632,6 +630,7 @@ var germanTranslation = {
     autoAdvanceEnabled: "Automatisch zur nächsten Seiten wechseln",
     autoAdvanceAllowComplete: "Umfrage automatisch ausfüllen",
     showProgressBar: "Fortschrittsbalken anzeigen",
+    progressBarLocation: "Ausrichtung der Fortschrittsleiste",
     questionTitleLocation: "Position des Fragentitels",
     questionTitleWidth: "Breite des Fragetitels",
     requiredMark: "Symbol für erforderliche Fragen",
@@ -1204,16 +1203,13 @@ var germanTranslation = {
     questionOrder: {
       initial: "Original"
     },
-    showProgressBar: {
-      off: "Versteckt",
-      topbottom: "oben und unten",
-      aboveheader: "Über der Kopfzeile",
-      belowheader: "Unterhalb der Kopfzeile"
-    },
     progressBarLocation: {
       top: "Nach oben",
       bottom: "Unteres",
-      topBottom: "Oben und unten"
+      topbottom: "Oben und unten",
+      aboveheader: "Oberhalb der Kopfzeile",
+      belowheader: "Unterhalb der Kopfzeile",
+      off: "Versteckt"
     },
     sum: "Summe",
     count: "Zahl",
@@ -1438,7 +1434,8 @@ var germanTranslation = {
     },
     // survey templates
     survey: {
-      mode: "Wählen Sie zwischen: \"Bearbeiten\" - ermöglicht es den Befragten, Ihre Umfrage auszufüllen; \"Anzeigen\" - deaktiviert die Formularbearbeitung."
+      mode: "Wählen Sie zwischen: \"Bearbeiten\" - ermöglicht es den Befragten, Ihre Umfrage auszufüllen; \"Anzeigen\" - deaktiviert die Formularbearbeitung.",
+      progressBarLocation: "Legt die Position des Fortschrittsbalkens fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an."
     },
     matrixdropdowncolumn: {
       name: "Eine Spalten-ID, die für die Befragten nicht sichtbar ist.",
@@ -1461,7 +1458,6 @@ var germanTranslation = {
     autoAdvanceAllowComplete: "Wählen Sie diese Option aus, wenn die Umfrage automatisch abgeschlossen werden soll, nachdem ein Befragter alle Fragen beantwortet hat.",
     showNavigationButtons: "Legt die Sichtbarkeit und Position von Navigationsschaltflächen auf einer Seite fest.",
     navigationButtonsLocation: "Legt die Position der Navigationsschaltflächen auf einer Seite fest.",
-    showProgressBar: "Legt die Sichtbarkeit und Position einer Statusanzeige fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an.",
     showPreviewBeforeComplete: "Aktivieren Sie die Vorschauseite nur mit allen oder beantworteten Fragen.",
     questionTitleLocation: "Gilt für alle Fragen innerhalb der Umfrage. Diese Einstellung kann durch Regeln für die Titelausrichtung auf niedrigeren Ebenen außer Kraft gesetzt werden: Bereich, Seite oder Frage. Eine Einstellung auf niedrigerer Ebene überschreibt die Einstellung auf einer höheren Ebene.",
     requiredMark: "Ein Symbol oder eine Sequenz von Symbolen, die darauf hinweist, dass eine Antwort erforderlich ist.",
@@ -2700,3 +2696,9 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Verwenden Sie Werte aus der folgenden Matrixspalte oder Panelfrage als Auswahltexte"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Bei Fragetypen mit Einzel- und Mehrfachauswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Diese Einstellung gibt an, welche Matrixspalten- oder Bereichsfrage die IDs bereitstellen soll."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Bei Fragetypen mit Einzel- und Mehrfachauswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Diese Einstellung legt fest, welche Matrix-, Spalten- oder Bereichsfrage die Anzeigetexte bereitstellen soll."
+// pe.progressBarLocation: "Progress bar alignment" => "Ausrichtung der Fortschrittsleiste"
+// progressBarLocation.topbottom: "Top and bottom" => "Oben und unten"
+// progressBarLocation.aboveheader: "Above the header" => "Oberhalb der Kopfzeile"
+// progressBarLocation.belowheader: "Below the header" => "Unterhalb der Kopfzeile"
+// progressBarLocation.off: "Hidden" => "Versteckt"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Legt die Position des Fortschrittsbalkens fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an."

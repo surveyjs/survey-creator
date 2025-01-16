@@ -334,8 +334,6 @@ export var jaStrings = {
       templateErrorLocation: "エラー・メッセージのアライメント",
       newPanelPosition: "新しいパネルの位置",
       showRangeInProgress: "進行状況バーを表示する",
-      showProgressBar: "進行状況バーを表示する",
-      progressBarLocation: "プログレスバーの配置",
       keyName: "次の質問で回答の重複を防ぐ"
     },
     question: {
@@ -632,6 +630,7 @@ export var jaStrings = {
     autoAdvanceEnabled: "すべての質問に回答すると、自動的に次のページに移動します",
     autoAdvanceAllowComplete: "調査に自動的に回答する",
     showProgressBar: "プログレスバーを表示する",
+    progressBarLocation: "プログレスバーの配置",
     questionTitleLocation: "質問のタイトルの場所",
     questionTitleWidth: "質問タイトルの幅",
     requiredMark: "質問には記号が必要",
@@ -1204,16 +1203,13 @@ export var jaStrings = {
     questionOrder: {
       initial: "翻訳元"
     },
-    showProgressBar: {
-      off: "隠れた",
-      topbottom: "上と下",
-      aboveheader: "ヘッダーの上",
-      belowheader: "ヘッダーの下"
-    },
     progressBarLocation: {
       top: "ページのトップへ",
       bottom: "底",
-      topBottom: "上部と下部"
+      topbottom: "上部と下部",
+      aboveheader: "ヘッダーの上",
+      belowheader: "ヘッダーの下",
+      off: "隠れた"
     },
     sum: "和",
     count: "数える",
@@ -1438,7 +1434,8 @@ export var jaStrings = {
     },
     // survey templates
     survey: {
-      mode: "次から選択します。 「編集可能」 - 回答者がアンケートに回答できるようにします。「読み取り専用」 - フォームの編集を無効にします。"
+      mode: "次から選択します。 「編集可能」 - 回答者がアンケートに回答できるようにします。「読み取り専用」 - フォームの編集を無効にします。",
+      progressBarLocation: "プログレスバーの位置を設定します。「自動」の値は、調査ヘッダーの上または下に進行状況バーを表示します。"
     },
     matrixdropdowncolumn: {
       name: "回答者に表示されない列 ID。",
@@ -1461,7 +1458,6 @@ export var jaStrings = {
     autoAdvanceAllowComplete: "回答者がすべての質問に回答した後にアンケートを自動的に完了する場合に選択します。",
     showNavigationButtons: "ページ上のナビゲーションボタンの表示と位置を設定します。",
     navigationButtonsLocation: "ページ上のナビゲーション ボタンの位置を設定します。",
-    showProgressBar: "プログレスバーの表示と位置を設定します。「自動」の値は、アンケートヘッダーの上または下に進行状況バーを表示します。",
     showPreviewBeforeComplete: "すべての質問または回答済みの質問のみを含むプレビューページを有効にします。",
     questionTitleLocation: "アンケート内のすべての質問に適用されます。この設定は、下位レベル(パネル、ページ、または質問)のタイトル配置ルールによって上書きできます。下位レベルの設定は、上位レベルの設定よりも優先されます。",
     requiredMark: "回答が必要であることを示す記号または記号のシーケンス。",
@@ -2987,3 +2983,9 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "次の行列の列またはパネルの質問の値を選択テキストとして使用します"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、どの行列列またはパネルの質問がIDを提供するかを指定します。"
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、表示テキストを提供する行列列またはパネルの質問を指定します。"
+// pe.progressBarLocation: "Progress bar alignment" => "プログレスバーの配置"
+// progressBarLocation.topbottom: "Top and bottom" => "上部と下部"
+// progressBarLocation.aboveheader: "Above the header" => "ヘッダーの上"
+// progressBarLocation.belowheader: "Below the header" => "ヘッダーの下"
+// progressBarLocation.off: "Hidden" => "隠れた"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "プログレスバーの位置を設定します。「自動」の値は、調査ヘッダーの上または下に進行状況バーを表示します。"

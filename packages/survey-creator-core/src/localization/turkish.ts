@@ -334,8 +334,6 @@ export var turkishStrings = {
       templateErrorLocation: "Hata iletisi hizalaması",
       newPanelPosition: "Yeni panel konumu",
       showRangeInProgress: "İlerleme çubuğunu gösterme",
-      showProgressBar: "İlerleme çubuğunu gösterme",
-      progressBarLocation: "İlerleme çubuğu hizalaması",
       keyName: "Aşağıdaki soruda yinelenen yanıtları önleyin"
     },
     question: {
@@ -632,6 +630,7 @@ export var turkishStrings = {
     autoAdvanceEnabled: "Tüm soruları cevaplarken otomatik olarak sonraki sayfaya git",
     autoAdvanceAllowComplete: "Anketi otomatik olarak tamamlama",
     showProgressBar: "İlerleme çubuğunu göster",
+    progressBarLocation: "İlerleme çubuğu hizalaması",
     questionTitleLocation: "Soru başlığı konumu",
     questionTitleWidth: "Soru başlığı genişliği",
     requiredMark: "Zorunlu soru sembolü",
@@ -1204,16 +1203,13 @@ export var turkishStrings = {
     questionOrder: {
       initial: "Özgün"
     },
-    showProgressBar: {
-      off: "Gizli",
-      topbottom: "Üst ve alt",
-      aboveheader: "Başlığın üstünde",
-      belowheader: "Başlığın altında"
-    },
     progressBarLocation: {
       top: "Sayfanın Üstü",
       bottom: "Dip",
-      topBottom: "Üst ve alt"
+      topbottom: "Üst ve alt",
+      aboveheader: "Başlığın üstünde",
+      belowheader: "Başlığın altında",
+      off: "Gizli"
     },
     sum: "Toplam",
     count: "Saymak",
@@ -1438,7 +1434,8 @@ export var turkishStrings = {
     },
     // survey templates
     survey: {
-      mode: "Şunlar arasından seçim yapın: \"Düzenlenebilir\" - yanıtlayanların anketinizi doldurmasını sağlar; \"Salt okunur\" - form düzenlemeyi devre dışı bırakır."
+      mode: "Şunlar arasından seçim yapın: \"Düzenlenebilir\" - yanıtlayanların anketinizi doldurmasını sağlar; \"Salt okunur\" - form düzenlemeyi devre dışı bırakır.",
+      progressBarLocation: "İlerleme çubuğunun konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
     },
     matrixdropdowncolumn: {
       name: "Yanıtlayanlar tarafından görülemeyen bir sütun kimliği.",
@@ -1461,7 +1458,6 @@ export var turkishStrings = {
     autoAdvanceAllowComplete: "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin.",
     showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar.",
     navigationButtonsLocation: "Sayfadaki gezinme düğmelerinin konumunu ayarlar.",
-    showProgressBar: "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler.",
     showPreviewBeforeComplete: "Önizleme sayfasını tüm sorularla veya yalnızca yanıtlanmış sorularla etkinleştirin.",
     questionTitleLocation: "Anketteki tüm sorular için geçerlidir. Bu ayar, panel, sayfa veya soru gibi daha düşük düzeylerdeki başlık hizalama kuralları tarafından geçersiz kılınabilir. Daha düşük düzeydeki bir ayar, daha yüksek düzeydeki ayarları geçersiz kılar.",
     requiredMark: "Bir yanıtın gerekli olduğunu gösteren bir sembol veya sembol dizisi.",
@@ -2983,3 +2979,9 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Aşağıdaki matris sütununda veya panel sorusunda yer alan değerleri seçim metinleri olarak kullanın"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, kimlikleri hangi matris, sütun veya panel sorusunun sağlaması gerektiğini belirtir."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, hangi matris sütun veya panel sorusunun görüntü metinlerini sağlaması gerektiğini belirtir."
+// pe.progressBarLocation: "Progress bar alignment" => "İlerleme çubuğu hizalaması"
+// progressBarLocation.topbottom: "Top and bottom" => "Üst ve alt"
+// progressBarLocation.aboveheader: "Above the header" => "Başlığın üstünde"
+// progressBarLocation.belowheader: "Below the header" => "Başlığın altında"
+// progressBarLocation.off: "Hidden" => "Gizli"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "İlerleme çubuğunun konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."

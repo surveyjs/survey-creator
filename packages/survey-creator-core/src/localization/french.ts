@@ -334,8 +334,6 @@ var frenchTranslation = {
       templateErrorLocation: "Alignement des messages d’erreur",
       newPanelPosition: "Nouvel emplacement du panneau",
       showRangeInProgress: "Afficher la barre de progression",
-      showProgressBar: "Afficher la barre de progression",
-      progressBarLocation: "Alignement de la barre de progression",
       keyName: "Éviter les réponses en double à la question suivante"
     },
     question: {
@@ -632,6 +630,7 @@ var frenchTranslation = {
     autoAdvanceEnabled: "Aller à la page suivante automatiquement pour toutes les questions",
     autoAdvanceAllowComplete: "Répondez automatiquement à l’enquête",
     showProgressBar: "Afficher la barre de progression",
+    progressBarLocation: "Alignement de la barre de progression",
     questionTitleLocation: "Emplacement du titre de la question",
     questionTitleWidth: "Largeur du titre de la question",
     requiredMark: "Symbole(s) des questions obligatoires",
@@ -1204,16 +1203,13 @@ var frenchTranslation = {
     questionOrder: {
       initial: "Langue source"
     },
-    showProgressBar: {
-      off: "Masqué",
-      topbottom: "Haut et bas",
-      aboveheader: "Au-dessus de l’en-tête",
-      belowheader: "Sous l’en-tête"
-    },
     progressBarLocation: {
       top: "Retour au début",
       bottom: "Fond",
-      topBottom: "Haut et bas"
+      topbottom: "Haut et bas",
+      aboveheader: "Au-dessus de l’en-tête",
+      belowheader: "Sous l’en-tête",
+      off: "Caché"
     },
     sum: "Somme",
     count: "Compter",
@@ -1438,7 +1434,8 @@ var frenchTranslation = {
     },
     // survey templates
     survey: {
-      mode: "Choisissez entre : « Modifiable » - permet aux personnes interrogées de remplir votre sondage ; « Lecture seule » - désactive l’édition de formulaire."
+      mode: "Choisissez entre : « Modifiable » - permet aux personnes interrogées de remplir votre sondage ; « Lecture seule » - désactive l’édition de formulaire.",
+      progressBarLocation: "Définit l’emplacement de la barre de progression. La valeur « Auto » affiche la barre de progression au-dessus ou en dessous de l’en-tête de l’enquête."
     },
     matrixdropdowncolumn: {
       name: "ID de colonne qui n’est pas visible par les personnes interrogées.",
@@ -1461,7 +1458,6 @@ var frenchTranslation = {
     autoAdvanceAllowComplete: "Sélectionnez cette option si vous souhaitez que l’enquête se termine automatiquement une fois qu’une personne interrogée a répondu à toutes les questions.",
     showNavigationButtons: "Définit la visibilité et l’emplacement des boutons de navigation sur une page.",
     navigationButtonsLocation: "Définit l’emplacement des boutons de navigation sur une page.",
-    showProgressBar: "Définit la visibilité et l’emplacement d’une barre de progression. La valeur « Auto » affiche la barre de progression au-dessus ou au-dessous de l’en-tête de l’enquête.",
     showPreviewBeforeComplete: "Activez la page d’aperçu avec toutes les questions ou les questions auxquelles on a répondu uniquement.",
     questionTitleLocation: "S’applique à toutes les questions de l’enquête. Ce paramètre peut être remplacé par des règles d’alignement des titres aux niveaux inférieurs : panneau, page ou question. Un paramètre de niveau inférieur remplacera ceux d’un niveau supérieur.",
     requiredMark: "Symbole ou séquence de symboles indiquant qu’une réponse est requise.",
@@ -3047,3 +3043,9 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Utilisez les valeurs de la question matricielle, de la colonne ou du panneau suivant comme textes de choix"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Dans les types de questions à sélection unique et à sélection multiple, chaque option de choix a un ID et une valeur d’affichage. Ce paramètre spécifie la question de matrice, de colonne ou de panneau qui doit fournir les ID."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Dans les types de questions à sélection unique et à sélection multiple, chaque option de choix a un ID et une valeur d’affichage. Ce paramètre spécifie la question de matrice, de colonne ou de panneau qui doit fournir les textes d’affichage."
+// pe.progressBarLocation: "Progress bar alignment" => "Alignement de la barre de progression"
+// progressBarLocation.topbottom: "Top and bottom" => "Haut et bas"
+// progressBarLocation.aboveheader: "Above the header" => "Au-dessus de l’en-tête"
+// progressBarLocation.belowheader: "Below the header" => "Sous l’en-tête"
+// progressBarLocation.off: "Hidden" => "Caché"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Définit l’emplacement de la barre de progression. La valeur « Auto » affiche la barre de progression au-dessus ou en dessous de l’en-tête de l’enquête."

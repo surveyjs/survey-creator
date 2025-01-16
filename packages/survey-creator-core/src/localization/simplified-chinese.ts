@@ -334,8 +334,6 @@ var simplifiedChineseTranslation = {
       templateErrorLocation: "错误消息对齐",
       newPanelPosition: "新面板位置",
       showRangeInProgress: "显示进度条",
-      showProgressBar: "显示进度条",
-      progressBarLocation: "进度条对齐",
       keyName: "防止在以下问题中重复回答"
     },
     question: {
@@ -632,6 +630,7 @@ var simplifiedChineseTranslation = {
     autoAdvanceEnabled: "回答本页所有问题后，自动跳转到下一页",
     autoAdvanceAllowComplete: "自动完成调查",
     showProgressBar: "显示进度条",
+    progressBarLocation: "进度条对齐",
     questionTitleLocation: "问题的标题位置",
     questionTitleWidth: "问题标题宽度",
     requiredMark: "问题必填标志",
@@ -1204,16 +1203,13 @@ var simplifiedChineseTranslation = {
     questionOrder: {
       initial: "源语言"
     },
-    showProgressBar: {
-      off: "隐藏",
-      topbottom: "顶和底",
-      aboveheader: "标题上方",
-      belowheader: "在标题下方"
-    },
     progressBarLocation: {
       top: "返回页首",
       bottom: "底",
-      topBottom: "顶部和底部"
+      topbottom: "顶部和底部",
+      aboveheader: "标题上方",
+      belowheader: "标题下方",
+      off: "隐藏"
     },
     sum: "和",
     count: "计数",
@@ -1438,7 +1434,8 @@ var simplifiedChineseTranslation = {
     },
     // survey templates
     survey: {
-      mode: "选择：“可编辑” - 使受访者能够填写您的调查;“只读” - 禁用表单编辑。"
+      mode: "选择：“可编辑” - 使受访者能够填写您的调查;“只读” - 禁用表单编辑。",
+      progressBarLocation: "设置进度条的位置。“自动”值在调查标题的上方或下方显示进度条。"
     },
     matrixdropdowncolumn: {
       name: "受访者不可见的列 ID。",
@@ -1461,7 +1458,6 @@ var simplifiedChineseTranslation = {
     autoAdvanceAllowComplete: "选择是否希望在受访者回答所有问题后自动完成调查。",
     showNavigationButtons: "设置导航按钮在页面上的可见性和位置。",
     navigationButtonsLocation: "设置页面上导航按钮的位置。",
-    showProgressBar: "设置进度条的可见性和位置。“自动”值显示测量标题上方或下方的进度条。",
     showPreviewBeforeComplete: "启用仅包含所有问题或已回答问题的预览页面。",
     questionTitleLocation: "适用于调查中的所有问题。此设置可以被较低级别的标题对齐规则覆盖：面板、页面或问题。较低级别的设置将覆盖较高级别的设置。",
     requiredMark: "一个符号或一系列符号，表示需要答案。",
@@ -3129,3 +3125,9 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "使用以下矩阵、列或面板问题中的值作为选择文本"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "在单选和多选问题类型中，每个选项都有一个 ID 和显示值。此设置指定哪个矩阵、列或面板问题应提供 ID。"
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "在单选和多选问题类型中，每个选项都有一个 ID 和显示值。此设置指定哪个矩阵列或面板问题应提供显示文本。"
+// pe.progressBarLocation: "Progress bar alignment" => "进度条对齐"
+// progressBarLocation.topbottom: "Top and bottom" => "顶部和底部"
+// progressBarLocation.aboveheader: "Above the header" => "标题上方"
+// progressBarLocation.belowheader: "Below the header" => "标题下方"
+// progressBarLocation.off: "Hidden" => "隐藏"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "设置进度条的位置。“自动”值在调查标题的上方或下方显示进度条。"

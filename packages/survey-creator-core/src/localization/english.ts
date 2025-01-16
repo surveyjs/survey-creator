@@ -336,8 +336,6 @@ export var enStrings = {
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New panel location",
       showRangeInProgress: "Show the progress bar",
-      showProgressBar: "Show the progress bar",
-      progressBarLocation: "Progress bar alignment",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -633,7 +631,8 @@ export var enStrings = {
     showCompletePage: "Show the \"Thank You\" page",
     autoAdvanceEnabled: "Auto-advance to the next page",
     autoAdvanceAllowComplete: "Complete the survey automatically",
-    showProgressBar: "Progress bar alignment",
+    showProgressBar: "Show the progress bar",
+    progressBarLocation: "Progress bar alignment",
     questionTitleLocation: "Question title alignment",
     questionTitleWidth: "Question title width",
     requiredMark: "Required symbol(s)",
@@ -758,8 +757,8 @@ export var enStrings = {
     choicesFromQuestionMode: "Which choice options to copy",
     choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs",
     choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts",
-    progressBarShowPageTitles: "Display page titles in progress bar",
-    progressBarShowPageNumbers: "Display page numbers in progress bar",
+    progressBarShowPageTitles: "Display page titles in the progress bar",
+    progressBarShowPageNumbers: "Display page numbers in the progress bar",
     showCommentArea: "Add a comment box",
     commentPlaceholder: "Placeholder text for the comment box",
     displayRateDescriptionsAsExtremeItems: "Show the labels as extreme values",
@@ -1208,16 +1207,13 @@ export var enStrings = {
     questionOrder: {
       initial: "Original"
     },
-    showProgressBar: {
-      off: "Hidden",
+    progressBarLocation: {
+      top: "Top",
+      bottom: "Bottom",
       topbottom: "Top and bottom",
       aboveheader: "Above the header",
-      belowheader: "Below the header"
-    },
-    progressBarLocation: {
-      "top": "Top",
-      "bottom": "Bottom",
-      "topBottom": "Top and bottom"
+      belowheader: "Below the header",
+      off: "Hidden"
     },
     sum: "Sum",
     count: "Count",
@@ -1445,7 +1441,8 @@ export var enStrings = {
     },
     // survey templates
     survey: {
-      mode: "Choose between: \"Editable\" - enables respondents to fill out your survey; \"Read-only\" - disables form editing."
+      mode: "Choose between: \"Editable\" - enables respondents to fill out your survey; \"Read-only\" - disables form editing.",
+      progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
     },
     matrixdropdowncolumn: {
       name: "A column ID that is not visible to respondents.",
@@ -1468,7 +1465,6 @@ export var enStrings = {
     autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions.",
     showNavigationButtons: "Sets the visibility of navigation buttons on a page.",
     navigationButtonsLocation: "Sets the location of navigation buttons on a page.",
-    showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header.",
     showPreviewBeforeComplete: "Enable the preview page with all or answered questions only.",
     questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level.",
     requiredMark: "A symbol or a sequence of symbols indicating that an answer is required.",

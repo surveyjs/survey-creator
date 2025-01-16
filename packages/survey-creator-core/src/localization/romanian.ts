@@ -334,8 +334,6 @@ export const roStrings = {
       templateErrorLocation: "Alinierea mesajului de eroare",
       newPanelPosition: "Locația noului panou",
       showRangeInProgress: "Afișați bara de progres",
-      showProgressBar: "Afișați bara de progres",
-      progressBarLocation: "Alinierea barei de progres",
       keyName: "Prevenirea răspunsurilor duplicate în următoarea întrebare"
     },
     question: {
@@ -632,6 +630,7 @@ export const roStrings = {
     autoAdvanceEnabled: "Trecerea automată la pagina următoare",
     autoAdvanceAllowComplete: "Finalizați chestionarul automat",
     showProgressBar: "Alinierea barei de progres",
+    progressBarLocation: "Alinierea barei de progres",
     questionTitleLocation: "Alinierea titlului întrebării",
     questionTitleWidth: "Lățimea titlului întrebării",
     requiredMark: "Simbol(uri) obligatoriu(e)",
@@ -1204,16 +1203,13 @@ export const roStrings = {
     questionOrder: {
       initial: "Original"
     },
-    showProgressBar: {
-      off: "Ascuns",
-      topbottom: "Deasupra și dedesubt",
-      aboveheader: "Deasupra antetului",
-      belowheader: "Sub antet"
-    },
     progressBarLocation: {
       top: "Culme",
       bottom: "Fund",
-      topBottom: "Sus și jos"
+      topbottom: "Sus și jos",
+      aboveheader: "Deasupra antetului",
+      belowheader: "Sub antet",
+      off: "Ascuns"
     },
     sum: "Sumă",
     count: "Numără",
@@ -1438,7 +1434,8 @@ export const roStrings = {
     },
     // survey templates
     survey: {
-      mode: "Alegeți între: „Editabil” - permite respondenților să completeze chestionarul dvs.; „Doar citire” - dezactivează editarea formularului."
+      mode: "Alegeți între: „Editabil” - permite respondenților să completeze chestionarul dvs.; „Doar citire” - dezactivează editarea formularului.",
+      progressBarLocation: "Setează locația barei de progres. Valoarea \"Auto\" afișează bara de progres deasupra sau dedesubtul antetului sondajului."
     },
     matrixdropdowncolumn: {
       name: "Un ID al coloanei care nu este vizibil pentru respondenți.",
@@ -1461,7 +1458,6 @@ export const roStrings = {
     autoAdvanceAllowComplete: "Selectați dacă doriți ca chestionarul să se completeze automat după ce un respondent răspunde la toate întrebările.",
     showNavigationButtons: "Setează vizibilitatea și locația butoanelor de navigare pe o pagină.",
     navigationButtonsLocation: "Setează locația butoanelor de navigare dintr-o pagină.",
-    showProgressBar: "Setează vizibilitatea și locația unei bare de progres. Valoarea „Auto” afișează bara de progres deasupra sau dedesubtul antetului chestionarului.",
     showPreviewBeforeComplete: "Activează pagina de previzualizare cu toate sau doar întrebările la care s-a răspuns.",
     questionTitleLocation: "Se aplică tuturor întrebărilor din chestionar. Această setare poate fi înlocuită de regulile de aliniere a titlului la niveluri inferioare: panou, pagină sau întrebare. O setare de nivel inferior va înlocui setările de nivel superior.",
     requiredMark: "Un simbol sau o secvență de simboluri care indică faptul că este necesar un răspuns.",
@@ -1928,3 +1924,9 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca texte de alegere"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze ID-urile."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze textele afișate."
+// pe.progressBarLocation: "Progress bar alignment" => "Alinierea barei de progres"
+// progressBarLocation.topbottom: "Top and bottom" => "Sus și jos"
+// progressBarLocation.aboveheader: "Above the header" => "Deasupra antetului"
+// progressBarLocation.belowheader: "Below the header" => "Sub antet"
+// progressBarLocation.off: "Hidden" => "Ascuns"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Setează locația barei de progres. Valoarea \"Auto\" afișează bara de progres deasupra sau dedesubtul antetului sondajului."

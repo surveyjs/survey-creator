@@ -750,6 +750,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showPrevButton", tab: "navigation" },
       { name: "showProgressBar", tab: "navigation" },
       { name: "progressBarType", tab: "navigation" },
+      { name: "progressBarLocation", tab: "navigation" },
       { name: "progressBarShowPageTitles", tab: "navigation" },
       { name: "progressBarShowPageNumbers", tab: "navigation" },
       { name: "showTOC", tab: "navigation" },

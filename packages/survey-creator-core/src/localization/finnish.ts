@@ -334,8 +334,6 @@ export var fiStrings = {
       templateErrorLocation: "Virhesanoman tasaus",
       newPanelPosition: "Uusi paneelin sijainti",
       showRangeInProgress: "Edistymispalkin näyttäminen",
-      showProgressBar: "Edistymispalkin näyttäminen",
-      progressBarLocation: "Edistymispalkin tasaus",
       keyName: "Päällekkäisten vastausten estäminen seuraavassa kysymyksessä"
     },
     question: {
@@ -632,6 +630,7 @@ export var fiStrings = {
     autoAdvanceEnabled: "Kun vastaat kaikkiin kysymyksiin, siirry seuraavalle sivulle automaattisesti",
     autoAdvanceAllowComplete: "Vastaa kyselyyn automaattisesti",
     showProgressBar: "Näytä edistymispalkki",
+    progressBarLocation: "Edistymispalkin tasaus",
     questionTitleLocation: "Kysymyksen otsikon sijainti",
     questionTitleWidth: "Kysymyksen otsikon leveys",
     requiredMark: "Kysymys vaadittu symboli (t)",
@@ -1204,16 +1203,13 @@ export var fiStrings = {
     questionOrder: {
       initial: "Alkuperäinen"
     },
-    showProgressBar: {
-      off: "Piilevä",
-      topbottom: "Ylhäällä ja alhaalla",
-      aboveheader: "Otsikon yläpuolella",
-      belowheader: "Otsikon alapuolella"
-    },
     progressBarLocation: {
       top: "Huippu",
       bottom: "Pohja",
-      topBottom: "Ylhäällä ja alhaalla"
+      topbottom: "Ylhäällä ja alhaalla",
+      aboveheader: "Otsikon yläpuolella",
+      belowheader: "Otsikon alapuolella",
+      off: "Piilevä"
     },
     sum: "Summa",
     count: "Laske",
@@ -1438,7 +1434,8 @@ export var fiStrings = {
     },
     // survey templates
     survey: {
-      mode: "Valitse jompikumpi seuraavista: \"Muokattavissa\" - vastaajat voivat täyttää kyselysi; \"Vain luku\" - poistaa lomakkeen muokkauksen käytöstä."
+      mode: "Valitse jompikumpi seuraavista: \"Muokattavissa\" - vastaajat voivat täyttää kyselysi; \"Vain luku\" - poistaa lomakkeen muokkauksen käytöstä.",
+      progressBarLocation: "Määrittää edistymispalkin sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella."
     },
     matrixdropdowncolumn: {
       name: "Sarakkeen tunnus, joka ei näy vastaajille.",
@@ -1461,7 +1458,6 @@ export var fiStrings = {
     autoAdvanceAllowComplete: "Valitse, haluatko kyselyn täyttyvän automaattisesti, kun vastaaja on vastannut kaikkiin kysymyksiin.",
     showNavigationButtons: "Määrittää sivun navigointipainikkeiden näkyvyyden ja sijainnin.",
     navigationButtonsLocation: "Määrittää navigointipainikkeiden sijainnin sivulla.",
-    showProgressBar: "Määrittää edistymispalkin näkyvyyden ja sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella.",
     showPreviewBeforeComplete: "Ota esikatselusivu käyttöön vain kaikilla kysymyksillä tai vastatuilla kysymyksillä.",
     questionTitleLocation: "Koskee kaikkia kyselyn kysymyksiä. Tämä asetus voidaan ohittaa otsikon tasaussäännöillä alemmilla tasoilla: paneeli, sivu tai kysymys. Alemman tason asetus ohittaa korkeammalla tasolla olevat.",
     requiredMark: "Symboli tai symbolisarja, joka osoittaa, että vastaus vaaditaan.",
@@ -2960,3 +2956,9 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintateksteinä"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Yksi- ja monivalintakysymystyypeissä kullakin valintavaihtoehdolla on tunnus ja näyttöarvo. Tämä asetus määrittää, mikä matriisisarake tai paneelikysymys antaa tunnukset."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Yksi- ja monivalintakysymystyypeissä kullakin valintavaihtoehdolla on tunnus ja näyttöarvo. Tämä asetus määrittää, mikä matriisisarake tai paneelikysymys sisältää näyttötekstit."
+// pe.progressBarLocation: "Progress bar alignment" => "Edistymispalkin tasaus"
+// progressBarLocation.topbottom: "Top and bottom" => "Ylhäällä ja alhaalla"
+// progressBarLocation.aboveheader: "Above the header" => "Otsikon yläpuolella"
+// progressBarLocation.belowheader: "Below the header" => "Otsikon alapuolella"
+// progressBarLocation.off: "Hidden" => "Piilevä"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Määrittää edistymispalkin sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella."

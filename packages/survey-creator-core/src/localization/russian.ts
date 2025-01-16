@@ -334,8 +334,6 @@ export var ruStrings = {
       templateErrorLocation: "Выравнивание сообщений об ошибках",
       newPanelPosition: "Новое расположение панели",
       showRangeInProgress: "Отображение индикатора выполнения",
-      showProgressBar: "Отображение индикатора выполнения",
-      progressBarLocation: "Выравнивание полосы прогресса",
       keyName: "Предотвращение дублирования ответов в следующем вопросе"
     },
     question: {
@@ -632,6 +630,7 @@ export var ruStrings = {
     autoAdvanceEnabled: "Переходить на следующую страницу автоматически при заполнении всех вопросов",
     autoAdvanceAllowComplete: "Автоматическое заполнение опроса",
     showProgressBar: "Показывать прогресс заполнения",
+    progressBarLocation: "Выравнивание полосы прогресса",
     questionTitleLocation: "Расположение заголовка вопроса",
     questionTitleWidth: "Ширина заголовка вопроса",
     requiredMark: "Символ для обязательного вопроса",
@@ -1204,16 +1203,13 @@ export var ruStrings = {
     questionOrder: {
       initial: "Исходный текст"
     },
-    showProgressBar: {
-      off: "Скрытый",
-      topbottom: "Сверху и снизу",
-      aboveheader: "Над заголовком",
-      belowheader: "Под заголовком"
-    },
     progressBarLocation: {
       top: "Вверх",
       bottom: "Низ",
-      topBottom: "Верх и низ"
+      topbottom: "Верх и низ",
+      aboveheader: "Над заголовком",
+      belowheader: "Под заголовком",
+      off: "Скрытый"
     },
     sum: "Сумма",
     count: "Считать",
@@ -1438,7 +1434,8 @@ export var ruStrings = {
     },
     // survey templates
     survey: {
-      mode: "Выберите один из следующих вариантов: «Редактируемый» - позволяет респондентам заполнять Ваш опрос; \"Только для чтения\" - отключает редактирование формы."
+      mode: "Выберите один из следующих вариантов: «Редактируемый» - позволяет респондентам заполнять Ваш опрос; \"Только для чтения\" - отключает редактирование формы.",
+      progressBarLocation: "Задает расположение индикатора выполнения. Значение \"Auto\" отображает индикатор выполнения над или под заголовком опроса."
     },
     matrixdropdowncolumn: {
       name: "Идентификатор столбца, который не виден респондентам.",
@@ -1461,7 +1458,6 @@ export var ruStrings = {
     autoAdvanceAllowComplete: "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы.",
     showNavigationButtons: "Задает видимость и расположение кнопок навигации на странице.",
     navigationButtonsLocation: "Задает расположение кнопок навигации на странице.",
-    showProgressBar: "Задает видимость и расположение индикатора выполнения. Значение «Авто» отображает индикатор выполнения над или под заголовком опроса.",
     showPreviewBeforeComplete: "Включите страницу предварительного просмотра, на которой отображаются все вопросы или только ответы на них.",
     questionTitleLocation: "Применяется ко всем вопросам в опросе. Этот параметр может быть переопределен правилами выравнивания заголовков на более низких уровнях: панели, странице или вопросе. Настройки более низкого уровня будут переопределять настройки на более высоком уровне.",
     requiredMark: "Символ или последовательность символов, указывающие на то, что требуется ответ.",
@@ -3043,3 +3039,9 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pv.allQuestions: "Show all questions" => "Показать все вопросы"
 // pv.answeredQuestions: "Show answered questions only" => "Показать только отвеченные вопросы"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Задает расположение кнопок навигации на странице."
+// pe.progressBarLocation: "Progress bar alignment" => "Выравнивание полосы прогресса"
+// progressBarLocation.topbottom: "Top and bottom" => "Верх и низ"
+// progressBarLocation.aboveheader: "Above the header" => "Над заголовком"
+// progressBarLocation.belowheader: "Below the header" => "Под заголовком"
+// progressBarLocation.off: "Hidden" => "Скрытый"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Задает расположение индикатора выполнения. Значение \"Auto\" отображает индикатор выполнения над или под заголовком опроса."

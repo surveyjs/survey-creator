@@ -334,8 +334,6 @@ export var nbStrings = {
       templateErrorLocation: "Justering av feilmelding",
       newPanelPosition: "Ny panelplassering",
       showRangeInProgress: "Vis fremdriftslinjen",
-      showProgressBar: "Vis fremdriftslinjen",
-      progressBarLocation: "Justering av fremdriftslinje",
       keyName: "Forhindre dupliserte svar i følgende spørsmål"
     },
     question: {
@@ -632,6 +630,7 @@ export var nbStrings = {
     autoAdvanceEnabled: "Når en har svart alle spørsmål, gå til neste side automatisk",
     autoAdvanceAllowComplete: "Fullfør undersøkelsen automatisk",
     showProgressBar: "Vis fremdriftslinje",
+    progressBarLocation: "Justering av fremdriftslinje",
     questionTitleLocation: "Spørsmål tittel plassering",
     questionTitleWidth: "Bredde på spørsmålstittel",
     requiredMark: "Svar nødvendig symbol(er)",
@@ -1204,16 +1203,13 @@ export var nbStrings = {
     questionOrder: {
       initial: "Original"
     },
-    showProgressBar: {
-      off: "Skjult",
-      topbottom: "top and bottom",
-      aboveheader: "Over overskriften",
-      belowheader: "Under overskriften"
-    },
     progressBarLocation: {
       top: "Topp",
       bottom: "Bunn",
-      topBottom: "Topp og bunn"
+      topbottom: "Topp og bunn",
+      aboveheader: "Over overskriften",
+      belowheader: "Under overskriften",
+      off: "Skjult"
     },
     sum: "Sum",
     count: "Greve",
@@ -1438,7 +1434,8 @@ export var nbStrings = {
     },
     // survey templates
     survey: {
-      mode: "Velg mellom: \"Redigerbar\" - gjør det mulig for respondenter å fylle ut undersøkelsen din; \"Skrivebeskyttet\" - deaktiverer skjemaredigering."
+      mode: "Velg mellom: \"Redigerbar\" - gjør det mulig for respondenter å fylle ut undersøkelsen din; \"Skrivebeskyttet\" - deaktiverer skjemaredigering.",
+      progressBarLocation: "Angir plasseringen av fremdriftslinjen. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelsesoverskriften."
     },
     matrixdropdowncolumn: {
       name: "En kolonne-ID som ikke er synlig for respondentene.",
@@ -1461,7 +1458,6 @@ export var nbStrings = {
     autoAdvanceAllowComplete: "Velg om du vil at evalueringen skal fullføres automatisk etter at en svarperson har svart på alle spørsmålene.",
     showNavigationButtons: "Angir synligheten og plasseringen av navigasjonsknapper på en side.",
     navigationButtonsLocation: "Angir plasseringen av navigasjonsknapper på en side.",
-    showProgressBar: "Angir synligheten og plasseringen til en fremdriftsindikator. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelseshodet.",
     showPreviewBeforeComplete: "Aktiver forhåndsvisningssiden med alle eller besvarte spørsmål.",
     questionTitleLocation: "Gjelder alle spørsmålene i undersøkelsen. Denne innstillingen kan overstyres av titteljusteringsregler på lavere nivåer: panel, side eller spørsmål. En innstilling på lavere nivå vil overstyre de på et høyere nivå.",
     requiredMark: "Et symbol eller en sekvens av symboler som indikerer at et svar er nødvendig.",
@@ -2990,3 +2986,9 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Bruk verdier fra følgende matrisekolonne eller paneloppgave som valgtekster"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "I spørsmålstyper med ett eller flere valg har hvert valgalternativ en ID og visningsverdi. Denne innstillingen angir hvilken matrisekolonne eller hvilket panelspørsmål som skal gi ID-ene."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "I spørsmålstyper med ett eller flere valg har hvert valgalternativ en ID og visningsverdi. Denne innstillingen angir hvilken matrisekolonne eller hvilket panelspørsmål som skal inneholde visningstekstene."
+// pe.progressBarLocation: "Progress bar alignment" => "Justering av fremdriftslinje"
+// progressBarLocation.topbottom: "Top and bottom" => "Topp og bunn"
+// progressBarLocation.aboveheader: "Above the header" => "Over overskriften"
+// progressBarLocation.belowheader: "Below the header" => "Under overskriften"
+// progressBarLocation.off: "Hidden" => "Skjult"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Angir plasseringen av fremdriftslinjen. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelsesoverskriften."

@@ -334,8 +334,6 @@ export var bgStrings = {
       templateErrorLocation: "Подравняване на съобщение за грешка",
       newPanelPosition: "Ново местоположение на панела",
       showRangeInProgress: "Показване на лентата за напредъка",
-      showProgressBar: "Показване на лентата за напредъка",
-      progressBarLocation: "Подравняване на лентата за напредъка",
       keyName: "Предотвратяване на дублиращи се отговори в следния въпрос"
     },
     question: {
@@ -632,6 +630,7 @@ export var bgStrings = {
     autoAdvanceEnabled: "Продължи автоматично към следващата страница.",
     autoAdvanceAllowComplete: "Попълване на анкетата автоматично",
     showProgressBar: "Местоположение на лентата за напредък",
+    progressBarLocation: "Подравняване на лентата за напредъка",
     questionTitleLocation: "Местоположение на заглавието на въпроса",
     questionTitleWidth: "Ширина на заглавието на въпроса",
     requiredMark: "Задължителен символ(и)",
@@ -1204,16 +1203,13 @@ export var bgStrings = {
     questionOrder: {
       initial: "Оригинален"
     },
-    showProgressBar: {
-      off: "Скрит",
-      topbottom: "Отгоре и отдолу",
-      aboveheader: "Над горния колонтитул",
-      belowheader: "Под заглавката"
-    },
     progressBarLocation: {
       top: "Връх",
       bottom: "Дъно",
-      topBottom: "Отгоре и отдолу"
+      topbottom: "Отгоре и отдолу",
+      aboveheader: "Над заглавката",
+      belowheader: "Под заглавката",
+      off: "Скрит"
     },
     sum: "Сума",
     count: "Граф",
@@ -1438,7 +1434,8 @@ export var bgStrings = {
     },
     // survey templates
     survey: {
-      mode: "Изберете между: \"Редактируем\" - дава възможност на респондентите да попълнят анкетата Ви; \"Само за четене\" - забранява редактирането на формуляри."
+      mode: "Изберете между: \"Редактируем\" - дава възможност на респондентите да попълнят анкетата Ви; \"Само за четене\" - забранява редактирането на формуляри.",
+      progressBarLocation: "Задава местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването."
     },
     matrixdropdowncolumn: {
       name: "ИД на колона, която не се вижда от респондентите.",
@@ -1461,7 +1458,6 @@ export var bgStrings = {
     autoAdvanceAllowComplete: "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси.",
     showNavigationButtons: "Задава видимостта и местоположението на бутоните за навигация на дадена страница.",
     navigationButtonsLocation: "Задава местоположението на бутоните за навигация на страница.",
-    showProgressBar: "Задава видимостта и местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването.",
     showPreviewBeforeComplete: "Разрешете страницата за визуализация само с всички въпроси или само с отговор.",
     questionTitleLocation: "Отнася се за всички въпроси в рамките на проучването. Тази настройка може да бъде заместена от правилата за подравняване на заглавията на по-ниските нива: панел, страница или въпрос. Настройката от по-ниско ниво ще замени тези на по-високо ниво.",
     requiredMark: "Символ или поредица от символи, показващи, че е необходим отговор.",
@@ -2551,3 +2547,9 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Използване на стойности от следната матрична колона или панелен въпрос като текстове за избор"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "При типовете въпроси с един и множествен избор всяка опция за избор има идентификатор и стойност на показване. Тази настройка определя коя матрична колона или въпрос от панела трябва да предостави идентификаторите."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "При типовете въпроси с един и множествен избор всяка опция за избор има идентификатор и стойност на показване. Тази настройка указва коя матрична колона или въпрос от панела трябва да предоставя текстовете на дисплея."
+// pe.progressBarLocation: "Progress bar alignment" => "Подравняване на лентата за напредъка"
+// progressBarLocation.topbottom: "Top and bottom" => "Отгоре и отдолу"
+// progressBarLocation.aboveheader: "Above the header" => "Над заглавката"
+// progressBarLocation.belowheader: "Below the header" => "Под заглавката"
+// progressBarLocation.off: "Hidden" => "Скрит"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Задава местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването."

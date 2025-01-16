@@ -334,8 +334,6 @@ var polishStrings = {
       templateErrorLocation: "Wyrównanie komunikatu o błędzie",
       newPanelPosition: "Nowa lokalizacja panelu",
       showRangeInProgress: "Pokazywanie paska postępu",
-      showProgressBar: "Pokazywanie paska postępu",
-      progressBarLocation: "Wyrównanie paska postępu",
       keyName: "Zapobiegaj zduplikowanym odpowiedziom w następującym pytaniu"
     },
     question: {
@@ -632,6 +630,7 @@ var polishStrings = {
     autoAdvanceEnabled: "On answering all questions, go to the next page automatically",
     autoAdvanceAllowComplete: "Wypełnij ankietę automatycznie",
     showProgressBar: "Show progress bar",
+    progressBarLocation: "Wyrównanie paska postępu",
     questionTitleLocation: "Question title location",
     questionTitleWidth: "Szerokość tytułu pytania",
     requiredMark: "The question required symbol(s)",
@@ -1204,16 +1203,13 @@ var polishStrings = {
     questionOrder: {
       initial: "Oryginał"
     },
-    showProgressBar: {
-      off: "Ukryty",
-      topbottom: "Góra i dół",
-      aboveheader: "Nad nagłówkiem",
-      belowheader: "Pod nagłówkiem"
-    },
     progressBarLocation: {
       top: "Do góry",
       bottom: "Dno",
-      topBottom: "Góra i dół"
+      topbottom: "Góra i dół",
+      aboveheader: "Nad nagłówkiem",
+      belowheader: "Pod nagłówkiem",
+      off: "Ukryty"
     },
     sum: "Suma",
     count: "Hrabia",
@@ -1438,7 +1434,8 @@ var polishStrings = {
     },
     // survey templates
     survey: {
-      mode: "Wybierz pomiędzy: \"Edytowalne\" - umożliwia respondentom wypełnienie ankiety; \"Tylko do odczytu\" - wyłącza edycję formularza."
+      mode: "Wybierz pomiędzy: \"Edytowalne\" - umożliwia respondentom wypełnienie ankiety; \"Tylko do odczytu\" - wyłącza edycję formularza.",
+      progressBarLocation: "Ustawia położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu powyżej lub poniżej nagłówka ankiety."
     },
     matrixdropdowncolumn: {
       name: "Identyfikator kolumny, który nie jest widoczny dla respondentów.",
@@ -1461,7 +1458,6 @@ var polishStrings = {
     autoAdvanceAllowComplete: "Wybierz, jeśli chcesz, aby ankieta była wypełniana automatycznie po udzieleniu odpowiedzi respondenta na wszystkie pytania.",
     showNavigationButtons: "Ustawia widoczność i położenie przycisków nawigacyjnych na stronie.",
     navigationButtonsLocation: "Określa położenie przycisków nawigacyjnych na stronie.",
-    showProgressBar: "Ustawia widoczność i położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu nad lub pod nagłówkiem ankiety.",
     showPreviewBeforeComplete: "Włącz stronę podglądu ze wszystkimi pytaniami lub tylko odpowiedziami.",
     questionTitleLocation: "Dotyczy wszystkich pytań w ankiecie. To ustawienie może zostać zastąpione przez reguły wyrównania tytułu na niższych poziomach: panelu, strony lub pytania. Ustawienie niższego poziomu zastąpi ustawienia wyższego poziomu.",
     requiredMark: "Symbol lub sekwencja symboli wskazująca, że odpowiedź jest wymagana.",
@@ -3253,3 +3249,9 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Użyj wartości z poniższego pytania macierzowego, kolumnowego lub panelowego jako tekstów wyboru"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "W pytaniach jednokrotnego i wielokrotnego wyboru każda opcja wyboru ma identyfikator i wartość wyświetlaną. To ustawienie określa, która kolumna macierzy lub pytanie typu panel powinno zawierać identyfikatory."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "W pytaniach jednokrotnego i wielokrotnego wyboru każda opcja wyboru ma identyfikator i wartość wyświetlaną. To ustawienie określa, która kolumna macierzy lub pytanie typu panel powinno zawierać tekst wyświetlany."
+// pe.progressBarLocation: "Progress bar alignment" => "Wyrównanie paska postępu"
+// progressBarLocation.topbottom: "Top and bottom" => "Góra i dół"
+// progressBarLocation.aboveheader: "Above the header" => "Nad nagłówkiem"
+// progressBarLocation.belowheader: "Below the header" => "Pod nagłówkiem"
+// progressBarLocation.off: "Hidden" => "Ukryty"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Ustawia położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu powyżej lub poniżej nagłówka ankiety."

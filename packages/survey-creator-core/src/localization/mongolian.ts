@@ -334,8 +334,6 @@ export var mnStrings = {
       templateErrorLocation: "Алдааны мессежийн зохицуулалт",
       newPanelPosition: "Шинэ панелийн байршил",
       showRangeInProgress: "Хөгжил дэвшлийн барыг харуул",
-      showProgressBar: "Хөгжил дэвшлийн барыг харуул",
-      progressBarLocation: "Хөгжлийн барын зохицуулалт",
       keyName: "Дараах асуултад хувилж хариулахаас сэргийлье"
     },
     question: {
@@ -632,6 +630,7 @@ export var mnStrings = {
     autoAdvanceEnabled: "Дараагийн хуудас руу автоматаар шилжих",
     autoAdvanceAllowComplete: "Судалгааг автоматаар дуусгах",
     showProgressBar: "Явцын мөрний байршил",
+    progressBarLocation: "Progress bar alignment",
     questionTitleLocation: "Асуултын гарчгийн байршил",
     questionTitleWidth: "Асуулт нэрийн өргөн",
     requiredMark: "Шаардлагатай тэмдэг(үүд)",
@@ -1204,16 +1203,13 @@ export var mnStrings = {
     questionOrder: {
       initial: "Оргил"
     },
-    showProgressBar: {
-      off: "Нуусан",
-      topbottom: "Дээд ба доод",
-      aboveheader: "Толгой дээгүүр",
-      belowheader: "Гарчигны доор"
-    },
     progressBarLocation: {
       top: "Дээд",
       bottom: "Доод",
-      topBottom: "Дээд, доод"
+      topbottom: "Дээд ба доод",
+      aboveheader: "Гарчгийн дээр",
+      belowheader: "Гарчгийн доод талд",
+      off: "Нуугдмал"
     },
     sum: "Сум",
     count: "Тооллого",
@@ -1438,7 +1434,8 @@ export var mnStrings = {
     },
     // survey templates
     survey: {
-      mode: "Аль нэгийг нь сонгох: \"Editable\" - таны судалгааг бөглөх боломжийг санал асуулгад оролцогчдын хувьд олгодог; \"Зөвхөн уншлага\" - хөгжлийн бэрхшээлтэй хүмүүс редакци үүсгэнэ."
+      mode: "Аль нэгийг нь сонгох: \"Editable\" - таны судалгааг бөглөх боломжийг санал асуулгад оролцогчдын хувьд олгодог; \"Зөвхөн уншлага\" - хөгжлийн бэрхшээлтэй хүмүүс редакци үүсгэнэ.",
+      progressBarLocation: "Явцын барын байршлыг тогтооно. \"Auto\" value нь судалгааны гарчгийн дээр эсвэл доод тал дахь явцын барыг харуулна."
     },
     matrixdropdowncolumn: {
       name: "Хариулагчдад харагдахгүй байгаа баганын ID.",
@@ -1461,7 +1458,6 @@ export var mnStrings = {
     autoAdvanceAllowComplete: "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго.",
     showNavigationButtons: "Хуудас дээр навигацийн товчны харагдах байдал, байршлыг тогтооно.",
     navigationButtonsLocation: "Хуудас дээрх навигацийн товчлууруудын байрлалыг тогтооно.",
-    showProgressBar: "Хэмжилтийн тавцангийн харагдах байдал, байршлыг тогтооно. \"Авто\" үнэ цэнэ нь судалгааны толгой гарчгийн дээр эсвэл түүнээс доош хөгжил дэвшлийн барыг харуулдаг.",
     showPreviewBeforeComplete: "Зөвхөн бүх асуултаар эсвэл хариулт бүхий урьдчилан харах хуудсыг боломжтой болго.",
     questionTitleLocation: "Судалгааны бүх асуултад хамаарна. Энэ тохиргоог доод түвшний нэрийн зохицуулах дүрмээр давамгайлах боломжтой: panel, хуудас, эсвэл асуулт. Доод түвшний тохиргоо нь илүү өндөр түвшинд байгаа хүмүүсийг хүчингүй болгоно.",
     requiredMark: "Хариу шаардлагатайг заасан бэлгэдэл буюу бэлгэ тэмдгийн дараалал.",
@@ -2643,3 +2639,9 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын текст болгон ашигла"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт ID-г өгөхийг тодорхойлдог."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт үзүүлбэрийн текстийг хангахыг тодорхойлдог."
+// pe.progressBarLocation: "Progress bar alignment" => "Progress bar alignment"
+// progressBarLocation.topbottom: "Top and bottom" => "Дээд ба доод"
+// progressBarLocation.aboveheader: "Above the header" => "Гарчгийн дээр"
+// progressBarLocation.belowheader: "Below the header" => "Гарчгийн доод талд"
+// progressBarLocation.off: "Hidden" => "Нуугдмал"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Явцын барын байршлыг тогтооно. \"Auto\" value нь судалгааны гарчгийн дээр эсвэл доод тал дахь явцын барыг харуулна."
