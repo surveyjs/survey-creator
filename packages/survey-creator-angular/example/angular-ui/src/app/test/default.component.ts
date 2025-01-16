@@ -21,6 +21,8 @@ export class TestDefaultComponent implements OnInit {
       this.zone && this.zone.run(() => {
         (<any>window).prevCreator = this.creator;
         this.creator = new SurveyCreatorModel(options);
+        this.creator.showOneCategoryInPropertyGrid = false;
+        this.creator.allowZoom = false;
         this.creator.JSON = json;
         (<any>window).creator = this.creator;
       });
@@ -36,5 +38,6 @@ export class TestDefaultComponent implements OnInit {
     this.creator.tabResponsivenessMode = "menu";
     this.creator["animationEnabled"] = false;
     this.creator.showOneCategoryInPropertyGrid = false;
+    this.creator.allowZoom = false;
   }
 }

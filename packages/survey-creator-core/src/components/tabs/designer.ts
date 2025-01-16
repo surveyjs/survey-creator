@@ -135,7 +135,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.zoomInTooltip",
       iconName: "icon-zoomin-24x24",
       iconSize: "auto",
-      visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
+      visible: new ComputedUpdater<boolean>(() => this.creator.allowZoom),
       action: () => { this.scaleSurface(this.surfaceScale + this.stepSurfaceScaling); }
     });
     surfaceToolbarItems.push(<IAction>{
@@ -143,7 +143,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.zoom100Tooltip",
       iconName: "icon-actual-size-24x24",
       iconSize: "auto",
-      visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
+      visible: new ComputedUpdater<boolean>(() => this.creator.allowZoom),
       action: () => { this.scaleSurface(100); }
     });
     surfaceToolbarItems.push(<IAction>{
@@ -151,7 +151,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.zoomOutTooltip",
       iconName: "icon-zoomout-24x24",
       iconSize: "auto",
-      visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
+      visible: new ComputedUpdater<boolean>(() => this.creator.allowZoom),
       action: () => {
         this.scaleSurface(this.surfaceScale - this.stepSurfaceScaling);
         this.forceLazyRendering();
@@ -163,7 +163,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
       iconSize: "auto",
-      needSeparator: this.creator.showCreatorThemeSettings,
+      needSeparator: <any>new ComputedUpdater<boolean>(() => this.creator.allowZoom),
       visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
       action: () => this.creator.expandCollapseManager.expandCollapseElements("collapse-all", true)
     });

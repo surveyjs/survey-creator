@@ -6,21 +6,27 @@ import { Serializer } from "survey-core";
 
 test("Sidebar tabs initial", () => {
   const creator = new CreatorTester();
-  expect(creator.sidebar.pages.length).toEqual(3);
+  expect(creator.sidebar.pages.length).toEqual(4);
 });
 test("Sidebar tabs with showTranslationTab: true", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
-  expect(creator.sidebar.pages.length).toEqual(4);
+  expect(creator.sidebar.pages.length).toEqual(5);
 });
 
 test("Sidebar: activate tab change", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
   expect(creator.sidebar.header.title).toEqual(undefined);
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
+  expect(creator.sidebar.pages[0].id).toEqual("propertyGrid");
   expect(creator.sidebar.pages[0].visible).toEqual(true); // propertyGrid
+  expect(creator.sidebar.pages[1].id).toEqual("toolbox");
   expect(creator.sidebar.pages[1].visible).toEqual(false); // toolbox
+  expect(creator.sidebar.pages[2].id).toEqual("propertyGridPlaceholder");
   expect(creator.sidebar.pages[2].visible).toEqual(false); // propertyGridPlaceholder
-  expect(creator.sidebar.pages[3].visible).toEqual(false); // translation
+  expect(creator.sidebar.pages[3].id).toEqual("creatorTheme");
+  expect(creator.sidebar.pages[3].visible).toEqual(false); // creatorTheme
+  expect(creator.sidebar.pages[4].id).toEqual("translation");
+  expect(creator.sidebar.pages[4].visible).toEqual(false); // translation
 
   creator.sidebar.activePage = "translation";
   expect(creator.sidebar.header.title).toEqual("Language Settings");
@@ -28,7 +34,8 @@ test("Sidebar: activate tab change", () => {
   expect(creator.sidebar.pages[0].visible).toEqual(false); // propertyGrid
   expect(creator.sidebar.pages[1].visible).toEqual(false); // toolbox
   expect(creator.sidebar.pages[2].visible).toEqual(false); // propertyGridPlaceholder
-  expect(creator.sidebar.pages[3].visible).toEqual(true); // translation
+  expect(creator.sidebar.pages[3].visible).toEqual(false); // creatorTheme
+  expect(creator.sidebar.pages[4].visible).toEqual(true); // translation
 
   creator.sidebar.activePage = "toolbox";
   expect(creator.sidebar.header.title).toEqual(undefined);
@@ -36,7 +43,8 @@ test("Sidebar: activate tab change", () => {
   expect(creator.sidebar.pages[0].visible).toEqual(false); // propertyGrid
   expect(creator.sidebar.pages[1].visible).toEqual(true); // toolbox
   expect(creator.sidebar.pages[2].visible).toEqual(false); // propertyGridPlaceholder
-  expect(creator.sidebar.pages[3].visible).toEqual(false); // translation
+  expect(creator.sidebar.pages[3].visible).toEqual(false); // creatorTheme
+  expect(creator.sidebar.pages[4].visible).toEqual(false); // translation
 });
 
 test("Sidebar: hasVisiblePages test", () => {

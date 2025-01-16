@@ -4624,4 +4624,3 @@ test("Check the placeholders of the survey items if isMobileView is true", (): a
   expect(panelModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new element to the panel.");
   expect(imageQuestionModelAdorner.placeholderText).toBe("Click the button below and choose an image to upload");
 });
-
