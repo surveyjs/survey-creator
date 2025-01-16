@@ -993,7 +993,7 @@ test("fast copy tests, copy a question and check the index", (): any => {
       { type: "text", name: "question1" },
       { type: "text", name: "question2", startWithNewLine: false },
       { type: "text", name: "question3" }
-    ]
+    ], showQuestionNumbers: "on"
   };
   creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
   expect(creator.survey.pages[0].questions).toHaveLength(4);
@@ -1007,7 +1007,7 @@ test("fast copy tests, copy a question and check the index", (): any => {
       { type: "text", name: "question1" },
       { type: "text", name: "question2" },
       { type: "text", name: "question3" }
-    ]
+    ], showQuestionNumbers: "on"
   };
   creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
   expect(creator.survey.pages[0].questions).toHaveLength(4);
@@ -3376,7 +3376,7 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
 test("Add Questions with selection", (): any => {
   const creator = new CreatorTester();
   creator.addNewQuestionLast = false;
-  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }], showQuestionNumbers: "on" };
   const panel = <PanelModel>creator.survey.getAllPanels()[0];
   const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
   panelModel.addNewQuestion();

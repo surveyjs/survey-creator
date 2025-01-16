@@ -334,8 +334,6 @@ export let svStrings = {
       templateErrorLocation: "Justering av felmeddelande",
       newPanelPosition: "Ny panelplats",
       showRangeInProgress: "Visa förloppsindikatorn",
-      showProgressBar: "Visa förloppsindikatorn",
-      progressBarLocation: "Justering av förloppsindikator",
       keyName: "Förhindra dubbletter av svar i följande fråga"
     },
     question: {
@@ -388,7 +386,8 @@ export let svStrings = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Beskrivning av undersökningen"
+      description: "Beskrivning av undersökningen",
+      readOnly: "Gör undersökningen skrivskyddad"
     },
     page: {
       name: "Sidans namn",
@@ -611,7 +610,6 @@ export let svStrings = {
     simulator: "Välj enhetstyp",
     landscapeOrientation: "Växla till liggande orientering",
     portraitOrientation: "Växla till stående orientering",
-    mode: "Läge (redigera/läsa enbart)",
     clearInvisibleValues: "Rensa osynliga värden",
     cookieName: "Kaknamn (för att inaktivera kör enkäten två gånger lokalt)",
     partialSendEnabled: "Skicka enkät resultatet till nästa sida",
@@ -632,6 +630,7 @@ export let svStrings = {
     autoAdvanceEnabled: "Vid besvarande av alla frågor, gå till nästa sida automatiskt",
     autoAdvanceAllowComplete: "Fyll i enkäten automatiskt",
     showProgressBar: "Visa händelsförlopp",
+    progressBarLocation: "Justering av förloppsindikator",
     questionTitleLocation: "Fråga titel placering",
     questionTitleWidth: "Bredd på frågerubrik",
     requiredMark: "Var vänlig skriv en text",
@@ -1204,16 +1203,13 @@ export let svStrings = {
     questionOrder: {
       initial: "Original"
     },
-    showProgressBar: {
-      off: "Dold",
-      topbottom: "top and bottom",
-      aboveheader: "Ovanför sidhuvudet",
-      belowheader: "Nedanför rubriken"
-    },
     progressBarLocation: {
       top: "Topp",
       bottom: "Botten",
-      topBottom: "Topp och botten"
+      topbottom: "Topp och botten",
+      aboveheader: "Ovanför sidhuvudet",
+      belowheader: "Nedanför sidhuvudet",
+      off: "Dold"
     },
     sum: "Summa",
     count: "Räkna",
@@ -1438,7 +1434,8 @@ export let svStrings = {
     },
     // survey templates
     survey: {
-      mode: "Välj mellan: \"Redigerbar\" - gör det möjligt för respondenterna att fylla i din undersökning; \"Skrivskyddad\" - inaktiverar formulärredigering."
+      readOnly: "Välj om du vill hindra respondenterna från att fylla i din undersökning.",
+      progressBarLocation: "Ställer in platsen för förloppsindikatorn. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
     },
     matrixdropdowncolumn: {
       name: "Ett kolumn-ID som inte är synligt för svarande.",
@@ -1461,7 +1458,6 @@ export let svStrings = {
     autoAdvanceAllowComplete: "Välj om du vill att undersökningen ska slutföras automatiskt efter att en svarande har svarat på alla frågor.",
     showNavigationButtons: "Anger synlighet och placering av navigeringsknappar på en sida.",
     navigationButtonsLocation: "Anger placeringen av navigeringsknapparna på en sida.",
-    showProgressBar: "Anger synlighet och plats för en förloppsindikator. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet.",
     showPreviewBeforeComplete: "Aktivera förhandsgranskningssidan med alla eller endast besvarade frågor.",
     questionTitleLocation: "Gäller alla frågor i undersökningen. Den här inställningen kan åsidosättas av regler för justering av rubriker på lägre nivåer: panel, sida eller fråga. En inställning på lägre nivå åsidosätter de på en högre nivå.",
     requiredMark: "En symbol eller en sekvens av symboler som anger att ett svar krävs.",
@@ -3162,3 +3158,11 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Använd värden från följande matriskolumn eller panelfråga som valtexter"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "I frågetyper med ett eller flera val har varje alternativ ett ID och ett visningsvärde. Den här inställningen anger vilken matriskolumn eller panelfråga som ska ange ID:n."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "I frågetyper med ett eller flera val har varje alternativ ett ID och ett visningsvärde. Den här inställningen anger vilken matris-, kolumn- eller panelfråga som ska tillhandahålla visningstexterna."
+// pe.progressBarLocation: "Progress bar alignment" => "Justering av förloppsindikator"
+// progressBarLocation.topbottom: "Top and bottom" => "Topp och botten"
+// progressBarLocation.aboveheader: "Above the header" => "Ovanför sidhuvudet"
+// progressBarLocation.belowheader: "Below the header" => "Nedanför sidhuvudet"
+// progressBarLocation.off: "Hidden" => "Dold"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Ställer in platsen för förloppsindikatorn. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
+// survey.readOnly: "Make the survey read-only" => "Gör undersökningen skrivskyddad"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Välj om du vill hindra respondenterna från att fylla i din undersökning."
