@@ -82,7 +82,8 @@ require("./creator-theme/creator.scss");
 addIconsToThemeSet("v1", iconsV1);
 addIconsToThemeSet("v2", iconsV2);
 
-SvgRegistry.registerIcons(settings.useLegacyIcons ? iconsV1 : iconsV2);
+SvgRegistry.registerIcons(iconsV2);
+SvgRegistry.registerIcons(SvgThemeSets["v2"]);
 
 export interface IKeyboardShortcut {
   name?: string;
