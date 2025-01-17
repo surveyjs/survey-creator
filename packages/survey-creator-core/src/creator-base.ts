@@ -99,7 +99,7 @@ export class FooterToolbarActionContainer extends ActionContainer {
   protected getDefaultCssClasses() {
     const defaultCss = super.getDefaultCssClasses();
     return {
-      root: defaultCss.root + " svc-toolbar sv-action-bar",
+      root: defaultCss.root + " svc-toolbar sv-action-bar sv-action-bar--default-size-mode",
       item: defaultCss.item + " svc-toolbar__item",
       itemWithTitle: defaultCss.itemWithTitle + " svc-toolbar__item--with-text",
       itemAsIcon: defaultCss.itemAsIcon + " svc-toolbar__item--icon",
