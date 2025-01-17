@@ -31,7 +31,7 @@ import { TabTestPlugin } from "./components/tabs/test-plugin";
 import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-plugin";
-import { defaultV2Css, Notifier } from "survey-core";
+import { defaultCss, Notifier } from "survey-core";
 import { UndoRedoManager } from "./plugins/undo-redo/undo-redo-manager";
 import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/undo-redo";
 import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
@@ -1131,12 +1131,12 @@ export class SurveyCreatorModel extends Base
   /**
    * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
    *
-   * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
+   * Accepted values: `"default"`
    *
-   * Default value: `"defaultV2"`
+   * Default value: `"default"`
    * @see previewAllowSelectTheme
    */
-  public previewTheme: string = "defaultV2";
+  public previewTheme: string = "default";
   /**
    * Obsolete. Use the [`previewTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewTheme) property instead.
    * @deprecated
@@ -2072,7 +2072,7 @@ export class SurveyCreatorModel extends Base
   }
   private existingPages: {};
   private getSurfaceCss() {
-    const result = JSON.parse(JSON.stringify(defaultV2Css));
+    const result = JSON.parse(JSON.stringify(defaultCss));
     result.header += " svc-surface-header";
 
     return result;

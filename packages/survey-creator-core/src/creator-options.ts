@@ -131,9 +131,9 @@ export interface ICreatorOptions {
   /**
    * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
    *
-   * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
+   * Accepted values: `"default"`
    *
-   * Default value: `"defaultV2"`
+   * Default value: `"default"`
    */
   previewTheme?: string;
   /**
