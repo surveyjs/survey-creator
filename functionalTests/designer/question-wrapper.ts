@@ -125,21 +125,11 @@ test("Single input question wrapper action convert on hover", async (t) => {
 });
 
 test("Single input question wrapper action duplicate", async (t) => {
-  const json = {
-    showQuestionNumbers: "on",
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          { "type": "text", "name": "question1" }
-        ]
-      }
-    ]
-  };
-
-  await t.expect(questions.exists).notOk();
-  await setJSON(json);
   await t
+    .expect(questions.exists).notOk()
+
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input").visible).ok()
     .expect(duplicateActionButton.visible).ok()
@@ -159,22 +149,12 @@ test("Single input question wrapper action duplicate", async (t) => {
 });
 
 test("Single input question wrapper action change require", async (t) => {
-  const json = {
-    showQuestionNumbers: "on",
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          { "type": "text", "name": "question1" }
-        ]
-      }
-    ]
-  };
-
   const questionTitle = Selector(".sd-question__title");
-  await t.expect(questions.exists).notOk();
-  await setJSON(json);
   await t
+    .expect(questions.exists).notOk()
+
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input").visible).ok();
 
