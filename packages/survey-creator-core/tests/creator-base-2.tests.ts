@@ -269,6 +269,7 @@ test("propertyGridNavigationMode property", (): any => {
 test("showSurfaceTools", (): any => {
   const creator = new CreatorTester();
   creator.expandCollapseButtonVisibility = "never";
+  creator.allowZoom = false;
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(designerTabModel.showSurfaceTools).toBeFalsy();
 
@@ -294,6 +295,9 @@ test("Designer surface css classes", (): any => {
   const creator = new CreatorTester(undefined, undefined, false);
   creator.expandCollapseButtonVisibility = "never";
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-surface-tools svc-tab-designer--with-placeholder svc-tab-designer--standard-mode");
+
+  creator.allowZoom = false;
   expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-placeholder svc-tab-designer--standard-mode");
 
   creator.JSON = { pages: [{ name: "page1" }] };
