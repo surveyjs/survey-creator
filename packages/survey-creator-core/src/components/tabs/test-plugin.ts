@@ -1,5 +1,5 @@
 import { notShortCircuitAnd } from "../../utils/utils";
-import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName, IAction, ListModel, PopupModel, surveyLocalization } from "survey-core";
+import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultThemeName, IAction, ListModel, PopupModel, surveyLocalization } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
@@ -18,7 +18,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   private previewAction: Action;
   private prevPageAction: Action;
   private nextPageAction: Action;
-  private simulatorTheme: any = surveyCss[defaultV2ThemeName];
+  private simulatorTheme: any = surveyCss[defaultThemeName];
 
   public model: TestSurveyTabViewModel;
   private _previewDevice: string = "";
@@ -82,7 +82,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     }
   }
   private setPreviewTheme(themeName: string): void {
-    this.simulatorTheme = surveyCss[themeName] || surveyCss[defaultV2ThemeName];
+    this.simulatorTheme = surveyCss[themeName] || surveyCss[defaultThemeName];
   }
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "preview"; });

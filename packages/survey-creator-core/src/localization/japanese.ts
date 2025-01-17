@@ -334,8 +334,6 @@ export var jaStrings = {
       templateErrorLocation: "エラー・メッセージのアライメント",
       newPanelPosition: "新しいパネルの位置",
       showRangeInProgress: "進行状況バーを表示する",
-      showProgressBar: "進行状況バーを表示する",
-      progressBarLocation: "プログレスバーの配置",
       keyName: "次の質問で回答の重複を防ぐ"
     },
     question: {
@@ -388,7 +386,8 @@ export var jaStrings = {
     // survey templates
     survey: {
       title: "タイトル",
-      description: "調査内容"
+      description: "調査内容",
+      readOnly: "調査を読み取り専用にする"
     },
     page: {
       name: "ページ名",
@@ -611,7 +610,6 @@ export var jaStrings = {
     simulator: "デバイスを選択する",
     landscapeOrientation: "横向き",
     portraitOrientation: "縦向きに切り替える",
-    mode: "モード（編集/読み取り専用）",
     clearInvisibleValues: "非表示の値をクリアする",
     cookieName: "Cookie名（ローカルで2回アンケートを実行しないようにするため）",
     partialSendEnabled: "次のページにアンケート結果を送信する",
@@ -632,6 +630,7 @@ export var jaStrings = {
     autoAdvanceEnabled: "すべての質問に回答すると、自動的に次のページに移動します",
     autoAdvanceAllowComplete: "調査に自動的に回答する",
     showProgressBar: "プログレスバーを表示する",
+    progressBarLocation: "プログレスバーの配置",
     questionTitleLocation: "質問のタイトルの場所",
     questionTitleWidth: "質問タイトルの幅",
     requiredMark: "質問には記号が必要",
@@ -754,6 +753,8 @@ export var jaStrings = {
     separateSpecialChoices: "個別の特別な選択肢 (なし、その他、すべて選択)",
     choicesFromQuestion: "次の質問から選択肢をコピーする",
     choicesFromQuestionMode: "どの選択肢をコピーするか?",
+    choiceValuesFromQuestion: "次の行列列またはパネルの質問の値を選択肢IDとして使用します",
+    choiceTextsFromQuestion: "次の行列の列またはパネルの質問の値を選択テキストとして使用します",
     progressBarShowPageTitles: "プログレスバーにページタイトルを表示する",
     progressBarShowPageNumbers: "プログレスバーにページ番号を表示する",
     showCommentArea: "コメント領域を表示する",
@@ -1202,16 +1203,13 @@ export var jaStrings = {
     questionOrder: {
       initial: "翻訳元"
     },
-    showProgressBar: {
-      off: "隠れた",
-      topbottom: "上と下",
-      aboveheader: "ヘッダーの上",
-      belowheader: "ヘッダーの下"
-    },
     progressBarLocation: {
       top: "ページのトップへ",
       bottom: "底",
-      topBottom: "上部と下部"
+      topbottom: "上部と下部",
+      aboveheader: "ヘッダーの上",
+      belowheader: "ヘッダーの下",
+      off: "隠れた"
     },
     sum: "和",
     count: "数える",
@@ -1436,7 +1434,8 @@ export var jaStrings = {
     },
     // survey templates
     survey: {
-      mode: "次から選択します。 「編集可能」 - 回答者がアンケートに回答できるようにします。「読み取り専用」 - フォームの編集を無効にします。"
+      readOnly: "回答者がアンケートに回答できないようにする場合に選択します。",
+      progressBarLocation: "プログレスバーの位置を設定します。「自動」の値は、調査ヘッダーの上または下に進行状況バーを表示します。"
     },
     matrixdropdowncolumn: {
       name: "回答者に表示されない列 ID。",
@@ -1459,7 +1458,6 @@ export var jaStrings = {
     autoAdvanceAllowComplete: "回答者がすべての質問に回答した後にアンケートを自動的に完了する場合に選択します。",
     showNavigationButtons: "ページ上のナビゲーションボタンの表示と位置を設定します。",
     navigationButtonsLocation: "ページ上のナビゲーション ボタンの位置を設定します。",
-    showProgressBar: "プログレスバーの表示と位置を設定します。「自動」の値は、アンケートヘッダーの上または下に進行状況バーを表示します。",
     showPreviewBeforeComplete: "すべての質問または回答済みの質問のみを含むプレビューページを有効にします。",
     questionTitleLocation: "アンケート内のすべての質問に適用されます。この設定は、下位レベル(パネル、ページ、または質問)のタイトル配置ルールによって上書きできます。下位レベルの設定は、上位レベルの設定よりも優先されます。",
     requiredMark: "回答が必要であることを示す記号または記号のシーケンス。",
@@ -1520,6 +1518,8 @@ export var jaStrings = {
     useDisplayValuesInDynamicTexts: "単一選択および複数選択の質問タイプでは、各選択肢にIDと表示値があります。この設定を選択すると、HTML の質問やアンケート エレメントの動的なタイトルと説明に ID 値ではなく表示値が表示されます。",
     clearIfInvisible: "条件付きロジックで非表示にした質問値をクリアするかどうか、およびいつクリアするかを選択します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「アンケート完了時」)を適用します。",
     choicesFromQuestionMode: "選択元: 「すべて」 - 選択した質問からすべての選択肢をコピーします。\"Selected\" - 選択した選択肢オプションのみを動的にコピーします。「未選択」 - 選択されていない選択肢オプションのみを動的にコピーします。「なし」と「その他」のオプションは、ソースの質問で有効になっている場合、デフォルトでコピーされます。",
+    choiceValuesFromQuestion: "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、どの行列列またはパネルの質問がIDを提供するかを指定します。",
+    choiceTextsFromQuestion: "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、表示テキストを提供する行列列またはパネルの質問を指定します。",
     showOtherItem: "選択すると、ユーザーは別のコメント ボックスに追加の入力を含めることができます。",
     separateSpecialChoices: "各特殊選択オプション(「なし」、「その他」、「すべて選択」)を、複数列のレイアウトを使用している場合でも、新しい行に表示します。",
     path: "サービス データセット内で、オブジェクトのターゲット配列が配置されている場所を指定します。URL が既に配列を指している場合は、空のままにします。",
@@ -2979,3 +2979,15 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pv.answeredQuestions: "Show answered questions only" => "回答済みの質問のみを表示する"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "ページ上のナビゲーション ボタンの位置を設定します。"
 // pe.size: "Input field width (in characters)" => "入力フィールドの幅 (文字単位)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "次の行列列またはパネルの質問の値を選択肢IDとして使用します"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "次の行列の列またはパネルの質問の値を選択テキストとして使用します"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、どの行列列またはパネルの質問がIDを提供するかを指定します。"
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、表示テキストを提供する行列列またはパネルの質問を指定します。"
+// pe.progressBarLocation: "Progress bar alignment" => "プログレスバーの配置"
+// progressBarLocation.topbottom: "Top and bottom" => "上部と下部"
+// progressBarLocation.aboveheader: "Above the header" => "ヘッダーの上"
+// progressBarLocation.belowheader: "Below the header" => "ヘッダーの下"
+// progressBarLocation.off: "Hidden" => "隠れた"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "プログレスバーの位置を設定します。「自動」の値は、調査ヘッダーの上または下に進行状況バーを表示します。"
+// survey.readOnly: "Make the survey read-only" => "調査を読み取り専用にする"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "回答者がアンケートに回答できないようにする場合に選択します。"

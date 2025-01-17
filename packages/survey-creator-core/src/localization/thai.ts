@@ -334,8 +334,6 @@ export const thStrings = {
       templateErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
       newPanelPosition: "ตำแหน่งแผงใหม่",
       showRangeInProgress: "แสดงแถบความคืบหน้า",
-      showProgressBar: "แสดงแถบความคืบหน้า",
-      progressBarLocation: "การจัดตําแหน่งแถบความคืบหน้า",
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
     question: {
@@ -388,7 +386,8 @@ export const thStrings = {
     // survey templates
     survey: {
       title: "ชื่อแบบสำรวจ",
-      description: "คำอธิบายแบบสำรวจ"
+      description: "คำอธิบายแบบสำรวจ",
+      readOnly: "ทําให้แบบสํารวจเป็นแบบอ่านอย่างเดียว"
     },
     page: {
       name: "ชื่อหน้า",
@@ -611,7 +610,6 @@ export const thStrings = {
     simulator: "เลือกประเภทอุปกรณ์",
     landscapeOrientation: "เปลี่ยนเป็นแนวนอน",
     portraitOrientation: "เปลี่ยนเป็นแนวตั้ง",
-    mode: "โหมดการแสดงผลแบบสำรวจ",
     clearInvisibleValues: "ล้างค่าคำถามที่ซ่อนอยู่",
     cookieName: "จำกัดการตอบหนึ่งครั้ง",
     partialSendEnabled: "บันทึกความคืบหน้าแบบสำรวจอัตโนมัติเมื่อเปลี่ยนหน้า",
@@ -632,6 +630,7 @@ export const thStrings = {
     autoAdvanceEnabled: "ไปหน้าถัดไปอัตโนมัติ",
     autoAdvanceAllowComplete: "เสร็จสิ้นแบบสำรวจอัตโนมัติ",
     showProgressBar: "การจัดตำแหน่งแถบความคืบหน้า",
+    progressBarLocation: "การจัดตําแหน่งแถบความคืบหน้า",
     questionTitleLocation: "การจัดตำแหน่งชื่อคำถาม",
     questionTitleWidth: "ความกว้างของชื่อคำถาม",
     requiredMark: "สัญลักษณ์ที่จำเป็น",
@@ -754,6 +753,8 @@ export const thStrings = {
     separateSpecialChoices: "แยกตัวเลือกพิเศษ",
     choicesFromQuestion: "คัดลอกตัวเลือกจากคำถามต่อไปนี้",
     choicesFromQuestionMode: "ตัวเลือกใดที่จะคัดลอก",
+    choiceValuesFromQuestion: "ใช้ค่าจากคอลัมน์เมทริกซ์ต่อไปนี้หรือคําถามแผงเป็น ID ตัวเลือก",
+    choiceTextsFromQuestion: "ใช้ค่าจากคอลัมน์เมทริกซ์หรือคําถามแผงต่อไปนี้เป็นข้อความตัวเลือก",
     progressBarShowPageTitles: "แสดงชื่อหน้าในแถบความคืบหน้า",
     progressBarShowPageNumbers: "แสดงหมายเลขหน้าในแถบความคืบหน้า",
     showCommentArea: "เพิ่มกล่องความคิดเห็น",
@@ -1202,16 +1203,13 @@ export const thStrings = {
     questionOrder: {
       initial: "ดั้งเดิม"
     },
-    showProgressBar: {
-      off: "ซ่อน",
-      topbottom: "ด้านบนและล่าง",
-      aboveheader: "เหนือหัวเรื่อง",
-      belowheader: "ใต้หัวเรื่อง"
-    },
     progressBarLocation: {
       top: "ด้านบน",
       bottom: "ก้น",
-      topBottom: "ด้านบนและด้านล่าง"
+      topbottom: "ด้านบนและด้านล่าง",
+      aboveheader: "เหนือส่วนหัว",
+      belowheader: "ด้านล่างส่วนหัว",
+      off: "ซ่อน"
     },
     sum: "รวม",
     count: "นับ",
@@ -1436,7 +1434,8 @@ export const thStrings = {
     },
     // survey templates
     survey: {
-      mode: "เลือกจาก: \"แก้ไขได้\" - อนุญาตให้ผู้ตอบกรอกแบบสำรวจของคุณ; \"อ่านอย่างเดียว\" - ปิดการแก้ไขแบบฟอร์ม"
+      readOnly: "เลือกว่าคุณต้องการป้องกันไม่ให้ผู้ตอบแบบสอบถามกรอกแบบสํารวจหรือไม่",
+      progressBarLocation: "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"
     },
     matrixdropdowncolumn: {
       name: "ID คอลัมน์ที่ไม่มองเห็นได้สำหรับผู้ตอบแบบสำรวจ",
@@ -1459,7 +1458,6 @@ export const thStrings = {
     autoAdvanceAllowComplete: "เลือกถ้าคุณต้องการให้แบบสำรวจเสร็จสิ้นโดยอัตโนมัติหลังจากผู้ตอบตอบคำถามทั้งหมด",
     showNavigationButtons: "ตั้งการมองเห็นและตำแหน่งของปุ่มนำทางในหน้า",
     navigationButtonsLocation: "ตั้งค่าตําแหน่งของปุ่มนําทางบนหน้า",
-    showProgressBar: "ตั้งการมองเห็นและตำแหน่งของแถบความคืบหน้า ตัวเลือก \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าเหนือหรือใต้หัวเรื่องแบบสำรวจ",
     showPreviewBeforeComplete: "เปิดใช้งานหน้าพรีวิวที่มีคำถามทั้งหมดหรือที่ตอบแล้ว",
     questionTitleLocation: "ใช้กับคำถามทั้งหมดในแบบสำรวจ การตั้งค่านี้สามารถถูกแทนที่ได้โดยกฎการจัดตำแหน่งชื่อเรื่องที่ระดับต่ำกว่า: แผง, หน้า หรือคำถาม การตั้งค่าระดับต่ำกว่าจะยกเลิกการตั้งค่าระดับสูง",
     requiredMark: "สัญลักษณ์หรือชุดของสัญลักษณ์ที่ระบุว่าจำเป็นต้องตอบ",
@@ -1520,6 +1518,8 @@ export const thStrings = {
     useDisplayValuesInDynamicTexts: "ในประเภทคำถามเลือกเดียวและเลือกหลายแต่ละตัวเลือกมี ID และค่าที่แสดง เมื่อเลือก การตั้งค่านี้จะแสดงค่าที่แสดงแทนที่จะเป็นค่า ID ในคำถาม HTML และชื่อเรื่องและคำอธิบายแบบไดนามิกขององค์ประกอบแบบสำรวจ",
     clearIfInvisible: "เลือกว่าจะล้างค่าคำถามที่ซ่อนโดยตรรกะเงื่อนไขหรือไม่และเมื่อใด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"เมื่อเสร็จสิ้นแบบสำรวจ\")",
     choicesFromQuestionMode: "เลือกจาก: \"ทั้งหมด\" - คัดลอกตัวเลือกทั้งหมดจากคำถามที่เลือก; \"เลือกแล้ว\" - คัดลอกเฉพาะตัวเลือกที่เลือกแบบไดนามิก; \"ไม่ได้เลือก\" - คัดลอกเฉพาะตัวเลือกที่ไม่ได้เลือกแบบไดนามิก ตัวเลือก \"ไม่มี\" และ \"อื่น\" จะคัดลอกตามค่าเริ่มต้นถ้าเปิดในคำถามต้นทาง",
+    choiceValuesFromQuestion: "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดควรให้รหัส",
+    choiceTextsFromQuestion: "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดที่ควรให้ข้อความที่แสดง",
     showOtherItem: "เมื่อเลือก ผู้ใช้สามารถป้อนข้อมูลเพิ่มเติมในกล่องความคิดเห็นแยก",
     separateSpecialChoices: "แสดงตัวเลือกพิเศษแต่ละตัวเลือก (\"ไม่มี\", \"อื่น\", \"เลือกทั้งหมด\") ในบรรทัดใหม่ แม้ว่าจะใช้การจัดเรียงหลายคอลัมน์",
     path: "ระบุที่ตั้งในชุดข้อมูลบริการที่มีอาร์เรย์ของวัตถุเป้าหมาย อยู่ถ้าลิงก์ URL ชี้ไปที่อาร์เรย์",
@@ -1920,3 +1920,15 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // pv.allQuestions: "Show all questions" => "แสดงคําถามทั้งหมด"
 // pv.answeredQuestions: "Show answered questions only" => "แสดงเฉพาะคําถามที่ตอบแล้ว"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "ตั้งค่าตําแหน่งของปุ่มนําทางบนหน้า"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "ใช้ค่าจากคอลัมน์เมทริกซ์ต่อไปนี้หรือคําถามแผงเป็น ID ตัวเลือก"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "ใช้ค่าจากคอลัมน์เมทริกซ์หรือคําถามแผงต่อไปนี้เป็นข้อความตัวเลือก"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดควรให้รหัส"
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดที่ควรให้ข้อความที่แสดง"
+// pe.progressBarLocation: "Progress bar alignment" => "การจัดตําแหน่งแถบความคืบหน้า"
+// progressBarLocation.topbottom: "Top and bottom" => "ด้านบนและด้านล่าง"
+// progressBarLocation.aboveheader: "Above the header" => "เหนือส่วนหัว"
+// progressBarLocation.belowheader: "Below the header" => "ด้านล่างส่วนหัว"
+// progressBarLocation.off: "Hidden" => "ซ่อน"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"
+// survey.readOnly: "Make the survey read-only" => "ทําให้แบบสํารวจเป็นแบบอ่านอย่างเดียว"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "เลือกว่าคุณต้องการป้องกันไม่ให้ผู้ตอบแบบสอบถามกรอกแบบสํารวจหรือไม่"

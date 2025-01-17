@@ -562,13 +562,11 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "maskSettings", tab: "mask" },
     ],
     tabs: [
-      { name: "mask", index: 20 },
-      { name: "validators", index: 25 }
+      { name: "mask", index: 20 }
     ]
   },
   "matrixdropdowncolumn@comment": {
-    properties: ["rows", "placeholder", "maxLength"],
-    tabs: [{ name: "validators", index: 25 }]
+    properties: ["rows", "placeholder ", "maxLength"]
   },
   "matrixdropdowncolumn@boolean": {
     properties: [
@@ -736,8 +734,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "title",
       "description",
       "showTitle",
+      "readOnly",
       "locale",
-      "mode",
       "cookieName",
       "widthMode",
       "width",
@@ -752,6 +750,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showPrevButton", tab: "navigation" },
       { name: "showProgressBar", tab: "navigation" },
       { name: "progressBarType", tab: "navigation" },
+      { name: "progressBarLocation", tab: "navigation" },
       { name: "progressBarShowPageTitles", tab: "navigation" },
       { name: "progressBarShowPageNumbers", tab: "navigation" },
       { name: "showTOC", tab: "navigation" },

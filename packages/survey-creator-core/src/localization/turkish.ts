@@ -334,8 +334,6 @@ export var turkishStrings = {
       templateErrorLocation: "Hata iletisi hizalaması",
       newPanelPosition: "Yeni panel konumu",
       showRangeInProgress: "İlerleme çubuğunu gösterme",
-      showProgressBar: "İlerleme çubuğunu gösterme",
-      progressBarLocation: "İlerleme çubuğu hizalaması",
       keyName: "Aşağıdaki soruda yinelenen yanıtları önleyin"
     },
     question: {
@@ -388,7 +386,8 @@ export var turkishStrings = {
     // survey templates
     survey: {
       title: "Başlık",
-      description: "Anket açıklaması"
+      description: "Anket açıklaması",
+      readOnly: "Anketi salt okunur hale getirin"
     },
     page: {
       name: "Sayfa adı",
@@ -611,7 +610,6 @@ export var turkishStrings = {
     simulator: "Cihaz seçin",
     landscapeOrientation: "Yatay",
     portraitOrientation: "Dikey yöne geçme",
-    mode: "Mod (düzenlebilir/düzenlenemez)",
     clearInvisibleValues: "Görünmez değerleri sil",
     cookieName: "Çerez adı (anketi yerel olarak iki kez devre dışı bırakmak için)",
     partialSendEnabled: "Bir sonraki sayfada anket sonuçlarını gönder",
@@ -632,6 +630,7 @@ export var turkishStrings = {
     autoAdvanceEnabled: "Tüm soruları cevaplarken otomatik olarak sonraki sayfaya git",
     autoAdvanceAllowComplete: "Anketi otomatik olarak tamamlama",
     showProgressBar: "İlerleme çubuğunu göster",
+    progressBarLocation: "İlerleme çubuğu hizalaması",
     questionTitleLocation: "Soru başlığı konumu",
     questionTitleWidth: "Soru başlığı genişliği",
     requiredMark: "Zorunlu soru sembolü",
@@ -754,6 +753,8 @@ export var turkishStrings = {
     separateSpecialChoices: "Ayrı özel seçenekler (Yok, Diğer, Tümünü Seç)",
     choicesFromQuestion: "Aşağıdaki sorudan seçenekleri kopyalama",
     choicesFromQuestionMode: "Hangi seçenekleri kopyalamalıyım?",
+    choiceValuesFromQuestion: "Aşağıdaki matris sütunundaki veya panel sorusundaki değerleri seçim kimlikleri olarak kullanın",
+    choiceTextsFromQuestion: "Aşağıdaki matris sütununda veya panel sorusunda yer alan değerleri seçim metinleri olarak kullanın",
     progressBarShowPageTitles: "Sayfa başlıklarını ilerleme çubuğunda görüntüleme",
     progressBarShowPageNumbers: "İlerleme çubuğunda sayfa numaralarını görüntüleme",
     showCommentArea: "Yorumu var",
@@ -1202,16 +1203,13 @@ export var turkishStrings = {
     questionOrder: {
       initial: "Özgün"
     },
-    showProgressBar: {
-      off: "Gizli",
-      topbottom: "Üst ve alt",
-      aboveheader: "Başlığın üstünde",
-      belowheader: "Başlığın altında"
-    },
     progressBarLocation: {
       top: "Sayfanın Üstü",
       bottom: "Dip",
-      topBottom: "Üst ve alt"
+      topbottom: "Üst ve alt",
+      aboveheader: "Başlığın üstünde",
+      belowheader: "Başlığın altında",
+      off: "Gizli"
     },
     sum: "Toplam",
     count: "Saymak",
@@ -1436,7 +1434,8 @@ export var turkishStrings = {
     },
     // survey templates
     survey: {
-      mode: "Şunlar arasından seçim yapın: \"Düzenlenebilir\" - yanıtlayanların anketinizi doldurmasını sağlar; \"Salt okunur\" - form düzenlemeyi devre dışı bırakır."
+      readOnly: "Yanıtlayanların anketinizi doldurmasını engellemek isteyip istemediğinizi seçin.",
+      progressBarLocation: "İlerleme çubuğunun konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
     },
     matrixdropdowncolumn: {
       name: "Yanıtlayanlar tarafından görülemeyen bir sütun kimliği.",
@@ -1459,7 +1458,6 @@ export var turkishStrings = {
     autoAdvanceAllowComplete: "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin.",
     showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar.",
     navigationButtonsLocation: "Sayfadaki gezinme düğmelerinin konumunu ayarlar.",
-    showProgressBar: "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler.",
     showPreviewBeforeComplete: "Önizleme sayfasını tüm sorularla veya yalnızca yanıtlanmış sorularla etkinleştirin.",
     questionTitleLocation: "Anketteki tüm sorular için geçerlidir. Bu ayar, panel, sayfa veya soru gibi daha düşük düzeylerdeki başlık hizalama kuralları tarafından geçersiz kılınabilir. Daha düşük düzeydeki bir ayar, daha yüksek düzeydeki ayarları geçersiz kılar.",
     requiredMark: "Bir yanıtın gerekli olduğunu gösteren bir sembol veya sembol dizisi.",
@@ -1520,6 +1518,8 @@ export var turkishStrings = {
     useDisplayValuesInDynamicTexts: "Tekli ve çoktan seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Seçildiğinde, bu ayar HTML sorularında ve anket öğelerinin dinamik başlıklarında ve açıklamalarında kimlik değeri yerine bir görünen değer gösterir.",
     clearIfInvisible: "Koşullu mantık tarafından gizlenen soru değerlerinin temizlenip temizlenmeyeceğini ve ne zaman yapılacağını seçin. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Anket tamamlandıktan sonra\").",
     choicesFromQuestionMode: "Şunlar arasından seçim yapın: \"Tümü\" - seçilen sorudaki tüm seçim seçeneklerini kopyalar; \"Seçili\" - yalnızca seçilen seçim seçeneklerini dinamik olarak kopyalar; \"Seçilmemiş\" - yalnızca seçilmemiş seçim seçeneklerini dinamik olarak kopyalar. \"Yok\" ve \"Diğer\" seçenekleri, kaynak soruda etkinleştirilmişse varsayılan olarak kopyalanır.",
+    choiceValuesFromQuestion: "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, kimlikleri hangi matris, sütun veya panel sorusunun sağlaması gerektiğini belirtir.",
+    choiceTextsFromQuestion: "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, hangi matris sütun veya panel sorusunun görüntü metinlerini sağlaması gerektiğini belirtir.",
     showOtherItem: "Seçildiğinde, kullanıcılar ayrı bir yorum kutusuna ek girdi ekleyebilir.",
     separateSpecialChoices: "Her özel seçim seçeneğini (\"Yok\", \"Diğer\", \"Tümünü Seç\") çok sütunlu bir düzen kullanırken bile yeni bir satırda görüntüler.",
     path: "Hizmet veri kümesinde, hedef nesne dizisinin bulunduğu konumu belirtin. URL zaten diziye işaret ediyorsa boş bırakın.",
@@ -2975,3 +2975,15 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pv.allQuestions: "Show all questions" => "Tüm soruları göster"
 // pv.answeredQuestions: "Show answered questions only" => "Yalnızca yanıtlanmış soruları göster"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Sayfadaki gezinme düğmelerinin konumunu ayarlar."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Aşağıdaki matris sütunundaki veya panel sorusundaki değerleri seçim kimlikleri olarak kullanın"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Aşağıdaki matris sütununda veya panel sorusunda yer alan değerleri seçim metinleri olarak kullanın"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, kimlikleri hangi matris, sütun veya panel sorusunun sağlaması gerektiğini belirtir."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, hangi matris sütun veya panel sorusunun görüntü metinlerini sağlaması gerektiğini belirtir."
+// pe.progressBarLocation: "Progress bar alignment" => "İlerleme çubuğu hizalaması"
+// progressBarLocation.topbottom: "Top and bottom" => "Üst ve alt"
+// progressBarLocation.aboveheader: "Above the header" => "Başlığın üstünde"
+// progressBarLocation.belowheader: "Below the header" => "Başlığın altında"
+// progressBarLocation.off: "Hidden" => "Gizli"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "İlerleme çubuğunun konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
+// survey.readOnly: "Make the survey read-only" => "Anketi salt okunur hale getirin"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Yanıtlayanların anketinizi doldurmasını engellemek isteyip istemediğinizi seçin."

@@ -334,8 +334,6 @@ export var hrStrings = {
       templateErrorLocation: "Poravnanje poruke o pogrešci",
       newPanelPosition: "Novo mjesto ploče",
       showRangeInProgress: "Prikaz trake napretka",
-      showProgressBar: "Prikaz trake napretka",
-      progressBarLocation: "Poravnanje trake napretka",
       keyName: "Spriječite dvostruke odgovore u sljedećem pitanju"
     },
     question: {
@@ -388,7 +386,8 @@ export var hrStrings = {
     // survey templates
     survey: {
       title: "Naslov",
-      description: "Opis upitnika"
+      description: "Opis upitnika",
+      readOnly: "Neka anketa bude samo za čitanje"
     },
     page: {
       name: "Naziv stranice",
@@ -611,7 +610,6 @@ export var hrStrings = {
     simulator: "Odaberite uređaj",
     landscapeOrientation: "Krajolik",
     portraitOrientation: "Prebacivanje na okomito usmjerenje",
-    mode: "Način rada (samo uređivanje/čitanje)",
     clearInvisibleValues: "Jasne nevidljive vrijednosti",
     cookieName: "Naziv kolačića (onemogućiti anketu dva puta lokalno)",
     partialSendEnabled: "Pošaljite rezultate ankete na sljedeću stranicu",
@@ -632,6 +630,7 @@ export var hrStrings = {
     autoAdvanceEnabled: "Kada odgovarate na sva pitanja, idite automatski na sljedeću stranicu",
     autoAdvanceAllowComplete: "Automatsko ispunjavanje upitnika",
     showProgressBar: "Pokaži traku napretka",
+    progressBarLocation: "Poravnanje trake napretka",
     questionTitleLocation: "Lokacija naslova pitanja",
     questionTitleWidth: "Širina naslova pitanja",
     requiredMark: "Pitanje je zahtijevalo simbole",
@@ -754,6 +753,8 @@ export var hrStrings = {
     separateSpecialChoices: "Razdvoji posebne odabire (Ništa, Ostalo, Odaberi sve)",
     choicesFromQuestion: "Kopiraj odabire iz sljedećeg pitanja",
     choicesFromQuestionMode: "Koje izbore kopirati?",
+    choiceValuesFromQuestion: "Koristite vrijednosti iz sljedećeg stupca matrice ili pitanja panela kao ID-ove izbora",
+    choiceTextsFromQuestion: "Koristite vrijednosti iz sljedećeg stupca matrice ili pitanja na ploči kao tekstove izbora",
     progressBarShowPageTitles: "Prikaz naslova stranica na traci tijeka",
     progressBarShowPageNumbers: "Prikaz brojeva stranica na traci tijeka",
     showCommentArea: "Prikaz područja komentara",
@@ -1202,16 +1203,13 @@ export var hrStrings = {
     questionOrder: {
       initial: "Originalan"
     },
-    showProgressBar: {
-      off: "Skriven",
-      topbottom: "top and bottom",
-      aboveheader: "Iznad zaglavlja",
-      belowheader: "Ispod zaglavlja"
-    },
     progressBarLocation: {
       top: "Vrh",
       bottom: "Dno",
-      topBottom: "Vrh i dno"
+      topbottom: "Vrh i dno",
+      aboveheader: "Iznad zaglavlja",
+      belowheader: "Ispod zaglavlja",
+      off: "Skriven"
     },
     sum: "Suma",
     count: "Brojati",
@@ -1436,7 +1434,8 @@ export var hrStrings = {
     },
     // survey templates
     survey: {
-      mode: "Odaberite između: \"Može se uređivati\" - omogućuje ispitanicima da ispune vašu anketu; \"Samo za čitanje\" - onemogućuje uređivanje obrazaca."
+      readOnly: "Odaberite želite li ispitanicima onemogućiti ispunjavanje upitnika.",
+      progressBarLocation: "Postavlja lokaciju trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja ankete."
     },
     matrixdropdowncolumn: {
       name: "ID stupca koji nije vidljiv ispitanicima.",
@@ -1459,7 +1458,6 @@ export var hrStrings = {
     autoAdvanceAllowComplete: "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja.",
     showNavigationButtons: "Postavlja vidljivost i mjesto navigacijskih gumba na stranici.",
     navigationButtonsLocation: "Postavlja mjesto navigacijskih gumba na stranici.",
-    showProgressBar: "Postavlja vidljivost i mjesto trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja upitnika.",
     showPreviewBeforeComplete: "Omogućite stranicu pretpregleda samo sa svim ili odgovorenim pitanjima.",
     questionTitleLocation: "Odnosi se na sva pitanja unutar ankete. Ova postavka može se nadjačati pravilima poravnanja naslova na nižim razinama: ploča, stranica ili pitanje. Postavka niže razine nadjačat će one na višoj razini.",
     requiredMark: "Simbol ili niz simbola koji označavaju da je potreban odgovor.",
@@ -1520,6 +1518,8 @@ export var hrStrings = {
     useDisplayValuesInDynamicTexts: "U vrstama pitanja s jednim i višestrukim odabirom svaka mogućnost izbora ima ID i vrijednost prikaza. Kada je odabrana, ova postavka prikazuje prikazanu vrijednost umjesto ID vrijednosti u HTML pitanjima te dinamičke naslove i opise elemenata upitnika.",
     clearIfInvisible: "Odaberite želite li očistiti vrijednosti pitanja skrivene uvjetnom logikom i kada to učiniti. Opcija \"Naslijedi\" prema zadanim postavkama primjenjuje postavku na razini upitnika (\"Nakon završetka ankete\").",
     choicesFromQuestionMode: "Odaberite između: \"Sve\" - kopira sve opcije izbora iz odabranog pitanja; \"Odabrano\" - dinamički kopira samo odabrane opcije izbora; \"Neodabrano\" - dinamički kopira samo neodabrane opcije izbora. Opcije \"Ništa\" i \"Ostalo\" kopiraju se prema zadanim postavkama ako su omogućene u izvornom pitanju.",
+    choiceValuesFromQuestion: "U vrstama pitanja s jednim i višestrukim odabirom svaka opcija izbora ima ID i vrijednost prikaza. Ova postavka određuje koji stupac matrice ili pitanje na ploči treba dati ID-ove.",
+    choiceTextsFromQuestion: "U vrstama pitanja s jednim i višestrukim odabirom svaka opcija izbora ima ID i vrijednost prikaza. Ova postavka određuje koji stupac matrice ili pitanje na ploči treba pružiti tekstove za prikaz.",
     showOtherItem: "Kada je odabrano, korisnici mogu uključiti dodatni unos u zaseban okvir za komentare.",
     separateSpecialChoices: "Prikazuje svaku mogućnost posebnog izbora (\"Nema\", \"Ostalo\", \"Odaberi sve\") u novom retku, čak i kada koristite izgled s više stupaca.",
     path: "Navedite mjesto unutar skupa podataka o usluzi na kojem se nalazi ciljno polje objekata. Ostavite prazno ako URL već pokazuje na polje.",
@@ -2974,3 +2974,15 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pv.answeredQuestions: "Show answered questions only" => "Prikaži samo odgovorena pitanja"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Postavlja mjesto navigacijskih gumba na stranici."
 // pe.size: "Input field width (in characters)" => "Širina polja za unos (u znakovima)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Koristite vrijednosti iz sljedećeg stupca matrice ili pitanja panela kao ID-ove izbora"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Koristite vrijednosti iz sljedećeg stupca matrice ili pitanja na ploči kao tekstove izbora"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "U vrstama pitanja s jednim i višestrukim odabirom svaka opcija izbora ima ID i vrijednost prikaza. Ova postavka određuje koji stupac matrice ili pitanje na ploči treba dati ID-ove."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "U vrstama pitanja s jednim i višestrukim odabirom svaka opcija izbora ima ID i vrijednost prikaza. Ova postavka određuje koji stupac matrice ili pitanje na ploči treba pružiti tekstove za prikaz."
+// pe.progressBarLocation: "Progress bar alignment" => "Poravnanje trake napretka"
+// progressBarLocation.topbottom: "Top and bottom" => "Vrh i dno"
+// progressBarLocation.aboveheader: "Above the header" => "Iznad zaglavlja"
+// progressBarLocation.belowheader: "Below the header" => "Ispod zaglavlja"
+// progressBarLocation.off: "Hidden" => "Skriven"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Postavlja lokaciju trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja ankete."
+// survey.readOnly: "Make the survey read-only" => "Neka anketa bude samo za čitanje"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Odaberite želite li ispitanicima onemogućiti ispunjavanje upitnika."

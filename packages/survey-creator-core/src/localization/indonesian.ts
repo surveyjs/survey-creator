@@ -334,8 +334,6 @@ export var indonesianStrings = {
       templateErrorLocation: "Perataan pesan kesalahan",
       newPanelPosition: "Lokasi panel baru",
       showRangeInProgress: "Menampilkan bilah kemajuan",
-      showProgressBar: "Menampilkan bilah kemajuan",
-      progressBarLocation: "Perataan bilah kemajuan",
       keyName: "Cegah respons duplikat dalam pertanyaan berikut"
     },
     question: {
@@ -388,7 +386,8 @@ export var indonesianStrings = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Deskripsi survei"
+      description: "Deskripsi survei",
+      readOnly: "Membuat survei hanya baca"
     },
     page: {
       name: "Nama halaman",
@@ -611,7 +610,6 @@ export var indonesianStrings = {
     simulator: "Pilih jenis perangkat",
     landscapeOrientation: "Beralih ke orientasi lanskap",
     portraitOrientation: "Beralih ke orientasi potret",
-    mode: "Mode (ubah/baca saja)",
     clearInvisibleValues: "Bersihkan nilai tak terlihat",
     cookieName: "Nama cookie (untuk menonaktifkan menjalankan survei dua kali secara lokal)",
     partialSendEnabled: "Kirim hasil survei pada halaman selanjutnya",
@@ -632,6 +630,7 @@ export var indonesianStrings = {
     autoAdvanceEnabled: "Setelah menjawa seluruh pertanyaan, pergi ke halaman berikutnya secara otomatis",
     autoAdvanceAllowComplete: "Selesaikan survei secara otomatis",
     showProgressBar: "Tampilkan progress bar",
+    progressBarLocation: "Perataan bilah kemajuan",
     questionTitleLocation: "Lokasi judul pertanyaan",
     questionTitleWidth: "Lebar judul pertanyaan",
     requiredMark: "Simbil pertanyaan wajib",
@@ -754,6 +753,8 @@ export var indonesianStrings = {
     separateSpecialChoices: "Pisahkan pilihan khusus (Tidak Ada, Lainnya, Pilih Semua)",
     choicesFromQuestion: "Salin pilihan dari pertanyaan berikut",
     choicesFromQuestionMode: "Pilihan mana yang harus disalin?",
+    choiceValuesFromQuestion: "Gunakan nilai dari matriks, kolom atau pertanyaan panel berikut sebagai ID pilihan",
+    choiceTextsFromQuestion: "Gunakan nilai dari kolom matriks atau pertanyaan panel berikut sebagai teks pilihan",
     progressBarShowPageTitles: "Menampilkan judul halaman di bilah kemajuan",
     progressBarShowPageNumbers: "Menampilkan nomor halaman di bilah kemajuan",
     showCommentArea: "Tampilkan area komentar",
@@ -1202,16 +1203,13 @@ export var indonesianStrings = {
     questionOrder: {
       initial: "Asli"
     },
-    showProgressBar: {
-      off: "Sembunyi",
-      topbottom: "atas dan bawah",
-      aboveheader: "Di atas header",
-      belowheader: "Di bawah header"
-    },
     progressBarLocation: {
       top: "Puncak",
       bottom: "Dasar",
-      topBottom: "Atas dan bawah"
+      topbottom: "Atas dan bawah",
+      aboveheader: "Di atas header",
+      belowheader: "Di bawah header",
+      off: "Sembunyi"
     },
     sum: "Jumlah",
     count: "Hitung",
@@ -1436,7 +1434,8 @@ export var indonesianStrings = {
     },
     // survey templates
     survey: {
-      mode: "Pilih antara: \"Dapat Diedit\" - memungkinkan responden mengisi survei Anda; \"Read-only\" - menonaktifkan pengeditan formulir."
+      readOnly: "Pilih jika Anda ingin mencegah responden mengisi survei Anda.",
+      progressBarLocation: "Mengatur lokasi bilah progres. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
     },
     matrixdropdowncolumn: {
       name: "ID kolom yang tidak terlihat oleh responden.",
@@ -1459,7 +1458,6 @@ export var indonesianStrings = {
     autoAdvanceAllowComplete: "Pilih apakah Anda ingin survei selesai secara otomatis setelah responden menjawab semua pertanyaan.",
     showNavigationButtons: "Mengatur visibilitas dan lokasi tombol navigasi pada halaman.",
     navigationButtonsLocation: "Mengatur lokasi tombol navigasi pada halaman.",
-    showProgressBar: "Mengatur visibilitas dan lokasi bilah kemajuan. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei.",
     showPreviewBeforeComplete: "Aktifkan halaman pratinjau hanya dengan semua atau pertanyaan yang dijawab.",
     questionTitleLocation: "Berlaku untuk semua pertanyaan dalam survei. Setelan ini dapat diganti dengan aturan penyelarasan judul di tingkat yang lebih rendah: panel, halaman, atau pertanyaan. Pengaturan tingkat yang lebih rendah akan menggantikan pengaturan tingkat yang lebih tinggi.",
     requiredMark: "Simbol atau urutan simbol yang menunjukkan bahwa jawaban diperlukan.",
@@ -1520,6 +1518,8 @@ export var indonesianStrings = {
     useDisplayValuesInDynamicTexts: "Dalam tipe pertanyaan pilihan tunggal dan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Saat dipilih, setelan ini akan menampilkan nilai tampilan, bukan nilai ID dalam pertanyaan HTML serta judul dinamis dan deskripsi elemen survei.",
     clearIfInvisible: "Pilih apakah akan menghapus nilai pertanyaan yang disembunyikan oleh logika kondisional atau tidak dan kapan melakukannya. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Setelah survei selesai\" secara default).",
     choicesFromQuestionMode: "Pilih dari: \"Semua\" - menyalin semua opsi pilihan dari pertanyaan yang dipilih; \"Dipilih\" - secara dinamis menyalin hanya opsi pilihan yang dipilih; \"Tidak dipilih\" - secara dinamis hanya menyalin opsi pilihan yang tidak dipilih. Opsi \"Tidak Ada\" dan \"Lainnya\" disalin secara default jika diaktifkan dalam pertanyaan sumber.",
+    choiceValuesFromQuestion: "Dalam jenis pertanyaan pilihan tunggal dan pilihan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Pengaturan ini menentukan kolom matriks atau pertanyaan panel mana yang harus memberikan ID.",
+    choiceTextsFromQuestion: "Dalam jenis pertanyaan pilihan tunggal dan pilihan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Pengaturan ini menentukan kolom matriks atau pertanyaan panel mana yang harus menyediakan teks tampilan.",
     showOtherItem: "Saat dipilih, pengguna dapat menyertakan input tambahan di kotak komentar terpisah.",
     separateSpecialChoices: "Menampilkan setiap opsi pilihan khusus (\"Tidak Ada\", \"Lainnya\", \"Pilih Semua\") pada baris baru, bahkan saat menggunakan tata letak beberapa kolom.",
     path: "Tentukan lokasi dalam himpunan data layanan tempat array objek target berada. Biarkan kosong jika URL sudah menunjuk ke array.",
@@ -3134,3 +3134,15 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pv.answeredQuestions: "Show answered questions only" => "Tampilkan pertanyaan yang dijawab saja"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Mengatur lokasi tombol navigasi pada halaman."
 // pe.size: "Input field width (in characters)" => "Lebar bidang input (dalam karakter)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Gunakan nilai dari matriks, kolom atau pertanyaan panel berikut sebagai ID pilihan"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Gunakan nilai dari kolom matriks atau pertanyaan panel berikut sebagai teks pilihan"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Dalam jenis pertanyaan pilihan tunggal dan pilihan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Pengaturan ini menentukan kolom matriks atau pertanyaan panel mana yang harus memberikan ID."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Dalam jenis pertanyaan pilihan tunggal dan pilihan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Pengaturan ini menentukan kolom matriks atau pertanyaan panel mana yang harus menyediakan teks tampilan."
+// pe.progressBarLocation: "Progress bar alignment" => "Perataan bilah kemajuan"
+// progressBarLocation.topbottom: "Top and bottom" => "Atas dan bawah"
+// progressBarLocation.aboveheader: "Above the header" => "Di atas header"
+// progressBarLocation.belowheader: "Below the header" => "Di bawah header"
+// progressBarLocation.off: "Hidden" => "Sembunyi"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Mengatur lokasi bilah progres. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
+// survey.readOnly: "Make the survey read-only" => "Membuat survei hanya baca"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Pilih jika Anda ingin mencegah responden mengisi survei Anda."

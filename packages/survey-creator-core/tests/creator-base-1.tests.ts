@@ -993,7 +993,7 @@ test("fast copy tests, copy a question and check the index", (): any => {
       { type: "text", name: "question1" },
       { type: "text", name: "question2", startWithNewLine: false },
       { type: "text", name: "question3" }
-    ]
+    ], showQuestionNumbers: "on"
   };
   creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
   expect(creator.survey.pages[0].questions).toHaveLength(4);
@@ -1007,7 +1007,7 @@ test("fast copy tests, copy a question and check the index", (): any => {
       { type: "text", name: "question1" },
       { type: "text", name: "question2" },
       { type: "text", name: "question3" }
-    ]
+    ], showQuestionNumbers: "on"
   };
   creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
   expect(creator.survey.pages[0].questions).toHaveLength(4);
@@ -3376,7 +3376,7 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
 test("Add Questions with selection", (): any => {
   const creator = new CreatorTester();
   creator.addNewQuestionLast = false;
-  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }], showQuestionNumbers: "on" };
   const panel = <PanelModel>creator.survey.getAllPanels()[0];
   const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
   panelModel.addNewQuestion();
@@ -3821,9 +3821,9 @@ test("onSurveyPropertyValueChanged event", () => {
   let propertyValue;
   let objType;
   let counter = 0;
-  creator.onSurveyPropertyValueChanged.add((sender, options) => {
+  creator.onAfterPropertyChanged.add((sender, options) => {
     counter++;
-    objType = options.obj.getType();
+    objType = options.element.getType();
     propertyName = options.propertyName;
     propertyValue = options.value;
   });
@@ -4623,252 +4623,4 @@ test("Check the placeholders of the survey items if isMobileView is true", (): a
   expect(pageModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new element to the page.");
   expect(panelModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new element to the panel.");
   expect(imageQuestionModelAdorner.placeholderText).toBe("Click the button below and choose an image to upload");
-});
-
-test("onModified is raised for mask settings", (): any => {
-  const creator = new CreatorTester();
-  creator.JSON = {
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          {
-            "type": "text",
-            "name": "question1",
-            "maskType": "numeric",
-            "maskSettings": {
-              "thousandsSeparator": "."
-            }
-          }
-        ]
-      }
-    ]
-  };
-  let propName = "not triggered";
-  creator.onModified.add((sender, options) => {
-    propName = options.name;
-  });
-  const maskedQuestion = creator.survey.getQuestionByName("question1") as QuestionTextModel;
-  (maskedQuestion.maskSettings as any).thousandsSeparator = "-";
-  expect(propName).toBe("thousandsSeparator");
-});
-
-test("json editor default indent", (): any => {
-  const creator = new CreatorTester();
-  expect(settings.jsonEditor.indentation).toBe(2);
-  expect(creator.text).toBe("{\n  \"logoPosition\": \"right\",\n  \"pages\": [\n    {\n      \"name\": \"page1\"\n    }\n  ]\n}");
-});
-test("onSetPropertyEditorOptions -> onConfigureTablePropertyEditor", (): any => {
-  const creator = new CreatorTester();
-  creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: [1, 2] }] };
-  const question = creator.survey.getQuestionByName("q1");
-  const callBackOptions = {
-    allowAddRemoveItems: true,
-    allowRemoveAllItems: true,
-    allowBatchEdit: true
-  };
-  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
-  expect(callBackOptions.allowBatchEdit).toBeTruthy();
-  let onSetPropertyEditorOptions_allowBatchEdit = false;
-  creator.onSetPropertyEditorOptions.add((sender: any, options: ConfigureTablePropertyEditorEvent) => {
-    options.editorOptions.allowBatchEdit = onSetPropertyEditorOptions_allowBatchEdit;
-  });
-  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
-  expect(callBackOptions.allowBatchEdit).toBeFalsy();
-  callBackOptions.allowBatchEdit = true;
-  onSetPropertyEditorOptions_allowBatchEdit = true;
-  let onConfigureTablePropertyEditor_allowBatchEdit = true;
-  creator.onConfigureTablePropertyEditor.add((sender: any, options: ConfigureTablePropertyEditorEvent) => {
-    options.allowBatchEdit = onConfigureTablePropertyEditor_allowBatchEdit;
-  });
-  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
-  expect(callBackOptions.allowBatchEdit).toBeTruthy();
-
-  onSetPropertyEditorOptions_allowBatchEdit = false;
-  creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
-  expect(callBackOptions.allowBatchEdit).toBeFalsy();
-});
-test("creator.onSurveyInstanceCreated from property Grid", () => {
-  const creator = new CreatorTester();
-  const selectedTypes = new Array<string>();
-  creator.onSurveyInstanceCreated.add((sender, options) => {
-    if (options.area === "property-grid") {
-      if (options.obj) {
-        selectedTypes.push(options.obj.getType());
-      }
-    }
-  });
-  creator.JSON = {
-    elements: [
-      { name: "q1", type: "text" },
-      {
-        name: "q2",
-        type: "radiogroup"
-      }
-    ]
-  };
-  creator.selectQuestionByName("q1");
-  creator.selectQuestionByName("q2");
-  expect(selectedTypes).toStrictEqual(["survey", "text", "radiogroup"]);
-});
-
-test("check tabResponsivenessMode property", () => {
-  const creator = new CreatorTester();
-  creator.tabResponsivenessMode = "menu";
-  expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
-
-  creator.tabResponsivenessMode = "icons";
-  expect(creator.tabbedMenu.actions.every((action) => !action.disableShrink)).toBeTruthy();
-  const firstTab = creator.tabbedMenu.actions[0];
-  expect(firstTab.hasTitle).toBeTruthy();
-  expect(firstTab.hasIcon).toBeFalsy();
-  firstTab.mode = "small";
-  expect(firstTab.hasTitle).toBeFalsy();
-  expect(firstTab.hasIcon).toBeTruthy();
-
-  creator.tabResponsivenessMode = "menu";
-  expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
-});
-test("onModified options, on adding page and on copying page", () => {
-  const creator = new CreatorTester({
-    pages: [{ elements: [{ type: "text", name: "q1" }] }]
-  });
-  const modifiedOptions = new Array<any>();
-  creator.onModified.add(function (survey, options) {
-    modifiedOptions.push(options);
-  });
-  const newPage = new PageModel();
-  newPage.name = "page2";
-  creator.addPage(newPage);
-  creator.copyPage(creator.survey.pages[0]);
-  expect(modifiedOptions[0].type).toBe("PAGE_ADDED");
-  expect(modifiedOptions[0].newValue.name).toBe("page2");
-  expect(modifiedOptions[2].type).toBe("ELEMENT_COPIED");
-  expect(modifiedOptions[2].newValue.name).toBe("page3");
-});
-
-test("ZoomIn/ZoomOut designer surface", (): any => {
-  const creator = new CreatorTester();
-  const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
-  expect(designerTabModel["surfaceScale"]).toBe(100);
-  expect(creator.themeVariables).toStrictEqual({});
-
-  designerTabModel["scaleSurface"](10);
-  expect(designerTabModel["surfaceScale"]).toBe(100);
-  expect(creator.themeVariables).toStrictEqual({});
-  expect(creator.survey.widthScale).toBe(100);
-
-  designerTabModel["scaleSurface"](200);
-  expect(designerTabModel["surfaceScale"]).toBe(100);
-  expect(creator.themeVariables).toStrictEqual({});
-  expect(creator.survey.widthScale).toBe(100);
-
-  designerTabModel["maxSurfaceScaling"] = 200;
-  designerTabModel["scaleSurface"](150);
-  expect(creator.survey.widthScale).toBe(150);
-  expect(designerTabModel["surfaceScale"]).toBe(150);
-  expect(creator.themeVariables).toStrictEqual({
-    "--ctr-surface-base-unit": "12px",
-    "--lbr-corner-radius-unit": "12px",
-    "--lbr-font-unit": "12px",
-    "--lbr-line-height-unit": "12px",
-    "--lbr-size-unit": "12px",
-    "--lbr-spacing-unit": "12px",
-    "--lbr-stroke-unit": "1.5px"
-  });
-});
-
-test("ZoomIn/ZoomOut actions limits", (): any => {
-  const creator = new CreatorTester();
-  const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
-  const zoomInAction = designerTabModel.surfaceToolbar.getActionById("zoomIn");
-  const zoomOutAction = designerTabModel.surfaceToolbar.getActionById("zoomOut");
-  const zoom100Action = designerTabModel.surfaceToolbar.getActionById("zoom100");
-
-  expect(designerTabModel["surfaceScale"]).toBe(100);
-  expect(creator.survey.widthScale).toBe(100);
-
-  zoomInAction.action();
-  expect(designerTabModel["surfaceScale"]).toBe(100);
-  expect(creator.survey.widthScale).toBe(100);
-
-  zoomOutAction.action();
-  expect(designerTabModel["surfaceScale"]).toBe(90);
-  expect(creator.survey.widthScale).toBe(90);
-
-  zoomOutAction.action();
-  zoomOutAction.action();
-  zoomOutAction.action();
-  zoomOutAction.action();
-  zoomOutAction.action();
-  zoomOutAction.action();
-  expect(designerTabModel["surfaceScale"]).toBe(30);
-  expect(creator.survey.widthScale).toBe(30);
-
-  zoomOutAction.action();
-  expect(designerTabModel["surfaceScale"]).toBe(20);
-  expect(creator.survey.widthScale).toBe(20);
-
-  zoomOutAction.action();
-  expect(designerTabModel["surfaceScale"]).toBe(20);
-  expect(creator.survey.widthScale).toBe(20);
-
-  zoom100Action.action();
-  expect(designerTabModel["surfaceScale"]).toBe(100);
-  expect(creator.survey.widthScale).toBe(100);
-});
-
-test("propertyGridNavigationMode property", (): any => {
-  const creator = new CreatorTester();
-  creator.propertyGridNavigationMode = "buttons";
-  expect(creator.showOneCategoryInPropertyGrid).toBeTruthy();
-  creator.propertyGridNavigationMode = "accordion";
-  expect(creator.showOneCategoryInPropertyGrid).toBeFalsy();
-
-  creator.showOneCategoryInPropertyGrid = true;
-  expect(creator.propertyGridNavigationMode).toBe("buttons");
-  creator.showOneCategoryInPropertyGrid = false;
-  expect(creator.propertyGridNavigationMode).toBe("accordion");
-});
-test("showSurfaceTools", (): any => {
-  const creator = new CreatorTester();
-  creator.expandCollapseButtonVisibility = "never";
-  const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
-  expect(designerTabModel.showSurfaceTools).toBeFalsy();
-
-  creator.JSON = { pages: [{ name: "page1" }, { name: "page2" }] };
-  expect(designerTabModel.showSurfaceTools).toBeTruthy();
-
-  creator.isMobileView = true;
-  expect(designerTabModel.showSurfaceTools).toBeFalsy();
-
-  creator.isMobileView = false;
-  expect(designerTabModel.showSurfaceTools).toBeTruthy();
-
-  creator.JSON = { pages: [{ name: "page1" }] };
-  expect(designerTabModel.showSurfaceTools).toBeFalsy();
-
-  creator.expandCollapseButtonVisibility = "always";
-  expect(designerTabModel.showSurfaceTools).toBeTruthy();
-});
-
-test("Designer surface css classes", (): any => {
-  const savedNewJSON = settings.defaultNewSurveyJSON;
-  settings.defaultNewSurveyJSON = {};
-  const creator = new CreatorTester(undefined, undefined, false);
-  creator.expandCollapseButtonVisibility = "never";
-  const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
-  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-placeholder svc-tab-designer--standard-mode");
-
-  creator.JSON = { pages: [{ name: "page1" }] };
-  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--standard-mode");
-
-  creator.expandCollapseButtonVisibility = "always";
-  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-surface-tools svc-tab-designer--standard-mode");
-
-  creator.expandCollapseButtonVisibility = "never";
-  creator.JSON = { pages: [{ name: "page1" }, { name: "page2" }] };
-  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-surface-tools svc-tab-designer--standard-mode");
-
-  settings.defaultNewSurveyJSON = savedNewJSON;
 });

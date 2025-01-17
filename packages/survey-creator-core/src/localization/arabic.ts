@@ -334,8 +334,6 @@ export var arStrings = {
       templateErrorLocation: "محاذاة رسالة الخطأ",
       newPanelPosition: "موقع لوحة جديد",
       showRangeInProgress: "إظهار شريط التقدم",
-      showProgressBar: "إظهار شريط التقدم",
-      progressBarLocation: "محاذاة شريط التقدم",
       keyName: "منع تكرار الردود في السؤال التالي"
     },
     question: {
@@ -388,7 +386,8 @@ export var arStrings = {
     // survey templates
     survey: {
       title: "عنوان",
-      description: "وصف المسح"
+      description: "وصف المسح",
+      readOnly: "جعل الاستطلاع للقراءة فقط"
     },
     page: {
       name: "اسم الصفحة",
@@ -611,7 +610,6 @@ export var arStrings = {
     simulator: "Choose device",
     landscapeOrientation: "Landscape",
     portraitOrientation: "Portrait",
-    mode: "النمط (التعديل، القرائة فقط)",
     clearInvisibleValues: "إمسح القيم الغير مرئية",
     cookieName: "أدخل إسم ملف تعريف الإرتباط (لتعطيل المشاركة بالإستبيان أكثر من مرة)",
     partialSendEnabled: "إرسال نتائج الإستبيان على الصفحة التالية",
@@ -632,6 +630,7 @@ export var arStrings = {
     autoAdvanceEnabled: "عند الإجابة على جميع الأسئلة، إنتقل إلى الصفحة التالية تلقائياً",
     autoAdvanceAllowComplete: "إكمال الاستطلاع تلقائيا",
     showProgressBar: "إظهار شريط التقدم",
+    progressBarLocation: "محاذاة شريط التقدم",
     questionTitleLocation: "موقع عنوان السؤال",
     questionTitleWidth: "عرض عنوان السؤال",
     requiredMark: "رمز السؤال مطلوب",
@@ -754,6 +753,8 @@ export var arStrings = {
     separateSpecialChoices: "خيارات خاصة منفصلة (لا شيء، أخرى، تحديد الكل)",
     choicesFromQuestion: "نسخ الاختيارات من السؤال التالي",
     choicesFromQuestionMode: "ما هي الخيارات التي تريد نسخها؟",
+    choiceValuesFromQuestion: "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كمعرفات اختيار",
+    choiceTextsFromQuestion: "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كنصوص اختيار",
     progressBarShowPageTitles: "عرض عناوين الصفحات في شريط التقدم",
     progressBarShowPageNumbers: "عرض أرقام الصفحات في شريط التقدم",
     showCommentArea: "إظهار منطقة التعليق",
@@ -1202,16 +1203,13 @@ export var arStrings = {
     questionOrder: {
       initial: "اللغة الأصلية"
     },
-    showProgressBar: {
-      off: "مخفي",
-      topbottom: "الاعلى والأسفل",
-      aboveheader: "فوق الرأس",
-      belowheader: "أسفل الرأس"
-    },
     progressBarLocation: {
       top: "أعلى",
       bottom: "قاع",
-      topBottom: "أعلى وأسفل"
+      topbottom: "أعلى وأسفل",
+      aboveheader: "أعلى الرأس",
+      belowheader: "أسفل العنوان",
+      off: "مخفي"
     },
     sum: "مجموع",
     count: "عد",
@@ -1436,7 +1434,8 @@ export var arStrings = {
     },
     // survey templates
     survey: {
-      mode: "اختر بين: \"قابل للتحرير\" - يمكن المستجيبين من ملء الاستبيان الخاص بك ؛ \"للقراءة فقط\" - تعطيل تحرير النموذج."
+      readOnly: "حدد ما إذا كنت تريد منع المستجيبين من ملء الاستطلاع الخاص بك.",
+      progressBarLocation: "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
     },
     matrixdropdowncolumn: {
       name: "معرف عمود غير مرئي للمستجيبين.",
@@ -1459,7 +1458,6 @@ export var arStrings = {
     autoAdvanceAllowComplete: "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة.",
     showNavigationButtons: "يضبط رؤية وموقع أزرار التنقل على الصفحة.",
     navigationButtonsLocation: "لتعيين موقع أزرار التنقل على الصفحة.",
-    showProgressBar: "يضبط رؤية شريط التقدم وموقعه. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله.",
     showPreviewBeforeComplete: "قم بتمكين صفحة المعاينة مع جميع الأسئلة أو الإجابة عليها فقط.",
     questionTitleLocation: "ينطبق على جميع الأسئلة داخل الاستطلاع. يمكن تجاوز هذا الإعداد من خلال قواعد محاذاة العنوان في المستويات الأدنى: اللوحة أو الصفحة أو السؤال. سيتجاوز إعداد المستوى الأدنى تلك الموجودة في المستوى الأعلى.",
     requiredMark: "رمز أو سلسلة من الرموز تشير إلى أن الإجابة مطلوبة.",
@@ -1520,6 +1518,8 @@ export var arStrings = {
     useDisplayValuesInDynamicTexts: "في أنواع الأسئلة ذات التحديد الفردي والمتعدد، يكون لكل خيار اختيار معرف وقيمة عرض. عند تحديده، يعرض هذا الإعداد قيمة عرض بدلا من قيمة معرف في أسئلة HTML والعناوين الديناميكية وأوصاف عناصر الاستطلاع.",
     clearIfInvisible: "اختر ما إذا كنت تريد مسح قيم الأسئلة المخفية بواسطة المنطق الشرطي أم لا ومتى تفعل ذلك. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"عند اكتمال الاستطلاع\" افتراضيا).",
     choicesFromQuestionMode: "اختر من بين: \"الكل\" - نسخ جميع خيارات الاختيار من السؤال المحدد ؛ \"محدد\" - ينسخ ديناميكيا خيارات الاختيار المحددة فقط ؛ \"غير محدد\" - ينسخ ديناميكيا خيارات الاختيار غير المحددة فقط. يتم نسخ الخيارين \"بلا\" و \"أخرى\" افتراضيا إذا تم تمكينهما في السؤال المصدر.",
+    choiceValuesFromQuestion: "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر معرفات.",
+    choiceTextsFromQuestion: "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر نصوص العرض.",
     showOtherItem: "عند تحديده، يمكن للمستخدمين تضمين مدخلات إضافية في مربع تعليق منفصل.",
     separateSpecialChoices: "يعرض كل خيار اختيار خاص (\"بلا\" ، \"أخرى\" ، \"تحديد الكل\") على سطر جديد ، حتى عند استخدام تخطيط متعدد الأعمدة.",
     path: "حدد الموقع داخل مجموعة بيانات الخدمة حيث يوجد الصفيف الهدف من الكائنات. اتركه فارغا إذا كان عنوان URL يشير بالفعل إلى المصفوفة.",
@@ -2894,3 +2894,15 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pv.answeredQuestions: "Show answered questions only" => "إظهار الأسئلة التي تمت الإجابة عليها فقط"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "لتعيين موقع أزرار التنقل على الصفحة."
 // pe.size: "Input field width (in characters)" => "عرض حقل الإدخال (بالأحرف)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كمعرفات اختيار"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كنصوص اختيار"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر معرفات."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر نصوص العرض."
+// pe.progressBarLocation: "Progress bar alignment" => "محاذاة شريط التقدم"
+// progressBarLocation.topbottom: "Top and bottom" => "أعلى وأسفل"
+// progressBarLocation.aboveheader: "Above the header" => "أعلى الرأس"
+// progressBarLocation.belowheader: "Below the header" => "أسفل العنوان"
+// progressBarLocation.off: "Hidden" => "مخفي"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
+// survey.readOnly: "Make the survey read-only" => "جعل الاستطلاع للقراءة فقط"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "حدد ما إذا كنت تريد منع المستجيبين من ملء الاستطلاع الخاص بك."

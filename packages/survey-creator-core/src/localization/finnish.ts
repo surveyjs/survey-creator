@@ -334,8 +334,6 @@ export var fiStrings = {
       templateErrorLocation: "Virhesanoman tasaus",
       newPanelPosition: "Uusi paneelin sijainti",
       showRangeInProgress: "Edistymispalkin näyttäminen",
-      showProgressBar: "Edistymispalkin näyttäminen",
-      progressBarLocation: "Edistymispalkin tasaus",
       keyName: "Päällekkäisten vastausten estäminen seuraavassa kysymyksessä"
     },
     question: {
@@ -388,7 +386,8 @@ export var fiStrings = {
     // survey templates
     survey: {
       title: "Kyselyn otsikko",
-      description: "Kyselyn kuvaus"
+      description: "Kyselyn kuvaus",
+      readOnly: "Tee kyselystä vain luku -muotoinen"
     },
     page: {
       name: "Sivun nimi",
@@ -611,7 +610,6 @@ export var fiStrings = {
     simulator: "Valitse laite",
     landscapeOrientation: "Vaakasuunta",
     portraitOrientation: "Pystysuuntaan vaihtaminen",
-    mode: "Tila (vain muokkaus / vain luku)",
     clearInvisibleValues: "Tyhjennä näkymättömät arvot",
     cookieName: "Evästeen nimi (poistaaksesi kysely käytöstä suorita kysely kaksi kertaa paikallisesti)",
     partialSendEnabled: "Lähetä kyselyn tulokset seuraavalla sivulla",
@@ -632,6 +630,7 @@ export var fiStrings = {
     autoAdvanceEnabled: "Kun vastaat kaikkiin kysymyksiin, siirry seuraavalle sivulle automaattisesti",
     autoAdvanceAllowComplete: "Vastaa kyselyyn automaattisesti",
     showProgressBar: "Näytä edistymispalkki",
+    progressBarLocation: "Edistymispalkin tasaus",
     questionTitleLocation: "Kysymyksen otsikon sijainti",
     questionTitleWidth: "Kysymyksen otsikon leveys",
     requiredMark: "Kysymys vaadittu symboli (t)",
@@ -754,6 +753,8 @@ export var fiStrings = {
     separateSpecialChoices: "Erilliset erikoisvalinnat (Ei mitään, Muu, Valitse kaikki)",
     choicesFromQuestion: "Kopioi valinnat seuraavasta kysymyksestä",
     choicesFromQuestionMode: "Mitkä vaihtoehdot kopioidaan?",
+    choiceValuesFromQuestion: "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintatunnuksina",
+    choiceTextsFromQuestion: "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintateksteinä",
     progressBarShowPageTitles: "Sivujen otsikoiden näyttäminen edistymispalkissa",
     progressBarShowPageNumbers: "Sivunumeroiden näyttäminen edistymispalkissa",
     showCommentArea: "Näytä kommenttialue",
@@ -1202,16 +1203,13 @@ export var fiStrings = {
     questionOrder: {
       initial: "Alkuperäinen"
     },
-    showProgressBar: {
-      off: "Piilevä",
-      topbottom: "Ylhäällä ja alhaalla",
-      aboveheader: "Otsikon yläpuolella",
-      belowheader: "Otsikon alapuolella"
-    },
     progressBarLocation: {
       top: "Huippu",
       bottom: "Pohja",
-      topBottom: "Ylhäällä ja alhaalla"
+      topbottom: "Ylhäällä ja alhaalla",
+      aboveheader: "Otsikon yläpuolella",
+      belowheader: "Otsikon alapuolella",
+      off: "Piilevä"
     },
     sum: "Summa",
     count: "Laske",
@@ -1436,7 +1434,8 @@ export var fiStrings = {
     },
     // survey templates
     survey: {
-      mode: "Valitse jompikumpi seuraavista: \"Muokattavissa\" - vastaajat voivat täyttää kyselysi; \"Vain luku\" - poistaa lomakkeen muokkauksen käytöstä."
+      readOnly: "Valitse tämä, jos haluat estää vastaajia vastaamasta kyselyyn.",
+      progressBarLocation: "Määrittää edistymispalkin sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella."
     },
     matrixdropdowncolumn: {
       name: "Sarakkeen tunnus, joka ei näy vastaajille.",
@@ -1459,7 +1458,6 @@ export var fiStrings = {
     autoAdvanceAllowComplete: "Valitse, haluatko kyselyn täyttyvän automaattisesti, kun vastaaja on vastannut kaikkiin kysymyksiin.",
     showNavigationButtons: "Määrittää sivun navigointipainikkeiden näkyvyyden ja sijainnin.",
     navigationButtonsLocation: "Määrittää navigointipainikkeiden sijainnin sivulla.",
-    showProgressBar: "Määrittää edistymispalkin näkyvyyden ja sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella.",
     showPreviewBeforeComplete: "Ota esikatselusivu käyttöön vain kaikilla kysymyksillä tai vastatuilla kysymyksillä.",
     questionTitleLocation: "Koskee kaikkia kyselyn kysymyksiä. Tämä asetus voidaan ohittaa otsikon tasaussäännöillä alemmilla tasoilla: paneeli, sivu tai kysymys. Alemman tason asetus ohittaa korkeammalla tasolla olevat.",
     requiredMark: "Symboli tai symbolisarja, joka osoittaa, että vastaus vaaditaan.",
@@ -1520,6 +1518,8 @@ export var fiStrings = {
     useDisplayValuesInDynamicTexts: "Yksi- ja monivalintakysymystyypeissä kullakin valintavaihtoehdolla on tunnus ja näyttöarvo. Kun tämä asetus on valittuna, se näyttää tunnusarvon sijaan HTML-kysymyksissä ja kyselyelementtien dynaamisissa otsikoissa ja kuvauksissa.",
     clearIfInvisible: "Valitse, poistetaanko ehdollisen logiikan piilottamat kysymysarvot ja milloin se tehdään. \"Peri\"-vaihtoehto käyttää kyselytason asetusta (\"Kyselyn valmistuttua\" oletuksena).",
     choicesFromQuestionMode: "Valitse seuraavista: \"Kaikki\" - kopioi kaikki valintavaihtoehdot valitusta kysymyksestä; \"Valittu\" - kopioi dynaamisesti vain valitut valintavaihtoehdot; \"Ei valittu\" - kopioi dynaamisesti vain valitsemattomat valintavaihtoehdot. Vaihtoehdot \"Ei mitään\" ja \"Muut\" kopioidaan oletusarvoisesti, jos ne on otettu käyttöön lähdekysymyksessä.",
+    choiceValuesFromQuestion: "Yksi- ja monivalintakysymystyypeissä kullakin valintavaihtoehdolla on tunnus ja näyttöarvo. Tämä asetus määrittää, mikä matriisisarake tai paneelikysymys antaa tunnukset.",
+    choiceTextsFromQuestion: "Yksi- ja monivalintakysymystyypeissä kullakin valintavaihtoehdolla on tunnus ja näyttöarvo. Tämä asetus määrittää, mikä matriisisarake tai paneelikysymys sisältää näyttötekstit.",
     showOtherItem: "Kun tämä on valittuna, käyttäjät voivat lisätä lisätietoja erilliseen kommenttiruutuun.",
     separateSpecialChoices: "Näyttää jokaisen erityisen valintavaihtoehdon (\"Ei mitään\", \"Muu\", \"Valitse kaikki\") uudella rivillä, vaikka käytettäisiin monisarakkeista asettelua.",
     path: "Määritä palvelutietojoukon sijainti, jossa objektien kohderyhmä sijaitsee. Jätä tyhjäksi, jos URL-osoite osoittaa jo matriisiin.",
@@ -2952,3 +2952,15 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pv.answeredQuestions: "Show answered questions only" => "Näytä vain vastatut kysymykset"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Määrittää navigointipainikkeiden sijainnin sivulla."
 // pe.size: "Input field width (in characters)" => "Syöttökentän leveys (merkkeinä)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintatunnuksina"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintateksteinä"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Yksi- ja monivalintakysymystyypeissä kullakin valintavaihtoehdolla on tunnus ja näyttöarvo. Tämä asetus määrittää, mikä matriisisarake tai paneelikysymys antaa tunnukset."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Yksi- ja monivalintakysymystyypeissä kullakin valintavaihtoehdolla on tunnus ja näyttöarvo. Tämä asetus määrittää, mikä matriisisarake tai paneelikysymys sisältää näyttötekstit."
+// pe.progressBarLocation: "Progress bar alignment" => "Edistymispalkin tasaus"
+// progressBarLocation.topbottom: "Top and bottom" => "Ylhäällä ja alhaalla"
+// progressBarLocation.aboveheader: "Above the header" => "Otsikon yläpuolella"
+// progressBarLocation.belowheader: "Below the header" => "Otsikon alapuolella"
+// progressBarLocation.off: "Hidden" => "Piilevä"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Määrittää edistymispalkin sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella."
+// survey.readOnly: "Make the survey read-only" => "Tee kyselystä vain luku -muotoinen"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Valitse tämä, jos haluat estää vastaajia vastaamasta kyselyyn."

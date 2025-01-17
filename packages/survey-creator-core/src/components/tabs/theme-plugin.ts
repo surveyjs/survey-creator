@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel, ItemValue, QuestionSelectBase } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel, ItemValue, QuestionSelectBase } from "survey-core";
 import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -54,7 +54,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private redoAction: Action;
   private advancedModeSwitcher: Switcher;
   private inputFileElement: HTMLInputElement;
-  private simulatorCssClasses: any = surveyCss[defaultV2ThemeName];
+  private simulatorCssClasses: any = surveyCss[defaultThemeName];
   private _availableThemes = [].concat(PredefinedThemes);
   private _showOneCategoryInPropertyGrid: boolean = false;
   private _advancedModeValue = false;
@@ -241,7 +241,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("theme", this);
-    this.simulatorCssClasses = surveyCss[defaultV2ThemeName];
+    this.simulatorCssClasses = surveyCss[defaultThemeName];
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.propertyGrid = new PropertyGridModel(undefined, creator, themeModelPropertyGridDefinition);

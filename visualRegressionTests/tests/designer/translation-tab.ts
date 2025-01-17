@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -84,6 +85,7 @@ test("tranlation property grid + onMachineTranslate", async (t) => {
       (window as any).creator.onMachineTranslate.add((sender, options) => { });
     })();
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {

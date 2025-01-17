@@ -334,8 +334,6 @@ var persianStrings = {
       templateErrorLocation: "همترازسازی پیام خطا",
       newPanelPosition: "محل جدید پنل",
       showRangeInProgress: "نمایش نوار پیشرفت",
-      showProgressBar: "نمایش نوار پیشرفت",
-      progressBarLocation: "تراز نوار پیشرفت",
       keyName: "جلوگیری از پاسخ های تکراری در سوال زیر"
     },
     question: {
@@ -388,7 +386,8 @@ var persianStrings = {
     // survey templates
     survey: {
       title: "عنوان",
-      description: "توضیحات نظرسنجی"
+      description: "توضیحات نظرسنجی",
+      readOnly: "نظرسنجی را فقط خواندنی کنید"
     },
     page: {
       name: "نام صفحه",
@@ -611,7 +610,6 @@ var persianStrings = {
     simulator: "انتخاب دستگاه",
     landscapeOrientation: "افقی",
     portraitOrientation: "تغییر جهت به جهت تصویر",
-    mode: "حالت (ویرایش/خواندن)",
     clearInvisibleValues: "پاکسازی مقادیر پنهان",
     cookieName: "نام کوکی (به منظور جلوگیری از اجرای دوباره نظرسنجی)",
     partialSendEnabled: "ارسال نتایج نظرسنجی در صفحه بعدی",
@@ -632,6 +630,7 @@ var persianStrings = {
     autoAdvanceEnabled: "با پاسخگویی به تمام سوالات، به صورت اتوماتیک به صفحه بعد برود",
     autoAdvanceAllowComplete: "بررسی را به طور خودکار تکمیل کنید",
     showProgressBar: "نمایش نشانگر پیشرفت",
+    progressBarLocation: "تراز نوار پیشرفت",
     questionTitleLocation: "محل عنوان سوال",
     questionTitleWidth: "عرض عنوان سوال",
     requiredMark: "سوالات نشان دار اجباری هستند",
@@ -754,6 +753,8 @@ var persianStrings = {
     separateSpecialChoices: "انتخاب های ویژه جداگانه (هیچ کدام، دیگر، همه را انتخاب کنید)",
     choicesFromQuestion: "کپی کردن انتخابها از سؤال زیر",
     choicesFromQuestionMode: "کدام گزینه ها را کپی کنید؟",
+    choiceValuesFromQuestion: "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان شناسه های انتخاب استفاده کنید.",
+    choiceTextsFromQuestion: "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان متن انتخابی استفاده کنید",
     progressBarShowPageTitles: "نمایش عناوین صفحه در نوار پیشرفت",
     progressBarShowPageNumbers: "نمایش شمارههای صفحه در نوار پیشرفت",
     showCommentArea: "نمایش ناحیهی نظرات",
@@ -1202,16 +1203,13 @@ var persianStrings = {
     questionOrder: {
       initial: "اصلی"
     },
-    showProgressBar: {
-      off: "پنهان",
-      topbottom: "بالا و پایین",
-      aboveheader: "بالای سرصفحه",
-      belowheader: "زیر سرایند"
-    },
     progressBarLocation: {
       top: "بالا",
       bottom: "پایین",
-      topBottom: "بالا و پایین"
+      topbottom: "بالا و پایین",
+      aboveheader: "بالای سربرگ",
+      belowheader: "در زیر سرصفحه",
+      off: "پنهان"
     },
     sum: "مجموع",
     count: "تعداد",
@@ -1436,7 +1434,8 @@ var persianStrings = {
     },
     // survey templates
     survey: {
-      mode: "انتخاب بین: \"قابل ویرایش\" - پاسخ دهندگان را قادر می سازد تا نظرسنجی خود را پر کنند. \"فقط خواندنی\" - ویرایش فرم را غیرفعال می کند."
+      readOnly: "اگر می خواهید از پر کردن نظرسنجی پاسخ دهندگان جلوگیری کنید، انتخاب کنید.",
+      progressBarLocation: "مکان نوار پیشرفت را تنظیم می کند. مقدار \"خودکار\" نوار پیشرفت را در بالا یا پایین سربرگ نظرسنجی نشان می دهد."
     },
     matrixdropdowncolumn: {
       name: "یک شناسه ستون که برای پاسخ دهندگان قابل مشاهده نیست.",
@@ -1459,7 +1458,6 @@ var persianStrings = {
     autoAdvanceAllowComplete: "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار پس از پاسخ دادن به تمام سوالات پاسخ دهد.",
     showNavigationButtons: "قابلیت مشاهده و مکان دکمه های پیمایش را در یک صفحه تنظیم می کند.",
     navigationButtonsLocation: "مکان دکمه های پیمایش را در یک صفحه تنظیم می کند.",
-    showProgressBar: "دید و مکان یک نوار پیشرفت را تنظیم می کند. مقدار \"Auto\" نوار پیشرفت را در بالا یا پایین هدر نظرسنجی نشان می دهد.",
     showPreviewBeforeComplete: "صفحه پیش نمایش را فقط با تمام سوالات یا پاسخ داده شده فعال کنید.",
     questionTitleLocation: "به تمام سوالات در نظرسنجی اعمال می شود. این تنظیم را می توان با قوانین هم ترازی عنوان در سطوح پایین تر لغو کرد: پانل، صفحه یا سوال. یک تنظیم سطح پایین تر، کسانی را که در سطح بالاتری قرار دارند، نادیده می گیرد.",
     requiredMark: "یک نماد یا دنباله ای از نمادها نشان می دهد که یک پاسخ مورد نیاز است.",
@@ -1520,6 +1518,8 @@ var persianStrings = {
     useDisplayValuesInDynamicTexts: "در انواع سوالات تک و چند انتخاب، هر گزینه انتخاب دارای یک شناسه و مقدار نمایش است. هنگامی که انتخاب می شود، این تنظیم یک مقدار نمایش را به جای یک مقدار ID در سوالات HTML و عناوین پویا و توصیف عناصر بررسی نشان می دهد.",
     clearIfInvisible: "انتخاب کنید که ایا برای پاک کردن یا نه ارزش سوال پنهان شده توسط منطق شرطی و زمانی که به ان را انجام دهد. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"پس از اتمام نظرسنجی\" به طور پیش فرض) اعمال می شود.",
     choicesFromQuestionMode: "انتخاب از: \"همه\" - کپی تمام گزینه های انتخاب از سوال انتخاب شده؛ \"انتخاب شده\" - به صورت پویا فقط گزینه های انتخاب شده را کپی می کند؛ \"Unselected\" - به صورت پویا تنها گزینه های انتخاب نشده را کپی می کند. گزینه های \"None\" و \"Other\" در صورت فعال شدن در سؤال منبع به طور پیش فرض کپی می شوند.",
+    choiceValuesFromQuestion: "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید شناسه ها را ارائه دهد.",
+    choiceTextsFromQuestion: "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید متون نمایش داده شده را ارائه دهد.",
     showOtherItem: "هنگامی که انتخاب می شوند، کاربران می توانند ورودی های اضافی را در یک جعبه نظر جداگانه قرار دهند.",
     separateSpecialChoices: "نمایش هر گزینه انتخاب خاص (\"هیچ\"، \"دیگر\"، \"انتخاب همه\") در یک خط جدید، حتی در هنگام استفاده از یک طرح چند ستون.",
     path: "مشخص کردن محل در مجموعه داده های سرویس که در ان ارایه هدف از اشیاء واقع شده است. ترک خالی اگر URL در حال حاضر به ارایه اشاره می کند.",
@@ -2935,3 +2935,15 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pv.allQuestions: "Show all questions" => "نمایش همه سوالات"
 // pv.answeredQuestions: "Show answered questions only" => "فقط سوالات پاسخ داده شده را نشان دهید"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "مکان دکمه های پیمایش را در یک صفحه تنظیم می کند."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان شناسه های انتخاب استفاده کنید."
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان متن انتخابی استفاده کنید"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید شناسه ها را ارائه دهد."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید متون نمایش داده شده را ارائه دهد."
+// pe.progressBarLocation: "Progress bar alignment" => "تراز نوار پیشرفت"
+// progressBarLocation.topbottom: "Top and bottom" => "بالا و پایین"
+// progressBarLocation.aboveheader: "Above the header" => "بالای سربرگ"
+// progressBarLocation.belowheader: "Below the header" => "در زیر سرصفحه"
+// progressBarLocation.off: "Hidden" => "پنهان"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "مکان نوار پیشرفت را تنظیم می کند. مقدار \"خودکار\" نوار پیشرفت را در بالا یا پایین سربرگ نظرسنجی نشان می دهد."
+// survey.readOnly: "Make the survey read-only" => "نظرسنجی را فقط خواندنی کنید"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "اگر می خواهید از پر کردن نظرسنجی پاسخ دهندگان جلوگیری کنید، انتخاب کنید."

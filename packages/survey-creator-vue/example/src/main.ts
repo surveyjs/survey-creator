@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import "survey-core/defaultV2.css";
+import "survey-core/default.css";
 import "survey-creator-core/survey-creator-core.css";
 import App from './App.vue'
 import router from './router'

@@ -334,8 +334,6 @@ export var nlStrings = {
       templateErrorLocation: "Uitlijning van foutmeldingen",
       newPanelPosition: "Nieuwe paneellocatie",
       showRangeInProgress: "De voortgangsbalk weergeven",
-      showProgressBar: "De voortgangsbalk weergeven",
-      progressBarLocation: "Uitlijning van de voortgangsbalk",
       keyName: "Voorkom dubbele antwoorden in de volgende vraag"
     },
     question: {
@@ -388,7 +386,8 @@ export var nlStrings = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Beschrijving van de enquête"
+      description: "Beschrijving van de enquête",
+      readOnly: "De enquête alleen-lezen maken"
     },
     page: {
       name: "Paginanaam",
@@ -611,7 +610,6 @@ export var nlStrings = {
     simulator: "Kies apparaat",
     landscapeOrientation: "Landschap",
     portraitOrientation: "Overschakelen naar staande stand",
-    mode: "Modus (bewerken/alleen lezen)",
     clearInvisibleValues: "Wis onzichtbare waarden",
     cookieName: "Cookienaam (zodat enquête slechts éénmalig wordt ingevuld)",
     partialSendEnabled: "Antwoorden opslaan bij pagina-overgang",
@@ -632,6 +630,7 @@ export var nlStrings = {
     autoAdvanceEnabled: "Na alle vragen automatisch naar volgende pagina gaan",
     autoAdvanceAllowComplete: "Vul de enquête automatisch in",
     showProgressBar: "Toon voortgangsbalk",
+    progressBarLocation: "Uitlijning van de voortgangsbalk",
     questionTitleLocation: "Plek vraagtitel",
     questionTitleWidth: "Breedte van de vraagtitel",
     requiredMark: "Symbool(en) verplichte vraag",
@@ -754,6 +753,8 @@ export var nlStrings = {
     separateSpecialChoices: "Speciale keuzes afzonderlijk (Geen, Overig, Alles selecteren)",
     choicesFromQuestion: "Kopieer keuzes uit de volgende vraag",
     choicesFromQuestionMode: "Welke keuzes kopiëren?",
+    choiceValuesFromQuestion: "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuze-ID's",
+    choiceTextsFromQuestion: "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuzeteksten",
     progressBarShowPageTitles: "Paginatitels weergeven in de voortgangsbalk",
     progressBarShowPageNumbers: "Paginanummers weergeven in de voortgangsbalk",
     showCommentArea: "Het opmerkingenveld weergeven",
@@ -1202,16 +1203,13 @@ export var nlStrings = {
     questionOrder: {
       initial: "Origineel"
     },
-    showProgressBar: {
-      off: "Verborgen",
-      topbottom: "Top en beneden",
-      aboveheader: "Boven de koptekst",
-      belowheader: "Onder de kop"
-    },
     progressBarLocation: {
       top: "Boven",
       bottom: "Bodem",
-      topBottom: "Boven en onder"
+      topbottom: "Boven en onder",
+      aboveheader: "Boven de koptekst",
+      belowheader: "Onder de kop",
+      off: "Verborgen"
     },
     sum: "Som",
     count: "Tellen",
@@ -1436,7 +1434,8 @@ export var nlStrings = {
     },
     // survey templates
     survey: {
-      mode: "Kies tussen: \"Bewerkbaar\" - stelt respondenten in staat uw enquête in te vullen; \"Alleen-lezen\" - schakelt het bewerken van formulieren uit."
+      readOnly: "Selecteer deze optie als u wilt voorkomen dat respondenten uw enquête invullen.",
+      progressBarLocation: "Hiermee stelt u de locatie van de voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
     },
     matrixdropdowncolumn: {
       name: "Een kolom-id die niet zichtbaar is voor respondenten.",
@@ -1459,7 +1458,6 @@ export var nlStrings = {
     autoAdvanceAllowComplete: "Selecteer of u wilt dat de enquête automatisch wordt ingevuld nadat een respondent alle vragen heeft beantwoord.",
     showNavigationButtons: "Hiermee stelt u de zichtbaarheid en locatie van navigatieknoppen op een pagina in.",
     navigationButtonsLocation: "Hiermee stelt u de locatie van navigatieknoppen op een pagina in.",
-    showProgressBar: "Hiermee stelt u de zichtbaarheid en locatie van een voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer.",
     showPreviewBeforeComplete: "Schakel de voorbeeldpagina in met alleen alle of beantwoorde vragen.",
     questionTitleLocation: "Geldt voor alle vragen in de enquête. Deze instelling kan worden overschreven door regels voor titeluitlijning op lagere niveaus: deelvenster, pagina of vraag. Een instelling op een lager niveau heeft voorrang op die op een hoger niveau.",
     requiredMark: "Een symbool of een reeks symbolen die aangeven dat een antwoord vereist is.",
@@ -1520,6 +1518,8 @@ export var nlStrings = {
     useDisplayValuesInDynamicTexts: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Als deze instelling is geselecteerd, wordt een weergavewaarde weergegeven in plaats van een ID-waarde in HTML-vragen en dynamische titels en beschrijvingen van enquête-elementen.",
     clearIfInvisible: "Kies of vraagwaarden die verborgen zijn door voorwaardelijke logica al dan niet moeten worden gewist en wanneer u dit wilt doen. Met de optie \"Overnemen\" wordt de instelling op enquêteniveau toegepast (\"Na voltooiing van de enquête\" standaard).",
     choicesFromQuestionMode: "Kies uit: \"Alle\" - kopieert alle keuzemogelijkheden van de geselecteerde vraag; \"Geselecteerd\" - kopieert dynamisch alleen geselecteerde keuzeopties; \"Niet geselecteerd\" - kopieert dynamisch alleen niet-geselecteerde keuzeopties. De opties \"Geen\" en \"Overig\" worden standaard gekopieerd als deze zijn ingeschakeld in de bronvraag.",
+    choiceValuesFromQuestion: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de ID's moeten bevatten.",
+    choiceTextsFromQuestion: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de weergaveteksten moet opleveren.",
     showOtherItem: "Als deze optie is geselecteerd, kunnen gebruikers extra invoer invullen in een apart invulveld.",
     separateSpecialChoices: "Geeft elke speciale keuzeoptie ('Geen', 'Overig', 'Alles selecteren') weer op een nieuwe regel, zelfs bij gebruik van een lay-out met meerdere kolommen.",
     path: "Geef de locatie binnen de servicegegevensset op waar de doelmatrix met objecten zich bevindt. Laat leeg als de URL al naar de array verwijst.",
@@ -2958,3 +2958,15 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pv.answeredQuestions: "Show answered questions only" => "Alleen beantwoorde vragen weergeven"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Hiermee stelt u de locatie van navigatieknoppen op een pagina in."
 // pe.size: "Input field width (in characters)" => "Breedte invoerveld (in tekens)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuze-ID's"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuzeteksten"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de ID's moeten bevatten."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de weergaveteksten moet opleveren."
+// pe.progressBarLocation: "Progress bar alignment" => "Uitlijning van de voortgangsbalk"
+// progressBarLocation.topbottom: "Top and bottom" => "Boven en onder"
+// progressBarLocation.aboveheader: "Above the header" => "Boven de koptekst"
+// progressBarLocation.belowheader: "Below the header" => "Onder de kop"
+// progressBarLocation.off: "Hidden" => "Verborgen"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Hiermee stelt u de locatie van de voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
+// survey.readOnly: "Make the survey read-only" => "De enquête alleen-lezen maken"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Selecteer deze optie als u wilt voorkomen dat respondenten uw enquête invullen."

@@ -334,8 +334,6 @@ var spanishTranslation = {
       templateErrorLocation: "Alineación de mensajes de error",
       newPanelPosition: "Nueva ubicación del panel",
       showRangeInProgress: "Mostrar la barra de progreso",
-      showProgressBar: "Mostrar la barra de progreso",
-      progressBarLocation: "Alineación de la barra de progreso",
       keyName: "Evitar respuestas duplicadas en la siguiente pregunta"
     },
     question: {
@@ -388,7 +386,8 @@ var spanishTranslation = {
     // survey templates
     survey: {
       title: "Título",
-      description: "Descripción de la encuesta"
+      description: "Descripción de la encuesta",
+      readOnly: "Hacer que la encuesta sea de solo lectura"
     },
     page: {
       name: "Nombre de la página",
@@ -611,7 +610,6 @@ var spanishTranslation = {
     simulator: "Elige dispositivo",
     landscapeOrientation: "Orientación horizontal ",
     portraitOrientation: "Cambiar a orientatión retrato",
-    mode: "Modo (editar / leer solamente)",
     clearInvisibleValues: "Claros valores invisibles",
     cookieName: "Nombre de la cookie (para deshabilitar la encuesta de ejecución dos veces localmente)",
     partialSendEnabled: "Enviar resultados de encuestas en la página Siguiente",
@@ -632,6 +630,7 @@ var spanishTranslation = {
     autoAdvanceEnabled: "Al responder todas las preguntas, vaya a la página siguiente automáticamente",
     autoAdvanceAllowComplete: "Completar la encuesta automáticamente",
     showProgressBar: "Mostrar barra de progreso",
+    progressBarLocation: "Alineación de la barra de progreso",
     questionTitleLocation: "Ubicación del título de la pregunta",
     questionTitleWidth: "Ancho del título de la pregunta",
     requiredMark: "La pregunta requerida (s) símbolo (s)",
@@ -754,6 +753,8 @@ var spanishTranslation = {
     separateSpecialChoices: "Opciones de separación especiales (None, Other, Select All)",
     choicesFromQuestion: "Copiar opciones de la siguiente pregunta",
     choicesFromQuestionMode: "Qué opciones a copiar?",
+    choiceValuesFromQuestion: "Utilice los valores de la siguiente columna de matriz o pregunta de panel como ID de opción",
+    choiceTextsFromQuestion: "Utilice los valores de la siguiente columna de matriz o pregunta de panel como textos de elección",
     progressBarShowPageTitles: "Mostrar los títulos de las páginas en la barra de progreso",
     progressBarShowPageNumbers: "Mostrar números de página en la barra de progreso",
     showCommentArea: "Mostrar el área de comentarios",
@@ -1202,16 +1203,13 @@ var spanishTranslation = {
     questionOrder: {
       initial: "Texto original en"
     },
-    showProgressBar: {
-      off: "Oculto",
-      topbottom: "arriba y abajo",
-      aboveheader: "Encima del encabezado",
-      belowheader: "Debajo del encabezado"
-    },
     progressBarLocation: {
       top: "Arriba",
       bottom: "Fondo",
-      topBottom: "Arriba y abajo"
+      topbottom: "Arriba y abajo",
+      aboveheader: "Encima del encabezado",
+      belowheader: "Debajo del encabezado",
+      off: "Escondido"
     },
     sum: "Suma",
     count: "Contar",
@@ -1436,7 +1434,8 @@ var spanishTranslation = {
     },
     // survey templates
     survey: {
-      mode: "Elija entre: \"Editable\": permite a los encuestados completar su encuesta; \"Solo lectura\": deshabilita la edición de formularios."
+      readOnly: "Seleccione si desea evitar que los encuestados completen su encuesta.",
+      progressBarLocation: "Establece la ubicación de la barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta."
     },
     matrixdropdowncolumn: {
       name: "Un identificador de columna que no es visible para los encuestados.",
@@ -1459,7 +1458,6 @@ var spanishTranslation = {
     autoAdvanceAllowComplete: "Seleccione si desea que la encuesta se complete automáticamente después de que un encuestado responda todas las preguntas.",
     showNavigationButtons: "Establece la visibilidad y la ubicación de los botones de navegación en una página.",
     navigationButtonsLocation: "Establece la ubicación de los botones de navegación en una página.",
-    showProgressBar: "Establece la visibilidad y la ubicación de una barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta.",
     showPreviewBeforeComplete: "Habilite la página de vista previa con todas las preguntas o solo las respondidas.",
     questionTitleLocation: "Se aplica a todas las preguntas de la encuesta. Esta configuración se puede anular mediante reglas de alineación de títulos en niveles inferiores: panel, página o pregunta. Una configuración de nivel inferior anulará las de un nivel superior.",
     requiredMark: "Un símbolo o una secuencia de símbolos que indican que se requiere una respuesta.",
@@ -1520,6 +1518,8 @@ var spanishTranslation = {
     useDisplayValuesInDynamicTexts: "En los tipos de preguntas de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Cuando se selecciona, esta configuración muestra un valor de visualización en lugar de un valor de ID en las preguntas HTML y en los títulos dinámicos y las descripciones de los elementos de la encuesta.",
     clearIfInvisible: "Elija si desea o no borrar los valores de las preguntas ocultos por la lógica condicional y cuándo hacerlo. La opción \"Heredar\" aplica la configuración de nivel de encuesta (\"Al finalizar la encuesta\" de forma predeterminada).",
     choicesFromQuestionMode: "Elija entre: \"Todas\": copia todas las opciones de elección de la pregunta seleccionada; \"Seleccionado\": copia dinámicamente solo las opciones de elección seleccionadas; \"No seleccionado\": copia dinámicamente solo las opciones de elección no seleccionadas. Las opciones \"Ninguno\" y \"Otro\" se copian de forma predeterminada si están habilitadas en la pregunta de origen.",
+    choiceValuesFromQuestion: "En los tipos de preguntas de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Esta configuración especifica qué columna de matriz o pregunta de panel debe proporcionar los identificadores.",
+    choiceTextsFromQuestion: "En los tipos de preguntas de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Esta configuración especifica qué columna de matriz o pregunta de panel debe proporcionar los textos de visualización.",
     showOtherItem: "Cuando se selecciona, los usuarios pueden incluir entradas adicionales en un cuadro de comentarios independiente.",
     separateSpecialChoices: "Muestra cada opción de opción especial (\"Ninguno\", \"Otro\", \"Seleccionar todo\") en una nueva línea, incluso cuando se utiliza un diseño de varias columnas.",
     path: "Especifique la ubicación dentro del dataset de servicio donde se encuentra la matriz de objetos de destino. Déjelo en vacío si la dirección URL ya apunta a la matriz.",
@@ -2756,3 +2756,15 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pv.allQuestions: "Show all questions" => "Mostrar todas las preguntas"
 // pv.answeredQuestions: "Show answered questions only" => "Mostrar solo las preguntas respondidas"
 // pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Establece la ubicación de los botones de navegación en una página."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Utilice los valores de la siguiente columna de matriz o pregunta de panel como ID de opción"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Utilice los valores de la siguiente columna de matriz o pregunta de panel como textos de elección"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "En los tipos de preguntas de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Esta configuración especifica qué columna de matriz o pregunta de panel debe proporcionar los identificadores."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "En los tipos de preguntas de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Esta configuración especifica qué columna de matriz o pregunta de panel debe proporcionar los textos de visualización."
+// pe.progressBarLocation: "Progress bar alignment" => "Alineación de la barra de progreso"
+// progressBarLocation.topbottom: "Top and bottom" => "Arriba y abajo"
+// progressBarLocation.aboveheader: "Above the header" => "Encima del encabezado"
+// progressBarLocation.belowheader: "Below the header" => "Debajo del encabezado"
+// progressBarLocation.off: "Hidden" => "Escondido"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Establece la ubicación de la barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta."
+// survey.readOnly: "Make the survey read-only" => "Hacer que la encuesta sea de solo lectura"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Seleccione si desea evitar que los encuestados completen su encuesta."
