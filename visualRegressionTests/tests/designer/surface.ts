@@ -412,20 +412,10 @@ test("Choices (Checkbox): Layout", async (t) => {
 
 test("Choices (Tagbox): Layout", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1280, 900);
-    const json = {
-      showQuestionNumbers: "on",
-      "pages": [
-        {
-          "name": "page1",
-          "elements": [
-            { "type": "tagbox", "name": "question1", "choices": ["Item 1", "Item 2", "Item 3"] }
-          ]
-        }
-      ]
-    };
-    await setJSON(json);
     await t
+      .resizeWindow(1280, 900)
+      .hover(getToolboxItemByAriaLabel("Multi-Select Dropdown"), { speed: 0.5 })
+      .click(getToolboxItemByAriaLabel("Multi-Select Dropdown"), { speed: 0.5 })
       .click(getPropertyGridCategory(generalGroupName))
       .click(getPropertyGridCategory("Data"))
       .click(Selector("span").withExactText("Set Default Answer"))
