@@ -61,11 +61,11 @@ test("Check property grid survey options", () => {
     "survey",
     "showProgressBar"
   ).defaultValue;
-  Serializer.findProperty("survey", "showProgressBar").defaultValue = "top";
+  Serializer.findProperty("survey", "showProgressBar").defaultValue = true;
   var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
   expect(propertyGrid.survey.showNavigationButtons).toEqual(false);
-  expect(propertyGrid.survey.showProgressBar).toEqual("off");
+  expect(propertyGrid.survey.showProgressBar).toEqual(false);
   Serializer.findProperty("survey", "showProgressBar").defaultValue = oldValue;
 });
 

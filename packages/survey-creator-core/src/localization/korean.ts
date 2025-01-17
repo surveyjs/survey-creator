@@ -334,8 +334,6 @@ export var koreanStrings = {
       templateErrorLocation: "오류 메시지 맞춤",
       newPanelPosition: "새 패널 위치",
       showRangeInProgress: "진행률 표시줄 표시",
-      showProgressBar: "진행률 표시줄 표시",
-      progressBarLocation: "진행률 표시줄 맞춤",
       keyName: "다음 질문에서 중복 응답 방지"
     },
     question: {
@@ -388,7 +386,8 @@ export var koreanStrings = {
     // survey templates
     survey: {
       title: "타이틀",
-      description: "설문조사 설명"
+      description: "설문조사 설명",
+      readOnly: "설문조사를 읽기 전용으로 설정"
     },
     page: {
       name: "페이지 이름",
@@ -611,7 +610,6 @@ export var koreanStrings = {
     simulator: "장치 유형 선택",
     landscapeOrientation: "가로 방향으로 전환",
     portraitOrientation: "세로 방향으로 전환",
-    mode: "모드(편집/읽기전용)",
     clearInvisibleValues: "보이지 않는 값 지우기",
     cookieName: "쿠키 이름(로컬에서 설문 조사를 두 번 사용하지 않도록 설정)",
     partialSendEnabled: "다음 페이지에서 설문 조사 결과 보내기",
@@ -632,6 +630,7 @@ export var koreanStrings = {
     autoAdvanceEnabled: "모든 질문에 응답 후 자동으로 다음 페이지로 이동",
     autoAdvanceAllowComplete: "설문조사 자동 완성",
     showProgressBar: "진행률 막대 표시",
+    progressBarLocation: "진행률 표시줄 맞춤",
     questionTitleLocation: "질문 제목 위치",
     questionTitleWidth: "질문 제목 너비",
     requiredMark: "질문에 필요한 기호",
@@ -1204,16 +1203,13 @@ export var koreanStrings = {
     questionOrder: {
       initial: "원문 언어"
     },
-    showProgressBar: {
-      off: "숨겨진",
-      topbottom: "위아래",
-      aboveheader: "머리글 위",
-      belowheader: "머리글 아래"
-    },
     progressBarLocation: {
       top: "맨 위로",
       bottom: "밑바닥",
-      topBottom: "위쪽 및 아래쪽"
+      topbottom: "위쪽 및 아래쪽",
+      aboveheader: "헤더 위",
+      belowheader: "헤더 아래",
+      off: "숨겨진"
     },
     sum: "합계",
     count: "세다",
@@ -1438,7 +1434,8 @@ export var koreanStrings = {
     },
     // survey templates
     survey: {
-      mode: "다음 중 하나를 선택합니다. \"수정 가능\" - 응답자가 설문조사를 작성할 수 있습니다. \"읽기 전용\" - 양식 편집을 비활성화합니다."
+      readOnly: "응답자가 설문조사를 작성하지 못하도록 하려면 선택합니다.",
+      progressBarLocation: "진행률 표시줄의 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
     },
     matrixdropdowncolumn: {
       name: "응답자에게 표시되지 않는 열 ID입니다.",
@@ -1461,7 +1458,6 @@ export var koreanStrings = {
     autoAdvanceAllowComplete: "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다.",
     showNavigationButtons: "페이지에서 탐색 단추의 표시 여부와 위치를 설정합니다.",
     navigationButtonsLocation: "페이지에서 탐색 단추의 위치를 설정합니다.",
-    showProgressBar: "진행률 표시줄의 표시 여부와 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다.",
     showPreviewBeforeComplete: "모든 질문 또는 답변된 질문만 있는 미리보기 페이지를 활성화합니다.",
     questionTitleLocation: "설문조사 내의 모든 질문에 적용됩니다. 이 설정은 하위 수준(패널, 페이지 또는 질문)의 제목 정렬 규칙으로 재정의할 수 있습니다. 낮은 수준의 설정은 더 높은 수준의 설정보다 우선합니다.",
     requiredMark: "답변이 필요함을 나타내는 기호 또는 일련의 기호입니다.",
@@ -3192,3 +3188,11 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "다음 행렬 열 또는 패널 질문의 값을 선택 텍스트로 사용합니다."
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "단일 선택 및 다중 선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정은 ID를 제공해야 하는 행렬 열 또는 패널 질문을 지정합니다."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "단일 선택 및 다중 선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정은 표시 텍스트를 제공해야 하는 행렬 열 또는 패널 질문을 지정합니다."
+// pe.progressBarLocation: "Progress bar alignment" => "진행률 표시줄 맞춤"
+// progressBarLocation.topbottom: "Top and bottom" => "위쪽 및 아래쪽"
+// progressBarLocation.aboveheader: "Above the header" => "헤더 위"
+// progressBarLocation.belowheader: "Below the header" => "헤더 아래"
+// progressBarLocation.off: "Hidden" => "숨겨진"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "진행률 표시줄의 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
+// survey.readOnly: "Make the survey read-only" => "설문조사를 읽기 전용으로 설정"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "응답자가 설문조사를 작성하지 못하도록 하려면 선택합니다."

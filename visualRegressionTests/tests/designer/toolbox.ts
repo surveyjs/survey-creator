@@ -20,7 +20,9 @@ test("Left toolbox", async (t) => {
     const toolboxElement = Selector(".svc-toolbox");
     const creatorTabElement = Selector(".svc-creator-tab");
 
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
     await setShowSidebar(false);
     await takeElementScreenshot("toolbox-left.png", toolboxElement, t, comparer);
@@ -63,7 +65,9 @@ test("Right toolbox", async (t) => {
     const toolboxItem = Selector(".svc-toolbox__item");
     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
 
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
     await setShowSidebar(false);
     await changeToolboxLocation("right");
@@ -109,7 +113,9 @@ test("Right toolbox (rtl)", async (t) => {
     const toolboxItem = Selector(".svc-toolbox__item");
     const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
 
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
     await setShowSidebar(false);
 
@@ -184,6 +190,7 @@ test("designer tab view with page navigator", async (t) => {
     await setAllowEditSurveyTitle(false);
     await setShowAddQuestionButton(false);
     await setJSON({
+      showQuestionNumbers: "on",
       pages: [
         {
           "name": "page1",
@@ -210,7 +217,9 @@ test("Toolbox category collapsed", async (t) => {
     await changeToolboxSearchEnabled(false);
     await t.resizeWindow(2560, 1440);
     const toolboxElement = Selector(".svc-toolbox");
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await ClientFunction(() => { window["creator"].toolbox.changeCategories([{ name: "matrixdropdown", category: "matrix-custom" }]); })();
     await ClientFunction(() => { window["creator"].toolbox.showCategoryTitles = true; })();
     await ClientFunction(() => { window["creator"].toolbox.allowExpandMultipleCategories = true; })();
@@ -224,7 +233,9 @@ test("Toolbox with category titles", async (t) => {
     await changeToolboxSearchEnabled(false);
     const toolboxElement = Selector(".svc-toolbox");
 
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await ClientFunction(() => { window["creator"].toolbox.keepAllCategoriesExpanded = true; })();
     await ClientFunction(() => { window["creator"].toolbox.changeCategories([]); })();
     await ClientFunction(() => { window["creator"].toolbox.showCategoryTitles = true; })();
@@ -238,7 +249,9 @@ test("Toolbox with subtypes (ltr)", async (t) => {
     const toolboxElement = Selector(".svc-toolbox");
     const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filterVisible();
 
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     const itemSelector = getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool");
     await t.resizeWindow(2560, 1440)
       .wait(300)
@@ -257,7 +270,9 @@ test.skip("Toolbox with subtypes (wrap)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").nth(1);
 
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(1775, 500)
       .scrollBy(".svc-toolbox .svc-scroll__scroller", 2, 300)
       .hover(getToolboxItemByText("Single-Line Input"))
@@ -274,7 +289,9 @@ test("Toolbox with subtypes (rtl)", async (t) => {
     const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filterVisible();
     const itemSelector = getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool");
 
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440)
       .wait(300)
       .hover(itemSelector);
@@ -325,7 +342,9 @@ test("Right toolbox - scroll", async (t) => {
     await setShowAddQuestionButton(false);
     const toolboxItem = Selector(".svc-toolbox__item").filterVisible().nth(5);
 
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
     await setShowSidebar(false);
     await changeToolboxLocation("right");
@@ -358,7 +377,9 @@ test("Right toolbox (rtl) - scroll", async (t) => {
     const toolboxItem = Selector(".svc-toolbox__item").filterVisible().nth(5);
 
     await setDirRTL();
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
     await setShowSidebar(false);
     await changeToolboxScrolling(true);
@@ -389,7 +410,9 @@ test("Toolbox with search", async (t) => {
     await setAllowEditSurveyTitle(false);
     await setShowAddQuestionButton(false);
     await changeToolboxSearchEnabled(true);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     await t.resizeWindow(2560, 1440);
     await setShowSidebar(false);
@@ -411,7 +434,9 @@ test("Toolbox with search in categories", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const toolboxElement = Selector(".svc-toolbox");
 
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await changeToolboxScrolling(false);
     await changeToolboxSearchEnabled(true);
     await ClientFunction(() => {
@@ -432,7 +457,9 @@ test("Toolbox with search compact", async (t) => {
     await setAllowEditSurveyTitle(false);
     await setShowAddQuestionButton(false);
     await changeToolboxSearchEnabled(true);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     await t.resizeWindow(1240, 870);
     await setShowSidebar(false);
@@ -454,7 +481,9 @@ test("Toolbox right with search", async (t) => {
     await setShowAddQuestionButton(false);
     await changeToolboxSearchEnabled(true);
     await changeToolboxLocation("right");
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
     await setShowSidebar(false);
     await takeElementScreenshot("toolbox-search-right.png", toolboxElement, t, comparer);
@@ -475,7 +504,9 @@ test("Toolbox RTL with search", async (t) => {
     await setShowAddQuestionButton(false);
     await changeToolboxSearchEnabled(true);
     await setDirRTL();
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     await t.resizeWindow(2560, 1440);
     await setShowSidebar(false);
@@ -495,7 +526,9 @@ test("Toolbox RTL with search compact", async (t) => {
     await setAllowEditSurveyTitle(false);
     await setShowAddQuestionButton(false);
     await setShowSidebar(false);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     await t.resizeWindow(950, 870);
     await changeToolboxSearchEnabled(true);

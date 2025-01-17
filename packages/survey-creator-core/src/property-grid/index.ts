@@ -918,7 +918,9 @@ export class PropertyGridModel {
       this.onValueChanging(options);
     });
     this.survey.onValidateQuestion.add((sender, options) => {
-      this.onValidateQuestion(options);
+      if(options.errors.length === 0) {
+        this.onValidateQuestion(options);
+      }
     });
     this.survey.onGetQuestionTitleActions.add((sender, options) => {
       this.titleActionsCreator.onGetQuestionTitleActions(options);
@@ -1161,7 +1163,7 @@ export class PropertyGridModel {
   private onValidateQuestion(options: any) {
     var q = options.question;
     if (!q || !q.property) return;
-    options.error = this.validateQuestionValue(this.obj, q, q.property, options.value);
+    options.error = this.validateQuestionValue(q.obj || this.obj, q, q.property, options.value);
   }
   private onValueChanging(options: any) {
     var q = options.question;

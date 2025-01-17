@@ -334,8 +334,6 @@ var traditionalChineseTranslation = {
       templateErrorLocation: "錯誤消息對齊",
       newPanelPosition: "新面板位置",
       showRangeInProgress: "顯示進度條",
-      showProgressBar: "顯示進度條",
-      progressBarLocation: "進度條對齊",
       keyName: "防止在以下問題中重複回答"
     },
     question: {
@@ -388,7 +386,8 @@ var traditionalChineseTranslation = {
     // survey templates
     survey: {
       title: "標題",
-      description: "調查說明"
+      description: "調查說明",
+      readOnly: "將調查設為唯讀"
     },
     page: {
       name: "頁面名稱",
@@ -611,7 +610,6 @@ var traditionalChineseTranslation = {
     simulator: "選擇設備類型",
     landscapeOrientation: "切換到橫向",
     portraitOrientation: "切換到縱向",
-    mode: "模式 (編輯/只讀)",
     clearInvisibleValues: "清除隱藏值",
     cookieName: "Cookie name (to disable run survey two times locally)",
     partialSendEnabled: "Send survey results on page next",
@@ -632,6 +630,7 @@ var traditionalChineseTranslation = {
     autoAdvanceEnabled: "回答本頁所有問題後，自動跳轉到下一頁",
     autoAdvanceAllowComplete: "自動完成調查",
     showProgressBar: "顯示進度條",
+    progressBarLocation: "進度條對齊",
     questionTitleLocation: "問題的標題位置",
     questionTitleWidth: "問題標題寬度",
     requiredMark: "The question required symbol(s)",
@@ -1204,16 +1203,13 @@ var traditionalChineseTranslation = {
     questionOrder: {
       initial: "源語言"
     },
-    showProgressBar: {
-      off: "隱藏",
-      topbottom: "頂部和底部",
-      aboveheader: "標題上方",
-      belowheader: "在標題下方"
-    },
     progressBarLocation: {
       top: "返回頁首",
       bottom: "底",
-      topBottom: "頂部和底部"
+      topbottom: "頂部和底部",
+      aboveheader: "標題上方",
+      belowheader: "標題下方",
+      off: "隱藏"
     },
     sum: "和",
     count: "計數",
@@ -1438,7 +1434,8 @@ var traditionalChineseTranslation = {
     },
     // survey templates
     survey: {
-      mode: "選擇：「可編輯」 - 使受訪者能夠填寫您的調查;“只讀” - 禁用表單編輯。"
+      readOnly: "選擇是否要阻止受訪者填寫您的調查。",
+      progressBarLocation: "設置進度條的位置。“自動”值在調查標題的上方或下方顯示進度條。"
     },
     matrixdropdowncolumn: {
       name: "受訪者不可見的列ID。",
@@ -1461,7 +1458,6 @@ var traditionalChineseTranslation = {
     autoAdvanceAllowComplete: "選擇是否希望在受訪者回答所有問題後自動完成調查。",
     showNavigationButtons: "設置導航按鈕在頁面上的可見性和位置。",
     navigationButtonsLocation: "設置頁面上導航按鈕的位置。",
-    showProgressBar: "設置進度條的可見性和位置。“自動”值顯示測量標題上方或下方的進度條。",
     showPreviewBeforeComplete: "啟用僅包含所有問題或已回答問題的預覽頁面。",
     questionTitleLocation: "適用於調查中的所有問題。此設置可以被較低級別的標題對齊規則覆蓋：面板、頁面或問題。較低級別的設置將覆蓋較高級別的設置。",
     requiredMark: "一個符號或一系列符號，表示需要答案。",
@@ -3258,3 +3254,11 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "使用以下矩陣、列或面板問題中的值作為選擇文本"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣、列或面板問題應提供ID。"
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣列或面板問題應提供顯示文本。"
+// pe.progressBarLocation: "Progress bar alignment" => "進度條對齊"
+// progressBarLocation.topbottom: "Top and bottom" => "頂部和底部"
+// progressBarLocation.aboveheader: "Above the header" => "標題上方"
+// progressBarLocation.belowheader: "Below the header" => "標題下方"
+// progressBarLocation.off: "Hidden" => "隱藏"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "設置進度條的位置。“自動”值在調查標題的上方或下方顯示進度條。"
+// survey.readOnly: "Make the survey read-only" => "將調查設為唯讀"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "選擇是否要阻止受訪者填寫您的調查。"

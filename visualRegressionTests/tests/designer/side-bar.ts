@@ -8,7 +8,9 @@ fixture`${title}`.page`${url}`;
 
 test("object selector popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t
       .resizeWindow(750, 700)
       .click(expandButtonSelector)
@@ -41,6 +43,7 @@ test("object selector with large object's name", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const sideBarActionsContainer = Selector(".svc-side-bar__container-actions");
     await setJSON({
+      showQuestionNumbers: "on",
       "pages": [
         {
           "name": "page1",
@@ -65,6 +68,7 @@ test("object selector with large object's name", async (t) => {
 test("property grid search", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
+      showQuestionNumbers: "on",
       "elements": [
         {
           "type": "text",
@@ -95,6 +99,7 @@ test("property grid search", async (t) => {
 test("property grid search matrix", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
+      showQuestionNumbers: "on",
       "elements": [
         {
           "type": "radiogroup",
