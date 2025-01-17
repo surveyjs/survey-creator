@@ -1,4 +1,4 @@
-import { SurveyModel, QuestionPanelDynamicModel, ItemValue, PanelModel, Base, FunctionFactory, Question, QuestionHtmlModel, QuestionDropdownModel, SurveyElement, defaultV2Css } from "survey-core";
+import { SurveyModel, QuestionPanelDynamicModel, ItemValue, PanelModel, Base, FunctionFactory, Question, QuestionHtmlModel, QuestionDropdownModel, SurveyElement, defaultCss } from "survey-core";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { PropertyEditorSetupValue } from "../../property-grid/index";
 import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
@@ -7,7 +7,7 @@ import { editorLocalization } from "../../editorLocalization";
 import { SurveyHelper } from "../../survey-helper";
 import { logicCss } from "./logic-theme";
 import { copyCssClasses } from "../../utils/utils";
-import { assignDefaultV2Classes } from "../../utils/creator-utils";
+import { assignDefaultClasses } from "../../utils/creator-utils";
 import { QuestionLinkValueModel } from "../../components/link-value";
 import { LogicActionModelBase, LogicActionModel, LogicActionTriggerModel } from "./logic-actions-model";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
@@ -264,14 +264,14 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       cssClasses.onError = "svc-logic-operator--error";
     }
     if (question.isContentElement || this.isSetValueInternalQuestion(question)) {
-      assignDefaultV2Classes(cssClasses, question.getType());
+      assignDefaultClasses(cssClasses, question.getType());
       cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
     }
     const parentName = question.parent?.name;
     if (selectorsNames.indexOf(question.name) < 0 && (parentName === "triggerEditorPanel" || parentName === "setValueIfPanel")) {
       const qType = question.getType();
-      assignDefaultV2Classes(cssClasses, qType);
-      if (!defaultV2Css[qType] && propertyGridCss[qType]) {
+      assignDefaultClasses(cssClasses, qType);
+      if (!defaultCss[qType] && propertyGridCss[qType]) {
         copyCssClasses(cssClasses, propertyGridCss.question);
         copyCssClasses(cssClasses, propertyGridCss[qType]);
       }
@@ -315,7 +315,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       cssClasses.panel.container += " svc-logic_trigger-questions";
     }
     if (this.isSetValueInternalQuestionCore(panel.parentQuestion)) {
-      assignDefaultV2Classes(cssClasses, panel.getType());
+      assignDefaultClasses(cssClasses, panel.getType());
     }
   }
   private onValueChanged(options: any) {

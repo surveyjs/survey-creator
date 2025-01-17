@@ -4,7 +4,7 @@ import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
-import { assignDefaultV2Classes, wrapTextByCurlyBraces } from "../utils/creator-utils";
+import { assignDefaultClasses, wrapTextByCurlyBraces } from "../utils/creator-utils";
 import { logicCss } from "../components/tabs/logic-theme";
 import { getLogicString } from "../components/tabs/logic-types";
 import { CreatorBase } from "../creator-base";
@@ -978,7 +978,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       cssClasses.mainRoot += " svc-logic-condition-remove-question";
     }
     if (question.name === "questionValue" || question.isContentElement) {
-      assignDefaultV2Classes(cssClasses, question.getType());
+      assignDefaultClasses(cssClasses, question.getType());
       cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
       cssClasses.error.root = "svc-logic-operator__error";
     }

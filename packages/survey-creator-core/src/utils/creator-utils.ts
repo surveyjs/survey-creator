@@ -1,4 +1,4 @@
-import { defaultV2Css, IAction, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
+import { defaultCss, IAction, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
 import { copyCssClasses } from "./utils";
 import { settings } from "../creator-settings";
 
@@ -129,11 +129,11 @@ export function scrollElementIntoView(elementId: string) {
   el.scrollIntoView({ behavior: "smooth", block: "center", inline: "start" });
 }
 
-export function assignDefaultV2Classes(destination: any, questionType: string) {
-  copyCssClasses(destination, defaultV2Css.question);
-  copyCssClasses(destination, defaultV2Css[questionType]);
+export function assignDefaultClasses(destination: any, questionType: string) {
+  copyCssClasses(destination, defaultCss.question);
+  copyCssClasses(destination, defaultCss[questionType]);
   if (destination.list) {
-    copyCssClasses(destination.list, defaultV2Css.list);
+    copyCssClasses(destination.list, defaultCss.list);
   }
   destination.hasErrorTop = "";
   destination.hasErrorBottom = "";

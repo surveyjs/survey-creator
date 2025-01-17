@@ -36,7 +36,7 @@ import {
   settings as creatorSettings
 } from "../creator-settings";
 import { QuestionFactory } from "survey-core";
-import { defaultV2Css } from "survey-core";
+import { defaultCss } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { parsePropertyDescription } from "./description-parser";
@@ -1425,7 +1425,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     );
     if (!surveyPropertyEditor) return null;
     if (property.type !== "condition") {
-      surveyPropertyEditor.editSurvey.css = defaultV2Css;
+      surveyPropertyEditor.editSurvey.css = defaultCss;
     }
     if (question.isReadOnly) {
       surveyPropertyEditor.editSurvey.mode = "display";
