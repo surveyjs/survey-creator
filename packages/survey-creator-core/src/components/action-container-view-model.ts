@@ -94,6 +94,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public static AdornerValueName = "__sjs_creator_adorner";
   public actionContainer: ActionContainer;
+  public topActionContainer: ActionContainer;
   protected expandCollapseAction: IAction;
   @property({ defaultValue: true }) allowDragging: boolean;
   @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
@@ -227,6 +228,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected createActionContainers() {
     this.actionContainer = this.createActionContainer();
+    this.topActionContainer = new ActionContainer();
+    this.topActionContainer.sizeMode = "small";
+    this.topActionContainer.setItems([this.expandCollapseAction]);
   }
 
   protected createActionContainer(): ActionContainer {

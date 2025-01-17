@@ -75,7 +75,8 @@ svc-page {
   padding: 0 calcSize(1.5) 0 var(--ctr-survey-page-drag-indicator-width, calcSize(3));
   z-index: 1;
   transition: opacity $creator-transition-duration;
-
+  white-space: nowrap;
+  
   .sv-action-bar-separator {
     margin: 0 calcSize(1);
   }

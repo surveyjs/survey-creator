@@ -46,10 +46,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected updateActionVisibility(id: string, isVisible: boolean) {
     super.updateActionVisibility(id, !this.isGhost && isVisible);
   }
-  protected updateActionsContainer(surveyElement: SurveyElement): void {
-    super.updateActionsContainer(surveyElement);
-    if (this.creator.expandCollapseButtonVisibility != "never") this.actionContainer.addAction(this.expandCollapseAction);
-  }
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed;
   }
@@ -177,6 +173,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       itemTitle: "svc-page-toolbar-item__title",
       itemTitleWithIcon: "svc-page-toolbar-item__title--with-icon",
     };
+    container.dotsItem.iconSize = "auto";
+    container.dotsItem.cssClasses.itemIcon += " svc-page-toolbar-item__icon";
     return container;
   }
 

@@ -56,7 +56,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   placeholderComponentData: any;
 
   private dragOrClickHelper: DragOrClickHelper;
-  public topActionContainer: ActionContainer;
   constructor(
     creator: SurveyCreatorModel,
     surveyElement: SurveyElement,
@@ -324,7 +323,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.actionContainer.cssClasses = defaultCssClasses;
     (<SurveyElementActionContainer>this.actionContainer).dotsItem.css += " svc-survey-element-toolbar__dots-item";
     (<SurveyElementActionContainer>this.actionContainer).dotsItem.innerCss += " svc-survey-element-toolbar__item";
-    this.topActionContainer = new ActionContainer();
     this.topActionContainer.cssClasses = {
       root: "svc-survey-element-top-toolbar sv-action-bar",
       item: "svc-survey-element-top-toolbar__item",
@@ -332,8 +330,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       itemTitle: "svc-survey-element-toolbar-item__title",
       itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
     };
-    this.topActionContainer.sizeMode = "small";
-    this.topActionContainer.setItems([this.expandCollapseAction]);
   }
   public getActionById(id: string): Action {
     let res = super.getActionById(id);
