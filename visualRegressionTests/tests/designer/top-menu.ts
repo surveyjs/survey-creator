@@ -8,7 +8,9 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 
 test("Top menu on designer tab", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(1920, 1080);
 
     const topBarElement = Selector(".svc-top-bar");
@@ -53,7 +55,9 @@ test("Top menu on designer tab", async (t) => {
 });
 test("Top menu with single item", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(1920, 1080);
 
     const topBarElement = Selector(".svc-top-bar");
@@ -70,7 +74,9 @@ test("Tabbed menu: icons responsivity", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(900, 1080);
     const topBarElement = Selector(".svc-top-bar");
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await ClientFunction(() => (window as any).creator.tabResponsivenessMode = "icons")();
     await takeElementScreenshot("top-menu-responsivity-icons-big.png", topBarElement, t, comparer);
     await t.resizeWindow(700, 1080);

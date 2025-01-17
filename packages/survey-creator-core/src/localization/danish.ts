@@ -334,8 +334,6 @@ export var danishStrings = {
       templateErrorLocation: "Justering af fejlmeddelelse",
       newPanelPosition: "Ny panelplacering",
       showRangeInProgress: "Vis statuslinjen",
-      showProgressBar: "Vis statuslinjen",
-      progressBarLocation: "Justering af statuslinje",
       keyName: "Undgå dublerede svar i følgende spørgsmål"
     },
     question: {
@@ -388,7 +386,8 @@ export var danishStrings = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Beskrivelse af undersøgelsen"
+      description: "Beskrivelse af undersøgelsen",
+      readOnly: "Gør undersøgelsen skrivebeskyttet"
     },
     page: {
       name: "Sidenavn",
@@ -611,7 +610,6 @@ export var danishStrings = {
     simulator: "Vælg enhedstype",
     landscapeOrientation: "Skift til liggende retning",
     portraitOrientation: "Skift til stående format",
-    mode: "Mode (rediger/skrivebeskyttet)",
     clearInvisibleValues: "Fjern usynlige værdier",
     cookieName: "Cookienavn (for at undgå at afvikle undersøgelsen to gange lokalt)",
     partialSendEnabled: "Send undersøgelsesresultatet ved næste side",
@@ -632,6 +630,7 @@ export var danishStrings = {
     autoAdvanceEnabled: "Gå til næste side automatisk når alle spørgsmål er besvaret",
     autoAdvanceAllowComplete: "Udfyld undersøgelsen automatisk",
     showProgressBar: "Vis fremdriftslinje",
+    progressBarLocation: "Justering af statuslinje",
     questionTitleLocation: "Spørgsmålstitel placering",
     questionTitleWidth: "Spørgsmålets titelbredde",
     requiredMark: "Påkrævet spørgsmålssymbol(er)",
@@ -1204,16 +1203,13 @@ export var danishStrings = {
     questionOrder: {
       initial: "Oprindelig"
     },
-    showProgressBar: {
-      off: "Skjult",
-      topbottom: "top and bottom",
-      aboveheader: "Over overskriften",
-      belowheader: "Under overskriften"
-    },
     progressBarLocation: {
       top: "Top",
       bottom: "Bund",
-      topBottom: "Top og bund"
+      topbottom: "Top og bund",
+      aboveheader: "Over overskriften",
+      belowheader: "Under overskriften",
+      off: "Skjult"
     },
     sum: "Sum",
     count: "Tælle",
@@ -1438,7 +1434,8 @@ export var danishStrings = {
     },
     // survey templates
     survey: {
-      mode: "Vælg mellem: \"Redigerbar\" - gør det muligt for respondenter at udfylde din undersøgelse; \"Skrivebeskyttet\" - deaktiverer formularredigering."
+      readOnly: "Vælg, hvis du vil forhindre respondenter i at udfylde din undersøgelse.",
+      progressBarLocation: "Angiver placeringen af statuslinjen. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
     },
     matrixdropdowncolumn: {
       name: "Et kolonne-id, der ikke er synligt for svarpersoner.",
@@ -1461,7 +1458,6 @@ export var danishStrings = {
     autoAdvanceAllowComplete: "Vælg, om undersøgelsen skal fuldføres automatisk, når svarpersonen har besvaret alle spørgsmål.",
     showNavigationButtons: "Angiver synligheden og placeringen af navigationsknapper på en side.",
     navigationButtonsLocation: "Angiver placeringen af navigationsknapper på en side.",
-    showProgressBar: "Indstiller synligheden og placeringen af en statuslinje. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften.",
     showPreviewBeforeComplete: "Aktivér eksempelsiden med alle eller kun besvarede spørgsmål.",
     questionTitleLocation: "Gælder for alle spørgsmål i undersøgelsen. Denne indstilling kan tilsidesættes af titeljusteringsregler på lavere niveauer: panel, side eller spørgsmål. En indstilling på lavere niveau tilsidesætter dem på et højere niveau.",
     requiredMark: "Et symbol eller en sekvens af symboler, der angiver, at et svar er påkrævet.",
@@ -3172,3 +3168,11 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Brug værdier fra følgende matrixkolonne eller panelspørgsmål som valgtekster"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal angive id'erne."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal indeholde visningsteksterne."
+// pe.progressBarLocation: "Progress bar alignment" => "Justering af statuslinje"
+// progressBarLocation.topbottom: "Top and bottom" => "Top og bund"
+// progressBarLocation.aboveheader: "Above the header" => "Over overskriften"
+// progressBarLocation.belowheader: "Below the header" => "Under overskriften"
+// progressBarLocation.off: "Hidden" => "Skjult"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Angiver placeringen af statuslinjen. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
+// survey.readOnly: "Make the survey read-only" => "Gør undersøgelsen skrivebeskyttet"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Vælg, hvis du vil forhindre respondenter i at udfylde din undersøgelse."

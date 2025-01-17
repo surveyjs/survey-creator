@@ -7,6 +7,7 @@ fixture`${title}`.page`${urlDropdownCollapseView}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   questions: [
     {
       type: "dropdown",

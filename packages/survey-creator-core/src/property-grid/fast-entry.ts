@@ -19,6 +19,7 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
     (this.editSurvey.getQuestionByName("question") as QuestionTextBase).placeholder =
       editorLocalization.getString("pe.fastEntryPlaceholder");
     this.editSurvey.onValidateQuestion.add((sender, options) => {
+      if(options.errors.length > 0) return;
       const minChoiceCount = this.options.minimumChoicesCount;
       if(minChoiceCount > 0) {
         const choicesCount = this.getChoicesCount();
