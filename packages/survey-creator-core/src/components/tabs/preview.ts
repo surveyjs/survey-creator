@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, surveyLocalization, ITheme } from "survey-core";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
@@ -72,7 +72,7 @@ export class PreviewViewModel extends Base {
     return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
   }
 
-  constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultV2Css) {
+  constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultCss) {
     super();
     this.simulator = new SurveySimulatorModel(surveyProvider);
     this.pages.cssClasses = {
@@ -318,7 +318,7 @@ export class PreviewViewModel extends Base {
   }
   public setTheme(themeName: string, themeMapper: any): void {
     const availableThemes = themeMapper.filter(item => item.name === themeName);
-    let theme = <any>defaultV2Css;
+    let theme = <any>defaultCss;
     if (availableThemes.length > 0) {
       theme = availableThemes[0].theme;
     }

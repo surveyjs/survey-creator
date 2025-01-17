@@ -334,8 +334,6 @@ export var huStrings = {
       templateErrorLocation: "Hibaüzenetek igazítása",
       newPanelPosition: "Új panel helye",
       showRangeInProgress: "A folyamatjelző sáv megjelenítése",
-      showProgressBar: "A folyamatjelző sáv megjelenítése",
-      progressBarLocation: "Folyamatjelző sáv igazítása",
       keyName: "Az ismétlődő válaszok elkerülése a következő kérdésben"
     },
     question: {
@@ -388,7 +386,8 @@ export var huStrings = {
     // survey templates
     survey: {
       title: "Cím",
-      description: "A felmérés leírása"
+      description: "A felmérés leírása",
+      readOnly: "A felmérés írásvédetté tétele"
     },
     page: {
       name: "Oldal neve",
@@ -611,7 +610,6 @@ export var huStrings = {
     simulator: "Válassza ki az eszköz típusát",
     landscapeOrientation: "Váltás fekvő tájolásra",
     portraitOrientation: "Váltás álló tájolásra",
-    mode: "Mód (szerkesztés/megtekintés)",
     clearInvisibleValues: "Nemlátható értékek törlése",
     cookieName: "Süti megnevezése (a kérdőív csak egyszer kitölthető)",
     partialSendEnabled: "Kérdőív értékének küldése a következő lapra lépéskor",
@@ -632,6 +630,7 @@ export var huStrings = {
     autoAdvanceEnabled: "Minden kérdés megválaszolásakor automatikusan a következő lapra lépés",
     autoAdvanceAllowComplete: "A felmérés automatikus kitöltése",
     showProgressBar: "Előrehaladás-mutató megjelenítése",
+    progressBarLocation: "Folyamatjelző sáv igazítása",
     questionTitleLocation: "Kérdés címének helye",
     questionTitleWidth: "Kérdés címének szélessége",
     requiredMark: "Kötelező szimbólum",
@@ -1204,16 +1203,13 @@ export var huStrings = {
     questionOrder: {
       initial: "Eredeti"
     },
-    showProgressBar: {
-      off: "Rejtett",
-      topbottom: "fent és lent",
-      aboveheader: "A fejléc felett",
-      belowheader: "A fejléc alatt"
-    },
     progressBarLocation: {
       top: "Felső",
       bottom: "Fenék",
-      topBottom: "Felső és alsó"
+      topbottom: "Felső és alsó",
+      aboveheader: "A fejléc felett",
+      belowheader: "A fejléc alatt",
+      off: "Rejtett"
     },
     sum: "Összeg",
     count: "Gróf",
@@ -1438,7 +1434,8 @@ export var huStrings = {
     },
     // survey templates
     survey: {
-      mode: "Válasszon a következők közül: \"Szerkeszthető\" - lehetővé teszi a válaszadók számára a felmérés kitöltését; \"Csak olvasható\" - letiltja az űrlapszerkesztést."
+      readOnly: "Válassza ki, ha meg szeretné akadályozni, hogy a válaszadók kitöltsék a felmérést.",
+      progressBarLocation: "Beállítja a folyamatjelző sáv helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt."
     },
     matrixdropdowncolumn: {
       name: "A válaszadók számára nem látható oszlopazonosító.",
@@ -1461,7 +1458,6 @@ export var huStrings = {
     autoAdvanceAllowComplete: "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan kitöltődjön, miután a válaszadó megválaszolta az összes kérdést.",
     showNavigationButtons: "Beállítja a navigációs gombok láthatóságát és helyét az oldalon.",
     navigationButtonsLocation: "Beállítja a navigációs gombok helyét az oldalon.",
-    showProgressBar: "Beállítja a folyamatjelző sáv láthatóságát és helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt.",
     showPreviewBeforeComplete: "Engedélyezze az előnézeti oldalt csak az összes vagy megválaszolt kérdéssel.",
     questionTitleLocation: "A felmérésben szereplő összes kérdésre vonatkozik. Ezt a beállítást felülbírálhatják az alacsonyabb szinteken lévő címigazítási szabályok: panel, oldal vagy kérdés. Az alacsonyabb szintű beállítás felülírja a magasabb szinten lévőket.",
     requiredMark: "Egy szimbólum vagy szimbólumsorozat, amely jelzi, hogy válaszolni kell.",
@@ -3139,3 +3135,11 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Használja a következő mátrixoszlop vagy panelkérdés értékeit választási szövegként:"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Az egyszeres és többszörös kijelölésű kérdéstípusokban minden választási lehetőség rendelkezik azonosítóval és megjelenített értékkel. Ez a beállítás határozza meg, hogy melyik mátrixoszlop vagy panelkérdés adja meg az azonosítókat."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Az egyszeres és többszörös kijelölésű kérdéstípusokban minden választási lehetőség rendelkezik azonosítóval és megjelenített értékkel. Ez a beállítás határozza meg, hogy melyik mátrixoszlop vagy panelkérdés jelenítse meg a megjelenített szövegeket."
+// pe.progressBarLocation: "Progress bar alignment" => "Folyamatjelző sáv igazítása"
+// progressBarLocation.topbottom: "Top and bottom" => "Felső és alsó"
+// progressBarLocation.aboveheader: "Above the header" => "A fejléc felett"
+// progressBarLocation.belowheader: "Below the header" => "A fejléc alatt"
+// progressBarLocation.off: "Hidden" => "Rejtett"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Beállítja a folyamatjelző sáv helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt."
+// survey.readOnly: "Make the survey read-only" => "A felmérés írásvédetté tétele"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Válassza ki, ha meg szeretné akadályozni, hogy a válaszadók kitöltsék a felmérést."

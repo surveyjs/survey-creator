@@ -334,8 +334,6 @@ export var czStrings = {
       templateErrorLocation: "Zarovnání chybové zprávy",
       newPanelPosition: "Nové umístění panelu",
       showRangeInProgress: "Zobrazení ukazatele průběhu",
-      showProgressBar: "Zobrazení ukazatele průběhu",
-      progressBarLocation: "Zarovnání indikátoru průběhu",
       keyName: "Zabraňte duplicitním odpovědím v následující otázce"
     },
     question: {
@@ -388,7 +386,8 @@ export var czStrings = {
     // survey templates
     survey: {
       title: "Titul",
-      description: "Popis průzkumu"
+      description: "Popis průzkumu",
+      readOnly: "Nastavení průzkumu pouze ke čtení"
     },
     page: {
       name: "Název stránky",
@@ -611,7 +610,6 @@ export var czStrings = {
     simulator: "Vybrat zařízení",
     landscapeOrientation: "Na šířku",
     portraitOrientation: "Přepnout orientaci na výšku",
-    mode: "Režim (pouze pro úpravy/čtení)",
     clearInvisibleValues: "Vymazat neviditelné hodnoty",
     cookieName: "Název souboru cookie (pro zakázání dvojího lokálního spuštění průzkumu)",
     partialSendEnabled: "Odeslání výsledků průzkumu na další straně",
@@ -632,6 +630,7 @@ export var czStrings = {
     autoAdvanceEnabled: "Po zodpovězení všech otázek automaticky přejít na další stránku",
     autoAdvanceAllowComplete: "Automatické vyplnění dotazníku",
     showProgressBar: "Zobrazit ukazatel průběhu",
+    progressBarLocation: "Zarovnání indikátoru průběhu",
     questionTitleLocation: "Umístění názvu otázky",
     questionTitleWidth: "Šířka názvu otázky",
     requiredMark: "Povinné symboly otázky",
@@ -1204,16 +1203,13 @@ export var czStrings = {
     questionOrder: {
       initial: "Původní"
     },
-    showProgressBar: {
-      off: "Skrytý",
-      topbottom: "nahoře a dole",
-      aboveheader: "Nad záhlavím",
-      belowheader: "Pod záhlavím"
-    },
     progressBarLocation: {
       top: "Vrchol",
       bottom: "Dno",
-      topBottom: "Nahoře a dole"
+      topbottom: "Nahoře a dole",
+      aboveheader: "Nad záhlavím",
+      belowheader: "Pod záhlavím",
+      off: "Schovaný"
     },
     sum: "Součet",
     count: "Počítat",
@@ -1438,7 +1434,8 @@ export var czStrings = {
     },
     // survey templates
     survey: {
-      mode: "Vyberte si mezi: \"Upravitelné\" - umožňuje respondentům vyplnit váš průzkum; \"Read-only\" - zakáže editaci formulářů."
+      readOnly: "Vyberte, zda chcete respondentům zabránit ve vyplnění průzkumu.",
+      progressBarLocation: "Nastaví umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu."
     },
     matrixdropdowncolumn: {
       name: "ID sloupce, které není viditelné pro respondenty.",
@@ -1461,7 +1458,6 @@ export var czStrings = {
     autoAdvanceAllowComplete: "Vyberte, zda chcete, aby se průzkum vyplnil automaticky poté, co respondent odpoví na všechny otázky.",
     showNavigationButtons: "Nastaví viditelnost a umístění navigačních tlačítek na stránce.",
     navigationButtonsLocation: "Nastaví umístění navigačních tlačítek na stránce.",
-    showProgressBar: "Nastaví viditelnost a umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu.",
     showPreviewBeforeComplete: "Povolte stránku náhledu pouze se všemi nebo zodpovězenými otázkami.",
     questionTitleLocation: "Platí pro všechny otázky v rámci průzkumu. Toto nastavení lze přepsat pravidly zarovnání nadpisů na nižších úrovních: panel, stránka nebo otázka. Nastavení nižší úrovně přepíše nastavení na vyšší úrovni.",
     requiredMark: "Symbol nebo posloupnost symbolů označující, že je vyžadována odpověď.",
@@ -2565,3 +2561,11 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Jako texty voleb použijte hodnoty z následujícího sloupce matice nebo otázky panelu"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "U otázek s jedním a více výběry má každá možnost volby ID a zobrazovanou hodnotu. Toto nastavení určuje, která matice, sloupec nebo otázka panelu by měla ID poskytovat."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "U otázek s jedním a více výběry má každá možnost volby ID a zobrazovanou hodnotu. Toto nastavení určuje, který sloupec matice nebo otázka panelu by měla poskytovat zobrazované texty."
+// pe.progressBarLocation: "Progress bar alignment" => "Zarovnání indikátoru průběhu"
+// progressBarLocation.topbottom: "Top and bottom" => "Nahoře a dole"
+// progressBarLocation.aboveheader: "Above the header" => "Nad záhlavím"
+// progressBarLocation.belowheader: "Below the header" => "Pod záhlavím"
+// progressBarLocation.off: "Hidden" => "Schovaný"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Nastaví umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu."
+// survey.readOnly: "Make the survey read-only" => "Nastavení průzkumu pouze ke čtení"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Vyberte, zda chcete respondentům zabránit ve vyplnění průzkumu."

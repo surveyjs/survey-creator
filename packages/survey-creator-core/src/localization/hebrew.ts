@@ -334,8 +334,6 @@ export var hebrewStrings = {
       templateErrorLocation: "יישור הודעת שגיאה",
       newPanelPosition: "מיקום חדש בלוח",
       showRangeInProgress: "הצגת מד ההתקדמות",
-      showProgressBar: "הצגת מד ההתקדמות",
-      progressBarLocation: "יישור מד התקדמות",
       keyName: "מניעת תגובות כפולות בשאלה הבאה"
     },
     question: {
@@ -388,7 +386,8 @@ export var hebrewStrings = {
     // survey templates
     survey: {
       title: "כותר",
-      description: "תיאור הסקר"
+      description: "תיאור הסקר",
+      readOnly: "הפוך את הסקר לקריאה בלבד"
     },
     page: {
       name: "שם הדף",
@@ -611,7 +610,6 @@ export var hebrewStrings = {
     simulator: "בחר סוג מכשיר",
     landscapeOrientation: "עבור לתצוגה אופקית",
     portraitOrientation: "עבור לתצוגה אנכית",
-    mode: "עריכה או לקריאה בלבד",
     clearInvisibleValues: "נקה ערכים בלתי נראים",
     cookieName: "שם העוגיה",
     partialSendEnabled: "שמור תוצאות סקר חלקיות בתהליך",
@@ -632,6 +630,7 @@ export var hebrewStrings = {
     autoAdvanceEnabled: "עבור אוטומטית לעמוד הבא",
     autoAdvanceAllowComplete: "השלם את הסקר באופן אוטומטי",
     showProgressBar: "מיקום שורת ההתקדמות",
+    progressBarLocation: "יישור מד התקדמות",
     questionTitleLocation: "מיקום כותרת השאלה",
     questionTitleWidth: "רוחב כותרת השאלה",
     requiredMark: "סמן נדרש(ים)",
@@ -1204,16 +1203,13 @@ export var hebrewStrings = {
     questionOrder: {
       initial: "מקורי"
     },
-    showProgressBar: {
-      off: "מוסתר",
-      topbottom: "עליון ותחתון",
-      aboveheader: "מעל הכותרת העליונה",
-      belowheader: "מתחת לכותרת העליונה"
-    },
     progressBarLocation: {
       top: "סביבון",
       bottom: "ישבן",
-      topBottom: "עליון ותחתון"
+      topbottom: "עליון ותחתון",
+      aboveheader: "מעל הכותרת העליונה",
+      belowheader: "מתחת לכותרת העליונה",
+      off: "מוסתרים"
     },
     sum: "סכום",
     count: "מנה",
@@ -1438,7 +1434,8 @@ export var hebrewStrings = {
     },
     // survey templates
     survey: {
-      mode: "בחר בין: \"ניתן לעריכה\" - מאפשר למשיבים למלא את הסקר שלך; \"לקריאה בלבד\" - משבית עריכת טפסים."
+      readOnly: "בחר אם ברצונך למנוע מהמשיבים למלא את הסקר שלך.",
+      progressBarLocation: "מגדיר את המיקום של מד ההתקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר."
     },
     matrixdropdowncolumn: {
       name: "מזהה עמודה שאינו גלוי למשיבים.",
@@ -1461,7 +1458,6 @@ export var hebrewStrings = {
     autoAdvanceAllowComplete: "בחר אם ברצונך שהסקר יושלם באופן אוטומטי לאחר שמשיב עונה על כל השאלות.",
     showNavigationButtons: "מגדיר את התצוגה והמיקום של לחצני ניווט בעמוד.",
     navigationButtonsLocation: "הגדרת המיקום של לחצני ניווט בעמוד.",
-    showProgressBar: "הגדרת הניראות והמיקום של מד התקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר.",
     showPreviewBeforeComplete: "הפעל את דף התצוגה המקדימה עם כל השאלות או שאלות שנענו בלבד.",
     questionTitleLocation: "חל על כל השאלות בסקר. ניתן לדרוס הגדרה זו באמצעות כללי יישור כותרות ברמות נמוכות יותר: חלונית, עמוד או שאלה. הגדרה ברמה נמוכה יותר תעקוף את אלה ברמה גבוהה יותר.",
     requiredMark: "סמל או רצף של סמלים המציינים כי נדרשת תשובה.",
@@ -2555,3 +2551,11 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "השתמש בערכים מעמודת המטריצה או משאלת החלונית הבאה כטקסטים נבחרים"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "בסוגי שאלות של בחירה בודדת ושאלות מרובות, לכל אפשרות בחירה יש מזהה וערך תצוגה. הגדרה זו מציינת איזו עמודת מטריצה או שאלת חלונית יספקו את המזהים."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "בסוגי שאלות של בחירה בודדת ושאלות מרובות, לכל אפשרות בחירה יש מזהה וערך תצוגה. הגדרה זו מציינת איזו שאלת עמודת מטריצה או חלונית תספק את טקסטי התצוגה."
+// pe.progressBarLocation: "Progress bar alignment" => "יישור מד התקדמות"
+// progressBarLocation.topbottom: "Top and bottom" => "עליון ותחתון"
+// progressBarLocation.aboveheader: "Above the header" => "מעל הכותרת העליונה"
+// progressBarLocation.belowheader: "Below the header" => "מתחת לכותרת העליונה"
+// progressBarLocation.off: "Hidden" => "מוסתרים"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "מגדיר את המיקום של מד ההתקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר."
+// survey.readOnly: "Make the survey read-only" => "הפוך את הסקר לקריאה בלבד"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "בחר אם ברצונך למנוע מהמשיבים למלא את הסקר שלך."

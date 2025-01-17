@@ -12,7 +12,7 @@ import {
   surveyLocalization,
   Serializer,
 } from "survey-core";
-import { defaultV2Css } from "survey-core";
+import { defaultCss } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { toggleHovered } from "../utils/html-element-utils";
 import { SurveyHelper } from "../survey-helper";
@@ -28,7 +28,7 @@ export class MatrixCellWrapperEditSurvey {
     let questionJSON = cellQuestion.toJSON();
     questionJSON.type = cellQuestion.getType();
     this.surveyValue = creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor", model, (survey: SurveyModel): void => {
-      survey.css = defaultV2Css;
+      survey.css = defaultCss;
       survey.setDesignMode(true);
       (<any>survey).isPopupEditorContent = true;
       survey.showQuestionNumbers = "none";
