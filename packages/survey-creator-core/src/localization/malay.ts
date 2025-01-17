@@ -334,8 +334,6 @@ export var msStrings = {
       templateErrorLocation: "Penjajaran mesej ralat",
       newPanelPosition: "Lokasi panel baru",
       showRangeInProgress: "Tunjukkan bar kemajuan",
-      showProgressBar: "Tunjukkan bar kemajuan",
-      progressBarLocation: "Penjajaran bar kemajuan",
       keyName: "Mencegah jawapan pendua dalam soalan berikut"
     },
     question: {
@@ -388,7 +386,8 @@ export var msStrings = {
     // survey templates
     survey: {
       title: "Tajuk",
-      description: "Penerangan tinjauan"
+      description: "Penerangan tinjauan",
+      readOnly: "Jadikan tinjauan baca sahaja"
     },
     page: {
       name: "Nama halaman",
@@ -611,7 +610,6 @@ export var msStrings = {
     simulator: "Pilih peranti",
     landscapeOrientation: "Landskap",
     portraitOrientation: "Bertukar kepada orientasi potret",
-    mode: "Mod (edit/baca sahaja)",
     clearInvisibleValues: "Kosongkan nilai tersembunyi",
     cookieName: "Nama kuki (untuk melumpuhkan perlaksanaan tinjauan dua kali secara setempat)",
     partialSendEnabled: "Hantar keputusan tinjauan pada halaman seterusnya",
@@ -632,6 +630,7 @@ export var msStrings = {
     autoAdvanceEnabled: "Selepas menjawab semua soalan, pergi ke halaman seterusnya secara automatik",
     autoAdvanceAllowComplete: "Lengkapkan tinjauan secara automatik",
     showProgressBar: "Tunjukkan bar perkembangan",
+    progressBarLocation: "Penjajaran bar kemajuan",
     questionTitleLocation: "Lokasi tajuk soalan",
     questionTitleWidth: "Lebar tajuk soalan",
     requiredMark: "Soalan memerlukan simbol",
@@ -1204,16 +1203,13 @@ export var msStrings = {
     questionOrder: {
       initial: "Asal"
     },
-    showProgressBar: {
-      off: "Tersembunyi",
-      topbottom: "atas dan bawah",
-      aboveheader: "Di atas pengepala",
-      belowheader: "Di bawah pengepala"
-    },
     progressBarLocation: {
       top: "Atas",
       bottom: "Bawah",
-      topBottom: "Atas dan bawah"
+      topbottom: "Atas dan bawah",
+      aboveheader: "Di atas pengepala",
+      belowheader: "Di bawah pengepala",
+      off: "Tersembunyi"
     },
     sum: "Jumlah",
     count: "Kiraan",
@@ -1438,7 +1434,8 @@ export var msStrings = {
     },
     // survey templates
     survey: {
-      mode: "Pilih antara: \"Boleh diedit\" - membolehkan responden mengisi tinjauan anda; \"Baca sahaja\" - melumpuhkan penyuntingan borang."
+      readOnly: "Pilih jika anda mahu menghalang responden daripada mengisi tinjauan anda.",
+      progressBarLocation: "Menetapkan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan."
     },
     matrixdropdowncolumn: {
       name: "ID lajur yang tidak kelihatan kepada responden.",
@@ -1461,7 +1458,6 @@ export var msStrings = {
     autoAdvanceAllowComplete: "Pilih jika anda mahu tinjauan selesai secara automatik selepas responden menjawab semua soalan.",
     showNavigationButtons: "Mengesetkan kebolehlihatan dan lokasi butang navigasi pada halaman.",
     navigationButtonsLocation: "Menetapkan lokasi butang navigasi pada halaman.",
-    showProgressBar: "Menetapkan kebolehlihatan dan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan.",
     showPreviewBeforeComplete: "Dayakan halaman pratonton dengan semua atau menjawab soalan sahaja.",
     questionTitleLocation: "Digunakan untuk semua soalan dalam tinjauan. Tetapan ini boleh diubah oleh peraturan penjajaran tajuk pada tahap yang lebih rendah: panel, halaman atau soalan. Tetapan peringkat rendah akan mengatasi mereka yang berada pada tahap yang lebih tinggi.",
     requiredMark: "Simbol atau urutan simbol yang menunjukkan bahawa jawapan diperlukan.",
@@ -2942,3 +2938,11 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Gunakan nilai daripada lajur matriks atau soalan panel berikut sebagai teks pilihan"
 // pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Dalam jenis soalan pilihan tunggal dan berbilang pilihan, setiap pilihan pilihan mempunyai ID dan nilai paparan. Seting ini menentukan lajur matriks atau soalan panel yang harus menyediakan ID."
 // pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Dalam jenis soalan pilihan tunggal dan berbilang pilihan, setiap pilihan pilihan mempunyai ID dan nilai paparan. Seting ini menentukan lajur matriks atau soalan panel yang harus menyediakan teks paparan."
+// pe.progressBarLocation: "Progress bar alignment" => "Penjajaran bar kemajuan"
+// progressBarLocation.topbottom: "Top and bottom" => "Atas dan bawah"
+// progressBarLocation.aboveheader: "Above the header" => "Di atas pengepala"
+// progressBarLocation.belowheader: "Below the header" => "Di bawah pengepala"
+// progressBarLocation.off: "Hidden" => "Tersembunyi"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Menetapkan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan."
+// survey.readOnly: "Make the survey read-only" => "Jadikan tinjauan baca sahaja"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Pilih jika anda mahu menghalang responden daripada mengisi tinjauan anda."

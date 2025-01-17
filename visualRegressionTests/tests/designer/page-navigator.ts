@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -123,7 +124,9 @@ test("Page Navigator works with - scroll-behavior: smooth;", async (t) => {
       document.documentElement.style["scroll-behavior"] = "smooth";
     })();
 
-    await setJSON({ pages: [{ name: "page1", questions: [{ type: "radiogroup", choices: [1, 2, 3] }] }, { name: "page2" }, { name: "page3" }, { name: "page4" }, { name: "page5" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1", questions: [{ type: "radiogroup", choices: [1, 2, 3] }] }, { name: "page2" }, { name: "page3" }, { name: "page4" }, { name: "page5" }]
+    });
 
     const firstPageNavigatorItem = "svc-page-navigator-item:nth-child(1) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(1) > .svc-page-navigator-item--selected";
     const thirdPageNavigatorItem = "svc-page-navigator-item:nth-child(3) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(3) > .svc-page-navigator-item--selected";
@@ -421,6 +424,7 @@ test("Page navigator has enough space to be shown", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1508, 800);
     await setJSON({
+      showQuestionNumbers: "on",
       "title": "NPS Survey Question",
       "widthMode": "responsive",
       "pages": [
@@ -490,6 +494,7 @@ test("Page navigator in by-page mode has enough space to be shown", async (t) =>
       window["creator"].pageEditMode = "bypage";
     })();
     await setJSON({
+      showQuestionNumbers: "on",
       "title": "NPS Survey Question",
       "widthMode": "responsive",
       "pages": [
@@ -560,6 +565,7 @@ test("Page navigator scrolls to top of long page and centers small page", async 
     await t.resizeWindow(1500, 800);
     await setShowSidebar(false);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {

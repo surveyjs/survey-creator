@@ -15,5 +15,6 @@ export class ThemeTabComponent extends TestDefaultComponent {
     this.creator.tabResponsivenessMode = "menu";
     this.creator["animationEnabled"] = false;
     this.creator.showOneCategoryInPropertyGrid = false;
+    this.creator.allowZoom = false;
   }
 }

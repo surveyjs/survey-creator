@@ -53,6 +53,7 @@ export interface ICreatorOptions {
    */
   showThemeTab?: boolean;
   showCreatorThemeSettings?: boolean;
+  allowZoom?: boolean;
   /**
    * Specifies whether to call the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) and [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) functions each time survey or theme settings are changed.
    *
@@ -130,9 +131,9 @@ export interface ICreatorOptions {
   /**
    * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
    *
-   * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
+   * Accepted values: `"default"`
    *
-   * Default value: `"defaultV2"`
+   * Default value: `"default"`
    */
   previewTheme?: string;
   /**

@@ -31,7 +31,7 @@ import { TabTestPlugin } from "./components/tabs/test-plugin";
 import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-plugin";
-import { defaultV2Css, Notifier } from "survey-core";
+import { defaultCss, Notifier } from "survey-core";
 import { UndoRedoManager } from "./plugins/undo-redo/undo-redo-manager";
 import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/undo-redo";
 import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
@@ -163,7 +163,8 @@ export class SurveyCreatorModel extends Base
    * @see saveThemeFunc
    */
   @property({ defaultValue: false }) showThemeTab: boolean;
-  @property({ defaultValue: false }) showCreatorThemeSettings: boolean;
+  @property({ defaultValue: true }) showCreatorThemeSettings: boolean;
+  @property({ defaultValue: true }) allowZoom: boolean;
   /**
    * Specifies whether to display the Translation tab.
    *
@@ -1129,12 +1130,12 @@ export class SurveyCreatorModel extends Base
   /**
    * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
    *
-   * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
+   * Accepted values: `"default"`
    *
-   * Default value: `"defaultV2"`
+   * Default value: `"default"`
    * @see previewAllowSelectTheme
    */
-  public previewTheme: string = "defaultV2";
+  public previewTheme: string = "default";
   /**
    * Obsolete. Use the [`previewTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewTheme) property instead.
    * @deprecated
@@ -2071,7 +2072,7 @@ export class SurveyCreatorModel extends Base
   }
   private existingPages: {};
   private getSurfaceCss() {
-    const result = JSON.parse(JSON.stringify(defaultV2Css));
+    const result = JSON.parse(JSON.stringify(defaultCss));
     result.header += " svc-surface-header";
 
     return result;
@@ -2754,33 +2755,10 @@ export class SurveyCreatorModel extends Base
       parent = panel;
     }
     this.addNewElementReason = modifiedType;
-    const currentRow = this.findRowByElement(selectedElement, parent);
     element.setVisibleIndex(-1);
-    if (currentRow && this.isRowMultiline(currentRow)) {
-      this.addElemenMultiline(parent, element, index, currentRow);
-    } else {
-      parent.addElement(element, index);
-    }
+    parent.addElement(element, index);
     this.addNewElementReason = "";
     this.setModified({ type: modifiedType, question: element });
-  }
-
-  private isRowMultiline(row) {
-    return row.elements.length > 1;
-  }
-
-  private findRowByElement(element, parent) {
-    if (!element) return null;
-    if (element.isPage) return element.rows[element.rows.length - 1];
-    return parent.rows.find(row => row.elements.indexOf(element) !== -1);
-  }
-
-  private addElemenMultiline(parent: any, element: any, index, currentRow: any) {
-    const elsCount = currentRow.elements.length;
-    const prevElement = currentRow.elements[elsCount - 1];
-    prevElement.startWithNewLine = true;
-    parent.addElement(element, index);
-    prevElement.startWithNewLine = false;
   }
 
   public setNewNames(element: ISurveyElement) {

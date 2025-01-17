@@ -993,7 +993,7 @@ test("fast copy tests, copy a question and check the index", (): any => {
       { type: "text", name: "question1" },
       { type: "text", name: "question2", startWithNewLine: false },
       { type: "text", name: "question3" }
-    ]
+    ], showQuestionNumbers: "on"
   };
   creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
   expect(creator.survey.pages[0].questions).toHaveLength(4);
@@ -1007,7 +1007,7 @@ test("fast copy tests, copy a question and check the index", (): any => {
       { type: "text", name: "question1" },
       { type: "text", name: "question2" },
       { type: "text", name: "question3" }
-    ]
+    ], showQuestionNumbers: "on"
   };
   creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
   expect(creator.survey.pages[0].questions).toHaveLength(4);
@@ -3376,7 +3376,7 @@ test("Use settings.designer.showAddQuestionButton = false", (): any => {
 test("Add Questions with selection", (): any => {
   const creator = new CreatorTester();
   creator.addNewQuestionLast = false;
-  creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };
+  creator.JSON = { elements: [{ type: "panel", name: "panel1" }], showQuestionNumbers: "on" };
   const panel = <PanelModel>creator.survey.getAllPanels()[0];
   const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
   panelModel.addNewQuestion();
@@ -4833,6 +4833,7 @@ test("propertyGridNavigationMode property", (): any => {
 test("showSurfaceTools", (): any => {
   const creator = new CreatorTester();
   creator.expandCollapseButtonVisibility = "never";
+  creator.allowZoom = false;
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(designerTabModel.showSurfaceTools).toBeFalsy();
 
@@ -4858,6 +4859,9 @@ test("Designer surface css classes", (): any => {
   const creator = new CreatorTester(undefined, undefined, false);
   creator.expandCollapseButtonVisibility = "never";
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-surface-tools svc-tab-designer--with-placeholder svc-tab-designer--standard-mode");
+
+  creator.allowZoom = false;
   expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-placeholder svc-tab-designer--standard-mode");
 
   creator.JSON = { pages: [{ name: "page1" }] };

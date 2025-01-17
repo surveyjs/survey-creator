@@ -36,7 +36,7 @@ import {
   settings as creatorSettings
 } from "../creator-settings";
 import { QuestionFactory } from "survey-core";
-import { defaultV2Css } from "survey-core";
+import { defaultCss } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { parsePropertyDescription } from "./description-parser";
@@ -918,7 +918,9 @@ export class PropertyGridModel {
       this.onValueChanging(options);
     });
     this.survey.onValidateQuestion.add((sender, options) => {
-      this.onValidateQuestion(options);
+      if(options.errors.length === 0) {
+        this.onValidateQuestion(options);
+      }
     });
     this.survey.onGetQuestionTitleActions.add((sender, options) => {
       this.titleActionsCreator.onGetQuestionTitleActions(options);
@@ -1161,7 +1163,7 @@ export class PropertyGridModel {
   private onValidateQuestion(options: any) {
     var q = options.question;
     if (!q || !q.property) return;
-    options.error = this.validateQuestionValue(this.obj, q, q.property, options.value);
+    options.error = this.validateQuestionValue(q.obj || this.obj, q, q.property, options.value);
   }
   private onValueChanging(options: any) {
     var q = options.question;
@@ -1423,7 +1425,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     );
     if (!surveyPropertyEditor) return null;
     if (property.type !== "condition") {
-      surveyPropertyEditor.editSurvey.css = defaultV2Css;
+      surveyPropertyEditor.editSurvey.css = defaultCss;
     }
     if (question.isReadOnly) {
       surveyPropertyEditor.editSurvey.mode = "display";
