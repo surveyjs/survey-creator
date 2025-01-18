@@ -73,7 +73,7 @@ svc-page {
   justify-content: flex-end;
   box-sizing: border-box;
   padding: 0 calcSize(1.5) 0 var(--ctr-survey-page-drag-indicator-width, calcSize(3));
-  z-index: 1;
+  z-index: 12;
   transition: opacity $creator-transition-duration;
   white-space: nowrap;
   
@@ -195,6 +195,9 @@ svc-page {
   background-color: transparent;
   padding-top: var(--ctr-survey-page-margin-top, calcSize(2));
   padding-bottom: var(--ctr-survey-page-margin-bottom-new-page, calcSize(9));
+  .svc-survey-element-top-toolbar {
+    display: none;
+  }
 }
 
 .svc-page__content--selected,
@@ -283,7 +286,7 @@ svc-page {
       background: var(--ctr-survey-page-background-color-selected, $secondary-backcolor-semi-light);
 
       .svc-page__content-actions {
-        display: block;
+        display: flex;
       }
     }
   }
@@ -414,7 +417,7 @@ svc-page {
   }
 
   .svc-page__content-actions {
-    display: block;
+    display: flex;
   }
 
   .sd-page {

@@ -231,9 +231,16 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.topActionContainer = new ActionContainer();
     this.topActionContainer.sizeMode = "small";
     this.topActionContainer.setItems([this.expandCollapseAction]);
+    this.topActionContainer.cssClasses = {
+      root: "svc-survey-element-top-toolbar sv-action-bar",
+      item: "svc-survey-element-top-toolbar__item",
+      itemIcon: "svc-survey-element-toolbar-item__icon",
+      itemTitle: "svc-survey-element-toolbar-item__title",
+      itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
+    };
   }
 
-  protected createActionContainer(): ActionContainer {
+  protected createActionContainer(): AdaptiveActionContainer {
     const actionContainer = new SurveyElementActionContainer();
     actionContainer.dotsItem.popupModel.horizontalPosition = "center";
     return actionContainer;
