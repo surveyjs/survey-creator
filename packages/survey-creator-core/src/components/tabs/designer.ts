@@ -33,7 +33,11 @@ export class TabDesignerViewModel extends Base {
   @property({ defaultValue: false }) showNewPage: boolean;
   @property() pageCount: number;
   @property() designerCss: string;
-  @property() showPlaceholder: boolean;
+  @property({
+    onSet: (val, objectInstance: TabDesignerViewModel, prevVal) => {
+      objectInstance.updateSurveyScaleStartDimensions();
+    },
+  }) showPlaceholder: boolean;
   public scaleCssVariables: { [index: string]: string } = {};
   public creator: SurveyCreatorModel;
 
@@ -131,7 +135,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.zoomInTooltip",
       iconName: "icon-zoomin-24x24",
       iconSize: "auto",
-      visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
+      visible: new ComputedUpdater<boolean>(() => this.creator.allowZoom),
       action: () => { this.scaleSurface(this.surfaceScale + this.stepSurfaceScaling); }
     });
     surfaceToolbarItems.push(<IAction>{
@@ -139,7 +143,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.zoom100Tooltip",
       iconName: "icon-actual-size-24x24",
       iconSize: "auto",
-      visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
+      visible: new ComputedUpdater<boolean>(() => this.creator.allowZoom),
       action: () => { this.scaleSurface(100); }
     });
     surfaceToolbarItems.push(<IAction>{
@@ -147,7 +151,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.zoomOutTooltip",
       iconName: "icon-zoomout-24x24",
       iconSize: "auto",
-      visible: new ComputedUpdater<boolean>(() => this.creator.showCreatorThemeSettings),
+      visible: new ComputedUpdater<boolean>(() => this.creator.allowZoom),
       action: () => {
         this.scaleSurface(this.surfaceScale - this.stepSurfaceScaling);
         this.forceLazyRendering();
@@ -159,7 +163,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
       iconSize: "auto",
-      needSeparator: this.creator.showCreatorThemeSettings,
+      needSeparator: <any>new ComputedUpdater<boolean>(() => this.creator.allowZoom),
       visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
       action: () => this.creator.expandCollapseManager.expandCollapseElements("collapse-all", true)
     });
@@ -269,12 +273,16 @@ export class TabDesignerViewModel extends Base {
       this.checkNewPage(true);
       this.updatePages();
     }, "__designer_tab_model__");
-    this.survey.registerFunctionOnPropertyValueChanged("widthMode", () => {
-      this.survey.responsiveStartWidth = undefined;
-      setTimeout(() => this.scaleSurface(this.surfaceScale), 1);
+    this.survey.registerFunctionOnPropertiesValueChanged(["widthMode", "calculatedWidthMode"], () => {
+      this.updateSurveyScaleStartDimensions();
     }, "__designer_tab_model__");
     this.designerCss = <any>this.cssUpdater;
     this.pagesController.onSurveyChanged();
+  }
+  private updateSurveyScaleStartDimensions() {
+    this.survey.staticStartWidth = undefined;
+    this.survey.responsiveStartWidth = undefined;
+    setTimeout(() => this.scaleSurface(this.surfaceScale), 1);
   }
   private checkNewPage(updatePageController: boolean) {
     const showPlaceholder = this.survey.getAllQuestions().length === 0 && this.survey.pageCount === 0;
@@ -311,7 +319,7 @@ export class TabDesignerViewModel extends Base {
     super.dispose();
     this.cssUpdater && this.cssUpdater.dispose();
     this.survey.unRegisterFunctionOnPropertyValueChanged("pages", "__designer_tab_model__");
-    this.survey.unRegisterFunctionOnPropertyValueChanged("widthMode", "__designer_tab_model__");
+    this.survey.unRegisterFunctionOnPropertiesValueChanged(["widthMode", "calculatedWidthMode"], "__designer_tab_model__");
   }
   private checkLastPageToDelete(): boolean {
     if (this.survey.pageCount === 0 || this.survey.isQuestionDragging) return false;

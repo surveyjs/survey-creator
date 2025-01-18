@@ -11,6 +11,8 @@ export class CreatorTester extends SurveyCreatorModel {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions, setOldDefaultNewSurveyJSON = true) {
     if (setOldDefaultNewSurveyJSON) {
       creatorSetting.defaultNewSurveyJSON = { pages: [{ name: "page1" }] };
+    } else {
+      creatorSetting.defaultNewSurveyJSON = {};
     }
     super(options, options2);
     this.autoSaveDelay = 0;
