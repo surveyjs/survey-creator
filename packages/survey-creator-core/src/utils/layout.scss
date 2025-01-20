@@ -150,7 +150,7 @@
 
   //checked state
   &.svc-toolbar__item--active {
-    background-color: var(--ctr-menu-toolbar-button-background-color-selected, var(--sjs-layer-1-background-500, #ffffffff));
+    background-color: var(--ctr-menu-toolbar-button-background-color-selected, var(--sjs-primary-background-10, #19b3941a));
     use {
       fill: var(--ctr-menu-toolbar-button-text-color-selected, var(--sjs-primary-background-500, #19b394ff));
     }
@@ -168,7 +168,7 @@
     var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
     var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
     var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
-  border-radius: var(--ctr-menu-toolbar-button-corner-radius, 0);
+  border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
 }
 
 .svc-toolbar-item__icon {
