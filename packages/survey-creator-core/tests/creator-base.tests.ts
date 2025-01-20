@@ -3170,44 +3170,6 @@ test("doClickQuestionCore", () => {
   expect(creator.survey.getAllQuestions()[3].startWithNewLine).toEqual(false);
 });
 
-test("logoPosition set right for emtpy survey only", () => {
-  const creator = new CreatorTester();
-  expect(creator.survey.logoPosition).toEqual("right");
-  creator.JSON = {
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          {
-            "type": "text",
-            "name": "question1"
-          }
-        ]
-      }
-    ]
-  };
-  expect(creator.survey.logoPosition).toEqual("left");
-  creator.JSON = {
-    "logoPosition": "top",
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          {
-            "type": "text",
-            "name": "question1"
-          }
-        ]
-      }
-    ]
-  };
-  expect(creator.survey.logoPosition).toEqual("top");
-  creator.text = "";
-  expect(creator.survey.logoPosition).toEqual("right");
-  creator.JSON = undefined;
-  expect(creator.survey.logoPosition).toEqual("right");
-});
-
 test("Add new question to Panel and Page", (): any => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
@@ -3585,7 +3547,7 @@ test("get survey JSON with pageEditModeValue=single #2711", (): any => {
   try {
     let creator = new CreatorTester({ pageEditMode: "single" });
     creator.text = "";
-    expect(creator.JSON).toStrictEqual({ "logoPosition": "right" });
+    expect(creator.JSON).toStrictEqual({});
   } finally {
     surveySettings.allowShowEmptyTitleInDesignMode = true;
     surveySettings.allowShowEmptyDescriptionInDesignMode = true;
@@ -4656,7 +4618,7 @@ test("onModified is raised for mask settings", (): any => {
 test("json editor default indent", (): any => {
   const creator = new CreatorTester();
   expect(settings.jsonEditor.indentation).toBe(2);
-  expect(creator.text).toBe("{\n  \"logoPosition\": \"right\",\n  \"pages\": [\n    {\n      \"name\": \"page1\"\n    }\n  ]\n}");
+  expect(creator.text).toBe("{\n  \"pages\": [\n    {\n      \"name\": \"page1\"\n    }\n  ]\n}");
 });
 test("onSetPropertyEditorOptions -> onConfigureTablePropertyEditor", (): any => {
   const creator = new CreatorTester();

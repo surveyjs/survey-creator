@@ -1163,7 +1163,7 @@ test("header editable after theme changed", (): any => {
 
   themeChooser.value = "flat";
   expect(headerTitleQuestion.isVisible).toBe(true);
-  
+
   headerViewContainer.getElementByName("headerView").value = "basic";
   expect(headerTitleQuestion.isVisible).toBe(false);
 });
