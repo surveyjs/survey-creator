@@ -4,6 +4,8 @@ import { fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-
 import { assign } from "../../utils/utils";
 
 export class HeaderModel extends Base implements IHeader {
+  static primaryColorStr = "var(--sjs-primary-backcolor)";
+
   height: number;
   mobileHeight: number;
   inheritWidthFrom: "survey" | "container";
@@ -85,17 +87,17 @@ export class HeaderModel extends Base implements IHeader {
 
   private setHeaderBackgroundColorCssVariable(cssVariables: any) {
     if (this["backgroundColorSwitch"] === "none") {
-      cssVariables["--sjs-header-backcolor"] = "transparent";
+      cssVariables["--sjs-header-backcolor"] = undefined;
     } else if (this["backgroundColorSwitch"] === "custom") {
       cssVariables["--sjs-header-backcolor"] = this["backgroundColor"] ?? "transparent";
     } else {
-      cssVariables["--sjs-header-backcolor"] = "var(--sjs-primary-backcolor)";
+      cssVariables["--sjs-header-backcolor"] = HeaderModel.primaryColorStr;
     }
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
-    if (backgroundColor === "var(--sjs-primary-backcolor)") return "accentColor";
-    if (backgroundColor === "transparent") return "none";
+    if (backgroundColor === HeaderModel.primaryColorStr) return "accentColor";
+    if (!backgroundColor || backgroundColor === "transparent") return "none";
     return "custom";
   }
 

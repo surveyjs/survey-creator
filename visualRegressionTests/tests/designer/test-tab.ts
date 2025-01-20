@@ -248,6 +248,7 @@ test("Check survey timer", async (t) => {
     await t.resizeWindow(1920, 1080);
     const json = {
       showQuestionNumbers: "on",
+      headerView: "basic",
       "autoFocusFirstQuestion": true,
       "title": "American History",
       "showTimerPanel": "bottom",
