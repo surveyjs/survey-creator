@@ -646,8 +646,8 @@ var persianStrings = {
     renderMode: "حالت رندر",
     allowAddPanel: "اجازه افزودن پنل",
     allowRemovePanel: "اجازه حذف پنل",
-    panelAddText: "متن افزودن پنل",
-    panelRemoveText: "متن حذف پنل",
+    addPanelText: "متن افزودن پنل",
+    removePanelText: "متن حذف پنل",
     isSinglePage: "نمایش تمام المان ها در یک صفحه",
     html: "Html",
     setValue: "پاسخ",
@@ -721,9 +721,9 @@ var persianStrings = {
     minPanelCount: "حداقل تعداد پانل",
     maxPanelCount: "حداکثر تعداد پانل",
     panelsState: "پانل داخلی گسترش دولت",
-    panelPrevText: "قبلی دکمه پنل tooltip",
-    panelNextText: "بعدی دکمه پنل tooltip",
-    panelRemoveButtonLocation: "حذف محل دکمه پنل",
+    prevPanelText: "قبلی دکمه پنل tooltip",
+    nextPanelText: "بعدی دکمه پنل tooltip",
+    removePanelButtonLocation: "حذف محل دکمه پنل",
     hideIfRowsEmpty: "مخفی کردن سؤال اگر سطری وجود نداشته باشد",
     hideColumnsIfEmpty: "مخفی کردن ستونها اگر سطری وجود نداشته باشد",
     rateValues: "مقادیر نرخ سفارشی",
@@ -1893,11 +1893,11 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.panelsState: "Inner panel expand state" => "پانل داخلی گسترش دولت"
 // pe.templateDescription: "Description template" => "قالب شرح"
 // pe.templateTitle: "Title template" => "قالب عنوان"
-// pe.panelPrevText: "Previous Panel button tooltip" => "قبلی دکمه پنل tooltip"
-// pe.panelNextText: "Next Panel button tooltip" => "بعدی دکمه پنل tooltip"
+// pe.prevPanelText: "Previous Panel button tooltip" => "قبلی دکمه پنل tooltip"
+// pe.nextPanelText: "Next Panel button tooltip" => "بعدی دکمه پنل tooltip"
 // pe.showRangeInProgress: "Show progress bar" => "نمایش نوار پیشرفت"
 // pe.templateQuestionTitleLocation: "Question title location" => "عنوان سوال محل"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "حذف محل دکمه پنل"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "حذف محل دکمه پنل"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "مخفی کردن سؤال اگر سطری وجود نداشته باشد"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "مخفی کردن ستونها اگر سطری وجود نداشته باشد"
 // pe.rateValues: "Custom rate values" => "مقادیر نرخ سفارشی"

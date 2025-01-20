@@ -646,8 +646,8 @@ var frenchTranslation = {
     renderMode: "Mode de rendu",
     allowAddPanel: "Autoriser l'ajout de sections",
     allowRemovePanel: "Autoriser la suppression de sections",
-    panelAddText: "Ajouter le texte du bouton de la section",
-    panelRemoveText: "Supprimer la section texte",
+    addPanelText: "Ajouter le texte du bouton de la section",
+    removePanelText: "Supprimer la section texte",
     isSinglePage: "Afficher tous les éléments sur une seule page",
     html: "Balisage HTML",
     setValue: "Réponse",
@@ -721,9 +721,9 @@ var frenchTranslation = {
     minPanelCount: "Nombre minimal de sections",
     maxPanelCount: "Nombre maximal de sections",
     panelsState: "Déploiement de la section",
-    panelPrevText: "Info-bulle du bouton Section précédente",
-    panelNextText: "Info-bulle du bouton Section suivante",
-    panelRemoveButtonLocation: "Emplacement du bouton Supprimer la Section",
+    prevPanelText: "Info-bulle du bouton Section précédente",
+    nextPanelText: "Info-bulle du bouton Section suivante",
+    removePanelButtonLocation: "Emplacement du bouton Supprimer la Section",
     hideIfRowsEmpty: "Masquer la question s’il n’y a pas de lignes",
     hideColumnsIfEmpty: "Masquer les colonnes s’il n’y a pas de lignes",
     rateValues: "Valeurs des notes personnalisées",
@@ -1970,11 +1970,11 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pe.panelsState: "Inner panel expand state" => "État d’expansion du panneau intérieur"
 // pe.templateDescription: "Description template" => "Modèle de description"
 // pe.templateTitle: "Title template" => "Modèle de titre"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Info-bulle précédente du bouton Panneau"
-// pe.panelNextText: "Next Panel button tooltip" => "Info-bulle du bouton Panneau suivant"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Info-bulle précédente du bouton Panneau"
+// pe.nextPanelText: "Next Panel button tooltip" => "Info-bulle du bouton Panneau suivant"
 // pe.showRangeInProgress: "Show progress bar" => "Afficher la barre de progression"
 // pe.templateQuestionTitleLocation: "Question title location" => "Emplacement du titre de la question"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Supprimer l’emplacement du bouton Panneau"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Supprimer l’emplacement du bouton Panneau"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Masquer la question s’il n’y a pas de lignes"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Masquer les colonnes s’il n’y a pas de lignes"
 // pe.rateValues: "Custom rate values" => "Valeurs de taux personnalisées"

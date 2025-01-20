@@ -15,8 +15,7 @@ export interface ElementDeletingEvent {
    */
   elementType: string;
   /**
-   * Obsolete. Use `options.allow` instead.
-   * @deprecated
+   * @deprecated Use `options.allow` instead.
    */
   allowing?: boolean;
   /**
@@ -35,13 +34,11 @@ export interface GetPropertyReadOnlyEvent {
    */
   parentProperty: JsonObjectProperty;
   /**
-   * Obsolete. Use `options.element` instead.
-   * @deprecated
+   * @deprecated Use `options.element` instead.
    */
   obj?: Base;
   /**
-   * Obsolete. Use `options.parentElement` instead.
-   * @deprecated
+   * @deprecated Use `options.parentElement` instead.
    */
   parentObj?: Base;
   /**
@@ -126,8 +123,7 @@ export interface ElementAllowOperationsEvent {
    */
   element: Base;
   /**
-   * Obsolete. Use `options.element` instead.
-   * @deprecated
+   * @deprecated Use `options.element` instead.
    */
   obj?: Base;
   /**
@@ -155,8 +151,7 @@ export interface ElementAllowOperationsEvent {
    */
   allowDrag: boolean;
   /**
-   * Obsolete. Use `options.allowDrag` instead.
-   * @deprecated
+   * @deprecated Use `options.allowDrag` instead.
    */
   allowDragging?: boolean;
   /**
@@ -175,13 +170,11 @@ export interface ElementAllowOperationsEvent {
 
 export interface DefineElementMenuItemsEvent {
   /**
-   * Obsolete. Use `options.element` instead.
-   * @deprecated
+   * @deprecated Use `options.element` instead.
    */
   obj?: Base;
   /**
-   * Obsolete. Use `options.actions` instead.
-   * @deprecated
+   * @deprecated Use `options.actions` instead.
    */
   items?: IAction[];
 }
@@ -206,18 +199,15 @@ export interface PropertyAddingEvent {
    */
   parentProperty: JsonObjectProperty;
   /**
-   * Obsolete. Use `options.element` instead.
-   * @deprecated
+   * @deprecated Use `options.element` instead.
    */
   obj?: Base;
   /**
-   * Obsolete. Use `options.parentElement` instead.
-   * @deprecated
+   * @deprecated Use `options.parentElement` instead.
    */
   parentObj?: Base;
   /**
-   * Obsolete. Use `options.show` instead.
-   * @deprecated
+   * @deprecated Use `options.show` instead.
    */
   canShow?: boolean;
 }
@@ -283,7 +273,7 @@ export interface PropertyEditorUpdateTitleActionsEvent {
 
 export interface PropertyGridShowPopupEvent {
   /**
-   * Obsolete. Use `options.element` instead.
+   * @deprecated Use `options.element` instead.
    */
   obj?: Base;
   /**
@@ -415,8 +405,7 @@ export interface ConfigureTablePropertyEditorEvent {
    */
   allowBatchEdit: boolean;
   /**
-   * Obsolete. Use `options.allowAddRemoveItems`, `options.allowRemoveAllItems`, and `options.allowBatchEdit` instead.
-   * @deprecated
+   * @deprecated Use `options.allowAddRemoveItems`, `options.allowRemoveAllItems`, and `options.allowBatchEdit` instead.
    */
   editorOptions: TablePropertyEditorOptions;
 }
@@ -427,8 +416,7 @@ export interface PropertyDisplayCustomErrorEvent {
    */
   element: Base;
   /**
-   * Obsolete. Use `options.element` instead.
-   * @deprecated
+   * @deprecated Use `options.element` instead.
    */
   obj?: Base;
   /**
@@ -447,8 +435,7 @@ export interface PropertyDisplayCustomErrorEvent {
 
 export interface PropertyValueChangingEvent {
   /**
-   * Obsolete. Use `options.element` instead.
-   * @deprecated
+   * @deprecated Use `options.element` instead.
    */
   obj?: Base;
   /**
@@ -456,8 +443,7 @@ export interface PropertyValueChangingEvent {
    */
   propertyName: string;
   /**
-   * Obsolete. Use `options.oldValue` instead.
-   * @deprecated
+   * @deprecated Use `options.oldValue` instead.
    */
   value?: any;
   /**
@@ -478,8 +464,7 @@ export interface BeforePropertyChangedEvent extends PropertyValueChangingEvent {
 
 export interface PropertyValueChangedEvent {
   /**
-   * Obsolete. Use `options.element` instead.
-   * @deprecated
+   * @deprecated Use `options.element` instead.
    */
   obj?: Base;
   /**
@@ -715,8 +700,7 @@ export interface SurveyInstanceCreatedEvent {
    */
   obj?: Base;
   /**
-   * Obsolete. Use `options.area` instead.
-   * @deprecated
+   * @deprecated Use `options.area` instead.
    */
   reason: string;
   model?: Base;
@@ -749,8 +733,7 @@ export interface NotifyEvent {
 
 export interface ElementFocusingEvent {
   /**
-   * Obsolete. Use `options.element` instead.
-   * @deprecated
+   * @deprecated Use `options.element` instead.
    */
   newSelectedElement?: Base;
 }
@@ -763,8 +746,7 @@ export interface ElementSelectingEvent extends ElementFocusingEvent {
 
 export interface ElementFocusedEvent {
   /**
-   * Obsolete. Use `options.element` instead.
-   * @deprecated
+   * @deprecated Use `options.element` instead.
    */
   newSelectedElement?: Base;
 }
@@ -829,8 +811,7 @@ export interface UploadFileEvent {
    */
   callback: (status: string, fileUrl?: string) => void;
   /**
-   * Obsolete. Use `options.element` instead.
-   * @deprecated
+   * @deprecated Use `options.element` instead.
    */
   question: Question;
 }
@@ -968,13 +949,11 @@ export interface DragDropAllowEvent {
    */
   allow: boolean;
   /**
-   * Obsolete. Use `options.draggedElement` instead.
-   * @deprecated
+   * @deprecated Use `options.draggedElement` instead.
    */
   target?: IElement;
   /**
-   * Obsolete. Use `options.toElement` instead.
-   * @deprecated
+   * @deprecated Use `options.toElement` instead.
    */
   source?: IElement;
 }
@@ -1024,8 +1003,7 @@ export interface BeforeUndoEvent {
    */
   allow: boolean;
   /**
-   * Obsolete. Use `options.allow` instead.
-   * @deprecated
+   * @deprecated Use `options.allow` instead.
    */
   canUndo?: boolean;
 }
@@ -1036,8 +1014,7 @@ export interface BeforeRedoEvent {
    */
   allow: boolean;
   /**
-   * Obsolete. Use `options.allow` instead.
-   * @deprecated
+   * @deprecated Use `options.allow` instead.
    */
   canRedo?: boolean;
 }

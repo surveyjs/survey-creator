@@ -646,8 +646,8 @@ export var koreanStrings = {
     renderMode: "렌더링 모드",
     allowAddPanel: "패널 추가 허용",
     allowRemovePanel: "패널 제거 허용",
-    panelAddText: "패널 텍스트 추가",
-    panelRemoveText: "패널 텍스트 삭제",
+    addPanelText: "패널 텍스트 추가",
+    removePanelText: "패널 텍스트 삭제",
     isSinglePage: "한 페이지에 모든 요소 표시",
     html: "HTML 마크업",
     setValue: "대답",
@@ -721,9 +721,9 @@ export var koreanStrings = {
     minPanelCount: "최소 패널 수",
     maxPanelCount: "최대 패널 수",
     panelsState: "내부 패널 확장 상태",
-    panelPrevText: "이전 패널 단추 도구 설명",
-    panelNextText: "다음 패널 단추 도구 설명",
-    panelRemoveButtonLocation: "패널 단추 위치 제거",
+    prevPanelText: "이전 패널 단추 도구 설명",
+    nextPanelText: "다음 패널 단추 도구 설명",
+    removePanelButtonLocation: "패널 단추 위치 제거",
     hideIfRowsEmpty: "행이 없는 경우 질문 숨기기",
     hideColumnsIfEmpty: "행이 없는 경우 열 숨기기",
     rateValues: "사용자 지정 요금 값",
@@ -2090,11 +2090,11 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.panelsState: "Inner panel expand state" => "내부 패널 확장 상태"
 // pe.templateDescription: "Description template" => "설명 템플릿"
 // pe.templateTitle: "Title template" => "제목 템플릿"
-// pe.panelPrevText: "Previous Panel button tooltip" => "이전 패널 단추 도구 설명"
-// pe.panelNextText: "Next Panel button tooltip" => "다음 패널 단추 도구 설명"
+// pe.prevPanelText: "Previous Panel button tooltip" => "이전 패널 단추 도구 설명"
+// pe.nextPanelText: "Next Panel button tooltip" => "다음 패널 단추 도구 설명"
 // pe.showRangeInProgress: "Show progress bar" => "진행률 표시줄 표시"
 // pe.templateQuestionTitleLocation: "Question title location" => "질문 제목 위치"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "패널 단추 위치 제거"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "패널 단추 위치 제거"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "행이 없는 경우 질문 숨기기"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "행이 없는 경우 열 숨기기"
 // pe.rateValues: "Custom rate values" => "사용자 지정 요금 값"

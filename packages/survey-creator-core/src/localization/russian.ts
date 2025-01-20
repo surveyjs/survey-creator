@@ -646,8 +646,8 @@ export var ruStrings = {
     renderMode: "Режим отображения панели",
     allowAddPanel: "Разрешить добавление панели",
     allowRemovePanel: "Разрешить удаление панели",
-    panelAddText: "Добавление текста на панели",
-    panelRemoveText: "Удаление текста на панели",
+    addPanelText: "Добавление текста на панели",
+    removePanelText: "Удаление текста на панели",
     isSinglePage: "Показывать все элементы на одной странице",
     html: "HTML-разметка",
     setValue: "Ответ",
@@ -721,9 +721,9 @@ export var ruStrings = {
     minPanelCount: "Минимальное количество панелей",
     maxPanelCount: "Максимальное количество панелей",
     panelsState: "Состояние расширения внутренней панели",
-    panelPrevText: "Предыдущая всплывающая подсказка кнопки «Панель»",
-    panelNextText: "Всплывающая подсказка кнопки «Следующая панель»",
-    panelRemoveButtonLocation: "Удалить расположение кнопки «Панель»",
+    prevPanelText: "Предыдущая всплывающая подсказка кнопки «Панель»",
+    nextPanelText: "Всплывающая подсказка кнопки «Следующая панель»",
+    removePanelButtonLocation: "Удалить расположение кнопки «Панель»",
     hideIfRowsEmpty: "Скрыть вопрос, если нет строк",
     hideColumnsIfEmpty: "Скрытие столбцов, если строк нет",
     rateValues: "Пользовательские значения тарифов",
@@ -1978,11 +1978,11 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.panelsState: "Inner panel expand state" => "Состояние расширения внутренней панели"
 // pe.templateDescription: "Description template" => "Шаблон описания"
 // pe.templateTitle: "Title template" => "Шаблон заголовка"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Предыдущая всплывающая подсказка кнопки «Панель»"
-// pe.panelNextText: "Next Panel button tooltip" => "Всплывающая подсказка кнопки «Следующая панель»"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Предыдущая всплывающая подсказка кнопки «Панель»"
+// pe.nextPanelText: "Next Panel button tooltip" => "Всплывающая подсказка кнопки «Следующая панель»"
 // pe.showRangeInProgress: "Show progress bar" => "Показать индикатор выполнения"
 // pe.templateQuestionTitleLocation: "Question title location" => "Местоположение заголовка вопроса"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Удалить расположение кнопки «Панель»"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Удалить расположение кнопки «Панель»"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Скрыть вопрос, если нет строк"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Скрытие столбцов, если строк нет"
 // pe.rateValues: "Custom rate values" => "Пользовательские значения тарифов"

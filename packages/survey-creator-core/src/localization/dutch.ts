@@ -646,8 +646,8 @@ export var nlStrings = {
     renderMode: "Render-modus",
     allowAddPanel: "Sta het toevoegen van een paneel toe",
     allowRemovePanel: "Laat het verwijderen van het paneel toe",
-    panelAddText: "Paneeltekst toevoegen",
-    panelRemoveText: "Paneeltekst verwijderen",
+    addPanelText: "Paneeltekst toevoegen",
+    removePanelText: "Paneeltekst verwijderen",
     isSinglePage: "Toon alle elementen op één pagina",
     html: "Html",
     setValue: "Antwoorden",
@@ -721,9 +721,9 @@ export var nlStrings = {
     minPanelCount: "Minimaal aantal panelen",
     maxPanelCount: "Maximaal aantal panelen",
     panelsState: "Uitvouwstatus binnenpaneel",
-    panelPrevText: "Knopinfo vorige deelvensterknop",
-    panelNextText: "knopinfo voor het volgende deelvenster",
-    panelRemoveButtonLocation: "Locatie van de knop Deelvenster verwijderen",
+    prevPanelText: "Knopinfo vorige deelvensterknop",
+    nextPanelText: "knopinfo voor het volgende deelvenster",
+    removePanelButtonLocation: "Locatie van de knop Deelvenster verwijderen",
     hideIfRowsEmpty: "Verberg de vraag als er geen rijen zijn",
     hideColumnsIfEmpty: "Kolommen verbergen als er geen rijen zijn",
     rateValues: "Aangepaste tariefwaarden",
@@ -1928,11 +1928,11 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.panelsState: "Inner panel expand state" => "Uitvouwstatus binnenpaneel"
 // pe.templateDescription: "Description template" => "Beschrijving sjabloon"
 // pe.templateTitle: "Title template" => "Titel sjabloon"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Knopinfo vorige deelvensterknop"
-// pe.panelNextText: "Next Panel button tooltip" => "knopinfo voor het volgende deelvenster"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Knopinfo vorige deelvensterknop"
+// pe.nextPanelText: "Next Panel button tooltip" => "knopinfo voor het volgende deelvenster"
 // pe.showRangeInProgress: "Show progress bar" => "Voortgangsbalk weergeven"
 // pe.templateQuestionTitleLocation: "Question title location" => "Locatie van de vraagtitel"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Locatie van de knop Deelvenster verwijderen"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Locatie van de knop Deelvenster verwijderen"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Verberg de vraag als er geen rijen zijn"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Kolommen verbergen als er geen rijen zijn"
 // pe.rateValues: "Custom rate values" => "Aangepaste tariefwaarden"

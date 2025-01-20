@@ -646,8 +646,8 @@ export var huStrings = {
     renderMode: "Megjelenítés módja",
     allowAddPanel: "Új panel hozzáadásának engedélyezése",
     allowRemovePanel: "Panel eltávolításának engedélyezése",
-    panelAddText: "'Új panel felvétele' gomb szövege",
-    panelRemoveText: "'Panel eltávolítása' gomb szövege",
+    addPanelText: "'Új panel felvétele' gomb szövege",
+    removePanelText: "'Panel eltávolítása' gomb szövege",
     isSinglePage: "Minden elem mutatása egy lapon",
     html: "HTML",
     setValue: "Válasz",
@@ -721,9 +721,9 @@ export var huStrings = {
     minPanelCount: "Panelek minimális száma",
     maxPanelCount: "Panelek maximális száma",
     panelsState: "Belső panel kibontási állapota",
-    panelPrevText: "Előző Panel gomb eszköztipp",
-    panelNextText: "Következő Panel gomb elemleírása",
-    panelRemoveButtonLocation: "A Panel gomb helyének eltávolítása",
+    prevPanelText: "Előző Panel gomb eszköztipp",
+    nextPanelText: "Következő Panel gomb elemleírása",
+    removePanelButtonLocation: "A Panel gomb helyének eltávolítása",
     hideIfRowsEmpty: "A kérdés elrejtése, ha nincsenek sorok",
     hideColumnsIfEmpty: "Oszlopok elrejtése, ha nincsenek sorok",
     rateValues: "Egyéni díjértékek",
@@ -2048,11 +2048,11 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.panelsState: "Inner panel expand state" => "Belső panel kibontási állapota"
 // pe.templateDescription: "Description template" => "Leíró sablon"
 // pe.templateTitle: "Title template" => "Cím sablon"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Előző Panel gomb eszköztipp"
-// pe.panelNextText: "Next Panel button tooltip" => "Következő Panel gomb elemleírása"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Előző Panel gomb eszköztipp"
+// pe.nextPanelText: "Next Panel button tooltip" => "Következő Panel gomb elemleírása"
 // pe.showRangeInProgress: "Show progress bar" => "Folyamatjelző sáv megjelenítése"
 // pe.templateQuestionTitleLocation: "Question title location" => "Kérdés címének helye"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "A Panel gomb helyének eltávolítása"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "A Panel gomb helyének eltávolítása"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "A kérdés elrejtése, ha nincsenek sorok"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Oszlopok elrejtése, ha nincsenek sorok"
 // pe.rateValues: "Custom rate values" => "Egyéni díjértékek"

@@ -85,9 +85,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     });
     this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
       const q = options.panel.getQuestionByName(options.name);
-      if(!!q && q.parent?.name === "triggerEditorPanel") {
+      if (!!q && q.parent?.name === "triggerEditorPanel") {
         const action = <LogicActionTriggerModel>this.getActionModelByPanel(options.panel);
-        if(action) {
+        if (action) {
           action.onPanelQuestionValueChanged(<PanelModel>q.parent, options.name);
         }
       }
@@ -140,8 +140,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
           name: "panel",
           title: getLogicString("actionsEditorTitle"),
           titleLocation: "hidden",
-          panelAddText: getLogicString("addNewAction"),
-          panelRemoveButtonLocation: "right",
+          addPanelText: getLogicString("addNewAction"),
+          removePanelButtonLocation: "right",
           panelCount: 0,
           minPanelCount: 1,
           maxPanelCount: 1,
@@ -242,7 +242,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   private onUpdateQuestionCssClasses(options: any) {
     const cssClasses = options.cssClasses;
     const question = options.question;
-    if(question.getType() !== "paneldynamic") {
+    if (question.getType() !== "paneldynamic") {
       cssClasses.answered = "svc-logic-question--answered";
     }
 
