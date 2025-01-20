@@ -646,8 +646,8 @@ export let svStrings = {
     renderMode: "Rendering läge",
     allowAddPanel: "Tillåt att lägga till panel",
     allowRemovePanel: "Tillåt att ta bort panel",
-    panelAddText: "Lägg till panel text",
-    panelRemoveText: "Ta bort panel text",
+    addPanelText: "Lägg till panel text",
+    removePanelText: "Ta bort panel text",
     isSinglePage: "Visa alla element på en sida",
     html: "HTML-kod",
     setValue: "Svar",
@@ -721,9 +721,9 @@ export let svStrings = {
     minPanelCount: "Minsta antal paneler",
     maxPanelCount: "Maximalt antal paneler",
     panelsState: "Expanderingsläge för innerpanelen",
-    panelPrevText: "Knappbeskrivning för föregående panel",
-    panelNextText: "Knappbeskrivning för knappen Nästa panel",
-    panelRemoveButtonLocation: "Ta bort panelknappens placering",
+    prevPanelText: "Knappbeskrivning för föregående panel",
+    nextPanelText: "Knappbeskrivning för knappen Nästa panel",
+    removePanelButtonLocation: "Ta bort panelknappens placering",
     hideIfRowsEmpty: "Dölj frågan om det inte finns några rader",
     hideColumnsIfEmpty: "Dölj kolumner om det inte finns några rader",
     rateValues: "Anpassade prisvärden",
@@ -2070,11 +2070,11 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pe.panelsState: "Inner panel expand state" => "Expanderingsläge för innerpanelen"
 // pe.templateDescription: "Description template" => "Beskrivning mall"
 // pe.templateTitle: "Title template" => "Mall för titel"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Knappbeskrivning för föregående panel"
-// pe.panelNextText: "Next Panel button tooltip" => "Knappbeskrivning för knappen Nästa panel"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Knappbeskrivning för föregående panel"
+// pe.nextPanelText: "Next Panel button tooltip" => "Knappbeskrivning för knappen Nästa panel"
 // pe.showRangeInProgress: "Show progress bar" => "Visa förloppsindikator"
 // pe.templateQuestionTitleLocation: "Question title location" => "Plats för frågerubrik"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Ta bort panelknappens placering"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Ta bort panelknappens placering"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Dölj frågan om det inte finns några rader"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Dölj kolumner om det inte finns några rader"
 // pe.rateValues: "Custom rate values" => "Anpassade prisvärden"

@@ -646,8 +646,8 @@ export var hrStrings = {
     renderMode: "Način prikaza",
     allowAddPanel: "Dopustite dodavanje ploče",
     allowRemovePanel: "Dopustite uklanjanje ploče",
-    panelAddText: "Dodavanje teksta panela",
-    panelRemoveText: "Removing panel text",
+    addPanelText: "Dodavanje teksta panela",
+    removePanelText: "Removing panel text",
     isSinglePage: "Uklanjanje teksta ploče",
     html: "Html",
     setValue: "Odgovor",
@@ -721,9 +721,9 @@ export var hrStrings = {
     minPanelCount: "Najmanji broj ploča",
     maxPanelCount: "Maksimalan broj ploča",
     panelsState: "Stanje proširenja unutarnje ploče",
-    panelPrevText: "Opis alata gumba Prethodna ploča",
-    panelNextText: "Opis alata gumba Sljedeća ploča",
-    panelRemoveButtonLocation: "Ukloni mjesto gumba ploče",
+    prevPanelText: "Opis alata gumba Prethodna ploča",
+    nextPanelText: "Opis alata gumba Sljedeća ploča",
+    removePanelButtonLocation: "Ukloni mjesto gumba ploče",
     hideIfRowsEmpty: "Sakrij pitanje ako nema redaka",
     hideColumnsIfEmpty: "Sakrij stupce ako nema redaka",
     rateValues: "Vrijednosti prilagođene stope",
@@ -1932,11 +1932,11 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pe.panelsState: "Inner panel expand state" => "Stanje proširenja unutarnje ploče"
 // pe.templateDescription: "Description template" => "Predložak opisa"
 // pe.templateTitle: "Title template" => "Predložak naslova"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Opis alata gumba Prethodna ploča"
-// pe.panelNextText: "Next Panel button tooltip" => "Opis alata gumba Sljedeća ploča"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Opis alata gumba Prethodna ploča"
+// pe.nextPanelText: "Next Panel button tooltip" => "Opis alata gumba Sljedeća ploča"
 // pe.showRangeInProgress: "Show progress bar" => "Pokaži traku tijeka"
 // pe.templateQuestionTitleLocation: "Question title location" => "Mjesto naslova pitanja"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Ukloni mjesto gumba ploče"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Ukloni mjesto gumba ploče"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Sakrij pitanje ako nema redaka"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Sakrij stupce ako nema redaka"
 // pe.rateValues: "Custom rate values" => "Vrijednosti prilagođene stope"

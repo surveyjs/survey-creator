@@ -646,8 +646,8 @@ var germanTranslation = {
     renderMode: "Anzeigemodus",
     allowAddPanel: "Hinzufügen eines Panels erlauben",
     allowRemovePanel: "Entfernen eines Panels erlauben",
-    panelAddText: "Text für die Schaltfläche \"Panel hinzufügen\"",
-    panelRemoveText: "Text für die Schaltfläche \"Panel entfernen\"",
+    addPanelText: "Text für die Schaltfläche \"Panel hinzufügen\"",
+    removePanelText: "Text für die Schaltfläche \"Panel entfernen\"",
     isSinglePage: "Alle Elemente auf einer Seite anzeigen",
     html: "HTML",
     setValue: "Antwort",
@@ -721,9 +721,9 @@ var germanTranslation = {
     minPanelCount: "Minimale Panelanzahl",
     maxPanelCount: "Maximale Panelanzahl",
     panelsState: "Erweiterungszustand des inneren Bereichs",
-    panelPrevText: "Text für die Schaltfläche \"Vorheriges Panel\".",
-    panelNextText: "Text für die Schaltfläche \"Nächstes Panel\".",
-    panelRemoveButtonLocation: "Position der Schaltfläche \"Panel entfernen\"",
+    prevPanelText: "Text für die Schaltfläche \"Vorheriges Panel\".",
+    nextPanelText: "Text für die Schaltfläche \"Nächstes Panel\".",
+    removePanelButtonLocation: "Position der Schaltfläche \"Panel entfernen\"",
     hideIfRowsEmpty: "Frage ausblenden, wenn keine Zeilen vorhanden sind",
     hideColumnsIfEmpty: "Spalten ausblenden, wenn keine Zeilen vorhanden sind",
     rateValues: "Benutzerdefinierte Bewertungswerte",
@@ -1800,7 +1800,7 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Bildbreite (in CSS-akzeptierten Werten)"
 // pe.allowResizeComment: "Allow users to resize text areas" => "Benutzern erlauben, die Größe von Textbereichen zu ändern"
 // pe.templateQuestionTitleLocation: "Question title location" => "Position des Fragetitels"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Position der Panel-Schaltfläche entfernen"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Position der Panel-Schaltfläche entfernen"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Blenden Sie die Frage aus, wenn keine Zeilen vorhanden sind"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Spalten ausblenden, wenn keine Zeilen vorhanden sind"
 // pe.rateValues: "Custom rate values" => "Benutzerdefinierte Ratenwerte"

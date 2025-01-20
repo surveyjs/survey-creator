@@ -646,8 +646,8 @@ export var arStrings = {
     renderMode: "نمط العرض",
     allowAddPanel: "السماح بإضافة لوحة",
     allowRemovePanel: "السماح بإزالة لوحة",
-    panelAddText: "نص إضافة لوحة",
-    panelRemoveText: "نص إزالة لوحة",
+    addPanelText: "نص إضافة لوحة",
+    removePanelText: "نص إزالة لوحة",
     isSinglePage: "Show all elements on one page",
     html: "صفحة ويب HTML",
     setValue: "جواب",
@@ -721,9 +721,9 @@ export var arStrings = {
     minPanelCount: "الحد الأدنى لعدد اللوحات",
     maxPanelCount: "الحد الأقصى لعدد اللوحات",
     panelsState: "حالة توسيع اللوحة الداخلية",
-    panelPrevText: "تلميح أداة زر اللوحة السابق",
-    panelNextText: "تلميح أداة زر اللوحة التالية",
-    panelRemoveButtonLocation: "إزالة موقع زر اللوحة",
+    prevPanelText: "تلميح أداة زر اللوحة السابق",
+    nextPanelText: "تلميح أداة زر اللوحة التالية",
+    removePanelButtonLocation: "إزالة موقع زر اللوحة",
     hideIfRowsEmpty: "إخفاء السؤال إذا لم تكن هناك صفوف",
     hideColumnsIfEmpty: "إخفاء الأعمدة في حالة عدم وجود صفوف",
     rateValues: "قيم الأسعار المخصصة",
@@ -1892,11 +1892,11 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pe.panelsState: "Inner panel expand state" => "حالة توسيع اللوحة الداخلية"
 // pe.templateDescription: "Description template" => "قالب الوصف"
 // pe.templateTitle: "Title template" => "قالب العنوان"
-// pe.panelPrevText: "Previous Panel button tooltip" => "تلميح أداة زر اللوحة السابق"
-// pe.panelNextText: "Next Panel button tooltip" => "تلميح أداة زر اللوحة التالية"
+// pe.prevPanelText: "Previous Panel button tooltip" => "تلميح أداة زر اللوحة السابق"
+// pe.nextPanelText: "Next Panel button tooltip" => "تلميح أداة زر اللوحة التالية"
 // pe.showRangeInProgress: "Show progress bar" => "إظهار شريط التقدم"
 // pe.templateQuestionTitleLocation: "Question title location" => "موقع عنوان السؤال"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "إزالة موقع زر اللوحة"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "إزالة موقع زر اللوحة"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "إخفاء السؤال إذا لم تكن هناك صفوف"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "إخفاء الأعمدة في حالة عدم وجود صفوف"
 // pe.rateValues: "Custom rate values" => "قيم الأسعار المخصصة"
