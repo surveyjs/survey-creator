@@ -178,6 +178,12 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return container;
   }
 
+  protected createActionContainers() {
+    super.createActionContainers();
+    this.topActionContainer.cssClasses = { ...this.actionContainer.cssClasses };
+    this.topActionContainer.cssClasses.root += " svc-page-toolbar--collapse";
+  }
+
   protected allowExpandCollapseByDblClick(element: any) {
     return element.classList.contains("svc-page__content") ||
       element.classList.contains("sd-page") ||
