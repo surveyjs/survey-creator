@@ -140,10 +140,9 @@ svc-page {
 }
 
 .svc-page-toolbar__item--with-text {
-  --thm-survey-question-panel-toolbar-item-padding-right: calc(var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text, var(--lbr-spacing-x1)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05)));
   --thm-survey-question-panel-toolbar-item-gap: calc(var(--ctr-survey-question-panel-toolbar-item-gap, var(--lbr-spacing-x05)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05)));
 
-  padding-inline-end: var(--thm-survey-question-panel-toolbar-item-padding-right);
+  padding-inline-end: var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text, var(--lbr-spacing-x1));
   gap: var(--thm-survey-question-panel-toolbar-item-gap);
 }
 
