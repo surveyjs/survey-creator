@@ -1,7 +1,7 @@
 import { Action, ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement, settings as SurveySettings } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
-import { SurveyElementAdornerBase } from "./action-container-view-model";
+import { SurveyElementAdornerBase } from "./survey-element";
 import { getLocString } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
@@ -129,10 +129,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   @property({
     onSet(val, target: PageAdorner, prevVal) {
-      if(val != prevVal) {
+      if (val != prevVal) {
         target.updateShowPlaceholder();
         target.updateActionsProperties();
-        if(val && target.surveyElement) {
+        if (val && target.surveyElement) {
           target.addGhostPageSubsribes(target.surveyElement);
         }
       }
@@ -326,7 +326,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (cssClasses.pageRow) return [].slice.call(this.rootElement?.querySelectorAll(`:scope .svc-page__footer, :scope ${classesToSelector(this.surveyElement.cssRoot)} > .svc-row`));
     return null;
   }
-  public onPageSelected() {}
+  public onPageSelected() { }
   protected getAllowDragging(options: any): boolean {
     return this.creator.allowDragPages && super.getAllowDragging(options);
   }

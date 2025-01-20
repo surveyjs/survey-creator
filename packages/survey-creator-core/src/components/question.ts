@@ -34,7 +34,7 @@ import {
   isPropertyVisible,
   propertyExists,
 } from "../utils/creator-utils";
-import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
+import { SurveyElementActionContainer } from "./action-container-view-model";
 require("./question.scss");
 import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
@@ -42,6 +42,7 @@ import { DragDropSurveyElements, isPanelDynamic } from "../survey-elements";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 import { isUndefined } from "lodash";
 import { listComponentCss } from "./list-theme";
+import { SurveyElementAdornerBase } from "./survey-element";
 
 export interface QuestionBannerParams {
   text: string;
@@ -680,7 +681,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       cssClasses: listComponentCss,
     });
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
-      if(opt.isVisible) {
+      if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         options.updateListModel(listModel);
       }
