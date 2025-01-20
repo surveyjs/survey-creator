@@ -5,7 +5,7 @@ function getQuestionJSON() {
   return {
     "type": "paneldynamic",
     "minPanelCount": 1,
-    "panelAddText": getLocString("theme.boxShadowAddRule"),
+    "addPanelText": getLocString("theme.boxShadowAddRule"),
     "templateElements": [
       {
         "type": "spinedit",

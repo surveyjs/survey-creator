@@ -646,8 +646,8 @@ export var fiStrings = {
     renderMode: "Renderöinnin tila",
     allowAddPanel: "Salli paneelin lisääminen",
     allowRemovePanel: "Salli paneelin poistaminen",
-    panelAddText: "Paneelin tekstin lisääminen",
-    panelRemoveText: "Paneelin tekstin poistaminen",
+    addPanelText: "Paneelin tekstin lisääminen",
+    removePanelText: "Paneelin tekstin poistaminen",
     isSinglePage: "Näytä kaikki elementit yhdellä sivulla",
     html: "Html",
     setValue: "Vastata",
@@ -721,9 +721,9 @@ export var fiStrings = {
     minPanelCount: "Paneelien vähimmäismäärä",
     maxPanelCount: "Paneelien enimmäismäärä",
     panelsState: "Sisäpaneelin laajennustila",
-    panelPrevText: "Edellinen paneeli -painikkeen työkaluvihje",
-    panelNextText: "Seuraava paneeli -painikkeen työkaluvihje",
-    panelRemoveButtonLocation: "Poista paneelipainikkeen sijainti",
+    prevPanelText: "Edellinen paneeli -painikkeen työkaluvihje",
+    nextPanelText: "Seuraava paneeli -painikkeen työkaluvihje",
+    removePanelButtonLocation: "Poista paneelipainikkeen sijainti",
     hideIfRowsEmpty: "Piilota kysymys, jos rivejä ei ole",
     hideColumnsIfEmpty: "Piilota sarakkeet, jos rivejä ei ole",
     rateValues: "Muokatut hinta-arvot",
@@ -1935,11 +1935,11 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pe.panelsState: "Inner panel expand state" => "Sisäpaneelin laajennustila"
 // pe.templateDescription: "Description template" => "Kuvaus-malli"
 // pe.templateTitle: "Title template" => "Otsikko-malli"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Edellinen paneeli -painikkeen työkaluvihje"
-// pe.panelNextText: "Next Panel button tooltip" => "Seuraava paneeli -painikkeen työkaluvihje"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Edellinen paneeli -painikkeen työkaluvihje"
+// pe.nextPanelText: "Next Panel button tooltip" => "Seuraava paneeli -painikkeen työkaluvihje"
 // pe.showRangeInProgress: "Show progress bar" => "Näytä edistymispalkki"
 // pe.templateQuestionTitleLocation: "Question title location" => "Kysymyksen otsikon sijainti"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Poista paneelipainikkeen sijainti"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Poista paneelipainikkeen sijainti"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Piilota kysymys, jos rivejä ei ole"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Piilota sarakkeet, jos rivejä ei ole"
 // pe.rateValues: "Custom rate values" => "Muokatut hinta-arvot"

@@ -646,8 +646,8 @@ export var jaStrings = {
     renderMode: "レンダーモード",
     allowAddPanel: "パネルの追加を許可",
     allowRemovePanel: "パネルの削除を許可",
-    panelAddText: "パネルテキストを追加しています",
-    panelRemoveText: "パネルテキストを削除しています",
+    addPanelText: "パネルテキストを追加しています",
+    removePanelText: "パネルテキストを削除しています",
     isSinglePage: "1ページ上にすべてのエレメントを表示",
     html: "HTML",
     setValue: "答える",
@@ -721,9 +721,9 @@ export var jaStrings = {
     minPanelCount: "最小パネル数",
     maxPanelCount: "最大パネル数",
     panelsState: "内側パネルの展開状態",
-    panelPrevText: "前のパネルボタンのツールチップ",
-    panelNextText: "[次へ] パネル ボタンのツールチップ",
-    panelRemoveButtonLocation: "[パネルを削除] ボタンの位置",
+    prevPanelText: "前のパネルボタンのツールチップ",
+    nextPanelText: "[次へ] パネル ボタンのツールチップ",
+    removePanelButtonLocation: "[パネルを削除] ボタンの位置",
     hideIfRowsEmpty: "行がない場合は質問を非表示にする",
     hideColumnsIfEmpty: "行がない場合は列を非表示にする",
     rateValues: "カスタムレート値",
@@ -1930,11 +1930,11 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pe.panelsState: "Inner panel expand state" => "内側パネルの展開状態"
 // pe.templateDescription: "Description template" => "説明テンプレート"
 // pe.templateTitle: "Title template" => "タイトルテンプレート"
-// pe.panelPrevText: "Previous Panel button tooltip" => "前のパネルボタンのツールチップ"
-// pe.panelNextText: "Next Panel button tooltip" => "[次へ] パネル ボタンのツールチップ"
+// pe.prevPanelText: "Previous Panel button tooltip" => "前のパネルボタンのツールチップ"
+// pe.nextPanelText: "Next Panel button tooltip" => "[次へ] パネル ボタンのツールチップ"
 // pe.showRangeInProgress: "Show progress bar" => "進行状況バーを表示する"
 // pe.templateQuestionTitleLocation: "Question title location" => "質問タイトルの場所"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "[パネルを削除] ボタンの位置"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "[パネルを削除] ボタンの位置"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "行がない場合は質問を非表示にする"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "行がない場合は列を非表示にする"
 // pe.rateValues: "Custom rate values" => "カスタムレート値"

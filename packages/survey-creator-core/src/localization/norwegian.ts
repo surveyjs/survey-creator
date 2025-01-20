@@ -646,8 +646,8 @@ export var nbStrings = {
     renderMode: "Gjengivelse modus",
     allowAddPanel: "Tillat å legge til panel",
     allowRemovePanel: "Tillat å fjerne panel",
-    panelAddText: "Legg til panel tekst",
-    panelRemoveText: "Fjern panel tekst",
+    addPanelText: "Legg til panel tekst",
+    removePanelText: "Fjern panel tekst",
     isSinglePage: "Vis alle elementer på en side",
     html: "HTML",
     setValue: "Svare",
@@ -721,9 +721,9 @@ export var nbStrings = {
     minPanelCount: "Minimum antall paneler",
     maxPanelCount: "Maksimalt antall paneler",
     panelsState: "Utvidelsestilstand for Indre panel",
-    panelPrevText: "Verktøytips for forrige panelknapp",
-    panelNextText: "Verktøytips for neste panelknapp",
-    panelRemoveButtonLocation: "Fjern plassering av panelknappen",
+    prevPanelText: "Verktøytips for forrige panelknapp",
+    nextPanelText: "Verktøytips for neste panelknapp",
+    removePanelButtonLocation: "Fjern plassering av panelknappen",
     hideIfRowsEmpty: "Skjul spørsmålet hvis det ikke er noen rader",
     hideColumnsIfEmpty: "Skjule kolonner hvis det ikke er noen rader",
     rateValues: "Egendefinerte frekvensverdier",
@@ -1934,11 +1934,11 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pe.panelsState: "Inner panel expand state" => "Utvidelsestilstand for Indre panel"
 // pe.templateDescription: "Description template" => "Mal for beskrivelse"
 // pe.templateTitle: "Title template" => "Tittel mal"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Verktøytips for forrige panelknapp"
-// pe.panelNextText: "Next Panel button tooltip" => "Verktøytips for neste panelknapp"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Verktøytips for forrige panelknapp"
+// pe.nextPanelText: "Next Panel button tooltip" => "Verktøytips for neste panelknapp"
 // pe.showRangeInProgress: "Show progress bar" => "Vis fremdriftsindikator"
 // pe.templateQuestionTitleLocation: "Question title location" => "Spørsmål tittel sted"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Fjern plassering av panelknappen"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Fjern plassering av panelknappen"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Skjul spørsmålet hvis det ikke er noen rader"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Skjule kolonner hvis det ikke er noen rader"
 // pe.rateValues: "Custom rate values" => "Egendefinerte frekvensverdier"

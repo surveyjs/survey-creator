@@ -646,8 +646,8 @@ export var msStrings = {
     renderMode: "Mod penyampaian",
     allowAddPanel: "Benarkan menambahkan panel",
     allowRemovePanel: "Benarkan alih keluar panel",
-    panelAddText: "Menambahkan teks panel",
-    panelRemoveText: "Mengalih keluar teks panel",
+    addPanelText: "Menambahkan teks panel",
+    removePanelText: "Mengalih keluar teks panel",
     isSinglePage: "Tunjukkan semua elemen pada satu halaman",
     html: "HTML",
     setValue: "Jawapan",
@@ -721,9 +721,9 @@ export var msStrings = {
     minPanelCount: "Kiraan panel minimum",
     maxPanelCount: "Kiraan panel maksimum",
     panelsState: "Panel dalaman mengembangkan keadaan",
-    panelPrevText: "Petua alat butang Panel Sebelumnya",
-    panelNextText: "Petua alat butang Panel Seterusnya",
-    panelRemoveButtonLocation: "Alih keluar lokasi butang Panel",
+    prevPanelText: "Petua alat butang Panel Sebelumnya",
+    nextPanelText: "Petua alat butang Panel Seterusnya",
+    removePanelButtonLocation: "Alih keluar lokasi butang Panel",
     hideIfRowsEmpty: "Sembunyikan soalan jika tiada baris",
     hideColumnsIfEmpty: "Menyembunyikan lajur jika tiada baris",
     rateValues: "Nilai kadar tersuai",
@@ -1930,11 +1930,11 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pe.panelsState: "Inner panel expand state" => "Panel dalaman mengembangkan keadaan"
 // pe.templateDescription: "Description template" => "Templat perihalan"
 // pe.templateTitle: "Title template" => "Templat tajuk"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Petua alat butang Panel Sebelumnya"
-// pe.panelNextText: "Next Panel button tooltip" => "Petua alat butang Panel Seterusnya"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Petua alat butang Panel Sebelumnya"
+// pe.nextPanelText: "Next Panel button tooltip" => "Petua alat butang Panel Seterusnya"
 // pe.showRangeInProgress: "Show progress bar" => "Tunjukkan bar kemajuan"
 // pe.templateQuestionTitleLocation: "Question title location" => "Lokasi tajuk soalan"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Alih keluar lokasi butang Panel"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Alih keluar lokasi butang Panel"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Sembunyikan soalan jika tiada baris"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Menyembunyikan lajur jika tiada baris"
 // pe.rateValues: "Custom rate values" => "Nilai kadar tersuai"

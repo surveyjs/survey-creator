@@ -1364,7 +1364,7 @@ test("Check text for add panel button", () => {
     new SurveyModel(),
     new QuestionTextModel("q1")
   );
-  expect(editor.panel.panelAddText).toEqual("Add Condition");
+  expect(editor.panel.addPanelText).toEqual("Add Condition");
 });
 test("Show rating/ranking in new line", () => {
   var survey = new SurveyModel({

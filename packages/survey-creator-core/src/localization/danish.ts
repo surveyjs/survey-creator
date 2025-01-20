@@ -646,8 +646,8 @@ export var danishStrings = {
     renderMode: "Renderingstilstand",
     allowAddPanel: "Tillad at tilføje et panel",
     allowRemovePanel: "Tillad at fjerne et panel",
-    panelAddText: "Tilføj panel tekst",
-    panelRemoveText: "Fjern panel tekst",
+    addPanelText: "Tilføj panel tekst",
+    removePanelText: "Fjern panel tekst",
     isSinglePage: "Vis alle elementer på én side",
     html: "HTML-markering",
     setValue: "Svare",
@@ -721,9 +721,9 @@ export var danishStrings = {
     minPanelCount: "Mindste antal paneler",
     maxPanelCount: "Maksimalt antal paneler",
     panelsState: "Udvid tilstand for indvendigt panel",
-    panelPrevText: "Forrige værktøjstip til panelknap",
-    panelNextText: "Værktøjstip til knappen Næste panel",
-    panelRemoveButtonLocation: "Fjern placering af panelknap",
+    prevPanelText: "Forrige værktøjstip til panelknap",
+    nextPanelText: "Værktøjstip til knappen Næste panel",
+    removePanelButtonLocation: "Fjern placering af panelknap",
     hideIfRowsEmpty: "Skjul spørgsmålet, hvis der ikke er nogen rækker",
     hideColumnsIfEmpty: "Skjule kolonner, hvis der ikke er nogen rækker",
     rateValues: "Tilpassede satsværdier",
@@ -2076,11 +2076,11 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pe.panelsState: "Inner panel expand state" => "Udvid tilstand for indvendigt panel"
 // pe.templateDescription: "Description template" => "Beskrivelse skabelon"
 // pe.templateTitle: "Title template" => "Titel skabelon"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Forrige værktøjstip til panelknap"
-// pe.panelNextText: "Next Panel button tooltip" => "Værktøjstip til knappen Næste panel"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Forrige værktøjstip til panelknap"
+// pe.nextPanelText: "Next Panel button tooltip" => "Værktøjstip til knappen Næste panel"
 // pe.showRangeInProgress: "Show progress bar" => "Vis statuslinje"
 // pe.templateQuestionTitleLocation: "Question title location" => "Placering af spørgsmålets titel"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Fjern placering af panelknap"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Fjern placering af panelknap"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Skjul spørgsmålet, hvis der ikke er nogen rækker"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Skjule kolonner, hvis der ikke er nogen rækker"
 // pe.rateValues: "Custom rate values" => "Tilpassede satsværdier"

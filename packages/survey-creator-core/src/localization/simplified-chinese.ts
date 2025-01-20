@@ -646,8 +646,8 @@ var simplifiedChineseTranslation = {
     renderMode: "渲染模式",
     allowAddPanel: "允许添加面板",
     allowRemovePanel: "允许删除面板",
-    panelAddText: "添加面板文本",
-    panelRemoveText: "删除面板文本",
+    addPanelText: "添加面板文本",
+    removePanelText: "删除面板文本",
     isSinglePage: "在一个页面上展示所有元素",
     html: "Html",
     setValue: "答",
@@ -721,9 +721,9 @@ var simplifiedChineseTranslation = {
     minPanelCount: "最小面板数",
     maxPanelCount: "最大面板数",
     panelsState: "内面板展开状态",
-    panelPrevText: "“上一个面板”按钮工具提示",
-    panelNextText: "“下一个面板”按钮工具提示",
-    panelRemoveButtonLocation: "“删除面板”按钮位置",
+    prevPanelText: "“上一个面板”按钮工具提示",
+    nextPanelText: "“下一个面板”按钮工具提示",
+    removePanelButtonLocation: "“删除面板”按钮位置",
     hideIfRowsEmpty: "如果没有行，则隐藏问题",
     hideColumnsIfEmpty: "如果没有行，则隐藏列",
     rateValues: "自定义费率值",
@@ -2035,11 +2035,11 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pe.panelsState: "Inner panel expand state" => "内面板展开状态"
 // pe.templateDescription: "Description template" => "描述模板"
 // pe.templateTitle: "Title template" => "标题模板"
-// pe.panelPrevText: "Previous Panel button tooltip" => "“上一个面板”按钮工具提示"
-// pe.panelNextText: "Next Panel button tooltip" => "“下一个面板”按钮工具提示"
+// pe.prevPanelText: "Previous Panel button tooltip" => "“上一个面板”按钮工具提示"
+// pe.nextPanelText: "Next Panel button tooltip" => "“下一个面板”按钮工具提示"
 // pe.showRangeInProgress: "Show progress bar" => "显示进度条"
 // pe.templateQuestionTitleLocation: "Question title location" => "问题标题位置"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "“删除面板”按钮位置"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "“删除面板”按钮位置"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "如果没有行，则隐藏问题"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "如果没有行，则隐藏列"
 // pe.rateValues: "Custom rate values" => "自定义费率值"
