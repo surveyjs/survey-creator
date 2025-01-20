@@ -7,7 +7,6 @@ $primary-background-dark: var(--sjs-primary-backcolor-dark, rgb(20, 164, 139));
 $primary-foreground: var(--sjs-primary-forecolor, var(--primary-foreground, #fff));
 $primary-foreground-disabled: var(--sjs-primary-forecolor-light, var(--primary-foreground-disabled, rgba(#fff, 0.25)));
 
-$secondary: var(--sjs-secondary-backcolor, var(--secondary, #ff9814));
 $secondary-light: var(--sjs-secondary-backcolor-light, var(--secondary-light, rgba(255, 152, 20, 0.25)));
 $secondary-backcolor-semi-light: var(--sjs-secondary-backcolor-semi-light, rgba(255, 152, 20, 0.1));
 $secondary-forecolor: var(--sjs-secondary-forecolor, #fff);

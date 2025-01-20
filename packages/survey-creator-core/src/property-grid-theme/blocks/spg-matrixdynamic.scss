@@ -40,7 +40,7 @@
   content: "";
   width: 100%;
   height: calcSize(0.5);
-  background-color: $secondary;
+  background-color: var(--sjs-secondary-background-500, #19B394FF);
   position: absolute;
   left: 0;
 }

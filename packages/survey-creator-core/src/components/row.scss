@@ -78,7 +78,7 @@
 
 .svc-row__drop-indicator {
   position: absolute;
-  background: $secondary;
+  background: var(--sjs-secondary-background-500, #19B394FF);
   opacity: 0;
   transition: opacity $creator-transition-duration;
 }

@@ -442,7 +442,7 @@ svc-question {
 
   .svc-list__item:hover > .svc-list__item-body .sv-svg-icon use,
   .sv-svg-icon use {
-    fill: $secondary;
+    fill: var(--sjs-secondary-background-500, #19B394FF);
   }
 }
 
@@ -642,7 +642,7 @@ svc-question {
 
 .svc-question__drop-indicator {
   position: absolute;
-  background: $secondary;
+  background: var(--sjs-secondary-background-500, #19B394FF);
   opacity: 0;
   transition: opacity $creator-transition-duration;
 }

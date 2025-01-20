@@ -85,7 +85,7 @@
 }
 
 .sl-table__row.sl-table__row--additional .sl-table__cell .svc-action-button {
-  color: $secondary;
+  color: var(--sjs-secondary-background-500, #19B394FF);
 }
 .sl-table .svc-action-button {
   padding: var(--ctr-survey-page-header-padding-vertical-with-button, var(--sjs-spacing-x05)) 0px;

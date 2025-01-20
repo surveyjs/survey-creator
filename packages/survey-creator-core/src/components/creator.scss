@@ -190,7 +190,7 @@ survey-creator,
   top: calcSize(0.75);
   width: 100%;
   height: calcSize(0.5);
-  background: $secondary;
+  background: var(--sjs-secondary-background-500, #19B394FF);
   position: absolute;
 }
 
