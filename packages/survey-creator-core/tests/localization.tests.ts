@@ -20,6 +20,9 @@ test("Get property name from pe. based on class name", () => {
   const pe: any = defaultStrings.pe;
   pe.testProperty = "All";
   pe.testProperty2 = "All2";
+  const pe_survey = pe.survey;
+  const pe_question = pe.question;
+  const pe_text = pe.text;
   pe.survey = { testProperty: "Survey" };
   pe.question = { testProperty: "Question", testProperty2: "Question2", testProperty3: "Question3" };
   pe.text = { testProperty: "Text" };
@@ -42,6 +45,9 @@ test("Get property name from pe. based on class name", () => {
   expect(editorLocalization.getPropertyNameInEditor("text", "testProperty3")).toEqual("Question3");
 
   expect(editorLocalization.getPropertyNameInEditor("expression", "format")).toEqual("Formatted string");
+  pe.survey = pe_survey;
+  pe.question = pe_question;
+  pe.text = pe_text;
 });
 test("Get property description from peHelp. based on class name", () => {
   const peHelp: any = defaultStrings.pehelp;
@@ -129,7 +135,7 @@ test("change string to empty string", () => {
 test("getPropertyNameInEditor", () => {
   expect(editorLocalization.getPropertyNameInEditor("rating", "rateMin")).toEqual("Minimum rating value");
   expect(editorLocalization.getPropertyNameInEditor("question", "someGoodProperty")).toEqual("Some good property");
-  expect(editorLocalization.getPropertyNameInEditor("question", "title")).toEqual("Title");
+  expect(editorLocalization.getPropertyNameInEditor("question", "title")).toEqual("Question title");
 });
 
 test("getPropertyNameInEditor, go to p, if pe is emtpy", () => {
