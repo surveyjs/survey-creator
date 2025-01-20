@@ -327,7 +327,7 @@ var italianTranslation = {
       templateTabTitle: "Modello del titolo della tabulazione",
       tabTitlePlaceholder: "Segnaposto titolo tabulazione",
       templateVisibleIf: "Rendi visibile un singolo pannello se",
-      hideNumber: "Nascondere il numero del pannello",
+      showNumber: "Numerare il pannello",
       titleLocation: "Allineamento del titolo del pannello",
       descriptionLocation: "Allineamento della descrizione del pannello",
       templateQuestionTitleLocation: "Allineamento del titolo della domanda",
@@ -344,7 +344,7 @@ var italianTranslation = {
       requiredIf: "Rendi la domanda richiesta se",
       page: "Pagina principale",
       state: "Stato di compressione della casella delle domande",
-      hideNumber: "Nascondi il numero della domanda",
+      showNumber: "Numera questa domanda",
       titleLocation: "Allineamento del titolo della domanda",
       descriptionLocation: "Allineamento della descrizione della domanda",
       errorLocation: "Allineamento dei messaggi di errore",
@@ -789,6 +789,10 @@ var italianTranslation = {
       top: "In alto",
       bottom: "In basso"
     },
+    previewMode: "Modalità anteprima",
+    gridLayoutEnabled: "Abilita il layout della griglia",
+    maskSettings: "Impostazioni maschera",
+    detailErrorLocation: "Allineamento del messaggio di errore di espansione delle righe",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ var italianTranslation = {
     rowTitleWidth: "Accetta valori CSS (px, %, in, pt, ecc.).",
     totalText: "Visibile solo quando almeno una colonna ha il tipo Totale o l'espressione Totale.",
     cellErrorLocation: "Imposta la posizione di un messaggio di errore in relazione a una cella con input non valido. L'opzione \"Eredita\" applica l'impostazione della proprietà \"Allineamento messaggi di errore\".",
+    detailErrorLocation: "Imposta la posizione dei messaggi di errore per le domande nidificate nelle sezioni di dettaglio. L'opzione \"Eredita\" applica l'impostazione della proprietà \"Allineamento messaggio di errore\".",
     keyDuplicationError: "Quando la proprietà \"Impedisci risposte duplicate\" è abilitata, un rispondente che tenta di inviare una voce duplicata riceverà il seguente messaggio di errore.",
     totalExpression: "Consente di calcolare i valori totali in base a un'espressione. L'espressione può includere calcoli di base ('{q1_id} + {q2_id}'), espressioni booleane ('{age} > 60') e funzioni ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', ecc.).",
     confirmDelete: "Attiva un prompt che chiede di confermare l'eliminazione della riga.",
@@ -2753,3 +2758,10 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Imposta la posizione della barra di avanzamento. Il valore \"Auto\" visualizza la barra di avanzamento sopra o sotto l'intestazione del rilevamento."
 // survey.readOnly: "Make the survey read-only" => "Rendere l'indagine di sola lettura"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Seleziona se vuoi impedire ai rispondenti di compilare la tua indagine."
+// paneldynamic.showNumber: "Number the panel" => "Numerare il pannello"
+// question.showNumber: "Number this question" => "Numera questa domanda"
+// pe.previewMode: "Preview mode" => "Modalità anteprima"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Abilita il layout della griglia"
+// pe.maskSettings: "Mask settings" => "Impostazioni maschera"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Allineamento del messaggio di errore di espansione delle righe"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Imposta la posizione dei messaggi di errore per le domande nidificate nelle sezioni di dettaglio. L'opzione \"Eredita\" applica l'impostazione della proprietà \"Allineamento messaggio di errore\"."

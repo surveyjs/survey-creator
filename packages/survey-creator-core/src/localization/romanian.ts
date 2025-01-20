@@ -327,7 +327,7 @@ export const roStrings = {
       templateTabTitle: "Model de titlu a filei",
       tabTitlePlaceholder: "Locaș pentru titlul filei",
       templateVisibleIf: "Fă un panou individual vizibil dacă",
-      hideNumber: "Ascunde numărul panoului",
+      showNumber: "Numerotați panoul",
       titleLocation: "Alinierea titlului panoului",
       descriptionLocation: "Alinierea descrierii panoului",
       templateQuestionTitleLocation: "Alinierea titlului întrebării",
@@ -344,7 +344,7 @@ export const roStrings = {
       requiredIf: "Fă întrebarea obligatorie dacă",
       page: "Mută întrebarea la pagina",
       state: "Starea de colaps a casetei întrebării",
-      hideNumber: "Ascunde numărul întrebării",
+      showNumber: "Numerotați această întrebare",
       titleLocation: "Alinierea titlului întrebării",
       descriptionLocation: "Alinierea descrierii întrebării",
       errorLocation: "Alinierea mesajului de eroare",
@@ -789,6 +789,10 @@ export const roStrings = {
       top: "Deasupra",
       bottom: "Dedesubt"
     },
+    previewMode: "Modul de previzualizare",
+    gridLayoutEnabled: "Activarea aspectului grilei",
+    maskSettings: "Setările măștii",
+    detailErrorLocation: "Alinierea mesajelor de eroare de extindere a rândurilor",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export const roStrings = {
     rowTitleWidth: "Acceptă valori CSS (px, %, in, pt etc.).",
     totalText: "Vizibil numai dacă cel puțin o coloană afișează valorile totale setate cu „Metoda de agregare” sau „Expresia valorii totale”.",
     cellErrorLocation: "Setează locația unui mesaj de eroare în raport cu o celulă cu intrare invalidă. Opțiunea „Moștenește” aplică setarea din proprietatea „Alinierea mesajului de eroare”.",
+    detailErrorLocation: "Setează locația mesajelor de eroare pentru întrebările imbricate în secțiunile de detaliu. Opțiunea \"Moștenire\" aplică setarea din proprietatea \"Alinierea mesajului de eroare\".",
     keyDuplicationError: "Când proprietatea „Împiedică răspunsurile duplicate” este activată, un respondent care încearcă să trimită o intrare duplicat va primi următorul mesaj de eroare.",
     totalExpression: "Vă permite să calculați valorile totale pe baza unei expresii. Expresia poate include calcule de bază (`{q1_id} + {q2_id}`), expresii booleene (`{age} > 60`) și funcții (`iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
     confirmDelete: "Declanșează un prompt care solicită confirmarea ștergerii rândului.",
@@ -1932,3 +1937,10 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Setează locația barei de progres. Valoarea \"Auto\" afișează bara de progres deasupra sau dedesubtul antetului sondajului."
 // survey.readOnly: "Make the survey read-only" => "Faceți chestionarul doar în citire"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Selectați dacă doriți să împiedicați respondenții să completeze chestionarul."
+// paneldynamic.showNumber: "Number the panel" => "Numerotați panoul"
+// question.showNumber: "Number this question" => "Numerotați această întrebare"
+// pe.previewMode: "Preview mode" => "Modul de previzualizare"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Activarea aspectului grilei"
+// pe.maskSettings: "Mask settings" => "Setările măștii"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Alinierea mesajelor de eroare de extindere a rândurilor"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Setează locația mesajelor de eroare pentru întrebările imbricate în secțiunile de detaliu. Opțiunea \"Moștenire\" aplică setarea din proprietatea \"Alinierea mesajului de eroare\"."

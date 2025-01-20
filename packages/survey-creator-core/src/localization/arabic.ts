@@ -327,7 +327,7 @@ export var arStrings = {
       templateTabTitle: "نمط عنوان علامة التبويب",
       tabTitlePlaceholder: "العنصر النائب لعنوان علامة التبويب",
       templateVisibleIf: "اجعل لوحة فردية مرئية إذا",
-      hideNumber: "إخفاء رقم اللوحة",
+      showNumber: "ترقيم اللوحة",
       titleLocation: "محاذاة عنوان اللوحة",
       descriptionLocation: "محاذاة وصف اللوحة",
       templateQuestionTitleLocation: "محاذاة عنوان السؤال",
@@ -344,7 +344,7 @@ export var arStrings = {
       requiredIf: "اجعل السؤال مطلوبا إذا",
       page: "الصفحة الرئيسية",
       state: "حالة طي مربع الأسئلة",
-      hideNumber: "إخفاء رقم السؤال",
+      showNumber: "رقم هذا السؤال",
       titleLocation: "محاذاة عنوان السؤال",
       descriptionLocation: "محاذاة وصف السؤال",
       errorLocation: "محاذاة رسالة الخطأ",
@@ -789,6 +789,10 @@ export var arStrings = {
       top: "في الأعلى",
       bottom: "في الأسفل"
     },
+    previewMode: "وضع المعاينة",
+    gridLayoutEnabled: "تمكين تخطيط الشبكة",
+    maskSettings: "إعدادات القناع",
+    detailErrorLocation: "محاذاة رسالة خطأ توسيع الصف",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var arStrings = {
     rowTitleWidth: "يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
     totalText: "تكون مرئية فقط عندما يحتوي عمود واحد على الأقل على نوع الإجمالي أو تعبير الإجمالي.",
     cellErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بخلية ذات إدخال غير صالح. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\".",
+    detailErrorLocation: "تعيين موقع رسائل الخطأ للأسئلة المتداخلة في أقسام التفاصيل. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\".",
     keyDuplicationError: "عند تمكين الخاصية \"منع الاستجابات المكررة\"، سيتلقى مستجيب يحاول إرسال إدخال مكرر رسالة الخطأ التالية.",
     totalExpression: "يسمح لك بحساب القيم الإجمالية استنادا إلى تعبير. يمكن أن يتضمن التعبير العمليات الحسابية الأساسية ('{q1_id} + {q2_id}') والتعبيرات المنطقية ('{age} > 60') والوظائف ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', إلخ).",
     confirmDelete: "يؤدي إلى تشغيل مطالبة تطلب تأكيد حذف الصف.",
@@ -2906,3 +2911,10 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
 // survey.readOnly: "Make the survey read-only" => "جعل الاستطلاع للقراءة فقط"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "حدد ما إذا كنت تريد منع المستجيبين من ملء الاستطلاع الخاص بك."
+// paneldynamic.showNumber: "Number the panel" => "ترقيم اللوحة"
+// question.showNumber: "Number this question" => "رقم هذا السؤال"
+// pe.previewMode: "Preview mode" => "وضع المعاينة"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "تمكين تخطيط الشبكة"
+// pe.maskSettings: "Mask settings" => "إعدادات القناع"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "محاذاة رسالة خطأ توسيع الصف"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "تعيين موقع رسائل الخطأ للأسئلة المتداخلة في أقسام التفاصيل. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\"."

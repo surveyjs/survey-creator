@@ -327,7 +327,7 @@ export var danishStrings = {
       templateTabTitle: "Fanetitel mønster",
       tabTitlePlaceholder: "Pladsholder til fanetitel",
       templateVisibleIf: "Gør et individuelt panel synligt, hvis",
-      hideNumber: "Skjul panelnummeret",
+      showNumber: "Nummerer panelet",
       titleLocation: "Justering af paneltitel",
       descriptionLocation: "Justering af panelbeskrivelse",
       templateQuestionTitleLocation: "Tilpasning af spørgsmålets titel",
@@ -344,7 +344,7 @@ export var danishStrings = {
       requiredIf: "Foretag spørgsmålet påkrævet, hvis",
       page: "Overordnet side",
       state: "Tilstand for sammenbrud af spørgsmålsfelt",
-      hideNumber: "Skjul spørgsmålsnummeret",
+      showNumber: "Nummerer dette spørgsmål",
       titleLocation: "Tilpasning af spørgsmålets titel",
       descriptionLocation: "Tilpasning af spørgsmålsbeskrivelse",
       errorLocation: "Justering af fejlmeddelelse",
@@ -789,6 +789,10 @@ export var danishStrings = {
       top: "På toppen",
       bottom: "I bunden"
     },
+    previewMode: "Forhåndsvisning tilstand",
+    gridLayoutEnabled: "Aktivere gitterlayoutet",
+    maskSettings: "Indstillinger for maske",
+    detailErrorLocation: "Justering af fejlmeddelelse om rækkeudvidelse",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var danishStrings = {
     rowTitleWidth: "Accepterer CSS-værdier (px, %, in, pt osv.).",
     totalText: "Kun synlig, når mindst én kolonne har typen Total eller Totaludtryk.",
     cellErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til en celle med ugyldigt input. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelse\".",
+    detailErrorLocation: "Angiver placeringen af fejlmeddelelser for spørgsmål, der er indlejret i detaljerede afsnit. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelser\".",
     keyDuplicationError: "Når egenskaben \"Undgå dublerede svar\" er aktiveret, modtager en svarperson, der forsøger at sende en dubletpost, følgende fejlmeddelelse.",
     totalExpression: "Giver dig mulighed for at beregne samlede værdier baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger ('{q1_id} + {q2_id}'), booleske udtryk ('{alder} > 60') og funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv.).",
     confirmDelete: "Udløser en prompt, der beder om at bekræfte sletningen af rækken.",
@@ -3176,3 +3181,10 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Angiver placeringen af statuslinjen. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
 // survey.readOnly: "Make the survey read-only" => "Gør undersøgelsen skrivebeskyttet"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Vælg, hvis du vil forhindre respondenter i at udfylde din undersøgelse."
+// paneldynamic.showNumber: "Number the panel" => "Nummerer panelet"
+// question.showNumber: "Number this question" => "Nummerer dette spørgsmål"
+// pe.previewMode: "Preview mode" => "Forhåndsvisning tilstand"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Aktivere gitterlayoutet"
+// pe.maskSettings: "Mask settings" => "Indstillinger for maske"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Justering af fejlmeddelelse om rækkeudvidelse"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angiver placeringen af fejlmeddelelser for spørgsmål, der er indlejret i detaljerede afsnit. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelser\"."

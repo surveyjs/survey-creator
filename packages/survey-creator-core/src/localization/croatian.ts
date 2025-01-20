@@ -327,7 +327,7 @@ export var hrStrings = {
       templateTabTitle: "Uzorak naslova kartice",
       tabTitlePlaceholder: "Rezervirano mjesto naslova tabulatora",
       templateVisibleIf: "Učinite pojedinačnu ploču vidljivom ako",
-      hideNumber: "Skrivanje broja ploče",
+      showNumber: "Numerirajte ploču",
       titleLocation: "Poravnanje naslova ploče",
       descriptionLocation: "Poravnanje opisa ploče",
       templateQuestionTitleLocation: "Poravnanje naslova pitanja",
@@ -344,7 +344,7 @@ export var hrStrings = {
       requiredIf: "Neka pitanje bude potrebno ako:",
       page: "Nadređena stranica",
       state: "Stanje sažimanja okvira pitanja",
-      hideNumber: "Skrivanje broja pitanja",
+      showNumber: "Brojite ovo pitanje",
       titleLocation: "Poravnanje naslova pitanja",
       descriptionLocation: "Poravnanje opisa pitanja",
       errorLocation: "Poravnanje poruke o pogrešci",
@@ -789,6 +789,10 @@ export var hrStrings = {
       top: "Na vrhu",
       bottom: "Na dnu"
     },
+    previewMode: "Način pregleda",
+    gridLayoutEnabled: "Omogućivanje izgleda rešetke",
+    maskSettings: "Postavke maske",
+    detailErrorLocation: "Poravnanje poruke o pogrešci proširenja retka",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var hrStrings = {
     rowTitleWidth: "Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
     totalText: "Vidljivo samo ako barem jedan stupac ima izraz Vrsta zbroja ili Ukupno.",
     cellErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na ćeliju s unosom koji nije valjan. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\".",
+    detailErrorLocation: "Postavlja mjesto poruka o pogreškama za pitanja ugniježđena u detaljnim odjeljcima. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\".",
     keyDuplicationError: "Kada je omogućeno svojstvo \"Spriječi duplicirane odgovore\", ispitanik koji pokuša poslati duplikat unosa primit će sljedeću poruku o pogrešci.",
     totalExpression: "Omogućuje izračunavanje ukupnih vrijednosti na temelju izraza. Izraz može uključivati osnovne izračune ('{q1_id} + {q2_id}'), Booleove izraze ('{age} > 60') i funkcije ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd.).",
     confirmDelete: "Pokreće upit u kojem se traži potvrda brisanja retka.",
@@ -2986,3 +2991,10 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Postavlja lokaciju trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja ankete."
 // survey.readOnly: "Make the survey read-only" => "Neka anketa bude samo za čitanje"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Odaberite želite li ispitanicima onemogućiti ispunjavanje upitnika."
+// paneldynamic.showNumber: "Number the panel" => "Numerirajte ploču"
+// question.showNumber: "Number this question" => "Brojite ovo pitanje"
+// pe.previewMode: "Preview mode" => "Način pregleda"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Omogućivanje izgleda rešetke"
+// pe.maskSettings: "Mask settings" => "Postavke maske"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Poravnanje poruke o pogrešci proširenja retka"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Postavlja mjesto poruka o pogreškama za pitanja ugniježđena u detaljnim odjeljcima. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\"."

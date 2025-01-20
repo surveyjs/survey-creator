@@ -327,7 +327,7 @@ var simplifiedChineseTranslation = {
       templateTabTitle: "选项卡标题模式",
       tabTitlePlaceholder: "选项卡标题占位符",
       templateVisibleIf: "如果出现以下情况，则使单个面板可见",
-      hideNumber: "隐藏面板编号",
+      showNumber: "为面板编号",
       titleLocation: "面板标题对齐方式",
       descriptionLocation: "面板描述对齐方式",
       templateQuestionTitleLocation: "问题标题对齐方式",
@@ -344,7 +344,7 @@ var simplifiedChineseTranslation = {
       requiredIf: "如果出现以下情况，则将问题设为必填项",
       page: "父页面",
       state: "问题框折叠状态",
-      hideNumber: "隐藏问题编号",
+      showNumber: "为这个问题编号",
       titleLocation: "问题标题对齐方式",
       descriptionLocation: "问题描述对齐方式",
       errorLocation: "错误消息对齐",
@@ -789,6 +789,10 @@ var simplifiedChineseTranslation = {
       top: "在顶部",
       bottom: "在底部"
     },
+    previewMode: "预览模式",
+    gridLayoutEnabled: "启用网格布局",
+    maskSettings: "蒙版设置",
+    detailErrorLocation: "行扩展错误消息对齐",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ var simplifiedChineseTranslation = {
     rowTitleWidth: "接受 CSS 值（px、%、in、pt 等）。",
     totalText: "仅当至少一列具有 Total 类型或 Total 表达式时才可见。",
     cellErrorLocation: "设置与输入无效的单元格相关的错误消息的位置。“继承”选项应用“错误消息对齐”属性中的设置。",
+    detailErrorLocation: "设置嵌套在详细信息部分中的问题的错误消息的位置。“Inherit” 选项应用“Error message alignment” 属性中的设置。",
     keyDuplicationError: "启用“防止重复响应”属性后，尝试提交重复条目的受访者将收到以下错误消息。",
     totalExpression: "允许您根据表达式计算总值。表达式可以包括基本计算 （'{q1_id} + {q2_id}'）、布尔表达式 （'{age} > 60'） 和函数 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
     confirmDelete: "触发提示，要求确认删除行。",
@@ -3133,3 +3138,10 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "设置进度条的位置。“自动”值在调查标题的上方或下方显示进度条。"
 // survey.readOnly: "Make the survey read-only" => "将调查设为只读"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "选择是否要阻止受访者填写您的调查。"
+// paneldynamic.showNumber: "Number the panel" => "为面板编号"
+// question.showNumber: "Number this question" => "为这个问题编号"
+// pe.previewMode: "Preview mode" => "预览模式"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "启用网格布局"
+// pe.maskSettings: "Mask settings" => "蒙版设置"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "行扩展错误消息对齐"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "设置嵌套在详细信息部分中的问题的错误消息的位置。“Inherit” 选项应用“Error message alignment” 属性中的设置。"

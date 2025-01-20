@@ -327,7 +327,7 @@ export let svStrings = {
       templateTabTitle: "Mönster för flikrubrik",
       tabTitlePlaceholder: "Platshållare för flikrubrik",
       templateVisibleIf: "Gör en enskild panel synlig om",
-      hideNumber: "Dölj panelnumret",
+      showNumber: "Numrera panelen",
       titleLocation: "Justering av panelrubrik",
       descriptionLocation: "Justering av panelbeskrivning",
       templateQuestionTitleLocation: "Justering av frågerubrik",
@@ -344,7 +344,7 @@ export let svStrings = {
       requiredIf: "Gör frågan obligatorisk om",
       page: "Överordnad sida",
       state: "Komprimeringstillstånd för frågeruta",
-      hideNumber: "Dölj frågans nummer",
+      showNumber: "Numrera den här frågan",
       titleLocation: "Justering av frågerubrik",
       descriptionLocation: "Justering av frågebeskrivning",
       errorLocation: "Justering av felmeddelande",
@@ -789,6 +789,10 @@ export let svStrings = {
       top: "På toppen",
       bottom: "I botten"
     },
+    previewMode: "Förhandsgranska läge",
+    gridLayoutEnabled: "Aktivera rutnätslayouten",
+    maskSettings: "Inställningar för mask",
+    detailErrorLocation: "Felmeddelande om radexpansion",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export let svStrings = {
     rowTitleWidth: "Accepterar CSS-värden (px, %, in, pt, etc.).",
     totalText: "Visas bara när minst en kolumn har Total type eller Total uttryck.",
     cellErrorLocation: "Anger platsen för ett felmeddelande i förhållande till en cell med ogiltiga indata. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\".",
+    detailErrorLocation: "Anger platsen för felmeddelanden för frågor som är kapslade i detaljavsnitt. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\".",
     keyDuplicationError: "När egenskapen \"Förhindra dubblettsvar\" är aktiverad kommer en svarande som försöker skicka in en dubblett att få följande felmeddelande.",
     totalExpression: "Gör att du kan beräkna totalvärden baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar ('{q1_id} + {q2_id}'), booleska uttryck ('{age} > 60') och funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     confirmDelete: "Utlöser en uppmaning där du uppmanas att bekräfta borttagningen av raden.",
@@ -3166,3 +3171,10 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Ställer in platsen för förloppsindikatorn. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
 // survey.readOnly: "Make the survey read-only" => "Gör undersökningen skrivskyddad"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Välj om du vill hindra respondenterna från att fylla i din undersökning."
+// paneldynamic.showNumber: "Number the panel" => "Numrera panelen"
+// question.showNumber: "Number this question" => "Numrera den här frågan"
+// pe.previewMode: "Preview mode" => "Förhandsgranska läge"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Aktivera rutnätslayouten"
+// pe.maskSettings: "Mask settings" => "Inställningar för mask"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Felmeddelande om radexpansion"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Anger platsen för felmeddelanden för frågor som är kapslade i detaljavsnitt. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\"."
