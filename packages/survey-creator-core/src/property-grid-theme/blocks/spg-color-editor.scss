@@ -15,9 +15,9 @@
 
 .svc-list__item-body {
   // display: flex;
-  // gap: var(--ctr-list-item-gap, calcSize(2));
-  // padding: var(--ctr-list-item-padding-top-with-icon, calcSize(1)) var(--ctr-list-item-padding-right, calcSize(8))
-  //   var(--ctr-list-item-padding-bottom-with-icon, calcSize(1)) var(--ctr-list-item-padding-left, calcSize(2));
+  // gap: var(--ctr-list-item-gap, var(--sjs-spacing-x2));
+  // padding: var(--ctr-list-item-padding-top-with-icon, var(--sjs-spacing-x150)) var(--ctr-list-item-padding-right, var(--sjs-spacing-x6))
+  //   var(--ctr-list-item-padding-bottom-with-icon, var(--sjs-spacing-x150)) var(--ctr-list-item-padding-left, var(--sjs-spacing-x2));
 
   .spg-color-editor__color-swatch {
     margin-left: 0;
@@ -29,17 +29,17 @@
   position: relative;
   flex-shrink: 0;
   flex-grow: 0;
-  border-radius: var(--ctr-list-item-color-swatch-corner-radius, 3px);
-  width: var(--ctr-list-item-color-swatch-width, calcSize(4));
-  height: var(--ctr-list-item-color-swatch-height, calcSize(3));
+  border-radius: var(--ctr-list-item-color-swatch-corner-radius, var(--sjs-corner-radius-x05));
+  width: var(--ctr-list-item-color-swatch-width, var(--sjs-font-size-x4));
+  height: var(--ctr-list-item-color-swatch-height, var(--sjs-font-size-x3));
   box-sizing: border-box;
-  border: 1px solid var(--ctr-list-item-color-swatch-border-color, $border-inside);
-  margin-left: var(--ctr-editor-color-swatch-margin-left, calcSize(1.5));
+  border: 1px solid var(--ctr-list-item-color-swatch-border-color, var(--sjs-border-25-overlay, #00000026));
+  margin-left: var(--ctr-editor-color-swatch-margin-left, var(--sjs-spacing-x150));
 
   .sv-svg-icon {
     position: absolute;
-    width: var(--ctr-editor-color-swatch-icon-width, calcSize(2));
-    height: var(--ctr-editor-color-swatch-icon-height, calcSize(2));
+    width: var(--ctr-editor-color-swatch-icon-width, var(--sjs-font-size-x2));
+    height: var(--ctr-editor-color-swatch-icon-height, var(--sjs-font-size-x2));
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -47,7 +47,7 @@
   }
 }
 .spg-question--disabled .spg-color-editor {
-  background-color: var(--ctr-editor-background-color-disabled, $background-dim);
+  background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
 }
 .spg-color-editor__color-swatch--disabled {
   .sv-svg-icon {
@@ -62,5 +62,5 @@
 }
 
 .spg-color-editor .spg-input__edit-button+* {
-  margin-inline-end: calc(0px - var(--ctr-editor-gap, 4px));
+  margin-inline-end: calc(0px - var(--ctr-editor-gap, var(--sjs-spacing-x05)));
 }

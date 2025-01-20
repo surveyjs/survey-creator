@@ -5,11 +5,11 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  border-radius: var(--ctr-editor-corner-radius);
+  border-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
 }
 
 .spg-question.spg-question--disabled {
-  background-color: var(--ctr-editor-background-color-disabled);
+  background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 .spg-question__header {
@@ -24,13 +24,13 @@
   @include ctrDefaultFont;
   width: 100%;
   margin: 0;
-  padding: var(--ctr-label-padding-top, calcSize(1)) var(--ctr-label-padding-right, 0px)
-    var(--ctr-label-padding-bottom, calcSize(1)) var(--ctr-label-padding-left, 0px);
-  color: var(--ctr-label-text-color, $foreground-light);
+  padding: var(--ctr-label-padding-top, var(--sjs-spacing-x1)) var(--ctr-label-padding-right, 0px)
+    var(--ctr-label-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-label-padding-left, 0px);
+  color: var(--ctr-label-text-color, var(--sjs-layer-1-foreground-50, #00000080));
   box-sizing: border-box;
 }
 .spg-question__title.sd-element__title--disabled {
-  color: var(--ctr-caption-with-actions-text-color-disabled, $foreground-dim);
+  color: var(--ctr-caption-with-actions-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
 }
 
 .spg-question__content {
@@ -63,44 +63,44 @@
 
 .spg-question__description {
   @include ctrSmallFont;
-  color: var(--ctr-caption-with-actions-description-text-color, $foreground-dim-light);
+  color: var(--ctr-caption-with-actions-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
   padding-bottom: calcSize(2);
   white-space: normal;
 }
 
 .spg-question--disabled .spg-question__description {
-  color: var(--ctr-caption-with-actions-description-text-color, $foreground-dim-light);
+  color: var(--ctr-caption-with-actions-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
 }
 
 .spg-row-narrow__question {
-  --thm-ctr-property-grid-form-gap: var(--ctr-property-grid-form-gap, #{calcSize(2)});
+  --thm-ctr-property-grid-form-gap: var(--ctr-property-grid-form-gap, var(--sjs-spacing-x2));
   margin-top: calc(-1 * var(--thm-ctr-property-grid-form-gap));
 }
 
 .spg-row--multiple {
   & > div > .spg-row-narrow__question {
-    --thm-ctr-editor-layout-gap: var(--ctr-editor-layout-gap, #{calcSize(1)});
+    --thm-ctr-editor-layout-gap: var(--ctr-editor-layout-gap, var(--sjs-spacing-x1));
     margin-top: calc(-1 * var(--thm-ctr-editor-layout-gap));
   }
 }
 
 .spg-question--location--left {
   flex-direction: row;
-  background: var(--ctr-editor-background-color, $background);
-  box-shadow: inset 0 0 0 var(--ctr-editor-border-width, 1px) var(--ctr-editor-border-color, $border-inside);
+  background: var(--ctr-editor-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
+  box-shadow: inset 0 0 0 var(--ctr-editor-border-width, var(--sjs-stroke-x1)) var(--ctr-editor-border-color, var(--sjs-border-10, #dcdcdcff));
   line-height: calcSize(6);
   vertical-align: middle;
   align-items: stretch;
-  border-radius: var(--ctr-editor-corner-radius, 0px);
+  border-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
 
 
   &:focus-within {
-    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-focused, 2px) var(--ctr-editor-border-color-focused, $primary);
+    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
   }
 }
 
 .spg-question--disabled.spg-question--location--left .spg-question__title {
-  color: var(--ctr-editor-content-text-color-disabled, $foreground-dim);
+  color: var(--ctr-editor-content-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
 }
 
 .spg-question__header--location--left {
@@ -110,17 +110,17 @@
   flex: 0 0;
   display: flex;
   align-items: center;
-  padding-inline-start: var(--ctr-editor-padding-left, 0);
+  padding-inline-start: var(--ctr-editor-padding-left, var(--sjs-spacing-x05));
 
   .spg-question__title {
     padding: 
-      var(--ctr-editor-label-padding-top, calcSize(1)) 
-      var(--ctr-editor-label-padding-right, calcSize(2)) 
-      var(--ctr-editor-label-padding-bottom, calcSize(1)) 
-      var(--ctr-editor-label-padding-left, calcSize(2));
+      var(--ctr-editor-label-padding-top, var(--sjs-spacing-x1)) 
+      var(--ctr-editor-label-padding-right, var(--sjs-spacing-x2)) 
+      var(--ctr-editor-label-padding-bottom, var(--sjs-spacing-x1)) 
+      var(--ctr-editor-label-padding-left, var(--sjs-spacing-x150));
     border-inline-end: 1px solid $border;
     display: inline-block;
-    color: var(--ctr-editor-label-color, $foreground-dim-light);
+    color: var(--ctr-editor-label-color, var(--sjs-layer-3-foreground-50, #00000080));
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -147,7 +147,7 @@
 
 .spg-row--multiple {
   display: flex;
-  gap: var(--ctr-editor-layout-gap, calcSize(1));
+  gap: var(--ctr-editor-layout-gap, var(--sjs-spacing-x1));
   flex-wrap: wrap;
 
   & > div {
@@ -163,12 +163,12 @@
 
 .spg-question__erbox {
   @include ctrDefaultFont;
-  padding: var(--ctr-error-message-padding-top, calcSize(1)) var(--ctr-error-message-padding-right, calcSize(1.5))
-    var(--ctr-error-message-padding-bottom, calcSize(1)) var(--ctr-error-message-padding-left, calcSize(1.5));
+  padding: var(--ctr-error-message-padding-top, var(--sjs-spacing-x1)) var(--ctr-error-message-padding-right, var(--sjs-spacing-x150))
+    var(--ctr-error-message-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-error-message-padding-left, var(--sjs-spacing-x150));
 
-  color: var(--ctr-error-message-text-color, $foreground);
-  background-color: var(--ctr-error-message-background-color, $red-light);
-  border-radius: var(--ctr-error-message-corner-radius, calcSize(0.5));
+  color: var(--ctr-error-message-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  background-color: var(--ctr-error-message-background-color, var(--sjs-semantic-red-background-10, #e50a3e1a));
+  border-radius: var(--ctr-error-message-corner-radius, var(--sjs-corner-radius-x05));
 }
 
 .spg-question__erbox,
@@ -176,22 +176,22 @@
 sv-question-error {
   & > div {
     display: flex;
-    gap: var(--ctr-error-message-gap, calcSize(1));
+    gap: var(--ctr-error-message-gap, var(--sjs-spacing-x1));
   }
 }
 
 .spg-question__erbox-icon {
-  width: var(--ctr-error-message-icon-width, calcSize(3));
-  height: var(--ctr-error-message-icon-height, calcSize(3));
+  width: var(--ctr-error-message-icon-width, var(--sjs-font-size-x3));
+  height: var(--ctr-error-message-icon-height, var(--sjs-font-size-x3));
   
   .sv-svg-icon {
     vertical-align: top;
-    width: var(--ctr-error-message-icon-width, calcSize(3));
-    height: var(--ctr-error-message-icon-height, calcSize(3));
+    width: var(--ctr-error-message-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-error-message-icon-height, var(--sjs-font-size-x3));
   }
 
   use {
-    fill: var(--ctr-error-message-icon-color, $red);
+    fill: var(--ctr-error-message-icon-color, var(--sjs-semantic-red-background-500, #e50a3eff));
   }
 }
 
@@ -215,14 +215,14 @@ sv-question-error {
   .spg-input-container,
   .spg-question--location--left,
   .spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
-    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-highlighed, 2px) var(--ctr-editor-border-color-highlighted, $secondary);
+    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 
   .spg-checkbox__control:focus + .spg-checkbox__rectangle,
   .spg-matrixdynamic__content.spg-text__content {
-    outline: var(--ctr-editor-border-width-highlighed, 2px) solid var(--ctr-editor-border-color-highlighted, $secondary);
-    outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, 2px));
-    border-radius: var(--ctr-data-table-corner-radius, 0px);
+    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)));
+    border-radius: var(--ctr-data-table-corner-radius, var(--sjs-corner-radius-x075));
 
     .spg-input {
       box-shadow: none;
@@ -230,20 +230,20 @@ sv-question-error {
   }
 
   .svc-action-button {
-    border: var(--ctr-actionbar-button-border-width-highlighed, 2px) solid var(--ctr-actionbar-button-border-color-highlighted, $secondary);
+    border: var(--ctr-actionbar-button-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-actionbar-button-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 
   .sv-button-group {
-    box-shadow: 0 0 0 1px var(--ctr-editor-border-color-highlighted, $secondary);
-    border-color: var(--ctr-editor-border-color-highlighted, $secondary);
+    box-shadow: 0 0 0 1px var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    border-color: var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 
   .spg-checkbox__control + .spg-checkbox__rectangle {
-    outline: var(--ctr-editor-border-width-highlighed, 2px) solid var(--ctr-editor-border-color-highlighted, $secondary);
-    outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, 2px));
+    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
+    outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)));
   }
 
   .spg-button-group::after {
-    box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, 2px) var(--ctr-editor-border-color-highlighted, $secondary);
+    box-shadow: inset 0 0 0 var(--ctr-button-group-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-editor-border-color-highlighted, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 }
