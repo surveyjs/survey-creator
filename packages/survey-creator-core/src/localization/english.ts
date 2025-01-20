@@ -329,7 +329,8 @@ export var enStrings = {
       templateTabTitle: "Tab title pattern",
       tabTitlePlaceholder: "Tab title placeholder",
       templateVisibleIf: "Make an individual panel visible if",
-      hideNumber: "Hide the panel number",
+      //hideNumber: "Hide the panel number",
+      showNumber: "Show the panel number",
       titleLocation: "Panel title alignment",
       descriptionLocation: "Panel description alignment",
       templateQuestionTitleLocation: "Question title alignment",
@@ -346,7 +347,8 @@ export var enStrings = {
       requiredIf: "Make the question required if",
       page: "Move the question to page",
       state: "Question box collapse state",
-      hideNumber: "Hide the question number",
+      //hideNumber: "Hide the question number",
+      showNumber: "Show the question number",
       titleLocation: "Question title alignment",
       descriptionLocation: "Question description alignment",
       errorLocation: "Error message alignment",
@@ -791,6 +793,10 @@ export var enStrings = {
       top: "On the top",
       bottom: "In the bottom"
     },
+    previewMode: "Preview mode",
+    gridLayoutEnabled: "Grid layout enabled",
+    maskSettings: "Mask settings",
+    detailErrorLocation: "Detail Error location",
     // Creator tabs
     tabs: {
       panel: {
