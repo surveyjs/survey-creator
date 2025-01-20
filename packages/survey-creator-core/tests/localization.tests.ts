@@ -1,8 +1,9 @@
 import { editorLocalization, defaultStrings } from "../src/editorLocalization";
 import { CreatorTester } from "./creator-tester";
-import { Action } from "survey-core";
+import { Action, Serializer } from "survey-core";
 export * from "../src/localization/italian";
 export * from "../src/localization/french";
+import { enStrings } from "../src/localization/english";
 
 test("Get nested property", () => {
   expect(editorLocalization.getString("qt.text")).toEqual("Single-Line Input");
@@ -315,4 +316,45 @@ test("Support preset locale strings", () => {
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
 
   editorLocalization.defaultLocale = "";
+});
+test("All properties should be in English translation", () => {
+  const classes = ["survey", "page", "panel", "matrixdropdown", "calculatedvalue", "choicesByUrl", "multipletextitem"];
+  const addClasses = (baseClassName: string): void => {
+    classes.push(baseClassName);
+    Serializer.getChildrenClasses(baseClassName, true).forEach((qType) => {
+      if (["linkvalue", "color"].indexOf(qType.name) < 0) {
+        classes.push(qType.name);
+      }
+    });
+  };
+  addClasses("question");
+  addClasses("expressionitem");
+  addClasses("itemvalue");
+  addClasses("trigger");
+  addClasses("surveyvalidator");
+  addClasses("masksettings");
+  const errors = new Array<any>();
+  const englishStrings = enStrings;
+  const checkPropertyDisplayName = (className: string, propertyName: string): void => {
+    if(!!englishStrings.p[propertyName]) return;
+    if(!!englishStrings.pe[propertyName]) return;
+    let cl: any = Serializer.findClass(className);
+    if(cl.parentName) {
+      if(!!cl.parentName && Serializer.findProperty(cl.parentName, propertyName)) return;
+    }
+    while(!!cl) {
+      const tClass = englishStrings.pe[cl.name];
+      if(tClass && !!tClass[propertyName]) return;
+      cl = !!cl.parentName ? Serializer.findClass(cl.parentName) : undefined;
+    }
+    errors.push({ className: className, propertyName: propertyName });
+  };
+  classes.forEach((className) => {
+    Serializer.getProperties(className).forEach((prop) => {
+      if(prop.visible !== false) {
+        checkPropertyDisplayName(className, prop.name);
+      }
+    });
+  });
+  expect(errors).toHaveLength(0);
 });
