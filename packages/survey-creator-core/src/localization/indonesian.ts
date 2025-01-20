@@ -646,8 +646,8 @@ export var indonesianStrings = {
     renderMode: "Mode render",
     allowAddPanel: "Bolehkan penambahan panel",
     allowRemovePanel: "Bolehkan penghapusan panel",
-    panelAddText: "Teks tambah panel",
-    panelRemoveText: "Teks hapus panel",
+    addPanelText: "Teks tambah panel",
+    removePanelText: "Teks hapus panel",
     isSinglePage: "Tampilkan seluruh elemen pada halaman",
     html: "Html",
     setValue: "Menjawab",
@@ -721,9 +721,9 @@ export var indonesianStrings = {
     minPanelCount: "Jumlah panel minimum",
     maxPanelCount: "Jumlah panel maksimum",
     panelsState: "Status perluasan panel dalam",
-    panelPrevText: "Tooltip tombol Panel sebelumnya",
-    panelNextText: "Tooltip tombol Panel Berikutnya",
-    panelRemoveButtonLocation: "Hapus lokasi tombol Panel",
+    prevPanelText: "Tooltip tombol Panel sebelumnya",
+    nextPanelText: "Tooltip tombol Panel Berikutnya",
+    removePanelButtonLocation: "Hapus lokasi tombol Panel",
     hideIfRowsEmpty: "Menyembunyikan pertanyaan jika tidak ada baris",
     hideColumnsIfEmpty: "Menyembunyikan kolom jika tidak ada baris",
     rateValues: "Nilai tarif kustom",
@@ -2050,11 +2050,11 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pe.panelsState: "Inner panel expand state" => "Status perluasan panel dalam"
 // pe.templateDescription: "Description template" => "Template deskripsi"
 // pe.templateTitle: "Title template" => "Templat judul"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Tooltip tombol Panel sebelumnya"
-// pe.panelNextText: "Next Panel button tooltip" => "Tooltip tombol Panel Berikutnya"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Tooltip tombol Panel sebelumnya"
+// pe.nextPanelText: "Next Panel button tooltip" => "Tooltip tombol Panel Berikutnya"
 // pe.showRangeInProgress: "Show progress bar" => "Perlihatkan bilah kemajuan"
 // pe.templateQuestionTitleLocation: "Question title location" => "Lokasi judul pertanyaan"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Hapus lokasi tombol Panel"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Hapus lokasi tombol Panel"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Menyembunyikan pertanyaan jika tidak ada baris"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Menyembunyikan kolom jika tidak ada baris"
 // pe.rateValues: "Custom rate values" => "Nilai tarif kustom"

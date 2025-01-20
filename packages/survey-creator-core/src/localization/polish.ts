@@ -646,8 +646,8 @@ var polishStrings = {
     renderMode: "Render mode",
     allowAddPanel: "Allow adding a panel",
     allowRemovePanel: "Allow removing the panel",
-    panelAddText: "Adding panel text",
-    panelRemoveText: "Removing panel text",
+    addPanelText: "Adding panel text",
+    removePanelText: "Removing panel text",
     isSinglePage: "Show all elements on one page",
     html: "Znaczniki HTML",
     setValue: "Odpowiedź",
@@ -721,9 +721,9 @@ var polishStrings = {
     minPanelCount: "Minimalna liczba paneli",
     maxPanelCount: "Maksymalna liczba paneli",
     panelsState: "Stan rozwinięcia panelu wewnętrznego",
-    panelPrevText: "Poprzednia etykietka przycisku panelu",
-    panelNextText: "Przycisk Następny panel — etykietka narzędzia",
-    panelRemoveButtonLocation: "Usuń położenie przycisku panelu",
+    prevPanelText: "Poprzednia etykietka przycisku panelu",
+    nextPanelText: "Przycisk Następny panel — etykietka narzędzia",
+    removePanelButtonLocation: "Usuń położenie przycisku panelu",
     hideIfRowsEmpty: "Ukryj pytanie, jeśli nie ma wierszy",
     hideColumnsIfEmpty: "Ukryj kolumny, jeśli nie ma wierszy",
     rateValues: "Niestandardowe wartości stawek",
@@ -2102,11 +2102,11 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pe.panelsState: "Inner panel expand state" => "Stan rozwinięcia panelu wewnętrznego"
 // pe.templateDescription: "Description template" => "Szablon opisu"
 // pe.templateTitle: "Title template" => "Szablon tytułu"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Poprzednia etykietka przycisku panelu"
-// pe.panelNextText: "Next Panel button tooltip" => "Przycisk Następny panel — etykietka narzędzia"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Poprzednia etykietka przycisku panelu"
+// pe.nextPanelText: "Next Panel button tooltip" => "Przycisk Następny panel — etykietka narzędzia"
 // pe.showRangeInProgress: "Show progress bar" => "Pokaż pasek postępu"
 // pe.templateQuestionTitleLocation: "Question title location" => "Lokalizacja tytułu pytania"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Usuń położenie przycisku panelu"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Usuń położenie przycisku panelu"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Ukryj pytanie, jeśli nie ma wierszy"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Ukryj kolumny, jeśli nie ma wierszy"
 // pe.rateValues: "Custom rate values" => "Niestandardowe wartości stawek"

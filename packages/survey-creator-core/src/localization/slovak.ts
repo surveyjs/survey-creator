@@ -646,8 +646,8 @@ export var skStrings = {
     renderMode: "Režim vykresľovania",
     allowAddPanel: "Povoliť pridanie panela",
     allowRemovePanel: "Povoliť odstránenie panela",
-    panelAddText: "Text pri pridaní panela",
-    panelRemoveText: "Text pri odstránení panela",
+    addPanelText: "Text pri pridaní panela",
+    removePanelText: "Text pri odstránení panela",
     isSinglePage: "Zobraziť všetky prvky na jednej stránke",
     html: "Html",
     setValue: "Odpoveď",
@@ -721,9 +721,9 @@ export var skStrings = {
     minPanelCount: "Minimálny počet panelov",
     maxPanelCount: "Maximálny počet panelov",
     panelsState: "Stav rozbalenia vnútorného panela",
-    panelPrevText: "Popis tlačidla Predchádzajúci panel",
-    panelNextText: "Popis tlačidla Nasledujúci panel",
-    panelRemoveButtonLocation: "Odstrániť umiestnenie tlačidla panela",
+    prevPanelText: "Popis tlačidla Predchádzajúci panel",
+    nextPanelText: "Popis tlačidla Nasledujúci panel",
+    removePanelButtonLocation: "Odstrániť umiestnenie tlačidla panela",
     hideIfRowsEmpty: "Skryť otázku, ak nie sú žiadne riadky",
     hideColumnsIfEmpty: "Skryť stĺpce, ak nie sú k dispozícii žiadne riadky",
     rateValues: "Vlastné hodnoty sadzieb",
@@ -1930,11 +1930,11 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pe.panelsState: "Inner panel expand state" => "Stav rozbalenia vnútorného panela"
 // pe.templateDescription: "Description template" => "Šablóna popisu"
 // pe.templateTitle: "Title template" => "Šablóna názvu"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Popis tlačidla Predchádzajúci panel"
-// pe.panelNextText: "Next Panel button tooltip" => "Popis tlačidla Nasledujúci panel"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Popis tlačidla Predchádzajúci panel"
+// pe.nextPanelText: "Next Panel button tooltip" => "Popis tlačidla Nasledujúci panel"
 // pe.showRangeInProgress: "Show progress bar" => "Zobraziť indikátor priebehu"
 // pe.templateQuestionTitleLocation: "Question title location" => "Otázka, názov, umiestnenie:"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Odstrániť umiestnenie tlačidla panela"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Odstrániť umiestnenie tlačidla panela"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Skryť otázku, ak nie sú žiadne riadky"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Skryť stĺpce, ak nie sú k dispozícii žiadne riadky"
 // pe.rateValues: "Custom rate values" => "Vlastné hodnoty sadzieb"

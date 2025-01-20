@@ -646,8 +646,8 @@ export var turkishStrings = {
     renderMode: "İşleme modu",
     allowAddPanel: "Panel eklemeye izin ver",
     allowRemovePanel: "Panel silmeye izin ver",
-    panelAddText: "Panel ekleme metni",
-    panelRemoveText: "Panel silme metni",
+    addPanelText: "Panel ekleme metni",
+    removePanelText: "Panel silme metni",
     isSinglePage: "Tüm öğeleri tek bir sayfada göster",
     html: "Html",
     setValue: "Cevap",
@@ -721,9 +721,9 @@ export var turkishStrings = {
     minPanelCount: "Minimum panel sayısı",
     maxPanelCount: "Maksimum panel sayısı",
     panelsState: "İç panel genişletme durumu",
-    panelPrevText: "Önceki Panel düğmesi araç ipucu",
-    panelNextText: "Sonraki Panel düğmesi araç ipucu",
-    panelRemoveButtonLocation: "Panel düğmesinin konumunu kaldır",
+    prevPanelText: "Önceki Panel düğmesi araç ipucu",
+    nextPanelText: "Sonraki Panel düğmesi araç ipucu",
+    removePanelButtonLocation: "Panel düğmesinin konumunu kaldır",
     hideIfRowsEmpty: "Satır yoksa soruyu gizleme",
     hideColumnsIfEmpty: "Satır yoksa sütunları gizleme",
     rateValues: "Özel fiyat değerleri",
@@ -1941,11 +1941,11 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.panelsState: "Inner panel expand state" => "İç panel genişletme durumu"
 // pe.templateDescription: "Description template" => "Açıklama şablonu"
 // pe.templateTitle: "Title template" => "Başlık şablonu"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Önceki Panel düğmesi araç ipucu"
-// pe.panelNextText: "Next Panel button tooltip" => "Sonraki Panel düğmesi araç ipucu"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Önceki Panel düğmesi araç ipucu"
+// pe.nextPanelText: "Next Panel button tooltip" => "Sonraki Panel düğmesi araç ipucu"
 // pe.showRangeInProgress: "Show progress bar" => "İlerleme çubuğunu göster"
 // pe.templateQuestionTitleLocation: "Question title location" => "Soru başlığı konumu"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Panel düğmesinin konumunu kaldır"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Panel düğmesinin konumunu kaldır"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Satır yoksa soruyu gizleme"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Satır yoksa sütunları gizleme"
 // pe.rateValues: "Custom rate values" => "Özel fiyat değerleri"

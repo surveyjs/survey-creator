@@ -613,7 +613,7 @@ export const largeSurvey = {
                 }
               ],
               "panelCount": 1,
-              "panelAddText": "Add marriage"
+              "addPanelText": "Add marriage"
             },
             {
               "type": "panel",
@@ -832,7 +832,7 @@ export const largeSurvey = {
             }
           ],
           "panelCount": 1,
-          "panelAddText": "Add Family Member"
+          "addPanelText": "Add Family Member"
         },
         {
           "type": "comment",
