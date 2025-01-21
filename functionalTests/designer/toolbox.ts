@@ -373,7 +373,6 @@ test("toolbox subTypes: add items by drag-n-drop", async (t) => {
     .expect(toolboxSubTypesPopup.visible).notOk();
 
   const expectedJson = {
-    "logoPosition": "right",
     "pages": [
       {
         "name": "page1",
@@ -418,7 +417,6 @@ test("toolbox subTypes: add items by click", async (t) => {
     .expect(toolboxSubTypesPopup.visible).ok();
 
   const expectedJson = {
-    "logoPosition": "right",
     "pages": [
       {
         "name": "page1",

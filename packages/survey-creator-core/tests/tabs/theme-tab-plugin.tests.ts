@@ -336,7 +336,7 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(creator.hasPendingThemeChanges).toBeFalsy();
   expect(themePlugin.isModified).toBeTruthy();
 
-  themeModel.header["headerView"] = "advanced";
+  themeModel.header["headerView"] = "basic";
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(5);
@@ -880,33 +880,33 @@ test("Theme undo redo header settings", (): any => {
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   const inheritWidthFromQuestion = headerViewContainer.getElementByName("inheritWidthFrom");
 
-  expect(header.inheritWidthFrom).toBe("container");
-  expect(themeModel.undoRedoManager.canUndo()).toBe(false);
-  expect(themeModel.undoRedoManager.canRedo()).toBe(false);
-  expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(inheritWidthFromQuestion.value).toBe("container");
-
-  inheritWidthFromQuestion.value = "survey";
-
   expect(header.inheritWidthFrom).toBe("survey");
-  expect(themeModel.undoRedoManager.canUndo()).toBe(true);
+  expect(themeModel.undoRedoManager.canUndo()).toBe(false);
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
   expect(inheritWidthFromQuestion.value).toBe("survey");
 
-  themePlugin.undo();
+  inheritWidthFromQuestion.value = "container";
+
   expect(header.inheritWidthFrom).toBe("container");
+  expect(themeModel.undoRedoManager.canUndo()).toBe(true);
+  expect(themeModel.undoRedoManager.canRedo()).toBe(false);
+  expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
+  expect(inheritWidthFromQuestion.value).toBe("container");
+
+  themePlugin.undo();
+  expect(header.inheritWidthFrom).toBe("survey");
   expect(themeModel.undoRedoManager.canUndo()).toBe(false);
   expect(themeModel.undoRedoManager.canRedo()).toBe(true);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(inheritWidthFromQuestion.value).toBe("container");
+  expect(inheritWidthFromQuestion.value).toBe("survey");
 
   themePlugin.redo();
-  expect(header.inheritWidthFrom).toBe("survey");
+  expect(header.inheritWidthFrom).toBe("container");
   expect(themeModel.undoRedoManager.canUndo()).toBe(true);
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(inheritWidthFromQuestion.value).toBe("survey");
+  expect(inheritWidthFromQuestion.value).toBe("container");
 });
 test("Set header settings properties, binding with a property grid", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
@@ -919,13 +919,13 @@ test("Set header settings properties, binding with a property grid", (): any => 
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   const inheritWidthFromQuestion = headerViewContainer.getElementByName("inheritWidthFrom");
 
-  expect(header.inheritWidthFrom).toBe("container");
-  expect(inheritWidthFromQuestion.value).toBe("container");
-
-  header.inheritWidthFrom = "survey";
-
   expect(header.inheritWidthFrom).toBe("survey");
   expect(inheritWidthFromQuestion.value).toBe("survey");
+
+  header.inheritWidthFrom = "container";
+
+  expect(header.inheritWidthFrom).toBe("container");
+  expect(inheritWidthFromQuestion.value).toBe("container");
 });
 
 test("Theme builder: trigger responsiveness", (): any => {

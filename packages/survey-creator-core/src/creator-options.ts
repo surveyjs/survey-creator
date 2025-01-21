@@ -61,8 +61,7 @@ export interface ICreatorOptions {
    */
   autoSaveEnabled?: boolean;
   /**
-   * Obsolete. Use the [`autoSaveEnabled`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#autoSaveEnabled) property instead.
-   * @deprecated
+   * @deprecated Use the [`autoSaveEnabled`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#autoSaveEnabled) property instead.
    */
   isAutoSave?: boolean;
   /**
@@ -78,8 +77,7 @@ export interface ICreatorOptions {
    */
   showSurveyHeader?: boolean;
   /**
-   * Obsolete. Use the [`showSurveyHeader`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showSurveyHeader) property instead.
-   * @deprecated
+   * @deprecated Use the [`showSurveyHeader`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showSurveyHeader) property instead.
    */
   showSurveyTitle?: boolean;
   /**
@@ -93,8 +91,7 @@ export interface ICreatorOptions {
    */
   logicAllowTextEditExpressions?: boolean;
   /**
-   * Obsolete. Use the[`logicAllowTextEditExpressions`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicAllowTextEditExpressions) property instead.
-   * @deprecated
+   * @deprecated Use the[`logicAllowTextEditExpressions`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicAllowTextEditExpressions) property instead.
    */
   allowEditExpressionsInTextEditor?: boolean;
   /**
@@ -124,8 +121,7 @@ export interface ICreatorOptions {
    */
   previewAllowSelectPage?: boolean;
   /**
-   * Obsolete. Use the [`previewAllowSelectPage`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectPage) property instead.
-   * @deprecated
+   * @deprecated Use the [`previewAllowSelectPage`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectPage) property instead.
    */
   showPagesInPreviewTab?: boolean;
   /**
@@ -137,8 +133,7 @@ export interface ICreatorOptions {
    */
   previewTheme?: string;
   /**
-   * Obsolete. Use the [`previewTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewTheme) property instead.
-   * @deprecated
+   * @deprecated Use the [`previewTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewTheme) property instead.
    */
   themeForPreview?: string;
   /**
@@ -148,8 +143,7 @@ export interface ICreatorOptions {
    */
   previewAllowSimulateDevices?: boolean;
   /**
-   * Obsolete. Use the [`previewAllowSimulateDevices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSimulateDevices) property instead.
-   * @deprecated
+   * @deprecated Use the [`previewAllowSimulateDevices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSimulateDevices) property instead.
    */
   showSimulatorInPreviewTab?: boolean;
   /**
@@ -173,8 +167,7 @@ export interface ICreatorOptions {
    */
   previewAllowSelectLanguage?: boolean | string;
   /**
-   * Obsolete. Use the [`previewAllowSelectLanguage`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectLanguage) property instead.
-   * @deprecated
+   * @deprecated Use the [`previewAllowSelectLanguage`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectLanguage) property instead.
    */
   showDefaultLanguageInPreviewTab?: boolean | string;
   /**
@@ -184,18 +177,15 @@ export interface ICreatorOptions {
    */
   previewAllowHiddenElements?: boolean;
   /**
-   * Obsolete. Use the [`previewAllowHiddenElements`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowHiddenElements) property instead.
-   * @deprecated
+   * @deprecated Use the [`previewAllowHiddenElements`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowHiddenElements) property instead.
    */
   showInvisibleElementsInPreviewTab?: boolean;
   /**
-   * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#useElementTitles) property instead.
-   * @deprecated
+   * @deprecated Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#useElementTitles) property instead.
    */
   showObjectTitles?: boolean;
   /**
-   * Obsolete. Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#useElementTitles) property instead.
-   * @deprecated
+   * @deprecated Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#useElementTitles) property instead.
    */
   showTitlesInExpressions?: boolean;
   /**
@@ -255,28 +245,23 @@ export interface ICreatorOptions {
    */
   maxRateValues?: number;
   /**
-   * Obsolete. Use the [`maxColumns`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxColumns) property instead.
-   * @deprecated
+   * @deprecated Use the [`maxColumns`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxColumns) property instead.
    */
   maximumColumnsCount?: number;
   /**
-   * Obsolete. Use the [`minChoices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#minChoices) property instead.
-   * @deprecated
+   * @deprecated Use the [`minChoices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#minChoices) property instead.
    */
   minimumChoicesCount?: number;
   /**
-   * Obsolete. Use the [`maxChoices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxChoices) property instead.
-   * @deprecated
+   * @deprecated Use the [`maxChoices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxChoices) property instead.
    */
   maximumChoicesCount?: number;
   /**
-   * Obsolete. Use the [`maxRows`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxRows) property instead.
-   * @deprecated
+   * @deprecated Use the [`maxRows`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxRows) property instead.
    */
   maximumRowsCount?: number;
   /**
-   * Obsolete. Use the [`maxRateValues`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxRateValues) property instead.
-   * @deprecated
+   * @deprecated Use the [`maxRateValues`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxRateValues) property instead.
    */
   maximumRateValues?: number;
 
@@ -287,8 +272,7 @@ export interface ICreatorOptions {
    */
   logicMaxItemsInCondition?: number;
   /**
-   * Obsolete. Use the [`logicMaxItemsInCondition`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicMaxItemsInCondition) property instead.
-   * @deprecated
+   * @deprecated Use the [`logicMaxItemsInCondition`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicMaxItemsInCondition) property instead.
    */
   maxLogicItemsInCondition?: number;
 
@@ -307,8 +291,7 @@ export interface ICreatorOptions {
    */
   previewAllowSelectTheme?: boolean;
   /**
-   * Obsolete. Use the [`previewAllowSelectTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectTheme) property instead.
-   * @deprecated
+   * @deprecated Use the [`previewAllowSelectTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectTheme) property instead.
    */
   allowChangeThemeInPreview?: boolean;
   /**

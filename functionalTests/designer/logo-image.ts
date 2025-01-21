@@ -21,7 +21,7 @@ test("Set logo in property grid and remove it in designer", async (t) => {
 });
 
 test("Set logo in designer, change it and check it in test tab", async (t) => {
-  await setJSON({ pages: [{ name: "page1" }] });
+  await setJSON({ pages: [{ name: "page1", "elements": [{ "type": "text", "name": "question1" }] }] });
   await t
     .setFilesToUpload(Selector(".svc-logo-image input[type=file]"), "./image.jpg")
     .click(Selector(".svc-logo-image-placeholder svg"));
