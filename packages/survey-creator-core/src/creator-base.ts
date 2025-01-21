@@ -2177,7 +2177,7 @@ export class SurveyCreatorModel extends Base
       reason: reason,
       collapsed: defaultValue
     };
-    this.onElementGetExpandCollapseState.fire(this, options);
+    if (reason) this.onElementGetExpandCollapseState.fire(this, options);
     return options.collapsed;
   }
 
@@ -4155,6 +4155,31 @@ export class SurveyCreatorModel extends Base
    * @see onElementGetExpandCollapseState
    */
   @property({ defaultValue: "onhover" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+
+  /**
+   * 
+   */
+  public collapseAll() {
+    this.expandCollapseManager.expandCollapseElements(null, true);
+  }
+  /**
+   * 
+   */
+  public expandAll() {
+    this.expandCollapseManager.expandCollapseElements(null, false);
+  }
+  /**
+   * 
+   */
+  public collapseElement(element: SurveyElement) {
+    SurveyElementAdornerBase.GetAdorner(element).collapsed = true;
+  }
+  /**
+   * 
+   */
+  public expandElement(element: SurveyElement) {
+    SurveyElementAdornerBase.GetAdorner(element).collapsed = false;
+  }
 
   collapsePages = false;
   collapsePanels = false;
