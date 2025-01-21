@@ -7,11 +7,11 @@ resources:
   repositories:
     - repository: Service
       type: github
-      endpoint: dmitrykurmanov:admin
+      endpoint: github.com_surveyjsdeveloper
       name: surveyjs/service
     - repository: EmptyRepo
       type: github
-      endpoint: dmitrykurmanov:admin
+      endpoint: github.com_surveyjsdeveloper
       name: surveyjs/azure-pipelines-repo-dont-remove-please
 
 trigger:
@@ -57,8 +57,8 @@ jobs:
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'
-          git config --global user.email "kurmanov.work@gmail.com"
-          git config --global user.name "dmitrykurmanov"
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
         displayName: "Set up git config"
 
       - task: DownloadBuildArtifacts@0
@@ -258,8 +258,8 @@ jobs:
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'
-          git config --global user.email "kurmanov.work@gmail.com"
-          git config --global user.name "dmitrykurmanov"
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
         displayName: "Set up git config"
 
       - task: DownloadBuildArtifacts@0
@@ -451,8 +451,8 @@ jobs:
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'
-          git config --global user.email "kurmanov.work@gmail.com"
-          git config --global user.name "dmitrykurmanov"
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
         displayName: "Set up git config"
 
       - task: DownloadBuildArtifacts@0
@@ -593,8 +593,8 @@ jobs:
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'
-          git config --global user.email "kurmanov.work@gmail.com"
-          git config --global user.name "dmitrykurmanov"
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
         displayName: "Set up git config"
 
       - task: DownloadBuildArtifacts@0
@@ -749,8 +749,8 @@ jobs:
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'
-          git config --global user.email "kurmanov.work@gmail.com"
-          git config --global user.name "dmitrykurmanov"
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
         displayName: "Set up git config"
 
       - task: DownloadBuildArtifacts@0
