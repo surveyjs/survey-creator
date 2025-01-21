@@ -23,6 +23,7 @@ const json = {
 };
 
 const json2 = {
+  headerView: "basic",
   title: {
     default: "My Survey",
     de: "Meine Umfrage"
