@@ -27,10 +27,16 @@ svc-tab-designer {
 
 .svc-designer-header .svc-surface-header {
   background-color: transparent;
-  padding-inline-start: var(--lbr-header-padding-left, calcSize(3));
-  padding-inline-end: var(--ctr-survey-header-padding-right-logo-placeholder, calcSize(1));
-  padding-block-start: var(--lbr-header-padding-top, calcSize(3));
-  padding-block-end: var(--lbr-page-header-padding-bottom, calcSize(3));
+  display: flex;
+  padding-block-start: var(--ctr-survey-header-padding-top-advanced, 16px);
+  padding-inline-end: var(--ctr-survey-header-padding-right-logo-placeholder, 8px);
+  padding-block-end: var(--ctr-survey-header-padding-bottom-advanced, 16px);
+  padding-inline-start: var(--lbr-header-padding-left, 24px);
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--ctr-survey-header-gap, 8px);
+  box-shadow: none;
 }
 
 .svc-surface-header {
@@ -49,7 +55,6 @@ svc-tab-designer {
 
 .svc-tab-designer {
   .svc-designer-header {
-    border-bottom: 2px solid transparent;
     position: relative;
   }
 
