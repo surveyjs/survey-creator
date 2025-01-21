@@ -141,7 +141,6 @@ test("Add New Question with sub type", async t => {
     .expect(getVisibleElement(".svc-question__content-actions .svc-survey-element-toolbar-item__title").nth(1).textContent).eql("Stars");
 
   let expectedJson = {
-    "logoPosition": "right",
     "pages": [
       {
         "name": "page1",
