@@ -58,7 +58,6 @@
     "style-loader": "^1.2.1",
     "svg-inline-loader": "^0.8.2",
     "surveyjs-doc-generator": "git+https://github.com/surveyjs/surveyjs-doc-generator.git",
-    "testcafe": "^3.6.2",
     "ts-jest": "^29.2.2",
     "ts-loader": "^9.5.2",
     "ts-node": "3.3.0",
