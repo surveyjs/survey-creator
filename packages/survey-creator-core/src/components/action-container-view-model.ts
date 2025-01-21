@@ -17,6 +17,7 @@ import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } fr
 import { listComponentCss } from "./list-theme";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
+  public alwaysShrink = false;
   private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
     return (item.innerItem.location == "start" && shrinkTypeConverterAction || item.innerItem.location != "start");
   }
@@ -55,21 +56,22 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
     this.dotsItem.visible = false;
     const items = this.visibleActions;
 
-    if (options.availableSpace >= items.reduce((sum, i) => sum += i.maxDimension, 0)) {
-      items.forEach(i => i.mode = "large");
-      return;
-    }
+    if (!this.alwaysShrink) {
+      if (options.availableSpace >= items.reduce((sum, i) => sum += i.maxDimension, 0)) {
+        items.forEach(i => i.mode = "large");
+        return;
+      }
 
-    if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, false), 0)) {
-      this.setModeForActions(false);
-      return;
-    }
+      if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, false), 0)) {
+        this.setModeForActions(false);
+        return;
+      }
 
-    if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, ["convertInputType"]), 0)) {
-      this.setModeForActions(false, ["convertInputType"]);
-      return;
+      if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, ["convertInputType"]), 0)) {
+        this.setModeForActions(false, ["convertInputType"]);
+        return;
+      }
     }
-
     if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, true), 0)) {
       this.setModeForActions(true);
       return;
@@ -93,7 +95,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public static AdornerValueName = "__sjs_creator_adorner";
-  public actionContainer: ActionContainer;
+  public actionContainer: SurveyElementActionContainer;
   public topActionContainer: ActionContainer;
   protected expandCollapseAction: IAction;
   @property({ defaultValue: true }) allowDragging: boolean;
@@ -242,7 +244,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }
 
-  protected createActionContainer(): AdaptiveActionContainer {
+  protected createActionContainer(): SurveyElementActionContainer {
     const actionContainer = new SurveyElementActionContainer();
     actionContainer.dotsItem.popupModel.horizontalPosition = "center";
     return actionContainer;

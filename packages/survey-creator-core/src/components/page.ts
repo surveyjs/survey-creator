@@ -42,6 +42,12 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       }
     );
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
+    this.actionContainer.alwaysShrink = this.creator.isMobileView;
+    this.creator.onPropertyChanged.add(this.creatorPropertyChanged);
+  }
+  public dispose() {
+    this.creator.onPropertyChanged.remove(this.creatorPropertyChanged);
+    super.dispose();
   }
   protected updateActionVisibility(id: string, isVisible: boolean) {
     super.updateActionVisibility(id, !this.isGhost && isVisible);
@@ -160,7 +166,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return this.getPage();
   }
 
-  protected createActionContainer(): AdaptiveActionContainer<Action> {
+  protected createActionContainer(): SurveyElementActionContainer {
     const container = super.createActionContainer();
     container.sizeMode = "small";
     container.cssClasses = {
@@ -280,7 +286,11 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
     return result.trim();
   }
-
+  private creatorPropertyChanged = (sender, options) => {
+    if (options.name === "isMobileView") {
+      this.actionContainer.alwaysShrink = options.newValue;
+    }
+  }
   public hoverStopper(event: MouseEvent, element: HTMLElement | any) {
     event["__svc_question_processed"] = true;
   }
