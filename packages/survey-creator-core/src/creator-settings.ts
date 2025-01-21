@@ -110,49 +110,7 @@ export var settings = {
     /**
      * Use it to change the default question JSON on dropping it into designer or converting questions
      */
-    defaultJSON: {
-      dropdown: {
-        choices: ["Item 1", "Item 2", "Item 3"]
-      },
-      tagbox: {
-        choices: ["Item 1", "Item 2", "Item 3"]
-      },
-      checkbox: {
-        choices: ["Item 1", "Item 2", "Item 3"]
-      },
-      radiogroup: {
-        choices: ["Item 1", "Item 2", "Item 3"]
-      },
-      ranking: {
-        choices: ["Item 1", "Item 2", "Item 3"]
-      },
-      imagepicker: {
-        imageFit: "cover",
-        choices: [
-          {
-            value: "Image 1",
-            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
-          },
-          {
-            value: "Image 2",
-            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
-          },
-          {
-            value: "Image 3",
-            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
-          },
-          {
-            value: "Image 4",
-            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
-          }
-        ]
-      },
-      image: {
-        imageFit: "cover",
-        imageHeight: "auto",
-        imageWidth: "100%"
-      }
-    }
+    defaultJSON: <{ [index: string]: any }>{},
   },
   /**
    * Notification settings
@@ -186,6 +144,49 @@ export var settings = {
     exportFileName: "survey.json"
   },
   useLegacyIcons: true
+};
+settings.toolbox.defaultJSON = {
+  dropdown: {
+    choices: ["Item 1", "Item 2", "Item 3"]
+  },
+  tagbox: {
+    choices: ["Item 1", "Item 2", "Item 3"]
+  },
+  checkbox: {
+    choices: ["Item 1", "Item 2", "Item 3"]
+  },
+  radiogroup: {
+    choices: ["Item 1", "Item 2", "Item 3"]
+  },
+  ranking: {
+    choices: ["Item 1", "Item 2", "Item 3"]
+  },
+  imagepicker: {
+    imageFit: "cover",
+    choices: [
+      {
+        value: "Image 1",
+        imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+      },
+      {
+        value: "Image 2",
+        imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+      },
+      {
+        value: "Image 3",
+        imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+      },
+      {
+        value: "Image 4",
+        imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+      }
+    ]
+  },
+  image: {
+    imageFit: "cover",
+    imageHeight: "auto",
+    imageWidth: "100%"
+  }
 };
 export interface ICollectionItemAllowOperations {
   allowDelete: boolean;
