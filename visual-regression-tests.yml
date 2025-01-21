@@ -7,7 +7,7 @@ resources:
   repositories:
     - repository: EmptyRepo
       type: github
-      endpoint: dmitrykurmanov:admin
+      endpoint: github.com_surveyjsdeveloper
       name: surveyjs/azure-pipelines-repo-dont-remove-please
 
 trigger:
