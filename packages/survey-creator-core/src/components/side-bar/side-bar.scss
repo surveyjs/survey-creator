@@ -9,10 +9,10 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   flex-direction: column;
   display: flex;
   position: relative;
-  width: var(--ctr-property-grid-width, 450px);
-  min-width: var(--ctr-property-grid-min-width, 370px);
+  width: var(--ctr-property-grid-width, var(--sjs-size-x60));
+  min-width: var(--ctr-property-grid-min-width, var(--sjs-size-x40));
   height: 100%;
-  border-inline-start: 1px solid var(--ctr-property-grid-border-color, $border);
+  border-inline-start: 1px solid var(--ctr-property-grid-border-color, var(--sjs-border-25, #d4d4d4ff));
 }
 
 .svc-side-bar__wrapper {
@@ -38,12 +38,12 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 }
 
 .svc-side-bar__container-header {
-  background: var(--ctr-property-grid-header-background-color, $background);
-  box-shadow: inset 0px -2px 0px var(--ctr-property-grid-header-border-color, $primary);
+  background: var(--ctr-property-grid-header-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  box-shadow: inset 0px -2px 0px var(--ctr-property-grid-header-border-color, var(--sjs-primary-background-500, #19b394ff));
   // text-align: right;
   display: flex;
-  padding: var(--ctr-property-grid-header-padding-top, calcSize(1.5)) var(--ctr-property-grid-header-padding-right, calcSize(1))
-  var(--ctr-property-grid-header-padding-bottom, calcSize(1.5)) var(--ctr-property-grid-header-padding-left, calcSize(1));
+  padding: var(--ctr-property-grid-header-padding-top, var(--sjs-spacing-x150)) var(--ctr-property-grid-header-padding-right, var(--sjs-spacing-x2))
+  var(--ctr-property-grid-header-padding-bottom, var(--sjs-spacing-x150)) var(--ctr-property-grid-header-padding-left, var(--sjs-spacing-x2));
 }
 
 .svc-side-bar__container-content {
@@ -52,7 +52,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   align-items: flex-start;
   height: 100%;
   overflow-y: auto;
-  background-color: var(--ctr-property-grid-background-color, $background);
+  background-color: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 .svc-side-bar__container-container {
@@ -73,10 +73,10 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   flex-grow: 1;
   flex-shrink: 0;
   justify-content: flex-end;
-  padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1))
-    var(--ctr-menu-toolbar-button-padding-right, calcSize(1)) var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1))
-    var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
-  color: var(--ctr-menu-toolbar-button-text-color, $foreground);
+  padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
+  color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
 }
 
 .svc-side-bar__container-actions {
@@ -92,27 +92,27 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   }
   
   .sv-action-bar-item:not(.sv-action-bar-item--pressed):enabled {
-    border-radius: var(--ctr-menu-toolbar-button-corner-radius, 0);
+    border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
 
     &:focus {
-      background: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
+      background: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
     }
     
     &:hover {
-      background: var(--ctr-menu-toolbar-button-background-color-hovered, $background-dim);
+      background: var(--ctr-menu-toolbar-button-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
     }
   }
   
   .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
-    background: var(--ctr-menu-toolbar-button-background-color-pressed, $background-dim);
+    background: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
   }
   
   .sv-action-bar-item__title {
-    color: var(--ctr-menu-toolbar-button-text-color, $foreground);
+    color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   }
   
   .sv-action-bar-item__icon use {
-    fill: var(--ctr-menu-toolbar-button-icon-color, $foreground-light);
+    fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 }
 
@@ -122,18 +122,18 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   background-color: transparent;
 }
 .svc-side-bar__container {
-  background-color: var(--ctr-property-grid-form-background-color, $background-dim);
+  background-color: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 .svc-side-bar {
   height: 100%;
 }
 
-$tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, 8px) + var(--ctr-menu-toolbar-button-padding-right, 8px) + var(--ctr-menu-toolbar-button-icon-width, 24px) + var(--ctr-property-grid-tabs-padding-left, 12px) + var(--ctr-property-grid-tabs-padding-right, 12px));
+$tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1)) + var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1)) + var(--ctr-menu-toolbar-button-icon-width, var(--sjs-font-size-x3)) + var(--ctr-property-grid-tabs-padding-left, var(--sjs-spacing-x150)) + var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150)));
 
 .svc-side-bar--flyout {
   .svc-side-bar__shadow {
-    background-color: var(--ctr-popup-haze-background-color, $background-semitransparent);
+    background-color: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));
     position: absolute;
     top: 0;
     bottom: 0;
@@ -330,14 +330,14 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, 8px) + var(--ctr-m
   margin-inline-end: auto;
 
   .sv-action-bar-item--icon {
-    padding: var(--ctr-menu-toolbar-button-padding-top, calcSize(1))
-      var(--ctr-menu-toolbar-button-padding-right, calcSize(1))
-      var(--ctr-menu-toolbar-button-padding-bottom, calcSize(1))
-      var(--ctr-menu-toolbar-button-padding-left, calcSize(1));
+    padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
+      var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
+      var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
+      var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
   }
   .sv-svg-icon {
-    width: var(--ctr-menu-toolbar-button-icon-width, calcSize(3));
-    height: var(--ctr-menu-toolbar-button-icon-height, calcSize(3));
+    width: var(--ctr-menu-toolbar-button-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3));
   }
 }
 

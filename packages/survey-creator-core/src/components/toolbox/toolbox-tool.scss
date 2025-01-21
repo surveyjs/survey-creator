@@ -6,22 +6,22 @@
   position: relative;
   align-items: center;
   outline: none;
-  padding-top: var(--ctr-toolbox-item-padding-top, calcSize(1));
-  padding-bottom: var(--ctr-toolbox-item-padding-bottom, calcSize(1));
-  padding-inline-end: var(--ctr-toolbox-item-padding-right, calcSize(1.5));
-  padding-inline-start: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
-  border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
+  padding-top: var(--ctr-toolbox-item-padding-top, var(--sjs-spacing-x1));
+  padding-bottom: var(--ctr-toolbox-item-padding-bottom, var(--sjs-spacing-x1));
+  padding-inline-end: var(--ctr-toolbox-item-padding-right, var(--sjs-spacing-x2));
+  padding-inline-start: var(--ctr-toolbox-item-padding-left, var(--sjs-spacing-x150));
+  border-radius: var(--ctr-toolbox-item-corner-radius, var(--sjs-corner-radius-x1));
 }
 .svc-toolbox__item-icon {
   display: block;
-  height: var(--ctr-toolbox-item-icon-height, calcSize(3));
-  width: var(--ctr-toolbox-item-icon-width, calcSize(3));
+  height: var(--ctr-toolbox-item-icon-height, var(--sjs-font-size-x3));
+  width: var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3));
   pointer-events: none;
 }
 .svc-toolbox__tool {
   cursor: default;
-  align-items: var(--ctr-toolbox-item-align, flex-start);
-  align-self: var(--ctr-toolbox-item-align, flex-start);
+  align-items: var(--ctr-toolbox-item-align, stretch);
+  align-self: var(--ctr-toolbox-item-align, stretch);
   &:first-of-type > .svc-toolbox__tool-content {
     padding-block-start: 0;
     .svc-toolbox__item-banner {
@@ -32,9 +32,9 @@
 .svc-toolbox__tool-content {
   display: flex;
   // padding: calcSize(0.25) 0;
-  padding-block-start: var(--ctr-toolbox-group-gap, calcSize(0.5));
+  padding-block-start: var(--ctr-toolbox-group-gap, var(--sjs-spacing-x05));
   flex-direction: column;
-  align-items: var(--ctr-toolbox-item-align, flex-start);
+  align-items: var(--ctr-toolbox-item-align, stretch);
   position: relative;
 }
 
@@ -43,8 +43,8 @@
 }
 
 .svc-toolbox__tool--has-subitems {
-  align-items: var(--ctr-toolbox-item-align, flex-start);
-  align-self: var(--ctr-toolbox-item-align, flex-start);
+  align-items: var(--ctr-toolbox-item-align, stretch);
+  align-self: var(--ctr-toolbox-item-align, stretch);
 }
 
 // is always visible
@@ -52,7 +52,7 @@
   display: flex;
   outline: none;
   use {
-    fill: var(--ctr-toolbox-item-icon-color, $foreground-light);
+    fill: var(--ctr-toolbox-item-icon-color, var(--sjs-primary-background-500, #19b394ff));
   }
 }
 
@@ -64,67 +64,75 @@
   align-items: center;
   inset-inline-start: var(--thm-toolbox-item-banner-left, calcSize(-0.5));
   max-width: calcSize(100);
-  padding-top: var(--ctr-tooltip-padding-top, calcSize(1.5));
-  padding-inline-end: var(--ctr-tooltip-padding-right, calcSize(3.5));
-  padding-bottom: var(--ctr-tooltip-padding-bottom, calcSize(1.5));
-  padding-inline-start: var(--ctr-tooltip-padding-left, calcSize(5.5));
+  padding-top: var(--ctr-tooltip-padding-top, var(--sjs-spacing-x2));
+  padding-inline-end: var(--ctr-tooltip-padding-right, var(--sjs-spacing-x3));
+  padding-bottom: var(--ctr-tooltip-padding-bottom, var(--sjs-spacing-x2));
+  padding-inline-start: var(--ctr-tooltip-padding-left, var(--sjs-spacing-x3));
   margin-inline-end: calcSize(-2);
   white-space: nowrap;
-  color: var(--ctr-toolbox-item-text-color, $foreground);
+  color: var(--ctr-toolbox-item-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   transition: opacity $creator-transition-duration;
   background-color: $background;
   /* Shadow / Medium */
-  border-radius: var(--ctr-tooltip-corder-radius, calcSize(12.5));
+  border-radius: var(--ctr-tooltip-corder-radius, var(--sjs-corner-radius-x075));
   box-shadow:
-    var(--ctr-tooltip-shadow-1-offset-x, 0px) var(--ctr-tooltip-shadow-1-offset-y, 2px)
-      var(--ctr-tooltip-shadow-1-blur, 6px) var(--ctr-tooltip-shadow-1-spread, 0px)
-      var(--ctr-tooltip-shadow-1-color, rgba(0, 0, 0, 0.1)),
-    var(--ctr-tooltip-shadow-2-offset-x, 0px) var(--ctr-tooltip-shadow-2-offset-y, 1px)
-      var(--ctr-tooltip-shadow-2-blur, 2px) var(--ctr-tooltip-shadow-2-spread, 0px)
-      var(--ctr-tooltip-shadow-2-color, transparent);
+    var(--ctr-tooltip-shadow-1-offset-x, 0px)
+      var(--ctr-tooltip-shadow-1-offset-y, 2px)
+      var(--ctr-tooltip-shadow-1-blur, 8px)
+      var(--ctr-tooltip-shadow-1-spread, 0px),
+    var(--ctr-tooltip-shadow-2-offset-x, 0px)
+      var(--ctr-tooltip-shadow-2-offset-y, 1px)
+      var(--ctr-tooltip-shadow-2-blur, 2px)
+      var(--ctr-tooltip-shadow-2-spread, 0px);
   // transition:
   //   max-width 0.1s ease-in-out,
   //   padding 0.2s ease-in-out;
-  background-color: var(--ctr-tooltip-background-color, $background);
+  background-color: var(--ctr-tooltip-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   overflow: visible;
   position: absolute;
   z-index: 200;
-  top: calc(50% + var(--ctr-toolbox-group-gap, 4px) / 2);
+  top: calc(50% + var(--ctr-toolbox-group-gap, var(--sjs-spacing-x05)));
   transform: translate(0, -50%);
   pointer-events: none;
   .svc-toolbox__item-icon {
     position: absolute;
-    display: var(--ctr-toolbox-item-banner-icon-display, block);
+    display: var(--ctr-toolbox-item-banner-icon-display, none);
     inset-inline-start: calcSize(1.5);
     top: calcSize(1);
   }
 
   &:after {
     content: " ";
-    display: var(--ctr-toolbox-item-banner-beak-display, none);
-    width: calc(var(--ctr-tooltip-pointer-height) * 1.41);
-    height: calc(var(--ctr-tooltip-pointer-height) * 1.41);
-    background: var(--ctr-tooltip-background-color, $background);
+    display: var(--ctr-toolbox-item-banner-beak-display, block);
+    width: calc(var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) * 1.41);
+    height: calc(var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) * 1.41);
+    background: var(--ctr-tooltip-background-color, var(--sjs-layer-1-background-500, #ffffffff));
     border-top-color: transparent;
     border-inline-end-color: transparent;
     box-shadow:
-      var(--ctr-tooltip-shadow-1-offset-x, 0px) var(--ctr-tooltip-shadow-1-offset-y, 2px)
-        var(--ctr-tooltip-shadow-1-blur, 6px) var(--ctr-tooltip-shadow-1-spread, 0px)
-        var(--ctr-tooltip-shadow-1-color, rgba(0, 0, 0, 0.1)),
-      var(--ctr-tooltip-shadow-2-offset-x, 0px) var(--ctr-tooltip-shadow-2-offset-y, 1px)
-        var(--ctr-tooltip-shadow-2-blur, 2px) var(--ctr-tooltip-shadow-2-spread, 0px)
-        var(--ctr-tooltip-shadow-2-color, transparent);
+      var(--ctr-tooltip-shadow-1-offset-x, 0px)
+        var(--ctr-tooltip-shadow-1-offset-y, 2px)
+        var(--ctr-tooltip-shadow-1-blur, 8px)
+        var(--ctr-tooltip-shadow-1-spread, 0px),
+      var(--ctr-tooltip-shadow-2-offset-x, 0px)
+        var(--ctr-tooltip-shadow-2-offset-y, 1px)
+        var(--ctr-tooltip-shadow-2-blur, 2px)
+        var(--ctr-tooltip-shadow-2-spread, 0px);
     align-self: center;
     position: absolute;
     inset-inline-end: 100%;
     top: 50%;
     z-index: 300;
-    transform: translate(calc(var(--ctr-tooltip-pointer-height) / 1.41), calc(var(--ctr-tooltip-pointer-height) / -1.41)) rotate(45deg);
+    transform: translate(
+        calc(var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) / 1.41),
+        calc(var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) / -1.41)
+      )
+      rotate(45deg);
     clip-path: polygon(-100% -100%, -100% 200%, 200% 200%);
   }
 
   .sv-svg-icon use {
-    fill: var(--ctr-toolbox-item-icon-color-hovered, $primary);
+    fill: var(--ctr-toolbox-item-icon-color-hovered, var(--sjs-primary-background-500, #19b394ff));
   }
 }
 
@@ -135,7 +143,7 @@
   padding-inline-start: calcSize(1);
   padding-inline-end: calcSize(1.5);
   white-space: nowrap;
-  color: var(--ctr-toolbox-item-text-color, $foreground-light);
+  color: var(--ctr-toolbox-item-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -157,8 +165,8 @@
   pointer-events: none;
 
   use {
-    opacity: var(--ctr-toolbox-item-icon-opacity-disabled, 0.15);
-    fill: var(--ctr-toolbox-item-icon-color-disabled, rgba(0, 0, 0, 0.91));
+    opacity: var(--ctr-toolbox-item-icon-opacity-disabled, 0.25);
+    fill: var(--ctr-toolbox-item-icon-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
   }
   .svc-toolbox__item-title {
     opacity: var(--ctr-toolbox-item-text-opacity-disabled, 0.25);
@@ -169,15 +177,19 @@
 .svc-toolbox__tool--has-subitems:hover > .svc-toolbox__tool-content > .svc-toolbox__item,
 .svc-toolbox__item:hover {
   overflow: visible;
-  background-color: var(--ctr-toolbox-item-background-color-hovered, $background);
+  background-color: var(--ctr-toolbox-item-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
 
   box-shadow:
-    var(--ctr-toolbox-item-shadow-hovered-1-offset-x, 0px) var(--ctr-toolbox-item-shadow-hovered-1-offset-y, 2px)
-      var(--ctr-toolbox-item-shadow-hovered-1-blur, 6px) var(--ctr-toolbox-item-shadow-hovered-1-spread, 0px)
-      var(--ctr-toolbox-item-shadow-hovered-1-color, rgba(0, 0, 0, 0.1)),
-    var(--ctr-toolbox-item-shadow-hovered-2-offset-x, 0px) var(--ctr-toolbox-item-shadow-hovered-2-offset-y, 1px)
-      var(--ctr-toolbox-item-shadow-hovered-2-blur, 2px) var(--ctr-toolbox-item-shadow-hovered-2-spread, 0px)
-      var(--ctr-toolbox-item-shadow-hovered-2-color, transparent);
+    var(--ctr-toolbox-item-shadow-hovered-1-offset-x, 0px)
+      var(--ctr-toolbox-item-shadow-hovered-1-offset-y, 2px)
+      var(--ctr-toolbox-item-shadow-hovered-1-blur, 8px)
+      var(--ctr-toolbox-item-shadow-hovered-1-spread, 0px)
+      var(--ctr-toolbox-item-shadow-hovered-1-color, #00000000),
+    var(--ctr-toolbox-item-shadow-hovered-2-offset-x, 0px)
+      var(--ctr-toolbox-item-shadow-hovered-2-offset-y, 1px)
+      var(--ctr-toolbox-item-shadow-hovered-2-blur, 2px)
+      var(--ctr-toolbox-item-shadow-hovered-2-spread, 0px)
+      var(--ctr-toolbox-item-shadow-hovered-2-color, #00000000);
   transition: 0.1s ease-in-out;
 
   .svc-toolbox--compact {
@@ -190,48 +202,48 @@
   }
 
   .svc-toolbox__item-title {
-    color: var(--ctr-toolbox-item-text-color-hovered, $foreground);
+    color: var(--ctr-toolbox-item-text-color-hovered, var(--sjs-layer-1-foreground-100, #000000e6));
   }
 
   .sv-svg-icon use {
-    fill: var(--ctr-toolbox-item-icon-color-hovered, $primary);
+    fill: var(--ctr-toolbox-item-icon-color-hovered, var(--sjs-primary-background-500, #19b394ff));
   }
 }
 
 .svc-toolbox__tool .sv-dots__item:hover:enabled,
 .svc-toolbox__tool .sv-dots__item:focus:enabled,
 .svc-toolbox__tool .sv-dots__item.sv-action-bar-item--pressed {
-  background-color: var(--ctr-toolbox-button-background-color-hovered, $primary-light);
-  border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
+  background-color: var(--ctr-toolbox-button-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
+  border-radius: var(--ctr-toolbox-item-corner-radius, var(--sjs-corner-radius-x1));
   box-shadow: none;
 
   .sv-svg-icon use {
-    fill: var(--ctr-toolbox-item-icon-color-hovered, $primary);
+    fill: var(--ctr-toolbox-item-icon-color-hovered, var(--sjs-primary-background-500, #19b394ff));
   }
 }
 .svc-toolbox__item-submenu-button {
   position: absolute;
-  inset-inline-end: var(--ctr-toolbox-item-padding-right, calcSize(1.5));
-  margin-inline-end: var(--ctr-toolbox-item-submenu-button-margin-right, 0);
+  inset-inline-end: var(--ctr-toolbox-item-padding-right, var(--sjs-spacing-x2));
+  margin-inline-end: var(--ctr-toolbox-item-submenu-button-margin-right, var(--sjs-spacing-x1n));
   top: calc(var(--ctr-toolbox-item-padding-top, var(--dft-toolbox-item-padding-top)) + var(--ctr-toolbox-gap, var(--dft-toolbox-gap)));
   bottom: var(--ctr-toolbox-item-padding-bottom, var(--dft-toolbox-item-padding-bottom));
   display: inline-flex;
-  padding: var(--ctr-toolbox-item-submenu-button-padding-top, calcSize(0.5))
-    var(--ctr-toolbox-item-submenu-button-padding-right, calcSize(0.5)) 
-    var(--ctr-toolbox-item-submenu-button-padding-bottom, calcSize(0.5))
-    var(--ctr-toolbox-item-submenu-button-padding-left, calcSize(0.5));
+  padding: var(--ctr-toolbox-item-submenu-button-padding-top, var(--sjs-spacing-x05))
+    var(--ctr-toolbox-item-submenu-button-padding-right, var(--sjs-spacing-x05))
+    var(--ctr-toolbox-item-submenu-button-padding-bottom, var(--sjs-spacing-x05))
+    var(--ctr-toolbox-item-submenu-button-padding-left, var(--sjs-spacing-x05));
   box-sizing: border-box;
   align-items: center;
-  border-radius: var(--ctr-toolbox-item-submenu-button-corner-radius, 1024px);
-  background-color: var(--ctr-toolbox-item-submenu-button-background-color, $background-dim);
+  border-radius: var(--ctr-toolbox-item-submenu-button-corner-radius, var(--sjs-corner-radius-x05));
+  background-color: var(--ctr-toolbox-item-submenu-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   transition: background-color $creator-transition-duration;
   &:hover {
-    background-color: var(--ctr-toolbox-item-submenu-button-background-color-hovered, $background);
+    background-color: var(--ctr-toolbox-item-submenu-button-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
   }
   svg {
-    fill: var(--ctr-toolbox-item-submenu-button-icon-color, $layer-1-foreground-50);
-    width: var(--ctr-toolbox-item-submenu-button-icon-width, calcSize(2));
-    height: var(--ctr-toolbox-item-submenu-button-icon-height, calcSize(2));
+    fill: var(--ctr-toolbox-item-submenu-button-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
+    width: var(--ctr-toolbox-item-submenu-button-icon-width, var(--sjs-font-size-x2));
+    height: var(--ctr-toolbox-item-submenu-button-icon-height, var(--sjs-font-size-x2));
   }
 }
 
@@ -254,20 +266,22 @@
 
 .svc-toolbox__tool.svc-toolbox__tool--pressed {
   .svc-toolbox__item {
-    background: var(--ctr-toolbox-item-background-color-pressed, inherit);
+    background: var(--ctr-toolbox-item-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
     box-shadow: var(--ctr-toolbox-item-shadow-pressed-offset-x, 0px)
-      var(--ctr-toolbox-item-shadow-pressed-offset-y, 1px) var(--ctr-toolbox-item-shadow-pressed-blur, 2px)
-      var(--ctr-toolbox-item-shadow-pressed-spread, 0px) var(--ctr-toolbox-item-shadow-pressed-color, rgba(0, 0, 0, 0));
+      var(--ctr-toolbox-item-shadow-pressed-offset-y, 1px)
+      var(--ctr-toolbox-item-shadow-pressed-blur, 2px)
+      var(--ctr-toolbox-item-shadow-pressed-spread, 0px)
+      var(--ctr-toolbox-item-shadow-pressed-color, #00000000);
   }
 
   .svc-toolbox__item-title {
-    color: var(--ctr-toolbox-item-text-color-pressed, $foreground);
+    color: var(--ctr-toolbox-item-text-color-pressed, var(--sjs-layer-1-foreground-100, #000000e6));
     opacity: var(--ctr-toolbox-item-text-opacity-pressed, 0.5);
   }
 
   .sv-svg-icon use {
-    fill: var(--ctr-toolbox-item-icon-color-pressed, $foreground);
-    opacity: var(--ctr-toolbox-item-icon-opacity-pressed, 0.5);
+    fill: var(--ctr-toolbox-item-icon-color-pressed, var(--sjs-layer-1-foreground-100, #000000e6));
+    opacity: var(--ctr-toolbox-item-icon-opacity-pressed, 0.35);
   }
 
   .svc-toolbox__item.svc-toolbox__item-subtype {
@@ -278,16 +292,17 @@
 .svc-toolbox-subtypes {
   .sv-popup__container {
     margin-top: calc(
-      0px - var(--ctr-toolbox-submenu-group-margin-top, 0px) -
-        var(--ctr-toolbox-item-padding-top, var(--dft-toolbox-item-padding-top))
+      0px - var(--ctr-toolbox-submenu-group-margin-top, var(--sjs-spacing-x150)) -
+        var(--ctr-toolbox-item-padding-top, var(--sjs-spacing-x1))
     );
     padding: 0;
 
     padding-inline-start: calc(
-      var(--ctr-toolbox-item-padding-right, var(--dft-toolbox-item-padding-right)) + 
-      var(--ctr-toolbox-item-submenu-button-margin-right, 0px) + 
-      var(--ctr-toolbox-group-padding-right, var(--dft-toolbox-group-padding-right)) +
-      var(--ctr-toolbox-border-width-right, 0px));
+      var(--ctr-toolbox-item-padding-right, var(--sjs-spacing-x2)) +
+        var(--ctr-toolbox-item-submenu-button-margin-right, var(--sjs-spacing-x1n)) +
+        var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)) +
+        var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1))
+    );
 
     box-shadow: unset;
     background: unset;
@@ -299,23 +314,27 @@
   }
 
   .sv-popup__body-content {
-    border-radius: var(--ctr-toolbox-submenu-corner-radius, calcSize(1));
+    border-radius: var(--ctr-toolbox-submenu-corner-radius, var(--sjs-corner-radius-x1));
     box-shadow:
-      var(--ctr-toolbox-submenu-shadow-1-offset-x, 0px) var(--ctr-toolbox-submenu-shadow-1-offset-y, 2px)
-        var(--ctr-toolbox-submenu-shadow-1-blur, 8px) var(--ctr-toolbox-submenu-shadow-1-spread, 0px)
-        var(--ctr-toolbox-submenu-shadow-1-color, transparent),
-      var(--ctr-toolbox-submenu-shadow-2-offset-x, 0px) var(--ctr-toolbox-submenu-shadow-2-offset-y, 16px)
-        var(--ctr-toolbox-submenu-shadow-2-blur, 32px) var(--ctr-toolbox-submenu-shadow-2-spread, 0px)
-        var(--ctr-toolbox-submenu-shadow-2-color, transparent);
-    background: var(--ctr-toolbox-submenu-background-color, unset);
+      var(--ctr-toolbox-submenu-shadow-1-offset-x, 0px)
+        var(--ctr-toolbox-submenu-shadow-1-offset-y, 2px)
+        var(--ctr-toolbox-submenu-shadow-1-blur, 8px)
+        var(--ctr-toolbox-submenu-shadow-1-spread, 0px)
+        var(--ctr-toolbox-submenu-shadow-1-color, var(--sjs-special-glow, #004c441a)),
+      var(--ctr-toolbox-submenu-shadow-2-offset-x, 0px)
+        var(--ctr-toolbox-submenu-shadow-2-offset-y, 16px)
+        var(--ctr-toolbox-submenu-shadow-2-blur, 32px)
+        var(--ctr-toolbox-submenu-shadow-2-spread, 0px)
+        var(--ctr-toolbox-submenu-shadow-2-color, var(--sjs-special-glow, #004c441a));
+    background: var(--ctr-toolbox-submenu-background-color, var(--sjs-layer-1-background-500, #ffffffff));
     padding: 0;
   }
 
   .sv-popup__scrolling-content {
-    padding-top: calc(var(--ctr-toolbox-submenu-group-margin-top, 0px));
-    padding-inline-end: var(--ctr-toolbox-submenu-group-margin-right, 0px);
-    padding-bottom: var(--ctr-toolbox-submenu-group-margin-bottom-last, 0px);
-    padding-inline-start: var(--ctr-toolbox-submenu-group-margin-left, 0px);
+    padding-top: calc(var(--ctr-toolbox-submenu-group-margin-top, var(--sjs-spacing-x150)));
+    padding-inline-end: var(--ctr-toolbox-submenu-group-margin-right, var(--sjs-spacing-x150));
+    padding-bottom: var(--ctr-toolbox-submenu-group-margin-bottom-last, var(--sjs-spacing-x150));
+    padding-inline-start: var(--ctr-toolbox-submenu-group-margin-left, var(--sjs-spacing-x150));
     overflow: visible;
   }
 
@@ -325,40 +344,43 @@
   }
 
   .svc-toolbox__item.svc-toolbox__item-subtype {
-    opacity: var(--ctr-toolbox-item-opacity-submenu, 0.85);
+    opacity: var(--ctr-toolbox-item-opacity-submenu, 1);
     overflow: hidden;
-    border-radius: var(--ctr-toolbox-item-corner-radius, calcSize(12.5));
-    background: var(--ctr-toolbox-item-background-color-submenu, $layer-2-background-500);
+    border-radius: var(--ctr-toolbox-item-corner-radius, var(--sjs-corner-radius-x1));
+    background: var(--ctr-toolbox-item-background-color-submenu, var(--sjs-layer-1-background-500, #ffffffff));
     box-shadow:
-      var(--ctr-toolbox-item-shadow-hovered-1-offset-x, 0px) var(--ctr-toolbox-item-shadow-hovered-1-offset-y, 2px)
-        var(--ctr-toolbox-item-shadow-hovered-1-blur, 6px) var(--ctr-toolbox-item-shadow-hovered-1-spread, 0px)
-        var(--ctr-toolbox-item-shadow-hovered-1-color, rgba(0, 0, 0, 0.1)),
-      var(--ctr-toolbox-item-shadow-hovered-2-offset-x, 0px) var(--ctr-toolbox-item-shadow-hovered-2-offset-y, 1px)
-        var(--ctr-toolbox-item-shadow-hovered-2-blur, 2px) var(--ctr-toolbox-item-shadow-hovered-2-spread, 0px)
-        var(--ctr-toolbox-item-shadow-hovered-2-color, rgba(0, 0, 0, 0));
+      var(--ctr-toolbox-item-shadow-hovered-1-offset-x, 0px)
+        var(--ctr-toolbox-item-shadow-hovered-1-offset-y, 2px)
+        var(--ctr-toolbox-item-shadow-hovered-1-blur, 8px)
+        var(--ctr-toolbox-item-shadow-hovered-1-spread, 0px)
+        var(--ctr-toolbox-item-shadow-hovered-1-color, #00000000),
+      var(--ctr-toolbox-item-shadow-hovered-2-offset-x, 0px)
+        var(--ctr-toolbox-item-shadow-hovered-2-offset-y, 1px)
+        var(--ctr-toolbox-item-shadow-hovered-2-blur, 2px)
+        var(--ctr-toolbox-item-shadow-hovered-2-spread, 0px)
+        var(--ctr-toolbox-item-shadow-hovered-2-color, #00000000);
     transition: 0.1s ease-in-out;
-    padding: 
-      var(--ctr-toolbox-item-padding-top-submenu, calcSize(1.5))
-      var(--ctr-toolbox-item-padding-right, calcSize(2))
-      var(--ctr-toolbox-item-padding-bottom-submenu, calcSize(1.5))
-      var(--ctr-toolbox-item-padding-left-submenu, calcSize(2));
+    padding: var(--ctr-toolbox-item-padding-top-submenu, var(--sjs-spacing-x150))
+      var(--ctr-toolbox-item-padding-right, var(--sjs-spacing-x2))
+      var(--ctr-toolbox-item-padding-bottom-submenu, var(--sjs-spacing-x150))
+      var(--ctr-toolbox-item-padding-left-submenu, var(--sjs-spacing-x2));
     align-self: flex-start;
-    min-width: var(--ctr-toolbox-submenu-item-min-width, initial);
+    min-width: var(--ctr-toolbox-submenu-item-min-width, calc(17 * 8px));
     box-sizing: border-box;
 
     .svc-toolbox__item-title {
-      color: var(--ctr-toolbox-item-text-color-submenu, $layer-2-foreground-100);
+      color: var(--ctr-toolbox-item-text-color-submenu, var(--sjs-layer-2-foreground-100, #000000e6));
     }
   }
 
   .svc-toolbox__tool:hover,
   .svc-toolbox__item:focus {
     .svc-toolbox__item-subtype {
-      background: var(--ctr-toolbox-item-background-color-hovered, $layer-1-background-500);
+      background: var(--ctr-toolbox-item-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
       opacity: unset;
 
       .svc-toolbox__item-title {
-        color: var(--ctr-toolbox-item-text-color-hovered, $layer-1-foreground-100);
+        color: var(--ctr-toolbox-item-text-color-hovered, var(--sjs-layer-1-foreground-100, #000000e6));
       }
     }
   }
@@ -372,7 +394,7 @@
   align-self: flex-start;
 }
 .svc-toolbox__item--dots {
-  padding-inline-end: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
+  padding-inline-end: var(--ctr-toolbox-item-padding-left, var(--sjs-spacing-x150));
   margin-top: calcSize(0.5);
 }
 .svc-toolbox--compact {
@@ -380,16 +402,16 @@
     display: none;
   }
   .svc-toolbox__tool {
-    padding: 0px var(--ctr-toolbox-item-margin-horizontal-no-text, calcSize(0.5));
+    padding: 0px var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05));
     align-self: flex-start;
     pointer-events: all;
   }
   .svc-toolbox__search-button {
-    padding-inline-start: var(--ctr-toolbox-item-margin-horizontal-no-text, calcSize(0.5));
+    padding-inline-start: var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05));
   }
   .svc-toolbox__item {
-    padding-inline-start: var(--ctr-toolbox-item-padding-left-no-text, calcSize(1));
-    padding-inline-end: var(--ctr-toolbox-item-padding-right-no-text, calcSize(1));
+    padding-inline-start: var(--ctr-toolbox-item-padding-left-no-text, var(--sjs-spacing-x1));
+    padding-inline-end: var(--ctr-toolbox-item-padding-right-no-text, var(--sjs-spacing-x1));
     box-sizing: border-box;
     align-self: flex-start;
     &:after {
@@ -403,7 +425,7 @@
     padding-inline-start: 0;
   }
   .svc-toolbox__item--dots {
-    padding-inline-end: var(--ctr-toolbox-item-padding-right, calcSize(1.5));
-    padding-inline-start: var(--ctr-toolbox-item-padding-left, calcSize(1.5));
+    padding-inline-end: var(--ctr-toolbox-item-padding-right, var(--sjs-spacing-x2));
+    padding-inline-start: var(--ctr-toolbox-item-padding-left, var(--sjs-spacing-x150));
   }
 }

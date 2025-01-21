@@ -3,55 +3,55 @@
 .spg-dropdown {
     display: flex;
     padding-right: calc(
-        var(--ctr-editor-buttons-gap, 4px) + var(--ctr-editor-button-padding-right, 8px) +
-            var(--ctr-editor-button-padding-left, 8px) + var(--ctr-editor-button-icon-width, 24px)
+        var(--ctr-editor-buttons-gap, var(--sjs-spacing-x05)) + var(--ctr-editor-button-padding-right, var(--sjs-spacing-x1)) +
+            var(--ctr-editor-button-padding-left, var(--sjs-spacing-x1)) + var(--ctr-editor-button-icon-width, var(--sjs-font-size-x3))
     ); // dropdown_chevron-button offset
     min-height: calc(
-        var(--ctr-editor-button-icon-height) + var(--ctr-editor-button-padding-top) +
-            var(--ctr-editor-button-padding-bottom) + var(--ctr-editor-padding-top) + var(--ctr-editor-padding-bottom)
+        var(--ctr-editor-button-icon-height, var(--sjs-font-size-x3)) + var(--ctr-editor-button-padding-top, var(--sjs-spacing-x1)) +
+            var(--ctr-editor-button-padding-bottom, var(--sjs-spacing-x1)) + var(--ctr-editor-padding-top, var(--sjs-spacing-x05)) + var(--ctr-editor-padding-bottom, var(--sjs-spacing-x05))
     );
 }
 .spg-dropdown--empty .spg-dropdown__value {
-    min-height: var(--ctr-font-default-line-height, var(--ctr-default-line-height, 24px));
+    min-height: var(--ctr-font-default-line-height, var(--sjs-line-height-x3));
 }
 
 .spg-dropdown__value {
     @include ctrDefaultFont;
     display: flex;
     align-items: center;
-    min-height: var(--ctr-font-default-line-height, var(--ctr-default-line-height, 24px));
+    min-height: var(--ctr-font-default-line-height, var(--sjs-line-height-x3));
 }
 .spg-dropdown__filter-string-input {
     @include ctrDefaultFont;
 }
 .spg-dropdown_chevron-button {
-    width: var(--ctr-editor-button-icon-width, calcSize(3));
-    padding: var(--ctr-editor-button-padding-top, calcSize(1)) var(--ctr-editor-button-padding-right, calcSize(1))
-        var(--ctr-editor-button-padding-bottom, calcSize(1)) var(--ctr-editor-button-padding-left, calcSize(1));
-    inset-block-start: var(--ctr-editor-padding-top, calcSize(0.5));
-    inset-inline-end: var(--ctr-editor-padding-right, calcSize(0.5));
-    inset-block-end: var(--ctr-editor-padding-bottom, calcSize(0.5));
+    width: var(--ctr-editor-button-icon-width, var(--sjs-font-size-x3));
+    padding: var(--ctr-editor-button-padding-top, var(--sjs-spacing-x1)) var(--ctr-editor-button-padding-right, var(--sjs-spacing-x1))
+        var(--ctr-editor-button-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-editor-button-padding-left, var(--sjs-spacing-x1));
+    inset-block-start: var(--ctr-editor-padding-top, var(--sjs-spacing-x05));
+    inset-inline-end: var(--ctr-editor-padding-right, var(--sjs-spacing-x05));
+    inset-block-end: var(--ctr-editor-padding-bottom, var(--sjs-spacing-x05));
 
     &:hover,
     &:focus {
-        border-radius: var(--ctr-editor-button-corner-radius);
-        background: var(--ctr-editor-button-background-color-hovered, $background-dim);
+        border-radius: var(--ctr-editor-button-corner-radius, var(--sjs-corner-radius-x05));
+        background: var(--ctr-editor-button-background-color-hovered, var(--sjs-layer-3-background-400, #eaeaeaff));
     }
     .spg-dropdown_chevron-button-svg use {
-        fill: var(--ctr-editor-button-icon-color, $foreground-light);
+        fill: var(--ctr-editor-button-icon-color, var(--sjs-layer-3-foreground-75, #000000bf));
     }
 }
 .spg-dropdown_chevron-button-svg {
-    width: var(--ctr-editor-button-icon-width, calcSize(3));
-    height: var(--ctr-editor-button-icon-height, calcSize(3));
+    width: var(--ctr-editor-button-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-editor-button-icon-height, var(--sjs-font-size-x3));
 }
 .spg-dropdown-popup:not(.sv-popup--dropdown-overlay) {
     height: 0;
 }
 
 .spg-dropdown__clean-button {
-    --thm-ctr-editor-content-margin-top: var(--ctr-editor-content-margin-top, #{calcSize(1)});
-    --thm-ctr-editor-content-margin-bottom: var(--ctr-editor-content-margin-bottom, #{calcSize(1)});
+    --thm-ctr-editor-content-margin-top: var(--ctr-editor-content-margin-top, var(--sjs-spacing-x1));
+    --thm-ctr-editor-content-margin-bottom: var(--ctr-editor-content-margin-bottom, var(--sjs-spacing-x1));
     margin-top: calc(-1 * var(--thm-ctr-editor-content-margin-top));
     margin-bottom: calc(-1 * var(--thm-ctr-editor-content-margin-bottom));
     use {

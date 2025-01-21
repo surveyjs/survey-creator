@@ -9,26 +9,26 @@
 .svc-context-button {
   display: flex;
   box-sizing: border-box;
-  background-color: var(--ctr-survey-contextual-button-background-color, $background);
-  border-radius: var(--ctr-survey-contextual-button-corner-radius, 50%);
-  width: var(--ctr-survey-contextual-button-width, calcSize(6));
-  height: var(--ctr-survey-contextual-button-height, calcSize(6));
-  padding: var(--ctr-survey-contextual-button-padding-top, calcSize(1.5))
-    var(--ctr-survey-contextual-button-padding-right, calcSize(1.5))
-    var(--ctr-survey-contextual-button-padding-bottom, calcSize(1.5))
-    var(--ctr-survey-contextual-button-padding-left, calcSize(1.5));
+  background-color: var(--ctr-survey-contextual-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  border-radius: var(--ctr-survey-contextual-button-corner-radius, var(--lbr-corner-radius-round));
+  width: var(--ctr-survey-contextual-button-width, var(--lbr-size-x6));
+  height: var(--ctr-survey-contextual-button-height, var(--lbr-size-x6));
+  padding: var(--ctr-survey-contextual-button-padding-top, var(--lbr-spacing-x150))
+    var(--ctr-survey-contextual-button-padding-right, var(--lbr-spacing-x150))
+    var(--ctr-survey-contextual-button-padding-bottom, var(--lbr-spacing-x150))
+    var(--ctr-survey-contextual-button-padding-left, var(--lbr-spacing-x150));
 
   cursor: pointer;
   outline: none;
 
   .sv-svg-icon {
     --thm-button-contextual-button-icon-width: calc(
-      var(--ctr-survey-contextual-button-width) - var(--ctr-survey-contextual-button-padding-right) -
-        var(--ctr-survey-contextual-button-padding-left)
+      var(--ctr-survey-contextual-button-width, var(--lbr-size-x6)) - var(--ctr-survey-contextual-button-padding-right, var(--lbr-spacing-x150)) -
+        var(--ctr-survey-contextual-button-padding-left, var(--lbr-spacing-x150))
     );
     --thm-button-contextual-button-icon-height: calc(
-      var(--ctr-survey-contextual-button-height) - var(--ctr-survey-contextual-button-padding-top) -
-        var(--ctr-survey-contextual-button-padding-bottom)
+      var(--ctr-survey-contextual-button-height, var(--lbr-size-x6)) - var(--ctr-survey-contextual-button-padding-top, var(--lbr-spacing-x150)) -
+        var(--ctr-survey-contextual-button-padding-bottom, var(--lbr-spacing-x150))
     );
     width: var(--thm-button-contextual-button-icon-width, calcSize(3));
     height: var(--thm-button-contextual-button-icon-height, calcSize(3));
