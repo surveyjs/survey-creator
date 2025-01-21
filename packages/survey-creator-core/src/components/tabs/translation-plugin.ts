@@ -51,7 +51,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.updateSettingsSurvey();
     this.model.readOnly = this.creator.readOnly;
     this.model.translationStringVisibilityCallback = (obj: Base, propertyName: string, visible: boolean) => {
-      const options = { obj: obj, propertyName: propertyName, visible: visible };
+      const options = { obj: obj, element: obj, propertyName: propertyName, visible: visible };
       !this.creator.onTranslationStringVisibility.isEmpty && this.creator.onTranslationStringVisibility.fire(this.creator, options);
       return options.visible;
     };

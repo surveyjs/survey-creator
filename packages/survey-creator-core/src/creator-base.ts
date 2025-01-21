@@ -2462,7 +2462,7 @@ export class SurveyCreatorModel extends Base
     if (!displayName) {
       displayName = SurveyHelper.getObjectName(obj, this.useElementTitles || this.showObjectTitles);
     }
-    var options = { obj: obj, displayName: displayName, area: area, reason: reason };
+    var options = { obj: obj, element: obj, displayName: displayName, area: area, reason: reason };
     this.onElementGetDisplayName.fire(this, options);
     return options.displayName;
   }
@@ -2489,12 +2489,14 @@ export class SurveyCreatorModel extends Base
       callback(survey);
     }
     area = area || this.getSurveyInstanceCreatedArea(reason);
+    const element = area === "property-grid" && model ? model.obj : undefined;
     this.onSurveyInstanceCreated.fire(this, {
       survey: survey,
       reason: reason,
       area: area,
       model: !!model ? model : this.currentPlugin?.model,
-      obj: area === "property-grid" && model ? model.obj : undefined
+      obj: element,
+      element: element
     });
     if (reason === "designer") {
       this.onDesignerSurveyCreated.fire(this, { survey: survey });
@@ -3485,7 +3487,7 @@ export class SurveyCreatorModel extends Base
     property: JsonObjectProperty,
     editor: Question
   ): void {
-    const options = { obj: object, property: property, editor: editor };
+    const options = { obj: object, element: object, property: property, editor: editor };
     this.onPropertyEditorCreated.fire(this, options);
   }
   onPropertyEditorUpdateTitleActionsCallback(
@@ -3494,7 +3496,7 @@ export class SurveyCreatorModel extends Base
     editor: Question,
     titleActions: IAction[]
   ): void {
-    const options = { obj: object, property: property, editor: editor, titleActions: titleActions };
+    const options = { obj: object, element: object, property: property, editor: editor, titleActions: titleActions };
     this.onPropertyEditorUpdateTitleActions.fire(this, options);
   }
   onPropertyGridShowModalCallback(object: any,
@@ -3545,6 +3547,7 @@ export class SurveyCreatorModel extends Base
     if (this.onCollectionItemAllowOperations.isEmpty) return;
     var options = {
       obj: obj,
+      element: obj,
       property: property,
       propertyName: property && property.name,
       collection: collection,
@@ -3566,6 +3569,7 @@ export class SurveyCreatorModel extends Base
   ): void {
     var options = {
       obj: obj,
+      element: obj,
       propertyName: propertyName,
       newItem: itemValue,
       itemValues: itemValues
@@ -3596,6 +3600,7 @@ export class SurveyCreatorModel extends Base
     const options: any = {
       propertyName: propertyName,
       obj: obj,
+      element: obj,
       editorOptions: editorOptions,
       allowAddRemoveItems: editorOptions.allowAddRemoveItems,
       allowRemoveAllItems: editorOptions.allowRemoveAllItems,
@@ -3643,6 +3648,7 @@ export class SurveyCreatorModel extends Base
     var options = {
       propertyName: propertyName,
       obj: obj,
+      element: obj,
       editor: editor,
       sortOrder: "asc",
       list: list,
@@ -3690,6 +3696,7 @@ export class SurveyCreatorModel extends Base
     const options = {
       locale: locale,
       obj: obj,
+      element: obj,
       locString: <LocalizableString>locString,
       newText: newText
     };
@@ -3700,6 +3707,7 @@ export class SurveyCreatorModel extends Base
     if (this.onTranslationExportItem.isEmpty) return text;
     const options = {
       obj: obj,
+      element: obj,
       name: name,
       locString: <LocalizableString>locString,
       locale: locale,
