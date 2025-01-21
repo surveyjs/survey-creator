@@ -68,6 +68,7 @@ svc-page {
   opacity: 0;
   top: calcSize(1);
   inset-inline-end: 0; // right
+  inset-inline-start: 0;
   display: flex;
   justify-content: flex-end;
   box-sizing: border-box;
