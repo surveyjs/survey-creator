@@ -1083,7 +1083,7 @@ export class PropertyGridModel {
   public get survey() {
     return this.surveyValue;
   }
-  public showOneCategoryInPropertyGrid: boolean = false;
+  public showOneCategoryInPropertyGrid: boolean = true;
 
   public validate(): boolean {
     if (!this.survey) return;

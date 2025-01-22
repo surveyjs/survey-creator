@@ -20,7 +20,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   public model: TabDesignerViewModel;
   public propertyGridViewModel: PropertyGridViewModel;
   private propertyGrid: PropertyGridModel;
-  private _showOneCategoryInPropertyGrid: boolean = false;
+  private _showOneCategoryInPropertyGrid: boolean = true;
   private propertyGridTab: SidebarPageModel;
   private toolboxTab: SidebarPageModel;
   private propertyGridPlaceholderPage: SidebarPageModel;

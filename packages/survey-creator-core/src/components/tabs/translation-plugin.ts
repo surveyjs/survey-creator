@@ -15,7 +15,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private importCsvAction: Action;
   private exportCsvAction: Action;
   private sidebarTab: SidebarPageModel;
-  private _showOneCategoryInPropertyGrid: boolean = false;
+  private _showOneCategoryInPropertyGrid: boolean = true;
   private tabControlModel: TabControlModel;
 
   public model: Translation;

@@ -56,7 +56,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private inputFileElement: HTMLInputElement;
   private simulatorCssClasses: any = surveyCss[defaultThemeName];
   private _availableThemes = [].concat(PredefinedThemes);
-  private _showOneCategoryInPropertyGrid: boolean = false;
+  private _showOneCategoryInPropertyGrid: boolean = true;
   private _advancedModeValue = false;
 
   private tabControlModel: TabControlModel;
