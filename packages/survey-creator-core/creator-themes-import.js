@@ -33,6 +33,114 @@ var themeConstants = {
 const baseThemeCssVariable = getCssVariablesFormFile(baseThemeName + ".css");
 const themeDistinctions = {};
 
+function ingectAlpha(hexColor, alpha) {
+  if (!!hexColor && alpha !== undefined) {
+    const rgbValue = HEXToRGB(hexColor);
+    return `rgba(${rgbValue[0]}, ${rgbValue[1]}, ${rgbValue[2]}, ${rgbValue[3] || alpha})`;
+  }
+}
+
+function roundTo2Decimals(number) {
+  return Math.round(number * 100) / 100;
+}
+
+function parseRgbaFromString(value = "") {
+  const matchRgb = value.match(/\((.*)\)/);
+  if (matchRgb) {
+    return matchRgb[1].split(",").map(i => parseFloat(i));
+  } else {
+    return [];
+  }
+}
+
+function getRGBaChannelValues(color) {
+  let colorRgba = parseRgbaFromString(color);
+  if (colorRgba.length === 0) {
+    colorRgba = parseRgbaFromString(ingectAlpha(color, 1));
+  }
+  return colorRgba;
+}
+
+function HEXToRGB(baseColor) {
+  if (!!baseColor) {
+    const r = parseInt(baseColor.slice(1, 3), 16);
+    const g = parseInt(baseColor.slice(3, 5), 16);
+    const b = parseInt(baseColor.slice(5, 7), 16);
+    const alpha = roundTo2Decimals(parseInt(baseColor.slice(7, 9), 16) / 255);
+
+    return [r, g, b, alpha];
+  }
+  return [];
+}
+
+function RGBToHSL(r, g, b){
+  r /= 255, g /= 255, b /= 255;
+  var max = Math.max(r, g, b), min = Math.min(r, g, b);
+  var h, s, l = (max + min) / 2;
+
+  if(max == min){
+      h = s = 0;
+  }else{
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch(max){
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+  }
+
+  return [roundTo2Decimals(h * 360), roundTo2Decimals(s * 100), roundTo2Decimals(l * 100)];
+}
+
+function generateColor(cssVariables, baseColorName, dependentColorName, skipHue = false, skipSaturation = false, skipLightness = false) {
+  if(!cssVariables[baseColorName]) {
+    console.log(`${baseColorName} is missing`);
+    return;
+  }
+  if(!cssVariables[dependentColorName]) {
+    console.log(`${dependentColorName} is missing`);
+    return;
+  }
+
+  const baseRgbaColor = getRGBaChannelValues(cssVariables[baseColorName]);
+  const baseHslColor = RGBToHSL(baseRgbaColor[0], baseRgbaColor[1], baseRgbaColor[2]);
+
+  const dependentRgbaColor = getRGBaChannelValues(cssVariables[dependentColorName]);
+  const dependentHslColor = RGBToHSL(dependentRgbaColor[0], dependentRgbaColor[1], dependentRgbaColor[2]);
+  // console.log(`${dependentColorName} r=${dependentRgbaColor[0]} g=${dependentRgbaColor[1]} b=${dependentRgbaColor[2]}`);
+  // console.log(`${dependentColorName} h=${dependentHslColor[0]} s=${dependentHslColor[1]} l=${dependentHslColor[2]}`);
+
+  const deltaAlpha = baseRgbaColor[3] - dependentRgbaColor[3];
+  const deltaH = roundTo2Decimals(baseHslColor[0] - dependentHslColor[0]);
+  const deltaS = roundTo2Decimals(baseHslColor[1] - dependentHslColor[1]);
+  const deltaL = roundTo2Decimals(baseHslColor[2] - dependentHslColor[2]);
+
+  // console.log(`${dependentColorName} dh=${deltaH} ds=${deltaS} dl=${deltaL} da=${deltaAlpha}`);
+  cssVariables[dependentColorName + "-deltaAlpha"] = deltaAlpha;
+  cssVariables[dependentColorName + "-deltaH"] = deltaH;
+  cssVariables[dependentColorName + "-deltaS"] = deltaS;
+  cssVariables[dependentColorName + "-deltaL"] = deltaL;
+
+  const hueValue = skipHue ? "h" : `calc(h - var(${dependentColorName + "-deltaH"}))`;
+  const saturationValue = skipSaturation ? "s" : `calc(s - var(${dependentColorName + "-deltaS"}))`;
+  const lightnessValue = skipLightness ? "l" : `calc(l - var(${dependentColorName + "-deltaL"}))`;
+  const alphaValue = `calc(1 - var(${dependentColorName + "-deltaAlpha"}))`;
+  cssVariables[dependentColorName] = `hsl(from var(${baseColorName}) ${hueValue} ${saturationValue} ${lightnessValue} / ${alphaValue})`;
+}
+function generateColorVariables(cssVariables) {
+  generateColor(cssVariables, "--sjs-primary-background-500", "--sjs-primary-background-400");
+  generateColor(cssVariables, "--sjs-primary-background-500", "--sjs-primary-background-10");
+
+  generateColor(cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-400");
+  generateColor(cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-25");
+  generateColor(cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-10");
+
+  generateColor(cssVariables, "--sjs-special-background", "--sjs-special-haze");
+  generateColor(cssVariables, "--sjs-special-background", "--sjs-special-glow");
+}
+
 function getUsedCssVariables(path) {
   fs.readdirSync(path, { withFileTypes: true }).forEach(item => {
     if(item.isDirectory()) {
@@ -161,6 +269,7 @@ Object.keys(themeNameMap).forEach(themeName => {
   (palettes || []).forEach(paletteName => {
     console.log("Palette - " + paletteName);
     const curPaletteCssVariables = getCssVariablesFormFile(currentTheme + "/" + paletteName + ".css");
+    generateColorVariables(curPaletteCssVariables);
     strImportTheme = writeThemePalette(currentTheme, paletteName, curPaletteCssVariables);
     indexFileContent += strImportTheme;
   });
