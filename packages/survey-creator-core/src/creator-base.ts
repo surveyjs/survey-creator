@@ -554,6 +554,8 @@ export class SurveyCreatorModel extends Base
    * @see [ICreatorOptions.collapsePanels](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#collapsePanels)
    * @see [ICreatorOptions.collapsePages](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#collapsePages)
    * @see expandCollapseButtonVisibility
+   * @see collapseAll
+   * @see expandAll
    */
   public onElementGetExpandCollapseState: EventBase<SurveyCreatorModel, ElementGetExpandCollapseStateEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetExpandCollapseStateEvent>();
   /**
@@ -2177,7 +2179,7 @@ export class SurveyCreatorModel extends Base
       reason: reason,
       collapsed: defaultValue
     };
-    this.onElementGetExpandCollapseState.fire(this, options);
+    if (reason) this.onElementGetExpandCollapseState.fire(this, options);
     return options.collapsed;
   }
 
@@ -4155,6 +4157,41 @@ export class SurveyCreatorModel extends Base
    * @see onElementGetExpandCollapseState
    */
   @property({ defaultValue: "onhover" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
+
+  /**
+   * Collapses all survey elements in the design surface.
+   * @see expandAll
+   * @see collapseElement
+   */
+  public collapseAll() {
+    this.expandCollapseManager.expandCollapseElements(null, true);
+  }
+  /**
+   * Expands all survey elements on the design surface.
+   * @see collapseAll
+   * @see expandElement
+   */
+  public expandAll() {
+    this.expandCollapseManager.expandCollapseElements(null, false);
+  }
+  /**
+   * Collapses an individual survey element on the design surface.
+   * @param element A survey element to collapse.
+   * @see expandElement
+   * @see collapseAll
+   */
+  public collapseElement(element: SurveyElement) {
+    SurveyElementAdornerBase.GetAdorner(element).collapsed = true;
+  }
+  /**
+   * Expands an individual survey element on the design surface.
+   * @param element A survey element to expand.
+   * @see collapseElement
+   * @see expandAll
+   */
+  public expandElement(element: SurveyElement) {
+    SurveyElementAdornerBase.GetAdorner(element).collapsed = false;
+  }
 
   collapsePages = false;
   collapsePanels = false;
