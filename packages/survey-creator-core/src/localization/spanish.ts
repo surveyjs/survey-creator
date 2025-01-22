@@ -327,7 +327,7 @@ var spanishTranslation = {
       templateTabTitle: "Patrón de título de tabulación",
       tabTitlePlaceholder: "Marcador de posición del título de la pestaña",
       templateVisibleIf: "Hacer visible un panel individual si",
-      hideNumber: "Ocultar el número de panel",
+      showNumber: "Numerar el panel",
       titleLocation: "Alineación del título del panel",
       descriptionLocation: "Alineación de la descripción del panel",
       templateQuestionTitleLocation: "Alineación del título de la pregunta",
@@ -344,7 +344,7 @@ var spanishTranslation = {
       requiredIf: "Haga que la pregunta sea obligatoria si:",
       page: "Página padre",
       state: "Estado de contracción del cuadro de pregunta",
-      hideNumber: "Ocultar el número de pregunta",
+      showNumber: "Numerar esta pregunta",
       titleLocation: "Alineación del título de la pregunta",
       descriptionLocation: "Alineación de la descripción de la pregunta",
       errorLocation: "Alineación de mensajes de error",
@@ -789,6 +789,10 @@ var spanishTranslation = {
       top: "En la parte superior",
       bottom: "En la parte inferior"
     },
+    previewMode: "Modo de vista previa",
+    gridLayoutEnabled: "Habilitar el diseño de cuadrícula",
+    maskSettings: "Ajustes de la máscara",
+    detailErrorLocation: "Alineación de mensajes de error de expansión de filas",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ var spanishTranslation = {
     rowTitleWidth: "Acepta valores CSS (px, %, in, pt, etc.).",
     totalText: "Visible sólo cuando al menos una columna tiene el tipo Total o la expresión Total.",
     cellErrorLocation: "Establece la ubicación de un mensaje de error en relación con una celda con entrada no válida. La opción \"Heredar\" aplica la configuración de la propiedad \"Alineación de mensajes de error\".",
+    detailErrorLocation: "Establece la ubicación de los mensajes de error para las preguntas anidadas en secciones de detalle. La opción \"Heredar\" aplica la configuración de la propiedad \"Alineación de mensajes de error\".",
     keyDuplicationError: "Cuando la propiedad \"Evitar respuestas duplicadas\" está habilitada, un encuestado que intente enviar una entrada duplicada recibirá el siguiente mensaje de error.",
     totalExpression: "Permite calcular los valores totales en función de una expresión. La expresión puede incluir cálculos básicos ('{q1_id} + {q2_id}'), expresiones booleanas ('{edad} > 60') y funciones ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     confirmDelete: "Activa un mensaje en el que se le pide que confirme la eliminación de filas.",
@@ -2768,3 +2773,10 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Establece la ubicación de la barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta."
 // survey.readOnly: "Make the survey read-only" => "Hacer que la encuesta sea de solo lectura"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Seleccione si desea evitar que los encuestados completen su encuesta."
+// paneldynamic.showNumber: "Number the panel" => "Numerar el panel"
+// question.showNumber: "Number this question" => "Numerar esta pregunta"
+// pe.previewMode: "Preview mode" => "Modo de vista previa"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Habilitar el diseño de cuadrícula"
+// pe.maskSettings: "Mask settings" => "Ajustes de la máscara"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Alineación de mensajes de error de expansión de filas"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Establece la ubicación de los mensajes de error para las preguntas anidadas en secciones de detalle. La opción \"Heredar\" aplica la configuración de la propiedad \"Alineación de mensajes de error\"."

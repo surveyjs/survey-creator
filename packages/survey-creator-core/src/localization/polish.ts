@@ -327,7 +327,7 @@ var polishStrings = {
       templateTabTitle: "Wzorzec tytułu tabulatora",
       tabTitlePlaceholder: "Symbol zastępczy tytułu tabulatora",
       templateVisibleIf: "Uwidocznij pojedynczy panel, jeśli",
-      hideNumber: "Ukryj numer panelu",
+      showNumber: "Numerowanie panelu",
       titleLocation: "Wyrównanie tytułu panelu",
       descriptionLocation: "Wyrównanie opisu panelu",
       templateQuestionTitleLocation: "Wyrównanie tytułu pytania",
@@ -344,7 +344,7 @@ var polishStrings = {
       requiredIf: "Zadbaj o to, aby pytanie było wymagane, jeśli",
       page: "Strona nadrzędna",
       state: "Stan zwinięcia pola pytania",
-      hideNumber: "Ukryj numer pytania",
+      showNumber: "Ponumeruj to pytanie",
       titleLocation: "Wyrównanie tytułu pytania",
       descriptionLocation: "Wyrównanie opisu pytania",
       errorLocation: "Wyrównanie komunikatu o błędzie",
@@ -789,6 +789,10 @@ var polishStrings = {
       top: "Na górze",
       bottom: "Na dole"
     },
+    previewMode: "Tryb podglądu",
+    gridLayoutEnabled: "Włączanie układu siatki",
+    maskSettings: "Ustawienia maski",
+    detailErrorLocation: "Wyrównanie komunikatu o błędzie rozwijania wiersza",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ var polishStrings = {
     rowTitleWidth: "Akceptuje wartości CSS (px, %, in, pt itp.).",
     totalText: "Opcja widoczna tylko wtedy, gdy co najmniej jedna kolumna zawiera wyrażenie typu Total lub Total.",
     cellErrorLocation: "Ustawia lokalizację komunikatu o błędzie w odniesieniu do komórki z nieprawidłowymi danymi wejściowymi. Opcja \"Dziedzicz\" stosuje ustawienie z właściwości \"Wyrównanie komunikatu o błędzie\".",
+    detailErrorLocation: "Ustawia lokalizację komunikatów o błędach dla pytań zagnieżdżonych w sekcjach szczegółowych. Opcja \"Dziedzicz\" stosuje ustawienie z właściwości \"Wyrównanie komunikatu o błędzie\".",
     keyDuplicationError: "Gdy właściwość \"Zapobiegaj zduplikowanym odpowiedziom\" jest włączona, respondent próbujący przesłać zduplikowany wpis otrzyma następujący komunikat o błędzie.",
     totalExpression: "Umożliwia obliczanie wartości całkowitych na podstawie wyrażenia. Wyrażenie może zawierać podstawowe obliczenia ('{q1_id} + {q2_id}'), wyrażenia logiczne ('{age} > 60') i funkcje ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' itp.).",
     confirmDelete: "Wyzwala monit z prośbą o potwierdzenie usunięcia wiersza.",
@@ -3257,3 +3262,10 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Ustawia położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu powyżej lub poniżej nagłówka ankiety."
 // survey.readOnly: "Make the survey read-only" => "Ustawianie ankiety jako tylko do odczytu"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Wybierz, czy chcesz uniemożliwić respondentom wypełnianie ankiety."
+// paneldynamic.showNumber: "Number the panel" => "Numerowanie panelu"
+// question.showNumber: "Number this question" => "Ponumeruj to pytanie"
+// pe.previewMode: "Preview mode" => "Tryb podglądu"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Włączanie układu siatki"
+// pe.maskSettings: "Mask settings" => "Ustawienia maski"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Wyrównanie komunikatu o błędzie rozwijania wiersza"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Ustawia lokalizację komunikatów o błędach dla pytań zagnieżdżonych w sekcjach szczegółowych. Opcja \"Dziedzicz\" stosuje ustawienie z właściwości \"Wyrównanie komunikatu o błędzie\"."

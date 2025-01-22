@@ -3,7 +3,7 @@
 .svc-tab-translation {
   width: 100%;
   height: 100%;
-  background-color: var(--ctr-surface-background-color, $background-dim);
+  background-color: var(--ctr-surface-background-color, var(--sjs-special-background, #edf9f7ff));
 }
 
 .svc-translation-tab {
@@ -24,7 +24,7 @@
 
 
 .st-properties {
-  background-color: var(--ctr-property-grid-background-color, $background-dim);
+  background-color: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   flex-grow: 1;
   padding-right: calcSize(4);
   padding-left: calcSize(4);
@@ -42,7 +42,7 @@
     .spg-table__question-wrapper {
       @include ctrDefaultFont;
       padding: calcSize(1.5) calcSize(1);
-      color: var(--ctr-checkbox-text-color, $foreground-dim);
+      color: var(--ctr-checkbox-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
 
       .spg-checkbox {
         margin: 0;
@@ -55,20 +55,20 @@
 
     .spg-checkbox--disabled {
       .spg-checkbox__caption {
-        color: var(--ctr-checkbox-text-color-disabled, $foreground-light);
+        color: var(--ctr-checkbox-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
       }
     
       .spg-checkbox__rectangle,
       .spg-checkbox__rectangle:hover {
-        border: var(--ctr-checkbox-border-width, 1px) solid var(--ctr-checkbox-border-color-disabled, rgba(0, 0, 0, 0.16));
-        background: var(--ctr-checkbox-background-color-disabled, #f3f3f3);
+        border: var(--ctr-checkbox-border-width, var(--sjs-stroke-x1)) solid var(--ctr-checkbox-border-color-disabled, var(--sjs-border-10, #dcdcdcff));
+        background: var(--ctr-checkbox-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
       }
     }
   }
 
   .spg-matrixdynamic__dragged-row {
     @include ctrDefaultFont;
-    color: var(--ctr-checkbox-text-color, $foreground-dim);
+    color: var(--ctr-checkbox-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
 
     .spg-table__cell:nth-child(3) {
       flex: 1;
@@ -107,7 +107,7 @@
 
 .st-strings-header {
   .st-table__cell {
-    background-color: var(--ctr-string-table-header-background-color, $background-dim);
+    background-color: var(--ctr-string-table-header-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
     height: auto;
   }
 }
@@ -117,7 +117,7 @@
   height: fit-content;
   max-height: 100%;
   overflow-y: auto;
-  background-color: var(--ctr-string-table-background-color, $background-dim); 
+  background-color: var(--ctr-string-table-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff)); 
 }
 
 .st-title.st-panel__title,
@@ -127,17 +127,17 @@
 }
 
 .st-table__cell.st-table__cell--header {
-  color: var(--ctr-string-table-header-text-color, $foreground-light);
+  color: var(--ctr-string-table-header-text-color, var(--sjs-layer-3-foreground-75, #000000bf));
 }
 
 .st-title.st-panel__title {
   margin: 0;
-  color: var(--ctr-string-table-group-header-text-color, $foreground-light);
-  background-color: var(--ctr-string-table-group-header-background-color, $background-dim-light);
-  border-bottom: 1px solid var(--ctr-string-table-row-border-color, $border-light);
-  padding: var(--ctr-string-table-row-padding-top, #{calcSize(1)})
-    var(--ctr-string-table-row-padding-right, #{calcSize(3)}) var(--ctr-string-table-row-padding-bottom, #{calcSize(1)})
-    var(--ctr-string-table-row-padding-left, #{calcSize(3)});
+  color: var(--ctr-string-table-group-header-text-color, var(--sjs-layer-2-foreground-75, #000000bf));
+  background-color: var(--ctr-string-table-group-header-background-color, var(--sjs-layer-2-background-500, #f8f8f8ff));
+  border-bottom: 1px solid var(--ctr-string-table-row-border-color, var(--sjs-border-10, #dcdcdcff));
+  padding: var(--ctr-string-table-row-padding-top, var(--sjs-spacing-x1))
+    var(--ctr-string-table-row-padding-right, var(--sjs-spacing-x3)) var(--ctr-string-table-row-padding-bottom, var(--sjs-spacing-x1))
+    var(--ctr-string-table-row-padding-left, var(--sjs-spacing-x3));
 }
 
 .st-table {
@@ -151,14 +151,14 @@
   display: block;
   flex: 1 1;
   box-sizing: border-box;
-  background-color: var(--ctr-string-table-row-background-color, $background);
-  border-bottom: 1px solid var(--ctr-string-table-row-border-color, $border-light);
+  background-color: var(--ctr-string-table-row-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  border-bottom: 1px solid var(--ctr-string-table-row-border-color, var(--sjs-border-10, #dcdcdcff));
   padding: calcSize(1) 0;
 }
 
 td.st-table__cell:first-of-type {
   @include ctrDefaultBoldFont;
-  color: var(--ctr-string-table-row-text-color-title, $foreground);
+  color: var(--ctr-string-table-row-text-color-title, var(--sjs-layer-1-foreground-100, #000000e6));
   max-width: 300px;
   padding-right: calcSize(3);
 
@@ -187,8 +187,8 @@ td.st-table__cell:first-of-type {
   width: calc(100% - 3 * #{$base-unit});
   border: unset;
   outline: none;
-  background-color: var(--ctr-string-table-row-background-color, $background);
-  color: var(--ctr-string-table-row-text-color-title, $foreground);
+  background-color: var(--ctr-string-table-row-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  color: var(--ctr-string-table-row-text-color-title, var(--sjs-layer-1-foreground-100, #000000e6));
   resize: none;
   padding: 0;
 }
@@ -279,7 +279,7 @@ td.st-table__cell:first-of-type {
   padding: calcSize(2);
   padding-left: calcSize(3);
   background: $background;
-  border-bottom: 1px solid var(--ctr-string-table-row-border-color, $border-light);
+  border-bottom: 1px solid var(--ctr-string-table-row-border-color, var(--sjs-border-10, #dcdcdcff));
 }
 .st-translation-dialog .st-strings-wrapper {
   border-radius: 4px;

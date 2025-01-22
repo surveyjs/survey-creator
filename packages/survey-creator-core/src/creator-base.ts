@@ -82,8 +82,7 @@ require("./creator-theme/creator.scss");
 addIconsToThemeSet("v1", iconsV1);
 addIconsToThemeSet("v2", iconsV2);
 
-SvgRegistry.registerIcons(settings.useLegacyIcons ? iconsV1 : iconsV2);
-
+SvgRegistry.registerIcons(iconsV2);
 export interface IKeyboardShortcut {
   name?: string;
   affectedTab?: string;
@@ -1486,6 +1485,7 @@ export class SurveyCreatorModel extends Base
       this.options = !!options2 ? options2 : {};
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
+    SvgRegistry.registerIcons(SvgThemeSets["v2"]);
     this.previewDevice = options.previewDevice ?? "desktop";
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
@@ -4220,7 +4220,7 @@ export class SurveyCreatorModel extends Base
       assign(newCssVariable, designerPlugin.model.scaleCssVariables || {});
     }
     this.themeVariables = newCssVariable;
-    const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v1";
+    const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v2";
     SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);
 
     if (isLight !== undefined) {

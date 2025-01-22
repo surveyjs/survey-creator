@@ -29,7 +29,7 @@
 
 .svc-matrix-cell--selected {
   position: absolute;
-  border: calcSize(0.25) solid $secondary;
+  border: calcSize(0.25) solid var(--sjs-secondary-background-500, #19B394FF);
   border-radius: calcSize(0.5);
   top: calcSize(0);
   left: calcSize(0);

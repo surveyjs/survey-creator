@@ -22,7 +22,7 @@
 
     &[aria-placeholder]:empty:before {
       content: attr(aria-placeholder);
-      color: var(--ctr-survey-page-header-title-color-placeholder, $foreground-light);
+      color: var(--ctr-survey-page-header-title-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
       transition: color $creator-transition-duration;
     }
   }

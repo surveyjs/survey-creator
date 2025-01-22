@@ -327,7 +327,7 @@ export var jaStrings = {
       templateTabTitle: "タブ タイトルのパターン",
       tabTitlePlaceholder: "タブ タイトルのプレースホルダー",
       templateVisibleIf: "個々のパネルを表示するのは、次の場合です",
-      hideNumber: "パネル番号を隠す",
+      showNumber: "パネルに番号を付ける",
       titleLocation: "パネルタイトルの配置",
       descriptionLocation: "パネル記述の位置合わせ",
       templateQuestionTitleLocation: "質問タイトルの配置",
@@ -344,7 +344,7 @@ export var jaStrings = {
       requiredIf: "次の場合は質問を必須にします",
       page: "親ページ",
       state: "質問ボックスの折りたたみ状態",
-      hideNumber: "質問番号を非表示にする",
+      showNumber: "この質問に番号を付ける",
       titleLocation: "質問タイトルの配置",
       descriptionLocation: "質問の説明の配置",
       errorLocation: "エラー・メッセージのアライメント",
@@ -789,6 +789,10 @@ export var jaStrings = {
       top: "上に",
       bottom: "下に"
     },
+    previewMode: "プレビューモード",
+    gridLayoutEnabled: "グリッド レイアウトの有効化",
+    maskSettings: "マスク設定",
+    detailErrorLocation: "行拡張エラーメッセージの配置",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var jaStrings = {
     rowTitleWidth: "CSS 値 (px、%、in、pt など) を受け入れます。",
     totalText: "少なくとも 1 つの列に [合計型] または [合計式] がある場合にのみ表示されます。",
     cellErrorLocation: "無効な入力があるセルに関連するエラーメッセージの位置を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。",
+    detailErrorLocation: "詳細セクションにネストされた質問のエラーメッセージの場所を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。",
     keyDuplicationError: "「重複回答の防止」プロパティが有効な場合、重複したエントリを送信しようとする回答者は、次のエラーメッセージを受け取ります。",
     totalExpression: "式に基づいて合計値を計算できます。式には、基本的な計算 ('{q1_id} + {q2_id}')、ブール式 ('{age} > 60')、関数 ('iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' など) を含めることができます。",
     confirmDelete: "行の削除を確認するプロンプトをトリガーします。",
@@ -2991,3 +2996,10 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "プログレスバーの位置を設定します。「自動」の値は、調査ヘッダーの上または下に進行状況バーを表示します。"
 // survey.readOnly: "Make the survey read-only" => "調査を読み取り専用にする"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "回答者がアンケートに回答できないようにする場合に選択します。"
+// paneldynamic.showNumber: "Number the panel" => "パネルに番号を付ける"
+// question.showNumber: "Number this question" => "この質問に番号を付ける"
+// pe.previewMode: "Preview mode" => "プレビューモード"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "グリッド レイアウトの有効化"
+// pe.maskSettings: "Mask settings" => "マスク設定"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "行拡張エラーメッセージの配置"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "詳細セクションにネストされた質問のエラーメッセージの場所を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。"
