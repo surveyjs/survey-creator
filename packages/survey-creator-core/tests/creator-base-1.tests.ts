@@ -2158,8 +2158,8 @@ test("PageAdorner and onElementAllowOperations, allowExpandCollapse", (): any =>
   });
   const pageModel1 = new PageAdorner(creator, creator.survey.pages[0]);
   const pageModel2 = new PageAdorner(creator, creator.survey.pages[1]);
-  expect(pageModel1.actionContainer.getActionById("collapse").visible).toBeFalsy();
-  expect(pageModel2.actionContainer.getActionById("collapse").visible).toBeTruthy();
+  expect(pageModel1.topActionContainer.getActionById("collapse").visible).toBeFalsy();
+  expect(pageModel2.topActionContainer.getActionById("collapse").visible).toBeTruthy();
 });
 test("PageAdorner and creator readOnly", (): any => {
   const creator = new CreatorTester();
