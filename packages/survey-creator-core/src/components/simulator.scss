@@ -18,10 +18,10 @@
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  border-radius: var(--ctr-preview-device-corner-radius, 32px);
-  border: var(--ctr-preview-device-border-width, 4px) solid var(--ctr-preview-device-border-color, $background-dim);
-  background: var(--ctr-preview-device-background-color, $background);
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.10), 0px 8px 16px 0px var(--ctr-preview-device-shadow-2-color, rgba(0, 0, 0, 0.05));
+  border-radius: var(--ctr-preview-device-corner-radius, var(--sjs-corner-radius-x4));
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.10), 0px 8px 16px 0px var(--ctr-preview-device-shadow-2-color, var(--sjs-special-glow, #004c441a));
+  border: var(--ctr-preview-device-border-width, var(--sjs-stroke-x4)) solid var(--ctr-preview-device-border-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
+  background: var(--ctr-preview-device-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 .svd-simulator-main {

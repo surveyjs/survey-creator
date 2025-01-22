@@ -2,7 +2,7 @@
 
 .svc-designer-header .sd-container-modern__title {
   gap: 0;
-  column-gap: var(--lbr-header-gap, 32px);
+  column-gap: var(--lbr-header-gap, var(--lbr-spacing-x4));
 }
 
 .svc-logo-image {
@@ -36,41 +36,41 @@
 .svc-logo-image-placeholder {
   @include ctrLargeFont;
   color: $foreground-light;
-  opacity: var(--ctr-survey-header-logo-placeholder-icon-opacity, 0.25);
+  opacity: var(--ctr-survey-header-logo-placeholder-icon-opacity, 0.5);
   white-space: nowrap;
   word-break: keep-all;
   padding: 0;
   // width: calcSize(8);
   // height: calcSize(8);
-  padding: var(--ctr-survey-header-logo-placeholder-padding-top, calcSize(1))
-    var(--ctr-survey-header-logo-placeholder-padding-right, calcSize(1))
-    var(--ctr-survey-header-logo-placeholder-padding-bottom, calcSize(1))
-    var(--ctr-survey-header-logo-placeholder-padding-left, calcSize(1));
+  padding: var(--ctr-survey-header-logo-placeholder-padding-top, var(--lbr-spacing-x1))
+    var(--ctr-survey-header-logo-placeholder-padding-right, var(--lbr-spacing-x1))
+    var(--ctr-survey-header-logo-placeholder-padding-bottom, var(--lbr-spacing-x1))
+    var(--ctr-survey-header-logo-placeholder-padding-left, var(--lbr-spacing-x1));
   display: flex;
   justify-content: center;
   align-items: center;
   // margin-right: calcSize(-2);
-  border-radius: var(--ctr-survey-header-logo-placeholder-corner-radius, calcSize(4));
+  border-radius: var(--ctr-survey-header-logo-placeholder-corner-radius, var(--lbr-corner-radius-round));
   transition: background-color $creator-transition-duration, opacity $creator-transition-duration;
 
   &:hover {
-    background-color: var(--ctr-survey-header-logo-placeholder-background-color-hovered, $primary-light);
+    background-color: var(--ctr-survey-header-logo-placeholder-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
     opacity: unset;
 
     use {
-      fill: var(--ctr-survey-header-logo-placeholder-icon-color-hovered, $primary);
+      fill: var(--ctr-survey-header-logo-placeholder-icon-color-hovered, var(--sjs-primary-background-500, #19b394ff));
     }
   }
 
   svg {
-    width: var(--ctr-survey-header-logo-placeholder-icon-width, calcSize(6));
-    height: var(--ctr-survey-header-logo-placeholder-icon-height, calcSize(6));
+    width: var(--ctr-survey-header-logo-placeholder-icon-width, var(--lbr-size-x6));
+    height: var(--ctr-survey-header-logo-placeholder-icon-height, var(--lbr-size-x6));
   }
 }
 
 .svc-logo-image-placeholder use {
   transition: fill $creator-transition-duration;
-  fill: var(--ctr-survey-header-logo-placeholder-icon-color, $foreground-light);
+  fill: var(--ctr-survey-header-logo-placeholder-icon-color, var(--sjs-layer-3-foreground-50, #00000080));
 }
 
 .svc-logo-image-container {

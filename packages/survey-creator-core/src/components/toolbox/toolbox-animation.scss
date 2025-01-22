@@ -33,8 +33,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 @keyframes toolboxSeparatorSearchMoveIn {
   from {
-    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, calcSize(2));
-    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, calcSize(2));
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, var(--sjs-spacing-x2));
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, var(--sjs-spacing-x2));
 
     overflow: hidden;
   }
@@ -48,14 +48,14 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 @keyframes toolboxSeparatorMoveIn {
   from {
-    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, calcSize(2));
-    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, calcSize(2));
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, var(--sjs-spacing-x2));
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, var(--sjs-spacing-x2));
     overflow: hidden;
   }
 
   to {
-    padding-inline-end: var(--ctr-toolbox-separator-padding-right, calcSize(2));
-    padding-inline-start: var(--ctr-toolbox-separator-padding-left, calcSize(2));
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right, 0px);
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left, var(--sjs-spacing-x2));
     overflow: hidden;
   }
 }
@@ -120,9 +120,9 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 .svc-toolbox--flyout-to-compact-running {
   width: var(--toolbox-width-compact);
-  margin-inline-end: var(--ctr-toolbox-margin-left-compact, calcSize(1.5));
+  margin-inline-end: var(--ctr-toolbox-margin-left-compact, 0);
   z-index: 200;
-  border-inline-end: var(--ctr-toolbox-border-width-right, 0px) solid transparent;
+  border-inline-end: var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1)) solid transparent;
 }
 
 .svc-creator--disable-animations {

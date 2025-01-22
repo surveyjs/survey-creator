@@ -327,7 +327,7 @@ export const thStrings = {
       templateTabTitle: "รูปแบบชื่อแท็บ",
       tabTitlePlaceholder: "ตัวอย่างชื่อแท็บ",
       templateVisibleIf: "ทำให้แผงแต่ละแผงมองเห็นได้ถ้า",
-      hideNumber: "ซ่อนหมายเลขแผง",
+      showNumber: "หมายเลขแผง",
       titleLocation: "การจัดตำแหน่งชื่อแผง",
       descriptionLocation: "การจัดตำแหน่งคำอธิบายแผง",
       templateQuestionTitleLocation: "การจัดตำแหน่งชื่อคำถาม",
@@ -344,7 +344,7 @@ export const thStrings = {
       requiredIf: "ทำให้คำถามจำเป็นถ้า",
       page: "ย้ายคำถามไปที่หน้า",
       state: "สถานะกล่องคำถามพับ",
-      hideNumber: "ซ่อนหมายเลขคำถาม",
+      showNumber: "ใส่หมายเลขคําถามนี้",
       titleLocation: "การจัดตำแหน่งชื่อคำถาม",
       descriptionLocation: "การจัดตำแหน่งคำอธิบายคำถาม",
       errorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
@@ -789,6 +789,10 @@ export const thStrings = {
       top: "ด้านบน",
       bottom: "ด้านล่าง"
     },
+    previewMode: "โหมดแสดงตัวอย่าง",
+    gridLayoutEnabled: "เปิดใช้งานเค้าโครงกริด",
+    maskSettings: "การตั้งค่าหน้ากาก",
+    detailErrorLocation: "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดในการขยายแถว",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export const thStrings = {
     rowTitleWidth: "รับค่าของ CSS (px, %, in, pt, ฯลฯ)",
     totalText: "แสดงเฉพาะเมื่อมีคอลัมน์ที่แสดงค่ารวมที่ตั้งค่าด้วย \"วิธีการรวม\" หรือ \"นิพจน์ค่ารวม\"",
     cellErrorLocation: "ตั้งตำแหน่งของข้อความข้อผิดพลาดเมื่อเทียบกับเซลล์ที่มีอินพุตที่ไม่ถูกต้อง ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจาก \"การจัดข้อความข้อผิดพลาด\"",
+    detailErrorLocation: "ตั้งค่าตําแหน่งของข้อความแสดงข้อผิดพลาดสําหรับคําถามที่ซ้อนกันในส่วนรายละเอียด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจากคุณสมบัติ \"การจัดตําแหน่งข้อความแสดงข้อผิดพลาด\"",
     keyDuplicationError: "เมื่อเปิดใช้คุณสมบัติ \"ป้องกันคำตอบซ้ำกัน\" ผู้ตอบที่พยายามส่งการตอบซ้ำจะได้รับข้อความข้อผิดพลาดต่อไปนี้",
     totalExpression: "ช่วยให้คุณคำนวณค่ารวมตามนิพจน์ นิพจน์สามารถประกอบด้วยการคำนวณพื้นฐาน ({q1_id} + {q2_id}), นิพจน์บูลีน ({age} > 60) และฟังก์ชัน ('iif(), today(), age(), min(), max(), avg(), ฯลฯ)",
     confirmDelete: "เรียกใช้งานพร้อมท์เพื่อยืนยันการลบแถว",
@@ -1932,3 +1937,10 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"
 // survey.readOnly: "Make the survey read-only" => "ทําให้แบบสํารวจเป็นแบบอ่านอย่างเดียว"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "เลือกว่าคุณต้องการป้องกันไม่ให้ผู้ตอบแบบสอบถามกรอกแบบสํารวจหรือไม่"
+// paneldynamic.showNumber: "Number the panel" => "หมายเลขแผง"
+// question.showNumber: "Number this question" => "ใส่หมายเลขคําถามนี้"
+// pe.previewMode: "Preview mode" => "โหมดแสดงตัวอย่าง"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "เปิดใช้งานเค้าโครงกริด"
+// pe.maskSettings: "Mask settings" => "การตั้งค่าหน้ากาก"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดในการขยายแถว"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "ตั้งค่าตําแหน่งของข้อความแสดงข้อผิดพลาดสําหรับคําถามที่ซ้อนกันในส่วนรายละเอียด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจากคุณสมบัติ \"การจัดตําแหน่งข้อความแสดงข้อผิดพลาด\""

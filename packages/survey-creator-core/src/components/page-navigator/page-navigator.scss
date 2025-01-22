@@ -4,36 +4,36 @@ svc-page-navigator,
 .svc-page-navigator {
   display: flex;
   flex-direction: column;
-  gap: var(--ctr-page-navigator-gap, calcSize(2));
+  gap: var(--ctr-page-navigator-gap, var(--sjs-spacing-x2));
 }
 
 .svc-page-navigator__button-icon {
   display: block;
-  width: var(--ctr-page-navigator-button-icon-width, calcSize(3));
-  height: var(--ctr-page-navigator-button-icon-height, calcSize(3));
-  padding: var(--ctr-page-navigator-button-padding, calcSize(1));
-  border-radius: var(--ctr-page-navigator-button-corner-radius, 50%);
+  width: var(--ctr-page-navigator-button-icon-width, var(--sjs-font-size-x3));
+  height: var(--ctr-page-navigator-button-icon-height, var(--sjs-font-size-x3));
+  padding: var(--ctr-page-navigator-button-padding, var(--sjs-spacing-x1));
+  border-radius: var(--ctr-page-navigator-button-corner-radius, var(--sjs-corner-radius-x1));
   overflow: visible;
   cursor: pointer;
   transition: background-color $creator-transition-duration;
 
   .sv-svg-icon {
-    width: var(--ctr-page-navigator-button-icon-width, calcSize(3));
-    height: var(--ctr-page-navigator-button-icon-height, calcSize(3));
+    width: var(--ctr-page-navigator-button-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-page-navigator-button-icon-height, var(--sjs-font-size-x3));
   }
 
   use {
-    fill: var(--ctr-page-navigator-button-icon-color, $foreground-light);
+    fill: var(--ctr-page-navigator-button-icon-color, var(--sjs-layer-3-foreground-75, #000000bf));
     transition: fill $creator-transition-duration;
   }
 }
 
 .svc-page-navigator__button {
-  --ctr-page-navigator-button-double-padding: calc(2 * var(--ctr-page-navigator-button-padding));
-  --ctr-page-navigator-button-width: calc(var(--ctr-page-navigator-button-icon-width) + var(--ctr-page-navigator-button-double-padding));
-  --ctr-page-navigator-button-height: calc(var(--ctr-page-navigator-button-icon-height) + var(--ctr-page-navigator-button-double-padding));
-  width: var(--ctr-page-navigator-button-width, calcSize(5));
-  height: var(--ctr-page-navigator-button-height, calcSize(5));
+  --ctr-page-navigator-button-double-padding: calc(2 * var(--ctr-page-navigator-button-padding, var(--sjs-spacing-x1)));
+  --ctr-page-navigator-button-width: calc(var(--ctr-page-navigator-button-icon-width, var(--sjs-font-size-x3)) + var(--ctr-page-navigator-button-double-padding));
+  --ctr-page-navigator-button-height: calc(var(--ctr-page-navigator-button-icon-height, var(--sjs-font-size-x3)) + var(--ctr-page-navigator-button-double-padding));
+  width: var(--ctr-page-navigator-button-width);
+  height: var(--ctr-page-navigator-button-height);
 
   padding: 0;
   cursor: pointer;
@@ -45,10 +45,10 @@ svc-page-navigator,
     outline: none;
 
     .svc-page-navigator__button-icon {
-      background-color: var(--ctr-page-navigator-button-background-color-hovered, $primary-light);
+      background-color: var(--ctr-page-navigator-button-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
 
       use {
-        fill: var(--ctr-page-navigator-button-icon-color-hovered, $primary);
+        fill: var(--ctr-page-navigator-button-icon-color-hovered, var(--sjs-layer-3-foreground-75, #000000bf));
       }
     }
   }
@@ -57,11 +57,11 @@ svc-page-navigator,
 .svc-page-navigator__button--pressed,
 .svc-page-navigator__button:active {
   .svc-page-navigator__button-icon {
-    background: var(--ctr-page-navigator-button-background-color-pressed, $primary-light);
+    background: var(--ctr-page-navigator-button-background-color-pressed, var(--sjs-primary-background-10, #19b3941a));
     opacity: var(--ctr-page-navigator-button-opacity-pressed, 0.5);
 
     use {
-      fill: var(--ctr-page-navigator-button-icon-color-hovered, $primary);
+      fill: var(--ctr-page-navigator-button-icon-color-hovered, var(--sjs-layer-3-foreground-75, #000000bf));
     }
   }
 }
@@ -69,10 +69,10 @@ svc-page-navigator,
 .svc-page-navigator__button--active,
 .svc-page-navigator__button--active:hover {
   .svc-page-navigator__button-icon {
-    background: var(--ctr-page-navigator-button-background-color-checked, transparent);
+    background: var(--ctr-page-navigator-button-background-color-checked, var(--sjs-primary-background-10, #19b3941a));
 
     use {
-      fill: var(--ctr-page-navigator-button-icon-color-checked, $primary);
+      fill: var(--ctr-page-navigator-button-icon-color-checked, var(--sjs-primary-background-500, #19b394ff));
     }
   }
 }

@@ -9,10 +9,10 @@ $-base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
 @mixin ctrLargeFont {
   font-family: $-font-family;
-  font-size: var(--ctr-font-large-size, 32px);
+  font-size: var(--ctr-font-large-size, var(--sjs-font-size-x4));
   font-style: normal;
   font-weight: 400;
-  line-height: var(--ctr-font-large-line-height, 40px);
+  line-height: var(--ctr-font-large-line-height, var(--sjs-line-height-x5));
 }
 
 @mixin ctrLargeBoldFont {
@@ -21,14 +21,14 @@ $-base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin ctrMediumFont {
-  --thm-medium-bold-font-size: calc(3 * #{$-base-unit});
-  --thm-medium-bold-line-height: calc(4 * #{$-base-unit});
+  // --thm-medium-bold-font-size: calc(3 * #{$-base-unit});
+  // --thm-medium-bold-line-height: calc(4 * #{$-base-unit});
 
   font-family: $-font-family;
-  font-size: var(--ctr-font-medium-size, var(--thm-medium-bold-font-size, 24px));
+  font-size: var(--ctr-font-medium-size, var(--sjs-font-size-x3));
   font-style: normal;
   font-weight: 400;
-  line-height: var(--ctr-font-medium-line-height, var(--thm-medium-bold-line-height, 32px));
+  line-height: var(--ctr-font-medium-line-height, var(--sjs-line-height-x4));
 }
 
 @mixin ctrMediumBoldFont {
@@ -37,14 +37,14 @@ $-base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin ctrDefaultFont {
-  --thm-default-font-size: var(--sjs-font-size, calc(2 * #{$-base-unit}));
-  --thm-default-line-height: calc(1.5 * var(--thm-default-font-size));
+  // --thm-default-font-size: var(--sjs-font-size, calc(2 * #{$-base-unit}));
+  // --thm-default-line-height: calc(1.5 * var(--thm-default-font-size));
 
   font-family: $-font-family;
-  font-size: var(--ctr-font-default-size, var(--thm-default-font-size, 16px));
+  font-size: var(--ctr-font-default-size, var(--sjs-font-size-x2));
   font-style: normal;
   font-weight: 400;
-  line-height: var(--ctr-font-default-line-height, var(--thm-default-line-height, 24px));
+  line-height: var(--ctr-font-default-line-height, var(--sjs-line-height-x3));
 }
 
 @mixin ctrDefaultBoldFont {
@@ -66,20 +66,20 @@ $-base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 @mixin ctrDefaultAllCapsFont {
   @include ctrDefaultFont;
   font-weight: 600;
-  line-height: var(--ctr-font-default-line-height-all-caps, 16px);
+  line-height: var(--ctr-font-default-line-height-all-caps, var(--sjs-line-height-x2));
   text-transform: uppercase;
 }
 
 @mixin ctrSmallFont {
-  --small-bold-font-size: var(--sjs-font-size, calc(2 * #{$-base-unit}));
-  --ctr-small-bold-font-size: calc(0.75 * var(--small-bold-font-size));
-  --ctr-small-bold-line-height: var(--small-bold-font-size);
+  // --small-bold-font-size: var(--sjs-font-size, calc(2 * #{$-base-unit}));
+  // --ctr-small-bold-font-size: calc(0.75 * var(--small-bold-font-size));
+  // --ctr-small-bold-line-height: var(--small-bold-font-size);
 
   font-family: $-font-family;
-  font-size: var(--ctr-font-small-size, var(--ctr-small-bold-font-size, 12px));
+  font-size: var(--ctr-font-small-size, var(--sjs-font-size-x150));
   font-style: normal;
   font-weight: 400;
-  line-height: var(--ctr-font-small-line-height, var(--ctr-small-bold-line-height, 16px));
+  line-height: var(--ctr-font-small-line-height, var(--sjs-line-height-x2));
 }
 
 @mixin ctrSmallBoldFont {
@@ -100,8 +100,8 @@ $-base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
 @mixin ctrCodeFont {
   font-family: var(--ctr-font-family-code, monospace);
-  font-size: var(--ctr-font-code-size, 16px);
+  font-size: var(--ctr-font-code-size, var(--sjs-font-size-x2));
   font-style: normal;
   font-weight: 400;
-  line-height: var(--ctr-font-code-line-height, 24px);
+  line-height: var(--ctr-font-code-line-height, var(--sjs-line-height-x3));
 }
