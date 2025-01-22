@@ -11,6 +11,7 @@
       sv-ng-svg-icon></svg>
     <div class="svc-page__content-actions">
       <sv-action-bar [model]="adorner.actionContainer"></sv-action-bar>
+      <sv-action-bar *ngIf="adorner.topActionContainer.hasActions" [model]="adorner.topActionContainer"></sv-action-bar>
     </div>
   </div>
   <div *ngIf="!adorner.allowDragging || adorner.isGhost" class="svc-page__content-actions">
