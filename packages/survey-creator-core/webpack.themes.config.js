@@ -10,6 +10,7 @@ const config = {
     path: __dirname + "/build/themes"
   },
   entry: {
+    "sc2020": path.resolve(__dirname, "./src/themes/sc2020.ts"),
     "default-light": path.resolve(__dirname, "./src/themes/default-light.ts"),
     "default-dark": path.resolve(__dirname, "./src/themes/default-dark.ts"),
     "default-contrast": path.resolve(__dirname, "./src/themes/default-contrast.ts"),

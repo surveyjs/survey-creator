@@ -15,7 +15,8 @@ Object.keys(Themes || {}).forEach(themeName => {
 });
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
-  static defautlThemeName = "sc2020";
+  static legacyThemeName = "sc2020";
+  static defaultThemeName = "default-light";
 
   initialCssVariables: { [index: string]: string } = {};
   themeCssVariablesChanges?: { [index: string]: string } = {};
@@ -33,7 +34,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     "--ctr-stroke-unit": 1,
   }
 
-  @property() themeName: string = CreatorThemeModel.defautlThemeName;
+  @property() themeName: string = CreatorThemeModel.defaultThemeName;
   @property() scale: number;
   @property() fontScale: number;
   @property() isLight: boolean = true;
@@ -141,8 +142,8 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
 
   private cssVariableChangedHandler() {
-    if (this.themeName === CreatorThemeModel.defautlThemeName && Object.keys(this.cssVariables).length === 0) {
-      this.loadTheme({ themeName: CreatorThemeModel.defautlThemeName });
+    if (this.themeName === CreatorThemeModel.defaultThemeName && Object.keys(this.cssVariables).length === 0) {
+      this.loadTheme({ themeName: CreatorThemeModel.defaultThemeName });
     }
   }
   private setThemeCssVariablesChanges(name: string, value: any) {
@@ -226,7 +227,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     this.blockThemeChangedNotifications += 1;
     try {
       const baseTheme = CreatorThemes[theme.themeName] || {};
-      this.themeName = theme.themeName || baseTheme.themeName || CreatorThemeModel.defautlThemeName;
+      this.themeName = theme.themeName || baseTheme.themeName || CreatorThemeModel.defaultThemeName;
 
       const effectiveThemeCssVariables = {};
       assign(effectiveThemeCssVariables, baseTheme.cssVariables || {});
@@ -314,7 +315,7 @@ Serializer.addClass(
       type: "string",
       visible: false,
       name: "iconsSet",
-      default: "v1"
+      default: "v2"
     }
   ],
   (json) => { return new CreatorThemeModel(); }
@@ -324,7 +325,7 @@ Serializer.addProperties("creatortheme", [
   {
     type: "color",
     name: "--sjs-special-background",
-    default: "#F3F3F3FF",
+    default: "#EDF9F7FF",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.titleLocation = "hidden";
@@ -344,7 +345,7 @@ Serializer.addProperties("creatortheme", [
   }, {
     type: "color",
     name: "--sjs-secondary-background-500",
-    default: "#FF9814FF",
+    default: "#19B394FF",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
@@ -366,7 +367,7 @@ Serializer.addProperties("creatortheme", [
     isSerializable: false,
     default: 100,
     enableIf: (obj: CreatorThemeModel): boolean => {
-      return !obj || obj.themeName !== CreatorThemeModel.defautlThemeName;
+      return !obj || obj.themeName !== CreatorThemeModel.legacyThemeName;
     },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
@@ -420,7 +421,7 @@ Serializer.addProperties("creatortheme", [
     isSerializable: false,
     default: 100,
     enableIf: (obj: CreatorThemeModel): boolean => {
-      return !obj || obj.themeName !== CreatorThemeModel.defautlThemeName;
+      return !obj || obj.themeName !== CreatorThemeModel.legacyThemeName;
     },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {

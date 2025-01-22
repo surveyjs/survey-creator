@@ -327,7 +327,7 @@ export var mnStrings = {
       templateTabTitle: "Таб нэрийн загвар",
       tabTitlePlaceholder: "Таб нэрийн хуудас эзэмшигч",
       templateVisibleIf: "Хувь хүний панелыг ил гаргах",
-      hideNumber: "Хавтангийн дугаарыг нуух",
+      showNumber: "Хавтангийн дугаар",
       titleLocation: "Панел цолны зохицуулалт",
       descriptionLocation: "Панел дүрслэлийн зохицуулалт",
       templateQuestionTitleLocation: "Асуулт нэрийн уялдаа",
@@ -344,7 +344,7 @@ export var mnStrings = {
       requiredIf: "Шаардлагатай асуултыг тавих",
       page: "Эх хуудас",
       state: "Асуултын хайрцаг нурах байдал",
-      hideNumber: "Асуултын дугаарыг нуух",
+      showNumber: "Энэ асуултыг дугаарла.",
       titleLocation: "Асуулт нэрийн уялдаа",
       descriptionLocation: "Асуулт тодорхойлолтын зохицуулалт",
       errorLocation: "Алдааны мессежийн зохицуулалт",
@@ -789,6 +789,10 @@ export var mnStrings = {
       top: "Дээр",
       bottom: "Доор"
     },
+    previewMode: "Урьдчилан харах хэлбэр",
+    gridLayoutEnabled: "Grid layout-ийг идэвхжүүлэх",
+    maskSettings: "Маскийн тохиргоо",
+    detailErrorLocation: "Мөр өргөтгөлийн алдаа мессежийн тохируулга",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var mnStrings = {
     rowTitleWidth: "CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
     totalText: "Хамгийн багадаа нэг багана Нэмэх төрлийн эвсэл нэмэх үйлдэлтэй үед л харагдах боломжтой.",
     cellErrorLocation: "Хүчингүй оруулсан эстэй холбоотой алдааны мессежийн байршлыг тогтооно. \"Өв залгамж\" сонголт нь \"Error message alignment\" өмчийн тохиргоог хэрэгжүүлдэг.",
+    detailErrorLocation: "Нарийвчилсан хэсгүүдэд байрласан асуултуудын алдааны мессежүүдийн байршлыг тохируулна. \"Inherit\" сонголт нь \"Error message alignment\" шинж чанарын тохиргоог хэрэглэнэ.",
     keyDuplicationError: "\"Хуулбарласан хариу арга хэмжээ авахаас урьдчилан сэргийлье\" өмчийг боломжтой болгоход хуулбарлан оруулахыг оролдсон хариулагч дараах алдааны мэдээг хүлээн авна.",
     totalExpression: "Илэрхийллийн үндсэн дээр нийт үнэт зүйлсийг тооцох боломжийг танд олгож байна. Илэрхийлэл нь үндсэн тооцоо ('{q1_id} + {q2_id}'), Бөүлийн илэрхийллүүд ('{нас} > 60') функцууд ('iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м.",
     confirmDelete: "Дарааллыг арилгахыг батлахыг хүссэн өдөөлтийг өдөөв.",
@@ -2647,3 +2652,10 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Явцын барын байршлыг тогтооно. \"Auto\" value нь судалгааны гарчгийн дээр эсвэл доод тал дахь явцын барыг харуулна."
 // survey.readOnly: "Make the survey read-only" => "Судалгааг зөвхөн унших хэлбэртэй болго"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Хэрэв та хариулагчдыг таны судалгааг бөглөхөд саад болохыг хүсвэл сонго."
+// paneldynamic.showNumber: "Number the panel" => "Хавтангийн дугаар"
+// question.showNumber: "Number this question" => "Энэ асуултыг дугаарла."
+// pe.previewMode: "Preview mode" => "Урьдчилан харах хэлбэр"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Grid layout-ийг идэвхжүүлэх"
+// pe.maskSettings: "Mask settings" => "Маскийн тохиргоо"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Мөр өргөтгөлийн алдаа мессежийн тохируулга"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Нарийвчилсан хэсгүүдэд байрласан асуултуудын алдааны мессежүүдийн байршлыг тохируулна. \"Inherit\" сонголт нь \"Error message alignment\" шинж чанарын тохиргоог хэрэглэнэ."

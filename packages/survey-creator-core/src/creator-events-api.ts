@@ -59,9 +59,13 @@ export interface PropertyGetReadOnlyEvent extends GetPropertyReadOnlyEvent {
 
 export interface ElementGetDisplayNameEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (survey, page, question, or panel) whose name has been requested.
    */
-  obj: Base;
+  element: Base;
   /**
   * A Survey Creator UI element that requests the display name. Contains one of the following values:
   *   - `"page-selector"` - Page selector on the design surface.
@@ -247,16 +251,24 @@ export interface PropertyEditorCreatedEvent {
    */
   property: JsonObjectProperty;
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element being edited in the Property Grid.
    */
-  obj: Base;
+  element: Base;
 }
 
 export interface PropertyEditorUpdateTitleActionsEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element being edited in the Property Grid.
    */
-  obj: Base;
+  element: Base;
   /**
    * A property editor that contains the title actions. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
    */
@@ -300,9 +312,13 @@ export interface PropertyGridShowPopupEvent {
 
 export interface CollectionItemAllowOperationsEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (survey, page, panel, question) that contains the collection to which the target item belongs.
    */
-  obj: Base;
+  element: Base;
   /**
    * A property that contains the collection to which the target item belongs.
    */
@@ -335,9 +351,13 @@ export interface CollectionItemAllowOperationsEvent {
 
 export interface CollectionItemAddedEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (survey, page, panel, question) that contains the collection to which the target item belongs.
    */
-  obj: Base;
+  element: Base;
   /**
    * The property's name: `columns`, `rows`, `choices`, `rateValues`, etc.
    */
@@ -385,9 +405,13 @@ export interface TablePropertyEditorOptions {
 }
 export interface ConfigureTablePropertyEditorEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (survey, page, panel, question) for which the table property editor is created.
    */
-  obj: Base;
+  element: Base;
   /**
    * The name of the property with which the editor is associated: [`"columns"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns), [`"rows"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows), [`"choices"`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices), etc.
    */
@@ -485,9 +509,13 @@ export interface AfterPropertyChangedEvent extends PropertyValueChangedEvent {
 
 export interface ConditionGetQuestionListEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (question, panel, page, or the survey itself) for which the condition editor is displayed.
    */
-  obj: Base;
+  element: Base;
   /**
    * The name of a property being configured: `enableIf`, `requiredIf`, `visibleIf`, etc.
    */
@@ -696,9 +724,13 @@ export interface SurveyInstanceCreatedEvent {
    */
   survey: SurveyModel;
   /**
-   * A survey element being edited in the Property Grid. Present only if the `options.area` parameter equals `"property-grid"`.
+   * @deprecated Use `options.element` instead.
    */
   obj?: Base;
+  /**
+   * A survey element being edited in the Property Grid. Present only if the `options.area` parameter equals `"property-grid"`.
+   */
+  element?: Base;
   /**
    * @deprecated Use `options.area` instead.
    */
@@ -818,9 +850,13 @@ export interface UploadFileEvent {
 
 export interface TranslationStringVisibilityEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (survey, page, panel, question) whose string translations are edited in the Translation tab.
    */
-  obj: Base;
+  element: Base;
   /**
    * The name of a property being translated.
    */
@@ -851,9 +887,13 @@ export interface TranslationImportedEvent {
 
 export interface TranslationExportItemEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (survey, page, panel, question) whose string translations are being exported to CSV.
    */
-  obj: Base;
+  element: Base;
   /**
    * The current locale code (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
    */
@@ -874,9 +914,13 @@ export interface TranslationExportItemEvent {
 
 export interface TranslationItemChangingEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element instance (survey, page, panel, question) whose string translation is being changed.
    */
-  obj: Base;
+  element: Base;
   /**
    * The current locale code (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
    */

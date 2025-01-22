@@ -7,11 +7,11 @@ resources:
   repositories:
     - repository: Service
       type: github
-      endpoint: dmitrykurmanov:admin
+      endpoint: github.com_surveyjsdeveloper
       name: surveyjs/service
     - repository: EmptyRepo
       type: github
-      endpoint: dmitrykurmanov:admin
+      endpoint: github.com_surveyjsdeveloper
       name: surveyjs/azure-pipelines-repo-dont-remove-please
 
 trigger:
@@ -57,8 +57,8 @@ jobs:
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'
-          git config --global user.email "kurmanov.work@gmail.com"
-          git config --global user.name "dmitrykurmanov"
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
         displayName: "Set up git config"
 
       - task: DownloadBuildArtifacts@0
@@ -258,8 +258,8 @@ jobs:
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'
-          git config --global user.email "kurmanov.work@gmail.com"
-          git config --global user.name "dmitrykurmanov"
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
         displayName: "Set up git config"
 
       - task: DownloadBuildArtifacts@0
@@ -309,6 +309,29 @@ jobs:
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/"
+          Contents: "package.json"
+          TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
+          OverWrite: true
+        displayName: "Copy package.json for cache key (root)"
+
+      - task: Cache@2
+        inputs:
+          key: "npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json"
+          path: $(Build.SourcesDirectory)/survey-creator/node_modules
+          cacheHitVar: NPM_CACHE_RESTORED_ROOT
+        displayName: Cache NPM
+
+      - task: Npm@1
+        displayName: "Npm install root"
+        inputs:
+          command: install
+          verbose: false
+          workingDir: $(Build.SourcesDirectory)/survey-creator
+        condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
 
       # - script: |
       #     cd $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
@@ -451,8 +474,8 @@ jobs:
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'
-          git config --global user.email "kurmanov.work@gmail.com"
-          git config --global user.name "dmitrykurmanov"
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
         displayName: "Set up git config"
 
       - task: DownloadBuildArtifacts@0
@@ -502,6 +525,29 @@ jobs:
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/"
+          Contents: "package.json"
+          TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
+          OverWrite: true
+        displayName: "Copy package.json for cache key (root)"
+
+      - task: Cache@2
+        inputs:
+          key: "npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json"
+          path: $(Build.SourcesDirectory)/survey-creator/node_modules
+          cacheHitVar: NPM_CACHE_RESTORED_ROOT
+        displayName: Cache NPM
+
+      - task: Npm@1
+        displayName: "Npm install root"
+        inputs:
+          command: install
+          verbose: false
+          workingDir: $(Build.SourcesDirectory)/survey-creator
+        condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
@@ -593,8 +639,8 @@ jobs:
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'
-          git config --global user.email "kurmanov.work@gmail.com"
-          git config --global user.name "dmitrykurmanov"
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
         displayName: "Set up git config"
 
       - task: DownloadBuildArtifacts@0
@@ -644,6 +690,29 @@ jobs:
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/"
+          Contents: "package.json"
+          TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
+          OverWrite: true
+        displayName: "Copy package.json for cache key (root)"
+
+      - task: Cache@2
+        inputs:
+          key: "npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json"
+          path: $(Build.SourcesDirectory)/survey-creator/node_modules
+          cacheHitVar: NPM_CACHE_RESTORED_ROOT
+        displayName: Cache NPM
+
+      - task: Npm@1
+        displayName: "Npm install root"
+        inputs:
+          command: install
+          verbose: false
+          workingDir: $(Build.SourcesDirectory)/survey-creator
+        condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
@@ -749,8 +818,8 @@ jobs:
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'
-          git config --global user.email "kurmanov.work@gmail.com"
-          git config --global user.name "dmitrykurmanov"
+          git config --global user.email "surveyjs.org@gmail.com"
+          git config --global user.name "surveyjsdeveloper"
         displayName: "Set up git config"
 
       - task: DownloadBuildArtifacts@0
@@ -805,6 +874,29 @@ jobs:
         inputs:
           SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/"
+          Contents: "package.json"
+          TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
+          OverWrite: true
+        displayName: "Copy package.json for cache key (root)"
+
+      - task: Cache@2
+        inputs:
+          key: "npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json"
+          path: $(Build.SourcesDirectory)/survey-creator/node_modules
+          cacheHitVar: NPM_CACHE_RESTORED_ROOT
+        displayName: Cache NPM
+
+      - task: Npm@1
+        displayName: "Npm install root"
+        inputs:
+          command: install
+          verbose: false
+          workingDir: $(Build.SourcesDirectory)/survey-creator
+        condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
 
       # - script: |
       #     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core

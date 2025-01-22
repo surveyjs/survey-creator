@@ -737,26 +737,26 @@ test("headerViewContainer init state", (): any => {
   const headerViewContainer = groupHeader.elements[0].contentPanel;
 
   expect(headerViewContainer.getValue()).toStrictEqual({
-    "headerView": "basic",
+    "headerView": "advanced",
     "logoPosition": "left",
-    "inheritWidthFrom": "container",
+    "inheritWidthFrom": "survey",
     "overlapEnabled": false,
-    "backgroundColorSwitch": "accentColor",
+    "backgroundColorSwitch": "none",
     "backgroundImageFit": "cover",
     "backgroundImageOpacity": 100,
-    "logoPositionX": "right",
-    "logoPositionY": "top",
+    "logoPositionX": "left",
+    "logoPositionY": "bottom",
     "titlePositionX": "left",
     "titlePositionY": "bottom",
     "descriptionPositionX": "left",
     "descriptionPositionY": "bottom",
-    "textAreaWidth": 512,
-    "height": 256,
+    "textAreaWidth": 0,
+    "height": 0,
     "mobileHeight": 0,
     "headerDescription": {
       "family": "Open Sans",
-      "size": 16,
-      "weight": "600",
+      "size": 20,
+      "weight": "400",
     },
     "headerTitle": {
       "family": "Open Sans",
@@ -849,7 +849,7 @@ test("set headerViewContainer advanced", (): any => {
   headerViewContainer.getElementByName("logoPosition").value = "right";
   headerViewContainer.getElementByName("headerView").value = "advanced";
   headerViewContainer.getElementByName("height").value = 300;
-  headerViewContainer.getElementByName("inheritWidthFrom").value = "survey";
+  headerViewContainer.getElementByName("inheritWidthFrom").value = "container";
   headerViewContainer.getElementByName("textAreaWidth").value = 600;
   headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
   headerViewContainer.getElementByName("backgroundColor").value = "#5094ed";
@@ -874,7 +874,7 @@ test("set headerViewContainer advanced", (): any => {
 
   expect(creator.theme.header).toStrictEqual({
     "height": 300,
-    "inheritWidthFrom": "survey",
+    "inheritWidthFrom": "container",
     "textAreaWidth": 600,
     "overlapEnabled": true,
     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
@@ -946,7 +946,7 @@ test("restore basic headerViewContainer values", (): any => {
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   headerViewContainer.getQuestionByName("");
 
-  expect(headerViewContainer.getQuestionByName("headerView").value).toBe("basic");
+  expect(headerViewContainer.getQuestionByName("headerView").value).toBe("advanced");
   expect(headerViewContainer.getQuestionByName("logoPosition").value).toBe("left");
   expect(headerViewContainer.getQuestionByName("inheritWidthFrom").value).toBe("container");
   expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#5094ed");
@@ -1162,10 +1162,10 @@ test("header editable after theme changed", (): any => {
   const themeChooser = themePlugin.propertyGrid.survey.getQuestionByName("themeName") as QuestionDropdownModel;
 
   themeChooser.value = "flat";
-  expect(headerTitleQuestion.isVisible).toBe(false);
-
-  headerViewContainer.getElementByName("headerView").value = "advanced";
   expect(headerTitleQuestion.isVisible).toBe(true);
+
+  headerViewContainer.getElementByName("headerView").value = "basic";
+  expect(headerTitleQuestion.isVisible).toBe(false);
 });
 
 test("advanced header disable inheritWidthFrom and reset it to 'container' if showTOC is true", (): any => {
@@ -1178,13 +1178,8 @@ test("advanced header disable inheritWidthFrom and reset it to 'container' if sh
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   const inheritWidthFromQuestion = headerViewContainer.getElementByName("inheritWidthFrom");
 
-  expect(inheritWidthFromQuestion.isVisible).toBe(false);
-
-  headerViewContainer.getElementByName("headerView").value = "advanced";
   expect(inheritWidthFromQuestion.isVisible).toBe(true);
-  expect(inheritWidthFromQuestion.value).toBe("container");
-
-  inheritWidthFromQuestion.value = "survey";
+  expect(inheritWidthFromQuestion.value).toBe("survey");
 
   themePlugin.deactivate();
   creator.survey.showTOC = true;

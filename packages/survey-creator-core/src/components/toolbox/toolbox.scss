@@ -8,24 +8,24 @@
   --dft-toolbox-width-compact: calc(9 *#{$base-unit});
 
   --thm-toolbox-width-compact: calc(
-    var(--ctr-toolbox-item-icon-width) +
-    var(--ctr-toolbox-item-padding-right-no-text) +
-    var(--ctr-toolbox-item-padding-left-no-text) +
-    var(--ctr-toolbox-item-margin-horizontal-no-text) * 2 +
-    var(--ctr-toolbox-group-padding-right) +
-    var(--ctr-toolbox-group-padding-left)
+    var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3)) +
+    var(--ctr-toolbox-item-padding-right-no-text, var(--sjs-spacing-x1)) +
+    var(--ctr-toolbox-item-padding-left-no-text, var(--sjs-spacing-x1)) +
+    var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05)) * 2 +
+    var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)) +
+    var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150))
   );
 
   --thm-toolbox-item-banner-left: calc(
-    var(--ctr-toolbox-item-icon-width) +
-    var(--ctr-toolbox-item-padding-right-no-text) +
-    var(--ctr-toolbox-item-padding-left-no-text) +
-    var(--ctr-toolbox-item-margin-horizontal-no-text) * 2 +
-    var(--ctr-toolbox-group-padding-right) +
-    var(--ctr-tooltip-pointer-height) * 2
+    var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3)) +
+    var(--ctr-toolbox-item-padding-right-no-text, var(--sjs-spacing-x1)) +
+    var(--ctr-toolbox-item-padding-left-no-text, var(--sjs-spacing-x1)) +
+    var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05)) * 2 +
+    var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)) +
+    var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) * 2
   );
 
-  --toolbox-width: var(--ctr-toolbox-min-width, 224.984375px /*calcSize(28)*/);
+  --toolbox-width: var(--ctr-toolbox-min-width, var(--sjs-size-x20));
   --toolbox-width-compact: var(--thm-toolbox-width-compact, var(--dft-toolbox-width-compact));
   
   width: auto;
@@ -41,31 +41,31 @@
   height: 0;
   display: flex;
   flex-direction: column;
-  border-inline-end: var(--ctr-toolbox-border-width-right, 0px) solid var(--ctr-toolbox-border-color, transparent);
-  background: var(--ctr-toolbox-background-color, $background-dim);
+  border-inline-end: var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1)) solid var(--ctr-toolbox-border-color, var(--sjs-border-25, #d4d4d4ff));
+  background: var(--ctr-toolbox-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   min-width: var(--toolbox-width);
 }
 
 .svc-toolbox {
 
   .svc-scroll__scroller {
-    padding: var(--ctr-toolbox-padding-top, calcSize(1.5)) var(--ctr-toolbox-group-padding-right, calcSize(1.5))
-      var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left, calcSize(1.5));
-    align-items: var(--ctr-toolbox-scroller-align-items, flex-end);
+    padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150))
+      var(--ctr-toolbox-padding-bottom, var(--sjs-spacing-x2)) var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150));
+    align-items: var(--ctr-toolbox-scroller-align-items, flex-start);
 
   }
   .svc-scroll__scrollbar {
-    inset-inline-end: var(--ctr-toolbox-scrollbar-right, initial);
-    inset-inline-start: var(--ctr-toolbox-scrollbar-left, 0);
-    padding: var(--ctr-toolbox-padding-top, calcSize(1)) 0 var(--ctr-toolbox-padding-bottom, calcSize(2)) 0;
+    inset-inline-end: var(--ctr-toolbox-scrollbar-right, 0);
+    inset-inline-start: var(--ctr-toolbox-scrollbar-left, "auto");
+    padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) 0 var(--ctr-toolbox-padding-bottom, var(--sjs-spacing-x2)) 0;
   }
 }
 
 .svc-toolbox--scrollable {
-  --toolbox-width: var(--ctr-toolbox-min-width, 236.984375px);
+  --toolbox-width: var(--ctr-toolbox-min-width, var(--sjs-size-x20));
 }
 .svc-toolbox--compact {
-  margin-inline-end: var(--ctr-toolbox-margin-left-compact, calcSize(1.5));
+  margin-inline-end: var(--ctr-toolbox-margin-left-compact, 0);
   .svc-toolbox__panel {
     overflow: visible;
     width: var(--toolbox-width-compact);
@@ -73,8 +73,8 @@
   }
   .svc-scroll__scroller {
     width: 100vw;
-    padding: var(--ctr-toolbox-padding-top, calcSize(1.5)) var(--ctr-toolbox-group-padding-right-compact, calcSize(1.5))
-      var(--ctr-toolbox-padding-bottom, calcSize(2)) var(--ctr-toolbox-group-padding-left-compact, calcSize(1.5));
+    padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) var(--ctr-toolbox-group-padding-right-compact, var(--sjs-spacing-x150))
+      var(--ctr-toolbox-padding-bottom, var(--sjs-spacing-x2)) var(--ctr-toolbox-group-padding-left-compact, var(--sjs-spacing-x150));
     pointer-events: none;
   }
   .svc-search {
@@ -82,17 +82,17 @@
     position: absolute;
   }
   .svc-toolbox__search-container {
-    padding-top: var(--ctr-toolbox-padding-top, calcSize(1.5));
-    padding-inline-start: var(--ctr-toolbox-group-padding-left, calcSize(1.5));
-    padding-inline-end: var(--ctr-toolbox-group-padding-left, calcSize(1.5));
-    padding-bottom: calc(var(--ctr-toolbox-separator-padding-top, 8px) + var(--ctr-toolbox-gap, 4px));
+    padding-top: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150));
+    padding-inline-start: var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150));
+    padding-inline-end: var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150));
+    padding-bottom: calc(var(--ctr-toolbox-separator-padding-top, var(--sjs-spacing-x1)) + var(--ctr-toolbox-gap, var(--sjs-spacing-x05)));
   }
   .svc-toolbox__category-separator {
     box-sizing: content-box;
-    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, calcSize(2));
-    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, calcSize(2));
-    margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right-compact, 12px) - var(--ctr-toolbox-item-margin-horizontal-no-text, 4px));
-    margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left-compact, 12px) - var(--ctr-toolbox-item-margin-horizontal-no-text, 4px));
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, var(--sjs-spacing-x2));
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, var(--sjs-spacing-x2));
+    margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right-compact, var(--sjs-spacing-x150)) - var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05)));
+    margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left-compact, var(--sjs-spacing-x150)) - var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05)));
   }
   .svc-toolbox__category-separator--search {
     margin-inline-end: 0;
@@ -106,20 +106,20 @@
   align-items: center;
   width: fit-content;
   svg {
-    height: var(--ctr-toolbox-item-icon-height, calcSize(3));
-    width: var(--ctr-toolbox-item-icon-width, calcSize(3));
+    height: var(--ctr-toolbox-item-icon-height, var(--sjs-font-size-x3));
+    width: var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3));
   }
 }
 
 .svc-toolbox--flyout {
-  --toolbox-width: var(--ctr-toolbox-min-width, calc(32 *#{$base-unit}));
-  margin-inline-end: var(--ctr-toolbox-margin-left-compact, calcSize(1.5));
+  --toolbox-width: var(--ctr-toolbox-min-width, var(--sjs-size-x20));
+  margin-inline-end: var(--ctr-toolbox-margin-left-compact, 0);
   overflow: visible;
   overflow: visible;
   width: var(--toolbox-width-compact);
   max-width: var(--thm-toolbox-width-compact, calcSize(10.5));
   overflow: visible;
-  border-inline-end: var(--ctr-toolbox-border-width-right, 0px) solid transparent;
+  border-inline-end: var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1)) solid transparent;
 
   .svc-search {
     opacity: 1;
@@ -131,12 +131,16 @@
     width: fit-content;
     position: relative;
     box-shadow:
-      var(--ctr-toolbox-shadow-floating-2-offset-x, 0px) var(--ctr-toolbox-shadow-floating-2-offset-y, 8px)
-        var(--ctr-toolbox-shadow-floating-2-blur, 16px) var(--ctr-toolbox-shadow-floating-2-spread, 0px)
-        var(--ctr-toolbox-shadow-floating-2-color, rgba(0, 0, 0, 0.1)),
-      var(--ctr-toolbox-shadow-floating-1-offset-x, 0px) var(--ctr-toolbox-shadow-floating-1-offset-y, 2px)
-        var(--ctr-toolbox-shadow-floating-1-blur, 6px) var(--ctr-toolbox-shadow-floating-1-spread, 0px)
-        var(--ctr-toolbox-shadow-floating-1-color, rgba(0, 0, 0, 0.1));
+      var(--ctr-toolbox-shadow-floating-2-offset-x, 0px)
+        var(--ctr-toolbox-shadow-floating-2-offset-y, 16px)
+        var(--ctr-toolbox-shadow-floating-2-blur, 32px)
+        var(--ctr-toolbox-shadow-floating-2-spread, 0px)
+        var(--ctr-toolbox-shadow-floating-2-color, var(--sjs-special-glow, #004c441a)),
+      var(--ctr-toolbox-shadow-floating-1-offset-x, 0px)
+        var(--ctr-toolbox-shadow-floating-1-offset-y, 2px)
+        var(--ctr-toolbox-shadow-floating-1-blur, 8px)
+        var(--ctr-toolbox-shadow-floating-1-spread, 0px)
+        var(--ctr-toolbox-shadow-floating-1-color, var(--sjs-special-glow, #004c441a));
     transition: box-shadow $creator-transition-duration;
   }
 }
@@ -151,8 +155,8 @@
   display: none;
   flex-direction: column;
   box-sizing: border-box;
-  background: var(--ctr-toolbox-background-color, $background-dim);
-  border-bottom: var(--ctr-toolbox-search-border-width-bottom, 1px) solid transparent;
+  background: var(--ctr-toolbox-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  border-bottom: var(--ctr-toolbox-search-border-width-bottom, var(--sjs-stroke-x1)) solid transparent;
 
   svg {
     pointer-events: none;
@@ -167,19 +171,19 @@
 
 .svc-toolbox__category-separator {
   box-sizing: border-box;
-  padding-top: var(--ctr-toolbox-separator-padding-top, calcSize(1.5));
-  padding-inline-end: var(--ctr-toolbox-separator-padding-right, calcSize(2));
-  padding-bottom: var(--ctr-toolbox-separator-padding-bottom, calcSize(1));
-  padding-inline-start: var(--ctr-toolbox-separator-padding-left, calcSize(2));
-  margin-top: var(--ctr-toolbox-gap, 0);
-  margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, 12px));
-  margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, 12px));
-  max-width: var(--ctr-toolbox-separator-max-width, calcSize(9));
+  padding-top: var(--ctr-toolbox-separator-padding-top, var(--sjs-spacing-x1));
+  padding-inline-end: var(--ctr-toolbox-separator-padding-right, 0px);
+  padding-bottom: var(--ctr-toolbox-separator-padding-bottom, var(--sjs-spacing-x1));
+  padding-inline-start: var(--ctr-toolbox-separator-padding-left, var(--sjs-spacing-x2));
+  margin-top: var(--ctr-toolbox-gap, var(--sjs-spacing-x05));
+  margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)));
+  margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150)));
+  max-width: var(--ctr-toolbox-separator-max-width, var(--sjs-size-max));
   &:after {
     content: "";
     display: block;
-    height: var(--ctr-toolbox-separator-height, 1px);
-    background-color: var(--ctr-toolbox-separator-color, $border);
+    height: var(--ctr-toolbox-separator-height, var(--sjs-size-x0125));
+    background-color: var(--ctr-toolbox-separator-color, var(--sjs-border-25, #d4d4d4ff));
   }
 }
 
@@ -206,23 +210,27 @@
 }
 
 .svc-toolbox__category-header-wrapper {
-  padding: var(--ctr-toolbox-group-header-margin-top, 0px) var(--ctr-toolbox-group-header-margin-left, 0px)
-    var(--ctr-toolbox-group-header-margin-bottom, 0px) var(--ctr-toolbox-group-header-margin-left, 0px);
-  margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, 0px));
-  margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, 0px));
+  padding: var(--ctr-toolbox-group-header-margin-top, var(--sjs-spacing-x1)) var(--ctr-toolbox-group-header-margin-left, 0px)
+    var(--ctr-toolbox-group-header-margin-bottom, var(--sjs-spacing-x1)) var(--ctr-toolbox-group-header-margin-left, 0px);
+  margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150)));
+  margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)));
   align-self: stretch;
 }
 .svc-toolbox__category-header {
-  padding-top: var(--ctr-toolbox-group-header-padding-top, calcSize(1.5));
-  padding-inline-end: var(--ctr-toolbox-group-header-padding-right, calcSize(1.5));
-  padding-bottom: var(--ctr-toolbox-group-header-padding-bottom, calcSize(1.5));
-  padding-inline-start: var(--ctr-toolbox-group-header-padding-left, calcSize(1.5));
+  padding-top: var(--ctr-toolbox-group-header-padding-top, var(--sjs-spacing-x1));
+  padding-inline-end: var(--ctr-toolbox-group-header-padding-right, var(--sjs-spacing-x1));
+  padding-bottom: var(--ctr-toolbox-group-header-padding-bottom, var(--sjs-spacing-x1));
+  padding-inline-start: var(--ctr-toolbox-group-header-padding-left, var(--sjs-spacing-x3));
 
-  box-shadow: 
-    inset 0 var(--ctr-toolbox-group-header-border-width-top, 0px) var(--ctr-toolbox-group-header-border-color, $border),
-    inset calc(0px - var(--ctr-toolbox-group-header-border-width-right, 0px)) 0 var(--ctr-toolbox-group-header-border-color, $border),
-    inset 0 calc(0px - var(--ctr-toolbox-group-header-border-width-bottom, 1px)) var(--ctr-toolbox-group-header-border-color, $border),
-    inset var(--ctr-toolbox-group-header-border-width-left, 0px) 0 var(--ctr-toolbox-group-header-border-color, $border);
+  box-shadow:
+    inset 0 var(--ctr-toolbox-group-header-border-width-top, 0px)
+      var(--ctr-toolbox-group-header-border-color, var(--sjs-border-25, #d4d4d4ff)),
+    inset calc(0px - var(--ctr-toolbox-group-header-border-width-right, 0px)) 0
+      var(--ctr-toolbox-group-header-border-color, var(--sjs-border-25, #d4d4d4ff)),
+    inset 0 calc(0px - var(--ctr-toolbox-group-header-border-width-bottom, var(--sjs-stroke-x1)))
+      var(--ctr-toolbox-group-header-border-color, var(--sjs-border-25, #d4d4d4ff)),
+    inset var(--ctr-toolbox-group-header-border-width-left, 0px) 0
+      var(--ctr-toolbox-group-header-border-color, var(--sjs-border-25, #d4d4d4ff));
 
   box-sizing: border-box;
   width: 100%;
@@ -254,8 +262,8 @@
 
 .svc-toolbox__category-header__button {
   fill: $foreground-light;
-  height: var(--ctr-toolbox-item-icon-height, calcSize(3));
-  width: var(--ctr-toolbox-item-icon-width, calcSize(3));
+  height: var(--ctr-toolbox-item-icon-height, var(--sjs-font-size-x3));
+  width: var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3));
 }
 
 .svc-toolbox__category-header:hover {
@@ -281,5 +289,5 @@
   padding-top: calcSize(13.5);
   margin-inline-start: auto;
   margin-inline-end: auto;
-  color: var(--ctr-property-grid-placeholder-text-description-color, $foreground-light);
+  color: var(--ctr-property-grid-placeholder-text-description-color, var(--sjs-layer-1-foreground-50, #00000080));
 }

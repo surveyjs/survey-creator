@@ -44,7 +44,7 @@
 }
 
 .spg-root-modern.spg-root--one-category {
-  background-color: var(--ctr-property-grid-form-background-color, $background-dim);
+  background-color: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   border-right: unset;
 
   .spg-page.spg-body__page {
@@ -101,7 +101,7 @@
 }
 
 .spg-action-title-bar {
-  margin-inline-end: var(--ctr-data-table-border-width, 1px);
+  margin-inline-end: var(--ctr-data-table-border-width, var(--sjs-stroke-x1));
   padding-inline-end: var(--ctr-caption-with-actions-actionbar-padding-right, calcSize(0.5));
 }
 
@@ -125,11 +125,11 @@
     flex-grow: 1;
 
     .spg-action-button--icon {
-      padding: var(--ctr-actionbar-button-padding-top-small-icon, calcSize(0.5))
-        var(--ctr-actionbar-button-padding-right-small-icon, calcSize(0.5))
-        var(--ctr-actionbar-button-padding-bottom-small-icon, calcSize(0.5))
-        var(--ctr-actionbar-button-padding-left-small-icon, calcSize(0.5));
-      opacity: var(--ctr-actionbar-button-opacity-muted, 0.5);
+      padding: var(--ctr-actionbar-button-padding-top-small-icon, var(--sjs-spacing-x05))
+        var(--ctr-actionbar-button-padding-right-small-icon, var(--sjs-spacing-x05))
+        var(--ctr-actionbar-button-padding-bottom-small-icon, var(--sjs-spacing-x05))
+        var(--ctr-actionbar-button-padding-left-small-icon, var(--sjs-spacing-x05));
+      opacity: var(--ctr-actionbar-button-opacity-muted, 0.35);
     }
 
     .spg-action-button--icon:focus,
@@ -142,8 +142,8 @@
     }
 
     .spg-action-button__icon {
-      width: var(--ctr-actionbar-button-icon-width-small, calcSize(2));
-      height: var(--ctr-actionbar-button-icon-height-small, calcSize(2));
+      width: var(--ctr-actionbar-button-icon-width-small, var(--sjs-font-size-x2));
+      height: var(--ctr-actionbar-button-icon-height-small, var(--sjs-font-size-x2));
     }
 
     svg {
