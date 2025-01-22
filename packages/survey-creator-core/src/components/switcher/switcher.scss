@@ -8,7 +8,7 @@
 
 .svc-switcher__title {
   @include ctrSmallBoldFont;
-  color: var(--ctr-property-grid-switcher-text-color, $foreground-light);
+  color: var(--ctr-property-grid-switcher-text-color, var(--sjs-layer-1-foreground-75, #000000bf));
 }
 
 .svc-switcher__icon {

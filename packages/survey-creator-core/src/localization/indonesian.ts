@@ -327,7 +327,7 @@ export var indonesianStrings = {
       templateTabTitle: "Pola judul tab",
       tabTitlePlaceholder: "Tempat penampung judul tab",
       templateVisibleIf: "Membuat panel individual terlihat jika",
-      hideNumber: "Menyembunyikan nomor panel",
+      showNumber: "Nomor panel",
       titleLocation: "Perataan judul panel",
       descriptionLocation: "Perataan deskripsi panel",
       templateQuestionTitleLocation: "Perataan judul pertanyaan",
@@ -344,7 +344,7 @@ export var indonesianStrings = {
       requiredIf: "Buat pertanyaan diperlukan jika",
       page: "Halaman induk",
       state: "Status ciutkan kotak pertanyaan",
-      hideNumber: "Menyembunyikan nomor pertanyaan",
+      showNumber: "Nomor pertanyaan ini",
       titleLocation: "Perataan judul pertanyaan",
       descriptionLocation: "Perataan deskripsi pertanyaan",
       errorLocation: "Perataan pesan kesalahan",
@@ -646,8 +646,8 @@ export var indonesianStrings = {
     renderMode: "Mode render",
     allowAddPanel: "Bolehkan penambahan panel",
     allowRemovePanel: "Bolehkan penghapusan panel",
-    panelAddText: "Teks tambah panel",
-    panelRemoveText: "Teks hapus panel",
+    addPanelText: "Teks tambah panel",
+    removePanelText: "Teks hapus panel",
     isSinglePage: "Tampilkan seluruh elemen pada halaman",
     html: "Html",
     setValue: "Menjawab",
@@ -721,9 +721,9 @@ export var indonesianStrings = {
     minPanelCount: "Jumlah panel minimum",
     maxPanelCount: "Jumlah panel maksimum",
     panelsState: "Status perluasan panel dalam",
-    panelPrevText: "Tooltip tombol Panel sebelumnya",
-    panelNextText: "Tooltip tombol Panel Berikutnya",
-    panelRemoveButtonLocation: "Hapus lokasi tombol Panel",
+    prevPanelText: "Tooltip tombol Panel sebelumnya",
+    nextPanelText: "Tooltip tombol Panel Berikutnya",
+    removePanelButtonLocation: "Hapus lokasi tombol Panel",
     hideIfRowsEmpty: "Menyembunyikan pertanyaan jika tidak ada baris",
     hideColumnsIfEmpty: "Menyembunyikan kolom jika tidak ada baris",
     rateValues: "Nilai tarif kustom",
@@ -789,6 +789,10 @@ export var indonesianStrings = {
       top: "Di atas",
       bottom: "Di bagian bawah"
     },
+    previewMode: "Mode pratinjau",
+    gridLayoutEnabled: "Mengaktifkan tata letak kisi",
+    maskSettings: "Pengaturan topeng",
+    detailErrorLocation: "Perataan pesan kesalahan perluasan baris",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var indonesianStrings = {
     rowTitleWidth: "Menerima nilai CSS (px, %, in, pt, dll.).",
     totalText: "Hanya terlihat bila setidaknya satu kolom memiliki Tipe total atau Ekspresi total.",
     cellErrorLocation: "Mengatur lokasi pesan kesalahan dalam kaitannya dengan sel dengan input yang tidak valid. Opsi \"Warisi\" menerapkan pengaturan dari properti \"Perataan pesan kesalahan\".",
+    detailErrorLocation: "Mengatur lokasi pesan kesalahan untuk pertanyaan yang bertumpuk di bagian detail. Opsi \"Wariskan\" menerapkan pengaturan dari properti \"Perataan pesan kesalahan\".",
     keyDuplicationError: "Ketika properti \"mencegah duplikat respons\" diaktifkan, responden mencoba untuk mengirimkan entri duplikat akan menerima pesan galat berikut.",
     totalExpression: "Memungkinkan Anda menghitung nilai total berdasarkan ekspresi. Ekspresi dapat mencakup perhitungan dasar ('{q1_id} + {q2_id}'), ekspresi Boolean ('{age} > 60') dan fungsi ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll.).",
     confirmDelete: "Memicu prompt yang meminta konfirmasi penghapusan baris.",
@@ -2050,11 +2055,11 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pe.panelsState: "Inner panel expand state" => "Status perluasan panel dalam"
 // pe.templateDescription: "Description template" => "Template deskripsi"
 // pe.templateTitle: "Title template" => "Templat judul"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Tooltip tombol Panel sebelumnya"
-// pe.panelNextText: "Next Panel button tooltip" => "Tooltip tombol Panel Berikutnya"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Tooltip tombol Panel sebelumnya"
+// pe.nextPanelText: "Next Panel button tooltip" => "Tooltip tombol Panel Berikutnya"
 // pe.showRangeInProgress: "Show progress bar" => "Perlihatkan bilah kemajuan"
 // pe.templateQuestionTitleLocation: "Question title location" => "Lokasi judul pertanyaan"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Hapus lokasi tombol Panel"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Hapus lokasi tombol Panel"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Menyembunyikan pertanyaan jika tidak ada baris"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Menyembunyikan kolom jika tidak ada baris"
 // pe.rateValues: "Custom rate values" => "Nilai tarif kustom"
@@ -3146,3 +3151,10 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Mengatur lokasi bilah progres. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
 // survey.readOnly: "Make the survey read-only" => "Membuat survei hanya baca"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Pilih jika Anda ingin mencegah responden mengisi survei Anda."
+// paneldynamic.showNumber: "Number the panel" => "Nomor panel"
+// question.showNumber: "Number this question" => "Nomor pertanyaan ini"
+// pe.previewMode: "Preview mode" => "Mode pratinjau"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Mengaktifkan tata letak kisi"
+// pe.maskSettings: "Mask settings" => "Pengaturan topeng"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Perataan pesan kesalahan perluasan baris"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Mengatur lokasi pesan kesalahan untuk pertanyaan yang bertumpuk di bagian detail. Opsi \"Wariskan\" menerapkan pengaturan dari properti \"Perataan pesan kesalahan\"."

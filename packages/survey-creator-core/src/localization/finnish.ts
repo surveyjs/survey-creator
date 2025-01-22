@@ -327,7 +327,7 @@ export var fiStrings = {
       templateTabTitle: "Välilehden otsikkomalli",
       tabTitlePlaceholder: "Välilehden otsikon paikkamerkki",
       templateVisibleIf: "Tee yksittäinen paneeli näkyväksi, jos",
-      hideNumber: "Piilota paneelin numero",
+      showNumber: "Paneelin numerointi",
       titleLocation: "Paneelin otsikon tasaus",
       descriptionLocation: "Paneelin kuvauksen tasaus",
       templateQuestionTitleLocation: "Kysymyksen otsikon tasaus",
@@ -344,7 +344,7 @@ export var fiStrings = {
       requiredIf: "Tee kysymys pakolliseksi, jos",
       page: "Pääsivu",
       state: "Kysymysruudun tiivistystila",
-      hideNumber: "Piilota kysymyksen numero",
+      showNumber: "Numeroi tämä kysymys",
       titleLocation: "Kysymyksen otsikon tasaus",
       descriptionLocation: "Kysymyksen kuvauksen tasaus",
       errorLocation: "Virhesanoman tasaus",
@@ -646,8 +646,8 @@ export var fiStrings = {
     renderMode: "Renderöinnin tila",
     allowAddPanel: "Salli paneelin lisääminen",
     allowRemovePanel: "Salli paneelin poistaminen",
-    panelAddText: "Paneelin tekstin lisääminen",
-    panelRemoveText: "Paneelin tekstin poistaminen",
+    addPanelText: "Paneelin tekstin lisääminen",
+    removePanelText: "Paneelin tekstin poistaminen",
     isSinglePage: "Näytä kaikki elementit yhdellä sivulla",
     html: "Html",
     setValue: "Vastata",
@@ -721,9 +721,9 @@ export var fiStrings = {
     minPanelCount: "Paneelien vähimmäismäärä",
     maxPanelCount: "Paneelien enimmäismäärä",
     panelsState: "Sisäpaneelin laajennustila",
-    panelPrevText: "Edellinen paneeli -painikkeen työkaluvihje",
-    panelNextText: "Seuraava paneeli -painikkeen työkaluvihje",
-    panelRemoveButtonLocation: "Poista paneelipainikkeen sijainti",
+    prevPanelText: "Edellinen paneeli -painikkeen työkaluvihje",
+    nextPanelText: "Seuraava paneeli -painikkeen työkaluvihje",
+    removePanelButtonLocation: "Poista paneelipainikkeen sijainti",
     hideIfRowsEmpty: "Piilota kysymys, jos rivejä ei ole",
     hideColumnsIfEmpty: "Piilota sarakkeet, jos rivejä ei ole",
     rateValues: "Muokatut hinta-arvot",
@@ -789,6 +789,10 @@ export var fiStrings = {
       top: "Päällä",
       bottom: "Alla"
     },
+    previewMode: "Esikatselu-tila",
+    gridLayoutEnabled: "Ota ruudukkoasettelu käyttöön",
+    maskSettings: "Maskin asetukset",
+    detailErrorLocation: "Rivin laajennuksen virhesanoman tasaus",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var fiStrings = {
     rowTitleWidth: "Hyväksyy CSS-arvot (px, %, in, pt jne.).",
     totalText: "Näkyy vain, kun vähintään yhdessä sarakkeessa on Summa-tyyppi tai Summa-lauseke.",
     cellErrorLocation: "Määrittää virhesanoman sijainnin suhteessa soluun, jonka syöte on virheellinen. \"Peri\" -vaihtoehto käyttää asetusta \"Virheilmoituksen kohdistus\" -ominaisuudesta.",
+    detailErrorLocation: "Määrittää tieto-osiin sisältyvien kysymysten virhesanomien sijainnin. \"Peri\" -vaihtoehto käyttää asetusta \"Virheilmoituksen kohdistus\" -ominaisuudesta.",
     keyDuplicationError: "Kun Estä päällekkäiset vastaukset -ominaisuus on käytössä, vastaaja, joka yrittää lähettää merkinnän kaksoiskappaleen, saa seuraavan virhesanoman.",
     totalExpression: "Voit laskea kokonaisarvot lausekkeen perusteella. Lauseke voi sisältää peruslaskutoimituksia ('{q1_id} + {q2_id}'), totuusarvolausekkeita ('{age} > 60') ja funktioita ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' jne.).",
     confirmDelete: "Käynnistää kehotteen, jossa pyydetään vahvistamaan rivin poisto.",
@@ -1935,11 +1940,11 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pe.panelsState: "Inner panel expand state" => "Sisäpaneelin laajennustila"
 // pe.templateDescription: "Description template" => "Kuvaus-malli"
 // pe.templateTitle: "Title template" => "Otsikko-malli"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Edellinen paneeli -painikkeen työkaluvihje"
-// pe.panelNextText: "Next Panel button tooltip" => "Seuraava paneeli -painikkeen työkaluvihje"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Edellinen paneeli -painikkeen työkaluvihje"
+// pe.nextPanelText: "Next Panel button tooltip" => "Seuraava paneeli -painikkeen työkaluvihje"
 // pe.showRangeInProgress: "Show progress bar" => "Näytä edistymispalkki"
 // pe.templateQuestionTitleLocation: "Question title location" => "Kysymyksen otsikon sijainti"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Poista paneelipainikkeen sijainti"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Poista paneelipainikkeen sijainti"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Piilota kysymys, jos rivejä ei ole"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Piilota sarakkeet, jos rivejä ei ole"
 // pe.rateValues: "Custom rate values" => "Muokatut hinta-arvot"
@@ -2964,3 +2969,10 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Määrittää edistymispalkin sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella."
 // survey.readOnly: "Make the survey read-only" => "Tee kyselystä vain luku -muotoinen"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Valitse tämä, jos haluat estää vastaajia vastaamasta kyselyyn."
+// paneldynamic.showNumber: "Number the panel" => "Paneelin numerointi"
+// question.showNumber: "Number this question" => "Numeroi tämä kysymys"
+// pe.previewMode: "Preview mode" => "Esikatselu-tila"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Ota ruudukkoasettelu käyttöön"
+// pe.maskSettings: "Mask settings" => "Maskin asetukset"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Rivin laajennuksen virhesanoman tasaus"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Määrittää tieto-osiin sisältyvien kysymysten virhesanomien sijainnin. \"Peri\" -vaihtoehto käyttää asetusta \"Virheilmoituksen kohdistus\" -ominaisuudesta."

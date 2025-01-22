@@ -327,7 +327,7 @@ export var turkishStrings = {
       templateTabTitle: "Sekme başlığı deseni",
       tabTitlePlaceholder: "Sekme başlığı yer tutucusu",
       templateVisibleIf: "Aşağıdaki durumlarda tek bir paneli görünür hale getirme",
-      hideNumber: "Panel numarasını gizleme",
+      showNumber: "Paneli numaralandırma",
       titleLocation: "Panel başlığı hizalaması",
       descriptionLocation: "Panel açıklaması hizalaması",
       templateQuestionTitleLocation: "Soru başlığı hizalaması",
@@ -344,7 +344,7 @@ export var turkishStrings = {
       requiredIf: "Aşağıdaki durumlarda soruyu gerekli hale getirin",
       page: "Ana sayfa",
       state: "Soru kutusu daraltma durumu",
-      hideNumber: "Soru numarasını gizleme",
+      showNumber: "Bu soruyu numaralandırın",
       titleLocation: "Soru başlığı hizalaması",
       descriptionLocation: "Soru açıklaması hizalaması",
       errorLocation: "Hata iletisi hizalaması",
@@ -646,8 +646,8 @@ export var turkishStrings = {
     renderMode: "İşleme modu",
     allowAddPanel: "Panel eklemeye izin ver",
     allowRemovePanel: "Panel silmeye izin ver",
-    panelAddText: "Panel ekleme metni",
-    panelRemoveText: "Panel silme metni",
+    addPanelText: "Panel ekleme metni",
+    removePanelText: "Panel silme metni",
     isSinglePage: "Tüm öğeleri tek bir sayfada göster",
     html: "Html",
     setValue: "Cevap",
@@ -721,9 +721,9 @@ export var turkishStrings = {
     minPanelCount: "Minimum panel sayısı",
     maxPanelCount: "Maksimum panel sayısı",
     panelsState: "İç panel genişletme durumu",
-    panelPrevText: "Önceki Panel düğmesi araç ipucu",
-    panelNextText: "Sonraki Panel düğmesi araç ipucu",
-    panelRemoveButtonLocation: "Panel düğmesinin konumunu kaldır",
+    prevPanelText: "Önceki Panel düğmesi araç ipucu",
+    nextPanelText: "Sonraki Panel düğmesi araç ipucu",
+    removePanelButtonLocation: "Panel düğmesinin konumunu kaldır",
     hideIfRowsEmpty: "Satır yoksa soruyu gizleme",
     hideColumnsIfEmpty: "Satır yoksa sütunları gizleme",
     rateValues: "Özel fiyat değerleri",
@@ -789,6 +789,10 @@ export var turkishStrings = {
       top: "Üstte",
       bottom: "Altta"
     },
+    previewMode: "Önizleme modu",
+    gridLayoutEnabled: "Izgara düzenini etkinleştirin",
+    maskSettings: "Maske ayarları",
+    detailErrorLocation: "Satır genişletme hata iletisi hizalaması",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var turkishStrings = {
     rowTitleWidth: "CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
     totalText: "Yalnızca en az bir sütunda Toplam türü veya Toplam ifadesi olduğunda görünür.",
     cellErrorLocation: "Geçersiz girişi olan bir hücreyle ilgili olarak bir hata iletisinin konumunu ayarlar. \"Devral\" seçeneği, ayarı \"Hata iletisi hizalaması\" özelliğinden uygular.",
+    detailErrorLocation: "Ayrıntı bölümlerinde iç içe geçmiş sorular için hata mesajlarının konumunu ayarlar. \"Devral\" seçeneği, \"Hata mesajı hizalaması\" özelliğindeki ayarı uygular.",
     keyDuplicationError: "\"Yinelenen yanıtları engelle\" özelliği etkinleştirildiğinde, yinelenen bir girdi göndermeye çalışan yanıtlayan aşağıdaki hata iletisini alır.",
     totalExpression: "Bir ifadeye dayalı olarak toplam değerleri hesaplamanıza olanak tanır. İfade, temel hesaplamaları ('{q1_id} + {q2_id}'), Boole ifadelerini ('{age} > 60') ve işlevleri ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb.) içerebilir.",
     confirmDelete: "Satır silme işlemini onaylamanızı isteyen bir istemi tetikler.",
@@ -1941,11 +1946,11 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.panelsState: "Inner panel expand state" => "İç panel genişletme durumu"
 // pe.templateDescription: "Description template" => "Açıklama şablonu"
 // pe.templateTitle: "Title template" => "Başlık şablonu"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Önceki Panel düğmesi araç ipucu"
-// pe.panelNextText: "Next Panel button tooltip" => "Sonraki Panel düğmesi araç ipucu"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Önceki Panel düğmesi araç ipucu"
+// pe.nextPanelText: "Next Panel button tooltip" => "Sonraki Panel düğmesi araç ipucu"
 // pe.showRangeInProgress: "Show progress bar" => "İlerleme çubuğunu göster"
 // pe.templateQuestionTitleLocation: "Question title location" => "Soru başlığı konumu"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Panel düğmesinin konumunu kaldır"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Panel düğmesinin konumunu kaldır"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Satır yoksa soruyu gizleme"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Satır yoksa sütunları gizleme"
 // pe.rateValues: "Custom rate values" => "Özel fiyat değerleri"
@@ -2987,3 +2992,10 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "İlerleme çubuğunun konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
 // survey.readOnly: "Make the survey read-only" => "Anketi salt okunur hale getirin"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Yanıtlayanların anketinizi doldurmasını engellemek isteyip istemediğinizi seçin."
+// paneldynamic.showNumber: "Number the panel" => "Paneli numaralandırma"
+// question.showNumber: "Number this question" => "Bu soruyu numaralandırın"
+// pe.previewMode: "Preview mode" => "Önizleme modu"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Izgara düzenini etkinleştirin"
+// pe.maskSettings: "Mask settings" => "Maske ayarları"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Satır genişletme hata iletisi hizalaması"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Ayrıntı bölümlerinde iç içe geçmiş sorular için hata mesajlarının konumunu ayarlar. \"Devral\" seçeneği, \"Hata mesajı hizalaması\" özelliğindeki ayarı uygular."

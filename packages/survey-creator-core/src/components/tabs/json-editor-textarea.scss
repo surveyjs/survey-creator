@@ -13,8 +13,8 @@ svc-tab-json-editor-textarea {
 
 .svc-json-editor-tab__content-area {
   @include ctrCodeFont;
-  color: var(--ctr-code-viewer-text-color, #505050);
-  background: var(--ctr-code-viewer-background-color, $background);
+  color: var(--ctr-code-viewer-text-color, var(--sjs-code-gray-300, #505050ff));
+  background: var(--ctr-code-viewer-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   width: 100%;
   height: 100%;
   border: none;
@@ -100,8 +100,8 @@ svc-tab-json-editor-textarea {
 
 .svc-json-error__icon {
   fill: $red;
-  width: var(--ctr-code-viewer-code-error-row-icon-width, calcSize(2));
-  height: var(--ctr-code-viewer-code-error-row-icon-height, calcSize(2));
+  width: var(--ctr-code-viewer-code-error-row-icon-width, var(--sjs-font-size-x2));
+  height: var(--ctr-code-viewer-code-error-row-icon-height, var(--sjs-font-size-x2));
 }
 
 .svc-json-error__container {

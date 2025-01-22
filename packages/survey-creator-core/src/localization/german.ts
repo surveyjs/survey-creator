@@ -327,7 +327,7 @@ var germanTranslation = {
       templateTabTitle: "Muster des Tab-Titels",
       tabTitlePlaceholder: "Platzhalter für Registerkartentitel",
       templateVisibleIf: "Machen Sie ein einzelnes Panel sichtbar, wenn",
-      hideNumber: "Ausblenden der Panel-Nummer",
+      showNumber: "Nummerieren des Bedienfelds",
       titleLocation: "Ausrichtung des Panel-Titels",
       descriptionLocation: "Ausrichtung der Panelbeschreibung",
       templateQuestionTitleLocation: "Ausrichtung des Fragetitels",
@@ -344,7 +344,7 @@ var germanTranslation = {
       requiredIf: "Frage erforderlich machen, wenn",
       page: "Frage auf die Seite verschieben",
       state: "Status des Ausblendens des Fragefelds",
-      hideNumber: "Ausblenden der Fragenummer",
+      showNumber: "Diese Frage nummerieren",
       titleLocation: "Ausrichtung des Fragetitels",
       descriptionLocation: "Ausrichtung der Fragebeschreibung",
       errorLocation: "Ausrichtung von Fehlermeldungen",
@@ -646,8 +646,8 @@ var germanTranslation = {
     renderMode: "Anzeigemodus",
     allowAddPanel: "Hinzufügen eines Panels erlauben",
     allowRemovePanel: "Entfernen eines Panels erlauben",
-    panelAddText: "Text für die Schaltfläche \"Panel hinzufügen\"",
-    panelRemoveText: "Text für die Schaltfläche \"Panel entfernen\"",
+    addPanelText: "Text für die Schaltfläche \"Panel hinzufügen\"",
+    removePanelText: "Text für die Schaltfläche \"Panel entfernen\"",
     isSinglePage: "Alle Elemente auf einer Seite anzeigen",
     html: "HTML",
     setValue: "Antwort",
@@ -721,9 +721,9 @@ var germanTranslation = {
     minPanelCount: "Minimale Panelanzahl",
     maxPanelCount: "Maximale Panelanzahl",
     panelsState: "Erweiterungszustand des inneren Bereichs",
-    panelPrevText: "Text für die Schaltfläche \"Vorheriges Panel\".",
-    panelNextText: "Text für die Schaltfläche \"Nächstes Panel\".",
-    panelRemoveButtonLocation: "Position der Schaltfläche \"Panel entfernen\"",
+    prevPanelText: "Text für die Schaltfläche \"Vorheriges Panel\".",
+    nextPanelText: "Text für die Schaltfläche \"Nächstes Panel\".",
+    removePanelButtonLocation: "Position der Schaltfläche \"Panel entfernen\"",
     hideIfRowsEmpty: "Frage ausblenden, wenn keine Zeilen vorhanden sind",
     hideColumnsIfEmpty: "Spalten ausblenden, wenn keine Zeilen vorhanden sind",
     rateValues: "Benutzerdefinierte Bewertungswerte",
@@ -789,6 +789,10 @@ var germanTranslation = {
       top: "oben",
       bottom: "unten"
     },
+    previewMode: "Vorschau-Modus",
+    gridLayoutEnabled: "Aktivieren des Rasterlayouts",
+    maskSettings: "Masken-Einstellungen",
+    detailErrorLocation: "Ausrichtung der Fehlermeldung bei der Zeilenerweiterung",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ var germanTranslation = {
     rowTitleWidth: "Akzeptiert CSS-Werte (px, %, in, pt usw.).",
     totalText: "Diese Option ist nur sichtbar, wenn mindestens eine Spalte über den Total-Typ oder den Total-Ausdruck verfügt.",
     cellErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf eine Zelle mit ungültiger Eingabe fest. Die Option \"Vererben\" übernimmt die Einstellung aus der Eigenschaft \"Fehlermeldungsausrichtung\".",
+    detailErrorLocation: "Legt die Position von Fehlermeldungen für Fragen fest, die in Detailabschnitten verschachtelt sind. Die Option \"Vererben\" wendet die Einstellung aus der Eigenschaft \"Ausrichtung der Fehlermeldung\" an.",
     keyDuplicationError: "Wenn die Eigenschaft \"Doppelte Beantwortungen verhindern\" aktiviert ist, erhält ein Befragter, der versucht, einen doppelten Beitrag einzureichen, die folgende Fehlermeldung.",
     totalExpression: "Hiermit können Sie Gesamtwerte basierend auf einem Ausdruck berechnen. Der Ausdruck kann grundlegende Berechnungen ('{q1_id} + {q2_id}'), boolesche Ausdrücke ('{age} > 60') und Funktionen ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw.) enthalten.",
     confirmDelete: "Löst eine Eingabeaufforderung aus, in der Sie aufgefordert werden, das Löschen der Zeile zu bestätigen.",
@@ -1800,7 +1805,7 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Bildbreite (in CSS-akzeptierten Werten)"
 // pe.allowResizeComment: "Allow users to resize text areas" => "Benutzern erlauben, die Größe von Textbereichen zu ändern"
 // pe.templateQuestionTitleLocation: "Question title location" => "Position des Fragetitels"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Position der Panel-Schaltfläche entfernen"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Position der Panel-Schaltfläche entfernen"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Blenden Sie die Frage aus, wenn keine Zeilen vorhanden sind"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Spalten ausblenden, wenn keine Zeilen vorhanden sind"
 // pe.rateValues: "Custom rate values" => "Benutzerdefinierte Ratenwerte"
@@ -2704,3 +2709,10 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Legt die Position des Fortschrittsbalkens fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an."
 // survey.readOnly: "Make the survey read-only" => "Machen Sie die Umfrage schreibgeschützt"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Wählen Sie diese Option aus, wenn Sie verhindern möchten, dass die Befragten Ihre Umfrage ausfüllen."
+// paneldynamic.showNumber: "Number the panel" => "Nummerieren des Bedienfelds"
+// question.showNumber: "Number this question" => "Diese Frage nummerieren"
+// pe.previewMode: "Preview mode" => "Vorschau-Modus"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Aktivieren des Rasterlayouts"
+// pe.maskSettings: "Mask settings" => "Masken-Einstellungen"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Ausrichtung der Fehlermeldung bei der Zeilenerweiterung"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Legt die Position von Fehlermeldungen für Fragen fest, die in Detailabschnitten verschachtelt sind. Die Option \"Vererben\" wendet die Einstellung aus der Eigenschaft \"Ausrichtung der Fehlermeldung\" an."

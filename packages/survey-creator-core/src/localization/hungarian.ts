@@ -327,7 +327,7 @@ export var huStrings = {
       templateTabTitle: "Lapcím mintája",
       tabTitlePlaceholder: "Lapcím helyőrzője",
       templateVisibleIf: "Egy adott panel láthatóvá tétele, ha",
-      hideNumber: "A panel számának elrejtése",
+      showNumber: "A panel számozása",
       titleLocation: "Panelcím igazítása",
       descriptionLocation: "Panel leírás igazítása",
       templateQuestionTitleLocation: "Kérdés címének igazítása",
@@ -344,7 +344,7 @@ export var huStrings = {
       requiredIf: "Tegye kötelezővé a kérdést, ha",
       page: "Szülőoldal",
       state: "Kérdésmező összecsukási állapota",
-      hideNumber: "A kérdés számának elrejtése",
+      showNumber: "Számozza meg ezt a kérdést",
       titleLocation: "Kérdés címének igazítása",
       descriptionLocation: "Kérdés leírás igazítása",
       errorLocation: "Hibaüzenetek igazítása",
@@ -646,8 +646,8 @@ export var huStrings = {
     renderMode: "Megjelenítés módja",
     allowAddPanel: "Új panel hozzáadásának engedélyezése",
     allowRemovePanel: "Panel eltávolításának engedélyezése",
-    panelAddText: "'Új panel felvétele' gomb szövege",
-    panelRemoveText: "'Panel eltávolítása' gomb szövege",
+    addPanelText: "'Új panel felvétele' gomb szövege",
+    removePanelText: "'Panel eltávolítása' gomb szövege",
     isSinglePage: "Minden elem mutatása egy lapon",
     html: "HTML",
     setValue: "Válasz",
@@ -721,9 +721,9 @@ export var huStrings = {
     minPanelCount: "Panelek minimális száma",
     maxPanelCount: "Panelek maximális száma",
     panelsState: "Belső panel kibontási állapota",
-    panelPrevText: "Előző Panel gomb eszköztipp",
-    panelNextText: "Következő Panel gomb elemleírása",
-    panelRemoveButtonLocation: "A Panel gomb helyének eltávolítása",
+    prevPanelText: "Előző Panel gomb eszköztipp",
+    nextPanelText: "Következő Panel gomb elemleírása",
+    removePanelButtonLocation: "A Panel gomb helyének eltávolítása",
     hideIfRowsEmpty: "A kérdés elrejtése, ha nincsenek sorok",
     hideColumnsIfEmpty: "Oszlopok elrejtése, ha nincsenek sorok",
     rateValues: "Egyéni díjértékek",
@@ -789,6 +789,10 @@ export var huStrings = {
       top: "A tetején",
       bottom: "Alul"
     },
+    previewMode: "Előnézeti mód",
+    gridLayoutEnabled: "A rácselrendezés engedélyezése",
+    maskSettings: "Maszk beállításai",
+    detailErrorLocation: "Sorbővítési hibaüzenet igazítása",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var huStrings = {
     rowTitleWidth: "CSS-értékeket fogad el (px, %, in, pt stb.).",
     totalText: "Csak akkor látható, ha legalább egy oszlop Összeg típusú vagy Összeg kifejezéssel rendelkezik.",
     cellErrorLocation: "Beállítja a hibaüzenet helyét egy érvénytelen bevitelű cellával kapcsolatban. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza.",
+    detailErrorLocation: "Beállítja a hibaüzenetek helyét a részletes szakaszokba ágyazott kérdésekhez. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza.",
     keyDuplicationError: "Ha az \"Ismétlődő válaszok megakadályozása\" tulajdonság engedélyezve van, az ismétlődő bejegyzést beküldeni próbáló válaszadó a következő hibaüzenetet kapja.",
     totalExpression: "Lehetővé teszi az összesített értékek kiszámítását egy kifejezés alapján. A kifejezés tartalmazhat alapvető számításokat ('{q1_id} + {q2_id}'), logikai kifejezéseket ('{age} > 60') és függvényeket ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb.).",
     confirmDelete: "Elindít egy kérést, amely a sor törlésének megerősítését kéri.",
@@ -2048,11 +2053,11 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.panelsState: "Inner panel expand state" => "Belső panel kibontási állapota"
 // pe.templateDescription: "Description template" => "Leíró sablon"
 // pe.templateTitle: "Title template" => "Cím sablon"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Előző Panel gomb eszköztipp"
-// pe.panelNextText: "Next Panel button tooltip" => "Következő Panel gomb elemleírása"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Előző Panel gomb eszköztipp"
+// pe.nextPanelText: "Next Panel button tooltip" => "Következő Panel gomb elemleírása"
 // pe.showRangeInProgress: "Show progress bar" => "Folyamatjelző sáv megjelenítése"
 // pe.templateQuestionTitleLocation: "Question title location" => "Kérdés címének helye"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "A Panel gomb helyének eltávolítása"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "A Panel gomb helyének eltávolítása"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "A kérdés elrejtése, ha nincsenek sorok"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Oszlopok elrejtése, ha nincsenek sorok"
 // pe.rateValues: "Custom rate values" => "Egyéni díjértékek"
@@ -3143,3 +3148,10 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Beállítja a folyamatjelző sáv helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt."
 // survey.readOnly: "Make the survey read-only" => "A felmérés írásvédetté tétele"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Válassza ki, ha meg szeretné akadályozni, hogy a válaszadók kitöltsék a felmérést."
+// paneldynamic.showNumber: "Number the panel" => "A panel számozása"
+// question.showNumber: "Number this question" => "Számozza meg ezt a kérdést"
+// pe.previewMode: "Preview mode" => "Előnézeti mód"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "A rácselrendezés engedélyezése"
+// pe.maskSettings: "Mask settings" => "Maszk beállításai"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Sorbővítési hibaüzenet igazítása"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Beállítja a hibaüzenetek helyét a részletes szakaszokba ágyazott kérdésekhez. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza."

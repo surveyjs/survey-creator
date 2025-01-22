@@ -44,8 +44,8 @@
   @include ctrDefaultBoldFont;
   -webkit-appearance: none;
   appearance: none;
-  border-radius: var(--ctr-expression-item-corner-radius, calcSize(12.5));
-  padding: var(--ctr-expression-item-padding-top, calcSize(1)) var(--ctr-expression-item-padding-right, calcSize(2)) var(--ctr-expression-item-padding-bottom, calcSize(1)) var(--ctr-expression-item-padding-left, calcSize(2));
+  border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
+  padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-right, var(--sjs-spacing-x2)) var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-left, var(--sjs-spacing-x2));
 
   border: none;
   outline: none;
@@ -67,90 +67,90 @@
 
   &:hover,
   &:focus {
-    color: var(--ctr-expression-item-text-color-parameter-hovered, $primary-foreground);
+    color: var(--ctr-expression-item-text-color-parameter-hovered, var(--sjs-semantic-blue-foreground-100, #ffffffff));
     outline: none;
     box-shadow: none;
   }
 }
 
 .svc-logic-operator.svc-logic-operator--question {
-  background-color: var(--ctr-expression-item-background-color-parameter, $blue-light);
-  color: var(--ctr-expression-item-text-color-parameter-empty, $foreground-light);
+  background-color: var(--ctr-expression-item-background-color-parameter, var(--sjs-semantic-blue-background-10, #437fd91a));
+  color: var(--ctr-expression-item-text-color-parameter-empty, var(--sjs-layer-3-foreground-50, #00000080));
 
   &:hover,
   &:focus {
-    background-color: var(--ctr-expression-item-background-color-parameter-hovered, $blue);
-    color: var(--ctr-expression-item-text-color-parameter-hovered, $background);
+    background-color: var(--ctr-expression-item-background-color-parameter-hovered, var(--sjs-semantic-blue-background-500, #437fd9ff));
+    color: var(--ctr-expression-item-text-color-parameter-hovered, var(--sjs-semantic-blue-foreground-100, #ffffffff));
   }
 }
 
 .svc-logic-operator.svc-logic-operator--conjunction {
-  background-color: var(--ctr-expression-item-background-color-conjunction, $yellow-light);
-  color: var(--ctr-expression-item-text-color-conjunction-empty, $foreground-light);
+  background-color: var(--ctr-expression-item-background-color-conjunction, var(--sjs-semantic-yellow-background-10, #ff98141a));
+  color: var(--ctr-expression-item-text-color-conjunction-empty, var(--sjs-layer-3-foreground-50, #00000080));
 
   &:hover,
   &:focus {
-    background-color: var(--ctr-expression-item-background-color-conjunction-hovered, $yellow);
-    color: var(--ctr-expression-item-text-color-conjunction-hovered, $primary-foreground);
+    background-color: var(--ctr-expression-item-background-color-conjunction-hovered, var(--sjs-semantic-yellow-background-500, #ff9814ff));
+    color: var(--ctr-expression-item-text-color-conjunction-hovered, var(--sjs-semantic-yellow-foreground-100, #ffffffff));
   }
 }
 
 .svc-logic-operator.svc-logic-operator--operator {
-  background-color: var(--ctr-expression-item-background-color-operator, $yellow-light);
-  color: var(--ctr-expression-item-text-color-operator-empty, $foreground-light);
+  background-color: var(--ctr-expression-item-background-color-operator, var(--sjs-semantic-yellow-background-10, #ff98141a));
+  color: var(--ctr-expression-item-text-color-operator-empty, var(--sjs-layer-3-foreground-50, #00000080));
 
   &:hover,
   &:focus {
-    background-color: var(--ctr-expression-item-background-color-operator-hovered, $yellow);
-    color: var(--ctr-expression-item-text-color-operator-hovered, $primary-foreground);
+    background-color: var(--ctr-expression-item-background-color-operator-hovered, var(--sjs-semantic-yellow-background-500, #ff9814ff));
+    color: var(--ctr-expression-item-text-color-operator-hovered, var(--sjs-semantic-yellow-foreground-100, #ffffffff));
   }
 }
 
 .svc-logic-operator.svc-logic-operator--action {
-  background-color: var(--ctr-expression-item-background-color-action, $red-light);
-  color: var(--ctr-expression-item-text-color-action-empty, $foreground-light);
+  background-color: var(--ctr-expression-item-background-color-action, var(--sjs-semantic-red-background-10, #e50a3e1a));
+  color: var(--ctr-expression-item-text-color-action-empty, var(--sjs-layer-3-foreground-50, #00000080));
 
   &:hover,
   &:focus {
-    background-color: var(--ctr-expression-item-background-color-action-hovered, $red);
-    color: var(--ctr-expression-item-text-color-action-hovered, $primary-foreground);
+    background-color: var(--ctr-expression-item-background-color-action-hovered, var(--sjs-semantic-red-background-500, #e50a3eff));
+    color: var(--ctr-expression-item-text-color-action-hovered, var(--sjs-semantic-red-foreground-100, #ffffffff));
   }
 }
 
 .svc-logic-operator--action.sl-paneldynamic__add-btn,
 .svc-logic-operator--operator.sl-paneldynamic__add-btn {
-  margin-top: var(--ctr-expression-rows-gap, calcSize(2));
+  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
 }
 
 .svc-logic-operator--action.sl-paneldynamic__add-btn {
-  color: var(--ctr-expression-item-text-color-action, $foreground);
+  color: var(--ctr-expression-item-text-color-action, var(--sjs-layer-3-foreground-100, #000000e6));
 }
 
 .svc-logic-operator--operator.sl-paneldynamic__add-btn {
-  color: var(--ctr-expression-item-text-color-operator, $foreground);
+  color: var(--ctr-expression-item-text-color-operator, var(--sjs-layer-3-foreground-100, #000000e6));
 }
 
 .svc-logic-question--answered .svc-logic-operator--question {
-  color: var(--ctr-expression-item-text-color-parameter, $foreground);
+  color: var(--ctr-expression-item-text-color-parameter, var(--sjs-layer-3-foreground-100, #000000e6));
 }
 
 .svc-logic-question--answered .svc-logic-operator--conjunction {
-  color: var(--ctr-expression-item-text-color-conjunction, $foreground);
+  color: var(--ctr-expression-item-text-color-conjunction, var(--sjs-layer-3-foreground-100, #000000e6));
 }
 
 .svc-logic-question--answered .svc-logic-operator--operator {
-  color: var(--ctr-expression-item-text-color-operator, $foreground);
+  color: var(--ctr-expression-item-text-color-operator, var(--sjs-layer-3-foreground-100, #000000e6));
 }
 
 .svc-logic-question--answered .svc-logic-operator--action {
-  color: var(--ctr-expression-item-text-color-action, $foreground);
+  color: var(--ctr-expression-item-text-color-action, var(--sjs-layer-3-foreground-100, #000000e6));
 }
 
 
 .svc-logic-operator.svc-logic-operator--error {
-  background-color: var(--ctr-expression-item-background-color-parameter-error, $background);
-  color: var(--ctr-expression-item-text-color-parameter-error, $red);
-  box-shadow: inset 0 0 0 2px var(--ctr-expression-item-text-color-parameter-error, $red);
+  background-color: var(--ctr-expression-item-background-color-parameter-error, var(--sjs-layer-1-background-500, #ffffffff));
+  color: var(--ctr-expression-item-text-color-parameter-error, var(--sjs-semantic-red-background-500, #e50a3eff));
+  box-shadow: inset 0 0 0 2px var(--ctr-expression-item-text-color-parameter-error, var(--sjs-semantic-red-background-500, #e50a3eff));
 }
 
 .svc-logic-operator__error {
@@ -166,8 +166,8 @@
 
 .svc-action-button--icon.svc-icon-remove {
   display: none;
-  padding: var(--ctr-expression-item-padding-top, 8px) var(--ctr-expression-item-padding-right-icon-only, 8px) var(--ctr-expression-item-padding-bottom, 8px) var(--ctr-expression-item-padding-left-icon-only, 8px);
-  border-radius: var(--ctr-expression-item-corner-radius, calcSize(12.5));
+  padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-right-icon-only, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-left-icon-only, var(--sjs-spacing-x1));
+  border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
   background: none;
   justify-content: center;
   align-items: center;
@@ -175,21 +175,21 @@
   border: none;
 
   .sv-svg-icon {
-    width: var(--ctr-expression-item-icon-width, 24px);
-    height: var(--ctr-expression-item-icon-height, 24px);
+    width: var(--ctr-expression-item-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-expression-item-icon-height, var(--sjs-font-size-x3));
   }
 
   use {
-    fill: var(--ctr-expression-item-icon-color, $red);
+    fill: var(--ctr-expression-item-icon-color, var(--sjs-semantic-red-background-500, #e50a3eff));
   }
 
   &:focus,
   &:hover {
-    background-color: var(--ctr-expression-item-background-color-remove-button-hovered, $red-light);
+    background-color: var(--ctr-expression-item-background-color-remove-button-hovered, var(--sjs-semantic-red-background-10, #e50a3e1a));
   }
 
   &.svc-action-button--disabled {
-    fill: var(--ctr-survey-action-button-icon-color-disabled, $foreground-dim-light);
+    fill: var(--ctr-survey-action-button-icon-color-disabled, var(--sjs-layer-1-foreground-50, #00000080));
   }
 }
 
@@ -232,7 +232,7 @@
   .svc-logic-tab__content-action {
     margin-left: 25%;
     margin-right: 25%;
-    margin-top: var(--ctr-surface-gap, calcSize(5));
+    margin-top: var(--ctr-surface-gap, var(--sjs-spacing-x5));
     margin-bottom: calcSize(8);
   }
 
@@ -242,13 +242,13 @@
 
     &:focus,
     &:hover {
-      background-color: var(--ctr-button-background-color, $background);
+      background-color: var(--ctr-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
       box-shadow: $shadow-small;
     }
   }
 
   .svc-logic-tab__content-action--disabled .svc-btn__text {
-    color: var(--ctr-button-text-color-disabled, $foreground);
+    color: var(--ctr-button-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
     opacity: var(--ctr-button-text-opacity-disabled, 0.25);
   }
 
@@ -260,7 +260,7 @@
 
 .svc-logic-tab__content-empty {
   .svc-btn__text {
-    color: var(--ctr-surface-placeholder-text-description-color, $foreground);
+    color: var(--ctr-surface-placeholder-text-description-color, var(--sjs-layer-3-foreground-50, #00000080));
   }
 }
 
@@ -289,7 +289,7 @@
 
 .sl-table__cell.sd-table__cell-action--show-detail {
   use {
-    fill: var(--ctr-collapse-button-icon-color, $foreground-light);
+    fill: var(--ctr-collapse-button-icon-color, var(--sjs-layer-3-foreground-75, #000000bf));
   }
 }
 
@@ -349,11 +349,13 @@
 }
 
 .svc-logic-tab__leave-apply-button {
-  background-color: var(--ctr-button-background-color-danger, $red);
+  background-color: var(--ctr-button-background-color-danger, var(--sjs-semantic-red-background-500, #e50a3eff));
 }
 
 .svc-logic-question-value.sd-element--with-frame {
-  box-shadow: var(--lbr-question-panel-shadow-offset-x, 0px) var(--lbr-question-panel-shadow-offset-y, 1px)
-    var(--lbr-question-panel-shadow-blur, 2px) var(--lbr-question-panel-shadow-spread, 0px)
-    var(--lbr-question-panel-shadow-color, rgba(0, 0, 0, 0.15));
+  box-shadow: var(--lbr-question-panel-shadow-offset-x, 0px)
+    var(--lbr-question-panel-shadow-offset-y, 1px)
+    var(--lbr-question-panel-shadow-blur, 2px)
+    var(--lbr-question-panel-shadow-spread, 0px)
+    var(--lbr-question-panel-shadow-color, var(--sjs-special-shadow, #00000040));
 }

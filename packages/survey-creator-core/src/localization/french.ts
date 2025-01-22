@@ -327,7 +327,7 @@ var frenchTranslation = {
       templateTabTitle: "Modèle de titre de tabulation",
       tabTitlePlaceholder: "Espace réservé au titre de l’onglet",
       templateVisibleIf: "Rendre un panneau individuel visible si :",
-      hideNumber: "Masquer le numéro du panneau",
+      showNumber: "Numérotez le panneau",
       titleLocation: "Alignement du titre du panneau",
       descriptionLocation: "Alignement de la description du panneau",
       templateQuestionTitleLocation: "Alignement du titre de la question",
@@ -344,7 +344,7 @@ var frenchTranslation = {
       requiredIf: "Faites en sorte que la question soit obligatoire si",
       page: "Page parent",
       state: "État de réduction de la zone de question",
-      hideNumber: "Masquer le numéro de la question",
+      showNumber: "Numéroter cette question",
       titleLocation: "Alignement du titre de la question",
       descriptionLocation: "Alignement de la description de la question",
       errorLocation: "Alignement des messages d’erreur",
@@ -646,8 +646,8 @@ var frenchTranslation = {
     renderMode: "Mode de rendu",
     allowAddPanel: "Autoriser l'ajout de sections",
     allowRemovePanel: "Autoriser la suppression de sections",
-    panelAddText: "Ajouter le texte du bouton de la section",
-    panelRemoveText: "Supprimer la section texte",
+    addPanelText: "Ajouter le texte du bouton de la section",
+    removePanelText: "Supprimer la section texte",
     isSinglePage: "Afficher tous les éléments sur une seule page",
     html: "Balisage HTML",
     setValue: "Réponse",
@@ -721,9 +721,9 @@ var frenchTranslation = {
     minPanelCount: "Nombre minimal de sections",
     maxPanelCount: "Nombre maximal de sections",
     panelsState: "Déploiement de la section",
-    panelPrevText: "Info-bulle du bouton Section précédente",
-    panelNextText: "Info-bulle du bouton Section suivante",
-    panelRemoveButtonLocation: "Emplacement du bouton Supprimer la Section",
+    prevPanelText: "Info-bulle du bouton Section précédente",
+    nextPanelText: "Info-bulle du bouton Section suivante",
+    removePanelButtonLocation: "Emplacement du bouton Supprimer la Section",
     hideIfRowsEmpty: "Masquer la question s’il n’y a pas de lignes",
     hideColumnsIfEmpty: "Masquer les colonnes s’il n’y a pas de lignes",
     rateValues: "Valeurs des notes personnalisées",
@@ -789,6 +789,10 @@ var frenchTranslation = {
       top: "Au dessus",
       bottom: "En dessous"
     },
+    previewMode: "Mode de prévisualisation",
+    gridLayoutEnabled: "Activer la disposition en grille",
+    maskSettings: "Paramètres du masque",
+    detailErrorLocation: "Alignement du message d’erreur d’extension de ligne",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ var frenchTranslation = {
     rowTitleWidth: "Accepte les valeurs CSS (px, %, in, pt, etc.).",
     totalText: "Visible uniquement lorsqu’au moins une colonne a un type Total ou une expression Total.",
     cellErrorLocation: "Définit l’emplacement d’un message d’erreur par rapport à une cellule dont l’entrée n’est pas valide. L’option « Hériter » applique le paramètre de la propriété « Alignement du message d’erreur ».",
+    detailErrorLocation: "Définit l’emplacement des messages d’erreur pour les questions imbriquées dans les sections de détails. L’option « Hériter » applique le paramètre de la propriété « Alignement du message d’erreur ».",
     keyDuplicationError: "Lorsque la propriété « Empêcher les réponses en double » est activée, un répondant qui tente de soumettre une entrée en double recevra le message d’erreur suivant.",
     totalExpression: "Permet de calculer des valeurs totales en fonction d’une expression. L’expression peut inclure des calculs de base ('{q1_id} + {q2_id}'), des expressions booléennes ('{age} > 60') et des fonctions ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     confirmDelete: "Déclenche une invite vous demandant de confirmer la suppression de ligne.",
@@ -1970,11 +1975,11 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pe.panelsState: "Inner panel expand state" => "État d’expansion du panneau intérieur"
 // pe.templateDescription: "Description template" => "Modèle de description"
 // pe.templateTitle: "Title template" => "Modèle de titre"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Info-bulle précédente du bouton Panneau"
-// pe.panelNextText: "Next Panel button tooltip" => "Info-bulle du bouton Panneau suivant"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Info-bulle précédente du bouton Panneau"
+// pe.nextPanelText: "Next Panel button tooltip" => "Info-bulle du bouton Panneau suivant"
 // pe.showRangeInProgress: "Show progress bar" => "Afficher la barre de progression"
 // pe.templateQuestionTitleLocation: "Question title location" => "Emplacement du titre de la question"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Supprimer l’emplacement du bouton Panneau"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Supprimer l’emplacement du bouton Panneau"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Masquer la question s’il n’y a pas de lignes"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Masquer les colonnes s’il n’y a pas de lignes"
 // pe.rateValues: "Custom rate values" => "Valeurs de taux personnalisées"
@@ -3051,3 +3056,10 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Définit l’emplacement de la barre de progression. La valeur « Auto » affiche la barre de progression au-dessus ou en dessous de l’en-tête de l’enquête."
 // survey.readOnly: "Make the survey read-only" => "Rendre l’enquête en lecture seule"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Sélectionnez cette option si vous souhaitez empêcher les personnes interrogées de remplir votre sondage."
+// paneldynamic.showNumber: "Number the panel" => "Numérotez le panneau"
+// question.showNumber: "Number this question" => "Numéroter cette question"
+// pe.previewMode: "Preview mode" => "Mode de prévisualisation"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Activer la disposition en grille"
+// pe.maskSettings: "Mask settings" => "Paramètres du masque"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Alignement du message d’erreur d’extension de ligne"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Définit l’emplacement des messages d’erreur pour les questions imbriquées dans les sections de détails. L’option «Hériter» applique le paramètre de la propriété «Alignement du message d’erreur»."

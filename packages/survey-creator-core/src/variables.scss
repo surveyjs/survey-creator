@@ -7,7 +7,6 @@ $primary-background-dark: var(--sjs-primary-backcolor-dark, rgb(20, 164, 139));
 $primary-foreground: var(--sjs-primary-forecolor, var(--primary-foreground, #fff));
 $primary-foreground-disabled: var(--sjs-primary-forecolor-light, var(--primary-foreground-disabled, rgba(#fff, 0.25)));
 
-$secondary: var(--sjs-secondary-backcolor, var(--secondary, #ff9814));
 $secondary-light: var(--sjs-secondary-backcolor-light, var(--secondary-light, rgba(255, 152, 20, 0.25)));
 $secondary-backcolor-semi-light: var(--sjs-secondary-backcolor-semi-light, rgba(255, 152, 20, 0.1));
 $secondary-forecolor: var(--sjs-secondary-forecolor, #fff);
@@ -36,13 +35,13 @@ $border: var(--sjs-border-default, var(--border, #d6d6d6));
 $border-light: var(--sjs-border-light, var(--border-light, #eaeaea));
 $border-inside: var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16)));
 
-$shadow-small: 0px 1px 2px 0px var(--ctr-shadow-small-color, rgba(0, 0, 0, 0.15));
-$shadow-small-reset: 0px 0px 0px 0px var(--ctr-shadow-small-color, rgba(0, 0, 0, 0.15));
-$shadow-medium: 0px 2px 6px 0px var(--ctr-shadow-medium-color, rgba(0, 0, 0, 0.10));
-$shadow-large: 0px 8px 16px 0px var(--ctr-shadow-large-color, rgba(0, 0, 0, 0.10));
+$shadow-small: 0px 1px 2px 0px var(--ctr-shadow-small-color, var(--sjs-special-shadow, #00000040));
+$shadow-small-reset: 0px 0px 0px 0px var(--ctr-shadow-small-color, var(--sjs-special-shadow, #00000040));
+$shadow-medium: 0px 2px 6px 0px var(--ctr-shadow-medium-color, var(--sjs-special-glow, #004c441a));
+$shadow-large: 0px 8px 16px 0px var(--ctr-shadow-large-color, var(--sjs-special-glow, #004c441a));
 $shadow-inner: var(--sjs-shadow-inner, inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15));
 $shadow-inner-reset: var(--sjs-shadow-inner, inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15));
-$shadow-x-large: 0px 0px 0px 0px var(--ctr-shadow-x-large-color, rgba(0, 0, 0, 0.10));
+$shadow-x-large: 0px 0px 0px 0px var(--ctr-shadow-x-large-color, var(--sjs-special-glow, #004c441a));
 
 $red: var(--sjs-special-red, var(--red, #e60a3e));
 $red-light: var(--sjs-special-red-light, var(--red-light, rgba(230, 10, 62, 0.1)));

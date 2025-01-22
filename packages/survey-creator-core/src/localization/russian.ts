@@ -327,7 +327,7 @@ export var ruStrings = {
       templateTabTitle: "Шаблон заголовка вкладки",
       tabTitlePlaceholder: "Заполнитель заголовка вкладки",
       templateVisibleIf: "Сделать отдельную панель видимой, если",
-      hideNumber: "Скрытие номера панели",
+      showNumber: "Пронумеруйте панель",
       titleLocation: "Выравнивание заголовков панелей",
       descriptionLocation: "Выравнивание описания панели",
       templateQuestionTitleLocation: "Выравнивание заголовка вопроса",
@@ -344,7 +344,7 @@ export var ruStrings = {
       requiredIf: "Сделайте вопрос обязательным, если",
       page: "Родительская страница",
       state: "Состояние сворачивания окна вопроса",
-      hideNumber: "Скрыть номер вопроса",
+      showNumber: "Пронумеруйте этот вопрос",
       titleLocation: "Выравнивание заголовка вопроса",
       descriptionLocation: "Выравнивание описания вопроса",
       errorLocation: "Выравнивание сообщений об ошибках",
@@ -646,8 +646,8 @@ export var ruStrings = {
     renderMode: "Режим отображения панели",
     allowAddPanel: "Разрешить добавление панели",
     allowRemovePanel: "Разрешить удаление панели",
-    panelAddText: "Добавление текста на панели",
-    panelRemoveText: "Удаление текста на панели",
+    addPanelText: "Добавление текста на панели",
+    removePanelText: "Удаление текста на панели",
     isSinglePage: "Показывать все элементы на одной странице",
     html: "HTML-разметка",
     setValue: "Ответ",
@@ -721,9 +721,9 @@ export var ruStrings = {
     minPanelCount: "Минимальное количество панелей",
     maxPanelCount: "Максимальное количество панелей",
     panelsState: "Состояние расширения внутренней панели",
-    panelPrevText: "Предыдущая всплывающая подсказка кнопки «Панель»",
-    panelNextText: "Всплывающая подсказка кнопки «Следующая панель»",
-    panelRemoveButtonLocation: "Удалить расположение кнопки «Панель»",
+    prevPanelText: "Предыдущая всплывающая подсказка кнопки «Панель»",
+    nextPanelText: "Всплывающая подсказка кнопки «Следующая панель»",
+    removePanelButtonLocation: "Удалить расположение кнопки «Панель»",
     hideIfRowsEmpty: "Скрыть вопрос, если нет строк",
     hideColumnsIfEmpty: "Скрытие столбцов, если строк нет",
     rateValues: "Пользовательские значения тарифов",
@@ -789,6 +789,10 @@ export var ruStrings = {
       top: "Сверху",
       bottom: "Снизу"
     },
+    previewMode: "Режим предварительного просмотра",
+    gridLayoutEnabled: "Включение макета сетки",
+    maskSettings: "Настройки маски",
+    detailErrorLocation: "Выравнивание сообщения об ошибке расширения строк",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var ruStrings = {
     rowTitleWidth: "Принимает значения CSS (px, %, in, pt и т. д.).",
     totalText: "Отображается только в том случае, если хотя бы один столбец имеет тип Total или выражение Total.",
     cellErrorLocation: "Задает местоположение сообщения об ошибке по отношению к ячейке с недопустимыми входными данными. Опция «Наследовать» применяет настройку из свойства «Выравнивание сообщений об ошибках».",
+    detailErrorLocation: "Задает расположение сообщений об ошибках для вопросов, вложенных в подробные разделы. Опция \"Наследовать\" применяет настройку из свойства \"Выравнивание сообщения об ошибке\".",
     keyDuplicationError: "Если включено свойство «Не допускать дублирования ответов», респондент, пытающийся отправить дублирующуюся запись, получит следующее сообщение об ошибке.",
     totalExpression: "Позволяет вычислять итоговые значения на основе выражения. Выражение может включать базовые вычисления ('{q1_id} + {q2_id}'), логические выражения ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д.).",
     confirmDelete: "Запускает запрос на подтверждение удаления строки.",
@@ -1978,11 +1983,11 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.panelsState: "Inner panel expand state" => "Состояние расширения внутренней панели"
 // pe.templateDescription: "Description template" => "Шаблон описания"
 // pe.templateTitle: "Title template" => "Шаблон заголовка"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Предыдущая всплывающая подсказка кнопки «Панель»"
-// pe.panelNextText: "Next Panel button tooltip" => "Всплывающая подсказка кнопки «Следующая панель»"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Предыдущая всплывающая подсказка кнопки «Панель»"
+// pe.nextPanelText: "Next Panel button tooltip" => "Всплывающая подсказка кнопки «Следующая панель»"
 // pe.showRangeInProgress: "Show progress bar" => "Показать индикатор выполнения"
 // pe.templateQuestionTitleLocation: "Question title location" => "Местоположение заголовка вопроса"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Удалить расположение кнопки «Панель»"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Удалить расположение кнопки «Панель»"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Скрыть вопрос, если нет строк"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Скрытие столбцов, если строк нет"
 // pe.rateValues: "Custom rate values" => "Пользовательские значения тарифов"
@@ -3047,3 +3052,10 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Задает расположение индикатора выполнения. Значение \"Auto\" отображает индикатор выполнения над или под заголовком опроса."
 // survey.readOnly: "Make the survey read-only" => "Сделайте опрос доступным только для чтения"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Выберите, хотите ли вы запретить респондентам заполнять ваш опрос."
+// paneldynamic.showNumber: "Number the panel" => "Пронумеруйте панель"
+// question.showNumber: "Number this question" => "Пронумеруйте этот вопрос"
+// pe.previewMode: "Preview mode" => "Режим предварительного просмотра"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Включение макета сетки"
+// pe.maskSettings: "Mask settings" => "Настройки маски"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Выравнивание сообщения об ошибке расширения строк"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Задает расположение сообщений об ошибках для вопросов, вложенных в подробные разделы. Опция \"Наследовать\" применяет настройку из свойства \"Выравнивание сообщения об ошибке\"."

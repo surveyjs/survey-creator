@@ -1,5 +1,7 @@
-import { SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue,
-  PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel } from "survey-core";
+import {
+  SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue,
+  PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel
+} from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
@@ -332,8 +334,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
           type: "paneldynamic",
           titleLocation: "hidden",
           name: "panel",
-          panelRemoveButtonLocation: "right",
-          panelAddText: editorLocalization.getString("pe.addCondition"),
+          removePanelButtonLocation: "right",
+          addPanelText: editorLocalization.getString("pe.addCondition"),
           minPanelCount: 1,
           maxPanelCount: 1,
           startWithNewLine: false,
@@ -518,14 +520,14 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private isSettingPanelValues = false;
   private getIsOperatorEnabled(qName: string, qType: string, op: string, condQuestion: Question, isContainer: boolean): boolean {
-    if(isContainer) return op === "empty" || op === "notempty";
+    if (isContainer) return op === "empty" || op === "notempty";
     let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[op]);
     return !!condQuestion ? this.options.isConditionOperatorEnabled(qName, condQuestion, op, isOperatorEnabled) : isOperatorEnabled;
   }
   private isContainerQuestion(questionName: string): boolean {
-    if(!settings.logic.includeComplexQuestions || !questionName) return false;
-    for(let key in this.addConditionQuestionsHash) {
-      if(key.indexOf(questionName + ".") === 0 || key.indexOf(questionName + "[") === 0) return true;
+    if (!settings.logic.includeComplexQuestions || !questionName) return false;
+    for (let key in this.addConditionQuestionsHash) {
+      if (key.indexOf(questionName + ".") === 0 || key.indexOf(questionName + "[") === 0) return true;
     }
     return false;
   }
@@ -683,7 +685,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         const question = questions[i];
         if (contextObject == question) continue;
         const context = contextObject ? contextObject : (!this.context || this.context === question);
-        if(settings.logic.includeComplexQuestions && question.isContainer) {
+        if (settings.logic.includeComplexQuestions && question.isContainer) {
           res.push({ question: question, name: question.name, text: question.title });
         }
         question.addConditionObjectsByContext(res, context);
@@ -953,10 +955,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private onUpdateQuestionCssClasses(options: any) {
     const cssClasses = options.cssClasses;
     const question = options.question;
-    if(question.getType() !== "paneldynamic") {
+    if (question.getType() !== "paneldynamic") {
       cssClasses.answered = "svc-logic-question--answered";
     }
-    if(question.name === "textEditor") {
+    if (question.name === "textEditor") {
       cssClasses.root += " svc-logic-question-text-editor";
     }
     if (question.name === "conjunction") {

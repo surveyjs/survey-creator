@@ -327,7 +327,7 @@ export var jaStrings = {
       templateTabTitle: "タブ タイトルのパターン",
       tabTitlePlaceholder: "タブ タイトルのプレースホルダー",
       templateVisibleIf: "個々のパネルを表示するのは、次の場合です",
-      hideNumber: "パネル番号を隠す",
+      showNumber: "パネルに番号を付ける",
       titleLocation: "パネルタイトルの配置",
       descriptionLocation: "パネル記述の位置合わせ",
       templateQuestionTitleLocation: "質問タイトルの配置",
@@ -344,7 +344,7 @@ export var jaStrings = {
       requiredIf: "次の場合は質問を必須にします",
       page: "親ページ",
       state: "質問ボックスの折りたたみ状態",
-      hideNumber: "質問番号を非表示にする",
+      showNumber: "この質問に番号を付ける",
       titleLocation: "質問タイトルの配置",
       descriptionLocation: "質問の説明の配置",
       errorLocation: "エラー・メッセージのアライメント",
@@ -646,8 +646,8 @@ export var jaStrings = {
     renderMode: "レンダーモード",
     allowAddPanel: "パネルの追加を許可",
     allowRemovePanel: "パネルの削除を許可",
-    panelAddText: "パネルテキストを追加しています",
-    panelRemoveText: "パネルテキストを削除しています",
+    addPanelText: "パネルテキストを追加しています",
+    removePanelText: "パネルテキストを削除しています",
     isSinglePage: "1ページ上にすべてのエレメントを表示",
     html: "HTML",
     setValue: "答える",
@@ -721,9 +721,9 @@ export var jaStrings = {
     minPanelCount: "最小パネル数",
     maxPanelCount: "最大パネル数",
     panelsState: "内側パネルの展開状態",
-    panelPrevText: "前のパネルボタンのツールチップ",
-    panelNextText: "[次へ] パネル ボタンのツールチップ",
-    panelRemoveButtonLocation: "[パネルを削除] ボタンの位置",
+    prevPanelText: "前のパネルボタンのツールチップ",
+    nextPanelText: "[次へ] パネル ボタンのツールチップ",
+    removePanelButtonLocation: "[パネルを削除] ボタンの位置",
     hideIfRowsEmpty: "行がない場合は質問を非表示にする",
     hideColumnsIfEmpty: "行がない場合は列を非表示にする",
     rateValues: "カスタムレート値",
@@ -789,6 +789,10 @@ export var jaStrings = {
       top: "上に",
       bottom: "下に"
     },
+    previewMode: "プレビューモード",
+    gridLayoutEnabled: "グリッド レイアウトの有効化",
+    maskSettings: "マスク設定",
+    detailErrorLocation: "行拡張エラーメッセージの配置",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var jaStrings = {
     rowTitleWidth: "CSS 値 (px、%、in、pt など) を受け入れます。",
     totalText: "少なくとも 1 つの列に [合計型] または [合計式] がある場合にのみ表示されます。",
     cellErrorLocation: "無効な入力があるセルに関連するエラーメッセージの位置を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。",
+    detailErrorLocation: "詳細セクションにネストされた質問のエラーメッセージの場所を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。",
     keyDuplicationError: "「重複回答の防止」プロパティが有効な場合、重複したエントリを送信しようとする回答者は、次のエラーメッセージを受け取ります。",
     totalExpression: "式に基づいて合計値を計算できます。式には、基本的な計算 ('{q1_id} + {q2_id}')、ブール式 ('{age} > 60')、関数 ('iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' など) を含めることができます。",
     confirmDelete: "行の削除を確認するプロンプトをトリガーします。",
@@ -1930,11 +1935,11 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pe.panelsState: "Inner panel expand state" => "内側パネルの展開状態"
 // pe.templateDescription: "Description template" => "説明テンプレート"
 // pe.templateTitle: "Title template" => "タイトルテンプレート"
-// pe.panelPrevText: "Previous Panel button tooltip" => "前のパネルボタンのツールチップ"
-// pe.panelNextText: "Next Panel button tooltip" => "[次へ] パネル ボタンのツールチップ"
+// pe.prevPanelText: "Previous Panel button tooltip" => "前のパネルボタンのツールチップ"
+// pe.nextPanelText: "Next Panel button tooltip" => "[次へ] パネル ボタンのツールチップ"
 // pe.showRangeInProgress: "Show progress bar" => "進行状況バーを表示する"
 // pe.templateQuestionTitleLocation: "Question title location" => "質問タイトルの場所"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "[パネルを削除] ボタンの位置"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "[パネルを削除] ボタンの位置"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "行がない場合は質問を非表示にする"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "行がない場合は列を非表示にする"
 // pe.rateValues: "Custom rate values" => "カスタムレート値"
@@ -2991,3 +2996,10 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "プログレスバーの位置を設定します。「自動」の値は、調査ヘッダーの上または下に進行状況バーを表示します。"
 // survey.readOnly: "Make the survey read-only" => "調査を読み取り専用にする"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "回答者がアンケートに回答できないようにする場合に選択します。"
+// paneldynamic.showNumber: "Number the panel" => "パネルに番号を付ける"
+// question.showNumber: "Number this question" => "この質問に番号を付ける"
+// pe.previewMode: "Preview mode" => "プレビューモード"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "グリッド レイアウトの有効化"
+// pe.maskSettings: "Mask settings" => "マスク設定"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "行拡張エラーメッセージの配置"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "詳細セクションにネストされた質問のエラーメッセージの場所を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。"

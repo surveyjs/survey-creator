@@ -327,7 +327,7 @@ export var koreanStrings = {
       templateTabTitle: "탭 제목 패턴",
       tabTitlePlaceholder: "탭 제목 자리 표시자",
       templateVisibleIf: "다음과 같은 경우 개별 패널을 표시합니다.",
-      hideNumber: "패널 번호 숨기기",
+      showNumber: "패널 번호 매기기",
       titleLocation: "패널 제목 정렬",
       descriptionLocation: "패널 설명 정렬",
       templateQuestionTitleLocation: "질문 제목 정렬",
@@ -344,7 +344,7 @@ export var koreanStrings = {
       requiredIf: "다음과 같은 경우 질문을 필수로 만듭니다.",
       page: "상위 페이지",
       state: "질문 상자 축소 상태",
-      hideNumber: "질문 번호 숨기기",
+      showNumber: "이 질문에 번호를 매기십시오.",
       titleLocation: "질문 제목 정렬",
       descriptionLocation: "질문 설명 정렬",
       errorLocation: "오류 메시지 맞춤",
@@ -646,8 +646,8 @@ export var koreanStrings = {
     renderMode: "렌더링 모드",
     allowAddPanel: "패널 추가 허용",
     allowRemovePanel: "패널 제거 허용",
-    panelAddText: "패널 텍스트 추가",
-    panelRemoveText: "패널 텍스트 삭제",
+    addPanelText: "패널 텍스트 추가",
+    removePanelText: "패널 텍스트 삭제",
     isSinglePage: "한 페이지에 모든 요소 표시",
     html: "HTML 마크업",
     setValue: "대답",
@@ -721,9 +721,9 @@ export var koreanStrings = {
     minPanelCount: "최소 패널 수",
     maxPanelCount: "최대 패널 수",
     panelsState: "내부 패널 확장 상태",
-    panelPrevText: "이전 패널 단추 도구 설명",
-    panelNextText: "다음 패널 단추 도구 설명",
-    panelRemoveButtonLocation: "패널 단추 위치 제거",
+    prevPanelText: "이전 패널 단추 도구 설명",
+    nextPanelText: "다음 패널 단추 도구 설명",
+    removePanelButtonLocation: "패널 단추 위치 제거",
     hideIfRowsEmpty: "행이 없는 경우 질문 숨기기",
     hideColumnsIfEmpty: "행이 없는 경우 열 숨기기",
     rateValues: "사용자 지정 요금 값",
@@ -789,6 +789,10 @@ export var koreanStrings = {
       top: "맨 위에",
       bottom: "하단에"
     },
+    previewMode: "미리보기 모드",
+    gridLayoutEnabled: "그리드 레이아웃 사용Enable the grid layout",
+    maskSettings: "마스크 설정",
+    detailErrorLocation: "행 확장 오류 메시지 맞춤",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var koreanStrings = {
     rowTitleWidth: "CSS 값(px, %, in, pt 등)을 허용합니다.",
     totalText: "하나 이상의 열에 Total 유형 또는 Total 표현식이 있는 경우에만 표시됩니다.",
     cellErrorLocation: "잘못된 입력이 있는 셀과 관련하여 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 \"오류 메시지 맞춤\" 속성의 설정을 적용합니다.",
+    detailErrorLocation: "세부 섹션에 중첩된 질문에 대한 오류 메시지의 위치를 설정합니다. \"Inherit\" 옵션은 \"Error message alignment\" 속성의 설정을 적용합니다.",
     keyDuplicationError: "\"중복 응답 방지\" 속성이 활성화된 경우, 중복 항목을 제출하려는 응답자는 다음과 같은 오류 메시지를 받게 됩니다.",
     totalExpression: "표현식을 기준으로 합계 값을 계산할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식('{age} > 60') 및 함수('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등)이 포함될 수 있습니다.",
     confirmDelete: "행 삭제를 확인하라는 프롬프트를 트리거합니다.",
@@ -2090,11 +2095,11 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.panelsState: "Inner panel expand state" => "내부 패널 확장 상태"
 // pe.templateDescription: "Description template" => "설명 템플릿"
 // pe.templateTitle: "Title template" => "제목 템플릿"
-// pe.panelPrevText: "Previous Panel button tooltip" => "이전 패널 단추 도구 설명"
-// pe.panelNextText: "Next Panel button tooltip" => "다음 패널 단추 도구 설명"
+// pe.prevPanelText: "Previous Panel button tooltip" => "이전 패널 단추 도구 설명"
+// pe.nextPanelText: "Next Panel button tooltip" => "다음 패널 단추 도구 설명"
 // pe.showRangeInProgress: "Show progress bar" => "진행률 표시줄 표시"
 // pe.templateQuestionTitleLocation: "Question title location" => "질문 제목 위치"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "패널 단추 위치 제거"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "패널 단추 위치 제거"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "행이 없는 경우 질문 숨기기"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "행이 없는 경우 열 숨기기"
 // pe.rateValues: "Custom rate values" => "사용자 지정 요금 값"
@@ -3196,3 +3201,10 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "진행률 표시줄의 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
 // survey.readOnly: "Make the survey read-only" => "설문조사를 읽기 전용으로 설정"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "응답자가 설문조사를 작성하지 못하도록 하려면 선택합니다."
+// paneldynamic.showNumber: "Number the panel" => "패널 번호 매기기"
+// question.showNumber: "Number this question" => "이 질문에 번호를 매기십시오."
+// pe.previewMode: "Preview mode" => "미리보기 모드"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "그리드 레이아웃 사용Enable the grid layout"
+// pe.maskSettings: "Mask settings" => "마스크 설정"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "행 확장 오류 메시지 맞춤"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "세부 섹션에 중첩된 질문에 대한 오류 메시지의 위치를 설정합니다. \"Inherit\" 옵션은 \"Error message alignment\" 속성의 설정을 적용합니다."

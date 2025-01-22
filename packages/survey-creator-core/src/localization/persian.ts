@@ -327,7 +327,7 @@ var persianStrings = {
       templateTabTitle: "الگوی عنوان زبانه",
       tabTitlePlaceholder: "ذی نفع عنوان تب",
       templateVisibleIf: "ایجاد یک پنل منفرد مرئی اگر",
-      hideNumber: "مخفی کردن شمارهی تابلو",
+      showNumber: "شماره گذاری پانل",
       titleLocation: "ترازبندی عنوان پنل",
       descriptionLocation: "ترازبندی توضیحات پنل",
       templateQuestionTitleLocation: "هم ترازی عنوان پرسش",
@@ -344,7 +344,7 @@ var persianStrings = {
       requiredIf: "سؤال مورد نیاز را مطرح کنید اگر",
       page: "صفحه اصلی",
       state: "جعبه سوال دولت فروپاشی",
-      hideNumber: "مخفی کردن شماره سوال",
+      showNumber: "این سوال را شماره گذاری کنید",
       titleLocation: "هم ترازی عنوان پرسش",
       descriptionLocation: "هم ترازی توضیحات سؤال",
       errorLocation: "همترازسازی پیام خطا",
@@ -646,8 +646,8 @@ var persianStrings = {
     renderMode: "حالت رندر",
     allowAddPanel: "اجازه افزودن پنل",
     allowRemovePanel: "اجازه حذف پنل",
-    panelAddText: "متن افزودن پنل",
-    panelRemoveText: "متن حذف پنل",
+    addPanelText: "متن افزودن پنل",
+    removePanelText: "متن حذف پنل",
     isSinglePage: "نمایش تمام المان ها در یک صفحه",
     html: "Html",
     setValue: "پاسخ",
@@ -721,9 +721,9 @@ var persianStrings = {
     minPanelCount: "حداقل تعداد پانل",
     maxPanelCount: "حداکثر تعداد پانل",
     panelsState: "پانل داخلی گسترش دولت",
-    panelPrevText: "قبلی دکمه پنل tooltip",
-    panelNextText: "بعدی دکمه پنل tooltip",
-    panelRemoveButtonLocation: "حذف محل دکمه پنل",
+    prevPanelText: "قبلی دکمه پنل tooltip",
+    nextPanelText: "بعدی دکمه پنل tooltip",
+    removePanelButtonLocation: "حذف محل دکمه پنل",
     hideIfRowsEmpty: "مخفی کردن سؤال اگر سطری وجود نداشته باشد",
     hideColumnsIfEmpty: "مخفی کردن ستونها اگر سطری وجود نداشته باشد",
     rateValues: "مقادیر نرخ سفارشی",
@@ -789,6 +789,10 @@ var persianStrings = {
       top: "بخش بالا",
       bottom: "بخش پایین"
     },
+    previewMode: "حالت پیش نمایش",
+    gridLayoutEnabled: "طرح بندی شبکه را فعال کنید",
+    maskSettings: "تنظیمات ماسک",
+    detailErrorLocation: "تراز پیام خطای گسترش ردیف",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ var persianStrings = {
     rowTitleWidth: "مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
     totalText: "تنها زمانی قابل مشاهده است که حداقل یک ستون دارای عبارت Total type یا Total باشد.",
     cellErrorLocation: "محل یک پیام خطا را در رابطه با یک سلول با ورودی نامعتبر تنظیم می کند. گزینه \"Inherit\" تنظیمات را از ویژگی \"Error message alignment\" اعمال می کند.",
+    detailErrorLocation: "مکان پیام های خطا را برای سؤالات تودرتو در بخش های جزئیات تنظیم می کند. گزینه \"وراثت\" تنظیمات را از ویژگی \"تراز پیام خطا\" اعمال می کند.",
     keyDuplicationError: "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند.",
     totalExpression: "به شما اجازه می دهد تا مقادیر کل را بر اساس یک عبارت محاسبه کنید. این عبارت می تواند شامل محاسبات اساسی ('{q1_id} + {q2_id}')، عبارات بولی ('{age} > 60') و توابع ('iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()'، و غیره باشد.",
     confirmDelete: "یک درخواست فوری برای تایید حذف ردیف ایجاد می کند.",
@@ -1893,11 +1898,11 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.panelsState: "Inner panel expand state" => "پانل داخلی گسترش دولت"
 // pe.templateDescription: "Description template" => "قالب شرح"
 // pe.templateTitle: "Title template" => "قالب عنوان"
-// pe.panelPrevText: "Previous Panel button tooltip" => "قبلی دکمه پنل tooltip"
-// pe.panelNextText: "Next Panel button tooltip" => "بعدی دکمه پنل tooltip"
+// pe.prevPanelText: "Previous Panel button tooltip" => "قبلی دکمه پنل tooltip"
+// pe.nextPanelText: "Next Panel button tooltip" => "بعدی دکمه پنل tooltip"
 // pe.showRangeInProgress: "Show progress bar" => "نمایش نوار پیشرفت"
 // pe.templateQuestionTitleLocation: "Question title location" => "عنوان سوال محل"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "حذف محل دکمه پنل"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "حذف محل دکمه پنل"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "مخفی کردن سؤال اگر سطری وجود نداشته باشد"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "مخفی کردن ستونها اگر سطری وجود نداشته باشد"
 // pe.rateValues: "Custom rate values" => "مقادیر نرخ سفارشی"
@@ -2947,3 +2952,10 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "مکان نوار پیشرفت را تنظیم می کند. مقدار \"خودکار\" نوار پیشرفت را در بالا یا پایین سربرگ نظرسنجی نشان می دهد."
 // survey.readOnly: "Make the survey read-only" => "نظرسنجی را فقط خواندنی کنید"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "اگر می خواهید از پر کردن نظرسنجی پاسخ دهندگان جلوگیری کنید، انتخاب کنید."
+// paneldynamic.showNumber: "Number the panel" => "شماره گذاری پانل"
+// question.showNumber: "Number this question" => "این سوال را شماره گذاری کنید"
+// pe.previewMode: "Preview mode" => "حالت پیش نمایش"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "طرح بندی شبکه را فعال کنید"
+// pe.maskSettings: "Mask settings" => "تنظیمات ماسک"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "تراز پیام خطای گسترش ردیف"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "مکان پیام های خطا را برای سؤالات تودرتو در بخش های جزئیات تنظیم می کند. گزینه \"وراثت\" تنظیمات را از ویژگی \"تراز پیام خطا\" اعمال می کند."

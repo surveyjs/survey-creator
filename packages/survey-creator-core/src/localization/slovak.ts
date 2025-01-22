@@ -327,7 +327,7 @@ export var skStrings = {
       templateTabTitle: "Vzor názvu tabulátora",
       tabTitlePlaceholder: "Zástupný symbol názvu tabulátora",
       templateVisibleIf: "Zviditeľniť samostatný panel, ak",
-      hideNumber: "Skrytie čísla panela",
+      showNumber: "Očíslujte panel",
       titleLocation: "Zarovnanie názvu panela",
       descriptionLocation: "Zarovnanie popisu panela",
       templateQuestionTitleLocation: "Zarovnanie názvu otázky",
@@ -344,7 +344,7 @@ export var skStrings = {
       requiredIf: "Urobte otázku povinnou, ak",
       page: "Nadradená stránka",
       state: "Stav zbalenia poľa otázok",
-      hideNumber: "Skrytie čísla otázky",
+      showNumber: "Číslo tejto otázky",
       titleLocation: "Zarovnanie názvu otázky",
       descriptionLocation: "Zarovnanie popisu otázky",
       errorLocation: "Zarovnanie chybových hlásení",
@@ -646,8 +646,8 @@ export var skStrings = {
     renderMode: "Režim vykresľovania",
     allowAddPanel: "Povoliť pridanie panela",
     allowRemovePanel: "Povoliť odstránenie panela",
-    panelAddText: "Text pri pridaní panela",
-    panelRemoveText: "Text pri odstránení panela",
+    addPanelText: "Text pri pridaní panela",
+    removePanelText: "Text pri odstránení panela",
     isSinglePage: "Zobraziť všetky prvky na jednej stránke",
     html: "Html",
     setValue: "Odpoveď",
@@ -721,9 +721,9 @@ export var skStrings = {
     minPanelCount: "Minimálny počet panelov",
     maxPanelCount: "Maximálny počet panelov",
     panelsState: "Stav rozbalenia vnútorného panela",
-    panelPrevText: "Popis tlačidla Predchádzajúci panel",
-    panelNextText: "Popis tlačidla Nasledujúci panel",
-    panelRemoveButtonLocation: "Odstrániť umiestnenie tlačidla panela",
+    prevPanelText: "Popis tlačidla Predchádzajúci panel",
+    nextPanelText: "Popis tlačidla Nasledujúci panel",
+    removePanelButtonLocation: "Odstrániť umiestnenie tlačidla panela",
     hideIfRowsEmpty: "Skryť otázku, ak nie sú žiadne riadky",
     hideColumnsIfEmpty: "Skryť stĺpce, ak nie sú k dispozícii žiadne riadky",
     rateValues: "Vlastné hodnoty sadzieb",
@@ -789,6 +789,10 @@ export var skStrings = {
       top: "V hornej časti",
       bottom: "V spodnej časti"
     },
+    previewMode: "Režim náhľadu",
+    gridLayoutEnabled: "Povolenie rozloženia mriežky",
+    maskSettings: "Nastavenia masky",
+    detailErrorLocation: "Zarovnanie chybového hlásenia o rozšírení riadka",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var skStrings = {
     rowTitleWidth: "Akceptuje hodnoty CSS (px, %, in, pt atď.).",
     totalText: "Viditeľné len vtedy, ak aspoň jeden stĺpec obsahuje výraz Typ celkom alebo Celkom.",
     cellErrorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu k bunke s neplatným vstupom. Možnosť Zdediť použije nastavenie z vlastnosti Zarovnanie chybového hlásenia.",
+    detailErrorLocation: "Nastaví umiestnenie chybových hlásení pre otázky vnorené do podrobných sekcií. Možnosť \"Zdediť\" použije nastavenie z vlastnosti \"Zarovnanie chybového hlásenia\".",
     keyDuplicationError: "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie.",
     totalExpression: "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.).",
     confirmDelete: "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka.",
@@ -1930,11 +1935,11 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pe.panelsState: "Inner panel expand state" => "Stav rozbalenia vnútorného panela"
 // pe.templateDescription: "Description template" => "Šablóna popisu"
 // pe.templateTitle: "Title template" => "Šablóna názvu"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Popis tlačidla Predchádzajúci panel"
-// pe.panelNextText: "Next Panel button tooltip" => "Popis tlačidla Nasledujúci panel"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Popis tlačidla Predchádzajúci panel"
+// pe.nextPanelText: "Next Panel button tooltip" => "Popis tlačidla Nasledujúci panel"
 // pe.showRangeInProgress: "Show progress bar" => "Zobraziť indikátor priebehu"
 // pe.templateQuestionTitleLocation: "Question title location" => "Otázka, názov, umiestnenie:"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Odstrániť umiestnenie tlačidla panela"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Odstrániť umiestnenie tlačidla panela"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Skryť otázku, ak nie sú žiadne riadky"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Skryť stĺpce, ak nie sú k dispozícii žiadne riadky"
 // pe.rateValues: "Custom rate values" => "Vlastné hodnoty sadzieb"
@@ -2945,3 +2950,10 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Nastaví umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu."
 // survey.readOnly: "Make the survey read-only" => "Nastavenie prieskumu iba na čítanie"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Vyberte, či chcete respondentom zabrániť vo vypĺňaní prieskumu."
+// paneldynamic.showNumber: "Number the panel" => "Očíslujte panel"
+// question.showNumber: "Number this question" => "Číslo tejto otázky"
+// pe.previewMode: "Preview mode" => "Režim náhľadu"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Povolenie rozloženia mriežky"
+// pe.maskSettings: "Mask settings" => "Nastavenia masky"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Zarovnanie chybového hlásenia o rozšírení riadka"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Nastaví umiestnenie chybových hlásení pre otázky vnorené do podrobných sekcií. Možnosť \"Zdediť\" použije nastavenie z vlastnosti \"Zarovnanie chybového hlásenia\"."

@@ -327,7 +327,7 @@ export var nlStrings = {
       templateTabTitle: "Patroon voor tabbladtitel",
       tabTitlePlaceholder: "Tijdelijke aanduiding voor tabtitel",
       templateVisibleIf: "Maak een afzonderlijk paneel zichtbaar als",
-      hideNumber: "Het paneelnummer verbergen",
+      showNumber: "Nummer het paneel",
       titleLocation: "Uitlijning van paneeltitels",
       descriptionLocation: "Uitlijning van paneelbeschrijving",
       templateQuestionTitleLocation: "Uitlijning van vraagtitels",
@@ -344,7 +344,7 @@ export var nlStrings = {
       requiredIf: "Maak de vraag verplicht als",
       page: "Bovenliggende pagina",
       state: "Samenvouwen van vragenvak",
-      hideNumber: "Verberg het vraagnummer",
+      showNumber: "Nummer deze vraag",
       titleLocation: "Uitlijning van vraagtitels",
       descriptionLocation: "Uitlijning van vraagbeschrijvingen",
       errorLocation: "Uitlijning van foutmeldingen",
@@ -646,8 +646,8 @@ export var nlStrings = {
     renderMode: "Render-modus",
     allowAddPanel: "Sta het toevoegen van een paneel toe",
     allowRemovePanel: "Laat het verwijderen van het paneel toe",
-    panelAddText: "Paneeltekst toevoegen",
-    panelRemoveText: "Paneeltekst verwijderen",
+    addPanelText: "Paneeltekst toevoegen",
+    removePanelText: "Paneeltekst verwijderen",
     isSinglePage: "Toon alle elementen op één pagina",
     html: "Html",
     setValue: "Antwoorden",
@@ -721,9 +721,9 @@ export var nlStrings = {
     minPanelCount: "Minimaal aantal panelen",
     maxPanelCount: "Maximaal aantal panelen",
     panelsState: "Uitvouwstatus binnenpaneel",
-    panelPrevText: "Knopinfo vorige deelvensterknop",
-    panelNextText: "knopinfo voor het volgende deelvenster",
-    panelRemoveButtonLocation: "Locatie van de knop Deelvenster verwijderen",
+    prevPanelText: "Knopinfo vorige deelvensterknop",
+    nextPanelText: "knopinfo voor het volgende deelvenster",
+    removePanelButtonLocation: "Locatie van de knop Deelvenster verwijderen",
     hideIfRowsEmpty: "Verberg de vraag als er geen rijen zijn",
     hideColumnsIfEmpty: "Kolommen verbergen als er geen rijen zijn",
     rateValues: "Aangepaste tariefwaarden",
@@ -789,6 +789,10 @@ export var nlStrings = {
       top: "Bovenop",
       bottom: "Onder aan"
     },
+    previewMode: "Preview-modus",
+    gridLayoutEnabled: "De rasterlay-out inschakelen",
+    maskSettings: "Masker-instellingen",
+    detailErrorLocation: "Uitlijning van foutmeldingen bij rijuitbreiding",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var nlStrings = {
     rowTitleWidth: "Accepteert CSS-waarden (px, %, in, pt, enz.).",
     totalText: "Alleen zichtbaar als ten minste één kolom het type Totaal of de expressie Totaal heeft.",
     cellErrorLocation: "Hiermee stelt u de locatie van een foutbericht in ten opzichte van een cel met ongeldige invoer. Met de optie 'Overerven' wordt de instelling van de eigenschap 'Uitlijning van foutberichten' toegepast.",
+    detailErrorLocation: "Hiermee stelt u de locatie in van foutmeldingen voor vragen die zijn genest in detailsecties. De optie \"Overerven\" past de instelling van de eigenschap \"Uitlijning van foutmeldingen\" toe.",
     keyDuplicationError: "Wanneer de eigenschap 'Dubbele antwoorden voorkomen' is ingeschakeld, ontvangt een respondent die een dubbele vermelding probeert in te dienen, het volgende foutbericht.",
     totalExpression: "Hiermee kunt u totale waarden berekenen op basis van een expressie. De expressie kan basisberekeningen ('{q1_id} + {q2_id}'), Booleaanse expressies ('{age} > 60') en functies ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.) bevatten.",
     confirmDelete: "Hiermee wordt gevraagd om het verwijderen van de rij te bevestigen.",
@@ -1928,11 +1933,11 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.panelsState: "Inner panel expand state" => "Uitvouwstatus binnenpaneel"
 // pe.templateDescription: "Description template" => "Beschrijving sjabloon"
 // pe.templateTitle: "Title template" => "Titel sjabloon"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Knopinfo vorige deelvensterknop"
-// pe.panelNextText: "Next Panel button tooltip" => "knopinfo voor het volgende deelvenster"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Knopinfo vorige deelvensterknop"
+// pe.nextPanelText: "Next Panel button tooltip" => "knopinfo voor het volgende deelvenster"
 // pe.showRangeInProgress: "Show progress bar" => "Voortgangsbalk weergeven"
 // pe.templateQuestionTitleLocation: "Question title location" => "Locatie van de vraagtitel"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Locatie van de knop Deelvenster verwijderen"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Locatie van de knop Deelvenster verwijderen"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Verberg de vraag als er geen rijen zijn"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Kolommen verbergen als er geen rijen zijn"
 // pe.rateValues: "Custom rate values" => "Aangepaste tariefwaarden"
@@ -2970,3 +2975,10 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Hiermee stelt u de locatie van de voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
 // survey.readOnly: "Make the survey read-only" => "De enquête alleen-lezen maken"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Selecteer deze optie als u wilt voorkomen dat respondenten uw enquête invullen."
+// paneldynamic.showNumber: "Number the panel" => "Nummer het paneel"
+// question.showNumber: "Number this question" => "Nummer deze vraag"
+// pe.previewMode: "Preview mode" => "Preview-modus"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "De rasterlay-out inschakelen"
+// pe.maskSettings: "Mask settings" => "Masker-instellingen"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Uitlijning van foutmeldingen bij rijuitbreiding"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Hiermee stelt u de locatie in van foutmeldingen voor vragen die zijn genest in detailsecties. De optie \"Overerven\" past de instelling van de eigenschap \"Uitlijning van foutmeldingen\" toe."

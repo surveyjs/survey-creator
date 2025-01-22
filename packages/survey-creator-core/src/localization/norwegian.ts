@@ -327,7 +327,7 @@ export var nbStrings = {
       templateTabTitle: "Mønster for tabulatortittel",
       tabTitlePlaceholder: "Plassholder for tabulatortittel",
       templateVisibleIf: "Gjør et individuelt panel synlig hvis",
-      hideNumber: "Skjule panelnummeret",
+      showNumber: "Nummerer panelet",
       titleLocation: "Justering av paneltittel",
       descriptionLocation: "Justering av panelbeskrivelse",
       templateQuestionTitleLocation: "Justering av spørsmålstittel",
@@ -344,7 +344,7 @@ export var nbStrings = {
       requiredIf: "Gjør spørsmålet nødvendig hvis",
       page: "Overordnet side",
       state: "Skjul tilstand for spørsmålsboks",
-      hideNumber: "Skjul spørsmålsnummeret",
+      showNumber: "Nummerering av dette spørsmålet",
       titleLocation: "Justering av spørsmålstittel",
       descriptionLocation: "Justering av spørsmålsbeskrivelse",
       errorLocation: "Justering av feilmelding",
@@ -646,8 +646,8 @@ export var nbStrings = {
     renderMode: "Gjengivelse modus",
     allowAddPanel: "Tillat å legge til panel",
     allowRemovePanel: "Tillat å fjerne panel",
-    panelAddText: "Legg til panel tekst",
-    panelRemoveText: "Fjern panel tekst",
+    addPanelText: "Legg til panel tekst",
+    removePanelText: "Fjern panel tekst",
     isSinglePage: "Vis alle elementer på en side",
     html: "HTML",
     setValue: "Svare",
@@ -721,9 +721,9 @@ export var nbStrings = {
     minPanelCount: "Minimum antall paneler",
     maxPanelCount: "Maksimalt antall paneler",
     panelsState: "Utvidelsestilstand for Indre panel",
-    panelPrevText: "Verktøytips for forrige panelknapp",
-    panelNextText: "Verktøytips for neste panelknapp",
-    panelRemoveButtonLocation: "Fjern plassering av panelknappen",
+    prevPanelText: "Verktøytips for forrige panelknapp",
+    nextPanelText: "Verktøytips for neste panelknapp",
+    removePanelButtonLocation: "Fjern plassering av panelknappen",
     hideIfRowsEmpty: "Skjul spørsmålet hvis det ikke er noen rader",
     hideColumnsIfEmpty: "Skjule kolonner hvis det ikke er noen rader",
     rateValues: "Egendefinerte frekvensverdier",
@@ -789,6 +789,10 @@ export var nbStrings = {
       top: "Topp",
       bottom: "Bunn"
     },
+    previewMode: "Forhåndsvisning-modus",
+    gridLayoutEnabled: "Aktivere rutenettoppsettet",
+    maskSettings: "Innstillinger for maske",
+    detailErrorLocation: "Justering av feilmelding for radutvidelse",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var nbStrings = {
     rowTitleWidth: "Godtar CSS-verdier (px, %, i, pt osv.).",
     totalText: "Bare synlig når minst én kolonne har Totaltype- eller Total-uttrykk.",
     cellErrorLocation: "Angir plasseringen til en feilmelding i forhold til en celle med ugyldige inndata. Alternativet \"Arv\" bruker innstillingen fra egenskapen \"Justering av feilmelding\".",
+    detailErrorLocation: "Angir plasseringen av feilmeldinger for spørsmål som er nestet i detaljdeler. Alternativet \"Arv\" bruker innstillingen fra egenskapen \"Feilmeldingsjustering\".",
     keyDuplicationError: "Når egenskapen \"Forhindre dupliserte svar\" er aktivert, får en svarperson som prøver å sende inn en duplikatoppføring, følgende feilmelding.",
     totalExpression: "Lar deg beregne totalverdier basert på et uttrykk. Uttrykket kan omfatte grunnleggende beregninger ('{q1_id} + {q2_id}'), boolske uttrykk ('{alder} > 60') og funksjoner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     confirmDelete: "Utløser en melding som ber om å bekrefte radslettingen.",
@@ -1934,11 +1939,11 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pe.panelsState: "Inner panel expand state" => "Utvidelsestilstand for Indre panel"
 // pe.templateDescription: "Description template" => "Mal for beskrivelse"
 // pe.templateTitle: "Title template" => "Tittel mal"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Verktøytips for forrige panelknapp"
-// pe.panelNextText: "Next Panel button tooltip" => "Verktøytips for neste panelknapp"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Verktøytips for forrige panelknapp"
+// pe.nextPanelText: "Next Panel button tooltip" => "Verktøytips for neste panelknapp"
 // pe.showRangeInProgress: "Show progress bar" => "Vis fremdriftsindikator"
 // pe.templateQuestionTitleLocation: "Question title location" => "Spørsmål tittel sted"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Fjern plassering av panelknappen"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Fjern plassering av panelknappen"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Skjul spørsmålet hvis det ikke er noen rader"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Skjule kolonner hvis det ikke er noen rader"
 // pe.rateValues: "Custom rate values" => "Egendefinerte frekvensverdier"
@@ -2994,3 +2999,10 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Angir plasseringen av fremdriftslinjen. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelsesoverskriften."
 // survey.readOnly: "Make the survey read-only" => "Gjør undersøkelsen skrivebeskyttet"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Velg hvis du vil hindre respondenter i å fylle ut undersøkelsen."
+// paneldynamic.showNumber: "Number the panel" => "Nummerer panelet"
+// question.showNumber: "Number this question" => "Nummerering av dette spørsmålet"
+// pe.previewMode: "Preview mode" => "Forhåndsvisning-modus"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Aktivere rutenettoppsettet"
+// pe.maskSettings: "Mask settings" => "Innstillinger for maske"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Justering av feilmelding for radutvidelse"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angir plasseringen av feilmeldinger for spørsmål som er nestet i detaljdeler. Alternativet \"Arv\" bruker innstillingen fra egenskapen \"Feilmeldingsjustering\"."

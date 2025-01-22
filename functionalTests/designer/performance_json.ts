@@ -742,8 +742,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -799,8 +799,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -1565,8 +1565,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -1622,8 +1622,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -2388,8 +2388,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -2445,8 +2445,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -3211,8 +3211,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -3268,8 +3268,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -4034,8 +4034,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -4091,8 +4091,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -4857,8 +4857,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -4914,8 +4914,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -5680,8 +5680,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -5737,8 +5737,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -6509,8 +6509,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -6566,8 +6566,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -7332,8 +7332,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -7389,8 +7389,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -8155,8 +8155,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -8212,8 +8212,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -8978,8 +8978,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -9035,8 +9035,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -9801,8 +9801,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -9858,8 +9858,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -10624,8 +10624,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -10681,8 +10681,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -11447,8 +11447,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -11504,8 +11504,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -12276,8 +12276,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -12333,8 +12333,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -13099,8 +13099,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -13156,8 +13156,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -13922,8 +13922,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -13979,8 +13979,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -14745,8 +14745,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -14802,8 +14802,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -15568,8 +15568,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -15625,8 +15625,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -16391,8 +16391,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -16448,8 +16448,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -17214,8 +17214,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -17271,8 +17271,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -18043,8 +18043,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -18100,8 +18100,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -18866,8 +18866,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -18923,8 +18923,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -19689,8 +19689,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -19746,8 +19746,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -20512,8 +20512,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -20569,8 +20569,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -21335,8 +21335,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -21392,8 +21392,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -22158,8 +22158,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -22215,8 +22215,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -22981,8 +22981,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -23038,8 +23038,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -23804,8 +23804,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         }
@@ -23867,8 +23867,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -24633,8 +24633,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -24690,8 +24690,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -25456,8 +25456,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -25513,8 +25513,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -26279,8 +26279,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -26336,8 +26336,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -27102,8 +27102,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -27159,8 +27159,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -27925,8 +27925,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -27982,8 +27982,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -28748,8 +28748,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -28805,8 +28805,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -29571,8 +29571,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -29628,8 +29628,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",
@@ -30394,8 +30394,8 @@ export const large_json = {
           ],
           "templateTitle": "Information about: {panel.relativeType}",
           "panelCount": 2,
-          "panelAddText": "Add a blood relative",
-          "panelRemoveText": "Remove the relative",
+          "addPanelText": "Add a blood relative",
+          "removePanelText": "Remove the relative",
           "renderMode": "progressTop",
           "displayMode": "carousel"
         },
@@ -30451,8 +30451,8 @@ export const large_json = {
               "panelCount": 1,
               "minPanelCount": 1,
               "keyName": "name",
-              "panelAddText": "Add another  item",
-              "panelRemoveText": "Remove item"
+              "addPanelText": "Add another  item",
+              "removePanelText": "Remove item"
             },
             {
               "type": "panel",

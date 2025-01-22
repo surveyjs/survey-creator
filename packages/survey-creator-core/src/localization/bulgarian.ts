@@ -327,7 +327,7 @@ export var bgStrings = {
       templateTabTitle: "Шаблон на заглавие на раздел",
       tabTitlePlaceholder: "Контейнер за заглавие на раздел",
       templateVisibleIf: "Направете отделен панел видим, ако",
-      hideNumber: "Скриване на номера на панела",
+      showNumber: "Номерирайте панела",
       titleLocation: "Подравняване на заглавието на панела",
       descriptionLocation: "Подравняване на описанието на панела",
       templateQuestionTitleLocation: "Подравняване на заглавието на въпроса",
@@ -344,7 +344,7 @@ export var bgStrings = {
       requiredIf: "Задайте въпроса, който е необходим, ако",
       page: "Родителска страница",
       state: "Състояние на свиване на полето за въпроси",
-      hideNumber: "Скриване на номера на въпроса",
+      showNumber: "Номерирайте този въпрос",
       titleLocation: "Подравняване на заглавието на въпроса",
       descriptionLocation: "Подравняване на описанието на въпроса",
       errorLocation: "Подравняване на съобщение за грешка",
@@ -646,8 +646,8 @@ export var bgStrings = {
     renderMode: "Режим на показване на панела",
     allowAddPanel: "Разрешаване добавянето на панели",
     allowRemovePanel: "Разрешаване премахването на панели",
-    panelAddText: "Добавяне на текст на панелен бутон",
-    panelRemoveText: "Премахване на текст на панелен бутон",
+    addPanelText: "Добавяне на текст на панелен бутон",
+    removePanelText: "Премахване на текст на панелен бутон",
     isSinglePage: "Показване на всички елементи на една страница",
     html: "HTML маркиране",
     setValue: "Отговор",
@@ -721,9 +721,9 @@ export var bgStrings = {
     minPanelCount: "Минимален брой панели",
     maxPanelCount: "Максимален брой панели",
     panelsState: "Разширено състояние на вътрешния панел",
-    panelPrevText: "Подсказка към бутона за предишен панел",
-    panelNextText: "Подсказка към бутона за следващ панел",
-    panelRemoveButtonLocation: "Премахване местоположението на бутона на панела",
+    prevPanelText: "Подсказка към бутона за предишен панел",
+    nextPanelText: "Подсказка към бутона за следващ панел",
+    removePanelButtonLocation: "Премахване местоположението на бутона на панела",
     hideIfRowsEmpty: "Скриване на въпроса, ако няма редове",
     hideColumnsIfEmpty: "Скриване на колони, ако няма редове",
     rateValues: "Персонализирани стойности на оценката",
@@ -789,6 +789,10 @@ export var bgStrings = {
       top: "Отгоре",
       bottom: "Отдолу"
     },
+    previewMode: "Режим на визуализация",
+    gridLayoutEnabled: "Разрешаване на оформлението на мрежата",
+    maskSettings: "Настройки на маската",
+    detailErrorLocation: "Подравняване на съобщението за грешка при разгъване на реда",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var bgStrings = {
     rowTitleWidth: "Приема CSS стойности (px, %, in, pt и т.н.).",
     totalText: "Вижда се, само когато поне една колона има общ тип или общ израз.",
     cellErrorLocation: "Задава местоположението на съобщение за грешка по отношение на клетка с невалиден вход. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщение за грешка\".",
+    detailErrorLocation: "Задава местоположението на съобщенията за грешки за въпроси, вложени в подробни раздели. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщенията за грешки\".",
     keyDuplicationError: "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено, респондентът, който се опитва да подаде дублиран запис, ще получи следното съобщение за грешка.",
     totalExpression: "Позволява ви да изчислявате общи стойности на базата на израз. Изразът може да включва основни изчисления ('{q1_id} + {q2_id}'), булеви изрази ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.н.).",
     confirmDelete: "Задейства подкана с молба за потвърждаване на изтриването на реда.",
@@ -2555,3 +2560,10 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Задава местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването."
 // survey.readOnly: "Make the survey read-only" => "Направете проучването само за четене"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Изберете дали искате да попречите на респондентите да попълват анкетата ви."
+// paneldynamic.showNumber: "Number the panel" => "Номерирайте панела"
+// question.showNumber: "Number this question" => "Номерирайте този въпрос"
+// pe.previewMode: "Preview mode" => "Режим на визуализация"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Разрешаване на оформлението на мрежата"
+// pe.maskSettings: "Mask settings" => "Настройки на маската"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Подравняване на съобщението за грешка при разгъване на реда"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Задава местоположението на съобщенията за грешки за въпроси, вложени в подробни раздели. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщенията за грешки\"."

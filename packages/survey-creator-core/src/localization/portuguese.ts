@@ -327,7 +327,7 @@ var portugueseTranslation = {
       templateTabTitle: "Padrão de título de guia",
       tabTitlePlaceholder: "Espaço reservado para título da guia",
       templateVisibleIf: "Tornar um painel individual visível se",
-      hideNumber: "Ocultar o número do painel",
+      showNumber: "Numerar o painel",
       titleLocation: "Alinhamento do título do painel",
       descriptionLocation: "Alinhamento da descrição do painel",
       templateQuestionTitleLocation: "Alinhamento do título da pergunta",
@@ -344,7 +344,7 @@ var portugueseTranslation = {
       requiredIf: "Faça a pergunta obrigatória se",
       page: "Página principal",
       state: "Estado de recolhimento da caixa de pergunta",
-      hideNumber: "Ocultar o número da pergunta",
+      showNumber: "Numere esta pergunta",
       titleLocation: "Alinhamento do título da pergunta",
       descriptionLocation: "Alinhamento da descrição da pergunta",
       errorLocation: "Alinhamento da mensagem de erro",
@@ -646,8 +646,8 @@ var portugueseTranslation = {
     renderMode: "Modo de renderização",
     allowAddPanel: "Permitir adicionar painel",
     allowRemovePanel: "Permitir remover painel",
-    panelAddText: "Texto de adicionar painel",
-    panelRemoveText: "Texto de remover painel",
+    addPanelText: "Texto de adicionar painel",
+    removePanelText: "Texto de remover painel",
     isSinglePage: "Mostrar todos elementos em uma página",
     html: "HTML markup",
     setValue: "Responder",
@@ -721,9 +721,9 @@ var portugueseTranslation = {
     minPanelCount: "Contagem mínima de painéis",
     maxPanelCount: "Contagem máxima de painéis",
     panelsState: "Estado de expansão do painel interno",
-    panelPrevText: "Dica de ferramenta do botão do painel anterior",
-    panelNextText: "Dica de ferramenta do botão do painel seguinte",
-    panelRemoveButtonLocation: "Remover localização do botão do painel",
+    prevPanelText: "Dica de ferramenta do botão do painel anterior",
+    nextPanelText: "Dica de ferramenta do botão do painel seguinte",
+    removePanelButtonLocation: "Remover localização do botão do painel",
     hideIfRowsEmpty: "Oculte a pergunta se não houver linhas",
     hideColumnsIfEmpty: "Ocultar colunas se não houver linhas",
     rateValues: "Valores de taxa personalizados",
@@ -789,6 +789,10 @@ var portugueseTranslation = {
       top: "No cabeçalho",
       bottom: "No rodapé"
     },
+    previewMode: "Modo de visualização",
+    gridLayoutEnabled: "Ativar o layout da grade",
+    maskSettings: "Configurações de máscara",
+    detailErrorLocation: "Alinhamento da mensagem de erro de expansão de linha",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ var portugueseTranslation = {
     rowTitleWidth: "Aceita valores CSS (px, %, in, pt, etc.).",
     totalText: "Visível apenas quando pelo menos uma coluna tiver tipo total ou expressão total.",
     cellErrorLocation: "Define o local de uma mensagem de erro em relação a uma célula com entrada inválida. A opção \"Herdar\" aplica a configuração da propriedade \"Alinhamento da mensagem de erro\".",
+    detailErrorLocation: "Define o local das mensagens de erro para perguntas aninhadas em seções de detalhes. A opção \"Herdar\" aplica a configuração da propriedade \"Alinhamento da mensagem de erro\".",
     keyDuplicationError: "Quando a propriedade \"Impedir respostas duplicadas\" está habilitada, um respondente tentando enviar uma entrada duplicada receberá a seguinte mensagem de erro.",
     totalExpression: "Permite calcular valores totais com base em uma expressão. A expressão pode incluir cálculos básicos ('{q1_id} + {q2_id}'), expressões booleanas ('{age} > 60') e funções ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     confirmDelete: "Aciona um prompt pedindo para confirmar a exclusão da linha.",
@@ -2660,3 +2665,10 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Define a localização da barra de progresso. O valor \"Auto\" exibe a barra de progresso acima ou abaixo do cabeçalho da pesquisa."
 // survey.readOnly: "Make the survey read-only" => "Tornar a pesquisa somente leitura"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Selecione se deseja impedir que os respondentes preencham seu questionário."
+// paneldynamic.showNumber: "Number the panel" => "Numerar o painel"
+// question.showNumber: "Number this question" => "Numere esta pergunta"
+// pe.previewMode: "Preview mode" => "Modo de visualização"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Ativar o layout da grade"
+// pe.maskSettings: "Mask settings" => "Configurações de máscara"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Alinhamento da mensagem de erro de expansão de linha"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Define o local das mensagens de erro para perguntas aninhadas em seções de detalhes. A opção \"Herdar\" aplica a configuração da propriedade \"Alinhamento da mensagem de erro\"."

@@ -327,7 +327,7 @@ export var msStrings = {
       templateTabTitle: "Corak tajuk tab",
       tabTitlePlaceholder: "Ruang letak tajuk tab",
       templateVisibleIf: "Jadikan panel individu kelihatan jika",
-      hideNumber: "Sembunyikan nombor panel",
+      showNumber: "Nombor panel",
       titleLocation: "Penjajaran tajuk panel",
       descriptionLocation: "Penjajaran perihalan panel",
       templateQuestionTitleLocation: "Penjajaran tajuk soalan",
@@ -344,7 +344,7 @@ export var msStrings = {
       requiredIf: "Jadikan soalan diperlukan jika",
       page: "Halaman induk",
       state: "Keadaan kotak soalan runtuh",
-      hideNumber: "Sembunyikan nombor soalan",
+      showNumber: "Nombor soalan ini",
       titleLocation: "Penjajaran tajuk soalan",
       descriptionLocation: "Penjajaran perihalan soalan",
       errorLocation: "Penjajaran mesej ralat",
@@ -646,8 +646,8 @@ export var msStrings = {
     renderMode: "Mod penyampaian",
     allowAddPanel: "Benarkan menambahkan panel",
     allowRemovePanel: "Benarkan alih keluar panel",
-    panelAddText: "Menambahkan teks panel",
-    panelRemoveText: "Mengalih keluar teks panel",
+    addPanelText: "Menambahkan teks panel",
+    removePanelText: "Mengalih keluar teks panel",
     isSinglePage: "Tunjukkan semua elemen pada satu halaman",
     html: "HTML",
     setValue: "Jawapan",
@@ -721,9 +721,9 @@ export var msStrings = {
     minPanelCount: "Kiraan panel minimum",
     maxPanelCount: "Kiraan panel maksimum",
     panelsState: "Panel dalaman mengembangkan keadaan",
-    panelPrevText: "Petua alat butang Panel Sebelumnya",
-    panelNextText: "Petua alat butang Panel Seterusnya",
-    panelRemoveButtonLocation: "Alih keluar lokasi butang Panel",
+    prevPanelText: "Petua alat butang Panel Sebelumnya",
+    nextPanelText: "Petua alat butang Panel Seterusnya",
+    removePanelButtonLocation: "Alih keluar lokasi butang Panel",
     hideIfRowsEmpty: "Sembunyikan soalan jika tiada baris",
     hideColumnsIfEmpty: "Menyembunyikan lajur jika tiada baris",
     rateValues: "Nilai kadar tersuai",
@@ -789,6 +789,10 @@ export var msStrings = {
       top: "Di atas",
       bottom: "Di bawah"
     },
+    previewMode: "Mod pratonton",
+    gridLayoutEnabled: "Dayakan reka letak grid",
+    maskSettings: "Tetapan topeng",
+    detailErrorLocation: "Penjajaran mesej ralat pengembangan baris",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var msStrings = {
     rowTitleWidth: "Menerima nilai CSS (px, %, dalam, pt, dll.).",
     totalText: "Boleh dilihat hanya apabila sekurang-kurangnya satu lajur mempunyai jenis Jumlah atau ungkapan Jumlah.",
     cellErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan sel dengan input tidak sah. Opsyen \"Warisan\" menggunakan seting daripada sifat \"Penjajaran mesej ralat\".",
+    detailErrorLocation: "Menetapkan lokasi mesej ralat untuk soalan yang bersarang dalam bahagian terperinci. Pilihan \"Mewarisi\" menggunakan tetapan daripada sifat \"Penjajaran mesej ralat\".",
     keyDuplicationError: "Apabila sifat \"Mencegah respons pendua\" didayakan, responden yang cuba menyerahkan entri pendua akan menerima mesej ralat berikut.",
     totalExpression: "Membolehkan anda mengira jumlah nilai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), Ungkapan Boolean ('{age} > 60') dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dll.).",
     confirmDelete: "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman baris.",
@@ -1930,11 +1935,11 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pe.panelsState: "Inner panel expand state" => "Panel dalaman mengembangkan keadaan"
 // pe.templateDescription: "Description template" => "Templat perihalan"
 // pe.templateTitle: "Title template" => "Templat tajuk"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Petua alat butang Panel Sebelumnya"
-// pe.panelNextText: "Next Panel button tooltip" => "Petua alat butang Panel Seterusnya"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Petua alat butang Panel Sebelumnya"
+// pe.nextPanelText: "Next Panel button tooltip" => "Petua alat butang Panel Seterusnya"
 // pe.showRangeInProgress: "Show progress bar" => "Tunjukkan bar kemajuan"
 // pe.templateQuestionTitleLocation: "Question title location" => "Lokasi tajuk soalan"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Alih keluar lokasi butang Panel"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Alih keluar lokasi butang Panel"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Sembunyikan soalan jika tiada baris"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Menyembunyikan lajur jika tiada baris"
 // pe.rateValues: "Custom rate values" => "Nilai kadar tersuai"
@@ -2946,3 +2951,10 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Menetapkan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan."
 // survey.readOnly: "Make the survey read-only" => "Jadikan tinjauan baca sahaja"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Pilih jika anda mahu menghalang responden daripada mengisi tinjauan anda."
+// paneldynamic.showNumber: "Number the panel" => "Nombor panel"
+// question.showNumber: "Number this question" => "Nombor soalan ini"
+// pe.previewMode: "Preview mode" => "Mod pratonton"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Dayakan reka letak grid"
+// pe.maskSettings: "Mask settings" => "Tetapan topeng"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Penjajaran mesej ralat pengembangan baris"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Menetapkan lokasi mesej ralat untuk soalan yang bersarang dalam bahagian terperinci. Pilihan \"Mewarisi\" menggunakan tetapan daripada sifat \"Penjajaran mesej ralat\"."

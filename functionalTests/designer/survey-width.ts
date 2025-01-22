@@ -42,8 +42,8 @@ test("Change survey width 1", async (t) => {
     .pressKey("tab");
 
   await t
-    .expect(Selector(".sd-container-modern").clientWidth).gte(1200)
-    .expect(Selector(".sd-container-modern").clientWidth).lte(1220);
+    .expect(Selector(".sd-container-modern").clientWidth).gte(1175)
+    .expect(Selector(".sd-container-modern").clientWidth).lte(1200);
 });
 
 test("Change survey width 2", async (t) => {
