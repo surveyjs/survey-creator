@@ -327,7 +327,7 @@ export var hebrewStrings = {
       templateTabTitle: "תבנית כותרת טאב",
       tabTitlePlaceholder: "מציין מיקום של כותרת טאב",
       templateVisibleIf: "הפיכת חלונית בודדת לגלויה אם",
-      hideNumber: "הסתרת מספר החלונית",
+      showNumber: "מספור החלונית",
       titleLocation: "יישור כותרת חלונית",
       descriptionLocation: "יישור תיאור החלונית",
       templateQuestionTitleLocation: "יישור כותרת שאלה",
@@ -344,7 +344,7 @@ export var hebrewStrings = {
       requiredIf: "הפוך את השאלה לנדרשת אם",
       page: "עמוד הורה",
       state: "מצב כיווץ תיבת שאלה",
-      hideNumber: "הסתרת מספר השאלה",
+      showNumber: "מספר שאלה זו",
       titleLocation: "יישור כותרת שאלה",
       descriptionLocation: "יישור תיאור השאלה",
       errorLocation: "יישור הודעת שגיאה",
@@ -789,6 +789,10 @@ export var hebrewStrings = {
       top: "מלמעלה",
       bottom: "מלמטה"
     },
+    previewMode: "מצב תצוגה מקדימה",
+    gridLayoutEnabled: "הפיכת פריסת הרשת לזמינה",
+    maskSettings: "קביעות מסיכה",
+    detailErrorLocation: "יישור הודעת שגיאה של הרחבת שורה",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var hebrewStrings = {
     rowTitleWidth: "מקבל ערכי CSS (px, %, in, pt וכו').",
     totalText: "נראה רק כאשר לפחות עמוד אחד מכיל עמוד סוג או ביטוי סוג.",
     cellErrorLocation: "הגדרת המיקום של הודעת שגיאה ביחס לתא עם קלט לא חוקי. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\".",
+    detailErrorLocation: "הגדרת המיקום של הודעות שגיאה עבור שאלות המקוננות במקטעים מפורטים. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\".",
     keyDuplicationError: "כאשר המאפיין \"מנע תגובות כפולות\" מופעל, משיב שינסה לשלוח ערך כפול יקבל את הודעת השגיאה הבאה.",
     totalExpression: "מאפשר לחשב ערכים כוללים בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים ('{q1_id} + {q2_id}'), ביטויים בוליאניים ('{age} > 60') ופונקציות ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו').",
     confirmDelete: "מפעיל בקשה המבקשת לאשר את מחיקת השורות.",
@@ -2559,3 +2564,10 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "מגדיר את המיקום של מד ההתקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר."
 // survey.readOnly: "Make the survey read-only" => "הפוך את הסקר לקריאה בלבד"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "בחר אם ברצונך למנוע מהמשיבים למלא את הסקר שלך."
+// paneldynamic.showNumber: "Number the panel" => "מספור החלונית"
+// question.showNumber: "Number this question" => "מספר שאלה זו"
+// pe.previewMode: "Preview mode" => "מצב תצוגה מקדימה"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "הפיכת פריסת הרשת לזמינה"
+// pe.maskSettings: "Mask settings" => "קביעות מסיכה"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "יישור הודעת שגיאה של הרחבת שורה"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "הגדרת המיקום של הודעות שגיאה עבור שאלות המקוננות במקטעים מפורטים. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\"."

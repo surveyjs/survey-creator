@@ -327,7 +327,7 @@ export var czStrings = {
       templateTabTitle: "Vzor názvu tabulátoru",
       tabTitlePlaceholder: "Zástupný symbol názvu tabulátoru",
       templateVisibleIf: "Zviditelněte jednotlivý panel, pokud",
-      hideNumber: "Skrýt číslo panelu",
+      showNumber: "Očíslujte panel",
       titleLocation: "Zarovnání názvu panelu",
       descriptionLocation: "Zarovnání popisu panelu",
       templateQuestionTitleLocation: "Zarovnání názvu otázky",
@@ -344,7 +344,7 @@ export var czStrings = {
       requiredIf: "Otázku povinně zjišťte, pokud",
       page: "Nadřazená stránka",
       state: "Stav sbalení pole otázek",
-      hideNumber: "Skrýt číslo otázky",
+      showNumber: "Číslo této otázky",
       titleLocation: "Zarovnání názvu otázky",
       descriptionLocation: "Zarovnání popisu otázky",
       errorLocation: "Zarovnání chybové zprávy",
@@ -789,6 +789,10 @@ export var czStrings = {
       top: "Nahoře",
       bottom: "Dole"
     },
+    previewMode: "Režim náhledu",
+    gridLayoutEnabled: "Povolte rozvržení mřížky",
+    maskSettings: "Nastavení masky",
+    detailErrorLocation: "Chybová zpráva Zarovnání rozšíření řádku",
     // Creator tabs
     tabs: {
       panel: {
@@ -1481,6 +1485,7 @@ export var czStrings = {
     rowTitleWidth: "Přijímá hodnoty CSS (px, %, in, pt atd.).",
     totalText: "Viditelné pouze v případě, že alespoň jeden sloupec je typu suma nebo obsahuje sumarizační výraz.",
     cellErrorLocation: "Nastaví umístění chybové zprávy ve vztahu k buňce s neplatným vstupem. Možnost \"Zdědit\" použije nastavení z vlastnosti \"Zarovnání chybové zprávy\".",
+    detailErrorLocation: "Nastavuje umístění chybových zpráv pro otázky vnořené do podrobných oddílů. Volba \"Zdědit\" aplikuje nastavení z vlastnosti \"Zarovnání chybové zprávy\".",
     keyDuplicationError: "Pokud je povolena vlastnost \"Zabránit duplicitním odpovědím\", respondentovi, který se pokouší odeslat duplicitní záznam, se zobrazí následující chybová zpráva.",
     totalExpression: "Umožňuje vypočítat celkové hodnoty na základě výrazu. Výraz může obsahovat základní výpočty ('{q1_id} + {q2_id}'), logické výrazy ('{age} > 60') a funkce ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atd.).",
     confirmDelete: "Spustí výzvu s žádostí o potvrzení odstranění řádku.",
@@ -2569,3 +2574,10 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Nastaví umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu."
 // survey.readOnly: "Make the survey read-only" => "Nastavení průzkumu pouze ke čtení"
 // survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Vyberte, zda chcete respondentům zabránit ve vyplnění průzkumu."
+// paneldynamic.showNumber: "Number the panel" => "Očíslujte panel"
+// question.showNumber: "Number this question" => "Číslo této otázky"
+// pe.previewMode: "Preview mode" => "Režim náhledu"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Povolte rozvržení mřížky"
+// pe.maskSettings: "Mask settings" => "Nastavení masky"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Chybová zpráva Zarovnání rozšíření řádku"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Nastavuje umístění chybových zpráv pro otázky vnořené do podrobných oddílů. Volba \"Zdědit\" aplikuje nastavení z vlastnosti \"Zarovnání chybové zprávy\"."
