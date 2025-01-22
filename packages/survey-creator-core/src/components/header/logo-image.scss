@@ -13,6 +13,7 @@
   padding: 0;
   cursor: pointer;
   max-width: 50%;
+  margin-inline-start: var(--ctr-survey-header-logo-placeholder-margin-left-advanced, var(--lbr-spacing-x2n));
 
   .sd-logo__image {
     max-width: 100%;
