@@ -214,7 +214,7 @@ export class ConditionEditorItemsBuilder {
 
 function questionValueVisibleIf(params: any): boolean {
   if (params.length !== 2) return false;
-  if (!params[0] || !params[1]) return false;
+  if (Helpers.isValueEmpty(params[0]) || !params[1]) return false;
   return params[1] !== "empty" && params[1] !== "notempty";
 }
 
