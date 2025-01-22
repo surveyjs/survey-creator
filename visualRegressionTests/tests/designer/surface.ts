@@ -166,6 +166,7 @@ test("Test question type converter (mobile)", async (t) => {
       .expect(Selector("#convertTo").visible).ok()
       .click(Selector("#convertTo"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
+    await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("convert-to-popup-mobile.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
 });
