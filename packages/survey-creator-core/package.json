@@ -52,6 +52,7 @@
     "rimraf": "2.5.4",
     "sass": "^1.62.1",
     "sass-loader": "^16.0.4",
+    "standard-version": "^9.5.0",
     "style-loader": "^1.2.1",
     "svg-inline-loader": "^0.8.2",
     "surveyjs-doc-generator": "git+https://github.com/surveyjs/surveyjs-doc-generator.git",
