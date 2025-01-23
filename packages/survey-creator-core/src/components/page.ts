@@ -194,6 +194,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return element.classList.contains("svc-page__content") ||
       element.classList.contains("sd-page") ||
       element.classList.contains("svc-page-toolbar") ||
+      element.classList.contains("svc-page__content-actions") ||
       element.closest(".svc-question__drag-area") && !element.closest(".svc-page__content-actions") ||
       (element.closest(".sd-page__title") || element.closest(".sd-page__description")) && !element.closest(".svc-string-editor");
   }
