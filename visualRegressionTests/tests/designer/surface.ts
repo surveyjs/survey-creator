@@ -958,8 +958,8 @@ test("Logo image hover", async (t) => {
       ],
     };
     await setJSON(json);
-    await t.hover(".svc-logo-image");
-    await takeElementScreenshot("logo-image-hover.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(".svc-logo-image-placeholder");
+    await takeElementScreenshot("logo-image-hover.png", Selector(".svc-logo-image-placeholder"), t, comparer);
   });
 });
 test("Logo image loading", async (t) => {
