@@ -719,3 +719,61 @@ test("expand/collapse event and expand all", () => {
   expect(questionAdorner.collapsed).toBeFalsy();
   expect(panelAdorner.collapsed).toBeFalsy();
 });
+
+test("expand/collapse methods", () => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
+  let eventCalled = false;
+
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  const question = creator.survey.getAllQuestions()[0];
+  const page1Adorner = new PageAdorner(creator, creator.survey.pages[0]);
+  const panelAdorner = new QuestionAdornerViewModel(creator, creator.survey.getAllPanels()[0] as any, undefined);
+  const questionAdorner = new QuestionAdornerViewModel(creator, question, undefined);
+
+  creator.onElementGetExpandCollapseState.add((_, o) => {
+    eventCalled = true;
+  });
+
+  expect(page1Adorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeFalsy();
+  expect(panelAdorner.collapsed).toBeFalsy();
+
+  creator.collapseAll();
+  expect(page1Adorner.collapsed).toBeTruthy();
+  expect(questionAdorner.collapsed).toBeTruthy();
+  expect(panelAdorner.collapsed).toBeTruthy();
+  expect(eventCalled).toBeFalsy();
+
+  creator.expandAll();
+  expect(page1Adorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeFalsy();
+  expect(panelAdorner.collapsed).toBeFalsy();
+  expect(eventCalled).toBeFalsy();
+
+  creator.collapseElement(question);
+  expect(questionAdorner.collapsed).toBeTruthy();
+
+  creator.expandElement(question);
+  expect(questionAdorner.collapsed).toBeFalsy();
+});
