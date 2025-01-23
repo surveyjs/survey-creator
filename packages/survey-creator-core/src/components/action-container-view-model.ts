@@ -455,7 +455,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     action.visible = isVisible;
   }
   public getActionById(id: string): Action {
-    return this.actionContainer.getActionById(id);
+    return this.actionContainer.getActionById(id) || this.topActionContainer.getActionById(id);
   }
   protected buildActions(items: Array<Action>) {
     items.push(
