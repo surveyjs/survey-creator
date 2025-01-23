@@ -1,4 +1,4 @@
-import { addQuestionByAddQuestionButton, url, selectedObjectTextSelector } from "../helper";
+import { addQuestionByAddQuestionButton, url, selectedObjectTextSelector, setAllowEditSurveyTitle } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Page navigator";
 
@@ -68,6 +68,7 @@ test("Check page navigator track scrolling", async (t) => {
 });
 
 test("PageNavigator shown if scrolling exists", async t => {
+  await setAllowEditSurveyTitle(false);
   await t.resizeWindow(1600, 1400);
   await t
     .expect(getAddNewQuestionButton().visible).ok()
