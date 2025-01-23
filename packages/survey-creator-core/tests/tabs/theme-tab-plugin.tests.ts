@@ -876,7 +876,7 @@ test("Theme undo redo header settings", (): any => {
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
   const header = themeModel.header as HeaderModel;
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   const inheritWidthFromQuestion = headerViewContainer.getElementByName("inheritWidthFrom");
 
@@ -915,7 +915,7 @@ test("Set header settings properties, binding with a property grid", (): any => 
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
   const header = themeModel.header as HeaderModel;
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   const inheritWidthFromQuestion = headerViewContainer.getElementByName("inheritWidthFrom");
 
@@ -1163,7 +1163,7 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
   expect(lastUploadOptions.elementType).toBe("theme");
   expect(lastUploadOptions.propertyName).toBe("backgroundImage");
 
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerBackgroundImageEditor = groupHeader.elements[0].contentPanel.getElementByName("backgroundImage");
   testInput.id = headerBackgroundImageEditor.inputId;
   headerBackgroundImageEditor["rootElement"] = testContainer;
@@ -1242,9 +1242,9 @@ test("Modify property grid & switch themeName", (): any => {
     Serializer.addProperty("theme", { name: "matrix-title", type: "font", category: "appearancequestion" });
 
     const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-    creator.onShowingProperty.add(function (sender, options) {
-      if (options.obj.getType() == "theme") {
-        options.canShow = options.property.name == "themeName" || options.property.name == "matrix-title";
+    creator.onPropertyShowing.add(function (sender, options) {
+      if (options.element.getType() == "theme") {
+        options.show = options.property.name == "themeName" || options.property.name == "matrix-title";
       }
     });
 

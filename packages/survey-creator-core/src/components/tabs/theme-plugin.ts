@@ -72,7 +72,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     if (this._showOneCategoryInPropertyGrid !== newValue) {
       this._showOneCategoryInPropertyGrid = newValue;
       this.creator.sidebar.hideSideBarVisibilityControlActions = newValue;
-      this.updateAdvancedModeQuestion();
+      this.updateAdvancedModeQuestion(newValue);
       this.propertyGrid.showOneCategoryInPropertyGrid = newValue;
       this.propertyGrid["setObj"](this.creator.selectedElement);
       if (this.creator.activeTab === "theme") {
@@ -81,11 +81,15 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     }
   }
 
-  private updateAdvancedModeQuestion(): void {
+  private updateAdvancedModeQuestion(availableQuestion: boolean): void {
     const advancedModeQuestion = this.propertyGrid.survey.getQuestionByName("advancedMode");
     if (advancedModeQuestion) {
-      advancedModeQuestion.visible = this.showOneCategoryInPropertyGrid;
-      advancedModeQuestion.value = this._advancedModeValue;
+      if (!availableQuestion) {
+        advancedModeQuestion.visible = false;
+      } else {
+        advancedModeQuestion.visible = advancedModeQuestion.visible && !this.creator.isMobileView;
+        advancedModeQuestion.value = this._advancedModeValue;
+      }
     }
   }
   private createVisibleUpdater() {
@@ -134,7 +138,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private updatePropertyGridEditorsAvailability() {
     const simulatorSurvey = this.model.survey;
     const page = this.propertyGrid.survey.pages[0];
-    const header = page?.getElementByName("header") as PanelModel;
+    const header = this.showOneCategoryInPropertyGrid ? this.propertyGrid.survey.getPageByName("header") : page?.getElementByName("header") as PanelModel;
     if (header && header.elements.length > 0) {
       const headerViewContainer = (header.elements[0] as QuestionCompositeModel).contentPanel;
       this.setCoverPropertiesFromSurvey(headerViewContainer, simulatorSurvey);
@@ -246,6 +250,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.propertyGrid = new PropertyGridModel(undefined, creator, themeModelPropertyGridDefinition);
     this.propertyGrid.surveyInstanceCreatedArea = "theme-tab:property-grid";
+    this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridTab = this.creator.sidebar.addPage("theme", "svc-property-grid", propertyGridViewModel);
     this.propertyGridTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
@@ -287,13 +292,14 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.themeModel.initialize(this.creator.theme, this.creator.survey, this.creator);
     this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
     this.update();
+    this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     this.propertyGrid.survey.onOpenFileChooser.clear();
     this.propertyGrid.obj = this.themeModel;
     this.propertyGrid.survey.mode = "edit";
     this.propertyGrid.survey.getAllQuestions().forEach(q => q.readOnly = false);
     this.onAvailableThemesChanged(this.availableThemes);
     this.updateAllowModifyTheme();
-    this.updateAdvancedModeQuestion();
+    this.updateAdvancedModeQuestion(this.showOneCategoryInPropertyGrid);
     const themeBuilderCss = JSON.parse(JSON.stringify(propertyGridCss));
     themeBuilderCss.root += " spg-theme-builder-root";
 
@@ -446,7 +452,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     });
 
     this.resetTheme.enabled = getThemeFullName(this.themeModel.defaultSessionTheme) !== getThemeFullName(this.creator.theme) || this.isModified;
-    this.updateTabControl();
   }
   private updateAllowModifyTheme() {
     const opt: { theme: ITheme, allow: boolean } = { theme: this.themeModel, allow: !this.creator.readOnly };

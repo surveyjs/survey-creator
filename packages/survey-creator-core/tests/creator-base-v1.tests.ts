@@ -685,6 +685,7 @@ test("Do not call onPageAdded on pages move", () => {
 test("creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab collapsePropertyTab, allowExpandMultipleCategories = true", () => {
   creatorSettings.propertyGrid.allowExpandMultipleCategories = true;
   const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "accordion";
   const page = creator.survey.pages[0];
   const q1 = page.addNewQuestion("text", "q1");
   creator.selectElement(q1);

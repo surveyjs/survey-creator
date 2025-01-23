@@ -55,6 +55,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
       this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
     } else {
+      this.propertyGridViewModel.objectSelectionAction.tooltip = "";
       this.creator.sidebar.sideAreaComponentName = "";
       this.creator.sidebar.sideAreaComponentData = undefined;
     }
@@ -179,7 +180,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("designer", this);
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
-    this.propertyGrid = new PropertyGridModel(creator.survey as any as Base, creator, creator.getPropertyGridDefinition());
+    this.propertyGrid = new PropertyGridModel(undefined, creator, creator.getPropertyGridDefinition());
+    this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
+    this.propertyGrid.obj = creator.survey;
     this.propertyGrid.onSetNewObjectCallback = () => {
       this.updateTabControlActions();
     };
