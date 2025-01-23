@@ -44,8 +44,6 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   ) {
     super(creator, surveyElement, templateData);
     this.isEmptyImageLink = !this.question.imageLink;
-    // this.surveyElement.registerFunctionOnPropertyValueChanged("imageLink", this.imageLinkValueChangedHandler, "imageLinkValueChanged");
-    // (this.surveyElement as QuestionImageModel).locImageLink.onStringChanged.add(this.imageLinkValueChangedHandler);
     this.initFilePresentationModel();
   }
 
