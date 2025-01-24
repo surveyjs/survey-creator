@@ -335,7 +335,7 @@ test("Responsive creator: property grid - click the shadow", async (t) => {
   await setJSON(json);
   await t
     .resizeWindow(900, 700)
-    .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 273 })
+    .click(Selector(".svc-page__content"), { offsetX: 5, offsetY: 5 })
     .click(expandButtonSelector)
     .expect(propertyGridSelector.visible).ok()
     .expect(flyoutPropertyGrid.exists).ok()

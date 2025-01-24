@@ -46,6 +46,7 @@
     var(--ctr-survey-header-logo-placeholder-padding-right, var(--lbr-spacing-x1))
     var(--ctr-survey-header-logo-placeholder-padding-bottom, var(--lbr-spacing-x1))
     var(--ctr-survey-header-logo-placeholder-padding-left, var(--lbr-spacing-x1));
+  margin-inline-start: var(--ctr-survey-header-logo-placeholder-margin-left-advanced, var(--lbr-spacing-x2n));
   display: flex;
   justify-content: center;
   align-items: center;

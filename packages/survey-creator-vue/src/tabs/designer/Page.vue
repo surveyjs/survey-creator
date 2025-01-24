@@ -43,6 +43,11 @@
           :is="'sv-action-bar'"
           :model="model.actionContainer"
         ></SvComponent>
+        <SvComponent
+          v-if="model.topActionContainer.hasActions"
+          :is="'sv-action-bar'"
+          :model="model.topActionContainer"
+        ></SvComponent>
       </div>
     </div>
     <div
@@ -52,6 +57,11 @@
       <SvComponent
         :is="'sv-action-bar'"
         :model="model.actionContainer"
+      ></SvComponent>
+      <SvComponent
+          v-if="model.topActionContainer.hasActions"
+          :is="'sv-action-bar'"
+          :model="model.topActionContainer"
       ></SvComponent>
     </div>
     <SvComponent

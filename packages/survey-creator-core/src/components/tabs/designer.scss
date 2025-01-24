@@ -1,4 +1,5 @@
 @use "../../variables" as *;
+@use "../../lbr-variables.scss" as lbrVariables;
 
 svc-tab-designer {
   width: 100%;
@@ -27,23 +28,37 @@ svc-tab-designer {
 
 .svc-designer-header .svc-surface-header {
   background-color: transparent;
-  padding-inline-start: var(--lbr-header-padding-left, var(--lbr-spacing-x3));
+  display: flex;
+  padding-block-start: var(--ctr-survey-header-padding-top-advanced, var(--lbr-spacing-x2));
   padding-inline-end: var(--ctr-survey-header-padding-right-logo-placeholder, var(--lbr-spacing-x1));
-  padding-block-start: var(--lbr-header-padding-top, var(--lbr-spacing-x3));
-  padding-block-end: var(--lbr-page-header-padding-bottom, var(--lbr-spacing-x3));
+  padding-block-end: var(--ctr-survey-header-padding-bottom-advanced, var(--lbr-spacing-x2));
+  padding-inline-start: var(--lbr-header-padding-left, var(--lbr-spacing-x3));
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--ctr-survey-header-gap, var(--lbr-spacing-x1));
+  box-shadow: none;
 }
 
 .svc-surface-header {
   .sd-title {
     .sv-string-editor {
+      @include lbrVariables.lbrLargeBoldFont;
+      color: var(--ctr-survey-header-text-title-color, var(--sjs-layer-3-foreground-100, rgba(0, 0, 0, 0.9)));
+
       &[aria-placeholder]:empty:before {
         color: var(--ctr-survey-header-text-title-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
       }
     }
   }
 
-  .sd-description {
-    color: var(--ctr-survey-header-text-description-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
+  .sd-description .sv-string-editor {
+    @include lbrVariables.lbrDefaultFont;
+    color: var(--ctr-survey-header-text-description-color, var(--sjs-layer-3-foreground-50, rgba(0, 0, 0, 0.5)));
+
+    &[aria-placeholder]:empty:before {
+      color: var(--ctr-survey-header-text-description-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
+    }
   }
 }
 
@@ -139,12 +154,17 @@ svc-tab-designer {
   }
 
   .svc-element__add-new-question {
-    padding: var(--ctr-button-padding-vertical, var(--sjs-spacing-x2)) var(--ctr-button-padding-horizontal-contextual-button, var(--sjs-spacing-x10));
+    padding: var(--ctr-button-padding-vertical, var(--sjs-spacing-x2))
+      var(--ctr-button-padding-horizontal-contextual-button, var(--sjs-spacing-x10));
 
     .svc-element__question-type-selector {
-      padding: var(--ctr-button-contextual-button-padding-top, var(--sjs-spacing-x1)) var(--ctr-button-contextual-button-padding-right, var(--sjs-spacing-x1)) var(--ctr-button-contextual-button-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-button-contextual-button-padding-left, var(--sjs-spacing-x1));
+      padding: var(--ctr-button-contextual-button-padding-top, var(--sjs-spacing-x1))
+        var(--ctr-button-contextual-button-padding-right, var(--sjs-spacing-x1))
+        var(--ctr-button-contextual-button-padding-bottom, var(--sjs-spacing-x1))
+        var(--ctr-button-contextual-button-padding-left, var(--sjs-spacing-x1));
 
-      margin: var(--ctr-button-contextual-button-margin-vertical, var(--sjs-spacing-x1)) var(--ctr-button-contextual-button-margin-horizontal, var(--sjs-spacing-x1));
+      margin: var(--ctr-button-contextual-button-margin-vertical, var(--sjs-spacing-x1))
+        var(--ctr-button-contextual-button-margin-horizontal, var(--sjs-spacing-x1));
 
       border-radius: var(--ctr-button-contextual-button-corner-radius, var(--sjs-corner-radius-x05));
     }
@@ -177,7 +197,10 @@ svc-tab-designer {
   top: 0;
   bottom: 0;
   right: 0;
-  padding: var(--ctr-surface-toolbar-padding-top, var(--sjs-spacing-x2)) var(--ctr-surface-toolbar-padding-right, var(--sjs-spacing-x2)) var(--ctr-surface-toolbar-padding-bottom, var(--sjs-spacing-x2)) var(--ctr-surface-toolbar-padding-left, var(--sjs-spacing-x2));
+  padding: var(--ctr-surface-toolbar-padding-top, var(--sjs-spacing-x2))
+    var(--ctr-surface-toolbar-padding-right, var(--sjs-spacing-x2))
+    var(--ctr-surface-toolbar-padding-bottom, var(--sjs-spacing-x2))
+    var(--ctr-surface-toolbar-padding-left, var(--sjs-spacing-x2));
   flex-direction: column;
   align-items: center;
 }

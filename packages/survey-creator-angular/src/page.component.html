@@ -10,11 +10,13 @@
     <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="'auto'"
       sv-ng-svg-icon></svg>
     <div class="svc-page__content-actions">
-      <sv-action-bar [model]="adorner.actionContainer"></sv-action-bar>
+      <sv-action-bar [model]="adorner.actionContainer" #container></sv-action-bar>
+      <sv-action-bar *ngIf="adorner.topActionContainer.hasActions" [model]="adorner.topActionContainer"></sv-action-bar>
     </div>
   </div>
   <div *ngIf="!adorner.allowDragging || adorner.isGhost" class="svc-page__content-actions">
     <sv-action-bar [model]="adorner.actionContainer"></sv-action-bar>
+    <sv-action-bar *ngIf="adorner.topActionContainer.hasActions" [model]="adorner.topActionContainer"></sv-action-bar>
   </div>
   <page [model]="model" [survey]="survey"></page>
   <div *ngIf="adorner.showPlaceholder" class="svc-page__placeholder_frame">

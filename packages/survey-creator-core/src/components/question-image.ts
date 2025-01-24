@@ -44,9 +44,29 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   ) {
     super(creator, surveyElement, templateData);
     this.isEmptyImageLink = !this.question.imageLink;
-    this.surveyElement.registerFunctionOnPropertyValueChanged("imageLink", this.imageLinkValueChangedHandler, "imageLinkValueChanged");
-    (this.surveyElement as QuestionImageModel).locImageLink.onStringChanged.add(this.imageLinkValueChangedHandler);
     this.initFilePresentationModel();
+  }
+
+  protected detachElement(surveyElement: SurveyElement): void {
+    if (surveyElement) {
+      surveyElement.unRegisterFunctionOnPropertyValueChanged("imageLink", "imageLinkValueChanged");
+      (surveyElement as QuestionImageModel).locImageLink.onStringChanged.remove(this.imageLinkValueChangedHandler);
+    }
+    super.detachElement(this.element);
+  }
+  protected attachElement(surveyElement: SurveyElement): void {
+    super.attachElement(surveyElement);
+    if (surveyElement) {
+      if (!this.imageLinkValueChangedHandler) {
+        this.imageLinkValueChangedHandler = () => {
+          this.isEmptyImageLink = !this.question.imageLink;
+          this.filePresentationModel.value = null;
+          this.filePresentationModel.visible = !this.question.imageLink;
+        };
+      }
+      surveyElement.registerFunctionOnPropertyValueChanged("imageLink", this.imageLinkValueChangedHandler, "imageLinkValueChanged");
+      (surveyElement as QuestionImageModel).locImageLink.onStringChanged.add(this.imageLinkValueChangedHandler);
+    }
   }
 
   @property({ defaultValue: false }) isUploading;
@@ -61,11 +81,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   public get acceptedTypes(): string {
     return getAcceptedTypesByContentMode((this.surveyElement as QuestionImageModel).contentMode);
   }
-  imageLinkValueChangedHandler = () => {
-    this.isEmptyImageLink = !this.question.imageLink;
-    this.filePresentationModel.value = null;
-    this.filePresentationModel.visible = !this.question.imageLink;
-  }
+  imageLinkValueChangedHandler: () => void;
 
   public get isEmptyElement(): boolean {
     return this.isEmptyImageLink;
@@ -99,12 +115,5 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     return new CssClassBuilder()
       .append(super.css())
       .append("svc-question__content--loading", this.isUploading).toString();
-  }
-  public dispose(): void {
-    if (this.surveyElement) {
-      this.surveyElement.unRegisterFunctionOnPropertyValueChanged("imageLink", "imageLinkValueChanged");
-      (this.surveyElement as QuestionImageModel).locImageLink.onStringChanged.remove(this.imageLinkValueChangedHandler);
-    }
-    super.dispose();
   }
 }

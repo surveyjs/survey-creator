@@ -120,20 +120,4 @@
       border: 0;
     }
   }
-
-  .svc-page__content-actions {
-    .svc-page-toolbar {
-      padding-right: calcSize(1);
-
-      .sv-action {
-        .sv-action__content {
-          padding-right: 0;
-        }
-      }
-    }
-  }
-
-  .svc-page-toolbar-item__title--with-icon {
-    display: none;
-  }
 }
