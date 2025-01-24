@@ -140,6 +140,7 @@ test("Test question type converter on page for panel - 2", async (t) => {
 test("Test question type converter (mobile)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(600, 900);
+    await setAllowEditSurveyTitle(false);
 
     const surveyJSON = {
       "showQuestionNumbers": "off",
@@ -166,6 +167,7 @@ test("Test question type converter (mobile)", async (t) => {
       .expect(Selector("#convertTo").visible).ok()
       .click(Selector("#convertTo"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
+    await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("convert-to-popup-mobile.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
 });
@@ -956,8 +958,8 @@ test("Logo image hover", async (t) => {
       ],
     };
     await setJSON(json);
-    await t.hover(".svc-logo-image");
-    await takeElementScreenshot("logo-image-hover.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(".svc-logo-image-placeholder");
+    await takeElementScreenshot("logo-image-hover.png", Selector(".svc-logo-image-placeholder"), t, comparer);
   });
 });
 test("Logo image loading", async (t) => {
@@ -2551,7 +2553,7 @@ test("Scaling design surface", async (t) => {
     for (let i = 0; i < 3; i++) { await t.click(Selector("#zoomIn").find("button")); }
     await takeElementScreenshot("design-surface-zoom-in.png", surfaceSelector, t, comparer);
 
-    for (let i = 0; i < 8; i++) { await t.click(Selector("#zoomOut").find("button")); }
+    for (let i = 0; i < 5; i++) { await t.click(Selector("#zoomOut").find("button")); }
     await t.resizeWindow(600, 1900);
     await takeElementScreenshot("design-surface-zoom-out.png", surfaceSelector, t, comparer);
   });

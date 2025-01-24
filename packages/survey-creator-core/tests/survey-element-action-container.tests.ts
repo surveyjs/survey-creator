@@ -167,6 +167,16 @@ test("SurveyElementActionContainer without subtypes fit", () => {
   expect(actionContainer.getActionById("delete").mode).toBe("large");
   expect(actionContainer.dotsItem.visible).toBeFalsy();
 
+  actionContainer.alwaysShrink = true;
+  actionContainer.fit({ availableSpace: 564 });
+  expect(actionContainer.getActionById("convertTo").mode).toBe("small");
+  expect(actionContainer.getActionById("duplicate").mode).toBe("small");
+  expect(actionContainer.getActionById("isrequired").mode).toBe("small");
+  expect(actionContainer.getActionById("delete").mode).toBe("small");
+  expect(actionContainer.dotsItem.visible).toBeFalsy();
+
+  actionContainer.alwaysShrink = false;
+
   actionContainer.fit({ availableSpace: 304 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");

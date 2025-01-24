@@ -1985,6 +1985,34 @@ test("LogicUI: edit matrix column visibleIf. Filter selector if there is a conte
   colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
   expect(colSelector.choices).toHaveLength(3 + 2);
 });
+test("A question with name '0' doesn't appear correctly within a condition editor Bug#6430", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "radiogroup", name: "0", choices: ["a", "b", "c", "d"] },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  const expressionEditor = logic.expressionEditor;
+  const firstExpressionPanel = expressionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstExpressionPanel.getQuestionByName("questionName");
+  questionName.value = 0;
+  const questionValue = firstExpressionPanel.getQuestionByName("questionValue");
+  expect(questionValue).toBeTruthy();
+  expect(questionValue.isVisible).toBeTruthy();
+  expect(questionValue.getType()).toBe("radiogroup");
+  expect(questionValue.choices).toHaveLength(4);
+  questionValue.value = "d";
+  const itemEditor = logic.itemEditor;
+  let actionPanel = itemEditor.panels[0];
+  actionPanel.getQuestionByName("logicTypeName").value = "question_visibility";
+  actionPanel.getQuestionByName("elementSelector").value = "q2";
+  logic.saveEditableItem();
+  const q2 = survey.getQuestionByName("q2");
+  expect(q2.visibleIf).toEqual("{0} = 'd'");
+});
 test("LogicUI: edit matrix column visibleIf. Filter logic types and delete actions if there is a context", () => {
   const survey = new SurveyModel({
     elements: [
