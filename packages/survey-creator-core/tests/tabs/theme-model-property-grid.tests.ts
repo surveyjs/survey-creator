@@ -475,6 +475,122 @@ test("isPanelless is switching to panelless and back", (): any => {
 
 test("disable irrelevant settings", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "accordion";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  let propertyGridSurvey = themePlugin.propertyGrid.survey;
+  let groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  let headerViewContainer = groupHeader.elements[0].contentPanel;
+
+  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeTruthy();
+  expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeTruthy();
+  expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeTruthy();
+
+  creator.activeTab = "designer";
+  creator.JSON = {
+    "title": "Survey Title",
+    "description": "Survey Description",
+    "pages": [
+      {
+        "name": "page1",
+        "title": "page 1",
+        "description": "page 1 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ],
+      },
+      {
+        "name": "page2",
+        "title": "page 2",
+        "description": "page 2 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ],
+      }
+    ],
+  };
+
+  themePlugin.activate();
+  propertyGridSurvey = themePlugin.propertyGrid.survey;
+  groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  headerViewContainer = groupHeader.elements[0].contentPanel;
+
+  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeFalsy();
+  expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
+  expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
+});
+
+test("disable page settings if single page mode", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "accordion";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  let propertyGridSurvey = themePlugin.propertyGrid.survey;
+  let groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  let headerViewContainer = groupHeader.elements[0].contentPanel;
+
+  expect(creator.survey.isSinglePage).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeTruthy();
+  expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeTruthy();
+  expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeTruthy();
+
+  creator.activeTab = "designer";
+  creator.JSON = {
+    "title": "Survey Title",
+    "description": "Survey Description",
+    "pages": [
+      {
+        "name": "page1",
+        "title": "page 1",
+        "description": "page 1 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ],
+      },
+      {
+        "name": "page2",
+        "title": "page 2",
+        "description": "page 2 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ],
+      }
+    ],
+    "questionsOnPageMode": "singlePage",
+  };
+
+  themePlugin.activate();
+  propertyGridSurvey = themePlugin.propertyGrid.survey;
+  groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  headerViewContainer = groupHeader.elements[0].contentPanel;
+  expect(creator.survey.isSinglePage).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeFalsy();
+  expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
+  expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
+});
+
+test("disable irrelevant settings (property grid buttons)", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
 
@@ -529,7 +645,7 @@ test("disable irrelevant settings", (): any => {
   expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
 });
 
-test("disable page settings if single page mode", (): any => {
+test("disable page settings if single page mode (property grid buttons)", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
@@ -1109,7 +1225,75 @@ test("restore advanced headerViewContainer values", (): any => {
   });
 });
 
+test("Check accordion property grid categories", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "accordion";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  let propertyGridSurvey = themePlugin.propertyGrid.survey;
+  const categoriesTrueOrder = ["general", "header", "background", "appearance"];
+  const categories = propertyGridSurvey.pages[0].elements;
+  const categoriesNames = categories.map(pe => pe.name);
+  expect(categoriesNames).toStrictEqual(categoriesTrueOrder);
+
+  expect(categories[0].isVisible).toBeTruthy();
+  expect(categories[1].isVisible).toBeTruthy();
+  expect(categories[2].isVisible).toBeTruthy();
+  expect(categories[3].isVisible).toBeTruthy();
+});
+
+test("Check buttons property grid categories", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "buttons";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  let propertyGridSurvey = themePlugin.propertyGrid.survey;
+  const categoriesTrueOrder = ["general", "header", "background", "appearance"];
+  const categories = propertyGridSurvey.pages;
+  const categoriesNames = categories.map(pe => pe.name);
+  expect(categoriesNames).toStrictEqual(categoriesTrueOrder);
+  expect(propertyGridSurvey.currentPage.name).toBe("general");
+});
+
 test("Check subcategory order", (): any => {
+  Serializer.addProperty("theme", {
+    name: "custom-question-title",
+    type: "font",
+    category: "appearancequestion",
+  });
+
+  Serializer.addProperty("theme", {
+    name: "matrix-title",
+    type: "font",
+    category: "appearancequestion",
+  });
+
+  try {
+    Serializer.getProperty("theme", "questionTitle").visible = false;
+
+    const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+    creator.propertyGridNavigationMode = "accordion";
+    const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+    creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+    themePlugin.activate();
+    let propertyGridSurvey = themePlugin.propertyGrid.survey;
+    const subcategoriesTrueOrder = ["appearancecolor", "appearancefont", "appearanceother", "appearanceadvancedmode", "appearanceprimarycolor", "appearancepage", "appearancequestion", "appearanceinput", "appearancelines"];
+    const subcategories = propertyGridSurvey.getPanelByName("appearance").elements.filter(pe => pe.isPanel).map(pe => pe.name);
+
+    expect(subcategories).toStrictEqual(subcategoriesTrueOrder);
+  } finally {
+    Serializer.removeProperty("theme", "custom-question-title");
+    Serializer.removeProperty("theme", "matrix-title");
+    Serializer.getProperty("theme", "questionTitle").visible = true;
+  }
+});
+
+test("Check subcategory order (property grid buttons)", (): any => {
   Serializer.addProperty("theme", {
     name: "custom-question-title",
     type: "font",

@@ -84,11 +84,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private updateAdvancedModeQuestion(availableQuestion: boolean): void {
     const advancedModeQuestion = this.propertyGrid.survey.getQuestionByName("advancedMode");
     if (advancedModeQuestion) {
+      advancedModeQuestion.value = this._advancedModeValue;
       if (!availableQuestion) {
         advancedModeQuestion.visible = false;
       } else {
         advancedModeQuestion.visible = advancedModeQuestion.visible && !this.creator.isMobileView;
-        advancedModeQuestion.value = this._advancedModeValue;
       }
     }
   }
