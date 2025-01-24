@@ -495,10 +495,10 @@ test("Question adorner double click", async (t) => {
       }
     ]
   };
-  await setJSON(json);
   await ClientFunction(() => {
     window["creator"].expandCollapseButtonVisibility = "always";
   })();
+  await setJSON(json);
   function isCollapsed() {
     return Selector(".svc-question__content").hasClass("svc-question__content--collapsed");
   }
@@ -545,11 +545,11 @@ test("Page adorner double click", async (t) => {
       }
     ]
   };
-  await setJSON(json);
   await ClientFunction(() => {
     window["creator"].expandCollapseButtonVisibility = "always";
     window["creator"].allowDragPages = true;
   })();
+  await setJSON(json);
   function isCollapsed() {
     return Selector(".svc-page__content").hasClass("svc-page__content--collapsed");
   }

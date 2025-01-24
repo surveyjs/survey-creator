@@ -1,7 +1,7 @@
-import { Action, ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement, settings as SurveySettings } from "survey-core";
+import { Action, ActionContainer, AdaptiveActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement, settings as SurveySettings } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
-import { SurveyElementAdornerBase } from "./action-container-view-model";
+import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
 import { getLocString } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
@@ -42,13 +42,15 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       }
     );
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
+    this.actionContainer.alwaysShrink = this.creator.isMobileView;
+    this.creator.onPropertyChanged.add(this.creatorPropertyChanged);
+  }
+  public dispose() {
+    this.creator.onPropertyChanged.remove(this.creatorPropertyChanged);
+    super.dispose();
   }
   protected updateActionVisibility(id: string, isVisible: boolean) {
     super.updateActionVisibility(id, !this.isGhost && isVisible);
-  }
-  protected updateActionsContainer(surveyElement: SurveyElement): void {
-    super.updateActionsContainer(surveyElement);
-    if (this.creator.expandCollapseButtonVisibility != "never") this.actionContainer.addAction(this.expandCollapseAction);
   }
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed;
@@ -164,8 +166,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return this.getPage();
   }
 
-  protected createActionContainer(): ActionContainer<Action> {
-    const container = new ActionContainer();
+  protected createActionContainer(): SurveyElementActionContainer {
+    const container = super.createActionContainer();
     container.sizeMode = "small";
     container.cssClasses = {
       root: "svc-page-toolbar sv-action-bar",
@@ -177,12 +179,22 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       itemTitle: "svc-page-toolbar-item__title",
       itemTitleWithIcon: "svc-page-toolbar-item__title--with-icon",
     };
+    container.dotsItem.iconSize = "auto";
+    container.dotsItem.cssClasses.itemIcon += " svc-page-toolbar-item__icon";
     return container;
+  }
+
+  protected createActionContainers() {
+    super.createActionContainers();
+    this.topActionContainer.cssClasses = { ...this.actionContainer.cssClasses };
+    this.topActionContainer.cssClasses.root += " svc-page-toolbar--collapse";
   }
 
   protected allowExpandCollapseByDblClick(element: any) {
     return element.classList.contains("svc-page__content") ||
       element.classList.contains("sd-page") ||
+      element.classList.contains("svc-page-toolbar") ||
+      element.classList.contains("svc-page__content-actions") ||
       element.closest(".svc-question__drag-area") && !element.closest(".svc-page__content-actions") ||
       (element.closest(".sd-page__title") || element.closest(".sd-page__description")) && !element.closest(".svc-string-editor");
   }
@@ -276,7 +288,11 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
     return result.trim();
   }
-
+  private creatorPropertyChanged = (sender, options) => {
+    if (options.name === "isMobileView") {
+      this.actionContainer.alwaysShrink = options.newValue;
+    }
+  }
   public hoverStopper(event: MouseEvent, element: HTMLElement | any) {
     event["__svc_question_processed"] = true;
   }
