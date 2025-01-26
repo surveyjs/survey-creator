@@ -308,6 +308,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   private creatorOnLocaleChanged: (sender: Base, options: any) => void = (_, options) => {
     if(this.surveyElement) {
       this.updateActionsContainer(this.surveyElement);
+      this.updateActionsProperties();
     }
   };
   public static GetAdorner<V = SurveyElementAdornerBase>(surveyElement: SurveyElement): V {
