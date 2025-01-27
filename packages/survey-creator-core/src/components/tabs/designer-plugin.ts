@@ -181,6 +181,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     creator.addPluginTab("designer", this);
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.propertyGrid = new PropertyGridModel(undefined, creator, creator.getPropertyGridDefinition());
+    this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     this.propertyGrid.obj = creator.survey;
     this.propertyGrid.onSetNewObjectCallback = () => {
       this.updateTabControlActions();
@@ -205,7 +206,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       }
       return result;
     });
-    this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
 
     creator.onElementSelected.add((sender, options) => {
       if (this.showOneCategoryInPropertyGrid && this.creator.activeTab === "designer") {
