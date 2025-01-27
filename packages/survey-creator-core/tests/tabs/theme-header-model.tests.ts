@@ -186,7 +186,7 @@ test("headerViewContainer get color values from theme", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerTitleQuestion = groupHeader.elements[0].contentPanel.getElementByName("headerTitle");
   const headerDescriptionQuestion = groupHeader.elements[0].contentPanel.getElementByName("headerDescription");
 

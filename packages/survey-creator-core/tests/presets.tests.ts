@@ -125,6 +125,7 @@ test("Override toolbox JSON", () => {
 });
 test("set property grid defintion", () => {
   const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "accordion";
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.selectQuestionByName("q1");
   const preset = new CreatorPreset({
@@ -159,6 +160,7 @@ test("set property grid defintion", () => {
 });
 test("set property grid defintion: make general tab not the first one", () => {
   const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "accordion";
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.selectQuestionByName("q1");
   const preset = new CreatorPreset({

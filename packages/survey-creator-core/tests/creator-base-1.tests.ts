@@ -1950,6 +1950,7 @@ test("set showSidebar is equivalent to action", (): any => {
 });
 test("Show/hide property grid by collapse/expand actions", (): any => {
   const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "accordion";
   creator.allowCollapseSidebar = true;
   creator.JSON = {
     pages: [
@@ -1985,6 +1986,7 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
 });
 test("Hide property grid is always visible in flyoutMode", (): any => {
   const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "accordion";
   creator.allowCollapseSidebar = false;
   creator.JSON = {
     pages: [
@@ -4079,6 +4081,7 @@ test("addNewQuestionInPage with json", (): any => {
 });
 test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "accordion";
   let survey: SurveyModel;
   const getCategoryName = (): string => {
     if (!survey) return "";
