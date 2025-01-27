@@ -10,8 +10,6 @@ const defaultVariables = {
   "--sjs-special-shadow": "#00000040",
   "--sjs-primary-background-500": "#19B394FF",
   "--sjs-secondary-background-500": "#19B394FF",
-  "--ctr-surface-background-color": "var(--sjs-special-background)",
-  "--ctr-toolbox-background-color": "var(--sjs-special-background)",
 
   "--sjs-special-haze": "hsl(from var(--sjs-special-background) calc(h - var(--sjs-special-haze-deltaH)) calc(s - var(--sjs-special-haze-deltaS)) calc(l - var(--sjs-special-haze-deltaL)) / calc(1 - var(--sjs-special-haze-deltaAlpha)))",
   "--sjs-primary-background-10": "hsl(from var(--sjs-primary-background-500) calc(h - var(--sjs-primary-background-10-deltaH)) calc(s - var(--sjs-primary-background-10-deltaS)) calc(l - var(--sjs-primary-background-10-deltaL)) / calc(1 - var(--sjs-primary-background-10-deltaAlpha)))",
