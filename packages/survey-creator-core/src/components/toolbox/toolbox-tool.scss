@@ -1,5 +1,4 @@
 @use "../../variables" as *;
-@use "../../variables-layer.scss" as *;
 
 .svc-toolbox__item {
   display: flex;
@@ -62,7 +61,7 @@
   opacity: 0;
   box-sizing: border-box;
   align-items: center;
-  inset-inline-start: var(--thm-toolbox-item-banner-left, calcSize(-0.5));
+  inset-inline-start: var(--thm-toolbox-item-banner-left);
   max-width: calcSize(100);
   padding-top: var(--ctr-tooltip-padding-top, var(--sjs-spacing-x2));
   padding-inline-end: var(--ctr-tooltip-padding-right, var(--sjs-spacing-x3));
@@ -225,7 +224,7 @@
   position: absolute;
   inset-inline-end: var(--ctr-toolbox-item-padding-right, var(--sjs-spacing-x2));
   margin-inline-end: var(--ctr-toolbox-item-submenu-button-margin-right, var(--sjs-spacing-x1n));
-  top: calc(var(--ctr-toolbox-item-padding-top, var(--dft-toolbox-item-padding-top)) + var(--ctr-toolbox-gap, var(--dft-toolbox-gap)));
+  top: calc(var(--ctr-toolbox-item-padding-top, var(--sjs-spacing-x1)) + var(--ctr-toolbox-gap, var(--sjs-spacing-x05)));
   bottom: var(--ctr-toolbox-item-padding-bottom, var(--dft-toolbox-item-padding-bottom));
   display: inline-flex;
   padding: var(--ctr-toolbox-item-submenu-button-padding-top, var(--sjs-spacing-x05))

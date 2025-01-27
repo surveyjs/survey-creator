@@ -243,7 +243,7 @@ svc-question {
   }
 
   .sd-multipletext__item-container.sd-input:focus-within {
-    box-shadow: $shadow-inner;
+    // box-shadow: var(--sjs-shadow-inner, inset 0px 1px 2px 0px rgba(0, 0, 0, 0.149)); // #00000026
   }
 
   .sd-matrixdynamic__btn.sd-matrixdynamic__add-btn {
@@ -1366,7 +1366,7 @@ svc-question,
 
 .sd-row--enter.sd-row--enter.sd-row--enter.sd-row--enter {
   .svc-question__content--selected {
-    box-shadow: $shadow-small;
+    box-shadow: 0px 1px 2px 0px var(--ctr-shadow-small-color, var(--sjs-special-shadow, #00000040));
 
     .svc-question__content-actions {
       opacity: 0;

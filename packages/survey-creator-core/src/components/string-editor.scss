@@ -99,7 +99,9 @@
     right: calcSize(-1);
     box-sizing: content-box;
     background-color: $background;
-    box-shadow: $shadow-medium, 0px 0px 0px calcSize(0.25) $primary;
+    box-shadow:
+      0px 2px 6px 0px var(--ctr-shadow-medium-color, var(--sjs-special-glow, #004c441a)),
+      0px 0px 0px calcSize(0.25) $primary;
   }
 }
 
@@ -155,7 +157,9 @@
 
 .svc-string-editor.svc-string-editor--error:focus-within {
   .svc-string-editor__border--focus {
-    box-shadow: $shadow-medium, 0px 0px 0px calcSize(0.25) $red;
+    box-shadow:
+      0px 2px 6px 0px var(--ctr-shadow-medium-color, var(--sjs-special-glow, #004c441a)),
+      0px 0px 0px calcSize(0.25) var(--sjs-semantic-red-background-500, #e50a3eff);
   }
 }
 

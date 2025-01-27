@@ -283,7 +283,7 @@ td.st-table__cell:first-of-type {
 }
 .st-translation-dialog .st-strings-wrapper {
   border-radius: 4px;
-  box-shadow: $shadow-small;
+  box-shadow: 0px 1px 2px 0px var(--ctr-shadow-small-color, var(--sjs-special-shadow, #00000040));
   overflow: hidden;
 }
 

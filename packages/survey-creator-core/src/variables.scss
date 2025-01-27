@@ -35,27 +35,6 @@ $border: var(--sjs-border-default, var(--border, #d6d6d6));
 $border-light: var(--sjs-border-light, var(--border-light, #eaeaea));
 $border-inside: var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16)));
 
-$shadow-small: 0px 1px 2px 0px var(--ctr-shadow-small-color, var(--sjs-special-shadow, #00000040));
-$shadow-small-reset: 0px 0px 0px 0px var(--ctr-shadow-small-color, var(--sjs-special-shadow, #00000040));
-$shadow-medium: 0px 2px 6px 0px var(--ctr-shadow-medium-color, var(--sjs-special-glow, #004c441a));
-$shadow-large: 0px 8px 16px 0px var(--ctr-shadow-large-color, var(--sjs-special-glow, #004c441a));
-$shadow-inner: var(--sjs-shadow-inner, inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15));
-$shadow-inner-reset: var(--sjs-shadow-inner, inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15));
-$shadow-x-large: 0px 0px 0px 0px var(--ctr-shadow-x-large-color, var(--sjs-special-glow, #004c441a));
-
-$red: var(--sjs-special-red, var(--red, #e60a3e));
-$red-light: var(--sjs-special-red-light, var(--red-light, rgba(230, 10, 62, 0.1)));
-$red-forecolor: var(--sjs-special-red-forecolor, #ffffff);
-$yellow: var(--sjs-special-yellow, var(--yellow, #ff9814));
-$yellow-light: var(--sjs-special-yellow-light, var(--yellow-light, rgba(255, 152, 20, 0.1)));
-$yellow-forecolor: var(--sjs-special-yellow-forecolor, #ffffff);
-$green: var(--sjs-special-green, var(--green, #19b394));
-$green-light: var(--sjs-special-green-light, var(--green-light, rgba(25, 179, 148, 0.1)));
-$green-forecolor: var(--sjs-special-green-forecolor, #ffffff);
-$blue: var(--sjs-special-blue, #437fd9);
-$blue-light: var(--sjs-special-blue-light, var(--blue-light, rgba(67, 127, 217, 0.1)));
-$blue-forecolor: var(--sjs-special-blue-forecolor, #ffffff);
-
 $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
 $sd-panel-normal-min-width: 496px;

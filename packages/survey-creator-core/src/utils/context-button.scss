@@ -55,7 +55,7 @@
   &:hover,
   &:focus {
     use {
-      fill: $red;
+      fill: var(--sjs-semantic-red-background-500, #e50a3eff);
     }
   }
 }

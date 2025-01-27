@@ -183,14 +183,12 @@
 
 .svc-footer-bar {
   .svc-toolbar-wrapper {
-    height: calcSize(6);
-
-    .sv-action-bar {
+    .svc-toolbar {
       justify-content: center;
       padding: 0;
       width: 100%;
 
-      height: calc(6 * #{$base-unit});
+      padding: var(--ctr-menu-toolbar-padding-vertical-mobile, var(--sjs-spacing-x05)) var(--ctr-menu-toolbar-padding-horizontal, var(--sjs-spacing-x2));
       background:  var(--ctr-menu-background-color, var(--sjs-layer-1-background-500, #ffffffff));
       border-top: var(--ctr-menu-border-width, var(--sjs-stroke-x1)) solid var(--ctr-menu-border-color, var(--sjs-border-25, #d4d4d4ff));
       box-sizing: border-box;
