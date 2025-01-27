@@ -791,6 +791,7 @@ export var skStrings = {
     },
     previewMode: "Režim náhľadu",
     gridLayoutEnabled: "Povolenie rozloženia mriežky",
+    gridLayoutColumns: "Stĺpce rozloženia mriežky",
     maskSettings: "Nastavenia masky",
     detailErrorLocation: "Zarovnanie chybového hlásenia o rozšírení riadka",
     // Creator tabs
@@ -2957,3 +2958,4 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pe.maskSettings: "Mask settings" => "Nastavenia masky"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Zarovnanie chybového hlásenia o rozšírení riadka"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Nastaví umiestnenie chybových hlásení pre otázky vnorené do podrobných sekcií. Možnosť \"Zdediť\" použije nastavenie z vlastnosti \"Zarovnanie chybového hlásenia\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Stĺpce rozloženia mriežky"

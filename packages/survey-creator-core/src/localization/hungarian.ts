@@ -791,6 +791,7 @@ export var huStrings = {
     },
     previewMode: "Előnézeti mód",
     gridLayoutEnabled: "A rácselrendezés engedélyezése",
+    gridLayoutColumns: "Rácsos elrendezés oszlopai",
     maskSettings: "Maszk beállításai",
     detailErrorLocation: "Sorbővítési hibaüzenet igazítása",
     // Creator tabs
@@ -3155,3 +3156,4 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.maskSettings: "Mask settings" => "Maszk beállításai"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Sorbővítési hibaüzenet igazítása"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Beállítja a hibaüzenetek helyét a részletes szakaszokba ágyazott kérdésekhez. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza."
+// pe.gridLayoutColumns: "Grid layout columns" => "Rácsos elrendezés oszlopai"

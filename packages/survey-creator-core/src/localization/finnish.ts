@@ -791,6 +791,7 @@ export var fiStrings = {
     },
     previewMode: "Esikatselu-tila",
     gridLayoutEnabled: "Ota ruudukkoasettelu käyttöön",
+    gridLayoutColumns: "Ruudukkoasettelun sarakkeet",
     maskSettings: "Maskin asetukset",
     detailErrorLocation: "Rivin laajennuksen virhesanoman tasaus",
     // Creator tabs
@@ -2976,3 +2977,4 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pe.maskSettings: "Mask settings" => "Maskin asetukset"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Rivin laajennuksen virhesanoman tasaus"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Määrittää tieto-osiin sisältyvien kysymysten virhesanomien sijainnin. \"Peri\" -vaihtoehto käyttää asetusta \"Virheilmoituksen kohdistus\" -ominaisuudesta."
+// pe.gridLayoutColumns: "Grid layout columns" => "Ruudukkoasettelun sarakkeet"

@@ -791,6 +791,7 @@ var traditionalChineseTranslation = {
     },
     previewMode: "預覽模式",
     gridLayoutEnabled: "啟用網格佈局",
+    gridLayoutColumns: "網格佈局列",
     maskSettings: "蒙版設置",
     detailErrorLocation: "行擴展錯誤消息對齊",
     // Creator tabs
@@ -3274,3 +3275,4 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pe.maskSettings: "Mask settings" => "蒙版設置"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "行擴展錯誤消息對齊"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "設置嵌套在詳細資訊部分中的問題的錯誤消息的位置。“Inherit” 選項應用“Error message alignment” 屬性中的設置。"
+// pe.gridLayoutColumns: "Grid layout columns" => "網格佈局列"
