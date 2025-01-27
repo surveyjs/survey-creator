@@ -1137,7 +1137,9 @@ export class SurveyCreatorModel extends Base
     editorLocalization.currentLocale = value;
     this.setPropertyValue("locale", value);
     this.updateLocalizedStrings();
+    this.onLocaleChanded.fire(this, { locale: value });
   }
+  public onLocaleChanded: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   public updateLocalizedStrings(): void {
     this.toolbox.updateTitles();
     this.refreshPlugin();

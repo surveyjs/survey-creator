@@ -290,7 +290,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.createActionContainers();
     this.attachToUI(surveyElement);
   }
-
+  private creatorOnLocaleChanged: (sender: Base, options: any) => void = (_, options) => {
+    if(this.surveyElement) {
+      this.updateActionsContainer(this.surveyElement);
+      this.updateActionsProperties();
+    }
+  };
   public static GetAdorner<V = SurveyElementAdornerBase>(surveyElement: SurveyElement): V {
     return surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) as V;
   }
@@ -349,6 +354,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
     if (this.surveyElement != surveyElement) {
       this.setSurveyElement(surveyElement);
+      this.creator.onLocaleChanded.add(this.creatorOnLocaleChanged);
       this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
       this.creator.expandCollapseManager.add(this);
     }
@@ -362,6 +368,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.rootElement = undefined;
     this.detachOnlyMyElement();
     this.surveyElement = undefined;
+    this.creator.onLocaleChanded.remove(this.creatorOnLocaleChanged);
     this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
     this.creator.expandCollapseManager.remove(this);
   }
