@@ -45,6 +45,7 @@ test("Generate and update title correctly", () => {
 });
 test("Prev/next correctly, including columns via actions", () => {
   const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "accordion";
   creator.JSON = {
     elements: [
       { type: "matrixdynamic", name: "q1", columns: [{ name: "col1" }] }
