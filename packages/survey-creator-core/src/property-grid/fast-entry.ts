@@ -196,17 +196,18 @@ export class FastEntryEditor extends FastEntryEditorBase {
     return this.applyCore();
   }
   public applyItemValueArray(dest: Array<ItemValue>, src: Array<ItemValue>, names: Array<string> = []): void {
-    this.calcBeforeApplyItemsArray(dest, src, names);
-    for (var i = 0; i < dest.length; i++) {
-      if (dest[i].value != src[i].value) {
-        dest[i].value = src[i].value;
+    for(let i = 0; i < src.length; i++) {
+      const item = ItemValue.getItemByValue(dest, src[i].value);
+      if(item) {
+        item.text = src[i].text;
+        names.forEach((name) => {
+          if (name == "value" || name == "text") return;
+          dest[i][name] = src[i][name];
+        });
+        src.splice(i, 1, item);
       }
-      dest[i].text = src[i].hasText ? src[i].text : "";
-      names.forEach((name) => {
-        if (name == "value" || name == "text") return;
-        dest[i][name] = src[i][name];
-      });
     }
+    dest.splice.apply(dest, [0, dest.length].concat(<any>src));
   }
   protected convertItemValuesToText(): string {
     var text = "";
