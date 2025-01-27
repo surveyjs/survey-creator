@@ -406,6 +406,7 @@ test("Undo restore deleted page and question", (): any => {
 });
 test("Undo on removing questions in deleted two pages", (): any => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );

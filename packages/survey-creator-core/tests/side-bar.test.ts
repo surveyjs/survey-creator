@@ -126,6 +126,7 @@ test("showOneCategoryInPropertyGrid: property grid actions - on removing/adding/
 
 test("showOneCategoryInPropertyGrid: tab control", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
@@ -142,6 +143,7 @@ test("showOneCategoryInPropertyGrid: tab control", () => {
 
 test("showOneCategoryInPropertyGrid: switch between tabs", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
@@ -163,6 +165,7 @@ test("showOneCategoryInPropertyGrid: switch between tabs", () => {
 
 test("showOneCategoryInPropertyGrid: switch tabs by search", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
