@@ -2238,6 +2238,31 @@ test("Question adorner - collapsed", async (t) => {
         {
           type: "panel",
           name: "panel1"
+        },
+        {
+          "type": "checkbox",
+          "name": "question1",
+          "choices": [
+            "Item 1",
+            "Item 2",
+            "Item 3"
+          ],
+          "choicesByUrl": {
+            "url": "#"
+          }
+        },
+        {
+          "type": "image",
+          "name": "question2",
+          "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
+          "imageFit": "cover",
+          "imageHeight": "auto",
+          "imageWidth": "100%"
+        },
+        {
+          "type": "html",
+          "name": "question3",
+          "html": "HTML<br>\nLines"
         }
       ]
     };
@@ -2251,6 +2276,15 @@ test("Question adorner - collapsed", async (t) => {
     await t.click(qContent.nth(1), { offsetX: 10, offsetY: 10 });
     await t.click(qCollapseButton.filterVisible());
     await takeElementScreenshot("panel-adorner-collapsed.png", qContent.nth(1), t, comparer);
+    await t.click(qContent.nth(2), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("question-carry-forward-collapsed.png", qContent.nth(2), t, comparer);
+    await t.click(qContent.nth(3), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("question-image-collapsed.png", qContent.nth(3), t, comparer);
+    await t.click(qContent.nth(4), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await takeElementScreenshot("question-html-collapsed.png", qContent.nth(4), t, comparer);
 
     await t.click(Selector(".svc-tabbed-menu-item").withText("Preview"));
     await t.click(Selector(".svc-tabbed-menu-item").withText("Designer"));
