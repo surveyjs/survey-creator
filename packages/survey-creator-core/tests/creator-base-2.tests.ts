@@ -186,31 +186,28 @@ test("ZoomIn/ZoomOut designer surface", (): any => {
   const creator = new CreatorTester();
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(designerTabModel["surfaceScale"]).toBe(100);
-  // expect(creator.themeVariables).toStrictEqual({});
+  expect(creator.survey.widthScale).toBe(100);
+  expect(creator.themeVariables["--ctr-surface-base-unit"]).toBe(undefined);
+  expect(creator.themeVariables["--lbr-corner-radius-unit"]).toBe("8px");
+  expect(creator.themeVariables["--lbr-font-unit"]).toBe("8px");
+  expect(creator.themeVariables["--lbr-line-height-unit"]).toBe("8px");
+  expect(creator.themeVariables["--lbr-size-unit"]).toBe("8px");
+  expect(creator.themeVariables["--lbr-spacing-unit"]).toBe("8px");
+  expect(creator.themeVariables["--lbr-stroke-unit"]).toBe("1px");
 
   designerTabModel["scaleSurface"](10);
   expect(designerTabModel["surfaceScale"]).toBe(100);
-  // expect(creator.themeVariables).toStrictEqual({});
   expect(creator.survey.widthScale).toBe(100);
 
   designerTabModel["scaleSurface"](200);
   expect(designerTabModel["surfaceScale"]).toBe(100);
-  // expect(creator.themeVariables).toStrictEqual({});
   expect(creator.survey.widthScale).toBe(100);
 
   designerTabModel["maxSurfaceScaling"] = 200;
   designerTabModel["scaleSurface"](150);
   expect(creator.survey.widthScale).toBe(150);
   expect(designerTabModel["surfaceScale"]).toBe(150);
-  // expect(creator.themeVariables).toStrictEqual({
-  //   "--ctr-surface-base-unit": "12px",
-  //   "--lbr-corner-radius-unit": "12px",
-  //   "--lbr-font-unit": "12px",
-  //   "--lbr-line-height-unit": "12px",
-  //   "--lbr-size-unit": "12px",
-  //   "--lbr-spacing-unit": "12px",
-  //   "--lbr-stroke-unit": "1.5px"
-  // });
+
   expect(creator.themeVariables["--ctr-surface-base-unit"]).toBe("12px");
   expect(creator.themeVariables["--lbr-corner-radius-unit"]).toBe("12px");
   expect(creator.themeVariables["--lbr-font-unit"]).toBe("12px");

@@ -54,13 +54,13 @@ test("Default theme serialization", (): any => {
   expect(themeModelJson).toStrictEqual({ themeName: "default-light" });
 });
 
-test.skip("Creator theme: sync css variables", (): any => {
+test("Creator theme: sync css variables", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
   const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
   const themeModel = designerPlugin["themeModel"];
   let surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-special-background");
 
-  expect(creator.themeVariables["--sjs-special-background"]).toEqual(undefined);
+  expect(creator.themeVariables["--sjs-special-background"]).toEqual("#EDF9F7FF");
   expect((themeModel.cssVariables || {})["--sjs-special-background"]).toEqual(undefined);
   expect(surfaceBackgroundColor.value).toEqual("#EDF9F7FF");
 
