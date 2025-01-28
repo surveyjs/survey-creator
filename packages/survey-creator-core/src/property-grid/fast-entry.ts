@@ -196,6 +196,7 @@ export class FastEntryEditor extends FastEntryEditorBase {
     return this.applyCore();
   }
   public applyItemValueArray(dest: Array<ItemValue>, src: Array<ItemValue>, names: Array<string> = []): void {
+    if(!Array.isArray(src)) src = [];
     for(let i = 0; i < src.length; i++) {
       const item = ItemValue.getItemByValue(dest, src[i].value);
       if(item) {
