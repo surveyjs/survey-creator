@@ -115,3 +115,27 @@ test("Placeholder for FastEntry editor", () => {
   const fastEntryEditor = new FastEntryEditor(originalElement.choices, options);
   expect((fastEntryEditor.editSurvey.getAllQuestions()[0] as QuestionTextBase).placeholder).toEqual("Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules.");
 });
+test("Do not re-create with the same item.value", () => {
+  const originalElement = new QuestionRadiogroupModel("originalElement");
+  originalElement.choices = ["item1", "item2", "item3", "item4", "item5"];
+  const choices = originalElement.choices;
+  choices[0].setPropertyValue("#id", 1);
+  choices[1].setPropertyValue("#id", 2);
+  choices[4].setPropertyValue("#id", 5);
+  const fastEntryEditor = new FastEntryEditor(choices, new EmptySurveyCreatorOptions());
+  fastEntryEditor.comment.value = "item1\nitem6\nitem2\nitem5\nitem7\nitem8";
+  fastEntryEditor.apply();
+  expect(originalElement.choices).toHaveLength(6);
+  expect(choices[0].value).toEqual("item1");
+  expect(choices[0].getPropertyValue("#id")).toEqual(1);
+  expect(choices[1].value).toEqual("item6");
+  expect(choices[1].getPropertyValue("#id")).toBeUndefined();
+  expect(choices[2].value).toEqual("item2");
+  expect(choices[2].getPropertyValue("#id")).toEqual(2);
+  expect(choices[3].value).toEqual("item5");
+  expect(choices[3].getPropertyValue("#id")).toEqual(5);
+  expect(choices[4].value).toEqual("item7");
+  expect(choices[4].getPropertyValue("#id")).toBeUndefined();
+  expect(choices[5].value).toEqual("item8");
+  expect(choices[5].getPropertyValue("#id")).toBeUndefined();
+});
