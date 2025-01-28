@@ -42,7 +42,7 @@ svc-tab-json-editor-textarea {
 
   background-color: $background;
   background-image: linear-gradient(to bottom, transparent, var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16))));
-  border: 1px solid $border;
+  border: 1px solid var(--sjs-border-default, var(--border, #d6d6d6));
   border-radius: 1px;
 
   color: $foreground;

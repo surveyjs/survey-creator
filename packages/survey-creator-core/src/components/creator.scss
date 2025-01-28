@@ -20,7 +20,7 @@ survey-creator,
 
   @-moz-document url-prefix() {
     scrollbar-width: thin;
-    scrollbar-color: $border transparent;
+    scrollbar-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026)) transparent;
   }
 
   ::-webkit-scrollbar {

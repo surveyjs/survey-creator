@@ -20,7 +20,9 @@
 .spg-root-modern {
   position: relative;
   width: 100%;
-  border-inline-end: 1px solid $border;
+  border-left: var(--ctr-property-grid-border-width-left, var(--sjs-stroke-x1)) solid
+    var(--ctr-property-grid-border-color, var(--sjs-border-25, #d4d4d4ff));
+  background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   box-sizing: border-box;
   height: 0;
   flex-grow: 1;
