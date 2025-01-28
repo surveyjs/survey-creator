@@ -518,7 +518,7 @@ test("expand/collapse event - loading", () => {
   expect(questionAdorner.collapsed).toBeTruthy();
   expect(panelAdorner.collapsed).toBeFalsy();
 
-  creator.collapseAllPagesOnDragStart();
+  creator.collapseAllPagesOnDragStart(creator.survey.pages[0]);
   expect(page1Adorner.collapsed).toBeTruthy();
   expect(page2Adorner.collapsed).toBeFalsy();
   expect(questionAdorner.collapsed).toBeTruthy();

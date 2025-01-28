@@ -399,6 +399,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const element = <any>this.surveyElement;
     const isElementSelected = this.creator.selectedElement === element;
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
+    if (this.creator.collapsePagesOnDrag) {
+      this.creator.designerStateManager?.suspend();
+      this.creator.collapseAllPagesOnDragStart(element);
+    }
     return true;
   }
 
@@ -669,7 +673,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       cssClasses: listComponentCss,
     });
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
-      if(opt.isVisible) {
+      if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         options.updateListModel(listModel);
       }

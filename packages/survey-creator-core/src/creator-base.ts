@@ -2157,7 +2157,7 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragClear.add((sender, options) => {
       isDraggedFromToolbox = false;
       this.stopUndoRedoTransaction();
-      if (this.collapsePagesOnDrag) {
+      if (options.draggedElement && options.draggedElement.isPage || this.collapsePagesOnDrag) {
         this.designerStateManager?.release();
         this.restoreElementsState();
       }
@@ -2166,8 +2166,8 @@ export class SurveyCreatorModel extends Base
   public get designerStateManager() {
     return (this.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
   }
-  public collapseAllPagesOnDragStart(): void {
-    this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages);
+  public collapseAllPagesOnDragStart(element: SurveyElement): void {
+    this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages.filter(p => !element || element.isPage || p !== (element as any).page));
   }
   public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
     if (this.expandCollapseButtonVisibility == "never") return false;
@@ -4267,7 +4267,7 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  public allowDragPages = false;
+  public allowDragPages = true;
   public collapsePagesOnDrag = false;
 }
 
