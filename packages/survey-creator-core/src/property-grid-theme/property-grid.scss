@@ -20,6 +20,7 @@
 .spg-root-modern {
   position: relative;
   width: 100%;
+  border-inline-end: 1px solid transparent;
   background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   box-sizing: border-box;
   height: 0;
@@ -44,6 +45,7 @@
 }
 
 .spg-root-modern.spg-root--one-category {
+  border-inline-end: unset;
   background-color: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 
   .spg-page.spg-body__page {
