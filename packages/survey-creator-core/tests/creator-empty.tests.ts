@@ -45,7 +45,7 @@ const multipageJSON = {
 test("the creator can be empty", () => {
   const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
   creatorSetting.defaultNewSurveyJSON = {};
-  const creator = new CreatorTester(undefined, undefined, false);
+  const creator = new CreatorTester();
   creator.JSON = multipageJSON;
   creator.text = undefined;
   expect(creator.survey.pages).toHaveLength(0);
@@ -59,7 +59,7 @@ test("the creator can be empty", () => {
 test("Create new page, set empty JSON", (): any => {
   const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
   creatorSetting.defaultNewSurveyJSON = {};
-  const creator = new CreatorTester(undefined, undefined, false);
+  const creator = new CreatorTester();
   expect(creator.viewType).toEqual("designer");
   const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(creator.survey.pages).toHaveLength(0);
@@ -69,9 +69,7 @@ test("Create new page, set empty JSON", (): any => {
 });
 
 test("Create new page, recreate designer survey via JSON", (): any => {
-  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
-  creatorSetting.defaultNewSurveyJSON = {};
-  const creator = new CreatorTester(undefined, undefined, false);
+  const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text", name: "question1" }] };
   creator.showTestSurvey();
   const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
@@ -79,29 +77,23 @@ test("Create new page, recreate designer survey via JSON", (): any => {
   creator.showDesigner();
   expect(creator.survey.pages).toHaveLength(0);
   expect(designerPlugin.model.newPage).toBeTruthy();
-  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 
 test("pageEditMode='single'", (): any => {
-  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
-  creatorSetting.defaultNewSurveyJSON = {};
-  let creator = new CreatorTester(undefined, undefined, false);
+  let creator = new CreatorTester();
   let designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(creator.pageEditMode).toEqual("standard");
   expect(designerPlugin.model.showNewPage).toBeTruthy();
   expect(designerPlugin.model.newPage).toBeTruthy();
 
-  creator = new CreatorTester({ pageEditMode: "single" }, undefined, false);
+  creator = new CreatorTester({ pageEditMode: "single" }, undefined);
   designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(designerPlugin.model.showNewPage).toBeTruthy();
   expect(designerPlugin.model.newPage).toBeTruthy();
-  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 test("Create new ghost on adding a question", (): any => {
-  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
-  creatorSetting.defaultNewSurveyJSON = {};
   surveySettings.supportCreatorV2 = true;
-  const creator = new CreatorTester(undefined, undefined, false);
+  const creator = new CreatorTester();
   const undoredo = creator.getPlugin("undoredo");
   expect(undoredo.model).toBeTruthy();
   expect((<UndoRedoController>undoredo.model).undoRedoManager).toBeTruthy();
@@ -123,7 +115,6 @@ test("Create new ghost on adding a question", (): any => {
   creator.clickToolboxItem({ type: "text" });
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
-  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 test("setting empty JSON into creator do not update undo/redo survey and onModified stopped working", (): any => {
   const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
