@@ -15,12 +15,12 @@ test("Sidebar tabs with showTranslationTab: true", () => {
 
 test("Sidebar: activate tab change", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
-  expect(creator.sidebar.header.title).toEqual(undefined);
-  expect(creator.sidebar.activePage).toEqual("propertyGrid");
+  expect(creator.sidebar.header.title).toEqual("Survey Settings");
+  expect(creator.sidebar.activePage).toEqual("propertyGridPlaceholder");
   expect(creator.sidebar.pages[0].id).toEqual("propertyGridPlaceholder");
-  expect(creator.sidebar.pages[0].visible).toEqual(false); // propertyGridPlaceholder
+  expect(creator.sidebar.pages[0].visible).toEqual(true); // propertyGridPlaceholder
   expect(creator.sidebar.pages[1].id).toEqual("propertyGrid");
-  expect(creator.sidebar.pages[1].visible).toEqual(true); // propertyGrid
+  expect(creator.sidebar.pages[1].visible).toEqual(false); // propertyGrid
   expect(creator.sidebar.pages[2].id).toEqual("toolbox");
   expect(creator.sidebar.pages[2].visible).toEqual(false); // toolbox
   expect(creator.sidebar.pages[3].id).toEqual("creatorTheme");
@@ -126,6 +126,7 @@ test("showOneCategoryInPropertyGrid: property grid actions - on removing/adding/
 
 test("showOneCategoryInPropertyGrid: tab control", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
@@ -142,6 +143,7 @@ test("showOneCategoryInPropertyGrid: tab control", () => {
 
 test("showOneCategoryInPropertyGrid: switch between tabs", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
@@ -163,6 +165,7 @@ test("showOneCategoryInPropertyGrid: switch between tabs", () => {
 
 test("showOneCategoryInPropertyGrid: switch tabs by search", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
