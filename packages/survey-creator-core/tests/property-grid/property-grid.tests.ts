@@ -2163,7 +2163,7 @@ test("Support property availableInMatrixColumn attribute && correct category, #5
   Serializer.removeProperty("question", "prop3");
 });
 
-test("Validate Selected Element Errors", (): any => {
+test("Validate Selected Element Errors 1", (): any => {
   var titleProp = Serializer.findProperty("question", "title");
   var oldIsRequired = titleProp.isRequired;
   titleProp.isRequired = true;
@@ -2197,7 +2197,7 @@ test("Required properties restore on change to empty value", (): any => {
   expect(titleQuestion.value).toBeFalsy();
   titleProp.isRequired = oldIsRequired;
 });
-test("Validate Selected Element Errors", () => {
+test("Validate Selected Element Errors 2", () => {
   var question = new QuestionTextModel("q1");
   var options = new EmptySurveyCreatorOptions();
   var propertyGrid = new PropertyGridModelTester(question, options);
