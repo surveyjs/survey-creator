@@ -791,6 +791,7 @@ export var koreanStrings = {
     },
     previewMode: "미리보기 모드",
     gridLayoutEnabled: "그리드 레이아웃 사용Enable the grid layout",
+    gridLayoutColumns: "그리드 레이아웃 열",
     maskSettings: "마스크 설정",
     detailErrorLocation: "행 확장 오류 메시지 맞춤",
     // Creator tabs
@@ -3208,3 +3209,4 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.maskSettings: "Mask settings" => "마스크 설정"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "행 확장 오류 메시지 맞춤"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "세부 섹션에 중첩된 질문에 대한 오류 메시지의 위치를 설정합니다. \"Inherit\" 옵션은 \"Error message alignment\" 속성의 설정을 적용합니다."
+// pe.gridLayoutColumns: "Grid layout columns" => "그리드 레이아웃 열"

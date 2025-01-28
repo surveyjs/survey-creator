@@ -791,6 +791,7 @@ var frenchTranslation = {
     },
     previewMode: "Mode de prévisualisation",
     gridLayoutEnabled: "Activer la disposition en grille",
+    gridLayoutColumns: "Colonnes de disposition de grille",
     maskSettings: "Paramètres du masque",
     detailErrorLocation: "Alignement du message d’erreur d’extension de ligne",
     // Creator tabs
@@ -3063,3 +3064,4 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pe.maskSettings: "Mask settings" => "Paramètres du masque"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Alignement du message d’erreur d’extension de ligne"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Définit l’emplacement des messages d’erreur pour les questions imbriquées dans les sections de détails. L’option «Hériter» applique le paramètre de la propriété «Alignement du message d’erreur»."
+// pe.gridLayoutColumns: "Grid layout columns" => "Colonnes de disposition de grille"

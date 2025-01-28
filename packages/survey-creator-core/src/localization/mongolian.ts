@@ -791,6 +791,7 @@ export var mnStrings = {
     },
     previewMode: "Урьдчилан харах хэлбэр",
     gridLayoutEnabled: "Grid layout-ийг идэвхжүүлэх",
+    gridLayoutColumns: "Grid layout columns",
     maskSettings: "Маскийн тохиргоо",
     detailErrorLocation: "Мөр өргөтгөлийн алдаа мессежийн тохируулга",
     // Creator tabs
@@ -2659,3 +2660,4 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pe.maskSettings: "Mask settings" => "Маскийн тохиргоо"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Мөр өргөтгөлийн алдаа мессежийн тохируулга"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Нарийвчилсан хэсгүүдэд байрласан асуултуудын алдааны мессежүүдийн байршлыг тохируулна. \"Inherit\" сонголт нь \"Error message alignment\" шинж чанарын тохиргоог хэрэглэнэ."
+// pe.gridLayoutColumns: "Grid layout columns" => "Grid layout columns"
