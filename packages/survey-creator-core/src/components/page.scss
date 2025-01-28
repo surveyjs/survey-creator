@@ -170,7 +170,7 @@ svc-page {
       var(--sjs-primary-background-10, #19b3941a)
     );
     .svc-survey-element-toolbar-item__title {
-      color: var(--ctr-survey-page-toolbar-item-text-color-selected, $foreground);
+      color: var(--ctr-survey-page-toolbar-item-text-color-selected, var(--sjs-secondary-background-400, #14a48bff));
     }
     use {
       fill: var(--ctr-survey-page-toolbar-item-icon-color-selected, var(--sjs-secondary-background-500, #19b394ff));
@@ -285,7 +285,7 @@ svc-page {
 
 .svc-page__content--collapse-onhover,
 .svc-page__content--collapse-always {
-  outline: 2px transparent dashed;
+  outline: var(--ctr-survey-page-border-width-minimized, var(--lbr-stroke-x2)) transparent dashed;
 
   &.svc-page__content--selected,
   &.svc-page__content.svc-hovered {
@@ -293,22 +293,22 @@ svc-page {
   }
 
   &.svc-page__content--collapsed-drag-over-inside {
-    box-shadow: 0 0 0 2px $primary;
-    background: $primary-light;
+    box-shadow: 0 0 0 var(--ctr-survey-page-border-width-overing, var(--lbr-stroke-x2)) var(--ctr-survey-page-border-color-overing, var(--sjs-primary-background-500, #19b394ff));
+    background: var(--ctr-survey-page-background-color-overing, var(--sjs-primary-background-10, #19b3941a));
     animation: collapsed-drag-over-inside-blinking 1s infinite;
     outline-color: transparent;
   }
 }
 
 .svc-page__content--collapsed {
-  outline-color: $border;
+  outline-color: var(--ctr-survey-page-border-color-minimized, var(--sjs-border-10, #dcdcdcff));
 }
 
 .svc-creator--mobile {
   .svc-page__content {
     &::after {
       margin: 0;
-      border-radius: calcSize(1);
+      border-radius: var(--ctr-survey-page-corner-radius, var(--lbr-corner-radius-x1));
     }
   }
 
@@ -330,7 +330,7 @@ svc-page {
 
   .svc-page__content:not(.svc-page__content--new):focus,
   .svc-hovered.svc-page__content:not(.svc-page__content--new) {
-    box-shadow: 0 0 0 2px inset $secondary-light;
+    box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-hovered, var(--sjs-secondary-background-25, #19b39440));
   }
 }
 

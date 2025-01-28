@@ -138,15 +138,6 @@ survey-creator,
   }
 }
 
-.svc-plugin-tab__content-actions {
-  sv-action-bar {
-    padding: 0;
-    height: calc(6 * #{$base-unit});
-    background: $background;
-    border-top: 1px solid $border;
-  }
-}
-
 .svc-creator__banner {
   width: 100%;
   line-height: calcSize(4);

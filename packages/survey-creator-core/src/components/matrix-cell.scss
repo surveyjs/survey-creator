@@ -58,7 +58,8 @@
 }
 
 .svc-matrix-cell__question-controls-button {
-  border: 1px solid $border;
+  border: var(--ctr-survey-contextual-button-border-width, var(--lbr-stroke-x1)) solid
+    var(--ctr-survey-contextual-button-border-color, var(--sjs-border-25));
 }
 
 .svc-matrix-cell:hover .svc-matrix-cell__question-controls {

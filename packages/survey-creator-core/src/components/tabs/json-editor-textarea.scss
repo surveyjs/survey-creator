@@ -98,10 +98,12 @@ svc-tab-json-editor-textarea {
   text-decoration: underline;
 }
 
-.svc-json-error__icon use {
+.svc-json-error__icon {
   fill: var(--sjs-semantic-red-background-500, #e50a3eff);
   width: var(--ctr-code-viewer-code-error-row-icon-width, var(--sjs-font-size-x2));
   height: var(--ctr-code-viewer-code-error-row-icon-height, var(--sjs-font-size-x2));
+  box-sizing: border-box;
+  display: block;
 }
 
 .svc-json-error__container {
