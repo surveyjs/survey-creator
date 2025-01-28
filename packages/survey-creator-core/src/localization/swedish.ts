@@ -791,6 +791,7 @@ export let svStrings = {
     },
     previewMode: "Förhandsgranska läge",
     gridLayoutEnabled: "Aktivera rutnätslayouten",
+    gridLayoutColumns: "Kolumner för rutnätslayout",
     maskSettings: "Inställningar för mask",
     detailErrorLocation: "Felmeddelande om radexpansion",
     // Creator tabs
@@ -3178,3 +3179,4 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pe.maskSettings: "Mask settings" => "Inställningar för mask"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Felmeddelande om radexpansion"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Anger platsen för felmeddelanden för frågor som är kapslade i detaljavsnitt. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolumner för rutnätslayout"

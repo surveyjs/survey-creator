@@ -791,6 +791,7 @@ export var danishStrings = {
     },
     previewMode: "Forhåndsvisning tilstand",
     gridLayoutEnabled: "Aktivere gitterlayoutet",
+    gridLayoutColumns: "Kolonner med gitterlayout",
     maskSettings: "Indstillinger for maske",
     detailErrorLocation: "Justering af fejlmeddelelse om rækkeudvidelse",
     // Creator tabs
@@ -3188,3 +3189,4 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pe.maskSettings: "Mask settings" => "Indstillinger for maske"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Justering af fejlmeddelelse om rækkeudvidelse"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angiver placeringen af fejlmeddelelser for spørgsmål, der er indlejret i detaljerede afsnit. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelser\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolonner med gitterlayout"
