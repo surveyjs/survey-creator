@@ -24,16 +24,12 @@ $background-semitransparent: var(--background-semitransparent, rgba(144, 144, 14
 $background-dark: var(--sjs-questionpanel-hovercolor, var(--sjs-general-backcolor-dark, rgb(248, 248, 248)));
 $background-dim-dark: var(--sjs-editorpanel-hovercolor, var(--sjs-general-backcolor-dim-dark, rgb(243, 243, 243)));
 
-$corner-radius: var(--sjs-corner-radius, 4px);
-
 $foreground: var(--sjs-general-forecolor, var(--foreground, #161616));
 $foreground-light: var(--sjs-general-forecolor-light, var(--foreground-light, #909090));
 $foreground-dim: var(--sjs-general-dim-forecolor, rgba(0, 0, 0, 0.91));
 $foreground-dim-light: var(--sjs-general-dim-forecolor-light, rgba(0, 0, 0, 0.45));
 
 $border: var(--sjs-border-default, var(--border, #d6d6d6));
-$border-light: var(--sjs-border-light, var(--border-light, #eaeaea));
-$border-inside: var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16)));
 
 $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
