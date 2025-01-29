@@ -63,7 +63,14 @@ svc-tab-json-editor-textarea {
 */
 
 .svc-json-errors {
+  --thm-json-error-row: calc(
+    var(--ctr-code-viewer-code-error-row-border-width-top, var(--sjs-stroke-x1)) +
+      var(--ctr-code-viewer-code-error-row-padding-top, var(--sjs-spacing-x1)) +
+      var(--ctr-code-viewer-code-error-row-padding-bottom, var(--sjs-spacing-x1)) +
+      var(--ctr-code-viewer-code-error-row-fix-button-icon-height, var(--sjs-font-size-x3))
+  );
   display: flex;
+  max-height: calc(5 * var(--thm-json-error-row));
   overflow-y: auto;
   flex-direction: column;
   padding: 0;

@@ -41,7 +41,7 @@
   &.svc-visible {
     display: block;
     border: var(--ctr-survey-matrix-cell-border-width, var(--lbr-stroke-x2)) solid
-      var(--ctr-survey-matrix-cell-border-color-edit, var(--sjs-primary-background-500, #19b394ff));
+      var(--ctr-survey-matrix-cell-border-color-selected, var(--sjs-secondary-background-500, #19b394ff));
   }
 }
 
@@ -62,7 +62,7 @@
 
 .svc-matrix-cell__question-controls-button {
   border: var(--ctr-survey-contextual-button-border-width, var(--lbr-stroke-x1)) solid
-    var(--ctr-survey-contextual-button-border-color, var(--sjs-border-25));
+    var(--ctr-survey-contextual-button-border-color, var(--sjs-border-25, #d4d4d4ff));
 }
 
 .svc-matrix-cell:hover .svc-matrix-cell__question-controls {
