@@ -850,7 +850,7 @@ export var enStrings = {
       background: "Background",
       appearance: "Appearance",
       accentColors: "Accent colors",
-      surfaceBackground: "Surface Background",
+      surfaceBackground: "Surface background",
       scaling: "Scaling",
       others: "Others"
     },
@@ -1404,7 +1404,7 @@ export var enStrings = {
     resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set).",
     setValueIf: "Use the magic wand icon to set a conditional rule that determines when to run the \"Set value expression\" and dynamically assign the resulting value as a response.",
     setValueExpression: "Specify an expression that defines the value to be set when the conditions in the \"Set value if\" rule are met. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression can be overridden by a respondent's manual input.",
-    gridLayoutEnabled: "Structures form elements using a two-dimensional system of rows and columns. Enable this setting if the default layout engine doesn't meet your requirements. To configure the layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field.",
+    gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field.",
     question: {
       name: "A question ID that is not visible to respondents.",
       description: "Type a question subtitle.",
