@@ -791,6 +791,7 @@ var italianTranslation = {
     },
     previewMode: "Modalità anteprima",
     gridLayoutEnabled: "Abilita il layout della griglia",
+    gridLayoutColumns: "Colonne del layout a griglia",
     maskSettings: "Impostazioni maschera",
     detailErrorLocation: "Allineamento del messaggio di errore di espansione delle righe",
     // Creator tabs
@@ -2765,3 +2766,4 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // pe.maskSettings: "Mask settings" => "Impostazioni maschera"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Allineamento del messaggio di errore di espansione delle righe"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Imposta la posizione dei messaggi di errore per le domande nidificate nelle sezioni di dettaglio. L'opzione \"Eredita\" applica l'impostazione della proprietà \"Allineamento messaggio di errore\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Colonne del layout a griglia"

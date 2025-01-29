@@ -791,6 +791,7 @@ export var ruStrings = {
     },
     previewMode: "Режим предварительного просмотра",
     gridLayoutEnabled: "Включение макета сетки",
+    gridLayoutColumns: "Столбцы макета сетки",
     maskSettings: "Настройки маски",
     detailErrorLocation: "Выравнивание сообщения об ошибке расширения строк",
     // Creator tabs
@@ -3059,3 +3060,4 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.maskSettings: "Mask settings" => "Настройки маски"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Выравнивание сообщения об ошибке расширения строк"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Задает расположение сообщений об ошибках для вопросов, вложенных в подробные разделы. Опция \"Наследовать\" применяет настройку из свойства \"Выравнивание сообщения об ошибке\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Столбцы макета сетки"

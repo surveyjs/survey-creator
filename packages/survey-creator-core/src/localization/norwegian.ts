@@ -791,6 +791,7 @@ export var nbStrings = {
     },
     previewMode: "Forhåndsvisning-modus",
     gridLayoutEnabled: "Aktivere rutenettoppsettet",
+    gridLayoutColumns: "Kolonner for rutenettoppsett",
     maskSettings: "Innstillinger for maske",
     detailErrorLocation: "Justering av feilmelding for radutvidelse",
     // Creator tabs
@@ -3006,3 +3007,4 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pe.maskSettings: "Mask settings" => "Innstillinger for maske"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Justering av feilmelding for radutvidelse"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angir plasseringen av feilmeldinger for spørsmål som er nestet i detaljdeler. Alternativet \"Arv\" bruker innstillingen fra egenskapen \"Feilmeldingsjustering\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolonner for rutenettoppsett"

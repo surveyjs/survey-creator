@@ -791,6 +791,7 @@ export const thStrings = {
     },
     previewMode: "โหมดแสดงตัวอย่าง",
     gridLayoutEnabled: "เปิดใช้งานเค้าโครงกริด",
+    gridLayoutColumns: "คอลัมน์เค้าโครงกริด",
     maskSettings: "การตั้งค่าหน้ากาก",
     detailErrorLocation: "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดในการขยายแถว",
     // Creator tabs
@@ -1944,3 +1945,4 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // pe.maskSettings: "Mask settings" => "การตั้งค่าหน้ากาก"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดในการขยายแถว"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "ตั้งค่าตําแหน่งของข้อความแสดงข้อผิดพลาดสําหรับคําถามที่ซ้อนกันในส่วนรายละเอียด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจากคุณสมบัติ \"การจัดตําแหน่งข้อความแสดงข้อผิดพลาด\""
+// pe.gridLayoutColumns: "Grid layout columns" => "คอลัมน์เค้าโครงกริด"

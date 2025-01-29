@@ -6,8 +6,6 @@ import { CreatorTester } from "./creator-tester";
 import { UndoRedoAction } from "../src/plugins/undo-redo/undo-redo-manager";
 import { PageAdorner } from "../src/components/page";
 
-surveySettings.supportCreatorV2 = true;
-
 test("canUndo/canRedo functions ", (): any => {
   const creator = new CreatorTester();
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();

@@ -1286,7 +1286,7 @@ export class SurveyCreatorModel extends Base
   get allowChangeThemeInPreview() { return this.previewAllowSelectTheme; }
   set allowChangeThemeInPreview(val) { this.previewAllowSelectTheme = val; }
 
-  private _tabResponsivenessMode: "menu" | "icons" = "menu";
+  private _tabResponsivenessMode: "menu" | "icons" = "icons";
   public get tabResponsivenessMode(): "menu" | "icons" {
     return this._tabResponsivenessMode;
   }

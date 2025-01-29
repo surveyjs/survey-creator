@@ -791,6 +791,7 @@ export var indonesianStrings = {
     },
     previewMode: "Mode pratinjau",
     gridLayoutEnabled: "Mengaktifkan tata letak kisi",
+    gridLayoutColumns: "Kolom tata letak kisi",
     maskSettings: "Pengaturan topeng",
     detailErrorLocation: "Perataan pesan kesalahan perluasan baris",
     // Creator tabs
@@ -3158,3 +3159,4 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pe.maskSettings: "Mask settings" => "Pengaturan topeng"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Perataan pesan kesalahan perluasan baris"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Mengatur lokasi pesan kesalahan untuk pertanyaan yang bertumpuk di bagian detail. Opsi \"Wariskan\" menerapkan pengaturan dari properti \"Perataan pesan kesalahan\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolom tata letak kisi"

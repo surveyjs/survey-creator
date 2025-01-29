@@ -13,8 +13,6 @@ import { CreatorTester } from "../creator-tester";
 import { ObjectSelectorModel } from "../../src/property-grid/object-selector";
 import { settings } from "../../src/creator-settings";
 
-surveySettings.supportCreatorV2 = true;
-
 test("Generate and update title correctly", () => {
   const creator = new CreatorTester();
   creator.JSON = {

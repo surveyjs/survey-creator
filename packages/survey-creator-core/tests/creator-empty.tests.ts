@@ -6,8 +6,6 @@ import { UndoRedoController } from "../src/plugins/undo-redo/undo-redo-controlle
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 
-surveySettings.supportCreatorV2 = true;
-
 const multipageJSON = {
   pages: [
     {
@@ -92,7 +90,6 @@ test("pageEditMode='single'", (): any => {
   expect(designerPlugin.model.newPage).toBeTruthy();
 });
 test("Create new ghost on adding a question", (): any => {
-  surveySettings.supportCreatorV2 = true;
   const creator = new CreatorTester();
   const undoredo = creator.getPlugin("undoredo");
   expect(undoredo.model).toBeTruthy();

@@ -791,6 +791,7 @@ var portugueseTranslation = {
     },
     previewMode: "Modo de visualização",
     gridLayoutEnabled: "Ativar o layout da grade",
+    gridLayoutColumns: "Colunas de layout de grade",
     maskSettings: "Configurações de máscara",
     detailErrorLocation: "Alinhamento da mensagem de erro de expansão de linha",
     // Creator tabs
@@ -2672,3 +2673,4 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // pe.maskSettings: "Mask settings" => "Configurações de máscara"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Alinhamento da mensagem de erro de expansão de linha"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Define o local das mensagens de erro para perguntas aninhadas em seções de detalhes. A opção \"Herdar\" aplica a configuração da propriedade \"Alinhamento da mensagem de erro\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Colunas de layout de grade"
