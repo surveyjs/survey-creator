@@ -538,6 +538,7 @@ export var ruStrings = {
     titlePlaceholder: "Введите заголовок",
     surveyTitlePlaceholder: "Введите заголовок опроса",
     pageTitlePlaceholder: "Введите заголовок страницы",
+    startPageTitlePlaceholder: "Стартовая страница",
     descriptionPlaceholder: "Введите описание",
     surveyDescriptionPlaceholder: "Введите описание опроса",
     pageDescriptionPlaceholder: "Введите описание страницы",
@@ -3061,3 +3062,4 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Выравнивание сообщения об ошибке расширения строк"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Задает расположение сообщений об ошибках для вопросов, вложенных в подробные разделы. Опция \"Наследовать\" применяет настройку из свойства \"Выравнивание сообщения об ошибке\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Столбцы макета сетки"
+// pe.startPageTitlePlaceholder: "Start Page" => "Стартовая страница"

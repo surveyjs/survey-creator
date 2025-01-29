@@ -538,6 +538,7 @@ export var koreanStrings = {
     titlePlaceholder: "타이틀",
     surveyTitlePlaceholder: "설문조사 제목",
     pageTitlePlaceholder: "페이지 {num}",
+    startPageTitlePlaceholder: "시작 페이지",
     descriptionPlaceholder: "묘사",
     surveyDescriptionPlaceholder: "묘사",
     pageDescriptionPlaceholder: "묘사",
@@ -3210,3 +3211,4 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "행 확장 오류 메시지 맞춤"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "세부 섹션에 중첩된 질문에 대한 오류 메시지의 위치를 설정합니다. \"Inherit\" 옵션은 \"Error message alignment\" 속성의 설정을 적용합니다."
 // pe.gridLayoutColumns: "Grid layout columns" => "그리드 레이아웃 열"
+// pe.startPageTitlePlaceholder: "Start Page" => "시작 페이지"

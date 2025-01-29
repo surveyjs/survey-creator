@@ -538,6 +538,7 @@ var frenchTranslation = {
     titlePlaceholder: "Titre de la page",
     surveyTitlePlaceholder: "Saisissez le titre du sondage",
     pageTitlePlaceholder: "Saisissez le titre de la page",
+    startPageTitlePlaceholder: "Page d’accueil",
     descriptionPlaceholder: "Entrez une description",
     surveyDescriptionPlaceholder: "Entrez une description pour l'enquête",
     pageDescriptionPlaceholder: "Entrez une description pour la page",
@@ -3065,3 +3066,4 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Alignement du message d’erreur d’extension de ligne"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Définit l’emplacement des messages d’erreur pour les questions imbriquées dans les sections de détails. L’option «Hériter» applique le paramètre de la propriété «Alignement du message d’erreur»."
 // pe.gridLayoutColumns: "Grid layout columns" => "Colonnes de disposition de grille"
+// pe.startPageTitlePlaceholder: "Start Page" => "Page d’accueil"

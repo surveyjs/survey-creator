@@ -538,6 +538,7 @@ var italianTranslation = {
     titlePlaceholder: "Titolo",
     surveyTitlePlaceholder: "Titolo del sondaggio",
     pageTitlePlaceholder: "Pagina {num}",
+    startPageTitlePlaceholder: "Pagina iniziale",
     descriptionPlaceholder: "Descrizione",
     surveyDescriptionPlaceholder: "Descrizione",
     pageDescriptionPlaceholder: "Descrizione",
@@ -2767,3 +2768,4 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Allineamento del messaggio di errore di espansione delle righe"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Imposta la posizione dei messaggi di errore per le domande nidificate nelle sezioni di dettaglio. L'opzione \"Eredita\" applica l'impostazione della proprietà \"Allineamento messaggio di errore\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Colonne del layout a griglia"
+// pe.startPageTitlePlaceholder: "Start Page" => "Pagina iniziale"

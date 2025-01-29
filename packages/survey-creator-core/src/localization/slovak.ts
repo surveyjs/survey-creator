@@ -538,6 +538,7 @@ export var skStrings = {
     titlePlaceholder: "Sem zadajte titul",
     surveyTitlePlaceholder: "Sem vložte titul prieskumu",
     pageTitlePlaceholder: "Sem zadajte titul stránky",
+    startPageTitlePlaceholder: "Úvodná stránka",
     descriptionPlaceholder: "Zadať opis",
     surveyDescriptionPlaceholder: "Zadať opis prieskumu",
     pageDescriptionPlaceholder: "Zadať opis stránky",
@@ -2959,3 +2960,4 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Zarovnanie chybového hlásenia o rozšírení riadka"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Nastaví umiestnenie chybových hlásení pre otázky vnorené do podrobných sekcií. Možnosť \"Zdediť\" použije nastavenie z vlastnosti \"Zarovnanie chybového hlásenia\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Stĺpce rozloženia mriežky"
+// pe.startPageTitlePlaceholder: "Start Page" => "Úvodná stránka"

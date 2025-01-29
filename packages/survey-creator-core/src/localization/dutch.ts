@@ -538,6 +538,7 @@ export var nlStrings = {
     titlePlaceholder: "Voer hier de titel in",
     surveyTitlePlaceholder: "Voer de enquêtetitel hier in",
     pageTitlePlaceholder: "Voer hier de paginatitel in",
+    startPageTitlePlaceholder: "Startpagina",
     descriptionPlaceholder: "Voer een omschrijving in",
     surveyDescriptionPlaceholder: "Voer een onderzoeksbeschrijving in",
     pageDescriptionPlaceholder: "Voer een paginabeschrijving in",
@@ -2984,3 +2985,4 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Uitlijning van foutmeldingen bij rijuitbreiding"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Hiermee stelt u de locatie in van foutmeldingen voor vragen die zijn genest in detailsecties. De optie \"Overerven\" past de instelling van de eigenschap \"Uitlijning van foutmeldingen\" toe."
 // pe.gridLayoutColumns: "Grid layout columns" => "Kolommen voor rasterlay-out"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startpagina"

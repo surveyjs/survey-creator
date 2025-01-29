@@ -538,6 +538,7 @@ var spanishTranslation = {
     titlePlaceholder: "Título de entrada aquí",
     surveyTitlePlaceholder: "Título de la encuesta de entrada aquí",
     pageTitlePlaceholder: "Título de la página de entrada aquí",
+    startPageTitlePlaceholder: "Página de inicio",
     descriptionPlaceholder: "Ingrese una descripción",
     surveyDescriptionPlaceholder: "Ingrese una descripción de la encuesta",
     pageDescriptionPlaceholder: "Ingrese una descripción de la página",
@@ -2782,3 +2783,4 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Alineación de mensajes de error de expansión de filas"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Establece la ubicación de los mensajes de error para las preguntas anidadas en secciones de detalle. La opción \"Heredar\" aplica la configuración de la propiedad \"Alineación de mensajes de error\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Columnas de diseño de cuadrícula"
+// pe.startPageTitlePlaceholder: "Start Page" => "Página de inicio"

@@ -538,6 +538,7 @@ export var hebrewStrings = {
     titlePlaceholder: "כותרת",
     surveyTitlePlaceholder: "כותרת הסקר",
     pageTitlePlaceholder: "עמוד {num}",
+    startPageTitlePlaceholder: "דף פתיחה",
     descriptionPlaceholder: "תיאור",
     surveyDescriptionPlaceholder: "תיאור הסקר",
     pageDescriptionPlaceholder: "תיאור העמוד",
@@ -2573,3 +2574,4 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "יישור הודעת שגיאה של הרחבת שורה"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "הגדרת המיקום של הודעות שגיאה עבור שאלות המקוננות במקטעים מפורטים. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "עמודות פריסת רשת"
+// pe.startPageTitlePlaceholder: "Start Page" => "דף פתיחה"

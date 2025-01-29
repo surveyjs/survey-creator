@@ -538,6 +538,7 @@ export let svStrings = {
     titlePlaceholder: "Titel",
     surveyTitlePlaceholder: "Undersökningens titel",
     pageTitlePlaceholder: "Sida {num}",
+    startPageTitlePlaceholder: "Startsida",
     descriptionPlaceholder: "Beskrivning",
     surveyDescriptionPlaceholder: "Beskrivning",
     pageDescriptionPlaceholder: "Beskrivning",
@@ -3180,3 +3181,4 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Felmeddelande om radexpansion"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Anger platsen för felmeddelanden för frågor som är kapslade i detaljavsnitt. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Kolumner för rutnätslayout"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startsida"

@@ -538,6 +538,7 @@ export var danishStrings = {
     titlePlaceholder: "Titel",
     surveyTitlePlaceholder: "Undersøgelsens titel",
     pageTitlePlaceholder: "Side {num}",
+    startPageTitlePlaceholder: "Startside",
     descriptionPlaceholder: "Beskrivelse",
     surveyDescriptionPlaceholder: "Beskrivelse",
     pageDescriptionPlaceholder: "Beskrivelse",
@@ -3190,3 +3191,4 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Justering af fejlmeddelelse om rækkeudvidelse"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angiver placeringen af fejlmeddelelser for spørgsmål, der er indlejret i detaljerede afsnit. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelser\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Kolonner med gitterlayout"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startside"

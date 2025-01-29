@@ -538,6 +538,7 @@ export const thStrings = {
     titlePlaceholder: "ชื่อเรื่อง",
     surveyTitlePlaceholder: "ชื่อเรื่องแบบสำรวจ",
     pageTitlePlaceholder: "หน้า {num}",
+    startPageTitlePlaceholder: "หน้าเริ่มต้น",
     descriptionPlaceholder: "คำอธิบาย",
     surveyDescriptionPlaceholder: "คำอธิบาย",
     pageDescriptionPlaceholder: "คำอธิบาย",
@@ -1946,3 +1947,4 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดในการขยายแถว"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "ตั้งค่าตําแหน่งของข้อความแสดงข้อผิดพลาดสําหรับคําถามที่ซ้อนกันในส่วนรายละเอียด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจากคุณสมบัติ \"การจัดตําแหน่งข้อความแสดงข้อผิดพลาด\""
 // pe.gridLayoutColumns: "Grid layout columns" => "คอลัมน์เค้าโครงกริด"
+// pe.startPageTitlePlaceholder: "Start Page" => "หน้าเริ่มต้น"

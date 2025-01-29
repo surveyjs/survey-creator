@@ -538,6 +538,7 @@ export var indonesianStrings = {
     titlePlaceholder: "Titel",
     surveyTitlePlaceholder: "Judul Survei",
     pageTitlePlaceholder: "Halaman {num}",
+    startPageTitlePlaceholder: "Halaman Awal",
     descriptionPlaceholder: "Deskripsi",
     surveyDescriptionPlaceholder: "Deskripsi",
     pageDescriptionPlaceholder: "Deskripsi",
@@ -3160,3 +3161,4 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Perataan pesan kesalahan perluasan baris"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Mengatur lokasi pesan kesalahan untuk pertanyaan yang bertumpuk di bagian detail. Opsi \"Wariskan\" menerapkan pengaturan dari properti \"Perataan pesan kesalahan\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Kolom tata letak kisi"
+// pe.startPageTitlePlaceholder: "Start Page" => "Halaman Awal"

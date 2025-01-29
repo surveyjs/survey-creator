@@ -538,6 +538,7 @@ export var arStrings = {
     titlePlaceholder: "Input title here",
     surveyTitlePlaceholder: "أدخل عنوان الإستبيان هنا",
     pageTitlePlaceholder: "أدخل عنوان الصفحة هنا",
+    startPageTitlePlaceholder: "الصفحة الرئيسية",
     descriptionPlaceholder: "Enter a description",
     surveyDescriptionPlaceholder: "أدخل وصف للإستبيان",
     pageDescriptionPlaceholder: "أدخل وصف للصفحة",
@@ -2920,3 +2921,4 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "محاذاة رسالة خطأ توسيع الصف"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "تعيين موقع رسائل الخطأ للأسئلة المتداخلة في أقسام التفاصيل. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "أعمدة تخطيط الشبكة"
+// pe.startPageTitlePlaceholder: "Start Page" => "الصفحة الرئيسية"

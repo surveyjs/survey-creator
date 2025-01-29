@@ -538,6 +538,7 @@ export var czStrings = {
     titlePlaceholder: "Sem zadejte název",
     surveyTitlePlaceholder: "Sem zadejte název průzkumu",
     pageTitlePlaceholder: "Sem zadejte název stránky",
+    startPageTitlePlaceholder: "Úvodní stránka",
     descriptionPlaceholder: "Zadejte popis",
     surveyDescriptionPlaceholder: "Zadejte popis průzkumu",
     pageDescriptionPlaceholder: "Zadejte popis stránky",
@@ -2583,3 +2584,4 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Chybová zpráva Zarovnání rozšíření řádku"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Nastavuje umístění chybových zpráv pro otázky vnořené do podrobných oddílů. Volba \"Zdědit\" aplikuje nastavení z vlastnosti \"Zarovnání chybové zprávy\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Sloupce rozvržení mřížky"
+// pe.startPageTitlePlaceholder: "Start Page" => "Úvodní stránka"

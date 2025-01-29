@@ -538,6 +538,7 @@ export var mnStrings = {
     titlePlaceholder: "Гарчиг",
     surveyTitlePlaceholder: "Санал асуулгын гарчиг",
     pageTitlePlaceholder: "Хуудас {num}",
+    startPageTitlePlaceholder: "Эхлэх хуудас",
     descriptionPlaceholder: "Тайлбар",
     surveyDescriptionPlaceholder: "Тайлбар",
     pageDescriptionPlaceholder: "Тайлбар",
@@ -2661,3 +2662,4 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Мөр өргөтгөлийн алдаа мессежийн тохируулга"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Нарийвчилсан хэсгүүдэд байрласан асуултуудын алдааны мессежүүдийн байршлыг тохируулна. \"Inherit\" сонголт нь \"Error message alignment\" шинж чанарын тохиргоог хэрэглэнэ."
 // pe.gridLayoutColumns: "Grid layout columns" => "Grid layout columns"
+// pe.startPageTitlePlaceholder: "Start Page" => "Эхлэх хуудас"

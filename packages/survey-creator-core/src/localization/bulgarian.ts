@@ -538,6 +538,7 @@ export var bgStrings = {
     titlePlaceholder: "Заглавие",
     surveyTitlePlaceholder: "Заглавие на анкетата",
     pageTitlePlaceholder: "Страница {num}",
+    startPageTitlePlaceholder: "Начална страница",
     descriptionPlaceholder: "Описание",
     surveyDescriptionPlaceholder: "Описание",
     pageDescriptionPlaceholder: "Описание",
@@ -2569,3 +2570,4 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Подравняване на съобщението за грешка при разгъване на реда"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Задава местоположението на съобщенията за грешки за въпроси, вложени в подробни раздели. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщенията за грешки\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Колони за оформление на мрежата"
+// pe.startPageTitlePlaceholder: "Start Page" => "Начална страница"

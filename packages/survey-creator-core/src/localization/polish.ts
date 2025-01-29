@@ -538,6 +538,7 @@ var polishStrings = {
     titlePlaceholder: "Tytuł",
     surveyTitlePlaceholder: "Tytuł ankiety",
     pageTitlePlaceholder: "Strona {num}",
+    startPageTitlePlaceholder: "Strona startowa",
     descriptionPlaceholder: "Opis",
     surveyDescriptionPlaceholder: "Opis",
     pageDescriptionPlaceholder: "Opis",
@@ -3271,3 +3272,4 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Wyrównanie komunikatu o błędzie rozwijania wiersza"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Ustawia lokalizację komunikatów o błędach dla pytań zagnieżdżonych w sekcjach szczegółowych. Opcja \"Dziedzicz\" stosuje ustawienie z właściwości \"Wyrównanie komunikatu o błędzie\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Kolumny układu siatki"
+// pe.startPageTitlePlaceholder: "Start Page" => "Strona startowa"

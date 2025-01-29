@@ -538,6 +538,7 @@ export var msStrings = {
     titlePlaceholder: "Tajuk input di sini",
     surveyTitlePlaceholder: "Tajuk tinjauan input di sini",
     pageTitlePlaceholder: "Tajuk halaman input di sini",
+    startPageTitlePlaceholder: "Halaman Permulaan",
     descriptionPlaceholder: "Masukkan perihalan",
     surveyDescriptionPlaceholder: "Masukkan perihalan tinjauan",
     pageDescriptionPlaceholder: "Masukkan perihalan halaman",
@@ -2960,3 +2961,4 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Penjajaran mesej ralat pengembangan baris"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Menetapkan lokasi mesej ralat untuk soalan yang bersarang dalam bahagian terperinci. Pilihan \"Mewarisi\" menggunakan tetapan daripada sifat \"Penjajaran mesej ralat\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Lajur susun atur grid"
+// pe.startPageTitlePlaceholder: "Start Page" => "Halaman Permulaan"
