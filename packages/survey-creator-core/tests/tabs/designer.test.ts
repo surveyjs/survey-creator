@@ -11,27 +11,18 @@ import { TabDesignerViewModel } from "../../src/components/tabs/designer";
 export * from "../../src/property-grid/matrices";
 
 test("Survey/page title/description placeholders text", () => {
-  new CreatorTester();
-  const survey: SurveyModel = new SurveyModel({
-    pages: [
-      {
-        elements: [
-          { type: "text" }
-        ]
-      }
-    ]
-  });
-  const checkPlaceholder = (owner: ILocalizableOwner, ownerName: string, propertyName: string, placeholderText?: string) => {
-    const locStr: LocalizableString = new LocalizableString(owner, false, propertyName);
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text" }] };
+  const survey = creator.survey;
+  new PageAdorner(creator, survey.pages[0]);
+  const checkPlaceholder = (locStr: LocalizableString, checkText: string) => {
     const editor: StringEditorViewModelBase = new StringEditorViewModelBase(locStr, null);
-    const property: JsonObjectProperty = Serializer.findProperty(ownerName, propertyName);
-    const placeholder: string = placeholderText || editorLocalization.getString((<any>property).placeholder);
-    expect(editor.placeholder).toEqual(placeholder);
+    expect(editor.placeholder).toEqual(checkText);
   };
-  checkPlaceholder(survey, "survey", "title");
-  checkPlaceholder(survey, "survey", "description");
-  checkPlaceholder(survey.pages[0], "page", "title", "Page 1");
-  checkPlaceholder(survey.pages[0], "page", "description");
+  checkPlaceholder(survey.locTitle, "Survey Title");
+  checkPlaceholder(survey.locDescription, "Description");
+  checkPlaceholder(survey.pages[0].locTitle, "Page 1");
+  checkPlaceholder(survey.pages[0].locDescription, "Description");
 });
 
 test("Save survey action properties", () => {

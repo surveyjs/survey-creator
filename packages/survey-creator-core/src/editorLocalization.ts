@@ -47,6 +47,7 @@ export class EditorLocalization {
     this.reset();
   }
   public getString(strName: string, locale: string = null): string {
+    if(!strName) return strName;
     const oldVal = this.getOldKeysString(strName, locale);
     if(!!oldVal) return oldVal;
     const path = strName.split(".");
