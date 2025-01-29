@@ -2,7 +2,7 @@ import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptio
 import { getLocString } from "../editorLocalization";
 import { assign, roundTo2Decimals, sortDefaultThemes } from "../utils/utils";
 import { ColorCalculator, colorsAreEqual, HueColorCalculator } from "../utils/color-utils";
-import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
+import { CreatorThemes, defaultCreatorThemesOrder, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import * as Themes from "survey-creator-core/themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
 
@@ -295,15 +295,13 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
 }
 
-const defaultThemesOrder = ["default-light", "default-contrast", "default-dark", "sc2020"];
-
 Serializer.addClass(
   "creatortheme",
   [
     {
       type: "dropdown",
       name: "themeName",
-      choices: sortDefaultThemes(defaultThemesOrder, PredefinedCreatorThemes).map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) })),
+      choices: sortDefaultThemes(defaultCreatorThemesOrder, PredefinedCreatorThemes).map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) })),
     },
     {
       type: "string",

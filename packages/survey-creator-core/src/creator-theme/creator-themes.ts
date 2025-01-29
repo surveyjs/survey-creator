@@ -5,6 +5,8 @@ export interface ICreatorTheme {
 }
 
 export const PredefinedCreatorThemes: string[] = ["default-light"];
+export const defaultCreatorThemesOrder = ["default-light", "default-contrast", "default-dark", "sc2020"];
+
 const defaultVariables = {
   "--sjs-special-background": "#EDF9F7FF",
   "--sjs-special-glow": "#004C441A",

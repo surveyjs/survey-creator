@@ -1,6 +1,6 @@
 import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges } from "survey-core";
 import { getLocString } from "../../editorLocalization";
-import { PredefinedThemes, Themes } from "./themes";
+import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
 
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
@@ -572,7 +572,7 @@ export class ThemeModel extends Base implements ITheme {
 
 }
 
-const defaultThemesOrder = ["default", "sharp", "borderless", "flat", "plain", "doubleborder", "layered", "solid", "threedimensional", "contrast"];
+const themeNameValues = sortDefaultThemes(defaultThemesOrder, PredefinedThemes).map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
 
 Serializer.addClass(
   "theme",
@@ -580,7 +580,7 @@ Serializer.addClass(
     {
       type: "dropdown",
       name: "themeName",
-      choices: sortDefaultThemes(defaultThemesOrder, PredefinedThemes).map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
+      choices: themeNameValues,
       category: "general",
     }, {
       type: "buttongroup",

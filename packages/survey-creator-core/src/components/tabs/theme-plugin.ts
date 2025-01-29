@@ -5,8 +5,8 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeTabViewModel } from "./theme-builder";
 import { SidebarPageModel } from "../side-bar/side-bar-page-model";
-import { getPredefinedColorsItemValues, PredefinedColors, PredefinedThemes, Themes } from "./themes";
-import { assign, notShortCircuitAnd } from "../../utils/utils";
+import { defaultThemesOrder, getPredefinedColorsItemValues, PredefinedColors, PredefinedThemes, Themes } from "./themes";
+import { assign, notShortCircuitAnd, sortDefaultThemes } from "../../utils/utils";
 import { saveToFileHandler } from "../../utils/html-element-utils";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
@@ -55,7 +55,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private advancedModeSwitcher: Switcher;
   private inputFileElement: HTMLInputElement;
   private simulatorCssClasses: any = surveyCss[defaultThemeName];
-  private _availableThemes = [].concat(PredefinedThemes);
+  private _availableThemes = [].concat(sortDefaultThemes(defaultThemesOrder, PredefinedThemes));
   private _showOneCategoryInPropertyGrid: boolean = true;
   private _advancedModeValue = false;
 
