@@ -1,7 +1,7 @@
 "use strict";
 const webpackCommonConfigCreator = require("./webpack.config");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
-const fs = require("fs");
 
 const { merge } = require("webpack-merge");
 const packageJson = require("./package.json");
@@ -46,6 +46,9 @@ module.exports = function (options) {
   config.entry = {};
   config.output = {};
   config.plugins.shift();
+  config.plugins[3] = new MiniCssExtractPlugin({
+    filename: "../[name].fontless.min.css",
+  }),
   config.externals = {};
   delete config.mode;
   return merge(config, getConfig(options));
