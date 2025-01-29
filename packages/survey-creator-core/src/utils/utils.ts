@@ -75,3 +75,10 @@ export function assign(...inputs: Array<any>) {
     assign(objects[0], objects[i]);
   }
 }
+
+export function sortDefaultThemes(defaultThemesOrder: Array<string>, themes: Array<string>) {
+  const result = [].concat(themes).sort((t1, t2) => {
+    return defaultThemesOrder.indexOf(t1) - defaultThemesOrder.indexOf(t2);
+  });
+  return result;
+}

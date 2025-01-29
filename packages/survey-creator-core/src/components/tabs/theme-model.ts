@@ -8,7 +8,7 @@ import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVaria
 import { createBoxShadowReset, trimBoxShadowValue } from "./theme-custom-questions/shadow-effects";
 import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
-import { assign, roundTo2Decimals } from "../../utils/utils";
+import { assign, roundTo2Decimals, sortDefaultThemes } from "../../utils/utils";
 import { ColorCalculator, ingectAlpha, parseColor } from "../../utils/color-utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
@@ -18,6 +18,9 @@ export * from "./header-model";
 
 Object.keys(LibraryThemes || {}).forEach(libraryThemeName => {
   const libraryTheme: ITheme = LibraryThemes[libraryThemeName];
+  if (PredefinedThemes.indexOf(libraryTheme.themeName) === -1) {
+    PredefinedThemes.push(libraryTheme.themeName);
+  }
   const creatorThemeVariables = {};
   const creatorTheme = {};
   assign(creatorThemeVariables, libraryTheme.cssVariables);
@@ -569,13 +572,15 @@ export class ThemeModel extends Base implements ITheme {
 
 }
 
+const defaultThemesOrder = ["default", "sharp", "borderless", "flat", "plain", "doubleborder", "layered", "solid", "threedimensional", "contrast"];
+
 Serializer.addClass(
   "theme",
   [
     {
       type: "dropdown",
       name: "themeName",
-      choices: PredefinedThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
+      choices: sortDefaultThemes(defaultThemesOrder, PredefinedThemes).map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
       category: "general",
     }, {
       type: "buttongroup",

@@ -1,6 +1,6 @@
 import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptions, ISaveToJSONOptions } from "survey-core";
 import { getLocString } from "../editorLocalization";
-import { assign, roundTo2Decimals } from "../utils/utils";
+import { assign, roundTo2Decimals, sortDefaultThemes } from "../utils/utils";
 import { ColorCalculator, colorsAreEqual, HueColorCalculator } from "../utils/color-utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import * as Themes from "survey-creator-core/themes";
@@ -296,12 +296,6 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 }
 
 const defaultThemesOrder = ["default-light", "default-contrast", "default-dark", "sc2020"];
-function sortDefaultThemes(themes) {
-  const result = [].concat(themes).sort((t1, t2) => {
-    return defaultThemesOrder.indexOf(t1) - defaultThemesOrder.indexOf(t2);
-  });
-  return result;
-}
 
 Serializer.addClass(
   "creatortheme",
@@ -309,7 +303,7 @@ Serializer.addClass(
     {
       type: "dropdown",
       name: "themeName",
-      choices: sortDefaultThemes(PredefinedCreatorThemes).map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) })),
+      choices: sortDefaultThemes(defaultThemesOrder, PredefinedCreatorThemes).map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) })),
     },
     {
       type: "string",
