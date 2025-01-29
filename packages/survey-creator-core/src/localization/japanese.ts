@@ -791,6 +791,7 @@ export var jaStrings = {
     },
     previewMode: "プレビューモード",
     gridLayoutEnabled: "グリッド レイアウトの有効化",
+    gridLayoutColumns: "グリッド レイアウト列",
     maskSettings: "マスク設定",
     detailErrorLocation: "行拡張エラーメッセージの配置",
     // Creator tabs
@@ -3003,3 +3004,4 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pe.maskSettings: "Mask settings" => "マスク設定"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "行拡張エラーメッセージの配置"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "詳細セクションにネストされた質問のエラーメッセージの場所を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。"
+// pe.gridLayoutColumns: "Grid layout columns" => "グリッド レイアウト列"

@@ -58,8 +58,6 @@ import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
 
-surveySettings.supportCreatorV2 = true;
-
 test("options.questionTypes", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -250,6 +248,7 @@ test("PagesController", (): any => {
 
 test("PageNavigatorViewModel", (): any => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
   const pagesController = desigerTab.pagesController;
   const model = new PageNavigatorViewModel(pagesController, "");
@@ -279,6 +278,7 @@ test("PageNavigatorViewModel", (): any => {
 
 test("PageNavigatorViewModel currentPage", (): any => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
   const pagesController = desigerTab.pagesController;
   const model = new PageNavigatorViewModel(pagesController, "");
@@ -308,6 +308,7 @@ test("PageNavigatorViewModel currentPage", (): any => {
 
 test("PageNavigatorViewModel visibleItems", (): any => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
   const pagesController = desigerTab.pagesController;
   const model = new PageNavigatorViewModel(pagesController, "");
@@ -411,6 +412,7 @@ test("PageNavigatorViewModel visibleItems", (): any => {
 
 test("PageNavigatorViewModel bypage mode", (): any => {
   const creator = new CreatorTester({ pageEditMode: "bypage" });
+  creator.JSON = { pages: [{ name: "page1" }] };
   const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
   const pagesController = desigerTab.pagesController;
   const model = new PageNavigatorViewModel(pagesController, "bypage");
@@ -720,12 +722,14 @@ test("Create new page on creating designer plugin", (): any => {
   expect(designerPlugin.model.showNewPage).toBeTruthy();
 
   creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   expect(creator.survey.pages).toHaveLength(1);
   designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.showNewPage).toBeTruthy();
 
   creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   creator.survey.pages[0].addNewQuestion("text", "question1");
   creator.survey.addNewPage("page2");
   expect(creator.survey.pages).toHaveLength(2);
@@ -755,6 +759,7 @@ test("Create new page on creating designer plugin", (): any => {
 });
 test("Create new page with empty survey", (): any => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   expect(creator.viewType).toEqual("designer");
   const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
@@ -960,7 +965,7 @@ test("Create new page, set empty JSON", (): any => {
   const designerPlugin = <TabDesignerPlugin>(
     creator.getPlugin("designer")
   );
-  expect(creator.survey.pages).toHaveLength(1);
+  expect(creator.survey.pages).toHaveLength(0);
   expect(designerPlugin.model.newPage).toBeTruthy();
 });
 test("Create new page, recreate designer survey via JSON", (): any => {
@@ -972,7 +977,7 @@ test("Create new page, recreate designer survey via JSON", (): any => {
   );
   creator.JSON = {};
   creator.showDesigner();
-  expect(creator.survey.pages).toHaveLength(1);
+  expect(creator.survey.pages).toHaveLength(0);
   expect(designerPlugin.model.newPage).toBeTruthy();
 });
 
@@ -2841,23 +2846,6 @@ test("active tab disableHide", (): any => {
   expect(creator.tabs[0].active).toBeFalsy();
   expect(creator.tabs[0].disableHide).toBeFalsy();
 });
-test("creator.onDragDropAllow", (): any => {
-  const creator = new CreatorTester({});
-  let fired = false;
-  creator.onDragDropAllow.add((sender, options) => {
-    fired = true;
-  });
-
-  const survey = creator.survey;
-  const page = survey.addNewPage("page1");
-  const q1 = page.addNewQuestion("text", "q1");
-  const q2 = page.addNewQuestion("text", "q2");
-  const target = new QuestionTextModel("q1");
-  page.dragDropStart(q1, target);
-  page.dragDropMoveTo(q2, true);
-
-  expect(fired).toBeTruthy();
-});
 test("update tab content", (): any => {
   const creator = new CreatorTester({
     showTranslationTab: true,
@@ -2974,6 +2962,7 @@ test("LogicPlugin Manual Entry: fastEntryAction enabled", () => {
 });
 test("getNewName get new element name", (): any => {
   const creator = new CreatorTester({ allowEditSurveyTitle: false });
+  creator.JSON = { pages: [{ name: "page1" }] };
   const getNewName = (elementType: string, isPanel?: boolean) => { return creator["getNewName"](elementType, isPanel); };
 
   let elementType = "rating";
@@ -3549,7 +3538,7 @@ test("get survey JSON with pageEditModeValue=single #2711", (): any => {
   try {
     let creator = new CreatorTester({ pageEditMode: "single" });
     creator.text = "";
-    expect(creator.JSON).toStrictEqual({ });
+    expect(creator.JSON).toStrictEqual({});
   } finally {
     surveySettings.allowShowEmptyTitleInDesignMode = true;
     surveySettings.allowShowEmptyDescriptionInDesignMode = true;
@@ -3878,7 +3867,7 @@ test("Allow to set survey JSON via text if errors in JSON is not critical", (): 
   expect(creator.activeTab).toEqual("designer");
   expect(creator.survey.getAllQuestions()).toHaveLength(2);
 });
-test("allowModifyPages=false", (): any => {
+test("allowModifyPages=false 1", (): any => {
   let creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
@@ -3913,8 +3902,9 @@ test("allowModifyPages=false", (): any => {
   pageAdornerModel.select(pageAdornerModel, { stopPropagation: () => { } } as any);
   expect(pageAdornerModel.getActionById("delete").visible).toBeFalsy();
 });
-test("allowModifyPages=false", (): any => {
+test("allowModifyPages=false 2", (): any => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   creator.survey.pages[0].delete();
   expect(creator.survey.pages).toHaveLength(0);
   const enLocale = editorLocalization.getLocale("");

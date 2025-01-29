@@ -791,6 +791,7 @@ export var nlStrings = {
     },
     previewMode: "Preview-modus",
     gridLayoutEnabled: "De rasterlay-out inschakelen",
+    gridLayoutColumns: "Kolommen voor rasterlay-out",
     maskSettings: "Masker-instellingen",
     detailErrorLocation: "Uitlijning van foutmeldingen bij rijuitbreiding",
     // Creator tabs
@@ -2982,3 +2983,4 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.maskSettings: "Mask settings" => "Masker-instellingen"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Uitlijning van foutmeldingen bij rijuitbreiding"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Hiermee stelt u de locatie in van foutmeldingen voor vragen die zijn genest in detailsecties. De optie \"Overerven\" past de instelling van de eigenschap \"Uitlijning van foutmeldingen\" toe."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolommen voor rasterlay-out"

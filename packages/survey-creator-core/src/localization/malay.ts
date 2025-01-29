@@ -791,6 +791,7 @@ export var msStrings = {
     },
     previewMode: "Mod pratonton",
     gridLayoutEnabled: "Dayakan reka letak grid",
+    gridLayoutColumns: "Lajur susun atur grid",
     maskSettings: "Tetapan topeng",
     detailErrorLocation: "Penjajaran mesej ralat pengembangan baris",
     // Creator tabs
@@ -2958,3 +2959,4 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pe.maskSettings: "Mask settings" => "Tetapan topeng"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Penjajaran mesej ralat pengembangan baris"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Menetapkan lokasi mesej ralat untuk soalan yang bersarang dalam bahagian terperinci. Pilihan \"Mewarisi\" menggunakan tetapan daripada sifat \"Penjajaran mesej ralat\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Lajur susun atur grid"

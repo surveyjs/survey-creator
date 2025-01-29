@@ -26,6 +26,7 @@ test("show/hidetabs", () => {
 });
 test("Update top toolbars on setting tabs", () => {
   const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "accordion";
   expect(creator.sidebar.getPageById("propertyGrid").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svd-settings").visible).toBeTruthy();
   const preset = new CreatorPreset({ tabs: { items: ["preview"] } });
@@ -38,6 +39,7 @@ test("Update top toolbars on setting tabs", () => {
 });
 test("active tab", () => {
   const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "accordion";
   expect(creator.toolbar.getActionById("svd-settings").visible).toBeTruthy();
   expect(creator.sidebar.getPageById("propertyGrid").visible).toBeTruthy();
   const preset = new CreatorPreset({ tabs: { items: ["designer", "json"], activeTab: "json" } });

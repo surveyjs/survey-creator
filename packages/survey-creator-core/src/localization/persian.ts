@@ -791,6 +791,7 @@ var persianStrings = {
     },
     previewMode: "حالت پیش نمایش",
     gridLayoutEnabled: "طرح بندی شبکه را فعال کنید",
+    gridLayoutColumns: "ستون های طرح بندی شبکه ای",
     maskSettings: "تنظیمات ماسک",
     detailErrorLocation: "تراز پیام خطای گسترش ردیف",
     // Creator tabs
@@ -2959,3 +2960,4 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.maskSettings: "Mask settings" => "تنظیمات ماسک"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "تراز پیام خطای گسترش ردیف"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "مکان پیام های خطا را برای سؤالات تودرتو در بخش های جزئیات تنظیم می کند. گزینه \"وراثت\" تنظیمات را از ویژگی \"تراز پیام خطا\" اعمال می کند."
+// pe.gridLayoutColumns: "Grid layout columns" => "ستون های طرح بندی شبکه ای"
