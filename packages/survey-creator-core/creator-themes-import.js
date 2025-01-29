@@ -94,7 +94,7 @@ function RGBToHSL(r, g, b){
   return [roundTo2Decimals(h * 360), roundTo2Decimals(s * 100), roundTo2Decimals(l * 100)];
 }
 
-function generateColor(cssVariables, baseColorName, dependentColorName, skipHue = false, skipSaturation = false, skipLightness = false) {
+function generateColor(cssVariables, baseColorName, dependentColorName, resultCssVariables) {
   if(!cssVariables[baseColorName]) {
     console.log(`${baseColorName} is missing`);
     return;
@@ -118,27 +118,30 @@ function generateColor(cssVariables, baseColorName, dependentColorName, skipHue 
   const deltaL = roundTo2Decimals(baseHslColor[2] - dependentHslColor[2]);
 
   // console.log(`${dependentColorName} dh=${deltaH} ds=${deltaS} dl=${deltaL} da=${deltaAlpha}`);
-  cssVariables[dependentColorName + "-deltaAlpha"] = deltaAlpha;
-  cssVariables[dependentColorName + "-deltaH"] = deltaH;
-  cssVariables[dependentColorName + "-deltaS"] = deltaS;
-  cssVariables[dependentColorName + "-deltaL"] = deltaL;
+  resultCssVariables[dependentColorName + "-deltaAlpha"] = deltaAlpha;
+  resultCssVariables[dependentColorName + "-deltaH"] = deltaH;
+  resultCssVariables[dependentColorName + "-deltaS"] = deltaS;
+  resultCssVariables[dependentColorName + "-deltaL"] = deltaL;
 
-  const hueValue = skipHue ? "h" : `calc(h - var(${dependentColorName + "-deltaH"}))`;
-  const saturationValue = skipSaturation ? "s" : `calc(s - var(${dependentColorName + "-deltaS"}))`;
-  const lightnessValue = skipLightness ? "l" : `calc(l - var(${dependentColorName + "-deltaL"}))`;
+  const hueValue = `calc(h - var(${dependentColorName + "-deltaH"}))`;
+  const saturationValue = `calc(s - var(${dependentColorName + "-deltaS"}))`;
+  const lightnessValue = `calc(l - var(${dependentColorName + "-deltaL"}))`;
   const alphaValue = `calc(1 - var(${dependentColorName + "-deltaAlpha"}))`;
-  cssVariables[dependentColorName] = `hsl(from var(${baseColorName}) ${hueValue} ${saturationValue} ${lightnessValue} / ${alphaValue})`;
+  resultCssVariables[dependentColorName] = `hsl(from var(${baseColorName}) ${hueValue} ${saturationValue} ${lightnessValue} / ${alphaValue})`;
 }
 function generateColorVariables(cssVariables) {
-  generateColor(cssVariables, "--sjs-primary-background-500", "--sjs-primary-background-400");
-  generateColor(cssVariables, "--sjs-primary-background-500", "--sjs-primary-background-10");
+  const resultCssVariables = {};
+  generateColor(cssVariables, "--sjs-primary-background-500", "--sjs-primary-background-400", resultCssVariables);
+  generateColor(cssVariables, "--sjs-primary-background-500", "--sjs-primary-background-10", resultCssVariables);
 
-  generateColor(cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-400");
-  generateColor(cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-25");
-  generateColor(cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-10");
+  generateColor(cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-400", resultCssVariables);
+  generateColor(cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-25", resultCssVariables);
+  generateColor(cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-10", resultCssVariables);
 
-  generateColor(cssVariables, "--sjs-special-background", "--sjs-special-haze");
-  generateColor(cssVariables, "--sjs-special-background", "--sjs-special-glow");
+  generateColor(cssVariables, "--sjs-special-background", "--sjs-special-haze", resultCssVariables);
+  generateColor(cssVariables, "--sjs-special-background", "--sjs-special-glow", resultCssVariables);
+  
+  return resultCssVariables;
 }
 
 function getUsedCssVariables(path) {
@@ -269,8 +272,15 @@ Object.keys(themeNameMap).forEach(themeName => {
   (palettes || []).forEach(paletteName => {
     console.log("Palette - " + paletteName);
     const curPaletteCssVariables = getCssVariablesFormFile(currentTheme + "/" + paletteName + ".css");
-    generateColorVariables(curPaletteCssVariables);
-    strImportTheme = writeThemePalette(currentTheme, paletteName, curPaletteCssVariables);
+    const resultColorVariables = generateColorVariables(curPaletteCssVariables);
+    const cssVariables = { ...curPaletteCssVariables, ...resultColorVariables };
+
+    if(paletteName === "light") {
+        const cssVariablesJson = JSON.stringify(resultColorVariables, null, 2);
+        const result = `export const DefaultLightColor = ${cssVariablesJson};`;
+        fs.writeFileSync(_dirPath + "generateColors.ts", result);
+    }
+    strImportTheme = writeThemePalette(currentTheme, paletteName, cssVariables);
     indexFileContent += strImportTheme;
   });
 });

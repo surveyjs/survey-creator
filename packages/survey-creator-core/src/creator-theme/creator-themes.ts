@@ -1,3 +1,6 @@
+import { CreatorStylesManager } from "./styles-manager";
+import { DefaultLightColor } from "../themes/generateColors";
+
 export interface ICreatorTheme {
   themeName?: string;
   iconSet?: string;
@@ -18,3 +21,5 @@ export const CreatorThemes: { [index: string]: ICreatorTheme } = {
     iconSet: "v2"
   }
 };
+
+CreatorStylesManager.insertStylesRulesIntoDocument(DefaultLightColor);
