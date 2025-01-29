@@ -43,7 +43,7 @@ module.exports = function (options) {
   options.isCore = false;
   patchEntries();
   const mainConfig = webpackCommonConfigCreator(options);
-  delete mainConfig.entry[packageJson.name];
+  mainConfig.entry = {};
   mainConfig.plugins.shift();
   return merge(mainConfig, config);
 };
