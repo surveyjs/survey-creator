@@ -11,18 +11,30 @@ function getConfig(options) {
   const isProductionBuild = options.buildType === "prod";
 
   const config = {
+    mode: "production",
+    devtool: "source-map",
     entry: {
       [packageJson.name]: path.resolve(__dirname, "./src/entries/index.ts"),
     },
     output: {
-      filename: "[name]" + (isProductionBuild ? ".min" : "") + ".mjs",
+      filename: "[name]" + ".js",
       path: buildPath,
-      module: true,
-      umdNamedDefine: true
+      library: {
+        type: "module"
+      }
     },
     experiments: {
       outputModule: true,
     },
+    optimization: {
+      minimize: false
+    },
+    externalsType: "module",
+    externals: {
+      "survey-core": "survey-core",
+      "survey-core/themes": "survey-core/themes",
+      "survey-creator-core/themes": "survey-creator-core/themes"
+    }
   };
 
   return config;
@@ -30,11 +42,11 @@ function getConfig(options) {
 
 module.exports = function (options) {
   options.tsConfigFile = "tsconfig.fesm.json";
-  const mainConfig = webpackCommonConfigCreator(options);
-  mainConfig.entry = {};
-  mainConfig.output = {};
-  mainConfig.plugins.shift();
-  // mainConfig.plugins.splice(3, 1);
-  mainConfig.externals = {}; // TODO - leave survey-core external
-  return merge(mainConfig, getConfig(options));
+  const config = webpackCommonConfigCreator(options);
+  config.entry = {};
+  config.output = {};
+  config.plugins.shift();
+  config.externals = {};
+  delete config.mode;
+  return merge(config, getConfig(options));
 };

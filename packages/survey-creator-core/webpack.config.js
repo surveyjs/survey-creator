@@ -39,6 +39,7 @@ var buildPlatformJson = {
     "**/*"
   ],
   main: packageJson.name + ".js",
+  module: "fesm/" + packageJson.name + ".js",
   repository: {
     type: "git",
     url: "https://github.com/surveyjs/survey-creator.git",
