@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
     plugins: [vue()],
 
     build: {
-      // Output compiled files to /dist.
+      emptyOutDir: false,
       sourcemap: mode == "development",
       outDir: "./build",
       lib: {
@@ -62,12 +62,9 @@ export default defineConfig(({ mode }) => {
       },
     },
     resolve: {
-      preserveSymlinks: true,
+      dedupe: ["survey-core", "vue"],
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
-        "survey-core": fileURLToPath(
-          new URL("./node_modules/survey-core", import.meta.url)
-        ),
       },
     },
   };
