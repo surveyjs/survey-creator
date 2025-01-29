@@ -68,7 +68,7 @@ import {
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
-import { CreatorThemes, ICreatorTheme } from "./creator-theme/creator-themes";
+import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/action-container-view-model";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
 
@@ -1509,7 +1509,6 @@ export class SurveyCreatorModel extends Base
     this.isTouch = IsTouch;
     const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
-    this.syncTheme(CreatorThemes["default-light"]);
   }
   public addCreatorEvent<SurveyCreatorModel, T>(): EventBase<SurveyCreatorModel, T> {
     return this.addEvent<SurveyCreatorModel, T>();
