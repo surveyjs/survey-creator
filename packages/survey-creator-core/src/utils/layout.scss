@@ -179,6 +179,10 @@
     fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 }
+.svc-toolbar-item__title {
+  color: var(--ctr-menu-toolbar-button-text-color, rgba(0, 0, 0, 0.90));
+  @include ctrDefaultFont;
+}
 
 
 .svc-footer-bar {
