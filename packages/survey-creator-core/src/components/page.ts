@@ -94,7 +94,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this.dragTypeOverMe = surveyElement.dragTypeOverMe;
       this.isDragMe = surveyElement.isDragMe;
       if(this.creator.pageEditMode !== "single") {
-        (<any>surveyElement.locTitle).placeholder = () => { return surveyElement.isStartPage ? "Started Page" : "pe.pageTitlePlaceholder"; };
+        (<any>surveyElement.locTitle).placeholder = () => { return surveyElement.isStartPage ? "pe.startPageTitlePlaceholder" : "pe.pageTitlePlaceholder"; };
         (<any>surveyElement.locDescription).placeholder = "pe.pageDescriptionPlaceholder";
       }
     }
