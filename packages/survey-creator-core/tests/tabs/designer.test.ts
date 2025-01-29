@@ -107,23 +107,39 @@ test("Select survey in designer", () => {
 });
 
 test("StringEditorViewModelBase page title placeholder", () => {
-  Serializer.findProperty("page", "title")["placeholder"] = "pe.pageTitlePlaceholder";
-  let survey: SurveyModel = new SurveyModel({
-    pages: [
-      {
-        elements: [
-          { type: "text" }
-        ]
-      }
-    ]
-  });
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text" }] };
+  const survey = creator.survey;
   let page1 = survey.pages[0];
+  new PageAdorner(creator, page1);
   let editor: StringEditorViewModelBase = new StringEditorViewModelBase(page1.locTitle, null);
   expect(page1.visibleIndex).toBe(0);
   expect(page1.num).toBe(1);
   expect(editor.placeholderValue).toBeUndefined();
   expect(editor.placeholder).toBe("Page 1");
   expect(editor.placeholderValue).toBe("Page 1");
+});
+test("StringEditorViewModelBase page title placeholder for started page", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    firstPageIsStarted: true,
+    pages: [
+      { elements: [{ type: "text" }] },
+      { elements: [{ type: "text" }] }
+    ]
+  };
+  const survey = creator.survey;
+  const page1 = survey.pages[0];
+  new PageAdorner(creator, page1);
+  const editor: StringEditorViewModelBase = new StringEditorViewModelBase(page1.locTitle, null);
+  expect(page1.isStartPage).toBeTruthy();
+  expect(page1.visibleIndex).toBe(-1);
+  expect(page1.num).toBe(-1);
+  expect(editor.placeholderValue).toBeUndefined();
+  expect(editor.placeholder).toBe("Started Page");
+  expect(editor.placeholderValue).toBe("Started Page");
+  survey.firstPageIsStartPage = false;
+  expect(editor.placeholder).toBe("Page 1");
 });
 
 test("Logo css", () => {

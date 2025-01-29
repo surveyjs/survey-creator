@@ -93,11 +93,17 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this.checkActionProperties();
       this.dragTypeOverMe = surveyElement.dragTypeOverMe;
       this.isDragMe = surveyElement.isDragMe;
+      if(this.creator.pageEditMode !== "single") {
+        (<any>surveyElement.locTitle).placeholder = () => { return surveyElement.isStartPage ? "Started Page" : "pe.pageTitlePlaceholder"; };
+        (<any>surveyElement.locDescription).placeholder = "pe.pageDescriptionPlaceholder";
+      }
     }
   }
 
   protected detachElement(surveyElement: PageModel): void {
     if (!!surveyElement) {
+      delete (<any>surveyElement.locTitle).placeholder;
+      delete (<any>surveyElement.locDescription).placeholder;
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["elements"], "updatePlaceholder");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["dragTypeOverMe", "isDragMe"], "dragOver");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
