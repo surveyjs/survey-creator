@@ -791,6 +791,7 @@ var spanishTranslation = {
     },
     previewMode: "Modo de vista previa",
     gridLayoutEnabled: "Habilitar el diseño de cuadrícula",
+    gridLayoutColumns: "Columnas de diseño de cuadrícula",
     maskSettings: "Ajustes de la máscara",
     detailErrorLocation: "Alineación de mensajes de error de expansión de filas",
     // Creator tabs
@@ -2780,3 +2781,4 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pe.maskSettings: "Mask settings" => "Ajustes de la máscara"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Alineación de mensajes de error de expansión de filas"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Establece la ubicación de los mensajes de error para las preguntas anidadas en secciones de detalle. La opción \"Heredar\" aplica la configuración de la propiedad \"Alineación de mensajes de error\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Columnas de diseño de cuadrícula"

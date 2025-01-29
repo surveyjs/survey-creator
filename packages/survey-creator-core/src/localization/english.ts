@@ -798,6 +798,7 @@ export var enStrings = {
     },
     previewMode: "Preview mode",
     gridLayoutEnabled: "Enable grid layout",
+    gridLayoutColumns: "Grid columns",
     maskSettings: "Mask settings",
     detailErrorLocation: "Row expansion error message alignment",
     // Creator tabs

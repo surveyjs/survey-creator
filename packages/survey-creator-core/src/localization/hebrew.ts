@@ -791,6 +791,7 @@ export var hebrewStrings = {
     },
     previewMode: "מצב תצוגה מקדימה",
     gridLayoutEnabled: "הפיכת פריסת הרשת לזמינה",
+    gridLayoutColumns: "עמודות פריסת רשת",
     maskSettings: "קביעות מסיכה",
     detailErrorLocation: "יישור הודעת שגיאה של הרחבת שורה",
     // Creator tabs
@@ -2571,3 +2572,4 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pe.maskSettings: "Mask settings" => "קביעות מסיכה"
 // pe.detailErrorLocation: "Row expansion error message alignment" => "יישור הודעת שגיאה של הרחבת שורה"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "הגדרת המיקום של הודעות שגיאה עבור שאלות המקוננות במקטעים מפורטים. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "עמודות פריסת רשת"

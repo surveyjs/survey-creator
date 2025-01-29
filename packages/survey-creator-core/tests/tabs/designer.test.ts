@@ -238,6 +238,7 @@ test("StringEditorViewModelBase skip formatting keys and enter key", () => {
 
 test("Property Grid and logic tab, Bug#4877", () => {
   const creator = new CreatorTester({ showLogicTab: true });
+  creator.propertyGridNavigationMode = "accordion";
   creator.selectElement(creator.survey);
   const logicPanel = creator.propertyGrid.getPanelByName("logic");
   logicPanel.expand();
@@ -256,6 +257,7 @@ test("Property Grid and logic tab, Bug#4877", () => {
 });
 test("Property Grid and adding a validator in the code, Bug#4882", () => {
   const creator = new CreatorTester({ showLogicTab: true });
+  creator.propertyGridNavigationMode = "accordion";
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const q1 = creator.survey.getQuestionByName("q1");
   creator.selectElement(q1);

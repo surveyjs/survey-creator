@@ -5,8 +5,6 @@ import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { QuestionAdornerViewModel } from "../src/components/question";
 
-settings.supportCreatorV2 = true;
-
 jest.mock("survey-core", () => ({
   ...jest["requireActual"]("survey-core"),
   sanitizeEditableContent: jest.fn(),
