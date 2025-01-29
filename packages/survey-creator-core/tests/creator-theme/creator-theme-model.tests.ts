@@ -60,7 +60,7 @@ test("Creator theme: sync css variables", (): any => {
   const themeModel = designerPlugin["themeModel"];
   let surfaceBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-special-background");
 
-  expect(creator.themeVariables["--sjs-special-background"]).toEqual("#EDF9F7FF");
+  expect(creator.themeVariables["--sjs-special-background"]).toEqual(undefined);
   expect((themeModel.cssVariables || {})["--sjs-special-background"]).toEqual(undefined);
   expect(surfaceBackgroundColor.value).toEqual("#EDF9F7FF");
 

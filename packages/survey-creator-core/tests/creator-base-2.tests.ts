@@ -188,13 +188,7 @@ test("ZoomIn/ZoomOut designer surface", (): any => {
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(designerTabModel["surfaceScale"]).toBe(100);
   expect(creator.survey.widthScale).toBe(100);
-  expect(creator.themeVariables["--ctr-surface-base-unit"]).toBe(undefined);
-  expect(creator.themeVariables["--lbr-corner-radius-unit"]).toBe("8px");
-  expect(creator.themeVariables["--lbr-font-unit"]).toBe("8px");
-  expect(creator.themeVariables["--lbr-line-height-unit"]).toBe("8px");
-  expect(creator.themeVariables["--lbr-size-unit"]).toBe("8px");
-  expect(creator.themeVariables["--lbr-spacing-unit"]).toBe("8px");
-  expect(creator.themeVariables["--lbr-stroke-unit"]).toBe("1px");
+  expect(creator.themeVariables).toStrictEqual({});
 
   designerTabModel["scaleSurface"](10);
   expect(designerTabModel["surfaceScale"]).toBe(100);
