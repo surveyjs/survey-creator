@@ -5,11 +5,9 @@ import { CreatorTester } from "./creator-tester";
 var assert: any;
 
 test("Move item in row from left to right", () => {
-  settings.supportCreatorV2 = true;
-  for(let i = 0; i < 6; i++) {
+  for (let i = 0; i < 6; i++) {
     var survey = new SurveyModel();
     survey["_isDesignMode"] = true;
-    settings.supportCreatorV2 = true;
     var page = survey.addNewPage("p1");
     var q1 = page.addNewQuestion("text", "q1");
     var q2 = page.addNewQuestion("text", "q2");
@@ -97,11 +95,9 @@ test("Move item in row from left to right", () => {
 });
 
 test("Move item in row from right to left", () => {
-  settings.supportCreatorV2 = true;
-  for(let i = 0; i < 6; i++) {
+  for (let i = 0; i < 6; i++) {
     var survey = new SurveyModel();
     survey["_isDesignMode"] = true;
-    settings.supportCreatorV2 = true;
     var page = survey.addNewPage("p1");
     var q1 = page.addNewQuestion("text", "q1");
     var q2 = page.addNewQuestion("text", "q2");
@@ -189,11 +185,9 @@ test("Move item in row from right to left", () => {
 });
 
 test("Move item in row from center to right", () => {
-  settings.supportCreatorV2 = true;
-  for(let i = 0; i < 4; i++) {
+  for (let i = 0; i < 4; i++) {
     var survey = new SurveyModel();
     survey["_isDesignMode"] = true;
-    settings.supportCreatorV2 = true;
     var page = survey.addNewPage("p1");
     var q1 = page.addNewQuestion("text", "q1");
     var q2 = page.addNewQuestion("text", "q2");
@@ -256,11 +250,9 @@ test("Move item in row from center to right", () => {
 });
 
 test("Move item in row from center to left", () => {
-  settings.supportCreatorV2 = true;
-  for(let i = 0; i < 4; i++) {
+  for (let i = 0; i < 4; i++) {
     var survey = new SurveyModel();
     survey["_isDesignMode"] = true;
-    settings.supportCreatorV2 = true;
 
     var page = survey.addNewPage("p1");
     var q1 = page.addNewQuestion("text", "q1");
@@ -324,11 +316,9 @@ test("Move item in row from center to left", () => {
 });
 
 test("Move item in prev row from left to multi-row", () => {
-  settings.supportCreatorV2 = true;
-  for(let i = 0; i < 6; i++) {
+  for (let i = 0; i < 6; i++) {
     var survey = new SurveyModel();
     survey["_isDesignMode"] = true;
-    settings.supportCreatorV2 = true;
     var page = survey.addNewPage("p1");
     var q0 = page.addNewQuestion("text", "q0");
     var q1 = page.addNewQuestion("text", "q1");
@@ -419,11 +409,9 @@ test("Move item in prev row from left to multi-row", () => {
 });
 
 test("Move item in prev row from right to multi-row", () => {
-  settings.supportCreatorV2 = true;
-  for(let i = 0; i < 6; i++) {
+  for (let i = 0; i < 6; i++) {
     var survey = new SurveyModel();
     survey["_isDesignMode"] = true;
-    settings.supportCreatorV2 = true;
     var page = survey.addNewPage("p1");
     var q0 = page.addNewQuestion("text", "q0");
     var q1 = page.addNewQuestion("text", "q1");
@@ -514,11 +502,9 @@ test("Move item in prev row from right to multi-row", () => {
 });
 
 test("Move item multi-row to single-row bottom, from bottom to top", () => {
-  settings.supportCreatorV2 = true;
-  for(let i = 2; i <= 4; i++) {
+  for (let i = 2; i <= 4; i++) {
     var survey = new SurveyModel();
     survey["_isDesignMode"] = true;
-    settings.supportCreatorV2 = true;
     var page = survey.addNewPage("p1");
     var q1 = page.addNewQuestion("text", "q1");
     var q2 = page.addNewQuestion("text", "q2");
@@ -549,11 +535,9 @@ test("Move item multi-row to single-row bottom, from bottom to top", () => {
 });
 
 test("Move item multi-row to single-row top, from bottom to top", () => {
-  settings.supportCreatorV2 = true;
-  for(let i = 2; i <= 4; i++) {
+  for (let i = 2; i <= 4; i++) {
     var survey = new SurveyModel();
     survey["_isDesignMode"] = true;
-    settings.supportCreatorV2 = true;
     var page = survey.addNewPage("p1");
     var q1 = page.addNewQuestion("text", "q1");
     var q2 = page.addNewQuestion("text", "q2");
@@ -584,11 +568,9 @@ test("Move item multi-row to single-row top, from bottom to top", () => {
 });
 
 test("Move item multi-row to single-row bottom, from top to bottom", () => {
-  settings.supportCreatorV2 = true;
-  for(let i = 2; i <= 4; i++) {
+  for (let i = 2; i <= 4; i++) {
     var survey = new SurveyModel();
     survey["_isDesignMode"] = true;
-    settings.supportCreatorV2 = true;
     var page = survey.addNewPage("p1");
     var q2 = page.addNewQuestion("text", "q2");
     var q3 = page.addNewQuestion("text", "q3");
@@ -619,11 +601,9 @@ test("Move item multi-row to single-row bottom, from top to bottom", () => {
 });
 
 test("Move item multi-row to single-row top, from top to bottom", () => {
-  settings.supportCreatorV2 = true;
-  for(let i = 2; i <= 4; i++) {
+  for (let i = 2; i <= 4; i++) {
     var survey = new SurveyModel();
     survey["_isDesignMode"] = true;
-    settings.supportCreatorV2 = true;
     var page = survey.addNewPage("p1");
     var q2 = page.addNewQuestion("text", "q2");
     var q3 = page.addNewQuestion("text", "q3");
@@ -654,10 +634,8 @@ test("Move item multi-row to single-row top, from top to bottom", () => {
 });
 
 test("Move item between pages", () => {
-  settings.supportCreatorV2 = true;
   var survey = new SurveyModel();
   survey["_isDesignMode"] = true;
-  settings.supportCreatorV2 = true;
   var page = survey.addNewPage("p1");
   var page2 = survey.addNewPage("p2");
   var q1 = page.addNewQuestion("text", "q1");
@@ -680,11 +658,9 @@ test("Move item between pages", () => {
 });
 
 test("Move item multi-row to single-row top, between pages", () => {
-  settings.supportCreatorV2 = true;
-  for(let i = 2; i <= 4; i++) {
+  for (let i = 2; i <= 4; i++) {
     var survey = new SurveyModel();
     survey["_isDesignMode"] = true;
-    settings.supportCreatorV2 = true;
     var page = survey.addNewPage("p1");
     var page2 = survey.addNewPage("p2");
     var q2 = page.addNewQuestion("text", "q2");
@@ -717,11 +693,9 @@ test("Move item multi-row to single-row top, between pages", () => {
 });
 
 test("Move item multi-row to single-row bottom, between pages", () => {
-  settings.supportCreatorV2 = true;
-  for(let i = 2; i <= 4; i++) {
+  for (let i = 2; i <= 4; i++) {
     var survey = new SurveyModel();
     survey["_isDesignMode"] = true;
-    settings.supportCreatorV2 = true;
     var page = survey.addNewPage("p1");
     var page2 = survey.addNewPage("p2");
     var q2 = page.addNewQuestion("text", "q2");
@@ -754,10 +728,8 @@ test("Move item multi-row to single-row bottom, between pages", () => {
 });
 
 test("Move item from nowhere (creator toolbox) to page", () => {
-  settings.supportCreatorV2 = true;
   var survey = new SurveyModel();
   survey["_isDesignMode"] = true;
-  settings.supportCreatorV2 = true;
   var page = survey.addNewPage("p1");
   var q1 = new QuestionTextModel("q1");
   var q2 = page.addNewQuestion("text", "q2");
@@ -778,10 +750,8 @@ test("Move item from nowhere (creator toolbox) to page", () => {
 });
 
 test("Move new question under row with several questions", () => {
-  settings.supportCreatorV2 = true;
   const survey = new SurveyModel();
   survey["_isDesignMode"] = true;
-  settings.supportCreatorV2 = true;
   const page = survey.addNewPage("p1");
   const q1 = page.addNewQuestion("text", "q1");
   const q2 = page.addNewQuestion("text", "q2");
@@ -808,10 +778,8 @@ test("Move new question under row with several questions", () => {
 });
 
 test("Move new question inside the row with several questions", () => {
-  settings.supportCreatorV2 = true;
   const survey = new SurveyModel();
   survey["_isDesignMode"] = true;
-  settings.supportCreatorV2 = true;
   const page = survey.addNewPage("p1");
   const q1 = page.addNewQuestion("text", "q1");
   const q2 = page.addNewQuestion("text", "q2");
@@ -838,10 +806,8 @@ test("Move new question inside the row with several questions", () => {
 });
 
 test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
-  settings.supportCreatorV2 = true;
   const survey = new SurveyModel();
   survey["_isDesignMode"] = true;
-  settings.supportCreatorV2 = true;
   const page = survey.addNewPage("p1");
 
   const q1 = page.addNewQuestion("text", "q1");
@@ -874,10 +840,8 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
 });
 
 test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
-  settings.supportCreatorV2 = true;
   const survey = new SurveyModel();
   survey["_isDesignMode"] = true;
-  settings.supportCreatorV2 = true;
   const page = survey.addNewPage("p1");
   const q1 = page.addNewQuestion("text", "q1");
   const q2 = page.addNewQuestion("text", "q2");

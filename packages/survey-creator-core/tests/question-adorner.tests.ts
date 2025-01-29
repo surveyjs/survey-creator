@@ -5,8 +5,6 @@ import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { QuestionToolboxItem } from "../src/toolbox";
 
-settings.supportCreatorV2 = true;
-
 test("Check required action", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

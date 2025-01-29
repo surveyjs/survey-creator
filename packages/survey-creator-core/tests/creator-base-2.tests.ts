@@ -58,8 +58,6 @@ import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
 
-surveySettings.supportCreatorV2 = true;
-
 test("onModified is raised for mask settings", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -90,6 +88,7 @@ test("onModified is raised for mask settings", (): any => {
 
 test("json editor default indent", (): any => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   expect(settings.jsonEditor.indentation).toBe(2);
   expect(creator.text).toBe("{\n  \"pages\": [\n    {\n      \"name\": \"page1\"\n    }\n  ]\n}");
 });
@@ -165,9 +164,11 @@ test("check tabResponsivenessMode property", () => {
   expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
 });
 test("onModified options, on adding page and on copying page", () => {
-  const creator = new CreatorTester({
+  const creator = new CreatorTester();
+  creator.JSON = {
     pages: [{ elements: [{ type: "text", name: "q1" }] }]
-  });
+  };
+
   const modifiedOptions = new Array<any>();
   creator.onModified.add(function (survey, options) {
     modifiedOptions.push(options);

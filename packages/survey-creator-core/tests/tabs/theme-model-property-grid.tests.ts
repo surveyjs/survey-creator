@@ -185,7 +185,7 @@ test("Check all file edit questions has onChooseFiles callback", (): any => {
   const backgroundImageEditor = themePlugin.propertyGrid.survey.findQuestionByName("backgroundImage") as QuestionFileEditorModel;
   expect(!!backgroundImageEditor.onChooseFilesCallback).toBeTruthy();
 
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerBackgroundImageEditor = groupHeader.elements[0].contentPanel.getElementByName("backgroundImage");
   expect(!!headerBackgroundImageEditor.onChooseFilesCallback).toBeTruthy();
 });
@@ -220,6 +220,7 @@ test("Theme builder: restore questionTitle switch tabs", (): any => {
 
 test("Desktop mode: add advanced mode switcher", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "accordion";
   creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -239,6 +240,7 @@ test("Desktop mode: add advanced mode switcher", (): any => {
 
 test("Mobile mode: hide advanced settings in property grid", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "accordion";
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   creator.isMobileView = true;
 
@@ -257,8 +259,23 @@ test("Mobile mode: hide advanced settings in property grid", (): any => {
   expect(actions[0].visible).toBeFalsy();
 });
 
+test("Mobile mode: hide advanced settings (property grid buttons)", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.isMobileView = true;
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const propertyGridSurvey = themePlugin.propertyGrid.survey;
+  const advancedModeQuestion = propertyGridSurvey.getQuestionByName("advancedMode");
+
+  expect(advancedModeQuestion.visible).toBeFalsy();
+});
+
 test("Change advancedModeSwitcher visibility", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "accordion";
   creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -277,6 +294,7 @@ test("Change advancedModeSwitcher visibility", (): any => {
 
 test("advancedModeSwitcher state after switch tabs", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "accordion";
   creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
 
   creator.activeTab = "theme";
@@ -297,6 +315,22 @@ test("advancedModeSwitcher state after switch tabs", (): any => {
   creator.activeTab = "theme";
   expect(actions[0].checked).toBeTruthy();
   expect(propertyGridSurvey.getQuestionByName("advancedMode").value).toBeTruthy();
+});
+
+test("advancedModeSwitcher state after switch tabs (property grid buttons)", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
+
+  creator.activeTab = "theme";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  const propertyGridSurvey = themePlugin.propertyGrid.survey;
+  const advancedModeQuestion = propertyGridSurvey.getQuestionByName("advancedMode");
+  expect(advancedModeQuestion.value).toBeFalsy();
+
+  advancedModeQuestion.value = true;
+  creator.activeTab = "designer";
+  creator.activeTab = "theme";
+  expect(advancedModeQuestion.value).toBeTruthy();
 });
 
 test("onAllowModifyTheme events + use creator.readOnly", (): any => {
@@ -441,6 +475,7 @@ test("isPanelless is switching to panelless and back", (): any => {
 
 test("disable irrelevant settings", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "accordion";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
 
@@ -497,6 +532,7 @@ test("disable irrelevant settings", (): any => {
 
 test("disable page settings if single page mode", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "accordion";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
 
@@ -545,6 +581,120 @@ test("disable page settings if single page mode", (): any => {
   themePlugin.activate();
   propertyGridSurvey = themePlugin.propertyGrid.survey;
   groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  headerViewContainer = groupHeader.elements[0].contentPanel;
+  expect(creator.survey.isSinglePage).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeFalsy();
+  expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
+  expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
+});
+
+test("disable irrelevant settings (property grid buttons)", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  let propertyGridSurvey = themePlugin.propertyGrid.survey;
+  let groupHeader = themePlugin.propertyGrid.survey.pages[1];
+  let headerViewContainer = groupHeader.elements[0].contentPanel;
+
+  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeTruthy();
+  expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeTruthy();
+  expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeTruthy();
+
+  creator.activeTab = "designer";
+  creator.JSON = {
+    "title": "Survey Title",
+    "description": "Survey Description",
+    "pages": [
+      {
+        "name": "page1",
+        "title": "page 1",
+        "description": "page 1 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ],
+      },
+      {
+        "name": "page2",
+        "title": "page 2",
+        "description": "page 2 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ],
+      }
+    ],
+  };
+
+  themePlugin.activate();
+  propertyGridSurvey = themePlugin.propertyGrid.survey;
+  groupHeader = themePlugin.propertyGrid.survey.pages[1];
+  headerViewContainer = groupHeader.elements[0].contentPanel;
+
+  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeFalsy();
+  expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
+  expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
+});
+
+test("disable page settings if single page mode (property grid buttons)", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  let propertyGridSurvey = themePlugin.propertyGrid.survey;
+  let groupHeader = themePlugin.propertyGrid.survey.pages[1];
+  let headerViewContainer = groupHeader.elements[0].contentPanel;
+
+  expect(creator.survey.isSinglePage).toBeFalsy();
+  expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
+  expect(headerViewContainer.getQuestionByName("surveyDescription").isReadOnly).toBeTruthy();
+  expect(propertyGridSurvey.getQuestionByName("pageTitle").isReadOnly).toBeTruthy();
+  expect(propertyGridSurvey.getQuestionByName("pageDescription").isReadOnly).toBeTruthy();
+
+  creator.activeTab = "designer";
+  creator.JSON = {
+    "title": "Survey Title",
+    "description": "Survey Description",
+    "pages": [
+      {
+        "name": "page1",
+        "title": "page 1",
+        "description": "page 1 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ],
+      },
+      {
+        "name": "page2",
+        "title": "page 2",
+        "description": "page 2 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ],
+      }
+    ],
+    "questionsOnPageMode": "singlePage",
+  };
+
+  themePlugin.activate();
+  propertyGridSurvey = themePlugin.propertyGrid.survey;
+  groupHeader = themePlugin.propertyGrid.survey.pages[1];
   headerViewContainer = groupHeader.elements[0].contentPanel;
   expect(creator.survey.isSinglePage).toBeTruthy();
   expect(headerViewContainer.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
@@ -733,7 +883,7 @@ test("headerViewContainer init state", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerViewContainer = groupHeader.elements[0].contentPanel;
 
   expect(headerViewContainer.getValue()).toStrictEqual({
@@ -784,7 +934,7 @@ test("set headerViewContainer basic", (): any => {
   themePlugin.activate();
   const simulatorSurvey = themePlugin.model.survey;
   const themeModel = themePlugin.themeModel as ThemeModel;
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   const surveyTitleQuestion = headerViewContainer.getElementByName("surveyTitle");
   const surveyDescriptionQuestion = headerViewContainer.getElementByName("surveyDescription");
@@ -817,7 +967,7 @@ test("set headerViewContainer basic restore", (): any => {
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
 
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   expect(headerViewContainer.getElementByName("logoPosition").value).toEqual("right");
 });
@@ -828,7 +978,7 @@ test("set headerViewContainer advanced", (): any => {
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
   const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
@@ -942,7 +1092,7 @@ test("restore basic headerViewContainer values", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   headerViewContainer.getQuestionByName("");
 
@@ -1030,7 +1180,7 @@ test("restore advanced headerViewContainer values", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   headerViewContainer.getQuestionByName("");
 
@@ -1075,7 +1225,75 @@ test("restore advanced headerViewContainer values", (): any => {
   });
 });
 
+test("Check accordion property grid categories", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "accordion";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  let propertyGridSurvey = themePlugin.propertyGrid.survey;
+  const categoriesTrueOrder = ["general", "header", "background", "appearance"];
+  const categories = propertyGridSurvey.pages[0].elements;
+  const categoriesNames = categories.map(pe => pe.name);
+  expect(categoriesNames).toStrictEqual(categoriesTrueOrder);
+
+  expect(categories[0].isVisible).toBeTruthy();
+  expect(categories[1].isVisible).toBeTruthy();
+  expect(categories[2].isVisible).toBeTruthy();
+  expect(categories[3].isVisible).toBeTruthy();
+});
+
+test("Check buttons property grid categories", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.propertyGridNavigationMode = "buttons";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  let propertyGridSurvey = themePlugin.propertyGrid.survey;
+  const categoriesTrueOrder = ["general", "header", "background", "appearance"];
+  const categories = propertyGridSurvey.pages;
+  const categoriesNames = categories.map(pe => pe.name);
+  expect(categoriesNames).toStrictEqual(categoriesTrueOrder);
+  expect(propertyGridSurvey.currentPage.name).toBe("general");
+});
+
 test("Check subcategory order", (): any => {
+  Serializer.addProperty("theme", {
+    name: "custom-question-title",
+    type: "font",
+    category: "appearancequestion",
+  });
+
+  Serializer.addProperty("theme", {
+    name: "matrix-title",
+    type: "font",
+    category: "appearancequestion",
+  });
+
+  try {
+    Serializer.getProperty("theme", "questionTitle").visible = false;
+
+    const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+    creator.propertyGridNavigationMode = "accordion";
+    const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+    creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+    themePlugin.activate();
+    let propertyGridSurvey = themePlugin.propertyGrid.survey;
+    const subcategoriesTrueOrder = ["appearancecolor", "appearancefont", "appearanceother", "appearanceadvancedmode", "appearanceprimarycolor", "appearancepage", "appearancequestion", "appearanceinput", "appearancelines"];
+    const subcategories = propertyGridSurvey.getPanelByName("appearance").elements.filter(pe => pe.isPanel).map(pe => pe.name);
+
+    expect(subcategories).toStrictEqual(subcategoriesTrueOrder);
+  } finally {
+    Serializer.removeProperty("theme", "custom-question-title");
+    Serializer.removeProperty("theme", "matrix-title");
+    Serializer.getProperty("theme", "questionTitle").visible = true;
+  }
+});
+
+test("Check subcategory order (property grid buttons)", (): any => {
   Serializer.addProperty("theme", {
     name: "custom-question-title",
     type: "font",
@@ -1098,7 +1316,7 @@ test("Check subcategory order", (): any => {
     themePlugin.activate();
     let propertyGridSurvey = themePlugin.propertyGrid.survey;
     const subcategoriesTrueOrder = ["appearancecolor", "appearancefont", "appearanceother", "appearanceadvancedmode", "appearanceprimarycolor", "appearancepage", "appearancequestion", "appearanceinput", "appearancelines"];
-    const subcategories = propertyGridSurvey.getPanelByName("appearance").elements.filter(pe => pe.isPanel).map(pe => pe.name);
+    const subcategories = propertyGridSurvey.getPageByName("appearance").elements.filter(pe => pe.isPanel).map(pe => pe.name);
 
     expect(subcategories).toStrictEqual(subcategoriesTrueOrder);
   } finally {
@@ -1114,7 +1332,7 @@ test("header survey title font color changed", (): any => {
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
 
@@ -1156,7 +1374,7 @@ test("header editable after theme changed", (): any => {
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
   const themeChooser = themePlugin.propertyGrid.survey.getQuestionByName("themeName") as QuestionDropdownModel;
@@ -1174,7 +1392,7 @@ test("advanced header disable inheritWidthFrom and reset it to 'container' if sh
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const groupHeader = themePlugin.propertyGrid.survey.pages[0].getElementByName("header");
+  const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   const inheritWidthFromQuestion = headerViewContainer.getElementByName("inheritWidthFrom");
 
