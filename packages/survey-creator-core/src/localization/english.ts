@@ -310,6 +310,10 @@ export var enStrings = {
       maxWidth: "Maximum panel width",
       showNumber: "Number this panel"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Effective width, %",
+      questionTitleWidth: "Question title width, px",
+    },
     paneldynamic: {
       name: "Panel name",
       title: "Panel title",
@@ -507,6 +511,7 @@ export var enStrings = {
     listIsEmpty: "You don't have any items yet",
     "listIsEmpty@choices": "You don't have any choices yet",
     "listIsEmpty@columns": "You don't have any columns yet",
+    "listIsEmpty@gridLayoutColumns": "You don't have layout columns yet",
     "listIsEmpty@rows": "You don't have any rows yet",
     "listIsEmpty@validators": "You don't have any validation rules yet",
     "listIsEmpty@calculatedValues": "You don't have any custom variables yet",
@@ -792,7 +797,7 @@ export var enStrings = {
       bottom: "In the bottom"
     },
     previewMode: "Preview mode",
-    gridLayoutEnabled: "Enable the grid layout",
+    gridLayoutEnabled: "Enable grid layout",
     maskSettings: "Mask settings",
     detailErrorLocation: "Row expansion error message alignment",
     // Creator tabs
@@ -1363,7 +1368,9 @@ export var enStrings = {
       startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form.",
       state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed.",
       width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
-      showQuestionNumbers: "Assigns numbers to questions nested within this panel."
+      showQuestionNumbers: "Assigns numbers to questions nested within this panel.",
+      effectiveColSpan: "Specifies how many columns this panel spans within the grid layout.",
+      gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column.",
     },
     paneldynamic: {
       name: "A panel ID that is not visible to respondents.",
@@ -1396,6 +1403,7 @@ export var enStrings = {
     resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set).",
     setValueIf: "Use the magic wand icon to set a conditional rule that determines when to run the \"Set value expression\" and dynamically assign the resulting value as a response.",
     setValueExpression: "Specify an expression that defines the value to be set when the conditions in the \"Set value if\" rule are met. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression can be overridden by a respondent's manual input.",
+    gridLayoutEnabled: "Structures form elements using a two-dimensional system of rows and columns. Enable this setting if the default layout engine doesn't meet your requirements. To configure the layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field.",
     question: {
       name: "A question ID that is not visible to respondents.",
       description: "Type a question subtitle.",
@@ -1416,7 +1424,8 @@ export var enStrings = {
       textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default).",
       url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data.",
       searchMode: "A comparison operation used to filter the drop-down list.",
-      textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
+      textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip.",
+      effectiveColSpan: "Specifies how many columns this question spans within the grid layout."
     },
     signaturepad: {
       signatureWidth: "Sets the width of the displayed signature area and the resulting image.",
@@ -1516,7 +1525,8 @@ export var enStrings = {
       questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
-      showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
+      showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\".",
+      gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column.",
     },
     timerLocation: "Sets the location of a timer on a page.",
     panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded. Applies if \"Panel display mode\" is set to \"List\" and the \"Panel title pattern\" property is specified.",
@@ -1604,10 +1614,6 @@ export var enStrings = {
       textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels.",
       overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header.",
       mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content.",
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Accepts values %.",
-      questionTitleWidth: "Accepts values px."
     },
     progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in."
   },

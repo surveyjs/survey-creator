@@ -686,8 +686,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "questionTitleLocation", tab: "questionSettings" },
       { name: "questionTitleWidth", tab: "questionSettings" },
       { name: "questionErrorLocation", tab: "questionSettings" },
-      { name: "layoutColumns", tab: "questionSettings" },
-      { name: "gridLayoutColumns", tab: "questionSettings" },
+      { name: "gridLayoutColumns", tab: "questionSettings", index: 900 },
     ],
     tabs: [
       { name: "questionSettings", index: 100 },
@@ -781,9 +780,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "commentAreaRows", tab: "question" },
       { name: "autoGrowComment", tab: "question" },
       { name: "allowResizeComment", tab: "question" },
-      { name: "gridLayoutEnabled", tab: "question" },
       { name: "showPageTitles", tab: "pages" },
       { name: "showPageNumbers", tab: "pages" },
+      { name: "gridLayoutEnabled", tab: "pages" },
 
       { name: "calculatedValues", tab: "logic" },
       { name: "triggers", tab: "logic" },
