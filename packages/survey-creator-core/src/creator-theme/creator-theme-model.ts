@@ -262,7 +262,7 @@ Serializer.addClass(
     {
       type: "string",
       visible: false,
-      name: "iconsSet",
+      name: "iconSet",
       default: "v2"
     }
   ],
