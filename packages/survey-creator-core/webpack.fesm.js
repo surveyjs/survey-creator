@@ -42,6 +42,7 @@ function getConfig(options) {
 
 module.exports = function (options) {
   options.tsConfigFile = "tsconfig.fesm.json";
+  options.isCore = false;
   const config = webpackCommonConfigCreator(options);
   config.entry = {};
   config.output = {};
