@@ -1,15 +1,14 @@
 import { notShortCircuitAnd } from "../../utils/utils";
-import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName, IAction, ListModel, PopupModel, surveyLocalization, SurveyModel, StylesManager } from "survey-core";
+import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultThemeName, IAction, ListModel, PopupModel, surveyLocalization } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
 import { TestSurveyTabViewModel } from "./test";
+import { listComponentCss } from "../list-theme";
 
 export class TabTestPlugin implements ICreatorPlugin {
   private languageSelectorAction: Action;
-  private changeThemePopupModel: PopupModel;
-  private changeThemeModel: ListModel;
   protected changeThemeAction: Action;
   private deviceSelectorAction: Action;
   private orientationSelectorAction: Action;
@@ -19,17 +18,31 @@ export class TabTestPlugin implements ICreatorPlugin {
   private previewAction: Action;
   private prevPageAction: Action;
   private nextPageAction: Action;
-  private simulatorTheme: any = surveyCss[defaultV2ThemeName];
+  private simulatorTheme: any = surveyCss[defaultThemeName];
 
   public model: TestSurveyTabViewModel;
+  private _previewDevice: string = "";
+  public get previewDevice(): string {
+    if (!!this.model) {
+      this._previewDevice = this.model.simulator.device;
+    }
+    return this._previewDevice;
+  }
+  public set previewDevice(newValue: string) {
+    this.setDevice(newValue);
+  }
 
-  private setDevice(newVal: string) {
-    this.model.simulator.device = newVal;
-    this.model.simulator.resetZoomParameters();
-    let currentType = simulatorDevices[this.model.simulator.device].deviceType;
+  private setDevice(newValue: string) {
+    this._previewDevice = newValue || "desktop";
+    if (!!this.model) {
+      this.model.simulator.device = newValue;
+      this.model.simulator.resetZoomParameters();
+    }
+    let currentType = simulatorDevices[this._previewDevice].deviceType;
     this.orientationSelectorAction.enabled = currentType != "desktop";
     this.deviceSelectorAction.iconName = "icon-device-" + currentType;
     this.deviceSelectorAction.title = getLocString("pe.simulator");
+    this.deviceSelectorAction.data.selectedItem = { id: this._previewDevice };
   }
   private setDefaultLanguageOption(opt: boolean | string) {
     const vis: boolean = opt === true || opt === "all" || (opt === "auto" && this.model.survey.getUsedLocales().length > 1);
@@ -61,7 +74,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     }
 
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
-      this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
+      this.invisibleToggleAction.active = this.model.showInvisibleElements;
       this.invisibleToggleAction.visible = this.model.isRunning;
     }
     if (this.creator.showDefaultLanguageInTestSurveyTab != undefined) {
@@ -69,20 +82,22 @@ export class TabTestPlugin implements ICreatorPlugin {
     }
   }
   private setPreviewTheme(themeName: string): void {
-    this.simulatorTheme = surveyCss[themeName] || surveyCss[defaultV2ThemeName];
+    this.simulatorTheme = surveyCss[themeName] || surveyCss[defaultThemeName];
   }
   private createVisibleUpdater() {
-    return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "test"; });
+    return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "preview"; });
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab("test", this);
-    this.setPreviewTheme(this.creator.themeForPreview);
+    creator.addPluginTab("preview", this);
+    this.setPreviewTheme(this.creator.previewTheme);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
-    this.model = new TestSurveyTabViewModel(this.creator, this.simulatorTheme);
-    this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
+    const tabModel = new TestSurveyTabViewModel(this.creator, this.simulatorTheme);
+    tabModel.simulator.device = this.previewDevice || this.creator.previewDevice || "desktop";
+    tabModel.simulator.landscape = this.creator.previewOrientation != "portrait";
+    this.model = tabModel;
     this.update();
   }
   public update(): void {
@@ -90,6 +105,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     const options = {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
     };
+    this.testAgainAction.locStrsChanged();
     this.model.testAgainAction = this.testAgainAction;
     this.model.prevPageAction = this.prevPageAction;
     this.model.nextPageAction = this.nextPageAction;
@@ -107,6 +123,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     if (this.model) {
+      this._previewDevice = this.model.simulator.device;
       this.simulatorTheme = this.model.simulator.survey.css;
       this.model.onSurveyCreatedCallback = undefined;
       this.model.dispose();
@@ -116,19 +133,6 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
     return true;
-  }
-  private getAvailableThemes(themeMapper: Array<any>): Array<Action> {
-    const availableThemesToItems = [];
-    for (var i = 0; i < themeMapper.length; i++) {
-      const item = themeMapper[i];
-      const action = new Action({ id: item.name + "_themeSwitcher", locTitleName: this.getThemeLocName(item.name) });
-      (<any>action).value = item.name;
-      availableThemesToItems.push(action);
-    }
-    return availableThemesToItems;
-  }
-  private getThemeLocName(name: string): string {
-    return "ed." + name + "Theme";
   }
   public createActions(): Array<Action> {
     const items: Array<Action> = [];
@@ -149,9 +153,10 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.deviceSelectorAction = createDropdownActionModel({
         id: "deviceSelector",
         iconName: "icon-device-desktop",
+        iconSize: "auto",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab);
+          return notShortCircuitAnd(this.creator.activeTab === "preview", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
         }),
       }, {
         items: deviceSelectorItems,
@@ -159,6 +164,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         onSelectionChanged: (item: any) => { this.setDevice(item.id); },
         horizontalPosition: "center",
         cssClass: "svc-creator-popup",
+        cssClasses: listComponentCss,
         onHide: () => { this.deviceSelectorAction.enabled = true; },
         onShow: () => { this.deviceSelectorAction.enabled = false; }
       });
@@ -167,9 +173,10 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.orientationSelectorAction = new Action({
         id: "orientationSelector",
         iconName: "icon-device-rotate",
+        iconSize: "auto",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab);
+          return notShortCircuitAnd(this.creator.activeTab === "preview", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
         }),
         action: () => {
           this.model.simulator.landscape = !this.model.simulator.landscape;
@@ -182,6 +189,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.invisibleToggleAction = new Action({
         id: "showInvisible",
         iconName: "icon-invisible-items",
+        iconSize: "auto",
         mode: "small",
         needSeparator: <any>new ComputedUpdater<boolean>(() => {
           return !this.creator.isMobileView;
@@ -190,65 +198,11 @@ export class TabTestPlugin implements ICreatorPlugin {
         visible: false,
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
-          this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
+          this.invisibleToggleAction.active = !this.invisibleToggleAction.active;
           this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
         }
       });
       items.push(this.invisibleToggleAction);
-    }
-
-    let themeMapper = StylesManager.getIncludedThemeCss() as Array<any>;
-    const sequence = ["defaultV2", "modern", "default"];
-    themeMapper = themeMapper.sort((theme1, theme2) => {
-      return sequence.indexOf(theme1.name) > sequence.indexOf(theme2.name) ? 1 : -1;
-    });
-    let availableThemesToItems = this.getAvailableThemes(themeMapper);
-
-    if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1 && !this.creator.showThemeTab) {
-      this.changeThemeModel = new ListModel(
-        availableThemesToItems,
-        (item: any) => {
-          if (!!this.model) {
-            this.model.setTheme(item.value, themeMapper);
-          }
-          this.changeThemeAction.locTitleName = this.getThemeLocName(item.value);
-          this.changeThemeAction.locStrsChanged();
-          this.changeThemePopupModel.toggleVisibility();
-        },
-        true
-      );
-      this.changeThemeModel.locOwner = this.creator;
-
-      this.changeThemePopupModel = new PopupModel(
-        "sv-list",
-        { model: this.changeThemeModel },
-        {
-          verticalPosition: "bottom",
-          horizontalPosition: "center",
-          cssClass: "svc-creator-popup",
-        }
-      );
-      const getStartThemeName = (): string => {
-        const availableThemes = themeMapper.filter(item => item.theme.root === this.simulatorTheme.root);
-        return availableThemes.length > 0 ? availableThemes[0].name : "defaultV2";
-      };
-      this.changeThemeAction = new Action({
-        id: "themeSwitcher",
-        iconName: "icon-theme",
-        component: "sv-action-bar-item-dropdown",
-        mode: "large",
-        locTitleName: this.getThemeLocName(getStartThemeName()),
-        needSeparator: true,
-        visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.showSimulatorInTestSurveyTab, this.creator.activeTab === "test");
-        }),
-        action: () => {
-          this.changeThemePopupModel.toggleVisibility();
-        },
-        popupModel: this.changeThemePopupModel
-      });
-
-      items.push(this.changeThemeAction);
     }
 
     this.languageSelectorAction = createDropdownActionModel({
@@ -267,6 +221,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       },
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
+      cssClasses: listComponentCss,
       onHide: () => { this.languageSelectorAction.enabled = true; },
       onShow: () => { this.languageSelectorAction.enabled = false; }
     });
@@ -275,7 +230,8 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.designerAction = new Action({
       id: "svd-designer",
       iconName: "icon-config",
-      action: () => { this.creator.makeNewViewActive("designer"); },
+      iconSize: "auto",
+      action: () => { this.creator.switchTab("designer"); },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
       showTitle: false
@@ -284,6 +240,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.previewAction = new Action({
       id: "svd-preview",
       iconName: "icon-preview",
+      iconSize: "auto",
       active: true,
       visible: this.createVisibleUpdater(),
       locTitleName: "tabs.preview",
@@ -294,6 +251,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.prevPageAction = new Action({
       id: "prevPage",
       iconName: "icon-arrow-left_16x16",
+      iconSize: "auto",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
       }),
@@ -303,6 +261,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.nextPageAction = new Action({
       id: "nextPage",
       iconName: "icon-arrow-right_16x16",
+      iconSize: "auto",
       visible: false
     });
     return items;

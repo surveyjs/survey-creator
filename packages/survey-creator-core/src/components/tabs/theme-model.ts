@@ -5,16 +5,18 @@ import { settings } from "../../creator-settings";
 
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
-import { createBoxShadowReset } from "./theme-custom-questions/shadow-effects";
+import { createBoxShadowReset, trimBoxShadowValue } from "./theme-custom-questions/shadow-effects";
 import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
-import { ColorCalculator, assign, ingectAlpha, parseColor, roundTo2Decimals } from "../../utils/utils";
+import { assign, roundTo2Decimals } from "../../utils/utils";
+import { ColorCalculator, ingectAlpha, parseColor } from "../../utils/color-utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
+import { SurveyCreatorModel } from "../../creator-base";
 
 export * from "./header-model";
 
-Object.keys(LibraryThemes).forEach(libraryThemeName => {
+Object.keys(LibraryThemes || {}).forEach(libraryThemeName => {
   const libraryTheme: ITheme = LibraryThemes[libraryThemeName];
   const creatorThemeVariables = {};
   const creatorTheme = {};
@@ -31,6 +33,14 @@ export function getThemeFullName(theme: ITheme) {
     fullThemeName += "-panelless";
   }
   return fullThemeName;
+}
+
+export function isThemeEmpty(theme: ITheme) {
+  if (!theme) {
+    return true;
+  }
+  const themeProperties = Object.keys(theme);
+  return themeProperties.length == 0 || themeProperties.length == 1 && themeProperties[0] == "cssVariables" && Object.keys(theme.cssVariables).length == 0;
 }
 
 export function findSuitableTheme(themeName: string, colorPalette: string, isPanelless: boolean, probeThemeFullName: string) {
@@ -89,10 +99,11 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
 }
 
 export class ThemeModel extends Base implements ITheme {
-  public static DefaultTheme = Themes["default-light"];
+  public static DefaultTheme = Themes["default-light"] || {};
   public undoRedoManager: UndoRedoManager;
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();
+  private dependentColorNames = ["--sjs-primary-backcolor-light", "--sjs-primary-backcolor-dark"];
 
   @property() backgroundImage: string;
   @property() backgroundImageFit: "auto" | "contain" | "cover";
@@ -188,25 +199,24 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   private initializeColorCalculator(cssVariables: { [index: string]: string }) {
-    if (!cssVariables["--sjs-primary-backcolor"] ||
-      !cssVariables["--sjs-primary-backcolor-light"] ||
-      !cssVariables["--sjs-primary-backcolor-dark"]) {
+    const baseColorName = "--sjs-primary-backcolor";
+    const cssValuesExists = this.dependentColorNames.every(name => !!cssVariables[name]);
+    if (!cssVariables[baseColorName] || !cssValuesExists) {
       return;
     }
 
-    this.colorCalculator.initialize(
-      cssVariables["--sjs-primary-backcolor"],
-      cssVariables["--sjs-primary-backcolor-light"],
-      cssVariables["--sjs-primary-backcolor-dark"]
-    );
+    const dependentColorValues = this.dependentColorNames.map(name => { return cssVariables[name]; });
+    this.colorCalculator.initializeColorSettings(cssVariables[baseColorName], dependentColorValues);
   }
 
   private updatePropertiesDependentOnPrimaryColor(value: string) {
-    this.colorCalculator.calculateColors(value);
-    this.setPropertyValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
-    this.setPropertyValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
-    this.setThemeCssVariablesChanges("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
-    this.setThemeCssVariablesChanges("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+    if (!this.colorCalculator.isInitialized) return;
+
+    const newDependentColors = this.colorCalculator.calculateDependentColorValues(value);
+    this.dependentColorNames.forEach((name, index) => {
+      this.setPropertyValue(name, newDependentColors[index]);
+      this.setThemeCssVariablesChanges(name, newDependentColors[index]);
+    });
   }
   private cssVariablePropertiesChanged(name: string, value: any, property: JsonObjectProperty) {
     let nameProcessed = true;
@@ -254,8 +264,10 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   private setThemeCssVariablesChanges(name: string, value: any) {
-    this.themeCssVariablesChanges[name] = value;
-    this.onThemePropertyChanged.fire(this, { name, value });
+    if (this.themeCssVariablesChanges[name] !== value) {
+      this.themeCssVariablesChanges[name] = value;
+      this.onThemePropertyChanged.fire(this, { name, value });
+    }
   }
 
   constructor() {
@@ -279,13 +291,13 @@ export class ThemeModel extends Base implements ITheme {
     };
   }
 
-  initialize(surveyTheme: ITheme = {}, survey?: SurveyModel) {
+  initialize(surveyTheme: ITheme = {}, survey?: SurveyModel, creator?: SurveyCreatorModel) {
     this._defaultSessionTheme = ThemeModel.DefaultTheme;
     this.backgroundImage = "backgroundImage" in surveyTheme ? surveyTheme.backgroundImage : survey?.backgroundImage;
     this.backgroundImageFit = surveyTheme.backgroundImageFit !== undefined ? surveyTheme.backgroundImageFit : survey?.backgroundImageFit;
     this.backgroundImageAttachment = surveyTheme.backgroundImageAttachment !== undefined ? surveyTheme.backgroundImageAttachment : survey?.backgroundImageAttachment;
     this.backgroundOpacity = ((surveyTheme.backgroundOpacity !== undefined ? surveyTheme.backgroundOpacity : survey?.backgroundOpacity) || 1) * 100;
-    this.loadTheme(surveyTheme);
+    this.loadTheme(surveyTheme, creator && creator.preferredColorPalette);
     this.header["logoPosition"] = survey?.logoPosition;
     this.undoRedoManager = new UndoRedoManager();
   }
@@ -323,11 +335,11 @@ export class ThemeModel extends Base implements ITheme {
   public onAllowModifyTheme = new EventBase<ThemeModel, { theme: ITheme, allow: boolean }>();
 
   private blockThemeChangedNotifications = 0;
-  public loadTheme(theme: ITheme) {
+  public loadTheme(theme: ITheme, preferredColorPalette?: string) {
     this.blockThemeChangedNotifications += 1;
     try {
-      let probeThemeFullName = getThemeFullName(theme);
-      const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette, theme.isPanelless, probeThemeFullName);
+      let probeThemeFullName = getThemeFullName({ themeName: theme.themeName, colorPalette: theme.colorPalette || preferredColorPalette, isPanelless: theme.isPanelless });
+      const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette || preferredColorPalette, theme.isPanelless, probeThemeFullName);
       const themeChanges = getThemeChanges(theme, baseTheme);
       this.themeName = themeChanges.themeName;
       this.colorPalette = themeChanges.colorPalette as any;
@@ -610,8 +622,18 @@ Serializer.addClass(
           editor.min = 0;
         }
       }
-    },
-    {
+    }, {
+      name: "advancedMode",
+      type: "switchToggle",
+      isSerializable: false,
+      default: false,
+      onPropertyEditorUpdate: function (obj: any, editor: any) {
+        if (!!editor) {
+          editor.titleLocation = "hidden";
+          editor.renderAs = "switch";
+        }
+      }
+    }, {
       type: "spinedit",
       isSerializable: false,
       name: "fontSize",
@@ -777,6 +799,9 @@ Serializer.addProperties("theme",
   }, {
     type: "shadoweffects",
     name: "--sjs-shadow-small",
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("--sjs-shadow-small", trimBoxShadowValue(value));
+    },
   }, {
     type: "font",
     name: "questionTitle",
@@ -797,6 +822,9 @@ Serializer.addProperties("theme",
   {
     type: "shadoweffects",
     name: "--sjs-shadow-inner",
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("--sjs-shadow-inner", trimBoxShadowValue(value));
+    },
   }, {
     type: "font",
     name: "editorFont",
@@ -842,10 +870,34 @@ Serializer.addProperties("theme",
   { name: "--sjs-secondary-backcolor-semi-light", visible: false },
   { name: "--sjs-secondary-forecolor", visible: false },
   { name: "--sjs-secondary-forecolor-light", visible: false },
-  { name: "--sjs-shadow-small-reset", visible: false },
-  { name: "--sjs-shadow-medium", visible: false },
-  { name: "--sjs-shadow-large", visible: false },
-  { name: "--sjs-shadow-inner-reset", visible: false },
+  {
+    name: "--sjs-shadow-small-reset",
+    visible: false,
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("--sjs-shadow-small-reset", trimBoxShadowValue(value));
+    },
+  },
+  {
+    name: "--sjs-shadow-medium",
+    visible: false,
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("--sjs-shadow-medium", trimBoxShadowValue(value));
+    },
+  },
+  {
+    name: "--sjs-shadow-large",
+    visible: false,
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("--sjs-shadow-large", trimBoxShadowValue(value));
+    },
+  },
+  {
+    name: "--sjs-shadow-inner-reset",
+    visible: false,
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("--sjs-shadow-inner-reset", trimBoxShadowValue(value));
+    },
+  },
   { name: "--sjs-border-light", visible: false },
   { name: "--sjs-border-default", visible: false },
   { name: "--sjs-border-inside", visible: false },

@@ -66,7 +66,7 @@ module.exports = function (options) {
   function createStylesBundleWithFonts() {
     const getdir = (filename) => {
       return buildPath + filename;
-    }
+    };
 
     if (isProductionBuild) {
       let outputPath = getdir("survey-creator-core.min.css");
@@ -86,26 +86,26 @@ module.exports = function (options) {
 
   }
 
-  var percentage_handler = function handler(percentage, msg) {
-    if (0 == percentage) {
-      console.log("Build started... good luck!");
-    } else if (1 == percentage) {
-      if (isProductionBuild) {
-        fs.createReadStream("./README.md").pipe(
-          fs.createWriteStream(buildPath + "README.md")
-        );
+  var percentage_handler = function(options) {
+    return function handler(percentage, msg) {
+      if (0 == percentage) {
+        console.log("Build started... good luck!");
+      } else if (1 == percentage && (options.isCore || options.isCore === undefined)) {
+        if (isProductionBuild) {
+          fs.createReadStream("./README.md").pipe(
+            fs.createWriteStream(buildPath + "README.md")
+          );
+        }
+        if (isProductionBuild) {
+          fs.writeFileSync(
+            buildPath + "package.json",
+            JSON.stringify(buildPlatformJson, null, 2),
+            "utf8"
+          );
+        }
+        return createStylesBundleWithFonts();
       }
-
-      if (isProductionBuild) {
-        fs.writeFileSync(
-          buildPath + "package.json",
-          JSON.stringify(buildPlatformJson, null, 2),
-          "utf8"
-        );
-      }
-
-      return createStylesBundleWithFonts();
-    }
+    };
   };
 
   var config = {
@@ -151,6 +151,7 @@ module.exports = function (options) {
             {
               loader: "sass-loader",
               options: {
+                api: "modern",
                 sourceMap: options.buildType !== "prod",
               },
             },
@@ -164,6 +165,10 @@ module.exports = function (options) {
           test: /\.svg$/,
           loader: "svg-inline-loader",
         },
+        {
+          test: /\.(png|jpg)$/,
+          type: "asset/inline" // https://webpack.js.org/guides/asset-modules/
+        }
       ],
     },
     output: {
@@ -171,25 +176,31 @@ module.exports = function (options) {
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
       library: {
         root: options.libraryName || "SurveyCreatorCore",
-        amd: '[dashedname]',
-        commonjs: '[dashedname]',
+        amd: "[dashedname]",
+        commonjs: "[dashedname]",
       },
       libraryTarget: "umd",
-      globalObject: 'this',
+      globalObject: "this",
       umdNamedDefine: true
     },
     externals: {
-      knockout: {
-        root: "ko",
-        commonjs2: "knockout",
-        commonjs: "knockout",
-        amd: "knockout",
-      },
       "survey-core": {
         root: "Survey",
         commonjs2: "survey-core",
         commonjs: "survey-core",
         amd: "survey-core",
+      },
+      "survey-core/themes": {
+        root: "SurveyTheme",
+        commonjs2: "survey-core/themes",
+        commonjs: "survey-core/themes",
+        amd: "survey-core/themes",
+      },
+      "survey-creator-core/themes": {
+        root: "SurveyCreatorTheme",
+        commonjs2: "survey-creator-core/themes",
+        commonjs: "survey-creator-core/themes",
+        amd: "survey-creator-core/themes",
       },
     },
     plugins: [

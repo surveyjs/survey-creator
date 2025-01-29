@@ -11,7 +11,7 @@ import {
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { ISurveyCreatorOptions } from "./creator-settings";
-import { wrapTextByCurlyBraces } from "./utils/utils";
+import { wrapTextByCurlyBraces } from "./utils/creator-utils";
 
 export enum ObjType {
   Unknown = "unknown",
@@ -24,9 +24,9 @@ export enum ObjType {
 export class SurveyHelper {
   public static getNewElementName(el: ISurveyElement): string {
     const survey: SurveyModel = (<any>el).getSurvey();
-    if(!survey) return el.name;
-    if(el.isPage) return this.getNewPageName(survey.pages);
-    if(el.isPanel) return this.getNewPanelName(survey.getAllPanels());
+    if (!survey) return el.name;
+    if (el.isPage) return this.getNewPageName(survey.pages);
+    if (el.isPanel) return this.getNewPanelName(survey.getAllPanels());
     return this.getNewQuestionName(survey.getAllQuestions(false, false, true));
   }
   public static getNewPageName(objs: Array<any>) {
@@ -170,20 +170,26 @@ export class SurveyHelper {
     if (!!canShow && !canShow(obj, property)) return false;
     return true;
   }
-  public static scrollIntoViewIfNeeded(el: HTMLElement) {
+  public static isNeedScrollIntoView(el: HTMLElement, scrollIfElementBiggerThanContainer: boolean = false): undefined | "top" | "bottom" {
     if (!el || !el.scrollIntoView) return;
     var rect = el.getBoundingClientRect();
     var scrollableDiv = SurveyHelper.getScrollableDiv(el);
     if (!scrollableDiv) return;
     var height = scrollableDiv.clientHeight;
     if (rect.top < scrollableDiv.offsetTop) {
-      el.scrollIntoView(true);
+      return "top";
     } else {
       let offsetTop = height + scrollableDiv.offsetTop;
-      if (rect.bottom > offsetTop && rect.height < height) {
-        el.scrollIntoView(false);
+      if (rect.bottom > offsetTop && (rect.height < height || scrollIfElementBiggerThanContainer)) {
+        return "bottom";
       }
     }
+  }
+  public static scrollIntoViewIfNeeded(el: HTMLElement, getOptions?: (overTop: boolean) => ScrollIntoViewOptions, scrollIfElementBiggerThanContainer: boolean = false) {
+    const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el, scrollIfElementBiggerThanContainer);
+    if (!isNeedScroll) return;
+    const isNeedScrollToTop = isNeedScroll === "top";
+    el.scrollIntoView(getOptions ? getOptions(isNeedScrollToTop) : isNeedScrollToTop);
   }
   public static getScrollableDiv(el: HTMLElement): HTMLElement {
     while (!!el) {
@@ -270,8 +276,8 @@ export class SurveyHelper {
     delete json["maxWidth"];
   }
   private static deleteRandomProperties(json: any) {
-    ["choicesOrder", "rowsOrder"].forEach(prop => {
-      if(json[prop] === "random") {
+    ["choicesOrder", "rowOrder"].forEach(prop => {
+      if (json[prop] === "random") {
         delete json[prop];
       }
     });
@@ -287,7 +293,7 @@ export class SurveyHelper {
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.rates);
   }
   private static deleteConditionPropertiesFromArray(jsonArray: Array<any>): void {
-    if(!Array.isArray(jsonArray)) return;
+    if (!Array.isArray(jsonArray)) return;
     jsonArray.forEach(item => {
       SurveyHelper.deleteConditionProperties(item);
     });

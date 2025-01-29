@@ -260,3 +260,22 @@ test("Delete random properties properties", () => {
   etalon.title = "q2";
   expect(editorQuestionJSON).toEqual(etalon);
 });
+test("Default Editor Value for panel dynamic with preset panel count", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "paneldynamic",
+        "name": "q1",
+        "templateElements": [{ "type": "text", name: "q2" }],
+        "panelCount": 2
+      }
+    ]
+  });
+  let question = survey.getQuestionByName("q1");
+  let editor = new DefaultValueEditor(question, "defaultValue");
+  const panel = <QuestionPanelDynamicModel>editor.question;
+  expect(panel.panels).toHaveLength(2);
+  expect(panel.value).toStrictEqual([{}, {}]);
+  panel.panels[0].getQuestionByName("q2").value = 1;
+  expect(panel.panels).toHaveLength(2);
+});

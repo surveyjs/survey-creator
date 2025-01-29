@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables" as *;
 
 // .svc-question__content {
 //   .sd-table {
@@ -14,59 +14,55 @@
 
 .svc-question__adorner {
   .sd-table .sd-table__cell--column-title {
-    padding: 0  calcSize(1);
+    padding: 0 calcSize(1);
+
     .svc-matrix-cell {
       padding: calcSize(1.5) calcSize(1);
+    }
+
+    &.sd-table__cell--drag {
+      padding-right: 0;
+      padding-left: 0;
     }
   }
 }
 
 .svc-matrix-cell--selected {
   position: absolute;
-  border: calcSize(0.25) solid $secondary;
+  border: calcSize(0.25) solid var(--sjs-secondary-background-500, #19B394FF);
   border-radius: calcSize(0.5);
   top: calcSize(0);
   left: calcSize(0);
   right: calcSize(0);
   bottom: calcSize(0);
   display: none;
+
   &.svc-visible {
     display: block;
   }
 }
 
-.svc-hovered > .svc-matrix-cell--selected:not(.svc-visible) {
+.svc-hovered>.svc-matrix-cell--selected:not(.svc-visible) {
   border: calcSize(0.25) solid $secondary-light;
   border-radius: calcSize(0.5);
   display: block;
 }
 
 .svc-matrix-cell__question-controls {
-  display: none;
+  opacity: 0;
   position: absolute;
   top: calc(50% - 3 * #{$base-unit});
   left: calc(50% - 3 * #{$base-unit});
   z-index: 2;
+  transition: opacity $creator-transition-duration;
 }
 
 .svc-matrix-cell__question-controls-button {
-  display: block;
-  width: calcSize(6);
-  height: calcSize(6);
-  background: $background;
   border: 1px solid $border;
-  box-sizing: border-box;
-  border-radius: 50%;
-  padding: calcSize(1.5);
-  cursor: pointer;
-
-  use {
-    fill: $foreground-light;
-  }
 }
 
 .svc-matrix-cell:hover .svc-matrix-cell__question-controls {
-  display: block;
+  opacity: 1;
 }
 
 .svc-question__content--in-popup {
@@ -88,5 +84,15 @@
 .svc-question__content {
   .sd-table__cell--detail-panel {
     padding-left: calcSize(6);
+  }
+}
+
+.svc-question__content {
+  .sd-drag-element__svg {
+    visibility: visible;
+    cursor: initial;
+    use {
+      fill: $foreground-light;
+    }
   }
 }

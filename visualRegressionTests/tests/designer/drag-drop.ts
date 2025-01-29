@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, changeToolboxScrolling, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength, RatingToolboxItem } from "../../helper";
+import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, changeToolboxScrolling, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength, RatingToolboxItem, setShowAddQuestionButton, setAllowEditSurveyTitle, hideAllAdornerActions, upArrowImageLink, downArrowImageLink, leftArrowImageLink } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
@@ -8,9 +8,14 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 
 test("Ghost Survey Element", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await setJSON({ pages: [{ name: "page1" }] });
+    await hideAllAdornerActions();
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
       window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
@@ -31,9 +36,14 @@ test("Ghost Survey Element", async (t) => {
 
 test("Empty page", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await setJSON({ pages: [{ name: "page1" }] });
+    await hideAllAdornerActions();
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
       window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
@@ -54,9 +64,14 @@ test("Empty page", async (t) => {
 
 test("Ghost Survey Element after several drops", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await setJSON({ pages: [{ name: "page1" }] });
+    await hideAllAdornerActions();
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
     const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
@@ -99,9 +114,14 @@ test("Ghost Survey Element after several drops", async (t) => {
 
 test("Toolbox Item State After Drag", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await setJSON({ pages: [{ name: "page1" }] });
+    await hideAllAdornerActions();
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
@@ -116,9 +136,11 @@ test("Toolbox Item State After Drag", async (t) => {
 
 test("Empty Panel Styles", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(2560, 1440);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -147,9 +169,11 @@ test("Empty Panel Styles", async (t) => {
 
 test("Empty Panel Dynamic Styles", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(2560, 1440);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -177,9 +201,11 @@ test("Empty Panel Dynamic Styles", async (t) => {
 
 test("Choices: Ranking", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(2560, 1440);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -214,9 +240,11 @@ test("Choices: Ranking", async (t) => {
 
 test("Choices: Mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(390, 844);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -241,10 +269,12 @@ test("Choices: Mobile", async (t) => {
 });
 
 test("Choices: Ranking: Mobile", async (t) => {
+  await hideAllAdornerActions();
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(390, 844);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -270,9 +300,11 @@ test("Choices: Ranking: Mobile", async (t) => {
 
 test("Choices: DropDown: Mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(390, 844);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -298,6 +330,7 @@ test("Choices: DropDown: Mobile", async (t) => {
 
 test("Matrix: Property Grid: Choices", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(2560, 1440);
 
     const patchMatrixDragDropToDisableDrop = ClientFunction(() => {
@@ -307,6 +340,7 @@ test("Matrix: Property Grid: Choices", async (t) => {
     });
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -363,6 +397,7 @@ test("Matrix: Property Grid: Choices: Scroll", async (t) => {
     });
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -403,9 +438,11 @@ test("Matrix: Property Grid: Choices: Scroll", async (t) => {
 test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await explicitErrorHandler();
+    await hideAllAdornerActions();
     await t.resizeWindow(2560, 1440);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -415,20 +452,20 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
               "name": "question1",
               "choices": [
                 {
-                  "value": "lion",
-                  "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+                  "value": "up",
+                  "imageLink": upArrowImageLink
                 },
                 {
                   "value": "giraffe",
                   "imageLink": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
                 },
                 {
-                  "value": "panda",
-                  "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+                  "value": "down",
+                  "imageLink": downArrowImageLink
                 },
                 {
-                  "value": "camel",
-                  "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+                  "value": "left",
+                  "imageLink": leftArrowImageLink
                 }
               ]
             }
@@ -457,11 +494,13 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
 // https://github.com/surveyjs/survey-creator/issues/3234
 test("Drag Drop to Multiline from Toolbox", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     changeToolboxScrolling(false);
     await explicitErrorHandler();
     await t.resizeWindow(2584, 1440);
 
     const json = {
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -500,10 +539,13 @@ test("Drag Drop to Multiline from Toolbox", async (t) => {
 
 test("Drag Drop to Multiline styles", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await explicitErrorHandler();
     await t.resizeWindow(832, 600);
+    await setShowAddQuestionButton(false);
 
     const json = {
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -557,10 +599,12 @@ test("Drag Drop to Multiline styles", async (t) => {
 
 test("Drag Drop inside panel dynamic top indicator", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await explicitErrorHandler();
     await t.resizeWindow(832, 600);
 
     const json = {
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -604,6 +648,7 @@ test("Drag Drop inside panel dynamic top indicator", async (t) => {
 
 test("Toolbox Custom Component Icon", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(2560, 1440);
 
     const changeIconRatingForToolbox = ClientFunction((iconName) => {
@@ -611,6 +656,7 @@ test("Toolbox Custom Component Icon", async (t) => {
     });
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -643,9 +689,11 @@ test("Toolbox Custom Component Icon", async (t) => {
 
 test("Drag Drop (choices): scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
     await t.resizeWindow(1000, 500);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -675,6 +723,8 @@ test("Drag Drop (choices): scroll", async (t) => {
 
 test("Drag Drop to collapsed panel", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
     await ClientFunction(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
@@ -683,6 +733,7 @@ test("Drag Drop to collapsed panel", async (t) => {
 
     await t.resizeWindow(1600, 1000);
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -722,9 +773,11 @@ test("Drag Drop to collapsed page", async (t) => {
       window["creator"].expandOnDragTimeOut = 1000000;
       document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
     })();
-
-    await t.resizeWindow(1600, 500);
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+    await t.resizeWindow(1652, 500);
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -753,5 +806,113 @@ test("Drag Drop to collapsed page", async (t) => {
       .dispatchEvent(toolboxToolAction, "pointerdown")
       .hover(Page);
     await takeElementScreenshot("drag-drop-in-collapsed-page.png", ".svc-tab-designer_content", t, comparer);
+  });
+});
+
+fixture`DragDrop custom widget Screenshot`.page`${url}`.beforeEach(async (t) => {
+});
+
+test("Drag indicator for custom widget", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => {
+      const widget = {
+        name: "peoplepicker",
+        title: "People Picker",
+        iconName: "search",
+        widgetIsLoaded: function () { return true; },
+        isFit: function (question) { return question.getType() === "peoplepicker"; },
+        activatedByChanged: function (activatedBy) { window["Survey"].Serializer.addClass("peoplepicker", [], null, "empty"); },
+        isDefaultRender: false,
+        htmlTemplate: `
+                  <div>
+                    <label class="dds-search">
+                    <input type="text" placeholder="Search by name or email" value="">
+                    </label>
+                  </div>
+                `,
+        afterRender: (question, element) => {
+          const input = element.getElementsByTagName("input")[0];
+          input.style.width = "100%";
+          input.style.padding = "8px auto";
+        },
+      };
+
+      window["Survey"].CustomWidgetCollection.Instance.addCustomWidget(widget, "customtype");
+
+      const widgetTemplateForKo = document.createElement("script");
+      widgetTemplateForKo.setAttribute("id", "survey-widget-peoplepicker");
+      widgetTemplateForKo.setAttribute("type", "text/html");
+      widgetTemplateForKo.innerHTML = `
+                  <div>
+                    <label class="dds-search">
+                    <input type="text" placeholder="Search by name or email" value="">
+                    </label>
+                  </div>
+                `;
+      document.body.appendChild(widgetTemplateForKo);
+    })();
+    await hideAllAdornerActions();
+    await t.resizeWindow(1252, 900);
+    await setShowAddQuestionButton(false);
+
+    const json = {
+      showQuestionNumbers: "on",
+      elements: [{ type: "peoplepicker", name: "q1" }, { type: "peoplepicker", name: "q2" }]
+    };
+    await setJSON(json);
+
+    await patchDragDropToDisableDrop();
+
+    const q1 = Selector("[data-sv-drop-target-survey-element='q1']");
+    await t
+      .hover(RatingToolboxItem)
+      .dragToElement(RatingToolboxItem, q1, { speed: 0.5, offsetX: 100, offsetY: 10 });
+
+    await takeElementScreenshot("drag-drop-over-custom-widget.png", Selector(".svc-page").nth(0), t, comparer);
+  });
+});
+
+test("Drag Drop Indicator: Inside Panel: Rows", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await hideAllAdornerActions();
+    await t.resizeWindow(1000, 500);
+
+    const json = {
+      showQuestionNumbers: "on",
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel1",
+              "elements": [
+                {
+                  "type": "text",
+                  "name": "question1"
+                },
+                {
+                  "type": "text",
+                  "name": "question2",
+                  "startWithNewLine": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    await patchDragDropToDisableDrop();
+
+    const panelRow = Selector(".sd-row__panel");
+    const CheckboxItem = Selector("[aria-label='Checkboxes']");
+    await t
+      .hover(CheckboxItem)
+      .dragToElement(CheckboxItem, panelRow, { speed: 0.5, destinationOffsetY: 0, destinationOffsetX: 50 });
+
+    await takeElementScreenshot("drag-drop-indicator-inside-panel-rows.png", Selector(".svc-question__content--panel"), t, comparer);
   });
 });

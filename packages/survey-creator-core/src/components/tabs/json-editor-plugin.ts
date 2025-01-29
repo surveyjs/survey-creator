@@ -2,7 +2,7 @@ import { Base, property, ListModel, Action, ComputedUpdater } from "survey-core"
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
-import { saveToFileHandler } from "../../utils/utils";
+import { saveToFileHandler } from "../../utils/html-element-utils";
 import { settings } from "../../creator-settings";
 
 const maxErrorLength = 150;
@@ -96,7 +96,7 @@ export abstract class JsonEditorBaseModel extends Base {
         title: title,
         tooltip: error.text,
         iconName: "icon-error",
-        iconSize: 16,
+        iconSize: "auto",
         data: {
           error: error,
           showFixButton: error.isFixable,
@@ -162,9 +162,10 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
     this.importAction = new Action({
       id: "svc-json-import",
       iconName: "icon-load",
+      iconSize: "auto",
       locTitleName: "ed.surveyJsonImportButton",
       locTooltipName: "ed.surveyJsonImportButton",
-      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "editor"; }),
+      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "json"; }),
       mode: "small",
       component: "sv-action-bar-item",
       needSeparator: true,
@@ -188,9 +189,10 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
     this.exportAction = new Action({
       id: "svc-json-export",
       iconName: "icon-download",
+      iconSize: "auto",
       locTitleName: "ed.surveyJsonExportButton",
       locTooltipName: "ed.surveyJsonExportButton",
-      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "editor"; }),
+      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "json"; }),
       mode: "small",
       component: "sv-action-bar-item",
       action: () => {
@@ -202,9 +204,10 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
     this.copyAction = new Action({
       id: "svc-json-copy",
       iconName: "icon-copy",
+      iconSize: "auto",
       locTitleName: "ed.surveyJsonCopyButton",
       locTooltipName: "ed.surveyJsonCopyButton",
-      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "editor"; }),
+      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "json"; }),
       mode: "small",
       component: "sv-action-bar-item",
       action: () => {
@@ -222,13 +225,9 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     if (this.model) {
-      const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
-      if (!textWorker.isJsonCorrect) {
-        return false;
-      }
       if (!this.model.readOnly && this.model.isJSONChanged) {
         this.creator.selectedElement = undefined;
-        this.creator.text = this.model.text;
+        this.creator.changeText(this.model.text, false, true);
         this.creator.selectedElement = this.creator.survey;
         this.creator.setModified({ type: "JSON_EDITOR" });
       }

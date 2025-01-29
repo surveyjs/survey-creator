@@ -2,21 +2,22 @@ import {
   Base,
   AdaptiveActionContainer,
   Action,
-  SurveyModel,
   SurveyElement,
   property,
-  actionModeType,
   IAction,
   ActionContainer,
-  ComputedUpdater
+  ComputedUpdater,
+  AnimationBoolean,
+  IAnimationConsumer,
+  CssClassBuilder
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
-import { settings } from "../creator-settings";
-import { DesignerStateManager } from "./tabs/designer-state-manager";
-import { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { isPanelDynamic } from "../survey-elements";
+import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
+import { listComponentCss } from "./list-theme";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
+  public alwaysShrink = false;
   private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
     return (item.innerItem.location == "start" && shrinkTypeConverterAction || item.innerItem.location != "start");
   }
@@ -42,28 +43,36 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
     return item.maxDimension;
   }
 
-  public fit(dimension: number, dotsItemSize: number) {
-    if (dimension <= 0) return;
+  constructor() {
+    super();
+    this.dotsItem.iconSize = "auto" as any;
+    this.dotsItem.popupModel.cssClass += " svc-creator-popup";
+    this.hiddenItemsListModel.cssClasses = listComponentCss;
+  }
+
+  public fit(options: { availableSpace: number, gap?: number }) {
+    if (options.availableSpace <= 0) return;
 
     this.dotsItem.visible = false;
     const items = this.visibleActions;
 
-    if (dimension >= items.reduce((sum, i) => sum += i.maxDimension, 0)) {
-      items.forEach(i => i.mode = "large");
-      return;
-    }
+    if (!this.alwaysShrink) {
+      if (options.availableSpace >= items.reduce((sum, i) => sum += i.maxDimension, 0)) {
+        items.forEach(i => i.mode = "large");
+        return;
+      }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false), 0)) {
-      this.setModeForActions(false);
-      return;
-    }
+      if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, false), 0)) {
+        this.setModeForActions(false);
+        return;
+      }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, ["convertInputType"]), 0)) {
-      this.setModeForActions(false, ["convertInputType"]);
-      return;
+      if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, ["convertInputType"]), 0)) {
+        this.setModeForActions(false, ["convertInputType"]);
+        return;
+      }
     }
-
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, true), 0)) {
+    if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, true), 0)) {
       this.setModeForActions(true);
       return;
     }
@@ -85,21 +94,25 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 }
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
-  public actionContainer: ActionContainer;
+  public static AdornerValueName = "__sjs_creator_adorner";
+  public actionContainer: SurveyElementActionContainer;
+  public topActionContainer: ActionContainer;
   protected expandCollapseAction: IAction;
-  protected designerStateManager: DesignerStateManager;
   @property({ defaultValue: true }) allowDragging: boolean;
+  @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
+  public rootElement: HTMLElement;
 
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
   }
-
+  @property({ defaultValue: true }) needToRenderContent: boolean;
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.renderedCollapsed = val;
-      if (target.designerStateManager && target.surveyElement) {
-        target.designerStateManager.getElementState(target.surveyElement).collapsed = val;
+      if (!val) target.needToRenderContent = true;
+      if (target.creator.designerStateManager && !target.creator.designerStateManager.isSuspended && target.surveyElement) {
+        target.creator.designerStateManager.getElementState(target.surveyElement).collapsed = val;
       }
       setTimeout(() => {
         target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
@@ -107,11 +120,132 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       }, 50);
     }
   }) collapsed: boolean;
-  @property() renderedCollapsed: boolean;
+  @property() private _renderedCollapsed: boolean;
 
-  protected createActionContainer(): ActionContainer {
+  @property() isAnimationRunningCollapsed: boolean;
+
+  protected getAnimatedElement() {
+    return null;
+  }
+
+  protected getInnerAnimatedElements() {
+    return [] as Array<HTMLElement>;
+  }
+
+  protected getCollapsingCssClassName() {
+    return "svc-question--leave";
+  }
+  protected getExpandingCssClassName() {
+    return "svc-question--enter";
+  }
+
+  private hoverTimeout: any;
+  @property({ defaultValue: false }) private isHovered: boolean;
+
+  protected get hoverDelay(): number {
+    return this.creator.pageHoverDelay;
+  }
+
+  public hover(e: MouseEvent, element: HTMLElement | any) {
+    const processedFlagName = "__svc_question_processed";
+    if (!e[processedFlagName] && e.type === "mouseover") {
+      if (!this.hoverTimeout) {
+        this.hoverTimeout = setTimeout(() => {
+          this.isHovered = true;
+          this.hoverTimeout = undefined;
+        }, this.hoverDelay);
+      }
+      e[processedFlagName] = true;
+    } else {
+      clearTimeout(this.hoverTimeout);
+      this.hoverTimeout = undefined;
+      this.isHovered = false;
+    }
+  }
+
+  private getExpandCollapseAnimationOptions(): IAnimationConsumer {
+    const beforeRunAnimation = (el: HTMLElement, animatingClassName: string) => {
+      prepareElementForVerticalAnimation(el);
+      const innerAnimatedElements = this.getInnerAnimatedElements();
+      innerAnimatedElements.forEach((elem: HTMLElement) => {
+        prepareElementForVerticalAnimation(elem);
+      });
+      innerAnimatedElements.forEach((elem: HTMLElement) => {
+        elem.classList.add(animatingClassName);
+      });
+    };
+    const afterRunAnimation = (el: HTMLElement, animatingClassName: string) => {
+      this.expandCollapseAnimationRunning = false;
+      if (this.surveyElement) {
+        cleanHtmlElementAfterAnimation(el);
+        const innerAnimatedElements = this.getInnerAnimatedElements();
+        innerAnimatedElements.forEach((elem: HTMLElement) => {
+          cleanHtmlElementAfterAnimation(elem);
+        });
+        innerAnimatedElements.forEach((elem: HTMLElement) => {
+          elem.classList.remove(animatingClassName);
+        });
+      }
+    };
+    return {
+      getRerenderEvent: () => this.onElementRerendered,
+      getEnterOptions: () => {
+        const className = this.getExpandingCssClassName();
+        return {
+          cssClass: className,
+          onBeforeRunAnimation: (el) => {
+            beforeRunAnimation(el, className);
+          },
+          onAfterRunAnimation: (el) => {
+            afterRunAnimation(el, className);
+          },
+        };
+      },
+      getLeaveOptions: () => {
+        const className = this.getCollapsingCssClassName();
+        return {
+          cssClass: className,
+          onBeforeRunAnimation: (el) => {
+            beforeRunAnimation(el, className);
+          },
+          onAfterRunAnimation: (el) => {
+            afterRunAnimation(el, className);
+          },
+        };
+      },
+      getAnimatedElement: () => this.getAnimatedElement(),
+      isAnimationEnabled: () => this.animationAllowed
+    };
+  }
+
+  private animationCollapsed = new AnimationBoolean(this.getExpandCollapseAnimationOptions(), (val) => {
+    this._renderedCollapsed = !val;
+  }, () => !this.renderedCollapsed);
+  public set renderedCollapsed(val: boolean) {
+    if (this.animationAllowed && val !== this.renderedCollapsed) this.expandCollapseAnimationRunning = true;
+    this.animationCollapsed.sync(!val);
+  }
+  public get renderedCollapsed(): boolean {
+    return !!this._renderedCollapsed;
+  }
+  protected createActionContainers() {
+    this.actionContainer = this.createActionContainer();
+    this.topActionContainer = new ActionContainer();
+    this.topActionContainer.sizeMode = "small";
+    if (this.creator.expandCollapseButtonVisibility != "never") {
+      this.topActionContainer.setItems([this.expandCollapseAction]);
+      this.topActionContainer.cssClasses = {
+        root: "svc-survey-element-top-toolbar sv-action-bar",
+        item: "svc-survey-element-top-toolbar__item",
+        itemIcon: "svc-survey-element-toolbar-item__icon",
+        itemTitle: "svc-survey-element-toolbar-item__title",
+        itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
+      };
+    }
+  }
+
+  protected createActionContainer(): SurveyElementActionContainer {
     const actionContainer = new SurveyElementActionContainer();
-    actionContainer.dotsItem.iconSize = 16;
     actionContainer.dotsItem.popupModel.horizontalPosition = "center";
     return actionContainer;
   }
@@ -143,79 +277,85 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }
 
+  protected allowExpandCollapseByDblClick(element: any) {
+    return true;
+  }
   public dblclick(event) {
-    if (this.allowExpandCollapse) this.collapsed = !this.collapsed;
+    if (this.allowExpandCollapseByDblClick(event.target)) {
+      if (this.allowExpandCollapse) this.collapsed = !this.collapsed;
+    }
     event.stopPropagation();
   }
   private allowEditOption: boolean;
-  private selectedPropPageFunc: (sender: Base, options: any) => void;
-  private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
-
+  private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void = (_, options) => {
+    if (options.name === "flyoutMode") {
+      this.updateActionsProperties();
+    }
+  };
+  protected surveyElement: T
+  get element() {
+    return this.surveyElement;
+  }
   constructor(
     public creator: SurveyCreatorModel,
-    protected surveyElement: T
+    surveyElement: T
   ) {
     super();
-    this.designerStateManager = (creator.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
-    this.designerStateManager?.initForElement(surveyElement);
-    this.selectedPropPageFunc = (sender: Base, options: any) => {
-      if (options.name === "isSelectedInDesigner") {
-        this.onElementSelectedChanged(options.newValue);
-      }
-    };
-    this.sidebarFlyoutModeChangedFunc = (sender: Base, options: any) => {
-      if (options.name === "flyoutMode") {
-        this.updateActionsProperties();
-      }
-    };
-    this.actionContainer = this.createActionContainer();
+    this.expandCollapseAction = this.getExpandCollapseAction();
+    this.createActionContainers();
+    this.attachToUI(surveyElement);
+  }
+  private creatorOnLocaleChanged: (sender: Base, options: any) => void = (_, options) => {
+    if(this.surveyElement) {
+      this.updateActionsContainer(this.surveyElement);
+      this.updateActionsProperties();
+    }
+  };
+  public static GetAdorner<V = SurveyElementAdornerBase>(surveyElement: SurveyElement): V {
+    return surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) as V;
+  }
+  public static RestoreStateFor(surveyElement: SurveyElement): void {
+    const adorner = SurveyElementAdornerBase.GetAdorner(surveyElement);
+    if (!!adorner) {
+      adorner.restoreState();
+    }
+  }
 
-    const collapseIcon = "icon-collapse-detail-light_16x16";
-    const expandIcon = "icon-restore_16x16";
-    this.expandCollapseAction = {
-      id: "collapse",
-      css: "sv-action-bar-item--secondary sv-action-bar-item--collapse",
-      iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
-      iconSize: 16,
-      action: () => {
-        this.collapsed = !this.collapsed;
-      }
-    };
-    this.collapsed = !!surveyElement && (this.designerStateManager?.getElementState(surveyElement).collapsed);
-    this.setSurveyElement(surveyElement);
-    this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
-    this.setShowAddQuestionButton(true);
-    this.expandCollapseAction.visible = this.allowExpandCollapse;
-
-    this.creator.onSurfaceToolbarActionExecuted.add((_, options) => {
-      if (options.action.id == "collapseAll") this.collapsed = true;
-      if (options.action.id == "expandAll") this.collapsed = false;
-    });
+  protected restoreState(): void {
+    if (!!this.surveyElement) {
+      const state = this.creator.designerStateManager?.getElementState(this.surveyElement);
+      this.collapsed = state.collapsed;
+    }
+    if (!this.surveyElement || this.surveyElement.isInteractiveDesignElement) {
+      this.needToRenderContent = !this.collapsed;
+    }
   }
 
   protected detachElement(surveyElement: T): void {
     if (surveyElement) {
-      surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
+      surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, null);
+      surveyElement.unRegisterFunctionOnPropertyValueChanged("isSelectedInDesigner", "questionSelected");
+      this.cleanActionsContainer();
     }
   }
   protected attachElement(surveyElement: T): void {
     if (surveyElement) {
-      surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
+      this.creator?.designerStateManager?.initForElement(surveyElement);
+      surveyElement.registerFunctionOnPropertyValueChanged("isSelectedInDesigner",
+        (newValue: any) => {
+          this.onElementSelectedChanged(newValue);
+        }, "questionSelected"
+      );
+      this.restoreState();
+      this.updateActionsContainer(surveyElement);
+      this.updateActionsProperties();
+      surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, this);
     }
   }
   protected setSurveyElement(surveyElement: T): void {
-    this.detachElement(this.surveyElement);
+    this.detachOnlyMyElement();
     this.surveyElement = surveyElement;
     this.attachElement(this.surveyElement);
-    if (this.surveyElement) {
-      var actions: Array<Action> = [];
-      this.buildActions(actions);
-      this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
-      const prevActions = this.actionContainer.actions;
-      prevActions.forEach(action => action.dispose && action.dispose());
-      this.actionContainer.setItems(actions);
-      this.updateActionsProperties();
-    }
   }
 
   protected checkActionProperties(): void {
@@ -223,20 +363,66 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.updateActionsProperties();
     }
   }
-
+  public attachToUI(surveyElement: T, rootElement?: HTMLElement) {
+    if (!!rootElement) {
+      this.rootElement = rootElement;
+    }
+    if (this.surveyElement != surveyElement) {
+      this.setSurveyElement(surveyElement);
+      this.creator.onLocaleChanded.add(this.creatorOnLocaleChanged);
+      this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
+      this.creator.expandCollapseManager.add(this);
+    }
+  }
+  private detachOnlyMyElement() {
+    if (this.surveyElement && this.surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) === this && !this.surveyElement.isDisposed) {
+      this.detachElement(this.surveyElement);
+    }
+  }
+  public detachFromUI() {
+    this.rootElement = undefined;
+    this.detachOnlyMyElement();
+    this.surveyElement = undefined;
+    this.creator.onLocaleChanded.remove(this.creatorOnLocaleChanged);
+    this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
+    this.creator.expandCollapseManager.remove(this);
+  }
   public dispose(): void {
-    super.dispose();
-    this.detachElement(this.surveyElement);
+    this.detachFromUI();
     if (!this.actionContainer.isDisposed) {
       this.actionContainer.dispose();
     }
-    this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
-    this.selectedPropPageFunc = undefined;
+    super.dispose();
     this.sidebarFlyoutModeChangedFunc = undefined;
+    this.animationCollapsed = undefined;
   }
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
     this.updateActionsProperties();
+  }
+  protected getExpandCollapseAction(): IAction {
+    const collapseIcon = "icon-collapsepanel-16x16";
+    const expandIcon = "icon-expandpanel-16x16";
+    return {
+      id: "collapse",
+      css: "sv-action-bar-item--collapse",
+      iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
+      iconSize: "auto",
+      action: () => {
+        this.collapsed = !this.collapsed;
+      }
+    };
+  }
+  protected cleanActionsContainer() {
+    const actions = this.actionContainer.actions;
+    this.actionContainer.setItems([]);
+    actions.forEach(action => action.dispose && action.dispose());
+  }
+  protected updateActionsContainer(surveyElement: SurveyElement) {
+    const actions: Array<Action> = [];
+    this.buildActions(actions);
+    this.creator.onElementMenuItemsChanged(surveyElement, actions);
+    this.actionContainer.setItems(actions);
   }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;
@@ -245,12 +431,19 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.isOperationsAllow()
     );
   }
+  protected getAllowDragging(options: any): boolean {
+    return options.allowDragging;
+  }
+  protected getAllowExpandCollapse(options: any): boolean {
+    return this.creator.expandCollapseButtonVisibility != "never" && (options.allowExpandCollapse == undefined || !!options.allowExpandCollapse);
+  }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
-    this.allowDragging = operationsAllow && options.allowDragging;
-    this.allowExpandCollapse = this.creator.expandCollapseButtonVisibility != "never" && (options.allowExpandCollapse == undefined || !!options.allowExpandCollapse);
+    this.allowDragging = operationsAllow && this.getAllowDragging(options);
+    this.allowExpandCollapse = this.getAllowExpandCollapse(options);
     this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
+    this.updateActionVisibility("collapse", this.allowExpandCollapse);
     if (options.allowShowSettings === undefined) {
       const settingsVisibility = (options.allowEdit !== undefined) ? (operationsAllow && options.allowEdit) : this.creator.sidebar.flyoutMode;
       this.updateActionVisibility("settings", settingsVisibility);
@@ -269,21 +462,17 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     action.visible = isVisible;
   }
   public getActionById(id: string): Action {
-    let actions = this.actionContainer.actions;
-    for (var i = 0; i < actions.length; i++) {
-      if (actions[i].id === id) return actions[i];
-    }
-    return null;
+    return this.actionContainer.getActionById(id) || this.topActionContainer.getActionById(id);
   }
   protected buildActions(items: Array<Action>) {
     items.push(
       new Action({
         id: "duplicate",
         iconName: "icon-duplicate_16x16",
-        css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+        css: "svc-action-bar-item--right",
         title: this.creator.getLocString("survey.duplicate"),
         visibleIndex: 10,
-        iconSize: 16,
+        iconSize: "auto",
         action: () => this.duplicate(),
         onFocus: (isMouse: boolean, event: any) => this.disableActionFocusing(isMouse, event)
       })
@@ -293,15 +482,17 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       new Action({
         id: "settings",
         iconName: "icon-settings_16x16",
-        css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+        css: "svc-action-bar-item--right",
         title: this.creator.getLocString("ed.settings"),
         locTooltipName: "ed.settingsTooltip",
         visibleIndex: 20,
-        iconSize: 16,
+        iconSize: "auto",
         action: () => {
           this.creator.setShowSidebar(true, true);
           if (!this.creator.isMobileView) {
-            this.creator.propertyGrid.getAllQuestions()[0].focus();
+            this.creator.sidebar.executeOnExpand(() => {
+              this.creator.propertyGrid.getAllQuestions()[0].focus();
+            });
           }
         }
       })
@@ -311,11 +502,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       new Action({
         id: "delete",
         iconName: "icon-delete_16x16",
-        css: "svc-action-bar-item--right sv-action-bar-item--secondary",
+        css: "svc-action-bar-item--right",
         //needSeparator: items.length > 0,
         title: this.creator.getLocString("pe.delete"),
         visibleIndex: 30,
-        iconSize: 16,
+        iconSize: "auto",
         action: () => {
           this.delete();
         },
@@ -344,5 +535,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected duplicate(): void { }
   protected delete(): void {
     this.creator.deleteElement(this.surveyElement);
+  }
+  protected getCss(): string {
+    return new CssClassBuilder().append("svc-hovered svc-hovered-ready", this.isHovered).toString();
   }
 }

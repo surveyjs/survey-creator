@@ -37,7 +37,7 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
       className="svc-context-button"
       onClick={() => this.model.chooseFile(this.model)}
     >
-      <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
+      <SvgIcon size={"auto"} iconName={"icon-choosefile"}></SvgIcon>
     </span>);
   }
   renderClearButton() {
@@ -45,7 +45,7 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
       className="svc-context-button svc-context-button--danger"
       onClick={() => this.model.remove(this.model)}
     >
-      <SvgIcon size={24} iconName={"icon-clear"}></SvgIcon>
+      <SvgIcon size={"auto"} iconName={"icon-clear"}></SvgIcon>
     </span>);
   }
   renderButtons() {
@@ -61,7 +61,7 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
     </div>;
   }
   renderPlaceHolder() {
-    return this.model.allowEdit && !this.model.isUploading ? attachKey2click(<div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}><svg><use xlinkHref="#icon-logo"></use></svg></div>) : null;
+    return this.model.allowEdit && !this.model.isUploading ? attachKey2click(<div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}><svg><use xlinkHref="#icon-image-48x48"></use></svg></div>) : null;
   }
   renderInput() {
     return <input aria-hidden="true" type="file" tabIndex={-1} accept={this.model.acceptedTypes} className="svc-choose-file-input" />;
@@ -69,8 +69,8 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
   renderLoadingIndicator() {
     return <div className="svc-logo-image__loading"><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
   }
-  render(): JSX.Element {
-    let content: JSX.Element = null;
+  render(): React.JSX.Element {
+    let content: React.JSX.Element = null;
     if (this.model.survey.locLogo.renderedHtml && !this.model.isUploading) {
       content = this.renderImage();
     }

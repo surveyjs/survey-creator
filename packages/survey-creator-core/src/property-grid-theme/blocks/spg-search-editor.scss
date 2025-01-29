@@ -1,147 +1,51 @@
-.spg-editor--highlighted {
+@use "../../variables.scss" as *;
 
-  .spg-input,
-  .spg-input-container,
-  .spg-question--location--left,
-  .spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
-    box-shadow: 0 0 0 2px $secondary;
+.svc-side-bar {
+  .svc-search {
+    border-bottom: 1px solid var(--ctr-property-grid-search-border-color, var(--sjs-border-10, #dcdcdcff));
+    background: var(--ctr-property-grid-search-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
+    gap: var(--ctr-property-grid-search-gap, var(--sjs-spacing-x1));
+  
+    padding: var(--ctr-property-grid-search-padding-top, var(--sjs-spacing-x2))
+      var(--ctr-property-grid-search-padding-right, var(--sjs-spacing-x2))
+      var(--ctr-property-grid-search-padding-bottom, var(--sjs-spacing-x2))
+      var(--ctr-property-grid-search-padding-left, var(--sjs-spacing-x2));
   }
-
-  .spg-checkbox__control:focus+.spg-checkbox__rectangle,
-  .spg-matrixdynamic__content.spg-text__content {
-    outline: 2px solid $secondary;
-    outline-offset: -2px;
-
-    .spg-input {
-      box-shadow: none;
+  
+  .svc-search__input {
+    color: var(--ctr-property-grid-search-text-color, var(--sjs-layer-3-foreground-100, #000000e6));
+  }
+  
+  .svc-search__input::placeholder {
+    color: var(--ctr-property-grid-search-text-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
+  }
+  
+  .svc-search__bar-item:not(.sv-action-bar-item--pressed) {
+    &:hover:enabled,
+    &:focus:enabled {
+      background-color: var(--ctr-property-grid-search-button-background-color-hovered, var(--sjs-layer-3-background-400, #eaeaeaff));
     }
   }
-
-  .svc-action-button {
-    background-color: $secondary-light;
+  
+  .svc-search__toolbar .sv-action-bar-item__icon use {
+    fill: var(--ctr-property-grid-search-button-icon-color, var(--sjs-layer-3-foreground-50, #00000080));
   }
-
-  .sv-button-group {
-    box-shadow: 0 0 0 1px $secondary;
-    border-color: $secondary;
+  
+  .svc-search__toolbar-counter {
+    color: var(--ctr-property-grid-search-count-text-color, var(--sjs-layer-3-foreground-50, #00000080));
   }
-
-  .spg-checkbox__control+.spg-checkbox__rectangle {
-    outline: 2px solid $secondary;
-    outline-offset: -2px;
-  }
-}
-
-.spg-search-editor_container {
-  --sjs-general-forecolor: rgba(0, 0, 0, 0.91);
-  --sjs-general-forecolor-light: rgba(0, 0, 0, 0.45);
-}
-
-.spg-search-editor_container {
-  border-bottom: 1px solid var(--ctr-property-grid-search-border-color, $border);
-  background: var(--ctr-property-grid-search-background-color, $background-dim);
-  padding: calcSize(2);
-  height: calcSize(3);
-  width: calc(100% - calc(4 * #{$base-unit}));
-  display: flex;
-  align-items: center;
-}
-
-.spg-search-editor_input {
-  @include textEllipsis;
-  color: var(--ctr-property-grid-search-text-color, $foreground);
-
-  font-family: $font-family;
-  font-size: calcSize(1.5);
-  font-style: normal;
-  font-weight: 600;
-  line-height: calcSize(2);
-
-  border: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-
-  display: block;
-  background: transparent;
-  box-sizing: border-box;
-  width: 100%;
-  outline: none;
-  padding-inline-start: calcSize(1);
-  padding-inline-end: calcSize(1);
-}
-
-.svc-creator--mobile .spg-search-editor_input {
-  $fontSize: calcSize(1.5);
-  font-size: Max(16px, #{$fontSize});
-}
-
-.spg-search-editor_input::placeholder {
-  color: var(--ctr-property-grid-search-text-color-placeholder, $foreground-light);
-}
-
-.spg-search-editor_toolbar {
-  display: flex;
-  gap: calcSize(1.5);
-  justify-content: flex-end;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.spg-search-editor_toolbar .sv-action-bar {
-  gap: calcSize(0.5);
-  margin: 0;
-  flex-shrink: 0;
-}
-
-.spg-search-editor_toolbar .sv-action--hidden {
-  display: none;
-}
-
-.spg-search-editor_toolbar .spg-search-editor_bar-item {
-  padding: calcSize(0.5);
-  height: min-content;
-  margin: 0;
-}
-
-.spg-search-editor_bar-item:not(.sv-action-bar-item--pressed) {
-
-  &:hover:enabled,
-  &:focus:enabled {
-    background: var(--ctr-search-button-background-color-clear-hovered, $background-dim);
-
-    .sv-action-bar-item__icon use {
-      fill: var(--ctr-search-button-icon-color-clear-hovered, $foreground-light)
-    }
-  }
-}
-
-.spg-search-editor_toolbar .sv-action-bar-item__icon use {
-  fill: var(--ctr-property-grid-search-button-icon-color, $foreground-light)
-}
-
-.spg-search-editor_toolbar-counter {
-  color: var(--ctr-property-grid-search-count-text-color, $foreground-light);
-
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 600;
-  font-size: calcSize(1.5);
-  line-height: calcSize(2);
-  display: flex;
-  flex-shrink: 0;
-}
-
-.spg-search-editor_search-icon {
-  width: calcSize(3);
-  height: calcSize(3);
-
-  .sv-svg-icon {
-    width: calcSize(3);
-    height: calcSize(3);
-
-    use {
-      fill: var(--ctr-property-grid-search-icon-color, $foreground-light);
+  
+  .svc-search__search-icon {
+    width: var(--ctr-property-grid-search-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-property-grid-search-icon-height, var(--sjs-font-size-x3));
+  
+    .sv-svg-icon {
+      width: var(--ctr-property-grid-search-icon-width, var(--sjs-font-size-x3));
+      height: var(--ctr-property-grid-search-icon-height, var(--sjs-font-size-x3));
+  
+      use {
+        fill: var(--ctr-property-grid-search-icon-color, var(--sjs-layer-3-foreground-50, #00000080));
+      }
     }
   }
 }

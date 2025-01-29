@@ -5,13 +5,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/defaultV2.css" />
+  <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/default.css" />
   <!-- <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/modern.css" /> -->
   <!-- <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/survey.css" /> -->
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/survey-creator-core.css" />
   <!-- <link rel="stylesheet" type="text/css" href="../build/survey-creator-js.min.css" /> -->
   <script src="../node_modules/survey-core/survey.core.js"></script>
   <script src="../node_modules/survey-core/survey.i18n.js"></script>
+  <script src="../node_modules/survey-core/themes/index.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js"></script>
   <script src="../node_modules/survey-js-ui/survey-js-ui.js"></script>
@@ -24,7 +25,11 @@
 </body>
 <script>
   window.surveyJSFramework = "react";
-  const creator = new SurveyCreator.SurveyCreator({ themeForPreview: "modern" });
+  const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", themeForPreview: "modern" });
+  creator.tabResponsivenessMode = "menu";
+  creator["animationEnabled"] = false;
+  creator.showOneCategoryInPropertyGrid = false;
+  creator.allowZoom = false;
   window.creator = creator;
   SurveyCreator.renderSurveyCreator(creator, document.getElementById("survey-creator"));
 </script>

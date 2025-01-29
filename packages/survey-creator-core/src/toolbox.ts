@@ -17,20 +17,23 @@ import {
   CssClassBuilder,
   HashTable,
   surveyLocalization,
-  ComputedUpdater
+  ComputedUpdater,
+  AnimationBoolean,
+  IAnimationConsumer
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
 import { settings } from "./creator-settings";
 import { DragDropSurveyElements } from "./survey-elements";
-import { SearchManagerToolbox } from "./property-grid/search-manager";
+import { SearchManagerToolbox } from "./components/toolbox/toolbox-search-manager";
+import { listComponentCss } from "./components/list-theme";
 
 export type overflowBehaviorType = "hideInMenu" | "scroll";
 
 /**
  * A toolbox item configuration.
  * 
- * `IQuestionToolboxItem` objects are used in such Toolbox API methods as [`getItemByName(name)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#getItemByName), [`addItem(item, index)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#addItem), [`replaceItem(item)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#replaceItem), and others.
+ * `IQuestionToolboxItem` objects are used in such Toolbox API methods as [`addItem(item, index)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#addItem), [`replaceItem(item)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#replaceItem), [`addSubitem(subitem, index)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem#addSubitem), and others.
  * 
  * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
  */
@@ -46,7 +49,7 @@ export interface IQuestionToolboxItem extends IAction {
    * 
    * [UI Icons](https://surveyjs.io/form-library/documentation/icons (linkStyle))
    */
-  iconName: string;
+  iconName?: string;
   /**
    * A JSON object used to create a new question or panel when users click this toolbox item. It must contain the `type` property.
    * 
@@ -57,11 +60,11 @@ export interface IQuestionToolboxItem extends IAction {
    * A user-friendly toolbox item title.
    */
   title: string;
-  className: string;
+  className?: string;
   /**
    * A toolbox item tooltip.
    * 
-   * If `tooltip` is undefined, the [`title`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#title) property value is used instead.
+   * If `tooltip` is undefined, the [`title`](#title) property value is used instead.
    */
   tooltip?: string;
   isCopied?: boolean;
@@ -80,32 +83,8 @@ export interface IQuestionToolboxItem extends IAction {
    */
   enabled?: boolean;
   getArea?: (el: HTMLElement) => HTMLElement;
-  /**
-   * Removes all subitems from this toolbox item.
-   * 
-   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
-   * @see removeSubitem
-   * @see addSubitem
-   */
   clearSubitems?(): void;
-  /**
-   * Adds a subitem to this toolbox item.
-   * 
-   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
-   * @param subitem An `IQuestionToolboxItem` object that represents a subitem configuration.
-   * @param index *(Optional)* A zero-based index at which to insert the subitem. If you do not specify this parameter, the subitem is added to the end.
-   * @see removeSubitem
-   * @see clearSubitems
-   */
   addSubitem?(subitem: IQuestionToolboxItem, index: number): void;
-  /**
-   * Removes a specific subitem from this toolbox item.
-   * 
-   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
-   * @param subitem A subitem [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name) or an `IQuestionToolboxItem` object that represents a subitem configuration.
-   * @see clearSubitems
-   * @see addSubitem
-   */
   removeSubitem?(subitem: IQuestionToolboxItem | string): void;
 }
 
@@ -143,7 +122,14 @@ export class QuestionToolboxCategory extends Base {
     }
   }
 }
+/**
+ * A toolbox item instance.
+ * 
+ * An object of this class is returned by the `QuestionToolbox`'s [`getItemByName(name)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#getItemByName) method.
+ */
 export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
+  public propName: string;
+  public propValue: string;
   static getItemClassNames(iconName?: string): string {
     return new CssClassBuilder()
       .append("svc-toolbox__item")
@@ -163,18 +149,74 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
         .append("svc-toolbox__tool")
         .append("svc-toolbox__tool--action")
         .append(originalCss)
-        .append("svc-toolbox__tool--hovered", this.isHovered)
         .append("svc-toolbox__tool--pressed", this.isPressed)
         .append("svc-toolbox__tool--has-icon", !!this.iconName)
+        .append("svc-toolbox__tool--has-subitems", !!(this.items?.length > 0))
         .append("svc-toolbox__tool--disabled", this.enabled === false)
         .append("sv-action--hidden", !this.isVisible)
         .toString();
     }) as any;
   }
+  /**
+   * A user-friendly toolbox item title.
+   */
+  public get title(): string {
+    return this.getTitle();
+  }
+  public set title(val: string) {
+    this.setTitle(val);
+  }
+  /**
+   * Specifies whether users can interact with the toolbox item.
+   * 
+   * Default value: `true`
+   */
+  public get enabled(): boolean {
+    return this.getEnabled();
+  }
+  public set enabled(val: boolean) {
+    this.setEnabled(val);
+  }
   className: string;
+
+  public get renderedCss(): string {
+    return new CssClassBuilder()
+      .append("svc-toolbox__item")
+      .append(this.className)
+      .append("svc-toolbox__item--has-subitems", this.hasSubItems).toString();
+  }
+  /**
+   * An icon name.
+   * 
+   * [UI Icons](https://surveyjs.io/form-library/documentation/icons (linkStyle))
+   */
+  iconName: string;
+  /**
+   * A toolbox item identifier.
+   * 
+   * > Toolbox item names must be unique.
+   */
   name: string;
+  /**
+   * A JSON object used to create a new question or panel when users click this toolbox item. It must contain the `type` property.
+   * 
+   * [View Toolbox Customization Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-customization/ (linkStyle))
+   */
   json: any;
+  /**
+   * A toolbox item tooltip.
+   * 
+   * If `tooltip` is undefined, the [`title`](#title) property value is used instead.
+   */
+  tooltip: string;
   isCopied: boolean;
+  /**
+   * A category to which this toolbox item belongs.
+   * 
+   * Out-of-the-box categories include `"general"`, `"choice"`, `"text"`, `"containers"`, `"matrix"`, and `"misc"`.
+   * 
+   * Default value: `"general"`
+   */
   category: string;
   toJSON() {
     return this.item;
@@ -198,17 +240,31 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     return this.title.toLowerCase().indexOf(textLowerCase) >= 0 || this.name.toLowerCase().indexOf(textLowerCase) >= 0;
   }
 
-  public getSubitemByName(id: string): QuestionToolboxItem {
-    return this.items?.filter(i => i.id === id)[0];
+  /**
+   * Finds a subitem with a specified name in the collection of subitems belonging to this toolbox item.
+   * 
+   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
+   * @param name A subitem [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name).
+   * @returns A [`QuestionToolboxItem`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem) object that represents the subitem instance.
+   */
+  public getSubitem(name: string): QuestionToolboxItem {
+    return this.items?.filter(i => i.id === name)[0];
   }
 
   public addSubitems(items: Array<QuestionToolboxItem>) {
     if (!items || items.length < 1) return;
 
     this.setSubItems({ items: items });
+    this.popupModel.getAreaCallback = this.getArea;
     this.component = QuestionToolbox.defaultItemGroupComponent;
   }
-
+  /**
+   * Removes all subitems from this toolbox item.
+   * 
+   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
+   * @see removeSubitem
+   * @see addSubitem
+   */
   public clearSubitems(): void {
     if (this.hasSubItems) {
       this.items = [];
@@ -216,10 +272,18 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
       this.popupModel.dispose();
     }
   }
-
-  public addSubitem(item: IQuestionToolboxItem, index: number = -1): void {
-    if (!item) return;
-    const newItem: QuestionToolboxItem = new QuestionToolboxItem(item);
+  /**
+   * Adds a subitem to this toolbox item.
+   * 
+   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
+   * @param subitem An [`IQuestionToolboxItem`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem) object that represents a subitem configuration.
+   * @param index *(Optional)* A zero-based index at which to insert the subitem. If you do not specify this parameter, the subitem is added to the end.
+   * @see removeSubitem
+   * @see clearSubitems
+   */
+  public addSubitem(subitem: IQuestionToolboxItem, index: number = -1): void {
+    if (!subitem) return;
+    const newItem: QuestionToolboxItem = new QuestionToolboxItem(subitem);
     newItem.iconName = "";
     if (!newItem.className) newItem.className = QuestionToolboxItem.getItemClassNames(newItem.iconName);
     newItem.className = new CssClassBuilder().append(newItem.className).append("svc-toolbox__item-subtype").toString();
@@ -231,14 +295,21 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     }
     this.addSubitems(array);
   }
+  /**
+   * Removes a specific subitem from this toolbox item.
+   * 
+   * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
+   * @param subitem A subitem [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name) or an [`IQuestionToolboxItem`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem) object that represents a subitem configuration.
+   * @see clearSubitems
+   * @see addSubitem
+   */
+  public removeSubitem(subitem: IQuestionToolboxItem | string): void {
+    if (!this.hasSubItems || !subitem) return;
 
-  public removeSubitem(item: IQuestionToolboxItem | string): void {
-    if (!this.hasSubItems || !item) return;
-
-    const id: string = (item as IQuestionToolboxItem)?.id || item as string;
+    const id: string = (subitem as IQuestionToolboxItem)?.id || subitem as string;
     if (!id) return;
 
-    const removedItem = this.getSubitemByName(id);
+    const removedItem = this.getSubitem(id);
     let array: Array<QuestionToolboxItem> = (this.items || []).slice();
     const removedIndex = array.indexOf(removedItem);
     if (removedIndex > -1) {
@@ -249,6 +320,10 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     } else {
       this.addSubitems(array);
     }
+  }
+
+  public get subitemsButtonIcon() {
+    return "icon-next_16x16";
   }
 }
 
@@ -292,13 +367,18 @@ export class QuestionToolbox
     "html", "expression", "image", "signaturepad"
   ];
   private _containerElementValue: HTMLElement;
+  private _rootElementValue: HTMLElement;
+  private _scrollbarElement: HTMLElement;
+  private _containerBodyElement: HTMLElement;
+  private _scrollbarSizerElement: HTMLElement;
+  private _containerBodyResizeObserver: ResizeObserver;
   public presetDefaultItems: Array<IQuestionToolboxItem>;
 
   public get itemSelector(): string {
     return ".svc-toolbox__category>.svc-toolbox__tool--action";
   }
   public get containerSelector(): string {
-    return ".svc-toolbox__scroller";
+    return ".svc-scroll__scroller";
   }
 
   public static getQuestionDefaultSettings(questionType: string): any {
@@ -324,7 +404,7 @@ export class QuestionToolbox
   @property({ defaultValue: false }) private showCategoryTitlesValue: boolean;
   private dragOrClickHelper: DragOrClickHelper;
 
-  public toolboxNoResultsFound = getLocString("ed.toolboxNoResultsFound");
+  public get toolboxNoResultsFound() { return getLocString("ed.toolboxNoResultsFound"); }
 
   //koItems = ko.observableArray();
   /**
@@ -353,8 +433,10 @@ export class QuestionToolbox
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
   public updateResponsiveness(isCompact: boolean, overflowBehavior: overflowBehaviorType) {
-    if (overflowBehavior == "scroll" && this.creator && !this.creator.isTouch) {
+    if (overflowBehavior == "scroll" && this.creator && !this.creator.isTouch ||
+      this.creator && this.creator.toolboxLocation === "sidebar") {
       this.isResponsivenessDisabled = true;
+      this.updateCallback && this.updateCallback(true);
       return;
     }
     if (this.hasCategories && this.showCategoryTitles) {
@@ -377,11 +459,49 @@ export class QuestionToolbox
     defaultValue: false,
     onSet: (val: boolean, target: QuestionToolbox) => {
       target.updateResponsiveness(val, target.overflowBehavior);
+      target.compactAnimation.sync(!(val && !target.isFocused));
     }
   }) isCompact: boolean;
 
+  @property({ defaultValue: false }) isCompactRendered: boolean;
+  @property({ defaultValue: false }) isFlyoutToCompactRunning: boolean;
+
+  private getAnimationOptions(): IAnimationConsumer {
+    const onBeforeRunAnimation = (el: HTMLElement) => {
+      el.style.setProperty("--animation-width", getComputedStyle(el).width);
+    };
+    return {
+      getAnimatedElement: () => {
+        return this.rootElement?.querySelector(".svc-toolbox__panel");
+      },
+      isAnimationEnabled: () => this.animationAllowed,
+      getRerenderEvent: () => this.onElementRerendered,
+      getLeaveOptions: () => {
+        return {
+          cssClass: "svc-toolbox__panel--leave",
+          onAfterRunAnimation: () => { this.isFlyoutToCompactRunning = false; },
+          onBeforeRunAnimation: onBeforeRunAnimation
+        };
+      },
+      getEnterOptions: () => {
+        return {
+          cssClass: "svc-toolbox__panel--enter",
+          onBeforeRunAnimation: onBeforeRunAnimation
+        };
+      }
+    };
+  }
+
+  public compactAnimation = new AnimationBoolean(this.getAnimationOptions(), (val: boolean) => {
+    this.isCompactRendered = !val;
+  }, () => !this.isCompactRendered);
+
   @property({
     defaultValue: false,
+    onSet: (val: boolean, target: QuestionToolbox) => {
+      if (target.animationAllowed) target.isFlyoutToCompactRunning = target.isCompact && !val;
+      target.compactAnimation.sync(!(target.isCompact && !val));
+    }
   }) isFocused: boolean;
   /**
    * Specifies how the Toolbox behaves when it contains more items than can fit on the screen.
@@ -433,13 +553,9 @@ export class QuestionToolbox
    */
   @property({ defaultValue: true }) showSubitems: boolean;
 
-  @property({ defaultValue: false }) isScrollLocked: boolean;
-  public lockScrollBar(val: boolean) {
-    if (!this._containerElementValue) return;
-    this.isScrollLocked = val && this._containerElementValue.scrollHeight > this._containerElementValue.clientHeight;
-  }
   public searchManager = new SearchManagerToolbox();
   @property() showPlaceholder: boolean;
+  @property({ defaultValue: true }) showSeparators: boolean;
 
   constructor(
     private supportedQuestions: Array<string> = null,
@@ -447,17 +563,19 @@ export class QuestionToolbox
     useDefaultCategories = false
   ) {
     super();
+    this.subItemsShowDelay = 0;
     this.searchManager.isVisible = this.searchEnabled;
     this.searchManager.toolbox = this;
     this.searchItem = new Action({
       id: "searchItem-id",
       css: "svc-toolbox__tool svc-toolbox__search-button",
-      innerCss: "sv-dots__item",
+      innerCss: "svc-toolbox__item sv-dots__item",
       iconName: "icon-search",
+      iconSize: "auto",
       component: "sv-action-bar-item",
       tooltip: surveyLocalization.getString("search"),
       action: () => {
-        (document.querySelector(".svc-toolbox__panel input") as HTMLInputElement).focus();
+        (this.rootElement.querySelector("input") as HTMLInputElement).focus();
         this.isFocused = true;
       }
     });
@@ -467,11 +585,10 @@ export class QuestionToolbox
   }
 
   private initDotsItem() {
-    const originalCss = this.dotsItem.css;
+    this.dotsItem.innerCss = "svc-toolbox__item svc-toolbox__item--dots sv-dots__item";
     this.dotsItem.css = new ComputedUpdater(() => {
       return new CssClassBuilder()
-        .append("svc-toolbox__tool")
-        .append(originalCss)
+        .append("svc-toolbox__tool svc-toolbox__tool--dots")
         .append("sv-action--hidden", !this.dotsItem.isVisible)
         .toString();
     }) as any;
@@ -489,7 +606,8 @@ export class QuestionToolbox
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
       }
     };
-    this.dotsItem.popupModel.cssClass = "svc-toolbox-popup";
+    this.dotsItem.popupModel.cssClass += " svc-toolbox-popup svc-creator-popup";
+    this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
   private getDefaultQuestionCategories() {
     const questionCategoryMap = {};
@@ -517,10 +635,6 @@ export class QuestionToolbox
     //}
   }
 
-  public get isCompactRendered() {
-    return this.isCompact && !this.isFocused;
-  }
-
   public get showSearch() {
     return this.searchEnabled && this.items.length > QuestionToolbox.MINELEMENTCOUNT;
   }
@@ -530,13 +644,15 @@ export class QuestionToolbox
   }
 
   public setRootElement(element: HTMLElement) {
+    this._rootElementValue = element;
     this._containerElementValue = element?.querySelector(this.containerSelector);
   }
-
   public get containerElement() {
     return this._containerElementValue;
   }
-
+  public get rootElement() {
+    return this._rootElementValue;
+  }
   public focusOut(e) {
     if (e.relatedTarget !== e.currentTarget &&
       !e.currentTarget.contains(e.relatedTarget)) {
@@ -551,9 +667,9 @@ export class QuestionToolbox
     return new CssClassBuilder()
       .append("svc-toolbox")
       .append("svc-toolbox--searchable", this.searchEnabled)
-      .append("svc-toolbox--filtering", !!this.searchManager.filterString)
+      .append("svc-toolbox--no-separators", !this.showSeparators)
+      .append("svc-toolbox--flyout-to-compact-running", this.isFlyoutToCompactRunning)
       .append("svc-toolbox--compact", this.isCompactRendered)
-      .append("svc-toolbox--scroll-locked", this.isScrollLocked)
       .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
       .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll").toString();
   }
@@ -563,6 +679,7 @@ export class QuestionToolbox
     } else {
       this.dotsItem.popupModel.horizontalPosition = this.creator.toolboxLocation == "right" ? "left" : "right";
     }
+    this.updateResponsiveness(this.isCompact, this.overflowBehavior);
   }
 
   public get jsonText() {
@@ -648,15 +765,11 @@ export class QuestionToolbox
     else {
       item.iconName = item.iconName ? item.iconName : QuestionToolbox.defaultIconName;
       const newItem = new QuestionToolboxItem(item);
-      const newItems = this.createSubTypes(newItem);
-      if (newItems) {
-        newItem.addSubitems(newItems);
-      }
-
+      this.createSubTypes(newItem);
       return newItem;
     }
   }
-  private createSubTypes(parentItem: QuestionToolboxItem): Array<QuestionToolboxItem> {
+  private createSubTypes(parentItem: QuestionToolboxItem): void {
     let property = null;
     const propName = QuestionToolbox.getSubTypePropertyName(parentItem.id);
     if (propName) property = Serializer.findProperty(parentItem.id, propName);
@@ -665,10 +778,11 @@ export class QuestionToolbox
     const newItems: Array<QuestionToolboxItem> = property.choices.map(ch => {
       const newJson = { ...parentItem.json };
       newJson[propName] = ch;
+      const newId = parentItem.id != ch ? ch : parentItem.id + "-default";
 
       const innerItem = new QuestionToolboxItem({
-        id: ch,
-        name: ch,
+        id: newId,
+        name: newId,
         title: editorLocalization.getPropertyValueInEditor(propName, ch),
         className: QuestionToolboxItem.getItemClassNames() + " svc-toolbox__item-subtype",
         json: newJson,
@@ -677,11 +791,14 @@ export class QuestionToolbox
         isCopied: false,
         component: QuestionToolbox.defaultItemComponent
       });
+      innerItem.propName = propName;
+      innerItem.propValue = ch;
       return innerItem;
     });
-    return newItems;
+    if (newItems) {
+      parentItem.addSubitems(newItems);
+    }
   }
-
   /**
    * Adds a new item to the Toolbox.
    * @param item A [toolbox item configuration](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem).
@@ -752,11 +869,11 @@ export class QuestionToolbox
     }
   }
   /**
-   * Returns a [toolbox item](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem) with a specified name.
+   * Returns a [toolbox item](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem) with a specified name.
    * @param name A toolbox item's [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name).
    * @returns A toolbox item or `null` if a toolbox item with the specified name isn't found.
    */
-  public getItemByName(name: string): IQuestionToolboxItem {
+  public getItemByName(name: string): QuestionToolboxItem {
     if (!name) return null;
     const index: number = this.indexOf(name);
     return index > -1 ? this.actions[index] : null;
@@ -807,14 +924,25 @@ export class QuestionToolbox
   }
   public updateTitles(): void {
     this.actions.forEach(action => {
-      this.updateActionTitle(action);
-      this.updateActionTitle(action.innerItem);
+      this.updateToolboxItemTitle(action);
     });
     if (Array.isArray(this.categories)) {
       this.categories.forEach(category => {
         category.title = this.getCategoryTitle(category.name);
       });
     }
+  }
+  private updateToolboxItemTitle(item: QuestionToolboxItem): void {
+    this.updateActionTitle(item);
+    this.updateActionTitle(item.innerItem);
+    if(!Array.isArray(item.items)) return;
+    item.items.forEach(subItem => {
+      const propName = subItem.propName;
+      const propValue = subItem.propValue;
+      if(!!propName && !!propValue) {
+        subItem.title = editorLocalization.getPropertyValueInEditor(propName, propValue);
+      }
+    });
   }
   private updateActionTitle(action: IAction): void {
     const newTitle = editorLocalization.getString("qt." + action.id);
@@ -1206,7 +1334,7 @@ export class QuestionToolbox
     const iconName: string = json.iconName ? json.iconName : QuestionToolbox.defaultIconName;
     let title: string = editorLocalization.getString("qt." + json.name);
     if (!title || title == json.name) {
-      title = json.title;
+      title = this.getTitleFromJsonTitle(json.title, json.name);
     }
     if (!title) {
       title = json.name;
@@ -1229,6 +1357,18 @@ export class QuestionToolbox
       category: category
     });
     return this.getOrCreateToolboxItem(item);
+  }
+  private getTitleFromJsonTitle(title: any, name: string): string {
+    if (!title) return title;
+    if (typeof title === "string") return title;
+    if (typeof title !== "object") return title;
+    for (let key in title) {
+      const loc = editorLocalization.locales[key];
+      if (title[key] && loc && loc.qt) {
+        loc.qt[name] = title[key];
+      }
+    }
+    return editorLocalization.getString("qt." + name);
   }
   private getQuestionJSON(question: any): any {
     var json = new JsonObject().toJsonObject(question);
@@ -1265,15 +1405,6 @@ export class QuestionToolbox
         questions.push(name);
     }
     return questions;
-  }
-
-  public hideAllInnerPopups() {
-    this.actions.forEach(action => {
-      action.hidePopup();
-    });
-  }
-  public onScroll(model, event) {
-    this.hideAllInnerPopups();
   }
   //public dispose(): void { } Don't we need to dispose toolbox?
 }

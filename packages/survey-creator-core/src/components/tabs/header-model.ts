@@ -4,7 +4,10 @@ import { fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-
 import { assign } from "../../utils/utils";
 
 export class HeaderModel extends Base implements IHeader {
+  static primaryColorStr = "var(--sjs-primary-backcolor)";
+
   height: number;
+  mobileHeight: number;
   inheritWidthFrom: "survey" | "container";
   textAreaWidth: number;
   overlapEnabled: boolean;
@@ -84,15 +87,17 @@ export class HeaderModel extends Base implements IHeader {
 
   private setHeaderBackgroundColorCssVariable(cssVariables: any) {
     if (this["backgroundColorSwitch"] === "none") {
-      cssVariables["--sjs-header-backcolor"] = "transparent";
+      cssVariables["--sjs-header-backcolor"] = undefined;
     } else if (this["backgroundColorSwitch"] === "custom") {
       cssVariables["--sjs-header-backcolor"] = this["backgroundColor"] ?? "transparent";
+    } else {
+      cssVariables["--sjs-header-backcolor"] = HeaderModel.primaryColorStr;
     }
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
-    if (!backgroundColor) return "accentColor";
-    if (backgroundColor === "transparent") return "none";
+    if (backgroundColor === HeaderModel.primaryColorStr) return "accentColor";
+    if (!backgroundColor || backgroundColor === "transparent") return "none";
     return "custom";
   }
 
@@ -109,7 +114,7 @@ function getDefaultTitleSetting() {
 function getDefaultDescriptionSetting(isAdvanced?: boolean) {
   const result = { family: settings.themeEditor.defaultFontFamily, weight: "400", size: 16 };
   if (isAdvanced) {
-    result["weight"] = "600";
+    result["size"] = 20;
   }
   return result;
 }
@@ -148,7 +153,7 @@ Serializer.addClass(
     {
       type: "buttongroup",
       name: "headerView",
-      default: "basic",
+      default: "advanced",
       choices: [
         { value: "basic" },
         { value: "advanced" }
@@ -168,7 +173,19 @@ Serializer.addClass(
       type: "spinedit",
       name: "height",
       visibleIf: (obj) => obj.headerView === "advanced",
-      default: 256,
+      default: 0,
+      onPropertyEditorUpdate: function (obj: any, editor: any) {
+        if (!!editor) {
+          editor.unit = "px";
+          editor.min = 0;
+        }
+      }
+    },
+    {
+      type: "spinedit",
+      name: "mobileHeight",
+      visibleIf: (obj) => obj.headerView === "advanced",
+      default: 0,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "px";
@@ -180,7 +197,7 @@ Serializer.addClass(
       type: "buttongroup",
       name: "inheritWidthFrom",
       visibleIf: (obj) => obj.headerView === "advanced",
-      default: "container",
+      default: "survey",
       choices: [
         { value: "survey" },
         { value: "container" }
@@ -190,7 +207,7 @@ Serializer.addClass(
       type: "spinedit",
       name: "textAreaWidth",
       visibleIf: (obj) => obj.headerView === "advanced",
-      default: 512,
+      default: 0,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "px";
@@ -203,7 +220,7 @@ Serializer.addClass(
       name: "backgroundColorSwitch",
       visibleIf: (obj) => obj.headerView === "advanced",
       isSerializable: false,
-      default: "accentColor",
+      default: "none",
       choices: [
         { value: "none" },
         { value: "accentColor" },
@@ -279,8 +296,8 @@ Serializer.addClass(
       }
     },
 
-    getHorizontalAlignment("logoPositionX", "right"),
-    getVerticalAlignment("logoPositionY", "top"),
+    getHorizontalAlignment("logoPositionX", "left"),
+    getVerticalAlignment("logoPositionY", "bottom"),
     getHorizontalAlignment("titlePositionX", "left"),
     getVerticalAlignment("titlePositionY", "bottom"),
     getHorizontalAlignment("descriptionPositionX", "left"),

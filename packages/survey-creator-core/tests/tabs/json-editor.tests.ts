@@ -1,7 +1,7 @@
 import { TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "../../src/components/tabs/json-editor-textarea";
 import { CreatorTester } from "../creator-tester";
-import { JsonEditorBaseModel } from "../../src/components/tabs/json-editor-plugin";
 import { settings } from "../../src/creator-settings";
+import { SurveyTextWorker } from "../../src/textWorker";
 
 test("JsonEditor & showErrors/errorList", () => {
   const creator = new CreatorTester();
@@ -163,34 +163,34 @@ test("JsonEditor & showErrors/errorList", () => {
   const creator = new CreatorTester({ showJSONEditorTab: true });
   let modelEditor;
   creator.onActiveTabChanged.add((sender, options) => {
-    if (options.tabName === "editor") {
+    if (options.tabName === "json") {
       modelEditor = options.model;
     }
   });
   let allowToPassSomeErrors = false;
   creator.onActiveTabChanging.add((sender, options) => {
-    if (creator.activeTab === "editor") {
+    if (creator.activeTab === "json") {
       if (!options.allow) {
         options.allow = allowToPassSomeErrors;
       }
     }
   });
-  creator.activeTab = "editor";
-  expect(creator.activeTab).toBe("editor");
+  creator.activeTab = "json";
+  expect(creator.activeTab).toBe("json");
   modelEditor.text = "{ elements: [ { type: \"text\", name: \"q1\", customProp1: \"abc\" } ]}";
   creator.activeTab = "designer";
-  expect(creator.activeTab).toBe("editor");
+  expect(creator.activeTab).toBe("json");
   allowToPassSomeErrors = true;
   creator.activeTab = "designer";
   expect(creator.activeTab).toBe("designer");
-  creator.activeTab = "editor";
+  creator.activeTab = "json";
   modelEditor.text = "{a: ";
   creator.activeTab = "designer";
-  expect(creator.activeTab).toBe("editor");
+  expect(creator.activeTab).toBe("json");
 });
 test("import export copy actions", () => {
   const creator: CreatorTester = new CreatorTester();
-  const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
+  const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   const importAction = creator.getActionBarItem("svc-json-import");
   const exportAction = creator.getActionBarItem("svc-json-export");
   const copyAction = creator.getActionBarItem("svc-json-copy");
@@ -199,14 +199,14 @@ test("import export copy actions", () => {
   expect(exportAction.visible).toBeFalsy();
   expect(copyAction.visible).toBeFalsy();
 
-  creator.activeTab = "editor";
+  creator.activeTab = "json";
   expect(importAction.visible).toBeTruthy();
   expect(exportAction.visible).toBeTruthy();
   expect(copyAction.visible).toBeTruthy();
 });
 test("import json from file", (done) => {
   const creator: CreatorTester = new CreatorTester();
-  const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
+  const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   editorPlugin.activate();
 
   const data = JSON.stringify({ questions: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] } as any, null, 4);
@@ -221,7 +221,7 @@ test("import json from file", (done) => {
 test("export json to file", (done): any => {
   const creator: CreatorTester = new CreatorTester();
   creator.JSON = { questions: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] };
-  const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("editor");
+  const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   editorPlugin.activate();
 
   expect(editorPlugin.model.text).toEqual("{\n  \"pages\": [\n    {\n      \"name\": \"page1\",\n      \"elements\": [\n        {\n          \"type\": \"text\",\n          \"name\": \"q1\"\n        },\n        {\n          \"type\": \"text\",\n          \"name\": \"q2\"\n        }\n      ]\n    }\n  ]\n}");
@@ -247,4 +247,20 @@ test("Put elements into end of the JSON", () => {
   const elementsPos = text.indexOf("elements");
   const titlePos = text.indexOf("title");
   expect(elementsPos > titlePos).toBeTruthy();
+});
+test("We should have one SurveyTextWorker.fromJSON/toJSON", () => {
+  const json = { requiredMark: "###" };
+  const creator = new CreatorTester();
+  creator.activeTab = "json";
+  const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
+  editorPlugin.model.text = JSON.stringify(json);
+  let counter = 0;
+  SurveyTextWorker.onProcessJson = (json: any): void => {
+    if (json?.requiredMark === "###") {
+      counter++;
+    }
+  };
+  creator.activeTab = "designer";
+  expect(counter).toBe(1);
+  SurveyTextWorker.onProcessJson = undefined;
 });

@@ -1,34 +1,42 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
-import { SurveyCreatorModel, QuestionToolbox } from "survey-creator-core";
+import { SurveyCreatorModel, QuestionToolbox, QuestionToolboxItem } from "survey-creator-core";
 import { Action, VerticalResponsivityManager } from "survey-core";
-import { BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 
 @Component({
-  selector: "svc-adaptive-toolbox",
+  selector: "svc-toolbox",
   templateUrl: "./adaptive-toolbox.component.html",
   styles: [":host { display: none; }"]
 })
 export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> implements AfterViewInit {
-  @Input() creator!: SurveyCreatorModel;
+  @Input() model!: SurveyCreatorModel;
   @ViewChild("container") container!: ElementRef<HTMLElement>;
   private responsivityManager: VerticalResponsivityManager | undefined;
-  public get model() {
-    return this.creator.toolbox;
+  public get toolbox() {
+    return this.model.toolbox;
+  }
+  public get creator() {
+    return this.model;
   }
   public get searchItem() {
-    return this.model.searchItem as Action;
+    return this.toolbox.searchItem as Action;
   }
   ngAfterViewInit() {
-    this.model.setRootElement(this.container.nativeElement as HTMLDivElement);
+    this.toolbox.setRootElement(this.container.nativeElement as HTMLDivElement);
     this.responsivityManager =
-      new VerticalResponsivityManager(this.model.containerElement as HTMLDivElement,
-        this.model, this.model.itemSelector);
+        new VerticalResponsivityManager(this.toolbox.containerElement as HTMLDivElement,
+          this.toolbox);
   }
   protected getModel(): QuestionToolbox {
-    return this.model;
+    return this.toolbox;
   }
   override ngOnDestroy(): void {
     this.responsivityManager?.dispose();
+    this.toolbox.setRootElement(undefined as any);
     super.ngOnDestroy();
   }
+  trackItemBy(_: number, item: QuestionToolboxItem) {
+    return item.renderedId;
+  }
 }
+AngularComponentFactory.Instance.registerComponent("svc-toolbox", AdaptiveToolboxComponent);

@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export var skStrings = {
   // survey templates
@@ -22,7 +22,7 @@ export var skStrings = {
     theme: "Témy",
     translation: "Preklad",
     designer: "Návrhár prieskumov",
-    editor: "Editor JSON",
+    json: "Editor JSON",
     logic: "Logika prieskumu"
   },
   // Question types
@@ -69,6 +69,7 @@ export var skStrings = {
     surveySettingsTooltip: "Nastavenia prieskumu",
     themeSettings: "Nastavenia motívu",
     themeSettingsTooltip: "Nastavenia motívu",
+    creatorSettingTitle: "Nastavenia tvorcu",
     showPanel: "Zobraziť panel",
     hidePanel: "Skryť panel",
     prevSelected: "Výber predchádzajúceho",
@@ -106,6 +107,12 @@ export var skStrings = {
     redo: "Opakovať",
     undoTooltip: "Zrušiť poslednú zmenu",
     redoTooltip: "Opakovať zmenu",
+    expandAllTooltip: "Rozbaliť všetko",
+    collapseAllTooltip: "Zbaliť všetko",
+    zoomInTooltip: "Priblížiť",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Oddialiť",
+    lockQuestionsTooltip: "Uzamknutie stavu rozbalenia/zbalenia otázok",
     showMoreChoices: "Zobraziť viac",
     showLessChoices: "Zobraziť menej",
     copy: "Kopírovať",
@@ -123,6 +130,8 @@ export var skStrings = {
     toolboxNoResultsFound: "Nenašli sa žiadne výsledky",
     propertyGridFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     propertyGridNoResultsFound: "Nenašli sa žiadne výsledky",
+    propertyGridPlaceholderTitle: "Začnite konfigurovať formulár",
+    propertyGridPlaceholderDescription: "Kliknutím na ikonu ľubovoľnej kategórie preskúmate nastavenia prieskumu. Ďalšie nastavenia budú k dispozícii po pridaní prvku prieskumu na návrhovú plochu.",
     correctJSON: "Opravte JSON.",
     surveyResults: "Výsledok prieskumu: ",
     surveyResultsTable: "Ako tabuľku",
@@ -154,6 +163,7 @@ export var skStrings = {
     translationPlaceHolder: "Preklad...",
     translationSource: "Zdroj: ",
     translationTarget: "Cieľ: ",
+    translationYouTubeNotSupported: "Odkazy na YouTube nie sú podporované.",
     themeExportButton: "Vývoz",
     themeImportButton: "Import",
     surveyJsonExportButton: "Vývoz",
@@ -177,6 +187,18 @@ export var skStrings = {
     pagePlaceHolder: "Stránka je prázdna. Potiahnite prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
     imagePlaceHolder: "Presuňte obrázok sem alebo kliknite na tlačidlo nižšie a vyberte obrázok, ktorý chcete nahrať",
     surveyPlaceHolderMobile: "Kliknite na tlačidlo \"Pridať otázku\" nižšie a začnite vytvárať formulár.",
+    surveyPlaceholderTitle: "Formulár je prázdny",
+    surveyPlaceholderTitleMobile: "Formulár je prázdny",
+    surveyPlaceholderDescription: "Presuňte prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
+    surveyPlaceholderDescriptionMobile: "Presuňte prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
+    previewPlaceholderTitle: "Žiadny náhľad",
+    previewPlaceholderTitleMobile: "Žiadny náhľad",
+    previewPlaceholderDescription: "Prieskum neobsahuje žiadne viditeľné prvky.",
+    previewPlaceholderDescriptionMobile: "Prieskum neobsahuje žiadne viditeľné prvky.",
+    translationsPlaceholderTitle: "Žiadne reťazce na preklad",
+    translationsPlaceholderTitleMobile: "Žiadne reťazce na preklad",
+    translationsPlaceholderDescription: "Pridajte prvky do formulára alebo zmeňte filter reťazcov na paneli s nástrojmi.",
+    translationsPlaceholderDescriptionMobile: "Pridajte prvky do formulára alebo zmeňte filter reťazcov na paneli s nástrojmi.",
     pagePlaceHolderMobile: "Kliknite na tlačidlo \"Pridať otázku\" nižšie a pridajte na stránku nový prvok.",
     panelPlaceHolderMobile: "Kliknite na tlačidlo \"Pridať otázku\" nižšie a pridajte na panel nový prvok.",
     imagePlaceHolderMobile: "Kliknite na tlačidlo nižšie a vyberte obrázok, ktorý chcete nahrať",
@@ -189,6 +211,10 @@ export var skStrings = {
     lg: {
       addNewItem: "Pridať nové pravidlo",
       empty_tab: "Vytvorte pravidlo na prispôsobenie toku prieskumu.",
+      logicPlaceholderTitle: "Žiadne logické pravidlá",
+      logicPlaceholderTitleMobile: "Žiadne logické pravidlá",
+      logicPlaceholderDescription: "Vytvorte pravidlo na prispôsobenie toku prieskumu.",
+      logicPlaceholderDescriptionMobile: "Vytvorte pravidlo na prispôsobenie toku prieskumu.",
       page_visibilityName: "Viditeľnosť strany",
       page_enableName: "Povoliť (zakázať) stránku",
       page_requireName: "Nastavenie požadovanej strany",
@@ -273,14 +299,14 @@ export var skStrings = {
       description: "Popis panelu",
       visibleIf: "Zviditeľnite panel, ak",
       requiredIf: "Nastavte panel tak, aby bol povinný, ak",
-      questionsOrder: "Poradie otázok v rámci panelu",
+      questionOrder: "Poradie otázok v rámci panelu",
       page: "Nadradená stránka",
       startWithNewLine: "Zobrazenie panela na novom riadku",
       state: "Stav zbalenia panela",
       width: "Šírka vnoreného panela",
       minWidth: "Minimálna šírka panela",
       maxWidth: "Maximálna šírka panela",
-      showNumber: "Číselné panely"
+      showNumber: "Očíslujte tento panel"
     },
     paneldynamic: {
       name: "Názov panela",
@@ -301,12 +327,13 @@ export var skStrings = {
       templateTabTitle: "Vzor názvu tabulátora",
       tabTitlePlaceholder: "Zástupný symbol názvu tabulátora",
       templateVisibleIf: "Zviditeľniť samostatný panel, ak",
-      hideNumber: "Skrytie čísla panela",
+      showNumber: "Očíslujte panel",
       titleLocation: "Zarovnanie názvu panela",
       descriptionLocation: "Zarovnanie popisu panela",
-      templateTitleLocation: "Zarovnanie názvu otázky",
+      templateQuestionTitleLocation: "Zarovnanie názvu otázky",
       templateErrorLocation: "Zarovnanie chybových hlásení",
       newPanelPosition: "Nové umiestnenie panela",
+      showRangeInProgress: "Zobrazenie indikátora priebehu",
       keyName: "Zabránenie duplicitným odpovediam v nasledujúcej otázke"
     },
     question: {
@@ -317,7 +344,7 @@ export var skStrings = {
       requiredIf: "Urobte otázku povinnou, ak",
       page: "Nadradená stránka",
       state: "Stav zbalenia poľa otázok",
-      hideNumber: "Skrytie čísla otázky",
+      showNumber: "Číslo tejto otázky",
       titleLocation: "Zarovnanie názvu otázky",
       descriptionLocation: "Zarovnanie popisu otázky",
       errorLocation: "Zarovnanie chybových hlásení",
@@ -359,7 +386,8 @@ export var skStrings = {
     // survey templates
     survey: {
       title: "Titul",
-      description: "Opis prieskumu"
+      description: "Opis prieskumu",
+      readOnly: "Nastavenie prieskumu iba na čítanie"
     },
     page: {
       name: "Názov stránky",
@@ -367,8 +395,8 @@ export var skStrings = {
       description: "Popis stránky",
       visibleIf: "Zviditeľniť stránku, ak",
       requiredIf: "Nastavte stránku ako povinnú, ak",
-      maxTimeToFinish: "Časový limit na dokončenie stránky (v sekundách)",
-      questionsOrder: "Poradie otázok na stránke"
+      timeLimit: "Časový limit na dokončenie stránky (v sekundách)",
+      questionOrder: "Poradie otázok na stránke"
     },
     matrixdropdowncolumn: {
       name: "Názov stĺpca",
@@ -482,6 +510,7 @@ export var skStrings = {
     "listIsEmpty@calculatedValues": "Zatiaľ nemáte žiadne vlastné premenné",
     "listIsEmpty@triggers": "Zatiaľ nemáte žiadne spúšťače",
     "listIsEmpty@navigateToUrlOnCondition": "Zatiaľ nemáte žiadne odkazy",
+    "listIsEmpty@pages": "Zatiaľ nemáte žiadne stránky",
     "addNew@choices": "Pridať výber",
     "addNew@columns": "Pridať nový stĺpec",
     "addNew@rows": "Pridať nový riadok",
@@ -489,6 +518,7 @@ export var skStrings = {
     "addNew@calculatedValues": "Pridanie novej premennej",
     "addNew@triggers": "Pridať nový spúšťač",
     "addNew@navigateToUrlOnCondition": "Pridať novú URL adresu",
+    "addNew@pages": "Pridať novú stránku",
     expressionIsEmpty: "Výraz je prázdny",
     value: "Hodnota",
     text: "Text",
@@ -532,7 +562,7 @@ export var skStrings = {
     isRequired: "Vyžaduje sa?",
     markRequired: "Označiť podľa potreby",
     removeRequiredMark: "Odstráňte požadovanú značku",
-    isAllRowRequired: "Vyžadovať odpoveď pre všetky riadky",
+    eachRowRequired: "Vyžadovať odpoveď pre všetky riadky",
     eachRowUnique: "Zabráňte duplicitným odpovediam v riadkoch",
     requiredErrorText: "Text chyby pri povinných položkách",
     startWithNewLine: "Začína sa novým riadkom?",
@@ -544,7 +574,7 @@ export var skStrings = {
     maxSize: "Maximálna veľkosť súboru v bajtoch",
     rowCount: "Počet riadkov",
     columnLayout: "Rozloženie stĺpcov",
-    addRowLocation: "Poloha tlačidla na pridanie riadka",
+    addRowButtonLocation: "Poloha tlačidla na pridanie riadka",
     transposeData: "Transponovanie riadkov do stĺpcov",
     addRowText: "Text tlačidla na pridanie riadka",
     removeRowText: "Text tlačidla na odstránenie riadka",
@@ -580,10 +610,9 @@ export var skStrings = {
     simulator: "Vybrať zariadenie",
     landscapeOrientation: "Na šírku",
     portraitOrientation: "Prepnutie na orientáciu na výšku",
-    mode: "Režim (upraviť/iba na čítanie)",
     clearInvisibleValues: "Odstrániť neviditeľné hodnoty",
     cookieName: "Názov súboru cookie (na zabránenie lokálneho spustenia prieskumu dvakrát)",
-    sendResultOnPageNext: "Odoslať výsledky prieskumu na ďalšiu stránku",
+    partialSendEnabled: "Odoslať výsledky prieskumu na ďalšiu stránku",
     storeOthersAsComment: "Uložiť hodnotu „iné“ v samostatnom poli",
     showPageTitles: "Zobraziť tituly stránok",
     showPageNumbers: "Zobraziť čísla stránok",
@@ -594,35 +623,38 @@ export var skStrings = {
     editText: "Text tlačidla úpravy",
     startSurveyText: "Text tlačidla spustenia",
     showNavigationButtons: "Zobraziť navigačné tlačidlá (predvolená navigácia)",
+    navigationButtonsLocation: "Zarovnanie navigačných tlačidiel",
     showPrevButton: "Zobraziť tlačidlo predchádzajúce (používateľ sa môže vráiť na predchádzajúcu stránku)",
-    firstPageIsStarted: "Prvá stránka v prieskume je úvodná stránka.",
-    showCompletedPage: "Na konci zobraziť stránku s dokončením (completedHtml)",
-    goNextPageAutomatic: "Po zodpovedaní všetkých otázok prejsť na ďalšiu stránku automaticky",
-    allowCompleteSurveyAutomatic: "Vyplňte prieskum automaticky",
+    firstPageIsStartPage: "Prvá stránka v prieskume je úvodná stránka.",
+    showCompletePage: "Na konci zobraziť stránku s dokončením (completedHtml)",
+    autoAdvanceEnabled: "Po zodpovedaní všetkých otázok prejsť na ďalšiu stránku automaticky",
+    autoAdvanceAllowComplete: "Vyplňte prieskum automaticky",
     showProgressBar: "Zobraziť indikátor priebehu",
+    progressBarLocation: "Zarovnanie indikátora priebehu",
     questionTitleLocation: "Poloha titulu otázky",
     questionTitleWidth: "Šírka názvu otázky",
-    requiredText: "Povinný symbol(-y) otázok",
+    requiredMark: "Povinný symbol(-y) otázok",
     questionTitleTemplate: "Šablóna titulu otázky, predvolená je:  „{no}. {require} {title}“",
     questionErrorLocation: "Poloha chyby otázky",
-    focusFirstQuestionAutomatic: "Prechod na prvú otázku pri zmene stránky",
-    questionsOrder: "Poradie prvkov na stránke",
-    maxTimeToFinish: "Maximálny čas na dokončenie prieskumu",
-    maxTimeToFinishPage: "Maximálny čas na dokončenie stránky v rámci prieskumu",
-    showTimerPanel: "Zobraziť panel s časovačom",
-    showTimerPanelMode: "Zobraziť režim panela s časovačom",
+    autoFocusFirstQuestion: "Prechod na prvú otázku pri zmene stránky",
+    questionOrder: "Poradie prvkov na stránke",
+    timeLimit: "Maximálny čas na dokončenie prieskumu",
+    timeLimitPerPage: "Maximálny čas na dokončenie stránky v rámci prieskumu",
+    showTimer: "Použitie časovača",
+    timerLocation: "Zobraziť panel s časovačom",
+    timerInfoMode: "Zobraziť režim panela s časovačom",
     renderMode: "Režim vykresľovania",
     allowAddPanel: "Povoliť pridanie panela",
     allowRemovePanel: "Povoliť odstránenie panela",
-    panelAddText: "Text pri pridaní panela",
-    panelRemoveText: "Text pri odstránení panela",
+    addPanelText: "Text pri pridaní panela",
+    removePanelText: "Text pri odstránení panela",
     isSinglePage: "Zobraziť všetky prvky na jednej stránke",
     html: "Html",
     setValue: "Odpoveď",
     dataFormat: "Formát obrázka",
     allowAddRows: "Povoliť pridávanie riadkov",
     allowRemoveRows: "Povoliť odstránenie riadkov",
-    allowRowsDragAndDrop: "Povoliť presúvanie riadkov",
+    allowRowReorder: "Povoliť presúvanie riadkov",
     responsiveImageSizeHelp: "Neuplatňuje sa, ak zadáte presnú šírku alebo výšku obrázka.",
     minImageWidth: "Minimálna šírka obrázka",
     maxImageWidth: "Maximálna šírka obrázka",
@@ -630,6 +662,7 @@ export var skStrings = {
     maxImageHeight: "Maximálna výška obrázka",
     minValue: "Minimálna hodnota",
     maxValue: "Maximálna hodnota",
+    caseInsensitive: "Nerozlišujú sa veľké a malé písmená",
     minLength: "Minimálna dĺžka",
     allowDigits: "Povoliť čísla",
     minCount: "Minimálny počet",
@@ -648,13 +681,13 @@ export var skStrings = {
     logo: "Logo (reťazec s kódovaním URL alebo base64)",
     questionsOnPageMode: "Štruktúra prieskumu",
     maxTextLength: "Maximálna dĺžka odpovede (v znakoch)",
-    maxOthersLength: "Maximálna dĺžka komentára (v znakoch)",
+    maxCommentLength: "Maximálna dĺžka komentára (v znakoch)",
     commentAreaRows: "Výška oblasti komentárov (v riadkoch)",
     autoGrowComment: "V prípade potreby automaticky rozbaľte oblasť komentárov",
     allowResizeComment: "Povolenie používateľom meniť veľkosť textových oblastí",
     textUpdateMode: "Aktualizácia hodnoty textovej otázky",
     maskType: "Typ vstupnej masky",
-    focusOnFirstError: "Zameranie na prvú neplatnú odpoveď",
+    autoFocusFirstError: "Zameranie na prvú neplatnú odpoveď",
     checkErrorsMode: "Spustenie overenia pravosti",
     validateVisitedEmptyFields: "Overenie prázdnych polí pri strate zamerania",
     navigateToUrl: "Prejsť na adresu URL",
@@ -688,10 +721,9 @@ export var skStrings = {
     minPanelCount: "Minimálny počet panelov",
     maxPanelCount: "Maximálny počet panelov",
     panelsState: "Stav rozbalenia vnútorného panela",
-    panelPrevText: "Popis tlačidla Predchádzajúci panel",
-    panelNextText: "Popis tlačidla Nasledujúci panel",
-    showRangeInProgress: "Zobraziť indikátor priebehu",
-    panelRemoveButtonLocation: "Odstrániť umiestnenie tlačidla panela",
+    prevPanelText: "Popis tlačidla Predchádzajúci panel",
+    nextPanelText: "Popis tlačidla Nasledujúci panel",
+    removePanelButtonLocation: "Odstrániť umiestnenie tlačidla panela",
     hideIfRowsEmpty: "Skryť otázku, ak nie sú žiadne riadky",
     hideColumnsIfEmpty: "Skryť stĺpce, ak nie sú k dispozícii žiadne riadky",
     rateValues: "Vlastné hodnoty sadzieb",
@@ -713,21 +745,22 @@ export var skStrings = {
     keyDuplicationError: "Chybové hlásenie \"Nejedinečná kľúčová hodnota\"",
     minSelectedChoices: "Minimálny počet vybraných možností",
     maxSelectedChoices: "Maximálny počet vybraných možností",
-    showClearButton: "Zobrazenie tlačidla Vymazať",
     logoWidth: "Šírka loga (v akceptovaných hodnotách CSS)",
     logoHeight: "Výška loga (v hodnotách akceptovaných CSS)",
     readOnly: "Iba na čítanie",
     enableIf: "Upraviteľné, ak",
-    emptyRowsText: "Správa \"Žiadne riadky\"",
+    noRowsText: "Správa \"Žiadne riadky\"",
     separateSpecialChoices: "Samostatné špeciálne možnosti (Žiadne, Iné, Vybrať všetko)",
     choicesFromQuestion: "Skopírujte voľby z nasledujúcej otázky",
     choicesFromQuestionMode: "Aké možnosti kopírovať?",
+    choiceValuesFromQuestion: "Použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky ako ID výberu",
+    choiceTextsFromQuestion: "Ako texty výberu použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky",
     progressBarShowPageTitles: "Zobrazenie prebiehajúcich názvov stránok",
     progressBarShowPageNumbers: "Zobrazenie prebiehajúcich čísel strán",
     showCommentArea: "Zobrazenie oblasti komentárov",
     commentPlaceholder: "Zástupný symbol oblasti komentárov",
     displayRateDescriptionsAsExtremeItems: "Popisy rýchlosti zobrazenia ako extrémnych hodnôt",
-    rowsOrder: "Poradie riadkov",
+    rowOrder: "Poradie riadkov",
     columnsLayout: "Rozloženie stĺpcov",
     columnColCount: "Vnorený počet stĺpcov",
     correctAnswer: "Správna odpoveď",
@@ -756,6 +789,11 @@ export var skStrings = {
       top: "V hornej časti",
       bottom: "V spodnej časti"
     },
+    previewMode: "Režim náhľadu",
+    gridLayoutEnabled: "Povolenie rozloženia mriežky",
+    gridLayoutColumns: "Stĺpce rozloženia mriežky",
+    maskSettings: "Nastavenia masky",
+    detailErrorLocation: "Zarovnanie chybového hlásenia o rozšírení riadka",
     // Creator tabs
     tabs: {
       panel: {
@@ -803,6 +841,9 @@ export var skStrings = {
       header: "Hlavička",
       background: "Pozadie",
       appearance: "Vzhľad",
+      accentColors: "Akcentové farby",
+      surfaceBackground: "Pozadie povrchu",
+      scaling: "Škálovanie",
       others: "Iné"
     },
     editProperty: "Upraviť vlastnosť „{0}“",
@@ -812,8 +853,7 @@ export var skStrings = {
     columnsEnableIf: "Stĺpce sú viditeľné, ak",
     rowsEnableIf: "Riadky sú viditeľné, ak",
     innerIndent: "Pridanie vnútorných zarážok",
-    defaultValueFromLastRow: "Prevzatie predvolených hodnôt z posledného riadka",
-    defaultValueFromLastPanel: "Prevzatie predvolených hodnôt z posledného panela",
+    copyDefaultValueFromLastEntry: "Predvolené použitie odpovedí z posledného záznamu",
     enterNewValue: "Zadajte hodnotu.",
     noquestions: "V prieskume nie je žiadna otázka.",
     createtrigger: "Vytvorte aktivátor",
@@ -867,6 +907,7 @@ export var skStrings = {
       fontSize: "Veľkosť písma",
       scale: "Stupnica",
       cornerRadius: "Polomer rohov",
+      advancedMode: "Pokročilý režim",
       pageTitle: "Písmo názvu",
       pageDescription: "Popisné písmo",
       questionTitle: "Písmo názvu",
@@ -927,10 +968,11 @@ export var skStrings = {
     firstExpanded: "prvý rozbalený",
     off: "vyp.",
     list: "zoznam",
+    carousel: "Kolotoč",
+    tab: "Karty",
     progressTop: "horná časť priebehu",
     progressBottom: "spodná časť priebehu",
     progressTopBottom: "priebeh –​ horná a spodná časť",
-    tab: "Karty",
     horizontal: "vodorovné",
     vertical: "zvislé",
     top: "hore",
@@ -988,6 +1030,61 @@ export var skStrings = {
       url: "URL adresa",
       week: "Týždeň"
     },
+    autocomplete: {
+      name: "Celé meno",
+      "honorific-prefix": "Predpona",
+      "given-name": "Krstné meno",
+      "additional-name": "Stredné meno",
+      "family-name": "Priezvisko",
+      "honorific-suffix": "Prípona",
+      nickname: "Prezývka",
+      "organization-title": "Pracovná pozícia",
+      username: "Používateľské meno",
+      "new-password": "Nové heslo",
+      "current-password": "Aktuálne heslo",
+      organization: "Názov organizácie",
+      "street-address": "Celá adresa",
+      "address-line1": "Riadok adresy 1",
+      "address-line2": "Riadok adresy 2",
+      "address-line3": "Riadok adresy 3",
+      "address-level4": "Adresa úrovne 4",
+      "address-level3": "Adresa úrovne 3",
+      "address-level2": "Adresa úrovne 2",
+      "address-level1": "Adresa úrovne 1",
+      country: "Kód krajiny",
+      "country-name": "Názov krajiny",
+      "postal-code": "Psč",
+      "cc-name": "Meno držiteľa karty",
+      "cc-given-name": "Krstné meno držiteľa karty",
+      "cc-additional-name": "Stredné meno držiteľa karty",
+      "cc-family-name": "Priezvisko držiteľa karty",
+      "cc-number": "Číslo kreditnej karty",
+      "cc-exp": "Dátum vypršania platnosti",
+      "cc-exp-month": "Mesiac vypršania platnosti",
+      "cc-exp-year": "Rok vypršania platnosti",
+      "cc-csc": "Bezpečnostný kód karty",
+      "cc-type": "Typ kreditnej karty",
+      "transaction-currency": "Mena transakcie",
+      "transaction-amount": "Suma transakcie",
+      language: "Preferovaný jazyk",
+      bday: "Narodeniny",
+      "bday-day": "Deň narodenín",
+      "bday-month": "Mesiac narodenín",
+      "bday-year": "Rok narodenín",
+      sex: "Pohlavie",
+      url: "URL adresa webovej stránky",
+      photo: "Profilová fotka",
+      tel: "Telefónne číslo",
+      "tel-country-code": "Kód krajiny pre telefón",
+      "tel-national": "Národné telefónne číslo",
+      "tel-area-code": "Telefónna Predvoľba",
+      "tel-local": "Miestne telefónne číslo",
+      "tel-local-prefix": "Lokálna predvoľba telefónu",
+      "tel-local-suffix": "Prípona miestneho telefónu",
+      "tel-extension": "Rozšírenie telefónu",
+      email: "E-mailová adresa",
+      impp: "Protokol okamžitých správ"
+    },
     maskType: {
       none: "Žiadny",
       pattern: "Vzorka",
@@ -1014,6 +1111,8 @@ export var skStrings = {
     noPreview: "žiadna ukážka",
     showAllQuestions: "zobraziť ukážku so všetkými otázkami",
     showAnsweredQuestions: "zobraziť ukážku so zodpovedanými otázkami",
+    allQuestions: "Zobraziť všetky otázky",
+    answeredQuestions: "Zobraziť len zodpovedané otázky",
     pages: "stránky",
     questions: "otázky",
     requiredQuestions: "povinné otázky",
@@ -1029,13 +1128,10 @@ export var skStrings = {
     showNavigationButtons: {
       none: "Skrytý"
     },
-    showTimerPanel: {
-      none: "Skrytý"
+    timerInfoMode: {
+      combined: "Obidva"
     },
-    showTimerPanelMode: {
-      all: "Obidva"
-    },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "Závisí od rozloženia matice"
     },
     panelsState: {
@@ -1106,17 +1202,19 @@ export var skStrings = {
       percent: "Percento",
       date: "Dátum"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "Originál"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "Originál"
     },
-    showProgressBar: {
-      off: "Skrytý",
-      topbottom: "hore a dolu",
+    progressBarLocation: {
+      top: "Vrchol",
+      bottom: "Dno",
+      topbottom: "Hore a dole",
       aboveheader: "Nad hlavičkou",
-      belowheader: "Pod hlavičkou"
+      belowheader: "Pod hlavičkou",
+      off: "Skrytý"
     },
     sum: "Súčet",
     count: "Počítať",
@@ -1255,12 +1353,13 @@ export var skStrings = {
       questionTitleLocation: "Vzťahuje sa na všetky otázky v tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\").",
       questionTitleWidth: "Nastavuje konzistentnú šírku názvov otázok, keď sú zarovnané naľavo od polí otázok. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
       questionErrorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu ku všetkým otázkam v paneli. Možnosť Zdediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu.",
-      questionsOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť Zdediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu.",
+      questionOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť Zdediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu.",
       page: "Premiestni panel na koniec vybratej strany.",
       innerIndent: "Pridá medzeru alebo okraj medzi obsah panela a ľavý okraj panela.",
       startWithNewLine: "Zrušte výber výberu, ak chcete panel zobraziť v jednom riadku s predchádzajúcou otázkou alebo panelom. Toto nastavenie sa neuplatňuje, ak je panel prvým prvkom vo formulári.",
       state: "Vyberte si z: \"Rozšírené\" - panel je zobrazený v plnom rozsahu a môže byť zbalený; \"Zbalené\" - panel zobrazuje iba názov a popis a je možné ho rozšíriť; \"Zamknutý\" - panel sa zobrazuje v plnom rozsahu a nedá sa zbaliť.",
-      width: "Nastaví šírku panela v pomere k ostatným prvkom prieskumu v tej istej čiare. Akceptuje hodnoty CSS (px, %, in, pt atď.)."
+      width: "Nastaví šírku panela v pomere k ostatným prvkom prieskumu v tej istej čiare. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
+      showQuestionNumbers: "Priradí čísla otázkam vnoreným do tohto panela."
     },
     paneldynamic: {
       name: "ID panela, ktoré respondenti nevidia.",
@@ -1268,7 +1367,7 @@ export var skStrings = {
       visibleIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje viditeľnosť panela.",
       enableIf: "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre panel.",
       requiredIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď.",
-      templateTitleLocation: "Vzťahuje sa na všetky otázky v tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\").",
+      templateQuestionTitleLocation: "Vzťahuje sa na všetky otázky v tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\").",
       templateErrorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\").",
       errorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu ku všetkým otázkam v paneli. Možnosť Zdediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu.",
       page: "Premiestni panel na koniec vybratej strany.",
@@ -1283,9 +1382,10 @@ export var skStrings = {
       titleLocation: "Toto nastavenie sa automaticky dedí všetkými otázkami na tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\").",
       descriptionLocation: "Možnosť \"Dediť\" použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene pod názvom panela\").",
       newPanelPosition: "Definuje pozíciu novo pridaného panela. V predvolenom nastavení sa na koniec pridávajú nové panely. Výberom položky \"Ďalej\" vložíte nový panel za aktuálny.",
-      defaultValueFromLastPanel: "Duplikuje odpovede z posledného panela a priradí ich ďalšiemu pridanému dynamickému panelu.",
+      copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného panela a priradí ich ďalšiemu pridanému dynamickému panelu.",
       keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli."
     },
+    copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku.",
     defaultValueExpression: "Toto nastavenie vám umožňuje priradiť predvolenú hodnotu odpovede na základe výrazu. Výraz môže obsahovať základné výpočty - '{q1_id} + {q2_id}', boolovské výrazy, ako napríklad '{age} > 60', a funkcie: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atď. Hodnota určená týmto výrazom slúži ako počiatočná predvolená hodnota, ktorú je možné prepísať manuálnym vstupom respondenta.",
     resetValueIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje, kedy sa vstup respondenta obnoví na hodnotu na základe hodnoty \"Výraz predvolenej hodnoty\" alebo \"Výraz nastavenej hodnoty\" alebo hodnoty \"Predvolená odpoveď\" (ak je nastavená).",
     setValueIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje, kedy spustiť \"Nastaviť výraz hodnoty\" a dynamicky priradiť výslednú hodnotu ako odpoveď.",
@@ -1339,7 +1439,8 @@ export var skStrings = {
     },
     // survey templates
     survey: {
-      mode: "Vyberte si medzi: \"Upraviteľné\" - umožňuje respondentom vyplniť váš prieskum; \"Iba na čítanie\" - zakáže úpravu formulárov."
+      readOnly: "Vyberte, či chcete respondentom zabrániť vo vypĺňaní prieskumu.",
+      progressBarLocation: "Nastaví umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu."
     },
     matrixdropdowncolumn: {
       name: "ID stĺpca, ktoré respondenti nevidia.",
@@ -1348,27 +1449,29 @@ export var skStrings = {
       visibleIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje viditeľnosť stĺpca.",
       enableIf: "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre stĺpec.",
       requiredIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď.",
-      showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu."
+      showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu.",
+      colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
     },
+    caseInsensitive: "Vyberte, či sa veľké a malé písmená v regulárnom výraze musia považovať za ekvivalentné.",
     widthMode: "Vyberte si z: \"Statický\" - nastavuje pevnú šírku; \"Responzívny\" - spôsobuje, že prieskum zaberá celú šírku obrazovky; \"Auto\" - použije ktorýkoľvek z týchto dvoch v závislosti od použitých typov otázok.",
     cookieName: "Súbory cookie zabraňujú používateľom vyplniť ten istý prieskum dvakrát.",
     logo: "Prilepte odkaz na obrázok (bez obmedzenia veľkosti) alebo kliknite na ikonu priečinka a prehľadávajte súbor z počítača (až 64 kB).",
     logoWidth: "Nastavuje šírku loga v jednotkách CSS (px, %, in, pt atď.).",
     logoHeight: "Nastavuje výšku loga v jednotkách CSS (px, %, in, pt atď.).",
     logoFit: "Vyberte si z: \"Žiadne\" - obrázok si zachováva svoju pôvodnú veľkosť; \"Obsahovať\" - veľkosť obrázka sa zmení tak, aby sa zmestil pri zachovaní pomeru strán; \"Obal\" - obrázok vyplní celé pole pri zachovaní pomeru strán; \"Vyplniť\" - obrázok je natiahnutý tak, aby vyplnil pole bez zachovania pomeru strán.",
-    goNextPageAutomatic: "Vyberte, či chcete, aby prieskum automaticky postúpil na ďalšiu stranu po tom, čo respondent odpovie na všetky otázky na aktuálnej stránke.",
-    allowCompleteSurveyAutomatic: "Vyberte, či chcete, aby sa prieskum dokončil automaticky po tom, čo respondent odpovie na všetky otázky.",
+    autoAdvanceEnabled: "Vyberte, či chcete, aby sa prieskum automaticky posunul na ďalšiu stránku, keď respondent odpovie na všetky otázky na aktuálnej stránke. Táto funkcia sa nepoužije, ak je posledná otázka na stránke otvorená alebo umožňuje viacero odpovedí.",
+    autoAdvanceAllowComplete: "Vyberte, či chcete, aby sa prieskum dokončil automaticky po tom, čo respondent odpovie na všetky otázky.",
     showNavigationButtons: "Nastavuje viditeľnosť a umiestnenie navigačných tlačidiel na stránke.",
-    showProgressBar: "Nastavuje viditeľnosť a umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu.",
+    navigationButtonsLocation: "Nastaví umiestnenie navigačných tlačidiel na stránke.",
     showPreviewBeforeComplete: "Povoľte stránku ukážky so všetkými alebo iba zodpovedanými otázkami.",
     questionTitleLocation: "Vzťahuje sa na všetky otázky v rámci prieskumu. Toto nastavenie je možné prepísať pravidlami zarovnania názvov na nižších úrovniach: panel, stránka alebo otázka. Nastavenie nižšej úrovne prepíše nastavenia na vyššej úrovni.",
-    requiredText: "Symbol alebo postupnosť symbolov označujúcich, že sa vyžaduje odpoveď.",
+    requiredMark: "Symbol alebo postupnosť symbolov označujúcich, že sa vyžaduje odpoveď.",
     questionStartIndex: "Zadajte číslo alebo písmeno, ktorým chcete začať číslovanie.",
     questionErrorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text.",
-    focusFirstQuestionAutomatic: "Vyberte, či chcete prvé vstupné pole na každej strane pripraviť na zadávanie textu.",
-    questionsOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
+    autoFocusFirstQuestion: "Vyberte, či chcete prvé vstupné pole na každej strane pripraviť na zadávanie textu.",
+    questionOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
     maxTextLength: "Len pre otázky týkajúce sa zadávania textu.",
-    maxOthersLength: "Len pre komentáre k otázkam.",
+    maxCommentLength: "Len pre komentáre k otázkam.",
     commentAreaRows: "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre otázok. Vo vstupe zaberá viac riadkov, zobrazí sa posúvač.",
     autoGrowComment: "Vyberte, či chcete, aby komentáre otázok a otázky s dlhým textom automaticky narástli na výšku na základe zadanej dĺžky textu.",
     allowResizeComment: "Iba pre komentáre k otázkam a otázky s dlhým textom.",
@@ -1383,10 +1486,10 @@ export var skStrings = {
     rowTitleWidth: "Akceptuje hodnoty CSS (px, %, in, pt atď.).",
     totalText: "Viditeľné len vtedy, ak aspoň jeden stĺpec obsahuje výraz Typ celkom alebo Celkom.",
     cellErrorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu k bunke s neplatným vstupom. Možnosť Zdediť použije nastavenie z vlastnosti Zarovnanie chybového hlásenia.",
+    detailErrorLocation: "Nastaví umiestnenie chybových hlásení pre otázky vnorené do podrobných sekcií. Možnosť \"Zdediť\" použije nastavenie z vlastnosti \"Zarovnanie chybového hlásenia\".",
     keyDuplicationError: "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie.",
     totalExpression: "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.).",
     confirmDelete: "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka.",
-    defaultValueFromLastRow: "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku.",
     keyName: "Ak zadaný stĺpec obsahuje rovnaké hodnoty, prieskum vyhodí chybu \"Nejedinečná hodnota kľúča\".",
     description: "Zadajte podnadpis.",
     locale: "Vyberte jazyk a začnite vytvárať prieskum. Ak chcete pridať preklad, prepnite na nový jazyk a preložte pôvodný text tu alebo na karte Preklady.",
@@ -1394,21 +1497,21 @@ export var skStrings = {
     imageFit: "Vyberte si z: \"Žiadne\" - obrázok si zachováva svoju pôvodnú veľkosť; \"Obsahovať\" - veľkosť obrázka sa zmení tak, aby sa zmestil pri zachovaní pomeru strán; \"Obal\" - obrázok vyplní celé pole pri zachovaní pomeru strán; \"Vyplniť\" - obrázok je natiahnutý tak, aby vyplnil pole bez zachovania pomeru strán.",
     autoGrow: "Postupne zvyšuje výšku vstupného poľa pri zadávaní údajov. Prepíše nastavenie Výška vstupného poľa (v riadkoch).",
     allowResize: "Rukoväť na zmenu veľkosti (alebo uchopenie) sa zobrazí v rohu a potiahnutím môžete zmeniť veľkosť vstupného poľa.",
-    maxTimeToFinish: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na stránku s poďakovaním.",
-    maxTimeToFinishPage: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
+    timeLimit: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na stránku s poďakovaním.",
+    timeLimitPerPage: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
     validateVisitedEmptyFields: "Povoľte túto možnosť, ak chcete spustiť overenie, keď sa používateľ zameria na prázdne vstupné pole a potom ho opustí bez vykonania akýchkoľvek zmien.",
     page: {
-      maxTimeToFinish: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
+      timeLimit: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
       visibleIf: "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré určuje viditeľnosť stránky.",
       enableIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre stránku.",
       requiredIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď.",
       questionTitleLocation: "Vzťahuje sa na všetky otázky na tejto stránke. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky alebo panely. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Predvolene hore\").",
       questionTitleWidth: "Nastavuje konzistentnú šírku názvov otázok, keď sú zarovnané naľavo od polí otázok. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
       questionErrorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Predvolene hore\").",
-      questionsOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Originál\" v predvolenom nastavení). Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
-      navigationButtonsVisibility: "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\"."
+      questionOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Originál\" v predvolenom nastavení). Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
+      showNavigationButtons: "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\"."
     },
-    showTimerPanel: "Nastavuje viditeľnosť a umiestnenie časovača na stránke.",
+    timerLocation: "Nastaví umiestnenie časovača na strane.",
     panelsState: "Vyberte si z: \"Zamknuté\" - používatelia nemôžu rozširovať ani zbaliť panely; \"Zbaliť všetko\" - všetky panely začínajú v zbalenom stave; \"Rozbaliť všetko\" - všetky panely začínajú v rozšírenom stave; \"Prvý rozšírený\" - pôvodne sa rozšíril iba prvý panel.",
     imageLinkName: "Zadajte zdieľaný názov vlastnosti do poľa objektov obsahujúceho URL adresy obrázkov alebo videosúborov, ktoré chcete zobraziť v zozname výberu.",
     choices: "Ľavá hodnota slúži ako ID položky používané v podmienených pravidlách, pravá hodnota sa zobrazuje respondentom.",
@@ -1421,6 +1524,8 @@ export var skStrings = {
     useDisplayValuesInDynamicTexts: "V prípade otázok s jedným a viacerými výbermi má každá možnosť výberu identifikátor a zobrazenú hodnotu. Ak je táto voľba vybratá, toto nastavenie zobrazuje zobrazenú hodnotu namiesto hodnoty ID v otázkach HTML a dynamických názvoch a popisoch prvkov prieskumu.",
     clearIfInvisible: "Vyberte, či chcete vymazať hodnoty otázok skryté podmienenou logikou a kedy to chcete urobiť. Možnosť \"Dediť\" použije nastavenie na úrovni prieskumu (\"Po dokončení prieskumu predvolene\").",
     choicesFromQuestionMode: "Vyberte si z: \"Všetko\" - skopíruje všetky možnosti výberu z vybranej otázky; \"Vybraté\" - dynamicky kopíruje iba vybrané možnosti výberu; \"Nevybraté\" - dynamicky kopíruje iba nevybraté možnosti výberu. Možnosti \"Žiadne\" a \"Iné\" sa predvolene kopírujú, ak sú povolené v otázke zdroja.",
+    choiceValuesFromQuestion: "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo panelová otázka má poskytnúť ID.",
+    choiceTextsFromQuestion: "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo otázka panela by mala poskytovať zobrazované texty.",
     showOtherItem: "Ak je táto voľba vybratá, používatelia môžu zahrnúť ďalšie vstupy do samostatného poľa komentára.",
     separateSpecialChoices: "Zobrazí každú možnosť špeciálnej voľby (\"Žiadne\", \"Iné\", \"Vybrať všetko\") na novom riadku, a to aj pri použití rozloženia s viacerými stĺpcami.",
     path: "Zadajte umiestnenie v množine údajov služby, kde sa nachádza cieľové pole objektov. Ak URL adresa už odkazuje na pole, nechajte prázdne.",
@@ -1442,7 +1547,7 @@ export var skStrings = {
     needConfirmRemoveFile: "Spustí výzvu na potvrdenie odstránenia súboru.",
     selectToRankEnabled: "Povoľte zoradiť iba vybrané možnosti. Používatelia presunú vybrané položky zo zoznamu možností a zoradia ich v oblasti poradia.",
     dataList: "Zadajte zoznam možností, ktoré budú respondentovi navrhnuté počas vstupu.",
-    itemSize: "Toto nastavenie zmení iba veľkosť vstupných polí a neovplyvní šírku poľa otázok.",
+    inputSize: "Toto nastavenie zmení iba veľkosť vstupných polí a neovplyvní šírku poľa otázok.",
     itemTitleWidth: "Nastavuje konzistentnú šírku pre všetky štítky položiek v pixeloch",
     inputTextAlignment: "Vyberte, ako chcete zarovnať vstupnú hodnotu v poli. Predvolené nastavenie \"Auto\" zarovná vstupnú hodnotu doprava, ak je použité maskovanie meny alebo čísel, a doľava, ak nie.",
     altText: "Slúži ako náhrada, keď obrázok nie je možné zobraziť na zariadení používateľa a na účely prístupnosti.",
@@ -1490,7 +1595,8 @@ export var skStrings = {
     header: {
       inheritWidthFrom: "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti obsahu hlavičky tak, aby sa zmestila do prvku HTML, do ktorého je prieskum umiestnený.",
       textAreaWidth: "Šírka oblasti hlavičky, ktorá obsahuje názov a popis prieskumu, meraná v pixeloch.",
-      overlapEnabled: "Vytvorí spodnú časť hlavičky prekrytú hornou časťou prieskumu."
+      overlapEnabled: "Ak je táto možnosť povolená, horná časť prieskumu prekrýva spodnú časť hlavičky.",
+      mobileHeight: "Ak je nastavená hodnota 0, výška sa vypočíta automaticky, aby sa prispôsobila obsahu hlavičky."
     },
     panellayoutcolumn: {
       effectiveWidth: "Akceptuje hodnoty %.",
@@ -1559,12 +1665,11 @@ export var skStrings = {
     maxValueExpression: "výraz maximálnej hodnoty",
     step: "krok",
     dataList: "zoznam údajov",
-    itemSize: "Veľkosť položky",
+    inputSize: "Veľkosť položky",
     itemTitleWidth: "Šírka označenia položky (v px)",
     inputTextAlignment: "Zarovnanie vstupných hodnôt",
     elements: "Prvky",
     content: "Obsah",
-    navigationButtonsVisibility: "Viditeľnosť navigačných tlačidiel",
     navigationTitle: "Navigácia –​ titul",
     navigationDescription: "Navigácia – opis",
     longTap: "Dlhé klepnutie",
@@ -1578,6 +1683,7 @@ export var skStrings = {
     imageFit: "umiestnenie obrázka",
     altText: "Alternatívny text",
     height: "výška",
+    mobileHeight: "Výška na smartfónoch",
     penColor: "farba pera",
     backgroundColor: "farba pozadia",
     templateElements: "Prvky šablóny",
@@ -1660,12 +1766,27 @@ export var skStrings = {
       orchid: "Orchidea",
       tulip: "Tulipán",
       brown: "Hnedý",
-      green: "Zelený"
+      green: "Zelený",
+      gray: "Sivý"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Povrchové pozadie",
+    "--sjs-primary-background-500": "Prvotný",
+    "--sjs-secondary-background-500": "Sekundárny",
+    surfaceScale: "Povrch",
+    userInterfaceBaseUnit: "Používateľské rozhranie",
+    fontScale: "Písmo",
+    names: {
+      sc2020: "Tvorca prieskumu 2020",
+      "default-light": "Svetlo",
+      "default-dark": "Tmavý",
+      "default-contrast": "Kontrast"
     }
   }
 };
 
-editorLocalization.locales["sk"] = skStrings;
+setupLocale({ localeCode: "sk", strings: skStrings });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
@@ -1759,14 +1880,14 @@ editorLocalization.locales["sk"] = skStrings;
 // pe.portraitOrientation: "Switch to portrait orientation" => "Prepnutie na orientáciu na výšku"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Výška snímky (v hodnotách akceptovaných šablónou CSS)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Šírka obrázka (v akceptovaných hodnotách CSS)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Časový limit na dokončenie stránky (v sekundách)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Časový limit na dokončenie stránky (v sekundách)"
 // question.page: "Parent page" => "Nadradená stránka"
 // pe.noEntriesText: "Empty entries text" => "Text prázdnych položiek"
 // pe.setValue: "Answer" => "Odpoveď"
 // pe.dataFormat: "Image format" => "Formát obrázka"
 // pe.allowAddRows: "Allow adding rows" => "Povoliť pridávanie riadkov"
 // pe.allowRemoveRows: "Allow removing rows" => "Povoliť odstránenie riadkov"
-// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "Povoliť presúvanie riadkov"
+// pe.allowRowReorder: "Allow row drag and drop" => "Povoliť presúvanie riadkov"
 // pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "Neuplatňuje sa, ak zadáte presnú šírku alebo výšku obrázka."
 // pe.minImageWidth: "Minimum image width" => "Minimálna šírka obrázka"
 // pe.maxImageWidth: "Maximum image width" => "Maximálna šírka obrázka"
@@ -1777,11 +1898,11 @@ editorLocalization.locales["sk"] = skStrings;
 // pe.logo: "Logo (URL or base64-encoded string)" => "Logo (reťazec s kódovaním URL alebo base64)"
 // pe.questionsOnPageMode: "Survey structure" => "Štruktúra prieskumu"
 // pe.maxTextLength: "Maximum answer length (in characters)" => "Maximálna dĺžka odpovede (v znakoch)"
-// pe.maxOthersLength: "Maximum comment length (in characters)" => "Maximálna dĺžka komentára (v znakoch)"
+// pe.maxCommentLength: "Maximum comment length (in characters)" => "Maximálna dĺžka komentára (v znakoch)"
 // pe.autoGrowComment: "Auto-expand comment area if necessary" => "V prípade potreby automaticky rozbaľte oblasť komentárov"
 // pe.allowResizeComment: "Allow users to resize text areas" => "Povolenie používateľom meniť veľkosť textových oblastí"
 // pe.textUpdateMode: "Update text question value" => "Aktualizácia hodnoty textovej otázky"
-// pe.focusOnFirstError: "Set focus on the first invalid answer" => "Zameranie na prvú neplatnú odpoveď"
+// pe.autoFocusFirstError: "Set focus on the first invalid answer" => "Zameranie na prvú neplatnú odpoveď"
 // pe.checkErrorsMode: "Run validation" => "Spustenie overenia pravosti"
 // pe.navigateToUrl: "Navigate to URL" => "Prejsť na adresu URL"
 // pe.navigateToUrlOnCondition: "Dynamic URL" => "Dynamická webová adresa"
@@ -1815,11 +1936,11 @@ editorLocalization.locales["sk"] = skStrings;
 // pe.panelsState: "Inner panel expand state" => "Stav rozbalenia vnútorného panela"
 // pe.templateDescription: "Description template" => "Šablóna popisu"
 // pe.templateTitle: "Title template" => "Šablóna názvu"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Popis tlačidla Predchádzajúci panel"
-// pe.panelNextText: "Next Panel button tooltip" => "Popis tlačidla Nasledujúci panel"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Popis tlačidla Predchádzajúci panel"
+// pe.nextPanelText: "Next Panel button tooltip" => "Popis tlačidla Nasledujúci panel"
 // pe.showRangeInProgress: "Show progress bar" => "Zobraziť indikátor priebehu"
-// pe.templateTitleLocation: "Question title location" => "Otázka, názov, umiestnenie:"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Odstrániť umiestnenie tlačidla panela"
+// pe.templateQuestionTitleLocation: "Question title location" => "Otázka, názov, umiestnenie:"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Odstrániť umiestnenie tlačidla panela"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Skryť otázku, ak nie sú žiadne riadky"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Skryť stĺpce, ak nie sú k dispozícii žiadne riadky"
 // pe.rateValues: "Custom rate values" => "Vlastné hodnoty sadzieb"
@@ -1842,13 +1963,13 @@ editorLocalization.locales["sk"] = skStrings;
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Chybové hlásenie \"Nejedinečná kľúčová hodnota\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Minimálny počet vybraných možností"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maximálny počet vybraných možností"
-// pe.showClearButton: "Show the Clear button" => "Zobrazenie tlačidla Vymazať"
+// pe.allowClear: "Show the Clear button" => "Zobrazenie tlačidla Vymazať"
 // pe.showNumber: "Show panel number" => "Zobraziť číslo panela"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Šírka loga (v akceptovaných hodnotách CSS)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Výška loga (v hodnotách akceptovaných CSS)"
 // pe.readOnly: "Read-only" => "Iba na čítanie"
 // pe.enableIf: "Editable if" => "Upraviteľné, ak"
-// pe.emptyRowsText: "\"No rows\" message" => "Správa \"Žiadne riadky\""
+// pe.noRowsText: "\"No rows\" message" => "Správa \"Žiadne riadky\""
 // pe.size: "Input field size (in characters)" => "Veľkosť vstupného poľa (v znakoch)"
 // pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "Samostatné špeciálne možnosti (Žiadne, Iné, Vybrať všetko)"
 // pe.choicesFromQuestion: "Copy choices from the following question" => "Skopírujte voľby z nasledujúcej otázky"
@@ -1856,7 +1977,7 @@ editorLocalization.locales["sk"] = skStrings;
 // pe.showCommentArea: "Show the comment area" => "Zobrazenie oblasti komentárov"
 // pe.commentPlaceholder: "Comment area placeholder" => "Zástupný symbol oblasti komentárov"
 // pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "Popisy rýchlosti zobrazenia ako extrémnych hodnôt"
-// pe.rowsOrder: "Row order" => "Poradie riadkov"
+// pe.rowOrder: "Row order" => "Poradie riadkov"
 // pe.columnsLayout: "Column layout" => "Rozloženie stĺpcov"
 // pe.columnColCount: "Nested column count" => "Vnorený počet stĺpcov"
 // pe.state: "Panel expand state" => "Stav rozbalenia panela"
@@ -1873,8 +1994,6 @@ editorLocalization.locales["sk"] = skStrings;
 // pe.indent: "Add indents" => "Pridanie zarážok"
 // panel.indent: "Add outer indents" => "Pridanie vonkajších zarážok"
 // pe.innerIndent: "Add inner indents" => "Pridanie vnútorných zarážok"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Prevzatie predvolených hodnôt z posledného riadka"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Prevzatie predvolených hodnôt z posledného panela"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "Sem zadajte výraz..."
 // pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "Ak sa otázka skryje, vymažte hodnotu"
 // pe.valuePropertyName: "Value property name" => "Názov vlastnosti Value"
@@ -1936,7 +2055,7 @@ editorLocalization.locales["sk"] = skStrings;
 // showTimerPanel.none: "Hidden" => "Skrytý"
 // showTimerPanelMode.all: "Both" => "Obidva"
 // detailPanelMode.none: "Hidden" => "Skrytý"
-// addRowLocation.default: "Depends on matrix layout" => "Závisí od rozloženia matice"
+// addRowButtonLocation.default: "Depends on matrix layout" => "Závisí od rozloženia matice"
 // panelsState.default: "Users cannot expand or collapse panels" => "Používatelia nemôžu rozbaliť alebo zbaliť panely"
 // panelsState.collapsed: "All panels are collapsed" => "Všetky panely sú zbalené"
 // panelsState.expanded: "All panels are expanded" => "Všetky panely sú rozšírené"
@@ -2223,13 +2342,12 @@ editorLocalization.locales["sk"] = skStrings;
 // panel.description: "Panel description" => "Popis panelu"
 // panel.visibleIf: "Make the panel visible if" => "Zviditeľnite panel, ak"
 // panel.requiredIf: "Make the panel required if" => "Nastavte panel tak, aby bol povinný, ak"
-// panel.questionsOrder: "Question order within the panel" => "Poradie otázok v rámci panelu"
+// panel.questionOrder: "Question order within the panel" => "Poradie otázok v rámci panelu"
 // panel.startWithNewLine: "Display the panel on a new line" => "Zobrazenie panela na novom riadku"
 // panel.state: "Panel collapse state" => "Stav zbalenia panela"
 // panel.width: "Inline panel width" => "Šírka vnoreného panela"
 // panel.minWidth: "Minimum panel width" => "Minimálna šírka panela"
 // panel.maxWidth: "Maximum panel width" => "Maximálna šírka panela"
-// panel.showNumber: "Number panels" => "Číselné panely"
 // paneldynamic.name: "Panel name" => "Názov panela"
 // paneldynamic.title: "Panel title" => "Názov panelu"
 // paneldynamic.description: "Panel description" => "Popis panelu"
@@ -2249,7 +2367,7 @@ editorLocalization.locales["sk"] = skStrings;
 // paneldynamic.hideNumber: "Hide the panel number" => "Skrytie čísla panela"
 // paneldynamic.titleLocation: "Panel title alignment" => "Zarovnanie názvu panela"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "Zarovnanie popisu panela"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "Zarovnanie názvu otázky"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "Zarovnanie názvu otázky"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "Zarovnanie chybových hlásení"
 // paneldynamic.newPanelPosition: "New panel location" => "Nové umiestnenie panela"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "Zabránenie duplicitným odpovediam v nasledujúcej otázke"
@@ -2282,7 +2400,7 @@ editorLocalization.locales["sk"] = skStrings;
 // page.description: "Page description" => "Popis stránky"
 // page.visibleIf: "Make the page visible if" => "Zviditeľniť stránku, ak"
 // page.requiredIf: "Make the page required if" => "Nastavte stránku ako povinnú, ak"
-// page.questionsOrder: "Question order on the page" => "Poradie otázok na stránke"
+// page.questionOrder: "Question order on the page" => "Poradie otázok na stránke"
 // matrixdropdowncolumn.name: "Column name" => "Názov stĺpca"
 // matrixdropdowncolumn.title: "Column title" => "Názov stĺpca"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "Zabráňte duplicitným odpovediam"
@@ -2356,8 +2474,8 @@ editorLocalization.locales["sk"] = skStrings;
 // totalDisplayStyle.currency: "Currency" => "Mena"
 // totalDisplayStyle.percent: "Percentage" => "Percento"
 // totalDisplayStyle.date: "Date" => "Dátum"
-// rowsOrder.initial: "Original" => "Originál"
-// questionsOrder.initial: "Original" => "Originál"
+// rowOrder.initial: "Original" => "Originál"
+// questionOrder.initial: "Original" => "Originál"
 // showProgressBar.aboveheader: "Above the header" => "Nad hlavičkou"
 // showProgressBar.belowheader: "Below the header" => "Pod hlavičkou"
 // pv.sum: "Sum" => "Súčet"
@@ -2374,7 +2492,7 @@ editorLocalization.locales["sk"] = skStrings;
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Vzťahuje sa na všetky otázky v tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\")."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Nastaví umiestnenie chybového hlásenia vo vzťahu ku všetkým otázkam v paneli. Možnosť Zdediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť Zdediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť Zdediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu."
 // panel.page: "Repositions the panel to the end of a selected page." => "Premiestni panel na koniec vybratej strany."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "Pridá medzeru alebo okraj medzi obsah panela a ľavý okraj panela."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "Zrušte výber výberu, ak chcete panel zobraziť v jednom riadku s predchádzajúcou otázkou alebo panelom. Toto nastavenie sa neuplatňuje, ak je panel prvým prvkom vo formulári."
@@ -2385,7 +2503,7 @@ editorLocalization.locales["sk"] = skStrings;
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje viditeľnosť panela."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre panel."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Vzťahuje sa na všetky otázky v tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\")."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Vzťahuje sa na všetky otázky v tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\")."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\")."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Nastaví umiestnenie chybového hlásenia vo vzťahu ku všetkým otázkam v paneli. Možnosť Zdediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "Premiestni panel na koniec vybratej strany."
@@ -2399,7 +2517,7 @@ editorLocalization.locales["sk"] = skStrings;
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Toto nastavenie sa automaticky dedí všetkými otázkami na tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\")."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Možnosť \"Dediť\" použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene pod názvom panela\")."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Definuje pozíciu novo pridaného panela. V predvolenom nastavení sa na koniec pridávajú nové panely. Výberom položky \"Ďalej\" vložíte nový panel za aktuálny."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplikuje odpovede z posledného panela a priradí ich ďalšiemu pridanému dynamickému panelu."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplikuje odpovede z posledného panela a priradí ich ďalšiemu pridanému dynamickému panelu."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Toto nastavenie vám umožňuje priradiť predvolenú hodnotu odpovede na základe výrazu. Výraz môže obsahovať základné výpočty - '{q1_id} + {q2_id}', boolovské výrazy, ako napríklad '{age} > 60', a funkcie: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atď. Hodnota určená týmto výrazom slúži ako počiatočná predvolená hodnota, ktorú je možné prepísať manuálnym vstupom respondenta."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje, kedy sa vstup respondenta obnoví na hodnotu na základe hodnoty \"Výraz predvolenej hodnoty\" alebo \"Výraz nastavenej hodnoty\" alebo hodnoty \"Predvolená odpoveď\" (ak je nastavená)."
@@ -2445,18 +2563,17 @@ editorLocalization.locales["sk"] = skStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Nastavuje šírku loga v jednotkách CSS (px, %, in, pt atď.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Nastavuje výšku loga v jednotkách CSS (px, %, in, pt atď.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vyberte si z: \"Žiadne\" - obrázok si zachováva svoju pôvodnú veľkosť; \"Obsahovať\" - veľkosť obrázka sa zmení tak, aby sa zmestil pri zachovaní pomeru strán; \"Obal\" - obrázok vyplní celé pole pri zachovaní pomeru strán; \"Vyplniť\" - obrázok je natiahnutý tak, aby vyplnil pole bez zachovania pomeru strán."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Vyberte, či chcete, aby prieskum automaticky postúpil na ďalšiu stranu po tom, čo respondent odpovie na všetky otázky na aktuálnej stránke."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Nastavuje viditeľnosť a umiestnenie navigačných tlačidiel na stránke."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Nastavuje viditeľnosť a umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Povoľte stránku ukážky so všetkými alebo iba zodpovedanými otázkami."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "Vzťahuje sa na všetky otázky v rámci prieskumu. Toto nastavenie je možné prepísať pravidlami zarovnania názvov na nižších úrovniach: panel, stránka alebo otázka. Nastavenie nižšej úrovne prepíše nastavenia na vyššej úrovni."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "Symbol alebo postupnosť symbolov označujúcich, že sa vyžaduje odpoveď."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "Symbol alebo postupnosť symbolov označujúcich, že sa vyžaduje odpoveď."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "Zadajte číslo alebo písmeno, ktorým chcete začať číslovanie."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "Vyberte, či chcete prvé vstupné pole na každej strane pripraviť na zadávanie textu."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Efekt tohto nastavenia je viditeľný iba na karte Ukážka."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "Vyberte, či chcete prvé vstupné pole na každej strane pripraviť na zadávanie textu."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Efekt tohto nastavenia je viditeľný iba na karte Ukážka."
 // pehelp.maxTextLength: "For text entry questions only." => "Len pre otázky týkajúce sa zadávania textu."
-// pehelp.maxOthersLength: "For question comments only." => "Len pre komentáre k otázkam."
+// pehelp.maxCommentLength: "For question comments only." => "Len pre komentáre k otázkam."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "Vyberte, či chcete, aby komentáre otázok a otázky s dlhým textom automaticky narástli na výšku na základe zadanej dĺžky textu."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "Iba pre komentáre k otázkam a otázky s dlhým textom."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "Vlastné premenné slúžia ako medziľahlé alebo pomocné premenné používané vo výpočtoch formulárov. Vstupy respondentov berú ako zdrojové hodnoty. Každá vlastná premenná má jedinečný názov a výraz, na ktorom je založená."
@@ -2472,24 +2589,23 @@ editorLocalization.locales["sk"] = skStrings;
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku."
 // pehelp.description: "Type a subtitle." => "Zadajte podnadpis."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Vyberte jazyk a začnite vytvárať prieskum. Ak chcete pridať preklad, prepnite na nový jazyk a preložte pôvodný text tu alebo na karte Preklady."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Nastaví umiestnenie sekcie podrobností vo vzťahu k riadku. Vyberte si z: \"Žiadne\" - nie je pridané žiadne rozšírenie; \"Pod riadkom\" - pod každým riadkom matice je umiestnené rozšírenie riadku; \"Pod riadkom zobraziť iba rozšírenie jedného riadka\" - rozšírenie sa zobrazí iba pod jedným riadkom, zvyšné rozšírenia riadkov sa zbalia."
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vyberte si z: \"Žiadne\" - obrázok si zachováva svoju pôvodnú veľkosť; \"Obsahovať\" - veľkosť obrázka sa zmení tak, aby sa zmestil pri zachovaní pomeru strán; \"Obal\" - obrázok vyplní celé pole pri zachovaní pomeru strán; \"Vyplniť\" - obrázok je natiahnutý tak, aby vyplnil pole bez zachovania pomeru strán."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Postupne zvyšuje výšku vstupného poľa pri zadávaní údajov. Prepíše nastavenie Výška vstupného poľa (v riadkoch)."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Rukoväť na zmenu veľkosti (alebo uchopenie) sa zobrazí v rohu a potiahnutím môžete zmeniť veľkosť vstupného poľa."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Časový interval v sekundách, po ktorom prieskum automaticky prejde na stránku s poďakovaním."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Časový interval v sekundách, po ktorom prieskum automaticky prejde na stránku s poďakovaním."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré určuje viditeľnosť stránky."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre stránku."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Vzťahuje sa na všetky otázky na tejto stránke. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky alebo panely. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Predvolene hore\")."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Predvolene hore\")."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Originál\" v predvolenom nastavení). Efekt tohto nastavenia je viditeľný iba na karte Ukážka."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Nastavuje viditeľnosť a umiestnenie časovača na stránke."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Originál\" v predvolenom nastavení). Efekt tohto nastavenia je viditeľný iba na karte Ukážka."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Vyberte si z: \"Zamknuté\" - používatelia nemôžu rozširovať ani zbaliť panely; \"Zbaliť všetko\" - všetky panely začínajú v zbalenom stave; \"Rozbaliť všetko\" - všetky panely začínajú v rozšírenom stave; \"Prvý rozšírený\" - pôvodne sa rozšíril iba prvý panel."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Zadajte zdieľaný názov vlastnosti do poľa objektov obsahujúceho URL adresy obrázkov alebo videosúborov, ktoré chcete zobraziť v zozname výberu."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Ľavá hodnota slúži ako ID položky používané v podmienených pravidlách, pravá hodnota sa zobrazuje respondentom."
@@ -2517,7 +2633,7 @@ editorLocalization.locales["sk"] = skStrings;
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "Spustí výzvu na potvrdenie odstránenia súboru."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Povoľte zoradiť iba vybrané možnosti. Používatelia presunú vybrané položky zo zoznamu možností a zoradia ich v oblasti poradia."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Zadajte zoznam možností, ktoré budú respondentovi navrhnuté počas vstupu."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Toto nastavenie zmení iba veľkosť vstupných polí a neovplyvní šírku poľa otázok."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Toto nastavenie zmení iba veľkosť vstupných polí a neovplyvní šírku poľa otázok."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Nastavuje konzistentnú šírku pre všetky štítky položiek v pixeloch"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Možnosť \"Auto\" automaticky určuje vhodný režim zobrazenia - obrázok, video alebo YouTube - na základe poskytnutej zdrojovej adresy URL."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Slúži ako náhrada, keď obrázok nie je možné zobraziť na zariadení používateľa a na účely prístupnosti."
@@ -2530,8 +2646,8 @@ editorLocalization.locales["sk"] = skStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Šírka označenia položky (v px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Text, ktorý zobrazuje, či sú vybraté všetky možnosti"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Zástupný text pre oblasť hodnotenia"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Vyplňte prieskum automaticky"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Vyberte, či chcete, aby sa prieskum dokončil automaticky po tom, čo respondent odpovie na všetky otázky."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Vyplňte prieskum automaticky"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Vyberte, či chcete, aby sa prieskum dokončil automaticky po tom, čo respondent odpovie na všetky otázky."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "Uložte maskovanú hodnotu do výsledkov prieskumu"
 // patternmask.pattern: "Value pattern" => "Hodnotový vzor"
 // datetimemask.min: "Minimum value" => "Minimálna hodnota"
@@ -2686,7 +2802,6 @@ editorLocalization.locales["sk"] = skStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Nastaví hlavnú farbu pozadia prieskumu."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti obsahu hlavičky tak, aby sa zmestila do prvku HTML, do ktorého je prieskum umiestnený."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Šírka oblasti hlavičky, ktorá obsahuje názov a popis prieskumu, meraná v pixeloch."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Vytvorí spodnú časť hlavičky prekrytú hornou časťou prieskumu."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akceptuje hodnoty %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akceptuje hodnoty px."
 // p.effectiveColSpan: "Column span" => "Rozpätie stĺpca"
@@ -2706,3 +2821,141 @@ editorLocalization.locales["sk"] = skStrings;
 // inputTextAlignment.right: "Right" => "Doprava"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Vyberte, ako chcete zarovnať vstupnú hodnotu v poli. Predvolené nastavenie \"Auto\" zarovná vstupnú hodnotu doprava, ak je použité maskovanie meny alebo čísel, a doľava, ak nie."
 // p.inputTextAlignment: "Input value alignment" => "Zarovnanie vstupných hodnôt"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Zobrazenie indikátora priebehu"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Zobrazenie indikátora priebehu"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Zarovnanie indikátora priebehu"
+// pv.carousel: "Carousel" => "Kolotoč"
+// progressBarLocation.top: "Top" => "Vrchol"
+// progressBarLocation.bottom: "Bottom" => "Dno"
+// progressBarLocation.topBottom: "Top and bottom" => "Hore a dole"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Odkazy na YouTube nie sú podporované."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Začnite konfigurovať formulár"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknutím na ikonu ľubovoľnej kategórie preskúmate nastavenia prieskumu. Ďalšie nastavenia budú k dispozícii po pridaní prvku prieskumu na návrhovú plochu."
+// pe.caseInsensitive: "Case insensitive" => "Nerozlišujú sa veľké a malé písmená"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Vyberte, či sa veľké a malé písmená v regulárnom výraze musia považovať za ekvivalentné."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Formulár je prázdny"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Formulár je prázdny"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Presuňte prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Presuňte prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie."
+// ed.previewPlaceholderTitle: "No preview" => "Žiadny náhľad"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Žiadny náhľad"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Prieskum neobsahuje žiadne viditeľné prvky."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Prieskum neobsahuje žiadne viditeľné prvky."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Žiadne reťazce na preklad"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Žiadne reťazce na preklad"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Pridajte prvky do formulára alebo zmeňte filter reťazcov na paneli s nástrojmi."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Pridajte prvky do formulára alebo zmeňte filter reťazcov na paneli s nástrojmi."
+// lg.logicPlaceholderTitle: "No logical rules" => "Žiadne logické pravidlá"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Žiadne logické pravidlá"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Vytvorte pravidlo na prispôsobenie toku prieskumu."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Vytvorte pravidlo na prispôsobenie toku prieskumu."
+// pe.showTimer: "Use a timer" => "Použitie časovača"
+// theme.advancedMode: "Advanced mode" => "Pokročilý režim"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Nastaví umiestnenie časovača na strane."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Ak je nastavená hodnota 0, výška sa vypočíta automaticky, aby sa prispôsobila obsahu hlavičky."
+// p.mobileHeight: "Height on smartphones" => "Výška na smartfónoch"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Ak je táto možnosť povolená, horná časť prieskumu prekrýva spodnú časť hlavičky."
+// ed.creatorSettingTitle: "Creator Settings" => "Nastavenia tvorcu"
+// tabs.accentColors: "Accent colors" => "Akcentové farby"
+// tabs.scaling: "Scaling" => "Škálovanie"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Priradí čísla otázkam vnoreným do tohto panela."
+// creatortheme.--sjs-special-background: "Surface background" => "Povrchové pozadie"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Prvotný"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundárny"
+// creatortheme.surfaceScale: "Surface" => "Povrch"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Používateľské rozhranie"
+// creatortheme.fontScale: "Font" => "Písmo"
+// names.sc2020: "Survey Creator 2020" => "Tvorca prieskumu 2020"
+// names.default-light: "Light" => "Svetlo"
+// names.default-dark: "Dark" => "Tmavý"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Očíslujte tento panel"
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Vyberte, či chcete, aby sa prieskum automaticky posunul na ďalšiu stránku, keď respondent odpovie na všetky otázky na aktuálnej stránke. Táto funkcia sa nepoužije, ak je posledná otázka na stránke otvorená alebo umožňuje viacero odpovedí."
+// autocomplete.name: "Full Name" => "Celé meno"
+// autocomplete.honorific-prefix: "Prefix" => "Predpona"
+// autocomplete.given-name: "First Name" => "Krstné meno"
+// autocomplete.additional-name: "Middle Name" => "Stredné meno"
+// autocomplete.family-name: "Last Name" => "Priezvisko"
+// autocomplete.honorific-suffix: "Suffix" => "Prípona"
+// autocomplete.nickname: "Nickname" => "Prezývka"
+// autocomplete.organization-title: "Job Title" => "Pracovná pozícia"
+// autocomplete.username: "User Name" => "Používateľské meno"
+// autocomplete.new-password: "New Password" => "Nové heslo"
+// autocomplete.current-password: "Current Password" => "Aktuálne heslo"
+// autocomplete.organization: "Organization Name" => "Názov organizácie"
+// autocomplete.street-address: "Full Street Address" => "Celá adresa"
+// autocomplete.address-line1: "Address Line 1" => "Riadok adresy 1"
+// autocomplete.address-line2: "Address Line 2" => "Riadok adresy 2"
+// autocomplete.address-line3: "Address Line 3" => "Riadok adresy 3"
+// autocomplete.address-level4: "Level 4 Address" => "Adresa úrovne 4"
+// autocomplete.address-level3: "Level 3 Address" => "Adresa úrovne 3"
+// autocomplete.address-level2: "Level 2 Address" => "Adresa úrovne 2"
+// autocomplete.address-level1: "Level 1 Address" => "Adresa úrovne 1"
+// autocomplete.country: "Country Code" => "Kód krajiny"
+// autocomplete.country-name: "Country Name" => "Názov krajiny"
+// autocomplete.postal-code: "Postal Code" => "Psč"
+// autocomplete.cc-name: "Cardholder Name" => "Meno držiteľa karty"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Krstné meno držiteľa karty"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Stredné meno držiteľa karty"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Priezvisko držiteľa karty"
+// autocomplete.cc-number: "Credit Card Number" => "Číslo kreditnej karty"
+// autocomplete.cc-exp: "Expiration Date" => "Dátum vypršania platnosti"
+// autocomplete.cc-exp-month: "Expiration Month" => "Mesiac vypršania platnosti"
+// autocomplete.cc-exp-year: "Expiration Year" => "Rok vypršania platnosti"
+// autocomplete.cc-csc: "Card Security Code" => "Bezpečnostný kód karty"
+// autocomplete.cc-type: "Credit Card Type" => "Typ kreditnej karty"
+// autocomplete.transaction-currency: "Transaction Currency" => "Mena transakcie"
+// autocomplete.transaction-amount: "Transaction Amount" => "Suma transakcie"
+// autocomplete.language: "Preferred Language" => "Preferovaný jazyk"
+// autocomplete.bday: "Birthday" => "Narodeniny"
+// autocomplete.bday-day: "Birthday Day" => "Deň narodenín"
+// autocomplete.bday-month: "Birthday Month" => "Mesiac narodenín"
+// autocomplete.bday-year: "Birthday Year" => "Rok narodenín"
+// autocomplete.sex: "Gender" => "Pohlavie"
+// autocomplete.url: "Website URL" => "URL adresa webovej stránky"
+// autocomplete.photo: "Profile Photo" => "Profilová fotka"
+// autocomplete.tel: "Telephone Number" => "Telefónne číslo"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Kód krajiny pre telefón"
+// autocomplete.tel-national: "National Telephone Number" => "Národné telefónne číslo"
+// autocomplete.tel-area-code: "Area Code" => "Telefónna Predvoľba"
+// autocomplete.tel-local: "Local Phone Number" => "Miestne telefónne číslo"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Lokálna predvoľba telefónu"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Prípona miestneho telefónu"
+// autocomplete.tel-extension: "Phone Extension" => "Rozšírenie telefónu"
+// autocomplete.email: "Email Address" => "E-mailová adresa"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokol okamžitých správ"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Uzamknutie stavu rozbalenia/zbalenia otázok"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Zatiaľ nemáte žiadne stránky"
+// pe.addNew@pages: "Add new page" => "Pridať novú stránku"
+// ed.zoomInTooltip: "Zoom In" => "Priblížiť"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Oddialiť"
+// tabs.surfaceBackground: "Surface Background" => "Pozadie povrchu"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Predvolené použitie odpovedí z posledného záznamu"
+// colors.gray: "Gray" => "Sivý"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Zarovnanie navigačných tlačidiel"
+// pv.allQuestions: "Show all questions" => "Zobraziť všetky otázky"
+// pv.answeredQuestions: "Show answered questions only" => "Zobraziť len zodpovedané otázky"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Nastaví umiestnenie navigačných tlačidiel na stránke."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky ako ID výberu"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Ako texty výberu použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo panelová otázka má poskytnúť ID."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo otázka panela by mala poskytovať zobrazované texty."
+// pe.progressBarLocation: "Progress bar alignment" => "Zarovnanie indikátora priebehu"
+// progressBarLocation.topbottom: "Top and bottom" => "Hore a dole"
+// progressBarLocation.aboveheader: "Above the header" => "Nad hlavičkou"
+// progressBarLocation.belowheader: "Below the header" => "Pod hlavičkou"
+// progressBarLocation.off: "Hidden" => "Skrytý"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Nastaví umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu."
+// survey.readOnly: "Make the survey read-only" => "Nastavenie prieskumu iba na čítanie"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Vyberte, či chcete respondentom zabrániť vo vypĺňaní prieskumu."
+// paneldynamic.showNumber: "Number the panel" => "Očíslujte panel"
+// question.showNumber: "Number this question" => "Číslo tejto otázky"
+// pe.previewMode: "Preview mode" => "Režim náhľadu"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Povolenie rozloženia mriežky"
+// pe.maskSettings: "Mask settings" => "Nastavenia masky"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Zarovnanie chybového hlásenia o rozšírení riadka"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Nastaví umiestnenie chybových hlásení pre otázky vnorené do podrobných sekcií. Možnosť \"Zdediť\" použije nastavenie z vlastnosti \"Zarovnanie chybového hlásenia\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Stĺpce rozloženia mriežky"

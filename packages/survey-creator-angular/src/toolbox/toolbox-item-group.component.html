@@ -1,4 +1,8 @@
 <ng-template #template>
   <svc-toolbox-item [model]="item" [viewModel]="viewModel" [creator]="creator" [isCompact]="isCompact"></svc-toolbox-item>
-  <sv-ng-popup [popupModel]="model.popupModel" [getArea]="model.getArea"></sv-ng-popup>
+  <div class="svc-toolbox__item-submenu-button" (mouseover)="viewModel.onMouseOver(item, $event)"
+    (mouseleave)="viewModel.onMouseLeave(item, $event)">
+    <svg [iconName]="item.subitemsButtonIcon" [size]="'auto'" sv-ng-svg-icon></svg>
+    <sv-ng-popup [popupModel]="model.popupModel"></sv-ng-popup>
+  </div>
 </ng-template>

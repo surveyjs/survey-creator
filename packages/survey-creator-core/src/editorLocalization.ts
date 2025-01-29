@@ -8,6 +8,7 @@ renamedKeys["tabs.theme"] = "ed.themeSurvey";
 renamedKeys["tabs.translation"] = "ed.translation";
 renamedKeys["tabs.designer"] = "ed.designer";
 renamedKeys["tabs.editor"] = "ed.jsonEditor";
+renamedKeys["tabs.json"] = "tabs.editor";
 renamedKeys["tabs.logic"] = "ed.logic";
 
 export class EditorLocalization {
@@ -269,9 +270,13 @@ export class EditorLocalization {
   }
   public getLocale(locale?: string): any {
     if (!locale) locale = this.currentLocale;
-    var strs = locale ? this.locales[locale] : this.getDefaultStrings();
-    if (!strs) strs = this.getDefaultStrings();
-    return strs;
+    return (locale ? this.getLocaleStrings(locale) : this.getDefaultStrings()) || this.getDefaultStrings();
+  }
+  public getLocaleStrings(loc: string): any {
+    return this.locales[loc];
+  }
+  public setupLocale(loc: string, strings: any): void {
+    this.locales[loc] = strings;
   }
   private getPresetLocale(locale?: string): any {
     if(!this.presetStrings) return undefined;
@@ -339,3 +344,6 @@ export function getLocString(strName: string, locale: string = null) {
 }
 
 export var defaultStrings = enStrings;
+export function setupLocale(localeConfig: { localeCode: string, strings: any }): void {
+  editorLocalization.setupLocale(localeConfig.localeCode, localeConfig.strings);
+}

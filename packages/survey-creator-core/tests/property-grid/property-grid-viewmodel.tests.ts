@@ -13,8 +13,6 @@ import { CreatorTester } from "../creator-tester";
 import { ObjectSelectorModel } from "../../src/property-grid/object-selector";
 import { settings } from "../../src/creator-settings";
 
-surveySettings.supportCreatorV2 = true;
-
 test("Generate and update title correctly", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -45,6 +43,7 @@ test("Generate and update title correctly", () => {
 });
 test("Prev/next correctly, including columns via actions", () => {
   const creator = new CreatorTester();
+  creator.propertyGridNavigationMode = "accordion";
   creator.JSON = {
     elements: [
       { type: "matrixdynamic", name: "q1", columns: [{ name: "col1" }] }

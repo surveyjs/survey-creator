@@ -19,7 +19,7 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
           ref={(input) => (this.setControl(input))}
           placeholder={this.question.renderedPlaceholder}
           autoComplete="off"
-          onBlur={(event) => this.question.onBlur(event.nativeEvent) }
+          onBlur={(event) => this.question.onBlur(event.nativeEvent)}
           onFocus={(event) => this.question.onFocus(event.nativeEvent)}
           onChange={this.question.onChange}
           onBeforeInput={event => this.question.onBeforeInput(event.nativeEvent as InputEvent)}
@@ -33,18 +33,18 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
       </>
     );
   }
-  protected renderElement(): JSX.Element {
+  protected renderElement(): React.JSX.Element {
     return (
       <div className={this.question.cssClasses.root} onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
-        { this.renderInput() }
-        { this.renderButtons() }
+        {this.renderInput()}
+        {this.renderButtons()}
       </div>
     );
   }
   protected getValueCore() {
     return this.question.renderedValue;
   }
-  protected renderButtons(): JSX.Element {
+  protected renderButtons(): React.JSX.Element {
     return (
       <span className={this.question.cssClasses.buttonsContainer}>
         <button

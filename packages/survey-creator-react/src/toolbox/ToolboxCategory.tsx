@@ -27,18 +27,20 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
     return (this.category as any);
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     const header = this.renderCategoryHeader();
     const items = this.renderCategoryContent();
     return (
       <div className={this.class} key={this.category.name}>
-        {header}
+        <div className="svc-toolbox__category-header-wrapper">
+          {header}
+        </div>
         {items}
       </div>
     );
   }
 
-  renderCategoryHeader(): JSX.Element {
+  renderCategoryHeader(): React.JSX.Element {
     let className = "svc-toolbox__category-header";
     if (this.toolbox.canCollapseCategories) {
       className += " svc-toolbox__category-header--collapsed";
@@ -51,14 +53,14 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
     );
   }
 
-  renderButton(): JSX.Element {
+  renderButton(): React.JSX.Element {
     if (!this.toolbox.canCollapseCategories) return null;
 
     const iconName = this.category.collapsed ? "arrow-down" : "arrow-up";
     const suffixName = this.category.collapsed ? "expand" : "collapse";
     const svgIconClassName = "svc-toolbox__category-header__button svc-string-editor__button--" + suffixName;
     return (<div className="svc-toolbox__category-header__controls">
-      <SvgIcon className={svgIconClassName} iconName={"icon-" + iconName} size={24}></SvgIcon>
+      <SvgIcon className={svgIconClassName} iconName={"icon-" + iconName} size={"auto"}></SvgIcon>
     </div>);
   }
 

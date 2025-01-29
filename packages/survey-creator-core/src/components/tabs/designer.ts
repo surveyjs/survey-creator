@@ -1,26 +1,47 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction, activateLazyRenderingChecks } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
 import { DragDropSurveyElements } from "../../survey-elements";
-import { SurveyElementActionContainer } from "../action-container-view-model";
+import { SurveyElementAdornerBase } from "../action-container-view-model";
+import { assign } from "../../utils/utils";
+import designTabSurveyThemeJSON from "../../designTabSurveyThemeJSON";
 require("./designer.scss");
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
 
 export class TabDesignerViewModel extends Base {
+  private minSurfaceScaling = 20;
+  private maxSurfaceScaling = 100;
+  private stepSurfaceScaling = 10;
   private cssUpdater: ComputedUpdater;
   private pagesControllerValue: PagesController;
+  public surfaceScale = 100;
+
+  unitDictionary: { [index: string]: number } = {
+    "--ctr-surface-base-unit": 8,
+    "--lbr-font-unit": 8,
+    "--lbr-line-height-unit": 8,
+    "--lbr-size-unit": 8,
+    "--lbr-spacing-unit": 8,
+    "--lbr-corner-radius-unit": 8,
+    "--lbr-stroke-unit": 1,
+  }
 
   @property() newPage: PageModel;
   @property({ defaultValue: false }) showNewPage: boolean;
   @property() pageCount: number;
   @property() designerCss: string;
-  @property() showPlaceholder: boolean;
+  @property({
+    onSet: (val, objectInstance: TabDesignerViewModel, prevVal) => {
+      objectInstance.updateSurveyScaleStartDimensions();
+    },
+  }) showPlaceholder: boolean;
+  public scaleCssVariables: { [index: string]: string } = {};
   public creator: SurveyCreatorModel;
 
-  public actionContainer: ActionContainer;
+  public surfaceToolbar: ActionContainer;
 
   public get displayPageDropTarget() {
     return this.pagesController.page2Display === this.newPage ? "newGhostPage" : this.pagesController.page2Display.name;
@@ -37,7 +58,7 @@ export class TabDesignerViewModel extends Base {
     newPage.updateCustomWidgets();
     newPage.setWasShown(true);
     newPage.setSurveyImpl(this.survey);
-    newPage.updateElementCss();
+    newPage.updateElementCss(true);
     var checkNewElementHandler = (sender: SurveyModel, options: any) => {
       if (options.name === "elements" && newPage.elements.length > 0) {
         // if (this.survey.pages.indexOf(newPage) > -1) return;
@@ -53,6 +74,7 @@ export class TabDesignerViewModel extends Base {
     newPage.num = this.survey.pages.length + 1;
     newPage.onPropertyChanged.add(checkNewElementHandler);
     DragDropSurveyElements.newGhostPage = newPage;
+    delete newPage["ignoreUndoRedo"];
     return newPage;
   }
   private get canShowNewPage(): boolean {
@@ -71,36 +93,122 @@ export class TabDesignerViewModel extends Base {
     this.creator = creator;
     this.pagesControllerValue = new PagesController(creator);
 
-    this.initToolbar();
+    this.creator.dragDropChoices.onShortcutCreated = (shortcut: HTMLElement) => {
+      Object.keys(this.surveyThemeVariables).forEach((key) => {
+        shortcut.style.setProperty(key, this.surveyThemeVariables[key]);
+      });
+    };
+
+    this.initSurfaceToolbar();
     this.initSurvey();
   }
-  private initToolbar() {
-    this.actionContainer = new ActionContainer();
-    const action = (action) => { this.creator.onSurfaceToolbarActionExecuted.fire(this.creator, { action: action }); };
+  public get surveyThemeVariables(): {} {
+    const cssVariables = {};
+    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, {
+      "--sjs-base-unit": "var(--ctr-surface-base-unit)",
+      "--sjs-font-size": "calc(2 * var(--ctr-surface-base-unit))",
+    });
+    return cssVariables;
+  }
+
+  private initSurfaceToolbar() {
+    this.surfaceToolbar = new ActionContainer();
 
     let defaultActionBarCss = {
-      root: "sv-action-bar",
+      root: "sv-action-bar svc-tab-designer__surface-toolbar",
       defaultSizeMode: "",
       smallSizeMode: "",
-      item: "svc-page-navigator__selector",
+      item: "svc-page-navigator__button",
       itemWithTitle: "",
       itemAsIcon: "",
-      itemActive: "",
+      itemActive: "svc-page-navigator__button--active",
       itemPressed: "",
-      itemIcon: "svc-page-navigator__navigator-icon",
+      itemIcon: "svc-page-navigator__button-icon",
       itemTitleWithIcon: "",
     };
-    this.actionContainer.cssClasses = defaultActionBarCss;
+    this.surfaceToolbar.cssClasses = defaultActionBarCss;
 
-    this.actionContainer.setItems([{
+    const surfaceToolbarItems: Array<IAction> = [];
+
+    surfaceToolbarItems.push(<IAction>{
+      id: "zoomIn",
+      locTooltipName: "ed.zoomInTooltip",
+      iconName: "icon-zoomin-24x24",
+      iconSize: "auto",
+      visible: new ComputedUpdater<boolean>(() => this.creator.allowZoom),
+      action: () => { this.scaleSurface(this.surfaceScale + this.stepSurfaceScaling); }
+    });
+    surfaceToolbarItems.push(<IAction>{
+      id: "zoom100",
+      locTooltipName: "ed.zoom100Tooltip",
+      iconName: "icon-actual-size-24x24",
+      iconSize: "auto",
+      visible: new ComputedUpdater<boolean>(() => this.creator.allowZoom),
+      action: () => { this.scaleSurface(100); }
+    });
+    surfaceToolbarItems.push(<IAction>{
+      id: "zoomOut",
+      locTooltipName: "ed.zoomOutTooltip",
+      iconName: "icon-zoomout-24x24",
+      iconSize: "auto",
+      visible: new ComputedUpdater<boolean>(() => this.creator.allowZoom),
+      action: () => {
+        this.scaleSurface(this.surfaceScale - this.stepSurfaceScaling);
+        this.forceLazyRendering();
+      }
+    });
+
+    surfaceToolbarItems.push({
       id: "collapseAll",
+      locTooltipName: "ed.collapseAllTooltip",
       iconName: "icon-collapseall-24x24",
-      action: action
-    }, {
+      iconSize: "auto",
+      needSeparator: <any>new ComputedUpdater<boolean>(() => this.creator.allowZoom),
+      visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
+      action: () => this.creator.expandCollapseManager.expandCollapseElements("collapse-all", true)
+    });
+    surfaceToolbarItems.push({
       id: "expandAll",
+      locTooltipName: "ed.expandAllTooltip",
       iconName: "icon-expandall-24x24",
-      action: action
-    }]);
+      iconSize: "auto",
+      visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
+      action: () => this.creator.expandCollapseManager.expandCollapseElements("expand-all", false)
+    });
+    surfaceToolbarItems.push({
+      id: "lockQuestions",
+      locTooltipName: "ed.lockQuestionsTooltip",
+      iconName: "icon-questionlock-24x24",
+      iconSize: "auto",
+      active: this.creator.expandCollapseManager.questionsLocked,
+      visible: new ComputedUpdater<boolean>(() => this.creator.expandCollapseButtonVisibility != "never"),
+      action: (action) => {
+        action.active = !action.active;
+        this.creator.expandCollapseManager.lockQuestions(action.active);
+      }
+    });
+    this.surfaceToolbar.setItems(surfaceToolbarItems);
+  }
+  private forceLazyRendering() {
+    this.creator.survey.pages.forEach(page => activateLazyRenderingChecks(page.id));
+  }
+
+  private scaleSurface(scaleFactor: number): void {
+    if (scaleFactor < this.minSurfaceScaling || scaleFactor > this.maxSurfaceScaling) return;
+
+    this.surfaceScale = scaleFactor;
+    if (!this.creator.survey.responsiveStartWidth) {
+      this.creator.responsivityManager?.updateSurveyActualWidth();
+    }
+    this.creator.survey.widthScale = scaleFactor;
+
+    Object.keys(this.unitDictionary).forEach(key => {
+      this.scaleCssVariables[key] = (this.unitDictionary[key] * scaleFactor / 100) + "px";
+    });
+
+    const newCssVariable = {};
+    assign(newCssVariable, this.creator.themeVariables, this.scaleCssVariables);
+    this.creator.themeVariables = newCssVariable;
   }
 
   get survey() {
@@ -117,9 +225,24 @@ export class TabDesignerViewModel extends Base {
       return getLocString("ed.surveyPlaceHolderMobile");
     return getLocString("ed.surveyPlaceHolder");
   }
-  public get hasToolbar() {
-    return this.creator.expandCollapseButtonVisibility != "never";
+  public get placeholderTitleText(): string {
+    if (this.creator.isMobileView)
+      return getLocString("ed.surveyPlaceholderTitleMobile");
+    return getLocString("ed.surveyPlaceholderTitle");
   }
+  public get placeholderDescriptionText(): string {
+    if (this.creator.isMobileView)
+      return getLocString("ed.surveyPlaceholderDescriptionMobile");
+    return getLocString("ed.surveyPlaceholderDescription");
+  }
+  public get showSurfaceToolbar(): boolean {
+    const hasVisibleItems = this.surfaceToolbar.actions.some((action) => action.visible);
+    return this.creator.allowShowSurfaceToolbar && hasVisibleItems;
+  }
+  public get showSurfaceTools(): boolean {
+    return !this.creator.isMobileView && (this.showSurfaceToolbar || (this.creator.showPageNavigator && (this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage")));
+  }
+
   private isUpdatingNewPage: boolean;
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {
     if (!obj || this.isUpdatingNewPage) return;
@@ -131,9 +254,6 @@ export class TabDesignerViewModel extends Base {
       }
       this.checkNewPage(updatePageController);
     }
-    if (propName === "pages" && obj.isDescendantOf("survey")) {
-      this.checkNewPage(true);
-    }
     this.isUpdatingNewPage = false;
   }
   private calculateDesignerCss() {
@@ -144,12 +264,25 @@ export class TabDesignerViewModel extends Base {
     this.showNewPage = false;
     this.newPage = undefined;
     this.checkNewPage(false);
+    this.updatePages();
     this.cssUpdater && this.cssUpdater.dispose();
     this.cssUpdater = new ComputedUpdater<string>(() => {
       return this.calculateDesignerCss();
     });
+    this.survey.registerFunctionOnPropertyValueChanged("pages", () => {
+      this.checkNewPage(true);
+      this.updatePages();
+    }, "__designer_tab_model__");
+    this.survey.registerFunctionOnPropertiesValueChanged(["widthMode", "calculatedWidthMode"], () => {
+      this.updateSurveyScaleStartDimensions();
+    }, "__designer_tab_model__");
     this.designerCss = <any>this.cssUpdater;
     this.pagesController.onSurveyChanged();
+  }
+  private updateSurveyScaleStartDimensions() {
+    this.survey.staticStartWidth = undefined;
+    this.survey.responsiveStartWidth = undefined;
+    setTimeout(() => this.scaleSurface(this.surfaceScale), 1);
   }
   private checkNewPage(updatePageController: boolean) {
     const showPlaceholder = this.survey.getAllQuestions().length === 0 && this.survey.pageCount === 0;
@@ -179,9 +312,14 @@ export class TabDesignerViewModel extends Base {
       this.pagesController.raisePagesChanged();
     }
   }
+  private updatePages() {
+    this.pages = this.survey.pages.concat(this.showNewPage ? [this.newPage] : []);
+  }
   public dispose(): void {
     super.dispose();
     this.cssUpdater && this.cssUpdater.dispose();
+    this.survey.unRegisterFunctionOnPropertyValueChanged("pages", "__designer_tab_model__");
+    this.survey.unRegisterFunctionOnPropertiesValueChanged(["widthMode", "calculatedWidthMode"], "__designer_tab_model__");
   }
   private checkLastPageToDelete(): boolean {
     if (this.survey.pageCount === 0 || this.survey.isQuestionDragging) return false;
@@ -195,16 +333,71 @@ export class TabDesignerViewModel extends Base {
     return true;
   }
 
+  @propertyArray() _pages: Array<PageModel> = [];
+
+  public get pages(): Array<PageModel> {
+    return this._pages;
+  }
+  public set pages(val: Array<PageModel>) {
+    this.pagesAnimation.sync(val);
+  }
+
+  private pagesAnimation = new AnimationGroup(this.getPagesAnimationOptions(), (val) => {
+    this._pages = val;
+    this._pages.forEach(page => delete page["draggedFrom"]);
+  }, () => this._pages)
+
+  private getPagesAnimationOptions(): IAnimationGroupConsumer<PageModel> {
+    return {
+      getEnterOptions: (item, info) => {
+        return {
+          onBeforeRunAnimation: prepareElementForVerticalAnimation,
+          cssClass: "svc-page--enter",
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation
+        };
+      },
+      getLeaveOptions: (item, info) => {
+        return {
+          onBeforeRunAnimation: prepareElementForVerticalAnimation,
+          cssClass: "svc-page--leave",
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation
+        };
+      },
+      isAnimationEnabled: () => {
+        return this.animationAllowed;
+      },
+      getKey(page) {
+        return page.id;
+      },
+      getAnimatedElement: (item) => SurveyElementAdornerBase.GetAdorner(item)?.rootElement?.parentElement,
+      getRerenderEvent: () => this.onElementRerendered,
+      onCompareArrays(options) {
+        const droppedPage = options.mergedItems.filter(page => page["draggedFrom"] !== undefined)[0];
+        if (droppedPage) {
+          options.reorderedItems = [];
+          options.addedItems = [droppedPage];
+          const ghostPage = new PageModel();
+          ghostPage.setSurveyImpl(droppedPage.survey as SurveyModel);
+          ghostPage.title = droppedPage.title;
+          ghostPage.num = droppedPage.num;
+          ghostPage["isGhost"] = true;
+          options.deletedItems = [ghostPage];
+          options.mergedItems.splice(droppedPage["draggedFrom"], 0, ghostPage);
+        }
+      },
+    };
+  }
+
   public clickDesigner() {
     this.creator.selectedElement = this.creator.survey;
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;
-    if (this.creator.showPageNavigator && this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage") {
-      rootCss += " svc-tab-designer--with-page-navigator";
+    if (this.showSurfaceTools) {
+      rootCss += " svc-tab-designer--with-surface-tools";
     }
     if (this.showPlaceholder) {
-      rootCss += " svc-tab-designer--with-place-holder";
+      rootCss += " svc-tab-designer--with-placeholder";
     }
     rootCss += " svc-tab-designer--" + this.creator.pageEditMode + "-mode";
     return rootCss;

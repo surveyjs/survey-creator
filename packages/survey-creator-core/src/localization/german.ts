@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 var germanTranslation = {
   // survey templates
@@ -22,7 +22,7 @@ var germanTranslation = {
     theme: "Themen",
     translation: "Übersetzung",
     designer: "Designer",
-    editor: "JSON",
+    json: "JSON",
     logic: "Logik"
   },
   // Question types
@@ -69,6 +69,7 @@ var germanTranslation = {
     surveySettingsTooltip: "Einstellungen für Umfragen",
     themeSettings: "Theme-Einstellungen",
     themeSettingsTooltip: "Theme-Einstellungen",
+    creatorSettingTitle: "Creator-Einstellungen",
     showPanel: "Panel anzeigen",
     hidePanel: "Panel verstecken",
     prevSelected: "Vorheriges auswählen",
@@ -106,6 +107,12 @@ var germanTranslation = {
     redo: "Wiederherstellen",
     undoTooltip: "Letzte Änderung rückgängig machen",
     redoTooltip: "Letzte Änderung wiederherstellen",
+    expandAllTooltip: "Alle aufklappen",
+    collapseAllTooltip: "Alle einklappen",
+    zoomInTooltip: "Vergrößern",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Verkleinern",
+    lockQuestionsTooltip: "Sperren des Erweiterungs-/Einklappenzustands für Fragen",
     showMoreChoices: "Zeige mehr",
     showLessChoices: "Zeige weniger",
     copy: "Kopieren",
@@ -123,6 +130,8 @@ var germanTranslation = {
     toolboxNoResultsFound: "Keine Ergebnisse gefunden",
     propertyGridFilteredTextPlaceholder: "Tippen, um zu suchen ...",
     propertyGridNoResultsFound: "Keine Ergebnisse gefunden",
+    propertyGridPlaceholderTitle: "Beginnen Sie mit der Konfiguration Ihres Formulars",
+    propertyGridPlaceholderDescription: "Klicken Sie auf ein beliebiges Kategoriesymbol, um die Umfrageeinstellungen zu erkunden. Zusätzliche Einstellungen sind verfügbar, sobald Sie der Entwurfsoberfläche ein Vermessungselement hinzufügen.",
     correctJSON: "Bitte JSON korrigieren.",
     surveyResults: "Umfrageergebnis: ",
     surveyResultsTable: "Als Tabelle",
@@ -154,6 +163,7 @@ var germanTranslation = {
     translationPlaceHolder: "Übersetzung ...",
     translationSource: "Quelle: ",
     translationTarget: "Ziel: ",
+    translationYouTubeNotSupported: "YouTube-Links werden nicht unterstützt.",
     themeExportButton: "Exportieren",
     themeImportButton: "Importieren",
     surveyJsonExportButton: "Exportieren",
@@ -177,6 +187,18 @@ var germanTranslation = {
     pagePlaceHolder: "Die Seite ist leer. Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten.",
     imagePlaceHolder: "Ziehen Sie ein Bild per Drag & Drop hierher oder klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus",
     surveyPlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um mit der Erstellung Ihres Formulars zu beginnen.",
+    surveyPlaceholderTitle: "Ihr Formular ist leer",
+    surveyPlaceholderTitleMobile: "Ihr Formular ist leer",
+    surveyPlaceholderDescription: "Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten.",
+    surveyPlaceholderDescriptionMobile: "Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten.",
+    previewPlaceholderTitle: "Keine Vorschau",
+    previewPlaceholderTitleMobile: "Keine Vorschau",
+    previewPlaceholderDescription: "Die Umfrage enthält keine sichtbaren Elemente.",
+    previewPlaceholderDescriptionMobile: "Die Umfrage enthält keine sichtbaren Elemente.",
+    translationsPlaceholderTitle: "Keine Zeichenfolgen zu übersetzen",
+    translationsPlaceholderTitleMobile: "Keine Zeichenfolgen zu übersetzen",
+    translationsPlaceholderDescription: "Fügen Sie Ihrem Formular Elemente hinzu oder ändern Sie den Zeichenfolgenfilter in der Symbolleiste.",
+    translationsPlaceholderDescriptionMobile: "Fügen Sie Ihrem Formular Elemente hinzu oder ändern Sie den Zeichenfolgenfilter in der Symbolleiste.",
     pagePlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um der Seite ein neues Element hinzuzufügen.",
     panelPlaceHolderMobile: "Klicken Sie unten auf die Schaltfläche \"Frage hinzufügen\", um dem Bedienfeld ein neues Element hinzuzufügen.",
     imagePlaceHolderMobile: "Klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus",
@@ -189,6 +211,10 @@ var germanTranslation = {
     lg: {
       addNewItem: "Neue Regel hinzufügen",
       empty_tab: "Erstellen Sie eine Regel, um den Fluss der Umfrage anzupassen.",
+      logicPlaceholderTitle: "Keine logischen Regeln",
+      logicPlaceholderTitleMobile: "Keine logischen Regeln",
+      logicPlaceholderDescription: "Erstellen Sie eine Regel, um den Ablauf der Umfrage anzupassen.",
+      logicPlaceholderDescriptionMobile: "Erstellen Sie eine Regel, um den Ablauf der Umfrage anzupassen.",
       page_visibilityName: "Seite anzeigen/verstecken",
       page_enableName: "Seite aktivieren/deaktivieren",
       page_requireName: "Seite als erforderlich festlegen",
@@ -273,14 +299,14 @@ var germanTranslation = {
       description: "Beschreibung des Panels",
       visibleIf: "Panel sichtbar machen, wenn",
       requiredIf: "Panel erforderlich machen, wenn",
-      questionsOrder: "Reihenfolge der Fragen innerhalb des Panels",
+      questionOrder: "Reihenfolge der Fragen innerhalb des Panels",
       page: "Panel auf die Seite verschieben",
       startWithNewLine: "Panel in einer neuen Zeile anzeigen",
       state: "Status des Ausblendens des Panels",
       width: "Breite des Inline-Panels",
       minWidth: "Minimale Breite des Panels",
       maxWidth: "Maximale Breite des Panels",
-      showNumber: "Nummernfelder"
+      showNumber: "Nummerieren Sie dieses Feld"
     },
     paneldynamic: {
       name: "Name des Panels",
@@ -301,12 +327,13 @@ var germanTranslation = {
       templateTabTitle: "Muster des Tab-Titels",
       tabTitlePlaceholder: "Platzhalter für Registerkartentitel",
       templateVisibleIf: "Machen Sie ein einzelnes Panel sichtbar, wenn",
-      hideNumber: "Ausblenden der Panel-Nummer",
+      showNumber: "Nummerieren des Bedienfelds",
       titleLocation: "Ausrichtung des Panel-Titels",
       descriptionLocation: "Ausrichtung der Panelbeschreibung",
-      templateTitleLocation: "Ausrichtung des Fragetitels",
+      templateQuestionTitleLocation: "Ausrichtung des Fragetitels",
       templateErrorLocation: "Ausrichtung von Fehlermeldungen",
       newPanelPosition: "Neue Panel-Position",
+      showRangeInProgress: "Zeigen Sie den Fortschrittsbalken an",
       keyName: "Doppelte Antworten in der folgenden Frage verhindern"
     },
     question: {
@@ -317,7 +344,7 @@ var germanTranslation = {
       requiredIf: "Frage erforderlich machen, wenn",
       page: "Frage auf die Seite verschieben",
       state: "Status des Ausblendens des Fragefelds",
-      hideNumber: "Ausblenden der Fragenummer",
+      showNumber: "Diese Frage nummerieren",
       titleLocation: "Ausrichtung des Fragetitels",
       descriptionLocation: "Ausrichtung der Fragebeschreibung",
       errorLocation: "Ausrichtung von Fehlermeldungen",
@@ -359,7 +386,8 @@ var germanTranslation = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Beschreibung der Umfrage"
+      description: "Beschreibung der Umfrage",
+      readOnly: "Machen Sie die Umfrage schreibgeschützt"
     },
     page: {
       name: "Name der Seite",
@@ -367,8 +395,8 @@ var germanTranslation = {
       description: "Seitenbeschreibung",
       visibleIf: "Seite sichtbar machen, wenn",
       requiredIf: "Seite erforderlich machen, wenn",
-      maxTimeToFinish: "Zeitlimit zum Beenden der Seite (in Sekunden)",
-      questionsOrder: "Reihenfolge der Fragen auf der Seite"
+      timeLimit: "Zeitlimit zum Beenden der Seite (in Sekunden)",
+      questionOrder: "Reihenfolge der Fragen auf der Seite"
     },
     matrixdropdowncolumn: {
       name: "Name der Spalte",
@@ -411,7 +439,7 @@ var germanTranslation = {
     imageWidth: "Bildbreite",
     valueName: "Name der Antwort",
     rateDescriptionLocation: "Ausrichtung der Beschriftung",
-    size: "Größe des Eingabefeldes (in Zeichen)",
+    size: "Breite des Eingabefeldes (in Zeichen)",
     cellErrorLocation: "Ausrichtung von Zellenfehlermeldungen",
     enabled: "Ermöglichte",
     disabled: "Arbeitsunfähig",
@@ -482,6 +510,7 @@ var germanTranslation = {
     "listIsEmpty@calculatedValues": "Sie haben noch keine benutzerdefinierten Variablen",
     "listIsEmpty@triggers": "Sie haben noch keine Auslöser",
     "listIsEmpty@navigateToUrlOnCondition": "Sie haben noch keine Links",
+    "listIsEmpty@pages": "Sie haben noch keine Seiten",
     "addNew@choices": "Auswahlmöglichkeit hinzufügen",
     "addNew@columns": "Neue Spalte hinzufügen",
     "addNew@rows": "Neue Zeile hinzufügen",
@@ -489,6 +518,7 @@ var germanTranslation = {
     "addNew@calculatedValues": "Neue Variable hinzufügen",
     "addNew@triggers": "Neuen Auslöser hinzufügen",
     "addNew@navigateToUrlOnCondition": "Neue URL hinzufügen",
+    "addNew@pages": "Neue Seite hinzufügen",
     expressionIsEmpty: "Keinen Ausdruck definiert",
     value: "Wert",
     text: "Text",
@@ -532,7 +562,7 @@ var germanTranslation = {
     isRequired: "Erforderlich?",
     markRequired: "Als erforderlich markieren",
     removeRequiredMark: "Erforderliche Markierung entfernen",
-    isAllRowRequired: "Eine Antwort in jeder Zeile erforderlich machen",
+    eachRowRequired: "Eine Antwort in jeder Zeile erforderlich machen",
     eachRowUnique: "Doppelte Beantwortungen in Zeilen verhindern",
     requiredErrorText: "Fehlermeldung bei nicht beantworteten erforderlichen Fragen",
     startWithNewLine: "Mit einer neuen Zeile starten",
@@ -544,7 +574,7 @@ var germanTranslation = {
     maxSize: "Maximale Dateigröße in Bytes",
     rowCount: "Zeilenanzahl",
     columnLayout: "Spaltenlayout",
-    addRowLocation: "Zeilenknopfposition hinzufügen",
+    addRowButtonLocation: "Zeilenknopfposition hinzufügen",
     transposeData: "Transponieren von Zeilen in Spalten",
     addRowText: "Text für die Schaltfläche \"Zeile hinzufügen\"",
     removeRowText: "Text für die Schaltfläche \"Zeile entfernen\"",
@@ -580,10 +610,9 @@ var germanTranslation = {
     simulator: "Gerät auswählen",
     landscapeOrientation: "Querformat",
     portraitOrientation: "Hochformat",
-    mode: "Modus (editierbar/schreibgeschützt)",
     clearInvisibleValues: "Alle unsichtbaren Werte leeren",
     cookieName: "Cookie-Name (um zu unterdrücken, dass die Umfrage lokal zwei Mal ausgefüllt werden kann)",
-    sendResultOnPageNext: "Umfrageergebnisse beim Seitenwechsel automatisch speichern",
+    partialSendEnabled: "Umfrageergebnisse beim Seitenwechsel automatisch speichern",
     storeOthersAsComment: "\"Sonstige\" Werte als Kommentar speichern",
     showPageTitles: "Seitenbeschreibung anzeigen",
     showPageNumbers: "Seitennummern anzeigen",
@@ -594,35 +623,38 @@ var germanTranslation = {
     editText: "Text für die Schaltfläche \"Antwort bearbeiten\"",
     startSurveyText: "Text für die Schaltfläche \"Umfrage starten\"",
     showNavigationButtons: "Navigationsschaltflächen anzeigen",
+    navigationButtonsLocation: "Ausrichtung der Navigationsschaltflächen",
     showPrevButton: "Schaltfläche \"Vorherige Seite\" anzeigen (Benutzer können auf die vorherige Seite zurückkehren)",
-    firstPageIsStarted: "Die erste Seite der Umfrage ist die Startseite",
-    showCompletedPage: "Nach Abschluss die Seite \"Umfrage abgeschlossen\" anzeigen",
-    goNextPageAutomatic: "Automatisch zur nächsten Seiten wechseln",
-    allowCompleteSurveyAutomatic: "Umfrage automatisch ausfüllen",
+    firstPageIsStartPage: "Die erste Seite der Umfrage ist die Startseite",
+    showCompletePage: "Nach Abschluss die Seite \"Umfrage abgeschlossen\" anzeigen",
+    autoAdvanceEnabled: "Automatisch zur nächsten Seiten wechseln",
+    autoAdvanceAllowComplete: "Umfrage automatisch ausfüllen",
     showProgressBar: "Fortschrittsbalken anzeigen",
+    progressBarLocation: "Ausrichtung der Fortschrittsleiste",
     questionTitleLocation: "Position des Fragentitels",
     questionTitleWidth: "Breite des Fragetitels",
-    requiredText: "Symbol für erforderliche Fragen",
+    requiredMark: "Symbol für erforderliche Fragen",
     questionTitleTemplate: "Template für den Fragentitel. Standard ist: \"{no}. {require} {title}\"",
     questionErrorLocation: "Position der Fehlermeldungen",
-    focusFirstQuestionAutomatic: "Erste Frage auf einer neuen Seite fokussieren",
-    questionsOrder: "Reihenfolge der Fragen auf der Seite",
-    maxTimeToFinish: "Maximale Zeit, um die Umfrage zu beenden",
-    maxTimeToFinishPage: "Maximale Zeit, um eine Seite der Umfrage zu beenden",
-    showTimerPanel: "Position des Timers",
-    showTimerPanelMode: "Modus des Timers",
+    autoFocusFirstQuestion: "Erste Frage auf einer neuen Seite fokussieren",
+    questionOrder: "Reihenfolge der Fragen auf der Seite",
+    timeLimit: "Maximale Zeit, um die Umfrage zu beenden",
+    timeLimitPerPage: "Maximale Zeit, um eine Seite der Umfrage zu beenden",
+    showTimer: "Verwenden eines Timers",
+    timerLocation: "Position des Timers",
+    timerInfoMode: "Modus des Timers",
     renderMode: "Anzeigemodus",
     allowAddPanel: "Hinzufügen eines Panels erlauben",
     allowRemovePanel: "Entfernen eines Panels erlauben",
-    panelAddText: "Text für die Schaltfläche \"Panel hinzufügen\"",
-    panelRemoveText: "Text für die Schaltfläche \"Panel entfernen\"",
+    addPanelText: "Text für die Schaltfläche \"Panel hinzufügen\"",
+    removePanelText: "Text für die Schaltfläche \"Panel entfernen\"",
     isSinglePage: "Alle Elemente auf einer Seite anzeigen",
     html: "HTML",
     setValue: "Antwort",
     dataFormat: "Bildformat",
     allowAddRows: "Hinzufügen von Zeilen zulassen",
     allowRemoveRows: "Entfernen von Zeilen zulassen",
-    allowRowsDragAndDrop: "Verschieben von Zeilen zulassen",
+    allowRowReorder: "Verschieben von Zeilen zulassen",
     responsiveImageSizeHelp: "Gilt nicht, wenn Sie die genaue Bildbreite oder -höhe angeben.",
     minImageWidth: "Minimale Bildbreite",
     maxImageWidth: "Maximale Bildbreite",
@@ -630,6 +662,7 @@ var germanTranslation = {
     maxImageHeight: "Maximale Bildhöhe",
     minValue: "Minimaler Wert",
     maxValue: "Maximaler Wert",
+    caseInsensitive: "Schreibungsunabhängig",
     minLength: "Minimale Länge",
     allowDigits: "Ziffern erlaubt",
     minCount: "Minimale Anzahl",
@@ -648,13 +681,13 @@ var germanTranslation = {
     logo: "Logo (URL oder base64-codierte Zeichenfolge)",
     questionsOnPageMode: "Umfrage Struktur",
     maxTextLength: "Maximale Antwortlänge (in Zeichen)",
-    maxOthersLength: "Maximale Kommentarlänge (in Zeichen)",
+    maxCommentLength: "Maximale Kommentarlänge (in Zeichen)",
     commentAreaRows: "Höhe des Kommentarbereichs (in Zeilen)",
     autoGrowComment: "Kommentarbereich bei Bedarf automatisch erweitern",
     allowResizeComment: "Benutzern erlauben, die Größe von Textbereichen zu ändern",
     textUpdateMode: "Wert der Textfrage aktualisieren",
     maskType: "Typ der Eingabemaske",
-    focusOnFirstError: "Fokus auf die erste ungültige Antwort setzen",
+    autoFocusFirstError: "Fokus auf die erste ungültige Antwort setzen",
     checkErrorsMode: "Validierung ausführen",
     validateVisitedEmptyFields: "Validieren leerer Felder bei verlorenem Fokus",
     navigateToUrl: "Zur externen URL umleiten",
@@ -688,10 +721,9 @@ var germanTranslation = {
     minPanelCount: "Minimale Panelanzahl",
     maxPanelCount: "Maximale Panelanzahl",
     panelsState: "Erweiterungszustand des inneren Bereichs",
-    panelPrevText: "Text für die Schaltfläche \"Vorheriges Panel\".",
-    panelNextText: "Text für die Schaltfläche \"Nächstes Panel\".",
-    showRangeInProgress: "Fortschrittsbalken anzeigen",
-    panelRemoveButtonLocation: "Position der Schaltfläche \"Panel entfernen\"",
+    prevPanelText: "Text für die Schaltfläche \"Vorheriges Panel\".",
+    nextPanelText: "Text für die Schaltfläche \"Nächstes Panel\".",
+    removePanelButtonLocation: "Position der Schaltfläche \"Panel entfernen\"",
     hideIfRowsEmpty: "Frage ausblenden, wenn keine Zeilen vorhanden sind",
     hideColumnsIfEmpty: "Spalten ausblenden, wenn keine Zeilen vorhanden sind",
     rateValues: "Benutzerdefinierte Bewertungswerte",
@@ -713,21 +745,22 @@ var germanTranslation = {
     keyDuplicationError: "Fehlermeldung bei doppelter Beantwortung",
     minSelectedChoices: "Mindestanzahl an Auswahlmöglichkeiten",
     maxSelectedChoices: "Maximum an Auswahlmöglichkeiten",
-    showClearButton: "Schaltfläche \"Löschen\" anzeigen",
     logoWidth: "Logobreite",
     logoHeight: "Logohöhe",
     readOnly: "Schreibgeschützt",
     enableIf: "Bearbeitbar, wenn",
-    emptyRowsText: "Meldung \"Keine Zeilen\"",
+    noRowsText: "Meldung \"Keine Zeilen\"",
     separateSpecialChoices: "Spezielle Auswahlmöglichkeiten separieren",
     choicesFromQuestion: "Auswahlmöglichkeiten aus folgender Frage kopieren",
     choicesFromQuestionMode: "Auswahlmöglichkeiten, die kopiert werden sollen",
+    choiceValuesFromQuestion: "Verwenden Sie Werte aus der folgenden Matrixspalte oder Bereichsfrage als Auswahl-IDs",
+    choiceTextsFromQuestion: "Verwenden Sie Werte aus der folgenden Matrixspalte oder Panelfrage als Auswahltexte",
     progressBarShowPageTitles: "Seitentitel in der Fortschrittsbalke anzeigen",
     progressBarShowPageNumbers: "Seitenzahlen in der Fortschrittsbalke anzeigen",
     showCommentArea: "Kommentarbereich anzeigen",
     commentPlaceholder: "Platzhaltertext für den Kommentarbereich",
     displayRateDescriptionsAsExtremeItems: "Beschreibung für minimale und maximale Bewertung als Werte anzeigen",
-    rowsOrder: "Reihenfolge der Zeilen",
+    rowOrder: "Reihenfolge der Zeilen",
     columnsLayout: "Spalten-Layout",
     columnColCount: "Anzahl der geschachtelten Spalten",
     correctAnswer: "Richtige Antwort",
@@ -756,6 +789,11 @@ var germanTranslation = {
       top: "oben",
       bottom: "unten"
     },
+    previewMode: "Vorschau-Modus",
+    gridLayoutEnabled: "Aktivieren des Rasterlayouts",
+    gridLayoutColumns: "Spalten für das Rasterlayout",
+    maskSettings: "Masken-Einstellungen",
+    detailErrorLocation: "Ausrichtung der Fehlermeldung bei der Zeilenerweiterung",
     // Creator tabs
     tabs: {
       panel: {
@@ -803,6 +841,9 @@ var germanTranslation = {
       header: "Titelzeile",
       background: "Hintergrund",
       appearance: "Erscheinungsbild",
+      accentColors: "Akzentfarben",
+      surfaceBackground: "Oberflächen-Hintergrund",
+      scaling: "Skalierung",
       others: "Weiteres"
     },
     editProperty: "Eigenschaft bearbeiten '{0}'",
@@ -812,8 +853,7 @@ var germanTranslation = {
     columnsEnableIf: "Spalten sichtbar machen, wenn",
     rowsEnableIf: "Zeilen sichtbar machen, wenn",
     innerIndent: "Inneren Einzug vergrößern",
-    defaultValueFromLastRow: "Werte aus der letzten Zeile als Standard festlegen",
-    defaultValueFromLastPanel: "Werte aus dem letzten Panel als Standard festlegen",
+    copyDefaultValueFromLastEntry: "Antworten aus dem letzten Eintrag als Standard verwenden",
     enterNewValue: "Bitte einen Wert eingeben.",
     noquestions: "Die Umfrage enthält keine Fragen.",
     createtrigger: "Bitte einen Auslöser eingeben.",
@@ -867,6 +907,7 @@ var germanTranslation = {
       fontSize: "Schriftgrad",
       scale: "Maßstab",
       cornerRadius: "Ecken-Radius",
+      advancedMode: "Erweiterter Modus",
       pageTitle: "Schriftart des Titels",
       pageDescription: "Beschreibung Schriftart",
       questionTitle: "Schriftart des Titels",
@@ -927,10 +968,11 @@ var germanTranslation = {
     firstExpanded: "ausgeklappt (erstes Element)",
     off: "aus",
     list: "Liste",
+    carousel: "Karussell",
+    tab: "Tabulatoren",
     progressTop: "oben (Fortschritt)",
     progressBottom: "unten (Fortschritt)",
     progressTopBottom: "oben und unten (Fortschritt)",
-    tab: "Tabulatoren",
     horizontal: "horizontal",
     vertical: "vertikal",
     top: "oben",
@@ -988,6 +1030,61 @@ var germanTranslation = {
       url: "Web-URL",
       week: "Woche"
     },
+    autocomplete: {
+      name: "Vollständiger Name",
+      "honorific-prefix": "Präfix",
+      "given-name": "Vorname",
+      "additional-name": "Zweitname",
+      "family-name": "Nachname",
+      "honorific-suffix": "Nachsilbe",
+      nickname: "Spitzname",
+      "organization-title": "Berufsbezeichnung",
+      username: "Benutzername",
+      "new-password": "Neues Passwort",
+      "current-password": "Aktuelles Passwort",
+      organization: "Name der Organisation",
+      "street-address": "Vollständige Adresse",
+      "address-line1": "Adresszeile 1",
+      "address-line2": "Adresszeile 2",
+      "address-line3": "Adresszeile 3",
+      "address-level4": "Adresse der Ebene 4",
+      "address-level3": "Level 3 Adresse",
+      "address-level2": "Level 2 Adresse",
+      "address-level1": "Adresse der Ebene 1",
+      country: "Landescode",
+      "country-name": "Ländername",
+      "postal-code": "Postleitzahl",
+      "cc-name": "Name des Karteninhabers",
+      "cc-given-name": "Vorname des Karteninhabers",
+      "cc-additional-name": "Zweiter Vorname des Karteninhabers",
+      "cc-family-name": "Nachname des Karteninhabers",
+      "cc-number": "Kreditkartennummer",
+      "cc-exp": "Verfallsdatum",
+      "cc-exp-month": "Ablauf-Monat",
+      "cc-exp-year": "Verfallsjahr",
+      "cc-csc": "Sicherheitscode der Karte",
+      "cc-type": "Art der Kreditkarte",
+      "transaction-currency": "Transaktionswährung",
+      "transaction-amount": "Betrag der Transaktion",
+      language: "Bevorzugte Sprache",
+      bday: "Geburtstag",
+      "bday-day": "Geburtstagstag",
+      "bday-month": "Geburtstagsmonat",
+      "bday-year": "Geburtstagsjahr",
+      sex: "Geschlecht",
+      url: "Website URL",
+      photo: "Profilfoto",
+      tel: "Telefonnummer",
+      "tel-country-code": "Landesvorwahl für Telefon",
+      "tel-national": "Nationale Telefonnummer",
+      "tel-area-code": "Vorwahl",
+      "tel-local": "Lokale Telefonnummer",
+      "tel-local-prefix": "Lokale Telefonvorwahl",
+      "tel-local-suffix": "Suffix für lokale Telefone",
+      "tel-extension": "Telefon-Durchwahl",
+      email: "E-Mail-Adresse",
+      impp: "Instant-Messaging-Protokoll"
+    },
     maskType: {
       none: "Nichts",
       pattern: "Muster",
@@ -1014,6 +1111,8 @@ var germanTranslation = {
     noPreview: "Keine Vorschau",
     showAllQuestions: "Vorschau mit allen Fragen anzeigen",
     showAnsweredQuestions: "Vorschau mit beantworteten Fragen anzeigen",
+    allQuestions: "Alle Fragen anzeigen",
+    answeredQuestions: "Nur beantwortete Fragen anzeigen",
     pages: "Seiten",
     questions: "Fragen",
     requiredQuestions: "Erforderliche Fragen",
@@ -1029,13 +1128,10 @@ var germanTranslation = {
     showNavigationButtons: {
       none: "Versteckt"
     },
-    showTimerPanel: {
-      none: "Versteckt"
+    timerInfoMode: {
+      combined: "Beide"
     },
-    showTimerPanelMode: {
-      all: "Beide"
-    },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "Basierend auf dem Matrix-Layout"
     },
     panelsState: {
@@ -1106,17 +1202,19 @@ var germanTranslation = {
       percent: "Prozentsatz",
       date: "Datum"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "Original"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "Original"
     },
-    showProgressBar: {
-      off: "Versteckt",
-      topbottom: "oben und unten",
-      aboveheader: "Über der Kopfzeile",
-      belowheader: "Unterhalb der Kopfzeile"
+    progressBarLocation: {
+      top: "Nach oben",
+      bottom: "Unteres",
+      topbottom: "Oben und unten",
+      aboveheader: "Oberhalb der Kopfzeile",
+      belowheader: "Unterhalb der Kopfzeile",
+      off: "Versteckt"
     },
     sum: "Summe",
     count: "Zahl",
@@ -1255,12 +1353,13 @@ var germanTranslation = {
       questionTitleLocation: "Gilt für alle Fragen in diesem Bereich. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\").",
       questionTitleWidth: "Legt eine konsistente Breite für Fragetitel fest, wenn sie links neben den Fragefeldern ausgerichtet sind. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
       questionErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf alle Fragen innerhalb des Bereichs fest. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an.",
-      questionsOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an.",
+      questionOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an.",
       page: "Positioniert das Panel am Ende einer ausgewählten Seite.",
       innerIndent: "Fügt Abstand oder Rand zwischen dem Inhalt des Panels und dem linken Rand des Panels hinzu.",
       startWithNewLine: "Deaktivieren Sie diese Option, um den Bereich in einer Zeile mit der vorherigen Frage oder dem vorherigen Bereich anzuzeigen. Die Einstellung gilt nicht, wenn der Bereich das erste Element in Ihrem Formular ist.",
       state: "Wählen Sie aus: \"Erweitert\" - das Panel wird vollständig angezeigt und kann eingeklappt werden; \"Reduziert\" - das Panel zeigt nur den Titel und die Beschreibung an und kann erweitert werden; \"Gesperrt\" - das Panel wird vollständig angezeigt und kann nicht eingeklappt werden.",
-      width: "Legt die Breite des Fensters im Verhältnis zu anderen Vermessungselementen in derselben Linie fest. Akzeptiert CSS-Werte (px, %, in, pt usw.)."
+      width: "Legt die Breite des Fensters im Verhältnis zu anderen Vermessungselementen in derselben Linie fest. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
+      showQuestionNumbers: "Weist Fragen, die in diesem Bereich verschachtelt sind, Nummern zu."
     },
     paneldynamic: {
       name: "Eine Panel-ID, die für die Befragten nicht sichtbar ist.",
@@ -1268,7 +1367,7 @@ var germanTranslation = {
       visibleIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Sichtbarkeit des Panels bestimmt.",
       enableIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die den schreibgeschützten Modus für das Panel deaktiviert.",
       requiredIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort.",
-      templateTitleLocation: "Gilt für alle Fragen in diesem Bereich. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\").",
+      templateQuestionTitleLocation: "Gilt für alle Fragen in diesem Bereich. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\").",
       templateErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf eine Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\").",
       errorLocation: "Legt die Position einer Fehlermeldung in Bezug auf alle Fragen innerhalb des Bereichs fest. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an.",
       page: "Positioniert das Panel am Ende einer ausgewählten Seite.",
@@ -1283,9 +1382,10 @@ var germanTranslation = {
       titleLocation: "Diese Einstellung wird automatisch von allen Fragen in diesem Bereich übernommen. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\").",
       descriptionLocation: "Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig unter dem Panel-Titel).",
       newPanelPosition: "Definiert die Position eines neu hinzugefügten Panels. Standardmäßig werden neue Panele am Ende hinzugefügt. Wählen Sie \"Weiter\", um ein neues Panel nach dem aktuellen einzufügen.",
-      defaultValueFromLastPanel: "Dupliziert die Antworten aus dem letzten Bereich und weist sie dem nächsten hinzugefügten dynamischen Bereich zu.",
+      copyDefaultValueFromLastEntry: "Dupliziert die Antworten aus dem letzten Bereich und weist sie dem nächsten hinzugefügten dynamischen Bereich zu.",
       keyName: "Verweisen Sie auf einen Fragenamen, um einen Benutzer aufzufordern, in jedem Bereich eine eindeutige Antwort auf diese Frage zu geben."
     },
+    copyDefaultValueFromLastEntry: "Dupliziert Antworten aus der letzten Zeile und weist sie der nächsten hinzugefügten dynamischen Zeile zu.",
     defaultValueExpression: "Mit dieser Einstellung können Sie einen Standardantwortwert basierend auf einem Ausdruck zuweisen. Der Ausdruck kann grundlegende Berechnungen enthalten - '{q1_id} + {q2_id}', boolesche Ausdrücke wie '{age} > 60' und Funktionen: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw. Der durch diesen Ausdruck ermittelte Wert dient als anfänglicher Standardwert, der durch die manuelle Eingabe eines Befragten überschrieben werden kann.",
     resetValueIf: "Verwenden Sie das Zauberstabsymbol, um eine Bedingungsregel festzulegen, die bestimmt, wann die Eingabe eines Befragten auf den Wert zurückgesetzt wird, der auf dem Wert \"Standardwertausdruck\" oder \"Wertausdruck festlegen\" oder auf dem Wert \"Standardantwort\" (falls einer dieser Werte festgelegt ist) basiert.",
     setValueIf: "Verwenden Sie das Zauberstabsymbol, um eine Bedingungsregel festzulegen, die bestimmt, wann der \"Wertausdruck festlegen\" ausgeführt werden soll, und weisen Sie den resultierenden Wert dynamisch als Antwort zu.",
@@ -1339,7 +1439,8 @@ var germanTranslation = {
     },
     // survey templates
     survey: {
-      mode: "Wählen Sie zwischen: \"Bearbeiten\" - ermöglicht es den Befragten, Ihre Umfrage auszufüllen; \"Anzeigen\" - deaktiviert die Formularbearbeitung."
+      readOnly: "Wählen Sie diese Option aus, wenn Sie verhindern möchten, dass die Befragten Ihre Umfrage ausfüllen.",
+      progressBarLocation: "Legt die Position des Fortschrittsbalkens fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an."
     },
     matrixdropdowncolumn: {
       name: "Eine Spalten-ID, die für die Befragten nicht sichtbar ist.",
@@ -1348,27 +1449,29 @@ var germanTranslation = {
       visibleIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Sichtbarkeit von Spalten bestimmt.",
       enableIf: "Verwenden Sie das Zauberstabsymbol, um eine Bedingungsregel festzulegen, die den schreibgeschützten Modus für die Spalte deaktiviert.",
       requiredIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort.",
-      showInMultipleColumns: "Wenn diese Option aktiviert ist, wird für jede Auswahloption eine eigene Spalte erstellt."
+      showInMultipleColumns: "Wenn diese Option aktiviert ist, wird für jede Auswahloption eine eigene Spalte erstellt.",
+      colCount: "Ordnet die Auswahloptionen in einem mehrspaltigen Layout an. Wenn der Wert auf 0 gesetzt ist, werden die Optionen in einer einzigen Zeile angezeigt. Wenn dieser Wert auf -1 festgelegt ist, wird der tatsächliche Wert von der Eigenschaft \"Anzahl der geschachtelten Spalten\" der übergeordneten Matrix geerbt."
     },
+    caseInsensitive: "Wählen Sie diese Option aus, wenn Groß- und Kleinbuchstaben im regulären Ausdruck als gleichwertig behandelt werden müssen.",
     widthMode: "Wählen Sie aus: \"Statisch\" - legt eine feste Breite fest; \"Responsive\" - lässt die Umfrage die gesamte Breite des Bildschirms einnehmen; \"Auto\" - wendet je nach verwendetem Fragetyp einen der beiden an.",
     cookieName: "Cookies verhindern, dass Benutzer dieselbe Umfrage zweimal ausfüllen.",
     logo: "Fügen Sie einen Bildlink ein (keine Größenbeschränkung) oder klicken Sie auf das Ordnersymbol, um eine Datei von Ihrem Computer (bis zu 64 KB) zu durchsuchen.",
     logoWidth: "Legt eine Logobreite in CSS-Einheiten (px, %, in, pt usw.) fest.",
     logoHeight: "Legt die Höhe eines Logos in CSS-Einheiten (px, %, in, pt usw.) fest.",
     logoFit: "Wählen Sie aus: \"Keine\" - das Bild behält seine ursprüngliche Größe; \"Enthalten\" - die Größe des Bildes wird angepasst, wobei das Seitenverhältnis beibehalten wird. \"Cover\" - das Bild füllt den gesamten Rahmen aus, während das Seitenverhältnis beibehalten wird. \"Füllen\" - Das Bild wird gestreckt, um den Rahmen auszufüllen, ohne das Seitenverhältnis beizubehalten.",
-    goNextPageAutomatic: "Wählen Sie diese Option aus, wenn die Umfrage automatisch zur nächsten Seite weitergeleitet werden soll, nachdem ein Befragter alle Fragen auf der aktuellen Seite beantwortet hat.",
-    allowCompleteSurveyAutomatic: "Wählen Sie diese Option aus, wenn die Umfrage automatisch abgeschlossen werden soll, nachdem ein Befragter alle Fragen beantwortet hat.",
+    autoAdvanceEnabled: "Wählen Sie aus, ob die Umfrage automatisch zur nächsten Seite wechseln soll, sobald ein Befragter alle Fragen auf der aktuellen Seite beantwortet hat. Diese Funktion wird nicht angewendet, wenn die letzte Frage auf der Seite offen ist oder mehrere Antworten zulässt.",
+    autoAdvanceAllowComplete: "Wählen Sie diese Option aus, wenn die Umfrage automatisch abgeschlossen werden soll, nachdem ein Befragter alle Fragen beantwortet hat.",
     showNavigationButtons: "Legt die Sichtbarkeit und Position von Navigationsschaltflächen auf einer Seite fest.",
-    showProgressBar: "Legt die Sichtbarkeit und Position einer Statusanzeige fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an.",
+    navigationButtonsLocation: "Legt die Position der Navigationsschaltflächen auf einer Seite fest.",
     showPreviewBeforeComplete: "Aktivieren Sie die Vorschauseite nur mit allen oder beantworteten Fragen.",
     questionTitleLocation: "Gilt für alle Fragen innerhalb der Umfrage. Diese Einstellung kann durch Regeln für die Titelausrichtung auf niedrigeren Ebenen außer Kraft gesetzt werden: Bereich, Seite oder Frage. Eine Einstellung auf niedrigerer Ebene überschreibt die Einstellung auf einer höheren Ebene.",
-    requiredText: "Ein Symbol oder eine Sequenz von Symbolen, die darauf hinweist, dass eine Antwort erforderlich ist.",
+    requiredMark: "Ein Symbol oder eine Sequenz von Symbolen, die darauf hinweist, dass eine Antwort erforderlich ist.",
     questionStartIndex: "Geben Sie eine Zahl oder einen Buchstaben ein, mit der Sie die Nummerierung beginnen möchten.",
     questionErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf die Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert.",
-    focusFirstQuestionAutomatic: "Wählen Sie diese Option aus, wenn das erste Eingabefeld auf jeder Seite für die Texteingabe bereit sein soll.",
-    questionsOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
+    autoFocusFirstQuestion: "Wählen Sie diese Option aus, wenn das erste Eingabefeld auf jeder Seite für die Texteingabe bereit sein soll.",
+    questionOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
     maxTextLength: "Nur für Fragen zur Texteingabe.",
-    maxOthersLength: "Nur für Fragenkommentare.",
+    maxCommentLength: "Nur für Fragenkommentare.",
     commentAreaRows: "Legt die Anzahl der angezeigten Zeilen in Textbereichen für Fragenkommentare fest. Wenn die Eingabe mehr Zeilen einnimmt, erscheint die Bildlaufleiste.",
     autoGrowComment: "Wählen Sie diese Option aus, wenn Fragenkommentare und Langtextfragen basierend auf der eingegebenen Textlänge automatisch in die Höhe wachsen sollen.",
     allowResizeComment: "Nur für Fragenkommentare und Langtextfragen.",
@@ -1383,10 +1486,10 @@ var germanTranslation = {
     rowTitleWidth: "Akzeptiert CSS-Werte (px, %, in, pt usw.).",
     totalText: "Diese Option ist nur sichtbar, wenn mindestens eine Spalte über den Total-Typ oder den Total-Ausdruck verfügt.",
     cellErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf eine Zelle mit ungültiger Eingabe fest. Die Option \"Vererben\" übernimmt die Einstellung aus der Eigenschaft \"Fehlermeldungsausrichtung\".",
+    detailErrorLocation: "Legt die Position von Fehlermeldungen für Fragen fest, die in Detailabschnitten verschachtelt sind. Die Option \"Vererben\" wendet die Einstellung aus der Eigenschaft \"Ausrichtung der Fehlermeldung\" an.",
     keyDuplicationError: "Wenn die Eigenschaft \"Doppelte Beantwortungen verhindern\" aktiviert ist, erhält ein Befragter, der versucht, einen doppelten Beitrag einzureichen, die folgende Fehlermeldung.",
     totalExpression: "Hiermit können Sie Gesamtwerte basierend auf einem Ausdruck berechnen. Der Ausdruck kann grundlegende Berechnungen ('{q1_id} + {q2_id}'), boolesche Ausdrücke ('{age} > 60') und Funktionen ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw.) enthalten.",
     confirmDelete: "Löst eine Eingabeaufforderung aus, in der Sie aufgefordert werden, das Löschen der Zeile zu bestätigen.",
-    defaultValueFromLastRow: "Dupliziert Antworten aus der letzten Zeile und weist sie der nächsten hinzugefügten dynamischen Zeile zu.",
     keyName: "Wenn die angegebene Spalte identische Werte enthält, löst die Umfrage den Fehler \"Nicht eindeutiger Schlüsselwert\" aus.",
     description: "Geben Sie einen Untertitel ein.",
     locale: "Wählen Sie eine Sprache aus, um mit der Erstellung Ihrer Umfrage zu beginnen. Um eine Übersetzung hinzuzufügen, wechseln Sie in eine neue Sprache und übersetzen Sie den Originaltext hier oder auf dem Tab \"Übersetzungen\".",
@@ -1394,21 +1497,21 @@ var germanTranslation = {
     imageFit: "Wählen Sie aus: \"Keine\" - das Bild behält seine ursprüngliche Größe; \"Enthalten\" - die Größe des Bildes wird angepasst, wobei das Seitenverhältnis beibehalten wird. \"Cover\" - das Bild füllt den gesamten Rahmen aus, während das Seitenverhältnis beibehalten wird. \"Füllen\" - Das Bild wird gestreckt, um den Rahmen auszufüllen, ohne das Seitenverhältnis beizubehalten.",
     autoGrow: "Erhöht die Höhe des Eingabefelds schrittweise, während Daten eingegeben werden. Überschreibt die Einstellung \"Höhe des Eingabefelds (in Zeilen)\".",
     allowResize: "Der Ziehpunkt (oder Griff) wird in der Ecke angezeigt und kann gezogen werden, um die Größe des Eingabefelds zu ändern.",
-    maxTimeToFinish: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur Danke-Seite wechselt.",
-    maxTimeToFinishPage: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt.",
+    timeLimit: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur Danke-Seite wechselt.",
+    timeLimitPerPage: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt.",
     validateVisitedEmptyFields: "Aktivieren Sie diese Option, um die Validierung auszulösen, wenn sich ein Benutzer auf ein leeres Eingabefeld konzentriert und es dann verlässt, ohne Änderungen vorzunehmen.",
     page: {
-      maxTimeToFinish: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt.",
+      timeLimit: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt.",
       visibleIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Sichtbarkeit der Seite bestimmt.",
       enableIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die den schreibgeschützten Modus für die Seite deaktiviert.",
       requiredIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort.",
       questionTitleLocation: "Gilt für alle Fragen auf dieser Seite. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen oder Bereiche. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (standardmäßig \"Oben\").",
       questionTitleWidth: "Legt eine konsistente Breite für Fragetitel fest, wenn sie links neben den Fragefeldern ausgerichtet sind. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
       questionErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf die Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (standardmäßig \"Oben\").",
-      questionsOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene (\"Original\" standardmäßig) angewendet. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
-      navigationButtonsVisibility: "Legt die Sichtbarkeit von Navigationsschaltflächen auf der Seite fest. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene angewendet, die standardmäßig auf \"Sichtbar\" eingestellt ist."
+      questionOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene (\"Original\" standardmäßig) angewendet. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
+      showNavigationButtons: "Legt die Sichtbarkeit von Navigationsschaltflächen auf der Seite fest. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene angewendet, die standardmäßig auf \"Sichtbar\" eingestellt ist."
     },
-    showTimerPanel: "Legt die Sichtbarkeit und Position eines Timers auf einer Seite fest.",
+    timerLocation: "Legt die Position eines Timers auf einer Seite fest.",
     panelsState: "Wählen Sie aus: \"Gesperrt\" - Benutzer können Panele nicht erweitern oder reduzieren; \"Alle ausblenden\" - alle Panele beginnen in einem zusammengeklappten Zustand; \"Alle erweitern\" - alle Panele beginnen in einem erweiterten Zustand; \"First expanded\" - nur das erste Panel wird zunächst erweitert.",
     imageLinkName: "Geben Sie einen freigegebenen Eigenschaftsnamen in das Array von Objekten ein, das die Bild- oder Videodatei-URLs enthält, die in der Auswahlliste angezeigt werden sollen.",
     choices: "Der linke Wert dient als Element-ID, die in bedingten Regeln verwendet wird, der rechte Wert wird den Befragten angezeigt.",
@@ -1421,6 +1524,8 @@ var germanTranslation = {
     useDisplayValuesInDynamicTexts: "Bei Fragetypen mit einfacher und mehrfacher Auswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Wenn diese Einstellung aktiviert ist, wird in HTML-Fragen und dynamischen Titeln und Beschreibungen von Umfrageelementen ein Anzeigewert anstelle eines ID-Werts angezeigt.",
     clearIfInvisible: "Wählen Sie aus, ob und wann Fragenwerte, die durch bedingte Logik ausgeblendet werden, gelöscht werden sollen. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (standardmäßig \"Nach Abschluss der Umfrage\").",
     choicesFromQuestionMode: "Wählen Sie aus: \"Alle\" - kopiert alle Auswahloptionen aus der ausgewählten Frage; \"Ausgewählt\" - kopiert dynamisch nur ausgewählte Auswahloptionen; \"Nicht ausgewählt\" - kopiert dynamisch nur nicht ausgewählte Auswahloptionen. Die Optionen \"Keine\" und \"Sonstiges\" werden standardmäßig kopiert, wenn sie in der Quellfrage aktiviert sind.",
+    choiceValuesFromQuestion: "Bei Fragetypen mit Einzel- und Mehrfachauswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Diese Einstellung gibt an, welche Matrixspalten- oder Bereichsfrage die IDs bereitstellen soll.",
+    choiceTextsFromQuestion: "Bei Fragetypen mit Einzel- und Mehrfachauswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Diese Einstellung legt fest, welche Matrix-, Spalten- oder Bereichsfrage die Anzeigetexte bereitstellen soll.",
     showOtherItem: "Wenn diese Option ausgewählt ist, können Benutzer zusätzliche Eingaben in ein separates Kommentarfeld einfügen.",
     separateSpecialChoices: "Zeigt jede spezielle Auswahloption (\"Keine\", \"Andere\", \"Alle auswählen\") in einer neuen Zeile an, auch wenn ein mehrspaltiges Layout verwendet wird.",
     path: "Geben Sie die Position innerhalb des Service-Datasets an, an der sich das Ziel-Array von Objekten befindet. Lassen Sie das Feld leer, wenn die URL bereits auf das Array verweist.",
@@ -1442,7 +1547,7 @@ var germanTranslation = {
     needConfirmRemoveFile: "Löst eine Eingabeaufforderung aus, in der Sie aufgefordert werden, das Löschen der Datei zu bestätigen.",
     selectToRankEnabled: "Aktivieren Sie diese Option, um nur ausgewählte Auswahlmöglichkeiten in eine Rangfolge zu bringen. Benutzer ziehen ausgewählte Elemente aus der Auswahlliste, um sie innerhalb des Ranking-Bereichs zu sortieren.",
     dataList: "Geben Sie eine Liste mit Auswahlmöglichkeiten ein, die dem Befragten während der Eingabe vorgeschlagen werden.",
-    itemSize: "Die Einstellung ändert nur die Größe der Eingabefelder und wirkt sich nicht auf die Breite des Fragefelds aus.",
+    inputSize: "Die Einstellung ändert nur die Größe der Eingabefelder und wirkt sich nicht auf die Breite des Fragefelds aus.",
     itemTitleWidth: "Legt eine konsistente Breite für alle Elementbeschriftungen in Pixeln fest",
     inputTextAlignment: "Wählen Sie aus, wie der Eingabewert innerhalb des Felds ausgerichtet werden soll. Die Standardeinstellung \"Auto\" richtet den Eingabewert nach rechts aus, wenn eine Währungs- oder numerische Maskierung angewendet wird, und nach links, wenn dies nicht der Fall ist.",
     altText: "Dient als Ersatz, wenn das Bild nicht auf dem Gerät eines Benutzers angezeigt werden kann, und aus Gründen der Barrierefreiheit.",
@@ -1490,7 +1595,8 @@ var germanTranslation = {
     header: {
       inheritWidthFrom: "Die Option \"Wie Container\" passt die Breite des Inhaltsbereichs der Kopfzeile automatisch an das HTML-Element an, in dem die Umfrage platziert wird.",
       textAreaWidth: "Die Breite des Kopfbereichs, der den Titel und die Beschreibung der Umfrage enthält, gemessen in Pixeln.",
-      overlapEnabled: "Legt fest, dass der untere Rand der Kopfzeile mit dem oberen Rand des Survey überlagert wird."
+      overlapEnabled: "Wenn diese Option aktiviert ist, überlagert der obere Rand der Umfrage den unteren Rand der Kopfzeile.",
+      mobileHeight: "Wenn der Wert auf 0 gesetzt ist, wird die Höhe automatisch berechnet, um den Inhalt der Kopfzeile aufzunehmen."
     },
     panellayoutcolumn: {
       effectiveWidth: "Akzeptiert die Werte %.",
@@ -1559,12 +1665,11 @@ var germanTranslation = {
     maxValueExpression: "Ausdruck für maximalen Wert",
     step: "Schritt",
     dataList: "Datenliste",
-    itemSize: "Elementgröße",
+    inputSize: "Elementgröße",
     itemTitleWidth: "Breite der Artikelbeschriftung (in px)",
     inputTextAlignment: "Ausrichtung der Eingabewerte",
     elements: "Elemente",
     content: "Inhalt",
-    navigationButtonsVisibility: "Sichtbarkeit der Navigationsbuttons",
     navigationTitle: "Navigationstitel",
     navigationDescription: "Navigationsbeschreibung",
     longTap: "langtippen",
@@ -1578,6 +1683,7 @@ var germanTranslation = {
     imageFit: "Passform des Bildes",
     altText: "altText",
     height: "Höhe",
+    mobileHeight: "Höhe auf Smartphones",
     penColor: "Stiftfarbe",
     backgroundColor: "Hintergrundfarbe",
     templateElements: "VorlagenElemente",
@@ -1660,12 +1766,27 @@ var germanTranslation = {
       orchid: "Orchidee",
       tulip: "Tulpe",
       brown: "Braun",
-      green: "Grün"
+      green: "Grün",
+      gray: "Grau"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Oberflächenhintergrund",
+    "--sjs-primary-background-500": "Primär",
+    "--sjs-secondary-background-500": "Sekundär",
+    surfaceScale: "Oberfläche",
+    userInterfaceBaseUnit: "Benutzeroberfläche",
+    fontScale: "Schriftart",
+    names: {
+      sc2020: "Ersteller von Umfragen 2020",
+      "default-light": "Licht",
+      "default-dark": "Dunkel",
+      "default-contrast": "Kontrast"
     }
   }
 };
 
-editorLocalization.locales["de"] = germanTranslation;
+setupLocale({ localeCode: "de", strings: germanTranslation });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
@@ -1684,8 +1805,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Bildhöhe (in CSS-akzeptierten Werten)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Bildbreite (in CSS-akzeptierten Werten)"
 // pe.allowResizeComment: "Allow users to resize text areas" => "Benutzern erlauben, die Größe von Textbereichen zu ändern"
-// pe.templateTitleLocation: "Question title location" => "Position des Fragetitels"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Position der Panel-Schaltfläche entfernen"
+// pe.templateQuestionTitleLocation: "Question title location" => "Position des Fragetitels"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Position der Panel-Schaltfläche entfernen"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Blenden Sie die Frage aus, wenn keine Zeilen vorhanden sind"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Spalten ausblenden, wenn keine Zeilen vorhanden sind"
 // pe.rateValues: "Custom rate values" => "Benutzerdefinierte Ratenwerte"
@@ -1707,18 +1828,18 @@ editorLocalization.locales["de"] = germanTranslation;
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Fehlermeldung \"Nicht eindeutiger Schlüsselwert\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Minimale Auswahlmöglichkeiten"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maximale Auswahlmöglichkeiten"
-// pe.showClearButton: "Show the Clear button" => "Zeigen Sie die Schaltfläche \"Löschen\" an"
+// pe.allowClear: "Show the Clear button" => "Zeigen Sie die Schaltfläche \"Löschen\" an"
 // pe.showNumber: "Show panel number" => "Panel-Nummer anzeigen"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Logobreite (in CSS-akzeptierten Werten)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Logohöhe (in CSS-akzeptierten Werten)"
 // pe.enableIf: "Editable if" => "Bearbeitbar, wenn"
-// pe.emptyRowsText: "\"No rows\" message" => "Meldung \"Keine Zeilen\""
+// pe.noRowsText: "\"No rows\" message" => "Meldung \"Keine Zeilen\""
 // pe.size: "Input field size (in characters)" => "Größe des Eingabefeldes (in Zeichen)"
 // pe.choicesFromQuestion: "Copy choices from the following question" => "Kopieren Sie die Auswahlmöglichkeiten aus der folgenden Frage"
 // pe.choicesFromQuestionMode: "Which choices to copy?" => "Welche Auswahlmöglichkeiten sollen kopiert werden?"
 // pe.showCommentArea: "Show the comment area" => "Kommentarbereich anzeigen"
 // pe.commentPlaceholder: "Comment area placeholder" => "Platzhalter für den Kommentarbereich"
-// pe.rowsOrder: "Row order" => "Reihenfolge der Zeilen"
+// pe.rowOrder: "Row order" => "Reihenfolge der Zeilen"
 // pe.columnsLayout: "Column layout" => "Spalten-Layout"
 // pe.columnColCount: "Nested column count" => "Anzahl der geschachtelten Spalten"
 // pe.state: "Panel expand state" => "Status erweitern des Panels"
@@ -1978,13 +2099,12 @@ editorLocalization.locales["de"] = germanTranslation;
 // panel.description: "Panel description" => "Beschreibung des Panels"
 // panel.visibleIf: "Make the panel visible if" => "Machen Sie das Panel sichtbar, wenn"
 // panel.requiredIf: "Make the panel required if" => "Machen Sie das Panel erforderlich, wenn"
-// panel.questionsOrder: "Question order within the panel" => "Reihenfolge der Fragen innerhalb des Panels"
+// panel.questionOrder: "Question order within the panel" => "Reihenfolge der Fragen innerhalb des Panels"
 // panel.startWithNewLine: "Display the panel on a new line" => "Anzeigen des Panels in einer neuen Zeile"
 // panel.state: "Panel collapse state" => "Status des Ausblendens des Panels"
 // panel.width: "Inline panel width" => "Breite des Inline-Panels"
 // panel.minWidth: "Minimum panel width" => "Minimale Breite der Platte"
 // panel.maxWidth: "Maximum panel width" => "Maximale Breite des Paneels"
-// panel.showNumber: "Number panels" => "Nummernfelder"
 // paneldynamic.name: "Panel name" => "Name des Panels"
 // paneldynamic.title: "Panel title" => "Titel des Panels"
 // paneldynamic.description: "Panel description" => "Beschreibung des Panels"
@@ -2004,7 +2124,7 @@ editorLocalization.locales["de"] = germanTranslation;
 // paneldynamic.hideNumber: "Hide the panel number" => "Ausblenden der Panel-Nummer"
 // paneldynamic.titleLocation: "Panel title alignment" => "Ausrichtung des Panel-Titels"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "Ausrichtung der Panelbeschreibung"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "Ausrichtung des Fragetitels"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "Ausrichtung des Fragetitels"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "Ausrichtung von Fehlermeldungen"
 // paneldynamic.newPanelPosition: "New panel location" => "Neue Panel-Position"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "Verhindern Sie doppelte Antworten in der folgenden Frage"
@@ -2037,7 +2157,7 @@ editorLocalization.locales["de"] = germanTranslation;
 // page.description: "Page description" => "Seitenbeschreibung"
 // page.visibleIf: "Make the page visible if" => "Machen Sie die Seite sichtbar, wenn"
 // page.requiredIf: "Make the page required if" => "Machen Sie die Seite erforderlich, wenn"
-// page.questionsOrder: "Question order on the page" => "Reihenfolge der Fragen auf der Seite"
+// page.questionOrder: "Question order on the page" => "Reihenfolge der Fragen auf der Seite"
 // matrixdropdowncolumn.name: "Column name" => "Name der Spalte"
 // matrixdropdowncolumn.title: "Column title" => "Titel der Spalte"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "Doppelte Beantwortungen verhindern"
@@ -2111,8 +2231,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // totalDisplayStyle.currency: "Currency" => "Währung"
 // totalDisplayStyle.percent: "Percentage" => "Prozentsatz"
 // totalDisplayStyle.date: "Date" => "Datum"
-// rowsOrder.initial: "Original" => "Original"
-// questionsOrder.initial: "Original" => "Original"
+// rowOrder.initial: "Original" => "Original"
+// questionOrder.initial: "Original" => "Original"
 // showProgressBar.aboveheader: "Above the header" => "Über der Kopfzeile"
 // showProgressBar.belowheader: "Below the header" => "Unterhalb der Kopfzeile"
 // pv.sum: "Sum" => "Summe"
@@ -2129,7 +2249,7 @@ editorLocalization.locales["de"] = germanTranslation;
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Gilt für alle Fragen in diesem Bereich. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\")."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Legt die Position einer Fehlermeldung in Bezug auf alle Fragen innerhalb des Bereichs fest. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an."
 // panel.page: "Repositions the panel to the end of a selected page." => "Positioniert das Panel am Ende einer ausgewählten Seite."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "Fügt Abstand oder Rand zwischen dem Inhalt des Panels und dem linken Rand des Panels hinzu."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "Deaktivieren Sie diese Option, um den Bereich in einer Zeile mit der vorherigen Frage oder dem vorherigen Bereich anzuzeigen. Die Einstellung gilt nicht, wenn der Bereich das erste Element in Ihrem Formular ist."
@@ -2140,7 +2260,7 @@ editorLocalization.locales["de"] = germanTranslation;
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Sichtbarkeit des Panels bestimmt."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die den schreibgeschützten Modus für das Panel deaktiviert."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Gilt für alle Fragen in diesem Bereich. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\")."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Gilt für alle Fragen in diesem Bereich. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\")."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Legt die Position einer Fehlermeldung in Bezug auf eine Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\")."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Legt die Position einer Fehlermeldung in Bezug auf alle Fragen innerhalb des Bereichs fest. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "Positioniert das Panel am Ende einer ausgewählten Seite."
@@ -2154,7 +2274,7 @@ editorLocalization.locales["de"] = germanTranslation;
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Diese Einstellung wird automatisch von allen Fragen in diesem Bereich übernommen. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\")."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig unter dem Panel-Titel)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Definiert die Position eines neu hinzugefügten Panels. Standardmäßig werden neue Bedienfelder am Ende hinzugefügt. Wählen Sie \"Weiter\", um ein neues Panel nach dem aktuellen einzufügen."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Dupliziert die Antworten aus dem letzten Bereich und weist sie dem nächsten hinzugefügten dynamischen Bereich zu."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Dupliziert die Antworten aus dem letzten Bereich und weist sie dem nächsten hinzugefügten dynamischen Bereich zu."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Verweisen Sie auf einen Fragenamen, um einen Benutzer aufzufordern, in jedem Bereich eine eindeutige Antwort auf diese Frage zu geben."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Mit dieser Einstellung können Sie einen Standardantwortwert basierend auf einem Ausdruck zuweisen. Der Ausdruck kann grundlegende Berechnungen enthalten - '{q1_id} + {q2_id}', boolesche Ausdrücke wie '{age} > 60' und Funktionen: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw. Der durch diesen Ausdruck ermittelte Wert dient als anfänglicher Standardwert, der durch die manuelle Eingabe eines Befragten überschrieben werden kann."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Verwenden Sie das Zauberstabsymbol, um eine Bedingungsregel festzulegen, die bestimmt, wann die Eingabe eines Befragten auf den Wert zurückgesetzt wird, der auf dem Wert \"Standardwertausdruck\" oder \"Wertausdruck festlegen\" oder auf dem Wert \"Standardantwort\" (falls einer dieser Werte festgelegt ist) basiert."
@@ -2200,18 +2320,17 @@ editorLocalization.locales["de"] = germanTranslation;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Legt eine Logobreite in CSS-Einheiten (px, %, in, pt usw.) fest."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Legt die Höhe eines Logos in CSS-Einheiten (px, %, in, pt usw.) fest."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Wählen Sie aus: \"Keine\" - das Bild behält seine ursprüngliche Größe; \"Enthalten\" - die Größe des Bildes wird angepasst, wobei das Seitenverhältnis beibehalten wird. \"Cover\" - das Bild füllt den gesamten Rahmen aus, während das Seitenverhältnis beibehalten wird. \"Füllen\" - Das Bild wird gestreckt, um den Rahmen auszufüllen, ohne das Seitenverhältnis beizubehalten."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "Wählen Sie diese Option aus, wenn die Umfrage automatisch zur nächsten Seite weitergeleitet werden soll, nachdem ein Befragter alle Fragen auf der aktuellen Seite beantwortet hat."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Legt die Sichtbarkeit und Position von Navigationsschaltflächen auf einer Seite fest."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Legt die Sichtbarkeit und Position einer Statusanzeige fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Aktivieren Sie die Vorschauseite nur mit allen oder beantworteten Fragen."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "Gilt für alle Fragen innerhalb der Umfrage. Diese Einstellung kann durch Regeln für die Titelausrichtung auf niedrigeren Ebenen außer Kraft gesetzt werden: Bereich, Seite oder Frage. Eine Einstellung auf niedrigerer Ebene überschreibt die Einstellung auf einer höheren Ebene."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "Ein Symbol oder eine Sequenz von Symbolen, die darauf hinweist, dass eine Antwort erforderlich ist."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "Ein Symbol oder eine Sequenz von Symbolen, die darauf hinweist, dass eine Antwort erforderlich ist."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "Geben Sie eine Zahl oder einen Buchstaben ein, mit der Sie die Nummerierung beginnen möchten."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "Legt die Position einer Fehlermeldung in Bezug auf die Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "Wählen Sie diese Option aus, wenn das erste Eingabefeld auf jeder Seite für die Texteingabe bereit sein soll."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Auswirkungen dieser Einstellung sind nur auf der Registerkarte Vorschau sichtbar."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "Wählen Sie diese Option aus, wenn das erste Eingabefeld auf jeder Seite für die Texteingabe bereit sein soll."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Auswirkungen dieser Einstellung sind nur auf der Registerkarte Vorschau sichtbar."
 // pehelp.maxTextLength: "For text entry questions only." => "Nur für Fragen zur Texteingabe."
-// pehelp.maxOthersLength: "For question comments only." => "Nur für Fragenkommentare."
+// pehelp.maxCommentLength: "For question comments only." => "Nur für Fragenkommentare."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "Wählen Sie diese Option aus, wenn Fragenkommentare und Langtextfragen basierend auf der eingegebenen Textlänge automatisch in die Höhe wachsen sollen."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "Nur für Fragenkommentare und Langtextfragen."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "Benutzerdefinierte Variablen dienen als Zwischen- oder Hilfsvariablen, die in Formularberechnungen verwendet werden. Sie nehmen die Eingaben der Befragten als Quellwerte. Jede benutzerdefinierte Variable hat einen eindeutigen Namen und einen Ausdruck, auf dem sie basiert."
@@ -2227,24 +2346,23 @@ editorLocalization.locales["de"] = germanTranslation;
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Wenn die Eigenschaft \"Doppelte Beantwortungen verhindern\" aktiviert ist, erhält ein Befragter, der versucht, einen doppelten Beitrag einzureichen, die folgende Fehlermeldung."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Hiermit können Sie Gesamtwerte basierend auf einem Ausdruck berechnen. Der Ausdruck kann grundlegende Berechnungen ('{q1_id} + {q2_id}'), boolesche Ausdrücke ('{age} > 60') und Funktionen ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw.) enthalten."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Löst eine Eingabeaufforderung aus, in der Sie aufgefordert werden, das Löschen der Zeile zu bestätigen."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dupliziert Antworten aus der letzten Zeile und weist sie der nächsten hinzugefügten dynamischen Zeile zu."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dupliziert Antworten aus der letzten Zeile und weist sie der nächsten hinzugefügten dynamischen Zeile zu."
 // pehelp.description: "Type a subtitle." => "Geben Sie einen Untertitel ein."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Wählen Sie eine Sprache aus, um mit der Erstellung Ihrer Umfrage zu beginnen. Um eine Übersetzung hinzuzufügen, wechseln Sie in eine neue Sprache und übersetzen Sie den Originaltext hier oder auf der Registerkarte Übersetzungen."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Legt die Position eines Detailabschnitts in Bezug auf eine Zeile fest. Wählen Sie aus: \"Keine\" - es wird keine Erweiterung hinzugefügt; \"Unter der Zeile\" - unter jeder Zeile der Matrix wird eine Zeilenerweiterung platziert; \"Unter der Zeile nur eine Zeilenerweiterung anzeigen\" - eine Erweiterung wird nur unter einer einzelnen Zeile angezeigt, die restlichen Zeilenerweiterungen werden ausgeblendet."
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Wählen Sie aus: \"Keine\" - das Bild behält seine ursprüngliche Größe; \"Enthalten\" - die Größe des Bildes wird angepasst, wobei das Seitenverhältnis beibehalten wird. \"Cover\" - das Bild füllt den gesamten Rahmen aus, während das Seitenverhältnis beibehalten wird. \"Füllen\" - Das Bild wird gestreckt, um den Rahmen auszufüllen, ohne das Seitenverhältnis beizubehalten."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Erhöht die Höhe des Eingabefelds schrittweise, während Daten eingegeben werden. Überschreibt die Einstellung \"Höhe des Eingabefelds (in Zeilen)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Der Ziehpunkt (oder Griff) wird in der Ecke angezeigt und kann gezogen werden, um die Größe des Eingabefelds zu ändern."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur Danke-Seite wechselt."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur Danke-Seite wechselt."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Sichtbarkeit der Seite bestimmt."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die den schreibgeschützten Modus für die Seite deaktiviert."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Gilt für alle Fragen auf dieser Seite. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen oder Bereiche. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (standardmäßig \"Oben\")."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Legt die Position einer Fehlermeldung in Bezug auf die Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (standardmäßig \"Oben\")."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene (\"Original\" standardmäßig) angewendet. Die Auswirkungen dieser Einstellung sind nur auf der Registerkarte Vorschau sichtbar."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Legt die Sichtbarkeit von Navigationsschaltflächen auf der Seite fest. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene angewendet, die standardmäßig auf \"Sichtbar\" eingestellt ist."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Legt die Sichtbarkeit und Position eines Timers auf einer Seite fest."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene (\"Original\" standardmäßig) angewendet. Die Auswirkungen dieser Einstellung sind nur auf der Registerkarte Vorschau sichtbar."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Legt die Sichtbarkeit von Navigationsschaltflächen auf der Seite fest. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene angewendet, die standardmäßig auf \"Sichtbar\" eingestellt ist."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Wählen Sie aus: \"Gesperrt\" - Benutzer können Bedienfelder nicht erweitern oder reduzieren; \"Alle ausblenden\" - alle Bedienfelder beginnen in einem zusammengeklappten Zustand; \"Alle erweitern\" - alle Bedienfelder beginnen in einem erweiterten Zustand; \"First expanded\" - nur das erste Panel wird zunächst erweitert."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Geben Sie einen freigegebenen Eigenschaftsnamen in das Array von Objekten ein, das die Bild- oder Videodatei-URLs enthält, die in der Auswahlliste angezeigt werden sollen."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Der linke Wert dient als Element-ID, die in bedingten Regeln verwendet wird, der rechte Wert wird den Befragten angezeigt."
@@ -2272,7 +2390,7 @@ editorLocalization.locales["de"] = germanTranslation;
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "Löst eine Eingabeaufforderung aus, in der Sie aufgefordert werden, das Löschen der Datei zu bestätigen."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Aktivieren Sie diese Option, um nur ausgewählte Auswahlmöglichkeiten in eine Rangfolge zu bringen. Benutzer ziehen ausgewählte Elemente aus der Auswahlliste, um sie innerhalb des Ranking-Bereichs zu sortieren."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Geben Sie eine Liste mit Auswahlmöglichkeiten ein, die dem Befragten während der Eingabe vorgeschlagen werden."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Die Einstellung ändert nur die Größe der Eingabefelder und wirkt sich nicht auf die Breite des Fragefelds aus."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Die Einstellung ändert nur die Größe der Eingabefelder und wirkt sich nicht auf die Breite des Fragefelds aus."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Legt eine konsistente Breite für alle Elementbeschriftungen in Pixeln fest"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Die Option \"Auto\" bestimmt automatisch den geeigneten Anzeigemodus - Bild, Video oder YouTube - basierend auf der bereitgestellten Quell-URL."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Dient als Ersatz, wenn das Bild nicht auf dem Gerät eines Benutzers angezeigt werden kann, und aus Gründen der Barrierefreiheit."
@@ -2285,8 +2403,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // p.itemTitleWidth: "Item label width (in px)" => "Breite der Artikelbeschriftung (in px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Text, der angezeigt werden soll, wenn alle Optionen ausgewählt sind"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Platzhaltertext für den Rankingbereich"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Automatisches Ausfüllen der Umfrage"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Wählen Sie diese Option aus, wenn die Umfrage automatisch abgeschlossen werden soll, nachdem ein Befragter alle Fragen beantwortet hat."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Automatisches Ausfüllen der Umfrage"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Wählen Sie diese Option aus, wenn die Umfrage automatisch abgeschlossen werden soll, nachdem ein Befragter alle Fragen beantwortet hat."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "Maskierte Werte in Umfrageergebnissen speichern"
 // patternmask.pattern: "Value pattern" => "Werte-Muster"
 // datetimemask.min: "Minimum value" => "Mindestwert"
@@ -2442,7 +2560,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Legt die Haupthintergrundfarbe der Umfrage fest."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Die Option \"Wie Container\" passt die Breite des Inhaltsbereichs der Kopfzeile automatisch an das HTML-Element an, in dem die Umfrage platziert wird."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Die Breite des Kopfbereichs, der den Titel und die Beschreibung der Umfrage enthält, gemessen in Pixeln."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Legt fest, dass der untere Rand der Kopfzeile mit dem oberen Rand des Survey überlagert wird."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Akzeptiert die Werte %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Akzeptiert die Werte px."
 // p.effectiveColSpan: "Column span" => "Spaltenbereich"
@@ -2462,3 +2579,142 @@ editorLocalization.locales["de"] = germanTranslation;
 // inputTextAlignment.right: "Right" => "Rechts"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Wählen Sie aus, wie der Eingabewert innerhalb des Felds ausgerichtet werden soll. Die Standardeinstellung \"Auto\" richtet den Eingabewert nach rechts aus, wenn eine Währungs- oder numerische Maskierung angewendet wird, und nach links, wenn dies nicht der Fall ist."
 // p.inputTextAlignment: "Input value alignment" => "Ausrichtung der Eingabewerte"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Zeigen Sie den Fortschrittsbalken an"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Zeigen Sie den Fortschrittsbalken an"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Ausrichtung der Fortschrittsleiste"
+// pv.carousel: "Carousel" => "Karussell"
+// progressBarLocation.top: "Top" => "Nach oben"
+// progressBarLocation.bottom: "Bottom" => "Unteres"
+// progressBarLocation.topBottom: "Top and bottom" => "Oben und unten"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordnet die Auswahloptionen in einem mehrspaltigen Layout an. Wenn der Wert auf 0 gesetzt ist, werden die Optionen in einer einzigen Zeile angezeigt. Wenn dieser Wert auf -1 festgelegt ist, wird der tatsächliche Wert von der Eigenschaft \"Anzahl der geschachtelten Spalten\" der übergeordneten Matrix geerbt."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-Links werden nicht unterstützt."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Beginnen Sie mit der Konfiguration Ihres Formulars"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klicken Sie auf ein beliebiges Kategoriesymbol, um die Umfrageeinstellungen zu erkunden. Zusätzliche Einstellungen sind verfügbar, sobald Sie der Entwurfsoberfläche ein Vermessungselement hinzufügen."
+// pe.caseInsensitive: "Case insensitive" => "Schreibungsunabhängig"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Wählen Sie diese Option aus, wenn Groß- und Kleinbuchstaben im regulären Ausdruck als gleichwertig behandelt werden müssen."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Ihr Formular ist leer"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Ihr Formular ist leer"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Ziehen Sie ein Element aus der Toolbox oder klicken Sie auf die Schaltfläche unten."
+// ed.previewPlaceholderTitle: "No preview" => "Keine Vorschau"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Keine Vorschau"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Die Umfrage enthält keine sichtbaren Elemente."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Die Umfrage enthält keine sichtbaren Elemente."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Keine Zeichenfolgen zu übersetzen"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Keine Zeichenfolgen zu übersetzen"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Fügen Sie Ihrem Formular Elemente hinzu oder ändern Sie den Zeichenfolgenfilter in der Symbolleiste."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Fügen Sie Ihrem Formular Elemente hinzu oder ändern Sie den Zeichenfolgenfilter in der Symbolleiste."
+// lg.logicPlaceholderTitle: "No logical rules" => "Keine logischen Regeln"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Keine logischen Regeln"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Erstellen Sie eine Regel, um den Ablauf der Umfrage anzupassen."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Erstellen Sie eine Regel, um den Ablauf der Umfrage anzupassen."
+// pe.showTimer: "Use a timer" => "Verwenden eines Timers"
+// theme.advancedMode: "Advanced mode" => "Erweiterter Modus"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Legt die Position eines Timers auf einer Seite fest."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Wenn der Wert auf 0 gesetzt ist, wird die Höhe automatisch berechnet, um den Inhalt der Kopfzeile aufzunehmen."
+// p.mobileHeight: "Height on smartphones" => "Höhe auf Smartphones"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Wenn diese Option aktiviert ist, überlagert der obere Rand der Umfrage den unteren Rand der Kopfzeile."
+// ed.creatorSettingTitle: "Creator Settings" => "Creator-Einstellungen"
+// tabs.accentColors: "Accent colors" => "Akzentfarben"
+// tabs.scaling: "Scaling" => "Skalierung"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Weist Fragen, die in diesem Bereich verschachtelt sind, Nummern zu."
+// creatortheme.--sjs-special-background: "Surface background" => "Oberflächenhintergrund"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primär"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundär"
+// creatortheme.surfaceScale: "Surface" => "Oberfläche"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Benutzeroberfläche"
+// creatortheme.fontScale: "Font" => "Schriftart"
+// names.sc2020: "Survey Creator 2020" => "Ersteller von Umfragen 2020"
+// names.default-light: "Light" => "Licht"
+// names.default-dark: "Dark" => "Dunkel"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Nummerieren Sie dieses Feld"
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Wählen Sie aus, ob die Umfrage automatisch zur nächsten Seite wechseln soll, sobald ein Befragter alle Fragen auf der aktuellen Seite beantwortet hat. Diese Funktion wird nicht angewendet, wenn die letzte Frage auf der Seite offen ist oder mehrere Antworten zulässt."
+// autocomplete.name: "Full Name" => "Vollständiger Name"
+// autocomplete.honorific-prefix: "Prefix" => "Präfix"
+// autocomplete.given-name: "First Name" => "Vorname"
+// autocomplete.additional-name: "Middle Name" => "Zweitname"
+// autocomplete.family-name: "Last Name" => "Nachname"
+// autocomplete.honorific-suffix: "Suffix" => "Nachsilbe"
+// autocomplete.nickname: "Nickname" => "Spitzname"
+// autocomplete.organization-title: "Job Title" => "Berufsbezeichnung"
+// autocomplete.username: "User Name" => "Benutzername"
+// autocomplete.new-password: "New Password" => "Neues Passwort"
+// autocomplete.current-password: "Current Password" => "Aktuelles Passwort"
+// autocomplete.organization: "Organization Name" => "Name der Organisation"
+// autocomplete.street-address: "Full Street Address" => "Vollständige Adresse"
+// autocomplete.address-line1: "Address Line 1" => "Adresszeile 1"
+// autocomplete.address-line2: "Address Line 2" => "Adresszeile 2"
+// autocomplete.address-line3: "Address Line 3" => "Adresszeile 3"
+// autocomplete.address-level4: "Level 4 Address" => "Adresse der Ebene 4"
+// autocomplete.address-level3: "Level 3 Address" => "Level 3 Adresse"
+// autocomplete.address-level2: "Level 2 Address" => "Level 2 Adresse"
+// autocomplete.address-level1: "Level 1 Address" => "Adresse der Ebene 1"
+// autocomplete.country: "Country Code" => "Landescode"
+// autocomplete.country-name: "Country Name" => "Ländername"
+// autocomplete.postal-code: "Postal Code" => "Postleitzahl"
+// autocomplete.cc-name: "Cardholder Name" => "Name des Karteninhabers"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Vorname des Karteninhabers"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Zweiter Vorname des Karteninhabers"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Nachname des Karteninhabers"
+// autocomplete.cc-number: "Credit Card Number" => "Kreditkartennummer"
+// autocomplete.cc-exp: "Expiration Date" => "Verfallsdatum"
+// autocomplete.cc-exp-month: "Expiration Month" => "Ablauf-Monat"
+// autocomplete.cc-exp-year: "Expiration Year" => "Verfallsjahr"
+// autocomplete.cc-csc: "Card Security Code" => "Sicherheitscode der Karte"
+// autocomplete.cc-type: "Credit Card Type" => "Art der Kreditkarte"
+// autocomplete.transaction-currency: "Transaction Currency" => "Transaktionswährung"
+// autocomplete.transaction-amount: "Transaction Amount" => "Betrag der Transaktion"
+// autocomplete.language: "Preferred Language" => "Bevorzugte Sprache"
+// autocomplete.bday: "Birthday" => "Geburtstag"
+// autocomplete.bday-day: "Birthday Day" => "Geburtstagstag"
+// autocomplete.bday-month: "Birthday Month" => "Geburtstagsmonat"
+// autocomplete.bday-year: "Birthday Year" => "Geburtstagsjahr"
+// autocomplete.sex: "Gender" => "Geschlecht"
+// autocomplete.url: "Website URL" => "Website URL"
+// autocomplete.photo: "Profile Photo" => "Profilfoto"
+// autocomplete.tel: "Telephone Number" => "Telefonnummer"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Landesvorwahl für Telefon"
+// autocomplete.tel-national: "National Telephone Number" => "Nationale Telefonnummer"
+// autocomplete.tel-area-code: "Area Code" => "Vorwahl"
+// autocomplete.tel-local: "Local Phone Number" => "Lokale Telefonnummer"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Lokale Telefonvorwahl"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Suffix für lokale Telefone"
+// autocomplete.tel-extension: "Phone Extension" => "Telefon-Durchwahl"
+// autocomplete.email: "Email Address" => "E-Mail-Adresse"
+// autocomplete.impp: "Instant Messaging Protocol" => "Instant-Messaging-Protokoll"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Sperren des Erweiterungs-/Einklappenzustands für Fragen"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Sie haben noch keine Seiten"
+// pe.addNew@pages: "Add new page" => "Neue Seite hinzufügen"
+// ed.zoomInTooltip: "Zoom In" => "Vergrößern"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Verkleinern"
+// tabs.surfaceBackground: "Surface Background" => "Oberflächen-Hintergrund"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Antworten aus dem letzten Eintrag als Standard verwenden"
+// colors.gray: "Gray" => "Grau"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Ausrichtung der Navigationsschaltflächen"
+// pv.allQuestions: "Show all questions" => "Alle Fragen anzeigen"
+// pv.answeredQuestions: "Show answered questions only" => "Nur beantwortete Fragen anzeigen"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Legt die Position der Navigationsschaltflächen auf einer Seite fest."
+// pe.size: "Input field width (in characters)" => "Breite des Eingabefeldes (in Zeichen)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Verwenden Sie Werte aus der folgenden Matrixspalte oder Bereichsfrage als Auswahl-IDs"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Verwenden Sie Werte aus der folgenden Matrixspalte oder Panelfrage als Auswahltexte"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Bei Fragetypen mit Einzel- und Mehrfachauswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Diese Einstellung gibt an, welche Matrixspalten- oder Bereichsfrage die IDs bereitstellen soll."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Bei Fragetypen mit Einzel- und Mehrfachauswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Diese Einstellung legt fest, welche Matrix-, Spalten- oder Bereichsfrage die Anzeigetexte bereitstellen soll."
+// pe.progressBarLocation: "Progress bar alignment" => "Ausrichtung der Fortschrittsleiste"
+// progressBarLocation.topbottom: "Top and bottom" => "Oben und unten"
+// progressBarLocation.aboveheader: "Above the header" => "Oberhalb der Kopfzeile"
+// progressBarLocation.belowheader: "Below the header" => "Unterhalb der Kopfzeile"
+// progressBarLocation.off: "Hidden" => "Versteckt"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Legt die Position des Fortschrittsbalkens fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an."
+// survey.readOnly: "Make the survey read-only" => "Machen Sie die Umfrage schreibgeschützt"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Wählen Sie diese Option aus, wenn Sie verhindern möchten, dass die Befragten Ihre Umfrage ausfüllen."
+// paneldynamic.showNumber: "Number the panel" => "Nummerieren des Bedienfelds"
+// question.showNumber: "Number this question" => "Diese Frage nummerieren"
+// pe.previewMode: "Preview mode" => "Vorschau-Modus"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Aktivieren des Rasterlayouts"
+// pe.maskSettings: "Mask settings" => "Masken-Einstellungen"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Ausrichtung der Fehlermeldung bei der Zeilenerweiterung"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Legt die Position von Fehlermeldungen für Fragen fest, die in Detailabschnitten verschachtelt sind. Die Option \"Vererben\" wendet die Einstellung aus der Eigenschaft \"Ausrichtung der Fehlermeldung\" an."
+// pe.gridLayoutColumns: "Grid layout columns" => "Spalten für das Rasterlayout"

@@ -1,9 +1,10 @@
-@import "../../variables.scss";
-@import "../../colors.scss";
+@use "../../variables" as *;
+@use "../../colors.scss" as *;
 
 .sl-table {
   width: 50%;
   margin: 0 25%;
+  margin-top: calcSize(-2);
 }
 
 .sl-table__row {
@@ -11,68 +12,84 @@
 }
 
 .sl-table__cell.st-table__cell--actions:first-of-type .sv-action-bar {
-  margin-top: calcSize(-0.5);
-  padding-right: calcSize(4);
+  margin-top: var(--ctr-collapse-button-margin-top, var(--sjs-spacing-x05n));
+  padding-right: var(--ctr-collapse-button-margin-right, var(--sjs-spacing-x2));
 }
 
 .sl-table .sl-table__detail-button.sl-table__detail-button {
-  width: calcSize(6);
-  height: calcSize(6);
-
   box-sizing: border-box;
-  border-radius: calcSize(12.5);
-  padding: 0;
+  border-radius: var(--ctr-collapse-button-corner-radius, var(--sjs-corner-radius-x1));
+  padding: var(--ctr-collapse-button-padding, var(--sjs-spacing-x150));
+  transition: background-color $creator-transition-duration;
 
+  &:focus:enabled {
+    background-color: transparent;
+  }
+  use {
+    transition: fill $creator-transition-duration;
+  }
   &:hover:enabled,
-  &.sv-focused--by-key {
-    background-color: var(--ctr-collapse-button-background-color-hovered, $primary-light);
+  &.sv-focused--by-key.sv-focused--by-key {
+    background-color: var(--ctr-collapse-button-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
     outline: none;
 
     use {
-      fill: var(--ctr-collapse-button-icon-color-hovered, $primary);
+      fill: var(--ctr-collapse-button-icon-color-hovered, var(--sjs-layer-3-foreground-75, #000000bf));
     }
+  }
+  .sv-action-bar-item__icon {
+    width: var(--ctr-collapse-button-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-collapse-button-icon-height, var(--sjs-font-size-x3));
   }
 }
 
 .sl-table__remove-button .sv-action-bar-item {
-  border-radius: calcSize(12.5);
-  padding: calcSize(1);
+  padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-right-icon-only, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-left-icon-only, var(--sjs-spacing-x1));
   cursor: pointer;
-
+  border: none;
+  border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
+  &:focus:enabled {
+    background-color: transparent;
+  }
+  use {
+    fill: var(--ctr-expression-item-icon-color, var(--sjs-semantic-red-background-500, #e50a3eff));
+  }
   &:hover:enabled,
-  &.sv-focused--by-key {
-    background-color: var(--ctr-library-action-button-background-color-negative-hovered, $red-light);
+  &.sv-focused--by-key.sv-focused--by-key  {
+    background-color: var(--ctr-expression-item-background-color-remove-button-hovered, var(--sjs-semantic-red-background-10, #e50a3e1a));
     outline: none;
 
     use {
-      fill: var(--lbr-action-button-icon-color-negative, $red);
+      fill: var(--ctr-expression-item-icon-color, var(--sjs-semantic-red-background-500, #e50a3eff));
     }
+  }
+  .sv-action-bar-item__icon {
+    width: var(--ctr-expression-item-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-expression-item-icon-height, var(--sjs-font-size-x3));
   }
 }
 
+.sl-table__remove-button .sv-action-bar-item__icon {
+  width: var(--ctr-survey-action-button-icon-width, var(--lbr-size-x3));
+  height: var(--ctr-survey-action-button-icon-height, var(--lbr-size-x3));
+}
+
 .sl-table__cell .sv-action-bar-item__icon {
-  display: none;
+  opacity: 0;
+  transition: opacity $creator-transition-duration;
 }
 
 .sl-table__row:hover .sl-table__cell .sv-action-bar-item__icon,
 .sl-table__cell .sv-action-bar-item.sv-focused--by-key .sv-action-bar-item__icon {
-  display: block;
-}
-
-.sl-table__row #remove-row {
-  .sv-action-bar-item {
-    border: none;
-    width: calcSize(5);
-    height: calcSize(5);
-  }
-
-  .sv-action-bar-item__icon use {
-    fill: var(--lbr-action-button-icon-color-negative, $red);
-  }
+  opacity: 1;
 }
 
 .sl-table__row.sl-table__row--additional .sl-table__cell .svc-action-button {
-  color: $secondary;
+  color: var(--sjs-secondary-background-500, #19B394FF);
+}
+.sl-table .svc-action-button {
+  padding: var(--ctr-survey-page-header-padding-vertical-with-button, var(--sjs-spacing-x05)) 0px;
+  margin-left: 0;
 }
 
 .sl-table__cell .svc-action-button,
@@ -80,15 +97,17 @@
 .sl-table__cell .svc-action-button:focus,
 .sl-table__cell .svc-action-button:hover:enabled,
 .sl-table__cell .svc-action-button:focus:enabled {
-  @include mediumBold;
-
+  @include ctrMediumBoldFont;
+  --thm-logic-header-max-height: var(--ctr-font-medium-line-height, var(--ctr-medium-bold-line-height, calcSize(4)));
   background: transparent;
   //color: $foreground;
   outline: none;
   border: none;
   box-shadow: none;
+  border-radius: 0;
   color: $foreground-dim;
-  max-height: calcSize(13.5);
+  box-sizing: content-box;
+  max-height: calc(3 * var(--thm-logic-header-max-height));;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -96,13 +115,15 @@
 }
 
 .sl-table__cell {
-  color: $foreground;
-  font-weight: bold;
-  font-size: calcSize(2);
-  font-family: $font-family;
   vertical-align: top;
-  padding: calcSize(2) 0;
+  padding: 0;
   width: 100%;
+}
+.sl-table__row {
+  .sl-table__cell {
+    --animation-padding-top: #{calcSize(5)};
+    padding-top: calcSize(5);
+  }
 }
 
 .sl-table__cell--actions {
@@ -145,20 +166,6 @@
     }
   }
 
-  tbody {
-    tr:last-of-type {
-      .sl-table__cell {
-        padding-bottom: calcSize(10);
-      }
-    }
-  }
-
-  tr:first-of-type {
-    .sl-table__cell {
-      padding-top: calcSize(4);
-    }
-  }
-
   td,
   th {
     &:first-of-type {
@@ -190,14 +197,15 @@
   }
 
   button.sl-panel__done-button {
-    width: 100%;
-    margin: calcSize(2) 0 calcSize(10) 0;
-    color: var(--ctr-expression-item-text-color-button, $primary);
-    background-color: var(--ctr-expression-item-background-color-button, $primary-light);
-
-    font-family: $font-family;
-    font-size: calcSize(2);
-    border-radius: calcSize(12.5);
+    @include ctrDefaultBoldFont;
+    width: auto;
+    margin: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2)) 0 0 0;
+    color: var(--ctr-expression-item-text-color-button, var(--sjs-primary-background-500, #19b394ff));
+    background-color: var(--ctr-expression-item-background-color-button, var(--sjs-primary-background-10, #19b3941a));
+    border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
+    padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1))
+      var(--ctr-expression-item-padding-right-button, var(--sjs-spacing-x4))
+      var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-left-button, var(--sjs-spacing-x4));
 
     display: flex;
     align-items: center;
@@ -205,20 +213,22 @@
     text-align: center;
 
     user-select: none;
+
+    transition: background-color $creator-transition-duration, color $creator-transition-duration;
   }
 
   button:hover:enabled {
-    background-color: var(--ctr-expression-item-background-color-button-hovered, $primary);
-    color: var(--ctr-expression-item-text-color-button-hovered, $primary-foreground);
+    background-color: var(--ctr-expression-item-background-color-button-hovered, var(--sjs-primary-background-500, #19b394ff));
+    color: var(--ctr-expression-item-text-color-button-hovered, var(--sjs-primary-foreground-100, #ffffffff));
   }
 
   .sv-action-bar-item__title {
+    @include ctrDefaultBoldFont;
     color: inherit;
     display: flex;
     align-items: center;
     flex-grow: 1;
     justify-content: center;
-    font-weight: 600;
   }
 }
 
@@ -229,13 +239,17 @@
 .sl-question {
   display: flex;
   align-items: center;
-  margin-top: calcSize(2);
+  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
 }
 
 .sl-row {
   display: flex;
   align-items: flex-start;
   flex-flow: row wrap;
+}
+
+.svc-creator-popup .sl-panel-wrapper:first-child .sl-question {
+  margin-top: 0;
 }
 
 .sl-row--multiple {
@@ -245,7 +259,7 @@
 }
 
 .sl-question__header--left {
-  margin-right: calcSize(1);
+  margin-right: var(--ctr-expression-items-gap, var(--sjs-spacing-x1));
 }
 
 .sl-row {
@@ -257,11 +271,9 @@
 }
 
 .sl-question__title {
-  color: var(--ctr-expression-item-text-color-function, $foreground);
-  font-size: calcSize(2);
-  line-height: calcSize(3);
+  @include ctrDefaultBoldFont;
+  color: var(--ctr-expression-item-text-color-function, var(--sjs-layer-3-foreground-100, #000000e6));
   margin: 0;
-  font-weight: 600;
 
   span+span {
     display: none;
@@ -269,26 +281,28 @@
 }
 
 .sl-row--multiple .sl-question {
-  padding-right: calcSize(1);
+  padding-right: var(--ctr-expression-items-gap, var(--sjs-spacing-x1));
 }
-
+.svc-logic-question-text-editor {
+  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
+}
 .svc-logic-question-value {
   --sd-base-padding: calc(5 * #{$base-unit});
   --sd-base-vertical-padding: calc(4 * #{$base-unit});
   --sd-page-vertical-padding: calc(3 * #{$base-unit});
   padding-right: calcSize(5);
-  margin-top: calcSize(2);
+  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
 }
 
 .svc-logic_trigger-editor {
-  margin-top: calcSize(2);
+  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
 }
 
 .svc-logic_trigger-editor .svc-logic-question-value {
   margin-top: 0;
 }
 
-.sv-popup.sv-property-editor {
+.sv-popup.svc-property-editor {
   .sl-row {
     flex-flow: nowrap;
   }
@@ -297,7 +311,185 @@
 .spg-comment.sl-comment {
   height: calcSize(17);
 }
-
 .sl-body {
-  @include disableAnimations;
+    @include disableLibraryAnimations;
+}
+
+$sl-pd-list-fade-in-duration: var(--sl-pd-list-fade-in-duration, 250ms);
+$sl-pd-list-move-in-duration: var(--sl-pd-list-move-in-duration, 150ms);
+$sl-pd-list-fade-in-delay: var(--sl-pd-list-fade-in-delay, 150ms);
+$sl-pd-list-fade-out-duration: var(--sl-pd-list-fade-out-duration, 100ms);
+$sl-pd-list-move-out-duration: var(--sl-pd-list-move-out-duration, 250ms);
+$sl-pd-list-move-out-delay: var(--sl-pd-list-move-out-delay, 100ms);
+
+.sl-panel-wrapper--list {
+  &.sl-panel-wrapper--leave,
+  &.sl-panel-wrapper--enter {
+    animation-name: fadeIn, moveInWithOverflow;
+    animation-fill-mode: forwards;
+    min-height: 0 !important;
+  }
+  &.sl-panel-wrapper--enter {
+    opacity: 0;
+    animation-timing-function: $ease-out;
+    animation-duration: $sl-pd-list-fade-in-duration, $sl-pd-list-move-in-duration;
+    animation-delay: $sl-pd-list-fade-in-delay, 0s;
+  }
+
+  &.sl-panel-wrapper--leave {
+    animation-direction: reverse;
+    animation-timing-function: $reverse-ease-out;
+    animation-duration: $sl-pd-list-fade-out-duration, $sl-pd-list-move-out-duration;
+    animation-delay: 0s, $sl-pd-list-move-out-delay;
+  }
+}
+
+$sl-matrix-row-fade-in-duration: var(--sjs-sl-matrix-row-fade-in-duration, 250ms);
+$sl-matrix-row-move-in-duration: var(--sjs-sl-matrix-row-move-in-duration, 150ms);
+$sl-matrix-row-fade-in-delay: var(--sjs-sl-matrix-row-fade-in-delay, 150ms);
+$sl-matrix-row-fade-out-duration: var(--sjs-sl-matrix-row-fade-out-duration, 100ms);
+$sl-matrix-row-move-out-duration: var(--sjs-sl-matrix-row-move-out-duration, 250ms);
+$sl-matrix-row-move-out-delay: var(--sjs-sl-matrix-row-move-out-delay, 100ms);
+
+$sl-matrix-detail-row-fade-in-duration: var(--sjs-sl-matrix-detail-row-fade-in-duration, 500ms);
+$sl-matrix-detail-row-move-in-duration: var(--sjs-sl-matrix-detail-row-move-in-duration, 150ms);
+$sl-matrix-detail-row-fade-in-delay: var(--sjs-sl-matrix-detail-row-fade-in-delay, 150ms);
+$sl-matrix-detail-row-fade-out-duration: var(--sjs-sl-matrix-detail-row-fade-out-duration, 150ms);
+$sl-matrix-detail-row-move-out-duration: var(--sjs-sl-matrix-detail-row-move-out-duration, 250ms);
+$sl-matrix-detail-row-move-out-delay: var(--sjs-sl-matrix-detail-row-move-out-delay, 100ms);
+
+.sl-table__row--leave,
+.sl-table__row--enter {
+  animation-name: empty;
+  --move-whole-animation-duration: calc(var(--move-animation-duration) + var(--move-animation-delay));
+  --fade-whole-animation-duration: calc(var(--fade-animation-duration) + var(--fade-animation-delay));
+  animation-duration: max(var(--fade-whole-animation-duration), var(--move-whole-animation-duration));
+  & > td {
+    animation-name: paddingFadeIn;
+    animation-duration: var(--move-animation-duration);
+    animation-delay: var(--move-animation-delay);
+    animation-direction: var(--animation-direction);
+    animation-fill-mode: forwards;
+    animation-timing-function: var(--animation-timing-function);
+    & > div {
+      animation-name: fadeIn, moveInWithOverflow;
+      opacity: 0;
+      animation-direction: var(--animation-direction);
+      animation-timing-function: var(--animation-timing-function);
+      animation-fill-mode: forwards;
+      animation-duration: var(--fade-animation-duration), var(--move-animation-duration), var(--move-animation-duration);
+      animation-delay: var(--fade-animation-delay), var(--move-animation-delay), var(--move-animation-delay);
+    }
+  }
+}
+.sl-table__row--enter {
+  --move-animation-delay: 0s;
+  --move-animation-duration: #{$sl-matrix-row-move-in-duration};
+  --fade-animation-duration: #{$sl-matrix-row-fade-in-duration};
+  --fade-animation-delay: #{$sl-matrix-row-fade-in-delay};
+  --animation-direction: normal;
+  --animation-timing-function: #{$ease-out};
+}
+.sl-table__row--leave {
+  --move-animation-delay: #{$sl-matrix-row-move-out-delay};
+  --move-animation-duration: #{$sl-matrix-row-move-out-duration};
+  --fade-animation-duration: #{$sl-matrix-row-fade-out-duration};
+  --fade-animation-delay: 0s;
+  --animation-direction: reverse;
+  --animation-timing-function: #{$reverse-ease-out};
+}
+.sl-table__row--detail {
+  &.sl-table__row--enter {
+    --move-animation-delay: 0s;
+    --move-animation-duration: #{$sl-matrix-detail-row-move-in-duration};
+    --fade-animation-duration: #{$sl-matrix-detail-row-fade-in-duration};
+    --fade-animation-delay: #{$sl-matrix-detail-row-fade-in-delay};
+    --animation-direction: normal;
+    --animation-timing-function: #{$ease-out};
+  }
+  &.sl-table__row--leave {
+    --move-animation-delay: #{$sl-matrix-detail-row-move-out-delay};
+    --move-animation-duration: #{$sl-matrix-detail-row-move-out-duration};
+    --fade-animation-duration: #{$sl-matrix-detail-row-fade-out-duration};
+    --fade-animation-delay: 0s;
+    --animation-direction: reverse;
+    --animation-timing-function: #{$reverse-ease-out};
+  }
+}
+
+$sl-row-fade-in-duration: var(--sjs-sl-row-fade-in-duration, 500ms);
+$sl-row-move-in-duration: var(--sjs-sl-row-move-in-duration, 150ms);
+$sl-row-fade-in-delay: var(--sjs-sl-row-fade-in-delay, 150ms);
+$sl-row-fade-out-duration: var(--sjs-sl-row-fade-out-duration, 150ms);
+$sl-row-move-out-duration: var(--sjs-sl-row-move-out-duration, 250ms);
+$sl-row-move-out-delay: var(--sjs-sl-row-move-out-delay, 100ms);
+$sl-row-fade-in-animation-delay: var(--sjs-sl-row-fade-in-animation-delay, 400ms);
+
+.sl-row--enter {
+  animation-fill-mode: forwards;
+  animation-name: fadeIn, moveInWithOverflow;
+  min-height: 0 !important;
+  opacity: 0;
+  animation-timing-function: $ease-out;
+  animation-delay: $sl-row-fade-in-delay, 0s, 0s;
+  animation-duration: $sl-row-fade-in-duration, $sl-row-move-in-duration, $sl-row-move-in-duration;
+}
+.sl-row--delayed-enter {
+  overflow: hidden;
+  height: 0;
+  animation-delay: calc(#{$sl-row-fade-in-delay} + #{$sl-row-fade-in-animation-delay}), $sl-row-fade-in-animation-delay,
+    $sl-row-fade-in-animation-delay;
+}
+
+.sl-row--leave {
+  animation-name: fadeIn, moveInWithOverflow;
+  animation-timing-function: $reverse-ease-out;
+  animation-fill-mode: forwards;
+  animation-direction: reverse;
+  min-height: 0 !important;
+  animation-delay: 0s, $sl-row-move-out-delay, $sl-row-move-out-delay;
+  animation-duration: $sl-row-fade-out-duration, $sl-row-move-out-duration, $sl-row-move-out-duration;
+}
+
+$sl-element-fade-in-duration: var(--sjs-sl-element-fade-in-duration, 500ms);
+$sl-element-move-in-duration: var(--sjs-sl-element-move-in-duration, 150ms);
+$sl-element-fade-in-delay: var(--sjs-sl-element-fade-in-delay, 150ms);
+$sl-element-fade-out-duration: var(--sjs-sl-element-fade-out-duration, 150ms);
+$sl-element-move-out-duration: var(--sjs-sl-element-move-out-duration, 250ms);
+$sl-element-move-out-delay: var(--sjs-sl-element-move-out-delay, 100ms);
+
+.sl-element-wrapper--enter {
+  animation-fill-mode: forwards;
+  animation-name: fadeIn, moveInWithOverflow;
+  min-height: 0 !important;
+  opacity: 0;
+  height: 0;
+  animation-timing-function: $ease-out;
+  animation-delay: $sl-element-fade-in-delay, 0s;
+  animation-duration: $sl-element-fade-in-duration, $sl-element-move-in-duration;
+}
+
+.sl-element-wrapper--leave {
+  animation-name: fadeIn, moveInWithOverflow;
+  animation-timing-function: $reverse-ease-out;
+  animation-fill-mode: forwards;
+  animation-direction: reverse;
+  min-height: 0 !important;
+  animation-delay: 0s, $sl-element-move-out-delay;
+  animation-duration: $sl-element-fade-out-duration, $sl-element-move-out-duration;
+}
+
+
+.svc-creator--disable-animations {
+  .sl-row--enter,
+  .sl-row--leave,
+  .sl-element-wrapper--enter,
+  .sl-element-wrapper--leave,
+  .sl-table__row--enter,
+  .sl-table__row--leave,
+  .sl-panel-wrapper--leave,
+  .sl-panel-wrapper--enter
+   {
+    animation: none;
+  }
 }

@@ -13,6 +13,7 @@ import {
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
+import { title } from "process";
 
 export * from "../../src/components/link-value";
 
@@ -79,32 +80,6 @@ test("Add condition", () => {
   expect(conditionEditor.text).toEqual("{q} = 1 and {q2} = 2");
   expect(conditionEditor.title).toEqual("{q} = 1 and {q2} = 2");
 });
-test("Custom text for condition title", () => {
-  const survey = new SurveyModel({
-    questions: [
-      { type: "text", name: "q1" },
-      { type: "text", name: "q" },
-      { type: "text", name: "q2" }
-    ]
-  });
-  const options = new EmptySurveyCreatorOptions();
-  options.onConditionGetTitleCallback = (expression: string, title: string): string => {
-    if (!expression) return "Please setup the expression";
-    return "Your expression is: " + title;
-  };
-  const conditionEditor = new ConditionEditor(survey, survey.getQuestionByName("q1"), options);
-  expect(conditionEditor.title).toEqual("Please setup the expression");
-  conditionEditor.text = "{q} = 1";
-  expect(conditionEditor.title).toEqual("Your expression is: {q} = 1");
-  conditionEditor.panel.addPanel();
-  expect(conditionEditor.title).toEqual("Please setup the expression");
-  var editPanel = conditionEditor.panel.panels[1];
-  var nameQuestion = editPanel.getQuestionByName("questionName");
-  nameQuestion.value = "q2";
-  editPanel.getQuestionByName("questionValue").value = 2;
-  expect(conditionEditor.title).toEqual("Your expression is: {q} = 1 and {q2} = 2");
-});
-
 test("Do not delete the only condition, but clear it", () => {
   var survey = new SurveyModel({
     questions: [
@@ -1098,6 +1073,59 @@ test("Change operators via callback", () => {
   expect(ItemValue.getItemByValue(qOperator.visibleChoices, "equal").isVisible).toBeTruthy();
   expect(evnt_questionType).toBe("checkbox");
 });
+test("Show complex question in the condition builder", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text", visibleIf: "{q2} = 'a'" },
+      { name: "q2", type: "text" },
+      {
+        name: "q3",
+        type: "paneldynamic",
+        title: "abc q3",
+        templateElements: [{ type: "text", name: "q2_q1" }]
+      },
+      {
+        name: "q4",
+        type: "matrixdynamic",
+        columns: [{ cellType: "text", name: "col1" }]
+      },
+      {
+        name: "q5",
+        type: "multipletext",
+        items: [{ name: "item1" }]
+      }
+    ]
+  });
+  const question = survey.getQuestionByName("q1");
+  const options = new EmptySurveyCreatorOptions();
+  options.showTitlesInExpressions = true;
+  let editor = new ConditionEditor(survey, question, options, "visibleIf");
+  expect(editor.allConditionQuestions).toHaveLength(4);
+  let panel = editor.panel.panels[0];
+  let qName = <QuestionCheckboxModel>panel.getQuestionByName("questionName");
+  expect(qName.choices).toHaveLength(4);
+
+  settings.logic.includeComplexQuestions = true;
+
+  editor = new ConditionEditor(survey, question, options, "visibleIf");
+  expect(editor.allConditionQuestions).toHaveLength(4 + 3);
+  panel = editor.panel.panels[0];
+  qName = <QuestionCheckboxModel>panel.getQuestionByName("questionName");
+  expect(qName.choices).toHaveLength(4 + 3);
+  expect(qName.choices[0].value).toBe("q3");
+  expect(qName.choices[0].text).toBe("abc q3");
+  qName.value = "q4";
+  const qOperator = <QuestionDropdownModel>panel.getQuestionByName("operator");
+  expect(qOperator.value).toBe("empty");
+  qOperator.onOpenedCallBack();
+  expect(ItemValue.getItemByValue(qOperator.visibleChoices, "anyof").isVisible).toBeFalsy();
+  expect(ItemValue.getItemByValue(qOperator.visibleChoices, "contains").isVisible).toBeFalsy();
+  expect(ItemValue.getItemByValue(qOperator.visibleChoices, "equal").isVisible).toBeFalsy();
+  expect(ItemValue.getItemByValue(qOperator.visibleChoices, "empty").isVisible).toBeTruthy();
+  expect(ItemValue.getItemByValue(qOperator.visibleChoices, "notempty").isVisible).toBeTruthy();
+
+  settings.logic.includeComplexQuestions = false;
+});
 test("file question type should not set operator to 'equal'", () => {
   var survey = new SurveyModel({
     elements: [
@@ -1336,7 +1364,7 @@ test("Check text for add panel button", () => {
     new SurveyModel(),
     new QuestionTextModel("q1")
   );
-  expect(editor.panel.panelAddText).toEqual("Add Condition");
+  expect(editor.panel.addPanelText).toEqual("Add Condition");
 });
 test("Show rating/ranking in new line", () => {
   var survey = new SurveyModel({

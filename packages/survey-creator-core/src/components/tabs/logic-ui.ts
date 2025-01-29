@@ -92,7 +92,9 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   public addNewUI() {
     if (this.items.length == 0 || !this.items[this.items.length - 1].isNew) {
+      this.matrixItems["lockResetRenderedTable"] = true;
       this.addNew();
+      this.matrixItems["lockResetRenderedTable"] = false;
     }
     const rows = this.matrixItems.visibleRows;
     rows[rows.length - 1].showDetailPanel();
@@ -513,4 +515,15 @@ export class SurveyLogicUI extends SurveyLogic {
   public get emptyTabPlaceholder(): string {
     return getLogicString("empty_tab");
   }
+  public get placeholderTitleText(): string {
+    if (this.options.isMobileView)
+      return getLogicString("logicPlaceholderTitleMobile");
+    return getLogicString("logicPlaceholderTitle");
+  }
+  public get placeholderDescriptionText(): string {
+    if (this.options.isMobileView)
+      return getLogicString("logicPlaceholderDescriptionMobile");
+    return getLogicString("logicPlaceholderDescription");
+  }
+
 }

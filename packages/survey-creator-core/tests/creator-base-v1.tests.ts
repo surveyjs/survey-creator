@@ -16,7 +16,7 @@ import {
   ItemValue,
   QuestionPanelDynamicModel
 } from "survey-core";
-import { getNextValue, getNextItemText } from "../src/utils/utils";
+import { getNextValue, getNextItemText } from "../src/utils/creator-utils";
 import { editorLocalization } from "../src/editorLocalization";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
 import { CreatorTester } from "./creator-tester";
@@ -29,8 +29,6 @@ import { PagesController } from "../src/pages-controller";
 import { settings as creatorSettings } from "../src/creator-settings";
 
 export * from "../src/components/link-value";
-
-settings.supportCreatorV2 = true;
 
 function getSurveyJson(): any {
   return {
@@ -178,11 +176,11 @@ test("Escape HTML question string", () => {
   );
 });
 
-test("At least one page should be available", () => {
+test("Default JSON - no pages", () => {
   const creator = new CreatorTester();
   creator.JSON = getSurveyJson();
   creator.text = undefined;
-  expect(creator.survey.pages).toHaveLength(1);
+  expect(creator.survey.pages).toHaveLength(0);
 });
 
 test("options.questionTypes", () => {
@@ -242,6 +240,7 @@ test("Do not reload surey on 'Designer' tab click", () => {
 
 test("SurveyJSON always return correct data, bug #53", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   creator.survey.pages[0].addNewQuestion("text", "q1");
   creator.showTestSurvey();
   expect(JSON.stringify(creator.text).indexOf("q1") > -1).toBeTruthy();
@@ -266,6 +265,7 @@ test("onQuestionAdded event + undo/redo", () => {
 
 test("onElementDeleting event", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   let counter = 0;
   let canRemove = true;
   creator.onElementDeleting.add(function (editor, options) {
@@ -346,6 +346,7 @@ test("Delete object and selectedElement property", () => {
 
 test("fast copy tests, copy a question", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const q1 = <QuestionTextModel>(
     creator.survey.pages[0].addNewQuestion("text", "question1")
   );
@@ -359,6 +360,7 @@ test("fast copy tests, copy a question", () => {
 
 test("fast copy tests, copy a panel with questions and a nested panel", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const survey = creator.survey;
   const p1 = survey.pages[0].addNewPanel("panel1");
   const q1 = p1.addNewQuestion("text", "question1");
@@ -378,6 +380,7 @@ test("fast copy tests, copy a panel with questions and a nested panel", () => {
 
 test("Copy a page", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const survey = creator.survey;
   const p1 = survey.pages[0].addNewPanel("panel1");
   const q1 = p1.addNewQuestion("text", "question1");
@@ -399,6 +402,7 @@ test("Copy a page", () => {
 
 test("fast copy tests, set the correct parent", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const survey = creator.survey;
   const p1 = creator.survey.pages[0].addNewPanel("panel1");
   const q1 = p1.addNewQuestion("text", "question1");
@@ -424,10 +428,12 @@ test("addQuestion into the QuestionPanelDynamic into second page", () => {
 
 test("generateValidJSON should be true by default, bug #135", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   expect(creator.generateValidJSON).toBeTruthy();
 });
 test("Element name should be unique - property grid + Question Editor", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   creator.survey.currentPage.addNewQuestion("text", "question1");
   creator.survey.currentPage.addNewQuestion("text", "question2");
   const question = creator.survey.currentPage.addNewQuestion("text", "question");
@@ -481,6 +487,7 @@ test("Validate Selected Element Errors", () => {
   const oldIsRequired = titleProp.isRequired;
   titleProp.isRequired = true;
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const question = creator.survey.currentPage.addNewQuestion("text", "question1");
   creator.selectedElement = question;
   expect(creator.validateSelectedElement()).toBeFalsy();
@@ -493,6 +500,7 @@ test("Validate Selected Element Errors", () => {
 });
 test("Update conditions/expressions on changing question.name", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const page = creator.survey.currentPage;
   page.enableIf = "{question1} = 1";
   page.addNewQuestion("text", "question1");
@@ -509,6 +517,7 @@ test("Update conditions/expressions on changing question.name", () => {
 
 test("Update conditions/expressions on changing question.valueName", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   creator.survey.currentPage.addNewQuestion("text", "question1");
   creator.survey.currentPage.addNewQuestion("text", "question2");
   const q1 = creator.survey.getAllQuestions()[0];
@@ -652,6 +661,7 @@ test("The onModified event is called on property changed", () => {
 
 test("deleteElement function", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const page = creator.survey.pages[0];
   const q1 = page.addNewQuestion("text", "q1");
   const q2 = page.addNewQuestion("text", "q2");
@@ -668,6 +678,7 @@ test("deleteElement function", () => {
 
 test("Do not call onPageAdded on pages move", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   let counter = 0;
   creator.onPageAdded.add(function (sender, options) {
     counter++;
@@ -685,6 +696,8 @@ test("Do not call onPageAdded on pages move", () => {
 test("creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab collapsePropertyTab, allowExpandMultipleCategories = true", () => {
   creatorSettings.propertyGrid.allowExpandMultipleCategories = true;
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
+  creator.propertyGridNavigationMode = "accordion";
   const page = creator.survey.pages[0];
   const q1 = page.addNewQuestion("text", "q1");
   creator.selectElement(q1);
@@ -788,7 +801,7 @@ test("creator.onGetObjectDisplayName, change visible name for objects", () => {
   const creator = new CreatorTester();
   let reason = "";
   let area = "";
-  creator.onGetObjectDisplayName.add(function (sender, options) {
+  creator.onElementGetDisplayName.add(function (sender, options) {
     reason = options.reason;
     area = options.area;
     options.displayName = options.obj.title + " [" + options.obj.name + "]";
@@ -819,7 +832,7 @@ test(
   "use creator.onGetObjectDisplayName instead of creator.onGetObjectTextInPropertyGrid event, update on property changing",
   () => {
     const creator = new CreatorTester();
-    creator.onGetObjectDisplayName.add(function (sender, options) {
+    creator.onElementGetDisplayName.add(function (sender, options) {
       if (options.reason === "property-grid" && options.area === "property-grid-header:element-list") {
         if (!!options.obj.title) {
           options.displayName = options.obj.title;
@@ -836,7 +849,7 @@ test(
       elements: [{ type: "text", name: "q1", title: "question1", description: "New Title" }],
     };
     creator.selectElement(creator.survey.getQuestionByName("q1"));
-    const propertyGrid = creator.sidebar.getTabById("propertyGrid").model as PropertyGridViewModel;
+    const propertyGrid = creator.sidebar.getPageById("propertyGrid").componentData as PropertyGridViewModel;
     expect(propertyGrid).toBeTruthy();
     const selectorBarItem = propertyGrid.objectSelectionAction;
     expect(selectorBarItem).toBeTruthy();
@@ -876,10 +889,10 @@ test("creator options.maxLogicItemsInCondition, hide `Add Condition` on exceedin
 
 test("creator.onAddQuestion and undo-redo manager, Bug#972", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   creator.onQuestionAdded.add(function (sender, options) {
     options.question.title = "new title";
   });
-  creator.JSON = {};
   creator.survey.currentPage.addNewQuestion("text", "q1");
   creator.survey.currentPage.addNewQuestion("text", "q2");
   creator.undo();
@@ -888,10 +901,10 @@ test("creator.onAddQuestion and undo-redo manager, Bug#972", () => {
 });
 test("creator.onAddPage and undo-redo manager, Bug#972", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   creator.onPageAdded.add(function (sender, options) {
     options.page.title = "new title";
   });
-  creator.JSON = {};
   creator.survey.addNewPage("p2");
   creator.survey.addNewPage("p3");
   creator.undo();
@@ -900,10 +913,10 @@ test("creator.onAddPage and undo-redo manager, Bug#972", () => {
 });
 test("creator.onAddPanel and undo-redo manager, Bug#972", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   creator.onPanelAdded.add(function (sender, options) {
     options.panel.title = "new title";
   });
-  creator.JSON = {};
   creator.survey.currentPage.addNewPanel("panel1");
   creator.survey.currentPage.addNewPanel("panel2");
   creator.undo();
@@ -1080,6 +1093,7 @@ test("Update expressions on copyElements for matrix dynamic in detail panel", ()
 });
 test("onModified options", () => {
   const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
   const modifiedOptions = [];
   creator.onModified.add(function (survey, options) {
     modifiedOptions.push(options);
@@ -1128,6 +1142,13 @@ test("onModified options", () => {
 test("getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380", () => {
   const creator = new CreatorTester();
   creator.showObjectTitles = true;
+  creator.JSON = getSurveyJson();
+  const model = new PageNavigatorViewModel(new PagesController(creator), "");
+  expect(model.items[0].title).toEqual("Page 1");
+});
+test("getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380", () => {
+  const creator = new CreatorTester();
+  creator.useElementTitles = true;
   creator.JSON = getSurveyJson();
   const model = new PageNavigatorViewModel(new PagesController(creator), "");
   expect(model.items[0].title).toEqual("Page 1");
@@ -1181,7 +1202,7 @@ test("creator.onPageAdding", () => {
     counter++;
     options.allow = allowAdd;
   });
-  creator.JSON = {};
+  creator.JSON = { pages: [{ name: "page1" }] };
   expect(counter).toBe(1);
   expect(creator.survey.pages).toHaveLength(1);
   creator.addPage(new PageModel("p2"));

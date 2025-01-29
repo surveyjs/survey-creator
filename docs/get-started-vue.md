@@ -33,7 +33,9 @@ If you are looking for a quick-start application that includes all SurveyJS comp
 
 ## Add Survey Creator to a Vue 3 Application
 
-### Install the `survey-creator-vue` npm Package
+<div id="install-the-survey-creator-vue-npm-package"></div>
+
+### Install the Vue Form Builder npm Package
 
 Survey Creator for Vue 3 consists of two npm packages: [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) (platform-independent code) and [`survey-creator-vue`](https://www.npmjs.com/package/survey-creator-vue) (rendering code). Run the following command to install `survey-creator-vue`. The `survey-creator-core` package will be installed automatically as a dependency.
 
@@ -115,7 +117,20 @@ const creator = new SurveyCreatorModel(creatorOptions);
 
 ### Render Survey Creator
 
-Survey Creator rendering code is encapsulated in the `SurveyCreatorComponent`. To use it in your template, you need to install `surveyPlugin` (for SurveyJS Form Library) and `surveyCreatorPlugin`. Open the `main.ts` file, import these plugins, and install them using the `app.use()` method *in the exact order shown below*:
+To render Survey Creator, add `SurveyCreatorComponent` to your template, and pass the model instance you created in the previous step to the component's `model` attribute:
+
+```html
+<script setup lang="ts">
+import { SurveyCreatorComponent } from "survey-creator-vue";
+// ...
+</script>
+
+<template>
+  <SurveyCreatorComponent :model="creator" />
+</template>
+```
+
+The code above registers `SurveyCreatorComponent` locally. If you want to register it globally, open the `main.ts` file, import `surveyPlugin` (for SurveyJS Form Library) and `surveyCreatorPlugin`, and install them using the `app.use()` method *in the exact order shown below*. In this case, you don't need to import `SurveyCreatorComponent` within each Vue component where you want to use it.
 
 ```js
 // main.ts
@@ -128,18 +143,6 @@ createApp(App)
   .use(surveyPlugin)
   .use(surveyCreatorPlugin)
   .mount("#app");
-```
-
-To render Survey Creator, add `SurveyCreatorComponent` to your template, and pass the model instance you created in the previous step to the component's `model` attribute:
-
-```html
-<script setup lang="ts">
-// ...
-</script>
-
-<template>
-  <SurveyCreatorComponent :model="creator" />
-</template>
 ```
 
 <details>
@@ -153,6 +156,7 @@ import "survey-creator-core/survey-creator-core.min.css";
 
 import type { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorModel } from "survey-creator-core";
+import { SurveyCreatorComponent } from "survey-creator-vue";
 
 const creatorOptions: ICreatorOptions = {
   showLogicTab: true,
@@ -164,19 +168,6 @@ const creator = new SurveyCreatorModel(creatorOptions);
 <template>
   <SurveyCreatorComponent :model="creator" />
 </template>
-```
-
-```js
-// main.ts
-import { createApp } from "vue";
-import App from "./App.vue";
-import { surveyPlugin } from "survey-vue3-ui";
-import { surveyCreatorPlugin } from "survey-creator-vue";
-
-createApp(App)
-  .use(surveyPlugin)
-  .use(surveyCreatorPlugin)
-  .mount("#app");
 ```
 </details>
 
@@ -190,7 +181,7 @@ An incremental number of the current change. Since web services are asynchronous
 - `callback`        
 A callback function. Call it and pass `saveNo` as the first argument. Set the second argument to `true` or `false` based on whether the server applied or rejected the change.
 
-The following code shows how to use the `saveSurveyFunc` function to save a survey model schema in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
+The following code shows how to use the `saveSurveyFunc` function to save a survey model schema in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
 
 ```html
 <script setup lang="ts">
@@ -236,6 +227,8 @@ function saveSurveyJson(url: string, json: object, saveNo: number, callback: Fun
 </template>
 ```
 
+[View Demo](/survey-creator/examples/set-how-survey-configuration-changes-are-saved/ (linkStyle))
+
 If you are running a NodeJS server, you can check a survey JSON schema before saving it. On the server, create a `SurveyModel` and call its [`toJSON()`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#toJSON) method. This method deletes unknown properties and incorrect property values from the survey JSON schema:
 
 ```js
@@ -250,7 +243,7 @@ const correctSurveyJson = survey.toJSON();
 // ...
 ```
 
-To load a survey model schema JSON into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
+To load a survey model schema into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
 
 ```html
 <script setup lang="ts">
@@ -291,6 +284,7 @@ import "survey-creator-core/survey-creator-core.min.css";
 
 import type { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorModel } from "survey-creator-core";
+import { SurveyCreatorComponent } from "survey-creator-vue";
 
 const creatorOptions: ICreatorOptions = {
   showLogicTab: true,
@@ -349,19 +343,6 @@ creator.saveSurveyFunc = (saveNo: number, callback: Function) => {
   <SurveyCreatorComponent :model="creator" />
 </template>
 ```
-
-```js
-// main.ts
-import { createApp } from "vue";
-import App from "./App.vue";
-import { surveyPlugin } from "survey-vue3-ui";
-import { surveyCreatorPlugin } from "survey-creator-vue";
-
-createApp(App)
-  .use(surveyPlugin)
-  .use(surveyCreatorPlugin)
-  .mount("#app");
-```
 </details>
 
 ### Manage Image Uploads
@@ -414,6 +395,7 @@ import "survey-creator-core/survey-creator-core.min.css";
 
 import type { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorModel } from "survey-creator-core";
+import { SurveyCreatorComponent } from "survey-creator-vue";
 
 const creatorOptions: ICreatorOptions = {
   showLogicTab: true,
@@ -493,19 +475,6 @@ creator.saveSurveyFunc = (saveNo: number, callback: Function) => {
   <SurveyCreatorComponent :model="creator" />
 </template>
 ```
-
-```js
-// main.ts
-import { createApp } from "vue";
-import App from "./App.vue";
-import { surveyPlugin } from "survey-vue3-ui";
-import { surveyCreatorPlugin } from "survey-creator-vue";
-
-createApp(App)
-  .use(surveyPlugin)
-  .use(surveyCreatorPlugin)
-  .mount("#app");
-```
 </details>
 
 [View Demo](https://surveyjs.io/survey-creator/examples/file-upload/vue3js (linkStyle))
@@ -514,7 +483,9 @@ createApp(App)
 
 ## Add Survey Creator to a Vue 2 Application
 
-### Install the `survey-creator-knockout` npm Package
+<div id="install-the-survey-creator-knockout-npm-package"></div>
+
+### Install the Knockout Form Builder npm Package
 
 Survey Creator does not provide a native implementation for Vue 2. However, you can integrate the version for Knockout into your Vue 2 application. Run the following command to install the <a href="https://www.npmjs.com/package/survey-creator-knockout" target="_blank">survey-creator-knockout</a> package:
 
@@ -672,7 +643,7 @@ An incremental number of the current change. Since web services are asynchronous
 - `callback`        
 A callback function. Call it and pass `saveNo` as the first argument. Set the second argument to `true` or `false` based on whether the server applied or rejected the change.
 
-The following code shows how to use the `saveSurveyFunc` function to save a survey model schema in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
+The following code shows how to use the `saveSurveyFunc` function to save a survey model schema in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
 
 
 ```js
@@ -722,8 +693,9 @@ function saveSurveyJson(url, json, saveNo, callback) {
 </script>
 ```
 
-To load a survey model schema JSON into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
+[View Demo](/survey-creator/examples/set-how-survey-configuration-changes-are-saved/ (linkStyle))
 
+To load a survey model schema into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
 
 ```js
 // ...

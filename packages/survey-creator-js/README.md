@@ -26,7 +26,7 @@ To get started with Survey Creator / Form Builder for HTML/CSS/JavaScript applic
 - [Live Examples](https://surveyjs.io/Examples/Survey-Creator)
 - [What's New](https://surveyjs.io/WhatsNew)
 
-## Build Survey Creator / Form Builder for React from Sources
+## Build Survey Creator / Form Builder for HTML/CSS/JavaScript Applications from Sources
 
 If you want to build the library yourself, do the following:
 
@@ -38,7 +38,7 @@ If you want to build the library yourself, do the following:
 
     > NOTE: Make sure that folders with cloned `survey-library` and `survey-creator` repositories are in the same directory.
 
-1.  **Install build dependencies for Survey Creator / Form Builder for React**
+1.  **Install build dependencies for Survey Creator / Form Builder for HTML/CSS/JavaScript Applications**
 
     ```
     cd survey-creator/packages/survey-creator-js

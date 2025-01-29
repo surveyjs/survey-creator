@@ -8,7 +8,7 @@ import {
 import { CreatorModelElement } from "./ModelElement";
 
 interface ImageItemValueAdornerComponentProps {
-  element: JSX.Element;
+  element: React.JSX.Element;
   componentData: any;
   question: QuestionSelectBase;
   item: ImageItemValue;
@@ -62,10 +62,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     return <div className="svc-image-item-value__loading"><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
   }
 
-  render(): JSX.Element {
-    // if (this.model.question.isDragged) {
-    //   return null;
-    // }
+  render(): React.JSX.Element {
     this.model.item = this.props.item;
     const isNew = !this.props.question.isItemInList(this.props.item);
     this.model.isNew = isNew;
@@ -87,7 +84,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
 
         <div className="svc-image-item-value-controls">
           {this.model.allowAdd && !this.model.isUploading ? attachKey2click(<span className="svc-context-button svc-image-item-value-controls__add" onClick={() => this.model.chooseNewFile(this.model)}>
-            <SvgIcon size={24} iconName={"icon-add-lg"} title={this.model.addFileTitle}></SvgIcon>
+            <SvgIcon size={"auto"} iconName={"icon-add-lg"} title={this.model.addFileTitle}></SvgIcon>
           </span>) : null}
         </div>
       </>);
@@ -103,7 +100,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
               <span className="svc-context-button svc-image-item-value-controls__drag-area-indicator"
                 onPointerDown={(event: any) => this.model.onPointerDown(event)}
               >
-                <SvgIcon size={24} iconName={"icon-drag-area-indicator"}></SvgIcon>
+                <SvgIcon size={"auto"} iconName={"icon-drag-24x24"}></SvgIcon>
               </span>
               : null
           }
@@ -115,13 +112,13 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
                   className="svc-context-button"
                   onClick={() => this.model.chooseFile(this.model)}
                 >
-                  <SvgIcon role="button" size={24} iconName={"icon-file"} title={this.model.selectFileTitle}></SvgIcon>
+                  <SvgIcon role="button" size={"auto"} iconName={"icon-choosefile"} title={this.model.selectFileTitle}></SvgIcon>
                 </span>) : null}
                 {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
                   className="svc-context-button svc-context-button--danger"
                   onClick={() => this.model.remove(this.model)}
                 >
-                  <SvgIcon role="button" size={24} iconName={"icon-delete"} title={this.model.removeFileTitle}></SvgIcon>
+                  <SvgIcon role="button" size={"auto"} iconName={"icon-delete"} title={this.model.removeFileTitle}></SvgIcon>
                 </span>) : null}
               </div>
               : null

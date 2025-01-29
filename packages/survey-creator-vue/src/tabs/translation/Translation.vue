@@ -1,10 +1,8 @@
 <template>
-  <div class="svc-creator-tab__content svc-translation-tab">
-    <div class="st-content">
-      <div v-if="model.isEmpty" class="st-no-strings">
-        <span>{{ model.noStringsText }}</span>
-      </div>
-      <div v-if="!model.isEmpty" class="svc-flex-column st-strings-wrapper">
+  <div class="svc-creator-tab__content svc-translation-tab" :class="model.isEmpty ? 'svc-translation-tab--empty' : ''">
+    <SurfacePlaceholder v-if="model.isEmpty" :name="'translation'" :placeholderTitleText="model.placeholderTitleText" :placeholderDescriptionText="model.placeholderDescriptionText" />
+    <div v-if="!model.isEmpty" class="st-content">
+      <div class="svc-flex-column st-strings-wrapper">
         <div class="svc-flex-row st-strings-header">
           <SurveyComponent :model="model.stringsHeaderSurvey"></SurveyComponent>
         </div>
@@ -18,8 +16,8 @@
 
 <script lang="ts" setup>
 import type { Translation } from "survey-creator-core";
-import { useBase } from "survey-vue3-ui";
-
+import { useBase, SurveyComponent } from "survey-vue3-ui";
+import SurfacePlaceholder from "../../components/SurfacePlaceholder.vue";
 const props = defineProps<{ model: Translation }>();
 useBase(() => props.model);
 </script>

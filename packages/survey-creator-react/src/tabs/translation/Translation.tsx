@@ -6,6 +6,7 @@ import {
   Survey
 } from "survey-react-ui";
 import { Translation } from "survey-creator-core";
+import { SurfacePlaceholder } from "../../components/SurfacePlaceholder";
 
 export class TabTranslationComponent extends SurveyElementBase<any, any> {
   private get model(): Translation {
@@ -14,21 +15,17 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
   protected getStateElement(): Base {
     return this.model;
   }
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     if (!this.model) return null;
     return (
-      <div className="svc-creator-tab__content svc-translation-tab">
+      <div className={"svc-creator-tab__content svc-translation-tab" + (this.model.isEmpty ? " svc-translation-tab--empty" : "")}>
         {this.renderElementContent()}
       </div>
     );
   }
-  renderElementContent(): JSX.Element {
+  renderElementContent(): React.JSX.Element {
     if (this.model.isEmpty) {
-      return (
-        <div className="st-no-strings">
-          <span>{this.model.noStringsText}</span>
-        </div>
-      );
+      return <SurfacePlaceholder name={"translation"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />;
     } else {
       return (
         <div className="st-content">

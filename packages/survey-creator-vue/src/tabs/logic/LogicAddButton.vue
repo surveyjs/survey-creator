@@ -9,12 +9,13 @@
         model.enabled !== undefined && !model.enabled,
     }"
   >
-    <span class="svc-text svc-text--normal svc-text--bold">
+    <span class="svc-btn__text">
       {{ model.title }}
     </span>
   </div>
 </template>
 <script lang="ts" setup>
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import type { Action } from "survey-core";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{ model: Action }>();

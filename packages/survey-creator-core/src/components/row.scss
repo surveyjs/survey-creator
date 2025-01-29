@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables" as *;
 
 .svc-row {
   width: 100%;
@@ -11,6 +11,9 @@
 
 .svc-row > .sd-row.sd-page__row {
   margin-top: calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)));
+  &.sd-row--delayed-enter {
+    margin-top: 0;
+  }
 }
 
 .svc-row .sd-row.sd-row--multiple {
@@ -73,24 +76,47 @@
   }
 }
 
-.svc-row--drag-over-top:before {
-  content: " ";
+.svc-row__drop-indicator {
   position: absolute;
-  left: 0;
-  background: $secondary;
-  top: 6px;
-  width: 100%;
-  height: 2px;
+  background: var(--sjs-secondary-background-500, #19B394FF);
+  opacity: 0;
+  transition: opacity $creator-transition-duration;
 }
 
-.svc-row--drag-over-bottom:after {
-  content: " ";
-  position: absolute;
+.svc-row__drop-indicator--top,
+.svc-row__drop-indicator--bottom {
   left: 0;
-  background: $secondary;
-  bottom: -10px;
   width: 100%;
-  height: 2px;
+  height: 0px;
+}
+
+.svc-row__drop-indicator--top {
+  top: calc(calcSize(1) - (calcSize(0.25) / 2));
+}
+
+.svc-row__drop-indicator--bottom {
+  bottom: calc(calcSize(-1) - (calcSize(-0.25) / 2));
+}
+
+.svc-row--drag-over-top {
+  >.svc-row__drop-indicator--top {
+    opacity: 1;
+    height: calcSize(0.25);
+  }
+}
+
+.svc-row--drag-over-bottom {
+  >.svc-row__drop-indicator--bottom {
+    opacity: 1;
+    height: calcSize(0.25);
+  }
+}
+
+.svc-question__content--panel,
+.sd-panel__content {
+  .svc-row__drop-indicator--top {
+    top: calc(calcSize(-1) - (calcSize(0.25) / 2));
+  }
 }
 
 .svc-question__content--panel,
@@ -109,6 +135,36 @@
     }
   }
 }
+.svc-creator--disable-animations {
+  .svc-row {
+    @include disableLibraryAnimations;
+  }
+}
+
+.sd-panel .svc-row > .sd-row.sd-row--multiple {
+  width: calc(100% + #{$base-unit});
+  padding-left: 0;
+  margin-left: calcSize(-1);
+  & > div {
+    box-sizing: border-box;
+    --animation-padding-left: #{calcSize(1)};
+    padding-left: calcSize(1);
+  }
+}
+$svc-row-fade-in-duration: var(--sjs-svc-row-fade-in-duration, 250ms);
+$svc-row-move-in-duration: var(--sjs-svc-row-move-in-duration, 250ms);
+$svc-row-fade-in-delay: var(--sjs-svc-row-fade-in-delay, 100ms);
+$svc-row-fade-out-duration: var(--sjs-svc-row-fade-out-duration, 250ms);
+$svc-row-move-out-duration: var(--sjs-svc-row-move-out-duration, 250ms);
+$svc-row-move-out-delay: var(--sjs-svc-row-move-out-delay, 100ms);
+$svc-row-fade-in-animation-delay: var(--sjs-svc-row-fade-in-animation-delay, 0s);
+
 .svc-row {
-  @include disableAnimations;
+  --sjs-row-fade-in-duration: #{$svc-row-fade-in-duration};
+  --sjs-row-move-in-duration: #{$svc-row-move-in-duration};
+  --sjs-row-fade-in-delay: #{$svc-row-fade-in-delay};
+  --sjs-row-fade-out-duration: #{$svc-row-fade-out-duration};
+  --sjs-row-move-out-duration: #{$svc-row-move-out-duration};
+  --sjs-row-move-out-delay: #{$svc-row-move-out-delay};
+  --sjs-row-fade-in-animation-delay: #{$svc-row-fade-in-animation-delay};
 }

@@ -1,0 +1,15 @@
+<ng-template #template>
+  <div class="svc-sidebar__header svc-sidebar__header--tabbed">
+    <div class="svc-sidebar__header-container svc-sidebar__header-container--with-subtitle">
+      <div class="svc-sidebar__header-content">
+        <div [class]="model.buttonClassName" (click)="model.action()" [key2click]="{ processEsc: false }">
+          <div class="svc-sidebar__header-caption">
+            <span class="svc-sidebar__header-title">{{model.title}}</span>
+            <span class="svc-sidebar__header-subtitle">{{model.tooltip}}</span>
+          </div>
+        </div>
+        <sv-ng-popup [popupModel]="model.popupModel"></sv-ng-popup>
+      </div>
+    </div>
+  </div>
+</ng-template>

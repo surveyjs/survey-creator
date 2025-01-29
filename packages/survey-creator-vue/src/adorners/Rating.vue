@@ -1,31 +1,35 @@
 <template>
   <div class="svc-rating-question-content">
     <div :class="model?.controlsClassNames">
-      <sv-svg-icon
+      <SvComponent
+        :is="'sv-svg-icon'"
         v-if="model?.allowRemove"
         :iconName="'icon-remove_16x16'"
-        :size="16"
+        :size="'auto'"
         v-key2click
         @click="model?.removeItem(model)"
         :class="model?.removeClassNames"
         :title="model?.removeTooltip"
         :aria-label="model?.removeTooltip"
-      ></sv-svg-icon>
-      <sv-svg-icon
+      ></SvComponent>
+      <SvComponent
+        :is="'sv-svg-icon'"
         v-if="model?.allowAdd"
         :iconName="'icon-add_16x16'"
-        :size="16"
+        :size="'auto'"
         v-key2click
         @click="model?.addItem(model)"
         :class="model?.addClassNames"
         :title="model?.addTooltip"
         :aria-label="model?.addTooltip"
-      ></sv-svg-icon>
+      ></SvComponent>
     </div>
     <slot></slot>
   </div>
 </template>
 <script lang="ts" setup>
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { QuestionRatingModel } from "survey-core";
 import {

@@ -1,8 +1,10 @@
 import { SurveySimulatorModel } from "../simulator";
-import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, surveyLocalization } from "survey-core";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
+import { findSuitableTheme, isThemeEmpty } from "./theme-model";
+import { listComponentCss } from "../list-theme";
 
 export class PreviewViewModel extends Base {
   static tagRegex = /(<([^>]+)>)/ig;
@@ -34,7 +36,7 @@ export class PreviewViewModel extends Base {
     onSet: (val: PageModel, target: PreviewViewModel) => {
       if (!!val) {
         const survey = target.simulator.survey;
-        if (survey.firstPageIsStarted) {
+        if (survey.firstPageIsStartPage) {
           if (val === survey.pages[0]) {
             survey.clear(false, true);
           } else {
@@ -70,9 +72,18 @@ export class PreviewViewModel extends Base {
     return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
   }
 
-  constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultV2Css) {
+  constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultCss) {
     super();
-    this.simulator = new SurveySimulatorModel();
+    this.simulator = new SurveySimulatorModel(surveyProvider);
+    this.pages.cssClasses = {
+      root: "sv-action-bar svc-pages-toolbar",
+      item: "svc-preview-pager__item",
+      itemActive: "svc-preview-pager__item--active",
+      itemPressed: "svc-preview-pager__item--pressed",
+      itemAsIcon: "svc-preview-pager__item--icon",
+      itemIcon: "svc-preview-pager-item__icon",
+      itemTitle: "svc-preview-pager-item__title",
+    };
   }
 
   public get isMobileView() {
@@ -84,7 +95,11 @@ export class PreviewViewModel extends Base {
 
   public updateSimulatorSurvey(json: any, theme: any) {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, this.getTabName(), this, (survey: SurveyModel): void => {
-      survey.applyTheme(this.surveyProvider.theme);
+      let preferredTheme: ITheme = undefined;
+      if (isThemeEmpty(this.surveyProvider.theme)) {
+        preferredTheme = findSuitableTheme(undefined, this.surveyProvider.preferredColorPalette, undefined, undefined);
+      }
+      survey.applyTheme(preferredTheme || this.surveyProvider.theme);
       survey.setCss(theme, false);
       survey.fitToContainer = true;
       survey.addLayoutElement({
@@ -187,7 +202,6 @@ export class PreviewViewModel extends Base {
       if (!page.isVisible) {
         pageItem.css = "svc-page-invisible";
         pageItem.markerIconName = "icon-invisible-items";
-        pageItem.markerIconSize = 24;
       }
       pages.push(pageItem);
     }
@@ -221,7 +235,7 @@ export class PreviewViewModel extends Base {
         newIndex = 0;
       }
       let nearPage: PageModel = this.showInvisibleElements ? this.survey.pages[newIndex] : this.survey.visiblePages[newIndex];
-      if (!isNext && currentIndex === 0 && this.survey.firstPageIsStarted
+      if (!isNext && currentIndex === 0 && this.survey.firstPageIsStartPage
         && this.survey.pages.length > 0) {
         nearPage = this.survey.pages[0];
       }
@@ -238,9 +252,6 @@ export class PreviewViewModel extends Base {
       });
       this.prevPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-left" : "icon-arrow-left_16x16";
-      });
-      this.prevPageAction.iconSize = <any>new ComputedUpdater<number>(() => {
-        return this.surveyProvider.isMobileView ? 24 : 16;
       });
       this.prevPageAction.action = () => setNearPage(false);
       pageActions.push(this.prevPageAction);
@@ -262,6 +273,7 @@ export class PreviewViewModel extends Base {
         }
       },
       cssClass: "svc-creator-popup",
+      cssClasses: listComponentCss,
       verticalPosition: "top",
       horizontalPosition: "center"
     });
@@ -277,9 +289,6 @@ export class PreviewViewModel extends Base {
       });
       this.nextPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-right" : "icon-arrow-right_16x16";
-      });
-      this.nextPageAction.iconSize = <any>new ComputedUpdater<number>(() => {
-        return this.surveyProvider.isMobileView ? 24 : 16;
       });
       this.nextPageAction.action = () => setNearPage(true);
       pageActions.push(this.nextPageAction);
@@ -309,7 +318,7 @@ export class PreviewViewModel extends Base {
   }
   public setTheme(themeName: string, themeMapper: any): void {
     const availableThemes = themeMapper.filter(item => item.name === themeName);
-    let theme = <any>defaultV2Css;
+    let theme = <any>defaultCss;
     if (availableThemes.length > 0) {
       theme = availableThemes[0].theme;
     }
@@ -332,11 +341,21 @@ export class PreviewViewModel extends Base {
   }
   private updatePrevNextPageActionState() {
     if (!this.prevPageAction || !this.survey) return;
-    const isPrevEnabled = this.survey.firstPageIsStarted && this.survey.state !== "starting"
-      || (!this.survey.firstPageIsStarted && !this.survey.isFirstPage);
+    const isPrevEnabled = this.survey.firstPageIsStartPage && this.survey.state !== "starting"
+      || (!this.survey.firstPageIsStartPage && !this.survey.isFirstPage);
     this.prevPageAction.enabled = isPrevEnabled;
     const isNextEnabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
     this.nextPageAction.enabled = isNextEnabled;
+  }
+  public get placeholderTitleText(): string {
+    if (this.isMobileView)
+      return getLocString("ed.previewPlaceholderTitleMobile");
+    return getLocString("ed.previewPlaceholderTitle");
+  }
+  public get placeholderDescriptionText(): string {
+    if (this.isMobileView)
+      return getLocString("ed.previewPlaceholderDescriptionMobile");
+    return getLocString("ed.previewPlaceholderDescription");
   }
   public onScroll() {
     this.survey.onScroll();

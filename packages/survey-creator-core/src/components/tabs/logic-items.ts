@@ -16,7 +16,7 @@ import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
 import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { settings } from "../../creator-settings";
-import { wrapTextByCurlyBraces } from "../../utils/utils";
+import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 import { SurveyHelper } from "../../survey-helper";
 
 export class SurveyLogicAction {

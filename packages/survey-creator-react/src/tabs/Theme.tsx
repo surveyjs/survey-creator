@@ -9,7 +9,7 @@ import {
 import { ThemeTabViewModel } from "survey-creator-core";
 import { SurveySimulator } from "./SurveySimulator";
 import { SurveyResults } from "../Results";
-import { TabPreviewTestSurveyAgainComponent } from "./Preview";
+import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
 
 export class TabThemeSurveyComponent extends SurveyElementBase<any, any> {
   private get model(): ThemeTabViewModel {
@@ -18,20 +18,27 @@ export class TabThemeSurveyComponent extends SurveyElementBase<any, any> {
   protected getStateElement(): Base {
     return this.model;
   }
-
-  renderElement(): JSX.Element {
+  renderPlaceholder(): React.JSX.Element {
+    return (<div className="svc-test-tab--empty">
+      <SurfacePlaceholder name={"theme"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />
+    </div>);
+  }
+  renderSimulator(): React.JSX.Element {
+    return (<div className="svc-plugin-tab__content">
+      <SurveySimulator model={this.model.simulator}></SurveySimulator>
+      {this.model.showResults ? <SurveyResults survey={this.model.simulator.survey} /> : null}
+    </div>);
+  }
+  renderElement(): React.JSX.Element {
     const tabContentClassName = "svc-creator-tab__content svc-test-tab__content" + (this.model.isPageToolbarVisible ? " svc-creator-tab__content--with-toolbar" : "");
     return (
       <div className={tabContentClassName}>
-        <div className="svc-plugin-tab__content">
-          <SurveySimulator model={this.model.simulator}></SurveySimulator>
-          {this.model.showResults ? <SurveyResults survey={this.model.simulator.survey} /> : null}
-        </div>
+        {this.model.simulator.survey.isEmpty ? this.renderPlaceholder() : this.renderSimulator()}
         {this.getBottomToolbar()}
       </div>
     );
   }
-  getBottomToolbar(): JSX.Element {
+  getBottomToolbar(): React.JSX.Element {
     if (this.model.isPageToolbarVisible) {
       return (
         <div className="svc-test-tab__content-actions">

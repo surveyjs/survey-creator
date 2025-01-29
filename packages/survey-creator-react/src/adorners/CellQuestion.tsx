@@ -27,11 +27,7 @@ export class CellQuestionAdornerComponent extends CreatorModelElement<
   protected getUpdatedModelProps(): string[] {
     return ["question", "componentData"];
   }
-  render(): JSX.Element {
-    if (this.model.isDragged) {
-      return null;
-    }
-
+  render(): React.JSX.Element {
     return (
       <React.Fragment>
         <div

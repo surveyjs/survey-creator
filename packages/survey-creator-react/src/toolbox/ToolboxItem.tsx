@@ -6,6 +6,7 @@ import {
 } from "survey-creator-core";
 import { CSSProperties, createElement } from "react";
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { ToolboxToolViewModel } from "survey-creator-core";
 import {
   Action,
@@ -23,18 +24,26 @@ import { CreatorModelElement } from "../ModelElement";
 export interface ISurveyCreatorToolboxItemProps {
   creator: SurveyCreatorModel;
   item: QuestionToolboxItem;
+  model: ToolboxToolViewModel;
+  parentModel: ActionContainer;
+  isCompact: boolean;
+}
+export interface ISurveyCreatorToolboxToolProps {
+  creator: SurveyCreatorModel;
+  item: QuestionToolboxItem;
   parentModel: ActionContainer;
   isCompact: boolean;
 }
 
 export class SurveyCreatorToolboxTool extends CreatorModelElement<
-  ISurveyCreatorToolboxItemProps,
+  ISurveyCreatorToolboxToolProps,
   any
 > {
   model: ToolboxToolViewModel;
-
+  rootRef: React.RefObject<HTMLDivElement>;
   constructor(props) {
     super(props);
+    this.rootRef = React.createRef();
   }
   protected createModel(props: any): void {
     this.model = new ToolboxToolViewModel(props.item, props.creator, props.parentModel);
@@ -56,7 +65,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
     return (this.item as any);
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     const item = this.item;
     const itemComponent = ReactElementFactory.Instance.createElement(
       this.model.itemComponent,
@@ -64,24 +73,19 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
         item: item,
         creator: this.creator,
         parentModel: this.creator.toolbox,
+        model: this.model,
         isCompact: this.isCompact
       }
     );
     return (
-      <div className={item.css} key={item.id}>
+      <div className={item.css} key={item.id} ref={this.rootRef}>
         {(item.needSeparator && !this.creator.toolbox.showCategoryTitles) ? (
           <div className="svc-toolbox__category-separator"></div>
         ) : null}
-        <div className="sv-action__content"
+        <div className="svc-toolbox__tool-content sv-action__content"
           onPointerDown={(event: any) => {
             event.persist();
             this.model.onPointerDown(event);
-          }}
-          onMouseOver={(event: any) => {
-            this.model.onMouseOver(item, event);
-          }}
-          onMouseLeave={(event: any) => {
-            this.model.onMouseLeave(item, event);
           }}
         >
           {itemComponent}
@@ -89,19 +93,36 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
       </div>
     );
   }
+  componentWillUnmount(): void {
+    super.componentWillUnmount();
+    this.item.updateModeCallback = undefined;
+  }
+  componentDidMount(): void {
+    super.componentDidMount();
+    this.item.updateModeCallback = (mode, callback) => {
+      queueMicrotask(() => {
+        if((ReactDOM as any)["flushSync"]) {
+          (ReactDOM as any)["flushSync"](() => {
+            this.item.mode = mode;
+          });
+        } else {
+          this.item.mode = mode;
+        }
+        queueMicrotask(() => {
+          callback(mode, this.rootRef.current);
+        });
+      });
+    };
+    this.item.afterRender();
+  }
 }
 
 export class SurveyCreatorToolboxItem extends CreatorModelElement<
   ISurveyCreatorToolboxItemProps,
   any
 > {
-  model: ToolboxToolViewModel;
   constructor(props) {
     super(props);
-  }
-  protected createModel(props: any): void {
-    const toolboxItem: IQuestionToolboxItem = props.item;
-    this.model = new ToolboxToolViewModel(toolboxItem, props.creator, props.parentModel);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "item"];
@@ -112,34 +133,50 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
   public get creator() {
     return this.props.creator;
   }
+  public get model() {
+    return this.props.model;
+  }
   protected getStateElement(): Base {
     return this.model;
   }
-  render(): JSX.Element {
-    return attachKey2click(
+  render(): React.JSX.Element {
+    const banner = (this.props.isCompact ?
+      <span className="svc-toolbox__item-banner"
+        onClick={(event: any) => {
+          event.persist();
+          this.model.click(event);
+        }}>
+        <SvgIcon size={"auto"} iconName={this.item.iconName} className="svc-toolbox__item-icon" title={this.item.tooltip}></SvgIcon>
+        <span>{this.item.title}</span>
+      </span>
+      :
+      null
+    );
+    const item = attachKey2click(
       <div
-        className={"svc-toolbox__item " + this.item.className}
+        className={this.item.renderedCss}
         tabIndex={0}
         role="button"
         aria-label={this.item.tooltip}
-        title={this.item.tooltip}
         onClick={(event: any) => {
           event.persist();
           this.model.click(event);
         }}
       >
         <span className="svc-toolbox__item-container">
-          {!!this.item.iconName ? <SvgIcon size={24} iconName={this.item.iconName} title={this.item.tooltip}></SvgIcon> : null}
+          {!!this.item.iconName ? <SvgIcon size={"auto"} iconName={this.item.iconName} className="svc-toolbox__item-icon"></SvgIcon> : null}
         </span>
         {(this.props.isCompact ?
-          <span className="svc-toolbox__item-banner svc-item__banner">
-            <SvgIcon size={24} iconName={this.item.iconName} className="svc-toolbox__item-icon" title={this.item.tooltip}></SvgIcon>
-            <span className="svc-toolbox__item-title">{this.item.title}</span>
-          </span>
+          null
           :
           <span className="svc-toolbox__item-title">{this.item.title}</span>
         )}
-      </div>
+      </div>);
+    return (
+      <>
+        {item}
+        {banner}
+      </>
     );
   }
 }

@@ -1,5 +1,4 @@
-import {
-  StylesManager, Base, IAction, ItemValue,
+import { Base, IAction, ItemValue,
   JsonObjectProperty, MatrixDropdownColumn, Question,
   SurveyModel, ILocalizableString, PopupBaseViewModel, SurveyElement
 } from "survey-core";
@@ -63,7 +62,9 @@ export var settings = {
       checkbox: "allof",
       tagbox: "allof"
     },
-    visibleActions: [],
+    includeComplexQuestions: false,
+    visibleActions: new Array<string>(),
+    invisibleTriggers: new Array<string>(),
     logicItemTitleMaxChars: 50,
     openBracket: "{",
     closeBracket: "}",
@@ -91,6 +92,11 @@ export var settings = {
     maxCharsInButtonGroup: 25,
     showNavigationButtons: false,
     enableSearch: true,
+    maxColumns: 0,
+    minChoices: 0,
+    maxChoices: 0,
+    maxRows: 0,
+    maxRateValues: 0,
     maximumColumnsCount: 0,
     minimumChoicesCount: 0,
     maximumChoicesCount: 0,
@@ -104,7 +110,7 @@ export var settings = {
     /**
      * Use it to change the default question JSON on dropping it into designer or converting questions
      */
-    defaultJSON: {
+    defaultJSON: <{ [index: string]: any }>{
       dropdown: {
         choices: ["Item 1", "Item 2", "Item 3"]
       },
@@ -178,7 +184,8 @@ export var settings = {
   jsonEditor: {
     indentation: 2,
     exportFileName: "survey.json"
-  }
+  },
+  useLegacyIcons: false
 };
 export interface ICollectionItemAllowOperations {
   allowDelete: boolean;
@@ -195,6 +202,7 @@ export interface ICreatorPlugin {
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
+  showOneCategoryInPropertyGrid?: boolean;
 }
 
 export interface ISurveyCreatorOptions {
@@ -202,8 +210,15 @@ export interface ISurveyCreatorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
   maxLogicItemsInCondition: number;
-  showTitlesInExpressions: boolean;
+  /**
+   * @deprecated
+   */
   showObjectTitles: boolean;
+  /**
+   * @deprecated
+   */
+  showTitlesInExpressions: boolean;
+  useElementTitles: boolean;
   allowEditExpressionsInTextEditor: boolean;
   maximumColumnsCount: number;
   minimumChoicesCount: number;
@@ -215,6 +230,7 @@ export interface ISurveyCreatorOptions {
   inplaceEditForValues: boolean;
   rootElement?: HTMLElement;
   previewShowResults: boolean;
+  showOneCategoryInPropertyGrid: boolean;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
   getElementAddornerCssCallback(obj: Base, className: string): string;
   onCanShowPropertyCallback(
@@ -291,21 +307,17 @@ export interface ISurveyCreatorOptions {
     obj: Base,
     value: any
   ): string;
-  onValueChangingCallback(options: any);
+  onValueChangingCallback(options: any): void;
   onGetElementEditorTitleCallback(obj: Base, title: string): string;
-  startUndoRedoTransaction();
-  stopUndoRedoTransaction();
-  createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string);
+  startUndoRedoTransaction(name?: string): void;
+  stopUndoRedoTransaction(): void;
+  createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel;
   onConditionQuestionsGetListCallback(
     propertyName: string,
     obj: Base,
     editor: any,
     list: any[],
     variables: string[]
-  ): string;
-  onConditionGetTitleCallback(
-    expression: string,
-    title: string
   ): string;
   isConditionOperatorEnabled(questionName: string, question: Question, operator: string, isEnabled: boolean): boolean;
   onLogicGetTitleCallback(
@@ -345,8 +357,15 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
   maxLogicItemsInCondition: number;
-  showTitlesInExpressions: boolean;
+  /**
+   * @deprecated
+   */
   showObjectTitles: boolean;
+  /**
+   * @deprecated
+   */
+  showTitlesInExpressions: boolean;
+  useElementTitles: boolean;
   allowEditExpressionsInTextEditor: boolean = true;
   maximumColumnsCount: number = settings.propertyGrid.maximumColumnsCount;
   minimumChoicesCount: number = settings.propertyGrid.minimumChoicesCount;
@@ -356,6 +375,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   machineTranslationValue: boolean = false;
   inplaceEditForValues: boolean = false;
   maxNestedPanels: number = -1;
+  showOneCategoryInPropertyGrid: boolean;
 
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
     return displayName;
@@ -452,8 +472,8 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   onGetElementEditorTitleCallback(obj: Base, title: string): string {
     return title;
   }
-  startUndoRedoTransaction() { }
-  stopUndoRedoTransaction() { }
+  startUndoRedoTransaction(name?: string): void { }
+  stopUndoRedoTransaction(): void { }
   createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = new SurveyModel(json);
     if (!!callback) {
@@ -468,12 +488,6 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     list: any[],
     variables: string[]
   ): string { return "asc"; }
-  onConditionGetTitleCallback(
-    expression: string,
-    title: string
-  ): string {
-    return title;
-  }
   isConditionOperatorEnabled(questionName: string, question: Question, operator: string, isEnabled: boolean): boolean { return isEnabled; }
   onLogicGetTitleCallback(
     expression: string,
@@ -492,5 +506,3 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void { }
   translationLocalesOrder: Array<string> = [];
 }
-
-StylesManager.applyTheme("defaultV2");

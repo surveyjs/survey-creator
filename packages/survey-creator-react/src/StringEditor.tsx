@@ -122,13 +122,18 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   private get className() {
     return this.baseModel.className(this.locString.renderedHtml);
   }
-  public render(): JSX.Element {
+  private htmlValue = {
+    __html: this.locString?.renderedHtml
+  };
+  public render(): React.JSX.Element {
     if (!this.locString) {
       return null;
     }
     let control = null;
     if (this.locString.hasHtml) {
-      const htmlValue = { __html: this.locString.renderedHtml };
+      if(this.htmlValue.__html !== this.locString.renderedHtml) {
+        this.htmlValue = { __html: this.locString.renderedHtml };
+      }
       control = (
         <span
           role="textbox"
@@ -140,13 +145,13 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           aria-label={this.placeholder || "content editable"}
           suppressContentEditableWarning={true}
           // style={this.style}
-          dangerouslySetInnerHTML={htmlValue}
+          dangerouslySetInnerHTML={this.htmlValue}
           onBlur={this.onBlur}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
           onMouseUp={this.onMouseUp}
           onClick={this.edit}
-        />
+        ></span>
       );
     } else {
       control = (
@@ -178,16 +183,16 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     return (
       <span className={this.className}>
         <span className="svc-string-editor__content">
-          <div className="svc-string-editor__border"
+          <div className="svc-string-editor__border svc-string-editor__border--hover"
             onClick={this.edit}
           >
-            <SvgIcon
-              className="svc-string-editor__button svc-string-editor__button--edit"
-              size={16}
-              iconName={"icon-edit"}
-            ></SvgIcon>
-
           </div>
+
+          <div className="svc-string-editor__border svc-string-editor__border--focus"
+            onClick={this.edit}
+          >
+          </div>
+
           <span className="svc-string-editor__input">
             {control}
             <div className="svc-string-editor__controls"

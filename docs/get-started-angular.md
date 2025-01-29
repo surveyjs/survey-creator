@@ -19,7 +19,9 @@ If you are looking for a quick-start application that includes all SurveyJS comp
 
 > In this guide, the terms "Form Builder" and "Survey Creator" are used interchangeably and both refer to the SurveyJS form building component for Angular.
 
-## Install the `survey-creator-angular` npm Package
+<div id="install-the-survey-creator-angular-npm-package"></div>
+
+## Install the Angular Form Builder npm Package
 
 Survey Creator for Angular consists of two npm packages: [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) (platform-independent code) and [`survey-creator-angular`](https://www.npmjs.com/package/survey-creator-angular) (rendering code). Run the following command to install `survey-creator-angular`. The `survey-creator-core` package will be installed automatically as a dependency.
 
@@ -33,7 +35,7 @@ npm install survey-creator-angular --save
 > npm install @angular/cdk@^12.0.0 --save
 > ```
 >
-> Earlier Angular versions are supported by the [`survey-creator`](https://www.npmjs.com/package/survey-creator) package. It depends on Knockout and is now obsolete. However, you can use it in your Angular v8&ndash;v11 projects. Refer to the following examples on GitHub for more information:
+> Earlier Angular versions are supported by the [`survey-creator-knockout`](https://www.npmjs.com/package/survey-creator-knockout) package. It depends on Knockout and is now obsolete. However, you can use it in your Angular v8&ndash;v11 projects. Refer to the following examples on GitHub for more information:
 > 
 > - [Add SurveyJS Form Library to an Angular v8&ndash;v11 Application](https://github.com/surveyjs/code-examples/tree/main/legacy-angular/form-library)
 > - [Add Survey Creator to an Angular v8&ndash;v11 Application](https://github.com/surveyjs/code-examples/tree/main/legacy-angular/survey-creator).
@@ -271,7 +273,7 @@ An incremental number of the current change. Since web services are asynchronous
 - `callback`        
 A callback function. Call it and pass `saveNo` as the first argument. Set the second argument to `true` or `false` based on whether the server applied or rejected the change.
 
-The following code shows how to use the `saveSurveyFunc` function to save a survey model schema in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
+The following code shows how to use the `saveSurveyFunc` function to save a survey model schema in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
 
 
 ```js
@@ -321,6 +323,8 @@ function saveSurveyJson(url: string | URL, json: object, saveNo: number, callbac
 }
 ```
 
+[View Demo](/survey-creator/examples/set-how-survey-configuration-changes-are-saved/ (linkStyle))
+
 If you are running a NodeJS server, you can check a survey JSON schema before saving it. On the server, create a `SurveyModel` and call its [`toJSON()`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#toJSON) method. This method deletes unknown properties and incorrect property values from the survey JSON schema:
 
 ```js
@@ -335,7 +339,7 @@ const correctSurveyJson = survey.toJSON();
 // ...
 ```
 
-To load a survey model schema JSON into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
+To load a survey model schema into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
 
 ```js
 const defaultJson = {

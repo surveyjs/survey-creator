@@ -6,19 +6,19 @@ export class CreatorPresetTabs extends CreatorPresetBase {
   protected applyCore(creator: SurveyCreatorModel): void {
     super.applyCore(creator);
     const items = this.json["items"] || [];
-    let tab = this.json.activeTab || (items.length > 0 ? items[0]: "");
-    if(items.length > 0 && items.indexOf(tab) < 0) {
+    let tab = this.json.activeTab || (items.length > 0 ? items[0] : "");
+    if (items.length > 0 && items.indexOf(tab) < 0) {
       tab = items[0];
     }
-    if(!!tab && creator.activeTab !== tab) {
+    if (!!tab && creator.activeTab !== tab) {
       const activePlugin = creator.getPlugin(creator.activeTab);
-      if(!!activePlugin?.deactivate) {
+      if (!!activePlugin?.deactivate) {
         activePlugin.deactivate();
       }
     }
     this.applyTabs(creator, items);
     if (tab) {
-      creator.activeTab = tab === "preview" ? "test" : tab;
+      creator.activeTab = tab;
     }
   }
   private applyTabs(creator: SurveyCreatorModel, items: Array<string>): void {

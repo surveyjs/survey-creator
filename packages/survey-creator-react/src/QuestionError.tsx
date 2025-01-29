@@ -10,7 +10,7 @@ export interface IQuestionErrorComponentProps {
 }
 
 export class QuestionErrorComponent extends React.Component<IQuestionErrorComponentProps, any> {
-  render(): JSX.Element | null {
+  render(): React.JSX.Element | null {
     return (
       <div>
         <SvgIcon aria-hidden="true" iconName="icon-alert_24x24" size="24" className={this.props.cssClasses.error.icon}></SvgIcon>

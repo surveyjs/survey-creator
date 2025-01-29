@@ -1,8 +1,9 @@
 import { editorLocalization, defaultStrings } from "../src/editorLocalization";
 import { CreatorTester } from "./creator-tester";
-import { Action } from "survey-core";
+import { Action, Serializer } from "survey-core";
 export * from "../src/localization/italian";
 export * from "../src/localization/french";
+import { enStrings } from "../src/localization/english";
 
 test("Get nested property", () => {
   expect(editorLocalization.getString("qt.text")).toEqual("Single-Line Input");
@@ -19,6 +20,9 @@ test("Get property name from pe. based on class name", () => {
   const pe: any = defaultStrings.pe;
   pe.testProperty = "All";
   pe.testProperty2 = "All2";
+  const pe_survey = pe.survey;
+  const pe_question = pe.question;
+  const pe_text = pe.text;
   pe.survey = { testProperty: "Survey" };
   pe.question = { testProperty: "Question", testProperty2: "Question2", testProperty3: "Question3" };
   pe.text = { testProperty: "Text" };
@@ -41,6 +45,9 @@ test("Get property name from pe. based on class name", () => {
   expect(editorLocalization.getPropertyNameInEditor("text", "testProperty3")).toEqual("Question3");
 
   expect(editorLocalization.getPropertyNameInEditor("expression", "format")).toEqual("Formatted string");
+  pe.survey = pe_survey;
+  pe.question = pe_question;
+  pe.text = pe_text;
 });
 test("Get property description from peHelp. based on class name", () => {
   const peHelp: any = defaultStrings.pehelp;
@@ -83,8 +90,8 @@ test("Get property placeholder", () => {
 test("Get value name from pv. based on property name", () => {
   const pv: any = defaultStrings.pv;
   pv.testValue = "All";
-  pv.questionsOrder = { testValue: "Question" };
-  expect(editorLocalization.getPropertyValueInEditor("questionsOrder", "testValue")).toEqual("Question");
+  pv.questionOrder = { testValue: "Question" };
+  expect(editorLocalization.getPropertyValueInEditor("questionOrder", "testValue")).toEqual("Question");
   expect(editorLocalization.getPropertyValueInEditor("noQuestionOrder", "testValue")).toEqual("All");
 });
 test("getProperty function breaks on word automatically", () => {
@@ -128,7 +135,7 @@ test("change string to empty string", () => {
 test("getPropertyNameInEditor", () => {
   expect(editorLocalization.getPropertyNameInEditor("rating", "rateMin")).toEqual("Minimum rating value");
   expect(editorLocalization.getPropertyNameInEditor("question", "someGoodProperty")).toEqual("Some good property");
-  expect(editorLocalization.getPropertyNameInEditor("question", "title")).toEqual("Title");
+  expect(editorLocalization.getPropertyNameInEditor("question", "title")).toEqual("Question title");
 });
 
 test("getPropertyNameInEditor, go to p, if pe is emtpy", () => {
@@ -315,4 +322,46 @@ test("Support preset locale strings", () => {
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
 
   editorLocalization.defaultLocale = "";
+});
+test("All properties should be in English translation", () => {
+  const classes = ["survey", "matrixdropdown", "calculatedvalue", "choicesByUrl", "multipletextitem"];
+  const addClasses = (baseClassName: string): void => {
+    classes.push(baseClassName);
+    Serializer.getChildrenClasses(baseClassName, true).forEach((qType) => {
+      if (["linkvalue", "color"].indexOf(qType.name) < 0) {
+        classes.push(qType.name);
+      }
+    });
+  };
+  addClasses("panelbase");
+  addClasses("question");
+  addClasses("expressionitem");
+  addClasses("itemvalue");
+  addClasses("trigger");
+  addClasses("surveyvalidator");
+  addClasses("masksettings");
+  const errors = new Array<any>();
+  const englishStrings = enStrings;
+  const checkPropertyDisplayName = (className: string, propertyName: string): void => {
+    if(!!englishStrings.p[propertyName]) return;
+    if(!!englishStrings.pe[propertyName]) return;
+    let cl: any = Serializer.findClass(className);
+    if(cl.parentName) {
+      if(!!cl.parentName && Serializer.findProperty(cl.parentName, propertyName)) return;
+    }
+    while(!!cl) {
+      const tClass = englishStrings.pe[cl.name];
+      if(tClass && !!tClass[propertyName]) return;
+      cl = !!cl.parentName ? Serializer.findClass(cl.parentName) : undefined;
+    }
+    errors.push({ className: className, propertyName: propertyName });
+  };
+  classes.forEach((className) => {
+    Serializer.getProperties(className).forEach((prop) => {
+      if(prop.visible !== false) {
+        checkPropertyDisplayName(className, prop.name);
+      }
+    });
+  });
+  expect(errors).toHaveLength(0);
 });

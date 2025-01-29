@@ -1,36 +1,35 @@
+@use "../variables" as *;
+
 .svc-action-button {
+  @include ctrDefaultBoldFont;
   display: inline-block;
 
-  padding: calcSize(0.5) calcSize(2);
+  padding-top: var(--ctr-actionbar-button-padding-top-medium-text, var(--sjs-spacing-x05));
+  padding-inline-end: var(--ctr-actionbar-button-padding-right-medium-text, var(--sjs-spacing-x2));
+  padding-bottom: var(--ctr-actionbar-button-padding-bottom-medium-text, var(--sjs-spacing-x05)); 
+  padding-inline-start: var(--ctr-actionbar-button-padding-left-medium-text, var(--sjs-spacing-x2));
+
   box-sizing: border-box;
   border-radius: calcSize(12.5);
 
-  color: var(--ctr-survey-action-button-text-color-positive, $primary);
-
-  font-weight: 600;
-  font-size: calcSize(2);
-  line-height: calcSize(3);
+  color: var(--ctr-survey-action-button-text-color-positive, var(--sjs-primary-background-500, #19b394ff));
 
   border: calcSize(0.25) solid transparent;
 
-  .svc-text {
-    color: var(--ctr-survey-action-button-text-color-positive, $primary);
-  }
-
   &:focus,
   &:hover {
-    background-color: var(--ctr-survey-action-button-background-color-hovered-positive, $primary-light);
+    background-color: var(--ctr-survey-action-button-background-color-hovered-positive, var(--sjs-primary-background-10, #19b3941a));
     outline: none;
   }
 }
 
 .svc-action-button--selected {
-  border-color: var(--ctr-survey-action-button-text-color-positive, $primary);
+  border-color: var(--ctr-survey-action-button-text-color-positive, var(--sjs-primary-background-500, #19b394ff));
 }
 
 .svc-action-button--disabled {
   opacity: var(--ctr-survey-action-button-opacity-disabled, 0.25);
-  color: var(--ctr-survey-action-button-text-color-disabled, $foreground);
+  color: var(--ctr-survey-action-button-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
 }
 
 .svc-action-button--pressed {}

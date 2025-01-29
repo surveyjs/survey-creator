@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="model"
     class="svc-question__adorner"
     :class="model.rootCss()"
     ref="root"
@@ -9,6 +10,16 @@
     :data-sv-drop-target-survey-element="model.element.name || null"
     data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
   >
+    <div v-if="model.showHiddenTitle" :class="model.cssCollapsedHiddenHeader">
+      <SvComponent
+          v-if="!!element.hasTitle"
+          :is="'survey-element-title'"
+          :element="element"
+      />
+      <div v-else :class="model.cssCollapsedHiddenTitle">
+        <span class="svc-fake-title">{{ element.name }}</span>
+      </div>
+    </div>
     <div
       v-on:click="
         (e) => {
@@ -20,35 +31,45 @@
       v-key2click="{ disableTabStop: true }"
     >
       <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--left"
+      ></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--right"
+      ></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--top"
+      ></div>
+      <div
+        class="svc-question__drop-indicator svc-question__drop-indicator--bottom"
+      ></div>
+      <div
         v-if="model.allowDragging"
         class="svc-question__drag-area"
         v-on:pointerdown="(e) => model.onPointerDown(e)"
       >
-        <sv-svg-icon
+        <SvComponent
+          :is="'sv-svg-icon'"
           class="svc-question__drag-element"
           v-bind="{
             css: 'svc-question__drag-element',
             iconName: 'icon-drag-area-indicator_24x16',
-            size: 24,
+            size: 'auto',
           }"
-        ></sv-svg-icon>
+        ></SvComponent>
         <div class="svc-question__top-actions">
-          <sv-action-bar
+          <SvComponent
+            :is="'sv-action-bar'"
             :model="model.topActionContainer"
             :handleClick="false"
-          ></sv-action-bar>
+          ></SvComponent>
         </div>
       </div>
-      <div v-if="!element.hasTitle" :class="model.cssCollapsedHiddenHeader">
-        <div :class="model.cssCollapsedHiddenTitle">
-          <survey-string :locString="element.locTitle"/>
-        </div>
-      </div>
-
-      <sv-template-renderer
+      <template v-if="model.needToRenderContent">
+      <SvComponent
+        :is="'sv-template-renderer'"
         :componentName="componentName"
         :componentData="componentData"
-      ></sv-template-renderer>
+      ></SvComponent>
       <div
         v-if="model.isEmptyElement && !showPlaceholderComponent"
         class="svc-panel__placeholder_frame-wrapper"
@@ -59,67 +80,78 @@
           </div>
         </div>
       </div>
-      <component
+      <SvComponent
         v-if="model.isEmptyElement && showPlaceholderComponent"
         :is="placeholderComponent"
-        v-bind="placeholderComponentData"
-      ></component>
-      <!-- ko if: koIsEmptyElement() && !!$data.placeholderComponentData -->
-      <!-- ko let: { question: placeholderComponentData.data }  -->
-      <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: placeholderComponentData } } -->
-      <!-- /ko -->
-      <!-- /ko -->
-      <!-- /ko -->
-
-      <!-- ko if: adornerComponent -->
-      <!-- ko component: { name: adornerComponent, params: { model: $data } } -->
-      <!-- /ko -->
-      <!-- /ko -->
-      <component
+        v-bind="
+          getPlaceholderComponentData && getPlaceholderComponentData(model)
+        "
+      ></SvComponent>
+      <SvComponent
         v-if="adornerComponent"
         :is="adornerComponent"
         :model="model"
         :element="element"
       />
-      <svc-question-banner
+      <SvComponent
+        :is="'svc-question-banner'"
         v-if="model.isBannerShowing"
         :model="questionBannerParams"
-      ></svc-question-banner>
+      ></SvComponent>
       <div
         class="svc-question__content-actions"
-        v-on:focusin="
-          (e) => {
-            model.select(model, e);
-            e.stopPropagation();
-          }
-        "
+        v-on:focusin="onFocusIn"
       >
-        <sv-action-bar
+        <SvComponent
+          :is="'sv-action-bar'"
           :model="model.actionContainer"
           :handleClick="false"
-        ></sv-action-bar>
+        ></SvComponent>
       </div>
-    </div>
+    </template>
+  </div>
   </div>
 </template>
 <script lang="ts" setup>
-import type { QuestionAdornerViewModel } from "survey-creator-core";
-import { computed, ref } from "vue";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
+import { QuestionAdornerViewModel } from "survey-creator-core";
+import { computed, onMounted, onUpdated, ref } from "vue";
+import { useCreatorModel } from "@/creator-model";
 const props = defineProps<{
-  model: QuestionAdornerViewModel;
+  createModel: () => QuestionAdornerViewModel;
   element: any;
   adornerComponent?: string;
   showPlaceholderComponent?: boolean;
   placeholderComponent?: string;
-  placeholderComponentData?: any;
+  getPlaceholderComponentData?: (adorner: QuestionAdornerViewModel) => any;
   componentName: string;
   componentData: any;
 }>();
 const root = ref();
-defineExpose({
-  questionRoot: root,
-});
-const questionBannerParams = computed(() =>
-  props.model.isBannerShowing ? props.model.createBannerParams() : null
+
+const model = useCreatorModel(
+  () => props.createModel(),
+  [() => props.componentName, () => props.componentData],
+  (value) => {
+    value.dispose();
+  }
 );
+const questionBannerParams = computed(() =>
+  model.value.isBannerShowing ? model.value.createBannerParams() : null
+);
+onUpdated(() => {
+  if (root.value && model.value) {
+    model.value.rootElement = root.value;
+  }
+});
+onMounted(() => {
+  if (root.value && model.value) {
+    model.value.rootElement = root.value;
+  }
+});
+const onFocusIn = (e: any) => {
+  model.value.select(model.value, e);
+  e.stopPropagation();
+}
 </script>

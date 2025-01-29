@@ -1,11 +1,15 @@
-import { SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue, PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel, QuestionMatrixDropdownModelBase } from "survey-core";
+import {
+  SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue,
+  PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel
+} from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
-import { assignDefaultV2Classes, wrapTextByCurlyBraces } from "../utils/utils";
+import { assignDefaultClasses, wrapTextByCurlyBraces } from "../utils/creator-utils";
 import { logicCss } from "../components/tabs/logic-theme";
 import { getLogicString } from "../components/tabs/logic-types";
+import { CreatorBase } from "../creator-base";
 
 export class ConditionEditorItem {
   public conjunction: string = "and";
@@ -210,7 +214,7 @@ export class ConditionEditorItemsBuilder {
 
 function questionValueVisibleIf(params: any): boolean {
   if (params.length !== 2) return false;
-  if (!params[0] || !params[1]) return false;
+  if (Helpers.isValueEmpty(params[0]) || !params[1]) return false;
   return params[1] !== "empty" && params[1] !== "notempty";
 }
 
@@ -316,7 +320,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   protected updatePlaceholderVisibileIf() {
     if (!!this.panel) {
       let expression = "";
-      if (this.isModal) {
+      //todo remove placeholder to V2 version
+      if (this.isModal && !(this.options as CreatorBase)["animationEnabled"]) {
         expression = "{panel.questionName} empty and {panelIndex} == 0";
       }
       this.panel.template.getQuestionByName("placeholder").visibleIf = expression;
@@ -329,8 +334,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
           type: "paneldynamic",
           titleLocation: "hidden",
           name: "panel",
-          panelRemoveButtonLocation: "right",
-          panelAddText: editorLocalization.getString("pe.addCondition"),
+          removePanelButtonLocation: "right",
+          addPanelText: editorLocalization.getString("pe.addCondition"),
           minPanelCount: 1,
           maxPanelCount: 1,
           startWithNewLine: false,
@@ -514,22 +519,45 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
   }
   private isSettingPanelValues = false;
+  private getIsOperatorEnabled(qName: string, qType: string, op: string, condQuestion: Question, isContainer: boolean): boolean {
+    if (isContainer) return op === "empty" || op === "notempty";
+    let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[op]);
+    return !!condQuestion ? this.options.isConditionOperatorEnabled(qName, condQuestion, op, isOperatorEnabled) : isOperatorEnabled;
+  }
+  private isContainerQuestion(questionName: string): boolean {
+    if (!settings.logic.includeComplexQuestions || !questionName) return false;
+    for (let key in this.addConditionQuestionsHash) {
+      if (key.indexOf(questionName + ".") === 0 || key.indexOf(questionName + "[") === 0) return true;
+    }
+    return false;
+  }
   private setupConditionOperator(item: ConditionEditorItem, panel: PanelModel) {
     const questionOperator = <QuestionDropdownModel>panel.getQuestionByName("operator");
     questionOperator.choices = this.getOperators();
     questionOperator.value = item.operator;
     questionOperator.onOpened.add((_, opt) => {
-      const questionName = panel.getQuestionByName("questionName").value;
-      const json = this.getQuestionConditionJson(questionName);
-      const qType = !!json ? json.type : null;
-      const condQuestion = this.getConditionQuestion(questionName);
-      opt.choices.forEach((choice, index) => {
-        let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
-        isOperatorEnabled = this.options.isConditionOperatorEnabled(questionName, condQuestion, choice.value, isOperatorEnabled);
-        choice.setIsEnabled(isOperatorEnabled);
-        choice.setIsVisible(isOperatorEnabled);
-      });
+      this.updateConditionChoices(panel, opt.choices);
     });
+  }
+  private updateConditionChoices(panel: PanelModel, choices: Array<ItemValue>, questionOperator?: Question): void {
+    let isCurrentOperatorEnabled = true;
+    const op = questionOperator?.value;
+    const questionName = panel.getQuestionByName("questionName").value;
+    const json = this.getQuestionConditionJson(questionName);
+    const qType = !!json ? json.type : null;
+    const isContainer = this.isContainerQuestion(questionName);
+    const condQuestion = this.getConditionQuestion(questionName);
+    choices.forEach((choice) => {
+      const isOperatorEnabled = this.getIsOperatorEnabled(questionName, qType, choice.value, condQuestion, isContainer);
+      choice.setIsEnabled(isOperatorEnabled);
+      choice.setIsVisible(isOperatorEnabled);
+      if (!!questionOperator && choice.value == op) {
+        isCurrentOperatorEnabled = isOperatorEnabled;
+      }
+    });
+    if (!isCurrentOperatorEnabled) {
+      questionOperator.value = this.getFirstEnabledOperator(choices);
+    }
   }
   private setupConditionQuestionName(item: ConditionEditorItem, panel: PanelModel) {
     const panelQuestionName = <QuestionDropdownModel>panel.getQuestionByName("questionName");
@@ -643,6 +671,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     name = name.substring(0, indexInfo.index);
     return <Question>this.survey.getQuestionByValueName(name);
   }
+  private getConditionQuestionText(question: Question, name: string): string {
+    return this.options.getObjectDisplayName(question, "condition-editor", "condition", name);
+  }
   private createAllConditionQuestions(): Array<ItemValue> {
     if (!this.survey) return [];
     const res = [];
@@ -654,6 +685,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         const question = questions[i];
         if (contextObject == question) continue;
         const context = contextObject ? contextObject : (!this.context || this.context === question);
+        if (settings.logic.includeComplexQuestions && question.isContainer) {
+          res.push({ question: question, name: question.name, text: question.title });
+        }
         question.addConditionObjectsByContext(res, context);
       }
     }
@@ -665,7 +699,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     for (let i = 0; i < res.length; i++) {
       res[i].value = res[i].name;
       let question = !!res[i].question ? res[i].question : res[i];
-      if (!this.options.showTitlesInExpressions) {
+      if (!(this.options.useElementTitles || this.options.showTitlesInExpressions)) {
         let name = res[i].name;
         let valueName = question.valueName;
         if (!!valueName && name.indexOf(valueName) == 0) {
@@ -673,7 +707,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         }
         const unwrappedValueText = "-unwrapped";
         name = name.replace(unwrappedValueText, "");
-        res[i].text = this.options.getObjectDisplayName(question, "condition-editor", "condition", name);
+        res[i].text = this.getConditionQuestionText(question, name);
       }
       this.addConditionQuestionsHash[res[i].name] = question;
     }
@@ -852,26 +886,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
   }
   private updateOperatorEnables(panel: PanelModel) {
-    const questionName = panel.getQuestionByName("questionName");
-    if (!questionName) return;
-    const json = this.getQuestionConditionJson(questionName.value);
-    const qType = !!json ? json.type : null;
     const questionOperator = <QuestionDropdownModel>panel.getQuestionByName("operator");
     if (!questionOperator) return;
-    const choices = questionOperator.choices;
-    let isCurrentOperatorEnabled = true;
-    const op = questionOperator.value;
-    for (let i = 0; i < choices.length; i++) {
-      const isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choices[i].value]);
-      choices[i].setIsEnabled(isOperatorEnabled);
-      choices[i].setIsVisible(isOperatorEnabled);
-      if (choices[i].value == op) {
-        isCurrentOperatorEnabled = choices[i].isEnabled;
-      }
-    }
-    if (!isCurrentOperatorEnabled) {
-      questionOperator.value = this.getFirstEnabledOperator(choices);
-    }
+    this.updateConditionChoices(panel, questionOperator.choices, questionOperator);
   }
   private updateQuestionsWidth(panel: PanelModel) {
     const valueQuestion = panel.getQuestionByName("questionValue");
@@ -938,8 +955,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private onUpdateQuestionCssClasses(options: any) {
     const cssClasses = options.cssClasses;
     const question = options.question;
-    cssClasses.answered = "svc-logic-question--answered";
-
+    if (question.getType() !== "paneldynamic") {
+      cssClasses.answered = "svc-logic-question--answered";
+    }
+    if (question.name === "textEditor") {
+      cssClasses.root += " svc-logic-question-text-editor";
+    }
     if (question.name === "conjunction") {
       question.allowRootStyle = false;
       cssClasses.control += " svc-logic-operator svc-logic-operator--conjunction ";
@@ -959,7 +980,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       cssClasses.mainRoot += " svc-logic-condition-remove-question";
     }
     if (question.name === "questionValue" || question.isContentElement) {
-      assignDefaultV2Classes(cssClasses, question.getType());
+      assignDefaultClasses(cssClasses, question.getType());
       cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
       cssClasses.error.root = "svc-logic-operator__error";
     }
@@ -980,13 +1001,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         panel.getQuestionByName("removeAction").visible = options.value.length !== 1;
       });
     }
-    this.setTitle();
+    this.title = this.isReady ? this.text : editorLocalization.getString("pe.ruleIsNotSet");
   }
-  private setTitle() {
-    const text = this.isReady ? this.text : "";
-    this.title = this.options.onConditionGetTitleCallback(text, text || editorLocalization.getString("pe.ruleIsNotSet"));
-  }
-
   private showTextEditor(expression: string) {
     this.panel.visible = false;
     this.textEditor.value = expression;

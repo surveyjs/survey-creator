@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export const roStrings = {
   // survey templates
@@ -22,7 +22,7 @@ export const roStrings = {
     theme: "Teme",
     translation: "Traduceri",
     designer: "Designer",
-    editor: "Editor JSON",
+    json: "Editor JSON",
     logic: "Logică"
   },
   // Question types
@@ -69,6 +69,7 @@ export const roStrings = {
     surveySettingsTooltip: "Setările chestionarului",
     themeSettings: "Setările temei",
     themeSettingsTooltip: "Setările temei",
+    creatorSettingTitle: "Setările creatorului",
     showPanel: "Afișează panoul",
     hidePanel: "Ascunde panoul",
     prevSelected: "Selectează precedentul",
@@ -106,6 +107,12 @@ export const roStrings = {
     redo: "Refă",
     undoTooltip: "Anulează ultima modificare",
     redoTooltip: "Refă modificarea",
+    expandAllTooltip: "Extindeți tot",
+    collapseAllTooltip: "Restrângeți tot",
+    zoomInTooltip: "Măriți",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Micșorare",
+    lockQuestionsTooltip: "Blocați starea de extindere/restrângere pentru întrebări",
     showMoreChoices: "Afișează mai multe",
     showLessChoices: "Afișează mai puține",
     copy: "Copiază",
@@ -123,6 +130,8 @@ export const roStrings = {
     toolboxNoResultsFound: "Nu au fost găsite rezultate",
     propertyGridFilteredTextPlaceholder: "Tastați pentru a căuta...",
     propertyGridNoResultsFound: "Nu au fost găsite rezultate",
+    propertyGridPlaceholderTitle: "Începeți să configurați formularul",
+    propertyGridPlaceholderDescription: "Faceți clic pe orice pictogramă de categorie pentru a explora setările sondajului. Setările suplimentare vor deveni disponibile odată ce adăugați un element de chestionar la suprafața de proiectare.",
     correctJSON: "Vă rugăm să corectați JSON.",
     surveyResults: "Rezultatele chestionarului ",
     surveyResultsTable: "Ca tabel",
@@ -154,6 +163,7 @@ export const roStrings = {
     translationPlaceHolder: "Traducere...",
     translationSource: "Sursă: ",
     translationTarget: "Țintă: ",
+    translationYouTubeNotSupported: "Linkurile YouTube nu sunt acceptate.",
     themeExportButton: "Exportă",
     themeImportButton: "Importă",
     surveyJsonExportButton: "Exportă",
@@ -177,6 +187,18 @@ export const roStrings = {
     pagePlaceHolder: "Pagina este goală. Trageți un element din cutia de instrumente sau faceți clic pe butonul de mai jos.",
     imagePlaceHolder: "Trageți și lăsați o imagine aici sau faceți clic pe butonul de mai jos și alegeți o imagine de încărcat",
     surveyPlaceHolderMobile: "Faceți clic pe butonul \"Adaugă întrebare\" de mai jos pentru a începe crearea formularului.",
+    surveyPlaceholderTitle: "Formularul tău este gol",
+    surveyPlaceholderTitleMobile: "Formularul tău este gol",
+    surveyPlaceholderDescription: "Trageți un element din caseta de instrumente sau faceți clic pe butonul de mai jos.",
+    surveyPlaceholderDescriptionMobile: "Trageți un element din caseta de instrumente sau faceți clic pe butonul de mai jos.",
+    previewPlaceholderTitle: "Fără previzualizare",
+    previewPlaceholderTitleMobile: "Fără previzualizare",
+    previewPlaceholderDescription: "Sondajul nu conține elemente vizibile.",
+    previewPlaceholderDescriptionMobile: "Sondajul nu conține elemente vizibile.",
+    translationsPlaceholderTitle: "Fără șiruri de tradus",
+    translationsPlaceholderTitleMobile: "Fără șiruri de tradus",
+    translationsPlaceholderDescription: "Adăugați elemente la formular sau modificați filtrul șiruri din bara de instrumente.",
+    translationsPlaceholderDescriptionMobile: "Adăugați elemente la formular sau modificați filtrul șiruri din bara de instrumente.",
     pagePlaceHolderMobile: "Faceți clic pe butonul \"Adaugă întrebare\" de mai jos pentru a adăuga un nou element pe pagină.",
     panelPlaceHolderMobile: "Faceți clic pe butonul \"Adaugă întrebare\" de mai jos pentru a adăuga un nou element în panou.",
     imagePlaceHolderMobile: "Faceți clic pe butonul de mai jos și alegeți o imagine de încărcat",
@@ -189,6 +211,10 @@ export const roStrings = {
     lg: {
       addNewItem: "Adăugați regulă nouă",
       empty_tab: "Creați o regulă pentru a personaliza fluxul chestionarului.",
+      logicPlaceholderTitle: "Fără reguli logice",
+      logicPlaceholderTitleMobile: "Fără reguli logice",
+      logicPlaceholderDescription: "Creați o regulă pentru a personaliza fluxul sondajului.",
+      logicPlaceholderDescriptionMobile: "Creați o regulă pentru a personaliza fluxul sondajului.",
       page_visibilityName: "Afișează/ascunde pagina",
       page_enableName: "Activează/dezactivează pagina",
       page_requireName: "Fă pagina obligatorie",
@@ -273,14 +299,14 @@ export const roStrings = {
       description: "Descrierea panoului",
       visibleIf: "Fă panoul vizibil dacă",
       requiredIf: "Fă panoul obligatoriu dacă",
-      questionsOrder: "Ordinea întrebărilor în panou",
+      questionOrder: "Ordinea întrebărilor în panou",
       page: "Mută panoul la pagina",
       startWithNewLine: "Afișează panoul pe un rând nou",
       state: "Starea de colaps a panoului",
       width: "Lățimea panoului inline",
       minWidth: "Lățimea minimă a panoului",
       maxWidth: "Lățimea maximă a panoului",
-      showNumber: "Numerotează panourile"
+      showNumber: "Numerotați acest panou"
     },
     paneldynamic: {
       name: "Numele panoului",
@@ -301,12 +327,13 @@ export const roStrings = {
       templateTabTitle: "Model de titlu a filei",
       tabTitlePlaceholder: "Locaș pentru titlul filei",
       templateVisibleIf: "Fă un panou individual vizibil dacă",
-      hideNumber: "Ascunde numărul panoului",
+      showNumber: "Numerotați panoul",
       titleLocation: "Alinierea titlului panoului",
       descriptionLocation: "Alinierea descrierii panoului",
-      templateTitleLocation: "Alinierea titlului întrebării",
+      templateQuestionTitleLocation: "Alinierea titlului întrebării",
       templateErrorLocation: "Alinierea mesajului de eroare",
       newPanelPosition: "Locația noului panou",
+      showRangeInProgress: "Afișați bara de progres",
       keyName: "Prevenirea răspunsurilor duplicate în următoarea întrebare"
     },
     question: {
@@ -317,7 +344,7 @@ export const roStrings = {
       requiredIf: "Fă întrebarea obligatorie dacă",
       page: "Mută întrebarea la pagina",
       state: "Starea de colaps a casetei întrebării",
-      hideNumber: "Ascunde numărul întrebării",
+      showNumber: "Numerotați această întrebare",
       titleLocation: "Alinierea titlului întrebării",
       descriptionLocation: "Alinierea descrierii întrebării",
       errorLocation: "Alinierea mesajului de eroare",
@@ -359,7 +386,8 @@ export const roStrings = {
     // survey templates
     survey: {
       title: "Titlul chestionarului",
-      description: "Descrierea chestionarului"
+      description: "Descrierea chestionarului",
+      readOnly: "Faceți chestionarul doar în citire"
     },
     page: {
       name: "Numele paginii",
@@ -367,8 +395,8 @@ export const roStrings = {
       description: "Descrierea paginii",
       visibleIf: "Fă pagina vizibilă dacă",
       requiredIf: "Fă pagina obligatorie dacă",
-      maxTimeToFinish: "Limită de timp pentru finalizarea paginii",
-      questionsOrder: "Ordinea întrebărilor pe pagină"
+      timeLimit: "Limită de timp pentru finalizarea paginii",
+      questionOrder: "Ordinea întrebărilor pe pagină"
     },
     matrixdropdowncolumn: {
       name: "Numele coloanei",
@@ -482,6 +510,7 @@ export const roStrings = {
     "listIsEmpty@calculatedValues": "Nu aveți încă nicio variabilă personalizată",
     "listIsEmpty@triggers": "Nu aveți încă niciun declanșator",
     "listIsEmpty@navigateToUrlOnCondition": "Nu aveți încă niciun link",
+    "listIsEmpty@pages": "Nu aveți încă nicio pagină",
     "addNew@choices": "Adăugați o alegere nouă",
     "addNew@columns": "Adăugați o coloană nouă",
     "addNew@rows": "Adăugați un rând nou",
@@ -489,6 +518,7 @@ export const roStrings = {
     "addNew@calculatedValues": "Adăugați o variabilă nouă",
     "addNew@triggers": "Adăugați un declanșator nou",
     "addNew@navigateToUrlOnCondition": "Adăugați un URL nou",
+    "addNew@pages": "Adaugă o pagină nouă",
     expressionIsEmpty: "Expresia este goală",
     value: "Valoare",
     text: "Text",
@@ -532,7 +562,7 @@ export const roStrings = {
     isRequired: "Obligatoriu",
     markRequired: "Marchează ca obligatoriu",
     removeRequiredMark: "Elimină marcajul obligatoriu",
-    isAllRowRequired: "Necesită un răspuns în fiecare rând",
+    eachRowRequired: "Necesită un răspuns în fiecare rând",
     eachRowUnique: "Prevenirea răspunsurilor duplicate în rânduri",
     requiredErrorText: "Mesaj de eroare pentru întrebările obligatorii",
     startWithNewLine: "Afișează întrebarea pe un rând nou",
@@ -544,7 +574,7 @@ export const roStrings = {
     maxSize: "Dimensiunea maximă a fișierului (în octeți)",
     rowCount: "Număr de rânduri",
     columnLayout: "Aspect coloane",
-    addRowLocation: "Alinierea butonului „Adaugă rând”",
+    addRowButtonLocation: "Alinierea butonului „Adaugă rând”",
     transposeData: "Transpune rândurile în coloane",
     addRowText: "Textul butonului „Adaugă rând”",
     removeRowText: "Textul butonului „Elimină rând”",
@@ -580,10 +610,9 @@ export const roStrings = {
     simulator: "Selectați tipul de dispozitiv",
     landscapeOrientation: "Comutați la orientarea peisaj",
     portraitOrientation: "Comutați la orientarea portret",
-    mode: "Modul de afișare a chestionarului",
     clearInvisibleValues: "Ștergeți valorile întrebărilor ascunse",
     cookieName: "Limitează la un singur răspuns",
-    sendResultOnPageNext: "Auto-salvați progresul chestionarului la schimbarea paginii",
+    partialSendEnabled: "Auto-salvați progresul chestionarului la schimbarea paginii",
     storeOthersAsComment: "Salvați valoarea opțiunii „Altul” ca proprietate separată",
     showPageTitles: "Afișați titlurile paginilor",
     showPageNumbers: "Afișați numerele paginilor",
@@ -594,35 +623,38 @@ export const roStrings = {
     editText: "Textul butonului „Editează răspunsul”",
     startSurveyText: "Textul butonului „Începe chestionarul”",
     showNavigationButtons: "Afișați/ascundeți butoanele de navigare",
+    navigationButtonsLocation: "Alinierea butoanelor de navigare",
     showPrevButton: "Afișați butonul „Pagina anterioară”",
-    firstPageIsStarted: "Prima pagină este o pagină de început",
-    showCompletedPage: "Afișați pagina de „Mulțumire”",
-    goNextPageAutomatic: "Trecerea automată la pagina următoare",
-    allowCompleteSurveyAutomatic: "Finalizați chestionarul automat",
+    firstPageIsStartPage: "Prima pagină este o pagină de început",
+    showCompletePage: "Afișați pagina de „Mulțumire”",
+    autoAdvanceEnabled: "Trecerea automată la pagina următoare",
+    autoAdvanceAllowComplete: "Finalizați chestionarul automat",
     showProgressBar: "Alinierea barei de progres",
+    progressBarLocation: "Alinierea barei de progres",
     questionTitleLocation: "Alinierea titlului întrebării",
     questionTitleWidth: "Lățimea titlului întrebării",
-    requiredText: "Simbol(uri) obligatoriu(e)",
+    requiredMark: "Simbol(uri) obligatoriu(e)",
     questionTitleTemplate: "Șablon titlu întrebare, implicit este: '{no}. {require} {title}'",
     questionErrorLocation: "Alinierea mesajului de eroare",
-    focusFirstQuestionAutomatic: "Focalizați pe prima întrebare la o pagină nouă",
-    questionsOrder: "Ordinea întrebărilor",
-    maxTimeToFinish: "Limită de timp pentru finalizarea chestionarului",
-    maxTimeToFinishPage: "Limită de timp pentru finalizarea unei pagini",
-    showTimerPanel: "Alinierea timerului",
-    showTimerPanelMode: "Modul timerului",
+    autoFocusFirstQuestion: "Focalizați pe prima întrebare la o pagină nouă",
+    questionOrder: "Ordinea întrebărilor",
+    timeLimit: "Limită de timp pentru finalizarea chestionarului",
+    timeLimitPerPage: "Limită de timp pentru finalizarea unei pagini",
+    showTimer: "Utilizarea unui cronometru",
+    timerLocation: "Alinierea timerului",
+    timerInfoMode: "Modul timerului",
     renderMode: "Modul de afișare a panoului",
     allowAddPanel: "Permite adăugarea panoului",
     allowRemovePanel: "Permite eliminarea panoului",
-    panelAddText: "Textul butonului „Adaugă panou”",
-    panelRemoveText: "Textul butonului „Elimină panou”",
+    addPanelText: "Textul butonului „Adaugă panou”",
+    removePanelText: "Textul butonului „Elimină panou”",
     isSinglePage: "Afișează toate elementele pe o singură pagină",
     html: "Marcaj HTML",
     setValue: "Răspuns",
     dataFormat: "Format de stocare",
     allowAddRows: "Permite adăugarea rândului",
     allowRemoveRows: "Permite eliminarea rândului",
-    allowRowsDragAndDrop: "Permite reordonarea rândurilor",
+    allowRowReorder: "Permite reordonarea rândurilor",
     responsiveImageSizeHelp: "Nu se aplică dacă specificați lățimea sau înălțimea exactă a zonei de afișare.",
     minImageWidth: "Lățimea minimă a zonei de afișare",
     maxImageWidth: "Lățimea maximă a zonei de afișare",
@@ -630,6 +662,7 @@ export const roStrings = {
     maxImageHeight: "Înălțimea maximă a zonei de afișare",
     minValue: "Valoarea minimă",
     maxValue: "Valoarea maximă",
+    caseInsensitive: "Insensibil la majuscule și minuscule",
     minLength: "Lungimea minimă (în caractere)",
     allowDigits: "Permiteți cifre",
     minCount: "Numărul minim",
@@ -648,13 +681,13 @@ export const roStrings = {
     logo: "Logo-ul chestionarului",
     questionsOnPageMode: "Aspectul chestionarului",
     maxTextLength: "Restricționează lungimea răspunsului",
-    maxOthersLength: "Restricționează lungimea comentariului",
+    maxCommentLength: "Restricționează lungimea comentariului",
     commentAreaRows: "Înălțimea zonei de comentarii (în linii)",
     autoGrowComment: "Auto-extindere a zonelor de text",
     allowResizeComment: "Permite utilizatorilor să redimensioneze zonele de text",
     textUpdateMode: "Actualizează valorile câmpurilor de intrare",
     maskType: "Tip mască de intrare",
-    focusOnFirstError: "Focalizați pe primul răspuns invalid",
+    autoFocusFirstError: "Focalizați pe primul răspuns invalid",
     checkErrorsMode: "Rulați validarea",
     validateVisitedEmptyFields: "Validarea câmpurilor goale pentru focalizarea pierdută",
     navigateToUrl: "Redirecționare către un link extern după trimitere",
@@ -688,10 +721,9 @@ export const roStrings = {
     minPanelCount: "Număr minim de panouri",
     maxPanelCount: "Număr maxim de panouri",
     panelsState: "Starea de colaps a panoului intern",
-    panelPrevText: "Textul butonului „Panoul anterior”",
-    panelNextText: "Textul butonului „Panoul următor”",
-    showRangeInProgress: "Afișați bara de progres",
-    panelRemoveButtonLocation: "Alinierea butonului „Elimină panou”",
+    prevPanelText: "Textul butonului „Panoul anterior”",
+    nextPanelText: "Textul butonului „Panoul următor”",
+    removePanelButtonLocation: "Alinierea butonului „Elimină panou”",
     hideIfRowsEmpty: "Ascunde întrebarea dacă nu are rânduri",
     hideColumnsIfEmpty: "Ascunde coloanele dacă nu sunt rânduri",
     rateValues: "Valori personalizate de evaluare",
@@ -713,21 +745,22 @@ export const roStrings = {
     keyDuplicationError: "Mesaj de eroare pentru răspunsuri duplicate",
     minSelectedChoices: "Alegere minimă pentru selectare",
     maxSelectedChoices: "Alegere maximă pentru selectare",
-    showClearButton: "Afișează butonul de ștergere",
     logoWidth: "Lățimea logo-ului",
     logoHeight: "Înălțimea logo-ului",
     readOnly: "Doar citire",
     enableIf: "Dezactivează modul doar citire dacă",
-    emptyRowsText: "Mesaj „Nu sunt rânduri”",
+    noRowsText: "Mesaj „Nu sunt rânduri”",
     separateSpecialChoices: "Separă alegerile speciale",
     choicesFromQuestion: "Copiază alegerile din următoarea întrebare",
     choicesFromQuestionMode: "Care opțiuni de alegere să fie copiate",
+    choiceValuesFromQuestion: "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca ID-uri de alegere",
+    choiceTextsFromQuestion: "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca texte de alegere",
     progressBarShowPageTitles: "Afișează titlurile paginilor în bara de progres",
     progressBarShowPageNumbers: "Afișează numerele paginilor în bara de progres",
     showCommentArea: "Adaugă o casetă de comentarii",
     commentPlaceholder: "Text locaș pentru caseta de comentarii",
     displayRateDescriptionsAsExtremeItems: "Afișați etichetele ca valori extreme",
-    rowsOrder: "Ordinea rândurilor",
+    rowOrder: "Ordinea rândurilor",
     columnsLayout: "Aspect coloane",
     columnColCount: "Număr coloane imbricate",
     correctAnswer: "Răspuns corect",
@@ -756,6 +789,11 @@ export const roStrings = {
       top: "Deasupra",
       bottom: "Dedesubt"
     },
+    previewMode: "Modul de previzualizare",
+    gridLayoutEnabled: "Activarea aspectului grilei",
+    gridLayoutColumns: "Coloane de aspect grilă",
+    maskSettings: "Setările măștii",
+    detailErrorLocation: "Alinierea mesajelor de eroare de extindere a rândurilor",
     // Creator tabs
     tabs: {
       panel: {
@@ -803,6 +841,9 @@ export const roStrings = {
       header: "Antet",
       background: "Fundal",
       appearance: "Aspect",
+      accentColors: "Culori de accent",
+      surfaceBackground: "Fundal de suprafață",
+      scaling: "Scalare",
       others: "Altele"
     },
     editProperty: "Editează proprietatea '{0}'",
@@ -812,8 +853,7 @@ export const roStrings = {
     columnsEnableIf: "Fă coloanele vizibile dacă",
     rowsEnableIf: "Fă rândurile vizibile dacă",
     innerIndent: "Crește indentarea internă",
-    defaultValueFromLastRow: "Utilizează răspunsurile din ultimul rând ca implicite",
-    defaultValueFromLastPanel: "Utilizează răspunsurile din ultimul panou ca implicite",
+    copyDefaultValueFromLastEntry: "Utilizați răspunsurile de la ultima intrare ca implicit",
     enterNewValue: "Vă rugăm să introduceți o valoare.",
     noquestions: "Nu există întrebări în chestionar.",
     createtrigger: "Vă rugăm să creați un declanșator",
@@ -867,6 +907,7 @@ export const roStrings = {
       fontSize: "Dimensiunea fontului chestionarului",
       scale: "Factor de scalare chestionar",
       cornerRadius: "Raza colțului",
+      advancedMode: "Mod avansat",
       pageTitle: "Font titlu",
       pageDescription: "Font descriere",
       questionTitle: "Font titlu",
@@ -927,10 +968,11 @@ export const roStrings = {
     firstExpanded: "Primul panou este extins",
     off: "Ascunde numerele întrebărilor",
     list: "Listă",
+    carousel: "Carusel",
+    tab: "File",
     progressTop: "Navigator panou + bară de progres în partea de sus",
     progressBottom: "Navigator panou + bară de progres în partea de jos",
     progressTopBottom: "Navigator panou + bară de progres în partea de sus și de jos",
-    tab: "File",
     horizontal: "Orizontal",
     vertical: "Vertical",
     top: "Deasupra",
@@ -988,6 +1030,61 @@ export const roStrings = {
       url: "URL",
       week: "Săptămână"
     },
+    autocomplete: {
+      name: "Nume complet",
+      "honorific-prefix": "Prefix",
+      "given-name": "Prenume",
+      "additional-name": "Al doilea nume",
+      "family-name": "Nume de familie",
+      "honorific-suffix": "Sufix",
+      nickname: "Poreclă",
+      "organization-title": "Titlul postului",
+      username: "Nume de utilizator",
+      "new-password": "Parolă nouă",
+      "current-password": "Parolă curentă",
+      organization: "Numele organizației",
+      "street-address": "Adresa stradală completă",
+      "address-line1": "Linia de adresă 1",
+      "address-line2": "Linia de adresă 2",
+      "address-line3": "Linia de adresă 3",
+      "address-level4": "Adresa de nivel 4",
+      "address-level3": "Nivel 3 Adresă",
+      "address-level2": "Nivel 2 Adresă",
+      "address-level1": "Adresa de nivel 1",
+      country: "Codul țării",
+      "country-name": "Numele țării",
+      "postal-code": "Cod poștal",
+      "cc-name": "Numele titularului cardului",
+      "cc-given-name": "Prenumele titularului cardului",
+      "cc-additional-name": "Al doilea prenume al deținătorului cardului",
+      "cc-family-name": "Numele de familie al titularului cardului",
+      "cc-number": "Numărul cardului de credit",
+      "cc-exp": "Data de expirare",
+      "cc-exp-month": "Luna de expirare",
+      "cc-exp-year": "Anul de expirare",
+      "cc-csc": "Codul de securitate al cardului",
+      "cc-type": "Tip card de credit",
+      "transaction-currency": "Moneda tranzacției",
+      "transaction-amount": "Suma tranzacției",
+      language: "Limba preferată",
+      bday: "Aniversare",
+      "bday-day": "Ziua zilei de naștere",
+      "bday-month": "Luna zilei de naștere",
+      "bday-year": "Anul zilei de naștere",
+      sex: "Gen",
+      url: "Adresa URL a site-ului web",
+      photo: "Fotografie de profil",
+      tel: "Număr telefonic",
+      "tel-country-code": "Codul de țară pentru telefon",
+      "tel-national": "Număr de telefon național",
+      "tel-area-code": "Prefix",
+      "tel-local": "Număr de telefon local",
+      "tel-local-prefix": "Prefix telefon local",
+      "tel-local-suffix": "Sufixul telefonului local",
+      "tel-extension": "Extensie de telefon",
+      email: "Adresa de e-mail",
+      impp: "Protocol de mesagerie instantanee"
+    },
     maskType: {
       none: "Niciunul",
       pattern: "Model",
@@ -1014,6 +1111,8 @@ export const roStrings = {
     noPreview: "Fără previzualizare",
     showAllQuestions: "Afișați toate întrebările",
     showAnsweredQuestions: "Afișați doar întrebările la care s-a răspuns",
+    allQuestions: "Afișează toate întrebările",
+    answeredQuestions: "Afișați numai întrebările la care au răspuns",
     pages: "Pagini completate",
     questions: "Întrebări cu răspuns",
     requiredQuestions: "Întrebări obligatorii cu răspuns",
@@ -1029,13 +1128,10 @@ export const roStrings = {
     showNavigationButtons: {
       none: "Ascuns"
     },
-    showTimerPanel: {
-      none: "Ascuns"
+    timerInfoMode: {
+      combined: "Ambele"
     },
-    showTimerPanelMode: {
-      all: "Ambele"
-    },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "Pe baza aspectului matricei"
     },
     panelsState: {
@@ -1106,17 +1202,19 @@ export const roStrings = {
       percent: "Procent",
       date: "Dată"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "Original"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "Original"
     },
-    showProgressBar: {
-      off: "Ascuns",
-      topbottom: "Deasupra și dedesubt",
+    progressBarLocation: {
+      top: "Culme",
+      bottom: "Fund",
+      topbottom: "Sus și jos",
       aboveheader: "Deasupra antetului",
-      belowheader: "Sub antet"
+      belowheader: "Sub antet",
+      off: "Ascuns"
     },
     sum: "Sumă",
     count: "Numără",
@@ -1255,12 +1353,13 @@ export const roStrings = {
       questionTitleLocation: "Se aplică tuturor întrebărilor din acest panou. Dacă doriți să înlocuiți această setare, definiți reguli de aliniere a titlului pentru întrebările individuale. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
       questionTitleWidth: "Setează lățimea titlurilor întrebărilor atunci când sunt aliniate la stânga casetelor de întrebări. Acceptă valori CSS (px, %, in, pt etc.).",
       questionErrorLocation: "Setează locația unui mesaj de eroare în raport cu toate întrebările din panou. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar.",
-      questionsOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar.",
+      questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar.",
       page: "Repoziționează panoul la sfârșitul unei pagini selectate.",
       innerIndent: "Adaugă spațiu sau margine între conținutul panoului și marginea stângă a casetei panoului.",
       startWithNewLine: "Deselectați pentru a afișa panoul pe un rând cu întrebarea sau panoul anterior. Setarea nu se aplică dacă panoul este primul element din formular.",
       state: "Alegeți dintre: „Extins” - panoul este afișat complet și poate fi colapsat; „Colapsat” - panoul afișează doar titlul și descrierea și poate fi extins; „Blocat” - panoul este afișat complet și nu poate fi colapsat.",
-      width: "Setează lățimea panoului în proporție cu alte elemente ale chestionarului de pe același rând. Acceptă valori CSS (px, %, in, pt etc.)."
+      width: "Setează lățimea panoului în proporție cu alte elemente ale chestionarului de pe același rând. Acceptă valori CSS (px, %, in, pt etc.).",
+      showQuestionNumbers: "Atribuie numere întrebărilor imbricate în acest panou."
     },
     paneldynamic: {
       name: "Un ID al panoului care nu este vizibil pentru respondenți.",
@@ -1268,7 +1367,7 @@ export const roStrings = {
       visibleIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină vizibilitatea panoului.",
       enableIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care dezactivează modul doar citire pentru panou.",
       requiredIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
-      templateTitleLocation: "Se aplică tuturor întrebărilor din acest panou. Dacă doriți să înlocuiți această setare, definiți reguli de aliniere a titlului pentru întrebările individuale. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
+      templateQuestionTitleLocation: "Se aplică tuturor întrebărilor din acest panou. Dacă doriți să înlocuiți această setare, definiți reguli de aliniere a titlului pentru întrebările individuale. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
       templateErrorLocation: "Setează locația unui mesaj de eroare în raport cu o întrebare cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
       errorLocation: "Setează locația unui mesaj de eroare în raport cu toate întrebările din panou. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar.",
       page: "Repoziționează panoul la sfârșitul unei pagini selectate.",
@@ -1283,9 +1382,10 @@ export const roStrings = {
       titleLocation: "Această setare este moștenită automat de toate întrebările din acest panou. Dacă doriți să înlocuiți această setare, definiți reguli de aliniere a titlului pentru întrebările individuale. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
       descriptionLocation: "Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sub titlul panoului” implicit).",
       newPanelPosition: "Definește poziția unui panou nou adăugat. În mod implicit, panourile noi sunt adăugate la sfârșit. Selectați „Următor” pentru a introduce un nou panou după cel curent.",
-      defaultValueFromLastPanel: "Duplică răspunsurile din ultimul panou și le atribuie următorului panou dinamic adăugat.",
+      copyDefaultValueFromLastEntry: "Duplică răspunsurile din ultimul panou și le atribuie următorului panou dinamic adăugat.",
       keyName: "Faceți referire la un nume de întrebare pentru a solicita unui utilizator să furnizeze un răspuns unic pentru această întrebare în fiecare panou."
     },
+    copyDefaultValueFromLastEntry: "Duplică răspunsurile din ultimul rând și le atribuie următorului rând dinamic adăugat.",
     defaultValueExpression: "Această setare vă permite să atribuiți o valoare implicită a răspunsului pe baza unei expresii. Expresia poate include calcule de bază - `{q1_id} + {q2_id}`, expresii booleene, cum ar fi `{age} > 60`, și funcții: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. Valoarea determinată de această expresie servește ca valoare implicită inițială care poate fi suprascrisă de o intrare manuală a respondentului.",
     resetValueIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină când o intrare a respondentului este resetată la valoarea pe baza „Expresiei valorii implicite” sau „Expresiei de setare a valorii” sau la valoarea „Răspuns implicit” (dacă oricare este setată).",
     setValueIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină când să rulați „Expresia de setare a valorii” și să atribuiți dinamic valoarea rezultată ca răspuns.",
@@ -1339,7 +1439,8 @@ export const roStrings = {
     },
     // survey templates
     survey: {
-      mode: "Alegeți între: „Editabil” - permite respondenților să completeze chestionarul dvs.; „Doar citire” - dezactivează editarea formularului."
+      readOnly: "Selectați dacă doriți să împiedicați respondenții să completeze chestionarul.",
+      progressBarLocation: "Setează locația barei de progres. Valoarea \"Auto\" afișează bara de progres deasupra sau dedesubtul antetului sondajului."
     },
     matrixdropdowncolumn: {
       name: "Un ID al coloanei care nu este vizibil pentru respondenți.",
@@ -1348,27 +1449,29 @@ export const roStrings = {
       visibleIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină vizibilitatea coloanei.",
       enableIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care dezactivează modul doar citire pentru coloană.",
       requiredIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
-      showInMultipleColumns: "Când este selectat, creează o coloană individuală pentru fiecare opțiune de alegere."
+      showInMultipleColumns: "Când este selectat, creează o coloană individuală pentru fiecare opțiune de alegere.",
+      colCount: "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte."
     },
+    caseInsensitive: "Selectați dacă literele mari și mici din expresia regulată trebuie tratate ca echivalente.",
     widthMode: "Alegeți dintre: „Static” - setează o lățime fixă; „Responsive” - face ca chestionarul să ocupe întreaga lățime a ecranului; „Auto” - aplică una dintre cele două în funcție de tipurile de întrebări utilizate.",
     cookieName: "Atribuiți o valoare unică cookie-ului pentru chestionarul dvs. Cookie-ul va fi setat în browserul unui respondent la finalizarea chestionarului pentru a preveni trimiterea repetată a chestionarului.",
     logo: "Introduceți un link către o imagine (fără limită de dimensiune) sau faceți clic pe pictograma folder pentru a naviga un fișier de pe computerul dvs. (până la 64KB).",
     logoWidth: "Setează o lățime a logo-ului în unități CSS (px, %, in, pt etc.).",
     logoHeight: "Setează o înălțime a logo-ului în unități CSS (px, %, in, pt etc.).",
     logoFit: "Alegeți dintre: „Niciunul” - imaginea își menține dimensiunea originală; „Conține” - imaginea este redimensionată pentru a se potrivi păstrând aspectul său; „Acoperă” - imaginea umple întreaga casetă păstrând aspectul său; „Umple” - imaginea este întinsă pentru a umple caseta fără a păstra aspectul său.",
-    goNextPageAutomatic: "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent răspunde la toate întrebările de pe pagina curentă.",
-    allowCompleteSurveyAutomatic: "Selectați dacă doriți ca chestionarul să se completeze automat după ce un respondent răspunde la toate întrebările.",
+    autoAdvanceEnabled: "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent a răspuns la toate întrebările de pe pagina curentă. Această funcție nu se va aplica dacă ultima întrebare de pe pagină este deschisă sau permite răspunsuri multiple.",
+    autoAdvanceAllowComplete: "Selectați dacă doriți ca chestionarul să se completeze automat după ce un respondent răspunde la toate întrebările.",
     showNavigationButtons: "Setează vizibilitatea și locația butoanelor de navigare pe o pagină.",
-    showProgressBar: "Setează vizibilitatea și locația unei bare de progres. Valoarea „Auto” afișează bara de progres deasupra sau dedesubtul antetului chestionarului.",
+    navigationButtonsLocation: "Setează locația butoanelor de navigare dintr-o pagină.",
     showPreviewBeforeComplete: "Activează pagina de previzualizare cu toate sau doar întrebările la care s-a răspuns.",
     questionTitleLocation: "Se aplică tuturor întrebărilor din chestionar. Această setare poate fi înlocuită de regulile de aliniere a titlului la niveluri inferioare: panou, pagină sau întrebare. O setare de nivel inferior va înlocui setările de nivel superior.",
-    requiredText: "Un simbol sau o secvență de simboluri care indică faptul că este necesar un răspuns.",
+    requiredMark: "Un simbol sau o secvență de simboluri care indică faptul că este necesar un răspuns.",
     questionStartIndex: "Introduceți un număr sau o literă cu care doriți să începeți numerotarea.",
     questionErrorLocation: "Setează locația unui mesaj de eroare în raport cu întrebarea cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării.",
-    focusFirstQuestionAutomatic: "Selectați dacă doriți ca primul câmp de intrare de pe fiecare pagină să fie pregătit pentru introducerea textului.",
-    questionsOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Efectul acestei setări este vizibil doar în fila Previzualizare.",
+    autoFocusFirstQuestion: "Selectați dacă doriți ca primul câmp de intrare de pe fiecare pagină să fie pregătit pentru introducerea textului.",
+    questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Efectul acestei setări este vizibil doar în fila Previzualizare.",
     maxTextLength: "Doar pentru întrebările de introducere a textului.",
-    maxOthersLength: "Doar pentru comentariile întrebărilor.",
+    maxCommentLength: "Doar pentru comentariile întrebărilor.",
     commentAreaRows: "Setează numărul de linii afișate în zonele de text pentru comentariile întrebărilor. Dacă introducerea ocupă mai multe linii, va apărea bara de derulare.",
     autoGrowComment: "Selectați dacă doriți ca comentariile întrebărilor și întrebările de Text lung să se extindă automat în funcție de lungimea textului introdus.",
     allowResizeComment: "Doar pentru comentariile întrebărilor și întrebările de Text lung.",
@@ -1383,10 +1486,10 @@ export const roStrings = {
     rowTitleWidth: "Acceptă valori CSS (px, %, in, pt etc.).",
     totalText: "Vizibil numai dacă cel puțin o coloană afișează valorile totale setate cu „Metoda de agregare” sau „Expresia valorii totale”.",
     cellErrorLocation: "Setează locația unui mesaj de eroare în raport cu o celulă cu intrare invalidă. Opțiunea „Moștenește” aplică setarea din proprietatea „Alinierea mesajului de eroare”.",
+    detailErrorLocation: "Setează locația mesajelor de eroare pentru întrebările imbricate în secțiunile de detaliu. Opțiunea \"Moștenire\" aplică setarea din proprietatea \"Alinierea mesajului de eroare\".",
     keyDuplicationError: "Când proprietatea „Împiedică răspunsurile duplicate” este activată, un respondent care încearcă să trimită o intrare duplicat va primi următorul mesaj de eroare.",
     totalExpression: "Vă permite să calculați valorile totale pe baza unei expresii. Expresia poate include calcule de bază (`{q1_id} + {q2_id}`), expresii booleene (`{age} > 60`) și funcții (`iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
     confirmDelete: "Declanșează un prompt care solicită confirmarea ștergerii rândului.",
-    defaultValueFromLastRow: "Duplică răspunsurile din ultimul rând și le atribuie următorului rând dinamic adăugat.",
     keyName: "Faceți referire la un ID al coloanei pentru a solicita unui utilizator să furnizeze un răspuns unic pentru fiecare întrebare din coloana specificată.",
     description: "Introduceți un subtitlu.",
     locale: "Alegeți o limbă pentru a începe să creați chestionarul. Pentru a adăuga o traducere, comutați la o limbă nouă și traduceți textul original aici sau în fila Traduceri.",
@@ -1394,21 +1497,21 @@ export const roStrings = {
     imageFit: "Alegeți dintre: „Niciunul” - imaginea își menține dimensiunea originală; „Conține” - imaginea este redimensionată pentru a se potrivi păstrând aspectul său; „Acoperă” - imaginea umple întreaga casetă păstrând aspectul său; „Umple” - imaginea este întinsă pentru a umple caseta fără a păstra aspectul său.",
     autoGrow: "Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Dezactivat” implicit).",
     allowResize: "Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Activat” implicit).",
-    maxTimeToFinish: "Un interval de timp în secunde după care chestionarul avansează automat la pagina „Mulțumim”.",
-    maxTimeToFinishPage: "Un interval de timp în secunde după care chestionarul avansează automat la pagina următoare. Ascunde butonul de navigare „Anterior”.",
+    timeLimit: "Un interval de timp în secunde după care chestionarul avansează automat la pagina „Mulțumim”.",
+    timeLimitPerPage: "Un interval de timp în secunde după care chestionarul avansează automat la pagina următoare. Ascunde butonul de navigare „Anterior”.",
     validateVisitedEmptyFields: "Activați această opțiune pentru a declanșa validarea atunci când un utilizator se concentrează pe un câmp de introducere gol și apoi îl lasă fără a efectua modificări.",
     page: {
-      maxTimeToFinish: "Un interval de timp în secunde după care chestionarul avansează automat la pagina următoare. Ascunde butonul de navigare „Anterior”.",
+      timeLimit: "Un interval de timp în secunde după care chestionarul avansează automat la pagina următoare. Ascunde butonul de navigare „Anterior”.",
       visibleIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină vizibilitatea paginii.",
       enableIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care dezactivează modul doar citire pentru pagină.",
       requiredIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
       questionTitleLocation: "Se aplică tuturor întrebărilor din această pagină. Dacă doriți să înlocuiți această setare, definiți reguli de aliniere a titlului pentru întrebările individuale sau panouri. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Sus” implicit).",
       questionTitleWidth: "Setează lățimea titlurilor întrebărilor atunci când sunt aliniate la stânga casetelor de întrebări. Acceptă valori CSS (px, %, in, pt etc.).",
       questionErrorLocation: "Setează locația unui mesaj de eroare în raport cu întrebarea cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar.",
-      questionsOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Original” implicit). Efectul acestei setări este vizibil doar în fila Previzualizare.",
-      navigationButtonsVisibility: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”."
+      questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Original” implicit). Efectul acestei setări este vizibil doar în fila Previzualizare.",
+      showNavigationButtons: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”."
     },
-    showTimerPanel: "Setează vizibilitatea și locația unui cronometru pe o pagină.",
+    timerLocation: "Setează locația unui cronometru pe o pagină.",
     panelsState: "Alegeți dintre: „Blocat” - utilizatorii nu pot extinde sau colapsa panouri; „Colapsați toate” - toate panourile încep într-o stare colapsată; „Extindeți toate” - toate panourile încep într-o stare extinsă; „Primul extins” - doar primul panou este extins inițial. Se aplică dacă „Modul de afișare a panoului” este setat la „Listă” și proprietatea „Șablon titlu panou” este specificată.",
     imageLinkName: "Introduceți un nume de proprietate comun în cadrul array-ului de obiecte care conține URL-urile fișierelor imagine sau video pe care doriți să le afișați în lista de opțiuni.",
     choices: "Valoarea din stânga servește ca un ID al elementului utilizat în regulile condiționale, valoarea din dreapta este afișată respondenților.",
@@ -1421,6 +1524,8 @@ export const roStrings = {
     useDisplayValuesInDynamicTexts: "În tipurile de întrebări de selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare de afișare. Când este selectată, această setare afișează o valoare de afișare în loc de o valoare ID în întrebările HTML și în titlurile și descrierile dinamice ale elementelor chestionarului.",
     clearIfInvisible: "Alegeți dacă doriți sau nu să ștergeți valorile întrebărilor ascunse prin logica condițională și când să o faceți. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („La finalizarea chestionarului” implicit).",
     choicesFromQuestionMode: "Alegeți dintre: „Toate” - copiază toate opțiunile de alegere din întrebarea selectată; „Selectate” - copiază dinamic doar opțiunile de alegere selectate; „Neselectate” - copiază dinamic doar opțiunile de alegere neselectate. Opțiunile „Niciuna” și „Altele” sunt copiate implicit dacă sunt activate în întrebarea sursă.",
+    choiceValuesFromQuestion: "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze ID-urile.",
+    choiceTextsFromQuestion: "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze textele afișate.",
     showOtherItem: "Când este selectat, utilizatorii pot include intrare suplimentară într-o casetă de comentarii separată.",
     separateSpecialChoices: "Afișează fiecare opțiune de alegere specială („Niciuna”, „Altele”, „Selectează toate”) pe un rând nou, chiar și atunci când utilizați un layout pe mai multe coloane.",
     path: "Specificați locația din cadrul setului de date al serviciului unde se află array-ul de obiecte țintă. Lăsați gol dacă URL-ul indică deja către array.",
@@ -1442,7 +1547,7 @@ export const roStrings = {
     needConfirmRemoveFile: "Declanșează un prompt care solicită confirmarea ștergerii fișierului.",
     selectToRankEnabled: "Activați pentru a clasifica doar opțiunile selectate. Utilizatorii vor trage elementele selectate din lista de opțiuni pentru a le ordona în zona de clasificare.",
     dataList: "Introduceți o listă de opțiuni care vor fi sugerate respondentului în timpul introducerii.",
-    itemSize: "Setarea redimensionează doar câmpurile de intrare și nu afectează lățimea casetei întrebării.",
+    inputSize: "Setarea redimensionează doar câmpurile de intrare și nu afectează lățimea casetei întrebării.",
     itemTitleWidth: "Setează o lățime consistentă pentru toate etichetele elementelor în pixeli",
     inputTextAlignment: "Selectați modul de aliniere a valorii de intrare în câmp. Setarea implicită \"Auto\" aliniază valoarea de intrare la dreapta dacă se aplică mascare monedară sau numerică și la stânga dacă nu.",
     altText: "Servește ca un substitut atunci când imaginea nu poate fi afișată pe dispozitivul utilizatorului și pentru scopuri de accesibilitate.",
@@ -1490,7 +1595,8 @@ export const roStrings = {
     header: {
       inheritWidthFrom: "Opțiunea \"La fel ca și containerul\" ajustează automat lățimea zonei de conținut a antetului pentru a se potrivi în elementul HTML în care este plasat chestionarul.",
       textAreaWidth: "Lățimea zonei de antet care conține titlul și descrierea chestionarului, măsurată în pixeli.",
-      overlapEnabled: "Face ca partea de jos a antetului să fie suprapusă cu partea de sus a chestionarului."
+      overlapEnabled: "Când este activată, partea de sus a chestionarului se suprapune cu partea de jos a antetului.",
+      mobileHeight: "Când este setată la 0, înălțimea este calculată automat pentru a găzdui conținutul antetului."
     },
     panellayoutcolumn: {
       effectiveWidth: "Acceptă valori în %.",
@@ -1559,12 +1665,11 @@ export const roStrings = {
     maxValueExpression: "Expresia valorii maxime",
     step: "Pas",
     dataList: "Elemente pentru sugestii automate",
-    itemSize: "Lățimea câmpului de intrare (în caractere)",
+    inputSize: "Lățimea câmpului de intrare (în caractere)",
     itemTitleWidth: "Lățimea etichetei elementului (în px)",
     inputTextAlignment: "Alinierea valorilor de intrare",
     elements: "Elemente",
     content: "Conținut",
-    navigationButtonsVisibility: "Arată/ascunde butoanele de navigare",
     navigationTitle: "Titlul navigării",
     navigationDescription: "Descrierea navigării",
     longTap: "Apăsare lungă",
@@ -1578,6 +1683,7 @@ export const roStrings = {
     imageFit: "Potrivirea imaginii și miniaturilor",
     altText: "Text alternativ",
     height: "Înălțime",
+    mobileHeight: "Înălțimea pe smartphone-uri",
     penColor: "Culoarea stiloului",
     backgroundColor: "Culoarea fundalului",
     templateElements: "Elemente template",
@@ -1660,12 +1766,28 @@ export const roStrings = {
       orchid: "Orhidee",
       tulip: "Lalea",
       brown: "Maro",
-      green: "Verde"
+      green: "Verde",
+      gray: "Gri"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Fundal de suprafață",
+    "--sjs-primary-background-500": "Primar",
+    "--sjs-secondary-background-500": "Secundar",
+    surfaceScale: "Suprafață",
+    userInterfaceBaseUnit: "Interfață cu utilizatorul",
+    fontScale: "Font",
+    names: {
+      sc2020: "Creator de sondaje 2020",
+      "default-light": "Lumină",
+      "default-dark": "Întunecat",
+      "default-contrast": "Contrast"
     }
   }
 };
 
-editorLocalization.locales["ro"] = roStrings;
+setupLocale({ localeCode: "ro", strings: roStrings });
+
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
 // pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Validarea câmpurilor goale pentru focalizarea pierdută"
@@ -1686,3 +1808,141 @@ editorLocalization.locales["ro"] = roStrings;
 // inputTextAlignment.right: "Right" => "Dreapta"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Selectați modul de aliniere a valorii de intrare în câmp. Setarea implicită \"Auto\" aliniază valoarea de intrare la dreapta dacă se aplică mascare monedară sau numerică și la stânga dacă nu."
 // p.inputTextAlignment: "Input value alignment" => "Alinierea valorilor de intrare"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Afișați bara de progres"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Afișați bara de progres"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Alinierea barei de progres"
+// pv.carousel: "Carousel" => "Carusel"
+// progressBarLocation.top: "Top" => "Culme"
+// progressBarLocation.bottom: "Bottom" => "Fund"
+// progressBarLocation.topBottom: "Top and bottom" => "Sus și jos"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "Linkurile YouTube nu sunt acceptate."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Începeți să configurați formularul"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Faceți clic pe orice pictogramă de categorie pentru a explora setările sondajului. Setările suplimentare vor deveni disponibile odată ce adăugați un element de chestionar la suprafața de proiectare."
+// pe.caseInsensitive: "Case insensitive" => "Insensibil la majuscule și minuscule"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Selectați dacă literele mari și mici din expresia regulată trebuie tratate ca echivalente."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Formularul tău este gol"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Formularul tău este gol"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Trageți un element din caseta de instrumente sau faceți clic pe butonul de mai jos."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Trageți un element din caseta de instrumente sau faceți clic pe butonul de mai jos."
+// ed.previewPlaceholderTitle: "No preview" => "Fără previzualizare"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Fără previzualizare"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Sondajul nu conține elemente vizibile."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Sondajul nu conține elemente vizibile."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Fără șiruri de tradus"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Fără șiruri de tradus"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Adăugați elemente la formular sau modificați filtrul șiruri din bara de instrumente."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Adăugați elemente la formular sau modificați filtrul șiruri din bara de instrumente."
+// lg.logicPlaceholderTitle: "No logical rules" => "Fără reguli logice"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Fără reguli logice"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Creați o regulă pentru a personaliza fluxul sondajului."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Creați o regulă pentru a personaliza fluxul sondajului."
+// pe.showTimer: "Use a timer" => "Utilizarea unui cronometru"
+// theme.advancedMode: "Advanced mode" => "Mod avansat"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Setează locația unui cronometru pe o pagină."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Când este setată la 0, înălțimea este calculată automat pentru a găzdui conținutul antetului."
+// p.mobileHeight: "Height on smartphones" => "Înălțimea pe smartphone-uri"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Când este activată, partea de sus a chestionarului se suprapune cu partea de jos a antetului."
+// ed.creatorSettingTitle: "Creator Settings" => "Setările creatorului"
+// tabs.accentColors: "Accent colors" => "Culori de accent"
+// tabs.scaling: "Scaling" => "Scalare"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Atribuie numere întrebărilor imbricate în acest panou."
+// creatortheme.--sjs-special-background: "Surface background" => "Fundal de suprafață"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primar"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Secundar"
+// creatortheme.surfaceScale: "Surface" => "Suprafață"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Interfață cu utilizatorul"
+// creatortheme.fontScale: "Font" => "Font"
+// names.sc2020: "Survey Creator 2020" => "Creator de sondaje 2020"
+// names.default-light: "Light" => "Lumină"
+// names.default-dark: "Dark" => "Întunecat"
+// names.default-contrast: "Contrast" => "Contrast"
+// panel.showNumber: "Number this panel" => "Numerotați acest panou"
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent a răspuns la toate întrebările de pe pagina curentă. Această funcție nu se va aplica dacă ultima întrebare de pe pagină este deschisă sau permite răspunsuri multiple."
+// autocomplete.name: "Full Name" => "Nume complet"
+// autocomplete.honorific-prefix: "Prefix" => "Prefix"
+// autocomplete.given-name: "First Name" => "Prenume"
+// autocomplete.additional-name: "Middle Name" => "Al doilea nume"
+// autocomplete.family-name: "Last Name" => "Nume de familie"
+// autocomplete.honorific-suffix: "Suffix" => "Sufix"
+// autocomplete.nickname: "Nickname" => "Poreclă"
+// autocomplete.organization-title: "Job Title" => "Titlul postului"
+// autocomplete.username: "User Name" => "Nume de utilizator"
+// autocomplete.new-password: "New Password" => "Parolă nouă"
+// autocomplete.current-password: "Current Password" => "Parolă curentă"
+// autocomplete.organization: "Organization Name" => "Numele organizației"
+// autocomplete.street-address: "Full Street Address" => "Adresa stradală completă"
+// autocomplete.address-line1: "Address Line 1" => "Linia de adresă 1"
+// autocomplete.address-line2: "Address Line 2" => "Linia de adresă 2"
+// autocomplete.address-line3: "Address Line 3" => "Linia de adresă 3"
+// autocomplete.address-level4: "Level 4 Address" => "Adresa de nivel 4"
+// autocomplete.address-level3: "Level 3 Address" => "Nivel 3 Adresă"
+// autocomplete.address-level2: "Level 2 Address" => "Nivel 2 Adresă"
+// autocomplete.address-level1: "Level 1 Address" => "Adresa de nivel 1"
+// autocomplete.country: "Country Code" => "Codul țării"
+// autocomplete.country-name: "Country Name" => "Numele țării"
+// autocomplete.postal-code: "Postal Code" => "Cod poștal"
+// autocomplete.cc-name: "Cardholder Name" => "Numele titularului cardului"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Prenumele titularului cardului"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Al doilea prenume al deținătorului cardului"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Numele de familie al titularului cardului"
+// autocomplete.cc-number: "Credit Card Number" => "Numărul cardului de credit"
+// autocomplete.cc-exp: "Expiration Date" => "Data de expirare"
+// autocomplete.cc-exp-month: "Expiration Month" => "Luna de expirare"
+// autocomplete.cc-exp-year: "Expiration Year" => "Anul de expirare"
+// autocomplete.cc-csc: "Card Security Code" => "Codul de securitate al cardului"
+// autocomplete.cc-type: "Credit Card Type" => "Tip card de credit"
+// autocomplete.transaction-currency: "Transaction Currency" => "Moneda tranzacției"
+// autocomplete.transaction-amount: "Transaction Amount" => "Suma tranzacției"
+// autocomplete.language: "Preferred Language" => "Limba preferată"
+// autocomplete.bday: "Birthday" => "Aniversare"
+// autocomplete.bday-day: "Birthday Day" => "Ziua zilei de naștere"
+// autocomplete.bday-month: "Birthday Month" => "Luna zilei de naștere"
+// autocomplete.bday-year: "Birthday Year" => "Anul zilei de naștere"
+// autocomplete.sex: "Gender" => "Gen"
+// autocomplete.url: "Website URL" => "Adresa URL a site-ului web"
+// autocomplete.photo: "Profile Photo" => "Fotografie de profil"
+// autocomplete.tel: "Telephone Number" => "Număr telefonic"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Codul de țară pentru telefon"
+// autocomplete.tel-national: "National Telephone Number" => "Număr de telefon național"
+// autocomplete.tel-area-code: "Area Code" => "Prefix"
+// autocomplete.tel-local: "Local Phone Number" => "Număr de telefon local"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Prefix telefon local"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Sufixul telefonului local"
+// autocomplete.tel-extension: "Phone Extension" => "Extensie de telefon"
+// autocomplete.email: "Email Address" => "Adresa de e-mail"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protocol de mesagerie instantanee"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Blocați starea de extindere/restrângere pentru întrebări"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Nu aveți încă nicio pagină"
+// pe.addNew@pages: "Add new page" => "Adaugă o pagină nouă"
+// ed.zoomInTooltip: "Zoom In" => "Măriți"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Micșorare"
+// tabs.surfaceBackground: "Surface Background" => "Fundal de suprafață"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Utilizați răspunsurile de la ultima intrare ca implicit"
+// colors.gray: "Gray" => "Gri"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Alinierea butoanelor de navigare"
+// pv.allQuestions: "Show all questions" => "Afișează toate întrebările"
+// pv.answeredQuestions: "Show answered questions only" => "Afișați numai întrebările la care au răspuns"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Setează locația butoanelor de navigare dintr-o pagină."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca ID-uri de alegere"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca texte de alegere"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze ID-urile."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze textele afișate."
+// pe.progressBarLocation: "Progress bar alignment" => "Alinierea barei de progres"
+// progressBarLocation.topbottom: "Top and bottom" => "Sus și jos"
+// progressBarLocation.aboveheader: "Above the header" => "Deasupra antetului"
+// progressBarLocation.belowheader: "Below the header" => "Sub antet"
+// progressBarLocation.off: "Hidden" => "Ascuns"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Setează locația barei de progres. Valoarea \"Auto\" afișează bara de progres deasupra sau dedesubtul antetului sondajului."
+// survey.readOnly: "Make the survey read-only" => "Faceți chestionarul doar în citire"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Selectați dacă doriți să împiedicați respondenții să completeze chestionarul."
+// paneldynamic.showNumber: "Number the panel" => "Numerotați panoul"
+// question.showNumber: "Number this question" => "Numerotați această întrebare"
+// pe.previewMode: "Preview mode" => "Modul de previzualizare"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Activarea aspectului grilei"
+// pe.maskSettings: "Mask settings" => "Setările măștii"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Alinierea mesajelor de eroare de extindere a rândurilor"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Setează locația mesajelor de eroare pentru întrebările imbricate în secțiunile de detaliu. Opțiunea \"Moștenire\" aplică setarea din proprietatea \"Alinierea mesajului de eroare\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Coloane de aspect grilă"

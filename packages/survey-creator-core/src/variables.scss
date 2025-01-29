@@ -1,10 +1,12 @@
+@forward "./lbr-variables.scss";
+@forward "./ctr-variables.scss";
+
 $primary: var(--sjs-primary-backcolor, var(--primary, #19b394));
 $primary-light: var(--sjs-primary-backcolor-light, var(--primary-light, rgba(25, 179, 148, 0.1)));
 $primary-background-dark: var(--sjs-primary-backcolor-dark, rgb(20, 164, 139));
 $primary-foreground: var(--sjs-primary-forecolor, var(--primary-foreground, #fff));
 $primary-foreground-disabled: var(--sjs-primary-forecolor-light, var(--primary-foreground-disabled, rgba(#fff, 0.25)));
 
-$secondary: var(--sjs-secondary-backcolor, var(--secondary, #ff9814));
 $secondary-light: var(--sjs-secondary-backcolor-light, var(--secondary-light, rgba(255, 152, 20, 0.25)));
 $secondary-backcolor-semi-light: var(--sjs-secondary-backcolor-semi-light, rgba(255, 152, 20, 0.1));
 $secondary-forecolor: var(--sjs-secondary-forecolor, #fff);
@@ -33,11 +35,13 @@ $border: var(--sjs-border-default, var(--border, #d6d6d6));
 $border-light: var(--sjs-border-light, var(--border-light, #eaeaea));
 $border-inside: var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16)));
 
-$shadow-small: 0px 1px 2px 0px var(--ctr-shadow-small-color, rgba(0, 0, 0, 0.15));
-$shadow-medium: 0px 2px 6px 0px var(--ctr-shadow-medium-color, rgba(0, 0, 0, 0.10));
-$shadow-large: 0px 8px 16px 0px var(--ctr-shadow-large-color, rgba(0, 0, 0, 0.10));
+$shadow-small: 0px 1px 2px 0px var(--ctr-shadow-small-color, var(--sjs-special-shadow, #00000040));
+$shadow-small-reset: 0px 0px 0px 0px var(--ctr-shadow-small-color, var(--sjs-special-shadow, #00000040));
+$shadow-medium: 0px 2px 6px 0px var(--ctr-shadow-medium-color, var(--sjs-special-glow, #004c441a));
+$shadow-large: 0px 8px 16px 0px var(--ctr-shadow-large-color, var(--sjs-special-glow, #004c441a));
 $shadow-inner: var(--sjs-shadow-inner, inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15));
-$shadow-x-large: 0px 0px 0px 0px var(--ctr-shadow-x-large-color, rgba(0, 0, 0, 0.10));
+$shadow-inner-reset: var(--sjs-shadow-inner, inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15));
+$shadow-x-large: 0px 0px 0px 0px var(--ctr-shadow-x-large-color, var(--sjs-special-glow, #004c441a));
 
 $red: var(--sjs-special-red, var(--red, #e60a3e));
 $red-light: var(--sjs-special-red-light, var(--red-light, rgba(230, 10, 62, 0.1)));
@@ -52,8 +56,6 @@ $blue: var(--sjs-special-blue, #437fd9);
 $blue-light: var(--sjs-special-blue-light, var(--blue-light, rgba(67, 127, 217, 0.1)));
 $blue-forecolor: var(--sjs-special-blue-forecolor, #ffffff);
 
-$font-family: var(--sjs-font-family, var(--font-family));
-$font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
 $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
 $sd-panel-normal-min-width: 496px;
@@ -71,50 +73,9 @@ $sd-panel-medium-min-width: 176px;
   }
 }
 
-@mixin smallBold {
-  --small-bold-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 600;
-  font-size: calc(0.75 * var(--small-bold-font-size));
-  line-height: $font-size;
-}
-
-@mixin defaultBold {
-  --default-bold-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 600;
-  font-size: $font-size;
-  line-height: calc(1.5 * var(--default-bold-font-size));
-}
-
-@mixin defaultFont {
-  --default-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
-  font-family: $font-family;
-  font-style: normal;
-  font-size: $font-size;
-  line-height: calc(1.5 * var(--default-font-size));
-}
-
-@mixin borderLight {
-  --border-light-font-size: #{$base-unit};
-  border: calc(0.25 * var(--border-light-font-size)) solid $border-light;
-  border-radius: $corner-radius;
-}
-
 // creator variables
 
 $tab-min-height: var(--tab-min-height, auto);
-
-@mixin mediumBold {
-  --medium-bold-font-size: #{$base-unit};
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: bold;
-  font-size: calc(3 * var(--medium-bold-font-size));
-  line-height: calc(4 * var(--medium-bold-font-size));
-}
 
 @mixin textEllipsis {
   overflow: hidden;
@@ -122,26 +83,23 @@ $tab-min-height: var(--tab-min-height, auto);
   text-overflow: ellipsis;
 }
 
+@mixin defaultActionButtonSettings {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  display: flex;
+  box-sizing: border-box;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
 @mixin disableUserSelect {
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-@mixin centerText {
-  --center-text-font-size: #{$base-unit};
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: 400;
-  font-size: calc(2 * var(--center-text-font-size));
-  color: $foreground;
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-  overflow: hidden;
 }
 
 @mixin disableTransitionAnimations {
@@ -153,34 +111,42 @@ $tab-min-height: var(--tab-min-height, auto);
   }
 }
 
-@mixin disableAnimations {
-
-  .sd-row--fade-out,
-  .sd-row--fade-in {
+@mixin disableLibraryAnimations {
+  .sd-row--leave,
+  .sd-row--enter {
     animation: none;
   }
-
-  .sd-element-wrapper--fade-out,
-  .sd-element-wrapper--fade-in {
+  .sd-element-wrapper--leave,
+  .sd-element-wrapper--enter {
     animation: none;
   }
-
-  .sd-element__content--fade-in,
-  .sd-element__content--fade-out {
+  .sd-element__content--enter,
+  .sd-element__content--leave {
     animation: none;
   }
-
-  .sd-paneldynamic__panel-wrapper--fade-in,
-  .sd-paneldynamic__panel-wrapper--fade-out,
-  .sd-paneldynamic__panel-wrapper--fade-out-left,
-  .sd-paneldynamic__panel-wrapper--fade-out-right,
-  .sd-paneldynamic__panel-wrapper--fade-in-left,
-  .sd-paneldynamic__panel-wrapper--fade-in-right {
+  .sd-paneldynamic__panel-wrapper--enter,
+  .sd-paneldynamic__panel-wrapper--leave {
     animation: none;
   }
-
-  .sd-table__row--fade-out,
-  .sd-table__row--fade-in {
+  .sd-item--enter {
+    animation: none;
+  }
+  .sd-item--leave {
+    animation: none;
+  }
+  .sd-table__row--leave,
+  .sd-table__row--enter {
     animation: none;
   }
 }
+
+$creator-transition-duration: var(--sjs-creator-transition-duration, 150ms);
+$ease-out: cubic-bezier(0, 0, 0.58, 1);
+$reverse-ease-out: cubic-bezier(0.42, 0, 1, 1);
+
+$svc-expand-fade-in-duration: var(--sjs-svc-expand-fade-in-duration, 150ms);
+$svc-expand-move-in-duration: var(--sjs-svc-expand-move-in-duration, 250ms);
+$svc-expand-fade-in-delay: var(--sjs-svc-expand-fade-in-delay, 250ms);
+$svc-collapse-fade-out-duration: var(--sjs-svc-collapse-fade-out-duration, 150ms);
+$svc-collapse-move-out-duration: var(--sjs-svc-collapse-move-out-duration, 250ms);
+$svc-collapse-move-out-delay: var(--sjs-svc-collapse-move-out-delay, 100ms);

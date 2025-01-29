@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@use "./variables" as *;
 
 $primary-background-500: var(--sjs-primary-background-500, #{$primary});
 $primary-background-400: var(--sjs-primary-background-400, #{$primary-background-dark});
@@ -6,7 +6,7 @@ $primary-background-10: var(--sjs-primary-background-10, #{$primary-light});
 $primary-foreground-100: var(--sjs-primary-foreground-100, #{$primary-foreground});
 $primary-foreground-25: var(--sjs-primary-foreground-25, #{$primary-foreground-disabled});
 
-$secondary-background-500: var(--sjs-secondary-background-500, #{$secondary});
+$secondary-background-500: var(--sjs-secondary-background-500, #19B394FF);
 $secondary-background-25: var(--sjs-secondary-background-25, #{$secondary-backcolor-semi-light});
 $secondary-background-10: var(--sjs-secondary-background-10, #{$secondary-light});
 $secondary-foreground-100: var(--sjs-secondary-foreground-100, #{$secondary-forecolor});

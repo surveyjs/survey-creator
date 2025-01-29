@@ -13,7 +13,7 @@ import {
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionToDisplayText } from "../../expressionToDisplayText";
 import { ISurveyCreatorOptions } from "../../creator-settings";
-import { wrapTextByCurlyBraces } from "../../utils/utils";
+import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 
 export function getLogicString(name: string) {
   return editorLocalization.getString("ed.lg." + name);
@@ -22,6 +22,7 @@ export function getLogicString(name: string) {
 export interface ISurveyLogicType {
   name: string;
   baseClass: string;
+  incorrectClasses?: Array<string>;
   propertyName: string;
   dynamicPropertyName?: string;
   dependedOnPropertyName?: string;
@@ -69,6 +70,16 @@ export class SurveyLogicType {
       }
     }
   }
+  public hasNeededTypes(types: Array<string>): boolean {
+    if(types.indexOf(this.baseClass) < 0) return false;
+    const inCls = this.logicType.incorrectClasses;
+    if(Array.isArray(inCls)) {
+      for(let i = 0; i < inCls.length; i ++) {
+        if(types.indexOf(inCls[i]) > -1) return false;
+      }
+    }
+    return true;
+  }
   public get name(): string {
     return this.logicType.name;
   }
@@ -93,7 +104,7 @@ export class SurveyLogicType {
     return true;
   }
   public get showTitlesInExpression(): boolean {
-    return !!this.options && this.options.showTitlesInExpressions;
+    return !!this.options && (this.options.useElementTitles || this.options.showTitlesInExpressions);
   }
   public createNewObj(srcObj: Base): Base {
     const obj = <Base>Serializer.createClass(this.baseClass);
@@ -203,7 +214,7 @@ export class SurveyLogicType {
     if (!this.logicType.supportContext) return false;
     return this.logicType.supportContext(context);
   }
-  private get isTrigger(): boolean {
+  public get isTrigger(): boolean {
     return !!this.baseClass && this.baseClass.indexOf("trigger") > -1;
   }
 }
@@ -328,16 +339,19 @@ export class SurveyLogicTypes {
     {
       name: "panel_visibility",
       baseClass: "panel",
+      incorrectClasses: ["page"],
       propertyName: "visibleIf",
     },
     {
       name: "panel_enable",
       baseClass: "panel",
+      incorrectClasses: ["page"],
       propertyName: "enableIf",
     },
     {
       name: "panel_require",
       baseClass: "panel",
+      incorrectClasses: ["page"],
       propertyName: "requiredIf",
     },
     {

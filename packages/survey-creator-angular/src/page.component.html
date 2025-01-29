@@ -1,8 +1,22 @@
-<div *ngIf="model && adorner && (isGhost === undefined || isGhost === adorner.isGhost)" class="svc-page__content" [class]="adorner.css" [key2click]
-  (click)="adorner.select(adorner, $event)" (dblclick)="adorner.dblclick($event)"  (mouseover)="adorner.hover($event, $event.currentTarget)"
-  (mouseleave)="adorner.hover($event, $event.target)" [id]="adorner.page.id" data-bind="clickBubble: false">
-  <div class="svc-page__content-actions">
+<ng-template #template>
+<div *ngIf="model && adorner" class="svc-page__content" [class]="adorner.css" [key2click]
+  (click)="adorner.select(adorner, $event)" (dblclick)="adorner.dblclick($event)"
+  (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.target)"
+  [id]="adorner.page.id" [attr.data-sv-drop-target-survey-page]="adorner.dropTargetName" #container>
+  <div class="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
+  <div class="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
+  <div *ngIf="adorner.allowDragging && !adorner.isGhost" class="svc-question__drag-area"
+    (pointerdown)="adorner.onPointerDown($event)">
+    <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="'auto'"
+      sv-ng-svg-icon></svg>
+    <div class="svc-page__content-actions">
+      <sv-action-bar [model]="adorner.actionContainer" #container></sv-action-bar>
+      <sv-action-bar *ngIf="adorner.topActionContainer.hasActions" [model]="adorner.topActionContainer"></sv-action-bar>
+    </div>
+  </div>
+  <div *ngIf="!adorner.allowDragging || adorner.isGhost" class="svc-page__content-actions">
     <sv-action-bar [model]="adorner.actionContainer"></sv-action-bar>
+    <sv-action-bar *ngIf="adorner.topActionContainer.hasActions" [model]="adorner.topActionContainer"></sv-action-bar>
   </div>
   <page [model]="model" [survey]="survey"></page>
   <div *ngIf="adorner.showPlaceholder" class="svc-page__placeholder_frame">
@@ -12,3 +26,4 @@
   </div>
   <sv-action-bar [model]="adorner.footerActionsBar"></sv-action-bar>
 </div>
+</ng-template>

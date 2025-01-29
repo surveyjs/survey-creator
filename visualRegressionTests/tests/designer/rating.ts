@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -21,6 +22,7 @@ const json = {
   ]
 };
 const jsonComment = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -37,6 +39,7 @@ const jsonComment = {
 };
 
 const jsonMulti = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -78,6 +81,7 @@ test("Rating adorners - disabled buttons", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1956, 1080);
     await setJSON({
+      showQuestionNumbers: "on",
       elements: [
         {
           type: "rating",
@@ -90,6 +94,7 @@ test("Rating adorners - disabled buttons", async (t) => {
     const question = Selector("div[data-name=question1]");
     await takeElementScreenshot("rating-disabled-add.png", question, t, comparer);
     await setJSON({
+      showQuestionNumbers: "on",
       elements: [
         {
           type: "rating",
@@ -130,7 +135,7 @@ test("Multi row rating adorner", async (t) => {
     const question2 = Selector("div[data-name=question2]");
     await takeElementScreenshot("rating-multiline-text.png", question2, t, comparer);
 
-    await t.resizeWindow(550, 900);
+    await t.resizeWindow(549, 900);
     await takeElementScreenshot("rating-multiline-mobile.png", question, t, comparer);
     await takeElementScreenshot("rating-multiline-text-mobile.png", question2, t, comparer);
 
@@ -157,7 +162,7 @@ test("Multi row rating adorner smileys", async (t) => {
     const question2 = Selector("div[data-name=question2]");
     await takeElementScreenshot("rating-multiline-smileys-text.png", question2, t, comparer);
 
-    await t.resizeWindow(550, 900);
+    await t.resizeWindow(549, 900);
     await takeElementScreenshot("rating-multiline-smileys-mobile.png", question, t, comparer);
     await takeElementScreenshot("rating-multiline-smileys-text-mobile.png", question2, t, comparer);
 
@@ -184,7 +189,7 @@ test("Multi row rating adorner stars", async (t) => {
     const question2 = Selector("div[data-name=question2]");
     await takeElementScreenshot("rating-multiline-stars-text.png", question2, t, comparer);
 
-    await t.resizeWindow(550, 900);
+    await t.resizeWindow(549, 900);
     await takeElementScreenshot("rating-multiline-stars-mobile.png", question, t, comparer);
     await takeElementScreenshot("rating-multiline-stars-text-mobile.png", question2, t, comparer);
 
@@ -210,6 +215,7 @@ test("Rating editing", async (t) => {
 test("Rating min/max editing", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
+      showQuestionNumbers: "on",
       "pages": [
         {
           "name": "page1",
@@ -237,6 +243,7 @@ test("Rating min/max editing", async (t) => {
 test("Rating in matrix", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -283,6 +290,7 @@ test("Rating in matrix", async (t) => {
 test("Rating long item", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -321,6 +329,7 @@ test("Rating long item", async (t) => {
 test("Rating labels location", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {

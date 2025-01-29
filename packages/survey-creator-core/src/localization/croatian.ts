@@ -1,4 +1,4 @@
-import { editorLocalization, defaultStrings } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export var hrStrings = {
   // survey templates
@@ -22,7 +22,7 @@ export var hrStrings = {
     theme: "Teme",
     translation: "Prijevod",
     designer: "Dizajner ankete",
-    editor: "JSON urednik",
+    json: "JSON urednik",
     logic: "Logika ankete"
   },
   // Question types
@@ -69,6 +69,7 @@ export var hrStrings = {
     surveySettingsTooltip: "Postavke upitnika",
     themeSettings: "Postavke teme",
     themeSettingsTooltip: "Postavke teme",
+    creatorSettingTitle: "Postavke autora",
     showPanel: "Pokaži ploču",
     hidePanel: "Sakrij ploču",
     prevSelected: "Odaberi prethodno",
@@ -106,6 +107,12 @@ export var hrStrings = {
     redo: "Ponoviti",
     undoTooltip: "Poništi posljednju promjenu",
     redoTooltip: "Preusmjeti promjenu",
+    expandAllTooltip: "Proširi sve",
+    collapseAllTooltip: "Sažmi sve",
+    zoomInTooltip: "Zumiranje",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Smanji",
+    lockQuestionsTooltip: "Zaključavanje stanja proširenja/sažimanja za pitanja",
     showMoreChoices: "Pokaži više",
     showLessChoices: "Pokaži manje",
     copy: "Kopirati",
@@ -123,6 +130,8 @@ export var hrStrings = {
     toolboxNoResultsFound: "Nisu pronađeni rezultati",
     propertyGridFilteredTextPlaceholder: "Upišite za pretraživanje...",
     propertyGridNoResultsFound: "Nisu pronađeni rezultati",
+    propertyGridPlaceholderTitle: "Počnite konfigurirati svoj obrazac",
+    propertyGridPlaceholderDescription: "Kliknite bilo koju ikonu kategorije da biste istražili postavke upitnika. Dodatne postavke postat će dostupne nakon što dodate element upitnika na površinu dizajna.",
     correctJSON: "Ispravite JSON.",
     surveyResults: "Rezultat ankete: ",
     surveyResultsTable: "Kao tablica",
@@ -154,6 +163,7 @@ export var hrStrings = {
     translationPlaceHolder: "Prevođenje...",
     translationSource: "Izvor: ",
     translationTarget: "Cilj: ",
+    translationYouTubeNotSupported: "YouTube veze nisu podržane.",
     themeExportButton: "Izvoz",
     themeImportButton: "Uvoz",
     surveyJsonExportButton: "Izvoz",
@@ -177,6 +187,18 @@ export var hrStrings = {
     pagePlaceHolder: "Stranica je prazna. Povucite element iz alatnog okvira ili kliknite donji gumb.",
     imagePlaceHolder: "Povucite i ispustite sliku ovdje ili kliknite donji gumb i odaberite sliku koju želite prenijeti",
     surveyPlaceHolderMobile: "Kliknite donji gumb \"Dodaj pitanje\" da biste započeli stvaranje obrasca.",
+    surveyPlaceholderTitle: "Obrazac je prazan",
+    surveyPlaceholderTitleMobile: "Obrazac je prazan",
+    surveyPlaceholderDescription: "Povucite element iz okvira s alatima ili kliknite gumb ispod.",
+    surveyPlaceholderDescriptionMobile: "Povucite element iz okvira s alatima ili kliknite gumb ispod.",
+    previewPlaceholderTitle: "Nema pregleda",
+    previewPlaceholderTitleMobile: "Nema pregleda",
+    previewPlaceholderDescription: "Anketa ne sadrži vidljive elemente.",
+    previewPlaceholderDescriptionMobile: "Anketa ne sadrži vidljive elemente.",
+    translationsPlaceholderTitle: "Nema obaveza za prevođenje",
+    translationsPlaceholderTitleMobile: "Nema obaveza za prevođenje",
+    translationsPlaceholderDescription: "Dodajte elemente u obrazac ili promijenite filtar nizova na alatnoj traci.",
+    translationsPlaceholderDescriptionMobile: "Dodajte elemente u obrazac ili promijenite filtar nizova na alatnoj traci.",
     pagePlaceHolderMobile: "Kliknite donji gumb \"Dodaj pitanje\" da biste na stranicu dodali novi element.",
     panelPlaceHolderMobile: "Kliknite donji gumb \"Dodaj pitanje\" da biste na ploču dodali novi element.",
     imagePlaceHolderMobile: "Kliknite donji gumb i odaberite sliku koju želite prenijeti",
@@ -189,6 +211,10 @@ export var hrStrings = {
     lg: {
       addNewItem: "Dodaj novo pravilo",
       empty_tab: "Stvorite pravilo za prilagodbu tijeka upitnika.",
+      logicPlaceholderTitle: "Nema logičkih pravila",
+      logicPlaceholderTitleMobile: "Nema logičkih pravila",
+      logicPlaceholderDescription: "Stvorite pravilo za prilagodbu tijeka upitnika.",
+      logicPlaceholderDescriptionMobile: "Stvorite pravilo za prilagodbu tijeka upitnika.",
       page_visibilityName: "Vidljivost stranice",
       page_enableName: "Omogući (onemogući stranicu)",
       page_requireName: "Učini stranicu obaveznom",
@@ -273,14 +299,14 @@ export var hrStrings = {
       description: "Opis ploče",
       visibleIf: "Učini ploču vidljivom ako",
       requiredIf: "Učinite ploču potrebnom ako",
-      questionsOrder: "Redoslijed pitanja unutar ploče",
+      questionOrder: "Redoslijed pitanja unutar ploče",
       page: "Nadređena stranica",
       startWithNewLine: "Prikaz ploče na novom retku",
       state: "Stanje sažimanja ploče",
       width: "Širina umetnute ploče",
       minWidth: "Minimalna širina ploče",
       maxWidth: "Maksimalna širina ploče",
-      showNumber: "Brojčane ploče"
+      showNumber: "Numerirajte ovu ploču"
     },
     paneldynamic: {
       name: "Naziv ploče",
@@ -301,12 +327,13 @@ export var hrStrings = {
       templateTabTitle: "Uzorak naslova kartice",
       tabTitlePlaceholder: "Rezervirano mjesto naslova tabulatora",
       templateVisibleIf: "Učinite pojedinačnu ploču vidljivom ako",
-      hideNumber: "Skrivanje broja ploče",
+      showNumber: "Numerirajte ploču",
       titleLocation: "Poravnanje naslova ploče",
       descriptionLocation: "Poravnanje opisa ploče",
-      templateTitleLocation: "Poravnanje naslova pitanja",
+      templateQuestionTitleLocation: "Poravnanje naslova pitanja",
       templateErrorLocation: "Poravnanje poruke o pogrešci",
       newPanelPosition: "Novo mjesto ploče",
+      showRangeInProgress: "Prikaz trake napretka",
       keyName: "Spriječite dvostruke odgovore u sljedećem pitanju"
     },
     question: {
@@ -317,7 +344,7 @@ export var hrStrings = {
       requiredIf: "Neka pitanje bude potrebno ako:",
       page: "Nadređena stranica",
       state: "Stanje sažimanja okvira pitanja",
-      hideNumber: "Skrivanje broja pitanja",
+      showNumber: "Brojite ovo pitanje",
       titleLocation: "Poravnanje naslova pitanja",
       descriptionLocation: "Poravnanje opisa pitanja",
       errorLocation: "Poravnanje poruke o pogrešci",
@@ -359,7 +386,8 @@ export var hrStrings = {
     // survey templates
     survey: {
       title: "Naslov",
-      description: "Opis upitnika"
+      description: "Opis upitnika",
+      readOnly: "Neka anketa bude samo za čitanje"
     },
     page: {
       name: "Naziv stranice",
@@ -367,8 +395,8 @@ export var hrStrings = {
       description: "Opis stranice",
       visibleIf: "Učini stranicu vidljivom ako",
       requiredIf: "Učini stranicu potrebnom ako",
-      maxTimeToFinish: "Vremensko ograničenje za dovršetak stranice (u sekundama)",
-      questionsOrder: "Redoslijed pitanja na stranici"
+      timeLimit: "Vremensko ograničenje za dovršetak stranice (u sekundama)",
+      questionOrder: "Redoslijed pitanja na stranici"
     },
     matrixdropdowncolumn: {
       name: "Naziv stupca",
@@ -411,7 +439,7 @@ export var hrStrings = {
     imageWidth: "Širina slike",
     valueName: "Naziv vrijednosti",
     rateDescriptionLocation: "Poravnanje natpisa",
-    size: "Veličina polja unosa (u znakovima)",
+    size: "Širina polja za unos (u znakovima)",
     cellErrorLocation: "Poravnanje poruke o pogrešci ćelije",
     enabled: "Omogućen",
     disabled: "Onemogućen",
@@ -482,6 +510,7 @@ export var hrStrings = {
     "listIsEmpty@calculatedValues": "Još nemate prilagođene varijable",
     "listIsEmpty@triggers": "Još nemaš okidača",
     "listIsEmpty@navigateToUrlOnCondition": "Još nemate poveznice",
+    "listIsEmpty@pages": "Još nemate stranice",
     "addNew@choices": "Dodavanje izbora",
     "addNew@columns": "Dodaj novi stupac",
     "addNew@rows": "Dodaj novi redak",
@@ -489,6 +518,7 @@ export var hrStrings = {
     "addNew@calculatedValues": "Dodaj novu varijablu",
     "addNew@triggers": "Dodaj novi okidač",
     "addNew@navigateToUrlOnCondition": "Dodaj novi URL",
+    "addNew@pages": "Dodaj novu stranicu",
     expressionIsEmpty: "Izraz je prazan",
     value: "Vrijednost",
     text: "tekst",
@@ -532,7 +562,7 @@ export var hrStrings = {
     isRequired: "Je potrebno?",
     markRequired: "Označi kao obavezno",
     removeRequiredMark: "Uklanjanje potrebne oznake",
-    isAllRowRequired: "Zahtijevati odgovor za sve redove",
+    eachRowRequired: "Zahtijevati odgovor za sve redove",
     eachRowUnique: "Sprječavanje dvostrukih odgovora u recima",
     requiredErrorText: "Potreban tekst pogreške",
     startWithNewLine: "Počinje li s novom linijom?",
@@ -544,7 +574,7 @@ export var hrStrings = {
     maxSize: "Maksimalna veličina datoteke u bytes",
     rowCount: "Broj redaka",
     columnLayout: "Raspored stupaca",
-    addRowLocation: "Dodavanje lokacije gumba redaka",
+    addRowButtonLocation: "Dodavanje lokacije gumba redaka",
     transposeData: "Transponiranje redaka u stupce",
     addRowText: "Dodavanje teksta gumba redak",
     removeRowText: "Uklanjanje teksta gumba redaka",
@@ -580,10 +610,9 @@ export var hrStrings = {
     simulator: "Odaberite uređaj",
     landscapeOrientation: "Krajolik",
     portraitOrientation: "Prebacivanje na okomito usmjerenje",
-    mode: "Način rada (samo uređivanje/čitanje)",
     clearInvisibleValues: "Jasne nevidljive vrijednosti",
     cookieName: "Naziv kolačića (onemogućiti anketu dva puta lokalno)",
-    sendResultOnPageNext: "Pošaljite rezultate ankete na sljedeću stranicu",
+    partialSendEnabled: "Pošaljite rezultate ankete na sljedeću stranicu",
     storeOthersAsComment: "Pohranite vrijednost 'others' u zasebnom polju",
     showPageTitles: "Prikazate naslove stranica",
     showPageNumbers: "Prikazate brojeve stranica",
@@ -594,35 +623,38 @@ export var hrStrings = {
     editText: "Uređivanje teksta gumba",
     startSurveyText: "Tekst gumba za pokretanje",
     showNavigationButtons: "Prikakanje navigacijskih tipki (zadana navigacija)",
+    navigationButtonsLocation: "Poravnanje navigacijskih gumba",
     showPrevButton: "Prikagnite prethodni gumb (korisnik se može vratiti na prethodnu stranicu)",
-    firstPageIsStarted: "Prva stranica u anketi je početna stranica.",
-    showCompletedPage: "Prikagušite dovršenu stranicu na kraju (completedHtml)",
-    goNextPageAutomatic: "Kada odgovarate na sva pitanja, idite automatski na sljedeću stranicu",
-    allowCompleteSurveyAutomatic: "Automatsko ispunjavanje upitnika",
+    firstPageIsStartPage: "Prva stranica u anketi je početna stranica.",
+    showCompletePage: "Prikagušite dovršenu stranicu na kraju (completedHtml)",
+    autoAdvanceEnabled: "Kada odgovarate na sva pitanja, idite automatski na sljedeću stranicu",
+    autoAdvanceAllowComplete: "Automatsko ispunjavanje upitnika",
     showProgressBar: "Pokaži traku napretka",
+    progressBarLocation: "Poravnanje trake napretka",
     questionTitleLocation: "Lokacija naslova pitanja",
     questionTitleWidth: "Širina naslova pitanja",
-    requiredText: "Pitanje je zahtijevalo simbole",
+    requiredMark: "Pitanje je zahtijevalo simbole",
     questionTitleTemplate: "Predložak naslova pitanja, zadano je: '{no}. {require} {title}'",
     questionErrorLocation: "Mjesto pogreške u pitanju",
-    focusFirstQuestionAutomatic: "Usredotočite prvo pitanje na promjenu stranice",
-    questionsOrder: "Redoslijed elemenata na stranici",
-    maxTimeToFinish: "Maksimalno vrijeme za dovršaje ankete",
-    maxTimeToFinishPage: "Maksimalno vrijeme za dovršanje stranice u anketi",
-    showTimerPanel: "Pokaži ploču timera",
-    showTimerPanelMode: "Prikazate način rada timer panela",
+    autoFocusFirstQuestion: "Usredotočite prvo pitanje na promjenu stranice",
+    questionOrder: "Redoslijed elemenata na stranici",
+    timeLimit: "Maksimalno vrijeme za dovršaje ankete",
+    timeLimitPerPage: "Maksimalno vrijeme za dovršanje stranice u anketi",
+    showTimer: "Koristite mjerač vremena",
+    timerLocation: "Pokaži ploču timera",
+    timerInfoMode: "Prikazate način rada timer panela",
     renderMode: "Način prikaza",
     allowAddPanel: "Dopustite dodavanje ploče",
     allowRemovePanel: "Dopustite uklanjanje ploče",
-    panelAddText: "Dodavanje teksta panela",
-    panelRemoveText: "Removing panel text",
+    addPanelText: "Dodavanje teksta panela",
+    removePanelText: "Removing panel text",
     isSinglePage: "Uklanjanje teksta ploče",
     html: "Html",
     setValue: "Odgovor",
     dataFormat: "Oblik slike",
     allowAddRows: "Dopusti dodavanje redaka",
     allowRemoveRows: "Dopusti uklanjanje redaka",
-    allowRowsDragAndDrop: "Dopusti povlačenje i ispuštanje retka",
+    allowRowReorder: "Dopusti povlačenje i ispuštanje retka",
     responsiveImageSizeHelp: "Ne primjenjuje se ako navedete točnu širinu ili visinu slike.",
     minImageWidth: "Minimalna širina slike",
     maxImageWidth: "Maksimalna širina slike",
@@ -630,6 +662,7 @@ export var hrStrings = {
     maxImageHeight: "Maksimalna visina slike",
     minValue: "Minimalna vrijednost",
     maxValue: "Maksimalna vrijednost",
+    caseInsensitive: "Bez osjetljivosti na velika i mala slova",
     minLength: "Minimalna duljina",
     allowDigits: "Dopustite znamenke",
     minCount: "Minimalno brojanje",
@@ -648,13 +681,13 @@ export var hrStrings = {
     logo: "Logotip (URL ili niz kodiran base64)",
     questionsOnPageMode: "Struktura upitnika",
     maxTextLength: "Maksimalna duljina odgovora (u znakovima)",
-    maxOthersLength: "Maksimalna duljina komentara (u znakovima)",
+    maxCommentLength: "Maksimalna duljina komentara (u znakovima)",
     commentAreaRows: "Visina područja komentara (u recima)",
     autoGrowComment: "Ako je potrebno, automatsko proširivanje područja komentara",
     allowResizeComment: "Dopusti korisnicima promjenu veličine tekstnih područja",
     textUpdateMode: "Ažuriranje vrijednosti tekstnog pitanja",
     maskType: "Vrsta maske za unos",
-    focusOnFirstError: "Postavljanje fokusa na prvi odgovor koji nije valjan",
+    autoFocusFirstError: "Postavljanje fokusa na prvi odgovor koji nije valjan",
     checkErrorsMode: "Pokreni provjeru valjanosti",
     validateVisitedEmptyFields: "Provjera valjanosti praznih polja pri izgubljenom fokusu",
     navigateToUrl: "Navigacija do URL-a",
@@ -688,10 +721,9 @@ export var hrStrings = {
     minPanelCount: "Najmanji broj ploča",
     maxPanelCount: "Maksimalan broj ploča",
     panelsState: "Stanje proširenja unutarnje ploče",
-    panelPrevText: "Opis alata gumba Prethodna ploča",
-    panelNextText: "Opis alata gumba Sljedeća ploča",
-    showRangeInProgress: "Pokaži traku tijeka",
-    panelRemoveButtonLocation: "Ukloni mjesto gumba ploče",
+    prevPanelText: "Opis alata gumba Prethodna ploča",
+    nextPanelText: "Opis alata gumba Sljedeća ploča",
+    removePanelButtonLocation: "Ukloni mjesto gumba ploče",
     hideIfRowsEmpty: "Sakrij pitanje ako nema redaka",
     hideColumnsIfEmpty: "Sakrij stupce ako nema redaka",
     rateValues: "Vrijednosti prilagođene stope",
@@ -713,21 +745,22 @@ export var hrStrings = {
     keyDuplicationError: "Poruka o pogrešci \"Nejedinstvena vrijednost ključa\"",
     minSelectedChoices: "Minimalno odabrani odabiri",
     maxSelectedChoices: "Maksimalan broj odabranih izbora",
-    showClearButton: "Prikaz gumba Očisti",
     logoWidth: "Širina logotipa (u CSS-prihvaćenim vrijednostima)",
     logoHeight: "Visina logotipa (u CSS-prihvaćenim vrijednostima)",
     readOnly: "Samo za čitanje",
     enableIf: "Može se uređivati ako",
-    emptyRowsText: "Poruka \"Bez redaka\"",
+    noRowsText: "Poruka \"Bez redaka\"",
     separateSpecialChoices: "Razdvoji posebne odabire (Ništa, Ostalo, Odaberi sve)",
     choicesFromQuestion: "Kopiraj odabire iz sljedećeg pitanja",
     choicesFromQuestionMode: "Koje izbore kopirati?",
+    choiceValuesFromQuestion: "Koristite vrijednosti iz sljedećeg stupca matrice ili pitanja panela kao ID-ove izbora",
+    choiceTextsFromQuestion: "Koristite vrijednosti iz sljedećeg stupca matrice ili pitanja na ploči kao tekstove izbora",
     progressBarShowPageTitles: "Prikaz naslova stranica na traci tijeka",
     progressBarShowPageNumbers: "Prikaz brojeva stranica na traci tijeka",
     showCommentArea: "Prikaz područja komentara",
     commentPlaceholder: "Rezervirano mjesto područja komentara",
     displayRateDescriptionsAsExtremeItems: "Opisi brzine prikaza kao ekstremne vrijednosti",
-    rowsOrder: "Redoslijed redaka",
+    rowOrder: "Redoslijed redaka",
     columnsLayout: "Izgled stupca",
     columnColCount: "Broj ugniježđenih stupaca",
     correctAnswer: "Točan odgovor",
@@ -756,6 +789,11 @@ export var hrStrings = {
       top: "Na vrhu",
       bottom: "Na dnu"
     },
+    previewMode: "Način pregleda",
+    gridLayoutEnabled: "Omogućivanje izgleda rešetke",
+    gridLayoutColumns: "Stupci rasporeda rešetke",
+    maskSettings: "Postavke maske",
+    detailErrorLocation: "Poravnanje poruke o pogrešci proširenja retka",
     // Creator tabs
     tabs: {
       panel: {
@@ -803,6 +841,9 @@ export var hrStrings = {
       header: "Zaglavlje",
       background: "Pozadina",
       appearance: "Izgled",
+      accentColors: "Naglašavajuće boje",
+      surfaceBackground: "Pozadina površine",
+      scaling: "Skaliranje",
       others: "Drugi"
     },
     editProperty: "Uređivanje objekta '{0}'",
@@ -812,8 +853,7 @@ export var hrStrings = {
     columnsEnableIf: "Stupci su vidljivi ako",
     rowsEnableIf: "Reci su vidljivi ako",
     innerIndent: "Dodavanje unutarnjih uvlaka",
-    defaultValueFromLastRow: "Uzimanje zadanih vrijednosti iz posljednjeg retka",
-    defaultValueFromLastPanel: "Preuzimanje zadanih vrijednosti s posljednje ploče",
+    copyDefaultValueFromLastEntry: "Koristite odgovore iz posljednjeg unosa kao standardne",
     enterNewValue: "Unesite vrijednost.",
     noquestions: "U anketi nema nikakvog pitanja.",
     createtrigger: "Izradite okidač",
@@ -867,6 +907,7 @@ export var hrStrings = {
       fontSize: "Veličina fonta",
       scale: "Vaga",
       cornerRadius: "Kutni radijus",
+      advancedMode: "Napredni način rada",
       pageTitle: "Font naslova",
       pageDescription: "Font opisa",
       questionTitle: "Font naslova",
@@ -927,10 +968,11 @@ export var hrStrings = {
     firstExpanded: "firstExpanded",
     off: "isključeno",
     list: "popis",
+    carousel: "Vrtuljak",
+    tab: "Tabulatori",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Tabulatori",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "top",
@@ -988,6 +1030,61 @@ export var hrStrings = {
       url: "URL",
       week: "Tjedan"
     },
+    autocomplete: {
+      name: "Puno ime i prezime",
+      "honorific-prefix": "Prefiks",
+      "given-name": "Ime",
+      "additional-name": "Srednje ime",
+      "family-name": "Prezime",
+      "honorific-suffix": "Sufiks",
+      nickname: "Nadimak",
+      "organization-title": "Naziv radnog mjesta",
+      username: "Korisničko ime",
+      "new-password": "Nova lozinka",
+      "current-password": "Trenutna lozinka",
+      organization: "Naziv tvrtke ili ustanove",
+      "street-address": "Puna adresa",
+      "address-line1": "Redak adrese 1",
+      "address-line2": "Redak adrese 2",
+      "address-line3": "Redak adrese 3",
+      "address-level4": "Adresa razine 4",
+      "address-level3": "Adresa razine 3",
+      "address-level2": "Adresa razine 2",
+      "address-level1": "Adresa razine 1",
+      country: "Pozivni broj zemlje",
+      "country-name": "Naziv zemlje",
+      "postal-code": "Poštanski broj",
+      "cc-name": "Ime vlasnika kartice",
+      "cc-given-name": "Ime vlasnika kartice",
+      "cc-additional-name": "Srednje ime vlasnika kartice",
+      "cc-family-name": "Prezime vlasnika kartice",
+      "cc-number": "Broj kreditne kartice",
+      "cc-exp": "Isteka",
+      "cc-exp-month": "Mjesec isteka",
+      "cc-exp-year": "Godina isteka",
+      "cc-csc": "Sigurnosni kod kartice",
+      "cc-type": "Vrsta kreditne kartice",
+      "transaction-currency": "Valuta transakcije",
+      "transaction-amount": "Iznos transakcije",
+      language: "Preferirani jezik",
+      bday: "Rođendan",
+      "bday-day": "Rođendanski dan",
+      "bday-month": "Rođendanski mjesec",
+      "bday-year": "Godina rođenja",
+      sex: "Spol",
+      url: "URL web stranice",
+      photo: "Profilna fotografija",
+      tel: "Telefonski broj",
+      "tel-country-code": "Pozivni broj za telefon",
+      "tel-national": "Nacionalni telefonski broj",
+      "tel-area-code": "Pozivni broj",
+      "tel-local": "Lokalni telefonski broj",
+      "tel-local-prefix": "Prefiks lokalnog telefona",
+      "tel-local-suffix": "Sufiks lokalnog telefona",
+      "tel-extension": "Proširenje telefona",
+      email: "Adresa e-pošte",
+      impp: "Protokol za razmjenu izravnih poruka"
+    },
     maskType: {
       none: "Nijedan",
       pattern: "Uzorak",
@@ -1014,6 +1111,8 @@ export var hrStrings = {
     noPreview: "no preview",
     showAllQuestions: "show preview with all questions",
     showAnsweredQuestions: "show preview with answered questions",
+    allQuestions: "Prikaži sva pitanja",
+    answeredQuestions: "Prikaži samo odgovorena pitanja",
     pages: "Dovršene stranice",
     questions: "Odgovorena pitanja",
     requiredQuestions: "Odgovoreno na obavezna pitanja",
@@ -1029,13 +1128,10 @@ export var hrStrings = {
     showNavigationButtons: {
       none: "Skriven"
     },
-    showTimerPanel: {
-      none: "Skriven"
+    timerInfoMode: {
+      combined: "Oba"
     },
-    showTimerPanelMode: {
-      all: "Oba"
-    },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "Ovisi o izgledu matrice"
     },
     panelsState: {
@@ -1106,17 +1202,19 @@ export var hrStrings = {
       percent: "Postotak",
       date: "Datum"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "Originalan"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "Originalan"
     },
-    showProgressBar: {
-      off: "Skriven",
-      topbottom: "top and bottom",
+    progressBarLocation: {
+      top: "Vrh",
+      bottom: "Dno",
+      topbottom: "Vrh i dno",
       aboveheader: "Iznad zaglavlja",
-      belowheader: "Ispod zaglavlja"
+      belowheader: "Ispod zaglavlja",
+      off: "Skriven"
     },
     sum: "Suma",
     count: "Brojati",
@@ -1255,12 +1353,13 @@ export var hrStrings = {
       questionTitleLocation: "Odnosi se na sva pitanja unutar ovog panela. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       questionTitleWidth: "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       questionErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na sva pitanja unutar ploče. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika.",
-      questionsOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika.",
+      questionOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika.",
       page: "Premješta ploču na kraj odabrane stranice.",
       innerIndent: "Dodaje razmak ili marginu između sadržaja ploče i lijevog obruba okvira ploče.",
       startWithNewLine: "Poništite odabir za prikaz ploče u jednom retku s prethodnim pitanjem ili pločom. Postavka se ne primjenjuje ako je ploča prvi element u obrascu.",
       state: "Odaberite između: \"Prošireno\" - ploča je prikazana u cijelosti i može se sažeti; \"Sažeto\" - ploča prikazuje samo naslov i opis i može se proširiti; \"Zaključano\" - ploča je prikazana u cijelosti i ne može se sažeti.",
-      width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.)."
+      width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
+      showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar ove ploče."
     },
     paneldynamic: {
       name: "ID ploče koji nije vidljiv ispitanicima.",
@@ -1268,7 +1367,7 @@ export var hrStrings = {
       visibleIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje vidljivost ploče.",
       enableIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje ploče.",
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
-      templateTitleLocation: "Odnosi se na sva pitanja unutar ovog panela. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama).",
+      templateQuestionTitleLocation: "Odnosi se na sva pitanja unutar ovog panela. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       templateErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       errorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na sva pitanja unutar ploče. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika.",
       page: "Premješta ploču na kraj odabrane stranice.",
@@ -1283,9 +1382,10 @@ export var hrStrings = {
       titleLocation: "Ovu postavku automatski nasljeđuju sva pitanja unutar ove ploče. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       descriptionLocation: "Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Pod naslovom ploče\" prema zadanim postavkama).",
       newPanelPosition: "Definira položaj novododane ploče. Prema zadanim postavkama na kraj se dodaju nove ploče. Odaberite \"Dalje\" da biste umetnuli novu ploču nakon trenutne.",
-      defaultValueFromLastPanel: "Duplicira odgovore s posljednje ploče i dodjeljuje ih sljedećoj dodanoj dinamičkoj ploči.",
+      copyDefaultValueFromLastEntry: "Duplicira odgovore s posljednje ploče i dodjeljuje ih sljedećoj dodanoj dinamičkoj ploči.",
       keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči."
     },
+    copyDefaultValueFromLastEntry: "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku.",
     defaultValueExpression: "Ova postavka omogućuje dodjeljivanje zadane vrijednosti odgovora na temelju izraza. Izraz može uključivati osnovne izračune - '{q1_id} + {q2_id}', Booleove izraze, kao što su '{age} > 60', i funkcije: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd. Vrijednost određena ovim izrazom služi kao početna zadana vrijednost koja se može nadjačati ručnim unosom ispitanika.",
     resetValueIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje kada se unos ispitanika vraća na vrijednost na temelju \"Zadani izraz vrijednosti\" ili \"Postavi izraz vrijednosti\" ili na vrijednost \"Zadani odgovor\" (ako je postavljena).",
     setValueIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje kada pokrenuti \"Postavi izraz vrijednosti\" i dinamički dodijelite dobivenu vrijednost kao odgovor.",
@@ -1339,7 +1439,8 @@ export var hrStrings = {
     },
     // survey templates
     survey: {
-      mode: "Odaberite između: \"Može se uređivati\" - omogućuje ispitanicima da ispune vašu anketu; \"Samo za čitanje\" - onemogućuje uređivanje obrazaca."
+      readOnly: "Odaberite želite li ispitanicima onemogućiti ispunjavanje upitnika.",
+      progressBarLocation: "Postavlja lokaciju trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja ankete."
     },
     matrixdropdowncolumn: {
       name: "ID stupca koji nije vidljiv ispitanicima.",
@@ -1348,27 +1449,29 @@ export var hrStrings = {
       visibleIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje vidljivost stupca.",
       enableIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje stupca.",
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
-      showInMultipleColumns: "Kada je odabrano, stvara pojedinačni stupac za svaku mogućnost izbora."
+      showInMultipleColumns: "Kada je odabrano, stvara pojedinačni stupac za svaku mogućnost izbora.",
+      colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
     },
+    caseInsensitive: "Odaberite ako se velika i mala slova u regularnom izrazu moraju tretirati kao ekvivalentna.",
     widthMode: "Odaberite između: \"Statika\" - postavlja fiksnu širinu; \"Responsive\" - čini da anketa zauzima punu širinu zaslona; \"Auto\" - primjenjuje se bilo koji od dva ovisno o korištenim vrstama pitanja.",
     cookieName: "Kolačići sprječavaju korisnike da dvaput ispune istu anketu.",
     logo: "Zalijepite slikovnu vezu (bez ograničenja veličine) ili kliknite ikonu mape da biste pregledali datoteku s računala (do 64 KB).",
     logoWidth: "Postavlja širinu logotipa u CSS jedinicama (px, %, in, pt itd.).",
     logoHeight: "Postavlja visinu logotipa u CSS jedinicama (px, %, in, pt itd.).",
     logoFit: "Odaberite između: \"Nema\" - slika zadržava svoju izvornu veličinu; \"Sadrži\" - slika se mijenja kako bi stala uz zadržavanje omjera slike; \"Poklopac\" - slika ispunjava cijelu kutiju zadržavajući omjer slike; \"Ispuna\" - slika se rasteže kako bi ispunila kutiju bez zadržavanja omjera slike.",
-    goNextPageAutomatic: "Odaberite želite li da anketa automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici.",
-    allowCompleteSurveyAutomatic: "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja.",
+    autoAdvanceEnabled: "Odaberite želite li da se upitnik automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici. Ova se značajka neće primijeniti ako je posljednje pitanje na stranici otvoreno ili dopušta više odgovora.",
+    autoAdvanceAllowComplete: "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja.",
     showNavigationButtons: "Postavlja vidljivost i mjesto navigacijskih gumba na stranici.",
-    showProgressBar: "Postavlja vidljivost i mjesto trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja upitnika.",
+    navigationButtonsLocation: "Postavlja mjesto navigacijskih gumba na stranici.",
     showPreviewBeforeComplete: "Omogućite stranicu pretpregleda samo sa svim ili odgovorenim pitanjima.",
     questionTitleLocation: "Odnosi se na sva pitanja unutar ankete. Ova postavka može se nadjačati pravilima poravnanja naslova na nižim razinama: ploča, stranica ili pitanje. Postavka niže razine nadjačat će one na višoj razini.",
-    requiredText: "Simbol ili niz simbola koji označavaju da je potreban odgovor.",
+    requiredMark: "Simbol ili niz simbola koji označavaju da je potreban odgovor.",
     questionStartIndex: "Unesite broj ili slovo s kojim želite započeti numeriranje.",
     questionErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja.",
-    focusFirstQuestionAutomatic: "Odaberite želite li da prvo polje za unos na svakoj stranici bude spremno za unos teksta.",
-    questionsOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
+    autoFocusFirstQuestion: "Odaberite želite li da prvo polje za unos na svakoj stranici bude spremno za unos teksta.",
+    questionOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
     maxTextLength: "Samo za pitanja o unosu teksta.",
-    maxOthersLength: "Samo za komentare pitanja.",
+    maxCommentLength: "Samo za komentare pitanja.",
     commentAreaRows: "Postavlja broj prikazanih redaka u tekstnim područjima za komentare pitanja. U ulazu zauzima više redaka pojavljuje se klizač.",
     autoGrowComment: "Odaberite želite li da komentari pitanja i pitanja dugog teksta automatski rastu u visinu na temelju unesene duljine teksta.",
     allowResizeComment: "Samo za komentare pitanja i pitanja dugog teksta.",
@@ -1383,10 +1486,10 @@ export var hrStrings = {
     rowTitleWidth: "Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
     totalText: "Vidljivo samo ako barem jedan stupac ima izraz Vrsta zbroja ili Ukupno.",
     cellErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na ćeliju s unosom koji nije valjan. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\".",
+    detailErrorLocation: "Postavlja mjesto poruka o pogreškama za pitanja ugniježđena u detaljnim odjeljcima. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\".",
     keyDuplicationError: "Kada je omogućeno svojstvo \"Spriječi duplicirane odgovore\", ispitanik koji pokuša poslati duplikat unosa primit će sljedeću poruku o pogrešci.",
     totalExpression: "Omogućuje izračunavanje ukupnih vrijednosti na temelju izraza. Izraz može uključivati osnovne izračune ('{q1_id} + {q2_id}'), Booleove izraze ('{age} > 60') i funkcije ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd.).",
     confirmDelete: "Pokreće upit u kojem se traži potvrda brisanja retka.",
-    defaultValueFromLastRow: "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku.",
     keyName: "Ako navedeni stupac sadrži identične vrijednosti, anketa odbacuje pogrešku \"Nejedinstvena vrijednost ključa\".",
     description: "Upišite podnaslov.",
     locale: "Odaberite jezik za početak stvaranja upitnika. Da biste dodali prijevod, prijeđite na novi jezik i prevedite izvorni tekst ovdje ili na kartici Prijevodi.",
@@ -1394,21 +1497,21 @@ export var hrStrings = {
     imageFit: "Odaberite između: \"Nema\" - slika zadržava svoju izvornu veličinu; \"Sadrži\" - slika se mijenja kako bi stala uz zadržavanje omjera slike; \"Poklopac\" - slika ispunjava cijelu kutiju zadržavajući omjer slike; \"Ispuna\" - slika se rasteže kako bi ispunila kutiju bez zadržavanja omjera slike.",
     autoGrow: "Postupno povećava visinu polja unosa tijekom unosa podataka. Nadjačava postavku \"Visina polja unosa (u crtama)\".",
     allowResize: "Ručica za promjenu veličine (ili držač) pojavljuje se u kutu i može se povući kako bi se promijenila veličina polja za unos.",
-    maxTimeToFinish: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na stranicu zahvale.",
-    maxTimeToFinishPage: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu.",
+    timeLimit: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na stranicu zahvale.",
+    timeLimitPerPage: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu.",
     validateVisitedEmptyFields: "Omogućite ovu mogućnost da biste pokrenuli provjeru valjanosti kada se korisnik usredotoči na prazno polje za unos, a zatim ga napusti bez ikakvih promjena.",
     page: {
-      maxTimeToFinish: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu.",
+      timeLimit: "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu.",
       visibleIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje vidljivost stranice.",
       enableIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje stranice.",
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
       questionTitleLocation: "Odnosi se na sva pitanja unutar ove stranice. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja ili ploče. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       questionTitleWidth: "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       questionErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama).",
-      questionsOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Original\" prema zadanim postavkama). Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
-      navigationButtonsVisibility: "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
+      questionOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Original\" prema zadanim postavkama). Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
+      showNavigationButtons: "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
     },
-    showTimerPanel: "Postavlja vidljivost i mjesto mjerača vremena na stranici.",
+    timerLocation: "Postavlja lokaciju mjerača vremena na stranici.",
     panelsState: "Odaberite između: \"Zaključano\" - korisnici ne mogu proširiti ili sažeti ploče; \"Sažmite sve\" - sve ploče počinju u urušenom stanju; \"Proširite sve\" - sve ploče počinju u proširenom stanju; \"Prvo prošireno\" - samo je prva ploča u početku proširena.",
     imageLinkName: "Unesite naziv zajedničkog svojstva unutar polja objekata koje sadrži URL-ove slike ili videodatoteke koje želite prikazati na popisu izbora.",
     choices: "Lijeva vrijednost služi kao ID artikla koji se koristi u uvjetnim pravilima, a ispitanicima se prikazuje prava vrijednost.",
@@ -1421,6 +1524,8 @@ export var hrStrings = {
     useDisplayValuesInDynamicTexts: "U vrstama pitanja s jednim i višestrukim odabirom svaka mogućnost izbora ima ID i vrijednost prikaza. Kada je odabrana, ova postavka prikazuje prikazanu vrijednost umjesto ID vrijednosti u HTML pitanjima te dinamičke naslove i opise elemenata upitnika.",
     clearIfInvisible: "Odaberite želite li očistiti vrijednosti pitanja skrivene uvjetnom logikom i kada to učiniti. Opcija \"Naslijedi\" prema zadanim postavkama primjenjuje postavku na razini upitnika (\"Nakon završetka ankete\").",
     choicesFromQuestionMode: "Odaberite između: \"Sve\" - kopira sve opcije izbora iz odabranog pitanja; \"Odabrano\" - dinamički kopira samo odabrane opcije izbora; \"Neodabrano\" - dinamički kopira samo neodabrane opcije izbora. Opcije \"Ništa\" i \"Ostalo\" kopiraju se prema zadanim postavkama ako su omogućene u izvornom pitanju.",
+    choiceValuesFromQuestion: "U vrstama pitanja s jednim i višestrukim odabirom svaka opcija izbora ima ID i vrijednost prikaza. Ova postavka određuje koji stupac matrice ili pitanje na ploči treba dati ID-ove.",
+    choiceTextsFromQuestion: "U vrstama pitanja s jednim i višestrukim odabirom svaka opcija izbora ima ID i vrijednost prikaza. Ova postavka određuje koji stupac matrice ili pitanje na ploči treba pružiti tekstove za prikaz.",
     showOtherItem: "Kada je odabrano, korisnici mogu uključiti dodatni unos u zaseban okvir za komentare.",
     separateSpecialChoices: "Prikazuje svaku mogućnost posebnog izbora (\"Nema\", \"Ostalo\", \"Odaberi sve\") u novom retku, čak i kada koristite izgled s više stupaca.",
     path: "Navedite mjesto unutar skupa podataka o usluzi na kojem se nalazi ciljno polje objekata. Ostavite prazno ako URL već pokazuje na polje.",
@@ -1442,7 +1547,7 @@ export var hrStrings = {
     needConfirmRemoveFile: "Pokreće upit u kojem se traži potvrda brisanja datoteke.",
     selectToRankEnabled: "Omogućite rangiranje samo odabranih odabira. Korisnici će povući odabrane stavke s popisa izbora kako bi ih naručili unutar područja rangiranja.",
     dataList: "Unesite popis izbora koji će se predložiti ispitaniku tijekom unosa.",
-    itemSize: "Postavka samo mijenja veličinu ulaznih polja i ne utječe na širinu okvira pitanja.",
+    inputSize: "Postavka samo mijenja veličinu ulaznih polja i ne utječe na širinu okvira pitanja.",
     itemTitleWidth: "Postavlja dosljednu širinu za sve natpise stavki u pikselima",
     inputTextAlignment: "Odaberite način poravnanja ulazne vrijednosti unutar polja. Zadana postavka \"Automatski\" poravnava ulaznu vrijednost udesno ako se primjenjuje valutno ili numeričko maskiranje i ulijevo ako nije.",
     altText: "Služi kao zamjena kada se slika ne može prikazati na korisnikovom uređaju i u svrhu pristupačnosti.",
@@ -1490,7 +1595,8 @@ export var hrStrings = {
     header: {
       inheritWidthFrom: "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja sadržaja zaglavlja kako bi se uklopila u HTML element u koji je upitnik postavljen.",
       textAreaWidth: "Širina područja zaglavlja koje sadrži naslov i opis upitnika, mjerena u pikselima.",
-      overlapEnabled: "Čini dno zaglavlja prekrivenim vrhom upitnika."
+      overlapEnabled: "Kada je omogućeno, vrh upitnika prekriva dno zaglavlja.",
+      mobileHeight: "Kada je postavljena na 0, visina se automatski izračunava kako bi se prilagodio sadržaju zaglavlja."
     },
     panellayoutcolumn: {
       effectiveWidth: "Prihvaća vrijednosti %.",
@@ -1559,12 +1665,11 @@ export var hrStrings = {
     maxValueExpression: "Izraz maksimalne vrijednosti",
     step: "Korak",
     dataList: "Popis podataka",
-    itemSize: "itemSize",
+    inputSize: "inputSize",
     itemTitleWidth: "Širina natpisa stavke (u px)",
     inputTextAlignment: "Usklađivanje ulaznih vrijednosti",
     elements: "Elemenata",
     content: "Sadržaj",
-    navigationButtonsVisibility: "navigationButtonsVisibility",
     navigationTitle: "Naslov navigacije",
     navigationDescription: "Opis navigacije",
     longTap: "Dugi dodir",
@@ -1578,6 +1683,7 @@ export var hrStrings = {
     imageFit: "Prilagodba slike",
     altText: "Zamjenski tekst",
     height: "Visina",
+    mobileHeight: "Visina na pametnim telefonima",
     penColor: "Boja olovke",
     backgroundColor: "Boja pozadine",
     templateElements: "Elementi predloška",
@@ -1660,11 +1766,26 @@ export var hrStrings = {
       orchid: "Orhideja",
       tulip: "Lala",
       brown: "Smeđ",
-      green: "Zelen"
+      green: "Zelen",
+      gray: "Siv"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Pozadina površine",
+    "--sjs-primary-background-500": "Glavni",
+    "--sjs-secondary-background-500": "Sekundaran",
+    surfaceScale: "Površina",
+    userInterfaceBaseUnit: "Korisničko sučelje",
+    fontScale: "Krstionica",
+    names: {
+      sc2020: "Kreator ankete 2020",
+      "default-light": "Svjetlo",
+      "default-dark": "Mračan",
+      "default-contrast": "Razlika"
     }
   }
 };
-editorLocalization.locales["hr"] = hrStrings;
+setupLocale({ localeCode: "hr", strings: hrStrings });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
@@ -1760,14 +1881,14 @@ editorLocalization.locales["hr"] = hrStrings;
 // pe.portraitOrientation: "Switch to portrait orientation" => "Prebacivanje na okomito usmjerenje"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Visina slike (u CSS-prihvaćenim vrijednostima)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Širina slike (u CSS-prihvaćenim vrijednostima)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Vremensko ograničenje za dovršetak stranice (u sekundama)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Vremensko ograničenje za dovršetak stranice (u sekundama)"
 // question.page: "Parent page" => "Nadređena stranica"
 // pe.noEntriesText: "Empty entries text" => "Prazan tekst unosa"
 // pe.setValue: "Answer" => "Odgovor"
 // pe.dataFormat: "Image format" => "Oblik slike"
 // pe.allowAddRows: "Allow adding rows" => "Dopusti dodavanje redaka"
 // pe.allowRemoveRows: "Allow removing rows" => "Dopusti uklanjanje redaka"
-// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "Dopusti povlačenje i ispuštanje retka"
+// pe.allowRowReorder: "Allow row drag and drop" => "Dopusti povlačenje i ispuštanje retka"
 // pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "Ne primjenjuje se ako navedete točnu širinu ili visinu slike."
 // pe.minImageWidth: "Minimum image width" => "Minimalna širina slike"
 // pe.maxImageWidth: "Maximum image width" => "Maksimalna širina slike"
@@ -1778,11 +1899,11 @@ editorLocalization.locales["hr"] = hrStrings;
 // pe.logo: "Logo (URL or base64-encoded string)" => "Logotip (URL ili niz kodiran base64)"
 // pe.questionsOnPageMode: "Survey structure" => "Struktura upitnika"
 // pe.maxTextLength: "Maximum answer length (in characters)" => "Maksimalna duljina odgovora (u znakovima)"
-// pe.maxOthersLength: "Maximum comment length (in characters)" => "Maksimalna duljina komentara (u znakovima)"
+// pe.maxCommentLength: "Maximum comment length (in characters)" => "Maksimalna duljina komentara (u znakovima)"
 // pe.autoGrowComment: "Auto-expand comment area if necessary" => "Ako je potrebno, automatsko proširivanje područja komentara"
 // pe.allowResizeComment: "Allow users to resize text areas" => "Dopusti korisnicima promjenu veličine tekstnih područja"
 // pe.textUpdateMode: "Update text question value" => "Ažuriranje vrijednosti tekstnog pitanja"
-// pe.focusOnFirstError: "Set focus on the first invalid answer" => "Postavljanje fokusa na prvi odgovor koji nije valjan"
+// pe.autoFocusFirstError: "Set focus on the first invalid answer" => "Postavljanje fokusa na prvi odgovor koji nije valjan"
 // pe.checkErrorsMode: "Run validation" => "Pokreni provjeru valjanosti"
 // pe.navigateToUrl: "Navigate to URL" => "Navigacija do URL-a"
 // pe.navigateToUrlOnCondition: "Dynamic URL" => "Dinamički URL"
@@ -1817,11 +1938,11 @@ editorLocalization.locales["hr"] = hrStrings;
 // pe.panelsState: "Inner panel expand state" => "Stanje proširenja unutarnje ploče"
 // pe.templateDescription: "Description template" => "Predložak opisa"
 // pe.templateTitle: "Title template" => "Predložak naslova"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Opis alata gumba Prethodna ploča"
-// pe.panelNextText: "Next Panel button tooltip" => "Opis alata gumba Sljedeća ploča"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Opis alata gumba Prethodna ploča"
+// pe.nextPanelText: "Next Panel button tooltip" => "Opis alata gumba Sljedeća ploča"
 // pe.showRangeInProgress: "Show progress bar" => "Pokaži traku tijeka"
-// pe.templateTitleLocation: "Question title location" => "Mjesto naslova pitanja"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Ukloni mjesto gumba ploče"
+// pe.templateQuestionTitleLocation: "Question title location" => "Mjesto naslova pitanja"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Ukloni mjesto gumba ploče"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Sakrij pitanje ako nema redaka"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Sakrij stupce ako nema redaka"
 // pe.rateValues: "Custom rate values" => "Vrijednosti prilagođene stope"
@@ -1844,13 +1965,12 @@ editorLocalization.locales["hr"] = hrStrings;
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Poruka o pogrešci \"Nejedinstvena vrijednost ključa\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Minimalno odabrani odabiri"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maksimalan broj odabranih izbora"
-// pe.showClearButton: "Show the Clear button" => "Prikaz gumba Očisti"
 // pe.showNumber: "Show panel number" => "Pokaži broj ploče"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Širina logotipa (u CSS-prihvaćenim vrijednostima)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Visina logotipa (u CSS-prihvaćenim vrijednostima)"
 // pe.readOnly: "Read-only" => "Samo za čitanje"
 // pe.enableIf: "Editable if" => "Može se uređivati ako"
-// pe.emptyRowsText: "\"No rows\" message" => "Poruka \"Bez redaka\""
+// pe.noRowsText: "\"No rows\" message" => "Poruka \"Bez redaka\""
 // pe.size: "Input field size (in characters)" => "Veličina polja unosa (u znakovima)"
 // pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "Razdvoji posebne odabire (Ništa, Ostalo, Odaberi sve)"
 // pe.choicesFromQuestion: "Copy choices from the following question" => "Kopiraj odabire iz sljedećeg pitanja"
@@ -1858,7 +1978,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // pe.showCommentArea: "Show the comment area" => "Prikaz područja komentara"
 // pe.commentPlaceholder: "Comment area placeholder" => "Rezervirano mjesto područja komentara"
 // pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "Opisi brzine prikaza kao ekstremne vrijednosti"
-// pe.rowsOrder: "Row order" => "Redoslijed redaka"
+// pe.rowOrder: "Row order" => "Redoslijed redaka"
 // pe.columnsLayout: "Column layout" => "Izgled stupca"
 // pe.columnColCount: "Nested column count" => "Broj ugniježđenih stupaca"
 // pe.state: "Panel expand state" => "Stanje proširenja ploče"
@@ -1875,8 +1995,6 @@ editorLocalization.locales["hr"] = hrStrings;
 // pe.indent: "Add indents" => "Dodavanje uvlaka"
 // panel.indent: "Add outer indents" => "Dodavanje vanjskih uvlaka"
 // pe.innerIndent: "Add inner indents" => "Dodavanje unutarnjih uvlaka"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Uzimanje zadanih vrijednosti iz posljednjeg retka"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Preuzimanje zadanih vrijednosti s posljednje ploče"
 // pe.emptyExpressionPlaceHolder: "Type expression here..." => "Ovdje upišite izraz..."
 // pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "Očisti vrijednost ako pitanje postane skriveno"
 // pe.valuePropertyName: "Value property name" => "Naziv svojstva Vrijednost"
@@ -1945,7 +2063,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // showTimerPanel.none: "Hidden" => "Skriven"
 // showTimerPanelMode.all: "Both" => "Oba"
 // detailPanelMode.none: "Hidden" => "Skriven"
-// addRowLocation.default: "Depends on matrix layout" => "Ovisi o izgledu matrice"
+// addRowButtonLocation.default: "Depends on matrix layout" => "Ovisi o izgledu matrice"
 // panelsState.default: "Users cannot expand or collapse panels" => "Korisnici ne mogu proširiti ili sažeti ploče"
 // panelsState.collapsed: "All panels are collapsed" => "Sve ploče su urušene"
 // panelsState.expanded: "All panels are expanded" => "Sve ploče su proširene"
@@ -2264,13 +2382,12 @@ editorLocalization.locales["hr"] = hrStrings;
 // panel.description: "Panel description" => "Opis ploče"
 // panel.visibleIf: "Make the panel visible if" => "Učini ploču vidljivom ako"
 // panel.requiredIf: "Make the panel required if" => "Učinite ploču potrebnom ako"
-// panel.questionsOrder: "Question order within the panel" => "Redoslijed pitanja unutar ploče"
+// panel.questionOrder: "Question order within the panel" => "Redoslijed pitanja unutar ploče"
 // panel.startWithNewLine: "Display the panel on a new line" => "Prikaz ploče na novom retku"
 // panel.state: "Panel collapse state" => "Stanje sažimanja ploče"
 // panel.width: "Inline panel width" => "Širina umetnute ploče"
 // panel.minWidth: "Minimum panel width" => "Minimalna širina ploče"
 // panel.maxWidth: "Maximum panel width" => "Maksimalna širina ploče"
-// panel.showNumber: "Number panels" => "Brojčane ploče"
 // paneldynamic.name: "Panel name" => "Naziv ploče"
 // paneldynamic.title: "Panel title" => "Naslov ploče"
 // paneldynamic.description: "Panel description" => "Opis ploče"
@@ -2290,7 +2407,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // paneldynamic.hideNumber: "Hide the panel number" => "Skrivanje broja ploče"
 // paneldynamic.titleLocation: "Panel title alignment" => "Poravnanje naslova ploče"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "Poravnanje opisa ploče"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "Poravnanje naslova pitanja"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "Poravnanje naslova pitanja"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "Poravnanje poruke o pogrešci"
 // paneldynamic.newPanelPosition: "New panel location" => "Novo mjesto ploče"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "Spriječite dvostruke odgovore u sljedećem pitanju"
@@ -2323,7 +2440,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // page.description: "Page description" => "Opis stranice"
 // page.visibleIf: "Make the page visible if" => "Učini stranicu vidljivom ako"
 // page.requiredIf: "Make the page required if" => "Učini stranicu potrebnom ako"
-// page.questionsOrder: "Question order on the page" => "Redoslijed pitanja na stranici"
+// page.questionOrder: "Question order on the page" => "Redoslijed pitanja na stranici"
 // matrixdropdowncolumn.name: "Column name" => "Naziv stupca"
 // matrixdropdowncolumn.title: "Column title" => "Naslov stupca"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "Sprječavanje dvostrukih odgovora"
@@ -2397,8 +2514,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // totalDisplayStyle.currency: "Currency" => "Valuta"
 // totalDisplayStyle.percent: "Percentage" => "Postotak"
 // totalDisplayStyle.date: "Date" => "Datum"
-// rowsOrder.initial: "Original" => "Originalan"
-// questionsOrder.initial: "Original" => "Originalan"
+// rowOrder.initial: "Original" => "Originalan"
+// questionOrder.initial: "Original" => "Originalan"
 // showProgressBar.aboveheader: "Above the header" => "Iznad zaglavlja"
 // showProgressBar.belowheader: "Below the header" => "Ispod zaglavlja"
 // pv.sum: "Sum" => "Suma"
@@ -2415,7 +2532,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Odnosi se na sva pitanja unutar ovog panela. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama)."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Postavlja mjesto poruke o pogrešci u odnosu na sva pitanja unutar ploče. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Zadržava izvorni redoslijed pitanja ili ih randomizira. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Zadržava izvorni redoslijed pitanja ili ih randomizira. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika."
 // panel.page: "Repositions the panel to the end of a selected page." => "Premješta ploču na kraj odabrane stranice."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "Dodaje razmak ili marginu između sadržaja ploče i lijevog obruba okvira ploče."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "Poništite odabir za prikaz ploče u jednom retku s prethodnim pitanjem ili pločom. Postavka se ne primjenjuje ako je ploča prvi element u obrascu."
@@ -2426,7 +2543,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje vidljivost ploče."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje ploče."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Odnosi se na sva pitanja unutar ovog panela. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama)."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Odnosi se na sva pitanja unutar ovog panela. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama)."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama)."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Postavlja mjesto poruke o pogrešci u odnosu na sva pitanja unutar ploče. Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "Premješta ploču na kraj odabrane stranice."
@@ -2440,7 +2557,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Ovu postavku automatski nasljeđuju sva pitanja unutar ove ploče. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Vrh\" prema zadanim postavkama)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Pod naslovom ploče\" prema zadanim postavkama)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Definira položaj novododane ploče. Prema zadanim postavkama na kraj se dodaju nove ploče. Odaberite \"Dalje\" da biste umetnuli novu ploču nakon trenutne."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplicira odgovore s posljednje ploče i dodjeljuje ih sljedećoj dodanoj dinamičkoj ploči."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplicira odgovore s posljednje ploče i dodjeljuje ih sljedećoj dodanoj dinamičkoj ploči."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Ova postavka omogućuje dodjeljivanje zadane vrijednosti odgovora na temelju izraza. Izraz može uključivati osnovne izračune - '{q1_id} + {q2_id}', Booleove izraze, kao što su '{age} > 60', i funkcije: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd. Vrijednost određena ovim izrazom služi kao početna zadana vrijednost koja se može nadjačati ručnim unosom ispitanika."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje kada se unos ispitanika vraća na vrijednost na temelju \"Zadani izraz vrijednosti\" ili \"Postavi izraz vrijednosti\" ili na vrijednost \"Zadani odgovor\" (ako je postavljena)."
@@ -2486,18 +2603,17 @@ editorLocalization.locales["hr"] = hrStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Postavlja širinu logotipa u CSS jedinicama (px, %, in, pt itd.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Postavlja visinu logotipa u CSS jedinicama (px, %, in, pt itd.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Odaberite između: \"Nema\" - slika zadržava svoju izvornu veličinu; \"Sadrži\" - slika se mijenja kako bi stala uz zadržavanje omjera slike; \"Poklopac\" - slika ispunjava cijelu kutiju zadržavajući omjer slike; \"Ispuna\" - slika se rasteže kako bi ispunila kutiju bez zadržavanja omjera slike."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Odaberite želite li da anketa automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Postavlja vidljivost i mjesto navigacijskih gumba na stranici."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Postavlja vidljivost i mjesto trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja upitnika."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Omogućite stranicu pretpregleda samo sa svim ili odgovorenim pitanjima."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "Odnosi se na sva pitanja unutar ankete. Ova postavka može se nadjačati pravilima poravnanja naslova na nižim razinama: ploča, stranica ili pitanje. Postavka niže razine nadjačat će one na višoj razini."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "Simbol ili niz simbola koji označavaju da je potreban odgovor."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "Simbol ili niz simbola koji označavaju da je potreban odgovor."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "Unesite broj ili slovo s kojim želite započeti numeriranje."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "Odaberite želite li da prvo polje za unos na svakoj stranici bude spremno za unos teksta."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Zadržava izvorni redoslijed pitanja ili ih randomizira. Efekt ove postavke vidljiv je samo na kartici Pretpregled."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "Odaberite želite li da prvo polje za unos na svakoj stranici bude spremno za unos teksta."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Zadržava izvorni redoslijed pitanja ili ih randomizira. Efekt ove postavke vidljiv je samo na kartici Pretpregled."
 // pehelp.maxTextLength: "For text entry questions only." => "Samo za pitanja o unosu teksta."
-// pehelp.maxOthersLength: "For question comments only." => "Samo za komentare pitanja."
+// pehelp.maxCommentLength: "For question comments only." => "Samo za komentare pitanja."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "Odaberite želite li da komentari pitanja i pitanja dugog teksta automatski rastu u visinu na temelju unesene duljine teksta."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "Samo za komentare pitanja i pitanja dugog teksta."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "Prilagođene varijable služe kao srednje ili pomoćne varijable koje se koriste u izračunima obrazaca. Oni uzimaju unose ispitanika kao izvorne vrijednosti. Svaka prilagođena varijabla ima jedinstveni naziv i izraz na kojem se temelji."
@@ -2513,24 +2629,23 @@ editorLocalization.locales["hr"] = hrStrings;
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Kada je omogućeno svojstvo \"Spriječi duplicirane odgovore\", ispitanik koji pokuša poslati duplikat unosa primit će sljedeću poruku o pogrešci."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Omogućuje izračunavanje ukupnih vrijednosti na temelju izraza. Izraz može uključivati osnovne izračune ('{q1_id} + {q2_id}'), Booleove izraze ('{age} > 60') i funkcije ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd.)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Pokreće upit u kojem se traži potvrda brisanja retka."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku."
 // pehelp.description: "Type a subtitle." => "Upišite podnaslov."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Odaberite jezik za početak stvaranja upitnika. Da biste dodali prijevod, prijeđite na novi jezik i prevedite izvorni tekst ovdje ili na kartici Prijevodi."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Postavlja mjesto sekcije s detaljima u odnosu na redak. Odaberite između: \"Nema\" - ne dodaje se proširenje; \"Ispod reda\" - proširenje retka nalazi se ispod svakog retka matrice; \"Ispod retka prikaži samo proširenje jednog retka\" - proširenje se prikazuje samo ispod jednog retka, preostala proširenja retka su sažeta."
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Odaberite između: \"Nema\" - slika zadržava svoju izvornu veličinu; \"Sadrži\" - slika se mijenja kako bi stala uz zadržavanje omjera slike; \"Poklopac\" - slika ispunjava cijelu kutiju zadržavajući omjer slike; \"Ispuna\" - slika se rasteže kako bi ispunila kutiju bez zadržavanja omjera slike."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Postupno povećava visinu polja unosa tijekom unosa podataka. Nadjačava postavku \"Visina polja unosa (u crtama)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Ručica za promjenu veličine (ili držač) pojavljuje se u kutu i može se povući kako bi se promijenila veličina polja za unos."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na stranicu zahvale."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na stranicu zahvale."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Vremenski interval u sekundama nakon kojeg anketa automatski prelazi na sljedeću stranicu."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje vidljivost stranice."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje onemogućuje način samo za čitanje stranice."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Odnosi se na sva pitanja unutar ove stranice. Ako želite nadjačati ovu postavku, definirajte pravila poravnanja naslova za pojedinačna pitanja ili ploče. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama)."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Zadržava izvorni redoslijed pitanja ili ih randomizira. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Original\" prema zadanim postavkama). Efekt ove postavke vidljiv je samo na kartici Pretpregled."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Postavlja vidljivost i mjesto mjerača vremena na stranici."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Zadržava izvorni redoslijed pitanja ili ih randomizira. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Original\" prema zadanim postavkama). Efekt ove postavke vidljiv je samo na kartici Pretpregled."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Odaberite između: \"Zaključano\" - korisnici ne mogu proširiti ili sažeti ploče; \"Sažmite sve\" - sve ploče počinju u urušenom stanju; \"Proširite sve\" - sve ploče počinju u proširenom stanju; \"Prvo prošireno\" - samo je prva ploča u početku proširena."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Unesite naziv zajedničkog svojstva unutar polja objekata koje sadrži URL-ove slike ili videodatoteke koje želite prikazati na popisu izbora."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Lijeva vrijednost služi kao ID artikla koji se koristi u uvjetnim pravilima, a ispitanicima se prikazuje prava vrijednost."
@@ -2558,7 +2673,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "Pokreće upit u kojem se traži potvrda brisanja datoteke."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Omogućite rangiranje samo odabranih odabira. Korisnici će povući odabrane stavke s popisa izbora kako bi ih naručili unutar područja rangiranja."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Unesite popis izbora koji će se predložiti ispitaniku tijekom unosa."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Postavka samo mijenja veličinu ulaznih polja i ne utječe na širinu okvira pitanja."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Postavka samo mijenja veličinu ulaznih polja i ne utječe na širinu okvira pitanja."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Postavlja dosljednu širinu za sve natpise stavki u pikselima"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Opcija \"Automatski\" automatski određuje odgovarajući način prikaza - Slika, Videozapis ili YouTube - na temelju navedenog izvornog URL-a."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Služi kao zamjena kada se slika ne može prikazati na korisnikovom uređaju i u svrhu pristupačnosti."
@@ -2571,8 +2686,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Širina natpisa stavke (u px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst koji prikazuje jesu li odabrane sve mogućnosti"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Tekst rezerviranog mjesta za područje rangiranja"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Automatsko ispunjavanje upitnika"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Automatsko ispunjavanje upitnika"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "Spremanje maskirane vrijednosti u rezultate upitnika"
 // patternmask.pattern: "Value pattern" => "Uzorak vrijednosti"
 // datetimemask.min: "Minimum value" => "Minimalna vrijednost"
@@ -2727,7 +2842,6 @@ editorLocalization.locales["hr"] = hrStrings;
 // theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Postavlja glavnu boju pozadine upitnika."
 // header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja sadržaja zaglavlja kako bi se uklopila u HTML element u koji je upitnik postavljen."
 // header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Širina područja zaglavlja koje sadrži naslov i opis upitnika, mjerena u pikselima."
-// header.overlapEnabled: "Makes the bottom of the header overlaid with the top of the survey." => "Čini dno zaglavlja prekrivenim vrhom upitnika."
 // panellayoutcolumn.effectiveWidth: "Accepts values %." => "Prihvaća vrijednosti %."
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Prihvaća vrijednosti px."
 // p.effectiveColSpan: "Column span" => "Raspon stupaca"
@@ -2747,3 +2861,142 @@ editorLocalization.locales["hr"] = hrStrings;
 // inputTextAlignment.right: "Right" => "Desno"
 // pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Odaberite način poravnanja ulazne vrijednosti unutar polja. Zadana postavka \"Automatski\" poravnava ulaznu vrijednost udesno ako se primjenjuje valutno ili numeričko maskiranje i ulijevo ako nije."
 // p.inputTextAlignment: "Input value alignment" => "Usklađivanje ulaznih vrijednosti"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Prikaz trake napretka"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Prikaz trake napretka"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Poravnanje trake napretka"
+// pv.carousel: "Carousel" => "Vrtuljak"
+// progressBarLocation.top: "Top" => "Vrh"
+// progressBarLocation.bottom: "Bottom" => "Dno"
+// progressBarLocation.topBottom: "Top and bottom" => "Vrh i dno"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube veze nisu podržane."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Počnite konfigurirati svoj obrazac"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Kliknite bilo koju ikonu kategorije da biste istražili postavke upitnika. Dodatne postavke postat će dostupne nakon što dodate element upitnika na površinu dizajna."
+// pe.caseInsensitive: "Case insensitive" => "Bez osjetljivosti na velika i mala slova"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Odaberite ako se velika i mala slova u regularnom izrazu moraju tretirati kao ekvivalentna."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Obrazac je prazan"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Obrazac je prazan"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Povucite element iz okvira s alatima ili kliknite gumb ispod."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Povucite element iz okvira s alatima ili kliknite gumb ispod."
+// ed.previewPlaceholderTitle: "No preview" => "Nema pregleda"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Nema pregleda"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Anketa ne sadrži vidljive elemente."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Anketa ne sadrži vidljive elemente."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Nema obaveza za prevođenje"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Nema obaveza za prevođenje"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Dodajte elemente u obrazac ili promijenite filtar nizova na alatnoj traci."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Dodajte elemente u obrazac ili promijenite filtar nizova na alatnoj traci."
+// lg.logicPlaceholderTitle: "No logical rules" => "Nema logičkih pravila"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Nema logičkih pravila"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Stvorite pravilo za prilagodbu tijeka upitnika."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Stvorite pravilo za prilagodbu tijeka upitnika."
+// pe.showTimer: "Use a timer" => "Koristite mjerač vremena"
+// theme.advancedMode: "Advanced mode" => "Napredni način rada"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Postavlja lokaciju mjerača vremena na stranici."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Kada je postavljena na 0, visina se automatski izračunava kako bi se prilagodio sadržaju zaglavlja."
+// p.mobileHeight: "Height on smartphones" => "Visina na pametnim telefonima"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Kada je omogućeno, vrh upitnika prekriva dno zaglavlja."
+// ed.creatorSettingTitle: "Creator Settings" => "Postavke autora"
+// tabs.accentColors: "Accent colors" => "Naglašavajuće boje"
+// tabs.scaling: "Scaling" => "Skaliranje"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Dodjeljuje brojeve pitanjima ugniježđenim unutar ove ploče."
+// creatortheme.--sjs-special-background: "Surface background" => "Pozadina površine"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Glavni"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundaran"
+// creatortheme.surfaceScale: "Surface" => "Površina"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Korisničko sučelje"
+// creatortheme.fontScale: "Font" => "Krstionica"
+// names.sc2020: "Survey Creator 2020" => "Kreator ankete 2020"
+// names.default-light: "Light" => "Svjetlo"
+// names.default-dark: "Dark" => "Mračan"
+// names.default-contrast: "Contrast" => "Razlika"
+// panel.showNumber: "Number this panel" => "Numerirajte ovu ploču"
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Odaberite želite li da se upitnik automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici. Ova se značajka neće primijeniti ako je posljednje pitanje na stranici otvoreno ili dopušta više odgovora."
+// autocomplete.name: "Full Name" => "Puno ime i prezime"
+// autocomplete.honorific-prefix: "Prefix" => "Prefiks"
+// autocomplete.given-name: "First Name" => "Ime"
+// autocomplete.additional-name: "Middle Name" => "Srednje ime"
+// autocomplete.family-name: "Last Name" => "Prezime"
+// autocomplete.honorific-suffix: "Suffix" => "Sufiks"
+// autocomplete.nickname: "Nickname" => "Nadimak"
+// autocomplete.organization-title: "Job Title" => "Naziv radnog mjesta"
+// autocomplete.username: "User Name" => "Korisničko ime"
+// autocomplete.new-password: "New Password" => "Nova lozinka"
+// autocomplete.current-password: "Current Password" => "Trenutna lozinka"
+// autocomplete.organization: "Organization Name" => "Naziv tvrtke ili ustanove"
+// autocomplete.street-address: "Full Street Address" => "Puna adresa"
+// autocomplete.address-line1: "Address Line 1" => "Redak adrese 1"
+// autocomplete.address-line2: "Address Line 2" => "Redak adrese 2"
+// autocomplete.address-line3: "Address Line 3" => "Redak adrese 3"
+// autocomplete.address-level4: "Level 4 Address" => "Adresa razine 4"
+// autocomplete.address-level3: "Level 3 Address" => "Adresa razine 3"
+// autocomplete.address-level2: "Level 2 Address" => "Adresa razine 2"
+// autocomplete.address-level1: "Level 1 Address" => "Adresa razine 1"
+// autocomplete.country: "Country Code" => "Pozivni broj zemlje"
+// autocomplete.country-name: "Country Name" => "Naziv zemlje"
+// autocomplete.postal-code: "Postal Code" => "Poštanski broj"
+// autocomplete.cc-name: "Cardholder Name" => "Ime vlasnika kartice"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Ime vlasnika kartice"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Srednje ime vlasnika kartice"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Prezime vlasnika kartice"
+// autocomplete.cc-number: "Credit Card Number" => "Broj kreditne kartice"
+// autocomplete.cc-exp: "Expiration Date" => "Isteka"
+// autocomplete.cc-exp-month: "Expiration Month" => "Mjesec isteka"
+// autocomplete.cc-exp-year: "Expiration Year" => "Godina isteka"
+// autocomplete.cc-csc: "Card Security Code" => "Sigurnosni kod kartice"
+// autocomplete.cc-type: "Credit Card Type" => "Vrsta kreditne kartice"
+// autocomplete.transaction-currency: "Transaction Currency" => "Valuta transakcije"
+// autocomplete.transaction-amount: "Transaction Amount" => "Iznos transakcije"
+// autocomplete.language: "Preferred Language" => "Preferirani jezik"
+// autocomplete.bday: "Birthday" => "Rođendan"
+// autocomplete.bday-day: "Birthday Day" => "Rođendanski dan"
+// autocomplete.bday-month: "Birthday Month" => "Rođendanski mjesec"
+// autocomplete.bday-year: "Birthday Year" => "Godina rođenja"
+// autocomplete.sex: "Gender" => "Spol"
+// autocomplete.url: "Website URL" => "URL web stranice"
+// autocomplete.photo: "Profile Photo" => "Profilna fotografija"
+// autocomplete.tel: "Telephone Number" => "Telefonski broj"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Pozivni broj za telefon"
+// autocomplete.tel-national: "National Telephone Number" => "Nacionalni telefonski broj"
+// autocomplete.tel-area-code: "Area Code" => "Pozivni broj"
+// autocomplete.tel-local: "Local Phone Number" => "Lokalni telefonski broj"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Prefiks lokalnog telefona"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Sufiks lokalnog telefona"
+// autocomplete.tel-extension: "Phone Extension" => "Proširenje telefona"
+// autocomplete.email: "Email Address" => "Adresa e-pošte"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokol za razmjenu izravnih poruka"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Zaključavanje stanja proširenja/sažimanja za pitanja"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Još nemate stranice"
+// pe.addNew@pages: "Add new page" => "Dodaj novu stranicu"
+// ed.zoomInTooltip: "Zoom In" => "Zumiranje"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Smanji"
+// tabs.surfaceBackground: "Surface Background" => "Pozadina površine"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Koristite odgovore iz posljednjeg unosa kao standardne"
+// colors.gray: "Gray" => "Siv"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Poravnanje navigacijskih gumba"
+// pv.allQuestions: "Show all questions" => "Prikaži sva pitanja"
+// pv.answeredQuestions: "Show answered questions only" => "Prikaži samo odgovorena pitanja"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Postavlja mjesto navigacijskih gumba na stranici."
+// pe.size: "Input field width (in characters)" => "Širina polja za unos (u znakovima)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Koristite vrijednosti iz sljedećeg stupca matrice ili pitanja panela kao ID-ove izbora"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Koristite vrijednosti iz sljedećeg stupca matrice ili pitanja na ploči kao tekstove izbora"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "U vrstama pitanja s jednim i višestrukim odabirom svaka opcija izbora ima ID i vrijednost prikaza. Ova postavka određuje koji stupac matrice ili pitanje na ploči treba dati ID-ove."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "U vrstama pitanja s jednim i višestrukim odabirom svaka opcija izbora ima ID i vrijednost prikaza. Ova postavka određuje koji stupac matrice ili pitanje na ploči treba pružiti tekstove za prikaz."
+// pe.progressBarLocation: "Progress bar alignment" => "Poravnanje trake napretka"
+// progressBarLocation.topbottom: "Top and bottom" => "Vrh i dno"
+// progressBarLocation.aboveheader: "Above the header" => "Iznad zaglavlja"
+// progressBarLocation.belowheader: "Below the header" => "Ispod zaglavlja"
+// progressBarLocation.off: "Hidden" => "Skriven"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Postavlja lokaciju trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja ankete."
+// survey.readOnly: "Make the survey read-only" => "Neka anketa bude samo za čitanje"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Odaberite želite li ispitanicima onemogućiti ispunjavanje upitnika."
+// paneldynamic.showNumber: "Number the panel" => "Numerirajte ploču"
+// question.showNumber: "Number this question" => "Brojite ovo pitanje"
+// pe.previewMode: "Preview mode" => "Način pregleda"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Omogućivanje izgleda rešetke"
+// pe.maskSettings: "Mask settings" => "Postavke maske"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Poravnanje poruke o pogrešci proširenja retka"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Postavlja mjesto poruka o pogreškama za pitanja ugniježđena u detaljnim odjeljcima. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Stupci rasporeda rešetke"

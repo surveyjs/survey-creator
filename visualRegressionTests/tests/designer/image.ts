@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, explicitErrorHandler, wrapVisualTest, takeElementScreenshot } from "../../helper";
+import { url, setJSON, explicitErrorHandler, wrapVisualTest, takeElementScreenshot, upArrowImageLink } from "../../helper";
 
 const title = "Image Screenshot";
 
@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -19,7 +20,7 @@ const json = {
         {
           "type": "image",
           "name": "question2",
-          "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+          "imageLink": upArrowImageLink
         }
       ]
     }
@@ -45,6 +46,7 @@ test("empty imageLink", async (t) => {
     await explicitErrorHandler();
     await t.resizeWindow(2560, 1440);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -75,6 +77,7 @@ test("broken imageLink", async (t) => {
     await explicitErrorHandler();
     await t.resizeWindow(2560, 1440);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -103,6 +106,7 @@ test("Check image loading indicator", async (t) => {
     await explicitErrorHandler();
     await t.resizeWindow(2560, 1440);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {

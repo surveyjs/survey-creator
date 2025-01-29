@@ -11,9 +11,9 @@ Property Grid displays the properties of a selected survey element and allows a 
 
 ## Hide Properties from the Property Grid
 
-If you do not want users to change a survey property, you can hide it from the Property Grid. Survey Creator allows you to hide an individual property or multiple properties at once.
+If you want to prevent users from accessing or modifying a certain survey element's property, you can hide it from the Property Grid. Survey Creator allows you to hide either an individual property or multiple properties at once.
 
-To hide a single survey property, call the `getProperty(questionType, propertyName)` method on the `Survey.Serializer` object as follows:
+To hide a single property, access it using the `Serializer`'s `getProperty(className, propertyName)` method and set its `visible` attribute to `false`:
 
 ```js
 // Hide the `title` property for Boolean questions
@@ -24,7 +24,7 @@ import { Serializer } from "survey-core";
 Serializer.getProperty("boolean", "title").visible = false;
 ```
 
-If you want to hide multiple properties, handle the Survey Creator's [`onShowingProperty`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onShowingProperty) event. Its second parameter exposes the `canShow` Boolean property. Disable it for the properties you want to hide. The following example illustrates two cases: hide black-listed properties and keep only white-listed properties. This code hides the properties for [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) questions.
+If you want to hide multiple properties, handle the Survey Creator's [`onShowingProperty`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onShowingProperty) event. Its second parameter includes the `canShow` Boolean property. Disable it for the properties you want to hide. The following example illustrates two cases: hide black-listed properties and keep only white-listed properties. This code hides the properties for [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) questions.
 
 ```js
 const blackList = [ "visible", "isRequired" ];
@@ -33,7 +33,7 @@ const blackList = [ "visible", "isRequired" ];
 creator.onShowingProperty.add(function (_, options) {
   if (options.obj.getType() == "panel") {
     // Hide properties found in `blackList`
-    options.canShow = blackList.indexOf(options.property.name) < 0;
+    options.canShow = blackList.indexOf(options.property.name) === -1;
 
     // Hide all properties except those found in `whiteList`
     // options.canShow = whiteList.indexOf(options.property.name) > -1;
@@ -45,7 +45,7 @@ creator.onShowingProperty.add(function (_, options) {
 
 ## Override Default Property Values
 
-You can specify a different default value for a property in Property Grid. To do this, call `Serializer`'s `getProperty(questionType, propertyName)` method and change the property's `defaultValue` setting:
+You can specify a different default value for a property in Property Grid. To do this, call `Serializer`'s `getProperty(className, propertyName)` method and change the property's `defaultValue` setting:
 
 ```js
 // Override the default value of the `isAllRowRequired` property for Single-Select Matrix questions
@@ -62,14 +62,14 @@ Property editors can display hints or tooltips that help survey authors specify 
 
 <img src="./images/property-grid-hint.png" alt="Survey Creator: Hints in the Property Grid">
 
-Hints are stored in the `pehelp` object (stands for "property editor help") within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization). You can use [localization API](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages#override-individual-translations) to specify or override help texts within this object. For instance, the code below specifies a hint for the [`title`](https://surveyjs.io/form-library/documentation/api-reference/question#title) property editor.
+Hints are stored in the `pehelp` object (stands for "property editor help") within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization). You can use [localization API](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages#override-individual-translations) to specify or override help texts within this object. For instance, the code below specifies a hint for the [`title`](https://surveyjs.io/form-library/documentation/api-reference/question#title) property editor.
 
 ```js
 // Get current locale translations
-const translations = SurveyCreator.localization.getLocale("");
+const translations = SurveyCreator.editorLocalization.getLocale("");
 // In modular applications
-import { localization } from "survey-creator-core";
-const translations = localization.getLocale("");
+import { editorLocalization } from "survey-creator-core";
+const translations = editorLocalization.getLocale("");
 
 translations.pehelp.title = "A hint for the Title property editor";
 ```

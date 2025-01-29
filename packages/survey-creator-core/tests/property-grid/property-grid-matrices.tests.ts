@@ -1,12 +1,12 @@
-import { CalculatedValue, ExpressionValidator, HtmlConditionItem, QuestionCheckboxBase, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionMatrixDynamicModel, QuestionMatrixModel, QuestionMultipleTextModel, QuestionRatingModel, QuestionTextModel,
-  Serializer,
-  SurveyModel,
-  SurveyTriggerRunExpression,
-  UrlConditionItem,
-  settings as surveySettings } from "survey-core";
+import {
+  CalculatedValue, ExpressionValidator, HtmlConditionItem, QuestionCheckboxBase, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionMatrixDynamicModel,
+  QuestionMatrixModel, QuestionMultipleTextModel, QuestionRatingModel, QuestionTextModel, QuestionBooleanModel, Serializer, SurveyModel,
+  SurveyTriggerRunExpression, UrlConditionItem, settings as surveySettings,
+  ItemValue
+} from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
-import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
+import { EmptySurveyCreatorOptions, settings as settingsCreator } from "../../src/creator-settings";
 import { SurveyTriggerComplete } from "survey-core";
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/bindings";
@@ -197,6 +197,23 @@ test("Triggers property editor after remove trigger class", () => {
   Serializer.addClass(runexpressiontriggerClass.name, runexpressiontriggerClass.properties, runexpressiontriggerClass.creator, runexpressiontriggerClass.parentName);
 });
 
+test("Hide triggers based on settings.logic.invisibleTriggers, #6031", () => {
+  settingsCreator.logic.invisibleTriggers = ["skip", "complete"];
+
+  const survey = new SurveyModel();
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const triggersQuestion = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("triggers"));
+  triggersQuestion.addRow();
+  expect(triggersQuestion.visibleRows).toHaveLength(1);
+  const triggerTypeQuestion = triggersQuestion.visibleRows[0].cells[0].question;
+  expect(triggerTypeQuestion.getType()).toEqual("dropdown");
+  expect(ItemValue.getItemByValue(triggerTypeQuestion.choices, "runexpressiontrigger")).toBeTruthy();
+  expect(ItemValue.getItemByValue(triggerTypeQuestion.choices, "completetrigger")).toBeFalsy();
+  expect(ItemValue.getItemByValue(triggerTypeQuestion.choices, "skiptrigger")).toBeFalsy();
+
+  settingsCreator.logic.invisibleTriggers = [];
+});
+
 test("calculatedValues property editor", () => {
   var survey = new SurveyModel();
   survey.calculatedValues.push(new CalculatedValue("var1", "{q1}=1"));
@@ -205,7 +222,7 @@ test("calculatedValues property editor", () => {
     propertyGrid.survey.getQuestionByName("calculatedValues")
   );
   expect(calcValuesQuestion).toBeTruthy();
-  expect(calcValuesQuestion.isUniqueCaseSensitive).toEqual(false);
+  expect(calcValuesQuestion.useCaseSensitiveComparison).toEqual(false);
   expect(calcValuesQuestion.visibleRows).toHaveLength(1);
   expect(calcValuesQuestion.columns).toHaveLength(2);
   expect(calcValuesQuestion.columns[0].cellType).toEqual("text");
@@ -513,6 +530,18 @@ test("Several errors in choices, Bug #4701", () => {
   expect(row1Q.errors).toHaveLength(0);
   expect(row2Q.errors).toHaveLength(0);
 });
+test("Apply value correctly after errors, Bug #5915", () => {
+  const q = new QuestionCheckboxBase("q1");
+  q.choices = ["item1", "item2", "item3"];
+  var propertyGrid = new PropertyGridModelTester(q);
+  const qChoices = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
+  const rows = qChoices.visibleRows;
+  expect(rows).toHaveLength(3);
+  rows[1].cells[0].value = "item1";
+  rows[0].cells[0].value = "item2";
+  expect(q.choices[0].value).toBe("item2");
+  expect(q.choices[1].value).toBe("item1");
+});
 test("Show text column in itemvalue (choices) if inplaceEditForValues is false (default)", () => {
   const q = new QuestionCheckboxBase("q1");
   q.choices = ["item1", "item2", "item3"];
@@ -562,4 +591,21 @@ test("Hide text column in itemvalue (matrix.columns) if inplaceEditForValues is 
   const qProperty = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("columns");
   expect(qProperty.columns).toHaveLength(1);
   expect(qProperty.columns[0].name).toBe("value");
+});
+test("Add custom boolean property to choices, Bug#6004", () => {
+  Serializer.addProperty("itemvalue", "isDeleted:boolean");
+
+  const q = new QuestionMatrixModel("q1");
+  q.columns = ["item1", "item2", "item3"];
+  const propertyGrid = new PropertyGridModelTester(q);
+  const qProperty = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("columns");
+  expect(qProperty.columns).toHaveLength(3);
+  expect(qProperty.columns[2].name).toBe("isDeleted");
+  const qCell = <QuestionBooleanModel>qProperty.visibleRows[0].getQuestionByName("isDeleted");
+  expect(qCell).toBeTruthy();
+  expect(qCell.name).toBe("isDeleted");
+  expect(qCell.getType()).toBe("boolean");
+  expect(qCell.isLabelRendered).toBeFalsy();
+
+  Serializer.removeProperty("itemvalue", "isDeleted");
 });

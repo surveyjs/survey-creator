@@ -1,4 +1,4 @@
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 import { url, setJSON, wrapVisualTest, takeElementScreenshot } from "../../helper";
 
 const title = "ValueLink Actions in Data section Screenshot";
@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -39,5 +40,12 @@ test("Check states", async (t) => {
 
     await t.hover(buttonElement);
     await takeElementScreenshot("action-button-hovered.png", buttonElement, t, comparer);
+
+    await ClientFunction(() => {
+      window["creator"].survey.getAllQuestions()[0].defaultValue = "val";
+    })();
+    const clearButtonElement = Selector(".svc-link__button.svc-question-link__clear-button.svc-action-button");
+    await t.hover(clearButtonElement);
+    await takeElementScreenshot("action-clear-button-hovered.png", clearButtonElement, t, comparer);
   });
 });

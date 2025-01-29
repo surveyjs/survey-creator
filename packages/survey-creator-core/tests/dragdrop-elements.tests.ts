@@ -1,5 +1,5 @@
 import { DragTypeOverMeEnum, Question, QuestionTextModel, SurveyModel } from "survey-core";
-import { DragDropSurveyElements, calculateIsEdge, calculateIsSide } from "../src/survey-elements";
+import { DragDropSurveyElements, calculateDragOverLocation, calculateIsEdge, calculateIsSide } from "../src/survey-elements";
 import { CreatorTester } from "./creator-tester";
 
 test("calculateVerticalMiddleOfHTMLElement", () => {
@@ -336,6 +336,37 @@ test("SurveyElements: isDropTargetValid && maxNestedPanels", () => {
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q1"))).toBe(true);
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(false);
   expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel2"), undefined, DragTypeOverMeEnum.InsideEmptyPanel)).toBe(false);
+});
+test("SurveyElements: isDropTargetValid && maxNestedPanels, #6109", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "panel",
+        name: "panel1",
+        elements: [
+          { type: "text", name: "q2" }
+        ]
+      },
+      {
+        type: "text",
+        name: "q1",
+      },
+      {
+        type: "panel",
+        name: "panel2",
+        elements: [
+          { type: "panel", name: "panel3" }
+        ]
+      }
+    ],
+  });
+  const pd = survey.getPanelByName("panel2");
+  const ddHelper: any = new DragDropSurveyElements(survey);
+
+  ddHelper.draggedElement = pd;
+  expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(true);
+  ddHelper.onGetMaxNestedPanels = (): number => { return 1; };
+  expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(false);
 });
 
 // test("surveyelement: calcTargetRowMultiple for paneldynamic", () => {
@@ -1141,6 +1172,69 @@ test("Support onDragDropAllow, Bug#4572", (): any => {
   expect(counter).toBe(2);
   expect(ddHelper["allowDropHere"]).toBeTruthy();
 });
+test("Test onDragOverLocationCalculating", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      }
+    ]
+  };
+  creator.onDragOverLocationCalculating.add((sender, options) => {
+    if (options.draggedSurveyElement.name == "question2" && options.insideContainer) {
+      options.insideContainer = false;
+      options.dragOverLocation = calculateDragOverLocation(options.clientX, options.clientY, options.dragOverRect, "top-bottom");
+    }
+  });
+  const ddHelper: any = creator.dragDropSurveyElements;
+  const q1 = creator.survey.getQuestionByName("question1");
+  const q2 = creator.survey.getQuestionByName("question2");
+  const q3 = creator.survey.getQuestionByName("question3");
+  ddHelper.draggedElement = q2;
+  ddHelper["allowDropHere"] = true;
+  ddHelper["findDropTargetNodeFromPoint"] = () => ({ getBoundingClientRect: () => ({ x: 10, y: 10, width: 200, height: 100 }) });
+  ddHelper["getDropTargetByNode"] = () => q1;
+  ddHelper["isDropTargetValid"] = () => true;
+  ddHelper.dragOver({ clientX: 40, clientY: 50 });
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Top);
+  expect(ddHelper.insideContainer).toBeFalsy();
+  ddHelper.dragOver({ clientX: 100, clientY: 90 });
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Bottom);
+  expect(ddHelper.insideContainer).toBeFalsy();
+  ddHelper.draggedElement = q3;
+  ddHelper.dragOver({ clientX: 40, clientY: 50 });
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Left);
+  expect(ddHelper.insideContainer).toBeTruthy();
+  ddHelper.dragOver({ clientX: 100, clientY: 90 });
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Bottom);
+  expect(ddHelper.insideContainer).toBeTruthy();
+});
 test("Support onDragDropAllow&allowDropNextToAnother, #5621", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -1346,4 +1440,84 @@ test("onQuestionAdded fires when drag drop new element", () => {
     ],
   });
   expect(log).toBe("->added:q4");
+});
+test("draggedElementType", () => {
+  const survey = new SurveyModel({});
+  const ddHelper: any = new DragDropSurveyElements(survey);
+
+  expect(ddHelper.draggedElement).toBe(null);
+  expect(ddHelper.draggedElementType).toBe("survey-element");
+
+  ddHelper.draggedElement = {};
+  expect(ddHelper.draggedElementType).toBe("survey-element");
+
+  ddHelper.draggedElement = { isPage: true };
+  expect(ddHelper.draggedElementType).toBe("survey-page");
+});
+test("drag drop page", () => {
+  const json = {
+    "pages": [
+      { "name": "page1", "elements": [{ "type": "text", "name": "q1" }] },
+      { "name": "page2", "elements": [{ "type": "text", "name": "q2" }] },
+      { "name": "page3", "elements": [{ "type": "text", "name": "q3" }] },
+    ]
+  };
+  const survey = new SurveyModel(json);
+
+  const [p1, p2, p3] = survey.pages;
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+  ddHelper.draggedElement = p3;
+
+  ddHelper.dragOverCore(p2, DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+  expect(survey.toJSON()).toStrictEqual({
+    "pages": [
+      { "name": "page1", "elements": [{ "type": "text", "name": "q1" }] },
+      { "name": "page3", "elements": [{ "type": "text", "name": "q3" }] },
+      { "name": "page2", "elements": [{ "type": "text", "name": "q2" }] },
+    ]
+  });
+});
+
+test("drag drop page check draggedFrom property", () => {
+  const json = {
+    "pages": [
+      { "name": "page1", "elements": [{ "type": "text", "name": "q1" }] },
+      { "name": "page2", "elements": [{ "type": "text", "name": "q2" }] },
+      { "name": "page3", "elements": [{ "type": "text", "name": "q3" }] },
+    ]
+  };
+  const survey = new SurveyModel(json);
+
+  const [p1, p2, p3] = survey.pages;
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+
+  ddHelper.draggedElement = p3;
+  ddHelper.dragOverCore(p2, DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+  expect(p3["draggedFrom"]).toStrictEqual(3);
+
+  ddHelper.draggedElement = p3;
+  ddHelper.dragOverCore(p2, DragTypeOverMeEnum.Bottom);
+  ddHelper.doDrop();
+  expect(p3["draggedFrom"]).toStrictEqual(1);
+
+  ddHelper.draggedElement = p1;
+  ddHelper.dragOverCore(p3, DragTypeOverMeEnum.Bottom);
+  ddHelper.doDrop();
+  expect(p1["draggedFrom"]).toStrictEqual(0);
+
+  ddHelper.draggedElement = p3;
+  p3["draggedFrom"] = undefined;
+  ddHelper.dragOverCore(p2, DragTypeOverMeEnum.Bottom);
+  ddHelper.doDrop();
+  expect(p3["draggedFrom"]).toStrictEqual(undefined);
+
+  ddHelper.draggedElement = p3;
+  p3["draggedFrom"] = undefined;
+  ddHelper.dragOverCore(p2, DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+  expect(p3["draggedFrom"]).toStrictEqual(2);
 });

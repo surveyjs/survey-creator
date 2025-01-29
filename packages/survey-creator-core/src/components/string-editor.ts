@@ -1,11 +1,12 @@
 import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, CssClassBuilder } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
-import { clearNewLines, getNextValue, select } from "../utils/utils";
+import { clearNewLines } from "../utils/utils";
+import { getNextItemValue, getNextValue } from "../utils/creator-utils";
+import { select } from "../utils/html-element-utils";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
 import { QuestionRatingAdornerViewModel } from "./question-rating";
-import { getNextItemValue } from "../utils/utils";
 
 export abstract class StringItemsNavigatorBase {
   constructor(protected question: any) { }
@@ -275,7 +276,7 @@ export class StringEditorViewModelBase extends Base {
   public activate = () => {
     const element = this.getEditorElement();
     if (element && element.offsetParent != null) {
-      element.focus();
+      element.focus({ preventScroll: true });
       select(element);
       return true;
     }
@@ -522,7 +523,7 @@ export class StringEditorViewModelBase extends Base {
       this.blurEditor();
       this.done(event);
     }
-    if (event.keyCode === 8 && !(event.target as any).innerText) {
+    if (event.keyCode === 8 && !clearNewLines((event.target as any).innerText)) {
       this.done(event);
       this.connector.onBackspaceEmptyString.fire(this, {});
     }

@@ -1,15 +1,15 @@
 <ng-template #template>
-  <div class="svc-toolbox__item" role="button" [attr.aria-label]="this.item.tooltip" [title]="this.item.tooltip"
-    [class]="item.className" (click)="viewModel.click($event)" [key2click]>
+  <div role="button" [attr.aria-label]="this.item.tooltip" [class]="this.item.renderedCss"
+    (click)="viewModel.click($event)" [key2click]>
     <span class="svc-toolbox__item-container">
-      <svg *ngIf="item.iconName" [iconName]="item.iconName" [size]="24" [title]="this.item.tooltip"
+      <svg *ngIf="item.iconName" [iconName]="item.iconName" [size]="'auto'" class="svc-toolbox__item-icon" [title]="this.item.tooltip"
         sv-ng-svg-icon></svg>
     </span>
-    <span *ngIf="isCompact" class="svc-toolbox__item-banner svc-item__banner">
-      <svg *ngIf="item.iconName" [iconName]="item.iconName" [size]="24" [title]="this.item.tooltip"
-        class="svc-toolbox__item-icon" sv-ng-svg-icon></svg>
-      <span class="svc-toolbox__item-title">{{item.title}}</span>
-    </span>
     <span *ngIf="!isCompact" class="svc-toolbox__item-title">{{item.title}}</span>
-  </div>
+    </div>
+  <span *ngIf="isCompact" class="svc-toolbox__item-banner" (click)="viewModel.click($event)">
+    <svg *ngIf="item.iconName" [iconName]="item.iconName" [size]="'auto'" class="svc-toolbox__item-icon"
+      sv-ng-svg-icon></svg>
+    <span>{{item.title}}</span>
+    </span>
 </ng-template>

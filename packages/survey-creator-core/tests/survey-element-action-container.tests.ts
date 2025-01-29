@@ -1,4 +1,4 @@
-import { Action, IAction } from "survey-core";
+import { Action, IAction, PopupDropdownViewModel } from "survey-core";
 import { SurveyElementActionContainer } from "../src/components/action-container-view-model";
 import { CreatorTester } from "./creator-tester";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -59,7 +59,7 @@ test("SurveyElementActionContainer with subtypes fit", () => {
     return action;
   }));
 
-  actionContainer.fit(564, 32);
+  actionContainer.fit({ availableSpace: 564 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("large");
   expect(actionContainer.getActionById("duplicate").mode).toBe("large");
@@ -67,7 +67,7 @@ test("SurveyElementActionContainer with subtypes fit", () => {
   expect(actionContainer.getActionById("delete").mode).toBe("large");
   expect(actionContainer.dotsItem.visible).toBeFalsy();
 
-  actionContainer.fit(432, 32);
+  actionContainer.fit({ availableSpace: 432 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("large");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");
@@ -76,7 +76,7 @@ test("SurveyElementActionContainer with subtypes fit", () => {
   expect(actionContainer.dotsItem.visible).toBeFalsy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
-  actionContainer.fit(250, 32);
+  actionContainer.fit({ availableSpace: 250 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("removed");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");
@@ -85,7 +85,7 @@ test("SurveyElementActionContainer with subtypes fit", () => {
   expect(actionContainer.dotsItem.visible).toBeFalsy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
-  actionContainer.fit(192, 32);
+  actionContainer.fit({ availableSpace: 192 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("small");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("removed");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");
@@ -94,7 +94,7 @@ test("SurveyElementActionContainer with subtypes fit", () => {
   expect(actionContainer.dotsItem.visible).toBeFalsy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
-  actionContainer.fit(150, 32);
+  actionContainer.fit({ availableSpace: 150 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("small");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("removed");
   expect(actionContainer.getActionById("duplicate").mode).toBe("popup");
@@ -160,14 +160,24 @@ test("SurveyElementActionContainer without subtypes fit", () => {
     return action;
   }));
 
-  actionContainer.fit(564, 32);
+  actionContainer.fit({ availableSpace: 564 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("duplicate").mode).toBe("large");
   expect(actionContainer.getActionById("isrequired").mode).toBe("large");
   expect(actionContainer.getActionById("delete").mode).toBe("large");
   expect(actionContainer.dotsItem.visible).toBeFalsy();
 
-  actionContainer.fit(304, 32);
+  actionContainer.alwaysShrink = true;
+  actionContainer.fit({ availableSpace: 564 });
+  expect(actionContainer.getActionById("convertTo").mode).toBe("small");
+  expect(actionContainer.getActionById("duplicate").mode).toBe("small");
+  expect(actionContainer.getActionById("isrequired").mode).toBe("small");
+  expect(actionContainer.getActionById("delete").mode).toBe("small");
+  expect(actionContainer.dotsItem.visible).toBeFalsy();
+
+  actionContainer.alwaysShrink = false;
+
+  actionContainer.fit({ availableSpace: 304 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");
   expect(actionContainer.getActionById("isrequired").mode).toBe("small");
@@ -175,7 +185,7 @@ test("SurveyElementActionContainer without subtypes fit", () => {
   expect(actionContainer.dotsItem.visible).toBeFalsy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
-  actionContainer.fit(192, 32);
+  actionContainer.fit({ availableSpace: 192 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("small");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");
   expect(actionContainer.getActionById("isrequired").mode).toBe("small");
@@ -183,7 +193,7 @@ test("SurveyElementActionContainer without subtypes fit", () => {
   expect(actionContainer.dotsItem.visible).toBeFalsy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
-  actionContainer.fit(150 - 81, 32);
+  actionContainer.fit({ availableSpace: 150 - 81 });
   expect(actionContainer.getActionById("convertTo").mode).toBe("small");
   expect(actionContainer.getActionById("duplicate").mode).toBe("popup");
   expect(actionContainer.getActionById("isrequired").mode).toBe("popup");
@@ -205,21 +215,11 @@ test("actions and creator.onPropertyValueChanging", () => {
     }
   });
   const q1 = creator.survey.getQuestionByName("q1");
+  creator.selectElement(q1);
   const q1Adapter = new QuestionAdornerViewModel(creator, q1, <any>undefined);
   q1Adapter.actionContainer.getActionById("isrequired").action();
   expect(q1.isRequired).toBeFalsy();
   isRequiredNewValue = true;
   q1Adapter.actionContainer.getActionById("isrequired").action();
   expect(q1.isRequired).toBeTruthy();
-
-  let action = q1Adapter.getActionById("convertInputType");
-  expect(action).toBeTruthy();
-  const popup = action.popupModel;
-  expect(popup).toBeTruthy();
-  popup.toggleVisibility();
-  const list = popup.contentComponentData.model;
-  const telItem = list.actions.filter(item => item.id === "tel")[0];
-  list.onItemClick(telItem);
-  expect(q1.inputType).toBe("date");
-  expect(action.title).toBe("Date");
 });

@@ -10,7 +10,12 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "declaration": true,
-    "declarationDir": "build/typings/"
+    "declarationDir": "build/typings/",
+    "paths": {
+      "survey-creator-core/themes": [
+        "./src/themes/index.ts"
+      ],
+    },
   },
   "include": [
     "./src/entries/index.ts"

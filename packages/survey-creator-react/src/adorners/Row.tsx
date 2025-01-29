@@ -5,7 +5,7 @@ import { ReactElementFactory } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
 
 interface RowWrapperComponentProps {
-  element: JSX.Element;
+  element: React.JSX.Element;
   componentData: any;
   row: QuestionRowModel;
 }
@@ -19,6 +19,9 @@ export class RowWrapper extends CreatorModelElement<
     super(props);
   }
   protected createModel(props: any): void {
+    if (!!this.model) {
+      this.model.dispose();
+    }
     this.model = new RowViewModel(
       props.componentData.creator,
       props.row,
@@ -32,12 +35,23 @@ export class RowWrapper extends CreatorModelElement<
     return this.model;
   }
 
-  render(): JSX.Element {
+  componentDidMount(): void {
+    super.componentDidMount();
+    this.model.subscribeElementChanges();
+  }
+  componentWillUnmount(): void {
+    this.model.unsubscribeElementChanges();
+    super.componentWillUnmount();
+  }
+
+  render(): React.JSX.Element {
     return (
       <div
         key={"svc-row-" + this.props.row.id}
         className={this.model.cssClasses}
       >
+        <div className="svc-row__drop-indicator svc-row__drop-indicator--top"></div>
+        <div className="svc-row__drop-indicator svc-row__drop-indicator--bottom"></div>
         {this.props.element}
       </div>
     );

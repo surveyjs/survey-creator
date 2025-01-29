@@ -176,7 +176,7 @@ test("Theme model load custom theme", (): any => {
   themeModel.fromJSON(customeTheme);
 
   const json = themeModel.toJSON();
-  customeTheme.headerView = "basic";
+  customeTheme.headerView = "advanced";
   expect(json).toStrictEqual(customeTheme);
 
   Serializer.removeProperty("theme", "--a-var");

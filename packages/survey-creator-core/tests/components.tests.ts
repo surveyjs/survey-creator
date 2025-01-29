@@ -14,8 +14,6 @@ import { settings as creatorSettings } from "../src/creator-settings";
 
 beforeEach(() => { });
 
-settings.supportCreatorV2 = true;
-
 test("item value isNew isDraggable allowRemove", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -468,9 +466,9 @@ test("QuestionImageAdornerViewModel pass question into onUploadFile event", () =
   const imageAdorner = new QuestionImageAdornerViewModel(
     creator,
     question,
-    <any>{},
-    rootElement
+    <any>{}
   );
+  imageAdorner.rootElement = rootElement;
 
   let counter = 0;
   creator.onUploadFile.add((s, o) => {
@@ -853,7 +851,8 @@ test("QuestionImageAdornerViewModel isUploading", () => {
     elements: [{ type: "image", name: "q1" }]
   };
   const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
-  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any);
+  imageAdorner.rootElement = { getElementsByClassName: () => [{}] } as any;
   let uploadCount = 0;
   creator.onOpenFileChooser.add((s, o) => {
     o.callback([{}]);
@@ -983,15 +982,15 @@ test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly",
 });
 
 test("calculateDragOverLocation", () => {
-  let location = calculateDragOverLocation(150, 120, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  let location = calculateDragOverLocation(150, 120, { x: 100, y: 100, width: 300, height: 100 });
   expect(location).toBe(DragTypeOverMeEnum.Left);
-  creatorSettings.dragDrop.allowDragToTheSameLine = false;
-  location = calculateDragOverLocation(150, 120, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  // creatorSettings.dragDrop.allowDragToTheSameLine = false;
+  location = calculateDragOverLocation(150, 120, { x: 100, y: 100, width: 300, height: 100 }, "top-bottom");
   expect(location).toBe(DragTypeOverMeEnum.Top);
-  location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  location = calculateDragOverLocation(350, 170, { x: 100, y: 100, width: 300, height: 100 }, "top-bottom");
   expect(location).toBe(DragTypeOverMeEnum.Bottom);
-  creatorSettings.dragDrop.allowDragToTheSameLine = true;
-  location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  // creatorSettings.dragDrop.allowDragToTheSameLine = true;
+  location = calculateDragOverLocation(350, 170, { x: 100, y: 100, width: 300, height: 100 });
   expect(location).toBe(DragTypeOverMeEnum.Right);
 });
 

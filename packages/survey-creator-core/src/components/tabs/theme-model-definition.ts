@@ -28,6 +28,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
 
       { name: "scale", tab: "appearanceother" },
       { name: "cornerRadius", tab: "appearanceother" },
+      { name: "advancedMode", tab: "appearanceadvancedmode" },
 
       { name: "pageTitle", tab: "appearancepage" },
       { name: "pageDescription", tab: "appearancepage" },
@@ -52,6 +53,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "appearancecolor", parent: "appearance", index: 100 },
       { name: "appearancefont", parent: "appearance", index: 200 },
       { name: "appearanceother", parent: "appearance", index: 300 },
+      { name: "appearanceadvancedmode", parent: "appearance", index: 350 },
       { name: "appearanceprimarycolor", parent: "appearance", index: 400 },
       { name: "appearancepage", parent: "appearance", index: 500 },
       { name: "appearancequestion", parent: "appearance", index: 600 },
@@ -66,6 +68,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
       { name: "surveyTitle" },
       { name: "surveyDescription" },
       { name: "height", tab: "layout" },
+      { name: "mobileHeight", tab: "layout" },
       { name: "inheritWidthFrom", tab: "layout" },
       { name: "textAreaWidth", tab: "layout" },
 

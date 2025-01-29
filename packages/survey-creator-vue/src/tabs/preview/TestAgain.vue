@@ -5,12 +5,13 @@
     @click="action.action()"
     v-key2click
   >
-    <span class="svc-text svc-text--normal svc-text--bold">
+    <span class="svc-btn__text">
       {{ action.title }}
     </span>
   </div>
 </template>
 <script lang="ts" setup>
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import type { Action } from "survey-core";
 import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";

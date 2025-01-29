@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, explicitErrorHandler, wrapVisualTest, takeElementScreenshot } from "../../helper";
+import { url, setJSON, explicitErrorHandler, wrapVisualTest, takeElementScreenshot, upArrowImageLink, rigthArrowImageLink, downArrowImageLink, leftArrowImageLink } from "../../helper";
 
 const title = "ImagePicker Screenshot";
 
@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -17,22 +18,22 @@ const json = {
           "name": "question1",
           "choices": [
             {
-              "value": "lion",
-              "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+              "value": "left",
+              "imageLink": leftArrowImageLink
             },
             {
-              "value": "giraffe",
-              "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+              "value": "down",
+              "imageLink": downArrowImageLink
             },
             {
-              "value": "panda",
-              "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+              "value": "up",
+              "imageLink": upArrowImageLink
             },
             {
-              "value": "camel",
-              "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
-            }
-          ]
+              "value": "right",
+              "imageLink": rigthArrowImageLink
+            },
+          ],
         }
       ]
     }

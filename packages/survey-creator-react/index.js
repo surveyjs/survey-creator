@@ -106,8 +106,10 @@ let json = {
 const options = {
   showLogicTab: true,
   showTranslationTab: true,
+  showThemeTab: true,
   showEmbeddedSurveyTab: true,
   showThemeTab: true,
+  showCreatorThemeSettings: true,
   isAutoSave: true
 };
 
@@ -144,13 +146,6 @@ class CustomToolboxWrapper extends React.Component {
     );
   }
 }
-
-SurveyReact.ReactElementFactory.Instance.registerElement(
-  "svc-toolbox",
-  (props) => {
-    return React.createElement(CustomToolboxWrapper, props);
-  }
-);
 
 // class CustomPropertyGridWrapper extends React.Component {
 //   constructor(props) {
@@ -203,18 +198,90 @@ creator.onMachineTranslate.add((_, options) => {
   options.strings.forEach(str => { translatedStrings.push(options.toLocale + ": " + str); });
   options.callback(translatedStrings);
 });
-creator.JSON = json;
-creator.locale = "de";
+// creator.JSON = json;
+// creator.locale = "de";
 window.creator = creator;
+creator.showOneCategoryInPropertyGrid = true;
+creator.propertyGridNavigationMode = "buttons";
+// creator.getPlugin("designer").showOneCategoryInPropertyGrid = true;
+// creator.getPlugin("theme").showOneCategoryInPropertyGrid = true;
+
+// Step 3: Add a custom adorner that saves a question configuration as a toolbox item
+creator.onDefineElementMenuItems.add((_, options) => {
+  if (options.obj["isPage"]) return;
+  const objToAdd = options.obj;
+  options.items.unshift({
+    id: "save-to-toolbox",
+    title: "Save to Toolbox",
+    iconName: "icon-toolbox",
+    iconSize: 16,
+    action: () => {
+      //saveCustomItem(objToAdd);
+    }
+  });
+});
+
+function getCompositeInput(question) {
+  return question.contentPanel.getQuestionByName("q1");
+}
+
+Survey.ComponentCollection.Instance.add({
+  name: "myComposite",
+  elementsJSON: [
+    {
+      name: "b1",
+      type: "boolean",
+      title: "N/A",
+    },
+    {
+      name: "q1",
+      type: "text",
+      title: "Answer",
+    },
+  ],
+  onInit() {
+    Survey.Serializer.addProperties("myComposite", [
+      {
+        name: "maskType",
+        category: "mask",
+        default: "none",
+        visibleIndex: 0,
+        choices: ["none", "pattern", "datetime", "numeric", "currency"],
+        onSetValue: function (obj, value) {
+          obj.setPropertyValue("maskType", value);
+          const q = getCompositeInput(obj);
+          if (q) q.maskType = value;
+        },
+      },
+      {
+        name: "maskSettings:masksettings",
+        category: "mask",
+        visibleIndex: 1,
+        dependsOn: ["maskType"],
+        onGetValue: function (obj) {
+          const q = getCompositeInput(obj);
+          return q ? q.maskSettings : {};
+        },
+        onSetValue: function (obj, value) {
+          const q = getCompositeInput(obj);
+          if (q) {
+            q.maskSettings.setData(value);
+          }
+        },
+      },
+    ]);
+  },
+});
 
 creator.toolbox.searchEnabled = true;
-
+creator.expandCollapseButtonVisibility = "onhover";
 creator.onElementAllowOperations.add((sender, options) => {
   if (options.obj.isPage) {
     options.allowDelete = sender.survey.pageCount > 1;
   }
 });
-
+//creator.toolboxLocation = "sidebar";
+creator.animationEnabled = true;
 creator.saveSurveyFunc = (no, callback) => {
   console.log(no);
   setTimeout(function () {

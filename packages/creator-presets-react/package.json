@@ -76,15 +76,10 @@
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "survey-core": "../../../survey-library/build/survey-core",
+    "survey-core": "../../../survey-library/packages/survey-core/build",
+    "survey-react-ui": "../../../survey-library/packages/survey-react-ui/build",
     "survey-creator-core": "../survey-creator-core/build",
-    "survey-react-ui": "../../../survey-library/build/survey-react-ui",
     "creator-presets-core": "../creator-presets-core/build",
     "survey-creator-react": "../survey-creator-react/build"
-  },
-  "standard-version": {
-    "skip": {
-      "tag": true
-    }
   }
 }

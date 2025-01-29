@@ -12,6 +12,10 @@ export class ThemePreviewComponent extends TestDefaultComponent {
     super();
   }
   protected override createCreator(): void {
-    this.creator = new SurveyCreatorModel({ themeForPreview: "modern" });
+    this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", themeForPreview: "modern" });
+    this.creator.tabResponsivenessMode = "menu";
+    this.creator["animationEnabled"] = false;
+    this.creator.showOneCategoryInPropertyGrid = false;
+    this.creator.allowZoom = false;
   }
 }

@@ -18,7 +18,7 @@ export interface QuestionWrapperHeaderProps {
 }
 
 export class QuestionWrapperHeader extends React.Component<QuestionWrapperHeaderProps, any> {
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     if (!this.props.model.allowDragging) return null;
     return (
       <div className={"svc-question__drag-area"}
@@ -26,7 +26,7 @@ export class QuestionWrapperHeader extends React.Component<QuestionWrapperHeader
           this.props.model.onPointerDown(event)
         }
       >
-        <SvgIcon className="svc-question__drag-element" size={24} iconName={"icon-drag-area-indicator_24x16"}></SvgIcon>
+        <SvgIcon className="svc-question__drag-element" size={"auto"} iconName={"icon-drag-area-indicator_24x16"}></SvgIcon>
         <div className="svc-question__top-actions">
           <SurveyActionBar model={this.props.model.topActionContainer} handleClick={false}></SurveyActionBar>
         </div>

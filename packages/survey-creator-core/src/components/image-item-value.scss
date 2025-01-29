@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables" as *;
 
 .svc-image-item-value-wrapper {
   display: inline-block;
@@ -45,13 +45,16 @@
 
 .svc-image-item-value--new .svc-image-item-value-controls__button {
   background-color: transparent;
+  transition: background-color $creator-transition-duration;
 }
 
 .svc-image-item-value-controls__add {
   background-color: transparent;
+  transition: background-color $creator-transition-duration;
 
   use {
     fill: $primary;
+    transition: fill $creator-transition-duration;
   }
 
   &:hover,

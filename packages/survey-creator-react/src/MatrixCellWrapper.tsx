@@ -9,7 +9,7 @@ import {
 import { CreatorModelElement } from "./ModelElement";
 
 interface MatrixCellAdornerComponentProps {
-  element: JSX.Element;
+  element: React.JSX.Element;
   componentData: any;
   question: QuestionSelectBase;
   cell: any;
@@ -50,12 +50,12 @@ export class MatrixCellAdornerComponent extends CreatorModelElement<
     return this.model;
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     let controls = null;
     if (!!this.model.isSupportCellEditor) {
       controls = <div className="svc-matrix-cell__question-controls">
-        {attachKey2click(<span className="svc-matrix-cell__question-controls-button" onClick={(event: any) => this.model.editQuestion(this.model, event)}>
-          <SvgIcon size={24} iconName={"icon-edit"}></SvgIcon>
+        {attachKey2click(<span className="svc-matrix-cell__question-controls-button svc-context-button" onClick={(event: any) => this.model.editQuestion(this.model, event)}>
+          <SvgIcon size={"auto"} iconName={"icon-edit"}></SvgIcon>
         </span>)}
       </div>;
     }
