@@ -308,6 +308,10 @@ var simplifiedChineseTranslation = {
       maxWidth: "最大面板宽度",
       showNumber: "为此面板编号"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "有效宽度，%",
+      questionTitleWidth: "问题标题宽度，px"
+    },
     paneldynamic: {
       name: "面板名称",
       title: "面板标题",
@@ -505,6 +509,7 @@ var simplifiedChineseTranslation = {
     listIsEmpty: "尚未添加任何项目",
     "listIsEmpty@choices": "尚未添加任何选项",
     "listIsEmpty@columns": "您还没有任何列",
+    "listIsEmpty@gridLayoutColumns": "您还没有布局列",
     "listIsEmpty@rows": "您还没有任何行",
     "listIsEmpty@validators": "尚无任何验证规则",
     "listIsEmpty@calculatedValues": "您还没有任何自定义变量",
@@ -1359,7 +1364,9 @@ var simplifiedChineseTranslation = {
       startWithNewLine: "取消选择以将面板与上一个问题或面板显示在一行中。如果面板是窗体中的第一个元素，则该设置不适用。",
       state: "从中选择：“展开” - 面板完整显示，可以折叠;“已折叠” - 面板仅显示标题和描述，可以展开;“已锁定” - 面板完整显示，无法折叠。",
       width: "设置面板的宽度，使其与同一行中的其他测量图元成比例。接受 CSS 值（px、%、in、pt 等）。",
-      showQuestionNumbers: "为嵌套在此面板中的问题分配编号。"
+      showQuestionNumbers: "为嵌套在此面板中的问题分配编号。",
+      effectiveColSpan: "指定此面板在网格布局中跨越的列数。",
+      gridLayoutColumns: "此表允许您配置面板中的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。"
     },
     paneldynamic: {
       name: "受访者不可见的面板 ID。",
@@ -1390,6 +1397,7 @@ var simplifiedChineseTranslation = {
     resetValueIf: "使用魔杖图标设置条件规则，该规则确定何时将受访者的输入重置为基于“默认值表达式”或“设置值表达式”的值，或重置为“默认答案”值（如果设置了其中任何一个）。",
     setValueIf: "使用魔杖图标设置条件规则，该规则确定何时运行“设置值表达式”，并将结果值动态分配为响应。",
     setValueExpression: "指定一个表达式，该表达式定义在满足“如果设置值”规则中的条件时要设置的值。表达式可以包括基本计算 - '{q1_id} + {q2_id}'、布尔表达式，例如 '{age} > 60'，以及函数：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。由此表达式确定的值可以被受访者的手动输入覆盖。",
+    gridLayoutEnabled: "Survey Creator 允许您手动调整表单元素的内联宽度以控制布局。如果这没有产生所需的结果，您可以启用网格布局，该布局使用基于列的系统构建表单元素。要配置布局列，请选择一个页面或面板，然后使用 “Question Settings” → “Grid columns” 表格。要调整问题跨越的列数，请选择它并在 “Layout” → “Column span” 字段中设置所需的值。",
     question: {
       name: "受访者不可见的问题 ID。",
       description: "键入问题副标题。",
@@ -1410,7 +1418,8 @@ var simplifiedChineseTranslation = {
       textUpdateMode: "从中选择：“失焦时” - 当输入字段失去焦点时，该值会更新;“键入时” - 当用户键入时，该值会实时更新。“继承”选项将应用调查级别设置（默认为“失去焦点时”）。",
       url: "您可以使用任何 Web 服务作为多项选择题的数据源。要填充选项值，请输入提供数据的服务的 URL。",
       searchMode: "用于筛选下拉列表的比较操作。",
-      textWrapEnabled: "选项选项中的长文本将自动生成换行符以适合下拉菜单。如果要剪裁文本，请取消选择。"
+      textWrapEnabled: "选项选项中的长文本将自动生成换行符以适合下拉菜单。如果要剪裁文本，请取消选择。",
+      effectiveColSpan: "指定此问题在网格布局中跨越多少列。"
     },
     signaturepad: {
       signatureWidth: "设置显示的签名区域和生成的图像的宽度。",
@@ -1509,7 +1518,8 @@ var simplifiedChineseTranslation = {
       questionTitleWidth: "当问题标题与问题框左侧对齐时，为问题标题设置一致的宽度。接受 CSS 值（px、%、in、pt 等）。",
       questionErrorLocation: "设置与输入无效的问题相关的错误消息的位置。选择：“顶部” - 错误文本放置在问题框的顶部;“底部” - 错误文本放置在问题框的底部。“继承”选项将应用调查级别设置（默认为“顶部”）。",
       questionOrder: "保持问题的原始顺序或随机化问题。“继承”选项应用调查级别设置（默认为“原始”）。此设置的效果仅在“预览”选项卡中可见。",
-      showNavigationButtons: "设置导航按钮在页面上的可见性。“继承”选项应用调查级别设置，默认为“可见”。"
+      showNavigationButtons: "设置导航按钮在页面上的可见性。“继承”选项应用调查级别设置，默认为“可见”。",
+      gridLayoutColumns: "此表允许您配置页面上的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。"
     },
     timerLocation: "设置计时器在页面上的位置。",
     panelsState: "从以下选项中选择：“锁定” - 用户无法展开或折叠面板;“全部折叠” - 所有面板都以折叠状态启动;“全部展开” - 所有面板都以展开状态启动;“首先展开” - 最初只有第一个面板被展开。",
@@ -1597,10 +1607,6 @@ var simplifiedChineseTranslation = {
       textAreaWidth: "包含调查标题和描述的标题区域的宽度，以像素为单位。",
       overlapEnabled: "启用后，调查的顶部将覆盖页眉的底部。",
       mobileHeight: "设置为 0 时，将自动计算高度以适应标题的内容。"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "接受值 %。",
-      questionTitleWidth: "接受值 px。"
     },
     progressBarInheritWidthFrom: "“与容器相同”选项会自动调整进度条区域的宽度，以适应放置调查的 HTML 元素。"
   },
@@ -3147,3 +3153,11 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "行扩展错误消息对齐"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "设置嵌套在详细信息部分中的问题的错误消息的位置。“Inherit” 选项应用“Error message alignment” 属性中的设置。"
 // pe.gridLayoutColumns: "Grid layout columns" => "网格布局列"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "有效宽度，%"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "问题标题宽度，px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "您还没有布局列"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "指定此面板在网格布局中跨越的列数。"
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允许您配置面板中的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。"
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator 允许您手动调整表单元素的内联宽度以控制布局。如果这没有产生所需的结果，您可以启用网格布局，该布局使用基于列的系统构建表单元素。要配置布局列，请选择一个页面或面板，然后使用 “Question Settings” → “Grid columns” 表格。要调整问题跨越的列数，请选择它并在 “Layout” → “Column span” 字段中设置所需的值。"
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "指定此问题在网格布局中跨越多少列。"
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允许您配置页面上的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。"
