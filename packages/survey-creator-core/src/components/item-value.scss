@@ -38,7 +38,7 @@
 
 .svc-item-value--dragging {
   background: $background;
-  box-shadow: $shadow-large;
+  box-shadow: 0px 8px 16px 0px var(--ctr-shadow-large-color, var(--sjs-special-glow, #004c441a));
   border-radius: calcSize(12.5);
   padding-right: calcSize(3);
   padding-left: calcSize(0.5);
