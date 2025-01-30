@@ -12,10 +12,10 @@
   margin-inline-start: calc(-1 * var(--ctr-actionbar-button-padding-left-medium-text, var(--sjs-spacing-x2)));
 }
 .svc-question-link__clear-button {
-  color: $red;
+  color: var(--sjs-semantic-red-background-500, #e50a3eff);
   cursor: pointer;
 }
 .svc-question-link__clear-button:focus,
 .svc-question-link__clear-button:hover {
-  background-color: $red-light;
+  background-color: var(--sjs-semantic-red-background-10, #e50a3e1a);
 }

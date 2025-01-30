@@ -7,7 +7,7 @@ class ItemTemplateComponent extends SurveyElementBase<{ item: ItemValue }, any> 
     const item = this.props.item;
     return (
       <>
-        <SvgIcon iconName={item.iconName} iconSize={item.iconSize} className={"svc-json-error__icon"} ></SvgIcon>
+        <SvgIcon iconName={item.iconName} size={item.iconSize} className={"svc-json-error__icon"} ></SvgIcon>
         <div className="svc-json-error__container">
           <div className="svc-json-error__title">
             <span key={2}>{this.renderLocString(item.locTitle, undefined, "locString")}</span>

@@ -41,7 +41,7 @@ input.spg-input:focus:read-only {
 .spg-input:disabled::placeholder,
 input.spg-input:read-only,
 input.spg-input:read-only::placeholder {
-  color: color-mix(in srgb, var(--ctr-editor-content-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6))), transparent calc(100% - 100%*var(--ctr-editor-content-text-opacity-disabled, 0.25));
+  color: rgb(from var(--ctr-editor-content-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6)) r g b / var(--ctr-editor-content-text-opacity-disabled, 0.25));
   background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
 }
 

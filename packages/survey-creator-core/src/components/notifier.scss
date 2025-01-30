@@ -14,7 +14,7 @@
   background: var(--ctr-notification-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   opacity: 0;
   padding: calcSize(1) calcSize(2);
-  box-shadow: $shadow-medium;
+  box-shadow: 0px 2px 6px 0px var(--ctr-shadow-medium-color, var(--sjs-special-glow, #004c441a));
   border-radius: calcSize(0.5);
   color: var(--ctr-notification-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   min-width: calcSize(30);

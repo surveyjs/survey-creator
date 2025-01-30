@@ -308,6 +308,10 @@ var polishStrings = {
       maxWidth: "Maksymalna szerokość panelu",
       showNumber: "Numeruj ten panel"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Szerokość efektywna, %",
+      questionTitleWidth: "Szerokość tytułu pytania, px"
+    },
     paneldynamic: {
       name: "Nazwa panelu",
       title: "Tytuł panelu",
@@ -505,6 +509,7 @@ var polishStrings = {
     listIsEmpty: "Nie dodano jeszcze żadnych przedmiotów",
     "listIsEmpty@choices": "Nie dodano jeszcze żadnych opcji",
     "listIsEmpty@columns": "Nie masz jeszcze żadnych kolumn",
+    "listIsEmpty@gridLayoutColumns": "Nie masz jeszcze kolumn układu",
     "listIsEmpty@rows": "Nie masz jeszcze żadnych wierszy",
     "listIsEmpty@validators": "Nie masz jeszcze żadnych reguł sprawdzania poprawności",
     "listIsEmpty@calculatedValues": "Nie masz jeszcze żadnych zmiennych niestandardowych",
@@ -1359,7 +1364,9 @@ var polishStrings = {
       startWithNewLine: "Usuń zaznaczenie, aby wyświetlić panel w jednym wierszu z poprzednim pytaniem lub panelem. To ustawienie nie ma zastosowania, jeśli panel jest pierwszym elementem formularza.",
       state: "Do wyboru: \"Rozwinięty\" - panel wyświetla się w całości i można go zwinąć; \"Zwinięty\" - panel wyświetla tylko tytuł i opis i można go rozwinąć; \"Zablokowany\" - panel jest wyświetlany w całości i nie można go zwinąć.",
       width: "Ustawia szerokość panelu proporcjonalnie do innych elementów pomiarowych w tej samej linii. Akceptuje wartości CSS (px, %, in, pt itp.).",
-      showQuestionNumbers: "Przypisuje numery pytaniom zagnieżdżonym w tym panelu."
+      showQuestionNumbers: "Przypisuje numery pytaniom zagnieżdżonym w tym panelu.",
+      effectiveColSpan: "Określa, ile kolumn w układzie siatki obejmuje ten panel.",
+      gridLayoutColumns: "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki w panelu. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie."
     },
     paneldynamic: {
       name: "Identyfikator panelu, który nie jest widoczny dla respondentów.",
@@ -1390,6 +1397,7 @@ var polishStrings = {
     resetValueIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która określa, kiedy dane wejściowe respondenta są resetowane do wartości na podstawie \"Wyrażenia wartości domyślnej\" lub \"Wyrażenia wartości domyślnej\" lub wartości \"Odpowiedź domyślna\" (jeśli którakolwiek z nich jest ustawiona).",
     setValueIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która określa, kiedy uruchomić \"Wyrażenie wartości zestawu\" i dynamicznie przypisać wynikową wartość jako odpowiedź.",
     setValueExpression: "Określ wyrażenie definiujące wartość, która ma zostać ustawiona, gdy zostaną spełnione warunki reguły \"Ustaw wartość, jeśli\". Wyrażenie może zawierać podstawowe obliczenia - '{q1_id} + {q2_id}', wyrażenia logiczne, takie jak '{wiek} > 60' oraz funkcje: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' itp. Wartość określona przez to wyrażenie może zostać zastąpiona przez ręczne wprowadzenie danych przez respondenta.",
+    gridLayoutEnabled: "Kreator ankiet umożliwia ręczne dostosowanie szerokości elementów formularza w tekście w celu kontrolowania układu. Jeśli nie przyniesie to pożądanego rezultatu, można włączyć układ siatki, w którym struktury tworzą elementy przy użyciu systemu opartego na kolumnach. Aby skonfigurować kolumny układu, wybierz stronę lub panel i użyj tabeli \"Ustawienia pytań\" → \"Kolumny siatki\". Aby dostosować liczbę kolumn obejmujących pytanie, zaznacz je i ustaw żądaną wartość w polu \"Układ\" → \"Zakres kolumn\".",
     question: {
       name: "Identyfikator pytania, który nie jest widoczny dla respondentów.",
       description: "Wpisz podtytuł pytania.",
@@ -1410,7 +1418,8 @@ var polishStrings = {
       textUpdateMode: "Do wyboru: \"W przypadku utraty fokusu\" - wartość jest aktualizowana, gdy pole wejściowe traci fokus; \"Podczas pisania\" - wartość jest aktualizowana w czasie rzeczywistym, w miarę pisania przez użytkowników. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Po utracie fokusu\").",
       url: "Możesz użyć dowolnej usługi internetowej jako źródła danych dla pytań wielokrotnego wyboru. Aby wypełnić wartości wyborów, wprowadź adres URL usługi udostępniającej dane.",
       searchMode: "Operacja porównania używana do filtrowania listy rozwijanej.",
-      textWrapEnabled: "Długie teksty w opcjach wyboru automatycznie wygenerują podziały wierszy, aby zmieścić się w menu rozwijanym. Usuń zaznaczenie, jeśli chcesz, aby teksty zostały przycięte."
+      textWrapEnabled: "Długie teksty w opcjach wyboru automatycznie wygenerują podziały wierszy, aby zmieścić się w menu rozwijanym. Usuń zaznaczenie, jeśli chcesz, aby teksty zostały przycięte.",
+      effectiveColSpan: "Określa, ile kolumn obejmuje to pytanie w układzie siatki."
     },
     signaturepad: {
       signatureWidth: "Ustawia szerokość wyświetlanego obszaru podpisu i wynikowego obrazu.",
@@ -1509,7 +1518,8 @@ var polishStrings = {
       questionTitleWidth: "Ustawia spójną szerokość tytułów pytań, gdy są one wyrównane do lewej strony pól pytań. Akceptuje wartości CSS (px, %, in, pt itp.).",
       questionErrorLocation: "Ustawia lokalizację komunikatu o błędzie w odniesieniu do pytania z nieprawidłowymi danymi wejściowymi. Wybierz pomiędzy: \"Góra\" - tekst błędu jest umieszczany w górnej części pola pytania; \"Na dole\" — tekst błędu jest umieszczany u dołu pola pytania. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Góra\").",
       questionOrder: "Zachowuje pierwotną kolejność pytań lub losuje je. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Oryginalne\"). Efekt tego ustawienia jest widoczny tylko na karcie Podgląd.",
-      showNavigationButtons: "Ustawia widoczność przycisków nawigacyjnych na stronie. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety, które domyślnie ma wartość \"Widoczny\"."
+      showNavigationButtons: "Ustawia widoczność przycisków nawigacyjnych na stronie. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety, które domyślnie ma wartość \"Widoczny\".",
+      gridLayoutColumns: "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki na stronie. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie."
     },
     timerLocation: "Ustawia położenie czasomierza na stronie.",
     panelsState: "Do wyboru: \"Zablokowany\" - użytkownicy nie mogą rozwijać ani zwijać paneli; \"Zwiń wszystko\" - wszystkie panele rozpoczynają się w stanie zwiniętym; \"Rozwiń wszystko\" - wszystkie panele rozpoczynają się w stanie rozwiniętym; \"Pierwszy rozwinięty\" - początkowo rozwijany jest tylko pierwszy panel.",
@@ -1597,10 +1607,6 @@ var polishStrings = {
       textAreaWidth: "Szerokość obszaru nagłówka, który zawiera tytuł i opis ankiety, mierzona w pikselach.",
       overlapEnabled: "Gdy ta opcja jest włączona, górna krawędź ankiety nakłada się na dolną część nagłówka.",
       mobileHeight: "Po ustawieniu wartości 0 wysokość jest obliczana automatycznie, aby pomieścić zawartość nagłówka."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Akceptuje wartości %.",
-      questionTitleWidth: "Akceptuje wartości px."
     },
     progressBarInheritWidthFrom: "Opcja \"Tak samo jak kontener\" automatycznie dostosowuje szerokość obszaru paska postępu, aby pasowała do elementu HTML, w którym umieszczona jest ankieta."
   },
@@ -3271,3 +3277,11 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Wyrównanie komunikatu o błędzie rozwijania wiersza"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Ustawia lokalizację komunikatów o błędach dla pytań zagnieżdżonych w sekcjach szczegółowych. Opcja \"Dziedzicz\" stosuje ustawienie z właściwości \"Wyrównanie komunikatu o błędzie\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Kolumny układu siatki"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Szerokość efektywna, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Szerokość tytułu pytania, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Nie masz jeszcze kolumn układu"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Określa, ile kolumn w układzie siatki obejmuje ten panel."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki w panelu. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Kreator ankiet umożliwia ręczne dostosowanie szerokości elementów formularza w tekście w celu kontrolowania układu. Jeśli nie przyniesie to pożądanego rezultatu, można włączyć układ siatki, w którym struktury tworzą elementy przy użyciu systemu opartego na kolumnach. Aby skonfigurować kolumny układu, wybierz stronę lub panel i użyj tabeli \"Ustawienia pytań\" → \"Kolumny siatki\". Aby dostosować liczbę kolumn obejmujących pytanie, zaznacz je i ustaw żądaną wartość w polu \"Układ\" → \"Zakres kolumn\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Określa, ile kolumn obejmuje to pytanie w układzie siatki."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki na stronie. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie."

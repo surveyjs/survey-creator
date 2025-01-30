@@ -308,6 +308,10 @@ export var hebrewStrings = {
       maxWidth: "רוחב לוח מרבי",
       showNumber: "מספר חלונית זו"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "רוחב אפקטיבי, %",
+      questionTitleWidth: "רוחב כותרת השאלה, px"
+    },
     paneldynamic: {
       name: "שם החלונית",
       title: "כותרת הפאנל",
@@ -505,6 +509,7 @@ export var hebrewStrings = {
     listIsEmpty: "טרם הוספו פריטים",
     "listIsEmpty@choices": "טרם הוספו ברירות בחירה",
     "listIsEmpty@columns": "עדיין אין לך עמודות",
+    "listIsEmpty@gridLayoutColumns": "עדיין אין לך עמודות פריסה",
     "listIsEmpty@rows": "עדיין אין לך שורות",
     "listIsEmpty@validators": "עדיין אין לך כללי אימות",
     "listIsEmpty@calculatedValues": "עדיין אין לך משתנים מותאמים אישית",
@@ -1359,7 +1364,9 @@ export var hebrewStrings = {
       startWithNewLine: "בטל את הבחירה כדי להציג את החלונית בשורה אחת עם השאלה או החלונית הקודמת. ההגדרה אינה חלה אם החלונית היא הרכיב הראשון בטופס.",
       state: "בחר מתוך: \"מורחב\" - הלוח מוצג במלואו וניתן לכווץ; \"מכווץ\" - הלוח מציג רק את הכותרת והתיאור וניתן להרחיבו; \"נעול\" - הלוח מוצג במלואו ולא ניתן לכווץ.",
       width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו').",
-      showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בלוח זה."
+      showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בלוח זה.",
+      effectiveColSpan: "מציין כמה עמודות תפרוס חלונית זו בפריסת הרשת.",
+      gridLayoutColumns: "טבלה זו מאפשרת להגדיר כל עמודת רשת בחלונית. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."
     },
     paneldynamic: {
       name: "מזהה חלונית שאינו גלוי למשיבים.",
@@ -1390,6 +1397,7 @@ export var hebrewStrings = {
     resetValueIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל מותנה הקובע מתי הקלט של המשיב יאופס לערך בהתבסס על \"ביטוי ערך ברירת מחדל\" או \"הגדר ביטוי ערך\" או על הערך \"תשובת ברירת מחדל\" (אם אחד מהם מוגדר).",
     setValueIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל מותנה הקובע מתי להפעיל את \"Set value expression\" ולהקצות באופן דינמי את הערך המתקבל כתגובה.",
     setValueExpression: "ציין ביטוי המגדיר את הערך שיש להגדיר כשהתנאים בכלל \"הגדר ערך אם\" מתקיימים. הביטוי יכול לכלול חישובים בסיסיים - '{q1_id} + {q2_id}', ביטויים בוליאניים, כגון '{age} > 60', ופונקציות: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו'. הערך שנקבע על ידי ביטוי זה ניתן לדריסת קלט ידני של המשיב.",
+    gridLayoutEnabled: "יוצר הסקר מאפשר לך להתאים באופן ידני את רוחב השורה של רכיבי טופס כדי לשלוט בפריסה. אם פעולה זו אינה מפיקה את התוצאה הרצויה, ניתן להפעיל את פריסת הרשת, הבונה רכיבי טופס באמצעות מערכת מבוססת עמודות. כדי להגדיר עמודות פריסה, בחר עמוד או חלונית והשתמש בטבלה \"הגדרות שאלה\" → \"עמודות רשת\". כדי להתאים את מספר העמודות ששאלה משתרעת, בחר אותה והגדר את הערך הרצוי בשדה \"פריסה\" → \"טווח עמודות\".",
     question: {
       name: "מזהה שאלה שאינו גלוי למשיבים.",
       description: "הקלד כותרת משנה של שאלה.",
@@ -1410,7 +1418,8 @@ export var hebrewStrings = {
       textUpdateMode: "בחר מתוך: \"על מיקוד אבוד\" - הערך מתעדכן כאשר שדה הקלט מאבד את המיקוד; \"בעת הקלדה\" - הערך מתעדכן בזמן אמת, כאשר המשתמשים מקלידים. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מיקוד אבוד\" כברירת מחדל).",
       url: "באפשרותך להשתמש בכל שירות אינטרנט כמקור נתונים לשאלות אמריקאיות. כדי לאכלס ערכי בחירה, הזן את כתובת ה- URL של השירות המספק את הנתונים.",
       searchMode: "פעולת השוואה המשמשת לסינון הרשימה הנפתחת.",
-      textWrapEnabled: "טקסטים ארוכים באפשרויות בחירה ייצרו באופן אוטומטי מעברי שורה שיתאימו לתפריט הנפתח. בטל את הבחירה אם ברצונך שהטקסטים ייחתכו."
+      textWrapEnabled: "טקסטים ארוכים באפשרויות בחירה ייצרו באופן אוטומטי מעברי שורה שיתאימו לתפריט הנפתח. בטל את הבחירה אם ברצונך שהטקסטים ייחתכו.",
+      effectiveColSpan: "מציין כמה עמודות שאלה זו משתרעת בתוך פריסת הרשת."
     },
     signaturepad: {
       signatureWidth: "קובע את רוחב אזור החתימה המוצג ואת התמונה שתיווצר.",
@@ -1509,7 +1518,8 @@ export var hebrewStrings = {
       questionTitleWidth: "הגדרת רוחב עקבי לכותרות שאלות כאשר הן מיושרות משמאל לתיבות השאלות. מקבל ערכי CSS (px, %, in, pt וכו').",
       questionErrorLocation: "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"למעלה\" כברירת מחדל).",
       questionOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מקורי\" כברירת מחדל). ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
-      showNavigationButtons: "מגדיר את התצוגה של לחצני ניווט בעמוד. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר, המוגדרת כברירת מחדל ל\"גלוי\"."
+      showNavigationButtons: "מגדיר את התצוגה של לחצני ניווט בעמוד. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר, המוגדרת כברירת מחדל ל\"גלוי\".",
+      gridLayoutColumns: "טבלה זו מאפשרת לך לקבוע את התצורה של כל עמודת רשת בעמוד. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."
     },
     timerLocation: "הגדרת המיקום של טיימר בעמוד.",
     panelsState: "בחר מתוך: \"נעול\" - משתמשים אינם יכולים להרחיב או לכווץ חלוניות; \"כווץ הכל\" - כל הלוחות מתחילים במצב מכווץ; \"הרחב הכל\" - כל הלוחות מתחילים במצב מורחב; \"מורחב ראשון\" - רק הלוח הראשון מורחב בתחילה.",
@@ -1597,10 +1607,6 @@ export var hebrewStrings = {
       textAreaWidth: "רוחב אזור הכותרת המכיל את כותרת הסקר ותיאורו, נמדד בפיקסלים.",
       overlapEnabled: "כאשר אפשרות זו מופעלת, החלק העליון של הסקר מכסה את החלק התחתון של הכותרת.",
       mobileHeight: "כאשר הוא מוגדר ל- 0, הגובה מחושב באופן אוטומטי כדי להתאים לתוכן הכותרת."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "מקבל ערכים %.",
-      questionTitleWidth: "מקבל ערכים px."
     },
     progressBarInheritWidthFrom: "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור מד ההתקדמות כך שיתאים לרכיב HTML שבו ממוקם הסקר."
   },
@@ -2573,3 +2579,11 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "יישור הודעת שגיאה של הרחבת שורה"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "הגדרת המיקום של הודעות שגיאה עבור שאלות המקוננות במקטעים מפורטים. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "עמודות פריסת רשת"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "רוחב אפקטיבי, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "רוחב כותרת השאלה, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "עדיין אין לך עמודות פריסה"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "מציין כמה עמודות תפרוס חלונית זו בפריסת הרשת."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "טבלה זו מאפשרת להגדיר כל עמודת רשת בחלונית. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "יוצר הסקר מאפשר לך להתאים באופן ידני את רוחב השורה של רכיבי טופס כדי לשלוט בפריסה. אם פעולה זו אינה מפיקה את התוצאה הרצויה, ניתן להפעיל את פריסת הרשת, הבונה רכיבי טופס באמצעות מערכת מבוססת עמודות. כדי להגדיר עמודות פריסה, בחר עמוד או חלונית והשתמש בטבלה \"הגדרות שאלה\" → \"עמודות רשת\". כדי להתאים את מספר העמודות ששאלה משתרעת, בחר אותה והגדר את הערך הרצוי בשדה \"פריסה\" → \"טווח עמודות\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "מציין כמה עמודות שאלה זו משתרעת בתוך פריסת הרשת."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "טבלה זו מאפשרת לך לקבוע את התצורה של כל עמודת רשת בעמוד. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."
