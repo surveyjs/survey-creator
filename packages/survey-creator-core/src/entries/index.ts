@@ -103,6 +103,7 @@ export * from "../utils/resizer";
 export * from "../plugins/undo-redo";
 export * from "../plugins/undo-redo/undo-redo-manager";
 export * from "../pages-controller";
+export * from "../creator-theme/creator-themes";
 export * from "../creator-theme/creator-theme-model-definition";
 export * from "../creator-theme/creator-theme-model";
 export * from "../presets/presets-base";
