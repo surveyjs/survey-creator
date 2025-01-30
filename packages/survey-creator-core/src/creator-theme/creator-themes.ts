@@ -32,4 +32,4 @@ if (Object.keys(DefaultLightColorCssVariables).length) {
     } catch (e) { }
   });
 }
-CreatorStylesManager.insertStylesRulesIntoDocument({ selector: "", styles: stylesStr });
+CreatorStylesManager.insertStylesRulesIntoDocument([{ selector: "survey-creator,.svc-creator", styles: stylesStr }]);

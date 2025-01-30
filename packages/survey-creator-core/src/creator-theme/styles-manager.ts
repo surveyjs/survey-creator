@@ -71,7 +71,7 @@ export class CreatorStylesManager {
     return <CSSStyleSheet>style.sheet;
   }
 
-  public static insertStylesRulesIntoDocument(rules: { selector: string, styles: string }): any {
+  public static insertStylesRulesIntoDocument(rules: Array<{ selector: string, styles: string }>): any {
     if (CreatorStylesManager.Enabled) {
       let sheet = CreatorStylesManager.findSheet(CreatorStylesManager.SurveyJSCreatorStylesSheetId);
       if (!sheet) {
@@ -79,9 +79,9 @@ export class CreatorStylesManager {
       }
 
       if (Object.keys(rules).length) {
-        Object.keys(rules).forEach((selector) => {
+        rules.forEach((rule) => {
           try {
-            sheet.insertRule(`${selector} { ${rules[selector]} }`, 0);
+            sheet.insertRule(`${rule.selector} { ${rule.styles} }`, 0);
           } catch (e) { }
         });
       }
