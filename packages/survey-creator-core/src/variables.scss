@@ -7,16 +7,6 @@ $primary-background-dark: var(--sjs-primary-backcolor-dark, rgb(20, 164, 139));
 $primary-foreground: var(--sjs-primary-forecolor, var(--primary-foreground, #fff));
 $primary-foreground-disabled: var(--sjs-primary-forecolor-light, var(--primary-foreground-disabled, rgba(#fff, 0.25)));
 
-$secondary-light: var(--sjs-secondary-backcolor-light, var(--secondary-light, rgba(255, 152, 20, 0.25)));
-$secondary-backcolor-semi-light: var(--sjs-secondary-backcolor-semi-light, rgba(255, 152, 20, 0.1));
-$secondary-forecolor: var(--sjs-secondary-forecolor, #fff);
-$secondary-forecolor-light: var(--sjs-secondary-forecolor-light, rgba(#fff, 0.25));
-
-$editor-background: var(--sjs-editorpanel-backcolor,
-    var(--sjs-editor-background, var(--sjs-general-backcolor-dim-light, var(--background-dim-light, #f9f9f9))));
-$question-background: var(--sjs-questionpanel-backcolor,
-    var(--sjs-question-background, var(--sjs-general-backcolor, var(--background, #fff))));
-
 $background: var(--sjs-general-backcolor, var(--background, #fff));
 $background-dim: var(--sjs-general-backcolor-dim, var(--background-dim, #f3f3f3));
 $background-dim-light: var(--sjs-general-backcolor-dim-light, var(--background-dim-light, #f9f9f9));
@@ -24,37 +14,10 @@ $background-semitransparent: var(--background-semitransparent, rgba(144, 144, 14
 $background-dark: var(--sjs-questionpanel-hovercolor, var(--sjs-general-backcolor-dark, rgb(248, 248, 248)));
 $background-dim-dark: var(--sjs-editorpanel-hovercolor, var(--sjs-general-backcolor-dim-dark, rgb(243, 243, 243)));
 
-$corner-radius: var(--sjs-corner-radius, 4px);
-
 $foreground: var(--sjs-general-forecolor, var(--foreground, #161616));
 $foreground-light: var(--sjs-general-forecolor-light, var(--foreground-light, #909090));
 $foreground-dim: var(--sjs-general-dim-forecolor, rgba(0, 0, 0, 0.91));
 $foreground-dim-light: var(--sjs-general-dim-forecolor-light, rgba(0, 0, 0, 0.45));
-
-$border: var(--sjs-border-default, var(--border, #d6d6d6));
-$border-light: var(--sjs-border-light, var(--border-light, #eaeaea));
-$border-inside: var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16)));
-
-$shadow-small: 0px 1px 2px 0px var(--ctr-shadow-small-color, var(--sjs-special-shadow, #00000040));
-$shadow-small-reset: 0px 0px 0px 0px var(--ctr-shadow-small-color, var(--sjs-special-shadow, #00000040));
-$shadow-medium: 0px 2px 6px 0px var(--ctr-shadow-medium-color, var(--sjs-special-glow, #004c441a));
-$shadow-large: 0px 8px 16px 0px var(--ctr-shadow-large-color, var(--sjs-special-glow, #004c441a));
-$shadow-inner: var(--sjs-shadow-inner, inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15));
-$shadow-inner-reset: var(--sjs-shadow-inner, inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15));
-$shadow-x-large: 0px 0px 0px 0px var(--ctr-shadow-x-large-color, var(--sjs-special-glow, #004c441a));
-
-$red: var(--sjs-special-red, var(--red, #e60a3e));
-$red-light: var(--sjs-special-red-light, var(--red-light, rgba(230, 10, 62, 0.1)));
-$red-forecolor: var(--sjs-special-red-forecolor, #ffffff);
-$yellow: var(--sjs-special-yellow, var(--yellow, #ff9814));
-$yellow-light: var(--sjs-special-yellow-light, var(--yellow-light, rgba(255, 152, 20, 0.1)));
-$yellow-forecolor: var(--sjs-special-yellow-forecolor, #ffffff);
-$green: var(--sjs-special-green, var(--green, #19b394));
-$green-light: var(--sjs-special-green-light, var(--green-light, rgba(25, 179, 148, 0.1)));
-$green-forecolor: var(--sjs-special-green-forecolor, #ffffff);
-$blue: var(--sjs-special-blue, #437fd9);
-$blue-light: var(--sjs-special-blue-light, var(--blue-light, rgba(67, 127, 217, 0.1)));
-$blue-forecolor: var(--sjs-special-blue-forecolor, #ffffff);
 
 $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
