@@ -543,6 +543,7 @@ export var fiStrings = {
     titlePlaceholder: "Syötä otsikko tähän",
     surveyTitlePlaceholder: "Syötä kyselyn otsikko tähän",
     pageTitlePlaceholder: "Syötä sivun otsikko tähän",
+    startPageTitlePlaceholder: "Aloitussivu",
     descriptionPlaceholder: "Lisää kuvaus",
     surveyDescriptionPlaceholder: "Lisää kyselyn kuvaus",
     pageDescriptionPlaceholder: "Lisää sivun kuvaus",
@@ -2984,6 +2985,7 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Rivin laajennuksen virhesanoman tasaus"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Määrittää tieto-osiin sisältyvien kysymysten virhesanomien sijainnin. \"Peri\" -vaihtoehto käyttää asetusta \"Virheilmoituksen kohdistus\" -ominaisuudesta."
 // pe.gridLayoutColumns: "Grid layout columns" => "Ruudukkoasettelun sarakkeet"
+// pe.startPageTitlePlaceholder: "Start Page" => "Aloitussivu"
 // panellayoutcolumn.effectiveWidth: "Effective width, %" => "Tehollinen leveys, %"
 // panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Kysymyksen otsikon leveys, px"
 // pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Sinulla ei vielä ole asettelusarakkeita"

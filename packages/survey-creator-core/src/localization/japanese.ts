@@ -543,6 +543,7 @@ export var jaStrings = {
     titlePlaceholder: "タイトルを入力",
     surveyTitlePlaceholder: "調査タイトルを入力",
     pageTitlePlaceholder: "ページタイトルを入力",
+    startPageTitlePlaceholder: "スタートページ",
     descriptionPlaceholder: "詳細を入力",
     surveyDescriptionPlaceholder: "調査の詳細を入力",
     pageDescriptionPlaceholder: "ページの詳細を入力",
@@ -3011,6 +3012,7 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "行拡張エラーメッセージの配置"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "詳細セクションにネストされた質問のエラーメッセージの場所を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。"
 // pe.gridLayoutColumns: "Grid layout columns" => "グリッド レイアウト列"
+// pe.startPageTitlePlaceholder: "Start Page" => "スタートページ"
 // panellayoutcolumn.effectiveWidth: "Effective width, %" => "有効幅、%"
 // panellayoutcolumn.questionTitleWidth: "Question title width, px" => "質問タイトルの幅、px"
 // pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "レイアウト列がまだありません"

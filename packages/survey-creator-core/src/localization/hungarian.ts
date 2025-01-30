@@ -543,6 +543,7 @@ export var huStrings = {
     titlePlaceholder: "Cím",
     surveyTitlePlaceholder: "Felmérés címe",
     pageTitlePlaceholder: "Oldal {num}",
+    startPageTitlePlaceholder: "Kezdőlap",
     descriptionPlaceholder: "Leírás: __________",
     surveyDescriptionPlaceholder: "Leírás: __________",
     pageDescriptionPlaceholder: "Leírás: __________",
@@ -3163,6 +3164,7 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Sorbővítési hibaüzenet igazítása"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Beállítja a hibaüzenetek helyét a részletes szakaszokba ágyazott kérdésekhez. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza."
 // pe.gridLayoutColumns: "Grid layout columns" => "Rácsos elrendezés oszlopai"
+// pe.startPageTitlePlaceholder: "Start Page" => "Kezdőlap"
 // panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektív szélesség, %"
 // panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Kérdés címének szélessége, px"
 // pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Még nincsenek elrendezésoszlopok"

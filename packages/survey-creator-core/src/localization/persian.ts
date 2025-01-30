@@ -543,6 +543,7 @@ var persianStrings = {
     titlePlaceholder: "عنوان را اینجا وارد کنید",
     surveyTitlePlaceholder: "عنوان نظرسنجی را اینجا وارد کنید",
     pageTitlePlaceholder: "عنوان صفحه را اینجا وارد کنید",
+    startPageTitlePlaceholder: "صفحه شروع",
     descriptionPlaceholder: "توضیحات را وارد کنید",
     surveyDescriptionPlaceholder: "توضیحات نظرسنجی را وارد کنید",
     pageDescriptionPlaceholder: "توضیحات صفحه را وارد کنید",
@@ -2967,6 +2968,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "تراز پیام خطای گسترش ردیف"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "مکان پیام های خطا را برای سؤالات تودرتو در بخش های جزئیات تنظیم می کند. گزینه \"وراثت\" تنظیمات را از ویژگی \"تراز پیام خطا\" اعمال می کند."
 // pe.gridLayoutColumns: "Grid layout columns" => "ستون های طرح بندی شبکه ای"
+// pe.startPageTitlePlaceholder: "Start Page" => "صفحه شروع"
 // panellayoutcolumn.effectiveWidth: "Effective width, %" => "عرض موثر، ٪"
 // panellayoutcolumn.questionTitleWidth: "Question title width, px" => "عرض عنوان سوال، px"
 // pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "شما هنوز ستون های طرح بندی ندارید"

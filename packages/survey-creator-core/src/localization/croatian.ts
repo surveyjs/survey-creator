@@ -543,6 +543,7 @@ export var hrStrings = {
     titlePlaceholder: "Ulazni naslov ovdje",
     surveyTitlePlaceholder: "Naslov ulazne ankete ovdje",
     pageTitlePlaceholder: "Naslov ulazne stranice ovdje",
+    startPageTitlePlaceholder: "Početna stranica",
     descriptionPlaceholder: "Unesite opis",
     surveyDescriptionPlaceholder: "Unesite opis ankete",
     pageDescriptionPlaceholder: "Unesite opis stranice",
@@ -3006,6 +3007,7 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Poravnanje poruke o pogrešci proširenja retka"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Postavlja mjesto poruka o pogreškama za pitanja ugniježđena u detaljnim odjeljcima. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Stupci rasporeda rešetke"
+// pe.startPageTitlePlaceholder: "Start Page" => "Početna stranica"
 // panellayoutcolumn.effectiveWidth: "Effective width, %" => "Efektivna širina, %"
 // panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Širina naslova pitanja, px"
 // pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Još nemate stupce izgleda"
