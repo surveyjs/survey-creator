@@ -1,18 +1,20 @@
 import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptions, ISaveToJSONOptions } from "survey-core";
 import { getLocString } from "../editorLocalization";
-import { assign, roundTo2Decimals } from "../utils/utils";
+import { assign, roundTo2Decimals, sortDefaultThemes } from "../utils/utils";
 import { colorsAreEqual } from "../utils/color-utils";
-import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
+import { CreatorThemes, defaultCreatorThemesOrder, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import * as Themes from "survey-creator-core/themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
 
+const importedThemeNames = [];
 Object.keys(Themes || {}).forEach(themeName => {
   const theme: ICreatorTheme = Themes[themeName];
-  if (PredefinedCreatorThemes.indexOf(theme.themeName) === -1) {
-    PredefinedCreatorThemes.push(theme.themeName);
+  if (importedThemeNames.indexOf(theme.themeName) === -1) {
+    importedThemeNames.push(theme.themeName);
   }
   CreatorThemes[theme.themeName] = theme;
 });
+sortDefaultThemes(defaultCreatorThemesOrder, importedThemeNames, PredefinedCreatorThemes);
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";
@@ -243,21 +245,13 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
 }
 
-const defaultThemesOrder = ["default-light", "default-contrast", "default-dark", "sc2020"];
-function sortDefaultThemes(themes) {
-  const result = [].concat(themes).sort((t1, t2) => {
-    return defaultThemesOrder.indexOf(t1) - defaultThemesOrder.indexOf(t2);
-  });
-  return result;
-}
-
 Serializer.addClass(
   "creatortheme",
   [
     {
       type: "dropdown",
       name: "themeName",
-      choices: sortDefaultThemes(PredefinedCreatorThemes).map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) })),
+      choices: PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) })),
     },
     {
       type: "string",
