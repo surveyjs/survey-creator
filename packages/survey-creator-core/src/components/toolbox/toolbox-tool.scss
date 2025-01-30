@@ -20,6 +20,7 @@
 }
 .svc-toolbox__tool {
   cursor: default;
+  width: initial;
   align-items: var(--ctr-toolbox-item-align, stretch);
   align-self: var(--ctr-toolbox-item-align, stretch);
   &:first-of-type > .svc-toolbox__tool-content {
