@@ -308,6 +308,10 @@ export var indonesianStrings = {
       maxWidth: "Lebar panel maksimum",
       showNumber: "Nomor panel ini"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Lebar efektif, %",
+      questionTitleWidth: "Lebar judul pertanyaan, px"
+    },
     paneldynamic: {
       name: "Nama panel",
       title: "Judul panel",
@@ -505,6 +509,7 @@ export var indonesianStrings = {
     listIsEmpty: "Belum ada item yang ditambahkan",
     "listIsEmpty@choices": "Belum ada pilihan yang ditambahkan",
     "listIsEmpty@columns": "Anda belum memiliki kolom apa pun",
+    "listIsEmpty@gridLayoutColumns": "Anda belum memiliki kolom tata letak",
     "listIsEmpty@rows": "Anda belum memiliki baris",
     "listIsEmpty@validators": "Anda belum memiliki aturan validasi apa pun",
     "listIsEmpty@calculatedValues": "Anda belum memiliki variabel khusus",
@@ -1360,7 +1365,9 @@ export var indonesianStrings = {
       startWithNewLine: "Batalkan pilihan untuk menampilkan panel dalam satu baris dengan pertanyaan atau panel sebelumnya. Pengaturan tidak berlaku jika panel adalah elemen pertama dalam formulir Anda.",
       state: "Pilih dari: \"Diperluas\" - panel ditampilkan secara penuh dan dapat diciutkan; \"Collapsed\" - panel hanya menampilkan judul dan deskripsi dan dapat diperluas; \"Terkunci\" - panel ditampilkan secara penuh dan tidak dapat diciutkan.",
       width: "Mengatur lebar panel secara proporsional dengan elemen survei lainnya di baris yang sama. Menerima nilai CSS (px, %, in, pt, dll.).",
-      showQuestionNumbers: "Menetapkan nomor untuk pertanyaan yang bersarang dalam panel ini."
+      showQuestionNumbers: "Menetapkan nomor untuk pertanyaan yang bersarang dalam panel ini.",
+      effectiveColSpan: "Menentukan berapa banyak kolom panel ini dalam tata letak kisi.",
+      gridLayoutColumns: "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi dalam panel. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom."
     },
     paneldynamic: {
       name: "ID panel yang tidak terlihat oleh responden.",
@@ -1391,6 +1398,7 @@ export var indonesianStrings = {
     resetValueIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menentukan kapan input responden diatur ulang ke nilai berdasarkan \"Ekspresi nilai default\" atau \"Atur ekspresi nilai\" atau ke nilai \"Jawaban default\" (jika salah satu diatur).",
     setValueIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menentukan kapan harus menjalankan \"Atur ekspresi nilai\" dan secara dinamis menetapkan nilai yang dihasilkan sebagai respons.",
     setValueExpression: "Tentukan ekspresi yang menentukan nilai yang akan ditetapkan saat kondisi dalam aturan \"Tetapkan nilai jika\" terpenuhi. Ekspresi dapat mencakup perhitungan dasar - '{q1_id} + {q2_id}', ekspresi Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll. Nilai yang ditentukan oleh ekspresi ini dapat ditimpa oleh input manual responden.",
+    gridLayoutEnabled: "Pembuat Survei memungkinkan Anda menyesuaikan lebar sebaris elemen formulir secara manual untuk mengontrol tata letak. Jika ini tidak menghasilkan hasil yang diinginkan, Anda dapat mengaktifkan tata letak kisi, yang menyusun elemen bentuk menggunakan sistem berbasis kolom. Untuk mengonfigurasi kolom tata letak, pilih halaman atau panel dan gunakan tabel \"Pengaturan Pertanyaan\" → \"Kolom kisi\". Untuk menyesuaikan berapa banyak kolom rentang pertanyaan, pilih dan atur nilai yang diinginkan di bidang \"Tata Letak\" → \"Rentang kolom\".",
     question: {
       name: "ID pertanyaan yang tidak terlihat oleh responden.",
       description: "Ketik subtitle pertanyaan.",
@@ -1411,7 +1419,8 @@ export var indonesianStrings = {
       textUpdateMode: "Pilih dari: \"On lost focus\" - nilai diperbarui ketika bidang input kehilangan fokus; \"Saat mengetik\" - nilainya diperbarui secara real-time, saat pengguna mengetik. Opsi \"Warisi\" menerapkan pengaturan tingkat survei (\"Pada fokus yang hilang\" secara default).",
       url: "Anda dapat menggunakan layanan web apa pun sebagai sumber data untuk pertanyaan pilihan ganda. Untuk mengisi nilai pilihan, masukkan URL layanan yang menyediakan data.",
       searchMode: "Operasi perbandingan yang digunakan untuk memfilter daftar turun bawah.",
-      textWrapEnabled: "Teks panjang dalam opsi pilihan akan secara otomatis menghasilkan jeda baris agar sesuai dengan menu tarik-turun. Batalkan pilihan jika Anda ingin teks dipotong."
+      textWrapEnabled: "Teks panjang dalam opsi pilihan akan secara otomatis menghasilkan jeda baris agar sesuai dengan menu tarik-turun. Batalkan pilihan jika Anda ingin teks dipotong.",
+      effectiveColSpan: "Menentukan berapa banyak kolom yang mencakup pertanyaan ini dalam tata letak kisi."
     },
     signaturepad: {
       signatureWidth: "Mengatur lebar area tanda tangan yang ditampilkan dan gambar yang dihasilkan.",
@@ -1510,7 +1519,8 @@ export var indonesianStrings = {
       questionTitleWidth: "Mengatur lebar yang konsisten untuk judul pertanyaan bila disejajarkan di sebelah kiri kotak pertanyaan. Menerima nilai CSS (px, %, in, pt, dll.).",
       questionErrorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan pertanyaan dengan input yang tidak valid. Pilih antara: \"Atas\" - teks kesalahan ditempatkan di bagian atas kotak pertanyaan; \"Bawah\" - teks kesalahan ditempatkan di bagian bawah kotak pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Teratas\" secara default).",
       questionOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Asli\" secara default). Efek pengaturan ini hanya terlihat di tab Pratinjau.",
-      showNavigationButtons: "Mengatur visibilitas tombol navigasi di halaman. Opsi \"Warisi\" menerapkan pengaturan tingkat survei, yang defaultnya adalah \"Terlihat\"."
+      showNavigationButtons: "Mengatur visibilitas tombol navigasi di halaman. Opsi \"Warisi\" menerapkan pengaturan tingkat survei, yang defaultnya adalah \"Terlihat\".",
+      gridLayoutColumns: "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi pada halaman. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom."
     },
     timerLocation: "Mengatur lokasi pengatur waktu pada halaman.",
     panelsState: "Pilih dari: \"Terkunci\" - pengguna tidak dapat memperluas atau menciutkan panel; \"Runtuhkan semua\" - semua panel dimulai dalam keadaan diciutkan; \"Perluas semua\" - semua panel dimulai dalam keadaan diperluas; \"Pertama diperluas\" - hanya panel pertama yang awalnya diperluas.",
@@ -1598,10 +1608,6 @@ export var indonesianStrings = {
       textAreaWidth: "Lebar area header yang berisi judul dan deskripsi survei, diukur dalam piksel.",
       overlapEnabled: "Saat diaktifkan, bagian atas survei melapisi bagian bawah header.",
       mobileHeight: "Saat diatur ke 0, tinggi dihitung secara otomatis untuk mengakomodasi konten header."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Menerima nilai %",
-      questionTitleWidth: "Menerima nilai px."
     },
     progressBarInheritWidthFrom: "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area bilah kemajuan agar sesuai dengan elemen HTML tempat survei ditempatkan."
   },
@@ -3162,3 +3168,11 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Mengatur lokasi pesan kesalahan untuk pertanyaan yang bertumpuk di bagian detail. Opsi \"Wariskan\" menerapkan pengaturan dari properti \"Perataan pesan kesalahan\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Kolom tata letak kisi"
 // pe.startPageTitlePlaceholder: "Start Page" => "Halaman Awal"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Lebar efektif, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Lebar judul pertanyaan, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Anda belum memiliki kolom tata letak"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Menentukan berapa banyak kolom panel ini dalam tata letak kisi."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi dalam panel. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Pembuat Survei memungkinkan Anda menyesuaikan lebar sebaris elemen formulir secara manual untuk mengontrol tata letak. Jika ini tidak menghasilkan hasil yang diinginkan, Anda dapat mengaktifkan tata letak kisi, yang menyusun elemen bentuk menggunakan sistem berbasis kolom. Untuk mengonfigurasi kolom tata letak, pilih halaman atau panel dan gunakan tabel \"Pengaturan Pertanyaan\" → \"Kolom kisi\". Untuk menyesuaikan berapa banyak kolom rentang pertanyaan, pilih dan atur nilai yang diinginkan di bidang \"Tata Letak\" → \"Rentang kolom\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Menentukan berapa banyak kolom yang mencakup pertanyaan ini dalam tata letak kisi."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi pada halaman. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom."

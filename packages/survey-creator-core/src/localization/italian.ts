@@ -308,6 +308,10 @@ var italianTranslation = {
       maxWidth: "Larghezza massima del pannello",
       showNumber: "Numera questo pannello"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Larghezza effettiva, %",
+      questionTitleWidth: "Larghezza del titolo della domanda, px"
+    },
     paneldynamic: {
       name: "Nome del pannello",
       title: "Titolo del panel",
@@ -505,6 +509,7 @@ var italianTranslation = {
     listIsEmpty: "Aggiungi una nuova opzione",
     "listIsEmpty@choices": "Non sono state ancora aggiunte scelte",
     "listIsEmpty@columns": "Non hai ancora colonne",
+    "listIsEmpty@gridLayoutColumns": "Non hai ancora colonne di layout",
     "listIsEmpty@rows": "Non ci sono ancora righe",
     "listIsEmpty@validators": "Non si dispone ancora di regole di convalida",
     "listIsEmpty@calculatedValues": "Non disponi ancora di variabili personalizzate",
@@ -1360,7 +1365,9 @@ var italianTranslation = {
       startWithNewLine: "Deselezionare questa opzione per visualizzare il pannello in una riga con la domanda o il pannello precedente. L'impostazione non si applica se il pannello è il primo elemento del modulo.",
       state: "Scegli tra: \"Espanso\" - il pannello viene visualizzato per intero e può essere compresso; \"Compresso\" - il pannello visualizza solo il titolo e la descrizione e può essere espanso; \"Bloccato\": il pannello viene visualizzato per intero e non può essere compresso.",
       width: "Imposta la larghezza del pannello in proporzione agli altri elementi di rilievo nella stessa linea. Accetta valori CSS (px, %, in, pt, ecc.).",
-      showQuestionNumbers: "Assegna numeri alle domande nidificate all'interno di questo pannello."
+      showQuestionNumbers: "Assegna numeri alle domande nidificate all'interno di questo pannello.",
+      effectiveColSpan: "Specifica il numero di colonne distribuite dal pannello all'interno del layout della griglia.",
+      gridLayoutColumns: "Questa tabella consente di configurare ogni colonna della griglia all'interno del pannello. Imposta automaticamente la percentuale di larghezza per ogni colonna in base al numero massimo di elementi in una riga. Per personalizzare il layout della griglia, regola manualmente questi valori e definisci la larghezza del titolo per tutte le domande in ogni colonna."
     },
     paneldynamic: {
       name: "Un ID pannello che non è visibile ai rispondenti.",
@@ -1391,6 +1398,7 @@ var italianTranslation = {
     resetValueIf: "Utilizza l'icona della bacchetta magica per impostare una regola condizionale che determini quando l'input di un rispondente viene reimpostato sul valore in base all'\"Espressione del valore predefinito\" o \"Imposta espressione del valore\" o al valore \"Risposta predefinita\" (se uno dei due è impostato).",
     setValueIf: "Utilizzare l'icona della bacchetta magica per impostare una regola condizionale che determina quando eseguire l'espressione \"Imposta valore\" e assegnare dinamicamente il valore risultante come risposta.",
     setValueExpression: "Specificare un'espressione che definisca il valore da impostare quando vengono soddisfatte le condizioni della regola \"Imposta valore se\". L'espressione può includere calcoli di base: '{q1_id} + {q2_id}', espressioni booleane, come '{age} > 60' e funzioni: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', ecc. Il valore determinato da questa espressione può essere sovrascritto dall'input manuale di un rispondente.",
+    gridLayoutEnabled: "Survey Creator consente di regolare manualmente le larghezze in linea degli elementi del modulo per controllare il layout. Se questo non produce il risultato desiderato, è possibile abilitare il layout a griglia, che struttura gli elementi di forma utilizzando un sistema basato su colonne. Per configurare le colonne del layout, seleziona una pagina o un pannello e utilizza la tabella \"Impostazioni domanda\" → \"Colonne griglia\". Per regolare il numero di colonne di una domanda, selezionala e imposta il valore desiderato nel campo \"Layout\" → \"Estensione colonne\".",
     question: {
       name: "Un ID domanda che non è visibile ai rispondenti.",
       description: "Digita il sottotitolo di una domanda.",
@@ -1411,7 +1419,8 @@ var italianTranslation = {
       textUpdateMode: "Scegli tra: \"In caso di perdita di messa a fuoco\" - il valore viene aggiornato quando il campo di immissione perde lo stato attivo; \"Durante la digitazione\": il valore viene aggiornato in tempo reale, mentre gli utenti digitano. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"In caso di perdita di focus\" per impostazione predefinita).",
       url: "È possibile utilizzare qualsiasi servizio Web come origine dati per le domande a scelta multipla. Per popolare i valori di scelta, immettere l'URL del servizio che fornisce i dati.",
       searchMode: "Operazione di confronto utilizzata per filtrare l'elenco a discesa.",
-      textWrapEnabled: "I testi lunghi nelle opzioni di scelta genereranno automaticamente interruzioni di riga per adattarsi al menu a discesa. Deselezionare questa opzione se si desidera che i testi vengano ritagliati."
+      textWrapEnabled: "I testi lunghi nelle opzioni di scelta genereranno automaticamente interruzioni di riga per adattarsi al menu a discesa. Deselezionare questa opzione se si desidera che i testi vengano ritagliati.",
+      effectiveColSpan: "Specifica il numero di colonne su cui si estende la domanda all'interno del layout della griglia."
     },
     signaturepad: {
       signatureWidth: "Imposta la larghezza dell'area della firma visualizzata e dell'immagine risultante.",
@@ -1510,7 +1519,8 @@ var italianTranslation = {
       questionTitleWidth: "Imposta una larghezza coerente per i titoli delle domande quando sono allineati a sinistra delle caselle delle domande. Accetta valori CSS (px, %, in, pt, ecc.).",
       questionErrorLocation: "Imposta la posizione di un messaggio di errore in relazione alla domanda con input non valido. Scegli tra: \"In alto\" - un testo di errore viene posizionato nella parte superiore della casella della domanda; \"In basso\": un testo di errore viene inserito nella parte inferiore della casella della domanda. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"In alto\" per impostazione predefinita).",
       questionOrder: "Mantiene l'ordine originale delle domande o le rende casuali. L'opzione \"Eredita\" applica l'impostazione a livello di indagine (\"Originale\" per impostazione predefinita). L'effetto di questa impostazione è visibile solo nella scheda Anteprima.",
-      showNavigationButtons: "Imposta la visibilità dei pulsanti di navigazione nella pagina. L'opzione \"Eredita\" applica l'impostazione a livello di indagine, che per impostazione predefinita è \"Visibile\"."
+      showNavigationButtons: "Imposta la visibilità dei pulsanti di navigazione nella pagina. L'opzione \"Eredita\" applica l'impostazione a livello di indagine, che per impostazione predefinita è \"Visibile\".",
+      gridLayoutColumns: "Questa tabella consente di configurare ogni colonna della griglia nella pagina. Imposta automaticamente la percentuale di larghezza per ogni colonna in base al numero massimo di elementi in una riga. Per personalizzare il layout della griglia, regola manualmente questi valori e definisci la larghezza del titolo per tutte le domande in ogni colonna."
     },
     timerLocation: "Imposta la posizione di un timer su una pagina.",
     panelsState: "Scegli tra: \"Bloccato\" - gli utenti non possono espandere o comprimere i pannelli; \"Comprimi tutto\": tutti i pannelli iniziano in uno stato compresso; \"Espandi tutto\": tutti i pannelli iniziano in uno stato espanso; \"Prima espansa\": inizialmente viene espanso solo il primo pannello.",
@@ -1598,10 +1608,6 @@ var italianTranslation = {
       textAreaWidth: "La larghezza dell'area dell'intestazione che contiene il titolo e la descrizione del sondaggio, misurata in pixel.",
       overlapEnabled: "Se abilitata, la parte superiore del sondaggio si sovrappone alla parte inferiore dell'intestazione.",
       mobileHeight: "Se impostata su 0, l'altezza viene calcolata automaticamente per adattarsi al contenuto dell'intestazione."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Accetta valori %.",
-      questionTitleWidth: "Accetta valori px."
     },
     progressBarInheritWidthFrom: "L'opzione \"Uguale al contenitore\" regola automaticamente la larghezza dell'area della barra di avanzamento per adattarla all'elemento HTML in cui è posizionato il sondaggio."
   },
@@ -2769,3 +2775,11 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Imposta la posizione dei messaggi di errore per le domande nidificate nelle sezioni di dettaglio. L'opzione \"Eredita\" applica l'impostazione della proprietà \"Allineamento messaggio di errore\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Colonne del layout a griglia"
 // pe.startPageTitlePlaceholder: "Start Page" => "Pagina iniziale"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Larghezza effettiva, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Larghezza del titolo della domanda, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Non hai ancora colonne di layout"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Specifica il numero di colonne distribuite dal pannello all'interno del layout della griglia."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Questa tabella consente di configurare ogni colonna della griglia all'interno del pannello. Imposta automaticamente la percentuale di larghezza per ogni colonna in base al numero massimo di elementi in una riga. Per personalizzare il layout della griglia, regola manualmente questi valori e definisci la larghezza del titolo per tutte le domande in ogni colonna."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator consente di regolare manualmente le larghezze in linea degli elementi del modulo per controllare il layout. Se questo non produce il risultato desiderato, è possibile abilitare il layout a griglia, che struttura gli elementi di forma utilizzando un sistema basato su colonne. Per configurare le colonne del layout, seleziona una pagina o un pannello e utilizza la tabella \"Impostazioni domanda\" → \"Colonne griglia\". Per regolare il numero di colonne di una domanda, selezionala e imposta il valore desiderato nel campo \"Layout\" → \"Estensione colonne\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Specifica il numero di colonne su cui si estende la domanda all'interno del layout della griglia."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Questa tabella consente di configurare ogni colonna della griglia nella pagina. Imposta automaticamente la percentuale di larghezza per ogni colonna in base al numero massimo di elementi in una riga. Per personalizzare il layout della griglia, regola manualmente questi valori e definisci la larghezza del titolo per tutte le domande in ogni colonna."

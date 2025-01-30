@@ -308,6 +308,10 @@ var portugueseTranslation = {
       maxWidth: "Largura máxima do painel",
       showNumber: "Numerar este painel"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Largura efetiva, %",
+      questionTitleWidth: "Largura do título da pergunta, px"
+    },
     paneldynamic: {
       name: "Nome do painel",
       title: "Título do painel",
@@ -505,6 +509,7 @@ var portugueseTranslation = {
     listIsEmpty: "Nenhum item foi adicionado ainda",
     "listIsEmpty@choices": "Nenhuma opção foi adicionada ainda",
     "listIsEmpty@columns": "Você ainda não tem nenhuma coluna",
+    "listIsEmpty@gridLayoutColumns": "Você ainda não tem colunas de layout",
     "listIsEmpty@rows": "Você ainda não tem nenhuma linha",
     "listIsEmpty@validators": "Você ainda não tem nenhuma regra de validação",
     "listIsEmpty@calculatedValues": "Você ainda não tem nenhuma variável personalizada",
@@ -1360,7 +1365,9 @@ var portugueseTranslation = {
       startWithNewLine: "Desmarque para exibir o painel em uma linha com a pergunta ou painel anterior. A configuração não se aplica se o painel for o primeiro elemento do formulário.",
       state: "Escolha entre: \"Expandido\" - o painel é exibido na íntegra e pode ser recolhido; \"Recolhido\" - o painel exibe apenas o título e a descrição e pode ser expandido; \"Bloqueado\" - o painel é exibido na íntegra e não pode ser recolhido.",
       width: "Define a largura do painel proporcionalmente a outros elementos de pesquisa na mesma linha. Aceita valores CSS (px, %, in, pt, etc.).",
-      showQuestionNumbers: "Atribui números a perguntas aninhadas neste painel."
+      showQuestionNumbers: "Atribui números a perguntas aninhadas neste painel.",
+      effectiveColSpan: "Especifica quantas colunas esse painel abrange dentro do layout da grade.",
+      gridLayoutColumns: "Esta tabela permite configurar cada coluna de grade dentro do painel. Ele define automaticamente a porcentagem de largura para cada coluna com base no número máximo de elementos em uma linha. Para personalizar o layout da grade, ajuste manualmente esses valores e defina a largura do título para todas as perguntas em cada coluna."
     },
     paneldynamic: {
       name: "Um ID de painel que não está visível para os respondentes.",
@@ -1391,6 +1398,7 @@ var portugueseTranslation = {
     resetValueIf: "Use o ícone de varinha mágica para definir uma regra condicional que determina quando a entrada de um respondente é redefinida para o valor com base no valor \"Expressão de valor padrão\" ou \"Definir expressão de valor\" ou no valor \"Resposta padrão\" (se um dos dois estiver definido).",
     setValueIf: "Use o ícone de varinha mágica para definir uma regra condicional que determine quando executar a expressão \"Definir valor\" e atribuir dinamicamente o valor resultante como resposta.",
     setValueExpression: "Especifique uma expressão que defina o valor a ser definido quando as condições na regra \"Definir valor se\" forem atendidas. A expressão pode incluir cálculos básicos - '{q1_id} + {q2_id}', expressões booleanas, como '{age} > 60', e funções: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. O valor determinado por essa expressão pode ser substituído pela entrada manual de um respondente.",
+    gridLayoutEnabled: "O Survey Creator permite ajustar manualmente as larguras embutidas dos elementos do formulário para controlar o layout. Se isso não produzir o resultado desejado, você poderá habilitar o layout da grade, que estrutura os elementos do formulário usando um sistema baseado em colunas. Para configurar colunas de layout, selecione uma página ou painel e use a tabela \"Configurações da pergunta\" → \"Colunas da grade\". Para ajustar quantas colunas uma pergunta abrange, selecione-a e defina o valor desejado no campo \"Layout\" → \"Extensão de coluna\".",
     question: {
       name: "Um ID de pergunta que não é visível para os respondentes.",
       description: "Digite um subtítulo de pergunta.",
@@ -1411,7 +1419,8 @@ var portugueseTranslation = {
       textUpdateMode: "Escolha entre: \"Em foco perdido\" - o valor é atualizado quando o campo de entrada perde o foco; \"Ao digitar\" - o valor é atualizado em tempo real, à medida que os usuários digitam. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Em foco perdido\" por padrão).",
       url: "Você pode usar qualquer serviço Web como uma fonte de dados para perguntas de múltipla escolha. Para preencher valores de escolha, insira a URL do serviço que fornece os dados.",
       searchMode: "Uma operação de comparação usada para filtrar a lista suspensa.",
-      textWrapEnabled: "Textos longos nas opções de escolha gerarão automaticamente quebras de linha para caber no menu suspenso. Desmarque se quiser que os textos sejam recortados."
+      textWrapEnabled: "Textos longos nas opções de escolha gerarão automaticamente quebras de linha para caber no menu suspenso. Desmarque se quiser que os textos sejam recortados.",
+      effectiveColSpan: "Especifica quantas colunas essa pergunta abrange dentro do layout da grade."
     },
     signaturepad: {
       signatureWidth: "Define a largura da área de assinatura exibida e a imagem resultante.",
@@ -1510,7 +1519,8 @@ var portugueseTranslation = {
       questionTitleWidth: "Define largura consistente para títulos de perguntas quando eles estão alinhados à esquerda de suas caixas de perguntas. Aceita valores CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Define o local de uma mensagem de erro em relação à pergunta com entrada inválida. Escolha entre: \"Top\" - um texto de erro é colocado na parte superior da caixa de perguntas; \"Inferior\" - um texto de erro é colocado na parte inferior da caixa de perguntas. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Superior\" por padrão).",
       questionOrder: "Mantém a ordem original das perguntas ou as randomiza. A opção \"Herdar\" aplica a configuração de nível de pesquisa (\"Original\" por padrão). O efeito dessa configuração só é visível na guia Visualização.",
-      showNavigationButtons: "Define a visibilidade dos botões de navegação na página. A opção \"Herdar\" aplica a configuração de nível de pesquisa, que tem como padrão \"Visível\"."
+      showNavigationButtons: "Define a visibilidade dos botões de navegação na página. A opção \"Herdar\" aplica a configuração de nível de pesquisa, que tem como padrão \"Visível\".",
+      gridLayoutColumns: "Esta tabela permite configurar cada coluna de grade na página. Ele define automaticamente a porcentagem de largura para cada coluna com base no número máximo de elementos em uma linha. Para personalizar o layout da grade, ajuste manualmente esses valores e defina a largura do título para todas as perguntas em cada coluna."
     },
     timerLocation: "Define a localização de um cronômetro em uma página.",
     panelsState: "Escolha entre: \"Bloqueado\" - os usuários não podem expandir ou recolher painéis; \"Recolher tudo\" - todos os painéis começam em estado colapsado; \"Expandir tudo\" - todos os painéis começam em um estado expandido; \"Primeiro expandido\" - apenas o primeiro painel é inicialmente expandido.",
@@ -1598,10 +1608,6 @@ var portugueseTranslation = {
       textAreaWidth: "A largura da área do cabeçalho que contém o título e a descrição da pesquisa, medida em pixels.",
       overlapEnabled: "Quando ativado, a parte superior da pesquisa se sobrepõe à parte inferior do cabeçalho.",
       mobileHeight: "Quando definido como 0, a altura é calculada automaticamente para acomodar o conteúdo do cabeçalho."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Aceita valores %.",
-      questionTitleWidth: "Aceita valores px."
     },
     progressBarInheritWidthFrom: "A opção \"Igual ao contêiner\" ajusta automaticamente a largura da área da barra de progresso para caber no elemento HTML em que a pesquisa é colocada."
   },
@@ -2676,3 +2682,11 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Define o local das mensagens de erro para perguntas aninhadas em seções de detalhes. A opção \"Herdar\" aplica a configuração da propriedade \"Alinhamento da mensagem de erro\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Colunas de layout de grade"
 // pe.startPageTitlePlaceholder: "Start Page" => "Página inicial"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Largura efetiva, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Largura do título da pergunta, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Você ainda não tem colunas de layout"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Especifica quantas colunas esse painel abrange dentro do layout da grade."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Esta tabela permite configurar cada coluna de grade dentro do painel. Ele define automaticamente a porcentagem de largura para cada coluna com base no número máximo de elementos em uma linha. Para personalizar o layout da grade, ajuste manualmente esses valores e defina a largura do título para todas as perguntas em cada coluna."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "O Survey Creator permite ajustar manualmente as larguras embutidas dos elementos do formulário para controlar o layout. Se isso não produzir o resultado desejado, você poderá habilitar o layout da grade, que estrutura os elementos do formulário usando um sistema baseado em colunas. Para configurar colunas de layout, selecione uma página ou painel e use a tabela \"Configurações da pergunta\" → \"Colunas da grade\". Para ajustar quantas colunas uma pergunta abrange, selecione-a e defina o valor desejado no campo \"Layout\" → \"Extensão de coluna\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Especifica quantas colunas essa pergunta abrange dentro do layout da grade."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Esta tabela permite configurar cada coluna de grade na página. Ele define automaticamente a porcentagem de largura para cada coluna com base no número máximo de elementos em uma linha. Para personalizar o layout da grade, ajuste manualmente esses valores e defina a largura do título para todas as perguntas em cada coluna."

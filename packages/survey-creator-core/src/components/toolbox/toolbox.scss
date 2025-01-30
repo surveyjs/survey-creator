@@ -1,13 +1,7 @@
 @use "../../variables" as *;
 
 .svc-toolbox {
-  --dft-toolbox-item-padding-top: calc(1 * #{$base-unit});
-  --dft-toolbox-group-padding-right: calc(2 * #{$base-unit});
-  --dft-toolbox-item-padding-right: calc(1.5 * #{$base-unit});
-  --dft-toolbox-gap: calc(0.5 * #{$base-unit});
-  --dft-toolbox-width-compact: calc(9 *#{$base-unit});
-
-  --thm-toolbox-width-compact: calc(
+  --toolbox-width-compact: calc(
     var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3)) +
     var(--ctr-toolbox-item-padding-right-no-text, var(--sjs-spacing-x1)) +
     var(--ctr-toolbox-item-padding-left-no-text, var(--sjs-spacing-x1)) +
@@ -25,9 +19,6 @@
     var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) * 2
   );
 
-  --toolbox-width: var(--ctr-toolbox-min-width, var(--sjs-size-x20));
-  --toolbox-width-compact: var(--thm-toolbox-width-compact, var(--dft-toolbox-width-compact));
-  
   width: auto;
   height: 100%;
   display: flex;
@@ -43,7 +34,7 @@
   flex-direction: column;
   border-inline-end: var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1)) solid var(--ctr-toolbox-border-color, var(--sjs-border-25, #d4d4d4ff));
   background: var(--ctr-toolbox-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-  min-width: var(--toolbox-width);
+  min-width: var(--ctr-toolbox-min-width, var(--sjs-size-x20));
 }
 
 .svc-toolbox {

@@ -308,6 +308,10 @@ export var skStrings = {
       maxWidth: "Maximálna šírka panela",
       showNumber: "Očíslujte tento panel"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Efektívna šírka, %",
+      questionTitleWidth: "Šírka názvu otázky, px"
+    },
     paneldynamic: {
       name: "Názov panela",
       title: "Názov panelu",
@@ -505,6 +509,7 @@ export var skStrings = {
     listIsEmpty: "Pridajte novú položku",
     "listIsEmpty@choices": "Zatiaľ neboli pridané žiadne možnosti",
     "listIsEmpty@columns": "Zatiaľ nemáte žiadne stĺpce",
+    "listIsEmpty@gridLayoutColumns": "Ešte nemáte stĺpce rozloženia",
     "listIsEmpty@rows": "Zatiaľ nemáte žiadne riadky",
     "listIsEmpty@validators": "Zatiaľ nemáte žiadne overovacie pravidlá",
     "listIsEmpty@calculatedValues": "Zatiaľ nemáte žiadne vlastné premenné",
@@ -1360,7 +1365,9 @@ export var skStrings = {
       startWithNewLine: "Zrušte výber výberu, ak chcete panel zobraziť v jednom riadku s predchádzajúcou otázkou alebo panelom. Toto nastavenie sa neuplatňuje, ak je panel prvým prvkom vo formulári.",
       state: "Vyberte si z: \"Rozšírené\" - panel je zobrazený v plnom rozsahu a môže byť zbalený; \"Zbalené\" - panel zobrazuje iba názov a popis a je možné ho rozšíriť; \"Zamknutý\" - panel sa zobrazuje v plnom rozsahu a nedá sa zbaliť.",
       width: "Nastaví šírku panela v pomere k ostatným prvkom prieskumu v tej istej čiare. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
-      showQuestionNumbers: "Priradí čísla otázkam vnoreným do tohto panela."
+      showQuestionNumbers: "Priradí čísla otázkam vnoreným do tohto panela.",
+      effectiveColSpan: "Určuje, koľko stĺpcov má tento panel v rozložení mriežky.",
+      gridLayoutColumns: "Táto tabuľka umožňuje nakonfigurovať každý stĺpec mriežky v paneli. Automaticky nastaví percentuálnu šírku pre každý stĺpec na základe maximálneho počtu prvkov v riadku. Ak chcete prispôsobiť rozloženie mriežky, manuálne upravte tieto hodnoty a definujte šírku názvu pre všetky otázky v každom stĺpci."
     },
     paneldynamic: {
       name: "ID panela, ktoré respondenti nevidia.",
@@ -1391,6 +1398,7 @@ export var skStrings = {
     resetValueIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje, kedy sa vstup respondenta obnoví na hodnotu na základe hodnoty \"Výraz predvolenej hodnoty\" alebo \"Výraz nastavenej hodnoty\" alebo hodnoty \"Predvolená odpoveď\" (ak je nastavená).",
     setValueIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré určuje, kedy spustiť \"Nastaviť výraz hodnoty\" a dynamicky priradiť výslednú hodnotu ako odpoveď.",
     setValueExpression: "Zadajte výraz, ktorý definuje hodnotu, ktorá sa má nastaviť, keď sú splnené podmienky pravidla \"Nastaviť hodnotu ak\". Výraz môže obsahovať základné výpočty - '{q1_id} + {q2_id}', boolovské výrazy, ako napríklad '{age} > 60', a funkcie: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atď. Hodnota určená týmto výrazom môže byť prepísaná manuálnym vstupom respondenta.",
+    gridLayoutEnabled: "Aplikácia Survey Creator umožňuje manuálne upraviť vnorené šírky prvkov formulára na ovládanie rozloženia. Ak to neprinesie požadovaný výsledok, môžete povoliť rozloženie mriežky, ktoré štruktúry tvoria prvky pomocou systému založeného na stĺpcoch. Ak chcete nakonfigurovať stĺpce rozloženia, vyberte stránku alebo panel a použite tabuľku \"Nastavenia otázky\" → \"Stĺpce mriežky\". Ak chcete upraviť, koľko stĺpcov otázka zahŕňa, vyberte ju a nastavte požadovanú hodnotu v poli \"Rozloženie\" → \"Rozsah stĺpcov\".",
     question: {
       name: "ID otázky, ktoré respondenti nevidia.",
       description: "Zadajte podnadpis otázky.",
@@ -1411,7 +1419,8 @@ export var skStrings = {
       textUpdateMode: "Vyberte si z: \"Pri strate zaostrenia\" - hodnota sa aktualizuje, keď vstupné pole stratí zaostrenie; \"Počas písania\" - hodnota sa aktualizuje v reálnom čase, keď používatelia píšu. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Predvolene stratené zameranie\").",
       url: "Ako zdroj údajov môžete použiť ľubovoľnú webovú službu na otázky s voliteľnými odpoveďami. Ak chcete vyplniť hodnoty možností, zadajte adresu URL služby poskytujúcej údaje.",
       searchMode: "Porovnávacia operácia použitá na filtrovanie rozbaľovacieho zoznamu.",
-      textWrapEnabled: "Dlhé texty v možnostiach výberu automaticky vygenerujú zlomy riadkov, aby sa zmestili do rozbaľovacej ponuky. Zrušte výber, či chcete texty vystrihnúť."
+      textWrapEnabled: "Dlhé texty v možnostiach výberu automaticky vygenerujú zlomy riadkov, aby sa zmestili do rozbaľovacej ponuky. Zrušte výber, či chcete texty vystrihnúť.",
+      effectiveColSpan: "Určuje, koľko stĺpcov táto otázka zahŕňa v rozložení mriežky."
     },
     signaturepad: {
       signatureWidth: "Nastaví šírku zobrazenej oblasti podpisu a výsledného obrázka.",
@@ -1510,7 +1519,8 @@ export var skStrings = {
       questionTitleWidth: "Nastavuje konzistentnú šírku názvov otázok, keď sú zarovnané naľavo od polí otázok. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
       questionErrorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Predvolene hore\").",
       questionOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Možnosť \"Zdediť\" použije nastavenie na úrovni prieskumu (\"Originál\" v predvolenom nastavení). Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
-      showNavigationButtons: "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\"."
+      showNavigationButtons: "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\".",
+      gridLayoutColumns: "Táto tabuľka umožňuje nakonfigurovať každý stĺpec mriežky na strane. Automaticky nastaví percentuálnu šírku pre každý stĺpec na základe maximálneho počtu prvkov v riadku. Ak chcete prispôsobiť rozloženie mriežky, manuálne upravte tieto hodnoty a definujte šírku názvu pre všetky otázky v každom stĺpci."
     },
     timerLocation: "Nastaví umiestnenie časovača na strane.",
     panelsState: "Vyberte si z: \"Zamknuté\" - používatelia nemôžu rozširovať ani zbaliť panely; \"Zbaliť všetko\" - všetky panely začínajú v zbalenom stave; \"Rozbaliť všetko\" - všetky panely začínajú v rozšírenom stave; \"Prvý rozšírený\" - pôvodne sa rozšíril iba prvý panel.",
@@ -1598,10 +1608,6 @@ export var skStrings = {
       textAreaWidth: "Šírka oblasti hlavičky, ktorá obsahuje názov a popis prieskumu, meraná v pixeloch.",
       overlapEnabled: "Ak je táto možnosť povolená, horná časť prieskumu prekrýva spodnú časť hlavičky.",
       mobileHeight: "Ak je nastavená hodnota 0, výška sa vypočíta automaticky, aby sa prispôsobila obsahu hlavičky."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Akceptuje hodnoty %.",
-      questionTitleWidth: "Akceptuje hodnoty px."
     },
     progressBarInheritWidthFrom: "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti indikátora priebehu tak, aby sa zmestila do prvku HTML, v ktorom je prieskum umiestnený."
   },
@@ -2961,3 +2967,11 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Nastaví umiestnenie chybových hlásení pre otázky vnorené do podrobných sekcií. Možnosť \"Zdediť\" použije nastavenie z vlastnosti \"Zarovnanie chybového hlásenia\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Stĺpce rozloženia mriežky"
 // pe.startPageTitlePlaceholder: "Start Page" => "Úvodná stránka"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Efektívna šírka, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Šírka názvu otázky, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Ešte nemáte stĺpce rozloženia"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Určuje, koľko stĺpcov má tento panel v rozložení mriežky."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Táto tabuľka umožňuje nakonfigurovať každý stĺpec mriežky v paneli. Automaticky nastaví percentuálnu šírku pre každý stĺpec na základe maximálneho počtu prvkov v riadku. Ak chcete prispôsobiť rozloženie mriežky, manuálne upravte tieto hodnoty a definujte šírku názvu pre všetky otázky v každom stĺpci."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Aplikácia Survey Creator umožňuje manuálne upraviť vnorené šírky prvkov formulára na ovládanie rozloženia. Ak to neprinesie požadovaný výsledok, môžete povoliť rozloženie mriežky, ktoré štruktúry tvoria prvky pomocou systému založeného na stĺpcoch. Ak chcete nakonfigurovať stĺpce rozloženia, vyberte stránku alebo panel a použite tabuľku \"Nastavenia otázky\" → \"Stĺpce mriežky\". Ak chcete upraviť, koľko stĺpcov otázka zahŕňa, vyberte ju a nastavte požadovanú hodnotu v poli \"Rozloženie\" → \"Rozsah stĺpcov\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Určuje, koľko stĺpcov táto otázka zahŕňa v rozložení mriežky."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Táto tabuľka umožňuje nakonfigurovať každý stĺpec mriežky na strane. Automaticky nastaví percentuálnu šírku pre každý stĺpec na základe maximálneho počtu prvkov v riadku. Ak chcete prispôsobiť rozloženie mriežky, manuálne upravte tieto hodnoty a definujte šírku názvu pre všetky otázky v každom stĺpci."

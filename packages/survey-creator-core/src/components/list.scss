@@ -22,7 +22,7 @@
   text-align: start;
   color: var(--ctr-list-item-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   transition: color $creator-transition-duration;
-  --thm-list-item-padding-left-default: calc(2 * #{$base-unit});
+  
   --thm-list-item-padding-delta: var(--ctr-list-item-padding-left, var(--sjs-spacing-x2));
   --thm-list-item-padding-left: calc(var(--sjs-list-item-level) * var(--thm-list-item-padding-delta));
   display: flex;

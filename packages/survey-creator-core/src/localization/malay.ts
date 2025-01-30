@@ -308,6 +308,10 @@ export var msStrings = {
       maxWidth: "Lebar panel maksimum",
       showNumber: "Nombor panel ini"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Lebar berkesan,%",
+      questionTitleWidth: "Lebar tajuk soalan, px"
+    },
     paneldynamic: {
       name: "Nama panel",
       title: "Tajuk panel",
@@ -505,6 +509,7 @@ export var msStrings = {
     listIsEmpty: "Tambahkan item baharu",
     "listIsEmpty@choices": "Tiada pilihan telah ditambah lagi",
     "listIsEmpty@columns": "Anda belum mempunyai sebarang lajur",
+    "listIsEmpty@gridLayoutColumns": "Anda belum mempunyai lajur reka letak lagi",
     "listIsEmpty@rows": "Anda belum mempunyai sebarang baris",
     "listIsEmpty@validators": "Anda belum mempunyai sebarang peraturan pengesahihan",
     "listIsEmpty@calculatedValues": "Anda belum mempunyai sebarang pemboleh ubah tersuai",
@@ -1360,7 +1365,9 @@ export var msStrings = {
       startWithNewLine: "Nyahpilih untuk memaparkan panel dalam satu baris dengan soalan atau panel sebelumnya. Seting tidak digunakan jika panel ialah elemen pertama dalam borang anda.",
       state: "Pilih daripada: \"Diperluaskan\" - panel dipaparkan sepenuhnya dan boleh runtuh; \"Runtuh\" - panel hanya memaparkan tajuk dan keterangan dan boleh diperluaskan; \"Dikunci\" - panel dipaparkan sepenuhnya dan tidak boleh runtuh.",
       width: "Mengesetkan lebar panel mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.).",
-      showQuestionNumbers: "Memberikan nombor kepada soalan yang bersarang dalam panel ini."
+      showQuestionNumbers: "Memberikan nombor kepada soalan yang bersarang dalam panel ini.",
+      effectiveColSpan: "Menentukan bilangan lajur panel ini merangkumi dalam tataletak grid.",
+      gridLayoutColumns: "Jadual ini membolehkan anda mengkonfigurasi setiap lajur grid dalam panel. Ia secara automatik menetapkan peratusan lebar untuk setiap lajur berdasarkan bilangan maksimum elemen dalam baris. Untuk menyesuaikan tataletak grid, laraskan nilai ini secara manual dan takrifkan lebar tajuk untuk semua soalan dalam setiap lajur."
     },
     paneldynamic: {
       name: "ID panel yang tidak kelihatan kepada responden.",
@@ -1391,6 +1398,7 @@ export var msStrings = {
     resetValueIf: "Gunakan ikon tongkat ajaib untuk mengesetkan peraturan bersyarat yang menentukan masa input responden ditetapkan semula kepada nilai berdasarkan \"Ungkapan nilai lalai\" atau \"Setkan ungkapan nilai\" atau kepada nilai \"Jawapan lalai\" (jika sama ada ditetapkan).",
     setValueIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan masa untuk menjalankan \"Tetapkan ungkapan nilai\" dan secara dinamik memperuntukkan nilai yang terhasil sebagai respons.",
     setValueExpression: "Tentukan ungkapan yang mentakrifkan nilai yang akan disetkan apabila syarat dalam peraturan \"Set nilai jika\" dipenuhi. Ungkapan ini boleh termasuk pengiraan asas - '{q1_id} + {q2_id}', ungkapan Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dsb. Nilai yang ditentukan oleh ungkapan ini boleh diubah oleh input manual responden.",
+    gridLayoutEnabled: "Pencipta Tinjauan membolehkan anda melaraskan lebar sebaris elemen borang secara manual untuk mengawal reka letak. Jika ini tidak menghasilkan hasil yang diingini, anda boleh mendayakan reka letak grid, yang menstrukturkan elemen membentuk menggunakan sistem berasaskan lajur. Untuk mengkonfigurasi lajur reka letak, pilih halaman atau panel dan gunakan jadual \"Tetapan Soalan\" → \"Lajur Grid\". Untuk melaraskan bilangan lajur rentang soalan, pilihnya dan tetapkan nilai yang dikehendaki dalam medan \"Reka Letak\" → \"Rentang lajur\".",
     question: {
       name: "ID soalan yang tidak dapat dilihat oleh responden.",
       description: "Taipkan sari kata soalan.",
@@ -1411,7 +1419,8 @@ export var msStrings = {
       textUpdateMode: "Pilih daripada: \"Pada fokus yang hilang\" - nilai dikemas kini apabila medan input kehilangan fokus; \"Semasa menaip\" - nilai dikemas kini dalam masa nyata, semasa pengguna menaip. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Pada fokus yang hilang\" secara lalai).",
       url: "Anda boleh menggunakan mana-mana perkhidmatan web sebagai sumber data untuk soalan pelbagai pilihan. Untuk mengisi nilai pilihan, masukkan URL perkhidmatan yang menyediakan data.",
       searchMode: "Operasi perbandingan yang digunakan untuk menapis senarai juntai bawah.",
-      textWrapEnabled: "Teks panjang dalam pilihan pilihan akan menjana pemisah baris secara automatik agar muat dalam menu lungsur. Nyahpilih jika anda mahu teks klip."
+      textWrapEnabled: "Teks panjang dalam pilihan pilihan akan menjana pemisah baris secara automatik agar muat dalam menu lungsur. Nyahpilih jika anda mahu teks klip.",
+      effectiveColSpan: "Menentukan bilangan lajur soalan ini merangkumi dalam reka letak grid."
     },
     signaturepad: {
       signatureWidth: "Mengesetkan lebar kawasan tandatangan yang dipaparkan dan imej yang terhasil.",
@@ -1510,7 +1519,8 @@ export var msStrings = {
       questionTitleWidth: "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia dijajarkan di sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.).",
       questionErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Atas\" secara lalai).",
       questionOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Pilihan \"Warisan\" menggunakan seting peringkat tinjauan (\"Asal\" secara lalai). Kesan seting ini hanya kelihatan dalam tab Pratonton.",
-      showNavigationButtons: "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\"."
+      showNavigationButtons: "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\".",
+      gridLayoutColumns: "Jadual ini membolehkan anda mengkonfigurasi setiap lajur grid pada halaman. Ia secara automatik menetapkan peratusan lebar untuk setiap lajur berdasarkan bilangan maksimum elemen dalam baris. Untuk menyesuaikan tataletak grid, laraskan nilai ini secara manual dan takrifkan lebar tajuk untuk semua soalan dalam setiap lajur."
     },
     timerLocation: "Menetapkan lokasi pemasa pada halaman.",
     panelsState: "Pilih daripada: \"Dikunci\" - pengguna tidak boleh mengembangkan atau meruntuhkan panel; \"Runtuhkan semua\" - semua panel bermula dalam keadaan runtuh; \"Kembangkan semua\" - semua panel bermula dalam keadaan yang diperluaskan; \"Pertama diperluaskan\" - hanya panel pertama yang pada mulanya diperluaskan.",
@@ -1598,10 +1608,6 @@ export var msStrings = {
       textAreaWidth: "Lebar kawasan pengepala yang mengandungi tajuk dan perihalan tinjauan, diukur dalam piksel.",
       overlapEnabled: "Apabila didayakan, bahagian atas tinjauan menindih bahagian bawah pengepala.",
       mobileHeight: "Apabila ditetapkan kepada 0, ketinggian dikira secara automatik untuk menampung kandungan pengepala."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Menerima nilai %.",
-      questionTitleWidth: "Menerima nilai px."
     },
     progressBarInheritWidthFrom: "Pilihan \"Sama seperti bekas\" melaraskan lebar kawasan bar kemajuan secara automatik agar sesuai dengan elemen HTML yang diletakkan dalam tinjauan."
   },
@@ -2962,3 +2968,11 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Menetapkan lokasi mesej ralat untuk soalan yang bersarang dalam bahagian terperinci. Pilihan \"Mewarisi\" menggunakan tetapan daripada sifat \"Penjajaran mesej ralat\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Lajur susun atur grid"
 // pe.startPageTitlePlaceholder: "Start Page" => "Halaman Permulaan"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Lebar berkesan,%"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Lebar tajuk soalan, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Anda belum mempunyai lajur reka letak lagi"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Menentukan bilangan lajur panel ini merangkumi dalam tataletak grid."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Jadual ini membolehkan anda mengkonfigurasi setiap lajur grid dalam panel. Ia secara automatik menetapkan peratusan lebar untuk setiap lajur berdasarkan bilangan maksimum elemen dalam baris. Untuk menyesuaikan tataletak grid, laraskan nilai ini secara manual dan takrifkan lebar tajuk untuk semua soalan dalam setiap lajur."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Pencipta Tinjauan membolehkan anda melaraskan lebar sebaris elemen borang secara manual untuk mengawal reka letak. Jika ini tidak menghasilkan hasil yang diingini, anda boleh mendayakan reka letak grid, yang menstrukturkan elemen membentuk menggunakan sistem berasaskan lajur. Untuk mengkonfigurasi lajur reka letak, pilih halaman atau panel dan gunakan jadual \"Tetapan Soalan\" → \"Lajur Grid\". Untuk melaraskan bilangan lajur rentang soalan, pilihnya dan tetapkan nilai yang dikehendaki dalam medan \"Reka Letak\" → \"Rentang lajur\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Menentukan bilangan lajur soalan ini merangkumi dalam reka letak grid."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Jadual ini membolehkan anda mengkonfigurasi setiap lajur grid pada halaman. Ia secara automatik menetapkan peratusan lebar untuk setiap lajur berdasarkan bilangan maksimum elemen dalam baris. Untuk menyesuaikan tataletak grid, laraskan nilai ini secara manual dan takrifkan lebar tajuk untuk semua soalan dalam setiap lajur."

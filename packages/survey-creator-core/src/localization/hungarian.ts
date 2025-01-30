@@ -308,6 +308,10 @@ export var huStrings = {
       maxWidth: "Maximális panelszélesség",
       showNumber: "A panel számozása"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Effektív szélesség, %",
+      questionTitleWidth: "Kérdés címének szélessége, px"
+    },
     paneldynamic: {
       name: "Panel neve",
       title: "Panel címe",
@@ -505,6 +509,7 @@ export var huStrings = {
     listIsEmpty: "Még nincsenek hozzáadott elemek",
     "listIsEmpty@choices": "Még nincsenek választási lehetőségek hozzáadva",
     "listIsEmpty@columns": "Még nincsenek oszlopai",
+    "listIsEmpty@gridLayoutColumns": "Még nincsenek elrendezésoszlopok",
     "listIsEmpty@rows": "Még nincsenek sorai",
     "listIsEmpty@validators": "Még nincsenek érvényességi szabályai",
     "listIsEmpty@calculatedValues": "Még nincsenek egyéni változói",
@@ -1360,7 +1365,9 @@ export var huStrings = {
       startWithNewLine: "Törölje a jelölést, ha a panel egy sorban jelenik meg az előző kérdéssel vagy panellel. A beállítás nem érvényes, ha a panel az űrlap első eleme.",
       state: "Válasszon a következők közül: \"Kibontott\" - a panel teljes egészében megjelenik és összecsukható; \"Összecsukott\" - a panel csak a címet és a leírást jeleníti meg, és bővíthető; \"Zárolva\" - a panel teljes egészében megjelenik, és nem csukható össze.",
       width: "A panel szélességét az ugyanabban a sorban lévő többi földmérési elemhez viszonyítva állítja be. CSS-értékeket fogad el (px, %, in, pt stb.).",
-      showQuestionNumbers: "Számokat rendel a panelbe ágyazott kérdésekhez."
+      showQuestionNumbers: "Számokat rendel a panelbe ágyazott kérdésekhez.",
+      effectiveColSpan: "Megadja, hogy ez a panel hány oszlopot ölel fel a rácselrendezésen belül.",
+      gridLayoutColumns: "Ez a táblázat lehetővé teszi az egyes rácsoszlopok konfigurálását a panelen. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."
     },
     paneldynamic: {
       name: "Olyan panelazonosító, amely nem látható a válaszadók számára.",
@@ -1391,6 +1398,7 @@ export var huStrings = {
     resetValueIf: "A varázspálca ikonnal feltételes szabályt állíthat be, amely meghatározza, hogy a válaszadó bemenete mikor áll vissza az \"Alapértelmezett érték kifejezés\" vagy az \"Értékkifejezés beállítása\" vagy az \"Alapértelmezett válasz\" érték alapján (ha bármelyik be van állítva).",
     setValueIf: "A varázspálca ikonnal beállíthat egy feltételes szabályt, amely meghatározza, hogy mikor kell futtatni az \"Érték beállítása kifejezést\", és dinamikusan hozzárendelni az eredményül kapott értéket válaszként.",
     setValueExpression: "Adjon meg egy kifejezést, amely meghatározza az \"Érték beállítása, ha\" szabály feltételeinek teljesülése esetén beállítandó értéket. A kifejezés tartalmazhat alapvető számításokat - '{q1_id} + {q2_id}', logikai kifejezéseket, például \"{age} > 60\" és függvényeket: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb. A kifejezés által meghatározott értéket felülbírálhatja a válaszadó kézi bevitele.",
+    gridLayoutEnabled: "A Survey Creator lehetővé teszi az űrlapelemek szövegközi szélességének manuális beállítását az elrendezés vezérléséhez. Ha ez nem hozza meg a kívánt eredményt, engedélyezheti a rácselrendezést, amely oszlopalapú rendszer használatával struktúrákat alkot elemeket. Az elrendezésoszlopok konfigurálásához válasszon ki egy oldalt vagy panelt, és használja a \"Kérdésbeállítások\" → a \"Rácsoszlopok\" táblázatot. Annak beállításához, hogy egy kérdés hány oszlopra terjed ki, válassza ki azt, és állítsa be a kívánt értéket az \"Elrendezés\" → az \"Oszloptartomány\" mezőben.",
     question: {
       name: "A válaszadók számára nem látható kérdésazonosító.",
       description: "Írja be a kérdés alcímét.",
@@ -1411,7 +1419,8 @@ export var huStrings = {
       textUpdateMode: "Válasszon a következők közül: \"Elveszett fókuszban\" - az érték frissül, amikor a beviteli mező elveszíti a fókuszt; \"Gépelés közben\" - az érték valós időben frissül, ahogy a felhasználók gépelnek. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Alapértelmezés szerint elveszett fókuszban\").",
       url: "Bármely webszolgáltatást használhat adatforrásként feleletválasztós kérdésekhez. A választási lehetőségek értékeinek feltöltéséhez adja meg az adatokat szolgáltató szolgáltatás URL-címét.",
       searchMode: "A legördülő lista szűrésére szolgáló összehasonlító művelet.",
-      textWrapEnabled: "A választási lehetőségekben szereplő hosszú szövegek automatikusan sortöréseket generálnak, hogy elférjenek a legördülő menüben. Törölje a jelet a jelölőnégyzetből, ha le szeretné vágni a szövegeket."
+      textWrapEnabled: "A választási lehetőségekben szereplő hosszú szövegek automatikusan sortöréseket generálnak, hogy elférjenek a legördülő menüben. Törölje a jelet a jelölőnégyzetből, ha le szeretné vágni a szövegeket.",
+      effectiveColSpan: "Megadja, hogy ez a kérdés hány oszlopra terjed ki a rácsos elrendezésen belül."
     },
     signaturepad: {
       signatureWidth: "Beállítja a megjelenített aláírási terület szélességét és az eredményül kapott képet.",
@@ -1510,7 +1519,8 @@ export var huStrings = {
       questionTitleWidth: "Egységes szélességet állít be a kérdéscímekhez, ha azok a kérdésmezőktől balra vannak igazítva. CSS-értékeket fogad el (px, %, in, pt stb.).",
       questionErrorLocation: "Beállítja az érvénytelen bevitelű kérdéssel kapcsolatos hibaüzenet helyét. Válasszon a következők közül: \"Felső\" - egy hibaüzenet kerül a kérdésmező tetejére; \"Alsó\" - egy hibaüzenet kerül a kérdésmező aljára. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Felül\" alapértelmezés szerint).",
       questionOrder: "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. Az \"Öröklés\" opció a felmérési szintű beállítást alkalmazza (\"Eredeti\" alapértelmezés szerint). A beállítás hatása csak az Előnézet lapon látható.",
-      showNavigationButtons: "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\"."
+      showNavigationButtons: "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\".",
+      gridLayoutColumns: "Ez a táblázat lehetővé teszi az oldal egyes rácsoszlopainak konfigurálását. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."
     },
     timerLocation: "Beállítja az időzítő helyét az oldalon.",
     panelsState: "Válasszon a következők közül: \"Zárolt\" - a felhasználók nem bonthatják ki vagy csukhatják össze a paneleket; \"Az összes összecsukása\" - minden panel összecsukott állapotban indul; \"Összes kibontása\" - minden panel kibővített állapotban indul; \"Először bővített\" - csak az első panel bővül.",
@@ -1598,10 +1608,6 @@ export var huStrings = {
       textAreaWidth: "A felmérés címét és leírását tartalmazó fejlécterület szélessége képpontban mérve.",
       overlapEnabled: "Ha engedélyezve van, a felmérés teteje átfedi a fejléc alját.",
       mobileHeight: "Ha 0-ra van állítva, a magasság automatikusan kiszámításra kerül, hogy elférjen a fejléc tartalma."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Elfogadja a % értékeket",
-      questionTitleWidth: "Elfogadja a px értékeket."
     },
     progressBarInheritWidthFrom: "Az \"Ugyanaz, mint a tároló\" opció automatikusan beállítja a folyamatjelző sáv területének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül."
   },
@@ -3159,3 +3165,11 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Beállítja a hibaüzenetek helyét a részletes szakaszokba ágyazott kérdésekhez. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza."
 // pe.gridLayoutColumns: "Grid layout columns" => "Rácsos elrendezés oszlopai"
 // pe.startPageTitlePlaceholder: "Start Page" => "Kezdőlap"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektív szélesség, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Kérdés címének szélessége, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Még nincsenek elrendezésoszlopok"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Megadja, hogy ez a panel hány oszlopot ölel fel a rácselrendezésen belül."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ez a táblázat lehetővé teszi az egyes rácsoszlopok konfigurálását a panelen. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "A Survey Creator lehetővé teszi az űrlapelemek szövegközi szélességének manuális beállítását az elrendezés vezérléséhez. Ha ez nem hozza meg a kívánt eredményt, engedélyezheti a rácselrendezést, amely oszlopalapú rendszer használatával struktúrákat alkot elemeket. Az elrendezésoszlopok konfigurálásához válasszon ki egy oldalt vagy panelt, és használja a \"Kérdésbeállítások\" → a \"Rácsoszlopok\" táblázatot. Annak beállításához, hogy egy kérdés hány oszlopra terjed ki, válassza ki azt, és állítsa be a kívánt értéket az \"Elrendezés\" → az \"Oszloptartomány\" mezőben."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Megadja, hogy ez a kérdés hány oszlopra terjed ki a rácsos elrendezésen belül."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ez a táblázat lehetővé teszi az oldal egyes rácsoszlopainak konfigurálását. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."

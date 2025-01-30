@@ -308,6 +308,10 @@ var traditionalChineseTranslation = {
       maxWidth: "最大面板寬度",
       showNumber: "為此面板編號"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "有效寬度，%",
+      questionTitleWidth: "問題標題寬度，px"
+    },
     paneldynamic: {
       name: "面板名稱",
       title: "面板標題",
@@ -505,6 +509,7 @@ var traditionalChineseTranslation = {
     listIsEmpty: "尚未添加任何專案",
     "listIsEmpty@choices": "尚未添加任何選項",
     "listIsEmpty@columns": "您還沒有任何列",
+    "listIsEmpty@gridLayoutColumns": "您還沒有佈局列",
     "listIsEmpty@rows": "您還沒有任何行",
     "listIsEmpty@validators": "尚無任何驗證規則",
     "listIsEmpty@calculatedValues": "您還沒有任何自訂變數",
@@ -1360,7 +1365,9 @@ var traditionalChineseTranslation = {
       startWithNewLine: "取消選擇以將面板與上一個問題或面板顯示在一行中。如果面板是表單中的第一個元素，則該設置不適用。",
       state: "從中選擇：「展開」 - 面板完整顯示，可以摺疊;“已摺疊” - 面板僅顯示標題和描述，可以展開;“已鎖定” - 面板完整顯示，無法摺疊。",
       width: "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。",
-      showQuestionNumbers: "為嵌套在此面板中的問題分配編號。"
+      showQuestionNumbers: "為嵌套在此面板中的問題分配編號。",
+      effectiveColSpan: "指定此面板在網格佈局中跨越的列數。",
+      gridLayoutColumns: "此表允許您設定面板中的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
     },
     paneldynamic: {
       name: "受訪者不可見的面板ID。",
@@ -1391,6 +1398,7 @@ var traditionalChineseTranslation = {
     resetValueIf: "使用魔杖圖示設置條件規則，該規則確定何時將受訪者的輸入重置為基於“預設值表達式”或“設置值表達式”的值，或重置為“預設答案”值（如果設置了其中任何一個）。",
     setValueIf: "使用魔杖圖示設置條件規則，該規則確定何時運行「設置值表達式」 ，並將結果值動態分配為回應。",
     setValueExpression: "指定一個表達式，該運算式定義在滿足「如果設置值」規則中的條件時要設置的值。表達式可以包括基本計算 - '{q1_id} + {q2_id}'、布爾表達式，例如 '{age} > 60'，以及函數：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。由此表達式確定的值可以被受訪者的手動輸入覆蓋。",
+    gridLayoutEnabled: "Survey Creator 允許您手動調整表單元素的內聯寬度以控制佈局。如果這沒有產生所需的結果，您可以啟用網格佈局，該佈局使用基於列的系統構建表單元素。要配置佈局列，請選擇一個頁面或面板，然後使用 “Question Settings” → “Grid columns” 表格。要調整問題跨越的列數，請選擇它並在 「Layout」 → 「Column span」 欄位中設置所需的值。",
     question: {
       name: "受訪者不可見的問題ID。",
       description: "鍵入問題副標題。",
@@ -1411,7 +1419,8 @@ var traditionalChineseTranslation = {
       textUpdateMode: "從中選擇：「失焦時」 - 當輸入字段失去焦點時，該值會更新;“鍵入時” - 當使用者鍵入時，該值會即時更新。“繼承”選項將應用調查級別設置（預設為“失去焦點時”）。",
       url: "您可以使用任何 Web 服務作為多項選擇題的數據來源。要填充選項值，請輸入提供數據的服務的URL。",
       searchMode: "用於篩選下拉清單的比較操作。",
-      textWrapEnabled: "選項選項中的長文本將自動生成換行符以適合下拉功能表。如果要剪裁文字，請取消選擇。"
+      textWrapEnabled: "選項選項中的長文本將自動生成換行符以適合下拉功能表。如果要剪裁文字，請取消選擇。",
+      effectiveColSpan: "指定此問題在網格佈局中跨越多少列。"
     },
     signaturepad: {
       signatureWidth: "設置顯示的簽名區域和生成的圖像的寬度。",
@@ -1510,7 +1519,8 @@ var traditionalChineseTranslation = {
       questionTitleWidth: "當問題標題與問題框左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。",
       questionErrorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。",
       questionOrder: "保持問題的原始順序或隨機化問題。繼承「選項應用調查級別設置（預設為」原始」。）。此設置的效果僅在「預覽」選項卡中可見。",
-      showNavigationButtons: "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。"
+      showNavigationButtons: "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。",
+      gridLayoutColumns: "此表允許您設定頁面上的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
     },
     timerLocation: "設置計時器在頁面上的位置。",
     panelsState: "從以下選項中選擇：「鎖定」 - 使用者無法展開或摺疊面板;“全部摺疊” - 所有面板都以摺疊狀態啟動;“全部展開” - 所有面板都以展開狀態啟動;“首先展開” - 最初只有第一個面板被展開。",
@@ -1598,10 +1608,6 @@ var traditionalChineseTranslation = {
       textAreaWidth: "包含調查標題和描述的標題區域的寬度，以像素為單位。",
       overlapEnabled: "啟用后，調查的頂部將覆蓋頁眉的底部。",
       mobileHeight: "設置為 0 時，將自動計算高度以適應標題的內容。"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "接受值 。",
-      questionTitleWidth: "接受值 px。"
     },
     progressBarInheritWidthFrom: "“與容器相同”選項會自動調整進度條區域的寬度，以適應放置調查的 HTML 元素。"
   },
@@ -3278,3 +3284,11 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "設置嵌套在詳細資訊部分中的問題的錯誤消息的位置。“Inherit” 選項應用“Error message alignment” 屬性中的設置。"
 // pe.gridLayoutColumns: "Grid layout columns" => "網格佈局列"
 // pe.startPageTitlePlaceholder: "Start Page" => "起始頁"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "有效寬度，%"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "問題標題寬度，px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "您還沒有佈局列"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "指定此面板在網格佈局中跨越的列數。"
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允許您設定面板中的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator 允許您手動調整表單元素的內聯寬度以控制佈局。如果這沒有產生所需的結果，您可以啟用網格佈局，該佈局使用基於列的系統構建表單元素。要配置佈局列，請選擇一個頁面或面板，然後使用 “Question Settings” → “Grid columns” 表格。要調整問題跨越的列數，請選擇它並在 「Layout」 → 「Column span」 欄位中設置所需的值。"
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "指定此問題在網格佈局中跨越多少列。"
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允許您設定頁面上的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
