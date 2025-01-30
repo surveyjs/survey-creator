@@ -403,4 +403,6 @@ export interface ICreatorOptions {
    * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid. 
    */
   propertyGridNavigationMode?: "buttons" | "accordion";
+  allowDragPages?: boolean;
+  collapseOnDrag?: boolean;
 }
