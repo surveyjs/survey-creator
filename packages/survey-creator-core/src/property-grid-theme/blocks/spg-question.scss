@@ -118,7 +118,8 @@
       var(--ctr-editor-label-padding-right, var(--sjs-spacing-x2)) 
       var(--ctr-editor-label-padding-bottom, var(--sjs-spacing-x1)) 
       var(--ctr-editor-label-padding-left, var(--sjs-spacing-x150));
-    border-inline-end: 1px solid $border;
+    border-inline-end: var(--ctr-editor-label-separator-width, var(--sjs-stroke-x1)) solid
+      var(--ctr-editor-label-separator-color, var(--sjs-border-10, #dcdcdcff));
     display: inline-block;
     color: var(--ctr-editor-label-color, var(--sjs-layer-3-foreground-50, #00000080));
     white-space: nowrap;

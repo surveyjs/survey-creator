@@ -308,6 +308,10 @@ export var jaStrings = {
       maxWidth: "最大パネル幅",
       showNumber: "このパネルに番号を付ける"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "有効幅、%",
+      questionTitleWidth: "質問タイトルの幅、px"
+    },
     paneldynamic: {
       name: "パネル名",
       title: "パネルタイトル",
@@ -505,6 +509,7 @@ export var jaStrings = {
     listIsEmpty: "新しいアイテムを追加",
     "listIsEmpty@choices": "選択肢はまだ追加されていません",
     "listIsEmpty@columns": "まだ列がありません",
+    "listIsEmpty@gridLayoutColumns": "レイアウト列がまだありません",
     "listIsEmpty@rows": "まだ行がありません",
     "listIsEmpty@validators": "入力規則はまだありません",
     "listIsEmpty@calculatedValues": "カスタム変数はまだありません",
@@ -1359,7 +1364,9 @@ export var jaStrings = {
       startWithNewLine: "選択を解除すると、前の質問またはパネルと 1 行でパネルが表示されます。パネルがフォームの最初の要素である場合、この設定は適用されません。",
       state: "次から選択します: 「展開」 - パネルは完全に表示され、折りたたむことができます。「折りたたまれた」 - パネルにはタイトルと説明のみが表示され、展開できます。「ロック」 - パネルは完全に表示され、折りたたむことはできません。",
       width: "パネルの幅を、同じ行内の他の調査要素に比例して設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
-      showQuestionNumbers: "このパネル内にネストされた質問に番号を割り当てます。"
+      showQuestionNumbers: "このパネル内にネストされた質問に番号を割り当てます。",
+      effectiveColSpan: "このパネルがグリッドレイアウト内で何列にまたがっているかを指定します。",
+      gridLayoutColumns: "このテーブルでは、パネル内の各グリッド列を構成できます。行内の要素の最大数に基づいて、各列の幅の割合が自動的に設定されます。グリッドレイアウトをカスタマイズするには、これらの値を手動で調整し、各列のすべての質問のタイトル幅を定義します。"
     },
     paneldynamic: {
       name: "回答者には表示されないパネルID。",
@@ -1390,6 +1397,7 @@ export var jaStrings = {
     resetValueIf: "魔法の杖アイコンを使用して、回答者の入力を「デフォルト値式」または「値式の設定」に基づく値、または「デフォルト回答」値(どちらかが設定されている場合)にリセットするタイミングを決定する条件付きルールを設定します。",
     setValueIf: "魔法の杖アイコンを使用して、「値の設定式」をいつ実行するかを決定し、結果の値を応答として動的に割り当てる条件付きルールを設定します。",
     setValueExpression: "「値を設定する条件」ルールの条件が満たされた場合に設定される値を定義する式を指定します。式には、基本的な計算 - '{q1_id} + {q2_id}'、'{age} > 60' などのブール式、関数 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などを含めることができます。この式によって決定される値は、回答者の手動入力によって上書きできます。",
+    gridLayoutEnabled: "Survey Creator では、フォーム要素のインライン幅を手動で調整して、レイアウトを制御できます。これで目的の結果が得られない場合は、列ベースのシステムを使用してフォーム要素を構成するグリッドレイアウトを有効にすることができます。レイアウト列を設定するには、ページまたはパネルを選択し、「質問設定」→「グリッド列」テーブルを使用します。質問の列数を調整するには、質問を選択し、「レイアウト」→「列範囲」フィールドで目的の値を設定します。",
     question: {
       name: "回答者に表示されない質問ID。",
       description: "質問のサブタイトルを入力します。",
@@ -1410,7 +1418,8 @@ export var jaStrings = {
       textUpdateMode: "次から選択します: \"On lost focus\" - 入力フィールドがフォーカスを失ったときに値が更新されます。「入力中」 - ユーザーが入力しているときに、値がリアルタイムで更新されます。「継承」オプションは、アンケートレベルの設定(デフォルトでは「フォーカスを失ったとき」)を適用します。",
       url: "任意の Web サービスを多肢選択式の質問のデータ ソースとして使用できます。選択肢の値を入力するには、データを提供するサービスの URL を入力します。",
       searchMode: "ドロップダウン リストをフィルター処理するために使用される比較演算。",
-      textWrapEnabled: "選択肢オプションのテキスト(長い)は、ドロップダウンメニュー内に収まるように改行を自動的に生成します。テキストをクリップする場合は、選択を解除します。"
+      textWrapEnabled: "選択肢オプションのテキスト(長い)は、ドロップダウンメニュー内に収まるように改行を自動的に生成します。テキストをクリップする場合は、選択を解除します。",
+      effectiveColSpan: "この質問がグリッドレイアウト内で何列にまたがっているかを指定します。"
     },
     signaturepad: {
       signatureWidth: "表示される署名領域と結果の画像の幅を設定します。",
@@ -1509,7 +1518,8 @@ export var jaStrings = {
       questionTitleWidth: "質問タイトルが質問ボックスの左側に配置されている場合に、質問タイトルの幅を一定に設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
       questionErrorLocation: "無効な入力を含む質問に関連するエラーメッセージの場所を設定します。次から選択します: \"Top\" - 質問ボックスの上部にエラーテキストが配置されます。\"Bottom\" - 質問ボックスの下部にエラーテキストが配置されます。「継承」オプションは、アンケートレベルの設定(デフォルトでは「トップ」)を適用します。",
       questionOrder: "質問の元の順序を維持するか、ランダム化します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「オリジナル」)を適用します。この設定の効果は、「プレビュー」タブにのみ表示されます。",
-      showNavigationButtons: "ページ上のナビゲーションボタンの表示を設定します。「継承」オプションは、アンケートレベルの設定を適用し、デフォルトは「表示」です。"
+      showNavigationButtons: "ページ上のナビゲーションボタンの表示を設定します。「継承」オプションは、アンケートレベルの設定を適用し、デフォルトは「表示」です。",
+      gridLayoutColumns: "このテーブルでは、ページ上の各グリッド列を構成できます。行内の要素の最大数に基づいて、各列の幅の割合が自動的に設定されます。グリッドレイアウトをカスタマイズするには、これらの値を手動で調整し、各列のすべての質問のタイトル幅を定義します。"
     },
     timerLocation: "ページ上のタイマーの位置を設定します。",
     panelsState: "次から選択します: 「ロック」 - ユーザーはパネルを展開または折りたたむことはできません。\"Collapse all\" - すべてのパネルが折りたたまれた状態で開始されます。\"Expand all\" - すべてのパネルが展開された状態で開始されます。\"First expanded\" - 最初のパネルのみが最初に展開されます。",
@@ -1597,10 +1607,6 @@ export var jaStrings = {
       textAreaWidth: "調査のタイトルと説明を含むヘッダー領域の幅 (ピクセル単位)。",
       overlapEnabled: "有効にすると、調査の上部がヘッダーの下部に重なります。",
       mobileHeight: "0 に設定すると、ヘッダーのコンテンツに合わせて高さが自動的に計算されます。"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "値 % を受け入れます。",
-      questionTitleWidth: "値 px を受け入れます。"
     },
     progressBarInheritWidthFrom: "「コンテナと同じ」オプションは、調査が配置されているHTML要素に収まるようにプログレスバーの領域幅を自動調整します。"
   },
@@ -3005,3 +3011,11 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "行拡張エラーメッセージの配置"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "詳細セクションにネストされた質問のエラーメッセージの場所を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。"
 // pe.gridLayoutColumns: "Grid layout columns" => "グリッド レイアウト列"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "有効幅、%"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "質問タイトルの幅、px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "レイアウト列がまだありません"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "このパネルがグリッドレイアウト内で何列にまたがっているかを指定します。"
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "このテーブルでは、パネル内の各グリッド列を構成できます。行内の要素の最大数に基づいて、各列の幅の割合が自動的に設定されます。グリッドレイアウトをカスタマイズするには、これらの値を手動で調整し、各列のすべての質問のタイトル幅を定義します。"
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator では、フォーム要素のインライン幅を手動で調整して、レイアウトを制御できます。これで目的の結果が得られない場合は、列ベースのシステムを使用してフォーム要素を構成するグリッドレイアウトを有効にすることができます。レイアウト列を設定するには、ページまたはパネルを選択し、「質問設定」→「グリッド列」テーブルを使用します。質問の列数を調整するには、質問を選択し、「レイアウト」→「列範囲」フィールドで目的の値を設定します。"
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "この質問がグリッドレイアウト内で何列にまたがっているかを指定します。"
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "このテーブルでは、ページ上の各グリッド列を構成できます。行内の要素の最大数に基づいて、各列の幅の割合が自動的に設定されます。グリッドレイアウトをカスタマイズするには、これらの値を手動で調整し、各列のすべての質問のタイトル幅を定義します。"

@@ -660,7 +660,7 @@ test("Panel empty", async (t) => {
     };
     await setJSON(json);
     await takeElementScreenshot("surface-empty-panel.png", Selector(".svc-question__content"), t, comparer);
-    await t.hover(Selector(".svc-question__content div").withText("Add Question"));
+    await t.hover(Selector(".svc-panel__add-new-question"));
     await takeElementScreenshot("surface-empty-panel-hover.png", Selector(".svc-question__content"), t, comparer);
   });
 });

@@ -14,8 +14,6 @@ import { settings as creatorSettings } from "../src/creator-settings";
 
 beforeEach(() => { });
 
-settings.supportCreatorV2 = true;
-
 test("item value isNew isDraggable allowRemove", () => {
   const creator = new CreatorTester();
   creator.JSON = {

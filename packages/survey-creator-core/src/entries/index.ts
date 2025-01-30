@@ -131,6 +131,5 @@ require("../utils/layout.scss");
 require("../custom-questions/boolean-switch.scss");
 
 import { settings, checkLibraryVersion } from "survey-core";
-settings.supportCreatorV2 = true;
 
 checkLibraryVersion(`${process.env.VERSION}`, "survey-creator-core");

@@ -33,6 +33,117 @@ var themeConstants = {
 const baseThemeCssVariable = getCssVariablesFormFile(baseThemeName + ".css");
 const themeDistinctions = {};
 
+function ingectAlpha(hexColor, alpha) {
+  if (!!hexColor && alpha !== undefined) {
+    const rgbValue = HEXToRGB(hexColor);
+    return `rgba(${rgbValue[0]}, ${rgbValue[1]}, ${rgbValue[2]}, ${rgbValue[3] || alpha})`;
+  }
+}
+
+function roundTo2Decimals(number) {
+  return Math.round(number * 100) / 100;
+}
+
+function parseRgbaFromString(value = "") {
+  const matchRgb = value.match(/\((.*)\)/);
+  if (matchRgb) {
+    return matchRgb[1].split(",").map(i => parseFloat(i));
+  } else {
+    return [];
+  }
+}
+
+function getRGBaChannelValues(color) {
+  let colorRgba = parseRgbaFromString(color);
+  if (colorRgba.length === 0) {
+    colorRgba = parseRgbaFromString(ingectAlpha(color, 1));
+  }
+  return colorRgba;
+}
+
+function HEXToRGB(baseColor) {
+  if (!!baseColor) {
+    const r = parseInt(baseColor.slice(1, 3), 16);
+    const g = parseInt(baseColor.slice(3, 5), 16);
+    const b = parseInt(baseColor.slice(5, 7), 16);
+    const alpha = roundTo2Decimals(parseInt(baseColor.slice(7, 9), 16) / 255);
+
+    return [r, g, b, alpha];
+  }
+  return [];
+}
+
+function RGBToHSL(r, g, b){
+  r /= 255, g /= 255, b /= 255;
+  var max = Math.max(r, g, b), min = Math.min(r, g, b);
+  var h, s, l = (max + min) / 2;
+
+  if(max == min){
+      h = s = 0;
+  }else{
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch(max){
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+  }
+
+  return [roundTo2Decimals(h * 360), roundTo2Decimals(s * 100), roundTo2Decimals(l * 100)];
+}
+
+function generateColor(cssVariables, baseColorName, dependentColorName, resultCssVariables) {
+  if(!cssVariables[baseColorName]) {
+    console.log(`${baseColorName} is missing`);
+    return;
+  }
+  if(!cssVariables[dependentColorName]) {
+    console.log(`${dependentColorName} is missing`);
+    return;
+  }
+
+  const baseRgbaColor = getRGBaChannelValues(cssVariables[baseColorName]);
+  const baseHslColor = RGBToHSL(baseRgbaColor[0], baseRgbaColor[1], baseRgbaColor[2]);
+
+  const dependentRgbaColor = getRGBaChannelValues(cssVariables[dependentColorName]);
+  const dependentHslColor = RGBToHSL(dependentRgbaColor[0], dependentRgbaColor[1], dependentRgbaColor[2]);
+  // console.log(`${dependentColorName} r=${dependentRgbaColor[0]} g=${dependentRgbaColor[1]} b=${dependentRgbaColor[2]}`);
+  // console.log(`${dependentColorName} h=${dependentHslColor[0]} s=${dependentHslColor[1]} l=${dependentHslColor[2]}`);
+
+  const deltaAlpha = baseRgbaColor[3] - dependentRgbaColor[3];
+  const deltaH = roundTo2Decimals(baseHslColor[0] - dependentHslColor[0]);
+  const deltaS = roundTo2Decimals(baseHslColor[1] - dependentHslColor[1]);
+  const deltaL = roundTo2Decimals(baseHslColor[2] - dependentHslColor[2]);
+
+  // console.log(`${dependentColorName} dh=${deltaH} ds=${deltaS} dl=${deltaL} da=${deltaAlpha}`);
+  resultCssVariables[dependentColorName + "-deltaAlpha"] = deltaAlpha;
+  resultCssVariables[dependentColorName + "-deltaH"] = deltaH;
+  resultCssVariables[dependentColorName + "-deltaS"] = deltaS;
+  resultCssVariables[dependentColorName + "-deltaL"] = deltaL;
+
+  const hueValue = `calc(h - var(${dependentColorName + "-deltaH"}))`;
+  const saturationValue = `calc(s - var(${dependentColorName + "-deltaS"}))`;
+  const lightnessValue = `calc(l - var(${dependentColorName + "-deltaL"}))`;
+  const alphaValue = `calc(1 - var(${dependentColorName + "-deltaAlpha"}))`;
+  resultCssVariables[dependentColorName] = `hsl(from var(${baseColorName}) ${hueValue} ${saturationValue} ${lightnessValue} / ${alphaValue})`;
+}
+function generateColorVariables(cssVariables) {
+  const resultCssVariables = {};
+  generateColor(cssVariables, "--sjs-primary-background-500", "--sjs-primary-background-400", resultCssVariables);
+  generateColor(cssVariables, "--sjs-primary-background-500", "--sjs-primary-background-10", resultCssVariables);
+
+  generateColor(cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-400", resultCssVariables);
+  generateColor(cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-25", resultCssVariables);
+  generateColor(cssVariables, "--sjs-secondary-background-500", "--sjs-secondary-background-10", resultCssVariables);
+
+  generateColor(cssVariables, "--sjs-special-background", "--sjs-special-haze", resultCssVariables);
+  generateColor(cssVariables, "--sjs-special-background", "--sjs-special-glow", resultCssVariables);
+  
+  return resultCssVariables;
+}
+
 function getUsedCssVariables(path) {
   fs.readdirSync(path, { withFileTypes: true }).forEach(item => {
     if(item.isDirectory()) {
@@ -92,7 +203,7 @@ function isLightTheme(themeName) {
 function writeTheme2020(themeName, cssVars, variableName) {
   const curPaletteCssVariables = getCssVariablesFormFile(themeName + "/v2.css");
   const cssVariables = { ...cssVars, ...curPaletteCssVariables };
-  const theme = { themeName, iconsSet: "v1", isLight: true, cssVariables };
+  const theme = { themeName, iconSet: "v1", isLight: true, cssVariables };
   const themeJson = JSON.stringify(theme, null, 2);
   const result = `const Theme = ${themeJson};\nexport default Theme;\nexport const ${variableName} = Theme;`;
   fs.writeFileSync(_dirPath + themeName + ".ts", result);
@@ -101,7 +212,7 @@ function writeTheme2020(themeName, cssVars, variableName) {
 }
 
 function writeTheme(themeName, cssVariables, variableName) {
-  const theme = { themeName, iconsSet: "v2", cssVariables };
+  const theme = { themeName, iconSet: "v2", cssVariables };
   const themeJson = JSON.stringify(theme, null, 2);
   const result = `const Theme = ${themeJson};\nexport default Theme;\nexport const ${variableName} = Theme;`;
   fs.writeFileSync(_dirPath + themeName + ".ts", result);
@@ -115,7 +226,7 @@ function writeThemePalette(themeName, paletteName, cssVariables) {
   const variableName = [baseThemeVariable, capitalizedFirstLetter(paletteName)].join("");
   const isLight = isLightTheme(fileName);
 
-  const theme = { themeName: fileName, iconsSet: "v2", isLight: isLight, cssVariables: cssVariables };
+  const theme = { themeName: fileName, iconSet: "v2", isLight: isLight, cssVariables: cssVariables };
   const themeJson = JSON.stringify(theme, null, 2);
   const importsString = `import { assign } from "./utils";\nimport { ${baseThemeVariable} } from "./${themeName}";\n\n`;
   const useImportString = `const themeCssVariables = {};\nassign(themeCssVariables, ${baseThemeVariable}.cssVariables, Theme.cssVariables);\nassign(Theme, { cssVariables: themeCssVariables });\n\n`;
@@ -161,7 +272,15 @@ Object.keys(themeNameMap).forEach(themeName => {
   (palettes || []).forEach(paletteName => {
     console.log("Palette - " + paletteName);
     const curPaletteCssVariables = getCssVariablesFormFile(currentTheme + "/" + paletteName + ".css");
-    strImportTheme = writeThemePalette(currentTheme, paletteName, curPaletteCssVariables);
+    const resultColorVariables = generateColorVariables(curPaletteCssVariables);
+    const cssVariables = { ...curPaletteCssVariables, ...resultColorVariables };
+
+    if(paletteName === "light") {
+        const cssVariablesJson = JSON.stringify(resultColorVariables, null, 2);
+        const result = `export const DefaultLightColorCssVariables = ${cssVariablesJson};`;
+        fs.writeFileSync(_dirPath + "default-light-color-css-variables.ts", result);
+    }
+    strImportTheme = writeThemePalette(currentTheme, paletteName, cssVariables);
     indexFileContent += strImportTheme;
   });
 });

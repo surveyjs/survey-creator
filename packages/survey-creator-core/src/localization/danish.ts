@@ -308,6 +308,10 @@ export var danishStrings = {
       maxWidth: "Maksimal panelbredde",
       showNumber: "Nummerer dette panel"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Effektiv bredde, %",
+      questionTitleWidth: "Spørgsmålets titelbredde, px"
+    },
     paneldynamic: {
       name: "Panelets navn",
       title: "Panelets titel",
@@ -505,6 +509,7 @@ export var danishStrings = {
     listIsEmpty: "Der er endnu ikke tilføjet nogen varer",
     "listIsEmpty@choices": "Der er endnu ikke tilføjet nogen valgmuligheder",
     "listIsEmpty@columns": "Du har ikke nogen kolonner endnu",
+    "listIsEmpty@gridLayoutColumns": "Du har ikke layoutkolonner endnu",
     "listIsEmpty@rows": "Du har ingen rækker endnu",
     "listIsEmpty@validators": "Du har endnu ingen valideringsregler",
     "listIsEmpty@calculatedValues": "Du har endnu ingen tilpassede variabler",
@@ -1359,7 +1364,9 @@ export var danishStrings = {
       startWithNewLine: "Fjern markeringen for at få vist panelet på én linje med det forrige spørgsmål eller panel. Indstillingen gælder ikke, hvis panelet er det første element i formularen.",
       state: "Vælg mellem: \"Udvidet\" - panelet vises fuldt ud og kan skjules; \"Skjult\" - panelet viser kun titlen og beskrivelsen og kan udvides; \"Låst\" - panelet vises fuldt ud og kan ikke skjules.",
       width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.).",
-      showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i dette panel."
+      showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i dette panel.",
+      effectiveColSpan: "Angiver, hvor mange kolonner dette panel strækker sig over i gitterlayoutet.",
+      gridLayoutColumns: "Denne tabel giver dig mulighed for at konfigurere hver gitterkolonne i panelet. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
     },
     paneldynamic: {
       name: "Et panel-id, der ikke er synligt for svarpersonerne.",
@@ -1390,6 +1397,7 @@ export var danishStrings = {
     resetValueIf: "Brug tryllestavsikonet til at angive en betinget regel, der bestemmer, hvornår en svarpersons input nulstilles til værdien baseret på værdien \"Standardværdiudtryk\" eller \"Angiv værdiudtryk\" eller til værdien \"Standardsvar\" (hvis en af dem er angivet).",
     setValueIf: "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer, hvornår \"Indstil værdiudtryk\" skal køres, og tildele den resulterende værdi dynamisk som et svar.",
     setValueExpression: "Angiv et udtryk, der definerer den værdi, der skal angives, når betingelserne i reglen \"Angiv værdi hvis\" er opfyldt. Udtrykket kan omfatte grundlæggende beregninger - '{q1_id} + {q2_id}', booleske udtryk, såsom '{alder} > 60' og funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Den værdi, der bestemmes af dette udtryk, kan tilsidesættes af svarpersonens manuelle input.",
+    gridLayoutEnabled: "Survey Creator giver dig mulighed for manuelt at justere de indbyggede bredder af formularelementer for at styre layoutet. Hvis dette ikke giver det ønskede resultat, kan du aktivere gitterlayoutet, som strukturerer formularelementer ved hjælp af et kolonnebaseret system. For at konfigurere layoutkolonner skal du vælge en side eller et panel og bruge tabellen \"Spørgsmålsindstillinger\" → \"Gitterkolonner\". For at justere, hvor mange kolonner et spørgsmål strækker sig over, skal du vælge det og indstille den ønskede værdi i feltet \"Layout\" → \"Kolonnespænd\".",
     question: {
       name: "Et spørgsmåls-id, der ikke er synligt for svarpersonerne.",
       description: "Skriv et spørgsmåls undertitel.",
@@ -1410,7 +1418,8 @@ export var danishStrings = {
       textUpdateMode: "Vælg mellem: \"Ved tabt fokus\" - værdien opdateres, når indtastningsfeltet mister fokus; \"Mens du skriver\" - værdien opdateres i realtid, da brugerne skriver. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Ved mistet fokus\" som standard).",
       url: "Du kan bruge enhver webtjeneste som datakilde til multiple choice-spørgsmål. Hvis du vil udfylde valgværdier, skal du angive URL-adressen på den tjeneste, der leverer dataene.",
       searchMode: "En sammenligningshandling, der bruges til at filtrere rullelisten.",
-      textWrapEnabled: "Lange tekster i valgmuligheder genererer automatisk linjeskift, så de passer ind i rullemenuen. Fjern markeringen, hvis teksterne skal klippes."
+      textWrapEnabled: "Lange tekster i valgmuligheder genererer automatisk linjeskift, så de passer ind i rullemenuen. Fjern markeringen, hvis teksterne skal klippes.",
+      effectiveColSpan: "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet."
     },
     signaturepad: {
       signatureWidth: "Indstiller bredden på det viste signaturområde og det resulterende billede.",
@@ -1509,7 +1518,8 @@ export var danishStrings = {
       questionTitleWidth: "Angiver ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsbokse. Accepterer CSS-værdier (px, %, in, pt osv.).",
       questionErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til spørgsmålet med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard).",
       questionOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau (\"Original\" som standard). Effekten af denne indstilling er kun synlig under fanen Eksempel.",
-      showNavigationButtons: "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
+      showNavigationButtons: "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\".",
+      gridLayoutColumns: "I denne tabel kan du konfigurere hver gitterkolonne på siden. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
     },
     timerLocation: "Indstiller placeringen af en timer på en side.",
     panelsState: "Vælg mellem: \"Låst\" - brugere kan ikke udvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Udvid alle\" - alle paneler starter i udvidet tilstand; \"Først udvidet\" - kun det første panel udvides oprindeligt.",
@@ -1597,10 +1607,6 @@ export var danishStrings = {
       textAreaWidth: "Bredden af det sidehovedområde, der indeholder undersøgelsens titel og beskrivelse, målt i pixel.",
       overlapEnabled: "Når den er aktiveret, overlejres toppen af undersøgelsen bunden af sidehovedet.",
       mobileHeight: "Når den er indstillet til 0, beregnes højden automatisk for at rumme sidehovedets indhold."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Accepterer værdier %.",
-      questionTitleWidth: "Accepterer værdier px."
     },
     progressBarInheritWidthFrom: "Indstillingen \"Samme som beholder\" justerer automatisk bredden på statuslinjens område, så den passer ind i det HTML-element, som undersøgelsen er placeret i."
   },
@@ -3190,3 +3196,11 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Justering af fejlmeddelelse om rækkeudvidelse"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angiver placeringen af fejlmeddelelser for spørgsmål, der er indlejret i detaljerede afsnit. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelser\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Kolonner med gitterlayout"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektiv bredde, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Spørgsmålets titelbredde, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Du har ikke layoutkolonner endnu"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Angiver, hvor mange kolonner dette panel strækker sig over i gitterlayoutet."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Denne tabel giver dig mulighed for at konfigurere hver gitterkolonne i panelet. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator giver dig mulighed for manuelt at justere de indbyggede bredder af formularelementer for at styre layoutet. Hvis dette ikke giver det ønskede resultat, kan du aktivere gitterlayoutet, som strukturerer formularelementer ved hjælp af et kolonnebaseret system. For at konfigurere layoutkolonner skal du vælge en side eller et panel og bruge tabellen \"Spørgsmålsindstillinger\" → \"Gitterkolonner\". For at justere, hvor mange kolonner et spørgsmål strækker sig over, skal du vælge det og indstille den ønskede værdi i feltet \"Layout\" → \"Kolonnespænd\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I denne tabel kan du konfigurere hver gitterkolonne på siden. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."

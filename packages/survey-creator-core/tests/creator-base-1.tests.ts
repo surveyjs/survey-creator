@@ -58,8 +58,6 @@ import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
 
-surveySettings.supportCreatorV2 = true;
-
 test("options.questionTypes", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

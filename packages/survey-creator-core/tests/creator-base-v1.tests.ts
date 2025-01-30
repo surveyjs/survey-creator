@@ -30,8 +30,6 @@ import { settings as creatorSettings } from "../src/creator-settings";
 
 export * from "../src/components/link-value";
 
-settings.supportCreatorV2 = true;
-
 function getSurveyJson(): any {
   return {
     pages: [

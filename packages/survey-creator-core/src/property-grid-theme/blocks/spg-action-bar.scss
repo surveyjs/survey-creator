@@ -59,14 +59,14 @@
 }
 
 .spg-action-button--danger {
-  color: var(--ctr-library-action-button-text-color-negative, $red);
+  color: var(--ctr-library-action-button-text-color-negative, var(--sjs-semantic-red-background-500, #e50a3eff));
 
   &:hover,
   &:focus {
-    background-color: var(--ctr-library-action-button-background-color-negative-hovered, $red-light);
+    background-color: var(--ctr-library-action-button-background-color-negative-hovered, var(--sjs-semantic-red-background-10, #e50a3e1a));
 
     use {
-      fill: var(--ctr-library-action-button-icon-color-negative, $red);
+      fill: var(--ctr-library-action-button-icon-color-negative, var(--sjs-semantic-red-background-500, #e50a3eff));
     }
   }
 }
