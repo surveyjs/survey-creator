@@ -539,6 +539,7 @@ export var fiStrings = {
     titlePlaceholder: "Syötä otsikko tähän",
     surveyTitlePlaceholder: "Syötä kyselyn otsikko tähän",
     pageTitlePlaceholder: "Syötä sivun otsikko tähän",
+    startPageTitlePlaceholder: "Aloitussivu",
     descriptionPlaceholder: "Lisää kuvaus",
     surveyDescriptionPlaceholder: "Lisää kyselyn kuvaus",
     pageDescriptionPlaceholder: "Lisää sivun kuvaus",
@@ -2952,3 +2953,14 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Rivin laajennuksen virhesanoman tasaus"
 // tabs.surfaceBackground: "Surface Background" => "Surfacen tausta"
 // colors.gray: "Gray" => "Harmaa"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Määrittää tieto-osiin sisältyvien kysymysten virhesanomien sijainnin. \"Peri\" -vaihtoehto käyttää asetusta \"Virheilmoituksen kohdistus\" -ominaisuudesta."
+// pe.gridLayoutColumns: "Grid layout columns" => "Ruudukkoasettelun sarakkeet"
+// pe.startPageTitlePlaceholder: "Start Page" => "Aloitussivu"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Tehollinen leveys, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Kysymyksen otsikon leveys, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Sinulla ei vielä ole asettelusarakkeita"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Määrittää, kuinka monta saraketta tämä paneeli kattaa ruudukkoasettelussa."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tämän taulukon avulla voit määrittää paneelin jokaisen ruudukkosarakkeen. Se määrittää automaattisesti kunkin sarakkeen leveysprosentin rivin elementtien enimmäismäärän perusteella. Jos haluat mukauttaa ruudukon asettelua, säädä näitä arvoja manuaalisesti ja määritä otsikon leveys kunkin sarakkeen kaikille kysymyksille."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creatorin avulla voit manuaalisesti säätää lomake-elementtien sisäisiä leveyksiä asettelun hallitsemiseksi. Jos tämä ei tuota toivottua tulosta, voit ottaa käyttöön ruudukkoasettelun, joka jäsentää elementtejä sarakepohjaisen järjestelmän avulla. Määritä asettelusarakkeet valitsemalla sivu tai paneeli ja käyttämällä \"Kysymysasetukset\" → \"Ruudukkosarakkeet\" -taulukkoa. Jos haluat säätää, kuinka monta saraketta kysymys kattaa, valitse se ja aseta haluamasi arvo \"Asettelu\" → \"Sarakeväli\" -kenttään."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Määrittää, kuinka monta saraketta tämä kysymys kattaa ruudukkoasettelussa."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tämän taulukon avulla voit määrittää sivun jokaisen ruudukkosarakkeen. Se määrittää automaattisesti kunkin sarakkeen leveysprosentin rivin elementtien enimmäismäärän perusteella. Jos haluat mukauttaa ruudukon asettelua, säädä näitä arvoja manuaalisesti ja määritä otsikon leveys kunkin sarakkeen kaikille kysymyksille."

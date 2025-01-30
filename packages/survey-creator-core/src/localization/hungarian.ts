@@ -539,6 +539,7 @@ export var huStrings = {
     titlePlaceholder: "Cím",
     surveyTitlePlaceholder: "Felmérés címe",
     pageTitlePlaceholder: "Oldal {num}",
+    startPageTitlePlaceholder: "Kezdőlap",
     descriptionPlaceholder: "Leírás: __________",
     surveyDescriptionPlaceholder: "Leírás: __________",
     pageDescriptionPlaceholder: "Leírás: __________",
@@ -3131,3 +3132,14 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Sorbővítési hibaüzenet igazítása"
 // tabs.surfaceBackground: "Surface Background" => "Felület háttér"
 // colors.gray: "Gray" => "Szürke"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Beállítja a hibaüzenetek helyét a részletes szakaszokba ágyazott kérdésekhez. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza."
+// pe.gridLayoutColumns: "Grid layout columns" => "Rácsos elrendezés oszlopai"
+// pe.startPageTitlePlaceholder: "Start Page" => "Kezdőlap"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektív szélesség, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Kérdés címének szélessége, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Még nincsenek elrendezésoszlopok"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Megadja, hogy ez a panel hány oszlopot ölel fel a rácselrendezésen belül."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ez a táblázat lehetővé teszi az egyes rácsoszlopok konfigurálását a panelen. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "A Survey Creator lehetővé teszi az űrlapelemek szövegközi szélességének manuális beállítását az elrendezés vezérléséhez. Ha ez nem hozza meg a kívánt eredményt, engedélyezheti a rácselrendezést, amely oszlopalapú rendszer használatával struktúrákat alkot elemeket. Az elrendezésoszlopok konfigurálásához válasszon ki egy oldalt vagy panelt, és használja a \"Kérdésbeállítások\" → a \"Rácsoszlopok\" táblázatot. Annak beállításához, hogy egy kérdés hány oszlopra terjed ki, válassza ki azt, és állítsa be a kívánt értéket az \"Elrendezés\" → az \"Oszloptartomány\" mezőben."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Megadja, hogy ez a kérdés hány oszlopra terjed ki a rácsos elrendezésen belül."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ez a táblázat lehetővé teszi az oldal egyes rácsoszlopainak konfigurálását. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."

@@ -539,6 +539,7 @@ export var indonesianStrings = {
     titlePlaceholder: "Titel",
     surveyTitlePlaceholder: "Judul Survei",
     pageTitlePlaceholder: "Halaman {num}",
+    startPageTitlePlaceholder: "Halaman Awal",
     descriptionPlaceholder: "Deskripsi",
     surveyDescriptionPlaceholder: "Deskripsi",
     pageDescriptionPlaceholder: "Deskripsi",
@@ -3134,3 +3135,14 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Perataan pesan kesalahan perluasan baris"
 // tabs.surfaceBackground: "Surface Background" => "Latar Belakang Permukaan"
 // colors.gray: "Gray" => "Abu-abu"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Mengatur lokasi pesan kesalahan untuk pertanyaan yang bertumpuk di bagian detail. Opsi \"Wariskan\" menerapkan pengaturan dari properti \"Perataan pesan kesalahan\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolom tata letak kisi"
+// pe.startPageTitlePlaceholder: "Start Page" => "Halaman Awal"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Lebar efektif, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Lebar judul pertanyaan, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Anda belum memiliki kolom tata letak"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Menentukan berapa banyak kolom panel ini dalam tata letak kisi."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi dalam panel. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Pembuat Survei memungkinkan Anda menyesuaikan lebar sebaris elemen formulir secara manual untuk mengontrol tata letak. Jika ini tidak menghasilkan hasil yang diinginkan, Anda dapat mengaktifkan tata letak kisi, yang menyusun elemen bentuk menggunakan sistem berbasis kolom. Untuk mengonfigurasi kolom tata letak, pilih halaman atau panel dan gunakan tabel \"Pengaturan Pertanyaan\" → \"Kolom kisi\". Untuk menyesuaikan berapa banyak kolom rentang pertanyaan, pilih dan atur nilai yang diinginkan di bidang \"Tata Letak\" → \"Rentang kolom\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Menentukan berapa banyak kolom yang mencakup pertanyaan ini dalam tata letak kisi."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi pada halaman. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom."

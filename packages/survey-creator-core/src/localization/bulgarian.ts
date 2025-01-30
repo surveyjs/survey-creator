@@ -539,6 +539,7 @@ export var bgStrings = {
     titlePlaceholder: "Заглавие",
     surveyTitlePlaceholder: "Заглавие на анкетата",
     pageTitlePlaceholder: "Страница {num}",
+    startPageTitlePlaceholder: "Начална страница",
     descriptionPlaceholder: "Описание",
     surveyDescriptionPlaceholder: "Описание",
     pageDescriptionPlaceholder: "Описание",
@@ -2540,3 +2541,14 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Подравняване на съобщението за грешка при разгъване на реда"
 // tabs.surfaceBackground: "Surface Background" => "Повърхностен фон"
 // colors.gray: "Gray" => "Сив"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Задава местоположението на съобщенията за грешки за въпроси, вложени в подробни раздели. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщенията за грешки\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Колони за оформление на мрежата"
+// pe.startPageTitlePlaceholder: "Start Page" => "Начална страница"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Ефективна ширина, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Ширина на заглавието на въпроса, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Все още нямате графи за оформление"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Указва колко колони обхваща този панел в оформлението на мрежата."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Тази таблица ви позволява да конфигурирате всяка колона на мрежата в панела. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator ви позволява ръчно да регулирате вградените ширини на елементите на формуляра, за да контролирате оформлението. Ако това не доведе до желания резултат, можете да активирате оформлението на мрежата, което структурира елементите на формата с помощта на система, базирана на колони. За да конфигурирате колони за оформление, изберете страница или панел и използвайте таблицата \"Настройки на въпроса\" → \"Колони на мрежата\". За да регулирате колко колони обхваща даден въпрос, изберете го и задайте желаната стойност в полето \"Оформление\" → \"Обхват на колоната\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Указва колко колони обхваща този въпрос в оформлението на мрежата."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Тази таблица ви позволява да конфигурирате всяка колона на мрежата на страницата. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона."

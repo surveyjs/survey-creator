@@ -539,6 +539,7 @@ var persianStrings = {
     titlePlaceholder: "عنوان را اینجا وارد کنید",
     surveyTitlePlaceholder: "عنوان نظرسنجی را اینجا وارد کنید",
     pageTitlePlaceholder: "عنوان صفحه را اینجا وارد کنید",
+    startPageTitlePlaceholder: "صفحه شروع",
     descriptionPlaceholder: "توضیحات را وارد کنید",
     surveyDescriptionPlaceholder: "توضیحات نظرسنجی را وارد کنید",
     pageDescriptionPlaceholder: "توضیحات صفحه را وارد کنید",
@@ -2936,3 +2937,14 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "تراز پیام خطای گسترش ردیف"
 // tabs.surfaceBackground: "Surface Background" => "زمینه سطح"
 // colors.gray: "Gray" => "خاکستری"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "مکان پیام های خطا را برای سؤالات تودرتو در بخش های جزئیات تنظیم می کند. گزینه \"وراثت\" تنظیمات را از ویژگی \"تراز پیام خطا\" اعمال می کند."
+// pe.gridLayoutColumns: "Grid layout columns" => "ستون های طرح بندی شبکه ای"
+// pe.startPageTitlePlaceholder: "Start Page" => "صفحه شروع"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "عرض موثر، ٪"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "عرض عنوان سوال، px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "شما هنوز ستون های طرح بندی ندارید"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "مشخص می کند که این پانل چند ستون در طرح بندی شبکه قرار دارد."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "این جدول به شما امکان می دهد هر ستون شبکه را در پانل پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator به شما امکان می دهد عرض درون خطی عناصر فرم را به صورت دستی تنظیم کنید تا طرح بندی را کنترل کنید. اگر این نتیجه دلخواه را به همراه نداشت، می توانید طرح بندی شبکه را فعال کنید، که با استفاده از یک سیستم مبتنی بر ستون عناصر را تشکیل می دهد. برای پیکربندی ستون های طرح بندی، یک صفحه یا پانل را انتخاب کنید و از جدول «تنظیمات سوال» → «ستون های شبکه» استفاده کنید. برای تنظیم تعداد ستون های یک سوال، آن را انتخاب کنید و مقدار مورد نظر را در قسمت \"Layout\" → \"Column span\" تنظیم کنید."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "مشخص می کند که این سوال چند ستون در طرح بندی شبکه قرار دارد."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "این جدول به شما امکان می دهد هر ستون شبکه را در صفحه پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."

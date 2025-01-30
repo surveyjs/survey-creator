@@ -539,6 +539,7 @@ var italianTranslation = {
     titlePlaceholder: "Titolo",
     surveyTitlePlaceholder: "Titolo del sondaggio",
     pageTitlePlaceholder: "Pagina {num}",
+    startPageTitlePlaceholder: "Pagina iniziale",
     descriptionPlaceholder: "Descrizione",
     surveyDescriptionPlaceholder: "Descrizione",
     pageDescriptionPlaceholder: "Descrizione",
@@ -2738,3 +2739,14 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Allineamento del messaggio di errore di espansione delle righe"
 // tabs.surfaceBackground: "Surface Background" => "Sfondo della superficie"
 // colors.gray: "Gray" => "Grigio"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Imposta la posizione dei messaggi di errore per le domande nidificate nelle sezioni di dettaglio. L'opzione \"Eredita\" applica l'impostazione della proprietà \"Allineamento messaggio di errore\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Colonne del layout a griglia"
+// pe.startPageTitlePlaceholder: "Start Page" => "Pagina iniziale"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Larghezza effettiva, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Larghezza del titolo della domanda, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Non hai ancora colonne di layout"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Specifica il numero di colonne distribuite dal pannello all'interno del layout della griglia."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Questa tabella consente di configurare ogni colonna della griglia all'interno del pannello. Imposta automaticamente la percentuale di larghezza per ogni colonna in base al numero massimo di elementi in una riga. Per personalizzare il layout della griglia, regola manualmente questi valori e definisci la larghezza del titolo per tutte le domande in ogni colonna."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator consente di regolare manualmente le larghezze in linea degli elementi del modulo per controllare il layout. Se questo non produce il risultato desiderato, è possibile abilitare il layout a griglia, che struttura gli elementi di forma utilizzando un sistema basato su colonne. Per configurare le colonne del layout, seleziona una pagina o un pannello e utilizza la tabella \"Impostazioni domanda\" → \"Colonne griglia\". Per regolare il numero di colonne di una domanda, selezionala e imposta il valore desiderato nel campo \"Layout\" → \"Estensione colonne\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Specifica il numero di colonne su cui si estende la domanda all'interno del layout della griglia."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Questa tabella consente di configurare ogni colonna della griglia nella pagina. Imposta automaticamente la percentuale di larghezza per ogni colonna in base al numero massimo di elementi in una riga. Per personalizzare il layout della griglia, regola manualmente questi valori e definisci la larghezza del titolo per tutte le domande in ogni colonna."

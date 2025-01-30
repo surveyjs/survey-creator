@@ -539,6 +539,7 @@ export var hrStrings = {
     titlePlaceholder: "Ulazni naslov ovdje",
     surveyTitlePlaceholder: "Naslov ulazne ankete ovdje",
     pageTitlePlaceholder: "Naslov ulazne stranice ovdje",
+    startPageTitlePlaceholder: "Početna stranica",
     descriptionPlaceholder: "Unesite opis",
     surveyDescriptionPlaceholder: "Unesite opis ankete",
     pageDescriptionPlaceholder: "Unesite opis stranice",
@@ -2974,3 +2975,14 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Poravnanje poruke o pogrešci proširenja retka"
 // tabs.surfaceBackground: "Surface Background" => "Pozadina površine"
 // colors.gray: "Gray" => "Siv"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Postavlja mjesto poruka o pogreškama za pitanja ugniježđena u detaljnim odjeljcima. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Stupci rasporeda rešetke"
+// pe.startPageTitlePlaceholder: "Start Page" => "Početna stranica"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Efektivna širina, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Širina naslova pitanja, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Još nemate stupce izgleda"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Određuje koliko stupaca ova ploča obuhvaća unutar rasporeda rešetke."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ova tablica omogućuje konfiguriranje svakog stupca rešetke unutar ploče. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator omogućuje vam ručno podešavanje ugrađenih širina elemenata obrasca za kontrolu izgleda. Ako to ne daje željeni ishod, možete omogućiti raspored rešetke, čije strukture tvore elemente pomoću sustava temeljenog na stupcima. Da biste konfigurirali stupce izgleda, odaberite stranicu ili ploču i upotrijebite tablicu \"Postavke pitanja\" → \"Stupci rešetke\". Da biste prilagodili koliko stupaca obuhvaća pitanje, odaberite ga i postavite željenu vrijednost u polju \"Izgled\" → \"Raspon stupaca\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Određuje koliko stupaca ovo pitanje obuhvaća unutar rasporeda rešetke."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ova tablica omogućuje konfiguriranje svakog stupca rešetke na stranici. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."

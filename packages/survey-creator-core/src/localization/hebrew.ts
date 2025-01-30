@@ -539,6 +539,7 @@ export var hebrewStrings = {
     titlePlaceholder: "כותרת",
     surveyTitlePlaceholder: "כותרת הסקר",
     pageTitlePlaceholder: "עמוד {num}",
+    startPageTitlePlaceholder: "דף פתיחה",
     descriptionPlaceholder: "תיאור",
     surveyDescriptionPlaceholder: "תיאור הסקר",
     pageDescriptionPlaceholder: "תיאור העמוד",
@@ -2545,3 +2546,14 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "יישור הודעת שגיאה של הרחבת שורה"
 // tabs.surfaceBackground: "Surface Background" => "רקע פני השטח"
 // colors.gray: "Gray" => "אפור"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "הגדרת המיקום של הודעות שגיאה עבור שאלות המקוננות במקטעים מפורטים. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "עמודות פריסת רשת"
+// pe.startPageTitlePlaceholder: "Start Page" => "דף פתיחה"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "רוחב אפקטיבי, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "רוחב כותרת השאלה, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "עדיין אין לך עמודות פריסה"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "מציין כמה עמודות תפרוס חלונית זו בפריסת הרשת."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "טבלה זו מאפשרת להגדיר כל עמודת רשת בחלונית. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "יוצר הסקר מאפשר לך להתאים באופן ידני את רוחב השורה של רכיבי טופס כדי לשלוט בפריסה. אם פעולה זו אינה מפיקה את התוצאה הרצויה, ניתן להפעיל את פריסת הרשת, הבונה רכיבי טופס באמצעות מערכת מבוססת עמודות. כדי להגדיר עמודות פריסה, בחר עמוד או חלונית והשתמש בטבלה \"הגדרות שאלה\" → \"עמודות רשת\". כדי להתאים את מספר העמודות ששאלה משתרעת, בחר אותה והגדר את הערך הרצוי בשדה \"פריסה\" → \"טווח עמודות\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "מציין כמה עמודות שאלה זו משתרעת בתוך פריסת הרשת."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "טבלה זו מאפשרת לך לקבוע את התצורה של כל עמודת רשת בעמוד. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."

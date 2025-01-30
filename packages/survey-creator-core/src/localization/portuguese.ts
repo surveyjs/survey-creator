@@ -539,6 +539,7 @@ var portugueseTranslation = {
     titlePlaceholder: "Título",
     surveyTitlePlaceholder: "Título do Questionário",
     pageTitlePlaceholder: "Página {num}",
+    startPageTitlePlaceholder: "Página inicial",
     descriptionPlaceholder: "Descrição",
     surveyDescriptionPlaceholder: "Descrição",
     pageDescriptionPlaceholder: "Descrição",
@@ -2646,3 +2647,14 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Alinhamento da mensagem de erro de expansão de linha"
 // tabs.surfaceBackground: "Surface Background" => "Fundo da superfície"
 // colors.gray: "Gray" => "Cinza"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Define o local das mensagens de erro para perguntas aninhadas em seções de detalhes. A opção \"Herdar\" aplica a configuração da propriedade \"Alinhamento da mensagem de erro\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Colunas de layout de grade"
+// pe.startPageTitlePlaceholder: "Start Page" => "Página inicial"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Largura efetiva, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Largura do título da pergunta, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Você ainda não tem colunas de layout"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Especifica quantas colunas esse painel abrange dentro do layout da grade."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Esta tabela permite configurar cada coluna de grade dentro do painel. Ele define automaticamente a porcentagem de largura para cada coluna com base no número máximo de elementos em uma linha. Para personalizar o layout da grade, ajuste manualmente esses valores e defina a largura do título para todas as perguntas em cada coluna."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "O Survey Creator permite ajustar manualmente as larguras embutidas dos elementos do formulário para controlar o layout. Se isso não produzir o resultado desejado, você poderá habilitar o layout da grade, que estrutura os elementos do formulário usando um sistema baseado em colunas. Para configurar colunas de layout, selecione uma página ou painel e use a tabela \"Configurações da pergunta\" → \"Colunas da grade\". Para ajustar quantas colunas uma pergunta abrange, selecione-a e defina o valor desejado no campo \"Layout\" → \"Extensão de coluna\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Especifica quantas colunas essa pergunta abrange dentro do layout da grade."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Esta tabela permite configurar cada coluna de grade na página. Ele define automaticamente a porcentagem de largura para cada coluna com base no número máximo de elementos em uma linha. Para personalizar o layout da grade, ajuste manualmente esses valores e defina a largura do título para todas as perguntas em cada coluna."

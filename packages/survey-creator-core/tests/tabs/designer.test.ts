@@ -11,27 +11,22 @@ import { TabDesignerViewModel } from "../../src/components/tabs/designer";
 export * from "../../src/property-grid/matrices";
 
 test("Survey/page title/description placeholders text", () => {
-  new CreatorTester();
-  const survey: SurveyModel = new SurveyModel({
-    pages: [
-      {
-        elements: [
-          { type: "text" }
-        ]
-      }
-    ]
-  });
-  const checkPlaceholder = (owner: ILocalizableOwner, ownerName: string, propertyName: string, placeholderText?: string) => {
-    const locStr: LocalizableString = new LocalizableString(owner, false, propertyName);
+  Serializer.findProperty("question", "description").placeholder = "Q placeholder";
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text" }] };
+  const survey = creator.survey;
+  new PageAdorner(creator, survey.pages[0]);
+  const question = survey.getAllQuestions()[0];
+  const checkPlaceholder = (locStr: LocalizableString, checkText: string) => {
     const editor: StringEditorViewModelBase = new StringEditorViewModelBase(locStr, null);
-    const property: JsonObjectProperty = Serializer.findProperty(ownerName, propertyName);
-    const placeholder: string = placeholderText || editorLocalization.getString((<any>property).placeholder);
-    expect(editor.placeholder).toEqual(placeholder);
+    expect(editor.placeholder).toEqual(checkText);
   };
-  checkPlaceholder(survey, "survey", "title");
-  checkPlaceholder(survey, "survey", "description");
-  checkPlaceholder(survey.pages[0], "page", "title", "Page 1");
-  checkPlaceholder(survey.pages[0], "page", "description");
+  checkPlaceholder(survey.locTitle, "Survey Title");
+  checkPlaceholder(survey.locDescription, "Description");
+  checkPlaceholder(survey.pages[0].locTitle, "Page 1");
+  checkPlaceholder(survey.pages[0].locDescription, "Description");
+  checkPlaceholder(question.locDescription, "Q placeholder");
+  Serializer.findProperty("question", "description").placeholder = undefined;
 });
 
 test("Save survey action properties", () => {
@@ -107,23 +102,39 @@ test("Select survey in designer", () => {
 });
 
 test("StringEditorViewModelBase page title placeholder", () => {
-  Serializer.findProperty("page", "title")["placeholder"] = "pe.pageTitlePlaceholder";
-  let survey: SurveyModel = new SurveyModel({
-    pages: [
-      {
-        elements: [
-          { type: "text" }
-        ]
-      }
-    ]
-  });
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text" }] };
+  const survey = creator.survey;
   let page1 = survey.pages[0];
+  new PageAdorner(creator, page1);
   let editor: StringEditorViewModelBase = new StringEditorViewModelBase(page1.locTitle, null);
   expect(page1.visibleIndex).toBe(0);
   expect(page1.num).toBe(1);
   expect(editor.placeholderValue).toBeUndefined();
   expect(editor.placeholder).toBe("Page 1");
   expect(editor.placeholderValue).toBe("Page 1");
+});
+test("StringEditorViewModelBase page title placeholder for started page", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    firstPageIsStarted: true,
+    pages: [
+      { elements: [{ type: "text" }] },
+      { elements: [{ type: "text" }] }
+    ]
+  };
+  const survey = creator.survey;
+  const page1 = survey.pages[0];
+  new PageAdorner(creator, page1);
+  const editor: StringEditorViewModelBase = new StringEditorViewModelBase(page1.locTitle, null);
+  expect(page1.isStartPage).toBeTruthy();
+  expect(page1.visibleIndex).toBe(-1);
+  expect(page1.num).toBe(-1);
+  expect(editor.placeholderValue).toBeUndefined();
+  expect(editor.placeholder).toBe("Start Page");
+  expect(editor.placeholderValue).toBe("Start Page");
+  survey.firstPageIsStartPage = false;
+  expect(editor.placeholder).toBe("Page 1");
 });
 
 test("Logo css", () => {

@@ -539,6 +539,7 @@ export var danishStrings = {
     titlePlaceholder: "Titel",
     surveyTitlePlaceholder: "Undersøgelsens titel",
     pageTitlePlaceholder: "Side {num}",
+    startPageTitlePlaceholder: "Startside",
     descriptionPlaceholder: "Beskrivelse",
     surveyDescriptionPlaceholder: "Beskrivelse",
     pageDescriptionPlaceholder: "Beskrivelse",
@@ -3164,3 +3165,14 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Justering af fejlmeddelelse om rækkeudvidelse"
 // tabs.surfaceBackground: "Surface Background" => "Overflade baggrund"
 // colors.gray: "Gray" => "Grå"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angiver placeringen af fejlmeddelelser for spørgsmål, der er indlejret i detaljerede afsnit. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelser\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolonner med gitterlayout"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startside"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektiv bredde, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Spørgsmålets titelbredde, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Du har ikke layoutkolonner endnu"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Angiver, hvor mange kolonner dette panel strækker sig over i gitterlayoutet."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Denne tabel giver dig mulighed for at konfigurere hver gitterkolonne i panelet. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator giver dig mulighed for manuelt at justere de indbyggede bredder af formularelementer for at styre layoutet. Hvis dette ikke giver det ønskede resultat, kan du aktivere gitterlayoutet, som strukturerer formularelementer ved hjælp af et kolonnebaseret system. For at konfigurere layoutkolonner skal du vælge en side eller et panel og bruge tabellen \"Spørgsmålsindstillinger\" → \"Gitterkolonner\". For at justere, hvor mange kolonner et spørgsmål strækker sig over, skal du vælge det og indstille den ønskede værdi i feltet \"Layout\" → \"Kolonnespænd\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I denne tabel kan du konfigurere hver gitterkolonne på siden. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."

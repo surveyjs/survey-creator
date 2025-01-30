@@ -541,6 +541,7 @@ export var enStrings = {
     titlePlaceholder: "Title",
     surveyTitlePlaceholder: "Survey Title",
     pageTitlePlaceholder: "Page {num}",
+    startPageTitlePlaceholder: "Start Page",
     descriptionPlaceholder: "Description",
     surveyDescriptionPlaceholder: "Description",
     pageDescriptionPlaceholder: "Description",

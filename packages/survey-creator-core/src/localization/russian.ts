@@ -539,6 +539,7 @@ export var ruStrings = {
     titlePlaceholder: "Введите заголовок",
     surveyTitlePlaceholder: "Введите заголовок опроса",
     pageTitlePlaceholder: "Введите заголовок страницы",
+    startPageTitlePlaceholder: "Стартовая страница",
     descriptionPlaceholder: "Введите описание",
     surveyDescriptionPlaceholder: "Введите описание опроса",
     pageDescriptionPlaceholder: "Введите описание страницы",
@@ -3040,3 +3041,14 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Выравнивание сообщения об ошибке расширения строк"
 // tabs.surfaceBackground: "Surface Background" => "Фон поверхности"
 // colors.gray: "Gray" => "Серый"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Задает расположение сообщений об ошибках для вопросов, вложенных в подробные разделы. Опция \"Наследовать\" применяет настройку из свойства \"Выравнивание сообщения об ошибке\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Столбцы макета сетки"
+// pe.startPageTitlePlaceholder: "Start Page" => "Стартовая страница"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Полезная ширина, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Ширина заголовка вопроса, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "У вас еще нет столбцов макета"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Указывает, сколько столбцов занимает эта панель в макете сетки."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "В этой таблице можно настроить каждый столбец сетки на панели. Он автоматически устанавливает процент ширины для каждого столбца в зависимости от максимального количества элементов в строке. Чтобы настроить макет сетки, вручную настройте эти значения и определите ширину заголовка для всех вопросов в каждом столбце."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator позволяет вручную настраивать встроенную ширину элементов формы для управления макетом. Если это не дает желаемого результата, вы можете включить макет сетки, который структурирует элементы с использованием системы на основе столбцов. Чтобы настроить макет столбцов, выберите страницу или панель и используйте таблицу «Настройки вопроса» → «Столбцы сетки». Чтобы настроить количество столбцов в вопросе, выберите его и установите нужное значение в полях «Макет» → «Диапазон столбцов»."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Указывает, сколько столбцов занимает этот вопрос в макете сетки."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "В этой таблице можно настроить каждый столбец сетки на странице. Он автоматически устанавливает процент ширины для каждого столбца в зависимости от максимального количества элементов в строке. Чтобы настроить макет сетки, вручную настройте эти значения и определите ширину заголовка для всех вопросов в каждом столбце."

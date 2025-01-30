@@ -539,6 +539,7 @@ export const thStrings = {
     titlePlaceholder: "ชื่อเรื่อง",
     surveyTitlePlaceholder: "ชื่อเรื่องแบบสำรวจ",
     pageTitlePlaceholder: "หน้า {num}",
+    startPageTitlePlaceholder: "หน้าเริ่มต้น",
     descriptionPlaceholder: "คำอธิบาย",
     surveyDescriptionPlaceholder: "คำอธิบาย",
     pageDescriptionPlaceholder: "คำอธิบาย",
@@ -1918,3 +1919,14 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดในการขยายแถว"
 // tabs.surfaceBackground: "Surface Background" => "พื้นหลังพื้นผิว"
 // colors.gray: "Gray" => "เทา"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "ตั้งค่าตําแหน่งของข้อความแสดงข้อผิดพลาดสําหรับคําถามที่ซ้อนกันในส่วนรายละเอียด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจากคุณสมบัติ \"การจัดตําแหน่งข้อความแสดงข้อผิดพลาด\""
+// pe.gridLayoutColumns: "Grid layout columns" => "คอลัมน์เค้าโครงกริด"
+// pe.startPageTitlePlaceholder: "Start Page" => "หน้าเริ่มต้น"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "ความกว้างที่มีประสิทธิภาพ %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "ความกว้างของชื่อคําถาม px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "คุณยังไม่มีคอลัมน์เค้าโครง"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "ระบุจํานวนคอลัมน์ที่แผงนี้ครอบคลุมภายในเค้าโครงกริด"
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "ตารางนี้ให้คุณกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์ภายในแผงควบคุม โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์"
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "ตัวสร้างแบบสํารวจช่วยให้คุณสามารถปรับความกว้างแบบอินไลน์ขององค์ประกอบฟอร์มด้วยตนเองเพื่อควบคุมเค้าโครง หากสิ่งนี้ไม่ก่อให้เกิดผลลัพธ์ที่ต้องการ คุณสามารถเปิดใช้งานเค้าโครงกริด ซึ่งโครงสร้างสร้างองค์ประกอบโดยใช้ระบบตามคอลัมน์ หากต้องการกําหนดค่าคอลัมน์เค้าโครง ให้เลือกหน้าหรือแผง แล้วใช้ตาราง \"การตั้งค่าคําถาม\" → \"คอลัมน์กริด\" หากต้องการปรับจํานวนคอลัมน์ของคําถาม ให้เลือกและตั้งค่าที่ต้องการในช่อง \"เค้าโครง\" → \"ช่วงคอลัมน์\""
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "ระบุจํานวนคอลัมน์ที่คําถามนี้ครอบคลุมภายในเค้าโครงกริด"
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "ตารางนี้ช่วยให้คุณสามารถกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์บนหน้า โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์"

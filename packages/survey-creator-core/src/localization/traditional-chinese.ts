@@ -539,6 +539,7 @@ var traditionalChineseTranslation = {
     titlePlaceholder: "標題",
     surveyTitlePlaceholder: "調查標題",
     pageTitlePlaceholder: "頁數 {num}",
+    startPageTitlePlaceholder: "起始頁",
     descriptionPlaceholder: "描述",
     surveyDescriptionPlaceholder: "描述",
     pageDescriptionPlaceholder: "描述",
@@ -3252,3 +3253,14 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "行擴展錯誤消息對齊"
 // tabs.surfaceBackground: "Surface Background" => "表面背景"
 // colors.gray: "Gray" => "灰色"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "設置嵌套在詳細資訊部分中的問題的錯誤消息的位置。“Inherit” 選項應用“Error message alignment” 屬性中的設置。"
+// pe.gridLayoutColumns: "Grid layout columns" => "網格佈局列"
+// pe.startPageTitlePlaceholder: "Start Page" => "起始頁"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "有效寬度，%"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "問題標題寬度，px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "您還沒有佈局列"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "指定此面板在網格佈局中跨越的列數。"
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允許您設定面板中的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator 允許您手動調整表單元素的內聯寬度以控制佈局。如果這沒有產生所需的結果，您可以啟用網格佈局，該佈局使用基於列的系統構建表單元素。要配置佈局列，請選擇一個頁面或面板，然後使用 “Question Settings” → “Grid columns” 表格。要調整問題跨越的列數，請選擇它並在 「Layout」 → 「Column span」 欄位中設置所需的值。"
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "指定此問題在網格佈局中跨越多少列。"
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允許您設定頁面上的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"

@@ -12,8 +12,8 @@ jest.mock("survey-core", () => ({
   sanitizeEditableContent: jest.fn(),
 }));
 test("Test css", (): any => {
-  let creator = new CreatorTester();
-  const survey: SurveyModel = new SurveyModel({
+  const creator = new CreatorTester();
+  creator.JSON = {
     pages: [
       {
         elements: [
@@ -21,13 +21,12 @@ test("Test css", (): any => {
         ]
       }
     ]
-  });
-  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "description");
-  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
-  expect(stringEditorSurveyTitle.className("")).toEqual("svc-string-editor svc-string-editor--multiline");
+  };
+  const survey = creator.survey;
+  const stringEditorSurveyTitle = new StringEditorViewModelBase(survey.locTitle, creator);
+  expect(stringEditorSurveyTitle.className("")).toEqual("svc-string-editor");
 
-  const locStrQuestion: LocalizableString = new LocalizableString(survey.getQuestionByName("q"), false, "description");
-  var stringEditorQuestion = new StringEditorViewModelBase(locStrQuestion, creator);
+  const stringEditorQuestion = new StringEditorViewModelBase(survey.getQuestionByName("q").locDescription, creator);
 
   expect(stringEditorQuestion.className("")).toEqual("svc-string-editor svc-string-editor--hidden svc-string-editor--multiline");
   expect(stringEditorQuestion.className("desc")).toEqual("svc-string-editor svc-string-editor--multiline");

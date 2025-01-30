@@ -539,6 +539,7 @@ export var nbStrings = {
     titlePlaceholder: "Skriv tittel her",
     surveyTitlePlaceholder: "Skriv skjematittel her",
     pageTitlePlaceholder: "Skriv sidetittel her",
+    startPageTitlePlaceholder: "Startside",
     descriptionPlaceholder: "Skriv beskrivelse",
     surveyDescriptionPlaceholder: "Skriv skjema-beskrivelse",
     pageDescriptionPlaceholder: "Skriv side-beskrivelse",
@@ -2983,3 +2984,14 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Justering av feilmelding for radutvidelse"
 // tabs.surfaceBackground: "Surface Background" => "Overflate bakgrunn"
 // colors.gray: "Gray" => "Grå"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angir plasseringen av feilmeldinger for spørsmål som er nestet i detaljdeler. Alternativet \"Arv\" bruker innstillingen fra egenskapen \"Feilmeldingsjustering\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolonner for rutenettoppsett"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startside"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektiv bredde, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Oppgavetittel bredde, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Du har ikke oppsettkolonner ennå"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Angir hvor mange kolonner dette panelet strekker seg over i rutenettoppsettet."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I denne tabellen kan du konfigurere hver rutenettkolonne i panelet. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Med Survey Creator kan du manuelt justere de innebygde breddene på skjemaelementer for å kontrollere oppsettet. Hvis dette ikke gir ønsket resultat, kan du aktivere rutenettoppsettet, som strukturerer skjemaelementer ved hjelp av et kolonnebasert system. For å konfigurere layoutkolonner, velg en side eller et panel og bruk tabellen \"Spørsmålsinnstillinger\" → \"Rutenettkolonner\". For å justere hvor mange kolonner et spørsmål strekker seg over, velg det og angi ønsket verdi i feltet \"Oppsett\" → \"Kolonnespenn\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Angir hvor mange kolonner dette spørsmålet strekker seg over i rutenettoppsettet."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I denne tabellen kan du konfigurere hver rutenettkolonne på siden. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne."

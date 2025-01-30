@@ -539,6 +539,7 @@ export var czStrings = {
     titlePlaceholder: "Sem zadejte název",
     surveyTitlePlaceholder: "Sem zadejte název průzkumu",
     pageTitlePlaceholder: "Sem zadejte název stránky",
+    startPageTitlePlaceholder: "Úvodní stránka",
     descriptionPlaceholder: "Zadejte popis",
     surveyDescriptionPlaceholder: "Zadejte popis průzkumu",
     pageDescriptionPlaceholder: "Zadejte popis stránky",
@@ -2554,3 +2555,14 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Chybová zpráva Zarovnání rozšíření řádku"
 // tabs.surfaceBackground: "Surface Background" => "Pozadí povrchu"
 // colors.gray: "Gray" => "Šedý"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Nastavuje umístění chybových zpráv pro otázky vnořené do podrobných oddílů. Volba \"Zdědit\" aplikuje nastavení z vlastnosti \"Zarovnání chybové zprávy\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Sloupce rozvržení mřížky"
+// pe.startPageTitlePlaceholder: "Start Page" => "Úvodní stránka"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Efektivní šířka, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Šířka názvu otázky, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Sloupce rozložení ještě nemáte"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Určuje, kolik sloupců se tento panel rozprostírá v rozvržení mřížky."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tato tabulka umožňuje konfigurovat jednotlivé sloupce mřížky v panelu. Automaticky nastaví procentuální šířku pro každý sloupec na základě maximálního počtu prvků v řádku. Chcete-li přizpůsobit rozvržení mřížky, upravte tyto hodnoty ručně a definujte šířku nadpisu pro všechny otázky v každém sloupci."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Aplikace Survey Creator umožňuje ručně upravit šířky vložených prvků formuláře a řídit tak rozvržení. Pokud to nevede k požadovanému výsledku, můžete zapnout rozvržení mřížky, které struktury tvoří elementy pomocí sloupcového systému. Chcete-li konfigurovat sloupce rozvržení, vyberte stránku nebo panel a použijte tabulku \"Nastavení otázek\" → \"Sloupce mřížky\". Chcete-li upravit, kolik sloupců otázka zabírá, vyberte ji a nastavte požadovanou hodnotu v poli \"Rozvržení\" → \"Rozpětí sloupců\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Určuje, kolik sloupců tato otázka zabírá v rozvržení mřížky."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tato tabulka umožňuje konfigurovat jednotlivé sloupce mřížky na stránce. Automaticky nastaví procentuální šířku pro každý sloupec na základě maximálního počtu prvků v řádku. Chcete-li přizpůsobit rozvržení mřížky, upravte tyto hodnoty ručně a definujte šířku nadpisu pro všechny otázky v každém sloupci."

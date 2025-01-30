@@ -539,6 +539,7 @@ export var turkishStrings = {
     titlePlaceholder: "Başlık",
     surveyTitlePlaceholder: "Anket başlığı",
     pageTitlePlaceholder: "Sayfa başlığı",
+    startPageTitlePlaceholder: "Başlangıç Sayfası",
     descriptionPlaceholder: "Bir açıklama giriniz",
     surveyDescriptionPlaceholder: "Anket açıklaması giriniz",
     pageDescriptionPlaceholder: "Sayfa açıklaması giriniz",
@@ -2975,3 +2976,14 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Satır genişletme hata iletisi hizalaması"
 // tabs.surfaceBackground: "Surface Background" => "Yüzey Arka Planı"
 // colors.gray: "Gray" => "Gri"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Ayrıntı bölümlerinde iç içe geçmiş sorular için hata mesajlarının konumunu ayarlar. \"Devral\" seçeneği, \"Hata mesajı hizalaması\" özelliğindeki ayarı uygular."
+// pe.gridLayoutColumns: "Grid layout columns" => "Izgara düzeni sütunları"
+// pe.startPageTitlePlaceholder: "Start Page" => "Başlangıç Sayfası"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Etkili genişlik, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Soru başlığı genişliği, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Henüz düzen sütunlarına sahip değilsiniz"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Bu panelin ızgara mizanpajı içinde kaç sütuna yayılacağını belirtir."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Bu tablo, panel içindeki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Anket Oluşturucu, düzeni kontrol etmek için form öğelerinin satır içi genişliklerini manuel olarak ayarlamanıza olanak tanır. Bu istenen sonucu vermezse, sütun tabanlı bir sistem kullanarak öğeleri oluşturan yapıların ızgara düzenini etkinleştirebilirsiniz. Düzen sütunlarını yapılandırmak için bir sayfa veya panel seçin ve \"Soru Ayarları\" → \"Izgara sütunları\" tablosunu kullanın. Bir sorunun kaç sütuna yayılacağını ayarlamak için soruyu seçin ve \"Düzen\" → \"Sütun aralığı\" alanında istediğiniz değeri ayarlayın."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Bu sorunun ızgara düzeni içinde kaç sütuna yayılacağını belirtir."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Bu tablo, sayfadaki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın."

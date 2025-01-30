@@ -1633,12 +1633,6 @@ export class SurveyCreatorModel extends Base
       this[key] = options[key];
     }
   }
-  private setPropertyPlaceHolder(className: string, propertyName: string, value: string) {
-    const prop: any = Serializer.findProperty(className, propertyName);
-    if (!!prop) {
-      prop.placeholder = value;
-    }
-  }
   private setPropertyVisibility(className: string, visible: boolean, ...properties: string[]) {
     if (!Array.isArray(properties)) return;
     for (var i = 0; i < properties.length; i++) {
@@ -1653,13 +1647,7 @@ export class SurveyCreatorModel extends Base
     }
   }
   private patchMetadata(): void {
-    this.setPropertyPlaceHolder("survey", "title", "pe.surveyTitlePlaceholder");
-    this.setPropertyPlaceHolder("survey", "description", "pe.surveyDescriptionPlaceholder");
     this.setPropertyVisibility("survey", false, "logoPosition");
-    if (this.pageEditMode !== "single") {
-      this.setPropertyPlaceHolder("page", "title", "pe.pageTitlePlaceholder");
-      this.setPropertyPlaceHolder("page", "description", "pe.pageDescriptionPlaceholder");
-    }
   }
 
   isCanModifyProperty(obj: Base, propertyName: string): boolean {
@@ -4084,6 +4072,8 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
     }
     return <any>locStr;
   };
+  model.locTitle.placeholder = "pe.surveyTitlePlaceholder";
+  model.locDescription.placeholder = "pe.surveyDescriptionPlaceholder";
 }
 
 function isContentElement(element: any) {

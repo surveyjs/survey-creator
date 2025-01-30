@@ -539,6 +539,7 @@ var polishStrings = {
     titlePlaceholder: "Tytuł",
     surveyTitlePlaceholder: "Tytuł ankiety",
     pageTitlePlaceholder: "Strona {num}",
+    startPageTitlePlaceholder: "Strona startowa",
     descriptionPlaceholder: "Opis",
     surveyDescriptionPlaceholder: "Opis",
     pageDescriptionPlaceholder: "Opis",
@@ -3247,3 +3248,14 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Wyrównanie komunikatu o błędzie rozwijania wiersza"
 // tabs.surfaceBackground: "Surface Background" => "Tło powierzchni"
 // colors.gray: "Gray" => "Szary"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Ustawia lokalizację komunikatów o błędach dla pytań zagnieżdżonych w sekcjach szczegółowych. Opcja \"Dziedzicz\" stosuje ustawienie z właściwości \"Wyrównanie komunikatu o błędzie\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolumny układu siatki"
+// pe.startPageTitlePlaceholder: "Start Page" => "Strona startowa"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Szerokość efektywna, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Szerokość tytułu pytania, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Nie masz jeszcze kolumn układu"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Określa, ile kolumn w układzie siatki obejmuje ten panel."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki w panelu. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Kreator ankiet umożliwia ręczne dostosowanie szerokości elementów formularza w tekście w celu kontrolowania układu. Jeśli nie przyniesie to pożądanego rezultatu, można włączyć układ siatki, w którym struktury tworzą elementy przy użyciu systemu opartego na kolumnach. Aby skonfigurować kolumny układu, wybierz stronę lub panel i użyj tabeli \"Ustawienia pytań\" → \"Kolumny siatki\". Aby dostosować liczbę kolumn obejmujących pytanie, zaznacz je i ustaw żądaną wartość w polu \"Układ\" → \"Zakres kolumn\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Określa, ile kolumn obejmuje to pytanie w układzie siatki."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki na stronie. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie."

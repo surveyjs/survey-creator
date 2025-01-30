@@ -539,6 +539,7 @@ export var nlStrings = {
     titlePlaceholder: "Voer hier de titel in",
     surveyTitlePlaceholder: "Voer de enquêtetitel hier in",
     pageTitlePlaceholder: "Voer hier de paginatitel in",
+    startPageTitlePlaceholder: "Startpagina",
     descriptionPlaceholder: "Voer een omschrijving in",
     surveyDescriptionPlaceholder: "Voer een onderzoeksbeschrijving in",
     pageDescriptionPlaceholder: "Voer een paginabeschrijving in",
@@ -2958,3 +2959,14 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Uitlijning van foutmeldingen bij rijuitbreiding"
 // tabs.surfaceBackground: "Surface Background" => "Oppervlakte Achtergrond"
 // colors.gray: "Gray" => "Grijs"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Hiermee stelt u de locatie in van foutmeldingen voor vragen die zijn genest in detailsecties. De optie \"Overerven\" past de instelling van de eigenschap \"Uitlijning van foutmeldingen\" toe."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolommen voor rasterlay-out"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startpagina"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effectieve breedte, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Breedte vraagtitel, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Je hebt nog geen lay-outkolommen"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Hiermee geeft u aan hoeveel kolommen dit deelvenster beslaat binnen de rasterlay-out."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Met deze tabel kunt u elke rasterkolom in het deelvenster configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Met Survey Creator kunt u de inlinebreedtes van formulierelementen handmatig aanpassen om de lay-out te beheren. Als dit niet het gewenste resultaat oplevert, kunt u de rasterlay-out inschakelen, waarvan de structuren elementen vormen met behulp van een op kolommen gebaseerd systeem. Om lay-outkolommen te configureren, selecteer je een pagina of paneel en gebruik je de tabel \"Vraaginstellingen\" → \"Rasterkolommen\". Om aan te passen hoeveel kolommen een vraag beslaat, selecteer je deze en stel je de gewenste waarde in in het veld \"Lay-out\" → \"Kolomspanwijdte\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Met deze tabel kunt u elke rasterkolom op de pagina configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
