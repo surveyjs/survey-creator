@@ -133,7 +133,7 @@ test("StringEditorViewModelBase page title placeholder for started page", () => 
   expect(editor.placeholderValue).toBeUndefined();
   expect(editor.placeholder).toBe("Start Page");
   expect(editor.placeholderValue).toBe("Start Page");
-  survey.firstPageIsStartPage = false;
+  survey.firstPageIsStarted = false;
   expect(editor.placeholder).toBe("Page 1");
 });
 
