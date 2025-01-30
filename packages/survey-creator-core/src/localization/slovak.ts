@@ -109,6 +109,9 @@ export var skStrings = {
     redoTooltip: "Opakovať zmenu",
     expandAllTooltip: "Rozbaliť všetko",
     collapseAllTooltip: "Zbaliť všetko",
+    zoomInTooltip: "Priblížiť",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Oddialiť",
     lockQuestionsTooltip: "Uzamknutie stavu rozbalenia/zbalenia otázok",
     showMoreChoices: "Zobraziť viac",
     showLessChoices: "Zobraziť menej",
@@ -785,6 +788,10 @@ export var skStrings = {
       top: "V hornej časti",
       bottom: "V spodnej časti"
     },
+    gridLayoutEnabled: "Povoliť rozloženie mriežky",
+    gridLayoutColumns: "Stĺpce mriežky",
+    maskSettings: "Nastavenia masky",
+    detailErrorLocation: "Zarovnanie chybového hlásenia o rozšírení riadka",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var skStrings = {
       background: "Pozadie",
       appearance: "Vzhľad",
       accentColors: "Akcentové farby",
+      surfaceBackground: "Pozadie povrchu",
       scaling: "Škálovanie",
       others: "Iné"
     },
@@ -1329,10 +1337,6 @@ export var skStrings = {
     },
     panelbase: {
       questionTitleWidth: "Napríklad: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Príklad: 30 %",
-      questionTitleWidth: "Príklad: 200 pixelov"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var skStrings = {
       orchid: "Orchidea",
       tulip: "Tulipán",
       brown: "Hnedý",
-      green: "Zelený"
+      green: "Zelený",
+      gray: "Sivý"
     }
   },
   creatortheme: {
@@ -2919,3 +2924,12 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Uzamknutie stavu rozbalenia/zbalenia otázok"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Zatiaľ nemáte žiadne stránky"
 // pe.addNew@pages: "Add new page" => "Pridať novú stránku"
+// ed.zoomInTooltip: "Zoom In" => "Priblížiť"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Oddialiť"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Povoliť rozloženie mriežky"
+// pe.gridLayoutColumns: "Grid columns" => "Stĺpce mriežky"
+// pe.maskSettings: "Mask settings" => "Nastavenia masky"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Zarovnanie chybového hlásenia o rozšírení riadka"
+// tabs.surfaceBackground: "Surface Background" => "Pozadie povrchu"
+// colors.gray: "Gray" => "Sivý"

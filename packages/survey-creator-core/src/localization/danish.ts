@@ -109,6 +109,9 @@ export var danishStrings = {
     redoTooltip: "Fortryd ændringen",
     expandAllTooltip: "Udvid alle",
     collapseAllTooltip: "Skjul alle",
+    zoomInTooltip: "Zoom ind",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Zoom ud",
     lockQuestionsTooltip: "Lås udvid/skjul tilstand for spørgsmål",
     showMoreChoices: "Vis mere",
     showLessChoices: "Vis mindre",
@@ -785,6 +788,10 @@ export var danishStrings = {
       top: "På toppen",
       bottom: "I bunden"
     },
+    gridLayoutEnabled: "Aktivere gitterlayout",
+    gridLayoutColumns: "Gitterkolonner",
+    maskSettings: "Indstillinger for maske",
+    detailErrorLocation: "Justering af fejlmeddelelse om rækkeudvidelse",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var danishStrings = {
       background: "Baggrund",
       appearance: "Udseende",
       accentColors: "Accentfarver",
+      surfaceBackground: "Overflade baggrund",
       scaling: "Skalering",
       others: "Andre"
     },
@@ -1329,10 +1337,6 @@ export var danishStrings = {
     },
     panelbase: {
       questionTitleWidth: "Eks.: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Eks.: 30%",
-      questionTitleWidth: "Eks.: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var danishStrings = {
       orchid: "Orkide",
       tulip: "Tulipan",
       brown: "Brun",
-      green: "Grøn"
+      green: "Grøn",
+      gray: "Grå"
     }
   },
   creatortheme: {
@@ -3150,3 +3155,12 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lås udvid/skjul tilstand for spørgsmål"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har ingen sider endnu"
 // pe.addNew@pages: "Add new page" => "Tilføj ny side"
+// ed.zoomInTooltip: "Zoom In" => "Zoom ind"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Zoom ud"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Aktivere gitterlayout"
+// pe.gridLayoutColumns: "Grid columns" => "Gitterkolonner"
+// pe.maskSettings: "Mask settings" => "Indstillinger for maske"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Justering af fejlmeddelelse om rækkeudvidelse"
+// tabs.surfaceBackground: "Surface Background" => "Overflade baggrund"
+// colors.gray: "Gray" => "Grå"

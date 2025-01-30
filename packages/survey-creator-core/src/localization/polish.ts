@@ -109,6 +109,9 @@ var polishStrings = {
     redoTooltip: "Ponowne wprowadzanie zmian",
     expandAllTooltip: "Rozwiń wszystko",
     collapseAllTooltip: "Zwiń wszystko",
+    zoomInTooltip: "Powiększenie",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Pomniejszanie",
     lockQuestionsTooltip: "Zablokuj stan rozwijania/zwijania dla pytań",
     showMoreChoices: "Pokaż więcej",
     showLessChoices: "Pokaż mniej",
@@ -785,6 +788,10 @@ var polishStrings = {
       top: "Na górze",
       bottom: "Na dole"
     },
+    gridLayoutEnabled: "Włączanie układu siatki",
+    gridLayoutColumns: "Kolumny siatki",
+    maskSettings: "Ustawienia maski",
+    detailErrorLocation: "Wyrównanie komunikatu o błędzie rozwijania wiersza",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ var polishStrings = {
       background: "Tło",
       appearance: "Wygląd",
       accentColors: "Akcenty kolorystyczne",
+      surfaceBackground: "Tło powierzchni",
       scaling: "Skalowanie",
       others: "Inni"
     },
@@ -1329,10 +1337,6 @@ var polishStrings = {
     },
     panelbase: {
       questionTitleWidth: "Przykład: 200 pikseli"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Przykład: 30%",
-      questionTitleWidth: "Przykład: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ var polishStrings = {
       orchid: "Orchidea",
       tulip: "Tulipan",
       brown: "Brązowy",
-      green: "Zielony"
+      green: "Zielony",
+      gray: "Szary"
     }
   },
   creatortheme: {
@@ -3233,3 +3238,12 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Zablokuj stan rozwijania/zwijania dla pytań"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Nie masz jeszcze żadnych stron"
 // pe.addNew@pages: "Add new page" => "Dodaj nową stronę"
+// ed.zoomInTooltip: "Zoom In" => "Powiększenie"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Pomniejszanie"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Włączanie układu siatki"
+// pe.gridLayoutColumns: "Grid columns" => "Kolumny siatki"
+// pe.maskSettings: "Mask settings" => "Ustawienia maski"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Wyrównanie komunikatu o błędzie rozwijania wiersza"
+// tabs.surfaceBackground: "Surface Background" => "Tło powierzchni"
+// colors.gray: "Gray" => "Szary"

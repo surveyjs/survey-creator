@@ -109,6 +109,9 @@ export const roStrings = {
     redoTooltip: "Refă modificarea",
     expandAllTooltip: "Extindeți tot",
     collapseAllTooltip: "Restrângeți tot",
+    zoomInTooltip: "Măriți",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Micșorare",
     lockQuestionsTooltip: "Blocați starea de extindere/restrângere pentru întrebări",
     showMoreChoices: "Afișează mai multe",
     showLessChoices: "Afișează mai puține",
@@ -785,6 +788,10 @@ export const roStrings = {
       top: "Deasupra",
       bottom: "Dedesubt"
     },
+    gridLayoutEnabled: "Activați aspectul grilei",
+    gridLayoutColumns: "Coloane grilă",
+    maskSettings: "Setările măștii",
+    detailErrorLocation: "Alinierea mesajelor de eroare de extindere a rândurilor",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export const roStrings = {
       background: "Fundal",
       appearance: "Aspect",
       accentColors: "Culori de accent",
+      surfaceBackground: "Fundal de suprafață",
       scaling: "Scalare",
       others: "Altele"
     },
@@ -1329,10 +1337,6 @@ export const roStrings = {
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Ex.: 30%",
-      questionTitleWidth: "Ex.: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export const roStrings = {
       orchid: "Orhidee",
       tulip: "Lalea",
       brown: "Maro",
-      green: "Verde"
+      green: "Verde",
+      gray: "Gri"
     }
   },
   creatortheme: {
@@ -1904,3 +1909,12 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Blocați starea de extindere/restrângere pentru întrebări"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Nu aveți încă nicio pagină"
 // pe.addNew@pages: "Add new page" => "Adaugă o pagină nouă"
+// ed.zoomInTooltip: "Zoom In" => "Măriți"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Micșorare"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Activați aspectul grilei"
+// pe.gridLayoutColumns: "Grid columns" => "Coloane grilă"
+// pe.maskSettings: "Mask settings" => "Setările măștii"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Alinierea mesajelor de eroare de extindere a rândurilor"
+// tabs.surfaceBackground: "Surface Background" => "Fundal de suprafață"
+// colors.gray: "Gray" => "Gri"

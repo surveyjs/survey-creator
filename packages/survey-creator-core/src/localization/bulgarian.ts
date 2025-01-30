@@ -109,6 +109,9 @@ export var bgStrings = {
     redoTooltip: "Повтаряне на последната промяна",
     expandAllTooltip: "Разширете всички",
     collapseAllTooltip: "Свиване на всички",
+    zoomInTooltip: "Увеличете",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Намаляване на мащаба",
     lockQuestionsTooltip: "Заключване на състояние на разгъване/свиване за въпроси",
     showMoreChoices: "Покажи повече.",
     showLessChoices: "Покажи по-малко.",
@@ -785,6 +788,10 @@ export var bgStrings = {
       top: "Отгоре",
       bottom: "Отдолу"
     },
+    gridLayoutEnabled: "Разрешаване на оформлението на мрежата",
+    gridLayoutColumns: "Колони на мрежата",
+    maskSettings: "Настройки на маската",
+    detailErrorLocation: "Подравняване на съобщението за грешка при разгъване на реда",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var bgStrings = {
       background: "Фон",
       appearance: "Външен вид",
       accentColors: "Акцентни цветове",
+      surfaceBackground: "Повърхностен фон",
       scaling: "Мащабиране",
       others: "Други"
     },
@@ -1329,10 +1337,6 @@ export var bgStrings = {
     },
     panelbase: {
       questionTitleWidth: "Пример: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Пример: 30%",
-      questionTitleWidth: "Пример: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var bgStrings = {
       orchid: "Орхидея",
       tulip: "Лале",
       brown: "Кафяв",
-      green: "Зелен"
+      green: "Зелен",
+      gray: "Сив"
     }
   },
   creatortheme: {
@@ -2526,3 +2531,12 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Заключване на състояние на разгъване/свиване за въпроси"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Все още нямате страници"
 // pe.addNew@pages: "Add new page" => "Добавяне на нова страница"
+// ed.zoomInTooltip: "Zoom In" => "Увеличете"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Намаляване на мащаба"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Разрешаване на оформлението на мрежата"
+// pe.gridLayoutColumns: "Grid columns" => "Колони на мрежата"
+// pe.maskSettings: "Mask settings" => "Настройки на маската"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Подравняване на съобщението за грешка при разгъване на реда"
+// tabs.surfaceBackground: "Surface Background" => "Повърхностен фон"
+// colors.gray: "Gray" => "Сив"

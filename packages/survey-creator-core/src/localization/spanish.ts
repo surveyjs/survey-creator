@@ -109,6 +109,9 @@ var spanishTranslation = {
     redoTooltip: "Rehacer el cambio",
     expandAllTooltip: "Expandir todo",
     collapseAllTooltip: "Contraer todo",
+    zoomInTooltip: "Acercar",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Alejar",
     lockQuestionsTooltip: "Bloquear el estado de expansión/contracción de las preguntas",
     showMoreChoices: "Mostrar más",
     showLessChoices: "Mostrar menos",
@@ -785,6 +788,10 @@ var spanishTranslation = {
       top: "En la parte superior",
       bottom: "En la parte inferior"
     },
+    gridLayoutEnabled: "Habilitar el diseño de cuadrícula",
+    gridLayoutColumns: "Columnas de cuadrícula",
+    maskSettings: "Ajustes de la máscara",
+    detailErrorLocation: "Alineación de mensajes de error de expansión de filas",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ var spanishTranslation = {
       background: "Fondo",
       appearance: "Apariencia",
       accentColors: "Colores de acento",
+      surfaceBackground: "Fondo de superficie",
       scaling: "Escalada",
       others: "Otras"
     },
@@ -1329,10 +1337,6 @@ var spanishTranslation = {
     },
     panelbase: {
       questionTitleWidth: "Ej.: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Ej.: 30%",
-      questionTitleWidth: "Ej.: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ var spanishTranslation = {
       orchid: "Orquídea",
       tulip: "Tulipán",
       brown: "Marrón",
-      green: "Verde"
+      green: "Verde",
+      gray: "Gris"
     }
   },
   creatortheme: {
@@ -2740,3 +2745,12 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Bloquear el estado de expansión/contracción de las preguntas"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Todavía no tienes ninguna página"
 // pe.addNew@pages: "Add new page" => "Agregar nueva página"
+// ed.zoomInTooltip: "Zoom In" => "Acercar"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Alejar"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Habilitar el diseño de cuadrícula"
+// pe.gridLayoutColumns: "Grid columns" => "Columnas de cuadrícula"
+// pe.maskSettings: "Mask settings" => "Ajustes de la máscara"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Alineación de mensajes de error de expansión de filas"
+// tabs.surfaceBackground: "Surface Background" => "Fondo de superficie"
+// colors.gray: "Gray" => "Gris"

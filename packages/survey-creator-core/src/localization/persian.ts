@@ -109,6 +109,9 @@ var persianStrings = {
     redoTooltip: "انجام دادن تغییر",
     expandAllTooltip: "گسترش همه",
     collapseAllTooltip: "جمع کردن همه",
+    zoomInTooltip: "بزرگنمایی",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "کوچک نمایی",
     lockQuestionsTooltip: "قفل کردن وضعیت expand/collapse برای سوالات",
     showMoreChoices: "نمایش بیشتر",
     showLessChoices: "نمایش کمتر",
@@ -785,6 +788,10 @@ var persianStrings = {
       top: "بخش بالا",
       bottom: "بخش پایین"
     },
+    gridLayoutEnabled: "طرح بندی شبکه را فعال کنید",
+    gridLayoutColumns: "ستون های شبکه ای",
+    maskSettings: "تنظیمات ماسک",
+    detailErrorLocation: "تراز پیام خطای گسترش ردیف",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ var persianStrings = {
       background: "پس زمینه",
       appearance: "ظاهر",
       accentColors: "رنگ های تاکیدی",
+      surfaceBackground: "زمینه سطح",
       scaling: "توزین",
       others: "باقی موارد"
     },
@@ -1329,10 +1337,6 @@ var persianStrings = {
     },
     panelbase: {
       questionTitleWidth: "سابق: 200 پیکسل"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "مثال: 30٪",
-      questionTitleWidth: "مثال: 200 پیکسل"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ var persianStrings = {
       orchid: "ارکیده",
       tulip: "لاله",
       brown: "قهوه ای",
-      green: "سبز"
+      green: "سبز",
+      gray: "خاکستری"
     }
   },
   creatortheme: {
@@ -2922,3 +2927,12 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "قفل کردن وضعیت expand/collapse برای سوالات"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "شما هنوز هیچ صفحه ای ندارید"
 // pe.addNew@pages: "Add new page" => "افزودن صفحه جدید"
+// ed.zoomInTooltip: "Zoom In" => "بزرگنمایی"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "کوچک نمایی"
+// pe.gridLayoutEnabled: "Enable grid layout" => "طرح بندی شبکه را فعال کنید"
+// pe.gridLayoutColumns: "Grid columns" => "ستون های شبکه ای"
+// pe.maskSettings: "Mask settings" => "تنظیمات ماسک"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "تراز پیام خطای گسترش ردیف"
+// tabs.surfaceBackground: "Surface Background" => "زمینه سطح"
+// colors.gray: "Gray" => "خاکستری"

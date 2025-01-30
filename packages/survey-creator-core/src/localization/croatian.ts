@@ -109,6 +109,9 @@ export var hrStrings = {
     redoTooltip: "Preusmjeti promjenu",
     expandAllTooltip: "Proširi sve",
     collapseAllTooltip: "Sažmi sve",
+    zoomInTooltip: "Zumiranje",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Smanji",
     lockQuestionsTooltip: "Zaključavanje stanja proširenja/sažimanja za pitanja",
     showMoreChoices: "Pokaži više",
     showLessChoices: "Pokaži manje",
@@ -785,6 +788,10 @@ export var hrStrings = {
       top: "Na vrhu",
       bottom: "Na dnu"
     },
+    gridLayoutEnabled: "Omogućivanje izgleda rešetke",
+    gridLayoutColumns: "Stupci rešetke",
+    maskSettings: "Postavke maske",
+    detailErrorLocation: "Poravnanje poruke o pogrešci proširenja retka",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var hrStrings = {
       background: "Pozadina",
       appearance: "Izgled",
       accentColors: "Naglašavajuće boje",
+      surfaceBackground: "Pozadina površine",
       scaling: "Skaliranje",
       others: "Drugi"
     },
@@ -1329,10 +1337,6 @@ export var hrStrings = {
     },
     panelbase: {
       questionTitleWidth: "Npr.: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Npr.: 30%",
-      questionTitleWidth: "Primjer: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var hrStrings = {
       orchid: "Orhideja",
       tulip: "Lala",
       brown: "Smeđ",
-      green: "Zelen"
+      green: "Zelen",
+      gray: "Siv"
     }
   },
   creatortheme: {
@@ -2960,3 +2965,12 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Zaključavanje stanja proširenja/sažimanja za pitanja"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Još nemate stranice"
 // pe.addNew@pages: "Add new page" => "Dodaj novu stranicu"
+// ed.zoomInTooltip: "Zoom In" => "Zumiranje"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Smanji"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Omogućivanje izgleda rešetke"
+// pe.gridLayoutColumns: "Grid columns" => "Stupci rešetke"
+// pe.maskSettings: "Mask settings" => "Postavke maske"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Poravnanje poruke o pogrešci proširenja retka"
+// tabs.surfaceBackground: "Surface Background" => "Pozadina površine"
+// colors.gray: "Gray" => "Siv"

@@ -109,6 +109,9 @@ var simplifiedChineseTranslation = {
     redoTooltip: "重做更改",
     expandAllTooltip: "全部展开",
     collapseAllTooltip: "全部折叠",
+    zoomInTooltip: "放大",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "缩小",
     lockQuestionsTooltip: "锁定问题的展开/折叠状态",
     showMoreChoices: "显示更多",
     showLessChoices: "显示更少",
@@ -785,6 +788,10 @@ var simplifiedChineseTranslation = {
       top: "在顶部",
       bottom: "在底部"
     },
+    gridLayoutEnabled: "启用网格布局",
+    gridLayoutColumns: "网格列",
+    maskSettings: "蒙版设置",
+    detailErrorLocation: "行扩展错误消息对齐",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ var simplifiedChineseTranslation = {
       background: "背景",
       appearance: "外观",
       accentColors: "强调色",
+      surfaceBackground: "表面背景",
       scaling: "缩放",
       others: "别人"
     },
@@ -1329,10 +1337,6 @@ var simplifiedChineseTranslation = {
     },
     panelbase: {
       questionTitleWidth: "例如：200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "例如：30%",
-      questionTitleWidth: "例如：200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ var simplifiedChineseTranslation = {
       orchid: "兰花",
       tulip: "郁金香",
       brown: "棕色",
-      green: "绿"
+      green: "绿",
+      gray: "灰色"
     }
   },
   creatortheme: {
@@ -3108,3 +3113,12 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "锁定问题的展开/折叠状态"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "您还没有任何页面"
 // pe.addNew@pages: "Add new page" => "添加新页面"
+// ed.zoomInTooltip: "Zoom In" => "放大"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "缩小"
+// pe.gridLayoutEnabled: "Enable grid layout" => "启用网格布局"
+// pe.gridLayoutColumns: "Grid columns" => "网格列"
+// pe.maskSettings: "Mask settings" => "蒙版设置"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "行扩展错误消息对齐"
+// tabs.surfaceBackground: "Surface Background" => "表面背景"
+// colors.gray: "Gray" => "灰色"

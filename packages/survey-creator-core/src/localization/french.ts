@@ -109,6 +109,9 @@ var frenchTranslation = {
     redoTooltip: "Rétablir la modification",
     expandAllTooltip: "Tout afficher",
     collapseAllTooltip: "Réduire tout",
+    zoomInTooltip: "Zoom avant",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Zoom arrière",
     lockQuestionsTooltip: "Verrouiller l’état d’expansion/réduction pour les questions",
     showMoreChoices: "Afficher plus",
     showLessChoices: "Afficher moins",
@@ -785,6 +788,10 @@ var frenchTranslation = {
       top: "Au dessus",
       bottom: "En dessous"
     },
+    gridLayoutEnabled: "Activer la disposition de la grille",
+    gridLayoutColumns: "Colonnes de grille",
+    maskSettings: "Paramètres du masque",
+    detailErrorLocation: "Alignement du message d’erreur d’extension de ligne",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ var frenchTranslation = {
       background: "Arrière-plan",
       appearance: "Apparence",
       accentColors: "Couleurs d’accentuation",
+      surfaceBackground: "Arrière-plan de surface",
       scaling: "Détartrage",
       others: "Autres"
     },
@@ -1329,10 +1337,6 @@ var frenchTranslation = {
     },
     panelbase: {
       questionTitleWidth: "Ex. : 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Ex. : 30 %",
-      questionTitleWidth: "Ex. : 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ var frenchTranslation = {
       orchid: "Orchidée",
       tulip: "Tulipe",
       brown: "Marron",
-      green: "Vert"
+      green: "Vert",
+      gray: "Gris"
     }
   },
   creatortheme: {
@@ -3025,3 +3030,12 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Verrouiller l’état d’expansion/réduction pour les questions"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Vous n’avez pas encore de pages"
 // pe.addNew@pages: "Add new page" => "Ajouter une nouvelle page"
+// ed.zoomInTooltip: "Zoom In" => "Zoom avant"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Zoom arrière"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Activer la disposition de la grille"
+// pe.gridLayoutColumns: "Grid columns" => "Colonnes de grille"
+// pe.maskSettings: "Mask settings" => "Paramètres du masque"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Alignement du message d’erreur d’extension de ligne"
+// tabs.surfaceBackground: "Surface Background" => "Arrière-plan de surface"
+// colors.gray: "Gray" => "Gris"

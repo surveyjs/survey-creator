@@ -109,6 +109,9 @@ export var ruStrings = {
     redoTooltip: "Повторите изменение",
     expandAllTooltip: "Развернуть все",
     collapseAllTooltip: "Свернуть все",
+    zoomInTooltip: "Увеличить",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Уменьшение масштаба",
     lockQuestionsTooltip: "Блокировка состояния развертывания/свертывания для вопросов",
     showMoreChoices: "Развернуть",
     showLessChoices: "Показать меньше",
@@ -785,6 +788,10 @@ export var ruStrings = {
       top: "Сверху",
       bottom: "Снизу"
     },
+    gridLayoutEnabled: "Включение макета сетки",
+    gridLayoutColumns: "Столбцы сетки",
+    maskSettings: "Настройки маски",
+    detailErrorLocation: "Выравнивание сообщения об ошибке расширения строк",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var ruStrings = {
       background: "Фон",
       appearance: "Внешний вид",
       accentColors: "Акцентные цвета",
+      surfaceBackground: "Фон поверхности",
       scaling: "Масштабирование",
       others: "Другие"
     },
@@ -1329,10 +1337,6 @@ export var ruStrings = {
     },
     panelbase: {
       questionTitleWidth: "Пример: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Пример: 30%",
-      questionTitleWidth: "Пример: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var ruStrings = {
       orchid: "Орхидея",
       tulip: "Тюльпан",
       brown: "Коричневый",
-      green: "Зеленый"
+      green: "Зеленый",
+      gray: "Серый"
     }
   },
   creatortheme: {
@@ -3026,3 +3031,12 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Блокировка состояния развертывания/свертывания для вопросов"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "У вас еще нет страниц"
 // pe.addNew@pages: "Add new page" => "Добавить новую страницу"
+// ed.zoomInTooltip: "Zoom In" => "Увеличить"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Уменьшение масштаба"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Включение макета сетки"
+// pe.gridLayoutColumns: "Grid columns" => "Столбцы сетки"
+// pe.maskSettings: "Mask settings" => "Настройки маски"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Выравнивание сообщения об ошибке расширения строк"
+// tabs.surfaceBackground: "Surface Background" => "Фон поверхности"
+// colors.gray: "Gray" => "Серый"

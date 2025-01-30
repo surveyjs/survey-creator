@@ -109,6 +109,9 @@ var portugueseTranslation = {
     redoTooltip: "Refazer a alteração",
     expandAllTooltip: "Expandir tudo",
     collapseAllTooltip: "Recolher tudo",
+    zoomInTooltip: "Ampliar",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Diminuir o zoom",
     lockQuestionsTooltip: "Bloquear estado de expansão/recolhimento para perguntas",
     showMoreChoices: "Mostrar mais",
     showLessChoices: "Mostrar menos",
@@ -785,6 +788,10 @@ var portugueseTranslation = {
       top: "No cabeçalho",
       bottom: "No rodapé"
     },
+    gridLayoutEnabled: "Ativar layout de grade",
+    gridLayoutColumns: "Colunas de grade",
+    maskSettings: "Configurações de máscara",
+    detailErrorLocation: "Alinhamento da mensagem de erro de expansão de linha",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ var portugueseTranslation = {
       background: "Fundo",
       appearance: "Aparência",
       accentColors: "Cores de destaque",
+      surfaceBackground: "Fundo da superfície",
       scaling: "Escala",
       others: "Outros"
     },
@@ -1329,10 +1337,6 @@ var portugueseTranslation = {
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Ex.: 30%",
-      questionTitleWidth: "Ex.: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ var portugueseTranslation = {
       orchid: "Orquídea",
       tulip: "Tulipa",
       brown: "Marrom",
-      green: "Verde"
+      green: "Verde",
+      gray: "Cinza"
     }
   },
   creatortheme: {
@@ -2632,3 +2637,12 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Bloquear estado de expansão/recolhimento para perguntas"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Você ainda não tem páginas"
 // pe.addNew@pages: "Add new page" => "Adicionar nova página"
+// ed.zoomInTooltip: "Zoom In" => "Ampliar"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Diminuir o zoom"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Ativar layout de grade"
+// pe.gridLayoutColumns: "Grid columns" => "Colunas de grade"
+// pe.maskSettings: "Mask settings" => "Configurações de máscara"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Alinhamento da mensagem de erro de expansão de linha"
+// tabs.surfaceBackground: "Surface Background" => "Fundo da superfície"
+// colors.gray: "Gray" => "Cinza"

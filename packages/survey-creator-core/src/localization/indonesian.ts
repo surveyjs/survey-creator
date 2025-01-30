@@ -109,6 +109,9 @@ export var indonesianStrings = {
     redoTooltip: "Mengulangi perubahan",
     expandAllTooltip: "Perluas Semua",
     collapseAllTooltip: "Ciutkan Semua",
+    zoomInTooltip: "Perbesar",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Perkecil",
     lockQuestionsTooltip: "Kunci status perluasan/ciutkan untuk pertanyaan",
     showMoreChoices: "Tampilkan lebih banyak",
     showLessChoices: "Tampilkan lebih sedikit",
@@ -785,6 +788,10 @@ export var indonesianStrings = {
       top: "Di atas",
       bottom: "Di bagian bawah"
     },
+    gridLayoutEnabled: "Mengaktifkan tata letak kisi",
+    gridLayoutColumns: "Kolom kisi",
+    maskSettings: "Pengaturan topeng",
+    detailErrorLocation: "Perataan pesan kesalahan perluasan baris",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var indonesianStrings = {
       background: "Latar",
       appearance: "Rupa",
       accentColors: "Warna aksen",
+      surfaceBackground: "Latar Belakang Permukaan",
       scaling: "Scaling",
       others: "Lain"
     },
@@ -1329,10 +1337,6 @@ export var indonesianStrings = {
     },
     panelbase: {
       questionTitleWidth: "Contoh: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Contoh: 30%",
-      questionTitleWidth: "Contoh: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var indonesianStrings = {
       orchid: "Anggrek",
       tulip: "Tulip",
       brown: "Coklat",
-      green: "Hijau"
+      green: "Hijau",
+      gray: "Abu-abu"
     }
   },
   creatortheme: {
@@ -3120,3 +3125,12 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Kunci status perluasan/ciutkan untuk pertanyaan"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Anda belum memiliki halaman apa pun"
 // pe.addNew@pages: "Add new page" => "Tambahkan halaman baru"
+// ed.zoomInTooltip: "Zoom In" => "Perbesar"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Perkecil"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Mengaktifkan tata letak kisi"
+// pe.gridLayoutColumns: "Grid columns" => "Kolom kisi"
+// pe.maskSettings: "Mask settings" => "Pengaturan topeng"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Perataan pesan kesalahan perluasan baris"
+// tabs.surfaceBackground: "Surface Background" => "Latar Belakang Permukaan"
+// colors.gray: "Gray" => "Abu-abu"

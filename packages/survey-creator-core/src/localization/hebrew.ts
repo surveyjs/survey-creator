@@ -109,6 +109,9 @@ export var hebrewStrings = {
     redoTooltip: "בצע מחדש את השינוי",
     expandAllTooltip: "הרחב הכל",
     collapseAllTooltip: "כווץ הכל",
+    zoomInTooltip: "התקרבות",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "הקטנת התצוגה",
     lockQuestionsTooltip: "נעילת מצב הרחבה/כיווץ עבור שאלות",
     showMoreChoices: "הצג עוד",
     showLessChoices: "הצג פחות",
@@ -785,6 +788,10 @@ export var hebrewStrings = {
       top: "מלמעלה",
       bottom: "מלמטה"
     },
+    gridLayoutEnabled: "הפיכת פריסת רשת לזמינה",
+    gridLayoutColumns: "עמודות רשת",
+    maskSettings: "קביעות מסיכה",
+    detailErrorLocation: "יישור הודעת שגיאה של הרחבת שורה",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var hebrewStrings = {
       background: "רקע",
       appearance: "מראה",
       accentColors: "צבעי הדגשה",
+      surfaceBackground: "רקע פני השטח",
       scaling: "שינוי גודל",
       others: "אחרים"
     },
@@ -1329,10 +1337,6 @@ export var hebrewStrings = {
     },
     panelbase: {
       questionTitleWidth: "לדוגמה: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "לדוגמה: 30%",
-      questionTitleWidth: "לדוגמה: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var hebrewStrings = {
       orchid: "אורכידיה",
       tulip: "טוליפ",
       brown: "חום",
-      green: "ירוק"
+      green: "ירוק",
+      gray: "אפור"
     }
   },
   creatortheme: {
@@ -2531,3 +2536,12 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "נעילת מצב הרחבה/כיווץ עבור שאלות"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "עדיין אין לך דפים"
 // pe.addNew@pages: "Add new page" => "הוספת עמוד חדש"
+// ed.zoomInTooltip: "Zoom In" => "התקרבות"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "הקטנת התצוגה"
+// pe.gridLayoutEnabled: "Enable grid layout" => "הפיכת פריסת רשת לזמינה"
+// pe.gridLayoutColumns: "Grid columns" => "עמודות רשת"
+// pe.maskSettings: "Mask settings" => "קביעות מסיכה"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "יישור הודעת שגיאה של הרחבת שורה"
+// tabs.surfaceBackground: "Surface Background" => "רקע פני השטח"
+// colors.gray: "Gray" => "אפור"

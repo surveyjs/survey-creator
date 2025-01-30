@@ -109,6 +109,9 @@ export var mnStrings = {
     redoTooltip: "Сүүлин өөрчлөлтийг дахих ",
     expandAllTooltip: "Бүх хүрээгээ тэлнэ",
     collapseAllTooltip: "Бүх нуралт",
+    zoomInTooltip: "Томруулах",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Томруулах",
     lockQuestionsTooltip: "Асуултын үед lock/expand/collapse state",
     showMoreChoices: "Дэлгэрэнгүй харуулах",
     showLessChoices: "Бага мэдээлэл харуулах",
@@ -785,6 +788,10 @@ export var mnStrings = {
       top: "Дээр",
       bottom: "Доор"
     },
+    gridLayoutEnabled: "Grid layout-ийг идэвхжүүлэх",
+    gridLayoutColumns: "Хүснэгтийн баганууд",
+    maskSettings: "Маскийн тохиргоо",
+    detailErrorLocation: "Мөр өргөтгөлийн алдаа мессежийн тохируулга",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var mnStrings = {
       background: "Ар талын",
       appearance: "Харагдах байдал",
       accentColors: "Акцентын өнгө",
+      surfaceBackground: "Гадаргуугийн фон",
       scaling: "Масштаблах",
       others: "Бусад"
     },
@@ -1329,10 +1337,6 @@ export var mnStrings = {
     },
     panelbase: {
       questionTitleWidth: "Экс: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Экс. : 30 %",
-      questionTitleWidth: "Экс: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var mnStrings = {
       orchid: "Орхон",
       tulip: "Тюлип",
       brown: "Браун",
-      green: "Ногоон"
+      green: "Ногоон",
+      gray: "Саарал"
     }
   },
   creatortheme: {
@@ -2619,3 +2624,12 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Асуултын үед lock/expand/collapse state"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Танд одоохондоо хуудас байхгүй байна"
 // pe.addNew@pages: "Add new page" => "Шинэ хуудас нэмж"
+// ed.zoomInTooltip: "Zoom In" => "Томруулах"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Томруулах"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Grid layout-ийг идэвхжүүлэх"
+// pe.gridLayoutColumns: "Grid columns" => "Хүснэгтийн баганууд"
+// pe.maskSettings: "Mask settings" => "Маскийн тохиргоо"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Мөр өргөтгөлийн алдаа мессежийн тохируулга"
+// tabs.surfaceBackground: "Surface Background" => "Гадаргуугийн фон"
+// colors.gray: "Gray" => "Саарал"

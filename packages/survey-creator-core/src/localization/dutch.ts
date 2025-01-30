@@ -109,6 +109,9 @@ export var nlStrings = {
     redoTooltip: "Voer de wijziging opnieuw uit",
     expandAllTooltip: "Alles uitvouwen",
     collapseAllTooltip: "Alles inklappen",
+    zoomInTooltip: "Inzoomen",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Uitzoomen",
     lockQuestionsTooltip: "Vergrendel de uitvouw-/samenvouwstatus voor vragen",
     showMoreChoices: "Toon meer",
     showLessChoices: "Toon minder",
@@ -785,6 +788,10 @@ export var nlStrings = {
       top: "Bovenop",
       bottom: "Onder aan"
     },
+    gridLayoutEnabled: "Rasterlay-out inschakelen",
+    gridLayoutColumns: "Raster kolommen",
+    maskSettings: "Masker-instellingen",
+    detailErrorLocation: "Uitlijning van foutmeldingen bij rijuitbreiding",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var nlStrings = {
       background: "Achtergrond",
       appearance: "Uiterlijk",
       accentColors: "Accent kleuren",
+      surfaceBackground: "Oppervlakte Achtergrond",
       scaling: "Schalen",
       others: "Anderen"
     },
@@ -1329,10 +1337,6 @@ export var nlStrings = {
     },
     panelbase: {
       questionTitleWidth: "Bijv.: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Excl.: 30%",
-      questionTitleWidth: "Bijv.: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var nlStrings = {
       orchid: "Orchidee",
       tulip: "Tulp",
       brown: "Bruin",
-      green: "Groen"
+      green: "Groen",
+      gray: "Grijs"
     }
   },
   creatortheme: {
@@ -2944,3 +2949,12 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Vergrendel de uitvouw-/samenvouwstatus voor vragen"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Je hebt nog geen pagina's"
 // pe.addNew@pages: "Add new page" => "Nieuwe pagina toevoegen"
+// ed.zoomInTooltip: "Zoom In" => "Inzoomen"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Uitzoomen"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Rasterlay-out inschakelen"
+// pe.gridLayoutColumns: "Grid columns" => "Raster kolommen"
+// pe.maskSettings: "Mask settings" => "Masker-instellingen"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Uitlijning van foutmeldingen bij rijuitbreiding"
+// tabs.surfaceBackground: "Surface Background" => "Oppervlakte Achtergrond"
+// colors.gray: "Gray" => "Grijs"

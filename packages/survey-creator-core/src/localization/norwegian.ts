@@ -109,6 +109,9 @@ export var nbStrings = {
     redoTooltip: "Gjør om siste endring",
     expandAllTooltip: "Utvid alle",
     collapseAllTooltip: "Skjul alle",
+    zoomInTooltip: "Zoom inn",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Zoom ut",
     lockQuestionsTooltip: "Lås utvidelses-/skjuletilstand for spørsmål",
     showMoreChoices: "Vis mer",
     showLessChoices: "Vis mindre",
@@ -785,6 +788,10 @@ export var nbStrings = {
       top: "Topp",
       bottom: "Bunn"
     },
+    gridLayoutEnabled: "Aktivere rutenettoppsett",
+    gridLayoutColumns: "Kolonner i rutenettet",
+    maskSettings: "Innstillinger for maske",
+    detailErrorLocation: "Justering av feilmelding for radutvidelse",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var nbStrings = {
       background: "Bakgrunn",
       appearance: "Utseende",
       accentColors: "Aksentfarger",
+      surfaceBackground: "Overflate bakgrunn",
       scaling: "Skalering",
       others: "Andre"
     },
@@ -1329,10 +1337,6 @@ export var nbStrings = {
     },
     panelbase: {
       questionTitleWidth: "Eks.: 200 piksler"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Eks.: 30%",
-      questionTitleWidth: "Eks.: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var nbStrings = {
       orchid: "Orkidé",
       tulip: "Tulipan",
       brown: "Brun",
-      green: "Grønn"
+      green: "Grønn",
+      gray: "Grå"
     }
   },
   creatortheme: {
@@ -2969,3 +2974,12 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lås utvidelses-/skjuletilstand for spørsmål"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har ingen sider ennå"
 // pe.addNew@pages: "Add new page" => "Legg til ny side"
+// ed.zoomInTooltip: "Zoom In" => "Zoom inn"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Zoom ut"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Aktivere rutenettoppsett"
+// pe.gridLayoutColumns: "Grid columns" => "Kolonner i rutenettet"
+// pe.maskSettings: "Mask settings" => "Innstillinger for maske"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Justering av feilmelding for radutvidelse"
+// tabs.surfaceBackground: "Surface Background" => "Overflate bakgrunn"
+// colors.gray: "Gray" => "Grå"

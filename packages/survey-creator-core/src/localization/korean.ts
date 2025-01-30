@@ -109,6 +109,9 @@ export var koreanStrings = {
     redoTooltip: "변경 내용 다시 실행",
     expandAllTooltip: "모두 확장",
     collapseAllTooltip: "모두 축소",
+    zoomInTooltip: "확대",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "축소",
     lockQuestionsTooltip: "질문의 확장/축소 상태 잠금",
     showMoreChoices: "더 보기",
     showLessChoices: "간략하게 표시",
@@ -785,6 +788,10 @@ export var koreanStrings = {
       top: "맨 위에",
       bottom: "하단에"
     },
+    gridLayoutEnabled: "그리드 레이아웃 사용Enable grid layout",
+    gridLayoutColumns: "그리드 열",
+    maskSettings: "마스크 설정",
+    detailErrorLocation: "행 확장 오류 메시지 맞춤",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var koreanStrings = {
       background: "배경",
       appearance: "외관",
       accentColors: "강조 색상",
+      surfaceBackground: "표면 배경",
       scaling: "스케일링",
       others: "다른"
     },
@@ -1329,10 +1337,6 @@ export var koreanStrings = {
     },
     panelbase: {
       questionTitleWidth: "예: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "예: 30%",
-      questionTitleWidth: "예: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var koreanStrings = {
       orchid: "난초",
       tulip: "튤립",
       brown: "갈색",
-      green: "녹색"
+      green: "녹색",
+      gray: "회색"
     }
   },
   creatortheme: {
@@ -3170,3 +3175,12 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "질문의 확장/축소 상태 잠금"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "아직 페이지가 없습니다."
 // pe.addNew@pages: "Add new page" => "새 페이지 추가"
+// ed.zoomInTooltip: "Zoom In" => "확대"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "축소"
+// pe.gridLayoutEnabled: "Enable grid layout" => "그리드 레이아웃 사용Enable grid layout"
+// pe.gridLayoutColumns: "Grid columns" => "그리드 열"
+// pe.maskSettings: "Mask settings" => "마스크 설정"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "행 확장 오류 메시지 맞춤"
+// tabs.surfaceBackground: "Surface Background" => "표면 배경"
+// colors.gray: "Gray" => "회색"

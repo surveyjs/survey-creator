@@ -109,6 +109,9 @@ export const thStrings = {
     redoTooltip: "ทำซ้ำการเปลี่ยนแปลง",
     expandAllTooltip: "ขยายทั้งหมด",
     collapseAllTooltip: "ยุบทั้งหมด",
+    zoomInTooltip: "ซูมเข้า",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "ซูมออก",
     lockQuestionsTooltip: "ล็อคสถานะขยาย/ยุบสําหรับคําถาม",
     showMoreChoices: "แสดงเพิ่มเติม",
     showLessChoices: "แสดงน้อยลง",
@@ -785,6 +788,10 @@ export const thStrings = {
       top: "ด้านบน",
       bottom: "ด้านล่าง"
     },
+    gridLayoutEnabled: "เปิดใช้งานเค้าโครงกริด",
+    gridLayoutColumns: "คอลัมน์กริด",
+    maskSettings: "การตั้งค่าหน้ากาก",
+    detailErrorLocation: "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดในการขยายแถว",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export const thStrings = {
       background: "พื้นหลัง",
       appearance: "การปรากฏ",
       accentColors: "สีเน้นเสียง",
+      surfaceBackground: "พื้นหลังพื้นผิว",
       scaling: "มาตรา ส่วน",
       others: "อื่นๆ"
     },
@@ -1329,10 +1337,6 @@ export const thStrings = {
     },
     panelbase: {
       questionTitleWidth: "ตัวอย่าง: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "ตัวอย่าง: 30%",
-      questionTitleWidth: "ตัวอย่าง: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export const thStrings = {
       orchid: "กล้วยไม้",
       tulip: "ทิวลิป",
       brown: "น้ำตาล",
-      green: "เขียว"
+      green: "เขียว",
+      gray: "เทา"
     }
   },
   creatortheme: {
@@ -1904,3 +1909,12 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "ล็อคสถานะขยาย/ยุบสําหรับคําถาม"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "คุณยังไม่มีหน้าใด ๆ"
 // pe.addNew@pages: "Add new page" => "เพิ่มหน้าใหม่"
+// ed.zoomInTooltip: "Zoom In" => "ซูมเข้า"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "ซูมออก"
+// pe.gridLayoutEnabled: "Enable grid layout" => "เปิดใช้งานเค้าโครงกริด"
+// pe.gridLayoutColumns: "Grid columns" => "คอลัมน์กริด"
+// pe.maskSettings: "Mask settings" => "การตั้งค่าหน้ากาก"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดในการขยายแถว"
+// tabs.surfaceBackground: "Surface Background" => "พื้นหลังพื้นผิว"
+// colors.gray: "Gray" => "เทา"

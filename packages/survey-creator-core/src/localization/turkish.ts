@@ -109,6 +109,9 @@ export var turkishStrings = {
     redoTooltip: "Son değişikliği ileri al",
     expandAllTooltip: "Tümünü Genişlet",
     collapseAllTooltip: "Tümünü Daralt",
+    zoomInTooltip: "Yakınlaştırma",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Uzaklaştırma",
     lockQuestionsTooltip: "Sorular için genişletme/daraltma durumunu kilitle",
     showMoreChoices: "Daha fazlasını göster",
     showLessChoices: "Daha az göster",
@@ -785,6 +788,10 @@ export var turkishStrings = {
       top: "Üstte",
       bottom: "Altta"
     },
+    gridLayoutEnabled: "Izgara düzenini etkinleştir",
+    gridLayoutColumns: "Izgara sütunları",
+    maskSettings: "Maske ayarları",
+    detailErrorLocation: "Satır genişletme hata iletisi hizalaması",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var turkishStrings = {
       background: "Arka plan",
       appearance: "Görünüş",
       accentColors: "Vurgu renkleri",
+      surfaceBackground: "Yüzey Arka Planı",
       scaling: "Ölçekleme",
       others: "Diğer"
     },
@@ -1329,10 +1337,6 @@ export var turkishStrings = {
     },
     panelbase: {
       questionTitleWidth: "Ör.: 200 piksel"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Ör.: %30",
-      questionTitleWidth: "Ör.: 200 piksel"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var turkishStrings = {
       orchid: "Orkide",
       tulip: "Lale",
       brown: "Kahverengi",
-      green: "Yeşil"
+      green: "Yeşil",
+      gray: "Gri"
     }
   },
   creatortheme: {
@@ -2961,3 +2966,12 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Sorular için genişletme/daraltma durumunu kilitle"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Henüz hiç sayfanız yok"
 // pe.addNew@pages: "Add new page" => "Yeni sayfa ekle"
+// ed.zoomInTooltip: "Zoom In" => "Yakınlaştırma"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Uzaklaştırma"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Izgara düzenini etkinleştir"
+// pe.gridLayoutColumns: "Grid columns" => "Izgara sütunları"
+// pe.maskSettings: "Mask settings" => "Maske ayarları"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Satır genişletme hata iletisi hizalaması"
+// tabs.surfaceBackground: "Surface Background" => "Yüzey Arka Planı"
+// colors.gray: "Gray" => "Gri"

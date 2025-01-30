@@ -109,6 +109,9 @@ var italianTranslation = {
     redoTooltip: "Ripristina l'ultima modifica",
     expandAllTooltip: "Espandi tutto",
     collapseAllTooltip: "Comprimi tutto",
+    zoomInTooltip: "Ingrandisci",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Zoom indietro",
     lockQuestionsTooltip: "Blocca lo stato di espansione/compressione per le domande",
     showMoreChoices: "Mostra di più",
     showLessChoices: "Mostra meno",
@@ -785,6 +788,10 @@ var italianTranslation = {
       top: "In alto",
       bottom: "In basso"
     },
+    gridLayoutEnabled: "Abilita layout griglia",
+    gridLayoutColumns: "Colonne della griglia",
+    maskSettings: "Impostazioni maschera",
+    detailErrorLocation: "Allineamento del messaggio di errore di espansione delle righe",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ var italianTranslation = {
       background: "Sfondo",
       appearance: "Apparenza",
       accentColors: "Colori d'accento",
+      surfaceBackground: "Sfondo della superficie",
       scaling: "Scalata",
       others: "Altri"
     },
@@ -1329,10 +1337,6 @@ var italianTranslation = {
     },
     panelbase: {
       questionTitleWidth: "Es.: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Es.: 30%",
-      questionTitleWidth: "Es.: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ var italianTranslation = {
       orchid: "Orchidea",
       tulip: "Tulipano",
       brown: "Marrone",
-      green: "Verde"
+      green: "Verde",
+      gray: "Grigio"
     }
   },
   creatortheme: {
@@ -2724,3 +2729,12 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Blocca lo stato di espansione/compressione per le domande"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Non hai ancora nessuna pagina"
 // pe.addNew@pages: "Add new page" => "Aggiungi nuova pagina"
+// ed.zoomInTooltip: "Zoom In" => "Ingrandisci"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Zoom indietro"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Abilita layout griglia"
+// pe.gridLayoutColumns: "Grid columns" => "Colonne della griglia"
+// pe.maskSettings: "Mask settings" => "Impostazioni maschera"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Allineamento del messaggio di errore di espansione delle righe"
+// tabs.surfaceBackground: "Surface Background" => "Sfondo della superficie"
+// colors.gray: "Gray" => "Grigio"

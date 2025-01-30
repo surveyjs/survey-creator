@@ -790,6 +790,10 @@ export var enStrings = {
       top: "On the top",
       bottom: "In the bottom"
     },
+    gridLayoutEnabled: "Enable grid layout",
+    gridLayoutColumns: "Grid columns",
+    maskSettings: "Mask settings",
+    detailErrorLocation: "Row expansion error message alignment",
     // Creator tabs
     tabs: {
       panel: {
@@ -1337,11 +1341,7 @@ export var enStrings = {
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Ex.: 30%",
-      questionTitleWidth: "Ex.: 200px",
-    },
+    }
   },
   pehelp: {
     panel: {
@@ -1709,7 +1709,7 @@ export var enStrings = {
     rateColorMode: "Smileys color scheme",
     copyDisplayValue: "Copy display value", // Auto-generated string
     effectiveColSpan: "Column span",
-    progressBarInheritWidthFrom: "Progress bar area width",
+    progressBarInheritWidthFrom: "Progress bar area width"
   },
   theme: {
     advancedMode: "Advanced mode",

@@ -109,6 +109,9 @@ var germanTranslation = {
     redoTooltip: "Letzte Änderung wiederherstellen",
     expandAllTooltip: "Alle aufklappen",
     collapseAllTooltip: "Alle einklappen",
+    zoomInTooltip: "Vergrößern",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Verkleinern",
     lockQuestionsTooltip: "Sperren des Erweiterungs-/Einklappenzustands für Fragen",
     showMoreChoices: "Zeige mehr",
     showLessChoices: "Zeige weniger",
@@ -785,6 +788,10 @@ var germanTranslation = {
       top: "oben",
       bottom: "unten"
     },
+    gridLayoutEnabled: "Aktivieren des Rasterlayouts",
+    gridLayoutColumns: "Spalten des Rasters",
+    maskSettings: "Masken-Einstellungen",
+    detailErrorLocation: "Ausrichtung der Fehlermeldung bei der Zeilenerweiterung",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ var germanTranslation = {
       background: "Hintergrund",
       appearance: "Erscheinungsbild",
       accentColors: "Akzentfarben",
+      surfaceBackground: "Oberflächen-Hintergrund",
       scaling: "Skalierung",
       others: "Weiteres"
     },
@@ -1329,10 +1337,6 @@ var germanTranslation = {
     },
     panelbase: {
       questionTitleWidth: "Beispiel: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Bsp.: 30%",
-      questionTitleWidth: "Beispiel: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ var germanTranslation = {
       orchid: "Orchidee",
       tulip: "Tulpe",
       brown: "Braun",
-      green: "Grün"
+      green: "Grün",
+      gray: "Grau"
     }
   },
   creatortheme: {
@@ -2675,3 +2680,12 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Sperren des Erweiterungs-/Einklappenzustands für Fragen"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Sie haben noch keine Seiten"
 // pe.addNew@pages: "Add new page" => "Neue Seite hinzufügen"
+// ed.zoomInTooltip: "Zoom In" => "Vergrößern"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Verkleinern"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Aktivieren des Rasterlayouts"
+// pe.gridLayoutColumns: "Grid columns" => "Spalten des Rasters"
+// pe.maskSettings: "Mask settings" => "Masken-Einstellungen"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Ausrichtung der Fehlermeldung bei der Zeilenerweiterung"
+// tabs.surfaceBackground: "Surface Background" => "Oberflächen-Hintergrund"
+// colors.gray: "Gray" => "Grau"

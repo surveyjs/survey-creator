@@ -109,6 +109,9 @@ export var huStrings = {
     redoTooltip: "Ismételje meg a módosítást",
     expandAllTooltip: "Összes kibontása",
     collapseAllTooltip: "Az összes összecsukása",
+    zoomInTooltip: "Nagyítás",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Kicsinyítés",
     lockQuestionsTooltip: "Kibontási/összecsukási állapot zárolása kérdések esetén",
     showMoreChoices: "Bővebben",
     showLessChoices: "Rövidebben",
@@ -785,6 +788,10 @@ export var huStrings = {
       top: "A tetején",
       bottom: "Alul"
     },
+    gridLayoutEnabled: "Rácsos elrendezés engedélyezése",
+    gridLayoutColumns: "Rácsoszlopok",
+    maskSettings: "Maszk beállításai",
+    detailErrorLocation: "Sorbővítési hibaüzenet igazítása",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var huStrings = {
       background: "Háttér",
       appearance: "Megjelenés",
       accentColors: "Kiemelő színek",
+      surfaceBackground: "Felület háttér",
       scaling: "Rétegképződés",
       others: "Mások"
     },
@@ -1329,10 +1337,6 @@ export var huStrings = {
     },
     panelbase: {
       questionTitleWidth: "Pl.: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Pl.: 30%",
-      questionTitleWidth: "Pl.: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var huStrings = {
       orchid: "Orchidea",
       tulip: "Tulipán",
       brown: "Barna",
-      green: "Zöld"
+      green: "Zöld",
+      gray: "Szürke"
     }
   },
   creatortheme: {
@@ -3117,3 +3122,12 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Kibontási/összecsukási állapot zárolása kérdések esetén"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Még nincsenek oldalai"
 // pe.addNew@pages: "Add new page" => "Új oldal hozzáadása"
+// ed.zoomInTooltip: "Zoom In" => "Nagyítás"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Kicsinyítés"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Rácsos elrendezés engedélyezése"
+// pe.gridLayoutColumns: "Grid columns" => "Rácsoszlopok"
+// pe.maskSettings: "Mask settings" => "Maszk beállításai"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Sorbővítési hibaüzenet igazítása"
+// tabs.surfaceBackground: "Surface Background" => "Felület háttér"
+// colors.gray: "Gray" => "Szürke"

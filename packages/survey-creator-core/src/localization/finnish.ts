@@ -109,6 +109,9 @@ export var fiStrings = {
     redoTooltip: "Tee muutos uudelleen",
     expandAllTooltip: "Laajenna kaikki",
     collapseAllTooltip: "Kutista kaikki",
+    zoomInTooltip: "Lähennä",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Loitonna",
     lockQuestionsTooltip: "Lukitse laajenna/kutista tila kysymyksiä varten",
     showMoreChoices: "Näytä lisää",
     showLessChoices: "Näytä vähemmän",
@@ -785,6 +788,10 @@ export var fiStrings = {
       top: "Päällä",
       bottom: "Alla"
     },
+    gridLayoutEnabled: "Ota ruudukkoasettelu käyttöön",
+    gridLayoutColumns: "Ruudukon sarakkeet",
+    maskSettings: "Maskin asetukset",
+    detailErrorLocation: "Rivin laajennuksen virhesanoman tasaus",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var fiStrings = {
       background: "Tausta",
       appearance: "Ulkonäkö",
       accentColors: "Korostusvärit",
+      surfaceBackground: "Surfacen tausta",
       scaling: "Skaalaus",
       others: "Muut"
     },
@@ -1329,10 +1337,6 @@ export var fiStrings = {
     },
     panelbase: {
       questionTitleWidth: "Esimerkki: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Esimerkki: 30 %",
-      questionTitleWidth: "Esimerkki: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var fiStrings = {
       orchid: "Orkidea",
       tulip: "Tulppaani",
       brown: "Ruskea",
-      green: "Vihreä"
+      green: "Vihreä",
+      gray: "Harmaa"
     }
   },
   creatortheme: {
@@ -2938,3 +2943,12 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lukitse laajenna/kutista tila kysymyksiä varten"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Sinulla ei ole vielä sivuja"
 // pe.addNew@pages: "Add new page" => "Lisää uusi sivu"
+// ed.zoomInTooltip: "Zoom In" => "Lähennä"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Loitonna"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Ota ruudukkoasettelu käyttöön"
+// pe.gridLayoutColumns: "Grid columns" => "Ruudukon sarakkeet"
+// pe.maskSettings: "Mask settings" => "Maskin asetukset"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Rivin laajennuksen virhesanoman tasaus"
+// tabs.surfaceBackground: "Surface Background" => "Surfacen tausta"
+// colors.gray: "Gray" => "Harmaa"

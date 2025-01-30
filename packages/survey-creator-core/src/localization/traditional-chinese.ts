@@ -109,6 +109,9 @@ var traditionalChineseTranslation = {
     redoTooltip: "重做更改",
     expandAllTooltip: "全部展開",
     collapseAllTooltip: "全部摺疊",
+    zoomInTooltip: "放大",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "縮小",
     lockQuestionsTooltip: "鎖定問題的展開/摺疊狀態",
     showMoreChoices: "顯示更多",
     showLessChoices: "顯示更少",
@@ -785,6 +788,10 @@ var traditionalChineseTranslation = {
       top: "在頂部",
       bottom: "在底部"
     },
+    gridLayoutEnabled: "啟用網格佈局",
+    gridLayoutColumns: "網格列",
+    maskSettings: "蒙版設置",
+    detailErrorLocation: "行擴展錯誤消息對齊",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ var traditionalChineseTranslation = {
       background: "背景",
       appearance: "外觀",
       accentColors: "強調色",
+      surfaceBackground: "表面背景",
       scaling: "縮放",
       others: "別人"
     },
@@ -1329,10 +1337,6 @@ var traditionalChineseTranslation = {
     },
     panelbase: {
       questionTitleWidth: "例如：200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "例如：30%",
-      questionTitleWidth: "例如：200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ var traditionalChineseTranslation = {
       orchid: "蘭花",
       tulip: "鬱金香",
       brown: "棕色",
-      green: "綠"
+      green: "綠",
+      gray: "灰色"
     }
   },
   creatortheme: {
@@ -3238,3 +3243,12 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "鎖定問題的展開/摺疊狀態"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "您還沒有任何頁面"
 // pe.addNew@pages: "Add new page" => "添加新頁面"
+// ed.zoomInTooltip: "Zoom In" => "放大"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "縮小"
+// pe.gridLayoutEnabled: "Enable grid layout" => "啟用網格佈局"
+// pe.gridLayoutColumns: "Grid columns" => "網格列"
+// pe.maskSettings: "Mask settings" => "蒙版設置"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "行擴展錯誤消息對齊"
+// tabs.surfaceBackground: "Surface Background" => "表面背景"
+// colors.gray: "Gray" => "灰色"

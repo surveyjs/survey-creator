@@ -109,6 +109,9 @@ export var jaStrings = {
     redoTooltip: "変更をやり直す",
     expandAllTooltip: "すべて展開",
     collapseAllTooltip: "すべて折りたたむ",
+    zoomInTooltip: "ズームインする",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "ズームアウト",
     lockQuestionsTooltip: "質問の展開/折りたたみ状態のロック",
     showMoreChoices: "さらに表示",
     showLessChoices: "表示を減らす",
@@ -785,6 +788,10 @@ export var jaStrings = {
       top: "上に",
       bottom: "下に"
     },
+    gridLayoutEnabled: "グリッドレイアウトを有効にする",
+    gridLayoutColumns: "グリッド列",
+    maskSettings: "マスク設定",
+    detailErrorLocation: "行拡張エラーメッセージの配置",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var jaStrings = {
       background: "バックグラウンド",
       appearance: "様子",
       accentColors: "アクセントカラー",
+      surfaceBackground: "サーフェスの背景",
       scaling: "スケーリング",
       others: "その他"
     },
@@ -1329,10 +1337,6 @@ export var jaStrings = {
     },
     panelbase: {
       questionTitleWidth: "例:200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "例:30%",
-      questionTitleWidth: "例:200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var jaStrings = {
       orchid: "蘭",
       tulip: "チューリップ",
       brown: "褐色",
-      green: "緑"
+      green: "緑",
+      gray: "灰色"
     }
   },
   creatortheme: {
@@ -2965,3 +2970,12 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "質問の展開/折りたたみ状態のロック"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "まだページがありません"
 // pe.addNew@pages: "Add new page" => "新しいページを追加"
+// ed.zoomInTooltip: "Zoom In" => "ズームインする"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "ズームアウト"
+// pe.gridLayoutEnabled: "Enable grid layout" => "グリッドレイアウトを有効にする"
+// pe.gridLayoutColumns: "Grid columns" => "グリッド列"
+// pe.maskSettings: "Mask settings" => "マスク設定"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "行拡張エラーメッセージの配置"
+// tabs.surfaceBackground: "Surface Background" => "サーフェスの背景"
+// colors.gray: "Gray" => "灰色"

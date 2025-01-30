@@ -109,6 +109,9 @@ export var msStrings = {
     redoTooltip: "Buat semula perubahan",
     expandAllTooltip: "Kembangkan Semua",
     collapseAllTooltip: "Runtuhkan Semua",
+    zoomInTooltip: "Zum Masuk",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Zum Keluar",
     lockQuestionsTooltip: "Kunci keadaan kembangkan/runtuhkan untuk soalan",
     showMoreChoices: "Tunjuk lebih banyak",
     showLessChoices: "Tunjukkan kurang",
@@ -785,6 +788,10 @@ export var msStrings = {
       top: "Di atas",
       bottom: "Di bawah"
     },
+    gridLayoutEnabled: "Dayakan reka letak grid",
+    gridLayoutColumns: "Lajur grid",
+    maskSettings: "Tetapan topeng",
+    detailErrorLocation: "Penjajaran mesej ralat pengembangan baris",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var msStrings = {
       background: "Latar belakang",
       appearance: "Penampilan",
       accentColors: "Warna aksen",
+      surfaceBackground: "Latar Belakang Permukaan",
       scaling: "Penskalaan",
       others: "Lain-lain"
     },
@@ -1329,10 +1337,6 @@ export var msStrings = {
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Cth.: 30%",
-      questionTitleWidth: "Cth.: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var msStrings = {
       orchid: "Orchid",
       tulip: "Tulip",
       brown: "Brown",
-      green: "Hijau"
+      green: "Hijau",
+      gray: "Kelabu"
     }
   },
   creatortheme: {
@@ -2919,3 +2924,12 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Kunci keadaan kembangkan/runtuhkan untuk soalan"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Anda belum mempunyai sebarang halaman lagi"
 // pe.addNew@pages: "Add new page" => "Tambah halaman baru"
+// ed.zoomInTooltip: "Zoom In" => "Zum Masuk"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Zum Keluar"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Dayakan reka letak grid"
+// pe.gridLayoutColumns: "Grid columns" => "Lajur grid"
+// pe.maskSettings: "Mask settings" => "Tetapan topeng"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Penjajaran mesej ralat pengembangan baris"
+// tabs.surfaceBackground: "Surface Background" => "Latar Belakang Permukaan"
+// colors.gray: "Gray" => "Kelabu"

@@ -109,6 +109,9 @@ export var arStrings = {
     redoTooltip: "Redo the change",
     expandAllTooltip: "توسيع الكل",
     collapseAllTooltip: "طي الكل",
+    zoomInTooltip: "تكبير",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "التصغير",
     lockQuestionsTooltip: "تأمين حالة التوسيع/الطي للأسئلة",
     showMoreChoices: "استعراض المزيد",
     showLessChoices: "عرض أقل",
@@ -785,6 +788,10 @@ export var arStrings = {
       top: "في الأعلى",
       bottom: "في الأسفل"
     },
+    gridLayoutEnabled: "تمكين تخطيط الشبكة",
+    gridLayoutColumns: "أعمدة الشبكة",
+    maskSettings: "إعدادات القناع",
+    detailErrorLocation: "محاذاة رسالة خطأ توسيع الصف",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export var arStrings = {
       background: "خلفية",
       appearance: "مظهر",
       accentColors: "ألوان مميزة",
+      surfaceBackground: "خلفية السطح",
       scaling: "القياس",
       others: "غير ذلك"
     },
@@ -1329,10 +1337,6 @@ export var arStrings = {
     },
     panelbase: {
       questionTitleWidth: "مثال: 200 بكسل"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "مثال: 30٪",
-      questionTitleWidth: "مثال: 200 بكسل"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export var arStrings = {
       orchid: "السحلب",
       tulip: "توليب",
       brown: "أسمر",
-      green: "أخضر"
+      green: "أخضر",
+      gray: "رمادي"
     }
   },
   creatortheme: {
@@ -2880,3 +2885,12 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "تأمين حالة التوسيع/الطي للأسئلة"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "ليس لديك أي صفحات حتى الآن"
 // pe.addNew@pages: "Add new page" => "إضافة صفحة جديدة"
+// ed.zoomInTooltip: "Zoom In" => "تكبير"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "التصغير"
+// pe.gridLayoutEnabled: "Enable grid layout" => "تمكين تخطيط الشبكة"
+// pe.gridLayoutColumns: "Grid columns" => "أعمدة الشبكة"
+// pe.maskSettings: "Mask settings" => "إعدادات القناع"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "محاذاة رسالة خطأ توسيع الصف"
+// tabs.surfaceBackground: "Surface Background" => "خلفية السطح"
+// colors.gray: "Gray" => "رمادي"

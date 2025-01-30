@@ -109,6 +109,9 @@ export let svStrings = {
     redoTooltip: "Gör om ändringen",
     expandAllTooltip: "Expandera alla",
     collapseAllTooltip: "Komprimera alla",
+    zoomInTooltip: "Zooma in",
+    zoom100Tooltip: "100%",
+    zoomOutTooltip: "Zooma ut",
     lockQuestionsTooltip: "Lås expandera/komprimera tillstånd för frågor",
     showMoreChoices: "Visa mer",
     showLessChoices: "Visa mindre",
@@ -785,6 +788,10 @@ export let svStrings = {
       top: "På toppen",
       bottom: "I botten"
     },
+    gridLayoutEnabled: "Aktivera rutnätslayout",
+    gridLayoutColumns: "Rutnät kolumner",
+    maskSettings: "Inställningar för mask",
+    detailErrorLocation: "Felmeddelande om radexpansion",
     // Creator tabs
     tabs: {
       panel: {
@@ -833,6 +840,7 @@ export let svStrings = {
       background: "Bakgrund",
       appearance: "Utseende",
       accentColors: "Accentfärger",
+      surfaceBackground: "Yta Bakgrund",
       scaling: "Skalning",
       others: "Andra"
     },
@@ -1329,10 +1337,6 @@ export let svStrings = {
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Ex.: 30%",
-      questionTitleWidth: "Ex.: 200px"
     }
   },
   pehelp: {
@@ -1755,7 +1759,8 @@ export let svStrings = {
       orchid: "Orkidé",
       tulip: "Tulpan",
       brown: "Brun",
-      green: "Grön"
+      green: "Grön",
+      gray: "Grå"
     }
   },
   creatortheme: {
@@ -3141,3 +3146,12 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lås expandera/komprimera tillstånd för frågor"
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har inga sidor ännu"
 // pe.addNew@pages: "Add new page" => "Lägg till ny sida"
+// ed.zoomInTooltip: "Zoom In" => "Zooma in"
+// ed.zoom100Tooltip: "100%" => "100%"
+// ed.zoomOutTooltip: "Zoom Out" => "Zooma ut"
+// pe.gridLayoutEnabled: "Enable grid layout" => "Aktivera rutnätslayout"
+// pe.gridLayoutColumns: "Grid columns" => "Rutnät kolumner"
+// pe.maskSettings: "Mask settings" => "Inställningar för mask"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Felmeddelande om radexpansion"
+// tabs.surfaceBackground: "Surface Background" => "Yta Bakgrund"
+// colors.gray: "Gray" => "Grå"
