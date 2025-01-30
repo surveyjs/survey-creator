@@ -16,10 +16,11 @@ import { SurveyCreatorModel } from "../../creator-base";
 
 export * from "./header-model";
 
+const importedThemeNames = [];
 Object.keys(LibraryThemes || {}).forEach(libraryThemeName => {
   const libraryTheme: ITheme = LibraryThemes[libraryThemeName];
-  if (PredefinedThemes.indexOf(libraryTheme.themeName) === -1) {
-    PredefinedThemes.push(libraryTheme.themeName);
+  if (importedThemeNames.indexOf(libraryTheme.themeName) === -1) {
+    importedThemeNames.push(libraryTheme.themeName);
   }
   const creatorThemeVariables = {};
   const creatorTheme = {};
@@ -28,6 +29,7 @@ Object.keys(LibraryThemes || {}).forEach(libraryThemeName => {
   const creatorThemeName = getThemeFullName(libraryTheme);
   Themes[creatorThemeName] = creatorTheme;
 });
+sortDefaultThemes(defaultThemesOrder, importedThemeNames, PredefinedThemes);
 
 export function getThemeFullName(theme: ITheme) {
   const themeName = theme.themeName || ThemeModel.DefaultTheme.themeName || "default";
@@ -572,7 +574,7 @@ export class ThemeModel extends Base implements ITheme {
 
 }
 
-const themeNameValues = sortDefaultThemes(defaultThemesOrder, PredefinedThemes).map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
+const themeNameValues = PredefinedThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
 
 Serializer.addClass(
   "theme",

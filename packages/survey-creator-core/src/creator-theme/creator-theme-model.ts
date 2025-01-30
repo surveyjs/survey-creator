@@ -6,13 +6,15 @@ import { CreatorThemes, defaultCreatorThemesOrder, ICreatorTheme, PredefinedCrea
 import * as Themes from "survey-creator-core/themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
 
+const importedThemeNames = [];
 Object.keys(Themes || {}).forEach(themeName => {
   const theme: ICreatorTheme = Themes[themeName];
-  if (PredefinedCreatorThemes.indexOf(theme.themeName) === -1) {
-    PredefinedCreatorThemes.push(theme.themeName);
+  if (importedThemeNames.indexOf(theme.themeName) === -1) {
+    importedThemeNames.push(theme.themeName);
   }
   CreatorThemes[theme.themeName] = theme;
 });
+sortDefaultThemes(defaultCreatorThemesOrder, importedThemeNames, PredefinedCreatorThemes);
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";
@@ -301,7 +303,7 @@ Serializer.addClass(
     {
       type: "dropdown",
       name: "themeName",
-      choices: sortDefaultThemes(defaultCreatorThemesOrder, PredefinedCreatorThemes).map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) })),
+      choices: PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) })),
     },
     {
       type: "string",
