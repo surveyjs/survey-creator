@@ -1,5 +1,5 @@
 import { CreatorStylesManager } from "./styles-manager";
-import { DefaultLightColor } from "../themes/generateColors";
+import { DefaultLightColorCssVariables } from "../themes/default-light-color-css-variables";
 
 export interface ICreatorTheme {
   themeName?: string;
@@ -22,4 +22,12 @@ export const CreatorThemes: { [index: string]: ICreatorTheme } = {
   }
 };
 
-CreatorStylesManager.insertStylesRulesIntoDocument(DefaultLightColor);
+let stylesStr = "";
+if (Object.keys(DefaultLightColorCssVariables).length) {
+  Object.keys(DefaultLightColorCssVariables).forEach((varName) => {
+    try {
+      stylesStr += `${varName}: ${DefaultLightColorCssVariables[varName]};`;
+    } catch (e) { }
+  });
+}
+CreatorStylesManager.insertStylesRulesIntoDocument({ selector: "", styles: stylesStr });

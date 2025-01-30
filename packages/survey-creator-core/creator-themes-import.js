@@ -277,8 +277,8 @@ Object.keys(themeNameMap).forEach(themeName => {
 
     if(paletteName === "light") {
         const cssVariablesJson = JSON.stringify(resultColorVariables, null, 2);
-        const result = `export const DefaultLightColor = ${cssVariablesJson};`;
-        fs.writeFileSync(_dirPath + "generateColors.ts", result);
+        const result = `export const DefaultLightColorCssVariables = ${cssVariablesJson};`;
+        fs.writeFileSync(_dirPath + "default-light-color-css-variables.ts", result);
     }
     strImportTheme = writeThemePalette(currentTheme, paletteName, cssVariables);
     indexFileContent += strImportTheme;

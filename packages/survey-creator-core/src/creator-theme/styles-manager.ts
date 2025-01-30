@@ -71,22 +71,20 @@ export class CreatorStylesManager {
     return <CSSStyleSheet>style.sheet;
   }
 
-  public static insertStylesRulesIntoDocument(rules: { [index: string]: string | any }): any {
+  public static insertStylesRulesIntoDocument(rules: { selector: string, styles: string }): any {
     if (CreatorStylesManager.Enabled) {
       let sheet = CreatorStylesManager.findSheet(CreatorStylesManager.SurveyJSCreatorStylesSheetId);
       if (!sheet) {
         sheet = CreatorStylesManager.createSheet(CreatorStylesManager.SurveyJSCreatorStylesSheetId);
       }
 
-      let styleStr = "";
       if (Object.keys(rules).length) {
-        Object.keys(rules).forEach((varName) => {
+        Object.keys(rules).forEach((selector) => {
           try {
-            styleStr += `${varName}: ${rules[varName]};`;
+            sheet.insertRule(`${selector} { ${rules[selector]} }`, 0);
           } catch (e) { }
         });
       }
-      sheet.insertRule(`survey-creator,.svc-creator { ${styleStr} }`, 0);
     }
   }
 }
