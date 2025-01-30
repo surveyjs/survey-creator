@@ -2157,7 +2157,7 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragClear.add((sender, options) => {
       isDraggedFromToolbox = false;
       this.stopUndoRedoTransaction();
-      if (options.draggedElement && options.draggedElement.isPage || this.collapsePagesOnDrag) {
+      if (options.draggedElement && options.draggedElement.isPage || this.collapseOnDrag) {
         this.designerStateManager?.release();
         this.restoreElementsState();
       }
@@ -4034,13 +4034,14 @@ export class SurveyCreatorModel extends Base
     });
   }
   public getElementAllowOperations(element: SurveyElement): any {
+    const allowDragDefault = !!element && (!element.isPage || element.isPage && this.allowDragPages);
     var options = {
       obj: element,
       element: element,
       allowDelete: true,
       allowCopy: true,
-      allowDragging: true,
-      allowDrag: true,
+      allowDragging: allowDragDefault,
+      allowDrag: allowDragDefault,
       allowChangeType: true,
       allowChangeInputType: true,
       allowChangeRequired: true,
@@ -4267,8 +4268,14 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  public allowDragPages = true;
-  public collapsePagesOnDrag = false;
+  private _allowDragPages = true;
+  public get allowDragPages(): boolean {
+    return this._allowDragPages && this.pageEditMode !== "single" && this.pageEditMode !== "bypage";
+  }
+  public set allowDragPages(newValue: boolean) {
+    this._allowDragPages = newValue;
+  }
+  public collapseOnDrag = false;
 }
 
 export class CreatorBase extends SurveyCreatorModel { }

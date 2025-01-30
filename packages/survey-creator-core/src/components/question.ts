@@ -399,7 +399,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const element = <any>this.surveyElement;
     const isElementSelected = this.creator.selectedElement === element;
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
-    if (this.creator.collapsePagesOnDrag) {
+    if (this.creator.collapseOnDrag) {
       this.creator.designerStateManager?.suspend();
       this.creator.collapseAllPagesOnDragStart(element);
     }
