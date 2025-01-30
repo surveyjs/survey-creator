@@ -308,6 +308,10 @@ export var hrStrings = {
       maxWidth: "Maksimalna širina ploče",
       showNumber: "Numerirajte ovu ploču"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Efektivna širina, %",
+      questionTitleWidth: "Širina naslova pitanja, px"
+    },
     paneldynamic: {
       name: "Naziv ploče",
       title: "Naslov ploče",
@@ -505,6 +509,7 @@ export var hrStrings = {
     listIsEmpty: "Dodavanje nove stavke",
     "listIsEmpty@choices": "Još nema izbora",
     "listIsEmpty@columns": "Još nemate kolumne",
+    "listIsEmpty@gridLayoutColumns": "Još nemate stupce izgleda",
     "listIsEmpty@rows": "Još nemate redaka",
     "listIsEmpty@validators": "Još nemate pravila provjere valjanosti",
     "listIsEmpty@calculatedValues": "Još nemate prilagođene varijable",
@@ -1359,7 +1364,9 @@ export var hrStrings = {
       startWithNewLine: "Poništite odabir za prikaz ploče u jednom retku s prethodnim pitanjem ili pločom. Postavka se ne primjenjuje ako je ploča prvi element u obrascu.",
       state: "Odaberite između: \"Prošireno\" - ploča je prikazana u cijelosti i može se sažeti; \"Sažeto\" - ploča prikazuje samo naslov i opis i može se proširiti; \"Zaključano\" - ploča je prikazana u cijelosti i ne može se sažeti.",
       width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
-      showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar ove ploče."
+      showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar ove ploče.",
+      effectiveColSpan: "Određuje koliko stupaca ova ploča obuhvaća unutar rasporeda rešetke.",
+      gridLayoutColumns: "Ova tablica omogućuje konfiguriranje svakog stupca rešetke unutar ploče. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."
     },
     paneldynamic: {
       name: "ID ploče koji nije vidljiv ispitanicima.",
@@ -1390,6 +1397,7 @@ export var hrStrings = {
     resetValueIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje kada se unos ispitanika vraća na vrijednost na temelju \"Zadani izraz vrijednosti\" ili \"Postavi izraz vrijednosti\" ili na vrijednost \"Zadani odgovor\" (ako je postavljena).",
     setValueIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje određuje kada pokrenuti \"Postavi izraz vrijednosti\" i dinamički dodijelite dobivenu vrijednost kao odgovor.",
     setValueExpression: "Navedite izraz koji definira vrijednost koju treba postaviti kada se ispune uvjeti u pravilu \"Postavi vrijednost ako\". Izraz može uključivati osnovne izračune - '{q1_id} + {q2_id}', Booleove izraze, kao što su '{age} > 60', i funkcije: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd. Vrijednost određena ovim izrazom može se nadjačati ručnim unosom ispitanika.",
+    gridLayoutEnabled: "Survey Creator omogućuje vam ručno podešavanje ugrađenih širina elemenata obrasca za kontrolu izgleda. Ako to ne daje željeni ishod, možete omogućiti raspored rešetke, čije strukture tvore elemente pomoću sustava temeljenog na stupcima. Da biste konfigurirali stupce izgleda, odaberite stranicu ili ploču i upotrijebite tablicu \"Postavke pitanja\" → \"Stupci rešetke\". Da biste prilagodili koliko stupaca obuhvaća pitanje, odaberite ga i postavite željenu vrijednost u polju \"Izgled\" → \"Raspon stupaca\".",
     question: {
       name: "ID pitanja koji nije vidljiv ispitanicima.",
       description: "Upišite podnaslov pitanja.",
@@ -1410,7 +1418,8 @@ export var hrStrings = {
       textUpdateMode: "Odaberite između: \"Na izgubljenom fokusu\" - vrijednost se ažurira kada polje za unos izgubi fokus; \"Tijekom tipkanja\" - vrijednost se ažurira u stvarnom vremenu, jer korisnici tipkaju. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Pri izgubljenom fokusu\" prema zadanim postavkama).",
       url: "Bilo koju web-uslugu možete koristiti kao izvor podataka za pitanja s višestrukim izborom odgovora. Da biste popunili vrijednosti izbora, unesite URL usluge koja pruža podatke.",
       searchMode: "Operacija usporedbe koja se koristi za filtriranje padajućeg popisa.",
-      textWrapEnabled: "Dugi tekstovi u mogućnostima izbora automatski će generirati prijelome redaka kako bi stali unutar padajućeg izbornika. Poništite odabir ako želite da se tekstovi izrežu."
+      textWrapEnabled: "Dugi tekstovi u mogućnostima izbora automatski će generirati prijelome redaka kako bi stali unutar padajućeg izbornika. Poništite odabir ako želite da se tekstovi izrežu.",
+      effectiveColSpan: "Određuje koliko stupaca ovo pitanje obuhvaća unutar rasporeda rešetke."
     },
     signaturepad: {
       signatureWidth: "Postavlja širinu prikazanog područja potpisa i rezultirajuću sliku.",
@@ -1509,7 +1518,8 @@ export var hrStrings = {
       questionTitleWidth: "Postavlja dosljednu širinu za naslove pitanja kada su poravnati lijevo od okvira pitanja. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       questionErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Vrh\" prema zadanim postavkama).",
       questionOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Mogućnost \"Naslijedi\" primjenjuje postavku na razini upitnika (\"Original\" prema zadanim postavkama). Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
-      showNavigationButtons: "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\"."
+      showNavigationButtons: "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\".",
+      gridLayoutColumns: "Ova tablica omogućuje konfiguriranje svakog stupca rešetke na stranici. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."
     },
     timerLocation: "Postavlja lokaciju mjerača vremena na stranici.",
     panelsState: "Odaberite između: \"Zaključano\" - korisnici ne mogu proširiti ili sažeti ploče; \"Sažmite sve\" - sve ploče počinju u urušenom stanju; \"Proširite sve\" - sve ploče počinju u proširenom stanju; \"Prvo prošireno\" - samo je prva ploča u početku proširena.",
@@ -1597,10 +1607,6 @@ export var hrStrings = {
       textAreaWidth: "Širina područja zaglavlja koje sadrži naslov i opis upitnika, mjerena u pikselima.",
       overlapEnabled: "Kada je omogućeno, vrh upitnika prekriva dno zaglavlja.",
       mobileHeight: "Kada je postavljena na 0, visina se automatski izračunava kako bi se prilagodio sadržaju zaglavlja."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Prihvaća vrijednosti %.",
-      questionTitleWidth: "Prihvaća vrijednosti px."
     },
     progressBarInheritWidthFrom: "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja trake napretka kako bi se uklopila u HTML element u koji je upitnik postavljen."
   },
@@ -3000,3 +3006,11 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Poravnanje poruke o pogrešci proširenja retka"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Postavlja mjesto poruka o pogreškama za pitanja ugniježđena u detaljnim odjeljcima. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Stupci rasporeda rešetke"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Efektivna širina, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Širina naslova pitanja, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Još nemate stupce izgleda"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Određuje koliko stupaca ova ploča obuhvaća unutar rasporeda rešetke."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ova tablica omogućuje konfiguriranje svakog stupca rešetke unutar ploče. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator omogućuje vam ručno podešavanje ugrađenih širina elemenata obrasca za kontrolu izgleda. Ako to ne daje željeni ishod, možete omogućiti raspored rešetke, čije strukture tvore elemente pomoću sustava temeljenog na stupcima. Da biste konfigurirali stupce izgleda, odaberite stranicu ili ploču i upotrijebite tablicu \"Postavke pitanja\" → \"Stupci rešetke\". Da biste prilagodili koliko stupaca obuhvaća pitanje, odaberite ga i postavite željenu vrijednost u polju \"Izgled\" → \"Raspon stupaca\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Određuje koliko stupaca ovo pitanje obuhvaća unutar rasporeda rešetke."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ova tablica omogućuje konfiguriranje svakog stupca rešetke na stranici. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."

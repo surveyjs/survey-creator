@@ -308,6 +308,10 @@ export const roStrings = {
       maxWidth: "Lățimea maximă a panoului",
       showNumber: "Numerotați acest panou"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Lățimea efectivă, %",
+      questionTitleWidth: "Lățimea titlului întrebării, px"
+    },
     paneldynamic: {
       name: "Numele panoului",
       title: "Titlul panoului",
@@ -505,6 +509,7 @@ export const roStrings = {
     listIsEmpty: "Nu aveți încă niciun element",
     "listIsEmpty@choices": "Nu aveți încă nicio alegere",
     "listIsEmpty@columns": "Nu aveți încă nicio coloană",
+    "listIsEmpty@gridLayoutColumns": "Nu aveți încă coloane de aspect",
     "listIsEmpty@rows": "Nu aveți încă niciun rând",
     "listIsEmpty@validators": "Nu aveți încă nicio regulă de validare",
     "listIsEmpty@calculatedValues": "Nu aveți încă nicio variabilă personalizată",
@@ -1359,7 +1364,9 @@ export const roStrings = {
       startWithNewLine: "Deselectați pentru a afișa panoul pe un rând cu întrebarea sau panoul anterior. Setarea nu se aplică dacă panoul este primul element din formular.",
       state: "Alegeți dintre: „Extins” - panoul este afișat complet și poate fi colapsat; „Colapsat” - panoul afișează doar titlul și descrierea și poate fi extins; „Blocat” - panoul este afișat complet și nu poate fi colapsat.",
       width: "Setează lățimea panoului în proporție cu alte elemente ale chestionarului de pe același rând. Acceptă valori CSS (px, %, in, pt etc.).",
-      showQuestionNumbers: "Atribuie numere întrebărilor imbricate în acest panou."
+      showQuestionNumbers: "Atribuie numere întrebărilor imbricate în acest panou.",
+      effectiveColSpan: "Specifică câte coloane se întinde acest panou în aspectul grilei.",
+      gridLayoutColumns: "Acest tabel vă permite să configurați fiecare coloană de grilă din panou. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."
     },
     paneldynamic: {
       name: "Un ID al panoului care nu este vizibil pentru respondenți.",
@@ -1390,6 +1397,7 @@ export const roStrings = {
     resetValueIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină când o intrare a respondentului este resetată la valoarea pe baza „Expresiei valorii implicite” sau „Expresiei de setare a valorii” sau la valoarea „Răspuns implicit” (dacă oricare este setată).",
     setValueIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină când să rulați „Expresia de setare a valorii” și să atribuiți dinamic valoarea rezultată ca răspuns.",
     setValueExpression: "Specificați o expresie care definește valoarea ce trebuie setată atunci când condițiile din regula „Setați valoarea dacă” sunt îndeplinite. Expresia poate include calcule de bază - `{q1_id} + {q2_id}`, expresii booleene, cum ar fi `{age} > 60`, și funcții: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. Valoarea determinată de această expresie poate fi suprascrisă de o intrare manuală a respondentului.",
+    gridLayoutEnabled: "Survey Creator vă permite să ajustați manual lățimile în linie ale elementelor de formular pentru a controla aspectul. Dacă acest lucru nu produce rezultatul dorit, puteți activa aspectul grilei, care structuri formează elemente folosind un sistem bazat pe coloane. Pentru a configura coloanele de aspect, selectați o pagină sau un panou și utilizați tabelul \"Setări întrebări\" → \"Coloane grilă\". Pentru a ajusta câte coloane se întinde pe o întrebare, selectați-o și setați valoarea dorită în câmpul \"Aspect\" → \"Spania coloanelor\".",
     question: {
       name: "Un ID al întrebării care nu este vizibil pentru respondenți.",
       description: "Introduceți un subtitlu pentru întrebare.",
@@ -1410,7 +1418,8 @@ export const roStrings = {
       textUpdateMode: "Alegeți dintre: „La pierderea focalizării” - valoarea este actualizată când câmpul de intrare pierde focalizarea; „În timp ce se tastează” - valoarea este actualizată în timp real, pe măsură ce utilizatorii tastează. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („La pierderea focalizării” implicit).",
       url: "Puteți utiliza orice serviciu web ca sursă de date pentru întrebările cu multiple opțiuni de alegere. Pentru a popula valorile opțiunilor, introduceți URL-ul serviciului care furnizează datele.",
       searchMode: "O operație de comparație utilizată pentru a filtra lista derulantă.",
-      textWrapEnabled: "Textele lungi din opțiunile de alegere vor genera automat întreruperi de linie pentru a se încadra în meniul derulant. Deselectați dacă doriți ca textele să fie tăiate."
+      textWrapEnabled: "Textele lungi din opțiunile de alegere vor genera automat întreruperi de linie pentru a se încadra în meniul derulant. Deselectați dacă doriți ca textele să fie tăiate.",
+      effectiveColSpan: "Specifică câte coloane se întinde această întrebare în aspectul grilei."
     },
     signaturepad: {
       signatureWidth: "Setează lățimea zonei de semnătură afișate și a imaginii rezultate.",
@@ -1509,7 +1518,8 @@ export const roStrings = {
       questionTitleWidth: "Setează lățimea titlurilor întrebărilor atunci când sunt aliniate la stânga casetelor de întrebări. Acceptă valori CSS (px, %, in, pt etc.).",
       questionErrorLocation: "Setează locația unui mesaj de eroare în raport cu întrebarea cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar.",
       questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Original” implicit). Efectul acestei setări este vizibil doar în fila Previzualizare.",
-      showNavigationButtons: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”."
+      showNavigationButtons: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”.",
+      gridLayoutColumns: "Acest tabel vă permite să configurați fiecare coloană de grilă din pagină. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."
     },
     timerLocation: "Setează locația unui cronometru pe o pagină.",
     panelsState: "Alegeți dintre: „Blocat” - utilizatorii nu pot extinde sau colapsa panouri; „Colapsați toate” - toate panourile încep într-o stare colapsată; „Extindeți toate” - toate panourile încep într-o stare extinsă; „Primul extins” - doar primul panou este extins inițial. Se aplică dacă „Modul de afișare a panoului” este setat la „Listă” și proprietatea „Șablon titlu panou” este specificată.",
@@ -1597,10 +1607,6 @@ export const roStrings = {
       textAreaWidth: "Lățimea zonei de antet care conține titlul și descrierea chestionarului, măsurată în pixeli.",
       overlapEnabled: "Când este activată, partea de sus a chestionarului se suprapune cu partea de jos a antetului.",
       mobileHeight: "Când este setată la 0, înălțimea este calculată automat pentru a găzdui conținutul antetului."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Acceptă valori în %.",
-      questionTitleWidth: "Acceptă valori în px."
     },
     progressBarInheritWidthFrom: "Opțiunea \"La fel ca containerul\" ajustează automat lățimea zonei barei de progres pentru a se potrivi cu elementul HTML în care este plasat sondajul."
   },
@@ -1946,3 +1952,11 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Alinierea mesajelor de eroare de extindere a rândurilor"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Setează locația mesajelor de eroare pentru întrebările imbricate în secțiunile de detaliu. Opțiunea \"Moștenire\" aplică setarea din proprietatea \"Alinierea mesajului de eroare\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Coloane de aspect grilă"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Lățimea efectivă, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Lățimea titlului întrebării, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Nu aveți încă coloane de aspect"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Specifică câte coloane se întinde acest panou în aspectul grilei."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Acest tabel vă permite să configurați fiecare coloană de grilă din panou. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator vă permite să ajustați manual lățimile în linie ale elementelor de formular pentru a controla aspectul. Dacă acest lucru nu produce rezultatul dorit, puteți activa aspectul grilei, care structuri formează elemente folosind un sistem bazat pe coloane. Pentru a configura coloanele de aspect, selectați o pagină sau un panou și utilizați tabelul \"Setări întrebări\" → \"Coloane grilă\". Pentru a ajusta câte coloane se întinde pe o întrebare, selectați-o și setați valoarea dorită în câmpul \"Aspect\" → \"Spania coloanelor\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Specifică câte coloane se întinde această întrebare în aspectul grilei."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Acest tabel vă permite să configurați fiecare coloană de grilă din pagină. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."

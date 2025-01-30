@@ -308,6 +308,10 @@ export var arStrings = {
       maxWidth: "الحد الأقصى لعرض اللوحة",
       showNumber: "رقم هذه اللوحة"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "العرض الفعال ،٪",
+      questionTitleWidth: "عرض عنوان السؤال، بكسل"
+    },
     paneldynamic: {
       name: "اسم اللوحة",
       title: "عنوان اللوحة",
@@ -505,6 +509,7 @@ export var arStrings = {
     listIsEmpty: "No items have been added yet",
     "listIsEmpty@choices": "لم تتم إضافة أي خيارات حتى الآن",
     "listIsEmpty@columns": "ليس لديك أي أعمدة حتى الآن",
+    "listIsEmpty@gridLayoutColumns": "ليس لديك أعمدة تخطيط حتى الآن",
     "listIsEmpty@rows": "ليس لديك أي صفوف حتى الآن",
     "listIsEmpty@validators": "ليس لديك أي قواعد تحقق حتى الآن",
     "listIsEmpty@calculatedValues": "ليس لديك أي متغيرات مخصصة حتى الآن",
@@ -1359,7 +1364,9 @@ export var arStrings = {
       startWithNewLine: "قم بإلغاء التحديد لعرض اللوحة في سطر واحد مع السؤال أو اللوحة السابقة. لا ينطبق الإعداد إذا كانت اللوحة هي العنصر الأول في النموذج الخاص بك.",
       state: "اختر من بين: \"موسعة\" - يتم عرض اللوحة بالكامل ويمكن طيها ؛ \"مطوي\" - تعرض اللوحة العنوان والوصف فقط ويمكن توسيعها ؛ \"مغلق\" - يتم عرض اللوحة بالكامل ولا يمكن طيها.",
       width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
-      showQuestionNumbers: "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة."
+      showQuestionNumbers: "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة.",
+      effectiveColSpan: "يحدد عدد الأعمدة التي تمتد إليها هذه اللوحة داخل تخطيط الشبكة.",
+      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة داخل اللوحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
     },
     paneldynamic: {
       name: "معرف لوحة غير مرئي للمستجيبين.",
@@ -1390,6 +1397,7 @@ export var arStrings = {
     resetValueIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد متى تتم إعادة تعيين إدخال المستجيب إلى القيمة استنادا إلى \"تعبير القيمة الافتراضية\" أو \"تعيين تعبير القيمة\" أو إلى قيمة \"الإجابة الافتراضية\" (إذا تم تعيين أي منهما).",
     setValueIf: "استخدم رمز العصا السحرية لتعيين قاعدة شرطية تحدد وقت تشغيل \"تعيين تعبير القيمة\" وتعيين القيمة الناتجة ديناميكيا كاستجابة.",
     setValueExpression: "حدد تعبيرا يحدد القيمة المراد تعيينها عند استيفاء الشروط الواردة في قاعدة \"تعيين القيمة إذا\". يمكن أن يتضمن التعبير حسابات أساسية - '{q1_id} + {q2_id}' ، والتعبيرات المنطقية ، مثل '{age} > 60' ، والدوالات: 'iif ()' ، 'today ()' ، 'age ()' ، 'min ()' ، 'max ()' ، 'avg ()' ، إلخ. يمكن تجاوز القيمة التي يحددها هذا التعبير بواسطة الإدخال اليدوي للمستجيب.",
+    gridLayoutEnabled: "يسمح لك Survey Creator بضبط العروض المضمنة لعناصر النموذج يدويا للتحكم في التخطيط. إذا لم يؤد ذلك إلى النتيجة المرجوة، فيمكنك تمكين تخطيط الشبكة، الذي يقوم ببناء عناصر التشكيل باستخدام نظام قائم على الأعمدة. لتكوين أعمدة التخطيط، حدد صفحة أو لوحة واستخدم جدول \"إعدادات الأسئلة\" → \"أعمدة الشبكة\". لضبط عدد الأعمدة التي يمتد إليها السؤال، حدده وقم بتعيين القيمة المطلوبة في حقل \"التخطيط\" → \"امتداد العمود\".",
     question: {
       name: "معرف سؤال غير مرئي للمستجيبين.",
       description: "اكتب عنوانا فرعيا للسؤال.",
@@ -1410,7 +1418,8 @@ export var arStrings = {
       textUpdateMode: "اختر من بين: \"عند فقدان التركيز\" - يتم تحديث القيمة عندما يفقد حقل الإدخال التركيز ؛ \"أثناء الكتابة\" - يتم تحديث القيمة في الوقت الفعلي ، حيث يكتب المستخدمون. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"عند فقدان التركيز\" افتراضيا).",
       url: "يمكنك استخدام أي خدمة ويب كمصدر بيانات لأسئلة الاختيار من متعدد. لتعبئة قيم الاختيار، أدخل عنوان URL للخدمة التي توفر البيانات.",
       searchMode: "عملية مقارنة تستخدم لتصفية القائمة المنسدلة.",
-      textWrapEnabled: "ستنشئ النصوص الطويلة في خيارات الاختيار فواصل أسطر تلقائيا لتلائم القائمة المنسدلة. قم بإلغاء تحديد ما إذا كنت تريد قص النصوص."
+      textWrapEnabled: "ستنشئ النصوص الطويلة في خيارات الاختيار فواصل أسطر تلقائيا لتلائم القائمة المنسدلة. قم بإلغاء تحديد ما إذا كنت تريد قص النصوص.",
+      effectiveColSpan: "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة."
     },
     signaturepad: {
       signatureWidth: "يضبط عرض مساحة التوقيع المعروضة والصورة الناتجة.",
@@ -1509,7 +1518,8 @@ export var arStrings = {
       questionTitleWidth: "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
       questionErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بالسؤال مع إدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أعلى\" افتراضيا).",
       questionOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أصلي\" افتراضيا). يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
-      showNavigationButtons: "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\"."
+      showNavigationButtons: "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\".",
+      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة على الصفحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
     },
     timerLocation: "يضبط موقع المؤقت على الصفحة.",
     panelsState: "اختر من بين: \"مقفل\" - لا يمكن للمستخدمين توسيع اللوحات أو طيها ؛ \"طي الكل\" - تبدأ جميع اللوحات في حالة انهيار ؛ \"توسيع الكل\" - تبدأ جميع اللوحات في حالة موسعة ؛ \"تم توسيعه أولا\" - تم توسيع اللوحة الأولى فقط في البداية.",
@@ -1597,10 +1607,6 @@ export var arStrings = {
       textAreaWidth: "عرض ناحية الرأس التي تحتوي على عنوان الاستطلاع ووصفه، مقاسا بالبكسل.",
       overlapEnabled: "عند التمكين، يقوم الجزء العلوي من الاستطلاع بتراكب الجزء السفلي من الرأس.",
       mobileHeight: "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "يقبل القيم٪",
-      questionTitleWidth: "يقبل القيم px."
     },
     progressBarInheritWidthFrom: "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
   },
@@ -2920,3 +2926,11 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "محاذاة رسالة خطأ توسيع الصف"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "تعيين موقع رسائل الخطأ للأسئلة المتداخلة في أقسام التفاصيل. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "أعمدة تخطيط الشبكة"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "العرض الفعال ،٪"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "عرض عنوان السؤال، بكسل"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "ليس لديك أعمدة تخطيط حتى الآن"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "يحدد عدد الأعمدة التي تمتد إليها هذه اللوحة داخل تخطيط الشبكة."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "يتيح لك هذا الجدول تكوين كل عمود شبكة داخل اللوحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "يسمح لك Survey Creator بضبط العروض المضمنة لعناصر النموذج يدويا للتحكم في التخطيط. إذا لم يؤد ذلك إلى النتيجة المرجوة، فيمكنك تمكين تخطيط الشبكة، الذي يقوم ببناء عناصر التشكيل باستخدام نظام قائم على الأعمدة. لتكوين أعمدة التخطيط، حدد صفحة أو لوحة واستخدم جدول \"إعدادات الأسئلة\" → \"أعمدة الشبكة\". لضبط عدد الأعمدة التي يمتد إليها السؤال، حدده وقم بتعيين القيمة المطلوبة في حقل \"التخطيط\" → \"امتداد العمود\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "يتيح لك هذا الجدول تكوين كل عمود شبكة على الصفحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
