@@ -11,10 +11,12 @@ import { TabDesignerViewModel } from "../../src/components/tabs/designer";
 export * from "../../src/property-grid/matrices";
 
 test("Survey/page title/description placeholders text", () => {
+  Serializer.findProperty("question", "description").placeholder = "Q placeholder";
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text" }] };
   const survey = creator.survey;
   new PageAdorner(creator, survey.pages[0]);
+  const question = survey.getAllQuestions()[0];
   const checkPlaceholder = (locStr: LocalizableString, checkText: string) => {
     const editor: StringEditorViewModelBase = new StringEditorViewModelBase(locStr, null);
     expect(editor.placeholder).toEqual(checkText);
@@ -23,6 +25,8 @@ test("Survey/page title/description placeholders text", () => {
   checkPlaceholder(survey.locDescription, "Description");
   checkPlaceholder(survey.pages[0].locTitle, "Page 1");
   checkPlaceholder(survey.pages[0].locDescription, "Description");
+  checkPlaceholder(question.locDescription, "Q placeholder");
+  Serializer.findProperty("question", "description").placeholder = undefined;
 });
 
 test("Save survey action properties", () => {

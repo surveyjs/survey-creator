@@ -562,12 +562,18 @@ export class StringEditorViewModelBase extends Base {
   }
   @property() placeholderValue: string;
   public get placeholder(): string {
-    if (!!this.placeholderValue) return this.placeholderValue;
-    if(!(<any>this.locString).placeholder) return "";
+    if (this.placeholderValue !== undefined) return this.placeholderValue;
+    const propPlaceholder = this.findProperty()?.placeholder;
+    if(!!propPlaceholder) {
+      (<any>this.locString).placeholder = propPlaceholder;
+    }
+    if(!(<any>this.locString).placeholder) {
+      this.placeholderValue = "";
+      return "";
+    }
     var re = /\{([^}]+)\}/g;
     this.placeholderValue = <any>new ComputedUpdater<string>(() => {
       let locPlaceholder: any = (<any>this.locString).placeholder;
-      if (!locPlaceholder) return "";
       if(typeof locPlaceholder === "function") {
         locPlaceholder = locPlaceholder();
       }
