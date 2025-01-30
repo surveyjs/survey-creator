@@ -1598,10 +1598,6 @@ export var enStrings = {
       overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header.",
       mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content.",
     },
-    panellayoutcolumn: {
-      effectiveWidth: "Accepts values %.",
-      questionTitleWidth: "Accepts values px."
-    },
     progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in."
   },
   // Properties
@@ -1710,6 +1706,68 @@ export var enStrings = {
     copyDisplayValue: "Copy display value", // Auto-generated string
     effectiveColSpan: "Column span",
     progressBarInheritWidthFrom: "Progress bar area width",
+    state: "State", // Auto-generated string
+    colSpan: "Column span", // Auto-generated string
+    indent: "Indent", // Auto-generated string
+    titleLocation: "Title alignment", // Auto-generated string
+    descriptionLocation: "Description alignment", // Auto-generated string
+    hideNumber: "Hide number", // Auto-generated string
+    errorLocation: "Error message alignment", // Auto-generated string
+    isUnique: "Prevent duplicate responses", // Auto-generated string
+    showInMultipleColumns: "Each option in a separate column", // Auto-generated string
+    totalAlignment: "Totals alignment", // Auto-generated string
+    detailErrorLocation: "Detail error alignment", // Auto-generated string
+    inheritWidthFrom: "Content area width", // Auto-generated string
+    textAreaWidth: "Text area width", // Auto-generated string
+    textGlowEnabled: "Enable text glow", // Auto-generated string
+    overlapEnabled: "Overlap", // Auto-generated string
+    backgroundImageOpacity: "Background image opacity", // Auto-generated string
+    logoPositionX: "Logo alignment", // Auto-generated string
+    logoPositionY: "Logo alignment", // Auto-generated string
+    titlePositionX: "Title alignment", // Auto-generated string
+    titlePositionY: "Title alignment", // Auto-generated string
+    descriptionPositionX: "Description alignment", // Auto-generated string
+    descriptionPositionY: "Description alignment", // Auto-generated string
+    effectiveWidth: "Effective width, %",
+    gridLayoutColumns: "Grid columns",
+    showNumber: "Show number", // Auto-generated string
+    sjsVersion: "SurveyJS version", // Auto-generated string
+    showTimerPanel: "Show timer panel", // Auto-generated string
+    gridLayoutEnabled: "Enable grid layout", // Auto-generated string
+    headerView: "Header view", // Auto-generated string
+    choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs",
+    choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts",
+    refuseText: "\"Refuse to Answer\" option text", // Auto-generated string
+    dontKnowText: "\"Don't know\" option text", // Auto-generated string
+    cellComponent: "Cell component", // Auto-generated string
+    maskSettings: "Mask settings", // Auto-generated string
+    itemErrorLocation: "Item error alignment", // Auto-generated string
+    selectToRankSwapAreas: "Swap ranking areas", // Auto-generated string
+    signatureWidth: "Signature area width", // Auto-generated string
+    signatureHeight: "Signature area height", // Auto-generated string
+    signatureAutoScaleEnabled: "Auto-scale the signature area", // Auto-generated string
+    penMinWidth: "Minimum stroke width",
+    penMaxWidth: "Maximum stroke width",
+    showPlaceholder: "Show a placeholder", // Auto-generated string
+    placeholderReadOnly: "Placeholder text in read-only or preview mode", // Auto-generated string
+    templateTitle: "Title pattern", // Auto-generated string
+    templateTabTitle: "Tab title pattern", // Auto-generated string
+    tabTitlePlaceholder: "Tab title placeholder", // Auto-generated string
+    templateDescription: "Description pattern", // Auto-generated string
+    noEntriesText: "Empty panel text", // Auto-generated string
+    newPanelPosition: "New panel location", // Auto-generated string
+    showRangeInProgress: "Show the progress bar", // Auto-generated string
+    progressBarLocation: "Progress bar alignment", // Auto-generated string
+    templateTitleLocation: "Question title alignment", // Auto-generated string
+    templateErrorLocation: "Error message alignment", // Auto-generated string
+    templateVisibleIf: "Make an individual panel visible if", // Auto-generated string
+    saveMaskedValue: "Save masked value in survey results", // Auto-generated string
+    pattern: "Value pattern", // Auto-generated string
+    allowNegativeValues: "Allow negative values", // Auto-generated string
+    decimalSeparator: "Decimal separator", // Auto-generated string
+    thousandsSeparator: "Thousands separator", // Auto-generated string
+    prefix: "Prefix", // Auto-generated string
+    suffix: "Suffix" // Auto-generated string
   },
   theme: {
     advancedMode: "Advanced mode",
