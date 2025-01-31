@@ -2180,7 +2180,10 @@ export class SurveyCreatorModel extends Base
   private restoreState(element: SurveyElement) {
     const state = this.getElementExpandCollapseState(element as any, "drag-end", undefined);
     if (state !== undefined) {
-      SurveyElementAdornerBase.GetAdorner(element).collapsed = state;
+      const adorner = SurveyElementAdornerBase.GetAdorner(element);
+      if (!!adorner) {
+        adorner.collapsed = state;
+      }
     }
     SurveyElementAdornerBase.RestoreStateFor(element);
   }
