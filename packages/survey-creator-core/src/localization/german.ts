@@ -1695,7 +1695,7 @@ var germanTranslation = {
     templateElements: "VorlagenElemente",
     operator: "Operator",
     isVariable: "istVariable",
-    runExpression: "runExpression",
+    runExpression: "Ausführen eines Ausdrucks",
     showCaption: "Titel anzeigen",
     iconName: "Name des Icons",
     iconSize: "Größe des Icons",
