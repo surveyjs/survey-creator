@@ -8,7 +8,12 @@
   }
   .svc-toolbox__item-banner {
     &:after {
-      transform: translate(-2px, -2px) rotate(90deg);
+      transform: translate(
+        calc(var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) / -1.41),
+        calc(var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) / -1.41)
+      )
+      scaleX(-1)
+      rotate(45deg);
     }
   }
   .svc-toolbox__item-submenu-button {
