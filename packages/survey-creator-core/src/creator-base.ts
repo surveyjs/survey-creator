@@ -4162,6 +4162,7 @@ export class SurveyCreatorModel extends Base
    * - `"always"` - Displays the expand/collapse buttons permanently.
    * - `"never"` - Hides the expand/collapse buttons.
    * @see onElementGetExpandCollapseState
+   * @see collapseOnDrag
    */
   @property({ defaultValue: "onhover" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
 
@@ -4273,6 +4274,12 @@ export class SurveyCreatorModel extends Base
   }
 
   private _allowDragPages = true;
+  /**
+   * Specifies whether users can drag and drop pages on the design surface.
+   * 
+   * Default value: `true` if [`pageEditMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#pageEditMode) is `"standard"`; `false` otherwise.
+   * @see collapseOnDrag
+   */
   public get allowDragPages(): boolean {
     return this._allowDragPages && this.pageEditMode !== "single" && this.pageEditMode !== "bypage";
   }
@@ -4284,6 +4291,27 @@ export class SurveyCreatorModel extends Base
     panels: true,
     pages: true
   };
+  /**
+   * Specifies whether questions, panels, and pages on the design surface collapse when users start dragging a survey element.
+   * 
+   * Default value: `{ questions: true, panels: true, pages: true }` (collapse all survey elements)
+   * 
+   * You can disable collapsing of individual survey element types or turn off this feature completely:
+   * 
+   * ```js
+   * const creatorOptions = {
+   *   // Do not collapse questions
+   *   collapseOnDrag: {
+   *     pages: true,
+   *     panels: true,
+   *     questions: false
+   *   },
+   *   // Do not collapse any survey elements
+   *   collapseOnDrag: false
+   * };
+   * const creator = new SurveyCreatorModel(creatorOptions);
+   * ```
+   */
   public get collapseOnDrag(): ICollapseOnDrag {
     return this._collapseOnDrag;
   }
