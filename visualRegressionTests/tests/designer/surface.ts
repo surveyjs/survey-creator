@@ -991,7 +991,7 @@ test("Logo image loading", async (t) => {
     await ClientFunction(() => {
       (<HTMLElement>document.querySelector(".sd-loading-indicator .sv-svg-icon")).style.animation = "none";
     })();
-    await takeElementScreenshot("logo-image-loading.png", Selector(".svc-logo-image"), t, comparer);
+    await takeElementScreenshot("logo-image-loading.png", Selector(".svc-logo-image__loading"), t, comparer);
   });
 });
 
