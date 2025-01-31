@@ -1,3 +1,6 @@
+export interface ICollapseOnDrag {
+  questions: boolean; panels: boolean; pages: boolean;
+}
 /**
  * Survey Creator configuration. Pass it as an argument to the `SurveyCreator`/`SurveyCreatorModel` constructor:
  *
@@ -404,5 +407,5 @@ export interface ICreatorOptions {
    */
   propertyGridNavigationMode?: "buttons" | "accordion";
   allowDragPages?: boolean;
-  collapseOnDrag?: boolean;
+  collapseOnDrag?: boolean | ICollapseOnDrag;
 }
