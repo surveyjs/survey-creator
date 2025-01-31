@@ -54,6 +54,16 @@ svc-page-navigator,
   }
 }
 
+.svc-page-navigator__button:disabled {
+  opacity: var(--ctr-page-navigator-button-icon-opacity-disabled, 0.25);
+  background-color: transparent;
+  cursor: default;
+
+  use {
+    fill: var(--ctr-page-navigator-button-icon-color-disabled, var(--sjs-layer-3-foreground-100, #000000e6));
+  }
+}
+
 .svc-page-navigator__button--pressed,
 .svc-page-navigator__button:active {
   .svc-page-navigator__button-icon {

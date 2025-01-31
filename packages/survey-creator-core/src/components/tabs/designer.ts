@@ -17,7 +17,6 @@ export class TabDesignerViewModel extends Base {
   private stepSurfaceScaling = 10;
   private cssUpdater: ComputedUpdater;
   private pagesControllerValue: PagesController;
-  public surfaceScale = 100;
 
   unitDictionary: { [index: string]: number } = {
     "--ctr-surface-base-unit": 8,
@@ -38,6 +37,7 @@ export class TabDesignerViewModel extends Base {
       objectInstance.updateSurveyScaleStartDimensions();
     },
   }) showPlaceholder: boolean;
+  @property() surfaceScale = 100;
   public scaleCssVariables: { [index: string]: string } = {};
   public creator: SurveyCreatorModel;
 
@@ -135,6 +135,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.zoomInTooltip",
       iconName: "icon-zoomin-24x24",
       iconSize: "auto",
+      enabled: new ComputedUpdater<boolean>(() => this.surfaceScale < this.maxSurfaceScaling),
       visible: new ComputedUpdater<boolean>(() => this.creator.allowZoom),
       action: () => { this.scaleSurface(this.surfaceScale + this.stepSurfaceScaling); }
     });
@@ -151,6 +152,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.zoomOutTooltip",
       iconName: "icon-zoomout-24x24",
       iconSize: "auto",
+      enabled: new ComputedUpdater<boolean>(() => this.surfaceScale > this.minSurfaceScaling),
       visible: new ComputedUpdater<boolean>(() => this.creator.allowZoom),
       action: () => {
         this.scaleSurface(this.surfaceScale - this.stepSurfaceScaling);
