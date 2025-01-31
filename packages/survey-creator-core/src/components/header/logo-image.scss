@@ -16,12 +16,6 @@
   .sd-logo__image {
     max-width: 100%;
   }
-
-  // .svc-image-item-value-controls {
-  //   display: block;
-  //   top: calcSize(2.5);
-  //   right: calcSize(1.5);
-  // }
 }
 
 .svc-logo-image__loading {
@@ -31,8 +25,8 @@
     var(--ctr-survey-header-logo-loading-margin-right, var(--lbr-spacing-x1))
     var(--ctr-survey-header-logo-loading-margin-bottom, var(--lbr-spacing-x1))
     var(--ctr-survey-header-logo-loading-margin-left, var(--lbr-spacing-x1));
-  box-sizing: border-box;
-  margin-right: var(--ctr-survey-header-logo-placeholder-margin-left-advanced, var(--lbr-spacing-x2n));
+  box-sizing: content-box;
+  margin-left: var(--ctr-survey-header-logo-placeholder-margin-left-advanced, var(--lbr-spacing-x2n));
 }
 
 .svc-logo-image-placeholder {
@@ -77,7 +71,7 @@
   padding: var(--ctr-survey-header-logo-margin-top-advanced, var(--lbr-spacing-x2)) 0px
     var(--ctr-survey-header-logo-margin-right-advanced, var(--lbr-spacing-x2)) 0px;
 
-  .sd-logo {
+  .sd-logo .sd-logo__image {
     margin: 0;
   }
 }
