@@ -62,7 +62,7 @@
   opacity: 0;
   box-sizing: border-box;
   align-items: center;
-  inset-inline-start: var(--thm-toolbox-item-banner-left);
+  inset-inline-start: var(--ctr-toolbox-item-banner-left, var(--thm-toolbox-item-banner-left));
   max-width: calcSize(100);
   padding-top: var(--ctr-tooltip-padding-top, var(--sjs-spacing-x2));
   padding-inline-end: var(--ctr-tooltip-padding-right, var(--sjs-spacing-x3));
@@ -70,7 +70,7 @@
   padding-inline-start: var(--ctr-tooltip-padding-left, var(--sjs-spacing-x3));
   margin-inline-end: calcSize(-2);
   white-space: nowrap;
-  color: var(--ctr-toolbox-item-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  color: var(--ctr-toolbox-item-text-color-hovered, var(--sjs-layer-1-foreground-100, #000000e6));
   transition: opacity $creator-transition-duration;
   background-color: $background;
   /* Shadow / Medium */
@@ -93,7 +93,7 @@
   overflow: visible;
   position: absolute;
   z-index: 200;
-  top: calc(50% + var(--ctr-toolbox-group-gap, var(--sjs-spacing-x05)));
+  top: calc(50% + 0.5*var(--ctr-toolbox-group-gap, var(--sjs-spacing-x05)));
   transform: translate(0, -50%);
   pointer-events: none;
   .svc-toolbox__item-icon {

@@ -3203,11 +3203,11 @@
   --ctr-survey-matching-item-corner-radius-floating: var(--lbr-corner-radius-round);
   --ctr-survey-matching-item-text-color-inactive: var(--sjs-layer-1-foreground-50);
   --ctr-survey-matching-item-border-color-inactive: var(--sjs-border-10);
-  --ctr-tooltip-corder-radius: var(--sjs-corner-radius-x05);
-  --ctr-tooltip-padding-left: var(--sjs-spacing-x3);
-  --ctr-tooltip-padding-right: var(--sjs-spacing-x3);
-  --ctr-tooltip-padding-top: var(--sjs-spacing-x2);
-  --ctr-tooltip-padding-bottom: var(--sjs-spacing-x2);
+  --ctr-tooltip-corder-radius: 100px;
+  --ctr-tooltip-padding-left: 44px;
+  --ctr-tooltip-padding-right: 28px;
+  --ctr-tooltip-padding-top: 12px;
+  --ctr-tooltip-padding-bottom: 12px;
   --ctr-tooltip-text-color: var(--sjs-layer-1-foreground-100);
   --ctr-tooltip-background-color: var(--sjs-layer-1-background-500);
   --ctr-tooltip-shadow-1-offset-x: var(--ctr-shadow-medium-offset-x);
