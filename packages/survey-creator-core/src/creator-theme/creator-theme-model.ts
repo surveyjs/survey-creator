@@ -268,6 +268,9 @@ Serializer.addProperties("creatortheme", [
     type: "color",
     name: "--sjs-special-background",
     default: "#EDF9F7FF",
+    enableIf: (obj: CreatorThemeModel): boolean => {
+      return !obj || obj.themeName !== CreatorThemeModel.legacyThemeName;
+    },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.titleLocation = "hidden";
