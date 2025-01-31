@@ -543,6 +543,7 @@ export var turkishStrings = {
     titlePlaceholder: "Başlık",
     surveyTitlePlaceholder: "Anket başlığı",
     pageTitlePlaceholder: "Sayfa başlığı",
+    startPageTitlePlaceholder: "Başlangıç Sayfası",
     descriptionPlaceholder: "Bir açıklama giriniz",
     surveyDescriptionPlaceholder: "Anket açıklaması giriniz",
     pageDescriptionPlaceholder: "Sayfa açıklaması giriniz",
@@ -3007,6 +3008,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Satır genişletme hata iletisi hizalaması"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Ayrıntı bölümlerinde iç içe geçmiş sorular için hata mesajlarının konumunu ayarlar. \"Devral\" seçeneği, \"Hata mesajı hizalaması\" özelliğindeki ayarı uygular."
 // pe.gridLayoutColumns: "Grid layout columns" => "Izgara düzeni sütunları"
+// pe.startPageTitlePlaceholder: "Start Page" => "Başlangıç Sayfası"
 // panellayoutcolumn.effectiveWidth: "Effective width, %" => "Etkili genişlik, %"
 // panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Soru başlığı genişliği, px"
 // pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Henüz düzen sütunlarına sahip değilsiniz"

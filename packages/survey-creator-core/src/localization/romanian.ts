@@ -543,6 +543,7 @@ export const roStrings = {
     titlePlaceholder: "Titlu",
     surveyTitlePlaceholder: "Titlul chestionarului",
     pageTitlePlaceholder: "Pagina {num}",
+    startPageTitlePlaceholder: "Pagina de pornire",
     descriptionPlaceholder: "Descriere",
     surveyDescriptionPlaceholder: "Descriere",
     pageDescriptionPlaceholder: "Descriere",
@@ -1952,6 +1953,7 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Alinierea mesajelor de eroare de extindere a rândurilor"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Setează locația mesajelor de eroare pentru întrebările imbricate în secțiunile de detaliu. Opțiunea \"Moștenire\" aplică setarea din proprietatea \"Alinierea mesajului de eroare\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Coloane de aspect grilă"
+// pe.startPageTitlePlaceholder: "Start Page" => "Pagina de pornire"
 // panellayoutcolumn.effectiveWidth: "Effective width, %" => "Lățimea efectivă, %"
 // panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Lățimea titlului întrebării, px"
 // pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Nu aveți încă coloane de aspect"

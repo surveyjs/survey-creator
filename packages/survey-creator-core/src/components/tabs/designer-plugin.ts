@@ -1,4 +1,4 @@
-import { Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent, PageVisibleChangedEvent } from "survey-core";
+import { Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent, PageVisibleChangedEvent, QuestionDropdownModel } from "survey-core";
 import { notShortCircuitAnd } from "../../utils/utils";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -10,10 +10,10 @@ import { DesignerStateManager } from "./designer-state-manager";
 import { TabControlModel } from "../side-bar/tab-control-model";
 import { pgTabIcons } from "../../property-grid/icons";
 import { MenuButton } from "../../utils/actions";
-import { editorLocalization } from "../../editorLocalization";
+import { editorLocalization, getLocString } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
 import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
-import { ICreatorTheme } from "../../creator-theme/creator-themes";
+import { ICreatorTheme, PredefinedCreatorThemes } from "../../creator-theme/creator-themes";
 import { getPredefinedBackgoundColorsChoices, getPredefinedColorsItemValues } from "./themes";
 
 export class TabDesignerPlugin implements ICreatorPlugin {
@@ -131,6 +131,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.themePropertyGrid.survey.onUpdatePanelCssClasses.add((_, options) => {
         options.cssClasses.panel.container += " spg-panel--group";
       });
+      this.updateThemeChooserChoices();
       this.updatePredefinedColorChoices();
     }
   }
@@ -138,6 +139,14 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     if (this.creator.showCreatorThemeSettings) {
       this.themeModel.setTheme(this.creator.creatorTheme);
     }
+  }
+
+  private updateThemeChooserChoices(): void {
+    const themeChooser = this.themePropertyGrid.survey.getQuestionByName("themeName") as QuestionDropdownModel;
+    if (!!themeChooser) {
+      themeChooser.choices = PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) }));
+    }
+    this.themePropertyGrid.survey.runExpressions();
   }
   private createCreatorThemeSettingsPage(creator: SurveyCreatorModel) {
     this.themeModel = new CreatorThemeModel();

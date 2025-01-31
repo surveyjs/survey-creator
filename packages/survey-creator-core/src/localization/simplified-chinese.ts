@@ -543,6 +543,7 @@ var simplifiedChineseTranslation = {
     titlePlaceholder: "标题",
     surveyTitlePlaceholder: "调查标题",
     pageTitlePlaceholder: "页数 {num}",
+    startPageTitlePlaceholder: "起始页",
     descriptionPlaceholder: "描述",
     surveyDescriptionPlaceholder: "描述",
     pageDescriptionPlaceholder: "描述",
@@ -3153,6 +3154,7 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "行扩展错误消息对齐"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "设置嵌套在详细信息部分中的问题的错误消息的位置。“Inherit” 选项应用“Error message alignment” 属性中的设置。"
 // pe.gridLayoutColumns: "Grid layout columns" => "网格布局列"
+// pe.startPageTitlePlaceholder: "Start Page" => "起始页"
 // panellayoutcolumn.effectiveWidth: "Effective width, %" => "有效宽度，%"
 // panellayoutcolumn.questionTitleWidth: "Question title width, px" => "问题标题宽度，px"
 // pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "您还没有布局列"

@@ -543,6 +543,7 @@ var traditionalChineseTranslation = {
     titlePlaceholder: "標題",
     surveyTitlePlaceholder: "調查標題",
     pageTitlePlaceholder: "頁數 {num}",
+    startPageTitlePlaceholder: "起始頁",
     descriptionPlaceholder: "描述",
     surveyDescriptionPlaceholder: "描述",
     pageDescriptionPlaceholder: "描述",
@@ -3282,6 +3283,7 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "行擴展錯誤消息對齊"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "設置嵌套在詳細資訊部分中的問題的錯誤消息的位置。“Inherit” 選項應用“Error message alignment” 屬性中的設置。"
 // pe.gridLayoutColumns: "Grid layout columns" => "網格佈局列"
+// pe.startPageTitlePlaceholder: "Start Page" => "起始頁"
 // panellayoutcolumn.effectiveWidth: "Effective width, %" => "有效寬度，%"
 // panellayoutcolumn.questionTitleWidth: "Question title width, px" => "問題標題寬度，px"
 // pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "您還沒有佈局列"

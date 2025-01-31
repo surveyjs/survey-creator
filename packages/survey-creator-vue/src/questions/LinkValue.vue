@@ -15,7 +15,6 @@
     v-if="!question.isReadOnly && question.showClear"
     :text="clearCaption"
     :click="question.doClearClick.bind(question)"
-    :selected="question.isSelected"
     :disabled="false"
     :classes="question.linkClearButtonCssClasses"
   >

@@ -543,6 +543,7 @@ var portugueseTranslation = {
     titlePlaceholder: "Título",
     surveyTitlePlaceholder: "Título do Questionário",
     pageTitlePlaceholder: "Página {num}",
+    startPageTitlePlaceholder: "Página inicial",
     descriptionPlaceholder: "Descrição",
     surveyDescriptionPlaceholder: "Descrição",
     pageDescriptionPlaceholder: "Descrição",
@@ -2680,6 +2681,7 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Alinhamento da mensagem de erro de expansão de linha"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Define o local das mensagens de erro para perguntas aninhadas em seções de detalhes. A opção \"Herdar\" aplica a configuração da propriedade \"Alinhamento da mensagem de erro\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Colunas de layout de grade"
+// pe.startPageTitlePlaceholder: "Start Page" => "Página inicial"
 // panellayoutcolumn.effectiveWidth: "Effective width, %" => "Largura efetiva, %"
 // panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Largura do título da pergunta, px"
 // pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Você ainda não tem colunas de layout"
