@@ -180,7 +180,7 @@
   }
 }
 .svc-toolbar-item__title {
-  color: var(--ctr-menu-toolbar-button-text-color, rgba(0, 0, 0, 0.90));
+  color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   @include ctrDefaultFont;
 }
 

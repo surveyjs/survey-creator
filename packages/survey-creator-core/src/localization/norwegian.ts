@@ -543,6 +543,7 @@ export var nbStrings = {
     titlePlaceholder: "Skriv tittel her",
     surveyTitlePlaceholder: "Skriv skjematittel her",
     pageTitlePlaceholder: "Skriv sidetittel her",
+    startPageTitlePlaceholder: "Startside",
     descriptionPlaceholder: "Skriv beskrivelse",
     surveyDescriptionPlaceholder: "Skriv skjema-beskrivelse",
     pageDescriptionPlaceholder: "Skriv side-beskrivelse",
@@ -3014,6 +3015,7 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Justering av feilmelding for radutvidelse"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angir plasseringen av feilmeldinger for spørsmål som er nestet i detaljdeler. Alternativet \"Arv\" bruker innstillingen fra egenskapen \"Feilmeldingsjustering\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Kolonner for rutenettoppsett"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startside"
 // panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektiv bredde, %"
 // panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Oppgavetittel bredde, px"
 // pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Du har ikke oppsettkolonner ennå"

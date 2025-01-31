@@ -543,6 +543,7 @@ var germanTranslation = {
     titlePlaceholder: "Titel eingeben",
     surveyTitlePlaceholder: "Umfragetitel eingeben",
     pageTitlePlaceholder: "Seitenbeschreibung eingeben",
+    startPageTitlePlaceholder: "Startseite",
     descriptionPlaceholder: "Beschreibung eingeben",
     surveyDescriptionPlaceholder: "Umfragebeschreibung eingeben",
     pageDescriptionPlaceholder: "Seitenbeschreibung eingeben",
@@ -1695,7 +1696,7 @@ var germanTranslation = {
     templateElements: "VorlagenElemente",
     operator: "Operator",
     isVariable: "istVariable",
-    runExpression: "runExpression",
+    runExpression: "Ausführen eines Ausdrucks",
     showCaption: "Titel anzeigen",
     iconName: "Name des Icons",
     iconSize: "Größe des Icons",
@@ -2724,6 +2725,7 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Ausrichtung der Fehlermeldung bei der Zeilenerweiterung"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Legt die Position von Fehlermeldungen für Fragen fest, die in Detailabschnitten verschachtelt sind. Die Option \"Vererben\" wendet die Einstellung aus der Eigenschaft \"Ausrichtung der Fehlermeldung\" an."
 // pe.gridLayoutColumns: "Grid layout columns" => "Spalten für das Rasterlayout"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startseite"
 // panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektive Breite, %"
 // panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Titelbreite der Frage, px"
 // pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Sie haben noch keine Layoutspalten"

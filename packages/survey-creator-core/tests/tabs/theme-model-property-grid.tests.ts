@@ -2,7 +2,7 @@ import { QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
-import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
+import { defaultThemesOrder, PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 import { editorLocalization } from "../../src/editorLocalization";
 import { DefaultFonts } from "../../src/components/tabs/theme-custom-questions/font-settings";
@@ -744,19 +744,8 @@ test("Disable/enable colorPalette property for custom theme variations in theme 
 
   const fullThemeName = themePlugin.addTheme({ "themeName": "custom", isPanelless: true, "colorPalette": "dark", cssVariables: {} });
   expect(fullThemeName).toBe("custom-dark-panelless");
-  expect(themeChooser.choices.map(c => c.value)).toStrictEqual([
-    "default",
-    "sharp",
-    "borderless",
-    "flat",
-    "plain",
-    "doubleborder",
-    "layered",
-    "solid",
-    "threedimensional",
-    "contrast",
-    "custom"
-  ]);
+  const actualThemeNameList = [...defaultThemesOrder, "custom"];
+  expect(themeChooser.choices.map(c => c.value)).toStrictEqual(actualThemeNameList);
 
   themeChooser.value = "custom";
 
@@ -772,19 +761,7 @@ test("Disable/enable colorPalette property for custom theme variations in theme 
   expect(themePlugin.themeModel.hasVariations(true)).toBe(true);
   expect(themePlugin.themeModel.hasVariations(false)).toBe(false);
 
-  expect(themeChooser.choices.map(c => c.value)).toStrictEqual([
-    "default",
-    "sharp",
-    "borderless",
-    "flat",
-    "plain",
-    "doubleborder",
-    "layered",
-    "solid",
-    "threedimensional",
-    "contrast",
-    "custom"
-  ]);
+  expect(themeChooser.choices.map(c => c.value)).toStrictEqual(actualThemeNameList);
 
   expect(themeChooser.value).toBe("custom");
   expect(isPanelless.value).toBe(true);
@@ -815,19 +792,8 @@ test("Disable/enable themeMode property for custom theme variations in theme pro
   const fullThemeName = themePlugin.addTheme({ "themeName": "custom", isPanelless: true, "colorPalette": "dark", cssVariables: {} });
   expect(fullThemeName).toBe("custom-dark-panelless");
   expect(Themes[fullThemeName]).toBeDefined();
-  expect(themeChooser.choices.map(c => c.value)).toStrictEqual([
-    "default",
-    "sharp",
-    "borderless",
-    "flat",
-    "plain",
-    "doubleborder",
-    "layered",
-    "solid",
-    "threedimensional",
-    "contrast",
-    "custom"
-  ]);
+  const actualThemeNameList = [...defaultThemesOrder, "custom"];
+  expect(themeChooser.choices.map(c => c.value)).toStrictEqual(actualThemeNameList);
 
   themeChooser.value = "custom";
 
@@ -840,19 +806,7 @@ test("Disable/enable themeMode property for custom theme variations in theme pro
   const fullPanellessThemeName = themePlugin.addTheme({ "themeName": "custom", isPanelless: false, "colorPalette": "dark", cssVariables: {} });
   expect(fullPanellessThemeName).toBe("custom-dark");
   expect(Themes[fullPanellessThemeName]).toBeDefined();
-  expect(themeChooser.choices.map(c => c.value)).toStrictEqual([
-    "default",
-    "sharp",
-    "borderless",
-    "flat",
-    "plain",
-    "doubleborder",
-    "layered",
-    "solid",
-    "threedimensional",
-    "contrast",
-    "custom"
-  ]);
+  expect(themeChooser.choices.map(c => c.value)).toStrictEqual(actualThemeNameList);
 
   expect(themeChooser.value).toBe("custom");
   expect(isPanelless.value).toBe(true);
@@ -863,18 +817,7 @@ test("Disable/enable themeMode property for custom theme variations in theme pro
   themePlugin.removeTheme(fullThemeName, true);
   expect(Themes[fullThemeName]).toBeUndefined();
   expect(Themes[fullPanellessThemeName]).toBeUndefined();
-  expect(themeChooser.choices.map(c => c.value)).toStrictEqual([
-    "default",
-    "sharp",
-    "borderless",
-    "flat",
-    "plain",
-    "doubleborder",
-    "layered",
-    "solid",
-    "threedimensional",
-    "contrast"
-  ]);
+  expect(themeChooser.choices.map(c => c.value)).toStrictEqual(defaultThemesOrder);
 });
 
 test("headerViewContainer init state", (): any => {

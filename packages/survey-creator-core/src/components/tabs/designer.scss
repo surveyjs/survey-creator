@@ -30,9 +30,10 @@ svc-tab-designer {
   background-color: transparent;
   display: flex;
   padding-block-start: var(--ctr-survey-header-padding-top-advanced, var(--lbr-spacing-x2));
-  padding-inline-end: var(--ctr-survey-header-padding-right-logo-placeholder, var(--lbr-spacing-x1));
+  padding-inline-end: var(--lbr-header-padding-right, var(--lbr-spacing-x3));
   padding-block-end: var(--ctr-survey-header-padding-bottom-advanced, var(--lbr-spacing-x2));
   padding-inline-start: var(--lbr-header-padding-left, var(--lbr-spacing-x3));
+
   flex-direction: column-reverse;
   justify-content: center;
   align-items: flex-start;

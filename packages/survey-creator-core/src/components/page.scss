@@ -97,6 +97,10 @@ svc-page {
 .svc-page-toolbar {
   flex-grow: 1;
   justify-content: flex-end;
+  pointer-events: none;
+  .sv-action {
+    pointer-events: all;
+  }
 }
 
 .svc-page-toolbar--collapse {

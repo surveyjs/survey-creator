@@ -5,7 +5,7 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeTabViewModel } from "./theme-builder";
 import { SidebarPageModel } from "../side-bar/side-bar-page-model";
-import { getPredefinedColorsItemValues, PredefinedColors, PredefinedThemes, Themes } from "./themes";
+import { getPredefinedColorsItemValues, PredefinedThemes, Themes } from "./themes";
 import { assign, notShortCircuitAnd } from "../../utils/utils";
 import { saveToFileHandler } from "../../utils/html-element-utils";
 import { PropertyGridModel } from "../../property-grid";

@@ -562,25 +562,32 @@ export class StringEditorViewModelBase extends Base {
   }
   @property() placeholderValue: string;
   public get placeholder(): string {
-    if (!!this.placeholderValue) return this.placeholderValue;
-    const property: any = this.findProperty();
-    if (!property || !property.placeholder) return "";
-    let placeholderValue: string = editorLocalization.getString(property.placeholder);
-    if (!!placeholderValue) {
-      var re = /\{([^}]+)\}/g;
-      this.placeholderValue = <any>new ComputedUpdater<string>(() => {
-        let result = placeholderValue;
-        let match = re.exec(result);
-        while (match != null) {
-          result = result.replace(re, propertyName => {
-            const propertyValue = this.locString.owner && this.locString.owner[match[1]];
-            return "" + propertyValue;
-          });
-          match = re.exec(result);
-        }
-        return result;
-      });
+    if (this.placeholderValue !== undefined) return this.placeholderValue;
+    const propPlaceholder = this.findProperty()?.placeholder;
+    if(!!propPlaceholder) {
+      (<any>this.locString).placeholder = propPlaceholder;
     }
+    if(!(<any>this.locString).placeholder) {
+      this.placeholderValue = "";
+      return "";
+    }
+    var re = /\{([^}]+)\}/g;
+    this.placeholderValue = <any>new ComputedUpdater<string>(() => {
+      let locPlaceholder: any = (<any>this.locString).placeholder;
+      if(typeof locPlaceholder === "function") {
+        locPlaceholder = locPlaceholder();
+      }
+      let result = editorLocalization.getString(locPlaceholder);
+      let match = re.exec(result);
+      while (match != null) {
+        result = result.replace(re, propertyName => {
+          const propertyValue = this.locString.owner && this.locString.owner[match[1]];
+          return "" + propertyValue;
+        });
+        match = re.exec(result);
+      }
+      return result;
+    });
     return this.placeholderValue;
   }
   public get contentEditable(): boolean {
