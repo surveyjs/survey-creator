@@ -38,7 +38,7 @@ import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 import { SidebarModel } from "./components/side-bar/side-bar-model";
-import { ICreatorOptions } from "./creator-options";
+import { ICollapseOnDrag, ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
 import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
@@ -2145,7 +2145,11 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragClear.add((sender, options) => {
       isDraggedFromToolbox = false;
       this.stopUndoRedoTransaction();
-      if (this.collapsePagesOnDrag) {
+      if (!!options.draggedElement &&
+        (options.draggedElement.isPage && this.collapseOnDrag.pages ||
+          options.draggedElement.isPanel && this.collapseOnDrag.panels ||
+          !options.draggedElement.isPanel && !options.draggedElement.isPage && this.collapseOnDrag.questions)
+      ) {
         this.designerStateManager?.release();
         this.restoreElementsState();
       }
@@ -2154,8 +2158,8 @@ export class SurveyCreatorModel extends Base
   public get designerStateManager() {
     return (this.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
   }
-  public collapseAllPagesOnDragStart(): void {
-    this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages);
+  public collapseAllPagesOnDragStart(element: SurveyElement): void {
+    this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages.filter(p => !element || element.isPage || p !== (element as any).page));
   }
   public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
     if (this.expandCollapseButtonVisibility == "never") return false;
@@ -2176,7 +2180,10 @@ export class SurveyCreatorModel extends Base
   private restoreState(element: SurveyElement) {
     const state = this.getElementExpandCollapseState(element as any, "drag-end", undefined);
     if (state !== undefined) {
-      SurveyElementAdornerBase.GetAdorner(element).collapsed = state;
+      const adorner = SurveyElementAdornerBase.GetAdorner(element);
+      if (!!adorner) {
+        adorner.collapsed = state;
+      }
     }
     SurveyElementAdornerBase.RestoreStateFor(element);
   }
@@ -4022,13 +4029,14 @@ export class SurveyCreatorModel extends Base
     });
   }
   public getElementAllowOperations(element: SurveyElement): any {
+    const allowDragDefault = !!element && (!element.isPage || element.isPage && this.allowDragPages);
     var options = {
       obj: element,
       element: element,
       allowDelete: true,
       allowCopy: true,
-      allowDragging: true,
-      allowDrag: true,
+      allowDragging: allowDragDefault,
+      allowDrag: allowDragDefault,
       allowChangeType: true,
       allowChangeInputType: true,
       allowChangeRequired: true,
@@ -4145,6 +4153,7 @@ export class SurveyCreatorModel extends Base
    * - `"always"` - Displays the expand/collapse buttons permanently.
    * - `"never"` - Hides the expand/collapse buttons.
    * @see onElementGetExpandCollapseState
+   * @see collapseOnDrag
    */
   @property({ defaultValue: "onhover" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
 
@@ -4255,8 +4264,59 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  public allowDragPages = false;
-  public collapsePagesOnDrag = false;
+  private _allowDragPages = true;
+  /**
+   * Specifies whether users can drag and drop pages on the design surface.
+   * 
+   * Default value: `true` if [`pageEditMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#pageEditMode) is `"standard"`; `false` otherwise.
+   * @see collapseOnDrag
+   */
+  public get allowDragPages(): boolean {
+    return this._allowDragPages && this.pageEditMode !== "single" && this.pageEditMode !== "bypage";
+  }
+  public set allowDragPages(newValue: boolean) {
+    this._allowDragPages = newValue;
+  }
+  private _collapseOnDrag: ICollapseOnDrag = {
+    questions: true,
+    panels: true,
+    pages: true
+  };
+  /**
+   * Specifies whether questions, panels, and pages on the design surface collapse when users start dragging a survey element.
+   * 
+   * Default value: `{ questions: true, panels: true, pages: true }` (collapse all survey elements)
+   * 
+   * You can disable collapsing of individual survey element types or turn off this feature completely:
+   * 
+   * ```js
+   * const creatorOptions = {
+   *   // Do not collapse questions
+   *   collapseOnDrag: {
+   *     pages: true,
+   *     panels: true,
+   *     questions: false
+   *   },
+   *   // Do not collapse any survey elements
+   *   collapseOnDrag: false
+   * };
+   * const creator = new SurveyCreatorModel(creatorOptions);
+   * ```
+   */
+  public get collapseOnDrag(): ICollapseOnDrag {
+    return this._collapseOnDrag;
+  }
+  public set collapseOnDrag(newValue: boolean | ICollapseOnDrag) {
+    if (typeof newValue === "object") {
+      this._collapseOnDrag.pages = !!newValue.pages;
+      this._collapseOnDrag.panels = !!newValue.panels;
+      this._collapseOnDrag.questions = !!newValue.questions;
+    } else {
+      this._collapseOnDrag.pages = !!newValue;
+      this._collapseOnDrag.panels = !!newValue;
+      this._collapseOnDrag.questions = !!newValue;
+    }
+  }
 }
 
 export class CreatorBase extends SurveyCreatorModel { }
