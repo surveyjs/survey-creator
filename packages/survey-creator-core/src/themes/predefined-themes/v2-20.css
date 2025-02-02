@@ -2233,7 +2233,7 @@
   --ctr-survey-question-panel-border-color-hovered: var(--sjs-secondary-background-25);
   --ctr-survey-question-panel-border-width-hovered: var(--sjs-stroke-x2);
   --ctr-survey-question-panel-border-color-nested: var(--sjs-border-25);
-  --ctr-survey-question-panel-border-width-nested: var(--sjs-stroke-x2);
+  --ctr-survey-question-panel-border-width-nested: var(--sjs-stroke-x1);
   --ctr-survey-question-panel-corner-radius-selection-panelless: var(--lbr-corner-radius-x075);
   --lbr-panel-border-color-panelless: var(--sjs-border-25);
   --lbr-panel-border-width-panelless: var(--lbr-stroke-x1);
