@@ -412,25 +412,9 @@ export interface ICreatorOptions {
    */
   allowDragPages?: boolean;
   /**
-   * Specifies whether questions, panels, and pages on the design surface collapse when users start dragging a survey element.
+   * Specifies whether to collapse pages on the design surface when users start dragging a survey element.
    * 
-   * Default value: `{ questions: true, panels: true, pages: true }` (collapse all survey elements)
-   * 
-   * You can disable collapsing of individual survey element types or turn off this feature completely:
-   * 
-   * ```js
-   * const creatorOptions = {
-   *   // Do not collapse questions
-   *   collapseOnDrag: {
-   *     pages: true,
-   *     panels: true,
-   *     questions: false
-   *   },
-   *   // Do not collapse any survey elements
-   *   collapseOnDrag: false
-   * };
-   * const creator = new SurveyCreatorModel(creatorOptions);
-   * ```
+   * Default value: `true`
    */
   collapseOnDrag?: boolean;
 }
