@@ -1,6 +1,3 @@
-export interface ICollapseOnDrag {
-  questions: boolean; panels: boolean; pages: boolean;
-}
 /**
  * Survey Creator configuration. Pass it as an argument to the `SurveyCreator`/`SurveyCreatorModel` constructor:
  *
@@ -435,5 +432,5 @@ export interface ICreatorOptions {
    * const creator = new SurveyCreatorModel(creatorOptions);
    * ```
    */
-  collapseOnDrag?: boolean | ICollapseOnDrag;
+  collapseOnDrag?: boolean;
 }
