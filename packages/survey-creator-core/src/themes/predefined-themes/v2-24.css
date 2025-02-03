@@ -1129,7 +1129,7 @@
   --ctr-survey-placeholder-border-width: var(--lbr-stroke-x1);
   --ctr-survey-drop-indicator-color: var(--sjs-primary-background-500);
   --ctr-survey-drop-indicator-corner-radius: var(--lbr-corner-radius-round);
-  --ctr-survey-drop-indicator-width: var(--sjs-size-x025);
+  --ctr-survey-drop-indicator-width: var(--lbr-size-x025);
   --ctr-search-background-color: var(--sjs-layer-1-background-500);
   --ctr-search-corner-radius: var(--sjs-corner-radius-round);
   --ctr-search-padding-left: var(--sjs-spacing-x2);
@@ -2203,14 +2203,14 @@
   --ctr-survey-question-panel-toolbar-margin-top: var(--lbr-spacing-x2);
   --lbr-question-panel-corner-radius: var(--lbr-corner-radius-x05);
   --ctr-survey-question-panel-border-color-selected: var(--sjs-secondary-background-500);
-  --ctr-survey-question-panel-border-width-selected: var(--sjs-stroke-x2);
+  --ctr-survey-question-panel-border-width-selected: var(--lbr-stroke-x2);
   --lbr-question-panel-shadow-offset-x: var(--lbr-shadow-small-offset-x);
   --lbr-question-panel-shadow-offset-y: var(--lbr-shadow-small-offset-y);
   --lbr-question-panel-shadow-blur: var(--lbr-shadow-small-blur);
   --lbr-question-panel-shadow-spread: var(--lbr-shadow-small-spread);
   --lbr-question-panel-shadow-color: var(--lbr-shadow-small-color);
   --ctr-survey-page-border-color-selected: var(--sjs-secondary-background-500);
-  --ctr-survey-page-border-width-selected: var(--sjs-stroke-x2);
+  --ctr-survey-page-border-width-selected: var(--lbr-stroke-x2);
   --lbr-page-padding-top: var(--lbr-spacing-x5);
   --lbr-page-padding-bottom: var(--lbr-spacing-x12);
   --ctr-survey-page-corner-radius: var(--lbr-corner-radius-x1);
@@ -2223,15 +2223,15 @@
   --lbr-dynamic-panel-footer-padding-top: var(--lbr-spacing-x3);
   --lbr-dynamic-panel-footer-padding-bottom: var(--lbr-spacing-x3);
   --ctr-survey-question-panel-border-color-hovered: var(--sjs-secondary-background-25);
-  --ctr-survey-question-panel-border-width-hovered: var(--sjs-stroke-x2);
+  --ctr-survey-question-panel-border-width-hovered: var(--lbr-stroke-x2);
   --ctr-survey-question-panel-border-color-nested: var(--sjs-border-25);
-  --ctr-survey-question-panel-border-width-nested: var(--sjs-stroke-x2);
+  --ctr-survey-question-panel-border-width-nested: var(--lbr-stroke-x1);
   --ctr-survey-question-panel-corner-radius-selection-panelless: var(--lbr-corner-radius-x075);
   --lbr-panel-border-color-panelless: var(--sjs-border-25);
   --lbr-panel-border-width-panelless: var(--lbr-stroke-x1);
   --lbr-question-panel-background-color-hovered: var(--sjs-layer-1-background-400);
   --ctr-survey-page-border-color-hovered: var(--sjs-secondary-background-25);
-  --ctr-survey-page-border-width-hovered: var(--sjs-stroke-x2);
+  --ctr-survey-page-border-width-hovered: var(--lbr-stroke-x2);
   --lbr-panel-border-color-nested: var(--sjs-border-10);
   --lbr-panel-border-width-nested: var(--lbr-stroke-x1);
   --lbr-panel-border-color-nested-panelless: var(--sjs-border-10);
@@ -2909,7 +2909,7 @@
   --ctr-survey-panel-border-width-overing: var(--lbr-stroke-x2);
   --ctr-survey-page-background-color-overing: var(--sjs-primary-background-10);
   --ctr-survey-page-border-color-overing: var(--sjs-primary-background-500);
-  --ctr-survey-page-border-width-overing: var(--sjs-stroke-x2);
+  --ctr-survey-page-border-width-overing: var(--lbr-stroke-x2);
   --ctr-toolbox-item-background-color-floating: var(--sjs-layer-1-background-500);
   --ctr-toolbox-item-margin-horizontal-no-text: var(--sjs-spacing-x05);
   --ctr-toolbox-item-padding-left-no-text: var(--sjs-spacing-x1);
@@ -2971,7 +2971,7 @@
   --ctr-menu-toolbar-button-padding-left-with-description: var(--sjs-spacing-x150);
   --ctr-menu-toolbar-button-padding-right-with-description: var(--sjs-spacing-x150);
   --ctr-survey-page-border-color-minimized: var(--sjs-border-10);
-  --ctr-survey-page-border-width-minimized: var(--sjs-stroke-x2);
+  --ctr-survey-page-border-width-minimized: var(--lbr-stroke-x2);
   --ctr-survey-page-drag-indicator-width: var(--lbr-size-x3);
   --ctr-survey-page-drag-indicator-height: var(--lbr-size-x2);
   --ctr-survey-page-drag-indicator-color: var(--sjs-layer-3-foreground-50);
@@ -3440,4 +3440,3 @@
   --lbr-popup-toolbar-header-padding-right: var(--lbr-spacing-x1);
   --lbr-popup-toolbar-header-padding-left: var(--lbr-spacing-x2);
 }
-
