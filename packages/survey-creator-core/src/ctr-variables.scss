@@ -1,7 +1,7 @@
 $size-unit: var(--ctr-size-unit, 8px);
 $spacing-unit: var(--ctr-spacing-unit, 8px);
 $corner-radius-unit: var(--ctr-corner-radius-unit, 8px);
-$stroke-unit: var(--ctr-stroke-unit, 1px);
+$stroke-unit: Max(var(--ctr-stroke-unit, 1px), 1px);
 $font-unit: var(--ctr-font-unit, 8px);
 $line-height-unit: var(--ctr-line-height-unit, 8px);
 $-font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family)));
