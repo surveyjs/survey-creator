@@ -1138,8 +1138,7 @@
   --ctr-survey-placeholder-border-color: var(--sjs-border-25);
   --ctr-survey-placeholder-border-width: var(--lbr-stroke-x1);
   --ctr-survey-drop-indicator-color: var(--sjs-secondary-background-500);
-  --ctr-survey-drop-indicator-corner-radius: var(--lbr-corner-radius-round);
-  --ctr-survey-drop-indicator-width: var(--lbr-size-x025);
+  --ctr-survey-drop-indicator-width: var(--lbr-stroke-x2);
   --ctr-search-background-color: var(--sjs-layer-1-background-500);
   --ctr-search-corner-radius: var(--sjs-corner-radius-round);
   --ctr-search-padding-left: var(--sjs-spacing-x2);

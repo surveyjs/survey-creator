@@ -5,7 +5,6 @@ $stroke-unit: Max(var(--ctr-stroke-unit, 1px), 1px);
 $font-unit: var(--ctr-font-unit, 8px);
 $line-height-unit: var(--ctr-line-height-unit, 8px);
 $-font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family)));
-$-base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
 @mixin ctrLargeFont {
   font-family: $-font-family;
@@ -21,9 +20,6 @@ $-base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin ctrMediumFont {
-  // --thm-medium-bold-font-size: calc(3 * #{$-base-unit});
-  // --thm-medium-bold-line-height: calc(4 * #{$-base-unit});
-
   font-family: $-font-family;
   font-size: var(--ctr-font-medium-size, var(--sjs-font-size-x3));
   font-style: normal;
@@ -37,9 +33,6 @@ $-base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin ctrDefaultFont {
-  // --thm-default-font-size: var(--sjs-font-size, calc(2 * #{$-base-unit}));
-  // --thm-default-line-height: calc(1.5 * var(--thm-default-font-size));
-
   font-family: $-font-family;
   font-size: var(--ctr-font-default-size, var(--sjs-font-size-x2));
   font-style: normal;
@@ -71,10 +64,6 @@ $-base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin ctrSmallFont {
-  // --small-bold-font-size: var(--sjs-font-size, calc(2 * #{$-base-unit}));
-  // --ctr-small-bold-font-size: calc(0.75 * var(--small-bold-font-size));
-  // --ctr-small-bold-line-height: var(--small-bold-font-size);
-
   font-family: $-font-family;
   font-size: var(--ctr-font-small-size, var(--sjs-font-size-x150));
   font-style: normal;
