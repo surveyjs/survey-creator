@@ -1702,6 +1702,9 @@ export class SurveyCreatorModel extends Base
       page = this.addNewPageIntoSurvey();
     } else {
       this.survey.addPage(page);
+      page.questions.forEach(question => {
+        this.doOnQuestionAdded(question, page);
+      });
     }
     if (changeSelection) {
       this.selectElement(page);
@@ -2324,6 +2327,7 @@ export class SurveyCreatorModel extends Base
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);
     var page = this.getPageByElement(question);
+    if (!page) return;
     var options = { question: question, page: page, reason: this.addNewElementReason };
     this.addNewElementReason = undefined;
     this.onQuestionAdded.fire(this, options);
