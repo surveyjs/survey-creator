@@ -3266,6 +3266,46 @@ test("Test questions css in an action panel", () => {
   checkFunc(3, "completedHtmlOnCondition", "html", false);
 });
 
+test("Run modified on changing runExpression", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ],
+    triggers: [
+      {
+        type: "runexpression",
+        expression: "{q1} = 3",
+        runExpression: "{q1} + 3"
+      }
+    ]
+  });
+  const logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(1);
+  const editor = new LogicItemEditor(logic.items[0]);
+  expect(editor.panels).toHaveLength(1);
+  expect(editor.panels[0].getQuestionByName("elementSelector").visible).toBeFalsy();
+  const panelTrigger = <PanelModel>(editor.panels[0].getElementByName("triggerEditorPanel"));
+  expect(panelTrigger).toBeTruthy();
+  expect(panelTrigger.visible).toBeTruthy();
+  const runExpressionQuestion = panelTrigger.getQuestionByName("runExpression");
+  expect(runExpressionQuestion.value).toEqual("{q1} + 3");
+  const changes = new Array<any>();
+  survey.onPropertyValueChangedCallback = (
+    name: string,
+    oldValue: any,
+    newValue: any
+  ) => {
+    changes.push({ name: name, value: newValue });
+  };
+  runExpressionQuestion.value = "{q1} + 4";
+  expect(changes).toHaveLength(0);
+  editor.apply();
+  expect(changes).toHaveLength(1);
+  expect(changes[0].name).toEqual("runExpression");
+  expect(changes[0].value).toEqual("{q1} + 4");
+});
+
 test("Custom trigger in logic", () => {
   Serializer.addClass(
     "incrementcountertrigger",
