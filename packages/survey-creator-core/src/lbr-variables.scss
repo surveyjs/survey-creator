@@ -1,7 +1,7 @@
 $lbr-size-unit: var(--lbr-size-unit, 8px);
 $lbr-spacing-unit: var(--lbr-spacing-unit, 8px);
 $lbr-corner-radius-unit: var(--lbr-corner-radius-unit, 8px);
-$lbr-stroke-unit: var(--lbr-stroke-unit, 1px);
+$lbr-stroke-unit: Max(var(--lbr-stroke-unit, 1px), 1px);
 $lbr-font-unit: var(--lbr-font-unit, 8px);
 $lbr-line-height-unit: var(--lbr-line-height-unit, 8px);
 $-font-family: var(--lbr-font-family, var(--sjs-font-family, var(--font-family)));

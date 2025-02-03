@@ -137,10 +137,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   @property({
     onSet(val, target: PageAdorner, prevVal) {
-      if(val != prevVal) {
+      if (val != prevVal) {
         target.updateShowPlaceholder();
         target.updateActionsProperties();
-        if(val && target.surveyElement) {
+        if (val && target.surveyElement) {
           target.addGhostPageSubsribes(target.surveyElement);
         }
       }
@@ -348,7 +348,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (cssClasses.pageRow) return [].slice.call(this.rootElement?.querySelectorAll(`:scope .svc-page__footer, :scope ${classesToSelector(this.surveyElement.cssRoot)} > .svc-row`));
     return null;
   }
-  public onPageSelected() {}
+  public onPageSelected() { }
   protected getAllowDragging(options: any): boolean {
     return this.creator.allowDragPages && super.getAllowDragging(options);
   }
@@ -362,9 +362,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     const element = <any>this.surveyElement;
     const isElementSelected = this.creator.selectedElement === element;
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
-    if (this.creator.collapsePagesOnDrag) {
+    if (!!element && element.isPage && this.creator.collapseOnDrag.pages) {
       this.creator.designerStateManager?.suspend();
-      this.creator.collapseAllPagesOnDragStart();
+      this.creator.collapseAllPagesOnDragStart(element);
     }
     return true;
   }
