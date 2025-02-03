@@ -377,7 +377,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           action: () => {
             this.creator.sidebar.expandSidebar();
             this.propertyGrid.survey.currentPage = p;
-            this.creator.sidebar.header.subTitle = p.title;
+            this.creator.sidebar.header.title = p.title;
             pgTabs.forEach(i => i.active = false);
             action.active = true;
           }
@@ -385,7 +385,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         return action;
       });
       this.tabControlModel.topToolbar.setItems(pgTabs);
-      this.creator.sidebar.header.subTitle = this.propertyGrid.survey.currentPage.title;
+      this.creator.sidebar.header.title = this.propertyGrid.survey.currentPage.title;
+      this.creator.sidebar.header.subTitle = this.propertyGridTab.caption;
     }
   }
 
