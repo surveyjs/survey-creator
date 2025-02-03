@@ -902,6 +902,7 @@ export var nlStrings = {
     maxWidth_placeholder: "Vb.: 50%",
     imageHeight_placeholder: "Auto",
     imageWidth_placeholder: "Auto",
+    itemTitleWidth_placeholder: "Bijv.: 100px",
     theme: {
       themeName: "Thema",
       isPanelless: "Weergave van de vraag",
@@ -2664,7 +2665,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Schakel in om alleen geselecteerde keuzes te rangschikken. Gebruikers slepen geselecteerde items uit de keuzelijst om ze binnen het rangschikkingsgebied te rangschikken."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Voer een lijst met keuzes in die tijdens de invoer aan de respondent worden voorgesteld."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "De instelling wijzigt alleen de grootte van de invoervelden en heeft geen invloed op de breedte van het vraagvak."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Hiermee stelt u een consistente breedte in voor alle artikellabels in pixels"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor alle artikellabels in pixels"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "De optie \"Auto\" bepaalt automatisch de geschikte modus voor weergave - Afbeelding, Video of YouTube - op basis van de opgegeven bron-URL."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Dient als vervanging wanneer de afbeelding niet kan worden weergegeven op het apparaat van een gebruiker en voor toegankelijkheidsdoeleinden."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Definieert de kleur van de geselecteerde emoji wanneer het type Beoordelingspictogram is ingesteld op \"Smileys\". Kies tussen: \"Standaard\" - de geselecteerde emoji verschijnt in de standaard enquêtekleur; \"Schaal\" - de geselecteerde emoji erft de kleur van de beoordelingsschaal."
@@ -2673,7 +2674,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Een expressie kan basisberekeningen ('{q1_id} + {q2_id}'), voorwaarden ('{leeftijd} > 60') en functies ('iif()', 'vandaag()', 'leeftijd()', 'min()', 'max()', 'gem()', enz.) bevatten."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Selecteer deze optie om de waarde van de optie 'Overig' op te slaan als een afzonderlijke eigenschap in enquêteresultaten."
 // p.swapOrder: "Swap the order of Yes and No" => "Verwissel de volgorde van Ja en Nee"
-// p.itemTitleWidth: "Item label width (in px)" => "Breedte artikellabel (in px)"
+// p.itemTitleWidth: "Item label width" => "Breedte artikellabel (in px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst om aan te geven of alle opties zijn geselecteerd"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Tijdelijke tekst voor het rangschikkingsgebied"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Vul de enquête automatisch in"
@@ -3000,3 +3001,5 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Met Survey Creator kunt u de inlinebreedtes van formulierelementen handmatig aanpassen om de lay-out te beheren. Als dit niet het gewenste resultaat oplevert, kunt u de rasterlay-out inschakelen, waarvan de structuren elementen vormen met behulp van een op kolommen gebaseerd systeem. Om lay-outkolommen te configureren, selecteer je een pagina of paneel en gebruik je de tabel \"Vraaginstellingen\" → \"Rasterkolommen\". Om aan te passen hoeveel kolommen een vraag beslaat, selecteer je deze en stel je de gewenste waarde in in het veld \"Lay-out\" → \"Kolomspanwijdte\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Met deze tabel kunt u elke rasterkolom op de pagina configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Bijv.: 100px"

@@ -902,6 +902,7 @@ var traditionalChineseTranslation = {
     maxWidth_placeholder: "例：50%",
     imageHeight_placeholder: "自動",
     imageWidth_placeholder: "自動",
+    itemTitleWidth_placeholder: "例：100px",
     theme: {
       themeName: "主題",
       isPanelless: "問題外觀",
@@ -2958,7 +2959,7 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "啟用此選項可僅對選定的選項進行排名。使用者將從選項清單中拖動所選專案，以在排名區域內對它們進行排序。"
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "輸入將在輸入期間向受訪者建議的選項清單。"
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "該設置僅調整輸入欄位的大小，不會影響問題框的寬度。"
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "為所有項目標籤設定一致的寬度（以像素為單位）"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "為所有項目標籤設定一致的寬度（以像素為單位）"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "“自動”選項會根據提供的源URL自動確定合適的顯示模式 - 圖像、視頻或YouTube。"
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "當圖像無法在使用者設備上顯示時，出於輔助功能的目的，可作為替代。"
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "定義當評級圖示類型設置為「笑臉」時所選表情符號的顏色。選擇：「預設」 - 選取表情符號以預設調查顏色顯示;“比例” - 所選的表情符號繼承了評分量表的顏色。"
@@ -2967,7 +2968,7 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、條件 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。"
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "選擇此選項可將「其他」選項值作為單獨的屬性存儲在調查結果中。"
 // p.swapOrder: "Swap the order of Yes and No" => "交換“是”和“否”的順序"
-// p.itemTitleWidth: "Item label width (in px)" => "項目標籤寬度（以 px 為單位）"
+// p.itemTitleWidth: "Item label width" => "項目標籤寬度（以 px 為單位）"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "顯示是否選擇了所有選項的文字"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "排名區域的佔位元文本"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "自動完成調查"
@@ -3292,3 +3293,5 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator 允許您手動調整表單元素的內聯寬度以控制佈局。如果這沒有產生所需的結果，您可以啟用網格佈局，該佈局使用基於列的系統構建表單元素。要配置佈局列，請選擇一個頁面或面板，然後使用 “Question Settings” → “Grid columns” 表格。要調整問題跨越的列數，請選擇它並在 「Layout」 → 「Column span」 欄位中設置所需的值。"
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "指定此問題在網格佈局中跨越多少列。"
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允許您設定頁面上的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "例：100px"

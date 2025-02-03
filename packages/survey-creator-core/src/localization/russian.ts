@@ -902,6 +902,7 @@ export var ruStrings = {
     maxWidth_placeholder: "Пример: 50%",
     imageHeight_placeholder: "Авто",
     imageWidth_placeholder: "Авто",
+    itemTitleWidth_placeholder: "Пример: 100px",
     theme: {
       themeName: "Тема",
       isPanelless: "Внешний вид вопроса",
@@ -2747,7 +2748,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Включите этот параметр, чтобы ранжировать только выбранные варианты. Пользователи будут перетаскивать выбранные элементы из списка вариантов, чтобы упорядочить их в области ранжирования."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Введите список вариантов, которые будут предложены респонденту во время ввода."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Этот параметр изменяет только размер полей ввода и не влияет на ширину поля вопроса."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Устанавливает одинаковую ширину для всех меток элементов в пикселях"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Устанавливает одинаковую ширину для всех меток элементов в пикселях"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Опция \"Авто\" автоматически определяет подходящий режим отображения - Изображение, Видео или YouTube - на основе предоставленного исходного URL-адреса."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Служит заменой, когда изображение не может быть отображено на устройстве пользователя, а также в целях обеспечения доступности."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Определяет цвет выбранного эмодзи, если для параметра «Тип значка рейтинга» установлено значение «Смайлики». Выберите между: \"По умолчанию\" - выбранный эмодзи отображается в цвете опроса по умолчанию; «Шкала» - выбранный эмодзи наследует цвет от шкалы оценки."
@@ -2756,7 +2757,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Выражение может включать базовые вычисления ('{q1_id} + {q2_id}'), условия ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д.)."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Выберите, чтобы сохранить значение параметра «Другое» как отдельное свойство в результатах опроса."
 // p.swapOrder: "Swap the order of Yes and No" => "Поменяйте местами «Да» и «Нет»"
-// p.itemTitleWidth: "Item label width (in px)" => "Ширина метки элемента (в пикселях)"
+// p.itemTitleWidth: "Item label width" => "Ширина метки элемента (в пикселях)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Текст, показывающий, если выбраны все параметры"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Замещающий текст для области ранжирования"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Автоматическое заполнение опроса"
@@ -3077,3 +3078,5 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator позволяет вручную настраивать встроенную ширину элементов формы для управления макетом. Если это не дает желаемого результата, вы можете включить макет сетки, который структурирует элементы с использованием системы на основе столбцов. Чтобы настроить макет столбцов, выберите страницу или панель и используйте таблицу «Настройки вопроса» → «Столбцы сетки». Чтобы настроить количество столбцов в вопросе, выберите его и установите нужное значение в полях «Макет» → «Диапазон столбцов»."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Указывает, сколько столбцов занимает этот вопрос в макете сетки."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "В этой таблице можно настроить каждый столбец сетки на странице. Он автоматически устанавливает процент ширины для каждого столбца в зависимости от максимального количества элементов в строке. Чтобы настроить макет сетки, вручную настройте эти значения и определите ширину заголовка для всех вопросов в каждом столбце."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Пример: 100px"

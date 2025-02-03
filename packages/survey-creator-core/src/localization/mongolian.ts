@@ -902,6 +902,7 @@ export var mnStrings = {
     maxWidth_placeholder: "Экс: 50%",
     imageHeight_placeholder: "автомат",
     imageWidth_placeholder: "автомат",
+    itemTitleWidth_placeholder: "Жишээ нь: 100px",
     theme: {
       themeName: "Сэдэв",
       isPanelless: "Асуулт хариултын төрх",
@@ -2343,7 +2344,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Зөвхөн сонгосон сонголтуудыг зэрэгцүүлэх боломжийг олгоно. Хэрэглэгчид сонгосон зүйлсийг сонгосон жагсаалтаас чирч, зэрэглэлийн бүс дотор тушаана."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Санал болгох сонголтуудын жагсаалтыг оруулах үед хариулагчид санал болгох болно."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Тохиргоо нь зөвхөн оролтын талбаруудыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Пикселд бүх зүйлийн шошгоны тогтмол өргөнийг тогтоох"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Пикселд бүх зүйлийн шошгоны тогтмол өргөнийг тогтоох"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"Авто\" сонголт нь эх сурвалж URL-д суурилсан зураг, видео, эсвэл YouTube - харуулах тохиромжтой хэв маягийг автоматаар тодорхойлдог."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Хэрэглэгчийн төхөөрөмж дээр болон хүртээмжийн зорилгоор дүрсийг харуулах боломжгүй үед орлуулагчаар үйлчилнэ."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Rating icon төрлийн \"Smileys\" гэж тогтооход сонгосон эможигийн өнгийг тодорхойлно. Аль нэгийг нь сонгоно уу: \"Default\" - сонгосон эможи нь стандарт судалгааны өнгөөр гарч ирдэг; \"Scale\" - сонгосон эможи нь үнэлгээний хэмжүүрээс өнгийг өвлөн авдаг."
@@ -2352,7 +2353,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Илэрхийлэл нь үндсэн тооцоо ('{q1_id} + {q2_id}'), нөхцөл ('{age} > 60'' болон функцууд ('iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "\"Бусад\" сонголтын үнэ цэнийг судалгааны үр дүнд тусад нь өмч болгон хадгалахыг сонго."
 // p.swapOrder: "Swap the order of Yes and No" => "Тийм, Үгүй гэсэн дарааллыг соль"
-// p.itemTitleWidth: "Item label width (in px)" => "Барааны шошгоны өргөн (px-д)"
+// p.itemTitleWidth: "Item label width" => "Барааны шошгоны өргөн (px-д)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Бүх сонголтыг сонгосон эсэхийг харуулах текст"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Хаягийн бүсэд байрлах газар эзэмшигчийн текст"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Судалгааг автоматаар дуусгах"
@@ -2677,3 +2678,5 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator нь загварыг хянахын тулд хэлбэрийн элементүүдийн inline өргөнийг гараар тохируулах боломжийг олгодог. Хэрэв энэ нь хүссэн үр дүнг өгөхгүй бол баган дээр суурилсан системийг ашиглан элементүүдийг бүрдүүлдэг grid layout-ийг идэвхжүүлж болно. Загварын багануудыг тохируулахын тулд хуудас эсвэл панелийг сонгоод \"Асуултын тохиргоо\" → \"Grid columns\" хүснэгтийг ашиглана. Асуулт хэдэн багана багтаахыг тохируулахын тулд үүнийг сонгоод \"Layout\" → \"Column span\" талбарт хүссэн утгыг тохируул."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Энэ асуулт хүснэгтийн загварт хэдэн багана багтаахыг тодорхойлно."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Энэ хүснэгт нь хуудас дээрх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Жишээ нь: 100px"

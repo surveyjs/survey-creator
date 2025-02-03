@@ -902,6 +902,7 @@ var spanishTranslation = {
     maxWidth_placeholder: "Ej.: 50%",
     imageHeight_placeholder: "Automático",
     imageWidth_placeholder: "Automático",
+    itemTitleWidth_placeholder: "Ej.: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Apariencia de la pregunta",
@@ -2464,7 +2465,7 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Habilite esta opción para clasificar solo las opciones seleccionadas. Los usuarios arrastrarán los elementos seleccionados de la lista de opciones para ordenarlos dentro del área de clasificación."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Ingrese una lista de opciones que se sugerirán al encuestado durante la entrada."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "La configuración solo cambia el tamaño de los campos de entrada y no afecta al ancho del cuadro de pregunta."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Establece un ancho coherente para todas las etiquetas de elementos en píxeles"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Establece un ancho coherente para todas las etiquetas de elementos en píxeles"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "La opción \"Auto\" determina automáticamente el modo adecuado para la visualización (Imagen, Video o YouTube) en función de la URL de origen proporcionada."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Sirve como sustituto cuando la imagen no se puede mostrar en el dispositivo de un usuario y por motivos de accesibilidad."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Define el color del emoji seleccionado cuando el tipo de icono de clasificación se establece en \"Emoticonos\". Elija entre: \"Predeterminado\": el emoji seleccionado aparece en el color predeterminado de la encuesta; \"Escala\": el emoji seleccionado hereda el color de la escala de calificación."
@@ -2473,7 +2474,7 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Una expresión puede incluir cálculos básicos ('{q1_id} + {q2_id}'), condiciones ('{edad} > 60') y funciones ('iif()', 'hoy()', 'edad()', 'min()', 'max()', 'avg()', etc.)."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Seleccione esta opción para almacenar el valor de la opción \"Otro\" como una propiedad independiente en los resultados de la encuesta."
 // p.swapOrder: "Swap the order of Yes and No" => "Cambiar el orden de Sí y No"
-// p.itemTitleWidth: "Item label width (in px)" => "Ancho de la etiqueta del elemento (en px)"
+// p.itemTitleWidth: "Item label width" => "Ancho de la etiqueta del elemento (en px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Texto para mostrar si todas las opciones están seleccionadas"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Texto de marcador de posición para el área de clasificación"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Completar la encuesta automáticamente"
@@ -2798,3 +2799,5 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator le permite ajustar manualmente los anchos en línea de los elementos del formulario para controlar el diseño. Si esto no produce el resultado deseado, puede habilitar el diseño de cuadrícula, que estructura elementos mediante un sistema basado en columnas. Para configurar las columnas de diseño, seleccione una página o un panel y utilice la tabla \"Configuración de preguntas\" → \"Columnas de cuadrícula\". Para ajustar el número de columnas que abarca una pregunta, selecciónela y establezca el valor deseado en el campo \"Diseño\" → \"Intervalo de columnas\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Especifica el número de columnas que abarca esta pregunta dentro del diseño de cuadrícula."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Esta tabla le permite configurar cada columna de cuadrícula en la página. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valores y defina el ancho del título para todas las preguntas de cada columna."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ej.: 100px"

@@ -902,6 +902,7 @@ var polishStrings = {
     maxWidth_placeholder: "Przykład: 50%",
     imageHeight_placeholder: "Automatycznie",
     imageWidth_placeholder: "Automatycznie",
+    itemTitleWidth_placeholder: "Przykład: 100px",
     theme: {
       themeName: "Kompozycja",
       isPanelless: "Wygląd pytania",
@@ -2953,7 +2954,7 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Włącz, aby uszeregować tylko wybrane wybory. Użytkownicy będą przeciągać wybrane elementy z listy wyboru, aby uporządkować je w obszarze rankingu."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Wprowadź listę opcji, które zostaną zasugerowane respondentowi podczas wprowadzania danych."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "To ustawienie zmienia tylko rozmiar pól wejściowych i nie wpływa na szerokość pola pytania."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Ustawia stałą szerokość dla wszystkich etykiet elementów w pikselach"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Ustawia stałą szerokość dla wszystkich etykiet elementów w pikselach"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Opcja \"Auto\" automatycznie określa odpowiedni tryb wyświetlania - Obraz, Wideo lub YouTube - na podstawie podanego źródłowego adresu URL."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Służy jako substytut, gdy obraz nie może być wyświetlany na urządzeniu użytkownika oraz w celu ułatwienia dostępu."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Określa kolor wybranego emoji, gdy typ ikony oceny jest ustawiony na \"Emotikony\". Wybierz pomiędzy: \"Domyślny\" - wybrany emoji pojawia się w domyślnym kolorze ankiety; \"Skala\" - wybrany emoji dziedziczy kolor ze skali ocen."
@@ -2962,7 +2963,7 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Wyrażenie może zawierać podstawowe obliczenia ('{q1_id} + {q2_id}'), warunki ('{wiek} > 60') i funkcje ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' itp.)."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Wybierz, aby zapisać wartość opcji \"Inne\" jako oddzielną właściwość w wynikach ankiety."
 // p.swapOrder: "Swap the order of Yes and No" => "Zamień kolejność Tak i Nie"
-// p.itemTitleWidth: "Item label width (in px)" => "Szerokość etykiety elementu (w pikselach)"
+// p.itemTitleWidth: "Item label width" => "Szerokość etykiety elementu (w pikselach)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst pokazujący, czy wszystkie opcje są zaznaczone"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Tekst zastępczy dla obszaru klasyfikacji"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Wypełnij ankietę automatycznie"
@@ -3287,3 +3288,5 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Kreator ankiet umożliwia ręczne dostosowanie szerokości elementów formularza w tekście w celu kontrolowania układu. Jeśli nie przyniesie to pożądanego rezultatu, można włączyć układ siatki, w którym struktury tworzą elementy przy użyciu systemu opartego na kolumnach. Aby skonfigurować kolumny układu, wybierz stronę lub panel i użyj tabeli \"Ustawienia pytań\" → \"Kolumny siatki\". Aby dostosować liczbę kolumn obejmujących pytanie, zaznacz je i ustaw żądaną wartość w polu \"Układ\" → \"Zakres kolumn\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Określa, ile kolumn obejmuje to pytanie w układzie siatki."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki na stronie. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Przykład: 100px"

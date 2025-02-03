@@ -902,6 +902,7 @@ export var hrStrings = {
     maxWidth_placeholder: "Npr.: 50%",
     imageHeight_placeholder: "Автоматично",
     imageWidth_placeholder: "Автоматично",
+    itemTitleWidth_placeholder: "Primjer: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Izgled pitanja",
@@ -2681,7 +2682,7 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Omogućite rangiranje samo odabranih odabira. Korisnici će povući odabrane stavke s popisa izbora kako bi ih naručili unutar područja rangiranja."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Unesite popis izbora koji će se predložiti ispitaniku tijekom unosa."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Postavka samo mijenja veličinu ulaznih polja i ne utječe na širinu okvira pitanja."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Postavlja dosljednu širinu za sve natpise stavki u pikselima"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za sve natpise stavki u pikselima"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Opcija \"Automatski\" automatski određuje odgovarajući način prikaza - Slika, Videozapis ili YouTube - na temelju navedenog izvornog URL-a."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Služi kao zamjena kada se slika ne može prikazati na korisnikovom uređaju i u svrhu pristupačnosti."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Definira boju odabranog emojija kada je vrsta ikone Ocjena postavljena na \"Smajlići\". Odaberite između: \"Zadano\" - odabrani emoji pojavljuje se u zadanoj boji ankete; \"Skala\" - odabrani emoji nasljeđuje boju od ljestvice ocjenjivanja."
@@ -2690,7 +2691,7 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Izraz može uključivati osnovne izračune ('{q1_id} + {q2_id}'), uvjete ('{age} > 60') i funkcije ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd.)."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Odaberite za spremanje vrijednosti mogućnosti \"Ostalo\" kao zasebnog svojstva u rezultatima upitnika."
 // p.swapOrder: "Swap the order of Yes and No" => "Zamjena redoslijeda Da i Ne"
-// p.itemTitleWidth: "Item label width (in px)" => "Širina natpisa stavke (u px)"
+// p.itemTitleWidth: "Item label width" => "Širina natpisa stavke (u px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst koji prikazuje jesu li odabrane sve mogućnosti"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Tekst rezerviranog mjesta za područje rangiranja"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Automatsko ispunjavanje upitnika"
@@ -3016,3 +3017,5 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator omogućuje vam ručno podešavanje ugrađenih širina elemenata obrasca za kontrolu izgleda. Ako to ne daje željeni ishod, možete omogućiti raspored rešetke, čije strukture tvore elemente pomoću sustava temeljenog na stupcima. Da biste konfigurirali stupce izgleda, odaberite stranicu ili ploču i upotrijebite tablicu \"Postavke pitanja\" → \"Stupci rešetke\". Da biste prilagodili koliko stupaca obuhvaća pitanje, odaberite ga i postavite željenu vrijednost u polju \"Izgled\" → \"Raspon stupaca\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Određuje koliko stupaca ovo pitanje obuhvaća unutar rasporeda rešetke."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ova tablica omogućuje konfiguriranje svakog stupca rešetke na stranici. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Primjer: 100px"

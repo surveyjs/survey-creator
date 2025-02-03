@@ -902,6 +902,7 @@ export var koreanStrings = {
     maxWidth_placeholder: "예: 50%",
     imageHeight_placeholder: "자동",
     imageWidth_placeholder: "자동",
+    itemTitleWidth_placeholder: "예: 100px",
     theme: {
       themeName: "주제",
       isPanelless: "질문 모양",
@@ -2891,7 +2892,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "선택한 선택 항목만 순위를 지정할 수 있습니다. 사용자는 선택 목록에서 선택한 항목을 끌어 순위 영역 내에서 정렬합니다."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "입력 시 응답자에게 제안될 선택 사항 목록을 입력합니다."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "모든 항목 레이블에 대해 일관된 너비를 픽셀 단위로 설정합니다."
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "모든 항목 레이블에 대해 일관된 너비를 픽셀 단위로 설정합니다."
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"자동\" 옵션은 제공된 소스 URL을 기반으로 표시에 적합한 모드(이미지, 비디오 또는 YouTube)를 자동으로 결정합니다."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "사용자의 장치에 이미지를 표시할 수 없는 경우 접근성을 위해 대신 사용할 수 있습니다."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "등급 아이콘 유형이 \"스마일리\"로 설정된 경우 선택한 이모티콘의 색상을 정의합니다. 다음 중 하나를 선택합니다. \"기본값\" - 선택한 이모티콘이 기본 설문조사 색상으로 표시됩니다. \"척도\"-선택한 이모티콘은 등급 척도에서 색상을 상속합니다."
@@ -2900,7 +2901,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "표현식에는 기본 계산('{q1_id} + {q2_id}'), 조건('{age} > 60') 및 함수('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등)가 포함될 수 있습니다."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "\"기타\" 옵션 값을 측량 결과에 별도의 속성으로 저장하려면 선택합니다."
 // p.swapOrder: "Swap the order of Yes and No" => "예와 아니요의 순서를 바꿉니다."
-// p.itemTitleWidth: "Item label width (in px)" => "항목 레이블 너비(px)"
+// p.itemTitleWidth: "Item label width" => "항목 레이블 너비(px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "모든 옵션이 선택된 경우 표시할 텍스트"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "순위 영역의 자리 표시자 텍스트"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "설문조사 자동 완성"
@@ -3226,3 +3227,5 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator를 사용하면 양식 요소의 인라인 너비를 수동으로 조정하여 레이아웃을 제어할 수 있습니다. 이렇게 해도 원하는 결과가 나오지 않으면 열 기반 시스템을 사용하여 요소를 형성하는 구조체인 그리드 레이아웃을 활성화할 수 있습니다. 레이아웃 열을 구성하려면 페이지 또는 패널을 선택하고 \"질문 설정\" → \"그리드 열\" 테이블을 사용합니다. 질문의 열 수를 조정하려면 질문을 선택하고 \"레이아웃\" → \"열 범위\" 입력란에서 원하는 값을 설정합니다."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "이 질문이 그리드 레이아웃 내에서 얼마나 많은 열에 걸쳐 있는지 지정합니다."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "이 테이블을 사용하면 페이지의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "예: 100px"

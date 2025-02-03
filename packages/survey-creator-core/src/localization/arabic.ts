@@ -902,6 +902,7 @@ export var arStrings = {
     maxWidth_placeholder: "مثال: 50٪",
     imageHeight_placeholder: "تلقائي",
     imageWidth_placeholder: "تلقائي",
+    itemTitleWidth_placeholder: "على سبيل المثال: 100 بكسل",
     theme: {
       themeName: "موضوع",
       isPanelless: "مظهر السؤال",
@@ -2598,7 +2599,7 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "تمكين لترتيب الخيارات المحددة فقط. سيقوم المستخدمون بسحب العناصر المحددة من قائمة الاختيار لترتيبها داخل منطقة الترتيب."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "أدخل قائمة بالخيارات التي سيتم اقتراحها على المستجيب أثناء الإدخال."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "يغير الإعداد حجم حقول الإدخال فقط ولا يؤثر على عرض مربع السؤال."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "يضبط عرضا متناسقا لكل تسميات العناصر بالبكسل"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "يضبط عرضا متناسقا لكل تسميات العناصر بالبكسل"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "يحدد الخيار \"تلقائي\" تلقائيا الوضع المناسب للعرض - الصورة أو الفيديو أو YouTube - بناء على عنوان URL المصدر المقدم."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "يعمل كبديل عندما يتعذر عرض الصورة على جهاز المستخدم ولأغراض إمكانية الوصول."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "يحدد لون الرموز التعبيرية المحددة عند تعيين نوع رمز التقييم على \"الوجوه الضاحكة\". اختر بين: \"افتراضي\" - يظهر الرمز التعبيري المحدد بلون الاستطلاع الافتراضي ؛ \"مقياس\" - يرث الرمز التعبيري المحدد اللون من مقياس التصنيف."
@@ -2607,7 +2608,7 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "يمكن أن يتضمن التعبير العمليات الحسابية الأساسية ('{q1_id} + {q2_id}') والشروط ('{age} > 60') والدوال ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', إلخ)."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "حدد لتخزين قيمة الخيار \"أخرى\" كخاصية منفصلة في نتائج الاستطلاع."
 // p.swapOrder: "Swap the order of Yes and No" => "مبادلة ترتيب نعم ولا"
-// p.itemTitleWidth: "Item label width (in px)" => "عرض تسمية العنصر (بالبكسل)"
+// p.itemTitleWidth: "Item label width" => "عرض تسمية العنصر (بالبكسل)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "نص لإظهار ما إذا كانت كل الخيارات محددة"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "نص العنصر النائب لمنطقة الترتيب"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "إكمال الاستطلاع تلقائيا"
@@ -2936,3 +2937,5 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "يسمح لك Survey Creator بضبط العروض المضمنة لعناصر النموذج يدويا للتحكم في التخطيط. إذا لم يؤد ذلك إلى النتيجة المرجوة، فيمكنك تمكين تخطيط الشبكة، الذي يقوم ببناء عناصر التشكيل باستخدام نظام قائم على الأعمدة. لتكوين أعمدة التخطيط، حدد صفحة أو لوحة واستخدم جدول \"إعدادات الأسئلة\" → \"أعمدة الشبكة\". لضبط عدد الأعمدة التي يمتد إليها السؤال، حدده وقم بتعيين القيمة المطلوبة في حقل \"التخطيط\" → \"امتداد العمود\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "يتيح لك هذا الجدول تكوين كل عمود شبكة على الصفحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "على سبيل المثال: 100 بكسل"

@@ -902,6 +902,7 @@ export var skStrings = {
     maxWidth_placeholder: "Napríklad: 50%",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Príklad: 100px",
     theme: {
       themeName: "Téma",
       isPanelless: "Vzhľad otázky",
@@ -2641,7 +2642,7 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Povoľte zoradiť iba vybrané možnosti. Používatelia presunú vybrané položky zo zoznamu možností a zoradia ich v oblasti poradia."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Zadajte zoznam možností, ktoré budú respondentovi navrhnuté počas vstupu."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Toto nastavenie zmení iba veľkosť vstupných polí a neovplyvní šírku poľa otázok."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Nastavuje konzistentnú šírku pre všetky štítky položiek v pixeloch"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Nastavuje konzistentnú šírku pre všetky štítky položiek v pixeloch"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Možnosť \"Auto\" automaticky určuje vhodný režim zobrazenia - obrázok, video alebo YouTube - na základe poskytnutej zdrojovej adresy URL."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Slúži ako náhrada, keď obrázok nie je možné zobraziť na zariadení používateľa a na účely prístupnosti."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Definuje farbu vybraných emodži, keď je typ ikony hodnotenia nastavený na \"Smajlíky\". Vyberte si medzi: \"Predvolené\" - vybrané emodži sa zobrazia v predvolenej farbe prieskumu; \"Mierka\" - vybrané emodži zdedí farbu z hodnotiacej stupnice."
@@ -2650,7 +2651,7 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), podmienky (\"{vek} > 60\") a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.)."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Túto voľbu vyberte, ak chcete uložiť hodnotu možnosti \"Iné\" ako samostatnú vlastnosť vo výsledkoch prieskumu."
 // p.swapOrder: "Swap the order of Yes and No" => "Zámena poradia Áno a Nie"
-// p.itemTitleWidth: "Item label width (in px)" => "Šírka označenia položky (v px)"
+// p.itemTitleWidth: "Item label width" => "Šírka označenia položky (v px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Text, ktorý zobrazuje, či sú vybraté všetky možnosti"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Zástupný text pre oblasť hodnotenia"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Vyplňte prieskum automaticky"
@@ -2975,3 +2976,5 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Aplikácia Survey Creator umožňuje manuálne upraviť vnorené šírky prvkov formulára na ovládanie rozloženia. Ak to neprinesie požadovaný výsledok, môžete povoliť rozloženie mriežky, ktoré štruktúry tvoria prvky pomocou systému založeného na stĺpcoch. Ak chcete nakonfigurovať stĺpce rozloženia, vyberte stránku alebo panel a použite tabuľku \"Nastavenia otázky\" → \"Stĺpce mriežky\". Ak chcete upraviť, koľko stĺpcov otázka zahŕňa, vyberte ju a nastavte požadovanú hodnotu v poli \"Rozloženie\" → \"Rozsah stĺpcov\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Určuje, koľko stĺpcov táto otázka zahŕňa v rozložení mriežky."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Táto tabuľka umožňuje nakonfigurovať každý stĺpec mriežky na strane. Automaticky nastaví percentuálnu šírku pre každý stĺpec na základe maximálneho počtu prvkov v riadku. Ak chcete prispôsobiť rozloženie mriežky, manuálne upravte tieto hodnoty a definujte šírku názvu pre všetky otázky v každom stĺpci."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Príklad: 100px"

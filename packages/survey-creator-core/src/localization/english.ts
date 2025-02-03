@@ -905,6 +905,7 @@ export var enStrings = {
     maxWidth_placeholder: "Ex.: 50%",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Ex.: 100px",
     theme: {
       themeName: "Theme",
       isPanelless: "Question appearance",
@@ -1567,7 +1568,7 @@ export var enStrings = {
     selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area.",
     dataList: "Enter a list of choices that will be suggested to the respondent during input.",
     inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box.",
-    itemTitleWidth: "Sets consistent width for all item labels in pixels",
+    itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.).",
     inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not.",
     altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes.",
     rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale.",
@@ -1681,7 +1682,7 @@ export var enStrings = {
     step: "Step", // Auto-generated string
     dataList: "Items for auto-suggest",
     inputSize: "Input field width (in characters)",
-    itemTitleWidth: "Item label width (in px)",
+    itemTitleWidth: "Item label width",
     inputTextAlignment: "Input value alignment",
     elements: "Elements", // Auto-generated string
     content: "Content", // Auto-generated string

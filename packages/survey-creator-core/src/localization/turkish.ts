@@ -902,6 +902,7 @@ export var turkishStrings = {
     maxWidth_placeholder: "Ör.: %50",
     imageHeight_placeholder: "Otomatik",
     imageWidth_placeholder: "Otomatik",
+    itemTitleWidth_placeholder: "Ör.: 100 piksel",
     theme: {
       themeName: "Tema",
       isPanelless: "Soru görünümü",
@@ -2683,7 +2684,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Yalnızca seçilen seçenekleri sıralamak için etkinleştirin. Kullanıcılar, sıralama alanı içinde sıralamak için seçim listesinden seçilen öğeleri sürükleyecektir."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Giriş sırasında yanıtlayana önerilecek seçeneklerin bir listesini girin."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Bu ayar yalnızca giriş alanlarını yeniden boyutlandırır ve soru kutusunun genişliğini etkilemez."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Piksel cinsinden tüm öğe etiketleri için tutarlı genişlik ayarlar"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Piksel cinsinden tüm öğe etiketleri için tutarlı genişlik ayarlar"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"Otomatik\" seçeneği, sağlanan kaynak URL'ye göre görüntüleme için uygun modu (Resim, Video veya YouTube) otomatik olarak belirler."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Görüntü, kullanıcının cihazında görüntülenemediğinde ve erişilebilirlik amacıyla yedek olarak görev yapar."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Derecelendirme simgesi türü \"Suratlar\" olarak ayarlandığında seçilen emojinin rengini tanımlar. Şunlar arasından seçim yapın: \"Varsayılan\" - seçilen emoji varsayılan anket renginde görünür; \"Ölçek\" - seçilen emoji, derecelendirme ölçeğinden rengi devralır."
@@ -2692,7 +2693,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Bir ifade, temel hesaplamaları ('{q1_id} + {q2_id}'), koşulları ('{age} > 60') ve işlevleri ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb.) içerebilir."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "\"Diğer\" seçenek değerini anket sonuçlarında ayrı bir özellik olarak saklamak için seçin."
 // p.swapOrder: "Swap the order of Yes and No" => "Evet ve Hayır sırasını değiştirin"
-// p.itemTitleWidth: "Item label width (in px)" => "Öğe etiketi genişliği (piksel cinsinden)"
+// p.itemTitleWidth: "Item label width" => "Öğe etiketi genişliği (piksel cinsinden)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tüm seçeneklerin seçili olup olmadığını gösteren metin"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Derecelendirme alanı için yer tutucu metin"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Anketi otomatik olarak tamamlama"
@@ -3017,3 +3018,5 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Anket Oluşturucu, düzeni kontrol etmek için form öğelerinin satır içi genişliklerini manuel olarak ayarlamanıza olanak tanır. Bu istenen sonucu vermezse, sütun tabanlı bir sistem kullanarak öğeleri oluşturan yapıların ızgara düzenini etkinleştirebilirsiniz. Düzen sütunlarını yapılandırmak için bir sayfa veya panel seçin ve \"Soru Ayarları\" → \"Izgara sütunları\" tablosunu kullanın. Bir sorunun kaç sütuna yayılacağını ayarlamak için soruyu seçin ve \"Düzen\" → \"Sütun aralığı\" alanında istediğiniz değeri ayarlayın."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Bu sorunun ızgara düzeni içinde kaç sütuna yayılacağını belirtir."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Bu tablo, sayfadaki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ör.: 100 piksel"

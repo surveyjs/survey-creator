@@ -902,6 +902,7 @@ var italianTranslation = {
     maxWidth_placeholder: "Es.: 50%",
     imageHeight_placeholder: "Automatico",
     imageWidth_placeholder: "Automatico",
+    itemTitleWidth_placeholder: "Es.: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Aspetto della domanda",
@@ -2448,7 +2449,7 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Abilita per classificare solo le scelte selezionate. Gli utenti trascineranno gli elementi selezionati dall'elenco di scelta per ordinarli all'interno dell'area di classificazione."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Inserisci un elenco di scelte che verranno suggerite al rispondente durante l'inserimento."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "L'impostazione ridimensiona solo i campi di input e non influisce sulla larghezza della casella della domanda."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Imposta una larghezza coerente per tutte le etichette degli elementi in pixel"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Imposta una larghezza coerente per tutte le etichette degli elementi in pixel"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "L'opzione \"Auto\" determina automaticamente la modalità di visualizzazione adatta - Immagine, Video o YouTube - in base all'URL di origine fornito."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Funge da sostituto quando l'immagine non può essere visualizzata sul dispositivo di un utente e per motivi di accessibilità."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Definisce il colore dell'emoji selezionata quando il tipo di icona Valutazione è impostato su \"Smiley\". Scegli tra: \"Predefinito\" - l'emoji selezionata appare nel colore predefinito del sondaggio; \"Scala\": l'emoji selezionata eredita il colore dalla scala di valutazione."
@@ -2457,7 +2458,7 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Un'espressione può includere calcoli di base ('{q1_id} + {q2_id}'), condizioni ('{età} > 60') e funzioni ('iif()', 'oggi()', 'età()', 'min()', 'max()', 'avg()' e così via)."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Selezionare questa opzione per memorizzare il valore dell'opzione \"Altro\" come proprietà separata nei risultati del rilevamento."
 // p.swapOrder: "Swap the order of Yes and No" => "Scambia l'ordine di Sì e No"
-// p.itemTitleWidth: "Item label width (in px)" => "Larghezza dell'etichetta dell'articolo (in px)"
+// p.itemTitleWidth: "Item label width" => "Larghezza dell'etichetta dell'articolo (in px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Testo da mostrare se tutte le opzioni sono selezionate"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Testo segnaposto per l'area di classificazione"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Completa automaticamente il sondaggio"
@@ -2783,3 +2784,5 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator consente di regolare manualmente le larghezze in linea degli elementi del modulo per controllare il layout. Se questo non produce il risultato desiderato, è possibile abilitare il layout a griglia, che struttura gli elementi di forma utilizzando un sistema basato su colonne. Per configurare le colonne del layout, seleziona una pagina o un pannello e utilizza la tabella \"Impostazioni domanda\" → \"Colonne griglia\". Per regolare il numero di colonne di una domanda, selezionala e imposta il valore desiderato nel campo \"Layout\" → \"Estensione colonne\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Specifica il numero di colonne su cui si estende la domanda all'interno del layout della griglia."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Questa tabella consente di configurare ogni colonna della griglia nella pagina. Imposta automaticamente la percentuale di larghezza per ogni colonna in base al numero massimo di elementi in una riga. Per personalizzare il layout della griglia, regola manualmente questi valori e definisci la larghezza del titolo per tutte le domande in ogni colonna."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Es.: 100px"

@@ -902,6 +902,7 @@ var portugueseTranslation = {
     maxWidth_placeholder: "Ex.: 50%",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Ex.: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Aparência da pergunta",
@@ -2356,7 +2357,7 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Habilite para classificar apenas as opções selecionadas. Os usuários arrastarão os itens selecionados da lista de opções para ordená-los dentro da área de classificação."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Insira uma lista de opções que serão sugeridas ao respondente durante a entrada."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "A configuração redimensiona apenas os campos de entrada e não afeta a largura da caixa de pergunta."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Define largura consistente para todos os rótulos de item em pixels"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Define largura consistente para todos os rótulos de item em pixels"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "A opção \"Auto\" determina automaticamente o modo adequado para exibição - Imagem, Vídeo ou YouTube - com base no URL de origem fornecido."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Serve como um substituto quando a imagem não pode ser exibida no dispositivo de um usuário e para fins de acessibilidade."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Define a cor do emoji selecionado quando o tipo de ícone Classificação é definido como \"Smileys\". Escolha entre: \"Padrão\" - o emoji selecionado aparece na cor padrão do questionário; \"Escala\" - o emoji selecionado herda a cor da escala de classificação."
@@ -2365,7 +2366,7 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Uma expressão pode incluir cálculos básicos ('{q1_id} + {q2_id}'), condições ('{age} > 60') e funções ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.)."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Selecione para armazenar o valor da opção \"Outro\" como uma propriedade separada nos resultados da pesquisa."
 // p.swapOrder: "Swap the order of Yes and No" => "Troque a ordem de Sim e Não"
-// p.itemTitleWidth: "Item label width (in px)" => "Largura da etiqueta do item (em px)"
+// p.itemTitleWidth: "Item label width" => "Largura da etiqueta do item (em px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Texto para mostrar se todas as opções estão selecionadas"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Texto de espaço reservado para a área de classificação"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Preencha o questionário automaticamente"
@@ -2690,3 +2691,5 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "O Survey Creator permite ajustar manualmente as larguras embutidas dos elementos do formulário para controlar o layout. Se isso não produzir o resultado desejado, você poderá habilitar o layout da grade, que estrutura os elementos do formulário usando um sistema baseado em colunas. Para configurar colunas de layout, selecione uma página ou painel e use a tabela \"Configurações da pergunta\" → \"Colunas da grade\". Para ajustar quantas colunas uma pergunta abrange, selecione-a e defina o valor desejado no campo \"Layout\" → \"Extensão de coluna\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Especifica quantas colunas essa pergunta abrange dentro do layout da grade."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Esta tabela permite configurar cada coluna de grade na página. Ele define automaticamente a porcentagem de largura para cada coluna com base no número máximo de elementos em uma linha. Para personalizar o layout da grade, ajuste manualmente esses valores e defina a largura do título para todas as perguntas em cada coluna."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"

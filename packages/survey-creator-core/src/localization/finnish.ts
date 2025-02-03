@@ -902,6 +902,7 @@ export var fiStrings = {
     maxWidth_placeholder: "Esimerkki: 50 %",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Esimerkki: 100px",
     theme: {
       themeName: "Teema",
       isPanelless: "Kysymyksen ulkonäkö",
@@ -2661,7 +2662,7 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Ota käyttöön, jos haluat luokitella vain valitut vaihtoehdot. Käyttäjät vetävät valitut kohteet valintaluettelosta järjestääkseen ne sijoitusalueella."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Kirjoita luettelo vaihtoehdoista, joita vastaajalle ehdotetaan syötteen aikana."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Asetus muuttaa vain syöttökenttien kokoa eikä vaikuta kysymysruudun leveyteen."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Määrittää yhdenmukaisen leveyden kaikille tuoteotsikoille kuvapisteinä"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Määrittää yhdenmukaisen leveyden kaikille tuoteotsikoille kuvapisteinä"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "\"Auto\" -vaihtoehto määrittää automaattisesti sopivan näyttötilan - Kuva, Video tai YouTube - annetun lähde-URL-osoitteen perusteella."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Toimii korvikkeena, kun kuvaa ei voida näyttää käyttäjän laitteella, ja esteettömyyssyistä."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Määrittää valitun emojin värin, kun luokituskuvakkeen tyypiksi on asetettu \"Hymiöt\". Valitse seuraavista: \"Oletus\" - valittu emoji näkyy kyselyn oletusvärillä; \"Scale\" - valittu emoji perii värin luokitusasteikolta."
@@ -2670,7 +2671,7 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Lauseke voi sisältää peruslaskutoimituksia ('{q1_id} + {q2_id}'), ehtoja ('{age} > 60') ja funktioita ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' jne.)."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Valitse tämä, jos haluat tallentaa Muu-vaihtoehdon arvon erillisenä ominaisuutena kyselyn tuloksiin."
 // p.swapOrder: "Swap the order of Yes and No" => "Kyllä- ja Ei-järjestyksen vaihtaminen"
-// p.itemTitleWidth: "Item label width (in px)" => "Nimikkeen otsikon leveys (px)"
+// p.itemTitleWidth: "Item label width" => "Nimikkeen otsikon leveys (px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Teksti, joka näyttää, onko kaikki asetukset valittu"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Sijoitusalueen paikkamerkkiteksti"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Vastaa kyselyyn automaattisesti"
@@ -2994,3 +2995,5 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creatorin avulla voit manuaalisesti säätää lomake-elementtien sisäisiä leveyksiä asettelun hallitsemiseksi. Jos tämä ei tuota toivottua tulosta, voit ottaa käyttöön ruudukkoasettelun, joka jäsentää elementtejä sarakepohjaisen järjestelmän avulla. Määritä asettelusarakkeet valitsemalla sivu tai paneeli ja käyttämällä \"Kysymysasetukset\" → \"Ruudukkosarakkeet\" -taulukkoa. Jos haluat säätää, kuinka monta saraketta kysymys kattaa, valitse se ja aseta haluamasi arvo \"Asettelu\" → \"Sarakeväli\" -kenttään."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Määrittää, kuinka monta saraketta tämä kysymys kattaa ruudukkoasettelussa."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tämän taulukon avulla voit määrittää sivun jokaisen ruudukkosarakkeen. Se määrittää automaattisesti kunkin sarakkeen leveysprosentin rivin elementtien enimmäismäärän perusteella. Jos haluat mukauttaa ruudukon asettelua, säädä näitä arvoja manuaalisesti ja määritä otsikon leveys kunkin sarakkeen kaikille kysymyksille."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Esimerkki: 100px"

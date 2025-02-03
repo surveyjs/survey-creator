@@ -902,6 +902,7 @@ export const roStrings = {
     maxWidth_placeholder: "Ex.: 50%",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Ex.: 100px",
     theme: {
       themeName: "Temă",
       isPanelless: "Aspect întrebări",
@@ -1962,3 +1963,5 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator vă permite să ajustați manual lățimile în linie ale elementelor de formular pentru a controla aspectul. Dacă acest lucru nu produce rezultatul dorit, puteți activa aspectul grilei, care structuri formează elemente folosind un sistem bazat pe coloane. Pentru a configura coloanele de aspect, selectați o pagină sau un panou și utilizați tabelul \"Setări întrebări\" → \"Coloane grilă\". Pentru a ajusta câte coloane se întinde pe o întrebare, selectați-o și setați valoarea dorită în câmpul \"Aspect\" → \"Spania coloanelor\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Specifică câte coloane se întinde această întrebare în aspectul grilei."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Acest tabel vă permite să configurați fiecare coloană de grilă din pagină. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"

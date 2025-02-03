@@ -902,6 +902,7 @@ export var danishStrings = {
     maxWidth_placeholder: "Eks.: 50%",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Eks.: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Spørgsmål udseende",
@@ -2871,7 +2872,7 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Aktivér for kun at rangere valgte valg. Brugere trækker valgte elementer fra valglisten for at sortere dem inden for rangeringsområdet."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Angiv en liste over valgmuligheder, der vil blive foreslået svarpersonen under input."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Indstillingen ændrer kun størrelsen på inputfelterne og påvirker ikke bredden af spørgsmålsfeltet."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Angiver ensartet bredde for alle vareetiketter i pixel"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Angiver ensartet bredde for alle vareetiketter i pixel"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Indstillingen \"Auto\" bestemmer automatisk den passende tilstand til visning - Billede, Video eller YouTube - baseret på den angivne kilde-URL."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Fungerer som erstatning, når billedet ikke kan vises på en brugers enhed og af tilgængelighedshensyn."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Definerer farven på den valgte emoji, når ikontypen Vurdering er indstillet til \"Smileys\". Vælg mellem: \"Standard\" - den valgte emoji vises i standard undersøgelsesfarve; \"Skala\" - den valgte emoji arver farve fra vurderingsskalaen."
@@ -2880,7 +2881,7 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Et udtryk kan omfatte grundlæggende beregninger ('{q1_id} + {q2_id}'), betingelser ('{alder} > 60') og funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv.)."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Vælg for at gemme værdien \"Andet\" som en separat egenskab i undersøgelsesresultater."
 // p.swapOrder: "Swap the order of Yes and No" => "Skift rækkefølgen Ja og Nej"
-// p.itemTitleWidth: "Item label width (in px)" => "Bredde på vareetiket (i px)"
+// p.itemTitleWidth: "Item label width" => "Bredde på vareetiket (i px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst, der viser, om alle indstillinger er markeret"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Pladsholdertekst for rangeringsområdet"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Udfyld undersøgelsen automatisk"
@@ -3206,3 +3207,5 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator giver dig mulighed for manuelt at justere de indbyggede bredder af formularelementer for at styre layoutet. Hvis dette ikke giver det ønskede resultat, kan du aktivere gitterlayoutet, som strukturerer formularelementer ved hjælp af et kolonnebaseret system. For at konfigurere layoutkolonner skal du vælge en side eller et panel og bruge tabellen \"Spørgsmålsindstillinger\" → \"Gitterkolonner\". For at justere, hvor mange kolonner et spørgsmål strækker sig over, skal du vælge det og indstille den ønskede værdi i feltet \"Layout\" → \"Kolonnespænd\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I denne tabel kan du konfigurere hver gitterkolonne på siden. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Eks.: 100px"

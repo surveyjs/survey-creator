@@ -902,6 +902,7 @@ var germanTranslation = {
     maxWidth_placeholder: "Bsp.: 50%",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Beispiel: 100px",
     theme: {
       themeName: "Thema",
       isPanelless: "Aussehen der Frage",
@@ -2398,7 +2399,7 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Aktivieren Sie diese Option, um nur ausgewählte Auswahlmöglichkeiten in eine Rangfolge zu bringen. Benutzer ziehen ausgewählte Elemente aus der Auswahlliste, um sie innerhalb des Ranking-Bereichs zu sortieren."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Geben Sie eine Liste mit Auswahlmöglichkeiten ein, die dem Befragten während der Eingabe vorgeschlagen werden."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Die Einstellung ändert nur die Größe der Eingabefelder und wirkt sich nicht auf die Breite des Fragefelds aus."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Legt eine konsistente Breite für alle Elementbeschriftungen in Pixeln fest"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Legt eine konsistente Breite für alle Elementbeschriftungen in Pixeln fest"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Die Option \"Auto\" bestimmt automatisch den geeigneten Anzeigemodus - Bild, Video oder YouTube - basierend auf der bereitgestellten Quell-URL."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Dient als Ersatz, wenn das Bild nicht auf dem Gerät eines Benutzers angezeigt werden kann, und aus Gründen der Barrierefreiheit."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Definiert die Farbe des ausgewählten Emojis, wenn der Symboltyp \"Bewertung\" auf \"Smileys\" eingestellt ist. Wählen Sie zwischen: \"Standard\" - das ausgewählte Emoji erscheint in der Standardfarbe der Umfrage; \"Skala\" - das ausgewählte Emoji erbt die Farbe von der Bewertungsskala."
@@ -2407,7 +2408,7 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Ein Ausdruck kann grundlegende Berechnungen ('{q1_id} + {q2_id}'), Bedingungen ('{age} > 60') und Funktionen ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw.) enthalten."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Wählen Sie diese Option aus, um den Wert der Option \"Sonstiges\" als separate Eigenschaft in den Umfrageergebnissen zu speichern."
 // p.swapOrder: "Swap the order of Yes and No" => "Vertauschen Sie die Reihenfolge von Ja und Nein"
-// p.itemTitleWidth: "Item label width (in px)" => "Breite der Artikelbeschriftung (in px)"
+// p.itemTitleWidth: "Item label width" => "Breite der Artikelbeschriftung (in px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Text, der angezeigt werden soll, wenn alle Optionen ausgewählt sind"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Platzhaltertext für den Rankingbereich"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Automatisches Ausfüllen der Umfrage"
@@ -2734,3 +2735,5 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Mit Survey Creator können Sie die Inline-Breiten von Formularelementen manuell anpassen, um das Layout zu steuern. Wenn dies nicht zum gewünschten Ergebnis führt, können Sie das Rasterlayout aktivieren, das Formularelemente mithilfe eines spaltenbasierten Systems strukturiert. Um Layoutspalten zu konfigurieren, wählen Sie eine Seite oder einen Bereich aus und verwenden Sie die Tabelle \"Frageneinstellungen\" → \"Rasterspalten\". Um anzupassen, wie viele Spalten eine Frage umfasst, wählen Sie sie aus und stellen Sie den gewünschten Wert im Feld \"Layout\" → \"Spaltenbereich\" ein."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Gibt an, über wie viele Spalten sich diese Frage innerhalb des Rasterlayouts erstreckt."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "In dieser Tabelle können Sie jede Rasterspalte auf der Seite konfigurieren. Der Breitenprozentsatz für jede Spalte wird automatisch basierend auf der maximalen Anzahl von Elementen in einer Zeile festgelegt. Um das Rasterlayout anzupassen, passen Sie diese Werte manuell an und definieren Sie die Titelbreite für alle Fragen in jeder Spalte."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Beispiel: 100px"

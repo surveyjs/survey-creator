@@ -902,6 +902,7 @@ var persianStrings = {
     maxWidth_placeholder: "سابق: 50٪",
     imageHeight_placeholder: "خودکار",
     imageWidth_placeholder: "خودکار",
+    itemTitleWidth_placeholder: "مثال: 100 پیکسل",
     theme: {
       themeName: "تم",
       isPanelless: "ظاهر سوال",
@@ -2643,7 +2644,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "فقط گزینه های انتخاب شده را رتبه بندی کنید. کاربران موارد انتخاب شده را از لیست انتخاب می کنند تا انها را در منطقه رتبه بندی سفارش دهند."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "لیستی از انتخاب هایی را وارد کنید که در طول ورودی به مخاطب پیشنهاد می شود."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "تنظیم فقط زمینه های ورودی را تغییر می دهد و بر عرض جعبه سوال تاثیر نمی گذارد."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "عرض سازگار را برای همۀ برچسبهای فقره به تصویردانه تنظیم میکند"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "عرض سازگار را برای همۀ برچسبهای فقره به تصویردانه تنظیم میکند"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "گزینه \"Auto\" به طور خودکار حالت مناسب برای نمایش - تصویر، ویدئو یا یوتیوب - را بر اساس URL منبع ارائه شده تعیین می کند."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "به عنوان یک جایگزین زمانی که تصویر نمی تواند بر روی دستگاه کاربر و برای اهداف دسترسی نمایش داده شود."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "رنگ ایموجی انتخاب شده را هنگامی که نوع نماد رتبه بندی روی \"Smileys\" تنظیم شده است، تعریف می کند. انتخاب بین: \"پیش فرض\" - ایموجی انتخاب شده در رنگ پیش فرض بررسی ظاهر می شود؛ \"Scale\" - ایموجی انتخاب شده رنگ را از مقیاس رتبه بندی به ارث می برد."
@@ -2652,7 +2653,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "یک عبارت می تواند شامل محاسبات اساسی ('{q1_id} + {q2_id}')، شرایط ('{age} > 60') و توابع ('iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()'' و غیره باشد."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "انتخاب کنید برای ذخیره \"دیگر\" مقدار گزینه به عنوان یک ملک جداگانه در نتایج نظرسنجی."
 // p.swapOrder: "Swap the order of Yes and No" => "تعویض سفارش بله و خیر"
-// p.itemTitleWidth: "Item label width (in px)" => "عرض برچسب مورد (در پیکسل)"
+// p.itemTitleWidth: "Item label width" => "عرض برچسب مورد (در پیکسل)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "متن برای نشان دادن اینکه ایا همه گزینهها انتخاب شدهاند"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "متن نگهدارنده برای منطقه رتبه بندی"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "بررسی را به طور خودکار تکمیل کنید"
@@ -2977,3 +2978,5 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator به شما امکان می دهد عرض درون خطی عناصر فرم را به صورت دستی تنظیم کنید تا طرح بندی را کنترل کنید. اگر این نتیجه دلخواه را به همراه نداشت، می توانید طرح بندی شبکه را فعال کنید، که با استفاده از یک سیستم مبتنی بر ستون عناصر را تشکیل می دهد. برای پیکربندی ستون های طرح بندی، یک صفحه یا پانل را انتخاب کنید و از جدول «تنظیمات سوال» → «ستون های شبکه» استفاده کنید. برای تنظیم تعداد ستون های یک سوال، آن را انتخاب کنید و مقدار مورد نظر را در قسمت \"Layout\" → \"Column span\" تنظیم کنید."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "مشخص می کند که این سوال چند ستون در طرح بندی شبکه قرار دارد."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "این جدول به شما امکان می دهد هر ستون شبکه را در صفحه پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "مثال: 100 پیکسل"

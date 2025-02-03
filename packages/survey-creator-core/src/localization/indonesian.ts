@@ -902,6 +902,7 @@ export var indonesianStrings = {
     maxWidth_placeholder: "Contoh: 50%",
     imageHeight_placeholder: "Auto",
     imageWidth_placeholder: "Auto",
+    itemTitleWidth_placeholder: "Contoh: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Penampilan pertanyaan",
@@ -2841,7 +2842,7 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Aktifkan untuk memberi peringkat hanya pada pilihan yang dipilih. Pengguna akan menyeret item yang dipilih dari daftar pilihan untuk memesannya di dalam area peringkat."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Masukkan daftar pilihan yang akan disarankan kepada responden saat masukan."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Pengaturan hanya mengubah ukuran bidang input dan tidak memengaruhi lebar kotak pertanyaan."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Mengatur lebar yang konsisten untuk semua label item dalam piksel"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk semua label item dalam piksel"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Opsi \"Otomatis\" secara otomatis menentukan mode yang sesuai untuk tampilan - Gambar, Video, atau YouTube - berdasarkan URL sumber yang disediakan."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Berfungsi sebagai pengganti ketika gambar tidak dapat ditampilkan pada perangkat pengguna dan untuk tujuan aksesibilitas."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Menentukan warna emoji yang dipilih saat jenis ikon Peringkat diatur ke \"Smiley\". Pilih antara: \"Default\" - emoji yang dipilih muncul dalam warna survei default; \"Skala\" - emoji yang dipilih mewarisi warna dari skala peringkat."
@@ -2850,7 +2851,7 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Ekspresi dapat mencakup perhitungan dasar ('{q1_id} + {q2_id}'), kondisi ('{age} > 60'), dan fungsi ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll.)."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Pilih untuk menyimpan nilai opsi \"Lainnya\" sebagai properti terpisah dalam hasil survei."
 // p.swapOrder: "Swap the order of Yes and No" => "Tukar urutan Ya dan Tidak"
-// p.itemTitleWidth: "Item label width (in px)" => "Lebar label item (dalam px)"
+// p.itemTitleWidth: "Item label width" => "Lebar label item (dalam px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Teks untuk memperlihatkan jika semua opsi dipilih"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Teks tempat penampung untuk area peringkat"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Selesaikan survei secara otomatis"
@@ -3176,3 +3177,5 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Pembuat Survei memungkinkan Anda menyesuaikan lebar sebaris elemen formulir secara manual untuk mengontrol tata letak. Jika ini tidak menghasilkan hasil yang diinginkan, Anda dapat mengaktifkan tata letak kisi, yang menyusun elemen bentuk menggunakan sistem berbasis kolom. Untuk mengonfigurasi kolom tata letak, pilih halaman atau panel dan gunakan tabel \"Pengaturan Pertanyaan\" → \"Kolom kisi\". Untuk menyesuaikan berapa banyak kolom rentang pertanyaan, pilih dan atur nilai yang diinginkan di bidang \"Tata Letak\" → \"Rentang kolom\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Menentukan berapa banyak kolom yang mencakup pertanyaan ini dalam tata letak kisi."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi pada halaman. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Contoh: 100px"

@@ -902,6 +902,7 @@ export let svStrings = {
     maxWidth_placeholder: "Ex.: 50%",
     imageHeight_placeholder: "bil",
     imageWidth_placeholder: "bil",
+    itemTitleWidth_placeholder: "Ex.: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Frågans utseende",
@@ -2862,7 +2863,7 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Aktivera för att endast rangordna valda alternativ. Användarna drar de valda objekten från urvalslistan för att ordna dem i rangordningsområdet."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Ange en lista med alternativ som kommer att föreslås för respondenten under inmatningen."
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Inställningen ändrar bara storleken på inmatningsfälten och påverkar inte frågerutans bredd."
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Anger konsekvent bredd för alla objektetiketter i pixlar"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Anger konsekvent bredd för alla objektetiketter i pixlar"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Alternativet \"Auto\" bestämmer automatiskt vilket läge som är lämpligt för visning - bild, video eller YouTube - baserat på den angivna källadressen."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Fungerar som ersättning när bilden inte kan visas på en användares enhet och i tillgänglighetssyfte."
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "Definierar färgen på den valda emojin när typen av betygsikon är inställd på \"Smileys\". Välj mellan: \"Standard\" - den valda emojin visas i standardundersökningsfärgen; \"Skala\" - den valda emojin ärver färg från betygsskalan."
@@ -2871,7 +2872,7 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Ett uttryck kan innehålla grundläggande beräkningar ('{q1_id} + {q2_id}'), villkor ('{age} > 60') och funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.)."
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "Välj det här alternativet om du vill lagra alternativvärdet \"Annat\" som en separat egenskap i undersökningsresultaten."
 // p.swapOrder: "Swap the order of Yes and No" => "Byt ordning på Ja och Nej"
-// p.itemTitleWidth: "Item label width (in px)" => "Bredd på objektetikett (i px)"
+// p.itemTitleWidth: "Item label width" => "Bredd på objektetikett (i px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Text som ska visas om alla alternativ är markerade"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Platshållartext för rangordningsområdet"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Fyll i enkäten automatiskt"
@@ -3196,3 +3197,5 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Med Survey Creator kan du manuellt justera de infogade bredderna på formulärelement för att styra layouten. Om detta inte ger önskat resultat kan du aktivera rutnätslayouten, som strukturerar bildelement med hjälp av ett kolumnbaserat system. För att konfigurera layoutkolumner, välj en sida eller panel och använd tabellen \"Frågeinställningar\" → \"Rutnätskolumner\". För att justera hur många kolumner en fråga sträcker sig över, markera den och ställ in önskat värde i fältet \"Layout\" → \"Kolumnintervall\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Anger hur många kolumner den här frågan sträcker sig över i rutnätslayouten."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I den här tabellen kan du konfigurera varje rutnätskolumn på sidan. Den ställer automatiskt in breddprocenten för varje kolumn baserat på det maximala antalet element i en rad. Om du vill anpassa rutnätslayouten justerar du dessa värden manuellt och definierar rubrikbredden för alla frågor i varje kolumn."
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"

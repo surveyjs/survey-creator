@@ -902,6 +902,7 @@ export var jaStrings = {
     maxWidth_placeholder: "例:50%",
     imageHeight_placeholder: "自動",
     imageWidth_placeholder: "自動",
+    itemTitleWidth_placeholder: "例:100px",
     theme: {
       themeName: "テーマ",
       isPanelless: "質問の表示設定",
@@ -2686,7 +2687,7 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "選択した選択肢のみをランク付けできるようにします。ユーザーは、選択した項目を選択リストからドラッグして、ランキング領域内で並べ替えます。"
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "入力時に回答者に提案される選択肢のリストを入力します。"
 // pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "この設定では、入力フィールドのサイズが変更されるだけで、質問ボックスの幅には影響しません。"
-// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "すべてのアイテムラベルの幅をピクセル単位で統一します。"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "すべてのアイテムラベルの幅をピクセル単位で統一します。"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "「自動」オプションでは、指定されたソースURLに基づいて、表示に適したモード(画像、動画、YouTube)が自動的に決定されます。"
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "ユーザーのデバイスに画像を表示できない場合や、アクセシビリティの目的で代用します。"
 // pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "レーティングアイコンの種類が「スマイリー」に設定されている場合に選択した絵文字の色を定義します。以下から選択します: \"デフォルト\" - 選択した絵文字はデフォルトのアンケートカラーで表示されます。「スケール」 - 選択した絵文字は、評価スケールから色を継承します。"
@@ -2695,7 +2696,7 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "式には、基本的な計算 ('{q1_id} + {q2_id}')、条件 ('{age} > 60')、関数 ('iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' など) を含めることができます。"
 // pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "「その他」オプションの値をアンケート結果に別のプロパティとして保存する場合に選択します。"
 // p.swapOrder: "Swap the order of Yes and No" => "「はい」と「いいえ」の順序を入れ替える"
-// p.itemTitleWidth: "Item label width (in px)" => "アイテムラベルの幅 (px)"
+// p.itemTitleWidth: "Item label width" => "アイテムラベルの幅 (px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "すべてのオプションが選択されている場合に表示されるテキスト"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "ランキングエリアのプレースホルダーテキスト"
 // pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "調査に自動的に回答する"
@@ -3021,3 +3022,5 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator では、フォーム要素のインライン幅を手動で調整して、レイアウトを制御できます。これで目的の結果が得られない場合は、列ベースのシステムを使用してフォーム要素を構成するグリッドレイアウトを有効にすることができます。レイアウト列を設定するには、ページまたはパネルを選択し、「質問設定」→「グリッド列」テーブルを使用します。質問の列数を調整するには、質問を選択し、「レイアウト」→「列範囲」フィールドで目的の値を設定します。"
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "この質問がグリッドレイアウト内で何列にまたがっているかを指定します。"
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "このテーブルでは、ページ上の各グリッド列を構成できます。行内の要素の最大数に基づいて、各列の幅の割合が自動的に設定されます。グリッドレイアウトをカスタマイズするには、これらの値を手動で調整し、各列のすべての質問のタイトル幅を定義します。"
+
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "例:100px"
