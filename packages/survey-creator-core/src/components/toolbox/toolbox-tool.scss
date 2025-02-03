@@ -74,7 +74,7 @@
   transition: opacity $creator-transition-duration;
   background-color: $background;
   /* Shadow / Medium */
-  border-radius: var(--ctr-tooltip-corder-radius, var(--sjs-corner-radius-x075));
+  border-radius: var(--ctr-tooltip-corner-radius, var(--sjs-corner-radius-x075));
   box-shadow:
     var(--ctr-tooltip-shadow-1-offset-x, 0px)
       var(--ctr-tooltip-shadow-1-offset-y, 2px)
