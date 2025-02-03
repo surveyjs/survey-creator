@@ -14,7 +14,6 @@ svc-page-navigator,
   padding: var(--ctr-page-navigator-button-padding, var(--sjs-spacing-x1));
   border-radius: var(--ctr-page-navigator-button-corner-radius, var(--sjs-corner-radius-x1));
   overflow: visible;
-  cursor: pointer;
   transition: background-color $creator-transition-duration;
 
   .sv-svg-icon {
@@ -51,6 +50,16 @@ svc-page-navigator,
         fill: var(--ctr-page-navigator-button-icon-color-hovered, var(--sjs-layer-3-foreground-75, #000000bf));
       }
     }
+  }
+}
+
+.svc-page-navigator__button:disabled {
+  opacity: var(--ctr-page-navigator-button-icon-opacity-disabled, 0.25);
+  background-color: transparent;
+  cursor: default;
+
+  use {
+    fill: var(--ctr-page-navigator-button-icon-color-disabled, var(--sjs-layer-3-foreground-100, #000000e6));
   }
 }
 

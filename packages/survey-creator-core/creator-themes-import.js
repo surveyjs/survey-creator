@@ -26,6 +26,7 @@ var themeConstants = {
     "--ctr-toolbox-margin-left-compact": "12px",
     "--ctr-toolbox-item-banner-icon-display": "block",
     "--ctr-toolbox-item-banner-beak-display": "none",
+    "--ctr-toolbox-item-banner-left": 0,
     "--ctr-toolbox-submenu-item-min-width": "initial",
   }
 };

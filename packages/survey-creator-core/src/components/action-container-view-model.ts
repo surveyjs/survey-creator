@@ -406,6 +406,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     return {
       id: "collapse",
       css: "sv-action-bar-item--collapse",
+      locTooltipName: new ComputedUpdater<string>(() => this.collapsed ? "ed.expandTooltip" : "ed.collapseTooltip") as any,
       iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
       iconSize: "auto",
       action: () => {
