@@ -210,6 +210,11 @@ export async function setExpandCollapseButtonVisibility(newVal: string) {
     window["creator"].expandCollapseButtonVisibility = newVal;
   })(newVal);
 }
+export async function setAllowZoom(newVal: boolean) {
+  await ClientFunction((newVal) => {
+    window["creator"].allowZoom = newVal;
+  })(newVal);
+}
 
 export const explicitErrorHandler = ClientFunction(() => {
   window.addEventListener("error", e => {
