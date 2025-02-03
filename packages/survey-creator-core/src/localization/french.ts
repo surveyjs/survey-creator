@@ -3083,4 +3083,4 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Spécifie le nombre de colonnes que cette question couvre dans la disposition de la grille."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ce tableau vous permet de configurer chaque colonne de la grille de la page. Il définit automatiquement le pourcentage de largeur de chaque colonne en fonction du nombre maximal d’éléments dans une rangée. Pour personnaliser la disposition de la grille, ajustez manuellement ces valeurs et définissez la largeur du titre pour toutes les questions de chaque colonne."
 
-// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex. : 100px"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"
