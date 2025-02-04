@@ -131,6 +131,9 @@
   appearance: none;
   display: flex;
   border: none;
+  use {
+    fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf))
+  }
   //hovered and focused state
   &:hover,
   &:focus {
@@ -142,17 +145,13 @@
   &.svc-toolbar__item--pressed {
     opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
     background-color: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
-    use {
-      fill: black;
-      opacity: 0.45;
-    }
   }
 
   //checked state
   &.svc-toolbar__item--active {
     background-color: var(--ctr-menu-toolbar-button-background-color-selected, var(--sjs-primary-background-10, #19b3941a));
     use {
-      fill: var(--ctr-menu-toolbar-button-text-color-selected, var(--sjs-primary-background-500, #19b394ff));
+      fill: var(--ctr-menu-toolbar-button-icon-color-selected, var(--sjs-primary-background-500, #19b394ff));
     }
   }
 
@@ -160,6 +159,9 @@
   &:disabled {
     background-color: transparent;
     opacity: var(--ctr-menu-toolbar-button-opacity-disabled, 0.25);
+    use {
+      fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+    }
   }
 }
 

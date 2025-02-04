@@ -101,8 +101,12 @@ svc-question {
   }
 
   //disabled state
-  :disabled {
+  &:disabled {
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-disabled, 0.25);
+    use {
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, var(--sjs-secondary-background-500, #19b394ff));
+      opacity: 1;
+    }
   }
 }
 

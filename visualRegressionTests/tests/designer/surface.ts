@@ -2631,18 +2631,31 @@ test("Page hidden header and top toolbar", async (t) => {
 test("Check question button states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
+    await ClientFunction(() => {
+      window["creator"].onDefineElementMenuItems.add((_, options) => {
+        if (options.obj["isPage"]) return;
+        options.items.push({
+          id: "isrequired2",
+          title: "Required",
+          enabled: false,
+          iconName: "icon-required",
+          action: () => { }
+        });
+      });
+    })();
     await setJSON({
       showQuestionNumbers: "on",
       "logoPosition": "right",
       "elements": [
         {
-          type: "text",
+          type: "boolean",
           name: "q1",
           title: "Question Title"
         }
       ]
     });
     const button = Selector(".svc-required-action");
+    const buttonDisabled = Selector(".svc-survey-element-toolbar__item:disabled");
     await t.click(Selector(".svc-question__content"));
     await takeElementScreenshot("question-button.png", button, t, comparer);
     await t.hover(button);
@@ -2654,18 +2667,33 @@ test("Check question button states", async (t) => {
     await takeElementScreenshot("question-button-after-click.png", button, t, comparer);
     await t.pressKey("tab shift+tab");
     await takeElementScreenshot("question-button-focused.png", button, t, comparer);
+    await takeElementScreenshot("question-button-disabled.png", buttonDisabled, t, comparer);
     await ClientFunction(() => {
       const question = window["creator"].survey.getQuestionByName("q1");
       const adorner = window["SurveyCreatorCore"].QuestionAdornerViewModel.GetAdorner(question);
       adorner.getActionById("isrequired").pressed = true;
+      adorner.getActionById("isrequired2").pressed = true;
     })();
     await takeElementScreenshot("question-button-pressed.png", button, t, comparer);
+    await takeElementScreenshot("question-button-pressed-disabled.png", buttonDisabled, t, comparer);
   });
 });
 
 test("Check page button states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
+    await ClientFunction(() => {
+      window["creator"].onDefineElementMenuItems.add((_, options) => {
+        if (!options.obj["isPage"]) return;
+        options.items.push({
+          id: "duplicate2",
+          title: "Duplicate",
+          enabled: false,
+          iconName: "icon-copy-16x16",
+          action: () => { }
+        });
+      });
+    })();
     await setJSON({
       showQuestionNumbers: "on",
       "logoPosition": "right",
@@ -2678,18 +2706,22 @@ test("Check page button states", async (t) => {
       ]
     });
     const button = Selector(".svc-page-toolbar__item");
+    const buttonDisabled = Selector(".svc-page-toolbar__item:disabled");
     await t.click(Selector(".svc-page__content"), { offsetX: 5, offsetY: 5 });
     await takeElementScreenshot("page-button.png", button, t, comparer);
     await t.hover(button);
     await takeElementScreenshot("page-button-hover.png", button, t, comparer);
     await t.pressKey("tab");
     await takeElementScreenshot("page-button-focused.png", button, t, comparer);
+    await takeElementScreenshot("page-button-disabled.png", buttonDisabled, t, comparer);
     await ClientFunction(() => {
       const page = window["creator"].survey.getPageByName("page1");
       const adorner = window["SurveyCreatorCore"].PageAdorner.GetAdorner(page);
       adorner.actionContainer.actions[0].pressed = true;
+      adorner.actionContainer.actions[2].pressed = true;
     })();
     await takeElementScreenshot("page-button-pressed.png", button, t, comparer);
+    await takeElementScreenshot("page-button-pressed-disabled.png", buttonDisabled, t, comparer);
   });
 });
 
