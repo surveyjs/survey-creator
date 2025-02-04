@@ -144,6 +144,7 @@ export class TabDesignerViewModel extends Base {
       locTooltipName: "ed.zoom100Tooltip",
       iconName: "icon-actual-size-24x24",
       iconSize: "auto",
+      enabled: new ComputedUpdater<boolean>(() => this.surfaceScale !== 100),
       visible: new ComputedUpdater<boolean>(() => this.creator.allowZoom),
       action: () => { this.scaleSurface(100); }
     });
