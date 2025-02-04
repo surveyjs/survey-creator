@@ -41,23 +41,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (!this.options) {
       this.options = new EmptySurveyCreatorOptions();
     }
-    this.editSurvey.css = logicCss;
-    this.editSurvey.onUpdateQuestionCssClasses.add((sender, options) => {
-      this.onUpdateQuestionCssClasses(options);
-    });
-    this.editSurvey.onUpdatePanelCssClasses.add((sender, options) => {
-      this.onUpdatePanelCssClasses(options);
-    });
-    this.editSurvey.onQuestionAdded.add((sender, options) => {
-      this.onQuestionAdded(options);
-    });
-    this.editSurvey.onGetQuestionTitleActions.add((sender, options) => {
-      this.onGetQuestionTitleActions(options);
-    });
-    this.editSurvey.onValueChanged.add((sender, options) => {
-      this.onValueChanged(options);
-    });
-    this.setEditableItem(editableItem);
     this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
       if (options.name == "logicTypeName") {
         this.onLogicTypeChanged(options.panel);
@@ -84,6 +67,22 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       const panel = this.panels[this.panel.panelCount - 1];
       this.onPanelAdded(panel, null);
     });
+    this.editSurvey.css = logicCss;
+    this.editSurvey.onUpdateQuestionCssClasses.add((sender, options) => {
+      this.onUpdateQuestionCssClasses(options);
+    });
+    this.editSurvey.onUpdatePanelCssClasses.add((sender, options) => {
+      this.onUpdatePanelCssClasses(options);
+    });
+    this.editSurvey.onQuestionAdded.add((sender, options) => {
+      this.onQuestionAdded(options);
+    });
+    this.editSurvey.onGetQuestionTitleActions.add((sender, options) => {
+      this.onGetQuestionTitleActions(options);
+    });
+    this.editSurvey.onValueChanged.add((sender, options) => {
+      this.onValueChanged(options);
+    });
     this.editSurvey.onDynamicPanelItemValueChanged.add((sender, options) => {
       const q = options.panel.getQuestionByName(options.name);
       if(!!q && q.parent?.name === "triggerEditorPanel") {
@@ -93,6 +92,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         }
       }
     });
+    this.setEditableItem(editableItem);
   }
   public get editableItem(): SurveyLogicItem {
     return this.editableItemValue;
