@@ -867,7 +867,8 @@ test(
     expect(selectorModel.list.actions).toHaveLength(3);
     expect(selectorModel.list.actions[2].title).toEqual("New Title");
 
-    expect(selectorBarItem.title).toEqual("q1 Properties");
+    expect(selectorBarItem.title).toEqual("General");
+    expect(selectorBarItem.tooltip).toEqual("q1 Properties");
   }
 );
 

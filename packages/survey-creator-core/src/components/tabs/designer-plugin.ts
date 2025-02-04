@@ -198,7 +198,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     };
     this.propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridPlaceholderPage = this.creator.sidebar.addPage("propertyGridPlaceholder", "svc-property-grid-placeholder", this.propertyGridViewModel);
-    this.propertyGridPlaceholderPage.caption = "Survey Settings";
+    this.propertyGridPlaceholderPage.caption = editorLocalization.getString("ed.surveySettings");
 
     this.propertyGridTab = this.creator.sidebar.addPage("propertyGrid", "svc-property-grid", this.propertyGridViewModel, () => {
       const result = [];
@@ -269,7 +269,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         pgTabs.forEach(action => {
           action.active = action.id === options.newCurrentPage.name;
         });
-        this.propertyGridViewModel.objectSelectionAction.tooltip = options.newCurrentPage.title;
+        this.propertyGridViewModel.objectSelectionAction.title = options.newCurrentPage.title;
       });
       this.propertyGrid.survey.onPageVisibleChanged.add((sender: SurveyModel, options: PageVisibleChangedEvent) => {
         const action = this.tabControlModel.topToolbar.getActionById(options.page.name);
@@ -278,7 +278,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         }
       });
 
-      this.propertyGridViewModel.objectSelectionAction.tooltip = this.propertyGrid.survey.currentPage?.title;
+      this.propertyGridViewModel.objectSelectionAction.title = this.propertyGrid.survey.currentPage?.title;
     }
   }
   private setupPropertyGridTabActions() {
@@ -305,7 +305,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
           this.creator.sidebar.expandSidebar();
           this.setPropertyGridIsActivePage();
           this.propertyGrid.survey.currentPage = p;
-          this.propertyGridViewModel.objectSelectionAction.tooltip = p.title;
+          this.propertyGridViewModel.objectSelectionAction.title = p.title;
           pgTabs.forEach(i => i.active = false);
           action.active = true;
         }
