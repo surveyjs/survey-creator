@@ -125,16 +125,21 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     const tempPanel = Serializer.createClass("panel");
     const propGenerator = new PropertyJSONGenerator(obj, options);
     propGenerator.setupObjPanel(tempPanel, true, "logic");
-    const newQuestion = tempPanel.getQuestionByName(name);
+    let newQuestion = tempPanel.getQuestionByName(name);
     if (!!newQuestion) {
-      let index = triggerEditorPanel.elements.indexOf(oldQuestion);
-      triggerEditorPanel.blockAnimations();
-      triggerEditorPanel.addElement(newQuestion, index);
-      oldQuestion.delete();
-      triggerEditorPanel.releaseAnimations();
-    }
-    if (newQuestion.name === "setValue") {
-      this.updateSetValueQuestion(newQuestion);
+      if(!Helpers.isTwoValueEquals(newQuestion.toJSON(), oldQuestion.toJSON())) {
+        let index = triggerEditorPanel.elements.indexOf(oldQuestion);
+        triggerEditorPanel.blockAnimations();
+        triggerEditorPanel.addElement(newQuestion, index);
+        oldQuestion.delete();
+        triggerEditorPanel.releaseAnimations();
+      }
+      else {
+        newQuestion = oldQuestion;
+      }
+      if (newQuestion.name === "setValue") {
+        this.updateSetValueQuestion(newQuestion);
+      }
     }
     this.updateVisibilityPanel(triggerEditorPanel);
     tempPanel.dispose();
