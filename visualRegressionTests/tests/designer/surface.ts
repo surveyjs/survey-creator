@@ -2632,6 +2632,7 @@ test("Check question button states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
     await ClientFunction(() => {
+      window["creator"].expandCollapseButtonVisibility = "never";
       window["creator"].onDefineElementMenuItems.add((_, options) => {
         if (options.obj["isPage"]) return;
         options.items.push({
