@@ -2689,6 +2689,7 @@ test("Check page button states", async (t) => {
           id: "duplicate2",
           title: "Duplicate",
           enabled: false,
+          iconSize: 16,
           iconName: "icon-copy-16x16",
           action: () => { }
         });
