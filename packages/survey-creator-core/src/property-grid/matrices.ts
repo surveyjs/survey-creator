@@ -134,7 +134,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   protected addItem(creator: ISurveyCreatorOptions, obj: Base, question: QuestionMatrixDynamicModel) {
     question.addRow();
   }
+  protected getHasAddButton(): boolean { return true; }
   public onGetQuestionTitleActions(obj: Base, options: any, creator: ISurveyCreatorOptions): void {
+    if(!this.getHasAddButton()) return;
     const question: QuestionMatrixDynamicModel = options.question;
     options.titleActions.push({
       id: "add-item",
@@ -655,7 +657,7 @@ export class PropertyGridEditorMatrixLayoutColumns extends PropertyGridEditorMat
     const q = options.cellQuestion;
     q.textUpdateMode = "onTyping";
   }
-
+  protected getHasAddButton(): boolean { return false; }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options?: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition) {
     super.onCreated(obj, question, prop, options, propGridDefinition);
     const matrixQuestion = <QuestionMatrixDynamicModel>question;
