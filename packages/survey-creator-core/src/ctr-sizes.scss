@@ -1,5 +1,6 @@
 @use "./ctr-variables.scss" as *;
 
+.svc-creator-popup,
 .svc-creator {
   --sjs-spacing-x2: calc(#{$spacing-unit} * 2);
   --sjs-spacing-x3: calc(#{$spacing-unit} * 3);
@@ -12,6 +13,7 @@
   --sjs-spacing-x4: calc(#{$spacing-unit} * 4);
   --sjs-spacing-x350: calc(#{$spacing-unit} * 3.5);
   --sjs-spacing-x5: calc(#{$spacing-unit} * 5);
+  --sjs-spacing-x550: calc(#{$spacing-unit} * 5.5);
   --sjs-spacing-x6: calc(#{$spacing-unit} * 6);
   --sjs-spacing-x7: calc(#{$spacing-unit} * 7);
   --sjs-spacing-x8: calc(#{$spacing-unit} * 8);
