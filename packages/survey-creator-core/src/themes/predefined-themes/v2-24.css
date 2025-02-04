@@ -758,7 +758,7 @@
   --ctr-data-table-background-color: var(--sjs-layer-1-background-400);
   --ctr-data-table-border-color: var(--sjs-border-25);
   --ctr-data-table-border-width: var(--sjs-stroke-x1);
-  --ctr-separator-width: var(--sjs-size-x0125);
+  --ctr-separator-width: var(--sjs-stroke-x1);
   --ctr-separator-color: var(--sjs-border-25);
   --ctr-separator-margin-vertical-small: var(--sjs-spacing-x1);
   --ctr-separator-margin-horizontal-small: var(--sjs-spacing-x1);
@@ -932,7 +932,7 @@
   --ctr-list-item-contextual-buttons-height: var(--sjs-font-size-x2);
   --ctr-toolbox-separator-color: var(--sjs-border-25);
   --ctr-toolbox-separator-padding-top: var(--sjs-spacing-x1);
-  --ctr-toolbox-separator-height: var(--sjs-size-x0125);
+  --ctr-toolbox-separator-height: var(--sjs-stroke-x1);
   --ctr-toolbox-separator-max-width: var(--sjs-size-max);
   --ctr-toolbox-separator-padding-left: var(--sjs-spacing-x2);
   --ctr-toolbox-separator-padding-bottom: var(--sjs-spacing-x1);
@@ -3438,4 +3438,6 @@
   --lbr-popup-toolbar-header-padding-top: var(--lbr-spacing-x1);
   --lbr-popup-toolbar-header-padding-right: var(--lbr-spacing-x1);
   --lbr-popup-toolbar-header-padding-left: var(--lbr-spacing-x2);
+  --lbr-separator-width: var(--lbr-stroke-x1);
 }
+
