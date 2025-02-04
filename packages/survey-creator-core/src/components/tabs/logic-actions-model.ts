@@ -126,7 +126,7 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     const propGenerator = new PropertyJSONGenerator(obj, options);
     propGenerator.setupObjPanel(tempPanel, true, "logic");
     const newQuestion = tempPanel.getQuestionByName(name);
-    if (!!newQuestion) {
+    if (!!newQuestion && !Helpers.isTwoValueEquals(newQuestion.toJSON(), oldQuestion.toJSON())) {
       let index = triggerEditorPanel.elements.indexOf(oldQuestion);
       triggerEditorPanel.blockAnimations();
       triggerEditorPanel.addElement(newQuestion, index);
