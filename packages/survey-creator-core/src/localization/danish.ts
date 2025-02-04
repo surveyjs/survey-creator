@@ -107,6 +107,8 @@ export var danishStrings = {
     redo: "Annuller fortryd",
     undoTooltip: "Fortryd seneste ændring",
     redoTooltip: "Fortryd ændringen",
+    expandTooltip: "Ekspandere",
+    collapseTooltip: "Sammenbrud",
     expandAllTooltip: "Udvid alle",
     collapseAllTooltip: "Skjul alle",
     zoomInTooltip: "Zoom ind",
@@ -902,6 +904,7 @@ export var danishStrings = {
     maxWidth_placeholder: "Eks.: 50%",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Eks.: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Spørgsmål udseende",
@@ -3206,3 +3209,7 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator giver dig mulighed for manuelt at justere de indbyggede bredder af formularelementer for at styre layoutet. Hvis dette ikke giver det ønskede resultat, kan du aktivere gitterlayoutet, som strukturerer formularelementer ved hjælp af et kolonnebaseret system. For at konfigurere layoutkolonner skal du vælge en side eller et panel og bruge tabellen \"Spørgsmålsindstillinger\" → \"Gitterkolonner\". For at justere, hvor mange kolonner et spørgsmål strækker sig over, skal du vælge det og indstille den ønskede værdi i feltet \"Layout\" → \"Kolonnespænd\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I denne tabel kan du konfigurere hver gitterkolonne på siden. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
+
+// ed.expandTooltip: "Expand" => "Ekspandere"
+// ed.collapseTooltip: "Collapse" => "Sammenbrud"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Eks.: 100px"

@@ -107,6 +107,8 @@ export var indonesianStrings = {
     redo: "Ulangi",
     undoTooltip: "Mengurungkan perubahan terakhir",
     redoTooltip: "Mengulangi perubahan",
+    expandTooltip: "Memperluas",
+    collapseTooltip: "Roboh",
     expandAllTooltip: "Perluas Semua",
     collapseAllTooltip: "Ciutkan Semua",
     zoomInTooltip: "Perbesar",
@@ -902,6 +904,7 @@ export var indonesianStrings = {
     maxWidth_placeholder: "Contoh: 50%",
     imageHeight_placeholder: "Auto",
     imageWidth_placeholder: "Auto",
+    itemTitleWidth_placeholder: "Contoh: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Penampilan pertanyaan",
@@ -3176,3 +3179,7 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Pembuat Survei memungkinkan Anda menyesuaikan lebar sebaris elemen formulir secara manual untuk mengontrol tata letak. Jika ini tidak menghasilkan hasil yang diinginkan, Anda dapat mengaktifkan tata letak kisi, yang menyusun elemen bentuk menggunakan sistem berbasis kolom. Untuk mengonfigurasi kolom tata letak, pilih halaman atau panel dan gunakan tabel \"Pengaturan Pertanyaan\" → \"Kolom kisi\". Untuk menyesuaikan berapa banyak kolom rentang pertanyaan, pilih dan atur nilai yang diinginkan di bidang \"Tata Letak\" → \"Rentang kolom\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Menentukan berapa banyak kolom yang mencakup pertanyaan ini dalam tata letak kisi."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi pada halaman. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom."
+
+// ed.expandTooltip: "Expand" => "Memperluas"
+// ed.collapseTooltip: "Collapse" => "Roboh"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Contoh: 100px"

@@ -107,6 +107,8 @@ export const thStrings = {
     redo: "ทำซ้ำ",
     undoTooltip: "เลิกทำการเปลี่ยนแปลงครั้งล่าสุด",
     redoTooltip: "ทำซ้ำการเปลี่ยนแปลง",
+    expandTooltip: "ขยาย",
+    collapseTooltip: "ทรุด",
     expandAllTooltip: "ขยายทั้งหมด",
     collapseAllTooltip: "ยุบทั้งหมด",
     zoomInTooltip: "ซูมเข้า",
@@ -902,6 +904,7 @@ export const thStrings = {
     maxWidth_placeholder: "ตัวอย่าง: 50%",
     imageHeight_placeholder: "อัตโนมัติ",
     imageWidth_placeholder: "อัตโนมัติ",
+    itemTitleWidth_placeholder: "ตัวอย่าง: 100px",
     theme: {
       themeName: "ธีม",
       isPanelless: "การปรากฏคำถาม",
@@ -1962,3 +1965,7 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "ตัวสร้างแบบสํารวจช่วยให้คุณสามารถปรับความกว้างแบบอินไลน์ขององค์ประกอบฟอร์มด้วยตนเองเพื่อควบคุมเค้าโครง หากสิ่งนี้ไม่ก่อให้เกิดผลลัพธ์ที่ต้องการ คุณสามารถเปิดใช้งานเค้าโครงกริด ซึ่งโครงสร้างสร้างองค์ประกอบโดยใช้ระบบตามคอลัมน์ หากต้องการกําหนดค่าคอลัมน์เค้าโครง ให้เลือกหน้าหรือแผง แล้วใช้ตาราง \"การตั้งค่าคําถาม\" → \"คอลัมน์กริด\" หากต้องการปรับจํานวนคอลัมน์ของคําถาม ให้เลือกและตั้งค่าที่ต้องการในช่อง \"เค้าโครง\" → \"ช่วงคอลัมน์\""
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "ระบุจํานวนคอลัมน์ที่คําถามนี้ครอบคลุมภายในเค้าโครงกริด"
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "ตารางนี้ช่วยให้คุณสามารถกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์บนหน้า โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์"
+
+// ed.expandTooltip: "Expand" => "ขยาย"
+// ed.collapseTooltip: "Collapse" => "ทรุด"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "ตัวอย่าง: 100px"

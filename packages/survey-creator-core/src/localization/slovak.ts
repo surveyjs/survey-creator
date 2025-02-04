@@ -107,6 +107,8 @@ export var skStrings = {
     redo: "Opakovať",
     undoTooltip: "Zrušiť poslednú zmenu",
     redoTooltip: "Opakovať zmenu",
+    expandTooltip: "Rozšíriť",
+    collapseTooltip: "Kolaps",
     expandAllTooltip: "Rozbaliť všetko",
     collapseAllTooltip: "Zbaliť všetko",
     zoomInTooltip: "Priblížiť",
@@ -902,6 +904,7 @@ export var skStrings = {
     maxWidth_placeholder: "Napríklad: 50%",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Príklad: 100px",
     theme: {
       themeName: "Téma",
       isPanelless: "Vzhľad otázky",
@@ -2975,3 +2978,7 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Aplikácia Survey Creator umožňuje manuálne upraviť vnorené šírky prvkov formulára na ovládanie rozloženia. Ak to neprinesie požadovaný výsledok, môžete povoliť rozloženie mriežky, ktoré štruktúry tvoria prvky pomocou systému založeného na stĺpcoch. Ak chcete nakonfigurovať stĺpce rozloženia, vyberte stránku alebo panel a použite tabuľku \"Nastavenia otázky\" → \"Stĺpce mriežky\". Ak chcete upraviť, koľko stĺpcov otázka zahŕňa, vyberte ju a nastavte požadovanú hodnotu v poli \"Rozloženie\" → \"Rozsah stĺpcov\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Určuje, koľko stĺpcov táto otázka zahŕňa v rozložení mriežky."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Táto tabuľka umožňuje nakonfigurovať každý stĺpec mriežky na strane. Automaticky nastaví percentuálnu šírku pre každý stĺpec na základe maximálneho počtu prvkov v riadku. Ak chcete prispôsobiť rozloženie mriežky, manuálne upravte tieto hodnoty a definujte šírku názvu pre všetky otázky v každom stĺpci."
+
+// ed.expandTooltip: "Expand" => "Rozšíriť"
+// ed.collapseTooltip: "Collapse" => "Kolaps"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Príklad: 100px"

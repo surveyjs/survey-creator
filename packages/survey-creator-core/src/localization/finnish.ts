@@ -107,6 +107,8 @@ export var fiStrings = {
     redo: "Tee uudelleen",
     undoTooltip: "Kumoa viimeinen muutos",
     redoTooltip: "Tee muutos uudelleen",
+    expandTooltip: "Laajentaa",
+    collapseTooltip: "Romahdus",
     expandAllTooltip: "Laajenna kaikki",
     collapseAllTooltip: "Kutista kaikki",
     zoomInTooltip: "Lähennä",
@@ -902,6 +904,7 @@ export var fiStrings = {
     maxWidth_placeholder: "Esimerkki: 50 %",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Esimerkki: 100px",
     theme: {
       themeName: "Teema",
       isPanelless: "Kysymyksen ulkonäkö",
@@ -2994,3 +2997,7 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creatorin avulla voit manuaalisesti säätää lomake-elementtien sisäisiä leveyksiä asettelun hallitsemiseksi. Jos tämä ei tuota toivottua tulosta, voit ottaa käyttöön ruudukkoasettelun, joka jäsentää elementtejä sarakepohjaisen järjestelmän avulla. Määritä asettelusarakkeet valitsemalla sivu tai paneeli ja käyttämällä \"Kysymysasetukset\" → \"Ruudukkosarakkeet\" -taulukkoa. Jos haluat säätää, kuinka monta saraketta kysymys kattaa, valitse se ja aseta haluamasi arvo \"Asettelu\" → \"Sarakeväli\" -kenttään."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Määrittää, kuinka monta saraketta tämä kysymys kattaa ruudukkoasettelussa."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tämän taulukon avulla voit määrittää sivun jokaisen ruudukkosarakkeen. Se määrittää automaattisesti kunkin sarakkeen leveysprosentin rivin elementtien enimmäismäärän perusteella. Jos haluat mukauttaa ruudukon asettelua, säädä näitä arvoja manuaalisesti ja määritä otsikon leveys kunkin sarakkeen kaikille kysymyksille."
+
+// ed.expandTooltip: "Expand" => "Laajentaa"
+// ed.collapseTooltip: "Collapse" => "Romahdus"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Esimerkki: 100px"

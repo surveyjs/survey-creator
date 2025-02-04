@@ -107,6 +107,8 @@ export var msStrings = {
     redo: "Buat Semula",
     undoTooltip: "Buat asal perubahan terakhir",
     redoTooltip: "Buat semula perubahan",
+    expandTooltip: "Mengembangkan",
+    collapseTooltip: "Runtuh",
     expandAllTooltip: "Kembangkan Semua",
     collapseAllTooltip: "Runtuhkan Semua",
     zoomInTooltip: "Zum Masuk",
@@ -902,6 +904,7 @@ export var msStrings = {
     maxWidth_placeholder: "Ex.: 50%",
     imageHeight_placeholder: "Auto",
     imageWidth_placeholder: "Auto",
+    itemTitleWidth_placeholder: "Cth.: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Penampilan soalan",
@@ -2976,3 +2979,7 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Pencipta Tinjauan membolehkan anda melaraskan lebar sebaris elemen borang secara manual untuk mengawal reka letak. Jika ini tidak menghasilkan hasil yang diingini, anda boleh mendayakan reka letak grid, yang menstrukturkan elemen membentuk menggunakan sistem berasaskan lajur. Untuk mengkonfigurasi lajur reka letak, pilih halaman atau panel dan gunakan jadual \"Tetapan Soalan\" → \"Lajur Grid\". Untuk melaraskan bilangan lajur rentang soalan, pilihnya dan tetapkan nilai yang dikehendaki dalam medan \"Reka Letak\" → \"Rentang lajur\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Menentukan bilangan lajur soalan ini merangkumi dalam reka letak grid."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Jadual ini membolehkan anda mengkonfigurasi setiap lajur grid pada halaman. Ia secara automatik menetapkan peratusan lebar untuk setiap lajur berdasarkan bilangan maksimum elemen dalam baris. Untuk menyesuaikan tataletak grid, laraskan nilai ini secara manual dan takrifkan lebar tajuk untuk semua soalan dalam setiap lajur."
+
+// ed.expandTooltip: "Expand" => "Mengembangkan"
+// ed.collapseTooltip: "Collapse" => "Runtuh"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Cth.: 100px"

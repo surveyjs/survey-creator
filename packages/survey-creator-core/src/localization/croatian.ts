@@ -107,6 +107,8 @@ export var hrStrings = {
     redo: "Ponoviti",
     undoTooltip: "Poništi posljednju promjenu",
     redoTooltip: "Preusmjeti promjenu",
+    expandTooltip: "Proširiti",
+    collapseTooltip: "Kolaps",
     expandAllTooltip: "Proširi sve",
     collapseAllTooltip: "Sažmi sve",
     zoomInTooltip: "Zumiranje",
@@ -902,6 +904,7 @@ export var hrStrings = {
     maxWidth_placeholder: "Npr.: 50%",
     imageHeight_placeholder: "Автоматично",
     imageWidth_placeholder: "Автоматично",
+    itemTitleWidth_placeholder: "Primjer: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Izgled pitanja",
@@ -3016,3 +3019,7 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator omogućuje vam ručno podešavanje ugrađenih širina elemenata obrasca za kontrolu izgleda. Ako to ne daje željeni ishod, možete omogućiti raspored rešetke, čije strukture tvore elemente pomoću sustava temeljenog na stupcima. Da biste konfigurirali stupce izgleda, odaberite stranicu ili ploču i upotrijebite tablicu \"Postavke pitanja\" → \"Stupci rešetke\". Da biste prilagodili koliko stupaca obuhvaća pitanje, odaberite ga i postavite željenu vrijednost u polju \"Izgled\" → \"Raspon stupaca\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Određuje koliko stupaca ovo pitanje obuhvaća unutar rasporeda rešetke."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ova tablica omogućuje konfiguriranje svakog stupca rešetke na stranici. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."
+
+// ed.expandTooltip: "Expand" => "Proširiti"
+// ed.collapseTooltip: "Collapse" => "Kolaps"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Primjer: 100px"

@@ -107,6 +107,8 @@ var spanishTranslation = {
     redo: "Rehacer",
     undoTooltip: "Deshacer el último cambio",
     redoTooltip: "Rehacer el cambio",
+    expandTooltip: "Expandir",
+    collapseTooltip: "Colapso",
     expandAllTooltip: "Expandir todo",
     collapseAllTooltip: "Contraer todo",
     zoomInTooltip: "Acercar",
@@ -902,6 +904,7 @@ var spanishTranslation = {
     maxWidth_placeholder: "Ej.: 50%",
     imageHeight_placeholder: "Automático",
     imageWidth_placeholder: "Automático",
+    itemTitleWidth_placeholder: "Ej.: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Apariencia de la pregunta",
@@ -2798,3 +2801,7 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator le permite ajustar manualmente los anchos en línea de los elementos del formulario para controlar el diseño. Si esto no produce el resultado deseado, puede habilitar el diseño de cuadrícula, que estructura elementos mediante un sistema basado en columnas. Para configurar las columnas de diseño, seleccione una página o un panel y utilice la tabla \"Configuración de preguntas\" → \"Columnas de cuadrícula\". Para ajustar el número de columnas que abarca una pregunta, selecciónela y establezca el valor deseado en el campo \"Diseño\" → \"Intervalo de columnas\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Especifica el número de columnas que abarca esta pregunta dentro del diseño de cuadrícula."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Esta tabla le permite configurar cada columna de cuadrícula en la página. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valores y defina el ancho del título para todas las preguntas de cada columna."
+
+// ed.expandTooltip: "Expand" => "Expandir"
+// ed.collapseTooltip: "Collapse" => "Colapso"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ej.: 100px"

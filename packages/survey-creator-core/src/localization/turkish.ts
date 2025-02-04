@@ -107,6 +107,8 @@ export var turkishStrings = {
     redo: "İleri",
     undoTooltip: "Son değişikliği geri al",
     redoTooltip: "Son değişikliği ileri al",
+    expandTooltip: "Genişletmek",
+    collapseTooltip: "Çökmek",
     expandAllTooltip: "Tümünü Genişlet",
     collapseAllTooltip: "Tümünü Daralt",
     zoomInTooltip: "Yakınlaştırma",
@@ -902,6 +904,7 @@ export var turkishStrings = {
     maxWidth_placeholder: "Ör.: %50",
     imageHeight_placeholder: "Otomatik",
     imageWidth_placeholder: "Otomatik",
+    itemTitleWidth_placeholder: "Ör.: 100 piksel",
     theme: {
       themeName: "Tema",
       isPanelless: "Soru görünümü",
@@ -3017,3 +3020,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Anket Oluşturucu, düzeni kontrol etmek için form öğelerinin satır içi genişliklerini manuel olarak ayarlamanıza olanak tanır. Bu istenen sonucu vermezse, sütun tabanlı bir sistem kullanarak öğeleri oluşturan yapıların ızgara düzenini etkinleştirebilirsiniz. Düzen sütunlarını yapılandırmak için bir sayfa veya panel seçin ve \"Soru Ayarları\" → \"Izgara sütunları\" tablosunu kullanın. Bir sorunun kaç sütuna yayılacağını ayarlamak için soruyu seçin ve \"Düzen\" → \"Sütun aralığı\" alanında istediğiniz değeri ayarlayın."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Bu sorunun ızgara düzeni içinde kaç sütuna yayılacağını belirtir."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Bu tablo, sayfadaki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın."
+
+// ed.expandTooltip: "Expand" => "Genişletmek"
+// ed.collapseTooltip: "Collapse" => "Çökmek"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ör.: 100 piksel"
