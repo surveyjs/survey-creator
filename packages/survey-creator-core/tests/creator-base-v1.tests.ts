@@ -98,16 +98,26 @@ test("getNextValue", () => {
   expect(getNextValue(prefix, ["aaa1bbb2ccc3"])).toEqual("aaa1bbb2ccc4");
 });
 
-test("getNextValue test", (): any => {
+test("getNextItemText test", (): any => {
   const choices: Array<ItemValue> = [];
   expect(getNextItemText(choices)).toBeFalsy();
   choices.push(new ItemValue("a"));
   choices.push(new ItemValue("b"));
   expect(getNextItemText(choices)).toBeFalsy();
   choices.push(new ItemValue("c", "Item c"));
-  expect(getNextItemText(choices)).toEqual("Item c1");
+  expect(getNextItemText(choices)).toBeFalsy();
   choices.push(new ItemValue("c1", "Item c1"));
   expect(getNextItemText(choices)).toEqual("Item c2");
+});
+test("getNextItemText for simple text", (): any => {
+  const choices: Array<ItemValue> = [];
+  expect(getNextItemText(choices)).toBeFalsy();
+  choices.push(new ItemValue("a"));
+  choices.push(new ItemValue("b"));
+  expect(getNextItemText(choices)).toBeFalsy();
+  choices[0].text = "Item abc";
+  choices[1].text = "Item bde";
+  expect(getNextItemText(choices)).toBeFalsy();
 });
 
 test("Set Text property", () => {
