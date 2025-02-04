@@ -67,6 +67,7 @@ export const creatorTabDesignerName = "Designer";
 export const creatorTabPreviewName = "Preview";
 export const creatorTabLogicName = "Logic";
 export const creatorTabTranslationName = "Translation";
+export const creatorTabThemeName = "Themes";
 export const generalGroupName = "General";
 export const logicGroupName = "Conditions";
 export const inputMaskSettingsGroupName = "Input Mask Settings";
