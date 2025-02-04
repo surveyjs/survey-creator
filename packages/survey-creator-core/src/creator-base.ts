@@ -64,7 +64,8 @@ import {
   GetPropertyReadOnlyEvent,
   ElementSelectingEvent,
   ElementSelectedEvent,
-  DefineElementMenuItemsEvent
+  DefineElementMenuItemsEvent,
+  CreatorThemePropertyChangedEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -951,6 +952,7 @@ export class SurveyCreatorModel extends Base
    * ```
    */
   public onCreateCustomMessagePanel: EventBase<SurveyCreatorModel, CreateCustomMessagePanelEvent> = this.addCreatorEvent<SurveyCreatorModel, CreateCustomMessagePanelEvent>();
+  public onCreatorThemePropertyChanged: EventBase<SurveyCreatorModel, CreatorThemePropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorThemePropertyChangedEvent>();
 
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   public setSurveyJSONTextCallback: (text: string) => void;

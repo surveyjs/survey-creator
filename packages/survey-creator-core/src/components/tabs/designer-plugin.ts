@@ -169,6 +169,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
       this.syncTheme();
+      this.creator.onCreatorThemePropertyChanged.fire(this.creator, options);
     });
 
     const settingsAction = new MenuButton({
