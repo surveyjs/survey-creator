@@ -1,5 +1,6 @@
 @use "./lbr-variables.scss" as *;
 
+.svc-creator-popup,
 .svc-creator {
   --lbr-line-height-x8: calc(#{$lbr-line-height-unit} * 8);
   --lbr-line-height-x7: calc(#{$lbr-line-height-unit} * 7);

@@ -1,5 +1,6 @@
 @use "./ctr-variables.scss" as *;
 
+.svc-creator-popup,
 .svc-creator {
   --sjs-font-size-x075: calc(#{$font-unit} * 0.75);
   --sjs-font-size-x1: calc(#{$font-unit} * 1);
