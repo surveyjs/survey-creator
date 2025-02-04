@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, takeElementScreenshot, wrapVisualTest, pageNavigator, getListItemByText, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName } from "../../helper";
+import { url, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, takeElementScreenshot, wrapVisualTest, pageNavigator, getListItemByText, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName } from "../../helper";
 import { largeSurvey } from "./surveys/large-survey";
 
 const title = "Sidebar Screenshot";
@@ -132,7 +132,7 @@ test.page(themeTabUrl)("tabbed mode", async (t) => {
     await t.click(getAddNewQuestionButton());
     await takeElementScreenshot("side-bar-tabbed-property-grid.png", ".svc-side-bar", t, comparer);
 
-    await t.click(getTabbedMenuItemByText("Themes"));
+    await t.click(getTabbedMenuItemByText(creatorTabThemeName));
     await takeElementScreenshot("side-bar-tabbed-property-grid-theme-general.png", ".svc-side-bar", t, comparer);
 
     await t.click(Selector(".svc-menu-action__button").filterVisible().nth(4));
@@ -155,7 +155,7 @@ test.page(themeTabUrl)("boolean switch", async (t) => {
       window["creator"].showOneCategoryInPropertyGrid = true;
     })();
 
-    await t.click(getTabbedMenuItemByText("Themes"));
+    await t.click(getTabbedMenuItemByText(creatorTabThemeName));
 
     await t.click(Selector(".svc-menu-action__button").filterVisible().nth(4));
     await takeElementScreenshot("boolean-switch-default.png", ".spg-boolean-switch", t, comparer);

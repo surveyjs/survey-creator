@@ -38,7 +38,7 @@ import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
 import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 import { SidebarModel } from "./components/side-bar/side-bar-model";
-import { ICollapseOnDrag, ICreatorOptions } from "./creator-options";
+import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
 import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
@@ -64,7 +64,8 @@ import {
   GetPropertyReadOnlyEvent,
   ElementSelectingEvent,
   ElementSelectedEvent,
-  DefineElementMenuItemsEvent
+  DefineElementMenuItemsEvent,
+  CreatorThemePropertyChangedEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -951,6 +952,7 @@ export class SurveyCreatorModel extends Base
    * ```
    */
   public onCreateCustomMessagePanel: EventBase<SurveyCreatorModel, CreateCustomMessagePanelEvent> = this.addCreatorEvent<SurveyCreatorModel, CreateCustomMessagePanelEvent>();
+  public onCreatorThemePropertyChanged: EventBase<SurveyCreatorModel, CreatorThemePropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorThemePropertyChangedEvent>();
 
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   public setSurveyJSONTextCallback: (text: string) => void;
@@ -1702,6 +1704,9 @@ export class SurveyCreatorModel extends Base
       page = this.addNewPageIntoSurvey();
     } else {
       this.survey.addPage(page);
+      page.questions.forEach(question => {
+        this.doOnQuestionAdded(question, page);
+      });
     }
     if (changeSelection) {
       this.selectElement(page);
@@ -2145,11 +2150,7 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragClear.add((sender, options) => {
       isDraggedFromToolbox = false;
       this.stopUndoRedoTransaction();
-      if (!!options.draggedElement &&
-        (options.draggedElement.isPage && this.collapseOnDrag.pages ||
-          options.draggedElement.isPanel && this.collapseOnDrag.panels ||
-          !options.draggedElement.isPanel && !options.draggedElement.isPage && this.collapseOnDrag.questions)
-      ) {
+      if (!!options.draggedElement && this.collapseOnDrag) {
         this.designerStateManager?.release();
         this.restoreElementsState();
       }
@@ -2324,6 +2325,7 @@ export class SurveyCreatorModel extends Base
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);
     var page = this.getPageByElement(question);
+    if (!page) return;
     var options = { question: question, page: page, reason: this.addNewElementReason };
     this.addNewElementReason = undefined;
     this.onQuestionAdded.fire(this, options);
@@ -4277,46 +4279,12 @@ export class SurveyCreatorModel extends Base
   public set allowDragPages(newValue: boolean) {
     this._allowDragPages = newValue;
   }
-  private _collapseOnDrag: ICollapseOnDrag = {
-    questions: true,
-    panels: true,
-    pages: true
-  };
   /**
-   * Specifies whether questions, panels, and pages on the design surface collapse when users start dragging a survey element.
+   * Specifies whether to collapse pages on the design surface when users start dragging a survey element.
    * 
-   * Default value: `{ questions: true, panels: true, pages: true }` (collapse all survey elements)
-   * 
-   * You can disable collapsing of individual survey element types or turn off this feature completely:
-   * 
-   * ```js
-   * const creatorOptions = {
-   *   // Do not collapse questions
-   *   collapseOnDrag: {
-   *     pages: true,
-   *     panels: true,
-   *     questions: false
-   *   },
-   *   // Do not collapse any survey elements
-   *   collapseOnDrag: false
-   * };
-   * const creator = new SurveyCreatorModel(creatorOptions);
-   * ```
+   * Default value: `true`
    */
-  public get collapseOnDrag(): ICollapseOnDrag {
-    return this._collapseOnDrag;
-  }
-  public set collapseOnDrag(newValue: boolean | ICollapseOnDrag) {
-    if (typeof newValue === "object") {
-      this._collapseOnDrag.pages = !!newValue.pages;
-      this._collapseOnDrag.panels = !!newValue.panels;
-      this._collapseOnDrag.questions = !!newValue.questions;
-    } else {
-      this._collapseOnDrag.pages = !!newValue;
-      this._collapseOnDrag.panels = !!newValue;
-      this._collapseOnDrag.questions = !!newValue;
-    }
-  }
+  public collapseOnDrag: boolean = true;
 }
 
 export class CreatorBase extends SurveyCreatorModel { }
