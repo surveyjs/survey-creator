@@ -218,10 +218,10 @@ test("Create last question, delete page and select survey in property grid", ():
   creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 test("onQuestionAdded fires correctly when drag drop into new page", () => {
-  const creator = new CreatorTester();
+  const creator = new CreatorTester(undefined, undefined, false);
   let json = {};
   let cnt = 0;
-
+  creator.JSON = json;
   creator.onQuestionAdded.add((sender, options) => {
     cnt++;
     json = { ...creator.survey.toJSON() };
