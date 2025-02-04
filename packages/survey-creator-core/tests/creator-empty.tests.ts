@@ -1,10 +1,11 @@
-import { SurveyModel, settings as surveySettings, Serializer } from "survey-core";
+import { SurveyModel, settings as surveySettings, Serializer, QuestionTextModel } from "survey-core";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { settings as creatorSetting, settings } from "../src/creator-settings";
 import { CreatorTester } from "./creator-tester";
 import { UndoRedoController } from "../src/plugins/undo-redo/undo-redo-controller";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "../src/components/tabs/test-plugin";
+import { TabDesignerViewModel } from "../src/components/tabs/designer";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -215,4 +216,27 @@ test("Create last question, delete page and select survey in property grid", ():
   expect(creator.selectedElement.getType()).toBe("survey");
   expect(creator.propertyGrid.editingObj.getType()).toBe("survey");
   creatorSetting.defaultNewSurveyJSON = savedNewJSON;
+});
+test("onQuestionAdded fires correctly when drag drop into new page", () => {
+  const creator = new CreatorTester(undefined, undefined, false);
+  let json = {};
+  let cnt = 0;
+  creator.JSON = json;
+  creator.onQuestionAdded.add((sender, options) => {
+    cnt++;
+    json = { ...creator.survey.toJSON() };
+  });
+  const newPage = (creator.getPlugin("designer").model as TabDesignerViewModel).newPage;
+  newPage.addElement(new QuestionTextModel("q1"));
+  expect(cnt).toBe(1);
+  expect(json).toStrictEqual({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          { "name": "q1", "type": "text", },
+        ],
+      },
+    ],
+  });
 });
