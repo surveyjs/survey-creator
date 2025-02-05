@@ -308,6 +308,10 @@ export var nlStrings = {
       maxWidth: "Maximale paneelbreedte",
       showNumber: "Nummer dit paneel"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Effectieve breedte, %",
+      questionTitleWidth: "Breedte vraagtitel, px"
+    },
     paneldynamic: {
       name: "Naam van het paneel",
       title: "Titel van het paneel",
@@ -505,6 +509,7 @@ export var nlStrings = {
     listIsEmpty: "Voeg een nieuw item toe",
     "listIsEmpty@choices": "Er zijn nog geen keuzes toegevoegd",
     "listIsEmpty@columns": "Je hebt nog geen kolommen",
+    "listIsEmpty@gridLayoutColumns": "Je hebt nog geen lay-outkolommen",
     "listIsEmpty@rows": "Je hebt nog geen rijen",
     "listIsEmpty@validators": "Je hebt nog geen validatieregels",
     "listIsEmpty@calculatedValues": "Je hebt nog geen aangepaste variabelen",
@@ -538,6 +543,7 @@ export var nlStrings = {
     titlePlaceholder: "Voer hier de titel in",
     surveyTitlePlaceholder: "Voer de enquêtetitel hier in",
     pageTitlePlaceholder: "Voer hier de paginatitel in",
+    startPageTitlePlaceholder: "Startpagina",
     descriptionPlaceholder: "Voer een omschrijving in",
     surveyDescriptionPlaceholder: "Voer een onderzoeksbeschrijving in",
     pageDescriptionPlaceholder: "Voer een paginabeschrijving in",
@@ -1359,7 +1365,9 @@ export var nlStrings = {
       startWithNewLine: "Schakel de optie uit om het deelvenster op één regel weer te geven met de vorige vraag of het vorige deelvenster. De instelling is niet van toepassing als het deelvenster het eerste element in uw formulier is.",
       state: "Kies uit: \"Uitgevouwen\" - het paneel wordt volledig weergegeven en kan worden ingeklapt; \"Samengevouwen\" - het paneel toont alleen de titel en beschrijving en kan worden uitgevouwen; \"Vergrendeld\" - het paneel wordt volledig weergegeven en kan niet worden ingeklapt.",
       width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.).",
-      showQuestionNumbers: "Wijst nummers toe aan vragen die in dit deelvenster zijn genest."
+      showQuestionNumbers: "Wijst nummers toe aan vragen die in dit deelvenster zijn genest.",
+      effectiveColSpan: "Hiermee geeft u aan hoeveel kolommen dit deelvenster beslaat binnen de rasterlay-out.",
+      gridLayoutColumns: "Met deze tabel kunt u elke rasterkolom in het deelvenster configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
     },
     paneldynamic: {
       name: "Een panel-ID die niet zichtbaar is voor respondenten.",
@@ -1390,6 +1398,7 @@ export var nlStrings = {
     resetValueIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die bepaalt wanneer de invoer van een respondent wordt teruggezet naar de waarde op basis van de \"Standaardwaarde-expressie\" of \"Waarde-expressie instellen\" of naar de waarde \"Standaardantwoord\" (als een van beide is ingesteld).",
     setValueIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die bepaalt wanneer de expressie 'Waarde instellen' moet worden uitgevoerd en wijs de resulterende waarde dynamisch toe als antwoord.",
     setValueExpression: "Geef een expressie op die de waarde definieert die moet worden ingesteld wanneer aan de voorwaarden in de regel 'Waarde instellen als' wordt voldaan. De expressie kan basisberekeningen bevatten - '{q1_id} + {q2_id}', Booleaanse expressies, zoals '{age} > 60', en functies: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', enz. De waarde die door deze expressie wordt bepaald, kan worden overschreven door de handmatige invoer van een respondent.",
+    gridLayoutEnabled: "Met Survey Creator kunt u de inlinebreedtes van formulierelementen handmatig aanpassen om de lay-out te beheren. Als dit niet het gewenste resultaat oplevert, kunt u de rasterlay-out inschakelen, waarvan de structuren elementen vormen met behulp van een op kolommen gebaseerd systeem. Om lay-outkolommen te configureren, selecteer je een pagina of paneel en gebruik je de tabel \"Vraaginstellingen\" → \"Rasterkolommen\". Om aan te passen hoeveel kolommen een vraag beslaat, selecteer je deze en stel je de gewenste waarde in in het veld \"Lay-out\" → \"Kolomspanwijdte\".",
     question: {
       name: "Een vraag-ID die niet zichtbaar is voor respondenten.",
       description: "Typ de ondertitel van een vraag.",
@@ -1410,7 +1419,8 @@ export var nlStrings = {
       textUpdateMode: "Kies uit: \"Bij verloren focus\" - de waarde wordt bijgewerkt wanneer het invoerveld de focus verliest; \"Tijdens het typen\" - de waarde wordt in realtime bijgewerkt, terwijl gebruikers typen. Met de optie \"Overerven\" wordt de instelling op enquêteniveau toegepast (\"Standaard bij verloren focus\").",
       url: "U kunt elke webservice gebruiken als gegevensbron voor meerkeuzevragen. Als u keuzewaarden wilt invullen, voert u de URL in van de service die de gegevens levert.",
       searchMode: "Een vergelijkingsbewerking die wordt gebruikt om de vervolgkeuzelijst te filteren.",
-      textWrapEnabled: "Lange teksten in keuze-opties genereren automatisch regeleinden die in het vervolgkeuzemenu passen. Schakel de selectie uit als u wilt dat de teksten worden afgekapt."
+      textWrapEnabled: "Lange teksten in keuze-opties genereren automatisch regeleinden die in het vervolgkeuzemenu passen. Schakel de selectie uit als u wilt dat de teksten worden afgekapt.",
+      effectiveColSpan: "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out."
     },
     signaturepad: {
       signatureWidth: "Hiermee stelt u de breedte van het weergegeven handtekeninggebied en de resulterende afbeelding in.",
@@ -1509,7 +1519,8 @@ export var nlStrings = {
       questionTitleWidth: "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard).",
       questionOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overerven\" past de instelling op enquêteniveau toe (\"Standaard Origineel\"). Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
-      showNavigationButtons: "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat."
+      showNavigationButtons: "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat.",
+      gridLayoutColumns: "Met deze tabel kunt u elke rasterkolom op de pagina configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
     },
     timerLocation: "Hiermee stelt u de locatie van een timer op een pagina in.",
     panelsState: "Kies uit: \"Vergrendeld\" - gebruikers kunnen panelen niet uitvouwen of samenvouwen; \"Alles samenvouwen\" - alle deelvensters beginnen in een samengevouwen toestand; \"Alles uitvouwen\" - alle deelvensters beginnen in een uitgevouwen staat; \"Eerst uitgevouwen\" - alleen het eerste paneel wordt in eerste instantie uitgevouwen.",
@@ -1597,10 +1608,6 @@ export var nlStrings = {
       textAreaWidth: "De breedte van het koptekstgebied dat de titel en beschrijving van de enquête bevat, gemeten in pixels.",
       overlapEnabled: "Als deze optie is ingeschakeld, overlapt de bovenkant van de enquête de onderkant van de koptekst.",
       mobileHeight: "Als deze optie is ingesteld op 0, wordt de hoogte automatisch berekend om de inhoud van de koptekst te accommoderen."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Accepteert waarden %.",
-      questionTitleWidth: "Accepteert waarden px."
     },
     progressBarInheritWidthFrom: "Met de optie \"Zelfde als container\" wordt de breedte van het gebied van de voortgangsbalk automatisch aangepast aan het HTML-element waarin de enquête is geplaatst."
   },
@@ -2984,3 +2991,12 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Uitlijning van foutmeldingen bij rijuitbreiding"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Hiermee stelt u de locatie in van foutmeldingen voor vragen die zijn genest in detailsecties. De optie \"Overerven\" past de instelling van de eigenschap \"Uitlijning van foutmeldingen\" toe."
 // pe.gridLayoutColumns: "Grid layout columns" => "Kolommen voor rasterlay-out"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startpagina"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effectieve breedte, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Breedte vraagtitel, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Je hebt nog geen lay-outkolommen"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Hiermee geeft u aan hoeveel kolommen dit deelvenster beslaat binnen de rasterlay-out."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Met deze tabel kunt u elke rasterkolom in het deelvenster configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Met Survey Creator kunt u de inlinebreedtes van formulierelementen handmatig aanpassen om de lay-out te beheren. Als dit niet het gewenste resultaat oplevert, kunt u de rasterlay-out inschakelen, waarvan de structuren elementen vormen met behulp van een op kolommen gebaseerd systeem. Om lay-outkolommen te configureren, selecteer je een pagina of paneel en gebruik je de tabel \"Vraaginstellingen\" → \"Rasterkolommen\". Om aan te passen hoeveel kolommen een vraag beslaat, selecteer je deze en stel je de gewenste waarde in in het veld \"Lay-out\" → \"Kolomspanwijdte\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Met deze tabel kunt u elke rasterkolom op de pagina configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."

@@ -524,9 +524,9 @@ test("Question adorner double click", async (t) => {
   await t.doubleClick(Selector(".sd-question__title"));
   await t.expect(isCollapsed()).notOk();
 
-  await t.doubleClick(Selector(".svc-question__drag-area"));
+  await t.doubleClick(Selector(".svc-question__drag-area").nth(1));
   await t.expect(isCollapsed()).ok();
-  await t.doubleClick(Selector(".svc-question__drag-area"));
+  await t.doubleClick(Selector(".svc-question__drag-area").nth(1));
   await t.expect(isCollapsed()).notOk();
 
 });
@@ -577,4 +577,25 @@ test("Page adorner double click", async (t) => {
   await t.doubleClick(Selector(".svc-page__content > .svc-question__drag-area"));
   await t.expect(isCollapsed()).notOk();
 
+});
+
+test("Page adorner header click - select", async (t) => {
+  const qName = "question1";
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": qName
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  await t.click(".svc-page__content-actions", { offsetX: 50, offsetY: 5 });
+  await t.expect(Selector(".svc-page__content").hasClass("svc-page__content--selected")).ok();
 });

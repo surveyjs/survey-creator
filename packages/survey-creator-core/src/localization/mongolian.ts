@@ -308,6 +308,10 @@ export var mnStrings = {
       maxWidth: "Хамгийн их хавтан өргөн",
       showNumber: "Энэ хавсралтыг дугаарлах"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Үр дүнтэй өргөн, %",
+      questionTitleWidth: "Асуултын гарчиг өргөн, px"
+    },
     paneldynamic: {
       name: "Панелийн нэр",
       title: "Панел цол",
@@ -505,6 +509,7 @@ export var mnStrings = {
     listIsEmpty: "Одоогоор ямар ч зүйл ороогүй байна",
     "listIsEmpty@choices": "Одоогор ямар ч сонголт ороогүй байна",
     "listIsEmpty@columns": "Танд ямар ч багана байхгүй",
+    "listIsEmpty@gridLayoutColumns": "Танд загварын багана хараахан байхгүй байна",
     "listIsEmpty@rows": "Чамд ямар ч мөр байхгүй",
     "listIsEmpty@validators": "Танд ямар нэгэн баталгаажуулалтын дүрэм байхгүй байна",
     "listIsEmpty@calculatedValues": "Танд ямар ч хувийн хувьсагч байхгүй",
@@ -538,6 +543,7 @@ export var mnStrings = {
     titlePlaceholder: "Гарчиг",
     surveyTitlePlaceholder: "Санал асуулгын гарчиг",
     pageTitlePlaceholder: "Хуудас {num}",
+    startPageTitlePlaceholder: "Эхлэх хуудас",
     descriptionPlaceholder: "Тайлбар",
     surveyDescriptionPlaceholder: "Тайлбар",
     pageDescriptionPlaceholder: "Тайлбар",
@@ -1359,7 +1365,9 @@ export var mnStrings = {
       startWithNewLine: "Өмнөх асуулт эсвэл панелтай нэг мөрт үзүүлэхээр сонгогдоогүй. Хэрэв панел нь таны маягт дахь анхны элемент бол тохиргоо хамаарахгүй.",
       state: "Сонголтоос: \"Өргөтгөсөн\" - хавтанг бүрэн харуулж, нурааж болно; \"Нурсан\" - панел нь зөвхөн гарчиг, тодорхойлолтыг харуулж, өргөтгөх боломжтой; \"Цоожтой\" - панелыг бүрэн харуулсан бөгөөд нурааж болохгүй.",
       width: "Панелийн өргөнийг ижил шугамаар бусад судалгааны элементүүдтэй тэнцүү тогтооно. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
-      showQuestionNumbers: "Энэ самбарт байрлуулсан асуултуудад дугаар өгнө."
+      showQuestionNumbers: "Энэ самбарт байрлуулсан асуултуудад дугаар өгнө.",
+      effectiveColSpan: "Энэ панел grid загварт хэдэн багана багтаахыг тодорхойлно.",
+      gridLayoutColumns: "Энэ хүснэгт нь панел доторх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."
     },
     paneldynamic: {
       name: "Хариулагчдад харагдахгүй панелийн ID.",
@@ -1390,6 +1398,7 @@ export var mnStrings = {
     resetValueIf: "\"Default value expression\" эсвэл \"Set value expression\" эсвэл \"Default answer\" value (хэрэв аль нэгийг нь тогтоосон бол) үнэ цэнэд үндэслэн хариулагчийн оруулсан хувь нэмрийг үнэ цэнэд хэзээ дахин тохируулахыг тодорхойлох нөхцөлтэй дүрмийг тогтоохын тулд шидэт wand зургыг ашигла.",
     setValueIf: "Ид шидийн wand зургыг ашиглан \"Set value expression\"-ийг хэзээ ажиллуулахыг тодорхойлох нөхцөлтэй дүрмийг тогтоож, үр дүнд хүрсэн үнэ цэнийг хариу болгон динамикаар даалга.",
     setValueExpression: "\"Set value if\" дүрмийн нөхцөл хангагдсан үед тогтоох үнэ цэнийг тодорхойлсон илэрхийллийг тодорхойл. Илэрхийлэл нь үндсэн тооцоо - '{q1_id} + {q2_id}', Бөүлийн илэрхийллүүд, тухайлбал '{age} > 60', функц: 'iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м. Энэ илэрхийлэлээр тогтоосон үнэ цэнийг хариулагчийн гарын авлагын оролтоор давхардуулан авч болно.",
+    gridLayoutEnabled: "Survey Creator нь загварыг хянахын тулд хэлбэрийн элементүүдийн inline өргөнийг гараар тохируулах боломжийг олгодог. Хэрэв энэ нь хүссэн үр дүнг өгөхгүй бол баган дээр суурилсан системийг ашиглан элементүүдийг бүрдүүлдэг grid layout-ийг идэвхжүүлж болно. Загварын багануудыг тохируулахын тулд хуудас эсвэл панелийг сонгоод \"Асуултын тохиргоо\" → \"Grid columns\" хүснэгтийг ашиглана. Асуулт хэдэн багана багтаахыг тохируулахын тулд үүнийг сонгоод \"Layout\" → \"Column span\" талбарт хүссэн утгыг тохируул.",
     question: {
       name: "Асуултад хариулагчдад харагдахгүй асуултын ID.",
       description: "Асуултын дэд гарчиг бичнэ үү.",
@@ -1410,7 +1419,8 @@ export var mnStrings = {
       textUpdateMode: "Сонгоно уу: \"Алдагдсан фокус дээр\" - оролтын талбар анхаарлаа алдсан үед үнэ цэнэ нь шинэчлэгддэг; \"Цахимаар бичих\" - хэрэглэгчид бичихийн хэрээр үнэ цэнэ нь бодит цаг хугацаанд шинэчлэгддэг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Алдагдсан фокус дээр\" дефолтоор) хэрэгжүүлдэг.",
       url: "Та ямар ч вэб үйлчилгээг олон сонголттой асуултуудад мэдээллийн эх сурвалж болгон ашиглаж болно. Сонголтын үнэт зүйлсийг хүн амлахын тулд өгөгдөл өгөх үйлчилгээний URL-ийг оруулна уу.",
       searchMode: "Дуслын жагсаалтыг шүүлт хийхэд ашигладаг харьцуулах мэс засал.",
-      textWrapEnabled: "Сонголтын сонголтуудын урт текстүүд нь дусал цэсний дотор багтахын тулд автоматаар шугамын завсар үүсгэх болно. Хэрэв та бичвэрүүдийг хайчлахыг хүсвэл сонгогдоогүй."
+      textWrapEnabled: "Сонголтын сонголтуудын урт текстүүд нь дусал цэсний дотор багтахын тулд автоматаар шугамын завсар үүсгэх болно. Хэрэв та бичвэрүүдийг хайчлахыг хүсвэл сонгогдоогүй.",
+      effectiveColSpan: "Энэ асуулт хүснэгтийн загварт хэдэн багана багтаахыг тодорхойлно."
     },
     signaturepad: {
       signatureWidth: "Үзүүлсэн гарын үсэг зурсан хэсгийн өргөнийг болон үүний үр дүнд бий болсон зургийг тогтоо.",
@@ -1509,7 +1519,8 @@ export var mnStrings = {
       questionTitleWidth: "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
       questionErrorLocation: "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг.",
       questionOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
-      showNavigationButtons: "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
+      showNavigationButtons: "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
+      gridLayoutColumns: "Энэ хүснэгт нь хуудас дээрх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."
     },
     timerLocation: "Хуудас дээрх цаг хэмжигчийн байрлалыг тогтооно.",
     panelsState: "Сонгоно уу: \"Locked\" - хэрэглэгчид панелуудыг өргөтгөх, нураах боломжгүй; \"Бүх нуралт\" - бүх панел нурсан байдлаас эхэлнэ; \"Бүх хүрээг өргөтгөнө\" - бүх панелууд өргөтгөсөн байдлаас эхэлнэ; \"First expanded\" - зөвхөн эхний панел нь эхэндээ өргөжсөн.",
@@ -1597,10 +1608,6 @@ export var mnStrings = {
       textAreaWidth: "Пикселээр хэмжсэн судалгааны нэр, тодорхойлолт бүхий толгойн хэсгийн өргөн.",
       overlapEnabled: "Идэвхжүүлбэл судалгааны дээд хэсэг нь header-ийн доод хэсгийг давхарладаг.",
       mobileHeight: "0 гэж тохируулбал өндөрийг гарчгийн агуулгад тохируулахын тулд автоматаар тооцоолдог."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг.",
-      questionTitleWidth: "Үнэ цэнэ px-ийг хүлээн зөвшөөрдөг."
     },
     progressBarInheritWidthFrom: "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг."
   },
@@ -2661,3 +2668,12 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Мөр өргөтгөлийн алдаа мессежийн тохируулга"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Нарийвчилсан хэсгүүдэд байрласан асуултуудын алдааны мессежүүдийн байршлыг тохируулна. \"Inherit\" сонголт нь \"Error message alignment\" шинж чанарын тохиргоог хэрэглэнэ."
 // pe.gridLayoutColumns: "Grid layout columns" => "Grid layout columns"
+// pe.startPageTitlePlaceholder: "Start Page" => "Эхлэх хуудас"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Үр дүнтэй өргөн, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Асуултын гарчиг өргөн, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Танд загварын багана хараахан байхгүй байна"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Энэ панел grid загварт хэдэн багана багтаахыг тодорхойлно."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Энэ хүснэгт нь панел доторх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator нь загварыг хянахын тулд хэлбэрийн элементүүдийн inline өргөнийг гараар тохируулах боломжийг олгодог. Хэрэв энэ нь хүссэн үр дүнг өгөхгүй бол баган дээр суурилсан системийг ашиглан элементүүдийг бүрдүүлдэг grid layout-ийг идэвхжүүлж болно. Загварын багануудыг тохируулахын тулд хуудас эсвэл панелийг сонгоод \"Асуултын тохиргоо\" → \"Grid columns\" хүснэгтийг ашиглана. Асуулт хэдэн багана багтаахыг тохируулахын тулд үүнийг сонгоод \"Layout\" → \"Column span\" талбарт хүссэн утгыг тохируул."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Энэ асуулт хүснэгтийн загварт хэдэн багана багтаахыг тодорхойлно."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Энэ хүснэгт нь хуудас дээрх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."

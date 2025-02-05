@@ -308,6 +308,10 @@ var frenchTranslation = {
       maxWidth: "Largeur maximale du panneau",
       showNumber: "Numéroter ce panneau"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Largeur utile, %",
+      questionTitleWidth: "Largeur du titre de la question, px"
+    },
     paneldynamic: {
       name: "Nom du panneau",
       title: "Titre du panneau",
@@ -505,6 +509,7 @@ var frenchTranslation = {
     listIsEmpty: "Ajouter un nouvel élément",
     "listIsEmpty@choices": "Aucun choix n’a encore été ajouté",
     "listIsEmpty@columns": "Vous n’avez pas encore de colonnes",
+    "listIsEmpty@gridLayoutColumns": "Vous n’avez pas encore de colonnes de mise en page",
     "listIsEmpty@rows": "Vous n’avez pas encore de lignes",
     "listIsEmpty@validators": "Vous n’avez pas encore de règles de validation",
     "listIsEmpty@calculatedValues": "Vous n’avez pas encore de variables personnalisées",
@@ -538,6 +543,7 @@ var frenchTranslation = {
     titlePlaceholder: "Titre de la page",
     surveyTitlePlaceholder: "Saisissez le titre du sondage",
     pageTitlePlaceholder: "Saisissez le titre de la page",
+    startPageTitlePlaceholder: "Page d’accueil",
     descriptionPlaceholder: "Entrez une description",
     surveyDescriptionPlaceholder: "Entrez une description pour l'enquête",
     pageDescriptionPlaceholder: "Entrez une description pour la page",
@@ -1359,7 +1365,9 @@ var frenchTranslation = {
       startWithNewLine: "Désélectionnez cette option pour afficher le panneau sur une seule ligne avec la question ou le panneau précédent. Ce paramètre ne s’applique pas si le panneau est le premier élément de votre formulaire.",
       state: "Choisissez parmi : « Développé » - le panneau s’affiche en entier et peut être réduit ; « Réduit » - le panneau n’affiche que le titre et la description et peut être développé ; « Verrouillé » - le panneau est affiché en entier et ne peut pas être réduit.",
       width: "Définit la largeur du panneau par rapport aux autres éléments de topographie de la même ligne. Accepte les valeurs CSS (px, %, in, pt, etc.).",
-      showQuestionNumbers: "Attribue des numéros aux questions imbriquées dans ce panneau."
+      showQuestionNumbers: "Attribue des numéros aux questions imbriquées dans ce panneau.",
+      effectiveColSpan: "Spécifie le nombre de colonnes de ce panneau dans la disposition de la grille.",
+      gridLayoutColumns: "Ce tableau vous permet de configurer chaque colonne de la grille dans le panneau. Il définit automatiquement le pourcentage de largeur de chaque colonne en fonction du nombre maximal d’éléments dans une rangée. Pour personnaliser la disposition de la grille, ajustez manuellement ces valeurs et définissez la largeur du titre pour toutes les questions de chaque colonne."
     },
     paneldynamic: {
       name: "Un ID de panel qui n’est pas visible par les personnes interrogées.",
@@ -1390,6 +1398,7 @@ var frenchTranslation = {
     resetValueIf: "Utilisez l’icône de la baguette magique pour définir une règle conditionnelle qui détermine le moment où l’entrée d’une personne interrogée est réinitialisée à la valeur basée sur l’expression de valeur par défaut ou l’expression de valeur définie ou à la valeur de la réponse par défaut (si l’une ou l’autre est définie).",
     setValueIf: "Utilisez l’icône de la baguette magique pour définir une règle conditionnelle qui détermine quand exécuter l’expression « Définir la valeur » et attribuer dynamiquement la valeur résultante en tant que réponse.",
     setValueExpression: "Spécifiez une expression qui définit la valeur à définir lorsque les conditions de la règle « Définir la valeur si » sont remplies. L’expression peut inclure des calculs de base - '{q1_id} + {q2_id}', des expressions booléennes, telles que '{age} > 60', et des fonctions : 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. La valeur déterminée par cette expression peut être remplacée par la saisie manuelle d’un répondant.",
+    gridLayoutEnabled: "Survey Creator vous permet d’ajuster manuellement les largeurs en ligne des éléments de formulaire pour contrôler la mise en page. Si cela ne produit pas le résultat souhaité, vous pouvez activer la disposition en grille, qui structure les éléments de formulaire à l’aide d’un système basé sur des colonnes. Pour configurer les colonnes de mise en page, sélectionnez une page ou un panneau et utilisez le tableau « Paramètres des questions » → « Colonnes de la grille ». Pour ajuster le nombre de colonnes d’une question, sélectionnez-la et définissez la valeur souhaitée dans le champ « Mise en page » → « Étendue de colonnes ».",
     question: {
       name: "ID de question qui n’est pas visible par les personnes interrogées.",
       description: "Saisissez un sous-titre de question.",
@@ -1410,7 +1419,8 @@ var frenchTranslation = {
       textUpdateMode: "Choisissez parmi : « En cas de perte de focus » - la valeur est mise à jour lorsque le champ de saisie perd le focus ; « Pendant la saisie » - la valeur est mise à jour en temps réel, au fur et à mesure que les utilisateurs tapent. L’option « Hériter » applique le paramètre au niveau de l’enquête (« En cas de perte de focus » par défaut).",
       url: "Vous pouvez utiliser n’importe quel service Web comme source de données pour les questions à choix multiples. Pour renseigner les valeurs de choix, entrez l’URL du service fournissant les données.",
       searchMode: "Opération de comparaison permettant de filtrer la liste déroulante.",
-      textWrapEnabled: "Les longs textes dans les options de choix généreront automatiquement des sauts de ligne pour s’adapter au menu déroulant. Désélectionnez cette option si vous souhaitez que les textes soient coupés."
+      textWrapEnabled: "Les longs textes dans les options de choix généreront automatiquement des sauts de ligne pour s’adapter au menu déroulant. Désélectionnez cette option si vous souhaitez que les textes soient coupés.",
+      effectiveColSpan: "Spécifie le nombre de colonnes que cette question couvre dans la disposition de la grille."
     },
     signaturepad: {
       signatureWidth: "Définit la largeur de la zone de signature affichée et l’image résultante.",
@@ -1509,7 +1519,8 @@ var frenchTranslation = {
       questionTitleWidth: "Définit une largeur cohérente pour les titres de questions lorsqu’ils sont alignés à gauche de leurs zones de questions. Accepte les valeurs CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Définit l’emplacement d’un message d’erreur par rapport à la question dont l’entrée n’est pas valide. Choisissez entre : « Haut » - un texte d’erreur est placé en haut de la zone de question ; « Bas » - un texte d’erreur est placé en bas de la zone de question. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Top » par défaut).",
       questionOrder: "Conserve l’ordre d’origine des questions ou les rend aléatoires. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Original » par défaut). L’effet de ce paramètre n’est visible que dans l’onglet Aperçu.",
-      showNavigationButtons: "Définit la visibilité des boutons de navigation sur la page. L’option « Hériter » applique le paramètre au niveau de l’enquête, qui est par défaut « Visible »."
+      showNavigationButtons: "Définit la visibilité des boutons de navigation sur la page. L’option « Hériter » applique le paramètre au niveau de l’enquête, qui est par défaut « Visible ».",
+      gridLayoutColumns: "Ce tableau vous permet de configurer chaque colonne de la grille de la page. Il définit automatiquement le pourcentage de largeur de chaque colonne en fonction du nombre maximal d’éléments dans une rangée. Pour personnaliser la disposition de la grille, ajustez manuellement ces valeurs et définissez la largeur du titre pour toutes les questions de chaque colonne."
     },
     timerLocation: "Définit l’emplacement d’un minuteur sur une page.",
     panelsState: "Choisissez parmi : « Verrouillé » - les utilisateurs ne peuvent pas développer ou réduire les panneaux ; « Réduire tout » - tous les panneaux commencent dans un état réduit ; « Développer tout » - tous les panneaux commencent dans un état développé ; « Premier développé » - seul le premier panneau est initialement développé.",
@@ -1597,10 +1608,6 @@ var frenchTranslation = {
       textAreaWidth: "Largeur de la zone d’en-tête contenant le titre et la description de l’enquête, mesurée en pixels.",
       overlapEnabled: "Lorsque cette option est activée, la partie supérieure de l’enquête se superpose au bas de l’en-tête.",
       mobileHeight: "Lorsqu’elle est définie sur 0, la hauteur est calculée automatiquement pour s’adapter au contenu de l’en-tête."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Accepte les valeurs %.",
-      questionTitleWidth: "Accepte les valeurs px."
     },
     progressBarInheritWidthFrom: "L’option « Identique au conteneur » ajuste automatiquement la largeur de la zone de la barre de progression pour s’adapter à l’élément HTML dans lequel l’enquête est placée."
   },
@@ -3065,3 +3072,12 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Alignement du message d’erreur d’extension de ligne"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Définit l’emplacement des messages d’erreur pour les questions imbriquées dans les sections de détails. L’option «Hériter» applique le paramètre de la propriété «Alignement du message d’erreur»."
 // pe.gridLayoutColumns: "Grid layout columns" => "Colonnes de disposition de grille"
+// pe.startPageTitlePlaceholder: "Start Page" => "Page d’accueil"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Largeur utile, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Largeur du titre de la question, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Vous n’avez pas encore de colonnes de mise en page"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Spécifie le nombre de colonnes de ce panneau dans la disposition de la grille."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ce tableau vous permet de configurer chaque colonne de la grille dans le panneau. Il définit automatiquement le pourcentage de largeur de chaque colonne en fonction du nombre maximal d’éléments dans une rangée. Pour personnaliser la disposition de la grille, ajustez manuellement ces valeurs et définissez la largeur du titre pour toutes les questions de chaque colonne."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator vous permet d’ajuster manuellement les largeurs en ligne des éléments de formulaire pour contrôler la mise en page. Si cela ne produit pas le résultat souhaité, vous pouvez activer la disposition en grille, qui structure les éléments de formulaire à l’aide d’un système basé sur des colonnes. Pour configurer les colonnes de mise en page, sélectionnez une page ou un panneau et utilisez le tableau « Paramètres des questions » → « Colonnes de la grille ». Pour ajuster le nombre de colonnes d’une question, sélectionnez-la et définissez la valeur souhaitée dans le champ « Mise en page » → « Étendue de colonnes »."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Spécifie le nombre de colonnes que cette question couvre dans la disposition de la grille."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ce tableau vous permet de configurer chaque colonne de la grille de la page. Il définit automatiquement le pourcentage de largeur de chaque colonne en fonction du nombre maximal d’éléments dans une rangée. Pour personnaliser la disposition de la grille, ajustez manuellement ces valeurs et définissez la largeur du titre pour toutes les questions de chaque colonne."

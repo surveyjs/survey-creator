@@ -308,6 +308,10 @@ export var nbStrings = {
       maxWidth: "Maksimal panelbredde",
       showNumber: "Nummerer dette panelet"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Effektiv bredde, %",
+      questionTitleWidth: "Oppgavetittel bredde, px"
+    },
     paneldynamic: {
       name: "Navn på panel",
       title: "Panelets tittel",
@@ -505,6 +509,7 @@ export var nbStrings = {
     listIsEmpty: "Legg til nytt element",
     "listIsEmpty@choices": "Ingen valg er lagt til ennå",
     "listIsEmpty@columns": "Du har ingen kolonner ennå",
+    "listIsEmpty@gridLayoutColumns": "Du har ikke oppsettkolonner ennå",
     "listIsEmpty@rows": "Du har ingen rader ennå",
     "listIsEmpty@validators": "Du har ingen valideringsregler ennå",
     "listIsEmpty@calculatedValues": "Du har ingen egendefinerte variabler ennå",
@@ -538,6 +543,7 @@ export var nbStrings = {
     titlePlaceholder: "Skriv tittel her",
     surveyTitlePlaceholder: "Skriv skjematittel her",
     pageTitlePlaceholder: "Skriv sidetittel her",
+    startPageTitlePlaceholder: "Startside",
     descriptionPlaceholder: "Skriv beskrivelse",
     surveyDescriptionPlaceholder: "Skriv skjema-beskrivelse",
     pageDescriptionPlaceholder: "Skriv side-beskrivelse",
@@ -1359,7 +1365,9 @@ export var nbStrings = {
       startWithNewLine: "Fjern merket for å vise panelet på én linje med forrige spørsmål eller panel. Innstillingen gjelder ikke hvis panelet er det første elementet i skjemaet.",
       state: "Velg mellom: \"Utvidet\" - panelet vises i sin helhet og kan skjules; \"Kollapset\" - panelet viser bare tittelen og beskrivelsen og kan utvides; \"Låst\" - panelet vises i sin helhet og kan ikke skjules.",
       width: "Angir bredden på panelet i forhold til andre undersøkelseselementer på samme linje. Godtar CSS-verdier (px, %, i, pt osv.).",
-      showQuestionNumbers: "Tildeler numre til spørsmål som er nestet i dette panelet."
+      showQuestionNumbers: "Tildeler numre til spørsmål som er nestet i dette panelet.",
+      effectiveColSpan: "Angir hvor mange kolonner dette panelet strekker seg over i rutenettoppsettet.",
+      gridLayoutColumns: "I denne tabellen kan du konfigurere hver rutenettkolonne i panelet. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne."
     },
     paneldynamic: {
       name: "En panel-ID som ikke er synlig for respondentene.",
@@ -1390,6 +1398,7 @@ export var nbStrings = {
     resetValueIf: "Bruk tryllestavikonet til å angi en betinget regel som bestemmer når en respondents inndata tilbakestilles til verdien basert på \"Standardverdiuttrykk\" eller \"Angi verdiuttrykk\" eller til \"Standard svar\"-verdien (hvis en av dem er angitt).",
     setValueIf: "Bruk tryllestavikonet til å angi en betinget regel som bestemmer når \"Angi verdiuttrykk\" skal kjøres, og tilordne den resulterende verdien dynamisk som et svar.",
     setValueExpression: "Angi et uttrykk som definerer verdien som skal angis når betingelsene i regelen Angi verdi hvis er oppfylt. Uttrykket kan inneholde grunnleggende beregninger - '{q1_id} + {q2_id}', boolske uttrykk, for eksempel '{alder} > 60', og funksjoner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. Verdien som bestemmes av dette uttrykket, kan overstyres av en respondents manuelle inndata.",
+    gridLayoutEnabled: "Med Survey Creator kan du manuelt justere de innebygde breddene på skjemaelementer for å kontrollere oppsettet. Hvis dette ikke gir ønsket resultat, kan du aktivere rutenettoppsettet, som strukturerer skjemaelementer ved hjelp av et kolonnebasert system. For å konfigurere layoutkolonner, velg en side eller et panel og bruk tabellen \"Spørsmålsinnstillinger\" → \"Rutenettkolonner\". For å justere hvor mange kolonner et spørsmål strekker seg over, velg det og angi ønsket verdi i feltet \"Oppsett\" → \"Kolonnespenn\".",
     question: {
       name: "En spørsmåls-ID som ikke er synlig for respondentene.",
       description: "Skriv inn en spørsmålsundertittel.",
@@ -1410,7 +1419,8 @@ export var nbStrings = {
       textUpdateMode: "Velg mellom: \"Ved tapt fokus\" - verdien oppdateres når inntastingsfeltet mister fokus; \"Mens du skriver\" - verdien oppdateres i sanntid, mens brukerne skriver. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Ved tapt fokus\" som standard).",
       url: "Du kan bruke en hvilken som helst webtjeneste som datakilde for flervalgsspørsmål. Hvis du vil fylle ut valgverdier, angir du URL-adressen til tjenesten som leverer dataene.",
       searchMode: "En sammenligningsoperasjon som brukes til å filtrere rullegardinlisten.",
-      textWrapEnabled: "Lange tekster i valgalternativer genererer automatisk linjeskift slik at de passer inn i rullegardinmenyen. Fjern merket hvis du vil at tekstene skal klippes ut."
+      textWrapEnabled: "Lange tekster i valgalternativer genererer automatisk linjeskift slik at de passer inn i rullegardinmenyen. Fjern merket hvis du vil at tekstene skal klippes ut.",
+      effectiveColSpan: "Angir hvor mange kolonner dette spørsmålet strekker seg over i rutenettoppsettet."
     },
     signaturepad: {
       signatureWidth: "Angir bredden på signaturområdet som vises, og det resulterende bildet.",
@@ -1509,7 +1519,8 @@ export var nbStrings = {
       questionTitleWidth: "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, i, pt osv.).",
       questionErrorLocation: "Angir plasseringen til en feilmelding i forhold til spørsmålet med ugyldige inndata. Velg mellom: \"Topp\" - en feiltekst plasseres øverst i spørsmålsboksen; \"Bunn\" - en feiltekst er plassert nederst i spørsmålsboksen. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Topp\" som standard).",
       questionOrder: "Beholder den opprinnelige rekkefølgen på spørsmål eller randomiserer dem. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Original\" som standard). Effekten av denne innstillingen er bare synlig i kategorien Forhåndsvisning.",
-      showNavigationButtons: "Angir synligheten til navigasjonsknapper på siden. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå, som som standard er \"Synlig\"."
+      showNavigationButtons: "Angir synligheten til navigasjonsknapper på siden. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå, som som standard er \"Synlig\".",
+      gridLayoutColumns: "I denne tabellen kan du konfigurere hver rutenettkolonne på siden. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne."
     },
     timerLocation: "Angir plasseringen av en tidtaker på en side.",
     panelsState: "Velg mellom: \"Låst\" - brukere kan ikke utvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Utvid alle\" - alle paneler starter i utvidet tilstand; \"Først utvidet\" - bare det første panelet er i utgangspunktet utvidet.",
@@ -1597,10 +1608,6 @@ export var nbStrings = {
       textAreaWidth: "Bredden på overskriftsområdet som inneholder evalueringstittelen og beskrivelsen, målt i piksler.",
       overlapEnabled: "Når den er aktivert, overlapper toppen av evalueringen bunnen av overskriften.",
       mobileHeight: "Når den er satt til 0, beregnes høyden automatisk for å få plass til overskriftens innhold."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Godtar verdier %.",
-      questionTitleWidth: "Godtar verdier px."
     },
     progressBarInheritWidthFrom: "Alternativet \"Samme som beholder\" justerer automatisk fremdriftslinjens områdebredde slik at den passer inn i HTML-elementet undersøkelsen er plassert i."
   },
@@ -3008,3 +3015,12 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Justering av feilmelding for radutvidelse"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angir plasseringen av feilmeldinger for spørsmål som er nestet i detaljdeler. Alternativet \"Arv\" bruker innstillingen fra egenskapen \"Feilmeldingsjustering\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Kolonner for rutenettoppsett"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startside"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektiv bredde, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Oppgavetittel bredde, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Du har ikke oppsettkolonner ennå"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Angir hvor mange kolonner dette panelet strekker seg over i rutenettoppsettet."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I denne tabellen kan du konfigurere hver rutenettkolonne i panelet. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Med Survey Creator kan du manuelt justere de innebygde breddene på skjemaelementer for å kontrollere oppsettet. Hvis dette ikke gir ønsket resultat, kan du aktivere rutenettoppsettet, som strukturerer skjemaelementer ved hjelp av et kolonnebasert system. For å konfigurere layoutkolonner, velg en side eller et panel og bruk tabellen \"Spørsmålsinnstillinger\" → \"Rutenettkolonner\". For å justere hvor mange kolonner et spørsmål strekker seg over, velg det og angi ønsket verdi i feltet \"Oppsett\" → \"Kolonnespenn\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Angir hvor mange kolonner dette spørsmålet strekker seg over i rutenettoppsettet."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I denne tabellen kan du konfigurere hver rutenettkolonne på siden. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne."

@@ -11,7 +11,6 @@ const config = {
   },
   entry: {
     "themes/sc2020": path.resolve(__dirname, "./src/themes/sc2020.ts"),
-    "themes/default-light": path.resolve(__dirname, "./src/themes/default-light.ts"),
     "themes/default-dark": path.resolve(__dirname, "./src/themes/default-dark.ts"),
     "themes/default-contrast": path.resolve(__dirname, "./src/themes/default-contrast.ts"),
     "themes/index": path.resolve(__dirname, "./src/themes/index.ts"),

@@ -3,7 +3,7 @@
     [disabled]="!model.isClickable" [classes]="model.linkSetButtonCssClasses" [title]="model.tooltip" [iconName]="model.iconName">
   </svc-action-button>
   <ng-container *ngIf="!model.isReadOnly && model.showClear">
-    <svc-action-button [text]="clearCaption" [click]="model.doClearClick.bind(model)" [selected]="model.isSelected"
+    <svc-action-button [text]="clearCaption" [click]="model.doClearClick.bind(model)"
       [disabled]="false" [classes]="model.linkClearButtonCssClasses">
     </svc-action-button>
   </ng-container>

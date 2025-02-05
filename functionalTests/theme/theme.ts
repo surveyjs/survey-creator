@@ -1,4 +1,4 @@
-import { getPropertyGridCategory, getTabbedMenuItemByText, setJSON } from "../helper";
+import { creatorTabThemeName, getPropertyGridCategory, getTabbedMenuItemByText, setJSON } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Theme Editor";
 const url = "http://127.0.0.1:8080/testCafe/testcafe-theme-tab";
@@ -38,7 +38,7 @@ test("Editors, loose focus on enter", async (t) => {
   };
   await setJSON(json);
 
-  await t.click(getTabbedMenuItemByText("Themes"));
+  await t.click(getTabbedMenuItemByText(creatorTabThemeName));
   await t.click(getPropertyGridCategory("Appearance"));
 
   const colorQuestionInputSelector = Selector("div[data-name=primaryColor] input.spg-color-editor__input");

@@ -308,6 +308,10 @@ var germanTranslation = {
       maxWidth: "Maximale Breite des Panels",
       showNumber: "Nummerieren Sie dieses Feld"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Effektive Breite, %",
+      questionTitleWidth: "Titelbreite der Frage, px"
+    },
     paneldynamic: {
       name: "Name des Panels",
       title: "Titel des Panels",
@@ -505,6 +509,7 @@ var germanTranslation = {
     listIsEmpty: "Neues Element hinzufügen",
     "listIsEmpty@choices": "Bisher wurden noch keine Auswahlmöglichkeiten hinzugefügt",
     "listIsEmpty@columns": "Sie haben noch keine Spalten",
+    "listIsEmpty@gridLayoutColumns": "Sie haben noch keine Layoutspalten",
     "listIsEmpty@rows": "Sie haben noch keine Zeilen",
     "listIsEmpty@validators": "Sie haben noch keine Validierungsregeln",
     "listIsEmpty@calculatedValues": "Sie haben noch keine benutzerdefinierten Variablen",
@@ -538,6 +543,7 @@ var germanTranslation = {
     titlePlaceholder: "Titel eingeben",
     surveyTitlePlaceholder: "Umfragetitel eingeben",
     pageTitlePlaceholder: "Seitenbeschreibung eingeben",
+    startPageTitlePlaceholder: "Startseite",
     descriptionPlaceholder: "Beschreibung eingeben",
     surveyDescriptionPlaceholder: "Umfragebeschreibung eingeben",
     pageDescriptionPlaceholder: "Seitenbeschreibung eingeben",
@@ -1359,7 +1365,9 @@ var germanTranslation = {
       startWithNewLine: "Deaktivieren Sie diese Option, um den Bereich in einer Zeile mit der vorherigen Frage oder dem vorherigen Bereich anzuzeigen. Die Einstellung gilt nicht, wenn der Bereich das erste Element in Ihrem Formular ist.",
       state: "Wählen Sie aus: \"Erweitert\" - das Panel wird vollständig angezeigt und kann eingeklappt werden; \"Reduziert\" - das Panel zeigt nur den Titel und die Beschreibung an und kann erweitert werden; \"Gesperrt\" - das Panel wird vollständig angezeigt und kann nicht eingeklappt werden.",
       width: "Legt die Breite des Fensters im Verhältnis zu anderen Vermessungselementen in derselben Linie fest. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
-      showQuestionNumbers: "Weist Fragen, die in diesem Bereich verschachtelt sind, Nummern zu."
+      showQuestionNumbers: "Weist Fragen, die in diesem Bereich verschachtelt sind, Nummern zu.",
+      effectiveColSpan: "Gibt an, über wie viele Spalten sich dieser Bereich innerhalb des Rasterlayouts erstreckt.",
+      gridLayoutColumns: "In dieser Tabelle können Sie jede Rasterspalte innerhalb des Bereichs konfigurieren. Der Breitenprozentsatz für jede Spalte wird automatisch basierend auf der maximalen Anzahl von Elementen in einer Zeile festgelegt. Um das Rasterlayout anzupassen, passen Sie diese Werte manuell an und definieren Sie die Titelbreite für alle Fragen in jeder Spalte."
     },
     paneldynamic: {
       name: "Eine Panel-ID, die für die Befragten nicht sichtbar ist.",
@@ -1390,6 +1398,7 @@ var germanTranslation = {
     resetValueIf: "Verwenden Sie das Zauberstabsymbol, um eine Bedingungsregel festzulegen, die bestimmt, wann die Eingabe eines Befragten auf den Wert zurückgesetzt wird, der auf dem Wert \"Standardwertausdruck\" oder \"Wertausdruck festlegen\" oder auf dem Wert \"Standardantwort\" (falls einer dieser Werte festgelegt ist) basiert.",
     setValueIf: "Verwenden Sie das Zauberstabsymbol, um eine Bedingungsregel festzulegen, die bestimmt, wann der \"Wertausdruck festlegen\" ausgeführt werden soll, und weisen Sie den resultierenden Wert dynamisch als Antwort zu.",
     setValueExpression: "Geben Sie einen Ausdruck an, der den Wert definiert, der festgelegt werden soll, wenn die Bedingungen in der Regel \"Wert festlegen, wenn\" erfüllt sind. Der Ausdruck kann grundlegende Berechnungen enthalten - '{q1_id} + {q2_id}', boolesche Ausdrücke wie '{age} > 60' und Funktionen: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw. Der durch diesen Ausdruck ermittelte Wert kann durch die manuelle Eingabe eines Befragten überschrieben werden.",
+    gridLayoutEnabled: "Mit Survey Creator können Sie die Inline-Breiten von Formularelementen manuell anpassen, um das Layout zu steuern. Wenn dies nicht zum gewünschten Ergebnis führt, können Sie das Rasterlayout aktivieren, das Formularelemente mithilfe eines spaltenbasierten Systems strukturiert. Um Layoutspalten zu konfigurieren, wählen Sie eine Seite oder einen Bereich aus und verwenden Sie die Tabelle \"Frageneinstellungen\" → \"Rasterspalten\". Um anzupassen, wie viele Spalten eine Frage umfasst, wählen Sie sie aus und stellen Sie den gewünschten Wert im Feld \"Layout\" → \"Spaltenbereich\" ein.",
     question: {
       name: "Eine Frage-ID, die für die Befragten nicht sichtbar ist.",
       description: "Geben Sie einen Untertitel für die Frage ein.",
@@ -1410,7 +1419,8 @@ var germanTranslation = {
       textUpdateMode: "Wählen Sie aus: \"Bei Fokusverlust\" - der Wert wird aktualisiert, wenn das Eingabefeld den Fokus verliert; \"Während der Eingabe\" - der Wert wird in Echtzeit aktualisiert, während Benutzer tippen. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (\"Standardmäßig bei verlorenem Fokus\").",
       url: "Sie können einen beliebigen Webdienst als Datenquelle für Multiple-Choice-Fragen verwenden. Um Auswahlwerte aufzufüllen, geben Sie die URL des Diensts ein, der die Daten bereitstellt.",
       searchMode: "Ein Vergleichsvorgang, der zum Filtern der Dropdownliste verwendet wird.",
-      textWrapEnabled: "Lange Texte in Auswahloptionen generieren automatisch Zeilenumbrüche, die in das Dropdown-Menü passen. Deaktivieren Sie diese Option, wenn die Texte abgeschnitten werden sollen."
+      textWrapEnabled: "Lange Texte in Auswahloptionen generieren automatisch Zeilenumbrüche, die in das Dropdown-Menü passen. Deaktivieren Sie diese Option, wenn die Texte abgeschnitten werden sollen.",
+      effectiveColSpan: "Gibt an, über wie viele Spalten sich diese Frage innerhalb des Rasterlayouts erstreckt."
     },
     signaturepad: {
       signatureWidth: "Legt die Breite des angezeigten Signaturbereichs und des resultierenden Bildes fest.",
@@ -1509,7 +1519,8 @@ var germanTranslation = {
       questionTitleWidth: "Legt eine konsistente Breite für Fragetitel fest, wenn sie links neben den Fragefeldern ausgerichtet sind. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
       questionErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf die Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (standardmäßig \"Oben\").",
       questionOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene (\"Original\" standardmäßig) angewendet. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
-      showNavigationButtons: "Legt die Sichtbarkeit von Navigationsschaltflächen auf der Seite fest. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene angewendet, die standardmäßig auf \"Sichtbar\" eingestellt ist."
+      showNavigationButtons: "Legt die Sichtbarkeit von Navigationsschaltflächen auf der Seite fest. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene angewendet, die standardmäßig auf \"Sichtbar\" eingestellt ist.",
+      gridLayoutColumns: "In dieser Tabelle können Sie jede Rasterspalte auf der Seite konfigurieren. Der Breitenprozentsatz für jede Spalte wird automatisch basierend auf der maximalen Anzahl von Elementen in einer Zeile festgelegt. Um das Rasterlayout anzupassen, passen Sie diese Werte manuell an und definieren Sie die Titelbreite für alle Fragen in jeder Spalte."
     },
     timerLocation: "Legt die Position eines Timers auf einer Seite fest.",
     panelsState: "Wählen Sie aus: \"Gesperrt\" - Benutzer können Panele nicht erweitern oder reduzieren; \"Alle ausblenden\" - alle Panele beginnen in einem zusammengeklappten Zustand; \"Alle erweitern\" - alle Panele beginnen in einem erweiterten Zustand; \"First expanded\" - nur das erste Panel wird zunächst erweitert.",
@@ -1598,10 +1609,6 @@ var germanTranslation = {
       overlapEnabled: "Wenn diese Option aktiviert ist, überlagert der obere Rand der Umfrage den unteren Rand der Kopfzeile.",
       mobileHeight: "Wenn der Wert auf 0 gesetzt ist, wird die Höhe automatisch berechnet, um den Inhalt der Kopfzeile aufzunehmen."
     },
-    panellayoutcolumn: {
-      effectiveWidth: "Akzeptiert die Werte %.",
-      questionTitleWidth: "Akzeptiert die Werte px."
-    },
     progressBarInheritWidthFrom: "Die Option \"Wie Container\" passt die Breite des Fortschrittsbalkenbereichs automatisch an das HTML-Element an, in dem die Umfrage platziert wird."
   },
   // Properties
@@ -1689,7 +1696,7 @@ var germanTranslation = {
     templateElements: "VorlagenElemente",
     operator: "Operator",
     isVariable: "istVariable",
-    runExpression: "runExpression",
+    runExpression: "Ausführen eines Ausdrucks",
     showCaption: "Titel anzeigen",
     iconName: "Name des Icons",
     iconSize: "Größe des Icons",
@@ -2718,3 +2725,12 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Ausrichtung der Fehlermeldung bei der Zeilenerweiterung"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Legt die Position von Fehlermeldungen für Fragen fest, die in Detailabschnitten verschachtelt sind. Die Option \"Vererben\" wendet die Einstellung aus der Eigenschaft \"Ausrichtung der Fehlermeldung\" an."
 // pe.gridLayoutColumns: "Grid layout columns" => "Spalten für das Rasterlayout"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startseite"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektive Breite, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Titelbreite der Frage, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Sie haben noch keine Layoutspalten"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Gibt an, über wie viele Spalten sich dieser Bereich innerhalb des Rasterlayouts erstreckt."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "In dieser Tabelle können Sie jede Rasterspalte innerhalb des Bereichs konfigurieren. Der Breitenprozentsatz für jede Spalte wird automatisch basierend auf der maximalen Anzahl von Elementen in einer Zeile festgelegt. Um das Rasterlayout anzupassen, passen Sie diese Werte manuell an und definieren Sie die Titelbreite für alle Fragen in jeder Spalte."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Mit Survey Creator können Sie die Inline-Breiten von Formularelementen manuell anpassen, um das Layout zu steuern. Wenn dies nicht zum gewünschten Ergebnis führt, können Sie das Rasterlayout aktivieren, das Formularelemente mithilfe eines spaltenbasierten Systems strukturiert. Um Layoutspalten zu konfigurieren, wählen Sie eine Seite oder einen Bereich aus und verwenden Sie die Tabelle \"Frageneinstellungen\" → \"Rasterspalten\". Um anzupassen, wie viele Spalten eine Frage umfasst, wählen Sie sie aus und stellen Sie den gewünschten Wert im Feld \"Layout\" → \"Spaltenbereich\" ein."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Gibt an, über wie viele Spalten sich diese Frage innerhalb des Rasterlayouts erstreckt."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "In dieser Tabelle können Sie jede Rasterspalte auf der Seite konfigurieren. Der Breitenprozentsatz für jede Spalte wird automatisch basierend auf der maximalen Anzahl von Elementen in einer Zeile festgelegt. Um das Rasterlayout anzupassen, passen Sie diese Werte manuell an und definieren Sie die Titelbreite für alle Fragen in jeder Spalte."

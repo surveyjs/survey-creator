@@ -308,6 +308,10 @@ var persianStrings = {
       maxWidth: "حداکثر عرض پانل",
       showNumber: "شماره گذاری این پانل"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "عرض موثر، ٪",
+      questionTitleWidth: "عرض عنوان سوال، px"
+    },
     paneldynamic: {
       name: "نام تابلو",
       title: "عنوان پنل",
@@ -505,6 +509,7 @@ var persianStrings = {
     listIsEmpty: "یک آیتم جدید اضافه کنید",
     "listIsEmpty@choices": "هنوز هیچ انتخابی اضافه نشده است",
     "listIsEmpty@columns": "شما هنوز هیچ ستونی ندارید",
+    "listIsEmpty@gridLayoutColumns": "شما هنوز ستون های طرح بندی ندارید",
     "listIsEmpty@rows": "شما هنوز هیچ ردیفی ندارید",
     "listIsEmpty@validators": "شما هنوز هیچ قانون اعتبار سنجی ندارید",
     "listIsEmpty@calculatedValues": "شما هنوز هیچ متغیر سفارشی ندارید",
@@ -538,6 +543,7 @@ var persianStrings = {
     titlePlaceholder: "عنوان را اینجا وارد کنید",
     surveyTitlePlaceholder: "عنوان نظرسنجی را اینجا وارد کنید",
     pageTitlePlaceholder: "عنوان صفحه را اینجا وارد کنید",
+    startPageTitlePlaceholder: "صفحه شروع",
     descriptionPlaceholder: "توضیحات را وارد کنید",
     surveyDescriptionPlaceholder: "توضیحات نظرسنجی را وارد کنید",
     pageDescriptionPlaceholder: "توضیحات صفحه را وارد کنید",
@@ -1359,7 +1365,9 @@ var persianStrings = {
       startWithNewLine: "عدم انتخاب برای نمایش پانل در یک خط با سوال قبلی یا پانل. تنظیمات اعمال نمی شود اگر پانل اولین عنصر در فرم شما باشد.",
       state: "را انتخاب کنید از: \"گسترش یافته\" - پانل به طور کامل نمایش داده می شود و می تواند سقوط کند؛ \"سقوط\" - پانل تنها عنوان و توضیحات را نمایش می دهد و می تواند گسترش یابد. \"Locked\" - پانل به طور کامل نمایش داده می شود و نمی تواند سقوط کند.",
       width: "عرض پانل را متناسب با سایر عناصر بررسی در همان خط تنظیم می کند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
-      showQuestionNumbers: "اعداد را به سؤالات تودرتو در این پانل اختصاص می دهد."
+      showQuestionNumbers: "اعداد را به سؤالات تودرتو در این پانل اختصاص می دهد.",
+      effectiveColSpan: "مشخص می کند که این پانل چند ستون در طرح بندی شبکه قرار دارد.",
+      gridLayoutColumns: "این جدول به شما امکان می دهد هر ستون شبکه را در پانل پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."
     },
     paneldynamic: {
       name: "یک شناسه پانل که برای پاسخ دهندگان قابل مشاهده نیست.",
@@ -1390,6 +1398,7 @@ var persianStrings = {
     resetValueIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که تعیین می کند چه زمانی ورودی پاسخ دهنده به مقدار بر اساس \"بیان مقدار پیش فرض\" یا \"تنظیم مقدار بیان\" یا \"پاسخ پیش فرض\" مقدار (اگر هر کدام تنظیم شده است) تنظیم مجدد شود.",
     setValueIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که تعیین می کند چه زمانی \"Set value expression\" را اجرا کنید و به صورت پویا مقدار حاصل را به عنوان یک پاسخ اختصاص دهید.",
     setValueExpression: "یک عبارت را مشخص کنید که مقدار تعیین شده را هنگامی که شرایط در قانون \"Set value if\" براورده می شود، تعریف می کند. این عبارت می تواند شامل محاسبات اساسی - \"{q1_id} + {q2_id}'، عبارات بولی مانند \"{age} > 60\" و توابع: \"iif()\"، \"today()\"، \"age()\"، \"min()\"، \"max()\"، \"avg()\" و غیره باشد. مقدار تعیین شده توسط این عبارت می تواند توسط ورودی دستی پاسخ دهنده لغو شود.",
+    gridLayoutEnabled: "Survey Creator به شما امکان می دهد عرض درون خطی عناصر فرم را به صورت دستی تنظیم کنید تا طرح بندی را کنترل کنید. اگر این نتیجه دلخواه را به همراه نداشت، می توانید طرح بندی شبکه را فعال کنید، که با استفاده از یک سیستم مبتنی بر ستون عناصر را تشکیل می دهد. برای پیکربندی ستون های طرح بندی، یک صفحه یا پانل را انتخاب کنید و از جدول «تنظیمات سوال» → «ستون های شبکه» استفاده کنید. برای تنظیم تعداد ستون های یک سوال، آن را انتخاب کنید و مقدار مورد نظر را در قسمت \"Layout\" → \"Column span\" تنظیم کنید.",
     question: {
       name: "یک شناسه سوال که برای پاسخ دهندگان قابل مشاهده نیست.",
       description: "یک سوال زیر نویس تایپ کنید.",
@@ -1410,7 +1419,8 @@ var persianStrings = {
       textUpdateMode: "انتخاب از: \"در تمرکز از دست رفته\" - مقدار به روز شده است زمانی که فیلد ورودی تمرکز خود را از دست می دهد؛ \"در هنگام تایپ\" - مقدار در زمان واقعی به روز می شود، زیرا کاربران تایپ می کنند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"در تمرکز از دست رفته\" به طور پیش فرض) اعمال می شود.",
       url: "شما می توانید از هر سرویس وب به عنوان منبع داده برای سوالات چند گزینه ای استفاده کنید. برای پر کردن مقادیر انتخاب، URL سرویس ارائه دهنده داده ها را وارد کنید.",
       searchMode: "یک عملیات مقایسه ای که برای فیلتر کردن لیست کشویی استفاده می شود.",
-      textWrapEnabled: "متون طولانی در گزینه های انتخاب به طور خودکار شکستن خط را ایجاد می کنند تا در منوی کشویی قرار بگیرند. اگر می خواهید متن ها کلیپ شوند، انتخاب را لغو کنید."
+      textWrapEnabled: "متون طولانی در گزینه های انتخاب به طور خودکار شکستن خط را ایجاد می کنند تا در منوی کشویی قرار بگیرند. اگر می خواهید متن ها کلیپ شوند، انتخاب را لغو کنید.",
+      effectiveColSpan: "مشخص می کند که این سوال چند ستون در طرح بندی شبکه قرار دارد."
     },
     signaturepad: {
       signatureWidth: "عرض ناحیه امضای نمایش داده شده و تصویر حاصل را تنظیم می کند.",
@@ -1509,7 +1519,8 @@ var persianStrings = {
       questionTitleWidth: "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
       questionErrorLocation: "مکان یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم می کند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند.",
       questionOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"اصلی\" به طور پیش فرض) را اعمال می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
-      showNavigationButtons: "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است."
+      showNavigationButtons: "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است.",
+      gridLayoutColumns: "این جدول به شما امکان می دهد هر ستون شبکه را در صفحه پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."
     },
     timerLocation: "مکان یک تایمر را در یک صفحه تنظیم می کند.",
     panelsState: "انتخاب از: \"قفل شده\" - کاربران نمی توانند پانل ها را گسترش یا سقوط دهند؛ \"سقوط همه\" - تمام پانل ها در یک حالت فروپاشی شروع می شوند؛ \"گسترش همه\" - تمام پانل ها در یک حالت گسترش یافته شروع می شوند؛ \"اولین گسترش\" - تنها پانل اول در ابتدا گسترش یافته است.",
@@ -1597,10 +1608,6 @@ var persianStrings = {
       textAreaWidth: "عرض ناحیه سرصفحه که حاوی عنوان و توضیحات نظرسنجی است که بر حسب پیکسل اندازه گیری می شود.",
       overlapEnabled: "هنگامی که فعال باشد، بالای نظرسنجی پایین هدر را همپوشانی می کند.",
       mobileHeight: "هنگامی که روی 0 تنظیم می شود، ارتفاع به طور خودکار محاسبه می شود تا محتوای هدر را در خود جای دهد."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "مقادیر را می پذیرد.",
-      questionTitleWidth: "مقادیر px را می پذیرد."
     },
     progressBarInheritWidthFrom: "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه نوار پیشرفت را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد."
   },
@@ -2961,3 +2968,12 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "تراز پیام خطای گسترش ردیف"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "مکان پیام های خطا را برای سؤالات تودرتو در بخش های جزئیات تنظیم می کند. گزینه \"وراثت\" تنظیمات را از ویژگی \"تراز پیام خطا\" اعمال می کند."
 // pe.gridLayoutColumns: "Grid layout columns" => "ستون های طرح بندی شبکه ای"
+// pe.startPageTitlePlaceholder: "Start Page" => "صفحه شروع"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "عرض موثر، ٪"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "عرض عنوان سوال، px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "شما هنوز ستون های طرح بندی ندارید"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "مشخص می کند که این پانل چند ستون در طرح بندی شبکه قرار دارد."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "این جدول به شما امکان می دهد هر ستون شبکه را در پانل پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator به شما امکان می دهد عرض درون خطی عناصر فرم را به صورت دستی تنظیم کنید تا طرح بندی را کنترل کنید. اگر این نتیجه دلخواه را به همراه نداشت، می توانید طرح بندی شبکه را فعال کنید، که با استفاده از یک سیستم مبتنی بر ستون عناصر را تشکیل می دهد. برای پیکربندی ستون های طرح بندی، یک صفحه یا پانل را انتخاب کنید و از جدول «تنظیمات سوال» → «ستون های شبکه» استفاده کنید. برای تنظیم تعداد ستون های یک سوال، آن را انتخاب کنید و مقدار مورد نظر را در قسمت \"Layout\" → \"Column span\" تنظیم کنید."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "مشخص می کند که این سوال چند ستون در طرح بندی شبکه قرار دارد."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "این جدول به شما امکان می دهد هر ستون شبکه را در صفحه پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."

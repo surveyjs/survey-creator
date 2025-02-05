@@ -361,7 +361,8 @@ export interface ICreatorOptions {
    * - `"always"` - Displays the expand/collapse buttons permanently.
    * - `"never"` - Hides the expand/collapse buttons.
    * @see [SurveyCreatorModel.onElementGetExpandCollapseState](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementGetExpandCollapseState)
-  */
+   * @see collapseOnDrag
+   */
   expandCollapseButtonVisibility?: "never" | "onhover" | "always";
 
   /**
@@ -403,4 +404,17 @@ export interface ICreatorOptions {
    * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid. 
    */
   propertyGridNavigationMode?: "buttons" | "accordion";
+  /**
+   * Specifies whether users can drag and drop pages on the design surface.
+   * 
+   * Default value: `true` if [`pageEditMode`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#pageEditMode) is `"standard"`; `false` otherwise.
+   * @see collapseOnDrag
+   */
+  allowDragPages?: boolean;
+  /**
+   * Specifies whether to collapse pages on the design surface when users start dragging a survey element.
+   * 
+   * Default value: `true`
+   */
+  collapseOnDrag?: boolean;
 }

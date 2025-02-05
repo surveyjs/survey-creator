@@ -161,13 +161,14 @@ export class TabTranslationPlugin implements ICreatorPlugin {
         pressed: false,
         action: () => {
           this.creator.sidebar.expandSidebar();
-          this.creator.sidebar.header.subTitle = languagesString;
+          this.creator.sidebar.header.title = languagesString;
           action.active = true;
         }
       });
 
       this.tabControlModel.topToolbar.setItems([action]);
-      this.creator.sidebar.header.subTitle = languagesString;
+      this.creator.sidebar.header.title = languagesString;
+      this.creator.sidebar.header.subTitle = this.sidebarTab.caption;
     }
   }
   private createMergeLocaleWithDefaultActionTitleUpdater(): any {

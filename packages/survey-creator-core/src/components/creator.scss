@@ -20,7 +20,7 @@ survey-creator,
 
   @-moz-document url-prefix() {
     scrollbar-width: thin;
-    scrollbar-color: $border transparent;
+    scrollbar-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026)) transparent;
   }
 
   ::-webkit-scrollbar {
@@ -138,15 +138,6 @@ survey-creator,
   }
 }
 
-.svc-plugin-tab__content-actions {
-  sv-action-bar {
-    padding: 0;
-    height: calc(6 * #{$base-unit});
-    background: $background;
-    border-top: 1px solid $border;
-  }
-}
-
 .svc-creator__banner {
   width: 100%;
   line-height: calcSize(4);
@@ -162,7 +153,7 @@ survey-creator,
   background-color: $background;
   /* Shadow / Medium */
   border-radius: calcSize(12.5);
-  box-shadow: $shadow-medium;
+  box-shadow: 0px 2px 6px 0px var(--ctr-shadow-medium-color, var(--sjs-special-glow, #004c441a));
   transition:
     max-width 0.1s ease-in-out,
     padding 0.2s ease-in-out;

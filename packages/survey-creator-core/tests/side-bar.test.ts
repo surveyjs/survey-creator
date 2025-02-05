@@ -78,8 +78,8 @@ test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if surve
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
   expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-property-grid-header");
   expect(creator.sidebar.header.componentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("question1");
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("General");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("General");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("question1");
   tabs = designerPlugin["tabControlModel"].topToolbar.actions;
   expect(tabs.length).toBe(6);
   expect(tabs.map(t => t.id).join(",")).toBe("general,layout,logic,mask,data,validation");
@@ -133,8 +133,8 @@ test("showOneCategoryInPropertyGrid: tab control", () => {
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
   expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-property-grid-header");
   expect(creator.sidebar.header.componentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Survey");
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("General");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("General");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("Survey");
   const tabs = designerPlugin["tabControlModel"].topToolbar.actions;
   expect(tabs.length).toBe(10);
   expect(tabs.map(t => t.id).join(",")).toBe("general,logo,navigation,question,pages,logic,data,validation,showOnCompleted,timer");
@@ -148,16 +148,16 @@ test("showOneCategoryInPropertyGrid: switch between tabs", () => {
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Survey");
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("General");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("General");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("Survey");
   const tabs = designerPlugin["tabControlModel"].topToolbar.actions;
   expect(tabs[0].active).toBe(true);
   expect(tabs[4].active).toBe(false);
   expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("general");
 
   tabs[4].action();
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Survey");
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("Pages");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Pages");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("Survey");
   expect(tabs[0].active).toBe(false);
   expect(tabs[4].active).toBe(true);
   expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("pages");
@@ -170,16 +170,16 @@ test("showOneCategoryInPropertyGrid: switch tabs by search", () => {
   designerPlugin.showOneCategoryInPropertyGrid = true;
 
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Survey");
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("General");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("General");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("Survey");
   const tabs = designerPlugin["tabControlModel"].topToolbar.actions;
   expect(tabs[0].active).toBe(true);
   expect(tabs[4].active).toBe(false);
   expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("general");
 
   designerPlugin.propertyGridViewModel.searchManager.filterString = "pages";
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Survey");
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("Pages");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("Pages");
+  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("Survey");
   expect(tabs[0].active).toBe(false);
   expect(tabs[4].active).toBe(true);
   expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("pages");
@@ -198,8 +198,8 @@ test("showOneCategoryInPropertyGrid: switch designer tab and update subTitle", (
 
   creator.activeTab = "translation";
   expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-header");
-  expect(creator.sidebar.header.title).toEqual("Language Settings");
-  expect(creator.sidebar.header.subTitle).toEqual("Languages");
+  expect(creator.sidebar.header.subTitle).toEqual("Language Settings");
+  expect(creator.sidebar.header.title).toEqual("Languages");
 
   creator.activeTab = "designer";
   expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-header");

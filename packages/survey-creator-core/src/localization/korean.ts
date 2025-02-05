@@ -308,6 +308,10 @@ export var koreanStrings = {
       maxWidth: "최대 패널 너비",
       showNumber: "이 패널에 번호 매기기"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "유효 폭, %",
+      questionTitleWidth: "질문 제목 너비, px"
+    },
     paneldynamic: {
       name: "패널 이름",
       title: "패널 제목",
@@ -505,6 +509,7 @@ export var koreanStrings = {
     listIsEmpty: "아직 추가된 항목이 없습니다.",
     "listIsEmpty@choices": "선택 항목이 아직 추가되지 않았습니다",
     "listIsEmpty@columns": "아직 열이 없습니다.",
+    "listIsEmpty@gridLayoutColumns": "레이아웃 열이 아직 없습니다.",
     "listIsEmpty@rows": "아직 행이 없습니다.",
     "listIsEmpty@validators": "아직 유효성 검사 규칙이 없습니다.",
     "listIsEmpty@calculatedValues": "아직 맞춤 변수가 없습니다.",
@@ -538,6 +543,7 @@ export var koreanStrings = {
     titlePlaceholder: "타이틀",
     surveyTitlePlaceholder: "설문조사 제목",
     pageTitlePlaceholder: "페이지 {num}",
+    startPageTitlePlaceholder: "시작 페이지",
     descriptionPlaceholder: "묘사",
     surveyDescriptionPlaceholder: "묘사",
     pageDescriptionPlaceholder: "묘사",
@@ -1359,7 +1365,9 @@ export var koreanStrings = {
       startWithNewLine: "이전 질문 또는 패널과 함께 한 줄로 패널을 표시하려면 선택을 취소합니다. 패널이 양식의 첫 번째 요소인 경우에는 설정이 적용되지 않습니다.",
       state: "다음 중에서 선택: \"확장\" - 패널이 전체적으로 표시되며 축소할 수 있습니다. \"축소됨\" - 패널에 제목과 설명만 표시되며 확장할 수 있습니다. \"잠김\" - 패널이 완전히 표시되며 축소할 수 없습니다.",
       width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
-      showQuestionNumbers: "이 패널 내에 중첩된 질문에 번호를 할당합니다."
+      showQuestionNumbers: "이 패널 내에 중첩된 질문에 번호를 할당합니다.",
+      effectiveColSpan: "이 패널이 그리드 레이아웃 내에서 확장되는 열의 수를 지정합니다.",
+      gridLayoutColumns: "이 테이블에서는 패널 내의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
     },
     paneldynamic: {
       name: "응답자에게 표시되지 않는 패널 ID입니다.",
@@ -1390,6 +1398,7 @@ export var koreanStrings = {
     resetValueIf: "마술 지팡이 아이콘을 사용하여 응답자의 입력이 \"기본값 표현식\" 또는 \"설정 값 표현식\" 또는 \"기본 답변\" 값(둘 중 하나가 설정된 경우)에 기반한 값으로 재설정되는 시점을 결정하는 조건부 규칙을 설정합니다.",
     setValueIf: "마술 지팡이 아이콘을 사용하여 \"값 설정 표현식\"을 실행할 시기를 결정하는 조건부 규칙을 설정하고 결과 값을 응답으로 동적으로 할당합니다.",
     setValueExpression: "\"Set value if\" 규칙의 조건이 충족될 때 설정할 값을 정의하는 표현식을 지정합니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식(예: '{age} > 60') 및 함수 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등이 포함될 수 있습니다. 이 표현식에 의해 결정된 값은 응답자의 수동 입력에 의해 재정의될 수 있습니다.",
+    gridLayoutEnabled: "Survey Creator를 사용하면 양식 요소의 인라인 너비를 수동으로 조정하여 레이아웃을 제어할 수 있습니다. 이렇게 해도 원하는 결과가 나오지 않으면 열 기반 시스템을 사용하여 요소를 형성하는 구조체인 그리드 레이아웃을 활성화할 수 있습니다. 레이아웃 열을 구성하려면 페이지 또는 패널을 선택하고 \"질문 설정\" → \"그리드 열\" 테이블을 사용합니다. 질문의 열 수를 조정하려면 질문을 선택하고 \"레이아웃\" → \"열 범위\" 입력란에서 원하는 값을 설정합니다.",
     question: {
       name: "응답자에게 표시되지 않는 질문 ID입니다.",
       description: "질문 부제목을 입력합니다.",
@@ -1410,7 +1419,8 @@ export var koreanStrings = {
       textUpdateMode: "다음 중에서 선택: \"초점을 잃을 때\" - 입력 필드가 초점을 잃을 때 값이 업데이트됩니다. \"While typing\" - 사용자가 입력할 때 값이 실시간으로 업데이트됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"초점 손실 시\")을 적용합니다.",
       url: "모든 웹 서비스를 객관식 질문의 데이터 소스로 사용할 수 있습니다. 선택 항목 값을 채우려면 데이터를 제공하는 서비스의 URL을 입력합니다.",
       searchMode: "드롭다운 목록을 필터링하는 데 사용되는 비교 작업입니다.",
-      textWrapEnabled: "선택 옵션의 긴 텍스트는 드롭다운 메뉴에 맞게 줄 바꿈을 자동으로 생성합니다. 텍스트를 자르려면 선택을 취소합니다."
+      textWrapEnabled: "선택 옵션의 긴 텍스트는 드롭다운 메뉴에 맞게 줄 바꿈을 자동으로 생성합니다. 텍스트를 자르려면 선택을 취소합니다.",
+      effectiveColSpan: "이 질문이 그리드 레이아웃 내에서 얼마나 많은 열에 걸쳐 있는지 지정합니다."
     },
     signaturepad: {
       signatureWidth: "표시된 서명 영역과 결과 이미지의 너비를 설정합니다.",
@@ -1509,7 +1519,8 @@ export var koreanStrings = {
       questionTitleWidth: "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       questionErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       questionOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"원본\")을 적용합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
-      showNavigationButtons: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다."
+      showNavigationButtons: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다.",
+      gridLayoutColumns: "이 테이블을 사용하면 페이지의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
     },
     timerLocation: "페이지에서 타이머의 위치를 설정합니다.",
     panelsState: "다음 중에서 선택: \"잠김\" - 사용자가 패널을 확장하거나 축소할 수 없습니다. \"모두 축소\" - 모든 패널이 축소된 상태에서 시작됩니다. \"모두 확장\" - 모든 패널이 확장된 상태에서 시작됩니다. \"첫 번째 확장\" - 첫 번째 패널만 처음에 확장됩니다.",
@@ -1597,10 +1608,6 @@ export var koreanStrings = {
       textAreaWidth: "설문조사 제목과 설명이 포함된 헤더 영역의 너비로, 픽셀 단위로 측정됩니다.",
       overlapEnabled: "활성화하면 설문조사의 상단이 헤더의 하단에 오버레이됩니다.",
       mobileHeight: "0으로 설정하면 헤더의 내용을 수용하기 위해 높이가 자동으로 계산됩니다."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "% 값을 허용합니다.",
-      questionTitleWidth: "px 값을 허용합니다."
     },
     progressBarInheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다."
   },
@@ -3210,3 +3217,12 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "행 확장 오류 메시지 맞춤"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "세부 섹션에 중첩된 질문에 대한 오류 메시지의 위치를 설정합니다. \"Inherit\" 옵션은 \"Error message alignment\" 속성의 설정을 적용합니다."
 // pe.gridLayoutColumns: "Grid layout columns" => "그리드 레이아웃 열"
+// pe.startPageTitlePlaceholder: "Start Page" => "시작 페이지"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "유효 폭, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "질문 제목 너비, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "레이아웃 열이 아직 없습니다."
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "이 패널이 그리드 레이아웃 내에서 확장되는 열의 수를 지정합니다."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "이 테이블에서는 패널 내의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator를 사용하면 양식 요소의 인라인 너비를 수동으로 조정하여 레이아웃을 제어할 수 있습니다. 이렇게 해도 원하는 결과가 나오지 않으면 열 기반 시스템을 사용하여 요소를 형성하는 구조체인 그리드 레이아웃을 활성화할 수 있습니다. 레이아웃 열을 구성하려면 페이지 또는 패널을 선택하고 \"질문 설정\" → \"그리드 열\" 테이블을 사용합니다. 질문의 열 수를 조정하려면 질문을 선택하고 \"레이아웃\" → \"열 범위\" 입력란에서 원하는 값을 설정합니다."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "이 질문이 그리드 레이아웃 내에서 얼마나 많은 열에 걸쳐 있는지 지정합니다."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "이 테이블을 사용하면 페이지의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."

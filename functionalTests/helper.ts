@@ -67,6 +67,7 @@ export const creatorTabDesignerName = "Designer";
 export const creatorTabPreviewName = "Preview";
 export const creatorTabLogicName = "Logic";
 export const creatorTabTranslationName = "Translation";
+export const creatorTabThemeName = "Themes";
 export const generalGroupName = "General";
 export const logicGroupName = "Conditions";
 export const inputMaskSettingsGroupName = "Input Mask Settings";
@@ -208,6 +209,11 @@ export async function setAllowEditSurveyTitle(newVal: boolean) {
 export async function setExpandCollapseButtonVisibility(newVal: string) {
   await ClientFunction((newVal) => {
     window["creator"].expandCollapseButtonVisibility = newVal;
+  })(newVal);
+}
+export async function setAllowZoom(newVal: boolean) {
+  await ClientFunction((newVal) => {
+    window["creator"].allowZoom = newVal;
   })(newVal);
 }
 

@@ -11,7 +11,7 @@ const newLineRegExp = /\r?\n/gi;
 
 
 const baseThemeCssVariable = getCssVariablesFormFile(baseThemeName + ".css");
-const colorPalleteLightCssVariable = getCssVariablesFormFile(defaultLightPaletteSourcePath);
+const colorPaletteLightCssVariable = getCssVariablesFormFile(defaultLightPaletteSourcePath);
 
 function getCorrectValue(variableKey, value) {
   if(value === undefined) return value;
@@ -30,8 +30,8 @@ function findConstantValue(value) {
 
   if(!!baseThemeCssVariable[varName]) {
     return findConstantValue(baseThemeCssVariable[varName]);
-  } else if(!!colorPalleteLightCssVariable[varName]) {
-    const colorValue = colorPalleteLightCssVariable[varName];
+  } else if(!!colorPaletteLightCssVariable[varName]) {
+    const colorValue = colorPaletteLightCssVariable[varName];
     if(colorValue.indexOf("#") === 0) return `var(${varName}, ${colorValue.toLowerCase()})`;
   } 
   return undefined;

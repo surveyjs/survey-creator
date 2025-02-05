@@ -187,31 +187,29 @@ test("ZoomIn/ZoomOut designer surface", (): any => {
   const creator = new CreatorTester();
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(designerTabModel["surfaceScale"]).toBe(100);
+  expect(creator.survey.widthScale).toBe(100);
   expect(creator.themeVariables).toStrictEqual({});
 
   designerTabModel["scaleSurface"](10);
   expect(designerTabModel["surfaceScale"]).toBe(100);
-  expect(creator.themeVariables).toStrictEqual({});
   expect(creator.survey.widthScale).toBe(100);
 
   designerTabModel["scaleSurface"](200);
   expect(designerTabModel["surfaceScale"]).toBe(100);
-  expect(creator.themeVariables).toStrictEqual({});
   expect(creator.survey.widthScale).toBe(100);
 
   designerTabModel["maxSurfaceScaling"] = 200;
   designerTabModel["scaleSurface"](150);
   expect(creator.survey.widthScale).toBe(150);
   expect(designerTabModel["surfaceScale"]).toBe(150);
-  expect(creator.themeVariables).toStrictEqual({
-    "--ctr-surface-base-unit": "12px",
-    "--lbr-corner-radius-unit": "12px",
-    "--lbr-font-unit": "12px",
-    "--lbr-line-height-unit": "12px",
-    "--lbr-size-unit": "12px",
-    "--lbr-spacing-unit": "12px",
-    "--lbr-stroke-unit": "1.5px"
-  });
+
+  expect(creator.themeVariables["--ctr-surface-base-unit"]).toBe("12px");
+  expect(creator.themeVariables["--lbr-corner-radius-unit"]).toBe("12px");
+  expect(creator.themeVariables["--lbr-font-unit"]).toBe("12px");
+  expect(creator.themeVariables["--lbr-line-height-unit"]).toBe("12px");
+  expect(creator.themeVariables["--lbr-size-unit"]).toBe("12px");
+  expect(creator.themeVariables["--lbr-spacing-unit"]).toBe("12px");
+  expect(creator.themeVariables["--lbr-stroke-unit"]).toBe("1.5px");
 });
 
 test("ZoomIn/ZoomOut actions limits", (): any => {
@@ -293,7 +291,7 @@ test("showSurfaceTools", (): any => {
 test("Designer surface css classes", (): any => {
   const savedNewJSON = settings.defaultNewSurveyJSON;
   settings.defaultNewSurveyJSON = {};
-  const creator = new CreatorTester(undefined, undefined, false);
+  const creator = new CreatorTester();
   creator.expandCollapseButtonVisibility = "never";
   const designerTabModel = creator.getPlugin("designer").model as TabDesignerViewModel;
   expect(designerTabModel.getRootCss()).toBe("sd-root-modern svc-tab-designer--with-surface-tools svc-tab-designer--with-placeholder svc-tab-designer--standard-mode");
@@ -315,7 +313,7 @@ test("Designer surface css classes", (): any => {
 });
 
 test("Update showPlaceholder calls updateSurveyScaleStartDimensions and resets scale start dimensions", (): any => {
-  const creator = new CreatorTester(undefined, undefined, false);
+  const creator = new CreatorTester();
   const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   designerPlugin.activate();
   const model = designerPlugin.model;
@@ -331,4 +329,62 @@ test("Update showPlaceholder calls updateSurveyScaleStartDimensions and resets s
   expect(model.showPlaceholder).toBeFalsy();
   expect(creator.survey.responsiveStartWidth).toBeUndefined();
   expect(creator.survey.staticStartWidth).toBeUndefined();
+});
+
+test("allowDragPages respects the pageEditMode", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.allowDragPages).toBeTruthy();
+  expect(creator.pageEditMode).toBe("standard");
+
+  creator.allowDragPages = false;
+  expect(creator.allowDragPages).toBeFalsy();
+  expect(creator.pageEditMode).toBe("standard");
+
+  creator.allowDragPages = true;
+  expect(creator.allowDragPages).toBeTruthy();
+  expect(creator.pageEditMode).toBe("standard");
+
+  creator.pageEditMode = "bypage";
+  expect(creator.allowDragPages).toBeFalsy();
+  expect(creator.pageEditMode).toBe("bypage");
+});
+
+test("onElementAllowOperations for pages and allowDragging in page adorner", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text" }] };
+  const reason: Array<boolean> = [];
+  let disableDrag = false;
+  creator.onElementAllowOperations.add(function (sender, options) {
+    if (options.element.getType() == "page") {
+      reason.push(options.allowDrag);
+      if (disableDrag) {
+        options.allowDrag = false;
+        options.allowDragging = false;
+      }
+    }
+  });
+
+  const pageAdorner = new PageAdorner(creator, creator.survey.pages[0]);
+
+  expect(creator.allowDragPages).toBeTruthy();
+  expect(pageAdorner.allowDragging).toBeTruthy();
+  expect(reason).toHaveLength(1);
+  expect(reason[0]).toBeTruthy();
+
+  creator.allowDragPages = false;
+  pageAdorner["updateActionsProperties"]();
+
+  expect(creator.allowDragPages).toBeFalsy();
+  expect(pageAdorner.allowDragging).toBeFalsy();
+  expect(reason).toHaveLength(2);
+  expect(reason[1]).toBeFalsy();
+
+  creator.allowDragPages = true;
+  disableDrag = true;
+  pageAdorner["updateActionsProperties"]();
+
+  expect(creator.allowDragPages).toBeTruthy();
+  expect(pageAdorner.allowDragging).toBeFalsy();
+  expect(reason).toHaveLength(3);
+  expect(reason[2]).toBeTruthy();
 });

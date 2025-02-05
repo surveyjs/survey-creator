@@ -3,7 +3,7 @@ import {
   JsonObjectProperty, ActionContainer, AdaptiveActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
   EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
-  dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
+  ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
   CssClassBuilder,
   SvgRegistry,
@@ -64,7 +64,8 @@ import {
   GetPropertyReadOnlyEvent,
   ElementSelectingEvent,
   ElementSelectedEvent,
-  DefineElementMenuItemsEvent
+  DefineElementMenuItemsEvent,
+  CreatorThemePropertyChangedEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -951,6 +952,7 @@ export class SurveyCreatorModel extends Base
    * ```
    */
   public onCreateCustomMessagePanel: EventBase<SurveyCreatorModel, CreateCustomMessagePanelEvent> = this.addCreatorEvent<SurveyCreatorModel, CreateCustomMessagePanelEvent>();
+  public onCreatorThemePropertyChanged: EventBase<SurveyCreatorModel, CreatorThemePropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorThemePropertyChangedEvent>();
 
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   public setSurveyJSONTextCallback: (text: string) => void;
@@ -1702,6 +1704,9 @@ export class SurveyCreatorModel extends Base
       page = this.addNewPageIntoSurvey();
     } else {
       this.survey.addPage(page);
+      page.questions.forEach(question => {
+        this.doOnQuestionAdded(question, page);
+      });
     }
     if (changeSelection) {
       this.selectElement(page);
@@ -1833,12 +1838,6 @@ export class SurveyCreatorModel extends Base
       this[key] = options[key];
     }
   }
-  private setPropertyPlaceHolder(className: string, propertyName: string, value: string) {
-    const prop: any = Serializer.findProperty(className, propertyName);
-    if (!!prop) {
-      prop.placeholder = value;
-    }
-  }
   private setPropertyVisibility(className: string, visible: boolean, ...properties: string[]) {
     if (!Array.isArray(properties)) return;
     for (var i = 0; i < properties.length; i++) {
@@ -1853,13 +1852,7 @@ export class SurveyCreatorModel extends Base
     }
   }
   private patchMetadata(): void {
-    this.setPropertyPlaceHolder("survey", "title", "pe.surveyTitlePlaceholder");
-    this.setPropertyPlaceHolder("survey", "description", "pe.surveyDescriptionPlaceholder");
     this.setPropertyVisibility("survey", false, "logoPosition");
-    if (this.pageEditMode !== "single") {
-      this.setPropertyPlaceHolder("page", "title", "pe.pageTitlePlaceholder");
-      this.setPropertyPlaceHolder("page", "description", "pe.pageDescriptionPlaceholder");
-    }
   }
 
   isCanModifyProperty(obj: Base, propertyName: string): boolean {
@@ -2157,7 +2150,7 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragClear.add((sender, options) => {
       isDraggedFromToolbox = false;
       this.stopUndoRedoTransaction();
-      if (this.collapsePagesOnDrag) {
+      if (!!options.draggedElement && this.collapseOnDrag) {
         this.designerStateManager?.release();
         this.restoreElementsState();
       }
@@ -2166,8 +2159,8 @@ export class SurveyCreatorModel extends Base
   public get designerStateManager() {
     return (this.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
   }
-  public collapseAllPagesOnDragStart(): void {
-    this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages);
+  public collapseAllPagesOnDragStart(element: SurveyElement): void {
+    this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages.filter(p => !element || element.isPage || p !== (element as any).page));
   }
   public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
     if (this.expandCollapseButtonVisibility == "never") return false;
@@ -2188,7 +2181,10 @@ export class SurveyCreatorModel extends Base
   private restoreState(element: SurveyElement) {
     const state = this.getElementExpandCollapseState(element as any, "drag-end", undefined);
     if (state !== undefined) {
-      SurveyElementAdornerBase.GetAdorner(element).collapsed = state;
+      const adorner = SurveyElementAdornerBase.GetAdorner(element);
+      if (!!adorner) {
+        adorner.collapsed = state;
+      }
     }
     SurveyElementAdornerBase.RestoreStateFor(element);
   }
@@ -2329,6 +2325,7 @@ export class SurveyCreatorModel extends Base
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);
     var page = this.getPageByElement(question);
+    if (!page) return;
     var options = { question: question, page: page, reason: this.addNewElementReason };
     this.addNewElementReason = undefined;
     this.onQuestionAdded.fire(this, options);
@@ -2676,14 +2673,8 @@ export class SurveyCreatorModel extends Base
     }
   }
   public loadSurvey(surveyId: string): void {
-    new dxSurveyService().loadSurvey(
-      surveyId,
-      (success: boolean, result: string, response: any) => {
-        if (success && result) {
-          this.JSON = result;
-        }
-      }
-    );
+    // eslint-disable-next-line no-console
+    console.warn("Self-hosted Form Library no longer supports integration with SurveyJS Demo Service. Learn more: https://surveyjs.io/stay-updated/release-notes/v2.0.0#form-library-removes-apis-for-integration-with-surveyjs-demo-service");
   }
   /**
    * Specifies where to add new questions when users click the "Add Question" button.
@@ -4034,13 +4025,14 @@ export class SurveyCreatorModel extends Base
     });
   }
   public getElementAllowOperations(element: SurveyElement): any {
+    const allowDragDefault = !!element && (!element.isPage || element.isPage && this.allowDragPages);
     var options = {
       obj: element,
       element: element,
       allowDelete: true,
       allowCopy: true,
-      allowDragging: true,
-      allowDrag: true,
+      allowDragging: allowDragDefault,
+      allowDrag: allowDragDefault,
       allowChangeType: true,
       allowChangeInputType: true,
       allowChangeRequired: true,
@@ -4157,6 +4149,7 @@ export class SurveyCreatorModel extends Base
    * - `"always"` - Displays the expand/collapse buttons permanently.
    * - `"never"` - Hides the expand/collapse buttons.
    * @see onElementGetExpandCollapseState
+   * @see collapseOnDrag
    */
   @property({ defaultValue: "onhover" }) expandCollapseButtonVisibility?: "never" | "onhover" | "always";
 
@@ -4259,7 +4252,7 @@ export class SurveyCreatorModel extends Base
       assign(newCssVariable, designerPlugin.model.scaleCssVariables || {});
     }
     this.themeVariables = newCssVariable;
-    const iconsSetName = this.creatorTheme && this.creatorTheme["iconsSet"] ? this.creatorTheme["iconsSet"] : "v2";
+    const iconsSetName = this.creatorTheme && this.creatorTheme["iconSet"] ? this.creatorTheme["iconSet"] : "v2";
     SvgRegistry.registerIcons(SvgThemeSets[iconsSetName]);
 
     if (isLight !== undefined) {
@@ -4267,8 +4260,25 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  public allowDragPages = false;
-  public collapsePagesOnDrag = false;
+  private _allowDragPages = true;
+  /**
+   * Specifies whether users can drag and drop pages on the design surface.
+   * 
+   * Default value: `true` if [`pageEditMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#pageEditMode) is `"standard"`; `false` otherwise.
+   * @see collapseOnDrag
+   */
+  public get allowDragPages(): boolean {
+    return this._allowDragPages && this.pageEditMode !== "single" && this.pageEditMode !== "bypage";
+  }
+  public set allowDragPages(newValue: boolean) {
+    this._allowDragPages = newValue;
+  }
+  /**
+   * Specifies whether to collapse pages on the design surface when users start dragging a survey element.
+   * 
+   * Default value: `true`
+   */
+  public collapseOnDrag: boolean = true;
 }
 
 export class CreatorBase extends SurveyCreatorModel { }
@@ -4335,6 +4345,8 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
     }
     return <any>locStr;
   };
+  model.locTitle.placeholder = "pe.surveyTitlePlaceholder";
+  model.locDescription.placeholder = "pe.surveyDescriptionPlaceholder";
 }
 
 function isContentElement(element: any) {

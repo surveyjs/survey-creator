@@ -2,7 +2,8 @@ import { ItemValue, ITheme, Trigger } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 
 export const Themes: { [index: string]: ITheme } = {};
-export const PredefinedThemes: string[] = ["default", "sharp", "borderless", "flat", "plain", "doubleborder", "layered", "solid", "threedimensional", "contrast"];
+export const PredefinedThemes: string[] = ["default"];
+export const defaultThemesOrder = ["default", "sharp", "borderless", "flat", "plain", "doubleborder", "layered", "solid", "threedimensional", "contrast"];
 
 export const PredefinedColors = {
   light: {

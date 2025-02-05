@@ -10,10 +10,7 @@ fixture`${title}`.page`${url}`.beforeEach(
 
 test("Edit survey description", async (t) => {
   const description = "SurveyDescription";
-  const placeholder = await ClientFunction(() => {
-    const property = window["Survey"].Serializer.findProperty("survey", "description");
-    return window["creator"].getLocString(property.placeholder);
-  })();
+  const placeholder = "Description";
 
   await setJSON({ pages: [{ name: "page1" }] });
   await t

@@ -420,6 +420,30 @@ test("Question adorner - collapse button in differen modes", async (t) => {
   await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "never"; })();
 });
 
+test("Question and page collapse button title", async (t) => {
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    elements: [
+      {
+        type: "text",
+        name: "question1"
+      }
+    ]
+  };
+  await setJSON(json);
+  await t.hover(getToolboxItemByText("Single-Line Input"));
+  const qCollapseButton = Selector(".svc-question__content #collapse button");
+  await t.expect(qCollapseButton.getAttribute("title")).eql("Collapse");
+  await t.click(qCollapseButton);
+  await t.expect(qCollapseButton.getAttribute("title")).eql("Expand");
+
+  const pCollapseButton = Selector(".svc-page__content #collapse button");
+  await t.expect(pCollapseButton.getAttribute("title")).eql("Collapse");
+  await t.click(pCollapseButton);
+  await t.expect(pCollapseButton.getAttribute("title")).eql("Expand");
+});
+
 test("Question adorner - do not render content when initially collapsed", async (t) => {
   const json = {
     elements: [

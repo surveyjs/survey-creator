@@ -308,6 +308,10 @@ var spanishTranslation = {
       maxWidth: "Anchura máxima del panel",
       showNumber: "Numerar este panel"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Anchura efectiva, %",
+      questionTitleWidth: "Ancho del título de la pregunta, px"
+    },
     paneldynamic: {
       name: "Nombre del panel",
       title: "Título de la viñeta",
@@ -505,6 +509,7 @@ var spanishTranslation = {
     listIsEmpty: "Añadir un nuevo artículo",
     "listIsEmpty@choices": "No se han añadido opciones todavía",
     "listIsEmpty@columns": "Todavía no tienes ninguna columna",
+    "listIsEmpty@gridLayoutColumns": "Todavía no tiene columnas de diseño",
     "listIsEmpty@rows": "Todavía no tienes ninguna fila",
     "listIsEmpty@validators": "Todavía no tiene ninguna regla de validación",
     "listIsEmpty@calculatedValues": "Todavía no tiene ninguna variable personalizada",
@@ -538,6 +543,7 @@ var spanishTranslation = {
     titlePlaceholder: "Título de entrada aquí",
     surveyTitlePlaceholder: "Título de la encuesta de entrada aquí",
     pageTitlePlaceholder: "Título de la página de entrada aquí",
+    startPageTitlePlaceholder: "Página de inicio",
     descriptionPlaceholder: "Ingrese una descripción",
     surveyDescriptionPlaceholder: "Ingrese una descripción de la encuesta",
     pageDescriptionPlaceholder: "Ingrese una descripción de la página",
@@ -1359,7 +1365,9 @@ var spanishTranslation = {
       startWithNewLine: "Anule la selección para mostrar el panel en una línea con la pregunta o el panel anterior. La configuración no se aplica si el panel es el primer elemento del formulario.",
       state: "Elija entre: \"Expandido\": el panel se muestra en su totalidad y se puede contraer; \"Contraído\": el panel muestra solo el título y la descripción y se puede expandir; \"Bloqueado\": el panel se muestra en su totalidad y no se puede contraer.",
       width: "Define la anchura del panel en proporción a otros elementos topográficos de la misma línea. Acepta valores CSS (px, %, in, pt, etc.).",
-      showQuestionNumbers: "Asigna números a las preguntas anidadas dentro de este panel."
+      showQuestionNumbers: "Asigna números a las preguntas anidadas dentro de este panel.",
+      effectiveColSpan: "Especifica el número de columnas que abarca este panel dentro del diseño de cuadrícula.",
+      gridLayoutColumns: "Esta tabla le permite configurar cada columna de cuadrícula dentro del panel. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valores y defina el ancho del título para todas las preguntas de cada columna."
     },
     paneldynamic: {
       name: "Un ID de panel que no es visible para los encuestados.",
@@ -1390,6 +1398,7 @@ var spanishTranslation = {
     resetValueIf: "Usa el ícono de la varita mágica para establecer una regla condicional que determine cuándo la entrada de un encuestado se restablece al valor basado en la \"Expresión de valor predeterminado\" o \"Expresión de valor establecido\" o al valor de \"Respuesta predeterminada\" (si cualquiera de los dos está establecido).",
     setValueIf: "Utilice el icono de la varita mágica para establecer una regla condicional que determine cuándo ejecutar la \"Expresión de valor establecido\" y asigne dinámicamente el valor resultante como respuesta.",
     setValueExpression: "Especifique una expresión que defina el valor que se establecerá cuando se cumplan las condiciones de la regla \"Establecer valor si\". La expresión puede incluir cálculos básicos: '{q1_id} + {q2_id}', expresiones booleanas, como '{edad} > 60', y funciones: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. El valor determinado por esta expresión puede ser anulado por la entrada manual de un encuestado.",
+    gridLayoutEnabled: "Survey Creator le permite ajustar manualmente los anchos en línea de los elementos del formulario para controlar el diseño. Si esto no produce el resultado deseado, puede habilitar el diseño de cuadrícula, que estructura elementos mediante un sistema basado en columnas. Para configurar las columnas de diseño, seleccione una página o un panel y utilice la tabla \"Configuración de preguntas\" → \"Columnas de cuadrícula\". Para ajustar el número de columnas que abarca una pregunta, selecciónela y establezca el valor deseado en el campo \"Diseño\" → \"Intervalo de columnas\".",
     question: {
       name: "Un identificador de pregunta que no es visible para los encuestados.",
       description: "Escribe un subtítulo para la pregunta.",
@@ -1410,7 +1419,8 @@ var spanishTranslation = {
       textUpdateMode: "Elija entre: \"Al perder el foco\": el valor se actualiza cuando el campo de entrada pierde el foco; \"Mientras escribes\": el valor se actualiza en tiempo real, a medida que los usuarios escriben. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Al perder el foco\" de forma predeterminada).",
       url: "Puede utilizar cualquier servicio web como fuente de datos para preguntas de opción múltiple. Para rellenar los valores de opción, introduzca la dirección URL del servicio que proporciona los datos.",
       searchMode: "Operación de comparación que se utiliza para filtrar la lista desplegable.",
-      textWrapEnabled: "Los textos largos en las opciones de elección generarán automáticamente saltos de línea para que se ajusten al menú desplegable. Anule la selección si desea que los textos se recorten."
+      textWrapEnabled: "Los textos largos en las opciones de elección generarán automáticamente saltos de línea para que se ajusten al menú desplegable. Anule la selección si desea que los textos se recorten.",
+      effectiveColSpan: "Especifica el número de columnas que abarca esta pregunta dentro del diseño de cuadrícula."
     },
     signaturepad: {
       signatureWidth: "Define la anchura del área de firma mostrada y de la imagen resultante.",
@@ -1509,7 +1519,8 @@ var spanishTranslation = {
       questionTitleWidth: "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntas. Acepta valores CSS (px, %, in, pt, etc.).",
       questionErrorLocation: "Establece la ubicación de un mensaje de error en relación con la pregunta con entrada no válida. Elija entre: \"Arriba\": se coloca un texto de error en la parte superior del cuadro de pregunta; \"Abajo\": se coloca un texto de error en la parte inferior del cuadro de pregunta. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Superior\" de forma predeterminada).",
       questionOrder: "Mantiene el orden original de las preguntas o las aleatoriza. La opción \"Heredar\" aplica la configuración a nivel de encuesta (\"Original\" de forma predeterminada). El efecto de esta configuración solo es visible en la pestaña Vista previa.",
-      showNavigationButtons: "Establece la visibilidad de los botones de navegación en la página. La opción \"Heredar\" aplica la configuración de nivel de encuesta, que por defecto es \"Visible\"."
+      showNavigationButtons: "Establece la visibilidad de los botones de navegación en la página. La opción \"Heredar\" aplica la configuración de nivel de encuesta, que por defecto es \"Visible\".",
+      gridLayoutColumns: "Esta tabla le permite configurar cada columna de cuadrícula en la página. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valores y defina el ancho del título para todas las preguntas de cada columna."
     },
     timerLocation: "Establece la ubicación de un temporizador en una página.",
     panelsState: "Elija entre: \"Bloqueado\": los usuarios no pueden expandir ni contraer paneles; \"Contraer todo\": todos los paneles comienzan en un estado contraído; \"Expandir todo\": todos los paneles comienzan en un estado expandido; \"Primero expandido\": solo el primer panel se expande inicialmente.",
@@ -1597,10 +1608,6 @@ var spanishTranslation = {
       textAreaWidth: "El ancho del área de encabezado que contiene el título y la descripción de la encuesta, medido en píxeles.",
       overlapEnabled: "Cuando se habilita, la parte superior de la encuesta se superpone a la parte inferior del encabezado.",
       mobileHeight: "Cuando se establece en 0, la altura se calcula automáticamente para acomodar el contenido del encabezado."
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "Acepta valores %.",
-      questionTitleWidth: "Acepta valores px."
     },
     progressBarInheritWidthFrom: "La opción \"Igual que el contenedor\" ajusta automáticamente el ancho del área de la barra de progreso para que quepa en el elemento HTML en el que se coloca la encuesta."
   },
@@ -2782,3 +2789,12 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pe.detailErrorLocation: "Row expansion error message alignment" => "Alineación de mensajes de error de expansión de filas"
 // pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Establece la ubicación de los mensajes de error para las preguntas anidadas en secciones de detalle. La opción \"Heredar\" aplica la configuración de la propiedad \"Alineación de mensajes de error\"."
 // pe.gridLayoutColumns: "Grid layout columns" => "Columnas de diseño de cuadrícula"
+// pe.startPageTitlePlaceholder: "Start Page" => "Página de inicio"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Anchura efectiva, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Ancho del título de la pregunta, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Todavía no tiene columnas de diseño"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Especifica el número de columnas que abarca este panel dentro del diseño de cuadrícula."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Esta tabla le permite configurar cada columna de cuadrícula dentro del panel. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valores y defina el ancho del título para todas las preguntas de cada columna."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator le permite ajustar manualmente los anchos en línea de los elementos del formulario para controlar el diseño. Si esto no produce el resultado deseado, puede habilitar el diseño de cuadrícula, que estructura elementos mediante un sistema basado en columnas. Para configurar las columnas de diseño, seleccione una página o un panel y utilice la tabla \"Configuración de preguntas\" → \"Columnas de cuadrícula\". Para ajustar el número de columnas que abarca una pregunta, selecciónela y establezca el valor deseado en el campo \"Diseño\" → \"Intervalo de columnas\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Especifica el número de columnas que abarca esta pregunta dentro del diseño de cuadrícula."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Esta tabla le permite configurar cada columna de cuadrícula en la página. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valores y defina el ancho del título para todas las preguntas de cada columna."

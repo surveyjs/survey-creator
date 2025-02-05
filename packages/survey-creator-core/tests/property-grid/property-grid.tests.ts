@@ -3323,6 +3323,22 @@ test("check pages editor respects onPageAdding", () => {
   expect(creator.survey.pages.length).toBe(1);
   settings.defaultNewSurveyJSON = savedNewJSON;
 });
+test("panellayoutcolumns doesn't have adding button", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    gridLayoutEnabled: true,
+    elements: [{ type: "text", name: "q1" }]
+  };
+  const propertyGrid = new PropertyGridModelTester(creator.survey.pages[0]);
+  const gridColumnsQuestion = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("gridLayoutColumns"));
+  expect(gridColumnsQuestion).toBeTruthy();
+  expect(gridColumnsQuestion.allowAddRows).toBeFalsy();
+  expect(gridColumnsQuestion.getTitleToolbar()).toBeTruthy();
+  const helpButton = gridColumnsQuestion.titleActions.find(a => a.id === "property-grid-help");
+  const addButton = gridColumnsQuestion.titleActions.find(a => a.id === "add-item");
+  expect(helpButton).toBeTruthy();
+  expect(addButton).toBeFalsy();
+});
 test("Set property name into correct category", () => {
   Serializer.addProperty("question", {
     name: "validation",
