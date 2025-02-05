@@ -108,7 +108,7 @@ svc-question {
     background-color: transparent;
     cursor: default;
     use {
-      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, var(--sjs-secondary-background-500, #19b394ff));
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color-disabled, var(--sjs-layer-1-foreground-50, #00000080));
       opacity: 1;
     }
   }
