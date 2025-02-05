@@ -4,9 +4,9 @@
 </template>
 <script setup lang="ts">
 import { SvComponent } from "survey-vue3-ui";
-import type { ItemValue } from "survey-core";
+import type { ItemValue, ListModel } from "survey-core";
 import { useBase } from "survey-vue3-ui";
-const props = defineProps<{ item: ItemValue }>();
+const props = defineProps<{ model: ListModel; item: ItemValue }>();
 useBase(() => props.item);
 const getStyle = () => {
   return { backgroundColor: props.item.value };
