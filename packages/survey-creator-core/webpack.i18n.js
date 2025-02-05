@@ -30,18 +30,10 @@ function patchEntries() {
   fs.readdirSync(path.resolve(__dirname, "./src/localization")).forEach(file => {
     var extension = path.extname(file);
     if (extension.toLowerCase() === ".ts") {
-      config.entry[path.basename(file, extension)] = (path.resolve(__dirname, "./src/localization") + "/" + file);
+      config.entry[`i18n/${path.basename(file, extension)}`] = (path.resolve(__dirname, "./src/localization") + "/" + file);
     }
   });
-  config.entry.index = path.resolve(__dirname, "./src/entries/i18n.ts");
-}
-
-function patchFilename(options) {
-  config.output = {};
-  const isProductionBuild = options.buildType === "prod";
-  config.output.filename = (pathData) => {
-    return (pathData.chunk.name == "survey-creator-core.i18n" ? "[name]" : "i18n/[name]") + (isProductionBuild ? ".min" : "") + ".js";
-  };
+  config.entry["i18n/index"] = path.resolve(__dirname, "./src/entries/i18n.ts");
 }
 
 module.exports = function (options) {
@@ -50,9 +42,8 @@ module.exports = function (options) {
   options.tsConfigFile = "tsconfig.i18n.json";
   options.isCore = false;
   patchEntries();
-  patchFilename(options);
   const mainConfig = webpackCommonConfigCreator(options);
-  delete mainConfig.entry[packageJson.name];
+  mainConfig.entry = {};
   mainConfig.plugins.shift();
   return merge(mainConfig, config);
 };

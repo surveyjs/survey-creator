@@ -39,6 +39,7 @@ var buildPlatformJson = {
     "**/*"
   ],
   main: packageJson.name + ".js",
+  module: "fesm/" + packageJson.name + ".js",
   repository: {
     type: "git",
     url: "https://github.com/surveyjs/survey-creator.git",
@@ -55,6 +56,36 @@ var buildPlatformJson = {
     "ace-builds": {
       "optional": true
     },
+  },
+  "exports": {
+    ".": {
+      "types": "./typings/entries/index.d.ts",
+      "import": "./fesm/survey-creator-core.js",
+      "require": "./survey-creator-core.js"
+    },
+    "./*.css": "./*.css",
+    "./survey-creator-core.i18n": {
+      "import": "./fesm/survey-creator-core.i18n.js",
+      "require": "./survey-creator-core.i18n.js"
+    },
+    "./i18n": {
+      "import": "./fesm/i18n/index.js",
+      "require": "./i18n/index.js"
+    },
+    "./i18n/*": {
+      "import": "./fesm/i18n/*.js",
+      "require": "./i18n/*.js"
+    },
+    "./themes": {
+      "types": "./themes/index.d.ts",
+      "import": "./fesm/themes/index.js",
+      "require": "./themes/index.js"
+    },
+    "./themes/*": {
+      "types": "./themes/*.d.ts",
+      "import": "./fesm/themes/*.js",
+      "require": "./themes/*.js"
+    }
   },
   devDependencies: {},
 };
@@ -204,8 +235,8 @@ module.exports = function (options) {
       },
     },
     plugins: [
-      new DashedNamePlugin(),
       new webpack.ProgressPlugin(percentage_handler(options)),
+      new DashedNamePlugin(),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version),
