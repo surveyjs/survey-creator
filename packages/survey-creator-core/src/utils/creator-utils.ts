@@ -55,10 +55,10 @@ export function getNextItemText(choices: ItemValue[]): string {
   const values: Array<string> = [];
   choices.forEach(item => { if (item.hasText) values.push(item.text); });
   choices.map((item: ItemValue) => item.text);
-  const nextValue = getNextValue("", values);
+  const nextValue = getNextValue("", values, true);
   return !!nextValue ? nextValue.toString() : "";
 }
-export function getNextValue(prefix: string, values: any[]): string | number {
+export function getNextValue(prefix: string, values: any[], isText?: boolean): string | number {
   let oposite: string | null = null;
   if (values.length > 0)
     oposite = getOpositValue(values[values.length - 1]);
@@ -97,7 +97,7 @@ export function getNextValue(prefix: string, values: any[]): string | number {
   if (!prefix) {
     prefix = values[values.length - 1];
   }
-  return prefix + 1;
+  return isText ? "" : prefix + 1;
 }
 
 export function propertyExists(obj: any, propertyName: string) {
