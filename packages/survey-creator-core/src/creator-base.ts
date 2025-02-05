@@ -3,7 +3,7 @@ import {
   JsonObjectProperty, ActionContainer, AdaptiveActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
   EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
-  dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
+  ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
   CssClassBuilder,
   SvgRegistry,
@@ -2673,14 +2673,8 @@ export class SurveyCreatorModel extends Base
     }
   }
   public loadSurvey(surveyId: string): void {
-    new dxSurveyService().loadSurvey(
-      surveyId,
-      (success: boolean, result: string, response: any) => {
-        if (success && result) {
-          this.JSON = result;
-        }
-      }
-    );
+    // eslint-disable-next-line no-console
+    console.warn("Self-hosted Form Library no longer supports integration with SurveyJS Demo Service. Learn more: https://surveyjs.io/stay-updated/release-notes/v2.0.0#form-library-removes-apis-for-integration-with-surveyjs-demo-service");
   }
   /**
    * Specifies where to add new questions when users click the "Add Question" button.
