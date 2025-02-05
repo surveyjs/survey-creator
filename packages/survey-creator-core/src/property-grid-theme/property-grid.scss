@@ -23,18 +23,11 @@
   border-inline-end: 1px solid transparent;
   background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   box-sizing: border-box;
-  height: 0;
+  min-height: fit-content;
   flex-grow: 1;
-  overflow: auto;
   /* disable library transition animations */
   --sjs-transition-duration: 0ms;
   @include disableLibraryAnimations;
-}
-
-.spg-root--one-category {
-  min-height: fit-content;
-  height: initial;
-  overflow: initial;
 }
 
 .spg-container {
