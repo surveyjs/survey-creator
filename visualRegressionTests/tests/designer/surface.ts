@@ -2478,7 +2478,7 @@ test("Collapse all and expand all toolbar", async (t) => {
     await takeElementScreenshot("design-surface-toolbar.png", Selector(".svc-tab-designer"), t, comparer);
 
     await setAllowZoom(true);
-    await t.hover("#zoom100");
+    await t.hover("#zoomOut");
     await takeElementScreenshot("design-surface-toolbar-with-zoom.png", Selector(".svc-tab-designer__surface-toolbar"), t, comparer);
   });
 });
