@@ -35,7 +35,11 @@
 <script lang="ts" setup>
 import { RendererFactory } from "survey-core";
 import { ref } from "vue";
-import { useQuestion, SvComponent } from "survey-vue3-ui";
+import {
+  useQuestion,
+  SvComponent,
+  key2ClickDirective as vKey2click,
+} from "survey-vue3-ui";
 defineOptions({ inheritAttrs: false });
 const props = defineProps<{ question: any }>();
 const root = ref(null);
