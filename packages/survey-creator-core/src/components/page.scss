@@ -431,13 +431,11 @@ svc-page {
 .svc-page--drag-over-empty .svc-page__footer:after {
   content: " ";
   position: absolute;
-  background: var(--sjs-secondary-background-500, #19b394ff);
-  left: calcSize(3);
-  bottom: calcSize(11.5);
+  background: var(--ctr-survey-drop-indicator-color, var(--sjs-primary-background-500, #19b394ff));
   width: 100%;
-  height: calcSize(0.25);
+  height: var(--ctr-survey-drop-indicator-width, var(--lbr-stroke-x2));
   left: 0;
-  top: calc(calcSize(-1) - (calcSize(0.25) / 2));
+  top: calc(calc(var(--lbr-page-layout-gap-medium, var(--lbr-spacing-x2)) + var(--ctr-survey-drop-indicator-width, var(--lbr-stroke-x2))) / -2);
 }
 
 .svc-page--drag-over-empty-no-add-button:after {
