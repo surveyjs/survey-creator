@@ -2125,6 +2125,13 @@ export class SurveyCreatorModel extends Base
    */
   public onDragEnd: EventBase<SurveyCreatorModel, DragStartEndEvent> = this.addCreatorEvent<SurveyCreatorModel, DragStartEndEvent>();
   public onAfterDrop: EventBase<any, DragStartEndEvent> = this.onDragEnd;
+  /**
+   * An event that is raised when users cancel dragging a survey element.
+   * @see onDragStart
+   * @see onDragEnd
+   * @see onDragDropAllow
+   */
+  public onDragClear: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
@@ -2154,6 +2161,7 @@ export class SurveyCreatorModel extends Base
         this.designerStateManager?.release();
         this.restoreElementsState();
       }
+      this.onDragClear.fire(this, options);
     });
   }
   public get designerStateManager() {
@@ -2206,8 +2214,10 @@ export class SurveyCreatorModel extends Base
       this.startUndoRedoTransaction("drag drop");
     });
     this.dragDropChoices.onDragEnd.add((sender, options) => {
-      this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false);
+    });
+    this.dragDropChoices.onDragClear.add((sender, options) => {
+      this.stopUndoRedoTransaction();
     });
   }
 
