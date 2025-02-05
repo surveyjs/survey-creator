@@ -159,6 +159,7 @@
   &:disabled {
     background-color: transparent;
     opacity: var(--ctr-menu-toolbar-button-opacity-disabled, 0.25);
+    cursor: default;
     use {
       fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
     }

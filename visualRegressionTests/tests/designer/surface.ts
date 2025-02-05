@@ -2669,6 +2669,8 @@ test("Check question button states", async (t) => {
     await t.pressKey("tab shift+tab");
     await takeElementScreenshot("question-button-focused.png", button, t, comparer);
     await takeElementScreenshot("question-button-disabled.png", buttonDisabled, t, comparer);
+    await t.hover(buttonDisabled);
+    await takeElementScreenshot("question-button-disabled-hover.png", buttonDisabled, t, comparer);
     await ClientFunction(() => {
       const question = window["creator"].survey.getQuestionByName("q1");
       const adorner = window["SurveyCreatorCore"].QuestionAdornerViewModel.GetAdorner(question);
@@ -2716,6 +2718,8 @@ test("Check page button states", async (t) => {
     await t.pressKey("tab");
     await takeElementScreenshot("page-button-focused.png", button, t, comparer);
     await takeElementScreenshot("page-button-disabled.png", buttonDisabled, t, comparer);
+    await t.hover(buttonDisabled);
+    await takeElementScreenshot("page-button-disabled-hover.png", buttonDisabled, t, comparer);
     await ClientFunction(() => {
       const page = window["creator"].survey.getPageByName("page1");
       const adorner = window["SurveyCreatorCore"].PageAdorner.GetAdorner(page);
