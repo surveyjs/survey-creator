@@ -1,5 +1,5 @@
 // Uncomment the line below if you create a custom dictionary
-import {editorLocalization, setupLocale} from "survey-creator-core";
+import { setupLocale} from "survey-creator-core";
 
 export var slStrings = {
     // survey templates
@@ -213,7 +213,7 @@ export var slStrings = {
         chooseLogoPlaceholder: "[LOGOTIP]",
         choices_Item: "Element ",
         selectFile: "Izberite datoteko",
-        removeFile: "Odstrani datoteko"
+        removeFile: "Odstrani datoteko",
 
         lg: {
             addNewItem: "Dodaj novo pravilo",
@@ -388,13 +388,13 @@ export var slStrings = {
 
         },
         showQuestionNumbers: "Oštevilčevanje vprašanj",
-        questionStartIndex: "Vrsta indeksiranja vprašanj"
+        questionStartIndex: "Vrsta indeksiranja vprašanj",
 
         expression: {
             name: "Ime izraza",
             title: "Naslov izraza",
             description: "Opis izraza",
-            expression: "Izraz"
+            expression: "Izraz",
 
         },
         trigger: {
@@ -1156,12 +1156,12 @@ export var slStrings = {
         survey: "Průzkum",
         onNextPage: "Při přechodu na další stránku",
         onValueChanged: "Po změně odpovědi",
-        onValueChanging: "Před změnou odpovědi"
+        onValueChanging: "Před změnou odpovědi",
 
         questionsOnPageMode: {
             standard: "Původní struktura",
             singlePage: "Zobrazit všechny otázky na jedné stránce",
-            questionPerPage: "Zobrazit jednu otázku na stránce"
+            questionPerPage: "Zobrazit jednu otázku na stránce",
 
         },
         noPreview: "Žádný náhled",
@@ -1542,7 +1542,7 @@ export var slStrings = {
         // survey templates
         survey: {
             readOnly: "Izberite, če želite preprečiti anketirancem izpolnjevanje ankete.",
-            progressBarLocation: "Določa lokacijo vrstice napredka. Vrednost "Samodejno" prikaže vrstico napredka nad ali pod glavo ankete."
+            progressBarLocation: "Določa lokacijo vrstice napredka. Vrednost \"Samodejno\" prikaže vrstico napredka nad ali pod glavo ankete."
         },
         matrixdropdowncolumn: {
             name: "ID stolpca, ki ni viden anketirancem.",
@@ -1552,7 +1552,7 @@ export var slStrings = {
             enableIf: "Uporabite ikono čarobne palice za nastavitev pogojnega pravila, ki onemogoči način samo za branje za stolpec.",
             requiredIf: "Uporabite ikono čarobne palice za nastavitev pogojnega pravila, ki prepreči oddajo ankete, če vsaj eno vprašanju v tem stolpcu ni bilo odgovorjeno.",
             showInMultipleColumns: "Ko je izbrano, ustvari posamezen stolpec za vsako izbiro.",
-            colCount: "Razvrsti možnosti izbire v postavitev z več stolpci. Ko je nastavljeno na 0, so možnosti prikazane v eni sami vrstici. Ko je nastavljeno na -1, se dejanska vrednost podeduje iz lastnosti "Število gnezdenih stolpcev" nadrejenega matriksa.",
+            colCount: "Razvrsti možnosti izbire v postavitev z več stolpci. Ko je nastavljeno na 0, so možnosti prikazane v eni sami vrstici. Ko je nastavljeno na -1, se dejanska vrednost podeduje iz lastnosti \"Število gnezdenih stolpcev\" nadrejenega matriksa.",
         },
         caseInsensitive: "Izberite, če naj bodo velike in male črke v regularnem izrazu obravnavane kot enake",
         widthMode: "Izberite med Statistična - nastavi fiksno širino, Responsive - naredi anketo, da zasede celotno širino zaslona, Auto - uporabi eno izmed dveh možnosti glede na vrsto vprašanj",
@@ -1638,7 +1638,7 @@ export var slStrings = {
         choicesVisibleIf: "Uporabite ikono čarobne palice za nastavitev pogoja, ki določa vidnost vseh možnosti izbire",
         rateValues: "Leva vrednost služi kot ID elementa, ki se uporablja v pogojnih pravilih, desna vrednost je prikazana anketirancem",
         rating: {
-            displayMode: ""Samodejno" izbere med načinoma "Gumbi" in "Spustni seznam" glede na razpoložljivo širino. Ko širina ni zadostna za prikaz gumbov, se vprašanje prikaže kot spustni seznam"
+            displayMode: "\"Samodejno\" izbere med načinoma \"Gumbi\" in \"Spustni seznam\" glede na razpoložljivo širino. Ko širina ni zadostna za prikaz gumbov, se vprašanje prikaže kot spustni seznam"
         },
         valuePropertyName: "Omogoča povezovanje vprašanj, ki ustvarjajo rezultate v različnih formatih. Ko so taka vprašanja povezana z identifikatorjem združevanja, ta skupna lastnost shrani izbrane vrednosti vprašanj",
         searchEnabled: "Izberite, če želite, da se vsebina spustnega seznama posodobi glede na iskalni niz, ki ga uporabnik vnaša v polje za vnos",
@@ -1650,23 +1650,23 @@ export var slStrings = {
         dataList: "Vnesite seznam možnosti, ki bodo predlagane anketirancu med vnosom",
         inputSize: "Ta nastavitev spremeni samo velikost vnosnih polj in ne vpliva na širino polja z vprašanjem",
         itemTitleWidth: "Nastavi enotno širino vseh oznak elementov v slikovnih pikah",
-        inputTextAlignment: "Izberite način poravnave vnosne vrednosti znotraj polja. Privzeta nastavitev "Samodejno" poravna vnosno vrednost desno, če je uporabljeno oblikovanje valute ali številk, in levo, če ni",
+        inputTextAlignment: "Izberite način poravnave vnosne vrednosti znotraj polja. Privzeta nastavitev \"Samodejno\" poravna vnosno vrednost desno, če je uporabljeno oblikovanje valute ali številk, in levo, če ni",
         altText: "Služi kot nadomestek, ko slike ni mogoče prikazati na uporabnikovi napravi, in za dostopnost",
-        rateColorMode: "Določa barvo izbrane ikone smeška, ko je vrsta ocenjevalne ikone nastavljena na "Smeški". Izberite med: "Privzeto" - izbrani smeško se prikaže v privzeti barvi ankete; "Lestvica" - izbrani smeško podeduje barvo iz ocenjevalne lestvice",
+        rateColorMode: "Določa barvo izbrane ikone smeška, ko je vrsta ocenjevalne ikone nastavljena na \"Smeški\". Izberite med: \"Privzeto\" - izbrani smeško se prikaže v privzeti barvi ankete; \"Lestvica\" - izbrani smeško podeduje barvo iz ocenjevalne lestvice",
         expression: {
             name: "ID izraza, ki ni viden anketirancem",
             description: "Vnesite podnaslov izraza",
             expression: "Izraz lahko vključuje osnovne izračune ({q1_id} + {q2_id}), pogoje ({age} > 60) in funkcije (iif(), today(), age(), min(), max(), avg(), itd.)",
         },
 
-        storeOthersAsComment: "Izberite, da shranite vrednost možnosti "Drugo" kot ločeno lastnost v rezultatih ankete",
+        storeOthersAsComment: "Izberite, da shranite vrednost možnosti \"Drugo\" kot ločeno lastnost v rezultatih ankete",
         format: "Uporabite {0} kot nadomestni znak za dejansko vrednost",
         acceptedTypes: "Poglejte opis atributa accept za več informacij",
-        columnColCount: "Razporedi možnosti izbire v več-stolpčni postavitvi. Ko je nastavljen na 0, so možnosti prikazane v eni vrstici. Velja samo za stolpce, kjer je "Vrsta vnosa celice" nastavljena na Skupino gumbov za izbiro ali potrditvena polja",
+        columnColCount: "Razporedi možnosti izbire v več-stolpčni postavitvi. Ko je nastavljen na 0, so možnosti prikazane v eni vrstici. Velja samo za stolpce, kjer je \"Vrsta vnosa celice\" nastavljena na Skupino gumbov za izbiro ali potrditvena polja",
         autocomplete: "Izberite vrsto podatkov, ki jih lahko brskalnik uporabnika pridobi. Ti podatki so pridobljeni bodisi iz prejšnjih vrednosti, ki jih je uporabnik vnesel, bodisi iz prednastavljenih vrednosti, če jih je uporabnik shranil za samodejno dopolnjevanje",
-        filePlaceholder: "Velja, ko je "Vrsta vira datoteke" nastavljena na "Lokalna datoteka" ali ko kamera ni na voljo",
-        photoPlaceholder: "Velja, ko je "Vrsta vira datoteke" nastavljena na "Kamera"",
-        fileOrPhotoPlaceholder: "Velja, ko je "Vrsta vira datoteke" nastavljena na "Lokalna datoteka ali kamera"",
+        filePlaceholder: "Velja, ko je \"Vrsta vira datoteke\" nastavljena na \"Lokalna datoteka\" ali ko kamera ni na voljo",
+        photoPlaceholder: "Velja, ko je \"Vrsta vira datoteke\" nastavljena na \"Kamera\"",
+        fileOrPhotoPlaceholder: "Velja, ko je \"Vrsta vira datoteke\" nastavljena na \"Lokalna datoteka ali kamera\"",
         colCount: "Razporedi možnosti izbire v več-stolpčni postavitvi. Ko je nastavljen na 0, so možnosti prikazane v eni vrstici",
         masksettings: {
             saveMaskedValue: "Izberite, če želite shraniti vrednost vprašanja z uporabo maske v rezultatih ankete"
@@ -1698,10 +1698,13 @@ export var slStrings = {
             "--sjs-general-backcolor-dim": "Nastavi glavno ozadje ankete."
         },
         header: {
-            inheritWidthFrom: ""Enako kot kontejner" možnost samodejno prilagodi širino vsebine glave, da se prilega HTML elementu, v katerega je anketa vstavljena.", textAreaWidth: "Širina območja glave, ki vsebuje naslov in opis ankete, izmerjena v slikovnih pikah.", overlapEnabled: "Ko je omogočeno, zgornji del ankete prekrije spodnji del glave.", mobileHeight: "Ko je nastavljeno na 0, se višina samodejno izračuna, da sprejme vsebino glave.",
+            inheritWidthFrom: "\"Enako kot kontejner\" možnost samodejno prilagodi širino vsebine glave, da se prilega HTML elementu, v katerega je anketa vstavljena.",
+            textAreaWidth: "Širina območja glave, ki vsebuje naslov in opis ankete, izmerjena v slikovnih pikah.",
+            overlapEnabled: "Ko je omogočeno, zgornji del ankete prekrije spodnji del glave.",
+            mobileHeight: "Ko je nastavljeno na 0, se višina samodejno izračuna, da sprejme vsebino glave.",
         },
 
-        progressBarInheritWidthFrom: ""Enako kot kontejner" možnost samodejno prilagodi širino območja napredka, da se prilega HTML elementu, v katerega je anketa vstavljena.",
+        progressBarInheritWidthFrom: "\"Enako kot kontejner\" možnost samodejno prilagodi širino območja napredka, da se prilega HTML elementu, v katerega je anketa vstavljena.",
     },
     // Properties
     p: {
