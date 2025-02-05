@@ -201,8 +201,11 @@ td.st-table__cell:first-of-type {
 
 .st-navigation-btn {
   @include ctrDefaultBoldFont;
-  padding-left: calcSize(1.5);
-  padding-right: calcSize(2);
+  padding: var(--ctr-actionbar-button-padding-top-large-icon-text, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-right-large-icon-text, var(--sjs-spacing-x2))
+    var(--ctr-actionbar-button-padding-bottom-large-icon-text, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-left-large-icon-text, var(--sjs-spacing-x150));
+  border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
   white-space: nowrap;
 
   .sd-action__icon {
@@ -210,19 +213,28 @@ td.st-table__cell:first-of-type {
   }
 }
 
+.st-navigation-btn:hover {
+  border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
+  background: var(--ctr-actionbar-button-background-color-hovered-colorful, var(--sjs-primary-background-10, #19b3941a));
+}
+
 .st-navigation-btn.sd-action--icon {
-  padding: calcSize(1);
+  padding: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-right-large-icon, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1))
+    var(--ctr-actionbar-button-padding-left-large-icon, var(--sjs-spacing-x1));
+  border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
 
   &:not(.sd-action--pressed) {
-
     &:hover,
     &:focus {
-      background-color: $primary-light;
+      border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
+      background: var(--ctr-actionbar-button-background-color-hovered-colorful, var(--sjs-primary-background-10, #19b3941a));
     }
   }
 
   svg use {
-    fill: $primary;
+    fill: var(--ctr-actionbar-button-icon-color-colorful, var(--sjs-primary-background-500, #19b394ff));
   }
 }
 
