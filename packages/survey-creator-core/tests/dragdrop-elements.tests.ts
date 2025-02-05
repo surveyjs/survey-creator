@@ -167,7 +167,7 @@ test("surveyelement: onDragStart and onDragEnd events", () => {
   ddHelper.draggedElement = question2;
   ddHelper.dropTarget = question1;
 
-  ddHelper["createDraggedElementShortcut"] = ()=>{};
+  ddHelper["createDraggedElementShortcut"] = () => { };
   ddHelper.dragInit(null, ddHelper.draggedElement, ddHelper.parentElement, document.createElement("div"));
   expect(beforeCount).toBe(1);
 
@@ -1230,6 +1230,56 @@ test("Test onDragOverLocationCalculating", (): any => {
   ddHelper.draggedElement = q3;
   ddHelper.dragOver({ clientX: 40, clientY: 50 });
   expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Left);
+  expect(ddHelper.insideContainer).toBeTruthy();
+  ddHelper.dragOver({ clientX: 100, clientY: 90 });
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Bottom);
+  expect(ddHelper.insideContainer).toBeTruthy();
+});
+test("dragOverLocation calculation for empty and non-empty pages", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      },
+      {
+        "name": "page3",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      }
+    ]
+  };
+  const ddHelper: any = creator.dragDropSurveyElements;
+  const p1 = creator.survey.pages[0];
+  const p2 = creator.survey.pages[1];
+  const p3 = creator.survey.pages[2];
+  ddHelper.draggedElement = p3;
+  ddHelper["allowDropHere"] = true;
+  ddHelper["findDropTargetNodeFromPoint"] = () => ({ getBoundingClientRect: () => ({ x: 10, y: 10, width: 200, height: 100 }) });
+  ddHelper["getDropTargetByNode"] = () => p1;
+  ddHelper["isDropTargetValid"] = () => true;
+  ddHelper.dragOver({ clientX: 40, clientY: 50 });
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Top);
+  expect(ddHelper.insideContainer).toBeTruthy();
+  ddHelper.dragOver({ clientX: 100, clientY: 90 });
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Bottom);
+  expect(ddHelper.insideContainer).toBeTruthy();
+  ddHelper["getDropTargetByNode"] = () => p2;
+  ddHelper.dragOver({ clientX: 40, clientY: 50 });
+  expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Top);
   expect(ddHelper.insideContainer).toBeTruthy();
   ddHelper.dragOver({ clientX: 100, clientY: 90 });
   expect(ddHelper.dragOverLocation).toBe(DragTypeOverMeEnum.Bottom);
