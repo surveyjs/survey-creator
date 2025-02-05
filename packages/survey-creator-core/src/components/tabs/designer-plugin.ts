@@ -293,6 +293,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     const pgTabs = this.getPropertyGridTabActions();
     this.tabControlModel.topToolbar.setItems(pgTabs);
     this.propertyGridTab.activateCallback = () => {
+      if (!this.propertyGrid.survey.currentPage) return;
+
       pgTabs.forEach(action => {
         action.active = action.id === this.propertyGrid.survey.currentPage.name;
       });
