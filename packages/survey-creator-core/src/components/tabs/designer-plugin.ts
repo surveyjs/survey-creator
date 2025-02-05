@@ -158,6 +158,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     themePropertyGridViewModel.searchEnabled = false;
     this.themePropertyGridTab = this.creator.sidebar.addPage("creatorTheme", "svc-property-grid", themePropertyGridViewModel);
     this.themePropertyGridTab.caption = editorLocalization.getString("ed.creatorSettingTitle");
+    this.themePropertyGridTab.activateCallback = () => {
+      settingsAction.active = true;
+    };
     this.themePropertyGridTab.deactivateCallback = () => {
       settingsAction.active = false;
     };
@@ -172,6 +175,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.creator.onCreatorThemePropertyChanged.fire(this.creator, options);
     });
 
+    let prevActivePage;
     const settingsAction = new MenuButton({
       id: "theme-settings",
       locTooltipName: "ed.creatorSettingTitle",
@@ -180,8 +184,12 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       pressed: false,
       action: () => {
         this.creator.sidebar.expandSidebar();
-        this.setActivePage(this.themePropertyGridTab.id);
-        settingsAction.active = true;
+        if (settingsAction.active) {
+          this.setActivePage(prevActivePage || this.propertyGridTab.id);
+        } else {
+          prevActivePage = this.creator.sidebar.activePage;
+          this.setActivePage(this.themePropertyGridTab.id);
+        }
       }
     });
     this.tabControlModel.bottomToolbar.setItems([settingsAction]);
@@ -284,6 +292,11 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private setupPropertyGridTabActions() {
     const pgTabs = this.getPropertyGridTabActions();
     this.tabControlModel.topToolbar.setItems(pgTabs);
+    this.propertyGridTab.activateCallback = () => {
+      pgTabs.forEach(action => {
+        action.active = action.id === this.propertyGrid.survey.currentPage.name;
+      });
+    };
     this.propertyGridTab.deactivateCallback = () => {
       pgTabs.forEach(tab => tab.active = false);
     };
