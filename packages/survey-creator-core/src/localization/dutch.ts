@@ -22,7 +22,7 @@ export var nlStrings = {
     theme: "Thema 's",
     translation: "Vertaling",
     designer: "Enquête-ontwerper",
-    editor: "JSON-editor",
+    json: "JSON-editor",
     logic: "Onderzoekslogica"
   },
   // Question types
@@ -308,6 +308,10 @@ export var nlStrings = {
       maxWidth: "Maximale paneelbreedte",
       showNumber: "Nummer dit paneel"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Effectieve breedte, %",
+      questionTitleWidth: "Breedte vraagtitel, px"
+    },
     paneldynamic: {
       name: "Naam van het paneel",
       title: "Titel van het paneel",
@@ -327,15 +331,13 @@ export var nlStrings = {
       templateTabTitle: "Patroon voor tabbladtitel",
       tabTitlePlaceholder: "Tijdelijke aanduiding voor tabtitel",
       templateVisibleIf: "Maak een afzonderlijk paneel zichtbaar als",
-      hideNumber: "Het paneelnummer verbergen",
+      showNumber: "Nummer het paneel",
       titleLocation: "Uitlijning van paneeltitels",
       descriptionLocation: "Uitlijning van paneelbeschrijving",
       templateQuestionTitleLocation: "Uitlijning van vraagtitels",
       templateErrorLocation: "Uitlijning van foutmeldingen",
       newPanelPosition: "Nieuwe paneellocatie",
       showRangeInProgress: "De voortgangsbalk weergeven",
-      showProgressBar: "De voortgangsbalk weergeven",
-      progressBarLocation: "Uitlijning van de voortgangsbalk",
       keyName: "Voorkom dubbele antwoorden in de volgende vraag"
     },
     question: {
@@ -346,7 +348,7 @@ export var nlStrings = {
       requiredIf: "Maak de vraag verplicht als",
       page: "Bovenliggende pagina",
       state: "Samenvouwen van vragenvak",
-      hideNumber: "Verberg het vraagnummer",
+      showNumber: "Nummer deze vraag",
       titleLocation: "Uitlijning van vraagtitels",
       descriptionLocation: "Uitlijning van vraagbeschrijvingen",
       errorLocation: "Uitlijning van foutmeldingen",
@@ -388,7 +390,8 @@ export var nlStrings = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Beschrijving van de enquête"
+      description: "Beschrijving van de enquête",
+      readOnly: "De enquête alleen-lezen maken"
     },
     page: {
       name: "Paginanaam",
@@ -440,7 +443,7 @@ export var nlStrings = {
     imageWidth: "Afbeelding breedte",
     valueName: "Waardenaam",
     rateDescriptionLocation: "Etiket uitlijnen",
-    size: "Grootte invoerveld (in tekens)",
+    size: "Breedte invoerveld (in tekens)",
     cellErrorLocation: "Uitlijning van celfoutmeldingen",
     enabled: "Ingeschakeld",
     disabled: "Invalide",
@@ -506,6 +509,7 @@ export var nlStrings = {
     listIsEmpty: "Voeg een nieuw item toe",
     "listIsEmpty@choices": "Er zijn nog geen keuzes toegevoegd",
     "listIsEmpty@columns": "Je hebt nog geen kolommen",
+    "listIsEmpty@gridLayoutColumns": "Je hebt nog geen lay-outkolommen",
     "listIsEmpty@rows": "Je hebt nog geen rijen",
     "listIsEmpty@validators": "Je hebt nog geen validatieregels",
     "listIsEmpty@calculatedValues": "Je hebt nog geen aangepaste variabelen",
@@ -539,6 +543,7 @@ export var nlStrings = {
     titlePlaceholder: "Voer hier de titel in",
     surveyTitlePlaceholder: "Voer de enquêtetitel hier in",
     pageTitlePlaceholder: "Voer hier de paginatitel in",
+    startPageTitlePlaceholder: "Startpagina",
     descriptionPlaceholder: "Voer een omschrijving in",
     surveyDescriptionPlaceholder: "Voer een onderzoeksbeschrijving in",
     pageDescriptionPlaceholder: "Voer een paginabeschrijving in",
@@ -611,7 +616,6 @@ export var nlStrings = {
     simulator: "Kies apparaat",
     landscapeOrientation: "Landschap",
     portraitOrientation: "Overschakelen naar staande stand",
-    mode: "Modus (bewerken/alleen lezen)",
     clearInvisibleValues: "Wis onzichtbare waarden",
     cookieName: "Cookienaam (zodat enquête slechts éénmalig wordt ingevuld)",
     partialSendEnabled: "Antwoorden opslaan bij pagina-overgang",
@@ -625,12 +629,14 @@ export var nlStrings = {
     editText: "Knoptitel 'Bewerken'",
     startSurveyText: "Knoptitel 'Starten'",
     showNavigationButtons: "Navigatieknoppen weergeven (standaardnavigatie)",
+    navigationButtonsLocation: "Uitlijning van navigatieknoppen",
     showPrevButton: "Toon knop 'Vorige pagina' (gebruiker kan terugkeren)",
     firstPageIsStartPage: "De eerste pagina in de enquête is een startpagina",
     showCompletePage: "Toon bij afronden deze HTML-code",
     autoAdvanceEnabled: "Na alle vragen automatisch naar volgende pagina gaan",
     autoAdvanceAllowComplete: "Vul de enquête automatisch in",
     showProgressBar: "Toon voortgangsbalk",
+    progressBarLocation: "Uitlijning van de voortgangsbalk",
     questionTitleLocation: "Plek vraagtitel",
     questionTitleWidth: "Breedte van de vraagtitel",
     requiredMark: "Symbool(en) verplichte vraag",
@@ -646,8 +652,8 @@ export var nlStrings = {
     renderMode: "Render-modus",
     allowAddPanel: "Sta het toevoegen van een paneel toe",
     allowRemovePanel: "Laat het verwijderen van het paneel toe",
-    panelAddText: "Paneeltekst toevoegen",
-    panelRemoveText: "Paneeltekst verwijderen",
+    addPanelText: "Paneeltekst toevoegen",
+    removePanelText: "Paneeltekst verwijderen",
     isSinglePage: "Toon alle elementen op één pagina",
     html: "Html",
     setValue: "Antwoorden",
@@ -721,9 +727,9 @@ export var nlStrings = {
     minPanelCount: "Minimaal aantal panelen",
     maxPanelCount: "Maximaal aantal panelen",
     panelsState: "Uitvouwstatus binnenpaneel",
-    panelPrevText: "Knopinfo vorige deelvensterknop",
-    panelNextText: "knopinfo voor het volgende deelvenster",
-    panelRemoveButtonLocation: "Locatie van de knop Deelvenster verwijderen",
+    prevPanelText: "Knopinfo vorige deelvensterknop",
+    nextPanelText: "knopinfo voor het volgende deelvenster",
+    removePanelButtonLocation: "Locatie van de knop Deelvenster verwijderen",
     hideIfRowsEmpty: "Verberg de vraag als er geen rijen zijn",
     hideColumnsIfEmpty: "Kolommen verbergen als er geen rijen zijn",
     rateValues: "Aangepaste tariefwaarden",
@@ -753,6 +759,8 @@ export var nlStrings = {
     separateSpecialChoices: "Speciale keuzes afzonderlijk (Geen, Overig, Alles selecteren)",
     choicesFromQuestion: "Kopieer keuzes uit de volgende vraag",
     choicesFromQuestionMode: "Welke keuzes kopiëren?",
+    choiceValuesFromQuestion: "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuze-ID's",
+    choiceTextsFromQuestion: "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuzeteksten",
     progressBarShowPageTitles: "Paginatitels weergeven in de voortgangsbalk",
     progressBarShowPageNumbers: "Paginanummers weergeven in de voortgangsbalk",
     showCommentArea: "Het opmerkingenveld weergeven",
@@ -787,6 +795,11 @@ export var nlStrings = {
       top: "Bovenop",
       bottom: "Onder aan"
     },
+    previewMode: "Preview-modus",
+    gridLayoutEnabled: "De rasterlay-out inschakelen",
+    gridLayoutColumns: "Kolommen voor rasterlay-out",
+    maskSettings: "Masker-instellingen",
+    detailErrorLocation: "Uitlijning van foutmeldingen bij rijuitbreiding",
     // Creator tabs
     tabs: {
       panel: {
@@ -1104,6 +1117,8 @@ export var nlStrings = {
     noPreview: "Geen preview",
     showAllQuestions: "Toon voorbeeld met alle vragen",
     showAnsweredQuestions: "Toon voorbeeld met beantwoorde vragen",
+    allQuestions: "Toon alle vragen",
+    answeredQuestions: "Alleen beantwoorde vragen weergeven",
     pages: "Voltooide pagina's",
     questions: "Beantwoorde vragen",
     requiredQuestions: "Vereiste vragen beantwoord",
@@ -1199,16 +1214,13 @@ export var nlStrings = {
     questionOrder: {
       initial: "Origineel"
     },
-    showProgressBar: {
-      off: "Verborgen",
-      topbottom: "Top en beneden",
-      aboveheader: "Boven de koptekst",
-      belowheader: "Onder de kop"
-    },
     progressBarLocation: {
       top: "Boven",
       bottom: "Bodem",
-      topBottom: "Boven en onder"
+      topbottom: "Boven en onder",
+      aboveheader: "Boven de koptekst",
+      belowheader: "Onder de kop",
+      off: "Verborgen"
     },
     sum: "Som",
     count: "Tellen",
@@ -1353,7 +1365,9 @@ export var nlStrings = {
       startWithNewLine: "Schakel de optie uit om het deelvenster op één regel weer te geven met de vorige vraag of het vorige deelvenster. De instelling is niet van toepassing als het deelvenster het eerste element in uw formulier is.",
       state: "Kies uit: \"Uitgevouwen\" - het paneel wordt volledig weergegeven en kan worden ingeklapt; \"Samengevouwen\" - het paneel toont alleen de titel en beschrijving en kan worden uitgevouwen; \"Vergrendeld\" - het paneel wordt volledig weergegeven en kan niet worden ingeklapt.",
       width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.).",
-      showQuestionNumbers: "Wijst nummers toe aan vragen die in dit deelvenster zijn genest."
+      showQuestionNumbers: "Wijst nummers toe aan vragen die in dit deelvenster zijn genest.",
+      effectiveColSpan: "Hiermee geeft u aan hoeveel kolommen dit deelvenster beslaat binnen de rasterlay-out.",
+      gridLayoutColumns: "Met deze tabel kunt u elke rasterkolom in het deelvenster configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
     },
     paneldynamic: {
       name: "Een panel-ID die niet zichtbaar is voor respondenten.",
@@ -1384,6 +1398,7 @@ export var nlStrings = {
     resetValueIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die bepaalt wanneer de invoer van een respondent wordt teruggezet naar de waarde op basis van de \"Standaardwaarde-expressie\" of \"Waarde-expressie instellen\" of naar de waarde \"Standaardantwoord\" (als een van beide is ingesteld).",
     setValueIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die bepaalt wanneer de expressie 'Waarde instellen' moet worden uitgevoerd en wijs de resulterende waarde dynamisch toe als antwoord.",
     setValueExpression: "Geef een expressie op die de waarde definieert die moet worden ingesteld wanneer aan de voorwaarden in de regel 'Waarde instellen als' wordt voldaan. De expressie kan basisberekeningen bevatten - '{q1_id} + {q2_id}', Booleaanse expressies, zoals '{age} > 60', en functies: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', enz. De waarde die door deze expressie wordt bepaald, kan worden overschreven door de handmatige invoer van een respondent.",
+    gridLayoutEnabled: "Met Survey Creator kunt u de inlinebreedtes van formulierelementen handmatig aanpassen om de lay-out te beheren. Als dit niet het gewenste resultaat oplevert, kunt u de rasterlay-out inschakelen, waarvan de structuren elementen vormen met behulp van een op kolommen gebaseerd systeem. Om lay-outkolommen te configureren, selecteer je een pagina of paneel en gebruik je de tabel \"Vraaginstellingen\" → \"Rasterkolommen\". Om aan te passen hoeveel kolommen een vraag beslaat, selecteer je deze en stel je de gewenste waarde in in het veld \"Lay-out\" → \"Kolomspanwijdte\".",
     question: {
       name: "Een vraag-ID die niet zichtbaar is voor respondenten.",
       description: "Typ de ondertitel van een vraag.",
@@ -1404,7 +1419,8 @@ export var nlStrings = {
       textUpdateMode: "Kies uit: \"Bij verloren focus\" - de waarde wordt bijgewerkt wanneer het invoerveld de focus verliest; \"Tijdens het typen\" - de waarde wordt in realtime bijgewerkt, terwijl gebruikers typen. Met de optie \"Overerven\" wordt de instelling op enquêteniveau toegepast (\"Standaard bij verloren focus\").",
       url: "U kunt elke webservice gebruiken als gegevensbron voor meerkeuzevragen. Als u keuzewaarden wilt invullen, voert u de URL in van de service die de gegevens levert.",
       searchMode: "Een vergelijkingsbewerking die wordt gebruikt om de vervolgkeuzelijst te filteren.",
-      textWrapEnabled: "Lange teksten in keuze-opties genereren automatisch regeleinden die in het vervolgkeuzemenu passen. Schakel de selectie uit als u wilt dat de teksten worden afgekapt."
+      textWrapEnabled: "Lange teksten in keuze-opties genereren automatisch regeleinden die in het vervolgkeuzemenu passen. Schakel de selectie uit als u wilt dat de teksten worden afgekapt.",
+      effectiveColSpan: "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out."
     },
     signaturepad: {
       signatureWidth: "Hiermee stelt u de breedte van het weergegeven handtekeninggebied en de resulterende afbeelding in.",
@@ -1433,7 +1449,8 @@ export var nlStrings = {
     },
     // survey templates
     survey: {
-      mode: "Kies tussen: \"Bewerkbaar\" - stelt respondenten in staat uw enquête in te vullen; \"Alleen-lezen\" - schakelt het bewerken van formulieren uit."
+      readOnly: "Selecteer deze optie als u wilt voorkomen dat respondenten uw enquête invullen.",
+      progressBarLocation: "Hiermee stelt u de locatie van de voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
     },
     matrixdropdowncolumn: {
       name: "Een kolom-id die niet zichtbaar is voor respondenten.",
@@ -1455,7 +1472,7 @@ export var nlStrings = {
     autoAdvanceEnabled: "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina gaat zodra een respondent alle vragen op de huidige pagina heeft beantwoord. Deze functie is niet van toepassing als de laatste vraag op de pagina een open einde heeft of meerdere antwoorden toestaat.",
     autoAdvanceAllowComplete: "Selecteer of u wilt dat de enquête automatisch wordt ingevuld nadat een respondent alle vragen heeft beantwoord.",
     showNavigationButtons: "Hiermee stelt u de zichtbaarheid en locatie van navigatieknoppen op een pagina in.",
-    showProgressBar: "Hiermee stelt u de zichtbaarheid en locatie van een voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer.",
+    navigationButtonsLocation: "Hiermee stelt u de locatie van navigatieknoppen op een pagina in.",
     showPreviewBeforeComplete: "Schakel de voorbeeldpagina in met alleen alle of beantwoorde vragen.",
     questionTitleLocation: "Geldt voor alle vragen in de enquête. Deze instelling kan worden overschreven door regels voor titeluitlijning op lagere niveaus: deelvenster, pagina of vraag. Een instelling op een lager niveau heeft voorrang op die op een hoger niveau.",
     requiredMark: "Een symbool of een reeks symbolen die aangeven dat een antwoord vereist is.",
@@ -1479,6 +1496,7 @@ export var nlStrings = {
     rowTitleWidth: "Accepteert CSS-waarden (px, %, in, pt, enz.).",
     totalText: "Alleen zichtbaar als ten minste één kolom het type Totaal of de expressie Totaal heeft.",
     cellErrorLocation: "Hiermee stelt u de locatie van een foutbericht in ten opzichte van een cel met ongeldige invoer. Met de optie 'Overerven' wordt de instelling van de eigenschap 'Uitlijning van foutberichten' toegepast.",
+    detailErrorLocation: "Hiermee stelt u de locatie in van foutmeldingen voor vragen die zijn genest in detailsecties. De optie \"Overerven\" past de instelling van de eigenschap \"Uitlijning van foutmeldingen\" toe.",
     keyDuplicationError: "Wanneer de eigenschap 'Dubbele antwoorden voorkomen' is ingeschakeld, ontvangt een respondent die een dubbele vermelding probeert in te dienen, het volgende foutbericht.",
     totalExpression: "Hiermee kunt u totale waarden berekenen op basis van een expressie. De expressie kan basisberekeningen ('{q1_id} + {q2_id}'), Booleaanse expressies ('{age} > 60') en functies ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.) bevatten.",
     confirmDelete: "Hiermee wordt gevraagd om het verwijderen van de rij te bevestigen.",
@@ -1501,7 +1519,8 @@ export var nlStrings = {
       questionTitleWidth: "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard).",
       questionOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overerven\" past de instelling op enquêteniveau toe (\"Standaard Origineel\"). Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
-      navigationButtonsVisibility: "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat."
+      showNavigationButtons: "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat.",
+      gridLayoutColumns: "Met deze tabel kunt u elke rasterkolom op de pagina configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
     },
     timerLocation: "Hiermee stelt u de locatie van een timer op een pagina in.",
     panelsState: "Kies uit: \"Vergrendeld\" - gebruikers kunnen panelen niet uitvouwen of samenvouwen; \"Alles samenvouwen\" - alle deelvensters beginnen in een samengevouwen toestand; \"Alles uitvouwen\" - alle deelvensters beginnen in een uitgevouwen staat; \"Eerst uitgevouwen\" - alleen het eerste paneel wordt in eerste instantie uitgevouwen.",
@@ -1516,6 +1535,8 @@ export var nlStrings = {
     useDisplayValuesInDynamicTexts: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Als deze instelling is geselecteerd, wordt een weergavewaarde weergegeven in plaats van een ID-waarde in HTML-vragen en dynamische titels en beschrijvingen van enquête-elementen.",
     clearIfInvisible: "Kies of vraagwaarden die verborgen zijn door voorwaardelijke logica al dan niet moeten worden gewist en wanneer u dit wilt doen. Met de optie \"Overnemen\" wordt de instelling op enquêteniveau toegepast (\"Na voltooiing van de enquête\" standaard).",
     choicesFromQuestionMode: "Kies uit: \"Alle\" - kopieert alle keuzemogelijkheden van de geselecteerde vraag; \"Geselecteerd\" - kopieert dynamisch alleen geselecteerde keuzeopties; \"Niet geselecteerd\" - kopieert dynamisch alleen niet-geselecteerde keuzeopties. De opties \"Geen\" en \"Overig\" worden standaard gekopieerd als deze zijn ingeschakeld in de bronvraag.",
+    choiceValuesFromQuestion: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de ID's moeten bevatten.",
+    choiceTextsFromQuestion: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de weergaveteksten moet opleveren.",
     showOtherItem: "Als deze optie is geselecteerd, kunnen gebruikers extra invoer invullen in een apart invulveld.",
     separateSpecialChoices: "Geeft elke speciale keuzeoptie ('Geen', 'Overig', 'Alles selecteren') weer op een nieuwe regel, zelfs bij gebruik van een lay-out met meerdere kolommen.",
     path: "Geef de locatie binnen de servicegegevensset op waar de doelmatrix met objecten zich bevindt. Laat leeg als de URL al naar de array verwijst.",
@@ -1588,10 +1609,6 @@ export var nlStrings = {
       overlapEnabled: "Als deze optie is ingeschakeld, overlapt de bovenkant van de enquête de onderkant van de koptekst.",
       mobileHeight: "Als deze optie is ingesteld op 0, wordt de hoogte automatisch berekend om de inhoud van de koptekst te accommoderen."
     },
-    panellayoutcolumn: {
-      effectiveWidth: "Accepteert waarden %.",
-      questionTitleWidth: "Accepteert waarden px."
-    },
     progressBarInheritWidthFrom: "Met de optie \"Zelfde als container\" wordt de breedte van het gebied van de voortgangsbalk automatisch aangepast aan het HTML-element waarin de enquête is geplaatst."
   },
   // Properties
@@ -1660,7 +1677,6 @@ export var nlStrings = {
     inputTextAlignment: "Uitlijning van invoerwaarden",
     elements: "Elementen",
     content: "Tevreden",
-    navigationButtonsVisibility: "Navigatie Knoppen zichtbaarheid",
     navigationTitle: "Titel navigatie",
     navigationDescription: "Navigatie beschrijving",
     longTap: "Lange tik",
@@ -1925,11 +1941,11 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.panelsState: "Inner panel expand state" => "Uitvouwstatus binnenpaneel"
 // pe.templateDescription: "Description template" => "Beschrijving sjabloon"
 // pe.templateTitle: "Title template" => "Titel sjabloon"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Knopinfo vorige deelvensterknop"
-// pe.panelNextText: "Next Panel button tooltip" => "knopinfo voor het volgende deelvenster"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Knopinfo vorige deelvensterknop"
+// pe.nextPanelText: "Next Panel button tooltip" => "knopinfo voor het volgende deelvenster"
 // pe.showRangeInProgress: "Show progress bar" => "Voortgangsbalk weergeven"
 // pe.templateQuestionTitleLocation: "Question title location" => "Locatie van de vraagtitel"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Locatie van de knop Deelvenster verwijderen"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Locatie van de knop Deelvenster verwijderen"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Verberg de vraag als er geen rijen zijn"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Kolommen verbergen als er geen rijen zijn"
 // pe.rateValues: "Custom rate values" => "Aangepaste tariefwaarden"
@@ -2619,7 +2635,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Geldt voor alle vragen op deze pagina. Als je deze instelling wilt overschrijven, definieer je regels voor titeluitlijning voor afzonderlijke vragen of panelen. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op enquêteniveau toe (\"Top\" standaard)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. De optie \"Overerven\" past de instelling op enquêteniveau toe (\"Standaard Origineel\"). Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Kies uit: \"Vergrendeld\" - gebruikers kunnen panelen niet uitvouwen of samenvouwen; \"Alles samenvouwen\" - alle deelvensters beginnen in een samengevouwen toestand; \"Alles uitvouwen\" - alle deelvensters beginnen in een uitgevouwen staat; \"Eerst uitgevouwen\" - alleen het eerste paneel wordt in eerste instantie uitgevouwen."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Voer de naam van een gedeelde eigenschap in binnen de matrix met objecten die de URL's van afbeeldings- of videobestanden bevat die u in de keuzelijst wilt weergeven."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "De linkerwaarde dient als een item-ID die wordt gebruikt in voorwaardelijke regels, de rechterwaarde wordt weergegeven aan respondenten."
@@ -2950,3 +2966,37 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // tabs.surfaceBackground: "Surface Background" => "Oppervlakte Achtergrond"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gebruik antwoorden van de laatste invoer als standaard"
 // colors.gray: "Gray" => "Grijs"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Uitlijning van navigatieknoppen"
+// pv.allQuestions: "Show all questions" => "Toon alle vragen"
+// pv.answeredQuestions: "Show answered questions only" => "Alleen beantwoorde vragen weergeven"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Hiermee stelt u de locatie van navigatieknoppen op een pagina in."
+// pe.size: "Input field width (in characters)" => "Breedte invoerveld (in tekens)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuze-ID's"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuzeteksten"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de ID's moeten bevatten."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de weergaveteksten moet opleveren."
+// pe.progressBarLocation: "Progress bar alignment" => "Uitlijning van de voortgangsbalk"
+// progressBarLocation.topbottom: "Top and bottom" => "Boven en onder"
+// progressBarLocation.aboveheader: "Above the header" => "Boven de koptekst"
+// progressBarLocation.belowheader: "Below the header" => "Onder de kop"
+// progressBarLocation.off: "Hidden" => "Verborgen"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Hiermee stelt u de locatie van de voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
+// survey.readOnly: "Make the survey read-only" => "De enquête alleen-lezen maken"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Selecteer deze optie als u wilt voorkomen dat respondenten uw enquête invullen."
+// paneldynamic.showNumber: "Number the panel" => "Nummer het paneel"
+// question.showNumber: "Number this question" => "Nummer deze vraag"
+// pe.previewMode: "Preview mode" => "Preview-modus"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "De rasterlay-out inschakelen"
+// pe.maskSettings: "Mask settings" => "Masker-instellingen"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Uitlijning van foutmeldingen bij rijuitbreiding"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Hiermee stelt u de locatie in van foutmeldingen voor vragen die zijn genest in detailsecties. De optie \"Overerven\" past de instelling van de eigenschap \"Uitlijning van foutmeldingen\" toe."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolommen voor rasterlay-out"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startpagina"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effectieve breedte, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Breedte vraagtitel, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Je hebt nog geen lay-outkolommen"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Hiermee geeft u aan hoeveel kolommen dit deelvenster beslaat binnen de rasterlay-out."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Met deze tabel kunt u elke rasterkolom in het deelvenster configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Met Survey Creator kunt u de inlinebreedtes van formulierelementen handmatig aanpassen om de lay-out te beheren. Als dit niet het gewenste resultaat oplevert, kunt u de rasterlay-out inschakelen, waarvan de structuren elementen vormen met behulp van een op kolommen gebaseerd systeem. Om lay-outkolommen te configureren, selecteer je een pagina of paneel en gebruik je de tabel \"Vraaginstellingen\" → \"Rasterkolommen\". Om aan te passen hoeveel kolommen een vraag beslaat, selecteer je deze en stel je de gewenste waarde in in het veld \"Lay-out\" → \"Kolomspanwijdte\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Met deze tabel kunt u elke rasterkolom op de pagina configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."

@@ -22,7 +22,7 @@ export var arStrings = {
     theme: "المواضيع",
     translation: "Translation",
     designer: "تصميم الإستبيان",
-    editor: "JSON Editor",
+    json: "JSON Editor",
     logic: "منطق الإستبيان"
   },
   // Question types
@@ -308,6 +308,10 @@ export var arStrings = {
       maxWidth: "الحد الأقصى لعرض اللوحة",
       showNumber: "رقم هذه اللوحة"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "العرض الفعال ،٪",
+      questionTitleWidth: "عرض عنوان السؤال، بكسل"
+    },
     paneldynamic: {
       name: "اسم اللوحة",
       title: "عنوان اللوحة",
@@ -327,15 +331,13 @@ export var arStrings = {
       templateTabTitle: "نمط عنوان علامة التبويب",
       tabTitlePlaceholder: "العنصر النائب لعنوان علامة التبويب",
       templateVisibleIf: "اجعل لوحة فردية مرئية إذا",
-      hideNumber: "إخفاء رقم اللوحة",
+      showNumber: "ترقيم اللوحة",
       titleLocation: "محاذاة عنوان اللوحة",
       descriptionLocation: "محاذاة وصف اللوحة",
       templateQuestionTitleLocation: "محاذاة عنوان السؤال",
       templateErrorLocation: "محاذاة رسالة الخطأ",
       newPanelPosition: "موقع لوحة جديد",
       showRangeInProgress: "إظهار شريط التقدم",
-      showProgressBar: "إظهار شريط التقدم",
-      progressBarLocation: "محاذاة شريط التقدم",
       keyName: "منع تكرار الردود في السؤال التالي"
     },
     question: {
@@ -346,7 +348,7 @@ export var arStrings = {
       requiredIf: "اجعل السؤال مطلوبا إذا",
       page: "الصفحة الرئيسية",
       state: "حالة طي مربع الأسئلة",
-      hideNumber: "إخفاء رقم السؤال",
+      showNumber: "رقم هذا السؤال",
       titleLocation: "محاذاة عنوان السؤال",
       descriptionLocation: "محاذاة وصف السؤال",
       errorLocation: "محاذاة رسالة الخطأ",
@@ -388,7 +390,8 @@ export var arStrings = {
     // survey templates
     survey: {
       title: "عنوان",
-      description: "وصف المسح"
+      description: "وصف المسح",
+      readOnly: "جعل الاستطلاع للقراءة فقط"
     },
     page: {
       name: "اسم الصفحة",
@@ -440,7 +443,7 @@ export var arStrings = {
     imageWidth: "عرض الصورة",
     valueName: "اسم القيمة",
     rateDescriptionLocation: "محاذاة التسمية",
-    size: "حجم حقل الإدخال (بالأحرف)",
+    size: "عرض حقل الإدخال (بالأحرف)",
     cellErrorLocation: "محاذاة رسالة خطأ الخلية",
     enabled: "تمكين",
     disabled: "ذوي الاحتياجات الخاصه",
@@ -506,6 +509,7 @@ export var arStrings = {
     listIsEmpty: "No items have been added yet",
     "listIsEmpty@choices": "لم تتم إضافة أي خيارات حتى الآن",
     "listIsEmpty@columns": "ليس لديك أي أعمدة حتى الآن",
+    "listIsEmpty@gridLayoutColumns": "ليس لديك أعمدة تخطيط حتى الآن",
     "listIsEmpty@rows": "ليس لديك أي صفوف حتى الآن",
     "listIsEmpty@validators": "ليس لديك أي قواعد تحقق حتى الآن",
     "listIsEmpty@calculatedValues": "ليس لديك أي متغيرات مخصصة حتى الآن",
@@ -539,6 +543,7 @@ export var arStrings = {
     titlePlaceholder: "Input title here",
     surveyTitlePlaceholder: "أدخل عنوان الإستبيان هنا",
     pageTitlePlaceholder: "أدخل عنوان الصفحة هنا",
+    startPageTitlePlaceholder: "الصفحة الرئيسية",
     descriptionPlaceholder: "Enter a description",
     surveyDescriptionPlaceholder: "أدخل وصف للإستبيان",
     pageDescriptionPlaceholder: "أدخل وصف للصفحة",
@@ -611,7 +616,6 @@ export var arStrings = {
     simulator: "Choose device",
     landscapeOrientation: "Landscape",
     portraitOrientation: "Portrait",
-    mode: "النمط (التعديل، القرائة فقط)",
     clearInvisibleValues: "إمسح القيم الغير مرئية",
     cookieName: "أدخل إسم ملف تعريف الإرتباط (لتعطيل المشاركة بالإستبيان أكثر من مرة)",
     partialSendEnabled: "إرسال نتائج الإستبيان على الصفحة التالية",
@@ -625,12 +629,14 @@ export var arStrings = {
     editText: "نص زر التعديل",
     startSurveyText: "نص زر بدء المشاركة بالإستبيان",
     showNavigationButtons: "إظهار أزرار الإنتقال (التنقل الإفتراضي)",
+    navigationButtonsLocation: "محاذاة أزرار التنقل",
     showPrevButton: "إظهار زر التنقل السابق (السماح للمستخدم من العودة للصفحة السابقة في الإستبيان)",
     firstPageIsStartPage: "الصفحة الأولى في الإستبيان هي صفحة البدء",
     showCompletePage: "إظهار الصفحة المكتملة في النهاية (صفحة ويب مكتملة)",
     autoAdvanceEnabled: "عند الإجابة على جميع الأسئلة، إنتقل إلى الصفحة التالية تلقائياً",
     autoAdvanceAllowComplete: "إكمال الاستطلاع تلقائيا",
     showProgressBar: "إظهار شريط التقدم",
+    progressBarLocation: "محاذاة شريط التقدم",
     questionTitleLocation: "موقع عنوان السؤال",
     questionTitleWidth: "عرض عنوان السؤال",
     requiredMark: "رمز السؤال مطلوب",
@@ -646,8 +652,8 @@ export var arStrings = {
     renderMode: "نمط العرض",
     allowAddPanel: "السماح بإضافة لوحة",
     allowRemovePanel: "السماح بإزالة لوحة",
-    panelAddText: "نص إضافة لوحة",
-    panelRemoveText: "نص إزالة لوحة",
+    addPanelText: "نص إضافة لوحة",
+    removePanelText: "نص إزالة لوحة",
     isSinglePage: "Show all elements on one page",
     html: "صفحة ويب HTML",
     setValue: "جواب",
@@ -721,9 +727,9 @@ export var arStrings = {
     minPanelCount: "الحد الأدنى لعدد اللوحات",
     maxPanelCount: "الحد الأقصى لعدد اللوحات",
     panelsState: "حالة توسيع اللوحة الداخلية",
-    panelPrevText: "تلميح أداة زر اللوحة السابق",
-    panelNextText: "تلميح أداة زر اللوحة التالية",
-    panelRemoveButtonLocation: "إزالة موقع زر اللوحة",
+    prevPanelText: "تلميح أداة زر اللوحة السابق",
+    nextPanelText: "تلميح أداة زر اللوحة التالية",
+    removePanelButtonLocation: "إزالة موقع زر اللوحة",
     hideIfRowsEmpty: "إخفاء السؤال إذا لم تكن هناك صفوف",
     hideColumnsIfEmpty: "إخفاء الأعمدة في حالة عدم وجود صفوف",
     rateValues: "قيم الأسعار المخصصة",
@@ -753,6 +759,8 @@ export var arStrings = {
     separateSpecialChoices: "خيارات خاصة منفصلة (لا شيء، أخرى، تحديد الكل)",
     choicesFromQuestion: "نسخ الاختيارات من السؤال التالي",
     choicesFromQuestionMode: "ما هي الخيارات التي تريد نسخها؟",
+    choiceValuesFromQuestion: "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كمعرفات اختيار",
+    choiceTextsFromQuestion: "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كنصوص اختيار",
     progressBarShowPageTitles: "عرض عناوين الصفحات في شريط التقدم",
     progressBarShowPageNumbers: "عرض أرقام الصفحات في شريط التقدم",
     showCommentArea: "إظهار منطقة التعليق",
@@ -787,6 +795,11 @@ export var arStrings = {
       top: "في الأعلى",
       bottom: "في الأسفل"
     },
+    previewMode: "وضع المعاينة",
+    gridLayoutEnabled: "تمكين تخطيط الشبكة",
+    gridLayoutColumns: "أعمدة تخطيط الشبكة",
+    maskSettings: "إعدادات القناع",
+    detailErrorLocation: "محاذاة رسالة خطأ توسيع الصف",
     // Creator tabs
     tabs: {
       panel: {
@@ -1104,6 +1117,8 @@ export var arStrings = {
     noPreview: "بلا عرض",
     showAllQuestions: "المعاينة مع جميع الأسئلة",
     showAnsweredQuestions: "المعاينة مع الأسئلة المجٌابة",
+    allQuestions: "عرض جميع الأسئلة",
+    answeredQuestions: "إظهار الأسئلة التي تمت الإجابة عليها فقط",
     pages: "الصفحات",
     questions: "الأسئلة",
     requiredQuestions: "الأسئلة المطلوبة",
@@ -1199,16 +1214,13 @@ export var arStrings = {
     questionOrder: {
       initial: "اللغة الأصلية"
     },
-    showProgressBar: {
-      off: "مخفي",
-      topbottom: "الاعلى والأسفل",
-      aboveheader: "فوق الرأس",
-      belowheader: "أسفل الرأس"
-    },
     progressBarLocation: {
       top: "أعلى",
       bottom: "قاع",
-      topBottom: "أعلى وأسفل"
+      topbottom: "أعلى وأسفل",
+      aboveheader: "أعلى الرأس",
+      belowheader: "أسفل العنوان",
+      off: "مخفي"
     },
     sum: "مجموع",
     count: "عد",
@@ -1353,7 +1365,9 @@ export var arStrings = {
       startWithNewLine: "قم بإلغاء التحديد لعرض اللوحة في سطر واحد مع السؤال أو اللوحة السابقة. لا ينطبق الإعداد إذا كانت اللوحة هي العنصر الأول في النموذج الخاص بك.",
       state: "اختر من بين: \"موسعة\" - يتم عرض اللوحة بالكامل ويمكن طيها ؛ \"مطوي\" - تعرض اللوحة العنوان والوصف فقط ويمكن توسيعها ؛ \"مغلق\" - يتم عرض اللوحة بالكامل ولا يمكن طيها.",
       width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
-      showQuestionNumbers: "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة."
+      showQuestionNumbers: "يعين الأرقام للأسئلة المتداخلة داخل هذه اللوحة.",
+      effectiveColSpan: "يحدد عدد الأعمدة التي تمتد إليها هذه اللوحة داخل تخطيط الشبكة.",
+      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة داخل اللوحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
     },
     paneldynamic: {
       name: "معرف لوحة غير مرئي للمستجيبين.",
@@ -1384,6 +1398,7 @@ export var arStrings = {
     resetValueIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد متى تتم إعادة تعيين إدخال المستجيب إلى القيمة استنادا إلى \"تعبير القيمة الافتراضية\" أو \"تعيين تعبير القيمة\" أو إلى قيمة \"الإجابة الافتراضية\" (إذا تم تعيين أي منهما).",
     setValueIf: "استخدم رمز العصا السحرية لتعيين قاعدة شرطية تحدد وقت تشغيل \"تعيين تعبير القيمة\" وتعيين القيمة الناتجة ديناميكيا كاستجابة.",
     setValueExpression: "حدد تعبيرا يحدد القيمة المراد تعيينها عند استيفاء الشروط الواردة في قاعدة \"تعيين القيمة إذا\". يمكن أن يتضمن التعبير حسابات أساسية - '{q1_id} + {q2_id}' ، والتعبيرات المنطقية ، مثل '{age} > 60' ، والدوالات: 'iif ()' ، 'today ()' ، 'age ()' ، 'min ()' ، 'max ()' ، 'avg ()' ، إلخ. يمكن تجاوز القيمة التي يحددها هذا التعبير بواسطة الإدخال اليدوي للمستجيب.",
+    gridLayoutEnabled: "يسمح لك Survey Creator بضبط العروض المضمنة لعناصر النموذج يدويا للتحكم في التخطيط. إذا لم يؤد ذلك إلى النتيجة المرجوة، فيمكنك تمكين تخطيط الشبكة، الذي يقوم ببناء عناصر التشكيل باستخدام نظام قائم على الأعمدة. لتكوين أعمدة التخطيط، حدد صفحة أو لوحة واستخدم جدول \"إعدادات الأسئلة\" → \"أعمدة الشبكة\". لضبط عدد الأعمدة التي يمتد إليها السؤال، حدده وقم بتعيين القيمة المطلوبة في حقل \"التخطيط\" → \"امتداد العمود\".",
     question: {
       name: "معرف سؤال غير مرئي للمستجيبين.",
       description: "اكتب عنوانا فرعيا للسؤال.",
@@ -1404,7 +1419,8 @@ export var arStrings = {
       textUpdateMode: "اختر من بين: \"عند فقدان التركيز\" - يتم تحديث القيمة عندما يفقد حقل الإدخال التركيز ؛ \"أثناء الكتابة\" - يتم تحديث القيمة في الوقت الفعلي ، حيث يكتب المستخدمون. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"عند فقدان التركيز\" افتراضيا).",
       url: "يمكنك استخدام أي خدمة ويب كمصدر بيانات لأسئلة الاختيار من متعدد. لتعبئة قيم الاختيار، أدخل عنوان URL للخدمة التي توفر البيانات.",
       searchMode: "عملية مقارنة تستخدم لتصفية القائمة المنسدلة.",
-      textWrapEnabled: "ستنشئ النصوص الطويلة في خيارات الاختيار فواصل أسطر تلقائيا لتلائم القائمة المنسدلة. قم بإلغاء تحديد ما إذا كنت تريد قص النصوص."
+      textWrapEnabled: "ستنشئ النصوص الطويلة في خيارات الاختيار فواصل أسطر تلقائيا لتلائم القائمة المنسدلة. قم بإلغاء تحديد ما إذا كنت تريد قص النصوص.",
+      effectiveColSpan: "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة."
     },
     signaturepad: {
       signatureWidth: "يضبط عرض مساحة التوقيع المعروضة والصورة الناتجة.",
@@ -1433,7 +1449,8 @@ export var arStrings = {
     },
     // survey templates
     survey: {
-      mode: "اختر بين: \"قابل للتحرير\" - يمكن المستجيبين من ملء الاستبيان الخاص بك ؛ \"للقراءة فقط\" - تعطيل تحرير النموذج."
+      readOnly: "حدد ما إذا كنت تريد منع المستجيبين من ملء الاستطلاع الخاص بك.",
+      progressBarLocation: "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
     },
     matrixdropdowncolumn: {
       name: "معرف عمود غير مرئي للمستجيبين.",
@@ -1455,7 +1472,7 @@ export var arStrings = {
     autoAdvanceEnabled: "حدد ما إذا كنت تريد أن يتقدم الاستطلاع تلقائيا إلى الصفحة التالية بمجرد إجابة المستجيب على جميع الأسئلة في الصفحة الحالية. لن يتم تطبيق هذه الميزة إذا كان السؤال الأخير على الصفحة مفتوحا أو يسمح بإجابات متعددة.",
     autoAdvanceAllowComplete: "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة.",
     showNavigationButtons: "يضبط رؤية وموقع أزرار التنقل على الصفحة.",
-    showProgressBar: "يضبط رؤية شريط التقدم وموقعه. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله.",
+    navigationButtonsLocation: "لتعيين موقع أزرار التنقل على الصفحة.",
     showPreviewBeforeComplete: "قم بتمكين صفحة المعاينة مع جميع الأسئلة أو الإجابة عليها فقط.",
     questionTitleLocation: "ينطبق على جميع الأسئلة داخل الاستطلاع. يمكن تجاوز هذا الإعداد من خلال قواعد محاذاة العنوان في المستويات الأدنى: اللوحة أو الصفحة أو السؤال. سيتجاوز إعداد المستوى الأدنى تلك الموجودة في المستوى الأعلى.",
     requiredMark: "رمز أو سلسلة من الرموز تشير إلى أن الإجابة مطلوبة.",
@@ -1479,6 +1496,7 @@ export var arStrings = {
     rowTitleWidth: "يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
     totalText: "تكون مرئية فقط عندما يحتوي عمود واحد على الأقل على نوع الإجمالي أو تعبير الإجمالي.",
     cellErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بخلية ذات إدخال غير صالح. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\".",
+    detailErrorLocation: "تعيين موقع رسائل الخطأ للأسئلة المتداخلة في أقسام التفاصيل. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\".",
     keyDuplicationError: "عند تمكين الخاصية \"منع الاستجابات المكررة\"، سيتلقى مستجيب يحاول إرسال إدخال مكرر رسالة الخطأ التالية.",
     totalExpression: "يسمح لك بحساب القيم الإجمالية استنادا إلى تعبير. يمكن أن يتضمن التعبير العمليات الحسابية الأساسية ('{q1_id} + {q2_id}') والتعبيرات المنطقية ('{age} > 60') والوظائف ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', إلخ).",
     confirmDelete: "يؤدي إلى تشغيل مطالبة تطلب تأكيد حذف الصف.",
@@ -1501,7 +1519,8 @@ export var arStrings = {
       questionTitleWidth: "يعين عرضا متناسقا لعناوين الأسئلة عندما تتم محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
       questionErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بالسؤال مع إدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أعلى\" افتراضيا).",
       questionOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أصلي\" افتراضيا). يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
-      navigationButtonsVisibility: "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\"."
+      showNavigationButtons: "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\".",
+      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة على الصفحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
     },
     timerLocation: "يضبط موقع المؤقت على الصفحة.",
     panelsState: "اختر من بين: \"مقفل\" - لا يمكن للمستخدمين توسيع اللوحات أو طيها ؛ \"طي الكل\" - تبدأ جميع اللوحات في حالة انهيار ؛ \"توسيع الكل\" - تبدأ جميع اللوحات في حالة موسعة ؛ \"تم توسيعه أولا\" - تم توسيع اللوحة الأولى فقط في البداية.",
@@ -1516,6 +1535,8 @@ export var arStrings = {
     useDisplayValuesInDynamicTexts: "في أنواع الأسئلة ذات التحديد الفردي والمتعدد، يكون لكل خيار اختيار معرف وقيمة عرض. عند تحديده، يعرض هذا الإعداد قيمة عرض بدلا من قيمة معرف في أسئلة HTML والعناوين الديناميكية وأوصاف عناصر الاستطلاع.",
     clearIfInvisible: "اختر ما إذا كنت تريد مسح قيم الأسئلة المخفية بواسطة المنطق الشرطي أم لا ومتى تفعل ذلك. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"عند اكتمال الاستطلاع\" افتراضيا).",
     choicesFromQuestionMode: "اختر من بين: \"الكل\" - نسخ جميع خيارات الاختيار من السؤال المحدد ؛ \"محدد\" - ينسخ ديناميكيا خيارات الاختيار المحددة فقط ؛ \"غير محدد\" - ينسخ ديناميكيا خيارات الاختيار غير المحددة فقط. يتم نسخ الخيارين \"بلا\" و \"أخرى\" افتراضيا إذا تم تمكينهما في السؤال المصدر.",
+    choiceValuesFromQuestion: "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر معرفات.",
+    choiceTextsFromQuestion: "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر نصوص العرض.",
     showOtherItem: "عند تحديده، يمكن للمستخدمين تضمين مدخلات إضافية في مربع تعليق منفصل.",
     separateSpecialChoices: "يعرض كل خيار اختيار خاص (\"بلا\" ، \"أخرى\" ، \"تحديد الكل\") على سطر جديد ، حتى عند استخدام تخطيط متعدد الأعمدة.",
     path: "حدد الموقع داخل مجموعة بيانات الخدمة حيث يوجد الصفيف الهدف من الكائنات. اتركه فارغا إذا كان عنوان URL يشير بالفعل إلى المصفوفة.",
@@ -1588,10 +1609,6 @@ export var arStrings = {
       overlapEnabled: "عند التمكين، يقوم الجزء العلوي من الاستطلاع بتراكب الجزء السفلي من الرأس.",
       mobileHeight: "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
     },
-    panellayoutcolumn: {
-      effectiveWidth: "يقبل القيم٪",
-      questionTitleWidth: "يقبل القيم px."
-    },
     progressBarInheritWidthFrom: "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
   },
   // Properties
@@ -1660,7 +1677,6 @@ export var arStrings = {
     inputTextAlignment: "محاذاة قيمة الإدخال",
     elements: "عناصر",
     content: "محتوى",
-    navigationButtonsVisibility: "رؤية أزرار التنقل",
     navigationTitle: "navigationTitle",
     navigationDescription: "navigationDescription",
     longTap: "نقرة طويلة",
@@ -1889,11 +1905,11 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pe.panelsState: "Inner panel expand state" => "حالة توسيع اللوحة الداخلية"
 // pe.templateDescription: "Description template" => "قالب الوصف"
 // pe.templateTitle: "Title template" => "قالب العنوان"
-// pe.panelPrevText: "Previous Panel button tooltip" => "تلميح أداة زر اللوحة السابق"
-// pe.panelNextText: "Next Panel button tooltip" => "تلميح أداة زر اللوحة التالية"
+// pe.prevPanelText: "Previous Panel button tooltip" => "تلميح أداة زر اللوحة السابق"
+// pe.nextPanelText: "Next Panel button tooltip" => "تلميح أداة زر اللوحة التالية"
 // pe.showRangeInProgress: "Show progress bar" => "إظهار شريط التقدم"
 // pe.templateQuestionTitleLocation: "Question title location" => "موقع عنوان السؤال"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "إزالة موقع زر اللوحة"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "إزالة موقع زر اللوحة"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "إخفاء السؤال إذا لم تكن هناك صفوف"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "إخفاء الأعمدة في حالة عدم وجود صفوف"
 // pe.rateValues: "Custom rate values" => "قيم الأسعار المخصصة"
@@ -2554,7 +2570,6 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "ينطبق على جميع الأسئلة الواردة في هذه الصفحة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة أو اللوحات الفردية. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أعلى\" افتراضيا)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "تعيين موقع رسالة خطأ فيما يتعلق بالسؤال مع إدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أعلى\" افتراضيا)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"أصلي\" افتراضيا). يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "اختر من بين: \"مقفل\" - لا يمكن للمستخدمين توسيع اللوحات أو طيها ؛ \"طي الكل\" - تبدأ جميع اللوحات في حالة انهيار ؛ \"توسيع الكل\" - تبدأ جميع اللوحات في حالة موسعة ؛ \"تم توسيعه أولا\" - تم توسيع اللوحة الأولى فقط في البداية."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "أدخل اسم خاصية مشتركة ضمن صفيف الكائنات التي تحتوي على عناوين URL لملفات الصور أو الفيديو التي تريد عرضها في قائمة الاختيارات."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "تعمل القيمة اليسرى كمعرف عنصر مستخدم في القواعد الشرطية ، ويتم عرض القيمة الصحيحة للمستجيبين."
@@ -2887,3 +2902,37 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // tabs.surfaceBackground: "Surface Background" => "خلفية السطح"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "استخدام الإجابات من الإدخال الأخير كإعداد افتراضي"
 // colors.gray: "Gray" => "رمادي"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "محاذاة أزرار التنقل"
+// pv.allQuestions: "Show all questions" => "عرض جميع الأسئلة"
+// pv.answeredQuestions: "Show answered questions only" => "إظهار الأسئلة التي تمت الإجابة عليها فقط"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "لتعيين موقع أزرار التنقل على الصفحة."
+// pe.size: "Input field width (in characters)" => "عرض حقل الإدخال (بالأحرف)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كمعرفات اختيار"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كنصوص اختيار"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر معرفات."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر نصوص العرض."
+// pe.progressBarLocation: "Progress bar alignment" => "محاذاة شريط التقدم"
+// progressBarLocation.topbottom: "Top and bottom" => "أعلى وأسفل"
+// progressBarLocation.aboveheader: "Above the header" => "أعلى الرأس"
+// progressBarLocation.belowheader: "Below the header" => "أسفل العنوان"
+// progressBarLocation.off: "Hidden" => "مخفي"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
+// survey.readOnly: "Make the survey read-only" => "جعل الاستطلاع للقراءة فقط"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "حدد ما إذا كنت تريد منع المستجيبين من ملء الاستطلاع الخاص بك."
+// paneldynamic.showNumber: "Number the panel" => "ترقيم اللوحة"
+// question.showNumber: "Number this question" => "رقم هذا السؤال"
+// pe.previewMode: "Preview mode" => "وضع المعاينة"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "تمكين تخطيط الشبكة"
+// pe.maskSettings: "Mask settings" => "إعدادات القناع"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "محاذاة رسالة خطأ توسيع الصف"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "تعيين موقع رسائل الخطأ للأسئلة المتداخلة في أقسام التفاصيل. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "أعمدة تخطيط الشبكة"
+// pe.startPageTitlePlaceholder: "Start Page" => "الصفحة الرئيسية"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "العرض الفعال ،٪"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "عرض عنوان السؤال، بكسل"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "ليس لديك أعمدة تخطيط حتى الآن"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "يحدد عدد الأعمدة التي تمتد إليها هذه اللوحة داخل تخطيط الشبكة."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "يتيح لك هذا الجدول تكوين كل عمود شبكة داخل اللوحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "يسمح لك Survey Creator بضبط العروض المضمنة لعناصر النموذج يدويا للتحكم في التخطيط. إذا لم يؤد ذلك إلى النتيجة المرجوة، فيمكنك تمكين تخطيط الشبكة، الذي يقوم ببناء عناصر التشكيل باستخدام نظام قائم على الأعمدة. لتكوين أعمدة التخطيط، حدد صفحة أو لوحة واستخدم جدول \"إعدادات الأسئلة\" → \"أعمدة الشبكة\". لضبط عدد الأعمدة التي يمتد إليها السؤال، حدده وقم بتعيين القيمة المطلوبة في حقل \"التخطيط\" → \"امتداد العمود\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "يتيح لك هذا الجدول تكوين كل عمود شبكة على الصفحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."

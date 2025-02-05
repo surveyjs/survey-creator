@@ -21,7 +21,7 @@
             class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing"
           >
             <div class="svc-top-bar">
-              <div class="svc-tabbed-menu-wrapper" v-show="model.showTabs">
+              <div class="svc-tabbed-menu-wrapper" v-if="model.showTabs">
                 <SvComponent
                   :is="'svc-tabbed-menu'"
                   :model="model.tabbedMenu"

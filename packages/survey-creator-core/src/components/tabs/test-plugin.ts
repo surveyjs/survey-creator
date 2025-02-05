@@ -1,5 +1,5 @@
 import { notShortCircuitAnd } from "../../utils/utils";
-import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName, IAction, ListModel, PopupModel, surveyLocalization } from "survey-core";
+import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultThemeName, IAction, ListModel, PopupModel, surveyLocalization } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
@@ -18,7 +18,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   private previewAction: Action;
   private prevPageAction: Action;
   private nextPageAction: Action;
-  private simulatorTheme: any = surveyCss[defaultV2ThemeName];
+  private simulatorTheme: any = surveyCss[defaultThemeName];
 
   public model: TestSurveyTabViewModel;
   private _previewDevice: string = "";
@@ -82,14 +82,14 @@ export class TabTestPlugin implements ICreatorPlugin {
     }
   }
   private setPreviewTheme(themeName: string): void {
-    this.simulatorTheme = surveyCss[themeName] || surveyCss[defaultV2ThemeName];
+    this.simulatorTheme = surveyCss[themeName] || surveyCss[defaultThemeName];
   }
   private createVisibleUpdater() {
-    return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "test"; });
+    return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "preview"; });
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab("test", this);
+    creator.addPluginTab("preview", this);
     this.setPreviewTheme(this.creator.previewTheme);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
@@ -156,7 +156,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconSize: "auto",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
+          return notShortCircuitAnd(this.creator.activeTab === "preview", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
         }),
       }, {
         items: deviceSelectorItems,
@@ -176,7 +176,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconSize: "auto",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
+          return notShortCircuitAnd(this.creator.activeTab === "preview", this.creator.showSimulatorInTestSurveyTab, !this.creator.isTouch);
         }),
         action: () => {
           this.model.simulator.landscape = !this.model.simulator.landscape;

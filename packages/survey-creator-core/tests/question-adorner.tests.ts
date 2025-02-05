@@ -5,8 +5,6 @@ import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { QuestionToolboxItem } from "../src/toolbox";
 
-settings.supportCreatorV2 = true;
-
 test("Check required action", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -250,7 +248,7 @@ function getQuestionConverterList(creator: CreatorTester, questionName: string) 
   const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
   const popup = convertToAction.popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
   return list;
 }
@@ -274,7 +272,7 @@ test("Check question converter no subitems", (): any => {
   const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
   const popup = convertToAction.popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
   expect((list.getActionById("text").items || []).length).toBe(0);
 
@@ -299,13 +297,13 @@ test("Check question converter selected item for subitems", (): any => {
   const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
   const popup = convertToAction.popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
   expect(list.selectedItem.id).toBe("text");
 
   const popupSubtype = list.selectedItem.popupModel;
   const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
-  popupSubtype.toggleVisibility();
+  popupSubtype.show();
   const listSubtype = popupSubtype.contentComponentData.model;
   expect(listSubtype.selectedItem.id).toBe("email");
 
@@ -342,13 +340,13 @@ test("Check question converter selected item for customized subitems (types)", (
   const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
   const popup = convertToAction.popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
   expect(list.selectedItem.id).toBe("matrix");
 
   const popupSubtype = list.selectedItem.popupModel;
   const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
-  popupSubtype.toggleVisibility();
+  popupSubtype.show();
   const listSubtype = popupSubtype.contentComponentData.model;
   expect(listSubtype.selectedItem.id).toBe("matrixdropdown");
 
@@ -380,13 +378,13 @@ test("Check question converter selected item for customized subitems (json)", ()
   const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
   const popup = convertToAction.popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
   expect(list.selectedItem.id).toBe("boolean");
 
   const popupSubtype = list.selectedItem.popupModel;
   const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
-  popupSubtype.toggleVisibility();
+  popupSubtype.show();
   const listSubtype = popupSubtype.contentComponentData.model;
   expect(listSubtype.selectedItem.id).toBe("boolradio");
 
@@ -422,13 +420,13 @@ test("Check question converter selected item for single subitems (json)", (): an
   const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
   const popup = convertToAction.popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
   expect(list.selectedItem.id).toBe("comment");
 
   const popupSubtype = list.selectedItem.popupModel;
   const popupViewModelSubtype = new PopupDropdownViewModel(popupSubtype); // need for popupModel.onShow
-  popupSubtype.toggleVisibility();
+  popupSubtype.show();
   const listSubtype = popupSubtype.contentComponentData.model;
   expect(listSubtype.selectedItem.id).toBe("limitedLongText");
 
@@ -441,13 +439,13 @@ test("Check question converter selected item for single subitems (json)", (): an
   const convertToAction2 = questionAdorner2.actionContainer.getActionById("convertTo");
   const popup2 = convertToAction2.popupModel;
   const popupViewModel2 = new PopupDropdownViewModel(popup2); // need for popupModel.onShow
-  popup2.toggleVisibility();
+  popup2.show();
   const list2 = popup2.contentComponentData.model;
   expect(list2.selectedItem.id).toBe("comment");
 
   const popupSubtype2 = list2.selectedItem.popupModel;
   const popupViewModelSubtype2 = new PopupDropdownViewModel(popupSubtype2); // need for popupModel.onShow
-  popupSubtype2.toggleVisibility();
+  popupSubtype2.show();
   const listSubtype2 = popupSubtype2.contentComponentData.model;
   expect(listSubtype2.actions.length).toBe(2);
   expect(listSubtype2.selectedItem.title).toBe("Long Text");
@@ -485,7 +483,7 @@ test("Check question converter with subitems (json)", (): any => {
   const convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
   const popup = convertToAction.popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
-  popup.toggleVisibility();
+  popup.show();
   const list = popup.contentComponentData.model;
 
   const booleanAction = list.getActionById("boolean");
@@ -494,7 +492,7 @@ test("Check question converter with subitems (json)", (): any => {
   const questionConverted = creator.survey.getQuestionByName("q1");
   expect(questionConverted.renderAs).toBe("checkbox");
 
-  popup.toggleVisibility();
+  popup.show();
   const booleanCheckAction2 = booleanAction.items[0];
   booleanCheckAction2.action();
   const questionConverted2 = creator.survey.getQuestionByName("q1");
@@ -533,7 +531,7 @@ test("Check question converter with subitems for input type", (): any => {
     const convertToAction = questionAdorner.actionContainer.getActionById("convertInputType");
     const popup = convertToAction.popupModel;
     const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
-    popup.toggleVisibility();
+    popup.show();
     return popup.contentComponentData.model;
   }
 
@@ -613,7 +611,7 @@ test("Check question converter with subitems for input type, bug #5884", (): any
     const convertToAction = questionAdorner.actionContainer.getActionById("convertInputType");
     const popup = convertToAction.popupModel;
     const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
-    popup.toggleVisibility();
+    popup.show();
     return popup.contentComponentData.model;
   }
 
@@ -988,7 +986,7 @@ test("Don't reset collapased state for moved question", () => {
   const page1 = creator.survey.pages[0];
   const page2 = creator.survey.pages[1];
   let pageAdorner = new PageAdorner(creator, page1);
-  creator.collapseAllPagesOnDragStart();
+  creator.collapseAllPagesOnDragStart(page1);
   expect(pageAdorner.collapsed).toBeTruthy();
   creator.designerStateManager.suspend();
   creator.survey.pages.splice(0, 1);

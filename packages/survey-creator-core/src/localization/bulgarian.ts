@@ -22,7 +22,7 @@ export var bgStrings = {
     theme: "Теми",
     translation: "Превод",
     designer: "Дизайнер",
-    editor: "JSON редактор",
+    json: "JSON редактор",
     logic: "Логика"
   },
   // Question types
@@ -308,6 +308,10 @@ export var bgStrings = {
       maxWidth: "Максимална ширина на панела",
       showNumber: "Номерирайте този панел"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Ефективна ширина, %",
+      questionTitleWidth: "Ширина на заглавието на въпроса, px"
+    },
     paneldynamic: {
       name: "Име на панела",
       title: "Заглавие на панела",
@@ -327,15 +331,13 @@ export var bgStrings = {
       templateTabTitle: "Шаблон на заглавие на раздел",
       tabTitlePlaceholder: "Контейнер за заглавие на раздел",
       templateVisibleIf: "Направете отделен панел видим, ако",
-      hideNumber: "Скриване на номера на панела",
+      showNumber: "Номерирайте панела",
       titleLocation: "Подравняване на заглавието на панела",
       descriptionLocation: "Подравняване на описанието на панела",
       templateQuestionTitleLocation: "Подравняване на заглавието на въпроса",
       templateErrorLocation: "Подравняване на съобщение за грешка",
       newPanelPosition: "Ново местоположение на панела",
       showRangeInProgress: "Показване на лентата за напредъка",
-      showProgressBar: "Показване на лентата за напредъка",
-      progressBarLocation: "Подравняване на лентата за напредъка",
       keyName: "Предотвратяване на дублиращи се отговори в следния въпрос"
     },
     question: {
@@ -346,7 +348,7 @@ export var bgStrings = {
       requiredIf: "Задайте въпроса, който е необходим, ако",
       page: "Родителска страница",
       state: "Състояние на свиване на полето за въпроси",
-      hideNumber: "Скриване на номера на въпроса",
+      showNumber: "Номерирайте този въпрос",
       titleLocation: "Подравняване на заглавието на въпроса",
       descriptionLocation: "Подравняване на описанието на въпроса",
       errorLocation: "Подравняване на съобщение за грешка",
@@ -388,7 +390,8 @@ export var bgStrings = {
     // survey templates
     survey: {
       title: "Заглавие",
-      description: "Описание на проучването"
+      description: "Описание на проучването",
+      readOnly: "Направете проучването само за четене"
     },
     page: {
       name: "Име на страница",
@@ -440,7 +443,7 @@ export var bgStrings = {
     imageWidth: "Широчина на изображението",
     valueName: "Съхранявай отговорите в следното JSON поле.",
     rateDescriptionLocation: "Подравняване на етикети",
-    size: "Размер на въвеждане (в знаци)",
+    size: "Ширина на полето за въвеждане (в знаци)",
     cellErrorLocation: "Подравняване на съобщение за грешка в клетка",
     enabled: "Разрешено",
     disabled: "Инвалид",
@@ -506,6 +509,7 @@ export var bgStrings = {
     listIsEmpty: "Все още няма добавени елементи.",
     "listIsEmpty@choices": "Все още няма добавени възможности за избор.",
     "listIsEmpty@columns": "Все още нямате колони",
+    "listIsEmpty@gridLayoutColumns": "Все още нямате графи за оформление",
     "listIsEmpty@rows": "Все още нямате никакви редове",
     "listIsEmpty@validators": "Все още нямате правила за валидиране",
     "listIsEmpty@calculatedValues": "Все още нямате никакви персонализирани променливи",
@@ -539,6 +543,7 @@ export var bgStrings = {
     titlePlaceholder: "Заглавие",
     surveyTitlePlaceholder: "Заглавие на анкетата",
     pageTitlePlaceholder: "Страница {num}",
+    startPageTitlePlaceholder: "Начална страница",
     descriptionPlaceholder: "Описание",
     surveyDescriptionPlaceholder: "Описание",
     pageDescriptionPlaceholder: "Описание",
@@ -611,7 +616,6 @@ export var bgStrings = {
     simulator: "Изберете тип устройство",
     landscapeOrientation: "Превключване към пейзажна ориентация",
     portraitOrientation: "Превключване към портретна ориентация",
-    mode: "Редактируемо или само за четене",
     clearInvisibleValues: "Изчистване на невидими стойности",
     cookieName: "Име на бисквитката",
     partialSendEnabled: "Запазване на частични резултати от анкетата в процес на изпълнение",
@@ -625,12 +629,14 @@ export var bgStrings = {
     editText: "Редактиране текста на бутона за отговор",
     startSurveyText: "Текст на бутона за стартиране на анкетата",
     showNavigationButtons: "Разположение на навигационните бутони",
+    navigationButtonsLocation: "Подравняване на бутоните за навигация",
     showPrevButton: "Показване на бутона Предишна страница",
     firstPageIsStartPage: "Първата страница е начална.",
     showCompletePage: "Показване на страницата Завършена анкета",
     autoAdvanceEnabled: "Продължи автоматично към следващата страница.",
     autoAdvanceAllowComplete: "Попълване на анкетата автоматично",
     showProgressBar: "Местоположение на лентата за напредък",
+    progressBarLocation: "Подравняване на лентата за напредъка",
     questionTitleLocation: "Местоположение на заглавието на въпроса",
     questionTitleWidth: "Ширина на заглавието на въпроса",
     requiredMark: "Задължителен символ(и)",
@@ -646,8 +652,8 @@ export var bgStrings = {
     renderMode: "Режим на показване на панела",
     allowAddPanel: "Разрешаване добавянето на панели",
     allowRemovePanel: "Разрешаване премахването на панели",
-    panelAddText: "Добавяне на текст на панелен бутон",
-    panelRemoveText: "Премахване на текст на панелен бутон",
+    addPanelText: "Добавяне на текст на панелен бутон",
+    removePanelText: "Премахване на текст на панелен бутон",
     isSinglePage: "Показване на всички елементи на една страница",
     html: "HTML маркиране",
     setValue: "Отговор",
@@ -721,9 +727,9 @@ export var bgStrings = {
     minPanelCount: "Минимален брой панели",
     maxPanelCount: "Максимален брой панели",
     panelsState: "Разширено състояние на вътрешния панел",
-    panelPrevText: "Подсказка към бутона за предишен панел",
-    panelNextText: "Подсказка към бутона за следващ панел",
-    panelRemoveButtonLocation: "Премахване местоположението на бутона на панела",
+    prevPanelText: "Подсказка към бутона за предишен панел",
+    nextPanelText: "Подсказка към бутона за следващ панел",
+    removePanelButtonLocation: "Премахване местоположението на бутона на панела",
     hideIfRowsEmpty: "Скриване на въпроса, ако няма редове",
     hideColumnsIfEmpty: "Скриване на колони, ако няма редове",
     rateValues: "Персонализирани стойности на оценката",
@@ -753,6 +759,8 @@ export var bgStrings = {
     separateSpecialChoices: "Разделяне със специален избор (Не, Други, Избери всички)",
     choicesFromQuestion: "Копиране изборите от следния въпрос",
     choicesFromQuestionMode: "Кои избори да се копират?",
+    choiceValuesFromQuestion: "Използване на стойности от следната матрична колона или въпрос на панела като идентификатори на избор",
+    choiceTextsFromQuestion: "Използване на стойности от следната матрична колона или панелен въпрос като текстове за избор",
     progressBarShowPageTitles: "Показване на заглавията на страниците в лентата за напредъка",
     progressBarShowPageNumbers: "Показване на номерата на страниците в лентата за напредъка",
     showCommentArea: "Показване на областта за коментари",
@@ -787,6 +795,11 @@ export var bgStrings = {
       top: "Отгоре",
       bottom: "Отдолу"
     },
+    previewMode: "Режим на визуализация",
+    gridLayoutEnabled: "Разрешаване на оформлението на мрежата",
+    gridLayoutColumns: "Колони за оформление на мрежата",
+    maskSettings: "Настройки на маската",
+    detailErrorLocation: "Подравняване на съобщението за грешка при разгъване на реда",
     // Creator tabs
     tabs: {
       panel: {
@@ -1104,6 +1117,8 @@ export var bgStrings = {
     noPreview: "Без визуализация",
     showAllQuestions: "Показване на всички въпроси",
     showAnsweredQuestions: "Показване само на въпроси с отговор",
+    allQuestions: "Покажи всички въпроси",
+    answeredQuestions: "Показване само на отговори на въпроси",
     pages: "Завършени страници",
     questions: "Отговорени въпроси",
     requiredQuestions: "Отговорени задължителни въпроси",
@@ -1199,16 +1214,13 @@ export var bgStrings = {
     questionOrder: {
       initial: "Оригинален"
     },
-    showProgressBar: {
-      off: "Скрит",
-      topbottom: "Отгоре и отдолу",
-      aboveheader: "Над горния колонтитул",
-      belowheader: "Под заглавката"
-    },
     progressBarLocation: {
       top: "Връх",
       bottom: "Дъно",
-      topBottom: "Отгоре и отдолу"
+      topbottom: "Отгоре и отдолу",
+      aboveheader: "Над заглавката",
+      belowheader: "Под заглавката",
+      off: "Скрит"
     },
     sum: "Сума",
     count: "Граф",
@@ -1353,7 +1365,9 @@ export var bgStrings = {
       startWithNewLine: "Премахнете отметката, за да покажете панела в един ред с предишния въпрос или панел. Настройката не се прилага, ако панелът е първият елемент във вашия формуляр.",
       state: "Изберете от: \"Разширен\" - панелът се показва изцяло и може да бъде свит; \"Свит\" - панелът показва само заглавието и описанието и може да бъде разширен; \"Заключен\" - панелът се показва изцяло и не може да се свива.",
       width: "Задава ширината на панела пропорционално на другите елементи на изследването в същия ред. Приема CSS стойности (px, %, in, pt и т.н.).",
-      showQuestionNumbers: "Присвоява номера на въпроси, вложени в този панел."
+      showQuestionNumbers: "Присвоява номера на въпроси, вложени в този панел.",
+      effectiveColSpan: "Указва колко колони обхваща този панел в оформлението на мрежата.",
+      gridLayoutColumns: "Тази таблица ви позволява да конфигурирате всяка колона на мрежата в панела. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона."
     },
     paneldynamic: {
       name: "ИД на панел, който не е видим за респондентите.",
@@ -1384,6 +1398,7 @@ export var bgStrings = {
     resetValueIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя кога входът на респондента се връща към стойността въз основа на \"Израз за стойност по подразбиране\" или \"Задаване на израз за стойност\" или към стойността \"Отговор по подразбиране\" (ако е зададена такава).",
     setValueIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което определя кога да изпълните \"Задаване на израз за стойност\" и динамично да зададете получената стойност като отговор.",
     setValueExpression: "Задайте израз, който определя стойността, която трябва да бъде зададена, когато са изпълнени условията в правилото \"Задаване на стойност ако\". Изразът може да включва основни изчисления - '{q1_id} + {q2_id}', булеви изрази, като '{age} > 60', и функции: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др. Стойността, определена от този израз, може да бъде заместена от ръчното въвеждане на респондента.",
+    gridLayoutEnabled: "Survey Creator ви позволява ръчно да регулирате вградените ширини на елементите на формуляра, за да контролирате оформлението. Ако това не доведе до желания резултат, можете да активирате оформлението на мрежата, което структурира елементите на формата с помощта на система, базирана на колони. За да конфигурирате колони за оформление, изберете страница или панел и използвайте таблицата \"Настройки на въпроса\" → \"Колони на мрежата\". За да регулирате колко колони обхваща даден въпрос, изберете го и задайте желаната стойност в полето \"Оформление\" → \"Обхват на колоната\".",
     question: {
       name: "Идентификационен номер на въпрос, който не е видим за респондентите.",
       description: "Въведете подзаглавие на въпрос.",
@@ -1404,7 +1419,8 @@ export var bgStrings = {
       textUpdateMode: "Изберете от: \"На загубен фокус\" - стойността се актуализира, когато входното поле загуби фокус; \"Докато пишете\" - стойността се актуализира в реално време, докато потребителите пишат. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"На загубен фокус\" по подразбиране).",
       url: "Можете да използвате всяка уеб услуга като източник на данни за въпроси с множествен избор. За да попълните стойности за избор, въведете URL адреса на услугата, предоставяща данните.",
       searchMode: "Операция за сравнение, използвана за филтриране на падащия списък.",
-      textWrapEnabled: "Дългите текстове в опциите за избор автоматично ще генерират нови редове, за да се поберат в падащото меню. Премахнете отметката, ако искате текстовете да бъдат изрязани."
+      textWrapEnabled: "Дългите текстове в опциите за избор автоматично ще генерират нови редове, за да се поберат в падащото меню. Премахнете отметката, ако искате текстовете да бъдат изрязани.",
+      effectiveColSpan: "Указва колко колони обхваща този въпрос в оформлението на мрежата."
     },
     signaturepad: {
       signatureWidth: "Задава ширината на показаната област за подпис и полученото изображение.",
@@ -1433,7 +1449,8 @@ export var bgStrings = {
     },
     // survey templates
     survey: {
-      mode: "Изберете между: \"Редактируем\" - дава възможност на респондентите да попълнят анкетата Ви; \"Само за четене\" - забранява редактирането на формуляри."
+      readOnly: "Изберете дали искате да попречите на респондентите да попълват анкетата ви.",
+      progressBarLocation: "Задава местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването."
     },
     matrixdropdowncolumn: {
       name: "ИД на колона, която не се вижда от респондентите.",
@@ -1455,7 +1472,7 @@ export var bgStrings = {
     autoAdvanceEnabled: "Изберете дали искате проучването автоматично да премине към следващата страница, след като респондентът отговори на всички въпроси на текущата страница. Тази функция няма да се прилага, ако последният въпрос на страницата е отворен или позволява множество отговори.",
     autoAdvanceAllowComplete: "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси.",
     showNavigationButtons: "Задава видимостта и местоположението на бутоните за навигация на дадена страница.",
-    showProgressBar: "Задава видимостта и местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването.",
+    navigationButtonsLocation: "Задава местоположението на бутоните за навигация на страница.",
     showPreviewBeforeComplete: "Разрешете страницата за визуализация само с всички въпроси или само с отговор.",
     questionTitleLocation: "Отнася се за всички въпроси в рамките на проучването. Тази настройка може да бъде заместена от правилата за подравняване на заглавията на по-ниските нива: панел, страница или въпрос. Настройката от по-ниско ниво ще замени тези на по-високо ниво.",
     requiredMark: "Символ или поредица от символи, показващи, че е необходим отговор.",
@@ -1479,6 +1496,7 @@ export var bgStrings = {
     rowTitleWidth: "Приема CSS стойности (px, %, in, pt и т.н.).",
     totalText: "Вижда се, само когато поне една колона има общ тип или общ израз.",
     cellErrorLocation: "Задава местоположението на съобщение за грешка по отношение на клетка с невалиден вход. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщение за грешка\".",
+    detailErrorLocation: "Задава местоположението на съобщенията за грешки за въпроси, вложени в подробни раздели. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщенията за грешки\".",
     keyDuplicationError: "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено, респондентът, който се опитва да подаде дублиран запис, ще получи следното съобщение за грешка.",
     totalExpression: "Позволява ви да изчислявате общи стойности на базата на израз. Изразът може да включва основни изчисления ('{q1_id} + {q2_id}'), булеви изрази ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.н.).",
     confirmDelete: "Задейства подкана с молба за потвърждаване на изтриването на реда.",
@@ -1501,7 +1519,8 @@ export var bgStrings = {
       questionTitleWidth: "Задава еднаква ширина за заглавията на въпросите, когато те са подравнени отляво на техните полета за въпроси. Приема CSS стойности (px, %, in, pt и т.н.).",
       questionErrorLocation: "Задава местоположението на съобщение за грешка във връзка с въпроса с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране).",
       questionOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"Оригинал\" по подразбиране). Ефектът от тази настройка се вижда само в раздела Визуализация .",
-      navigationButtonsVisibility: "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
+      showNavigationButtons: "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\".",
+      gridLayoutColumns: "Тази таблица ви позволява да конфигурирате всяка колона на мрежата на страницата. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона."
     },
     timerLocation: "Задава местоположението на таймер на страница.",
     panelsState: "Изберете от: \"Заключени\" - потребителите не могат да разширяват или свиват панели; \"Свиване на всички\" - всички панели започват в срутено състояние; \"Разширяване на всички\" - всички панели започват в разширено състояние; \"Първо разширен\" - само първият панел първоначално се разширява.",
@@ -1516,6 +1535,8 @@ export var bgStrings = {
     useDisplayValuesInDynamicTexts: "При типовете въпроси с единичен и множествен избор всяка опция за избор има ИД и стойност на показване. Когато е избрана, тази настройка показва показвана стойност вместо стойност на ИД в HTML въпроси и динамични заглавия и описания на елементи от проучване.",
     clearIfInvisible: "Изберете дали да изчистите стойностите на въпросите, скрити от условната логика, и кога да го направите. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"При завършване на проучването\" по подразбиране).",
     choicesFromQuestionMode: "Изберете от: \"Всички\" - копира всички опции за избор от избрания въпрос; \"Избрано\" - динамично копира само избраните опции за избор; \"Неизбрани\" - динамично копира само неизбрани опции за избор. Опциите \"Няма\" и \"Други\" се копират по подразбиране, ако са разрешени във въпроса източник.",
+    choiceValuesFromQuestion: "При типовете въпроси с един и множествен избор всяка опция за избор има идентификатор и стойност на показване. Тази настройка определя коя матрична колона или въпрос от панела трябва да предостави идентификаторите.",
+    choiceTextsFromQuestion: "При типовете въпроси с един и множествен избор всяка опция за избор има идентификатор и стойност на показване. Тази настройка указва коя матрична колона или въпрос от панела трябва да предоставя текстовете на дисплея.",
     showOtherItem: "Когато е избрано, потребителите могат да включат допълнително въвеждане в отделно поле за коментари.",
     separateSpecialChoices: "Показва всяка специална опция за избор (\"Няма\", \"Други\", \"Избери всички\") на нов ред, дори когато се използва оформление с няколко колони.",
     path: "Задайте местоположението в набора от данни на услугата, където се намира целевият масив от обекти. Оставете празно, ако URL адресът вече сочи към масива.",
@@ -1588,10 +1609,6 @@ export var bgStrings = {
       overlapEnabled: "Когато е разрешено, горната част на проучването се наслагва върху долната част на заглавката.",
       mobileHeight: "Когато е зададена на 0, височината се изчислява автоматично, за да побере съдържанието на заглавката."
     },
-    panellayoutcolumn: {
-      effectiveWidth: "Приема стойности %.",
-      questionTitleWidth: "Приема стойности px."
-    },
     progressBarInheritWidthFrom: "Опцията \"Същото като контейнер\" автоматично регулира ширината на областта на лентата за напредъка, за да се побере в HTML елемента, в който е поставена анкетата."
   },
   // Properties
@@ -1660,7 +1677,6 @@ export var bgStrings = {
     inputTextAlignment: "Подравняване на входните стойности",
     elements: "Елементи",
     content: "Съдържание",
-    navigationButtonsVisibility: "Видимост на бутоните за навигация",
     navigationTitle: "Навигационно заглавие",
     navigationDescription: "Описание на навигацията",
     longTap: "Дълго докосване",
@@ -2205,7 +2221,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Отнася се за всички въпроси в тази страница. Ако искате да замените тази настройка, определете правила за подравняване на заглавията за отделни въпроси или панели. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Задава местоположението на съобщение за грешка във връзка с въпроса с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка. Опцията \"Наследяване\" прилага настройката за ниво проучване (\"Top\" по подразбиране)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Запазва първоначалния ред на въпросите или ги рандомизира. Опцията \"Наследяване\" прилага настройката на ниво проучване (\"Оригинал\" по подразбиране). Ефектът от тази настройка се вижда само в раздела Визуализация ."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Изберете от: \"Заключени\" - потребителите не могат да разширяват или свиват панели; \"Свиване на всички\" - всички панели започват в срутено състояние; \"Разширяване на всички\" - всички панели започват в разширено състояние; \"Първо разширен\" - само първият панел първоначално се разширява."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Въведете име на споделено свойство в масива от обекти, съдържащ URL адресите на изображения или видеофайлове, които искате да покажете в списъка за избор."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Лявата стойност служи като ИД на артикул, използван в условни правила, дясната стойност се показва на респондентите."
@@ -2535,3 +2551,37 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // tabs.surfaceBackground: "Surface Background" => "Повърхностен фон"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Използване на отговорите от последния запис по подразбиране"
 // colors.gray: "Gray" => "Сив"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Подравняване на бутоните за навигация"
+// pv.allQuestions: "Show all questions" => "Покажи всички въпроси"
+// pv.answeredQuestions: "Show answered questions only" => "Показване само на отговори на въпроси"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Задава местоположението на бутоните за навигация на страница."
+// pe.size: "Input field width (in characters)" => "Ширина на полето за въвеждане (в знаци)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Използване на стойности от следната матрична колона или въпрос на панела като идентификатори на избор"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Използване на стойности от следната матрична колона или панелен въпрос като текстове за избор"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "При типовете въпроси с един и множествен избор всяка опция за избор има идентификатор и стойност на показване. Тази настройка определя коя матрична колона или въпрос от панела трябва да предостави идентификаторите."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "При типовете въпроси с един и множествен избор всяка опция за избор има идентификатор и стойност на показване. Тази настройка указва коя матрична колона или въпрос от панела трябва да предоставя текстовете на дисплея."
+// pe.progressBarLocation: "Progress bar alignment" => "Подравняване на лентата за напредъка"
+// progressBarLocation.topbottom: "Top and bottom" => "Отгоре и отдолу"
+// progressBarLocation.aboveheader: "Above the header" => "Над заглавката"
+// progressBarLocation.belowheader: "Below the header" => "Под заглавката"
+// progressBarLocation.off: "Hidden" => "Скрит"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Задава местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването."
+// survey.readOnly: "Make the survey read-only" => "Направете проучването само за четене"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Изберете дали искате да попречите на респондентите да попълват анкетата ви."
+// paneldynamic.showNumber: "Number the panel" => "Номерирайте панела"
+// question.showNumber: "Number this question" => "Номерирайте този въпрос"
+// pe.previewMode: "Preview mode" => "Режим на визуализация"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Разрешаване на оформлението на мрежата"
+// pe.maskSettings: "Mask settings" => "Настройки на маската"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Подравняване на съобщението за грешка при разгъване на реда"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Задава местоположението на съобщенията за грешки за въпроси, вложени в подробни раздели. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщенията за грешки\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Колони за оформление на мрежата"
+// pe.startPageTitlePlaceholder: "Start Page" => "Начална страница"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Ефективна ширина, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Ширина на заглавието на въпроса, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Все още нямате графи за оформление"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Указва колко колони обхваща този панел в оформлението на мрежата."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Тази таблица ви позволява да конфигурирате всяка колона на мрежата в панела. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator ви позволява ръчно да регулирате вградените ширини на елементите на формуляра, за да контролирате оформлението. Ако това не доведе до желания резултат, можете да активирате оформлението на мрежата, което структурира елементите на формата с помощта на система, базирана на колони. За да конфигурирате колони за оформление, изберете страница или панел и използвайте таблицата \"Настройки на въпроса\" → \"Колони на мрежата\". За да регулирате колко колони обхваща даден въпрос, изберете го и задайте желаната стойност в полето \"Оформление\" → \"Обхват на колоната\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Указва колко колони обхваща този въпрос в оформлението на мрежата."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Тази таблица ви позволява да конфигурирате всяка колона на мрежата на страницата. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона."

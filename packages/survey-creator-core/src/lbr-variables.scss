@@ -1,20 +1,16 @@
 $lbr-size-unit: var(--lbr-size-unit, 8px);
 $lbr-spacing-unit: var(--lbr-spacing-unit, 8px);
 $lbr-corner-radius-unit: var(--lbr-corner-radius-unit, 8px);
-$lbr-stroke-unit: var(--lbr-stroke-unit, 1px);
+$lbr-stroke-unit: Max(var(--lbr-stroke-unit, 1px), 1px);
 $lbr-font-unit: var(--lbr-font-unit, 8px);
 $lbr-line-height-unit: var(--lbr-line-height-unit, 8px);
-$-font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family)));
-$-base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
+$-font-family: var(--lbr-font-family, var(--sjs-font-family, var(--font-family)));
 
 @mixin lbrDefaultFont {
-  --thm-default-font-size: var(--sjs-font-size, calc(2 * #{$-base-unit}));
-  --thm-default-line-height: calc(1.5 * var(--thm-default-font-size));
-
   font-family: $-font-family;
-  font-size: var(--lbr-font-default-size, var(--thm-default-font-size, 16px));
+  font-size: var(--lbr-font-default-size, var(--lbr-font-size-x2));
   font-style: normal;
-  line-height: var(--lbr-font-default-line-height, var(--thm-default-line-height, 24px));
+  line-height: var(--lbr-font-default-line-height, var(--lbr-line-height-x3));
 }
 
 @mixin lbrDefaultBoldFont {
@@ -23,16 +19,26 @@ $-base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin lbrSmallFont {
-  --thm-small-line-height: var(--sjs-font-size, calc(2 * #{$-base-unit}));
-  --thm-small-font-size: calc(0.75 * var(--thm-small-line-height));
-
   font-family: $-font-family;
-  font-size: var(--lbr-font-small-size, var(--thm-small-font-size, 12px));
+  font-size: var(--lbr-font-small-size, var(--lbr-font-size-x150));
   font-style: normal;
-  line-height: var(--lbr-font-small-line-height, var(--thm-small-line-height, 16px));
+  line-height: var(--lbr-font-small-line-height, var(--lbr-line-height-x2));
 }
 
 @mixin lbrSmallBoldFont {
   @include lbrSmallFont;
   font-weight: 600;
+}
+
+@mixin lbrLargeFont {
+  font-family: $-font-family;
+  font-size: var(--lbr-font-large-size, var(--lbr-font-size-x4));
+  line-height: var(--lbr-font-large-line-height, var(--lbr-line-height-x5));
+  font-style: normal;
+  font-weight: 400;
+}
+
+@mixin lbrLargeBoldFont {
+  @include lbrLargeFont;
+  font-weight: 700;
 }

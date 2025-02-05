@@ -22,7 +22,7 @@ export const roStrings = {
     theme: "Teme",
     translation: "Traduceri",
     designer: "Designer",
-    editor: "Editor JSON",
+    json: "Editor JSON",
     logic: "Logică"
   },
   // Question types
@@ -308,6 +308,10 @@ export const roStrings = {
       maxWidth: "Lățimea maximă a panoului",
       showNumber: "Numerotați acest panou"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Lățimea efectivă, %",
+      questionTitleWidth: "Lățimea titlului întrebării, px"
+    },
     paneldynamic: {
       name: "Numele panoului",
       title: "Titlul panoului",
@@ -327,15 +331,13 @@ export const roStrings = {
       templateTabTitle: "Model de titlu a filei",
       tabTitlePlaceholder: "Locaș pentru titlul filei",
       templateVisibleIf: "Fă un panou individual vizibil dacă",
-      hideNumber: "Ascunde numărul panoului",
+      showNumber: "Numerotați panoul",
       titleLocation: "Alinierea titlului panoului",
       descriptionLocation: "Alinierea descrierii panoului",
       templateQuestionTitleLocation: "Alinierea titlului întrebării",
       templateErrorLocation: "Alinierea mesajului de eroare",
       newPanelPosition: "Locația noului panou",
       showRangeInProgress: "Afișați bara de progres",
-      showProgressBar: "Afișați bara de progres",
-      progressBarLocation: "Alinierea barei de progres",
       keyName: "Prevenirea răspunsurilor duplicate în următoarea întrebare"
     },
     question: {
@@ -346,7 +348,7 @@ export const roStrings = {
       requiredIf: "Fă întrebarea obligatorie dacă",
       page: "Mută întrebarea la pagina",
       state: "Starea de colaps a casetei întrebării",
-      hideNumber: "Ascunde numărul întrebării",
+      showNumber: "Numerotați această întrebare",
       titleLocation: "Alinierea titlului întrebării",
       descriptionLocation: "Alinierea descrierii întrebării",
       errorLocation: "Alinierea mesajului de eroare",
@@ -388,7 +390,8 @@ export const roStrings = {
     // survey templates
     survey: {
       title: "Titlul chestionarului",
-      description: "Descrierea chestionarului"
+      description: "Descrierea chestionarului",
+      readOnly: "Faceți chestionarul doar în citire"
     },
     page: {
       name: "Numele paginii",
@@ -506,6 +509,7 @@ export const roStrings = {
     listIsEmpty: "Nu aveți încă niciun element",
     "listIsEmpty@choices": "Nu aveți încă nicio alegere",
     "listIsEmpty@columns": "Nu aveți încă nicio coloană",
+    "listIsEmpty@gridLayoutColumns": "Nu aveți încă coloane de aspect",
     "listIsEmpty@rows": "Nu aveți încă niciun rând",
     "listIsEmpty@validators": "Nu aveți încă nicio regulă de validare",
     "listIsEmpty@calculatedValues": "Nu aveți încă nicio variabilă personalizată",
@@ -539,6 +543,7 @@ export const roStrings = {
     titlePlaceholder: "Titlu",
     surveyTitlePlaceholder: "Titlul chestionarului",
     pageTitlePlaceholder: "Pagina {num}",
+    startPageTitlePlaceholder: "Pagina de pornire",
     descriptionPlaceholder: "Descriere",
     surveyDescriptionPlaceholder: "Descriere",
     pageDescriptionPlaceholder: "Descriere",
@@ -611,7 +616,6 @@ export const roStrings = {
     simulator: "Selectați tipul de dispozitiv",
     landscapeOrientation: "Comutați la orientarea peisaj",
     portraitOrientation: "Comutați la orientarea portret",
-    mode: "Modul de afișare a chestionarului",
     clearInvisibleValues: "Ștergeți valorile întrebărilor ascunse",
     cookieName: "Limitează la un singur răspuns",
     partialSendEnabled: "Auto-salvați progresul chestionarului la schimbarea paginii",
@@ -625,12 +629,14 @@ export const roStrings = {
     editText: "Textul butonului „Editează răspunsul”",
     startSurveyText: "Textul butonului „Începe chestionarul”",
     showNavigationButtons: "Afișați/ascundeți butoanele de navigare",
+    navigationButtonsLocation: "Alinierea butoanelor de navigare",
     showPrevButton: "Afișați butonul „Pagina anterioară”",
     firstPageIsStartPage: "Prima pagină este o pagină de început",
     showCompletePage: "Afișați pagina de „Mulțumire”",
     autoAdvanceEnabled: "Trecerea automată la pagina următoare",
     autoAdvanceAllowComplete: "Finalizați chestionarul automat",
     showProgressBar: "Alinierea barei de progres",
+    progressBarLocation: "Alinierea barei de progres",
     questionTitleLocation: "Alinierea titlului întrebării",
     questionTitleWidth: "Lățimea titlului întrebării",
     requiredMark: "Simbol(uri) obligatoriu(e)",
@@ -646,8 +652,8 @@ export const roStrings = {
     renderMode: "Modul de afișare a panoului",
     allowAddPanel: "Permite adăugarea panoului",
     allowRemovePanel: "Permite eliminarea panoului",
-    panelAddText: "Textul butonului „Adaugă panou”",
-    panelRemoveText: "Textul butonului „Elimină panou”",
+    addPanelText: "Textul butonului „Adaugă panou”",
+    removePanelText: "Textul butonului „Elimină panou”",
     isSinglePage: "Afișează toate elementele pe o singură pagină",
     html: "Marcaj HTML",
     setValue: "Răspuns",
@@ -721,9 +727,9 @@ export const roStrings = {
     minPanelCount: "Număr minim de panouri",
     maxPanelCount: "Număr maxim de panouri",
     panelsState: "Starea de colaps a panoului intern",
-    panelPrevText: "Textul butonului „Panoul anterior”",
-    panelNextText: "Textul butonului „Panoul următor”",
-    panelRemoveButtonLocation: "Alinierea butonului „Elimină panou”",
+    prevPanelText: "Textul butonului „Panoul anterior”",
+    nextPanelText: "Textul butonului „Panoul următor”",
+    removePanelButtonLocation: "Alinierea butonului „Elimină panou”",
     hideIfRowsEmpty: "Ascunde întrebarea dacă nu are rânduri",
     hideColumnsIfEmpty: "Ascunde coloanele dacă nu sunt rânduri",
     rateValues: "Valori personalizate de evaluare",
@@ -753,6 +759,8 @@ export const roStrings = {
     separateSpecialChoices: "Separă alegerile speciale",
     choicesFromQuestion: "Copiază alegerile din următoarea întrebare",
     choicesFromQuestionMode: "Care opțiuni de alegere să fie copiate",
+    choiceValuesFromQuestion: "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca ID-uri de alegere",
+    choiceTextsFromQuestion: "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca texte de alegere",
     progressBarShowPageTitles: "Afișează titlurile paginilor în bara de progres",
     progressBarShowPageNumbers: "Afișează numerele paginilor în bara de progres",
     showCommentArea: "Adaugă o casetă de comentarii",
@@ -787,6 +795,11 @@ export const roStrings = {
       top: "Deasupra",
       bottom: "Dedesubt"
     },
+    previewMode: "Modul de previzualizare",
+    gridLayoutEnabled: "Activarea aspectului grilei",
+    gridLayoutColumns: "Coloane de aspect grilă",
+    maskSettings: "Setările măștii",
+    detailErrorLocation: "Alinierea mesajelor de eroare de extindere a rândurilor",
     // Creator tabs
     tabs: {
       panel: {
@@ -1104,6 +1117,8 @@ export const roStrings = {
     noPreview: "Fără previzualizare",
     showAllQuestions: "Afișați toate întrebările",
     showAnsweredQuestions: "Afișați doar întrebările la care s-a răspuns",
+    allQuestions: "Afișează toate întrebările",
+    answeredQuestions: "Afișați numai întrebările la care au răspuns",
     pages: "Pagini completate",
     questions: "Întrebări cu răspuns",
     requiredQuestions: "Întrebări obligatorii cu răspuns",
@@ -1199,16 +1214,13 @@ export const roStrings = {
     questionOrder: {
       initial: "Original"
     },
-    showProgressBar: {
-      off: "Ascuns",
-      topbottom: "Deasupra și dedesubt",
-      aboveheader: "Deasupra antetului",
-      belowheader: "Sub antet"
-    },
     progressBarLocation: {
       top: "Culme",
       bottom: "Fund",
-      topBottom: "Sus și jos"
+      topbottom: "Sus și jos",
+      aboveheader: "Deasupra antetului",
+      belowheader: "Sub antet",
+      off: "Ascuns"
     },
     sum: "Sumă",
     count: "Numără",
@@ -1353,7 +1365,9 @@ export const roStrings = {
       startWithNewLine: "Deselectați pentru a afișa panoul pe un rând cu întrebarea sau panoul anterior. Setarea nu se aplică dacă panoul este primul element din formular.",
       state: "Alegeți dintre: „Extins” - panoul este afișat complet și poate fi colapsat; „Colapsat” - panoul afișează doar titlul și descrierea și poate fi extins; „Blocat” - panoul este afișat complet și nu poate fi colapsat.",
       width: "Setează lățimea panoului în proporție cu alte elemente ale chestionarului de pe același rând. Acceptă valori CSS (px, %, in, pt etc.).",
-      showQuestionNumbers: "Atribuie numere întrebărilor imbricate în acest panou."
+      showQuestionNumbers: "Atribuie numere întrebărilor imbricate în acest panou.",
+      effectiveColSpan: "Specifică câte coloane se întinde acest panou în aspectul grilei.",
+      gridLayoutColumns: "Acest tabel vă permite să configurați fiecare coloană de grilă din panou. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."
     },
     paneldynamic: {
       name: "Un ID al panoului care nu este vizibil pentru respondenți.",
@@ -1384,6 +1398,7 @@ export const roStrings = {
     resetValueIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină când o intrare a respondentului este resetată la valoarea pe baza „Expresiei valorii implicite” sau „Expresiei de setare a valorii” sau la valoarea „Răspuns implicit” (dacă oricare este setată).",
     setValueIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină când să rulați „Expresia de setare a valorii” și să atribuiți dinamic valoarea rezultată ca răspuns.",
     setValueExpression: "Specificați o expresie care definește valoarea ce trebuie setată atunci când condițiile din regula „Setați valoarea dacă” sunt îndeplinite. Expresia poate include calcule de bază - `{q1_id} + {q2_id}`, expresii booleene, cum ar fi `{age} > 60`, și funcții: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. Valoarea determinată de această expresie poate fi suprascrisă de o intrare manuală a respondentului.",
+    gridLayoutEnabled: "Survey Creator vă permite să ajustați manual lățimile în linie ale elementelor de formular pentru a controla aspectul. Dacă acest lucru nu produce rezultatul dorit, puteți activa aspectul grilei, care structuri formează elemente folosind un sistem bazat pe coloane. Pentru a configura coloanele de aspect, selectați o pagină sau un panou și utilizați tabelul \"Setări întrebări\" → \"Coloane grilă\". Pentru a ajusta câte coloane se întinde pe o întrebare, selectați-o și setați valoarea dorită în câmpul \"Aspect\" → \"Spania coloanelor\".",
     question: {
       name: "Un ID al întrebării care nu este vizibil pentru respondenți.",
       description: "Introduceți un subtitlu pentru întrebare.",
@@ -1404,7 +1419,8 @@ export const roStrings = {
       textUpdateMode: "Alegeți dintre: „La pierderea focalizării” - valoarea este actualizată când câmpul de intrare pierde focalizarea; „În timp ce se tastează” - valoarea este actualizată în timp real, pe măsură ce utilizatorii tastează. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („La pierderea focalizării” implicit).",
       url: "Puteți utiliza orice serviciu web ca sursă de date pentru întrebările cu multiple opțiuni de alegere. Pentru a popula valorile opțiunilor, introduceți URL-ul serviciului care furnizează datele.",
       searchMode: "O operație de comparație utilizată pentru a filtra lista derulantă.",
-      textWrapEnabled: "Textele lungi din opțiunile de alegere vor genera automat întreruperi de linie pentru a se încadra în meniul derulant. Deselectați dacă doriți ca textele să fie tăiate."
+      textWrapEnabled: "Textele lungi din opțiunile de alegere vor genera automat întreruperi de linie pentru a se încadra în meniul derulant. Deselectați dacă doriți ca textele să fie tăiate.",
+      effectiveColSpan: "Specifică câte coloane se întinde această întrebare în aspectul grilei."
     },
     signaturepad: {
       signatureWidth: "Setează lățimea zonei de semnătură afișate și a imaginii rezultate.",
@@ -1433,7 +1449,8 @@ export const roStrings = {
     },
     // survey templates
     survey: {
-      mode: "Alegeți între: „Editabil” - permite respondenților să completeze chestionarul dvs.; „Doar citire” - dezactivează editarea formularului."
+      readOnly: "Selectați dacă doriți să împiedicați respondenții să completeze chestionarul.",
+      progressBarLocation: "Setează locația barei de progres. Valoarea \"Auto\" afișează bara de progres deasupra sau dedesubtul antetului sondajului."
     },
     matrixdropdowncolumn: {
       name: "Un ID al coloanei care nu este vizibil pentru respondenți.",
@@ -1455,7 +1472,7 @@ export const roStrings = {
     autoAdvanceEnabled: "Selectați dacă doriți ca chestionarul să avanseze automat la pagina următoare după ce un respondent a răspuns la toate întrebările de pe pagina curentă. Această funcție nu se va aplica dacă ultima întrebare de pe pagină este deschisă sau permite răspunsuri multiple.",
     autoAdvanceAllowComplete: "Selectați dacă doriți ca chestionarul să se completeze automat după ce un respondent răspunde la toate întrebările.",
     showNavigationButtons: "Setează vizibilitatea și locația butoanelor de navigare pe o pagină.",
-    showProgressBar: "Setează vizibilitatea și locația unei bare de progres. Valoarea „Auto” afișează bara de progres deasupra sau dedesubtul antetului chestionarului.",
+    navigationButtonsLocation: "Setează locația butoanelor de navigare dintr-o pagină.",
     showPreviewBeforeComplete: "Activează pagina de previzualizare cu toate sau doar întrebările la care s-a răspuns.",
     questionTitleLocation: "Se aplică tuturor întrebărilor din chestionar. Această setare poate fi înlocuită de regulile de aliniere a titlului la niveluri inferioare: panou, pagină sau întrebare. O setare de nivel inferior va înlocui setările de nivel superior.",
     requiredMark: "Un simbol sau o secvență de simboluri care indică faptul că este necesar un răspuns.",
@@ -1479,6 +1496,7 @@ export const roStrings = {
     rowTitleWidth: "Acceptă valori CSS (px, %, in, pt etc.).",
     totalText: "Vizibil numai dacă cel puțin o coloană afișează valorile totale setate cu „Metoda de agregare” sau „Expresia valorii totale”.",
     cellErrorLocation: "Setează locația unui mesaj de eroare în raport cu o celulă cu intrare invalidă. Opțiunea „Moștenește” aplică setarea din proprietatea „Alinierea mesajului de eroare”.",
+    detailErrorLocation: "Setează locația mesajelor de eroare pentru întrebările imbricate în secțiunile de detaliu. Opțiunea \"Moștenire\" aplică setarea din proprietatea \"Alinierea mesajului de eroare\".",
     keyDuplicationError: "Când proprietatea „Împiedică răspunsurile duplicate” este activată, un respondent care încearcă să trimită o intrare duplicat va primi următorul mesaj de eroare.",
     totalExpression: "Vă permite să calculați valorile totale pe baza unei expresii. Expresia poate include calcule de bază (`{q1_id} + {q2_id}`), expresii booleene (`{age} > 60`) și funcții (`iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
     confirmDelete: "Declanșează un prompt care solicită confirmarea ștergerii rândului.",
@@ -1501,7 +1519,8 @@ export const roStrings = {
       questionTitleWidth: "Setează lățimea titlurilor întrebărilor atunci când sunt aliniate la stânga casetelor de întrebări. Acceptă valori CSS (px, %, in, pt etc.).",
       questionErrorLocation: "Setează locația unui mesaj de eroare în raport cu întrebarea cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar.",
       questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („Original” implicit). Efectul acestei setări este vizibil doar în fila Previzualizare.",
-      navigationButtonsVisibility: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”."
+      showNavigationButtons: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”.",
+      gridLayoutColumns: "Acest tabel vă permite să configurați fiecare coloană de grilă din pagină. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."
     },
     timerLocation: "Setează locația unui cronometru pe o pagină.",
     panelsState: "Alegeți dintre: „Blocat” - utilizatorii nu pot extinde sau colapsa panouri; „Colapsați toate” - toate panourile încep într-o stare colapsată; „Extindeți toate” - toate panourile încep într-o stare extinsă; „Primul extins” - doar primul panou este extins inițial. Se aplică dacă „Modul de afișare a panoului” este setat la „Listă” și proprietatea „Șablon titlu panou” este specificată.",
@@ -1516,6 +1535,8 @@ export const roStrings = {
     useDisplayValuesInDynamicTexts: "În tipurile de întrebări de selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare de afișare. Când este selectată, această setare afișează o valoare de afișare în loc de o valoare ID în întrebările HTML și în titlurile și descrierile dinamice ale elementelor chestionarului.",
     clearIfInvisible: "Alegeți dacă doriți sau nu să ștergeți valorile întrebărilor ascunse prin logica condițională și când să o faceți. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („La finalizarea chestionarului” implicit).",
     choicesFromQuestionMode: "Alegeți dintre: „Toate” - copiază toate opțiunile de alegere din întrebarea selectată; „Selectate” - copiază dinamic doar opțiunile de alegere selectate; „Neselectate” - copiază dinamic doar opțiunile de alegere neselectate. Opțiunile „Niciuna” și „Altele” sunt copiate implicit dacă sunt activate în întrebarea sursă.",
+    choiceValuesFromQuestion: "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze ID-urile.",
+    choiceTextsFromQuestion: "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze textele afișate.",
     showOtherItem: "Când este selectat, utilizatorii pot include intrare suplimentară într-o casetă de comentarii separată.",
     separateSpecialChoices: "Afișează fiecare opțiune de alegere specială („Niciuna”, „Altele”, „Selectează toate”) pe un rând nou, chiar și atunci când utilizați un layout pe mai multe coloane.",
     path: "Specificați locația din cadrul setului de date al serviciului unde se află array-ul de obiecte țintă. Lăsați gol dacă URL-ul indică deja către array.",
@@ -1588,10 +1609,6 @@ export const roStrings = {
       overlapEnabled: "Când este activată, partea de sus a chestionarului se suprapune cu partea de jos a antetului.",
       mobileHeight: "Când este setată la 0, înălțimea este calculată automat pentru a găzdui conținutul antetului."
     },
-    panellayoutcolumn: {
-      effectiveWidth: "Acceptă valori în %.",
-      questionTitleWidth: "Acceptă valori în px."
-    },
     progressBarInheritWidthFrom: "Opțiunea \"La fel ca containerul\" ajustează automat lățimea zonei barei de progres pentru a se potrivi cu elementul HTML în care este plasat sondajul."
   },
   // Properties
@@ -1660,7 +1677,6 @@ export const roStrings = {
     inputTextAlignment: "Alinierea valorilor de intrare",
     elements: "Elemente",
     content: "Conținut",
-    navigationButtonsVisibility: "Arată/ascunde butoanele de navigare",
     navigationTitle: "Titlul navigării",
     navigationDescription: "Descrierea navigării",
     longTap: "Apăsare lungă",
@@ -1913,3 +1929,36 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // tabs.surfaceBackground: "Surface Background" => "Fundal de suprafață"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Utilizați răspunsurile de la ultima intrare ca implicit"
 // colors.gray: "Gray" => "Gri"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Alinierea butoanelor de navigare"
+// pv.allQuestions: "Show all questions" => "Afișează toate întrebările"
+// pv.answeredQuestions: "Show answered questions only" => "Afișați numai întrebările la care au răspuns"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Setează locația butoanelor de navigare dintr-o pagină."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca ID-uri de alegere"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca texte de alegere"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze ID-urile."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze textele afișate."
+// pe.progressBarLocation: "Progress bar alignment" => "Alinierea barei de progres"
+// progressBarLocation.topbottom: "Top and bottom" => "Sus și jos"
+// progressBarLocation.aboveheader: "Above the header" => "Deasupra antetului"
+// progressBarLocation.belowheader: "Below the header" => "Sub antet"
+// progressBarLocation.off: "Hidden" => "Ascuns"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Setează locația barei de progres. Valoarea \"Auto\" afișează bara de progres deasupra sau dedesubtul antetului sondajului."
+// survey.readOnly: "Make the survey read-only" => "Faceți chestionarul doar în citire"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Selectați dacă doriți să împiedicați respondenții să completeze chestionarul."
+// paneldynamic.showNumber: "Number the panel" => "Numerotați panoul"
+// question.showNumber: "Number this question" => "Numerotați această întrebare"
+// pe.previewMode: "Preview mode" => "Modul de previzualizare"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Activarea aspectului grilei"
+// pe.maskSettings: "Mask settings" => "Setările măștii"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Alinierea mesajelor de eroare de extindere a rândurilor"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Setează locația mesajelor de eroare pentru întrebările imbricate în secțiunile de detaliu. Opțiunea \"Moștenire\" aplică setarea din proprietatea \"Alinierea mesajului de eroare\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Coloane de aspect grilă"
+// pe.startPageTitlePlaceholder: "Start Page" => "Pagina de pornire"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Lățimea efectivă, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Lățimea titlului întrebării, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Nu aveți încă coloane de aspect"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Specifică câte coloane se întinde acest panou în aspectul grilei."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Acest tabel vă permite să configurați fiecare coloană de grilă din panou. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator vă permite să ajustați manual lățimile în linie ale elementelor de formular pentru a controla aspectul. Dacă acest lucru nu produce rezultatul dorit, puteți activa aspectul grilei, care structuri formează elemente folosind un sistem bazat pe coloane. Pentru a configura coloanele de aspect, selectați o pagină sau un panou și utilizați tabelul \"Setări întrebări\" → \"Coloane grilă\". Pentru a ajusta câte coloane se întinde pe o întrebare, selectați-o și setați valoarea dorită în câmpul \"Aspect\" → \"Spania coloanelor\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Specifică câte coloane se întinde această întrebare în aspectul grilei."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Acest tabel vă permite să configurați fiecare coloană de grilă din pagină. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."

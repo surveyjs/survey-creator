@@ -3,7 +3,7 @@
 svc-tab-json-editor-textarea {
   width: 100%;
   height: 100%;
-  background: $background-dim;
+  background: var(--ctr-code-viewer-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 .svc-json-editor-tab__content {
@@ -13,14 +13,14 @@ svc-tab-json-editor-textarea {
 
 .svc-json-editor-tab__content-area {
   @include ctrCodeFont;
-  color: var(--ctr-code-viewer-text-color, #505050);
-  background: var(--ctr-code-viewer-background-color, $background);
+  color: var(--ctr-code-viewer-text-color, var(--sjs-code-gray-300, #505050ff));
+  background: var(--ctr-code-viewer-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   width: 100%;
   height: 100%;
   border: none;
   outline: none;
 }
-
+/*
 .svc-json-editor-tab__errros_button {
   position: absolute;
   top: 0%;
@@ -41,8 +41,8 @@ svc-tab-json-editor-textarea {
   padding: $base-unit;
 
   background-color: $background;
-  background-image: linear-gradient(to bottom, transparent, $border-inside);
-  border: 1px solid $border;
+  background-image: linear-gradient(to bottom, transparent, var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16))));
+  border: 1px solid var(--sjs-border-default, var(--border, #d6d6d6));
   border-radius: 1px;
 
   color: $foreground;
@@ -52,7 +52,7 @@ svc-tab-json-editor-textarea {
     white-space: pre-line;
 
     >b {
-      color: $red;
+      color: var(--sjs-semantic-red-background-500, #e50a3eff);
     }
   }
 }
@@ -60,33 +60,40 @@ svc-tab-json-editor-textarea {
 .svc-json-editor-tab__content-errors:empty {
   display: none;
 }
+*/
 
 .svc-json-errors {
+  --thm-json-error-row: calc(
+    var(--ctr-code-viewer-code-error-row-border-width-top, var(--sjs-stroke-x1)) +
+      var(--ctr-code-viewer-code-error-row-padding-top, var(--sjs-spacing-x1)) +
+      var(--ctr-code-viewer-code-error-row-padding-bottom, var(--sjs-spacing-x1)) +
+      var(--ctr-code-viewer-code-error-row-fix-button-icon-height, var(--sjs-font-size-x3))
+  );
   display: flex;
-  max-height: calc(#{$base-unit} * 25 + 5px);
+  max-height: calc(5 * var(--thm-json-error-row));
   overflow-y: auto;
   flex-direction: column;
   padding: 0;
   margin: 0;
-  border-top: 1px solid $border-inside;
 }
 
 .svc-json-errors__item {
   pointer-events: none;
   display: block;
+  border-top: var(--ctr-code-viewer-code-error-row-border-width-top, var(--sjs-stroke-x1)) solid
+    var(--ctr-code-viewer-code-error-row-border-color, var(--sjs-border-25, #d4d4d4ff));
+  background: var(--ctr-code-viewer-code-error-row-background-color, var(--sjs-semantic-red-background-10, #e50a3e1a));
 }
 
 .svc-json-error {
   @include ctrDefaultFont;
-  padding: calcSize(1) calcSize(1) calcSize(1) calcSize(2);
-  background: $red-light;
+  padding: var(--ctr-code-viewer-code-error-row-padding-top, var(--sjs-spacing-x1))
+    var(--ctr-code-viewer-code-error-row-padding-right, var(--sjs-spacing-x1))
+    var(--ctr-code-viewer-code-error-row-padding-bottom, var(--sjs-spacing-x1))
+    var(--ctr-code-viewer-code-error-row-padding-left, var(--sjs-spacing-x2));
   display: flex;
   align-items: center;
-  gap: calcSize(2);
-}
-
-.svc-json-errors__item:not(:first-of-type) .svc-json-error {
-  border-top: 1px solid $border-inside;
+  gap: var(--ctr-code-viewer-code-error-row-gap, var(--sjs-spacing-x2));
 }
 
 .svc-json-error .sv-string-viewer {
@@ -99,14 +106,16 @@ svc-tab-json-editor-textarea {
 }
 
 .svc-json-error__icon {
-  fill: $red;
-  width: var(--ctr-code-viewer-code-error-row-icon-width, calcSize(2));
-  height: var(--ctr-code-viewer-code-error-row-icon-height, calcSize(2));
+  fill: var(--sjs-semantic-red-background-500, #e50a3eff);
+  width: var(--ctr-code-viewer-code-error-row-icon-width, var(--sjs-font-size-x2));
+  height: var(--ctr-code-viewer-code-error-row-icon-height, var(--sjs-font-size-x2));
+  box-sizing: border-box;
+  display: block;
 }
 
 .svc-json-error__container {
   display: flex;
-  gap: calcSize(1);
+  gap: var(--ctr-code-viewer-code-error-row-gap, var(--sjs-spacing-x2));
 }
 
 .svc-json-error__title {
@@ -118,25 +127,39 @@ svc-tab-json-editor-textarea {
   flex-grow: 0;
   flex-shrink: 0;
   pointer-events: all;
-  padding: 0 calcSize(1);
-  width: calcSize(5);
-  height: calcSize(3);
-  background: $background;
   border: none;
-  border-radius: calcSize(0.5);
-  box-shadow: $shadow-small;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--ctr-code-viewer-code-error-row-fix-button-padding-top, 0px)
+    var(--ctr-code-viewer-code-error-row-fix-button-padding-right, var(--sjs-spacing-x1))
+    var(--ctr-code-viewer-code-error-row-fix-button-padding-bottom, 0px)
+    var(--ctr-code-viewer-code-error-row-fix-button-padding-left, var(--sjs-spacing-x1));
+
+  border-radius: var(--ctr-code-viewer-code-error-row-fix-button-corner-radius, var(--sjs-corner-radius-x05));
+  background: var(
+    --ctr-code-viewer-code-error-row-fix-button-background-color,
+    var(--sjs-layer-1-background-500, #ffffffff)
+  );
+  box-shadow: var(--ctr-code-viewer-code-error-row-fix-button-shadow-offset-x, 0px)
+    var(--ctr-code-viewer-code-error-row-fix-button-shadow-offset-y, 1px)
+    var(--ctr-code-viewer-code-error-row-fix-button-shadow-blur, 2px)
+    var(--ctr-code-viewer-code-error-row-fix-button-shadow-spread, 0px)
+    var(--ctr-code-viewer-code-error-row-fix-button-shadow-color, var(--sjs-special-shadow, #00000040));
 
   svg {
-    fill: $foreground-dim-light;
-    width: calcSize(3);
-    height: calcSize(3);
-    opacity: 0.75;
+    fill: var(--ctr-code-viewer-code-error-row-fix-button-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
+    width: var(--ctr-code-viewer-code-error-row-fix-button-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-code-viewer-code-error-row-fix-button-icon-height, var(--sjs-font-size-x3));
   }
 }
 
 .svc-json-error__fix-button:hover {
   svg {
-    fill: $primary;
+    fill: var(
+      --ctr-code-viewer-code-error-row-fix-button-icon-color-hovered,
+      var(--sjs-primary-background-500, #19b394ff)
+    );
   }
 }

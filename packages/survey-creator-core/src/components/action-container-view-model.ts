@@ -17,6 +17,7 @@ import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } fr
 import { listComponentCss } from "./list-theme";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
+  public alwaysShrink = false;
   private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
     return (item.innerItem.location == "start" && shrinkTypeConverterAction || item.innerItem.location != "start");
   }
@@ -49,28 +50,29 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
     this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
 
-  public fit(dimension: number, dotsItemSize: number) {
-    if (dimension <= 0) return;
+  public fit(options: { availableSpace: number, gap?: number }) {
+    if (options.availableSpace <= 0) return;
 
     this.dotsItem.visible = false;
     const items = this.visibleActions;
 
-    if (dimension >= items.reduce((sum, i) => sum += i.maxDimension, 0)) {
-      items.forEach(i => i.mode = "large");
-      return;
-    }
+    if (!this.alwaysShrink) {
+      if (options.availableSpace >= items.reduce((sum, i) => sum += i.maxDimension, 0)) {
+        items.forEach(i => i.mode = "large");
+        return;
+      }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false), 0)) {
-      this.setModeForActions(false);
-      return;
-    }
+      if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, false), 0)) {
+        this.setModeForActions(false);
+        return;
+      }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, ["convertInputType"]), 0)) {
-      this.setModeForActions(false, ["convertInputType"]);
-      return;
+      if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, ["convertInputType"]), 0)) {
+        this.setModeForActions(false, ["convertInputType"]);
+        return;
+      }
     }
-
-    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, true), 0)) {
+    if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, true), 0)) {
       this.setModeForActions(true);
       return;
     }
@@ -93,7 +95,8 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public static AdornerValueName = "__sjs_creator_adorner";
-  public actionContainer: ActionContainer;
+  public actionContainer: SurveyElementActionContainer;
+  public topActionContainer: ActionContainer;
   protected expandCollapseAction: IAction;
   @property({ defaultValue: true }) allowDragging: boolean;
   @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
@@ -227,9 +230,21 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected createActionContainers() {
     this.actionContainer = this.createActionContainer();
+    this.topActionContainer = new ActionContainer();
+    this.topActionContainer.sizeMode = "small";
+    if (this.creator.expandCollapseButtonVisibility != "never") {
+      this.topActionContainer.setItems([this.expandCollapseAction]);
+      this.topActionContainer.cssClasses = {
+        root: "svc-survey-element-top-toolbar sv-action-bar",
+        item: "svc-survey-element-top-toolbar__item",
+        itemIcon: "svc-survey-element-toolbar-item__icon",
+        itemTitle: "svc-survey-element-toolbar-item__title",
+        itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
+      };
+    }
   }
 
-  protected createActionContainer(): ActionContainer {
+  protected createActionContainer(): SurveyElementActionContainer {
     const actionContainer = new SurveyElementActionContainer();
     actionContainer.dotsItem.popupModel.horizontalPosition = "center";
     return actionContainer;
@@ -290,7 +305,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.createActionContainers();
     this.attachToUI(surveyElement);
   }
-
+  private creatorOnLocaleChanged: (sender: Base, options: any) => void = (_, options) => {
+    if(this.surveyElement) {
+      this.updateActionsContainer(this.surveyElement);
+      this.updateActionsProperties();
+    }
+  };
   public static GetAdorner<V = SurveyElementAdornerBase>(surveyElement: SurveyElement): V {
     return surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) as V;
   }
@@ -349,6 +369,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
     if (this.surveyElement != surveyElement) {
       this.setSurveyElement(surveyElement);
+      this.creator.onLocaleChanded.add(this.creatorOnLocaleChanged);
       this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
       this.creator.expandCollapseManager.add(this);
     }
@@ -362,6 +383,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.rootElement = undefined;
     this.detachOnlyMyElement();
     this.surveyElement = undefined;
+    this.creator.onLocaleChanded.remove(this.creatorOnLocaleChanged);
     this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
     this.creator.expandCollapseManager.remove(this);
   }
@@ -384,6 +406,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     return {
       id: "collapse",
       css: "sv-action-bar-item--collapse",
+      locTooltipName: new ComputedUpdater<string>(() => this.collapsed ? "ed.expandTooltip" : "ed.collapseTooltip") as any,
       iconName: new ComputedUpdater<string>(() => this.collapsed ? expandIcon : collapseIcon) as any,
       iconSize: "auto",
       action: () => {
@@ -440,7 +463,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     action.visible = isVisible;
   }
   public getActionById(id: string): Action {
-    return this.actionContainer.getActionById(id);
+    return this.actionContainer.getActionById(id) || this.topActionContainer.getActionById(id);
   }
   protected buildActions(items: Array<Action>) {
     items.push(

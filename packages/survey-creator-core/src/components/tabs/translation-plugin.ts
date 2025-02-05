@@ -15,7 +15,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private importCsvAction: Action;
   private exportCsvAction: Action;
   private sidebarTab: SidebarPageModel;
-  private _showOneCategoryInPropertyGrid: boolean = false;
+  private _showOneCategoryInPropertyGrid: boolean = true;
   private tabControlModel: TabControlModel;
 
   public model: Translation;
@@ -51,7 +51,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.updateSettingsSurvey();
     this.model.readOnly = this.creator.readOnly;
     this.model.translationStringVisibilityCallback = (obj: Base, propertyName: string, visible: boolean) => {
-      const options = { obj: obj, propertyName: propertyName, visible: visible };
+      const options = { obj: obj, element: obj, propertyName: propertyName, visible: visible };
       !this.creator.onTranslationStringVisibility.isEmpty && this.creator.onTranslationStringVisibility.fire(this.creator, options);
       return options.visible;
     };
@@ -161,13 +161,14 @@ export class TabTranslationPlugin implements ICreatorPlugin {
         pressed: false,
         action: () => {
           this.creator.sidebar.expandSidebar();
-          this.creator.sidebar.header.subTitle = languagesString;
+          this.creator.sidebar.header.title = languagesString;
           action.active = true;
         }
       });
 
       this.tabControlModel.topToolbar.setItems([action]);
-      this.creator.sidebar.header.subTitle = languagesString;
+      this.creator.sidebar.header.title = languagesString;
+      this.creator.sidebar.header.subTitle = this.sidebarTab.caption;
     }
   }
   private createMergeLocaleWithDefaultActionTitleUpdater(): any {

@@ -22,7 +22,7 @@ export var turkishStrings = {
     theme: "Temalar",
     translation: "Çeviri",
     designer: "Anket Tasarımı",
-    editor: "JSON Editor",
+    json: "JSON Editor",
     logic: "Mantıksal Anket"
   },
   // Question types
@@ -308,6 +308,10 @@ export var turkishStrings = {
       maxWidth: "Maksimum panel genişliği",
       showNumber: "Bu paneli numaralandırın"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Etkili genişlik, %",
+      questionTitleWidth: "Soru başlığı genişliği, px"
+    },
     paneldynamic: {
       name: "Panel adı",
       title: "Panel başlığı",
@@ -327,15 +331,13 @@ export var turkishStrings = {
       templateTabTitle: "Sekme başlığı deseni",
       tabTitlePlaceholder: "Sekme başlığı yer tutucusu",
       templateVisibleIf: "Aşağıdaki durumlarda tek bir paneli görünür hale getirme",
-      hideNumber: "Panel numarasını gizleme",
+      showNumber: "Paneli numaralandırma",
       titleLocation: "Panel başlığı hizalaması",
       descriptionLocation: "Panel açıklaması hizalaması",
       templateQuestionTitleLocation: "Soru başlığı hizalaması",
       templateErrorLocation: "Hata iletisi hizalaması",
       newPanelPosition: "Yeni panel konumu",
       showRangeInProgress: "İlerleme çubuğunu gösterme",
-      showProgressBar: "İlerleme çubuğunu gösterme",
-      progressBarLocation: "İlerleme çubuğu hizalaması",
       keyName: "Aşağıdaki soruda yinelenen yanıtları önleyin"
     },
     question: {
@@ -346,7 +348,7 @@ export var turkishStrings = {
       requiredIf: "Aşağıdaki durumlarda soruyu gerekli hale getirin",
       page: "Ana sayfa",
       state: "Soru kutusu daraltma durumu",
-      hideNumber: "Soru numarasını gizleme",
+      showNumber: "Bu soruyu numaralandırın",
       titleLocation: "Soru başlığı hizalaması",
       descriptionLocation: "Soru açıklaması hizalaması",
       errorLocation: "Hata iletisi hizalaması",
@@ -388,7 +390,8 @@ export var turkishStrings = {
     // survey templates
     survey: {
       title: "Başlık",
-      description: "Anket açıklaması"
+      description: "Anket açıklaması",
+      readOnly: "Anketi salt okunur hale getirin"
     },
     page: {
       name: "Sayfa adı",
@@ -506,6 +509,7 @@ export var turkishStrings = {
     listIsEmpty: "Yeni eleman ekle",
     "listIsEmpty@choices": "Henüz seçenek eklenmedi",
     "listIsEmpty@columns": "Henüz sütununuz yok",
+    "listIsEmpty@gridLayoutColumns": "Henüz düzen sütunlarına sahip değilsiniz",
     "listIsEmpty@rows": "Henüz satırınız yok",
     "listIsEmpty@validators": "Henüz herhangi bir doğrulama kuralınız yok",
     "listIsEmpty@calculatedValues": "Henüz özelleştirilebilen değişkeniniz yok",
@@ -539,6 +543,7 @@ export var turkishStrings = {
     titlePlaceholder: "Başlık",
     surveyTitlePlaceholder: "Anket başlığı",
     pageTitlePlaceholder: "Sayfa başlığı",
+    startPageTitlePlaceholder: "Başlangıç Sayfası",
     descriptionPlaceholder: "Bir açıklama giriniz",
     surveyDescriptionPlaceholder: "Anket açıklaması giriniz",
     pageDescriptionPlaceholder: "Sayfa açıklaması giriniz",
@@ -611,7 +616,6 @@ export var turkishStrings = {
     simulator: "Cihaz seçin",
     landscapeOrientation: "Yatay",
     portraitOrientation: "Dikey yöne geçme",
-    mode: "Mod (düzenlebilir/düzenlenemez)",
     clearInvisibleValues: "Görünmez değerleri sil",
     cookieName: "Çerez adı (anketi yerel olarak iki kez devre dışı bırakmak için)",
     partialSendEnabled: "Bir sonraki sayfada anket sonuçlarını gönder",
@@ -625,12 +629,14 @@ export var turkishStrings = {
     editText: "Düğme metnini düzenle",
     startSurveyText: "Başla butonu yazısı",
     showNavigationButtons: "Gezinme butonlarını göster (varsayılan gezinme)",
+    navigationButtonsLocation: "Gezinme düğmeleri hizalaması",
     showPrevButton: "Önceki butonu göster (kullanıcı önceki sayfaya dönebilir)",
     firstPageIsStartPage: "Anketteki ilk sayfa bir başlangıç sayfasıdır.",
     showCompletePage: "Tamamlanan sayfayı en sonunda göster (HTML)",
     autoAdvanceEnabled: "Tüm soruları cevaplarken otomatik olarak sonraki sayfaya git",
     autoAdvanceAllowComplete: "Anketi otomatik olarak tamamlama",
     showProgressBar: "İlerleme çubuğunu göster",
+    progressBarLocation: "İlerleme çubuğu hizalaması",
     questionTitleLocation: "Soru başlığı konumu",
     questionTitleWidth: "Soru başlığı genişliği",
     requiredMark: "Zorunlu soru sembolü",
@@ -646,8 +652,8 @@ export var turkishStrings = {
     renderMode: "İşleme modu",
     allowAddPanel: "Panel eklemeye izin ver",
     allowRemovePanel: "Panel silmeye izin ver",
-    panelAddText: "Panel ekleme metni",
-    panelRemoveText: "Panel silme metni",
+    addPanelText: "Panel ekleme metni",
+    removePanelText: "Panel silme metni",
     isSinglePage: "Tüm öğeleri tek bir sayfada göster",
     html: "Html",
     setValue: "Cevap",
@@ -721,9 +727,9 @@ export var turkishStrings = {
     minPanelCount: "Minimum panel sayısı",
     maxPanelCount: "Maksimum panel sayısı",
     panelsState: "İç panel genişletme durumu",
-    panelPrevText: "Önceki Panel düğmesi araç ipucu",
-    panelNextText: "Sonraki Panel düğmesi araç ipucu",
-    panelRemoveButtonLocation: "Panel düğmesinin konumunu kaldır",
+    prevPanelText: "Önceki Panel düğmesi araç ipucu",
+    nextPanelText: "Sonraki Panel düğmesi araç ipucu",
+    removePanelButtonLocation: "Panel düğmesinin konumunu kaldır",
     hideIfRowsEmpty: "Satır yoksa soruyu gizleme",
     hideColumnsIfEmpty: "Satır yoksa sütunları gizleme",
     rateValues: "Özel fiyat değerleri",
@@ -753,6 +759,8 @@ export var turkishStrings = {
     separateSpecialChoices: "Ayrı özel seçenekler (Yok, Diğer, Tümünü Seç)",
     choicesFromQuestion: "Aşağıdaki sorudan seçenekleri kopyalama",
     choicesFromQuestionMode: "Hangi seçenekleri kopyalamalıyım?",
+    choiceValuesFromQuestion: "Aşağıdaki matris sütunundaki veya panel sorusundaki değerleri seçim kimlikleri olarak kullanın",
+    choiceTextsFromQuestion: "Aşağıdaki matris sütununda veya panel sorusunda yer alan değerleri seçim metinleri olarak kullanın",
     progressBarShowPageTitles: "Sayfa başlıklarını ilerleme çubuğunda görüntüleme",
     progressBarShowPageNumbers: "İlerleme çubuğunda sayfa numaralarını görüntüleme",
     showCommentArea: "Yorumu var",
@@ -787,6 +795,11 @@ export var turkishStrings = {
       top: "Üstte",
       bottom: "Altta"
     },
+    previewMode: "Önizleme modu",
+    gridLayoutEnabled: "Izgara düzenini etkinleştirin",
+    gridLayoutColumns: "Izgara düzeni sütunları",
+    maskSettings: "Maske ayarları",
+    detailErrorLocation: "Satır genişletme hata iletisi hizalaması",
     // Creator tabs
     tabs: {
       panel: {
@@ -1104,6 +1117,8 @@ export var turkishStrings = {
     noPreview: "Önizleme yok",
     showAllQuestions: "Tüm soruları göster",
     showAnsweredQuestions: "Cevaplanan soruları göster",
+    allQuestions: "Tüm soruları göster",
+    answeredQuestions: "Yalnızca yanıtlanmış soruları göster",
     pages: "Tamamlanan sayfalar",
     questions: "Sorular",
     requiredQuestions: "Gerekli sorular",
@@ -1199,16 +1214,13 @@ export var turkishStrings = {
     questionOrder: {
       initial: "Özgün"
     },
-    showProgressBar: {
-      off: "Gizli",
-      topbottom: "Üst ve alt",
-      aboveheader: "Başlığın üstünde",
-      belowheader: "Başlığın altında"
-    },
     progressBarLocation: {
       top: "Sayfanın Üstü",
       bottom: "Dip",
-      topBottom: "Üst ve alt"
+      topbottom: "Üst ve alt",
+      aboveheader: "Başlığın üstünde",
+      belowheader: "Başlığın altında",
+      off: "Gizli"
     },
     sum: "Toplam",
     count: "Saymak",
@@ -1353,7 +1365,9 @@ export var turkishStrings = {
       startWithNewLine: "Panelin önceki soru veya panelle aynı satırda görüntülenmesi için seçimi kaldırın. Panel formunuzdaki ilk öğeyse bu ayar uygulanmaz.",
       state: "Şunlar arasından seçim yapın: \"Genişletilmiş\" - panel tam olarak görüntülenir ve daraltılabilir; \"Daraltılmış\" - panel yalnızca başlığı ve açıklamayı görüntüler ve genişletilebilir; \"Kilitli\" - panel tam olarak görüntülenir ve daraltılamaz.",
       width: "Panelin genişliğini aynı satırdaki diğer anket öğeleriyle orantılı olarak ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
-      showQuestionNumbers: "Bu panelde iç içe yerleştirilmiş sorulara numaralar atar."
+      showQuestionNumbers: "Bu panelde iç içe yerleştirilmiş sorulara numaralar atar.",
+      effectiveColSpan: "Bu panelin ızgara mizanpajı içinde kaç sütuna yayılacağını belirtir.",
+      gridLayoutColumns: "Bu tablo, panel içindeki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın."
     },
     paneldynamic: {
       name: "Yanıtlayanlar tarafından görülemeyen bir panel kimliği.",
@@ -1384,6 +1398,7 @@ export var turkishStrings = {
     resetValueIf: "Yanıtlayanın girişinin ne zaman \"Varsayılan değer ifadesi\" veya \"Değer ifadesi ayarla\" ya da \"Varsayılan yanıt\" değerine (ayarlanmışsa) dayalı değere ne zaman sıfırlanacağını belirleyen bir koşullu kural ayarlamak için sihirli değnek simgesini kullanın.",
     setValueIf: "\"Değer ayarla ifadesinin\" ne zaman çalıştırılacağını belirleyen koşullu bir kural belirlemek ve elde edilen değeri yanıt olarak dinamik olarak atamak için sihirli değnek simgesini kullanın.",
     setValueExpression: "\"Şu durumda değer ayarla\" kuralındaki koşullar karşılandığında ayarlanacak değeri tanımlayan bir ifade belirtin. İfade temel hesaplamaları içerebilir - '{q1_id} + {q2_id}', '{age} > 60' gibi Boole ifadeleri ve işlevler: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb. Bu ifade tarafından belirlenen değer, yanıtlayanın manuel girişi tarafından geçersiz kılınabilir.",
+    gridLayoutEnabled: "Anket Oluşturucu, düzeni kontrol etmek için form öğelerinin satır içi genişliklerini manuel olarak ayarlamanıza olanak tanır. Bu istenen sonucu vermezse, sütun tabanlı bir sistem kullanarak öğeleri oluşturan yapıların ızgara düzenini etkinleştirebilirsiniz. Düzen sütunlarını yapılandırmak için bir sayfa veya panel seçin ve \"Soru Ayarları\" → \"Izgara sütunları\" tablosunu kullanın. Bir sorunun kaç sütuna yayılacağını ayarlamak için soruyu seçin ve \"Düzen\" → \"Sütun aralığı\" alanında istediğiniz değeri ayarlayın.",
     question: {
       name: "Yanıtlayanlar tarafından görülemeyen bir soru kimliği.",
       description: "Bir soru alt başlığı yazın.",
@@ -1404,7 +1419,8 @@ export var turkishStrings = {
       textUpdateMode: "Şunlar arasından seçim yapın: \"Odak kaybolduğunda\" - giriş alanı odağı kaybettiğinde değer güncellenir; \"Yazarken\" - değer, kullanıcılar yazarken gerçek zamanlı olarak güncellenir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Odak kaybolduğunda\").",
       url: "Çoktan seçmeli sorular için herhangi bir web hizmetini veri kaynağı olarak kullanabilirsiniz. Seçim değerlerini doldurmak için, verileri sağlayan hizmetin URL'sini girin.",
       searchMode: "Açılan listeyi filtrelemek için kullanılan bir karşılaştırma işlemi.",
-      textWrapEnabled: "Seçim seçeneklerindeki uzun metinler, açılır menüye sığacak şekilde otomatik olarak satır sonları oluşturur. Metinlerin kırpılmasını istiyorsanız seçimi kaldırın."
+      textWrapEnabled: "Seçim seçeneklerindeki uzun metinler, açılır menüye sığacak şekilde otomatik olarak satır sonları oluşturur. Metinlerin kırpılmasını istiyorsanız seçimi kaldırın.",
+      effectiveColSpan: "Bu sorunun ızgara düzeni içinde kaç sütuna yayılacağını belirtir."
     },
     signaturepad: {
       signatureWidth: "Görüntülenen imza alanının ve elde edilen görüntünün genişliğini ayarlar.",
@@ -1433,7 +1449,8 @@ export var turkishStrings = {
     },
     // survey templates
     survey: {
-      mode: "Şunlar arasından seçim yapın: \"Düzenlenebilir\" - yanıtlayanların anketinizi doldurmasını sağlar; \"Salt okunur\" - form düzenlemeyi devre dışı bırakır."
+      readOnly: "Yanıtlayanların anketinizi doldurmasını engellemek isteyip istemediğinizi seçin.",
+      progressBarLocation: "İlerleme çubuğunun konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
     },
     matrixdropdowncolumn: {
       name: "Yanıtlayanlar tarafından görülemeyen bir sütun kimliği.",
@@ -1455,7 +1472,7 @@ export var turkishStrings = {
     autoAdvanceEnabled: "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Bu özellik, sayfadaki son soru açık uçluysa veya birden fazla yanıta izin veriyorsa uygulanmaz.",
     autoAdvanceAllowComplete: "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin.",
     showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar.",
-    showProgressBar: "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler.",
+    navigationButtonsLocation: "Sayfadaki gezinme düğmelerinin konumunu ayarlar.",
     showPreviewBeforeComplete: "Önizleme sayfasını tüm sorularla veya yalnızca yanıtlanmış sorularla etkinleştirin.",
     questionTitleLocation: "Anketteki tüm sorular için geçerlidir. Bu ayar, panel, sayfa veya soru gibi daha düşük düzeylerdeki başlık hizalama kuralları tarafından geçersiz kılınabilir. Daha düşük düzeydeki bir ayar, daha yüksek düzeydeki ayarları geçersiz kılar.",
     requiredMark: "Bir yanıtın gerekli olduğunu gösteren bir sembol veya sembol dizisi.",
@@ -1479,6 +1496,7 @@ export var turkishStrings = {
     rowTitleWidth: "CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
     totalText: "Yalnızca en az bir sütunda Toplam türü veya Toplam ifadesi olduğunda görünür.",
     cellErrorLocation: "Geçersiz girişi olan bir hücreyle ilgili olarak bir hata iletisinin konumunu ayarlar. \"Devral\" seçeneği, ayarı \"Hata iletisi hizalaması\" özelliğinden uygular.",
+    detailErrorLocation: "Ayrıntı bölümlerinde iç içe geçmiş sorular için hata mesajlarının konumunu ayarlar. \"Devral\" seçeneği, \"Hata mesajı hizalaması\" özelliğindeki ayarı uygular.",
     keyDuplicationError: "\"Yinelenen yanıtları engelle\" özelliği etkinleştirildiğinde, yinelenen bir girdi göndermeye çalışan yanıtlayan aşağıdaki hata iletisini alır.",
     totalExpression: "Bir ifadeye dayalı olarak toplam değerleri hesaplamanıza olanak tanır. İfade, temel hesaplamaları ('{q1_id} + {q2_id}'), Boole ifadelerini ('{age} > 60') ve işlevleri ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb.) içerebilir.",
     confirmDelete: "Satır silme işlemini onaylamanızı isteyen bir istemi tetikler.",
@@ -1501,7 +1519,8 @@ export var turkishStrings = {
       questionTitleWidth: "Soru kutularının soluna hizalandıklarında soru başlıkları için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       questionErrorLocation: "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\").",
       questionOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
-      navigationButtonsVisibility: "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
+      showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular.",
+      gridLayoutColumns: "Bu tablo, sayfadaki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın."
     },
     timerLocation: "Sayfadaki bir zamanlayıcının konumunu ayarlar.",
     panelsState: "Şunlar arasından seçim yapın: \"Kilitli\" - kullanıcılar panelleri genişletemez veya daraltamaz; \"Tümünü daralt\" - tüm paneller daraltılmış durumda başlar; \"Tümünü genişlet\" - tüm paneller genişletilmiş bir durumda başlar; \"İlk genişletildi\" - başlangıçta yalnızca ilk panel genişletilir.",
@@ -1516,6 +1535,8 @@ export var turkishStrings = {
     useDisplayValuesInDynamicTexts: "Tekli ve çoktan seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Seçildiğinde, bu ayar HTML sorularında ve anket öğelerinin dinamik başlıklarında ve açıklamalarında kimlik değeri yerine bir görünen değer gösterir.",
     clearIfInvisible: "Koşullu mantık tarafından gizlenen soru değerlerinin temizlenip temizlenmeyeceğini ve ne zaman yapılacağını seçin. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Anket tamamlandıktan sonra\").",
     choicesFromQuestionMode: "Şunlar arasından seçim yapın: \"Tümü\" - seçilen sorudaki tüm seçim seçeneklerini kopyalar; \"Seçili\" - yalnızca seçilen seçim seçeneklerini dinamik olarak kopyalar; \"Seçilmemiş\" - yalnızca seçilmemiş seçim seçeneklerini dinamik olarak kopyalar. \"Yok\" ve \"Diğer\" seçenekleri, kaynak soruda etkinleştirilmişse varsayılan olarak kopyalanır.",
+    choiceValuesFromQuestion: "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, kimlikleri hangi matris, sütun veya panel sorusunun sağlaması gerektiğini belirtir.",
+    choiceTextsFromQuestion: "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, hangi matris sütun veya panel sorusunun görüntü metinlerini sağlaması gerektiğini belirtir.",
     showOtherItem: "Seçildiğinde, kullanıcılar ayrı bir yorum kutusuna ek girdi ekleyebilir.",
     separateSpecialChoices: "Her özel seçim seçeneğini (\"Yok\", \"Diğer\", \"Tümünü Seç\") çok sütunlu bir düzen kullanırken bile yeni bir satırda görüntüler.",
     path: "Hizmet veri kümesinde, hedef nesne dizisinin bulunduğu konumu belirtin. URL zaten diziye işaret ediyorsa boş bırakın.",
@@ -1588,10 +1609,6 @@ export var turkishStrings = {
       overlapEnabled: "Etkinleştirildiğinde, anketin üst kısmı başlığın alt kısmıyla kaplanır.",
       mobileHeight: "0 olarak ayarlandığında, üstbilginin içeriğine uyum sağlamak için yükseklik otomatik olarak hesaplanır."
     },
-    panellayoutcolumn: {
-      effectiveWidth: "% değerlerini kabul eder.",
-      questionTitleWidth: "Px değerlerini kabul eder."
-    },
     progressBarInheritWidthFrom: "\"Kapsayıcı ile aynı\" seçeneği, ilerleme çubuğu alan genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar."
   },
   // Properties
@@ -1660,7 +1677,6 @@ export var turkishStrings = {
     inputTextAlignment: "Giriş değeri hizalaması",
     elements: "Öğe",
     content: "İçerik",
-    navigationButtonsVisibility: "Navigasyon butonları görünürlüğü",
     navigationTitle: "Gezinme başlığı",
     navigationDescription: "Navigasyon açıklaması",
     longTap: "Uzun musluk",
@@ -1938,11 +1954,11 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.panelsState: "Inner panel expand state" => "İç panel genişletme durumu"
 // pe.templateDescription: "Description template" => "Açıklama şablonu"
 // pe.templateTitle: "Title template" => "Başlık şablonu"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Önceki Panel düğmesi araç ipucu"
-// pe.panelNextText: "Next Panel button tooltip" => "Sonraki Panel düğmesi araç ipucu"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Önceki Panel düğmesi araç ipucu"
+// pe.nextPanelText: "Next Panel button tooltip" => "Sonraki Panel düğmesi araç ipucu"
 // pe.showRangeInProgress: "Show progress bar" => "İlerleme çubuğunu göster"
 // pe.templateQuestionTitleLocation: "Question title location" => "Soru başlığı konumu"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Panel düğmesinin konumunu kaldır"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Panel düğmesinin konumunu kaldır"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Satır yoksa soruyu gizleme"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Satır yoksa sütunları gizleme"
 // pe.rateValues: "Custom rate values" => "Özel fiyat değerleri"
@@ -2638,7 +2654,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Bu sayfadaki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular veya paneller için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\")."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Üst\")."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Soruların orijinal sırasını korur veya rastgele hale getirir. \"Devral\" seçeneği, anket düzeyindeki ayarı (varsayılan olarak \"Orijinal\") uygular. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Şunlar arasından seçim yapın: \"Kilitli\" - kullanıcılar panelleri genişletemez veya daraltamaz; \"Tümünü daralt\" - tüm paneller daraltılmış durumda başlar; \"Tümünü genişlet\" - tüm paneller genişletilmiş bir durumda başlar; \"İlk genişletildi\" - başlangıçta yalnızca ilk panel genişletilir."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Seçim listesinde görüntülemek istediğiniz görüntü veya video dosyası URL'lerini içeren nesne dizisi içinde paylaşılan bir özellik adı girin."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Soldaki değer, koşullu kurallarda kullanılan bir öğe kimliği görevi görür, sağdaki değer yanıtlayanlara gösterilir."
@@ -2968,3 +2984,36 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // tabs.surfaceBackground: "Surface Background" => "Yüzey Arka Planı"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Varsayılan olarak son girişteki yanıtları kullan"
 // colors.gray: "Gray" => "Gri"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Gezinme düğmeleri hizalaması"
+// pv.allQuestions: "Show all questions" => "Tüm soruları göster"
+// pv.answeredQuestions: "Show answered questions only" => "Yalnızca yanıtlanmış soruları göster"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Sayfadaki gezinme düğmelerinin konumunu ayarlar."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Aşağıdaki matris sütunundaki veya panel sorusundaki değerleri seçim kimlikleri olarak kullanın"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Aşağıdaki matris sütununda veya panel sorusunda yer alan değerleri seçim metinleri olarak kullanın"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, kimlikleri hangi matris, sütun veya panel sorusunun sağlaması gerektiğini belirtir."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, hangi matris sütun veya panel sorusunun görüntü metinlerini sağlaması gerektiğini belirtir."
+// pe.progressBarLocation: "Progress bar alignment" => "İlerleme çubuğu hizalaması"
+// progressBarLocation.topbottom: "Top and bottom" => "Üst ve alt"
+// progressBarLocation.aboveheader: "Above the header" => "Başlığın üstünde"
+// progressBarLocation.belowheader: "Below the header" => "Başlığın altında"
+// progressBarLocation.off: "Hidden" => "Gizli"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "İlerleme çubuğunun konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
+// survey.readOnly: "Make the survey read-only" => "Anketi salt okunur hale getirin"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Yanıtlayanların anketinizi doldurmasını engellemek isteyip istemediğinizi seçin."
+// paneldynamic.showNumber: "Number the panel" => "Paneli numaralandırma"
+// question.showNumber: "Number this question" => "Bu soruyu numaralandırın"
+// pe.previewMode: "Preview mode" => "Önizleme modu"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Izgara düzenini etkinleştirin"
+// pe.maskSettings: "Mask settings" => "Maske ayarları"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Satır genişletme hata iletisi hizalaması"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Ayrıntı bölümlerinde iç içe geçmiş sorular için hata mesajlarının konumunu ayarlar. \"Devral\" seçeneği, \"Hata mesajı hizalaması\" özelliğindeki ayarı uygular."
+// pe.gridLayoutColumns: "Grid layout columns" => "Izgara düzeni sütunları"
+// pe.startPageTitlePlaceholder: "Start Page" => "Başlangıç Sayfası"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Etkili genişlik, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Soru başlığı genişliği, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Henüz düzen sütunlarına sahip değilsiniz"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Bu panelin ızgara mizanpajı içinde kaç sütuna yayılacağını belirtir."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Bu tablo, panel içindeki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Anket Oluşturucu, düzeni kontrol etmek için form öğelerinin satır içi genişliklerini manuel olarak ayarlamanıza olanak tanır. Bu istenen sonucu vermezse, sütun tabanlı bir sistem kullanarak öğeleri oluşturan yapıların ızgara düzenini etkinleştirebilirsiniz. Düzen sütunlarını yapılandırmak için bir sayfa veya panel seçin ve \"Soru Ayarları\" → \"Izgara sütunları\" tablosunu kullanın. Bir sorunun kaç sütuna yayılacağını ayarlamak için soruyu seçin ve \"Düzen\" → \"Sütun aralığı\" alanında istediğiniz değeri ayarlayın."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Bu sorunun ızgara düzeni içinde kaç sütuna yayılacağını belirtir."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Bu tablo, sayfadaki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın."

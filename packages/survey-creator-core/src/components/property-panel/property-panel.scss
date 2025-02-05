@@ -2,33 +2,33 @@
 
 .svc-property-grid-placeholder {
   display: flex;
-  padding: var(--ctr-property-grid-placeholder-padding-top, 96px)
-    var(--ctr-property-grid-placeholder-padding-right, 48px) var(--ctr-property-grid-placeholder-padding-bottom, 0px)
-    var(--ctr-property-grid-placeholder-padding-left, 48px);
+  padding: var(--ctr-property-grid-placeholder-padding-top, var(--sjs-spacing-x12))
+    var(--ctr-property-grid-placeholder-padding-right, var(--sjs-spacing-x6)) var(--ctr-property-grid-placeholder-padding-bottom, 0px)
+    var(--ctr-property-grid-placeholder-padding-left, var(--sjs-spacing-x6));
   flex-direction: column;
   align-items: center;
-  gap: var(--ctr-property-grid-placeholder-image-margin-top, 24px);
+  gap: var(--ctr-property-grid-placeholder-image-margin-top, var(--sjs-spacing-x3));
   flex: 1 0 0;
   align-self: stretch;
-  background: var(--ctr-property-grid-form-background-color, #f3f3f3);
+  background: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 }
 .svc-property-grid-placeholder__header {
   display: flex;
-  max-width: var(--ctr-property-grid-placeholder-text-max-width, 256px);
+  max-width: var(--ctr-property-grid-placeholder-text-max-width, 320px);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: var(--ctr-property-grid-placeholder-text-gap, 8px);
+  gap: var(--ctr-property-grid-placeholder-text-gap, var(--sjs-spacing-x1));
 }
 .svc-property-grid-placeholder__title {
   @include ctrDefaultBoldFont;
-  color: var(--ctr-property-grid-placeholder-text-title-color, rgba(0, 0, 0, 0.91));
+  color: var(--ctr-property-grid-placeholder-text-title-color, var(--sjs-layer-1-foreground-100, #000000e6));
   text-align: center;
   display: inline-block;
 }
 .svc-property-grid-placeholder__description {
   @include ctrSmallFont;
-  color: var(--ctr-property-grid-placeholder-text-description-color, rgba(0, 0, 0, 0.45));
+  color: var(--ctr-property-grid-placeholder-text-description-color, var(--sjs-layer-1-foreground-50, #00000080));
   text-align: center;
   display: inline-block;
 }

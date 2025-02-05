@@ -62,7 +62,7 @@
   background-color: $background;
   width: 100%;
   height: calcSize(27.5);
-  border: 1px dashed $border-inside;
+  border: var(--ctr-survey-placeholder-border-width, var(--lbr-stroke-x1)) dashed var(--ctr-survey-placeholder-border-color, var(--sjs-border-25, #D4D4D4));
 }
 
 .svc-image-question__loading {

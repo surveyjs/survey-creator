@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -48,3 +49,35 @@ test("Check states", async (t) => {
     await takeElementScreenshot("action-clear-button-hovered.png", clearButtonElement, t, comparer);
   });
 });
+
+test("Default value clear button", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 870);
+
+    const generalTab = Selector("h4").withExactText("General");
+    const dataTab = Selector("h4").withExactText("Data");
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1",
+              "defaultValue": "text"
+            }
+          ]
+        }
+      ]
+    });
+
+    await t
+      .click(Selector(".svc-question__content"))
+      .click(generalTab)
+      .click(dataTab)
+      .click(Selector(".svc-action-button.svc-question-link__set-button").withText("Change Default Answer"));
+    const buttons = Selector(".spg-link");
+    await takeElementScreenshot("action-buttons-on-popup-open.png", buttons, t, comparer);
+  });
+});
+

@@ -113,6 +113,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   protected renderHeader(): React.JSX.Element {
     const actions = (<div className="svc-page__content-actions">
       <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
+      {(this.model.topActionContainer.hasActions ? <SurveyActionBar model={this.model.topActionContainer}></SurveyActionBar> : null)}
     </div>);
     if (this.model.isGhost || !this.model.allowDragging) {
       return actions;

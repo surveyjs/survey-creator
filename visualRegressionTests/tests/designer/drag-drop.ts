@@ -9,9 +9,13 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 test("Ghost Survey Element", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await hideAllAdornerActions();
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
       window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
@@ -33,9 +37,13 @@ test("Ghost Survey Element", async (t) => {
 test("Empty page", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await hideAllAdornerActions();
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
       window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
@@ -57,9 +65,13 @@ test("Empty page", async (t) => {
 test("Ghost Survey Element after several drops", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await hideAllAdornerActions();
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
     const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
@@ -103,9 +115,13 @@ test("Ghost Survey Element after several drops", async (t) => {
 test("Toolbox Item State After Drag", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await hideAllAdornerActions();
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t.resizeWindow(2560, 1440);
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
 
     const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
@@ -124,6 +140,7 @@ test("Empty Panel Styles", async (t) => {
     await t.resizeWindow(2560, 1440);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -156,6 +173,7 @@ test("Empty Panel Dynamic Styles", async (t) => {
     await t.resizeWindow(2560, 1440);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -187,6 +205,7 @@ test("Choices: Ranking", async (t) => {
     await t.resizeWindow(2560, 1440);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -225,6 +244,7 @@ test("Choices: Mobile", async (t) => {
     await t.resizeWindow(390, 844);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -254,6 +274,7 @@ test("Choices: Ranking: Mobile", async (t) => {
     await t.resizeWindow(390, 844);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -283,6 +304,7 @@ test("Choices: DropDown: Mobile", async (t) => {
     await t.resizeWindow(390, 844);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -318,6 +340,7 @@ test("Matrix: Property Grid: Choices", async (t) => {
     });
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -374,6 +397,7 @@ test("Matrix: Property Grid: Choices: Scroll", async (t) => {
     });
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -418,6 +442,7 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
     await t.resizeWindow(2560, 1440);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -475,6 +500,7 @@ test("Drag Drop to Multiline from Toolbox", async (t) => {
     await t.resizeWindow(2584, 1440);
 
     const json = {
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -519,6 +545,7 @@ test("Drag Drop to Multiline styles", async (t) => {
     await setShowAddQuestionButton(false);
 
     const json = {
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -577,6 +604,7 @@ test("Drag Drop inside panel dynamic top indicator", async (t) => {
     await t.resizeWindow(832, 600);
 
     const json = {
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -628,6 +656,7 @@ test("Toolbox Custom Component Icon", async (t) => {
     });
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -664,6 +693,7 @@ test("Drag Drop (choices): scroll", async (t) => {
     await t.resizeWindow(1000, 500);
 
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -703,6 +733,7 @@ test("Drag Drop to collapsed panel", async (t) => {
 
     await t.resizeWindow(1600, 1000);
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -746,6 +777,7 @@ test("Drag Drop to collapsed page", async (t) => {
     await setShowAddQuestionButton(false);
     await t.resizeWindow(1652, 500);
     const json = {
+      showQuestionNumbers: "on",
       pages: [
         {
           name: "page1",
@@ -824,6 +856,7 @@ test("Drag indicator for custom widget", async (t) => {
     await setShowAddQuestionButton(false);
 
     const json = {
+      showQuestionNumbers: "on",
       elements: [{ type: "peoplepicker", name: "q1" }, { type: "peoplepicker", name: "q2" }]
     };
     await setJSON(json);
@@ -845,6 +878,7 @@ test("Drag Drop Indicator: Inside Panel: Rows", async (t) => {
     await t.resizeWindow(1000, 500);
 
     const json = {
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {

@@ -567,7 +567,7 @@ test("SurveyLogicUI: Test creator onLogicItemDisplayText event", () => {
       { type: "text", name: "q5" }
     ]
   };
-  creator.onLogicItemDisplayText.add((sender, options) => {
+  creator.onLogicRuleGetDisplayText.add((sender, options) => {
     let text = options.expressionText;
     text = text.replace(new RegExp("({|})", "gm"), "'");
     options.text = text;
@@ -1985,6 +1985,34 @@ test("LogicUI: edit matrix column visibleIf. Filter selector if there is a conte
   colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
   expect(colSelector.choices).toHaveLength(3 + 2);
 });
+test("A question with name '0' doesn't appear correctly within a condition editor Bug#6430", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "radiogroup", name: "0", choices: ["a", "b", "c", "d"] },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  const expressionEditor = logic.expressionEditor;
+  const firstExpressionPanel = expressionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstExpressionPanel.getQuestionByName("questionName");
+  questionName.value = 0;
+  const questionValue = firstExpressionPanel.getQuestionByName("questionValue");
+  expect(questionValue).toBeTruthy();
+  expect(questionValue.isVisible).toBeTruthy();
+  expect(questionValue.getType()).toBe("radiogroup");
+  expect(questionValue.choices).toHaveLength(4);
+  questionValue.value = "d";
+  const itemEditor = logic.itemEditor;
+  let actionPanel = itemEditor.panels[0];
+  actionPanel.getQuestionByName("logicTypeName").value = "question_visibility";
+  actionPanel.getQuestionByName("elementSelector").value = "q2";
+  logic.saveEditableItem();
+  const q2 = survey.getQuestionByName("q2");
+  expect(q2.visibleIf).toEqual("{0} = 'd'");
+});
 test("LogicUI: edit matrix column visibleIf. Filter logic types and delete actions if there is a context", () => {
   const survey = new SurveyModel({
     elements: [
@@ -3015,7 +3043,7 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   panel.getQuestionByName("elementSelector").value = "q4";
 
   creator.makeNewViewActive("test");
-  expect(creator.activeTab).toBe("test");
+  expect(creator.activeTab).toBe("preview");
 
   const q4 = creator.survey.getQuestionByName("q4");
   expect(q4.enableIf).toBe("{q1} = 4");
@@ -3236,6 +3264,46 @@ test("Test questions css in an action panel", () => {
   checkFunc(1, "trigger_setvalue", "setValue", true);
   checkFunc(2, "trigger_runExpression", "runExpression", false);
   checkFunc(3, "completedHtmlOnCondition", "html", false);
+});
+
+test("Run modified on changing runExpression", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ],
+    triggers: [
+      {
+        type: "runexpression",
+        expression: "{q1} = 3",
+        runExpression: "{q1} + 3"
+      }
+    ]
+  });
+  const logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(1);
+  const editor = new LogicItemEditor(logic.items[0]);
+  expect(editor.panels).toHaveLength(1);
+  expect(editor.panels[0].getQuestionByName("elementSelector").visible).toBeFalsy();
+  const panelTrigger = <PanelModel>(editor.panels[0].getElementByName("triggerEditorPanel"));
+  expect(panelTrigger).toBeTruthy();
+  expect(panelTrigger.visible).toBeTruthy();
+  const runExpressionQuestion = panelTrigger.getQuestionByName("runExpression");
+  expect(runExpressionQuestion.value).toEqual("{q1} + 3");
+  const changes = new Array<any>();
+  survey.onPropertyValueChangedCallback = (
+    name: string,
+    oldValue: any,
+    newValue: any
+  ) => {
+    changes.push({ name: name, value: newValue });
+  };
+  runExpressionQuestion.value = "{q1} + 4";
+  expect(changes).toHaveLength(0);
+  editor.apply();
+  expect(changes).toHaveLength(1);
+  expect(changes[0].name).toEqual("runExpression");
+  expect(changes[0].value).toEqual("{q1} + 4");
 });
 
 test("Custom trigger in logic", () => {
@@ -3543,8 +3611,8 @@ test("Limit the number of trigger types, #6031", () => {
     ]
   });
   const hasType = (types: Array<SurveyLogicType>, name: string): boolean => {
-    for(let i = 0; i < types.length; i ++) {
-      if(types[i].name === name) return true;
+    for (let i = 0; i < types.length; i++) {
+      if (types[i].name === name) return true;
     }
     return false;
   };

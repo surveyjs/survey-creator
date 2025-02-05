@@ -1,4 +1,4 @@
-import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByText, getSubToolboxItemByText } from "../helper";
+import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON, changeToolboxScrolling, changeToolboxSearchEnabled, getToolboxItemByText, getSubToolboxItemByText, setAllowEditSurveyTitle } from "../helper";
 
 import { ClientFunction, Selector } from "testcafe";
 const title = "Toolbox";
@@ -348,6 +348,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
 
 test("toolbox subTypes: add items by drag-n-drop", async (t) => {
   await explicitErrorHandler();
+  await setAllowEditSurveyTitle(false);
   await t.resizeWindow(1900, 800);
 
   await t
@@ -373,7 +374,6 @@ test("toolbox subTypes: add items by drag-n-drop", async (t) => {
     .expect(toolboxSubTypesPopup.visible).notOk();
 
   const expectedJson = {
-    "logoPosition": "right",
     "pages": [
       {
         "name": "page1",
@@ -418,7 +418,6 @@ test("toolbox subTypes: add items by click", async (t) => {
     .expect(toolboxSubTypesPopup.visible).ok();
 
   const expectedJson = {
-    "logoPosition": "right",
     "pages": [
       {
         "name": "page1",

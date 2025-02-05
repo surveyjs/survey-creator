@@ -50,7 +50,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "setValueExpression", tab: "logic" },
       { name: "page", tab: "layout" },
       { name: "startWithNewLine", tab: "layout" },
-      { name: "hideNumber", tab: "layout" },
+      { name: "showNumber", tab: "layout" },
       { name: "state", tab: "layout" },
       { name: "titleLocation", tab: "layout" },
       { name: "descriptionLocation", tab: "layout" },
@@ -361,7 +361,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "dataList",
       { name: "minValueExpression", tab: "logic" },
       { name: "maxValueExpression", tab: "logic" },
-      { name: "size", tab: "layout" },
+      { name: "inputSize", tab: "layout" },
       { name: "inputTextAlignment", tab: "layout" },
       { name: "maxLength", tab: "validation" },
       { name: "minErrorText", tab: "validation" },
@@ -562,13 +562,11 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "maskSettings", tab: "mask" },
     ],
     tabs: [
-      { name: "mask", index: 20 },
-      { name: "validators", index: 25 }
+      { name: "mask", index: 20 }
     ]
   },
   "matrixdropdowncolumn@comment": {
-    properties: ["rows", "placeholder", "maxLength"],
-    tabs: [{ name: "validators", index: 25 }]
+    properties: ["rows", "placeholder ", "maxLength"]
   },
   "matrixdropdowncolumn@boolean": {
     properties: [
@@ -613,7 +611,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "title",
       "inputType",
       "isRequired",
-      "size",
+      "inputSize",
       "placeholder",
       "inputTextAlignment",
       { name: "maxLength", tab: "validation" },
@@ -653,15 +651,15 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "panelsState",
       { name: "allowAddPanel" },
       { name: "allowRemovePanel" },
-      "panelAddText",
-      "panelRemoveText",
+      "addPanelText",
+      "removePanelText",
       "templateTitle",
       "templateDescription",
       "noEntriesText",
       "confirmDelete",
       "confirmDeleteText",
-      "panelPrevText",
-      "panelNextText",
+      "prevPanelText",
+      "nextPanelText",
       "showQuestionNumbers",
       "showRangeInProgress",
       "showProgressBar",
@@ -670,7 +668,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "copyDefaultValueFromLastEntry", tab: "data" },
       { name: "templateQuestionTitleLocation", tab: "questionSettings" },
       { name: "templateErrorLocation", tab: "questionSettings" },
-      { name: "panelRemoveButtonLocation", tab: "layout" },
+      { name: "removePanelButtonLocation", tab: "layout" },
       { name: "keyName", tab: "validation" },
       { name: "keyDuplicationError", tab: "validation" }
     ]
@@ -688,8 +686,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "questionTitleLocation", tab: "questionSettings" },
       { name: "questionTitleWidth", tab: "questionSettings" },
       { name: "questionErrorLocation", tab: "questionSettings" },
-      { name: "layoutColumns", tab: "questionSettings" },
-      { name: "gridLayoutColumns", tab: "questionSettings" },
+      { name: "gridLayoutColumns", tab: "questionSettings", index: 900 },
     ],
     tabs: [
       { name: "questionSettings", index: 100 },
@@ -727,7 +724,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "timeLimit",
       "maxTimeToFinish",
       { name: "questionOrder", tab: "questionSettings" },
-      { name: "navigationButtonsVisibility", tab: "navigation" }
+      { name: "showNavigationButtons", tab: "navigation" }
     ],
     tabs: [{ name: "navigation", index: 350 }, { name: "layout", visible: false }]
   },
@@ -736,8 +733,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "title",
       "description",
       "showTitle",
+      "readOnly",
       "locale",
-      "mode",
       "cookieName",
       "widthMode",
       "width",
@@ -748,14 +745,17 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "autoAdvanceEnabled", tab: "navigation" },
       { name: "autoAdvanceAllowComplete", tab: "navigation" },
       { name: "showNavigationButtons", tab: "navigation" },
+      { name: "navigationButtonsLocation", tab: "navigation" },
       { name: "showPrevButton", tab: "navigation" },
       { name: "showProgressBar", tab: "navigation" },
       { name: "progressBarType", tab: "navigation" },
+      { name: "progressBarLocation", tab: "navigation" },
       { name: "progressBarShowPageTitles", tab: "navigation" },
       { name: "progressBarShowPageNumbers", tab: "navigation" },
       { name: "showTOC", tab: "navigation" },
       { name: "tocLocation", tab: "navigation" },
       { name: "showPreviewBeforeComplete", tab: "navigation" },
+      { name: "previewMode", tab: "navigation" },
       { name: "previewText", tab: "navigation" },
       { name: "editText", tab: "navigation" },
       { name: "startSurveyText", tab: "navigation" },
@@ -780,9 +780,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "commentAreaRows", tab: "question" },
       { name: "autoGrowComment", tab: "question" },
       { name: "allowResizeComment", tab: "question" },
-      { name: "gridLayoutEnabled", tab: "question" },
       { name: "showPageTitles", tab: "pages" },
       { name: "showPageNumbers", tab: "pages" },
+      { name: "gridLayoutEnabled", tab: "pages" },
 
       { name: "calculatedValues", tab: "logic" },
       { name: "triggers", tab: "logic" },

@@ -19,6 +19,7 @@ const creator = shallowRef(new SurveyCreatorModel(props.options));
 creator.value.tabResponsivenessMode = "menu";
 creator.value["animationEnabled"] = false;
 creator.value.showOneCategoryInPropertyGrid = false;
+creator.value.allowZoom = false;
 (window as any).updateCreatorModel = (options: any, json: any) => {
   (window as any).prevCreator = creator.value;
   const newCreator = new SurveyCreatorModel(options);
@@ -27,6 +28,7 @@ creator.value.showOneCategoryInPropertyGrid = false;
   creator.value.tabResponsivenessMode = "menu";
   creator.value["animationEnabled"] = false;
   creator.value.showOneCategoryInPropertyGrid = false;
+  creator.value.allowZoom = false;
   (window as any).creator = creator.value;
 }
 </script>

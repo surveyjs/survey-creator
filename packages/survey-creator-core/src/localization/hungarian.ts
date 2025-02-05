@@ -22,7 +22,7 @@ export var huStrings = {
     theme: "Témák",
     translation: "Fordítás",
     designer: "Kérdőívtervező",
-    editor: "JSON szerkesztő",
+    json: "JSON szerkesztő",
     logic: "Logika"
   },
   // Question types
@@ -308,6 +308,10 @@ export var huStrings = {
       maxWidth: "Maximális panelszélesség",
       showNumber: "A panel számozása"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Effektív szélesség, %",
+      questionTitleWidth: "Kérdés címének szélessége, px"
+    },
     paneldynamic: {
       name: "Panel neve",
       title: "Panel címe",
@@ -327,15 +331,13 @@ export var huStrings = {
       templateTabTitle: "Lapcím mintája",
       tabTitlePlaceholder: "Lapcím helyőrzője",
       templateVisibleIf: "Egy adott panel láthatóvá tétele, ha",
-      hideNumber: "A panel számának elrejtése",
+      showNumber: "A panel számozása",
       titleLocation: "Panelcím igazítása",
       descriptionLocation: "Panel leírás igazítása",
       templateQuestionTitleLocation: "Kérdés címének igazítása",
       templateErrorLocation: "Hibaüzenetek igazítása",
       newPanelPosition: "Új panel helye",
       showRangeInProgress: "A folyamatjelző sáv megjelenítése",
-      showProgressBar: "A folyamatjelző sáv megjelenítése",
-      progressBarLocation: "Folyamatjelző sáv igazítása",
       keyName: "Az ismétlődő válaszok elkerülése a következő kérdésben"
     },
     question: {
@@ -346,7 +348,7 @@ export var huStrings = {
       requiredIf: "Tegye kötelezővé a kérdést, ha",
       page: "Szülőoldal",
       state: "Kérdésmező összecsukási állapota",
-      hideNumber: "A kérdés számának elrejtése",
+      showNumber: "Számozza meg ezt a kérdést",
       titleLocation: "Kérdés címének igazítása",
       descriptionLocation: "Kérdés leírás igazítása",
       errorLocation: "Hibaüzenetek igazítása",
@@ -388,7 +390,8 @@ export var huStrings = {
     // survey templates
     survey: {
       title: "Cím",
-      description: "A felmérés leírása"
+      description: "A felmérés leírása",
+      readOnly: "A felmérés írásvédetté tétele"
     },
     page: {
       name: "Oldal neve",
@@ -440,7 +443,7 @@ export var huStrings = {
     imageWidth: "Kép szélessége",
     valueName: "Érték megnevezése",
     rateDescriptionLocation: "Feliratigazítás",
-    size: "Beviteli mező mérete (karakterben)",
+    size: "Beviteli mező szélessége (karakterben)",
     cellErrorLocation: "Cellahibaüzenet igazítása",
     enabled: "Engedélyezve",
     disabled: "Fogyatékos",
@@ -506,6 +509,7 @@ export var huStrings = {
     listIsEmpty: "Még nincsenek hozzáadott elemek",
     "listIsEmpty@choices": "Még nincsenek választási lehetőségek hozzáadva",
     "listIsEmpty@columns": "Még nincsenek oszlopai",
+    "listIsEmpty@gridLayoutColumns": "Még nincsenek elrendezésoszlopok",
     "listIsEmpty@rows": "Még nincsenek sorai",
     "listIsEmpty@validators": "Még nincsenek érvényességi szabályai",
     "listIsEmpty@calculatedValues": "Még nincsenek egyéni változói",
@@ -539,6 +543,7 @@ export var huStrings = {
     titlePlaceholder: "Cím",
     surveyTitlePlaceholder: "Felmérés címe",
     pageTitlePlaceholder: "Oldal {num}",
+    startPageTitlePlaceholder: "Kezdőlap",
     descriptionPlaceholder: "Leírás: __________",
     surveyDescriptionPlaceholder: "Leírás: __________",
     pageDescriptionPlaceholder: "Leírás: __________",
@@ -611,7 +616,6 @@ export var huStrings = {
     simulator: "Válassza ki az eszköz típusát",
     landscapeOrientation: "Váltás fekvő tájolásra",
     portraitOrientation: "Váltás álló tájolásra",
-    mode: "Mód (szerkesztés/megtekintés)",
     clearInvisibleValues: "Nemlátható értékek törlése",
     cookieName: "Süti megnevezése (a kérdőív csak egyszer kitölthető)",
     partialSendEnabled: "Kérdőív értékének küldése a következő lapra lépéskor",
@@ -625,12 +629,14 @@ export var huStrings = {
     editText: "A Válasz gomb szövegének szerkesztése",
     startSurveyText: "'Kezdés' gomb felirata",
     showNavigationButtons: "Navigációs gombok mutatása (alapértelmezett navigáció)",
+    navigationButtonsLocation: "Navigációs gombok igazítása",
     showPrevButton: "'Előző lap' gomb mutatása",
     firstPageIsStartPage: "Az megkezdett lap a kérdőív első oldala.",
     showCompletePage: "Befejező szöveg mutatása a kérdőív befejezésekor",
     autoAdvanceEnabled: "Minden kérdés megválaszolásakor automatikusan a következő lapra lépés",
     autoAdvanceAllowComplete: "A felmérés automatikus kitöltése",
     showProgressBar: "Előrehaladás-mutató megjelenítése",
+    progressBarLocation: "Folyamatjelző sáv igazítása",
     questionTitleLocation: "Kérdés címének helye",
     questionTitleWidth: "Kérdés címének szélessége",
     requiredMark: "Kötelező szimbólum",
@@ -646,8 +652,8 @@ export var huStrings = {
     renderMode: "Megjelenítés módja",
     allowAddPanel: "Új panel hozzáadásának engedélyezése",
     allowRemovePanel: "Panel eltávolításának engedélyezése",
-    panelAddText: "'Új panel felvétele' gomb szövege",
-    panelRemoveText: "'Panel eltávolítása' gomb szövege",
+    addPanelText: "'Új panel felvétele' gomb szövege",
+    removePanelText: "'Panel eltávolítása' gomb szövege",
     isSinglePage: "Minden elem mutatása egy lapon",
     html: "HTML",
     setValue: "Válasz",
@@ -721,9 +727,9 @@ export var huStrings = {
     minPanelCount: "Panelek minimális száma",
     maxPanelCount: "Panelek maximális száma",
     panelsState: "Belső panel kibontási állapota",
-    panelPrevText: "Előző Panel gomb eszköztipp",
-    panelNextText: "Következő Panel gomb elemleírása",
-    panelRemoveButtonLocation: "A Panel gomb helyének eltávolítása",
+    prevPanelText: "Előző Panel gomb eszköztipp",
+    nextPanelText: "Következő Panel gomb elemleírása",
+    removePanelButtonLocation: "A Panel gomb helyének eltávolítása",
     hideIfRowsEmpty: "A kérdés elrejtése, ha nincsenek sorok",
     hideColumnsIfEmpty: "Oszlopok elrejtése, ha nincsenek sorok",
     rateValues: "Egyéni díjértékek",
@@ -753,6 +759,8 @@ export var huStrings = {
     separateSpecialChoices: "Külön speciális választási lehetőségek (Nincs, Egyéb, Összes kijelölése)",
     choicesFromQuestion: "Másolja ki a következő kérdés választási lehetőségeit",
     choicesFromQuestionMode: "Milyen lehetőségeket másoljon?",
+    choiceValuesFromQuestion: "Használja a következő mátrixoszlop vagy panelkérdés értékeit választási lehetőség-azonosítóként:",
+    choiceTextsFromQuestion: "Használja a következő mátrixoszlop vagy panelkérdés értékeit választási szövegként:",
     progressBarShowPageTitles: "Oldalcímek megjelenítése a folyamatjelző sávon",
     progressBarShowPageNumbers: "Oldalszámok megjelenítése a folyamatjelző sávon",
     showCommentArea: "A megjegyzésterület megjelenítése",
@@ -787,6 +795,11 @@ export var huStrings = {
       top: "A tetején",
       bottom: "Alul"
     },
+    previewMode: "Előnézeti mód",
+    gridLayoutEnabled: "A rácselrendezés engedélyezése",
+    gridLayoutColumns: "Rácsos elrendezés oszlopai",
+    maskSettings: "Maszk beállításai",
+    detailErrorLocation: "Sorbővítési hibaüzenet igazítása",
     // Creator tabs
     tabs: {
       panel: {
@@ -1104,6 +1117,8 @@ export var huStrings = {
     noPreview: "Nincs előnézet",
     showAllQuestions: "Az összes kérdés megjelenítése",
     showAnsweredQuestions: "Csak a megválaszolt kérdések megjelenítése",
+    allQuestions: "Az összes kérdés megjelenítése",
+    answeredQuestions: "Csak a megválaszolt kérdések megjelenítése",
     pages: "Befejezett oldalak",
     questions: "Megválaszolt kérdések",
     requiredQuestions: "Megválaszolt kötelező kérdések",
@@ -1199,16 +1214,13 @@ export var huStrings = {
     questionOrder: {
       initial: "Eredeti"
     },
-    showProgressBar: {
-      off: "Rejtett",
-      topbottom: "fent és lent",
-      aboveheader: "A fejléc felett",
-      belowheader: "A fejléc alatt"
-    },
     progressBarLocation: {
       top: "Felső",
       bottom: "Fenék",
-      topBottom: "Felső és alsó"
+      topbottom: "Felső és alsó",
+      aboveheader: "A fejléc felett",
+      belowheader: "A fejléc alatt",
+      off: "Rejtett"
     },
     sum: "Összeg",
     count: "Gróf",
@@ -1353,7 +1365,9 @@ export var huStrings = {
       startWithNewLine: "Törölje a jelölést, ha a panel egy sorban jelenik meg az előző kérdéssel vagy panellel. A beállítás nem érvényes, ha a panel az űrlap első eleme.",
       state: "Válasszon a következők közül: \"Kibontott\" - a panel teljes egészében megjelenik és összecsukható; \"Összecsukott\" - a panel csak a címet és a leírást jeleníti meg, és bővíthető; \"Zárolva\" - a panel teljes egészében megjelenik, és nem csukható össze.",
       width: "A panel szélességét az ugyanabban a sorban lévő többi földmérési elemhez viszonyítva állítja be. CSS-értékeket fogad el (px, %, in, pt stb.).",
-      showQuestionNumbers: "Számokat rendel a panelbe ágyazott kérdésekhez."
+      showQuestionNumbers: "Számokat rendel a panelbe ágyazott kérdésekhez.",
+      effectiveColSpan: "Megadja, hogy ez a panel hány oszlopot ölel fel a rácselrendezésen belül.",
+      gridLayoutColumns: "Ez a táblázat lehetővé teszi az egyes rácsoszlopok konfigurálását a panelen. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."
     },
     paneldynamic: {
       name: "Olyan panelazonosító, amely nem látható a válaszadók számára.",
@@ -1384,6 +1398,7 @@ export var huStrings = {
     resetValueIf: "A varázspálca ikonnal feltételes szabályt állíthat be, amely meghatározza, hogy a válaszadó bemenete mikor áll vissza az \"Alapértelmezett érték kifejezés\" vagy az \"Értékkifejezés beállítása\" vagy az \"Alapértelmezett válasz\" érték alapján (ha bármelyik be van állítva).",
     setValueIf: "A varázspálca ikonnal beállíthat egy feltételes szabályt, amely meghatározza, hogy mikor kell futtatni az \"Érték beállítása kifejezést\", és dinamikusan hozzárendelni az eredményül kapott értéket válaszként.",
     setValueExpression: "Adjon meg egy kifejezést, amely meghatározza az \"Érték beállítása, ha\" szabály feltételeinek teljesülése esetén beállítandó értéket. A kifejezés tartalmazhat alapvető számításokat - '{q1_id} + {q2_id}', logikai kifejezéseket, például \"{age} > 60\" és függvényeket: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb. A kifejezés által meghatározott értéket felülbírálhatja a válaszadó kézi bevitele.",
+    gridLayoutEnabled: "A Survey Creator lehetővé teszi az űrlapelemek szövegközi szélességének manuális beállítását az elrendezés vezérléséhez. Ha ez nem hozza meg a kívánt eredményt, engedélyezheti a rácselrendezést, amely oszlopalapú rendszer használatával struktúrákat alkot elemeket. Az elrendezésoszlopok konfigurálásához válasszon ki egy oldalt vagy panelt, és használja a \"Kérdésbeállítások\" → a \"Rácsoszlopok\" táblázatot. Annak beállításához, hogy egy kérdés hány oszlopra terjed ki, válassza ki azt, és állítsa be a kívánt értéket az \"Elrendezés\" → az \"Oszloptartomány\" mezőben.",
     question: {
       name: "A válaszadók számára nem látható kérdésazonosító.",
       description: "Írja be a kérdés alcímét.",
@@ -1404,7 +1419,8 @@ export var huStrings = {
       textUpdateMode: "Válasszon a következők közül: \"Elveszett fókuszban\" - az érték frissül, amikor a beviteli mező elveszíti a fókuszt; \"Gépelés közben\" - az érték valós időben frissül, ahogy a felhasználók gépelnek. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Alapértelmezés szerint elveszett fókuszban\").",
       url: "Bármely webszolgáltatást használhat adatforrásként feleletválasztós kérdésekhez. A választási lehetőségek értékeinek feltöltéséhez adja meg az adatokat szolgáltató szolgáltatás URL-címét.",
       searchMode: "A legördülő lista szűrésére szolgáló összehasonlító művelet.",
-      textWrapEnabled: "A választási lehetőségekben szereplő hosszú szövegek automatikusan sortöréseket generálnak, hogy elférjenek a legördülő menüben. Törölje a jelet a jelölőnégyzetből, ha le szeretné vágni a szövegeket."
+      textWrapEnabled: "A választási lehetőségekben szereplő hosszú szövegek automatikusan sortöréseket generálnak, hogy elférjenek a legördülő menüben. Törölje a jelet a jelölőnégyzetből, ha le szeretné vágni a szövegeket.",
+      effectiveColSpan: "Megadja, hogy ez a kérdés hány oszlopra terjed ki a rácsos elrendezésen belül."
     },
     signaturepad: {
       signatureWidth: "Beállítja a megjelenített aláírási terület szélességét és az eredményül kapott képet.",
@@ -1433,7 +1449,8 @@ export var huStrings = {
     },
     // survey templates
     survey: {
-      mode: "Válasszon a következők közül: \"Szerkeszthető\" - lehetővé teszi a válaszadók számára a felmérés kitöltését; \"Csak olvasható\" - letiltja az űrlapszerkesztést."
+      readOnly: "Válassza ki, ha meg szeretné akadályozni, hogy a válaszadók kitöltsék a felmérést.",
+      progressBarLocation: "Beállítja a folyamatjelző sáv helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt."
     },
     matrixdropdowncolumn: {
       name: "A válaszadók számára nem látható oszlopazonosító.",
@@ -1455,7 +1472,7 @@ export var huStrings = {
     autoAdvanceEnabled: "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan továbblépjen a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést. Ez a funkció nem érvényes, ha az oldal utolsó kérdése nyitott végű, vagy több választ is lehetővé tesz.",
     autoAdvanceAllowComplete: "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan kitöltődjön, miután a válaszadó megválaszolta az összes kérdést.",
     showNavigationButtons: "Beállítja a navigációs gombok láthatóságát és helyét az oldalon.",
-    showProgressBar: "Beállítja a folyamatjelző sáv láthatóságát és helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt.",
+    navigationButtonsLocation: "Beállítja a navigációs gombok helyét az oldalon.",
     showPreviewBeforeComplete: "Engedélyezze az előnézeti oldalt csak az összes vagy megválaszolt kérdéssel.",
     questionTitleLocation: "A felmérésben szereplő összes kérdésre vonatkozik. Ezt a beállítást felülbírálhatják az alacsonyabb szinteken lévő címigazítási szabályok: panel, oldal vagy kérdés. Az alacsonyabb szintű beállítás felülírja a magasabb szinten lévőket.",
     requiredMark: "Egy szimbólum vagy szimbólumsorozat, amely jelzi, hogy válaszolni kell.",
@@ -1479,6 +1496,7 @@ export var huStrings = {
     rowTitleWidth: "CSS-értékeket fogad el (px, %, in, pt stb.).",
     totalText: "Csak akkor látható, ha legalább egy oszlop Összeg típusú vagy Összeg kifejezéssel rendelkezik.",
     cellErrorLocation: "Beállítja a hibaüzenet helyét egy érvénytelen bevitelű cellával kapcsolatban. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza.",
+    detailErrorLocation: "Beállítja a hibaüzenetek helyét a részletes szakaszokba ágyazott kérdésekhez. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza.",
     keyDuplicationError: "Ha az \"Ismétlődő válaszok megakadályozása\" tulajdonság engedélyezve van, az ismétlődő bejegyzést beküldeni próbáló válaszadó a következő hibaüzenetet kapja.",
     totalExpression: "Lehetővé teszi az összesített értékek kiszámítását egy kifejezés alapján. A kifejezés tartalmazhat alapvető számításokat ('{q1_id} + {q2_id}'), logikai kifejezéseket ('{age} > 60') és függvényeket ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb.).",
     confirmDelete: "Elindít egy kérést, amely a sor törlésének megerősítését kéri.",
@@ -1501,7 +1519,8 @@ export var huStrings = {
       questionTitleWidth: "Egységes szélességet állít be a kérdéscímekhez, ha azok a kérdésmezőktől balra vannak igazítva. CSS-értékeket fogad el (px, %, in, pt stb.).",
       questionErrorLocation: "Beállítja az érvénytelen bevitelű kérdéssel kapcsolatos hibaüzenet helyét. Válasszon a következők közül: \"Felső\" - egy hibaüzenet kerül a kérdésmező tetejére; \"Alsó\" - egy hibaüzenet kerül a kérdésmező aljára. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Felül\" alapértelmezés szerint).",
       questionOrder: "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. Az \"Öröklés\" opció a felmérési szintű beállítást alkalmazza (\"Eredeti\" alapértelmezés szerint). A beállítás hatása csak az Előnézet lapon látható.",
-      navigationButtonsVisibility: "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\"."
+      showNavigationButtons: "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\".",
+      gridLayoutColumns: "Ez a táblázat lehetővé teszi az oldal egyes rácsoszlopainak konfigurálását. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."
     },
     timerLocation: "Beállítja az időzítő helyét az oldalon.",
     panelsState: "Válasszon a következők közül: \"Zárolt\" - a felhasználók nem bonthatják ki vagy csukhatják össze a paneleket; \"Az összes összecsukása\" - minden panel összecsukott állapotban indul; \"Összes kibontása\" - minden panel kibővített állapotban indul; \"Először bővített\" - csak az első panel bővül.",
@@ -1516,6 +1535,8 @@ export var huStrings = {
     useDisplayValuesInDynamicTexts: "Az egyszeres és többszörös kijelölésű kérdéstípusokban minden választási lehetőség rendelkezik azonosítóval és megjelenített értékkel. Ha be van jelölve, ez a beállítás azonosító érték helyett megjelenítési értéket jelenít meg a HTML-kérdésekben, valamint a dinamikus címekben és a földmérési elemek leírásában.",
     clearIfInvisible: "Válassza ki, hogy törli-e a feltételes logika által elrejtett kérdésértékeket, és mikor tegye meg. Az \"Öröklés\" opció a felmérési szintű beállítást alkalmazza (\"Felmérés befejezésekor\" alapértelmezés szerint).",
     choicesFromQuestionMode: "Válasszon a következők közül: \"Összes\" - átmásolja az összes választási lehetőséget a kiválasztott kérdésből; \"Kiválasztott\" - dinamikusan másolja csak a kiválasztott választási lehetőségeket; \"Nem kiválasztott\" - dinamikusan csak a nem kiválasztott választási lehetőségeket másolja. A \"Nincs\" és az \"Egyéb\" opciók alapértelmezés szerint másolásra kerülnek, ha engedélyezve vannak a forráskérdésben.",
+    choiceValuesFromQuestion: "Az egyszeres és többszörös kijelölésű kérdéstípusokban minden választási lehetőség rendelkezik azonosítóval és megjelenített értékkel. Ez a beállítás határozza meg, hogy melyik mátrixoszlop vagy panelkérdés adja meg az azonosítókat.",
+    choiceTextsFromQuestion: "Az egyszeres és többszörös kijelölésű kérdéstípusokban minden választási lehetőség rendelkezik azonosítóval és megjelenített értékkel. Ez a beállítás határozza meg, hogy melyik mátrixoszlop vagy panelkérdés jelenítse meg a megjelenített szövegeket.",
     showOtherItem: "Ha be van jelölve, a felhasználók további bevitelt adhatnak meg egy külön megjegyzésmezőben.",
     separateSpecialChoices: "Minden speciális választási lehetőséget (\"Nincs\", \"Egyéb\", \"Összes kijelölése\") új sorban jelenít meg, még akkor is, ha többoszlopos elrendezést használ.",
     path: "Adja meg azt a helyet a szolgáltatás adatkészletén belül, ahol az objektumok céltömbje található. Hagyja üresen, ha az URL-cím már a tömbre mutat.",
@@ -1588,10 +1609,6 @@ export var huStrings = {
       overlapEnabled: "Ha engedélyezve van, a felmérés teteje átfedi a fejléc alját.",
       mobileHeight: "Ha 0-ra van állítva, a magasság automatikusan kiszámításra kerül, hogy elférjen a fejléc tartalma."
     },
-    panellayoutcolumn: {
-      effectiveWidth: "Elfogadja a % értékeket",
-      questionTitleWidth: "Elfogadja a px értékeket."
-    },
     progressBarInheritWidthFrom: "Az \"Ugyanaz, mint a tároló\" opció automatikusan beállítja a folyamatjelző sáv területének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül."
   },
   // Properties
@@ -1660,7 +1677,6 @@ export var huStrings = {
     inputTextAlignment: "Bemeneti érték igazítása",
     elements: "Elemek",
     content: "Tartalom",
-    navigationButtonsVisibility: "Navigációs gombok láthatósága",
     navigationTitle: "Navigációs cím",
     navigationDescription: "Navigáció leírása",
     longTap: "Hosszú koppintás",
@@ -2045,11 +2061,11 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.panelsState: "Inner panel expand state" => "Belső panel kibontási állapota"
 // pe.templateDescription: "Description template" => "Leíró sablon"
 // pe.templateTitle: "Title template" => "Cím sablon"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Előző Panel gomb eszköztipp"
-// pe.panelNextText: "Next Panel button tooltip" => "Következő Panel gomb elemleírása"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Előző Panel gomb eszköztipp"
+// pe.nextPanelText: "Next Panel button tooltip" => "Következő Panel gomb elemleírása"
 // pe.showRangeInProgress: "Show progress bar" => "Folyamatjelző sáv megjelenítése"
 // pe.templateQuestionTitleLocation: "Question title location" => "Kérdés címének helye"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "A Panel gomb helyének eltávolítása"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "A Panel gomb helyének eltávolítása"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "A kérdés elrejtése, ha nincsenek sorok"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Oszlopok elrejtése, ha nincsenek sorok"
 // pe.rateValues: "Custom rate values" => "Egyéni díjértékek"
@@ -2793,7 +2809,7 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Az ezen az oldalon található összes kérdésre vonatkozik. Ha felül szeretné bírálni ezt a beállítást, határozzon meg címigazítási szabályokat az egyes kérdésekhez vagy panelekhez. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Felül\" alapértelmezés szerint)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Beállítja az érvénytelen bevitelű kérdéssel kapcsolatos hibaüzenet helyét. Válasszon a következők közül: \"Felső\" - egy hibaüzenet kerül a kérdésmező tetejére; \"Alsó\" - egy hibaüzenet kerül a kérdésmező aljára. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Felül\" alapértelmezés szerint)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. Az \"Öröklés\" opció a felmérési szintű beállítást alkalmazza (\"Eredeti\" alapértelmezés szerint). A beállítás hatása csak az Előnézet lapon látható."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Válasszon a következők közül: \"Zárolt\" - a felhasználók nem bonthatják ki vagy csukhatják össze a paneleket; \"Az összes összecsukása\" - minden panel összecsukott állapotban indul; \"Összes kibontása\" - minden panel kibővített állapotban indul; \"Először bővített\" - csak az első panel bővül."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Adjon meg egy megosztott tulajdonságnevet az objektumok tömbjében, amely tartalmazza az adatválaszték-listában megjeleníteni kívánt kép- vagy videofájl URL-címeit."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "A bal oldali érték a feltételes szabályokban használt elemazonosítóként szolgál, a jobb oldali érték megjelenik a válaszadók számára."
@@ -3123,3 +3139,37 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // tabs.surfaceBackground: "Surface Background" => "Felület háttér"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Az utolsó bejegyzés válaszainak használata alapértelmezettként"
 // colors.gray: "Gray" => "Szürke"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Navigációs gombok igazítása"
+// pv.allQuestions: "Show all questions" => "Az összes kérdés megjelenítése"
+// pv.answeredQuestions: "Show answered questions only" => "Csak a megválaszolt kérdések megjelenítése"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Beállítja a navigációs gombok helyét az oldalon."
+// pe.size: "Input field width (in characters)" => "Beviteli mező szélessége (karakterben)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Használja a következő mátrixoszlop vagy panelkérdés értékeit választási lehetőség-azonosítóként:"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Használja a következő mátrixoszlop vagy panelkérdés értékeit választási szövegként:"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Az egyszeres és többszörös kijelölésű kérdéstípusokban minden választási lehetőség rendelkezik azonosítóval és megjelenített értékkel. Ez a beállítás határozza meg, hogy melyik mátrixoszlop vagy panelkérdés adja meg az azonosítókat."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Az egyszeres és többszörös kijelölésű kérdéstípusokban minden választási lehetőség rendelkezik azonosítóval és megjelenített értékkel. Ez a beállítás határozza meg, hogy melyik mátrixoszlop vagy panelkérdés jelenítse meg a megjelenített szövegeket."
+// pe.progressBarLocation: "Progress bar alignment" => "Folyamatjelző sáv igazítása"
+// progressBarLocation.topbottom: "Top and bottom" => "Felső és alsó"
+// progressBarLocation.aboveheader: "Above the header" => "A fejléc felett"
+// progressBarLocation.belowheader: "Below the header" => "A fejléc alatt"
+// progressBarLocation.off: "Hidden" => "Rejtett"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Beállítja a folyamatjelző sáv helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt."
+// survey.readOnly: "Make the survey read-only" => "A felmérés írásvédetté tétele"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Válassza ki, ha meg szeretné akadályozni, hogy a válaszadók kitöltsék a felmérést."
+// paneldynamic.showNumber: "Number the panel" => "A panel számozása"
+// question.showNumber: "Number this question" => "Számozza meg ezt a kérdést"
+// pe.previewMode: "Preview mode" => "Előnézeti mód"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "A rácselrendezés engedélyezése"
+// pe.maskSettings: "Mask settings" => "Maszk beállításai"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Sorbővítési hibaüzenet igazítása"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Beállítja a hibaüzenetek helyét a részletes szakaszokba ágyazott kérdésekhez. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza."
+// pe.gridLayoutColumns: "Grid layout columns" => "Rácsos elrendezés oszlopai"
+// pe.startPageTitlePlaceholder: "Start Page" => "Kezdőlap"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektív szélesség, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Kérdés címének szélessége, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Még nincsenek elrendezésoszlopok"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Megadja, hogy ez a panel hány oszlopot ölel fel a rácselrendezésen belül."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ez a táblázat lehetővé teszi az egyes rácsoszlopok konfigurálását a panelen. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "A Survey Creator lehetővé teszi az űrlapelemek szövegközi szélességének manuális beállítását az elrendezés vezérléséhez. Ha ez nem hozza meg a kívánt eredményt, engedélyezheti a rácselrendezést, amely oszlopalapú rendszer használatával struktúrákat alkot elemeket. Az elrendezésoszlopok konfigurálásához válasszon ki egy oldalt vagy panelt, és használja a \"Kérdésbeállítások\" → a \"Rácsoszlopok\" táblázatot. Annak beállításához, hogy egy kérdés hány oszlopra terjed ki, válassza ki azt, és állítsa be a kívánt értéket az \"Elrendezés\" → az \"Oszloptartomány\" mezőben."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Megadja, hogy ez a kérdés hány oszlopra terjed ki a rácsos elrendezésen belül."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ez a táblázat lehetővé teszi az oldal egyes rácsoszlopainak konfigurálását. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."

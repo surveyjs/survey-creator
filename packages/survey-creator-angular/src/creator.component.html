@@ -20,9 +20,8 @@
           <div class="svc-creator__content-wrapper svc-flex-row"
             [class.svc-creator__content-wrapper--footer-toolbar]="creator.isMobileView">
             <div class="svc-creator__content-holder svc-flex-column">
-              <ng-container *ngFor="let tab of creator.tabs">
-                <div class="svc-creator-tab" *ngIf="creator.viewType == tab.id && tab.visible"
-                  [attr.id]="'scrollableDiv-' + tab.id"
+              <ng-container *ngFor="let tab of visibleTabs; trackBy: trackTabBy">
+                <div class="svc-creator-tab" [attr.id]="'scrollableDiv-' + tab.id"
                   [class.svc-creator__toolbox--right]="creator.toolboxLocation == 'right'">
                   <ng-template
                     [component]="{ name: tab.componentContent, data: { model: tab.data.model } }"></ng-template>

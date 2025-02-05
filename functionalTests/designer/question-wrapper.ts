@@ -139,11 +139,11 @@ test("Single input question wrapper action duplicate", async (t) => {
   const title1 = await questions.nth(0).find(".sd-question__title").innerText;
   await t
     .expect(questions.count).eql(2)
-    .expect(normalize(title1)).eql("1. question1");
+    .expect(normalize(title1)).eql("question1");
 
   const title2 = await questions.nth(1).find(".sd-question__title").innerText;
   await t
-    .expect(normalize(title2)).eql("2. question2")
+    .expect(normalize(title2)).eql("question2")
     .expect(questions.nth(0).hasClass("svc-question__content--selected")).notOk()
     .expect(questions.nth(1).hasClass("svc-question__content--selected")).ok();
 });
@@ -162,13 +162,13 @@ test("Single input question wrapper action change require", async (t) => {
 
   let title = await questionTitle.innerText;
   await t
-    .expect(normalize(title)).eql("1. question1")
+    .expect(normalize(title)).eql("question1")
     .expect(requiredActionButton.hasClass("svc-survey-element-toolbar__item--active")).notOk()
 
     .click(requiredActionButton);
   title = await questionTitle.innerText;
   await t
-    .expect(normalize(title)).eql("1. question1 *")
+    .expect(normalize(title)).eql("question1 *")
     .expect(requiredActionButton.hasClass("svc-survey-element-toolbar__item--active")).ok();
 });
 
@@ -418,6 +418,30 @@ test("Question adorner - collapse button in differen modes", async (t) => {
   await setJSON(json);
   await t.expect(qCollapseButton.visible).ok();
   await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "never"; })();
+});
+
+test("Question and page collapse button title", async (t) => {
+  await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    elements: [
+      {
+        type: "text",
+        name: "question1"
+      }
+    ]
+  };
+  await setJSON(json);
+  await t.hover(getToolboxItemByText("Single-Line Input"));
+  const qCollapseButton = Selector(".svc-question__content #collapse button");
+  await t.expect(qCollapseButton.getAttribute("title")).eql("Collapse");
+  await t.click(qCollapseButton);
+  await t.expect(qCollapseButton.getAttribute("title")).eql("Expand");
+
+  const pCollapseButton = Selector(".svc-page__content #collapse button");
+  await t.expect(pCollapseButton.getAttribute("title")).eql("Collapse");
+  await t.click(pCollapseButton);
+  await t.expect(pCollapseButton.getAttribute("title")).eql("Expand");
 });
 
 test("Question adorner - do not render content when initially collapsed", async (t) => {

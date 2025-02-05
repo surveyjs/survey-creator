@@ -165,7 +165,7 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
       iconSize: "auto",
       locTitleName: "ed.surveyJsonImportButton",
       locTooltipName: "ed.surveyJsonImportButton",
-      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "editor"; }),
+      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "json"; }),
       mode: "small",
       component: "sv-action-bar-item",
       needSeparator: true,
@@ -192,7 +192,7 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
       iconSize: "auto",
       locTitleName: "ed.surveyJsonExportButton",
       locTooltipName: "ed.surveyJsonExportButton",
-      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "editor"; }),
+      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "json"; }),
       mode: "small",
       component: "sv-action-bar-item",
       action: () => {
@@ -207,7 +207,7 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
       iconSize: "auto",
       locTitleName: "ed.surveyJsonCopyButton",
       locTooltipName: "ed.surveyJsonCopyButton",
-      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "editor"; }),
+      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "json"; }),
       mode: "small",
       component: "sv-action-bar-item",
       action: () => {

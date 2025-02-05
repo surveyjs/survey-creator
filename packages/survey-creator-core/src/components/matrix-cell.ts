@@ -12,7 +12,7 @@ import {
   surveyLocalization,
   Serializer,
 } from "survey-core";
-import { defaultV2Css } from "survey-core";
+import { defaultCss } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { toggleHovered } from "../utils/html-element-utils";
 import { SurveyHelper } from "../survey-helper";
@@ -28,7 +28,7 @@ export class MatrixCellWrapperEditSurvey {
     let questionJSON = cellQuestion.toJSON();
     questionJSON.type = cellQuestion.getType();
     this.surveyValue = creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor", model, (survey: SurveyModel): void => {
-      survey.css = defaultV2Css;
+      survey.css = defaultCss;
       survey.setDesignMode(true);
       (<any>survey).isPopupEditorContent = true;
       survey.showQuestionNumbers = "none";
@@ -75,7 +75,7 @@ export class MatrixCellWrapperViewModel extends Base {
     // if(!question && !!this.templateData.data) {
     //   this.question = this.templateData.data;
     // }
-    creator.onSelectedElementChanged.add(this.onSelectionChanged);
+    creator.onElementSelected.add(this.onSelectionChanged);
   }
   @property() isSelected: boolean;
 
@@ -146,7 +146,7 @@ export class MatrixCellWrapperViewModel extends Base {
     }
   }
   public dispose(): void {
-    this.creator.onSelectedElementChanged.remove(this.onSelectionChanged);
+    this.creator.onElementSelected.remove(this.onSelectionChanged);
     super.dispose();
   }
 }

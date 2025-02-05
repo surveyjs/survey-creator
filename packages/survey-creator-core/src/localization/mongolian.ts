@@ -22,7 +22,7 @@ export var mnStrings = {
     theme: "Сэдвүүд",
     translation: "Орчуулга",
     designer: "Удирдлага",
-    editor: "JSON засварлагч",
+    json: "JSON засварлагч",
     logic: "Логик"
   },
   // Question types
@@ -308,6 +308,10 @@ export var mnStrings = {
       maxWidth: "Хамгийн их хавтан өргөн",
       showNumber: "Энэ хавсралтыг дугаарлах"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Үр дүнтэй өргөн, %",
+      questionTitleWidth: "Асуултын гарчиг өргөн, px"
+    },
     paneldynamic: {
       name: "Панелийн нэр",
       title: "Панел цол",
@@ -327,15 +331,13 @@ export var mnStrings = {
       templateTabTitle: "Таб нэрийн загвар",
       tabTitlePlaceholder: "Таб нэрийн хуудас эзэмшигч",
       templateVisibleIf: "Хувь хүний панелыг ил гаргах",
-      hideNumber: "Хавтангийн дугаарыг нуух",
+      showNumber: "Хавтангийн дугаар",
       titleLocation: "Панел цолны зохицуулалт",
       descriptionLocation: "Панел дүрслэлийн зохицуулалт",
       templateQuestionTitleLocation: "Асуулт нэрийн уялдаа",
       templateErrorLocation: "Алдааны мессежийн зохицуулалт",
       newPanelPosition: "Шинэ панелийн байршил",
       showRangeInProgress: "Хөгжил дэвшлийн барыг харуул",
-      showProgressBar: "Хөгжил дэвшлийн барыг харуул",
-      progressBarLocation: "Хөгжлийн барын зохицуулалт",
       keyName: "Дараах асуултад хувилж хариулахаас сэргийлье"
     },
     question: {
@@ -346,7 +348,7 @@ export var mnStrings = {
       requiredIf: "Шаардлагатай асуултыг тавих",
       page: "Эх хуудас",
       state: "Асуултын хайрцаг нурах байдал",
-      hideNumber: "Асуултын дугаарыг нуух",
+      showNumber: "Энэ асуултыг дугаарла.",
       titleLocation: "Асуулт нэрийн уялдаа",
       descriptionLocation: "Асуулт тодорхойлолтын зохицуулалт",
       errorLocation: "Алдааны мессежийн зохицуулалт",
@@ -388,7 +390,8 @@ export var mnStrings = {
     // survey templates
     survey: {
       title: "Нүүр",
-      description: "Судалгааны тодорхойлолт"
+      description: "Судалгааны тодорхойлолт",
+      readOnly: "Судалгааг зөвхөн унших хэлбэртэй болго"
     },
     page: {
       name: "Хуудасны нэр",
@@ -506,6 +509,7 @@ export var mnStrings = {
     listIsEmpty: "Одоогоор ямар ч зүйл ороогүй байна",
     "listIsEmpty@choices": "Одоогор ямар ч сонголт ороогүй байна",
     "listIsEmpty@columns": "Танд ямар ч багана байхгүй",
+    "listIsEmpty@gridLayoutColumns": "Танд загварын багана хараахан байхгүй байна",
     "listIsEmpty@rows": "Чамд ямар ч мөр байхгүй",
     "listIsEmpty@validators": "Танд ямар нэгэн баталгаажуулалтын дүрэм байхгүй байна",
     "listIsEmpty@calculatedValues": "Танд ямар ч хувийн хувьсагч байхгүй",
@@ -539,6 +543,7 @@ export var mnStrings = {
     titlePlaceholder: "Гарчиг",
     surveyTitlePlaceholder: "Санал асуулгын гарчиг",
     pageTitlePlaceholder: "Хуудас {num}",
+    startPageTitlePlaceholder: "Эхлэх хуудас",
     descriptionPlaceholder: "Тайлбар",
     surveyDescriptionPlaceholder: "Тайлбар",
     pageDescriptionPlaceholder: "Тайлбар",
@@ -611,7 +616,6 @@ export var mnStrings = {
     simulator: "Төхөөрөмжийн төрөл сонгоно уу",
     landscapeOrientation: "Хэвтээ байрлалд шилжих",
     portraitOrientation: "Босоо байрлалд шилжих",
-    mode: "Засах боломжтой эсвэл зөвхөн унших",
     clearInvisibleValues: "Харагдахгүй утгыг цэвэрлэх",
     cookieName: "Cookie name",
     partialSendEnabled: "Хэсэгчилсэн санал асуулгын явцыг хадгалах",
@@ -625,12 +629,14 @@ export var mnStrings = {
     editText: "Хариулт засах харагдах бичиг",
     startSurveyText: "Санал асуулга эхлэх үед харагдах бичиг",
     showNavigationButtons: "Чиглүүлгийн товчийн байрлал",
+    navigationButtonsLocation: "Навигацийн товчлууруудын байрлал",
     showPrevButton: "Өмнөх хуудасны товч харуулах",
     firstPageIsStartPage: "Эхлэх хуудас нь эхний хуудас байна",
     showCompletePage: "Санал асуулга амжилттай бөглөгдсөн хуудсыг харуулах",
     autoAdvanceEnabled: "Дараагийн хуудас руу автоматаар шилжих",
     autoAdvanceAllowComplete: "Судалгааг автоматаар дуусгах",
     showProgressBar: "Явцын мөрний байршил",
+    progressBarLocation: "Progress bar alignment",
     questionTitleLocation: "Асуултын гарчгийн байршил",
     questionTitleWidth: "Асуулт нэрийн өргөн",
     requiredMark: "Шаардлагатай тэмдэг(үүд)",
@@ -646,8 +652,8 @@ export var mnStrings = {
     renderMode: "Панелийн дэлгэцийн горим",
     allowAddPanel: "Панел нэмэхийг зөвшөөрөх",
     allowRemovePanel: "Панел хасахыг зөвшөөрөх",
-    panelAddText: "Панел товчийн текст нэмэх",
-    panelRemoveText: "Панел товчийн текст хасах",
+    addPanelText: "Панел товчийн текст нэмэх",
+    removePanelText: "Панел товчийн текст хасах",
     isSinglePage: "Бүх элементийг нэг хуудас дээр харуулах",
     html: "HTML тэмдэглэгээ",
     setValue: "Хариулт",
@@ -721,9 +727,9 @@ export var mnStrings = {
     minPanelCount: "Хамгийн бага панелийн тоо",
     maxPanelCount: "Хамгийн их панелийн тоо",
     panelsState: "Дотоод панелийн өргөссөн төлөв",
-    panelPrevText: "Өмнөх панелийн товч",
-    panelNextText: "Дараагийн панелийн товч",
-    panelRemoveButtonLocation: "Панел устгах товчны байршил",
+    prevPanelText: "Өмнөх панелийн товч",
+    nextPanelText: "Дараагийн панелийн товч",
+    removePanelButtonLocation: "Панел устгах товчны байршил",
     hideIfRowsEmpty: "Мөр байхгүй тохиолдолд асуултыг нуух",
     hideColumnsIfEmpty: "Мөр байхгүй тохиолдолд баганыг нуух",
     rateValues: "Хэрэглэгчийн үнэлгээний утгууд",
@@ -753,6 +759,8 @@ export var mnStrings = {
     separateSpecialChoices: "Тусгай сонголтуудыг салгах (Аль нь ч биш, Бусад, Бүгдийг сонгох)",
     choicesFromQuestion: "Дараах асуултаас сонголтуудыг хуулах.",
     choicesFromQuestionMode: "Аль сонголтуудыг хуулах вэ?",
+    choiceValuesFromQuestion: "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын ID болгон ашигла",
+    choiceTextsFromQuestion: "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын текст болгон ашигла",
     progressBarShowPageTitles: "Хөгжил дэвшлийн тавцан дахь хуудасны гарчгыг харуул",
     progressBarShowPageNumbers: "Хуудасны дугааруудыг progress bar-д харуулах",
     showCommentArea: "Санал хүсэлтийн хэсэг харуулах",
@@ -787,6 +795,11 @@ export var mnStrings = {
       top: "Дээр",
       bottom: "Доор"
     },
+    previewMode: "Урьдчилан харах хэлбэр",
+    gridLayoutEnabled: "Grid layout-ийг идэвхжүүлэх",
+    gridLayoutColumns: "Grid layout columns",
+    maskSettings: "Маскийн тохиргоо",
+    detailErrorLocation: "Мөр өргөтгөлийн алдаа мессежийн тохируулга",
     // Creator tabs
     tabs: {
       panel: {
@@ -1104,6 +1117,8 @@ export var mnStrings = {
     noPreview: "Урьдчилан харах боломжгүй",
     showAllQuestions: "Бүх асуултыг харуулах.",
     showAnsweredQuestions: "Зөвхөн хариулсан асуултуудыг харуулах.",
+    allQuestions: "Бүх асуултыг үзүүл",
+    answeredQuestions: "Зөвхөн хариулсан асуултуудыг үзүүлэх",
     pages: "Бөглөгдсөн хуудсууд",
     questions: "Хариулсан асуултууд",
     requiredQuestions: "Заавал бөглөх асуултууд",
@@ -1199,16 +1214,13 @@ export var mnStrings = {
     questionOrder: {
       initial: "Оргил"
     },
-    showProgressBar: {
-      off: "Нуусан",
-      topbottom: "Дээд ба доод",
-      aboveheader: "Толгой дээгүүр",
-      belowheader: "Гарчигны доор"
-    },
     progressBarLocation: {
       top: "Дээд",
       bottom: "Доод",
-      topBottom: "Дээд, доод"
+      topbottom: "Дээд ба доод",
+      aboveheader: "Гарчгийн дээр",
+      belowheader: "Гарчгийн доод талд",
+      off: "Нуугдмал"
     },
     sum: "Сум",
     count: "Тооллого",
@@ -1353,7 +1365,9 @@ export var mnStrings = {
       startWithNewLine: "Өмнөх асуулт эсвэл панелтай нэг мөрт үзүүлэхээр сонгогдоогүй. Хэрэв панел нь таны маягт дахь анхны элемент бол тохиргоо хамаарахгүй.",
       state: "Сонголтоос: \"Өргөтгөсөн\" - хавтанг бүрэн харуулж, нурааж болно; \"Нурсан\" - панел нь зөвхөн гарчиг, тодорхойлолтыг харуулж, өргөтгөх боломжтой; \"Цоожтой\" - панелыг бүрэн харуулсан бөгөөд нурааж болохгүй.",
       width: "Панелийн өргөнийг ижил шугамаар бусад судалгааны элементүүдтэй тэнцүү тогтооно. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
-      showQuestionNumbers: "Энэ самбарт байрлуулсан асуултуудад дугаар өгнө."
+      showQuestionNumbers: "Энэ самбарт байрлуулсан асуултуудад дугаар өгнө.",
+      effectiveColSpan: "Энэ панел grid загварт хэдэн багана багтаахыг тодорхойлно.",
+      gridLayoutColumns: "Энэ хүснэгт нь панел доторх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."
     },
     paneldynamic: {
       name: "Хариулагчдад харагдахгүй панелийн ID.",
@@ -1384,6 +1398,7 @@ export var mnStrings = {
     resetValueIf: "\"Default value expression\" эсвэл \"Set value expression\" эсвэл \"Default answer\" value (хэрэв аль нэгийг нь тогтоосон бол) үнэ цэнэд үндэслэн хариулагчийн оруулсан хувь нэмрийг үнэ цэнэд хэзээ дахин тохируулахыг тодорхойлох нөхцөлтэй дүрмийг тогтоохын тулд шидэт wand зургыг ашигла.",
     setValueIf: "Ид шидийн wand зургыг ашиглан \"Set value expression\"-ийг хэзээ ажиллуулахыг тодорхойлох нөхцөлтэй дүрмийг тогтоож, үр дүнд хүрсэн үнэ цэнийг хариу болгон динамикаар даалга.",
     setValueExpression: "\"Set value if\" дүрмийн нөхцөл хангагдсан үед тогтоох үнэ цэнийг тодорхойлсон илэрхийллийг тодорхойл. Илэрхийлэл нь үндсэн тооцоо - '{q1_id} + {q2_id}', Бөүлийн илэрхийллүүд, тухайлбал '{age} > 60', функц: 'iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м. Энэ илэрхийлэлээр тогтоосон үнэ цэнийг хариулагчийн гарын авлагын оролтоор давхардуулан авч болно.",
+    gridLayoutEnabled: "Survey Creator нь загварыг хянахын тулд хэлбэрийн элементүүдийн inline өргөнийг гараар тохируулах боломжийг олгодог. Хэрэв энэ нь хүссэн үр дүнг өгөхгүй бол баган дээр суурилсан системийг ашиглан элементүүдийг бүрдүүлдэг grid layout-ийг идэвхжүүлж болно. Загварын багануудыг тохируулахын тулд хуудас эсвэл панелийг сонгоод \"Асуултын тохиргоо\" → \"Grid columns\" хүснэгтийг ашиглана. Асуулт хэдэн багана багтаахыг тохируулахын тулд үүнийг сонгоод \"Layout\" → \"Column span\" талбарт хүссэн утгыг тохируул.",
     question: {
       name: "Асуултад хариулагчдад харагдахгүй асуултын ID.",
       description: "Асуултын дэд гарчиг бичнэ үү.",
@@ -1404,7 +1419,8 @@ export var mnStrings = {
       textUpdateMode: "Сонгоно уу: \"Алдагдсан фокус дээр\" - оролтын талбар анхаарлаа алдсан үед үнэ цэнэ нь шинэчлэгддэг; \"Цахимаар бичих\" - хэрэглэгчид бичихийн хэрээр үнэ цэнэ нь бодит цаг хугацаанд шинэчлэгддэг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Алдагдсан фокус дээр\" дефолтоор) хэрэгжүүлдэг.",
       url: "Та ямар ч вэб үйлчилгээг олон сонголттой асуултуудад мэдээллийн эх сурвалж болгон ашиглаж болно. Сонголтын үнэт зүйлсийг хүн амлахын тулд өгөгдөл өгөх үйлчилгээний URL-ийг оруулна уу.",
       searchMode: "Дуслын жагсаалтыг шүүлт хийхэд ашигладаг харьцуулах мэс засал.",
-      textWrapEnabled: "Сонголтын сонголтуудын урт текстүүд нь дусал цэсний дотор багтахын тулд автоматаар шугамын завсар үүсгэх болно. Хэрэв та бичвэрүүдийг хайчлахыг хүсвэл сонгогдоогүй."
+      textWrapEnabled: "Сонголтын сонголтуудын урт текстүүд нь дусал цэсний дотор багтахын тулд автоматаар шугамын завсар үүсгэх болно. Хэрэв та бичвэрүүдийг хайчлахыг хүсвэл сонгогдоогүй.",
+      effectiveColSpan: "Энэ асуулт хүснэгтийн загварт хэдэн багана багтаахыг тодорхойлно."
     },
     signaturepad: {
       signatureWidth: "Үзүүлсэн гарын үсэг зурсан хэсгийн өргөнийг болон үүний үр дүнд бий болсон зургийг тогтоо.",
@@ -1433,7 +1449,8 @@ export var mnStrings = {
     },
     // survey templates
     survey: {
-      mode: "Аль нэгийг нь сонгох: \"Editable\" - таны судалгааг бөглөх боломжийг санал асуулгад оролцогчдын хувьд олгодог; \"Зөвхөн уншлага\" - хөгжлийн бэрхшээлтэй хүмүүс редакци үүсгэнэ."
+      readOnly: "Хэрэв та хариулагчдыг таны судалгааг бөглөхөд саад болохыг хүсвэл сонго.",
+      progressBarLocation: "Явцын барын байршлыг тогтооно. \"Auto\" value нь судалгааны гарчгийн дээр эсвэл доод тал дахь явцын барыг харуулна."
     },
     matrixdropdowncolumn: {
       name: "Хариулагчдад харагдахгүй байгаа баганын ID.",
@@ -1455,7 +1472,7 @@ export var mnStrings = {
     autoAdvanceEnabled: "Оролцогч одоогийн хуудсан дээрх бүх асуултад хариулсны дараа судалгааг дараагийн хуудас руу автоматаар шилжүүлэхийг хүсч байгаа эсэхээ сонго. Хуудасны хамгийн сүүлийн асуулт нээлттэй эсвэл олон хариулт өгөх боломж олгодог бол энэ онцлог хэрэгжихгүй.",
     autoAdvanceAllowComplete: "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго.",
     showNavigationButtons: "Хуудас дээр навигацийн товчны харагдах байдал, байршлыг тогтооно.",
-    showProgressBar: "Хэмжилтийн тавцангийн харагдах байдал, байршлыг тогтооно. \"Авто\" үнэ цэнэ нь судалгааны толгой гарчгийн дээр эсвэл түүнээс доош хөгжил дэвшлийн барыг харуулдаг.",
+    navigationButtonsLocation: "Хуудас дээрх навигацийн товчлууруудын байрлалыг тогтооно.",
     showPreviewBeforeComplete: "Зөвхөн бүх асуултаар эсвэл хариулт бүхий урьдчилан харах хуудсыг боломжтой болго.",
     questionTitleLocation: "Судалгааны бүх асуултад хамаарна. Энэ тохиргоог доод түвшний нэрийн зохицуулах дүрмээр давамгайлах боломжтой: panel, хуудас, эсвэл асуулт. Доод түвшний тохиргоо нь илүү өндөр түвшинд байгаа хүмүүсийг хүчингүй болгоно.",
     requiredMark: "Хариу шаардлагатайг заасан бэлгэдэл буюу бэлгэ тэмдгийн дараалал.",
@@ -1479,6 +1496,7 @@ export var mnStrings = {
     rowTitleWidth: "CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
     totalText: "Хамгийн багадаа нэг багана Нэмэх төрлийн эвсэл нэмэх үйлдэлтэй үед л харагдах боломжтой.",
     cellErrorLocation: "Хүчингүй оруулсан эстэй холбоотой алдааны мессежийн байршлыг тогтооно. \"Өв залгамж\" сонголт нь \"Error message alignment\" өмчийн тохиргоог хэрэгжүүлдэг.",
+    detailErrorLocation: "Нарийвчилсан хэсгүүдэд байрласан асуултуудын алдааны мессежүүдийн байршлыг тохируулна. \"Inherit\" сонголт нь \"Error message alignment\" шинж чанарын тохиргоог хэрэглэнэ.",
     keyDuplicationError: "\"Хуулбарласан хариу арга хэмжээ авахаас урьдчилан сэргийлье\" өмчийг боломжтой болгоход хуулбарлан оруулахыг оролдсон хариулагч дараах алдааны мэдээг хүлээн авна.",
     totalExpression: "Илэрхийллийн үндсэн дээр нийт үнэт зүйлсийг тооцох боломжийг танд олгож байна. Илэрхийлэл нь үндсэн тооцоо ('{q1_id} + {q2_id}'), Бөүлийн илэрхийллүүд ('{нас} > 60') функцууд ('iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м.",
     confirmDelete: "Дарааллыг арилгахыг батлахыг хүссэн өдөөлтийг өдөөв.",
@@ -1501,7 +1519,8 @@ export var mnStrings = {
       questionTitleWidth: "Асуултын хайрцгуудынхаа зүүн талд эгнэн зогсож байх үед асуултын нэрний тогтмол өргөнийг тогтоо. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
       questionErrorLocation: "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг.",
       questionOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
-      navigationButtonsVisibility: "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
+      showNavigationButtons: "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
+      gridLayoutColumns: "Энэ хүснэгт нь хуудас дээрх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."
     },
     timerLocation: "Хуудас дээрх цаг хэмжигчийн байрлалыг тогтооно.",
     panelsState: "Сонгоно уу: \"Locked\" - хэрэглэгчид панелуудыг өргөтгөх, нураах боломжгүй; \"Бүх нуралт\" - бүх панел нурсан байдлаас эхэлнэ; \"Бүх хүрээг өргөтгөнө\" - бүх панелууд өргөтгөсөн байдлаас эхэлнэ; \"First expanded\" - зөвхөн эхний панел нь эхэндээ өргөжсөн.",
@@ -1516,6 +1535,8 @@ export var mnStrings = {
     useDisplayValuesInDynamicTexts: "Ганц болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон харуулах үнэ цэнэтэй байдаг. Энэ тохиргоо нь сонгогдсон тохиолдолд HTML асуулт болон динамик гарчиг, судалгааны элементүүдийн тодорхойлолтод ID үнэ цэнийн оронд харуулах үнэ цэнийг харуулдаг.",
     clearIfInvisible: "Нөхцөл байдлын логикоор нуусан үнэт зүйлсийг тодорхой болгох уу, хэзээ хийх вэ гэдгийг сонго. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Upon survey completion\" -ийг дефолтоор) хэрэгжүүлдэг.",
     choicesFromQuestionMode: "Сонгоно уу: \"Бүгд\" - сонгосон асуултаас сонголт хийх бүх сонголтыг хуулбарласан; \"Сонгосон\" - динамикаар зөвхөн сонгосон сонголтын хувилбаруудыг хуулбарласан; \"Сонгогдоогүй\" - динамикаар зөвхөн сонгогдоогүй сонголтыг хувилдаг. \"None\" болон \"Бусад\" сонголтууд нь эх сурвалжийн асуулгад боломжтой бол default-ээр хуулагддаг.",
+    choiceValuesFromQuestion: "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт ID-г өгөхийг тодорхойлдог.",
+    choiceTextsFromQuestion: "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт үзүүлбэрийн текстийг хангахыг тодорхойлдог.",
     showOtherItem: "Сонгогдсон тохиолдолд хэрэглэгчид тусад нь тайлбарын хайрцагт нэмэлт оруулах боломжтой.",
     separateSpecialChoices: "Тусгай сонголт бүрийг (\"None\", \"Other\", \"Select All\") шинэ мөр дээр, бүр олон баганатай загварыг ашиглахдаа ч үзүүлдэг.",
     path: "Зорилтот олон тооны объект байрладаг үйлчилгээний мэдээллийн сан доторх байршлыг тодорхойл. URL аль хэдийн багц руу зааж байгаа бол хоосон орхи.",
@@ -1588,10 +1609,6 @@ export var mnStrings = {
       overlapEnabled: "Идэвхжүүлбэл судалгааны дээд хэсэг нь header-ийн доод хэсгийг давхарладаг.",
       mobileHeight: "0 гэж тохируулбал өндөрийг гарчгийн агуулгад тохируулахын тулд автоматаар тооцоолдог."
     },
-    panellayoutcolumn: {
-      effectiveWidth: "Үнэт зүйлсийг %-ийг хүлээн зөвшөөрдөг.",
-      questionTitleWidth: "Үнэ цэнэ px-ийг хүлээн зөвшөөрдөг."
-    },
     progressBarInheritWidthFrom: "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг."
   },
   // Properties
@@ -1660,7 +1677,6 @@ export var mnStrings = {
     inputTextAlignment: "Оролтын үнэ цэнийн зохицуулалт",
     elements: "Элементүүд",
     content: "Контент",
-    navigationButtonsVisibility: "Чиглүүлэх товчны харагдац",
     navigationTitle: "Чиглүүлэгчийн гарчиг",
     navigationDescription: "Чиглүүлэгчийн тайлбар",
     longTap: "Long tap",
@@ -2298,7 +2314,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Энэ хуудсан дахь бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуулт эсвэл панелуудын нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Top\" by default) хэрэгжүүлдэг."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Оригинал\" дефолтоор) хэрэгжүүлдэг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Сонгоно уу: \"Locked\" - хэрэглэгчид панелуудыг өргөтгөх, нураах боломжгүй; \"Бүх нуралт\" - бүх панел нурсан байдлаас эхэлнэ; \"Бүх хүрээг өргөтгөнө\" - бүх панелууд өргөтгөсөн байдлаас эхэлнэ; \"First expanded\" - зөвхөн эхний панел нь эхэндээ өргөжсөн."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Сонгосон жагсаалтанд харуулахыг хүссэн зураг эсвэл видео файл URL-уудыг агуулсан олон тооны эд зүйлсийн дотор хуваалцсан өмчийн нэрийг оруулна уу."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Зүүн үнэ цэнэ нь нөхцөлийн дүрэмд хэрэглэгддэг зүйл ID, зөв үнэ цэнийг хариулагчдад үзүүлдэг."
@@ -2628,3 +2644,36 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // tabs.surfaceBackground: "Surface Background" => "Гадаргуугийн фон"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Сүүлийн тайлбарын хариултуудыг стандарт болгон ашигла"
 // colors.gray: "Gray" => "Саарал"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Навигацийн товчлууруудын байрлал"
+// pv.allQuestions: "Show all questions" => "Бүх асуултыг үзүүл"
+// pv.answeredQuestions: "Show answered questions only" => "Зөвхөн хариулсан асуултуудыг үзүүлэх"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Хуудас дээрх навигацийн товчлууруудын байрлалыг тогтооно."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын ID болгон ашигла"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын текст болгон ашигла"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт ID-г өгөхийг тодорхойлдог."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт үзүүлбэрийн текстийг хангахыг тодорхойлдог."
+// pe.progressBarLocation: "Progress bar alignment" => "Progress bar alignment"
+// progressBarLocation.topbottom: "Top and bottom" => "Дээд ба доод"
+// progressBarLocation.aboveheader: "Above the header" => "Гарчгийн дээр"
+// progressBarLocation.belowheader: "Below the header" => "Гарчгийн доод талд"
+// progressBarLocation.off: "Hidden" => "Нуугдмал"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Явцын барын байршлыг тогтооно. \"Auto\" value нь судалгааны гарчгийн дээр эсвэл доод тал дахь явцын барыг харуулна."
+// survey.readOnly: "Make the survey read-only" => "Судалгааг зөвхөн унших хэлбэртэй болго"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Хэрэв та хариулагчдыг таны судалгааг бөглөхөд саад болохыг хүсвэл сонго."
+// paneldynamic.showNumber: "Number the panel" => "Хавтангийн дугаар"
+// question.showNumber: "Number this question" => "Энэ асуултыг дугаарла."
+// pe.previewMode: "Preview mode" => "Урьдчилан харах хэлбэр"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Grid layout-ийг идэвхжүүлэх"
+// pe.maskSettings: "Mask settings" => "Маскийн тохиргоо"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Мөр өргөтгөлийн алдаа мессежийн тохируулга"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Нарийвчилсан хэсгүүдэд байрласан асуултуудын алдааны мессежүүдийн байршлыг тохируулна. \"Inherit\" сонголт нь \"Error message alignment\" шинж чанарын тохиргоог хэрэглэнэ."
+// pe.gridLayoutColumns: "Grid layout columns" => "Grid layout columns"
+// pe.startPageTitlePlaceholder: "Start Page" => "Эхлэх хуудас"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Үр дүнтэй өргөн, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Асуултын гарчиг өргөн, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Танд загварын багана хараахан байхгүй байна"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Энэ панел grid загварт хэдэн багана багтаахыг тодорхойлно."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Энэ хүснэгт нь панел доторх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator нь загварыг хянахын тулд хэлбэрийн элементүүдийн inline өргөнийг гараар тохируулах боломжийг олгодог. Хэрэв энэ нь хүссэн үр дүнг өгөхгүй бол баган дээр суурилсан системийг ашиглан элементүүдийг бүрдүүлдэг grid layout-ийг идэвхжүүлж болно. Загварын багануудыг тохируулахын тулд хуудас эсвэл панелийг сонгоод \"Асуултын тохиргоо\" → \"Grid columns\" хүснэгтийг ашиглана. Асуулт хэдэн багана багтаахыг тохируулахын тулд үүнийг сонгоод \"Layout\" → \"Column span\" талбарт хүссэн утгыг тохируул."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Энэ асуулт хүснэгтийн загварт хэдэн багана багтаахыг тодорхойлно."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Энэ хүснэгт нь хуудас дээрх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."

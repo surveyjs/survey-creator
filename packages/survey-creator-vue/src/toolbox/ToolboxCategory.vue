@@ -6,43 +6,45 @@
       'svc-toolbox__category--empty': category.empty,
     }"
   >
-    <div
-      class="svc-toolbox__category-header"
-      @click="category.toggleState()"
-      v-key2click
-      :class="{
-        'svc-toolbox__category-header--collapsed':
-          toolbox.canCollapseCategories,
-      }"
-    >
-      <span class="svc-toolbox__category-title">{{ category.title }}</span>
+    <div className="svc-toolbox__category-header-wrapper">
       <div
-        v-if="toolbox.canCollapseCategories"
-        class="svc-toolbox__category-header__controls"
+        class="svc-toolbox__category-header"
+        @click="category.toggleState()"
+        v-key2click
+        :class="{
+          'svc-toolbox__category-header--collapsed':
+            toolbox.canCollapseCategories,
+        }"
       >
-        <div className="svc-toolbox__category-header-wrapper">
+        <span class="svc-toolbox__category-title">{{ category.title }}</span>
+        <div
+          v-if="toolbox.canCollapseCategories"
+          class="svc-toolbox__category-header__controls"
+        >
+          <div className="svc-toolbox__category-header-wrapper">
+            <SvComponent
+              :is="'sv-svg-icon'"
+              :iconName="'icon-arrow-down'"
+              class="svc-toolbox__category-header__button svc-string-editor__button--expand"
+              :size="'auto'"
+              v-show="category.collapsed"
+            ></SvComponent>
+          </div>
           <SvComponent
             :is="'sv-svg-icon'"
-            :iconName="'icon-arrow-down'"
-            class="svc-toolbox__category-header__button svc-string-editor__button--expand"
+            :iconName="'icon-arrow-up'"
+            class="svc-toolbox__category-header__button svc-string-editor__button--collapse"
             :size="'auto'"
-            v-show="category.collapsed"
+            v-show="!category.collapsed"
           ></SvComponent>
         </div>
-        <SvComponent
-          :is="'sv-svg-icon'"
-          :iconName="'icon-arrow-up'"
-          class="svc-toolbox__category-header__button svc-string-editor__button--collapse"
-          :size="'auto'"
-          v-show="!category.collapsed"
-        ></SvComponent>
       </div>
     </div>
     <SvComponent
       :is="'svc-toolbox-tool'"
-      v-for="(item, index) in category.items"
+      v-for="item in category.items"
       :item="item"
-      :key="index"
+      :key="item.renderedId"
       :creator="toolbox.creator"
       :parentModel="toolbox"
       :isCompact="false"

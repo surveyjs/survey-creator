@@ -110,7 +110,7 @@ export var settings = {
     /**
      * Use it to change the default question JSON on dropping it into designer or converting questions
      */
-    defaultJSON: {
+    defaultJSON: <{ [index: string]: any }>{
       dropdown: {
         choices: ["Item 1", "Item 2", "Item 3"]
       },
@@ -185,7 +185,7 @@ export var settings = {
     indentation: 2,
     exportFileName: "survey.json"
   },
-  useLegacyIcons: true
+  useLegacyIcons: false
 };
 export interface ICollectionItemAllowOperations {
   allowDelete: boolean;

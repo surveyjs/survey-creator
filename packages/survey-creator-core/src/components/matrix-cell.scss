@@ -29,8 +29,9 @@
 
 .svc-matrix-cell--selected {
   position: absolute;
-  border: calcSize(0.25) solid $secondary;
-  border-radius: calcSize(0.5);
+  border-radius: var(--ctr-survey-matrix-cell-corner-radius, var(--lbr-corner-radius-x075));
+  border: var(--ctr-survey-matrix-cell-border-width, var(--lbr-stroke-x2)) solid
+    var(--ctr-survey-matrix-cell-border-color-selected, var(--sjs-secondary-background-500, #19b394ff));
   top: calcSize(0);
   left: calcSize(0);
   right: calcSize(0);
@@ -39,12 +40,14 @@
 
   &.svc-visible {
     display: block;
+    border: var(--ctr-survey-matrix-cell-border-width, var(--lbr-stroke-x2)) solid
+      var(--ctr-survey-matrix-cell-border-color-selected, var(--sjs-secondary-background-500, #19b394ff));
   }
 }
 
-.svc-hovered>.svc-matrix-cell--selected:not(.svc-visible) {
-  border: calcSize(0.25) solid $secondary-light;
-  border-radius: calcSize(0.5);
+.svc-hovered > .svc-matrix-cell--selected:not(.svc-visible) {
+  border: var(--ctr-survey-matrix-cell-border-width, var(--lbr-stroke-x2)) solid
+    var(--ctr-survey-matrix-cell-border-color-hovered, var(--sjs-secondary-background-10, #19b3941a));
   display: block;
 }
 
@@ -58,7 +61,8 @@
 }
 
 .svc-matrix-cell__question-controls-button {
-  border: 1px solid $border;
+  border: var(--ctr-survey-contextual-button-border-width, var(--lbr-stroke-x1)) solid
+    var(--ctr-survey-contextual-button-border-color, var(--sjs-border-25, #d4d4d4ff));
 }
 
 .svc-matrix-cell:hover .svc-matrix-cell__question-controls {

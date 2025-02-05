@@ -22,7 +22,7 @@ var simplifiedChineseTranslation = {
     theme: "主题",
     translation: "转换",
     designer: "问卷设计器",
-    editor: "JSON 编辑器",
+    json: "JSON 编辑器",
     logic: "逻辑"
   },
   // Question types
@@ -308,6 +308,10 @@ var simplifiedChineseTranslation = {
       maxWidth: "最大面板宽度",
       showNumber: "为此面板编号"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "有效宽度，%",
+      questionTitleWidth: "问题标题宽度，px"
+    },
     paneldynamic: {
       name: "面板名称",
       title: "面板标题",
@@ -327,15 +331,13 @@ var simplifiedChineseTranslation = {
       templateTabTitle: "选项卡标题模式",
       tabTitlePlaceholder: "选项卡标题占位符",
       templateVisibleIf: "如果出现以下情况，则使单个面板可见",
-      hideNumber: "隐藏面板编号",
+      showNumber: "为面板编号",
       titleLocation: "面板标题对齐方式",
       descriptionLocation: "面板描述对齐方式",
       templateQuestionTitleLocation: "问题标题对齐方式",
       templateErrorLocation: "错误消息对齐",
       newPanelPosition: "新面板位置",
       showRangeInProgress: "显示进度条",
-      showProgressBar: "显示进度条",
-      progressBarLocation: "进度条对齐",
       keyName: "防止在以下问题中重复回答"
     },
     question: {
@@ -346,7 +348,7 @@ var simplifiedChineseTranslation = {
       requiredIf: "如果出现以下情况，则将问题设为必填项",
       page: "父页面",
       state: "问题框折叠状态",
-      hideNumber: "隐藏问题编号",
+      showNumber: "为这个问题编号",
       titleLocation: "问题标题对齐方式",
       descriptionLocation: "问题描述对齐方式",
       errorLocation: "错误消息对齐",
@@ -388,7 +390,8 @@ var simplifiedChineseTranslation = {
     // survey templates
     survey: {
       title: "标题",
-      description: "调查说明"
+      description: "调查说明",
+      readOnly: "将调查设为只读"
     },
     page: {
       name: "页面名称",
@@ -506,6 +509,7 @@ var simplifiedChineseTranslation = {
     listIsEmpty: "尚未添加任何项目",
     "listIsEmpty@choices": "尚未添加任何选项",
     "listIsEmpty@columns": "您还没有任何列",
+    "listIsEmpty@gridLayoutColumns": "您还没有布局列",
     "listIsEmpty@rows": "您还没有任何行",
     "listIsEmpty@validators": "尚无任何验证规则",
     "listIsEmpty@calculatedValues": "您还没有任何自定义变量",
@@ -539,6 +543,7 @@ var simplifiedChineseTranslation = {
     titlePlaceholder: "标题",
     surveyTitlePlaceholder: "调查标题",
     pageTitlePlaceholder: "页数 {num}",
+    startPageTitlePlaceholder: "起始页",
     descriptionPlaceholder: "描述",
     surveyDescriptionPlaceholder: "描述",
     pageDescriptionPlaceholder: "描述",
@@ -611,7 +616,6 @@ var simplifiedChineseTranslation = {
     simulator: "选择设备类型",
     landscapeOrientation: "切换到横向",
     portraitOrientation: "切换到纵向",
-    mode: "模式 (编辑/只读)",
     clearInvisibleValues: "清除隐藏值",
     cookieName: "Cookie名，避免多次运行)",
     partialSendEnabled: "切换页时保存结果",
@@ -625,12 +629,14 @@ var simplifiedChineseTranslation = {
     editText: "编辑应答按钮文本",
     startSurveyText: "开始按钮文本",
     showNavigationButtons: "显示导航按钮 (默认导航)",
+    navigationButtonsLocation: "导航按钮对齐",
     showPrevButton: "显示前一页按钮 (用户可返回至前一页面)",
     firstPageIsStartPage: "调查的第一页面为起始页.",
     showCompletePage: "结尾展示完成后的页面 (completedHtml)",
     autoAdvanceEnabled: "回答本页所有问题后，自动跳转到下一页",
     autoAdvanceAllowComplete: "自动完成调查",
     showProgressBar: "显示进度条",
+    progressBarLocation: "进度条对齐",
     questionTitleLocation: "问题的标题位置",
     questionTitleWidth: "问题标题宽度",
     requiredMark: "问题必填标志",
@@ -646,8 +652,8 @@ var simplifiedChineseTranslation = {
     renderMode: "渲染模式",
     allowAddPanel: "允许添加面板",
     allowRemovePanel: "允许删除面板",
-    panelAddText: "添加面板文本",
-    panelRemoveText: "删除面板文本",
+    addPanelText: "添加面板文本",
+    removePanelText: "删除面板文本",
     isSinglePage: "在一个页面上展示所有元素",
     html: "Html",
     setValue: "答",
@@ -721,9 +727,9 @@ var simplifiedChineseTranslation = {
     minPanelCount: "最小面板数",
     maxPanelCount: "最大面板数",
     panelsState: "内面板展开状态",
-    panelPrevText: "“上一个面板”按钮工具提示",
-    panelNextText: "“下一个面板”按钮工具提示",
-    panelRemoveButtonLocation: "“删除面板”按钮位置",
+    prevPanelText: "“上一个面板”按钮工具提示",
+    nextPanelText: "“下一个面板”按钮工具提示",
+    removePanelButtonLocation: "“删除面板”按钮位置",
     hideIfRowsEmpty: "如果没有行，则隐藏问题",
     hideColumnsIfEmpty: "如果没有行，则隐藏列",
     rateValues: "自定义费率值",
@@ -753,6 +759,8 @@ var simplifiedChineseTranslation = {
     separateSpecialChoices: "单独的特殊选项（无、其他、全选）",
     choicesFromQuestion: "复制以下问题的选项",
     choicesFromQuestionMode: "要复制哪些选项？",
+    choiceValuesFromQuestion: "使用以下矩阵、列或面板问题中的值作为选项 ID",
+    choiceTextsFromQuestion: "使用以下矩阵、列或面板问题中的值作为选择文本",
     progressBarShowPageTitles: "在进度条中显示页面标题",
     progressBarShowPageNumbers: "在进度条中显示页码",
     showCommentArea: "显示评论区域",
@@ -787,6 +795,11 @@ var simplifiedChineseTranslation = {
       top: "在顶部",
       bottom: "在底部"
     },
+    previewMode: "预览模式",
+    gridLayoutEnabled: "启用网格布局",
+    gridLayoutColumns: "网格布局列",
+    maskSettings: "蒙版设置",
+    detailErrorLocation: "行扩展错误消息对齐",
     // Creator tabs
     tabs: {
       panel: {
@@ -1104,6 +1117,8 @@ var simplifiedChineseTranslation = {
     noPreview: "无预览",
     showAllQuestions: "显示所有问题",
     showAnsweredQuestions: "仅显示已回答的问题",
+    allQuestions: "显示所有问题",
+    answeredQuestions: "仅显示已回答的问题",
     pages: "已完成的页面",
     questions: "已回答的问题",
     requiredQuestions: "回答必填问题",
@@ -1199,16 +1214,13 @@ var simplifiedChineseTranslation = {
     questionOrder: {
       initial: "源语言"
     },
-    showProgressBar: {
-      off: "隐藏",
-      topbottom: "顶和底",
-      aboveheader: "标题上方",
-      belowheader: "在标题下方"
-    },
     progressBarLocation: {
       top: "返回页首",
       bottom: "底",
-      topBottom: "顶部和底部"
+      topbottom: "顶部和底部",
+      aboveheader: "标题上方",
+      belowheader: "标题下方",
+      off: "隐藏"
     },
     sum: "和",
     count: "计数",
@@ -1353,7 +1365,9 @@ var simplifiedChineseTranslation = {
       startWithNewLine: "取消选择以将面板与上一个问题或面板显示在一行中。如果面板是窗体中的第一个元素，则该设置不适用。",
       state: "从中选择：“展开” - 面板完整显示，可以折叠;“已折叠” - 面板仅显示标题和描述，可以展开;“已锁定” - 面板完整显示，无法折叠。",
       width: "设置面板的宽度，使其与同一行中的其他测量图元成比例。接受 CSS 值（px、%、in、pt 等）。",
-      showQuestionNumbers: "为嵌套在此面板中的问题分配编号。"
+      showQuestionNumbers: "为嵌套在此面板中的问题分配编号。",
+      effectiveColSpan: "指定此面板在网格布局中跨越的列数。",
+      gridLayoutColumns: "此表允许您配置面板中的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。"
     },
     paneldynamic: {
       name: "受访者不可见的面板 ID。",
@@ -1384,6 +1398,7 @@ var simplifiedChineseTranslation = {
     resetValueIf: "使用魔杖图标设置条件规则，该规则确定何时将受访者的输入重置为基于“默认值表达式”或“设置值表达式”的值，或重置为“默认答案”值（如果设置了其中任何一个）。",
     setValueIf: "使用魔杖图标设置条件规则，该规则确定何时运行“设置值表达式”，并将结果值动态分配为响应。",
     setValueExpression: "指定一个表达式，该表达式定义在满足“如果设置值”规则中的条件时要设置的值。表达式可以包括基本计算 - '{q1_id} + {q2_id}'、布尔表达式，例如 '{age} > 60'，以及函数：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。由此表达式确定的值可以被受访者的手动输入覆盖。",
+    gridLayoutEnabled: "Survey Creator 允许您手动调整表单元素的内联宽度以控制布局。如果这没有产生所需的结果，您可以启用网格布局，该布局使用基于列的系统构建表单元素。要配置布局列，请选择一个页面或面板，然后使用 “Question Settings” → “Grid columns” 表格。要调整问题跨越的列数，请选择它并在 “Layout” → “Column span” 字段中设置所需的值。",
     question: {
       name: "受访者不可见的问题 ID。",
       description: "键入问题副标题。",
@@ -1404,7 +1419,8 @@ var simplifiedChineseTranslation = {
       textUpdateMode: "从中选择：“失焦时” - 当输入字段失去焦点时，该值会更新;“键入时” - 当用户键入时，该值会实时更新。“继承”选项将应用调查级别设置（默认为“失去焦点时”）。",
       url: "您可以使用任何 Web 服务作为多项选择题的数据源。要填充选项值，请输入提供数据的服务的 URL。",
       searchMode: "用于筛选下拉列表的比较操作。",
-      textWrapEnabled: "选项选项中的长文本将自动生成换行符以适合下拉菜单。如果要剪裁文本，请取消选择。"
+      textWrapEnabled: "选项选项中的长文本将自动生成换行符以适合下拉菜单。如果要剪裁文本，请取消选择。",
+      effectiveColSpan: "指定此问题在网格布局中跨越多少列。"
     },
     signaturepad: {
       signatureWidth: "设置显示的签名区域和生成的图像的宽度。",
@@ -1433,7 +1449,8 @@ var simplifiedChineseTranslation = {
     },
     // survey templates
     survey: {
-      mode: "选择：“可编辑” - 使受访者能够填写您的调查;“只读” - 禁用表单编辑。"
+      readOnly: "选择是否要阻止受访者填写您的调查。",
+      progressBarLocation: "设置进度条的位置。“自动”值在调查标题的上方或下方显示进度条。"
     },
     matrixdropdowncolumn: {
       name: "受访者不可见的列 ID。",
@@ -1455,7 +1472,7 @@ var simplifiedChineseTranslation = {
     autoAdvanceEnabled: "选择是否希望调查在受访者回答了当前页面上的所有问题后自动前进到下一页。如果页面上的最后一个问题是开放式的或允许多个答案，则此功能将不适用。",
     autoAdvanceAllowComplete: "选择是否希望在受访者回答所有问题后自动完成调查。",
     showNavigationButtons: "设置导航按钮在页面上的可见性和位置。",
-    showProgressBar: "设置进度条的可见性和位置。“自动”值显示测量标题上方或下方的进度条。",
+    navigationButtonsLocation: "设置页面上导航按钮的位置。",
     showPreviewBeforeComplete: "启用仅包含所有问题或已回答问题的预览页面。",
     questionTitleLocation: "适用于调查中的所有问题。此设置可以被较低级别的标题对齐规则覆盖：面板、页面或问题。较低级别的设置将覆盖较高级别的设置。",
     requiredMark: "一个符号或一系列符号，表示需要答案。",
@@ -1479,6 +1496,7 @@ var simplifiedChineseTranslation = {
     rowTitleWidth: "接受 CSS 值（px、%、in、pt 等）。",
     totalText: "仅当至少一列具有 Total 类型或 Total 表达式时才可见。",
     cellErrorLocation: "设置与输入无效的单元格相关的错误消息的位置。“继承”选项应用“错误消息对齐”属性中的设置。",
+    detailErrorLocation: "设置嵌套在详细信息部分中的问题的错误消息的位置。“Inherit” 选项应用“Error message alignment” 属性中的设置。",
     keyDuplicationError: "启用“防止重复响应”属性后，尝试提交重复条目的受访者将收到以下错误消息。",
     totalExpression: "允许您根据表达式计算总值。表达式可以包括基本计算 （'{q1_id} + {q2_id}'）、布尔表达式 （'{age} > 60'） 和函数 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
     confirmDelete: "触发提示，要求确认删除行。",
@@ -1501,7 +1519,8 @@ var simplifiedChineseTranslation = {
       questionTitleWidth: "当问题标题与问题框左侧对齐时，为问题标题设置一致的宽度。接受 CSS 值（px、%、in、pt 等）。",
       questionErrorLocation: "设置与输入无效的问题相关的错误消息的位置。选择：“顶部” - 错误文本放置在问题框的顶部;“底部” - 错误文本放置在问题框的底部。“继承”选项将应用调查级别设置（默认为“顶部”）。",
       questionOrder: "保持问题的原始顺序或随机化问题。“继承”选项应用调查级别设置（默认为“原始”）。此设置的效果仅在“预览”选项卡中可见。",
-      navigationButtonsVisibility: "设置导航按钮在页面上的可见性。“继承”选项应用调查级别设置，默认为“可见”。"
+      showNavigationButtons: "设置导航按钮在页面上的可见性。“继承”选项应用调查级别设置，默认为“可见”。",
+      gridLayoutColumns: "此表允许您配置页面上的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。"
     },
     timerLocation: "设置计时器在页面上的位置。",
     panelsState: "从以下选项中选择：“锁定” - 用户无法展开或折叠面板;“全部折叠” - 所有面板都以折叠状态启动;“全部展开” - 所有面板都以展开状态启动;“首先展开” - 最初只有第一个面板被展开。",
@@ -1516,6 +1535,8 @@ var simplifiedChineseTranslation = {
     useDisplayValuesInDynamicTexts: "在单选题和多选题类型中，每个选项都有一个 ID 和显示值。选中此设置后，将在 HTML 问题以及调查元素的动态标题和描述中显示显示值，而不是 ID 值。",
     clearIfInvisible: "选择是否清除条件逻辑隐藏的问题值以及何时清除。“继承”选项应用调查级别设置（默认为“完成调查后”）。",
     choicesFromQuestionMode: "从以下选项中选择：“全部” - 复制所选问题中的所有选项;“Selected” - 仅动态复制选定的选项选项;“未选择” - 仅动态复制未选择的选项。默认情况下，如果在源问题中启用了“无”和“其他”选项，则会复制该选项。",
+    choiceValuesFromQuestion: "在单选和多选问题类型中，每个选项都有一个 ID 和显示值。此设置指定哪个矩阵、列或面板问题应提供 ID。",
+    choiceTextsFromQuestion: "在单选和多选问题类型中，每个选项都有一个 ID 和显示值。此设置指定哪个矩阵列或面板问题应提供显示文本。",
     showOtherItem: "选中后，用户可以在单独的注释框中包含其他输入。",
     separateSpecialChoices: "在新行上显示每个特殊选项（“无”、“其他”、“全选”），即使使用多列布局也是如此。",
     path: "指定服务数据集中目标对象数组所在的位置。如果 URL 已指向数组，则留空。",
@@ -1588,10 +1609,6 @@ var simplifiedChineseTranslation = {
       overlapEnabled: "启用后，调查的顶部将覆盖页眉的底部。",
       mobileHeight: "设置为 0 时，将自动计算高度以适应标题的内容。"
     },
-    panellayoutcolumn: {
-      effectiveWidth: "接受值 %。",
-      questionTitleWidth: "接受值 px。"
-    },
     progressBarInheritWidthFrom: "“与容器相同”选项会自动调整进度条区域的宽度，以适应放置调查的 HTML 元素。"
   },
   // Properties
@@ -1660,7 +1677,6 @@ var simplifiedChineseTranslation = {
     inputTextAlignment: "输入值对齐",
     elements: "元素",
     content: "内容",
-    navigationButtonsVisibility: "导航按钮可见",
     navigationTitle: "导航标题",
     navigationDescription: "导航说明",
     longTap: "长按",
@@ -2032,11 +2048,11 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pe.panelsState: "Inner panel expand state" => "内面板展开状态"
 // pe.templateDescription: "Description template" => "描述模板"
 // pe.templateTitle: "Title template" => "标题模板"
-// pe.panelPrevText: "Previous Panel button tooltip" => "“上一个面板”按钮工具提示"
-// pe.panelNextText: "Next Panel button tooltip" => "“下一个面板”按钮工具提示"
+// pe.prevPanelText: "Previous Panel button tooltip" => "“上一个面板”按钮工具提示"
+// pe.nextPanelText: "Next Panel button tooltip" => "“下一个面板”按钮工具提示"
 // pe.showRangeInProgress: "Show progress bar" => "显示进度条"
 // pe.templateQuestionTitleLocation: "Question title location" => "问题标题位置"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "“删除面板”按钮位置"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "“删除面板”按钮位置"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "如果没有行，则隐藏问题"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "如果没有行，则隐藏列"
 // pe.rateValues: "Custom rate values" => "自定义费率值"
@@ -2784,7 +2800,7 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "适用于本页中的所有问题。如果要覆盖此设置，请为单个问题或面板定义标题对齐规则。“继承”选项将应用调查级别设置（默认为“顶部”）。"
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "设置与输入无效的问题相关的错误消息的位置。选择：“顶部” - 错误文本放置在问题框的顶部;“底部” - 错误文本放置在问题框的底部。“继承”选项将应用调查级别设置（默认为“顶部”）。"
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "保持问题的原始顺序或随机化问题。“继承”选项应用调查级别设置（默认为“原始”）。此设置的效果仅在“预览”选项卡中可见。"
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "设置导航按钮在页面上的可见性。“继承”选项应用调查级别设置，默认为“可见”。"
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "设置导航按钮在页面上的可见性。“继承”选项应用调查级别设置，默认为“可见”。"
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "从以下选项中选择：“锁定” - 用户无法展开或折叠面板;“全部折叠” - 所有面板都以折叠状态启动;“全部展开” - 所有面板都以展开状态启动;“首先展开” - 最初只有第一个面板被展开。"
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "在对象数组中输入共享属性名称，该数组包含要在选项列表中显示的图像或视频文件 URL。"
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "左边的值用作条件规则中使用的项目 ID，右边的值显示给受访者。"
@@ -3114,3 +3130,36 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // tabs.surfaceBackground: "Surface Background" => "表面背景"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "使用最后一个条目中的答案作为默认值"
 // colors.gray: "Gray" => "灰色"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "导航按钮对齐"
+// pv.allQuestions: "Show all questions" => "显示所有问题"
+// pv.answeredQuestions: "Show answered questions only" => "仅显示已回答的问题"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "设置页面上导航按钮的位置。"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "使用以下矩阵、列或面板问题中的值作为选项 ID"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "使用以下矩阵、列或面板问题中的值作为选择文本"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "在单选和多选问题类型中，每个选项都有一个 ID 和显示值。此设置指定哪个矩阵、列或面板问题应提供 ID。"
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "在单选和多选问题类型中，每个选项都有一个 ID 和显示值。此设置指定哪个矩阵列或面板问题应提供显示文本。"
+// pe.progressBarLocation: "Progress bar alignment" => "进度条对齐"
+// progressBarLocation.topbottom: "Top and bottom" => "顶部和底部"
+// progressBarLocation.aboveheader: "Above the header" => "标题上方"
+// progressBarLocation.belowheader: "Below the header" => "标题下方"
+// progressBarLocation.off: "Hidden" => "隐藏"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "设置进度条的位置。“自动”值在调查标题的上方或下方显示进度条。"
+// survey.readOnly: "Make the survey read-only" => "将调查设为只读"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "选择是否要阻止受访者填写您的调查。"
+// paneldynamic.showNumber: "Number the panel" => "为面板编号"
+// question.showNumber: "Number this question" => "为这个问题编号"
+// pe.previewMode: "Preview mode" => "预览模式"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "启用网格布局"
+// pe.maskSettings: "Mask settings" => "蒙版设置"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "行扩展错误消息对齐"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "设置嵌套在详细信息部分中的问题的错误消息的位置。“Inherit” 选项应用“Error message alignment” 属性中的设置。"
+// pe.gridLayoutColumns: "Grid layout columns" => "网格布局列"
+// pe.startPageTitlePlaceholder: "Start Page" => "起始页"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "有效宽度，%"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "问题标题宽度，px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "您还没有布局列"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "指定此面板在网格布局中跨越的列数。"
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允许您配置面板中的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。"
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator 允许您手动调整表单元素的内联宽度以控制布局。如果这没有产生所需的结果，您可以启用网格布局，该布局使用基于列的系统构建表单元素。要配置布局列，请选择一个页面或面板，然后使用 “Question Settings” → “Grid columns” 表格。要调整问题跨越的列数，请选择它并在 “Layout” → “Column span” 字段中设置所需的值。"
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "指定此问题在网格布局中跨越多少列。"
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允许您配置页面上的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。"

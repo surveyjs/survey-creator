@@ -61,11 +61,11 @@ test("Check property grid survey options", () => {
     "survey",
     "showProgressBar"
   ).defaultValue;
-  Serializer.findProperty("survey", "showProgressBar").defaultValue = "top";
+  Serializer.findProperty("survey", "showProgressBar").defaultValue = true;
   var question = new QuestionTextModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
-  expect(propertyGrid.survey.showNavigationButtons).toEqual("none");
-  expect(propertyGrid.survey.showProgressBar).toEqual("off");
+  expect(propertyGrid.survey.showNavigationButtons).toEqual(false);
+  expect(propertyGrid.survey.showProgressBar).toEqual(false);
   Serializer.findProperty("survey", "showProgressBar").defaultValue = oldValue;
 });
 
@@ -156,10 +156,10 @@ test("dropdown property editor localization", (): any => {
     "Under the input field"
   );
 
-  var showPreviewQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("showPreviewBeforeComplete");
+  var showPreviewQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("previewMode");
   expect(showPreviewQuestion.getType()).toEqual("dropdown"); //"correct property editor is created" a lot of text
-  expect(showPreviewQuestion.choices[0].value).toEqual("noPreview");
-  expect(showPreviewQuestion.choices[0].text).toEqual("No preview");
+  expect(showPreviewQuestion.choices[0].value).toEqual("allQuestions");
+  expect(showPreviewQuestion.choices[0].text).toEqual("Show all questions");
 
   var localeQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("locale");
   expect(localeQuestion.getType()).toEqual("dropdown"); //"correct property editor is created"
@@ -2163,7 +2163,7 @@ test("Support property availableInMatrixColumn attribute && correct category, #5
   Serializer.removeProperty("question", "prop3");
 });
 
-test("Validate Selected Element Errors", (): any => {
+test("Validate Selected Element Errors 1", (): any => {
   var titleProp = Serializer.findProperty("question", "title");
   var oldIsRequired = titleProp.isRequired;
   titleProp.isRequired = true;
@@ -2197,7 +2197,7 @@ test("Required properties restore on change to empty value", (): any => {
   expect(titleQuestion.value).toBeFalsy();
   titleProp.isRequired = oldIsRequired;
 });
-test("Validate Selected Element Errors", () => {
+test("Validate Selected Element Errors 2", () => {
   var question = new QuestionTextModel("q1");
   var options = new EmptySurveyCreatorOptions();
   var propertyGrid = new PropertyGridModelTester(question, options);
@@ -3322,6 +3322,22 @@ test("check pages editor respects onPageAdding", () => {
   addNewPageAction.action!();
   expect(creator.survey.pages.length).toBe(1);
   settings.defaultNewSurveyJSON = savedNewJSON;
+});
+test("panellayoutcolumns doesn't have adding button", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    gridLayoutEnabled: true,
+    elements: [{ type: "text", name: "q1" }]
+  };
+  const propertyGrid = new PropertyGridModelTester(creator.survey.pages[0]);
+  const gridColumnsQuestion = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("gridLayoutColumns"));
+  expect(gridColumnsQuestion).toBeTruthy();
+  expect(gridColumnsQuestion.allowAddRows).toBeFalsy();
+  expect(gridColumnsQuestion.getTitleToolbar()).toBeTruthy();
+  const helpButton = gridColumnsQuestion.titleActions.find(a => a.id === "property-grid-help");
+  const addButton = gridColumnsQuestion.titleActions.find(a => a.id === "add-item");
+  expect(helpButton).toBeTruthy();
+  expect(addButton).toBeFalsy();
 });
 test("Set property name into correct category", () => {
   Serializer.addProperty("question", {

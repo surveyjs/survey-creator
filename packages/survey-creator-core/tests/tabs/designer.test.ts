@@ -11,27 +11,22 @@ import { TabDesignerViewModel } from "../../src/components/tabs/designer";
 export * from "../../src/property-grid/matrices";
 
 test("Survey/page title/description placeholders text", () => {
-  new CreatorTester();
-  const survey: SurveyModel = new SurveyModel({
-    pages: [
-      {
-        elements: [
-          { type: "text" }
-        ]
-      }
-    ]
-  });
-  const checkPlaceholder = (owner: ILocalizableOwner, ownerName: string, propertyName: string, placeholderText?: string) => {
-    const locStr: LocalizableString = new LocalizableString(owner, false, propertyName);
+  Serializer.findProperty("question", "description").placeholder = "Q placeholder";
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text" }] };
+  const survey = creator.survey;
+  new PageAdorner(creator, survey.pages[0]);
+  const question = survey.getAllQuestions()[0];
+  const checkPlaceholder = (locStr: LocalizableString, checkText: string) => {
     const editor: StringEditorViewModelBase = new StringEditorViewModelBase(locStr, null);
-    const property: JsonObjectProperty = Serializer.findProperty(ownerName, propertyName);
-    const placeholder: string = placeholderText || editorLocalization.getString((<any>property).placeholder);
-    expect(editor.placeholder).toEqual(placeholder);
+    expect(editor.placeholder).toEqual(checkText);
   };
-  checkPlaceholder(survey, "survey", "title");
-  checkPlaceholder(survey, "survey", "description");
-  checkPlaceholder(survey.pages[0], "page", "title", "Page 1");
-  checkPlaceholder(survey.pages[0], "page", "description");
+  checkPlaceholder(survey.locTitle, "Survey Title");
+  checkPlaceholder(survey.locDescription, "Description");
+  checkPlaceholder(survey.pages[0].locTitle, "Page 1");
+  checkPlaceholder(survey.pages[0].locDescription, "Description");
+  checkPlaceholder(question.locDescription, "Q placeholder");
+  Serializer.findProperty("question", "description").placeholder = undefined;
 });
 
 test("Save survey action properties", () => {
@@ -107,23 +102,39 @@ test("Select survey in designer", () => {
 });
 
 test("StringEditorViewModelBase page title placeholder", () => {
-  Serializer.findProperty("page", "title")["placeholder"] = "pe.pageTitlePlaceholder";
-  let survey: SurveyModel = new SurveyModel({
-    pages: [
-      {
-        elements: [
-          { type: "text" }
-        ]
-      }
-    ]
-  });
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text" }] };
+  const survey = creator.survey;
   let page1 = survey.pages[0];
+  new PageAdorner(creator, page1);
   let editor: StringEditorViewModelBase = new StringEditorViewModelBase(page1.locTitle, null);
   expect(page1.visibleIndex).toBe(0);
   expect(page1.num).toBe(1);
   expect(editor.placeholderValue).toBeUndefined();
   expect(editor.placeholder).toBe("Page 1");
   expect(editor.placeholderValue).toBe("Page 1");
+});
+test("StringEditorViewModelBase page title placeholder for started page", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    firstPageIsStarted: true,
+    pages: [
+      { elements: [{ type: "text" }] },
+      { elements: [{ type: "text" }] }
+    ]
+  };
+  const survey = creator.survey;
+  const page1 = survey.pages[0];
+  new PageAdorner(creator, page1);
+  const editor: StringEditorViewModelBase = new StringEditorViewModelBase(page1.locTitle, null);
+  expect(page1.isStartPage).toBeTruthy();
+  expect(page1.visibleIndex).toBe(-1);
+  expect(page1.num).toBe(-1);
+  expect(editor.placeholderValue).toBeUndefined();
+  expect(editor.placeholder).toBe("Start Page");
+  expect(editor.placeholderValue).toBe("Start Page");
+  survey.firstPageIsStartPage = false;
+  expect(editor.placeholder).toBe("Page 1");
 });
 
 test("Logo css", () => {
@@ -238,6 +249,7 @@ test("StringEditorViewModelBase skip formatting keys and enter key", () => {
 
 test("Property Grid and logic tab, Bug#4877", () => {
   const creator = new CreatorTester({ showLogicTab: true });
+  creator.propertyGridNavigationMode = "accordion";
   creator.selectElement(creator.survey);
   const logicPanel = creator.propertyGrid.getPanelByName("logic");
   logicPanel.expand();
@@ -256,6 +268,7 @@ test("Property Grid and logic tab, Bug#4877", () => {
 });
 test("Property Grid and adding a validator in the code, Bug#4882", () => {
   const creator = new CreatorTester({ showLogicTab: true });
+  creator.propertyGridNavigationMode = "accordion";
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const q1 = creator.survey.getQuestionByName("q1");
   creator.selectElement(q1);
@@ -516,7 +529,7 @@ test("expand/collapse event - loading", () => {
   expect(questionAdorner.collapsed).toBeTruthy();
   expect(panelAdorner.collapsed).toBeFalsy();
 
-  creator.collapseAllPagesOnDragStart();
+  creator.collapseAllPagesOnDragStart(creator.survey.pages[0]);
   expect(page1Adorner.collapsed).toBeTruthy();
   expect(page2Adorner.collapsed).toBeFalsy();
   expect(questionAdorner.collapsed).toBeTruthy();
@@ -718,4 +731,62 @@ test("expand/collapse event and expand all", () => {
   expect(page1Adorner.collapsed).toBeFalsy();
   expect(questionAdorner.collapsed).toBeFalsy();
   expect(panelAdorner.collapsed).toBeFalsy();
+});
+
+test("expand/collapse methods", () => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
+  let eventCalled = false;
+
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  const question = creator.survey.getAllQuestions()[0];
+  const page1Adorner = new PageAdorner(creator, creator.survey.pages[0]);
+  const panelAdorner = new QuestionAdornerViewModel(creator, creator.survey.getAllPanels()[0] as any, undefined);
+  const questionAdorner = new QuestionAdornerViewModel(creator, question, undefined);
+
+  creator.onElementGetExpandCollapseState.add((_, o) => {
+    eventCalled = true;
+  });
+
+  expect(page1Adorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeFalsy();
+  expect(panelAdorner.collapsed).toBeFalsy();
+
+  creator.collapseAll();
+  expect(page1Adorner.collapsed).toBeTruthy();
+  expect(questionAdorner.collapsed).toBeTruthy();
+  expect(panelAdorner.collapsed).toBeTruthy();
+  expect(eventCalled).toBeFalsy();
+
+  creator.expandAll();
+  expect(page1Adorner.collapsed).toBeFalsy();
+  expect(questionAdorner.collapsed).toBeFalsy();
+  expect(panelAdorner.collapsed).toBeFalsy();
+  expect(eventCalled).toBeFalsy();
+
+  creator.collapseElement(question);
+  expect(questionAdorner.collapsed).toBeTruthy();
+
+  creator.expandElement(question);
+  expect(questionAdorner.collapsed).toBeFalsy();
 });

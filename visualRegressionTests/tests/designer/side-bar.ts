@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, takeElementScreenshot, wrapVisualTest, pageNavigator, getListItemByText, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName } from "../../helper";
+import { url, objectSelectorButton, propertyGridSelector, expandButtonSelector, setJSON, takeElementScreenshot, wrapVisualTest, pageNavigator, getListItemByText, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName } from "../../helper";
 import { largeSurvey } from "./surveys/large-survey";
 
 const title = "Sidebar Screenshot";
@@ -8,7 +8,9 @@ fixture`${title}`.page`${url}`;
 
 test("object selector popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await setJSON({ pages: [{ name: "page1" }] });
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
     await t
       .resizeWindow(750, 700)
       .click(expandButtonSelector)
@@ -41,6 +43,7 @@ test("object selector with large object's name", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const sideBarActionsContainer = Selector(".svc-side-bar__container-actions");
     await setJSON({
+      showQuestionNumbers: "on",
       "pages": [
         {
           "name": "page1",
@@ -65,6 +68,7 @@ test("object selector with large object's name", async (t) => {
 test("property grid search", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
+      showQuestionNumbers: "on",
       "elements": [
         {
           "type": "text",
@@ -95,6 +99,7 @@ test("property grid search", async (t) => {
 test("property grid search matrix", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
+      showQuestionNumbers: "on",
       "elements": [
         {
           "type": "radiogroup",
@@ -127,7 +132,7 @@ test.page(themeTabUrl)("tabbed mode", async (t) => {
     await t.click(getAddNewQuestionButton());
     await takeElementScreenshot("side-bar-tabbed-property-grid.png", ".svc-side-bar", t, comparer);
 
-    await t.click(getTabbedMenuItemByText("Themes"));
+    await t.click(getTabbedMenuItemByText(creatorTabThemeName));
     await takeElementScreenshot("side-bar-tabbed-property-grid-theme-general.png", ".svc-side-bar", t, comparer);
 
     await t.click(Selector(".svc-menu-action__button").filterVisible().nth(4));
@@ -150,7 +155,7 @@ test.page(themeTabUrl)("boolean switch", async (t) => {
       window["creator"].showOneCategoryInPropertyGrid = true;
     })();
 
-    await t.click(getTabbedMenuItemByText("Themes"));
+    await t.click(getTabbedMenuItemByText(creatorTabThemeName));
 
     await t.click(Selector(".svc-menu-action__button").filterVisible().nth(4));
     await takeElementScreenshot("boolean-switch-default.png", ".spg-boolean-switch", t, comparer);

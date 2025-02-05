@@ -56,7 +56,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   placeholderComponentData: any;
 
   private dragOrClickHelper: DragOrClickHelper;
-  public topActionContainer: ActionContainer;
   constructor(
     creator: SurveyCreatorModel,
     surveyElement: SurveyElement,
@@ -324,16 +323,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.actionContainer.cssClasses = defaultCssClasses;
     (<SurveyElementActionContainer>this.actionContainer).dotsItem.css += " svc-survey-element-toolbar__dots-item";
     (<SurveyElementActionContainer>this.actionContainer).dotsItem.innerCss += " svc-survey-element-toolbar__item";
-    this.topActionContainer = new ActionContainer();
-    this.topActionContainer.cssClasses = {
-      root: "svc-survey-element-top-toolbar sv-action-bar",
-      item: "svc-survey-element-top-toolbar__item",
-      itemIcon: "svc-survey-element-toolbar-item__icon",
-      itemTitle: "svc-survey-element-toolbar-item__title",
-      itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
-    };
-    this.topActionContainer.sizeMode = "small";
-    this.topActionContainer.setItems([this.expandCollapseAction]);
   }
   public getActionById(id: string): Action {
     let res = super.getActionById(id);
@@ -410,6 +399,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const element = <any>this.surveyElement;
     const isElementSelected = this.creator.selectedElement === element;
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
+    if (!!element && this.creator.collapseOnDrag) {
+      this.creator.designerStateManager?.suspend();
+      this.creator.collapseAllPagesOnDragStart(element);
+    }
     return true;
   }
 
@@ -653,7 +646,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       },
       "inputTypeAdorner"
     );
-    newAction.removePriority = 1;
     return newAction;
   }
   private getSelectedItem(actions: IAction[], id: string): IAction {
@@ -681,7 +673,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       cssClasses: listComponentCss,
     });
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
-      if(opt.isVisible) {
+      if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         options.updateListModel(listModel);
       }
@@ -760,7 +752,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected duplicate(): void {
     setTimeout(() => {
-      this.creator.fastCopyQuestion(this.surveyElement, true);
+      this.creator.copyQuestion(this.surveyElement, true);
     }, 1);
   }
   addNewQuestion = () => {

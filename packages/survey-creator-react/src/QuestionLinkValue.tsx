@@ -17,7 +17,6 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
         <ActionButton
           classes={this.question.linkClearButtonCssClasses}
           click={() => this.question.doClearClick()}
-          selected={this.question.isSelected}
           text={editorLocalization.getString("pe.clear")}
         ></ActionButton>
       );

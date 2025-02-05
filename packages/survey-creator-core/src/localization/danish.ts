@@ -22,7 +22,7 @@ export var danishStrings = {
     theme: "Temaer",
     translation: "Oversættelse",
     designer: "Undersøgelsesdesigner",
-    editor: "JSON Editor",
+    json: "JSON Editor",
     logic: "Logik"
   },
   // Question types
@@ -308,6 +308,10 @@ export var danishStrings = {
       maxWidth: "Maksimal panelbredde",
       showNumber: "Nummerer dette panel"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "Effektiv bredde, %",
+      questionTitleWidth: "Spørgsmålets titelbredde, px"
+    },
     paneldynamic: {
       name: "Panelets navn",
       title: "Panelets titel",
@@ -327,15 +331,13 @@ export var danishStrings = {
       templateTabTitle: "Fanetitel mønster",
       tabTitlePlaceholder: "Pladsholder til fanetitel",
       templateVisibleIf: "Gør et individuelt panel synligt, hvis",
-      hideNumber: "Skjul panelnummeret",
+      showNumber: "Nummerer panelet",
       titleLocation: "Justering af paneltitel",
       descriptionLocation: "Justering af panelbeskrivelse",
       templateQuestionTitleLocation: "Tilpasning af spørgsmålets titel",
       templateErrorLocation: "Justering af fejlmeddelelse",
       newPanelPosition: "Ny panelplacering",
       showRangeInProgress: "Vis statuslinjen",
-      showProgressBar: "Vis statuslinjen",
-      progressBarLocation: "Justering af statuslinje",
       keyName: "Undgå dublerede svar i følgende spørgsmål"
     },
     question: {
@@ -346,7 +348,7 @@ export var danishStrings = {
       requiredIf: "Foretag spørgsmålet påkrævet, hvis",
       page: "Overordnet side",
       state: "Tilstand for sammenbrud af spørgsmålsfelt",
-      hideNumber: "Skjul spørgsmålsnummeret",
+      showNumber: "Nummerer dette spørgsmål",
       titleLocation: "Tilpasning af spørgsmålets titel",
       descriptionLocation: "Tilpasning af spørgsmålsbeskrivelse",
       errorLocation: "Justering af fejlmeddelelse",
@@ -388,7 +390,8 @@ export var danishStrings = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Beskrivelse af undersøgelsen"
+      description: "Beskrivelse af undersøgelsen",
+      readOnly: "Gør undersøgelsen skrivebeskyttet"
     },
     page: {
       name: "Sidenavn",
@@ -440,7 +443,7 @@ export var danishStrings = {
     imageWidth: "Billedbredde",
     valueName: "Værdiens navn",
     rateDescriptionLocation: "Justering af etiketter",
-    size: "Inputfeltstørrelse (i tegn)",
+    size: "Bredde på inputfelt (i tegn)",
     cellErrorLocation: "Justering af cellefejlmeddelelse",
     enabled: "Aktiveret",
     disabled: "Handicappet",
@@ -506,6 +509,7 @@ export var danishStrings = {
     listIsEmpty: "Der er endnu ikke tilføjet nogen varer",
     "listIsEmpty@choices": "Der er endnu ikke tilføjet nogen valgmuligheder",
     "listIsEmpty@columns": "Du har ikke nogen kolonner endnu",
+    "listIsEmpty@gridLayoutColumns": "Du har ikke layoutkolonner endnu",
     "listIsEmpty@rows": "Du har ingen rækker endnu",
     "listIsEmpty@validators": "Du har endnu ingen valideringsregler",
     "listIsEmpty@calculatedValues": "Du har endnu ingen tilpassede variabler",
@@ -539,6 +543,7 @@ export var danishStrings = {
     titlePlaceholder: "Titel",
     surveyTitlePlaceholder: "Undersøgelsens titel",
     pageTitlePlaceholder: "Side {num}",
+    startPageTitlePlaceholder: "Startside",
     descriptionPlaceholder: "Beskrivelse",
     surveyDescriptionPlaceholder: "Beskrivelse",
     pageDescriptionPlaceholder: "Beskrivelse",
@@ -611,7 +616,6 @@ export var danishStrings = {
     simulator: "Vælg enhedstype",
     landscapeOrientation: "Skift til liggende retning",
     portraitOrientation: "Skift til stående format",
-    mode: "Mode (rediger/skrivebeskyttet)",
     clearInvisibleValues: "Fjern usynlige værdier",
     cookieName: "Cookienavn (for at undgå at afvikle undersøgelsen to gange lokalt)",
     partialSendEnabled: "Send undersøgelsesresultatet ved næste side",
@@ -625,12 +629,14 @@ export var danishStrings = {
     editText: "Tekst til knappen Rediger svar",
     startSurveyText: "Start knaptekst",
     showNavigationButtons: "Vis navigationsknapper (standard navigation)",
+    navigationButtonsLocation: "Justering af navigationsknapper",
     showPrevButton: "Vis forrige knap (brugeren må gå tilbage til forrige side)",
     firstPageIsStartPage: "Den første side in undersøgelsen er starten på undersøgelsen.",
     showCompletePage: "Vis afslutningssiden til slut (completedHtml)",
     autoAdvanceEnabled: "Gå til næste side automatisk når alle spørgsmål er besvaret",
     autoAdvanceAllowComplete: "Udfyld undersøgelsen automatisk",
     showProgressBar: "Vis fremdriftslinje",
+    progressBarLocation: "Justering af statuslinje",
     questionTitleLocation: "Spørgsmålstitel placering",
     questionTitleWidth: "Spørgsmålets titelbredde",
     requiredMark: "Påkrævet spørgsmålssymbol(er)",
@@ -646,8 +652,8 @@ export var danishStrings = {
     renderMode: "Renderingstilstand",
     allowAddPanel: "Tillad at tilføje et panel",
     allowRemovePanel: "Tillad at fjerne et panel",
-    panelAddText: "Tilføj panel tekst",
-    panelRemoveText: "Fjern panel tekst",
+    addPanelText: "Tilføj panel tekst",
+    removePanelText: "Fjern panel tekst",
     isSinglePage: "Vis alle elementer på én side",
     html: "HTML-markering",
     setValue: "Svare",
@@ -721,9 +727,9 @@ export var danishStrings = {
     minPanelCount: "Mindste antal paneler",
     maxPanelCount: "Maksimalt antal paneler",
     panelsState: "Udvid tilstand for indvendigt panel",
-    panelPrevText: "Forrige værktøjstip til panelknap",
-    panelNextText: "Værktøjstip til knappen Næste panel",
-    panelRemoveButtonLocation: "Fjern placering af panelknap",
+    prevPanelText: "Forrige værktøjstip til panelknap",
+    nextPanelText: "Værktøjstip til knappen Næste panel",
+    removePanelButtonLocation: "Fjern placering af panelknap",
     hideIfRowsEmpty: "Skjul spørgsmålet, hvis der ikke er nogen rækker",
     hideColumnsIfEmpty: "Skjule kolonner, hvis der ikke er nogen rækker",
     rateValues: "Tilpassede satsværdier",
@@ -753,6 +759,8 @@ export var danishStrings = {
     separateSpecialChoices: "Adskil særlige valg (Ingen, Andet, Vælg alle)",
     choicesFromQuestion: "Kopiér valg fra følgende spørgsmål",
     choicesFromQuestionMode: "Hvilke valgmuligheder skal kopieres?",
+    choiceValuesFromQuestion: "Bruge værdier fra følgende matrixkolonne eller panelspørgsmål som valg-id'er",
+    choiceTextsFromQuestion: "Brug værdier fra følgende matrixkolonne eller panelspørgsmål som valgtekster",
     progressBarShowPageTitles: "Vis sidetitler på statuslinjen",
     progressBarShowPageNumbers: "Vis sidetal på statuslinjen",
     showCommentArea: "Vis kommentarområdet",
@@ -787,6 +795,11 @@ export var danishStrings = {
       top: "På toppen",
       bottom: "I bunden"
     },
+    previewMode: "Forhåndsvisning tilstand",
+    gridLayoutEnabled: "Aktivere gitterlayoutet",
+    gridLayoutColumns: "Kolonner med gitterlayout",
+    maskSettings: "Indstillinger for maske",
+    detailErrorLocation: "Justering af fejlmeddelelse om rækkeudvidelse",
     // Creator tabs
     tabs: {
       panel: {
@@ -1104,6 +1117,8 @@ export var danishStrings = {
     noPreview: "Ingen forhåndsvisning",
     showAllQuestions: "Vis alle spørgsmål",
     showAnsweredQuestions: "Vis kun besvarede spørgsmål",
+    allQuestions: "Vis alle spørgsmål",
+    answeredQuestions: "Vis kun besvarede spørgsmål",
     pages: "Afsluttede sider",
     questions: "Besvarede spørgsmål",
     requiredQuestions: "Besvarede nødvendige spørgsmål",
@@ -1199,16 +1214,13 @@ export var danishStrings = {
     questionOrder: {
       initial: "Oprindelig"
     },
-    showProgressBar: {
-      off: "Skjult",
-      topbottom: "top and bottom",
-      aboveheader: "Over overskriften",
-      belowheader: "Under overskriften"
-    },
     progressBarLocation: {
       top: "Top",
       bottom: "Bund",
-      topBottom: "Top og bund"
+      topbottom: "Top og bund",
+      aboveheader: "Over overskriften",
+      belowheader: "Under overskriften",
+      off: "Skjult"
     },
     sum: "Sum",
     count: "Tælle",
@@ -1353,7 +1365,9 @@ export var danishStrings = {
       startWithNewLine: "Fjern markeringen for at få vist panelet på én linje med det forrige spørgsmål eller panel. Indstillingen gælder ikke, hvis panelet er det første element i formularen.",
       state: "Vælg mellem: \"Udvidet\" - panelet vises fuldt ud og kan skjules; \"Skjult\" - panelet viser kun titlen og beskrivelsen og kan udvides; \"Låst\" - panelet vises fuldt ud og kan ikke skjules.",
       width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.).",
-      showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i dette panel."
+      showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i dette panel.",
+      effectiveColSpan: "Angiver, hvor mange kolonner dette panel strækker sig over i gitterlayoutet.",
+      gridLayoutColumns: "Denne tabel giver dig mulighed for at konfigurere hver gitterkolonne i panelet. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
     },
     paneldynamic: {
       name: "Et panel-id, der ikke er synligt for svarpersonerne.",
@@ -1384,6 +1398,7 @@ export var danishStrings = {
     resetValueIf: "Brug tryllestavsikonet til at angive en betinget regel, der bestemmer, hvornår en svarpersons input nulstilles til værdien baseret på værdien \"Standardværdiudtryk\" eller \"Angiv værdiudtryk\" eller til værdien \"Standardsvar\" (hvis en af dem er angivet).",
     setValueIf: "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer, hvornår \"Indstil værdiudtryk\" skal køres, og tildele den resulterende værdi dynamisk som et svar.",
     setValueExpression: "Angiv et udtryk, der definerer den værdi, der skal angives, når betingelserne i reglen \"Angiv værdi hvis\" er opfyldt. Udtrykket kan omfatte grundlæggende beregninger - '{q1_id} + {q2_id}', booleske udtryk, såsom '{alder} > 60' og funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Den værdi, der bestemmes af dette udtryk, kan tilsidesættes af svarpersonens manuelle input.",
+    gridLayoutEnabled: "Survey Creator giver dig mulighed for manuelt at justere de indbyggede bredder af formularelementer for at styre layoutet. Hvis dette ikke giver det ønskede resultat, kan du aktivere gitterlayoutet, som strukturerer formularelementer ved hjælp af et kolonnebaseret system. For at konfigurere layoutkolonner skal du vælge en side eller et panel og bruge tabellen \"Spørgsmålsindstillinger\" → \"Gitterkolonner\". For at justere, hvor mange kolonner et spørgsmål strækker sig over, skal du vælge det og indstille den ønskede værdi i feltet \"Layout\" → \"Kolonnespænd\".",
     question: {
       name: "Et spørgsmåls-id, der ikke er synligt for svarpersonerne.",
       description: "Skriv et spørgsmåls undertitel.",
@@ -1404,7 +1419,8 @@ export var danishStrings = {
       textUpdateMode: "Vælg mellem: \"Ved tabt fokus\" - værdien opdateres, når indtastningsfeltet mister fokus; \"Mens du skriver\" - værdien opdateres i realtid, da brugerne skriver. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Ved mistet fokus\" som standard).",
       url: "Du kan bruge enhver webtjeneste som datakilde til multiple choice-spørgsmål. Hvis du vil udfylde valgværdier, skal du angive URL-adressen på den tjeneste, der leverer dataene.",
       searchMode: "En sammenligningshandling, der bruges til at filtrere rullelisten.",
-      textWrapEnabled: "Lange tekster i valgmuligheder genererer automatisk linjeskift, så de passer ind i rullemenuen. Fjern markeringen, hvis teksterne skal klippes."
+      textWrapEnabled: "Lange tekster i valgmuligheder genererer automatisk linjeskift, så de passer ind i rullemenuen. Fjern markeringen, hvis teksterne skal klippes.",
+      effectiveColSpan: "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet."
     },
     signaturepad: {
       signatureWidth: "Indstiller bredden på det viste signaturområde og det resulterende billede.",
@@ -1433,7 +1449,8 @@ export var danishStrings = {
     },
     // survey templates
     survey: {
-      mode: "Vælg mellem: \"Redigerbar\" - gør det muligt for respondenter at udfylde din undersøgelse; \"Skrivebeskyttet\" - deaktiverer formularredigering."
+      readOnly: "Vælg, hvis du vil forhindre respondenter i at udfylde din undersøgelse.",
+      progressBarLocation: "Angiver placeringen af statuslinjen. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
     },
     matrixdropdowncolumn: {
       name: "Et kolonne-id, der ikke er synligt for svarpersoner.",
@@ -1455,7 +1472,7 @@ export var danishStrings = {
     autoAdvanceEnabled: "Vælg, om undersøgelsen automatisk skal gå videre til næste side, når en svarperson har besvaret alle spørgsmål på den aktuelle side. Denne funktion gælder ikke, hvis det sidste spørgsmål på siden er åbent eller tillader flere svar.",
     autoAdvanceAllowComplete: "Vælg, om undersøgelsen skal fuldføres automatisk, når svarpersonen har besvaret alle spørgsmål.",
     showNavigationButtons: "Angiver synligheden og placeringen af navigationsknapper på en side.",
-    showProgressBar: "Indstiller synligheden og placeringen af en statuslinje. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften.",
+    navigationButtonsLocation: "Angiver placeringen af navigationsknapper på en side.",
     showPreviewBeforeComplete: "Aktivér eksempelsiden med alle eller kun besvarede spørgsmål.",
     questionTitleLocation: "Gælder for alle spørgsmål i undersøgelsen. Denne indstilling kan tilsidesættes af titeljusteringsregler på lavere niveauer: panel, side eller spørgsmål. En indstilling på lavere niveau tilsidesætter dem på et højere niveau.",
     requiredMark: "Et symbol eller en sekvens af symboler, der angiver, at et svar er påkrævet.",
@@ -1479,6 +1496,7 @@ export var danishStrings = {
     rowTitleWidth: "Accepterer CSS-værdier (px, %, in, pt osv.).",
     totalText: "Kun synlig, når mindst én kolonne har typen Total eller Totaludtryk.",
     cellErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til en celle med ugyldigt input. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelse\".",
+    detailErrorLocation: "Angiver placeringen af fejlmeddelelser for spørgsmål, der er indlejret i detaljerede afsnit. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelser\".",
     keyDuplicationError: "Når egenskaben \"Undgå dublerede svar\" er aktiveret, modtager en svarperson, der forsøger at sende en dubletpost, følgende fejlmeddelelse.",
     totalExpression: "Giver dig mulighed for at beregne samlede værdier baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger ('{q1_id} + {q2_id}'), booleske udtryk ('{alder} > 60') og funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv.).",
     confirmDelete: "Udløser en prompt, der beder om at bekræfte sletningen af rækken.",
@@ -1501,7 +1519,8 @@ export var danishStrings = {
       questionTitleWidth: "Angiver ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsbokse. Accepterer CSS-værdier (px, %, in, pt osv.).",
       questionErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til spørgsmålet med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard).",
       questionOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau (\"Original\" som standard). Effekten af denne indstilling er kun synlig under fanen Eksempel.",
-      navigationButtonsVisibility: "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
+      showNavigationButtons: "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\".",
+      gridLayoutColumns: "I denne tabel kan du konfigurere hver gitterkolonne på siden. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
     },
     timerLocation: "Indstiller placeringen af en timer på en side.",
     panelsState: "Vælg mellem: \"Låst\" - brugere kan ikke udvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Udvid alle\" - alle paneler starter i udvidet tilstand; \"Først udvidet\" - kun det første panel udvides oprindeligt.",
@@ -1516,6 +1535,8 @@ export var danishStrings = {
     useDisplayValuesInDynamicTexts: "I spørgsmålstyper med et enkelt og flere valg har hver valgmulighed et id og en visningsværdi. Når denne indstilling er valgt, vises der en visningsværdi i stedet for en id-værdi i HTML-spørgsmål og dynamiske titler og beskrivelser af undersøgelseselementer.",
     clearIfInvisible: "Vælg, om du vil rydde spørgsmålsværdier, der er skjult af betinget logik, og hvornår det skal gøres. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Ved afslutning af undersøgelsen\" som standard).",
     choicesFromQuestionMode: "Vælg mellem: \"Alle\" - kopierer alle valgmuligheder fra det valgte spørgsmål; \"Valgt\" - kopierer dynamisk kun valgte valgindstillinger; \"Ikke valgt\" - kopierer dynamisk kun ikke-valgte valgindstillinger. Indstillingerne \"Ingen\" og \"Andre\" kopieres som standard, hvis de er aktiveret i kildespørgsmålet.",
+    choiceValuesFromQuestion: "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal angive id'erne.",
+    choiceTextsFromQuestion: "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal indeholde visningsteksterne.",
     showOtherItem: "Når denne indstilling er valgt, kan brugerne medtage yderligere input i et separat kommentarfelt.",
     separateSpecialChoices: "Viser hver indstilling for særlige valgmuligheder (\"Ingen\", \"Andet\", \"Vælg alle\") på en ny linje, selv når du bruger et layout med flere kolonner.",
     path: "Angiv placeringen i tjenestedatasættet, hvor målmatrixen af objekter er placeret. Lad feltet stå tomt, hvis URL-adressen allerede peger på arrayet.",
@@ -1588,10 +1609,6 @@ export var danishStrings = {
       overlapEnabled: "Når den er aktiveret, overlejres toppen af undersøgelsen bunden af sidehovedet.",
       mobileHeight: "Når den er indstillet til 0, beregnes højden automatisk for at rumme sidehovedets indhold."
     },
-    panellayoutcolumn: {
-      effectiveWidth: "Accepterer værdier %.",
-      questionTitleWidth: "Accepterer værdier px."
-    },
     progressBarInheritWidthFrom: "Indstillingen \"Samme som beholder\" justerer automatisk bredden på statuslinjens område, så den passer ind i det HTML-element, som undersøgelsen er placeret i."
   },
   // Properties
@@ -1660,7 +1677,6 @@ export var danishStrings = {
     inputTextAlignment: "Justering af inputværdi",
     elements: "Elementer",
     content: "Indhold",
-    navigationButtonsVisibility: "navigationButtonsVisibility",
     navigationTitle: "Navigation titel",
     navigationDescription: "Beskrivelse af navigation",
     longTap: "Langt tryk",
@@ -2073,11 +2089,11 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pe.panelsState: "Inner panel expand state" => "Udvid tilstand for indvendigt panel"
 // pe.templateDescription: "Description template" => "Beskrivelse skabelon"
 // pe.templateTitle: "Title template" => "Titel skabelon"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Forrige værktøjstip til panelknap"
-// pe.panelNextText: "Next Panel button tooltip" => "Værktøjstip til knappen Næste panel"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Forrige værktøjstip til panelknap"
+// pe.nextPanelText: "Next Panel button tooltip" => "Værktøjstip til knappen Næste panel"
 // pe.showRangeInProgress: "Show progress bar" => "Vis statuslinje"
 // pe.templateQuestionTitleLocation: "Question title location" => "Placering af spørgsmålets titel"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Fjern placering af panelknap"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Fjern placering af panelknap"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Skjul spørgsmålet, hvis der ikke er nogen rækker"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Skjule kolonner, hvis der ikke er nogen rækker"
 // pe.rateValues: "Custom rate values" => "Tilpassede satsværdier"
@@ -2826,7 +2842,7 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Gælder for alle spørgsmål på denne side. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål eller paneler. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Angiver placeringen af en fejlmeddelelse i forhold til spørgsmålet med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard)."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau (\"Original\" som standard). Effekten af denne indstilling er kun synlig under fanen Eksempel."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Vælg mellem: \"Låst\" - brugere kan ikke udvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Udvid alle\" - alle paneler starter i udvidet tilstand; \"Først udvidet\" - kun det første panel udvides oprindeligt."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Angiv et delt egenskabsnavn i den række objekter, der indeholder de URL-adresser til billeder eller videofiler, du vil have vist på valglisten."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Den venstre værdi fungerer som et vare-id, der bruges i betingede regler, den rigtige værdi vises for respondenterne."
@@ -3156,3 +3172,37 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // tabs.surfaceBackground: "Surface Background" => "Overflade baggrund"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Brug svar fra sidste post som standard"
 // colors.gray: "Gray" => "Grå"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Justering af navigationsknapper"
+// pv.allQuestions: "Show all questions" => "Vis alle spørgsmål"
+// pv.answeredQuestions: "Show answered questions only" => "Vis kun besvarede spørgsmål"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Angiver placeringen af navigationsknapper på en side."
+// pe.size: "Input field width (in characters)" => "Bredde på inputfelt (i tegn)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Bruge værdier fra følgende matrixkolonne eller panelspørgsmål som valg-id'er"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Brug værdier fra følgende matrixkolonne eller panelspørgsmål som valgtekster"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal angive id'erne."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal indeholde visningsteksterne."
+// pe.progressBarLocation: "Progress bar alignment" => "Justering af statuslinje"
+// progressBarLocation.topbottom: "Top and bottom" => "Top og bund"
+// progressBarLocation.aboveheader: "Above the header" => "Over overskriften"
+// progressBarLocation.belowheader: "Below the header" => "Under overskriften"
+// progressBarLocation.off: "Hidden" => "Skjult"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Angiver placeringen af statuslinjen. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
+// survey.readOnly: "Make the survey read-only" => "Gør undersøgelsen skrivebeskyttet"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Vælg, hvis du vil forhindre respondenter i at udfylde din undersøgelse."
+// paneldynamic.showNumber: "Number the panel" => "Nummerer panelet"
+// question.showNumber: "Number this question" => "Nummerer dette spørgsmål"
+// pe.previewMode: "Preview mode" => "Forhåndsvisning tilstand"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Aktivere gitterlayoutet"
+// pe.maskSettings: "Mask settings" => "Indstillinger for maske"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Justering af fejlmeddelelse om rækkeudvidelse"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angiver placeringen af fejlmeddelelser for spørgsmål, der er indlejret i detaljerede afsnit. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelser\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolonner med gitterlayout"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startside"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektiv bredde, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Spørgsmålets titelbredde, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Du har ikke layoutkolonner endnu"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Angiver, hvor mange kolonner dette panel strækker sig over i gitterlayoutet."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Denne tabel giver dig mulighed for at konfigurere hver gitterkolonne i panelet. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator giver dig mulighed for manuelt at justere de indbyggede bredder af formularelementer for at styre layoutet. Hvis dette ikke giver det ønskede resultat, kan du aktivere gitterlayoutet, som strukturerer formularelementer ved hjælp af et kolonnebaseret system. For at konfigurere layoutkolonner skal du vælge en side eller et panel og bruge tabellen \"Spørgsmålsindstillinger\" → \"Gitterkolonner\". For at justere, hvor mange kolonner et spørgsmål strækker sig over, skal du vælge det og indstille den ønskede værdi i feltet \"Layout\" → \"Kolonnespænd\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I denne tabel kan du konfigurere hver gitterkolonne på siden. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."

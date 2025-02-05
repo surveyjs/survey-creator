@@ -1964,7 +1964,7 @@ test("Drag Drop page with other pages collapsed on start drag", async (t) => {
   await ClientFunction(() => {
     window["creator"].expandCollapseButtonVisibility = "always";
     window["creator"].allowDragPages = true;
-    window["creator"].collapsePagesOnDrag = true;
+    window["creator"].collapseOnDrag = true;
   })();
 
   await t.resizeWindow(1600, 900);

@@ -128,3 +128,20 @@ test("Check ghost page adorner actions visibility", (): any => {
   expect(pageAdorner.getActionById("settings").visible).toBeTruthy();
   expect(pageAdornerGhost.getActionById("settings").visible).toBeFalsy();
 });
+test("Actions should always shrink in mobile", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1" },
+    ]
+  };
+  creator.sidebar.flyoutMode = true;
+  const pageAdorner = new PageAdorner(
+    creator,
+    creator.survey.pages[0]
+  );
+
+  expect(pageAdorner.actionContainer.alwaysShrink).toBeFalsy();
+  creator.isMobileView = true;
+  expect(pageAdorner.actionContainer.alwaysShrink).toBeTruthy();
+});

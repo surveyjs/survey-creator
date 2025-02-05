@@ -1,6 +1,6 @@
 import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges } from "survey-core";
 import { getLocString } from "../../editorLocalization";
-import { PredefinedThemes, Themes } from "./themes";
+import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
 
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
@@ -8,7 +8,7 @@ import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVaria
 import { createBoxShadowReset, trimBoxShadowValue } from "./theme-custom-questions/shadow-effects";
 import { HeaderModel } from "./header-model";
 import * as LibraryThemes from "survey-core/themes";
-import { assign, roundTo2Decimals } from "../../utils/utils";
+import { assign, roundTo2Decimals, sortDefaultThemes } from "../../utils/utils";
 import { ColorCalculator, ingectAlpha, parseColor } from "../../utils/color-utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
@@ -16,8 +16,12 @@ import { SurveyCreatorModel } from "../../creator-base";
 
 export * from "./header-model";
 
+const importedThemeNames = [];
 Object.keys(LibraryThemes || {}).forEach(libraryThemeName => {
   const libraryTheme: ITheme = LibraryThemes[libraryThemeName];
+  if (importedThemeNames.indexOf(libraryTheme.themeName) === -1) {
+    importedThemeNames.push(libraryTheme.themeName);
+  }
   const creatorThemeVariables = {};
   const creatorTheme = {};
   assign(creatorThemeVariables, libraryTheme.cssVariables);
@@ -25,6 +29,7 @@ Object.keys(LibraryThemes || {}).forEach(libraryThemeName => {
   const creatorThemeName = getThemeFullName(libraryTheme);
   Themes[creatorThemeName] = creatorTheme;
 });
+sortDefaultThemes(defaultThemesOrder, importedThemeNames, PredefinedThemes);
 
 export function getThemeFullName(theme: ITheme) {
   const themeName = theme.themeName || ThemeModel.DefaultTheme.themeName || "default";
@@ -569,13 +574,15 @@ export class ThemeModel extends Base implements ITheme {
 
 }
 
+const themeNameValues = PredefinedThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
+
 Serializer.addClass(
   "theme",
   [
     {
       type: "dropdown",
       name: "themeName",
-      choices: PredefinedThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
+      choices: themeNameValues,
       category: "general",
     }, {
       type: "buttongroup",

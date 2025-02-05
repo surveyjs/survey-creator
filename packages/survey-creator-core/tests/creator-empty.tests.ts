@@ -1,12 +1,11 @@
-import { SurveyModel, settings as surveySettings, Serializer } from "survey-core";
+import { SurveyModel, settings as surveySettings, Serializer, QuestionTextModel } from "survey-core";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { settings as creatorSetting, settings } from "../src/creator-settings";
 import { CreatorTester } from "./creator-tester";
 import { UndoRedoController } from "../src/plugins/undo-redo/undo-redo-controller";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "../src/components/tabs/test-plugin";
-
-surveySettings.supportCreatorV2 = true;
+import { TabDesignerViewModel } from "../src/components/tabs/designer";
 
 const multipageJSON = {
   pages: [
@@ -45,7 +44,7 @@ const multipageJSON = {
 test("the creator can be empty", () => {
   const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
   creatorSetting.defaultNewSurveyJSON = {};
-  const creator = new CreatorTester(undefined, undefined, false);
+  const creator = new CreatorTester();
   creator.JSON = multipageJSON;
   creator.text = undefined;
   expect(creator.survey.pages).toHaveLength(0);
@@ -59,7 +58,7 @@ test("the creator can be empty", () => {
 test("Create new page, set empty JSON", (): any => {
   const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
   creatorSetting.defaultNewSurveyJSON = {};
-  const creator = new CreatorTester(undefined, undefined, false);
+  const creator = new CreatorTester();
   expect(creator.viewType).toEqual("designer");
   const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(creator.survey.pages).toHaveLength(0);
@@ -69,9 +68,7 @@ test("Create new page, set empty JSON", (): any => {
 });
 
 test("Create new page, recreate designer survey via JSON", (): any => {
-  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
-  creatorSetting.defaultNewSurveyJSON = {};
-  const creator = new CreatorTester(undefined, undefined, false);
+  const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text", name: "question1" }] };
   creator.showTestSurvey();
   const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
@@ -79,29 +76,22 @@ test("Create new page, recreate designer survey via JSON", (): any => {
   creator.showDesigner();
   expect(creator.survey.pages).toHaveLength(0);
   expect(designerPlugin.model.newPage).toBeTruthy();
-  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 
 test("pageEditMode='single'", (): any => {
-  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
-  creatorSetting.defaultNewSurveyJSON = {};
-  let creator = new CreatorTester(undefined, undefined, false);
+  let creator = new CreatorTester();
   let designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(creator.pageEditMode).toEqual("standard");
   expect(designerPlugin.model.showNewPage).toBeTruthy();
   expect(designerPlugin.model.newPage).toBeTruthy();
 
-  creator = new CreatorTester({ pageEditMode: "single" }, undefined, false);
+  creator = new CreatorTester({ pageEditMode: "single" }, undefined);
   designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(designerPlugin.model.showNewPage).toBeTruthy();
   expect(designerPlugin.model.newPage).toBeTruthy();
-  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 test("Create new ghost on adding a question", (): any => {
-  const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
-  creatorSetting.defaultNewSurveyJSON = {};
-  surveySettings.supportCreatorV2 = true;
-  const creator = new CreatorTester(undefined, undefined, false);
+  const creator = new CreatorTester();
   const undoredo = creator.getPlugin("undoredo");
   expect(undoredo.model).toBeTruthy();
   expect((<UndoRedoController>undoredo.model).undoRedoManager).toBeTruthy();
@@ -113,8 +103,8 @@ test("Create new ghost on adding a question", (): any => {
   );
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
-  creator.activeTab = "editor";
-  const editorPlugin = <TabJsonEditorTextareaPlugin>(creator.getPlugin("editor"));
+  creator.activeTab = "json";
+  const editorPlugin = <TabJsonEditorTextareaPlugin>(creator.getPlugin("json"));
   expect(editorPlugin.model).toBeTruthy();
   editorPlugin.model.text = "";
   creator.activeTab = "designer";
@@ -123,7 +113,6 @@ test("Create new ghost on adding a question", (): any => {
   creator.clickToolboxItem({ type: "text" });
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
-  creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
 test("setting empty JSON into creator do not update undo/redo survey and onModified stopped working", (): any => {
   const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
@@ -132,7 +121,7 @@ test("setting empty JSON into creator do not update undo/redo survey and onModif
   const creator = new CreatorTester();
   let counter = 0;
   creator.onModified.add((sender, options) => {
-    counter ++;
+    counter++;
   });
   settings.defaultNewSurveyJSON = {};
   creator.JSON = {};
@@ -215,4 +204,27 @@ test("Create last question, delete page and select survey in property grid", ():
   expect(creator.selectedElement.getType()).toBe("survey");
   expect(creator.propertyGrid.editingObj.getType()).toBe("survey");
   creatorSetting.defaultNewSurveyJSON = savedNewJSON;
+});
+test("onQuestionAdded fires correctly when drag drop into new page", () => {
+  const creator = new CreatorTester();
+  let json = {};
+  let cnt = 0;
+
+  creator.onQuestionAdded.add((sender, options) => {
+    cnt++;
+    json = { ...creator.survey.toJSON() };
+  });
+  const newPage = (creator.getPlugin("designer").model as TabDesignerViewModel).newPage;
+  newPage.addElement(new QuestionTextModel("q1"));
+  expect(cnt).toBe(1);
+  expect(json).toStrictEqual({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          { "name": "q1", "type": "text", },
+        ],
+      },
+    ],
+  });
 });

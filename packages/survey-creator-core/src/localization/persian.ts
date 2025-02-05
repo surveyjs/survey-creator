@@ -22,7 +22,7 @@ var persianStrings = {
     theme: "تم",
     translation: "ترجمه",
     designer: "طراح نظرسنجی",
-    editor: "ویرایشگر JSON",
+    json: "ویرایشگر JSON",
     logic: "منطق نظرسنجی"
   },
   // Question types
@@ -308,6 +308,10 @@ var persianStrings = {
       maxWidth: "حداکثر عرض پانل",
       showNumber: "شماره گذاری این پانل"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "عرض موثر، ٪",
+      questionTitleWidth: "عرض عنوان سوال، px"
+    },
     paneldynamic: {
       name: "نام تابلو",
       title: "عنوان پنل",
@@ -327,15 +331,13 @@ var persianStrings = {
       templateTabTitle: "الگوی عنوان زبانه",
       tabTitlePlaceholder: "ذی نفع عنوان تب",
       templateVisibleIf: "ایجاد یک پنل منفرد مرئی اگر",
-      hideNumber: "مخفی کردن شمارهی تابلو",
+      showNumber: "شماره گذاری پانل",
       titleLocation: "ترازبندی عنوان پنل",
       descriptionLocation: "ترازبندی توضیحات پنل",
       templateQuestionTitleLocation: "هم ترازی عنوان پرسش",
       templateErrorLocation: "همترازسازی پیام خطا",
       newPanelPosition: "محل جدید پنل",
       showRangeInProgress: "نمایش نوار پیشرفت",
-      showProgressBar: "نمایش نوار پیشرفت",
-      progressBarLocation: "تراز نوار پیشرفت",
       keyName: "جلوگیری از پاسخ های تکراری در سوال زیر"
     },
     question: {
@@ -346,7 +348,7 @@ var persianStrings = {
       requiredIf: "سؤال مورد نیاز را مطرح کنید اگر",
       page: "صفحه اصلی",
       state: "جعبه سوال دولت فروپاشی",
-      hideNumber: "مخفی کردن شماره سوال",
+      showNumber: "این سوال را شماره گذاری کنید",
       titleLocation: "هم ترازی عنوان پرسش",
       descriptionLocation: "هم ترازی توضیحات سؤال",
       errorLocation: "همترازسازی پیام خطا",
@@ -388,7 +390,8 @@ var persianStrings = {
     // survey templates
     survey: {
       title: "عنوان",
-      description: "توضیحات نظرسنجی"
+      description: "توضیحات نظرسنجی",
+      readOnly: "نظرسنجی را فقط خواندنی کنید"
     },
     page: {
       name: "نام صفحه",
@@ -506,6 +509,7 @@ var persianStrings = {
     listIsEmpty: "یک آیتم جدید اضافه کنید",
     "listIsEmpty@choices": "هنوز هیچ انتخابی اضافه نشده است",
     "listIsEmpty@columns": "شما هنوز هیچ ستونی ندارید",
+    "listIsEmpty@gridLayoutColumns": "شما هنوز ستون های طرح بندی ندارید",
     "listIsEmpty@rows": "شما هنوز هیچ ردیفی ندارید",
     "listIsEmpty@validators": "شما هنوز هیچ قانون اعتبار سنجی ندارید",
     "listIsEmpty@calculatedValues": "شما هنوز هیچ متغیر سفارشی ندارید",
@@ -539,6 +543,7 @@ var persianStrings = {
     titlePlaceholder: "عنوان را اینجا وارد کنید",
     surveyTitlePlaceholder: "عنوان نظرسنجی را اینجا وارد کنید",
     pageTitlePlaceholder: "عنوان صفحه را اینجا وارد کنید",
+    startPageTitlePlaceholder: "صفحه شروع",
     descriptionPlaceholder: "توضیحات را وارد کنید",
     surveyDescriptionPlaceholder: "توضیحات نظرسنجی را وارد کنید",
     pageDescriptionPlaceholder: "توضیحات صفحه را وارد کنید",
@@ -611,7 +616,6 @@ var persianStrings = {
     simulator: "انتخاب دستگاه",
     landscapeOrientation: "افقی",
     portraitOrientation: "تغییر جهت به جهت تصویر",
-    mode: "حالت (ویرایش/خواندن)",
     clearInvisibleValues: "پاکسازی مقادیر پنهان",
     cookieName: "نام کوکی (به منظور جلوگیری از اجرای دوباره نظرسنجی)",
     partialSendEnabled: "ارسال نتایج نظرسنجی در صفحه بعدی",
@@ -625,12 +629,14 @@ var persianStrings = {
     editText: "ویرایش متن دکمه",
     startSurveyText: "متن دکمه شروع نظرسنجی",
     showNavigationButtons: "نمایش دکمه های ناوبری (ناوبری پیش فرض)",
+    navigationButtonsLocation: "تراز کردن دکمه های ناوبری",
     showPrevButton: "نمایش دکمه قبلی (کاربر ممکن است به صفحه قبل برگردد)",
     firstPageIsStartPage: "صفحه اول در نظرسنجی نقطه آغازین آن است.",
     showCompletePage: "نمایش صفحه اتمام نظرسنجی در پایان (completedHtml)",
     autoAdvanceEnabled: "با پاسخگویی به تمام سوالات، به صورت اتوماتیک به صفحه بعد برود",
     autoAdvanceAllowComplete: "بررسی را به طور خودکار تکمیل کنید",
     showProgressBar: "نمایش نشانگر پیشرفت",
+    progressBarLocation: "تراز نوار پیشرفت",
     questionTitleLocation: "محل عنوان سوال",
     questionTitleWidth: "عرض عنوان سوال",
     requiredMark: "سوالات نشان دار اجباری هستند",
@@ -646,8 +652,8 @@ var persianStrings = {
     renderMode: "حالت رندر",
     allowAddPanel: "اجازه افزودن پنل",
     allowRemovePanel: "اجازه حذف پنل",
-    panelAddText: "متن افزودن پنل",
-    panelRemoveText: "متن حذف پنل",
+    addPanelText: "متن افزودن پنل",
+    removePanelText: "متن حذف پنل",
     isSinglePage: "نمایش تمام المان ها در یک صفحه",
     html: "Html",
     setValue: "پاسخ",
@@ -721,9 +727,9 @@ var persianStrings = {
     minPanelCount: "حداقل تعداد پانل",
     maxPanelCount: "حداکثر تعداد پانل",
     panelsState: "پانل داخلی گسترش دولت",
-    panelPrevText: "قبلی دکمه پنل tooltip",
-    panelNextText: "بعدی دکمه پنل tooltip",
-    panelRemoveButtonLocation: "حذف محل دکمه پنل",
+    prevPanelText: "قبلی دکمه پنل tooltip",
+    nextPanelText: "بعدی دکمه پنل tooltip",
+    removePanelButtonLocation: "حذف محل دکمه پنل",
     hideIfRowsEmpty: "مخفی کردن سؤال اگر سطری وجود نداشته باشد",
     hideColumnsIfEmpty: "مخفی کردن ستونها اگر سطری وجود نداشته باشد",
     rateValues: "مقادیر نرخ سفارشی",
@@ -753,6 +759,8 @@ var persianStrings = {
     separateSpecialChoices: "انتخاب های ویژه جداگانه (هیچ کدام، دیگر، همه را انتخاب کنید)",
     choicesFromQuestion: "کپی کردن انتخابها از سؤال زیر",
     choicesFromQuestionMode: "کدام گزینه ها را کپی کنید؟",
+    choiceValuesFromQuestion: "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان شناسه های انتخاب استفاده کنید.",
+    choiceTextsFromQuestion: "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان متن انتخابی استفاده کنید",
     progressBarShowPageTitles: "نمایش عناوین صفحه در نوار پیشرفت",
     progressBarShowPageNumbers: "نمایش شمارههای صفحه در نوار پیشرفت",
     showCommentArea: "نمایش ناحیهی نظرات",
@@ -787,6 +795,11 @@ var persianStrings = {
       top: "بخش بالا",
       bottom: "بخش پایین"
     },
+    previewMode: "حالت پیش نمایش",
+    gridLayoutEnabled: "طرح بندی شبکه را فعال کنید",
+    gridLayoutColumns: "ستون های طرح بندی شبکه ای",
+    maskSettings: "تنظیمات ماسک",
+    detailErrorLocation: "تراز پیام خطای گسترش ردیف",
     // Creator tabs
     tabs: {
       panel: {
@@ -1104,6 +1117,8 @@ var persianStrings = {
     noPreview: "پیش نمایش ندارد",
     showAllQuestions: "فعال سازی پیش نمایش با تمام سوالات",
     showAnsweredQuestions: "فعال سازی پیش نمایش به سوالات پاسخ داده شده",
+    allQuestions: "نمایش همه سوالات",
+    answeredQuestions: "فقط سوالات پاسخ داده شده را نشان دهید",
     pages: "صفحات تکمیل شده",
     questions: "سوالات پاسخ داده شده",
     requiredQuestions: "پاسخ به سوالات مورد نیاز",
@@ -1199,16 +1214,13 @@ var persianStrings = {
     questionOrder: {
       initial: "اصلی"
     },
-    showProgressBar: {
-      off: "پنهان",
-      topbottom: "بالا و پایین",
-      aboveheader: "بالای سرصفحه",
-      belowheader: "زیر سرایند"
-    },
     progressBarLocation: {
       top: "بالا",
       bottom: "پایین",
-      topBottom: "بالا و پایین"
+      topbottom: "بالا و پایین",
+      aboveheader: "بالای سربرگ",
+      belowheader: "در زیر سرصفحه",
+      off: "پنهان"
     },
     sum: "مجموع",
     count: "تعداد",
@@ -1353,7 +1365,9 @@ var persianStrings = {
       startWithNewLine: "عدم انتخاب برای نمایش پانل در یک خط با سوال قبلی یا پانل. تنظیمات اعمال نمی شود اگر پانل اولین عنصر در فرم شما باشد.",
       state: "را انتخاب کنید از: \"گسترش یافته\" - پانل به طور کامل نمایش داده می شود و می تواند سقوط کند؛ \"سقوط\" - پانل تنها عنوان و توضیحات را نمایش می دهد و می تواند گسترش یابد. \"Locked\" - پانل به طور کامل نمایش داده می شود و نمی تواند سقوط کند.",
       width: "عرض پانل را متناسب با سایر عناصر بررسی در همان خط تنظیم می کند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
-      showQuestionNumbers: "اعداد را به سؤالات تودرتو در این پانل اختصاص می دهد."
+      showQuestionNumbers: "اعداد را به سؤالات تودرتو در این پانل اختصاص می دهد.",
+      effectiveColSpan: "مشخص می کند که این پانل چند ستون در طرح بندی شبکه قرار دارد.",
+      gridLayoutColumns: "این جدول به شما امکان می دهد هر ستون شبکه را در پانل پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."
     },
     paneldynamic: {
       name: "یک شناسه پانل که برای پاسخ دهندگان قابل مشاهده نیست.",
@@ -1384,6 +1398,7 @@ var persianStrings = {
     resetValueIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که تعیین می کند چه زمانی ورودی پاسخ دهنده به مقدار بر اساس \"بیان مقدار پیش فرض\" یا \"تنظیم مقدار بیان\" یا \"پاسخ پیش فرض\" مقدار (اگر هر کدام تنظیم شده است) تنظیم مجدد شود.",
     setValueIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که تعیین می کند چه زمانی \"Set value expression\" را اجرا کنید و به صورت پویا مقدار حاصل را به عنوان یک پاسخ اختصاص دهید.",
     setValueExpression: "یک عبارت را مشخص کنید که مقدار تعیین شده را هنگامی که شرایط در قانون \"Set value if\" براورده می شود، تعریف می کند. این عبارت می تواند شامل محاسبات اساسی - \"{q1_id} + {q2_id}'، عبارات بولی مانند \"{age} > 60\" و توابع: \"iif()\"، \"today()\"، \"age()\"، \"min()\"، \"max()\"، \"avg()\" و غیره باشد. مقدار تعیین شده توسط این عبارت می تواند توسط ورودی دستی پاسخ دهنده لغو شود.",
+    gridLayoutEnabled: "Survey Creator به شما امکان می دهد عرض درون خطی عناصر فرم را به صورت دستی تنظیم کنید تا طرح بندی را کنترل کنید. اگر این نتیجه دلخواه را به همراه نداشت، می توانید طرح بندی شبکه را فعال کنید، که با استفاده از یک سیستم مبتنی بر ستون عناصر را تشکیل می دهد. برای پیکربندی ستون های طرح بندی، یک صفحه یا پانل را انتخاب کنید و از جدول «تنظیمات سوال» → «ستون های شبکه» استفاده کنید. برای تنظیم تعداد ستون های یک سوال، آن را انتخاب کنید و مقدار مورد نظر را در قسمت \"Layout\" → \"Column span\" تنظیم کنید.",
     question: {
       name: "یک شناسه سوال که برای پاسخ دهندگان قابل مشاهده نیست.",
       description: "یک سوال زیر نویس تایپ کنید.",
@@ -1404,7 +1419,8 @@ var persianStrings = {
       textUpdateMode: "انتخاب از: \"در تمرکز از دست رفته\" - مقدار به روز شده است زمانی که فیلد ورودی تمرکز خود را از دست می دهد؛ \"در هنگام تایپ\" - مقدار در زمان واقعی به روز می شود، زیرا کاربران تایپ می کنند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"در تمرکز از دست رفته\" به طور پیش فرض) اعمال می شود.",
       url: "شما می توانید از هر سرویس وب به عنوان منبع داده برای سوالات چند گزینه ای استفاده کنید. برای پر کردن مقادیر انتخاب، URL سرویس ارائه دهنده داده ها را وارد کنید.",
       searchMode: "یک عملیات مقایسه ای که برای فیلتر کردن لیست کشویی استفاده می شود.",
-      textWrapEnabled: "متون طولانی در گزینه های انتخاب به طور خودکار شکستن خط را ایجاد می کنند تا در منوی کشویی قرار بگیرند. اگر می خواهید متن ها کلیپ شوند، انتخاب را لغو کنید."
+      textWrapEnabled: "متون طولانی در گزینه های انتخاب به طور خودکار شکستن خط را ایجاد می کنند تا در منوی کشویی قرار بگیرند. اگر می خواهید متن ها کلیپ شوند، انتخاب را لغو کنید.",
+      effectiveColSpan: "مشخص می کند که این سوال چند ستون در طرح بندی شبکه قرار دارد."
     },
     signaturepad: {
       signatureWidth: "عرض ناحیه امضای نمایش داده شده و تصویر حاصل را تنظیم می کند.",
@@ -1433,7 +1449,8 @@ var persianStrings = {
     },
     // survey templates
     survey: {
-      mode: "انتخاب بین: \"قابل ویرایش\" - پاسخ دهندگان را قادر می سازد تا نظرسنجی خود را پر کنند. \"فقط خواندنی\" - ویرایش فرم را غیرفعال می کند."
+      readOnly: "اگر می خواهید از پر کردن نظرسنجی پاسخ دهندگان جلوگیری کنید، انتخاب کنید.",
+      progressBarLocation: "مکان نوار پیشرفت را تنظیم می کند. مقدار \"خودکار\" نوار پیشرفت را در بالا یا پایین سربرگ نظرسنجی نشان می دهد."
     },
     matrixdropdowncolumn: {
       name: "یک شناسه ستون که برای پاسخ دهندگان قابل مشاهده نیست.",
@@ -1455,7 +1472,7 @@ var persianStrings = {
     autoAdvanceEnabled: "انتخاب کنید که آیا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش برود پس از اینکه پاسخ دهنده به همه سؤالات موجود در صفحه فعلی پاسخ داد. اگر آخرین سؤال در صفحه باز باشد یا اجازه پاسخ های متعدد را بدهد، این ویژگی اعمال نمی شود.",
     autoAdvanceAllowComplete: "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار پس از پاسخ دادن به تمام سوالات پاسخ دهد.",
     showNavigationButtons: "قابلیت مشاهده و مکان دکمه های پیمایش را در یک صفحه تنظیم می کند.",
-    showProgressBar: "دید و مکان یک نوار پیشرفت را تنظیم می کند. مقدار \"Auto\" نوار پیشرفت را در بالا یا پایین هدر نظرسنجی نشان می دهد.",
+    navigationButtonsLocation: "مکان دکمه های پیمایش را در یک صفحه تنظیم می کند.",
     showPreviewBeforeComplete: "صفحه پیش نمایش را فقط با تمام سوالات یا پاسخ داده شده فعال کنید.",
     questionTitleLocation: "به تمام سوالات در نظرسنجی اعمال می شود. این تنظیم را می توان با قوانین هم ترازی عنوان در سطوح پایین تر لغو کرد: پانل، صفحه یا سوال. یک تنظیم سطح پایین تر، کسانی را که در سطح بالاتری قرار دارند، نادیده می گیرد.",
     requiredMark: "یک نماد یا دنباله ای از نمادها نشان می دهد که یک پاسخ مورد نیاز است.",
@@ -1479,6 +1496,7 @@ var persianStrings = {
     rowTitleWidth: "مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
     totalText: "تنها زمانی قابل مشاهده است که حداقل یک ستون دارای عبارت Total type یا Total باشد.",
     cellErrorLocation: "محل یک پیام خطا را در رابطه با یک سلول با ورودی نامعتبر تنظیم می کند. گزینه \"Inherit\" تنظیمات را از ویژگی \"Error message alignment\" اعمال می کند.",
+    detailErrorLocation: "مکان پیام های خطا را برای سؤالات تودرتو در بخش های جزئیات تنظیم می کند. گزینه \"وراثت\" تنظیمات را از ویژگی \"تراز پیام خطا\" اعمال می کند.",
     keyDuplicationError: "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند.",
     totalExpression: "به شما اجازه می دهد تا مقادیر کل را بر اساس یک عبارت محاسبه کنید. این عبارت می تواند شامل محاسبات اساسی ('{q1_id} + {q2_id}')، عبارات بولی ('{age} > 60') و توابع ('iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()'، و غیره باشد.",
     confirmDelete: "یک درخواست فوری برای تایید حذف ردیف ایجاد می کند.",
@@ -1501,7 +1519,8 @@ var persianStrings = {
       questionTitleWidth: "عرض ثابت را برای عناوین سؤال تنظیم می کند وقتی که انها در سمت چپ جعبه های سوال خود قرار دارند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
       questionErrorLocation: "مکان یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم می کند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند.",
       questionOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"اصلی\" به طور پیش فرض) را اعمال می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
-      navigationButtonsVisibility: "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است."
+      showNavigationButtons: "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است.",
+      gridLayoutColumns: "این جدول به شما امکان می دهد هر ستون شبکه را در صفحه پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."
     },
     timerLocation: "مکان یک تایمر را در یک صفحه تنظیم می کند.",
     panelsState: "انتخاب از: \"قفل شده\" - کاربران نمی توانند پانل ها را گسترش یا سقوط دهند؛ \"سقوط همه\" - تمام پانل ها در یک حالت فروپاشی شروع می شوند؛ \"گسترش همه\" - تمام پانل ها در یک حالت گسترش یافته شروع می شوند؛ \"اولین گسترش\" - تنها پانل اول در ابتدا گسترش یافته است.",
@@ -1516,6 +1535,8 @@ var persianStrings = {
     useDisplayValuesInDynamicTexts: "در انواع سوالات تک و چند انتخاب، هر گزینه انتخاب دارای یک شناسه و مقدار نمایش است. هنگامی که انتخاب می شود، این تنظیم یک مقدار نمایش را به جای یک مقدار ID در سوالات HTML و عناوین پویا و توصیف عناصر بررسی نشان می دهد.",
     clearIfInvisible: "انتخاب کنید که ایا برای پاک کردن یا نه ارزش سوال پنهان شده توسط منطق شرطی و زمانی که به ان را انجام دهد. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"پس از اتمام نظرسنجی\" به طور پیش فرض) اعمال می شود.",
     choicesFromQuestionMode: "انتخاب از: \"همه\" - کپی تمام گزینه های انتخاب از سوال انتخاب شده؛ \"انتخاب شده\" - به صورت پویا فقط گزینه های انتخاب شده را کپی می کند؛ \"Unselected\" - به صورت پویا تنها گزینه های انتخاب نشده را کپی می کند. گزینه های \"None\" و \"Other\" در صورت فعال شدن در سؤال منبع به طور پیش فرض کپی می شوند.",
+    choiceValuesFromQuestion: "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید شناسه ها را ارائه دهد.",
+    choiceTextsFromQuestion: "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید متون نمایش داده شده را ارائه دهد.",
     showOtherItem: "هنگامی که انتخاب می شوند، کاربران می توانند ورودی های اضافی را در یک جعبه نظر جداگانه قرار دهند.",
     separateSpecialChoices: "نمایش هر گزینه انتخاب خاص (\"هیچ\"، \"دیگر\"، \"انتخاب همه\") در یک خط جدید، حتی در هنگام استفاده از یک طرح چند ستون.",
     path: "مشخص کردن محل در مجموعه داده های سرویس که در ان ارایه هدف از اشیاء واقع شده است. ترک خالی اگر URL در حال حاضر به ارایه اشاره می کند.",
@@ -1588,10 +1609,6 @@ var persianStrings = {
       overlapEnabled: "هنگامی که فعال باشد، بالای نظرسنجی پایین هدر را همپوشانی می کند.",
       mobileHeight: "هنگامی که روی 0 تنظیم می شود، ارتفاع به طور خودکار محاسبه می شود تا محتوای هدر را در خود جای دهد."
     },
-    panellayoutcolumn: {
-      effectiveWidth: "مقادیر را می پذیرد.",
-      questionTitleWidth: "مقادیر px را می پذیرد."
-    },
     progressBarInheritWidthFrom: "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه نوار پیشرفت را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد."
   },
   // Properties
@@ -1660,7 +1677,6 @@ var persianStrings = {
     inputTextAlignment: "تراز مقدار ورودی",
     elements: "عناصر",
     content: "محتوای",
-    navigationButtonsVisibility: "پدیداری دکمه های ناوبری",
     navigationTitle: "عنوان ناوش",
     navigationDescription: "توضیحات ناوبری",
     longTap: "ضربه طولانی",
@@ -1890,11 +1906,11 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.panelsState: "Inner panel expand state" => "پانل داخلی گسترش دولت"
 // pe.templateDescription: "Description template" => "قالب شرح"
 // pe.templateTitle: "Title template" => "قالب عنوان"
-// pe.panelPrevText: "Previous Panel button tooltip" => "قبلی دکمه پنل tooltip"
-// pe.panelNextText: "Next Panel button tooltip" => "بعدی دکمه پنل tooltip"
+// pe.prevPanelText: "Previous Panel button tooltip" => "قبلی دکمه پنل tooltip"
+// pe.nextPanelText: "Next Panel button tooltip" => "بعدی دکمه پنل tooltip"
 // pe.showRangeInProgress: "Show progress bar" => "نمایش نوار پیشرفت"
 // pe.templateQuestionTitleLocation: "Question title location" => "عنوان سوال محل"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "حذف محل دکمه پنل"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "حذف محل دکمه پنل"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "مخفی کردن سؤال اگر سطری وجود نداشته باشد"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "مخفی کردن ستونها اگر سطری وجود نداشته باشد"
 // pe.rateValues: "Custom rate values" => "مقادیر نرخ سفارشی"
@@ -2598,7 +2614,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "به تمام سوالات موجود در این صفحه اعمال می شود. اگر می خواهید این تنظیمات را لغو کنید، قوانین تراز عنوان را برای سوالات یا پانل های فردی تعریف کنید. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "مکان یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم می کند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"بالا\" به طور پیش فرض) را اعمال می کند."
 // page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"اصلی\" به طور پیش فرض) را اعمال می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "انتخاب از: \"قفل شده\" - کاربران نمی توانند پانل ها را گسترش یا سقوط دهند؛ \"سقوط همه\" - تمام پانل ها در یک حالت فروپاشی شروع می شوند؛ \"گسترش همه\" - تمام پانل ها در یک حالت گسترش یافته شروع می شوند؛ \"اولین گسترش\" - تنها پانل اول در ابتدا گسترش یافته است."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "یک نام خصوصیت مشترک را درون ارایۀ اشیایی که حاوی نشانیهای اینترنتی پرونده تصویر یا ویدئویی است که میخواهید در فهرست انتخاب نمایش داده شود، وارد کنید."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "مقدار سمت چپ به عنوان یک شناسه مورد استفاده در قوانین شرطی عمل می کند، مقدار مناسب برای پاسخ دهندگان نمایش داده می شود."
@@ -2928,3 +2944,36 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // tabs.surfaceBackground: "Surface Background" => "زمینه سطح"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "از پاسخ های آخرین ورودی به عنوان پیش فرض استفاده کنید"
 // colors.gray: "Gray" => "خاکستری"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "تراز کردن دکمه های ناوبری"
+// pv.allQuestions: "Show all questions" => "نمایش همه سوالات"
+// pv.answeredQuestions: "Show answered questions only" => "فقط سوالات پاسخ داده شده را نشان دهید"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "مکان دکمه های پیمایش را در یک صفحه تنظیم می کند."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان شناسه های انتخاب استفاده کنید."
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان متن انتخابی استفاده کنید"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید شناسه ها را ارائه دهد."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید متون نمایش داده شده را ارائه دهد."
+// pe.progressBarLocation: "Progress bar alignment" => "تراز نوار پیشرفت"
+// progressBarLocation.topbottom: "Top and bottom" => "بالا و پایین"
+// progressBarLocation.aboveheader: "Above the header" => "بالای سربرگ"
+// progressBarLocation.belowheader: "Below the header" => "در زیر سرصفحه"
+// progressBarLocation.off: "Hidden" => "پنهان"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "مکان نوار پیشرفت را تنظیم می کند. مقدار \"خودکار\" نوار پیشرفت را در بالا یا پایین سربرگ نظرسنجی نشان می دهد."
+// survey.readOnly: "Make the survey read-only" => "نظرسنجی را فقط خواندنی کنید"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "اگر می خواهید از پر کردن نظرسنجی پاسخ دهندگان جلوگیری کنید، انتخاب کنید."
+// paneldynamic.showNumber: "Number the panel" => "شماره گذاری پانل"
+// question.showNumber: "Number this question" => "این سوال را شماره گذاری کنید"
+// pe.previewMode: "Preview mode" => "حالت پیش نمایش"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "طرح بندی شبکه را فعال کنید"
+// pe.maskSettings: "Mask settings" => "تنظیمات ماسک"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "تراز پیام خطای گسترش ردیف"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "مکان پیام های خطا را برای سؤالات تودرتو در بخش های جزئیات تنظیم می کند. گزینه \"وراثت\" تنظیمات را از ویژگی \"تراز پیام خطا\" اعمال می کند."
+// pe.gridLayoutColumns: "Grid layout columns" => "ستون های طرح بندی شبکه ای"
+// pe.startPageTitlePlaceholder: "Start Page" => "صفحه شروع"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "عرض موثر، ٪"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "عرض عنوان سوال، px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "شما هنوز ستون های طرح بندی ندارید"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "مشخص می کند که این پانل چند ستون در طرح بندی شبکه قرار دارد."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "این جدول به شما امکان می دهد هر ستون شبکه را در پانل پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator به شما امکان می دهد عرض درون خطی عناصر فرم را به صورت دستی تنظیم کنید تا طرح بندی را کنترل کنید. اگر این نتیجه دلخواه را به همراه نداشت، می توانید طرح بندی شبکه را فعال کنید، که با استفاده از یک سیستم مبتنی بر ستون عناصر را تشکیل می دهد. برای پیکربندی ستون های طرح بندی، یک صفحه یا پانل را انتخاب کنید و از جدول «تنظیمات سوال» → «ستون های شبکه» استفاده کنید. برای تنظیم تعداد ستون های یک سوال، آن را انتخاب کنید و مقدار مورد نظر را در قسمت \"Layout\" → \"Column span\" تنظیم کنید."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "مشخص می کند که این سوال چند ستون در طرح بندی شبکه قرار دارد."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "این جدول به شما امکان می دهد هر ستون شبکه را در صفحه پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."

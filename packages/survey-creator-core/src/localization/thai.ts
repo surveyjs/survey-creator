@@ -22,7 +22,7 @@ export const thStrings = {
     theme: "ธีม",
     translation: "การแปล",
     designer: "นักออกแบบ",
-    editor: "ตัวแก้ไข JSON",
+    json: "ตัวแก้ไข JSON",
     logic: "ตรรกะ"
   },
   // Question types
@@ -308,6 +308,10 @@ export const thStrings = {
       maxWidth: "ความกว้างสูงสุดของแผง",
       showNumber: "หมายเลขแผงนี้"
     },
+    panellayoutcolumn: {
+      effectiveWidth: "ความกว้างที่มีประสิทธิภาพ %",
+      questionTitleWidth: "ความกว้างของชื่อคําถาม px"
+    },
     paneldynamic: {
       name: "ชื่อแผง",
       title: "ชื่อแผง",
@@ -327,15 +331,13 @@ export const thStrings = {
       templateTabTitle: "รูปแบบชื่อแท็บ",
       tabTitlePlaceholder: "ตัวอย่างชื่อแท็บ",
       templateVisibleIf: "ทำให้แผงแต่ละแผงมองเห็นได้ถ้า",
-      hideNumber: "ซ่อนหมายเลขแผง",
+      showNumber: "หมายเลขแผง",
       titleLocation: "การจัดตำแหน่งชื่อแผง",
       descriptionLocation: "การจัดตำแหน่งคำอธิบายแผง",
       templateQuestionTitleLocation: "การจัดตำแหน่งชื่อคำถาม",
       templateErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
       newPanelPosition: "ตำแหน่งแผงใหม่",
       showRangeInProgress: "แสดงแถบความคืบหน้า",
-      showProgressBar: "แสดงแถบความคืบหน้า",
-      progressBarLocation: "การจัดตําแหน่งแถบความคืบหน้า",
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
     question: {
@@ -346,7 +348,7 @@ export const thStrings = {
       requiredIf: "ทำให้คำถามจำเป็นถ้า",
       page: "ย้ายคำถามไปที่หน้า",
       state: "สถานะกล่องคำถามพับ",
-      hideNumber: "ซ่อนหมายเลขคำถาม",
+      showNumber: "ใส่หมายเลขคําถามนี้",
       titleLocation: "การจัดตำแหน่งชื่อคำถาม",
       descriptionLocation: "การจัดตำแหน่งคำอธิบายคำถาม",
       errorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
@@ -388,7 +390,8 @@ export const thStrings = {
     // survey templates
     survey: {
       title: "ชื่อแบบสำรวจ",
-      description: "คำอธิบายแบบสำรวจ"
+      description: "คำอธิบายแบบสำรวจ",
+      readOnly: "ทําให้แบบสํารวจเป็นแบบอ่านอย่างเดียว"
     },
     page: {
       name: "ชื่อหน้า",
@@ -506,6 +509,7 @@ export const thStrings = {
     listIsEmpty: "คุณยังไม่มีรายการใดๆ",
     "listIsEmpty@choices": "คุณยังไม่มีตัวเลือกใดๆ",
     "listIsEmpty@columns": "คุณยังไม่มีคอลัมน์ใดๆ",
+    "listIsEmpty@gridLayoutColumns": "คุณยังไม่มีคอลัมน์เค้าโครง",
     "listIsEmpty@rows": "คุณยังไม่มีแถวใดๆ",
     "listIsEmpty@validators": "คุณยังไม่มีการตรวจสอบความถูกต้องใดๆ",
     "listIsEmpty@calculatedValues": "คุณยังไม่มีตัวแปรใดๆ",
@@ -539,6 +543,7 @@ export const thStrings = {
     titlePlaceholder: "ชื่อเรื่อง",
     surveyTitlePlaceholder: "ชื่อเรื่องแบบสำรวจ",
     pageTitlePlaceholder: "หน้า {num}",
+    startPageTitlePlaceholder: "หน้าเริ่มต้น",
     descriptionPlaceholder: "คำอธิบาย",
     surveyDescriptionPlaceholder: "คำอธิบาย",
     pageDescriptionPlaceholder: "คำอธิบาย",
@@ -611,7 +616,6 @@ export const thStrings = {
     simulator: "เลือกประเภทอุปกรณ์",
     landscapeOrientation: "เปลี่ยนเป็นแนวนอน",
     portraitOrientation: "เปลี่ยนเป็นแนวตั้ง",
-    mode: "โหมดการแสดงผลแบบสำรวจ",
     clearInvisibleValues: "ล้างค่าคำถามที่ซ่อนอยู่",
     cookieName: "จำกัดการตอบหนึ่งครั้ง",
     partialSendEnabled: "บันทึกความคืบหน้าแบบสำรวจอัตโนมัติเมื่อเปลี่ยนหน้า",
@@ -625,12 +629,14 @@ export const thStrings = {
     editText: "ข้อความปุ่ม \"แก้ไขคำตอบ\"",
     startSurveyText: "ข้อความปุ่ม \"เริ่มแบบสำรวจ\"",
     showNavigationButtons: "แสดง/ซ่อนปุ่มนำทาง",
+    navigationButtonsLocation: "การจัดตําแหน่งปุ่มนําทาง",
     showPrevButton: "แสดงปุ่ม \"หน้าก่อนหน้า\"",
     firstPageIsStartPage: "หน้าแรกเป็นหน้าที่เริ่ม",
     showCompletePage: "แสดงหน้า \"ขอบคุณ\"",
     autoAdvanceEnabled: "ไปหน้าถัดไปอัตโนมัติ",
     autoAdvanceAllowComplete: "เสร็จสิ้นแบบสำรวจอัตโนมัติ",
     showProgressBar: "การจัดตำแหน่งแถบความคืบหน้า",
+    progressBarLocation: "การจัดตําแหน่งแถบความคืบหน้า",
     questionTitleLocation: "การจัดตำแหน่งชื่อคำถาม",
     questionTitleWidth: "ความกว้างของชื่อคำถาม",
     requiredMark: "สัญลักษณ์ที่จำเป็น",
@@ -646,8 +652,8 @@ export const thStrings = {
     renderMode: "โหมดแสดงผลแผง",
     allowAddPanel: "เปิดใช้งานการเพิ่มแผง",
     allowRemovePanel: "เปิดใช้งานการลบแผง",
-    panelAddText: "ข้อความปุ่ม \"เพิ่มแผง\"",
-    panelRemoveText: "ข้อความปุ่ม \"ลบแผง\"",
+    addPanelText: "ข้อความปุ่ม \"เพิ่มแผง\"",
+    removePanelText: "ข้อความปุ่ม \"ลบแผง\"",
     isSinglePage: "แสดงองค์ประกอบทั้งหมดในหน้าหนึ่ง",
     html: "มาร์กอัป HTML",
     setValue: "คำตอบ",
@@ -721,9 +727,9 @@ export const thStrings = {
     minPanelCount: "จำนวนแผงขั้นต่ำ",
     maxPanelCount: "จำนวนแผงสูงสุด",
     panelsState: "สถานะแผงภายใน",
-    panelPrevText: "ข้อความปุ่ม \"แผงก่อนหน้า\"",
-    panelNextText: "ข้อความปุ่ม \"แผงถัดไป\"",
-    panelRemoveButtonLocation: "การจัดตำแหน่งปุ่ม \"ลบแผง\"",
+    prevPanelText: "ข้อความปุ่ม \"แผงก่อนหน้า\"",
+    nextPanelText: "ข้อความปุ่ม \"แผงถัดไป\"",
+    removePanelButtonLocation: "การจัดตำแหน่งปุ่ม \"ลบแผง\"",
     hideIfRowsEmpty: "ซ่อนคำถามหากไม่มีแถว",
     hideColumnsIfEmpty: "ซ่อนคอลัมน์หากไม่มีแถว",
     rateValues: "ค่าการให้คะแนนที่กำหนดเอง",
@@ -753,6 +759,8 @@ export const thStrings = {
     separateSpecialChoices: "แยกตัวเลือกพิเศษ",
     choicesFromQuestion: "คัดลอกตัวเลือกจากคำถามต่อไปนี้",
     choicesFromQuestionMode: "ตัวเลือกใดที่จะคัดลอก",
+    choiceValuesFromQuestion: "ใช้ค่าจากคอลัมน์เมทริกซ์ต่อไปนี้หรือคําถามแผงเป็น ID ตัวเลือก",
+    choiceTextsFromQuestion: "ใช้ค่าจากคอลัมน์เมทริกซ์หรือคําถามแผงต่อไปนี้เป็นข้อความตัวเลือก",
     progressBarShowPageTitles: "แสดงชื่อหน้าในแถบความคืบหน้า",
     progressBarShowPageNumbers: "แสดงหมายเลขหน้าในแถบความคืบหน้า",
     showCommentArea: "เพิ่มกล่องความคิดเห็น",
@@ -787,6 +795,11 @@ export const thStrings = {
       top: "ด้านบน",
       bottom: "ด้านล่าง"
     },
+    previewMode: "โหมดแสดงตัวอย่าง",
+    gridLayoutEnabled: "เปิดใช้งานเค้าโครงกริด",
+    gridLayoutColumns: "คอลัมน์เค้าโครงกริด",
+    maskSettings: "การตั้งค่าหน้ากาก",
+    detailErrorLocation: "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดในการขยายแถว",
     // Creator tabs
     tabs: {
       panel: {
@@ -1104,6 +1117,8 @@ export const thStrings = {
     noPreview: "ไม่มีการแสดงตัวอย่าง",
     showAllQuestions: "แสดงคำถามทั้งหมด",
     showAnsweredQuestions: "แสดงเฉพาะคำถามที่ตอบแล้ว",
+    allQuestions: "แสดงคําถามทั้งหมด",
+    answeredQuestions: "แสดงเฉพาะคําถามที่ตอบแล้ว",
     pages: "หน้าที่เสร็จสมบูรณ์",
     questions: "คำถามที่ตอบแล้ว",
     requiredQuestions: "คำถามที่จำเป็นที่ตอบแล้ว",
@@ -1199,16 +1214,13 @@ export const thStrings = {
     questionOrder: {
       initial: "ดั้งเดิม"
     },
-    showProgressBar: {
-      off: "ซ่อน",
-      topbottom: "ด้านบนและล่าง",
-      aboveheader: "เหนือหัวเรื่อง",
-      belowheader: "ใต้หัวเรื่อง"
-    },
     progressBarLocation: {
       top: "ด้านบน",
       bottom: "ก้น",
-      topBottom: "ด้านบนและด้านล่าง"
+      topbottom: "ด้านบนและด้านล่าง",
+      aboveheader: "เหนือส่วนหัว",
+      belowheader: "ด้านล่างส่วนหัว",
+      off: "ซ่อน"
     },
     sum: "รวม",
     count: "นับ",
@@ -1353,7 +1365,9 @@ export const thStrings = {
       startWithNewLine: "ยกเลิกการเลือกเพื่อแสดงแผงในบรรทัดเดียวกับคำถามหรือแผงก่อนหน้า การตั้งค่านี้จะไม่ใช้ถ้าแผงเป็นองค์ประกอบแรกในแบบฟอร์มของคุณ",
       state: "เลือกจาก: \"ขยาย\" - แผงแสดงเต็มและสามารถยุบได้; \"ยุบ\" - แผงแสดงเพียงชื่อเรื่องและคำอธิบายและสามารถขยายได้; \"ล็อก\" - แผงแสดงเต็มและไม่สามารถยุบได้",
       width: "ตั้งความกว้างของแผงให้สัมพันธ์กับองค์ประกอบแบบสำรวจอื่นๆ ในบรรทัดเดียวกัน รับค่าของ CSS (px, %, in, pt, ฯลฯ)",
-      showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงนี้"
+      showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงนี้",
+      effectiveColSpan: "ระบุจํานวนคอลัมน์ที่แผงนี้ครอบคลุมภายในเค้าโครงกริด",
+      gridLayoutColumns: "ตารางนี้ให้คุณกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์ภายในแผงควบคุม โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์"
     },
     paneldynamic: {
       name: "ID แผงที่ไม่มองเห็นได้สำหรับผู้ตอบแบบสำรวจ",
@@ -1384,6 +1398,7 @@ export const thStrings = {
     resetValueIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่กำหนดเมื่อค่าคำตอบของผู้ตอบจะถูกรีเซ็ตตาม \"นิพจน์ค่าเริ่มต้น\" หรือ \"นิพจน์ตั้งค่า\" หรือค่าเริ่มต้นถ้ามีการตั้งค่า",
     setValueIf: "ใช้ไอคอนไม้เท้าวิเศษเพื่อตั้งกฎเงื่อนไขที่กำหนดเมื่อรัน \"นิพจน์ตั้งค่า\" และตั้งค่าที่ได้เป็นคำตอบ",
     setValueExpression: "ระบุนิพจน์ที่กำหนดค่าที่จะตั้งเมื่อเงื่อนไขในกฎ \"ตั้งค่า\" ถูกตอบสนอง นิพจน์สามารถประกอบด้วยการคำนวณพื้นฐาน {q1_id} + {q2_id}, นิพจน์บูลีน เช่น {age} > 60, และฟังก์ชัน: iif(), today(), age(), min(), max(), avg() เป็นต้น ค่าที่กำหนดโดยนิพจน์นี้สามารถถูกแทนที่ได้โดยการป้อนของผู้ตอบ",
+    gridLayoutEnabled: "ตัวสร้างแบบสํารวจช่วยให้คุณสามารถปรับความกว้างแบบอินไลน์ขององค์ประกอบฟอร์มด้วยตนเองเพื่อควบคุมเค้าโครง หากสิ่งนี้ไม่ก่อให้เกิดผลลัพธ์ที่ต้องการ คุณสามารถเปิดใช้งานเค้าโครงกริด ซึ่งโครงสร้างสร้างองค์ประกอบโดยใช้ระบบตามคอลัมน์ หากต้องการกําหนดค่าคอลัมน์เค้าโครง ให้เลือกหน้าหรือแผง แล้วใช้ตาราง \"การตั้งค่าคําถาม\" → \"คอลัมน์กริด\" หากต้องการปรับจํานวนคอลัมน์ของคําถาม ให้เลือกและตั้งค่าที่ต้องการในช่อง \"เค้าโครง\" → \"ช่วงคอลัมน์\"",
     question: {
       name: "ID คำถามที่ไม่มองเห็นได้สำหรับผู้ตอบแบบสำรวจ",
       description: "พิมพ์คำบรรยายคำถาม",
@@ -1404,7 +1419,8 @@ export const thStrings = {
       textUpdateMode: "เลือกจาก: \"เมื่อเสียโฟกัส\" - ค่าจะถูกอัปเดตเมื่อช่องป้อนข้อมูลเสียโฟกัส; \"ขณะพิมพ์\" - ค่าจะถูกอัปเดตแบบเรียลไทม์เมื่อผู้ใช้กำลังพิมพ์ ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"เมื่อเสียโฟกัส\")",
       url: "คุณสามารถใช้บริการเว็บใดก็ได้เป็นแหล่งข้อมูลสำหรับคำถามเลือกหลายตัวเลือก เพื่อเติมค่าตัวเลือกให้ป้อน URL ของบริการที่ให้ข้อมูล",
       searchMode: "การดำเนินการเปรียบเทียบที่ใช้ในการกรองรายการดรอปดาวน์",
-      textWrapEnabled: "ข้อความยาวในตัวเลือกจะสร้างการตัดบรรทัดอัตโนมัติเพื่อให้พอดีกับเมนูดรอปดาวน์ ยกเลิกการเลือกถ้าคุณต้องการให้ข้อความถูกตัด"
+      textWrapEnabled: "ข้อความยาวในตัวเลือกจะสร้างการตัดบรรทัดอัตโนมัติเพื่อให้พอดีกับเมนูดรอปดาวน์ ยกเลิกการเลือกถ้าคุณต้องการให้ข้อความถูกตัด",
+      effectiveColSpan: "ระบุจํานวนคอลัมน์ที่คําถามนี้ครอบคลุมภายในเค้าโครงกริด"
     },
     signaturepad: {
       signatureWidth: "ตั้งความกว้างของพื้นที่ลายเซ็นที่แสดงและภาพที่ได้",
@@ -1433,7 +1449,8 @@ export const thStrings = {
     },
     // survey templates
     survey: {
-      mode: "เลือกจาก: \"แก้ไขได้\" - อนุญาตให้ผู้ตอบกรอกแบบสำรวจของคุณ; \"อ่านอย่างเดียว\" - ปิดการแก้ไขแบบฟอร์ม"
+      readOnly: "เลือกว่าคุณต้องการป้องกันไม่ให้ผู้ตอบแบบสอบถามกรอกแบบสํารวจหรือไม่",
+      progressBarLocation: "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"
     },
     matrixdropdowncolumn: {
       name: "ID คอลัมน์ที่ไม่มองเห็นได้สำหรับผู้ตอบแบบสำรวจ",
@@ -1455,7 +1472,7 @@ export const thStrings = {
     autoAdvanceEnabled: "เลือกว่าคุณต้องการให้แบบสํารวจเลื่อนไปยังหน้าถัดไปโดยอัตโนมัติเมื่อผู้ตอบคําถามทั้งหมดในหน้าปัจจุบันแล้ว ฟีเจอร์นี้จะไม่มีผลหากคําถามสุดท้ายในหน้าเป็นคําถามปลายเปิดหรืออนุญาตให้มีคําตอบหลายข้อ",
     autoAdvanceAllowComplete: "เลือกถ้าคุณต้องการให้แบบสำรวจเสร็จสิ้นโดยอัตโนมัติหลังจากผู้ตอบตอบคำถามทั้งหมด",
     showNavigationButtons: "ตั้งการมองเห็นและตำแหน่งของปุ่มนำทางในหน้า",
-    showProgressBar: "ตั้งการมองเห็นและตำแหน่งของแถบความคืบหน้า ตัวเลือก \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าเหนือหรือใต้หัวเรื่องแบบสำรวจ",
+    navigationButtonsLocation: "ตั้งค่าตําแหน่งของปุ่มนําทางบนหน้า",
     showPreviewBeforeComplete: "เปิดใช้งานหน้าพรีวิวที่มีคำถามทั้งหมดหรือที่ตอบแล้ว",
     questionTitleLocation: "ใช้กับคำถามทั้งหมดในแบบสำรวจ การตั้งค่านี้สามารถถูกแทนที่ได้โดยกฎการจัดตำแหน่งชื่อเรื่องที่ระดับต่ำกว่า: แผง, หน้า หรือคำถาม การตั้งค่าระดับต่ำกว่าจะยกเลิกการตั้งค่าระดับสูง",
     requiredMark: "สัญลักษณ์หรือชุดของสัญลักษณ์ที่ระบุว่าจำเป็นต้องตอบ",
@@ -1479,6 +1496,7 @@ export const thStrings = {
     rowTitleWidth: "รับค่าของ CSS (px, %, in, pt, ฯลฯ)",
     totalText: "แสดงเฉพาะเมื่อมีคอลัมน์ที่แสดงค่ารวมที่ตั้งค่าด้วย \"วิธีการรวม\" หรือ \"นิพจน์ค่ารวม\"",
     cellErrorLocation: "ตั้งตำแหน่งของข้อความข้อผิดพลาดเมื่อเทียบกับเซลล์ที่มีอินพุตที่ไม่ถูกต้อง ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจาก \"การจัดข้อความข้อผิดพลาด\"",
+    detailErrorLocation: "ตั้งค่าตําแหน่งของข้อความแสดงข้อผิดพลาดสําหรับคําถามที่ซ้อนกันในส่วนรายละเอียด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจากคุณสมบัติ \"การจัดตําแหน่งข้อความแสดงข้อผิดพลาด\"",
     keyDuplicationError: "เมื่อเปิดใช้คุณสมบัติ \"ป้องกันคำตอบซ้ำกัน\" ผู้ตอบที่พยายามส่งการตอบซ้ำจะได้รับข้อความข้อผิดพลาดต่อไปนี้",
     totalExpression: "ช่วยให้คุณคำนวณค่ารวมตามนิพจน์ นิพจน์สามารถประกอบด้วยการคำนวณพื้นฐาน ({q1_id} + {q2_id}), นิพจน์บูลีน ({age} > 60) และฟังก์ชัน ('iif(), today(), age(), min(), max(), avg(), ฯลฯ)",
     confirmDelete: "เรียกใช้งานพร้อมท์เพื่อยืนยันการลบแถว",
@@ -1501,7 +1519,8 @@ export const thStrings = {
       questionTitleWidth: "ตั้งความกว้างที่สม่ำเสมอสำหรับชื่อคำถามเมื่อจัดเรียงทางซ้ายของกล่องคำถาม รับค่าของ CSS (px, %, in, pt, ฯลฯ)",
       questionErrorLocation: "ตั้งตำแหน่งของข้อความข้อผิดพลาดเมื่อเทียบกับคำถามที่มีอินพุตที่ไม่ถูกต้อง เลือกระหว่าง: \"ด้านบน\" - ข้อความข้อผิดพลาดจะวางที่ด้านบนของกล่องคำถาม; \"ด้านล่าง\" - ข้อความข้อผิดพลาดจะวางที่ด้านล่างของกล่องคำถาม ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"ด้านบน\")",
       questionOrder: "รักษาลำดับดั้งเดิมของคำถามหรือตั้งค่าให้สุ่ม ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"ดั้งเดิม\") ผลของการตั้งค่านี้จะแสดงในแท็บพรีวิวเท่านั้น",
-      navigationButtonsVisibility: "ตั้งการมองเห็นของปุ่มนำทางในหน้า ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจซึ่งค่าเริ่มต้นคือ \"มองเห็นได้\""
+      showNavigationButtons: "ตั้งการมองเห็นของปุ่มนำทางในหน้า ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจซึ่งค่าเริ่มต้นคือ \"มองเห็นได้\"",
+      gridLayoutColumns: "ตารางนี้ช่วยให้คุณสามารถกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์บนหน้า โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์"
     },
     timerLocation: "ตั้งค่าตําแหน่งของตัวจับเวลาบนหน้า",
     panelsState: "เลือกจาก: \"ล็อก\" - ผู้ใช้ไม่สามารถขยายหรือยุบแผง; \"ยุบทั้งหมด\" - แผงทั้งหมดเริ่มในสภาพยุบ; \"ขยายทั้งหมด\" - แผงทั้งหมดเริ่มในสภาพขยาย; \"แผงแรกขยาย\" - เฉพาะแผงแรกเท่านั้นที่ขยายเริ่มต้น ใช้เมื่อ \"โหมดแสดงแผง\" ตั้งเป็น \"รายการ\" และกำหนดคุณสมบัติ \"รูปแบบชื่อแผง\"",
@@ -1516,6 +1535,8 @@ export const thStrings = {
     useDisplayValuesInDynamicTexts: "ในประเภทคำถามเลือกเดียวและเลือกหลายแต่ละตัวเลือกมี ID และค่าที่แสดง เมื่อเลือก การตั้งค่านี้จะแสดงค่าที่แสดงแทนที่จะเป็นค่า ID ในคำถาม HTML และชื่อเรื่องและคำอธิบายแบบไดนามิกขององค์ประกอบแบบสำรวจ",
     clearIfInvisible: "เลือกว่าจะล้างค่าคำถามที่ซ่อนโดยตรรกะเงื่อนไขหรือไม่และเมื่อใด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"เมื่อเสร็จสิ้นแบบสำรวจ\")",
     choicesFromQuestionMode: "เลือกจาก: \"ทั้งหมด\" - คัดลอกตัวเลือกทั้งหมดจากคำถามที่เลือก; \"เลือกแล้ว\" - คัดลอกเฉพาะตัวเลือกที่เลือกแบบไดนามิก; \"ไม่ได้เลือก\" - คัดลอกเฉพาะตัวเลือกที่ไม่ได้เลือกแบบไดนามิก ตัวเลือก \"ไม่มี\" และ \"อื่น\" จะคัดลอกตามค่าเริ่มต้นถ้าเปิดในคำถามต้นทาง",
+    choiceValuesFromQuestion: "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดควรให้รหัส",
+    choiceTextsFromQuestion: "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดที่ควรให้ข้อความที่แสดง",
     showOtherItem: "เมื่อเลือก ผู้ใช้สามารถป้อนข้อมูลเพิ่มเติมในกล่องความคิดเห็นแยก",
     separateSpecialChoices: "แสดงตัวเลือกพิเศษแต่ละตัวเลือก (\"ไม่มี\", \"อื่น\", \"เลือกทั้งหมด\") ในบรรทัดใหม่ แม้ว่าจะใช้การจัดเรียงหลายคอลัมน์",
     path: "ระบุที่ตั้งในชุดข้อมูลบริการที่มีอาร์เรย์ของวัตถุเป้าหมาย อยู่ถ้าลิงก์ URL ชี้ไปที่อาร์เรย์",
@@ -1588,10 +1609,6 @@ export const thStrings = {
       overlapEnabled: "เมื่อเปิดใช้งาน ด้านบนของแบบสํารวจจะซ้อนทับด้านล่างของส่วนหัว",
       mobileHeight: "เมื่อตั้งค่าเป็น 0 ความสูงจะถูกคํานวณโดยอัตโนมัติเพื่อรองรับเนื้อหาของส่วนหัว"
     },
-    panellayoutcolumn: {
-      effectiveWidth: "รับค่าของ %",
-      questionTitleWidth: "รับค่าของ px"
-    },
     progressBarInheritWidthFrom: "ตัวเลือก \"เหมือนกับคอนเทนเนอร์\" จะปรับความกว้างของพื้นที่แถบความคืบหน้าโดยอัตโนมัติเพื่อให้พอดีกับองค์ประกอบ HTML ที่วางแบบสํารวจ"
   },
   // Properties
@@ -1660,7 +1677,6 @@ export const thStrings = {
     inputTextAlignment: "การจัดตําแหน่งค่าอินพุต",
     elements: "องค์ประกอบ",
     content: "เนื้อหา",
-    navigationButtonsVisibility: "แสดง/ซ่อนปุ่มนำทาง",
     navigationTitle: "ชื่อเรื่องนำทาง",
     navigationDescription: "คำอธิบายนำทาง",
     longTap: "แตะค้าง",
@@ -1913,3 +1929,36 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // tabs.surfaceBackground: "Surface Background" => "พื้นหลังพื้นผิว"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "ใช้คําตอบจากรายการสุดท้ายเป็นค่าเริ่มต้น"
 // colors.gray: "Gray" => "เทา"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "การจัดตําแหน่งปุ่มนําทาง"
+// pv.allQuestions: "Show all questions" => "แสดงคําถามทั้งหมด"
+// pv.answeredQuestions: "Show answered questions only" => "แสดงเฉพาะคําถามที่ตอบแล้ว"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "ตั้งค่าตําแหน่งของปุ่มนําทางบนหน้า"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "ใช้ค่าจากคอลัมน์เมทริกซ์ต่อไปนี้หรือคําถามแผงเป็น ID ตัวเลือก"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "ใช้ค่าจากคอลัมน์เมทริกซ์หรือคําถามแผงต่อไปนี้เป็นข้อความตัวเลือก"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดควรให้รหัส"
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "ในประเภทคําถามแบบเลือกเดี่ยวและหลายตัวเลือก แต่ละตัวเลือกจะมีรหัสและค่าที่แสดง การตั้งค่านี้ระบุว่าคอลัมน์เมทริกซ์หรือคําถามแผงใดที่ควรให้ข้อความที่แสดง"
+// pe.progressBarLocation: "Progress bar alignment" => "การจัดตําแหน่งแถบความคืบหน้า"
+// progressBarLocation.topbottom: "Top and bottom" => "ด้านบนและด้านล่าง"
+// progressBarLocation.aboveheader: "Above the header" => "เหนือส่วนหัว"
+// progressBarLocation.belowheader: "Below the header" => "ด้านล่างส่วนหัว"
+// progressBarLocation.off: "Hidden" => "ซ่อน"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"
+// survey.readOnly: "Make the survey read-only" => "ทําให้แบบสํารวจเป็นแบบอ่านอย่างเดียว"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "เลือกว่าคุณต้องการป้องกันไม่ให้ผู้ตอบแบบสอบถามกรอกแบบสํารวจหรือไม่"
+// paneldynamic.showNumber: "Number the panel" => "หมายเลขแผง"
+// question.showNumber: "Number this question" => "ใส่หมายเลขคําถามนี้"
+// pe.previewMode: "Preview mode" => "โหมดแสดงตัวอย่าง"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "เปิดใช้งานเค้าโครงกริด"
+// pe.maskSettings: "Mask settings" => "การตั้งค่าหน้ากาก"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดในการขยายแถว"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "ตั้งค่าตําแหน่งของข้อความแสดงข้อผิดพลาดสําหรับคําถามที่ซ้อนกันในส่วนรายละเอียด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจากคุณสมบัติ \"การจัดตําแหน่งข้อความแสดงข้อผิดพลาด\""
+// pe.gridLayoutColumns: "Grid layout columns" => "คอลัมน์เค้าโครงกริด"
+// pe.startPageTitlePlaceholder: "Start Page" => "หน้าเริ่มต้น"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "ความกว้างที่มีประสิทธิภาพ %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "ความกว้างของชื่อคําถาม px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "คุณยังไม่มีคอลัมน์เค้าโครง"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "ระบุจํานวนคอลัมน์ที่แผงนี้ครอบคลุมภายในเค้าโครงกริด"
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "ตารางนี้ให้คุณกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์ภายในแผงควบคุม โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์"
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "ตัวสร้างแบบสํารวจช่วยให้คุณสามารถปรับความกว้างแบบอินไลน์ขององค์ประกอบฟอร์มด้วยตนเองเพื่อควบคุมเค้าโครง หากสิ่งนี้ไม่ก่อให้เกิดผลลัพธ์ที่ต้องการ คุณสามารถเปิดใช้งานเค้าโครงกริด ซึ่งโครงสร้างสร้างองค์ประกอบโดยใช้ระบบตามคอลัมน์ หากต้องการกําหนดค่าคอลัมน์เค้าโครง ให้เลือกหน้าหรือแผง แล้วใช้ตาราง \"การตั้งค่าคําถาม\" → \"คอลัมน์กริด\" หากต้องการปรับจํานวนคอลัมน์ของคําถาม ให้เลือกและตั้งค่าที่ต้องการในช่อง \"เค้าโครง\" → \"ช่วงคอลัมน์\""
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "ระบุจํานวนคอลัมน์ที่คําถามนี้ครอบคลุมภายในเค้าโครงกริด"
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "ตารางนี้ช่วยให้คุณสามารถกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์บนหน้า โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์"

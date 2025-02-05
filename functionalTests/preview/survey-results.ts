@@ -142,7 +142,7 @@ test("Test markdown is processed in result question titles", async (t) => {
   await setJSON(json);
   await ClientFunction(() => {
     window["creator"].onSurveyInstanceCreated.add((s, o) => {
-      if (o.reason == "test") {
+      if (o.reason == "preview") {
         o.survey.onTextMarkdown.add(function (survey, options) {
           options.html = "Markdown converted text";
         });
