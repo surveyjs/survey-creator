@@ -2585,7 +2585,7 @@ test("Scaling design surface", async (t) => {
     await setJSON(json);
     const surfaceSelector = Selector(".svc-tab-designer_content > div");
     const qContent = Selector(".svc-question__content");
-    await t.click(qContent, { offsetX: 5, offsetY: 5 });
+    await t.click(qContent, { offsetX: 50, offsetY: 50 });
 
     await t.resizeWindow(1024, 3700);
     for (let i = 0; i < 3; i++) { await t.click(Selector("#zoomIn").find("button")); }
