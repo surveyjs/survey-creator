@@ -21,7 +21,11 @@
 
 <script lang="ts" setup>
 import { MenuButton } from "survey-creator-core";
-import { SvComponent, useBase } from "survey-vue3-ui";
+import {
+  SvComponent,
+  useBase,
+  key2ClickDirective as vKey2click,
+} from "survey-vue3-ui";
 const props = defineProps<{ model: MenuButton }>();
 
 useBase(() => props.model);
