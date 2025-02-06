@@ -1562,7 +1562,7 @@ var italianTranslation = {
     selectToRankEnabled: "Abilita per classificare solo le scelte selezionate. Gli utenti trascineranno gli elementi selezionati dall'elenco di scelta per ordinarli all'interno dell'area di classificazione.",
     dataList: "Inserisci un elenco di scelte che verranno suggerite al rispondente durante l'inserimento.",
     inputSize: "L'impostazione ridimensiona solo i campi di input e non influisce sulla larghezza della casella della domanda.",
-    itemTitleWidth: "Imposta una larghezza coerente per tutte le etichette degli elementi in pixel",
+    itemTitleWidth: "Imposta una larghezza uniforme per tutte le etichette degli articoli. Accetta valori CSS (px, %, in, pt, ecc.).",
     inputTextAlignment: "Selezionare la modalità di allineamento del valore di input all'interno del campo. L'impostazione predefinita \"Auto\" allinea il valore di input a destra se viene applicata una maschera di valuta o numerica e a sinistra in caso contrario.",
     altText: "Funge da sostituto quando l'immagine non può essere visualizzata sul dispositivo di un utente e per motivi di accessibilità.",
     rateColorMode: "Definisce il colore dell'emoji selezionata quando il tipo di icona Valutazione è impostato su \"Smiley\". Scegli tra: \"Predefinito\" - l'emoji selezionata appare nel colore predefinito del sondaggio; \"Scala\": l'emoji selezionata eredita il colore dalla scala di valutazione.",
@@ -2790,3 +2790,4 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // ed.expandTooltip: "Expand" => "Espandere"
 // ed.collapseTooltip: "Collapse" => "Collasso"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Es.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Imposta una larghezza uniforme per tutte le etichette degli articoli. Accetta valori CSS (px, %, in, pt, ecc.)."

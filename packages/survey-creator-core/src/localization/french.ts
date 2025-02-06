@@ -1562,7 +1562,7 @@ var frenchTranslation = {
     selectToRankEnabled: "Activez cette option pour classer uniquement les choix sélectionnés. Les utilisateurs feront glisser les éléments sélectionnés de la liste de choix pour les classer dans la zone de classement.",
     dataList: "Entrez une liste de choix qui seront suggérés au répondant lors de la saisie.",
     inputSize: "Le paramètre ne redimensionne que les champs de saisie et n’affecte pas la largeur de la zone de question.",
-    itemTitleWidth: "Définit une largeur cohérente pour toutes les étiquettes d’élément en pixels",
+    itemTitleWidth: "Définit une largeur cohérente pour toutes les étiquettes d’article. Accepte les valeurs CSS (px, %, in, pt, etc.).",
     inputTextAlignment: "Sélectionnez le mode d’alignement de la valeur d’entrée dans le champ. Le paramètre par défaut « Auto » aligne la valeur d’entrée à droite si le masquage monétaire ou numérique est appliqué et à gauche si ce n’est pas le cas.",
     altText: "Sert de substitut lorsque l’image ne peut pas être affichée sur l’appareil d’un utilisateur et à des fins d’accessibilité.",
     rateColorMode: "Définit la couleur de l’emoji sélectionné lorsque le type d’icône d’évaluation est défini sur « Smileys ». Choisissez entre : « Par défaut » - l’emoji sélectionné apparaît dans la couleur par défaut de l’enquête ; « Échelle » - l’emoji sélectionné hérite de la couleur de l’échelle d’évaluation.",
@@ -3088,3 +3088,4 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // ed.expandTooltip: "Expand" => "Développer"
 // ed.collapseTooltip: "Collapse" => "Effondrement"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex. : 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Définit une largeur cohérente pour toutes les étiquettes d’article. Accepte les valeurs CSS (px, %, in, pt, etc.)."

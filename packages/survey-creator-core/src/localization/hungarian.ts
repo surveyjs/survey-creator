@@ -1562,7 +1562,7 @@ export var huStrings = {
     selectToRankEnabled: "Engedélyezésével csak a kiválasztott választásokat rangsorolhatja. A felhasználók a kiválasztott elemeket az adatválaszték-listából húzzák, hogy a rangsorolási területen belül rendezzék őket.",
     dataList: "Adja meg azoknak a választási lehetőségeknek a listáját, amelyeket a rendszer javasolni fog a válaszadónak a bevitel során.",
     inputSize: "A beállítás csak a beviteli mezőket méretezi át, és nincs hatással a kérdésmező szélességére.",
-    itemTitleWidth: "Konzisztens szélességet állít be az összes elemfelirathoz képpontban",
+    itemTitleWidth: "Egységes szélességet állít be az összes cikkfelirathoz. CSS-értékeket fogad el (px, %, in, pt stb.).",
     inputTextAlignment: "Válassza ki, hogyan szeretné igazítani a bemeneti értéket a mezőn belül. Az alapértelmezett \"Automatikus\" beállítás a bemeneti értéket jobbra igazítja, ha pénznem vagy numerikus maszkolás van alkalmazva, és balra, ha nem.",
     altText: "Helyettesítőként szolgál, ha a kép nem jeleníthető meg a felhasználó eszközén, valamint kisegítő lehetőségek céljából.",
     rateColorMode: "Meghatározza a kiválasztott hangulatjel színét, ha az Értékelés ikon típusa \"Hangulatjelek\". Válasszon a következők közül: \"Alapértelmezett\" - a kiválasztott hangulatjel alapértelmezett felmérési színben jelenik meg; \"Skála\" - a kiválasztott hangulatjel örökli a színt a minősítési skálától.",
@@ -3180,3 +3180,4 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // ed.expandTooltip: "Expand" => "Kibővít"
 // ed.collapseTooltip: "Collapse" => "Összeomlás"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Pl.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Egységes szélességet állít be az összes cikkfelirathoz. CSS-értékeket fogad el (px, %, in, pt stb.)."

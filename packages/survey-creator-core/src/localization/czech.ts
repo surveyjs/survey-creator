@@ -1562,7 +1562,7 @@ export var czStrings = {
     selectToRankEnabled: "Povolením seřadíte pouze vybrané volby. Uživatelé přetáhnou vybrané položky ze seznamu voleb a seřadí je v oblasti hodnocení.",
     dataList: "Zadejte seznam možností, které budou respondentovi navrženy během vstupu.",
     inputSize: "Nastavení mění pouze velikost vstupních polí a nemá vliv na šířku pole pro otázky.",
-    itemTitleWidth: "Nastaví konzistentní šířku pro všechny popisky položek v pixelech",
+    itemTitleWidth: "Nastaví konzistentní šířku pro všechny popisky položek. Přijímá hodnoty CSS (px, %, in, pt, atd.).",
     inputTextAlignment: "Vyberte, jak chcete zarovnat vstupní hodnotu v poli. Výchozí nastavení \"Auto\" zarovná vstupní hodnotu doprava, pokud je použito maskování měny nebo čísel, a doleva, pokud ne.",
     altText: "Slouží jako náhrada v případě, že obrázek nelze zobrazit na zařízení uživatele, a pro účely usnadnění.",
     rateColorMode: "Definuje barvu vybraného emotikonu, když je typ ikony Hodnocení nastaven na \"Smajlíky\". Vyberte si mezi: \"Výchozí\" - vybraný emotikon se zobrazí ve výchozí barvě průzkumu; \"Měřítko\" - vybraný emotikon zdědí barvu ze stupnice hodnocení.",
@@ -2606,3 +2606,4 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // ed.expandTooltip: "Expand" => "Expandovat"
 // ed.collapseTooltip: "Collapse" => "Zhroucení"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Příklad: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentní šířku pro všechny popisky položek. Přijímá hodnoty CSS (px, %, in, pt, atd.)."

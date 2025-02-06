@@ -1562,7 +1562,7 @@ export let svStrings = {
     selectToRankEnabled: "Aktivera för att endast rangordna valda alternativ. Användarna drar de valda objekten från urvalslistan för att ordna dem i rangordningsområdet.",
     dataList: "Ange en lista med alternativ som kommer att föreslås för respondenten under inmatningen.",
     inputSize: "Inställningen ändrar bara storleken på inmatningsfälten och påverkar inte frågerutans bredd.",
-    itemTitleWidth: "Anger konsekvent bredd för alla objektetiketter i pixlar",
+    itemTitleWidth: "Ställer in konsekvent bredd för alla objektetiketter. Accepterar CSS-värden (px, %, in, pt, etc.).",
     inputTextAlignment: "Välj hur du vill justera indatavärdet i fältet. Standardinställningen \"Auto\" justerar indatavärdet till höger om valutamaskering eller numerisk maskering används och till vänster om inte.",
     altText: "Fungerar som ersättning när bilden inte kan visas på en användares enhet och i tillgänglighetssyfte.",
     rateColorMode: "Definierar färgen på den valda emojin när typen av betygsikon är inställd på \"Smileys\". Välj mellan: \"Standard\" - den valda emojin visas i standardundersökningsfärgen; \"Skala\" - den valda emojin ärver färg från betygsskalan.",
@@ -3203,3 +3203,4 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // ed.expandTooltip: "Expand" => "Expandera"
 // ed.collapseTooltip: "Collapse" => "Kollaps"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Ställer in konsekvent bredd för alla objektetiketter. Accepterar CSS-värden (px, %, in, pt, etc.)."

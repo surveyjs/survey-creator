@@ -1562,7 +1562,7 @@ export var nbStrings = {
     selectToRankEnabled: "Aktiver for å rangere bare valgte valg. Brukere vil dra valgte elementer fra valglisten for å sortere dem innenfor rangeringsområdet.",
     dataList: "Angi en liste over valg som skal foreslås for respondenten under inndata.",
     inputSize: "Innstillingen endrer bare størrelsen på inndatafeltene og påvirker ikke bredden på spørsmålsboksen.",
-    itemTitleWidth: "Angir konsekvent bredde for alle elementetiketter i piksler",
+    itemTitleWidth: "Angir konsekvent bredde for alle vareetiketter. Godtar CSS-verdier (px, %, in, pt, etc.).",
     inputTextAlignment: "Velg hvordan du vil justere inndataverdien i feltet. Standardinnstillingen \"Auto\" justerer inngangsverdien til høyre hvis valuta eller numerisk maskering brukes, og til venstre hvis ikke.",
     altText: "Fungerer som en erstatning når bildet ikke kan vises på en brukers enhet og av tilgjengelighetshensyn.",
     rateColorMode: "Definerer fargen på den valgte emojien når Vurdering-ikontypen er satt til \"Smileys\". Velg mellom: \"Standard\" - den valgte emojien vises i standard undersøkelsesfarge; \"Skala\" - den valgte emojien arver farge fra vurderingsskalaen.",
@@ -3031,3 +3031,4 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // ed.expandTooltip: "Expand" => "Utvide"
 // ed.collapseTooltip: "Collapse" => "Sammenbrudd"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Eks.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Angir konsekvent bredde for alle vareetiketter. Godtar CSS-verdier (px, %, in, pt, etc.)."

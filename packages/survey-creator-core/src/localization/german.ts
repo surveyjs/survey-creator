@@ -1562,7 +1562,7 @@ var germanTranslation = {
     selectToRankEnabled: "Aktivieren Sie diese Option, um nur ausgewählte Auswahlmöglichkeiten in eine Rangfolge zu bringen. Benutzer ziehen ausgewählte Elemente aus der Auswahlliste, um sie innerhalb des Ranking-Bereichs zu sortieren.",
     dataList: "Geben Sie eine Liste mit Auswahlmöglichkeiten ein, die dem Befragten während der Eingabe vorgeschlagen werden.",
     inputSize: "Die Einstellung ändert nur die Größe der Eingabefelder und wirkt sich nicht auf die Breite des Fragefelds aus.",
-    itemTitleWidth: "Legt eine konsistente Breite für alle Elementbeschriftungen in Pixeln fest",
+    itemTitleWidth: "Legt die einheitliche Breite für alle Elementbeschriftungen fest. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
     inputTextAlignment: "Wählen Sie aus, wie der Eingabewert innerhalb des Felds ausgerichtet werden soll. Die Standardeinstellung \"Auto\" richtet den Eingabewert nach rechts aus, wenn eine Währungs- oder numerische Maskierung angewendet wird, und nach links, wenn dies nicht der Fall ist.",
     altText: "Dient als Ersatz, wenn das Bild nicht auf dem Gerät eines Benutzers angezeigt werden kann, und aus Gründen der Barrierefreiheit.",
     rateColorMode: "Definiert die Farbe des ausgewählten Emojis, wenn der Symboltyp \"Bewertung\" auf \"Smileys\" eingestellt ist. Wählen Sie zwischen: \"Standard\" - das ausgewählte Emoji erscheint in der Standardfarbe der Umfrage; \"Skala\" - das ausgewählte Emoji erbt die Farbe von der Bewertungsskala.",
@@ -2741,3 +2741,4 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // ed.expandTooltip: "Expand" => "Erweitern"
 // ed.collapseTooltip: "Collapse" => "Zusammenbruch"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Beispiel: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Legt die einheitliche Breite für alle Elementbeschriftungen fest. Akzeptiert CSS-Werte (px, %, in, pt usw.)."

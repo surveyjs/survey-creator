@@ -1562,7 +1562,7 @@ export const roStrings = {
     selectToRankEnabled: "Activați pentru a clasifica doar opțiunile selectate. Utilizatorii vor trage elementele selectate din lista de opțiuni pentru a le ordona în zona de clasificare.",
     dataList: "Introduceți o listă de opțiuni care vor fi sugerate respondentului în timpul introducerii.",
     inputSize: "Setarea redimensionează doar câmpurile de intrare și nu afectează lățimea casetei întrebării.",
-    itemTitleWidth: "Setează o lățime consistentă pentru toate etichetele elementelor în pixeli",
+    itemTitleWidth: "Setează lățimea consecventă pentru toate etichetele articolelor. Acceptă valori CSS (px, %, in, pt etc.).",
     inputTextAlignment: "Selectați modul de aliniere a valorii de intrare în câmp. Setarea implicită \"Auto\" aliniază valoarea de intrare la dreapta dacă se aplică mascare monedară sau numerică și la stânga dacă nu.",
     altText: "Servește ca un substitut atunci când imaginea nu poate fi afișată pe dispozitivul utilizatorului și pentru scopuri de accesibilitate.",
     rateColorMode: "Definește culoarea emoji-ului selectat când tipul pictogramei de evaluare este setat la „Smileys”. Alegeți dintre: „Implicit” - emoji-ul selectat apare în culoarea implicită a chestionarului; „Scală” - emoji-ul selectat moștenește culoarea de la scala de evaluare.",
@@ -1969,3 +1969,4 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // ed.expandTooltip: "Expand" => "Expanda"
 // ed.collapseTooltip: "Collapse" => "Colaps"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Setează lățimea consecventă pentru toate etichetele articolelor. Acceptă valori CSS (px, %, in, pt etc.)."

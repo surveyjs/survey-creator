@@ -1562,7 +1562,7 @@ export var nlStrings = {
     selectToRankEnabled: "Schakel in om alleen geselecteerde keuzes te rangschikken. Gebruikers slepen geselecteerde items uit de keuzelijst om ze binnen het rangschikkingsgebied te rangschikken.",
     dataList: "Voer een lijst met keuzes in die tijdens de invoer aan de respondent worden voorgesteld.",
     inputSize: "De instelling wijzigt alleen de grootte van de invoervelden en heeft geen invloed op de breedte van het vraagvak.",
-    itemTitleWidth: "Hiermee stelt u een consistente breedte in voor alle artikellabels in pixels",
+    itemTitleWidth: "Hiermee stelt u een consistente breedte in voor alle artikellabels. Accepteert CSS-waarden (px, %, in, pt, enz.).",
     inputTextAlignment: "Selecteer hoe u de invoerwaarde binnen het veld wilt uitlijnen. De standaardinstelling \"Auto\" lijnt de invoerwaarde uit aan de rechterkant als valuta- of numerieke maskering wordt toegepast en aan de linkerkant als dat niet het geval is.",
     altText: "Dient als vervanging wanneer de afbeelding niet kan worden weergegeven op het apparaat van een gebruiker en voor toegankelijkheidsdoeleinden.",
     rateColorMode: "Definieert de kleur van de geselecteerde emoji wanneer het type Beoordelingspictogram is ingesteld op \"Smileys\". Kies tussen: \"Standaard\" - de geselecteerde emoji verschijnt in de standaard enquêtekleur; \"Schaal\" - de geselecteerde emoji erft de kleur van de beoordelingsschaal.",
@@ -3007,3 +3007,4 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // ed.expandTooltip: "Expand" => "Uitbreiden"
 // ed.collapseTooltip: "Collapse" => "Instorting"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Bijv.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor alle artikellabels. Accepteert CSS-waarden (px, %, in, pt, enz.)."

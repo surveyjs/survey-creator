@@ -1562,7 +1562,7 @@ export var koreanStrings = {
     selectToRankEnabled: "선택한 선택 항목만 순위를 지정할 수 있습니다. 사용자는 선택 목록에서 선택한 항목을 끌어 순위 영역 내에서 정렬합니다.",
     dataList: "입력 시 응답자에게 제안될 선택 사항 목록을 입력합니다.",
     inputSize: "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다.",
-    itemTitleWidth: "모든 항목 레이블에 대해 일관된 너비를 픽셀 단위로 설정합니다.",
+    itemTitleWidth: "모든 항목 레이블에 대해 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
     inputTextAlignment: "필드 내에서 입력 값을 정렬하는 방법을 선택합니다. 기본 설정인 \"Auto\"는 통화 또는 숫자 마스킹이 적용된 경우 입력 값을 오른쪽에 정렬하고 그렇지 않은 경우 왼쪽에 정렬합니다.",
     altText: "사용자의 장치에 이미지를 표시할 수 없는 경우 접근성을 위해 대신 사용할 수 있습니다.",
     rateColorMode: "등급 아이콘 유형이 \"스마일리\"로 설정된 경우 선택한 이모티콘의 색상을 정의합니다. 다음 중 하나를 선택합니다. \"기본값\" - 선택한 이모티콘이 기본 설문조사 색상으로 표시됩니다. \"척도\"-선택한 이모티콘은 등급 척도에서 색상을 상속합니다.",
@@ -3233,3 +3233,4 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // ed.expandTooltip: "Expand" => "넓히다"
 // ed.collapseTooltip: "Collapse" => "무너지다"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "예: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "모든 항목 레이블에 대해 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."

@@ -1562,7 +1562,7 @@ var traditionalChineseTranslation = {
     selectToRankEnabled: "啟用此選項可僅對選定的選項進行排名。使用者將從選項清單中拖動所選專案，以在排名區域內對它們進行排序。",
     dataList: "輸入將在輸入期間向受訪者建議的選項清單。",
     inputSize: "該設置僅調整輸入欄位的大小，不會影響問題框的寬度。",
-    itemTitleWidth: "為所有項目標籤設定一致的寬度（以像素為單位）",
+    itemTitleWidth: "為所有項目標籤設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。",
     inputTextAlignment: "選擇如何在欄位中對齊輸入值。默認設置 「Auto」 如果應用了貨幣或數位掩碼，則將輸入值向右對齊，如果未應用，則向左對齊。",
     altText: "當圖像無法在使用者設備上顯示時，出於輔助功能的目的，可作為替代。",
     rateColorMode: "定義當評級圖示類型設置為「笑臉」時所選表情符號的顏色。選擇：「預設」 - 選取表情符號以預設調查顏色顯示;“比例” - 所選的表情符號繼承了評分量表的顏色。",
@@ -3299,3 +3299,4 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // ed.expandTooltip: "Expand" => "擴大"
 // ed.collapseTooltip: "Collapse" => "崩潰"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "例：100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "為所有項目標籤設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"

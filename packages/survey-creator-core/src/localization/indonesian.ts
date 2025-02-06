@@ -1562,7 +1562,7 @@ export var indonesianStrings = {
     selectToRankEnabled: "Aktifkan untuk memberi peringkat hanya pada pilihan yang dipilih. Pengguna akan menyeret item yang dipilih dari daftar pilihan untuk memesannya di dalam area peringkat.",
     dataList: "Masukkan daftar pilihan yang akan disarankan kepada responden saat masukan.",
     inputSize: "Pengaturan hanya mengubah ukuran bidang input dan tidak memengaruhi lebar kotak pertanyaan.",
-    itemTitleWidth: "Mengatur lebar yang konsisten untuk semua label item dalam piksel",
+    itemTitleWidth: "Mengatur lebar yang konsisten untuk semua label item. Menerima nilai CSS (px, %, in, pt, dll.).",
     inputTextAlignment: "Pilih cara menyelaraskan nilai input dalam bidang. Pengaturan default \"Otomatis\" menyelaraskan nilai input ke kanan jika penyembunyian mata uang atau numerik diterapkan dan ke kiri jika tidak.",
     altText: "Berfungsi sebagai pengganti ketika gambar tidak dapat ditampilkan pada perangkat pengguna dan untuk tujuan aksesibilitas.",
     rateColorMode: "Menentukan warna emoji yang dipilih saat jenis ikon Peringkat diatur ke \"Smiley\". Pilih antara: \"Default\" - emoji yang dipilih muncul dalam warna survei default; \"Skala\" - emoji yang dipilih mewarisi warna dari skala peringkat.",
@@ -3183,3 +3183,4 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // ed.expandTooltip: "Expand" => "Memperluas"
 // ed.collapseTooltip: "Collapse" => "Roboh"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Contoh: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk semua label item. Menerima nilai CSS (px, %, in, pt, dll.)."

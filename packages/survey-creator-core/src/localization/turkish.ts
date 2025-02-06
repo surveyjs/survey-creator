@@ -1562,7 +1562,7 @@ export var turkishStrings = {
     selectToRankEnabled: "Yalnızca seçilen seçenekleri sıralamak için etkinleştirin. Kullanıcılar, sıralama alanı içinde sıralamak için seçim listesinden seçilen öğeleri sürükleyecektir.",
     dataList: "Giriş sırasında yanıtlayana önerilecek seçeneklerin bir listesini girin.",
     inputSize: "Bu ayar yalnızca giriş alanlarını yeniden boyutlandırır ve soru kutusunun genişliğini etkilemez.",
-    itemTitleWidth: "Piksel cinsinden tüm öğe etiketleri için tutarlı genişlik ayarlar",
+    itemTitleWidth: "Tüm öğe etiketleri için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
     inputTextAlignment: "Alan içinde giriş değerinin nasıl hizalanacağını seçin. Varsayılan ayar olan \"Otomatik\", para birimi veya sayısal maskeleme uygulanmışsa giriş değerini sağa, uygulanmıyorsa sola hizalar.",
     altText: "Görüntü, kullanıcının cihazında görüntülenemediğinde ve erişilebilirlik amacıyla yedek olarak görev yapar.",
     rateColorMode: "Derecelendirme simgesi türü \"Suratlar\" olarak ayarlandığında seçilen emojinin rengini tanımlar. Şunlar arasından seçim yapın: \"Varsayılan\" - seçilen emoji varsayılan anket renginde görünür; \"Ölçek\" - seçilen emoji, derecelendirme ölçeğinden rengi devralır.",
@@ -3024,3 +3024,4 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // ed.expandTooltip: "Expand" => "Genişletmek"
 // ed.collapseTooltip: "Collapse" => "Çökmek"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ör.: 100 piksel"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Tüm öğe etiketleri için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder."

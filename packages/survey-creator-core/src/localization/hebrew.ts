@@ -1562,7 +1562,7 @@ export var hebrewStrings = {
     selectToRankEnabled: "אפשר לדרג רק בחירות נבחרות. המשתמשים יגררו פריטים נבחרים מרשימת האפשרויות כדי לסדר אותם באזור הדירוג.",
     dataList: "הזן רשימה של אפשרויות שיוצעו למשיב במהלך הקלט.",
     inputSize: "ההגדרה משנה את גודל שדות הקלט בלבד ואינה משפיעה על רוחב תיבת השאלה.",
-    itemTitleWidth: "קובע רוחב עקבי לכל תוויות הפריטים בפיקסלים",
+    itemTitleWidth: "קובע רוחב עקבי לכל תוויות הפריט. מקבל ערכי CSS (px, %, in, pt וכו').",
     inputTextAlignment: "בחר כיצד ליישר ערך קלט בתוך השדה. הגדרת ברירת המחדל \"אוטומטי\" מיישרת את ערך הקלט ימינה אם מוחלת מסיכה על מטבע או מספר, ושמאלה אם לא.",
     altText: "משמש כתחליף כאשר לא ניתן להציג את התמונה במכשיר המשתמש ולמטרות נגישות.",
     rateColorMode: "מגדיר את צבע האמוג'י שנבחר כשסוג סמל הדירוג מוגדר ל\"סמיילי\". בחר בין: \"ברירת מחדל\" - האמוג'י שנבחר מופיע בצבע סקר ברירת מחדל; \"קנה מידה\" - האמוג'י שנבחר יורש צבע מסולם הדירוג.",
@@ -2596,3 +2596,4 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // ed.expandTooltip: "Expand" => "להרחיב"
 // ed.collapseTooltip: "Collapse" => "התמוטטות"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "לדוגמה: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "קובע רוחב עקבי לכל תוויות הפריט. מקבל ערכי CSS (px, %, in, pt וכו')."

@@ -1562,7 +1562,7 @@ var polishStrings = {
     selectToRankEnabled: "Włącz, aby uszeregować tylko wybrane wybory. Użytkownicy będą przeciągać wybrane elementy z listy wyboru, aby uporządkować je w obszarze rankingu.",
     dataList: "Wprowadź listę opcji, które zostaną zasugerowane respondentowi podczas wprowadzania danych.",
     inputSize: "To ustawienie zmienia tylko rozmiar pól wejściowych i nie wpływa na szerokość pola pytania.",
-    itemTitleWidth: "Ustawia stałą szerokość dla wszystkich etykiet elementów w pikselach",
+    itemTitleWidth: "Ustawia spójną szerokość dla wszystkich etykiet elementów. Akceptuje wartości CSS (px, %, in, pt itd.).",
     inputTextAlignment: "Wybierz sposób wyrównania wartości wejściowej w polu. Ustawienie domyślne \"Auto\" wyrównuje wartość wejściową do prawej, jeśli stosowane jest maskowanie walutowe lub numeryczne, i do lewej, jeśli nie.",
     altText: "Służy jako substytut, gdy obraz nie może być wyświetlany na urządzeniu użytkownika oraz w celu ułatwienia dostępu.",
     rateColorMode: "Określa kolor wybranego emoji, gdy typ ikony oceny jest ustawiony na \"Emotikony\". Wybierz pomiędzy: \"Domyślny\" - wybrany emoji pojawia się w domyślnym kolorze ankiety; \"Skala\" - wybrany emoji dziedziczy kolor ze skali ocen.",
@@ -3294,3 +3294,4 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // ed.expandTooltip: "Expand" => "Rozszerzać"
 // ed.collapseTooltip: "Collapse" => "Zapaść"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Przykład: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Ustawia spójną szerokość dla wszystkich etykiet elementów. Akceptuje wartości CSS (px, %, in, pt itd.)."

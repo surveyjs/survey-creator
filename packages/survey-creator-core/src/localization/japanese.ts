@@ -1562,7 +1562,7 @@ export var jaStrings = {
     selectToRankEnabled: "選択した選択肢のみをランク付けできるようにします。ユーザーは、選択した項目を選択リストからドラッグして、ランキング領域内で並べ替えます。",
     dataList: "入力時に回答者に提案される選択肢のリストを入力します。",
     inputSize: "この設定では、入力フィールドのサイズが変更されるだけで、質問ボックスの幅には影響しません。",
-    itemTitleWidth: "すべてのアイテムラベルの幅をピクセル単位で統一します。",
+    itemTitleWidth: "すべてのアイテム ラベルに一貫した幅を設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
     inputTextAlignment: "フィールド内で入力値を揃える方法を選択します。デフォルト設定の「自動」では、通貨または数値のマスキングが適用されている場合は入力値が右に、適用されていない場合は左に揃えられます。",
     altText: "ユーザーのデバイスに画像を表示できない場合や、アクセシビリティの目的で代用します。",
     rateColorMode: "レーティングアイコンの種類が「スマイリー」に設定されている場合に選択した絵文字の色を定義します。以下から選択します: \"デフォルト\" - 選択した絵文字はデフォルトのアンケートカラーで表示されます。「スケール」 - 選択した絵文字は、評価スケールから色を継承します。",
@@ -3028,3 +3028,4 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // ed.expandTooltip: "Expand" => "膨らむ"
 // ed.collapseTooltip: "Collapse" => "倒れる"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "例:100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "すべてのアイテム ラベルに一貫した幅を設定します。CSS 値 (px、%、in、pt など) を受け入れます。"

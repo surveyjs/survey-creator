@@ -1562,7 +1562,7 @@ export var msStrings = {
     selectToRankEnabled: "Membolehkan untuk menilai pilihan yang dipilih sahaja. Pengguna akan menyeret item terpilih dari senarai pilihan untuk memesannya dalam kawasan kedudukan.",
     dataList: "Masukkan senarai pilihan yang akan dicadangkan kepada responden semasa input.",
     inputSize: "Seting hanya mengubah saiz medan input dan tidak mempengaruhi lebar kotak soalan.",
-    itemTitleWidth: "Mengesetkan lebar yang konsisten untuk semua label item dalam piksel",
+    itemTitleWidth: "Menetapkan lebar yang konsisten untuk semua label item. Menerima nilai CSS (px, %, in, pt, dll.).",
     inputTextAlignment: "Pilih cara untuk menjajarkan nilai input dalam medan. Seting lalai \"Auto\" menjajarkan nilai input ke kanan jika mata wang atau topeng angka digunakan dan ke kiri jika tidak.",
     altText: "Berfungsi sebagai pengganti apabila imej tidak boleh dipaparkan pada peranti pengguna dan untuk tujuan kebolehcapaian.",
     rateColorMode: "Mentakrifkan warna emoji yang dipilih apabila jenis ikon Penarafan ditetapkan kepada \"Smileys\". Pilih antara: \"Lalai\" - emoji yang dipilih muncul dalam warna tinjauan lalai; \"Skala\" - emoji yang dipilih mewarisi warna dari skala penarafan.",
@@ -2983,3 +2983,4 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // ed.expandTooltip: "Expand" => "Mengembangkan"
 // ed.collapseTooltip: "Collapse" => "Runtuh"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Cth.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Menetapkan lebar yang konsisten untuk semua label item. Menerima nilai CSS (px, %, in, pt, dll.)."

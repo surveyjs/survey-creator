@@ -1562,7 +1562,7 @@ export var skStrings = {
     selectToRankEnabled: "Povoľte zoradiť iba vybrané možnosti. Používatelia presunú vybrané položky zo zoznamu možností a zoradia ich v oblasti poradia.",
     dataList: "Zadajte zoznam možností, ktoré budú respondentovi navrhnuté počas vstupu.",
     inputSize: "Toto nastavenie zmení iba veľkosť vstupných polí a neovplyvní šírku poľa otázok.",
-    itemTitleWidth: "Nastavuje konzistentnú šírku pre všetky štítky položiek v pixeloch",
+    itemTitleWidth: "Nastaví konzistentnú šírku pre všetky štítky položiek. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
     inputTextAlignment: "Vyberte, ako chcete zarovnať vstupnú hodnotu v poli. Predvolené nastavenie \"Auto\" zarovná vstupnú hodnotu doprava, ak je použité maskovanie meny alebo čísel, a doľava, ak nie.",
     altText: "Slúži ako náhrada, keď obrázok nie je možné zobraziť na zariadení používateľa a na účely prístupnosti.",
     rateColorMode: "Definuje farbu vybraných emodži, keď je typ ikony hodnotenia nastavený na \"Smajlíky\". Vyberte si medzi: \"Predvolené\" - vybrané emodži sa zobrazia v predvolenej farbe prieskumu; \"Mierka\" - vybrané emodži zdedí farbu z hodnotiacej stupnice.",
@@ -2982,3 +2982,4 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // ed.expandTooltip: "Expand" => "Rozšíriť"
 // ed.collapseTooltip: "Collapse" => "Kolaps"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Príklad: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentnú šírku pre všetky štítky položiek. Akceptuje hodnoty CSS (px, %, in, pt atď.)."

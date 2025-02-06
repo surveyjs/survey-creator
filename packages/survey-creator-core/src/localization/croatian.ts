@@ -1562,7 +1562,7 @@ export var hrStrings = {
     selectToRankEnabled: "Omogućite rangiranje samo odabranih odabira. Korisnici će povući odabrane stavke s popisa izbora kako bi ih naručili unutar područja rangiranja.",
     dataList: "Unesite popis izbora koji će se predložiti ispitaniku tijekom unosa.",
     inputSize: "Postavka samo mijenja veličinu ulaznih polja i ne utječe na širinu okvira pitanja.",
-    itemTitleWidth: "Postavlja dosljednu širinu za sve natpise stavki u pikselima",
+    itemTitleWidth: "Postavlja dosljednu širinu za sve oznake stavki. Prihvaća CSS vrijednosti (px, %, in, pt, itd.).",
     inputTextAlignment: "Odaberite način poravnanja ulazne vrijednosti unutar polja. Zadana postavka \"Automatski\" poravnava ulaznu vrijednost udesno ako se primjenjuje valutno ili numeričko maskiranje i ulijevo ako nije.",
     altText: "Služi kao zamjena kada se slika ne može prikazati na korisnikovom uređaju i u svrhu pristupačnosti.",
     rateColorMode: "Definira boju odabranog emojija kada je vrsta ikone Ocjena postavljena na \"Smajlići\". Odaberite između: \"Zadano\" - odabrani emoji pojavljuje se u zadanoj boji ankete; \"Skala\" - odabrani emoji nasljeđuje boju od ljestvice ocjenjivanja.",
@@ -3023,3 +3023,4 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // ed.expandTooltip: "Expand" => "Proširiti"
 // ed.collapseTooltip: "Collapse" => "Kolaps"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Primjer: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za sve oznake stavki. Prihvaća CSS vrijednosti (px, %, in, pt, itd.)."

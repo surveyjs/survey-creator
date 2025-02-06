@@ -1562,7 +1562,7 @@ export var danishStrings = {
     selectToRankEnabled: "Aktivér for kun at rangere valgte valg. Brugere trækker valgte elementer fra valglisten for at sortere dem inden for rangeringsområdet.",
     dataList: "Angiv en liste over valgmuligheder, der vil blive foreslået svarpersonen under input.",
     inputSize: "Indstillingen ændrer kun størrelsen på inputfelterne og påvirker ikke bredden af spørgsmålsfeltet.",
-    itemTitleWidth: "Angiver ensartet bredde for alle vareetiketter i pixel",
+    itemTitleWidth: "Indstiller ensartet bredde for alle elementetiketter. Accepterer CSS-værdier (px, %, in, pt osv.).",
     inputTextAlignment: "Vælg, hvordan inputværdien skal justeres i feltet. Standardindstillingen \"Auto\" justerer inputværdien til højre, hvis der anvendes valuta- eller numerisk maskering, og til venstre, hvis ikke.",
     altText: "Fungerer som erstatning, når billedet ikke kan vises på en brugers enhed og af tilgængelighedshensyn.",
     rateColorMode: "Definerer farven på den valgte emoji, når ikontypen Vurdering er indstillet til \"Smileys\". Vælg mellem: \"Standard\" - den valgte emoji vises i standard undersøgelsesfarve; \"Skala\" - den valgte emoji arver farve fra vurderingsskalaen.",
@@ -3213,3 +3213,4 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // ed.expandTooltip: "Expand" => "Ekspandere"
 // ed.collapseTooltip: "Collapse" => "Sammenbrud"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Eks.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Indstiller ensartet bredde for alle elementetiketter. Accepterer CSS-værdier (px, %, in, pt osv.)."

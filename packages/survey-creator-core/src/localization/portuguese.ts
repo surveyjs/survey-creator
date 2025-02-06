@@ -1562,7 +1562,7 @@ var portugueseTranslation = {
     selectToRankEnabled: "Habilite para classificar apenas as opções selecionadas. Os usuários arrastarão os itens selecionados da lista de opções para ordená-los dentro da área de classificação.",
     dataList: "Insira uma lista de opções que serão sugeridas ao respondente durante a entrada.",
     inputSize: "A configuração redimensiona apenas os campos de entrada e não afeta a largura da caixa de pergunta.",
-    itemTitleWidth: "Define largura consistente para todos os rótulos de item em pixels",
+    itemTitleWidth: "Define a largura consistente para todos os rótulos de item. Aceita valores CSS (px, %, in, pt, etc.).",
     inputTextAlignment: "Selecione como alinhar o valor de entrada dentro do campo. A configuração padrão \"Auto\" alinha o valor de entrada à direita se o mascaramento de moeda ou numérico for aplicado e à esquerda se não.",
     altText: "Serve como um substituto quando a imagem não pode ser exibida no dispositivo de um usuário e para fins de acessibilidade.",
     rateColorMode: "Define a cor do emoji selecionado quando o tipo de ícone Classificação é definido como \"Smileys\". Escolha entre: \"Padrão\" - o emoji selecionado aparece na cor padrão do questionário; \"Escala\" - o emoji selecionado herda a cor da escala de classificação.",
@@ -2697,3 +2697,4 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // ed.expandTooltip: "Expand" => "Expandir"
 // ed.collapseTooltip: "Collapse" => "Colapso"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Define a largura consistente para todos os rótulos de item. Aceita valores CSS (px, %, in, pt, etc.)."
