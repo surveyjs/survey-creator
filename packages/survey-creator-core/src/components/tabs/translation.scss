@@ -290,15 +290,14 @@ td.st-table__cell:first-of-type {
   }
 
   &:disabled {
-    padding-left: 0;
-    padding-right: 0;
-    opacity: var(--ctr-actionbar-button-opacity-disabled, 0.25);
+    opacity: 1;
     color: var(--ctr-actionbar-button-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
 
     fill: var(--ctr-actionbar-button-icon-color-with-text-disabled, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 }
 
+.st-translation-machine-from__btn:disabled .sd-action__title,
 .st-translation-machine-from__title {
   @include ctrDefaultFont;
   color: var(--ctr-string-table-title-caption-color, var(--sjs-layer-1-foreground-50, #00000080));
