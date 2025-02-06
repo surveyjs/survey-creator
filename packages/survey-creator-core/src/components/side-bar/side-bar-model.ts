@@ -198,6 +198,9 @@ export class SidebarModel extends Base {
     if (this._activePage) {
       this.header.title = this._activePage.caption;
       this._activePage.visible = true;
+      if(!!this._activePage.activateCallback) {
+        this._activePage.activateCallback();
+      }
     }
   }
 

@@ -2077,3 +2077,91 @@ test("Drag Drop page with other pages collapsed on start drag", async (t) => {
   const resultJson0 = await getJSON();
   await t.expect(resultJson0).eql(expectedJson);
 });
+
+test("Drag Drop page to denied area and then keep ghost page after added new one", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].expandCollapseButtonVisibility = "always";
+    window["creator"].allowDragPages = true;
+    window["creator"].collapseOnDrag = true;
+  })();
+
+  await t.resizeWindow(1600, 900);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "boolean",
+            "name": "question2"
+          }
+        ]
+      },
+    ]
+  };
+  await setJSON(json);
+
+  const expectedJson = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "boolean",
+            "name": "question2"
+          }
+        ]
+      },
+      {
+        "name": "page3",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      }
+    ]
+  };
+
+  const page2 = Selector("[data-sv-drop-target-survey-page=\"page2\"]");
+  const page2DragHandle = Selector("[data-sv-drop-target-survey-page=\"page2\"] > .svc-question__drag-area > .svc-question__drag-element");
+
+  await t
+    .scrollIntoView(page2)
+    .hover(page2, { offsetX: 150, offsetY: 20 })
+    .expect(Selector(".svc-page__content--collapsed").count).eql(0)
+    .dispatchEvent(page2DragHandle, "pointerdown")
+    .hover(Selector(".svc-designer-header"), { speed: 0.05 })
+    .dispatchEvent(page2DragHandle, "pointerup")
+    .wait(500)
+    .expect(Selector(".svc-page__content--collapsed").count).eql(0);
+  await t
+    .scrollIntoView(Selector(".svc-element__add-new-question").nth(2))
+    .expect(Selector(".svc-element__add-new-question").nth(3).exists).notOk()
+    .click(Selector(".svc-element__add-new-question").nth(2));
+  const resultJson0 = await getJSON();
+  await t.expect(resultJson0).eql(expectedJson);
+  await t
+    .expect(Selector(".svc-element__add-new-question").nth(3).visible).ok();
+});

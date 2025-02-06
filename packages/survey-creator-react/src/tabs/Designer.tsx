@@ -33,12 +33,12 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
 
   private addDragDropEvents = () => {
     this.creator.onDragStart.add(this.denyUpdate);
-    this.creator.onDragEnd.add(this.allowUpdate);
+    this.creator.onDragClear.add(this.allowUpdate);
   }
 
   private clearDragDropEvents = () => {
     this.creator.onDragStart.remove(this.denyUpdate);
-    this.creator.onDragEnd.remove(this.allowUpdate);
+    this.creator.onDragClear.remove(this.allowUpdate);
   }
 
   componentDidMount(): void {

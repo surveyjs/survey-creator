@@ -51,7 +51,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     const matrix = <QuestionMatrixDynamicModel>question;
     if (matrix.allowRowReorder && matrix.dragDropMatrixRows) {
       matrix.dragDropMatrixRows.onDragStart.add(() => { options.startUndoRedoTransaction(); });
-      matrix.dragDropMatrixRows.onDragEnd.add(() => { options.stopUndoRedoTransaction(); });
+      matrix.dragDropMatrixRows.onDragClear.add(() => { options.stopUndoRedoTransaction(); });
     }
   }
   private initializePlaceholder(rowObj: any, cellQuestion: Question, propertyName: string) {

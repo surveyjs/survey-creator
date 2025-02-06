@@ -11,7 +11,6 @@ export class SearchManagerPropertyGrid extends SearchManager {
   public get propertyGridNoResultsFound(): string { return getLocString("ed.propertyGridNoResultsFound"); }
 
   @property() survey: SurveyModel;
-  @property() isVisible: boolean;
   @property({ defaultValue: [] }) allMatches: Array<Question>;
 
   private lastCollapsedElement: IElement;

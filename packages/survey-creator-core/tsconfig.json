@@ -16,6 +16,7 @@
         "./src/themes/index.ts"
       ],
     },
+    "types": []
   },
   "include": [
     "./src/entries/index.ts"
