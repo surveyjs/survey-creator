@@ -107,6 +107,8 @@ var portugueseTranslation = {
     redo: "Refazer",
     undoTooltip: "Desfazer última alteração",
     redoTooltip: "Refazer a alteração",
+    expandTooltip: "Expandir",
+    collapseTooltip: "Colapso",
     expandAllTooltip: "Expandir tudo",
     collapseAllTooltip: "Recolher tudo",
     zoomInTooltip: "Ampliar",
@@ -902,6 +904,7 @@ var portugueseTranslation = {
     maxWidth_placeholder: "Ex.: 50%",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Ex.: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Aparência da pergunta",
@@ -1559,7 +1562,7 @@ var portugueseTranslation = {
     selectToRankEnabled: "Habilite para classificar apenas as opções selecionadas. Os usuários arrastarão os itens selecionados da lista de opções para ordená-los dentro da área de classificação.",
     dataList: "Insira uma lista de opções que serão sugeridas ao respondente durante a entrada.",
     inputSize: "A configuração redimensiona apenas os campos de entrada e não afeta a largura da caixa de pergunta.",
-    itemTitleWidth: "Define largura consistente para todos os rótulos de item em pixels",
+    itemTitleWidth: "Define a largura consistente para todos os rótulos de item. Aceita valores CSS (px, %, in, pt, etc.).",
     inputTextAlignment: "Selecione como alinhar o valor de entrada dentro do campo. A configuração padrão \"Auto\" alinha o valor de entrada à direita se o mascaramento de moeda ou numérico for aplicado e à esquerda se não.",
     altText: "Serve como um substituto quando a imagem não pode ser exibida no dispositivo de um usuário e para fins de acessibilidade.",
     rateColorMode: "Define a cor do emoji selecionado quando o tipo de ícone Classificação é definido como \"Smileys\". Escolha entre: \"Padrão\" - o emoji selecionado aparece na cor padrão do questionário; \"Escala\" - o emoji selecionado herda a cor da escala de classificação.",
@@ -2690,3 +2693,8 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "O Survey Creator permite ajustar manualmente as larguras embutidas dos elementos do formulário para controlar o layout. Se isso não produzir o resultado desejado, você poderá habilitar o layout da grade, que estrutura os elementos do formulário usando um sistema baseado em colunas. Para configurar colunas de layout, selecione uma página ou painel e use a tabela \"Configurações da pergunta\" → \"Colunas da grade\". Para ajustar quantas colunas uma pergunta abrange, selecione-a e defina o valor desejado no campo \"Layout\" → \"Extensão de coluna\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Especifica quantas colunas essa pergunta abrange dentro do layout da grade."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Esta tabela permite configurar cada coluna de grade na página. Ele define automaticamente a porcentagem de largura para cada coluna com base no número máximo de elementos em uma linha. Para personalizar o layout da grade, ajuste manualmente esses valores e defina a largura do título para todas as perguntas em cada coluna."
+
+// ed.expandTooltip: "Expand" => "Expandir"
+// ed.collapseTooltip: "Collapse" => "Colapso"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Define a largura consistente para todos os rótulos de item. Aceita valores CSS (px, %, in, pt, etc.)."

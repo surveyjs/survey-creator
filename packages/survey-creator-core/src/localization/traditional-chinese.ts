@@ -107,6 +107,8 @@ var traditionalChineseTranslation = {
     redo: "重做",
     undoTooltip: "恢復上次更改",
     redoTooltip: "重做更改",
+    expandTooltip: "擴大",
+    collapseTooltip: "崩潰",
     expandAllTooltip: "全部展開",
     collapseAllTooltip: "全部摺疊",
     zoomInTooltip: "放大",
@@ -902,6 +904,7 @@ var traditionalChineseTranslation = {
     maxWidth_placeholder: "例：50%",
     imageHeight_placeholder: "自動",
     imageWidth_placeholder: "自動",
+    itemTitleWidth_placeholder: "例：100px",
     theme: {
       themeName: "主題",
       isPanelless: "問題外觀",
@@ -1559,7 +1562,7 @@ var traditionalChineseTranslation = {
     selectToRankEnabled: "啟用此選項可僅對選定的選項進行排名。使用者將從選項清單中拖動所選專案，以在排名區域內對它們進行排序。",
     dataList: "輸入將在輸入期間向受訪者建議的選項清單。",
     inputSize: "該設置僅調整輸入欄位的大小，不會影響問題框的寬度。",
-    itemTitleWidth: "為所有項目標籤設定一致的寬度（以像素為單位）",
+    itemTitleWidth: "為所有項目標籤設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。",
     inputTextAlignment: "選擇如何在欄位中對齊輸入值。默認設置 「Auto」 如果應用了貨幣或數位掩碼，則將輸入值向右對齊，如果未應用，則向左對齊。",
     altText: "當圖像無法在使用者設備上顯示時，出於輔助功能的目的，可作為替代。",
     rateColorMode: "定義當評級圖示類型設置為「笑臉」時所選表情符號的顏色。選擇：「預設」 - 選取表情符號以預設調查顏色顯示;“比例” - 所選的表情符號繼承了評分量表的顏色。",
@@ -3292,3 +3295,8 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator 允許您手動調整表單元素的內聯寬度以控制佈局。如果這沒有產生所需的結果，您可以啟用網格佈局，該佈局使用基於列的系統構建表單元素。要配置佈局列，請選擇一個頁面或面板，然後使用 “Question Settings” → “Grid columns” 表格。要調整問題跨越的列數，請選擇它並在 「Layout」 → 「Column span」 欄位中設置所需的值。"
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "指定此問題在網格佈局中跨越多少列。"
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允許您設定頁面上的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
+
+// ed.expandTooltip: "Expand" => "擴大"
+// ed.collapseTooltip: "Collapse" => "崩潰"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "例：100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "為所有項目標籤設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"

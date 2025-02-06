@@ -107,6 +107,8 @@ var persianStrings = {
     redo: "بازانجام",
     undoTooltip: "بازگرداندن آخرین تغییر",
     redoTooltip: "انجام دادن تغییر",
+    expandTooltip: "گسترش",
+    collapseTooltip: "سقوط",
     expandAllTooltip: "گسترش همه",
     collapseAllTooltip: "جمع کردن همه",
     zoomInTooltip: "بزرگنمایی",
@@ -902,6 +904,7 @@ var persianStrings = {
     maxWidth_placeholder: "سابق: 50٪",
     imageHeight_placeholder: "خودکار",
     imageWidth_placeholder: "خودکار",
+    itemTitleWidth_placeholder: "مثال: 100 پیکسل",
     theme: {
       themeName: "تم",
       isPanelless: "ظاهر سوال",
@@ -1559,7 +1562,7 @@ var persianStrings = {
     selectToRankEnabled: "فقط گزینه های انتخاب شده را رتبه بندی کنید. کاربران موارد انتخاب شده را از لیست انتخاب می کنند تا انها را در منطقه رتبه بندی سفارش دهند.",
     dataList: "لیستی از انتخاب هایی را وارد کنید که در طول ورودی به مخاطب پیشنهاد می شود.",
     inputSize: "تنظیم فقط زمینه های ورودی را تغییر می دهد و بر عرض جعبه سوال تاثیر نمی گذارد.",
-    itemTitleWidth: "عرض سازگار را برای همۀ برچسبهای فقره به تصویردانه تنظیم میکند",
+    itemTitleWidth: "عرض ثابت را برای همه برچسب های مورد تنظیم می کند. مقادیر CSS (px، ٪، in، pt و غیره) را می پذیرد.",
     inputTextAlignment: "نحوه تراز کردن مقدار ورودی در فیلد را انتخاب کنید. تنظیم پیش فرض \"خودکار\" مقدار ورودی را در صورت اعمال پوشش ارز یا عددی به سمت راست و در صورت عدم اعمال به سمت چپ تراز می کند.",
     altText: "به عنوان یک جایگزین زمانی که تصویر نمی تواند بر روی دستگاه کاربر و برای اهداف دسترسی نمایش داده شود.",
     rateColorMode: "رنگ ایموجی انتخاب شده را هنگامی که نوع نماد رتبه بندی روی \"Smileys\" تنظیم شده است، تعریف می کند. انتخاب بین: \"پیش فرض\" - ایموجی انتخاب شده در رنگ پیش فرض بررسی ظاهر می شود؛ \"Scale\" - ایموجی انتخاب شده رنگ را از مقیاس رتبه بندی به ارث می برد.",
@@ -2977,3 +2980,8 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator به شما امکان می دهد عرض درون خطی عناصر فرم را به صورت دستی تنظیم کنید تا طرح بندی را کنترل کنید. اگر این نتیجه دلخواه را به همراه نداشت، می توانید طرح بندی شبکه را فعال کنید، که با استفاده از یک سیستم مبتنی بر ستون عناصر را تشکیل می دهد. برای پیکربندی ستون های طرح بندی، یک صفحه یا پانل را انتخاب کنید و از جدول «تنظیمات سوال» → «ستون های شبکه» استفاده کنید. برای تنظیم تعداد ستون های یک سوال، آن را انتخاب کنید و مقدار مورد نظر را در قسمت \"Layout\" → \"Column span\" تنظیم کنید."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "مشخص می کند که این سوال چند ستون در طرح بندی شبکه قرار دارد."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "این جدول به شما امکان می دهد هر ستون شبکه را در صفحه پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."
+
+// ed.expandTooltip: "Expand" => "گسترش"
+// ed.collapseTooltip: "Collapse" => "سقوط"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "مثال: 100 پیکسل"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "عرض ثابت را برای همه برچسب های مورد تنظیم می کند. مقادیر CSS (px، ٪، in، pt و غیره) را می پذیرد."
