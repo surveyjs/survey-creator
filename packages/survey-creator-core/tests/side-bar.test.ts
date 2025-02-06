@@ -207,3 +207,26 @@ test("showOneCategoryInPropertyGrid: switch designer tab and update subTitle", (
   expect(creator.sidebar.header.subTitle).toEqual("");
   creatorSetting.defaultNewSurveyJSON = savedNewJSON;
 });
+
+test("Toggle for Creator Settings", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
+  const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
+  expect(creator.sidebar.activePage).toEqual("propertyGrid");
+
+  const tabs = designerPlugin["tabControlModel"].topToolbar.actions;
+  const creatorSettingAction = designerPlugin["tabControlModel"].bottomToolbar.actions[0];
+  expect(tabs[0].active).toBe(true);
+  expect(!!creatorSettingAction.active).toBe(false);
+  expect(creator.sidebar.activePage).toEqual("propertyGrid");
+
+  creatorSettingAction.action();
+  expect(tabs[0].active).toBe(false);
+  expect(creatorSettingAction.active).toBe(true);
+  expect(creator.sidebar.activePage).toEqual("creatorTheme");
+
+  creatorSettingAction.action();
+  expect(tabs[0].active).toBe(true);
+  expect(creatorSettingAction.active).toBe(false);
+  expect(creator.sidebar.activePage).toEqual("propertyGrid");
+});
