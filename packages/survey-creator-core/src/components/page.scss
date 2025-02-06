@@ -243,6 +243,11 @@ svc-page {
     display: none;
   }
 }
+.svc-designer-placeholder-page {
+  .svc-page__content--new.svc-page__content--new {
+    padding-top: var(--ctr-survey-page-margin-top, var(--lbr-spacing-x2));
+  }
+}
 
 .svc-page__content--selected,
 .svc-hovered.svc-page__content {
@@ -571,7 +576,7 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
   --move-animation-delay: #{$svc-page-move-out-delay};
 }
 .svc-page__content {
-  transition-property: padding-top, padding-bottom;
+  transition-property: padding-bottom;
   transition-duration: $svc-page-move-in-duration;
   transition-timing-function: $ease-out;
 }
