@@ -108,110 +108,110 @@ test("Drag Drop Toolbox All Questions", async (t) => {
 
   await t
     .hover(CheckboxItem)
-    .dragToElement(CheckboxItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(CheckboxItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(2);
 
   await t
     .hover(RadiogroupItem)
-    .dragToElement(RadiogroupItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(RadiogroupItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(3);
 
   await t
     .hover(DropdownItem)
-    .dragToElement(DropdownItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(DropdownItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(4);
 
   await t
     .hover(CommentItem)
-    .dragToElement(CommentItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(CommentItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(5);
   await t.scrollIntoView(newGhostPagePage);
 
   await t
     .hover(RatingToolboxItem)
-    .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(6);
 
   await t
     .hover(RankingItem)
-    .dragToElement(RankingItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(RankingItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(7);
 
   await t
     .hover(SingleInputToolboxItem)
-    .dragToElement(SingleInputToolboxItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(SingleInputToolboxItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(8);
 
   await t
     .hover(HtmlItem)
-    .dragToElement(HtmlItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(HtmlItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(9);
 
   await t
     .hover(SignatureItem)
-    .dragToElement(SignatureItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(SignatureItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(10);
 
   await t
     .hover(ExpressionItem)
-    .dragToElement(ExpressionItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(ExpressionItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(11);
 
   await t
     .hover(FileItem)
-    .dragToElement(FileItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(FileItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(12);
 
   await t
     .hover(MatrixSingleChoiceItem)
-    .dragToElement(MatrixSingleChoiceItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(MatrixSingleChoiceItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(13);
 
   await t
     .hover(MatrixMultipleChoiceItem)
-    .dragToElement(MatrixMultipleChoiceItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(MatrixMultipleChoiceItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(14);
 
   await t
     .hover(MatrixDynamicRowsItem)
-    .dragToElement(MatrixDynamicRowsItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(MatrixDynamicRowsItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(15);
 
   await t
     .hover(MultipleTextItem)
-    .dragToElement(MultipleTextItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(MultipleTextItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(16);
 
   await t
     .hover(PanelItem)
-    .dragToElement(PanelItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(PanelItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(17);
 
   await t
     .hover(PanelDynamicItem)
-    .dragToElement(PanelDynamicItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(PanelDynamicItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(18);
 
   await t
     .hover(BooleanItem)
-    .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 })
     .wait(150);
 
   pagesLength = await getPagesLength();
@@ -219,7 +219,7 @@ test("Drag Drop Toolbox All Questions", async (t) => {
 
   await t
     .hover(ImageItem)
-    .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5 })
+    .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -50 })
     .wait(150);
 
   pagesLength = await getPagesLength();
