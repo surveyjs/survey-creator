@@ -3087,5 +3087,5 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 
 // ed.expandTooltip: "Expand" => "Développer"
 // ed.collapseTooltip: "Collapse" => "Effondrement"
-// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex. : 100px"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Définit une largeur cohérente pour toutes les étiquettes d’article. Accepte les valeurs CSS (px, %, in, pt, etc.)."
