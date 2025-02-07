@@ -35,7 +35,6 @@ export class ScrollViewModel {
           ? entry.contentBoxSize[0].blockSize
           : entry.contentRect.width;
         this._scrollbarSizerElement.style.height = height + "px";
-        this._scrollbarElement.style.visibility = this._scrollbarElement.clientHeight >= height ? "hidden" : "";
       }
     });
     this._containerBodyResizeObserver.observe(this._containerBodyElement);
