@@ -112,7 +112,7 @@ export var danishStrings = {
     expandAllTooltip: "Udvid alle",
     collapseAllTooltip: "Skjul alle",
     zoomInTooltip: "Zoom ind",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Zoom til 100 %",
     zoomOutTooltip: "Zoom ud",
     lockQuestionsTooltip: "Lås udvid/skjul tilstand for spørgsmål",
     showMoreChoices: "Vis mere",
@@ -3170,7 +3170,6 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har ingen sider endnu"
 // pe.addNew@pages: "Add new page" => "Tilføj ny side"
 // ed.zoomInTooltip: "Zoom In" => "Zoom ind"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Zoom ud"
 // tabs.surfaceBackground: "Surface Background" => "Overflade baggrund"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Brug svar fra sidste post som standard"
@@ -3214,3 +3213,4 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // ed.collapseTooltip: "Collapse" => "Sammenbrud"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Eks.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Indstiller ensartet bredde for alle elementetiketter. Accepterer CSS-værdier (px, %, in, pt osv.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zoom til 100 %"

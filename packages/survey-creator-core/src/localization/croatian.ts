@@ -112,7 +112,7 @@ export var hrStrings = {
     expandAllTooltip: "Proširi sve",
     collapseAllTooltip: "Sažmi sve",
     zoomInTooltip: "Zumiranje",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Zumiranje na 100%",
     zoomOutTooltip: "Smanji",
     lockQuestionsTooltip: "Zaključavanje stanja proširenja/sažimanja za pitanja",
     showMoreChoices: "Pokaži više",
@@ -2980,7 +2980,6 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Još nemate stranice"
 // pe.addNew@pages: "Add new page" => "Dodaj novu stranicu"
 // ed.zoomInTooltip: "Zoom In" => "Zumiranje"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Smanji"
 // tabs.surfaceBackground: "Surface Background" => "Pozadina površine"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Koristite odgovore iz posljednjeg unosa kao standardne"
@@ -3024,3 +3023,4 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // ed.collapseTooltip: "Collapse" => "Kolaps"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Primjer: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za sve oznake stavki. Prihvaća CSS vrijednosti (px, %, in, pt, itd.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zumiranje na 100%"

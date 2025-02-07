@@ -112,7 +112,7 @@ var traditionalChineseTranslation = {
     expandAllTooltip: "全部展開",
     collapseAllTooltip: "全部摺疊",
     zoomInTooltip: "放大",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "縮放到 100%",
     zoomOutTooltip: "縮小",
     lockQuestionsTooltip: "鎖定問題的展開/摺疊狀態",
     showMoreChoices: "顯示更多",
@@ -3257,7 +3257,6 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "您還沒有任何頁面"
 // pe.addNew@pages: "Add new page" => "添加新頁面"
 // ed.zoomInTooltip: "Zoom In" => "放大"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "縮小"
 // tabs.surfaceBackground: "Surface Background" => "表面背景"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "使用最後一個條目中的答案作為預設值"
@@ -3300,3 +3299,4 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // ed.collapseTooltip: "Collapse" => "崩潰"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "例：100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "為所有項目標籤設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"
+// ed.zoom100Tooltip: "Zoom to 100%" => "縮放到 100%"

@@ -112,7 +112,7 @@ export var ruStrings = {
     expandAllTooltip: "Развернуть все",
     collapseAllTooltip: "Свернуть все",
     zoomInTooltip: "Увеличить",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Увеличьте масштаб до 100%",
     zoomOutTooltip: "Уменьшение масштаба",
     lockQuestionsTooltip: "Блокировка состояния развертывания/свертывания для вопросов",
     showMoreChoices: "Развернуть",
@@ -3046,7 +3046,6 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "У вас еще нет страниц"
 // pe.addNew@pages: "Add new page" => "Добавить новую страницу"
 // ed.zoomInTooltip: "Zoom In" => "Увеличить"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Уменьшение масштаба"
 // tabs.surfaceBackground: "Surface Background" => "Фон поверхности"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Используйте ответы из последней записи по умолчанию"
@@ -3085,3 +3084,4 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // ed.collapseTooltip: "Collapse" => "Коллапс"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Пример: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Задает одинаковую ширину для всех меток товаров. Принимает значения CSS (px, %, in, pt и т.д.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Увеличьте масштаб до 100%"

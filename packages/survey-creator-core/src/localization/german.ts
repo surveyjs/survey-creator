@@ -112,7 +112,7 @@ var germanTranslation = {
     expandAllTooltip: "Alle aufklappen",
     collapseAllTooltip: "Alle einklappen",
     zoomInTooltip: "Vergrößern",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Auf 100 % zoomen",
     zoomOutTooltip: "Verkleinern",
     lockQuestionsTooltip: "Sperren des Erweiterungs-/Einklappenzustands für Fragen",
     showMoreChoices: "Zeige mehr",
@@ -2698,7 +2698,6 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Sie haben noch keine Seiten"
 // pe.addNew@pages: "Add new page" => "Neue Seite hinzufügen"
 // ed.zoomInTooltip: "Zoom In" => "Vergrößern"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Verkleinern"
 // tabs.surfaceBackground: "Surface Background" => "Oberflächen-Hintergrund"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Antworten aus dem letzten Eintrag als Standard verwenden"
@@ -2742,3 +2741,4 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // ed.collapseTooltip: "Collapse" => "Zusammenbruch"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Beispiel: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Legt die einheitliche Breite für alle Elementbeschriftungen fest. Akzeptiert CSS-Werte (px, %, in, pt usw.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Auf 100 % zoomen"

@@ -112,7 +112,7 @@ export const roStrings = {
     expandAllTooltip: "Extindeți tot",
     collapseAllTooltip: "Restrângeți tot",
     zoomInTooltip: "Măriți",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Măriți la 100%",
     zoomOutTooltip: "Micșorare",
     lockQuestionsTooltip: "Blocați starea de extindere/restrângere pentru întrebări",
     showMoreChoices: "Afișează mai multe",
@@ -1927,7 +1927,6 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Nu aveți încă nicio pagină"
 // pe.addNew@pages: "Add new page" => "Adaugă o pagină nouă"
 // ed.zoomInTooltip: "Zoom In" => "Măriți"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Micșorare"
 // tabs.surfaceBackground: "Surface Background" => "Fundal de suprafață"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Utilizați răspunsurile de la ultima intrare ca implicit"
@@ -1970,3 +1969,4 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // ed.collapseTooltip: "Collapse" => "Colaps"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Setează lățimea consecventă pentru toate etichetele articolelor. Acceptă valori CSS (px, %, in, pt etc.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Măriți la 100%"

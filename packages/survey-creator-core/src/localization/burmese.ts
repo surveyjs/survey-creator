@@ -112,7 +112,6 @@ export var mmStrings = {
     expandAllTooltip: "အားလုံးဖွင့်ပါ",
     collapseAllTooltip: "အားလုံးဖုံးရန်",
     zoomInTooltip: "ချဲ့သည်",
-    zoom100Tooltip: "၁၀၀%",
     zoomOutTooltip: "ကျဉ်းစေသည်",
     lockQuestionsTooltip: "မေးခွန်းများ၏ဖွင့်/ပိတ်အခြေအနေကိုသော့ထားပါ",
     showMoreChoices: "ပိုမိုပြရန်",

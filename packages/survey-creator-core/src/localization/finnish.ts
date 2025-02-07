@@ -112,7 +112,7 @@ export var fiStrings = {
     expandAllTooltip: "Laajenna kaikki",
     collapseAllTooltip: "Kutista kaikki",
     zoomInTooltip: "Lähennä",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Zoomaa 100 %:iin",
     zoomOutTooltip: "Loitonna",
     lockQuestionsTooltip: "Lukitse laajenna/kutista tila kysymyksiä varten",
     showMoreChoices: "Näytä lisää",
@@ -2958,7 +2958,6 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Sinulla ei ole vielä sivuja"
 // pe.addNew@pages: "Add new page" => "Lisää uusi sivu"
 // ed.zoomInTooltip: "Zoom In" => "Lähennä"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Loitonna"
 // tabs.surfaceBackground: "Surface Background" => "Surfacen tausta"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Käytä viimeisen merkinnän vastauksia oletuksena"
@@ -3002,3 +3001,4 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // ed.collapseTooltip: "Collapse" => "Romahdus"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Esimerkki: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Määrittää yhdenmukaisen leveyden kaikille nimikeotsikoille. Hyväksyy CSS-arvot (px, %, in, pt jne.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zoomaa 100 %:iin"

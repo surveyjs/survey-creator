@@ -112,7 +112,7 @@ export var huStrings = {
     expandAllTooltip: "Összes kibontása",
     collapseAllTooltip: "Az összes összecsukása",
     zoomInTooltip: "Nagyítás",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Nagyítás 100%-ra",
     zoomOutTooltip: "Kicsinyítés",
     lockQuestionsTooltip: "Kibontási/összecsukási állapot zárolása kérdések esetén",
     showMoreChoices: "Bővebben",
@@ -3137,7 +3137,6 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Még nincsenek oldalai"
 // pe.addNew@pages: "Add new page" => "Új oldal hozzáadása"
 // ed.zoomInTooltip: "Zoom In" => "Nagyítás"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Kicsinyítés"
 // tabs.surfaceBackground: "Surface Background" => "Felület háttér"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Az utolsó bejegyzés válaszainak használata alapértelmezettként"
@@ -3181,3 +3180,4 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // ed.collapseTooltip: "Collapse" => "Összeomlás"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Pl.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Egységes szélességet állít be az összes cikkfelirathoz. CSS-értékeket fogad el (px, %, in, pt stb.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Nagyítás 100%-ra"

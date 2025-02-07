@@ -112,7 +112,7 @@ export let svStrings = {
     expandAllTooltip: "Expandera alla",
     collapseAllTooltip: "Komprimera alla",
     zoomInTooltip: "Zooma in",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Zooma till 100 %",
     zoomOutTooltip: "Zooma ut",
     lockQuestionsTooltip: "Lås expandera/komprimera tillstånd för frågor",
     showMoreChoices: "Visa mer",
@@ -3161,7 +3161,6 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har inga sidor ännu"
 // pe.addNew@pages: "Add new page" => "Lägg till ny sida"
 // ed.zoomInTooltip: "Zoom In" => "Zooma in"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Zooma ut"
 // tabs.surfaceBackground: "Surface Background" => "Yta Bakgrund"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Använd svar från den senaste posten som standard"
@@ -3204,3 +3203,4 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // ed.collapseTooltip: "Collapse" => "Kollaps"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Ställer in konsekvent bredd för alla objektetiketter. Accepterar CSS-värden (px, %, in, pt, etc.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zooma till 100 %"

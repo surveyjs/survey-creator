@@ -112,7 +112,7 @@ var persianStrings = {
     expandAllTooltip: "گسترش همه",
     collapseAllTooltip: "جمع کردن همه",
     zoomInTooltip: "بزرگنمایی",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "بزرگنمایی تا 100٪",
     zoomOutTooltip: "کوچک نمایی",
     lockQuestionsTooltip: "قفل کردن وضعیت expand/collapse برای سوالات",
     showMoreChoices: "نمایش بیشتر",
@@ -2942,7 +2942,6 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "شما هنوز هیچ صفحه ای ندارید"
 // pe.addNew@pages: "Add new page" => "افزودن صفحه جدید"
 // ed.zoomInTooltip: "Zoom In" => "بزرگنمایی"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "کوچک نمایی"
 // tabs.surfaceBackground: "Surface Background" => "زمینه سطح"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "از پاسخ های آخرین ورودی به عنوان پیش فرض استفاده کنید"
@@ -2985,3 +2984,4 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // ed.collapseTooltip: "Collapse" => "سقوط"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "مثال: 100 پیکسل"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "عرض ثابت را برای همه برچسب های مورد تنظیم می کند. مقادیر CSS (px، ٪، in، pt و غیره) را می پذیرد."
+// ed.zoom100Tooltip: "Zoom to 100%" => "بزرگنمایی تا 100٪"

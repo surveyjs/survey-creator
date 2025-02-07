@@ -112,7 +112,7 @@ export var bgStrings = {
     expandAllTooltip: "Разширете всички",
     collapseAllTooltip: "Свиване на всички",
     zoomInTooltip: "Увеличете",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Увеличете до 100%",
     zoomOutTooltip: "Намаляване на мащаба",
     lockQuestionsTooltip: "Заключване на състояние на разгъване/свиване за въпроси",
     showMoreChoices: "Покажи повече.",
@@ -2549,7 +2549,6 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Все още нямате страници"
 // pe.addNew@pages: "Add new page" => "Добавяне на нова страница"
 // ed.zoomInTooltip: "Zoom In" => "Увеличете"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Намаляване на мащаба"
 // tabs.surfaceBackground: "Surface Background" => "Повърхностен фон"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Използване на отговорите от последния запис по подразбиране"
@@ -2593,3 +2592,4 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // ed.collapseTooltip: "Collapse" => "Срив"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Пример: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Задава постоянна ширина за всички етикети на елементите. Приема CSS стойности (px, %, in, pt и т.н.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Увеличете до 100%"

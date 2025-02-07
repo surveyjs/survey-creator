@@ -112,7 +112,7 @@ var spanishTranslation = {
     expandAllTooltip: "Expandir todo",
     collapseAllTooltip: "Contraer todo",
     zoomInTooltip: "Acercar",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Zoom al 100%",
     zoomOutTooltip: "Alejar",
     lockQuestionsTooltip: "Bloquear el estado de expansión/contracción de las preguntas",
     showMoreChoices: "Mostrar más",
@@ -2763,7 +2763,6 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Todavía no tienes ninguna página"
 // pe.addNew@pages: "Add new page" => "Agregar nueva página"
 // ed.zoomInTooltip: "Zoom In" => "Acercar"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Alejar"
 // tabs.surfaceBackground: "Surface Background" => "Fondo de superficie"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Usar las respuestas de la última entrada como predeterminadas"
@@ -2806,3 +2805,4 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // ed.collapseTooltip: "Collapse" => "Colapso"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ej.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Establece un ancho coherente para todas las etiquetas de los elementos. Acepta valores CSS (px, %, in, pt, etc.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zoom al 100%"

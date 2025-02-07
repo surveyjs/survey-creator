@@ -112,7 +112,7 @@ export var nlStrings = {
     expandAllTooltip: "Alles uitvouwen",
     collapseAllTooltip: "Alles inklappen",
     zoomInTooltip: "Inzoomen",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Inzoomen tot 100%",
     zoomOutTooltip: "Uitzoomen",
     lockQuestionsTooltip: "Vergrendel de uitvouw-/samenvouwstatus voor vragen",
     showMoreChoices: "Toon meer",
@@ -2964,7 +2964,6 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Je hebt nog geen pagina's"
 // pe.addNew@pages: "Add new page" => "Nieuwe pagina toevoegen"
 // ed.zoomInTooltip: "Zoom In" => "Inzoomen"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Uitzoomen"
 // tabs.surfaceBackground: "Surface Background" => "Oppervlakte Achtergrond"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gebruik antwoorden van de laatste invoer als standaard"
@@ -3008,3 +3007,4 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // ed.collapseTooltip: "Collapse" => "Instorting"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Bijv.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor alle artikellabels. Accepteert CSS-waarden (px, %, in, pt, enz.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Inzoomen tot 100%"

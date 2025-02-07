@@ -112,7 +112,7 @@ export var indonesianStrings = {
     expandAllTooltip: "Perluas Semua",
     collapseAllTooltip: "Ciutkan Semua",
     zoomInTooltip: "Perbesar",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Perbesar hingga 100%",
     zoomOutTooltip: "Perkecil",
     lockQuestionsTooltip: "Kunci status perluasan/ciutkan untuk pertanyaan",
     showMoreChoices: "Tampilkan lebih banyak",
@@ -3140,7 +3140,6 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Anda belum memiliki halaman apa pun"
 // pe.addNew@pages: "Add new page" => "Tambahkan halaman baru"
 // ed.zoomInTooltip: "Zoom In" => "Perbesar"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Perkecil"
 // tabs.surfaceBackground: "Surface Background" => "Latar Belakang Permukaan"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gunakan jawaban dari entri terakhir sebagai default"
@@ -3184,3 +3183,4 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // ed.collapseTooltip: "Collapse" => "Roboh"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Contoh: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk semua label item. Menerima nilai CSS (px, %, in, pt, dll.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Perbesar hingga 100%"

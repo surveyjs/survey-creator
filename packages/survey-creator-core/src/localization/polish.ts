@@ -112,7 +112,7 @@ var polishStrings = {
     expandAllTooltip: "Rozwiń wszystko",
     collapseAllTooltip: "Zwiń wszystko",
     zoomInTooltip: "Powiększenie",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Powiększenie do 100%",
     zoomOutTooltip: "Pomniejszanie",
     lockQuestionsTooltip: "Zablokuj stan rozwijania/zwijania dla pytań",
     showMoreChoices: "Pokaż więcej",
@@ -3252,7 +3252,6 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Nie masz jeszcze żadnych stron"
 // pe.addNew@pages: "Add new page" => "Dodaj nową stronę"
 // ed.zoomInTooltip: "Zoom In" => "Powiększenie"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Pomniejszanie"
 // tabs.surfaceBackground: "Surface Background" => "Tło powierzchni"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Domyślnie używaj odpowiedzi z ostatniego wpisu"
@@ -3295,3 +3294,4 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // ed.collapseTooltip: "Collapse" => "Zapaść"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Przykład: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Ustawia spójną szerokość dla wszystkich etykiet elementów. Akceptuje wartości CSS (px, %, in, pt itd.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Powiększenie do 100%"

@@ -112,7 +112,7 @@ export var nbStrings = {
     expandAllTooltip: "Utvid alle",
     collapseAllTooltip: "Skjul alle",
     zoomInTooltip: "Zoom inn",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Zoom til 100 %",
     zoomOutTooltip: "Zoom ut",
     lockQuestionsTooltip: "Lås utvidelses-/skjuletilstand for spørsmål",
     showMoreChoices: "Vis mer",
@@ -2989,7 +2989,6 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har ingen sider ennå"
 // pe.addNew@pages: "Add new page" => "Legg til ny side"
 // ed.zoomInTooltip: "Zoom In" => "Zoom inn"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Zoom ut"
 // tabs.surfaceBackground: "Surface Background" => "Overflate bakgrunn"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Bruk svar fra siste oppføring som standard"
@@ -3032,3 +3031,4 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // ed.collapseTooltip: "Collapse" => "Sammenbrudd"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Eks.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Angir konsekvent bredde for alle vareetiketter. Godtar CSS-verdier (px, %, in, pt, etc.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zoom til 100 %"

@@ -112,7 +112,7 @@ export var arStrings = {
     expandAllTooltip: "توسيع الكل",
     collapseAllTooltip: "طي الكل",
     zoomInTooltip: "تكبير",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "تكبير إلى 100٪",
     zoomOutTooltip: "التصغير",
     lockQuestionsTooltip: "تأمين حالة التوسيع/الطي للأسئلة",
     showMoreChoices: "استعراض المزيد",
@@ -2900,7 +2900,6 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "ليس لديك أي صفحات حتى الآن"
 // pe.addNew@pages: "Add new page" => "إضافة صفحة جديدة"
 // ed.zoomInTooltip: "Zoom In" => "تكبير"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "التصغير"
 // tabs.surfaceBackground: "Surface Background" => "خلفية السطح"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "استخدام الإجابات من الإدخال الأخير كإعداد افتراضي"
@@ -2944,3 +2943,4 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // ed.collapseTooltip: "Collapse" => "تقوض"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "على سبيل المثال: 100 بكسل"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "لتعيين عرض متسق لجميع تسميات الأصناف. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "تكبير إلى 100٪"

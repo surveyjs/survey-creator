@@ -112,7 +112,7 @@ export var koreanStrings = {
     expandAllTooltip: "모두 확장",
     collapseAllTooltip: "모두 축소",
     zoomInTooltip: "확대",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "100%로 확대/축소",
     zoomOutTooltip: "축소",
     lockQuestionsTooltip: "질문의 확장/축소 상태 잠금",
     showMoreChoices: "더 보기",
@@ -3190,7 +3190,6 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "아직 페이지가 없습니다."
 // pe.addNew@pages: "Add new page" => "새 페이지 추가"
 // ed.zoomInTooltip: "Zoom In" => "확대"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "축소"
 // tabs.surfaceBackground: "Surface Background" => "표면 배경"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "마지막 항목의 답변을 기본값으로 사용"
@@ -3234,3 +3233,4 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // ed.collapseTooltip: "Collapse" => "무너지다"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "예: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "모든 항목 레이블에 대해 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
+// ed.zoom100Tooltip: "Zoom to 100%" => "100%로 확대/축소"
