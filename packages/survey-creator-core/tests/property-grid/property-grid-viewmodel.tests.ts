@@ -15,6 +15,7 @@ import { settings } from "../../src/creator-settings";
 
 test("Generate and update title correctly", () => {
   const creator = new CreatorTester();
+  creator.showOneCategoryInPropertyGrid = false;
   creator.JSON = {
     elements: [
       {
@@ -40,6 +41,27 @@ test("Generate and update title correctly", () => {
   };
   propertyGrid.survey.getQuestionByName("name").value = "Q2";
   expect(model.objectSelectionAction.title).toEqual("Question:Q2");
+});
+test("showOneCategoryInPropertyGrid: Generate and update title correctly", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "question1" }] };
+  const propertyGrid = creator["designerPropertyGrid"];
+  const model = new PropertyGridViewModel(propertyGrid, creator);
+  expect(model.objectSelectionAction.tooltip).toEqual("Survey");
+  propertyGrid.obj = creator.survey.getQuestionByName("question1");
+  expect(model.objectSelectionAction.tooltip).toEqual("question1");
+  propertyGrid.survey.getQuestionByName("name").value = "Q1";
+  expect(model.objectSelectionAction.tooltip).toEqual("Q1");
+  propertyGrid.options.getObjectDisplayName = (
+    obj: Base,
+    area: string,
+    reason: string,
+    displayName: string
+  ) => {
+    return "Question:" + obj["name"];
+  };
+  propertyGrid.survey.getQuestionByName("name").value = "Q2";
+  expect(model.objectSelectionAction.tooltip).toEqual("Question:Q2");
 });
 test("Prev/next correctly, including columns via actions", () => {
   const creator = new CreatorTester();
