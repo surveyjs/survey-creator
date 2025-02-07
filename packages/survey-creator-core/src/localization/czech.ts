@@ -107,6 +107,8 @@ export var czStrings = {
     redo: "Opětovně vrátit",
     undoTooltip: "Vrátit poslední změnu",
     redoTooltip: "Znovu provést změnu",
+    expandTooltip: "Expandovat",
+    collapseTooltip: "Zhroucení",
     expandAllTooltip: "Rozbalit vše",
     collapseAllTooltip: "Sbalit vše",
     zoomInTooltip: "Přiblížit",
@@ -902,6 +904,7 @@ export var czStrings = {
     maxWidth_placeholder: "Př.: 50%",
     imageHeight_placeholder: "automaticky",
     imageWidth_placeholder: "automaticky",
+    itemTitleWidth_placeholder: "Příklad: 100px",
     theme: {
       themeName: "Téma",
       isPanelless: "Vzhled otázky",
@@ -1559,7 +1562,7 @@ export var czStrings = {
     selectToRankEnabled: "Povolením seřadíte pouze vybrané volby. Uživatelé přetáhnou vybrané položky ze seznamu voleb a seřadí je v oblasti hodnocení.",
     dataList: "Zadejte seznam možností, které budou respondentovi navrženy během vstupu.",
     inputSize: "Nastavení mění pouze velikost vstupních polí a nemá vliv na šířku pole pro otázky.",
-    itemTitleWidth: "Nastaví konzistentní šířku pro všechny popisky položek v pixelech",
+    itemTitleWidth: "Nastaví konzistentní šířku pro všechny popisky položek. Přijímá hodnoty CSS (px, %, in, pt, atd.).",
     inputTextAlignment: "Vyberte, jak chcete zarovnat vstupní hodnotu v poli. Výchozí nastavení \"Auto\" zarovná vstupní hodnotu doprava, pokud je použito maskování měny nebo čísel, a doleva, pokud ne.",
     altText: "Slouží jako náhrada v případě, že obrázek nelze zobrazit na zařízení uživatele, a pro účely usnadnění.",
     rateColorMode: "Definuje barvu vybraného emotikonu, když je typ ikony Hodnocení nastaven na \"Smajlíky\". Vyberte si mezi: \"Výchozí\" - vybraný emotikon se zobrazí ve výchozí barvě průzkumu; \"Měřítko\" - vybraný emotikon zdědí barvu ze stupnice hodnocení.",
@@ -2599,3 +2602,8 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Aplikace Survey Creator umožňuje ručně upravit šířky vložených prvků formuláře a řídit tak rozvržení. Pokud to nevede k požadovanému výsledku, můžete zapnout rozvržení mřížky, které struktury tvoří elementy pomocí sloupcového systému. Chcete-li konfigurovat sloupce rozvržení, vyberte stránku nebo panel a použijte tabulku \"Nastavení otázek\" → \"Sloupce mřížky\". Chcete-li upravit, kolik sloupců otázka zabírá, vyberte ji a nastavte požadovanou hodnotu v poli \"Rozvržení\" → \"Rozpětí sloupců\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Určuje, kolik sloupců tato otázka zabírá v rozvržení mřížky."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Tato tabulka umožňuje konfigurovat jednotlivé sloupce mřížky na stránce. Automaticky nastaví procentuální šířku pro každý sloupec na základě maximálního počtu prvků v řádku. Chcete-li přizpůsobit rozvržení mřížky, upravte tyto hodnoty ručně a definujte šířku nadpisu pro všechny otázky v každém sloupci."
+
+// ed.expandTooltip: "Expand" => "Expandovat"
+// ed.collapseTooltip: "Collapse" => "Zhroucení"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Příklad: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentní šířku pro všechny popisky položek. Přijímá hodnoty CSS (px, %, in, pt, atd.)."

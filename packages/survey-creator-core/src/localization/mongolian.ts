@@ -107,6 +107,8 @@ export var mnStrings = {
     redo: "Дахих",
     undoTooltip: "Сүүлийн өөрчлөлтийг буцаах",
     redoTooltip: "Сүүлин өөрчлөлтийг дахих ",
+    expandTooltip: "Өргөтгөх",
+    collapseTooltip: "Нуралт",
     expandAllTooltip: "Бүх хүрээгээ тэлнэ",
     collapseAllTooltip: "Бүх нуралт",
     zoomInTooltip: "Томруулах",
@@ -902,6 +904,7 @@ export var mnStrings = {
     maxWidth_placeholder: "Экс: 50%",
     imageHeight_placeholder: "автомат",
     imageWidth_placeholder: "автомат",
+    itemTitleWidth_placeholder: "Жишээ нь: 100px",
     theme: {
       themeName: "Сэдэв",
       isPanelless: "Асуулт хариултын төрх",
@@ -1559,7 +1562,7 @@ export var mnStrings = {
     selectToRankEnabled: "Зөвхөн сонгосон сонголтуудыг зэрэгцүүлэх боломжийг олгоно. Хэрэглэгчид сонгосон зүйлсийг сонгосон жагсаалтаас чирч, зэрэглэлийн бүс дотор тушаана.",
     dataList: "Санал болгох сонголтуудын жагсаалтыг оруулах үед хариулагчид санал болгох болно.",
     inputSize: "Тохиргоо нь зөвхөн оролтын талбаруудыг дахин тохируулдаг бөгөөд асуултын хайрцагны өргөнд нөлөөлдөггүй.",
-    itemTitleWidth: "Пикселд бүх зүйлийн шошгоны тогтмол өргөнийг тогтоох",
+    itemTitleWidth: "Бүх барааны шошгоны өргөнийг тогтвортой болгоно. CSS-ийн үнэ цэнийг (px, %, in, pt гэх мэт) хүлээн авна.",
     inputTextAlignment: "Талбар доторх оролтын үнэ цэнийг хэрхэн уялдуулахыг сонго. \"Авто\" гэсэн дефолт тохиргоо нь валют эсвэл тоон маск хэрэглэх бол оролтын үнэ цэнийг баруун тийш, хэрэв үгүй бол зүүн тийш нь уялдуулна.",
     altText: "Хэрэглэгчийн төхөөрөмж дээр болон хүртээмжийн зорилгоор дүрсийг харуулах боломжгүй үед орлуулагчаар үйлчилнэ.",
     rateColorMode: "Rating icon төрлийн \"Smileys\" гэж тогтооход сонгосон эможигийн өнгийг тодорхойлно. Аль нэгийг нь сонгоно уу: \"Default\" - сонгосон эможи нь стандарт судалгааны өнгөөр гарч ирдэг; \"Scale\" - сонгосон эможи нь үнэлгээний хэмжүүрээс өнгийг өвлөн авдаг.",
@@ -2677,3 +2680,8 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator нь загварыг хянахын тулд хэлбэрийн элементүүдийн inline өргөнийг гараар тохируулах боломжийг олгодог. Хэрэв энэ нь хүссэн үр дүнг өгөхгүй бол баган дээр суурилсан системийг ашиглан элементүүдийг бүрдүүлдэг grid layout-ийг идэвхжүүлж болно. Загварын багануудыг тохируулахын тулд хуудас эсвэл панелийг сонгоод \"Асуултын тохиргоо\" → \"Grid columns\" хүснэгтийг ашиглана. Асуулт хэдэн багана багтаахыг тохируулахын тулд үүнийг сонгоод \"Layout\" → \"Column span\" талбарт хүссэн утгыг тохируул."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Энэ асуулт хүснэгтийн загварт хэдэн багана багтаахыг тодорхойлно."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Энэ хүснэгт нь хуудас дээрх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."
+
+// ed.expandTooltip: "Expand" => "Өргөтгөх"
+// ed.collapseTooltip: "Collapse" => "Нуралт"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Жишээ нь: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Бүх барааны шошгоны өргөнийг тогтвортой болгоно. CSS-ийн үнэ цэнийг (px, %, in, pt гэх мэт) хүлээн авна."

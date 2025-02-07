@@ -599,3 +599,13 @@ test("Page adorner header click - select", async (t) => {
   await t.click(".svc-page__content-actions", { offsetX: 50, offsetY: 5 });
   await t.expect(Selector(".svc-page__content").hasClass("svc-page__content--selected")).ok();
 });
+
+test("Check survey settings button", async (t) => {
+  const settingsButton = Selector('button[title="Survey settings"]');
+  await ClientFunction(() => window["creator"].showOneCategoryInPropertyGrid = true)();
+  await t.resizeWindow(1000, 800);
+  await t.resizeWindow(1600, 800);
+  await t.expect(settingsButton.hasClass("svc-toolbar__item--active")).notOk();
+  await t.click('.svc-menu-action__button[title="General"]');
+  await t.expect(settingsButton.hasClass("svc-toolbar__item--active")).ok();
+});

@@ -107,6 +107,8 @@ export var bgStrings = {
     redo: "Повтаряне",
     undoTooltip: "Отмяна на последната промяна",
     redoTooltip: "Повтаряне на последната промяна",
+    expandTooltip: "Разширявам",
+    collapseTooltip: "Срив",
     expandAllTooltip: "Разширете всички",
     collapseAllTooltip: "Свиване на всички",
     zoomInTooltip: "Увеличете",
@@ -902,6 +904,7 @@ export var bgStrings = {
     maxWidth_placeholder: "Примерно: 50%",
     imageHeight_placeholder: "Автоматично",
     imageWidth_placeholder: "Автоматично",
+    itemTitleWidth_placeholder: "Пример: 100px",
     theme: {
       themeName: "Тема",
       isPanelless: "Външен вид на въпроса",
@@ -1559,7 +1562,7 @@ export var bgStrings = {
     selectToRankEnabled: "Разреши да се класират само избраните възможности за избор. Потребителите ще плъзгат избраните елементи от списъка за избор, за да ги подредят в областта за класиране.",
     dataList: "Въведете списък с възможности за избор, които ще бъдат предложени на респондента по време на въвеждането.",
     inputSize: "Настройката само преоразмерява входните полета и не влияе на ширината на полето за въпроси.",
-    itemTitleWidth: "Задава еднаква ширина за всички етикети на елементи в пиксели",
+    itemTitleWidth: "Задава постоянна ширина за всички етикети на елементите. Приема CSS стойности (px, %, in, pt и т.н.).",
     inputTextAlignment: "Изберете как да подравните входната стойност в полето. Настройката по подразбиране \"Автоматично\" подравнява входната стойност надясно, ако е приложено валутно или цифрово маскиране, и наляво, ако не.",
     altText: "Служи като заместител, когато изображението не може да бъде показано на устройството на потребителя и за целите на достъпността.",
     rateColorMode: "Определя цвета на избрания емотикон, когато типът на иконата за оценка е зададен на \"Усмивки\". Изберете между: \"По подразбиране\" - избраният емотикон се появява в цвета на проучването по подразбиране; \"Скала\" - избраният емотикон наследява цвят от рейтинговата скала.",
@@ -2585,3 +2588,8 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator ви позволява ръчно да регулирате вградените ширини на елементите на формуляра, за да контролирате оформлението. Ако това не доведе до желания резултат, можете да активирате оформлението на мрежата, което структурира елементите на формата с помощта на система, базирана на колони. За да конфигурирате колони за оформление, изберете страница или панел и използвайте таблицата \"Настройки на въпроса\" → \"Колони на мрежата\". За да регулирате колко колони обхваща даден въпрос, изберете го и задайте желаната стойност в полето \"Оформление\" → \"Обхват на колоната\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Указва колко колони обхваща този въпрос в оформлението на мрежата."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Тази таблица ви позволява да конфигурирате всяка колона на мрежата на страницата. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона."
+
+// ed.expandTooltip: "Expand" => "Разширявам"
+// ed.collapseTooltip: "Collapse" => "Срив"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Пример: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Задава постоянна ширина за всички етикети на елементите. Приема CSS стойности (px, %, in, pt и т.н.)."

@@ -984,7 +984,7 @@ test("Create new page, recreate designer survey via JSON", (): any => {
 test("Check survey settings button ", (): any => {
   const creator = new CreatorTester();
   const item = creator.getActionBarItem("svd-settings");
-  expect(item.active).toBeTruthy();
+  expect(item.active).toBeFalsy();
   creator.selectElement(creator.survey.pages[0]);
   expect(item.active).toBeFalsy();
   creator.selectElement(creator.survey);

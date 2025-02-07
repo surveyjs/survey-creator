@@ -107,6 +107,8 @@ export var ruStrings = {
     redo: "Повтор",
     undoTooltip: "Отменить последнее изменение",
     redoTooltip: "Повторите изменение",
+    expandTooltip: "Расширять",
+    collapseTooltip: "Коллапс",
     expandAllTooltip: "Развернуть все",
     collapseAllTooltip: "Свернуть все",
     zoomInTooltip: "Увеличить",
@@ -902,6 +904,7 @@ export var ruStrings = {
     maxWidth_placeholder: "Пример: 50%",
     imageHeight_placeholder: "Авто",
     imageWidth_placeholder: "Авто",
+    itemTitleWidth_placeholder: "Пример: 100px",
     theme: {
       themeName: "Тема",
       isPanelless: "Внешний вид вопроса",
@@ -1559,7 +1562,7 @@ export var ruStrings = {
     selectToRankEnabled: "Включите этот параметр, чтобы ранжировать только выбранные варианты. Пользователи будут перетаскивать выбранные элементы из списка вариантов, чтобы упорядочить их в области ранжирования.",
     dataList: "Введите список вариантов, которые будут предложены респонденту во время ввода.",
     inputSize: "Этот параметр изменяет только размер полей ввода и не влияет на ширину поля вопроса.",
-    itemTitleWidth: "Устанавливает одинаковую ширину для всех меток элементов в пикселях",
+    itemTitleWidth: "Задает одинаковую ширину для всех меток товаров. Принимает значения CSS (px, %, in, pt и т.д.).",
     inputTextAlignment: "Выберите способ выравнивания вводимого значения в поле. Настройка по умолчанию \"Auto\" выравнивает вводимое значение по правому краю, если применяется маскирование валюты или число, то по левому краю.",
     altText: "Служит заменой, когда изображение не может быть отображено на устройстве пользователя, а также в целях обеспечения доступности.",
     rateColorMode: "Определяет цвет выбранного эмодзи, если для параметра «Тип значка рейтинга» установлено значение «Смайлики». Выберите между: \"По умолчанию\" - выбранный эмодзи отображается в цвете опроса по умолчанию; «Шкала» - выбранный эмодзи наследует цвет от шкалы оценки.",
@@ -3077,3 +3080,8 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator позволяет вручную настраивать встроенную ширину элементов формы для управления макетом. Если это не дает желаемого результата, вы можете включить макет сетки, который структурирует элементы с использованием системы на основе столбцов. Чтобы настроить макет столбцов, выберите страницу или панель и используйте таблицу «Настройки вопроса» → «Столбцы сетки». Чтобы настроить количество столбцов в вопросе, выберите его и установите нужное значение в полях «Макет» → «Диапазон столбцов»."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Указывает, сколько столбцов занимает этот вопрос в макете сетки."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "В этой таблице можно настроить каждый столбец сетки на странице. Он автоматически устанавливает процент ширины для каждого столбца в зависимости от максимального количества элементов в строке. Чтобы настроить макет сетки, вручную настройте эти значения и определите ширину заголовка для всех вопросов в каждом столбце."
+
+// ed.expandTooltip: "Expand" => "Расширять"
+// ed.collapseTooltip: "Collapse" => "Коллапс"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Пример: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Задает одинаковую ширину для всех меток товаров. Принимает значения CSS (px, %, in, pt и т.д.)."

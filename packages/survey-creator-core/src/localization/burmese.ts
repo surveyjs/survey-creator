@@ -1,5 +1,3 @@
-// This dictionary contains 90 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { setupLocale } from "survey-creator-core";
 
 export var mmStrings = {
@@ -25,7 +23,7 @@ export var mmStrings = {
     translation: "ဘာသာစကား",
     designer: "ပံ့ပိုးသူ",
     json: "တည်းဖြတ်သူ",
-    logic: "စစ်တမ်း",
+    logic: "စစ်တမ်း"
   },
   // Question types
   qt: {
@@ -109,6 +107,8 @@ export var mmStrings = {
     redo: "ပြန်လုပ်ရန်",
     undoTooltip: "နောက်ဆုံးပြောင်းလဲမှုကိုဖျက်ပယ်ပါ",
     redoTooltip: "ပြောင်းလဲမှုကိုပြန်လုပ်ပါ",
+    // expandTooltip: "Expand",
+    // collapseTooltip: "Collapse",
     expandAllTooltip: "အားလုံးဖွင့်ပါ",
     collapseAllTooltip: "အားလုံးဖုံးရန်",
     zoomInTooltip: "ချဲ့သည်",
@@ -310,6 +310,10 @@ export var mmStrings = {
       maxWidth: "အများဆုံးပန်းနယ်အကျယ်",
       showNumber: "ပန်းနယ်နံပါတ်ကိုပြပါ"
     },
+    panellayoutcolumn: {
+      // effectiveWidth: "Effective width, %",
+      // questionTitleWidth: "Question title width, px"
+    },
     paneldynamic: {
       name: "ပန်းနယ်အမည်",
       title: "ပန်းနယ်ခေါင်းစဉ်",
@@ -329,15 +333,13 @@ export var mmStrings = {
       templateTabTitle: "Tab ခေါင်းစဉ်နမူနာ",
       tabTitlePlaceholder: "Tab ခေါင်းစဉ်အစားထိုး",
       templateVisibleIf: "ပန်းနယ်တစ်ခုချင်းစီကိုမြင်သာစေပါ",
-      hideNumber: "ပန်းနယ်နံပါတ်ကိုဖျောက်ပါ",
+      // showNumber: "Number the panel",
       titleLocation: "ပန်းနယ်ခေါင်းစဉ်တည်နေရာ",
       descriptionLocation: "ပန်းနယ်ဖော်ပြချက်တည်နေရာ",
       // templateQuestionTitleLocation: "Question title alignment",
       templateErrorLocation: "အမှားစာစောင်တည်နေရာ",
       newPanelPosition: "ပန်းနယ်အသစ်တည်နေရာ",
       showRangeInProgress: "တိုးတက်မှုဘားကိုပြပါ",
-      showProgressBar: "တိုးတက်မှုဘားကိုပြပါ",
-      progressBarLocation: "တိုးတက်မှုဘားတည်နေရာ",
       keyName: "ထပ်တူဖြေဆိုမှုကိုတားဆီးပါ"
     },
     question: {
@@ -348,7 +350,7 @@ export var mmStrings = {
       requiredIf: "မေးခွန်းလိုအပ်မှုအခြေအနေ",
       page: "မေးခွန်းကိုစာမျက်နှာသို့ရွှေ့ပါ",
       state: "မေးခွန်းဘောက်စ်အတိုးအကျိုးအခြေအနေ",
-      hideNumber: "မေးခွန်းနံပါတ်ကိုဖျောက်ပါ",
+      // showNumber: "Number this question",
       titleLocation: "မေးခွန်းခေါင်းစဉ်တည်နေရာ",
       descriptionLocation: "မေးခွန်းဖော်ပြချက်တည်နေရာ",
       errorLocation: "အမှားစာတည်နေရာ",
@@ -390,7 +392,8 @@ export var mmStrings = {
     // survey templates
     survey: {
       title: "စစ်တမ်းခေါင်းစဉ်",
-      description: "စစ်တမ်းဖော်ပြချက်"
+      description: "စစ်တမ်းဖော်ပြချက်",
+      // readOnly: "Make the survey read-only"
     },
     page: {
       name: "စာမျက်နှာအမည်",
@@ -442,6 +445,7 @@ export var mmStrings = {
     imageWidth: "ပုံအကျယ်",
     valueName: "တန်ဖိုးအမည်",
     rateDescriptionLocation: "အချက်အလက်ဖော်ပြချက်တည်နေရာ",
+    // size: "Input field width (in characters)",
     cellErrorLocation: "အကွက်အမှားစာတန်းတည်နေရာ",
     enabled: "ဖွင့်ထားသည်",
     disabled: "ပိတ်ထားသည်",
@@ -507,6 +511,7 @@ export var mmStrings = {
     listIsEmpty: "သင်တွင်မည်သည့်အရာမျှမရှိသေးပါ",
     "listIsEmpty@choices": "သင်တွင်မည်သည့်ရွေးချယ်မှုမျှမရှိသေးပါ",
     "listIsEmpty@columns": "သင်တွင်မည်သည့်ကော်လံမျှမရှိသေးပါ",
+    // "listIsEmpty@gridLayoutColumns": "You don't have layout columns yet",
     "listIsEmpty@rows": "သင်တွင်မည်သည့်အတန်းမျှမရှိသေးပါ",
     "listIsEmpty@validators": "သင်တွင်မည်သည့်စစ်မှန်မှုစည်းမျဉ်းမရှိသေးပါ",
     "listIsEmpty@calculatedValues": "သင်တွင်မည်သည့်စိတ်ကြိုက် variable မျှမရှိသေးပါ",
@@ -540,6 +545,7 @@ export var mmStrings = {
     titlePlaceholder: "ခေါင်းစဉ်",
     surveyTitlePlaceholder: "စစ်တမ်းခေါင်းစဉ်",
     pageTitlePlaceholder: "စာမျက်နှာ {num}",
+    // startPageTitlePlaceholder: "Start Page",
     descriptionPlaceholder: "ဖော်ပြချက်",
     surveyDescriptionPlaceholder: "ဖော်ပြချက်",
     pageDescriptionPlaceholder: "ဖော်ပြချက်",
@@ -612,7 +618,6 @@ export var mmStrings = {
     simulator: "စက်ပစ္စည်းအမျိုးအစားရွေးချယ်ပါ",
     landscapeOrientation: "လျှာအနေအထားသို့ပြောင်းပါ",
     portraitOrientation: "ရုပ်ပုံအနေအထားသို့ပြောင်းပါ",
-    mode: "စစ်တမ်းပြသမှု mode",
     clearInvisibleValues: "မမြင်သာသောမေးခွန်းတန်ဖိုးများကိုရှင်းလင်းပါ",
     cookieName: "တစ်ဖြေဆိုသူအပေါ်ကန့်သတ်",
     partialSendEnabled: "စာမျက်နှာပြောင်းလဲမှုတွင်စစ်တမ်းတိုးတက်မှုကိုအလိုအလျောက်သိမ်းဆည်းပါ",
@@ -633,6 +638,7 @@ export var mmStrings = {
     autoAdvanceEnabled: "နောက်စာမျက်နှာသို့အလိုအလျောက်ဆက်လက်သွားပါ",
     autoAdvanceAllowComplete: "စစ်တမ်းကိုအလိုအလျောက်ပြီးစီးစေပါ",
     showProgressBar: "တိုးတက်မှုဘားတည်နေရာ",
+    // progressBarLocation: "Progress bar alignment",
     questionTitleLocation: "မေးခွန်းခေါင်းစဉ်တည်နေရာ",
     questionTitleWidth: "မေးခွန်းခေါင်းစဉ်အကျယ်",
     requiredMark: "လိုအပ်သည့်အမှတ်အသားများ",
@@ -755,6 +761,8 @@ export var mmStrings = {
     separateSpecialChoices: "အထူးရွေးချယ်မှုများကိုခွဲခြားပါ",
     choicesFromQuestion: "အောက်ပါမေးခွန်းမှရွေးချယ်မှုများကိုကူးပါ",
     choicesFromQuestionMode: "မည်သည့်ရွေးချယ်မှုများကိုကူးမည်",
+    // choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs",
+    // choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts",
     progressBarShowPageTitles: "တိုးတက်မှုဘားတွင်စာမျက်နှာခေါင်းစဉ်များကိုပြပါ",
     progressBarShowPageNumbers: "တိုးတက်မှုဘားတွင်စာမျက်နှာနံပါတ်များကိုပြပါ",
     showCommentArea: "မှတ်ချက်ဘူးထည့်ပါ",
@@ -789,6 +797,11 @@ export var mmStrings = {
       top: "အပေါ်တွင်",
       bottom: "အောက်တွင်"
     },
+    // previewMode: "Preview mode",
+    // gridLayoutEnabled: "Enable grid layout",
+    // gridLayoutColumns: "Grid columns",
+    // maskSettings: "Mask settings",
+    // detailErrorLocation: "Row expansion error message alignment",
     // Creator tabs
     tabs: {
       panel: {
@@ -891,6 +904,7 @@ export var mmStrings = {
     maxWidth_placeholder: "ဥပမာ: 50%",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    // itemTitleWidth_placeholder: "Ex.: 100px",
     theme: {
       themeName: "အဖွဲ့အစည်း",
       isPanelless: "မေးခွန်းအသွင်အပြင်",
@@ -934,8 +948,7 @@ export var mmStrings = {
       logoPositionX: "လိုဂိုတည်နေရာ",
       titlePositionX: "စစ်တမ်းခေါင်းစဉ်တည်နေရာ",
       descriptionPositionX: "စစ်တမ်းဖော်ပြချက်တည်နေရာ"
-    },
-    inputSize: "အဝင်အကွက်အကျယ် (အက္ခရာများဖြင့်)"
+    }
   },
   // Property values
   pv: {
@@ -1204,16 +1217,13 @@ export var mmStrings = {
     questionOrder: {
       // initial: "Original"
     },
-    showProgressBar: {
-      off: "ဖျောက်ထားသည်",
-      topbottom: "အပေါ်နှင့်အောက်",
-      aboveheader: "ခေါင်းစဉ်အထက်",
-      belowheader: "ခေါင်းစဉ်အောက်"
-    },
     progressBarLocation: {
       top: "အပေါ်",
       bottom: "အောက်",
-      topBottom: "အပေါ်နှင့်အောက်"
+      // topbottom: "Top and bottom",
+      // aboveheader: "Above the header",
+      // belowheader: "Below the header",
+      // off: "Hidden"
     },
     sum: "ပေါင်း",
     count: "ရေတွက်",
@@ -1358,7 +1368,9 @@ export var mmStrings = {
       startWithNewLine: "မေးခွန်းတစ်ခုသို့မဟုတ် Panel တစ်ခုနှင့်တစ်လိုင်းအတွင်းတွဲဖက်ပြပါ",
       state: "\"ချဲ့ထားသည်\" - Panel ကိုအပြည့်အဝပြပြီးချုံ့နိုင်သည်၊ \"ချုံ့ထားသည်\" - Panel ကိုခေါင်းစဉ်နှင့်ဖော်ပြချက်သာပြပြီးချဲ့နိုင်သည်၊ \"ချုပ်ထားသည်\" - Panel ကိုအပြည့်အဝပြပြီးချုံ့လို့မရပါ",
       width: "Panel ၏အကျယ်ကိုပုံစံ Element အခြားတစ်ခုနှင့်ချိန်ညှိပါ",
-      showQuestionNumbers: "Panel ၏ Nested မေးခွန်းများကိုနံပါတ်ပေးပါ"
+      showQuestionNumbers: "Panel ၏ Nested မေးခွန်းများကိုနံပါတ်ပေးပါ",
+      // effectiveColSpan: "Specifies how many columns this panel spans within the grid layout.",
+      // gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
     },
     paneldynamic: {
       name: "တုံ့ပြန်သူများအနေဖြင့်မြင်မရသော Panel ID",
@@ -1389,6 +1401,7 @@ export var mmStrings = {
     resetValueIf: "Reset value ချိန်ညှိမှုကို Magic Wand icon ဖြင့်သတ်မှတ်ပါ။",
     setValueIf: "Magic Wand icon ကိုအသုံးပြု၍ စည်းမျဉ်းချမှတ်ပါ။",
     setValueExpression: "စည်းမျဉ်းတွေ့ရှိပါက ဖြေဆိုမှုတန်ဖိုးကို dynamically သတ်မှတ်ရန် Expression တစ်ခုဖော်ပြပါ။",
+    // gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field.",
     question: {
       name: "တုံ့ပြန်သူများအနေဖြင့် မမြင်ရသော မေးခွန်း ID",
       description: "မေးခွန်းခေါင်းစဉ်ခွဲစာသားကို ရိုက်ထည့်ပါ",
@@ -1409,7 +1422,8 @@ export var mmStrings = {
       textUpdateMode: "\"On lost focus\" - input field focus ပြောင်းလဲသည့်အချိန်၊ \"While typing\" - အသုံးပြုသူရိုက်နေစဉ် Value ကို real-time update ပြုလုပ်ပါ",
       url: "Multi-choice မေးခွန်းများအတွက် Web service URL ကို သတ်မှတ်ပါ",
       searchMode: "Drop-down list ကို filter ပြုလုပ်ရန် Operation တစ်ခုကိုရွေးချယ်ပါ",
-      textWrapEnabled: "Long text ကို drop-down menu အတွင်းမှ line break များဖြင့် ဖော်ပြပါ"
+      textWrapEnabled: "Long text ကို drop-down menu အတွင်းမှ line break များဖြင့် ဖော်ပြပါ",
+      // effectiveColSpan: "Specifies how many columns this question spans within the grid layout."
     },
     signaturepad: {
       signatureWidth: "ထိုးထွင်းရယူထားသော ပုံရိပ်၏ အကျယ်ကို သတ်မှတ်ပါ",
@@ -1438,7 +1452,8 @@ export var mmStrings = {
     },
     // survey templates
     survey: {
-      mode: "စစ်တမ်းကို ဖြည့်စွက်နိုင်မည့် 'Editable' နဲ့ Read-only mode ဖြစ်စေမည့် 'Read-only' ထဲမှရွေးချယ်ပါ။"
+      // readOnly: "Select if you want to prevent respondents from filling out your survey.",
+      // progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
     },
     matrixdropdowncolumn: {
       name: "တုံ့ပြန်သူများအနေဖြင့် မမြင်ရသော ကော်လံ ID",
@@ -1461,7 +1476,6 @@ export var mmStrings = {
     // autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions.",
     showNavigationButtons: "စာမျက်နှာတစ်ခုတွင် Navigation Buttons ၏ မြင်သာမှုနှင့် တည်နေရာကို သတ်မှတ်ပါ။",
     // navigationButtonsLocation: "Sets the location of navigation buttons on a page.",
-    showProgressBar: "Progress Bar ၏ မြင်သာမှုနှင့် တည်နေရာကို သတ်မှတ်ပါ။",
     showPreviewBeforeComplete: "တုံ့ပြန်မှုအားလုံး သို့မဟုတ် ဖြေဆိုပြီးသော မေးခွန်းများကို Preview စာမျက်နှာပေါ်တွင်ပြပါ။",
     questionTitleLocation: "Survey အတွင်းမေးခွန်းများအားလုံးအတွက် Title Alignment ကို သတ်မှတ်ပါ။",
     // requiredMark: "A symbol or a sequence of symbols indicating that an answer is required.",
@@ -1485,6 +1499,7 @@ export var mmStrings = {
     rowTitleWidth: "CSS တန်ဖိုးများကို လက်ခံသည် (px, %, in, pt, စသည်ဖြင့်)။",
     totalText: "\"Aggregation Method\" သို့မဟုတ် \"Total Value Expression\" ဖြင့် Total Values များကို ပြသသည်။",
     cellErrorLocation: "Cell Input မှာ အမှားစာသားတည်နေရာကို သတ်မှတ်ပါ။",
+    // detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
     keyDuplicationError: "\"Prevent Duplicate Responses\" သတ်မှတ်ချက် ဖွင့်ထားပါက Duplicate Entries အတွက် အမှားစာသားကို ဖော်ပြပါ။",
     totalExpression: "Expression တစ်ခုအပေါ်မူတည်ပြီး Total Values ကိုတွက်ချက်ပါ။",
     confirmDelete: "Row ဖျက်ပစ်မှုကို အတည်ပြုရန် Prompt ကို ဖော်ပြပါ။",
@@ -1507,7 +1522,8 @@ export var mmStrings = {
       // questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       // questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       // questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
-      showNavigationButtons: "စာမျက်နှာပေါ်တွင် Navigation Buttons ၏ မြင်သာမှုကို သတ်မှတ်ပါ။"
+      showNavigationButtons: "စာမျက်နှာပေါ်တွင် Navigation Buttons ၏ မြင်သာမှုကို သတ်မှတ်ပါ။",
+      // gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
     },
     timerLocation: "စာမျက်နှာတစ်ခုအတွင်း Timer ၏ တည်နေရာကို သတ်မှတ်ပါ။",
     panelsState: "\"Locked\", \"Collapse all\", \"Expand all\", \"First expanded\" တို့ထဲမှ Panel State ကိုရွေးချယ်ပါ။",
@@ -1522,6 +1538,8 @@ export var mmStrings = {
     useDisplayValuesInDynamicTexts: "Single- နှင့် Multiple-Selection မေးခွန်းအမျိုးအစားများတွင် ID နှင့် Display Value ပါရှိသည့်ရွေးချယ်မှုများအတွက် ID Value အစား Display Value ကို ပြသရန် ရွေးချယ်ပါ။",
     clearIfInvisible: "Conditional Logic ဖြင့်ဖျောက်ထားသော မေးခွန်းတန်ဖိုးများကို ဖျက်စီးရန် သို့မဟုတ်မဖျက်စီးရန်ရွေးချယ်ပါ။ \"Inherit\" သည် စစ်တမ်းအဆင့်သတ်မှတ်ချက်ကို သက်ဆိုင်ပါသည်။",
     choicesFromQuestionMode: "ရွေးချယ်မှုများအားလုံး၊ ရွေးချယ်ထားသောရွေးချယ်မှုများ၊ သို့မဟုတ် မရွေးချယ်ထားသောရွေးချယ်မှုများကို dynamic သတ်မှတ်ပါ။",
+    // choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs.",
+    // choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts.",
     showOtherItem: "ရွေးချယ်ပါက သီးခြား Comment Box မှာ ထပ်ထည့်နိုင်သောရွေးချယ်မှုများကို လွှင့်ပေးပါ။",
     separateSpecialChoices: "Special Choice Option (\"None\", \"Other\", \"Select All\") တစ်ခုချင်းစီကို အတန်းအသစ်တစ်ခုတွင် ပြသပါ။",
     path: "Target Array ကို Dataset အတွင်းမည်သည့်နေရာတွင်ရှိသည်ကို သတ်မှတ်ပါ။ URL သည် Array ကိုညွှန်ပြသောအခါ ရှင်းလင်းထားပါ။",
@@ -1544,7 +1562,6 @@ export var mmStrings = {
     selectToRankEnabled: "ရွေးချယ်ထားသောရွေးချယ်မှုများကိုသာ Rank ပြုလုပ်ရန် Enable လုပ်ပါ။",
     dataList: "Input များတွင် ပြသမည့် Choices စာရင်းကို ထည့်သွင်းပါ။",
     // inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box.",
-    itemTitleWidth: "Item Labels အားလုံးအတွက် Width ကို Pixels အနေနဲ့ သတ်မှတ်ပါ။",
     inputTextAlignment: "Input Field အတွင်း Input Value ကို Alignment လုပ်ရန် ရွေးချယ်ပါ။",
     altText: "Image မမြင်ရသောအခါသို့မဟုတ် Accessibility အတွက် Substitute အဖြစ် အသုံးပြုပါ။",
     rateColorMode: "Rating Icon Type ကို \"Smileys\" သတ်မှတ်ထားသောအခါ Emoji ၏အရောင်ကို သတ်မှတ်ပါ။",
@@ -1593,10 +1610,6 @@ export var mmStrings = {
       textAreaWidth: "စစ်တမ်းခေါင်းစဉ်နှင့် ဖော်ပြချက်ကို ပါဝင်သော Header Area ၏အကျယ်။",
       overlapEnabled: "Enabled ဖြစ်ပါက စစ်တမ်း၏ ထိပ်ပိုင်းသည် Header ၏ အောက်ပိုင်းကို အောက်ကျသည်။",
       mobileHeight: "0 အဖြစ် သတ်မှတ်ပါက Header Content ကိုလိုက်နာ၍ အမြင့်ကို အလိုအလျောက်တွက်ချက်ပေးသည်။"
-    },
-    panellayoutcolumn: {
-      effectiveWidth: "%. အတွက် တန်ဖိုးများကို လက်ခံပါသည်။",
-      questionTitleWidth: "px အတွက် တန်ဖိုးများကို လက်ခံပါသည်။"
     },
     progressBarInheritWidthFrom: "\"Same as container\" သည် Progress Bar Area ၏ အကျယ်ကို HTML Element နှင့် ကိုက်ညီစေပါသည်။"
   },
@@ -1704,70 +1717,7 @@ export var mmStrings = {
     rateColorMode: "အပြုံးအရောင်စနစ်",
     copyDisplayValue: "ပြသမှုတန်ဖိုးကိုကူးယူပါ",
     effectiveColSpan: "အကျိုးရှိသောကော်လံ span",
-    progressBarInheritWidthFrom: "တိုးတက်မှုဘားအကျယ်",
-    // state: "state",
-    // colSpan: "colSpan",
-    // indent: "indent",
-    // titleLocation: "titleLocation",
-    // descriptionLocation: "descriptionLocation",
-    // showNumber: "showNumber",
-    // hideNumber: "hideNumber",
-    // errorLocation: "errorLocation",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalAlignment: "totalAlignment",
-    // detailErrorLocation: "detailErrorLocation",
-    // inheritWidthFrom: "inheritWidthFrom",
-    // textAreaWidth: "textAreaWidth",
-    // textGlowEnabled: "textGlowEnabled",
-    // overlapEnabled: "overlapEnabled",
-    // backgroundImageOpacity: "backgroundImageOpacity",
-    // logoPositionX: "logoPositionX",
-    // logoPositionY: "logoPositionY",
-    // titlePositionX: "titlePositionX",
-    // titlePositionY: "titlePositionY",
-    // descriptionPositionX: "descriptionPositionX",
-    // descriptionPositionY: "descriptionPositionY",
-    // effectiveWidth: "effectiveWidth",
-    // gridLayoutColumns: "gridLayoutColumns",
-    // sjsVersion: "sjsVersion",
-    // previewMode: "previewMode",
-    // showTimerPanel: "showTimerPanel",
-    // gridLayoutEnabled: "gridLayoutEnabled",
-    // headerView: "headerView",
-    // choiceValuesFromQuestion: "choiceValuesFromQuestion",
-    // choiceTextsFromQuestion: "choiceTextsFromQuestion",
-    // refuseText: "refuseText",
-    // dontKnowText: "dontKnowText",
-    // cellComponent: "cellComponent",
-    // maskSettings: "maskSettings",
-    // itemErrorLocation: "itemErrorLocation",
-    // selectToRankSwapAreas: "selectToRankSwapAreas",
-    // signatureWidth: "signatureWidth",
-    // signatureHeight: "signatureHeight",
-    // signatureAutoScaleEnabled: "signatureAutoScaleEnabled",
-    // penMinWidth: "penMinWidth",
-    // penMaxWidth: "penMaxWidth",
-    // showPlaceholder: "showPlaceholder",
-    // placeholderReadOnly: "placeholderReadOnly",
-    // templateTitle: "templateTitle",
-    // templateTabTitle: "templateTabTitle",
-    // tabTitlePlaceholder: "tabTitlePlaceholder",
-    // templateDescription: "templateDescription",
-    // noEntriesText: "noEntriesText",
-    // newPanelPosition: "newPanelPosition",
-    // showRangeInProgress: "showRangeInProgress",
-    // progressBarLocation: "progressBarLocation",
-    // templateQuestionTitleLocation: "templateQuestionTitleLocation",
-    // templateErrorLocation: "templateErrorLocation",
-    // templateVisibleIf: "templateVisibleIf",
-    // saveMaskedValue: "saveMaskedValue",
-    // pattern: "pattern",
-    // allowNegativeValues: "allowNegativeValues",
-    // decimalSeparator: "decimalSeparator",
-    // thousandsSeparator: "thousandsSeparator",
-    // prefix: "prefix",
-    // suffix: "suffix"
+    progressBarInheritWidthFrom: "တိုးတက်မှုဘားအကျယ်"
   },
   theme: {
     advancedMode: "အဆင့်မြင့် mode",
@@ -1846,3 +1796,5 @@ export var mmStrings = {
 };
 
 setupLocale({ localeCode: "mm", strings: mmStrings });
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually

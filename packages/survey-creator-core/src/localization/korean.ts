@@ -107,6 +107,8 @@ export var koreanStrings = {
     redo: "복원",
     undoTooltip: "마지막 변경 사항 실행 취소",
     redoTooltip: "변경 내용 다시 실행",
+    expandTooltip: "넓히다",
+    collapseTooltip: "무너지다",
     expandAllTooltip: "모두 확장",
     collapseAllTooltip: "모두 축소",
     zoomInTooltip: "확대",
@@ -902,6 +904,7 @@ export var koreanStrings = {
     maxWidth_placeholder: "예: 50%",
     imageHeight_placeholder: "자동",
     imageWidth_placeholder: "자동",
+    itemTitleWidth_placeholder: "예: 100px",
     theme: {
       themeName: "주제",
       isPanelless: "질문 모양",
@@ -1559,7 +1562,7 @@ export var koreanStrings = {
     selectToRankEnabled: "선택한 선택 항목만 순위를 지정할 수 있습니다. 사용자는 선택 목록에서 선택한 항목을 끌어 순위 영역 내에서 정렬합니다.",
     dataList: "입력 시 응답자에게 제안될 선택 사항 목록을 입력합니다.",
     inputSize: "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다.",
-    itemTitleWidth: "모든 항목 레이블에 대해 일관된 너비를 픽셀 단위로 설정합니다.",
+    itemTitleWidth: "모든 항목 레이블에 대해 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
     inputTextAlignment: "필드 내에서 입력 값을 정렬하는 방법을 선택합니다. 기본 설정인 \"Auto\"는 통화 또는 숫자 마스킹이 적용된 경우 입력 값을 오른쪽에 정렬하고 그렇지 않은 경우 왼쪽에 정렬합니다.",
     altText: "사용자의 장치에 이미지를 표시할 수 없는 경우 접근성을 위해 대신 사용할 수 있습니다.",
     rateColorMode: "등급 아이콘 유형이 \"스마일리\"로 설정된 경우 선택한 이모티콘의 색상을 정의합니다. 다음 중 하나를 선택합니다. \"기본값\" - 선택한 이모티콘이 기본 설문조사 색상으로 표시됩니다. \"척도\"-선택한 이모티콘은 등급 척도에서 색상을 상속합니다.",
@@ -3226,3 +3229,8 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator를 사용하면 양식 요소의 인라인 너비를 수동으로 조정하여 레이아웃을 제어할 수 있습니다. 이렇게 해도 원하는 결과가 나오지 않으면 열 기반 시스템을 사용하여 요소를 형성하는 구조체인 그리드 레이아웃을 활성화할 수 있습니다. 레이아웃 열을 구성하려면 페이지 또는 패널을 선택하고 \"질문 설정\" → \"그리드 열\" 테이블을 사용합니다. 질문의 열 수를 조정하려면 질문을 선택하고 \"레이아웃\" → \"열 범위\" 입력란에서 원하는 값을 설정합니다."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "이 질문이 그리드 레이아웃 내에서 얼마나 많은 열에 걸쳐 있는지 지정합니다."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "이 테이블을 사용하면 페이지의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
+
+// ed.expandTooltip: "Expand" => "넓히다"
+// ed.collapseTooltip: "Collapse" => "무너지다"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "예: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "모든 항목 레이블에 대해 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
