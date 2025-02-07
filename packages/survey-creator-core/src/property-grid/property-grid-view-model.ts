@@ -91,9 +91,7 @@ export class PropertyGridViewModel extends Base {
     let titleName = this.getTitle();
     this.selectedElementName = titleName;
     this.objectSelectionAction.tooltip = titleName;
-    if (!this.propertyGridModel.showOneCategoryInPropertyGrid) {
-      this.objectSelectionAction.title = titleName;
-    }
+    this.objectSelectionAction.title = this.propertyGridModel.showOneCategoryInPropertyGrid ? "" : titleName;
   }
   private getTitle(): string {
     var obj = this.getSelectedObj();

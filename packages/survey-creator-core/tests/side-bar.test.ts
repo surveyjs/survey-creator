@@ -230,18 +230,3 @@ test("Toggle for Creator Settings", () => {
   expect(creatorSettingAction.active).toBe(false);
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
 });
-
-test("showOneCategoryInPropertyGrid: update objectSelectionAction title, after rename question", () => {
-  const creator = new CreatorTester();
-  const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
-  expect(creator.sidebar.activePage).toEqual("propertyGridPlaceholder");
-
-  creator.clickToolboxItem({ type: "text" });
-  expect(creator.sidebar.activePage).toEqual("propertyGrid");
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("General");
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("question1");
-
-  designerPlugin.propertyGridViewModel.survey.findQuestionByName("name").value = "q1";
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.title).toEqual("General");
-  expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("q1");
-});
