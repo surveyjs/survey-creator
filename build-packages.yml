@@ -9,6 +9,7 @@ resources:
       type: github
       endpoint: github.com_surveyjsdeveloper
       name: surveyjs/service
+      ref: V2
     - repository: EmptyRepo
       type: github
       endpoint: github.com_surveyjsdeveloper
@@ -228,6 +229,16 @@ jobs:
       #     git pull origin master
       #     git push origin master
       #   displayName: "Git surveyjs/service push updated docs"
+      - powershell: |
+          cd $(Build.SourcesDirectory)/service
+          git pull origin V2
+          git fetch origin V2 --tags --force
+          git checkout V2
+          git add surveyjs.io/App_Data/DocsEditor
+          git commit -m "updated survey-creator V2 docs [azurepipelines skip]"
+          git pull origin V2
+          git push origin V2
+        displayName: "git surveyjs/service push updated V2 docs"
 
   - job: CreatorV2React
     dependsOn: CreatorV2Core
