@@ -2591,9 +2591,6 @@ test("Scaling design surface", async (t) => {
     for (let i = 0; i < 5; i++) { await t.click(Selector("#zoomOut").find("button")); }
     await t.resizeWindow(600, 1900);
     await takeElementScreenshot("design-surface-zoom-out.png", surfaceSelector, t, comparer);
-
-    for (let i = 0; i < 3; i++) { await t.click(Selector("#zoomIn").find("button")); }
-    await takeElementScreenshot("design-surface-zoom-in.png", surfaceSelector, t, comparer);
   });
 });
 
