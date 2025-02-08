@@ -112,7 +112,7 @@ export var tgStrings = {
     // expandAllTooltip: "Expand All",
     // collapseAllTooltip: "Collapse All",
     // zoomInTooltip: "Zoom In",
-    // zoom100Tooltip: "100%",
+    // zoom100Tooltip: "Zoom to 100%",
     // zoomOutTooltip: "Zoom Out",
     // lockQuestionsTooltip: "Lock expand/collapse state for questions",
     // showMoreChoices: "Show more",

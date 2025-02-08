@@ -112,7 +112,7 @@ export var mnStrings = {
     expandAllTooltip: "Бүх хүрээгээ тэлнэ",
     collapseAllTooltip: "Бүх нуралт",
     zoomInTooltip: "Томруулах",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "100% хүртэл томруулах",
     zoomOutTooltip: "Томруулах",
     lockQuestionsTooltip: "Асуултын үед lock/expand/collapse state",
     showMoreChoices: "Дэлгэрэнгүй харуулах",
@@ -2642,7 +2642,6 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Танд одоохондоо хуудас байхгүй байна"
 // pe.addNew@pages: "Add new page" => "Шинэ хуудас нэмж"
 // ed.zoomInTooltip: "Zoom In" => "Томруулах"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Томруулах"
 // tabs.surfaceBackground: "Surface Background" => "Гадаргуугийн фон"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Сүүлийн тайлбарын хариултуудыг стандарт болгон ашигла"
@@ -2685,3 +2684,4 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // ed.collapseTooltip: "Collapse" => "Нуралт"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Жишээ нь: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Бүх барааны шошгоны өргөнийг тогтвортой болгоно. CSS-ийн үнэ цэнийг (px, %, in, pt гэх мэт) хүлээн авна."
+// ed.zoom100Tooltip: "Zoom to 100%" => "100% хүртэл томруулах"

@@ -112,7 +112,7 @@ export var czStrings = {
     expandAllTooltip: "Rozbalit vše",
     collapseAllTooltip: "Sbalit vše",
     zoomInTooltip: "Přiblížit",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Zvětšení na 100 %",
     zoomOutTooltip: "Oddálit",
     lockQuestionsTooltip: "Uzamknout stav rozbalení/sbalení pro otázky",
     showMoreChoices: "Zobrazit více",
@@ -2563,7 +2563,6 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Zatím nemáte žádné stránky"
 // pe.addNew@pages: "Add new page" => "Přidat novou stránku"
 // ed.zoomInTooltip: "Zoom In" => "Přiblížit"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Oddálit"
 // tabs.surfaceBackground: "Surface Background" => "Pozadí povrchu"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Použít odpovědi z posledního záznamu jako výchozí"
@@ -2607,3 +2606,4 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // ed.collapseTooltip: "Collapse" => "Zhroucení"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Příklad: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentní šířku pro všechny popisky položek. Přijímá hodnoty CSS (px, %, in, pt, atd.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zvětšení na 100 %"

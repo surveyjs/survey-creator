@@ -112,7 +112,7 @@ export var hebrewStrings = {
     expandAllTooltip: "הרחב הכל",
     collapseAllTooltip: "כווץ הכל",
     zoomInTooltip: "התקרבות",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "שינוי גודל תצוגה ל- 100%",
     zoomOutTooltip: "הקטנת התצוגה",
     lockQuestionsTooltip: "נעילת מצב הרחבה/כיווץ עבור שאלות",
     showMoreChoices: "הצג עוד",
@@ -2554,7 +2554,6 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "עדיין אין לך דפים"
 // pe.addNew@pages: "Add new page" => "הוספת עמוד חדש"
 // ed.zoomInTooltip: "Zoom In" => "התקרבות"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "הקטנת התצוגה"
 // tabs.surfaceBackground: "Surface Background" => "רקע פני השטח"
 // colors.gray: "Gray" => "אפור"
@@ -2597,3 +2596,4 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // ed.collapseTooltip: "Collapse" => "התמוטטות"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "לדוגמה: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "קובע רוחב עקבי לכל תוויות הפריט. מקבל ערכי CSS (px, %, in, pt וכו')."
+// ed.zoom100Tooltip: "Zoom to 100%" => "שינוי גודל תצוגה ל- 100%"

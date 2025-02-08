@@ -112,7 +112,7 @@ export var jaStrings = {
     expandAllTooltip: "すべて展開",
     collapseAllTooltip: "すべて折りたたむ",
     zoomInTooltip: "ズームインする",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "100%にズーム",
     zoomOutTooltip: "ズームアウト",
     lockQuestionsTooltip: "質問の展開/折りたたみ状態のロック",
     showMoreChoices: "さらに表示",
@@ -2985,7 +2985,6 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "まだページがありません"
 // pe.addNew@pages: "Add new page" => "新しいページを追加"
 // ed.zoomInTooltip: "Zoom In" => "ズームインする"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "ズームアウト"
 // tabs.surfaceBackground: "Surface Background" => "サーフェスの背景"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "最後のエントリの回答をデフォルトとして使用する"
@@ -3029,3 +3028,4 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // ed.collapseTooltip: "Collapse" => "倒れる"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "例:100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "すべてのアイテム ラベルに一貫した幅を設定します。CSS 値 (px、%、in、pt など) を受け入れます。"
+// ed.zoom100Tooltip: "Zoom to 100%" => "100%にズーム"

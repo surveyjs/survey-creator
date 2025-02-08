@@ -112,7 +112,7 @@ export const thStrings = {
     expandAllTooltip: "ขยายทั้งหมด",
     collapseAllTooltip: "ยุบทั้งหมด",
     zoomInTooltip: "ซูมเข้า",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "ซูมไปที่ 100%",
     zoomOutTooltip: "ซูมออก",
     lockQuestionsTooltip: "ล็อคสถานะขยาย/ยุบสําหรับคําถาม",
     showMoreChoices: "แสดงเพิ่มเติม",
@@ -1927,7 +1927,6 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "คุณยังไม่มีหน้าใด ๆ"
 // pe.addNew@pages: "Add new page" => "เพิ่มหน้าใหม่"
 // ed.zoomInTooltip: "Zoom In" => "ซูมเข้า"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "ซูมออก"
 // tabs.surfaceBackground: "Surface Background" => "พื้นหลังพื้นผิว"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "ใช้คําตอบจากรายการสุดท้ายเป็นค่าเริ่มต้น"
@@ -1970,3 +1969,4 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // ed.collapseTooltip: "Collapse" => "ทรุด"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "ตัวอย่าง: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "ตั้งค่าความกว้างที่สอดคล้องกันสําหรับป้ายชื่อสินค้าทั้งหมด ยอมรับค่า CSS (px, %, in, pt เป็นต้น)"
+// ed.zoom100Tooltip: "Zoom to 100%" => "ซูมไปที่ 100%"

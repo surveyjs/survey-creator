@@ -112,7 +112,7 @@ export var msStrings = {
     expandAllTooltip: "Kembangkan Semua",
     collapseAllTooltip: "Runtuhkan Semua",
     zoomInTooltip: "Zum Masuk",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Zum kepada 100%",
     zoomOutTooltip: "Zum Keluar",
     lockQuestionsTooltip: "Kunci keadaan kembangkan/runtuhkan untuk soalan",
     showMoreChoices: "Tunjuk lebih banyak",
@@ -2940,7 +2940,6 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Anda belum mempunyai sebarang halaman lagi"
 // pe.addNew@pages: "Add new page" => "Tambah halaman baru"
 // ed.zoomInTooltip: "Zoom In" => "Zum Masuk"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Zum Keluar"
 // tabs.surfaceBackground: "Surface Background" => "Latar Belakang Permukaan"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gunakan jawapan daripada entri terakhir sebagai lalai"
@@ -2984,3 +2983,4 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // ed.collapseTooltip: "Collapse" => "Runtuh"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Cth.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Menetapkan lebar yang konsisten untuk semua label item. Menerima nilai CSS (px, %, in, pt, dll.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zum kepada 100%"

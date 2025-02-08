@@ -112,7 +112,7 @@ export var turkishStrings = {
     expandAllTooltip: "Tümünü Genişlet",
     collapseAllTooltip: "Tümünü Daralt",
     zoomInTooltip: "Yakınlaştırma",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "%100 yakınlaştırma",
     zoomOutTooltip: "Uzaklaştırma",
     lockQuestionsTooltip: "Sorular için genişletme/daraltma durumunu kilitle",
     showMoreChoices: "Daha fazlasını göster",
@@ -2982,7 +2982,6 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Henüz hiç sayfanız yok"
 // pe.addNew@pages: "Add new page" => "Yeni sayfa ekle"
 // ed.zoomInTooltip: "Zoom In" => "Yakınlaştırma"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Uzaklaştırma"
 // tabs.surfaceBackground: "Surface Background" => "Yüzey Arka Planı"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Varsayılan olarak son girişteki yanıtları kullan"
@@ -3025,3 +3024,4 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // ed.collapseTooltip: "Collapse" => "Çökmek"
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ör.: 100 piksel"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Tüm öğe etiketleri için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder."
+// ed.zoom100Tooltip: "Zoom to 100%" => "%100 yakınlaştırma"
