@@ -222,21 +222,6 @@ test("Drop-down menus do not close on second click", async (t) => {
     .expect(popupContainer.visible).notOk();
 });
 
-test("tabbed mode", async (t) => {
-  const json = {
-    elements: [
-      {
-        type: "dropdown",
-        name: "q1",
-        title: "title"
-      }
-    ]
-  };
-  await setJSON(json);
-  await t.hover(Selector(".svc-side-bar .svc-scroll__wrapper").filterVisible());
-  await t.expect(Selector(".svc-side-bar .svc-scroll__scrollbar").visible).notOk();
-});
-
 test("Search correctly scrolls to element", async (t) => {
   const json = {
     "pages": [

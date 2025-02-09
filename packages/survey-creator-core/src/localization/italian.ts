@@ -107,10 +107,12 @@ var italianTranslation = {
     redo: "Ripristina",
     undoTooltip: "Annulla l'ultima modifica",
     redoTooltip: "Ripristina l'ultima modifica",
+    expandTooltip: "Espandere",
+    collapseTooltip: "Collasso",
     expandAllTooltip: "Espandi tutto",
     collapseAllTooltip: "Comprimi tutto",
     zoomInTooltip: "Ingrandisci",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Zoom al 100%",
     zoomOutTooltip: "Zoom indietro",
     lockQuestionsTooltip: "Blocca lo stato di espansione/compressione per le domande",
     showMoreChoices: "Mostra di più",
@@ -902,6 +904,7 @@ var italianTranslation = {
     maxWidth_placeholder: "Es.: 50%",
     imageHeight_placeholder: "Automatico",
     imageWidth_placeholder: "Automatico",
+    itemTitleWidth_placeholder: "Es.: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Aspetto della domanda",
@@ -1559,7 +1562,7 @@ var italianTranslation = {
     selectToRankEnabled: "Abilita per classificare solo le scelte selezionate. Gli utenti trascineranno gli elementi selezionati dall'elenco di scelta per ordinarli all'interno dell'area di classificazione.",
     dataList: "Inserisci un elenco di scelte che verranno suggerite al rispondente durante l'inserimento.",
     inputSize: "L'impostazione ridimensiona solo i campi di input e non influisce sulla larghezza della casella della domanda.",
-    itemTitleWidth: "Imposta una larghezza coerente per tutte le etichette degli elementi in pixel",
+    itemTitleWidth: "Imposta una larghezza uniforme per tutte le etichette degli articoli. Accetta valori CSS (px, %, in, pt, ecc.).",
     inputTextAlignment: "Selezionare la modalità di allineamento del valore di input all'interno del campo. L'impostazione predefinita \"Auto\" allinea il valore di input a destra se viene applicata una maschera di valuta o numerica e a sinistra in caso contrario.",
     altText: "Funge da sostituto quando l'immagine non può essere visualizzata sul dispositivo di un utente e per motivi di accessibilità.",
     rateColorMode: "Definisce il colore dell'emoji selezionata quando il tipo di icona Valutazione è impostato su \"Smiley\". Scegli tra: \"Predefinito\" - l'emoji selezionata appare nel colore predefinito del sondaggio; \"Scala\": l'emoji selezionata eredita il colore dalla scala di valutazione.",
@@ -2744,7 +2747,6 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Non hai ancora nessuna pagina"
 // pe.addNew@pages: "Add new page" => "Aggiungi nuova pagina"
 // ed.zoomInTooltip: "Zoom In" => "Ingrandisci"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Zoom indietro"
 // tabs.surfaceBackground: "Surface Background" => "Sfondo della superficie"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Usa le risposte dell'ultima voce come impostazione predefinita"
@@ -2783,3 +2785,9 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator consente di regolare manualmente le larghezze in linea degli elementi del modulo per controllare il layout. Se questo non produce il risultato desiderato, è possibile abilitare il layout a griglia, che struttura gli elementi di forma utilizzando un sistema basato su colonne. Per configurare le colonne del layout, seleziona una pagina o un pannello e utilizza la tabella \"Impostazioni domanda\" → \"Colonne griglia\". Per regolare il numero di colonne di una domanda, selezionala e imposta il valore desiderato nel campo \"Layout\" → \"Estensione colonne\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Specifica il numero di colonne su cui si estende la domanda all'interno del layout della griglia."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Questa tabella consente di configurare ogni colonna della griglia nella pagina. Imposta automaticamente la percentuale di larghezza per ogni colonna in base al numero massimo di elementi in una riga. Per personalizzare il layout della griglia, regola manualmente questi valori e definisci la larghezza del titolo per tutte le domande in ogni colonna."
+
+// ed.expandTooltip: "Expand" => "Espandere"
+// ed.collapseTooltip: "Collapse" => "Collasso"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Es.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Imposta una larghezza uniforme per tutte le etichette degli articoli. Accetta valori CSS (px, %, in, pt, ecc.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zoom al 100%"

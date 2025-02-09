@@ -107,10 +107,12 @@ export var hrStrings = {
     redo: "Ponoviti",
     undoTooltip: "Poništi posljednju promjenu",
     redoTooltip: "Preusmjeti promjenu",
+    expandTooltip: "Proširiti",
+    collapseTooltip: "Kolaps",
     expandAllTooltip: "Proširi sve",
     collapseAllTooltip: "Sažmi sve",
     zoomInTooltip: "Zumiranje",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Zumiranje na 100%",
     zoomOutTooltip: "Smanji",
     lockQuestionsTooltip: "Zaključavanje stanja proširenja/sažimanja za pitanja",
     showMoreChoices: "Pokaži više",
@@ -902,6 +904,7 @@ export var hrStrings = {
     maxWidth_placeholder: "Npr.: 50%",
     imageHeight_placeholder: "Автоматично",
     imageWidth_placeholder: "Автоматично",
+    itemTitleWidth_placeholder: "Primjer: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Izgled pitanja",
@@ -1559,7 +1562,7 @@ export var hrStrings = {
     selectToRankEnabled: "Omogućite rangiranje samo odabranih odabira. Korisnici će povući odabrane stavke s popisa izbora kako bi ih naručili unutar područja rangiranja.",
     dataList: "Unesite popis izbora koji će se predložiti ispitaniku tijekom unosa.",
     inputSize: "Postavka samo mijenja veličinu ulaznih polja i ne utječe na širinu okvira pitanja.",
-    itemTitleWidth: "Postavlja dosljednu širinu za sve natpise stavki u pikselima",
+    itemTitleWidth: "Postavlja dosljednu širinu za sve oznake stavki. Prihvaća CSS vrijednosti (px, %, in, pt, itd.).",
     inputTextAlignment: "Odaberite način poravnanja ulazne vrijednosti unutar polja. Zadana postavka \"Automatski\" poravnava ulaznu vrijednost udesno ako se primjenjuje valutno ili numeričko maskiranje i ulijevo ako nije.",
     altText: "Služi kao zamjena kada se slika ne može prikazati na korisnikovom uređaju i u svrhu pristupačnosti.",
     rateColorMode: "Definira boju odabranog emojija kada je vrsta ikone Ocjena postavljena na \"Smajlići\". Odaberite između: \"Zadano\" - odabrani emoji pojavljuje se u zadanoj boji ankete; \"Skala\" - odabrani emoji nasljeđuje boju od ljestvice ocjenjivanja.",
@@ -2977,7 +2980,6 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Još nemate stranice"
 // pe.addNew@pages: "Add new page" => "Dodaj novu stranicu"
 // ed.zoomInTooltip: "Zoom In" => "Zumiranje"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Smanji"
 // tabs.surfaceBackground: "Surface Background" => "Pozadina površine"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Koristite odgovore iz posljednjeg unosa kao standardne"
@@ -3016,3 +3018,9 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator omogućuje vam ručno podešavanje ugrađenih širina elemenata obrasca za kontrolu izgleda. Ako to ne daje željeni ishod, možete omogućiti raspored rešetke, čije strukture tvore elemente pomoću sustava temeljenog na stupcima. Da biste konfigurirali stupce izgleda, odaberite stranicu ili ploču i upotrijebite tablicu \"Postavke pitanja\" → \"Stupci rešetke\". Da biste prilagodili koliko stupaca obuhvaća pitanje, odaberite ga i postavite željenu vrijednost u polju \"Izgled\" → \"Raspon stupaca\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Određuje koliko stupaca ovo pitanje obuhvaća unutar rasporeda rešetke."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ova tablica omogućuje konfiguriranje svakog stupca rešetke na stranici. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."
+
+// ed.expandTooltip: "Expand" => "Proširiti"
+// ed.collapseTooltip: "Collapse" => "Kolaps"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Primjer: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za sve oznake stavki. Prihvaća CSS vrijednosti (px, %, in, pt, itd.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zumiranje na 100%"

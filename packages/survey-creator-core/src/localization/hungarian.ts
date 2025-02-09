@@ -107,10 +107,12 @@ export var huStrings = {
     redo: "Ismét",
     undoTooltip: "Utolsó módosítás visszavonása",
     redoTooltip: "Ismételje meg a módosítást",
+    expandTooltip: "Kibővít",
+    collapseTooltip: "Összeomlás",
     expandAllTooltip: "Összes kibontása",
     collapseAllTooltip: "Az összes összecsukása",
     zoomInTooltip: "Nagyítás",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Nagyítás 100%-ra",
     zoomOutTooltip: "Kicsinyítés",
     lockQuestionsTooltip: "Kibontási/összecsukási állapot zárolása kérdések esetén",
     showMoreChoices: "Bővebben",
@@ -902,6 +904,7 @@ export var huStrings = {
     maxWidth_placeholder: "Pl.: 50%",
     imageHeight_placeholder: "kocsi",
     imageWidth_placeholder: "kocsi",
+    itemTitleWidth_placeholder: "Pl.: 100px",
     theme: {
       themeName: "Téma",
       isPanelless: "Kérdés megjelenése",
@@ -1559,7 +1562,7 @@ export var huStrings = {
     selectToRankEnabled: "Engedélyezésével csak a kiválasztott választásokat rangsorolhatja. A felhasználók a kiválasztott elemeket az adatválaszték-listából húzzák, hogy a rangsorolási területen belül rendezzék őket.",
     dataList: "Adja meg azoknak a választási lehetőségeknek a listáját, amelyeket a rendszer javasolni fog a válaszadónak a bevitel során.",
     inputSize: "A beállítás csak a beviteli mezőket méretezi át, és nincs hatással a kérdésmező szélességére.",
-    itemTitleWidth: "Konzisztens szélességet állít be az összes elemfelirathoz képpontban",
+    itemTitleWidth: "Egységes szélességet állít be az összes cikkfelirathoz. CSS-értékeket fogad el (px, %, in, pt stb.).",
     inputTextAlignment: "Válassza ki, hogyan szeretné igazítani a bemeneti értéket a mezőn belül. Az alapértelmezett \"Automatikus\" beállítás a bemeneti értéket jobbra igazítja, ha pénznem vagy numerikus maszkolás van alkalmazva, és balra, ha nem.",
     altText: "Helyettesítőként szolgál, ha a kép nem jeleníthető meg a felhasználó eszközén, valamint kisegítő lehetőségek céljából.",
     rateColorMode: "Meghatározza a kiválasztott hangulatjel színét, ha az Értékelés ikon típusa \"Hangulatjelek\". Válasszon a következők közül: \"Alapértelmezett\" - a kiválasztott hangulatjel alapértelmezett felmérési színben jelenik meg; \"Skála\" - a kiválasztott hangulatjel örökli a színt a minősítési skálától.",
@@ -3134,7 +3137,6 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Még nincsenek oldalai"
 // pe.addNew@pages: "Add new page" => "Új oldal hozzáadása"
 // ed.zoomInTooltip: "Zoom In" => "Nagyítás"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Kicsinyítés"
 // tabs.surfaceBackground: "Surface Background" => "Felület háttér"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Az utolsó bejegyzés válaszainak használata alapértelmezettként"
@@ -3173,3 +3175,9 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "A Survey Creator lehetővé teszi az űrlapelemek szövegközi szélességének manuális beállítását az elrendezés vezérléséhez. Ha ez nem hozza meg a kívánt eredményt, engedélyezheti a rácselrendezést, amely oszlopalapú rendszer használatával struktúrákat alkot elemeket. Az elrendezésoszlopok konfigurálásához válasszon ki egy oldalt vagy panelt, és használja a \"Kérdésbeállítások\" → a \"Rácsoszlopok\" táblázatot. Annak beállításához, hogy egy kérdés hány oszlopra terjed ki, válassza ki azt, és állítsa be a kívánt értéket az \"Elrendezés\" → az \"Oszloptartomány\" mezőben."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Megadja, hogy ez a kérdés hány oszlopra terjed ki a rácsos elrendezésen belül."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ez a táblázat lehetővé teszi az oldal egyes rácsoszlopainak konfigurálását. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."
+
+// ed.expandTooltip: "Expand" => "Kibővít"
+// ed.collapseTooltip: "Collapse" => "Összeomlás"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Pl.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Egységes szélességet állít be az összes cikkfelirathoz. CSS-értékeket fogad el (px, %, in, pt stb.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Nagyítás 100%-ra"

@@ -2478,7 +2478,7 @@ test("Collapse all and expand all toolbar", async (t) => {
     await takeElementScreenshot("design-surface-toolbar.png", Selector(".svc-tab-designer"), t, comparer);
 
     await setAllowZoom(true);
-    await t.hover("#zoom100");
+    await t.hover("#zoomOut");
     await takeElementScreenshot("design-surface-toolbar-with-zoom.png", Selector(".svc-tab-designer__surface-toolbar"), t, comparer);
   });
 });
@@ -2588,9 +2588,6 @@ test("Scaling design surface", async (t) => {
     await t.click(qContent, { offsetX: 5, offsetY: 5 });
 
     await t.resizeWindow(1024, 3700);
-    for (let i = 0; i < 3; i++) { await t.click(Selector("#zoomIn").find("button")); }
-    await takeElementScreenshot("design-surface-zoom-in.png", surfaceSelector, t, comparer);
-
     for (let i = 0; i < 5; i++) { await t.click(Selector("#zoomOut").find("button")); }
     await t.resizeWindow(600, 1900);
     await takeElementScreenshot("design-surface-zoom-out.png", surfaceSelector, t, comparer);

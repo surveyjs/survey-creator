@@ -107,10 +107,12 @@ var polishStrings = {
     redo: "Ponów",
     undoTooltip: "Cofanie ostatniej zmiany",
     redoTooltip: "Ponowne wprowadzanie zmian",
+    expandTooltip: "Rozszerzać",
+    collapseTooltip: "Zapaść",
     expandAllTooltip: "Rozwiń wszystko",
     collapseAllTooltip: "Zwiń wszystko",
     zoomInTooltip: "Powiększenie",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Powiększenie do 100%",
     zoomOutTooltip: "Pomniejszanie",
     lockQuestionsTooltip: "Zablokuj stan rozwijania/zwijania dla pytań",
     showMoreChoices: "Pokaż więcej",
@@ -902,6 +904,7 @@ var polishStrings = {
     maxWidth_placeholder: "Przykład: 50%",
     imageHeight_placeholder: "Automatycznie",
     imageWidth_placeholder: "Automatycznie",
+    itemTitleWidth_placeholder: "Przykład: 100px",
     theme: {
       themeName: "Kompozycja",
       isPanelless: "Wygląd pytania",
@@ -1559,7 +1562,7 @@ var polishStrings = {
     selectToRankEnabled: "Włącz, aby uszeregować tylko wybrane wybory. Użytkownicy będą przeciągać wybrane elementy z listy wyboru, aby uporządkować je w obszarze rankingu.",
     dataList: "Wprowadź listę opcji, które zostaną zasugerowane respondentowi podczas wprowadzania danych.",
     inputSize: "To ustawienie zmienia tylko rozmiar pól wejściowych i nie wpływa na szerokość pola pytania.",
-    itemTitleWidth: "Ustawia stałą szerokość dla wszystkich etykiet elementów w pikselach",
+    itemTitleWidth: "Ustawia spójną szerokość dla wszystkich etykiet elementów. Akceptuje wartości CSS (px, %, in, pt itd.).",
     inputTextAlignment: "Wybierz sposób wyrównania wartości wejściowej w polu. Ustawienie domyślne \"Auto\" wyrównuje wartość wejściową do prawej, jeśli stosowane jest maskowanie walutowe lub numeryczne, i do lewej, jeśli nie.",
     altText: "Służy jako substytut, gdy obraz nie może być wyświetlany na urządzeniu użytkownika oraz w celu ułatwienia dostępu.",
     rateColorMode: "Określa kolor wybranego emoji, gdy typ ikony oceny jest ustawiony na \"Emotikony\". Wybierz pomiędzy: \"Domyślny\" - wybrany emoji pojawia się w domyślnym kolorze ankiety; \"Skala\" - wybrany emoji dziedziczy kolor ze skali ocen.",
@@ -3249,7 +3252,6 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Nie masz jeszcze żadnych stron"
 // pe.addNew@pages: "Add new page" => "Dodaj nową stronę"
 // ed.zoomInTooltip: "Zoom In" => "Powiększenie"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Pomniejszanie"
 // tabs.surfaceBackground: "Surface Background" => "Tło powierzchni"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Domyślnie używaj odpowiedzi z ostatniego wpisu"
@@ -3287,3 +3289,9 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Kreator ankiet umożliwia ręczne dostosowanie szerokości elementów formularza w tekście w celu kontrolowania układu. Jeśli nie przyniesie to pożądanego rezultatu, można włączyć układ siatki, w którym struktury tworzą elementy przy użyciu systemu opartego na kolumnach. Aby skonfigurować kolumny układu, wybierz stronę lub panel i użyj tabeli \"Ustawienia pytań\" → \"Kolumny siatki\". Aby dostosować liczbę kolumn obejmujących pytanie, zaznacz je i ustaw żądaną wartość w polu \"Układ\" → \"Zakres kolumn\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Określa, ile kolumn obejmuje to pytanie w układzie siatki."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki na stronie. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie."
+
+// ed.expandTooltip: "Expand" => "Rozszerzać"
+// ed.collapseTooltip: "Collapse" => "Zapaść"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Przykład: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Ustawia spójną szerokość dla wszystkich etykiet elementów. Akceptuje wartości CSS (px, %, in, pt itd.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Powiększenie do 100%"

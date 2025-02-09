@@ -107,10 +107,12 @@ export var hebrewStrings = {
     redo: "בצע מחדש",
     undoTooltip: "בטל שינוי אחרון",
     redoTooltip: "בצע מחדש את השינוי",
+    expandTooltip: "להרחיב",
+    collapseTooltip: "התמוטטות",
     expandAllTooltip: "הרחב הכל",
     collapseAllTooltip: "כווץ הכל",
     zoomInTooltip: "התקרבות",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "שינוי גודל תצוגה ל- 100%",
     zoomOutTooltip: "הקטנת התצוגה",
     lockQuestionsTooltip: "נעילת מצב הרחבה/כיווץ עבור שאלות",
     showMoreChoices: "הצג עוד",
@@ -902,6 +904,7 @@ export var hebrewStrings = {
     maxWidth_placeholder: "לדוגמה: 50%",
     imageHeight_placeholder: "אוטומטי",
     imageWidth_placeholder: "אוטומטי",
+    itemTitleWidth_placeholder: "לדוגמה: 100px",
     theme: {
       themeName: "ערכת נושא",
       isPanelless: "מראה השאלה",
@@ -1559,7 +1562,7 @@ export var hebrewStrings = {
     selectToRankEnabled: "אפשר לדרג רק בחירות נבחרות. המשתמשים יגררו פריטים נבחרים מרשימת האפשרויות כדי לסדר אותם באזור הדירוג.",
     dataList: "הזן רשימה של אפשרויות שיוצעו למשיב במהלך הקלט.",
     inputSize: "ההגדרה משנה את גודל שדות הקלט בלבד ואינה משפיעה על רוחב תיבת השאלה.",
-    itemTitleWidth: "קובע רוחב עקבי לכל תוויות הפריטים בפיקסלים",
+    itemTitleWidth: "קובע רוחב עקבי לכל תוויות הפריט. מקבל ערכי CSS (px, %, in, pt וכו').",
     inputTextAlignment: "בחר כיצד ליישר ערך קלט בתוך השדה. הגדרת ברירת המחדל \"אוטומטי\" מיישרת את ערך הקלט ימינה אם מוחלת מסיכה על מטבע או מספר, ושמאלה אם לא.",
     altText: "משמש כתחליף כאשר לא ניתן להציג את התמונה במכשיר המשתמש ולמטרות נגישות.",
     rateColorMode: "מגדיר את צבע האמוג'י שנבחר כשסוג סמל הדירוג מוגדר ל\"סמיילי\". בחר בין: \"ברירת מחדל\" - האמוג'י שנבחר מופיע בצבע סקר ברירת מחדל; \"קנה מידה\" - האמוג'י שנבחר יורש צבע מסולם הדירוג.",
@@ -2551,7 +2554,6 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "עדיין אין לך דפים"
 // pe.addNew@pages: "Add new page" => "הוספת עמוד חדש"
 // ed.zoomInTooltip: "Zoom In" => "התקרבות"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "הקטנת התצוגה"
 // tabs.surfaceBackground: "Surface Background" => "רקע פני השטח"
 // colors.gray: "Gray" => "אפור"
@@ -2589,3 +2591,9 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "יוצר הסקר מאפשר לך להתאים באופן ידני את רוחב השורה של רכיבי טופס כדי לשלוט בפריסה. אם פעולה זו אינה מפיקה את התוצאה הרצויה, ניתן להפעיל את פריסת הרשת, הבונה רכיבי טופס באמצעות מערכת מבוססת עמודות. כדי להגדיר עמודות פריסה, בחר עמוד או חלונית והשתמש בטבלה \"הגדרות שאלה\" → \"עמודות רשת\". כדי להתאים את מספר העמודות ששאלה משתרעת, בחר אותה והגדר את הערך הרצוי בשדה \"פריסה\" → \"טווח עמודות\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "מציין כמה עמודות שאלה זו משתרעת בתוך פריסת הרשת."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "טבלה זו מאפשרת לך לקבוע את התצורה של כל עמודת רשת בעמוד. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."
+
+// ed.expandTooltip: "Expand" => "להרחיב"
+// ed.collapseTooltip: "Collapse" => "התמוטטות"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "לדוגמה: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "קובע רוחב עקבי לכל תוויות הפריט. מקבל ערכי CSS (px, %, in, pt וכו')."
+// ed.zoom100Tooltip: "Zoom to 100%" => "שינוי גודל תצוגה ל- 100%"

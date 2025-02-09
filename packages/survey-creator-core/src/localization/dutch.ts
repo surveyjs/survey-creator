@@ -107,10 +107,12 @@ export var nlStrings = {
     redo: "Opnieuw uitvoeren",
     undoTooltip: "Maak de laatste wijziging ongedaan",
     redoTooltip: "Voer de wijziging opnieuw uit",
+    expandTooltip: "Uitbreiden",
+    collapseTooltip: "Instorting",
     expandAllTooltip: "Alles uitvouwen",
     collapseAllTooltip: "Alles inklappen",
     zoomInTooltip: "Inzoomen",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Inzoomen tot 100%",
     zoomOutTooltip: "Uitzoomen",
     lockQuestionsTooltip: "Vergrendel de uitvouw-/samenvouwstatus voor vragen",
     showMoreChoices: "Toon meer",
@@ -902,6 +904,7 @@ export var nlStrings = {
     maxWidth_placeholder: "Vb.: 50%",
     imageHeight_placeholder: "Auto",
     imageWidth_placeholder: "Auto",
+    itemTitleWidth_placeholder: "Bijv.: 100px",
     theme: {
       themeName: "Thema",
       isPanelless: "Weergave van de vraag",
@@ -1559,7 +1562,7 @@ export var nlStrings = {
     selectToRankEnabled: "Schakel in om alleen geselecteerde keuzes te rangschikken. Gebruikers slepen geselecteerde items uit de keuzelijst om ze binnen het rangschikkingsgebied te rangschikken.",
     dataList: "Voer een lijst met keuzes in die tijdens de invoer aan de respondent worden voorgesteld.",
     inputSize: "De instelling wijzigt alleen de grootte van de invoervelden en heeft geen invloed op de breedte van het vraagvak.",
-    itemTitleWidth: "Hiermee stelt u een consistente breedte in voor alle artikellabels in pixels",
+    itemTitleWidth: "Hiermee stelt u een consistente breedte in voor alle artikellabels. Accepteert CSS-waarden (px, %, in, pt, enz.).",
     inputTextAlignment: "Selecteer hoe u de invoerwaarde binnen het veld wilt uitlijnen. De standaardinstelling \"Auto\" lijnt de invoerwaarde uit aan de rechterkant als valuta- of numerieke maskering wordt toegepast en aan de linkerkant als dat niet het geval is.",
     altText: "Dient als vervanging wanneer de afbeelding niet kan worden weergegeven op het apparaat van een gebruiker en voor toegankelijkheidsdoeleinden.",
     rateColorMode: "Definieert de kleur van de geselecteerde emoji wanneer het type Beoordelingspictogram is ingesteld op \"Smileys\". Kies tussen: \"Standaard\" - de geselecteerde emoji verschijnt in de standaard enquêtekleur; \"Schaal\" - de geselecteerde emoji erft de kleur van de beoordelingsschaal.",
@@ -2961,7 +2964,6 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Je hebt nog geen pagina's"
 // pe.addNew@pages: "Add new page" => "Nieuwe pagina toevoegen"
 // ed.zoomInTooltip: "Zoom In" => "Inzoomen"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Uitzoomen"
 // tabs.surfaceBackground: "Surface Background" => "Oppervlakte Achtergrond"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Gebruik antwoorden van de laatste invoer als standaard"
@@ -3000,3 +3002,9 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Met Survey Creator kunt u de inlinebreedtes van formulierelementen handmatig aanpassen om de lay-out te beheren. Als dit niet het gewenste resultaat oplevert, kunt u de rasterlay-out inschakelen, waarvan de structuren elementen vormen met behulp van een op kolommen gebaseerd systeem. Om lay-outkolommen te configureren, selecteer je een pagina of paneel en gebruik je de tabel \"Vraaginstellingen\" → \"Rasterkolommen\". Om aan te passen hoeveel kolommen een vraag beslaat, selecteer je deze en stel je de gewenste waarde in in het veld \"Lay-out\" → \"Kolomspanwijdte\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Met deze tabel kunt u elke rasterkolom op de pagina configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
+
+// ed.expandTooltip: "Expand" => "Uitbreiden"
+// ed.collapseTooltip: "Collapse" => "Instorting"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Bijv.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor alle artikellabels. Accepteert CSS-waarden (px, %, in, pt, enz.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Inzoomen tot 100%"

@@ -107,10 +107,12 @@ var germanTranslation = {
     redo: "Wiederherstellen",
     undoTooltip: "Letzte Änderung rückgängig machen",
     redoTooltip: "Letzte Änderung wiederherstellen",
+    expandTooltip: "Erweitern",
+    collapseTooltip: "Zusammenbruch",
     expandAllTooltip: "Alle aufklappen",
     collapseAllTooltip: "Alle einklappen",
     zoomInTooltip: "Vergrößern",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Auf 100 % zoomen",
     zoomOutTooltip: "Verkleinern",
     lockQuestionsTooltip: "Sperren des Erweiterungs-/Einklappenzustands für Fragen",
     showMoreChoices: "Zeige mehr",
@@ -902,6 +904,7 @@ var germanTranslation = {
     maxWidth_placeholder: "Bsp.: 50%",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Beispiel: 100px",
     theme: {
       themeName: "Thema",
       isPanelless: "Aussehen der Frage",
@@ -1559,7 +1562,7 @@ var germanTranslation = {
     selectToRankEnabled: "Aktivieren Sie diese Option, um nur ausgewählte Auswahlmöglichkeiten in eine Rangfolge zu bringen. Benutzer ziehen ausgewählte Elemente aus der Auswahlliste, um sie innerhalb des Ranking-Bereichs zu sortieren.",
     dataList: "Geben Sie eine Liste mit Auswahlmöglichkeiten ein, die dem Befragten während der Eingabe vorgeschlagen werden.",
     inputSize: "Die Einstellung ändert nur die Größe der Eingabefelder und wirkt sich nicht auf die Breite des Fragefelds aus.",
-    itemTitleWidth: "Legt eine konsistente Breite für alle Elementbeschriftungen in Pixeln fest",
+    itemTitleWidth: "Legt die einheitliche Breite für alle Elementbeschriftungen fest. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
     inputTextAlignment: "Wählen Sie aus, wie der Eingabewert innerhalb des Felds ausgerichtet werden soll. Die Standardeinstellung \"Auto\" richtet den Eingabewert nach rechts aus, wenn eine Währungs- oder numerische Maskierung angewendet wird, und nach links, wenn dies nicht der Fall ist.",
     altText: "Dient als Ersatz, wenn das Bild nicht auf dem Gerät eines Benutzers angezeigt werden kann, und aus Gründen der Barrierefreiheit.",
     rateColorMode: "Definiert die Farbe des ausgewählten Emojis, wenn der Symboltyp \"Bewertung\" auf \"Smileys\" eingestellt ist. Wählen Sie zwischen: \"Standard\" - das ausgewählte Emoji erscheint in der Standardfarbe der Umfrage; \"Skala\" - das ausgewählte Emoji erbt die Farbe von der Bewertungsskala.",
@@ -2695,7 +2698,6 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Sie haben noch keine Seiten"
 // pe.addNew@pages: "Add new page" => "Neue Seite hinzufügen"
 // ed.zoomInTooltip: "Zoom In" => "Vergrößern"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Verkleinern"
 // tabs.surfaceBackground: "Surface Background" => "Oberflächen-Hintergrund"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Antworten aus dem letzten Eintrag als Standard verwenden"
@@ -2734,3 +2736,9 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Mit Survey Creator können Sie die Inline-Breiten von Formularelementen manuell anpassen, um das Layout zu steuern. Wenn dies nicht zum gewünschten Ergebnis führt, können Sie das Rasterlayout aktivieren, das Formularelemente mithilfe eines spaltenbasierten Systems strukturiert. Um Layoutspalten zu konfigurieren, wählen Sie eine Seite oder einen Bereich aus und verwenden Sie die Tabelle \"Frageneinstellungen\" → \"Rasterspalten\". Um anzupassen, wie viele Spalten eine Frage umfasst, wählen Sie sie aus und stellen Sie den gewünschten Wert im Feld \"Layout\" → \"Spaltenbereich\" ein."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Gibt an, über wie viele Spalten sich diese Frage innerhalb des Rasterlayouts erstreckt."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "In dieser Tabelle können Sie jede Rasterspalte auf der Seite konfigurieren. Der Breitenprozentsatz für jede Spalte wird automatisch basierend auf der maximalen Anzahl von Elementen in einer Zeile festgelegt. Um das Rasterlayout anzupassen, passen Sie diese Werte manuell an und definieren Sie die Titelbreite für alle Fragen in jeder Spalte."
+
+// ed.expandTooltip: "Expand" => "Erweitern"
+// ed.collapseTooltip: "Collapse" => "Zusammenbruch"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Beispiel: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Legt die einheitliche Breite für alle Elementbeschriftungen fest. Akzeptiert CSS-Werte (px, %, in, pt usw.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Auf 100 % zoomen"

@@ -107,10 +107,12 @@ var spanishTranslation = {
     redo: "Rehacer",
     undoTooltip: "Deshacer el último cambio",
     redoTooltip: "Rehacer el cambio",
+    expandTooltip: "Expandir",
+    collapseTooltip: "Colapso",
     expandAllTooltip: "Expandir todo",
     collapseAllTooltip: "Contraer todo",
     zoomInTooltip: "Acercar",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Zoom al 100%",
     zoomOutTooltip: "Alejar",
     lockQuestionsTooltip: "Bloquear el estado de expansión/contracción de las preguntas",
     showMoreChoices: "Mostrar más",
@@ -902,6 +904,7 @@ var spanishTranslation = {
     maxWidth_placeholder: "Ej.: 50%",
     imageHeight_placeholder: "Automático",
     imageWidth_placeholder: "Automático",
+    itemTitleWidth_placeholder: "Ej.: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Apariencia de la pregunta",
@@ -1559,7 +1562,7 @@ var spanishTranslation = {
     selectToRankEnabled: "Habilite esta opción para clasificar solo las opciones seleccionadas. Los usuarios arrastrarán los elementos seleccionados de la lista de opciones para ordenarlos dentro del área de clasificación.",
     dataList: "Ingrese una lista de opciones que se sugerirán al encuestado durante la entrada.",
     inputSize: "La configuración solo cambia el tamaño de los campos de entrada y no afecta al ancho del cuadro de pregunta.",
-    itemTitleWidth: "Establece un ancho coherente para todas las etiquetas de elementos en píxeles",
+    itemTitleWidth: "Establece un ancho coherente para todas las etiquetas de los elementos. Acepta valores CSS (px, %, in, pt, etc.).",
     inputTextAlignment: "Seleccione cómo alinear el valor de entrada dentro del campo. La configuración predeterminada \"Auto\" alinea el valor de entrada a la derecha si se aplica el enmascaramiento numérico o de moneda y a la izquierda si no se aplica.",
     altText: "Sirve como sustituto cuando la imagen no se puede mostrar en el dispositivo de un usuario y por motivos de accesibilidad.",
     rateColorMode: "Define el color del emoji seleccionado cuando el tipo de icono de clasificación se establece en \"Emoticonos\". Elija entre: \"Predeterminado\": el emoji seleccionado aparece en el color predeterminado de la encuesta; \"Escala\": el emoji seleccionado hereda el color de la escala de calificación.",
@@ -2760,7 +2763,6 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Todavía no tienes ninguna página"
 // pe.addNew@pages: "Add new page" => "Agregar nueva página"
 // ed.zoomInTooltip: "Zoom In" => "Acercar"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Alejar"
 // tabs.surfaceBackground: "Surface Background" => "Fondo de superficie"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Usar las respuestas de la última entrada como predeterminadas"
@@ -2798,3 +2800,9 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator le permite ajustar manualmente los anchos en línea de los elementos del formulario para controlar el diseño. Si esto no produce el resultado deseado, puede habilitar el diseño de cuadrícula, que estructura elementos mediante un sistema basado en columnas. Para configurar las columnas de diseño, seleccione una página o un panel y utilice la tabla \"Configuración de preguntas\" → \"Columnas de cuadrícula\". Para ajustar el número de columnas que abarca una pregunta, selecciónela y establezca el valor deseado en el campo \"Diseño\" → \"Intervalo de columnas\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Especifica el número de columnas que abarca esta pregunta dentro del diseño de cuadrícula."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Esta tabla le permite configurar cada columna de cuadrícula en la página. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valores y defina el ancho del título para todas las preguntas de cada columna."
+
+// ed.expandTooltip: "Expand" => "Expandir"
+// ed.collapseTooltip: "Collapse" => "Colapso"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ej.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Establece un ancho coherente para todas las etiquetas de los elementos. Acepta valores CSS (px, %, in, pt, etc.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zoom al 100%"

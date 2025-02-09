@@ -47,7 +47,10 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding-top: var(--ctr-property-grid-form-padding-top, var(--sjs-spacing-x2));
+  padding-top: calc(
+    var(--ctr-property-grid-form-padding-top, var(--sjs-spacing-x2)) -
+      var(--ctr-property-grid-form-gap, var(--sjs-spacing-x2))
+  );
   padding-inline-end: var(--ctr-property-grid-form-padding-right, var(--sjs-spacing-x4));
   padding-bottom: var(--ctr-property-grid-form-padding-bottom, var(--sjs-spacing-x5));
   padding-inline-start: var(--ctr-property-grid-form-padding-left, var(--sjs-spacing-x4));
@@ -65,9 +68,6 @@
   .spg-row--multiple {
     margin-top: var(--ctr-editor-layout-gap, var(--sjs-spacing-x1));
   }
-}
-.spg-panel__content > .spg-row:first-of-type {
-  margin-top: 0;
 }
 .svc-side-bar--mobile {
   .spg-panel__content {

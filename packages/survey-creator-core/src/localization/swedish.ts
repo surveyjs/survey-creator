@@ -107,10 +107,12 @@ export let svStrings = {
     redo: "Göra om",
     undoTooltip: "Ångra senaste ändring",
     redoTooltip: "Gör om ändringen",
+    expandTooltip: "Expandera",
+    collapseTooltip: "Kollaps",
     expandAllTooltip: "Expandera alla",
     collapseAllTooltip: "Komprimera alla",
     zoomInTooltip: "Zooma in",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Zooma till 100 %",
     zoomOutTooltip: "Zooma ut",
     lockQuestionsTooltip: "Lås expandera/komprimera tillstånd för frågor",
     showMoreChoices: "Visa mer",
@@ -902,6 +904,7 @@ export let svStrings = {
     maxWidth_placeholder: "Ex.: 50%",
     imageHeight_placeholder: "bil",
     imageWidth_placeholder: "bil",
+    itemTitleWidth_placeholder: "Ex.: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Frågans utseende",
@@ -1559,7 +1562,7 @@ export let svStrings = {
     selectToRankEnabled: "Aktivera för att endast rangordna valda alternativ. Användarna drar de valda objekten från urvalslistan för att ordna dem i rangordningsområdet.",
     dataList: "Ange en lista med alternativ som kommer att föreslås för respondenten under inmatningen.",
     inputSize: "Inställningen ändrar bara storleken på inmatningsfälten och påverkar inte frågerutans bredd.",
-    itemTitleWidth: "Anger konsekvent bredd för alla objektetiketter i pixlar",
+    itemTitleWidth: "Ställer in konsekvent bredd för alla objektetiketter. Accepterar CSS-värden (px, %, in, pt, etc.).",
     inputTextAlignment: "Välj hur du vill justera indatavärdet i fältet. Standardinställningen \"Auto\" justerar indatavärdet till höger om valutamaskering eller numerisk maskering används och till vänster om inte.",
     altText: "Fungerar som ersättning när bilden inte kan visas på en användares enhet och i tillgänglighetssyfte.",
     rateColorMode: "Definierar färgen på den valda emojin när typen av betygsikon är inställd på \"Smileys\". Välj mellan: \"Standard\" - den valda emojin visas i standardundersökningsfärgen; \"Skala\" - den valda emojin ärver färg från betygsskalan.",
@@ -3158,7 +3161,6 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har inga sidor ännu"
 // pe.addNew@pages: "Add new page" => "Lägg till ny sida"
 // ed.zoomInTooltip: "Zoom In" => "Zooma in"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Zooma ut"
 // tabs.surfaceBackground: "Surface Background" => "Yta Bakgrund"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Använd svar från den senaste posten som standard"
@@ -3196,3 +3198,9 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Med Survey Creator kan du manuellt justera de infogade bredderna på formulärelement för att styra layouten. Om detta inte ger önskat resultat kan du aktivera rutnätslayouten, som strukturerar bildelement med hjälp av ett kolumnbaserat system. För att konfigurera layoutkolumner, välj en sida eller panel och använd tabellen \"Frågeinställningar\" → \"Rutnätskolumner\". För att justera hur många kolumner en fråga sträcker sig över, markera den och ställ in önskat värde i fältet \"Layout\" → \"Kolumnintervall\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Anger hur många kolumner den här frågan sträcker sig över i rutnätslayouten."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I den här tabellen kan du konfigurera varje rutnätskolumn på sidan. Den ställer automatiskt in breddprocenten för varje kolumn baserat på det maximala antalet element i en rad. Om du vill anpassa rutnätslayouten justerar du dessa värden manuellt och definierar rubrikbredden för alla frågor i varje kolumn."
+
+// ed.expandTooltip: "Expand" => "Expandera"
+// ed.collapseTooltip: "Collapse" => "Kollaps"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Ställer in konsekvent bredd för alla objektetiketter. Accepterar CSS-värden (px, %, in, pt, etc.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zooma till 100 %"

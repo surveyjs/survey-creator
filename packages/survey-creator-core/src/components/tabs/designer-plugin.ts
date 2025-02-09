@@ -38,15 +38,22 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     return this.creator.isElementSelected(<any>this.creator.survey);
   }
   private get isSettingsActive(): boolean {
-    return this.creator.showSidebar && this.isSurveySelected;
+    const activePage = this.creator.sidebar.activePage;
+    return notShortCircuitAnd(this.creator.showSidebar,
+      this.isSurveySelected,
+      activePage !== this.propertyGridPlaceholderPage.id);
   }
   private get activePageIsPropertyGrid(): boolean {
     return this.creator.sidebar.activePage === this.propertyGridTab.id;
   }
+  private createSelectedUpdater() {
+    return <any>new ComputedUpdater<boolean>(() => {
+      return this.isSettingsActive;
+    });
+  }
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => {
-      const activePage = this.creator.sidebar.activePage;
-      return notShortCircuitAnd(this.creator.activeTab === "designer", activePage !== this.propertyGridPlaceholderPage.id);
+      return this.creator.activeTab === "designer";
     });
   }
   private updateTabControl() {
@@ -404,7 +411,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
           });
         }
       },
-      active: this.isSettingsActive,
+      active: this.createSelectedUpdater(),
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.surveySettings",
       locTooltipName: "ed.surveySettingsTooltip",

@@ -107,10 +107,12 @@ export var skStrings = {
     redo: "Opakovať",
     undoTooltip: "Zrušiť poslednú zmenu",
     redoTooltip: "Opakovať zmenu",
+    expandTooltip: "Rozšíriť",
+    collapseTooltip: "Kolaps",
     expandAllTooltip: "Rozbaliť všetko",
     collapseAllTooltip: "Zbaliť všetko",
     zoomInTooltip: "Priblížiť",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "Priblíženie na 100 %",
     zoomOutTooltip: "Oddialiť",
     lockQuestionsTooltip: "Uzamknutie stavu rozbalenia/zbalenia otázok",
     showMoreChoices: "Zobraziť viac",
@@ -902,6 +904,7 @@ export var skStrings = {
     maxWidth_placeholder: "Napríklad: 50%",
     imageHeight_placeholder: "auto",
     imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Príklad: 100px",
     theme: {
       themeName: "Téma",
       isPanelless: "Vzhľad otázky",
@@ -1559,7 +1562,7 @@ export var skStrings = {
     selectToRankEnabled: "Povoľte zoradiť iba vybrané možnosti. Používatelia presunú vybrané položky zo zoznamu možností a zoradia ich v oblasti poradia.",
     dataList: "Zadajte zoznam možností, ktoré budú respondentovi navrhnuté počas vstupu.",
     inputSize: "Toto nastavenie zmení iba veľkosť vstupných polí a neovplyvní šírku poľa otázok.",
-    itemTitleWidth: "Nastavuje konzistentnú šírku pre všetky štítky položiek v pixeloch",
+    itemTitleWidth: "Nastaví konzistentnú šírku pre všetky štítky položiek. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
     inputTextAlignment: "Vyberte, ako chcete zarovnať vstupnú hodnotu v poli. Predvolené nastavenie \"Auto\" zarovná vstupnú hodnotu doprava, ak je použité maskovanie meny alebo čísel, a doľava, ak nie.",
     altText: "Slúži ako náhrada, keď obrázok nie je možné zobraziť na zariadení používateľa a na účely prístupnosti.",
     rateColorMode: "Definuje farbu vybraných emodži, keď je typ ikony hodnotenia nastavený na \"Smajlíky\". Vyberte si medzi: \"Predvolené\" - vybrané emodži sa zobrazia v predvolenej farbe prieskumu; \"Mierka\" - vybrané emodži zdedí farbu z hodnotiacej stupnice.",
@@ -2937,7 +2940,6 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "Zatiaľ nemáte žiadne stránky"
 // pe.addNew@pages: "Add new page" => "Pridať novú stránku"
 // ed.zoomInTooltip: "Zoom In" => "Priblížiť"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "Oddialiť"
 // tabs.surfaceBackground: "Surface Background" => "Pozadie povrchu"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Predvolené použitie odpovedí z posledného záznamu"
@@ -2975,3 +2977,9 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Aplikácia Survey Creator umožňuje manuálne upraviť vnorené šírky prvkov formulára na ovládanie rozloženia. Ak to neprinesie požadovaný výsledok, môžete povoliť rozloženie mriežky, ktoré štruktúry tvoria prvky pomocou systému založeného na stĺpcoch. Ak chcete nakonfigurovať stĺpce rozloženia, vyberte stránku alebo panel a použite tabuľku \"Nastavenia otázky\" → \"Stĺpce mriežky\". Ak chcete upraviť, koľko stĺpcov otázka zahŕňa, vyberte ju a nastavte požadovanú hodnotu v poli \"Rozloženie\" → \"Rozsah stĺpcov\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Určuje, koľko stĺpcov táto otázka zahŕňa v rozložení mriežky."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Táto tabuľka umožňuje nakonfigurovať každý stĺpec mriežky na strane. Automaticky nastaví percentuálnu šírku pre každý stĺpec na základe maximálneho počtu prvkov v riadku. Ak chcete prispôsobiť rozloženie mriežky, manuálne upravte tieto hodnoty a definujte šírku názvu pre všetky otázky v každom stĺpci."
+
+// ed.expandTooltip: "Expand" => "Rozšíriť"
+// ed.collapseTooltip: "Collapse" => "Kolaps"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Príklad: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentnú šírku pre všetky štítky položiek. Akceptuje hodnoty CSS (px, %, in, pt atď.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Priblíženie na 100 %"

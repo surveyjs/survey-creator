@@ -107,10 +107,12 @@ export var arStrings = {
     redo: "Redo",
     undoTooltip: "Undo last change",
     redoTooltip: "Redo the change",
+    expandTooltip: "ستوسع",
+    collapseTooltip: "تقوض",
     expandAllTooltip: "توسيع الكل",
     collapseAllTooltip: "طي الكل",
     zoomInTooltip: "تكبير",
-    zoom100Tooltip: "100%",
+    zoom100Tooltip: "تكبير إلى 100٪",
     zoomOutTooltip: "التصغير",
     lockQuestionsTooltip: "تأمين حالة التوسيع/الطي للأسئلة",
     showMoreChoices: "استعراض المزيد",
@@ -902,6 +904,7 @@ export var arStrings = {
     maxWidth_placeholder: "مثال: 50٪",
     imageHeight_placeholder: "تلقائي",
     imageWidth_placeholder: "تلقائي",
+    itemTitleWidth_placeholder: "على سبيل المثال: 100 بكسل",
     theme: {
       themeName: "موضوع",
       isPanelless: "مظهر السؤال",
@@ -1559,7 +1562,7 @@ export var arStrings = {
     selectToRankEnabled: "تمكين لترتيب الخيارات المحددة فقط. سيقوم المستخدمون بسحب العناصر المحددة من قائمة الاختيار لترتيبها داخل منطقة الترتيب.",
     dataList: "أدخل قائمة بالخيارات التي سيتم اقتراحها على المستجيب أثناء الإدخال.",
     inputSize: "يغير الإعداد حجم حقول الإدخال فقط ولا يؤثر على عرض مربع السؤال.",
-    itemTitleWidth: "يضبط عرضا متناسقا لكل تسميات العناصر بالبكسل",
+    itemTitleWidth: "لتعيين عرض متسق لجميع تسميات الأصناف. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ).",
     inputTextAlignment: "حدد كيفية محاذاة قيمة الإدخال داخل الحقل. يقوم الإعداد الافتراضي \"تلقائي\" بمحاذاة قيمة الإدخال إلى اليمين إذا تم تطبيق إخفاء العملة أو الرقمية وإلى اليسار إذا لم يكن كذلك.",
     altText: "يعمل كبديل عندما يتعذر عرض الصورة على جهاز المستخدم ولأغراض إمكانية الوصول.",
     rateColorMode: "يحدد لون الرموز التعبيرية المحددة عند تعيين نوع رمز التقييم على \"الوجوه الضاحكة\". اختر بين: \"افتراضي\" - يظهر الرمز التعبيري المحدد بلون الاستطلاع الافتراضي ؛ \"مقياس\" - يرث الرمز التعبيري المحدد اللون من مقياس التصنيف.",
@@ -2897,7 +2900,6 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pe.listIsEmpty@pages: "You don't have any pages yet" => "ليس لديك أي صفحات حتى الآن"
 // pe.addNew@pages: "Add new page" => "إضافة صفحة جديدة"
 // ed.zoomInTooltip: "Zoom In" => "تكبير"
-// ed.zoom100Tooltip: "100%" => "100%"
 // ed.zoomOutTooltip: "Zoom Out" => "التصغير"
 // tabs.surfaceBackground: "Surface Background" => "خلفية السطح"
 // pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "استخدام الإجابات من الإدخال الأخير كإعداد افتراضي"
@@ -2936,3 +2938,9 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "يسمح لك Survey Creator بضبط العروض المضمنة لعناصر النموذج يدويا للتحكم في التخطيط. إذا لم يؤد ذلك إلى النتيجة المرجوة، فيمكنك تمكين تخطيط الشبكة، الذي يقوم ببناء عناصر التشكيل باستخدام نظام قائم على الأعمدة. لتكوين أعمدة التخطيط، حدد صفحة أو لوحة واستخدم جدول \"إعدادات الأسئلة\" → \"أعمدة الشبكة\". لضبط عدد الأعمدة التي يمتد إليها السؤال، حدده وقم بتعيين القيمة المطلوبة في حقل \"التخطيط\" → \"امتداد العمود\"."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "يتيح لك هذا الجدول تكوين كل عمود شبكة على الصفحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
+
+// ed.expandTooltip: "Expand" => "ستوسع"
+// ed.collapseTooltip: "Collapse" => "تقوض"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "على سبيل المثال: 100 بكسل"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "لتعيين عرض متسق لجميع تسميات الأصناف. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "تكبير إلى 100٪"
