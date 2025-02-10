@@ -366,6 +366,17 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return false;
   }
 
+  private isDragInsideItself(dragOverNodes: Array<HTMLElement>): boolean {
+    //https://github.com/surveyjs/survey-creator/issues/6536
+    let result = false;
+    dragOverNodes.forEach((node) => {
+      if (node.classList.contains("svc-question__content--dragged")) {
+        result = true;
+      }
+    });
+    return result;
+  }
+
   public dragOver(event: PointerEvent): void {
     const dropTargetNode = this.findDropTargetNodeFromPoint(
       event.clientX,
@@ -376,6 +387,12 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       this.banDropHere();
       return;
     }
+
+    if (this.isDragInsideItself(<Array<HTMLElement>>document.elementsFromPoint(event.clientX, event.clientY))) {
+      this.banDropHere();
+      return null;
+    }
+
     const oldInsideContainer = this.insideContainer;
     this.insideContainer = !calculateIsEdge(dropTargetNode, event.clientY) && !calculateIsSide(dropTargetNode, event.clientX);
     const dropTarget = this.getDropTargetByNode(dropTargetNode, event);
