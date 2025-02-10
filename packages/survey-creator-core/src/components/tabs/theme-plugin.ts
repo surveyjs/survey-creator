@@ -250,6 +250,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.propertyGrid = new PropertyGridModel(undefined, creator, themeModelPropertyGridDefinition);
     this.propertyGrid.surveyInstanceCreatedArea = "theme-tab:property-grid";
+    this.showOneCategoryInPropertyGrid = creator.showOneCategoryInPropertyGrid;
     this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridTab = this.creator.sidebar.addPage("theme", "svc-property-grid", propertyGridViewModel);

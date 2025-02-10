@@ -204,6 +204,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     creator.addPluginTab("designer", this);
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.propertyGrid = new PropertyGridModel(undefined, creator, creator.getPropertyGridDefinition());
+    this.showOneCategoryInPropertyGrid = creator.showOneCategoryInPropertyGrid;
     this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     this.propertyGrid.obj = creator.survey;
     this.propertyGrid.onSetNewObjectCallback = () => {
