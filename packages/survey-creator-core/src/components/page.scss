@@ -238,10 +238,14 @@ svc-page {
 .svc-page__content--new.svc-page__content--new {
   box-shadow: none;
   background-color: transparent;
-  padding-top: var(--ctr-survey-page-margin-top, var(--lbr-spacing-x2));
   padding-bottom: var(--ctr-survey-page-margin-bottom-new-page, var(--lbr-spacing-x9));
   .svc-page-toolbar {
     display: none;
+  }
+}
+.svc-designer-placeholder-page {
+  .svc-page__content--new.svc-page__content--new {
+    padding-top: var(--ctr-survey-page-margin-top, var(--lbr-spacing-x2));
   }
 }
 
@@ -303,7 +307,8 @@ svc-page {
   }
 
   &.svc-page__content--collapsed-drag-over-inside {
-    box-shadow: 0 0 0 var(--ctr-survey-page-border-width-overing, var(--lbr-stroke-x2)) var(--ctr-survey-page-border-color-overing, var(--sjs-primary-background-500, #19b394ff));
+    box-shadow: 0 0 0 var(--ctr-survey-page-border-width-overing, var(--lbr-stroke-x2))
+      var(--ctr-survey-page-border-color-overing, var(--sjs-primary-background-500, #19b394ff));
     background: var(--ctr-survey-page-background-color-overing, var(--sjs-primary-background-10, #19b3941a));
     animation: collapsed-drag-over-inside-blinking 1s infinite;
     outline-color: transparent;
@@ -340,7 +345,8 @@ svc-page {
 
   .svc-page__content:not(.svc-page__content--new):focus,
   .svc-hovered.svc-page__content:not(.svc-page__content--new) {
-    box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-hovered, var(--sjs-secondary-background-25, #19b39440));
+    box-shadow: 0 0 0 2px inset
+      var(--ctr-survey-page-border-color-hovered, var(--sjs-secondary-background-25, #19b39440));
   }
 }
 
@@ -441,7 +447,12 @@ svc-page {
   width: 100%;
   height: var(--ctr-survey-drop-indicator-width, var(--lbr-stroke-x2));
   left: 0;
-  top: calc(calc(var(--lbr-page-layout-gap-medium, var(--lbr-spacing-x2)) + var(--ctr-survey-drop-indicator-width, var(--lbr-stroke-x2))) / -2);
+  top: calc(
+    calc(
+        var(--lbr-page-layout-gap-medium, var(--lbr-spacing-x2)) +
+          var(--ctr-survey-drop-indicator-width, var(--lbr-stroke-x2))
+      ) / -2
+  );
 }
 
 .svc-page--drag-over-empty-no-add-button:after {
@@ -564,11 +575,19 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
   --fade-animation-delay: 0s;
   --move-animation-delay: #{$svc-page-move-out-delay};
 }
+.svc-page__content {
+  transition-property: padding-bottom;
+  transition-duration: $svc-page-move-in-duration;
+  transition-timing-function: $ease-out;
+}
 
 .svc-creator--disable-animations {
   .svc-page--enter,
   .svc-page--leave {
     animation: none;
+  }
+  .svc-page__content {
+    transition: none;
   }
 }
 
