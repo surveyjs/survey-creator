@@ -1089,6 +1089,13 @@ export class PropertyGridModel {
     if (!this.survey) return;
     return !this.survey.hasErrors(true, true);
   }
+  public activateCategory(name: string) {
+    if (this.showOneCategoryInPropertyGrid) {
+      this.survey.currentPage = name;
+    } else {
+      this.expandCategory(name);
+    }
+  }
   public collapseCategory(name: string) {
     var panel = <PanelModel>this.survey.getPanelByName(name);
     if (!!panel) {
@@ -1096,6 +1103,10 @@ export class PropertyGridModel {
     }
   }
   public expandCategory(name: string) {
+    if (this.showOneCategoryInPropertyGrid) {
+      this.survey.currentPage = name;
+      return;
+    }
     var panel = <PanelModel>this.survey.getPanelByName(name);
     if (!!panel) {
       panel.expand();
