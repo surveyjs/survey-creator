@@ -947,6 +947,13 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    */
   public onAllowModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, allow: boolean }>();
 
+  /**
+   * A Boolean value that indicates or specifies whether the Appearance category displays advanced settings.
+   * 
+   * Default value: `false`
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/change-form-theme/ (linkStyle))
+   */
   public get advancedModeEnabled(): boolean {
     return this._advancedModeValue;
   }
