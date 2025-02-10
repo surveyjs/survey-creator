@@ -12,16 +12,19 @@
 }
 .svc-sidebar-tabs__top-container {
   display: flex;
-  padding: var(--ctr-property-grid-tabs-padding-top, var(--sjs-spacing-x150)) var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150))
-    var(--ctr-property-grid-tabs-padding-bottom, var(--sjs-spacing-x150)) var(--ctr-property-grid-tabs-padding-left, var(--sjs-spacing-x150));
+  padding-top: var(--ctr-property-grid-tabs-padding-top, var(--sjs-spacing-x150));
+  padding-bottom: var(--ctr-property-grid-tabs-padding-bottom, var(--sjs-spacing-x150));
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
   gap: var(--ctr-property-grid-tabs-separator-margin, var(--sjs-spacing-x150));
+  flex-grow: 1;
 }
 .svc-sidebar-tabs__collapse-button {
   display: flex;
   align-items: center;
+  padding-inline-start: var(--ctr-property-grid-tabs-padding-left, var(--sjs-spacing-x150));
+  padding-inline-end: var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150));
 }
 
 [dir="rtl"],
@@ -40,6 +43,8 @@
   align-items: flex-start;
   align-self: stretch;
   margin-top: -1px;
+  padding-inline-start: var(--ctr-property-grid-tabs-padding-left, var(--sjs-spacing-x150));
+  padding-inline-end: var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150));
 
   & > div {
     height: var(--ctr-separator-width, var(--sjs-size-x0125));
@@ -53,12 +58,16 @@
   justify-content: center;
   align-items: flex-end;
   gap: var(--ctr-property-grid-tabs-gap, var(--sjs-spacing-x150));
+  padding-inline-start: var(--ctr-property-grid-tabs-padding-left, var(--sjs-spacing-x150));
+  padding-inline-end: var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150));
 }
 
 .svc-sidebar-tabs:not(.svc-sidebar-tabs--collapsed) .svc-menu-action__button--selected {
   display: flex;
-  padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
+  padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
   justify-content: center;
   align-items: center;
   gap: var(--ctr-menu-toolbar-button-gap, var(--sjs-spacing-x1));
@@ -84,8 +93,8 @@
 }
 .svc-sidebar-tabs__bottom-container {
   display: flex;
-  padding: var(--ctr-property-grid-tabs-padding-top, var(--sjs-spacing-x150)) var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150))
-    var(--ctr-property-grid-tabs-padding-bottom, var(--sjs-spacing-x150)) var(--ctr-property-grid-tabs-padding-left, var(--sjs-spacing-x150));
+  padding-top: var(--ctr-property-grid-tabs-padding-top, var(--sjs-spacing-x150));
+  padding-bottom: var(--ctr-property-grid-tabs-padding-bottom, var(--sjs-spacing-x150));
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
@@ -113,8 +122,10 @@
 .svc-sidebar__header--tabbed,
 .svc-sidebar__header-container {
   min-height: calc(
-    var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3)) + var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1)) +
-      var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1)) + var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150)) +
+    var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3)) +
+      var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1)) +
+      var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1)) +
+      var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150)) +
       var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150))
   );
 }
@@ -122,7 +133,8 @@
 .svc-sidebar__header-container.svc-sidebar__header-container--with-subtitle {
   padding: var(--ctr-property-grid-header-padding-top-with-subtitle, var(--sjs-spacing-x075))
     var(--ctr-property-grid-header-padding-right, var(--sjs-spacing-x2))
-    var(--ctr-property-grid-header-padding-bottom-with-subtitle, var(--sjs-spacing-x075)) var(--ctr-property-grid-header-padding-left, var(--sjs-spacing-x2));
+    var(--ctr-property-grid-header-padding-bottom-with-subtitle, var(--sjs-spacing-x075))
+    var(--ctr-property-grid-header-padding-left, var(--sjs-spacing-x2));
 }
 
 .svc-sidebar__header-container .svc-side-bar__container-title {
@@ -136,8 +148,10 @@
 
 .svc-menu-action__button {
   display: flex;
-  padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
+  padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
   justify-content: center;
   align-items: center;
   gap: var(--ctr-menu-toolbar-button-gap, var(--sjs-spacing-x1));
@@ -157,7 +171,8 @@
 .svc-menu-action__button.svc-menu-action__button--with-subtitle {
   padding: var(--ctr-menu-toolbar-button-padding-top-with-description, var(--sjs-spacing-x05))
     var(--ctr-menu-toolbar-button-padding-right-with-description, var(--sjs-spacing-x150))
-    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-left-with-description, var(--sjs-spacing-x150));
+    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-left-with-description, var(--sjs-spacing-x150));
 }
 
 .svc-menu-action__icon {

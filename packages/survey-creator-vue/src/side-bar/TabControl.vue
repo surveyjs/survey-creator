@@ -10,9 +10,11 @@
       <div class="svc-sidebar-tabs__separator">
         <div></div>
       </div>
-      <div class="svc-sidebar-tabs__items">
-        <SvComponent :is="'svc-tabs'" :model="model.topToolbar"></SvComponent>
-      </div>
+      <Scroll>
+        <div class="svc-sidebar-tabs__items">
+          <SvComponent :is="'svc-tabs'" :model="model.topToolbar"></SvComponent>
+        </div>
+      </Scroll>
     </div>
     <div class="svc-sidebar-tabs__bottom-container">
       <div class="svc-sidebar-tabs__items">
