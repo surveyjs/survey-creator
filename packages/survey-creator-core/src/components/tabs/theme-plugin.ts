@@ -947,10 +947,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    */
   public onAllowModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, allow: boolean }>();
 
-  public get isAppearanceEditingAdvancedMode(): boolean {
+  public get advancedModeEnabled(): boolean {
     return this._advancedModeValue;
   }
-  public set isAppearanceEditingAdvancedMode(newValue: boolean) {
+  public set advancedModeEnabled(newValue: boolean) {
     this._advancedModeValue = newValue;
     this.updateAdvancedModeQuestion(newValue);
   }
