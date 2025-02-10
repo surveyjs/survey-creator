@@ -946,4 +946,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    * A Boolean property that you can set to `false` if you want to disallow theme modifications.
    */
   public onAllowModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, allow: boolean }>();
+
+  public get isAppearanceEditingAdvancedMode(): boolean {
+    return this._advancedModeValue;
+  }
+  public set isAppearanceEditingAdvancedMode(newValue: boolean) {
+    this._advancedModeValue = newValue;
+    this.updateAdvancedModeQuestion(newValue);
+  }
 }
