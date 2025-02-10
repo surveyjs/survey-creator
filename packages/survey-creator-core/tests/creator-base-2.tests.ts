@@ -388,3 +388,23 @@ test("onElementAllowOperations for pages and allowDragging in page adorner", ():
   expect(reason).toHaveLength(3);
   expect(reason[2]).toBeTruthy();
 });
+
+test("Show/hide creator settings", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.sidebar.activePage).toBe("propertyGridPlaceholder");
+
+  creator.openCreatorThemeSettings();
+  expect(creator.sidebar.activePage).toBe("creatorTheme");
+
+  creator.closeCreatorThemeSettings();
+  expect(creator.sidebar.activePage).toBe("propertyGridPlaceholder");
+});
+
+test("activatePropertyGridCategory function", (): any => {
+  const creator = new CreatorTester();
+  let propertyGrid = creator["designerPropertyGrid"];
+  expect(propertyGrid.survey.currentPage.name).toBe("general");
+
+  creator.activatePropertyGridCategory("pages");
+  expect(propertyGrid.survey.currentPage.name).toBe("pages");
+});

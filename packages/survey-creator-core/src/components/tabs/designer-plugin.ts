@@ -33,6 +33,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private designerAction: Action;
   public designerStateManager: DesignerStateManager;
   private tabControlModel: TabControlModel;
+  private prevActivePage: string;
 
   private get isSurveySelected(): boolean {
     return this.creator.isElementSelected(<any>this.creator.survey);
@@ -182,7 +183,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.creator.onCreatorThemePropertyChanged.fire(this.creator, options);
     });
 
-    let prevActivePage;
     const settingsAction = new MenuButton({
       id: "theme-settings",
       locTooltipName: "ed.creatorSettingTitle",
@@ -190,12 +190,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       iconSize: "auto",
       pressed: false,
       action: () => {
-        this.creator.sidebar.expandSidebar();
         if (settingsAction.active) {
-          this.setActivePage(prevActivePage || this.propertyGridTab.id);
+          this.closeCreatorThemeSettings();
         } else {
-          prevActivePage = this.creator.sidebar.activePage;
-          this.setActivePage(this.themePropertyGridTab.id);
+          this.openCreatorThemeSettings();
         }
       }
     });
@@ -327,7 +325,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
           this.creator.sidebar.expandSidebar();
           this.setPropertyGridIsActivePage();
           this.propertyGrid.survey.currentPage = p;
-          this.propertyGridViewModel.objectSelectionAction.title = p.title;
           pgTabs.forEach(i => i.active = false);
           action.active = true;
         }
@@ -479,5 +476,15 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.creator.footerToolbar.actions.push(this.designerAction);
     this.creator.footerToolbar.actions.push(this.previewAction);
     this.creator.footerToolbar.actions.push(this.surveySettingsAction);
+  }
+
+  public openCreatorThemeSettings(): void {
+    this.creator.sidebar.expandSidebar();
+    this.prevActivePage = this.creator.sidebar.activePage;
+    this.setActivePage(this.themePropertyGridTab.id);
+  }
+
+  public closeCreatorThemeSettings(): void {
+    this.setActivePage(this.prevActivePage || this.propertyGridTab.id);
   }
 }

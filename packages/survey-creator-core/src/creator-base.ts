@@ -3085,6 +3085,26 @@ export class SurveyCreatorModel extends Base
     return val;
   }
 
+  public openCreatorThemeSettings(): void {
+    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    if (designerPlugin) {
+      designerPlugin.openCreatorThemeSettings();
+    }
+  }
+
+  public closeCreatorThemeSettings(): void {
+    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    if (designerPlugin) {
+      designerPlugin.closeCreatorThemeSettings();
+    }
+  }
+
+  public activatePropertyGridCategory(name: string): void {
+    if (!!this.designerPropertyGrid) {
+      this.designerPropertyGrid.activateCategory(name);
+    }
+  }
+
   //#region Obsolete designerPropertyGrid
   protected get designerPropertyGrid(): PropertyGridModel {
     const propertyGridTab = this.sidebar.getPageById("propertyGrid");
