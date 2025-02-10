@@ -53,6 +53,11 @@ export interface ICreatorOptions {
    */
   showThemeTab?: boolean;
   showCreatorThemeSettings?: boolean;
+  /**
+   * Specifies whether the "Zoom In", "Zoom Out", and "Zoom to 100%" buttons are available.
+   * 
+   * Default value: `true`
+   */
   allowZoom?: boolean;
   /**
    * Specifies whether to call the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) and [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) functions each time survey or theme settings are changed.

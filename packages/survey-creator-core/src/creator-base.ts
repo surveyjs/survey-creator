@@ -181,6 +181,11 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: false }) showThemeTab: boolean;
   @property({ defaultValue: true }) showCreatorThemeSettings: boolean;
+  /**
+   * Specifies whether the "Zoom In", "Zoom Out", and "Zoom to 100%" buttons are available.
+   * 
+   * Default value: `true`
+   */
   @property({ defaultValue: true }) allowZoom: boolean;
   /**
    * Specifies whether to display the Translation tab.
