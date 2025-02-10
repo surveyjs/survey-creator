@@ -289,4 +289,7 @@ Object.keys(themeNameMap).forEach(themeName => {
     }
   });
 });
+indexFileContent += `\nif (typeof window !== "undefined" && typeof window["SurveyCreatorCore"] !== "undefined") {
+  window["SurveyCreatorCore"].registerDefaultThemes();
+}\n`;
 fs.writeFileSync(_dirPath + "index.ts", indexFileContent);
