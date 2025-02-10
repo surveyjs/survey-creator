@@ -3,7 +3,7 @@ import { Action, ActionContainer, Base } from "survey-core";
 import { SurveyElementBase, ReactElementFactory } from "survey-react-ui";
 import { MenuButton, TabControlModel } from "survey-creator-core";
 import { TabButtonComponent } from "./TabButton";
-import { ScrollComponent } from "src/components/Scroll";
+import { ScrollComponent } from "../components/Scroll";
 
 interface ITabControlProps {
   model?: TabControlModel;

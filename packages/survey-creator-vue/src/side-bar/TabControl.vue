@@ -30,6 +30,7 @@
 <script lang="ts" setup>
 import { TabControlModel } from "survey-creator-core";
 import { SvComponent, useBase } from "survey-vue3-ui";
+import Scroll from "@/components/Scroll.vue";
 const props = defineProps<{ model: TabControlModel }>();
 
 useBase(() => props.model);
