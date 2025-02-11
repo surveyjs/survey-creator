@@ -121,6 +121,17 @@ test("property grid search matrix", async (t) => {
   });
 });
 
+test("tabbed mode - scrollable tabs", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 530);
+    await ClientFunction(() => {
+      window["creator"].showOneCategoryInPropertyGrid = true;
+    })();
+    await t.hover(".svc-sidebar-tabs");
+    await takeElementScreenshot("side-bar-tabs-scrollable.png", ".svc-sidebar-tabs", t, comparer);
+  });
+});
+
 const themeTabUrl = url.replace(/\/testcafe$/, "/testcafe-theme-tab");
 test.page(themeTabUrl)("tabbed mode", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
