@@ -178,7 +178,8 @@ module.exports = function (options) {
             {
               loader: MiniCssExtractPlugin.loader,
               options: {
-                publicPath: ""
+                publicPath: "",
+                emit: emitStyles
               }
             },
             {
@@ -259,9 +260,6 @@ module.exports = function (options) {
       }),
     ],
   };
-  if (!emitStyles) {
-    config.plugins.push(new webpack.IgnorePlugin({ resourceRegExp: /\.scss$/ }));
-  }
   if (isProductionBuild) {
     config.plugins.push = config.plugins.concat([]);
   } else {
