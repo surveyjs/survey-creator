@@ -181,6 +181,11 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: false }) showThemeTab: boolean;
   @property({ defaultValue: true }) showCreatorThemeSettings: boolean;
+  /**
+   * Specifies whether the "Zoom In", "Zoom Out", and "Zoom to 100%" buttons are available.
+   * 
+   * Default value: `true`
+   */
   @property({ defaultValue: true }) allowZoom: boolean;
   /**
    * Specifies whether to display the Translation tab.
@@ -3078,6 +3083,26 @@ export class SurveyCreatorModel extends Base
     if (options.element != val) return options.element;
     if (options.newSelectedElement != val) return options.newSelectedElement;
     return val;
+  }
+
+  public openCreatorThemeSettings(): void {
+    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    if (designerPlugin) {
+      designerPlugin.openCreatorThemeSettings();
+    }
+  }
+
+  public closeCreatorThemeSettings(): void {
+    const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
+    if (designerPlugin) {
+      designerPlugin.closeCreatorThemeSettings();
+    }
+  }
+
+  public activatePropertyGridCategory(name: string): void {
+    if (!!this.designerPropertyGrid) {
+      this.designerPropertyGrid.activateCategory(name);
+    }
   }
 
   //#region Obsolete designerPropertyGrid

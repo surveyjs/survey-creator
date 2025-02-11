@@ -6,15 +6,19 @@ import { CreatorThemes, defaultCreatorThemesOrder, ICreatorTheme, PredefinedCrea
 import * as Themes from "survey-creator-core/themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
 
-const importedThemeNames = [];
-Object.keys(Themes || {}).forEach(themeName => {
-  const theme: ICreatorTheme = Themes[themeName];
-  if (importedThemeNames.indexOf(theme.themeName) === -1) {
-    importedThemeNames.push(theme.themeName);
-  }
-  CreatorThemes[theme.themeName] = theme;
-});
-sortDefaultThemes(defaultCreatorThemesOrder, importedThemeNames, PredefinedCreatorThemes);
+export function registerDefaultThemes(themes: {}) {
+  if (!themes) return;
+  const importedThemeNames = [];
+  Object.keys(themes).forEach(themeName => {
+    const theme: ICreatorTheme = themes[themeName];
+    if (importedThemeNames.indexOf(theme.themeName) === -1) {
+      importedThemeNames.push(theme.themeName);
+    }
+    CreatorThemes[theme.themeName] = theme;
+  });
+  sortDefaultThemes(defaultCreatorThemesOrder, importedThemeNames, PredefinedCreatorThemes);
+}
+registerDefaultThemes(Themes);
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";

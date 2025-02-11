@@ -250,6 +250,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.propertyGrid = new PropertyGridModel(undefined, creator, themeModelPropertyGridDefinition);
     this.propertyGrid.surveyInstanceCreatedArea = "theme-tab:property-grid";
+    this.showOneCategoryInPropertyGrid = creator.showOneCategoryInPropertyGrid;
     this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridTab = this.creator.sidebar.addPage("theme", "svc-property-grid", propertyGridViewModel);
@@ -946,4 +947,19 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    * A Boolean property that you can set to `false` if you want to disallow theme modifications.
    */
   public onAllowModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, allow: boolean }>();
+
+  /**
+   * A Boolean value that indicates or specifies whether the Appearance category displays advanced settings.
+   * 
+   * Default value: `false`
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/change-form-theme/ (linkStyle))
+   */
+  public get advancedModeEnabled(): boolean {
+    return this._advancedModeValue;
+  }
+  public set advancedModeEnabled(newValue: boolean) {
+    this._advancedModeValue = newValue;
+    this.updateAdvancedModeQuestion(newValue);
+  }
 }

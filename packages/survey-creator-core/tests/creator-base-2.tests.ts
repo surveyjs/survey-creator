@@ -57,6 +57,7 @@ import { ObjectSelector } from "../src/property-grid/object-selector";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
+import { ThemeTabPlugin } from "../src/components/tabs/theme-plugin";
 
 test("onModified is raised for mask settings", (): any => {
   const creator = new CreatorTester();
@@ -265,6 +266,44 @@ test("propertyGridNavigationMode property", (): any => {
   expect(creator.propertyGridNavigationMode).toBe("accordion");
 });
 
+test("Plugin showOneCategoryInPropertyGrid by default", (): any => {
+  const creator = new CreatorTester({ showThemeTab: true, showTranslationTab: true });
+  const designerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  const translationPlugin = <TabTranslationPlugin>(creator.getPlugin("translation"));
+  expect(creator.showOneCategoryInPropertyGrid).toBeTruthy();
+  expect(designerPlugin.showOneCategoryInPropertyGrid).toBeTruthy();
+  expect(themePlugin.showOneCategoryInPropertyGrid).toBeTruthy();
+  expect(translationPlugin.showOneCategoryInPropertyGrid).toBeTruthy();
+
+  creator.propertyGridNavigationMode = "accordion";
+  expect(creator.showOneCategoryInPropertyGrid).toBeFalsy();
+  expect(designerPlugin.showOneCategoryInPropertyGrid).toBeFalsy();
+  expect(themePlugin.showOneCategoryInPropertyGrid).toBeFalsy();
+  expect(translationPlugin.showOneCategoryInPropertyGrid).toBeFalsy();
+});
+
+test("Set propertyGridNavigationMode property by options", (): any => {
+  const creator = new CreatorTester({
+    propertyGridNavigationMode: "accordion",
+    showThemeTab: true,
+    showTranslationTab: true
+  });
+  const designerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  const translationPlugin = <TabTranslationPlugin>(creator.getPlugin("translation"));
+  expect(creator.showOneCategoryInPropertyGrid).toBeFalsy();
+  expect(designerPlugin.showOneCategoryInPropertyGrid).toBeFalsy();
+  expect(themePlugin.showOneCategoryInPropertyGrid).toBeFalsy();
+  expect(translationPlugin.showOneCategoryInPropertyGrid).toBeFalsy();
+
+  creator.propertyGridNavigationMode = "buttons";
+  expect(creator.showOneCategoryInPropertyGrid).toBeTruthy();
+  expect(designerPlugin.showOneCategoryInPropertyGrid).toBeTruthy();
+  expect(themePlugin.showOneCategoryInPropertyGrid).toBeTruthy();
+  expect(translationPlugin.showOneCategoryInPropertyGrid).toBeTruthy();
+});
+
 test("showSurfaceTools", (): any => {
   const creator = new CreatorTester();
   creator.expandCollapseButtonVisibility = "never";
@@ -387,4 +426,24 @@ test("onElementAllowOperations for pages and allowDragging in page adorner", ():
   expect(pageAdorner.allowDragging).toBeFalsy();
   expect(reason).toHaveLength(3);
   expect(reason[2]).toBeTruthy();
+});
+
+test("Show/hide creator settings", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.sidebar.activePage).toBe("propertyGridPlaceholder");
+
+  creator.openCreatorThemeSettings();
+  expect(creator.sidebar.activePage).toBe("creatorTheme");
+
+  creator.closeCreatorThemeSettings();
+  expect(creator.sidebar.activePage).toBe("propertyGridPlaceholder");
+});
+
+test("activatePropertyGridCategory function", (): any => {
+  const creator = new CreatorTester();
+  let propertyGrid = creator["designerPropertyGrid"];
+  expect(propertyGrid.survey.currentPage.name).toBe("general");
+
+  creator.activatePropertyGridCategory("pages");
+  expect(propertyGrid.survey.currentPage.name).toBe("pages");
 });
