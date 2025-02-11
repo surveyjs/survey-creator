@@ -2145,7 +2145,12 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragOverLocationCalculating = (options) => { this.onDragOverLocationCalculating.fire(this, options); };
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
-      isDraggedFromToolbox = !sender.draggedElement.parent && !sender.draggedElement.isPage;
+      const element = sender.draggedElement;
+      isDraggedFromToolbox = !element.parent && !element.isPage;
+      if (!!element && element.isPage && this.collapseOnDrag) {
+        this.designerStateManager?.suspend();
+        this.collapseAllPagesOnDragStart(element);
+      }
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
     });
