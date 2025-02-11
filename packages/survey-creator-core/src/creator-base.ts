@@ -4288,13 +4288,20 @@ export class SurveyCreatorModel extends Base
 
   @property({ defaultValue: {} }) themeVariables: { [index: string]: string } = {};
   /**
-   * Gets or sets a theme for the Survey Creator UI.
+   * A theme for the Survey Creator UI.
+   * @see applyCreatorTheme
    * @see showCreatorThemeSettings
    */
   @property() creatorTheme: ICreatorTheme;
 
   public preferredColorPalette: string = "light";
 
+  /**
+   * Applies a specified UI theme to Survey Creator.
+   * @param theme An `ICreatorTheme` object with theme settings.
+   * @see creatorTheme
+   * @see showCreatorThemeSettings
+   */
   public applyCreatorTheme(theme: ICreatorTheme): void {
     this.syncTheme(theme);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
