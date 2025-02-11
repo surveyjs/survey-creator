@@ -3439,5 +3439,7 @@
   --lbr-popup-toolbar-header-padding-right: var(--lbr-spacing-x1);
   --lbr-popup-toolbar-header-padding-left: var(--lbr-spacing-x2);
   --lbr-separator-width: var(--lbr-stroke-x1);
+  --lbr-cover-row-gap: var(--lbr-spacing-x150);
+  --lbr-cover-column-gap: var(--lbr-spacing-x6);
 }
 
