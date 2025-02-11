@@ -36,6 +36,7 @@ const buildPlatformJson = {
   files: [
     "**/*"
   ],
+  module: "fesm/survey-creator-react.js",
   main: packageJson.name + ".js",
   repository: {
     type: "git",
@@ -61,28 +62,33 @@ const buildPlatformJson = {
   devDependencies: {}
 };
 
+function getPercentageHandler(emitNonSourceFiles, buildPath) {
+  return function (percentage, msg) {
+    if (0 == percentage) {
+      console.log("Build started... good luck!");
+    } else if (1 == percentage && emitNonSourceFiles) {
+      fs.createReadStream("./README.md").pipe(
+        fs.createWriteStream(buildPath + "README.md")
+      );
+      fs.writeFileSync(
+        buildPath + "package.json",
+        JSON.stringify(buildPlatformJson, null, 2),
+        "utf8"
+      );
+    }
+  };
+}
+
+
 module.exports = function (options) {
   const buildPath = __dirname + "/build/";
   const isProductionBuild = options.buildType === "prod";
+  const emitDeclarations = !!options.emitDeclarations;
+  const emitNonSourceFiles = !!options.emitNonSourceFiles;
 
-  const percentage_handler = function handler(percentage, msg) {
-    if (0 == percentage) {
-      console.log("Build started... good luck!");
-    } else if (1 == percentage) {
-      if (isProductionBuild) {
-        fs.createReadStream("./README.md").pipe(
-          fs.createWriteStream(buildPath + "README.md")
-        );
-      }
-
-      if (isProductionBuild) {
-        fs.writeFileSync(
-          buildPath + "package.json",
-          JSON.stringify(buildPlatformJson, null, 2),
-          "utf8"
-        );
-      }
-    }
+  const compilerOptions = emitDeclarations ? {} : {
+    declaration: false,
+    declarationDir: null
   };
 
   const config = {
@@ -105,6 +111,10 @@ module.exports = function (options) {
         {
           test: /\.(ts|tsx)$/,
           loader: "ts-loader",
+          options: {
+            configFile: options.tsConfigFile || "tsconfig.json",
+            compilerOptions
+          }
         },
         {
           test: /\.s(c|a)ss$/,
@@ -184,7 +194,7 @@ module.exports = function (options) {
     },
     plugins: [
       new DashedNamePlugin(),
-      new webpack.ProgressPlugin(percentage_handler),
+      new webpack.ProgressPlugin(getPercentageHandler(emitNonSourceFiles, buildPath)),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version)
