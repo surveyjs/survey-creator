@@ -289,4 +289,7 @@ Object.keys(themeNameMap).forEach(themeName => {
     }
   });
 });
+indexFileContent += `\nif (typeof window !== "undefined" && typeof window["SurveyCreatorCore"] !== "undefined") {
+  window["SurveyCreatorCore"].registerDefaultThemes({ SC2020: SC2020, DefaultDark: DefaultDark, DefaultContrast: DefaultContrast });
+}\n`;
 fs.writeFileSync(_dirPath + "index.ts", indexFileContent);
