@@ -2064,7 +2064,14 @@ test("Drag Drop page with other pages collapsed on start drag", async (t) => {
     .dispatchEvent(page4DragHandle, "pointerdown")
     .hover(page4, { speed: 0.05 })
     .expect(page4.hasClass("svc-page__content--dragged")).ok()
-    .expect(Selector(".svc-page__content--collapsed").count).eql(4)
+    .expect(Selector(".svc-page__content--collapsed").count).eql(4);
+
+  const pageRectBottom = await page1.getBoundingClientRectProperty("bottom");
+
+  await t
+    .hover(Selector("#survey-creator"), { offsetX: 50, offsetY: Math.round(pageRectBottom) + 8 })
+    .expect(page1.find(".svc-question__drop-indicator--top").visible).notOk()
+    .expect(page1.find(".svc-question__drop-indicator--bottom").visible).ok()
     .hover(page1, { offsetX: 150, offsetY: 60, speed: 0.05 })
     .expect(page1.find(".svc-question__drop-indicator--top").visible).notOk()
     .expect(page1.find(".svc-question__drop-indicator--bottom").visible).ok()
