@@ -226,7 +226,7 @@
 
     .svc-logic-tab__content-action {
       // width: calcSize(33);
-      margin-top: calcSize(1);
+      margin: 0;
     }
   }
 
@@ -259,17 +259,12 @@
   }
 }
 
-.svc-logic-tab__content-empty {
-  .svc-btn__text {
-    color: var(--ctr-surface-placeholder-text-description-color, var(--sjs-layer-3-foreground-50, #00000080));
-  }
-}
-
 .svc-logic-paneldynamic {
   .sd-row--multiple {
     padding: 0;
     background: none;
     box-shadow: none;
+    
     border-radius: 0;
     overflow: visible;
   }

@@ -106,6 +106,7 @@ svc-tab-designer {
 .svc-tab-designer--with-placeholder {
   .svc-tab-designer_content {
     display: flex;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
     min-height: 100%;
@@ -127,7 +128,6 @@ svc-tab-designer {
 
 .svc-designer__placeholder-container {
   display: flex;
-  flex-grow: 1;
   flex-shrink: 0;
   width: 100%;
   flex-direction: column;

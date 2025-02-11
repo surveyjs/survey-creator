@@ -1,11 +1,9 @@
 <ng-template #template>
   <div class="svc-creator-tab__content svc-test-tab__content"
     [class.svc-creator-tab__content--with-toolbar]="model.isPageToolbarVisible">
-    <div *ngIf="model.survey.isEmpty" class="svc-test-tab--empty">
-      <svc-surface-placeholder [name]="'theme'" [placeholderTitleText]="model.placeholderTitleText"
-        [placeholderDescriptionText]="model.placeholderDescriptionText">
-      </svc-surface-placeholder>
-    </div>
+    <svc-surface-placeholder *ngIf="model.survey.isEmpty" [name]="'theme'" [placeholderTitleText]="model.placeholderTitleText"
+      [placeholderDescriptionText]="model.placeholderDescriptionText">
+    </svc-surface-placeholder>
     <div *ngIf="!model.survey.isEmpty" class="svc-plugin-tab__content">
       <survey-simulator [model]="model.simulator"></survey-simulator>
       <ng-container *ngIf="model.showResults">

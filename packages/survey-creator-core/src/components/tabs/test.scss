@@ -6,16 +6,9 @@ svc-tab-preview {
   background: $background-dim;
 }
 
-.svc-test-tab--empty {
-  display: flex;
-  flex-direction: column;
+.svc-test-tab__content {
   align-items: center;
   justify-content: center;
-  flex-grow: 1;
-  flex-shrink: 0;
-  width: 100%;
-  height: 100%;
-  gap: 0px;
 }
 
 .svc-test-tab__content .svc-plugin-tab__content {

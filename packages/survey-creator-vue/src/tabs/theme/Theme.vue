@@ -5,9 +5,7 @@
       'svc-creator-tab__content--with-toolbar': model.isPageToolbarVisible,
     }"
   >
-    <div v-if="model.survey.isEmpty" class="svc-test-tab--empty">
-      <SurfacePlaceholder :name="'theme'" :placeholderTitleText="model.placeholderTitleText" :placeholderDescriptionText="model.placeholderDescriptionText" />
-    </div>
+    <SurfacePlaceholder v-if="model.survey.isEmpty" :name="'theme'" :placeholderTitleText="model.placeholderTitleText" :placeholderDescriptionText="model.placeholderDescriptionText" />
     <div v-if="!model.survey.isEmpty" class="svc-plugin-tab__content">
       <SvComponent
         :is="'survey-simulator'"
