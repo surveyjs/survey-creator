@@ -373,6 +373,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           id: p.name,
           tooltip: p.title,
           iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
+          iconSize: "auto",
           active: p.name === this.propertyGrid.survey.currentPage.name,
           pressed: false,
           action: () => {
