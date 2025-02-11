@@ -2410,6 +2410,45 @@ test("Question adorner - collapsed mobile", async (t) => {
   });
 });
 
+test("Page adorner - collapsed mobile", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(551, 1080);
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        },
+        {
+          "name": "page3",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question3"
+            }
+          ]
+        }
+      ]
+    };
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+    await setExpandCollapseButtonVisibility("onhover");
+    await setJSON(json);
+    const qContent = Selector(".svc-page__content");
+    const qCollapseButton = Selector(".svc-page__content #collapse");
+    await t.click(qContent.nth(0), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible());
+    await t.click(qContent.nth(1), { offsetX: 10, offsetY: 10 });
+    await t.click(qCollapseButton.filterVisible().nth(1));
+    await resetHoverToCreator(t);
+    await takeElementScreenshot("page-adorner-collapsed-mobile.png", ".svc-tab-designer_content", t, comparer);
+  });
+});
 test("Question types with subtypes", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1000, 700);
