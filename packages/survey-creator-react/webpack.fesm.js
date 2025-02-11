@@ -24,6 +24,8 @@ function getConfig(options) {
       "react": "react",
       "react-dom": "react-dom",
       "survey-creator-core": "survey-creator-core",
+      "survey-core": "survey-core",
+      "survey-react-ui": "survey-react-ui"
     }
   };
 
