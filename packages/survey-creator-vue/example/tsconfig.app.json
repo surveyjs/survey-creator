@@ -26,7 +26,7 @@
         "./node_modules/survey-vue3-ui"
       ],
       "vue": [
-        "../node_modules/vue"
+        "./node_modules/vue"
       ]
     }
   }
