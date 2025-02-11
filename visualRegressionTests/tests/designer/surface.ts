@@ -220,6 +220,7 @@ test("Matrix column editor", async (t) => {
 test("Matrix column editor with design surface zoomed out", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
+    await setAllowZoom(true);
     await addQuestionByAddQuestionButton(t, "Multi-Select Matrix");
     for (let i = 0; i < 5; i++) { await t.click(Selector("#zoomOut").find("button")); }
     const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
