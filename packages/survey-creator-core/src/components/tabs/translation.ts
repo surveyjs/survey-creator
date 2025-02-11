@@ -1230,8 +1230,10 @@ export class Translation extends Base implements ITranslationLocales {
     if (!this.localesQuestion) return;
     if (!Array.isArray(selectedLocales)) selectedLocales = [];
     const val = [];
-    if (includeSelected) {
-      selectedLocales.forEach(sl => { if (locales.indexOf(sl) < 0) locales.push(sl); });
+    if (includeSelected && selectedLocales.length > 0) {
+      const res = [].concat(selectedLocales);
+      locales.forEach(loc => { if (res.indexOf(loc) < 0) res.push(loc); });
+      locales = res;
     }
     const locDefault = this.defaultLocale;
     val.push({ isSelected: true, name: "", displayName: this.getLocaleName("") });
