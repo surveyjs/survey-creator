@@ -352,7 +352,7 @@ export class SurveyCreatorModel extends Base
   }
   public get startEditTitleOnQuestionAdded() {
     return !this.isMobileView &&
-      !((getOS() == "iOS" || getOS() == "Mac OS") && this.isTouch) &&
+      !((this.currentOS == "iOS" || this.currentOS == "Mac OS") && this.isTouch) &&
       !this.toolbox.searchManager.filterString &&
       this.startEditTitleOnQuestionAddedValue;
   }
@@ -1517,6 +1517,7 @@ export class SurveyCreatorModel extends Base
     this.initTabs();
     this.syncSaveButtons = this.options.saveSurveyAndTheme !== undefined ? this.options.saveSurveyAndTheme : this.options.syncSaveButtons;
     this.isTouch = IsTouch;
+    this.currentOS = getOS();
     const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
   }
@@ -4152,6 +4153,7 @@ export class SurveyCreatorModel extends Base
     }
   }) isMobileView: boolean;
   @property({ defaultValue: false }) isTouch;
+  currentOS: string;
   /**
    * Specifies the Toolbox location.
    * 
