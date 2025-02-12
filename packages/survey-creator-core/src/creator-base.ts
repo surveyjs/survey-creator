@@ -467,18 +467,38 @@ export class SurveyCreatorModel extends Base
    * @param name A unique tab ID. 
    * @param plugin An object that allows you to handle user interactions with the tab.
    * @param title A tab caption. If `title` is undefined, the `name` argument value is displayed instead. To localize the caption, add its translations to the `ed` object within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization) and pass `ed.propertyName` as the `title` argument.
-   * @param iconName A tab icon. If `iconName` is undefined, the default icon is displayed.
    * @param componentName The name of the component that renders tab markup. Default value: `"svc-tab-" + name`.
    * @param index A zero-based index that specifies the tab's position relative to other tabs.
    */
   public addPluginTab(
-    name: string,
-    plugin: ICreatorPlugin,
+    nameOrParams: string | {
+      name: string,
+      plugin: ICreatorPlugin,
+      title?: string,
+      iconName?: string,
+      componentName?: string,
+      index?: number
+    },
+    plugin?: ICreatorPlugin,
     title?: string,
-    iconName?: string,
     componentName?: string,
     index?: number
   ) {
+    let name = nameOrParams as string;
+    let iconName: string = undefined;
+    if (typeof nameOrParams === "object") {
+      ({
+        name,
+        plugin,
+        title,
+        iconName,
+        componentName,
+        index
+      } = nameOrParams);
+    }
+    if (!name || !plugin) {
+      throw new Error("Plugin or name is not set");
+    }
     this.tabbedMenu.addTab(name, plugin, title, iconName, componentName, index);
     this.addPlugin(name, plugin);
   }

@@ -89,7 +89,7 @@ export class TabJsonEditorTextareaPlugin
   implements ICreatorPlugin {
   constructor(creator: SurveyCreatorModel) {
     super(creator);
-    creator.addPluginTab("json", this, undefined, "icon-codeeditor-24x24", "svc-tab-json-editor-textarea");
+    creator.addPluginTab({ name: "json", plugin: this, iconName: "icon-codeeditor-24x24", componentName: "svc-tab-json-editor-textarea" });
   }
   protected createModel(
     creator: SurveyCreatorModel

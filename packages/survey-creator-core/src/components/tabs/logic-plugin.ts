@@ -13,7 +13,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
   private fastEntryAction: Action;
   public model: SurveyLogicUI;
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab("logic", this, undefined, "icon-logic-24x24");
+    creator.addPluginTab({ name: "logic", plugin: this, iconName: "icon-logic-24x24" });
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
