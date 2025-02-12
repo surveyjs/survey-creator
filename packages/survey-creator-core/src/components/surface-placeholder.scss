@@ -74,7 +74,7 @@
 .svc-translation-tab--empty .svc-surface-placeholder,
 .svc-designer__placeholder-container {
   max-width: var(--ctr-surface-placeholder-max-width, var(--sjs-size-x90));
-  padding: var(--ctr-surface-placeholder-padding-top, 0)
+  padding: var(--ctr-surface-placeholder-padding-top, var(--sjs-spacing-x4))
     var(--ctr-surface-placeholder-padding-right, var(--sjs-spacing-x6))
     var(--ctr-surface-placeholder-padding-bottom, var(--sjs-spacing-x16))
     var(--ctr-surface-placeholder-padding-left, var(--sjs-spacing-x6));

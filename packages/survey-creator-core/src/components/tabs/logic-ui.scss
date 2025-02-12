@@ -219,10 +219,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-grow: 1;
-    flex-shrink: 0;
-    width: 100%;
-    gap: 0px;
 
     .svc-logic-tab__content-action {
       // width: calcSize(33);
@@ -257,6 +253,14 @@
     margin-top: 0;
     align-items: start;
   }
+}
+
+.svc-logic-tab__content-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
 }
 
 .svc-logic-paneldynamic {
