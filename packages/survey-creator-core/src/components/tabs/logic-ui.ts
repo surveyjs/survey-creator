@@ -39,7 +39,6 @@ export class SurveyLogicUI extends SurveyLogic {
     super(survey, options);
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
     this.setupToolbarItems();
-    this.update();
   }
   public update(
     survey: SurveyModel = null,
