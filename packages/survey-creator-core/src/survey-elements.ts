@@ -367,7 +367,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   private isDragInsideItself(dragOverNodes: Array<HTMLElement>): boolean {
-    //https://github.com/surveyjs/survey-creator/issues/6536
     let result = false;
     dragOverNodes.forEach((node) => {
       if (node.classList.contains("svc-question__content--dragged")) {
