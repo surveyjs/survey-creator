@@ -1,5 +1,7 @@
 const designTabSurveyThemeJSON = {
   "cssVariables": {
+    "--sjs-base-unit": "var(--ctr-surface-base-unit)",
+    "--sjs-font-size": "calc(2 * var(--ctr-surface-base-unit))",
     "--sjs-primary-backcolor": "var(--sjs-primary-background-500, #19B394FF)",
     "--sjs-primary-backcolor-light": "var(--sjs-primary-background-10, #19B3941A)",
     "--sjs-primary-backcolor-dark": "var(--sjs-primary-background-400, #14A48BFF)",

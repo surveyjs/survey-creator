@@ -4,10 +4,10 @@ $lbr-corner-radius-unit: var(--lbr-corner-radius-unit, 8px);
 $lbr-stroke-unit: Max(var(--lbr-stroke-unit, 1px), 1px);
 $lbr-font-unit: var(--lbr-font-unit, 8px);
 $lbr-line-height-unit: var(--lbr-line-height-unit, 8px);
-$-font-family: var(--lbr-font-family, var(--sjs-font-family, var(--font-family)));
+$lbr-font-family: var(--lbr-font-family, var(--sjs-font-family, var(--font-family)));
 
 @mixin lbrDefaultFont {
-  font-family: $-font-family;
+  font-family: $lbr-font-family;
   font-size: var(--lbr-font-default-size, var(--lbr-font-size-x2));
   font-style: normal;
   line-height: var(--lbr-font-default-line-height, var(--lbr-line-height-x3));
@@ -19,7 +19,7 @@ $-font-family: var(--lbr-font-family, var(--sjs-font-family, var(--font-family))
 }
 
 @mixin lbrSmallFont {
-  font-family: $-font-family;
+  font-family: $lbr-font-family;
   font-size: var(--lbr-font-small-size, var(--lbr-font-size-x150));
   font-style: normal;
   line-height: var(--lbr-font-small-line-height, var(--lbr-line-height-x2));
@@ -31,7 +31,7 @@ $-font-family: var(--lbr-font-family, var(--sjs-font-family, var(--font-family))
 }
 
 @mixin lbrLargeFont {
-  font-family: $-font-family;
+  font-family: $lbr-font-family;
   font-size: var(--lbr-font-large-size, var(--lbr-font-size-x4));
   line-height: var(--lbr-font-large-line-height, var(--lbr-line-height-x5));
   font-style: normal;

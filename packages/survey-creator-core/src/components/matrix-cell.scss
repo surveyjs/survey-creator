@@ -75,13 +75,6 @@
 }
 
 .svc-matrix-cell__popup {
-  --lbr-stroke-unit: 1px;
-  --lbr-spacing-unit: var(--sjs-base-unit, 8px);
-  --lbr-font-unit: var(--sjs-base-unit, 8px);
-  --lbr-corner-radius-unit: var(--sjs-base-unit, 8px);
-  --lbr-size-unit: var(--sjs-base-unit, 8px);
-  --lbr-line-height-unit: var(--sjs-base-unit, 8px);
-
   .sv-popup__scrolling-content {
     margin-top: calcSize(1);
     padding-top: 0;

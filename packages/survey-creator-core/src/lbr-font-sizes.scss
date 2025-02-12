@@ -1,5 +1,7 @@
 @use "./lbr-variables.scss" as *;
 
+.svc-surface-drag-drop-choices-shortcut,
+.svc-designer-surface,
 .svc-creator-popup,
 .svc-creator {
   --lbr-line-height-x8: calc(#{$lbr-line-height-unit} * 8);

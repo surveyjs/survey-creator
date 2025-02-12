@@ -145,7 +145,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   renderTabContent(): React.JSX.Element {
     const survey: SurveyModel = this.creator.survey;
     const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle);
-    const style: any = { ...this.model.surveyThemeVariables };
+    const style: any = { ...this.model.surfaceCssVariables };
     style.maxWidth = survey.renderedWidth;
 
     const tabTools = this.renderTabTools();
