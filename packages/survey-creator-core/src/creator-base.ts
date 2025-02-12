@@ -1496,7 +1496,6 @@ export class SurveyCreatorModel extends Base
       this.options = !!options2 ? options2 : {};
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
-    SvgRegistry.registerIcons(SvgThemeSets["v2"]);
     this.previewDevice = options.previewDevice ?? "desktop";
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
