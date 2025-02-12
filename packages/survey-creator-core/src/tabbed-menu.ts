@@ -8,17 +8,6 @@ export interface ITabbedMenuItem extends IAction {
   renderTab?: () => any;
 }
 
-const tabsIcons = {
-  designer: "icon-config",
-  theme: "icon-theme",
-  json: "icon-codeeditor-24x24",
-  translation: "icon-language",
-  preview: "icon-preview",
-  logic: "icon-logic-24x24",
-  customembeded: "icon-embedsurvey-24x24",
-  default: "icon-undefined-24x24"
-};
-
 export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   constructor(item: ITabbedMenuItem) {
     super(item);
@@ -59,6 +48,7 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
   public addTab(name: string,
     plugin: ICreatorPlugin,
     title?: string,
+    iconName?: string,
     componentName?: string,
     index?: number) {
     const tabName = name === "test" ? "preview" : name;
@@ -69,7 +59,7 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
       title: title,
       componentContent: componentName ? componentName : "svc-tab-" + name,
       data: plugin,
-      iconName: tabsIcons[tabName] || tabsIcons["default"],
+      iconName: iconName || "icon-undefined-24x24",
       action: () => { this.creator.switchTab(name); },
       active: this.creator.viewType === name,
       disableHide: this.creator.viewType === name

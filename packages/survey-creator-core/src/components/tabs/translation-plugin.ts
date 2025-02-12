@@ -40,7 +40,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab("translation", this);
+    creator.addPluginTab("translation", this, undefined, "icon-language");
     this.showOneCategoryInPropertyGrid = creator.showOneCategoryInPropertyGrid;
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.sidebarTab = this.creator.sidebar.addPage("translation");
