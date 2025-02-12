@@ -18,7 +18,7 @@ import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
-import { assign } from "./utils/utils";
+import { assign, getOS } from "./utils/utils";
 import { getNextItemValue, getNextItemText } from "./utils/creator-utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
@@ -356,7 +356,10 @@ export class SurveyCreatorModel extends Base
     this.startEditTitleOnQuestionAddedValue = value;
   }
   public get startEditTitleOnQuestionAdded() {
-    return !this.isMobileView && !this.toolbox.searchManager.filterString && this.startEditTitleOnQuestionAddedValue;
+    return !this.isMobileView &&
+      !((this.currentOS == "iOS" || this.currentOS == "Mac OS") && this.isTouch) &&
+      !this.toolbox.searchManager.filterString &&
+      this.startEditTitleOnQuestionAddedValue;
   }
   private startEditTitleOnQuestionAddedValue: boolean = true;
   private isRTLValue: boolean = false;
@@ -1522,6 +1525,7 @@ export class SurveyCreatorModel extends Base
     this.initTabs();
     this.syncSaveButtons = this.options.saveSurveyAndTheme !== undefined ? this.options.saveSurveyAndTheme : this.options.syncSaveButtons;
     this.isTouch = IsTouch;
+    this.currentOS = getOS();
     const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
   }
@@ -4172,6 +4176,7 @@ export class SurveyCreatorModel extends Base
     }
   }) isMobileView: boolean;
   @property({ defaultValue: false }) isTouch;
+  currentOS: string;
   /**
    * Specifies the Toolbox location.
    * 
