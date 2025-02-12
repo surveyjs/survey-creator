@@ -230,7 +230,9 @@ test("Matrix column editor with design surface zoomed out", async (t) => {
       .expect(Selector(".svc-question__content").exists).ok()
       .hover(row1Column1Cell, { speed: 0.5 });
 
-    await t.click(editColumnButton);
+    await t
+      .click(editColumnButton)
+      .hover(Selector(".sv-popup__body-content").filterVisible(), { offsetX: 10, offsetY: 10 });
     await takeElementScreenshot("matrix-cell-edit-surface-zoomed-out.png", Selector(".svc-matrix-cell__popup .sv-popup__container"), t, comparer);
   });
 });

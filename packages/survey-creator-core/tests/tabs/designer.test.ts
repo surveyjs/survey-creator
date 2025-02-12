@@ -78,14 +78,14 @@ test("Designer widthMode css test", () => {
     creator.getPlugin("designer")
   );
   creator.JSON = { elements: [{ name: "question1", type: "text" }, { name: "question2", type: "text" }, { name: "question3", type: "text" }, { name: "question4", type: "text" }] };
-  expect(designerPlugin.model.designerCss).toEqual("sd-container-modern sd-container-modern--static");
+  expect(designerPlugin.model.designerCss).toEqual("svc-designer-surface sd-container-modern sd-container-modern--static");
   creator.survey.getQuestionByName("question2").startWithNewLine = false;
-  expect(designerPlugin.model.designerCss).toEqual("sd-container-modern sd-container-modern--responsive");
+  expect(designerPlugin.model.designerCss).toEqual("svc-designer-surface sd-container-modern sd-container-modern--responsive");
 
   creator.survey.widthMode = "static";
-  expect(designerPlugin.model.designerCss).toEqual("sd-container-modern sd-container-modern--static");
+  expect(designerPlugin.model.designerCss).toEqual("svc-designer-surface sd-container-modern sd-container-modern--static");
   creator.survey.widthMode = "responsive";
-  expect(designerPlugin.model.designerCss).toEqual("sd-container-modern sd-container-modern--responsive");
+  expect(designerPlugin.model.designerCss).toEqual("svc-designer-surface sd-container-modern sd-container-modern--responsive");
 });
 
 test("Select survey in designer", () => {
