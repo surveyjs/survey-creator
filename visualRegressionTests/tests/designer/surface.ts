@@ -2445,7 +2445,7 @@ test("Page adorner - collapsed mobile", async (t) => {
     await t.click(qCollapseButton.filterVisible());
     await t.click(qContent.nth(1), { offsetX: 10, offsetY: 10 });
     await t.click(qCollapseButton.filterVisible().nth(1));
-    await resetHoverToCreator(t);
+    await resetHoverToCreator(t, 0, -1);
     await takeElementScreenshot("page-adorner-collapsed-mobile.png", ".svc-tab-designer_content", t, comparer);
   });
 });
