@@ -180,6 +180,11 @@ export class SurveyCreatorModel extends Base
    * @see saveThemeFunc
    */
   @property({ defaultValue: false }) showThemeTab: boolean;
+  /**
+   * Specifies whether users can modify the [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme). Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#propertyGridNavigationMode) is `"buttons"`.
+   * 
+   * Default value: `true`
+   */
   @property({ defaultValue: true }) showCreatorThemeSettings: boolean;
   /**
    * Specifies whether the "Zoom In", "Zoom Out", and "Zoom to 100%" buttons are available.
@@ -957,6 +962,9 @@ export class SurveyCreatorModel extends Base
    * ```
    */
   public onCreateCustomMessagePanel: EventBase<SurveyCreatorModel, CreateCustomMessagePanelEvent> = this.addCreatorEvent<SurveyCreatorModel, CreateCustomMessagePanelEvent>();
+  /**
+   * An event that is raised when users change a property in a [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme).
+   */
   public onCreatorThemePropertyChanged: EventBase<SurveyCreatorModel, CreatorThemePropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorThemePropertyChangedEvent>();
 
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
@@ -3090,6 +3098,11 @@ export class SurveyCreatorModel extends Base
     return val;
   }
 
+  /**
+   * Opens [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme) settings in Property Grid. Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#propertyGridNavigationMode) is `"buttons"`.
+   * @see closeCreatorThemeSettings
+   * @see showCreatorThemeSettings
+   */
   public openCreatorThemeSettings(): void {
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
     if (designerPlugin) {
@@ -3097,6 +3110,11 @@ export class SurveyCreatorModel extends Base
     }
   }
 
+  /**
+   * Closes [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme) settings in Property Grid. Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#propertyGridNavigationMode) is `"buttons"`.
+   * @see openCreatorThemeSettings
+   * @see showCreatorThemeSettings
+   */
   public closeCreatorThemeSettings(): void {
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
     if (designerPlugin) {
@@ -3104,6 +3122,10 @@ export class SurveyCreatorModel extends Base
     }
   }
 
+  /**
+   * Activates a specified category in Property Grid. Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#propertyGridNavigationMode) is `"buttons"`.
+   * @param name A [category name](https://surveyjs.io/form-library/documentation/customize-question-types/add-custom-properties-to-a-form#category).
+   */
   public activatePropertyGridCategory(name: string): void {
     if (!!this.designerPropertyGrid) {
       this.designerPropertyGrid.activateCategory(name);
@@ -3120,7 +3142,7 @@ export class SurveyCreatorModel extends Base
     return this.designerPropertyGrid.survey;
   }
   /**
-   * Collapses a specified category in Property Grid.
+   * Collapses a specified category in Property Grid. Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#propertyGridNavigationMode) is `"accordion"`.
    * @param name A [category name](https://surveyjs.io/form-library/documentation/customize-question-types/add-custom-properties-to-a-form#category).
    * @see expandPropertyGridCategory
    */
@@ -3130,9 +3152,10 @@ export class SurveyCreatorModel extends Base
     }
   }
   /**
-   * Expands a specified category in Property Grid.
+   * Expands a specified category in Property Grid. Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#propertyGridNavigationMode) is `"accordion"`.
    * @param name A [category name](https://surveyjs.io/form-library/documentation/customize-question-types/add-custom-properties-to-a-form#category).
    * @see collapsePropertyGridCategory
+   * @see activatePropertyGridCategory
    */
   public expandPropertyGridCategory(name: string) {
     if (!!this.designerPropertyGrid) {
@@ -3140,7 +3163,7 @@ export class SurveyCreatorModel extends Base
     }
   }
   /**
-   * Collapses all categories in Property Grid.
+   * Collapses all categories in Property Grid. Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#propertyGridNavigationMode) is `"accordion"`.
    * @see expandAllPropertyGridCategories
    */
   public collapseAllPropertyGridCategories() {
@@ -3149,7 +3172,7 @@ export class SurveyCreatorModel extends Base
     }
   }
   /**
-   * Expands all categories in Property Grid.
+   * Expands all categories in Property Grid. Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#propertyGridNavigationMode) is `"accordion"`.
    * @see collapseAllPropertyGridCategories
    */
   public expandAllPropertyGridCategories() {
@@ -4269,10 +4292,21 @@ export class SurveyCreatorModel extends Base
   }
 
   @property({ defaultValue: {} }) themeVariables: { [index: string]: string } = {};
+  /**
+   * A theme for the Survey Creator UI.
+   * @see applyCreatorTheme
+   * @see showCreatorThemeSettings
+   */
   @property() creatorTheme: ICreatorTheme;
 
   public preferredColorPalette: string = "light";
 
+  /**
+   * Applies a specified UI theme to Survey Creator.
+   * @param theme An `ICreatorTheme` object with theme settings.
+   * @see creatorTheme
+   * @see showCreatorThemeSettings
+   */
   public applyCreatorTheme(theme: ICreatorTheme): void {
     this.syncTheme(theme);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
