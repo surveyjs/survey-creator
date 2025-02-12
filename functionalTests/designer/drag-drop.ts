@@ -2054,6 +2054,7 @@ test("Drag Drop page with other pages collapsed on start drag", async (t) => {
   };
 
   const page1 = Selector("[data-sv-drop-target-survey-page=\"page1\"]");
+  const page2 = Selector("[data-sv-drop-target-survey-page=\"page2\"]");
   const page4 = Selector("[data-sv-drop-target-survey-page=\"page4\"]");
   const page4DragHandle = Selector("[data-sv-drop-target-survey-page=\"page4\"] > .svc-question__drag-area > .svc-question__drag-element");
 
@@ -2067,11 +2068,12 @@ test("Drag Drop page with other pages collapsed on start drag", async (t) => {
     .expect(Selector(".svc-page__content--collapsed").count).eql(4);
 
   const pageRectBottom = await page1.getBoundingClientRectProperty("bottom");
-
+  const pageRectLeft = await page1.getBoundingClientRectProperty("left");
   await t
-    .hover(Selector("#survey-creator"), { offsetX: 50, offsetY: Math.round(pageRectBottom) + 8 })
-    .expect(page1.find(".svc-question__drop-indicator--top").visible).notOk()
-    .expect(page1.find(".svc-question__drop-indicator--bottom").visible).ok()
+    //test indicator between pages
+    .hover(Selector("#survey-creator"), { offsetX: Math.round(pageRectLeft) + 50, offsetY: Math.round(pageRectBottom) + 6 })
+    .expect(page2.find(".svc-question__drop-indicator--top").visible).ok()
+
     .hover(page1, { offsetX: 150, offsetY: 60, speed: 0.05 })
     .expect(page1.find(".svc-question__drop-indicator--top").visible).notOk()
     .expect(page1.find(".svc-question__drop-indicator--bottom").visible).ok()
