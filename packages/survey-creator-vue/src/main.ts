@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import { surveyCreatorPlugin } from "./index";
 
-import "survey-core/default.css";
+import "survey-core/survey-core.css";
 import "survey-creator-core/survey-creator-core.css";
 import { surveyPlugin } from "survey-vue3-ui";
 

@@ -90,10 +90,7 @@ var buildPlatformJson = {
   devDependencies: {},
 };
 
-module.exports = function (options) {
-  var buildPath = __dirname + "/build/";
-  var isProductionBuild = options.buildType === "prod";
-
+function getPercentageHandler(emitNonSourceFiles, emitStyles, buildPath, isProductionBuild) {
   function createStylesBundleWithFonts() {
     const getdir = (filename) => {
       return buildPath + filename;
@@ -116,27 +113,37 @@ module.exports = function (options) {
     }
 
   }
-
-  var percentage_handler = function(options) {
-    return function handler(percentage, msg) {
-      if (0 == percentage) {
-        console.log("Build started... good luck!");
-      } else if (1 == percentage && (options.isCore || options.isCore === undefined)) {
-        if (isProductionBuild) {
-          fs.createReadStream("./README.md").pipe(
-            fs.createWriteStream(buildPath + "README.md")
-          );
-        }
-        if (isProductionBuild) {
-          fs.writeFileSync(
-            buildPath + "package.json",
-            JSON.stringify(buildPlatformJson, null, 2),
-            "utf8"
-          );
-        }
+  return function handler(percentage, msg) {
+    if (0 == percentage) {
+      console.log("Build started... good luck!");
+    } else if (1 == percentage) {
+      if (emitNonSourceFiles) {
+        fs.createReadStream("./README.md").pipe(
+          fs.createWriteStream(buildPath + "README.md")
+        );
+        fs.writeFileSync(
+          buildPath + "package.json",
+          JSON.stringify(buildPlatformJson, null, 2),
+          "utf8"
+        );
+      }
+      if (emitStyles) {
         return createStylesBundleWithFonts();
       }
-    };
+    }
+  };
+}
+
+module.exports = function (options) {
+  const emitDeclarations = !!options.emitDeclarations;
+  const emitNonSourceFiles = !!options.emitNonSourceFiles;
+  const emitStyles = !!options.emitStyles;
+  const buildPath = __dirname + "/build/";
+  const isProductionBuild = options.buildType === "prod";
+
+  const compilerOptions = emitDeclarations ? {} : {
+    declaration: false,
+    declarationDir: null
   };
 
   var config = {
@@ -161,7 +168,8 @@ module.exports = function (options) {
           test: /\.(ts|tsx)$/,
           loader: "ts-loader",
           options: {
-            configFile: options.tsConfigFile || "tsconfig.json"
+            configFile: options.tsConfigFile || "tsconfig.json",
+            compilerOptions
           }
         },
         {
@@ -170,7 +178,8 @@ module.exports = function (options) {
             {
               loader: MiniCssExtractPlugin.loader,
               options: {
-                publicPath: ""
+                publicPath: "",
+                emit: emitStyles
               }
             },
             {
@@ -235,7 +244,7 @@ module.exports = function (options) {
       },
     },
     plugins: [
-      new webpack.ProgressPlugin(percentage_handler(options)),
+      new webpack.ProgressPlugin(getPercentageHandler(emitNonSourceFiles, emitStyles, buildPath, isProductionBuild)),
       new DashedNamePlugin(),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
@@ -251,7 +260,6 @@ module.exports = function (options) {
       }),
     ],
   };
-
   if (isProductionBuild) {
     config.plugins.push = config.plugins.concat([]);
   } else {
