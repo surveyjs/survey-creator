@@ -240,7 +240,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
     if (this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
       const pnl: any = <PanelModel>this.draggedElement;
-      if(pnl.deepNested === undefined) {
+      if (pnl.deepNested === undefined) {
         pnl.deepNested = this.getMaximumNestedPanelCount(pnl, 0);
       }
       let len = SurveyHelper.getElementDeepLength(dropTarget);
@@ -260,9 +260,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   private getMaximumNestedPanelCount(panel: PanelModel, deep: number): number {
     let max = deep;
     panel.elements.forEach(el => {
-      if(el.isPanel) {
+      if (el.isPanel) {
         const pDeep = this.getMaximumNestedPanelCount(<PanelModel>el, deep + 1);
-        if(pDeep > max) {
+        if (pDeep > max) {
           max = pDeep;
         }
       }
@@ -366,6 +366,16 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return false;
   }
 
+  private isDragInsideItself(dragOverNodes: Array<HTMLElement>): boolean {
+    let result = false;
+    dragOverNodes.forEach((node) => {
+      if (node.classList.contains("svc-question__content--dragged")) {
+        result = true;
+      }
+    });
+    return result;
+  }
+
   public dragOver(event: PointerEvent): void {
     const dropTargetNode = this.findDropTargetNodeFromPoint(
       event.clientX,
@@ -376,6 +386,12 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       this.banDropHere();
       return;
     }
+
+    if (document && document.elementsFromPoint && this.isDragInsideItself(<Array<HTMLElement>>document.elementsFromPoint(event.clientX, event.clientY))) {
+      this.banDropHere();
+      return null;
+    }
+
     const oldInsideContainer = this.insideContainer;
     this.insideContainer = !calculateIsEdge(dropTargetNode, event.clientY) && !calculateIsSide(dropTargetNode, event.clientX);
     const dropTarget = this.getDropTargetByNode(dropTargetNode, event);
@@ -449,7 +465,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       const indexOfDropTarget = survey.pages.indexOf(this.dropTarget) + (this.dragOverLocation === DragTypeOverMeEnum.Top ? 0 : 1);
       survey.pages.splice(indexOfDropTarget, 0, dragged);
 
-      if(indexOfDraggedPage !== indexOfDropTarget) {
+      if (indexOfDraggedPage !== indexOfDropTarget) {
         dragged["draggedFrom"] = indexOfDraggedPage < indexOfDropTarget ? indexOfDraggedPage : indexOfDraggedPage + 1;
       }
       return dragged;

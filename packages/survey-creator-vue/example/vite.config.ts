@@ -10,7 +10,7 @@ export default defineConfig(({ command }) => {
       vue(),
     ],
     resolve: {
-      dedupe: ["survey-creator-core", "survey-core", "vue"],
+      dedupe: ["survey-creator-core", "survey-core", "survey-vue3-ui", "vue" ],
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       }

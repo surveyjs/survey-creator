@@ -1,5 +1,5 @@
 "use strict";
-const webpackCommonConfigCreator = require("./webpack.i18n");
+const webpackCommonConfigCreator = require("./webpack.config");
 const { merge } = require("webpack-merge");
 
 function getConfig(options) {
@@ -21,7 +21,11 @@ function getConfig(options) {
     },
     externalsType: "module",
     externals: {
+      "react": "react",
+      "react-dom": "react-dom",
       "survey-creator-core": "survey-creator-core",
+      "survey-core": "survey-core",
+      "survey-react-ui": "survey-react-ui"
     }
   };
 
@@ -29,6 +33,7 @@ function getConfig(options) {
 }
 
 module.exports = function (options) {
+  options.tsConfigFile = "tsconfig.fesm.json";
   const config = webpackCommonConfigCreator(options);
   config.output = {};
   config.externals = {};
