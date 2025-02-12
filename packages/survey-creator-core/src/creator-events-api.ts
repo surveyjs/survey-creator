@@ -1089,6 +1089,12 @@ export interface DragStartEndEvent {
   toElement: IElement;
 }
 export interface CreatorThemePropertyChangedEvent {
+  /**
+   * A property name.
+   */
   name: string;
+  /**
+   * A new property value.
+   */
   value: any;
 }

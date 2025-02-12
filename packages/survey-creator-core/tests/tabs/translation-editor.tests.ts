@@ -513,3 +513,40 @@ test("Check navigation bar in translation dialog", () => {
   editor = tabTranslation.model.createTranslationEditor("de");
   expect(editor.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale").data.containerCss).toBe("st-translation-machine-from__container");
 });
+test("Do not swap languages in the property grid on auto-translation, Bug#6548", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            description: "desc"
+          }
+        ]
+      }
+    ]
+  };
+  creator.onMachineTranslate.add((sender, options) => {
+    const translatedStrings = new Array<string>();
+    options.strings.forEach(str => { translatedStrings.push(options.toLocale + ": " + str); });
+    options.callback(translatedStrings);
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  translation.addLocale("fr");
+  translation.addLocale("de");
+  const question = translation.settingsSurvey.getQuestionByName("locales");
+  expect(question.value).toHaveLength(3);
+  expect(question.value[1]["name"]).toBe("fr");
+  expect(question.value[2]["name"]).toBe("de");
+  const editor = translation.createTranslationEditor("de");
+  editor.doMachineTranslation();
+  editor.apply();
+  expect(question.value).toHaveLength(3);
+  expect(question.value[1]["name"]).toBe("fr");
+  expect(question.value[2]["name"]).toBe("de");
+});

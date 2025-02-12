@@ -22,7 +22,6 @@ module.exports = function (options) {
   options.platform = "";
   options.libraryName = "SurveyCreatorTheme";
   options.tsConfigFile = path.resolve(__dirname, "./tsconfig.themes.json");
-  options.isCore = false;
   const mainConfig = webpackCommonConfig(options);
   mainConfig.entry = {};
   return merge(mainConfig, config);

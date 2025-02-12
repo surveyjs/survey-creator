@@ -52,6 +52,11 @@ export interface ICreatorOptions {
    * [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor (linkStyle))
    */
   showThemeTab?: boolean;
+  /**
+   * Specifies whether users can modify the [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme). Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#propertyGridNavigationMode) is `"buttons"`.
+   * 
+   * Default value: `true`
+   */
   showCreatorThemeSettings?: boolean;
   /**
    * Specifies whether the "Zoom In", "Zoom Out", and "Zoom to 100%" buttons are available.

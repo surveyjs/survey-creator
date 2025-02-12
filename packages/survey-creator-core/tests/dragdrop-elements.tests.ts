@@ -1571,3 +1571,12 @@ test("drag drop page check draggedFrom property", () => {
   ddHelper.doDrop();
   expect(p3["draggedFrom"]).toStrictEqual(2);
 });
+
+test("isDragInsideItself", () => {
+  let ddHelper = new DragDropSurveyElements(null);
+  const div1 = document.createElement("div");
+  const div2 = document.createElement("div");
+  div2.classList.add("svc-question__content--dragged");
+  expect(ddHelper["isDragInsideItself"]([div1, div2])).toBe(true);
+  expect(ddHelper["isDragInsideItself"]([div1])).toBe(false);
+});

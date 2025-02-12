@@ -237,8 +237,8 @@ export function getDropdownValue(selector: string | Selector = ".sd-input.sd-dro
   return Selector(selector).find(".sv-string-viewer").textContent;
 }
 
-export async function resetHoverToCreator(t: TestController): Promise<void> {
-  await t.hover(Selector("#survey-creator"), { offsetX: 0, offsetY: 0 });
+export async function resetHoverToCreator(t: TestController, offsetX: number = 0, offsetY: number = 0): Promise<void> {
+  await t.hover(Selector("#survey-creator"), { offsetX: offsetX, offsetY: offsetY });
 }
 
 export const hideAllAdornerActions = ClientFunction(() => {

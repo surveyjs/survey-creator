@@ -5,7 +5,6 @@ const { merge } = require("webpack-merge");
 function getConfig(options) {
   const buildPath = __dirname + "/build/fesm/";
   const config = {
-    mode: "production",
     devtool: "source-map",
     output: {
       filename: "[name]" + ".js",
@@ -28,8 +27,6 @@ function getConfig(options) {
 module.exports = function (options) {
   const config = webpackCommonConfigCreator(options);
   config.output = {};
-  config.plugins.shift();
   config.externals = {};
-  delete config.mode;
   return merge(config, getConfig(options));
 };

@@ -16,6 +16,15 @@
       "@/*": [
         "./src/*"
       ],
+      "survey-core": [
+        "./node_modules/survey-core"
+      ],
+      "survey-creator-core": [
+        "./node_modules/survey-creator-core"
+      ],
+      "survey-vue3-ui": [
+        "./node_modules/survey-vue3-ui"
+      ],
       "vue": [
         "./node_modules/vue"
       ]

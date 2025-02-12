@@ -40,10 +40,8 @@ module.exports = function (options) {
   options.platform = "i18n";
   options.libraryName = "SurveyCreatorLocales";
   options.tsConfigFile = "tsconfig.i18n.json";
-  options.isCore = false;
   patchEntries();
   const mainConfig = webpackCommonConfigCreator(options);
   mainConfig.entry = {};
-  mainConfig.plugins.shift();
   return merge(mainConfig, config);
 };

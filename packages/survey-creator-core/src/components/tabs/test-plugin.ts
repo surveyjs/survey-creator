@@ -208,6 +208,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.languageSelectorAction = createDropdownActionModel({
       id: "languageSelector",
       iconName: "icon-language",
+      iconSize: "auto",
       visible: false,
       mode: <any>new ComputedUpdater<string>(() => {
         return this.creator.isMobileView ? "small" : "large";
