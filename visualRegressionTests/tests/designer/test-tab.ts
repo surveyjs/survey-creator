@@ -322,7 +322,7 @@ test("Check survey timer", async (t) => {
 });
 test("empty survey preview", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    const simulator = Selector(".svc-test-tab--empty");
+    const simulator = Selector(".svc-test-tab__content");
     await t.resizeWindow(800, 600);
 
     await setJSON({});

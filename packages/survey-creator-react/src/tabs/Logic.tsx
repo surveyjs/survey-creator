@@ -54,14 +54,18 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
     return (
       <Fragment>
         <div className={logicTabClassName}>
-          <Survey model={this.model.itemsSurvey}></Survey>
-          {this.model.hasItems ? null : (
-            <div className="svc-logic-tab__content-empty" >
+          {this.model.hasItems ?
+            (<>
+              <Survey model={this.model.itemsSurvey}></Survey>
+              {addLogic}
+            </>)
+            : (<div className="svc-logic-tab__content-empty" >
               <SurfacePlaceholder name={"logic"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />
-            </div>)}
-          {addLogic}
+              {addLogic}
+            </div>)
+          }
         </div>
-      </Fragment>
+      </Fragment >
     );
   }
 }

@@ -219,14 +219,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-grow: 1;
-    flex-shrink: 0;
-    width: 100%;
-    gap: 0px;
 
     .svc-logic-tab__content-action {
       // width: calcSize(33);
-      margin-top: calcSize(1);
+      margin: 0;
     }
   }
 
@@ -260,9 +256,11 @@
 }
 
 .svc-logic-tab__content-empty {
-  .svc-btn__text {
-    color: var(--ctr-surface-placeholder-text-description-color, var(--sjs-layer-3-foreground-50, #00000080));
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
 }
 
 .svc-logic-paneldynamic {
@@ -270,6 +268,7 @@
     padding: 0;
     background: none;
     box-shadow: none;
+    
     border-radius: 0;
     overflow: visible;
   }

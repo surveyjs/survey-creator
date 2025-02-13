@@ -51,9 +51,7 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
     return this.model;
   }
   renderPlaceholder(): React.JSX.Element {
-    return (<div className="svc-test-tab--empty">
-      <SurfacePlaceholder name={"preview"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />
-    </div>);
+    return <SurfacePlaceholder name={"preview"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />;
   }
   renderSimulator(): React.JSX.Element {
     return (<div className="svc-plugin-tab__content">

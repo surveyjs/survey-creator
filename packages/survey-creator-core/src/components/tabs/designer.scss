@@ -4,7 +4,7 @@
 svc-tab-designer {
   width: 100%;
   height: 100%;
-  background: $background-dim;
+  background: var(--ctr-surface-background-color, var(--sjs-special-background, #edf9f7ff));
 }
 
 .svc-tab-designer {
@@ -18,7 +18,8 @@ svc-tab-designer {
 }
 
 .svc-tab-designer--with-placeholder .svc-designer-header {
-  min-width: calcSize(84);
+  width: 100%;
+  min-width: var(--sjs-size-x90);
 }
 
 .svc-content-wrapper {
@@ -106,6 +107,7 @@ svc-tab-designer {
 .svc-tab-designer--with-placeholder {
   .svc-tab-designer_content {
     display: flex;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
     min-height: 100%;
@@ -127,7 +129,6 @@ svc-tab-designer {
 
 .svc-designer__placeholder-container {
   display: flex;
-  flex-grow: 1;
   flex-shrink: 0;
   width: 100%;
   flex-direction: column;
