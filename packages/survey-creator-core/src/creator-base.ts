@@ -4396,19 +4396,6 @@ export class SurveyCreatorModel extends Base
 
 export class CreatorBase extends SurveyCreatorModel { }
 
-export class StylesManager {
-  public static get currentTheme(): string {
-    SurveyHelper.warnNonSupported("StylesManager");
-    return undefined;
-  }
-  public static set currentTheme(val: string) {
-    SurveyHelper.warnNonSupported("StylesManager");
-  }
-  public static applyTheme(name?: string) {
-    SurveyHelper.warnNonSupported("StylesManager");
-  }
-}
-
 export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreatorModel) {
   model.creator = creator;
   model.isPopupEditorContent = false;
