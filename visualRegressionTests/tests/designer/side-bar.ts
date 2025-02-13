@@ -192,3 +192,18 @@ test("translation tab tabbed property grid", async (t) => {
     await takeElementScreenshot("side-bar-tabbed-property-grid-translation-general.png", ".svc-side-bar", t, comparer);
   });
 });
+
+test("check mobile popup in new side bar", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(500, 800);
+    await ClientFunction(() => {
+      window["Survey"]._setIsTouch(true);
+      window["creator"].showOneCategoryInPropertyGrid = true;
+    })();
+    await t
+      .click(Selector("#svd-settings"))
+      .click(Selector(".svc-menu-action__button").withAttribute("title", "Creator Settings"))
+      .click(Selector(".sd-dropdown").withAttribute("aria-label", "Theme name").find(".sd-dropdown__filter-string-input"));
+    await takeElementScreenshot("mobile-popup-inside-new-pg.png", "", t, comparer);
+  });
+});

@@ -141,11 +141,9 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-
     bottom: 0;
     inset-inline-end: 0;
     inset-inline-start: 0;
-    z-index: 900;
   }
   .svc-side-bar__container-wrapper {
     border-left: none;
-    z-index: 1000;
     position: absolute;
     inset-inline-end: 0;
     height: 100%;
@@ -160,8 +158,9 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-
     max-width: 100%;
   }
   .svc-sidebar-tabs {
-    z-index: 1000;
+    z-index: 1;
   }
+  z-index: 1000;
 }
 
 .svc-side-bar--mobile {
