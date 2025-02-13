@@ -1,7 +1,7 @@
 import { CreatorTester } from "../creator-tester";
 import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components/results";
-import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, StylesManager, _setIsTouch, Action } from "survey-core";
+import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, _setIsTouch, Action } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 import { SurveySimulatorModel, simulatorDevices } from "../../src/components/simulator";
 import { editorLocalization, getLocString } from "../../src/editorLocalization";
