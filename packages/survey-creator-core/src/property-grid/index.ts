@@ -448,6 +448,7 @@ export class PropertyGridTitleActionsCreator {
       iconSize: "auto",
       css: "spg-help-action",
       showTitle: false,
+      disableHide: true,
       action: () => {
         question.descriptionLocation =
           question.descriptionLocation != "hidden" ? "hidden" : "underTitle";

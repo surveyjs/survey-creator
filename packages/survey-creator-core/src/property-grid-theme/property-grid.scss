@@ -116,7 +116,7 @@
   // padding-left: 0;
 
   .spg-help-action {
-    flex-grow: 1;
+    margin-inline-end: auto;
 
     .spg-action-button--icon {
       padding: var(--ctr-actionbar-button-padding-top-small-icon, var(--sjs-spacing-x05))

@@ -864,7 +864,7 @@ test("popup overlay in property grid", async (t) => {
     await takeElementScreenshot("pg-overlay-popup.png", getVisibleElement(".sv-popup .sv-popup__container"), t, comparer);
   });
 });
-fixture`${title}`.page`${url}`.beforeEach(async (t) => { });
+
 test("Check creator theme settings", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
@@ -875,5 +875,20 @@ test("Check creator theme settings", async (t) => {
     await t.drag(Selector(".svc-resizer-west"), -60, 0);
     await t.click(Selector(".svc-sidebar-tabs__bottom-container .svc-menu-action__button"));
     await takeElementScreenshot("creator-theme-settings.png", getVisibleElement(".spg-body"), t, comparer);
+  });
+});
+
+test("Helper action not hidden", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1240, 870);
+    const westResizer = Selector(".svc-resizer-west");
+    const questionHeader = getPropertyGridCategory("Conditions").parent(".spg-panel").find(".spg-question__header");
+    const json = { "pages": [{ "name": "page1", "elements": [{ "type": "text", "name": "text", }] }] };
+    await setJSON(json);
+    await t.wait(1000);
+    await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
+    await t.click(getPropertyGridCategory("Conditions"));
+    await t.drag(westResizer, 200, 0);
+    await takeElementScreenshot("helper-action.png", questionHeader, t, comparer);
   });
 });
