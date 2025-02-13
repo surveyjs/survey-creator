@@ -201,7 +201,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab("designer", this);
+    creator.addTab({ name: "designer", plugin: this, iconName: "icon-config" });
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.propertyGrid = new PropertyGridModel(undefined, creator, creator.getPropertyGridDefinition());
     this.showOneCategoryInPropertyGrid = creator.showOneCategoryInPropertyGrid;
@@ -287,7 +287,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       });
       this.propertyGrid.survey.onPageVisibleChanged.add((sender: SurveyModel, options: PageVisibleChangedEvent) => {
         const action = this.tabControlModel.topToolbar.getActionById(options.page.name);
-        if(!!action) {
+        if (!!action) {
           action.visible = options.page.isVisible;
         }
       });

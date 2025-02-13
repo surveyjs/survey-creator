@@ -1,4 +1,5 @@
-import { Base, IAction, ItemValue,
+import {
+  Base, IAction, ItemValue,
   JsonObjectProperty, MatrixDropdownColumn, Question,
   SurveyModel, ILocalizableString, PopupBaseViewModel, SurveyElement
 } from "survey-core";
@@ -202,7 +203,15 @@ export interface ICreatorPlugin {
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
-  showOneCategoryInPropertyGrid?: boolean;
+}
+
+export interface ITabOptions {
+  name: string;
+  plugin: ICreatorPlugin;
+  title?: string;
+  iconName?: string;
+  componentName?: string;
+  index?: number;
 }
 
 export interface ISurveyCreatorOptions {
