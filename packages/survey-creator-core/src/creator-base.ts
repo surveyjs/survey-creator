@@ -461,14 +461,7 @@ export class SurveyCreatorModel extends Base
 
   protected plugins: { [name: string]: ICreatorPlugin } = {};
   /**
-   * Adds a custom tab to Survey Creator.
-   * 
-   * [View Demo](https://surveyjs.io/survey-creator/examples/modify-tab-bar/ (linkStyle))
-   * @param name A unique tab ID. 
-   * @param plugin An object that allows you to handle user interactions with the tab.
-   * @param title A tab caption. If `title` is undefined, the `name` argument value is displayed instead. To localize the caption, add its translations to the `ed` object within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization) and pass `ed.propertyName` as the `title` argument.
-   * @param componentName The name of the component that renders tab markup. Default value: `"svc-tab-" + name`.
-   * @param index A zero-based index that specifies the tab's position relative to other tabs.
+   * @deprecated Use the [`addTab(tabOptions)`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#addTab) method instead.
    */
   public addPluginTab(
     name: string,
@@ -480,6 +473,32 @@ export class SurveyCreatorModel extends Base
     this.tabbedMenu.addTab(name, plugin, title, undefined, componentName, index);
     this.addPlugin(name, plugin);
   }
+  /**
+   * Adds a custom tab to Survey Creator.
+   * 
+   * This method accepts an `ITabOptions` object with the following properties:
+   * 
+   * - `name`: `string`\
+   * A unique tab ID.
+   * 
+   * - `plugin`: `ICreatorPlugin`\
+   * An object that allows you to handle user interactions with the tab.
+   * 
+   * - `title`: `string`\
+   * *(Optional)* A tab caption. If `title` is undefined, the `name` property value is displayed instead. To localize the caption, add its translations to the `ed` object within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization) and pass `ed.propertyName` as the `title` property.
+   * 
+   * - `iconName`: `string`\
+   * *(Optional)* An [icon name](https://surveyjs.io/form-library/documentation/icons). Icons are used when the tab bar doesn't have enough width to display tab titles.
+   * 
+   * - `componentName`: `string`\
+   * *(Optional)* The name of the component that renders tab markup. Default value: `"svc-tab-" + name`.
+   * 
+   * - `index`: `number`\
+   * *(Optional)* A zero-based index that specifies the tab's position relative to other tabs.
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/modify-tab-bar/ (linkStyle))
+   * @param tabOptions An object that configures the tab.
+   */
   public addTab(tabOptions: ITabOptions) {
     let {
       name,
