@@ -202,8 +202,8 @@ test("check mobile popup in new side bar", async (t) => {
     })();
     await t
       .click(Selector("#svd-settings"))
-      .click(Selector(".svc-menu-action__button").withAttribute("title", "Creator Settings"))
-      .click(Selector(".sd-dropdown").withAttribute("aria-label", "Theme name").find(".sd-dropdown__filter-string-input"));
+      .click(Selector(".spg-dropdown").withAttribute("aria-label", "Select a survey language").find(".sd-dropdown__filter-string-input"))
+      .hover(Selector(".sv-popup").filterVisible(), { offsetX: 0, offsetY: 0 });
     await takeElementScreenshot("mobile-popup-inside-new-pg.png", "", t, comparer);
   });
 });
