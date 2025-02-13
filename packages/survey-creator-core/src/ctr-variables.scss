@@ -4,10 +4,10 @@ $corner-radius-unit: var(--ctr-corner-radius-unit, 8px);
 $stroke-unit: Max(var(--ctr-stroke-unit, 1px), 1px);
 $font-unit: var(--ctr-font-unit, 8px);
 $line-height-unit: var(--ctr-line-height-unit, 8px);
-$-font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family)));
+$ctr-font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family)));
 
 @mixin ctrLargeFont {
-  font-family: $-font-family;
+  font-family: $ctr-font-family;
   font-size: var(--ctr-font-large-size, var(--sjs-font-size-x4));
   font-style: normal;
   font-weight: 400;
@@ -20,7 +20,7 @@ $-font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family))
 }
 
 @mixin ctrMediumFont {
-  font-family: $-font-family;
+  font-family: $ctr-font-family;
   font-size: var(--ctr-font-medium-size, var(--sjs-font-size-x3));
   font-style: normal;
   font-weight: 400;
@@ -33,7 +33,7 @@ $-font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family))
 }
 
 @mixin ctrDefaultFont {
-  font-family: $-font-family;
+  font-family: $ctr-font-family;
   font-size: var(--ctr-font-default-size, var(--sjs-font-size-x2));
   font-style: normal;
   font-weight: 400;
@@ -64,7 +64,7 @@ $-font-family: var(--ctr-font-family, var(--sjs-font-family, var(--font-family))
 }
 
 @mixin ctrSmallFont {
-  font-family: $-font-family;
+  font-family: $ctr-font-family;
   font-size: var(--ctr-font-small-size, var(--sjs-font-size-x150));
   font-style: normal;
   font-weight: 400;

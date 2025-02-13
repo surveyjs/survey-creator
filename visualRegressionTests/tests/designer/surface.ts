@@ -217,6 +217,26 @@ test("Matrix column editor", async (t) => {
   });
 });
 
+test("Matrix column editor with design surface zoomed out", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    await setAllowZoom(true);
+    await addQuestionByAddQuestionButton(t, "Multi-Select Matrix");
+    for (let i = 0; i < 5; i++) { await t.click(Selector("#zoomOut").find("button")); }
+    const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
+    const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
+
+    await t
+      .expect(Selector(".svc-question__content").exists).ok()
+      .hover(row1Column1Cell, { speed: 0.5 });
+
+    await t
+      .click(editColumnButton)
+      .hover(Selector(".sv-popup__body-content").filterVisible(), { offsetX: 10, offsetY: 10 });
+    await takeElementScreenshot("matrix-cell-edit-surface-zoomed-out.png", Selector(".svc-matrix-cell__popup .sv-popup__container"), t, comparer);
+  });
+});
+
 test("Matrix column", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);

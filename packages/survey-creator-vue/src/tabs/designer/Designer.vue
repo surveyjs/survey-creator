@@ -55,7 +55,7 @@
             :class="model.designerCss"
             :style="[
               { maxWidth: model.survey.renderedWidth },
-              model.surveyThemeVariables,
+              model.surfaceCssVariables,
             ]"
           >
             <div

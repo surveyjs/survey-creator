@@ -1,4 +1,4 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction, activateLazyRenderingChecks } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction, activateLazyRenderingChecks, CssClassBuilder } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
@@ -38,6 +38,7 @@ export class TabDesignerViewModel extends Base {
     },
   }) showPlaceholder: boolean;
   @property() surfaceScale = 100;
+  @property() surfaceCssVariables: { [index: string]: string } = {};
   public scaleCssVariables: { [index: string]: string } = {};
   public creator: SurveyCreatorModel;
 
@@ -94,21 +95,31 @@ export class TabDesignerViewModel extends Base {
     this.pagesControllerValue = new PagesController(creator);
 
     this.creator.dragDropChoices.onShortcutCreated = (shortcut: HTMLElement) => {
-      Object.keys(this.surveyThemeVariables).forEach((key) => {
-        shortcut.style.setProperty(key, this.surveyThemeVariables[key]);
+      const cssVariables = {};
+      if (this.creator.dragDropChoices["parentElement"]?.survey["isPopupEditorContent"]) {
+        assign(cssVariables, designTabSurveyThemeJSON.cssVariables);
+      } else {
+        shortcut.classList.add("svc-surface-drag-drop-choices-shortcut");
+        assign(cssVariables, this.surfaceCssVariables);
+      }
+      Object.keys(cssVariables).forEach((key) => {
+        shortcut.style.setProperty(key, cssVariables[key]);
       });
     };
 
     this.initSurfaceToolbar();
     this.initSurvey();
+    this.updateSurfaceCssVariables();
   }
-  public get surveyThemeVariables(): {} {
+  public updateSurfaceCssVariables() {
     const cssVariables = {};
-    assign(cssVariables, designTabSurveyThemeJSON.cssVariables, {
-      "--sjs-base-unit": "var(--ctr-surface-base-unit)",
-      "--sjs-font-size": "calc(2 * var(--ctr-surface-base-unit))",
-    });
-    return cssVariables;
+    assign(
+      cssVariables,
+      designTabSurveyThemeJSON.cssVariables,
+      this.creator.creatorTheme?.cssVariables || {},
+      this.scaleCssVariables
+    );
+    this.surfaceCssVariables = cssVariables;
   }
 
   private initSurfaceToolbar() {
@@ -208,10 +219,7 @@ export class TabDesignerViewModel extends Base {
     Object.keys(this.unitDictionary).forEach(key => {
       this.scaleCssVariables[key] = (this.unitDictionary[key] * scaleFactor / 100) + "px";
     });
-
-    const newCssVariable = {};
-    assign(newCssVariable, this.creator.themeVariables, this.scaleCssVariables);
-    this.creator.themeVariables = newCssVariable;
+    this.updateSurfaceCssVariables();
   }
 
   get survey() {
@@ -260,7 +268,11 @@ export class TabDesignerViewModel extends Base {
     this.isUpdatingNewPage = false;
   }
   private calculateDesignerCss() {
-    return this.survey.css.container + " " + this.survey.css.container + "--" + this.survey.calculatedWidthMode;
+    return new CssClassBuilder()
+      .append("svc-designer-surface")
+      .append(this.survey.css.container)
+      .append(this.survey.css.container + "--" + this.survey.calculatedWidthMode)
+      .toString();
   }
   public initSurvey() {
     if (!this.survey) return;
