@@ -497,7 +497,7 @@ export class SurveyCreatorModel extends Base
    * *(Optional)* A zero-based index that specifies the tab's position relative to other tabs.
    * 
    * [View Demo](https://surveyjs.io/survey-creator/examples/modify-tab-bar/ (linkStyle))
-   * @param tabOptions An object that configures the tab.
+   * @param tabOptions An object that configures the custom tab.
    */
   public addTab(tabOptions: ITabOptions) {
     let {
