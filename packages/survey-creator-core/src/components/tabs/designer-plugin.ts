@@ -201,7 +201,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab({ name: "designer", plugin: this, iconName: "icon-config" });
+    creator.addTab({ name: "designer", plugin: this, iconName: "icon-config" });
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.propertyGrid = new PropertyGridModel(undefined, creator, creator.getPropertyGridDefinition());
     this.showOneCategoryInPropertyGrid = creator.showOneCategoryInPropertyGrid;

@@ -244,7 +244,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab({ name: "theme", plugin: this, iconName: "icon-theme" });
+    creator.addTab({ name: "theme", plugin: this, iconName: "icon-theme" });
     this.simulatorCssClasses = surveyCss[defaultThemeName];
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));

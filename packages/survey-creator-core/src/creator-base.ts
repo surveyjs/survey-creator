@@ -10,7 +10,7 @@ import {
   addIconsToThemeSet,
   SvgThemeSets
 } from "survey-core";
-import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
+import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropChoices } from "survey-core";
@@ -471,31 +471,24 @@ export class SurveyCreatorModel extends Base
    * @param index A zero-based index that specifies the tab's position relative to other tabs.
    */
   public addPluginTab(
-    nameOrParams: string | {
-      name: string,
-      plugin: ICreatorPlugin,
-      title?: string,
-      iconName?: string,
-      componentName?: string,
-      index?: number
-    },
-    plugin?: ICreatorPlugin,
+    name: string,
+    plugin: ICreatorPlugin,
     title?: string,
     componentName?: string,
     index?: number
   ) {
-    let name = nameOrParams as string;
-    let iconName: string = undefined;
-    if (typeof nameOrParams === "object") {
-      ({
-        name,
-        plugin,
-        title,
-        iconName,
-        componentName,
-        index
-      } = nameOrParams);
-    }
+    this.tabbedMenu.addTab(name, plugin, title, undefined, componentName, index);
+    this.addPlugin(name, plugin);
+  }
+  public addTab(tabOptions: ITabOptions) {
+    let {
+      name,
+      plugin,
+      title,
+      iconName,
+      componentName,
+      index
+    } = tabOptions;
     if (!name || !plugin) {
       throw new Error("Plugin or name is not set");
     }

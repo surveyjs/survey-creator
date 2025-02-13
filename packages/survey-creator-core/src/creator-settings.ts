@@ -205,6 +205,15 @@ export interface ICreatorPlugin {
   model: Base;
 }
 
+export interface ITabOptions {
+  name: string,
+  plugin: ICreatorPlugin,
+  title?: string,
+  iconName?: string,
+  componentName?: string,
+  index?: number
+}
+
 export interface ISurveyCreatorOptions {
   isMobileView: boolean;
   alwaySaveTextInPropertyEditors: boolean;
