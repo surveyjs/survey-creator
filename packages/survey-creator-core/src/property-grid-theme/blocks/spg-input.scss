@@ -26,6 +26,36 @@
   color: var(--ctr-editor-content-text-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
 }
 
+.spg-input {
+  &::-webkit-datetime-edit,
+  &::-webkit-datetime-edit-fields-wrapper,
+  &::-webkit-datetime-edit-ampm-field,
+  &::-webkit-datetime-edit-day-field,
+  &::-webkit-datetime-edit-hour-field,
+  &::-webkit-datetime-edit-millisecond-field,
+  &::-webkit-datetime-edit-minute-field,
+  &::-webkit-datetime-edit-month-field,
+  &::-webkit-datetime-edit-second-field,
+  &::-webkit-datetime-edit-week-field,
+  &::-webkit-datetime-edit-year-field
+  {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+.spg-input[type="date"], 
+.spg-input[type="datetime-local"] {
+  &:empty {
+    min-height: calc(var(--ctr-font-default-line-height, var(--sjs-line-height-x3)) +
+     var(--ctr-editor-padding-top, var(--sjs-spacing-x05)) +
+     var(--ctr-editor-content-margin-top, var(--sjs-spacing-x1)) +
+     var(--ctr-editor-padding-bottom, var(--sjs-spacing-x05)) + 
+     var(--ctr-editor-content-margin-bottom, var(--sjs-spacing-x1)));
+  }
+}
+
 .spg-input:focus:not(:disabled),
 .spg-input.spg-dropdown:focus:not(:disabled),
 .spg-input.spg-dropdown:focus-within:not(:disabled),
