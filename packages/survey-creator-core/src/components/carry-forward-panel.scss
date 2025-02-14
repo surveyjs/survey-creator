@@ -8,11 +8,14 @@
   @include ctrDefaultFont;
   box-sizing: border-box;
   width: 100%;
-  padding: calcSize(4) calcSize(8);
-  border-radius: calcSize(1);
-  background-color: $background-dim-light;
+  padding: var(--ctr-survey-info-panel-padding-top, var(--lbr-spacing-x4))
+    var(--ctr-survey-info-panel-padding-right, var(--lbr-spacing-x8))
+    var(--ctr-survey-info-panel-padding-bottom, var(--lbr-spacing-x4))
+    var(--ctr-survey-info-panel-padding-left, var(--lbr-spacing-x8));
+  border-radius: var(--ctr-survey-info-panel-corner-radius, var(--lbr-corner-radius-x1));
+  background: var(--ctr-survey-info-panel-background-color, var(--sjs-layer-2-background-500, #f8f8f8ff));
   text-align: center;
-  color: $foreground-dim-light;
+  color: var(--ctr-survey-info-panel-text-color, var(--sjs-layer-2-foreground-50, #00000080));
 }
   
 @container (max-width: #{$sd-panel-medium-min-width}) {
