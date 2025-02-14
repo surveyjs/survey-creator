@@ -149,6 +149,7 @@ var simplifiedChineseTranslation = {
     saveError: "错误，未保存",
     translationPropertyGridTitle: "语言设置",
     themePropertyGridTitle: "主题设置",
+    addLanguageTooltip: "添加语言",
     translationLanguages: "语言",
     translationDeleteLanguage: "您确定要删除此语言的所有字符串吗？",
     translationAddLanguage: "语言选择",
@@ -3171,3 +3172,4 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "例：100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "为所有项目标签设置一致的宽度。接受 CSS 值（px、%、in、pt 等）。"
 // ed.zoom100Tooltip: "Zoom to 100%" => "缩放到 100%"
+// ed.addLanguageTooltip: "Add Language" => "添加语言"

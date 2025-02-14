@@ -149,6 +149,7 @@ var traditionalChineseTranslation = {
     saveError: "錯誤！不保存編輯器內容。",
     translationPropertyGridTitle: "語言設置",
     themePropertyGridTitle: "主題設置",
+    addLanguageTooltip: "添加語言",
     translationLanguages: "語言",
     translationDeleteLanguage: "您確定要刪除此語言的所有字串嗎？",
     translationAddLanguage: "選擇要翻譯的語言",
@@ -3300,3 +3301,4 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "例：100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "為所有項目標籤設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"
 // ed.zoom100Tooltip: "Zoom to 100%" => "縮放到 100%"
+// ed.addLanguageTooltip: "Add Language" => "添加語言"

@@ -149,6 +149,7 @@ export var ruStrings = {
     saveError: "Ошибка! Содержание редактора не сохранено.",
     translationPropertyGridTitle: "Языковые настройки",
     themePropertyGridTitle: "Настройки темы",
+    addLanguageTooltip: "Добавить язык",
     translationLanguages: "Языки",
     translationDeleteLanguage: "Вы уверены, что хотите удалить все строки для этого языка?",
     translationAddLanguage: "Выберите дополнительный язык опросника",
@@ -3085,3 +3086,4 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Пример: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Задает одинаковую ширину для всех меток товаров. Принимает значения CSS (px, %, in, pt и т.д.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Увеличьте масштаб до 100%"
+// ed.addLanguageTooltip: "Add Language" => "Добавить язык"

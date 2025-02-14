@@ -149,6 +149,7 @@ export var bgStrings = {
     saveError: "Грешка! Съдържанието на редактора не е запазено.",
     translationPropertyGridTitle: "Езикови настройки",
     themePropertyGridTitle: "Настройки на тема",
+    addLanguageTooltip: "Добавяне на език",
     translationLanguages: "Езици",
     translationDeleteLanguage: "Сигурни ли сте, че искате да изтриете всички низове за този език?",
     translationAddLanguage: "Изберане на език за превод",
@@ -2593,3 +2594,4 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Пример: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Задава постоянна ширина за всички етикети на елементите. Приема CSS стойности (px, %, in, pt и т.н.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Увеличете до 100%"
+// ed.addLanguageTooltip: "Add Language" => "Добавяне на език"

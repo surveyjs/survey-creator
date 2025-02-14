@@ -149,6 +149,7 @@ export var fiStrings = {
     saveError: "Virhe! Editorin sisältöä ei ole tallennettu.",
     translationPropertyGridTitle: "Kieliasetukset",
     themePropertyGridTitle: "Teeman asetukset",
+    addLanguageTooltip: "Lisää kieli",
     translationLanguages: "Kielet",
     translationDeleteLanguage: "Oletko varma, että haluat poistaa kaikki merkkijonot tältä kieleltä?",
     translationAddLanguage: "Valitse käännettävä kieli",
@@ -3002,3 +3003,4 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Esimerkki: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Määrittää yhdenmukaisen leveyden kaikille nimikeotsikoille. Hyväksyy CSS-arvot (px, %, in, pt jne.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoomaa 100 %:iin"
+// ed.addLanguageTooltip: "Add Language" => "Lisää kieli"

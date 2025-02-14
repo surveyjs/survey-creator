@@ -1,4 +1,3 @@
-// Uncomment the line below if you create a custom dictionary
 import { setupLocale } from "survey-creator-core";
 
 export var slStrings = {
@@ -16,7 +15,6 @@ export var slStrings = {
     deleteQuestion: "Izbriši vprašanje",
     convertTo: "Pretvori v",
     drag: "Povlecite element",
-    license: "Za uporabo naše knjižnice je potrebna <a href='https://surveyjs.io/licensing'>licenca razvijalca</a>. Če imate aktivno licenco, <a href='https://surveyjs.io/remove-alert-banner'>nastavite licenčni ključ</a> in se prepričajte, da uporabljate najnovejšo različico."
   },
   // Creator tabs
   tabs: {
@@ -150,8 +148,8 @@ export var slStrings = {
     propertyEditorError: "Napaka",
     saveError: "Napaka! Vsebina urejevalnika ni shranjena.",
     translationPropertyGridTitle: "Jezikovne nastavitve",
-
     themePropertyGridTitle: "Nastavitve teme",
+    addLanguageTooltip: "Dodajanje jezika",
     translationLanguages: "Jeziki",
     translationDeleteLanguage: "Ste prepričani, da želite izbrisati vse nize za ta jezik?",
     translationAddLanguage: "Izberite jezik za prevod",
@@ -191,7 +189,6 @@ export var slStrings = {
     surveyPlaceHolder: "Anketa je prazna. Povlecite element iz orodjarne ali kliknite spodnji gumb.",
     pagePlaceHolder: "Stran je prazna. Povlecite element iz orodjarne ali kliknite spodnji gumb.",
     imagePlaceHolder: "Povlecite in spustite sliko sem ali kliknite spodnji gumb in izberite sliko za nalaganje.",
-
     surveyPlaceHolderMobile: "Kliknite gumb \"Dodaj vprašanje\" spodaj, da začnete ustvarjati svoj obrazec.",
     surveyPlaceholderTitle: "Vaš obrazec je prazen",
     surveyPlaceholderTitleMobile: "Vaš obrazec je prazen",
@@ -209,12 +206,11 @@ export var slStrings = {
     panelPlaceHolderMobile: "Kliknite gumb \"Dodaj vprašanje\" spodaj, da dodate nov element v ploščo.",
     imagePlaceHolderMobile: "Kliknite spodnji gumb in izberite sliko za nalaganje",
     imageChooseImage: "Izberite sliko",
-    addNewTypeQuestion: "Dodaj {0}", //{0} je lokalizirana vrsta vprašanja
+    addNewTypeQuestion: "Dodaj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGOTIP]",
     choices_Item: "Element ",
     selectFile: "Izberite datoteko",
     removeFile: "Odstrani datoteko",
-
     lg: {
       addNewItem: "Dodaj novo pravilo",
       empty_tab: "Ustvarite pravilo za prilagoditev poteka ankete.",
@@ -256,29 +252,29 @@ export var slStrings = {
       trigger_skipDescription: "Ko logični izraz vrne true, anketa skoči na izbrano vprašanje.",
       trigger_runExpressionDescription: "Ko logični izraz vrne true, anketa izvede drug izraz. Po želji se rezultat lahko dodeli izbranemu vprašanju.",
       completedHtmlOnConditionDescription: "Če logični izraz vrne true, stran \"Hvala\" prikaže določeno vsebino.",
-      itemExpressionText: "Ko izraz: '{0}' vrne true", //{0} - izraz
+      itemExpressionText: "Ko izraz: '{0}' vrne true", //{0} - the expression
       itemEmptyExpressionText: "Novo pravilo",
-      page_visibilityText: "naredi stran {0} vidno", //{0} ime strani
-      panel_visibilityText: "naredi ploščo {0} vidno", //{0} ime plošče
-      panel_enableText: "omogoči ploščo {0}", //{0} ime plošče
-      question_visibilityText: "naredi vprašanje {0} vidno", //{0} ime vprašanja
-      question_enableText: "omogoči vprašanje {0}", //{0} ime vprašanja
-      question_requireText: "naredi vprašanje {0} obvezno", //{0} ime vprašanja
-      question_resetValueText: "ponastavi vrednost vprašanja: {0}", //{0} ime vprašanja
-      question_setValueText: "dodeli vrednost: {1} vprašanju: {0}", //{0} ime vprašanja, {1} izraz vrednosti
-      column_visibilityText: "naredi stolpec {0} vprašanja {1} viden", //{0} ime stolpca, {1} ime vprašanja
-      column_enableText: "omogoči stolpec {0} vprašanja {1}", //{0} ime stolpca, {1} ime vprašanja
-      column_requireText: "naredi stolpec {0} vprašanja {1} obvezen", //{0} ime stolpca, {1} ime vprašanja
-      column_resetValueText: "ponastavi vrednost celice v stolpcu: {0}", //{0} ime stolpca
-      column_setValueText: "dodeli vrednost celice: {1} stolpcu: {0}", //{0} ime stolpca, {1} izraz vrednosti
+      page_visibilityText: "naredi stran {0} vidno", //{0} page name
+      panel_visibilityText: "naredi ploščo {0} vidno", //{0} panel name
+      panel_enableText: "omogoči ploščo {0}", //{0} panel name
+      question_visibilityText: "naredi vprašanje {0} vidno", //{0} question name
+      question_enableText: "omogoči vprašanje {0}", //{0} question name
+      question_requireText: "naredi vprašanje {0} obvezno", //{0} question name
+      question_resetValueText: "ponastavi vrednost vprašanja: {0}", //{0} question name.
+      question_setValueText: "dodeli vrednost: {1} vprašanju: {0}",
+      column_visibilityText: "naredi stolpec {0} vprašanja {1} viden", //{0} column name, {1} question name
+      column_enableText: "omogoči stolpec {0} vprašanja {1}", //{0} column name, {1} question name
+      column_requireText: "naredi stolpec {0} vprašanja {1} obvezen", //{0} column name, {1} question name
+      column_resetValueText: "ponastavi vrednost celice v stolpcu: {0}", //{0} column name
+      column_setValueText: "dodeli vrednost celice: {1} stolpcu: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "Izraz, katerega rezultat bo dodeljen ciljnemu vprašanju.",
       trigger_completeText: "anketa je zaključena",
-      trigger_setvalueText: "nastavi v vprašanje: {0} vrednost {1}", //{0} ime vprašanja, {1} vrednost
-      trigger_setvalueEmptyText: "počisti vrednost vprašanja: {0}", //{0} ime vprašanja
-      trigger_copyvalueText: "kopiraj v vprašanje: {0} vrednost iz vprašanja {1}", //{0} in {1} imeni vprašanj
-      trigger_skipText: "anketa preskoči na vprašanje {0}", //{0} ime vprašanja
-      trigger_runExpressionText1: "izvedi izraz: '{0}'", //{0} izraz
-      trigger_runExpressionText2: " in nastavi njegov rezultat v vprašanje: {0}", //{0} ime vprašanja
+      trigger_setvalueText: "nastavi v vprašanje: {0} vrednost {1}", //{0} question name, {1} setValue
+      trigger_setvalueEmptyText: "počisti vrednost vprašanja: {0}", //{0} question name
+      trigger_copyvalueText: "kopiraj v vprašanje: {0} vrednost iz vprašanja {1}", //{0} and {1} question names
+      trigger_skipText: "anketa preskoči na vprašanje {0}", //{0} question name
+      trigger_runExpressionText1: "izvedi izraz: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " in nastavi njegov rezultat v vprašanje: {0}", //{0} question name
       completedHtmlOnConditionText: "prikaži prilagojeno besedilo za stran \"Hvala\".",
       showAllQuestions: "Vsa vprašanja",
       showAllActionTypes: "Vse vrste dejanj",
@@ -296,7 +292,6 @@ export var slStrings = {
       uncompletedRule_text: "Nekatera logična pravila niso dokončana. Če zdaj zapustite zavihek, bodo spremembe izgubljene. Ali želite zapustiti zavihek brez dokončanja sprememb?",
       uncompletedRule_apply: "Da",
       uncompletedRule_cancel: "Ne, želim dokončati pravila"
-
     }
   },
   // Property Editors
@@ -315,12 +310,10 @@ export var slStrings = {
       minWidth: "Minimalna širina plošče",
       maxWidth: "Maksimalna širina plošče",
       showNumber: "Oštevilči to ploščo"
-
     },
     panellayoutcolumn: {
       effectiveWidth: "Dejanska širina, %",
       questionTitleWidth: "Širina naslova vprašanja, px"
-
     },
     paneldynamic: {
       name: "Ime plošče",
@@ -349,7 +342,6 @@ export var slStrings = {
       newPanelPosition: "Nova lokacija plošče",
       showRangeInProgress: "Prikaži vrstico napredka",
       keyName: "Prepreči podvojene odgovore v naslednjem vprašanju"
-
     },
     question: {
       name: "Ime vprašanja",
@@ -368,7 +360,6 @@ export var slStrings = {
       minWidth: "Minimalna širina vprašanja",
       maxWidth: "Maksimalna širina vprašanja",
       textUpdateMode: "Posodobi vrednost vnosnega polja"
-
     },
     signaturepad: {
       signatureWidth: "Širina območja za podpis",
@@ -381,21 +372,17 @@ export var slStrings = {
       penMinWidth: "Minimalna širina črte",
       penMaxWidth: "Maksimalna širina črte",
       penColor: "Barva črte"
-
     },
     comment: {
       rows: "Višina vnosnega polja (v vrsticah)"
-
     },
     showQuestionNumbers: "Oštevilčevanje vprašanj",
     questionStartIndex: "Vrsta indeksiranja vprašanj",
-
     expression: {
       name: "Ime izraza",
       title: "Naslov izraza",
       description: "Opis izraza",
-      expression: "Izraz",
-
+      expression: "Izraz"
     },
     trigger: {
       expression: "Izraz"
@@ -408,7 +395,6 @@ export var slStrings = {
       title: "Naslov ankete",
       description: "Opis ankete",
       readOnly: "Naredi anketo samo za branje"
-
     },
     page: {
       name: "Ime strani",
@@ -418,7 +404,6 @@ export var slStrings = {
       requiredIf: "Naredi stran obvezno, če",
       timeLimit: "Časovni omejitev za dokončanje strani",
       questionOrder: "Vrstni red vprašanj na strani"
-
     },
     matrixdropdowncolumn: {
       name: "Ime stolpca",
@@ -430,25 +415,20 @@ export var slStrings = {
       visibleIf: "Naredi stolpec viden, če",
       requiredIf: "Naredi stolpec obvezen, če",
       showInMultipleColumns: "Vsaka možnost v ločenem stolpcu"
-
     },
     multipletextitem: {
       name: "Ime",
       title: "Naslov"
-
     },
     masksettings: {
       saveMaskedValue: "Shrani zakrito vrednost v rezultatih ankete"
-
     },
     patternmask: {
       pattern: "Vzorec vrednosti"
-
     },
     datetimemask: {
       min: "Minimalna vrednost",
       max: "Maksimalna vrednost"
-
     },
     numericmask: {
       allowNegativeValues: "Dovoli negativne vrednosti",
@@ -457,12 +437,10 @@ export var slStrings = {
       precision: "Natančnost vrednosti",
       min: "Minimalna vrednost",
       max: "Maksimalna vrednost"
-
     },
     currencymask: {
       prefix: "Predpona valute",
       suffix: "Zaimek valute"
-
     },
     imageHeight: "Višina območja za prikaz",
     imageWidth: "Širina območja za prikaz",
@@ -558,11 +536,9 @@ export var slStrings = {
     itemEdit: "Uredi element: {0}",
     url: "URL",
     path: "Pot do podatkov",
-
     choicesbyurl: {
       url: "URL spletne storitve",
       valueName: "Pridobite vrednost za shranjevanje iz naslednje lastnosti"
-
     },
     titleName: "Pridobite vrednost za prikaz iz naslednje lastnosti",
     imageLinkName: "Pridobite URL-je datotek iz naslednje lastnosti",
@@ -701,11 +677,9 @@ export var slStrings = {
     minCount: "Minimalno število",
     maxCount: "Maksimalno število",
     regex: "Regularni izraz",
-
     surveyvalidator: {
       text: "Sporočilo o napaki",
       expression: "Izraz za preverjanje"
-
     },
     totalText: "Povzetek vrstice",
     totalType: "Metoda agregacije",
@@ -803,44 +777,36 @@ export var slStrings = {
     cells: "Besedila celic",
     fileInputPlaceholder: "Izberite datoteko ali prilepite povezavo do datoteke...",
     keyName: "Prepreči podvojene odgovore v naslednjem stolpcu",
-
     itemvalue: {
       visibleIf: "Naredi možnost vidno, če",
       enableIf: "Naredi možnost izbirno, če"
-
     },
     "itemvalue@rows": {
       visibleIf: "Naredi vrstico vidno, če",
       enableIf: "Naredi vrstico urejljivo, če"
-
     },
     imageitemvalue: {
       text: "Alt besedilo"
-
     },
     logoPosition: "Poravnava logotipa",
     addLogo: "Dodaj logotip...",
     changeLogo: "Spremeni logotip...",
-
     logoPositions: {
       none: "Odstrani logotip",
       left: "Levo",
       right: "Desno",
       top: "Na vrhu",
       bottom: "Na dnu"
-
     },
     previewMode: "Način predogleda",
     gridLayoutEnabled: "Omogoči mrežno postavitev",
     gridLayoutColumns: "Mrežne stolpce",
     maskSettings: "Nastavitve maske",
     detailErrorLocation: "Poravnava sporočila o napaki pri razširitvi vrstice",
-
     // Creator tabs
     tabs: {
       panel: {
         layout: "Postavitev panela"
-
       },
       general: "Splošno",
       fileOptions: "Možnosti",
@@ -872,7 +838,6 @@ export var slStrings = {
         panel: "Postavitev panela",
         question: "Postavitev vprašanja",
         base: "Osnovna postavitev"
-
       },
       data: "Podatki",
       validation: "Preverjanje",
@@ -889,7 +854,6 @@ export var slStrings = {
       surfaceBackground: "Ozadetje površine",
       scaling: "Spreminjanje velikosti",
       others: "Drugi"
-
     },
     editProperty: "Uredi lastnost '{0}'",
     items: "Postavke",
@@ -941,7 +905,7 @@ export var slStrings = {
     maxWidth_placeholder: "Npr.: 50%",
     imageHeight_placeholder: "avtomatsko",
     imageWidth_placeholder: "avtomatsko",
-
+    itemTitleWidth_placeholder: "Primer: 100px",
     theme: {
       themeName: "Tema",
       isPanelless: "Pogled vprašanja",
@@ -960,7 +924,6 @@ export var slStrings = {
       questionDescription: "Pisava opisa vprašanja",
       editorFont: "Pisava",
       backgroundOpacity: "Prosojnost",
-
       "--sjs-font-family": "Pisava ankete",
       "--sjs-general-backcolor-dim": "Barva ozadja",
       "--sjs-primary-backcolor": "Poudarne barve ozadja",
@@ -968,8 +931,7 @@ export var slStrings = {
       "--sjs-special-red": "Barve sporočil o napakah",
       "--sjs-shadow-small": "Efekti senc",
       "--sjs-shadow-inner": "Efekti notranjih senc",
-      "--sjs-border-default": "Barve",
-
+      "--sjs-border-default": "Barve"
     },
     "header@header": {
       headerView: "Pogled",
@@ -986,8 +948,7 @@ export var slStrings = {
       overlapEnabled: "Prekrivanje omogočeno",
       logoPositionX: "Poravnava logotipa",
       titlePositionX: "Poravnava naslova ankete",
-      descriptionPositionX: "Poravnava opisa ankete",
-
+      descriptionPositionX: "Poravnava opisa ankete"
     }
   },
   // Property values
@@ -1058,10 +1019,8 @@ export var slStrings = {
     onComplete: "Ob zaključku ankete",
     onHidden: "Ko je vprašanje skrito",
     onHiddenContainer: "Ko je vprašanje ali njegov panel/stran skrita",
-
     clearInvisibleValues: {
       none: "Nikoli"
-
     },
     clearIfInvisible: {
       none: "Nikoli"
@@ -1080,21 +1039,20 @@ export var slStrings = {
       time: "Čas",
       url: "URL",
       week: "Týden"
-
     },
     autocomplete: {
-      "name": "Celé jméno",
+      name: "Celé jméno",
       "honorific-prefix": "Prefix",
       "given-name": "Křestní jméno",
       "additional-name": "Střední jméno",
       "family-name": "Příjmení",
       "honorific-suffix": "Přípona",
-      "nickname": "Přezdívka",
+      nickname: "Přezdívka",
       "organization-title": "Pozice",
-      "username": "Uživatelské jméno",
+      username: "Uživatelské jméno",
       "new-password": "Nové heslo",
       "current-password": "Aktuální heslo",
-      "organization": "Název organizace",
+      organization: "Název organizace",
       "street-address": "Celá adresa",
       "address-line1": "Adresa řádek 1",
       "address-line2": "Adresa řádek 2",
@@ -1103,7 +1061,7 @@ export var slStrings = {
       "address-level3": "Úroveň 3 adresa",
       "address-level2": "Úroveň 2 adresa",
       "address-level1": "Úroveň 1 adresa",
-      "country": "Kód země",
+      country: "Kód země",
       "country-name": "Název země",
       "postal-code": "PSČ",
       "cc-name": "Jméno držitele karty",
@@ -1118,15 +1076,15 @@ export var slStrings = {
       "cc-type": "Typ kreditní karty",
       "transaction-currency": "Měna transakce",
       "transaction-amount": "Částka transakce",
-      "language": "Preferovaný jazyk",
-      "bday": "Datum narození",
+      language: "Preferovaný jazyk",
+      bday: "Datum narození",
       "bday-day": "Den narození",
       "bday-month": "Měsíc narození",
       "bday-year": "Rok narození",
-      "sex": "Pohlaví",
-      "url": "URL webové stránky",
-      "photo": "Profilová fotografie",
-      "tel": "Telefonní číslo",
+      sex: "Pohlaví",
+      url: "URL webové stránky",
+      photo: "Profilová fotografie",
+      tel: "Telefonní číslo",
       "tel-country-code": "Kód země pro telefon",
       "tel-national": "Národní telefonní číslo",
       "tel-area-code": "Předvolba oblasti",
@@ -1134,9 +1092,8 @@ export var slStrings = {
       "tel-local-prefix": "Místní telefonní předvolba",
       "tel-local-suffix": "Místní telefonní přípona",
       "tel-extension": "Telefonní linka",
-      "email": "Emailová adresa",
-      "impp": "Protokol okamžitého zasílání zpráv"
-
+      email: "Emailová adresa",
+      impp: "Protokol okamžitého zasílání zpráv"
     },
     maskType: {
       none: "Žádný",
@@ -1149,7 +1106,6 @@ export var slStrings = {
       auto: "Automaticky",
       left: "Vlevo",
       right: "Vpravo"
-
     },
     all: "Vše",
     page: "Stránka",
@@ -1157,12 +1113,10 @@ export var slStrings = {
     onNextPage: "Při přechodu na další stránku",
     onValueChanged: "Po změně odpovědi",
     onValueChanging: "Před změnou odpovědi",
-
     questionsOnPageMode: {
       standard: "Původní struktura",
       singlePage: "Zobrazit všechny otázky na jedné stránce",
-      questionPerPage: "Zobrazit jednu otázku na stránce",
-
+      questionPerPage: "Zobrazit jednu otázku na stránce"
     },
     noPreview: "Žádný náhled",
     showAllQuestions: "Zobrazit všechny otázky",
@@ -1181,66 +1135,53 @@ export var slStrings = {
     underRow: "Pod řádkem",
     underRowSingle: "Pod řádkem, zobrazit pouze jednu expanze řádku",
     auto: "Automaticky",
-
     showNavigationButtons: {
       none: "Skryté"
-
     },
     timerInfoMode: {
       combined: "Obojí"
-
     },
     addRowButtonLocation: {
       default: "Na základě rozložení matice"
-
     },
     panelsState: {
       default: "Zamčeno",
       collapsed: "Sbalit vše",
       expanded: "Rozbalit vše",
       firstExpanded: "První rozbalený"
-
     },
     widthMode: {
       static: "Statické",
       responsive: "Responzivní"
-
     },
     contentMode: {
       image: "Obrázek",
       video: "Video",
       youtube: "YouTube"
-
     },
     displayMode: {
       buttons: "Tlačítka",
       dropdown: "Rozbalovací nabídka"
-
     },
     rateColorMode: {
       default: "Výchozí",
       scale: "Měřítko"
-
     },
     scaleColorMode: {
       monochrome: "Monochromatické",
       colored: "Barevné"
-
     },
     autoGenerate: {
       "true": "Automatické generování",
       "false": "Manuální"
-
     },
     rateType: {
       labels: "Štítky",
       stars: "Hvězdičky",
       smileys: "Smajlíky"
-
     },
     state: {
       default: "Zamčeno"
-
     },
     showQuestionNumbers: {
       default: "Automatsko numerisanje",
@@ -1250,39 +1191,32 @@ export var slStrings = {
       onPanel: "Resetuj na svakom panelu",
       onSurvey: "Nastavi kroz anketu",
       off: "Bez numerisanja"
-
     },
     descriptionLocation: {
       underTitle: "Ispod naslova pitanja",
       underInput: "Ispod unosa"
-
     },
     selectToRankAreasLayout: {
       horizontal: "Pored opcija",
       vertical: "Iznad opcija"
-
     },
     displayStyle: {
       decimal: "Decimal",
       currency: "Valuta",
       percent: "Procenat",
       date: "Datum"
-
     },
     totalDisplayStyle: {
       decimal: "Decimal",
       currency: "Valuta",
       percent: "Procenat",
       date: "Datum"
-
     },
     rowOrder: {
       initial: "Izvorno"
-
     },
     questionOrder: {
       initial: "Izvorno"
-
     },
     progressBarLocation: {
       top: "Zgoraj",
@@ -1291,18 +1225,15 @@ export var slStrings = {
       aboveheader: "Nad naslovom",
       belowheader: "Pod naslovom",
       off: "Skrito"
-
     },
     sum: "Vsota",
     count: "Štetje",
     min: "Min",
     max: "Max",
     avg: "Povprečje",
-
     searchMode: {
       contains: "Vsebuje",
       startsWith: "Se začne z"
-
     },
     backgroundImageFit: {
       auto: "Samodejno",
@@ -1310,12 +1241,10 @@ export var slStrings = {
       contain: "Vsebuje",
       fill: "Raztegniti",
       tile: "Ploščice"
-
     },
     backgroundImageAttachment: {
       fixed: "Fiksno",
       scroll: "Pomikanje"
-
     },
     headerView: {
       basic: "Osnovno",
@@ -1328,22 +1257,19 @@ export var slStrings = {
     backgroundColorSwitch: {
       none: "Nič",
       accentColor: "Poudarna barva",
-      custom: "Po meri",
+      custom: "Po meri"
     },
     colorPalette: {
       light: "Svetla",
       dark: "Temna"
-
     },
     isPanelless: {
-      false: "Privzeto",
-      true: "Brez panelov"
-
+      "false": "Privzeto",
+      "true": "Brez panelov"
     },
     progressBarInheritWidthFrom: {
       survey: "Enako kot anketa",
       container: "Enako kot vsebnik"
-
     }
   },
   // Operators
@@ -1362,7 +1288,6 @@ export var slStrings = {
     lessorequal: "Manjše ali enako",
     and: "in",
     or: "ali"
-
   },
   // Embed window
   ew: {
@@ -1392,7 +1317,6 @@ export var slStrings = {
     selectPage: "Izberi stran za testiranje",
     showInvisibleElements: "Prikaži nevidne elemente",
     hideInvisibleElements: "Skrij nevidne elemente"
-
   },
   validators: {
     answercountvalidator: "Število odgovorov",
@@ -1401,7 +1325,6 @@ export var slStrings = {
     numericvalidator: "Število",
     regexvalidator: "Regex",
     textvalidator: "Besedilo"
-
   },
   triggers: {
     completetrigger: "Zaključi anketu",
@@ -1410,7 +1333,6 @@ export var slStrings = {
     skiptrigger: "Preskoči na vprašanje",
     runexpressiontrigger: "Zaženi izraz",
     visibletrigger: "Spremeni vidnost (zastarelo)"
-
   },
   peplaceholder: {
     patternmask: {
@@ -1428,8 +1350,8 @@ export var slStrings = {
     },
     panellayoutcolumn: {
       effectiveWidth: "Npr.: 30%",
-      questionTitleWidth: "Npr.: 200px",
-    },
+      questionTitleWidth: "Npr.: 200px"
+    }
   },
   pehelp: {
     panel: {
@@ -1449,8 +1371,7 @@ export var slStrings = {
       width: "Določi širino panela v razmerju z drugimi elementi ankete v isti vrstici. Sprejema CSS vrednosti (px, %, in, pt, itd.).",
       showQuestionNumbers: "Dodeli številke vprašanjem, ki so znotraj tega panela.",
       effectiveColSpan: "Določi, koliko stolpcev ta panel zajema v mrežnem načrtu.",
-      gridLayoutColumns: "Ta tabela vam omogoča konfiguracijo vsakega mrežnega stolpca znotraj panela. Samodejno nastavi širino odstotkov za vsak stolpec na podlagi največjega števila elementov v vrstici. Za prilagoditev mrežnega načrta ročno prilagodite te vrednosti in določite širino naslova za vsa vprašanja v vsakem stolpcu.",
-
+      gridLayoutColumns: "Ta tabela vam omogoča konfiguracijo vsakega mrežnega stolpca znotraj panela. Samodejno nastavi širino odstotkov za vsak stolpec na podlagi največjega števila elementov v vrstici. Za prilagoditev mrežnega načrta ročno prilagodite te vrednosti in določite širino naslova za vsa vprašanja v vsakem stolpcu."
     },
     paneldynamic: {
       name: "ID panela, ki ni viden anketirancem.",
@@ -1466,8 +1387,8 @@ export var slStrings = {
       startWithNewLine: "Odznači, da bo panel prikazan v eni vrstici s prejšnjim vprašanjem ali panelom. Nastavitev ne velja, če je panel prvi element v obrazcu.",
       state: "Izberite iz: \"Razširjeno\" - panel je prikazan v celoti in ga je mogoče zložiti; \"Zloženo\" - panel prikazuje samo naslov in opis ter ga je mogoče razširiti; \"Zaklenjeno\" - panel je prikazan v celoti in ga ni mogoče zložiti.",
       width: "Določi širino panela v razmerju z drugimi elementi ankete v isti vrstici. Sprejema CSS vrednosti (px, %, in, pt, itd.).",
-      templateTitle: "Vnesite predlogo za dinamične naslove panelov. Uporabite \{panelIndex}\ za splošno pozicijo panela in \{visiblePanelIndex}\ za njegov vrstni red med vidnimi paneli. Vstavite te označevalce v vzorec za dodajanje samodejnega številčenja.",
-      templateTabTitle: "Vnesite predlogo za naslove zavihkov. Uporabite \{panelIndex}\ za splošno pozicijo panela in \{visiblePanelIndex}\ za njegov vrstni red med vidnimi paneli. Vstavite te označevalce v vzorec za dodajanje samodejnega številčenja.",
+      templateTitle: "Vnesite predlogo za dinamične naslove panelov. Uporabite {panelIndex} za splošno pozicijo panela in {visiblePanelIndex} za njegov vrstni red med vidnimi paneli. Vstavite te označevalce v vzorec za dodajanje samodejnega številčenja.",
+      templateTabTitle: "Vnesite predlogo za naslove zavihkov. Uporabite {panelIndex} za splošno pozicijo panela in {visiblePanelIndex} za njegov vrstni red med vidnimi paneli. Vstavite te označevalce v vzorec za dodajanje samodejnega številčenja.",
       tabTitlePlaceholder: "Zasilni tekst za naslove zavihkov, ki se uporabi, kadar predloga za naslov zavihka ne ustvari smiselne vrednosti.",
       templateVisibleIf: "Ta nastavitev vam omogoča nadzor nad vidnostjo posameznih panelov znotraj dinamičnega panela. Uporabite označevalec `{panel}` za sklicevanje na trenutni panel v vaši izrazi.",
       titleLocation: "Ta nastavitev se samodejno deduje za vsa vprašanja znotraj tega panela. Če želite prekiniti to nastavitev, določite pravila za poravnavo naslovov za posamezna vprašanja. Možnost \"Dedovanje\" uporabi nastavitev na ravni strani (če je nastavljeno) ali na ravni ankete (\"Na vrhu\" privzeto).",
@@ -1482,7 +1403,6 @@ export var slStrings = {
     setValueIf: "Uporabite ikono čarobne paličice za nastavitev pogojnega pravila, ki določa, kdaj izvesti \"Izraz nastavitev vrednosti\" in dinamično dodeliti rezultat kot odgovor.",
     setValueExpression: "Določite izraz, ki opredeli vrednost, ki se nastavi, ko so izpolnjeni pogoji v pravilu \"Nastavi vrednost, če\". Izraz lahko vključuje osnovne izračune - `{q1_id} + {q2_id}`, Booleove izraze, kot je `{age} > 60`, in funkcije: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, itd. Vrednost, določena z tem izrazom, lahko prekine respondentov ročni vnos.",
     gridLayoutEnabled: "Ustvarjalec ankete vam omogoča ročno prilagoditev širine elementov obrazca za nadzor postavitve. Če to ne privede do želenega izida, lahko omogočite mrežno postavitev, ki strukturira elemente obrazca z uporabo sistema, temelječega na stolpcih. Za konfiguracijo postavitev stolpcev izberite stran ali panel in uporabite tabelo \"Nastavitve vprašanj\" → \"Stolpci mreže\". Za prilagoditev, koliko stolpcev zajema vprašanje, ga izberite in nastavite želeno vrednost v polju \"Postavitev\" → \"Širina stolpca\".",
-
     question: {
       name: "ID vprašanja, ki ni viden respondentu.",
       description: "Vnesite podnaslov vprašanja.",
@@ -1497,44 +1417,36 @@ export var slStrings = {
       errorLocation: "Nastavi lokacijo sporočila o napaki v povezavi z vprašanjem z neveljavnim vhodom. Izberite med: \"Zgoraj\" - sporočilo o napaki je postavljeno na vrh vprašalnika; \"Spodaj\" - sporočilo o napaki je postavljeno na dno vprašalnika. Možnost \"Podedovano\" uporablja nastavitev na ravni ankete (\"Zgoraj\" privzeto).",
       indent: "Doda prostor ali rob med vsebino vprašanja in levim robom vprašalnika.",
       width: "Nastavi širino vprašanja glede na druge elemente ankete v isti vrstici. Sprejema CSS vrednosti (px, %, in, pt, itd.).",
-
       surveyvalidator: {
         expression: "Uporabite ikono čarobne paličice za nastavitev pravila za preverjanje veljavnosti vprašanja."
-
       },
       textUpdateMode: "Izberite med: \"Ob izgubi fokusa\" - vrednost se posodobi, ko vnosno polje izgubi fokus; \"Med tipkanjem\" - vrednost se posodablja v realnem času med tipkanjem uporabnikov. Možnost \"Podedovano\" uporablja nastavitev na ravni ankete (privzeto \"Ob izgubi fokusa\").",
       url: "Kot vir podatkov za vprašanja z več možnimi odgovori lahko uporabite katero koli spletno storitev. Za izpolnitev vrednosti izbire vnesite URL storitve, ki zagotavlja podatke.",
       searchMode: "Primerjalna operacija, ki se uporablja za filtriranje spustnega seznama.",
       textWrapEnabled: "Dolga besedila v možnostih izbire bodo samodejno prelomljena, da se prilegajo v spustni meni. Odznačite, če želite, da se besedila odrežejo.",
       effectiveColSpan: "Določa, koliko stolpcev to vprašanje zavzema v postavitvi mreže."
-
     },
     signaturepad: {
       signatureWidth: "Določa širino prikazanega območja podpisa in končne slike.",
       signatureHeight: "Določa višino prikazanega območja podpisa in končne slike.",
       signatureAutoScaleEnabled: "Izberite, če želite, da se območje podpisa zapolni z vsem razpoložljivim prostorom v polju vprašanja ob ohranjanju privzetega razmerja stranic 3:2. Ko so nastavljene prilagojene vrednosti širine in višine, bo nastavitev ohranila razmerje teh dimenzij."
-
     },
     file: {
       imageHeight: "Prilagodi višino slike v rezultatih ankete.",
       imageWidth: "Prilagodi širino slike v rezultatih ankete.",
       allowImagesPreview: "Prikaže sličice naloženih datotek, kadar je to mogoče. Odznačite, če želite namesto tega prikazati ikone datotek."
-
     },
     image: {
       contentMode: "Možnost \"Samodejno\" samodejno določi ustrezen način prikaza – slika, video ali YouTube – glede na podani vir URL."
-
     },
     imagepicker: {
       imageHeight: "Prepiše najmanjše in največje vrednosti višine.",
       imageWidth: "Prepiše najmanjše in največje vrednosti širine.",
       choices: "\"Vrednost\" služi kot ID elementa, ki se uporablja v pogojnih pravilih; \"Besedilo\" je prikazano anketirancem.",
       contentMode: "Izberite med \"Slika\" in \"Video\", da nastavite način vsebine izbirnika medijev. Če je izbrana možnost \"Slika\", poskrbite, da so vse ponujene možnosti slikovne datoteke v naslednjih formatih: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Podobno, če je izbrana možnost \"Video\", zagotovite, da so vse možnosti neposredne povezave do video datotek v naslednjih formatih: MP4, MOV, WMV, FLV, AVI, MKV. Upoštevajte, da povezave do YouTuba niso podprte za video možnosti."
-
     },
     text: {
       size: "Ta nastavitev spremeni samo velikost vnosnega polja in ne vpliva na širino polja z vprašanjem. Če želite omejiti dolžino vnesenega besedila, pojdite na \"Validacija\" → \"Največje dovoljeno število znakov\"."
-
     },
     comment: {
       rows: "Določa število prikazanih vrstic v vnosnem polju. Če vnos zavzame več vrstic, se prikaže drsna vrstica."
@@ -1552,7 +1464,7 @@ export var slStrings = {
       enableIf: "Uporabite ikono čarobne palice za nastavitev pogojnega pravila, ki onemogoči način samo za branje za stolpec.",
       requiredIf: "Uporabite ikono čarobne palice za nastavitev pogojnega pravila, ki prepreči oddajo ankete, če vsaj eno vprašanju v tem stolpcu ni bilo odgovorjeno.",
       showInMultipleColumns: "Ko je izbrano, ustvari posamezen stolpec za vsako izbiro.",
-      colCount: "Razvrsti možnosti izbire v postavitev z več stolpci. Ko je nastavljeno na 0, so možnosti prikazane v eni sami vrstici. Ko je nastavljeno na -1, se dejanska vrednost podeduje iz lastnosti \"Število gnezdenih stolpcev\" nadrejenega matriksa.",
+      colCount: "Razvrsti možnosti izbire v postavitev z več stolpci. Ko je nastavljeno na 0, so možnosti prikazane v eni sami vrstici. Ko je nastavljeno na -1, se dejanska vrednost podeduje iz lastnosti \"Število gnezdenih stolpcev\" nadrejenega matriksa."
     },
     caseInsensitive: "Izberite, če naj bodo velike in male črke v regularnem izrazu obravnavane kot enake",
     widthMode: "Izberite med Statistična - nastavi fiksno širino, Responsive - naredi anketo, da zasede celotno širino zaslona, Auto - uporabi eno izmed dveh možnosti glede na vrsto vprašanj",
@@ -1596,7 +1508,11 @@ export var slStrings = {
     description: "Vnesite podnaslov",
     locale: "Izberite jezik za začetek ustvarjanja vaše ankete. Če želite dodati prevod, preklopite na nov jezik in prevedite izvirno besedilo tukaj ali na zavihku Prevod",
     detailPanelMode: "Nastavi lokacijo podrobnostnega razdelka v povezavi z vrstico. Izberite med: Brez - ni dodanega širjenja, Pod vrstico - širitev vrstice je postavljena pod vsako vrstico matrike, Pod vrstico prikaži samo eno širitev vrstice - širitev je prikazana samo pod eno vrstico, preostale širitve vrstic so skrite",
+    imageFit: "Izbirate lahko med: \"Brez\" - slika ohrani svojo prvotno velikost; »Contain« - velikost slike se spremeni tako, da se prilega, hkrati pa se ohrani njeno razmerje; »Cover« - slika zapolni celotno škatlo, hkrati pa ohrani razmerje med širino in višino; »Polnilo« - slika se raztegne, da zapolni polje, ne da bi ohranila njegovo razmerje.",
+    autoGrow: "Možnost »Podeduj« uporablja nastavitev na ravni ankete (»privzeto onemogočeno«).",
+    allowResize: "Možnost »Deduj« uporablja nastavitev na ravni ankete (»privzeto omogočeno«).",
     timeLimit: "Časovni interval v sekundah, po katerem anketa samodejno preide na stran Hvala. Ko je nastavljeno na 0, šteje čas preživet na anketi",
+    timeLimitPerPage: "Časovni interval v sekundah, po katerem se anketa samodejno premakne na naslednjo stran. Skrije gumb za krmarjenje »Prejšnji«. Če je nastavljena na 0, šteje čas, porabljen na trenutni strani.",
     validateVisitedEmptyFields: "Omogočite to možnost, da sprožite preverjanje, ko uporabnik klikne na prazno vnosno polje in ga nato zapusti brez sprememb",
     page: {
       timeLimit: "Časovni interval v sekundah, po katerem anketa samodejno preide na naslednjo stran. Skrije navigacijski gumb Prejšnja. Ko je nastavljeno na 0, šteje čas preživet na trenutni strani",
@@ -1608,9 +1524,8 @@ export var slStrings = {
       questionErrorLocation: "Nastavi lokacijo sporočila o napaki v povezavi z vprašanjem z neveljavnim vnosom. Izberite med: Zgoraj - besedilo napake je postavljeno na vrh polja vprašanja, Spodaj - besedilo napake je postavljeno na dno polja vprašanja. Možnost Podedovano uporabi nastavitev na ravni ankete (privzeto Zgoraj)",
       questionOrder: "Ohrani prvoten vrstni red vprašanj ali jih naključno premeša. Možnost Podedovano uporabi nastavitev na ravni ankete (privzeto Originalno). Učinek te nastavitve je viden samo na zavihku Predogled",
       showNavigationButtons: "Nastavi vidnost navigacijskih gumbov na strani. Možnost Podedovano uporabi nastavitev na ravni ankete, ki je privzeto Vidno",
-      gridLayoutColumns: "Ta tabela vam omogoča konfiguracijo vsakega stolpca mreže na strani. Samodejno nastavi odstotke širine za vsak stolpec glede na največje število elementov v vrstici. Če želite prilagoditi postavitev mreže, ročno prilagodite te vrednosti in določite širino naslova za vsa vprašanja v posameznem stolpcu",
+      gridLayoutColumns: "Ta tabela vam omogoča konfiguracijo vsakega stolpca mreže na strani. Samodejno nastavi odstotke širine za vsak stolpec glede na največje število elementov v vrstici. Če želite prilagoditi postavitev mreže, ročno prilagodite te vrednosti in določite širino naslova za vsa vprašanja v posameznem stolpcu"
     },
-
     timerLocation: "Nastavi lokacijo časovnika na strani",
     panelsState: "Izberite med: Zaklenjeno - uporabniki ne morejo razširiti ali strniti panelov, Strni vse - vsi paneli se začnejo v strnjenem stanju, Razširi vse - vsi paneli se začnejo v razširjenem stanju, Prvi razširjen - samo prvi panel je sprva razširjen. Uporablja se, če je Način prikaza panela nastavljen na Seznam in je določena lastnost Vzorec naslova panela",
     imageLinkName: "Vnesite skupno ime lastnosti v nizu objektov, ki vsebuje URL-je slik ali video datotek, ki jih želite prikazati na seznamu izbir",
@@ -1632,7 +1547,6 @@ export var slStrings = {
     choicesbyurl: {
       valueName: "Vnesite enotno ime lastnosti znotraj niza objektov, katere vrednost bo shranjena kot odgovor v rezultatih ankete"
     },
-
     titleName: "Vnesite enotno ime lastnosti znotraj niza objektov, ki vsebuje vrednosti, ki jih želite prikazati na seznamu izbir",
     allowEmptyResponse: "Izberite to možnost, da omogočite storitvi vračanje praznega odziva ali niza",
     choicesVisibleIf: "Uporabite ikono čarobne palice za nastavitev pogoja, ki določa vidnost vseh možnosti izbire",
@@ -1656,9 +1570,8 @@ export var slStrings = {
     expression: {
       name: "ID izraza, ki ni viden anketirancem",
       description: "Vnesite podnaslov izraza",
-      expression: "Izraz lahko vključuje osnovne izračune ({q1_id} + {q2_id}), pogoje ({age} > 60) in funkcije (iif(), today(), age(), min(), max(), avg(), itd.)",
+      expression: "Izraz lahko vključuje osnovne izračune ({q1_id} + {q2_id}), pogoje ({age} > 60) in funkcije (iif(), today(), age(), min(), max(), avg(), itd.)"
     },
-
     storeOthersAsComment: "Izberite, da shranite vrednost možnosti \"Drugo\" kot ločeno lastnost v rezultatih ankete",
     format: "Uporabite {0} kot nadomestni znak za dejansko vrednost",
     acceptedTypes: "Poglejte opis atributa accept za več informacij",
@@ -1672,20 +1585,17 @@ export var slStrings = {
       saveMaskedValue: "Izberite, če želite shraniti vrednost vprašanja z uporabo maske v rezultatih ankete"
     },
     patternmask: {
-
-      pattern: "Vzorec lahko vsebuje dobesedne nize in naslednje nadomestne znake: 9 - za številko; a - za veliko ali malo črko; # - za številko ali veliko ali malo črko. Za pobeg znaka uporabite poševnico \\.",
+      pattern: "Vzorec lahko vsebuje dobesedne nize in naslednje nadomestne znake: 9 - za številko; a - za veliko ali malo črko; # - za številko ali veliko ali malo črko. Za pobeg znaka uporabite poševnico \\."
     },
     datetimemask: {
-      pattern: "Vzorec lahko vsebuje ločevalne znake in naslednje nadomestne znake:<br>m - številka meseca.<br>mm - številka meseca, z začetno ničlo za enomestne vrednosti.<br>d - dan v mesecu.<br>dd - dan v mesecu, z začetno ničlo za enomestne vrednosti.<br>yy - zadnji dve števki leta.<br>yyyy - štirimestno leto.<br>H - ure v 24-urnem formatu.<br>HH - ure v 24-urnem formatu, z začetno ničlo za enomestne vrednosti.<br>h - ure v 12-urnem formatu.<br>hh - ure v 12-urnem formatu, z začetno ničlo za enomestne vrednosti.<br>MM - minute.<br>ss - sekunde.<br>TT - obdobje 12-urnega ure v velikih črkah (AM/PM).<br>tt - obdobje 12-urnega ure v malih črkah (am/pm).",
+      pattern: "Vzorec lahko vsebuje ločevalne znake in naslednje nadomestne znake:<br>m - številka meseca.<br>mm - številka meseca, z začetno ničlo za enomestne vrednosti.<br>d - dan v mesecu.<br>dd - dan v mesecu, z začetno ničlo za enomestne vrednosti.<br>yy - zadnji dve števki leta.<br>yyyy - štirimestno leto.<br>H - ure v 24-urnem formatu.<br>HH - ure v 24-urnem formatu, z začetno ničlo za enomestne vrednosti.<br>h - ure v 12-urnem formatu.<br>hh - ure v 12-urnem formatu, z začetno ničlo za enomestne vrednosti.<br>MM - minute.<br>ss - sekunde.<br>TT - obdobje 12-urnega ure v velikih črkah (AM/PM).<br>tt - obdobje 12-urnega ure v malih črkah (am/pm)."
     },
     numericmask: {
-
       decimalSeparator: "Simbol, ki se uporablja za ločevanje decimalnega dela od celostnega dela prikazane številke.",
       thousandsSeparator: "Simbol, ki se uporablja za ločevanje števk velike številke v skupine po tri.",
-      precision: "Omejuje, koliko števk se ohrani po decimalni piki za prikazano številko.",
+      precision: "Omejuje, koliko števk se ohrani po decimalni piki za prikazano številko."
     },
     currencymask: {
-
       prefix: "En ali več simbolov, ki bodo prikazani pred vrednostjo.",
       suffix: "En ali več simbolov, ki bodo prikazani za vrednostjo."
     },
@@ -1701,10 +1611,9 @@ export var slStrings = {
       inheritWidthFrom: "\"Enako kot kontejner\" možnost samodejno prilagodi širino vsebine glave, da se prilega HTML elementu, v katerega je anketa vstavljena.",
       textAreaWidth: "Širina območja glave, ki vsebuje naslov in opis ankete, izmerjena v slikovnih pikah.",
       overlapEnabled: "Ko je omogočeno, zgornji del ankete prekrije spodnji del glave.",
-      mobileHeight: "Ko je nastavljeno na 0, se višina samodejno izračuna, da sprejme vsebino glave.",
+      mobileHeight: "Ko je nastavljeno na 0, se višina samodejno izračuna, da sprejme vsebino glave."
     },
-
-    progressBarInheritWidthFrom: "\"Enako kot kontejner\" možnost samodejno prilagodi širino območja napredka, da se prilega HTML elementu, v katerega je anketa vstavljena.",
+    progressBarInheritWidthFrom: "\"Enako kot kontejner\" možnost samodejno prilagodi širino območja napredka, da se prilega HTML elementu, v katerega je anketa vstavljena."
   },
   // Properties
   p: {
@@ -1810,7 +1719,7 @@ export var slStrings = {
     rateColorMode: "Barvna shema smeškotov",
     copyDisplayValue: "Kopiraj prikazano vrednost",
     effectiveColSpan: "Razpon stolpca",
-    progressBarInheritWidthFrom: "Širina območja napredka",
+    progressBarInheritWidthFrom: "Širina območja napredka"
   },
   theme: {
     advancedMode: "Napreden način",
@@ -1818,26 +1727,21 @@ export var slStrings = {
     questionTitle: "Polje vprašanja",
     editorPanel: "Vhodni element",
     lines: "Vrste",
-
     primaryDefaultColor: "Privzeto",
     primaryDarkColor: "Ob prehodu",
     primaryLightColor: "Izbrano",
     backgroundDimColor: "Barva ozadja",
-
     cornerRadius: "Radij kota",
     backcolor: "Privzeto ozadje",
     hovercolor: "Ozadje ob prehodu",
     borderDecoration: "Dekoracija robov",
-
     fontColor: "Barva pisave",
     backgroundColor: "Barva ozadja",
-
     primaryForecolor: "Privzeta barva",
     primaryForecolorLight: "Onemogočena barva",
     font: "Pisava",
     borderDefault: "Temnejši rob",
     borderLight: "Svetlejši rob",
-
     fontFamily: "Družina pisav",
     fontWeightRegular: "Običajno",
     fontWeightHeavy: "Težka",
@@ -1846,7 +1750,6 @@ export var slStrings = {
     color: "Barva",
     placeholderColor: "Barva oznake",
     size: "Velikost",
-
     opacity: "Prosojnost",
     boxShadowX: "X",
     boxShadowY: "Y",
@@ -1855,7 +1758,6 @@ export var slStrings = {
     boxShadowSpread: "Porazdelitev",
     boxShadowDrop: "Padec",
     boxShadowInner: "Znotraj",
-
     names: {
       default: "Privzeto",
       sharp: "Ostrina",
@@ -1877,7 +1779,7 @@ export var slStrings = {
       brown: "Rjava",
       green: "Zelena",
       gray: "Siva"
-    },
+    }
   },
   creatortheme: {
     "--sjs-special-background": "Ozadje površine",
@@ -1886,14 +1788,21 @@ export var slStrings = {
     surfaceScale: "Površina",
     userInterfaceBaseUnit: "Enote uporabniškega vmesnika",
     fontScale: "Pisava",
-
     names: {
-      "sc2020": "Ustvarjalec anket 2020",
+      sc2020: "Ustvarjalec anket 2020",
       "default-light": "Svetla",
       "default-dark": "Temna",
       "default-contrast": "Kontrast"
-    },
+    }
   }
 };
 
 setupLocale({ localeCode: "sl", strings: slStrings });
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually
+// ed.addLanguageTooltip: "Add Language" => "Dodajanje jezika"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Primer: 100px"
+// pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Izbirate lahko med: \"Brez\" - slika ohrani svojo prvotno velikost; »Contain« - velikost slike se spremeni tako, da se prilega, hkrati pa se ohrani njeno razmerje; »Cover« - slika zapolni celotno škatlo, hkrati pa ohrani razmerje med širino in višino; »Polnilo« - slika se raztegne, da zapolni polje, ne da bi ohranila njegovo razmerje."
+// pehelp.autoGrow: "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)." => "Možnost »Podeduj« uporablja nastavitev na ravni ankete (»privzeto onemogočeno«)."
+// pehelp.allowResize: "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)." => "Možnost »Deduj« uporablja nastavitev na ravni ankete (»privzeto omogočeno«)."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page." => "Časovni interval v sekundah, po katerem se anketa samodejno premakne na naslednjo stran. Skrije gumb za krmarjenje »Prejšnji«. Če je nastavljena na 0, šteje čas, porabljen na trenutni strani."

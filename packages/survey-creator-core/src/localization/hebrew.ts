@@ -149,6 +149,7 @@ export var hebrewStrings = {
     saveError: "שגיאה! התוכן של העורך לא נשמר.",
     translationPropertyGridTitle: "הגדרות שפה",
     themePropertyGridTitle: "הגדרות ערכת העיצוב",
+    addLanguageTooltip: "הוסף שפה",
     translationLanguages: "שפות",
     translationDeleteLanguage: "האם אתה בטוח שברצונך למחוק את כל המחרוזות לשפה זו?",
     translationAddLanguage: "בחר שפה לתרגום",
@@ -2597,3 +2598,4 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "לדוגמה: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "קובע רוחב עקבי לכל תוויות הפריט. מקבל ערכי CSS (px, %, in, pt וכו')."
 // ed.zoom100Tooltip: "Zoom to 100%" => "שינוי גודל תצוגה ל- 100%"
+// ed.addLanguageTooltip: "Add Language" => "הוסף שפה"

@@ -149,6 +149,7 @@ export var czStrings = {
     saveError: "Chyba! Obsah editoru není uložen.",
     translationPropertyGridTitle: "Nastavení jazyka",
     themePropertyGridTitle: "Nastavení motivu",
+    addLanguageTooltip: "Přidat jazyk",
     translationLanguages: "Jazyky",
     translationDeleteLanguage: "Jste si jisti, že chcete odstranit všechny řetězce pro tento jazyk?",
     translationAddLanguage: "Vyberte jazyk pro překlad",
@@ -2607,3 +2608,4 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Příklad: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentní šířku pro všechny popisky položek. Přijímá hodnoty CSS (px, %, in, pt, atd.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zvětšení na 100 %"
+// ed.addLanguageTooltip: "Add Language" => "Přidat jazyk"

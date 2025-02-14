@@ -149,6 +149,7 @@ var germanTranslation = {
     saveError: "Fehler! Der Inhalt des Editors wurde nicht gespeichert.",
     translationPropertyGridTitle: "Übersetzungseinstellungen",
     themePropertyGridTitle: "Theme-Einstellungen",
+    addLanguageTooltip: "Sprache hinzufügen",
     translationLanguages: "Sprachen",
     translationDeleteLanguage: "Sind Sie sicher, dass Sie alle Texte für diese Sprache löschen möchten?",
     translationAddLanguage: "Wählen Sie eine Sprache aus",
@@ -2742,3 +2743,4 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Beispiel: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Legt die einheitliche Breite für alle Elementbeschriftungen fest. Akzeptiert CSS-Werte (px, %, in, pt usw.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Auf 100 % zoomen"
+// ed.addLanguageTooltip: "Add Language" => "Sprache hinzufügen"

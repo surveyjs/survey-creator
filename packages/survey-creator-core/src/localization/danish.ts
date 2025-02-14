@@ -149,6 +149,7 @@ export var danishStrings = {
     saveError: "Fejl! Undersøgelsen er ikke blevet gemt.",
     translationPropertyGridTitle: "Sprogindstillinger",
     themePropertyGridTitle: "Temaindstillinger",
+    addLanguageTooltip: "Tilføj sprog",
     translationLanguages: "Sprog",
     translationDeleteLanguage: "Er du sikker på, at du ønsker at slette alle strenge for dette sprog?",
     translationAddLanguage: "Vælg et sprog at oversætte",
@@ -3214,3 +3215,4 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Eks.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Indstiller ensartet bredde for alle elementetiketter. Accepterer CSS-værdier (px, %, in, pt osv.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoom til 100 %"
+// ed.addLanguageTooltip: "Add Language" => "Tilføj sprog"

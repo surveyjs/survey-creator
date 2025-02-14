@@ -149,6 +149,7 @@ var persianStrings = {
     saveError: "خطا! محتوای ویرایشگر ذخیره نشده است.",
     translationPropertyGridTitle: "تنظیمات زبان",
     themePropertyGridTitle: "تنظیمات تم",
+    addLanguageTooltip: "افزودن زبان",
     translationLanguages: "زبان",
     translationDeleteLanguage: "ایا مطمئن هستید که می خواهید تمام رشته ها را برای این زبان حذف کنید؟",
     translationAddLanguage: "زبانی را برای ترجمه انتخاب کنید",
@@ -2985,3 +2986,4 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "مثال: 100 پیکسل"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "عرض ثابت را برای همه برچسب های مورد تنظیم می کند. مقادیر CSS (px، ٪، in، pt و غیره) را می پذیرد."
 // ed.zoom100Tooltip: "Zoom to 100%" => "بزرگنمایی تا 100٪"
+// ed.addLanguageTooltip: "Add Language" => "افزودن زبان"

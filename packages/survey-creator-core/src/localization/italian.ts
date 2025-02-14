@@ -149,6 +149,7 @@ var italianTranslation = {
     saveError: "Errore! Il contenuto dell'editor non è salvato.",
     translationPropertyGridTitle: "Impostazione della traduzione",
     themePropertyGridTitle: "Impostazioni del tema",
+    addLanguageTooltip: "Aggiungi lingua",
     translationLanguages: "Lingue",
     translationDeleteLanguage: "Sei sicuro di voler eliminare tutte le stringhe per questa lingua?",
     translationAddLanguage: "Seleziona la lingua da tradurre",
@@ -2791,3 +2792,4 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Es.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Imposta una larghezza uniforme per tutte le etichette degli articoli. Accetta valori CSS (px, %, in, pt, ecc.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoom al 100%"
+// ed.addLanguageTooltip: "Add Language" => "Aggiungi lingua"

@@ -149,6 +149,7 @@ var polishStrings = {
     saveError: "Błąd! Zawartość edytora nie jest zapisywana.",
     translationPropertyGridTitle: "Ustawienia językowe",
     themePropertyGridTitle: "Ustawienia motywu",
+    addLanguageTooltip: "Dodaj język",
     translationLanguages: "Języki",
     translationDeleteLanguage: "Czy na pewno chcesz usunąć wszystkie ciągi znaków dla tego języka?",
     translationAddLanguage: "Wybierz język do przetłumaczenia",
@@ -3295,3 +3296,4 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Przykład: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Ustawia spójną szerokość dla wszystkich etykiet elementów. Akceptuje wartości CSS (px, %, in, pt itd.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Powiększenie do 100%"
+// ed.addLanguageTooltip: "Add Language" => "Dodaj język"

@@ -149,6 +149,7 @@ export var arStrings = {
     saveError: "Error! Editor content is not saved.",
     translationPropertyGridTitle: "Language Settings",
     themePropertyGridTitle: "إعدادات النسق",
+    addLanguageTooltip: "إضافة لغة",
     translationLanguages: "Languages",
     translationDeleteLanguage: "هل أنت متأكد من أنك ترغب في حذف جميع السلاسل لهذه اللغة؟",
     translationAddLanguage: "Select language to translate",
@@ -2944,3 +2945,4 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "على سبيل المثال: 100 بكسل"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "لتعيين عرض متسق لجميع تسميات الأصناف. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "تكبير إلى 100٪"
+// ed.addLanguageTooltip: "Add Language" => "إضافة لغة"

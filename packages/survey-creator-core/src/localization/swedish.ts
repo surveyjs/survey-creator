@@ -149,6 +149,7 @@ export let svStrings = {
     saveError: "Fel! Innehållet i enkäten är inte sparat.",
     translationPropertyGridTitle: "Språkinställningar",
     themePropertyGridTitle: "Tema Inställningar",
+    addLanguageTooltip: "Lägg till språk",
     translationLanguages: "Språk",
     translationDeleteLanguage: "Är du säker på att du vill ta bort alla strängar för det här språket?",
     translationAddLanguage: "Välj språk för oversättning",
@@ -3204,3 +3205,4 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Ställer in konsekvent bredd för alla objektetiketter. Accepterar CSS-värden (px, %, in, pt, etc.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zooma till 100 %"
+// ed.addLanguageTooltip: "Add Language" => "Lägg till språk"

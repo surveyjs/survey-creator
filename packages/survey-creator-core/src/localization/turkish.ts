@@ -149,6 +149,7 @@ export var turkishStrings = {
     saveError: "Hata! Editor içerisi kaydedilmedi.",
     translationPropertyGridTitle: "Dil Ayarları",
     themePropertyGridTitle: "Tema Ayarları",
+    addLanguageTooltip: "Dil Ekle",
     translationLanguages: "Diller",
     translationDeleteLanguage: "Bu dil için tüm dizeleri silmek istediğinizden emin misiniz?",
     translationAddLanguage: "Çeviri için dil seçiniz",
@@ -3025,3 +3026,4 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ör.: 100 piksel"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Tüm öğe etiketleri için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder."
 // ed.zoom100Tooltip: "Zoom to 100%" => "%100 yakınlaştırma"
+// ed.addLanguageTooltip: "Add Language" => "Dil Ekle"

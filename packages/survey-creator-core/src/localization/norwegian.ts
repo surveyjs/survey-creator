@@ -149,6 +149,7 @@ export var nbStrings = {
     saveError: "Feil! Skjema innhold er ikke lagret.",
     translationPropertyGridTitle: "Språkinnstillinger",
     themePropertyGridTitle: "Tema innstillinger",
+    addLanguageTooltip: "Legg til språk",
     translationLanguages: "Språk",
     translationDeleteLanguage: "Er du sikker på at du ønsker å slette alle strenger for dette språket?",
     translationAddLanguage: "Velg språk for oversetting",
@@ -3032,3 +3033,4 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Eks.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Angir konsekvent bredde for alle vareetiketter. Godtar CSS-verdier (px, %, in, pt, etc.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoom til 100 %"
+// ed.addLanguageTooltip: "Add Language" => "Legg til språk"

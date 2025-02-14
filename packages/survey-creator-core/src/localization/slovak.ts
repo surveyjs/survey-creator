@@ -149,6 +149,7 @@ export var skStrings = {
     saveError: "Chyba! Obsah editora sa neuložil.",
     translationPropertyGridTitle: "Nastavenia jazyka",
     themePropertyGridTitle: "Nastavenia motívu",
+    addLanguageTooltip: "Pridať jazyk",
     translationLanguages: "Jazyky",
     translationDeleteLanguage: "Ste si istý, že chcete odstrániť všetky reťazce pre tento jazyk?",
     translationAddLanguage: "Výber jazyka na preklad",
@@ -2983,3 +2984,4 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Príklad: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentnú šírku pre všetky štítky položiek. Akceptuje hodnoty CSS (px, %, in, pt atď.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Priblíženie na 100 %"
+// ed.addLanguageTooltip: "Add Language" => "Pridať jazyk"
