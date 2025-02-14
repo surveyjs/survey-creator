@@ -147,6 +147,7 @@ var frenchTranslation = {
     saveError: "Erreur! Le contenu de l'éditeur n'a pas été sauvegardé.",
     translationPropertyGridTitle: "Paramètres de langue",
     themePropertyGridTitle: "Paramètres du thème",
+    addLanguageTooltip: "Ajouter une langue",
     translationLanguages: "Traduction",
     translationDeleteLanguage: "Êtes-vous certain de vouloir supprimer toutes les chaînes pour cette langue ?",
     translationAddLanguage: "Choisir langue à traduire",
@@ -3051,3 +3052,5 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator vous permet d’ajuster manuellement les largeurs en ligne des éléments de formulaire pour contrôler la mise en page. Si cela ne produit pas le résultat souhaité, vous pouvez activer la disposition en grille, qui structure les éléments de formulaire à l’aide d’un système basé sur des colonnes. Pour configurer les colonnes de mise en page, sélectionnez une page ou un panneau et utilisez le tableau « Paramètres des questions » → « Colonnes de la grille ». Pour ajuster le nombre de colonnes d’une question, sélectionnez-la et définissez la valeur souhaitée dans le champ « Mise en page » → « Étendue de colonnes »."
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Spécifie le nombre de colonnes que cette question couvre dans la disposition de la grille."
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Ce tableau vous permet de configurer chaque colonne de la grille de la page. Il définit automatiquement le pourcentage de largeur de chaque colonne en fonction du nombre maximal d’éléments dans une rangée. Pour personnaliser la disposition de la grille, ajustez manuellement ces valeurs et définissez la largeur du titre pour toutes les questions de chaque colonne."
+
+// ed.addLanguageTooltip: "Add Language" => "Ajouter une langue"

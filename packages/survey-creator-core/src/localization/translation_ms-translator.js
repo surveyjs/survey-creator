@@ -5,7 +5,7 @@
  * node ms_translation french <ms-tranlation-key-32-symbols>
  */
 // eslint-disable-next-line no-undef
-const axios = require("axios").default;
+const http = require("https");
 // eslint-disable-next-line no-undef
 const crypto = require("crypto");
 // eslint-disable-next-line no-undef
@@ -17,35 +17,35 @@ const unsupportedName = "unsupported";
 
 // eslint-disable-next-line no-undef
 let arg = process.argv;
-if(!Array.isArray(arg)) return;
-if(arg.length < 4) {
+if (!Array.isArray(arg)) return;
+if (arg.length < 4) {
   utils.reportMessage("You should pass file name as parameter and ms-translation-key");
   return;
 }
 let parameter = arg[2].toLocaleLowerCase();
-if(parameter === "english") {
+if (parameter === "english") {
   utils.reportMessage("You can't update english translation");
   return;
 }
 let translationKey = arg[3];
 
-const endpoint = "https://api.cognitive.microsofttranslator.com";
+const endpoint = "api.cognitive.microsofttranslator.com";
 const resource_region = "southcentralus";
 const englishJSON = utils.readJson("english");
-if(parameter === "all") {
+if (parameter === "all") {
   fs.readdir(".", function (err, files) {
     if (err) {
       utils.reportMessage("Unable to scan directory: " + err);
       return;
     }
     files.forEach(function (file) {
-      if(file.indexOf(".ts") > 0 && file !== "english.ts") {
+      if (file.indexOf(".ts") > 0 && file !== "english.ts") {
         translateLanguage(file);
       }
     });
   });
 } else {
-  if(!utils.isTranslationExists(parameter)) {
+  if (!utils.isTranslationExists(parameter)) {
     utils.reportMessage("There is no translation file: " + utils.getTranslationFileName(parameter));
     return;
   }
@@ -54,31 +54,31 @@ if(parameter === "all") {
 
 function getMSTranslationLocale(name) {
   const locale = utils.getLocale(name);
-  if(locale === "gr") return "el";
-  if(locale === "ua") return "uk";
-  if(locale === "tel") return "te";
-  if(locale === "rs") return "sr-Latn";
-  if(locale === "tg") return unsupportedName;
+  if (locale === "gr") return "el";
+  if (locale === "ua") return "uk";
+  if (locale === "tel") return "te";
+  if (locale === "rs") return "sr-Latn";
+  if (locale === "tg") return unsupportedName;
   return locale;
 }
 function translateLanguage(name) {
   const locale = getMSTranslationLocale(name);
-  if(!locale) return;
-  if(locale === "en") {
+  if (!locale) return;
+  if (locale === "en") {
     return;
   }
-  if(locale === unsupportedName) {
+  if (locale === unsupportedName) {
     utils.reportMessage("MS translator doesn't support: " + name + ".");
     return;
   }
   const json = utils.readJson(name);
-  if(!json) return;
+  if (!json) return;
   utils.updateAlternativeNamesInJSON(json);
   const lines = [];
   const stringsToTranslate = [];
   utils.updateTranslationKey(lines, stringsToTranslate, englishJSON, json, 1);
   lines.push(utils.getNewLineText(0));
-  if(stringsToTranslate.length === 0) {
+  if (stringsToTranslate.length === 0) {
     utils.reportMessage("File name: " + name + ". There is nothing to translate.");
     return;
   }
@@ -87,12 +87,12 @@ function translateLanguage(name) {
   });
 }
 function updateFileWithTranslatedText(name, lines, stringsToTranslate) {
-  for(let i = 0; i < stringsToTranslate.length; i ++) {
+  for (let i = 0; i < stringsToTranslate.length; i++) {
     const item = stringsToTranslate[i];
-    if(!!item.translation && item.lineIndex < lines.length) {
+    if (!!item.translation && item.lineIndex < lines.length) {
       let str = utils.getNewLineText(item.level) + utils.getKeyName(item.propKey) + ": " + JSON.stringify(item.translation);
-      if(item.hasComma) str += ",";
-      if(!!item.comment) str += item.comment;
+      if (item.hasComma) str += ",";
+      if (!!item.comment) str += item.comment;
       lines.splice(item.lineIndex, 1, str);
     }
   }
@@ -102,36 +102,37 @@ function updateFileWithTranslatedText(name, lines, stringsToTranslate) {
 }
 function translateStrings(locale, stringsToTranslate, callback) {
   const dataToTranslate = [];
-  for(let i = 0; i < stringsToTranslate.length; i ++) {
+  for (let i = 0; i < stringsToTranslate.length; i++) {
     dataToTranslate.push({ text: stringsToTranslate[i].english });
   }
-  axios({
-    baseURL: endpoint,
-    url: "/translate",
-    method: "post",
+  let data = "";
+  http.request({
+    hostname: endpoint,
+    path: "/translate?api-version=3.0&from=en&to=" + locale,
+    method: "POST",
     headers: {
       "Ocp-Apim-Subscription-Key": translationKey,
       "Ocp-Apim-Subscription-Region": resource_region,
       "Content-type": "application/json",
       "X-ClientTraceId": UUIDGenerator()
     },
-    params: {
-      "api-version": "3.0",
-      "from": "en",
-      "to": locale
-    },
-    data: dataToTranslate,
     responseType: "json"
-  }).then(function(response) {
-    for(let i = 0; i < response.data.length; i ++) {
-      const item = response.data[i];
-      const tr_item = stringsToTranslate[i];
-      tr_item.translation = item.translations[0].text;
-    }
-    callback();
-  }).catch(function (error) {
-    utils.reportMessage("Error to translate: " + locale + ". Error: " + JSON.stringify(error.toJSON(), null, 2));
-  });
+  }, (response) => {
+    response.on("data", function (chunk) {
+      data += chunk;
+    });
+    response.on("end", function () {
+      const translations = JSON.parse(data);
+      for (let i = 0; i < translations.length; i++) {
+        const item = translations[i];
+        const tr_item = stringsToTranslate[i];
+        tr_item.translation = item.translations[0].text;
+      }
+      callback();
+    });
+  }).on("error", (error) => {
+    utils.reportMessage("Error to translate: " + locale + ". Error: " + JSON.stringify(error, null, 2));
+  }).end(JSON.stringify(dataToTranslate));
 }
 function UUIDGenerator() {
   return crypto.randomBytes(16).toString("hex");

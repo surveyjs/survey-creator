@@ -147,6 +147,7 @@ var simplifiedChineseTranslation = {
     saveError: "错误，未保存",
     translationPropertyGridTitle: "语言设置",
     themePropertyGridTitle: "主题设置",
+    addLanguageTooltip: "添加语言",
     translationLanguages: "语言",
     translationDeleteLanguage: "您确定要删除此语言的所有字符串吗？",
     translationAddLanguage: "语言选择",
@@ -3134,3 +3135,5 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator 允许您手动调整表单元素的内联宽度以控制布局。如果这没有产生所需的结果，您可以启用网格布局，该布局使用基于列的系统构建表单元素。要配置布局列，请选择一个页面或面板，然后使用 “Question Settings” → “Grid columns” 表格。要调整问题跨越的列数，请选择它并在 “Layout” → “Column span” 字段中设置所需的值。"
 // question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "指定此问题在网格布局中跨越多少列。"
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允许您配置页面上的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。"
+
+// ed.addLanguageTooltip: "Add Language" => "添加语言"

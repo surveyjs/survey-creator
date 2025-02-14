@@ -149,6 +149,7 @@ export var enStrings = {
     saveError: "Error! Editor content is not saved.",
     translationPropertyGridTitle: "Language Settings",
     themePropertyGridTitle: "Theme Settings",
+    addLanguageTooltip: "Add Language",
     translationLanguages: "Languages",
     translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?",
     translationAddLanguage: "Select language to translate",

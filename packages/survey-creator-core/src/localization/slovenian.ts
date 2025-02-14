@@ -147,6 +147,7 @@ export var slStrings = {
     saveError: "Napaka! Vsebina urejevalnika ni shranjena.",
     translationPropertyGridTitle: "Jezikovne nastavitve",
     themePropertyGridTitle: "Nastavitve teme",
+    addLanguageTooltip: "Dodajanje jezika",
     translationLanguages: "Jeziki",
     translationDeleteLanguage: "Ste prepričani, da želite izbrisati vse nize za ta jezik?",
     translationAddLanguage: "Izberite jezik za prevod",
@@ -1846,3 +1847,4 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Sprejema vrednosti px."
 // p.itemSize: "Input field width (in characters)" => "Širina vnosnega polja (v znakih)"
 // p.navigationButtonsVisibility: "Show/hide navigation buttons" => "Pokaži/skrij gumbe za krmarjenje"
+// ed.addLanguageTooltip: "Add Language" => "Dodajanje jezika"
