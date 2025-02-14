@@ -149,6 +149,7 @@ export const thStrings = {
     saveError: "ข้อผิดพลาด! เนื้อหาของตัวแก้ไขไม่ได้รับการบันทึก",
     translationPropertyGridTitle: "การตั้งค่าภาษา",
     themePropertyGridTitle: "การตั้งค่าธีม",
+    addLanguageTooltip: "เพิ่มภาษา",
     translationLanguages: "ภาษา",
     translationDeleteLanguage: "คุณแน่ใจหรือว่าต้องการลบสตริงทั้งหมดสำหรับภาษานี้?",
     translationAddLanguage: "เลือกภาษาที่จะแปล",
@@ -1970,3 +1971,4 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "ตัวอย่าง: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "ตั้งค่าความกว้างที่สอดคล้องกันสําหรับป้ายชื่อสินค้าทั้งหมด ยอมรับค่า CSS (px, %, in, pt เป็นต้น)"
 // ed.zoom100Tooltip: "Zoom to 100%" => "ซูมไปที่ 100%"
+// ed.addLanguageTooltip: "Add Language" => "เพิ่มภาษา"

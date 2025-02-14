@@ -149,6 +149,7 @@ export var koreanStrings = {
     saveError: "오류! 편집기 컨텐츠는 저장되지 않습니다.",
     translationPropertyGridTitle: "언어 설정",
     themePropertyGridTitle: "테마 설정",
+    addLanguageTooltip: "언어 추가",
     translationLanguages: "언어들",
     translationDeleteLanguage: "이 언어에 대한 모든 문자열을 삭제하시겠습니까?",
     translationAddLanguage: "번역할 언어 선택",
@@ -3234,3 +3235,4 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "예: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "모든 항목 레이블에 대해 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
 // ed.zoom100Tooltip: "Zoom to 100%" => "100%로 확대/축소"
+// ed.addLanguageTooltip: "Add Language" => "언어 추가"

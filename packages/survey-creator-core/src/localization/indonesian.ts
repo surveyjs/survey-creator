@@ -149,6 +149,7 @@ export var indonesianStrings = {
     saveError: "Error! Konten editor tidak berhasil disimpan.",
     translationPropertyGridTitle: "Pengaturan Bahasa",
     themePropertyGridTitle: "Pengaturan Tema",
+    addLanguageTooltip: "Tambahkan Bahasa",
     translationLanguages: "Bahasa",
     translationDeleteLanguage: "Apakah Anda yakin ingin menghapus semua string untuk bahasa ini?",
     translationAddLanguage: "Pilih bahasa untuk terjemahan",
@@ -3184,3 +3185,4 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Contoh: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk semua label item. Menerima nilai CSS (px, %, in, pt, dll.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Perbesar hingga 100%"
+// ed.addLanguageTooltip: "Add Language" => "Tambahkan Bahasa"

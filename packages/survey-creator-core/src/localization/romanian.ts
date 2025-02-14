@@ -149,6 +149,7 @@ export const roStrings = {
     saveError: "Eroare! Conținutul editorului nu este salvat.",
     translationPropertyGridTitle: "Setări de limbă",
     themePropertyGridTitle: "Setări de temă",
+    addLanguageTooltip: "Adăugați limbă",
     translationLanguages: "Limbi",
     translationDeleteLanguage: "Sigur doriți să ștergeți toate șirurile pentru această limbă?",
     translationAddLanguage: "Selectați limba pentru traducere",
@@ -1970,3 +1971,4 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Setează lățimea consecventă pentru toate etichetele articolelor. Acceptă valori CSS (px, %, in, pt etc.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Măriți la 100%"
+// ed.addLanguageTooltip: "Add Language" => "Adăugați limbă"

@@ -149,6 +149,7 @@ export var hrStrings = {
     saveError: "Pogreška! Sadržaj urednika nije spremljen.",
     translationPropertyGridTitle: "Jezične postavke",
     themePropertyGridTitle: "Postavke teme",
+    addLanguageTooltip: "Dodavanje jezika",
     translationLanguages: "Jezici",
     translationDeleteLanguage: "Jeste li sigurni da želite izbrisati sve nizove za ovaj jezik?",
     translationAddLanguage: "Odaberite jezik za prevođenje",
@@ -3024,3 +3025,4 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Primjer: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za sve oznake stavki. Prihvaća CSS vrijednosti (px, %, in, pt, itd.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zumiranje na 100%"
+// ed.addLanguageTooltip: "Add Language" => "Dodavanje jezika"

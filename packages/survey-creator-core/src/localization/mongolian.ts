@@ -149,6 +149,7 @@ export var mnStrings = {
     saveError: "Алдаа! Зассан агуулга хадгалагдаагүй байна.",
     translationPropertyGridTitle: "Хэлний тохиргоо",
     themePropertyGridTitle: "Сэдвийн тохиргоо",
+    addLanguageTooltip: "Хэл нэмэх",
     translationLanguages: "Хэл",
     translationDeleteLanguage: "Та энэ хэлний бүх уяаг арилгахыг хүсэж байгаа гэдэгтээ итгэлтэй байна уу?",
     translationAddLanguage: "Орчуулах хэлийг сонгоно уу",
@@ -2685,3 +2686,4 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Жишээ нь: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Бүх барааны шошгоны өргөнийг тогтвортой болгоно. CSS-ийн үнэ цэнийг (px, %, in, pt гэх мэт) хүлээн авна."
 // ed.zoom100Tooltip: "Zoom to 100%" => "100% хүртэл томруулах"
+// ed.addLanguageTooltip: "Add Language" => "Хэл нэмэх"

@@ -1094,6 +1094,7 @@ export class Translation extends Base implements ITranslationLocales {
       id: "svc-translation-choose-language",
       iconName: "icon-add",
       iconSize: "auto",
+      tooltip: editorLocalization.getString("ed.addLanguageTooltip"),
       enabled: <any>(new ComputedUpdater(() => this.isChooseLanguageEnabled && !this.readOnly)),
     }, {
       items: this.chooseLanguageActions,

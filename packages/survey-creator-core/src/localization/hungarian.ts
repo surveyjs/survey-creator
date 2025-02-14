@@ -149,6 +149,7 @@ export var huStrings = {
     saveError: "Hiba! A szerkesztő értéke nem került mentésre.",
     translationPropertyGridTitle: "Nyelvi beállítások",
     themePropertyGridTitle: "Téma beállítások",
+    addLanguageTooltip: "Nyelv hozzáadása",
     translationLanguages: "Nyelvek",
     translationDeleteLanguage: "Biztos benne, hogy törölni szeretné az összes karakterláncot ehhez a nyelvhez?",
     translationAddLanguage: "Válasszon egy nyelvet a fordításhoz.",
@@ -3181,3 +3182,4 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Pl.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Egységes szélességet állít be az összes cikkfelirathoz. CSS-értékeket fogad el (px, %, in, pt stb.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Nagyítás 100%-ra"
+// ed.addLanguageTooltip: "Add Language" => "Nyelv hozzáadása"

@@ -149,6 +149,7 @@ var spanishTranslation = {
     saveError: "¡Error!El contenido del editor no se ha guardado",
     translationPropertyGridTitle: "Opciones de lenguaje",
     themePropertyGridTitle: "Configuración del tema",
+    addLanguageTooltip: "Agregar idioma",
     translationLanguages: "Lenguajes",
     translationDeleteLanguage: "¿Está seguro de que desea eliminar todas las cadenas de este idioma?",
     translationAddLanguage: "Seleccione el idioma para traducir",
@@ -2806,3 +2807,4 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ej.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Establece un ancho coherente para todas las etiquetas de los elementos. Acepta valores CSS (px, %, in, pt, etc.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoom al 100%"
+// ed.addLanguageTooltip: "Add Language" => "Agregar idioma"

@@ -149,6 +149,7 @@ export var nlStrings = {
     saveError: "Fout! De inhoud van de editor wordt niet opgeslagen.",
     translationPropertyGridTitle: "Taalinstellingen",
     themePropertyGridTitle: "Thema-instellingen",
+    addLanguageTooltip: "Taal toevoegen",
     translationLanguages: "Talen",
     translationDeleteLanguage: "Weet u zeker dat u alle tekenreeksen voor deze taal wilt verwijderen?",
     translationAddLanguage: "Selecteer de taal om te vertalen",
@@ -3008,3 +3009,4 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Bijv.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor alle artikellabels. Accepteert CSS-waarden (px, %, in, pt, enz.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Inzoomen tot 100%"
+// ed.addLanguageTooltip: "Add Language" => "Taal toevoegen"

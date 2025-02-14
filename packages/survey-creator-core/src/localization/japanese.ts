@@ -149,6 +149,7 @@ export var jaStrings = {
     saveError: "エラー！ エディタのコンテンツは保存されません。",
     translationPropertyGridTitle: "言語設定",
     themePropertyGridTitle: "テーマ設定",
+    addLanguageTooltip: "言語を追加",
     translationLanguages: "言語",
     translationDeleteLanguage: "この言語のすべての文字列を削除してもよろしいですか?",
     translationAddLanguage: "翻訳する言語を選択する",
@@ -3029,3 +3030,4 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "例:100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "すべてのアイテム ラベルに一貫した幅を設定します。CSS 値 (px、%、in、pt など) を受け入れます。"
 // ed.zoom100Tooltip: "Zoom to 100%" => "100%にズーム"
+// ed.addLanguageTooltip: "Add Language" => "言語を追加"

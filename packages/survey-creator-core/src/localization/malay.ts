@@ -149,6 +149,7 @@ export var msStrings = {
     saveError: "Ralat! Kandungan editor tidak disimpan.",
     translationPropertyGridTitle: "Seting Bahasa",
     themePropertyGridTitle: "Seting Tema",
+    addLanguageTooltip: "Tambah Bahasa",
     translationLanguages: "Bahasa-bahasa",
     translationDeleteLanguage: "Adakah anda pasti ingin memadam semua rentetan untuk bahasa ini?",
     translationAddLanguage: "Pilihan bahasa untuk diterjemah",
@@ -2984,3 +2985,4 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Cth.: 100px"
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Menetapkan lebar yang konsisten untuk semua label item. Menerima nilai CSS (px, %, in, pt, dll.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zum kepada 100%"
+// ed.addLanguageTooltip: "Add Language" => "Tambah Bahasa"
