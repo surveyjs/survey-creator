@@ -132,9 +132,7 @@ export function scrollElementIntoView(elementId: string) {
 export function assignDefaultClasses(destination: any, questionType: string) {
   copyCssClasses(destination, defaultCss.question);
   copyCssClasses(destination, defaultCss[questionType]);
-  if (destination.list) {
-    copyCssClasses(destination.list, defaultCss.list);
-  }
+  destination.list = defaultCss.list;
   destination.hasErrorTop = "";
   destination.hasErrorBottom = "";
 }
