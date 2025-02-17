@@ -141,7 +141,7 @@
     }
 
     svg {
-      fill: $foreground-dim-light;
+      fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
     }
   }
 }

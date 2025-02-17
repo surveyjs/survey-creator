@@ -1364,7 +1364,7 @@ svc-question,
   }
 
   use {
-    fill: $foreground-dim-light;
+    fill: var(--ctr-survey-question-panel-drag-area-expand-button-color, var(--sjs-layer-1-foreground-50, #00000080));
   }
 }
 

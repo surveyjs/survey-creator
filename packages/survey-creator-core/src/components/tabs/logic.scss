@@ -85,7 +85,7 @@
 }
 
 .sl-table__row.sl-table__row--additional .sl-table__cell .svc-action-button {
-  color: var(--sjs-secondary-background-500, #19B394FF);
+  color: var(--lbr-page-header-title-color-not-completed-rule, var(--sjs-secondary-background-500, #19b394ff));
 }
 .sl-table .svc-action-button {
   padding: var(--ctr-survey-page-header-padding-vertical-with-button, var(--sjs-spacing-x05)) 0px;
@@ -100,12 +100,11 @@
   @include ctrMediumBoldFont;
   --thm-logic-header-max-height: var(--ctr-font-medium-line-height, var(--ctr-medium-bold-line-height, calcSize(4)));
   background: transparent;
-  //color: $foreground;
   outline: none;
   border: none;
   box-shadow: none;
   border-radius: 0;
-  color: $foreground-dim;
+  color: var(--lbr-page-header-title-color, var(--sjs-layer-3-foreground-100, #000000e6));
   box-sizing: content-box;
   max-height: calc(3 * var(--thm-logic-header-max-height));;
   overflow: hidden;
