@@ -243,3 +243,37 @@ test("sjs-special-background calculations on primary background changed", (): an
   expect(colorsAreEqual(themeModel["--sjs-primary-background-500"], "#fefefe")).toBeTruthy();
   expect(colorsAreEqual(themeModel["--sjs-special-background"], PredefinedBackgroundColors["light"]["gray"])).toBeTruthy();
 });
+
+test("Creator theme model isLight de/serialization", (): any => {
+  const themeModel = new CreatorThemeModel();
+  let result = themeModel.cssVariables || {};
+  expect(Object.keys(result).length).toBe(0);
+
+  const lightThemeJson: ICreatorTheme = {
+    themeName: "custom-light",
+  };
+  themeModel.fromJSON(lightThemeJson);
+  expect(themeModel.isLight).toBeTruthy();
+  expect(themeModel.themeName).toBe("custom-light");
+
+  let themeModelJson = themeModel.toJSON();
+  expect(themeModelJson).toStrictEqual(lightThemeJson);
+
+  const darkThemeJson: ICreatorTheme = {
+    themeName: "custom-dark",
+    isLight: false,
+  };
+  themeModel.fromJSON(darkThemeJson);
+  expect(themeModel.isLight).toBeFalsy();
+  expect(themeModel.themeName).toBe("custom-dark");
+
+  themeModelJson = themeModel.toJSON();
+  expect(themeModelJson).toStrictEqual(darkThemeJson);
+
+  themeModel.fromJSON(lightThemeJson);
+  expect(themeModel.isLight).toBeTruthy();
+  expect(themeModel.themeName).toBe("custom-light");
+
+  themeModelJson = themeModel.toJSON();
+  expect(themeModelJson).toStrictEqual(lightThemeJson);
+});
