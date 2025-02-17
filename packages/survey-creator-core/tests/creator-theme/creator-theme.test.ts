@@ -34,8 +34,8 @@ test("registerCreatorTheme function", (): any => {
     const creator: CreatorTester = new CreatorTester();
     const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
     const themeChooser = designerPlugin["themePropertyGrid"].survey.getQuestionByName("themeName") as QuestionDropdownModel;
-    expect(themeChooser.choices).toHaveLength(5);
-    expect(themeChooser.choices[4].value).toBe(customThemeName);
+    expect(themeChooser.choices).toHaveLength(2);
+    expect(themeChooser.choices[1].value).toBe(customThemeName);
     expect(creator.creatorTheme).toBeUndefined();
     expect(creator.themeVariables).toStrictEqual({});
 
