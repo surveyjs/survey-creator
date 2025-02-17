@@ -59,7 +59,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
   private updateTabControl() {
     if (this.showOneCategoryInPropertyGrid) {
-      this.updateTabControlActions();
       this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
       this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
     } else {
@@ -136,11 +135,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     if (this.creator.showCreatorThemeSettings) {
       this.themeModel.loadTheme(this.creator.creatorTheme);
       this.themePropertyGrid.obj = this.themeModel;
-      this.themePropertyGrid.survey.onUpdatePanelCssClasses.add((_, options) => {
-        options.cssClasses.panel.container += " spg-panel--group";
-      });
-      this.updateThemeChooserChoices();
-      this.updatePredefinedColorChoices();
     }
   }
   setTheme() {
@@ -149,17 +143,12 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     }
   }
 
-  private updateThemeChooserChoices(): void {
-    const themeChooser = this.themePropertyGrid.survey.getQuestionByName("themeName") as QuestionDropdownModel;
-    if (!!themeChooser) {
-      themeChooser.choices = PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) }));
-    }
-    this.themePropertyGrid.survey.runExpressions();
-  }
   private createCreatorThemeSettingsPage(creator: SurveyCreatorModel) {
     this.themeModel = new CreatorThemeModel();
     this.themePropertyGrid = new PropertyGridModel(undefined, creator, creatorThemeModelPropertyGridDefinition);
-    this.themePropertyGrid.survey.css.root += "svc-creator-theme-settings";
+    this.themePropertyGrid.onNewSurveyCreatedCallback = () => {
+      this.onThemePropertyGridSurveyCreated();
+    };
     this.themePropertyGrid.showOneCategoryInPropertyGrid = true;
     this.themePropertyGrid.surveyInstanceCreatedArea = "designer-tab:creator-settings";
     const themePropertyGridViewModel = new PropertyGridViewModel(this.themePropertyGrid, creator);
@@ -199,6 +188,19 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     });
     this.tabControlModel.bottomToolbar.setItems([settingsAction]);
   }
+  private onThemePropertyGridSurveyCreated() {
+    const survey = this.themePropertyGrid.survey;
+    survey.css.root += "svc-creator-theme-settings";
+    survey.onUpdatePanelCssClasses.add((_, options) => {
+      options.cssClasses.panel.container += " spg-panel--group";
+    });
+    const themeChooser = survey.getQuestionByName("themeName") as QuestionDropdownModel;
+    if (!!themeChooser) {
+      themeChooser.choices = PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) }));
+    }
+    survey.runExpressions();
+    this.updatePredefinedColorChoices();
+  }
 
   constructor(private creator: SurveyCreatorModel) {
     creator.addTab({ name: "designer", plugin: this, iconName: "icon-config" });
@@ -207,10 +209,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.showOneCategoryInPropertyGrid = creator.showOneCategoryInPropertyGrid;
     this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
     this.propertyGrid.obj = creator.survey;
-    this.propertyGrid.onSetNewObjectCallback = () => {
+    this.propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
+    this.propertyGridViewModel.onNewSurveyCreatedCallback = () => {
       this.updateTabControlActions();
     };
-    this.propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridPlaceholderPage = this.creator.sidebar.addPage("propertyGridPlaceholder", "svc-property-grid-placeholder", this.propertyGridViewModel);
     this.propertyGridPlaceholderPage.caption = editorLocalization.getString("ed.surveySettings");
 
