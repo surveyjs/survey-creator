@@ -2,9 +2,7 @@
 const webpackCommonConfigCreator = require("./webpack.config");
 const path = require("path");
 const fs = require("fs");
-
 const { merge } = require("webpack-merge");
-var packageJson = require("./package.json");
 
 const config = {
   entry: {
@@ -16,13 +14,7 @@ const config = {
       commonjs2: "survey-creator-core",
       commonjs: "survey-creator-core",
       amd: "survey-creator-core"
-    },
-    "survey-creator-core/themes": {
-      root: "SurveyCreatorTheme",
-      commonjs2: "survey-creator-core/themes",
-      commonjs: "survey-creator-core/themes",
-      amd: "survey-creator-core/themes",
-    },
+    }
   }
 };
 

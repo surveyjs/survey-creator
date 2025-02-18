@@ -30,7 +30,6 @@ function getConfig(options) {
     externals: {
       "survey-core": "survey-core",
       "survey-core/themes": "survey-core/themes",
-      "survey-creator-core/themes": "survey-creator-core/themes"
     }
   };
 

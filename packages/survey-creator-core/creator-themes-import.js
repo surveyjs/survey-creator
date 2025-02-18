@@ -74,33 +74,33 @@ function HEXToRGB(baseColor) {
   return [];
 }
 
-function RGBToHSL(r, g, b){
+function RGBToHSL(r, g, b) {
   r /= 255, g /= 255, b /= 255;
   var max = Math.max(r, g, b), min = Math.min(r, g, b);
   var h, s, l = (max + min) / 2;
 
-  if(max == min){
-      h = s = 0;
-  }else{
-      var d = max - min;
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-      switch(max){
-          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-          case g: h = (b - r) / d + 2; break;
-          case b: h = (r - g) / d + 4; break;
-      }
-      h /= 6;
+  if (max == min) {
+    h = s = 0;
+  } else {
+    var d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+    h /= 6;
   }
 
   return [roundTo2Decimals(h * 360), roundTo2Decimals(s * 100), roundTo2Decimals(l * 100)];
 }
 
 function generateColor(cssVariables, baseColorName, dependentColorName, resultCssVariables) {
-  if(!cssVariables[baseColorName]) {
+  if (!cssVariables[baseColorName]) {
     console.log(`${baseColorName} is missing`);
     return;
   }
-  if(!cssVariables[dependentColorName]) {
+  if (!cssVariables[dependentColorName]) {
     console.log(`${dependentColorName} is missing`);
     return;
   }
@@ -141,22 +141,22 @@ function generateColorVariables(cssVariables) {
 
   generateColor(cssVariables, "--sjs-special-background", "--sjs-special-haze", resultCssVariables);
   generateColor(cssVariables, "--sjs-special-background", "--sjs-special-glow", resultCssVariables);
-  
+
   return resultCssVariables;
 }
 
 function getUsedCssVariables(path) {
   fs.readdirSync(path, { withFileTypes: true }).forEach(item => {
-    if(item.isDirectory()) {
+    if (item.isDirectory()) {
       getUsedCssVariables(path + item.name + "/");
-    } else if(item.name.indexOf(".scss") === (item.name.length - 5)) {
+    } else if (item.name.indexOf(".scss") === (item.name.length - 5)) {
       const data = fs.readFileSync(path + item.name, "utf8");
 
       const iteratorResult = data.matchAll(cssVariablesRegExp);
-      const matches = [...iteratorResult]; 
+      const matches = [...iteratorResult];
       matches.forEach(m => {
         const variable = m.groups["variable"];
-        if(usedCssVariablesList.indexOf(variable) === -1) {
+        if (usedCssVariablesList.indexOf(variable) === -1) {
           usedCssVariablesList.push(variable);
         }
       });
@@ -170,7 +170,7 @@ function getCssVariablesFormFile(fileName) {
     // console.log(data);
 
     const iteratorResult = data.matchAll(regularExpression);
-    const matches = [...iteratorResult]; 
+    const matches = [...iteratorResult];
     const themeCssVariables = {};
     matches.forEach(m => themeCssVariables[m.groups["var1"]] = m.groups["var2"]);
     return themeCssVariables;
@@ -184,7 +184,7 @@ function capitalizedFirstLetter(word) {
 }
 
 function getCorrectValue(variableKey, value) {
-  if(variableKey.indexOf("-opacity") > -1) {
+  if (variableKey.indexOf("-opacity") > -1) {
     return parseInt(value) / 100;
   } else {
     return value;
@@ -194,7 +194,7 @@ function getCorrectValue(variableKey, value) {
 function isLightTheme(themeName) {
   let result = true;
   Object.keys(palettes).forEach(palette => {
-    if(palettes[palette].indexOf(themeName) > -1) {
+    if (palettes[palette].indexOf(themeName) > -1) {
       result = palette === "light";
     }
   });
@@ -231,7 +231,7 @@ function writeThemePalette(themeName, paletteName, cssVariables, extendTheme) {
   const themeJson = JSON.stringify(theme, null, 2);
   let importsString = "";
   let useImportString = "";
-  if(extendTheme) {
+  if (extendTheme) {
     importsString = `import { assign } from "./utils";\nimport { ${baseThemeVariable} } from "./${themeName}";\n\n`;
     useImportString = `const themeCssVariables = {};\nassign(themeCssVariables, ${baseThemeVariable}.cssVariables, Theme.cssVariables);\nassign(Theme, { cssVariables: themeCssVariables });\n\n`;
   }
@@ -245,14 +245,14 @@ const usedCssVariablesList = [];
 getUsedCssVariables("./src/");
 
 Object.keys(themeNameMap).forEach(themeName => {
-  if(!!baseThemeCssVariable) {
+  if (!!baseThemeCssVariable) {
     const curThemeCssVariables = getCssVariablesFormFile(themeName + ".css");
     const distinctions = themeConstants[themeNameMap[themeName]] || {};
     Object.keys(curThemeCssVariables || {}).forEach(variableKey => {
       const variableValue = curThemeCssVariables[variableKey];
-      if(variableKey.indexOf("--ctr-shadow-") > -1 || variableKey.indexOf("--lbr-shadow-") > -1 || variableKey.indexOf("-unit") > -1) {
+      if (variableKey.indexOf("--ctr-shadow-") > -1 || variableKey.indexOf("--lbr-shadow-") > -1 || variableKey.indexOf("-unit") > -1) {
         distinctions[variableKey] = variableValue;
-      } else if(variableValue !== baseThemeCssVariable[variableKey] || usedCssVariablesList.indexOf(variableKey) !== -1) {
+      } else if (variableValue !== baseThemeCssVariable[variableKey] || usedCssVariablesList.indexOf(variableKey) !== -1) {
         distinctions[variableKey] = getCorrectValue(variableKey, variableValue);
       }
     });
@@ -260,14 +260,14 @@ Object.keys(themeNameMap).forEach(themeName => {
   }
 });
 
-let indexFileContent = "";
+let indexFileContent = "import { registerDefaultThemes } from \"survey-creator-core\";\n";
 Object.keys(themeNameMap).forEach(themeName => {
   const currentTheme = themeNameMap[themeName];
   console.log("Theme - " + currentTheme);
   let strImportTheme = "";
-  if(legacyDefaultThemeName === themeName) {
+  if (legacyDefaultThemeName === themeName) {
     strImportTheme = writeTheme2020(currentTheme, themeDistinctions[currentTheme], "SC2020");
-  } else if(baseThemeName !== themeName){
+  } else if (baseThemeName !== themeName) {
     strImportTheme = writeTheme(currentTheme, themeDistinctions[currentTheme], capitalizedFirstLetter(currentTheme));
   }
   indexFileContent += strImportTheme;
@@ -279,7 +279,7 @@ Object.keys(themeNameMap).forEach(themeName => {
     const resultColorVariables = generateColorVariables(curPaletteCssVariables);
     const cssVariables = { ...curPaletteCssVariables, ...resultColorVariables };
 
-    if(baseThemeName === themeName && paletteName === "light") {
+    if (baseThemeName === themeName && paletteName === "light") {
       const cssVariablesJson = JSON.stringify(resultColorVariables, null, 2);
       const result = `export const DefaultLightColorCssVariables = ${cssVariablesJson};`;
       fs.writeFileSync(_dirPath + "default-light-color-css-variables.ts", result);
@@ -289,7 +289,5 @@ Object.keys(themeNameMap).forEach(themeName => {
     }
   });
 });
-indexFileContent += `\nif (typeof window !== "undefined" && typeof window["SurveyCreatorCore"] !== "undefined") {
-  window["SurveyCreatorCore"].registerDefaultThemes({ SC2020: SC2020, DefaultDark: DefaultDark, DefaultContrast: DefaultContrast });
-}\n`;
+indexFileContent += "registerDefaultThemes({ SC2020: SC2020, DefaultDark: DefaultDark, DefaultContrast: DefaultContrast });";
 fs.writeFileSync(_dirPath + "index.ts", indexFileContent);
