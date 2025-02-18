@@ -18,7 +18,9 @@ A platform-independent data model for Survey Creator / Form Builder by [SurveyJS
 
 If you want to build the library yourself, do the following:
 
-1.  **Clone the repo from GitHub and install build dependencies**
+1. **[Build `survey-library`](https://github.com/surveyjs/survey-library#build-the-surveyjs-form-library-from-sources)**
+ 
+2.  **Clone the repo from GitHub and install build dependencies**
 
     ```
     git clone https://github.com/surveyjs/survey-creator.git
@@ -26,7 +28,9 @@ If you want to build the library yourself, do the following:
     npm install
     ```
 
-1.  **Build the library**
+    > NOTE: Make sure that folders with cloned `survey-library` and `survey-creator` repositories are in the same directory.
+
+3.  **Build the library**
 
     ```
     npm run build
@@ -34,7 +38,7 @@ If you want to build the library yourself, do the following:
 
     You can find the built library in the "build" directory.
 
-1.  **Run unit tests**
+4.  **Run unit tests**
     ```
     npm test
     ```

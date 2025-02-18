@@ -19,6 +19,10 @@ function getConfig(options) {
     optimization: {
       minimize: false
     },
+    externalsType: "module",
+    externals: {
+      "survey-creator-core": "survey-creator-core",
+    }
   };
 
   return config;

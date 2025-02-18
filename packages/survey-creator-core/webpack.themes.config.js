@@ -2,7 +2,6 @@
 
 const webpackCommonConfig = require("./webpack.config");
 const { merge } = require("webpack-merge");
-var FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 var path = require("path");
 
 const config = {
@@ -15,7 +14,14 @@ const config = {
     "themes/default-contrast": path.resolve(__dirname, "./src/themes/default-contrast.ts"),
     "themes/index": path.resolve(__dirname, "./src/themes/index.ts"),
   },
-  plugins: [new FixStyleOnlyEntriesPlugin()],
+  externals: {
+    "survey-creator-core": {
+      root: "SurveyCreatorCore",
+      commonjs2: "survey-creator-core",
+      commonjs: "survey-creator-core",
+      amd: "survey-creator-core"
+    },
+  },
 };
 
 module.exports = function (options) {

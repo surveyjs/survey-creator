@@ -6,10 +6,7 @@
     "paths": {
       "survey-creator-core": [
         "./src/editorLocalization.ts"
-      ],
-      "survey-creator-core/themes": [
-        "./src/themes/index.ts"
-      ],
+      ]
     },
   }
 }

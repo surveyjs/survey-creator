@@ -4,6 +4,7 @@ import { DefaultLightColorCssVariables } from "../themes/default-light-color-css
 export interface ICreatorTheme {
   themeName?: string;
   iconSet?: string;
+  isLight?: boolean;
   cssVariables?: { [index: string]: string | any };
 }
 
