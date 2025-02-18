@@ -1134,6 +1134,7 @@ export class PropertyGridModel {
     });
   }
   public expandCategoryIfNeeded(): void {
+    if(!this.surveyValue) return;
     const expandedTabName = creatorSettings.propertyGrid.defaultExpandedTabName;
     if (!!expandedTabName && !this.getPropertyGridExpandedCategory()) {
       const panel = <PanelModel>this.survey.getPanelByName(expandedTabName);
