@@ -19,7 +19,6 @@ export class PropertyGridViewModel extends Base {
 
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
-  @property() survey: SurveyModel;
   @property() selectedElementName: string;
   @property({
     onSet: (newValue: boolean, target: PropertyGridViewModel) => {
@@ -52,7 +51,12 @@ export class PropertyGridViewModel extends Base {
     });
     this.onSurveyObjChanged();
   }
-
+  public get survey(): SurveyModel {
+    return this.getPropertyValue("survey", undefined, () => this.propertyGridModel.survey);
+  }
+  public set survey(val: SurveyModel) {
+    this.setPropertyValue("survey", val);
+  }
   public get rootCss(): string {
     return new CssClassBuilder()
       .append("spg-container")

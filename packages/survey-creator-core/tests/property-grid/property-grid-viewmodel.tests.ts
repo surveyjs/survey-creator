@@ -185,3 +185,10 @@ test("Check object selector popup's display mode", () => {
   expect(model.objectSelectionAction.popupModel.displayMode).toEqual("overlay");
   _setIsTouch(false);
 });
+test("Create the property grid survey on request", () => {
+  const creator = new CreatorTester();
+  const propertyGrid = creator["designerPropertyGrid"];
+  const model = new PropertyGridViewModel(propertyGrid, creator);
+  expect(model.getPropertyValue("survey")).toBeFalsy();
+  expect(model.survey).toBeTruthy();
+});
