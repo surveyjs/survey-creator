@@ -146,12 +146,12 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private createCreatorThemeSettingsPage(creator: SurveyCreatorModel) {
     this.themeModel = new CreatorThemeModel();
     this.themePropertyGrid = new PropertyGridModel(undefined, creator, creatorThemeModelPropertyGridDefinition);
-    this.themePropertyGrid.onNewSurveyCreatedCallback = () => {
-      this.onThemePropertyGridSurveyCreated();
-    };
     this.themePropertyGrid.showOneCategoryInPropertyGrid = true;
     this.themePropertyGrid.surveyInstanceCreatedArea = "designer-tab:creator-settings";
     const themePropertyGridViewModel = new PropertyGridViewModel(this.themePropertyGrid, creator);
+    themePropertyGridViewModel.onNewSurveyCreatedCallback = () => {
+      this.onThemePropertyGridSurveyCreated();
+    };
     themePropertyGridViewModel.searchEnabled = false;
     this.themePropertyGridTab = this.creator.sidebar.addPage("creatorTheme", "svc-property-grid", themePropertyGridViewModel);
     this.themePropertyGridTab.caption = editorLocalization.getString("ed.creatorSettingTitle");
