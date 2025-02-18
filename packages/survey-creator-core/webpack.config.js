@@ -229,13 +229,7 @@ module.exports = function (options) {
         commonjs2: "survey-core",
         commonjs: "survey-core",
         amd: "survey-core",
-      },
-      "survey-core/themes": {
-        root: "SurveyTheme",
-        commonjs2: "survey-core/themes",
-        commonjs: "survey-core/themes",
-        amd: "survey-core/themes",
-      },
+      }
     },
     plugins: [
       new webpack.ProgressPlugin(getPercentageHandler(emitNonSourceFiles, emitStyles, buildPath, isProductionBuild)),
