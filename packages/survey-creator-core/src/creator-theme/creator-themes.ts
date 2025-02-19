@@ -13,8 +13,10 @@ export const PredefinedCreatorThemes: string[] = ["default-light"];
 
 export function registerCreatorTheme(...themes: Array<ThemesHash<ICreatorTheme> | ICreatorTheme>) {
   registerTheme((theme: ICreatorTheme) => {
-    PredefinedCreatorThemes.push(theme.themeName);
     CreatorThemes[theme.themeName] = theme;
+    if (PredefinedCreatorThemes.indexOf(theme.themeName) === -1) {
+      PredefinedCreatorThemes.push(theme.themeName);
+    }
   }, ...themes);
 }
 

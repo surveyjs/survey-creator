@@ -24,10 +24,9 @@ export function registerSurveyTheme(...themes: Array<ThemesHash<ITheme> | ITheme
     assign(creatorTheme, theme, { cssVariables: creatorThemeVariables });
     const creatorThemeName = getThemeFullName(theme);
     Themes[creatorThemeName] = creatorTheme;
-    if (resultArray.indexOf(themeName) === -1) {
-      resultArray.push(themeName);
+    if (PredefinedThemes.indexOf(creatorThemeName) === -1) {
+      PredefinedThemes.push(creatorThemeName);
     }
-    PredefinedThemes.push(creatorThemeName);
   }, ...themes);
 }
 
