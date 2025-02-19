@@ -1486,7 +1486,7 @@ export var fiStrings = {
     questionOrder: "Säilyttää kysymysten alkuperäisen järjestyksen tai satunnaistaa ne. Tämän asetuksen vaikutus näkyy vain Esikatselu-välilehdessä.",
     maxTextLength: "Vain tekstinsyöttökysymykset.",
     maxCommentLength: "Vain kysymysten kommentit.",
-    commentAreaRows: "Määrittää tekstialueilla näytettävien rivien määrän kysymyskommentteja varten. Tulossa vie enemmän rivejä, vierityspalkki tulee näkyviin.",
+    commentAreaRows: "Määrittää kysymyskommenttien tekstialueilla näytettävien rivien määrän. Jos syöttö vie enemmän rivejä, vierityspalkki tulee näkyviin.",
     autoGrowComment: "Valitse tämä, jos haluat, että kysymysten kommentit ja pitkät tekstit -kysymykset kasvavat automaattisesti syötetyn tekstin pituuden perusteella.",
     allowResizeComment: "Vain kysymyskommentit ja pitkän tekstin kysymykset.",
     calculatedValues: "Mukautetut muuttujat toimivat väli- tai apumuuttujina, joita käytetään lomakelaskelmissa. He ottavat vastaajan syötteet lähdearvoina. Jokaisella mukautetulla muuttujalla on yksilöllinen nimi ja lauseke, johon se perustuu.",
@@ -3004,3 +3004,4 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Määrittää yhdenmukaisen leveyden kaikille nimikeotsikoille. Hyväksyy CSS-arvot (px, %, in, pt jne.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoomaa 100 %:iin"
 // ed.addLanguageTooltip: "Add Language" => "Lisää kieli"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Määrittää kysymyskommenttien tekstialueilla näytettävien rivien määrän. Jos syöttö vie enemmän rivejä, vierityspalkki tulee näkyviin."

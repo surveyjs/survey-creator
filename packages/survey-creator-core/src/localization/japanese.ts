@@ -1486,7 +1486,7 @@ export var jaStrings = {
     questionOrder: "質問の元の順序を維持するか、ランダム化します。この設定の効果は、「プレビュー」タブにのみ表示されます。",
     maxTextLength: "テキスト入力の質問専用です。",
     maxCommentLength: "質問コメント専用です。",
-    commentAreaRows: "質問コメントのテキスト領域に表示される行数を設定します。入力がより多くの行を占めると、スクロールバーが表示されます。",
+    commentAreaRows: "質問コメントのテキストエリアに表示される行数を設定します。入力がより多くの行を占める場合は、スクロールバーが表示されます。",
     autoGrowComment: "質問のコメントと長いテキストの質問の高さを、入力したテキストの長さに基づいて自動的に拡大する場合に選択します。",
     allowResizeComment: "質問コメントとテキスト(長文)の質問のみ。",
     calculatedValues: "カスタム変数は、フォーム計算で使用される中間変数または補助変数として機能します。回答者の入力をソース値として受け取ります。各カスタム変数には、一意の名前と基になる式があります。",
@@ -3031,3 +3031,4 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "すべてのアイテム ラベルに一貫した幅を設定します。CSS 値 (px、%、in、pt など) を受け入れます。"
 // ed.zoom100Tooltip: "Zoom to 100%" => "100%にズーム"
 // ed.addLanguageTooltip: "Add Language" => "言語を追加"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "質問コメントのテキストエリアに表示される行数を設定します。入力がより多くの行を占める場合は、スクロールバーが表示されます。"

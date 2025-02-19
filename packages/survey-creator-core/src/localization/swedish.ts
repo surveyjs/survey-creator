@@ -1486,7 +1486,7 @@ export let svStrings = {
     questionOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Effekten av den här inställningen visas bara på fliken Förhandsgranska.",
     maxTextLength: "Endast för textinmatningsfrågor.",
     maxCommentLength: "Endast för frågekommentarer.",
-    commentAreaRows: "Anger antalet rader som ska visas i textområden för frågekommentarer. I inmatningen tar upp fler rader visas rullningslisten.",
+    commentAreaRows: "Ställer in antalet rader som visas i textområden för frågekommentarer. Om inmatningen tar upp fler rader visas rullningslisten.",
     autoGrowComment: "Välj om du vill att frågekommentarer och långa textfrågor automatiskt ska öka i höjd baserat på den angivna textlängden.",
     allowResizeComment: "Endast för frågekommentarer och långa textfrågor.",
     calculatedValues: "Anpassade variabler fungerar som mellanliggande variabler eller hjälpvariabler som används i formulärberäkningar. De tar svarandes indata som källvärden. Varje anpassad variabel har ett unikt namn och ett uttryck som den baseras på.",
@@ -3206,3 +3206,4 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Ställer in konsekvent bredd för alla objektetiketter. Accepterar CSS-värden (px, %, in, pt, etc.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zooma till 100 %"
 // ed.addLanguageTooltip: "Add Language" => "Lägg till språk"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Ställer in antalet rader som visas i textområden för frågekommentarer. Om inmatningen tar upp fler rader visas rullningslisten."

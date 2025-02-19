@@ -1486,7 +1486,7 @@ var spanishTranslation = {
     questionOrder: "Mantiene el orden original de las preguntas o las aleatoriza. El efecto de esta configuración solo es visible en la pestaña Vista previa.",
     maxTextLength: "Solo para preguntas de entrada de texto.",
     maxCommentLength: "Solo para comentarios de preguntas.",
-    commentAreaRows: "Establece el número de líneas mostradas en las áreas de texto para los comentarios de las preguntas. En la entrada ocupa más líneas, aparece la barra de desplazamiento.",
+    commentAreaRows: "Establece el número de líneas mostradas en las áreas de texto para los comentarios de las preguntas. Si la entrada ocupa más líneas, aparece la barra de desplazamiento.",
     autoGrowComment: "Seleccione si desea que los comentarios de las preguntas y las preguntas de texto largo aumenten automáticamente en altura en función de la longitud del texto introducido.",
     allowResizeComment: "Solo para comentarios de preguntas y preguntas de texto largo.",
     calculatedValues: "Las variables personalizadas sirven como variables intermedias o auxiliares que se utilizan en los cálculos de formularios. Toman las entradas de los encuestados como valores de origen. Cada variable personalizada tiene un nombre único y una expresión en la que se basa.",
@@ -2808,3 +2808,4 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Establece un ancho coherente para todas las etiquetas de los elementos. Acepta valores CSS (px, %, in, pt, etc.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoom al 100%"
 // ed.addLanguageTooltip: "Add Language" => "Agregar idioma"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Establece el número de líneas mostradas en las áreas de texto para los comentarios de las preguntas. Si la entrada ocupa más líneas, aparece la barra de desplazamiento."

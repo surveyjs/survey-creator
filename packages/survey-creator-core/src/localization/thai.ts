@@ -1486,7 +1486,7 @@ export const thStrings = {
     questionOrder: "รักษาลำดับดั้งเดิมของคำถามหรือตั้งค่าให้สุ่ม ผลของการตั้งค่านี้จะแสดงในแท็บพรีวิวเท่านั้น",
     maxTextLength: "สำหรับคำถามป้อนข้อความเท่านั้น",
     maxCommentLength: "สำหรับความคิดเห็นคำถามเท่านั้น",
-    commentAreaRows: "ตั้งจำนวนบรรทัดที่แสดงในพื้นที่ข้อความสำหรับความคิดเห็นคำถาม ถ้าอินพุตมีบรรทัดมากขึ้น แถบเลื่อนจะปรากฏ",
+    commentAreaRows: "ตั้งค่าจํานวนบรรทัดที่แสดงในพื้นที่ข้อความสําหรับความคิดเห็นของคําถาม หากอินพุตใช้บรรทัดมากขึ้น แถบเลื่อนจะปรากฏขึ้น",
     autoGrowComment: "เลือกถ้าคุณต้องการให้ความคิดเห็นคำถามและคำถามข้อความยาวขยายตัวตามความยาวของข้อความที่ป้อน",
     allowResizeComment: "สำหรับความคิดเห็นคำถามและคำถามข้อความยาวเท่านั้น",
     calculatedValues: "ตัวแปรที่กำหนดเองทำหน้าที่เป็นตัวแปรกลางหรือเสริมที่ใช้ในการคำนวณแบบฟอร์ม พวกมันใช้คำตอบของผู้ตอบเป็นค่าต้นแหล่ง แต่ละตัวแปรที่กำหนดเองมีชื่อที่ไม่ซ้ำกันและนิพจน์ที่อิงตามค่า",
@@ -1972,3 +1972,4 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "ตั้งค่าความกว้างที่สอดคล้องกันสําหรับป้ายชื่อสินค้าทั้งหมด ยอมรับค่า CSS (px, %, in, pt เป็นต้น)"
 // ed.zoom100Tooltip: "Zoom to 100%" => "ซูมไปที่ 100%"
 // ed.addLanguageTooltip: "Add Language" => "เพิ่มภาษา"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "ตั้งค่าจํานวนบรรทัดที่แสดงในพื้นที่ข้อความสําหรับความคิดเห็นของคําถาม หากอินพุตใช้บรรทัดมากขึ้น แถบเลื่อนจะปรากฏขึ้น"

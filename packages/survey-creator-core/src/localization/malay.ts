@@ -1486,7 +1486,7 @@ export var msStrings = {
     questionOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Kesan seting ini hanya kelihatan dalam tab Pratonton.",
     maxTextLength: "Untuk soalan entri teks sahaja.",
     maxCommentLength: "Untuk komen soalan sahaja.",
-    commentAreaRows: "Mengesetkan bilangan baris yang dipaparkan dalam kawasan teks untuk komen soalan. Dalam input mengambil lebih banyak baris, bar skrol muncul.",
+    commentAreaRows: "Menetapkan bilangan baris yang dipaparkan dalam kawasan teks untuk ulasan soalan. Jika input mengambil lebih banyak baris, bar skrol muncul.",
     autoGrowComment: "Pilih jika anda inginkan komen soalan dan soalan Teks Panjang untuk mengembangkan ketinggian automatik berdasarkan panjang teks yang dimasukkan.",
     allowResizeComment: "Untuk komen soalan dan soalan Teks Panjang sahaja.",
     calculatedValues: "Pemboleh ubah tersuai berfungsi sebagai pemboleh ubah perantaraan atau tambahan yang digunakan dalam pengiraan borang. Mereka mengambil input responden sebagai nilai sumber. Setiap pemboleh ubah tersuai mempunyai nama unik dan ungkapan yang berdasarkannya.",
@@ -2986,3 +2986,4 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Menetapkan lebar yang konsisten untuk semua label item. Menerima nilai CSS (px, %, in, pt, dll.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zum kepada 100%"
 // ed.addLanguageTooltip: "Add Language" => "Tambah Bahasa"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Menetapkan bilangan baris yang dipaparkan dalam kawasan teks untuk ulasan soalan. Jika input mengambil lebih banyak baris, bar skrol muncul."

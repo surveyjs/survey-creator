@@ -1486,7 +1486,7 @@ export var danishStrings = {
     questionOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Effekten af denne indstilling er kun synlig under fanen Eksempel.",
     maxTextLength: "Kun til spørgsmål om indtastning af tekst.",
     maxCommentLength: "Kun til kommentarer til spørgsmål.",
-    commentAreaRows: "Angiver antallet af viste linjer i tekstområder for spørgsmålskommentarer. I indgangen optager flere linjer, rullepanelet vises.",
+    commentAreaRows: "Angiver antallet af viste linjer i tekstområder til spørgsmålskommentarer. Hvis inputtet optager flere linjer, vises rullepanelet.",
     autoGrowComment: "Vælg, om spørgsmålskommentarer og lange tekstspørgsmål automatisk skal vokse i højden baseret på den indtastede tekstlængde.",
     allowResizeComment: "Kun til spørgsmålskommentarer og lange tekstspørgsmål.",
     calculatedValues: "Brugerdefinerede variabler fungerer som mellemliggende eller hjælpevariabler, der bruges i formularberegninger. De tager respondentinput som kildeværdier. Hver brugerdefineret variabel har et entydigt navn og et udtryk, den er baseret på.",
@@ -3216,3 +3216,4 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Indstiller ensartet bredde for alle elementetiketter. Accepterer CSS-værdier (px, %, in, pt osv.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoom til 100 %"
 // ed.addLanguageTooltip: "Add Language" => "Tilføj sprog"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Angiver antallet af viste linjer i tekstområder til spørgsmålskommentarer. Hvis inputtet optager flere linjer, vises rullepanelet."

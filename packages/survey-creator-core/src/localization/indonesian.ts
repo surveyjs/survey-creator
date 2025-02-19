@@ -1486,7 +1486,7 @@ export var indonesianStrings = {
     questionOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Efek pengaturan ini hanya terlihat di tab Pratinjau.",
     maxTextLength: "Hanya untuk pertanyaan entri teks.",
     maxCommentLength: "Hanya untuk komentar pertanyaan.",
-    commentAreaRows: "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Dalam input mengambil lebih banyak baris, bilah gulir muncul.",
+    commentAreaRows: "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Jika input memakan lebih banyak baris, bilah gulir akan muncul.",
     autoGrowComment: "Pilih apakah Anda ingin komentar pertanyaan dan pertanyaan Teks Panjang bertambah tinggi secara otomatis berdasarkan panjang teks yang dimasukkan.",
     allowResizeComment: "Hanya untuk komentar pertanyaan dan pertanyaan Teks Panjang.",
     calculatedValues: "Variabel kustom berfungsi sebagai variabel perantara atau tambahan yang digunakan dalam perhitungan formulir. Mereka mengambil input responden sebagai nilai sumber. Setiap variabel kustom memiliki nama unik dan ekspresi yang menjadi dasarnya.",
@@ -3186,3 +3186,4 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk semua label item. Menerima nilai CSS (px, %, in, pt, dll.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Perbesar hingga 100%"
 // ed.addLanguageTooltip: "Add Language" => "Tambahkan Bahasa"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Jika input memakan lebih banyak baris, bilah gulir akan muncul."

@@ -1486,7 +1486,7 @@ export var hrStrings = {
     questionOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
     maxTextLength: "Samo za pitanja o unosu teksta.",
     maxCommentLength: "Samo za komentare pitanja.",
-    commentAreaRows: "Postavlja broj prikazanih redaka u tekstnim područjima za komentare pitanja. U ulazu zauzima više redaka pojavljuje se klizač.",
+    commentAreaRows: "Postavlja broj prikazanih redaka u tekstnim područjima za komentare pitanja. Ako ulaz zauzima više linija, pojavit će se klizač.",
     autoGrowComment: "Odaberite želite li da komentari pitanja i pitanja dugog teksta automatski rastu u visinu na temelju unesene duljine teksta.",
     allowResizeComment: "Samo za komentare pitanja i pitanja dugog teksta.",
     calculatedValues: "Prilagođene varijable služe kao srednje ili pomoćne varijable koje se koriste u izračunima obrazaca. Oni uzimaju unose ispitanika kao izvorne vrijednosti. Svaka prilagođena varijabla ima jedinstveni naziv i izraz na kojem se temelji.",
@@ -3026,3 +3026,4 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Postavlja dosljednu širinu za sve oznake stavki. Prihvaća CSS vrijednosti (px, %, in, pt, itd.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zumiranje na 100%"
 // ed.addLanguageTooltip: "Add Language" => "Dodavanje jezika"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Postavlja broj prikazanih redaka u tekstnim područjima za komentare pitanja. Ako ulaz zauzima više linija, pojavit će se klizač."

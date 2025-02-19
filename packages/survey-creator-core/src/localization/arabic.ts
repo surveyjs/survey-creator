@@ -1486,7 +1486,7 @@ export var arStrings = {
     questionOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
     maxTextLength: "لأسئلة إدخال النص فقط.",
     maxCommentLength: "لتعليقات الأسئلة فقط.",
-    commentAreaRows: "يضبط عدد الأسطر المعروضة في مساحات النص لتعليقات الأسئلة. في الإدخال يأخذ المزيد من الأسطر ، يظهر شريط التمرير.",
+    commentAreaRows: "لتعيين عدد الأسطر المعروضة في مناطق النص لتعليقات الأسئلة. إذا كان الإدخال يشغل المزيد من الأسطر، فسيظهر شريط التمرير.",
     autoGrowComment: "حدد ما إذا كنت تريد زيادة تعليقات الأسئلة وأسئلة النص الطويل تلقائيا في الارتفاع بناء على طول النص الذي تم إدخاله.",
     allowResizeComment: "لتعليقات الأسئلة وأسئلة النص الطويل فقط.",
     calculatedValues: "تعمل المتغيرات المخصصة كمتغيرات وسيطة أو مساعدة تستخدم في حسابات النماذج. يأخذون مدخلات المستجيبين كقيم مصدر. كل متغير مخصص له اسم فريد وتعبير يعتمد عليه.",
@@ -2946,3 +2946,4 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "لتعيين عرض متسق لجميع تسميات الأصناف. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "تكبير إلى 100٪"
 // ed.addLanguageTooltip: "Add Language" => "إضافة لغة"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "لتعيين عدد الأسطر المعروضة في مناطق النص لتعليقات الأسئلة. إذا كان الإدخال يشغل المزيد من الأسطر، فسيظهر شريط التمرير."

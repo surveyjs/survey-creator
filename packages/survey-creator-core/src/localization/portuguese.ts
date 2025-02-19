@@ -1486,7 +1486,7 @@ var portugueseTranslation = {
     questionOrder: "Mantém a ordem original das perguntas ou as randomiza. O efeito dessa configuração só é visível na guia Visualização.",
     maxTextLength: "Apenas para perguntas de entrada de texto.",
     maxCommentLength: "Apenas para comentários de perguntas.",
-    commentAreaRows: "Define o número de linhas exibidas em áreas de texto para comentários de perguntas. Na entrada ocupa mais linhas, a barra de rolagem aparece.",
+    commentAreaRows: "Define o número de linhas exibidas nas áreas de texto para comentários de perguntas. Se a entrada ocupar mais linhas, a barra de rolagem será exibida.",
     autoGrowComment: "Selecione se você deseja que os comentários de perguntas e as perguntas de texto longo aumentem automaticamente em altura com base no comprimento do texto inserido.",
     allowResizeComment: "Apenas para comentários de perguntas e perguntas de texto longo.",
     calculatedValues: "As variáveis personalizadas servem como variáveis intermediárias ou auxiliares usadas em cálculos de formulário. Eles tomam as entradas dos respondentes como valores de origem. Cada variável personalizada tem um nome exclusivo e uma expressão na qual se baseia.",
@@ -2700,3 +2700,4 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Define a largura consistente para todos os rótulos de item. Aceita valores CSS (px, %, in, pt, etc.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoom para 100%"
 // ed.addLanguageTooltip: "Add Language" => "Adicionar idioma"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Define o número de linhas exibidas nas áreas de texto para comentários de perguntas. Se a entrada ocupar mais linhas, a barra de rolagem será exibida."

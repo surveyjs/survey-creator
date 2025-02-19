@@ -1486,7 +1486,7 @@ var germanTranslation = {
     questionOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
     maxTextLength: "Nur für Fragen zur Texteingabe.",
     maxCommentLength: "Nur für Fragenkommentare.",
-    commentAreaRows: "Legt die Anzahl der angezeigten Zeilen in Textbereichen für Fragenkommentare fest. Wenn die Eingabe mehr Zeilen einnimmt, erscheint die Bildlaufleiste.",
+    commentAreaRows: "Legt die Anzahl der angezeigten Zeilen in Textbereichen für Fragenkommentare fest. Wenn die Eingabe mehr Zeilen einnimmt, wird die Bildlaufleiste angezeigt.",
     autoGrowComment: "Wählen Sie diese Option aus, wenn Fragenkommentare und Langtextfragen basierend auf der eingegebenen Textlänge automatisch in die Höhe wachsen sollen.",
     allowResizeComment: "Nur für Fragenkommentare und Langtextfragen.",
     calculatedValues: "Benutzerdefinierte Variablen dienen als Zwischen- oder Hilfsvariablen, die in Formularberechnungen verwendet werden. Sie nehmen die Eingaben der Befragten als Quellwerte. Jede benutzerdefinierte Variable hat einen eindeutigen Namen und einen Ausdruck, auf dem sie basiert.",
@@ -2744,3 +2744,4 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Legt die einheitliche Breite für alle Elementbeschriftungen fest. Akzeptiert CSS-Werte (px, %, in, pt usw.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Auf 100 % zoomen"
 // ed.addLanguageTooltip: "Add Language" => "Sprache hinzufügen"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Legt die Anzahl der angezeigten Zeilen in Textbereichen für Fragenkommentare fest. Wenn die Eingabe mehr Zeilen einnimmt, wird die Bildlaufleiste angezeigt."

@@ -1486,7 +1486,7 @@ export var czStrings = {
     questionOrder: "Zachová původní pořadí otázek nebo je náhodně vybere. Účinek tohoto nastavení je viditelný pouze na kartě Náhled.",
     maxTextLength: "Pouze pro otázky pro zadávání textu.",
     maxCommentLength: "Pouze pro komentáře k otázkám.",
-    commentAreaRows: "Nastaví počet zobrazených řádků v textových oblastech pro komentáře k otázkám. V případě, že vstup zabírá více řádků, zobrazí se posuvník.",
+    commentAreaRows: "Nastaví počet zobrazených řádků v textových oblastech pro komentáře k otázkám. Pokud vstup zabírá více řádků, zobrazí se posuvník.",
     autoGrowComment: "Vyberte, zda chcete, aby se komentáře k otázkám a otázky s dlouhým textem automaticky zvětšovaly na výšku podle zadané délky textu.",
     allowResizeComment: "Pouze pro komentáře k otázkám a otázky s dlouhým textem.",
     calculatedValues: "Vlastní proměnné slouží jako mezilehlé nebo pomocné proměnné používané při výpočtech formulářů. Jako zdrojové hodnoty berou vstupy respondentů. Každá vlastní proměnná má jedinečný název a výraz, na kterém je založena.",
@@ -2609,3 +2609,4 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentní šířku pro všechny popisky položek. Přijímá hodnoty CSS (px, %, in, pt, atd.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zvětšení na 100 %"
 // ed.addLanguageTooltip: "Add Language" => "Přidat jazyk"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Nastaví počet zobrazených řádků v textových oblastech pro komentáře k otázkám. Pokud vstup zabírá více řádků, zobrazí se posuvník."

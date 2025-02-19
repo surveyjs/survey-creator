@@ -1486,7 +1486,7 @@ export var turkishStrings = {
     questionOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
     maxTextLength: "Yalnızca metin girişi soruları için.",
     maxCommentLength: "Yalnızca soru yorumları içindir.",
-    commentAreaRows: "Soru yorumları için metin alanlarında görüntülenen satır sayısını ayarlar. Girişte daha fazla satır alır, kaydırma çubuğu görünür.",
+    commentAreaRows: "Soru yorumları için metin alanlarında görüntülenen satır sayısını ayarlar. Giriş daha fazla satır kaplıyorsa, kaydırma çubuğu görünür.",
     autoGrowComment: "Soru yorumlarının ve Uzun Metin sorularının yüksekliğinin girilen metin uzunluğuna göre otomatik olarak büyümesini istiyorsanız seçin.",
     allowResizeComment: "Yalnızca soru yorumları ve Uzun Metin soruları için.",
     calculatedValues: "Özelleştirilebilir değişkenler, form hesaplamalarında kullanılan ara veya yardımcı değişkenler olarak işlev görür. Yanıtlayan girdilerini kaynak değerler olarak alırlar. Her özelleştirilebilen değişkenin benzersiz bir adı ve temel aldığı bir ifadesi vardır.",
@@ -3027,3 +3027,4 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Tüm öğe etiketleri için tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder."
 // ed.zoom100Tooltip: "Zoom to 100%" => "%100 yakınlaştırma"
 // ed.addLanguageTooltip: "Add Language" => "Dil Ekle"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Soru yorumları için metin alanlarında görüntülenen satır sayısını ayarlar. Giriş daha fazla satır kaplıyorsa, kaydırma çubuğu görünür."

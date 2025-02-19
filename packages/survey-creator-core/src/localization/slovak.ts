@@ -1486,7 +1486,7 @@ export var skStrings = {
     questionOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
     maxTextLength: "Len pre otázky týkajúce sa zadávania textu.",
     maxCommentLength: "Len pre komentáre k otázkam.",
-    commentAreaRows: "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre otázok. Vo vstupe zaberá viac riadkov, zobrazí sa posúvač.",
+    commentAreaRows: "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre k otázkam. Ak vstup zaberie viac riadkov, zobrazí sa posúvač.",
     autoGrowComment: "Vyberte, či chcete, aby komentáre otázok a otázky s dlhým textom automaticky narástli na výšku na základe zadanej dĺžky textu.",
     allowResizeComment: "Iba pre komentáre k otázkam a otázky s dlhým textom.",
     calculatedValues: "Vlastné premenné slúžia ako medziľahlé alebo pomocné premenné používané vo výpočtoch formulárov. Vstupy respondentov berú ako zdrojové hodnoty. Každá vlastná premenná má jedinečný názov a výraz, na ktorom je založená.",
@@ -2985,3 +2985,4 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentnú šírku pre všetky štítky položiek. Akceptuje hodnoty CSS (px, %, in, pt atď.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Priblíženie na 100 %"
 // ed.addLanguageTooltip: "Add Language" => "Pridať jazyk"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre k otázkam. Ak vstup zaberie viac riadkov, zobrazí sa posúvač."

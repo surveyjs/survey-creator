@@ -1486,7 +1486,7 @@ export var slStrings = {
     questionOrder: "Ohrani prvoten vrstni red vprašanj ali jih naključno postavi. Učinek te nastavitve je viden samo na zavihku Predogled",
     maxTextLength: "Samo za vprašanja z besedilnim vnosom",
     maxCommentLength: "Samo za komentarje k vprašanjem",
-    commentAreaRows: "Določi število prikazanih vrstic v besedilnih območjih za komentarje k vprašanjem. Če vnos zavzame več vrstic, se prikaže drsna vrstica",
+    commentAreaRows: "Nastavi število prikazanih vrstic v besedilnih območjih za komentarje vprašanj. Če vnos zavzame več vrstic, se prikaže drsni trak.",
     autoGrowComment: "Izberite, če želite, da se komentarji k vprašanjem in vprašanja z dolgim besedilom samodejno povečajo v višino glede na dolžino vnesenega besedila",
     allowResizeComment: "Samo za komentarje k vprašanjem in vprašanja z dolgim besedilom",
     calculatedValues: "Spremenljivke po meri služijo kot vmesne ali pomožne spremenljivke, ki se uporabljajo v izračunih obrazca. Uporabljajo vhodne vrednosti anketirancev. Vsaka spremenljivka po meri ima edinstveno ime in izraz, na katerem temelji",
@@ -1806,3 +1806,4 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // pehelp.autoGrow: "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default)." => "Možnost »Podeduj« uporablja nastavitev na ravni ankete (»privzeto onemogočeno«)."
 // pehelp.allowResize: "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)." => "Možnost »Deduj« uporablja nastavitev na ravni ankete (»privzeto omogočeno«)."
 // pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page." => "Časovni interval v sekundah, po katerem se anketa samodejno premakne na naslednjo stran. Skrije gumb za krmarjenje »Prejšnji«. Če je nastavljena na 0, šteje čas, porabljen na trenutni strani."
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Nastavi število prikazanih vrstic v besedilnih območjih za komentarje vprašanj. Če vnos zavzame več vrstic, se prikaže drsni trak."
