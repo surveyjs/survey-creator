@@ -1003,6 +1003,7 @@ export class SurveyCreatorModel extends Base
    * An event that is raised when users change a property in a [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme).
    */
   public onCreatorThemePropertyChanged: EventBase<SurveyCreatorModel, CreatorThemePropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorThemePropertyChangedEvent>();
+  public onCreatorThemeSelected: EventBase<SurveyCreatorModel, { theme: ICreatorTheme }> = this.addCreatorEvent<SurveyCreatorModel, { theme: ICreatorTheme }>();
 
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   public setSurveyJSONTextCallback: (text: string) => void;
