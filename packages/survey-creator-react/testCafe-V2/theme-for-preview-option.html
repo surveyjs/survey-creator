@@ -32,6 +32,7 @@
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
+    SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
     SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", themeForPreview: "modern" });
     creator.applyCreatorTheme(SurveyCreatorTheme.SC2020);

@@ -2,6 +2,8 @@ import { Component, NgZone, OnInit, ViewEncapsulation } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
 import * as SurveyCreatorCore from "survey-creator-core";
 import * as Survey from "survey-core";
+import SurveyThemes from "survey-core/themes";
+SurveyCreatorCore.registerSurveyTheme(SurveyThemes);
 
 @Component({
   selector: "test-default",
