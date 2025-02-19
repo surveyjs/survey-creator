@@ -103,7 +103,17 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
 }
 
 export class ThemeModel extends Base implements ITheme {
-  public static DefaultTheme = Themes["default-light"] || {};
+  private static defaultThemeValue: ITheme;
+  public static get DefaultTheme() {
+    if(!this.defaultThemeValue) {
+      return Themes["default-light"] || {};
+    } else {
+      return this.defaultThemeValue;
+    }
+  }
+  public static set DefaultTheme(val: ITheme) {
+    this.defaultThemeValue = val;
+  }
   public undoRedoManager: UndoRedoManager;
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();

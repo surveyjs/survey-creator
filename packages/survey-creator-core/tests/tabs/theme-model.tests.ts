@@ -8,7 +8,9 @@ import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { assign } from "../../src/utils/utils";
 import { CreatorTester } from "../creator-tester";
 import { ThemeModel, getThemeChanges } from "../../src/components/tabs/theme-model";
-
+import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
+import SurveyThemes from "survey-core/themes";
+registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 
 const themeFromFile = {
