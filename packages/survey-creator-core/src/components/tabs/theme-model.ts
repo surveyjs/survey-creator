@@ -1,13 +1,13 @@
 import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges } from "survey-core";
 import { getLocString } from "../../editorLocalization";
-import { PredefinedThemes, Themes } from "./themes";
+import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
 
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
 import { createBoxShadowReset, trimBoxShadowValue } from "./theme-custom-questions/shadow-effects";
 import { HeaderModel } from "./header-model";
-import { registerTheme, ThemesHash } from "../../utils/themes";
+import { registerTheme, ThemesHash, sortDefaultThemes } from "../../utils/themes";
 import { assign, roundTo2Decimals } from "../../utils/utils";
 import { ColorCalculator, ingectAlpha, parseColor } from "../../utils/color-utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
@@ -17,6 +17,7 @@ import { SurveyCreatorModel } from "../../creator-base";
 export * from "./header-model";
 
 export function registerSurveyTheme(...themes: Array<ThemesHash<ITheme> | ITheme>) {
+  const importedThemeNames = [];
   registerTheme((theme: ITheme) => {
     const creatorThemeVariables = {};
     const creatorTheme = {};
@@ -24,10 +25,9 @@ export function registerSurveyTheme(...themes: Array<ThemesHash<ITheme> | ITheme
     assign(creatorTheme, theme, { cssVariables: creatorThemeVariables });
     const creatorThemeName = getThemeFullName(theme);
     Themes[creatorThemeName] = creatorTheme;
-    if (PredefinedThemes.indexOf(creatorThemeName) === -1) {
-      PredefinedThemes.push(creatorThemeName);
-    }
+    importedThemeNames.push(theme.themeName);
   }, ...themes);
+  sortDefaultThemes(defaultThemesOrder, importedThemeNames, PredefinedThemes);
 }
 
 export function getThemeFullName(theme: ITheme) {

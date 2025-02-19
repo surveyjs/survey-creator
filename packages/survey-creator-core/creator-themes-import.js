@@ -31,18 +31,6 @@ var themeConstants = {
   }
 };
 
-function sortDefaultThemes(defaultThemesOrder, themes) {
-  const sortedThemeNames = [].concat(themes).sort((t1, t2) => {
-    return defaultThemesOrder.indexOf(t1) - defaultThemesOrder.indexOf(t2);
-  });
-  themes.splice(0, themes.length);
-  sortedThemeNames.filter(themeName => {
-    if (themes.indexOf(themeName) === -1) {
-      themes.push(themeName);
-    }
-  });
-}
-
 const baseThemeCssVariable = getCssVariablesFormFile(baseThemeName + ".css");
 const themeDistinctions = {};
 
@@ -308,8 +296,6 @@ Object.keys(themeNameMap).forEach(themeName => {
 });
 
 indexFileContent += "const __surveyjs_internal_themes_hash = true;\n";
-
-sortDefaultThemes(["DefaultContrast", "DefaultDark", "SC2020"], exportedNames);
 exportedNames.push("__surveyjs_internal_themes_hash");
 indexFileContent += `export { ${exportedNames.join(", ")} };\n`;
 indexFileContent += `export default { ${exportedNames.join(", ")} };`;
