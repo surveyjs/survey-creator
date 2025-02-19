@@ -189,6 +189,7 @@ SurveyReact.ReactElementFactory.Instance.registerElement("svc-page", (props) => 
   return React.createElement(CreatorSurveyPageComponent2, props);
 });
 */
+SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme);
 const creator = new SurveyCreator.SurveyCreator(options);
 creator.onModified.add((sender, options) => {
   console.log(JSON.stringify(options, null, 3));
