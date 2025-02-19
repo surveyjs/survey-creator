@@ -1468,7 +1468,7 @@ export const roStrings = {
     questionsOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Efectul acestei setări este vizibil doar în fila Previzualizare.",
     maxTextLength: "Doar pentru întrebările de introducere a textului.",
     maxOthersLength: "Doar pentru comentariile întrebărilor.",
-    commentAreaRows: "Setează numărul de linii afișate în zonele de text pentru comentariile întrebărilor. Dacă introducerea ocupă mai multe linii, va apărea bara de derulare.",
+    commentAreaRows: "Setează numărul de linii afișate în zonele de text pentru comentariile la întrebări. Dacă intrarea ocupă mai multe linii, apare bara de derulare.",
     autoGrowComment: "Selectați dacă doriți ca comentariile întrebărilor și întrebările de Text lung să se extindă automat în funcție de lungimea textului introdus.",
     allowResizeComment: "Doar pentru comentariile întrebărilor și întrebările de Text lung.",
     calculatedValues: "Variabilele personalizate servesc drept variabile intermediare sau auxiliareutilizate în calculele formularului. Acestea iau intrările respondenților ca valori sursă. Fiecare variabilă personalizată are un nume unic și o expresie pe care se bazează.",
@@ -1933,3 +1933,4 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Acest tabel vă permite să configurați fiecare coloană de grilă din pagină. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."
 
 // ed.addLanguageTooltip: "Add Language" => "Adăugați limbă"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Setează numărul de linii afișate în zonele de text pentru comentariile la întrebări. Dacă intrarea ocupă mai multe linii, apare bara de derulare."

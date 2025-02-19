@@ -1468,7 +1468,7 @@ var traditionalChineseTranslation = {
     questionsOrder: "保持問題的原始順序或隨機化問題。此設置的效果僅在「預覽」選項卡中可見。",
     maxTextLength: "僅適用於文本輸入問題。",
     maxOthersLength: "僅供問題評論。",
-    commentAreaRows: "設置問題註釋的文字區域中顯示的行數。在輸入佔用更多行時，將出現滾動條。",
+    commentAreaRows: "設置問題註釋的文字區域中顯示的行數。如果輸入佔用更多行，則會顯示滾動條。",
     autoGrowComment: "選擇是否希望問題註釋和長文本問題根據輸入的文字長度自動增加高度。",
     allowResizeComment: "僅適用於問題評論和長文本問題。",
     calculatedValues: "自訂變數用作表單計算中使用的中間變數或輔助變數。他們將受訪者的輸入作為源值。每個自定義變數都有一個唯一的名稱和它所基於的表達式。",
@@ -3267,3 +3267,4 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "此表允許您設定頁面上的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
 
 // ed.addLanguageTooltip: "Add Language" => "添加語言"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "設置問題註釋的文字區域中顯示的行數。如果輸入佔用更多行，則會顯示滾動條。"

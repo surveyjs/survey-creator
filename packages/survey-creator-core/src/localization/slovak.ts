@@ -1468,7 +1468,7 @@ export var skStrings = {
     questionsOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
     maxTextLength: "Len pre otázky týkajúce sa zadávania textu.",
     maxOthersLength: "Len pre komentáre k otázkam.",
-    commentAreaRows: "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre otázok. Vo vstupe zaberá viac riadkov, zobrazí sa posúvač.",
+    commentAreaRows: "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre k otázkam. Ak vstup zaberie viac riadkov, zobrazí sa posúvač.",
     autoGrowComment: "Vyberte, či chcete, aby komentáre otázok a otázky s dlhým textom automaticky narástli na výšku na základe zadanej dĺžky textu.",
     allowResizeComment: "Iba pre komentáre k otázkam a otázky s dlhým textom.",
     calculatedValues: "Vlastné premenné slúžia ako medziľahlé alebo pomocné premenné používané vo výpočtoch formulárov. Vstupy respondentov berú ako zdrojové hodnoty. Každá vlastná premenná má jedinečný názov a výraz, na ktorom je založená.",
@@ -2948,3 +2948,4 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Táto tabuľka umožňuje nakonfigurovať každý stĺpec mriežky na strane. Automaticky nastaví percentuálnu šírku pre každý stĺpec na základe maximálneho počtu prvkov v riadku. Ak chcete prispôsobiť rozloženie mriežky, manuálne upravte tieto hodnoty a definujte šírku názvu pre všetky otázky v každom stĺpci."
 
 // ed.addLanguageTooltip: "Add Language" => "Pridať jazyk"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre k otázkam. Ak vstup zaberie viac riadkov, zobrazí sa posúvač."

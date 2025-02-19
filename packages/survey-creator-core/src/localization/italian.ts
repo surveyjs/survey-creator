@@ -1468,7 +1468,7 @@ var italianTranslation = {
     questionsOrder: "Mantiene l'ordine originale delle domande o le rende casuali. L'effetto di questa impostazione è visibile solo nella scheda Anteprima.",
     maxTextLength: "Solo per domande di immissione di testo.",
     maxOthersLength: "Solo per i commenti alle domande.",
-    commentAreaRows: "Imposta il numero di righe visualizzate nelle aree di testo per i commenti alle domande. Nell'input occupa più righe, viene visualizzata la barra di scorrimento.",
+    commentAreaRows: "Imposta il numero di righe visualizzate nelle aree di testo per i commenti alle domande. Se l'input occupa più righe, viene visualizzata la barra di scorrimento.",
     autoGrowComment: "Selezionare questa opzione se si desidera che i commenti alle domande e le domande di testo lungo aumentino automaticamente in altezza in base alla lunghezza del testo inserito.",
     allowResizeComment: "Solo per i commenti alle domande e le domande a testo lungo.",
     calculatedValues: "Le variabili personalizzate fungono da variabili intermedie o ausiliarie utilizzate nei calcoli dei moduli. Accettano gli input dei rispondenti come valori di origine. Ogni variabile personalizzata ha un nome univoco e un'espressione su cui si basa.",
@@ -2753,3 +2753,4 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Questa tabella consente di configurare ogni colonna della griglia nella pagina. Imposta automaticamente la percentuale di larghezza per ogni colonna in base al numero massimo di elementi in una riga. Per personalizzare il layout della griglia, regola manualmente questi valori e definisci la larghezza del titolo per tutte le domande in ogni colonna."
 
 // ed.addLanguageTooltip: "Add Language" => "Aggiungi lingua"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Imposta il numero di righe visualizzate nelle aree di testo per i commenti alle domande. Se l'input occupa più righe, viene visualizzata la barra di scorrimento."

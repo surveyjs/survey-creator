@@ -1468,7 +1468,7 @@ export var slStrings = {
     questionsOrder: "Ohrani prvotni vrstni red vprašanj ali jih naključno razvrsti. Učinek te nastavitve je viden samo na zavihku Predogled.",
     maxTextLength: "Samo za vprašanja z besedilnim vnosom",
     maxOthersLength: "Samo za komentarje vprašanj.",
-    commentAreaRows: "Določi število prikazanih vrstic v besedilnih območjih za komentarje k vprašanjem. Če vnos zavzame več vrstic, se prikaže drsna vrstica",
+    commentAreaRows: "Nastavi število prikazanih vrstic v besedilnih območjih za komentarje vprašanj. Če vnos zavzame več vrstic, se prikaže drsni trak.",
     autoGrowComment: "Izberite, če želite, da se komentarji k vprašanjem in vprašanja z dolgim besedilom samodejno povečajo v višino glede na dolžino vnesenega besedila",
     allowResizeComment: "Samo za komentarje k vprašanjem in vprašanja z dolgim besedilom",
     calculatedValues: "Spremenljivke po meri služijo kot vmesne ali pomožne spremenljivke, ki se uporabljajo v izračunih obrazca. Uporabljajo vhodne vrednosti anketirancev. Vsaka spremenljivka po meri ima edinstveno ime in izraz, na katerem temelji",
@@ -1848,3 +1848,4 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // p.itemSize: "Input field width (in characters)" => "Širina vnosnega polja (v znakih)"
 // p.navigationButtonsVisibility: "Show/hide navigation buttons" => "Pokaži/skrij gumbe za krmarjenje"
 // ed.addLanguageTooltip: "Add Language" => "Dodajanje jezika"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Nastavi število prikazanih vrstic v besedilnih območjih za komentarje vprašanj. Če vnos zavzame več vrstic, se prikaže drsni trak."

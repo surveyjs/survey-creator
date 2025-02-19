@@ -1468,7 +1468,7 @@ export var mmStrings = {
     questionsOrder: "မေးခွန်းများ၏ မူလအစီအစဉ်ကို ထိန်းသိမ်းပါ သို့မဟုတ် Randomize လုပ်ပါ။",
     maxTextLength: "Text Entry မေးခွန်းများအတွက်သာဖြစ်သည်။",
     maxOthersLength: "Comment များအတွက်သာဖြစ်သည်။",
-    commentAreaRows: "Comment များအတွက် Text Area ၏ Row အရေအတွက်ကို သတ်မှတ်ပါ။",
+    // commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears.",
     autoGrowComment: "Comment များနှင့် Long Text မေးခွန်းများအတွက် Auto-Grow Feature ကို ဖွင့်ပါ။",
     allowResizeComment: "Comment များနှင့် Long Text မေးခွန်းများအတွက် အရွယ်အစားကို ပြောင်းလဲနိုင်ရန် ဖွင့်ပါ။",
     calculatedValues: "Form Calculations အတွက် Custom Variable များကို ဖန်တီးပါ။",
@@ -1790,6 +1790,18 @@ setupLocale({ localeCode: "mm", strings: mmStrings });
 // pe.gridLayoutColumns: "Grid columns" => undefined
 // pe.maskSettings: "Mask settings" => undefined
 // pe.detailErrorLocation: "Row expansion error message alignment" => undefined
+// page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => undefined
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => undefined
+// page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => undefined
+// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => undefined
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => undefined
+// ed.addLanguageTooltip: "Add Language" => undefined
+// pe.startPageTitlePlaceholder: "Start Page" => undefined
+// pe.gridLayoutEnabled: "Enable grid layout" => undefined
+// pe.gridLayoutColumns: "Grid columns" => undefined
+// pe.maskSettings: "Mask settings" => undefined
+// pe.detailErrorLocation: "Row expansion error message alignment" => undefined
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => undefined
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => undefined
 // page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => undefined
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => undefined

@@ -1468,7 +1468,7 @@ export const thStrings = {
     questionsOrder: "รักษาลำดับดั้งเดิมของคำถามหรือตั้งค่าให้สุ่ม ผลของการตั้งค่านี้จะแสดงในแท็บพรีวิวเท่านั้น",
     maxTextLength: "สำหรับคำถามป้อนข้อความเท่านั้น",
     maxOthersLength: "สำหรับความคิดเห็นคำถามเท่านั้น",
-    commentAreaRows: "ตั้งจำนวนบรรทัดที่แสดงในพื้นที่ข้อความสำหรับความคิดเห็นคำถาม ถ้าอินพุตมีบรรทัดมากขึ้น แถบเลื่อนจะปรากฏ",
+    commentAreaRows: "ตั้งค่าจํานวนบรรทัดที่แสดงในพื้นที่ข้อความสําหรับความคิดเห็นของคําถาม หากอินพุตใช้บรรทัดมากขึ้น แถบเลื่อนจะปรากฏขึ้น",
     autoGrowComment: "เลือกถ้าคุณต้องการให้ความคิดเห็นคำถามและคำถามข้อความยาวขยายตัวตามความยาวของข้อความที่ป้อน",
     allowResizeComment: "สำหรับความคิดเห็นคำถามและคำถามข้อความยาวเท่านั้น",
     calculatedValues: "ตัวแปรที่กำหนดเองทำหน้าที่เป็นตัวแปรกลางหรือเสริมที่ใช้ในการคำนวณแบบฟอร์ม พวกมันใช้คำตอบของผู้ตอบเป็นค่าต้นแหล่ง แต่ละตัวแปรที่กำหนดเองมีชื่อที่ไม่ซ้ำกันและนิพจน์ที่อิงตามค่า",
@@ -1933,3 +1933,4 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "ตารางนี้ช่วยให้คุณสามารถกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์บนหน้า โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์"
 
 // ed.addLanguageTooltip: "Add Language" => "เพิ่มภาษา"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "ตั้งค่าจํานวนบรรทัดที่แสดงในพื้นที่ข้อความสําหรับความคิดเห็นของคําถาม หากอินพุตใช้บรรทัดมากขึ้น แถบเลื่อนจะปรากฏขึ้น"
