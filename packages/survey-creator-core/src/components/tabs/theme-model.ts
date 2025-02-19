@@ -15,7 +15,7 @@ import { SurveyCreatorModel } from "../../creator-base";
 
 export * from "./header-model";
 
-export function registerLibraryTheme(...themes: Array<ThemesHash<ITheme> | ITheme>) {
+export function registerSurveyTheme(...themes: Array<ThemesHash<ITheme> | ITheme>) {
   registerTheme((theme: ITheme) => {
     const creatorThemeVariables = {};
     const creatorTheme = {};
