@@ -1,6 +1,6 @@
 import { CreatorStylesManager } from "./styles-manager";
 import { DefaultLightColorCssVariables } from "../themes/default-light-color-css-variables";
-import { registerTheme, ThemesHash } from "../utils/utils";
+import { registerTheme, ThemesHash } from "../utils/themes";
 
 export interface ICreatorTheme {
   themeName?: string;

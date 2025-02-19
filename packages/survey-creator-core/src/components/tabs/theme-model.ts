@@ -7,7 +7,8 @@ import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } 
 import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
 import { createBoxShadowReset, trimBoxShadowValue } from "./theme-custom-questions/shadow-effects";
 import { HeaderModel } from "./header-model";
-import { assign, registerTheme, roundTo2Decimals, ThemesHash } from "../../utils/utils";
+import { registerTheme, ThemesHash } from "../../utils/themes";
+import { assign, roundTo2Decimals } from "../../utils/utils";
 import { ColorCalculator, ingectAlpha, parseColor } from "../../utils/color-utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
@@ -22,8 +23,11 @@ export function registerSurveyTheme(...themes: Array<ThemesHash<ITheme> | ITheme
     assign(creatorThemeVariables, theme.cssVariables);
     assign(creatorTheme, theme, { cssVariables: creatorThemeVariables });
     const creatorThemeName = getThemeFullName(theme);
-    PredefinedThemes.push(creatorThemeName);
     Themes[creatorThemeName] = creatorTheme;
+    if (resultArray.indexOf(themeName) === -1) {
+      resultArray.push(themeName);
+    }
+    PredefinedThemes.push(creatorThemeName);
   }, ...themes);
 }
 
