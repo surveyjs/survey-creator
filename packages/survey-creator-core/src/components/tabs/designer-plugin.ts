@@ -166,6 +166,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.themePropertyGrid.survey.editingObj = undefined;
       this.themePropertyGrid.survey.editingObj = sender;
       this.updatePredefinedColorChoices();
+      this.creator.onCreatorThemeSelected.fire(this.creator, options);
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
       this.syncTheme();

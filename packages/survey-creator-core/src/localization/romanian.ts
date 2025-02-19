@@ -1486,7 +1486,7 @@ export const roStrings = {
     questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Efectul acestei setări este vizibil doar în fila Previzualizare.",
     maxTextLength: "Doar pentru întrebările de introducere a textului.",
     maxCommentLength: "Doar pentru comentariile întrebărilor.",
-    commentAreaRows: "Setează numărul de linii afișate în zonele de text pentru comentariile întrebărilor. Dacă introducerea ocupă mai multe linii, va apărea bara de derulare.",
+    commentAreaRows: "Setează numărul de linii afișate în zonele de text pentru comentariile la întrebări. Dacă intrarea ocupă mai multe linii, apare bara de derulare.",
     autoGrowComment: "Selectați dacă doriți ca comentariile întrebărilor și întrebările de Text lung să se extindă automat în funcție de lungimea textului introdus.",
     allowResizeComment: "Doar pentru comentariile întrebărilor și întrebările de Text lung.",
     calculatedValues: "Variabilele personalizate servesc drept variabile intermediare sau auxiliareutilizate în calculele formularului. Acestea iau intrările respondenților ca valori sursă. Fiecare variabilă personalizată are un nume unic și o expresie pe care se bazează.",
@@ -1972,3 +1972,4 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Setează lățimea consecventă pentru toate etichetele articolelor. Acceptă valori CSS (px, %, in, pt etc.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Măriți la 100%"
 // ed.addLanguageTooltip: "Add Language" => "Adăugați limbă"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Setează numărul de linii afișate în zonele de text pentru comentariile la întrebări. Dacă intrarea ocupă mai multe linii, apare bara de derulare."

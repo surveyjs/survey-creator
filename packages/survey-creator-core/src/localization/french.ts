@@ -1486,7 +1486,7 @@ var frenchTranslation = {
     questionOrder: "Conserve l’ordre d’origine des questions ou les rend aléatoires. L’effet de ce paramètre n’est visible que dans l’onglet Aperçu.",
     maxTextLength: "Pour les questions de saisie de texte uniquement.",
     maxCommentLength: "Pour les commentaires sur les questions seulement.",
-    commentAreaRows: "Définit le nombre de lignes affichées dans les zones de texte pour les commentaires de question. Lorsque l’entrée occupe plus de lignes, la barre de défilement apparaît.",
+    commentAreaRows: "Définit le nombre de lignes affichées dans les zones de texte pour les commentaires de question. Si l’entrée occupe plus de lignes, la barre de défilement apparaît.",
     autoGrowComment: "Indiquez si vous souhaitez que les commentaires de question et les questions de texte long augmentent automatiquement en hauteur en fonction de la longueur du texte saisi.",
     allowResizeComment: "Pour les questions, les commentaires et les questions de texte long uniquement.",
     calculatedValues: "Les variables personnalisées servent de variables intermédiaires ou auxiliaires utilisées dans les calculs de formulaire. Ils prennent les données des répondants comme valeurs sources. Chaque variable personnalisée a un nom unique et une expression sur laquelle elle est basée.",
@@ -3091,3 +3091,4 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Définit une largeur cohérente pour toutes les étiquettes d’article. Accepte les valeurs CSS (px, %, in, pt, etc.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoom à 100%"
 // ed.addLanguageTooltip: "Add Language" => "Ajouter une langue"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Définit le nombre de lignes affichées dans les zones de texte pour les commentaires de question. Si l’entrée occupe plus de lignes, la barre de défilement apparaît."

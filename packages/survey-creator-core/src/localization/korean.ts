@@ -3236,3 +3236,4 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "모든 항목 레이블에 대해 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
 // ed.zoom100Tooltip: "Zoom to 100%" => "100%로 확대/축소"
 // ed.addLanguageTooltip: "Add Language" => "언어 추가"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다."

@@ -1486,7 +1486,7 @@ export var huStrings = {
     questionOrder: "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. A beállítás hatása csak az Előnézet lapon látható.",
     maxTextLength: "Csak szövegbeviteli kérdések esetén.",
     maxCommentLength: "Csak kérdésekhez fűzött megjegyzésekhez.",
-    commentAreaRows: "Beállítja a kérdésmegjegyzések szövegterületein megjelenített sorok számát. A bemenet több sort foglal el, megjelenik a görgetősáv.",
+    commentAreaRows: "Beállítja a szövegterületeken megjelenített sorok számát a kérdésmegjegyzésekhez. Ha a bevitel több sort foglal el, megjelenik a görgetősáv.",
     autoGrowComment: "Válassza ki, ha azt szeretné, hogy a kérdésmegjegyzések és a hosszú szöveges kérdések magassága automatikusan növekedjen a beírt szöveg hossza alapján.",
     allowResizeComment: "Csak kérdésekhez és hosszú szöveges kérdésekhez.",
     calculatedValues: "Az egyéni változók köztes vagy kiegészítő változókként szolgálnak az űrlapszámításokban. A válaszadó bemeneteit forrásértékként veszik fel. Minden egyéni változónak egyedi neve és egy kifejezése van, amelyen alapul.",
@@ -3183,3 +3183,4 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Egységes szélességet állít be az összes cikkfelirathoz. CSS-értékeket fogad el (px, %, in, pt stb.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Nagyítás 100%-ra"
 // ed.addLanguageTooltip: "Add Language" => "Nyelv hozzáadása"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Beállítja a szövegterületeken megjelenített sorok számát a kérdésmegjegyzésekhez. Ha a bevitel több sort foglal el, megjelenik a görgetősáv."

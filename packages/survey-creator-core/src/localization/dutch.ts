@@ -1486,7 +1486,7 @@ export var nlStrings = {
     questionOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
     maxTextLength: "Alleen voor vragen over tekstinvoer.",
     maxCommentLength: "Alleen voor opmerkingen over vragen.",
-    commentAreaRows: "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. In de invoer neemt meer regels in beslag, de schuifbalk verschijnt.",
+    commentAreaRows: "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. Als de invoer meer regels in beslag neemt, wordt de schuifbalk weergegeven.",
     autoGrowComment: "Selecteer of u wilt dat vraagopmerkingen en lange tekstvragen automatisch in hoogte groeien op basis van de ingevoerde tekstlengte.",
     allowResizeComment: "Alleen voor vraagopmerkingen en lange tekstvragen.",
     calculatedValues: "Aangepaste variabelen dienen als tussenliggende of hulpvariabelen die worden gebruikt in formulierberekeningen. Ze nemen de input van respondenten als bronwaarden. Elke aangepaste variabele heeft een unieke naam en een expressie waarop deze is gebaseerd.",
@@ -3010,3 +3010,4 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor alle artikellabels. Accepteert CSS-waarden (px, %, in, pt, enz.)."
 // ed.zoom100Tooltip: "Zoom to 100%" => "Inzoomen tot 100%"
 // ed.addLanguageTooltip: "Add Language" => "Taal toevoegen"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. Als de invoer meer regels in beslag neemt, wordt de schuifbalk weergegeven."

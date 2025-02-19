@@ -839,7 +839,7 @@ test("Allow logic type to be null and change it", () => {
   expect(panel.getQuestionByName("elementSelector").isEmpty()).toBeTruthy();
   expect(panel.getQuestionByName("elementSelector").isVisible).toBeTruthy();
   expect(logic.saveEditableItem()).toBeFalsy();
-  panel.getQuestionByName("elementSelector").value = survey.currentPage.name;
+  panel.getQuestionByName("elementSelector").value = "q3";
   expect(logic.saveEditableItem()).toBeTruthy();
 });
 test("One action exists in new item", () => {
