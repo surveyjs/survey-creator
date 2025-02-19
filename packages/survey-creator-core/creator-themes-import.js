@@ -31,6 +31,18 @@ var themeConstants = {
   }
 };
 
+function sortDefaultThemes(defaultThemesOrder, themes) {
+  const sortedThemeNames = [].concat(themes).sort((t1, t2) => {
+    return defaultThemesOrder.indexOf(t1) - defaultThemesOrder.indexOf(t2);
+  });
+  themes.splice(0, themes.length);
+  sortedThemeNames.filter(themeName => {
+    if (themes.indexOf(themeName) === -1) {
+      themes.push(themeName);
+    }
+  });
+}
+
 const baseThemeCssVariable = getCssVariablesFormFile(baseThemeName + ".css");
 const themeDistinctions = {};
 
@@ -201,7 +213,7 @@ function isLightTheme(themeName) {
   return result;
 }
 
-let defaultImportNames = ["__surveyjs_internal_themes_hash"];
+let exportedNames = [];
 
 function writeTheme2020(themeName, cssVars, variableName) {
   const curPaletteCssVariables = getCssVariablesFormFile(themeName + "/v2.css");
@@ -211,8 +223,8 @@ function writeTheme2020(themeName, cssVars, variableName) {
   const result = `const Theme = ${themeJson};\nexport default Theme;\nexport const ${variableName} = Theme;`;
   fs.writeFileSync(_dirPath + themeName + ".ts", result);
 
-  defaultImportNames.push(variableName);
-  return `import ${variableName}Theme from "./${themeName}";\nexport const ${variableName} = ${variableName}Theme;\n`;
+  exportedNames.push(variableName);
+  return `import { ${variableName} } from "./${themeName}";\n`;
 }
 
 function writeTheme(themeName, cssVariables, variableName) {
@@ -221,8 +233,8 @@ function writeTheme(themeName, cssVariables, variableName) {
   const result = `const Theme = ${themeJson};\nexport default Theme;\nexport const ${variableName} = Theme;`;
   fs.writeFileSync(_dirPath + themeName + ".ts", result);
 
-  defaultImportNames.push(variableName);
-  return `import ${variableName}Theme from "./${themeName}";\nexport const ${variableName} = ${variableName}Theme;\n`;
+  exportedNames.push(variableName);
+  return `import { ${variableName} } from "./${themeName}";\n`;
 }
 
 function writeThemePalette(themeName, paletteName, cssVariables, extendTheme) {
@@ -243,8 +255,8 @@ function writeThemePalette(themeName, paletteName, cssVariables, extendTheme) {
   const result = `${importsString}const Theme = ${themeJson};\n${useImportString}export default Theme;\nexport const ${variableName} = Theme;`;
   fs.writeFileSync(_dirPath + fileName + ".ts", result);
 
-  defaultImportNames.push(variableName);
-  return `import ${variableName}Theme from "./${fileName}";\nexport const ${variableName} = ${variableName}Theme;\n`;
+  exportedNames.push(variableName);
+  return `import { ${variableName} } from "./${fileName}";\n`;
 }
 
 const usedCssVariablesList = [];
@@ -295,6 +307,10 @@ Object.keys(themeNameMap).forEach(themeName => {
   });
 });
 
-indexFileContent += "export const __surveyjs_internal_themes_hash = true;\n";
-indexFileContent += `export default { ${defaultImportNames.join(",")} }`;
+indexFileContent += "const __surveyjs_internal_themes_hash = true;\n";
+
+sortDefaultThemes(["DefaultContrast", "DefaultDark", "SC2020"], exportedNames);
+exportedNames.push("__surveyjs_internal_themes_hash");
+indexFileContent += `export { ${exportedNames.join(", ")} };\n`;
+indexFileContent += `export default { ${exportedNames.join(", ")} };`;
 fs.writeFileSync(_dirPath + "index.ts", indexFileContent);
