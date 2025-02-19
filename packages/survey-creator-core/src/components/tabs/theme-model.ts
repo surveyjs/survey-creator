@@ -1,4 +1,4 @@
-import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, surveyThemes } from "survey-core";
+import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
@@ -7,7 +7,7 @@ import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } 
 import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
 import { createBoxShadowReset, trimBoxShadowValue } from "./theme-custom-questions/shadow-effects";
 import { HeaderModel } from "./header-model";
-import { assign, roundTo2Decimals, sortDefaultThemes } from "../../utils/utils";
+import { assign, registerTheme, roundTo2Decimals, sortDefaultThemes, ThemesHash } from "../../utils/utils";
 import { ColorCalculator, ingectAlpha, parseColor } from "../../utils/color-utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
@@ -15,21 +15,19 @@ import { SurveyCreatorModel } from "../../creator-base";
 
 export * from "./header-model";
 
-const importedThemeNames = [];
-Object.keys(surveyThemes).forEach(themeName => {
-  const libraryTheme: ITheme = surveyThemes[themeName];
-  if (importedThemeNames.indexOf(themeName) === -1) {
-    importedThemeNames.push(themeName);
-  }
-  const creatorThemeVariables = {};
-  const creatorTheme = {};
-  assign(creatorThemeVariables, libraryTheme.cssVariables);
-  assign(creatorTheme, libraryTheme, { cssVariables: creatorThemeVariables });
-  const creatorThemeName = getThemeFullName(libraryTheme);
-  Themes[creatorThemeName] = creatorTheme;
-});
-
-sortDefaultThemes(defaultThemesOrder, importedThemeNames, PredefinedThemes);
+export function registerLibraryTheme(...themes: Array<ThemesHash<ITheme> | ITheme>) {
+  const importedThemeNames = [];
+  registerTheme((theme: ITheme) => {
+    const creatorThemeVariables = {};
+    const creatorTheme = {};
+    assign(creatorThemeVariables, theme.cssVariables);
+    assign(creatorTheme, theme, { cssVariables: creatorThemeVariables });
+    const creatorThemeName = getThemeFullName(theme);
+    Themes[creatorThemeName] = creatorTheme;
+    importedThemeNames.push(theme.themeName);
+  }, ...themes);
+  sortDefaultThemes(defaultThemesOrder, importedThemeNames, PredefinedThemes);
+}
 
 export function getThemeFullName(theme: ITheme) {
   const themeName = theme.themeName || ThemeModel.DefaultTheme.themeName || "default";
