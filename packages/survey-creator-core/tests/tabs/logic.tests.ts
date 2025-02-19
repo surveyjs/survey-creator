@@ -1298,7 +1298,7 @@ test("LogicItemEditorUI: filter by question and addNew", () => {
 
   logic.expressionEditor.text = "{q1} = 4";
   let panel = logic.itemEditor.panels[0];
-  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  panel.getQuestionByName("logicTypeName").value = "question_enable";
   panel.getQuestionByName("elementSelector").value = "q4";
 
   expect(logic.saveEditableItem()).toBeTruthy();
@@ -1312,7 +1312,7 @@ test("LogicItemEditorUI: filter by question and addNew", () => {
 
   logic.expressionEditor.text = "{q1} = 4";
   panel = logic.itemEditor.panels[0];
-  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  panel.getQuestionByName("logicTypeName").value = "question_enable";
   panel.getQuestionByName("elementSelector").value = "q3";
 
   expect(logic.saveEditableItem()).toBeTruthy();
