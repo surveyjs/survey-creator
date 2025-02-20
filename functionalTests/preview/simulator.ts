@@ -50,6 +50,7 @@ test("Simulator popups", async (t) => {
     .expect(dropdownPopupContainer.visible).ok()
     .expect(dropdownPopup.classNames).contains(overlayPopup)
     .expect(dropdownPopup.classNames).contains(tabletPopup)
+    .click(Selector(".sv-popup--dropdown-overlay"), { offsetY: 10 })
 
     .click(getBarItemByTitle("Select device type"))
     .click(getListItemByText("iPhone 15"))
