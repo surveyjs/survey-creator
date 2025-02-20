@@ -5,7 +5,9 @@
 </template>
 <script lang="ts" setup>
 import { slk } from "survey-core";
-import { SurveyCreatorModel, type ICreatorOptions } from "survey-creator-core";
+import { registerSurveyTheme, SurveyCreatorModel, type ICreatorOptions } from "survey-creator-core";
+import SurveyThemes from "survey-core/themes";
+registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";
 import { shallowRef } from "vue";

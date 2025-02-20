@@ -45,10 +45,10 @@
     height: auto;
   }
   
-  &.sv-popup--overlay.sv-popup--tablet > .sv-popup__container {
+  &.sv-popup--overlay.sv-popup--tablet {
     background-color: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));
   }
-  &.sv-popup--overlay .sv-popup__container {
+  &.sv-popup--overlay {
     // background-color: var(--ctr-popup-menu-background-color, var(--sjs-layer-1-background-500, #ffffffff));
     background-color: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));
   }

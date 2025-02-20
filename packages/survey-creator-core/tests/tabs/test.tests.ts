@@ -6,7 +6,9 @@ import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 import { SurveySimulatorModel, simulatorDevices } from "../../src/components/simulator";
 import { editorLocalization, getLocString } from "../../src/editorLocalization";
 export * from "../../src/localization/german";
-
+import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
+import SurveyThemes from "survey-core/themes";
+registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {

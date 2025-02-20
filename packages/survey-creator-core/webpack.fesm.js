@@ -29,7 +29,6 @@ function getConfig(options) {
     externalsType: "module",
     externals: {
       "survey-core": "survey-core",
-      "survey-core/themes": "survey-core/themes",
     }
   };
 

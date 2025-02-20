@@ -1,22 +1,9 @@
 import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptions, ISaveToJSONOptions } from "survey-core";
 import { getLocString } from "../editorLocalization";
-import { assign, roundTo2Decimals, sortDefaultThemes } from "../utils/utils";
+import { assign, roundTo2Decimals } from "../utils/utils";
 import { colorsAreEqual } from "../utils/color-utils";
-import { CreatorThemes, defaultCreatorThemesOrder, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
+import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
-
-export function registerDefaultThemes(themes: {}) {
-  if (!themes) return;
-  const importedThemeNames = [];
-  Object.keys(themes).forEach(themeName => {
-    const theme: ICreatorTheme = themes[themeName];
-    if (importedThemeNames.indexOf(theme.themeName) === -1) {
-      importedThemeNames.push(theme.themeName);
-    }
-    CreatorThemes[theme.themeName] = theme;
-  });
-  sortDefaultThemes(defaultCreatorThemesOrder, importedThemeNames, PredefinedCreatorThemes);
-}
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";
