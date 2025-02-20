@@ -42,7 +42,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       }
     );
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
-    this.actionContainer.alwaysShrink = this.creator.isMobileView;
     this.creator.onPropertyChanged.add(this.creatorPropertyChanged);
   }
   public dispose() {
@@ -190,10 +189,12 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return container;
   }
 
-  protected createActionContainers() {
-    super.createActionContainers();
-    this.topActionContainer.cssClasses = { ...this.actionContainer.cssClasses };
-    this.topActionContainer.cssClasses.root += " svc-page-toolbar--collapse";
+  protected createTopActionContainer(): ActionContainer {
+    const actionContainer = super.createTopActionContainer();
+    (<SurveyElementActionContainer>actionContainer).alwaysShrink = this.creator.isMobileView;
+    actionContainer.cssClasses = { ...actionContainer.cssClasses };
+    actionContainer.cssClasses.root += " svc-page-toolbar--collapse";
+    return actionContainer;
   }
 
   protected allowExpandCollapseByDblClick(element: any) {
@@ -295,7 +296,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return result.trim();
   }
   private creatorPropertyChanged = (sender, options) => {
-    if (options.name === "isMobileView") {
+    if (options.name === "isMobileView" && this.isActionContainerCreated) {
       this.actionContainer.alwaysShrink = options.newValue;
     }
   }
