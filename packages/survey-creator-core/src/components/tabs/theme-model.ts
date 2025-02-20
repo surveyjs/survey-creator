@@ -7,8 +7,8 @@ import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } 
 import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
 import { createBoxShadowReset, trimBoxShadowValue } from "./theme-custom-questions/shadow-effects";
 import { HeaderModel } from "./header-model";
-import * as LibraryThemes from "survey-core/themes";
-import { assign, roundTo2Decimals, sortDefaultThemes } from "../../utils/utils";
+import { registerTheme, ThemesHash, sortDefaultThemes } from "../../utils/themes";
+import { assign, roundTo2Decimals } from "../../utils/utils";
 import { ColorCalculator, ingectAlpha, parseColor } from "../../utils/color-utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
@@ -16,20 +16,19 @@ import { SurveyCreatorModel } from "../../creator-base";
 
 export * from "./header-model";
 
-const importedThemeNames = [];
-Object.keys(LibraryThemes || {}).forEach(libraryThemeName => {
-  const libraryTheme: ITheme = LibraryThemes[libraryThemeName];
-  if (importedThemeNames.indexOf(libraryTheme.themeName) === -1) {
-    importedThemeNames.push(libraryTheme.themeName);
-  }
-  const creatorThemeVariables = {};
-  const creatorTheme = {};
-  assign(creatorThemeVariables, libraryTheme.cssVariables);
-  assign(creatorTheme, libraryTheme, { cssVariables: creatorThemeVariables });
-  const creatorThemeName = getThemeFullName(libraryTheme);
-  Themes[creatorThemeName] = creatorTheme;
-});
-sortDefaultThemes(defaultThemesOrder, importedThemeNames, PredefinedThemes);
+export function registerSurveyTheme(...themes: Array<ThemesHash<ITheme> | ITheme>) {
+  const importedThemeNames = [];
+  registerTheme((theme: ITheme) => {
+    const creatorThemeVariables = {};
+    const creatorTheme = {};
+    assign(creatorThemeVariables, theme.cssVariables);
+    assign(creatorTheme, theme, { cssVariables: creatorThemeVariables });
+    const creatorThemeName = getThemeFullName(theme);
+    Themes[creatorThemeName] = creatorTheme;
+    importedThemeNames.push(theme.themeName);
+  }, ...themes);
+  sortDefaultThemes(defaultThemesOrder, importedThemeNames, PredefinedThemes);
+}
 
 export function getThemeFullName(theme: ITheme) {
   const themeName = theme.themeName || ThemeModel.DefaultTheme.themeName || "default";
@@ -104,7 +103,17 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
 }
 
 export class ThemeModel extends Base implements ITheme {
-  public static DefaultTheme = Themes["default-light"] || {};
+  private static defaultThemeValue: ITheme;
+  public static get DefaultTheme() {
+    if(!this.defaultThemeValue) {
+      return Themes["default-light"] || {};
+    } else {
+      return this.defaultThemeValue;
+    }
+  }
+  public static set DefaultTheme(val: ITheme) {
+    this.defaultThemeValue = val;
+  }
   public undoRedoManager: UndoRedoManager;
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();

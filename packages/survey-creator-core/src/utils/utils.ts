@@ -76,18 +76,6 @@ export function assign(...inputs: Array<any>) {
   }
 }
 
-export function sortDefaultThemes(defaultThemesOrder: Array<string>, themes: Array<string>, resultArray: Array<string>): void {
-  const sortedThemeNames = [].concat(themes).sort((t1, t2) => {
-    return defaultThemesOrder.indexOf(t1) - defaultThemesOrder.indexOf(t2);
-  });
-
-  sortedThemeNames.forEach(themeName => {
-    if (resultArray.indexOf(themeName) === -1) {
-      resultArray.push(themeName);
-    }
-  });
-}
-
 export function getOS(): "Mac OS" | "iOS" | "Windows" | "Android" | "Linux" {
   const userAgent = window.navigator.userAgent,
     platform = (window.navigator as any)?.userAgentData?.platform || window.navigator.platform,

@@ -81,9 +81,13 @@ var buildPlatformJson = {
       "import": "./fesm/themes/index.js",
       "require": "./themes/index.js"
     },
+    "./themes/index": {
+      "types": "./themes/index.d.ts",
+      "import": "./fesm/themes/index.js",
+      "require": "./themes/index.js"
+    },
     "./themes/*": {
       "types": "./themes/*.d.ts",
-      "import": "./fesm/themes/*.js",
       "require": "./themes/*.js"
     }
   },
@@ -229,13 +233,7 @@ module.exports = function (options) {
         commonjs2: "survey-core",
         commonjs: "survey-core",
         amd: "survey-core",
-      },
-      "survey-core/themes": {
-        root: "SurveyTheme",
-        commonjs2: "survey-core/themes",
-        commonjs: "survey-core/themes",
-        amd: "survey-core/themes",
-      },
+      }
     },
     plugins: [
       new webpack.ProgressPlugin(getPercentageHandler(emitNonSourceFiles, emitStyles, buildPath, isProductionBuild)),

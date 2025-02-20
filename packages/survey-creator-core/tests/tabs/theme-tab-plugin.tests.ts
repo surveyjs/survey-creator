@@ -14,6 +14,9 @@ import { ThemeTabViewModel } from "../../src/components/tabs/theme-builder";
 import { settings } from "../../src/creator-settings";
 import { assign } from "../../src/utils/utils";
 import { PredefinedThemes, Themes } from "../../src/components/tabs/themes";
+import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
+import SurveyThemes from "survey-core/themes";
+registerSurveyTheme(SurveyThemes);
 
 test("Creator top action bar: only theme tab", (): any => {
   const themeBuilderButtonOrder = ["action-undo-theme", "action-redo-theme", "svc-reset-theme", "svc-theme-settings", "svc-theme-import", "svc-theme-export"].join("|");
