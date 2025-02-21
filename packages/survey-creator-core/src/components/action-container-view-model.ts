@@ -95,7 +95,6 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public static AdornerValueName = "__sjs_creator_adorner";
-  public topActionContainer: ActionContainer;
   protected expandCollapseAction: IAction;
   @property({ defaultValue: true }) allowDragging: boolean;
   @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
@@ -301,7 +300,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   ) {
     super();
     this.expandCollapseAction = this.getExpandCollapseAction();
-    this.topActionContainer = this.createTopActionContainer();
     this.attachToUI(surveyElement);
   }
   private actionContainerValue: SurveyElementActionContainer;
@@ -311,8 +309,19 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public get actionContainer(): SurveyElementActionContainer {
     if (!this.actionContainerValue) {
       this.actionContainerValue = this.createActionContainer();
+      if(this.surveyElement) {
+        this.updateActionsContainer(this.surveyElement);
+        this.updateActionsProperties();
+      }
     }
     return this.actionContainerValue;
+  }
+  private topActionContainerValue: ActionContainer;
+  public get topActionContainer(): ActionContainer {
+    if(!this.topActionContainerValue) {
+      this.topActionContainerValue = this.createTopActionContainer();
+    }
+    return this.topActionContainerValue;
   }
 
   private creatorOnLocaleChanged: (sender: Base, options: any) => void = (_, options) => {
@@ -439,7 +448,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.actionContainerValue.setItems(actions);
   }
   protected updateActionsProperties(): void {
-    if (this.isDisposed) return;
+    if (this.isDisposed || !this.isActionContainerCreated) return;
+    this.updateActionsPropertiesCore();
+  }
+  protected updateActionsPropertiesCore(): void {
     this.updateElementAllowOptions(
       this.creator.getElementAllowOperations(this.surveyElement),
       this.isOperationsAllow()

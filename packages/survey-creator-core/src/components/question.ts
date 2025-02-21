@@ -327,16 +327,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     (<SurveyElementActionContainer>actionContainer).dotsItem.innerCss += " svc-survey-element-toolbar__item";
     return actionContainer;
   }
-  public getActionById(id: string): Action {
-    let res = super.getActionById(id);
-    if (!res) {
-      res = this.topActionContainer.getActionById(id);
-    }
-    return res;
-  }
-  protected updateActionsProperties(): void {
-    if (this.isDisposed) return;
-    super.updateActionsProperties();
+  protected updateActionsPropertiesCore(): void {
+    super.updateActionsPropertiesCore();
     const actions = this.actionContainer.visibleActions;
     let switchToStartLocation = false;
     for (var i = actions.length - 1; i >= 0; i--) {
