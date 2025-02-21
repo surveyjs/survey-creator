@@ -4,7 +4,7 @@ const { merge } = require("webpack-merge");
 const path = require("path");
 
 function getConfig(options) {
-  const buildPath = __dirname + "/build/fesm/";
+  const buildPath = __dirname + "/build/fesm/themes";
   const config = {
     devtool: "source-map",
     output: {
@@ -15,7 +15,7 @@ function getConfig(options) {
       }
     },
     entry: {
-      "themes/index": path.resolve(__dirname, "./src/themes/index.ts"),
+      "index": path.resolve(__dirname, "./src/themes/index.ts"),
     },
     experiments: {
       outputModule: true,
