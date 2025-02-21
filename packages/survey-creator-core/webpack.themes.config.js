@@ -6,13 +6,13 @@ var path = require("path");
 
 const config = {
   output: {
-    path: __dirname + "/build"
+    path: __dirname + "/build/themes"
   },
   entry: {
-    "themes/sc2020": path.resolve(__dirname, "./src/themes/sc2020.ts"),
-    "themes/default-dark": path.resolve(__dirname, "./src/themes/default-dark.ts"),
-    "themes/default-contrast": path.resolve(__dirname, "./src/themes/default-contrast.ts"),
-    "themes/index": path.resolve(__dirname, "./src/themes/index.ts"),
+    "sc2020": path.resolve(__dirname, "./src/themes/sc2020.ts"),
+    "default-dark": path.resolve(__dirname, "./src/themes/default-dark.ts"),
+    "default-contrast": path.resolve(__dirname, "./src/themes/default-contrast.ts"),
+    "index": path.resolve(__dirname, "./src/themes/index.ts"),
   },
   externals: {
     "survey-creator-core": {
@@ -23,12 +23,35 @@ const config = {
     },
   },
 };
-
+const umdNames = {
+  "sc2020": "SC2020",
+};
+function patchEntries(config) {
+  Object.keys(config.entry).forEach(key => {
+    if (key == "index") return;
+    const importEntry = config.entry[key];
+    const umdName = umdNames[key] ?? key.replace(/([_-]\w|^\w)/g, k => (k[1] ?? k[0]).toUpperCase());
+    config.entry[key] = {
+      import: importEntry,
+      library: {
+        type: "umd",
+        export: "default",
+        umdNamedDefine: true,
+        name: {
+          root: ["SurveyCreatorThemes", umdName],
+          amd: "[dashedname]",
+          commonjs: "[dashedname]",
+        },
+      }
+    };
+  });
+}
 module.exports = function (options) {
   options.platform = "";
-  options.libraryName = "SurveyCreatorTheme";
+  options.libraryName = "SurveyCreatorThemes";
   options.tsConfigFile = path.resolve(__dirname, "./tsconfig.themes.json");
   const mainConfig = webpackCommonConfig(options);
   mainConfig.entry = {};
+  patchEntries(config);
   return merge(mainConfig, config);
 };
