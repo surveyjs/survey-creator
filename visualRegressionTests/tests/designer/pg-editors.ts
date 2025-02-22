@@ -861,7 +861,7 @@ test("popup overlay in property grid", async (t) => {
       .click(getQuestionBarItemByTitle("Open settings"))
       .click(Selector(".spg-dropdown[aria-label='Input type']"));
 
-    await takeElementScreenshot("pg-overlay-popup.png", getVisibleElement(".sv-popup .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-overlay-popup.png", getVisibleElement(".sv-popup"), t, comparer);
   });
 });
 

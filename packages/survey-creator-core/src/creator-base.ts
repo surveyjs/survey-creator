@@ -2194,7 +2194,7 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
       const element = sender.draggedElement;
       isDraggedFromToolbox = !element.parent && !element.isPage;
-      if (!!element && element.isPage && this.collapseOnDrag) {
+      if (!!element && (element.isPage || this.collapseOnDrag)) {
         this.designerStateManager?.suspend();
         this.collapseAllPagesOnDragStart(element);
       }
@@ -2214,7 +2214,7 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragClear.add((sender, options) => {
       isDraggedFromToolbox = false;
       this.stopUndoRedoTransaction();
-      if (!!options.draggedElement && this.collapseOnDrag) {
+      if (!!options.draggedElement && (options.draggedElement.isPage || this.collapseOnDrag)) {
         this.designerStateManager?.release();
         this.restoreElementsState();
       }
@@ -4390,9 +4390,9 @@ export class SurveyCreatorModel extends Base
   /**
    * Specifies whether to collapse pages on the design surface when users start dragging a survey element.
    * 
-   * Default value: `true`
+   * Default value: `false`
    */
-  public collapseOnDrag: boolean = true;
+  public collapseOnDrag: boolean = false;
 }
 
 export class CreatorBase extends SurveyCreatorModel { }
