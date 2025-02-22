@@ -2255,6 +2255,42 @@ test("QuestionAdornerViewModel and onElementAllowOperations, allowExpandCollapse
   expect(q2Model.topActionContainer.getActionById("collapse").visible).toBeFalsy();
 });
 
+test("QuestionAdornerViewModel actionContainer&topActionContainer on demand", (): any => {
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ]
+  };
+  let counter = 0;
+  creator.onElementAllowOperations.add((sender, options) => {
+    counter ++;
+  });
+  const q1Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
+  expect(q1Model["actionContainerValue"]).toBeFalsy();
+  expect(q1Model["topActionContainerValue"]).toBeFalsy();
+  expect(q1Model.topActionContainer).toBeTruthy();
+  expect(q1Model["actionContainerValue"]).toBeFalsy();
+  expect(q1Model["topActionContainerValue"]).toBeTruthy();
+  expect(q1Model.actionContainer).toBeTruthy();
+  expect(q1Model["actionContainerValue"]).toBeTruthy();
+  expect(q1Model["topActionContainerValue"]).toBeTruthy();
+
+  const q2Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[1], undefined);
+  expect(q2Model["actionContainerValue"]).toBeFalsy();
+  expect(q2Model["topActionContainerValue"]).toBeFalsy();
+  expect(q2Model.actionContainer).toBeTruthy();
+  expect(q2Model["actionContainerValue"]).toBeTruthy();
+  expect(q2Model["topActionContainerValue"]).toBeFalsy();
+  expect(q2Model.topActionContainer).toBeTruthy();
+  expect(q2Model["actionContainerValue"]).toBeTruthy();
+  expect(q2Model["topActionContainerValue"]).toBeTruthy();
+  expect(counter).toEqual(2);
+});
+
 test("QuestionAdornerViewModel and onElementAllowOperations on new elements", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

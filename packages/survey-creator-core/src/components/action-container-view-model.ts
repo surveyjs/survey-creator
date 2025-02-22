@@ -311,7 +311,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.actionContainerValue = this.createActionContainer();
       if(this.surveyElement) {
         this.updateActionsContainer(this.surveyElement);
-        this.updateActionsProperties();
+        this.updateActionsVisibility(false);
       }
     }
     return this.actionContainerValue;
@@ -320,6 +320,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public get topActionContainer(): ActionContainer {
     if(!this.topActionContainerValue) {
       this.topActionContainerValue = this.createTopActionContainer();
+      if(this.surveyElement) {
+        this.updateActionsVisibility(true);
+      }
     }
     return this.topActionContainerValue;
   }
@@ -408,12 +411,16 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   public dispose(): void {
     this.detachFromUI();
-    if (!this.actionContainerValue.isDisposed) {
-      this.actionContainerValue.dispose();
-    }
+    this.disposeActions(this.actionContainerValue);
+    this.disposeActions(this.topActionContainerValue);
     super.dispose();
     this.sidebarFlyoutModeChangedFunc = undefined;
     this.animationCollapsed = undefined;
+  }
+  private disposeActions(container: ActionContainer): void {
+    if(!!container && !container.isDisposed) {
+      container.dispose();
+    }
   }
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
@@ -448,7 +455,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.actionContainerValue.setItems(actions);
   }
   protected updateActionsProperties(): void {
-    if (this.isDisposed || !this.isActionContainerCreated) return;
+    if (this.isDisposed) return;
     this.updateActionsPropertiesCore();
   }
   protected updateActionsPropertiesCore(): void {
@@ -481,11 +488,21 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected isOperationsAllow(): boolean {
     return !this.creator.readOnly;
   }
+  private actionVisibilityCache: { [index: string]: boolean } = {};
   protected updateActionVisibility(id: string, isVisible: boolean) {
-    var action = this.getActionById(id);
-    if (!action) return;
-    if (action.visible == isVisible) return;
-    action.visible = isVisible;
+    var action = this.actionContainerValue?.getActionById(id) || this.topActionContainerValue?.getActionById(id);
+    if (!action) {
+      this.actionVisibilityCache[id] = isVisible;
+    } else {
+      if (action.visible !== isVisible) {
+        action.visible = isVisible;
+      }
+    }
+  }
+  protected updateActionsVisibility(isTop: boolean): void {
+    for (var key in this.actionVisibilityCache) {
+      this.updateActionVisibility(key, this.actionVisibilityCache[key]);
+    }
   }
   public getActionById(id: string): Action {
     return this.actionContainer.getActionById(id) || this.topActionContainer.getActionById(id);

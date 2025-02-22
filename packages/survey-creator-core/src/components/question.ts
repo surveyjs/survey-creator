@@ -329,6 +329,17 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected updateActionsPropertiesCore(): void {
     super.updateActionsPropertiesCore();
+    if(this.isActionContainerCreated) {
+      this.updateActionsLocations();
+    }
+  }
+  protected updateActionsVisibility(isTop: boolean): void {
+    super.updateActionsVisibility(isTop);
+    if(!isTop) {
+      this.updateActionsLocations();
+    }
+  }
+  private updateActionsLocations(): void {
     const actions = this.actionContainer.visibleActions;
     let switchToStartLocation = false;
     for (var i = actions.length - 1; i >= 0; i--) {

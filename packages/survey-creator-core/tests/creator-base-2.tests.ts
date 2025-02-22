@@ -404,7 +404,6 @@ test("onElementAllowOperations for pages and allowDragging in page adorner", ():
   });
 
   const pageAdorner = new PageAdorner(creator, creator.survey.pages[0]);
-
   expect(creator.allowDragPages).toBeTruthy();
   expect(pageAdorner.allowDragging).toBeTruthy();
   expect(reason).toHaveLength(1);
