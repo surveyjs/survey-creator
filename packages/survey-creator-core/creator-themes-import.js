@@ -208,21 +208,21 @@ function writeTheme2020(themeName, cssVars, variableName) {
   const cssVariables = { ...cssVars, ...curPaletteCssVariables };
   const theme = { themeName, iconSet: "v1", isLight: true, cssVariables };
   const themeJson = JSON.stringify(theme, null, 2);
-  const result = `const Theme = ${themeJson};\nexport default Theme;\nexport const ${variableName} = Theme;`;
+  const result = `export default ${themeJson};\n`;
   fs.writeFileSync(_dirPath + themeName + ".ts", result);
 
   exportedNames.push(variableName);
-  return `import { ${variableName} } from "./${themeName}";\n`;
+  return `import ${variableName} from "./${themeName}";\n`;
 }
 
 function writeTheme(themeName, cssVariables, variableName) {
   const theme = { themeName, iconSet: "v2", cssVariables };
   const themeJson = JSON.stringify(theme, null, 2);
-  const result = `const Theme = ${themeJson};\nexport default Theme;\nexport const ${variableName} = Theme;`;
+  const result = `export default ${themeJson};`;
   fs.writeFileSync(_dirPath + themeName + ".ts", result);
 
   exportedNames.push(variableName);
-  return `import { ${variableName} } from "./${themeName}";\n`;
+  return `import ${variableName} from "./${themeName}";\n`;
 }
 
 function writeThemePalette(themeName, paletteName, cssVariables, extendTheme) {
@@ -240,11 +240,11 @@ function writeThemePalette(themeName, paletteName, cssVariables, extendTheme) {
     importsString = `import { assign } from "./utils";\nimport { ${baseThemeVariable} } from "./${themeName}";\n\n`;
     useImportString = `const themeCssVariables = {};\nassign(themeCssVariables, ${baseThemeVariable}.cssVariables, Theme.cssVariables);\nassign(Theme, { cssVariables: themeCssVariables });\n\n`;
   }
-  const result = `${importsString}const Theme = ${themeJson};\n${useImportString}export default Theme;\nexport const ${variableName} = Theme;`;
+  const result = `${importsString}export default ${themeJson};\n`;
   fs.writeFileSync(_dirPath + fileName + ".ts", result);
 
   exportedNames.push(variableName);
-  return `import { ${variableName} } from "./${fileName}";\n`;
+  return `import ${variableName} from "./${fileName}";\n`;
 }
 
 const usedCssVariablesList = [];
