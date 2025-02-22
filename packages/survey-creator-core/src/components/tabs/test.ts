@@ -1,6 +1,6 @@
 import { SurveyCreatorModel } from "../../creator-base";
 import { PreviewViewModel } from "./preview";
-require("./test.scss");
+import "./test.scss";
 
 export class TestSurveyTabViewModel extends PreviewViewModel {
   constructor(surveyProvider: SurveyCreatorModel, startThemeClasses: any) {

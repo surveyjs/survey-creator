@@ -5,7 +5,7 @@ import { QuestionAdornerViewModel } from "./question";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { getLocString } from "../editorLocalization";
 
-require("./question-image.scss");
+import "./question-image.scss";
 
 export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   private editorSurveyModel: SurveyModel;

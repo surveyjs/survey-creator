@@ -2,7 +2,7 @@ export let Version: string;
 Version = `${process.env.VERSION}`;
 
 //should be loaded before other styles for easier override 
-require("../utils/context-button.scss");
+import "../utils/context-button.scss";
 
 export { enStrings } from "../localization/english";
 export { editorLocalization, defaultStrings } from "../editorLocalization";
@@ -114,23 +114,23 @@ export * from "../presets/presets-tabs";
 export * from "../presets/presets-toolbox";
 export * from "../survey-elements";
 
-require("../components/search.scss");
-require("../components/scroll.scss");
-require("../components/property-panel/property-panel-item.scss");
-require("../components/property-panel/property-panel.scss");
-require("../components/tabbed-menu/tabbed-menu-item.scss");
-require("../components/tabbed-menu/tabbed-menu.scss");
-require("../components/toolbox/toolbox-tool.scss");
-require("../components/question-dropdown.scss");
-require("../components/toolbox/toolbox.scss");
-require("../components/toolbox/toolbox-search.scss");
-require("../components/toolbox/toolbox-right.scss");
-require("../components/toolbox/toolbox-animation.scss");
-require("../components/side-bar/side-bar.scss");
-require("../components/side-bar/tab-control.scss");
-require("../property-grid-theme/property-grid.scss");
-require("../utils/layout.scss");
-require("../custom-questions/boolean-switch.scss");
+import "../components/search.scss";
+import "../components/scroll.scss";
+import "../components/property-panel/property-panel-item.scss";
+import "../components/property-panel/property-panel.scss";
+import "../components/tabbed-menu/tabbed-menu-item.scss";
+import "../components/tabbed-menu/tabbed-menu.scss";
+import "../components/toolbox/toolbox-tool.scss";
+import "../components/question-dropdown.scss";
+import "../components/toolbox/toolbox.scss";
+import "../components/toolbox/toolbox-search.scss";
+import "../components/toolbox/toolbox-right.scss";
+import "../components/toolbox/toolbox-animation.scss";
+import "../components/side-bar/side-bar.scss";
+import "../components/side-bar/tab-control.scss";
+import "../property-grid-theme/property-grid.scss";
+import "../utils/layout.scss";
+import "../custom-questions/boolean-switch.scss";
 
 import { settings, checkLibraryVersion } from "survey-core";
 

@@ -1,5 +1,5 @@
 import { SurveyCreatorModel } from "./creator-base";
-require("./responsivity.scss");
+import "./responsivity.scss";
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
   private currentWidth;

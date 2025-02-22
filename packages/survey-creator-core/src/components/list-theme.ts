@@ -1,4 +1,4 @@
-require("./list.scss");
+import "./list.scss";
 
 export var listComponentCss = {
   root: "svc-list__container",

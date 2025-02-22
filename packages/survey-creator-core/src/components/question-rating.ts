@@ -14,7 +14,7 @@ import { SurveyCreatorModel } from "../creator-base";
 import { getLocString } from "../editorLocalization";
 import { getNextValue, getQuestionFromObj } from "../utils/creator-utils";
 
-require("./question-rating.scss");
+import "./question-rating.scss";
 
 export class QuestionRatingAdornerViewModel extends Base {
   constructor(

@@ -3,7 +3,7 @@ import { editorLocalization } from "../../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import { SurveyLogicTypes, SurveyLogicType, ISurveyLogicType } from "./logic-types";
-require("./logic.scss");
+import "./logic.scss";
 
 export function initLogicOperator(question: QuestionDropdownModel) {
   question.popupModel.isFocusedContent = true;

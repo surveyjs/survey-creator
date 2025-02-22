@@ -76,9 +76,9 @@ import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
 import { iconsV1, iconsV2 } from "./svgbundle";
 import { listComponentCss } from "./components/list-theme";
 
-require("./components/creator.scss");
-require("./components/string-editor.scss");
-require("./creator-theme/creator.scss");
+import "./components/creator.scss";
+import "./components/string-editor.scss";
+import "./creator-theme/creator.scss";
 
 addIconsToThemeSet("v1", iconsV1);
 addIconsToThemeSet("v2", iconsV2);

@@ -7,7 +7,7 @@ import {
   property
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
-require("./row.scss");
+import "./row.scss";
 
 export class ScrollViewModel {
   private _containerElementValue: HTMLElement;

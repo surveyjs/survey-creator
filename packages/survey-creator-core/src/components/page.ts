@@ -7,7 +7,7 @@ import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
 import { DragDropSurveyElements } from "../survey-elements";
 
-require("./page.scss");
+import "./page.scss";
 
 export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
