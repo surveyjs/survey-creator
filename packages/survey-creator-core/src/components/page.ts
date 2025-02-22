@@ -173,6 +173,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   protected createActionContainer(): SurveyElementActionContainer {
     const container = super.createActionContainer();
+    container.alwaysShrink = this.creator.isMobileView;
     container.sizeMode = "small";
     container.cssClasses = {
       root: "svc-page-toolbar sv-action-bar",
@@ -190,11 +191,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   protected createTopActionContainer(): ActionContainer {
-    const actionContainer = super.createTopActionContainer();
-    (<SurveyElementActionContainer>actionContainer).alwaysShrink = this.creator.isMobileView;
-    actionContainer.cssClasses = { ...actionContainer.cssClasses };
-    actionContainer.cssClasses.root += " svc-page-toolbar--collapse";
-    return actionContainer;
+    const container = super.createTopActionContainer();
+    container.cssClasses = { ...container.cssClasses };
+    container.cssClasses.root += " svc-page-toolbar--collapse";
+    return container;
   }
 
   protected allowExpandCollapseByDblClick(element: any) {
