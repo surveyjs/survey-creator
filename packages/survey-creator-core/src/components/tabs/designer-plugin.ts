@@ -191,7 +191,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
   private onThemePropertyGridSurveyCreated() {
     const survey = this.themePropertyGrid.survey;
-    survey.css.root += "svc-creator-theme-settings";
+    survey.css.root += " svc-creator-theme-settings";
     survey.onUpdatePanelCssClasses.add((_, options) => {
       options.cssClasses.panel.container += " spg-panel--group";
     });
