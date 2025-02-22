@@ -175,7 +175,20 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     const container = super.createActionContainer();
     container.alwaysShrink = this.creator.isMobileView;
     container.sizeMode = "small";
-    container.cssClasses = {
+    container.cssClasses = this.containerCssClasses();
+    container.dotsItem.iconSize = "auto";
+    container.dotsItem.cssClasses.itemIcon += " svc-page-toolbar-item__icon";
+    return container;
+  }
+
+  protected createTopActionContainer(): ActionContainer {
+    const container = super.createTopActionContainer();
+    container.cssClasses = { ...this.containerCssClasses() };
+    container.cssClasses.root += " svc-page-toolbar--collapse";
+    return container;
+  }
+  private containerCssClasses(): any {
+    return {
       root: "svc-page-toolbar sv-action-bar",
       item: "svc-page-toolbar__item",
       itemWithTitle: "svc-page-toolbar__item--with-text",
@@ -185,18 +198,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       itemTitle: "svc-page-toolbar-item__title",
       itemTitleWithIcon: "svc-page-toolbar-item__title--with-icon",
     };
-    container.dotsItem.iconSize = "auto";
-    container.dotsItem.cssClasses.itemIcon += " svc-page-toolbar-item__icon";
-    return container;
   }
-
-  protected createTopActionContainer(): ActionContainer {
-    const container = super.createTopActionContainer();
-    container.cssClasses = { ...container.cssClasses };
-    container.cssClasses.root += " svc-page-toolbar--collapse";
-    return container;
-  }
-
   protected allowExpandCollapseByDblClick(element: any) {
     return element.classList.contains("svc-page__content") ||
       element.classList.contains("sd-page") ||
