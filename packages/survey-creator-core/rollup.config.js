@@ -25,31 +25,30 @@ module.exports = (options) => {
   if(!options.dir) {
     options.dir = path.resolve(__dirname, "./build/fesm");
   }
+  const iconsMap = {
+    "iconsV1": path.resolve(__dirname, "./src/images-v1/*.svg"),
+    "iconsV2": path.resolve(__dirname, "./src/images-v2/*.svg")
+  };
   return {
     input,
     context: "this",
     external: ["survey-core"],
     plugins: [
       {
-        name: "svgbundle",
+        name: "icons",
+        resolveId: (id) => {
+          if (Object.keys(iconsMap).includes(id)) {
+            return id;
+          }
+        },
         load: async (id) => {
-          if (id === path.resolve(__dirname, "./src/svgbundle.ts")) {
-            const iconsMap = {};
-            const iconsPathMap = {
-              "iconsV1": path.resolve(__dirname, "./src/images-v1/*.svg"),
-              "iconsV2": path.resolve(__dirname, "./src/images-v2/*.svg")
-            };
-            for(const iconsKey in iconsPathMap) {
-              const icons = {};
-              for (const iconPath of await glob(iconsPathMap[iconsKey])) {
-                const [fname] = iconPath.split("/").slice(-1);
-                icons[fname.replace(/\.svg$/, "").toLocaleLowerCase()] = readFile(iconPath).toString();
-              }
-              iconsMap[iconsKey] = JSON.stringify(icons, undefined, "\t");
+          if (Object.keys(iconsMap).includes(id)) {
+            const icons = {};
+            for (const iconPath of await glob(iconsMap[id])) {
+              const [fname] = iconPath.split("/").slice(-1);
+              icons[fname.replace(/\.svg$/, "").toLocaleLowerCase()] = readFile(iconPath).toString();
             }
-            return Object.keys(iconsMap).map(key => {
-              return `export const ${key} = ${iconsMap[key]}`;
-            }).join("\n");
+            return `export default ${JSON.stringify(icons, undefined, "\t")}`;
           }
         }
       },
