@@ -5,7 +5,7 @@ const commonjs = require("@rollup/plugin-commonjs");
 const bannerPlugin = require("rollup-plugin-license");
 
 const path = require("path");
-const glob = require("fast-glob").glob;
+const fg = require("fast-glob");
 const readFile = require("fs").readFileSync;
 const VERSION = require("./package.json").version;
 const input = { "survey-creator-core": path.resolve(__dirname, "./src/entries/index.ts") };
@@ -26,8 +26,8 @@ module.exports = (options) => {
     options.dir = path.resolve(__dirname, "./build/fesm");
   }
   const iconsMap = {
-    "iconsV1": path.resolve(__dirname, "./src/images-v1/*.svg"),
-    "iconsV2": path.resolve(__dirname, "./src/images-v2/*.svg")
+    "iconsV1": fg.convertPathToPattern(path.resolve(__dirname, "./src/images-v1")) + "/*.svg",
+    "iconsV2": fg.convertPathToPattern(path.resolve(__dirname, "./src/images-v2")) + "/*.svg"
   };
   return {
     input,
@@ -44,7 +44,7 @@ module.exports = (options) => {
         load: async (id) => {
           if (Object.keys(iconsMap).includes(id)) {
             const icons = {};
-            for (const iconPath of await glob(iconsMap[id])) {
+            for (const iconPath of await fg.glob(iconsMap[id])) {
               icons[path.basename(iconPath).replace(/\.svg$/, "").toLocaleLowerCase()] = readFile(iconPath).toString();
             }
             return `export default ${JSON.stringify(icons, undefined, "\t")}`;
