@@ -10,7 +10,6 @@ import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
 registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
-import { first } from "lodash";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
   if (creator.activeTab !== "test") {
