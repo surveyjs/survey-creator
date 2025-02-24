@@ -129,7 +129,7 @@ function getHorizontalAlignment(questionName: string): IJsonPropertyInfo {
       { value: "center" },
       { value: "right", },
     ],
-    defaultFunc: () => Serializer.getProperty("cover", questionName).default,
+    defaultFunc: () => Serializer.getProperty("cover", questionName).defaultValue,
   };
 }
 function getVerticalAlignment(questionName: string): IJsonPropertyInfo {
@@ -143,7 +143,7 @@ function getVerticalAlignment(questionName: string): IJsonPropertyInfo {
       { value: "middle" },
       { value: "bottom" },
     ],
-    defaultFunc: () => Serializer.getProperty("cover", questionName).default,
+    defaultFunc: () => Serializer.getProperty("cover", questionName).defaultValue,
   };
 }
 
@@ -163,7 +163,7 @@ Serializer.addClass(
       type: "buttongroup",
       name: "logoPosition",
       visibleIf: (obj) => obj.headerView === "basic",
-      defaultFunc: () => Serializer.getProperty("survey", "logoPosition").default,
+      defaultFunc: () => Serializer.getProperty("survey", "logoPosition").defaultValue,
       choices: [
         { value: "left" },
         { value: "right" }
@@ -173,7 +173,7 @@ Serializer.addClass(
       type: "spinedit",
       name: "height",
       visibleIf: (obj) => obj.headerView === "advanced",
-      defaultFunc: () => Serializer.getProperty("cover", "height").default,
+      defaultFunc: () => Serializer.getProperty("cover", "height").defaultValue,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "px";
@@ -185,7 +185,7 @@ Serializer.addClass(
       type: "spinedit",
       name: "mobileHeight",
       visibleIf: (obj) => obj.headerView === "advanced",
-      defaultFunc: () => Serializer.getProperty("cover", "mobileHeight").default,
+      defaultFunc: () => Serializer.getProperty("cover", "mobileHeight").defaultValue,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "px";
@@ -197,7 +197,7 @@ Serializer.addClass(
       type: "buttongroup",
       name: "inheritWidthFrom",
       visibleIf: (obj) => obj.headerView === "advanced",
-      defaultFunc: () => Serializer.getProperty("cover", "inheritWidthFrom").default,
+      defaultFunc: () => Serializer.getProperty("cover", "inheritWidthFrom").defaultValue,
       choices: [
         { value: "survey" },
         { value: "container" }
@@ -207,7 +207,7 @@ Serializer.addClass(
       type: "spinedit",
       name: "textAreaWidth",
       visibleIf: (obj) => obj.headerView === "advanced",
-      defaultFunc: () => Serializer.getProperty("cover", "textAreaWidth").default,
+      defaultFunc: () => Serializer.getProperty("cover", "textAreaWidth").defaultValue,
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "px";
@@ -260,7 +260,7 @@ Serializer.addClass(
         { value: "contain" },
         { value: "tile" },
       ],
-      defaultFunc: () => Serializer.getProperty("cover", "backgroundImageFit").default,
+      defaultFunc: () => Serializer.getProperty("cover", "backgroundImageFit").defaultValue,
       visibleIf: (obj) => obj.headerView === "advanced",
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
@@ -272,7 +272,13 @@ Serializer.addClass(
       type: "spinedit",
       name: "backgroundImageOpacity",
       visibleIf: (obj) => obj.headerView === "advanced",
-      defaultFunc: () => Serializer.getProperty("cover", "backgroundImageOpacity").default * 100,
+      defaultFunc: () => {
+        const defaultValue = Serializer.getProperty("cover", "backgroundImageOpacity").defaultValue;
+        if(defaultValue !== undefined && defaultValue !== null) {
+          return defaultValue * 100;
+        }
+        return defaultValue;
+      },
       onPropertyEditorUpdate: function (obj: any, editor: any) {
         if (!!editor) {
           editor.unit = "%";
