@@ -224,7 +224,10 @@ export class PreviewViewModel extends Base {
     this.updatePageList();
     this.show();
   }
-
+  private isSurveyRunning(): boolean {
+    const state = this.survey?.state;
+    return state === "running" || state === "starting";
+  }
   public buildActions() {
     const pageActions: Array<Action> = [];
     const setNearPage: (isNext: boolean) => void = (isNext: boolean) => {
@@ -246,7 +249,7 @@ export class PreviewViewModel extends Base {
 
     if (this.prevPageAction) {
       this.prevPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        const isRunning = this.survey.state === "running";
+        const isRunning = this.isSurveyRunning();
         const isActiveTab = this.getTabName() === this.surveyProvider.activeTab;
         return notShortCircuitAnd(this.isRunning, isActiveTab, this.pageListItems.length > 1) && isRunning;
       });
@@ -279,11 +282,11 @@ export class PreviewViewModel extends Base {
     });
     pageActions.push(this.selectPageAction);
     this.selectPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
-      return this.survey.state === "running";
+      return this.isSurveyRunning();
     });
     if (this.nextPageAction) {
       this.nextPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        const isRunning = this.survey.state === "running";
+        const isRunning = this.isSurveyRunning();
         const isActiveTab = this.getTabName() === this.surveyProvider.activeTab;
         return notShortCircuitAnd(this.isRunning, isActiveTab, this.pageListItems.length > 1) && isRunning;
       });
