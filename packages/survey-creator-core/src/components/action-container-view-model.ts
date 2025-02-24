@@ -95,8 +95,6 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public static AdornerValueName = "__sjs_creator_adorner";
-  public actionContainer: SurveyElementActionContainer;
-  public topActionContainer: ActionContainer;
   protected expandCollapseAction: IAction;
   @property({ defaultValue: true }) allowDragging: boolean;
   @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
@@ -228,13 +226,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public get renderedCollapsed(): boolean {
     return !!this._renderedCollapsed;
   }
-  protected createActionContainers() {
-    this.actionContainer = this.createActionContainer();
-    this.topActionContainer = new ActionContainer();
-    this.topActionContainer.sizeMode = "small";
+  protected createTopActionContainer(): ActionContainer {
+    const actionContainer = new ActionContainer();
+    actionContainer.sizeMode = "small";
     if (this.creator.expandCollapseButtonVisibility != "never") {
-      this.topActionContainer.setItems([this.expandCollapseAction]);
-      this.topActionContainer.cssClasses = {
+      actionContainer.setItems([this.expandCollapseAction]);
+      actionContainer.cssClasses = {
         root: "svc-survey-element-top-toolbar sv-action-bar",
         item: "svc-survey-element-top-toolbar__item",
         itemIcon: "svc-survey-element-toolbar-item__icon",
@@ -242,6 +239,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
       };
     }
+    return actionContainer;
   }
 
   protected createActionContainer(): SurveyElementActionContainer {
@@ -302,9 +300,33 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   ) {
     super();
     this.expandCollapseAction = this.getExpandCollapseAction();
-    this.createActionContainers();
     this.attachToUI(surveyElement);
   }
+  private actionContainerValue: SurveyElementActionContainer;
+  protected get isActionContainerCreated(): boolean {
+    return !!this.actionContainerValue;
+  }
+  public get actionContainer(): SurveyElementActionContainer {
+    if (!this.actionContainerValue) {
+      this.actionContainerValue = this.createActionContainer();
+      if(this.surveyElement) {
+        this.updateActionsContainer(this.surveyElement);
+        this.updateActionsVisibility(false);
+      }
+    }
+    return this.actionContainerValue;
+  }
+  private topActionContainerValue: ActionContainer;
+  public get topActionContainer(): ActionContainer {
+    if(!this.topActionContainerValue) {
+      this.topActionContainerValue = this.createTopActionContainer();
+      if(this.surveyElement) {
+        this.updateActionsVisibility(true);
+      }
+    }
+    return this.topActionContainerValue;
+  }
+
   private creatorOnLocaleChanged: (sender: Base, options: any) => void = (_, options) => {
     if(this.surveyElement) {
       this.updateActionsContainer(this.surveyElement);
@@ -389,12 +411,16 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   public dispose(): void {
     this.detachFromUI();
-    if (!this.actionContainer.isDisposed) {
-      this.actionContainer.dispose();
-    }
+    this.disposeActions(this.actionContainerValue);
+    this.disposeActions(this.topActionContainerValue);
     super.dispose();
     this.sidebarFlyoutModeChangedFunc = undefined;
     this.animationCollapsed = undefined;
+  }
+  private disposeActions(container: ActionContainer): void {
+    if(!!container && !container.isDisposed) {
+      container.dispose();
+    }
   }
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
@@ -415,18 +441,24 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     };
   }
   protected cleanActionsContainer() {
-    const actions = this.actionContainer.actions;
-    this.actionContainer.setItems([]);
+    const container = this.actionContainerValue;
+    if(!container) return;
+    const actions = container.actions;
+    container.setItems([]);
     actions.forEach(action => action.dispose && action.dispose());
   }
   protected updateActionsContainer(surveyElement: SurveyElement) {
+    if(!this.actionContainerValue) return;
     const actions: Array<Action> = [];
     this.buildActions(actions);
     this.creator.onElementMenuItemsChanged(surveyElement, actions);
-    this.actionContainer.setItems(actions);
+    this.actionContainerValue.setItems(actions);
   }
   protected updateActionsProperties(): void {
     if (this.isDisposed) return;
+    this.updateActionsPropertiesCore();
+  }
+  protected updateActionsPropertiesCore(): void {
     this.updateElementAllowOptions(
       this.creator.getElementAllowOperations(this.surveyElement),
       this.isOperationsAllow()
@@ -456,11 +488,21 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected isOperationsAllow(): boolean {
     return !this.creator.readOnly;
   }
+  private actionVisibilityCache: { [index: string]: boolean } = {};
   protected updateActionVisibility(id: string, isVisible: boolean) {
-    var action = this.getActionById(id);
-    if (!action) return;
-    if (action.visible == isVisible) return;
-    action.visible = isVisible;
+    var action = this.actionContainerValue?.getActionById(id) || this.topActionContainerValue?.getActionById(id);
+    if (!action) {
+      this.actionVisibilityCache[id] = isVisible;
+    } else {
+      if (action.visible !== isVisible) {
+        action.visible = isVisible;
+      }
+    }
+  }
+  protected updateActionsVisibility(isTop: boolean): void {
+    for (var key in this.actionVisibilityCache) {
+      this.updateActionVisibility(key, this.actionVisibilityCache[key]);
+    }
   }
   public getActionById(id: string): Action {
     return this.actionContainer.getActionById(id) || this.topActionContainer.getActionById(id);

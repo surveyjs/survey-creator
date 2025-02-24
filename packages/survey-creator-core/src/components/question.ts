@@ -285,8 +285,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     super.attachElement(surveyElement);
     if (surveyElement) {
       surveyElement.registerFunctionOnPropertyValueChanged("isRequired", (newValue: any) => {
-        const requiredAction = this.actionContainer.getActionById("isrequired");
-        this.updateRequiredAction(requiredAction);
+        if(this.isActionContainerCreated) {
+          const requiredAction = this.actionContainer.getActionById("isrequired");
+          this.updateRequiredAction(requiredAction);
+        }
       }, "isRequiredAdorner");
     }
   }
@@ -305,8 +307,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     super.hover(event, element);
   }
-  protected createActionContainers(): void {
-    super.createActionContainers();
+  protected createActionContainer(): SurveyElementActionContainer {
+    const actionContainer = super.createActionContainer();
     const defaultCssClasses = {
       root: "svc-survey-element-toolbar sv-action-bar",
       item: "svc-survey-element-toolbar__item",
@@ -319,21 +321,25 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
     };
 
-    this.actionContainer.sizeMode = "small";
-    this.actionContainer.cssClasses = defaultCssClasses;
-    (<SurveyElementActionContainer>this.actionContainer).dotsItem.css += " svc-survey-element-toolbar__dots-item";
-    (<SurveyElementActionContainer>this.actionContainer).dotsItem.innerCss += " svc-survey-element-toolbar__item";
+    actionContainer.sizeMode = "small";
+    actionContainer.cssClasses = defaultCssClasses;
+    (<SurveyElementActionContainer>actionContainer).dotsItem.css += " svc-survey-element-toolbar__dots-item";
+    (<SurveyElementActionContainer>actionContainer).dotsItem.innerCss += " svc-survey-element-toolbar__item";
+    return actionContainer;
   }
-  public getActionById(id: string): Action {
-    let res = super.getActionById(id);
-    if (!res) {
-      res = this.topActionContainer.getActionById(id);
+  protected updateActionsPropertiesCore(): void {
+    super.updateActionsPropertiesCore();
+    if(this.isActionContainerCreated) {
+      this.updateActionsLocations();
     }
-    return res;
   }
-  protected updateActionsProperties(): void {
-    if (this.isDisposed) return;
-    super.updateActionsProperties();
+  protected updateActionsVisibility(isTop: boolean): void {
+    super.updateActionsVisibility(isTop);
+    if(!isTop) {
+      this.updateActionsLocations();
+    }
+  }
+  private updateActionsLocations(): void {
     const actions = this.actionContainer.visibleActions;
     let switchToStartLocation = false;
     for (var i = actions.length - 1; i >= 0; i--) {

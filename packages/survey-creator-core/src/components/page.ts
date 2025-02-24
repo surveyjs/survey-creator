@@ -42,7 +42,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       }
     );
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
-    this.actionContainer.alwaysShrink = this.creator.isMobileView;
     this.creator.onPropertyChanged.add(this.creatorPropertyChanged);
   }
   public dispose() {
@@ -174,8 +173,22 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   protected createActionContainer(): SurveyElementActionContainer {
     const container = super.createActionContainer();
+    container.alwaysShrink = this.creator.isMobileView;
     container.sizeMode = "small";
-    container.cssClasses = {
+    container.cssClasses = this.containerCssClasses();
+    container.dotsItem.iconSize = "auto";
+    container.dotsItem.cssClasses.itemIcon += " svc-page-toolbar-item__icon";
+    return container;
+  }
+
+  protected createTopActionContainer(): ActionContainer {
+    const container = super.createTopActionContainer();
+    container.cssClasses = { ...this.containerCssClasses() };
+    container.cssClasses.root += " svc-page-toolbar--collapse";
+    return container;
+  }
+  private containerCssClasses(): any {
+    return {
       root: "svc-page-toolbar sv-action-bar",
       item: "svc-page-toolbar__item",
       itemWithTitle: "svc-page-toolbar__item--with-text",
@@ -185,17 +198,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       itemTitle: "svc-page-toolbar-item__title",
       itemTitleWithIcon: "svc-page-toolbar-item__title--with-icon",
     };
-    container.dotsItem.iconSize = "auto";
-    container.dotsItem.cssClasses.itemIcon += " svc-page-toolbar-item__icon";
-    return container;
   }
-
-  protected createActionContainers() {
-    super.createActionContainers();
-    this.topActionContainer.cssClasses = { ...this.actionContainer.cssClasses };
-    this.topActionContainer.cssClasses.root += " svc-page-toolbar--collapse";
-  }
-
   protected allowExpandCollapseByDblClick(element: any) {
     return element.classList.contains("svc-page__content") ||
       element.classList.contains("sd-page") ||
@@ -295,7 +298,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return result.trim();
   }
   private creatorPropertyChanged = (sender, options) => {
-    if (options.name === "isMobileView") {
+    if (options.name === "isMobileView" && this.isActionContainerCreated) {
       this.actionContainer.alwaysShrink = options.newValue;
     }
   }
