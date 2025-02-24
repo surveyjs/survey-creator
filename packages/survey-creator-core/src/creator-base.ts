@@ -2112,6 +2112,9 @@ export class SurveyCreatorModel extends Base
    * @returns true if initial survey doesn't have any elements or properties
    */
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
+    if (!json) {
+      json = { "headerView": "advanced" };
+    }
     this.existingPages = {};
     const survey = this.createSurvey({}, "designer", undefined, (survey: SurveyModel) => {
       survey.skeletonHeight = 188;
