@@ -4088,6 +4088,7 @@ test("Initial Property Grid category expanded state", (): any => {
   const defaultJSON = settings.defaultNewSurveyJSON;
   settings.defaultNewSurveyJSON = {};
   creator.JSON = {};
+  expect(creator.propertyGrid).toBeTruthy();
   expect(getCategoryName()).toBeFalsy();
   creator.survey.addNewPage("page1");
   creator.selectElement(creator.survey.getPageByName("page1"));

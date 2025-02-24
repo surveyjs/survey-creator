@@ -14,11 +14,11 @@ export class PropertyGridViewModel extends Base {
   public prevSelectionAction: Action;
   public objectSelectionAction: MenuButton;
   public searchManager = new SearchManagerPropertyGrid();
+  public onNewSurveyCreatedCallback: () => void;
   private selectorPopupModel: PopupModel;
 
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
-  @property() survey: SurveyModel;
   @property() selectedElementName: string;
   @property({
     onSet: (newValue: boolean, target: PropertyGridViewModel) => {
@@ -31,8 +31,11 @@ export class PropertyGridViewModel extends Base {
     super();
     this.searchEnabled = settings.propertyGrid.enableSearch;
     this.selectedElementName = this.getTitle();
-    this.propertyGridModel.objValueChangedCallback = () => {
-      this.onSurveyChanged();
+    this.propertyGridModel.onSetNewObjectCallback = () => {
+      this.onSurveyObjChanged();
+    };
+    this.propertyGridModel.onNewSurveyCreatedCallback = () => {
+      this.onNewSurveyCreated();
     };
     this.propertyGridModel.changedFromActionCallback = (obj: Base, propertyName: string) => {
       if (!!this.selectionController) {
@@ -46,9 +49,14 @@ export class PropertyGridViewModel extends Base {
         this.selectorPopupModel.horizontalPosition = this.creator.sidebarLocation == "right" ? "left" : "right";
       }
     });
-    this.onSurveyChanged();
+    this.onSurveyObjChanged();
   }
-
+  public get survey(): SurveyModel {
+    return this.getPropertyValue("survey", undefined, () => this.propertyGridModel.survey);
+  }
+  public set survey(val: SurveyModel) {
+    this.setPropertyValue("survey", val);
+  }
   public get rootCss(): string {
     return new CssClassBuilder()
       .append("spg-container")
@@ -71,7 +79,14 @@ export class PropertyGridViewModel extends Base {
     return this.creator.selectionHistoryController;
   }
 
-  private onSurveyChanged() {
+  private onSurveyObjChanged() {
+    this.updateTitle();
+    if (this.selectionController) {
+      this.hasPrev = this.selectionController.hasPrev;
+      this.hasNext = this.selectionController.hasNext;
+    }
+  }
+  private onNewSurveyCreated() {
     this.survey = this.propertyGridModel.survey;
     this.searchManager.setSurvey(this.survey);
     if (!!this.survey) {
@@ -81,10 +96,8 @@ export class PropertyGridViewModel extends Base {
         }
       });
     }
-    this.updateTitle();
-    if (this.selectionController) {
-      this.hasPrev = this.selectionController.hasPrev;
-      this.hasNext = this.selectionController.hasNext;
+    if(this.onNewSurveyCreatedCallback) {
+      this.onNewSurveyCreatedCallback();
     }
   }
   private updateTitle() {

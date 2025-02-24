@@ -69,6 +69,7 @@ test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if surve
   expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-header");
   expect(creator.sidebar.header.componentData).toEqual(creator.sidebar.header);
 
+  expect(creator.propertyGrid).toBeTruthy();
   let tabs = designerPlugin["tabControlModel"].topToolbar.actions;
   expect(tabs.length).toBe(10);
   expect(tabs.map(t => t.id).join(",")).toBe("general,logo,navigation,question,pages,logic,data,validation,showOnCompleted,timer");

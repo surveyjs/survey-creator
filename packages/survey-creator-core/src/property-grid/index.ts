@@ -819,8 +819,7 @@ export class PropertyGridModel {
   currentlySelectedPanel: PanelModel;
   currentlySelectedPage: PageModel;
   public onSetNewObjectCallback: () => void;
-
-  public objValueChangedCallback: () => void;
+  public onNewSurveyCreatedCallback: () => void;
   public changedFromActionCallback: (obj: Base, propertyName: string) => void;
   public refresh(): void {
     this.setObj(this.objValue);
@@ -883,6 +882,9 @@ export class PropertyGridModel {
   }
   private setObj(value: Base) {
     this.objValue = value;
+    if(this.onSetNewObjectCallback) {
+      this.onSetNewObjectCallback();
+    }
     this.classNameProperty = !!this.obj
       ? PropertyJSONGenerator.getClassNameProperty(this.obj)
       : "";
@@ -893,24 +895,32 @@ export class PropertyGridModel {
     this.titleActionsCreator = !!this.obj
       ? new PropertyGridTitleActionsCreator(this.obj, this.options)
       : undefined;
-    var json = this.getSurveyJSON();
+    if(!this.surveyValue) return;
+    this.clearSurveyValue();
+    this.createSurveyValue();
+  }
+  private clearSurveyValue() {
+    this.surveyValue.onValidateQuestion.clear();
+    this.surveyValue.onValueChanging.clear();
+    this.surveyValue.onValueChanged.clear();
+    this.surveyValue.onMatrixCellValueChanging.clear();
+    this.surveyValue.onMatrixCellValidate.clear();
+    this.surveyValue.onMatrixCellValueChanged.clear();
+    this.surveyValue.editingObj = undefined;
+    this.surveyValue.data = {};
+    this.surveyValue.dispose();
+  }
+  private createSurveyValue(): void {
+    const json = this.getSurveyJSON();
     if (this.options.readOnly) {
       json.mode = "display";
-    }
-    if (!!this.surveyValue) {
-      this.surveyValue.onValidateQuestion.clear();
-      this.surveyValue.onValueChanging.clear();
-      this.surveyValue.onValueChanged.clear();
-      this.surveyValue.onMatrixCellValueChanging.clear();
-      this.surveyValue.onMatrixCellValidate.clear();
-      this.surveyValue.onMatrixCellValueChanged.clear();
-      this.surveyValue.editingObj = undefined;
-      this.surveyValue.data = {};
-      this.surveyValue.dispose();
     }
     this.surveyValue = this.createSurvey(json, (survey: SurveyModel): void => {
       this.onCreateSurvey(survey);
     });
+    if (this.onNewSurveyCreatedCallback) {
+      this.onNewSurveyCreatedCallback();
+    }
     if (!this.obj) return;
     this.survey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
@@ -975,9 +985,6 @@ export class PropertyGridModel {
       }
     });
     this.survey.editingObj = this.obj;
-    if (this.objValueChangedCallback) {
-      this.objValueChangedCallback();
-    }
     this.updateDependedPropertiesEditors();
 
     if (this.showOneCategoryInPropertyGrid) {
@@ -1082,6 +1089,9 @@ export class PropertyGridModel {
     this.optionsValue = !!val ? val : new EmptySurveyCreatorOptions();
   }
   public get survey() {
+    if(!this.surveyValue) {
+      this.createSurveyValue();
+    }
     return this.surveyValue;
   }
   public showOneCategoryInPropertyGrid: boolean = false;
@@ -1124,6 +1134,7 @@ export class PropertyGridModel {
     });
   }
   public expandCategoryIfNeeded(): void {
+    if(!this.surveyValue) return;
     const expandedTabName = creatorSettings.propertyGrid.defaultExpandedTabName;
     if (!!expandedTabName && !this.getPropertyGridExpandedCategory()) {
       const panel = <PanelModel>this.survey.getPanelByName(expandedTabName);
@@ -1218,9 +1229,6 @@ export class PropertyGridModel {
       this.classNameValue !== options.value
     ) {
       this.setObj(this.obj);
-      if(this.onSetNewObjectCallback) {
-        this.onSetNewObjectCallback();
-      }
       if (!!this.survey) {
         const question = this.survey.getQuestionByName(options.name);
         if (!!question) {

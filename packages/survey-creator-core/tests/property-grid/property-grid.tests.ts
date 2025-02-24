@@ -612,22 +612,23 @@ test("Change editingObj of the property grid", () => {
   propertyGrid.obj = question2;
   expect(propertyGrid.survey.getValue("name")).toEqual("q2"); //"name property value is set for the second editingObj"
 });
-test("Check objValueChangedCallback", () => {
-  var count = 0;
-  var objValueChangedCallback = () => {
+test("Check onNewSurveyCreatedCallback", () => {
+  let count = 0;
+  const onNewSurveyCreatedCallback = () => {
     count++;
   };
-  var question = new QuestionTextModel("q1");
-  var question2 = new QuestionTextModel("q2");
-  var propertyGrid = new PropertyGridModelTester(question);
-  propertyGrid.objValueChangedCallback = objValueChangedCallback;
-  expect(count).toEqual(0); //"objValueChangedCallback isn't called");
+  const question = new QuestionTextModel("q1");
+  const question2 = new QuestionTextModel("q2");
+  const propertyGrid = new PropertyGridModelTester(question);
+  propertyGrid.onNewSurveyCreatedCallback = onNewSurveyCreatedCallback;
+  expect(count).toEqual(0); //"onNewSurveyCreatedCallback isn't called");
   propertyGrid.obj = question2;
-  expect(count).toEqual(1); //"objValueChangedCallback is called after changing obj value"
+  expect(propertyGrid.survey).toBeTruthy();
+  expect(count).toEqual(1); //"onNewSurveyCreatedCallback is called after changing obj value"
   propertyGrid.obj = question2;
-  expect(count).toEqual(1); //"objValueChangedCallback isn't called after setting same obj value"
+  expect(count).toEqual(1); //"onNewSurveyCreatedCallback isn't called after setting same obj value"
   propertyGrid.obj = question;
-  expect(count).toEqual(2); //"objValueChangedCallback is called after changing obj value"
+  expect(count).toEqual(2); //"onNewSurveyCreatedCallback is called after changing obj value"
 });
 test("Support property visibleIf attribute", () => {
   var question = new QuestionCheckboxModel("q1");
