@@ -2267,7 +2267,7 @@ test("QuestionAdornerViewModel actionContainer&topActionContainer on demand", ()
   };
   let counter = 0;
   creator.onElementAllowOperations.add((sender, options) => {
-    counter ++;
+    counter++;
   });
   const q1Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
   expect(q1Model["actionContainerValue"]).toBeFalsy();
@@ -3574,7 +3574,7 @@ test("get survey JSON with pageEditModeValue=single #2711", (): any => {
   try {
     let creator = new CreatorTester({ pageEditMode: "single" });
     creator.text = "";
-    expect(creator.JSON).toStrictEqual({});
+    expect(creator.JSON).toStrictEqual({ "headerView": "advanced" });
   } finally {
     surveySettings.allowShowEmptyTitleInDesignMode = true;
     surveySettings.allowShowEmptyDescriptionInDesignMode = true;

@@ -213,7 +213,7 @@ test("Theme builder: composite question values are lost", (): any => {
 
 test("import theme from file", (done) => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   creator.isAutoSave = true;
   creator.autoSaveDelay = 0;
   let saveThemeCount = 0;
@@ -289,7 +289,7 @@ test("Theme onModified and saveThemeFunc", (): any => {
     saveThemeCount++;
     callback(saveNo, "success");
   };
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   let modificationsLog = "";
   themePlugin.onThemeSelected.add((s, o) => {
@@ -367,7 +367,7 @@ test("loadTheme fill all theme parameters: name, mode and compactness", (): any 
 
 test("Get theme changes only", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
@@ -432,6 +432,7 @@ test("Pass background image from survey to theme editor and back", (): any => {
   const lionImage = "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg";
   const camelImage = "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg";
   creator.JSON = {
+    headerView: "advanced",
     backgroundImage: lionImage,
     questions: [{ type: "text", name: "q1" }]
   };
@@ -476,6 +477,7 @@ test("Keep background image in theme modifications", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const lionImage = "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg";
   creator.JSON = {
+    headerView: "advanced",
     questions: [{ type: "text", name: "q1" }]
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -550,7 +552,7 @@ test("Set and use custom default theme", (): any => {
   Serializer.addProperty("theme", { name: "--a-var", visible: false });
 
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   expect(ThemeModel.DefaultTheme).toEqual(Themes["default-light"]);
 
@@ -697,7 +699,7 @@ test("Reset theme to default one", (): any => {
 
 test("Theme undo redo changes", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
@@ -734,7 +736,7 @@ test("Theme undo redo changes", (): any => {
 
 test("Theme undo redo general settings", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
@@ -768,7 +770,7 @@ test("Theme undo redo general settings", (): any => {
 
 test("Theme undo redo calculated questions", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
@@ -836,7 +838,7 @@ test("Theme undo redo calculated questions", (): any => {
 
 test("Theme undo redo expression questions", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
@@ -874,7 +876,7 @@ test("Theme undo redo expression questions", (): any => {
 
 test("Theme undo redo header settings", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
@@ -1007,7 +1009,7 @@ test("saveTheme action", (): any => {
     saveThemeCount++;
     callback(saveNo, "success");
   };
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(0);
@@ -1063,7 +1065,7 @@ test("Reset theme action availability", (): any => {
     return true;
   };
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   const resetThemeAction = themePlugin["resetTheme"];
   themePlugin.activate();
@@ -1435,7 +1437,7 @@ test("Theme tab: default device and save current device", (): any => {
 
 test("Theme tab: use theme palatte corresponding cretor theme palette if theme is not selected", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
 
   expect(creator.preferredColorPalette).toBe("light");

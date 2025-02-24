@@ -695,6 +695,30 @@ test("Prev/Next actions enabled/disabled", (): any => {
   expect(model.prevPageAction.enabled).toBeTruthy();
   expect(model.nextPageAction.enabled).toBeFalsy();
 });
+test("isPageToolbarVisible & firstPage is started, #6624", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "q1" }] },
+      { elements: [{ type: "text", name: "q2" }] },
+      { elements: [{ type: "text", name: "q3" }] }
+    ],
+    firstPageIsStartPage: true
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  expect(model.pageListItems).toHaveLength(3);
+  expect(model.survey.state).toBe("starting");
+  expect(model.isPageToolbarVisible).toBeTruthy();
+  expect(model.nextPageAction.enabled).toBeTruthy();
+  expect(model.prevPageAction.enabled).toBeFalsy();
+  (<any>model.selectPageAction.popupModel).onSelectionChanged(model.pageListItems[1]);
+  expect(model.survey.state).toBe("running");
+  expect(model.isPageToolbarVisible).toBeTruthy();
+  expect(model.nextPageAction.enabled).toBeTruthy();
+  expect(model.prevPageAction.enabled).toBeTruthy();
+});
 
 test("Default mobile orientation", (): any => {
   const creator: CreatorTester = new CreatorTester();
