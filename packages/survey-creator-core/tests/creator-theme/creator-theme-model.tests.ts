@@ -46,9 +46,9 @@ test("Default theme serialization", (): any => {
   themeModel.loadTheme();
   expect(themeModel.themeName).toBe("default-light");
   expect(themeModel.scale).toBe(100);
-  expect(themeModel["--sjs-special-background"]).toBe("#EDF9F7FF");
-  expect(themeModel["--sjs-primary-background-500"]).toBe("#19B394FF");
-  expect(themeModel["--sjs-secondary-background-500"]).toBe("#19B394FF");
+  expect(themeModel["--sjs-special-background"]).toBe("#EDF9F7");
+  expect(themeModel["--sjs-primary-background-500"]).toBe("#19B394");
+  expect(themeModel["--sjs-secondary-background-500"]).toBe("#19B394");
 
   const themeModelJson = themeModel.toJSON();
   expect(themeModelJson).toStrictEqual({ themeName: "default-light" });
@@ -62,7 +62,7 @@ test("Creator theme: sync css variables", (): any => {
 
   expect(creator.themeVariables["--sjs-special-background"]).toEqual(undefined);
   expect((themeModel.cssVariables || {})["--sjs-special-background"]).toEqual(undefined);
-  expect(surfaceBackgroundColor.value).toEqual("#EDF9F7FF");
+  expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
 
   const newValue = "#c95ae7";
   surfaceBackgroundColor.value = newValue;
@@ -99,9 +99,9 @@ test("Creator theme: reset color variables after change theme", (): any => {
     const secondaryBackgroundColor = designerPlugin["themePropertyGrid"].survey.findQuestionByName("--sjs-secondary-background-500");
 
     expect(themeName.value).toEqual("default-light");
-    expect(surfaceBackgroundColor.value).toEqual("#EDF9F7FF");
-    expect(primaryBackgroundColor.value).toEqual("#19B394FF");
-    expect(secondaryBackgroundColor.value).toEqual("#19B394FF");
+    expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
+    expect(primaryBackgroundColor.value).toEqual("#19B394");
+    expect(secondaryBackgroundColor.value).toEqual("#19B394");
 
     primaryBackgroundColor.value = "rgba(20, 20, 20, 1)";
     secondaryBackgroundColor.value = "rgba(30, 30, 30, 0.1)";
@@ -223,12 +223,12 @@ test("Creator theme: apply custom theme", (): any => {
 test("sjs-special-background calculations on primary background changed", (): any => {
   const themeModel = new CreatorThemeModel();
 
-  expect(themeModel["--sjs-primary-background-500"]).toEqual("#19B394FF");
-  expect(themeModel["--sjs-special-background"]).toEqual("#EDF9F7FF");
+  expect(themeModel["--sjs-primary-background-500"]).toEqual("#19B394");
+  expect(themeModel["--sjs-special-background"]).toEqual("#EDF9F7");
 
   themeModel.loadTheme(PredefinedCreatorThemes["sc2020"]);
-  expect(themeModel["--sjs-primary-background-500"]).toEqual("#19B394FF");
-  expect(themeModel["--sjs-special-background"]).toEqual("#EDF9F7FF");
+  expect(themeModel["--sjs-primary-background-500"]).toEqual("#19B394");
+  expect(themeModel["--sjs-special-background"]).toEqual("#EDF9F7");
 
   themeModel["--sjs-primary-background-500"] = PredefinedColors["light"]["teal"];
   themeModel["--sjs-primary-background-500"] = PredefinedColors["light"]["teal"];
