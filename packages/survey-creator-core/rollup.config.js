@@ -61,7 +61,7 @@ module.exports = (options) => {
       //force take correct .js file for papaparse dependency
       nodeResolve({ browser: true }),
       commonjs(),
-      typescript({ tsconfig: options.tsconfig, compilerOptions: {
+      typescript({ inlineSources: true, sourceMap: true, tsconfig: options.tsconfig, compilerOptions: {
         declaration: false,
         declarationDir: null
       } }),
