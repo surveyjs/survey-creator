@@ -141,7 +141,7 @@ test("Add New Question with sub type", async t => {
     .expect(getVisibleElement(".svc-question__content-actions .svc-survey-element-toolbar-item__title").nth(1).textContent).eql("Stars");
 
   let expectedJson = {
-    "headerView": 'advanced',
+    "headerView": "advanced",
     "pages": [
       {
         "name": "page1",
@@ -168,7 +168,7 @@ test("Add New Question with sub type", async t => {
     .expect(getVisibleElement(".svc-question__content-actions .svc-survey-element-toolbar-item__title").nth(1).textContent).eql("Password");
 
   expectedJson = <any>{
-    "headerView": 'advanced',
+    "headerView": "advanced",
     "pages": [
       {
         "name": "page1",
@@ -195,7 +195,7 @@ test("Add New Question with sub type", async t => {
     .expect(getVisibleElement(".svc-question__content-actions .svc-survey-element-toolbar-item__title").nth(1).textContent).eql("Labels");
 
   expectedJson = <any>{
-    "headerView": 'advanced',
+    "headerView": "advanced",
     "pages": [
       {
         "name": "page1",
