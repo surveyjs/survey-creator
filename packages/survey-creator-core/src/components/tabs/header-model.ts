@@ -297,7 +297,7 @@ Serializer.addClass(
     },
 
     getHorizontalAlignment("logoPositionX", "left"),
-    getVerticalAlignment("logoPositionY", "bottom"),
+    getVerticalAlignment("logoPositionY", "top"),
     getHorizontalAlignment("titlePositionX", "left"),
     getVerticalAlignment("titlePositionY", "bottom"),
     getHorizontalAlignment("descriptionPositionX", "left"),
