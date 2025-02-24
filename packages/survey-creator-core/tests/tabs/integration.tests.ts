@@ -20,7 +20,7 @@ test("saveSurvey and saveTheme actions integration", (): any => {
     saveThemeCount++;
     callback(saveNo, "success");
   };
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
   const saveSurveyAction = designerPlugin["saveSurveyAction"] as Action;
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");

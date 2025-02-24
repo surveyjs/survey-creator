@@ -826,7 +826,7 @@ test("Disable/enable themeMode property for custom theme variations in theme pro
 test("headerViewContainer init state", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
   const groupHeader = themePlugin.propertyGrid.survey.pages[1];
@@ -1316,7 +1316,7 @@ test("header survey title font color changed", (): any => {
 
 test("header editable after theme changed", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { title: "Survey Title", questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { title: "Survey Title", headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
@@ -1334,7 +1334,7 @@ test("header editable after theme changed", (): any => {
 
 test("advanced header disable inheritWidthFrom and reset it to 'container' if showTOC is true", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { title: "Survey Title", questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { title: "Survey Title", headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
