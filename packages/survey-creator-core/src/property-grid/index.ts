@@ -138,7 +138,7 @@ export interface IPropertyGridEditor {
     property: JsonObjectProperty,
     question: Question,
     options: ISurveyCreatorOptions
-  ) => IPropertyEditorSetup;
+  ) => void;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions,
     propGridDefinition?: ISurveyPropertyGridDefinition) => void;
   onSetup?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
@@ -406,18 +406,6 @@ export class PropertyGridTitleActionsCreator {
       }
     };
   }
-  private showModalPropertyEditor(
-    editor: IPropertyGridEditor,
-    property: JsonObjectProperty,
-    question: Question
-  ) {
-    return editor.showModalPropertyEditor(
-      editor,
-      property,
-      question,
-      this.options
-    );
-  }
 
   private createEditorSetupAction(
     editor: IPropertyGridEditor,
@@ -432,8 +420,13 @@ export class PropertyGridTitleActionsCreator {
       enabled: enabled,
       title: getLocString("pe.edit"),
       showTitle: false,
-      action: () => {
-        return this.showModalPropertyEditor(editor, property, question);
+      action() {
+        editor.showModalPropertyEditor(
+          editor,
+          property,
+          question,
+          this.options
+        );
       }
     };
     return setupAction;
@@ -1443,7 +1436,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       question,
       options
     );
-    if (!surveyPropertyEditor) return null;
+    if (!surveyPropertyEditor) return;
     if (property.type !== "condition") {
       surveyPropertyEditor.editSurvey.css = defaultCss;
     }
