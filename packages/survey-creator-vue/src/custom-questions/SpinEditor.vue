@@ -22,6 +22,7 @@
       <button
         :disabled="question.isInputReadOnly"
         :class="question.cssClasses.arrowButton"
+        @click="question.onDownButtonClick"
         @mousedown="question.onDownButtonMouseDown"
         @mouseup="question.onButtonMouseUp"
         @mouseleave="question.onButtonMouseLeave"
@@ -38,6 +39,7 @@
       <button
         :disabled="question.isInputReadOnly"
         :class="question.cssClasses.arrowButton"
+        @click="question.onUpButtonClick"
         @mousedown="question.onUpButtonMouseDown"
         @mouseup="question.onButtonMouseUp"
         @mouseleave="question.onButtonMouseLeave"
