@@ -591,8 +591,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         if (selectedSubactionLocal) {
           selectedAction = action;
           selectedSubaction = selectedSubactionLocal;
-          selectedSubactions = subactions;
         }
+        selectedSubactions = subactions;
       }
       lastItem = item;
       newItems.push(action);
@@ -640,11 +640,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
     this.surveyElement.registerFunctionOnPropertiesValueChanged(
       ["inputType", "rateType"],
-      () => {
+      (newValue) => {
         const popup = newAction.popupModel;
         const list = popup.contentComponentData.model;
         this.updateQuestionTypeOrSubtypeListModel(list, true);
-        newAction.title = list.selectedItem.title;
+        newAction.title = list.selectedItem?.title || newValue;
       },
       "inputTypeAdorner"
     );
