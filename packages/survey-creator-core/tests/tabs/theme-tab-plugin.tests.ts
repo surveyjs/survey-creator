@@ -213,7 +213,7 @@ test("Theme builder: composite question values are lost", (): any => {
 
 test("import theme from file", (done) => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.JSON = { headerView: "advanced", questions: [{ type: "text", name: "q1" }] };
   creator.isAutoSave = true;
   creator.autoSaveDelay = 0;
   let saveThemeCount = 0;

@@ -133,8 +133,14 @@ test("StringEditorViewModelBase page title placeholder for started page", () => 
   expect(editor.placeholderValue).toBeUndefined();
   expect(editor.placeholder).toBe("Start Page");
   expect(editor.placeholderValue).toBe("Start Page");
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  const adorderPageGhost = new PageAdorner(creator, desigerTab.newPage);
+  adorderPageGhost.isGhost = true;
+  const editorGhost: StringEditorViewModelBase = new StringEditorViewModelBase(desigerTab.newPage.locTitle, null);
+  expect(editorGhost.placeholder).toBe("Page 2");
   survey.firstPageIsStartPage = false;
   expect(editor.placeholder).toBe("Page 1");
+  expect(editorGhost.placeholder).toBe("Page 3");
 });
 
 test("Logo css", () => {
