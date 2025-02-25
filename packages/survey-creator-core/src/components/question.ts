@@ -35,7 +35,7 @@ import {
   propertyExists,
 } from "../utils/creator-utils";
 import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
-require("./question.scss");
+import "./question.scss";
 import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
 import { DragDropSurveyElements, isPanelDynamic } from "../survey-elements";

@@ -13,7 +13,7 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { QuestionEmbeddedSurveyModel } from "../embedded-survey";
 import { updateMatrixLogicRemoveAction, updateMatrixLogicExpandAction } from "../../utils/actions";
 
-require("./logic-ui.scss");
+import "./logic-ui.scss";
 
 import { logicCss } from "./logic-theme";
 

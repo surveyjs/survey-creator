@@ -7,7 +7,7 @@ import { DragDropSurveyElements } from "../../survey-elements";
 import { SurveyElementAdornerBase } from "../action-container-view-model";
 import { assign } from "../../utils/utils";
 import designTabSurveyThemeJSON from "../../designTabSurveyThemeJSON";
-require("./designer.scss");
+import "./designer.scss";
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
 

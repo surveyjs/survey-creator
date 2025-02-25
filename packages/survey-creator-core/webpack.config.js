@@ -160,6 +160,8 @@ module.exports = function (options) {
       extensions: [".ts", ".js", ".tsx", ".scss"],
       //plugins: [new TsconfigPathsPlugin(/*{ configFile: "./tsconfig.json" }*/)],
       alias: {
+        "iconsV1": path.resolve(__dirname, "./src/icons/iconsV1"),
+        "iconsV2": path.resolve(__dirname, "./src/icons/iconsV2"),
         tslib: path.join(__dirname, "./src/entries/helpers.ts"),
       },
     },

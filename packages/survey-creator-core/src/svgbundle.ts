@@ -1,12 +1,11 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
+import iconsV1Data from "iconsV1";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
+import iconsV2Data from "iconsV2";
+
 export var svgBundle: {V1?: string, V2?: string} = {};
 
-function getIconsData(path) {
-  const icons: { [index: string]: string } = {};
-  path.keys().forEach((key: string) => {
-    icons[key.substring(2, key.length - 4).toLowerCase()] = path(key);
-  });
-  return icons;
-}
-
-export const iconsV1 = getIconsData((<any>require).context("./images-v1", true, /\.svg$/));
-export const iconsV2 = getIconsData((<any>require).context("./images-v2", true, /\.svg$/));
+export const iconsV1: { [index:string]: string } = iconsV1Data;
+export const iconsV2: { [index:string]: string } = iconsV2Data;

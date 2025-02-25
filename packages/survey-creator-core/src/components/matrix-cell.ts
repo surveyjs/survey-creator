@@ -18,7 +18,7 @@ import { toggleHovered } from "../utils/html-element-utils";
 import { SurveyHelper } from "../survey-helper";
 import { editorLocalization } from "../editorLocalization";
 
-require("./matrix-cell.scss");
+import "./matrix-cell.scss";
 
 export class MatrixCellWrapperEditSurvey {
   private surveyValue: SurveyModel;
