@@ -108,12 +108,12 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.loadTheme({ themeName: newValue });
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
     } else if (name === "--sjs-primary-background-500") {
-      this.setPropertyValue(name, newValue);
       this.setThemeCssVariablesChanges(name, newValue);
+      this.setPropertyValue(name, newValue);
       this.updateBackgroundColor(newValue, oldValue);
     } else if (name === "--sjs-secondary-background-500" || name === "--sjs-special-background") {
-      this.setPropertyValue(name, newValue);
       this.setThemeCssVariablesChanges(name, newValue);
+      this.setPropertyValue(name, newValue);
     } else if (name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(name, newValue);
     } else if (name == "fontScale" || name == "scale") {
@@ -260,7 +260,7 @@ Serializer.addProperties("creatortheme", [
   {
     type: "color",
     name: "--sjs-special-background",
-    default: "#EDF9F7FF",
+    default: "#EDF9F7",
     enableIf: (obj: CreatorThemeModel): boolean => {
       return !obj || obj.themeName !== CreatorThemeModel.legacyThemeName;
     },
@@ -273,7 +273,7 @@ Serializer.addProperties("creatortheme", [
   }, {
     type: "color",
     name: "--sjs-primary-background-500",
-    default: "#19B394FF",
+    default: "#19B394",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.titleLocation = "left";
@@ -283,7 +283,7 @@ Serializer.addProperties("creatortheme", [
   }, {
     type: "color",
     name: "--sjs-secondary-background-500",
-    default: "#19B394FF",
+    default: "#19B394",
     displayName: "",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
