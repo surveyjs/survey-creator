@@ -72,11 +72,16 @@ export class TabDesignerViewModel extends Base {
         });
       }
     };
-    newPage.num = this.survey.pages.length + 1;
+    newPage.num = this.getNewPageNum();
     newPage.onPropertyChanged.add(checkNewElementHandler);
     DragDropSurveyElements.newGhostPage = newPage;
     delete newPage["ignoreUndoRedo"];
     return newPage;
+  }
+  private getNewPageNum(): number {
+    const pages = this.survey.pages;
+    const num = pages.length + (this.survey.firstPageIsStarted ? 0 : 1);
+    return num > 0 ? num : 1;
   }
   private get canShowNewPage(): boolean {
     if (!this.survey || this.creator.pageEditMode === "single" || !this.creator.allowModifyPages) return false;
@@ -265,6 +270,9 @@ export class TabDesignerViewModel extends Base {
       }
       this.checkNewPage(updatePageController);
     }
+    if(propName === "firstPageIsStartPage") {
+      this.checkNewPage(true);
+    }
     this.isUpdatingNewPage = false;
   }
   private calculateDesignerCss() {
@@ -319,7 +327,7 @@ export class TabDesignerViewModel extends Base {
     }
     if (updatePageController) {
       if (this.newPage) {
-        this.newPage.num = this.survey.pages.length + 1;
+        this.newPage.num = this.getNewPageNum();
         this.newPage.startLoadingFromJson();
         this.newPage.name = SurveyHelper.getNewPageName(this.survey.pages);
         this.newPage.endLoadingFromJson();
