@@ -841,7 +841,7 @@ test("headerViewContainer init state", (): any => {
     "backgroundImageFit": "cover",
     "backgroundImageOpacity": 100,
     "logoPositionX": "left",
-    "logoPositionY": "bottom",
+    "logoPositionY": "top",
     "titlePositionX": "left",
     "titlePositionY": "bottom",
     "descriptionPositionX": "left",
