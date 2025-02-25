@@ -34,7 +34,7 @@ export abstract class StringItemsNavigatorBase {
 
     newItems.splice(startIndex, 1);
     itemsToAdd.forEach((item, offset) => {
-      if (newItems.length < creator.maximumChoicesCount) {
+      if (creator.maximumChoicesCount > 0 && newItems.length < creator.maximumChoicesCount) {
         newItems.splice(startIndex + offset, 0, createNewItem(item));
       }
     });
