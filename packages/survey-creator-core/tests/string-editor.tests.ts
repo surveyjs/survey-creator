@@ -1050,3 +1050,26 @@ test("Test string editor inplaceEditForValues without Creator", (): any => {
   expect(otherItem.locText.text).toEqual("Other changed");
   expect(q0.otherText).toEqual("Other changed");
 });
+
+test("StringEditor multiline paste for selectbase questions should respect creator.maximumChoicesCount", (): any => {
+  const creator = new CreatorTester();
+  creator.maximumChoicesCount = 4;
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
+  creator.selectElement(question);
+
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  var connectorItem2 = StringEditorConnector.get(question.choices[0].locText);
+
+  connectorItem2.onTextChanging.fire(null, { value: "\na\nb\r\nc\nd\n" });
+  expect(question.choices.map(c => c.text)).toEqual(["a", "b", "c", "item2"]);
+  expect(question.choices.map(c => c.value)).toEqual(["item3", "item4", "item5", "item2"]);
+});
