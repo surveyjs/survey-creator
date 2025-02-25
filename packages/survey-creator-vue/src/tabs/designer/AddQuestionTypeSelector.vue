@@ -1,39 +1,41 @@
 <template>
-  <button type="button"
-    v-on:click="
-      (e) => {
-        questionTypeSelectorModel.action();
-        e.stopPropagation();
-      }
-    "
-    :title="questionTypeSelectorModel.title"
-    v-key2click
-    :aria-label="questionTypeSelectorModel.title"
-    class="svc-element__question-type-selector"
-  >
-    <SvComponent
-      :is="'sv-svg-icon'"
-      class="svc-element__question-type-selector-icon"
-      v-bind="{
-        iconName: questionTypeSelectorModel.iconName,
-        size: 'auto',
-        title: questionTypeSelectorModel.title,
-      }"
-    ></SvComponent>
+  <span class="svc-question-type-selector">
+    <button
+      class="svc-question-type-selector__button"
+      v-on:click="
+        (e) => {
+          questionTypeSelectorModel.action();
+          e.stopPropagation();
+        }
+      "
+      :title="questionTypeSelectorModel.title"
+      v-key2click
+      :aria-label="questionTypeSelectorModel.title"
+    >
+      <SvComponent
+        :is="'sv-svg-icon'"
+        class="svc-question-type-selector__icon"
+        v-bind="{
+          iconName: questionTypeSelectorModel.iconName,
+          size: 'auto',
+          title: questionTypeSelectorModel.title,
+        }"
+      ></SvComponent>
+    </button>
     <SvComponent
       v-if="renderPopup"
       :is="'sv-popup'"
       :model="questionTypeSelectorModel.popupModel"
     ></SvComponent>
-  </button>
+  </span>
 </template>
 <script lang="ts" setup>
-import { computed } from "vue";
-import type { Action } from "survey-core";
-import type {} from "survey-creator-core";
 import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useBase } from "survey-vue3-ui";
 import { SvComponent } from "survey-vue3-ui";
-const props = defineProps<{ questionTypeSelectorModel: any, renderPopup: any}>();
+const props = defineProps<{
+  questionTypeSelectorModel: any;
+  renderPopup: any;
+}>();
 useBase(() => props.questionTypeSelectorModel);
 </script>
