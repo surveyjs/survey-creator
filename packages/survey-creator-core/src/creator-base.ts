@@ -1532,7 +1532,7 @@ export class SurveyCreatorModel extends Base
   }
   public sidebar: SidebarModel;
 
-  constructor(protected options: ICreatorOptions, options2?: ICreatorOptions) {
+  constructor(protected options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super();
     if (
       !!options2 ||
