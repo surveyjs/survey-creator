@@ -179,11 +179,11 @@ test("Creator theme check scale", (): any => {
   expect(themeModelJsonCssVariables["--ctr-font-unit"]).toEqual("12px");
   expect(themeModelJsonCssVariables["--ctr-line-height-unit"]).toEqual("12px");
 
-  scale.value = 225;
+  scale.value = 225; // max = 200 
   themeModelJsonCssVariables = themeModel.toJSON().cssVariables || {};
-  expect(themeModelJsonCssVariables["--ctr-size-unit"]).toEqual("18px");
-  expect(themeModelJsonCssVariables["--ctr-spacing-unit"]).toEqual("18px");
-  expect(themeModelJsonCssVariables["--ctr-corner-radius-unit"]).toEqual("18px");
+  expect(themeModelJsonCssVariables["--ctr-size-unit"]).toEqual("16px");
+  expect(themeModelJsonCssVariables["--ctr-spacing-unit"]).toEqual("16px");
+  expect(themeModelJsonCssVariables["--ctr-corner-radius-unit"]).toEqual("16px");
 });
 
 test("Creator theme: apply custom theme", (): any => {

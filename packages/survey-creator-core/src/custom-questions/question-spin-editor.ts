@@ -2,6 +2,7 @@ import { QuestionFactory, QuestionTextModel, Serializer, property } from "survey
 
 export class QuestionSpinEditorModel extends QuestionTextModel {
   @property() public unit: string;
+  @property() public changeValueOnPressing: boolean;
   @property() private _showUnitsInEditor: boolean = true;
 
   private parseValue(val: string | number): { unit?: string, value: number } {
@@ -65,19 +66,37 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     clearTimeout(this.increaseTimer);
   }
   public onUpButtonMouseDown = () => {
+    if (!this.changeValueOnPressing) return;
+
     this.increase();
     this.clearTimers();
     this.increaseTimer = setTimeout(this.onUpButtonMouseDown, 200);
   }
   public onDownButtonMouseDown = () => {
+    if (!this.changeValueOnPressing) return;
+
     this.decrease();
     this.clearTimers();
     this.decreaseTimer = setTimeout(this.onDownButtonMouseDown, 200);
   }
+  public onUpButtonClick = () => {
+    if (!this.changeValueOnPressing) {
+      this.increase();
+    }
+  }
+  public onDownButtonClick = () => {
+    if (!this.changeValueOnPressing) {
+      this.decrease();
+    }
+  }
   public onButtonMouseLeave = () => {
+    if (!this.changeValueOnPressing) return;
+
     this.onButtonMouseUp();
   }
   public onButtonMouseUp = () => {
+    if (!this.changeValueOnPressing) return;
+
     this.clearTimers();
   }
   public onKeyDown = (event: KeyboardEvent) => {
@@ -138,7 +157,8 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
   }
 }
 Serializer.addClass("spinedit", [
-  "unit"
+  "unit",
+  { name: "changeValueOnPressing:boolean", default: true }
 ], () => new QuestionSpinEditorModel(""), "text");
 QuestionFactory.Instance.registerQuestion("spinedit", name => {
   return new QuestionSpinEditorModel(name);

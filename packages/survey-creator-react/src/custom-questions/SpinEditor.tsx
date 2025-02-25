@@ -51,6 +51,7 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
           tabIndex={-1}
           className={this.question.cssClasses.arrowButton}
           disabled={this.isDisplayMode}
+          onClick={this.question.onDownButtonClick}
           onMouseDown={this.question.onDownButtonMouseDown}
           onMouseUp={this.question.onButtonMouseUp}
           onMouseLeave={this.question.onButtonMouseLeave}
@@ -62,6 +63,7 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
           tabIndex={-1}
           className={this.question.cssClasses.arrowButton}
           disabled={this.isDisplayMode}
+          onClick={this.question.onUpButtonClick}
           onMouseDown={this.question.onUpButtonMouseDown}
           onMouseUp={this.question.onButtonMouseUp}
           onMouseLeave={this.question.onButtonMouseLeave}

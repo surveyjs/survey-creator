@@ -310,11 +310,13 @@ Serializer.addProperties("creatortheme", [
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.unit = "%";
-        editor.min = 0;
+        editor.min = 50;
+        editor.max = 200;
         editor.step = 5;
         editor.title = getLocString("creatortheme.fontScale");
         editor.titleLocation = "left";
         editor.descriptionLocation = "hidden";
+        editor.changeValueOnPressing = false;
       }
     }
   }, {
@@ -364,11 +366,13 @@ Serializer.addProperties("creatortheme", [
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.unit = "%";
-        editor.min = 0;
+        editor.min = 25;
+        editor.max = 200;
         editor.step = 5;
         editor.title = getLocString("creatortheme.userInterfaceBaseUnit");
         editor.titleLocation = "left";
         editor.descriptionLocation = "hidden";
+        editor.changeValueOnPressing = false;
       }
     }
   }, {
