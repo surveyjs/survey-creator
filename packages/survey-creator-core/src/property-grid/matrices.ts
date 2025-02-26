@@ -670,9 +670,6 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "surveypages";
   }
-  protected addItem(creator: ISurveyCreatorOptions, obj: Base, question: QuestionMatrixDynamicModel) {
-    (creator as CreatorBase).addPage(undefined, false);
-  }
   protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
     return "page@" + obj.getType();
   }
