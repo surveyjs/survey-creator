@@ -1,7 +1,7 @@
 import {
   Base, IAction, ItemValue,
   JsonObjectProperty, MatrixDropdownColumn, Question,
-  SurveyModel, ILocalizableString, PopupBaseViewModel, SurveyElement
+  SurveyModel, ILocalizableString, PopupBaseViewModel, PageModel
 } from "survey-core";
 
 /**
@@ -353,6 +353,7 @@ export interface ISurveyCreatorOptions {
     context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ): void;
   translationLocalesOrder: Array<string>;
+  canAddPage(pageToAdd?: PageModel): boolean;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -514,4 +515,5 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
   chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void { }
   translationLocalesOrder: Array<string> = [];
+  canAddPage(pageToAdd?: PageModel): boolean { return true; }
 }
