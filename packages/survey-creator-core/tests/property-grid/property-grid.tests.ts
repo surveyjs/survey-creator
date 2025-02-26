@@ -3112,9 +3112,11 @@ test("Do not select page on adding new page in the property grid #5564", () => {
   expect(creator.survey.pages).toHaveLength(1);
   creator.selectElement(creator.survey);
   const pagesQuestion = <QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("pages");
+  expect(pagesQuestion.visibleRows).toHaveLength(1);
   const actions = pagesQuestion.getTitleActions();
   actions[actions.length - 1].action();
   expect(creator.survey.pages).toHaveLength(2);
+  expect(pagesQuestion.visibleRows).toHaveLength(2);
   expect((<any>creator.selectedElement).pages).toHaveLength(2);
 });
 test("Setup correct categories for dynamic properties in components", () => {
