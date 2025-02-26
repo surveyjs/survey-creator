@@ -445,6 +445,7 @@ var polishStrings = {
     imageHeight: "Image height",
     imageWidth: "Image width",
     valueName: "Value name",
+    defaultDisplayValue: "Domyślna wartość wyświetlana dla tekstów dynamicznych",
     rateDescriptionLocation: "Wyrównanie etykiety",
     size: "Rozmiar pola wejściowego (w znakach)",
     cellErrorLocation: "Wyrównanie komunikatu o błędzie komórki",
@@ -1536,6 +1537,7 @@ var polishStrings = {
     maxWidth: "Akceptuje wartości CSS (px, %, in, pt itp.).",
     width: "Akceptuje wartości CSS (px, %, in, pt itp.).",
     valueName: "Jeśli ta właściwość nie zostanie ustawiona, odpowiedź będzie przechowywana w polu określonym przez właściwość Name.",
+    defaultDisplayValue: "Wartość wyświetlana w pytaniach HTML oraz w dynamicznych tytułach i opisach elementów ankiety, gdy wartość pytania jest pusta.",
     useDisplayValuesInDynamicTexts: "W pytaniach typu jednokrotnego i wielokrotnego wyboru każda opcja wyboru ma identyfikator i wartość wyświetlaną. Po wybraniu tej opcji w pytaniach HTML oraz dynamicznych tytułach i opisach elementów ankiety wyświetlana jest wartość wyświetlana zamiast wartości identyfikatora.",
     clearIfInvisible: "Wybierz, czy chcesz wyczyścić wartości pytań ukryte przez logikę warunkową i kiedy to zrobić. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety (domyślnie \"Po zakończeniu ankiety\").",
     choicesFromQuestionMode: "Wybierz spośród: \"Wszystkie\" - kopiuje wszystkie opcje wyboru z wybranego pytania; \"Wybrane\" - dynamicznie kopiuje tylko wybrane opcje wyboru; \"Niewybrane\" - dynamicznie kopiuje tylko niezaznaczone opcje wyboru. Opcje \"Brak\" i \"Inne\" są domyślnie kopiowane, jeśli są włączone w pytaniu źródłowym.",
@@ -3298,3 +3300,5 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Powiększenie do 100%"
 // ed.addLanguageTooltip: "Add Language" => "Dodaj język"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Ustawia liczbę wierszy wyświetlanych w obszarach tekstowych dla komentarzy do pytań. Jeśli dane wejściowe zajmują więcej wierszy, pojawi się pasek przewijania."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Domyślna wartość wyświetlana dla tekstów dynamicznych"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Wartość wyświetlana w pytaniach HTML oraz w dynamicznych tytułach i opisach elementów ankiety, gdy wartość pytania jest pusta."

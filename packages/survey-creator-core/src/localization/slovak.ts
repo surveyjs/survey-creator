@@ -445,6 +445,7 @@ export var skStrings = {
     imageHeight: "Výška obrázka",
     imageWidth: "Šírka obrázka",
     valueName: "Názov hodnoty",
+    defaultDisplayValue: "Predvolená zobrazená hodnota pre dynamické texty",
     rateDescriptionLocation: "Zarovnanie štítkov",
     size: "Veľkosť vstupného poľa (v znakoch)",
     cellErrorLocation: "Zarovnanie chybového hlásenia bunky",
@@ -1536,6 +1537,7 @@ export var skStrings = {
     maxWidth: "Akceptuje hodnoty CSS (px, %, in, pt atď.).",
     width: "Akceptuje hodnoty CSS (px, %, in, pt atď.).",
     valueName: "Ak túto vlastnosť nenastavíte, odpoveď sa uloží do poľa určeného vlastnosťou Názov.",
+    defaultDisplayValue: "Hodnota zobrazená v otázkach HTML a v dynamických názvoch a popisoch prvkov prieskumu, keď je hodnota otázky prázdna.",
     useDisplayValuesInDynamicTexts: "V prípade otázok s jedným a viacerými výbermi má každá možnosť výberu identifikátor a zobrazenú hodnotu. Ak je táto voľba vybratá, toto nastavenie zobrazuje zobrazenú hodnotu namiesto hodnoty ID v otázkach HTML a dynamických názvoch a popisoch prvkov prieskumu.",
     clearIfInvisible: "Vyberte, či chcete vymazať hodnoty otázok skryté podmienenou logikou a kedy to chcete urobiť. Možnosť \"Dediť\" použije nastavenie na úrovni prieskumu (\"Po dokončení prieskumu predvolene\").",
     choicesFromQuestionMode: "Vyberte si z: \"Všetko\" - skopíruje všetky možnosti výberu z vybranej otázky; \"Vybraté\" - dynamicky kopíruje iba vybrané možnosti výberu; \"Nevybraté\" - dynamicky kopíruje iba nevybraté možnosti výberu. Možnosti \"Žiadne\" a \"Iné\" sa predvolene kopírujú, ak sú povolené v otázke zdroja.",
@@ -2986,3 +2988,5 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Priblíženie na 100 %"
 // ed.addLanguageTooltip: "Add Language" => "Pridať jazyk"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre k otázkam. Ak vstup zaberie viac riadkov, zobrazí sa posúvač."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Predvolená zobrazená hodnota pre dynamické texty"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Hodnota zobrazená v otázkach HTML a v dynamických názvoch a popisoch prvkov prieskumu, keď je hodnota otázky prázdna."

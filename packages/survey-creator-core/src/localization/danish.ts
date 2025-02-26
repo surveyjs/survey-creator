@@ -445,6 +445,7 @@ export var danishStrings = {
     imageHeight: "Billedhøjde",
     imageWidth: "Billedbredde",
     valueName: "Værdiens navn",
+    defaultDisplayValue: "Standardvisningsværdi for dynamiske tekster",
     rateDescriptionLocation: "Justering af etiketter",
     size: "Bredde på inputfelt (i tegn)",
     cellErrorLocation: "Justering af cellefejlmeddelelse",
@@ -1536,6 +1537,7 @@ export var danishStrings = {
     maxWidth: "Accepterer CSS-værdier (px, %, in, pt osv.).",
     width: "Accepterer CSS-værdier (px, %, in, pt osv.).",
     valueName: "Hvis du ikke angiver denne egenskab, gemmes svaret i et felt, der er angivet af egenskaben Navn.",
+    defaultDisplayValue: "En værdi, der vises i HTML-spørgsmål og i de dynamiske titler og beskrivelser af undersøgelseselementer, når spørgsmålsværdien er tom.",
     useDisplayValuesInDynamicTexts: "I spørgsmålstyper med et enkelt og flere valg har hver valgmulighed et id og en visningsværdi. Når denne indstilling er valgt, vises der en visningsværdi i stedet for en id-værdi i HTML-spørgsmål og dynamiske titler og beskrivelser af undersøgelseselementer.",
     clearIfInvisible: "Vælg, om du vil rydde spørgsmålsværdier, der er skjult af betinget logik, og hvornår det skal gøres. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Ved afslutning af undersøgelsen\" som standard).",
     choicesFromQuestionMode: "Vælg mellem: \"Alle\" - kopierer alle valgmuligheder fra det valgte spørgsmål; \"Valgt\" - kopierer dynamisk kun valgte valgindstillinger; \"Ikke valgt\" - kopierer dynamisk kun ikke-valgte valgindstillinger. Indstillingerne \"Ingen\" og \"Andre\" kopieres som standard, hvis de er aktiveret i kildespørgsmålet.",
@@ -3217,3 +3219,5 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoom til 100 %"
 // ed.addLanguageTooltip: "Add Language" => "Tilføj sprog"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Angiver antallet af viste linjer i tekstområder til spørgsmålskommentarer. Hvis inputtet optager flere linjer, vises rullepanelet."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Standardvisningsværdi for dynamiske tekster"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "En værdi, der vises i HTML-spørgsmål og i de dynamiske titler og beskrivelser af undersøgelseselementer, når spørgsmålsværdien er tom."

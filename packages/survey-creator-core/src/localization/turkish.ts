@@ -445,6 +445,7 @@ export var turkishStrings = {
     imageHeight: "Resim yüksekliği",
     imageWidth: "Resim genişliği",
     valueName: "Değer adı",
+    defaultDisplayValue: "Dinamik metinler için varsayılan görüntüleme değeri",
     rateDescriptionLocation: "Etiket hizalama",
     size: "Giriş alanı boyutu (karakter cinsinden)",
     cellErrorLocation: "Hücre hata iletisi hizalaması",
@@ -1536,6 +1537,7 @@ export var turkishStrings = {
     maxWidth: "CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
     width: "CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
     valueName: "Bu özelliği ayarlamazsanız, yanıt Name özelliği tarafından belirtilen bir alanda depolanır.",
+    defaultDisplayValue: "HTML sorularında ve anket öğelerinin dinamik başlıklarında ve açıklamalarında, soru değeri boş olduğunda görüntülenen bir değer.",
     useDisplayValuesInDynamicTexts: "Tekli ve çoktan seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Seçildiğinde, bu ayar HTML sorularında ve anket öğelerinin dinamik başlıklarında ve açıklamalarında kimlik değeri yerine bir görünen değer gösterir.",
     clearIfInvisible: "Koşullu mantık tarafından gizlenen soru değerlerinin temizlenip temizlenmeyeceğini ve ne zaman yapılacağını seçin. \"Devral\" seçeneği, anket düzeyindeki ayarı uygular (varsayılan olarak \"Anket tamamlandıktan sonra\").",
     choicesFromQuestionMode: "Şunlar arasından seçim yapın: \"Tümü\" - seçilen sorudaki tüm seçim seçeneklerini kopyalar; \"Seçili\" - yalnızca seçilen seçim seçeneklerini dinamik olarak kopyalar; \"Seçilmemiş\" - yalnızca seçilmemiş seçim seçeneklerini dinamik olarak kopyalar. \"Yok\" ve \"Diğer\" seçenekleri, kaynak soruda etkinleştirilmişse varsayılan olarak kopyalanır.",
@@ -3028,3 +3030,5 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "%100 yakınlaştırma"
 // ed.addLanguageTooltip: "Add Language" => "Dil Ekle"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Soru yorumları için metin alanlarında görüntülenen satır sayısını ayarlar. Giriş daha fazla satır kaplıyorsa, kaydırma çubuğu görünür."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Dinamik metinler için varsayılan görüntüleme değeri"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML sorularında ve anket öğelerinin dinamik başlıklarında ve açıklamalarında, soru değeri boş olduğunda görüntülenen bir değer."

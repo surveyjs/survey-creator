@@ -445,6 +445,7 @@ var germanTranslation = {
     imageHeight: "Bildhöhe",
     imageWidth: "Bildbreite",
     valueName: "Name der Antwort",
+    defaultDisplayValue: "Voreingestellter Anzeigewert für dynamische Texte",
     rateDescriptionLocation: "Ausrichtung der Beschriftung",
     size: "Breite des Eingabefeldes (in Zeichen)",
     cellErrorLocation: "Ausrichtung von Zellenfehlermeldungen",
@@ -1536,6 +1537,7 @@ var germanTranslation = {
     maxWidth: "Akzeptiert CSS-Werte (px, %, in, pt usw.).",
     width: "Akzeptiert CSS-Werte (px, %, in, pt usw.).",
     valueName: "Wenn Sie diese Eigenschaft nicht festlegen, wird die Antwort in einem Feld gespeichert, das durch die Name-Eigenschaft angegeben wird.",
+    defaultDisplayValue: "Ein Wert, der in HTML-Fragen und in den dynamischen Titeln und Beschreibungen von Umfrageelementen angezeigt wird, wenn der Fragewert leer ist.",
     useDisplayValuesInDynamicTexts: "Bei Fragetypen mit einfacher und mehrfacher Auswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Wenn diese Einstellung aktiviert ist, wird in HTML-Fragen und dynamischen Titeln und Beschreibungen von Umfrageelementen ein Anzeigewert anstelle eines ID-Werts angezeigt.",
     clearIfInvisible: "Wählen Sie aus, ob und wann Fragenwerte, die durch bedingte Logik ausgeblendet werden, gelöscht werden sollen. Die Option \"Vererben\" wendet die Einstellung auf Umfrageebene an (standardmäßig \"Nach Abschluss der Umfrage\").",
     choicesFromQuestionMode: "Wählen Sie aus: \"Alle\" - kopiert alle Auswahloptionen aus der ausgewählten Frage; \"Ausgewählt\" - kopiert dynamisch nur ausgewählte Auswahloptionen; \"Nicht ausgewählt\" - kopiert dynamisch nur nicht ausgewählte Auswahloptionen. Die Optionen \"Keine\" und \"Sonstiges\" werden standardmäßig kopiert, wenn sie in der Quellfrage aktiviert sind.",
@@ -2745,3 +2747,5 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Auf 100 % zoomen"
 // ed.addLanguageTooltip: "Add Language" => "Sprache hinzufügen"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Legt die Anzahl der angezeigten Zeilen in Textbereichen für Fragenkommentare fest. Wenn die Eingabe mehr Zeilen einnimmt, wird die Bildlaufleiste angezeigt."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Voreingestellter Anzeigewert für dynamische Texte"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Ein Wert, der in HTML-Fragen und in den dynamischen Titeln und Beschreibungen von Umfrageelementen angezeigt wird, wenn der Fragewert leer ist."

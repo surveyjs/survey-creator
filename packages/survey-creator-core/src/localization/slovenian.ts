@@ -445,6 +445,7 @@ export var slStrings = {
     imageHeight: "Višina območja za prikaz",
     imageWidth: "Širina območja za prikaz",
     valueName: "Povezovalni identifikator",
+    defaultDisplayValue: "Privzeta prikazana vrednost za dinamična besedila",
     rateDescriptionLocation: "Poravnava oznake",
     size: "Širina vnosa (v znakih)",
     cellErrorLocation: "Poravnava sporočila o napaki celice",
@@ -1536,6 +1537,7 @@ export var slStrings = {
     maxWidth: "Sprejema CSS vrednosti (px, %, in, pt itd.)",
     width: "Sprejema CSS vrednosti (px, %, in, pt itd.)",
     valueName: "Identifikator združevanja je uporabniški ključ, ki ga lahko dodelite več vprašanjem, da jih povežete in sinhronizirate njihove vrednosti. Te vrednosti bodo združene v en niz ali objekt in shranjene v rezultatih ankete z uporabo ključa kot imena lastnosti",
+    defaultDisplayValue: "Vrednost, prikazana v vprašanjih HTML ter v dinamičnih naslovih in opisih elementov ankete, ko je vrednost vprašanja prazna.",
     useDisplayValuesInDynamicTexts: "Pri vprašanjih z eno ali več izbirami ima vsaka možnost ID in prikazano vrednost. Ko je izbrano, ta nastavitev prikaže prikazano vrednost namesto ID-ja v HTML vprašanjih ter dinamičnih naslovih in opisih anketnih elementov",
     clearIfInvisible: "Izberite, ali naj se vrednosti vprašanj, skritih s pogojno logiko, izbrišejo in kdaj naj se to zgodi. Možnost Podedovano uporabi nastavitev na ravni ankete (privzeto Ob zaključku ankete)",
     choicesFromQuestionMode: "Izberite med: Vse - kopira vse možnosti izbranega vprašanja, Izbrano - dinamično kopira samo izbrane možnosti, Neizbrano - dinamično kopira samo neizbrane možnosti. Možnosti Nobena in Drugo se kopirajo privzeto, če so omogočene v izvornih vprašanjih",
@@ -1807,3 +1809,5 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // pehelp.allowResize: "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)." => "Možnost »Deduj« uporablja nastavitev na ravni ankete (»privzeto omogočeno«)."
 // pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page." => "Časovni interval v sekundah, po katerem se anketa samodejno premakne na naslednjo stran. Skrije gumb za krmarjenje »Prejšnji«. Če je nastavljena na 0, šteje čas, porabljen na trenutni strani."
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Nastavi število prikazanih vrstic v besedilnih območjih za komentarje vprašanj. Če vnos zavzame več vrstic, se prikaže drsni trak."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Privzeta prikazana vrednost za dinamična besedila"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Vrednost, prikazana v vprašanjih HTML ter v dinamičnih naslovih in opisih elementov ankete, ko je vrednost vprašanja prazna."

@@ -445,6 +445,7 @@ export var arStrings = {
     imageHeight: "طول الصورة",
     imageWidth: "عرض الصورة",
     valueName: "اسم القيمة",
+    defaultDisplayValue: "قيمة العرض الافتراضية للنصوص الديناميكية",
     rateDescriptionLocation: "محاذاة التسمية",
     size: "عرض حقل الإدخال (بالأحرف)",
     cellErrorLocation: "محاذاة رسالة خطأ الخلية",
@@ -1536,6 +1537,7 @@ export var arStrings = {
     maxWidth: "يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
     width: "يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
     valueName: "إذا لم تقم بتعيين هذه الخاصية، تخزين الإجابة في حقل محدد بواسطة خاصية الاسم.",
+    defaultDisplayValue: "قيمة معروضة في أسئلة HTML وفي العناوين الديناميكية وأوصاف عناصر الاستطلاع عندما تكون قيمة السؤال فارغة.",
     useDisplayValuesInDynamicTexts: "في أنواع الأسئلة ذات التحديد الفردي والمتعدد، يكون لكل خيار اختيار معرف وقيمة عرض. عند تحديده، يعرض هذا الإعداد قيمة عرض بدلا من قيمة معرف في أسئلة HTML والعناوين الديناميكية وأوصاف عناصر الاستطلاع.",
     clearIfInvisible: "اختر ما إذا كنت تريد مسح قيم الأسئلة المخفية بواسطة المنطق الشرطي أم لا ومتى تفعل ذلك. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"عند اكتمال الاستطلاع\" افتراضيا).",
     choicesFromQuestionMode: "اختر من بين: \"الكل\" - نسخ جميع خيارات الاختيار من السؤال المحدد ؛ \"محدد\" - ينسخ ديناميكيا خيارات الاختيار المحددة فقط ؛ \"غير محدد\" - ينسخ ديناميكيا خيارات الاختيار غير المحددة فقط. يتم نسخ الخيارين \"بلا\" و \"أخرى\" افتراضيا إذا تم تمكينهما في السؤال المصدر.",
@@ -2947,3 +2949,5 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "تكبير إلى 100٪"
 // ed.addLanguageTooltip: "Add Language" => "إضافة لغة"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "لتعيين عدد الأسطر المعروضة في مناطق النص لتعليقات الأسئلة. إذا كان الإدخال يشغل المزيد من الأسطر، فسيظهر شريط التمرير."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "قيمة العرض الافتراضية للنصوص الديناميكية"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "قيمة معروضة في أسئلة HTML وفي العناوين الديناميكية وأوصاف عناصر الاستطلاع عندما تكون قيمة السؤال فارغة."
