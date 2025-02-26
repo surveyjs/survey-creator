@@ -1051,6 +1051,40 @@ test("Test string editor inplaceEditForValues without Creator", (): any => {
   expect(q0.otherText).toEqual("Other changed");
 });
 
+test("Test string editor description clear (with EOL)", (): any => {
+  const survey = new SurveyModel({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "title": "title",
+            "description": "desc",
+            "name": "q0",
+            "choices": ["i1", "i2"]
+          }
+        ]
+      }
+    ]
+  });
+
+  const q0 = survey.getQuestionByName("q0");
+  const itemValue = q0.choices[0];
+  var seChoice = new StringEditorViewModelBase(itemValue.locText);
+  var seDescription = new StringEditorViewModelBase(q0.locDescription);
+  expect(itemValue.text).toEqual("i1");
+  seChoice.onBlur({ target: { innerText: "new\nTitle", innerHTML: "new\nTitle", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(itemValue.text).toEqual("newTitle");
+
+  expect(q0.description).toEqual("desc");
+  seDescription.onBlur({ target: { innerText: "new\nDesc", innerHTML: "new\nDesc", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(q0.locDescription.text).toEqual("new\nDesc");
+
+  seDescription.onBlur({ target: { innerText: "\n", innerHTML: "\n", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(q0.locDescription.text).toEqual("");
+});
+
 test("StringEditor multiline paste for selectbase questions should respect creator.maximumChoicesCount", (): any => {
   const creator = new CreatorTester();
   creator.maximumChoicesCount = 4;
