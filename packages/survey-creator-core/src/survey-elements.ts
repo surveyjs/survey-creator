@@ -5,6 +5,12 @@ import { SurveyHelper } from "./survey-helper";
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
   const rect = dropTargetNode.getBoundingClientRect();
+
+
+  if (dropTargetNode.dataset.svDropTargetSurveyElement === "newGhostPage") {
+    return false;
+  }
+
   return clientY - rect.top <= DragDropSurveyElements.edgeHeight || rect.bottom - clientY <= DragDropSurveyElements.edgeHeight;
 }
 export function calculateIsSide(dropTargetNode: HTMLElement, clientX: number) {
@@ -484,7 +490,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const srcContainer = src.parent || src.page;
     if (!!srcContainer) {
       (page.survey as SurveyModel).startMovingQuestion();
-      srcContainer.removeElement(src);
+      srcContainer.removeElement(src); // TODO here we remove
     }
     let dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
     if (isPanelDynamic(dest) && this.insideContainer) dest = dest.template;
@@ -494,7 +500,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       dest.insertElement(src);
     } else {
       const destParent = dest.parent || dest.page;
-      if (destParent) destParent.insertElement(src, dest, convertLocation());
+      if (destParent) destParent.insertElement(src, dest, convertLocation()); // TODO and here we might (if !destParent) not insert so element will disappear
     }
     (page.survey as SurveyModel).stopMovingQuestion();
     return dragged;
