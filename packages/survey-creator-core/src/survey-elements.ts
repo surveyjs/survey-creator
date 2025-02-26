@@ -5,12 +5,7 @@ import { SurveyHelper } from "./survey-helper";
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
   const rect = dropTargetNode.getBoundingClientRect();
-
-
-  if (dropTargetNode.dataset.svDropTargetSurveyElement === "newGhostPage") {
-    return false;
-  }
-
+  if (dropTargetNode.dataset.svDropTargetSurveyElement === "newGhostPage") return false;
   return clientY - rect.top <= DragDropSurveyElements.edgeHeight || rect.bottom - clientY <= DragDropSurveyElements.edgeHeight;
 }
 export function calculateIsSide(dropTargetNode: HTMLElement, clientX: number) {
