@@ -570,7 +570,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType, json) => { this.convertQuestion(questionType, json, defaultJsons); });
       if (this.toolboxItemIsCorresponded(item, !!selectedAction)) {
         selectedAction = action;
-        selectedSubactions = item.items;
       }
       if (item.items?.length > 0 && this.creator.toolbox.showSubitems) {
         const subactions = [];
@@ -596,8 +595,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         if (selectedSubactionLocal) {
           selectedAction = action;
           selectedSubaction = selectedSubactionLocal;
-          selectedSubactions = subactions;
         }
+        selectedSubactions = subactions;
       }
       lastItem = item;
       newItems.push(action);
@@ -626,12 +625,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       cssClasses: listComponentCss,
     });
     this.updateQuestionTypeOrSubtypeListModel(listModel, true);
-    if (listModel.actions.length == 0) return null;
-
+    const propName = QuestionToolbox.getSubTypePropertyName(this.surveyElement.getType());
+    if (!listModel.selectedItem && !propName) return null;
     const actionData: IAction = {
       id: "convertInputType",
       visibleIndex: 1,
-      title: listModel.selectedItem?.title || "SUBTYPE",
+      title: listModel.selectedItem?.title || editorLocalization.getPropertyValueInEditor(propName, this.surveyElement.getPropertyValue(propName)) || "SUBTYPE",
       disableShrink: true,
       iconName: "icon-chevron_16x16"
     };
@@ -642,14 +641,13 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         this.updateQuestionTypeOrSubtypeListModel(listModel, true);
       }
     });
-
     this.surveyElement.registerFunctionOnPropertiesValueChanged(
-      ["inputType", "rateType"],
-      () => {
+      [propName],
+      (newValue) => {
         const popup = newAction.popupModel;
         const list = popup.contentComponentData.model;
         this.updateQuestionTypeOrSubtypeListModel(list, true);
-        newAction.title = list.selectedItem.title;
+        newAction.title = list.selectedItem?.title || editorLocalization.getPropertyValueInEditor(propName, newValue) || "SUBTYPE";
       },
       "inputTypeAdorner"
     );
