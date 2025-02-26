@@ -445,6 +445,7 @@ export var koreanStrings = {
     imageHeight: "이미지 높이",
     imageWidth: "이미지 너비",
     valueName: "값 이름",
+    defaultDisplayValue: "동적 텍스트에 대한 기본 표시 값",
     rateDescriptionLocation: "레이블 정렬",
     size: "입력 필드 너비(문자 단위)",
     cellErrorLocation: "셀 오류 메시지 맞춤",
@@ -1536,6 +1537,7 @@ export var koreanStrings = {
     maxWidth: "CSS 값(px, %, in, pt 등)을 허용합니다.",
     width: "CSS 값(px, %, in, pt 등)을 허용합니다.",
     valueName: "이 속성을 설정하지 않으면 대답이 Name 속성으로 지정된 필드에 저장됩니다.",
+    defaultDisplayValue: "HTML 질문과 설문 요소의 동적 제목 및 설명에 표시되는 값으로, 질문 값이 비어 있을 때 표시됩니다.",
     useDisplayValuesInDynamicTexts: "단답형 및 다중선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정을 선택하면 HTML 질문과 동적 제목 및 현장조사 요소에 대한 설명에서 ID 값 대신 표시 값이 표시됩니다.",
     clearIfInvisible: "조건부 논리에 의해 숨겨진 질문 값을 지울지 여부와 지울 시기를 선택합니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"설문조사 완료 시\")을 적용합니다.",
     choicesFromQuestionMode: "다음 중에서 선택: \"모두\" - 선택한 질문의 모든 선택 옵션을 복사합니다. \"선택됨\" - 선택한 선택 옵션만 동적으로 복사합니다. \"선택되지 않음\" - 선택되지 않은 선택 옵션만 동적으로 복사합니다. \"없음\" 및 \"기타\" 옵션은 원본 질문에서 활성화된 경우 기본적으로 복사됩니다.",
@@ -3237,3 +3239,5 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "100%로 확대/축소"
 // ed.addLanguageTooltip: "Add Language" => "언어 추가"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "동적 텍스트에 대한 기본 표시 값"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML 질문과 설문 요소의 동적 제목 및 설명에 표시되는 값으로, 질문 값이 비어 있을 때 표시됩니다."

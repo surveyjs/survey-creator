@@ -445,6 +445,7 @@ export var hebrewStrings = {
     imageHeight: "גובה התמונה",
     imageWidth: "רוחב התמונה",
     valueName: "אחסן תשובות בשדה JSON הבא",
+    defaultDisplayValue: "ערך תצוגה המוגדר כברירת מחדל לטקסטים דינמיים",
     rateDescriptionLocation: "יישור תוויות",
     size: "רוחב שדה קלט (בתווים)",
     cellErrorLocation: "יישור הודעת שגיאה של תא",
@@ -1536,6 +1537,7 @@ export var hebrewStrings = {
     maxWidth: "מקבל ערכי CSS (px, %, in, pt וכו').",
     width: "מקבל ערכי CSS (px, %, in, pt וכו').",
     valueName: "אם אינך מגדיר מאפיין זה, התשובה תאוחסן בשדה המסוים במאפיין השם.",
+    defaultDisplayValue: "ערך המוצג בשאלות HTML ובכותרות ובתיאורים הדינמיים של רכיבי סקר כאשר ערך השאלה ריק.",
     useDisplayValuesInDynamicTexts: "בסוגי שאלות של בחירה בודדת ושאלות מרובות, לכל אפשרות בחירה יש מזהה וערך תצוגה. כשבוחרים באפשרות זו, הגדרה זו מציגה ערך תצוגה במקום ערך מזהה בשאלות HTML ובכותרות דינמיות ובתיאורים של רכיבי סקר.",
     clearIfInvisible: "בחר אם לנקות או לא לנקות ערכי שאלות המוסתרים על-ידי לוגיקה מותנית ומתי לעשות זאת. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"עם השלמת הסקר\" כברירת מחדל).",
     choicesFromQuestionMode: "בחר מתוך: \"הכל\" - מעתיק את כל אפשרויות הבחירה מהשאלה שנבחרה; \"נבחר\" - מעתיק באופן דינמי רק אפשרויות בחירה שנבחרו; \"לא נבחר\" - מעתיק באופן דינמי רק אפשרויות בחירה שלא נבחרו. האפשרויות \"ללא\" ו\"אחר\" מועתקות כברירת מחדל אם הן מופעלות בשאלת המקור.",
@@ -2600,3 +2602,5 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "שינוי גודל תצוגה ל- 100%"
 // ed.addLanguageTooltip: "Add Language" => "הוסף שפה"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "מגדיר את מספר השורות המוצגות באזורי טקסט להערות שאלה. אם הקלט תופס שורות נוספות, פס הגלילה מופיע."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "ערך תצוגה המוגדר כברירת מחדל לטקסטים דינמיים"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "ערך המוצג בשאלות HTML ובכותרות ובתיאורים הדינמיים של רכיבי סקר כאשר ערך השאלה ריק."

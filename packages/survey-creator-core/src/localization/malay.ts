@@ -445,6 +445,7 @@ export var msStrings = {
     imageHeight: "Tinggi imej",
     imageWidth: "Lebar imej",
     valueName: "Nama nilai",
+    defaultDisplayValue: "Nilai paparan lalai untuk teks dinamik",
     rateDescriptionLocation: "Penjajaran label",
     size: "Lebar medan input (dalam aksara)",
     cellErrorLocation: "Penjajaran mesej ralat sel",
@@ -1536,6 +1537,7 @@ export var msStrings = {
     maxWidth: "Menerima nilai CSS (px, %, dalam, pt, dll.).",
     width: "Menerima nilai CSS (px, %, dalam, pt, dll.).",
     valueName: "Jika anda tidak menetapkan sifat ini, jawapannya akan disimpan dalam medan yang ditentukan oleh sifat Nama.",
+    defaultDisplayValue: "Nilai yang dipaparkan dalam soalan HTML dan dalam tajuk dinamik dan perihalan elemen tinjauan apabila nilai soalan kosong.",
     useDisplayValuesInDynamicTexts: "Dalam jenis soalan pilihan tunggal dan berbilang pilihan, setiap pilihan pilihan mempunyai ID dan nilai paparan. Apabila dipilih, seting ini menunjukkan nilai paparan dan bukannya nilai ID dalam soalan HTML dan tajuk dinamik serta perihalan unsur tinjauan.",
     clearIfInvisible: "Pilih sama ada untuk mengosongkan nilai soalan yang tersembunyi oleh logik bersyarat dan bila untuk melakukannya. Pilihan \"Warisan\" menggunakan tetapan peringkat tinjauan (\"Setelah selesai tinjauan\" secara lalai).",
     choicesFromQuestionMode: "Pilih daripada: \"Semua\" - menyalin semua pilihan pilihan daripada soalan yang dipilih; \"Dipilih\" - secara dinamik hanya menyalin pilihan pilihan yang dipilih; \"Tidak dipilih\" - secara dinamik menyalin hanya pilihan pilihan yang tidak dipilih. Pilihan \"Tiada\" dan \"Lain-lain\" disalin secara lalai jika didayakan dalam soalan sumber.",
@@ -2987,3 +2989,5 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zum kepada 100%"
 // ed.addLanguageTooltip: "Add Language" => "Tambah Bahasa"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Menetapkan bilangan baris yang dipaparkan dalam kawasan teks untuk ulasan soalan. Jika input mengambil lebih banyak baris, bar skrol muncul."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Nilai paparan lalai untuk teks dinamik"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Nilai yang dipaparkan dalam soalan HTML dan dalam tajuk dinamik dan perihalan elemen tinjauan apabila nilai soalan kosong."

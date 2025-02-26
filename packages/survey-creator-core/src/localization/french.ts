@@ -445,6 +445,7 @@ var frenchTranslation = {
     imageHeight: "Hauteur de l'image",
     imageWidth: "Largeur de l'image",
     valueName: "Variable de stockage",
+    defaultDisplayValue: "Valeur d’affichage par défaut pour les textes dynamiques",
     rateDescriptionLocation: "Alignement des étiquettes",
     size: "Largeur du champ de saisie (en caractères)",
     cellErrorLocation: "Alignement des messages d’erreur de cellule",
@@ -1536,6 +1537,7 @@ var frenchTranslation = {
     maxWidth: "Accepte les valeurs CSS (px, %, in, pt, etc.).",
     width: "Accepte les valeurs CSS (px, %, in, pt, etc.).",
     valueName: "Si vous ne définissez pas cette propriété, la réponse sera stockée dans un champ spécifié par la propriété Variable de stockage.",
+    defaultDisplayValue: "Valeur affichée dans les questions HTML et dans les titres et descriptions dynamiques des éléments de l’enquête lorsque la valeur de la question est vide.",
     useDisplayValuesInDynamicTexts: "Dans les types de questions à sélection unique et multiple, chaque option de choix a un ID et une valeur d’affichage. Lorsqu’il est sélectionné, ce paramètre affiche une valeur d’affichage au lieu d’une valeur d’ID dans les questions HTML et les titres et descriptions dynamiques des éléments d’enquête.",
     clearIfInvisible: "Choisissez d’effacer ou non les valeurs de question masquées par la logique conditionnelle et quand le faire. L’option « Hériter » applique le paramètre au niveau de l’enquête (« À la fin de l’enquête » par défaut).",
     choicesFromQuestionMode: "Choisissez parmi : « Tous » - copie toutes les options de choix de la question sélectionnée ; « Sélectionné » - copie dynamiquement uniquement les options de choix sélectionnées ; « Non sélectionné » - copie dynamiquement uniquement les options de choix non sélectionnées. Les options « Aucun » et « Autre » sont copiées par défaut si elles sont activées dans la question source.",
@@ -3092,3 +3094,5 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoom à 100%"
 // ed.addLanguageTooltip: "Add Language" => "Ajouter une langue"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Définit le nombre de lignes affichées dans les zones de texte pour les commentaires de question. Si l’entrée occupe plus de lignes, la barre de défilement apparaît."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Valeur d’affichage par défaut pour les textes dynamiques"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Valeur affichée dans les questions HTML et dans les titres et descriptions dynamiques des éléments de l’enquête lorsque la valeur de la question est vide."

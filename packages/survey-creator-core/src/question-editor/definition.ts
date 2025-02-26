@@ -73,6 +73,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "defaultValue", tab: "data" },
       { name: "correctAnswer", tab: "data" },
       { name: "useDisplayValuesInDynamicTexts", tab: "data" },
+      { name: "defaultDisplayValue", tab: "data" },
       { name: "clearIfInvisible", tab: "data" },
       { name: "validators", tab: "validation" },
       { name: "requiredErrorText", tab: "validation" }
@@ -426,11 +427,13 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "totalFormat", tab: "totals" },
       { name: "totalExpression", tab: "totals" },
       { name: "validators", tab: "validation" },
-      { name: "requiredErrorText", tab: "validation" }
+      { name: "requiredErrorText", tab: "validation" },
+      { name: "defaultDisplayValue", tab: "data" }
     ],
     tabs: [
       { name: "general", index: 5 },
       { name: "logic", index: 20 },
+      { name: "data", index: 25 },
       { name: "totals", index: 40 },
       { name: "validation", index: 60 }
     ]

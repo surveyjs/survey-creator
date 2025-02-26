@@ -445,6 +445,7 @@ export var fiStrings = {
     imageHeight: "Kuvan korkeus",
     imageWidth: "Kuvan leveys",
     valueName: "Arvon nimi",
+    defaultDisplayValue: "Dynaamisten tekstien oletusnäyttöarvo",
     rateDescriptionLocation: "Otsikon tasaus",
     size: "Syöttökentän leveys (merkkeinä)",
     cellErrorLocation: "Solun virhesanoman tasaus",
@@ -1536,6 +1537,7 @@ export var fiStrings = {
     maxWidth: "Hyväksyy CSS-arvot (px, %, in, pt jne.).",
     width: "Hyväksyy CSS-arvot (px, %, in, pt jne.).",
     valueName: "Jos et määritä tätä ominaisuutta, vastaus tallennetaan Name-ominaisuuden määrittämään kenttään.",
+    defaultDisplayValue: "Arvo, joka näkyy HTML-kysymyksissä ja kyselyn elementtien dynaamisissa otsikoissa ja kuvauksissa, kun kysymyksen arvo on tyhjä.",
     useDisplayValuesInDynamicTexts: "Yksi- ja monivalintakysymystyypeissä kullakin valintavaihtoehdolla on tunnus ja näyttöarvo. Kun tämä asetus on valittuna, se näyttää tunnusarvon sijaan HTML-kysymyksissä ja kyselyelementtien dynaamisissa otsikoissa ja kuvauksissa.",
     clearIfInvisible: "Valitse, poistetaanko ehdollisen logiikan piilottamat kysymysarvot ja milloin se tehdään. \"Peri\"-vaihtoehto käyttää kyselytason asetusta (\"Kyselyn valmistuttua\" oletuksena).",
     choicesFromQuestionMode: "Valitse seuraavista: \"Kaikki\" - kopioi kaikki valintavaihtoehdot valitusta kysymyksestä; \"Valittu\" - kopioi dynaamisesti vain valitut valintavaihtoehdot; \"Ei valittu\" - kopioi dynaamisesti vain valitsemattomat valintavaihtoehdot. Vaihtoehdot \"Ei mitään\" ja \"Muut\" kopioidaan oletusarvoisesti, jos ne on otettu käyttöön lähdekysymyksessä.",
@@ -3005,3 +3007,5 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoomaa 100 %:iin"
 // ed.addLanguageTooltip: "Add Language" => "Lisää kieli"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Määrittää kysymyskommenttien tekstialueilla näytettävien rivien määrän. Jos syöttö vie enemmän rivejä, vierityspalkki tulee näkyviin."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Dynaamisten tekstien oletusnäyttöarvo"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Arvo, joka näkyy HTML-kysymyksissä ja kyselyn elementtien dynaamisissa otsikoissa ja kuvauksissa, kun kysymyksen arvo on tyhjä."

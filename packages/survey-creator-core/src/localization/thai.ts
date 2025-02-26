@@ -445,6 +445,7 @@ export const thStrings = {
     imageHeight: "ความสูงของพื้นที่แสดงผล",
     imageWidth: "ความกว้างของพื้นที่แสดงผล",
     valueName: "ตัวระบุที่เชื่อมต่อ",
+    defaultDisplayValue: "ค่าที่แสดงดีฟอลต์สําหรับข้อความไดนามิก",
     rateDescriptionLocation: "การจัดตำแหน่งป้าย",
     size: "ความกว้างของช่องป้อนข้อมูล (ในตัวอักษร)",
     cellErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาดในเซลล์",
@@ -1536,6 +1537,7 @@ export const thStrings = {
     maxWidth: "รับค่าของ CSS (px, %, in, pt, ฯลฯ)",
     width: "รับค่าของ CSS (px, %, in, pt, ฯลฯ)",
     valueName: "ตัวระบุการเข้าร่วมเป็นคีย์กำหนดเองที่คุณสามารถกำหนดให้กับคำถามหลายคำถามเพื่อเชื่อมโยงกันและซิงค์ค่า ค่าที่ซิงค์เหล่านี้จะรวมกันเป็นอาร์เรย์หรือวัตถุเดียวและบันทึกในผลลัพธ์แบบสำรวจโดยใช้คีย์เป็นชื่อคุณสมบัติ",
+    defaultDisplayValue: "ค่าที่แสดงในคําถาม HTML และในชื่อแบบไดนามิกและคําอธิบายขององค์ประกอบแบบสํารวจเมื่อค่าคําถามว่างเปล่า",
     useDisplayValuesInDynamicTexts: "ในประเภทคำถามเลือกเดียวและเลือกหลายแต่ละตัวเลือกมี ID และค่าที่แสดง เมื่อเลือก การตั้งค่านี้จะแสดงค่าที่แสดงแทนที่จะเป็นค่า ID ในคำถาม HTML และชื่อเรื่องและคำอธิบายแบบไดนามิกขององค์ประกอบแบบสำรวจ",
     clearIfInvisible: "เลือกว่าจะล้างค่าคำถามที่ซ่อนโดยตรรกะเงื่อนไขหรือไม่และเมื่อใด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"เมื่อเสร็จสิ้นแบบสำรวจ\")",
     choicesFromQuestionMode: "เลือกจาก: \"ทั้งหมด\" - คัดลอกตัวเลือกทั้งหมดจากคำถามที่เลือก; \"เลือกแล้ว\" - คัดลอกเฉพาะตัวเลือกที่เลือกแบบไดนามิก; \"ไม่ได้เลือก\" - คัดลอกเฉพาะตัวเลือกที่ไม่ได้เลือกแบบไดนามิก ตัวเลือก \"ไม่มี\" และ \"อื่น\" จะคัดลอกตามค่าเริ่มต้นถ้าเปิดในคำถามต้นทาง",
@@ -1973,3 +1975,5 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "ซูมไปที่ 100%"
 // ed.addLanguageTooltip: "Add Language" => "เพิ่มภาษา"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "ตั้งค่าจํานวนบรรทัดที่แสดงในพื้นที่ข้อความสําหรับความคิดเห็นของคําถาม หากอินพุตใช้บรรทัดมากขึ้น แถบเลื่อนจะปรากฏขึ้น"
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "ค่าที่แสดงดีฟอลต์สําหรับข้อความไดนามิก"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "ค่าที่แสดงในคําถาม HTML และในชื่อแบบไดนามิกและคําอธิบายขององค์ประกอบแบบสํารวจเมื่อค่าคําถามว่างเปล่า"

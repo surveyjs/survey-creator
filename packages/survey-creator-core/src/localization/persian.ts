@@ -445,6 +445,7 @@ var persianStrings = {
     imageHeight: "ارتفاع تصویر",
     imageWidth: "عرض تصویر",
     valueName: "نام مقدار",
+    defaultDisplayValue: "مقدار نمایش پیش فرض برای متون پویا",
     rateDescriptionLocation: "تراز برچسب",
     size: "اندازه فیلد ورودی (در نویسه ها)",
     cellErrorLocation: "همراستاسازی پیام خطای سلولی",
@@ -1536,6 +1537,7 @@ var persianStrings = {
     maxWidth: "مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
     width: "مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
     valueName: "اگر این ویژگی را تنظیم نکنید، پاسخ در زمینه ای که توسط ویژگی Name مشخص شده است ذخیره می شود.",
+    defaultDisplayValue: "مقداری که در سؤالات HTML و در عناوین پویا و توضیحات عناصر نظرسنجی زمانی که مقدار سوال خالی است، نمایش داده می شود.",
     useDisplayValuesInDynamicTexts: "در انواع سوالات تک و چند انتخاب، هر گزینه انتخاب دارای یک شناسه و مقدار نمایش است. هنگامی که انتخاب می شود، این تنظیم یک مقدار نمایش را به جای یک مقدار ID در سوالات HTML و عناوین پویا و توصیف عناصر بررسی نشان می دهد.",
     clearIfInvisible: "انتخاب کنید که ایا برای پاک کردن یا نه ارزش سوال پنهان شده توسط منطق شرطی و زمانی که به ان را انجام دهد. گزینه \"ارث\" تنظیم سطح نظرسنجی (\"پس از اتمام نظرسنجی\" به طور پیش فرض) اعمال می شود.",
     choicesFromQuestionMode: "انتخاب از: \"همه\" - کپی تمام گزینه های انتخاب از سوال انتخاب شده؛ \"انتخاب شده\" - به صورت پویا فقط گزینه های انتخاب شده را کپی می کند؛ \"Unselected\" - به صورت پویا تنها گزینه های انتخاب نشده را کپی می کند. گزینه های \"None\" و \"Other\" در صورت فعال شدن در سؤال منبع به طور پیش فرض کپی می شوند.",
@@ -2988,3 +2990,5 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "بزرگنمایی تا 100٪"
 // ed.addLanguageTooltip: "Add Language" => "افزودن زبان"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "تعداد خطوط نمایش داده شده در قسمت های متنی را برای نظرات سؤال تنظیم می کند. اگر ورودی خطوط بیشتری را اشغال کند، نوار اسکرول ظاهر می شود."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "مقدار نمایش پیش فرض برای متون پویا"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "مقداری که در سؤالات HTML و در عناوین پویا و توضیحات عناصر نظرسنجی زمانی که مقدار سوال خالی است، نمایش داده می شود."
