@@ -64,6 +64,40 @@ test("Check question adorners popups display mode", (): any => {
   expect(convertToAction.popupModel.displayMode).toBe("overlay");
 });
 
+test("Check question converter with removed subitems", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  // create subitems from new items (the same type, different json)
+
+  const ratingItem = creator.toolbox.getItemByName("rating");
+
+  // Remove Default Subitems
+  ratingItem.removeSubitem("stars");
+
+  ratingItem.title = "Rating Scale";
+
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1", rateType: "stars" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  let questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  let convertInputTypeAction = questionAdorner.actionContainer.getActionById("convertInputType");
+  expect(convertInputTypeAction.title).toBe("Stars");
+  question.rateType = "smileys";
+  expect(convertInputTypeAction.title).toBe("Smileys");
+  question.rateType = "stars";
+  expect(convertInputTypeAction.title).toBe("Stars");
+
+  surveySettings.animationEnabled = true;
+});
+
 test("Check question adorners icons", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
