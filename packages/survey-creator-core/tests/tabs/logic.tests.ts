@@ -3628,3 +3628,19 @@ test("Limit the number of trigger types, #6031", () => {
 
   expect(logic.logicTypes.length > 4).toBeTruthy();
 });
+test("SurveyLogic: Delete completedHtmlOnCondition item instead of removing expression only, Bug#6657", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+    ],
+    completedHtmlOnCondition: [
+      { expression: "{q1} = 4", html: "Custom html" },
+    ]
+  });
+  expect(survey.completedHtmlOnCondition).toHaveLength(1);
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(1);
+  logic.removeItem(logic.items[0]);
+  expect(survey.completedHtmlOnCondition).toHaveLength(0);
+});
+
