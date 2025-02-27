@@ -219,6 +219,7 @@
   appearance: none;
   outline: none;
   border: none;
+  padding: 0;
 
   &::placeholder {
     color: var(--ctr-list-search-text-color-placeholder, var(--sjs-layer-1-foreground-50, #00000080));
@@ -254,7 +255,8 @@
   color: var(--ctr-list-no-data-text-color, var(--sjs-layer-1-foreground-50, #00000080));
 }
 
-.sv-popup--overlay {
+.sv-popup--menu-phone,
+.sv-popup--menu-tablet {
   .svc-list-item__marker-icon {
     display: none;
   }

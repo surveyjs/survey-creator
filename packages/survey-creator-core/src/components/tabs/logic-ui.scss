@@ -334,7 +334,8 @@
   padding: calcSize(4) calcSize(5) calcSize(5);
 }
 
-.sv-popup--overlay {
+.sv-popup--menu-phone,
+.sv-popup--menu-tablet {
   .svc-logic-placeholder {
     width: initial;
   }

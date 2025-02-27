@@ -77,7 +77,7 @@ test("Check list item styles into logic popup", async (t) => {
       .pressKey("tab")
       .pressKey("down")
       .pressKey("down");
-    await takeElementScreenshot("pg-logic-popup-dropdown-list-item--focused.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-logic-popup-dropdown-list-item--focused.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
   });
 });
 test("Check run expression description", async (t) => {

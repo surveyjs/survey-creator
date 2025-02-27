@@ -441,10 +441,10 @@ test("Choices (Tagbox): Layout", async (t) => {
       .click(getPropertyGridCategory(generalGroupName))
       .click(getPropertyGridCategory("Data"))
       .click(Selector("span").withExactText("Set Default Answer"))
-      .click(Selector(".sv-popup--modal .sd-dropdown__filter-string-input"))
+      .click(Selector(".sv-popup--modal-popup .sd-dropdown__filter-string-input"))
       .click(getSurveyListItemByText("Item 2"))
       .click(getSurveyListItemByText("Item 3"))
-      .click(Selector(".sv-popup--modal button").withExactText("Apply"));
+      .click(Selector(".sv-popup--modal-popup button").withExactText("Apply"));
 
     const QRoot = Selector(".svc-question__adorner").filterVisible();
     await takeElementScreenshot("surface-tagbox-default-layout.png", QRoot, t, comparer);

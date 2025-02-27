@@ -290,7 +290,7 @@ test("Property grid editor popup", async (t) => {
     .click(getPropertyGridCategory(generalGroupName))
     .click(getPropertyGridCategory("Data"))
     .click(Selector("span").withExactText("Set Default Answer"))
-    .expect(Selector(".sv-popup--modal").visible).ok()
+    .expect(Selector(".sv-popup--modal-popup").visible).ok()
     .click(Selector("button").withExactText("Cancel"))
     .resizeWindow(380, 600)
     .click(Selector(".svc-survey-element-toolbar__item[title=\"Open settings\"]").filterVisible())
@@ -298,7 +298,7 @@ test("Property grid editor popup", async (t) => {
     .click(question1, { offsetX: 5, offsetY: 5 })
     .click(Selector(".svc-question__content-actions .svc-survey-element-toolbar__item[title=\"Open settings\"]").filterVisible())
     .click(Selector("span").withExactText("Set Default Answer"))
-    .expect(Selector(".sv-popup--overlay").visible).ok();
+    .expect(Selector(".sv-popup--menu-phone").visible).ok();
 });
 
 test("Question type popup - wide", async (t) => {
@@ -308,7 +308,7 @@ test("Question type popup - wide", async (t) => {
   await t
     .resizeWindow(1920, 900)
     .click(Selector("button.svc-element__question-type-selector"))
-    .expect(Selector(".sv-popup:not(.sv-popup--overlay) li").withText("Single-Line Input").visible).ok();
+    .expect(getListItemByText("Single-Line Input").exists).ok();
 });
 
 test("Question type popup - narrow", async (t) => {
@@ -327,7 +327,7 @@ test("Question type popup - narrow", async (t) => {
   await t
     .resizeWindow(380, 600)
     .click(Selector("button.svc-element__question-type-selector"))
-    .expect(Selector(".sv-popup.sv-popup--overlay li").withText("Single-Line Input").filterVisible().exists).ok();
+    .expect(getListItemByText("Single-Line Input").exists).ok();
 });
 
 test("Responsive creator: property grid - click the shadow", async (t) => {

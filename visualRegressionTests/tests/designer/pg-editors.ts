@@ -165,7 +165,7 @@ test("Default value popup", async (t) => {
       .click(generalTab)
       .click(dataTab)
       .click(Selector(".svc-action-button.svc-question-link__set-button").withText("Set Default Answer"));
-    await takeElementScreenshot("pg-default-value-popup.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-default-value-popup.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
   });
 });
 
@@ -196,7 +196,7 @@ test("Custom button into fast entry popup", async (t) => {
       .click(generalTab)
       .click(choicesTab)
       .click(Selector(".spg-action-button[title='Edit']"));
-    await takeElementScreenshot("pg-choices-fast-entry-popup.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-choices-fast-entry-popup.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
   });
 });
 
@@ -213,7 +213,7 @@ test("Logic popup", async (t) => {
       .click(generalTab)
       .click(logicTab)
       .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"));
-    await takeElementScreenshot("pg-logic-popup.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-logic-popup.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
   });
 });
 
@@ -257,10 +257,10 @@ test("Logic popup with boolean question", async (t) => {
       .click(logicTab)
       .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"))
       .click(Selector(".sd-boolean--checked"));
-    await takeElementScreenshot("pg-logic-popup-boolean.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-logic-popup-boolean.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
     await t.click(Selector("button").withText("Cancel").filterVisible());
     await t.click(Selector(".spg-panel__content div[data-name='enableIf'] button[title='Edit']"));
-    await takeElementScreenshot("pg-logic-popup-rating.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-logic-popup-rating.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
   });
 });
 
@@ -280,7 +280,7 @@ test("Logic popup mobile", async (t) => {
       .click(logicTab)
 
       .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"));
-    await takeElementScreenshot("pg-logic-popup-mobile.png", Selector(".sv-popup.svc-property-editor.sv-popup--overlay .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-logic-popup-mobile.png", Selector(".sv-popup.svc-property-editor.sv-popup--menu-phone .sv-popup__container"), t, comparer);
   });
 });
 
