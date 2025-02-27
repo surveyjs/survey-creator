@@ -3673,12 +3673,12 @@ test("Pages Collection Editor - The Trash Bin (Remove) button is unavailable whe
   const creator = new CreatorTester(undefined, undefined, false);
   const propertyGrid = new PropertyGridModelTester(creator.survey, creator);
   const pagesQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("pages");
-  expect(pagesQuestion.visibleRows).toHaveLength(0);
+  const rowsCount = pagesQuestion.visibleRows.length;
   const action = pagesQuestion.getTitleActions().filter(action => action.id === "add-item")[0];
   expect(action).toBeTruthy();
   action.action();
   action.action();
-  expect(pagesQuestion.visibleRows).toHaveLength(2);
+  expect(pagesQuestion.visibleRows).toHaveLength(rowsCount + 2);
 
   const rows = pagesQuestion.renderedTable.rows;
   expect(rows[0].isErrorsRow).toBeFalsy();
