@@ -3670,7 +3670,7 @@ test("Undo for deleting validator in multiple text item, Bug#6295", () => {
   expect(matrix.visibleRows).toHaveLength(1);
 });
 test("Pages Collection Editor - The Trash Bin (Remove) button is unavailable when you use the Add Page button Bug#6645", () => {
-  const creator = new CreatorTester();
+  const creator = new CreatorTester(undefined, undefined, false);
   const propertyGrid = new PropertyGridModelTester(creator.survey, creator);
   const pagesQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("pages");
   expect(pagesQuestion.visibleRows).toHaveLength(0);
