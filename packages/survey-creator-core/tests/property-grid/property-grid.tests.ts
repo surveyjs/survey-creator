@@ -33,7 +33,8 @@ import {
   ComponentCollection,
   QuestionBooleanModel,
   QuestionRadiogroupModel,
-  PageModel
+  PageModel,
+  ActionContainer
 } from "survey-core";
 import {
   EmptySurveyCreatorOptions,
@@ -3108,9 +3109,11 @@ test("Do not select page on adding new page in the property grid #5564", () => {
   expect(creator.survey.pages).toHaveLength(1);
   creator.selectElement(creator.survey);
   const pagesQuestion = <QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("pages");
+  expect(pagesQuestion.visibleRows).toHaveLength(1);
   const actions = pagesQuestion.getTitleActions();
   actions[actions.length - 1].action();
   expect(creator.survey.pages).toHaveLength(2);
+  expect(pagesQuestion.visibleRows).toHaveLength(2);
   expect((<any>creator.selectedElement).pages).toHaveLength(2);
 });
 test("Setup correct categories for dynamic properties in components", () => {
@@ -3665,4 +3668,29 @@ test("Undo for deleting validator in multiple text item, Bug#6295", () => {
   creator.undo();
   expect(item1.validators).toHaveLength(1);
   expect(matrix.visibleRows).toHaveLength(1);
+});
+test("Pages Collection Editor - The Trash Bin (Remove) button is unavailable when you use the Add Page button Bug#6645", () => {
+  const creator = new CreatorTester();
+  const propertyGrid = new PropertyGridModelTester(creator.survey, creator);
+  const pagesQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("pages");
+  expect(pagesQuestion.visibleRows).toHaveLength(0);
+  const action = pagesQuestion.getTitleActions().filter(action => action.id === "add-item")[0];
+  expect(action).toBeTruthy();
+  action.action();
+  action.action();
+  expect(pagesQuestion.visibleRows).toHaveLength(2);
+
+  const rows = pagesQuestion.renderedTable.rows;
+  expect(rows[0].isErrorsRow).toBeFalsy();
+  expect(rows[0].hasEndActions).toBeTruthy();
+  let cell = rows[0].cells[rows[0].cells.length - 1];
+  expect(cell.isActionsCell).toBeTruthy();
+  let container = <ActionContainer>cell.item.value;
+  expect(container.getActionById("remove-row")).toBeTruthy();
+  expect(rows[2].isErrorsRow).toBeFalsy();
+  expect(rows[2].hasEndActions).toBeTruthy();
+  cell = rows[2].cells[rows[2].cells.length - 1];
+  expect(cell.isActionsCell).toBeTruthy();
+  container = <ActionContainer>cell.item.value;
+  expect(container.getActionById("remove-row")).toBeTruthy();
 });
