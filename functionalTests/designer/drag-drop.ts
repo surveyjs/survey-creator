@@ -2174,3 +2174,51 @@ test("Drag Drop page to denied area and then keep ghost page after added new one
   await t
     .expect(Selector(".svc-element__add-new-question").nth(3).visible).ok();
 });
+
+
+test("Drag Drop Empty Page Drag to Edge(bottom)", async (t) => {
+  //https://github.com/surveyjs/survey-creator/issues/6620
+  await t.resizeWindow(1600, 900);
+
+  const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  await t
+    .debug()
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -1 });
+
+  const resultJson = await getJSON();
+  const expectedJson = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          },
+          {
+            "type": "rating",
+            "name": "question2"
+          },
+        ]
+      }
+    ]
+  };
+  await t.expect(resultJson).eql(expectedJson);
+});
