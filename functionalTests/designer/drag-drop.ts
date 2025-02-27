@@ -2175,7 +2175,6 @@ test("Drag Drop page to denied area and then keep ghost page after added new one
     .expect(Selector(".svc-element__add-new-question").nth(3).visible).ok();
 });
 
-
 test("Drag Drop Empty Page Drag to Edge(bottom)", async (t) => {
   //https://github.com/surveyjs/survey-creator/issues/6620
   await t.resizeWindow(1600, 900);
