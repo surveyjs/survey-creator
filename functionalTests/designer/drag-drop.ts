@@ -2198,7 +2198,6 @@ test("Drag Drop Empty Page Drag to Edge(bottom)", async (t) => {
   await setJSON(json);
 
   await t
-    .debug()
     .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5, destinationOffsetY: -1 });
 
