@@ -97,12 +97,12 @@ test("showOneCategoryInPropertyGrid: property grid actions - on removing/adding/
   creator.selectElement(col);
 
   let tabs = designerPlugin["tabControlModel"].topToolbar.actions;
-  expect(tabs.length).toBe(4);
-  expect(tabs.map(t => t.id).join(",")).toBe("general,logic,totals,validation");
+  expect(tabs.length).toBe(5);
+  expect(tabs.map(t => t.id).join(",")).toBe("general,logic,data,totals,validation");
   col.cellType = "dropdown";
   tabs = designerPlugin["tabControlModel"].topToolbar.actions;
-  expect(tabs.length).toBe(6);
-  expect(tabs.map(t => t.id).join(",")).toBe("general,choices,choicesByUrl,logic,totals,validation");
+  expect(tabs.length).toBe(7);
+  expect(tabs.map(t => t.id).join(",")).toBe("general,choices,choicesByUrl,logic,data,totals,validation");
 });
 test("showOneCategoryInPropertyGrid: property grid actions - on removing/adding/visible-changed", () => {
   Serializer.addProperty("text", { name: "test", category: "test", visibleIf: (obj) => obj.name !== "q1", dependsOn: "name" });
