@@ -58,20 +58,20 @@ test("Check custom color question with allowEmptyValue:true", () => {
   const question = new QuestionColorModel("q1");
   question.allowEmptyValue = true;
   expect(question.renderedValue).toBe("");
-  expect(question.renderedColorValue).toBe("");
+  expect(question.renderedColorValue).toBe("#000000");
   expect(question.value).toBe(undefined);
   question.value = undefined;
   expect(question.value).toBe(undefined);
   expect(question.renderedValue).toBe("");
-  expect(question.renderedColorValue).toBe("");
+  expect(question.renderedColorValue).toBe("#000000");
   question.value = null;
   expect(question.value).toBe(undefined);
   expect(question.renderedValue).toBe("");
-  expect(question.renderedColorValue).toBe("");
+  expect(question.renderedColorValue).toBe("#000000");
   question.value = "";
   expect(question.value).toBe(undefined);
   expect(question.renderedValue).toBe("");
-  expect(question.renderedColorValue).toBe("");
+  expect(question.renderedColorValue).toBe("#000000");
 });
 test("Check custom color question event callbacks", () => {
   const question = new QuestionColorModel("q1");
@@ -172,7 +172,7 @@ test("QuestionColorModel renderedValue always HEX (value from survey)", () => {
 test("QuestionColorModel renderedValue when _renderedValue and value are empty", () => {
   let q = new QuestionColorModel("q1");
   q._renderedValue = "";
-  expect(q.renderedColorValue).toBe("");
+  expect(q.renderedColorValue).toBe("#000000");
   q = new QuestionColorModel("q1");
   q._renderedValue = "";
   q.value = "";
@@ -188,8 +188,8 @@ test("Check signature pad color properties", () => {
   expect(backgroundColorQuestion.getType()).toBe("color");
   expect(penColorQuestion.renderedValue).toBe("");
   expect(backgroundColorQuestion.renderedValue).toBe("");
-  expect(penColorQuestion.renderedColorValue).toBe("");
-  expect(backgroundColorQuestion.renderedColorValue).toBe("");
+  expect(penColorQuestion.renderedColorValue).toBe("#000000");
+  expect(backgroundColorQuestion.renderedColorValue).toBe("#000000");
   question.penColor = "#f3f3f3";
   expect(penColorQuestion.renderedValue).toBe("#F3F3F3");
   expect(penColorQuestion.renderedColorValue).toBe("#F3F3F3");
@@ -209,8 +209,8 @@ test("Check signature pad color properties", () => {
   expect(backgroundColorQuestion.allowEmptyValue).toBeTruthy();
   expect(penColorQuestion.renderedValue).toBe("");
   expect(backgroundColorQuestion.renderedValue).toBe("");
-  expect(penColorQuestion.renderedColorValue).toBe("");
-  expect(backgroundColorQuestion.renderedColorValue).toBe("");
+  expect(penColorQuestion.renderedColorValue).toBe("#000000");
+  expect(backgroundColorQuestion.renderedColorValue).toBe("#000000");
   question.penColor = "#f3f3f3";
   expect(penColorQuestion.renderedValue).toBe("#F3F3F3");
   expect(penColorQuestion.renderedColorValue).toBe("#F3F3F3");
