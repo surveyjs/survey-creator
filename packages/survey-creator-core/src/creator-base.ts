@@ -1228,6 +1228,9 @@ export class SurveyCreatorModel extends Base
     if (this.activeTab !== "theme") {
       this.updatePlugin(this.activeTab);
     }
+    if (!!newTheme && newTheme.headerView) {
+      this.survey.headerView = newTheme.headerView;
+    }
   }
 
   private _doSaveThemeCore(onSaveComplete?: () => void) {
