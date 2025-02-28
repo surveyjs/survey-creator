@@ -2479,7 +2479,7 @@ test("Question types with subtypes", async (t) => {
       .hover(getListItemByText("Rating Scale").filterVisible())
       .wait(400)
       .hover(getListItemByText("Labels").nth(1));
-    await takeElementScreenshot("question-type-rating-subtypes.png", Selector(".sv-popup.sv-popup--dropdown").filterVisible(), t, comparer);
+    await takeElementScreenshot("question-type-rating-subtypes.png", Selector(".sv-popup--menu-popup").filterVisible(), t, comparer);
   });
 });
 

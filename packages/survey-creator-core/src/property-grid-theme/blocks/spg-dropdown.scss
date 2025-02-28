@@ -45,7 +45,7 @@
     width: var(--ctr-editor-button-icon-width, var(--sjs-font-size-x3));
     height: var(--ctr-editor-button-icon-height, var(--sjs-font-size-x3));
 }
-.spg-dropdown-popup:not(.sv-popup--menu-overlay) {
+.spg-dropdown-popup.sv-popup--menu-popup {
     height: 0;
 }
 
