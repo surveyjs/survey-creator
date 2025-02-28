@@ -394,6 +394,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     const oldInsideContainer = this.insideContainer;
     this.insideContainer = !calculateIsEdge(dropTargetNode, event.clientY) && !calculateIsSide(dropTargetNode, event.clientX);
+    if (dropTargetNode.dataset.svDropTargetSurveyElement === "newGhostPage") {
+      this.insideContainer = true;
+    }
     const dropTarget = this.getDropTargetByNode(dropTargetNode, event);
 
     if (!!oldInsideContainer != !!this.insideContainer) dropTarget.dragTypeOverMe = null;
@@ -484,7 +487,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const srcContainer = src.parent || src.page;
     if (!!srcContainer) {
       (page.survey as SurveyModel).startMovingQuestion();
-      srcContainer.removeElement(src);
+      srcContainer.removeElement(src); // TODO here we remove
     }
     let dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
     if (isPanelDynamic(dest) && this.insideContainer) dest = dest.template;
@@ -494,7 +497,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       dest.insertElement(src);
     } else {
       const destParent = dest.parent || dest.page;
-      if (destParent) destParent.insertElement(src, dest, convertLocation());
+      if (destParent) destParent.insertElement(src, dest, convertLocation()); // TODO and here we might (if !destParent) not insert so element will disappear
     }
     (page.survey as SurveyModel).stopMovingQuestion();
     return dragged;
