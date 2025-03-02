@@ -131,7 +131,7 @@ export function getSurveyListItemByText(text) {
   return Selector(".sv-popup__content .sv-list__item").withText(text).filterVisible();
 }
 export function getAddNewQuestionButton() {
-  return Selector(".svc-element__add-new-question > span").withText("Add Question");
+  return Selector(".svc-element__add-new-question > .svc-add-new-item-button__text").withText("Add Question");
 }
 
 export function getVisibleElement(selector: string | Selector): Selector {

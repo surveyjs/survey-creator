@@ -195,7 +195,7 @@ test("Test question type selector", async (t) => {
     await setJSON(surveyJSON);
 
     await t
-      .click(Selector(".svc-page__content--new .svc-question-type-selector-icon"))
+      .click(Selector(".svc-page__content--new .svc-question-type-selector__icon"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
     await takeElementScreenshot("select-type-popup.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
