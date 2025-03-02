@@ -55,6 +55,34 @@ test("Left toolbox", async (t) => {
   });
 });
 
+test("Left toolbox - subitems in first item", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await changeToolboxScrolling(false);
+    await changeToolboxSearchEnabled(false);
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+
+    await ClientFunction(() => {
+      window["creator"].toolbox.removeItem("radiogroup");
+    })();
+
+    const toolboxItem = Selector(".svc-toolbox__item");
+    const toolboxElement = Selector(".svc-toolbox");
+
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
+    await t.resizeWindow(2560, 1440);
+    await setShowSidebar(false);
+    await takeElementScreenshot("toolbox-left-subitems-first.png", toolboxElement, t, comparer);
+
+    await t.hover(toolboxItem);
+    await takeElementScreenshot("toolbox-left-hover-item-subitems-first.png", toolboxElement, t, comparer);
+
+    await t.resizeWindow(2560, 1440);
+  });
+});
+
 test("Right toolbox", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await changeToolboxScrolling(false);

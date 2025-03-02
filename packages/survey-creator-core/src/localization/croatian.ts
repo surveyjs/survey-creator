@@ -445,6 +445,7 @@ export var hrStrings = {
     imageHeight: "Visina slike",
     imageWidth: "Širina slike",
     valueName: "Naziv vrijednosti",
+    defaultDisplayValue: "Zadana vrijednost prikaza za dinamičke tekstove",
     rateDescriptionLocation: "Poravnanje natpisa",
     size: "Širina polja za unos (u znakovima)",
     cellErrorLocation: "Poravnanje poruke o pogrešci ćelije",
@@ -1536,6 +1537,7 @@ export var hrStrings = {
     maxWidth: "Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
     width: "Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
     valueName: "Ako ne postavite ovo svojstvo, odgovor će biti pohranjen u polju određenom svojstvom Naziv .",
+    defaultDisplayValue: "Vrijednost koja se prikazuje u HTML pitanjima te u dinamičkim naslovima i opisima elemenata upitnika kada je vrijednost pitanja prazna.",
     useDisplayValuesInDynamicTexts: "U vrstama pitanja s jednim i višestrukim odabirom svaka mogućnost izbora ima ID i vrijednost prikaza. Kada je odabrana, ova postavka prikazuje prikazanu vrijednost umjesto ID vrijednosti u HTML pitanjima te dinamičke naslove i opise elemenata upitnika.",
     clearIfInvisible: "Odaberite želite li očistiti vrijednosti pitanja skrivene uvjetnom logikom i kada to učiniti. Opcija \"Naslijedi\" prema zadanim postavkama primjenjuje postavku na razini upitnika (\"Nakon završetka ankete\").",
     choicesFromQuestionMode: "Odaberite između: \"Sve\" - kopira sve opcije izbora iz odabranog pitanja; \"Odabrano\" - dinamički kopira samo odabrane opcije izbora; \"Neodabrano\" - dinamički kopira samo neodabrane opcije izbora. Opcije \"Ništa\" i \"Ostalo\" kopiraju se prema zadanim postavkama ako su omogućene u izvornom pitanju.",
@@ -3027,3 +3029,5 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zumiranje na 100%"
 // ed.addLanguageTooltip: "Add Language" => "Dodavanje jezika"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Postavlja broj prikazanih redaka u tekstnim područjima za komentare pitanja. Ako ulaz zauzima više linija, pojavit će se klizač."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Zadana vrijednost prikaza za dinamičke tekstove"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Vrijednost koja se prikazuje u HTML pitanjima te u dinamičkim naslovima i opisima elemenata upitnika kada je vrijednost pitanja prazna."

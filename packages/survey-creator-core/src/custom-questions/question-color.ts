@@ -86,7 +86,7 @@ export class QuestionColorModel extends QuestionTextModel {
     return { backgroundColor: this.renderedValue };
   }
   public get renderedColorValue() {
-    return this.renderedValue;
+    return this.renderedValue || DEFAULT_COLOR;
   }
   public get isInputTextUpdate(): boolean {
     return false;

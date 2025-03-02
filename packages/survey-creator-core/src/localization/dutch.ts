@@ -445,6 +445,7 @@ export var nlStrings = {
     imageHeight: "Afbeelding hoogte",
     imageWidth: "Afbeelding breedte",
     valueName: "Waardenaam",
+    defaultDisplayValue: "Standaardweergavewaarde voor dynamische teksten",
     rateDescriptionLocation: "Etiket uitlijnen",
     size: "Breedte invoerveld (in tekens)",
     cellErrorLocation: "Uitlijning van celfoutmeldingen",
@@ -1536,6 +1537,7 @@ export var nlStrings = {
     maxWidth: "Accepteert CSS-waarden (px, %, in, pt, enz.).",
     width: "Accepteert CSS-waarden (px, %, in, pt, enz.).",
     valueName: "Als u deze eigenschap niet instelt, wordt het antwoord opgeslagen in een veld dat is opgegeven door de eigenschap Name.",
+    defaultDisplayValue: "Een waarde die wordt weergegeven in HTML-vragen en in de dynamische titels en beschrijvingen van enquête-elementen wanneer de vraagwaarde leeg is.",
     useDisplayValuesInDynamicTexts: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Als deze instelling is geselecteerd, wordt een weergavewaarde weergegeven in plaats van een ID-waarde in HTML-vragen en dynamische titels en beschrijvingen van enquête-elementen.",
     clearIfInvisible: "Kies of vraagwaarden die verborgen zijn door voorwaardelijke logica al dan niet moeten worden gewist en wanneer u dit wilt doen. Met de optie \"Overnemen\" wordt de instelling op enquêteniveau toegepast (\"Na voltooiing van de enquête\" standaard).",
     choicesFromQuestionMode: "Kies uit: \"Alle\" - kopieert alle keuzemogelijkheden van de geselecteerde vraag; \"Geselecteerd\" - kopieert dynamisch alleen geselecteerde keuzeopties; \"Niet geselecteerd\" - kopieert dynamisch alleen niet-geselecteerde keuzeopties. De opties \"Geen\" en \"Overig\" worden standaard gekopieerd als deze zijn ingeschakeld in de bronvraag.",
@@ -3011,3 +3013,5 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Inzoomen tot 100%"
 // ed.addLanguageTooltip: "Add Language" => "Taal toevoegen"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. Als de invoer meer regels in beslag neemt, wordt de schuifbalk weergegeven."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Standaardweergavewaarde voor dynamische teksten"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Een waarde die wordt weergegeven in HTML-vragen en in de dynamische titels en beschrijvingen van enquête-elementen wanneer de vraagwaarde leeg is."

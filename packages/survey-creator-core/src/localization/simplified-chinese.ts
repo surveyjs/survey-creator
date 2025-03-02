@@ -445,6 +445,7 @@ var simplifiedChineseTranslation = {
     imageHeight: "图片高度",
     imageWidth: "图片宽度",
     valueName: "值名",
+    defaultDisplayValue: "动态文本的默认显示值",
     rateDescriptionLocation: "标签对齐",
     size: "输入字段大小（以字符为单位）",
     cellErrorLocation: "单元格错误消息对齐方式",
@@ -1536,6 +1537,7 @@ var simplifiedChineseTranslation = {
     maxWidth: "接受 CSS 值（px、%、in、pt 等）。",
     width: "接受 CSS 值（px、%、in、pt 等）。",
     valueName: "如果未设置此属性，则答案将存储在 Name 属性指定的字段中。",
+    defaultDisplayValue: "当问题值为空时，显示在 HTML 问题以及调查元素的动态标题和描述中的值。",
     useDisplayValuesInDynamicTexts: "在单选题和多选题类型中，每个选项都有一个 ID 和显示值。选中此设置后，将在 HTML 问题以及调查元素的动态标题和描述中显示显示值，而不是 ID 值。",
     clearIfInvisible: "选择是否清除条件逻辑隐藏的问题值以及何时清除。“继承”选项应用调查级别设置（默认为“完成调查后”）。",
     choicesFromQuestionMode: "从以下选项中选择：“全部” - 复制所选问题中的所有选项;“Selected” - 仅动态复制选定的选项选项;“未选择” - 仅动态复制未选择的选项。默认情况下，如果在源问题中启用了“无”和“其他”选项，则会复制该选项。",
@@ -3174,3 +3176,5 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // ed.zoom100Tooltip: "Zoom to 100%" => "缩放到 100%"
 // ed.addLanguageTooltip: "Add Language" => "添加语言"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "设置问题注释的文本区域中显示的行数。如果输入占用更多行，则会显示滚动条。"
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "动态文本的默认显示值"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "当问题值为空时，显示在 HTML 问题以及调查元素的动态标题和描述中的值。"

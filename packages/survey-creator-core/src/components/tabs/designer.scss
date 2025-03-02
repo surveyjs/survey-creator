@@ -40,6 +40,7 @@ svc-tab-designer {
   align-items: flex-start;
   gap: var(--ctr-survey-header-gap, var(--lbr-spacing-x1));
   box-shadow: none;
+  overflow: visible;
 }
 
 .svc-surface-header {

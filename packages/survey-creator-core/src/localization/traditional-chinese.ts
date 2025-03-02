@@ -445,6 +445,7 @@ var traditionalChineseTranslation = {
     imageHeight: "圖片高度",
     imageWidth: "圖片寬度",
     valueName: "Value name",
+    defaultDisplayValue: "動態文字的預設顯示值",
     rateDescriptionLocation: "標籤對齊",
     size: "輸入欄位大小（以字元為單位 ）",
     cellErrorLocation: "單元格錯誤消息對齊方式",
@@ -1536,6 +1537,7 @@ var traditionalChineseTranslation = {
     maxWidth: "接受 CSS 值（px、%、in、pt 等）。",
     width: "接受 CSS 值（px、%、in、pt 等）。",
     valueName: "如果未設置此屬性，則答案將存儲在 Name 屬性指定的欄位中。",
+    defaultDisplayValue: "當問題值為空時，顯示在 HTML 問題以及調查元素的動態標題和描述中的值。",
     useDisplayValuesInDynamicTexts: "在單選題和多選題類型中，每個選項都有一個 ID 和顯示值。選中此設置后，將在 HTML 問題以及調查元素的動態標題和描述中顯示顯示值，而不是 ID 值。",
     clearIfInvisible: "選擇是否清除條件邏輯隱藏的問題值以及何時清除。“繼承”選項應用調查級別設置（預設為“完成調查後”）。",
     choicesFromQuestionMode: "從以下選項中選擇：「全部」 - 複製所選問題中的所有選項;“Selected” - 僅動態複製選定的選項選項;“未選擇” - 僅動態複製未選擇的選項。默認情況下，如果在源問題中啟用了“無”和“其他”選項，則會複製該選項。",
@@ -3303,3 +3305,5 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // ed.zoom100Tooltip: "Zoom to 100%" => "縮放到 100%"
 // ed.addLanguageTooltip: "Add Language" => "添加語言"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "設置問題註釋的文字區域中顯示的行數。如果輸入佔用更多行，則會顯示滾動條。"
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "動態文字的預設顯示值"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "當問題值為空時，顯示在 HTML 問題以及調查元素的動態標題和描述中的值。"

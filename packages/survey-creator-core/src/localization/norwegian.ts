@@ -445,6 +445,7 @@ export var nbStrings = {
     imageHeight: "Bildehøyde",
     imageWidth: "Bildebredde",
     valueName: "Verdinavn",
+    defaultDisplayValue: "Standard visningsverdi for dynamiske tekster",
     rateDescriptionLocation: "Justering av etiketter",
     size: "Størrelse på inndatafelt (i tegn)",
     cellErrorLocation: "Justering av cellefeilmelding",
@@ -1536,6 +1537,7 @@ export var nbStrings = {
     maxWidth: "Godtar CSS-verdier (px, %, i, pt osv.).",
     width: "Godtar CSS-verdier (px, %, i, pt osv.).",
     valueName: "Hvis du ikke angir denne egenskapen, lagres svaret i et felt som er angitt av egenskapen Name.",
+    defaultDisplayValue: "En verdi som vises i HTML-spørsmål og i de dynamiske titlene og beskrivelsene av undersøkelseselementer når spørsmålsverdien er tom.",
     useDisplayValuesInDynamicTexts: "I enkeltvalgs- og flervalgsspørsmålstyper har hvert valgalternativ en ID og visningsverdi. Når denne innstillingen er valgt, vises en visningsverdi i stedet for en ID-verdi i HTML-spørsmål og dynamiske titler og beskrivelser av evalueringselementer.",
     clearIfInvisible: "Velg om du vil fjerne spørsmålsverdier skjult av betinget logikk, og når du vil gjøre det. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå (\"Når undersøkelsen er fullført\" som standard).",
     choicesFromQuestionMode: "Velg mellom: \"Alle\" - kopierer alle valgalternativer fra det valgte spørsmålet; \"Valgt\" - kopierer dynamisk bare valgte valgalternativer; \"Unselected\" - kopierer dynamisk bare uvalgte valgalternativer. Alternativene \"Ingen\" og \"Annet\" kopieres som standard hvis de er aktivert i kildespørsmålet.",
@@ -3035,3 +3037,5 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoom til 100 %"
 // ed.addLanguageTooltip: "Add Language" => "Legg til språk"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Angir antall linjer som vises i tekstområder for spørsmålskommentarer. Hvis inndataene tar opp flere linjer, vises rullefeltet."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Standard visningsverdi for dynamiske tekster"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "En verdi som vises i HTML-spørsmål og i de dynamiske titlene og beskrivelsene av undersøkelseselementer når spørsmålsverdien er tom."

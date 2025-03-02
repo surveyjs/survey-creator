@@ -445,6 +445,7 @@ export const roStrings = {
     imageHeight: "Înălțimea zonei de afișare",
     imageWidth: "Lățimea zonei de afișare",
     valueName: "Identificator de îmbinare",
+    defaultDisplayValue: "Valoarea de afișare implicită pentru textele dinamice",
     rateDescriptionLocation: "Alinierea etichetei",
     size: "Lățimea câmpului de intrare (în caractere)",
     cellErrorLocation: "Alinierea mesajului de eroare al celulei",
@@ -1536,6 +1537,7 @@ export const roStrings = {
     maxWidth: "Acceptă valori CSS (px, %, in, pt etc.).",
     width: "Acceptă valori CSS (px, %, in, pt etc.).",
     valueName: "Un identificator comun este o cheie personalizată pe care o puteți atribui mai multor întrebări pentru a le lega împreună și a sincroniza valorile acestora. Aceste valori vor fi îmbinate într-un singur array sau obiect și stocate în rezultatele chestionarului folosind cheia ca nume de proprietate.",
+    defaultDisplayValue: "O valoare afișată în întrebările HTML și în titlurile și descrierile dinamice ale elementelor chestionarului atunci când valoarea întrebării este goală.",
     useDisplayValuesInDynamicTexts: "În tipurile de întrebări de selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare de afișare. Când este selectată, această setare afișează o valoare de afișare în loc de o valoare ID în întrebările HTML și în titlurile și descrierile dinamice ale elementelor chestionarului.",
     clearIfInvisible: "Alegeți dacă doriți sau nu să ștergeți valorile întrebărilor ascunse prin logica condițională și când să o faceți. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar („La finalizarea chestionarului” implicit).",
     choicesFromQuestionMode: "Alegeți dintre: „Toate” - copiază toate opțiunile de alegere din întrebarea selectată; „Selectate” - copiază dinamic doar opțiunile de alegere selectate; „Neselectate” - copiază dinamic doar opțiunile de alegere neselectate. Opțiunile „Niciuna” și „Altele” sunt copiate implicit dacă sunt activate în întrebarea sursă.",
@@ -1973,3 +1975,5 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Măriți la 100%"
 // ed.addLanguageTooltip: "Add Language" => "Adăugați limbă"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Setează numărul de linii afișate în zonele de text pentru comentariile la întrebări. Dacă intrarea ocupă mai multe linii, apare bara de derulare."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Valoarea de afișare implicită pentru textele dinamice"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "O valoare afișată în întrebările HTML și în titlurile și descrierile dinamice ale elementelor chestionarului atunci când valoarea întrebării este goală."

@@ -445,6 +445,7 @@ export var jaStrings = {
     imageHeight: "イメージの高さ",
     imageWidth: "イメージの幅",
     valueName: "値名",
+    defaultDisplayValue: "ダイナミックテキストのデフォルトの表示値",
     rateDescriptionLocation: "ラベルの配置",
     size: "入力フィールドの幅 (文字単位)",
     cellErrorLocation: "セル・エラー・メッセージの配置",
@@ -1536,6 +1537,7 @@ export var jaStrings = {
     maxWidth: "CSS 値 (px、%、in、pt など) を受け入れます。",
     width: "CSS 値 (px、%、in、pt など) を受け入れます。",
     valueName: "このプロパティを設定しない場合、回答は Name プロパティで指定されたフィールドに格納されます。",
+    defaultDisplayValue: "HTML の質問、および質問の値が空の場合にアンケート要素の動的なタイトルと説明に表示される値。",
     useDisplayValuesInDynamicTexts: "単一選択および複数選択の質問タイプでは、各選択肢にIDと表示値があります。この設定を選択すると、HTML の質問やアンケート エレメントの動的なタイトルと説明に ID 値ではなく表示値が表示されます。",
     clearIfInvisible: "条件付きロジックで非表示にした質問値をクリアするかどうか、およびいつクリアするかを選択します。「継承」オプションは、アンケートレベルの設定(デフォルトでは「アンケート完了時」)を適用します。",
     choicesFromQuestionMode: "選択元: 「すべて」 - 選択した質問からすべての選択肢をコピーします。\"Selected\" - 選択した選択肢オプションのみを動的にコピーします。「未選択」 - 選択されていない選択肢オプションのみを動的にコピーします。「なし」と「その他」のオプションは、ソースの質問で有効になっている場合、デフォルトでコピーされます。",
@@ -3032,3 +3034,5 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "100%にズーム"
 // ed.addLanguageTooltip: "Add Language" => "言語を追加"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "質問コメントのテキストエリアに表示される行数を設定します。入力がより多くの行を占める場合は、スクロールバーが表示されます。"
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "ダイナミックテキストのデフォルトの表示値"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML の質問、および質問の値が空の場合にアンケート要素の動的なタイトルと説明に表示される値。"

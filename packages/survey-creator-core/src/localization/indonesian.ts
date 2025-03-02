@@ -445,6 +445,7 @@ export var indonesianStrings = {
     imageHeight: "Tinggi gambar",
     imageWidth: "Lebar gambar",
     valueName: "Nama nilai",
+    defaultDisplayValue: "Nilai tampilan default untuk teks dinamis",
     rateDescriptionLocation: "Perataan label",
     size: "Lebar bidang input (dalam karakter)",
     cellErrorLocation: "Perataan pesan kesalahan sel",
@@ -1536,6 +1537,7 @@ export var indonesianStrings = {
     maxWidth: "Menerima nilai CSS (px, %, in, pt, dll.).",
     width: "Menerima nilai CSS (px, %, in, pt, dll.).",
     valueName: "Jika Anda tidak mengatur properti ini, jawabannya akan disimpan dalam bidang yang ditentukan oleh properti Name.",
+    defaultDisplayValue: "Nilai yang ditampilkan dalam pertanyaan HTML dan dalam judul dinamis dan deskripsi elemen survei saat nilai pertanyaan kosong.",
     useDisplayValuesInDynamicTexts: "Dalam tipe pertanyaan pilihan tunggal dan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Saat dipilih, setelan ini akan menampilkan nilai tampilan, bukan nilai ID dalam pertanyaan HTML serta judul dinamis dan deskripsi elemen survei.",
     clearIfInvisible: "Pilih apakah akan menghapus nilai pertanyaan yang disembunyikan oleh logika kondisional atau tidak dan kapan melakukannya. Opsi \"Warisi\" menerapkan setelan tingkat survei (\"Setelah survei selesai\" secara default).",
     choicesFromQuestionMode: "Pilih dari: \"Semua\" - menyalin semua opsi pilihan dari pertanyaan yang dipilih; \"Dipilih\" - secara dinamis menyalin hanya opsi pilihan yang dipilih; \"Tidak dipilih\" - secara dinamis hanya menyalin opsi pilihan yang tidak dipilih. Opsi \"Tidak Ada\" dan \"Lainnya\" disalin secara default jika diaktifkan dalam pertanyaan sumber.",
@@ -3187,3 +3189,5 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Perbesar hingga 100%"
 // ed.addLanguageTooltip: "Add Language" => "Tambahkan Bahasa"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Jika input memakan lebih banyak baris, bilah gulir akan muncul."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Nilai tampilan default untuk teks dinamis"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Nilai yang ditampilkan dalam pertanyaan HTML dan dalam judul dinamis dan deskripsi elemen survei saat nilai pertanyaan kosong."

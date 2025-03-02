@@ -445,6 +445,7 @@ export var huStrings = {
     imageHeight: "Kép magassága",
     imageWidth: "Kép szélessége",
     valueName: "Érték megnevezése",
+    defaultDisplayValue: "Dinamikus szövegek alapértelmezett megjelenítési értéke",
     rateDescriptionLocation: "Feliratigazítás",
     size: "Beviteli mező szélessége (karakterben)",
     cellErrorLocation: "Cellahibaüzenet igazítása",
@@ -1536,6 +1537,7 @@ export var huStrings = {
     maxWidth: "CSS-értékeket fogad el (px, %, in, pt stb.).",
     width: "CSS-értékeket fogad el (px, %, in, pt stb.).",
     valueName: "Ha nem állítja be ezt a tulajdonságot, a válasz a Name tulajdonságban megadott mezőben lesz tárolva.",
+    defaultDisplayValue: "A HTML-kérdésekben, valamint a felmérési elemek dinamikus címeiben és leírásaiban megjelenő érték, ha a kérdés értéke üres.",
     useDisplayValuesInDynamicTexts: "Az egyszeres és többszörös kijelölésű kérdéstípusokban minden választási lehetőség rendelkezik azonosítóval és megjelenített értékkel. Ha be van jelölve, ez a beállítás azonosító érték helyett megjelenítési értéket jelenít meg a HTML-kérdésekben, valamint a dinamikus címekben és a földmérési elemek leírásában.",
     clearIfInvisible: "Válassza ki, hogy törli-e a feltételes logika által elrejtett kérdésértékeket, és mikor tegye meg. Az \"Öröklés\" opció a felmérési szintű beállítást alkalmazza (\"Felmérés befejezésekor\" alapértelmezés szerint).",
     choicesFromQuestionMode: "Válasszon a következők közül: \"Összes\" - átmásolja az összes választási lehetőséget a kiválasztott kérdésből; \"Kiválasztott\" - dinamikusan másolja csak a kiválasztott választási lehetőségeket; \"Nem kiválasztott\" - dinamikusan csak a nem kiválasztott választási lehetőségeket másolja. A \"Nincs\" és az \"Egyéb\" opciók alapértelmezés szerint másolásra kerülnek, ha engedélyezve vannak a forráskérdésben.",
@@ -3184,3 +3186,5 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Nagyítás 100%-ra"
 // ed.addLanguageTooltip: "Add Language" => "Nyelv hozzáadása"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Beállítja a szövegterületeken megjelenített sorok számát a kérdésmegjegyzésekhez. Ha a bevitel több sort foglal el, megjelenik a görgetősáv."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Dinamikus szövegek alapértelmezett megjelenítési értéke"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "A HTML-kérdésekben, valamint a felmérési elemek dinamikus címeiben és leírásaiban megjelenő érték, ha a kérdés értéke üres."

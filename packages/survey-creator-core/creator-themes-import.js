@@ -164,6 +164,12 @@ function getUsedCssVariables(path) {
   });
 }
 
+function correctColorVariables(curPaletteCssVariables) {
+  for (let key in curPaletteCssVariables) {
+    curPaletteCssVariables[key] = curPaletteCssVariables[key].replace(/^(#\w{6,6})[fF]{2,2}$/, "$1");
+  }
+}
+
 function getCssVariablesFormFile(fileName) {
   try {
     const data = fs.readFileSync(sourcePath + fileName, "utf8");
@@ -205,6 +211,7 @@ let exportedNames = [];
 
 function writeTheme2020(themeName, cssVars, variableName) {
   const curPaletteCssVariables = getCssVariablesFormFile(themeName + "/v2.css");
+  correctColorVariables(curPaletteCssVariables);
   const cssVariables = { ...cssVars, ...curPaletteCssVariables };
   const theme = { themeName, iconSet: "v1", isLight: true, cssVariables };
   const themeJson = JSON.stringify(theme, null, 2);
@@ -281,9 +288,9 @@ Object.keys(themeNameMap).forEach(themeName => {
   (palettes || []).forEach(paletteName => {
     console.log("Palette - " + paletteName);
     const curPaletteCssVariables = getCssVariablesFormFile(currentTheme + "/" + paletteName + ".css");
+    correctColorVariables(curPaletteCssVariables);
     const resultColorVariables = generateColorVariables(curPaletteCssVariables);
     const cssVariables = { ...curPaletteCssVariables, ...resultColorVariables };
-
     if (baseThemeName === themeName && paletteName === "light") {
       const cssVariablesJson = JSON.stringify(resultColorVariables, null, 2);
       const result = `export const DefaultLightColorCssVariables = ${cssVariablesJson};`;

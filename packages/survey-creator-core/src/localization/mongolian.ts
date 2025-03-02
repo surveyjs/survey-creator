@@ -445,6 +445,7 @@ export var mnStrings = {
     imageHeight: "Зургийн өндөр",
     imageWidth: "Зургийн өргөн",
     valueName: "Хариултыг дараагийн JSON талбарт хадгалах",
+    defaultDisplayValue: "Динамик текстүүдийн стандарт үзүүлэлтийн үнэ",
     rateDescriptionLocation: "Шошгоны зохицл",
     size: "Оролтын хэмжээ (тэмдэгтээр)",
     cellErrorLocation: "Эсийн алдааны мессежийн зохицуулалт",
@@ -1536,6 +1537,7 @@ export var mnStrings = {
     maxWidth: "CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
     width: "CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
     valueName: "Хэрэв энэ талбарын утгыг оруулаагүй бол хариулт нь автоматаар Нэр талбарт хадгална.",
+    defaultDisplayValue: "HTML асуулт болон асуултын үнэ хоосон үед судалгааны элементүүдийн динамик гарчиг болон тайлбарт харагдах утга.",
     useDisplayValuesInDynamicTexts: "Ганц болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон харуулах үнэ цэнэтэй байдаг. Энэ тохиргоо нь сонгогдсон тохиолдолд HTML асуулт болон динамик гарчиг, судалгааны элементүүдийн тодорхойлолтод ID үнэ цэнийн оронд харуулах үнэ цэнийг харуулдаг.",
     clearIfInvisible: "Нөхцөл байдлын логикоор нуусан үнэт зүйлсийг тодорхой болгох уу, хэзээ хийх вэ гэдгийг сонго. \"Өв залгамж\" сонголт нь судалгааны түвшний тохиргоог (\"Upon survey completion\" -ийг дефолтоор) хэрэгжүүлдэг.",
     choicesFromQuestionMode: "Сонгоно уу: \"Бүгд\" - сонгосон асуултаас сонголт хийх бүх сонголтыг хуулбарласан; \"Сонгосон\" - динамикаар зөвхөн сонгосон сонголтын хувилбаруудыг хуулбарласан; \"Сонгогдоогүй\" - динамикаар зөвхөн сонгогдоогүй сонголтыг хувилдаг. \"None\" болон \"Бусад\" сонголтууд нь эх сурвалжийн асуулгад боломжтой бол default-ээр хуулагддаг.",
@@ -2688,3 +2690,5 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // ed.zoom100Tooltip: "Zoom to 100%" => "100% хүртэл томруулах"
 // ed.addLanguageTooltip: "Add Language" => "Хэл нэмэх"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Асуултын тайлбар бичвэрийн хэсэгт харагдах мөрийн тоог тогтооно. Хэрвээ оролт илүү олон мөр эзэлбэл гүйлгэх бар гарч ирнэ."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Динамик текстүүдийн стандарт үзүүлэлтийн үнэ"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML асуулт болон асуултын үнэ хоосон үед судалгааны элементүүдийн динамик гарчиг болон тайлбарт харагдах утга."

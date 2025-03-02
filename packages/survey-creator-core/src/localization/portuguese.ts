@@ -445,6 +445,7 @@ var portugueseTranslation = {
     imageHeight: "Altura da imagem",
     imageWidth: "Largura da imagem",
     valueName: "Nome do valor",
+    defaultDisplayValue: "Valor de exibição padrão para textos dinâmicos",
     rateDescriptionLocation: "Alinhamento de rótulos",
     size: "Tamanho de entrada (em caracteres)",
     cellErrorLocation: "Alinhamento da mensagem de erro da célula",
@@ -1536,6 +1537,7 @@ var portugueseTranslation = {
     maxWidth: "Aceita valores CSS (px, %, in, pt, etc.).",
     width: "Aceita valores CSS (px, %, in, pt, etc.).",
     valueName: "Se você não definir esta propriedade, a resposta será armazenada em um campo especificado pela propriedade Nome.",
+    defaultDisplayValue: "Um valor exibido em perguntas HTML e nos títulos dinâmicos e descrições de elementos de pesquisa quando o valor da pergunta está vazio.",
     useDisplayValuesInDynamicTexts: "Nos tipos de pergunta de seleção única e múltipla, cada opção de opção tem um ID e um valor de exibição. Quando selecionada, essa configuração mostra um valor de exibição em vez de um valor de ID em perguntas HTML e títulos dinâmicos e descrições de elementos de pesquisa.",
     clearIfInvisible: "Escolha se deseja ou não limpar valores de pergunta ocultos pela lógica condicional e quando fazê-lo. A opção \"Herdar\" aplica a configuração no nível do questionário (\"Após a conclusão do questionário\" por padrão).",
     choicesFromQuestionMode: "Escolha entre: \"Todos\" - copia todas as opções de escolha da pergunta selecionada; \"Selecionado\" - copia dinamicamente apenas as opções de escolha selecionadas; \"Não selecionado\" - copia dinamicamente apenas as opções de escolha não selecionadas. As opções \"Nenhum\" e \"Outros\" são copiadas por padrão se ativadas na pergunta de origem.",
@@ -2701,3 +2703,5 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // ed.zoom100Tooltip: "Zoom to 100%" => "Zoom para 100%"
 // ed.addLanguageTooltip: "Add Language" => "Adicionar idioma"
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Define o número de linhas exibidas nas áreas de texto para comentários de perguntas. Se a entrada ocupar mais linhas, a barra de rolagem será exibida."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Valor de exibição padrão para textos dinâmicos"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Um valor exibido em perguntas HTML e nos títulos dinâmicos e descrições de elementos de pesquisa quando o valor da pergunta está vazio."

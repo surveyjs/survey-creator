@@ -27,6 +27,9 @@
     .svc-toolbox__item-banner {
       top: 50%;
     }
+    .svc-toolbox__item-submenu-button {
+      top: calc(var(--ctr-toolbox-item-padding-top, var(--sjs-spacing-x1)));
+    }
   }
 }
 .svc-toolbox__tool-content {
