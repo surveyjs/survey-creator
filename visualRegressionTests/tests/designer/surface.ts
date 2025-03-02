@@ -130,8 +130,8 @@ test("Test question type converter on page for panel - 2", async (t) => {
 
     await t
       .scroll(Selector(".svc-tab-designer"), "bottom")
-      .expect(Selector(".svc-element__question-type-selector").visible).ok()
-      .click(Selector(".svc-element__question-type-selector"))
+      .expect(Selector(".svc-question-type-selector").visible).ok()
+      .click(Selector(".svc-question-type-selector"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
     await takeElementScreenshot("convert-to-popup-panel-not-empty.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
@@ -195,7 +195,7 @@ test("Test question type selector", async (t) => {
     await setJSON(surveyJSON);
 
     await t
-      .click(Selector(".svc-page__content--new .svc-element__question-type-selector-icon"))
+      .click(Selector(".svc-page__content--new .svc-question-type-selector-icon"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
     await takeElementScreenshot("select-type-popup.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
@@ -1468,14 +1468,14 @@ test("Question add type selector button", async (t) => {
       ]
     };
     await setJSON(json);
-    await t.hover(Selector(".svc-panel__add-new-question-container .svc-element__question-type-selector"));
+    await t.hover(Selector(".svc-panel__add-new-question-container .svc-question-type-selector"));
     await takeElementScreenshot("question-add-type-selector-button-panel-hover.png", Selector(".svc-panel__add-new-question-container"), t, comparer);
-    await ClientFunction(() => { (document.querySelector(".svc-panel__add-new-question-container .svc-element__question-type-selector") as HTMLDivElement).focus(); })();
+    await ClientFunction(() => { (document.querySelector(".svc-panel__add-new-question-container .svc-question-type-selector") as HTMLDivElement).focus(); })();
     await takeElementScreenshot("question-add-type-selector-button-panel-focus.png", Selector(".svc-panel__add-new-question-container"), t, comparer);
 
-    await t.hover(Selector(".svc-page__footer .svc-element__question-type-selector"));
+    await t.hover(Selector(".svc-page__footer .svc-question-type-selector"));
     await takeElementScreenshot("question-add-type-selector-button-page-hover.png", Selector(".svc-page__footer .svc-element__add-new-question"), t, comparer);
-    await ClientFunction(() => { (document.querySelector(".svc-page__footer .svc-element__question-type-selector") as HTMLDivElement).focus(); })();
+    await ClientFunction(() => { (document.querySelector(".svc-page__footer .svc-question-type-selector") as HTMLDivElement).focus(); })();
     await takeElementScreenshot("question-add-type-selector-button-page-focus.png", Selector(".svc-page__footer .svc-element__add-new-question"), t, comparer);
   });
 });
@@ -2475,7 +2475,7 @@ test("Question types with subtypes", async (t) => {
     await setShowToolbox(false);
 
     await t
-      .click(Selector(".svc-element__question-type-selector"))
+      .click(Selector(".svc-question-type-selector"))
       .hover(getListItemByText("Rating Scale").filterVisible())
       .wait(400)
       .hover(getListItemByText("Labels").nth(1));

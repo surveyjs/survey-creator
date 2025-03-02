@@ -148,7 +148,7 @@ export function getSubToolboxItemByText(text: string) {
 }
 export async function addQuestionByAddQuestionButton(t: TestController, text: string) {
   await t
-    .click(Selector(".svc-element__add-new-question .svc-element__question-type-selector"))
+    .click(Selector(".svc-element__add-new-question .svc-question-type-selector"))
     .click(Selector(".svc-list__item span").withExactText(text).filterVisible());
 }
 
