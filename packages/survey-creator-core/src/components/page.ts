@@ -1,11 +1,11 @@
-import { Action, ActionContainer, AdaptiveActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement, settings as SurveySettings } from "survey-core";
+import { ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, SurveyElement, settings as SurveySettings } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
 import { getLocString } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
-import { DragDropSurveyElements } from "../survey-elements";
+import { DragDropSurveyElements, DropTo } from "../dragdrop-survey-elements";
 
 import "./page.scss";
 
@@ -16,7 +16,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   public questionTypeSelectorModel: any;
   private dragOrClickHelper: DragOrClickHelper;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
-  @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
+  @property({ defaultValue: null }) dragTypeOverMe: DropTo;
   @property({ defaultValue: false }) isDragMe: boolean;
   private updateDragTypeOverMe() {
     if (!this.isDisposed) {
@@ -92,7 +92,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this.checkActionProperties();
       this.dragTypeOverMe = surveyElement.dragTypeOverMe;
       this.isDragMe = surveyElement.isDragMe;
-      if(this.creator.pageEditMode !== "single") {
+      if (this.creator.pageEditMode !== "single") {
         (<any>surveyElement.locTitle).placeholder = () => { return surveyElement.isStartPage ? "pe.startPageTitlePlaceholder" : "pe.pageTitlePlaceholder"; };
         (<any>surveyElement.locDescription).placeholder = "pe.pageDescriptionPlaceholder";
       }
@@ -256,10 +256,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   get css(): string {
     let result = super.getCss();
     if (this.dragDropHelper.draggedElement && this.dragDropHelper.draggedElement.isPage) {
-      if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
+      if (this.dragTypeOverMe === DropTo.Top) {
         result += " svc-question__content--drag-over-top";
       }
-      if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
+      if (this.dragTypeOverMe === DropTo.Bottom) {
         result += " svc-question__content--drag-over-bottom";
       }
     } else {

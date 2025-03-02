@@ -1,7 +1,17 @@
-import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, getIconNameFromProxy, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, renamedIcons, Serializer, SurveyModel } from "survey-core";
+import { DragDropAllowEvent, DragDropCore, getIconNameFromProxy, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
+import { QuestionAdornerViewModel } from "./components/question";
+import { PageAdorner } from "./components/page";
+
+export enum DropTo {
+  Inside = 0,
+  Top,
+  Bottom,
+  Right,
+  Left
+}
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
   const rect = dropTargetNode.getBoundingClientRect();
@@ -12,40 +22,40 @@ export function calculateIsSide(dropTargetNode: HTMLElement, clientX: number) {
   return clientX - rect.left <= DragDropSurveyElements.edgeHeight || rect.right - clientX <= DragDropSurveyElements.edgeHeight;
 }
 
-export function calculateDragOverLocation(clientX: number, clientY: number, rect: DOMRectInit, direction: "top-bottom" | "left-right" = null): DragTypeOverMeEnum {
+export function calculateDragOverLocation(clientX: number, clientY: number, rect: DOMRectInit, direction: "top-bottom" | "left-right" = null): DropTo {
   const tg = rect.height / rect.width;
   const dx = clientX - rect.x;
   const dy = clientY - rect.y;
 
   if (direction == "top-bottom") {
     if (dy >= rect.height / 2) {
-      return DragTypeOverMeEnum.Bottom;
+      return DropTo.Bottom;
     } else {
-      return DragTypeOverMeEnum.Top;
+      return DropTo.Top;
     }
   }
   if (direction == "left-right") {
     if (dx >= rect.width / 2) {
-      return DragTypeOverMeEnum.Right;
+      return DropTo.Right;
     } else {
-      return DragTypeOverMeEnum.Left;
+      return DropTo.Left;
     }
   }
 
   if (dy >= tg * dx) {
     if (dy >= - tg * dx + rect.height) {
-      return DragTypeOverMeEnum.Bottom;
+      return DropTo.Bottom;
     }
     else {
-      return DragTypeOverMeEnum.Left;
+      return DropTo.Left;
     }
   }
   else {
     if (dy >= - tg * dx + rect.height) {
-      return DragTypeOverMeEnum.Right;
+      return DropTo.Right;
     }
     else {
-      return DragTypeOverMeEnum.Top;
+      return DropTo.Top;
     }
   }
 }
@@ -65,7 +75,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   protected prevIsEdge: any = null;
   // protected ghostSurveyElement: IElement = null;
   protected dragOverIndicatorElement: any = null;
-  protected dragOverLocation: DragTypeOverMeEnum;
+  protected dragOverLocation: DropTo;
 
   protected get draggedElementType(): string {
     if (!!this.draggedElement && this.draggedElement.isPage) {
@@ -94,11 +104,16 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
   public startDragSurveyElement(
     event: PointerEvent,
-    draggedElement: any,
+    draggedElementAdorner: QuestionAdornerViewModel | PageAdorner,
     isElementSelected?: boolean
   ): void {
     this.isDraggedElementSelected = isElementSelected;
-    this.startDrag(event, draggedElement);
+    this.startDrag(event, this.getSurveyElenentByAdorner(draggedElementAdorner));
+  }
+
+  private getSurveyElenentByAdorner(adorner: QuestionAdornerViewModel | PageAdorner) {
+    if (adorner instanceof QuestionAdornerViewModel) return adorner.surveyElement;
+    if (adorner instanceof PageAdorner) return adorner.page;
   }
 
   protected getShortcutText(draggedElement: IShortcutText): string {
@@ -231,7 +246,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     // EO drop to question or panel
   }
 
-  protected isDropTargetValid(dropTarget: any, dropTargetNode?: HTMLElement, dragOverLocation: DragTypeOverMeEnum = DragTypeOverMeEnum.Top): boolean {
+  protected isDropTargetValid(dropTarget: any, dropTargetNode?: HTMLElement, dragOverLocation: DropTo = DropTo.Top): boolean {
     if (!dropTarget) return false;
     if (dropTarget === this.draggedElement) return false;
 
@@ -244,7 +259,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         pnl.deepNested = this.getMaximumNestedPanelCount(pnl, 0);
       }
       let len = SurveyHelper.getElementDeepLength(dropTarget);
-      if (dragOverLocation !== DragTypeOverMeEnum.InsideEmptyPanel && dropTarget.isPanel) len--;
+      if (dragOverLocation !== DropTo.Inside && dropTarget.isPanel) len--;
       if (this.maxNestedPanels < len + pnl.deepNested) return false;
     }
 
@@ -294,7 +309,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     return <HTMLElement>result;
   }
-  private isAllowDragOver(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum): boolean {
+  private isAllowDragOver(dropTarget: ISurveyElement, dragOverLocation: DropTo): boolean {
     if (!this.survey || this.survey.onDragDropAllow.isEmpty) return true;
     const allowOptions: DragDropAllowEvent = {
       allow: true,
@@ -308,24 +323,24 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       insertBefore: undefined,
       allowDropNextToAnother: true
     };
-    if (dragOverLocation === DragTypeOverMeEnum.Bottom || dragOverLocation === DragTypeOverMeEnum.Right) {
+    if (dragOverLocation === DropTo.Bottom || dragOverLocation === DropTo.Right) {
       allowOptions.insertAfter = <IElement>dropTarget;
     }
-    if (dragOverLocation === DragTypeOverMeEnum.Top || dragOverLocation === DragTypeOverMeEnum.Left) {
+    if (dragOverLocation === DropTo.Top || dragOverLocation === DropTo.Left) {
       allowOptions.insertBefore = <IElement>dropTarget;
     }
     this.survey.onDragDropAllow.fire(this.survey, allowOptions);
     if (!allowOptions.allowDropNextToAnother) {
-      if (dragOverLocation === DragTypeOverMeEnum.Left) {
-        this.dragOverLocation = DragTypeOverMeEnum.Top;
+      if (dragOverLocation === DropTo.Left) {
+        this.dragOverLocation = DropTo.Top;
       }
-      if (dragOverLocation === DragTypeOverMeEnum.Right) {
-        this.dragOverLocation = DragTypeOverMeEnum.Bottom;
+      if (dragOverLocation === DropTo.Right) {
+        this.dragOverLocation = DropTo.Bottom;
       }
     }
     return allowOptions.allow;
   }
-  public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum): void {
+  public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DropTo): void {
     const oldDragOverIndicatorElement = this.dragOverIndicatorElement;
     const oldDropTarget = this.dropTarget;
     if (this.isSameElement(dropTarget)) {
@@ -342,12 +357,12 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       this.allowDropHere = false;
       return;
     }
-    if (dragOverLocation == DragTypeOverMeEnum.InsideEmptyPanel) {
+    if (dragOverLocation == DropTo.Inside) {
       this.dragOverIndicatorElement = this.dropTarget;
-      this.dragOverIndicatorElement.dragTypeOverMe = DragTypeOverMeEnum.InsideEmptyPanel;
+      this.dragOverIndicatorElement.dragTypeOverMe = DropTo.Inside;
     } else {
       const row = this.parentElement.dragDropFindRow(this.dropTarget);
-      if (!!row && row.elements.length > 1 && (this.dragOverLocation === DragTypeOverMeEnum.Top || this.dragOverLocation === DragTypeOverMeEnum.Bottom)) {
+      if (!!row && row.elements.length > 1 && (this.dragOverLocation === DropTo.Top || this.dragOverLocation === DropTo.Bottom)) {
         row.dragTypeOverMe = this.dragOverLocation;
         this.dragOverIndicatorElement = row;
       } else {
@@ -402,7 +417,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetRect, calcDirection);
     if (!this.draggedElement.isPage && dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
       if (dropTarget.isPage || this.insideContainer) {
-        dragOverLocation = DragTypeOverMeEnum.InsideEmptyPanel;
+        dragOverLocation = DropTo.Inside;
       }
     }
     const options = {
@@ -462,7 +477,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       const survey = dragged.survey;
       const indexOfDraggedPage = survey.pages.indexOf(dragged);
       survey.pages.splice(indexOfDraggedPage, 1);
-      const indexOfDropTarget = survey.pages.indexOf(this.dropTarget) + (this.dragOverLocation === DragTypeOverMeEnum.Top ? 0 : 1);
+      const indexOfDropTarget = survey.pages.indexOf(this.dropTarget) + (this.dragOverLocation === DropTo.Top ? 0 : 1);
       survey.pages.splice(indexOfDropTarget, 0, dragged);
 
       if (indexOfDraggedPage !== indexOfDropTarget) {
@@ -473,10 +488,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     const convertLocation = () => {
       switch (this.dragOverLocation) {
-        case 4: return "top";
-        case 5: return "right";
-        case 6: return "bottom";
-        case 7: return "left";
+        case 1: return "top";
+        case 2: return "bottom";
+        case 3: return "right";
+        case 4: return "left";
         default: return "bottom";
       }
     };
@@ -491,10 +506,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (dest.isPage && dest.elements.length > 0 && !this.insideContainer) return;
     const isTargetIsContainer = dest.isPanel || dest.isPage;
     if (isTargetIsContainer && this.insideContainer) {
-      dest.insertElement(src);
+      (<PanelModelBase>dest).insertElement(src);
     } else {
       const destParent = dest.parent || dest.page;
-      if (destParent) destParent.insertElement(src, dest, convertLocation());
+      if (destParent) (<PanelModelBase>destParent).insertElement(src, dest, convertLocation());
     }
     (page.survey as SurveyModel).stopMovingQuestion();
     return dragged;
