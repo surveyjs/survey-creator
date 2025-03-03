@@ -2,8 +2,8 @@ import { DragDropAllowEvent, DragDropCore, getIconNameFromProxy, IElement, IPane
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
-import { QuestionAdornerViewModel } from "./components/question";
-import { PageAdorner } from "./components/page";
+import type { QuestionAdornerViewModel } from "./components/question";
+import type { PageAdorner } from "./components/page";
 import { SurveyElementAdornerBase } from "./components/action-container-view-model";
 
 export enum DropTo {
@@ -110,11 +110,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   ): void {
     this.isDraggedElementSelected = isElementSelected;
     this.startDrag(event, draggedElement);
-  }
-
-  private getSurveyElenentByAdorner(adorner: QuestionAdornerViewModel | PageAdorner) {
-    if (adorner instanceof QuestionAdornerViewModel) return adorner.surveyElement;
-    if (adorner instanceof PageAdorner) return adorner.page;
   }
 
   protected getShortcutText(draggedElement: IShortcutText): string {
