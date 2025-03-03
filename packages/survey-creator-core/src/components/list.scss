@@ -265,11 +265,11 @@
 
   .svc-list__item--group-selected > .svc-list__item-body {
     @include ctrDefaultBoldFont;
-    color: $primary-foreground;
-    background-color: $primary;
+    color: var(--ctr-list-item-text-color-selected, #fff);
+    background: var(--ctr-list-item-background-color-selected, #19b394);
 
     use {
-      fill: $background;
+      fill: var(--ctr-list-item-icon-color-selected, #ffffff);
     }
   }
 }

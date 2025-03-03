@@ -34,8 +34,8 @@ svc-question {
         border: none;
 
         &:active {
-          opacity: 0.5;
-          background-color: $background-dim;
+          opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
+          background: var(--ctr-survey-question-panel-toolbar-item-background-color-pressed, #f5f5f5);
         }
       }
     }
@@ -1253,16 +1253,16 @@ svc-question,
     padding: 0;
   }
 
-  .sd-table__cell--actions {
-    .sv-action-bar-item:disabled {
-      background: $background;
-      opacity: 1;
+  // .sd-table__cell--actions {
+  //   .sv-action-bar-item:disabled {
+  //     background: $background;
+  //     opacity: 1;
 
-      use {
-        fill: $foreground-light;
-      }
-    }
-  }
+  //     use {
+  //       fill: $foreground-light;
+  //     }
+  //   }
+  // }
 
   .sd-table__row-disabled > .sd-table__cell {
     opacity: 1;

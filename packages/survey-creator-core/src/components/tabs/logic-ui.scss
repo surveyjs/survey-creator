@@ -51,10 +51,10 @@
   outline: none;
   cursor: pointer;
 
-  option {
-    background: $background;
-    color: $foreground;
-  }
+  // option {
+  //   background: $background;
+  //   color: $foreground;
+  // }
 }
 
 .svc-logic-operator:focus {
@@ -328,7 +328,7 @@
   max-width: 100%;
   box-sizing: border-box;
   margin-top: calcSize(2);
-  background: $background;
+  // background: $background;
   box-shadow: 0px 1px 2px 0px var(--ctr-shadow-small-color, var(--sjs-special-shadow, #00000040));
   border-radius: calcSize(0.5);
   padding: calcSize(4) calcSize(5) calcSize(5);
