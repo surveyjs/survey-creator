@@ -8,6 +8,7 @@ import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
 import { PageAdorner } from "../../src/components/page";
 import { QuestionAdornerViewModel } from "../../src/components/question";
 import { TabDesignerViewModel } from "../../src/components/tabs/designer";
+import { TabControlModel } from "../../src/components/side-bar/tab-control-model";
 export * from "../../src/property-grid/matrices";
 
 test("Survey/page title/description placeholders text", () => {
@@ -795,4 +796,13 @@ test("expand/collapse methods", () => {
 
   creator.expandElement(question);
   expect(questionAdorner.collapsed).toBeFalsy();
+});
+test("Create topToolbar on request and setup it, Bug#6665", () => {
+  const creator = new CreatorTester();
+  const tabBar = <TabControlModel>creator.sidebar.sideAreaComponentData;
+  expect(tabBar).toBeTruthy();
+  expect(tabBar.isTopToolbarCreated).toBeFalsy();
+  const topToolbar = tabBar.topToolbar;
+  expect(tabBar.isTopToolbarCreated).toBeTruthy();
+  expect(topToolbar.actions.length > 3).toBeTruthy();
 });

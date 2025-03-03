@@ -446,3 +446,12 @@ test("activatePropertyGridCategory function", (): any => {
   creator.activatePropertyGridCategory("pages");
   expect(propertyGrid.survey.currentPage.name).toBe("pages");
 });
+
+test("creator set theme should update headerView survey property", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.survey.headerView).toBe("advanced");
+  creator.theme = {};
+  expect(creator.survey.headerView).toBe("advanced");
+  creator.theme = { headerView: "basic" };
+  expect(creator.survey.headerView).toBe("basic");
+});

@@ -341,7 +341,7 @@ test("Theme onModified and saveThemeFunc", (): any => {
 
   themeModel.header["headerView"] = "basic";
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
-  expect(saveCount).toBe(0);
+  expect(saveCount).toBe(1);
   expect(saveThemeCount).toBe(5);
   expect(creator.hasPendingThemeChanges).toBeFalsy();
   expect(themePlugin.isModified).toBeTruthy();
