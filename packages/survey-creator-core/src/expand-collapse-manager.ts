@@ -28,7 +28,7 @@ export class ExpandCollapseManager {
     elements.forEach(element => {
       if (element.isQuestion && this._lockQuestions) return;
       const collapsed = this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
-      this.creator.designerStateManager.setElementCollapsed(element, collapsed);
+      this.creator.designerStateManager?.setElementCollapsed(element, collapsed);
     });
     for (let i = this.adorners.length - 1; i >= 0; i--) {
       const element = this.adorners[i].element;
