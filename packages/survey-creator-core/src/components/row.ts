@@ -6,7 +6,7 @@ import {
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import "./row.scss";
-import { DropTo } from "src/dragdrop-survey-elements";
+import { DropTo } from "../dragdrop-survey-elements";
 
 export class RowViewModel extends Base {
   constructor(

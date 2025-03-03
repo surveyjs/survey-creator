@@ -1,4 +1,4 @@
-import { ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, SurveyElement, settings as SurveySettings } from "survey-core";
+import { ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, settings as SurveySettings } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
@@ -18,16 +18,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   @property({ defaultValue: null }) dragTypeOverMe: DropTo;
   @property({ defaultValue: false }) isDragMe: boolean;
-  private updateDragTypeOverMe() {
-    if (!this.isDisposed) {
-      this.dragTypeOverMe = this.page?.dragTypeOverMe;
-    }
-  }
-  private updateIsDragMe() {
-    if (!this.isDisposed) {
-      this.isDragMe = this.page?.isDragMe;
-    }
-  }
+
   private updateShowPlaceholder(visibleRows?: Array<QuestionRowModel>) {
     this.showPlaceholder = !this.isGhost && (visibleRows || this.page.visibleRows).length === 0;
   }
@@ -59,7 +50,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   protected attachElement(surveyElement: PageModel): void {
     super.attachElement(surveyElement);
-    this.dragTypeOverMe = null;
 
     if (!!surveyElement) {
       surveyElement["surveyChangedCallback"] = () => {
@@ -68,20 +58,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       if (this.isGhost) {
         this.addGhostPageSubsribes(surveyElement);
       }
-      surveyElement.registerFunctionOnPropertiesValueChanged(
-        ["dragTypeOverMe"],
-        () => {
-          this.updateDragTypeOverMe();
-        },
-        "dragOver"
-      );
-      surveyElement.registerFunctionOnPropertiesValueChanged(
-        ["isDragMe"],
-        () => {
-          this.updateIsDragMe();
-        },
-        "dragOver"
-      );
       surveyElement.registerFunctionOnPropertiesValueChanged(["visibleRows"], (newValue: Array<QuestionRowModel>) => {
         this.updateShowPlaceholder(newValue);
       }, "updatePlaceholder");
@@ -90,8 +66,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement.updateCustomWidgets();
       surveyElement.setWasShown(true);
       this.checkActionProperties();
-      this.dragTypeOverMe = surveyElement.dragTypeOverMe;
-      this.isDragMe = surveyElement.isDragMe;
       if (this.creator.pageEditMode !== "single") {
         (<any>surveyElement.locTitle).placeholder = () => { return surveyElement.isStartPage ? "pe.startPageTitlePlaceholder" : "pe.pageTitlePlaceholder"; };
         (<any>surveyElement.locDescription).placeholder = "pe.pageDescriptionPlaceholder";
@@ -104,7 +78,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       delete (<any>surveyElement.locTitle).placeholder;
       delete (<any>surveyElement.locDescription).placeholder;
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["elements"], "updatePlaceholder");
-      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["dragTypeOverMe", "isDragMe"], "dragOver");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["visibleRows"], "updatePlaceholder");
       surveyElement["surveyChangedCallback"] = undefined;
