@@ -3,9 +3,9 @@ import { SidebarModel } from "./side-bar-model";
 import { MenuButton } from "../../utils/actions";
 
 export class TabControlModel extends Base {
-  public topToolbar: ActionContainer<MenuButton> = new ActionContainer<MenuButton>();
   public bottomToolbar: ActionContainer<MenuButton> = new ActionContainer<MenuButton>();
   public expandCollapseAction: MenuButton;
+  public onTopToolbarItemCreated: (bar: ActionContainer<MenuButton>) => void;
 
   private updateExpandCollapseAction() {
     this.expandCollapseAction.iconName = this.sidePanel.visible ? "icon-collapse-panel" : "icon-expand-panel";
@@ -36,6 +36,19 @@ export class TabControlModel extends Base {
     this.sidePanel.registerFunctionOnPropertyValueChanged("_visible", () => {
       this.updateExpandCollapseAction();
     });
+  }
+  private topToolbarValue: ActionContainer<MenuButton>;
+  public get isTopToolbarCreated(): boolean {
+    return !!this.topToolbarValue;
+  }
+  public get topToolbar(): ActionContainer<MenuButton> {
+    if(!this.topToolbarValue) {
+      this.topToolbarValue = new ActionContainer<MenuButton>();
+      if(!!this.onTopToolbarItemCreated) {
+        this.onTopToolbarItemCreated(this.topToolbarValue);
+      }
+    }
+    return this.topToolbarValue;
   }
 
   public get sideBarClassName(): string {
