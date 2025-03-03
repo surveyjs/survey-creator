@@ -2,8 +2,6 @@ import { DragDropAllowEvent, DragDropCore, getIconNameFromProxy, IElement, IPane
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
-import type { QuestionAdornerViewModel } from "./components/question";
-import type { PageAdorner } from "./components/page";
 import { SurveyElementAdornerBase } from "./components/action-container-view-model";
 
 export enum DropTo {
@@ -77,6 +75,16 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   // protected ghostSurveyElement: IElement = null;
   protected dragOverIndicatorElement: any = null;
   protected dragOverLocation: DropTo;
+
+  protected get draggedElementAdorner(): SurveyElementAdornerBase | null {
+    if (!this.draggedElement) return null;
+    return SurveyElementAdornerBase.GetAdorner(this.draggedElement);
+  }
+
+  protected get dropTargetAdorner(): SurveyElementAdornerBase {
+    if (!this.dropTarget) return null;
+    return SurveyElementAdornerBase.GetAdorner(this.dropTarget);
+  }
 
   protected get draggedElementType(): string {
     if (!!this.draggedElement && this.draggedElement.isPage) {
@@ -354,11 +362,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       return;
     }
 
-    let dropTargetAdorner: QuestionAdornerViewModel | PageAdorner;
     if (dragOverLocation == DropTo.Inside) {
       this.dragOverIndicatorElement = this.dropTarget;
-      dropTargetAdorner = SurveyElementAdornerBase.GetAdorner(this.dragOverIndicatorElement);
-      dropTargetAdorner && (dropTargetAdorner.dragTypeOverMe = DropTo.Inside);
+      this.dropTargetAdorner.dragTypeOverMe = DropTo.Inside;
     } else {
       const row = this.parentElement.dragDropFindRow(this.dropTarget);
       if (!!row && row.elements.length > 1 && (this.dragOverLocation === DropTo.Top || this.dragOverLocation === DropTo.Bottom)) {
@@ -366,8 +372,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         this.dragOverIndicatorElement = row;
       } else {
         this.dragOverIndicatorElement = this.dropTarget;
-        dropTargetAdorner = SurveyElementAdornerBase.GetAdorner(this.dragOverIndicatorElement);
-        dropTargetAdorner && (dropTargetAdorner.dragTypeOverMe = this.dragOverLocation);
+        this.dropTargetAdorner.dragTypeOverMe = this.dragOverLocation;
       }
     }
     if (this.dragOverIndicatorElement != oldDragOverIndicatorElement) this.removeDragOverMarker(oldDragOverIndicatorElement);
@@ -411,8 +416,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     this.insideContainer = !calculateIsEdge(dropTargetNode, event.clientY) && !calculateIsSide(dropTargetNode, event.clientX);
     const dropTarget = this.getDropTargetByNode(dropTargetNode, event);
 
-    const dropTargetAdorner: QuestionAdornerViewModel | PageAdorner = SurveyElementAdornerBase.GetAdorner(dropTarget);
-    if (!!oldInsideContainer != !!this.insideContainer) { dropTargetAdorner && (dropTargetAdorner.dragTypeOverMe = null); }
+    if (!!oldInsideContainer != !!this.insideContainer) { this.dropTargetAdorner.dragTypeOverMe = null; }
     const dropTargetRect = dropTargetNode.getBoundingClientRect();
     const calcDirection = !settings.dragDrop.allowDragToTheSameLine || (!!this.draggedElement && this.draggedElement.isPage) ? "top-bottom" : null;
     let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetRect, calcDirection);
@@ -454,8 +458,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
   protected onStartDrag(): void {
     // this.ghostSurveyElement = this.createGhostSurveyElement();
-    const draggedElementAdorner: QuestionAdornerViewModel | PageAdorner = SurveyElementAdornerBase.GetAdorner(this.draggedElement);
-    draggedElementAdorner && (draggedElementAdorner.isDragMe = true);
+    if (this.draggedElementAdorner) {
+      this.draggedElementAdorner.isDragMe = true;
+    }
   }
   public moveElementInPanel(panel: IPanel, src: IElement, target: IElement, targetIndex: number) {
     var srcIndex = (<PanelModelBase>src.parent).elements.indexOf(src);
@@ -518,9 +523,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   private removeDragOverMarker(dropTarget: SurveyElement): void {
-    if (!!dropTarget) {
-      const dropTargetAdorner: QuestionAdornerViewModel | PageAdorner = SurveyElementAdornerBase.GetAdorner(dropTarget);
-      dropTargetAdorner && (dropTargetAdorner.dragTypeOverMe = null);
+    if (dropTarget && this.dropTargetAdorner) {
+      this.dropTargetAdorner.dragTypeOverMe = null;
     }
   }
 
@@ -529,9 +533,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     this.removeDragOverMarker(this.prevDropTarget);
     this.removeDragOverMarker(this.dropTarget);
     this.removeDragOverMarker(this.dragOverIndicatorElement);
-    if (!!this.draggedElement) {
-      const draggedElementAdorner: QuestionAdornerViewModel | PageAdorner = SurveyElementAdornerBase.GetAdorner(this.draggedElement);
-      draggedElementAdorner && (draggedElementAdorner.isDragMe = false);
+    if (this.draggedElement && this.draggedElementAdorner) {
+      this.draggedElementAdorner.isDragMe = false;
     }
     super.clear();
   }

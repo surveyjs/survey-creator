@@ -12,7 +12,7 @@ import {
   CssClassBuilder
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
-import { isPanelDynamic } from "../dragdrop-survey-elements";
+import { DropTo, isPanelDynamic } from "../dragdrop-survey-elements";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
 import { listComponentCss } from "./list-theme";
 
@@ -99,6 +99,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({ defaultValue: true }) allowDragging: boolean;
   @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
   public rootElement: HTMLElement;
+
+  @property({ defaultValue: null }) dragTypeOverMe: DropTo;
+  @property({ defaultValue: false }) isDragMe: boolean;
 
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;

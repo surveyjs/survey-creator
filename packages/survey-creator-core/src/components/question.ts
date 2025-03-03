@@ -47,9 +47,6 @@ export interface QuestionBannerParams {
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property({ defaultValue: "" }) currentAddQuestionType: string;
 
-  @property({ defaultValue: null }) dragTypeOverMe: DropTo;
-  @property({ defaultValue: false }) isDragMe: boolean;
-
   placeholderComponent: string;
   placeholderComponentData: any;
 

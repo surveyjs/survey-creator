@@ -16,8 +16,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   public questionTypeSelectorModel: any;
   private dragOrClickHelper: DragOrClickHelper;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
-  @property({ defaultValue: null }) dragTypeOverMe: DropTo;
-  @property({ defaultValue: false }) isDragMe: boolean;
 
   private updateShowPlaceholder(visibleRows?: Array<QuestionRowModel>) {
     this.showPlaceholder = !this.isGhost && (visibleRows || this.page.visibleRows).length === 0;
