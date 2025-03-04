@@ -236,7 +236,7 @@
 
 .svc-toolbox__category-title {
   @include ctrSmallBoldFont;
-  color: $foreground;
+  color: var(--ctr-toolbox-group-header-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   vertical-align: middle;
   display: block;
   flex-grow: 1;

@@ -59,7 +59,7 @@
 }
 
 .svc-remaining-character-counter {
-  @include ctrSmallFont;
+  @include lbrSmallFont;
   display: none;
   position: relative;
   outline: none;
@@ -67,7 +67,7 @@
   padding: 0px;
   vertical-align: top;
   margin-inline-start: calcSize(2);
-  color: var(--ctr-text-decor-text-color-limitation, var(--sjs-layer-1-foreground-50, #00000080));
+  color: var(--ctr-text-decor-text-color-placeholder, var(--sjs-layer-1-foreground-50, #00000080));
 }
 
 .svc-string-editor__border {

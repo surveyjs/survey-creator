@@ -1,8 +1,6 @@
 @forward "./lbr-variables.scss";
 @forward "./ctr-variables.scss";
 
-$foreground: var(--sjs-general-forecolor, var(--foreground, #161616));
-
 $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
 $sd-panel-normal-min-width: 496px;

@@ -83,13 +83,6 @@
 
   .svc-page-selector {
     max-width: 50%;
-
-    .sv-action-bar-item__title {
-      @include textEllipsis;
-
-      color: $foreground;
-      display: inline-block;
-    }
   }
 }
 
@@ -109,7 +102,7 @@
 }
 .svc-test-tab__content .sd-body--empty {
   @include ctrDefaultFont;
-  color: $foreground;
+  color: var(--sjs-layer-1-foreground-100, #000000E6);
   text-align: center;
   overflow: hidden;
   position: static;
