@@ -1,4 +1,4 @@
-import { Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent, PageVisibleChangedEvent, QuestionDropdownModel } from "survey-core";
+import { Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent, PageVisibleChangedEvent, QuestionDropdownModel, ActionContainer } from "survey-core";
 import { notShortCircuitAnd } from "../../utils/utils";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -206,6 +206,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   constructor(private creator: SurveyCreatorModel) {
     creator.addTab({ name: "designer", plugin: this, iconName: "icon-config" });
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
+    this.tabControlModel.onTopToolbarItemCreated = (bar) => {
+      this.setupPropertyGridTabActions(bar);
+    };
     this.propertyGrid = new PropertyGridModel(undefined, creator, creator.getPropertyGridDefinition());
     this.showOneCategoryInPropertyGrid = creator.showOneCategoryInPropertyGrid;
     this.propertyGrid.showOneCategoryInPropertyGrid = this.showOneCategoryInPropertyGrid;
@@ -280,7 +283,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
-      this.setupPropertyGridTabActions();
+      if(this.tabControlModel.isTopToolbarCreated) {
+        this.setupPropertyGridTabActions(this.tabControlModel.topToolbar);
+      }
       this.propertyGrid.survey.onCurrentPageChanged.add((sender: SurveyModel, options: CurrentPageChangedEvent) => {
         const pgTabs = this.tabControlModel.topToolbar.actions;
         pgTabs.forEach(action => {
@@ -298,9 +303,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.propertyGridViewModel.objectSelectionAction.title = this.propertyGrid.survey.currentPage?.title;
     }
   }
-  private setupPropertyGridTabActions() {
+  private setupPropertyGridTabActions(topToolbar: ActionContainer<MenuButton>) {
     const pgTabs = this.getPropertyGridTabActions();
-    this.tabControlModel.topToolbar.setItems(pgTabs);
+    topToolbar.setItems(pgTabs);
     this.propertyGridTab.activateCallback = () => {
       if (!this.propertyGrid.survey.currentPage) return;
 
