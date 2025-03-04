@@ -523,8 +523,11 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   private removeDragOverMarker(dropTarget: SurveyElement): void {
-    if (dropTarget && this.dropTargetAdorner) {
-      this.dropTargetAdorner.dragTypeOverMe = null;
+    if (dropTarget) {
+      const adorner = SurveyElementAdornerBase.GetAdorner(dropTarget);
+      if (adorner) {
+        adorner.dragTypeOverMe = null;
+      }
     }
   }
 
