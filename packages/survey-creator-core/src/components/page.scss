@@ -407,16 +407,16 @@ svc-page {
   margin: var(--ctr-surface-button-contextual-button-margin-vertical, var(--lbr-spacing-x1))
     var(--ctr-surface-button-contextual-button-margin-horizontal, var(--lbr-spacing-x1));
   transition: background-color $creator-transition-duration;
-  &:hover {
-    background-color: var(
-      --ctr-button-contextual-button-background-color-hovered,
-      var(--sjs-primary-background-10, #19b3941a)
-    );
-  }
 
   &:focus-within {
     background: var(
       --ctr-button-contextual-button-background-color-focused,
+      var(--sjs-primary-background-10, #19b3941a)
+    );
+  }
+  &:hover {
+    background-color: var(
+      --ctr-button-contextual-button-background-color-hovered,
       var(--sjs-primary-background-10, #19b3941a)
     );
   }
