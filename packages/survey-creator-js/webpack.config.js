@@ -37,6 +37,7 @@ const buildPlatformJson = {
     "**/*"
   ],
   main: packageJson.name + ".js",
+  module: "fesm/survey-creator-js.js",
   repository: {
     type: "git",
     url: "https://github.com/surveyjs/survey-creator.git"
@@ -125,7 +126,7 @@ module.exports = function (options) {
         },
         {
           test: /\.html$/,
-          exclude: [/node_modules/, require.resolve('./index.html')],
+          exclude: [/node_modules/, require.resolve("./index.html")],
           loader: "html-loader"
         },
         {
@@ -142,8 +143,8 @@ module.exports = function (options) {
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
       library: {
         root: options.libraryName || "SurveyCreator",
-        amd: '[dashedname]',
-        commonjs: '[dashedname]',
+        amd: "[dashedname]",
+        commonjs: "[dashedname]",
       },
       libraryTarget: "umd",
       globalObject: "this",
@@ -223,7 +224,7 @@ module.exports = function (options) {
     ]);
     config.devServer = {
       static: {
-        directory: path.join(__dirname, '.'),
+        directory: path.join(__dirname, "."),
       },
       //host: "0.0.0.0",
       compress: false,

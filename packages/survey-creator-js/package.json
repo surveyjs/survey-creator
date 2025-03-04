@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-js",
-  "version": "2.0.0-rc.8",
+  "version": "2.0.0-rc.9",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -30,12 +30,16 @@
     "visual-regression-tests:file": "testcafe --app \"http-server\" ../../visualRegressionTests/tests/designer/pg-editors.ts --screenshots ../../ --reporter minimal --selector-timeout 1500 --config-file .testcaferc.dev.js",
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
     "remove-package-lock": "rimraf package-lock.json",
-    "build": "webpack --env buildType=dev && webpack --env buildType=prod",
-    "watch:dev": "webpack --env buildType=dev --watch",
+    "build": "webpack --env buildType=dev && webpack --env buildType=prod && rollup -c",
+    "watch:dev": "webpack --env buildType=dev --watch && rollup -c -w",
     "watch:prod": "webpack --env buildType=prod --watch",
     "lint": "eslint ./src"
   },
   "devDependencies": {
+    "@rollup/plugin-alias": "^5.1.1",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-replace": "^6.0.2",
+    "@rollup/plugin-typescript": "^12.1.2",
     "@types/ace": "0.0.44",
     "@types/jest": "^26.0.24",
     "@types/jquery": "3.3.29",
@@ -51,6 +55,8 @@
     "jest-environment-jsdom": "^29.7.0",
     "mini-css-extract-plugin": "^2.9.0",
     "rimraf": "2.5.4",
+    "rollup": "^4.34.8",
+    "rollup-plugin-license": "^3.6.0",
     "sass": "^1.62.1",
     "sass-loader": "^8.0.2",
     "standard-version": "^9.5.0",
@@ -65,7 +71,7 @@
   },
   "dependencies": {
     "survey-core": "../../../survey-library/packages/survey-core/build",
-    "survey-js-ui": "../../../survey-library/packages/survey-js-ui/build",
-    "survey-creator-core": "../survey-creator-core/build"
+    "survey-creator-core": "../survey-creator-core/build",
+    "survey-js-ui": "../../../survey-library/packages/survey-js-ui/build"
   }
 }
