@@ -1,6 +1,7 @@
 @use "../ctr-variables.scss" as mixins;
 
-.svc-creator-popup.sv-popup--modal-popup {
+.svc-creator-popup.sv-popup--modal-popup,
+.svc-creator-popup.sv-popup--modal-overlay {
   .sv-modal-popup__button {
     border-radius: var(--ctr-button-corner-radius-small, var(--sjs-corner-radius-x075));
     padding: var(--ctr-button-padding-vertical-small, var(--sjs-spacing-x150))
