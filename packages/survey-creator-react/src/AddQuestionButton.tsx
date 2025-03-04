@@ -1,11 +1,9 @@
 import * as React from "react";
-import { Action, Base, IAction, PageModel, SurveyModel } from "survey-core";
+import { Action } from "survey-core";
 import {
   attachKey2click,
   Popup,
-  SurveyActionBar,
   ReactElementFactory,
-  SurveyPage,
   SvgIcon,
   SurveyElementBase
 } from "survey-react-ui";
@@ -17,26 +15,27 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
   }
   protected renderTypeSelector(): React.JSX.Element {
     const questionTypeSelectorModel = this.model.questionTypeSelectorModel;
-    return attachKey2click(<button
-      type="button"
-      onClick={(e) => {
-        e.stopPropagation();
-        questionTypeSelectorModel.action();
-      }}
-      className="svc-element__question-type-selector"
-      title={this.model.addNewQuestionText}
-    >
-      <span className="svc-element__question-type-selector-icon">
-        <SvgIcon
-          iconName={questionTypeSelectorModel.iconName}
-          size={"auto"}
-          title={this.model.addNewQuestionText}
-        ></SvgIcon>
-      </span>
-      {this.props.renderPopup === undefined || this.props.renderPopup ?
-        <Popup model={questionTypeSelectorModel.popupModel}></Popup>
-        : null}
-    </button>);
+    return <span className={"svc-question-type-selector"}>{
+      attachKey2click(<button
+        onClick={(e) => {
+          e.stopPropagation();
+          questionTypeSelectorModel.action();
+        }}
+        className="svc-question-type-selector__button"
+        title={this.model.addNewQuestionText}
+      >
+        <span className="svc-question-type-selector__icon">
+          <SvgIcon
+            iconName={questionTypeSelectorModel.iconName}
+            size={"auto"}
+            title={this.model.addNewQuestionText}
+          ></SvgIcon>
+        </span>
+      </button>)}
+    {this.props.renderPopup === undefined || this.props.renderPopup ?
+      <Popup model={questionTypeSelectorModel.popupModel}></Popup>
+      : null}
+    </span>;
   }
   protected renderElement(): React.JSX.Element {
     const addButtonClass = this.props.buttonClass || "svc-btn";

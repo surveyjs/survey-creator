@@ -394,43 +394,45 @@ svc-page {
     var(--ctr-button-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
 }
 
-.svc-element__question-type-selector {
+.svc-question-type-selector {
   position: absolute;
   inset-inline-end: 0;
-
-  appearance: none;
   display: flex;
-  padding: var(--ctr-surface-button-contextual-button-padding-top, var(--lbr-spacing-x1))
-    var(--ctr-surface-button-contextual-button-padding-right, var(--lbr-spacing-x1))
-    var(--ctr-surface-button-contextual-button-padding-bottom, var(--lbr-spacing-x1))
-    var(--ctr-surface-button-contextual-button-padding-left, var(--lbr-spacing-x1));
-  border-radius: var(--ctr-surface-button-contextual-button-corner-radius, var(--lbr-corner-radius-x05));
   box-sizing: border-box;
   border: none;
+  border-radius: var(--ctr-surface-button-contextual-button-corner-radius, var(--lbr-corner-radius-x05));
   background: transparent;
   cursor: pointer;
 
   margin: var(--ctr-surface-button-contextual-button-margin-vertical, var(--lbr-spacing-x1))
     var(--ctr-surface-button-contextual-button-margin-horizontal, var(--lbr-spacing-x1));
-  outline: none;
   transition: background-color $creator-transition-duration;
 
+  &:focus-within {
+    background: var(
+      --ctr-button-contextual-button-background-color-focused,
+      var(--sjs-primary-background-10, #19b3941a)
+    );
+  }
   &:hover {
     background-color: var(
       --ctr-button-contextual-button-background-color-hovered,
       var(--sjs-primary-background-10, #19b3941a)
     );
   }
-
-  &:focus {
-    background: var(
-      --ctr-button-contextual-button-background-color-focused,
-      var(--sjs-primary-background-10, #19b3941a)
-    );
-  }
+}
+.svc-question-type-selector__button {
+  appearance: none;
+  padding: var(--ctr-surface-button-contextual-button-padding-top, var(--lbr-spacing-x1))
+    var(--ctr-surface-button-contextual-button-padding-right, var(--lbr-spacing-x1))
+    var(--ctr-surface-button-contextual-button-padding-bottom, var(--lbr-spacing-x1))
+    var(--ctr-surface-button-contextual-button-padding-left, var(--lbr-spacing-x1));
+  background: transparent;
+  border: none;
+  outline: none;
 }
 
-.svc-element__question-type-selector-icon {
+.svc-question-type-selector__icon {
   width: var(--ctr-surface-button-contextual-button-icon-width, var(--lbr-size-x3));
   height: var(--ctr-surface-button-contextual-button-icon-height, var(--lbr-size-x3));
   display: flex;

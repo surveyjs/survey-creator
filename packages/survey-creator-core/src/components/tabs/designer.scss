@@ -160,19 +160,19 @@ svc-tab-designer {
     padding: var(--ctr-button-padding-vertical, var(--sjs-spacing-x2))
       var(--ctr-button-padding-horizontal-contextual-button, var(--sjs-spacing-x10));
 
-    .svc-element__question-type-selector {
+    .svc-question-type-selector {
+      margin: var(--ctr-button-contextual-button-margin-vertical, var(--sjs-spacing-x1))
+        var(--ctr-button-contextual-button-margin-horizontal, var(--sjs-spacing-x1));
+      border-radius: var(--ctr-button-contextual-button-corner-radius, var(--sjs-corner-radius-x05));
+    }
+    .svc-question-type-selector__button {
       padding: var(--ctr-button-contextual-button-padding-top, var(--sjs-spacing-x1))
         var(--ctr-button-contextual-button-padding-right, var(--sjs-spacing-x1))
         var(--ctr-button-contextual-button-padding-bottom, var(--sjs-spacing-x1))
         var(--ctr-button-contextual-button-padding-left, var(--sjs-spacing-x1));
-
-      margin: var(--ctr-button-contextual-button-margin-vertical, var(--sjs-spacing-x1))
-        var(--ctr-button-contextual-button-margin-horizontal, var(--sjs-spacing-x1));
-
-      border-radius: var(--ctr-button-contextual-button-corner-radius, var(--sjs-corner-radius-x05));
     }
 
-    .svc-element__question-type-selector-icon {
+    .svc-question-type-selector__icon {
       width: var(--ctr-button-contextual-button-icon-width, var(--sjs-font-size-x3));
       height: var(--ctr-button-contextual-button-icon-height, var(--sjs-font-size-x3));
 

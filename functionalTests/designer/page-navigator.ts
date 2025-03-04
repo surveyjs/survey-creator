@@ -3,7 +3,7 @@ import { ClientFunction, Selector } from "testcafe";
 const title = "Page navigator";
 
 export function getAddNewQuestionButton(n = 0) {
-  return Selector(".svc-element__add-new-question > span").withText("Add Question").nth(n);
+  return Selector(".svc-element__add-new-question > .svc-add-new-item-button__text").withText("Add Question").nth(n);
 }
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
