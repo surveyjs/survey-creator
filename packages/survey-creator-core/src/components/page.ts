@@ -48,6 +48,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   protected attachElement(surveyElement: PageModel): void {
     super.attachElement(surveyElement);
+    this.dragTypeOverMe = null;
 
     if (!!surveyElement) {
       surveyElement["surveyChangedCallback"] = () => {

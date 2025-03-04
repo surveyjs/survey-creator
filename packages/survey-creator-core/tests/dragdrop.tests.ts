@@ -1,6 +1,7 @@
 import { SurveyModel, QuestionTextModel } from "survey-core";
 import { DragDropSurveyElements, DropTo } from "../src/dragdrop-survey-elements";
 import { CreatorTester } from "./creator-tester";
+import { QuestionAdornerViewModel } from "../src/components/question";
 
 var assert: any;
 
@@ -15,6 +16,13 @@ test("Move item in row from left to right", () => {
     var q4 = page.addNewQuestion("text", "q4");
     q3.startWithNewLine = false;
     q4.startWithNewLine = false;
+
+    const creator = new CreatorTester();
+    new QuestionAdornerViewModel(creator, q1, null as any);
+    new QuestionAdornerViewModel(creator, q2, null as any);
+    new QuestionAdornerViewModel(creator, q3, null as any);
+    new QuestionAdornerViewModel(creator, q4, null as any);
+
     const ddHelper: any = new DragDropSurveyElements(survey);
     var target = new QuestionTextModel("q2");
 
@@ -46,7 +54,7 @@ test("Move item in row from left to right", () => {
 
     ddHelper.dragOverCore(q3, DropTo.Left);
     expect(ddHelper.dropTarget).toBe(q3);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Left);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Left);
     if (i == 2) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -58,7 +66,7 @@ test("Move item in row from left to right", () => {
 
     ddHelper.dragOverCore(q3, DropTo.Right);
     expect(ddHelper.dropTarget).toBe(q3);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
     if (i == 3) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -70,7 +78,7 @@ test("Move item in row from left to right", () => {
 
     ddHelper.dragOverCore(q4, DropTo.Left);
     expect(ddHelper.dropTarget).toBe(q4);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Left);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Left);
     if (i == 4) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -82,7 +90,7 @@ test("Move item in row from left to right", () => {
 
     ddHelper.dragOverCore(q4, DropTo.Right);
     expect(ddHelper.dropTarget).toBe(q4);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
     if (i == 5) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -136,7 +144,7 @@ test("Move item in row from right to left", () => {
 
     ddHelper.dragOverCore(q3, DropTo.Right);
     expect(ddHelper.dropTarget).toBe(q3);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
     if (i == 2) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -148,7 +156,7 @@ test("Move item in row from right to left", () => {
 
     ddHelper.dragOverCore(q3, DropTo.Left);
     expect(ddHelper.dropTarget).toBe(q3);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Left);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Left);
     if (i == 3) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -160,7 +168,7 @@ test("Move item in row from right to left", () => {
 
     ddHelper.dragOverCore(q2, DropTo.Right);
     expect(ddHelper.dropTarget).toBe(q2);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
     if (i == 4) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -172,7 +180,7 @@ test("Move item in row from right to left", () => {
 
     ddHelper.dragOverCore(q2, DropTo.Left);
     expect(ddHelper.dropTarget).toBe(q2);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Left);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Left);
     if (i == 5) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -225,7 +233,7 @@ test("Move item in row from center to right", () => {
 
     ddHelper.dragOverCore(q4, DropTo.Left);
     expect(ddHelper.dropTarget).toBe(q4);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Left);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Left);
     if (i == 2) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -237,7 +245,7 @@ test("Move item in row from center to right", () => {
 
     ddHelper.dragOverCore(q4, DropTo.Right);
     expect(ddHelper.dropTarget).toBe(q4);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
     if (i == 3) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -291,7 +299,7 @@ test("Move item in row from center to left", () => {
 
     ddHelper.dragOverCore(q2, DropTo.Right);
     expect(ddHelper.dropTarget).toBe(q2);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
     if (i == 2) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -303,7 +311,7 @@ test("Move item in row from center to left", () => {
 
     ddHelper.dragOverCore(q2, DropTo.Left);
     expect(ddHelper.dropTarget).toBe(q2);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Left);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Left);
     if (i == 3) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -336,7 +344,7 @@ test("Move item in prev row from left to multi-row", () => {
 
     ddHelper.dragOverCore(q2, DropTo.Left);
     expect(ddHelper.dropTarget).toBe(q2);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Left);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Left);
     if (i == 0) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -348,7 +356,7 @@ test("Move item in prev row from left to multi-row", () => {
 
     ddHelper.dragOverCore(q2, DropTo.Right);
     expect(ddHelper.dropTarget).toBe(q2);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
     if (i == 1) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -360,7 +368,7 @@ test("Move item in prev row from left to multi-row", () => {
 
     ddHelper.dragOverCore(q3, DropTo.Left);
     expect(ddHelper.dropTarget).toBe(q3);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Left);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Left);
     if (i == 2) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -372,7 +380,7 @@ test("Move item in prev row from left to multi-row", () => {
 
     ddHelper.dragOverCore(q3, DropTo.Right);
     expect(ddHelper.dropTarget).toBe(q3);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
     if (i == 3) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -384,7 +392,7 @@ test("Move item in prev row from left to multi-row", () => {
 
     ddHelper.dragOverCore(q4, DropTo.Left);
     expect(ddHelper.dropTarget).toBe(q4);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Left);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Left);
     if (i == 4) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -396,7 +404,7 @@ test("Move item in prev row from left to multi-row", () => {
 
     ddHelper.dragOverCore(q4, DropTo.Right);
     expect(ddHelper.dropTarget).toBe(q4);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
     if (i == 5) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -429,7 +437,7 @@ test("Move item in prev row from right to multi-row", () => {
 
     ddHelper.dragOverCore(q2, DropTo.Left);
     expect(ddHelper.dropTarget).toBe(q2);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Left);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Left);
     if (i == 0) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -441,7 +449,7 @@ test("Move item in prev row from right to multi-row", () => {
 
     ddHelper.dragOverCore(q2, DropTo.Right);
     expect(ddHelper.dropTarget).toBe(q2);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
     if (i == 1) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -453,7 +461,7 @@ test("Move item in prev row from right to multi-row", () => {
 
     ddHelper.dragOverCore(q3, DropTo.Left);
     expect(ddHelper.dropTarget).toBe(q3);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Left);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Left);
     if (i == 2) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -465,7 +473,7 @@ test("Move item in prev row from right to multi-row", () => {
 
     ddHelper.dragOverCore(q3, DropTo.Right);
     expect(ddHelper.dropTarget).toBe(q3);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
     if (i == 3) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -477,7 +485,7 @@ test("Move item in prev row from right to multi-row", () => {
 
     ddHelper.dragOverCore(q4, DropTo.Left);
     expect(ddHelper.dropTarget).toBe(q4);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Left);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Left);
     if (i == 4) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -489,7 +497,7 @@ test("Move item in prev row from right to multi-row", () => {
 
     ddHelper.dragOverCore(q4, DropTo.Right);
     expect(ddHelper.dropTarget).toBe(q4);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
     if (i == 5) {
       ddHelper.doDrop();
       expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
@@ -522,7 +530,7 @@ test("Move item multi-row to single-row bottom, from bottom to top", () => {
 
     ddHelper.dragOverCore(q1, DropTo.Bottom);
     expect(ddHelper.dropTarget).toBe(q1);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Bottom);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Bottom);
     ddHelper.doDrop();
     var arr = ["q2", "q3", "q4"];
     arr.splice(i - 2, 1);
@@ -555,7 +563,7 @@ test("Move item multi-row to single-row top, from bottom to top", () => {
 
     ddHelper.dragOverCore(q1, DropTo.Top);
     expect(ddHelper.dropTarget).toBe(q1);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Top);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Top);
     ddHelper.doDrop();
     var arr = ["q2", "q3", "q4"];
     arr.splice(i - 2, 1);
@@ -588,7 +596,7 @@ test("Move item multi-row to single-row bottom, from top to bottom", () => {
 
     ddHelper.dragOverCore(q1, DropTo.Bottom);
     expect(ddHelper.dropTarget).toBe(q1);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Bottom);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Bottom);
     ddHelper.doDrop();
     var arr = ["q2", "q3", "q4"];
     arr.splice(i - 2, 1);
@@ -621,7 +629,7 @@ test("Move item multi-row to single-row top, from top to bottom", () => {
 
     ddHelper.dragOverCore(q1, DropTo.Top);
     expect(ddHelper.dropTarget).toBe(q1);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Top);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Top);
     ddHelper.doDrop();
     var arr = ["q2", "q3", "q4"];
     arr.splice(i - 2, 1);
@@ -649,7 +657,7 @@ test("Move item between pages", () => {
 
   ddHelper.dragOverCore(q3, DropTo.Top);
   expect(ddHelper.dropTarget).toBe(q3);
-  expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Top);
+  expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Top);
   ddHelper.doDrop();
   expect(page.elements.map(e => e.name)).toStrictEqual(["q2"]); // "End. The first page q2"
   expect(page2.elements.map(e => e.name)).toStrictEqual(["q1", "q3"]); // "End. The last page is q1, q3"
@@ -679,7 +687,7 @@ test("Move item multi-row to single-row top, between pages", () => {
 
     ddHelper.dragOverCore(q1, DropTo.Top);
     expect(ddHelper.dropTarget).toBe(q1);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Top);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Top);
     ddHelper.doDrop();
     var arr = ["q2", "q3", "q4"];
     arr.splice(i - 2, 1);
@@ -714,7 +722,7 @@ test("Move item multi-row to single-row bottom, between pages", () => {
 
     ddHelper.dragOverCore(q1, DropTo.Bottom);
     expect(ddHelper.dropTarget).toBe(q1);
-    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Bottom);
+    expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Bottom);
     ddHelper.doDrop();
     var arr = ["q2", "q3", "q4"];
     arr.splice(i - 2, 1);
@@ -741,7 +749,7 @@ test("Move item from nowhere (creator toolbox) to page", () => {
 
   ddHelper.dragOverCore(q2, DropTo.Top);
   expect(ddHelper.dropTarget).toBe(q2);
-  expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Top);
+  expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Top);
   ddHelper.doDrop();
   expect(page.rows.length).toBe(2); // Three are two rows
   expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // First row q1
@@ -767,7 +775,7 @@ test("Move new question under row with several questions", () => {
 
   ddHelper.dragOverCore(q3, DropTo.Top, true);
   expect(ddHelper.dropTarget).toBe(q3);
-  expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Top);
+  expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Top);
   ddHelper.doDrop();
 
   expect(page.rows.length).toBe(3); // "There are 3 rows");
@@ -795,7 +803,7 @@ test("Move new question inside the row with several questions", () => {
 
   ddHelper.dragOverCore(q2, DropTo.Right, true);
   expect(ddHelper.dropTarget).toBe(q2);
-  expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+  expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
   ddHelper.doDrop();
 
   expect(page.rows.length).toBe(2); // "There are 2 rows");
@@ -828,7 +836,7 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
   ddHelper.draggedElement = q2;
   ddHelper.dragOverCore(q3, DropTo.Right);
   expect(ddHelper.dropTarget).toBe(q3);
-  expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+  expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
   ddHelper.doDrop();
 
   expect(page.rows.length).toBe(2); // "There are 2 rows");
@@ -858,7 +866,7 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
   ddHelper.draggedElement = q3;
   ddHelper.dragOverCore(q2, DropTo.Right);
   expect(ddHelper.dropTarget).toBe(q2);
-  expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DropTo.Right);
+  expect(ddHelper.dropTargetAdorner.dragTypeOverMe).toBe(DropTo.Right);
   ddHelper.doDrop();
 
   expect(page.rows.length).toBe(1); // "There are 1 rows");

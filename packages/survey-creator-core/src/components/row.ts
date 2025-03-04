@@ -8,13 +8,14 @@ import { SurveyCreatorModel } from "../creator-base";
 import "./row.scss";
 import { DropTo } from "../dragdrop-survey-elements";
 
-export class RowViewModel extends Base {
+export class RowViewModel extends Base { // TODO
   constructor(
     public creator: SurveyCreatorModel,
     public row: QuestionRowModel,
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super();
+    // this.dragTypeOverMe = this.row.dragTypeOverMe; //TODO
   }
   public subscribeElementChanges() {
     this.row.onPropertyChanged.add(this.rowDragTypeOverMeChanged);
