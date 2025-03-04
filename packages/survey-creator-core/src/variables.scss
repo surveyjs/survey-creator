@@ -2,7 +2,6 @@
 @forward "./ctr-variables.scss";
 
 $foreground: var(--sjs-general-forecolor, var(--foreground, #161616));
-$foreground-light: var(--sjs-general-forecolor-light, var(--foreground-light, #909090));
 
 $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 

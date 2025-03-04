@@ -35,7 +35,7 @@
   }
 
   use {
-    fill: $foreground-light;
+    fill: var(--ctr-survey-contextual-button-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
     transition: fill $creator-transition-duration;
   }
 }

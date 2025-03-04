@@ -252,7 +252,7 @@
 }
 
 .svc-toolbox__category-header__button {
-  fill: $foreground-light;
+  fill: var(--ctr-toolbox-group-header-expand-button-color, var(--sjs-layer-1-foreground-75, #000000bf));
   height: var(--ctr-toolbox-item-icon-height, var(--sjs-font-size-x3));
   width: var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3));
 }

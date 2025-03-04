@@ -96,7 +96,7 @@
     visibility: visible;
     cursor: initial;
     use {
-      fill: $foreground-light;
+      fill: (--ctr-data-table-row-drag-area-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
     }
   }
 }

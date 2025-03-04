@@ -54,7 +54,7 @@
   justify-content: flex-end;
   align-items: flex-end;
   padding: 0px;
-  color: $foreground-light;
+  color: var(--ctr-editor-label-color, var(--sjs-layer-3-foreground-50, #00000080));
   position: absolute;
   inset-inline-end: calcSize(0.75);
   inset-block-end: calcSize(0.5);
