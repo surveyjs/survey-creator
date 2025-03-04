@@ -1,6 +1,6 @@
 import {
-  Base, ImageItemValue, ItemValue, Model, QuestionCheckboxModel, JsonObjectProperty,
-  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings, SurveyModel, DragTypeOverMeEnum
+  Base, ImageItemValue, ItemValue, QuestionCheckboxModel, JsonObjectProperty,
+  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, SurveyModel
 } from "survey-core";
 import { ImageItemValueWrapperViewModel } from "../src/components/image-item-value";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
@@ -9,8 +9,7 @@ import { QuestionRatingAdornerViewModel } from "../src/components/question-ratin
 import { CreatorTester } from "./creator-tester";
 import { LogoImageViewModel } from "../src/components/header/logo-image";
 import { imageMimeTypes } from "../src/utils/utils";
-import { calculateDragOverLocation } from "../src/survey-elements";
-import { settings as creatorSettings } from "../src/creator-settings";
+import { calculateDragOverLocation, DropTo } from "../src/dragdrop-survey-elements";
 
 beforeEach(() => { });
 
@@ -983,15 +982,15 @@ test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly",
 
 test("calculateDragOverLocation", () => {
   let location = calculateDragOverLocation(150, 120, { x: 100, y: 100, width: 300, height: 100 });
-  expect(location).toBe(DragTypeOverMeEnum.Left);
+  expect(location).toBe(DropTo.Left);
   // creatorSettings.dragDrop.allowDragToTheSameLine = false;
   location = calculateDragOverLocation(150, 120, { x: 100, y: 100, width: 300, height: 100 }, "top-bottom");
-  expect(location).toBe(DragTypeOverMeEnum.Top);
+  expect(location).toBe(DropTo.Top);
   location = calculateDragOverLocation(350, 170, { x: 100, y: 100, width: 300, height: 100 }, "top-bottom");
-  expect(location).toBe(DragTypeOverMeEnum.Bottom);
+  expect(location).toBe(DropTo.Bottom);
   // creatorSettings.dragDrop.allowDragToTheSameLine = true;
   location = calculateDragOverLocation(350, 170, { x: 100, y: 100, width: 300, height: 100 });
-  expect(location).toBe(DragTypeOverMeEnum.Right);
+  expect(location).toBe(DropTo.Right);
 });
 
 test("ImageItemValueWrapperViewModel pass context to onOpenFileChooser event", () => {
