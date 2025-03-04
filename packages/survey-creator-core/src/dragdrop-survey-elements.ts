@@ -5,11 +5,11 @@ import { SurveyHelper } from "./survey-helper";
 import { SurveyElementAdornerBase } from "./components/action-container-view-model";
 
 export enum DropTo {
-  Inside = 0,
-  Top,
-  Bottom,
-  Right,
-  Left
+  Inside = "inside",
+  Top = "top",
+  Bottom = "bottom",
+  Right = "right",
+  Left = "left"
 }
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
