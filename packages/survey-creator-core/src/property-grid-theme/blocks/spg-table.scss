@@ -113,11 +113,11 @@
   }
 }
 
-.spg-table__cell--actions > .spg-matrixdynamic__drag-element {
-  display: inline-block;
-  margin-top: calcSize(0.5);
-  cursor: move;
-}
+// .spg-table__cell--actions > .spg-matrixdynamic__drag-element {
+//   display: inline-block;
+//   margin-top: calcSize(0.5);
+//   cursor: move;
+// }
 
 .spg-table__cell--header {
   background: var(--ctr-data-table-row-background-color-header, var(--sjs-layer-3-background-500, #f4f4f4ff));
