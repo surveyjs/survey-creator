@@ -265,11 +265,11 @@
 
   .svc-list__item--group-selected > .svc-list__item-body {
     @include ctrDefaultBoldFont;
-    color: var(--ctr-list-item-text-color-selected, #fff);
-    background: var(--ctr-list-item-background-color-selected, #19b394);
+    color: var(--ctr-list-item-text-color-selected, var(--sjs-primary-foreground-100, #ffffffff));
+    background: var(--ctr-list-item-background-color-selected, var(--sjs-primary-background-500, #19b394ff));
 
     use {
-      fill: var(--ctr-list-item-icon-color-selected, #ffffff);
+      fill: var(--ctr-list-item-icon-color-selected, var(--sjs-primary-foreground-100, #ffffffff));
     }
   }
 }
