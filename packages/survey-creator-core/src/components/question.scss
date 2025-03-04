@@ -396,15 +396,11 @@ svc-question {
     justify-content: left;
   }
 
-  .svc-survey-element-toolbar-item__icon {
-    &:last-child {
-      margin-inline-start: 0;
-    }
-  }
-
   .svc-survey-element-toolbar-item__icon:last-child {
+    margin-inline-start: 0;
+
     use {
-      fill: $primary;
+      fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, var(--sjs-secondary-background-500, #19b394ff));
     }
   }
 }
@@ -466,38 +462,45 @@ svc-question {
 }
 
 .svc-question__content--collapsed-drag-over-inside:not(.svc-question__content--dragged) {
-  box-shadow: 0 0 0 2px $primary;
-  background: $primary-light;
+  box-shadow: var(--ctr-survey-panel-border-width-overing, var(--lbr-stroke-x2)) solid
+    var(--ctr-survey-panel-border-color-overing, var(--sjs-primary-background-500, #19b394ff));
+  background: linear-gradient(
+      0deg,
+      var(--ctr-survey-panel-background-color-overing, var(--sjs-primary-background-10, #19b3941a)) 0%,
+      var(--ctr-survey-panel-background-color-overing, var(--sjs-primary-background-10, #19b3941a)) 100%
+    ),
+    var(--lbr-question-panel-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+
   animation: collapsed-drag-over-inside-blinking 1s;
 }
 
 @keyframes collapsed-drag-over-inside-blinking {
   0% {
-    background: $primary-light;
+    background: var(--ctr-survey-panel-background-color-overing, var(--sjs-primary-background-10, #19b3941a));
   }
   40% {
-    background: $primary-light;
+    background: var(--ctr-survey-panel-background-color-overing, var(--sjs-primary-background-10, #19b3941a));
   }
   50% {
     background: transparent;
   }
   55% {
-    background: $primary-light;
+    background: var(--ctr-survey-panel-background-color-overing, var(--sjs-primary-background-10, #19b3941a));
   }
   65% {
     background: transparent;
   }
   70% {
-    background: $primary-light;
+    background: var(--ctr-survey-panel-background-color-overing, var(--sjs-primary-background-10, #19b3941a));
   }
   80% {
     background: transparent;
   }
   85% {
-    background: $primary-light;
+    background: var(--ctr-survey-panel-background-color-overing, var(--sjs-primary-background-10, #19b3941a));
   }
   100% {
-    background: $primary-light;
+    background: var(--ctr-survey-panel-background-color-overing, var(--sjs-primary-background-10, #19b3941a));
   }
 }
 
@@ -638,9 +641,14 @@ svc-question {
 .svc-question__content--drag-over-inside,
 .svc-hovered > .svc-question__content--drag-over-inside {
   .svc-panel__placeholder_frame {
-    box-shadow: 0 0 0 1px $primary;
-    border: 1px solid $primary;
-    background: $primary-light;
+    box-shadow: 0 0 0 1px var(--ctr-survey-panel-border-color-overing, var(--sjs-primary-background-500, #19b394ff));
+    border: 1px solid var(--ctr-survey-panel-border-color-overing, var(--sjs-primary-background-500, #19b394ff));
+    background: linear-gradient(
+        0deg,
+        var(--ctr-survey-panel-background-color-overing, var(--sjs-primary-background-10, #19b3941a)) 0%,
+        var(--ctr-survey-panel-background-color-overing, var(--sjs-primary-background-10, #19b3941a)) 100%
+      ),
+      var(--lbr-question-panel-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 
     & > .svc-question__content-actions {
       opacity: 1;
@@ -1092,7 +1100,7 @@ svc-question,
     display: none;
 
     use {
-      fill: $primary;
+      fill: var(--ctr-survey-contextual-button-icon-color-positive, var(--sjs-primary-background-500, #19b394ff));
     }
   }
 
@@ -1146,7 +1154,7 @@ svc-question,
   display: none;
 
   use {
-    fill: $primary;
+    fill: var(--ctr-survey-contextual-button-icon-color-positive, var(--sjs-primary-background-500, #19b394ff));
   }
 }
 

@@ -1,12 +1,6 @@
 @forward "./lbr-variables.scss";
 @forward "./ctr-variables.scss";
 
-$primary: var(--sjs-primary-backcolor, var(--primary, #19b394));
-$primary-light: var(--sjs-primary-backcolor-light, var(--primary-light, rgba(25, 179, 148, 0.1)));
-$primary-background-dark: var(--sjs-primary-backcolor-dark, rgb(20, 164, 139));
-$primary-foreground: var(--sjs-primary-forecolor, var(--primary-foreground, #fff));
-$primary-foreground-disabled: var(--sjs-primary-forecolor-light, var(--primary-foreground-disabled, rgba(#fff, 0.25)));
-
 $foreground: var(--sjs-general-forecolor, var(--foreground, #161616));
 $foreground-light: var(--sjs-general-forecolor-light, var(--foreground-light, #909090));
 
