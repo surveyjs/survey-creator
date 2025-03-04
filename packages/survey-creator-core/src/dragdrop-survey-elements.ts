@@ -495,10 +495,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     const convertLocation = () => {
       switch (this.dragOverLocation) {
-        case 1: return "top";
-        case 2: return "bottom";
-        case 3: return "right";
-        case 4: return "left";
+        case "top": return "top";
+        case "bottom": return "bottom";
+        case "right": return "right";
+        case "left": return "left";
         default: return "bottom";
       }
     };
