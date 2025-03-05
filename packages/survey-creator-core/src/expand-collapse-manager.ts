@@ -35,7 +35,8 @@ export class ExpandCollapseManager {
       if (element.isQuestion && this._lockQuestions) continue;
       if (elements.indexOf(element) == -1) continue;
       if (this.adorners[i].allowExpandCollapse) {
-        let newState = this.creator.designerStateManager.getElementCollapsed(element);
+        // const newState = this.creator.designerStateManager.getElementCollapsed(element);
+        const newState = this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
         this.adorners[i].collapsed = newState;
       }
     }
