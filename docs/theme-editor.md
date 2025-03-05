@@ -24,6 +24,30 @@ const creatorOptions = {
 const creator = new SurveyCreatorModel(creatorOptions);
 ```
 
+SurveyJS is shipped with a number of [predefined UI themes for surveys](https://surveyjs.io/form-library/documentation/manage-default-themes-and-styles#add-surveyjs-themes-to-your-application). By default, users can customize only the Default theme. To add other themes to Theme Editor, use the following code:
+
+```js
+// In modular applications
+import SurveyTheme from "survey-core/themes"; // An object that contains all theme configurations
+import { registerSurveyTheme } from "survey-creator-core";
+
+registerSurveyTheme(SurveyTheme);
+```
+
+```html
+<!-- In classic script applications -->
+<head>
+    <!-- ... -->
+    <script type="text/javascript" src="https://unpkg.com/survey-core/themes/index.min.js"></script>
+    <!-- ... -->
+</head>
+<body>
+  <script>
+    SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
+  </script>
+</body>
+```
+
 ## Apply a Custom Theme
 
 Theme Editor produces a JSON object with CSS variables and other theme settings. For information on how to obtain this object and apply it to a survey, refer to the following help topic in Form Library documentation: [Create a Custom Theme](/form-library/documentation/manage-default-themes-and-styles#create-a-custom-theme).

@@ -50,13 +50,10 @@ const creatorOptions = {
 
 const creator = new SurveyCreator.SurveyCreator(creatorOptions);
 
-// In Vue and modular applications:
-import { SurveyCreator } from "survey-creator-knockout";
-const creator = new SurveyCreator(creatorOptions);
 // In React:
 import { SurveyCreator } from "survey-creator-react";
 const creator = new SurveyCreator(creatorOptions);
-// In Angular:
+// In other modular applications:
 import { SurveyCreatorModel } from "survey-creator-core";
 const creator = new SurveyCreatorModel(creatorOptions);
 ```

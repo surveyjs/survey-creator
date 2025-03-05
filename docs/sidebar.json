@@ -31,6 +31,10 @@
       ]
     },
     {
+      "Name": "survey-creator-interface-themes",
+      "Title": "Themes & Styles"
+    },
+    {
       "Name": "property-grid-customization",
       "Title": "Property Grid Customization"
     },
@@ -57,20 +61,6 @@
     {
       "Name": "customize-question-types",
       "Title": "Customize Question Types"
-    },
-    {
-      "Name": "migration-from-survey-creator-v1",
-      "Title": "Migration from Survey Creator V1",
-      "Items": [
-        {
-          "Name": "Creator-V2-Whats-New",
-          "Title": "What's New in Survey Creator V2"
-        },
-        {
-          "Name": "migration-guide-to-survey-creator-v2",
-          "Title": "Migration to Survey Creator V2"
-        }
-      ]
     },
     {
       "Name": "End-User-Guide",
