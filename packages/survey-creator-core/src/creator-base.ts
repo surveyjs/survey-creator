@@ -1,8 +1,8 @@
 import {
-  Base, SurveyModel, ListModel, Question, PanelModel, PageModel, PopupModel, property, IElement, Serializer,
-  JsonObjectProperty, ActionContainer, AdaptiveActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
-  QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
-  EventBase, hasLicense, slk, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
+  Base, SurveyModel, Question, PanelModel, PageModel, PopupModel, property, IElement, Serializer,
+  JsonObjectProperty, ActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
+  QuestionSelectBase, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
+  EventBase, hasLicense, slk, settings as SurveySettings, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
   CssClassBuilder,
@@ -11,7 +11,7 @@ import {
   SvgThemeSets
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
-import { editorLocalization, setupLocale } from "./editorLocalization";
+import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
@@ -3100,7 +3100,10 @@ export class SurveyCreatorModel extends Base
     clearTimeout(this.currentFocusTimeout);
     this.currentFocusTimeout = setTimeout(() => {
       this.currentFocusInterval = setInterval(() => {
-        const el = document.getElementById(selEl.id);
+        let el = document.getElementById(selEl.id);
+        if (selEl.getType() === "matrixdropdowncolumn") {
+          el = this.getNodeByColumnModel(selEl);
+        }
         if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
           if (!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
           clearInterval(this.currentFocusInterval);
@@ -3130,9 +3133,19 @@ export class SurveyCreatorModel extends Base
     }, 100);
   }
 
+  private getNodeByColumnModel(selEl: MatrixDropdownColumn): HTMLElement {
+    const matrixEl = <QuestionMatrixDropdownModelBase>selEl.colOwner;
+    const index = matrixEl.columns.indexOf(selEl);
+    let node = <HTMLElement>document.querySelectorAll(`#${matrixEl.id} .svc-matrix-cell`)[index];
+    if (!node) {
+      node = document.getElementById(matrixEl.id);
+    }
+    return node;
+  }
   private getSelectedSurveyElement(): IElement {
     var sel: any = this.selectedElement;
     if (!sel || sel.getType() == "survey") return null;
+    if (sel.getType() === "matrixdropdowncolumn" && sel.isInteractiveDesignElement) return sel;
     return sel.isInteractiveDesignElement && sel.id ? sel : null;
   }
   private onSelectingElement(val: Base): Base {
