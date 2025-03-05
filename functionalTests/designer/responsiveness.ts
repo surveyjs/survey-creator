@@ -298,7 +298,7 @@ test("Property grid editor popup", async (t) => {
     .click(question1, { offsetX: 5, offsetY: 5 })
     .click(Selector(".svc-question__content-actions .svc-survey-element-toolbar__item[title=\"Open settings\"]").filterVisible())
     .click(Selector("span").withExactText("Set Default Answer"))
-    .expect(Selector(".sv-popup--menu-phone").visible).ok();
+    .expect(Selector(".sv-popup--modal-overlay").visible).ok();
 });
 
 test("Question type popup - wide", async (t) => {
