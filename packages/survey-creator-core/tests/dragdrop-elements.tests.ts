@@ -1,6 +1,8 @@
 import { Question, QuestionTextModel, SurveyModel } from "survey-core";
 import { DragDropSurveyElements, calculateDragOverLocation, calculateIsEdge, calculateIsSide, DropTo } from "../src/dragdrop-survey-elements";
 import { CreatorTester } from "./creator-tester";
+import { QuestionAdornerViewModel } from "../src/components/question";
+import { PageAdorner } from "../src/components/page";
 
 test("calculateVerticalMiddleOfHTMLElement", () => {
   let ddHelper = new DragDropSurveyElements(null);
@@ -478,6 +480,11 @@ test("drag drop existing to top/bottom", () => {
   const q2 = survey.getQuestionByName("q2");
   const q3 = survey.getQuestionByName("q3");
 
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
+
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
 
@@ -525,6 +532,11 @@ test("drag drop existing to left/right", () => {
   const q1 = survey.getQuestionByName("q1");
   const q2 = survey.getQuestionByName("q2");
   const q3 = survey.getQuestionByName("q3");
+
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
 
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
@@ -773,6 +785,11 @@ test("drag drop first to left of last item", () => {
   const q2 = survey.getQuestionByName("q2");
   const q3 = survey.getQuestionByName("q3");
 
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
+
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
 
@@ -806,6 +823,11 @@ test("drag drop first to right of last item", () => {
   const q2 = survey.getQuestionByName("q2");
   const q3 = survey.getQuestionByName("q3");
 
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
+
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
 
@@ -837,6 +859,12 @@ test("drag drop to panel vertical", () => {
   const q1 = new QuestionTextModel("q1");
   const q2 = new QuestionTextModel("q2");
   const q3 = new QuestionTextModel("q3");
+
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, p1, null as any);
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
 
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
@@ -925,6 +953,12 @@ test("drag drop to panel horizontal", () => {
   const q1 = new QuestionTextModel("q1");
   const q2 = new QuestionTextModel("q2");
   const q3 = new QuestionTextModel("q3");
+
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, p1, null as any);
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
 
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
@@ -1037,6 +1071,9 @@ test("Undo/redo question dragged from last page", (): any => {
   expect(creator.undoRedoManager.canRedo()).toBeFalsy();
 
   ddHelper.draggedElement = creator.survey.getQuestionByName("question2");
+
+  new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("question1"), null as any);
+
   ddHelper.dragOverCore(creator.survey.getQuestionByName("question1"), DropTo.Bottom);
   creator.startUndoRedoTransaction("drag/drop");
   ddHelper.doDrop();
@@ -1084,6 +1121,10 @@ test("drag drop panel before another panel in left, Bug #4574", () => {
 
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = p2;
+
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, p1, null as any);
+  new QuestionAdornerViewModel(creator, p2, null as any);
 
   ddHelper.dragOverCore(p1, DropTo.Left);
   ddHelper.doDrop();
@@ -1159,6 +1200,10 @@ test("Support onDragDropAllow, Bug#4572", (): any => {
   const ddHelper: any = creator.dragDropSurveyElements;
   const q1 = creator.survey.getQuestionByName("question1");
   const q2 = creator.survey.getQuestionByName("question2");
+
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+
   ddHelper.draggedElement = q2;
   ddHelper["allowDropHere"] = true;
   ddHelper.dragOverCore(q1, DropTo.Top);
@@ -1216,6 +1261,16 @@ test("Test onDragOverLocationCalculating", (): any => {
   const q1 = creator.survey.getQuestionByName("question1");
   const q2 = creator.survey.getQuestionByName("question2");
   const q3 = creator.survey.getQuestionByName("question3");
+
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
+
+  const [p1, p2, p3] = creator.survey.pages;
+  new PageAdorner(creator, p1);
+  new PageAdorner(creator, p2);
+  new PageAdorner(creator, p3);
+
   ddHelper.draggedElement = q2;
   ddHelper["allowDropHere"] = true;
   ddHelper["findDropTargetNodeFromPoint"] = () => ({ getBoundingClientRect: () => ({ x: 10, y: 10, width: 200, height: 100 }) });
@@ -1266,6 +1321,11 @@ test("dragOverLocation calculation for empty and non-empty pages", (): any => {
   const p1 = creator.survey.pages[0];
   const p2 = creator.survey.pages[1];
   const p3 = creator.survey.pages[2];
+
+  new QuestionAdornerViewModel(creator, p1, null as any);
+  new QuestionAdornerViewModel(creator, p2, null as any);
+  new QuestionAdornerViewModel(creator, p3, null as any);
+
   ddHelper.draggedElement = p3;
   ddHelper["allowDropHere"] = true;
   ddHelper["findDropTargetNodeFromPoint"] = () => ({ getBoundingClientRect: () => ({ x: 10, y: 10, width: 200, height: 100 }) });
@@ -1316,6 +1376,10 @@ test("Support onDragDropAllow&allowDropNextToAnother, #5621", (): any => {
   const ddHelper: any = creator.dragDropSurveyElements;
   const q1 = creator.survey.getQuestionByName("question1");
   const q2 = creator.survey.getQuestionByName("question2");
+
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+
   ddHelper.draggedElement = q2;
   ddHelper.dragOverCore(q1, DropTo.Left);
   expect(ddHelper.dragOverLocation).toBe(DropTo.Top);
@@ -1345,6 +1409,10 @@ test("drag drop one empty panel to other empty panel - https://github.com/survey
   const survey = new SurveyModel(json);
   const p1 = survey.getPanelByName("panel1");
   const p2 = survey.getPanelByName("panel2");
+
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, p1, null as any);
+  new QuestionAdornerViewModel(creator, p2, null as any);
 
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = p2;
@@ -1435,6 +1503,10 @@ test("onQuestionAdded doesn't fire when drag drop existing element", () => {
   const q1 = survey.getQuestionByName("q1");
   const q3 = survey.getQuestionByName("q3");
 
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
+
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
 
@@ -1470,6 +1542,10 @@ test("onQuestionAdded fires when drag drop new element", () => {
 
   const q1 = survey.getQuestionByName("q1");
   const q4 = new QuestionTextModel("q4");
+
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q4, null as any);
 
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q4;
@@ -1516,6 +1592,11 @@ test("drag drop page", () => {
 
   const [p1, p2, p3] = survey.pages;
 
+  const creator = new CreatorTester();
+  new PageAdorner(creator, p1);
+  new PageAdorner(creator, p2);
+  new PageAdorner(creator, p3);
+
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = p3;
 
@@ -1541,6 +1622,11 @@ test("drag drop page check draggedFrom property", () => {
   const survey = new SurveyModel(json);
 
   const [p1, p2, p3] = survey.pages;
+
+  const creator = new CreatorTester();
+  new PageAdorner(creator, p1);
+  new PageAdorner(creator, p2);
+  new PageAdorner(creator, p3);
 
   const ddHelper: any = new DragDropSurveyElements(survey);
 

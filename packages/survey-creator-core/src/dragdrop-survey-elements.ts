@@ -416,7 +416,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     this.insideContainer = !calculateIsEdge(dropTargetNode, event.clientY) && !calculateIsSide(dropTargetNode, event.clientX);
     const dropTarget = this.getDropTargetByNode(dropTargetNode, event);
 
-    if (!!oldInsideContainer != !!this.insideContainer) { this.dropTargetAdorner.dragTypeOverMe = null; }
+    if (!!oldInsideContainer != !!this.insideContainer) {
+      const adorner = SurveyElementAdornerBase.GetAdorner(dropTarget);
+      adorner.dragTypeOverMe = null;
+    }
     const dropTargetRect = dropTargetNode.getBoundingClientRect();
     const calcDirection = !settings.dragDrop.allowDragToTheSameLine || (!!this.draggedElement && this.draggedElement.isPage) ? "top-bottom" : null;
     let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetRect, calcDirection);
