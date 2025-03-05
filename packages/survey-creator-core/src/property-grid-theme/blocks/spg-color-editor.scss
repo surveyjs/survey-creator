@@ -43,7 +43,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    fill: $background;
+    fill: var(--ctr-editor-color-swatch-icon-color-stroke, #00000040);
   }
 }
 .spg-question--disabled .spg-color-editor {

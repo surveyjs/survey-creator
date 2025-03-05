@@ -37,7 +37,7 @@
 }
 
 .svc-item-value--dragging {
-  background: $background;
+  // background: $background;
   box-shadow: 0px 8px 16px 0px var(--ctr-shadow-large-color, var(--sjs-special-glow, #004c441a));
   border-radius: calcSize(12.5);
   padding-right: calcSize(3);
@@ -158,7 +158,7 @@
   .svc-item-value__item {
     .sd-item__control-label,
     .sv-ranking-item__text {
-      color: $foreground-light;
+      color: var(--ctr-survey-ranking-item-text-color-inactive, var(--sjs-layer-1-foreground-50, #00000080));
     }
 
     .sd-item__decorator {
@@ -167,10 +167,11 @@
   }
 
   .sv-ranking-item__index {
-    background: $background-dim;
+    border-radius: var(--lbr-ranking-item-number-corner-radius, var(--lbr-corner-radius-round));
+    background: var(--ctr-survey-ranking-item-digit-background-color-inactive, var(--sjs-layer-3-background-500, #f4f4f4ff));
 
     svg {
-      fill: $foreground-light;
+      fill: var(--ctr-survey-ranking-item-digit-text-color-inactive, var(--sjs-layer-3-foreground-50, #00000080));
     }
   }
 }

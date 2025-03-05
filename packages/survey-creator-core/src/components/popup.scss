@@ -145,7 +145,7 @@
 
   &.sv-dropdown-popup.sv-popup--dropdown-overlay {
     .sv-popup__body-footer {
-      background-color: var(--ctr-contextual-menu-footer-background-color, $background-dim);
+      background-color: var(--ctr-contextual-menu-footer-background-color, var(--sjs-layer-3-background-500, var(--background-dim, #f3f3f3)));
     }
   }
 
