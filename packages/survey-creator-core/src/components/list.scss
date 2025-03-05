@@ -22,7 +22,7 @@
   text-align: start;
   color: var(--ctr-list-item-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   transition: color $creator-transition-duration;
-  
+
   --thm-list-item-padding-delta: var(--ctr-list-item-padding-left, var(--sjs-spacing-x2));
   --thm-list-item-padding-left: calc(var(--sjs-list-item-level) * var(--thm-list-item-padding-delta));
   display: flex;
@@ -173,6 +173,7 @@
 .svc-list__container {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   min-height: 0;
   height: 100%;
 }
@@ -220,6 +221,7 @@
   outline: none;
   border: none;
   padding: 0;
+  width: 100%;
 
   &::placeholder {
     color: var(--ctr-list-search-text-color-placeholder, var(--sjs-layer-1-foreground-50, #00000080));
@@ -233,9 +235,28 @@
   justify-content: center;
   align-items: center;
   border-radius: var(--ctr-search-button-corner-radius, var(--sjs-corner-radius-x05));
+  appearance: none;
+  border: none;
+  border-radius: 100%;
+  background-color: transparent;
+
+  svg {
+    display: flex;
+    width: var(--ctr-search-button-icon-width, var(--sjs-font-size-x2));
+    height: var(--ctr-search-button-icon-height, var(--sjs-font-size-x2));
+    justify-content: center;
+    align-items: center;
+
+    use {
+      fill: var(--ctr-search-button-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
+    }
+  }
 
   &:hover {
-    background: var(--ctr-search-button-background-color-clear-hovered, var(--sjs-semantic-red-background-10, #e50a3e1a));
+    background: var(
+      --ctr-search-button-background-color-clear-hovered,
+      var(--sjs-semantic-red-background-10, #e50a3e1a)
+    );
 
     use {
       fill: var(--ctr-search-button-icon-color-clear-hovered, var(--sjs-semantic-red-background-500, #e50a3eff));
@@ -244,14 +265,21 @@
 }
 
 .svc-list__empty-container {
-  padding: var(--ctr-list-padding-top-no-data, var(--sjs-spacing-x4)) var(--ctr-list-padding-right-no-data, var(--sjs-spacing-x2))
-    var(--ctr-list-padding-bottom-no-data, var(--sjs-spacing-x4)) var(--ctr-list-padding-left-no-data, var(--sjs-spacing-x2));
+  padding: var(--ctr-list-padding-top-no-data, var(--sjs-spacing-x4))
+    var(--ctr-list-padding-right-no-data, var(--sjs-spacing-x2))
+    var(--ctr-list-padding-bottom-no-data, var(--sjs-spacing-x4))
+    var(--ctr-list-padding-left-no-data, var(--sjs-spacing-x2));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .svc-list__empty-text {
   @include ctrDefaultFont;
   @include textEllipsis;
   text-align: center;
+  align-self: stretch;
   color: var(--ctr-list-no-data-text-color, var(--sjs-layer-1-foreground-50, #00000080));
 }
 
