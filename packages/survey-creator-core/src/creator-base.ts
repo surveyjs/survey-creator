@@ -3135,12 +3135,7 @@ export class SurveyCreatorModel extends Base
 
   private getNodeByColumnModel(selEl: MatrixDropdownColumn): HTMLElement {
     const matrixEl = <QuestionMatrixDropdownModelBase>selEl.colOwner;
-    const index = matrixEl.columns.indexOf(selEl);
-    let node = <HTMLElement>document.querySelectorAll(`#${matrixEl.id} .svc-matrix-cell`)[index];
-    if (!node) {
-      node = document.getElementById(matrixEl.id);
-    }
-    return node;
+    return document.getElementById(matrixEl.id);
   }
   private getSelectedSurveyElement(): IElement {
     var sel: any = this.selectedElement;
