@@ -1,22 +1,21 @@
 import {
   Base,
-  SurveyModel,
   SurveyTemplateRendererTemplateData,
   QuestionRowModel,
-  DragTypeOverMeEnum,
   property
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import "./row.scss";
+import { DropTo } from "../dragdrop-survey-elements";
 
-export class RowViewModel extends Base {
+export class RowViewModel extends Base { // TODO
   constructor(
     public creator: SurveyCreatorModel,
     public row: QuestionRowModel,
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super();
-    this.dragTypeOverMe = this.row.dragTypeOverMe;
+    // this.dragTypeOverMe = this.row.dragTypeOverMe; //TODO
   }
   public subscribeElementChanges() {
     this.row.onPropertyChanged.add(this.rowDragTypeOverMeChanged);
@@ -24,7 +23,7 @@ export class RowViewModel extends Base {
   public unsubscribeElementChanges() {
     this.row.onPropertyChanged.remove(this.rowDragTypeOverMeChanged);
   }
-  @property() dragTypeOverMe: DragTypeOverMeEnum;
+  @property({ defaultValue: null }) dragTypeOverMe: DropTo;
   private rowDragTypeOverMeChanged: (sender: Base, options: any) => any = (s, o) => {
     if (o.name == "dragTypeOverMe") this.dragTypeOverMe = o.newValue;
   };
@@ -39,10 +38,10 @@ export class RowViewModel extends Base {
       result += ghostClass;
     }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
+    if (this.dragTypeOverMe === DropTo.Top) {
       result += " svc-row--drag-over-top";
     }
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
+    if (this.dragTypeOverMe === DropTo.Bottom) {
       result += " svc-row--drag-over-bottom";
     }
 
