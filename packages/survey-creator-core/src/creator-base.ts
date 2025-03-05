@@ -3101,9 +3101,6 @@ export class SurveyCreatorModel extends Base
     this.currentFocusTimeout = setTimeout(() => {
       this.currentFocusInterval = setInterval(() => {
         let el = document.getElementById(selEl.id);
-        if (selEl.getType() === "matrixdropdowncolumn") {
-          el = this.getNodeByColumnModel(selEl);
-        }
         if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
           if (!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
           clearInterval(this.currentFocusInterval);
@@ -3132,15 +3129,10 @@ export class SurveyCreatorModel extends Base
       }, 1);
     }, 100);
   }
-
-  private getNodeByColumnModel(selEl: MatrixDropdownColumn): HTMLElement {
-    const matrixEl = <QuestionMatrixDropdownModelBase>selEl.colOwner;
-    return document.getElementById(matrixEl.id);
-  }
   private getSelectedSurveyElement(): IElement {
     var sel: any = this.selectedElement;
     if (!sel || sel.getType() == "survey") return null;
-    if (sel.getType() === "matrixdropdowncolumn" && sel.isInteractiveDesignElement) return sel;
+    if (sel.getType() === "matrixdropdowncolumn") sel = sel.colOwner;
     return sel.isInteractiveDesignElement && sel.id ? sel : null;
   }
   private onSelectingElement(val: Base): Base {
