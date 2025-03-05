@@ -38,7 +38,7 @@ npm install survey-creator-react --save
 Import Survey Creator and SurveyJS Form Library style sheets as shown below:
 
 ```js
-import "survey-core/defaultV2.min.css";
+import "survey-core/survey-core.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
 ```
 
@@ -46,16 +46,16 @@ import "survey-creator-core/survey-creator-core.min.css";
 
 To configure the Survey Creator component, specify [its properties](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions) in a configuration object. In this tutorial, the object enables the following properties:
 
-- [`showLogicTab`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showLogicTab)        
-Displays the Logic tab in the tab panel.
-
-- [`isAutoSave`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#isAutoSave)        
+- [`autoSaveEnabled`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#autoSaveEnabled)        
 Automatically saves the survey JSON schema on every change.
+
+- [`collapseOnDrag`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#collapseOnDrag)        
+Collapses pages on the design surface when users start dragging a survey element.
 
 ```js
 const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 ```
 
@@ -76,12 +76,12 @@ export function SurveyCreatorWidget() {
 
 ```js
 import { SurveyCreator } from "survey-creator-react";
-import "survey-core/defaultV2.min.css";
+import "survey-core/survey-core.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
 
 const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 
 export function SurveyCreatorWidget() {
@@ -124,12 +124,12 @@ export function SurveyCreatorWidget() {
 // 'use client'
 
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
-import "survey-core/defaultV2.min.css";
+import "survey-core/survey-core.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
 
 const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 
 export function SurveyCreatorWidget() {
@@ -246,12 +246,12 @@ export function SurveyCreatorWidget() {
 // 'use client'
 
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
-import "survey-core/defaultV2.min.css";
+import "survey-core/survey-core.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
 
 const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 
 const defaultJson = {
@@ -352,12 +352,12 @@ To view the application, run `npm run start` in a command line and open [http://
 // 'use client'
 
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
-import "survey-core/defaultV2.min.css";
+import "survey-core/survey-core.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
 
 const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 
 const defaultJson = {

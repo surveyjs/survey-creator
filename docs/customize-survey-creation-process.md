@@ -28,15 +28,15 @@ You can control the visibility of adorners using the [`onElementAllowOperations`
 | `allowChangeInputType` | Shows or hides the adorner that changes the [`inputType`](https://surveyjs.io/form-library/documentation/api-reference/text-entry-question-model#inputType) property of Single-Line Input questions. |
 | `allowCopy` | Shows or hides the adorner that duplicates the survey element. |
 | `allowDelete` | Shows or hides the adorner that deletes the survey element. |
-| `allowDragging` | Shows or hides the adorner that allows users to drag and drop survey elements. |
+| `allowDrag` | Shows or hides the adorner that allows users to drag and drop survey elements. |
 | `allowEdit` | Shows or hides the adorners that allow users to edit survey element properties on the design surface. If you disable this property, users can edit survey element properties only in the Property Grid. |
 | `allowShowSettings` | Shows or hides the adorner that allow users to open the Property Grid for survey element configuration. |
 
 The following code hides the "Change Type" adorner for Dropdown questions:
 
 ```js
-creator.onElementAllowOperations.add(function (_, options) {
-  if (options.obj?.getType() === "dropdown") {
+creator.onElementAllowOperations.add((_, options) => {
+  if (options.element?.getType() === "dropdown") {
     options.allowChangeType = false;
   }
 });

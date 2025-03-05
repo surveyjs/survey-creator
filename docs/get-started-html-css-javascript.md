@@ -21,7 +21,7 @@ Survey Creator consists of two parts: `survey-creator-core` (platform-independen
 <head>
     <!-- ... -->
     <!-- SurveyJS Form Library resources -->
-    <link  href="https://unpkg.com/survey-core/defaultV2.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
     <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
 
@@ -40,16 +40,16 @@ Survey Creator consists of two parts: `survey-creator-core` (platform-independen
 
 To configure the Survey Creator component, specify [its properties](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions) in a configuration object. In this tutorial, the object enables the following properties:
 
-- [`showLogicTab`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showLogicTab)        
-Displays the Logic tab in the tab panel.
-
-- [`isAutoSave`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#isAutoSave)        
+- [`autoSaveEnabled`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#autoSaveEnabled)        
 Automatically saves the survey JSON schema on every change.
+
+- [`collapseOnDrag`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#collapseOnDrag)        
+Collapses pages on the design surface when users start dragging a survey element.
 
 ```js
 const creatorOptions = {
-    showLogicTab: true,
-    isAutoSave: true
+    autoSaveEnabled: true,
+    collapseOnDrag: true
 };
 ```
 
@@ -68,7 +68,7 @@ const creator = new SurveyCreator.SurveyCreator(creatorOptions);
 <head>
     <title>Survey Creator / Form Builder</title>
     <meta charset="utf-8">
-    <link  href="https://unpkg.com/survey-core/defaultV2.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
     <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
     
@@ -86,8 +86,8 @@ const creator = new SurveyCreator.SurveyCreator(creatorOptions);
 
 ```js
 const creatorOptions = {
-    showLogicTab: true,
-    isAutoSave: true
+    autoSaveEnabled: true,
+    collapseOnDrag: true
 };
 
 const creator = new SurveyCreator.SurveyCreator(creatorOptions);
@@ -129,7 +129,7 @@ $(function() {
 <head>
     <title>Survey Creator / Form Builder</title>
     <meta charset="utf-8">
-    <link  href="https://unpkg.com/survey-core/defaultV2.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
     <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
     
@@ -147,8 +147,8 @@ $(function() {
 
 ```js
 const creatorOptions = {
-    showLogicTab: true,
-    isAutoSave: true
+    autoSaveEnabled: true,
+    collapseOnDrag: true
 };
 
 const creator = new SurveyCreator.SurveyCreator(creatorOptions);
@@ -254,7 +254,7 @@ creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defa
 <head>
     <title>Survey Creator / Form Builder</title>
     <meta charset="utf-8">
-    <link  href="https://unpkg.com/survey-core/defaultV2.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
     <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
     
@@ -272,8 +272,8 @@ creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defa
 
 ```js
 const creatorOptions = {
-    showLogicTab: true,
-    isAutoSave: true
+    autoSaveEnabled: true,
+    collapseOnDrag: true
 };
 
 const defaultJson = {
@@ -368,7 +368,7 @@ creator.onUploadFile.add((_, options) => {
 <head>
     <title>Survey Creator / Form Builder</title>
     <meta charset="utf-8">
-    <link  href="https://unpkg.com/survey-core/defaultV2.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
     <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
     
@@ -386,8 +386,8 @@ creator.onUploadFile.add((_, options) => {
 
 ```js
 const creatorOptions = {
-    showLogicTab: true,
-    isAutoSave: true
+    autoSaveEnabled: true,
+    collapseOnDrag: true
 };
 
 const defaultJson = {
