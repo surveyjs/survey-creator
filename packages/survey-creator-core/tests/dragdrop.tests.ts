@@ -114,6 +114,12 @@ test("Move item in row from right to left", () => {
     q3.startWithNewLine = false;
     q4.startWithNewLine = false;
 
+    const creator = new CreatorTester();
+    new QuestionAdornerViewModel(creator, q1, null as any);
+    new QuestionAdornerViewModel(creator, q2, null as any);
+    new QuestionAdornerViewModel(creator, q3, null as any);
+    new QuestionAdornerViewModel(creator, q4, null as any);
+
     const ddHelper: any = new DragDropSurveyElements(survey);
 
     expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
@@ -203,6 +209,13 @@ test("Move item in row from center to right", () => {
     var q4 = page.addNewQuestion("text", "q4");
     q3.startWithNewLine = false;
     q4.startWithNewLine = false;
+
+    const creator = new CreatorTester();
+    new QuestionAdornerViewModel(creator, q1, null as any);
+    new QuestionAdornerViewModel(creator, q2, null as any);
+    new QuestionAdornerViewModel(creator, q3, null as any);
+    new QuestionAdornerViewModel(creator, q4, null as any);
+
     const ddHelper: any = new DragDropSurveyElements(survey);
 
     expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
@@ -269,6 +282,13 @@ test("Move item in row from center to left", () => {
     var q4 = page.addNewQuestion("text", "q4");
     q3.startWithNewLine = false;
     q4.startWithNewLine = false;
+
+    const creator = new CreatorTester();
+    new QuestionAdornerViewModel(creator, q1, null as any);
+    new QuestionAdornerViewModel(creator, q2, null as any);
+    new QuestionAdornerViewModel(creator, q3, null as any);
+    new QuestionAdornerViewModel(creator, q4, null as any);
+
     const ddHelper: any = new DragDropSurveyElements(survey);
 
     expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
@@ -336,6 +356,13 @@ test("Move item in prev row from left to multi-row", () => {
     q1.startWithNewLine = false;
     q3.startWithNewLine = false;
     q4.startWithNewLine = false;
+
+    const creator = new CreatorTester();
+    new QuestionAdornerViewModel(creator, q1, null as any);
+    new QuestionAdornerViewModel(creator, q2, null as any);
+    new QuestionAdornerViewModel(creator, q3, null as any);
+    new QuestionAdornerViewModel(creator, q4, null as any);
+
     const ddHelper: any = new DragDropSurveyElements(survey);
 
     expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
@@ -429,6 +456,13 @@ test("Move item in prev row from right to multi-row", () => {
     q1.startWithNewLine = false;
     q3.startWithNewLine = false;
     q4.startWithNewLine = false;
+
+    const creator = new CreatorTester();
+    new QuestionAdornerViewModel(creator, q1, null as any);
+    new QuestionAdornerViewModel(creator, q2, null as any);
+    new QuestionAdornerViewModel(creator, q3, null as any);
+    new QuestionAdornerViewModel(creator, q4, null as any);
+
     const ddHelper: any = new DragDropSurveyElements(survey);
 
     expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
@@ -522,6 +556,13 @@ test("Move item multi-row to single-row bottom, from bottom to top", () => {
     q4.startWithNewLine = false;
     var dragQuestionName = "q" + i;
     var dragQuestion = page.getQuestionByName(dragQuestionName);
+
+    const creator = new CreatorTester();
+    new QuestionAdornerViewModel(creator, q1, null as any);
+    new QuestionAdornerViewModel(creator, q2, null as any);
+    new QuestionAdornerViewModel(creator, q3, null as any);
+    new QuestionAdornerViewModel(creator, q4, null as any);
+
     const ddHelper: any = new DragDropSurveyElements(survey);
 
     expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
@@ -555,6 +596,13 @@ test("Move item multi-row to single-row top, from bottom to top", () => {
     q4.startWithNewLine = false;
     var dragQuestionName = "q" + i;
     var dragQuestion = page.getQuestionByName(dragQuestionName);
+
+    const creator = new CreatorTester();
+    new QuestionAdornerViewModel(creator, q1, null as any);
+    new QuestionAdornerViewModel(creator, q2, null as any);
+    new QuestionAdornerViewModel(creator, q3, null as any);
+    new QuestionAdornerViewModel(creator, q4, null as any);
+
     const ddHelper: any = new DragDropSurveyElements(survey);
 
     expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
@@ -588,6 +636,13 @@ test("Move item multi-row to single-row bottom, from top to bottom", () => {
     q4.startWithNewLine = false;
     var dragQuestionName = "q" + i;
     var dragQuestion = page.getQuestionByName(dragQuestionName);
+
+    const creator = new CreatorTester();
+    new QuestionAdornerViewModel(creator, q1, null as any);
+    new QuestionAdornerViewModel(creator, q2, null as any);
+    new QuestionAdornerViewModel(creator, q3, null as any);
+    new QuestionAdornerViewModel(creator, q4, null as any);
+
     const ddHelper: any = new DragDropSurveyElements(survey);
 
     expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
@@ -621,6 +676,13 @@ test("Move item multi-row to single-row top, from top to bottom", () => {
     q4.startWithNewLine = false;
     var dragQuestionName = "q" + i;
     var dragQuestion = page.getQuestionByName(dragQuestionName);
+
+    const creator = new CreatorTester();
+    new QuestionAdornerViewModel(creator, q1, null as any);
+    new QuestionAdornerViewModel(creator, q2, null as any);
+    new QuestionAdornerViewModel(creator, q3, null as any);
+    new QuestionAdornerViewModel(creator, q4, null as any);
+
     const ddHelper: any = new DragDropSurveyElements(survey);
 
     expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
@@ -649,6 +711,12 @@ test("Move item between pages", () => {
   var q1 = page.addNewQuestion("text", "q1");
   var q2 = page.addNewQuestion("text", "q2");
   var q3 = page2.addNewQuestion("text", "q3");
+
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
+
   const ddHelper: any = new DragDropSurveyElements(survey);
 
   expect(page.rows.length).toBe(2); // Three are two rows");
@@ -679,6 +747,13 @@ test("Move item multi-row to single-row top, between pages", () => {
     q4.startWithNewLine = false;
     var dragQuestionName = "q" + i;
     var dragQuestion = page.getQuestionByName(dragQuestionName);
+
+    const creator = new CreatorTester();
+    new QuestionAdornerViewModel(creator, q1, null as any);
+    new QuestionAdornerViewModel(creator, q2, null as any);
+    new QuestionAdornerViewModel(creator, q3, null as any);
+    new QuestionAdornerViewModel(creator, q4, null as any);
+
     const ddHelper: any = new DragDropSurveyElements(survey);
 
     expect(page.rows.length).toBe(1); // "Iteration "+i+". Three is one row
@@ -714,6 +789,13 @@ test("Move item multi-row to single-row bottom, between pages", () => {
     q4.startWithNewLine = false;
     var dragQuestionName = "q" + i;
     var dragQuestion = page.getQuestionByName(dragQuestionName);
+
+    const creator = new CreatorTester();
+    new QuestionAdornerViewModel(creator, q1, null as any);
+    new QuestionAdornerViewModel(creator, q2, null as any);
+    new QuestionAdornerViewModel(creator, q3, null as any);
+    new QuestionAdornerViewModel(creator, q4, null as any);
+
     const ddHelper: any = new DragDropSurveyElements(survey);
 
     expect(page.rows.length).toBe(1); // "Iteration "+i+". Three is one row
@@ -741,6 +823,11 @@ test("Move item from nowhere (creator toolbox) to page", () => {
   var page = survey.addNewPage("p1");
   var q1 = new QuestionTextModel("q1");
   var q2 = page.addNewQuestion("text", "q2");
+
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+
   const ddHelper: any = new DragDropSurveyElements(survey);
 
   expect(page.rows.length).toBe(1); // "Iteration "+i+". Three is one row
@@ -765,6 +852,12 @@ test("Move new question under row with several questions", () => {
   const q2 = page.addNewQuestion("text", "q2");
   const q3 = page.addNewQuestion("text", "q3");
   q2.startWithNewLine = false;
+
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
+
   const ddHelper: any = new DragDropSurveyElements(survey);
 
   expect(page.rows.length).toBe(2); // "Iteration "+i+". Three are two rows
@@ -793,6 +886,12 @@ test("Move new question inside the row with several questions", () => {
   const q2 = page.addNewQuestion("text", "q2");
   const q3 = page.addNewQuestion("text", "q3");
   q2.startWithNewLine = false;
+
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
+
   const ddHelper: any = new DragDropSurveyElements(survey);
 
   expect(page.rows.length).toBe(2); // "Iteration "+i+". Three are two rows
@@ -824,6 +923,13 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
   const q4 = page.addNewQuestion("text", "q4");
   q3.startWithNewLine = false;
   q4.startWithNewLine = false;
+
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
+  new QuestionAdornerViewModel(creator, q4, null as any);
+
   const ddHelper: any = new DragDropSurveyElements(survey);
 
   expect(page.rows.length).toBe(2); // "Iteration "+i+". Three are two rows
@@ -855,6 +961,12 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
   const q2 = page.addNewQuestion("text", "q2");
   const q3 = page.addNewQuestion("text", "q3");
   q2.startWithNewLine = false;
+
+  const creator = new CreatorTester();
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  new QuestionAdornerViewModel(creator, q2, null as any);
+  new QuestionAdornerViewModel(creator, q3, null as any);
+
   const ddHelper: any = new DragDropSurveyElements(survey);
 
   expect(page.rows.length).toBe(2); // "Iteration "+i+". Three are two rows
@@ -897,6 +1009,9 @@ test("onModified is raised when frop from toolbox", (): any => {
   });
   var q1 = new QuestionTextModel("q1");
   const ddHelper: any = creator.dragDropSurveyElements;
+
+  new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("question1"), null as any);
+
   ddHelper.draggedElement = q1;
   ddHelper.dragOverCore(creator.survey.getQuestionByName("question1"), DropTo.Top);
   ddHelper.allowDropHere = true;
