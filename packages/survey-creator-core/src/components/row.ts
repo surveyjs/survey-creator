@@ -7,26 +7,27 @@ import {
 import { SurveyCreatorModel } from "../creator-base";
 import "./row.scss";
 import { DropTo } from "../dragdrop-survey-elements";
+import { SurveyElementAdornerBase } from "./action-container-view-model";
 
-export class RowViewModel extends Base { // TODO
+export class RowViewModel extends Base {
+  @property({ defaultValue: null }) dragTypeOverMe: DropTo;
+
   constructor(
     public creator: SurveyCreatorModel,
     public row: QuestionRowModel,
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super();
-    // this.dragTypeOverMe = this.row.dragTypeOverMe; //TODO
+    if (this.row) {
+      this.row.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, this);
+    }
   }
   public subscribeElementChanges() {
-    this.row.onPropertyChanged.add(this.rowDragTypeOverMeChanged);
+    this.row.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, this);
   }
   public unsubscribeElementChanges() {
-    this.row.onPropertyChanged.remove(this.rowDragTypeOverMeChanged);
+    this.row.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, null);
   }
-  @property({ defaultValue: null }) dragTypeOverMe: DropTo;
-  private rowDragTypeOverMeChanged: (sender: Base, options: any) => any = (s, o) => {
-    if (o.name == "dragTypeOverMe") this.dragTypeOverMe = o.newValue;
-  };
   public get cssClasses() {
     let result = "svc-row";
     let ghostClass = " svc-row--ghost";
@@ -50,6 +51,5 @@ export class RowViewModel extends Base { // TODO
   public dispose() {
     super.dispose();
     this.unsubscribeElementChanges();
-    this.rowDragTypeOverMeChanged = undefined;
   }
 }

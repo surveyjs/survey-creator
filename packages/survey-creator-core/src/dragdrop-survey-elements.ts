@@ -368,8 +368,11 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     } else {
       const row = this.parentElement.dragDropFindRow(this.dropTarget);
       if (!!row && row.elements.length > 1 && (this.dragOverLocation === DropTo.Top || this.dragOverLocation === DropTo.Bottom)) {
-        row.dragTypeOverMe = this.dragOverLocation;
         this.dragOverIndicatorElement = row;
+        const adorner = SurveyElementAdornerBase.GetAdorner(row);
+        if (adorner) {
+          adorner.dragTypeOverMe = this.dragOverLocation;
+        }
       } else {
         this.dragOverIndicatorElement = this.dropTarget;
         this.dropTargetAdorner.dragTypeOverMe = this.dragOverLocation;
