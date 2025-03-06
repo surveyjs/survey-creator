@@ -1,4 +1,4 @@
-import { ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, settings as SurveySettings } from "survey-core";
+import { ActionContainer, classesToSelector, ComputedUpdater, CssClassBuilder, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, settings as SurveySettings } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
@@ -226,49 +226,49 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   get css(): string {
-    let result = super.getCss();
-    if (this.dragDropHelper.draggedElement && this.dragDropHelper.draggedElement.isPage) {
-      if (this.dragTypeOverMe === DropTo.Top) {
-        result += " svc-question__content--drag-over-top";
-      }
-      if (this.dragTypeOverMe === DropTo.Bottom) {
-        result += " svc-question__content--drag-over-bottom";
-      }
-    } else {
-      if (!!this.dragTypeOverMe && this.showPlaceholder) {
-        result = "svc-question__content--drag-over-inside";
-      } else if (!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
-        result = "svc-page--drag-over-empty";
-        if (!!this.creator && !this.creator.showAddQuestionButton) {
-          result += " svc-page--drag-over-empty-no-add-button";
-        }
-      }
-      if (!!this.dragTypeOverMe && this.collapsed) {
+    let result: string = new CssClassBuilder()
+      .append(super.getCss())
+      .append("svc-question__content--drag-over-top", this.isDraggedElementPage && this.dragTypeOverMe === DropTo.Top)
+      .append("svc-question__content--drag-over-bottom", this.isDraggedElementPage && this.dragTypeOverMe === DropTo.Bottom)
+      .append("svc-question__content--drag-over-inside", !this.isDraggedElementPage && this.isDragOverInside)
+      .append("svc-page--drag-over-empty", !this.isDraggedElementPage && !this.isDragOverInside && this.isDragOverEmpty)
+      .append("svc-page--drag-over-empty-no-add-button", !this.isDraggedElementPage && !this.isDragOverInside && this.isDragOverEmpty && this.isShowAddQuestionButton)
+      .append("svc-page__content--collapsed-drag-over-inside", !this.isDraggedElementPage && this.isDragOverCollapsedInside)
+      .append("svc-page__content--dragged", this.isDragMe)
+      .append("svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility, this.allowExpandCollapse || this.page["isGhost"])
+      .append("svc-page__content--collapsed", (this.allowExpandCollapse || this.page["isGhost"]) && (this.renderedCollapsed || this.page["isGhost"]))
+      .append("svc-page__content--animation-running", (this.allowExpandCollapse || this.page["isGhost"]) && (this.expandCollapseAnimationRunning))
+      .append("svc-page__content--new", this.isGhost)
+      .append("svc-page__content--selected", this.creator.isElementSelected(this.page))
+      .append("svc-page__content--no-header", SurveySettings.designMode.showEmptyTitles === false)
+      .toString();
+
+    if (!this.isDraggedElementPage) {
+      if (this.isDragOverCollapsedInside) {
         this.dragIn();
-        result += " svc-page__content--collapsed-drag-over-inside";
       } else {
         this.dragOut();
       }
     }
-    if (this.allowExpandCollapse || this.page["isGhost"]) {
-      result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
-      if (this.renderedCollapsed || this.page["isGhost"]) result += (" svc-page__content--collapsed");
-      if (this.expandCollapseAnimationRunning) result += (" svc-page__content--animation-running");
-    }
-    if (this.isDragMe) {
-      result += " svc-page__content--dragged";
-    }
-    if (this.isGhost) {
-      return result + " svc-page__content--new";
-    }
-    if (this.creator.isElementSelected(this.page)) {
-      result += " svc-page__content--selected";
-    }
-    if (SurveySettings.designMode.showEmptyTitles === false) {
-      result += " svc-page__content--no-header";
-    }
-    return result.trim();
+
+    return result;
   }
+  private get isDraggedElementPage(): boolean {
+    return this.dragDropHelper.draggedElement && this.dragDropHelper.draggedElement.isPage;
+  }
+  private get isDragOverInside(): boolean {
+    return !!this.dragTypeOverMe && this.showPlaceholder;
+  }
+  private get isDragOverEmpty(): boolean {
+    return !!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0;
+  }
+  private get isShowAddQuestionButton(): boolean {
+    return !!this.creator && !this.creator.showAddQuestionButton;
+  }
+  private get isDragOverCollapsedInside(): boolean {
+    return !!this.dragTypeOverMe && this.collapsed;
+  }
+
   private creatorPropertyChanged = (sender, options) => {
     if (options.name === "isMobileView" && this.isActionContainerCreated) {
       this.actionContainer.alwaysShrink = options.newValue;
