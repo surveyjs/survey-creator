@@ -154,3 +154,12 @@ test("Dynamic panel inner panel not selectable", async (t) => {
     .expect(Selector(".svc-question__content .svc-question__content").exists).notOk()
     .expect(Selector(".svc-question__adorner .svc-question__adorner .svc-panel__placeholder_frame").exists).ok();
 });
+
+test("Matrix dropdown question select column via property-grid element-selector", async (t) => {
+  await addQuestionByAddQuestionButton(t, "Multi-Select Matrix");
+  await addQuestionByAddQuestionButton(t, "Multi-Select Matrix");
+
+  await t
+    .expect(false).ok()
+    .expect(Selector(".svc-matrix-cell--selected").visible).notOk();
+});

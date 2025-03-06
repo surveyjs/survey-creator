@@ -3087,13 +3087,19 @@ export class SurveyCreatorModel extends Base
       this.selectionChanged(this.selectedElement, propertyName, !!focus);
     }
     var selEl: any = this.getSelectedSurveyElement();
+    var focusEl: any = null;
+    if (selEl && selEl.getType() === "matrixdropdowncolumn") {
+      focusEl = selEl;
+      selEl = selEl.colOwner;
+    }
+
     if (oldValue !== element && !!document && !!selEl) {
       this.focusElement(element, focus, selEl, propertyName, startEdit);
     }
   }
   private currentFocusInterval: any;
   private currentFocusTimeout: any;
-  public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
+  public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null, focusEl: any = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
     if (!selEl) return;
     clearInterval(this.currentFocusInterval);
@@ -3115,7 +3121,9 @@ export class SurveyCreatorModel extends Base
                 SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
               }
             }
-            if (!propertyName && el.parentElement) {
+            if (focusEl) {
+              focusEl.focus({ preventScroll: true });
+            } else if (!propertyName && el.parentElement) {
               let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
               elToFocus && elToFocus.focus({ preventScroll: true });
             }
@@ -3132,7 +3140,7 @@ export class SurveyCreatorModel extends Base
   private getSelectedSurveyElement(): IElement {
     var sel: any = this.selectedElement;
     if (!sel || sel.getType() == "survey") return null;
-    if (sel.getType() === "matrixdropdowncolumn") sel = sel.colOwner;
+    if (sel.getType() === "matrixdropdowncolumn") return sel;
     return sel.isInteractiveDesignElement && sel.id ? sel : null;
   }
   private onSelectingElement(val: Base): Base {
