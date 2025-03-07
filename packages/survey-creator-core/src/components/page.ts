@@ -226,25 +226,31 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   get css(): string {
+    const isDraggedElementPage = this.dragDropHelper.draggedElement && this.dragDropHelper.draggedElement.isPage;
+    const isDragOverInside = !!this.dragTypeOverMe && this.showPlaceholder;
+    const isDragOverEmpty = !!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0;
+    const isShowAddQuestionButton = !!this.creator && !this.creator.showAddQuestionButton;
+    const isDragOverCollapsedInside = !!this.dragTypeOverMe && this.collapsed;
+
     let result: string = new CssClassBuilder()
       .append(super.getCss())
-      .append("svc-question__content--drag-over-top", this.isDraggedElementPage && this.dragTypeOverMe === DropTo.Top)
-      .append("svc-question__content--drag-over-bottom", this.isDraggedElementPage && this.dragTypeOverMe === DropTo.Bottom)
-      .append("svc-question__content--drag-over-inside", !this.isDraggedElementPage && this.isDragOverInside)
-      .append("svc-page--drag-over-empty", !this.isDraggedElementPage && !this.isDragOverInside && this.isDragOverEmpty)
-      .append("svc-page--drag-over-empty-no-add-button", !this.isDraggedElementPage && !this.isDragOverInside && this.isDragOverEmpty && this.isShowAddQuestionButton)
-      .append("svc-page__content--collapsed-drag-over-inside", !this.isDraggedElementPage && this.isDragOverCollapsedInside)
+      .append("svc-question__content--drag-over-top", isDraggedElementPage && this.dragTypeOverMe === DropTo.Top)
+      .append("svc-question__content--drag-over-bottom", isDraggedElementPage && this.dragTypeOverMe === DropTo.Bottom)
+      .append("svc-question__content--drag-over-inside", !isDraggedElementPage && isDragOverInside)
+      .append("svc-page--drag-over-empty", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty)
+      .append("svc-page--drag-over-empty-no-add-button", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty && isShowAddQuestionButton)
+      .append("svc-page__content--collapsed-drag-over-inside", !isDraggedElementPage && isDragOverCollapsedInside)
       .append("svc-page__content--dragged", this.isDragMe)
-      .append("svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility, this.allowExpandCollapse || this.page["isGhost"])
-      .append("svc-page__content--collapsed", (this.allowExpandCollapse || this.page["isGhost"]) && (this.renderedCollapsed || this.page["isGhost"]))
-      .append("svc-page__content--animation-running", (this.allowExpandCollapse || this.page["isGhost"]) && (this.expandCollapseAnimationRunning))
-      .append("svc-page__content--new", this.isGhost)
-      .append("svc-page__content--selected", this.creator.isElementSelected(this.page))
-      .append("svc-page__content--no-header", SurveySettings.designMode.showEmptyTitles === false)
+      .append("svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility, this.allowExpandCollapse || !!this.page["isGhost"])
+      .append("svc-page__content--collapsed", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.renderedCollapsed || !!this.page["isGhost"]))
+      .append("svc-page__content--animation-running", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.expandCollapseAnimationRunning))
+      .append("svc-page__content--new", !!this.isGhost)
+      .append("svc-page__content--selected", !this.isGhost && !!this.creator.isElementSelected(this.page))
+      .append("svc-page__content--no-header", !this.isGhost && SurveySettings.designMode.showEmptyTitles === false)
       .toString();
 
-    if (!this.isDraggedElementPage) {
-      if (this.isDragOverCollapsedInside) {
+    if (!isDraggedElementPage) {
+      if (isDragOverCollapsedInside) {
         this.dragIn();
       } else {
         this.dragOut();
@@ -252,21 +258,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
 
     return result;
-  }
-  private get isDraggedElementPage(): boolean {
-    return this.dragDropHelper.draggedElement && this.dragDropHelper.draggedElement.isPage;
-  }
-  private get isDragOverInside(): boolean {
-    return !!this.dragTypeOverMe && this.showPlaceholder;
-  }
-  private get isDragOverEmpty(): boolean {
-    return !!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0;
-  }
-  private get isShowAddQuestionButton(): boolean {
-    return !!this.creator && !this.creator.showAddQuestionButton;
-  }
-  private get isDragOverCollapsedInside(): boolean {
-    return !!this.dragTypeOverMe && this.collapsed;
   }
 
   private creatorPropertyChanged = (sender, options) => {

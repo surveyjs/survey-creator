@@ -108,7 +108,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   css() {
     if (!this.surveyElement.isInteractiveDesignElement) return "";
 
-    if (this.isDragIn) {
+    const isDragIn = !!this.dragTypeOverMe && (!!this.canExpandOnDrag) && !!this.dragInsideCollapsedContainer;
+
+    if (isDragIn) {
       this.dragIn();
     } else {
       this.dragOut();
@@ -117,14 +119,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     let result: string = new CssClassBuilder()
       .append("svc-question__content")
       .append("svc-question__content--" + this.surveyElement.getType(), typeof this.surveyElement.getType === "function")
-      .append("svc-question__content--selected", this.creator.isElementSelected(this.surveyElement))
+      .append("svc-question__content--selected", !!this.creator.isElementSelected(this.surveyElement))
       .append("svc-question__content--empty", this.isEmptyElement)
       .append("svc-question__content--empty-template", this.isEmptyTemplate)
       .append("svc-question__content--collapsed", this.renderedCollapsed)
       .append("svc-question__content--title-hidden", !this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden"))
       .append("svc-question__content--title-bottom", (this.surveyElement as Question).hasTitleOnBottom)
       .append("svc-question__content--dragged", this.isDragMe)
-      .append("svc-question__content--collapsed-drag-over-inside", this.isDragIn)
+      .append("svc-question__content--collapsed-drag-over-inside", isDragIn)
       .append("svc-question__content--drag-over-inside", this.dragTypeOverMe === DropTo.Inside)
       .append("svc-question__content--drag-over-top", !this.dragInsideCollapsedContainer && this.dragTypeOverMe === DropTo.Top)
       .append("svc-question__content--drag-over-bottom", !this.dragInsideCollapsedContainer && this.dragTypeOverMe === DropTo.Bottom)
@@ -136,10 +138,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
     }
     return result;
-  }
-
-  private get isDragIn(): boolean {
-    return !!this.dragTypeOverMe && (this.canExpandOnDrag) && this.dragInsideCollapsedContainer;
   }
 
   private get isTitleLeft() {
