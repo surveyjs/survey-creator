@@ -24,19 +24,19 @@ import { Serializer } from "survey-core";
 Serializer.getProperty("boolean", "title").visible = false;
 ```
 
-If you want to hide multiple properties, handle the Survey Creator's [`onShowingProperty`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onShowingProperty) event. Its second parameter includes the `canShow` Boolean property. Disable it for the properties you want to hide. The following example illustrates two cases: hide black-listed properties and keep only white-listed properties. This code hides the properties for [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) questions.
+If you want to hide multiple properties, handle the Survey Creator's [`onPropertyShowing`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPropertyShowing) event. Its second parameter includes the `show` Boolean property. Disable it for the properties you want to hide. The following example illustrates two cases: hide black-listed properties and keep only white-listed properties. This code hides the properties for [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) questions.
 
 ```js
 const blackList = [ "visible", "isRequired" ];
 // const whiteList = [ "title", "name" ];
 
-creator.onShowingProperty.add(function (_, options) {
-  if (options.obj.getType() == "panel") {
+creator.onPropertyShowing.add((_, options) => {
+  if (options.element.getType() === "panel") {
     // Hide properties found in `blackList`
-    options.canShow = blackList.indexOf(options.property.name) === -1;
+    options.show = blackList.indexOf(options.property.name) === -1;
 
     // Hide all properties except those found in `whiteList`
-    // options.canShow = whiteList.indexOf(options.property.name) > -1;
+    // options.show = whiteList.indexOf(options.property.name) > -1;
   }
 });
 ```
@@ -48,12 +48,12 @@ creator.onShowingProperty.add(function (_, options) {
 You can specify a different default value for a property in Property Grid. To do this, call `Serializer`'s `getProperty(className, propertyName)` method and change the property's `defaultValue` setting:
 
 ```js
-// Override the default value of the `isAllRowRequired` property for Single-Select Matrix questions
-Survey.Serializer.getProperty("matrix", "isAllRowRequired").defaultValue = true;
+// Override the default value of the `eachRowRequired` property for Single-Select Matrix questions
+Survey.Serializer.getProperty("matrix", "eachRowRequired").defaultValue = true;
 
 // In modular applications:
 import { Serializer } from "survey-core";
-Serializer.getProperty("matrix", "isAllRowRequired").defaultValue = true;
+Serializer.getProperty("matrix", "eachRowRequired").defaultValue = true;
 ```
 
 ## Add Help Texts to Property Editors
@@ -101,6 +101,6 @@ translations.pehelp.comment = {
 
 ## Add Custom Properties to the Property Grid
 
-Refer to the following help topic in the Form Library documentation:
+Survey Creator uses SurveyJS Form Library to render most of the UI elements. The main benefit of this approach is that Form Library supports native rendering all frameworks, and Survey Creator receives this functionality automatically. Another advantage is that you can customize Survey Creator UI elements as you would customize surveys. For example, Property Grid is a one-page survey in which every property is a question. To introduce a new or override an existing property editor, you need to define a custom question JSON configuration and implement functions that survey events call internally. Refer to the following help topic in the Form Library documentation for more information:
 
 [Add Custom Properties](/form-library/documentation/customize-question-types/add-custom-properties-to-a-form (linkStyle))

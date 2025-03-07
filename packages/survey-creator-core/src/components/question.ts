@@ -529,6 +529,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType, json) => { this.convertQuestion(questionType, json, defaultJsons); });
       if (this.toolboxItemIsCorresponded(item, !!selectedAction)) {
         selectedAction = action;
+        selectedSubactions = item.items;
       }
       if (item.items?.length > 0 && this.creator.toolbox.showSubitems) {
         const subactions = [];
@@ -554,8 +555,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         if (selectedSubactionLocal) {
           selectedAction = action;
           selectedSubaction = selectedSubactionLocal;
+          selectedSubactions = subactions;
         }
-        selectedSubactions = subactions;
       }
       lastItem = item;
       newItems.push(action);

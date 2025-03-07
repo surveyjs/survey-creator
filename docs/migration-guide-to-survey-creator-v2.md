@@ -29,8 +29,8 @@ npm install survey-creator-react --save
 Most of the imports will break after this operation. Run your application and fix import errors shown in the console. As a result, the Survey Creator code should look as follows:
 
 ```js
-import "survey-core/defaultV2.css";
-import "survey-creator-core/survey-creator-core.css";
+import "survey-core/defaultV2.min.css";
+import "survey-creator-core/survey-creator-core.min.css";
 import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
 
 const options = {

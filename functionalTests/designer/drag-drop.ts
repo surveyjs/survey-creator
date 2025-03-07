@@ -1887,25 +1887,25 @@ test("Drag Drop indicator - rows", async (t) => {
     .hover(toolboxToolAction)
     .dispatchEvent(toolboxToolAction, "pointerdown")
 
-    .hover(Selector(".svc-row").nth(0).find(".svc-question__adorner"), { offsetX: 100, offsetY: 5 })
+    .hover(Selector(".svc-row").nth(0).find(".svc-question__adorner"), { offsetX: 100, offsetY: 5, speed: 0.1 })
     .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-top")).ok()
 
-    .hover(Selector(".svc-row").nth(0).find(".svc-question__adorner"), { offsetX: 100, offsetY: 150 })
+    .hover(Selector(".svc-row").nth(0).find(".svc-question__adorner"), { offsetX: 100, offsetY: 150, speed: 0.1 })
     .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-top")).notOk()
     .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-bottom")).ok()
 
-    .hover(Selector(".svc-row").nth(1).find(".svc-question__adorner"), { offsetX: 100, offsetY: 5 })
+    .hover(Selector(".svc-row").nth(1).find(".svc-question__adorner"), { offsetX: 100, offsetY: 5, speed: 0.1 })
     .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-top")).notOk()
     .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-bottom")).notOk()
     .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-top")).ok()
 
-    .hover(Selector(".svc-row").nth(1).find(".svc-question__adorner"), { offsetX: 100, offsetY: 150 })
+    .hover(Selector(".svc-row").nth(1).find(".svc-question__adorner"), { offsetX: 100, offsetY: 150, speed: 0.1 })
     .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-top")).notOk()
     .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-bottom")).notOk()
     .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-top")).notOk()
     .expect(Selector(".svc-row").nth(1).hasClass("svc-row--drag-over-bottom")).ok()
 
-    .hover(Selector(".svc-page__content").nth(1), { offsetX: 100, offsetY: 1 })
+    .hover(Selector(".svc-page__content").nth(1), { offsetX: 100, offsetY: 1, speed: 0.1 })
     .dispatchEvent(Selector(".svc-page__content").nth(1), "pointerup")
     .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-top")).notOk()
     .expect(Selector(".svc-row").nth(0).hasClass("svc-row--drag-over-bottom")).notOk()
