@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getVisibleElement, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getVisibleElement, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -267,20 +267,14 @@ test("Logic popup with boolean question", async (t) => {
 test("Logic popup mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1240, 870);
-    const generalTab = Selector("h4").withExactText("General");
-    const logicTab = Selector("h4").withExactText("Conditions");
-
+    await t.click(getAddNewQuestionButton());
     await t
-      .hover(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 })
-      .click(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 });
-    await t.resizeWindow(500, 870)
-      .click(Selector("button[title='Open settings']").filterVisible(), { offsetX: 25 });
-
-    await t.click(generalTab)
-      .click(logicTab)
-
+      .resizeWindow(500, 870)
+      .click(getQuestionBarItemByTitle("Open settings"))
+      .click(getPropertyGridCategory("General"))
+      .click(getPropertyGridCategory("Conditions"))
       .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"));
-    await takeElementScreenshot("pg-logic-popup-mobile.png", Selector(".sv-popup.svc-property-editor.sv-popup--menu-phone .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-logic-popup-mobile.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-overlay"), t, comparer);
   });
 });
 
