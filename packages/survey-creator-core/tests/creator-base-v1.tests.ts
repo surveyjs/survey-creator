@@ -936,8 +936,8 @@ test("creator.onAddPanel and undo-redo manager, Bug#972", () => {
 });
 
 test("SurveyPropertyConditionEditor, set correct locale into internal survey, Bug #953", () => {
-  editorLocalization.currentLocale = "de";
   const creator = new CreatorTester();
+  editorLocalization.currentLocale = "de";
   creator.JSON = {
     elements: [
       { name: "q1", type: "text" },
@@ -955,8 +955,8 @@ test("SurveyPropertyConditionEditor, set correct locale into internal survey, Bu
   editorLocalization.currentLocale = "";
 });
 test("creator.onSurveyInstanceCreated, can pass ConditionEditor as model", () => {
-  editorLocalization.currentLocale = "de";
   const creator = new CreatorTester();
+  editorLocalization.currentLocale = "de";
   creator.JSON = {
     elements: [
       { name: "q1", type: "text" },
