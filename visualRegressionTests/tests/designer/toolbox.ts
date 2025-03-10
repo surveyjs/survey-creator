@@ -590,7 +590,7 @@ test("Toolbox disabled items", async (t) => {
     await setShowSidebar(false);
     await takeElementScreenshot("toolbox-compact-disabled-items.png", toolboxElement, t, comparer);
     await t
-      .click(Selector("button.svc-element__question-type-selector"))
+      .click(Selector("button.svc-question-type-selector__button"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
     await takeElementScreenshot("add-new-disabled-items.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
