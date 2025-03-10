@@ -56,6 +56,20 @@ import { Serializer } from "survey-core";
 Serializer.getProperty("matrix", "eachRowRequired").defaultValue = true;
 ```
 
+If you want to override the default value of a localizable property, do it using [localization capabilities](/form-library/documentation/survey-localization#override-individual-translations). In most cases, localizable properties are those that specify UI captions: [`completeText`](/form-library/documentation/api-reference/survey-data-model#completeText), [`pageNextText`](/form-library/documentation/api-reference/survey-data-model#pageNextText), [`pagePrevText`](/form-library/documentation/api-reference/survey-data-model#pagePrevText), etc.
+
+```js
+// Get English locale translations
+const engLocale = Survey.getLocaleStrings("en");
+// In modular applications
+import { getLocaleStrings } from "survey-core";
+const engLocale = getLocaleStrings("en");
+
+engLocale.pagePrevText = "Back";
+engLocale.pageNextText = "Forward";
+engLocale.completeText = "Send";
+```
+
 ## Add Help Texts to Property Editors
 
 Property editors can display hints or tooltips that help survey authors specify correct property values. For example, the following image illustrates a hint for the [`acceptedTypes`](https://surveyjs.io/form-library/documentation/api-reference/file-model#acceptedTypes) property editor in a [File Upload](https://surveyjs.io/form-library/examples/file-upload/) question: 

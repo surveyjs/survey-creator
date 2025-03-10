@@ -31,6 +31,7 @@
     inset-block-start: var(--ctr-editor-padding-top, var(--sjs-spacing-x05));
     inset-inline-end: var(--ctr-editor-padding-right, var(--sjs-spacing-x05));
     inset-block-end: var(--ctr-editor-padding-bottom, var(--sjs-spacing-x05));
+    transform: none;
 
     &:hover,
     &:focus {
