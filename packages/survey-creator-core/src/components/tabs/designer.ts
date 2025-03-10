@@ -3,7 +3,7 @@ import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
-import { DragDropSurveyElements } from "../../survey-elements";
+import { DragDropSurveyElements } from "../../dragdrop-survey-elements";
 import { SurveyElementAdornerBase } from "../action-container-view-model";
 import { assign } from "../../utils/utils";
 import designTabSurveyThemeJSON from "../../designTabSurveyThemeJSON";
@@ -270,7 +270,7 @@ export class TabDesignerViewModel extends Base {
       }
       this.checkNewPage(updatePageController);
     }
-    if(propName === "firstPageIsStartPage") {
+    if (propName === "firstPageIsStartPage") {
       this.checkNewPage(true);
     }
     this.isUpdatingNewPage = false;

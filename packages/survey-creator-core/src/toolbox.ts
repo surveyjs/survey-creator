@@ -24,7 +24,7 @@ import {
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
 import { settings } from "./creator-settings";
-import { DragDropSurveyElements } from "./survey-elements";
+import { DragDropSurveyElements } from "./dragdrop-survey-elements";
 import { SearchManagerToolbox } from "./components/toolbox/toolbox-search-manager";
 import { listComponentCss } from "./components/list-theme";
 
@@ -935,11 +935,11 @@ export class QuestionToolbox
   private updateToolboxItemTitle(item: QuestionToolboxItem): void {
     this.updateActionTitle(item);
     this.updateActionTitle(item.innerItem);
-    if(!Array.isArray(item.items)) return;
+    if (!Array.isArray(item.items)) return;
     item.items.forEach(subItem => {
       const propName = subItem.propName;
       const propValue = subItem.propValue;
-      if(!!propName && !!propValue) {
+      if (!!propName && !!propValue) {
         subItem.title = editorLocalization.getPropertyValueInEditor(propName, propValue);
       }
     });
