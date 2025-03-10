@@ -109,8 +109,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.renderedCollapsed = val;
       if (!val) target.needToRenderContent = true;
-      if (target.creator.designerStateManager && !target.creator.designerStateManager.isSuspended && target.surveyElement) {
-        target.creator.designerStateManager.getElementState(target.surveyElement).collapsed = val;
+      if (target.creator.designerStateManager && target.surveyElement) {
+        target.creator.designerStateManager.setElementCollapsed(target.surveyElement, val);
       }
       setTimeout(() => {
         target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
@@ -345,8 +345,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
 
   protected restoreState(): void {
     if (!!this.surveyElement) {
-      const state = this.creator.designerStateManager?.getElementState(this.surveyElement);
-      this.collapsed = state.collapsed;
+      this.collapsed = this.creator.designerStateManager?.getElementCollapsed(this.surveyElement);
     }
     if (!this.surveyElement || this.surveyElement.isInteractiveDesignElement) {
       this.needToRenderContent = !this.collapsed;
