@@ -1666,3 +1666,30 @@ test("isDragInsideItself", () => {
   expect(ddHelper["isDragInsideItself"]([div1, div2])).toBe(true);
   expect(ddHelper["isDragInsideItself"]([div1])).toBe(false);
 });
+
+test("drag drop move page shouldn't raise survey onPageAdded", () => {
+  const json = {
+    "pages": [
+      { "name": "page1", "elements": [{ "type": "text", "name": "q1" }] },
+      { "name": "page2", "elements": [{ "type": "text", "name": "q2" }] },
+      { "name": "page3", "elements": [{ "type": "text", "name": "q3" }] },
+    ]
+  };
+  const survey = new SurveyModel(json);
+
+  let pageAddedCounter = 0;
+  survey.onPageAdded.add((s, o) => {
+    pageAddedCounter++;
+  });
+
+  const [p1, p2, p3] = survey.pages;
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+
+  expect(pageAddedCounter).toBe(0);
+  ddHelper.draggedElement = p3;
+  ddHelper.dragOverCore(p2, DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+  expect(p3["draggedFrom"]).toStrictEqual(3);
+  expect(pageAddedCounter).toBe(0);
+});
