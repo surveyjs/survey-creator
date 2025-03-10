@@ -3333,6 +3333,7 @@ test("Localication and survey.pages property, Bug#6687", () => {
     }
   };
   editorLocalization.locales["de"] = deutschStrings;
+  settings.defaultNewSurveyJSON = {};
   const creator = new CreatorTester(undefined, undefined, false);
   creator.locale = "de";
   const propertyGrid = new PropertyGridModelTester(creator.survey);
