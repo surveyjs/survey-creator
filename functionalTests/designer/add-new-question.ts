@@ -26,7 +26,7 @@ test("Add New Question", async t => {
     .click(Selector(".svc-element__add-new-question > button.svc-element__question-type-selector"))
     .wait(100)
     .pressKey("p")
-    .click(Selector(".sv-popup:not(.sv-popup--overlay) li").withExactText("Panel").filterVisible())
+    .click(getListItemByText("Panel").filterVisible())
     .click(getAddNewQuestionButton())
     .expect(Selector("span").withText("question1").visible).ok();
 });

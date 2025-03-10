@@ -78,7 +78,7 @@ test("Matrix column editor in de localization", async (t) => {
 
   const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
   const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
-  const popup = Selector(".svc-matrix-cell__popup.sv-popup--modal .sv-popup__body-content");
+  const popup = Selector(".svc-matrix-cell__popup.sv-popup--modal-popup .sv-popup__body-content");
   const applyBtn = Selector("button").withExactText("Anwenden");
   const cancelBtn = Selector("button").withExactText("Abbrechen");
 
