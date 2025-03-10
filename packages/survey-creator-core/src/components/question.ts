@@ -571,7 +571,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       const action = toolboxItemToAction(item, needSeparator);
       if (this.toolboxItemIsCorresponded(item, !!selectedAction)) {
         selectedAction = action;
-        selectedSubactions = item.items.map(subitem => toolboxItemToAction(subitem));
+        if (item.items) {
+          selectedSubactions = item.items.map(subitem => toolboxItemToAction(subitem));
+        }
       }
       if (item.items?.length > 0 && this.creator.toolbox.showSubitems) {
         const subactions = [];
