@@ -237,8 +237,10 @@ test("dropdown property editor, get choices on callback", () => {
   Serializer.removeProperty("survey", "region");
 });
 test("Serializer.addpropery, type: 'dropdown' cuts the text before dots, provided into choices. Bug#5787", (): any => {
-  Serializer.addProperty("survey", { name: "prop1:dropdown", type: "dropdown",
-    choices: ["Gemini 1.5 Pro", "Claude 3.5 Sonnet"] });
+  Serializer.addProperty("survey", {
+    name: "prop1:dropdown", type: "dropdown",
+    choices: ["Gemini 1.5 Pro", "Claude 3.5 Sonnet"]
+  });
   const survey = new SurveyModel();
   const propertyGrid = new PropertyGridModelTester(survey);
   const question = propertyGrid.survey.getQuestionByName("prop1");
@@ -3323,6 +3325,47 @@ test("check pages editor respects onPageAdding", () => {
   addNewPageAction.action!();
   expect(creator.survey.pages.length).toBe(1);
   settings.defaultNewSurveyJSON = savedNewJSON;
+});
+test("Localication and survey.pages property, Bug#6687", () => {
+  const deutschStrings: any = {
+    ed: {
+      newPageName: "Seite"
+    }
+  };
+  editorLocalization.locales["de"] = deutschStrings;
+  const creator = new CreatorTester();
+  creator.locale = "de";
+  creator.JSON = {};
+  const propertyGrid = new PropertyGridModelTester(creator.survey);
+  const pagesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("pages")
+  );
+  const propertyEditor = new PropertyGridEditorMatrixPages();
+  const options = { titleActions: [], question: pagesQuestion };
+  propertyEditor.onGetQuestionTitleActions(creator.survey, options, creator);
+  const addNewPageAction = options.titleActions[0] as IAction;
+
+  expect(creator.survey.pages.length).toBe(0);
+  addNewPageAction.action!();
+
+  expect(creator.survey.pages.length).toBe(1);
+  expect(creator.survey.pages[0].name).toBe("Seite1");
+});
+test("panellayoutcolumns doesn't have adding button", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    gridLayoutEnabled: true,
+    elements: [{ type: "text", name: "q1" }]
+  };
+  const propertyGrid = new PropertyGridModelTester(creator.survey.pages[0]);
+  const gridColumnsQuestion = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("gridLayoutColumns"));
+  expect(gridColumnsQuestion).toBeTruthy();
+  expect(gridColumnsQuestion.allowAddRows).toBeFalsy();
+  expect(gridColumnsQuestion.getTitleToolbar()).toBeTruthy();
+  const helpButton = gridColumnsQuestion.titleActions.find(a => a.id === "property-grid-help");
+  const addButton = gridColumnsQuestion.titleActions.find(a => a.id === "add-item");
+  expect(helpButton).toBeTruthy();
+  expect(addButton).toBeFalsy();
 });
 test("Set property name into correct category", () => {
   Serializer.addProperty("question", {

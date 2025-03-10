@@ -685,7 +685,7 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
     return "name";
   }
   protected getBaseValue(prop: JsonObjectProperty): string {
-    return "page";
+    return editorLocalization.getString("ed.newPageName");
   }
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
 }
