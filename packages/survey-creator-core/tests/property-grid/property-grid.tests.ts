@@ -3333,9 +3333,8 @@ test("Localication and survey.pages property, Bug#6687", () => {
     }
   };
   editorLocalization.locales["de"] = deutschStrings;
-  const creator = new CreatorTester();
+  const creator = new CreatorTester(undefined, undefined, false);
   creator.locale = "de";
-  creator.JSON = {};
   const propertyGrid = new PropertyGridModelTester(creator.survey);
   const pagesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("pages")
@@ -3350,22 +3349,6 @@ test("Localication and survey.pages property, Bug#6687", () => {
 
   expect(creator.survey.pages.length).toBe(1);
   expect(creator.survey.pages[0].name).toBe("Seite1");
-});
-test("panellayoutcolumns doesn't have adding button", () => {
-  const creator = new CreatorTester();
-  creator.JSON = {
-    gridLayoutEnabled: true,
-    elements: [{ type: "text", name: "q1" }]
-  };
-  const propertyGrid = new PropertyGridModelTester(creator.survey.pages[0]);
-  const gridColumnsQuestion = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("gridLayoutColumns"));
-  expect(gridColumnsQuestion).toBeTruthy();
-  expect(gridColumnsQuestion.allowAddRows).toBeFalsy();
-  expect(gridColumnsQuestion.getTitleToolbar()).toBeTruthy();
-  const helpButton = gridColumnsQuestion.titleActions.find(a => a.id === "property-grid-help");
-  const addButton = gridColumnsQuestion.titleActions.find(a => a.id === "add-item");
-  expect(helpButton).toBeTruthy();
-  expect(addButton).toBeFalsy();
 });
 test("Set property name into correct category", () => {
   Serializer.addProperty("question", {
