@@ -5,7 +5,7 @@ Version = `${process.env.VERSION}`;
 import "../utils/context-button.scss";
 
 export { enStrings } from "../localization/english";
-export { editorLocalization, defaultStrings } from "../editorLocalization";
+export { editorLocalization, defaultStrings, getLocaleStrings } from "../editorLocalization";
 export { editorLocalization as localization } from "../editorLocalization";
 export * from "../creator-settings";
 export { ICreatorOptions } from "../creator-options";
