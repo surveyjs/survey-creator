@@ -41,7 +41,14 @@ export class DesignerStateManager {
       "designerStateManager"
     );
   }
-  getElementState(element: SurveyElement): ElementState {
+  getElementCollapsed(element: SurveyElement): boolean {
+    return this.getElementState(element).collapsed;
+  }
+  setElementCollapsed(element: SurveyElement, isCollapsed: boolean): void {
+    if (this.isSuspended) return;
+    this.getElementState(element).collapsed = isCollapsed;
+  }
+  private getElementState(element: SurveyElement): ElementState {
     return this.createElementState(element, true);
   }
   private createElementState(element: SurveyElement, checkIfExists: boolean): ElementState {
