@@ -139,8 +139,7 @@ test("Test question type converter on page for panel - 2", async (t) => {
 
 test("Test question type converter (mobile)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(600, 900);
-    await setAllowEditSurveyTitle(false);
+    await t.resizeWindow(599, 900);
 
     const surveyJSON = {
       "showQuestionNumbers": "off",
@@ -159,6 +158,7 @@ test("Test question type converter (mobile)", async (t) => {
       ]
     };
     await ClientFunction(() => {
+      window["Survey"]._setIsTouch(true);
       (window as any).creator.isTouch = true;
     })();
     await setJSON(surveyJSON);
