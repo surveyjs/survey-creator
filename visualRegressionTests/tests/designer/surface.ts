@@ -139,8 +139,7 @@ test("Test question type converter on page for panel - 2", async (t) => {
 
 test("Test question type converter (mobile)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(600, 900);
-    await setAllowEditSurveyTitle(false);
+    await t.resizeWindow(599, 900);
 
     const surveyJSON = {
       "showQuestionNumbers": "off",
@@ -159,6 +158,7 @@ test("Test question type converter (mobile)", async (t) => {
       ]
     };
     await ClientFunction(() => {
+      window["Survey"]._setIsTouch(true);
       (window as any).creator.isTouch = true;
     })();
     await setJSON(surveyJSON);
@@ -441,10 +441,10 @@ test("Choices (Tagbox): Layout", async (t) => {
       .click(getPropertyGridCategory(generalGroupName))
       .click(getPropertyGridCategory("Data"))
       .click(Selector("span").withExactText("Set Default Answer"))
-      .click(Selector(".sv-popup--modal .sd-dropdown__filter-string-input"))
+      .click(Selector(".sv-popup--modal-popup .sd-dropdown__filter-string-input"))
       .click(getSurveyListItemByText("Item 2"))
       .click(getSurveyListItemByText("Item 3"))
-      .click(Selector(".sv-popup--modal button").withExactText("Apply"));
+      .click(Selector(".sv-popup--modal-popup button").withExactText("Apply"));
 
     const QRoot = Selector(".svc-question__adorner").filterVisible();
     await takeElementScreenshot("surface-tagbox-default-layout.png", QRoot, t, comparer);
@@ -2479,7 +2479,7 @@ test("Question types with subtypes", async (t) => {
       .hover(getListItemByText("Rating Scale").filterVisible())
       .wait(400)
       .hover(getListItemByText("Labels").nth(1));
-    await takeElementScreenshot("question-type-rating-subtypes.png", Selector(".sv-popup.sv-popup--dropdown").filterVisible(), t, comparer);
+    await takeElementScreenshot("question-type-rating-subtypes.png", Selector(".sv-popup--menu-popup").filterVisible(), t, comparer);
   });
 });
 

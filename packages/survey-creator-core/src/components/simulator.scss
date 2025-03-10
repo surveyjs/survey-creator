@@ -53,7 +53,7 @@
   .sd-root-modern {
     min-height: 100%;
 
-    .sv-popup:not(.sv-popup--overlay):not(.sv-popup--modal) {
+    .sv-popup--menu-popup {
       width: auto;
       right: 0;
     }
@@ -68,6 +68,9 @@
   position: relative;
 }
 
-.svd-simulator .sv-popup--overlay {
-  --sv-popup-overlay-height: 100%;
+.svd-simulator {
+  .sv-popup--menu-phone,
+  .sv-popup--menu-tablet {
+    --sv-popup-overlay-height: 100%;
+  }
 }
