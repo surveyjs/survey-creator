@@ -1683,12 +1683,16 @@ test("drag drop move page shouldn't raise survey onPageAdded", () => {
   });
 
   const [p1, p2, p3] = survey.pages;
+  const creator = new CreatorTester();
+  new PageAdorner(creator, p1);
+  new PageAdorner(creator, p2);
+  new PageAdorner(creator, p3);
 
   const ddHelper: any = new DragDropSurveyElements(survey);
 
   expect(pageAddedCounter).toBe(0);
   ddHelper.draggedElement = p3;
-  ddHelper.dragOverCore(p2, DragTypeOverMeEnum.Top);
+  ddHelper.dragOverCore(p2, DropTo.Top);
   ddHelper.doDrop();
   expect(p3["draggedFrom"]).toStrictEqual(3);
   expect(pageAddedCounter).toBe(0);
