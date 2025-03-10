@@ -54,7 +54,7 @@ export class CreatorStylesManager {
   public static Enabled = true;
 
   static findSheet(styleSheetId: string): any {
-    if (typeof document === "undefined") return null;
+    if (!DomDocumentHelper.isAvailable()) return null;
     for (let i = 0; i < document.styleSheets.length; i++) {
       if (!!document.styleSheets[i].ownerNode && (<any>document).styleSheets[i].ownerNode["id"] === styleSheetId) {
         return <CSSStyleSheet>document.styleSheets[i];
@@ -64,6 +64,7 @@ export class CreatorStylesManager {
   }
 
   static createSheet(styleSheetId: string): any {
+    if (!DomDocumentHelper.isAvailable()) return null;
     let style = DomDocumentHelper.createElement("style") as HTMLStyleElement;
     style.id = styleSheetId;
     style.appendChild(new Text(""));
@@ -77,13 +78,14 @@ export class CreatorStylesManager {
       if (!sheet) {
         sheet = CreatorStylesManager.createSheet(CreatorStylesManager.SurveyJSCreatorStylesSheetId);
       }
-
-      if (Object.keys(rules).length) {
-        rules.forEach((rule) => {
-          try {
-            sheet.insertRule(`${rule.selector} { ${rule.styles} }`, 0);
-          } catch (e) { }
-        });
+      if(sheet) {
+        if (Object.keys(rules).length) {
+          rules.forEach((rule) => {
+            try {
+              sheet.insertRule(`${rule.selector} { ${rule.styles} }`, 0);
+            } catch (e) { }
+          });
+        }
       }
     }
   }
