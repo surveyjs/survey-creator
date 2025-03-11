@@ -5,7 +5,7 @@ Version = `${process.env.VERSION}`;
 import "../utils/context-button.scss";
 
 export { enStrings } from "../localization/english";
-export { editorLocalization, defaultStrings } from "../editorLocalization";
+export { editorLocalization, defaultStrings, getLocaleStrings } from "../editorLocalization";
 export { editorLocalization as localization } from "../editorLocalization";
 export * from "../creator-settings";
 export { ICreatorOptions } from "../creator-options";
@@ -112,7 +112,7 @@ export * from "../presets/presets";
 export * from "../presets/presets-properties";
 export * from "../presets/presets-tabs";
 export * from "../presets/presets-toolbox";
-export * from "../survey-elements";
+export * from "../dragdrop-survey-elements";
 
 import "../components/search.scss";
 import "../components/scroll.scss";

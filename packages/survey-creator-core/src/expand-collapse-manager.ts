@@ -25,22 +25,17 @@ export class ExpandCollapseManager {
   }
 
   private updateCollapsed(elements: SurveyElement[], value: boolean, reason: ElementGetExpandCollapseStateEventReason) {
-    const canToSaveToStateManager = this.creator.designerStateManager && !this.creator.designerStateManager.isSuspended;
     elements.forEach(element => {
       if (element.isQuestion && this._lockQuestions) return;
-      if (canToSaveToStateManager) {
-        this.creator.designerStateManager.getElementState(element).collapsed =
-          this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
-      }
+      const collapsed = this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
+      this.creator.designerStateManager?.setElementCollapsed(element, collapsed);
     });
     for (let i = this.adorners.length - 1; i >= 0; i--) {
       const element = this.adorners[i].element;
       if (element.isQuestion && this._lockQuestions) continue;
       if (elements.indexOf(element) == -1) continue;
       if (this.adorners[i].allowExpandCollapse) {
-        let newState = canToSaveToStateManager ?
-          this.creator.designerStateManager.getElementState(element).collapsed :
-          this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
+        const newState = this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
         this.adorners[i].collapsed = newState;
       }
     }

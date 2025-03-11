@@ -12,7 +12,7 @@ import {
   CssClassBuilder
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
-import { isPanelDynamic } from "../survey-elements";
+import { DropTo, isPanelDynamic } from "../dragdrop-survey-elements";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
 import { listComponentCss } from "./list-theme";
 
@@ -100,6 +100,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
   public rootElement: HTMLElement;
 
+  @property({ defaultValue: null }) dragTypeOverMe: DropTo;
+  @property({ defaultValue: false }) isDragMe: boolean;
+
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
   }
@@ -109,8 +112,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     onSet: (val, target: SurveyElementAdornerBase<T>) => {
       target.renderedCollapsed = val;
       if (!val) target.needToRenderContent = true;
-      if (target.creator.designerStateManager && !target.creator.designerStateManager.isSuspended && target.surveyElement) {
-        target.creator.designerStateManager.getElementState(target.surveyElement).collapsed = val;
+      if (target.creator.designerStateManager && target.surveyElement) {
+        target.creator.designerStateManager.setElementCollapsed(target.surveyElement, val);
       }
       setTimeout(() => {
         target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
@@ -290,7 +293,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.updateActionsProperties();
     }
   };
-  protected surveyElement: T
+  public surveyElement: T
   get element() {
     return this.surveyElement;
   }
@@ -309,7 +312,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public get actionContainer(): SurveyElementActionContainer {
     if (!this.actionContainerValue) {
       this.actionContainerValue = this.createActionContainer();
-      if(this.surveyElement) {
+      if (this.surveyElement) {
         this.updateActionsContainer(this.surveyElement);
         this.updateActionsVisibility(false);
       }
@@ -318,9 +321,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   private topActionContainerValue: ActionContainer;
   public get topActionContainer(): ActionContainer {
-    if(!this.topActionContainerValue) {
+    if (!this.topActionContainerValue) {
       this.topActionContainerValue = this.createTopActionContainer();
-      if(this.surveyElement) {
+      if (this.surveyElement) {
         this.updateActionsVisibility(true);
       }
     }
@@ -328,7 +331,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
 
   private creatorOnLocaleChanged: (sender: Base, options: any) => void = (_, options) => {
-    if(this.surveyElement) {
+    if (this.surveyElement) {
       this.updateActionsContainer(this.surveyElement);
       this.updateActionsProperties();
     }
@@ -345,8 +348,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
 
   protected restoreState(): void {
     if (!!this.surveyElement) {
-      const state = this.creator.designerStateManager?.getElementState(this.surveyElement);
-      this.collapsed = state.collapsed;
+      this.collapsed = this.creator.designerStateManager?.getElementCollapsed(this.surveyElement);
     }
     if (!this.surveyElement || this.surveyElement.isInteractiveDesignElement) {
       this.needToRenderContent = !this.collapsed;
@@ -418,7 +420,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.animationCollapsed = undefined;
   }
   private disposeActions(container: ActionContainer): void {
-    if(!!container && !container.isDisposed) {
+    if (!!container && !container.isDisposed) {
       container.dispose();
     }
   }
@@ -442,13 +444,13 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected cleanActionsContainer() {
     const container = this.actionContainerValue;
-    if(!container) return;
+    if (!container) return;
     const actions = container.actions;
     container.setItems([]);
     actions.forEach(action => action.dispose && action.dispose());
   }
   protected updateActionsContainer(surveyElement: SurveyElement) {
-    if(!this.actionContainerValue) return;
+    if (!this.actionContainerValue) return;
     const actions: Array<Action> = [];
     this.buildActions(actions);
     this.creator.onElementMenuItemsChanged(surveyElement, actions);

@@ -334,7 +334,8 @@
     var(--lbr-question-panel-shadow-color, var(--sjs-special-shadow, #00000040));
 }
 
-.sv-popup--overlay {
+.sv-popup--menu-phone,
+.sv-popup--menu-tablet {
   .svc-logic-placeholder {
     width: initial;
   }

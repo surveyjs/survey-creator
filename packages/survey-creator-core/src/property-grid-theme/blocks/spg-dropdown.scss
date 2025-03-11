@@ -31,6 +31,7 @@
     inset-block-start: var(--ctr-editor-padding-top, var(--sjs-spacing-x05));
     inset-inline-end: var(--ctr-editor-padding-right, var(--sjs-spacing-x05));
     inset-block-end: var(--ctr-editor-padding-bottom, var(--sjs-spacing-x05));
+    transform: none;
 
     &:hover,
     &:focus {
@@ -45,7 +46,7 @@
     width: var(--ctr-editor-button-icon-width, var(--sjs-font-size-x3));
     height: var(--ctr-editor-button-icon-height, var(--sjs-font-size-x3));
 }
-.spg-dropdown-popup:not(.sv-popup--dropdown-overlay) {
+.spg-dropdown-popup.sv-popup--menu-popup {
     height: 0;
 }
 
