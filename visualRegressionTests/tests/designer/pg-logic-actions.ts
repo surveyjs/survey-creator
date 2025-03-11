@@ -71,7 +71,7 @@ test("Check list item styles into logic popup", async (t) => {
 
     await t.click(sectionContentElement.find(".spg-action-button").nth(2))
       .click(Selector(".sl-dropdown"))
-      .click(getListItemByText("region"))
+      .click(getListItemByText("region"), { offsetX: 10, offsetY: 20 })
       .wait(1000)
       .pressKey("tab")
       .pressKey("tab")

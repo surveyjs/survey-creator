@@ -1,10 +1,10 @@
 @use "../../variables" as *;
 
-svc-tab-preview {
-  width: 100%;
-  height: 100%;
-  background: $background-dim;
-}
+// svc-tab-preview {
+//   width: 100%;
+//   height: 100%;
+//   background: $background-dim;
+// }
 
 .svc-test-tab__content {
   align-items: center;
@@ -12,17 +12,6 @@ svc-tab-preview {
 }
 
 .svc-test-tab__content .svc-plugin-tab__content {
-  .sv-root-modern .sv-completedpage,
-  .sv_default_css .sv_completed_page {
-    margin: 0;
-    border: 0;
-    background-color: $background-dim;
-  }
-
-  .sv_default_css .sv_body {
-    border: 0;
-  }
-
   .svc-preview__test-again {
     width: calcSize(33);
     box-sizing: border-box;
@@ -94,13 +83,6 @@ svc-tab-preview {
 
   .svc-page-selector {
     max-width: 50%;
-
-    .sv-action-bar-item__title {
-      @include textEllipsis;
-
-      color: $foreground;
-      display: inline-block;
-    }
   }
 }
 
@@ -120,7 +102,7 @@ svc-tab-preview {
 }
 .svc-test-tab__content .sd-body--empty {
   @include ctrDefaultFont;
-  color: $foreground;
+  color: var(--sjs-layer-1-foreground-100, #000000E6);
   text-align: center;
   overflow: hidden;
   position: static;
