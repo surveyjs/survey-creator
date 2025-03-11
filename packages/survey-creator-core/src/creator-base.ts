@@ -3100,7 +3100,7 @@ export class SurveyCreatorModel extends Base
     clearTimeout(this.currentFocusTimeout);
     this.currentFocusTimeout = setTimeout(() => {
       this.currentFocusInterval = setInterval(() => {
-        const el = document.getElementById(selEl.id);
+        let el = this.getHtmlElementForScroll(selEl);
         if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
           if (!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
           clearInterval(this.currentFocusInterval);
@@ -3115,7 +3115,7 @@ export class SurveyCreatorModel extends Base
                 SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
               }
             }
-            if (!propertyName && el.parentElement) {
+            if (!propertyName && el.parentElement && selEl.getType() !== "matrixdropdowncolumn") {
               let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
               elToFocus && elToFocus.focus({ preventScroll: true });
             }
@@ -3123,16 +3123,26 @@ export class SurveyCreatorModel extends Base
         } else {
           clearInterval(this.currentFocusInterval);
         }
-        if (startEdit && !!element) {
+        if ((startEdit || selEl.getType() === "matrixdropdowncolumn") && !!element) {
           StringEditorConnector.get((element as Question).locTitle).activateEditor();
         }
       }, 1);
     }, 100);
   }
 
+  private getHtmlElementForScroll(element: any): HTMLElement {
+    const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.id : element.id;
+    return document.getElementById(id);
+  }
+
   private getSelectedSurveyElement(): IElement {
     var sel: any = this.selectedElement;
     if (!sel || sel.getType() == "survey") return null;
+
+    if (this.selectedElement.getType() === "matrixdropdowncolumn") {
+      return (<any>this.selectedElement);
+    }
+
     return sel.isInteractiveDesignElement && sel.id ? sel : null;
   }
   private onSelectingElement(val: Base): Base {
