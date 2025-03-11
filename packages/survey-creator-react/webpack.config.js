@@ -46,6 +46,13 @@ const buildPlatformJson = {
     node: ">=0.10.0"
   },
   typings: "./typings/entries/index.d.ts",
+  exports: {
+    ".": {
+      "types": "./typings/entries/index.d.ts",
+      "import": "./fesm/survey-creator-react.js",
+      "require": "./survey-creator-react.js"
+    }
+  },
   peerDependencies: {
     "ace-builds": "^1.4.12",
     "react": "^16.5.0 || ^17.0.1 || ^18.1.0 || ^19.0.0",
@@ -78,7 +85,6 @@ function getPercentageHandler(emitNonSourceFiles, buildPath) {
     }
   };
 }
-
 
 module.exports = function (options) {
   const buildPath = __dirname + "/build/";
@@ -136,7 +142,7 @@ module.exports = function (options) {
         },
         {
           test: /\.html$/,
-          exclude: [/node_modules/, require.resolve('./index.html')],
+          exclude: [/node_modules/, require.resolve("./index.html")],
           loader: "html-loader"
         },
         {
@@ -153,8 +159,8 @@ module.exports = function (options) {
       filename: "[name]" + (isProductionBuild ? ".min" : "") + ".js",
       library: {
         root: options.libraryName || "SurveyCreator",
-        amd: '[dashedname]',
-        commonjs: '[dashedname]',
+        amd: "[dashedname]",
+        commonjs: "[dashedname]",
       },
       libraryTarget: "umd",
       globalObject: "this",
@@ -222,7 +228,7 @@ module.exports = function (options) {
     ]);
     config.devServer = {
       static: {
-        directory: path.join(__dirname, '.'),
+        directory: path.join(__dirname, "."),
       },
       //host: "0.0.0.0",
       compress: false,
