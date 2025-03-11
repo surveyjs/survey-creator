@@ -10,6 +10,8 @@ const dummyQuestion = new QuestionLinkValueModel("q1");
 export class CreatorTester extends SurveyCreatorModel {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
+    //Reset the locale to the default one from the previous tests
+    this.locale = "";
     this.autoSaveDelay = 0;
     this.onSurveyInstanceCreated.add((creator, options) => {
       options.survey.getRendererForString = (element: Base, name: string): any => {

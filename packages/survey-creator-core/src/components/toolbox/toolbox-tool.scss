@@ -321,7 +321,7 @@
     row-gap: var(--ctr-toolbox-group-gap, var(--sjs-spacing-x05));
   }
 
-  .sv-popup__body-content {
+  & > .sv-popup__container > .sv-popup__body-content {
     border-radius: var(--ctr-toolbox-submenu-corner-radius, var(--sjs-corner-radius-x1));
     box-shadow:
       var(--ctr-toolbox-submenu-shadow-1-offset-x, 0px)

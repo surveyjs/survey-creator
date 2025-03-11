@@ -42,7 +42,7 @@ import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
 import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
-import { DragDropSurveyElements } from "./survey-elements";
+import { DragDropSurveyElements } from "./dragdrop-survey-elements";
 import { PageAdorner } from "./components/page";
 import {
   ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, ElementAllowOperationsEvent,

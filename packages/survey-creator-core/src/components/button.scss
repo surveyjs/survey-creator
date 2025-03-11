@@ -1,7 +1,8 @@
-@use "../variables" as *;
+@use "../ctr-variables.scss" as mixins;
 
-.svc-creator-popup.sv-popup--modal {
-  .sd-btn.sv-popup__button {
+.svc-creator-popup.sv-popup--modal-popup,
+.svc-creator-popup.sv-popup--modal-overlay {
+  .sv-modal-popup__button {
     border-radius: var(--ctr-button-corner-radius-small, var(--sjs-corner-radius-x075));
     padding: var(--ctr-button-padding-vertical-small, var(--sjs-spacing-x150))
       var(--ctr-button-padding-horizontal-small, var(--sjs-spacing-x4))
@@ -20,23 +21,20 @@
       var(--ctr-button-shadow-spread, 0px)
       var(--ctr-button-shadow-color, var(--sjs-special-shadow, #00000040));
 
+    background: var(--ctr-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+    color: var(--ctr-button-text-color, var(--sjs-primary-background-500, #19b394ff));
+
+    &:hover {
+      background: var(--ctr-button-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
+    }
     span {
-      @include ctrDefaultBoldFont;
+      @include mixins.ctrDefaultBoldFont;
 
       text-align: center;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-  }
-
-  .sv-popup__button {
-    background: var(--ctr-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-    color: var(--ctr-button-text-color, var(--sjs-primary-background-500, #19b394ff));
-
-    &:hover {
-      background: var(--ctr-button-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
     }
   }
 

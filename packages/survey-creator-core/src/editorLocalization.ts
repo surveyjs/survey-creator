@@ -344,6 +344,10 @@ export function getLocString(strName: string, locale: string = null) {
   return editorLocalization.getString(strName, locale);
 }
 
+export function getLocaleStrings(loc: string): any {
+  return editorLocalization.getLocaleStrings(loc);
+}
+
 export var defaultStrings = enStrings;
 export function setupLocale(localeConfig: { localeCode: string, strings: any }): void {
   editorLocalization.setupLocale(localeConfig.localeCode, localeConfig.strings);
