@@ -1,6 +1,5 @@
 import {
   SurveyElement,
-  SurveyModel,
   SurveyTemplateRendererTemplateData,
   property,
   QuestionHtmlModel,
@@ -9,7 +8,6 @@ import {
   Question,
   ItemValue,
   Serializer,
-  DragTypeOverMeEnum,
   IAction,
   ComputedUpdater,
   DragOrClickHelper,
@@ -18,8 +16,6 @@ import {
   CssClassBuilder,
   QuestionPanelDynamicModel,
   ListModel,
-  QuestionTextModel,
-  ActionContainer,
   Helpers,
   PanelModel,
   classesToSelector,
@@ -29,7 +25,7 @@ import {
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
-import { IPortableDragEvent, IPortableEvent, IPortableMouseEvent } from "../utils/events";
+import { IPortableEvent } from "../utils/events";
 import {
   isPropertyVisible,
   propertyExists,
@@ -37,10 +33,9 @@ import {
 import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
 import "./question.scss";
 import { settings } from "../creator-settings";
-import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
-import { DragDropSurveyElements, isPanelDynamic } from "../survey-elements";
+import { StringItemsNavigatorBase } from "./string-editor";
+import { DragDropSurveyElements, DropTo } from "../dragdrop-survey-elements";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
-import { isUndefined } from "lodash";
 import { listComponentCss } from "./list-theme";
 
 export interface QuestionBannerParams {
@@ -146,22 +141,22 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       this.dragOut();
     }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.InsideEmptyPanel) {
+    if (this.dragTypeOverMe === DropTo.Inside) {
       result += " svc-question__content--drag-over-inside";
     }
     if (!this.dragInsideCollapsedContainer) {
-      if (this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
+      if (this.dragTypeOverMe === DropTo.Left) {
         result += " svc-question__content--drag-over-left";
       }
 
-      if (this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
+      if (this.dragTypeOverMe === DropTo.Right) {
         result += " svc-question__content--drag-over-right";
       }
 
-      if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
+      if (this.dragTypeOverMe === DropTo.Top) {
         result += " svc-question__content--drag-over-top";
       }
-      if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
+      if (this.dragTypeOverMe === DropTo.Bottom) {
         result += " svc-question__content--drag-over-bottom";
       }
       if (this.creator) {
@@ -202,14 +197,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   protected expandWithDragIn() {
     super.expandWithDragIn();
-    this.element.dragTypeOverMe = null;
+    this.dragTypeOverMe = null;
     this.creator.dragDropSurveyElements.dropTarget = null;
-  }
-  get isDragMe(): boolean {
-    return this.surveyElement.isDragMe;
-  }
-  get dragTypeOverMe() {
-    return this.element.dragTypeOverMe;
   }
   public get isBannerShowing(): boolean {
     return this.isUsingCarryForward || this.isUsingRestfull || this.isMessagePanelVisible;
@@ -285,7 +274,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     super.attachElement(surveyElement);
     if (surveyElement) {
       surveyElement.registerFunctionOnPropertyValueChanged("isRequired", (newValue: any) => {
-        if(this.isActionContainerCreated) {
+        if (this.isActionContainerCreated) {
           const requiredAction = this.actionContainer.getActionById("isrequired");
           this.updateRequiredAction(requiredAction);
         }
@@ -329,13 +318,13 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected updateActionsPropertiesCore(): void {
     super.updateActionsPropertiesCore();
-    if(this.isActionContainerCreated) {
+    if (this.isActionContainerCreated) {
       this.updateActionsLocations();
     }
   }
   protected updateActionsVisibility(isTop: boolean): void {
     super.updateActionsVisibility(isTop);
-    if(!isTop) {
+    if (!isTop) {
       this.updateActionsLocations();
     }
   }
@@ -565,6 +554,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType, json) => { this.convertQuestion(questionType, json, defaultJsons); });
       if (this.toolboxItemIsCorresponded(item, !!selectedAction)) {
         selectedAction = action;
+        selectedSubactions = item.items;
       }
       if (item.items?.length > 0 && this.creator.toolbox.showSubitems) {
         const subactions = [];
@@ -590,8 +580,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         if (selectedSubactionLocal) {
           selectedAction = action;
           selectedSubaction = selectedSubactionLocal;
+          selectedSubactions = subactions;
         }
-        selectedSubactions = subactions;
       }
       lastItem = item;
       newItems.push(action);

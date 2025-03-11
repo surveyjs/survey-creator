@@ -31,8 +31,8 @@ test("Simulator popups", async (t) => {
   const dropdownSelect = Selector(".sd-dropdown");
   const dropdownPopup = Selector(".svd-simulator-content .sv-popup");
   const dropdownPopupContainer = dropdownPopup.find(".sv-popup__container");
-  const tabletPopup = "sv-popup--tablet";
-  const overlayPopup = "sv-popup--dropdown-overlay";
+  const tabletPopup = "sv-popup--menu-tablet";
+  const phonePopup = "sv-popup--menu-phone";
 
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
@@ -40,7 +40,7 @@ test("Simulator popups", async (t) => {
 
     .click(dropdownSelect)
     .expect(dropdownPopupContainer.visible).ok()
-    .expect(dropdownPopup.classNames).notContains(overlayPopup)
+    .expect(dropdownPopup.classNames).notContains(phonePopup)
     .expect(dropdownPopup.classNames).notContains(tabletPopup)
 
     .click(getBarItemByTitle("Select device type"))
@@ -48,14 +48,14 @@ test("Simulator popups", async (t) => {
 
     .click(dropdownSelect)
     .expect(dropdownPopupContainer.visible).ok()
-    .expect(dropdownPopup.classNames).contains(overlayPopup)
+    .expect(dropdownPopup.classNames).notContains(phonePopup)
     .expect(dropdownPopup.classNames).contains(tabletPopup)
-    .click(Selector(".sv-popup--dropdown-overlay"), { offsetY: 10 })
+    .click(Selector(".sv-popup--menu-tablet"), { offsetY: 10 })
 
     .click(getBarItemByTitle("Select device type"))
     .click(getListItemByText("iPhone 15"))
     .click(dropdownSelect)
     .expect(dropdownPopupContainer.visible).ok()
-    .expect(dropdownPopup.classNames).contains(overlayPopup)
+    .expect(dropdownPopup.classNames).contains(phonePopup)
     .expect(dropdownPopup.classNames).notContains(tabletPopup);
 });

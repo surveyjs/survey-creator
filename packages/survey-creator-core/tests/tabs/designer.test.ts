@@ -144,6 +144,28 @@ test("StringEditorViewModelBase page title placeholder for started page", () => 
   expect(editorGhost.placeholder).toBe("Page 3");
 });
 
+test("StringEditorViewModelBase page title placeholder and changing creator locale on the fly, Bug#6695", () => {
+  const deutschStrings: any = {
+    pe: {
+      surveyTitlePlaceholder: "Umfragetitel eingeben"
+    }
+  };
+  editorLocalization.locales["de"] = deutschStrings;
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text" }] },
+      { elements: [{ type: "text" }] }
+    ]
+  };
+  const survey = creator.survey;
+  const page1 = survey.pages[0];
+  const surveyTitleEdtor: StringEditorViewModelBase = new StringEditorViewModelBase(survey.locTitle, creator);
+  expect(surveyTitleEdtor.placeholder).toBe("Survey Title");
+  creator.locale = "de";
+  expect(surveyTitleEdtor.placeholder).toBe("Umfragetitel eingeben");
+});
+
 test("Logo css", () => {
   const creator = new CreatorTester();
   var logo = new LogoImageViewModel(creator, null);

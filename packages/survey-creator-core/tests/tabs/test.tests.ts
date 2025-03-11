@@ -1075,8 +1075,8 @@ test("The Preview Survey button text is not translated Bug#6016", (): any => {
   expect(loc).toBeTruthy();
   if (!loc.ed) loc.ed = {};
   loc.ed.testSurveyAgain = deText;
-  editorLocalization.currentLocale = "en";
   const creator: CreatorTester = new CreatorTester();
+  editorLocalization.currentLocale = "en";
   expect(creator.locale).toBe("en");
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   expect(testPlugin.model).toBeFalsy();

@@ -256,8 +256,11 @@ export class StringEditorViewModelBase extends Base {
     super();
     this.locString = locString;
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
+    this.creator?.onLocaleChanded.add(this.onLocaleChanged);
   }
-
+  private onLocaleChanged = () => {
+    this.resetPropertyValue("placeholderValue");
+  };
   public afterRender() {
     if (this.connector.focusOnEditor) {
       if (this.activate()) this.connector.focusOnEditor = false;
@@ -271,6 +274,7 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public dispose(): void {
+    this.creator?.onLocaleChanded.remove(this.onLocaleChanged);
     super.dispose();
     this.detachFromUI();
   }

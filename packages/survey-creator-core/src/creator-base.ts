@@ -42,7 +42,7 @@ import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
 import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
-import { DragDropSurveyElements } from "./survey-elements";
+import { DragDropSurveyElements } from "./dragdrop-survey-elements";
 import { PageAdorner } from "./components/page";
 import {
   ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, ElementAllowOperationsEvent,
@@ -572,7 +572,7 @@ export class SurveyCreatorModel extends Base
   public onGetPropertyReadOnly: EventBase<SurveyCreatorModel, GetPropertyReadOnlyEvent> = this.onPropertyGetReadOnly;
 
   /**
-   * An event that is raised when Survey Creator [instantiates a survey to display a UI element](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys). Handle this event to customize the UI element by modifying the survey.
+   * An event that is raised when Survey Creator [instantiates a survey to display a UI element](https://surveyjs.io/survey-creator/documentation/property-grid-customization#add-custom-properties-to-the-property-grid). Handle this event to customize the UI element by modifying the survey.
    * 
    * For information on event handler parameters, refer to descriptions within the interface.
    * 
@@ -986,7 +986,7 @@ export class SurveyCreatorModel extends Base
    *   }
    * });
    * 
-   * const creator = new SurveyCreatorModel({});
+   * const creator = new SurveyCreatorModel();
    * 
    * creator.onCreateCustomMessagePanel.add((_, options) => {
    *   options.messageText = "Choices for this question are loaded from a predefined data source. ";

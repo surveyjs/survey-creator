@@ -1,11 +1,11 @@
-import { Action, ActionContainer, AdaptiveActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, DragTypeOverMeEnum, IAction, IElement, PageModel, property, QuestionRowModel, SurveyElement, settings as SurveySettings } from "survey-core";
+import { ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, settings as SurveySettings } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
 import { getLocString } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
-import { DragDropSurveyElements } from "../survey-elements";
+import { DragDropSurveyElements, DropTo } from "../dragdrop-survey-elements";
 
 import "./page.scss";
 
@@ -16,18 +16,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   public questionTypeSelectorModel: any;
   private dragOrClickHelper: DragOrClickHelper;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
-  @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
-  @property({ defaultValue: false }) isDragMe: boolean;
-  private updateDragTypeOverMe() {
-    if (!this.isDisposed) {
-      this.dragTypeOverMe = this.page?.dragTypeOverMe;
-    }
-  }
-  private updateIsDragMe() {
-    if (!this.isDisposed) {
-      this.isDragMe = this.page?.isDragMe;
-    }
-  }
+
   private updateShowPlaceholder(visibleRows?: Array<QuestionRowModel>) {
     this.showPlaceholder = !this.isGhost && (visibleRows || this.page.visibleRows).length === 0;
   }
@@ -68,20 +57,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       if (this.isGhost) {
         this.addGhostPageSubsribes(surveyElement);
       }
-      surveyElement.registerFunctionOnPropertiesValueChanged(
-        ["dragTypeOverMe"],
-        () => {
-          this.updateDragTypeOverMe();
-        },
-        "dragOver"
-      );
-      surveyElement.registerFunctionOnPropertiesValueChanged(
-        ["isDragMe"],
-        () => {
-          this.updateIsDragMe();
-        },
-        "dragOver"
-      );
       surveyElement.registerFunctionOnPropertiesValueChanged(["visibleRows"], (newValue: Array<QuestionRowModel>) => {
         this.updateShowPlaceholder(newValue);
       }, "updatePlaceholder");
@@ -90,9 +65,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement.updateCustomWidgets();
       surveyElement.setWasShown(true);
       this.checkActionProperties();
-      this.dragTypeOverMe = surveyElement.dragTypeOverMe;
-      this.isDragMe = surveyElement.isDragMe;
-      if(this.creator.pageEditMode !== "single") {
+      if (this.creator.pageEditMode !== "single") {
         (<any>surveyElement.locTitle).placeholder = () => { return surveyElement.isStartPage ? "pe.startPageTitlePlaceholder" : "pe.pageTitlePlaceholder"; };
         (<any>surveyElement.locDescription).placeholder = "pe.pageDescriptionPlaceholder";
       }
@@ -104,7 +77,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       delete (<any>surveyElement.locTitle).placeholder;
       delete (<any>surveyElement.locDescription).placeholder;
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["elements"], "updatePlaceholder");
-      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["dragTypeOverMe", "isDragMe"], "dragOver");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["visibleRows"], "updatePlaceholder");
       surveyElement["surveyChangedCallback"] = undefined;
@@ -256,10 +228,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   get css(): string {
     let result = super.getCss();
     if (this.dragDropHelper.draggedElement && this.dragDropHelper.draggedElement.isPage) {
-      if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
+      if (this.dragTypeOverMe === DropTo.Top) {
         result += " svc-question__content--drag-over-top";
       }
-      if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
+      if (this.dragTypeOverMe === DropTo.Bottom) {
         result += " svc-question__content--drag-over-bottom";
       }
     } else {
