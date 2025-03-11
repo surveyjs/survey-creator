@@ -75,7 +75,6 @@
   white-space: nowrap;
   color: var(--ctr-toolbox-item-text-color-hovered, var(--sjs-layer-1-foreground-100, #000000e6));
   transition: opacity $creator-transition-duration;
-  background-color: $background;
   /* Shadow / Medium */
   border-radius: var(--ctr-tooltip-corner-radius, var(--sjs-corner-radius-x075));
   box-shadow:
@@ -427,11 +426,6 @@
     padding-inline-end: var(--ctr-toolbox-item-padding-right-no-text, var(--sjs-spacing-x1));
     box-sizing: border-box;
     align-self: flex-start;
-    &:after {
-      content:"\a0";
-      @include ctrSmallBoldFont;
-      width: 0;
-    }
   }
   .svc-toolbox__tool--dots {
     padding-inline-end: 0;

@@ -333,6 +333,13 @@ test("Check question converter no subitems", (): any => {
   const list = popup.contentComponentData.model;
   expect((list.getActionById("text").items || []).length).toBe(0);
 
+  const convertInputType = questionAdorner.actionContainer.getActionById("convertInputType");
+  const popupInputType = convertInputType.popupModel;
+  const popupInputTypeViewModel = new PopupDropdownViewModel(popupInputType); // need for popupModel.onShow
+  popupInputType.show();
+  const listInputType = popupInputType.contentComponentData.model;
+  expect(listInputType.actions.every(a => !(a instanceof QuestionToolboxItem))).toBeTruthy();
+
   surveySettings.animationEnabled = true;
 });
 

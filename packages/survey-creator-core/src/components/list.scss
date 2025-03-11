@@ -295,11 +295,11 @@
 
   .svc-list__item--group-selected > .svc-list__item-body {
     @include ctrDefaultBoldFont;
-    color: $primary-foreground;
-    background-color: $primary;
+    color: var(--ctr-list-item-text-color-selected, var(--sjs-primary-foreground-100, #ffffffff));
+    background: var(--ctr-list-item-background-color-selected, var(--sjs-primary-background-500, #19b394ff));
 
     use {
-      fill: $background;
+      fill: var(--ctr-list-item-icon-color-selected, var(--sjs-primary-foreground-100, #ffffffff));
     }
   }
 }

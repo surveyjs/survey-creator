@@ -51,15 +51,15 @@
   outline: none;
   cursor: pointer;
 
-  option {
-    background: $background;
-    color: $foreground;
-  }
+  // option {
+  //   background: $background;
+  //   color: $foreground;
+  // }
 }
 
-.svc-logic-operator:focus {
-  outline: 1px dotted $primary;
-}
+// .svc-logic-operator:focus {
+//   outline: 1px dotted $primary;
+// }
 
 
 .svc-logic-operator.svc-logic-operator {
@@ -268,7 +268,7 @@
     padding: 0;
     background: none;
     box-shadow: none;
-    
+
     border-radius: 0;
     overflow: visible;
   }
@@ -321,17 +321,17 @@
   white-space: nowrap;
 }
 
-
 .svc-logic-placeholder {
   width: calcSize(78);
   min-width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  margin-top: calcSize(2);
-  background: $background;
-  box-shadow: 0px 1px 2px 0px var(--ctr-shadow-small-color, var(--sjs-special-shadow, #00000040));
-  border-radius: calcSize(0.5);
-  padding: calcSize(4) calcSize(5) calcSize(5);
+  margin-top: var(--lbr-question-panel-header-padding-bottom, var(--lbr-spacing-x2));
+  border-radius: var(--lbr-question-panel-corner-radius, var(--lbr-corner-radius-x05));
+  background: var(--lbr-question-panel-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  box-shadow: var(--lbr-question-panel-shadow-offset-x, 0px) var(--lbr-question-panel-shadow-offset-y, 1px)
+    var(--lbr-question-panel-shadow-blur, 2px) var(--lbr-question-panel-shadow-spread, 0px)
+    var(--lbr-question-panel-shadow-color, var(--sjs-special-shadow, #00000040));
 }
 
 .sv-popup--menu-phone,
@@ -342,11 +342,12 @@
 }
 
 .svc-logic-placeholder__text.svc-logic-placeholder__text {
-  @include ctrDefaultFont;
+  @include lbrDefaultFont;
+  color: var(--lbr-placeholder-text-color, var(--sjs-layer-1-foreground-50, #00000080));
   text-align: center;
-  color: $foreground-light;
   display: block;
-  padding: calcSize(4) calcSize(8);
+  padding: var(--lbr-placeholder-padding-top, var(--lbr-spacing-x2)) var(--lbr-placeholder-padding-right, var(--lbr-spacing-x8))
+    var(--lbr-placeholder-padding-bottom, var(--lbr-spacing-x2)) var(--lbr-placeholder-padding-left, var(--lbr-spacing-x8));
 }
 
 .svc-logic-tab__leave-apply-button {
