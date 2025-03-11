@@ -54,6 +54,13 @@ const buildPlatformJson = {
     "@types/react-dom": "*",
     "@types/react": "*",
   },
+  exports: {
+    ".": {
+      "types": "./typings/survey-creator-js/entries/index.d.ts",
+      "import": "./fesm/survey-creator-js.js",
+      "require": "./survey-creator-js.js"
+    }
+  },
   peerDependenciesMeta: {
     "ace-builds": {
       "optional": true
