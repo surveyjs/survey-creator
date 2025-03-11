@@ -1,4 +1,4 @@
-import { ItemValue, QuestionCommentModel, QuestionTextBase, Serializer, Base } from "survey-core";
+import { ItemValue, QuestionCommentModel, QuestionTextBase, Serializer, Base, Helpers } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
@@ -153,13 +153,14 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
   protected collectNames(item, type: string, separatorCounter: number): string {
     let text: string = "";
     this.names.forEach((name) => {
+      let str = undefined;
       if (type === "itemvalues") {
         if (name == "value") return;
-        var str = name == "text" ? item.pureText : item[name];
+        str = name == "text" ? item.pureText : item[name];
       } else {
-        var str = item[name];
+        str = item[name];
       }
-      if (!!str) {
+      if (!Helpers.isValueEmpty(str)) {
         for (var i = 0; i < separatorCounter; i++) {
           text += ItemValue.Separator;
         }
