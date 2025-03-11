@@ -14,7 +14,6 @@
     "build:all": "npm run build && npm run build:i18n && npm run build:themes",
     "test": "jest",
     "test:cov": "jest --coverage",
-    "test:dev": "jest --watch",
     "test:watch": "jest --watch",
     "test:postcss": "postcss build/survey-creator-core.css --silent  -u postcss-calc -u autoprefixer -u postcss-fail-on-warn -u postcss-import -o survey-creator-core.postcss.css && rimraf survey-creator-core.postcss.css",
     "doc_gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
