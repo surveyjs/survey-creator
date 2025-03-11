@@ -43,8 +43,8 @@ test("Default value", async (t) => {
     .click(question1)
     .click(dataTab)
     .click(Selector("span").withExactText("Set Default Answer"))
-    .click(Selector(".sv-popup--modal span").withExactText("Item 1"))
-    .click(Selector(".sv-popup--modal button").withExactText("Apply"))
+    .click(Selector(".sv-popup--modal-popup span").withExactText("Item 1"))
+    .click(Selector(".sv-popup--modal-popup button").withExactText("Apply"))
     .expect(Selector("span").withExactText("Change Default Answer").visible).ok();
   const resultJson = await getJSON();
   await t
@@ -79,8 +79,8 @@ test("Default value & readonly", async (t) => {
     .expect(Selector("span").withExactText("Clear").exists).notOk()
     .click(Selector("span").withExactText("Change Default Answer"))
     .click(Selector(".sv-popup__body-header").withExactText("Default Answer"))
-    .expect(Selector(".sv-popup--modal button").withExactText("Apply").filterVisible().exists).notOk()
-    .click(Selector(".sv-popup--modal button").withExactText("Cancel"))
+    .expect(Selector(".sv-popup--modal-popup button").withExactText("Apply").filterVisible().exists).notOk()
+    .click(Selector(".sv-popup--modal-popup button").withExactText("Cancel"))
     .expect(Selector("span").withExactText("Change Default Answer").visible).ok();
 });
 
@@ -114,13 +114,13 @@ test("Impossible to specify the default value for a masked Date field", async (t
     .wait(1000)
     .pressKey("2")
     .pressKey("4")
-    .expect(Selector(".sv-popup--modal input").value).eql("02/04/yyyy")
+    .expect(Selector(".sv-popup--modal-popup input").value).eql("02/04/yyyy")
     .pressKey("1")
     .pressKey("9")
     .pressKey("9")
     .pressKey("8")
-    .expect(Selector(".sv-popup--modal input").value).eql("02/04/1998")
-    .click(Selector(".sv-popup--modal button").withExactText("Apply"))
+    .expect(Selector(".sv-popup--modal-popup input").value).eql("02/04/1998")
+    .click(Selector(".sv-popup--modal-popup button").withExactText("Apply"))
     .expect(Selector("span").withExactText("Change Default Answer").visible).ok();
 
   const resultJson = await getJSON();
