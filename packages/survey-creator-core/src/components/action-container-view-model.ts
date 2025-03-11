@@ -395,7 +395,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.setSurveyElement(surveyElement);
       this.creator.onLocaleChanded.add(this.creatorOnLocaleChanged);
       this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
-      this.creator.expandCollapseManager.add(this);
     }
   }
   private detachOnlyMyElement() {
@@ -409,7 +408,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.surveyElement = undefined;
     this.creator.onLocaleChanded.remove(this.creatorOnLocaleChanged);
     this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
-    this.creator.expandCollapseManager.remove(this);
   }
   public dispose(): void {
     this.detachFromUI();
