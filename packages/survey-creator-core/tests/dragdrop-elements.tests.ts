@@ -1,5 +1,5 @@
 import { Question, QuestionTextModel, SurveyModel } from "survey-core";
-import { DragDropSurveyElements, calculateDragOverLocation, calculateIsEdge, calculateIsSide, DropTo } from "../src/dragdrop-survey-elements";
+import { DragDropSurveyElements, calculateDragOverLocation, calculateIsEdge, calculateIsSide, DropIndicatorPosition } from "../src/dragdrop-survey-elements";
 import { CreatorTester } from "./creator-tester";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { PageAdorner } from "../src/components/page";
@@ -332,12 +332,12 @@ test("SurveyElements: isDropTargetValid && maxNestedPanels", () => {
   expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(true);
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q1"))).toBe(true);
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(true);
-  expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel2"), undefined, DropTo.Inside)).toBe(false);
+  expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel2"), undefined, DropIndicatorPosition.Inside)).toBe(false);
   ddHelper.onGetMaxNestedPanels = (): number => { return 0; };
   expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(true);
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q1"))).toBe(true);
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(false);
-  expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel2"), undefined, DropTo.Inside)).toBe(false);
+  expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel2"), undefined, DropIndicatorPosition.Inside)).toBe(false);
 });
 test("SurveyElements: isDropTargetValid && maxNestedPanels, #6109", () => {
   const survey = new SurveyModel({
@@ -488,7 +488,7 @@ test("drag drop existing to top/bottom", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
 
-  ddHelper.dragOverCore(q1, DropTo.Bottom);
+  ddHelper.dragOverCore(q1, DropIndicatorPosition.Bottom);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -503,7 +503,7 @@ test("drag drop existing to top/bottom", () => {
     ],
   });
 
-  ddHelper.dragOverCore(q1, DropTo.Top);
+  ddHelper.dragOverCore(q1, DropIndicatorPosition.Top);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -541,7 +541,7 @@ test("drag drop existing to left/right", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
 
-  ddHelper.dragOverCore(q2, DropTo.Left);
+  ddHelper.dragOverCore(q2, DropIndicatorPosition.Left);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -556,7 +556,7 @@ test("drag drop existing to left/right", () => {
     ],
   });
 
-  ddHelper.dragOverCore(q1, DropTo.Right);
+  ddHelper.dragOverCore(q1, DropIndicatorPosition.Right);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -589,7 +589,7 @@ test("drag drop existing from single row to outside top/bottom - break into seve
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q2;
 
-  ddHelper.dragOverCore(q1, DropTo.Top);
+  ddHelper.dragOverCore(q1, DropIndicatorPosition.Top);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -605,7 +605,7 @@ test("drag drop existing from single row to outside top/bottom - break into seve
   });
 
   ddHelper.draggedElement = q1;
-  ddHelper.dragOverCore(q3, DropTo.Bottom);
+  ddHelper.dragOverCore(q3, DropIndicatorPosition.Bottom);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -636,7 +636,7 @@ test("drag drop existing from single row to outside top", () => {
 
   let ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
-  ddHelper.dragOverCore(q2, DropTo.Top);
+  ddHelper.dragOverCore(q2, DropIndicatorPosition.Top);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -658,7 +658,7 @@ test("drag drop existing from single row to outside top", () => {
 
   ddHelper = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q2;
-  ddHelper.dragOverCore(q1, DropTo.Top);
+  ddHelper.dragOverCore(q1, DropIndicatorPosition.Top);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -680,7 +680,7 @@ test("drag drop existing from single row to outside top", () => {
 
   ddHelper = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
-  ddHelper.dragOverCore(q1, DropTo.Top);
+  ddHelper.dragOverCore(q1, DropIndicatorPosition.Top);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -711,7 +711,7 @@ test("drag drop existing from single row to outside bottom", () => {
 
   let ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
-  ddHelper.dragOverCore(q3, DropTo.Bottom);
+  ddHelper.dragOverCore(q3, DropIndicatorPosition.Bottom);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -733,7 +733,7 @@ test("drag drop existing from single row to outside bottom", () => {
 
   ddHelper = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q2;
-  ddHelper.dragOverCore(q3, DropTo.Bottom);
+  ddHelper.dragOverCore(q3, DropIndicatorPosition.Bottom);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -755,7 +755,7 @@ test("drag drop existing from single row to outside bottom", () => {
 
   ddHelper = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
-  ddHelper.dragOverCore(q2, DropTo.Bottom);
+  ddHelper.dragOverCore(q2, DropIndicatorPosition.Bottom);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -793,7 +793,7 @@ test("drag drop first to left of last item", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
 
-  ddHelper.dragOverCore(q3, DropTo.Left);
+  ddHelper.dragOverCore(q3, DropIndicatorPosition.Left);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -831,7 +831,7 @@ test("drag drop first to right of last item", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
 
-  ddHelper.dragOverCore(q3, DropTo.Right);
+  ddHelper.dragOverCore(q3, DropIndicatorPosition.Right);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -870,7 +870,7 @@ test("drag drop to panel vertical", () => {
   ddHelper.draggedElement = q1;
 
   ddHelper.insideContainer = true;
-  ddHelper.dragOverCore(p1, DropTo.Inside);
+  ddHelper.dragOverCore(p1, DropIndicatorPosition.Inside);
   ddHelper.doDrop();
 
   expect(survey.toJSON()).toStrictEqual({
@@ -889,7 +889,7 @@ test("drag drop to panel vertical", () => {
 
   ddHelper.draggedElement = q2;
   ddHelper.insideContainer = false;
-  ddHelper.dragOverCore(survey.getQuestionByName("q1"), DropTo.Top);
+  ddHelper.dragOverCore(survey.getQuestionByName("q1"), DropIndicatorPosition.Top);
   ddHelper.doDrop();
 
   expect(survey.toJSON()).toStrictEqual({
@@ -913,7 +913,7 @@ test("drag drop to panel vertical", () => {
   });
 
   ddHelper.draggedElement = q3;
-  ddHelper.dragOverCore(survey.getQuestionByName("q1"), DropTo.Bottom);
+  ddHelper.dragOverCore(survey.getQuestionByName("q1"), DropIndicatorPosition.Bottom);
   ddHelper.doDrop();
 
   expect(survey.toJSON()).toStrictEqual({
@@ -964,7 +964,7 @@ test("drag drop to panel horizontal", () => {
   ddHelper.draggedElement = q1;
 
   ddHelper.insideContainer = true;
-  ddHelper.dragOverCore(p1, DropTo.Inside);
+  ddHelper.dragOverCore(p1, DropIndicatorPosition.Inside);
   ddHelper.doDrop();
 
   expect(survey.toJSON()).toStrictEqual({
@@ -983,7 +983,7 @@ test("drag drop to panel horizontal", () => {
 
   ddHelper.insideContainer = false;
   ddHelper.draggedElement = q2;
-  ddHelper.dragOverCore(survey.getQuestionByName("q1"), DropTo.Left);
+  ddHelper.dragOverCore(survey.getQuestionByName("q1"), DropIndicatorPosition.Left);
   ddHelper.doDrop();
 
   expect(survey.toJSON()).toStrictEqual({
@@ -1008,7 +1008,7 @@ test("drag drop to panel horizontal", () => {
   });
 
   ddHelper.draggedElement = q3;
-  ddHelper.dragOverCore(survey.getQuestionByName("q1"), DropTo.Right);
+  ddHelper.dragOverCore(survey.getQuestionByName("q1"), DropIndicatorPosition.Right);
   ddHelper.doDrop();
 
   expect(survey.toJSON()).toStrictEqual({
@@ -1074,7 +1074,7 @@ test("Undo/redo question dragged from last page", (): any => {
 
   new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("question1"), null as any);
 
-  ddHelper.dragOverCore(creator.survey.getQuestionByName("question1"), DropTo.Bottom);
+  ddHelper.dragOverCore(creator.survey.getQuestionByName("question1"), DropIndicatorPosition.Bottom);
   creator.startUndoRedoTransaction("drag/drop");
   ddHelper.doDrop();
   creator.stopUndoRedoTransaction();
@@ -1126,7 +1126,7 @@ test("drag drop panel before another panel in left, Bug #4574", () => {
   new QuestionAdornerViewModel(creator, p1, null as any);
   new QuestionAdornerViewModel(creator, p2, null as any);
 
-  ddHelper.dragOverCore(p1, DropTo.Left);
+  ddHelper.dragOverCore(p1, DropIndicatorPosition.Left);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -1206,14 +1206,14 @@ test("Support onDragDropAllow, Bug#4572", (): any => {
 
   ddHelper.draggedElement = q2;
   ddHelper["allowDropHere"] = true;
-  ddHelper.dragOverCore(q1, DropTo.Top);
+  ddHelper.dragOverCore(q1, DropIndicatorPosition.Top);
   expect(counter).toBe(1);
   expect(targetName).toBe("question1");
   expect(sourceName).toBe("question2");
   expect(parentName).toBe("page1");
   expect(ddHelper["allowDropHere"]).toBeFalsy();
   ddHelper["allowDropHere"] = true;
-  ddHelper.dragOverCore(q1, DropTo.Bottom);
+  ddHelper.dragOverCore(q1, DropIndicatorPosition.Bottom);
   expect(counter).toBe(2);
   expect(ddHelper["allowDropHere"]).toBeTruthy();
 });
@@ -1277,17 +1277,17 @@ test("Test onDragOverLocationCalculating", (): any => {
   ddHelper["getDropTargetByNode"] = () => q1;
   ddHelper["isDropTargetValid"] = () => true;
   ddHelper.dragOver({ clientX: 40, clientY: 50 });
-  expect(ddHelper.dragOverLocation).toBe(DropTo.Top);
+  expect(ddHelper.dragOverLocation).toBe(DropIndicatorPosition.Top);
   expect(ddHelper.insideContainer).toBeFalsy();
   ddHelper.dragOver({ clientX: 100, clientY: 90 });
-  expect(ddHelper.dragOverLocation).toBe(DropTo.Bottom);
+  expect(ddHelper.dragOverLocation).toBe(DropIndicatorPosition.Bottom);
   expect(ddHelper.insideContainer).toBeFalsy();
   ddHelper.draggedElement = q3;
   ddHelper.dragOver({ clientX: 40, clientY: 50 });
-  expect(ddHelper.dragOverLocation).toBe(DropTo.Left);
+  expect(ddHelper.dragOverLocation).toBe(DropIndicatorPosition.Left);
   expect(ddHelper.insideContainer).toBeTruthy();
   ddHelper.dragOver({ clientX: 100, clientY: 90 });
-  expect(ddHelper.dragOverLocation).toBe(DropTo.Bottom);
+  expect(ddHelper.dragOverLocation).toBe(DropIndicatorPosition.Bottom);
   expect(ddHelper.insideContainer).toBeTruthy();
 });
 test("dragOverLocation calculation for empty and non-empty pages", (): any => {
@@ -1332,17 +1332,17 @@ test("dragOverLocation calculation for empty and non-empty pages", (): any => {
   ddHelper["getDropTargetByNode"] = () => p1;
   ddHelper["isDropTargetValid"] = () => true;
   ddHelper.dragOver({ clientX: 40, clientY: 50 });
-  expect(ddHelper.dragOverLocation).toBe(DropTo.Top);
+  expect(ddHelper.dragOverLocation).toBe(DropIndicatorPosition.Top);
   expect(ddHelper.insideContainer).toBeTruthy();
   ddHelper.dragOver({ clientX: 100, clientY: 90 });
-  expect(ddHelper.dragOverLocation).toBe(DropTo.Bottom);
+  expect(ddHelper.dragOverLocation).toBe(DropIndicatorPosition.Bottom);
   expect(ddHelper.insideContainer).toBeTruthy();
   ddHelper["getDropTargetByNode"] = () => p2;
   ddHelper.dragOver({ clientX: 40, clientY: 50 });
-  expect(ddHelper.dragOverLocation).toBe(DropTo.Top);
+  expect(ddHelper.dragOverLocation).toBe(DropIndicatorPosition.Top);
   expect(ddHelper.insideContainer).toBeTruthy();
   ddHelper.dragOver({ clientX: 100, clientY: 90 });
-  expect(ddHelper.dragOverLocation).toBe(DropTo.Bottom);
+  expect(ddHelper.dragOverLocation).toBe(DropIndicatorPosition.Bottom);
   expect(ddHelper.insideContainer).toBeTruthy();
 });
 test("Support onDragDropAllow&allowDropNextToAnother, #5621", (): any => {
@@ -1381,10 +1381,10 @@ test("Support onDragDropAllow&allowDropNextToAnother, #5621", (): any => {
   new QuestionAdornerViewModel(creator, q2, null as any);
 
   ddHelper.draggedElement = q2;
-  ddHelper.dragOverCore(q1, DropTo.Left);
-  expect(ddHelper.dragOverLocation).toBe(DropTo.Top);
-  ddHelper.dragOverCore(q1, DropTo.Right);
-  expect(ddHelper.dragOverLocation).toBe(DropTo.Bottom);
+  ddHelper.dragOverCore(q1, DropIndicatorPosition.Left);
+  expect(ddHelper.dragOverLocation).toBe(DropIndicatorPosition.Top);
+  ddHelper.dragOverCore(q1, DropIndicatorPosition.Right);
+  expect(ddHelper.dragOverLocation).toBe(DropIndicatorPosition.Bottom);
 });
 
 test("drag drop one empty panel to other empty panel - https://github.com/surveyjs/survey-creator/issues/4390", () => {
@@ -1417,7 +1417,7 @@ test("drag drop one empty panel to other empty panel - https://github.com/survey
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = p2;
   ddHelper.insideContainer = true;
-  ddHelper.dragOverCore(p1, DropTo.Inside);
+  ddHelper.dragOverCore(p1, DropIndicatorPosition.Inside);
   ddHelper.doDrop();
 
   expect(survey.toJSON()).toStrictEqual({
@@ -1470,15 +1470,15 @@ test("Do not allow to drag inside panel", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = p1;
 
-  const checkAllowDragOverByType = (element: any, en: DropTo): void => {
+  const checkAllowDragOverByType = (element: any, en: DropIndicatorPosition): void => {
     ddHelper.dragOverCore(element, en);
     expect(ddHelper["allowDropHere"]).toBeFalsy();
   };
   const checkAllowDragOver = (element: any): void => {
-    checkAllowDragOverByType(element, DropTo.Top);
-    checkAllowDragOverByType(element, DropTo.Bottom);
-    checkAllowDragOverByType(element, DropTo.Left);
-    checkAllowDragOverByType(element, DropTo.Right);
+    checkAllowDragOverByType(element, DropIndicatorPosition.Top);
+    checkAllowDragOverByType(element, DropIndicatorPosition.Bottom);
+    checkAllowDragOverByType(element, DropIndicatorPosition.Left);
+    checkAllowDragOverByType(element, DropIndicatorPosition.Right);
   };
   ddHelper["allowDropHere"] = true;
   checkAllowDragOver(p2);
@@ -1510,7 +1510,7 @@ test("onQuestionAdded doesn't fire when drag drop existing element", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
 
-  ddHelper.dragOverCore(q1, DropTo.Bottom);
+  ddHelper.dragOverCore(q1, DropIndicatorPosition.Bottom);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -1550,7 +1550,7 @@ test("onQuestionAdded fires when drag drop new element", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q4;
 
-  ddHelper.dragOverCore(q1, DropTo.Bottom);
+  ddHelper.dragOverCore(q1, DropIndicatorPosition.Bottom);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -1600,7 +1600,7 @@ test("drag drop page", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = p3;
 
-  ddHelper.dragOverCore(p2, DropTo.Top);
+  ddHelper.dragOverCore(p2, DropIndicatorPosition.Top);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -1631,29 +1631,29 @@ test("drag drop page check draggedFrom property", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
 
   ddHelper.draggedElement = p3;
-  ddHelper.dragOverCore(p2, DropTo.Top);
+  ddHelper.dragOverCore(p2, DropIndicatorPosition.Top);
   ddHelper.doDrop();
   expect(p3["draggedFrom"]).toStrictEqual(3);
 
   ddHelper.draggedElement = p3;
-  ddHelper.dragOverCore(p2, DropTo.Bottom);
+  ddHelper.dragOverCore(p2, DropIndicatorPosition.Bottom);
   ddHelper.doDrop();
   expect(p3["draggedFrom"]).toStrictEqual(1);
 
   ddHelper.draggedElement = p1;
-  ddHelper.dragOverCore(p3, DropTo.Bottom);
+  ddHelper.dragOverCore(p3, DropIndicatorPosition.Bottom);
   ddHelper.doDrop();
   expect(p1["draggedFrom"]).toStrictEqual(0);
 
   ddHelper.draggedElement = p3;
   p3["draggedFrom"] = undefined;
-  ddHelper.dragOverCore(p2, DropTo.Bottom);
+  ddHelper.dragOverCore(p2, DropIndicatorPosition.Bottom);
   ddHelper.doDrop();
   expect(p3["draggedFrom"]).toStrictEqual(undefined);
 
   ddHelper.draggedElement = p3;
   p3["draggedFrom"] = undefined;
-  ddHelper.dragOverCore(p2, DropTo.Top);
+  ddHelper.dragOverCore(p2, DropIndicatorPosition.Top);
   ddHelper.doDrop();
   expect(p3["draggedFrom"]).toStrictEqual(2);
 });
@@ -1692,7 +1692,7 @@ test("drag drop move page shouldn't raise survey onPageAdded", () => {
 
   expect(pageAddedCounter).toBe(0);
   ddHelper.draggedElement = p3;
-  ddHelper.dragOverCore(p2, DropTo.Top);
+  ddHelper.dragOverCore(p2, DropIndicatorPosition.Top);
   ddHelper.doDrop();
   expect(p3["draggedFrom"]).toStrictEqual(3);
   expect(pageAddedCounter).toBe(0);

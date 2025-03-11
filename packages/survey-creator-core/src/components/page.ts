@@ -5,7 +5,7 @@ import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action
 import { getLocString } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
-import { DragDropSurveyElements, DropTo } from "../dragdrop-survey-elements";
+import { DragDropSurveyElements, DropIndicatorPosition } from "../dragdrop-survey-elements";
 
 import "./page.scss";
 
@@ -48,7 +48,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   protected attachElement(surveyElement: PageModel): void {
     super.attachElement(surveyElement);
-    this.dragTypeOverMe = null;
+    this.dropIndicatorPosition = null;
 
     if (!!surveyElement) {
       surveyElement["surveyChangedCallback"] = () => {
@@ -83,7 +83,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
     super.detachElement(surveyElement);
     if (!this.isDisposed) {
-      this.dragTypeOverMe = null;
+      this.dropIndicatorPosition = null;
     }
   }
 
@@ -227,20 +227,20 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   get css(): string {
     const isDraggedElementPage = this.dragDropHelper.draggedElement && this.dragDropHelper.draggedElement.isPage;
-    const isDragOverInside = !!this.dragTypeOverMe && this.showPlaceholder;
-    const isDragOverEmpty = !!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0;
+    const isDragOverInside = !!this.dropIndicatorPosition && this.showPlaceholder;
+    const isDragOverEmpty = !!this.dropIndicatorPosition && this.page.elements.length === 0 && this.creator.survey.pages.length > 0;
     const isShowAddQuestionButton = !!this.creator && !this.creator.showAddQuestionButton;
-    const isDragOverCollapsedInside = !!this.dragTypeOverMe && this.collapsed;
+    const isDragOverCollapsedInside = !!this.dropIndicatorPosition && this.collapsed;
 
     let result: string = new CssClassBuilder()
       .append(super.getCss())
-      .append("svc-question__content--drag-over-top", isDraggedElementPage && this.dragTypeOverMe === DropTo.Top)
-      .append("svc-question__content--drag-over-bottom", isDraggedElementPage && this.dragTypeOverMe === DropTo.Bottom)
+      .append("svc-question__content--drag-over-top", isDraggedElementPage && this.dropIndicatorPosition === DropIndicatorPosition.Top)
+      .append("svc-question__content--drag-over-bottom", isDraggedElementPage && this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
       .append("svc-question__content--drag-over-inside", !isDraggedElementPage && isDragOverInside)
       .append("svc-page--drag-over-empty", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty)
       .append("svc-page--drag-over-empty-no-add-button", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty && isShowAddQuestionButton)
       .append("svc-page__content--collapsed-drag-over-inside", !isDraggedElementPage && isDragOverCollapsedInside)
-      .append("svc-page__content--dragged", this.isDragMe)
+      .append("svc-page__content--dragged", this.isBeingDragged)
       .append("svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility, this.allowExpandCollapse || !!this.page["isGhost"])
       .append("svc-page__content--collapsed", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.renderedCollapsed || !!this.page["isGhost"]))
       .append("svc-page__content--animation-running", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.expandCollapseAnimationRunning))

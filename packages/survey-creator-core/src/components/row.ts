@@ -7,11 +7,11 @@ import {
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import "./row.scss";
-import { DropTo } from "../dragdrop-survey-elements";
+import { DropIndicatorPosition } from "../dragdrop-survey-elements";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
 
 export class RowViewModel extends Base {
-  @property({ defaultValue: null }) dragTypeOverMe: DropTo;
+  @property({ defaultValue: null }) dropIndicatorPosition: DropIndicatorPosition;
 
   constructor(
     public creator: SurveyCreatorModel,
@@ -33,8 +33,8 @@ export class RowViewModel extends Base {
     return new CssClassBuilder()
       .append("svc-row")
       .append("svc-row--ghost", this.row.elements.length === 1 && this.row.elements[0].name === "sv-drag-drop-ghost-survey-element-name")
-      .append("svc-row--drag-over-top", this.dragTypeOverMe === DropTo.Top)
-      .append("svc-row--drag-over-bottom", this.dragTypeOverMe === DropTo.Bottom)
+      .append("svc-row--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
+      .append("svc-row--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
       .toString();
   }
   public dispose() {
