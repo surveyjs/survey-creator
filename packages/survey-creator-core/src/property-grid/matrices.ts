@@ -1,4 +1,4 @@
-import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, renamedIcons, Serializer, SurveyElement } from "survey-core";
+import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, renamedIcons, Serializer, SurveyElement, SurveyModel } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
@@ -12,7 +12,6 @@ import {
 } from "./index";
 import { updateMatixActionsClasses, updateMatrixRemoveAction } from "../utils/actions";
 import { QuestionRatingAdornerViewModel } from "../components/question-rating";
-import { CreatorBase } from "../creator-base";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 
 Serializer.addProperty("itemvalue",
@@ -669,7 +668,9 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
     return prop.type == "surveypages";
   }
   protected addItem(creator: ISurveyCreatorOptions, obj: Base, question: QuestionMatrixDynamicModel) {
-    (creator as CreatorBase).addPage(undefined, false);
+    if(creator.canAddPage()) {
+      super.addItem(creator, obj, question);
+    }
   }
   protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
     return "page@" + obj.getType();
@@ -684,7 +685,7 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
     return "name";
   }
   protected getBaseValue(prop: JsonObjectProperty): string {
-    return "page";
+    return editorLocalization.getString("ed.newPageName");
   }
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
 }
