@@ -23,7 +23,7 @@ export class ExpandCollapseManager {
       .concat(this.creator.survey.getAllPanels() as unknown as SurveyElement[])
       .concat(this.creator.survey.getAllQuestions() as SurveyElement[]);
   }
-  private sortElements(elements: SurveyElement[]) {
+  private sortElements(elements: SurveyElement[]): Array<SurveyElement> {
     return [].concat(elements).sort((el, el2) => {
       const a = el.isPage ? 2 : el.isPanel ? 1 : 0;
       const b = el2.isPage ? 2 : el2.isPanel ? 1 : 0;
