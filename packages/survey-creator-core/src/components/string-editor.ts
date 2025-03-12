@@ -256,7 +256,7 @@ export class StringEditorViewModelBase extends Base {
     super();
     this.locString = locString;
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
-    this.creator?.onLocaleChanded.add(this.onLocaleChanged);
+    this.addCreatorEvents();
   }
   private onLocaleChanged = () => {
     this.resetPropertyValue("placeholderValue");
@@ -268,6 +268,7 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public detachFromUI() {
+    this.removeCreatorEvents();
     this.connector?.onDoActivate.remove(this.activate);
     this.getEditorElement = undefined;
     this.blurEditor = undefined;
@@ -278,7 +279,12 @@ export class StringEditorViewModelBase extends Base {
     super.dispose();
     this.detachFromUI();
   }
-
+  private addCreatorEvents() {
+    this.creator?.onLocaleChanded.add(this.onLocaleChanged);
+  }
+  private removeCreatorEvents() {
+    this.creator?.onLocaleChanded.remove(this.onLocaleChanged);
+  }
   public activate = () => {
     const element = this.getEditorElement();
     if (element && element.offsetParent != null) {
@@ -290,10 +296,12 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public setLocString(locString: LocalizableString) {
+    this.removeCreatorEvents();
     this.connector?.onDoActivate.remove(this.activate);
     this.locString = locString;
     this.connector = StringEditorConnector.get(locString);
     this.connector.onDoActivate.add(this.activate);
+    this.addCreatorEvents();
   }
   public checkConstraints(event: any) {
     if (!this.compostionInProgress && this.maxLength > 0 && event.keyCode >= 32) {
