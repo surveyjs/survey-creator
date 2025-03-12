@@ -366,7 +366,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       this.dragOverIndicatorElement = this.dropTarget;
       this.dropTargetAdorner.dropIndicatorPosition = DropIndicatorPosition.Inside;
     } else {
-      const row = this.parentElement.dragDropFindRow(this.dropTarget);
+      //const row = this.parentElement.dragDropFindRow(this.dropTarget);
+      const row = this.parentElement.findRowByElement(this.dropTarget);
       if (!!row && row.elements.length > 1 && (this.dragOverLocation === DropIndicatorPosition.Top || this.dragOverLocation === DropIndicatorPosition.Bottom)) {
         this.dragOverIndicatorElement = row;
         const adorner = SurveyElementAdornerBase.GetAdorner(row);
