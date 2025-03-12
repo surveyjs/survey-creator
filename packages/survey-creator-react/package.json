@@ -35,8 +35,7 @@
     "build": "webpack --env buildType=dev --env emitDeclarations --env emitNonSourceFiles && webpack --env buildType=prod && rollup -c",
     "watch:dev": "concurrently \"webpack --env buildType=dev --watch --env emitDeclarations --env emitStyles\" \"rollup -c -w\" ",
     "watch:prod": "webpack --env buildType=prod --watch",
-    "lint": "eslint ./src",
-    "webkit": "npx playwright wk http://127.0.0.1:8082"
+    "lint": "eslint ./src"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.0",
