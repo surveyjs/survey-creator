@@ -366,8 +366,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       this.dragOverIndicatorElement = this.dropTarget;
       this.dropTargetAdorner.dropIndicatorPosition = DropIndicatorPosition.Inside;
     } else {
-      //const row = this.parentElement.dragDropFindRow(this.dropTarget);
-      const row = this.parentElement.findRowByElement(this.dropTarget);
+      const row = this.dragDropFindRow(this.dropTarget, this.parentElement);
+
       if (!!row && row.elements.length > 1 && (this.dragOverLocation === DropIndicatorPosition.Top || this.dragOverLocation === DropIndicatorPosition.Bottom)) {
         this.dragOverIndicatorElement = row;
         const adorner = SurveyElementAdornerBase.GetAdorner(row);
@@ -381,6 +381,22 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
     if (this.dragOverIndicatorElement != oldDragOverIndicatorElement) this.removeDragOverMarker(oldDragOverIndicatorElement);
     if (this.dropTarget != oldDropTarget) this.removeDragOverMarker(oldDropTarget);
+  }
+  private dragDropFindRow(findElement: ISurveyElement, panel: PanelModelBase): QuestionRowModel {
+    if (!findElement || findElement.isPage) return null;
+    var element = <IElement>findElement;
+    var rows = panel.rows;
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].elements.indexOf(element) > -1) return rows[i];
+    }
+    for (var i = 0; i < panel.elements.length; i++) {
+      var pnl = panel.elements[i].getPanel();
+      if (!pnl) continue;
+      var row = this.dragDropFindRow(element, <PanelModelBase>pnl);
+      if (!!row) return row;
+    }
+    return null;
+
   }
   private isSameElement(target: ISurveyElement): boolean {
     while (!!target) {

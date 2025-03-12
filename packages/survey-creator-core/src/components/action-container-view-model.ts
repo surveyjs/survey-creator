@@ -336,7 +336,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.updateActionsProperties();
     }
   };
-  public static GetAdorner<V = SurveyElementAdornerBase>(surveyElement: SurveyElement): V {
+  public static GetAdorner<V = SurveyElementAdornerBase>(surveyElement: Base): V {
     return surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) as V;
   }
   public static RestoreStateFor(surveyElement: SurveyElement): void {
