@@ -173,7 +173,7 @@
   &:after {
     content: "";
     display: block;
-    height: var(--ctr-toolbox-separator-height, var(--sjs-size-x0125));
+    height: var(--ctr-toolbox-separator-height, var(--sjs-stroke-x1));
     background-color: var(--ctr-toolbox-separator-color, var(--sjs-border-25, #d4d4d4ff));
   }
 }
