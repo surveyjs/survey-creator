@@ -184,12 +184,16 @@ export class SurveyCreatorModel extends Base
    * Specifies whether users can modify the [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme). Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#propertyGridNavigationMode) is `"buttons"`.
    * 
    * Default value: `true`
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/dynamic-ui-customization/ (linkStyle))
    */
   @property({ defaultValue: true }) showCreatorThemeSettings: boolean;
   /**
    * Specifies whether the "Zoom In", "Zoom Out", and "Zoom to 100%" buttons are available.
    * 
    * Default value: `true`
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/expand-and-collapse-survey-elements/ (linkStyle))
    */
   @property({ defaultValue: true }) allowZoom: boolean;
   /**
@@ -598,6 +602,10 @@ export class SurveyCreatorModel extends Base
 
   /**
    * An event that is raised when Survey Creator obtains the expand/collapse state of a survey element on the design surface. Handle this event to set a required state.
+   * 
+   * For information on event handler parameters, refer to descriptions within the interface.
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/expand-and-collapse-survey-elements/ (linkStyle))
    * @see [ICreatorOptions.collapseQuestions](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#collapseQuestions)
    * @see [ICreatorOptions.collapsePanels](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#collapsePanels)
    * @see [ICreatorOptions.collapsePages](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#collapsePages)
@@ -3145,6 +3153,8 @@ export class SurveyCreatorModel extends Base
 
   /**
    * Opens [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme) settings in Property Grid. Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#propertyGridNavigationMode) is `"buttons"`.
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/dynamic-ui-customization/ (linkStyle))
    * @see closeCreatorThemeSettings
    * @see showCreatorThemeSettings
    */
@@ -4257,6 +4267,8 @@ export class SurveyCreatorModel extends Base
    * - `"onhover"` (default) - Displays an expand/collapse button when a survey element is hovered over or selected.
    * - `"always"` - Displays the expand/collapse buttons permanently.
    * - `"never"` - Hides the expand/collapse buttons.
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/expand-and-collapse-survey-elements/ (linkStyle))
    * @see onElementGetExpandCollapseState
    * @see collapseOnDrag
    */
@@ -4340,6 +4352,8 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: {} }) themeVariables: { [index: string]: string } = {};
   /**
    * A theme for the Survey Creator UI.
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/dynamic-ui-customization/ (linkStyle))
    * @see applyCreatorTheme
    * @see showCreatorThemeSettings
    */
@@ -4349,6 +4363,8 @@ export class SurveyCreatorModel extends Base
 
   /**
    * Applies a specified UI theme to Survey Creator.
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/dynamic-ui-customization/ (linkStyle))
    * @param theme An `ICreatorTheme` object with theme settings.
    * @see creatorTheme
    * @see showCreatorThemeSettings
