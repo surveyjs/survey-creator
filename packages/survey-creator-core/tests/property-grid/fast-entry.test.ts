@@ -139,3 +139,24 @@ test("Do not re-create with the same item.value", () => {
   expect(choices[5].value).toEqual("item8");
   expect(choices[5].getPropertyValue("#id")).toBeUndefined();
 });
+test("Work correctly with 0 number, Bug#6716", () => {
+  Serializer.addProperty("itemvalue", { name: "score:number" });
+  const originalElement = new QuestionRadiogroupModel("originalElement");
+  originalElement.choices = ["item1", "item2", "item2"];
+  const choices = originalElement.choices;
+  choices[0].score = 0;
+  choices[1].score = 1;
+  choices[2].score = 0;
+  const fastEntryEditor = new FastEntryEditor(choices, new EmptySurveyCreatorOptions(), undefined, ["value", "text", "score"]);
+  expect(fastEntryEditor.comment.value).toEqual("item1||0\nitem2||1\nitem2||0");
+  fastEntryEditor.comment.value = "item1||1\nitem2||0\nitem3||3";
+  fastEntryEditor.apply();
+  expect(originalElement.choices).toHaveLength(3);
+  expect(choices[0].value).toEqual("item1");
+  expect(choices[0].score).toBe("1");
+  expect(choices[1].value).toEqual("item2");
+  expect(choices[1].score).toBe("0");
+  expect(choices[2].value).toEqual("item3");
+  expect(choices[2].score).toBe("3");
+  Serializer.removeProperty("itemvalue", "score");
+});
