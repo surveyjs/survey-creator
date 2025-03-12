@@ -3123,7 +3123,7 @@ export class SurveyCreatorModel extends Base
         } else {
           clearInterval(this.currentFocusInterval);
         }
-        if ((startEdit || selEl.getType() === "matrixdropdowncolumn") && !!element) {
+        if (startEdit && !!element) {
           StringEditorConnector.get((element as Question).locTitle).activateEditor();
         }
       }, 1);
