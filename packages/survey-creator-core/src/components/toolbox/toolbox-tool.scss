@@ -28,7 +28,7 @@
       top: 50%;
     }
     .svc-toolbox__item-submenu-button {
-      top: calc(var(--ctr-toolbox-item-padding-top, var(--sjs-spacing-x1)));
+      top: 50%;
     }
   }
 }
@@ -231,8 +231,8 @@
   position: absolute;
   inset-inline-end: var(--ctr-toolbox-item-padding-right, var(--sjs-spacing-x2));
   margin-inline-end: var(--ctr-toolbox-item-submenu-button-margin-right, var(--sjs-spacing-x1n));
-  top: calc(var(--ctr-toolbox-item-padding-top, var(--sjs-spacing-x1)) + var(--ctr-toolbox-gap, var(--sjs-spacing-x05)));
-  bottom: var(--ctr-toolbox-item-padding-bottom, var(--dft-toolbox-item-padding-bottom));
+  top: calc(50% + var(--ctr-toolbox-gap, var(--sjs-spacing-x05)) / 2);
+  transform: translateY(-50%);
   display: inline-flex;
   padding: var(--ctr-toolbox-item-submenu-button-padding-top, var(--sjs-spacing-x05))
     var(--ctr-toolbox-item-submenu-button-padding-right, var(--sjs-spacing-x05))
