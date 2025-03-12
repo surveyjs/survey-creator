@@ -133,7 +133,7 @@
 
 .svc-list__item-separator {
   width: 100%;
-  height: var(--ctr-separator-width, var(--sjs-size-x0125));
+  height: var(--ctr-separator-width, var(--sjs-stroke-x1));
   margin: var(--ctr-separator-margin-vertical-small, var(--sjs-spacing-x1)) 0px;
   background-color: var(--ctr-separator-color, var(--sjs-border-25, #d4d4d4ff));
 }
