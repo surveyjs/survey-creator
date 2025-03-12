@@ -285,3 +285,54 @@ test("No Focus on open Property grid Mobile", async (t) => {
   await t.click(Selector(".svc-question__adorner button[title='Open settings']"));
   await t.expect(Selector(".spg-question[data-name=name] input").focused).notOk();
 });
+
+test("Element Selector: Column: Scroll", async (t) => {
+  await t.resizeWindow(1920, 500);
+
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "matrixdropdown",
+            "name": "question1",
+            "columns": [
+              {
+                "name": "Column 1"
+              },
+              {
+                "name": "Column 2"
+              },
+              {
+                "name": "Column 3"
+              }
+            ],
+            "choices": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "rows": [
+              "Row 1",
+              "Row 2"
+            ]
+          }
+        ]
+      }
+    ],
+    "headerView": "advanced"
+  };
+  await setJSON(json);
+
+  const getQuestionTopPosition = await ClientFunction(() => {
+    return Math.round(document.querySelector(".svc-question__content")!.getBoundingClientRect().top);
+  });
+
+  await t
+    .expect(getQuestionTopPosition()).eql(374)
+    .click(Selector("#svd-grid-object-selector")).click(Selector(".svc-list__item").withText("Column 2"))
+    .expect(getQuestionTopPosition()).eql(72);
+});
