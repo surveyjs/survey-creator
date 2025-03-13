@@ -149,7 +149,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     container.sizeMode = "small";
     container.cssClasses = this.containerCssClasses();
     container.dotsItem.iconSize = "auto";
-    container.dotsItem.cssClasses.itemIcon += " svc-page-toolbar-item__icon";
     return container;
   }
 
