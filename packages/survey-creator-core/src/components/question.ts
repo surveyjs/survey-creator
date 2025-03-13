@@ -313,7 +313,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     actionContainer.sizeMode = "small";
     actionContainer.cssClasses = defaultCssClasses;
     (<SurveyElementActionContainer>actionContainer).dotsItem.css += " svc-survey-element-toolbar__dots-item";
-    (<SurveyElementActionContainer>actionContainer).dotsItem.innerCss += " svc-survey-element-toolbar__item";
     return actionContainer;
   }
   protected updateActionsPropertiesCore(): void {
