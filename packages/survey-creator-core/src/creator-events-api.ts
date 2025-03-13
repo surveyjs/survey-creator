@@ -4,6 +4,7 @@ import {
 } from "survey-core";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
+import { ICreatorTheme } from "./creator-theme/creator-themes";
 
 export interface ElementDeletingEvent {
   /**
@@ -1097,4 +1098,10 @@ export interface CreatorThemePropertyChangedEvent {
    * A new property value.
    */
   value: any;
+}
+export interface CreatorThemeSelectedEvent {
+  /**
+   * A selected Survey Creator theme.
+   */
+  theme: ICreatorTheme;
 }
