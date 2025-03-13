@@ -1,11 +1,13 @@
 import { ActionContainer, classesToSelector, ComputedUpdater, CssClassBuilder, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, settings as SurveySettings } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
-import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
+import { SurveyElementActionContainer } from "./action-container-view-model";
+import { SurveyElementAdornerBase } from "./survey-element-adorner-base";
 import { getLocString } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
-import { DragDropSurveyElements, DropIndicatorPosition } from "../dragdrop-survey-elements";
+import { DragDropSurveyElements } from "../dragdrop-survey-elements";
+import { DropIndicatorPosition } from "../drop-to-enum";
 
 import "./page.scss";
 

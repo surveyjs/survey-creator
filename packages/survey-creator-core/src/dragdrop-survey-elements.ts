@@ -2,15 +2,8 @@ import { DragDropAllowEvent, DragDropCore, getIconNameFromProxy, IElement, IPane
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
-import { SurveyElementAdornerBase } from "./components/action-container-view-model";
-
-export enum DropIndicatorPosition {
-  Inside = "inside",
-  Top = "top",
-  Bottom = "bottom",
-  Right = "right",
-  Left = "left"
-}
+import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
+import { DropIndicatorPosition } from "./drop-to-enum";
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
   const rect = dropTargetNode.getBoundingClientRect();
@@ -59,10 +52,6 @@ export function calculateDragOverLocation(clientX: number, clientY: number, rect
   }
 }
 
-export function isPanelDynamic(element: ISurveyElement) {
-  return element instanceof QuestionPanelDynamicModel;
-}
-
 export class DragDropSurveyElements extends DragDropCore<any> {
   public static newGhostPage: PageModel = null;
   public static restrictDragQuestionBetweenPages: boolean = false;
@@ -81,7 +70,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return SurveyElementAdornerBase.GetAdorner(this.draggedElement);
   }
 
-  protected get dropTargetAdorner(): SurveyElementAdornerBase {
+  protected get dropTargetAdorner(): SurveyElementAdornerBase | null {
     if (!this.dropTarget) return null;
     return SurveyElementAdornerBase.GetAdorner(this.dropTarget);
   }
@@ -172,6 +161,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     var newElement = Serializer.createClass(json["type"]);
     new JsonObject().toObject(json, newElement);
     return newElement;
+  }
+
+  private isPanelDynamic(element: ISurveyElement) {
+    return element instanceof QuestionPanelDynamicModel;
   }
 
   protected findDropTargetNodeByDragOverNode(dragOverNode: HTMLElement): HTMLElement {
@@ -443,7 +436,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const dropTargetRect = dropTargetNode.getBoundingClientRect();
     const calcDirection = !settings.dragDrop.allowDragToTheSameLine || (!!this.draggedElement && this.draggedElement.isPage) ? "top-bottom" : null;
     let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetRect, calcDirection);
-    if (!this.draggedElement.isPage && dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
+    if (!this.draggedElement.isPage && dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || this.isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
       if (dropTarget.isPage || this.insideContainer) {
         dragOverLocation = DropIndicatorPosition.Inside;
       }
@@ -534,7 +527,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       srcContainer.removeElement(src);
     }
     let dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
-    if (isPanelDynamic(dest) && this.insideContainer) dest = dest.template;
+    if (this.isPanelDynamic(dest) && this.insideContainer) dest = dest.template;
     if (dest.isPage && dest.elements.length > 0 && !this.insideContainer) return;
     const isTargetIsContainer = dest.isPanel || dest.isPage;
     if (isTargetIsContainer && this.insideContainer) {

@@ -4,7 +4,7 @@ import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
 import { DragDropSurveyElements } from "../../dragdrop-survey-elements";
-import { SurveyElementAdornerBase } from "../action-container-view-model";
+import { SurveyElementAdornerBase } from "../survey-element-adorner-base";
 import { assign } from "../../utils/utils";
 import designTabSurveyThemeJSON from "../../designTabSurveyThemeJSON";
 import "./designer.scss";

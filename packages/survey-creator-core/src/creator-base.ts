@@ -71,7 +71,7 @@ import {
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
-import { SurveyElementAdornerBase } from "./components/action-container-view-model";
+import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
 
 import { iconsV1, iconsV2 } from "./svgbundle";

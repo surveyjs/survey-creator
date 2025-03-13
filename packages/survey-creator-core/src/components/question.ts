@@ -30,11 +30,13 @@ import {
   isPropertyVisible,
   propertyExists,
 } from "../utils/creator-utils";
-import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
+import { SurveyElementActionContainer } from "./action-container-view-model";
+import { SurveyElementAdornerBase } from "./survey-element-adorner-base";
 import "./question.scss";
 import { settings } from "../creator-settings";
 import { StringItemsNavigatorBase } from "./string-editor";
-import { DragDropSurveyElements, DropIndicatorPosition } from "../dragdrop-survey-elements";
+import { DragDropSurveyElements } from "../dragdrop-survey-elements";
+import { DropIndicatorPosition } from "../drop-to-enum";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 import { listComponentCss } from "./list-theme";
 

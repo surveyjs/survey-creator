@@ -1,7 +1,7 @@
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { settings } from "../src/creator-settings";
-import { DropIndicatorPosition } from "../src/dragdrop-survey-elements";
+import { DropIndicatorPosition } from "../src/drop-to-enum";
 import { CreatorTester } from "./creator-tester";
 
 test("Check page adorner css on drag over", (): any => {

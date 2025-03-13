@@ -1,5 +1,5 @@
 import { CreatorBase } from "./creator-base";
-import { SurveyElementAdornerBase } from "./components/action-container-view-model";
+import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
 import { PageModel, PanelModel, Question, SurveyElement } from "survey-core";
 import { ElementGetExpandCollapseStateEventReason } from "./creator-events-api";
 
