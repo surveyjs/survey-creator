@@ -9,7 +9,8 @@ import { QuestionRatingAdornerViewModel } from "../src/components/question-ratin
 import { CreatorTester } from "./creator-tester";
 import { LogoImageViewModel } from "../src/components/header/logo-image";
 import { imageMimeTypes } from "../src/utils/utils";
-import { calculateDragOverLocation, DropTo } from "../src/dragdrop-survey-elements";
+import { calculateDragOverLocation } from "../src/dragdrop-survey-elements";
+import { DropTo } from "../src/drop-to-enum";
 
 beforeEach(() => { });
 

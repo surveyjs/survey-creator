@@ -6,8 +6,8 @@ import {
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import "./row.scss";
-import { DropTo } from "../dragdrop-survey-elements";
-import { SurveyElementAdornerBase } from "./action-container-view-model";
+import { DropTo } from "../drop-to-enum";
+import { SurveyElementAdornerBase } from "./survey-element-adorner-base";
 
 export class RowViewModel extends Base {
   @property({ defaultValue: null }) dragTypeOverMe: DropTo;
