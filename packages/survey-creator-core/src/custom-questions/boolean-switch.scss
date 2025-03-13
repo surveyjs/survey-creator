@@ -57,12 +57,13 @@
   }
 
   &:focus {
-    background: var(--ctr-toggle-button-background-color-checked-focused,
-        #ffffff);
+    background: var(--ctr-toggle-button-background-color-checked-focused, var(--sjs-primary-foreground-100, #ffffff));
 
     .spg-boolean-switch__thumb--right {
-      background: var(--ctr-toggle-button-thumb-background-color-checked-focused,
-          #19b394);
+      background: var(
+        --ctr-toggle-button-thumb-background-color-checked-focused,
+        var(--sjs-primary-background-500, #19b394)
+      );
     }
   }
 }
