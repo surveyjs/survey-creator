@@ -6,6 +6,7 @@ import * as React from "react";
 interface IQuestionEditorContentComponentProps {
   creator: SurveyCreatorModel;
   survey: SurveyModel;
+  style: any;
 }
 
 export class QuestionEditorContentComponent extends React.Component<
@@ -40,9 +41,9 @@ export class QuestionEditorContentComponent extends React.Component<
   render(): React.JSX.Element {
     const question = this.survey.getAllQuestions()[0];
     return (
-      <>
+      <div style={this.props.style} >
         <SurveyQuestion creator={this} element={question}></SurveyQuestion>
-      </>
+      </div>
     );
   }
 }
