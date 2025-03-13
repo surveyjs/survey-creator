@@ -42,6 +42,9 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
     super();
     this.dotsItem.popupModel.horizontalPosition = "center";
     this.dotsItem.popupModel.cssClass += " svc-tabbed-menu-item__popup svc-creator-popup";
+    this.dotsItem.css += " svc-tabbed-menu-dots";
+    this.dotsItem.innerCss += " svc-tabbed-menu-dots__item";
+    this.dotsItem.iconSize = "auto";
     this.hiddenItemsListModel.cssClasses = listComponentCss;
     this.minVisibleItemsCount = 1;
   }

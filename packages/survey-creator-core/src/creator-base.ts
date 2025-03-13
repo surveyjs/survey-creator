@@ -65,12 +65,13 @@ import {
   ElementSelectingEvent,
   ElementSelectedEvent,
   DefineElementMenuItemsEvent,
-  CreatorThemePropertyChangedEvent
+  CreatorThemePropertyChangedEvent,
+  CreatorThemeSelectedEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
-import { SurveyElementAdornerBase } from "./components/action-container-view-model";
+import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
 
 import { iconsV1, iconsV2 } from "./svgbundle";
@@ -1011,7 +1012,10 @@ export class SurveyCreatorModel extends Base
    * An event that is raised when users change a property in a [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme).
    */
   public onCreatorThemePropertyChanged: EventBase<SurveyCreatorModel, CreatorThemePropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorThemePropertyChangedEvent>();
-  public onCreatorThemeSelected: EventBase<SurveyCreatorModel, { theme: ICreatorTheme }> = this.addCreatorEvent<SurveyCreatorModel, { theme: ICreatorTheme }>();
+  /**
+   * An event that is raised when users select a [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme) from the drop-down list of UI themes.
+   */
+  public onCreatorThemeSelected: EventBase<SurveyCreatorModel, CreatorThemeSelectedEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorThemeSelectedEvent>();
 
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   public setSurveyJSONTextCallback: (text: string) => void;
@@ -3108,7 +3112,7 @@ export class SurveyCreatorModel extends Base
     clearTimeout(this.currentFocusTimeout);
     this.currentFocusTimeout = setTimeout(() => {
       this.currentFocusInterval = setInterval(() => {
-        const el = document.getElementById(selEl.id);
+        let el = this.getHtmlElementForScroll(selEl);
         if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
           if (!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
           clearInterval(this.currentFocusInterval);
@@ -3123,7 +3127,7 @@ export class SurveyCreatorModel extends Base
                 SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
               }
             }
-            if (!propertyName && el.parentElement) {
+            if (!propertyName && el.parentElement && selEl.getType() !== "matrixdropdowncolumn") {
               let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
               elToFocus && elToFocus.focus({ preventScroll: true });
             }
@@ -3138,9 +3142,19 @@ export class SurveyCreatorModel extends Base
     }, 100);
   }
 
+  private getHtmlElementForScroll(element: any): HTMLElement {
+    const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.id : element.id;
+    return document.getElementById(id);
+  }
+
   private getSelectedSurveyElement(): IElement {
     var sel: any = this.selectedElement;
     if (!sel || sel.getType() == "survey") return null;
+
+    if (this.selectedElement.getType() === "matrixdropdowncolumn") {
+      return (<any>this.selectedElement);
+    }
+
     return sel.isInteractiveDesignElement && sel.id ? sel : null;
   }
   private onSelectingElement(val: Base): Base {

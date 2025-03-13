@@ -30,7 +30,7 @@ import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { QuestionImageAdornerViewModel } from "../src/components/question-image";
 import { QuestionDropdownAdornerViewModel } from "../src/components/question-dropdown";
-import { SurveyElementAdornerBase } from "../src/components/action-container-view-model";
+import { SurveyElementAdornerBase } from "../src/components/survey-element-adorner-base";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { TabTestPlugin } from "../src/components/tabs/test-plugin";

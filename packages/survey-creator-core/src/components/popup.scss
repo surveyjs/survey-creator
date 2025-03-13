@@ -127,6 +127,7 @@
   &.sv-popup--menu-popup {
     .sv-popup-inner > .sv-popup__container,
     & > .sv-popup__container {
+      background: transparent;
       border-radius: var(--ctr-popup-menu-corner-radius, var(--sjs-corner-radius-x1));
       box-shadow:
         var(--ctr-popup-menu-shadow-1-offset-x, 0px) var(--ctr-popup-menu-shadow-1-offset-y, 2px)
