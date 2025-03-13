@@ -1,7 +1,7 @@
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { settings } from "../src/creator-settings";
-import { DropTo } from "../src/dragdrop-survey-elements";
+import { DropIndicatorPosition } from "../src/dragdrop-survey-elements";
 import { CreatorTester } from "./creator-tester";
 
 test("Check page adorner css on drag over", (): any => {
@@ -17,7 +17,7 @@ test("Check page adorner css on drag over", (): any => {
     creator.survey.pages[0]
   );
   expect(pageAdorner.css).toBe("");
-  pageAdorner.dragTypeOverMe = true as any;
+  pageAdorner.dropIndicatorPosition = true as any;
   expect(pageAdorner.css).toBe("svc-question__content--drag-over-inside");
   pageAdorner.showPlaceholder = false;
   expect(pageAdorner.css).toBe("svc-page--drag-over-empty");
@@ -39,7 +39,7 @@ test("Check page adorner css on drag over", (): any => {
     creator.survey.pages[0]
   );
   expect(pageAdorner.css).toBe("");
-  pageAdorner.dragTypeOverMe = true as any;
+  pageAdorner.dropIndicatorPosition = true as any;
   expect(pageAdorner.css).toBe("svc-question__content--drag-over-inside");
   pageAdorner.showPlaceholder = false;
   expect(pageAdorner.css).toBe("svc-page--drag-over-empty");
@@ -96,15 +96,15 @@ test("Check css when dragging page over top/bottom", () => {
   );
   expect(pageAdorner.css).toBe("");
   creator.dragDropSurveyElements.draggedElement = creator.survey.pages[0];
-  pageAdorner.dragTypeOverMe = DropTo.Inside;
+  pageAdorner.dropIndicatorPosition = DropIndicatorPosition.Inside;
   expect(pageAdorner.css).toBe("");
-  pageAdorner.dragTypeOverMe = DropTo.Left;
+  pageAdorner.dropIndicatorPosition = DropIndicatorPosition.Left;
   expect(pageAdorner.css).toBe("");
-  pageAdorner.dragTypeOverMe = DropTo.Right;
+  pageAdorner.dropIndicatorPosition = DropIndicatorPosition.Right;
   expect(pageAdorner.css).toBe("");
-  pageAdorner.dragTypeOverMe = DropTo.Top;
+  pageAdorner.dropIndicatorPosition = DropIndicatorPosition.Top;
   expect(pageAdorner.css).toBe("svc-question__content--drag-over-top");
-  pageAdorner.dragTypeOverMe = DropTo.Bottom;
+  pageAdorner.dropIndicatorPosition = DropIndicatorPosition.Bottom;
   expect(pageAdorner.css).toBe("svc-question__content--drag-over-bottom");
 });
 test("Check ghost page adorner actions visibility", (): any => {
