@@ -65,7 +65,8 @@ import {
   ElementSelectingEvent,
   ElementSelectedEvent,
   DefineElementMenuItemsEvent,
-  CreatorThemePropertyChangedEvent
+  CreatorThemePropertyChangedEvent,
+  CreatorThemeSelectedEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
@@ -1011,7 +1012,10 @@ export class SurveyCreatorModel extends Base
    * An event that is raised when users change a property in a [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme).
    */
   public onCreatorThemePropertyChanged: EventBase<SurveyCreatorModel, CreatorThemePropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorThemePropertyChangedEvent>();
-  public onCreatorThemeSelected: EventBase<SurveyCreatorModel, { theme: ICreatorTheme }> = this.addCreatorEvent<SurveyCreatorModel, { theme: ICreatorTheme }>();
+  /**
+   * An event that is raised when users select a [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme) from the drop-down list of UI themes.
+   */
+  public onCreatorThemeSelected: EventBase<SurveyCreatorModel, CreatorThemeSelectedEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorThemeSelectedEvent>();
 
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   public setSurveyJSONTextCallback: (text: string) => void;
