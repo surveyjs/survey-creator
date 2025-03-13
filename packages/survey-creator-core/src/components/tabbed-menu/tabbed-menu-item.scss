@@ -3,8 +3,15 @@
 .svc-tabbed-menu-item {
   display: flex;
   align-items: center;
-  min-height: calc(var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3)) + var(--ctr-menu-item-padding-top, var(--sjs-spacing-x250)) + var(--ctr-menu-item-padding-bottom, var(--sjs-spacing-x250)));
-  padding: var(--ctr-menu-item-padding-top, var(--sjs-spacing-x250)) var(--ctr-menu-item-padding-right, var(--sjs-spacing-x3)) var(--ctr-menu-item-padding-bottom, var(--sjs-spacing-x250)) var(--ctr-menu-item-padding-left, var(--sjs-spacing-x3)) ;
+  min-height: calc(
+    var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3)) +
+      var(--ctr-menu-item-padding-top, var(--sjs-spacing-x250)) +
+      var(--ctr-menu-item-padding-bottom, var(--sjs-spacing-x250))
+  );
+  padding: var(--ctr-menu-item-padding-top, var(--sjs-spacing-x250))
+    var(--ctr-menu-item-padding-right, var(--sjs-spacing-x3))
+    var(--ctr-menu-item-padding-bottom, var(--sjs-spacing-x250))
+    var(--ctr-menu-item-padding-left, var(--sjs-spacing-x3));
   box-sizing: border-box;
   cursor: pointer;
   transition: box-shadow $creator-transition-duration, background-color $creator-transition-duration;
@@ -65,8 +72,32 @@
   fill: var(--ctr-menu-item-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
 }
 
-.svc-tabbed-menu-item-container .sv-dots__item {
+.svc-tabbed-menu-dots__item {
   width: auto;
+  padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
+    var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
+
+  svg {
+    width: var(--ctr-menu-toolbar-button-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-menu-toolbar-button-icon-height, var(--sjs-font-size-x3));
+  }
+  use {
+    fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, rgba(0, 0, 0, 0.7490196078)));
+  }
+
+  &:hover,
+  &:focus {
+    border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
+    background: var(--ctr-menu-toolbar-button-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
+  }
+
+  &.sv-action-bar-item--pressed {
+    border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
+    opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
+    background: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
+  }
 }
 .svc-tabbed-menu-item-container 
 {
