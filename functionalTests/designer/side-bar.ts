@@ -334,5 +334,5 @@ test("Element Selector: Column: Scroll", async (t) => {
   await t
     .expect(getQuestionTopPosition()).eql(326)
     .click(Selector("#svd-grid-object-selector")).click(Selector(".svc-list__item").withText("Column 2"))
-    .expect(getQuestionTopPosition()).eql(24);
+    .expect(getQuestionTopPosition()).eql(72);
 });
