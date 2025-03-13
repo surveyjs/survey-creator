@@ -12,7 +12,7 @@ import {
   QuestionPanelDynamicModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
-import { DropTo } from "../drop-to-enum";
+import { DropIndicatorPosition } from "../drop-to-enum";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
 import { SurveyElementActionContainer } from "./action-container-view-model";
 
@@ -23,8 +23,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
   public rootElement: HTMLElement;
 
-  @property({ defaultValue: null }) dragTypeOverMe: DropTo;
-  @property({ defaultValue: false }) isDragMe: boolean;
+  @property({ defaultValue: null }) dropIndicatorPosition: DropIndicatorPosition;
+  @property({ defaultValue: false }) isBeingDragged: boolean;
 
   protected get dragInsideCollapsedContainer(): boolean {
     return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
@@ -259,7 +259,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.updateActionsProperties();
     }
   };
-  public static GetAdorner<V = SurveyElementAdornerBase>(surveyElement: SurveyElement): V {
+  public static GetAdorner<V = SurveyElementAdornerBase>(surveyElement: Base): V {
     return surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName) as V;
   }
   public static RestoreStateFor(surveyElement: SurveyElement): void {

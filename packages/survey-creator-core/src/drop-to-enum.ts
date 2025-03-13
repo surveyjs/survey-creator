@@ -1,4 +1,4 @@
-export enum DropTo {
+export enum DropIndicatorPosition {
   Inside = "inside",
   Top = "top",
   Bottom = "bottom",
