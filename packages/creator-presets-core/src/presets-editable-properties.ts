@@ -195,7 +195,8 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       showPreviewTab: false,
       pageEditMode: "single",
       allowModifyPages: false,
-      showSurveyTitle: false
+      showSurveyTitle: false,
+      propertyGridNavigationMode: "accordion"
     };
     const oldSearchValue = settings.propertyGrid.enableSearch;
     settings.propertyGrid.enableSearch = false;
