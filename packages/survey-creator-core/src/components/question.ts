@@ -30,11 +30,13 @@ import {
   isPropertyVisible,
   propertyExists,
 } from "../utils/creator-utils";
-import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
+import { SurveyElementActionContainer } from "./action-container-view-model";
+import { SurveyElementAdornerBase } from "./survey-element-adorner-base";
 import "./question.scss";
 import { settings } from "../creator-settings";
 import { StringItemsNavigatorBase } from "./string-editor";
-import { DragDropSurveyElements, DropTo } from "../dragdrop-survey-elements";
+import { DragDropSurveyElements } from "../dragdrop-survey-elements";
+import { DropIndicatorPosition } from "../drop-to-enum";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 import { listComponentCss } from "./list-theme";
 
@@ -108,63 +110,38 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   css() {
     if (!this.surveyElement.isInteractiveDesignElement) return "";
 
-    let result = "svc-question__content";
-    result += typeof this.surveyElement.getType === "function" ? (" svc-question__content--" + this.surveyElement.getType()) : "";
-    if (this.creator.isElementSelected(this.surveyElement)) {
-      result += " svc-question__content--selected";
-    }
+    const isDragIn = !!this.dropIndicatorPosition && (!!this.canExpandOnDrag) && !!this.dragInsideCollapsedContainer;
 
-    if (this.isEmptyElement) {
-      result += " svc-question__content--empty";
-    }
-    if (this.isEmptyTemplate) {
-      result += " svc-question__content--empty-template";
-    }
-    if (this.renderedCollapsed) {
-      result += " svc-question__content--collapsed";
-    }
-    if (!this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden")) {
-      result += " svc-question__content--title-hidden";
-    }
-    if ((this.surveyElement as Question).hasTitleOnBottom) {
-      result += " svc-question__content--title-bottom";
-    }
-
-    if (this.isDragMe) {
-      result += " svc-question__content--dragged";
-    }
-
-    if (!!this.dragTypeOverMe && (this.canExpandOnDrag) && this.dragInsideCollapsedContainer) {
+    if (isDragIn) {
       this.dragIn();
-      result += " svc-question__content--collapsed-drag-over-inside";
     } else {
       this.dragOut();
     }
 
-    if (this.dragTypeOverMe === DropTo.Inside) {
-      result += " svc-question__content--drag-over-inside";
-    }
-    if (!this.dragInsideCollapsedContainer) {
-      if (this.dragTypeOverMe === DropTo.Left) {
-        result += " svc-question__content--drag-over-left";
-      }
+    let result: string = new CssClassBuilder()
+      .append("svc-question__content")
+      .append("svc-question__content--" + this.surveyElement.getType(), typeof this.surveyElement.getType === "function")
+      .append("svc-question__content--selected", !!this.creator.isElementSelected(this.surveyElement))
+      .append("svc-question__content--empty", this.isEmptyElement)
+      .append("svc-question__content--empty-template", this.isEmptyTemplate)
+      .append("svc-question__content--collapsed", this.renderedCollapsed)
+      .append("svc-question__content--title-hidden", !this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden"))
+      .append("svc-question__content--title-bottom", !!(this.surveyElement as Question).hasTitleOnBottom)
+      .append("svc-question__content--dragged", this.isBeingDragged)
+      .append("svc-question__content--collapsed-drag-over-inside", isDragIn)
+      .append("svc-question__content--drag-over-inside", this.dropIndicatorPosition === DropIndicatorPosition.Inside)
+      .append("svc-question__content--drag-over-top", !this.dragInsideCollapsedContainer && this.dropIndicatorPosition === DropIndicatorPosition.Top)
+      .append("svc-question__content--drag-over-bottom", !this.dragInsideCollapsedContainer && this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
+      .append("svc-question__content--drag-over-right", !this.dragInsideCollapsedContainer && this.dropIndicatorPosition === DropIndicatorPosition.Right)
+      .append("svc-question__content--drag-over-left", !this.dragInsideCollapsedContainer && this.dropIndicatorPosition === DropIndicatorPosition.Left)
+      .toString();
 
-      if (this.dragTypeOverMe === DropTo.Right) {
-        result += " svc-question__content--drag-over-right";
-      }
-
-      if (this.dragTypeOverMe === DropTo.Top) {
-        result += " svc-question__content--drag-over-top";
-      }
-      if (this.dragTypeOverMe === DropTo.Bottom) {
-        result += " svc-question__content--drag-over-bottom";
-      }
-      if (this.creator) {
-        result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
-      }
+    if (!this.dragInsideCollapsedContainer && this.creator) {
+      result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
     }
     return result;
   }
+
   private get isTitleLeft() {
     return (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "left");
   }
@@ -197,7 +174,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   protected expandWithDragIn() {
     super.expandWithDragIn();
-    this.dragTypeOverMe = null;
+    this.dropIndicatorPosition = null;
     this.creator.dragDropSurveyElements.dropTarget = null;
   }
   public get isBannerShowing(): boolean {
@@ -313,7 +290,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     actionContainer.sizeMode = "small";
     actionContainer.cssClasses = defaultCssClasses;
     (<SurveyElementActionContainer>actionContainer).dotsItem.css += " svc-survey-element-toolbar__dots-item";
-    (<SurveyElementActionContainer>actionContainer).dotsItem.innerCss += " svc-survey-element-toolbar__item";
     return actionContainer;
   }
   protected updateActionsPropertiesCore(): void {
