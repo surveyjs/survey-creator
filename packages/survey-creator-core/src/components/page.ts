@@ -1,11 +1,11 @@
-import { ActionContainer, classesToSelector, ComputedUpdater, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, settings as SurveySettings } from "survey-core";
+import { ActionContainer, classesToSelector, ComputedUpdater, CssClassBuilder, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, settings as SurveySettings } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementActionContainer, SurveyElementAdornerBase } from "./action-container-view-model";
 import { getLocString } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
-import { DragDropSurveyElements, DropTo } from "../dragdrop-survey-elements";
+import { DragDropSurveyElements, DropIndicatorPosition } from "../dragdrop-survey-elements";
 
 import "./page.scss";
 
@@ -48,7 +48,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   protected attachElement(surveyElement: PageModel): void {
     super.attachElement(surveyElement);
-    this.dragTypeOverMe = null;
+    this.dropIndicatorPosition = null;
 
     if (!!surveyElement) {
       surveyElement["surveyChangedCallback"] = () => {
@@ -83,7 +83,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
     super.detachElement(surveyElement);
     if (!this.isDisposed) {
-      this.dragTypeOverMe = null;
+      this.dropIndicatorPosition = null;
     }
   }
 
@@ -149,7 +149,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     container.sizeMode = "small";
     container.cssClasses = this.containerCssClasses();
     container.dotsItem.iconSize = "auto";
-    container.dotsItem.cssClasses.itemIcon += " svc-page-toolbar-item__icon";
     return container;
   }
 
@@ -226,49 +225,40 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   get css(): string {
-    let result = super.getCss();
-    if (this.dragDropHelper.draggedElement && this.dragDropHelper.draggedElement.isPage) {
-      if (this.dragTypeOverMe === DropTo.Top) {
-        result += " svc-question__content--drag-over-top";
-      }
-      if (this.dragTypeOverMe === DropTo.Bottom) {
-        result += " svc-question__content--drag-over-bottom";
-      }
-    } else {
-      if (!!this.dragTypeOverMe && this.showPlaceholder) {
-        result = "svc-question__content--drag-over-inside";
-      } else if (!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
-        result = "svc-page--drag-over-empty";
-        if (!!this.creator && !this.creator.showAddQuestionButton) {
-          result += " svc-page--drag-over-empty-no-add-button";
-        }
-      }
-      if (!!this.dragTypeOverMe && this.collapsed) {
+    const isDraggedElementPage = this.dragDropHelper.draggedElement && this.dragDropHelper.draggedElement.isPage;
+    const isDragOverInside = !!this.dropIndicatorPosition && this.showPlaceholder;
+    const isDragOverEmpty = !!this.dropIndicatorPosition && this.page.elements.length === 0 && this.creator.survey.pages.length > 0;
+    const isShowAddQuestionButton = !!this.creator && !this.creator.showAddQuestionButton;
+    const isDragOverCollapsedInside = !!this.dropIndicatorPosition && this.collapsed;
+
+    let result: string = new CssClassBuilder()
+      .append(super.getCss())
+      .append("svc-question__content--drag-over-top", isDraggedElementPage && this.dropIndicatorPosition === DropIndicatorPosition.Top)
+      .append("svc-question__content--drag-over-bottom", isDraggedElementPage && this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
+      .append("svc-question__content--drag-over-inside", !isDraggedElementPage && isDragOverInside)
+      .append("svc-page--drag-over-empty", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty)
+      .append("svc-page--drag-over-empty-no-add-button", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty && isShowAddQuestionButton)
+      .append("svc-page__content--collapsed-drag-over-inside", !isDraggedElementPage && isDragOverCollapsedInside)
+      .append("svc-page__content--dragged", this.isBeingDragged)
+      .append("svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility, this.allowExpandCollapse || !!this.page["isGhost"])
+      .append("svc-page__content--collapsed", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.renderedCollapsed || !!this.page["isGhost"]))
+      .append("svc-page__content--animation-running", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.expandCollapseAnimationRunning))
+      .append("svc-page__content--new", !!this.isGhost)
+      .append("svc-page__content--selected", !this.isGhost && !!this.creator.isElementSelected(this.page))
+      .append("svc-page__content--no-header", !this.isGhost && SurveySettings.designMode.showEmptyTitles === false)
+      .toString();
+
+    if (!isDraggedElementPage) {
+      if (isDragOverCollapsedInside) {
         this.dragIn();
-        result += " svc-page__content--collapsed-drag-over-inside";
       } else {
         this.dragOut();
       }
     }
-    if (this.allowExpandCollapse || this.page["isGhost"]) {
-      result += (" svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility);
-      if (this.renderedCollapsed || this.page["isGhost"]) result += (" svc-page__content--collapsed");
-      if (this.expandCollapseAnimationRunning) result += (" svc-page__content--animation-running");
-    }
-    if (this.isDragMe) {
-      result += " svc-page__content--dragged";
-    }
-    if (this.isGhost) {
-      return result + " svc-page__content--new";
-    }
-    if (this.creator.isElementSelected(this.page)) {
-      result += " svc-page__content--selected";
-    }
-    if (SurveySettings.designMode.showEmptyTitles === false) {
-      result += " svc-page__content--no-header";
-    }
-    return result.trim();
+
+    return result;
   }
+
   private creatorPropertyChanged = (sender, options) => {
     if (options.name === "isMobileView" && this.isActionContainerCreated) {
       this.actionContainer.alwaysShrink = options.newValue;

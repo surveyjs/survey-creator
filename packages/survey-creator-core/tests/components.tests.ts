@@ -9,7 +9,7 @@ import { QuestionRatingAdornerViewModel } from "../src/components/question-ratin
 import { CreatorTester } from "./creator-tester";
 import { LogoImageViewModel } from "../src/components/header/logo-image";
 import { imageMimeTypes } from "../src/utils/utils";
-import { calculateDragOverLocation, DropTo } from "../src/dragdrop-survey-elements";
+import { calculateDragOverLocation, DropIndicatorPosition } from "../src/dragdrop-survey-elements";
 
 beforeEach(() => { });
 
@@ -982,15 +982,15 @@ test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly",
 
 test("calculateDragOverLocation", () => {
   let location = calculateDragOverLocation(150, 120, { x: 100, y: 100, width: 300, height: 100 });
-  expect(location).toBe(DropTo.Left);
+  expect(location).toBe(DropIndicatorPosition.Left);
   // creatorSettings.dragDrop.allowDragToTheSameLine = false;
   location = calculateDragOverLocation(150, 120, { x: 100, y: 100, width: 300, height: 100 }, "top-bottom");
-  expect(location).toBe(DropTo.Top);
+  expect(location).toBe(DropIndicatorPosition.Top);
   location = calculateDragOverLocation(350, 170, { x: 100, y: 100, width: 300, height: 100 }, "top-bottom");
-  expect(location).toBe(DropTo.Bottom);
+  expect(location).toBe(DropIndicatorPosition.Bottom);
   // creatorSettings.dragDrop.allowDragToTheSameLine = true;
   location = calculateDragOverLocation(350, 170, { x: 100, y: 100, width: 300, height: 100 });
-  expect(location).toBe(DropTo.Right);
+  expect(location).toBe(DropIndicatorPosition.Right);
 });
 
 test("ImageItemValueWrapperViewModel pass context to onOpenFileChooser event", () => {
