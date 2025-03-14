@@ -42,9 +42,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected updateActionVisibility(id: string, isVisible: boolean) {
     super.updateActionVisibility(id, !this.isGhost && isVisible);
   }
-  public get isDragInsideCollapsedContainer(): boolean {
-    return this.collapsed;
-  }
   protected getAllowExpandCollapse(options: any): boolean {
     return !this.isGhost && super.getAllowExpandCollapse(options);
   }
@@ -231,17 +228,36 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     const isDragOverInside = !!this.dropIndicatorPosition && this.showPlaceholder;
     const isDragOverEmpty = !!this.dropIndicatorPosition && this.page.elements.length === 0 && this.creator.survey.pages.length > 0;
     const isShowAddQuestionButton = !!this.creator && !this.creator.showAddQuestionButton;
-    const isDragOverCollapsedInside = !!this.dropIndicatorPosition && this.collapsed;
+
+    // let result: string = new CssClassBuilder()
+    //   .append(super.getCss())
+    //   .append("svc-question__content--drag-over-top", isDraggedElementPage && this.dropIndicatorPosition === DropIndicatorPosition.Top)
+    //   .append("svc-question__content--drag-over-bottom", isDraggedElementPage && this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
+    //   .append("svc-question__content--drag-over-inside", !isDraggedElementPage && isDragOverInside)
+    //   .append("svc-page--drag-over-empty", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty)
+    //   .append("svc-page--drag-over-empty-no-add-button", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty && isShowAddQuestionButton)
+    //   .append("svc-page__content--collapsed-drag-over-inside", !isDraggedElementPage && isDragOverCollapsedInside)
+    //   .append("svc-page__content--dragged", this.isBeingDragged)
+    //   .append("svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility, this.allowExpandCollapse || !!this.page["isGhost"])
+    //   .append("svc-page__content--collapsed", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.renderedCollapsed || !!this.page["isGhost"]))
+    //   .append("svc-page__content--animation-running", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.expandCollapseAnimationRunning))
+    //   .append("svc-page__content--new", !!this.isGhost)
+    //   .append("svc-page__content--selected", !this.isGhost && !!this.creator.isElementSelected(this.page))
+    //   .append("svc-page__content--no-header", !this.isGhost && SurveySettings.designMode.showEmptyTitles === false)
+    //   .toString();
 
     let result: string = new CssClassBuilder()
       .append(super.getCss())
-      .append("svc-question__content--drag-over-top", isDraggedElementPage && this.dropIndicatorPosition === DropIndicatorPosition.Top)
-      .append("svc-question__content--drag-over-bottom", isDraggedElementPage && this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
+
+      .append("svc-page__content--dragged", this.isBeingDragged)
+      .append("svc-question__content--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
+      .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
+
+      .append("svc-page__content--collapsed-drag-over-inside", this.collapsed && this.dropIndicatorPosition === DropIndicatorPosition.Inside)
       .append("svc-question__content--drag-over-inside", !isDraggedElementPage && isDragOverInside)
       .append("svc-page--drag-over-empty", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty)
       .append("svc-page--drag-over-empty-no-add-button", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty && isShowAddQuestionButton)
-      .append("svc-page__content--collapsed-drag-over-inside", !isDraggedElementPage && isDragOverCollapsedInside)
-      .append("svc-page__content--dragged", this.isBeingDragged)
+
       .append("svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility, this.allowExpandCollapse || !!this.page["isGhost"])
       .append("svc-page__content--collapsed", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.renderedCollapsed || !!this.page["isGhost"]))
       .append("svc-page__content--animation-running", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.expandCollapseAnimationRunning))
@@ -250,12 +266,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       .append("svc-page__content--no-header", !this.isGhost && SurveySettings.designMode.showEmptyTitles === false)
       .toString();
 
-    if (!isDraggedElementPage) {
-      if (isDragOverCollapsedInside) {
-        this.dragIn();
-      } else {
-        this.dragOut();
-      }
+    if (this.collapsed && this.dropIndicatorPosition === DropIndicatorPosition.Inside) {
+      this.dragIn();
+    } else {
+      this.dragOut();
     }
 
     return result;

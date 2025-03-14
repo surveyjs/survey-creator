@@ -110,7 +110,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   css() {
     if (!this.surveyElement.isInteractiveDesignElement) return "";
 
-    const isDragIn = !!this.canExpandOnDrag && !!this.isDragInsideCollapsedContainer;
+    const isDragIn = !!this.canExpandOnDrag && !!this.collapsed;
 
     if (isDragIn && this.dropIndicatorPosition === DropIndicatorPosition.Inside) {
       this.dragIn();
@@ -136,7 +136,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       .append("svc-question__content--drag-over-left", this.dropIndicatorPosition === DropIndicatorPosition.Left)
       .toString();
 
-    if (!this.isDragInsideCollapsedContainer && this.creator) {
+    if (!(this.collapsed && this.dropIndicatorPosition === DropIndicatorPosition.Inside) && this.creator) {
       result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
     }
     return result;
