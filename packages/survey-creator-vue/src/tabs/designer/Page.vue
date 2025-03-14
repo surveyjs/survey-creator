@@ -24,6 +24,16 @@
     <div
       class="svc-question__drop-indicator svc-question__drop-indicator--bottom"
     ></div>
+    <SvComponent
+      :is="'survey-page'"
+      :survey="model.creator.survey"
+      :page="model.page"
+    />
+    <div v-if="model.showPlaceholder" class="svc-page__placeholder_frame">
+      <div class="svc-panel__placeholder_frame">
+        <div class="svc-panel__placeholder">{{ model.placeholderText }}</div>
+      </div>
+    </div>
     <div
       v-if="model.allowDragging && !model.isGhost"
       class="svc-question__drag-area"
@@ -59,20 +69,10 @@
         :model="model.actionContainer"
       ></SvComponent>
       <SvComponent
-          v-if="model.topActionContainer.hasActions"
-          :is="'sv-action-bar'"
-          :model="model.topActionContainer"
+        v-if="model.topActionContainer.hasActions"
+        :is="'sv-action-bar'"
+        :model="model.topActionContainer"
       ></SvComponent>
-    </div>
-    <SvComponent
-      :is="'survey-page'"
-      :survey="model.creator.survey"
-      :page="model.page"
-    />
-    <div v-if="model.showPlaceholder" class="svc-page__placeholder_frame">
-      <div class="svc-panel__placeholder_frame">
-        <div class="svc-panel__placeholder">{{ model.placeholderText }}</div>
-      </div>
     </div>
     <SvComponent
       :is="'sv-action-bar'"

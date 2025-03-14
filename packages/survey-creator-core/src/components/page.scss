@@ -81,7 +81,6 @@ svc-page {
   justify-content: flex-end;
   box-sizing: border-box;
   padding: 0 calcSize(1) 0 var(--ctr-survey-page-drag-indicator-width, var(--lbr-size-x3));
-  z-index: 12;
   transition: opacity $creator-transition-duration;
   white-space: nowrap;
 
