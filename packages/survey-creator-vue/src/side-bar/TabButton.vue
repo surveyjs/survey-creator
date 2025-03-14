@@ -1,5 +1,5 @@
 <template>
-  <div class="svc-menu-action">
+  <div v-if="model.visible" class="svc-menu-action">
     <div
       :class="model.buttonClassName"
       :title="model.tooltip"

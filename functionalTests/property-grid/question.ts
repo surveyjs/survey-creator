@@ -53,3 +53,31 @@ test("Change rating auto-generate", async (t) => {
     .click(Selector(".spg-button-group__item-caption").withExactText("Auto-generate"))
     .expect(items.visible).notOk();
 });
+
+test("Check survey settings button", async (t) => {
+  const question1 = Selector("[data-name=\"q1\"]");
+  const maskPage = Selector('.svc-menu-action__button[title="Input Mask Settings"]');
+  const changeInputType = ClientFunction((val: string) => { window["creator"].survey.getQuestionByName("q1").inputType = val; });
+  await ClientFunction(() => window["creator"].showOneCategoryInPropertyGrid = true)();
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "q1"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await t
+    .click(question1)
+    .expect(maskPage.visible).ok();
+  await changeInputType("date");
+  await t.expect(maskPage.visible).notOk();
+  await changeInputType("text");
+  await t.expect(maskPage.visible).ok();
+});
