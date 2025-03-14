@@ -254,9 +254,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
       .append("svc-page__content--collapsed-drag-over-inside", this.collapsed && this.dropIndicatorPosition === DropIndicatorPosition.Inside)
       // TODO from the bottom 
-      .append("svc-question__content--drag-over-inside", !isDraggedElementPage && isDragOverInside) //!collapsed && inside
-      .append("svc-page--drag-over-empty", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty)
-      .append("svc-page--drag-over-empty-no-add-button", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty && isShowAddQuestionButton)
+      .append("svc-question__content--drag-over-inside", !isDraggedElementPage && isDragOverInside) //!collapsed && inside & !ghost
+      .append("svc-page--drag-over-empty", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty) //!collapsed && inside & ghost
+      .append("svc-page--drag-over-empty-no-add-button", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty && isShowAddQuestionButton) //!collapsed && inside & emptybutton
 
       .append("svc-page__content--collapse-" + this.creator.expandCollapseButtonVisibility, this.allowExpandCollapse || !!this.page["isGhost"])
       .append("svc-page__content--collapsed", (this.allowExpandCollapse || !!this.page["isGhost"]) && (this.renderedCollapsed || !!this.page["isGhost"]))
