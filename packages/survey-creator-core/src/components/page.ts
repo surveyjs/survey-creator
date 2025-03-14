@@ -42,7 +42,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected updateActionVisibility(id: string, isVisible: boolean) {
     super.updateActionVisibility(id, !this.isGhost && isVisible);
   }
-  protected get dragInsideCollapsedContainer(): boolean {
+  public get isDragInsideCollapsedContainer(): boolean {
     return this.collapsed;
   }
   protected getAllowExpandCollapse(options: any): boolean {

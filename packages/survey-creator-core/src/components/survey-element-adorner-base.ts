@@ -26,8 +26,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({ defaultValue: null }) dropIndicatorPosition: DropIndicatorPosition;
   @property({ defaultValue: false }) isBeingDragged: boolean;
 
-  protected get dragInsideCollapsedContainer(): boolean {
-    return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
+  public get isDragInsideCollapsedContainer(): boolean {
+    return this.collapsed && this.creator.dragDropSurveyElements.insideElement;
   }
   @property({ defaultValue: true }) needToRenderContent: boolean;
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
