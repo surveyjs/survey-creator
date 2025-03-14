@@ -433,7 +433,7 @@ export class SurveyQuestionProperties {
     const isColumn = this.isColumnObj;
     for (var i = 0; i < this.properties.length; i++) {
       const prop = this.properties[i];
-      if (this.isJSONPropertyVisible(prop) && !usedProperties[prop.name] && (!isFormMode || prop.showMode === "form" || isColumn && prop.availableInMatrixColumn)) {
+      if (this.isJSONPropertyVisible(prop) && !usedProperties[prop.name] && (!isFormMode || prop.locationInTable === "both" || prop.showMode === "form" || isColumn && prop.availableInMatrixColumn)) {
         res.push(prop);
       }
     }

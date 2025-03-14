@@ -578,17 +578,8 @@ export class PropertyJSONGenerator {
       this.options.onPropertyEditorCreatedCallback(this.obj, prop, q);
     }
   }
-  private getVisibilityOnEvent(
-    prop: JsonObjectProperty,
-    showMode: string = ""
-  ): boolean {
-    return this.options.onCanShowPropertyCallback(
-      this.obj,
-      <any>prop,
-      showMode,
-      this.parentObj,
-      <any>this.parentProperty
-    );
+  private getVisibilityOnEvent(prop: JsonObjectProperty): boolean {
+    return this.options.onCanShowPropertyCallback(this.obj, <any>prop, undefined, this.parentObj, <any>this.parentProperty);
   }
   private isPropertyReadOnly(prop: JsonObjectProperty): boolean {
     return PropertyJSONGenerator.isPropertyReadOnly(
@@ -714,9 +705,8 @@ export class PropertyJSONGenerator {
     isColumn: boolean = false,
     context: string
   ): any {
-    var isVisible = this.isPropertyVisible(prop, isColumn ? "list" : "");
-    if (!isVisible && isColumn) return null;
-    var json = PropertyGridEditorCollection.getJSON(
+    //if(isColumn && !SurveyHelper.isPropertyVisible(this.obj, prop, undefined, isColumn ? "list" : "")) return null;
+    const json = PropertyGridEditorCollection.getJSON(
       obj, prop, this.options, context, this.propertyGridDefinition
     );
     if (!json) return null;
@@ -768,13 +758,6 @@ export class PropertyJSONGenerator {
       delete json.isReadOnly;
     }
     return json;
-  }
-  private isPropertyVisible(
-    prop: JsonObjectProperty,
-    showMode: string
-  ): boolean {
-    if (!prop.visible) return false;
-    return !showMode || !prop.showMode || showMode == prop.showMode;
   }
   private getPanelTitle(name: string, title: string): string {
     if (!!title) return title;

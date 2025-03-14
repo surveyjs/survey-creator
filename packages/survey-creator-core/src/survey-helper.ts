@@ -139,36 +139,10 @@ export class SurveyHelper {
     }
     return result;
   }
-  public static isPropertyVisible(
-    obj: any,
-    property: JsonObjectProperty,
-    options: ISurveyCreatorOptions = null,
-    showMode: string = null,
-    parentObj: any = null,
-    parentProperty: JsonObjectProperty = null
-  ): boolean {
-    if (!property || !property.visible) return false;
-    if (!!showMode && !!property.showMode && showMode !== property.showMode)
-      return false;
-    if (
-      !!property.isVisible &&
-      !!obj.getLayoutType &&
-      !(<any>property["isVisible"])(obj.getLayoutType(), null)
-    )
-      return false;
-    var canShow = !!options
-      ? (object: any, property: JsonObjectProperty) => {
-        return options.onCanShowPropertyCallback(
-          object,
-          property,
-          showMode,
-          parentObj,
-          parentProperty
-        );
-      }
-      : null;
-    if (!!canShow && !canShow(obj, property)) return false;
-    return true;
+  public static isPropertyVisible(obj: any, prop: JsonObjectProperty, options: ISurveyCreatorOptions = null, showMode: string = null, parentObj: any = null, parentProperty: JsonObjectProperty = null): boolean {
+    if (!prop || !prop.visible) return false;
+    if (!!showMode && !!prop.showMode && showMode !== prop.showMode && prop.locationInTable !== "both") return false;
+    return !options || options.onCanShowPropertyCallback(obj, prop, showMode, parentObj, parentProperty);
   }
   public static isNeedScrollIntoView(el: HTMLElement, scrollIfElementBiggerThanContainer: boolean = false): undefined | "top" | "bottom" {
     if (!el || !el.scrollIntoView) return;

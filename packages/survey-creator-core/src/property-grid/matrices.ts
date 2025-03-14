@@ -13,6 +13,7 @@ import {
 import { updateMatixActionsClasses, updateMatrixRemoveAction } from "../utils/actions";
 import { QuestionRatingAdornerViewModel } from "../components/question-rating";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
+import { SurveyHelper } from "../survey-helper";
 
 Serializer.addProperty("itemvalue",
   {
@@ -252,19 +253,15 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!!prop && !!prop.className) {
       var properties = Serializer.getProperties(prop.className);
       for (var i = 0; i < properties.length; i++) {
-        if (!this.isPropertyShownInList(properties[i])) {
-          continue;
+        if(SurveyHelper.isPropertyVisible(undefined, properties[i], undefined, "list")) {
+          res.push(properties[i].name);
         }
-        res.push(properties[i].name);
       }
     }
     return res.length > 0 ? res : this.getDefaulColumnNames();
   }
   protected getDefaulColumnNames(): Array<string> {
     return [];
-  }
-  private isPropertyShownInList(prop: JsonObjectProperty): boolean {
-    return prop.visible && prop.showMode !== "form";
   }
   protected getObjTypeName(): string {
     return "";
