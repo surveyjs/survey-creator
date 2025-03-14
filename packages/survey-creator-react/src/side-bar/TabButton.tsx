@@ -14,18 +14,20 @@ export class TabButtonComponent extends SurveyElementBase<{ model: MenuButton },
   }
 
   protected renderElement(): React.JSX.Element | null {
+    const model = this.props.model;
+    if(!model.visible) return null;
     const button = attachKey2click(
       <div
-        className={this.props.model.buttonClassName}
-        title={this.props.model.tooltip}
-        onClick={() => { this.props.model.action(); }}
+        className={model.buttonClassName}
+        title={model.tooltip}
+        onClick={() => { model.action(); }}
       >
         <div className="svc-menu-action__icon">
           <div className="svc-menu-action__icon-container">
-            <SvgIcon iconName={this.props.model.iconName} size={"auto"}></SvgIcon>
+            <SvgIcon iconName={model.iconName} size={"auto"}></SvgIcon>
           </div>
         </div>
-      </div>, this.props.model
+      </div>, model
     );
     return (
       <div className="svc-menu-action">
