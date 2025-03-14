@@ -194,7 +194,9 @@ test("Triggers property editor after remove trigger class", () => {
   expect(triggerTypeQuestion.value).toEqual("completetrigger");
   expect(triggerTypeQuestion.choices).toHaveLength(4);
 
-  Serializer.addClass(runexpressiontriggerClass.name, runexpressiontriggerClass.properties, runexpressiontriggerClass.creator, runexpressiontriggerClass.parentName);
+  const props: any = [];
+  runexpressiontriggerClass.properties.forEach(prop => props.push({ name: prop.name + ":" + prop.type }));
+  Serializer.addClass(runexpressiontriggerClass.name, props, runexpressiontriggerClass.creator, runexpressiontriggerClass.parentName);
 });
 
 test("Hide triggers based on settings.logic.invisibleTriggers, #6031", () => {
