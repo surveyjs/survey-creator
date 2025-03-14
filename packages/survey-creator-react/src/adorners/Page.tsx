@@ -90,9 +90,9 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
       >
         <div className="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
         <div className="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
-        {this.renderHeader()}
         {this.renderContent()}
         {this.renderPlaceholder()}
+        {this.renderHeader()}
         {this.renderFooter()}
       </div>)
     );

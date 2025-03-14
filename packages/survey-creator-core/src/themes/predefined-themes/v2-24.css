@@ -431,7 +431,7 @@
   --ctr-list-item-icon-color-disabled: var(--sjs-layer-1-foreground-75);
   --ctr-editor-button-background-color-hovered: var(--sjs-layer-3-background-400);
   --ctr-survey-page-toolbar-item-background-color-hovered: var(--sjs-primary-background-10);
-  --ctr-survey-page-toolbar-item-corner-radius: var(--lbr-corner-radius-x05);
+  --ctr-survey-page-toolbar-item-corner-radius: var(--lbr-corner-radius-x075);
   --ctr-list-search-icon-color: var(--sjs-layer-1-foreground-75);
   --ctr-caption-with-actions-text-color: var(--sjs-layer-1-foreground-50);
   --ctr-label-text-color: var(--sjs-layer-1-foreground-50);
@@ -755,7 +755,7 @@
   --ctr-expression-item-background-color-button-hovered: var(--sjs-primary-background-500);
   --ctr-expression-item-border-color-editing: var(--sjs-semantic-blue-background-500);
   --ctr-expression-item-text-color-function: var(--sjs-layer-3-foreground-100);
-  --ctr-data-table-background-color: var(--sjs-layer-1-background-400);
+  --ctr-data-table-background-color: var(--sjs-layer-1-background-500);
   --ctr-data-table-border-color: var(--sjs-border-25);
   --ctr-data-table-border-width: var(--sjs-stroke-x1);
   --ctr-separator-width: var(--sjs-stroke-x1);
@@ -2778,8 +2778,8 @@
   --lbr-step-progress-bar-padding-right-fit-to-survey-with-number: var(--lbr-spacing-x1n);
   --lbr-step-progress-bar-width: var(--lbr-size-x80);
   --ctr-toolbox-min-width: var(--sjs-size-x20);
-  --ctr-popup-menu-margin-top-tablet: var(--sjs-spacing-x8);
-  --ctr-popup-menu-margin-bottom-tablet: var(--sjs-spacing-x8);
+  --ctr-popup-menu-margin-top-tablet: var(--sjs-spacing-x3);
+  --ctr-popup-menu-margin-bottom-tablet: var(--sjs-spacing-x3);
   --ctr-popup-menu-margin-left-tablet: var(--sjs-spacing-x3);
   --ctr-popup-menu-margin-right-tablet: var(--sjs-spacing-x3);
   --ctr-popup-menu-max-width-tablet: var(--sjs-size-x40);
@@ -2864,7 +2864,7 @@
   --lbr-page-loading-padding-bottom: var(--lbr-spacing-x8);
   --lbr-page-loading-loading-icon-width: var(--lbr-size-x12);
   --lbr-page-loading-loading-icon-height: var(--lbr-size-x12);
-  --lbr-page-loading-loading-icon-circle-color: var(--sjs-layer-1-foreground-100);
+  --lbr-page-loading-loading-icon-circle-color: var(--sjs-layer-3-foreground-100);
   --lbr-page-loading-loading-icon-circle-color-spin: var(--sjs-primary-background-500);
   --lbr-page-loading-title-color: var(--sjs-layer-3-foreground-100);
   --lbr-page-loading-padding-top: var(--lbr-spacing-x3);
@@ -3447,5 +3447,10 @@
   --ctr-info-panel-padding-bottom: var(--sjs-spacing-x3);
   --ctr-info-panel-corner-radius: var(--sjs-corner-radius-x1);
   --ctr-info-panel-text-color-primary: var(--sjs-layer-3-foreground-100);
+  --ctr-surface-placeholder-image-max-width: var(--sjs-size-x43);
+  --lbr-popup-menu-background-color-global: var(--sjs-layer-3-background-500);
+  --lbr-list-item-text-color-action: var(--sjs-primary-background-500);
+  --ctr-list-item-icon-width-small: var(--sjs-font-size-x2);
+  --ctr-list-item-icon-height-small: var(--sjs-font-size-x2);
 }
 
