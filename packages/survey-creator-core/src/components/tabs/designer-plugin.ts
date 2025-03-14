@@ -367,7 +367,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.creator.sidebar.sideAreaComponentData = undefined;
     this.creator.sidebar.onPropertyChanged.clear();
     this.creator.sidebar.header.reset();
-    this.creator.expandCollapseManager.clear();
     return true;
   }
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {

@@ -23,32 +23,23 @@ export class ExpandCollapseManager {
       .concat(this.creator.survey.getAllPanels() as unknown as SurveyElement[])
       .concat(this.creator.survey.getAllQuestions() as SurveyElement[]);
   }
-
+  private sortElements(elements: SurveyElement[]): Array<SurveyElement> {
+    return [].concat(elements).sort((el, el2) => {
+      const a = el.isPage ? 2 : el.isPanel ? 1 : 0;
+      const b = el2.isPage ? 2 : el2.isPanel ? 1 : 0;
+      return a - b;
+    });
+  }
   private updateCollapsed(elements: SurveyElement[], value: boolean, reason: ElementGetExpandCollapseStateEventReason) {
-    elements.forEach(element => {
+    this.sortElements(elements).forEach(element => {
       if (element.isQuestion && this._lockQuestions) return;
       const collapsed = this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
       this.creator.designerStateManager?.setElementCollapsed(element, collapsed);
-    });
-    for (let i = this.adorners.length - 1; i >= 0; i--) {
-      const element = this.adorners[i].element;
-      if (element.isQuestion && this._lockQuestions) continue;
-      if (elements.indexOf(element) == -1) continue;
-      if (this.adorners[i].allowExpandCollapse) {
+      const adorner = SurveyElementAdornerBase.GetAdorner(element);
+      if (adorner && adorner.allowExpandCollapse) {
         const newState = this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
-        this.adorners[i].collapsed = newState;
+        adorner.collapsed = newState;
       }
-    }
-  }
-  private adorners: Array<SurveyElementAdornerBase> = [];
-
-  public add(adorner: SurveyElementAdornerBase) {
-    this.adorners.push(adorner);
-  }
-  public remove(adorner: SurveyElementAdornerBase) {
-    this.adorners.splice(this.adorners.indexOf(adorner), 1);
-  }
-  public clear() {
-    this.adorners.length = 0;
+    });
   }
 }
