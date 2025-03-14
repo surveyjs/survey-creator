@@ -3,7 +3,7 @@ import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
 import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
-import { DropIndicatorPosition } from "./drop-to-enum";
+import { DropIndicatorPosition, ElType } from "./drag-drop-enums";
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
   const rect = dropTargetNode.getBoundingClientRect();
@@ -418,6 +418,13 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return result;
   }
 
+  private getDragDropElementType(element: any) {
+    if (element.isPage) return ElType.Page;
+    if (element.isPanel) return ElType.Panel;
+    if (element instanceof QuestionPanelDynamicModel) return ElType.DynamicPanel;
+    return ElType.Question;
+  }
+
   public dragOver(event: PointerEvent): void {
     const dropTargetNode = this.findDropTargetNodeFromPoint(
       event.clientX,
@@ -463,6 +470,31 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (!this.draggedElement.isPage && dropTarget.isPage && dropTarget.elements.length !== 0 && !dropTargetAdorner.collapsed) {
       dragOverLocation = null;
     }
+
+    // const dropTargetType = this.getDragDropElementType(dropTarget);
+    // const draggedElementType = this.getDragDropElementType(this.draggedElement);
+    // switch (dropTargetType) {
+    //   case ElType.Page: {
+    //     console.log("dropTargetType", dropTargetType);
+    //     break;
+    //   }
+    //   case ElType.Panel: {
+    //     console.log("dropTargetType", dropTargetType);
+    //     break;
+    //   }
+    //   case ElType.DynamicPanel: {
+    //     console.log("dropTargetType", dropTargetType);
+    //     break;
+    //   }
+    //   case ElType.Question: {
+    //     console.log("dropTargetType", dropTargetType);
+    //     break;
+    //   }
+    //   // case ElType.EmptySurvey: {
+    //   //   console.log("dropTargetType", dropTargetType);
+    //   //   break;
+    //   // }
+    // }
 
     const options = {
       survey: this.survey,

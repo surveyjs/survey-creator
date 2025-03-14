@@ -12,7 +12,7 @@ import {
   QuestionPanelDynamicModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
-import { DropIndicatorPosition } from "../drop-to-enum";
+import { DropIndicatorPosition } from "../drag-drop-enums";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
 import { SurveyElementActionContainer } from "./action-container-view-model";
 

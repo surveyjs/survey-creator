@@ -1,6 +1,6 @@
 import { Question, QuestionTextModel, SurveyModel } from "survey-core";
 import { DragDropSurveyElements, calculateDragOverLocation, calculateIsEdge, calculateIsSide } from "../src/dragdrop-survey-elements";
-import { DropIndicatorPosition } from "../src/drop-to-enum";
+import { DropIndicatorPosition } from "../src/drag-drop-enums";
 import { CreatorTester } from "./creator-tester";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { PageAdorner } from "../src/components/page";

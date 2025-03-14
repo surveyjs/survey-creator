@@ -7,7 +7,7 @@ import { getLocString } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
 import { DragDropSurveyElements } from "../dragdrop-survey-elements";
-import { DropIndicatorPosition } from "../drop-to-enum";
+import { DropIndicatorPosition } from "../drag-drop-enums";
 
 import "./page.scss";
 

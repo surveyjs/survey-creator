@@ -36,7 +36,7 @@ import "./question.scss";
 import { settings } from "../creator-settings";
 import { StringItemsNavigatorBase } from "./string-editor";
 import { DragDropSurveyElements } from "../dragdrop-survey-elements";
-import { DropIndicatorPosition } from "../drop-to-enum";
+import { DropIndicatorPosition } from "../drag-drop-enums";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 import { listComponentCss } from "./list-theme";
 
