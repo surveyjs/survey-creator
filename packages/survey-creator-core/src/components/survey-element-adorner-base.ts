@@ -172,7 +172,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   private dragCollapsedTimer;
 
-  protected get canExpandOnDrag() {
+  public get canExpandOnDrag() {
     return this.surveyElement.isPanel || this.surveyElement.isPage || this.surveyElement instanceof QuestionPanelDynamicModel;
   }
   private draggedIn = false;

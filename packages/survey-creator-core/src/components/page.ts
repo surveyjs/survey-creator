@@ -252,9 +252,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       .append("svc-page__content--dragged", this.isBeingDragged)
       .append("svc-question__content--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
       .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
-
       .append("svc-page__content--collapsed-drag-over-inside", this.collapsed && this.dropIndicatorPosition === DropIndicatorPosition.Inside)
-      .append("svc-question__content--drag-over-inside", !isDraggedElementPage && isDragOverInside)
+      // TODO from the bottom 
+      .append("svc-question__content--drag-over-inside", !isDraggedElementPage && isDragOverInside) //!collapsed && inside
       .append("svc-page--drag-over-empty", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty)
       .append("svc-page--drag-over-empty-no-add-button", !isDraggedElementPage && !isDragOverInside && isDragOverEmpty && isShowAddQuestionButton)
 

@@ -456,7 +456,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       dragOverLocation = DropIndicatorPosition.Inside;
     }
 
-    if (this.isPanelDynamic(dropTarget) && dropTargetAdorner.collapsed) {
+    if ((dropTarget.isPanel || this.isPanelDynamic(dropTarget)) && this.insideElement && dropTargetAdorner.collapsed) {
       dragOverLocation = DropIndicatorPosition.Inside;
     }
 

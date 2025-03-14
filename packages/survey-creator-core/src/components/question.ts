@@ -110,9 +110,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   css() {
     if (!this.surveyElement.isInteractiveDesignElement) return "";
 
-    const isDragIn = !!this.canExpandOnDrag && !!this.collapsed;
-
-    if (isDragIn && this.dropIndicatorPosition === DropIndicatorPosition.Inside) {
+    if (this.collapsed && this.dropIndicatorPosition === DropIndicatorPosition.Inside) {
       this.dragIn();
     } else {
       this.dragOut();
@@ -128,8 +126,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       .append("svc-question__content--title-hidden", !this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden"))
       .append("svc-question__content--title-bottom", !!(this.surveyElement as Question).hasTitleOnBottom)
       .append("svc-question__content--dragged", this.isBeingDragged)
-      .append("svc-question__content--collapsed-drag-over-inside", isDragIn && this.dropIndicatorPosition === DropIndicatorPosition.Inside)
-      .append("svc-question__content--drag-over-inside", !isDragIn && this.dropIndicatorPosition === DropIndicatorPosition.Inside)
+      .append("svc-question__content--collapsed-drag-over-inside", this.collapsed && this.dropIndicatorPosition === DropIndicatorPosition.Inside)
+      .append("svc-question__content--drag-over-inside", !this.collapsed && this.dropIndicatorPosition === DropIndicatorPosition.Inside)
       .append("svc-question__content--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
       .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
       .append("svc-question__content--drag-over-right", this.dropIndicatorPosition === DropIndicatorPosition.Right)
