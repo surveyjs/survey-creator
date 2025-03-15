@@ -108,9 +108,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   css() {
+    const isInsideCollapsed = this.dropIndicatorPosition === DropIndicatorPosition.Inside && this.collapsed;
+
     if (!this.surveyElement.isInteractiveDesignElement) return "";
 
-    if (this.collapsed && this.dropIndicatorPosition === DropIndicatorPosition.Inside) {
+    if (isInsideCollapsed) {
       this.dragIn();
     } else {
       this.dragOut();
@@ -126,15 +128,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       .append("svc-question__content--title-hidden", !this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden"))
       .append("svc-question__content--title-bottom", !!(this.surveyElement as Question).hasTitleOnBottom)
       .append("svc-question__content--dragged", this.isBeingDragged)
-      .append("svc-question__content--collapsed-drag-over-inside", this.collapsed && this.dropIndicatorPosition === DropIndicatorPosition.Inside)
-      .append("svc-question__content--drag-over-inside", !this.collapsed && this.dropIndicatorPosition === DropIndicatorPosition.Inside)
+      .append("svc-question__content--collapsed-drag-over-inside", isInsideCollapsed)
+      .append("svc-question__content--drag-over-inside", this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed)
       .append("svc-question__content--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
       .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
       .append("svc-question__content--drag-over-right", this.dropIndicatorPosition === DropIndicatorPosition.Right)
       .append("svc-question__content--drag-over-left", this.dropIndicatorPosition === DropIndicatorPosition.Left)
       .toString();
 
-    if (!(this.collapsed && this.dropIndicatorPosition === DropIndicatorPosition.Inside) && this.creator) {
+    if (!isInsideCollapsed && this.creator) {
       result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
     }
     return result;
