@@ -7,7 +7,7 @@ import {
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import "./row.scss";
-import { DropIndicatorPosition } from "../drop-to-enum";
+import { DropIndicatorPosition } from "../drag-drop-enums";
 import { SurveyElementAdornerBase } from "./survey-element-adorner-base";
 
 export class RowViewModel extends Base {
