@@ -811,6 +811,28 @@ test("bindings property editor", () => {
   q.value = "q3";
   expect(matrix.bindings.getValueNameByPropertyName("rowCount")).toEqual("q3");
 });
+test("bindings property editor, store in JSON, Bug#6743", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "matrixdynamic", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(matrix);
+  const bindingsQuestion = <QuestionCompositeModel>(
+    propertyGrid.survey.getQuestionByName("bindings")
+  );
+  expect(bindingsQuestion).toBeTruthy();
+  expect(bindingsQuestion.getType()).toEqual("propertygrid_bindings");
+  expect(bindingsQuestion.contentPanel.questions).toHaveLength(1);
+  const q = bindingsQuestion.contentPanel.questions[0];
+  expect(q.name).toEqual("rowCount");
+  q.value = "q2";
+  expect(matrix.bindings.getValueNameByPropertyName("rowCount")).toEqual("q2");
+  expect(matrix.toJSON()).toEqual({ name: "q1", bindings: { rowCount: "q2" } });
+  expect(survey.getQuestionByName("q2").toJSON()).toEqual({ name: "q2" });
+});
 
 test("Dynamic panel 'Panel count' binding property editor", () => {
   const survey = new SurveyModel({
