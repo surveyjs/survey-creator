@@ -58,14 +58,12 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (cellQuestion.getType() === "text" && !!objType) {
       if (propertyName === "text" && objType === "itemvalue") {
         (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => {
-          if (!!rowObj.value) return rowObj.value.toString();
-          return rowObj.text;
+          return rowObj.locText.getPlaceholder();
         });
       }
       if (propertyName === "title" && (objType === "matrixdropdowncolumn" || objType === "multipletextitem")) {
         (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => {
-          if (!!rowObj.name) return rowObj.name;
-          return rowObj.title;
+          return rowObj.locTitle.getPlaceholder();
         });
       }
     }

@@ -3352,6 +3352,24 @@ test("Localication and survey.pages property, Bug#6687", () => {
   expect(creator.survey.pages.length).toBe(1);
   expect(creator.survey.pages[0].name).toBe("Seite1");
 });
+test("Localication and different locales, Bug#6717", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", title: "Question 1", choices: [{ value: 1, text: "Item 1" }] }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  let propertyGrid = new PropertyGridModelTester(question);
+  let titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
+  expect(titleQuestion.value).toBe("Question 1");
+  expect(titleQuestion.placeholder).toBe("q1");
+  creator.survey.locale = "de";
+  propertyGrid = new PropertyGridModelTester(question);
+  titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
+  expect(titleQuestion.value).toBeFalsy();
+  expect(titleQuestion.placeHolder).toBe("Question 1");
+});
 test("panellayoutcolumns doesn't have adding button", () => {
   const creator = new CreatorTester();
   creator.JSON = {
