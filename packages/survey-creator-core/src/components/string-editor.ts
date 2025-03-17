@@ -256,8 +256,11 @@ export class StringEditorViewModelBase extends Base {
     super();
     this.locString = locString;
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
+    this.addCreatorEvents();
   }
-
+  private onLocaleChanged = () => {
+    this.resetPropertyValue("placeholderValue");
+  };
   public afterRender() {
     if (this.connector.focusOnEditor) {
       if (this.activate()) this.connector.focusOnEditor = false;
@@ -265,6 +268,7 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public detachFromUI() {
+    this.removeCreatorEvents();
     this.connector?.onDoActivate.remove(this.activate);
     this.getEditorElement = undefined;
     this.blurEditor = undefined;
@@ -284,12 +288,20 @@ export class StringEditorViewModelBase extends Base {
     }
     return false;
   }
+  private addCreatorEvents() {
+    this.creator?.onLocaleChanded.add(this.onLocaleChanged);
+  }
+  private removeCreatorEvents() {
+    this.creator?.onLocaleChanded.remove(this.onLocaleChanged);
+  }
 
   public setLocString(locString: LocalizableString) {
+    this.removeCreatorEvents();
     this.connector?.onDoActivate.remove(this.activate);
     this.locString = locString;
     this.connector = StringEditorConnector.get(locString);
     this.connector.onDoActivate.add(this.activate);
+    this.addCreatorEvents();
   }
   public checkConstraints(event: any) {
     if (!this.compostionInProgress && this.maxLength > 0 && event.keyCode >= 32) {
@@ -422,9 +434,8 @@ export class StringEditorViewModelBase extends Base {
   private getClearedText(target: HTMLElement): string {
     const html = target.innerHTML;
     const text = target.innerText;
-    if(!this.creator) return this.locString.hasHtml ? html : text;
     let mdText = null;
-    if (!this.editAsText) {
+    if (!this.editAsText && this.creator) {
       const options = {
         element: <Base><any>this.locString.owner,
         text: <any>null,
@@ -438,9 +449,11 @@ export class StringEditorViewModelBase extends Base {
     if (mdText) {
       clearedText = mdText;
     } else {
-      let txt = this.locString.hasHtml && !this.editAsText ? html : text;
-      if (!this.locString.allowLineBreaks) txt = clearNewLines(txt);
-      clearedText = txt;
+      clearedText = this.locString.hasHtml && !this.editAsText ? html : text;
+      const txt = clearNewLines(clearedText);
+      if (!this.locString.allowLineBreaks || !txt) {
+        clearedText = txt;
+      }
     }
     const owner = this.locString.owner as any;
 
@@ -451,7 +464,7 @@ export class StringEditorViewModelBase extends Base {
       newValue: clearedText,
       doValidation: false
     };
-    this.creator.onValueChangingCallback(changingOptions);
+    if (this.creator) this.creator.onValueChangingCallback(changingOptions);
     return changingOptions.newValue;
   }
   private getErrorTextOnChanged(clearedText: string): string {

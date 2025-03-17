@@ -66,6 +66,63 @@ test("Check question adorners popups display mode", (): any => {
   expect(convertToAction.popupModel.displayMode).toBe("overlay");
 });
 
+test("Check rating question input type list", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  let questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  let convertInputTypeAction = questionAdorner.actionContainer.getActionById("convertInputType");
+  const popup = convertInputTypeAction.popupModel;
+  const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
+  popup.show();
+  const list = popup.contentComponentData.model;
+
+  expect(list.actions.map(i => i.id)).toEqual(["labels", "stars", "smileys"]);
+});
+
+test("Check question converter with removed subitems", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  // create subitems from new items (the same type, different json)
+
+  const ratingItem = creator.toolbox.getItemByName("rating");
+
+  // Remove Default Subitems
+  ratingItem.removeSubitem("stars");
+
+  ratingItem.title = "Rating Scale";
+
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1", rateType: "stars" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  let questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  let convertInputTypeAction = questionAdorner.actionContainer.getActionById("convertInputType");
+  expect(convertInputTypeAction.title).toBe("Stars");
+  question.rateType = "smileys";
+  expect(convertInputTypeAction.title).toBe("Smileys");
+  question.rateType = "stars";
+  expect(convertInputTypeAction.title).toBe("Stars");
+
+  surveySettings.animationEnabled = true;
+});
+
 test("Check question adorners icons", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -277,6 +334,13 @@ test("Check question converter no subitems", (): any => {
   popup.toggleVisibility();
   const list = popup.contentComponentData.model;
   expect((list.getActionById("text").items || []).length).toBe(0);
+
+  const convertInputType = questionAdorner.actionContainer.getActionById("convertInputType");
+  const popupInputType = convertInputType.popupModel;
+  const popupInputTypeViewModel = new PopupDropdownViewModel(popupInputType); // need for popupModel.onShow
+  popupInputType.show();
+  const listInputType = popupInputType.contentComponentData.model;
+  expect(listInputType.actions.every(a => !(a instanceof QuestionToolboxItem))).toBeTruthy();
 
   surveySettings.animationEnabled = true;
 });

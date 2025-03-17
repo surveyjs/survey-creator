@@ -557,6 +557,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       element.closest(".svc-question__drag-area") && !element.closest(".svc-question__top-actions") ||
       element.closest(".sd-element__header") && !element.closest(".svc-string-editor");
   }
+
   protected updateQuestionTypeOrSubtypeListModel(listModel: ListModel, subtypeOnly: boolean) {
     const availableItems = this.getConvertToTypes();
     const defaultJsons = this.buildDefaultJsonMap(availableItems);
@@ -565,25 +566,32 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     let selectedAction: IAction;
     let selectedSubaction: IAction = undefined;
     let selectedSubactions = undefined;
+
+    const toolboxItemToAction = (item, needSeparator = false) => {
+      return this.creator.createIActionBarItemByClass(item, needSeparator, (questionType, json) => { this.convertQuestion(questionType, json, defaultJsons); });
+    };
+
     availableItems.forEach((item: QuestionToolboxItem) => {
       const needSeparator = lastItem && item.category != lastItem.category;
-      const action = this.creator.createIActionBarItemByClass(item, needSeparator, (questionType, json) => { this.convertQuestion(questionType, json, defaultJsons); });
+      const action = toolboxItemToAction(item, needSeparator);
       if (this.toolboxItemIsCorresponded(item, !!selectedAction)) {
         selectedAction = action;
-        selectedSubactions = item.items;
+        if (item.items) {
+          selectedSubactions = item.items.map(subitem => toolboxItemToAction(subitem));
+        }
       }
       if (item.items?.length > 0 && this.creator.toolbox.showSubitems) {
         const subactions = [];
         let selectedSubactionLocal: IAction = undefined;
         let allChildsAreCompatibleToParent = false;
         item.items.forEach(subitem => {
-          const subaction = this.creator.createIActionBarItemByClass(subitem, false, (questionType, json) => { this.convertQuestion(questionType, json, defaultJsons); });
+          const subaction = toolboxItemToAction(subitem,);
           if (this.toolboxItemIsCorresponded(subitem, !!selectedAction)) selectedSubactionLocal = subitem;
           if (this.jsonsAreCompatible(item.json, subitem.json)) allChildsAreCompatibleToParent = true;
           subactions.push(subaction);
         });
         if (!allChildsAreCompatibleToParent && subactions.length > 0) {
-          const defaultSubaction = this.creator.createIActionBarItemByClass(item, false, (questionType, json) => { this.convertQuestion(questionType, json, defaultJsons); });
+          const defaultSubaction = toolboxItemToAction(item);
           defaultSubaction.id = action.id + "-default";
           defaultSubaction.iconName = undefined;
           defaultSubaction.markerIconName = undefined;
@@ -626,12 +634,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       cssClasses: listComponentCss,
     });
     this.updateQuestionTypeOrSubtypeListModel(listModel, true);
-    if (listModel.actions.length == 0) return null;
-
+    const propName = QuestionToolbox.getSubTypePropertyName(this.surveyElement.getType());
+    if (!listModel.selectedItem && !propName) return null;
     const actionData: IAction = {
       id: "convertInputType",
       visibleIndex: 1,
-      title: listModel.selectedItem?.title || "SUBTYPE",
+      title: listModel.selectedItem?.title || editorLocalization.getPropertyValueInEditor(propName, this.surveyElement.getPropertyValue(propName)) || "SUBTYPE",
       disableShrink: true,
       iconName: "icon-chevron_16x16"
     };
@@ -642,14 +650,13 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         this.updateQuestionTypeOrSubtypeListModel(listModel, true);
       }
     });
-
     this.surveyElement.registerFunctionOnPropertiesValueChanged(
-      ["inputType", "rateType"],
-      () => {
+      [propName],
+      (newValue) => {
         const popup = newAction.popupModel;
         const list = popup.contentComponentData.model;
         this.updateQuestionTypeOrSubtypeListModel(list, true);
-        newAction.title = list.selectedItem.title;
+        newAction.title = list.selectedItem?.title || editorLocalization.getPropertyValueInEditor(propName, newValue) || "SUBTYPE";
       },
       "inputTypeAdorner"
     );
