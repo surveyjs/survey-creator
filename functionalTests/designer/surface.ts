@@ -524,9 +524,9 @@ test("Question adorner double click", async (t) => {
   await t.doubleClick(Selector(".sd-question__title"));
   await t.expect(isCollapsed()).notOk();
 
-  await t.doubleClick(Selector(".svc-question__drag-area").nth(1));
+  await t.doubleClick(Selector(".svc-question__drag-area").nth(0));
   await t.expect(isCollapsed()).ok();
-  await t.doubleClick(Selector(".svc-question__drag-area").nth(1));
+  await t.doubleClick(Selector(".svc-question__drag-area").nth(0));
   await t.expect(isCollapsed()).notOk();
 
 });

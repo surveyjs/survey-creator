@@ -438,7 +438,7 @@ test("Question and page collapse button title", async (t) => {
   await t.click(qCollapseButton);
   await t.expect(qCollapseButton.getAttribute("title")).eql("Expand");
 
-  const pCollapseButton = Selector(".svc-page__content #collapse button");
+  const pCollapseButton = Selector(".svc-page__content > .svc-question__drag-area #collapse button");
   await t.expect(pCollapseButton.getAttribute("title")).eql("Collapse");
   await t.click(pCollapseButton);
   await t.expect(pCollapseButton.getAttribute("title")).eql("Expand");
@@ -586,31 +586,31 @@ test("Page adorner - collapse button in differen modes", async (t) => {
   };
   await setJSON(json);
   await t.hover(getToolboxItemByText("Single-Line Input"));
-  const qContent = Selector(".svc-page__content");
-  const qCollapseButton = Selector(".svc-page__content #collapse");
+  const pContent = Selector(".svc-page__content");
+  const pCollapseButton = Selector(".svc-page__content > .svc-question__drag-area #collapse button");
   const actions = Selector(".svc-page__content-actions");
-  await t.hover(qContent, { offsetX: 10, offsetY: 10 });
+  await t.hover(pContent, { offsetX: 10, offsetY: 10 });
   await t.expect(Selector(".svc-page__content").hasClass("svc-hovered")).ok({ timeout: 3000 });
-  await t.expect(qCollapseButton.visible).notOk();
-  await t.click(qContent, { offsetX: 10, offsetY: 10 });
-  await t.expect(qContent.hasClass("svc-page__content--selected")).ok();
-  await t.expect(qCollapseButton.visible).notOk();
+  await t.expect(pCollapseButton.visible).notOk();
+  await t.click(pContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(pContent.hasClass("svc-page__content--selected")).ok();
+  await t.expect(pCollapseButton.visible).notOk();
 
   await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "onhover"; })();
   json.elements[0].name = "question2";
   await setJSON(json);
   await t.hover(getToolboxItemByText("Single-Line Input"));
   await t.expect(actions.getStyleProperty("opacity")).eql("0");
-  await t.hover(qContent, { offsetX: 10, offsetY: 10 });
-  await t.expect(qCollapseButton.visible).ok();
-  await t.click(qContent, { offsetX: 10, offsetY: 10 });
-  await t.expect(qContent.hasClass("svc-page__content--selected")).ok();
-  await t.expect(qCollapseButton.visible).ok();
+  await t.hover(pContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(pCollapseButton.visible).ok();
+  await t.click(pContent, { offsetX: 10, offsetY: 10 });
+  await t.expect(pContent.hasClass("svc-page__content--selected")).ok();
+  await t.expect(pCollapseButton.visible).ok();
 
   await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "always"; })();
   json.elements[0].name = "question3";
   await t.hover(getToolboxItemByText("Single-Line Input"));
   await setJSON(json);
-  await t.expect(qCollapseButton.visible).ok();
+  await t.expect(pCollapseButton.visible).ok();
   await ClientFunction(() => { window["creator"].expandCollapseButtonVisibility = "never"; })();
 });
