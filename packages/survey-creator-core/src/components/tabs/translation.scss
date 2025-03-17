@@ -210,6 +210,8 @@ td.st-table__cell:first-of-type {
   white-space: nowrap;
 
   .sd-action__icon {
+    width: var(--ctr-actionbar-button-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-actionbar-button-icon-height, var(--sjs-font-size-x3));
     margin-left: 0;
   }
 }
