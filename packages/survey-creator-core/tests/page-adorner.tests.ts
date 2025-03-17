@@ -74,7 +74,6 @@ test("Check css when dragging page over top/bottom", () => {
     creator,
     creator.survey.pages[0]
   );
-  pageAdorner.collapsed = true;
   expect(pageAdorner.css).toBe("");
   creator.dragDropSurveyElements.draggedElement = creator.survey.pages[0];
   pageAdorner.dropIndicatorPosition = DropIndicatorPosition.Left;
