@@ -26,10 +26,6 @@ import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
 import { IPortableEvent } from "../utils/events";
-import {
-  isPropertyVisible,
-  propertyExists,
-} from "../utils/creator-utils";
 import { SurveyElementActionContainer } from "./action-container-view-model";
 import { SurveyElementAdornerBase } from "./survey-element-adorner-base";
 import "./question.scss";
@@ -39,6 +35,7 @@ import { DragDropSurveyElements } from "../dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../drop-to-enum";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 import { listComponentCss } from "./list-theme";
+import { SurveyHelper } from "../survey-helper";
 
 export interface QuestionBannerParams {
   text: string;
@@ -716,11 +713,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       items.push(inputTypeConverter);
     }
     items[items.length - 1].css += " svc-dropdown-action--convertTo-last";
-    if (
-      typeof element["isRequired"] !== "undefined" &&
-      propertyExists(element, "isRequired") &&
-      isPropertyVisible(element, "isRequired")
-    ) {
+    if (typeof element["isRequired"] !== "undefined" && !!element.getType
+      && SurveyHelper.isPropertyVisible(element, Serializer.findProperty(element.getType(), "isRequired"), this.creator)) {
       items.push(this.createRequiredAction());
     }
   }

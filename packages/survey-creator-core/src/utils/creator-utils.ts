@@ -100,24 +100,6 @@ export function getNextValue(prefix: string, values: any[], isText?: boolean): s
   return isText ? "" : prefix + 1;
 }
 
-export function propertyExists(obj: any, propertyName: string) {
-  let result = true;
-  if (!!obj && typeof obj.getType === "function") {
-    const property = Serializer.findProperty(obj.getType(), propertyName);
-    result = !!property;
-  }
-  return result;
-}
-
-export function isPropertyVisible(obj: any, propertyName: string) {
-  let result = true;
-  if (!!obj && typeof obj.getType === "function") {
-    const property = Serializer.findProperty(obj.getType(), propertyName);
-    result = !property || property.visible;
-  }
-  return result;
-}
-
 export function getQuestionFromObj(obj: SurveyElement): Question {
   return (obj instanceof MatrixDropdownColumn) ? obj.templateQuestion : (obj as Question);
 }

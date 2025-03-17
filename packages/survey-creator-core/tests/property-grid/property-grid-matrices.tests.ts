@@ -611,3 +611,31 @@ test("Add custom boolean property to choices, Bug#6004", () => {
 
   Serializer.removeProperty("itemvalue", "isDeleted");
 });
+test("itemvalue[] custom dropdown property add locationInTable, Bug#6677", () => {
+  Serializer.addProperty("itemvalue", { name: "prop1", category: "general", locationInTable: "column" });
+  Serializer.addProperty("itemvalue", { name: "prop2", category: "general", locationInTable: "detail" });
+  Serializer.addProperty("itemvalue", { name: "prop3", category: "general", locationInTable: "both" });
+  Serializer.addProperty("itemvalue", { name: "prop4", category: "general" });
+
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.getColumnByName("prop1")).toBeTruthy();
+  expect(choicesQuestion.getColumnByName("prop2")).toBeFalsy();
+  expect(choicesQuestion.getColumnByName("prop3")).toBeTruthy();
+  expect(choicesQuestion.getColumnByName("prop4")).toBeTruthy();
+  const row = choicesQuestion.visibleRows[0];
+  row.showDetailPanel();
+  expect(row.detailPanel.getQuestionByName("prop1")).toBeFalsy();
+  expect(row.detailPanel.getQuestionByName("prop2")).toBeTruthy();
+  expect(row.detailPanel.getQuestionByName("prop3")).toBeTruthy();
+  expect(row.detailPanel.getQuestionByName("prop4")).toBeFalsy();
+
+  Serializer.removeProperty("itemvalue", "prop1");
+  Serializer.removeProperty("itemvalue", "prop2");
+  Serializer.removeProperty("itemvalue", "prop3");
+  Serializer.removeProperty("itemvalue", "prop4");
+});
