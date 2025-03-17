@@ -547,7 +547,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
   protected doDrop = () => {
     if (!this.dropTarget) return;
-    //if (!this.dropTarget.isPage && this.dropTargetAdorner.collapsed && this.dropTargetAdorner.dropIndicatorPosition === DropIndicatorPosition.Inside) return;
+    if (!this.dragOverLocation) return;
 
     const page = this.parentElement;
     const dragged = this.draggedElement;
@@ -584,10 +584,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       srcContainer.removeElement(src);
     }
     let dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
-    if (this.isPanelDynamic(dest) && this.insideElement) dest = dest.template;
-    if (dest.isPage && dest.elements.length > 0 && !this.insideElement) return;
-    const isTargetIsContainer = dest.isPanel || dest.isPage;
-    if (isTargetIsContainer && this.insideElement) {
+
+    if (this.dragOverLocation === DropIndicatorPosition.Inside) {
+      if (this.isPanelDynamic(dest)) dest = dest.template;
       (<PanelModelBase>dest).insertElement(src);
     } else {
       const destParent = dest.parent || dest.page;
