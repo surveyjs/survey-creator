@@ -32,7 +32,7 @@ import "./question.scss";
 import { settings } from "../creator-settings";
 import { StringItemsNavigatorBase } from "./string-editor";
 import { DragDropSurveyElements } from "../dragdrop-survey-elements";
-import { DropIndicatorPosition } from "../drop-to-enum";
+import { DropIndicatorPosition } from "../drag-drop-enums";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 import { listComponentCss } from "./list-theme";
 import { SurveyHelper } from "../survey-helper";
@@ -105,11 +105,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   css() {
+    const isInsideCollapsed = this.dropIndicatorPosition === DropIndicatorPosition.Inside && this.collapsed;
+
     if (!this.surveyElement.isInteractiveDesignElement) return "";
 
-    const isDragIn = !!this.dropIndicatorPosition && (!!this.canExpandOnDrag) && !!this.dragInsideCollapsedContainer;
-
-    if (isDragIn) {
+    if (isInsideCollapsed) {
       this.dragIn();
     } else {
       this.dragOut();
@@ -125,15 +125,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       .append("svc-question__content--title-hidden", !this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden"))
       .append("svc-question__content--title-bottom", !!(this.surveyElement as Question).hasTitleOnBottom)
       .append("svc-question__content--dragged", this.isBeingDragged)
-      .append("svc-question__content--collapsed-drag-over-inside", isDragIn)
-      .append("svc-question__content--drag-over-inside", this.dropIndicatorPosition === DropIndicatorPosition.Inside)
-      .append("svc-question__content--drag-over-top", !this.dragInsideCollapsedContainer && this.dropIndicatorPosition === DropIndicatorPosition.Top)
-      .append("svc-question__content--drag-over-bottom", !this.dragInsideCollapsedContainer && this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
-      .append("svc-question__content--drag-over-right", !this.dragInsideCollapsedContainer && this.dropIndicatorPosition === DropIndicatorPosition.Right)
-      .append("svc-question__content--drag-over-left", !this.dragInsideCollapsedContainer && this.dropIndicatorPosition === DropIndicatorPosition.Left)
+      .append("svc-question__content--collapsed-drag-over-inside", isInsideCollapsed)
+      .append("svc-question__content--drag-over-inside", this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed)
+      .append("svc-question__content--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
+      .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
+      .append("svc-question__content--drag-over-right", this.dropIndicatorPosition === DropIndicatorPosition.Right)
+      .append("svc-question__content--drag-over-left", this.dropIndicatorPosition === DropIndicatorPosition.Left)
       .toString();
 
-    if (!this.dragInsideCollapsedContainer && this.creator) {
+    if (!isInsideCollapsed && this.creator) {
       result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
     }
     return result;

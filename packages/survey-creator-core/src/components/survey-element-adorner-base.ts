@@ -12,7 +12,7 @@ import {
   QuestionPanelDynamicModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
-import { DropIndicatorPosition } from "../drop-to-enum";
+import { DropIndicatorPosition } from "../drag-drop-enums";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
 import { SurveyElementActionContainer } from "./action-container-view-model";
 
@@ -26,9 +26,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({ defaultValue: null }) dropIndicatorPosition: DropIndicatorPosition;
   @property({ defaultValue: false }) isBeingDragged: boolean;
 
-  protected get dragInsideCollapsedContainer(): boolean {
-    return this.collapsed && this.creator.dragDropSurveyElements.insideContainer;
-  }
   @property({ defaultValue: true }) needToRenderContent: boolean;
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
@@ -175,7 +172,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   private dragCollapsedTimer;
 
-  protected get canExpandOnDrag() {
+  public get canExpandOnDrag() {
     return this.surveyElement.isPanel || this.surveyElement.isPage || this.surveyElement instanceof QuestionPanelDynamicModel;
   }
   private draggedIn = false;

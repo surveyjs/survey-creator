@@ -1,7 +1,7 @@
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { settings } from "../src/creator-settings";
-import { DropIndicatorPosition } from "../src/drop-to-enum";
+import { DropIndicatorPosition } from "../src/drag-drop-enums";
 import { CreatorTester } from "./creator-tester";
 
 test("Check page adorner css on drag over", (): any => {
@@ -17,36 +17,16 @@ test("Check page adorner css on drag over", (): any => {
     creator.survey.pages[0]
   );
   expect(pageAdorner.css).toBe("");
-  pageAdorner.dropIndicatorPosition = true as any;
+  pageAdorner.dropIndicatorPosition = DropIndicatorPosition.Inside;
   expect(pageAdorner.css).toBe("svc-question__content--drag-over-inside");
   pageAdorner.showPlaceholder = false;
-  expect(pageAdorner.css).toBe("svc-page--drag-over-empty");
+  pageAdorner.isGhost = true;
+  expect(pageAdorner.css).toBe("svc-page--drag-over-empty svc-page__content--new");
   settings.designer.showAddQuestionButton = false;
-  expect(pageAdorner.css).toBe("svc-page--drag-over-empty svc-page--drag-over-empty-no-add-button");
+  expect(pageAdorner.css).toBe("svc-page--drag-over-empty svc-page--drag-over-empty-no-add-button svc-page__content--new");
   settings.designer.showAddQuestionButton = true;
 });
 
-test("Check page adorner css on drag over", (): any => {
-  const creator = new CreatorTester();
-  creator.expandCollapseButtonVisibility = "never";
-  creator.JSON = {
-    pages: [
-      { name: "page1" },
-    ]
-  };
-  const pageAdorner = new PageAdorner(
-    creator,
-    creator.survey.pages[0]
-  );
-  expect(pageAdorner.css).toBe("");
-  pageAdorner.dropIndicatorPosition = true as any;
-  expect(pageAdorner.css).toBe("svc-question__content--drag-over-inside");
-  pageAdorner.showPlaceholder = false;
-  expect(pageAdorner.css).toBe("svc-page--drag-over-empty");
-  settings.designer.showAddQuestionButton = false;
-  expect(pageAdorner.css).toBe("svc-page--drag-over-empty svc-page--drag-over-empty-no-add-button");
-  settings.designer.showAddQuestionButton = true;
-});
 test("Check page getAnimatedElement methods", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -96,8 +76,6 @@ test("Check css when dragging page over top/bottom", () => {
   );
   expect(pageAdorner.css).toBe("");
   creator.dragDropSurveyElements.draggedElement = creator.survey.pages[0];
-  pageAdorner.dropIndicatorPosition = DropIndicatorPosition.Inside;
-  expect(pageAdorner.css).toBe("");
   pageAdorner.dropIndicatorPosition = DropIndicatorPosition.Left;
   expect(pageAdorner.css).toBe("");
   pageAdorner.dropIndicatorPosition = DropIndicatorPosition.Right;
