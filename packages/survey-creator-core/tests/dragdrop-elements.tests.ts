@@ -173,6 +173,7 @@ test("surveyelement: onDragStart and onDragEnd events", () => {
   ddHelper.dropTarget = {};
   ddHelper.draggedElement = question2;
   ddHelper.dropTarget = question1;
+  ddHelper.dragOverLocation = DropIndicatorPosition.Top;
 
   ddHelper["createDraggedElementShortcut"] = () => { };
   ddHelper.dragInit(null, ddHelper.draggedElement, ddHelper.parentElement, document.createElement("div"));
@@ -236,6 +237,7 @@ test("onDragStart event options", () => {
   //onDragEnd
   ddHelper.draggedElement = panel;
   ddHelper.dropTarget = question;
+  ddHelper.dragOverLocation = DropIndicatorPosition.Top;
   ddHelper.parentElement = page;
   ddHelper["draggedElementShortcut"] = document.body.appendChild(
     document.createElement("div")
