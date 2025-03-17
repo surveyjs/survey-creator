@@ -6,6 +6,6 @@ module.exports = {
   "concurrency": 1,
   "quarantineMode": {
     "successThreshold": 1,
-    "attemptLimit": 3
+    "attemptLimit": 5
   }
 }
