@@ -1419,7 +1419,24 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
   expect(actions[1].enabled).toBeFalsy();
   expect(updater()).toBeFalsy();
 });
-
+test("property-grid-setup action dynamic enabled property Bug#6751", () => {
+  const question1 = new QuestionDropdownModel("q1");
+  question1.choices = [1, 2, 3];
+  const propertyGrid = new PropertyGridModelTester(question1);
+  const choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const action = choicesQuestion.getTitleToolbar().getActionById("property-grid-setup");
+  expect(action).toBeTruthy();
+  expect(action.enabled).toBeTruthy();
+  const row = choicesQuestion.visibleRows[0];
+  row.showDetailPanel();
+  const visibleIfQuestion = row.detailPanel.getQuestionByName("visibleIf");
+  visibleIfQuestion.value = "1 = 1";
+  expect(action.enabled).toBeFalsy();
+  visibleIfQuestion.value = "";
+  expect(action.enabled).toBeTruthy();
+});
 test("options.onSetPropertyEditorOptionsCallback - allowBatchEdit", () => {
   const options = new EmptySurveyCreatorOptions();
   var propName = "";
@@ -3351,6 +3368,24 @@ test("Localication and survey.pages property, Bug#6687", () => {
 
   expect(creator.survey.pages.length).toBe(1);
   expect(creator.survey.pages[0].name).toBe("Seite1");
+});
+test("Localication and different locales, Bug#6717", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", title: "Question 1", choices: [{ value: 1, text: "Item 1" }] }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  let propertyGrid = new PropertyGridModelTester(question);
+  let titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
+  expect(titleQuestion.value).toBe("Question 1");
+  expect(titleQuestion.placeholder).toBe("q1");
+  creator.survey.locale = "de";
+  propertyGrid = new PropertyGridModelTester(question);
+  titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
+  expect(titleQuestion.value).toBeFalsy();
+  expect(titleQuestion.placeHolder).toBe("Question 1");
 });
 test("panellayoutcolumns doesn't have adding button", () => {
   const creator = new CreatorTester();
