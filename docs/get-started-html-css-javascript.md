@@ -359,6 +359,8 @@ creator.onUploadFile.add((_, options) => {
 });
 ```
 
+[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/vanillajs (linkStyle))
+
 <details>
     <summary>View Full Code</summary>  
 
@@ -464,8 +466,6 @@ document.addEventListener("DOMContentLoaded", function() {
 // }
 ```
 </details>
-
-[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/ (linkStyle))
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/html-css-js (linkStyle))
 

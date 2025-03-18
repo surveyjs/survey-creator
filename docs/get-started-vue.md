@@ -35,8 +35,8 @@ Import Survey Creator and SurveyJS Form Library style sheets in the Vue 3 compon
 
 ```html
 <script setup lang="ts">
-import "survey-core/survey-core.min.css";
-import "survey-creator-core/survey-creator-core.min.css";
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
 </script>
 
 <template>
@@ -82,8 +82,8 @@ const creator = new SurveyCreatorModel(creatorOptions);
 
 ```html
 <script setup lang="ts">
-import "survey-core/survey-core.min.css";
-import "survey-creator-core/survey-creator-core.min.css";
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
 
 import type { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorModel } from "survey-creator-core";
@@ -137,8 +137,8 @@ createApp(App)
 ```html
 <!-- components/SurveyCreator.vue -->
 <script setup lang="ts">
-import "survey-core/survey-core.min.css";
-import "survey-creator-core/survey-creator-core.min.css";
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
 
 import type { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorModel } from "survey-creator-core";
@@ -265,8 +265,8 @@ creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defa
 ```html
 <!-- components/SurveyCreator.vue -->
 <script setup lang="ts">
-import "survey-core/survey-core.min.css";
-import "survey-creator-core/survey-creator-core.min.css";
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
 
 import type { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorModel } from "survey-creator-core";
@@ -368,6 +368,8 @@ creator.onUploadFile.add((_, options) => {
 </template>
 ```
 
+[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/vue3js (linkStyle))
+
 To view the application, run `npm run dev` in a command line and open [http://localhost:5173/](http://localhost:5173/) in your browser.
 
 <details>
@@ -376,8 +378,8 @@ To view the application, run `npm run dev` in a command line and open [http://lo
 ```html
 <!-- components/SurveyCreator.vue -->
 <script setup lang="ts">
-import "survey-core/survey-core.min.css";
-import "survey-creator-core/survey-creator-core.min.css";
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
 
 import type { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorModel } from "survey-creator-core";
@@ -462,8 +464,6 @@ creator.saveSurveyFunc = (saveNo: number, callback: Function) => {
 </template>
 ```
 </details>
-
-[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/vue3js (linkStyle))
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue3 (linkStyle))
 

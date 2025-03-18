@@ -523,6 +523,8 @@ export class SurveyCreatorComponent implements OnInit {
 }
 ```
 
+[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/angular (linkStyle))
+
 To view the application, run `ng serve` in a command line and open [http://localhost:4200/](http://localhost:4200/) in your browser.
 
 <details>
@@ -660,8 +662,6 @@ import { SurveyCreatorComponent } from './survey-creator/survey-creator.componen
 export class AppModule { }
 ```
 </details>
-
-[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/angular (linkStyle))
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular (linkStyle))
 
