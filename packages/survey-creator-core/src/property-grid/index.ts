@@ -377,6 +377,15 @@ export class PropertyGridTitleActionsCreator {
       options.titleActions = actions;
     }
   }
+  public onValueChanged(obj: any, property: JsonObjectProperty, question: Question): void {
+    const editor = PropertyGridEditorCollection.getEditor(property);
+    if(!!editor && !!editor.createPropertyEditorSetup && !!editor.isPropertyEditorSetupEnabled) {
+      const act = question.getTitleToolbar().getActionById("property-grid-setup");
+      if(!!act) {
+        act.enabled = editor.isPropertyEditorSetupEnabled(obj, property, question, this.options);
+      }
+    }
+  }
   private createClearValueAction(
     editor: IPropertyGridEditor,
     property: JsonObjectProperty,
@@ -1334,6 +1343,8 @@ export class PropertyGridModel {
     if (!!cellQuestion) {
       this.changeDependedProperties(cellQuestion, (name: string): Question => { return options.row.getQuestionByName(name); },
         (name: string): any => { return options.row.getValue(name); });
+      const matrix = options.question;
+      this.titleActionsCreator.onValueChanged(matrix.obj, matrix.property, matrix);
     }
     PropertyGridEditorCollection.onMatrixCellValueChanged(
       this.obj,

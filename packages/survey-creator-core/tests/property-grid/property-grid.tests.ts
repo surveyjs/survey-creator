@@ -1441,7 +1441,24 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
   expect(actions[1].enabled).toBeFalsy();
   expect(updater()).toBeFalsy();
 });
-
+test("property-grid-setup action dynamic enabled property Bug#6751", () => {
+  const question1 = new QuestionDropdownModel("q1");
+  question1.choices = [1, 2, 3];
+  const propertyGrid = new PropertyGridModelTester(question1);
+  const choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const action = choicesQuestion.getTitleToolbar().getActionById("property-grid-setup");
+  expect(action).toBeTruthy();
+  expect(action.enabled).toBeTruthy();
+  const row = choicesQuestion.visibleRows[0];
+  row.showDetailPanel();
+  const visibleIfQuestion = row.detailPanel.getQuestionByName("visibleIf");
+  visibleIfQuestion.value = "1 = 1";
+  expect(action.enabled).toBeFalsy();
+  visibleIfQuestion.value = "";
+  expect(action.enabled).toBeTruthy();
+});
 test("options.onSetPropertyEditorOptionsCallback - allowBatchEdit", () => {
   const options = new EmptySurveyCreatorOptions();
   var propName = "";
