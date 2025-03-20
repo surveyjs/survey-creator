@@ -82,6 +82,7 @@ jobs:
           allowPartiallySucceededBuilds: true
           artifactName: 'SurveyJSLibraryBuildCore'
           targetPath: '$(System.ArtifactsDirectory'
+        displayName: "DownloadPipelineArtifact@2"
 
       - task: CopyFiles@2
         inputs:
