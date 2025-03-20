@@ -1,4 +1,4 @@
-import { editorLocalization, defaultStrings } from "../src/editorLocalization";
+import { editorLocalization, defaultStrings, getLocaleStrings } from "../src/editorLocalization";
 import { CreatorTester } from "./creator-tester";
 import { Action, Serializer } from "survey-core";
 export * from "../src/localization/italian";
@@ -364,4 +364,13 @@ test("All properties should be in English translation", () => {
     });
   });
   expect(errors).toHaveLength(0);
+});
+test("getLocaleStrings function, Bug#6754", () => {
+  expect(getLocaleStrings("en").qt.text).toEqual("Single-Line Input");
+  expect(getLocaleStrings("it").qt.text).toEqual("Testo semplice");
+  editorLocalization.defaultLocale = "it";
+  expect(getLocaleStrings("").qt.text).toEqual("Testo semplice");
+  expect(getLocaleStrings("en").qt.text).toEqual("Single-Line Input");
+  expect(getLocaleStrings("it").qt.text).toEqual("Testo semplice");
+  editorLocalization.defaultLocale = "en";
 });
