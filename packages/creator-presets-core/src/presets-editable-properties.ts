@@ -1,10 +1,14 @@
-import { JsonObjectProperty, ItemValue, QuestionDropdownModel,
+import {
+  JsonObjectProperty, ItemValue, QuestionDropdownModel,
   Base, Serializer, SurveyModel, matrixDropdownColumnTypes,
-  PanelModel, PanelModelBase, SurveyElement } from "survey-core";
+  PanelModel, PanelModelBase, SurveyElement
+} from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
-import { SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
+import {
+  SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
   SurveyQuestionProperties, editorLocalization, PropertyGridModel, TabDesignerPlugin,
-  ICreatorOptions, settings, IQuestionToolboxItem, SurveyHelper, calculateDragOverLocation, PageAdorner } from "survey-creator-core";
+  ICreatorOptions, settings, IQuestionToolboxItem, SurveyHelper, calculateDragOverLocation, PageAdorner
+} from "survey-creator-core";
 import { QuestionEmbeddedCreatorModel } from "./components/embedded-creator";
 require("./presets-editable-properties.scss");
 
@@ -35,32 +39,32 @@ export class SurveyQuestionPresetPropertiesDetail {
     Serializer.getPropertiesByObj(obj).forEach(prop => objProps[prop.name] = prop);
     this.allPropertiesNames.forEach(name => {
       const prop = objProps[name];
-      if(prop) {
+      if (prop) {
         const propClassName = this.getPropClassName(prop);
         this.propertiesHash[name] = propClassName;
         cls[propClassName] = true;
       }
     });
-    for(let i = 0; i < presetPropertiesBaseClasses.length; i ++) {
+    for (let i = 0; i < presetPropertiesBaseClasses.length; i++) {
       const cl = presetPropertiesBaseClasses[i];
-      if(cls[cl]) {
+      if (cls[cl]) {
         this.classes.push(cl);
       }
     }
-    if(this.classes.indexOf(className) < 0) {
+    if (this.classes.indexOf(className) < 0) {
       this.classes.push(className);
     }
     this.propertyGridValue = new PropertyGridModel(obj, undefined, this.currentJson);
     this.propertyGridDefaultValue = new PropertyGridModel(obj);
   }
   private createObj(): Base {
-    if(this.className === "survey") return new SurveyModel();
+    if (this.className === "survey") return new SurveyModel();
     const ind = this.className.indexOf("@");
-    if(ind < 0) return Serializer.createClass(this.className);
+    if (ind < 0) return Serializer.createClass(this.className);
     const clName = this.className.substring(0, ind);
     const postFix = this.className.substring(ind + 1);
     const res = Serializer.createClass(clName);
-    if(res.cellType) {
+    if (res.cellType) {
       res.cellType = postFix;
     }
     return res;
@@ -75,7 +79,7 @@ export class SurveyQuestionPresetPropertiesDetail {
     this.updateCurrentJsonCore(this.currentJson.classes, val);
   }
   private updateCurrentJsonCore(curJsonClasses: ISurveyPropertiesDefinition, val: Array<any>): void {
-    if(!Array.isArray(val) || val.length === 0) return;
+    if (!Array.isArray(val) || val.length === 0) return;
     const tabNames = [];
     this.classes.forEach(cl => {
       this.updateCurrentJsonClass(curJsonClasses, val, cl, tabNames);
@@ -88,32 +92,32 @@ export class SurveyQuestionPresetPropertiesDetail {
 
     val.forEach(tab => {
       const clVal = tab.items;
-      if(Array.isArray(clVal)) {
+      if (Array.isArray(clVal)) {
         const classesIndeces = [];
         this.classes.forEach(cl => classesIndeces.push(0));
         const propertiesIndeces = {};
-        for(let i = 0; i < clVal.length; i ++) {
+        for (let i = 0; i < clVal.length; i++) {
           const clName = this.propertiesHash[clVal[i]];
           let clIndex = this.classes.indexOf(clName);
-          if(clIndex < 0) continue;
+          if (clIndex < 0) continue;
           const nextStep = 10000 / Math.pow(10, clIndex);
           let max = 0;
-          for(let j = 0; j <= clIndex; j ++) {
-            if(classesIndeces[j] > max) max = classesIndeces[j];
+          for (let j = 0; j <= clIndex; j++) {
+            if (classesIndeces[j] > max) max = classesIndeces[j];
           }
           const visIndex = max + nextStep;
           propertiesIndeces[clVal[i]] = visIndex;
           classesIndeces[clIndex] = visIndex;
         }
         clVal.forEach(propName => {
-          if(this.propertiesHash[propName] === clName) {
+          if (this.propertiesHash[propName] === clName) {
             const tabName = tab.name;
-            if(!!tabName && tabNames.indexOf(tab.name) < 0) {
+            if (!!tabName && tabNames.indexOf(tab.name) < 0) {
               tabNames.push(tab.name);
               tabs.push({ name: tab.name, index: tabNames.length * tabStep });
             }
             const item: any = { name: propName, index: propertiesIndeces[propName] };
-            if(!!tabName) {
+            if (!!tabName) {
               item.tab = tabName;
             }
             properties.push(item);
@@ -125,18 +129,18 @@ export class SurveyQuestionPresetPropertiesDetail {
   }
   private getPropClassName(prop: JsonObjectProperty): string {
     const clName = prop.classInfo.name;
-    for(let i = 1; i < presetPropertiesBaseClasses.length; i ++) {
+    for (let i = 1; i < presetPropertiesBaseClasses.length; i++) {
       const cl = presetPropertiesBaseClasses[i];
-      if(clName === cl || Serializer.isDescendantOf(clName, cl)) return this.getClassName(cl);
+      if (clName === cl || Serializer.isDescendantOf(clName, cl)) return this.getClassName(cl);
     }
-    if(clName === this.className) return this.className;
+    if (clName === this.className) return this.className;
     return this.getClassName("question");
   }
   private getClassName(className: string): string {
     const ind = this.className.indexOf("@");
-    if(ind < 0) return className;
+    if (ind < 0) return className;
     const clName = this.className.substring(0, ind);
-    if(clName === className || className === "question") {
+    if (clName === className || className === "question") {
       className = "default";
     }
     return clName + "@" + className;
@@ -152,7 +156,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   private isModified: boolean;
   public get propCreator(): SurveyCreatorModel { return this.propCreatorValue; }
   public disposeCore(): void {
-    if(this.propCreator) {
+    if (this.propCreator) {
       this.propCreator.dispose();
       this.propCreatorValue = undefined;
     }
@@ -183,7 +187,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     };
   }
   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
-    if(!this.isModified) return undefined;
+    if (!this.isModified) return undefined;
     this.updateCurrentJson(model);
     return this.currentJson;
   }
@@ -207,7 +211,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
   private setJSONForTitlesAndDescriptions(locStrs: any, name: string): void {
     const strs = this.localeStrings[name];
-    if(Object.keys(strs).length > 0) {
+    if (Object.keys(strs).length > 0) {
       locStrs[name] = strs;
     }
   }
@@ -220,21 +224,21 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
   private isPropCreatorChanged: boolean;
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
-    if(name !== this.nameSelector) return;
+    if (name !== this.nameSelector) return;
     this.updateCurrentJson(model);
-    if(this.currentProperties) {
+    if (this.currentProperties) {
       this.currentProperties = null;
     }
     const selQuestion = this.getSelector(model);
     this.currentClassName = selQuestion.value;
-    if(!this.currentClassName) return;
+    if (!this.currentClassName) return;
     this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
     this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
     this.setupCreatorToolbox(this.propCreator);
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.isModified = !!json;
-    if(!json) {
+    if (!json) {
       json = this.copyJson(defaultPropertyGridDefinition);
     }
     this.currentJson = json;
@@ -252,7 +256,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     });
 
     Serializer.getChildrenClasses("question", true).forEach(cl => {
-      if(toolboxItems[cl.name]) {
+      if (toolboxItems[cl.name]) {
         classes.push(cl.name);
       }
     });
@@ -260,14 +264,14 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     classes.forEach(str => res.push(new ItemValue(str, this.getSelectorItemTitle(str))));
     const columnPrefix = "matrixdropdowncolumn@";
     res.push(new ItemValue(columnPrefix + "default", this.getColumnItemTitle("")));
-    for(let key in matrixDropdownColumnTypes) {
+    for (let key in matrixDropdownColumnTypes) {
       res.push(new ItemValue(columnPrefix + key, this.getColumnItemTitle(key)));
     }
     return res;
   }
   private getSelectorItemTitle(name: string): string {
-    if(name === "survey") return editorLocalization.getString("ed.surveyTypeName");
-    if(name === "page") return editorLocalization.getString("ed.pageTypeName");
+    if (name === "survey") return editorLocalization.getString("ed.surveyTypeName");
+    if (name === "page") return editorLocalization.getString("ed.pageTypeName");
     return editorLocalization.getString("qt." + name);
   }
   private getColumnItemTitle(name: string): string {
@@ -276,9 +280,9 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     return columnTitle + ": " + postFix;
   }
   private updateCurrentJson(model: SurveyModel): void {
-    if(!this.isPropCreatorChanged) return;
+    if (!this.isPropCreatorChanged) return;
     this.isPropCreatorChanged = false;
-    if(this.currentProperties) {
+    if (this.currentProperties) {
       this.currentProperties.updateCurrentJson(this.getPropertiesArray());
     }
   }
@@ -298,22 +302,22 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     this.ensureLocalizationPath(path);
     const strs = this.localeStrings[path];
     const className = this.currentProperties.getPropertyClassName(propName);
-    if(!!className) {
-      if(!strs[className]) {
+    if (!!className) {
+      if (!strs[className]) {
         strs[className] = {};
       }
       strs[className][propName] = val;
     }
   }
   private ensureLocalizationPath(path: string): void {
-    if(!this.localeStrings) {
+    if (!this.localeStrings) {
       this.localeStrings = {};
     }
     const names = path.split(".");
     let strs = this.localeStrings;
-    for(let i = 0; i < names.length; i ++) {
+    for (let i = 0; i < names.length; i++) {
       const name = names[i];
-      if(!strs[name]) strs[name] = {};
+      if (!strs[name]) strs[name] = {};
       strs = strs[name];
     }
   }
@@ -324,18 +328,18 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.onModified.add((sender, options) => {
       this.isPropCreatorChanged = true;
       this.isModified = true;
-      if(options.type === "PROPERTY_CHANGED") {
+      if (options.type === "PROPERTY_CHANGED") {
         const name = (<any>options.target).name;
-        if((<any>options.target)?.isQuestion) {
-          if(options.name === "title") {
+        if ((<any>options.target)?.isQuestion) {
+          if (options.name === "title") {
             this.changePropTitleAndDescription("pe", name, options.newValue);
           }
-          if(options.name === "description") {
+          if (options.name === "description") {
             this.changePropTitleAndDescription("pehelp", name, options.newValue);
           }
         }
-        if((<any>options.target)?.isPanel) {
-          if(options.name === "title") {
+        if ((<any>options.target)?.isPanel) {
+          if (options.name === "title") {
             this.ensureLocalizationPath("pe.tabs");
             this.localeStrings.pe.tabs[name] = options.newValue;
           }
@@ -353,12 +357,12 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.showSidebar = false;
     const designer = <TabDesignerPlugin>creator.getPlugin("designer");
     designer.designerStateManager.onInitElementStateCallback = (element: SurveyElement, state: any): void => {
-      if(element.isPanel || element.isQuestion) {
+      if (element.isPanel || element.isQuestion) {
         state.collapsed = true;
       }
     };
     creator.onSurveyInstanceCreated.add((sender, options) => {
-      if(options.reason === "designer") {
+      if (options.reason === "designer") {
         const model = options.survey;
         model.getAllPanels().forEach(panel => {
           this.addCategoryNamePropIntoPanel(<PanelModel>panel, creator);
@@ -369,10 +373,10 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
         model.onElementWrapperComponentName.add((sender, options) => {
           const el = options.element;
           const compName = options.componentName;
-          if(el.isQuestion && (compName === "svc-dropdown-question" || compName === "svc-question")) {
+          if (el.isQuestion && (compName === "svc-dropdown-question" || compName === "svc-question")) {
             options.componentName = "svc-preset-question";
           }
-          if(el.isPanel && compName === "svc-panel") {
+          if (el.isPanel && compName === "svc-panel") {
             options.componentName = "svc-preset-panel";
           }
         });
@@ -380,7 +384,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     });
     creator.onSelectedElementChanging.add((sender, options) => {
       const el = <any>options.newSelectedElement;
-      if(!!el && (el.isPage || el === creator.survey)) {
+      if (!!el && (el.isPage || el === creator.survey)) {
         options.newSelectedElement = creator.selectedElement;
       }
     });
@@ -400,15 +404,14 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       options.allowDelete = false;
     });
     creator.onModified.add((sender, options) => {
-      if(options.type === "OBJECT_DELETED") {
+      if (options.type === "OBJECT_DELETED") {
         this.setupCreatorToolbox(sender);
       }
     });
-    creator.getElementAddornerCssCallback = (obj: Base, className: string): string =>
-    { return className + " preset_pg_question"; };
+    creator.getElementAddornerCssCallback = (obj: Base, className: string): string => { return className + " preset_pg_question"; };
     creator.onPanelAdded.add((sender, options) => {
       const pnl = options.panel;
-      if(pnl.parent.isPanel) {
+      if (pnl.parent.isPanel) {
         const parent = pnl.parent;
         parent.removeElement(pnl);
         const page = creator.survey.pages[0];
@@ -421,16 +424,16 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     });
     creator.onQuestionAdded.add((sender, options) => {
       const q = options.question;
-      if(!q.parent || !q.parent.isPanel) {
+      if (!q.parent || !q.parent.isPanel) {
         let sel = creator.selectedElement;
         let index: number = undefined;
-        if(!sel || (<any>sel).isPage || sel.getType() === "survey") {
-          if(creator.survey.getAllPanels().length === 0) {
+        if (!sel || (<any>sel).isPage || sel.getType() === "survey") {
+          if (creator.survey.getAllPanels().length === 0) {
             creator.clickToolboxItem(creator.toolbox.getItemByName("panel").json);
           }
           sel = <any>creator.survey.getAllPanels()[0];
         }
-        if((<any>sel).isQuestion) {
+        if ((<any>sel).isQuestion) {
           const panel = (<any>sel).parent;
           index = panel.elements.indexOf(sel) + 1;
           sel = panel;
@@ -440,12 +443,12 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       this.setupCreatorToolbox(sender);
     });
     creator.onDragOverLocationCalculating.add((sender, options) => {
-      if (options.draggedSurveyElement?.isPanel && options.insideContainer) {
-        options.insideContainer = false;
+      if (options.draggedSurveyElement?.isPanel && options.insideElement) {
+        options.insideElement = false;
         options.dragOverLocation = calculateDragOverLocation(options.clientX, options.clientY, options.dragOverRect, "top-bottom");
       }
       if (options.draggedSurveyElement?.isQuestion && options.dragOverSurveyElement?.isPanel) {
-        options.insideContainer = true;
+        options.insideElement = true;
       }
     });
     creator.onDragDropAllow.add((sender, options) => {
@@ -459,16 +462,16 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     });
   }
   private updateCreatorJSON(json: any): any {
-    if(!json || !json.pages || !json.pages[0] || !json.pages[0].elements) return;
+    if (!json || !json.pages || !json.pages[0] || !json.pages[0].elements) return;
     json.widthMode = "static";
     json.width = "800px";
     this.updateCreatorJSONElements(json.pages[0].elements);
     return json;
   }
   private updateCreatorJSONElements(elements: Array<any>): void {
-    for(let i = elements.length - 1; i >= 0; i --) {
+    for (let i = elements.length - 1; i >= 0; i--) {
       const el = elements[i];
-      if(!!el.name && el.name.indexOf("overridingProperty")> -1) {
+      if (!!el.name && el.name.indexOf("overridingProperty") > -1) {
         elements.splice(i, 1);
       } else {
         this.updateJSONElement(el);
@@ -476,23 +479,23 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     }
   }
   private updateJSONElement(el: any): void {
-    if(Array.isArray(el.elements)) {
+    if (Array.isArray(el.elements)) {
       this.updateCreatorJSONElements(el.elements);
     }
-    if(el.titleLocation === "hidden") {
+    if (el.titleLocation === "hidden") {
       delete el.titleLocation;
     }
-    if(el.descriptionLocation === "hidden") {
+    if (el.descriptionLocation === "hidden") {
       delete el.descriptionLocation;
     }
-    if(!!el.state) {
+    if (!!el.state) {
       delete el.state;
     }
     const type = el.type;
-    if(type === "textwithreset") {
+    if (type === "textwithreset") {
       el.type = "text";
     }
-    if(type === "commentwithreset") {
+    if (type === "commentwithreset") {
       el.type = "comment";
     }
   }
@@ -503,7 +506,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     const survey = this.propCreator.survey;
     const allProps = this.currentProperties.getAllPropertiesNames();
     allProps.forEach(propName => {
-      if(!survey.getQuestionByName(propName) && propGrid.getQuestionByName(propName)
+      if (!survey.getQuestionByName(propName) && propGrid.getQuestionByName(propName)
         && hiddenProperties.indexOf(propName) < 0) {
         const q = propGrid.getQuestionByName(propName);
         const json = q.toJSON();
@@ -529,13 +532,13 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     (<any>locStr).locStr = locStr;
     (<any>locStr).creator = creator;
     locStr.onStrChanged = (oldValue: string, newValue: string): void => {
-      if(!!newValue) {
+      if (!!newValue) {
         panel.name = newValue;
       }
     };
   }
   private isDefaultPanelName(name: string): boolean {
-    if(!name) return true;
+    if (!name) return true;
     return !!this.currentProperties.propertyGridDefault.survey.getPanelByName(name);
   }
 }

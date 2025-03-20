@@ -7,7 +7,9 @@ import { Question, SurveyModel } from "survey-core";
   templateUrl: "./question-editor.component.html"
 })
 export class QuestionEditorComponent extends EmbeddedViewContentComponent {
-  @Input() survey!: SurveyModel
+  @Input() survey!: SurveyModel;
+  @Input() style!: any;
+
   get question(): Question {
     return this.survey.getAllQuestions()[0];
   }

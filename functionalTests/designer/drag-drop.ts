@@ -572,8 +572,8 @@ test("Drag Drop to collapsed page", async (t) => {
   };
   await setJSON(json);
 
-  const qCollapseButton = Selector(".svc-page__content #collapse");
-  await t.click(qCollapseButton.filterVisible());
+  const pCollapseButton = Selector(".svc-page__content > .svc-question__drag-area #collapse button");
+  await t.click(pCollapseButton.filterVisible());
 
   const Page = Selector(".svc-page");
   const toolboxToolAction = Selector(".svc-toolbox__tool > .sv-action__content");

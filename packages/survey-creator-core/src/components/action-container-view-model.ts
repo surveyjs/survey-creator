@@ -64,19 +64,23 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
       this.setModeForActions(true);
       return;
     }
+    if(this.visibleActions.length > 1) {
+      this.visibleActions.forEach((item) => {
+        if (item.id == "convertTo") {
+          item.mode = "small";
+          return;
+        }
+        if (item.id == "convertInputType") {
+          item.mode = "removed";
+          return;
+        }
+        item.mode = "popup";
+      });
+      this.dotsItem.visible = true;
+    } else {
+      this.visibleActions.forEach(i => i.mode = "small");
+    }
 
-    this.visibleActions.forEach((item) => {
-      if (item.id == "convertTo") {
-        item.mode = "small";
-        return;
-      }
-      if (item.id == "convertInputType") {
-        item.mode = "removed";
-        return;
-      }
-      item.mode = "popup";
-    });
-    this.dotsItem.visible = true;
     this.hiddenItemsListModel.setItems(items.filter(i => i.mode == "popup").map(i => i.innerItem));
   }
 }

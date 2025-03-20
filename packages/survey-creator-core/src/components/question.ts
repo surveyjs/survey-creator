@@ -26,19 +26,16 @@ import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
 import { IPortableEvent } from "../utils/events";
-import {
-  isPropertyVisible,
-  propertyExists,
-} from "../utils/creator-utils";
 import { SurveyElementActionContainer } from "./action-container-view-model";
 import { SurveyElementAdornerBase } from "./survey-element-adorner-base";
 import "./question.scss";
 import { settings } from "../creator-settings";
 import { StringItemsNavigatorBase } from "./string-editor";
 import { DragDropSurveyElements } from "../dragdrop-survey-elements";
-import { DropIndicatorPosition } from "../drop-to-enum";
+import { DropIndicatorPosition } from "../drag-drop-enums";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 import { listComponentCss } from "./list-theme";
+import { SurveyHelper } from "../survey-helper";
 
 export interface QuestionBannerParams {
   text: string;
@@ -108,11 +105,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   css() {
+    const isInsideCollapsed = this.dropIndicatorPosition === DropIndicatorPosition.Inside && this.collapsed;
+
     if (!this.surveyElement.isInteractiveDesignElement) return "";
 
-    const isDragIn = !!this.dropIndicatorPosition && (!!this.canExpandOnDrag) && !!this.dragInsideCollapsedContainer;
-
-    if (isDragIn) {
+    if (isInsideCollapsed) {
       this.dragIn();
     } else {
       this.dragOut();
@@ -128,15 +125,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       .append("svc-question__content--title-hidden", !this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden"))
       .append("svc-question__content--title-bottom", !!(this.surveyElement as Question).hasTitleOnBottom)
       .append("svc-question__content--dragged", this.isBeingDragged)
-      .append("svc-question__content--collapsed-drag-over-inside", isDragIn)
-      .append("svc-question__content--drag-over-inside", this.dropIndicatorPosition === DropIndicatorPosition.Inside)
-      .append("svc-question__content--drag-over-top", !this.dragInsideCollapsedContainer && this.dropIndicatorPosition === DropIndicatorPosition.Top)
-      .append("svc-question__content--drag-over-bottom", !this.dragInsideCollapsedContainer && this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
-      .append("svc-question__content--drag-over-right", !this.dragInsideCollapsedContainer && this.dropIndicatorPosition === DropIndicatorPosition.Right)
-      .append("svc-question__content--drag-over-left", !this.dragInsideCollapsedContainer && this.dropIndicatorPosition === DropIndicatorPosition.Left)
+      .append("svc-question__content--collapsed-drag-over-inside", isInsideCollapsed)
+      .append("svc-question__content--drag-over-inside", this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed)
+      .append("svc-question__content--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
+      .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
+      .append("svc-question__content--drag-over-right", this.dropIndicatorPosition === DropIndicatorPosition.Right)
+      .append("svc-question__content--drag-over-left", this.dropIndicatorPosition === DropIndicatorPosition.Left)
       .toString();
 
-    if (!this.dragInsideCollapsedContainer && this.creator) {
+    if (!isInsideCollapsed && this.creator) {
       result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
     }
     return result;
@@ -716,11 +713,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       items.push(inputTypeConverter);
     }
     items[items.length - 1].css += " svc-dropdown-action--convertTo-last";
-    if (
-      typeof element["isRequired"] !== "undefined" &&
-      propertyExists(element, "isRequired") &&
-      isPropertyVisible(element, "isRequired")
-    ) {
+    if (typeof element["isRequired"] !== "undefined" && !!element.getType
+      && SurveyHelper.isPropertyVisible(element, Serializer.findProperty(element.getType(), "isRequired"), this.creator)) {
       items.push(this.createRequiredAction());
     }
   }

@@ -81,7 +81,6 @@ svc-page {
   justify-content: flex-end;
   box-sizing: border-box;
   padding: 0 calcSize(1) 0 var(--ctr-survey-page-drag-indicator-width, var(--lbr-size-x3));
-  z-index: 12;
   transition: opacity $creator-transition-duration;
   white-space: nowrap;
 
@@ -108,6 +107,19 @@ svc-page {
   pointer-events: none;
   .sv-action {
     pointer-events: all;
+  }
+  & > .sv-dots {
+    width: auto;
+    .sv-dots__item {
+      width: auto;
+    }
+    &.sv-action--hidden {
+      width: 0;
+    }
+    .svc-list__item-icon {
+      width: var(--ctr-list-item-icon-width-small, var(--sjs-font-size-x2));
+      height: var(--ctr-list-item-icon-height-small, var(--sjs-font-size-x2));
+    }
   }
 }
 
@@ -138,7 +150,7 @@ svc-page {
     var(--ctr-survey-question-panel-toolbar-gap, var(--lbr-spacing-x1)) / 2
   );
   margin: 0 var(--thm-survey-question-panel-toolbar-button-gap);
-  border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, var(--lbr-corner-radius-x05));
+  border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, var(--lbr-corner-radius-x075));
   padding: var(--thm-survey-question-panel-toolbar-item-padding-top)
     var(--thm-survey-question-panel-toolbar-item-padding-right)
     var(--thm-survey-question-panel-toolbar-item-padding-bottom)
@@ -171,7 +183,6 @@ svc-page {
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
     use {
       fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
-      opacity: 0.5;
     }
   }
 
@@ -264,8 +275,6 @@ svc-page {
   }
 
   & > .svc-question__drag-area {
-    z-index: 1;
-
     .svc-question__drag-element {
       width: var(--ctr-survey-page-drag-indicator-width, var(--lbr-size-x3));
       height: var(--ctr-survey-page-drag-indicator-height, var(--lbr-size-x2));

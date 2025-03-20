@@ -3,7 +3,7 @@ import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
 import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
-import { DropIndicatorPosition } from "./drop-to-enum";
+import { DropIndicatorPosition, ElType } from "./drag-drop-enums";
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
   const rect = dropTargetNode.getBoundingClientRect();
@@ -59,7 +59,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   public static nestedPanelDepth: number = -1;
   public static ghostSurveyElementName = "sv-drag-drop-ghost-survey-element-name"; // before renaming use globa search (we have also css selectors)
 
-  public insideContainer = null;
+  public insideElement = null;
   protected prevIsEdge: any = null;
   // protected ghostSurveyElement: IElement = null;
   protected dragOverIndicatorElement: any = null;
@@ -109,7 +109,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     this.startDrag(event, draggedElement);
   }
 
-  protected getShortcutText(draggedElement: IShortcutText): string {
+  protected getShortcutText(draggedElement: any): string {
+    if (draggedElement.isPage) return draggedElement.name;
     return (<any>draggedElement).toolboxItemTitle || super.getShortcutText(draggedElement);
   }
 
@@ -222,7 +223,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     });
 
     // drop to matrix detail panel
-    if ((dropTarget.getType() === "matrixdropdown" || dropTarget.getType() === "matrixdynamic") && (<any>dropTarget).detailPanelMode !== "none" && this.insideContainer) {
+    if ((dropTarget.getType() === "matrixdropdown" || dropTarget.getType() === "matrixdynamic") && (<any>dropTarget).detailPanelMode !== "none" && this.insideElement) {
       dropTarget = (<any>dropTarget).detailPanel;
     }
 
@@ -369,7 +370,15 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         }
       } else {
         this.dragOverIndicatorElement = this.dropTarget;
-        this.dropTargetAdorner.dropIndicatorPosition = this.dragOverLocation;
+        if (this.draggedElement.isPage) {
+          if (this.dragOverLocation === DropIndicatorPosition.Top || this.dragOverLocation === DropIndicatorPosition.Bottom) {
+            this.dropTargetAdorner.dropIndicatorPosition = this.dragOverLocation;
+          } else {
+            this.dropTargetAdorner.dropIndicatorPosition = this.dragOverLocation;
+          }
+        } else {
+          this.dropTargetAdorner.dropIndicatorPosition = this.dragOverLocation;
+        }
       }
     }
     if (this.dragOverIndicatorElement != oldDragOverIndicatorElement) this.removeDragOverMarker(oldDragOverIndicatorElement);
@@ -409,6 +418,13 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return result;
   }
 
+  private getDragDropElementType(element: any) {
+    if (element.isPage) return ElType.Page;
+    if (element.isPanel) return ElType.Panel;
+    if (element instanceof QuestionPanelDynamicModel) return ElType.DynamicPanel;
+    return ElType.Question;
+  }
+
   public dragOver(event: PointerEvent): void {
     const dropTargetNode = this.findDropTargetNodeFromPoint(
       event.clientX,
@@ -425,22 +441,61 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       return null;
     }
 
-    const oldInsideContainer = this.insideContainer;
-    this.insideContainer = !calculateIsEdge(dropTargetNode, event.clientY) && !calculateIsSide(dropTargetNode, event.clientX);
+    const oldinsideElement = this.insideElement;
+    this.insideElement = !calculateIsEdge(dropTargetNode, event.clientY) && !calculateIsSide(dropTargetNode, event.clientX);
     const dropTarget = this.getDropTargetByNode(dropTargetNode, event);
 
-    if (!!oldInsideContainer != !!this.insideContainer) {
-      const adorner = SurveyElementAdornerBase.GetAdorner(dropTarget);
-      adorner.dropIndicatorPosition = null;
+    const dropTargetAdorner = SurveyElementAdornerBase.GetAdorner(dropTarget);
+    if (!!oldinsideElement != !!this.insideElement) {
+      dropTargetAdorner.dropIndicatorPosition = null;
     }
     const dropTargetRect = dropTargetNode.getBoundingClientRect();
     const calcDirection = !settings.dragDrop.allowDragToTheSameLine || (!!this.draggedElement && this.draggedElement.isPage) ? "top-bottom" : null;
     let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetRect, calcDirection);
+
     if (!this.draggedElement.isPage && dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || this.isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
-      if (dropTarget.isPage || this.insideContainer) {
+      if (dropTarget.isPage || this.insideElement) {
         dragOverLocation = DropIndicatorPosition.Inside;
       }
     }
+
+    if (!this.draggedElement.isPage && dropTarget.isPage && dropTargetAdorner.collapsed) {
+      dragOverLocation = DropIndicatorPosition.Inside;
+    }
+
+    if ((dropTarget.isPanel || this.isPanelDynamic(dropTarget)) && this.insideElement && dropTargetAdorner.collapsed) {
+      dragOverLocation = DropIndicatorPosition.Inside;
+    }
+
+    if (!this.draggedElement.isPage && dropTarget.isPage && dropTarget.elements.length !== 0 && !dropTargetAdorner.collapsed) {
+      dragOverLocation = null;
+    }
+
+    // const dropTargetType = this.getDragDropElementType(dropTarget);
+    // const draggedElementType = this.getDragDropElementType(this.draggedElement);
+    // switch (dropTargetType) {
+    //   case ElType.Page: {
+    //     console.log("dropTargetType", dropTargetType);
+    //     break;
+    //   }
+    //   case ElType.Panel: {
+    //     console.log("dropTargetType", dropTargetType);
+    //     break;
+    //   }
+    //   case ElType.DynamicPanel: {
+    //     console.log("dropTargetType", dropTargetType);
+    //     break;
+    //   }
+    //   case ElType.Question: {
+    //     console.log("dropTargetType", dropTargetType);
+    //     break;
+    //   }
+    //   // case ElType.EmptySurvey: {
+    //   //   console.log("dropTargetType", dropTargetType);
+    //   //   break;
+    //   // }
+    // }
+
     const options = {
       survey: this.survey,
       draggedSurveyElement: this.draggedElement,
@@ -448,13 +503,13 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       clientX: event.clientX,
       clientY: event.clientY,
       dragOverRect: dropTargetRect,
-      insideContainer: this.insideContainer,
+      insideElement: this.insideElement,
       dragOverLocation
     };
     if (this.onDragOverLocationCalculating) {
       this.onDragOverLocationCalculating(options);
       dragOverLocation = options.dragOverLocation;
-      this.insideContainer = options.insideContainer;
+      this.insideElement = options.insideElement;
     }
     const isDropTargetValid = this.isDropTargetValid(
       dropTarget,
@@ -492,6 +547,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
   protected doDrop = () => {
     if (!this.dropTarget) return;
+    if (!this.dragOverLocation) return;
+
     const page = this.parentElement;
     const dragged = this.draggedElement;
     const src = this.draggedElement;
@@ -527,10 +584,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       srcContainer.removeElement(src);
     }
     let dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
-    if (this.isPanelDynamic(dest) && this.insideContainer) dest = dest.template;
-    if (dest.isPage && dest.elements.length > 0 && !this.insideContainer) return;
-    const isTargetIsContainer = dest.isPanel || dest.isPage;
-    if (isTargetIsContainer && this.insideContainer) {
+
+    if (this.dragOverLocation === DropIndicatorPosition.Inside) {
+      if (this.isPanelDynamic(dest)) dest = dest.template;
       (<PanelModelBase>dest).insertElement(src);
     } else {
       const destParent = dest.parent || dest.page;
@@ -550,7 +606,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   public clear(): void {
-    this.insideContainer = null;
+    this.insideElement = null;
     this.removeDragOverMarker(this.prevDropTarget);
     this.removeDragOverMarker(this.dropTarget);
     this.removeDragOverMarker(this.dragOverIndicatorElement);
