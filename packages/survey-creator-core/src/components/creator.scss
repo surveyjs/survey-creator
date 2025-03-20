@@ -17,6 +17,7 @@ survey-creator,
   position: relative;
 
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 
   @-moz-document url-prefix() {
     scrollbar-width: thin;
