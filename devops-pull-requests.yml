@@ -50,16 +50,28 @@ jobs:
           cacheHitVar: NPM_CACHE_RESTORED
         displayName: Cache NPM Core
 
-      - task: DownloadBuildArtifacts@0
+      # - task: DownloadBuildArtifacts@0
+      #   inputs:
+      #     buildType: "specific"
+      #     project: "af2804d2-859a-4705-9ef5-cdf46d1d5d4f"
+      #     pipeline: "56"
+      #     specificBuildWithTriggering: true
+      #     buildVersionToDownload: "latest"
+      #     downloadType: "single"
+      #     artifactName: "SurveyJSLibraryBuildCore"
+      #     downloadPath: "$(System.ArtifactsDirectory)"
+
+      - task: DownloadBuildArtifacts@1
         inputs:
-          buildType: "specific"
-          project: "af2804d2-859a-4705-9ef5-cdf46d1d5d4f"
-          pipeline: "56"
+          buildType: 'specific'
+          project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+          pipeline: '56'
           specificBuildWithTriggering: true
-          buildVersionToDownload: "latest"
-          downloadType: "single"
-          artifactName: "SurveyJSLibraryBuildCore"
-          downloadPath: "$(System.ArtifactsDirectory)"
+          buildVersionToDownload: 'latest'
+          allowPartiallySucceededBuilds: true
+          downloadType: 'single'
+          artifactName: 'SurveyJSLibraryBuildCore'
+          downloadPath: '$(System.ArtifactsDirectory)'
 
       - task: CopyFiles@2
         inputs:
