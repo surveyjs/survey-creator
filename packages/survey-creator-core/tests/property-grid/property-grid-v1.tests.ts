@@ -749,9 +749,9 @@ test("extended SurveyPropertyItemValue + custom property - process items with cu
   Serializer.removeClass("itemvalues_ex");
 });
 test("SurveyPropertyItemValuesEditor + locale", () => {
-  var survey = new SurveyModel();
-  var p = survey.addNewPage();
-  var question = <QuestionDropdownModel>p.addNewQuestion("dropdown", "q1");
+  const survey = new SurveyModel();
+  const p = survey.addNewPage();
+  const question = <QuestionDropdownModel>p.addNewQuestion("dropdown", "q1");
   question.choices = [1, 2, 3];
   survey.locale = "en";
   question.choices[0].text = "English 1";
@@ -760,14 +760,16 @@ test("SurveyPropertyItemValuesEditor + locale", () => {
   var choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
-  var rows = choicesQuestion.visibleRows;
-  expect(rows[0].cells[1].value).toEqual("English 1");
+  const rows = choicesQuestion.visibleRows;
+  const textQuestion = rows[0].getQuestionByColumnName("text");
+  expect(textQuestion.value).toBeFalsy();
+  expect(textQuestion.placeholder).toEqual("English 1");
   rows[0].cells[1].value = "Deutsch 1";
   survey.locale = "en";
   expect(question.choices[0].text).toEqual("English 1");
   survey.locale = "de";
   expect(question.choices[0].text).toEqual("Deutsch 1");
-  expect(rows[0].cells[1].value).toEqual("Deutsch 1");
+  expect(textQuestion.value).toEqual("Deutsch 1");
   survey.locale = "en";
 });
 test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", () => {
@@ -777,7 +779,6 @@ test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", () => {
     p.addNewQuestion("matrixdynamic", "q1")
   );
   question.addColumn("col1");
-  survey.locale = "en";
   question.columns[0].title = "English 1";
 
   survey.locale = "de";
@@ -785,9 +786,11 @@ test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", () => {
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
   );
-  var rows = columnsQuestion.visibleRows;
-  expect(rows[0].getQuestionByColumnName("title").value).toEqual("English 1");
-  rows[0].getQuestionByColumnName("title").value = "Deutsch 1";
+  const rows = columnsQuestion.visibleRows;
+  const titleQuestion = rows[0].getQuestionByColumnName("title");
+  expect(titleQuestion.value).toBeFalsy();
+  expect(titleQuestion.placeholder).toBe("English 1");
+  titleQuestion.value = "Deutsch 1";
   survey.locale = "en";
   expect(question.columns[0].title).toEqual("English 1");
   survey.locale = "de";
