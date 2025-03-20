@@ -203,8 +203,9 @@ export class FastEntryEditor extends FastEntryEditorBase {
       if(item) {
         item.text = src[i].text;
         names.forEach((name) => {
-          if (name == "value" || name == "text") return;
-          dest[i][name] = src[i][name];
+          if (name !== "value") {
+            item[name] = src[i][name];
+          }
         });
         src.splice(i, 1, item);
       }
