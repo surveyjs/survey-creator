@@ -274,6 +274,8 @@ export class EditorLocalization {
     return (locale ? this.getLocaleStrings(locale) : this.getDefaultStrings()) || this.getDefaultStrings();
   }
   public getLocaleStrings(loc: string): any {
+    if(!loc) loc = this.defaultLocale;
+    if(loc === "en") return defaultStrings;
     return this.locales[loc];
   }
   public setupLocale(loc: string, strings: any): void {
