@@ -72,6 +72,16 @@ jobs:
           downloadType: 'single'
           artifactName: 'SurveyJSLibraryBuildCore'
           downloadPath: '$(System.ArtifactsDirectory)'
+      
+      # - task: DownloadPipelineArtifact@2
+      #   inputs:
+      #     buildType: 'specific'
+      #     project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      #     definition: '56'
+      #     buildVersionToDownload: 'latest'
+      #     allowPartiallySucceededBuilds: true
+      #     artifactName: 'SurveyJSLibraryBuildCore'
+      #     targetPath: '$(System.ArtifactsDirectory'
 
       - task: CopyFiles@2
         inputs:
