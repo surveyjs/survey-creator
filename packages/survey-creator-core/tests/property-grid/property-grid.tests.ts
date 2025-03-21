@@ -86,11 +86,13 @@ test("Check tabs creating", () => {
   var generalPanel = <PanelModel>propertyGrid.survey.getPanelByName("general");
   expect(generalPanel).toBeTruthy();
   expect(generalPanel.title).toEqual("General");
+  expect(generalPanel["iconName"]).toEqual("icon-pg-general-24x24");
   var actions = generalPanel.getTitleActions();
   expect(actions).toHaveLength(0);
   var choicesPanel = <PanelModel>propertyGrid.survey.getPanelByName("choices");
   expect(choicesPanel).toBeTruthy();
   expect(choicesPanel.title).toEqual("Choice Options");
+  expect(choicesPanel["iconName"]).toEqual("icon-pg-specific-24x24");
 });
 test("Categories titles", () => {
   enStrings.pe.tabs.layout.panel = "Panel Layout";

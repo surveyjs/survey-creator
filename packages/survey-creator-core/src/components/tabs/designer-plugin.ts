@@ -8,7 +8,6 @@ import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { TabDesignerViewModel } from "./designer";
 import { DesignerStateManager } from "./designer-state-manager";
 import { TabControlModel } from "../side-bar/tab-control-model";
-import { pgTabIcons } from "../../property-grid/icons";
 import { MenuButton } from "../../utils/actions";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
@@ -325,7 +324,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       const action = new MenuButton({
         id: p.name,
         tooltip: p.title,
-        iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
+        iconName: p["iconName"],
         iconSize: "auto",
         active: this.activePageIsPropertyGrid && p.name === this.propertyGrid.survey.currentPage.name,
         pressed: false,

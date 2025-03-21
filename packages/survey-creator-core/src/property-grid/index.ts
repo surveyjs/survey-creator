@@ -477,6 +477,8 @@ export class PropertyGridTitleActionsCreator {
   }
 }
 
+Serializer.addProperty("panelbase", { name: "iconName", visible: false });
+
 export class PropertyJSONGenerator {
   public static isPropertyReadOnly(
     prop: JsonObjectProperty,
@@ -664,7 +666,7 @@ export class PropertyJSONGenerator {
     return json;
   }
   private createPanelProps(tab: SurveyQuestionEditorTabDefinition, context: string, isChild: boolean = false): any {
-    var panel = this.createPanelJSON(tab.name, tab.title, isChild);
+    var panel = this.createPanelJSON(tab.name, tab.title, tab.iconName, isChild);
     for (var i = 0; i < tab.properties.length; i++) {
       var propDef = tab.properties[i];
       var propJSON = this.createQuestionJSON(this.obj, <any>propDef.property, propDef.title, false, context);
@@ -695,10 +697,11 @@ export class PropertyJSONGenerator {
     json.titleLocation = "left";
     json.minWidth = "50px";
   }
-  private createPanelJSON(category: string, title: string, isChild: boolean): any {
+  private createPanelJSON(category: string, title: string, iconName: string, isChild: boolean): any {
     const res: any = {
       type: "panel",
       name: category,
+      iconName: iconName,
       title: this.getPanelTitle(category, title),
       elements: []
     };

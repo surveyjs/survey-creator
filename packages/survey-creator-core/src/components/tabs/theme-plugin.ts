@@ -15,7 +15,6 @@ import { Switcher } from "../switcher/switcher";
 import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { TabControlModel } from "../side-bar/tab-control-model";
-import { pgTabIcons } from "../../property-grid/icons";
 import { MenuButton } from "../../utils/actions";
 
 /**
@@ -372,7 +371,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         const action = new MenuButton({
           id: p.name,
           tooltip: p.title,
-          iconName: pgTabIcons[p.name] || pgTabIcons["undefined"],
+          iconName: p["iconName"],
           iconSize: "auto",
           active: p.name === this.propertyGrid.survey.currentPage.name,
           pressed: false,
