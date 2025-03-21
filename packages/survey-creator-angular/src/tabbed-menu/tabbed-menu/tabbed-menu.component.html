@@ -1,5 +1,5 @@
 <ng-template #template>
-  <div class="svc-tabbed-menu" #container>
+  <div class="svc-tabbed-menu" #container role="tablist">
     <ng-container *ngFor="let action of model.renderedActions; trackBy: trackItemBy">
       <svc-tabbed-menu-item-wrapper [model]="action"></svc-tabbed-menu-item-wrapper>
     </ng-container>

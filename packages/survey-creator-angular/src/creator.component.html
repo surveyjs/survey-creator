@@ -21,7 +21,8 @@
             [class.svc-creator__content-wrapper--footer-toolbar]="creator.isMobileView">
             <div class="svc-creator__content-holder svc-flex-column">
               <ng-container *ngFor="let tab of visibleTabs; trackBy: trackTabBy">
-                <div class="svc-creator-tab" [attr.id]="'scrollableDiv-' + tab.id"
+                <div role="tabpanel" class="svc-creator-tab" [attr.id]="'scrollableDiv-' + tab.id"
+                  [attr.aria-labelledby]="'tab-' + tab.id"
                   [class.svc-creator__toolbox--right]="creator.toolboxLocation == 'right'">
                   <ng-template
                     [component]="{ name: tab.componentContent, data: { model: tab.data.model } }"></ng-template>
