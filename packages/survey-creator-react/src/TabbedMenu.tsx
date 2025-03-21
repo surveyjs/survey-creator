@@ -131,7 +131,14 @@ export class TabbedMenuItemComponent extends SurveyElementBase<
   render(): React.JSX.Element {
     const item = this.item;
     return (attachKey2click(
-      <div className={item.getRootCss()} onClick={() => item.action(item)}>
+      <div
+        role="tab"
+        id={"tab-" + item.id}
+        aria-selected={item.active}
+        aria-controls={"scrollableDiv-" + item.id}
+        className={item.getRootCss()}
+        onClick={() => item.action(item)}
+      >
         {item.hasTitle ? <span className={item.getTitleCss()}>{item.title}</span> : null}
         {item.hasIcon ? <SvgIcon iconName={item.iconName} className={item.getIconCss()} size={"auto"} title={item.tooltip || item.title}></SvgIcon> : null}
       </div>
