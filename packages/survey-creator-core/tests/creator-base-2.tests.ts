@@ -516,11 +516,16 @@ test("creator set theme should update headerView survey property", (): any => {
 
   creator.survey.locale = "fr";
   q1.locTitle.setLocaleText("de", "de: my question_new");
+  q2.locTitle.setLocaleText("de", "de: my question_new");
   q1.title = "fr: my question_new";
   q1.title = "fr: my question_new-1";
   expect(q1.locTitle.getJson()).toStrictEqual({
     default: "my question_new",
     de: "de: my question_new",
     fr: "fr: my question_new-1"
+  });
+  q2.name = "q2_new2";
+  expect(q2.locTitle.getJson()).toStrictEqual({
+    de: "de: my question_new"
   });
 });
