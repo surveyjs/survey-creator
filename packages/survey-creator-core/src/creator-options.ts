@@ -433,4 +433,5 @@ export interface ICreatorOptions {
    * Default value: `true`
    */
   collapseOnDrag?: boolean;
+  clearStringsLocalesOnChangingDefaultLocale?: boolean;
 }
