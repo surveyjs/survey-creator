@@ -1,20 +1,52 @@
 import { LocalizableString, SurveyModel, Base, JsonObjectProperty, Serializer, MatrixCells, QuestionMatrixModel,
-  settings as surveySettings } from "survey-core";
+  settings as surveySettings, surveyLocalization, Helpers } from "survey-core";
+import { ISurveyCreatorOptions } from "../creator-settings";
 
+export function doMachineStringsTranslation(survey: SurveyModel, creatorOptions: ISurveyCreatorOptions, ...locales: Array<string>): void {
+  locales.forEach(loc => {
+    const locStrs = getUnlocalizedStrings(survey, this, loc);
+    if (locStrs.length > 0) {
+      const locStrsHash: any = {};
+      const defaultStrs = new Array<string>();
+      locStrs.forEach(locStr => {
+        let text = locStr.getLocaleText("");
+        if(!text && locStr.onGetTextCallback) {
+          text = locStr.onGetTextCallback("");
+          if(isTextNonTranslated(text)) {
+            text = undefined;
+          }
+        }
+        if(!!text) {
+          if(!locStrsHash[text]) {
+            locStrsHash[text] = [];
+            defaultStrs.push(text);
+          }
+          locStrsHash[text].push(locStr);
+        }
+      });
+      creatorOptions.doMachineTranslation(surveyLocalization.defaultLocale, loc, defaultStrs, (translated: Array<string>) => {
+        if (!!translated && translated.length === defaultStrs.length) {
+          for(let i = 0; i < defaultStrs.length; i++) {
+            locStrsHash[defaultStrs[i]].forEach(locStr => locStr.setLocaleText(loc, translated[i]));
+          }
+        }
+      });
+    }
+  });
+}
 export interface ICollectLocalizableStringsOptions {
   canShowProperty(reason: string, obj: Base, property: JsonObjectProperty, locStr: LocalizableString, isShowing: boolean, defaultValue?: any): boolean;
   onAddLocalizedString(obj: Base, property: JsonObjectProperty, locStr: LocalizableString, translatedObj: any): void;
   onCreateNewTranslateObj(obj: Base, property: JsonObjectProperty, translateObj: any): any;
 }
-
 export function collectLocalizableStrings(survey: SurveyModel, options: ICollectLocalizableStringsOptions, translateObj?: any): void {
   collectStringsByObj(survey, options, translateObj);
 }
-export function getUnlocalizedStrings(survey: SurveyModel, creatorOptions: any, loc: string): Array<LocalizableString> {
+function getUnlocalizedStrings(survey: SurveyModel, creatorOptions: ISurveyCreatorOptions, loc: string): Array<LocalizableString> {
   const res = new Array<LocalizableString>();
   const options: ICollectLocalizableStringsOptions = {
     canShowProperty: (reason: string, obj: Base, property: JsonObjectProperty, locStr: LocalizableString, isShowing: boolean, defaultValue?: any): boolean => {
-      return isShowing && (!locStr || !locStr?.isEmpty);// || !!defaultValue;
+      return isShowing && (!locStr || !locStr?.isEmpty) || !!defaultValue;
     },
     onAddLocalizedString: (obj: Base, property: JsonObjectProperty, locStr: LocalizableString, translatedObj: any): void => {
       res.push(locStr);
@@ -81,7 +113,7 @@ function createItemValuesLocale(obj: any, options: ICollectLocalizableStringsOpt
   }
 }
 function addPropertiesForItemValue(itemValue: any, options: ICollectLocalizableStringsOptions, translateObj: any) {
-  const locProperties = getLocalizedProperties(itemValue, options);
+  const locProperties = getLocalizedProperties(itemValue, options, false);
   for(let i = 0; i < locProperties.length; i++) {
     const prop = locProperties[i];
     const isText = prop.name === "text";
@@ -94,14 +126,14 @@ function addPropertiesForItemValue(itemValue: any, options: ICollectLocalizableS
     }
   }
 }
-function getLocalizedProperties(obj: any, options: ICollectLocalizableStringsOptions): Array<JsonObjectProperty> {
+function getLocalizedProperties(obj: any, options: ICollectLocalizableStringsOptions, checkIsShowing: boolean = true): Array<JsonObjectProperty> {
   const res = new Array<JsonObjectProperty>();
   const properties = Serializer.getPropertiesByObj(obj);
   for (let i = 0; i < properties.length; i++) {
     const property = properties[i];
     if (property.readOnly || !property.visible || !property.isSerializable || !property.isLocalizable) continue;
     const isShowing = ["url", "file"].indexOf(property.type) < 0;
-    if (canShowProperty("get-property", options, obj, property, isShowing)) {
+    if (!checkIsShowing || canShowProperty("get-property", options, obj, property, isShowing)) {
       res.push(property);
     }
   }
@@ -169,4 +201,9 @@ function getDefaultValue(obj: any, prop: JsonObjectProperty): string {
       return obj["name"];
   }
   return "";
+}
+function isTextNonTranslated(text: string): boolean {
+  if(!text) return true;
+  if(Helpers.isNumber(text)) return true;
+  return text.length < 2;
 }

@@ -73,7 +73,7 @@ import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
-import { getUnlocalizedStrings } from "./utils/creator-locstrings";
+import { doMachineStringsTranslation } from "./utils/creator-locstrings";
 
 import { iconsV1, iconsV2 } from "./svgbundle";
 import { listComponentCss } from "./components/list-theme";
@@ -3857,29 +3857,7 @@ export class SurveyCreatorModel extends Base
   translationLocalesOrder: Array<string> = [];
   public translateStrings(...locales: Array<string>): void {
     if (!this.getHasMachineTranslation()) return;
-    locales.forEach(loc => {
-      const locStrs = getUnlocalizedStrings(this.survey, this, loc);
-      if (locStrs.length > 0) {
-        const locStrsHash: any = {};
-        const defaultStrs = new Array<string>();
-        locStrs.forEach(locStr => {
-          const text = locStr.getLocaleText("");
-          if(!locStrsHash[text]) {
-            locStrsHash[text] = [];
-            defaultStrs.push(text);
-          }
-          locStrsHash[text].push(locStr);
-        });
-        this.doMachineTranslation(surveyLocalization.defaultLocale, loc, defaultStrs, (translated: Array<string>) => {
-          if (!!translated && translated.length === defaultStrs.length) {
-            for(let i = 0; i < defaultStrs.length; i++) {
-              locStrsHash[defaultStrs[i]].forEach(locStr => locStr.setLocaleText(loc, translated[i]));
-            }
-          }
-        });
-      }
-    });
-
+    doMachineStringsTranslation(this.survey, this, ...locales);
   }
   /**
    * A delay between changing survey settings and saving the survey JSON schema, measured in milliseconds. Applies only when the [`autoSaveEnabled`](#autoSaveEnabled) property is `true`.
