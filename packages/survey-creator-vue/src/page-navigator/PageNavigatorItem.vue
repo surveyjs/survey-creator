@@ -1,6 +1,7 @@
 <template>
   <div class="svc-page-navigator-item">
     <div
+      role="button"
       class="svc-page-navigator-item-content"
       @click="click($event)"
       v-key2click

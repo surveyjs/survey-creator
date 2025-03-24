@@ -1,6 +1,7 @@
 <template>
   <div class="svc-page-navigator" v-show="model.visible" ref="root">
     <div
+      role="button"
       class="svc-page-navigator__selector svc-page-navigator__button"
       @click="model.togglePageSelector($event)"
       v-key2click
