@@ -3855,9 +3855,9 @@ export class SurveyCreatorModel extends Base
     }
   }
   translationLocalesOrder: Array<string> = [];
-  public translateStrings(...locales: Array<string>): void {
+  public startMachineTranslationTo(locales: Array<string>): void {
     if (!this.getHasMachineTranslation()) return;
-    doMachineStringsTranslation(this.survey, this, ...locales);
+    doMachineStringsTranslation(this.survey, this, locales);
   }
   /**
    * A delay between changing survey settings and saving the survey JSON schema, measured in milliseconds. Applies only when the [`autoSaveEnabled`](#autoSaveEnabled) property is `true`.

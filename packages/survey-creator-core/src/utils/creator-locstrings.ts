@@ -2,7 +2,7 @@ import { LocalizableString, SurveyModel, Base, JsonObjectProperty, Serializer, M
   settings as surveySettings, surveyLocalization, Helpers } from "survey-core";
 import { ISurveyCreatorOptions } from "../creator-settings";
 
-export function doMachineStringsTranslation(survey: SurveyModel, creatorOptions: ISurveyCreatorOptions, ...locales: Array<string>): void {
+export function doMachineStringsTranslation(survey: SurveyModel, creatorOptions: ISurveyCreatorOptions, locales: Array<string>): void {
   locales.forEach(loc => {
     const locStrs = getUnlocalizedStrings(survey, this, loc);
     if (locStrs.length > 0) {

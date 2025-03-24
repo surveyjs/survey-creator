@@ -26,7 +26,7 @@ test("Translate untranslated strings", () => {
     options.strings.forEach(str => { translatedStrings.push(options.toLocale + ": " + str); });
     options.callback(translatedStrings);
   });
-  creator.translateStrings("de", "fr");
+  creator.startMachineTranslationTo(["de", "fr"]);
   const q = creator.survey.getQuestionByName("q1");
   expect(q.locTitle.isEmpty).toBeTruthy();
   expect(q.locDescription.getJson()).toStrictEqual({ default: "desc", fr: "fr: desc", de: "de: desc" });
