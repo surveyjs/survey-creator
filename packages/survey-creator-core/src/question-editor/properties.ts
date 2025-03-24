@@ -7,6 +7,7 @@ import {
 import { JsonObjectProperty, Serializer, JsonMetadataClass } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
+import { pgTabIcons } from "../property-grid/icons";
 
 export class SurveyQuestionEditorPropertyDefinition {
   public property: JsonObjectProperty;
@@ -23,6 +24,7 @@ export class SurveyQuestionEditorPropertyDefinition {
 
 export class SurveyQuestionEditorTabDefinition {
   public name: string;
+  public iconName: string;
   public title: string;
   public visible: boolean = true;
   public index: number = 0;
@@ -294,6 +296,7 @@ export class SurveyQuestionProperties {
     }
     var res = new SurveyQuestionEditorTabDefinition();
     res.name = tabName;
+    res.iconName = pgTabIcons[tabName] || pgTabIcons["undefined"];
     if (tabName == settings.propertyGrid.generalTabName) {
       res.index = -1;
     }
