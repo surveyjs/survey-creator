@@ -62,6 +62,23 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     return <div className="svc-image-item-value__loading"><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
   }
 
+  renderNewItemControls() {
+    const addButton = attachKey2click(
+      <span className={this.model.addButtonCss}
+        onClick={() => this.model.chooseNewFile(this.model)}>
+        {this.model.showChooseButtonAsIcon ?
+          <SvgIcon size={"auto"} iconName={"icon-add-lg"}
+            title={this.model.addFileTitle}></SvgIcon> :
+          <span>{this.model.chooseImageText}</span>
+        }
+      </span>);
+    const placeholder = this.model.showPlaceholder ? <span className="svc-image-item-value__placeholder">{this.model.placeholderText}</span> : null;
+    return <>
+      {placeholder}
+      {addButton}
+    </>;
+  }
+
   render(): React.JSX.Element {
     this.model.item = this.props.item;
     const isNew = !this.props.question.isItemInList(this.props.item);
@@ -71,8 +88,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     let content = null;
     if (isNew || this.model.isUploading) {
       content = (<>
-        <div className="svc-image-item-value__item"
-          onDrop={this.model.onDrop} onDragOver={this.model.onDragOver} onDragLeave={this.model.onDragLeave}>
+        <div className="svc-image-item-value__item">
           <div className="sd-imagepicker__item sd-imagepicker__item--inline">
             <label className="sd-imagepicker__label">
               <div style={imageStyle} className="sd-imagepicker__image">
@@ -83,9 +99,9 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
         </div>
 
         <div className="svc-image-item-value-controls">
-          {this.model.allowAdd && !this.model.isUploading ? attachKey2click(<span className="svc-context-button svc-image-item-value-controls__add" onClick={() => this.model.chooseNewFile(this.model)}>
-            <SvgIcon size={"auto"} iconName={"icon-add-lg"} title={this.model.addFileTitle}></SvgIcon>
-          </span>) : null}
+          {this.model.allowAdd && !this.model.isUploading ?
+            this.renderNewItemControls()
+            : null}
         </div>
       </>);
     } else {
@@ -137,6 +153,10 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
         }
         onPointerDown={(event: any) => this.model.onPointerDown(event)}
         onDragStart={this.preventDragHandler}
+        onDrop={this.model.onDrop}
+        onDragEnter={this.model.onDragEnter}
+        onDragOver={this.model.onDragOver}
+        onDragLeave={this.model.onDragLeave}
       >
         <div className={"svc-image-item-value-wrapper__ghost"} style={imageStyle}></div>
         <div className={"svc-image-item-value-wrapper__content"}>

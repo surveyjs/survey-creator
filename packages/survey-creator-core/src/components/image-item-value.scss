@@ -6,7 +6,6 @@
 }
 
 .svc-image-item-value--new {
-  display: none;
   height: max-content;
 
   .sd-imagepicker__image {
@@ -27,11 +26,6 @@
       var(--sjs-primary-background-10, #19b3941a)
     );
   }
-
-  .svc-image-item-value__item {
-    position: relative;
-    z-index: 2;
-  }
 }
 
 .svc-question__content--selected .svc-image-item-value--new {
@@ -46,10 +40,44 @@
 }
 
 .svc-image-item-value--new .svc-image-item-value-controls {
-  top: calc(50% - 3 * #{$base-unit});
-  left: calc(50% - 3 * #{$base-unit});
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: calcSize(1);
+}
+.sd-imagepicker {
+  container-type: inline-size;
+}
+.svc-image-item-value--new.svc-image-item-value--single {
+  .svc-image-item-value-controls {
+    padding: 0 calcSize(6);
+  }
+}
+@container (max-width: 496px) {
+  .svc-image-item-value--new.svc-image-item-value--single {
+    .svc-image-item-value-controls {
+      padding: 0 calcSize(1);
+    }
+  }
+}
+@container (max-width: 176px) {
+  .svc-image-item-value__placeholder {
+    display: none;
+  }
 }
 
+.svc-image-item-value__placeholder {
+  @include lbrDefaultFont;
+  color: var(--ctr-survey-placeholder-text-color, rgba(0, 0, 0, 0.5));
+  text-align: center;
+  font-weight: 400;
+  white-space: normal;
+}
 .svc-image-item-value--new .svc-image-item-value-controls__button {
   background-color: transparent;
   transition: background-color $creator-transition-duration;
@@ -70,8 +98,16 @@
     border-radius: var(--ctr-survey-contextual-button-corner-radius, var(--lbr-corner-radius-round));
     background: linear-gradient(
         0deg,
-        var(--ctr-survey-contextual-button-background-color-hovered-positive, var(--sjs-primary-background-10, #19b3941a)) 0%,
-        var(--ctr-survey-contextual-button-background-color-hovered-positive, var(--sjs-primary-background-10, #19b3941a)) 100%
+        var(
+            --ctr-survey-contextual-button-background-color-hovered-positive,
+            var(--sjs-primary-background-10, #19b3941a)
+          )
+          0%,
+        var(
+            --ctr-survey-contextual-button-background-color-hovered-positive,
+            var(--sjs-primary-background-10, #19b3941a)
+          )
+          100%
       ),
       var(--ctr-survey-contextual-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   }
@@ -125,7 +161,7 @@
   width: 100%;
 
   .sd-imagepicker__image {
-    height: calcSize(30);
+    height: calcSize(36);
   }
 }
 
