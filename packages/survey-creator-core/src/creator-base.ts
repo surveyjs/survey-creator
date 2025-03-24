@@ -3855,6 +3855,12 @@ export class SurveyCreatorModel extends Base
     }
   }
   translationLocalesOrder: Array<string> = [];
+  /**
+   * Starts the translation of survey strings from the default language to one or more specified languages using a machine translation service, such as Google Translate or Microsoft Translator.
+   * 
+   * This method only launches the operation by raising the [`onMachineTranslate`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onMachineTranslate) event. Handle this event to perform the actual translation.
+   * @param locales An array of locale codes that correspond to target languages, for example, `[ "de", "fr" ]`.
+   */
   public startMachineTranslationTo(locales: Array<string>): void {
     if (!this.getHasMachineTranslation()) return;
     doMachineStringsTranslation(this.survey, this, locales);
