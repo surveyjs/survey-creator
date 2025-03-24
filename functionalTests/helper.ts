@@ -131,7 +131,7 @@ export function getSurveyListItemByText(text) {
   return Selector(".sv-popup__content .sv-list__item").withText(text).filterVisible();
 }
 export function getAddNewQuestionButton() {
-  return Selector(".svc-element__add-new-question > span").withText("Add Question");
+  return Selector(".svc-element__add-new-question > button").withText("Add Question");
 }
 
 export function getVisibleElement(selector: string | Selector): Selector {
@@ -237,16 +237,6 @@ export function getDropdownValue(selector: string | Selector = ".sd-input.sd-dro
   return Selector(selector).find(".sv-string-viewer").textContent;
 }
 
-export async function resetHoverToCreator(t: TestController, offsetX: number = 0, offsetY: number = 0): Promise<void> {
-  await t.hover(Selector("#survey-creator"), { offsetX: offsetX, offsetY: offsetY });
+export async function resetHoverToCreator(t: TestController): Promise<void> {
+  await t.hover(Selector("#survey-creator"), { offsetX: 0, offsetY: 0 });
 }
-
-export const hideAllAdornerActions = ClientFunction(() => {
-  (<any>window).creator.onElementAllowOperations.add((_, options) => {
-    Object.keys(options).forEach(key => {
-      if (key !== "allowDragging" && key !== "allowDrag" && key !== "allowEdit") {
-        options[key] = false;
-      }
-    });
-  });
-});

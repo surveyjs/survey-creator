@@ -42,6 +42,7 @@ svc-page {
     margin: 0;
     padding: calcSize(1) calcSize(3) 0;
   }
+
   &:before {
     position: absolute;
     content: "";
@@ -51,7 +52,8 @@ svc-page {
     padding-top: var(--ctr-survey-page-margin-top, var(--lbr-spacing-x2));
     bottom: 0;
   }
-  & > .svc-question__drag-area {
+
+  &>.svc-question__drag-area {
     padding-top: calcSize(1.25);
 
     .svc-question__drag-element {
@@ -97,7 +99,7 @@ svc-page {
   }
 }
 
-.svc-question__drag-area > .svc-page__content-actions {
+.svc-question__drag-area>.svc-page__content-actions {
   inset-inline-start: 50%;
 }
 
@@ -105,17 +107,22 @@ svc-page {
   flex-grow: 1;
   justify-content: flex-end;
   pointer-events: none;
+
   .sv-action {
     pointer-events: all;
   }
-  & > .sv-dots {
+
+  &>.sv-dots {
     width: auto;
+
     .sv-dots__item {
       width: auto;
     }
+
     &.sv-action--hidden {
       width: 0;
     }
+
     .svc-list__item-icon {
       width: var(--ctr-list-item-icon-width-small, var(--sjs-font-size-x2));
       height: var(--ctr-list-item-icon-height-small, var(--sjs-font-size-x2));
@@ -129,32 +136,15 @@ svc-page {
 
 .svc-page-toolbar__item {
   @include defaultActionButtonSettings;
-  --thm-survey-question-panel-toolbar-item-padding-top: calc(
-    var(--ctr-survey-question-panel-toolbar-item-padding-top, var(--lbr-spacing-x05)) +
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-top, var(--lbr-spacing-x05))
-  );
-  --thm-survey-question-panel-toolbar-item-padding-right: calc(
-    var(--ctr-survey-question-panel-toolbar-item-padding-right, var(--lbr-spacing-x05)) +
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05))
-  );
-  --thm-survey-question-panel-toolbar-item-padding-bottom: calc(
-    var(--ctr-survey-question-panel-toolbar-item-padding-bottom, var(--lbr-spacing-x05)) +
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom, var(--lbr-spacing-x05))
-  );
-  --thm-survey-question-panel-toolbar-item-padding-left: calc(
-    var(--ctr-survey-question-panel-toolbar-item-padding-left, var(--lbr-spacing-x05)) +
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-left, var(--lbr-spacing-x05))
-  );
+  --thm-survey-question-panel-toolbar-item-padding-top: calc(var(--ctr-survey-question-panel-toolbar-item-padding-top, var(--lbr-spacing-x05)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-top, var(--lbr-spacing-x05)));
+  --thm-survey-question-panel-toolbar-item-padding-right: calc(var(--ctr-survey-question-panel-toolbar-item-padding-right, var(--lbr-spacing-x05)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05)));
+  --thm-survey-question-panel-toolbar-item-padding-bottom: calc(var(--ctr-survey-question-panel-toolbar-item-padding-bottom, var(--lbr-spacing-x05)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom, var(--lbr-spacing-x05)));
+  --thm-survey-question-panel-toolbar-item-padding-left: calc(var(--ctr-survey-question-panel-toolbar-item-padding-left, var(--lbr-spacing-x05)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-left, var(--lbr-spacing-x05)));
 
-  --thm-survey-question-panel-toolbar-button-gap: calc(
-    var(--ctr-survey-question-panel-toolbar-gap, var(--lbr-spacing-x1)) / 2
-  );
+  --thm-survey-question-panel-toolbar-button-gap: calc(var(--ctr-survey-question-panel-toolbar-gap, var(--lbr-spacing-x1)) / 2);
   margin: 0 var(--thm-survey-question-panel-toolbar-button-gap);
   border-radius: var(--ctr-survey-page-toolbar-item-corner-radius, var(--lbr-corner-radius-x075));
-  padding: var(--thm-survey-question-panel-toolbar-item-padding-top)
-    var(--thm-survey-question-panel-toolbar-item-padding-right)
-    var(--thm-survey-question-panel-toolbar-item-padding-bottom)
-    var(--thm-survey-question-panel-toolbar-item-padding-left);
+  padding: var(--thm-survey-question-panel-toolbar-item-padding-top) var(--thm-survey-question-panel-toolbar-item-padding-right) var(--thm-survey-question-panel-toolbar-item-padding-bottom) var(--thm-survey-question-panel-toolbar-item-padding-left);
   justify-content: center;
   align-items: center;
 
@@ -164,23 +154,21 @@ svc-page {
   use {
     fill: var(--ctr-survey-question-panel-toolbar-item-icon-color, var(--sjs-secondary-background-500, #19b394ff));
   }
+
   //hovered and focused state
   &:hover,
   &:focus-visible {
-    background-color: var(
-      --ctr-survey-page-toolbar-item-background-color-hovered,
-      var(--sjs-primary-background-10, #19b3941a)
-    );
+    background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered,
+        var(--sjs-primary-background-10, #19b3941a));
   }
 
   //pressed state
   &:active,
   &.svc-page-toolbar__item--pressed {
-    background-color: var(
-      --ctr-survey-page-toolbar-item-background-color-hovered,
-      var(--sjs-primary-background-10, #19b3941a)
-    );
+    background-color: var(--ctr-survey-page-toolbar-item-background-color-hovered,
+        var(--sjs-primary-background-10, #19b3941a));
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-pressed, 0.5);
+
     use {
       fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
     }
@@ -188,13 +176,13 @@ svc-page {
 
   //checked state
   &.svc-survey-element-toolbar__item--active {
-    background-color: var(
-      --ctr-survey-page-toolbar-item-background-color-selected,
-      var(--sjs-primary-background-10, #19b3941a)
-    );
+    background-color: var(--ctr-survey-page-toolbar-item-background-color-selected,
+        var(--sjs-primary-background-10, #19b3941a));
+
     .svc-survey-element-toolbar-item__title {
       color: var(--ctr-survey-page-toolbar-item-text-color-selected, var(--sjs-secondary-background-400, #14a48bff));
     }
+
     use {
       fill: var(--ctr-survey-page-toolbar-item-icon-color-selected, var(--sjs-secondary-background-500, #19b394ff));
     }
@@ -205,6 +193,7 @@ svc-page {
     opacity: var(--ctr-survey-question-panel-toolbar-item-opacity-disabled, 0.25);
     background-color: transparent;
     cursor: default;
+
     use {
       fill: var(--ctr-survey-page-toolbar-item-icon-color-disabled, var(--sjs-layer-3-foreground-50, #00000080));
       opacity: 1;
@@ -213,26 +202,15 @@ svc-page {
 }
 
 .svc-page-toolbar__item--with-text {
-  --thm-survey-question-panel-toolbar-item-gap: calc(
-    var(--ctr-survey-question-panel-toolbar-item-gap, var(--lbr-spacing-x05)) +
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05))
-  );
+  --thm-survey-question-panel-toolbar-item-gap: calc(var(--ctr-survey-question-panel-toolbar-item-gap, var(--lbr-spacing-x05)) + var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05)));
 
   padding-inline-end: var(--ctr-survey-question-panel-toolbar-item-padding-right-with-text, var(--lbr-spacing-x1));
   gap: var(--thm-survey-question-panel-toolbar-item-gap);
 }
 
 .svc-page-toolbar-item__icon {
-  width: calc(
-    var(--ctr-survey-question-panel-toolbar-item-icon-container-width, var(--lbr-size-x3)) -
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05)) -
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-left, var(--lbr-spacing-x05))
-  );
-  height: calc(
-    var(--ctr-survey-question-panel-toolbar-item-icon-container-height, var(--lbr-size-x3)) -
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-top, var(--lbr-spacing-x05)) -
-      var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom, var(--lbr-spacing-x05))
-  );
+  width: calc(var(--ctr-survey-question-panel-toolbar-item-icon-container-width, var(--lbr-size-x3)) - var(--ctr-survey-question-panel-toolbar-item-icon-padding-right, var(--lbr-spacing-x05)) - var(--ctr-survey-question-panel-toolbar-item-icon-padding-left, var(--lbr-spacing-x05)));
+  height: calc(var(--ctr-survey-question-panel-toolbar-item-icon-container-height, var(--lbr-size-x3)) - var(--ctr-survey-question-panel-toolbar-item-icon-padding-top, var(--lbr-spacing-x05)) - var(--ctr-survey-question-panel-toolbar-item-icon-padding-bottom, var(--lbr-spacing-x05)));
 }
 
 .svc-page-toolbar-item__title {
@@ -249,8 +227,7 @@ svc-page {
 
 .svc-page__content:focus,
 .svc-hovered.svc-page__content {
-  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-hovered, var(--lbr-stroke-x2))
-    var(--ctr-survey-page-border-color-hovered, var(--sjs-secondary-background-25, #19b39440));
+  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-hovered, var(--lbr-stroke-x2)) var(--ctr-survey-page-border-color-hovered, var(--sjs-secondary-background-25, #19b39440));
   background: var(--ctr-survey-page-background-color-hovered, var(--sjs-special-background, #edf9f7ff));
 }
 
@@ -258,10 +235,12 @@ svc-page {
   box-shadow: none;
   background-color: transparent;
   padding-bottom: var(--ctr-survey-page-margin-bottom-new-page, var(--lbr-spacing-x9));
+
   .svc-page-toolbar {
     display: none;
   }
 }
+
 .svc-designer-placeholder-page {
   .svc-page__content--new.svc-page__content--new {
     padding: 0;
@@ -274,7 +253,7 @@ svc-page {
     opacity: 1;
   }
 
-  & > .svc-question__drag-area {
+  &>.svc-question__drag-area {
     .svc-question__drag-element {
       width: var(--ctr-survey-page-drag-indicator-width, var(--lbr-size-x3));
       height: var(--ctr-survey-page-drag-indicator-height, var(--lbr-size-x2));
@@ -284,8 +263,7 @@ svc-page {
 }
 
 .svc-page__content--selected.svc-page__content--selected {
-  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-selected, var(--lbr-stroke-x2))
-    var(--ctr-survey-page-border-color-selected, var(--sjs-secondary-background-500, #19b394ff));
+  box-shadow: 0 0 0 var(--ctr-survey-page-border-width-selected, var(--lbr-stroke-x2)) var(--ctr-survey-page-border-color-selected, var(--sjs-secondary-background-500, #19b394ff));
   background: var(--ctr-survey-page-background-color-selected, var(--sjs-special-background, #edf9f7ff));
 }
 
@@ -324,8 +302,7 @@ svc-page {
   }
 
   &.svc-page__content--collapsed-drag-over-inside {
-    box-shadow: 0 0 0 var(--ctr-survey-page-border-width-overing, var(--lbr-stroke-x2))
-      var(--ctr-survey-page-border-color-overing, var(--sjs-primary-background-500, #19b394ff));
+    box-shadow: 0 0 0 var(--ctr-survey-page-border-width-overing, var(--lbr-stroke-x2)) var(--ctr-survey-page-border-color-overing, var(--sjs-primary-background-500, #19b394ff));
     background: var(--ctr-survey-page-background-color-overing, var(--sjs-primary-background-10, #19b3941a));
     animation: collapsed-drag-over-inside-blinking 1s infinite;
     outline-color: transparent;
@@ -350,8 +327,7 @@ svc-page {
     &.svc-page__content--selected {
       box-shadow: 0 0 0 2px inset var(--sjs-secondary-background-500, #19b394ff);
 
-      box-shadow: 0 0 0 2px inset
-        var(--ctr-survey-page-border-color-selected, var(--sjs-secondary-background-500, #19b394ff));
+      box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-selected, var(--sjs-secondary-background-500, #19b394ff));
       background: var(--ctr-survey-page-background-color-selected, var(--sjs-special-background, #edf9f7ff));
 
       .svc-page__content-actions {
@@ -362,8 +338,7 @@ svc-page {
 
   .svc-page__content:not(.svc-page__content--new):focus,
   .svc-hovered.svc-page__content:not(.svc-page__content--new) {
-    box-shadow: 0 0 0 2px inset
-      var(--ctr-survey-page-border-color-hovered, var(--sjs-secondary-background-25, #19b39440));
+    box-shadow: 0 0 0 2px inset var(--ctr-survey-page-border-color-hovered, var(--sjs-secondary-background-25, #19b39440));
   }
 }
 
@@ -392,14 +367,21 @@ svc-page {
 
 .svc-element__add-new-question {
   height: auto;
-  padding: var(--ctr-surface-button-padding-vertical, var(--lbr-spacing-x2))
-    var(--ctr-surface-button-padding-horizontal-contextual-button, var(--lbr-spacing-x10));
+  padding: var(--ctr-surface-button-padding-vertical, var(--lbr-spacing-x2)) var(--ctr-surface-button-padding-horizontal-contextual-button, var(--lbr-spacing-x10));
   border-radius: var(--ctr-surface-button-corner-radius, var(--lbr-corner-radius-x05));
+  align-items: stretch;
+
+  button:first-of-type {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    flex: 1;
+  }
 }
 
 .svc-element__add-new-question:focus {
-  box-shadow: 0 0 0 var(--ctr-button-border-width-focused, var(--sjs-stroke-x2))
-    var(--ctr-button-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+  box-shadow: 0 0 0 var(--ctr-button-border-width-focused, var(--sjs-stroke-x2)) var(--ctr-button-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
 }
 
 .svc-element__question-type-selector {
@@ -408,33 +390,25 @@ svc-page {
 
   appearance: none;
   display: flex;
-  padding: var(--ctr-surface-button-contextual-button-padding-top, var(--lbr-spacing-x1))
-    var(--ctr-surface-button-contextual-button-padding-right, var(--lbr-spacing-x1))
-    var(--ctr-surface-button-contextual-button-padding-bottom, var(--lbr-spacing-x1))
-    var(--ctr-surface-button-contextual-button-padding-left, var(--lbr-spacing-x1));
+  padding: var(--ctr-surface-button-contextual-button-padding-top, var(--lbr-spacing-x1)) var(--ctr-surface-button-contextual-button-padding-right, var(--lbr-spacing-x1)) var(--ctr-surface-button-contextual-button-padding-bottom, var(--lbr-spacing-x1)) var(--ctr-surface-button-contextual-button-padding-left, var(--lbr-spacing-x1));
   border-radius: var(--ctr-surface-button-contextual-button-corner-radius, var(--lbr-corner-radius-x05));
   box-sizing: border-box;
   border: none;
   background: transparent;
   cursor: pointer;
 
-  margin: var(--ctr-surface-button-contextual-button-margin-vertical, var(--lbr-spacing-x1))
-    var(--ctr-surface-button-contextual-button-margin-horizontal, var(--lbr-spacing-x1));
+  margin: var(--ctr-surface-button-contextual-button-margin-vertical, var(--lbr-spacing-x1)) var(--ctr-surface-button-contextual-button-margin-horizontal, var(--lbr-spacing-x1));
   outline: none;
   transition: background-color $creator-transition-duration;
 
   &:hover {
-    background-color: var(
-      --ctr-button-contextual-button-background-color-hovered,
-      var(--sjs-primary-background-10, #19b3941a)
-    );
+    background-color: var(--ctr-button-contextual-button-background-color-hovered,
+        var(--sjs-primary-background-10, #19b3941a));
   }
 
   &:focus {
-    background: var(
-      --ctr-button-contextual-button-background-color-focused,
-      var(--sjs-primary-background-10, #19b3941a)
-    );
+    background: var(--ctr-button-contextual-button-background-color-focused,
+        var(--sjs-primary-background-10, #19b3941a));
   }
 }
 
@@ -463,12 +437,7 @@ svc-page {
   width: 100%;
   height: var(--ctr-survey-drop-indicator-width, var(--lbr-stroke-x2));
   left: 0;
-  top: calc(
-    calc(
-        var(--lbr-page-layout-gap-medium, var(--lbr-spacing-x2)) +
-          var(--ctr-survey-drop-indicator-width, var(--lbr-stroke-x2))
-      ) / -2
-  );
+  top: calc(calc(var(--lbr-page-layout-gap-medium, var(--lbr-spacing-x2)) + var(--ctr-survey-drop-indicator-width, var(--lbr-stroke-x2))) / -2);
 }
 
 .svc-page--drag-over-empty-no-add-button:after {
@@ -488,7 +457,7 @@ svc-page {
 }
 
 .svc-page__content--collapsed {
-  & > .sv-action-bar {
+  &>.sv-action-bar {
     display: none;
   }
 
@@ -507,7 +476,7 @@ svc-page {
   .sd-page {
     display: flex;
 
-    & > * {
+    &>* {
       display: none;
     }
 
@@ -591,6 +560,7 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
   --fade-animation-delay: 0s;
   --move-animation-delay: #{$svc-page-move-out-delay};
 }
+
 .svc-page__content {
   transition-property: padding-bottom;
   transition-duration: $svc-page-move-in-duration;
@@ -598,10 +568,12 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
 }
 
 .svc-creator--disable-animations {
+
   .svc-page--enter,
   .svc-page--leave {
     animation: none;
   }
+
   .svc-page__content {
     transition: none;
   }
@@ -616,7 +588,7 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
     box-shadow: 0 0 0 2px transparent;
     background-color: transparent;
 
-    & > .svc-question__drag-area {
+    &>.svc-question__drag-area {
       .svc-question__drag-element {
         opacity: 0;
       }
