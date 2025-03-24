@@ -202,6 +202,7 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `false`
    * @see activeTab
+   * @see clearTranslationsOnSourceTextChange
    */
   @property({ defaultValue: false }) showTranslationTab: boolean;
   /**
@@ -2679,17 +2680,17 @@ export class SurveyCreatorModel extends Base
     this.setModified(options);
   }
   private clearLocalizationStrings(el: any, name: string): void {
-    if(this.clearStringsLocalesOnChangingDefaultLocale) {
+    if (this.clearTranslationsOnSourceTextChange) {
       const loc = this.survey.locale;
-      if(!!loc && loc !== surveyLocalization.defaultLocale) return;
-      if((el.isQuestion || Serializer.isDescendantOf(el.getType(), "matrixdropdowncolumn")) && name === "name") {
+      if (!!loc && loc !== surveyLocalization.defaultLocale) return;
+      if ((el.isQuestion || Serializer.isDescendantOf(el.getType(), "matrixdropdowncolumn")) && name === "name") {
         this.clearNonDefaultLocalesInStrByValue(el.locTitle);
       } else {
-        if(Serializer.isDescendantOf(el.getType(), "itemvalue") && name === "value") {
+        if (Serializer.isDescendantOf(el.getType(), "itemvalue") && name === "value") {
           this.clearNonDefaultLocalesInStrByValue(el.locText);
         } else {
           const prop = Serializer.findProperty(el.getType(), name);
-          if(prop && prop.isLocalizable && prop.serializationProperty) {
+          if (prop && prop.isLocalizable && prop.serializationProperty) {
             const locStr = el[prop.serializationProperty];
             this.clearNonDefaultLocalesInStr(locStr);
           }
@@ -2698,21 +2699,21 @@ export class SurveyCreatorModel extends Base
     }
   }
   private clearNonDefaultLocalesInStrByValue(locStr: LocalizableString): void {
-    if(!locStr.isEmpty && !locStr.getLocaleText("")) {
+    if (!locStr.isEmpty && !locStr.getLocaleText("")) {
       this.clearNonDefaultLocalesInStr(locStr);
     }
   }
   private clearNonDefaultLocalesInStr(locStr: LocalizableString): void {
-    if(locStr) {
+    if (locStr) {
       const ctrl = this.undoRedoController;
-      if(ctrl) ctrl.ignoreChanges = true;
+      if (ctrl) ctrl.ignoreChanges = true;
       const locs = locStr.getLocales();
       locs.forEach(l => {
-        if(l !== surveyLocalization.defaultLocale && l !== "default") {
+        if (l !== surveyLocalization.defaultLocale && l !== "default") {
           locStr.setLocaleText(l, "");
         }
       });
-      if(ctrl) ctrl.ignoreChanges = false;
+      if (ctrl) ctrl.ignoreChanges = false;
     }
   }
   public notifySurveyItemMoved(options: any): void {
@@ -4467,7 +4468,13 @@ export class SurveyCreatorModel extends Base
    * Default value: `false`
    */
   public collapseOnDrag: boolean = false;
-  public clearStringsLocalesOnChangingDefaultLocale: boolean = false;
+  /**
+   * Specifies whether to clear translations to other languages when a source language translation is changed.
+   * 
+   * Default value: `false`
+   * @see showTranslationTab
+   */
+  public clearTranslationsOnSourceTextChange: boolean = false;
 }
 
 export class CreatorBase extends SurveyCreatorModel { }

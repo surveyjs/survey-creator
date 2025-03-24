@@ -457,7 +457,7 @@ test("creator set theme should update headerView survey property", (): any => {
 });
 test("creator set theme should update headerView survey property", (): any => {
   const creator = new CreatorTester({
-    clearStringsLocalesOnChangingDefaultLocale: true
+    clearTranslationsOnSourceTextChange: true
   });
   creator.JSON = {
     elements: [
@@ -479,7 +479,7 @@ test("creator set theme should update headerView survey property", (): any => {
       }
     ]
   };
-  expect(creator.clearStringsLocalesOnChangingDefaultLocale).toBeTruthy();
+  expect(creator.clearTranslationsOnSourceTextChange).toBeTruthy();
   const q1 = creator.survey.getQuestionByName("q1");
   const q2 = creator.survey.getQuestionByName("my question");
   const columns = creator.survey.getQuestionByName("q3").columns;
