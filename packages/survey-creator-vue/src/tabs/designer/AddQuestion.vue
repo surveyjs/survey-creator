@@ -9,6 +9,7 @@
     "
     v-key2click
     v-on:mouseover="(e) => item.data.hoverStopper && item.data.hoverStopper(e, e.currentTarget)"
+    role="button"
   >
     <SvComponent
       :is="'sv-svg-icon'"
