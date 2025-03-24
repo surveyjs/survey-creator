@@ -391,40 +391,46 @@ test("Get theme changes only", (): any => {
   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(249, 249, 249, 0.6)");
 
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
-  expect(Object.keys(fullModifiedTheme).length).toBe(9);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(83);
+  expect(Object.keys(fullModifiedTheme).length).toBe(10);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(85);
 
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
-  expect(Object.keys(modifiedThemeChanges).length).toBe(5);
-  expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(1);
-  expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual(["--sjs-editorpanel-backcolor"]);
+  expect(Object.keys(modifiedThemeChanges).length).toBe(6);
+  expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(3);
+  expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual([
+    "--sjs-editorpanel-backcolor",
+    "--sjs-font-family",
+    "--sjs-font-size",
+  ]);
 
   themeModel.resetTheme();
   const fullThemeReset = themePlugin.getCurrentTheme();
-  expect(Object.keys(fullThemeReset).length).toBe(9);
+  expect(Object.keys(fullThemeReset).length).toBe(10);
   expect(Object.keys(fullThemeReset)).toStrictEqual([
     "themeName",
     "colorPalette",
     "isPanelless",
     "backgroundImage",
-    "backgroundOpacity",
-    "backgroundImageAttachment",
     "backgroundImageFit",
+    "backgroundImageAttachment",
+    "backgroundOpacity",
     "cssVariables",
-    "headerView"
+    "header",
+    "headerView",
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(82);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(84);
 
   const themeChangesReset = themePlugin.getCurrentTheme(true);
-  expect(Object.keys(themeChangesReset).length).toBe(5);
+  expect(Object.keys(themeChangesReset).length).toBe(6);
   expect(Object.keys(themeChangesReset)).toStrictEqual([
     "cssVariables",
+    "header",
     "headerView",
     "themeName",
     "colorPalette",
     "isPanelless",
   ]);
-  expect(Object.keys(themeChangesReset.cssVariables).length).toBe(0);
+  expect(Object.keys(themeChangesReset.cssVariables).length).toBe(2);
 });
 
 test("Pass background image from survey to theme editor and back", (): any => {
@@ -849,7 +855,7 @@ test("Theme undo redo expression questions", (): any => {
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
   expect(fontSizeQuestion.value).toBe(100);
-  expect(themeModel.cssVariables["--sjs-font-size"]).toBe(undefined);
+  expect(themeModel.cssVariables["--sjs-font-size"]).toBe("16px");
 
   fontSizeQuestion.value = 150;
 
@@ -864,7 +870,7 @@ test("Theme undo redo expression questions", (): any => {
   expect(themeModel.undoRedoManager.canRedo()).toBe(true);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
   expect(fontSizeQuestion.value).toBe(100);
-  expect(themeModel.cssVariables["--sjs-font-size"]).toBe(undefined);
+  expect(themeModel.cssVariables["--sjs-font-size"]).toBe("16px");
 
   themePlugin.redo();
   expect(themeModel.undoRedoManager.canUndo()).toBe(true);
