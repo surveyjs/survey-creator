@@ -23,8 +23,6 @@
     "testcafe": "testcafe ../../functionalTests/ --app \"http-server\" --selector-timeout 1500 --config-file .testcaferc.dev.js",
     "testcafe:ci": "testcafe ../../functionalTests/ --app \"http-server --silent \" --selector-timeout 1500 --reporter minimal",
     "testcafe:file": "testcafe ../../functionalTests/designer/page-navigator.ts --app \"http-server --silent \" --reporter minimal --debug-mode --config-file .testcaferc.dev.js",
-    "testcafe:a11y": "testcafe ./testCafe/accessibility.js --app \"http-server --silent \"  --selector-timeout 1500 --config-file .testcaferc.dev.js",
-    "testcafe:a11y:ci": "testcafe ./testCafe/accessibility.js --app \"http-server\" --selector-timeout 1500 --reporter minimal",
     "visual-regression-tests": "testcafe ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal --config-file .testcaferc.dev.js",
     "visual-regression-tests:ci": "testcafe ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
     "visual-regression-tests:file": "testcafe --app \"http-server\" ../../visualRegressionTests/tests/designer/pg-editors.ts --screenshots ../../ --reporter minimal --selector-timeout 1500 --config-file .testcaferc.dev.js",
@@ -33,7 +31,9 @@
     "build": "webpack --env buildType=dev && webpack --env buildType=prod && rollup -c",
     "watch:dev": "webpack --env buildType=dev --watch && rollup -c -w",
     "watch:prod": "webpack --env buildType=prod --watch",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "test:a11y": "playwright test --project a11y --ui",
+    "test:a11y:ci": "playwright test --project a11y --reporter dot --quiet"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.1.1",

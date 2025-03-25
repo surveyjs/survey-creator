@@ -34,8 +34,8 @@
     "watch:dev": "concurrently \"webpack --env buildType=dev --watch --env emitDeclarations --env emitStyles\" \"rollup -c -w\" ",
     "watch:prod": "webpack --env buildType=prod --watch",
     "lint": "eslint ./src",
-    "a11y": "playwright test --project a11y --ui",
-    "a11y:ci": "playwright test --project a11y --reporter dot --quiet"
+    "test:a11y": "playwright test --project a11y --ui",
+    "test:a11y:ci": "playwright test --project a11y --reporter dot --quiet"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.0",
