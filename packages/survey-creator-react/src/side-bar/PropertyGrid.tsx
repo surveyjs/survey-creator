@@ -27,9 +27,7 @@ export class PropertyGridComponent extends SurveyElementBase<IPropertyGridCompon
     return (
       <div className={this.model.rootCss}>
         <SearchComponent model={this.model.searchManager}></SearchComponent>
-        <Scroll>
-          <Survey model={this.model.survey}></Survey>
-        </Scroll>
+        <Survey model={this.model.survey}></Survey>
       </div>
     );
   }

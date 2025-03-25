@@ -38,6 +38,10 @@
 }
 
 .svc-toolbox {
+  .sv-scroll__wrapper {
+    height: 0;
+    flex-grow: 1;
+  }
 
   .sv-scroll__scroller {
     padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150))
