@@ -433,4 +433,10 @@ export interface ICreatorOptions {
    * Default value: `true`
    */
   collapseOnDrag?: boolean;
+  /**
+   * Specifies whether to clear translations to other languages when a source language translation is changed.
+   * 
+   * Default value: `false`
+   */
+  clearTranslationsOnSourceTextChange?: boolean;
 }

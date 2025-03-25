@@ -455,3 +455,77 @@ test("creator set theme should update headerView survey property", (): any => {
   creator.theme = { headerView: "basic" };
   expect(creator.survey.headerView).toBe("basic");
 });
+test("creator set theme should update headerView survey property", (): any => {
+  const creator = new CreatorTester({
+    clearTranslationsOnSourceTextChange: true
+  });
+  creator.JSON = {
+    elements: [
+      {
+        type: "text", name: "q1", title: { default: "my question", de: "de: my question" }
+      },
+      {
+        type: "checkbox", name: "my question", title: { de: "de: my question" },
+        choices: [
+          { value: 1, text: { default: "item1", de: "de-item" } },
+          { value: "item2", text: { de: "de-item2" } }
+        ]
+      },
+      {
+        type: "matrixdynamic", name: "q3", columns: [
+          { name: "col1", title: { default: "col1", de: "de-col1" } },
+          { name: "col2", title: { de: "de-col2" } }
+        ]
+      }
+    ]
+  };
+  expect(creator.clearTranslationsOnSourceTextChange).toBeTruthy();
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("my question");
+  const columns = creator.survey.getQuestionByName("q3").columns;
+  const choices = q2.choices;
+  expect(q1.locTitle.getLocaleText("de")).toBe("de: my question");
+  expect(q2.locTitle.getLocaleText("de")).toBe("de: my question");
+  expect(choices[0].locText.getLocaleText("de")).toBe("de-item");
+  expect(choices[1].locText.getLocaleText("de")).toBe("de-item2");
+  expect(columns[0].locTitle.getLocaleText("de")).toBe("de-col1");
+  expect(columns[1].locTitle.getLocaleText("de")).toBe("de-col2");
+  q1.name = "q1_new";
+  q2.name = "my question_new";
+  expect(q1.locTitle.getLocaleText("de")).toBe("de: my question");
+  expect(q2.locTitle.getLocaleText("de")).toBeFalsy();
+
+  columns[0].name = "col1_new";
+  columns[1].name = "col2_new";
+  expect(columns[0].locTitle.getLocaleText("de")).toBe("de-col1");
+  expect(columns[1].locTitle.getLocaleText("de")).toBeFalsy();
+
+  choices[0].value = "item1_new";
+  choices[1].value = "item2_new";
+  expect(choices[0].locText.getLocaleText("de")).toBe("de-item");
+  expect(choices[1].locText.getLocaleText("de")).toBeFalsy();
+
+  q1.title = "my question_new";
+  expect(q1.locTitle.getLocaleText("de")).toBeFalsy();
+
+  columns[0].title = "col1_new";
+  expect(columns[0].locTitle.getLocaleText("de")).toBeFalsy();
+
+  choices[0].text = "item1_new";
+  expect(choices[0].locText.getLocaleText("de")).toBeFalsy();
+
+  creator.survey.locale = "fr";
+  q1.locTitle.setLocaleText("de", "de: my question_new");
+  q2.locTitle.setLocaleText("de", "de: my question_new");
+  q1.title = "fr: my question_new";
+  q1.title = "fr: my question_new-1";
+  expect(q1.locTitle.getJson()).toStrictEqual({
+    default: "my question_new",
+    de: "de: my question_new",
+    fr: "fr: my question_new-1"
+  });
+  q2.name = "q2_new2";
+  expect(q2.locTitle.getJson()).toStrictEqual({
+    de: "de: my question_new"
+  });
+});
