@@ -893,7 +893,6 @@ export class SurveyCreatorModel extends Base
    * 
    * For information on event handler parameters, refer to descriptions within the interface.
    * 
-   * 
    * Within the event handler, you need to pass translation strings and locale information to the translation service API. The service should return an array of translated strings that you need to pass to the `options.callback` function. The following code shows how to integrate the Microsoft Translator service into Survey Creator:
    * 
    * ```js
@@ -939,6 +938,7 @@ export class SurveyCreatorModel extends Base
    * ```
    * 
    * > Survey Creator does not include a machine translation service out of the box. Our component only provides a UI for calling the service API.
+   * @see startMachineTranslationTo
    */
   public onMachineTranslate: EventBase<SurveyCreatorModel, MachineTranslateEvent> = this.addCreatorEvent<SurveyCreatorModel, MachineTranslateEvent>();
 
@@ -3855,6 +3855,12 @@ export class SurveyCreatorModel extends Base
     }
   }
   translationLocalesOrder: Array<string> = [];
+  /**
+   * Starts the translation of survey strings from the default language to one or more specified languages using a machine translation service, such as Google Translate or Microsoft Translator.
+   * 
+   * This method only launches the operation by raising the [`onMachineTranslate`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onMachineTranslate) event. Handle this event to perform the actual translation.
+   * @param locales An array of locale codes that correspond to target languages, for example, `[ "de", "fr" ]`.
+   */
   public startMachineTranslationTo(locales: Array<string>): void {
     if (!this.getHasMachineTranslation()) return;
     doMachineStringsTranslation(this.survey, this, locales);
