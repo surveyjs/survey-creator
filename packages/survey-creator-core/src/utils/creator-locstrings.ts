@@ -1,6 +1,7 @@
 import { LocalizableString, SurveyModel, Base, JsonObjectProperty, Serializer, MatrixCells, QuestionMatrixModel,
   settings as surveySettings, surveyLocalization, Helpers } from "survey-core";
 import { ISurveyCreatorOptions } from "../creator-settings";
+import { create } from "domain";
 
 export function doMachineStringsTranslation(survey: SurveyModel, creatorOptions: ISurveyCreatorOptions, locales: Array<string>): void {
   locales.forEach(loc => {
@@ -26,9 +27,11 @@ export function doMachineStringsTranslation(survey: SurveyModel, creatorOptions:
       });
       creatorOptions.doMachineTranslation(surveyLocalization.defaultLocale, loc, defaultStrs, (translated: Array<string>) => {
         if (!!translated && translated.length === defaultStrs.length) {
+          creatorOptions.startUndoRedoTransaction("Translate to " + loc);
           for(let i = 0; i < defaultStrs.length; i++) {
             locStrsHash[defaultStrs[i]].forEach(locStr => locStr.setLocaleText(loc, translated[i]));
           }
+          creatorOptions.stopUndoRedoTransaction();
         }
       });
     }
