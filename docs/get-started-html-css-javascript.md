@@ -469,6 +469,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/html-css-js (linkStyle))
 
+
+## (Optional) Enable Ace Editor in the JSON Editor Tab
+
+The JSON Editor tab enables users to edit survey JSON schemas as text. To make the editing process more convenient, you can integrate the <a href="https://ace.c9.io/" target="_blank">Ace</a> code editor. Add the Ace script and the scripts of required Ace extensions to your HTML page. For instance, the following code references the editor itself and an extension that adds a Find/Replace dialog to it:
+
+```html
+<script src="https://unpkg.com/ace-builds/src-min-noconflict/ace.js" type="text/javascript"></script>
+<script src="https://unpkg.com/ace-builds/src-min-noconflict/ext-searchbox.js" type="text/javascript"></script>
+```
+
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/html-css-js (linkStyle))
+
 ## Further Reading
 
 - [Localization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)

@@ -53,7 +53,7 @@ Page numbers in your survey or form are hidden by default. To display them, foll
 
 ## How to Number Panels
 
-Panel numbering can be enabled for each individual panel, but only if the question numbering setting at the survey level is set to either **Auto-numbering** or **Reset on each page**. If the **No numbering** option is selected, panel numbering will not be applicable. To number a panel, follow these steps:
+Individual panel numbering and the numbering of questions within a nesting panel can be enabled only if the survey-level question numbering setting is set to either **Auto-numbering** or **Reset on each page**. If **No numbering** is selected, panel numbering will not apply. To number a panel, follow these steps:
 
 1. Select the panel you want to number using the survey tree or by clicking it on the design surface.  
 2. Under **Numbering**, locate the **Number panels** setting.
