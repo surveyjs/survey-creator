@@ -25,6 +25,7 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
       }}
       className="svc-element__question-type-selector"
       title={this.model.addNewQuestionText}
+      role="button"
     >
       <span className="svc-element__question-type-selector-icon">
         <SvgIcon

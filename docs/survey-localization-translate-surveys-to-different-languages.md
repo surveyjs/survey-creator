@@ -64,11 +64,11 @@ creator.locale = "fr";
 You can modify individual translation strings. Call the `getLocale(locale)` method to get an object with locale translations. Refer to any [dictionary file](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization) for information about the structure of this object. To modify a translation string, change the corresponding object property:
 
 ```js
-// Get current locale translations
-const translations = SurveyCreator.editorLocalization.getLocale("");
+// Get English translations
+const translations = SurveyCreatorCore.getLocaleStrings("en");
 // In modular applications
-import { editorLocalization } from "survey-creator-core";
-const translations = editorLocalization.getLocale("");
+import { getLocaleStrings } from "survey-creator-core";
+const translations = getLocaleStrings("en");
 
 // Change text for the `visible` property in Property Grid
 translations.p.visible = "Is visible";

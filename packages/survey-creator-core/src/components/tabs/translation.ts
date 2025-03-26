@@ -422,8 +422,7 @@ export class TranslationGroup extends TranslationItemBase {
     if (!this.obj || !this.obj.getType) return;
     var properties = this.getLocalizedProperties(this.obj);
     for (var i = 0; i < properties.length; i++) {
-      var property = properties[i];
-      var item = this.createTranslationItem(this.obj, properties[i]);
+      const item = this.createTranslationItem(this.obj, properties[i]);
       if (!!item) {
         this.itemValues.push(item);
       }
@@ -521,9 +520,9 @@ export class TranslationGroup extends TranslationItemBase {
     return isShowing;
   }
   private createTranslationItem(obj: any, property: JsonObjectProperty): TranslationItem {
-    const defaultValue = this.getDefaultValue(obj, property);
     const locStr = <LocalizableString>obj[property.serializationProperty];
     if (!locStr) return null;
+    const defaultValue = this.getDefaultValue(obj, property);
     if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
     const editLocale = this.translation?.getEditLocale();
     if (!!editLocale && !!locStr.getLocaleText(editLocale)) return null;
@@ -544,11 +543,7 @@ export class TranslationGroup extends TranslationItemBase {
       !!property.serializationProperty
     ) {
       var locStr = <LocalizableString>obj[property.serializationProperty];
-      if (
-        !!locStr &&
-        !obj.isPage && !obj.isPanel &&
-        (!!locStr.onGetTextCallback || locStr["onRenderedHtmlCallback"])
-      )
+      if (!!locStr && !obj.isPage && !obj.isPanel && !!locStr.onGetTextCallback)
         return obj["name"];
     }
     return "";

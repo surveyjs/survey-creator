@@ -5,6 +5,7 @@ import { IUndoRedoChange, UndoRedoAction, UndoRedoManager } from "./undo-redo-ma
 export class UndoRedoController extends Base {
   private undoAction: Action;
   private redoAction: Action;
+  public ignoreChanges: boolean;
 
   private onSurveyPropertyValueChangedCallback(
     name: string,
@@ -13,7 +14,7 @@ export class UndoRedoController extends Base {
     sender: Base,
     arrayChanges: ArrayChanges
   ) {
-    if (!this.undoRedoManager || !this.undoRedoManager.isCorrectProperty(sender, name)) {
+    if (this.ignoreChanges || !this.undoRedoManager || !this.undoRedoManager.isCorrectProperty(sender, name)) {
       return;
     }
     const canUndoRedoMerge = this.undoRedoManager.tryMergeTransaction(sender, name, newValue);
