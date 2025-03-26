@@ -117,7 +117,7 @@ test("Check dropdowns inside survey are hided when scrolling container", async (
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .click(Selector(".sd-dropdown__filter-string-input"))
     .expect(Selector(".sv-popup__container").filterVisible().exists).ok()
-    .scroll(Selector(".sd-root-modern.sd-root-modern--full-container"), "bottom")
+    .scroll(Selector(".sd-root-modern.sd-root-modern--full-container > .sv-scroll__wrapper > .sv-scroll__scroller"), "bottom")
     .expect(Selector(".sv-popup__container").filterVisible().exists).notOk();
 });
 
