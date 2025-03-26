@@ -93,7 +93,7 @@ Ungrouped items fall into the General category. You can use [localization capabi
 ```
 
 ```js
-const translations = SurveyCreator.editorLocalization.getLocale("");
+const translations = SurveyCreatorCore.getLocaleStrings("en");
 translations.toolboxCategories["general"] = "Common";
 ```
 
@@ -101,8 +101,8 @@ In modular applications, use the code below:
 
 ```js
 import "survey-creator-core/survey-creator-core.i18n";
-import { editorLocalization } from "survey-creator-core";
-const translations = editorLocalization.getLocale("");
+import { getLocaleStrings } from "survey-creator-core";
+const translations = getLocaleStrings("en");
 translations.toolboxCategories["general"] = "Common";
 ```
 
