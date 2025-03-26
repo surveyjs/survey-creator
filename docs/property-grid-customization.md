@@ -79,11 +79,11 @@ Property editors can display hints or tooltips that help survey authors specify 
 Hints are stored in the `pehelp` object (stands for "property editor help") within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization). You can use [localization API](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages#override-individual-translations) to specify or override help texts within this object. For instance, the code below specifies a hint for the [`title`](https://surveyjs.io/form-library/documentation/api-reference/question#title) property editor.
 
 ```js
-// Get current locale translations
-const translations = SurveyCreator.editorLocalization.getLocale("");
+// Get English translations
+const translations = SurveyCreatorCore.getLocaleStrings("en");
 // In modular applications
-import { editorLocalization } from "survey-creator-core";
-const translations = editorLocalization.getLocale("");
+import { getLocaleStrings } from "survey-creator-core";
+const translations = getLocaleStrings("en");
 
 translations.pehelp.title = "A hint for the Title property editor";
 ```
