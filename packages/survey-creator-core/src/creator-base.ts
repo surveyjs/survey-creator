@@ -2557,7 +2557,7 @@ export class SurveyCreatorModel extends Base
   private animationEnabled = true;
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
-    if (reason !== "designer" && reason !== "preview" && reason !== "theme") {
+    if (reason !== "designer" && reason !== "preview" && reason !== "theme" && reason !== "property-grid" && reason !== "theme-tab:property-grid") {
       survey.fitToContainer = false;
       survey.applyTheme(designTabSurveyThemeJSON);
       survey.gridLayoutEnabled = false;
