@@ -251,12 +251,14 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     return this.items?.filter(i => i.id === name)[0];
   }
 
+  protected getGroupComponentName(): string {
+    return QuestionToolbox.defaultItemGroupComponent;
+  }
   public addSubitems(items: Array<QuestionToolboxItem>) {
     if (!items || items.length < 1) return;
 
     this.setSubItems({ items: items });
     this.popupModel.getAreaCallback = this.getArea;
-    this.component = QuestionToolbox.defaultItemGroupComponent;
   }
   /**
    * Removes all subitems from this toolbox item.

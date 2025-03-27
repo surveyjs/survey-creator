@@ -294,6 +294,44 @@ test("Toolbox with subtypes (ltr)", async (t) => {
   });
 });
 
+test("Toolbox with custom subtypes set dynamically (ltr)", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const toolboxElement = Selector(".svc-toolbox");
+    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filterVisible();
+
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
+
+    const itemSelector = getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool");
+    await t.resizeWindow(2560, 1440);
+    await t.expect(itemSelector.visible).ok();
+
+    await ClientFunction(() => {
+      const qTemplate = {
+        type: "rating",
+        name: "question1",
+        title: "Custom Template",
+      };
+      const textItem = window["creator"].toolbox.getItemByName("rating");
+      const questiongroupItem = {
+        name: "my-questions",
+        title: "Sample Rating",
+        json: qTemplate,
+      };
+      textItem.addSubitem(questiongroupItem);
+    })();
+
+    await t
+      .wait(300)
+      .hover(itemSelector);
+
+    await t.hover(itemSelector.find(".svc-toolbox__item-submenu-button"));
+    await t.hover(getToolboxItemByText("Stars"));
+    await takeElementScreenshot("toolbox-left-rating-subtype-custom.png", subtypesPopup, t, comparer);
+  });
+});
+
 test.skip("Toolbox with subtypes (wrap)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").nth(1);
