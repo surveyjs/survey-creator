@@ -2,7 +2,9 @@
 /**
  * Auto translate strings using ms api translate service
  * Example of translating un-translated string in french.ts:
- * node ms_translation french <ms-tranlation-key-32-symbols>
+ * node translation_ms-translator french <ms-tranlation-key-32-symbols>
+ * Example of translating un-translated string in all files:
+ * node translation_ms-translator all <ms-tranlation-key-32-symbols>
  */
 // eslint-disable-next-line no-undef
 const http = require("https");

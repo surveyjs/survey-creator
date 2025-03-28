@@ -1190,6 +1190,7 @@ export var indonesianStrings = {
       onPage: "Setel ulang di setiap halaman",
       onpanel: "Setel ulang pada setiap panel",
       onPanel: "Setel ulang pada setiap panel",
+      recursive: "Penomoran rekursif",
       onSurvey: "Lanjutkan di seluruh survei",
       off: "Tanpa penomoran"
     },
@@ -3191,3 +3192,4 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Jika input memakan lebih banyak baris, bilah gulir akan muncul."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Nilai tampilan default untuk teks dinamis"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Nilai yang ditampilkan dalam pertanyaan HTML dan dalam judul dinamis dan deskripsi elemen survei saat nilai pertanyaan kosong."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Penomoran rekursif"

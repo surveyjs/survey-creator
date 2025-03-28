@@ -1190,6 +1190,7 @@ export const thStrings = {
       onPage: "รีเซ็ตในแต่ละหน้า",
       onpanel: "รีเซ็ตในแต่ละแผง",
       onPanel: "รีเซ็ตในแต่ละแผง",
+      recursive: "การกําหนดหมายเลขแบบเรียกซ้ํา",
       onSurvey: "ต่อเนื่องทั่วทั้งแบบสำรวจ",
       off: "ไม่มีการจัดลำดับ"
     },
@@ -1977,3 +1978,4 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "ตั้งค่าจํานวนบรรทัดที่แสดงในพื้นที่ข้อความสําหรับความคิดเห็นของคําถาม หากอินพุตใช้บรรทัดมากขึ้น แถบเลื่อนจะปรากฏขึ้น"
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "ค่าที่แสดงดีฟอลต์สําหรับข้อความไดนามิก"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "ค่าที่แสดงในคําถาม HTML และในชื่อแบบไดนามิกและคําอธิบายขององค์ประกอบแบบสํารวจเมื่อค่าคําถามว่างเปล่า"
+// showQuestionNumbers.recursive: "Recursive numbering" => "การกําหนดหมายเลขแบบเรียกซ้ํา"

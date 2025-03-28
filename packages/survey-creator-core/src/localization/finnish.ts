@@ -1190,6 +1190,7 @@ export var fiStrings = {
       onPage: "Nollaa jokaisella sivulla",
       onpanel: "Nollaa jokaisessa paneelissa",
       onPanel: "Nollaa jokaisessa paneelissa",
+      recursive: "Rekursiivinen numerointi",
       onSurvey: "Jatka kyselyssä",
       off: "Ei numerointia"
     },
@@ -3009,3 +3010,4 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Määrittää kysymyskommenttien tekstialueilla näytettävien rivien määrän. Jos syöttö vie enemmän rivejä, vierityspalkki tulee näkyviin."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Dynaamisten tekstien oletusnäyttöarvo"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Arvo, joka näkyy HTML-kysymyksissä ja kyselyn elementtien dynaamisissa otsikoissa ja kuvauksissa, kun kysymyksen arvo on tyhjä."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekursiivinen numerointi"
