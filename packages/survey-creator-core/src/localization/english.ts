@@ -1523,6 +1523,9 @@ export var enStrings = {
     timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page.",
     validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes.",
     page: {
+      name: "A page ID that is not visible to respondents.",
+      description: "Type a page subtitle.",
+      navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\".",
       timeLimit: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page.",
       // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility.",
