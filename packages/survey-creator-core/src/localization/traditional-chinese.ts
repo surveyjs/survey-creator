@@ -1190,6 +1190,7 @@ var traditionalChineseTranslation = {
       onPage: "在每個頁面上重置",
       onpanel: "在每個面板上重置",
       onPanel: "在每個面板上重置",
+      recursive: "遞歸編號",
       onSurvey: "在整個調查中繼續",
       off: "無編號"
     },
@@ -3307,3 +3308,4 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "設置問題註釋的文字區域中顯示的行數。如果輸入佔用更多行，則會顯示滾動條。"
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "動態文字的預設顯示值"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "當問題值為空時，顯示在 HTML 問題以及調查元素的動態標題和描述中的值。"
+// showQuestionNumbers.recursive: "Recursive numbering" => "遞歸編號"

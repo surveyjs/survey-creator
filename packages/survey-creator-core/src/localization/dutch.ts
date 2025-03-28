@@ -1190,6 +1190,7 @@ export var nlStrings = {
       onPage: "Reset op elke pagina",
       onpanel: "Reset op elk paneel",
       onPanel: "Reset op elk paneel",
+      recursive: "Recursieve nummering",
       onSurvey: "Doorgaan in de enquête",
       off: "Geen nummering"
     },
@@ -3015,3 +3016,4 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. Als de invoer meer regels in beslag neemt, wordt de schuifbalk weergegeven."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Standaardweergavewaarde voor dynamische teksten"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Een waarde die wordt weergegeven in HTML-vragen en in de dynamische titels en beschrijvingen van enquête-elementen wanneer de vraagwaarde leeg is."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Recursieve nummering"

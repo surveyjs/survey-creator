@@ -1190,6 +1190,7 @@ export var msStrings = {
       onPage: "Mengeset semula pada setiap halaman",
       onpanel: "Set semula pada setiap panel",
       onPanel: "Set semula pada setiap panel",
+      recursive: "Penomboran rekursif",
       onSurvey: "Teruskan merentasi tinjauan",
       off: "Tiada penomboran"
     },
@@ -2991,3 +2992,4 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Menetapkan bilangan baris yang dipaparkan dalam kawasan teks untuk ulasan soalan. Jika input mengambil lebih banyak baris, bar skrol muncul."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Nilai paparan lalai untuk teks dinamik"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Nilai yang dipaparkan dalam soalan HTML dan dalam tajuk dinamik dan perihalan elemen tinjauan apabila nilai soalan kosong."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Penomboran rekursif"

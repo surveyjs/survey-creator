@@ -1190,6 +1190,7 @@ export var jaStrings = {
       onPage: "各ページでリセット",
       onpanel: "各パネルでリセット",
       onPanel: "各パネルでリセット",
+      recursive: "再帰的なナンバリング",
       onSurvey: "調査を続ける",
       off: "ナンバリングなし"
     },
@@ -3036,3 +3037,4 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "質問コメントのテキストエリアに表示される行数を設定します。入力がより多くの行を占める場合は、スクロールバーが表示されます。"
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "ダイナミックテキストのデフォルトの表示値"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML の質問、および質問の値が空の場合にアンケート要素の動的なタイトルと説明に表示される値。"
+// showQuestionNumbers.recursive: "Recursive numbering" => "再帰的なナンバリング"

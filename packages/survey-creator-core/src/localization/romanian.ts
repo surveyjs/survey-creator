@@ -1190,6 +1190,7 @@ export const roStrings = {
       onPage: "Resetare pe fiecare pagină",
       onpanel: "Resetare pe fiecare panou",
       onPanel: "Resetare pe fiecare panou",
+      recursive: "Numerotare recursivă",
       onSurvey: "Continuă pe tot chestionarul",
       off: "Fără numerotare"
     },
@@ -1977,3 +1978,4 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Setează numărul de linii afișate în zonele de text pentru comentariile la întrebări. Dacă intrarea ocupă mai multe linii, apare bara de derulare."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Valoarea de afișare implicită pentru textele dinamice"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "O valoare afișată în întrebările HTML și în titlurile și descrierile dinamice ale elementelor chestionarului atunci când valoarea întrebării este goală."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Numerotare recursivă"

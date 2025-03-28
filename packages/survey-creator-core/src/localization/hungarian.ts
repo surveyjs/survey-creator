@@ -1190,6 +1190,7 @@ export var huStrings = {
       onPage: "Visszaállítás minden oldalon",
       onpanel: "Visszaállítás az egyes paneleken",
       onPanel: "Visszaállítás az egyes paneleken",
+      recursive: "Rekurzív számozás",
       onSurvey: "Folytassa a felmérést",
       off: "Nincs számozás"
     },
@@ -3188,3 +3189,4 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Beállítja a szövegterületeken megjelenített sorok számát a kérdésmegjegyzésekhez. Ha a bevitel több sort foglal el, megjelenik a görgetősáv."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Dinamikus szövegek alapértelmezett megjelenítési értéke"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "A HTML-kérdésekben, valamint a felmérési elemek dinamikus címeiben és leírásaiban megjelenő érték, ha a kérdés értéke üres."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekurzív számozás"

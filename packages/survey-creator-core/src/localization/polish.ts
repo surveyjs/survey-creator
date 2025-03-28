@@ -1190,6 +1190,7 @@ var polishStrings = {
       onPage: "Resetuj na każdej stronie",
       onpanel: "Resetuj na każdym panelu",
       onPanel: "Resetuj na każdym panelu",
+      recursive: "Numeracja rekurencyjna",
       onSurvey: "Kontynuuj badanie",
       off: "Brak numeracji"
     },
@@ -3302,3 +3303,4 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Ustawia liczbę wierszy wyświetlanych w obszarach tekstowych dla komentarzy do pytań. Jeśli dane wejściowe zajmują więcej wierszy, pojawi się pasek przewijania."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Domyślna wartość wyświetlana dla tekstów dynamicznych"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Wartość wyświetlana w pytaniach HTML oraz w dynamicznych tytułach i opisach elementów ankiety, gdy wartość pytania jest pusta."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Numeracja rekurencyjna"

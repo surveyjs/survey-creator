@@ -1190,6 +1190,7 @@ export var skStrings = {
       onPage: "Obnoviť na každej stránke",
       onpanel: "Resetovať na každom paneli",
       onPanel: "Resetovať na každom paneli",
+      recursive: "Rekurzívne číslovanie",
       onSurvey: "Pokračujte v prieskume",
       off: "Bez číslovania"
     },
@@ -2990,3 +2991,4 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre k otázkam. Ak vstup zaberie viac riadkov, zobrazí sa posúvač."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Predvolená zobrazená hodnota pre dynamické texty"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Hodnota zobrazená v otázkach HTML a v dynamických názvoch a popisoch prvkov prieskumu, keď je hodnota otázky prázdna."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekurzívne číslovanie"

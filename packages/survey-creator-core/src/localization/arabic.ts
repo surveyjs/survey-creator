@@ -1190,6 +1190,7 @@ export var arStrings = {
       onPage: "إعادة تعيين على كل صفحة",
       onpanel: "إعادة تعيين على كل لوحة",
       onPanel: "إعادة تعيين على كل لوحة",
+      recursive: "الترقيم المتكرر",
       onSurvey: "المتابعة عبر الاستطلاع",
       off: "لا ترقيم"
     },
@@ -2951,3 +2952,4 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "لتعيين عدد الأسطر المعروضة في مناطق النص لتعليقات الأسئلة. إذا كان الإدخال يشغل المزيد من الأسطر، فسيظهر شريط التمرير."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "قيمة العرض الافتراضية للنصوص الديناميكية"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "قيمة معروضة في أسئلة HTML وفي العناوين الديناميكية وأوصاف عناصر الاستطلاع عندما تكون قيمة السؤال فارغة."
+// showQuestionNumbers.recursive: "Recursive numbering" => "الترقيم المتكرر"

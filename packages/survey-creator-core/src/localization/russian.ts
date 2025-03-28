@@ -1190,6 +1190,7 @@ export var ruStrings = {
       onPage: "Сброс на каждой странице",
       onpanel: "Сброс на каждой панели",
       onPanel: "Сброс на каждой панели",
+      recursive: "Рекурсивная нумерация",
       onSurvey: "Продолжить опрос",
       off: "Без нумерации"
     },
@@ -3092,3 +3093,4 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Задает количество отображаемых строк в текстовых полях для комментариев к вопросам. Если ввод занимает больше строк, появляется полоса прокрутки."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Отображаемое значение по умолчанию для динамических текстов"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Значение, отображаемое в вопросах в формате HTML, а также в динамических заголовках и описаниях элементов опроса, когда значение вопроса пусто."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Рекурсивная нумерация"
