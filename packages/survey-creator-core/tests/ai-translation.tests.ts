@@ -34,3 +34,44 @@ test("Translate untranslated strings", () => {
   expect(q.choices[1].locText.getJson()).toStrictEqual({ fr: "fr: text2", de: "de: text2" });
   expect(q.choices[2].locText.isEmpty).toBeTruthy();
 });
+test("Translate untranslated strings & options.clearTranslationsOnSourceTextChange - survey.toJSON()", () => {
+  const creator = new CreatorTester({
+    clearTranslationsOnSourceTextChange: true
+  });
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "checkbox",
+            name: "q1",
+            title: "Tilte",
+            choices: [
+              { value: "text1" }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  creator.onMachineTranslate.add((sender, options) => {
+    const translatedStrings = new Array<string>();
+    options.strings.forEach(str => { translatedStrings.push(options.toLocale + ": " + str); });
+    options.callback(translatedStrings);
+  });
+  creator.startMachineTranslationTo(["de", "fr"]);
+  expect(creator.JSON).toMatchObject({
+    pages: [{
+      name: "page1",
+      elements: [
+        {
+          type: "checkbox",
+          name: "q1",
+          title: { default: "Tilte", fr: "fr: Tilte", de: "de: Tilte" },
+          choices: [
+            { value: "text1", text: { fr: "fr: text1", de: "de: text1" } }
+          ]
+        }
+      ] }] });
+});
