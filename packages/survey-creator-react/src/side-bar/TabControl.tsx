@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Action, ActionContainer, Base } from "survey-core";
-import { SurveyElementBase, ReactElementFactory } from "survey-react-ui";
+import { SurveyElementBase, ReactElementFactory, Scroll } from "survey-react-ui";
 import { MenuButton, TabControlModel } from "survey-creator-core";
 import { TabButtonComponent } from "./TabButton";
-import { ScrollComponent } from "../components/Scroll";
 
 interface ITabControlProps {
   model?: TabControlModel;
@@ -32,11 +31,11 @@ class TabControl extends SurveyElementBase<any, any> {
           <div className="svc-sidebar-tabs__separator">
             <div></div>
           </div>
-          <ScrollComponent>
+          <Scroll>
             <div className="svc-sidebar-tabs__items">
               <TabsComponent model={this.props.model.topToolbar}></TabsComponent>
             </div>
-          </ScrollComponent>
+          </Scroll>
         </div>
         <div className="svc-sidebar-tabs__bottom-container">
           <div className="svc-sidebar-tabs__items">

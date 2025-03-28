@@ -23,7 +23,7 @@
   border-inline-end: 1px solid transparent;
   background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   box-sizing: border-box;
-  min-height: fit-content;
+  height: 0;
   flex-grow: 1;
   /* disable library transition animations */
   --sjs-transition-duration: 0ms;

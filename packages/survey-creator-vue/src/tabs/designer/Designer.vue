@@ -11,7 +11,7 @@
     :class="model.getRootCss()"
     @click="model.clickDesigner"
   >
-    <Scroll>
+    <SvComponent :is="'sv-scroll'">
       <div class="svc-tab-designer_content">
         <template v-if="model.showPlaceholder">
           <div
@@ -117,7 +117,7 @@
             </div>
         </template>
       </div>
-    </Scroll>
+    </SvComponent>
   </div>
 </template>
 <script lang="ts" setup>
@@ -126,7 +126,6 @@ import type { TabDesignerViewModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";
 import SurfacePlaceholder from "../../components/SurfacePlaceholder.vue";
-import Scroll from "@/components/Scroll.vue";
 const props = defineProps<{ model: TabDesignerViewModel }>();
 const survey = computed(() => props.model.survey);
 useBase(() => props.model);

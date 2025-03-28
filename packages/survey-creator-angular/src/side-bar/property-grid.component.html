@@ -1,8 +1,6 @@
 <ng-template #template>
     <div [class]="model.rootCss">
         <svc-search [model]="model.searchManager"></svc-search>
-        <svc-scroll>
-            <survey-content *ngIf="!!model.survey" [model]="model.survey"></survey-content>
-        </svc-scroll>
+        <survey-content *ngIf="!!model.survey" [model]="model.survey"></survey-content>
     </div>
 </ng-template>
