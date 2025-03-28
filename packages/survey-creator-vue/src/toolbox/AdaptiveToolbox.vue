@@ -23,7 +23,7 @@
       <div v-if="toolbox.showPlaceholder" class="svc-toolbox__placeholder">
         {{ toolbox.toolboxNoResultsFound }}
       </div>
-      <Scroll>
+      <SvComponent :is="'sv-scroll'">
         <template v-if="!toolbox.showInSingleCategory">
           <SvComponent
             :is="'svc-toolbox-category'"
@@ -46,7 +46,7 @@
             </template>
           </div>
         </template>
-      </Scroll>
+      </SvComponent>
     </div>
   </div>
 </template>
@@ -56,7 +56,6 @@ import { VerticalResponsivityManager } from "survey-core";
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed, onMounted, onUnmounted, ref } from "vue";
-import Scroll from "@/components/Scroll.vue";
 const props = defineProps<{ model: SurveyCreatorModel }>();
 const toolbox = computed(() => {
   return props.model.toolbox;

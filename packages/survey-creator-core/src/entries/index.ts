@@ -58,7 +58,6 @@ export * from "../components/string-editor";
 export * from "../components/embedded-survey";
 export * from "../components/link-value";
 export * from "../components/search-manager";
-export * from "../components/scroll";
 export * from "../components/list-theme";
 export * from "../editorLocalization";
 export * from "../json5";
@@ -115,7 +114,6 @@ export * from "../presets/presets-toolbox";
 export * from "../dragdrop-survey-elements";
 
 import "../components/search.scss";
-import "../components/scroll.scss";
 import "../components/property-panel/property-panel-item.scss";
 import "../components/property-panel/property-panel.scss";
 import "../components/tabbed-menu/tabbed-menu-item.scss";

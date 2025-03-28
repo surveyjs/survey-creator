@@ -2557,7 +2557,7 @@ export class SurveyCreatorModel extends Base
   private animationEnabled = true;
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
-    if (reason !== "designer" && reason !== "preview" && reason !== "theme") {
+    if (reason !== "designer" && reason !== "preview" && reason !== "theme" && reason !== "property-grid" && reason !== "theme-tab:property-grid") {
       survey.fitToContainer = false;
       survey.applyTheme(designTabSurveyThemeJSON);
       survey.gridLayoutEnabled = false;
@@ -2682,8 +2682,6 @@ export class SurveyCreatorModel extends Base
   }
   private clearLocalizationStrings(el: any, name: string): void {
     if (this.clearTranslationsOnSourceTextChange) {
-      const loc = this.survey.locale;
-      if (!!loc && loc !== surveyLocalization.defaultLocale) return;
       if ((el.isQuestion || Serializer.isDescendantOf(el.getType(), "matrixdropdowncolumn")) && name === "name") {
         this.clearNonDefaultLocalesInStrByValue(el.locTitle);
       } else {
@@ -2706,6 +2704,8 @@ export class SurveyCreatorModel extends Base
   }
   private clearNonDefaultLocalesInStr(locStr: LocalizableString): void {
     if (locStr) {
+      const loc = locStr.lastChangedLoc;
+      if (!!loc && loc !== surveyLocalization.defaultLocale) return;
       const ctrl = this.undoRedoController;
       if (ctrl) ctrl.ignoreChanges = true;
       const locs = locStr.getLocales();

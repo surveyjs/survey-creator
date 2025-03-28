@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Base, VerticalResponsivityManager } from "survey-core";
-import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
+import { ReactElementFactory, SurveyElementBase, Scroll } from "survey-react-ui";
 import { SurveyCreatorToolboxTool } from "./ToolboxItem";
 import { SearchComponent } from "../components/Search";
-import { ScrollComponent } from "../components/Scroll";
 import { SurveyCreatorToolboxCategory } from "./ToolboxCategory";
 import { SurveyCreatorModel } from "survey-creator-core";
 export interface ISurveyCreatorToolboxProps {
@@ -76,14 +75,14 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
         <div onBlur={(e) => this.toolbox.focusOut(e)} className="svc-toolbox__panel">
           {search}
           {placeholder}
-          <ScrollComponent>
+          <Scroll>
             {(this.toolbox.showInSingleCategory) ?
               (<div className="svc-toolbox__category">
                 {this.renderItems(this.toolbox.renderedActions, this.toolbox.isCompactRendered)}
               </div>)
               : this.renderCategories()
             }
-          </ScrollComponent>
+          </Scroll>
         </div>
       </div>
     );

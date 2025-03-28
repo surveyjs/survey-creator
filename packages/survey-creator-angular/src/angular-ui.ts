@@ -19,7 +19,6 @@ export * from "./side-bar/side-bar-header.component";
 export * from "./side-bar/object-selector.component";
 export * from "./side-bar/property-grid.component";
 export * from "./components/search.component";
-export * from "./components/scroll.component";
 export * from "./tabs/json/json-editor-textarea.component";
 export * from "./tabs/json/json-editor-ace.component";
 export * from "./tabs/logic/logic.component";

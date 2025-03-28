@@ -378,7 +378,7 @@ export class QuestionToolbox
     return ".svc-toolbox__category>.svc-toolbox__tool--action";
   }
   public get containerSelector(): string {
-    return ".svc-scroll__scroller";
+    return ".sv-scroll__scroller";
   }
 
   public static getQuestionDefaultSettings(questionType: string): any {

@@ -38,14 +38,18 @@
 }
 
 .svc-toolbox {
+  .sv-scroll__wrapper {
+    height: 0;
+    flex-grow: 1;
+  }
 
-  .svc-scroll__scroller {
+  .sv-scroll__scroller {
     padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150))
       var(--ctr-toolbox-padding-bottom, var(--sjs-spacing-x2)) var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150));
     align-items: var(--ctr-toolbox-scroller-align-items, flex-start);
 
   }
-  .svc-scroll__scrollbar {
+  .sv-scroll__scrollbar {
     inset-inline-end: var(--ctr-toolbox-scrollbar-right, 0);
     inset-inline-start: var(--ctr-toolbox-scrollbar-left, "auto");
     padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) 0 var(--ctr-toolbox-padding-bottom, var(--sjs-spacing-x2)) 0;
@@ -62,7 +66,7 @@
     width: var(--toolbox-width-compact);
     min-width: var(--toolbox-width-compact);
   }
-  .svc-scroll__scroller {
+  .sv-scroll__scroller {
     width: 100vw;
     padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) var(--ctr-toolbox-group-padding-right-compact, var(--sjs-spacing-x150))
       var(--ctr-toolbox-padding-bottom, var(--sjs-spacing-x2)) var(--ctr-toolbox-group-padding-left-compact, var(--sjs-spacing-x150));

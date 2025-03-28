@@ -153,8 +153,8 @@ test.page(themeTabUrl)("tabbed mode", async (t) => {
     await t.hover(Selector(".svc-top-bar").filterVisible());
     await takeElementScreenshot("side-bar-tabbed-property-grid-theme-appearance-advanced.png", ".svc-side-bar", t, comparer);
 
-    await t.hover(Selector(".svc-side-bar .svc-scroll__wrapper").filterVisible());
-    await t.expect(Selector(".svc-side-bar .svc-scroll__scrollbar").visible).ok();
+    await t.hover(Selector(".svc-side-bar .sv-scroll__wrapper").filterVisible());
+    await t.expect(Selector(".svc-side-bar .sv-scroll__scrollbar").visible).ok();
     await takeElementScreenshot("side-bar-tabbed-property-grid-theme-appearance-advanced-hover.png", ".svc-side-bar", t, comparer);
   });
 });
