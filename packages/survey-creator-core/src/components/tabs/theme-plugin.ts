@@ -892,7 +892,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     return this.getThemeChanges();
   }
   public getThemeChanges() {
-    return getThemeChanges(this.creator.theme);
+    const themeModel = new ThemeModel();
+    themeModel.fromJSON(this.creator.theme);
+    const theme = themeModel.toJSON({ storeDefaults: false });
+    return getThemeChanges(theme);
   }
   /**
    * Indicates whether the selected theme has been modified.

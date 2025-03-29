@@ -89,7 +89,7 @@ test("assign function", (): any => {
 test("Theme model de/serialization", (): any => {
   const themeModel = new ThemeModel();
   let result = themeModel.cssVariables || {};
-  expect(Object.keys(result).length).toBe(0);
+  expect(Object.keys(result).length).toBe(2);
 
   const themeJson: ITheme = {
     themeName: "custom",
@@ -102,6 +102,7 @@ test("Theme model de/serialization", (): any => {
     cssVariables: {
       "--sjs-base-unit": "6px",
       "--sjs-corner-radius": "20px",
+      "--sjs-font-family": "Open Sans",
       "--sjs-font-size": "17.6px",
       "--sjs-general-backcolor": "rgba(253, 255, 148, 0.5)",
       "--sjs-general-backcolor-dark": "rgba(248, 248, 248, 1)",
@@ -144,11 +145,12 @@ test("Theme model backgroundImage serialization", (): any => {
   const themeModel = new ThemeModel();
   const initialJson = themeModel.toJSON();
   expect(Object.keys(initialJson)).toStrictEqual([
+    "backgroundImageFit",
+    "backgroundImageAttachment",
     "backgroundImage",
     "backgroundOpacity",
-    "backgroundImageAttachment",
-    "backgroundImageFit",
     "cssVariables",
+    "header",
     "headerView"]);
   expect(initialJson.backgroundImage).toBe("");
   themeModel.backgroundImage = "image";
@@ -172,8 +174,25 @@ test("Theme model load custom theme", (): any => {
     backgroundImageFit: "cover",
     backgroundOpacity: 1,
     cssVariables: {
-      "--a-var": "aVal"
+      "--a-var": "aVal",
+      "--sjs-font-family": "Open Sans",
+      "--sjs-font-size": "16px",
     },
+    "header": {
+      "backgroundImageFit": "cover",
+      "backgroundImageOpacity": 100,
+      "descriptionPositionX": "left",
+      "descriptionPositionY": "bottom",
+      "height": 0,
+      "inheritWidthFrom": "survey",
+      "logoPositionX": "left",
+      "logoPositionY": "top",
+      "mobileHeight": 0,
+      "overlapEnabled": false,
+      "textAreaWidth": 0,
+      "titlePositionX": "left",
+      "titlePositionY": "bottom",
+    }
   };
   themeModel.fromJSON(customeTheme);
 

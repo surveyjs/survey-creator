@@ -105,7 +105,7 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
 export class ThemeModel extends Base implements ITheme {
   private static defaultThemeValue: ITheme;
   public static get DefaultTheme() {
-    if(!this.defaultThemeValue) {
+    if (!this.defaultThemeValue) {
       return Themes["default-light"] || {};
     } else {
       return this.defaultThemeValue;
@@ -541,7 +541,7 @@ export class ThemeModel extends Base implements ITheme {
     }
   }
 
-  toJSON(options?: ISaveToJSONOptions): ITheme {
+  toJSON(options: ISaveToJSONOptions = { storeDefaults: true }): ITheme {
     if (this.scale !== undefined) {
       this["--sjs-base-unit"] = (this.scale * 8 / 100) + "px";
     }

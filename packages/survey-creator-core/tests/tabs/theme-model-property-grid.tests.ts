@@ -902,7 +902,7 @@ test("set headerViewContainer basic", (): any => {
   expect(header["surveyTitle"]).toStrictEqual({ family: "Courier New", weight: "400", size: 41 });
   expect(header["surveyDescription"]).toStrictEqual({ family: "Trebuchet MS", weight: "800", size: 21 });
 
-  expect(creator.theme.header).toBeUndefined();
+  expect(creator.theme.header).toStrictEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
   expect(creator.survey.logoPosition).toEqual("right");
   expect(simulatorSurvey.logoPosition).toEqual("right");
 });
@@ -929,7 +929,7 @@ test("set headerViewContainer advanced", (): any => {
   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
   const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
 
-  expect(creator.theme.header).toEqual(undefined);
+  expect(creator.theme.header).toStrictEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
 
   let currentThemeCssVariables = creator.theme.cssVariables || {};
   expect(currentThemeCssVariables["--sjs-font-headertitle-family"]).toBeUndefined();
@@ -972,6 +972,7 @@ test("set headerViewContainer advanced", (): any => {
     "height": 300,
     "inheritWidthFrom": "container",
     "textAreaWidth": 600,
+    "mobileHeight": 0,
     "overlapEnabled": true,
     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
     "backgroundImageOpacity": 0.5,
@@ -1282,7 +1283,7 @@ test("header survey title font color changed", (): any => {
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
 
-  expect(creator.theme.header).toEqual(undefined);
+  expect(creator.theme.header).toEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
 
   let currentThemeCssVariables = creator.theme.cssVariables || {};
   expect(currentThemeCssVariables["--sjs-font-headertitle-family"]).toBeUndefined();
