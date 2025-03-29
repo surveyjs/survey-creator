@@ -136,6 +136,8 @@
     legend+.sd-rating__item,
     legend+sv-ng-rating-item+.sd-rating__item,
     legend+.sd-rating__item-smiley,
+    .sd-rating--labels-top .sd-rating__min-text+.sd-rating__item,
+    .sd-rating--labels-bottom .sd-rating__min-text+.sd-rating__item,
     legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley {
       margin-inline-start: calc(9 * #{$base-unit} + 2px);
     }
