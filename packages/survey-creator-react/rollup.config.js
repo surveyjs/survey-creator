@@ -56,6 +56,7 @@ module.exports = (options) => {
         dir: options.dir,
         format: "esm",
         exports: "named",
+        entryFileNames: "[name].mjs",
         sourcemap: true,
       },
     ],
