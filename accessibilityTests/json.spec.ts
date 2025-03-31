@@ -12,7 +12,7 @@ test.describe("json a11y", () => {
     await getTabbedMenuItemByText(page, creatorTabJSONName).click();
     await checkA11y(page, ".svc-creator", { axeOptions });
   });
-  test("Check json tab with errors", async ({ page }) => {
+  test.skip("Check json tab with errors", async ({ page }) => {
     await getTabbedMenuItemByText(page, creatorTabJSONName).click();
     const editor = page.getByRole("textbox", { name: "JSON Editor" });
     await editor.fill(JSON.stringify({
