@@ -128,7 +128,7 @@
   .svc-question__content {
     .sd-rating {
       margin-inline-start: 0; // margin-left
-      width: 100%;
+      width: fit-content;
       max-width: 100%;
     }
 
@@ -136,6 +136,7 @@
     legend+.sd-rating__item,
     legend+sv-ng-rating-item+.sd-rating__item,
     legend+.sd-rating__item-smiley,
+    .sd-rating--labels-diagonal .sd-rating__min-text+.sd-rating__item,
     .sd-rating--labels-top .sd-rating__min-text+.sd-rating__item,
     .sd-rating--labels-bottom .sd-rating__min-text+.sd-rating__item,
     legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley {
