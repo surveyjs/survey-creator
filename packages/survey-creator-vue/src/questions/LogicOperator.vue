@@ -12,8 +12,10 @@
         :role="question.ariaRole"
         :aria-required="question.ariaRequired"
         :aria-label="question.ariaLabel"
+        :aria-labelledby="question.ariaLabelledBy"
         :aria-invalid="question.ariaInvalid"
-        :aria-describedby="question.ariaDescribedBy"
+        :aria-errormessage="question.ariaErrormessage"
+        :aria-expanded="question.ariaExpanded"
       >
         <div :class="question.cssClasses.controlValue">
           <SvComponent

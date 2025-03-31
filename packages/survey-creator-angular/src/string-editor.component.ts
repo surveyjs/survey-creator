@@ -105,6 +105,9 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
     this.locString?.onStringChanged.remove(this.onChangeHandler);
     super.ngOnDestroy();
   }
+  get ariaLabel(): string {
+    return this.placeholder || "content editable";
+  }
 }
 
 AngularComponentFactory.Instance.registerComponent(editableStringRendererName, StringEditorComponent);

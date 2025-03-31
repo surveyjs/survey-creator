@@ -25,6 +25,7 @@
           @click="edit"
           :textContent="renderedHtml"
           :aria-placeholder="placeholder"
+          :aria-label="placeholder || 'content editable'"
           :contenteditable="contentEditable"
           ref="root"
         ></span>
@@ -42,6 +43,7 @@
           @mouseup="baseModel?.onMouseUp"
           @click="edit"
           :aria-placeholder="placeholder"
+          :aria-label="placeholder || 'content editable'"
           :contenteditable="contentEditable"
           v-html="renderedHtml"
           ref="root"
