@@ -39,7 +39,7 @@ var buildPlatformJson = {
     "**/*"
   ],
   main: packageJson.name + ".js",
-  module: "fesm/" + packageJson.name + ".js",
+  module: "fesm/" + packageJson.name + ".mjs",
   repository: {
     type: "git",
     url: "https://github.com/surveyjs/survey-creator.git",
@@ -60,30 +60,30 @@ var buildPlatformJson = {
   "exports": {
     ".": {
       "types": "./typings/entries/index.d.ts",
-      "import": "./fesm/survey-creator-core.js",
+      "import": "./fesm/survey-creator-core.mjs",
       "require": "./survey-creator-core.js"
     },
     "./*.css": "./*.css",
     "./survey-creator-core.i18n": {
-      "import": "./fesm/survey-creator-core.i18n.js",
+      "import": "./fesm/survey-creator-core.i18n.mjs",
       "require": "./survey-creator-core.i18n.js"
     },
     "./i18n": {
-      "import": "./fesm/i18n/index.js",
+      "import": "./fesm/i18n/index.mjs",
       "require": "./i18n/index.js"
     },
     "./i18n/*": {
-      "import": "./fesm/i18n/*.js",
+      "import": "./fesm/i18n/*.mjs",
       "require": "./i18n/*.js"
     },
     "./themes": {
       "types": "./themes/index.d.ts",
-      "import": "./fesm/themes/index.js",
+      "import": "./fesm/themes/index.mjs",
       "require": "./themes/index.js"
     },
     "./themes/index": {
       "types": "./themes/index.d.ts",
-      "import": "./fesm/themes/index.js",
+      "import": "./fesm/themes/index.mjs",
       "require": "./themes/index.js"
     },
     "./themes/*": {
