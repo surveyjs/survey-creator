@@ -1190,6 +1190,7 @@ export var mmStrings = {
       onPage: "စာမျက်နှာတစ်ခုစီ reset လုပ်ပါ",
       onpanel: "ပန်းနယ်တစ်ခုစီ reset လုပ်ပါ",
       onPanel: "ပန်းနယ်တစ်ခုစီ reset လုပ်ပါ",
+      // recursive: "Recursive numbering",
       onSurvey: "စစ်တမ်းတစ်ခုလုံးဆက်လက်လုပ်ဆောင်ပါ",
       off: "နံပါတ်မပေးပါ"
     },
@@ -1958,6 +1959,73 @@ setupLocale({ localeCode: "mm", strings: mmStrings });
 // pv.allQuestions: "Show all questions" => undefined
 // pv.answeredQuestions: "Show answered questions only" => undefined
 // addRowButtonLocation.default: "Based on matrix layout" => undefined
+// rowOrder.initial: "Original" => undefined
+// questionOrder.initial: "Original" => undefined
+// progressBarLocation.topbottom: "Top and bottom" => undefined
+// progressBarLocation.aboveheader: "Above the header" => undefined
+// progressBarLocation.belowheader: "Below the header" => undefined
+// progressBarLocation.off: "Hidden" => undefined
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => undefined
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => undefined
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => undefined
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => undefined
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => undefined
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => undefined
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => undefined
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => undefined
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => undefined
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => undefined
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => undefined
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => undefined
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => undefined
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => undefined
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => undefined
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => undefined
+// pehelp.maxCommentLength: "For question comments only." => undefined
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => undefined
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => undefined
+// page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => undefined
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => undefined
+// page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => undefined
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => undefined
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => undefined
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => undefined
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => undefined
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => undefined
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => undefined
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => undefined
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => undefined
+// p.inputSize: "Input field width (in characters)" => undefined
+// ed.expandTooltip: "Expand" => undefined
+// ed.collapseTooltip: "Collapse" => undefined
+// ed.zoom100Tooltip: "Zoom to 100%" => undefined
+// ed.addLanguageTooltip: "Add Language" => undefined
+// panel.questionOrder: "Question order within the panel" => undefined
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => undefined
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => undefined
+// paneldynamic.showNumber: "Number the panel" => undefined
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => undefined
+// question.showNumber: "Number this question" => undefined
+// survey.readOnly: "Make the survey read-only" => undefined
+// page.questionOrder: "Question order on the page" => undefined
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => undefined
+// pe.size: "Input field width (in characters)" => undefined
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => undefined
+// pe.startPageTitlePlaceholder: "Start Page" => undefined
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => undefined
+// pe.progressBarLocation: "Progress bar alignment" => undefined
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => undefined
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => undefined
+// pe.previewMode: "Preview mode" => undefined
+// pe.gridLayoutEnabled: "Enable grid layout" => undefined
+// pe.gridLayoutColumns: "Grid columns" => undefined
+// pe.maskSettings: "Mask settings" => undefined
+// pe.detailErrorLocation: "Row expansion error message alignment" => undefined
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => undefined
+// pv.allQuestions: "Show all questions" => undefined
+// pv.answeredQuestions: "Show answered questions only" => undefined
+// addRowButtonLocation.default: "Based on matrix layout" => undefined
+// showQuestionNumbers.recursive: "Recursive numbering" => undefined
 // rowOrder.initial: "Original" => undefined
 // questionOrder.initial: "Original" => undefined
 // progressBarLocation.topbottom: "Top and bottom" => undefined
