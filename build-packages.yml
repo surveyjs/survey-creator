@@ -24,7 +24,7 @@ trigger:
       - v*.*.*
 
 pool:
-  vmImage: "Ubuntu-20.04"
+  vmImage: "Ubuntu-22.04"
 
 jobs:
   - job: CreatorV2Core
