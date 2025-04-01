@@ -4,6 +4,7 @@ import { ScrollViewModel } from "survey-creator-core";
 import { ReactElementFactory, SurveyActionBar, SurveyElementBase, SvgIcon } from "survey-react-ui";
 
 interface IScrollComponentProps {
+  onInnerHeightChanged?: (hasScroll: boolean) => void;
   children: React.ReactNode;
 }
 export class ScrollComponent extends React.Component<IScrollComponentProps, any> {
@@ -13,6 +14,7 @@ export class ScrollComponent extends React.Component<IScrollComponentProps, any>
     super(props);
     this.rootRef = React.createRef();
     this.model = new ScrollViewModel();
+    this.model.onInnerHeightChanged = props.onInnerHeightChanged;
   }
   componentDidMount() {
     const container = this.rootRef.current;

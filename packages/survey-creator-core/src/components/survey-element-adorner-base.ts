@@ -198,6 +198,32 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }
 
+  public dragEnter() {
+    if (this.hasDragLeft) {
+      clearTimeout(this.dragCollapsedTimer);
+      this.hasDragLeft = false;
+    }
+  }
+  private hasDragLeft = false;
+  public dragLeave() {
+    if (!this.creator.collapseOnDragLeft) {
+      return;
+    }
+    if (!this.hasDragLeft) {
+      if (this.canExpandOnDrag && !this.collapsed) {
+        this.hasDragLeft = true;
+        this.dragCollapsedTimer = setTimeout(() => {
+          this.collapseWithDragLeave();
+        }, this.creator.expandOnDragTimeOut);
+      }
+    }
+  }
+  protected collapseWithDragLeave() {
+    this.collapsed = true;
+    this.dragCollapsedTimer = undefined;
+    this.hasDragLeft = false;
+  }
+
   protected allowExpandCollapseByDblClick(element: any) {
     return true;
   }

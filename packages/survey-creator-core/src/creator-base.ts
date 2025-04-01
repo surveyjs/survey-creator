@@ -2214,9 +2214,9 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
       const element = sender.draggedElement;
       isDraggedFromToolbox = !element.parent && !element.isPage;
-      if (!!element && (element.isPage || this.collapseOnDrag)) {
+      if (!!element && !isDraggedFromToolbox && (element.isPage || (this.collapseOnDrag !== false && this.collapseOnDrag !== "none"))) {
         this.designerStateManager?.suspend();
-        this.collapseAllPagesOnDragStart(element);
+        this.collapseElementsOnDragStart(element);
       }
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
@@ -2232,20 +2232,31 @@ export class SurveyCreatorModel extends Base
       }
     });
     this.dragDropSurveyElements.onDragClear.add((sender, options) => {
-      isDraggedFromToolbox = false;
       this.stopUndoRedoTransaction();
-      if (!!options.draggedElement && (options.draggedElement.isPage || this.collapseOnDrag)) {
+      if (!!options.draggedElement && !isDraggedFromToolbox && (options.draggedElement.isPage || (this.collapseOnDrag !== false && this.collapseOnDrag !== "none"))) {
         this.designerStateManager?.release();
-        this.restoreElementsState();
+        this.restoreElementsStateOnDragEnd();
       }
+      isDraggedFromToolbox = false;
       this.onDragClear.fire(this, options);
     });
   }
   public get designerStateManager() {
     return (this.getPlugin("designer") as TabDesignerPlugin)?.designerStateManager;
   }
-  public collapseAllPagesOnDragStart(element: SurveyElement): void {
-    this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages.filter(p => !element || element.isPage || p !== (element as any).page));
+  public hasScroll: boolean = false;
+  public collapseElementsOnDragStart(element: SurveyElement): void {
+    if (element.isPage || this.collapseOnDrag === "pages") {
+      this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages.filter(p => !element || element.isPage || p !== (element as any).page));
+    } else if (this.collapseOnDrag === true || this.collapseOnDrag === "all" || this.collapseOnDrag === "adaptive" && this.hasScroll) {
+      const exeptions = [(element as any).page];
+      var current: any = element;
+      while (current.parent) {
+        exeptions.push(current);
+        current = current.parent;
+      }
+      this.collapseAll(exeptions);
+    }
   }
   public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
     if (this.expandCollapseButtonVisibility == "never") return false;
@@ -2273,8 +2284,8 @@ export class SurveyCreatorModel extends Base
     }
     SurveyElementAdornerBase.RestoreStateFor(element);
   }
-  public restoreElementsState(): void {
-    this.survey.pages.forEach(element => {
+  public restoreElementsStateOnDragEnd(): void {
+    this.expandCollapseManager?.getCollapsableElements().forEach(element => {
       if (element["draggedFrom"] !== undefined) {
         const adorner = SurveyElementAdornerBase.GetAdorner(element);
         adorner?.blockAnimations();
@@ -4343,16 +4354,16 @@ export class SurveyCreatorModel extends Base
    * @see expandAll
    * @see collapseElement
    */
-  public collapseAll() {
-    this.expandCollapseManager.expandCollapseElements(null, true);
+  public collapseAll(exceptions?: SurveyElement[]) {
+    this.expandCollapseManager.expandCollapseElements(null, true, undefined, exceptions);
   }
   /**
    * Expands all survey elements on the design surface.
    * @see collapseAll
    * @see expandElement
    */
-  public expandAll() {
-    this.expandCollapseManager.expandCollapseElements(null, false);
+  public expandAll(exceptions?: SurveyElement[]) {
+    this.expandCollapseManager.expandCollapseElements(null, false, undefined, exceptions);
   }
   /**
    * Collapses an individual survey element on the design surface.
@@ -4478,7 +4489,8 @@ export class SurveyCreatorModel extends Base
    * 
    * Default value: `false`
    */
-  public collapseOnDrag: boolean = false;
+  public collapseOnDrag: true | false | "none" | "pages" | "all" | "adaptive" = false;
+  public collapseOnDragLeft: boolean = false;
   /**
    * Specifies whether to clear translations to other languages when a source language translation is changed.
    * 

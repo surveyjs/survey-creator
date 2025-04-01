@@ -108,7 +108,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           {this.model.isToolboxVisible ? ReactElementFactory.Instance.createElement("svc-toolbox", { model: this.creator }) : null}
         </div>
         <div className={designerTabClassName} onClick={() => this.model.clickDesigner()}>
-          <ScrollComponent>
+          <ScrollComponent onInnerHeightChanged={(hasScroll: boolean) => this.creator.hasScroll = hasScroll}>
             <div className="svc-tab-designer_content">
               {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
             </div>
