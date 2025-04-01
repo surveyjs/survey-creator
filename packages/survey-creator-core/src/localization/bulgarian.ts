@@ -1190,6 +1190,7 @@ export var bgStrings = {
       onPage: "Нулиране на всяка страница",
       onpanel: "Нулиране на всеки панел",
       onPanel: "Нулиране на всеки панел",
+      recursive: "Рекурсивно номериране",
       onSurvey: "Продължете през проучването",
       off: "Без номериране"
     },
@@ -2600,3 +2601,4 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Задава броя на показваните редове в текстовите области за коментари на въпроси. Ако входът заема повече редове, се появява лентата за превъртане."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Стойност по подразбиране за показване за динамични текстове"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Стойност, показвана в HTML въпроси и в динамичните заглавия и описания на елементите на проучването, когато стойността на въпроса е празна."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Рекурсивно номериране"

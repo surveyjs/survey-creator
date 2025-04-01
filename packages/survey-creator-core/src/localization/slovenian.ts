@@ -1190,6 +1190,7 @@ export var slStrings = {
       onPage: "Resetuj na svakoj stranici",
       onpanel: "Resetuj na svakom panelu",
       onPanel: "Resetuj na svakom panelu",
+      recursive: "Rekurzivno številčenje",
       onSurvey: "Nastavi kroz anketu",
       off: "Bez numerisanja"
     },
@@ -1811,3 +1812,4 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Nastavi število prikazanih vrstic v besedilnih območjih za komentarje vprašanj. Če vnos zavzame več vrstic, se prikaže drsni trak."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Privzeta prikazana vrednost za dinamična besedila"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Vrednost, prikazana v vprašanjih HTML ter v dinamičnih naslovih in opisih elementov ankete, ko je vrednost vprašanja prazna."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekurzivno številčenje"

@@ -1194,6 +1194,7 @@ export var enStrings = {
       onPage: "Reset on each page",
       onpanel: "Reset on each panel",
       onPanel: "Reset on each panel",
+      recursive: "Recursive numbering",
       onSurvey: "Continue across the survey",
       off: "No numbering"
     },

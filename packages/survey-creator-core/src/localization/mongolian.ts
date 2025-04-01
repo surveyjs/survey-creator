@@ -1190,6 +1190,7 @@ export var mnStrings = {
       onPage: "Хуудас бүр дээр дахин тохируулах",
       onpanel: "Тавиур бүр дээр дахин тавих",
       onPanel: "Тавиур бүр дээр дахин тавих",
+      recursive: "Рекурсив дугаарлалт",
       onSurvey: "Судалгааг үргэлжлүүлэн хийх",
       off: "Дугаарлахгүй"
     },
@@ -2692,3 +2693,4 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Асуултын тайлбар бичвэрийн хэсэгт харагдах мөрийн тоог тогтооно. Хэрвээ оролт илүү олон мөр эзэлбэл гүйлгэх бар гарч ирнэ."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Динамик текстүүдийн стандарт үзүүлэлтийн үнэ"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML асуулт болон асуултын үнэ хоосон үед судалгааны элементүүдийн динамик гарчиг болон тайлбарт харагдах утга."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Рекурсив дугаарлалт"

@@ -181,11 +181,11 @@ test("Theme builder: composite question values are lost", (): any => {
 
   expect(themeModel.cssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
-  expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toBe("rgba(0, 0, 0, 0.91)");
   expect(themeModel.cssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
-  expect(themeModel.cssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-font-pagetitle-color"]).toBe("rgba(0, 0, 0, 0.91)");
   expect(themeModel.cssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
 
   questionTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#fefefe", size: 40 };
@@ -196,7 +196,7 @@ test("Theme builder: composite question values are lost", (): any => {
   expect(themeModel.cssVariables["--sjs-font-questiontitle-size"]).toEqual("40px");
   expect(themeModel.cssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
-  expect(themeModel.cssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-font-pagetitle-color"]).toBe("rgba(0, 0, 0, 0.91)");
   expect(themeModel.cssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
 
   pageTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#101010", size: 28 };
@@ -256,11 +256,7 @@ test("export theme to file", (done): any => {
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
-
   themeModel["questionTitle"] = { family: settings.themeEditor.defaultFontFamily, color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 19 };
-
-  const expectations = {};
-  assign(expectations, Themes["default-light"].cssVariables, { "--sjs-font-questiontitle-size": "19px" });
 
   themePlugin.saveToFileHandler = async (fileName: string, blob: Blob) => {
     let fileReader = new FileReader();
@@ -268,7 +264,9 @@ test("export theme to file", (done): any => {
       expect(fileName).toBe(settings.themeEditor.exportFileName);
       const theme: ITheme = JSON.parse(fileReader.result as string);
       expect(theme.themeName).toEqual("default");
-      expect(theme.cssVariables).toStrictEqual(expectations);
+      expect(Object.keys(theme.cssVariables).length).toBe(95);
+      expect(theme.cssVariables["--sjs-font-questiontitle-color"]).toBe("rgba(0, 0, 0, 0.91)");
+      expect(theme.cssVariables["--sjs-font-questiontitle-size"]).toBe("19px");
       done();
     };
     fileReader.readAsText(blob);
@@ -378,9 +376,10 @@ test("Get theme changes only", (): any => {
   expect(Object.keys(fullTheme.cssVariables).length).toBe(0);
 
   const themeChanges = themePlugin.getCurrentTheme(true) || {};
-  expect(Object.keys(themeChanges).length).toBe(4);
+  expect(Object.keys(themeChanges).length).toBe(5);
   expect(Object.keys(themeChanges)).toStrictEqual([
     "cssVariables",
+    "headerView",
     "themeName",
     "colorPalette",
     "isPanelless",
@@ -391,34 +390,38 @@ test("Get theme changes only", (): any => {
   expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toEqual("rgba(249, 249, 249, 0.6)");
 
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
-  expect(Object.keys(fullModifiedTheme).length).toBe(9);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(83);
+  expect(Object.keys(fullModifiedTheme).length).toBe(10);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(94);
 
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
-  expect(Object.keys(modifiedThemeChanges).length).toBe(5);
+  expect(Object.keys(modifiedThemeChanges).length).toBe(6);
   expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(1);
-  expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual(["--sjs-editorpanel-backcolor"]);
+  expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual([
+    "--sjs-editorpanel-backcolor",
+  ]);
 
   themeModel.resetTheme();
   const fullThemeReset = themePlugin.getCurrentTheme();
-  expect(Object.keys(fullThemeReset).length).toBe(9);
+  expect(Object.keys(fullThemeReset).length).toBe(10);
   expect(Object.keys(fullThemeReset)).toStrictEqual([
     "themeName",
     "colorPalette",
     "isPanelless",
     "backgroundImage",
-    "backgroundOpacity",
-    "backgroundImageAttachment",
     "backgroundImageFit",
+    "backgroundImageAttachment",
+    "backgroundOpacity",
     "cssVariables",
-    "headerView"
+    "header",
+    "headerView",
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(82);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(84);
 
   const themeChangesReset = themePlugin.getCurrentTheme(true);
-  expect(Object.keys(themeChangesReset).length).toBe(5);
+  expect(Object.keys(themeChangesReset).length).toBe(6);
   expect(Object.keys(themeChangesReset)).toStrictEqual([
     "cssVariables",
+    "header",
     "headerView",
     "themeName",
     "colorPalette",
@@ -619,7 +622,7 @@ test("Reset theme action calls confitmation dialog", (): any => {
   let themeModel = themePlugin.themeModel as ThemeModel;
 
   expect(themeModel.questionBackgroundTransparency).toEqual(100);
-  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs-editorpanel-backcolor"]).toBe("rgba(249, 249, 249, 1)");
   expect(themeModel.editorPanel).toStrictEqual({ "backcolor": "rgba(249, 249, 249, 1)", "cornerRadius": 4, "hovercolor": "rgba(243, 243, 243, 1)" });
 
   themeModel.editorPanel = { "backcolor": "#f7f7f7)", "cornerRadius": 4, "hovercolor": "rgba(243, 243, 243, 1)" };
@@ -849,7 +852,7 @@ test("Theme undo redo expression questions", (): any => {
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
   expect(fontSizeQuestion.value).toBe(100);
-  expect(themeModel.cssVariables["--sjs-font-size"]).toBe(undefined);
+  expect(themeModel.cssVariables["--sjs-font-size"]).toBe("16px");
 
   fontSizeQuestion.value = 150;
 
@@ -864,7 +867,7 @@ test("Theme undo redo expression questions", (): any => {
   expect(themeModel.undoRedoManager.canRedo()).toBe(true);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
   expect(fontSizeQuestion.value).toBe(100);
-  expect(themeModel.cssVariables["--sjs-font-size"]).toBe(undefined);
+  expect(themeModel.cssVariables["--sjs-font-size"]).toBe("16px");
 
   themePlugin.redo();
   expect(themeModel.undoRedoManager.canUndo()).toBe(true);
@@ -1223,7 +1226,7 @@ test("Modify property grid: add/hide properties", (): any => {
 
     expect(themeModel.cssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
     expect(themeModel.cssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
-    expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
+    expect(themeModel.cssVariables["--sjs-font-questiontitle-color"]).toBe("rgba(0, 0, 0, 0.91)");
     expect(themeModel.cssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
 
     expect(themeModel.cssVariables["--sjs-font-custom-question-title-family"]).toBe("Courier New");

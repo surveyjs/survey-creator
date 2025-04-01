@@ -59,9 +59,9 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     if (surveyElement) {
       if (!this.imageLinkValueChangedHandler) {
         this.imageLinkValueChangedHandler = () => {
-          this.isEmptyImageLink = !this.question.imageLink;
+          this.isEmptyImageLink = !this.question || !this.question.imageLink;
           this.filePresentationModel.value = null;
-          this.filePresentationModel.visible = !this.question.imageLink;
+          this.filePresentationModel.visible = this.isEmptyImageLink;
         };
       }
       surveyElement.registerFunctionOnPropertyValueChanged("imageLink", this.imageLinkValueChangedHandler, "imageLinkValueChanged");
