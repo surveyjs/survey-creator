@@ -258,10 +258,12 @@
 .svc-toolbox__category-header__controls {
   inset-inline-end: calcSize(1);
   top: var(--ctr-category-header-controls-top, calcSize(1));
-  display: none;
+  display: flex;
+  opacity: 0;
   align-self: center;
   margin-top: -50%;
   margin-bottom: -50%;
+  transition: opacity $creator-transition-duration;
 }
 
 .svc-toolbox__category-header__button {
@@ -272,7 +274,7 @@
 
 .svc-toolbox__category-header:hover {
   .svc-toolbox__category-header__controls {
-    display: flex;
+    opacity: 1;
   }
 }
 
