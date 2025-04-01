@@ -163,6 +163,9 @@
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: var(--ctr-toolbox-gap, var(--sjs-spacing-x05));
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .svc-toolbox__category-separator {
@@ -206,10 +209,10 @@
 }
 
 .svc-toolbox__category-header-wrapper {
-  padding: var(--ctr-toolbox-group-header-margin-top, 0px) var(--ctr-toolbox-group-header-margin-left, 0px)
-    var(--ctr-toolbox-group-header-margin-bottom, 0px) var(--ctr-toolbox-group-header-margin-left, 0px);
-  //margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150)));
-  //margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)));
+  padding: var(--ctr-toolbox-group-header-margin-top, 0px) var(--ctr-toolbox-group-header-margin-left, var(--sjs-spacing-x150))
+    var(--ctr-toolbox-group-header-margin-bottom, 0px) var(--ctr-toolbox-group-header-margin-right, var(--sjs-spacing-x150));
+  margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150)));
+  margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)));
   align-self: stretch;
 }
 .svc-toolbox__category-header {
