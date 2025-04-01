@@ -1104,3 +1104,15 @@ test("QuestionImageAdornerViewModel updated on locale changed", () => {
   creator.survey.locale = "fr";
   expect(imageAdorner.isEmptyImageLink).toBeFalsy();
 });
+
+test("QuestionImageAdornerViewModel imageLinkValueChangedHandler", () => {
+  const creator = new CreatorTester();
+  const question = new QuestionImageModel("q1");
+  question.imageLink = "test";
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+  expect(imageAdorner.isEmptyImageLink).toBeFalsy();
+  imageAdorner.detachFromUI();
+  expect(imageAdorner.question).toBeUndefined();
+  imageAdorner.imageLinkValueChangedHandler();
+  expect(imageAdorner.isEmptyImageLink).toBeTruthy();
+});
