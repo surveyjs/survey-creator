@@ -130,15 +130,19 @@
       margin-inline-start: 0; // margin-left
       width: fit-content;
       max-width: 100%;
+    }
+    .sd-rating--labels-top,
+    .sd-rating--labels-bottom,
+    .sd-rating--labels-diagonal {
       .sd-rating__min-text {
-        margin-inline-start: calc(9 * #{$base-unit})
+         margin-inline-start: calc(9 * #{$base-unit})
       }
     }
 
     fieldset::before {
       content: "";
       display: block;
-      width: calc(8 * #{$base-unit} + 2px);
+      width: calc(8 * #{$base-unit});
     }
   }
 }
