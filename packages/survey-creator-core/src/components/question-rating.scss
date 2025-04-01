@@ -130,26 +130,15 @@
       margin-inline-start: 0; // margin-left
       width: fit-content;
       max-width: 100%;
+      .sd-rating__min-text {
+        margin-inline-start: calc(9 * #{$base-unit})
+      }
     }
 
-
-    legend+.sd-rating__item,
-    legend+sv-ng-rating-item+.sd-rating__item,
-    legend+.sd-rating__item-smiley,
-    .sd-rating--labels-diagonal .sd-rating__min-text+.sd-rating__item,
-    .sd-rating--labels-top .sd-rating__min-text+.sd-rating__item,
-    .sd-rating--labels-bottom .sd-rating__min-text+.sd-rating__item,
-    .sd-rating--labels-diagonal .sd-rating__min-text+sv-ng-rating-item+.sd-rating__item,
-    .sd-rating--labels-top .sd-rating__min-text+sv-ng-rating-item+.sd-rating__item,
-    .sd-rating--labels-bottom .sd-rating__min-text+sv-ng-rating-item+.sd-rating__item,
-    legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley {
-      margin-inline-start: calc(9 * #{$base-unit} + 2px);
-    }
-
-    legend+.sd-rating__item-text,
-    legend+.sd-rating__item-star,
-    legend+sv-ng-rating-item-star+.sd-rating__item-star {
-      margin-inline-start: calc(9 * #{$base-unit});
+    fieldset::before {
+      content: "";
+      display: block;
+      width: calc(8 * #{$base-unit} + 2px);
     }
   }
 }
