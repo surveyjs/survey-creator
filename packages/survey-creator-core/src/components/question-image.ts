@@ -57,6 +57,13 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   protected attachElement(surveyElement: SurveyElement): void {
     super.attachElement(surveyElement);
     if (surveyElement) {
+      if (!this.imageLinkValueChangedHandler) {
+        this.imageLinkValueChangedHandler = () => {
+          this.isEmptyImageLink = !this.question || !this.question.imageLink;
+          this.filePresentationModel.value = null;
+          this.filePresentationModel.visible = this.isEmptyImageLink;
+        };
+      }
       surveyElement.registerFunctionOnPropertyValueChanged("imageLink", this.imageLinkValueChangedHandler, "imageLinkValueChanged");
       (surveyElement as QuestionImageModel).locImageLink.onStringChanged.add(this.imageLinkValueChangedHandler);
     }
@@ -74,11 +81,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   public get acceptedTypes(): string {
     return getAcceptedTypesByContentMode((this.surveyElement as QuestionImageModel).contentMode);
   }
-  imageLinkValueChangedHandler = () => {
-    this.isEmptyImageLink = !this.question || !this.question.imageLink;
-    this.filePresentationModel.value = null;
-    this.filePresentationModel.visible = this.isEmptyImageLink;
-  }
+  imageLinkValueChangedHandler: () => void;
 
   public get isEmptyElement(): boolean {
     return this.isEmptyImageLink;
