@@ -1190,6 +1190,7 @@ var persianStrings = {
       onPage: "بازنشانی در هر صفحه",
       onpanel: "بازنشانی در هر پنل",
       onPanel: "بازنشانی در هر پنل",
+      recursive: "شماره گذاری بازگشتی",
       onSurvey: "ادامه در سراسر نظرسنجی",
       off: "بدون شماره"
     },
@@ -2992,3 +2993,4 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "تعداد خطوط نمایش داده شده در قسمت های متنی را برای نظرات سؤال تنظیم می کند. اگر ورودی خطوط بیشتری را اشغال کند، نوار اسکرول ظاهر می شود."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "مقدار نمایش پیش فرض برای متون پویا"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "مقداری که در سؤالات HTML و در عناوین پویا و توضیحات عناصر نظرسنجی زمانی که مقدار سوال خالی است، نمایش داده می شود."
+// showQuestionNumbers.recursive: "Recursive numbering" => "شماره گذاری بازگشتی"

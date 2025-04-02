@@ -1190,6 +1190,7 @@ export var hebrewStrings = {
       onPage: "איפוס בכל עמוד",
       onpanel: "איפוס בכל חלונית",
       onPanel: "איפוס בכל חלונית",
+      recursive: "מספור רקורסיבי",
       onSurvey: "המשך לאורך הסקר",
       off: "ללא מספור"
     },
@@ -2604,3 +2605,4 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "מגדיר את מספר השורות המוצגות באזורי טקסט להערות שאלה. אם הקלט תופס שורות נוספות, פס הגלילה מופיע."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "ערך תצוגה המוגדר כברירת מחדל לטקסטים דינמיים"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "ערך המוצג בשאלות HTML ובכותרות ובתיאורים הדינמיים של רכיבי סקר כאשר ערך השאלה ריק."
+// showQuestionNumbers.recursive: "Recursive numbering" => "מספור רקורסיבי"

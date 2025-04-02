@@ -36,7 +36,7 @@ const buildPlatformJson = {
   files: [
     "**/*"
   ],
-  module: "fesm/survey-creator-react.js",
+  module: "fesm/survey-creator-react.mjs",
   main: packageJson.name + ".js",
   repository: {
     type: "git",
@@ -49,7 +49,7 @@ const buildPlatformJson = {
   exports: {
     ".": {
       "types": "./typings/entries/index.d.ts",
-      "import": "./fesm/survey-creator-react.js",
+      "import": "./fesm/survey-creator-react.mjs",
       "require": "./survey-creator-react.js"
     }
   },

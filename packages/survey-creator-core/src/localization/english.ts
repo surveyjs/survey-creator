@@ -570,6 +570,7 @@ export var enStrings = {
     cellType: "Cell input type",
     colCount: "Column count",
     choicesOrder: "Choice order",
+    allowCustomChoices: "Allow custom choices",
     visible: "Visible",
     isRequired: "Required",
     markRequired: "Mark as required",
@@ -1194,6 +1195,7 @@ export var enStrings = {
       onPage: "Reset on each page",
       onpanel: "Reset on each panel",
       onPanel: "Reset on each panel",
+      recursive: "Recursive numbering",
       onSurvey: "Continue across the survey",
       off: "No numbering"
     },
@@ -1554,6 +1556,7 @@ export var enStrings = {
     choicesFromQuestionMode: "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question.",
     choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs.",
     choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts.",
+    allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session.",
     showOtherItem: "When selected, users can include additional input in a separate comment box.",
     separateSpecialChoices: "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout.",
     path: "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array.",

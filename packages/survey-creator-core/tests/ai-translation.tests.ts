@@ -75,3 +75,50 @@ test("Translate untranslated strings & options.clearTranslationsOnSourceTextChan
         }
       ] }] });
 });
+test("Do not call for translated strings", () => {
+  const creator = new CreatorTester({
+    clearTranslationsOnSourceTextChange: true
+  });
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        title: "Page 1",
+        elements: [
+          {
+            type: "checkbox",
+            name: "q1",
+            title: "Tilte",
+            choices: [
+              { value: "text1" }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  let translatedHash: any = {};
+  creator.onMachineTranslate.add((sender, options) => {
+    translatedHash[options.toLocale] = options.strings.length;
+    const translatedStrings = new Array<string>();
+    options.strings.forEach(str => { translatedStrings.push(options.toLocale + ": " + str); });
+    options.callback(translatedStrings);
+  });
+  creator.startMachineTranslationTo(["de", "fr"]);
+  expect(translatedHash).toMatchObject({ de: 3, fr: 3 });
+  translatedHash = { de: 0, fr: 0 };
+  creator.startMachineTranslationTo(["de", "fr"]);
+  expect(translatedHash).toMatchObject({ de: 0, fr: 0 });
+  creator.startMachineTranslationTo(["de", "fr", "it"]);
+  expect(translatedHash).toMatchObject({ de: 0, fr: 0, it: 3 });
+  creator.survey.title = "New title";
+  creator.survey.locTitle.setLocaleText("de", "New title de");
+  translatedHash = { de: 0, fr: 0, it: 0 };
+  creator.startMachineTranslationTo(["de", "fr", "it"]);
+  expect(translatedHash).toMatchObject({ de: 0, fr: 1, it: 1 });
+  creator.survey.title = "New title1";
+  creator.survey.locTitle.setLocaleText("fr", "New title1 de");
+  translatedHash = { de: 0, fr: 0, it: 0 };
+  creator.startMachineTranslationTo(["de", "fr", "it", "es"]);
+  expect(translatedHash).toMatchObject({ de: 1, fr: 0, it: 1, es: 4 });
+});

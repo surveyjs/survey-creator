@@ -1190,6 +1190,7 @@ export var nbStrings = {
       onPage: "Tilbakestill på hver side",
       onpanel: "Tilbakestill på hvert panel",
       onPanel: "Tilbakestill på hvert panel",
+      recursive: "Rekursiv nummerering",
       onSurvey: "Fortsett på tvers av undersøkelsen",
       off: "Ingen nummerering"
     },
@@ -3039,3 +3040,4 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Angir antall linjer som vises i tekstområder for spørsmålskommentarer. Hvis inndataene tar opp flere linjer, vises rullefeltet."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Standard visningsverdi for dynamiske tekster"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "En verdi som vises i HTML-spørsmål og i de dynamiske titlene og beskrivelsene av undersøkelseselementer når spørsmålsverdien er tom."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekursiv nummerering"

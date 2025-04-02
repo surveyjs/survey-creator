@@ -25,6 +25,7 @@ export function doMachineStringsTranslation(survey: SurveyModel, creatorOptions:
           locStrsHash[text].push(locStr);
         }
       });
+      if(defaultStrs.length === 0) return;
       creatorOptions.doMachineTranslation(surveyLocalization.defaultLocale, loc, defaultStrs, (translated: Array<string>) => {
         if (!!translated && translated.length === defaultStrs.length) {
           creatorOptions.startUndoRedoTransaction("Translate to " + loc);
@@ -52,7 +53,9 @@ function getUnlocalizedStrings(survey: SurveyModel, creatorOptions: ISurveyCreat
       return isShowing && (!locStr || !locStr?.isEmpty) || !!defaultValue;
     },
     onAddLocalizedString: (obj: Base, property: JsonObjectProperty, locStr: LocalizableString, translatedObj: any): void => {
-      res.push(locStr);
+      if(!locStr.getLocaleText(loc)) {
+        res.push(locStr);
+      }
     },
     onCreateNewTranslateObj: (obj: Base, property: JsonObjectProperty, translateObj: any): any => {
       return undefined;

@@ -1190,6 +1190,7 @@ export let svStrings = {
       onPage: "Återställ på varje sida",
       onpanel: "Återställ på varje panel",
       onPanel: "Återställ på varje panel",
+      recursive: "Rekursiv numrering",
       onSurvey: "Fortsätt genom undersökningen",
       off: "Ingen numrering"
     },
@@ -3211,3 +3212,4 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Ställer in antalet rader som visas i textområden för frågekommentarer. Om inmatningen tar upp fler rader visas rullningslisten."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Standardvisningsvärde för dynamiska texter"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Ett värde som visas i HTML-frågor och i dynamiska titlar och beskrivningar av undersökningselement när frågevärdet är tomt."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekursiv numrering"

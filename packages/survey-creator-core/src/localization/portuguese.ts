@@ -1190,6 +1190,7 @@ var portugueseTranslation = {
       onPage: "Redefinir em cada página",
       onpanel: "Redefinir em cada painel",
       onPanel: "Redefinir em cada painel",
+      recursive: "Numeração recursiva",
       onSurvey: "Continue na pesquisa",
       off: "Sem numeração"
     },
@@ -2705,3 +2706,4 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Define o número de linhas exibidas nas áreas de texto para comentários de perguntas. Se a entrada ocupar mais linhas, a barra de rolagem será exibida."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Valor de exibição padrão para textos dinâmicos"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Um valor exibido em perguntas HTML e nos títulos dinâmicos e descrições de elementos de pesquisa quando o valor da pergunta está vazio."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Numeração recursiva"

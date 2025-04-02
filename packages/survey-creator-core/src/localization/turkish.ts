@@ -1190,6 +1190,7 @@ export var turkishStrings = {
       onPage: "Her sayfada sıfırla",
       onpanel: "Her panelde sıfırla",
       onPanel: "Her panelde sıfırla",
+      recursive: "Özyinelemeli numaralandırma",
       onSurvey: "Ankete devam edin",
       off: "Numaralandırma yok"
     },
@@ -3032,3 +3033,4 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Soru yorumları için metin alanlarında görüntülenen satır sayısını ayarlar. Giriş daha fazla satır kaplıyorsa, kaydırma çubuğu görünür."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Dinamik metinler için varsayılan görüntüleme değeri"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML sorularında ve anket öğelerinin dinamik başlıklarında ve açıklamalarında, soru değeri boş olduğunda görüntülenen bir değer."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Özyinelemeli numaralandırma"

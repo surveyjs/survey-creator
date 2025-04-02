@@ -1190,6 +1190,7 @@ export var koreanStrings = {
       onPage: "각 페이지에서 재설정",
       onpanel: "각 패널에서 재설정",
       onPanel: "각 패널에서 재설정",
+      recursive: "재귀 번호 매기기",
       onSurvey: "설문조사 계속하기",
       off: "번호 매기기 없음"
     },
@@ -3241,3 +3242,4 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "동적 텍스트에 대한 기본 표시 값"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML 질문과 설문 요소의 동적 제목 및 설명에 표시되는 값으로, 질문 값이 비어 있을 때 표시됩니다."
+// showQuestionNumbers.recursive: "Recursive numbering" => "재귀 번호 매기기"
