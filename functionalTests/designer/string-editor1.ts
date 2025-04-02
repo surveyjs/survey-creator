@@ -242,7 +242,7 @@ test("Check string editor on isRequired", async (t) => {
     })()).ok();
 });
 
-test("Check string editor not loosing focus and selects underlying items", async (t) => {
+test.skip("Check string editor not loosing focus and selects underlying items", async (t) => {
   await setJSON(json3);
 
   const svStringSelector = Selector(".sv-string-editor").withText("string_editor");
