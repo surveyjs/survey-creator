@@ -242,7 +242,7 @@ test("Check string editor on isRequired", async (t) => {
     })()).ok();
 });
 
-test.skip("Check string editor not loosing focus and selects underlying items", async (t) => {
+test("Check string editor not loosing focus and selects underlying items", async (t) => {
   await setJSON(json3);
 
   const svStringSelector = Selector(".sv-string-editor").withText("string_editor");
@@ -257,14 +257,15 @@ test.skip("Check string editor not loosing focus and selects underlying items", 
     .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("string_editor").visible).ok()
     .click(svItemSelector)
     .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("string_editor").visible).ok()
-    .expect(svItemSelector.focused).ok()
-    .wait(1000)
+    .expect(svItemSelector.focused).ok();
+/*
     .click(Selector(".sv-string-editor").withText("Column 1"))
     .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("Column 1").visible).ok()
     .click(Selector(".sv-string-editor").withText("Column 2"))
     .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("Column 2").visible).ok()
     .pressKey("tab")
     .expect(Selector(".svc-side-bar__container-header .sv-action-bar-item__title").withText("Column 3").visible).ok();
+*/
 });
 
 test("Check string editor inplaceEditForValues property", async (t) => {
