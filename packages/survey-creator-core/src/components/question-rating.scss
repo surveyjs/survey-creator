@@ -118,6 +118,11 @@
 .svc-creator--mobile {
   .svc-rating-question-content {
     position: relative;
+    fieldset::before {
+      content: "";
+      display: block;
+      width: calc(8 * #{$base-unit});
+    }
   }
 
   .svc-rating-question-controls {
@@ -137,12 +142,6 @@
       .sd-rating__min-text {
          margin-inline-start: calc(9 * #{$base-unit})
       }
-    }
-
-    fieldset::before {
-      content: "";
-      display: block;
-      width: calc(8 * #{$base-unit});
     }
   }
 }
