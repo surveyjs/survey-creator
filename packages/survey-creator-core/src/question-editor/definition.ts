@@ -671,6 +671,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "defaultPanelValue", tab: "data" },
       { name: "copyDefaultValueFromLastEntry", tab: "data" },
       { name: "templateQuestionTitleLocation", tab: "questionSettings" },
+      { name: "templateQuestionTitleWidth", tab: "questionSettings" },
       { name: "templateErrorLocation", tab: "questionSettings" },
       { name: "removePanelButtonLocation", tab: "layout" },
       { name: "keyName", tab: "validation" },
