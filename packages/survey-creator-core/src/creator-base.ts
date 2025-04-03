@@ -590,6 +590,7 @@ export class SurveyCreatorModel extends Base
    * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
    */
   public onSurveyInstanceCreated: EventBase<SurveyCreatorModel, SurveyInstanceCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, SurveyInstanceCreatedEvent>();
+  public onSurveyInstanceSetupHandlers: EventBase<SurveyCreatorModel, SurveyInstanceCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, SurveyInstanceCreatedEvent>();
 
   /**
    * An event that is raised when Survey Creator obtains a survey element name to display it in the UI.
@@ -2556,7 +2557,9 @@ export class SurveyCreatorModel extends Base
   }
   private animationEnabled = true;
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
-    const survey = this.createSurveyCore(json, reason);
+    area = area || this.getSurveyInstanceCreatedArea(reason);
+    const element = area === "property-grid" && model ? model.obj : undefined;
+    const survey = this.createSurveyCore(json, area, element);
     if (reason !== "designer" && reason !== "preview" && reason !== "theme" && reason !== "property-grid" && reason !== "theme-tab:property-grid") {
       survey.fitToContainer = false;
       survey.applyTheme(designTabSurveyThemeJSON);
@@ -2576,8 +2579,6 @@ export class SurveyCreatorModel extends Base
     if (callback) {
       callback(survey);
     }
-    area = area || this.getSurveyInstanceCreatedArea(reason);
-    const element = area === "property-grid" && model ? model.obj : undefined;
     this.onSurveyInstanceCreated.fire(this, {
       survey: survey,
       reason: reason,
@@ -2617,8 +2618,13 @@ export class SurveyCreatorModel extends Base
     const res = hash[reason];
     return !!res ? res : reason;
   }
-  protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
-    return new SurveyModel(json);
+  protected createSurveyCore(json: any = {}, area: string, element: Base): SurveyModel {
+    if(this.onSurveyInstanceSetupHandlers.isEmpty) return new SurveyModel(json);
+    const model = new SurveyModel();
+    const options = { survey: model, area: area, element: element, json: json };
+    this.onSurveyInstanceSetupHandlers.fire(this, options);
+    model.fromJSON(options.json);
+    return model;
   }
   private _stateValue: string;
   /**
