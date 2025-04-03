@@ -615,7 +615,7 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm run build:example
+          npm run build:example:prod
         displayName: "build example"
 
       - script: |
