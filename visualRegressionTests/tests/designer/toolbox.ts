@@ -253,6 +253,10 @@ test("Toolbox category collapsed", async (t) => {
     await ClientFunction(() => { window["creator"].toolbox.allowExpandMultipleCategories = true; })();
     await t.expect(Selector(".svc-toolbox__category-header--collapsed").withText("matrix-custom").visible).ok();
     await takeElementScreenshot("toolbox-categories-collapsed.png", toolboxElement, t, comparer);
+    await t.hover(".svc-toolbox__category-header");
+    await takeElementScreenshot("toolbox-category-collapsed-hover.png", Selector(".svc-toolbox__category-header"), t, comparer);
+    await t.click(".svc-toolbox__category-header");
+    await takeElementScreenshot("toolbox-category-hover.png", Selector(".svc-toolbox__category-header"), t, comparer);
   });
 });
 

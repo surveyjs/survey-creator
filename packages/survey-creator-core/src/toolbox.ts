@@ -113,6 +113,13 @@ export class QuestionToolboxCategory extends Base {
   public set collapsed(val: boolean) {
     this.collapsedValue = val;
   }
+  public get iconName() {
+    return this.collapsed ? "icon-chevrondown-24x24" : "icon-chevronup-24x24";
+  }
+  public get iconClassName() {
+    const suffixName = this.collapsed ? "expand" : "collapse";
+    return "svc-toolbox__category-header__button svc-string-editor__button--" + suffixName;
+  }
 
   @property() empty: boolean;
 
