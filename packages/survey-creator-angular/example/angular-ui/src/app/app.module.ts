@@ -7,7 +7,6 @@ import { SurveyCreatorModule } from "survey-creator-angular";
 import { SurveyModule } from "survey-angular-ui";
 import { ExampleComponent } from "./example.component";
 import { AppRoutingModule } from "./router.module";
-import { TestComponent } from "./test/test.component";
 import { TestDefaultComponent } from "./test/default.component";
 import { TestThemeSwitcherComponent } from "./test/theme-switcher.component";
 import { ThemePreviewComponent } from "./test/theme-preview.component";
@@ -20,7 +19,7 @@ import { NoLicenseComponent } from "./test/test-no-license.component";
 
 @NgModule({
   declarations: [
-    AppComponent, ExampleComponent, TestComponent, TestDefaultComponent, TestThemeSwitcherComponent, ThemePreviewComponent, TestByPageComponent, TestCustomWidgetComponent, TestDropdownCollapseComponent, TestLocalizationComponent, ThemeTabComponent, NoLicenseComponent
+    AppComponent, ExampleComponent, TestDefaultComponent, TestThemeSwitcherComponent, ThemePreviewComponent, TestByPageComponent, TestCustomWidgetComponent, TestDropdownCollapseComponent, TestLocalizationComponent, ThemeTabComponent, NoLicenseComponent
   ],
   imports: [
     BrowserModule, SurveyCreatorModule, FormsModule, SurveyModule, AppRoutingModule
