@@ -38,7 +38,7 @@
       :class="question.cssClasses.control"
     />
     <template v-if="question.showDropdownAction">
-      <div aria-hidden="true">
+      <div aria-hidden="true" :class="question.cssClasses.choicesButtonWrapper">
         <SvComponent
           :is="'sv-action-bar-item'"
           :item="question.dropdownAction"

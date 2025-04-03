@@ -14,7 +14,7 @@
     (keyup)="model.onKeyUp($event)" (blur)="model.onBlur($event)" (beforeinput)="model.onBeforeInput($event)"
     [value]="model.renderedValue" [class]="model.cssClasses.control" />
   <ng-container *ngIf="model.showDropdownAction">
-    <div aria-hidden="true">
+    <div aria-hidden="true" [class]="model.cssClasses.choicesButtonWrapper">
       <sv-action-bar-item [model]="model.dropdownAction"></sv-action-bar-item>
     </div>
     <sv-ng-popup [popupModel]="model.dropdownAction.popupModel"></sv-ng-popup>

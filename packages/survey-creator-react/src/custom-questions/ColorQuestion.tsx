@@ -63,7 +63,7 @@ export class SurveyQuestionColor extends SurveyQuestionText {
   protected renderDropdownAction(): React.JSX.Element {
     return (
       <>
-        <div aria-hidden="true">
+        <div aria-hidden="true" className={this.question.cssClasses.choicesButtonWrapper}>
           {ReactElementFactory.Instance.createElement("sv-action-bar-item", { item: this.question.dropdownAction })}
         </div>
         {this.renderPopup()}
