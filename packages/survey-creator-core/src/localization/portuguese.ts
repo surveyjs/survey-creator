@@ -338,6 +338,7 @@ var portugueseTranslation = {
       titleLocation: "Alinhamento do título do painel",
       descriptionLocation: "Alinhamento da descrição do painel",
       templateQuestionTitleLocation: "Alinhamento do título da pergunta",
+      templateQuestionTitleWidth: "Largura do título da pergunta",
       templateErrorLocation: "Alinhamento da mensagem de erro",
       newPanelPosition: "Nova localização do painel",
       showRangeInProgress: "Mostrar a barra de progresso",
@@ -568,6 +569,7 @@ var portugueseTranslation = {
     cellType: "Tipo de célula",
     colCount: "Contagem de células",
     choicesOrder: "Selecione a ordem das alternativas",
+    allowCustomChoices: "Permitir escolhas personalizadas",
     visible: "É visível?",
     isRequired: "É obrigatório?",
     markRequired: "Marcar conforme necessário",
@@ -1190,6 +1192,7 @@ var portugueseTranslation = {
       onPage: "Redefinir em cada página",
       onpanel: "Redefinir em cada painel",
       onPanel: "Redefinir em cada painel",
+      recursive: "Numeração recursiva",
       onSurvey: "Continue na pesquisa",
       off: "Sem numeração"
     },
@@ -1381,6 +1384,7 @@ var portugueseTranslation = {
       enableIf: "Use o ícone de varinha mágica para definir uma regra condicional que desabilite o modo somente leitura para o painel.",
       requiredIf: "Use o ícone de varinha mágica para definir uma regra condicional que impeça o envio de questionários, a menos que pelo menos uma pergunta aninhada tenha uma resposta.",
       templateQuestionTitleLocation: "Aplica-se a todas as perguntas deste painel. Se você quiser substituir essa configuração, defina regras de alinhamento de título para perguntas individuais. A opção \"Herdar\" aplica a configuração de nível de página (se definida) ou de nível de pesquisa (\"Superior\" por padrão).",
+      templateQuestionTitleWidth: "Define a largura consistente para os títulos das perguntas quando elas estão alinhadas à esquerda de suas caixas de perguntas. Aceita valores CSS (px, %, in, pt, etc.).",
       templateErrorLocation: "Define o local de uma mensagem de erro em relação a uma pergunta com entrada inválida. Escolha entre: \"Top\" - um texto de erro é colocado na parte superior da caixa de perguntas; \"Inferior\" - um texto de erro é colocado na parte inferior da caixa de perguntas. A opção \"Herdar\" aplica a configuração de nível de página (se definida) ou de nível de pesquisa (\"Superior\" por padrão).",
       errorLocation: "Define o local de uma mensagem de erro em relação a todas as perguntas no painel. A opção \"Herdar\" aplica a configuração de nível de página (se definida) ou de nível de pesquisa.",
       page: "Reposiciona o painel no final de uma página selecionada.",
@@ -1516,6 +1520,9 @@ var portugueseTranslation = {
     timeLimitPerPage: "Um intervalo de tempo em segundos após o qual o questionário avança automaticamente para a próxima página.",
     validateVisitedEmptyFields: "Ative essa opção para disparar a validação quando um usuário se concentrar em um campo de entrada vazio e deixá-lo sem fazer alterações.",
     page: {
+      name: "Um código de página que não é visível para os respondentes.",
+      description: "Digite um subtítulo de página.",
+      navigationTitle: "Uma legenda exibida em um botão de navegação na barra de progresso ou sumário. Se você deixar esse campo vazio, o botão de navegação usará o título ou o nome da página. Para ativar a barra de progresso ou sumário, vá para \"Pesquisa\" → \"Navegação\".",
       timeLimit: "Um intervalo de tempo em segundos após o qual o questionário avança automaticamente para a próxima página.",
       visibleIf: "Use o ícone de varinha mágica para definir uma regra condicional que determina a visibilidade da página.",
       enableIf: "Use o ícone de varinha mágica para definir uma regra condicional que desabilita o modo somente leitura da página.",
@@ -1543,6 +1550,7 @@ var portugueseTranslation = {
     choicesFromQuestionMode: "Escolha entre: \"Todos\" - copia todas as opções de escolha da pergunta selecionada; \"Selecionado\" - copia dinamicamente apenas as opções de escolha selecionadas; \"Não selecionado\" - copia dinamicamente apenas as opções de escolha não selecionadas. As opções \"Nenhum\" e \"Outros\" são copiadas por padrão se ativadas na pergunta de origem.",
     choiceValuesFromQuestion: "Nos tipos de pergunta de seleção única e múltipla, cada opção de escolha tem um ID e um valor de exibição. Essa configuração especifica qual pergunta de matriz, coluna ou painel deve fornecer as IDs.",
     choiceTextsFromQuestion: "Nos tipos de pergunta de seleção única e múltipla, cada opção de escolha tem um ID e um valor de exibição. Essa configuração especifica qual coluna de matriz ou pergunta de painel deve fornecer os textos de exibição.",
+    allowCustomChoices: "Selecione para permitir que os respondentes adicionem suas próprias opções se a opção desejada não estiver disponível na lista suspensa. As opções personalizadas serão armazenadas apenas temporariamente durante a sessão atual do navegador.",
     showOtherItem: "Quando selecionada, os usuários podem incluir entrada adicional em uma caixa de comentário separada.",
     separateSpecialChoices: "Exibe cada opção de opção especial (\"Nenhuma\", \"Outra\", \"Selecionar Tudo\") em uma nova linha, mesmo ao usar um layout de várias colunas.",
     path: "Especifique o local dentro do conjunto de dados de serviço onde a matriz de objetos de destino está localizada. Deixe em branco se a URL já apontar para a matriz.",
@@ -2705,3 +2713,11 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Define o número de linhas exibidas nas áreas de texto para comentários de perguntas. Se a entrada ocupar mais linhas, a barra de rolagem será exibida."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Valor de exibição padrão para textos dinâmicos"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Um valor exibido em perguntas HTML e nos títulos dinâmicos e descrições de elementos de pesquisa quando o valor da pergunta está vazio."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Numeração recursiva"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Largura do título da pergunta"
+// pe.allowCustomChoices: "Allow custom choices" => "Permitir escolhas personalizadas"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Define a largura consistente para os títulos das perguntas quando elas estão alinhadas à esquerda de suas caixas de perguntas. Aceita valores CSS (px, %, in, pt, etc.)."
+// page.name: "A page ID that is not visible to respondents." => "Um código de página que não é visível para os respondentes."
+// page.description: "Type a page subtitle." => "Digite um subtítulo de página."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Uma legenda exibida em um botão de navegação na barra de progresso ou sumário. Se você deixar esse campo vazio, o botão de navegação usará o título ou o nome da página. Para ativar a barra de progresso ou sumário, vá para \"Pesquisa\" → \"Navegação\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Selecione para permitir que os respondentes adicionem suas próprias opções se a opção desejada não estiver disponível na lista suspensa. As opções personalizadas serão armazenadas apenas temporariamente durante a sessão atual do navegador."

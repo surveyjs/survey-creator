@@ -346,10 +346,10 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-
   .svc-toolbox {
     width: 100%;
   }
-  .svc-toolbox .svc-scroll__scroller {
+  .svc-toolbox .sv-scroll__scroller {
     direction: initial;
   }
-  .svc-toolbox .svc-scroll__scrollbar {
+  .svc-toolbox .sv-scroll__scrollbar {
     inset-inline-end: 0;
     inset-inline-start: initial;
   }

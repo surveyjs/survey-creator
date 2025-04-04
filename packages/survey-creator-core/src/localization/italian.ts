@@ -338,6 +338,7 @@ var italianTranslation = {
       titleLocation: "Allineamento del titolo del pannello",
       descriptionLocation: "Allineamento della descrizione del pannello",
       templateQuestionTitleLocation: "Allineamento del titolo della domanda",
+      templateQuestionTitleWidth: "Larghezza del titolo della domanda",
       templateErrorLocation: "Allineamento dei messaggi di errore",
       newPanelPosition: "Nuova posizione del pannello",
       showRangeInProgress: "Visualizzare la barra di avanzamento",
@@ -568,6 +569,7 @@ var italianTranslation = {
     cellType: "Tipo di cella",
     colCount: "Numero di colonne",
     choicesOrder: "Ordinamento delle scelte",
+    allowCustomChoices: "Consenti scelte personalizzate",
     visible: "Visibile",
     isRequired: "Obbligatoria",
     markRequired: "Contrassegna come richiesto",
@@ -1190,6 +1192,7 @@ var italianTranslation = {
       onPage: "Inizia da capo in ogni pagina",
       onpanel: "Ripristina su ogni pannello",
       onPanel: "Ripristina su ogni pannello",
+      recursive: "Numerazione ricorsiva",
       onSurvey: "Continua con l'indagine",
       off: "Nessuna numerazione"
     },
@@ -1381,6 +1384,7 @@ var italianTranslation = {
       enableIf: "Utilizzare l'icona della bacchetta magica per impostare una regola condizionale che disabiliti la modalità di sola lettura per il pannello.",
       requiredIf: "Utilizza l'icona della bacchetta magica per impostare una regola condizionale che impedisca l'invio dell'indagine a meno che almeno una domanda nidificata non abbia una risposta.",
       templateQuestionTitleLocation: "Si applica a tutte le domande all'interno di questo pannello. Se si desidera ignorare questa impostazione, definire le regole di allineamento del titolo per le singole domande. L'opzione \"Eredita\" applica l'impostazione a livello di pagina (se impostata) o a livello di indagine (\"In alto\" per impostazione predefinita).",
+      templateQuestionTitleWidth: "Imposta una larghezza coerente per i titoli delle domande quando sono allineati a sinistra delle caselle delle domande. Accetta valori CSS (px, %, in, pt, ecc.).",
       templateErrorLocation: "Imposta la posizione di un messaggio di errore in relazione a una domanda con input non valido. Scegli tra: \"In alto\" - un testo di errore viene posizionato nella parte superiore della casella della domanda; \"In basso\": un testo di errore viene inserito nella parte inferiore della casella della domanda. L'opzione \"Eredita\" applica l'impostazione a livello di pagina (se impostata) o a livello di indagine (\"In alto\" per impostazione predefinita).",
       errorLocation: "Imposta la posizione di un messaggio di errore in relazione a tutte le domande all'interno del pannello. L'opzione \"Eredita\" applica l'impostazione a livello di pagina (se impostata) o a livello di indagine.",
       page: "Riposiziona il pannello alla fine di una pagina selezionata.",
@@ -1516,6 +1520,9 @@ var italianTranslation = {
     timeLimitPerPage: "Un intervallo di tempo in secondi dopo il quale il rilevamento avanza automaticamente alla pagina successiva.",
     validateVisitedEmptyFields: "Abilitare questa opzione per attivare la convalida quando un utente si concentra su un campo di input vuoto e poi lo abbandona senza apportare modifiche.",
     page: {
+      name: "Un ID pagina che non è visibile ai rispondenti.",
+      description: "Digita un sottotitolo della pagina.",
+      navigationTitle: "Didascalia visualizzata su un pulsante di navigazione nella barra di avanzamento o nel sommario. Se si lascia vuoto questo campo, il pulsante di navigazione utilizzerà il titolo o il nome della pagina. Per abilitare la barra di avanzamento o il sommario, vai su \"Sondaggio\" → \"Navigazione\".",
       timeLimit: "Un intervallo di tempo in secondi dopo il quale il rilevamento avanza automaticamente alla pagina successiva.",
       visibleIf: "Usa l'icona della bacchetta magica per impostare una regola condizionale che determina la visibilità della pagina.",
       enableIf: "Utilizzare l'icona della bacchetta magica per impostare una regola condizionale che disabilita la modalità di sola lettura per la pagina.",
@@ -1543,6 +1550,7 @@ var italianTranslation = {
     choicesFromQuestionMode: "Scegli tra: \"Tutte\" - copia tutte le opzioni di scelta dalla domanda selezionata; \"Selezionato\" - copia dinamicamente solo le opzioni di scelta selezionate; \"Non selezionato\" - copia dinamicamente solo le opzioni di scelta non selezionate. Le opzioni \"Nessuna\" e \"Altro\" vengono copiate per impostazione predefinita se abilitate nella domanda di origine.",
     choiceValuesFromQuestion: "Nei tipi di domande a selezione singola e multipla, ogni opzione di scelta ha un ID e un valore visualizzato. Questa impostazione specifica quale colonna matrice o domanda del pannello deve fornire gli ID.",
     choiceTextsFromQuestion: "Nei tipi di domande a selezione singola e multipla, ogni opzione di scelta ha un ID e un valore visualizzato. Questa impostazione specifica quale colonna matrice o domanda del pannello deve fornire i testi visualizzati.",
+    allowCustomChoices: "Seleziona questa opzione per consentire ai rispondenti di aggiungere le proprie scelte se l'opzione desiderata non è disponibile nel menu a discesa. Le scelte personalizzate verranno memorizzate solo temporaneamente per la durata della sessione corrente del browser.",
     showOtherItem: "Quando questa opzione è selezionata, gli utenti possono includere input aggiuntivi in una casella di commento separata.",
     separateSpecialChoices: "Visualizza ogni opzione di scelta speciale (\"Nessuna\", \"Altro\", \"Seleziona tutto\") su una nuova riga, anche quando si utilizza un layout a più colonne.",
     path: "Specificare la posizione all'interno del set di dati del servizio in cui si trova la matrice di oggetti di destinazione. Lasciare vuoto se l'URL punta già all'array.",
@@ -2798,3 +2806,11 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Imposta il numero di righe visualizzate nelle aree di testo per i commenti alle domande. Se l'input occupa più righe, viene visualizzata la barra di scorrimento."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Valore di visualizzazione predefinito per i testi dinamici"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Un valore visualizzato nelle domande HTML e nei titoli dinamici e nelle descrizioni degli elementi dell'indagine quando il valore della domanda è vuoto."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Numerazione ricorsiva"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Larghezza del titolo della domanda"
+// pe.allowCustomChoices: "Allow custom choices" => "Consenti scelte personalizzate"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Imposta una larghezza coerente per i titoli delle domande quando sono allineati a sinistra delle caselle delle domande. Accetta valori CSS (px, %, in, pt, ecc.)."
+// page.name: "A page ID that is not visible to respondents." => "Un ID pagina che non è visibile ai rispondenti."
+// page.description: "Type a page subtitle." => "Digita un sottotitolo della pagina."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Didascalia visualizzata su un pulsante di navigazione nella barra di avanzamento o nel sommario. Se si lascia vuoto questo campo, il pulsante di navigazione utilizzerà il titolo o il nome della pagina. Per abilitare la barra di avanzamento o il sommario, vai su \"Sondaggio\" → \"Navigazione\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Seleziona questa opzione per consentire ai rispondenti di aggiungere le proprie scelte se l'opzione desiderata non è disponibile nel menu a discesa. Le scelte personalizzate verranno memorizzate solo temporaneamente per la durata della sessione corrente del browser."

@@ -6,8 +6,7 @@
         (click)="category.toggleState()" [key2click] [class.svc-toolbox__category-header--collapsed]="toolbox.canCollapseCategories" >
         <span class="svc-toolbox__category-title">{{category.title}}</span>
         <div *ngIf="toolbox.canCollapseCategories" class="svc-toolbox__category-header__controls">
-          <svg [iconName]="'icon-arrow-down'" class="svc-toolbox__category-header__button svc-string-editor__button--expand" [size]="'auto'" sv-ng-svg-icon [visible]="category.collapsed"></svg>
-          <svg [iconName]="'icon-arrow-up'" class="svc-toolbox__category-header__button svc-string-editor__button--collapse" [size]="'auto'" sv-ng-svg-icon [visible]="!category.collapsed"></svg>
+          <svg [iconName]="category.iconName" [class]="category.iconClassName" [size]="'auto'" sv-ng-svg-icon></svg>
         </div>
       </div>
     </div>

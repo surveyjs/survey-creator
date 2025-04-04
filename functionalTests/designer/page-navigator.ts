@@ -61,8 +61,8 @@ test("Check page navigator track scrolling", async (t) => {
   await t
     .expect(Selector(firstPageNavigatorItem).exists).ok()
     .expect(Selector(lastPageNavigatorItem).exists).notOk()
-    .scroll(Selector(".svc-tab-designer--with-surface-tools .svc-scroll__scroller"), "bottomRight")
-    .scroll(Selector(".svc-tab-designer--with-surface-tools .svc-scroll__scroller"), "bottomRight")
+    .scroll(Selector(".svc-tab-designer--with-surface-tools .sv-scroll__scroller"), "bottomRight")
+    .scroll(Selector(".svc-tab-designer--with-surface-tools .sv-scroll__scroller"), "bottomRight")
     .expect(Selector(firstPageNavigatorItem).exists).notOk()
     .expect(Selector(lastPageNavigatorItem).exists).ok();
 });

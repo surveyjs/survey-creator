@@ -338,6 +338,7 @@ export var hebrewStrings = {
       titleLocation: "יישור כותרת חלונית",
       descriptionLocation: "יישור תיאור החלונית",
       templateQuestionTitleLocation: "יישור כותרת שאלה",
+      templateQuestionTitleWidth: "רוחב כותרת השאלה",
       templateErrorLocation: "יישור הודעת שגיאה",
       newPanelPosition: "מיקום חדש בלוח",
       showRangeInProgress: "הצגת מד ההתקדמות",
@@ -568,6 +569,7 @@ export var hebrewStrings = {
     cellType: "סוג התא",
     colCount: "מספר העמודות",
     choicesOrder: "סדר מיון של ברירות הבחירה",
+    allowCustomChoices: "מתן אפשרות לבחירות מותאמות אישית",
     visible: "נראה",
     isRequired: "נדרש",
     markRequired: "סמן כשדה חובה",
@@ -1190,6 +1192,7 @@ export var hebrewStrings = {
       onPage: "איפוס בכל עמוד",
       onpanel: "איפוס בכל חלונית",
       onPanel: "איפוס בכל חלונית",
+      recursive: "מספור רקורסיבי",
       onSurvey: "המשך לאורך הסקר",
       off: "ללא מספור"
     },
@@ -1381,6 +1384,7 @@ export var hebrewStrings = {
       enableIf: "השתמשו בסמל מטה הקסם כדי להגדיר כלל מותנה שמשבית את מצב הקריאה בלבד של החלונית.",
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
       templateQuestionTitleLocation: "חל על כל השאלות בפאנל זה. אם ברצונך לעקוף הגדרה זו, הגדר כללי יישור כותרת עבור שאלות בודדות. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
+      templateQuestionTitleWidth: "מגדיר רוחב עקבי לכותרות השאלות כשהן מיושרות לשמאל של תיבות השאלה שלהן. מקבל ערכי CSS (px, %, in, pt וכדומה).",
       templateErrorLocation: "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר (\"למעלה\" כברירת מחדל).",
       errorLocation: "קובע את המיקום של הודעת שגיאה ביחס לכל השאלות בחלונית. האפשרות \"הירושה\" מחילה את ההגדרה ברמת הדף (אם הוגדרה) או ברמת הסקר.",
       page: "מיקום מחדש של החלונית לסוף עמוד שנבחר.",
@@ -1516,6 +1520,9 @@ export var hebrewStrings = {
     timeLimitPerPage: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
     validateVisitedEmptyFields: "הפעל אפשרות זו כדי להפעיל אימות כאשר משתמש מתמקד בשדה קלט ריק ולאחר מכן עוזב אותו מבלי לבצע שינויים.",
     page: {
+      name: "מזהה דף שאינו גלוי למשיבים.",
+      description: "הקלד כותרת משנה של דף.",
+      navigationTitle: "כיתוב המוצג בלחצן ניווט בסרגל ההתקדמות או בתוכן העניינים (TOC). אם תשאיר שדה זה ריק, לחצן הניווט ישתמש בכותרת הדף או בשם הדף. כדי להפעיל את מד ההתקדמות או תוכן העניינים, עבור אל \"סקר\" →\"ניווט\".",
       timeLimit: "מרווח זמן בשניות שלאחריו הסקר מתקדם אוטומטית לעמוד הבא.",
       visibleIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי הקובע את תצוגת העמוד.",
       enableIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי שמשבית את מצב הקריאה בלבד של העמוד.",
@@ -1543,6 +1550,7 @@ export var hebrewStrings = {
     choicesFromQuestionMode: "בחר מתוך: \"הכל\" - מעתיק את כל אפשרויות הבחירה מהשאלה שנבחרה; \"נבחר\" - מעתיק באופן דינמי רק אפשרויות בחירה שנבחרו; \"לא נבחר\" - מעתיק באופן דינמי רק אפשרויות בחירה שלא נבחרו. האפשרויות \"ללא\" ו\"אחר\" מועתקות כברירת מחדל אם הן מופעלות בשאלת המקור.",
     choiceValuesFromQuestion: "בסוגי שאלות של בחירה בודדת ושאלות מרובות, לכל אפשרות בחירה יש מזהה וערך תצוגה. הגדרה זו מציינת איזו עמודת מטריצה או שאלת חלונית יספקו את המזהים.",
     choiceTextsFromQuestion: "בסוגי שאלות של בחירה בודדת ושאלות מרובות, לכל אפשרות בחירה יש מזהה וערך תצוגה. הגדרה זו מציינת איזו שאלת עמודת מטריצה או חלונית תספק את טקסטי התצוגה.",
+    allowCustomChoices: "בחר כדי לאפשר למשיבים להוסיף אפשרויות משלהם אם האפשרות הרצויה אינה זמינה ברשימה הנפתחת. אפשרויות מותאמות אישית יאוחסנו באופן זמני בלבד למשך הפעלת הדפדפן הנוכחית.",
     showOtherItem: "כשבוחרים באפשרות זו, משתמשים יכולים לכלול קלט נוסף בתיבת הערות נפרדת.",
     separateSpecialChoices: "מציג כל אפשרות בחירה מיוחדת (\"ללא\", \"אחר\", \"בחר הכל\") בשורה חדשה, גם בשעת שימוש בפריסה מרובת עמודות.",
     path: "ציין את המיקום בתוך ערכת נתוני השירות שבו ממוקם מערך האובייקטים המשמש כיעד. השאר ריק אם כתובת ה- URL כבר מצביעה על המערך.",
@@ -2604,3 +2612,11 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "מגדיר את מספר השורות המוצגות באזורי טקסט להערות שאלה. אם הקלט תופס שורות נוספות, פס הגלילה מופיע."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "ערך תצוגה המוגדר כברירת מחדל לטקסטים דינמיים"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "ערך המוצג בשאלות HTML ובכותרות ובתיאורים הדינמיים של רכיבי סקר כאשר ערך השאלה ריק."
+// showQuestionNumbers.recursive: "Recursive numbering" => "מספור רקורסיבי"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "רוחב כותרת השאלה"
+// pe.allowCustomChoices: "Allow custom choices" => "מתן אפשרות לבחירות מותאמות אישית"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "מגדיר רוחב עקבי לכותרות השאלות כשהן מיושרות לשמאל של תיבות השאלה שלהן. מקבל ערכי CSS (px, %, in, pt וכדומה)."
+// page.name: "A page ID that is not visible to respondents." => "מזהה דף שאינו גלוי למשיבים."
+// page.description: "Type a page subtitle." => "הקלד כותרת משנה של דף."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "כיתוב המוצג בלחצן ניווט בסרגל ההתקדמות או בתוכן העניינים (TOC). אם תשאיר שדה זה ריק, לחצן הניווט ישתמש בכותרת הדף או בשם הדף. כדי להפעיל את מד ההתקדמות או תוכן העניינים, עבור אל \"סקר\" →\"ניווט\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "בחר כדי לאפשר למשיבים להוסיף אפשרויות משלהם אם האפשרות הרצויה אינה זמינה ברשימה הנפתחת. אפשרויות מותאמות אישית יאוחסנו באופן זמני בלבד למשך הפעלת הדפדפן הנוכחית."

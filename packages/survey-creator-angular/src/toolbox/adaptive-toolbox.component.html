@@ -10,7 +10,7 @@
         <div class="svc-toolbox__category-separator svc-toolbox__category-separator--search"></div>
       </div>
       <div *ngIf="toolbox.showPlaceholder" class="svc-toolbox__placeholder">{{toolbox.toolboxNoResultsFound}}</div>
-      <svc-scroll>
+      <sv-scroll>
         <ng-container *ngIf="!toolbox.showInSingleCategory">
           <svc-toolbox-category *ngFor="let category of toolbox.categories" [category]="category"
             [toolbox]="toolbox"></svc-toolbox-category>
@@ -23,7 +23,7 @@
             </ng-container>
           </div>
         </ng-container>
-      </svc-scroll>
+      </sv-scroll>
     </div>
   </div>
 </ng-template>

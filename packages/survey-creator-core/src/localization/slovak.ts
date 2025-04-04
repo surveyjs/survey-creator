@@ -338,6 +338,7 @@ export var skStrings = {
       titleLocation: "Zarovnanie názvu panela",
       descriptionLocation: "Zarovnanie popisu panela",
       templateQuestionTitleLocation: "Zarovnanie názvu otázky",
+      templateQuestionTitleWidth: "Šírka názvu otázky",
       templateErrorLocation: "Zarovnanie chybových hlásení",
       newPanelPosition: "Nové umiestnenie panela",
       showRangeInProgress: "Zobrazenie indikátora priebehu",
@@ -568,6 +569,7 @@ export var skStrings = {
     cellType: "Typ bunky",
     colCount: "Počet stĺpcov",
     choicesOrder: "Poradie vybratých možností",
+    allowCustomChoices: "Povolenie vlastných volieb",
     visible: "Je viditeľné?",
     isRequired: "Vyžaduje sa?",
     markRequired: "Označiť podľa potreby",
@@ -1190,6 +1192,7 @@ export var skStrings = {
       onPage: "Obnoviť na každej stránke",
       onpanel: "Resetovať na každom paneli",
       onPanel: "Resetovať na každom paneli",
+      recursive: "Rekurzívne číslovanie",
       onSurvey: "Pokračujte v prieskume",
       off: "Bez číslovania"
     },
@@ -1381,6 +1384,7 @@ export var skStrings = {
       enableIf: "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre panel.",
       requiredIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď.",
       templateQuestionTitleLocation: "Vzťahuje sa na všetky otázky v tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\").",
+      templateQuestionTitleWidth: "Nastaví konzistentnú šírku názvov otázok, keď sú zarovnané naľavo od polí otázok. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
       templateErrorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\").",
       errorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu ku všetkým otázkam v paneli. Možnosť Zdediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu.",
       page: "Premiestni panel na koniec vybratej strany.",
@@ -1516,6 +1520,9 @@ export var skStrings = {
     timeLimitPerPage: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
     validateVisitedEmptyFields: "Povoľte túto možnosť, ak chcete spustiť overenie, keď sa používateľ zameria na prázdne vstupné pole a potom ho opustí bez vykonania akýchkoľvek zmien.",
     page: {
+      name: "Identifikátor stránky, ktorý nie je viditeľný pre respondentov.",
+      description: "Zadajte podnadpis strany.",
+      navigationTitle: "Titulok zobrazený na navigačnom tlačidle na indikátore priebehu alebo obsahu. Ak toto pole necháte prázdne, navigačné tlačidlo použije názov stránky alebo názov stránky. Ak chcete povoliť indikátor priebehu alebo obsah, prejdite na \"Prieskum\" → \"Navigácia\".",
       timeLimit: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
       visibleIf: "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré určuje viditeľnosť stránky.",
       enableIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre stránku.",
@@ -1543,6 +1550,7 @@ export var skStrings = {
     choicesFromQuestionMode: "Vyberte si z: \"Všetko\" - skopíruje všetky možnosti výberu z vybranej otázky; \"Vybraté\" - dynamicky kopíruje iba vybrané možnosti výberu; \"Nevybraté\" - dynamicky kopíruje iba nevybraté možnosti výberu. Možnosti \"Žiadne\" a \"Iné\" sa predvolene kopírujú, ak sú povolené v otázke zdroja.",
     choiceValuesFromQuestion: "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo panelová otázka má poskytnúť ID.",
     choiceTextsFromQuestion: "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo otázka panela by mala poskytovať zobrazované texty.",
+    allowCustomChoices: "Vyberte, ak chcete respondentom umožniť pridať vlastné možnosti, ak požadovaná možnosť nie je k dispozícii v rozbaľovacej ponuke. Vlastné voľby sa budú ukladať iba dočasne počas trvania aktuálnej relácie prehliadača.",
     showOtherItem: "Ak je táto voľba vybratá, používatelia môžu zahrnúť ďalšie vstupy do samostatného poľa komentára.",
     separateSpecialChoices: "Zobrazí každú možnosť špeciálnej voľby (\"Žiadne\", \"Iné\", \"Vybrať všetko\") na novom riadku, a to aj pri použití rozloženia s viacerými stĺpcami.",
     path: "Zadajte umiestnenie v množine údajov služby, kde sa nachádza cieľové pole objektov. Ak URL adresa už odkazuje na pole, nechajte prázdne.",
@@ -2990,3 +2998,11 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre k otázkam. Ak vstup zaberie viac riadkov, zobrazí sa posúvač."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Predvolená zobrazená hodnota pre dynamické texty"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Hodnota zobrazená v otázkach HTML a v dynamických názvoch a popisoch prvkov prieskumu, keď je hodnota otázky prázdna."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekurzívne číslovanie"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Šírka názvu otázky"
+// pe.allowCustomChoices: "Allow custom choices" => "Povolenie vlastných volieb"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentnú šírku názvov otázok, keď sú zarovnané naľavo od polí otázok. Akceptuje hodnoty CSS (px, %, in, pt atď.)."
+// page.name: "A page ID that is not visible to respondents." => "Identifikátor stránky, ktorý nie je viditeľný pre respondentov."
+// page.description: "Type a page subtitle." => "Zadajte podnadpis strany."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Titulok zobrazený na navigačnom tlačidle na indikátore priebehu alebo obsahu. Ak toto pole necháte prázdne, navigačné tlačidlo použije názov stránky alebo názov stránky. Ak chcete povoliť indikátor priebehu alebo obsah, prejdite na \"Prieskum\" → \"Navigácia\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Vyberte, ak chcete respondentom umožniť pridať vlastné možnosti, ak požadovaná možnosť nie je k dispozícii v rozbaľovacej ponuke. Vlastné voľby sa budú ukladať iba dočasne počas trvania aktuálnej relácie prehliadača."

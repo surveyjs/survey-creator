@@ -3,7 +3,7 @@
     <svc-toolbox *ngIf="model.isToolboxVisible" [model]="creator"></svc-toolbox>
   </div>
   <div class="svc-tab-designer" [class]="model.getRootCss()" (click)="model.clickDesigner()">
-    <svc-scroll>
+    <sv-scroll>
       <div class="svc-tab-designer_content">
         <ng-container *ngIf="model.showPlaceholder">
           <div *ngIf="creator.showHeaderInEmptySurvey && creator.allowEditSurveyTitle" class="svc-designer-header">
@@ -23,6 +23,6 @@
           <svc-designer-survey [model]="model"></svc-designer-survey>
         </ng-container>
       </div>
-    </svc-scroll>
+    </sv-scroll>
   </div>
 </ng-template>

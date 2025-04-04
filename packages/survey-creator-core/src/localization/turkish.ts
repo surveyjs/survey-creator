@@ -338,6 +338,7 @@ export var turkishStrings = {
       titleLocation: "Panel başlığı hizalaması",
       descriptionLocation: "Panel açıklaması hizalaması",
       templateQuestionTitleLocation: "Soru başlığı hizalaması",
+      templateQuestionTitleWidth: "Soru başlığı genişliği",
       templateErrorLocation: "Hata iletisi hizalaması",
       newPanelPosition: "Yeni panel konumu",
       showRangeInProgress: "İlerleme çubuğunu gösterme",
@@ -568,6 +569,7 @@ export var turkishStrings = {
     cellType: "Hücre tipi",
     colCount: "Kolon sayısı",
     choicesOrder: "Seçenek sırasını seç",
+    allowCustomChoices: "Özel seçimlere izin ver",
     visible: "Görünür?",
     isRequired: "Zorunlu?",
     markRequired: "Gerektiği gibi işaretleyin",
@@ -1190,6 +1192,7 @@ export var turkishStrings = {
       onPage: "Her sayfada sıfırla",
       onpanel: "Her panelde sıfırla",
       onPanel: "Her panelde sıfırla",
+      recursive: "Özyinelemeli numaralandırma",
       onSurvey: "Ankete devam edin",
       off: "Numaralandırma yok"
     },
@@ -1381,6 +1384,7 @@ export var turkishStrings = {
       enableIf: "Panelin salt okunur modunu devre dışı bırakan koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       requiredIf: "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       templateQuestionTitleLocation: "Bu paneldeki tüm sorular için geçerlidir. Bu ayarı geçersiz kılmak istiyorsanız, tek tek sorular için başlık hizalama kuralları tanımlayın. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular.",
+      templateQuestionTitleWidth: "Soru başlıkları soru kutularının soluna hizalandığında tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       templateErrorLocation: "Geçersiz girişi olan bir soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Üst\") uygular.",
       errorLocation: "Paneldeki tüm sorularla ilgili olarak bir hata mesajının konumunu ayarlar. \"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını uygular.",
       page: "Paneli seçili sayfanın sonuna yeniden konumlandırır.",
@@ -1516,6 +1520,9 @@ export var turkishStrings = {
     timeLimitPerPage: "Anketin otomatik olarak bir sonraki sayfaya ilerlediği saniye cinsinden bir zaman aralığı.",
     validateVisitedEmptyFields: "Bir kullanıcı boş bir giriş alanına odaklandığında ve ardından herhangi bir değişiklik yapmadan bu alandan ayrıldığında doğrulamayı tetiklemek için bu seçeneği etkinleştirin.",
     page: {
+      name: "Yanıtlayanlar tarafından görülemeyen bir sayfa kimliği.",
+      description: "Bir sayfa alt başlığı yazın.",
+      navigationTitle: "İlerleme çubuğundaki veya içindekiler tablosundaki (TOC) bir gezinti düğmesinde görüntülenen resim yazısı. Bu alanı boş bırakırsanız, gezinme düğmesi sayfa başlığını veya sayfa adını kullanır. İlerleme çubuğunu veya İçindekiler'i etkinleştirmek için \"Anket\" → \"Gezinme\"ye gidin.",
       timeLimit: "Anketin otomatik olarak bir sonraki sayfaya ilerlediği saniye cinsinden bir zaman aralığı.",
       visibleIf: "Sayfa görünürlüğünü belirleyen koşullu bir kural belirlemek için sihirli değnek simgesini kullanın.",
       enableIf: "Sayfanın salt okunur modunu devre dışı bırakan koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
@@ -1543,6 +1550,7 @@ export var turkishStrings = {
     choicesFromQuestionMode: "Şunlar arasından seçim yapın: \"Tümü\" - seçilen sorudaki tüm seçim seçeneklerini kopyalar; \"Seçili\" - yalnızca seçilen seçim seçeneklerini dinamik olarak kopyalar; \"Seçilmemiş\" - yalnızca seçilmemiş seçim seçeneklerini dinamik olarak kopyalar. \"Yok\" ve \"Diğer\" seçenekleri, kaynak soruda etkinleştirilmişse varsayılan olarak kopyalanır.",
     choiceValuesFromQuestion: "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, kimlikleri hangi matris, sütun veya panel sorusunun sağlaması gerektiğini belirtir.",
     choiceTextsFromQuestion: "Tekli ve çok seçimli soru tiplerinde, her seçim seçeneğinin bir kimliği ve görünen değeri vardır. Bu ayar, hangi matris sütun veya panel sorusunun görüntü metinlerini sağlaması gerektiğini belirtir.",
+    allowCustomChoices: "İstenen seçenek açılır menüde mevcut değilse, yanıtlayanların kendi seçimlerini eklemesine izin vermek için bunu seçin. Özel seçimler yalnızca geçerli tarayıcı oturumu süresince geçici olarak saklanacaktır.",
     showOtherItem: "Seçildiğinde, kullanıcılar ayrı bir yorum kutusuna ek girdi ekleyebilir.",
     separateSpecialChoices: "Her özel seçim seçeneğini (\"Yok\", \"Diğer\", \"Tümünü Seç\") çok sütunlu bir düzen kullanırken bile yeni bir satırda görüntüler.",
     path: "Hizmet veri kümesinde, hedef nesne dizisinin bulunduğu konumu belirtin. URL zaten diziye işaret ediyorsa boş bırakın.",
@@ -3032,3 +3040,11 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Soru yorumları için metin alanlarında görüntülenen satır sayısını ayarlar. Giriş daha fazla satır kaplıyorsa, kaydırma çubuğu görünür."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Dinamik metinler için varsayılan görüntüleme değeri"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML sorularında ve anket öğelerinin dinamik başlıklarında ve açıklamalarında, soru değeri boş olduğunda görüntülenen bir değer."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Özyinelemeli numaralandırma"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Soru başlığı genişliği"
+// pe.allowCustomChoices: "Allow custom choices" => "Özel seçimlere izin ver"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Soru başlıkları soru kutularının soluna hizalandığında tutarlı genişlik ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder."
+// page.name: "A page ID that is not visible to respondents." => "Yanıtlayanlar tarafından görülemeyen bir sayfa kimliği."
+// page.description: "Type a page subtitle." => "Bir sayfa alt başlığı yazın."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "İlerleme çubuğundaki veya içindekiler tablosundaki (TOC) bir gezinti düğmesinde görüntülenen resim yazısı. Bu alanı boş bırakırsanız, gezinme düğmesi sayfa başlığını veya sayfa adını kullanır. İlerleme çubuğunu veya İçindekiler'i etkinleştirmek için \"Anket\" → \"Gezinme\"ye gidin."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "İstenen seçenek açılır menüde mevcut değilse, yanıtlayanların kendi seçimlerini eklemesine izin vermek için bunu seçin. Özel seçimler yalnızca geçerli tarayıcı oturumu süresince geçici olarak saklanacaktır."

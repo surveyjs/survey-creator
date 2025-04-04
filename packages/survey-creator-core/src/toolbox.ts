@@ -113,6 +113,13 @@ export class QuestionToolboxCategory extends Base {
   public set collapsed(val: boolean) {
     this.collapsedValue = val;
   }
+  public get iconName() {
+    return this.collapsed ? "icon-chevrondown-24x24" : "icon-chevronup-24x24";
+  }
+  public get iconClassName() {
+    const suffixName = this.collapsed ? "expand" : "collapse";
+    return "svc-toolbox__category-header__button svc-string-editor__button--" + suffixName;
+  }
 
   @property() empty: boolean;
 
@@ -251,12 +258,14 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     return this.items?.filter(i => i.id === name)[0];
   }
 
+  protected getGroupComponentName(): string {
+    return QuestionToolbox.defaultItemGroupComponent;
+  }
   public addSubitems(items: Array<QuestionToolboxItem>) {
     if (!items || items.length < 1) return;
 
     this.setSubItems({ items: items });
     this.popupModel.getAreaCallback = this.getArea;
-    this.component = QuestionToolbox.defaultItemGroupComponent;
   }
   /**
    * Removes all subitems from this toolbox item.
@@ -378,7 +387,7 @@ export class QuestionToolbox
     return ".svc-toolbox__category>.svc-toolbox__tool--action";
   }
   public get containerSelector(): string {
-    return ".svc-scroll__scroller";
+    return ".sv-scroll__scroller";
   }
 
   public static getQuestionDefaultSettings(questionType: string): any {

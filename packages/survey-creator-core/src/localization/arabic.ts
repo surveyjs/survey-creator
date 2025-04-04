@@ -338,6 +338,7 @@ export var arStrings = {
       titleLocation: "محاذاة عنوان اللوحة",
       descriptionLocation: "محاذاة وصف اللوحة",
       templateQuestionTitleLocation: "محاذاة عنوان السؤال",
+      templateQuestionTitleWidth: "عرض عنوان السؤال",
       templateErrorLocation: "محاذاة رسالة الخطأ",
       newPanelPosition: "موقع لوحة جديد",
       showRangeInProgress: "إظهار شريط التقدم",
@@ -568,6 +569,7 @@ export var arStrings = {
     cellType: "نوع الخلية",
     colCount: "عدد الأعمدة",
     choicesOrder: "إختر ترتيب الإختيارات",
+    allowCustomChoices: "السماح بالخيارات المخصصة",
     visible: "مرئي؟",
     isRequired: "مطلوب؟",
     markRequired: "وضع علامة كمطلوب",
@@ -1190,6 +1192,7 @@ export var arStrings = {
       onPage: "إعادة تعيين على كل صفحة",
       onpanel: "إعادة تعيين على كل لوحة",
       onPanel: "إعادة تعيين على كل لوحة",
+      recursive: "الترقيم المتكرر",
       onSurvey: "المتابعة عبر الاستطلاع",
       off: "لا ترقيم"
     },
@@ -1381,6 +1384,7 @@ export var arStrings = {
       enableIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للوحة.",
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
       templateQuestionTitleLocation: "ينطبق على جميع الأسئلة داخل هذه اللجنة. إذا كنت تريد إلغاء هذا الإعداد، فحدد قواعد محاذاة العنوان للأسئلة الفردية. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا).",
+      templateQuestionTitleWidth: "تعيين عرض متسق لعناوين الأسئلة عند محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ).",
       templateErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بسؤال بإدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"أعلى\" افتراضيا).",
       errorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بجميع الأسئلة داخل اللوحة. يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع.",
       page: "تغيير موضع اللوحة إلى نهاية الصفحة المحددة.",
@@ -1516,6 +1520,9 @@ export var arStrings = {
     timeLimitPerPage: "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية.",
     validateVisitedEmptyFields: "قم بتمكين هذا الخيار لتشغيل التحقق من الصحة عندما يركز المستخدم على حقل إدخال فارغ ثم يتركه دون إجراء أي تغييرات.",
     page: {
+      name: "معرف صفحة غير مرئي للمستجيبين.",
+      description: "اكتب عنوانا فرعيا للصفحة.",
+      navigationTitle: "تسمية توضيحية معروضة على زر التنقل في شريط التقدم أو جدول المحتويات (TOC). إذا تركت هذا الحقل فارغا، فسيستخدم زر التنقل عنوان الصفحة أو اسم الصفحة. لتمكين شريط التقدم أو جدول المحتويات، انتقل إلى \"استطلاع\" → \"التنقل\".",
       timeLimit: "فاصل زمني بالثواني يتقدم بعده الاستطلاع تلقائيا إلى الصفحة التالية.",
       visibleIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تحدد رؤية الصفحة.",
       enableIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تعطل وضع القراءة فقط للصفحة.",
@@ -1543,6 +1550,7 @@ export var arStrings = {
     choicesFromQuestionMode: "اختر من بين: \"الكل\" - نسخ جميع خيارات الاختيار من السؤال المحدد ؛ \"محدد\" - ينسخ ديناميكيا خيارات الاختيار المحددة فقط ؛ \"غير محدد\" - ينسخ ديناميكيا خيارات الاختيار غير المحددة فقط. يتم نسخ الخيارين \"بلا\" و \"أخرى\" افتراضيا إذا تم تمكينهما في السؤال المصدر.",
     choiceValuesFromQuestion: "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر معرفات.",
     choiceTextsFromQuestion: "في أنواع أسئلة التحديد الفردي والمتعدد ، يحتوي كل خيار اختيار على معرف وقيمة عرض. يحدد هذا الإعداد عمود المصفوفة أو سؤال اللوحة الذي يجب أن يوفر نصوص العرض.",
+    allowCustomChoices: "حدد للسماح للمستجيبين بإضافة خياراتهم الخاصة إذا لم يكن الخيار المطلوب متاحا في القائمة المنسدلة. سيتم تخزين الخيارات المخصصة مؤقتا فقط طوال مدة جلسة المتصفح الحالية.",
     showOtherItem: "عند تحديده، يمكن للمستخدمين تضمين مدخلات إضافية في مربع تعليق منفصل.",
     separateSpecialChoices: "يعرض كل خيار اختيار خاص (\"بلا\" ، \"أخرى\" ، \"تحديد الكل\") على سطر جديد ، حتى عند استخدام تخطيط متعدد الأعمدة.",
     path: "حدد الموقع داخل مجموعة بيانات الخدمة حيث يوجد الصفيف الهدف من الكائنات. اتركه فارغا إذا كان عنوان URL يشير بالفعل إلى المصفوفة.",
@@ -2951,3 +2959,11 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "لتعيين عدد الأسطر المعروضة في مناطق النص لتعليقات الأسئلة. إذا كان الإدخال يشغل المزيد من الأسطر، فسيظهر شريط التمرير."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "قيمة العرض الافتراضية للنصوص الديناميكية"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "قيمة معروضة في أسئلة HTML وفي العناوين الديناميكية وأوصاف عناصر الاستطلاع عندما تكون قيمة السؤال فارغة."
+// showQuestionNumbers.recursive: "Recursive numbering" => "الترقيم المتكرر"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "عرض عنوان السؤال"
+// pe.allowCustomChoices: "Allow custom choices" => "السماح بالخيارات المخصصة"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "تعيين عرض متسق لعناوين الأسئلة عند محاذاتها إلى يسار مربعات الأسئلة الخاصة بها. يقبل قيم CSS (بكسل ، ٪ ، في ، pt ، إلخ)."
+// page.name: "A page ID that is not visible to respondents." => "معرف صفحة غير مرئي للمستجيبين."
+// page.description: "Type a page subtitle." => "اكتب عنوانا فرعيا للصفحة."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "تسمية توضيحية معروضة على زر التنقل في شريط التقدم أو جدول المحتويات (TOC). إذا تركت هذا الحقل فارغا، فسيستخدم زر التنقل عنوان الصفحة أو اسم الصفحة. لتمكين شريط التقدم أو جدول المحتويات، انتقل إلى \"استطلاع\" → \"التنقل\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "حدد للسماح للمستجيبين بإضافة خياراتهم الخاصة إذا لم يكن الخيار المطلوب متاحا في القائمة المنسدلة. سيتم تخزين الخيارات المخصصة مؤقتا فقط طوال مدة جلسة المتصفح الحالية."

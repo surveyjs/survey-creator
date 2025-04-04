@@ -467,6 +467,31 @@ creator.saveSurveyFunc = (saveNo: number, callback: Function) => {
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue3 (linkStyle))
 
+## (Optional) Enable Ace Editor in the JSON Editor Tab
+
+The JSON Editor tab enables users to edit survey JSON schemas as text. To make the editing process more convenient, you can integrate the <a href="https://ace.c9.io/" target="_blank">Ace</a> code editor. Install the <a href="https://www.npmjs.com/package/ace-builds" target="_blank">`ace-builds`</a> package to add Ace to your project:
+
+```sh
+npm install ace-builds --save
+```
+
+Import Ace and required extensions in a Vue component that renders Survey Creator. For instance, the following code imports an extension that adds a Find/Replace dialog to Ace:
+
+```html
+<!-- components/SurveyCreator.vue -->
+<script setup lang="ts">
+// ...
+import "ace-builds/src-noconflict/ace";
+import "ace-builds/src-noconflict/ext-searchbox";
+// ...
+</script>
+<template>
+  <!-- ... -->
+</template>
+```
+
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue3 (linkStyle))
+
 ## Further Reading
 
 - [Localization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)

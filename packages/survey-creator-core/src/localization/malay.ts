@@ -338,6 +338,7 @@ export var msStrings = {
       titleLocation: "Penjajaran tajuk panel",
       descriptionLocation: "Penjajaran perihalan panel",
       templateQuestionTitleLocation: "Penjajaran tajuk soalan",
+      templateQuestionTitleWidth: "Lebar tajuk soalan",
       templateErrorLocation: "Penjajaran mesej ralat",
       newPanelPosition: "Lokasi panel baru",
       showRangeInProgress: "Tunjukkan bar kemajuan",
@@ -568,6 +569,7 @@ export var msStrings = {
     cellType: "Jenis sel",
     colCount: "Kiraan lajur",
     choicesOrder: "Pilih susunan pilihan",
+    allowCustomChoices: "Benarkan pilihan tersuai",
     visible: "Boleh dilihat?",
     isRequired: "Diperlukan?",
     markRequired: "Tandakan mengikut keperluan",
@@ -1190,6 +1192,7 @@ export var msStrings = {
       onPage: "Mengeset semula pada setiap halaman",
       onpanel: "Set semula pada setiap panel",
       onPanel: "Set semula pada setiap panel",
+      recursive: "Penomboran rekursif",
       onSurvey: "Teruskan merentasi tinjauan",
       off: "Tiada penomboran"
     },
@@ -1381,6 +1384,7 @@ export var msStrings = {
       enableIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang melumpuhkan mod baca sahaja untuk panel.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
       templateQuestionTitleLocation: "Digunakan untuk semua soalan dalam panel ini. Jika anda ingin mengubah seting ini, takrifkan peraturan penjajaran tajuk untuk soalan individu. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai).",
+      templateQuestionTitleWidth: "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia diselaraskan ke sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.).",
       templateErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan. Pilihan \"Warisan\" menggunakan peringkat halaman (jika ditetapkan) atau tetapan peringkat tinjauan (\"Atas\" secara lalai).",
       errorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan semua soalan dalam panel. Opsyen \"Warisan\" menggunakan aras halaman (jika set) atau seting aras tinjauan.",
       page: "Meletakkan semula panel di hujung halaman yang dipilih.",
@@ -1516,6 +1520,9 @@ export var msStrings = {
     timeLimitPerPage: "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya.",
     validateVisitedEmptyFields: "Dayakan pilihan ini untuk mencetuskan pengesahan apabila pengguna memfokuskan pada medan input kosong dan kemudian meninggalkannya tanpa membuat sebarang perubahan.",
     page: {
+      name: "ID halaman yang tidak dapat dilihat oleh responden.",
+      description: "Taipkan sari kata halaman.",
+      navigationTitle: "Kapsyen yang dipaparkan pada butang navigasi dalam bar kemajuan atau jadual kandungan (TOC). Jika anda membiarkan medan ini kosong, butang navigasi akan menggunakan tajuk halaman atau nama halaman. Untuk mendayakan bar kemajuan atau TOC, pergi ke \"Tinjauan\" → \"Navigasi\".",
       timeLimit: "Selang masa dalam beberapa saat selepas itu tinjauan secara automatik maju ke halaman seterusnya.",
       visibleIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menentukan keterlihatan halaman.",
       enableIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menyahdayakan mod baca sahaja untuk halaman.",
@@ -1543,6 +1550,7 @@ export var msStrings = {
     choicesFromQuestionMode: "Pilih daripada: \"Semua\" - menyalin semua pilihan pilihan daripada soalan yang dipilih; \"Dipilih\" - secara dinamik hanya menyalin pilihan pilihan yang dipilih; \"Tidak dipilih\" - secara dinamik menyalin hanya pilihan pilihan yang tidak dipilih. Pilihan \"Tiada\" dan \"Lain-lain\" disalin secara lalai jika didayakan dalam soalan sumber.",
     choiceValuesFromQuestion: "Dalam jenis soalan pilihan tunggal dan berbilang pilihan, setiap pilihan pilihan mempunyai ID dan nilai paparan. Seting ini menentukan lajur matriks atau soalan panel yang harus menyediakan ID.",
     choiceTextsFromQuestion: "Dalam jenis soalan pilihan tunggal dan berbilang pilihan, setiap pilihan pilihan mempunyai ID dan nilai paparan. Seting ini menentukan lajur matriks atau soalan panel yang harus menyediakan teks paparan.",
+    allowCustomChoices: "Pilih untuk membenarkan responden menambah pilihan mereka sendiri jika pilihan yang dikehendaki tidak tersedia dalam menu lungsur. Pilihan tersuai hanya akan disimpan buat sementara waktu sepanjang sesi penyemak imbas semasa.",
     showOtherItem: "Apabila dipilih, pengguna boleh memasukkan input tambahan dalam kotak komen berasingan.",
     separateSpecialChoices: "Memaparkan setiap pilihan pilihan khas (\"Tiada\", \"Lain\", \"Pilih Semua\") pada baris baru, walaupun menggunakan tataletak berbilang lajur.",
     path: "Tentukan lokasi dalam set data perkhidmatan yang lokasi tatasusunan sasaran objek. Biarkan kosong jika URL telah menuding ke tatasusunan.",
@@ -2991,3 +2999,11 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Menetapkan bilangan baris yang dipaparkan dalam kawasan teks untuk ulasan soalan. Jika input mengambil lebih banyak baris, bar skrol muncul."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Nilai paparan lalai untuk teks dinamik"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Nilai yang dipaparkan dalam soalan HTML dan dalam tajuk dinamik dan perihalan elemen tinjauan apabila nilai soalan kosong."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Penomboran rekursif"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Lebar tajuk soalan"
+// pe.allowCustomChoices: "Allow custom choices" => "Benarkan pilihan tersuai"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Menetapkan lebar yang konsisten untuk tajuk soalan apabila ia diselaraskan ke sebelah kiri kotak soalan mereka. Menerima nilai CSS (px, %, dalam, pt, dll.)."
+// page.name: "A page ID that is not visible to respondents." => "ID halaman yang tidak dapat dilihat oleh responden."
+// page.description: "Type a page subtitle." => "Taipkan sari kata halaman."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Kapsyen yang dipaparkan pada butang navigasi dalam bar kemajuan atau jadual kandungan (TOC). Jika anda membiarkan medan ini kosong, butang navigasi akan menggunakan tajuk halaman atau nama halaman. Untuk mendayakan bar kemajuan atau TOC, pergi ke \"Tinjauan\" → \"Navigasi\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Pilih untuk membenarkan responden menambah pilihan mereka sendiri jika pilihan yang dikehendaki tidak tersedia dalam menu lungsur. Pilihan tersuai hanya akan disimpan buat sementara waktu sepanjang sesi penyemak imbas semasa."

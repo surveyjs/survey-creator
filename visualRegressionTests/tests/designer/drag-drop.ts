@@ -419,6 +419,7 @@ test("Matrix: Property Grid: Choices: Scroll", async (t) => {
 
     await t
       .click(Selector("[data-name=\"question1\"]"), { speed: 0.5 })
+      .click(getPropertyGridCategory("General"))
       .click(getPropertyGridCategory("Choice Options"));
 
     await patchMatrixDragDropToDisableDrop();
@@ -914,5 +915,29 @@ test("Drag Drop Indicator: Inside Panel: Rows", async (t) => {
       .dragToElement(CheckboxItem, panelRow, { speed: 0.5, destinationOffsetY: 0, destinationOffsetX: 50 });
 
     await takeElementScreenshot("drag-drop-indicator-inside-panel-rows.png", Selector(".svc-question__content--panel"), t, comparer);
+  });
+});
+
+test("Huge shortcut text", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." }] }]
+    });
+    await t.resizeWindow(2560, 1440);
+
+    const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
+      window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
+      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
+      window["creator"].dragDropSurveyElements.domAdapter.clear = () => { };
+    });
+
+    await patchDragDropToShowGhostElementAfterDrop();
+
+    const q1 = Selector("[data-sv-drop-target-survey-element='q1']");
+    await t
+      .hover(q1.find(".svc-question__drag-element"), { speed: 0.1 })
+      .dragToElement(q1.find(".svc-question__drag-element"), q1, { speed: 0.1, offsetX: 10, offsetY: 10 });
+
+    await takeElementScreenshot("drag-drop-huge-shortcut-text.png", Selector(".svc-page").nth(0), t, comparer);
   });
 });

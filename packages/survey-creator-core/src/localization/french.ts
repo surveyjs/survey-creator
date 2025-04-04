@@ -338,6 +338,7 @@ var frenchTranslation = {
       titleLocation: "Alignement du titre du panneau",
       descriptionLocation: "Alignement de la description du panneau",
       templateQuestionTitleLocation: "Alignement du titre de la question",
+      templateQuestionTitleWidth: "Largeur du titre de la question",
       templateErrorLocation: "Alignement des messages d’erreur",
       newPanelPosition: "Nouvel emplacement du panneau",
       showRangeInProgress: "Afficher la barre de progression",
@@ -568,6 +569,7 @@ var frenchTranslation = {
     cellType: "Type de cellule",
     colCount: "Nombre de colonnes",
     choicesOrder: "Sélectionner l'ordre des choix",
+    allowCustomChoices: "Autoriser les choix personnalisés",
     visible: "Est visible ?",
     isRequired: "Est obligatoire ?",
     markRequired: "Marquer au besoin",
@@ -1190,6 +1192,7 @@ var frenchTranslation = {
       onPage: "Réinitialisation sur chaque page",
       onpanel: "Réinitialisation sur chaque panneau",
       onPanel: "Réinitialisation sur chaque panneau",
+      recursive: "Numérotation récursive",
       onSurvey: "Continuez tout au long de l’enquête",
       off: "Pas de numérotation"
     },
@@ -1381,6 +1384,7 @@ var frenchTranslation = {
       enableIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui désactive le mode lecture seule du panneau.",
       requiredIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui empêche l’envoi d’un sondage à moins qu’au moins une question imbriquée n’ait une réponse.",
       templateQuestionTitleLocation: "S’applique à toutes les questions de ce panneau. Si vous souhaitez remplacer ce paramètre, définissez des règles d’alignement des titres pour les questions individuelles. L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête (« Haut » par défaut).",
+      templateQuestionTitleWidth: "Définit une largeur cohérente pour les titres de questions lorsqu’ils sont alignés à gauche de leurs zones de question. Accepte les valeurs CSS (px, %, in, pt, etc.).",
       templateErrorLocation: "Définit l’emplacement d’un message d’erreur par rapport à une question dont l’entrée n’est pas valide. Choisissez entre : « Haut » - un texte d’erreur est placé en haut de la zone de question ; « Bas » - un texte d’erreur est placé en bas de la zone de question. L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête (« Haut » par défaut).",
       errorLocation: "Définit l’emplacement d’un message d’erreur par rapport à toutes les questions du panneau. L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête.",
       page: "Repositionne le panneau à la fin d’une page sélectionnée.",
@@ -1516,6 +1520,9 @@ var frenchTranslation = {
     timeLimitPerPage: "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page suivante.",
     validateVisitedEmptyFields: "Activez cette option pour déclencher la validation lorsqu’un utilisateur se concentre sur un champ de saisie vide, puis le quitte sans apporter de modifications.",
     page: {
+      name: "Un ID de page qui n’est pas visible par les personnes interrogées.",
+      description: "Tapez un sous-titre de page.",
+      navigationTitle: "Une légende affichée sur un bouton de navigation dans la barre de progression ou la table des matières (TOC). Si vous laissez ce champ vide, le bouton de navigation utilisera le titre ou le nom de la page. Pour activer la barre de progression ou la table des matières, allez dans « Sondage » → « Navigation ».",
       timeLimit: "Intervalle de temps en secondes après lequel l’enquête passe automatiquement à la page suivante.",
       visibleIf: "Utilisez l’icône de la baguette magique pour définir une règle conditionnelle qui détermine la visibilité de la page.",
       enableIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui désactive le mode lecture seule de la page.",
@@ -1543,6 +1550,7 @@ var frenchTranslation = {
     choicesFromQuestionMode: "Choisissez parmi : « Tous » - copie toutes les options de choix de la question sélectionnée ; « Sélectionné » - copie dynamiquement uniquement les options de choix sélectionnées ; « Non sélectionné » - copie dynamiquement uniquement les options de choix non sélectionnées. Les options « Aucun » et « Autre » sont copiées par défaut si elles sont activées dans la question source.",
     choiceValuesFromQuestion: "Dans les types de questions à sélection unique et à sélection multiple, chaque option de choix a un ID et une valeur d’affichage. Ce paramètre spécifie la question de matrice, de colonne ou de panneau qui doit fournir les ID.",
     choiceTextsFromQuestion: "Dans les types de questions à sélection unique et à sélection multiple, chaque option de choix a un ID et une valeur d’affichage. Ce paramètre spécifie la question de matrice, de colonne ou de panneau qui doit fournir les textes d’affichage.",
+    allowCustomChoices: "Sélectionnez cette option pour permettre aux personnes interrogées d’ajouter leurs propres choix si l’option souhaitée n’est pas disponible dans la liste déroulante. Les choix personnalisés ne seront stockés que temporairement pour la durée de la session de navigation en cours.",
     showOtherItem: "Lorsque cette option est sélectionnée, les utilisateurs peuvent inclure des entrées supplémentaires dans une zone de commentaire distincte.",
     separateSpecialChoices: "Affiche chaque option de choix spécial (« Aucun », « Autre », « Tout sélectionner ») sur une nouvelle ligne, même en cas d’utilisation d’une mise en page à plusieurs colonnes.",
     path: "Spécifiez l’emplacement dans le jeu de données de service où se trouve le tableau cible d’objets. Laissez vide si l’URL pointe déjà vers le tableau.",
@@ -3096,3 +3104,11 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Définit le nombre de lignes affichées dans les zones de texte pour les commentaires de question. Si l’entrée occupe plus de lignes, la barre de défilement apparaît."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Valeur d’affichage par défaut pour les textes dynamiques"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Valeur affichée dans les questions HTML et dans les titres et descriptions dynamiques des éléments de l’enquête lorsque la valeur de la question est vide."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Numérotation récursive"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Largeur du titre de la question"
+// pe.allowCustomChoices: "Allow custom choices" => "Autoriser les choix personnalisés"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Définit une largeur cohérente pour les titres de questions lorsqu’ils sont alignés à gauche de leurs zones de question. Accepte les valeurs CSS (px, %, in, pt, etc.)."
+// page.name: "A page ID that is not visible to respondents." => "Un ID de page qui n’est pas visible par les personnes interrogées."
+// page.description: "Type a page subtitle." => "Tapez un sous-titre de page."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Une légende affichée sur un bouton de navigation dans la barre de progression ou la table des matières (TOC). Si vous laissez ce champ vide, le bouton de navigation utilisera le titre ou le nom de la page. Pour activer la barre de progression ou la table des matières, allez dans Sondage → Navigation."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Sélectionnez cette option pour permettre aux personnes interrogées d’ajouter leurs propres choix si l’option souhaitée n’est pas disponible dans la liste déroulante. Les choix personnalisés ne seront stockés que temporairement pour la durée de la session de navigation en cours."

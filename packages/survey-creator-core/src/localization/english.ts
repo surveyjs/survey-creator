@@ -16,7 +16,7 @@ export var enStrings = {
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
     drag: "Drag element",
-    license: "To use our library, a <a href='https://surveyjs.io/licensing'>developer license</a> is required. If you have an active license, <a href='https://surveyjs.io/remove-alert-banner'>set up your license key</a> and ensure you're using the latest version."
+    license: "To use our library, a <a href='https://surveyjs.io/licensing' target='_blank'>developer license</a> is required. If you have an active license, <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up your license key</a> and ensure you're using the latest version."
   },
   // Creator tabs
   tabs: {
@@ -340,6 +340,7 @@ export var enStrings = {
       titleLocation: "Panel title alignment",
       descriptionLocation: "Panel description alignment",
       templateQuestionTitleLocation: "Question title alignment",
+      templateQuestionTitleWidth: "Question title width",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New panel location",
       showRangeInProgress: "Show the progress bar",
@@ -570,6 +571,7 @@ export var enStrings = {
     cellType: "Cell input type",
     colCount: "Column count",
     choicesOrder: "Choice order",
+    allowCustomChoices: "Allow custom choices",
     visible: "Visible",
     isRequired: "Required",
     markRequired: "Mark as required",
@@ -1194,6 +1196,7 @@ export var enStrings = {
       onPage: "Reset on each page",
       onpanel: "Reset on each panel",
       onPanel: "Reset on each panel",
+      recursive: "Recursive numbering",
       onSurvey: "Continue across the survey",
       off: "No numbering"
     },
@@ -1389,6 +1392,7 @@ export var enStrings = {
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
       templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
+      templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
       errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       // questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
@@ -1525,6 +1529,9 @@ export var enStrings = {
     timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page.",
     validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes.",
     page: {
+      name: "A page ID that is not visible to respondents.",
+      description: "Type a page subtitle.",
+      navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\".",
       timeLimit: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page.",
       // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility.",
@@ -1553,6 +1560,7 @@ export var enStrings = {
     choicesFromQuestionMode: "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question.",
     choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs.",
     choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts.",
+    allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session.",
     showOtherItem: "When selected, users can include additional input in a separate comment box.",
     separateSpecialChoices: "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout.",
     path: "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array.",

@@ -600,6 +600,9 @@ svc-question {
 
 .svc-dragged-element-shortcut__text {
   @include ctrSmallBoldFont;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: var(--ctr-toolbox-item-max-width, 320px);
 }
 
 .svc-dragged-element-shortcut--has-icon {

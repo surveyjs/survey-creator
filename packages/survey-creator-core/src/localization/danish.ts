@@ -338,6 +338,7 @@ export var danishStrings = {
       titleLocation: "Justering af paneltitel",
       descriptionLocation: "Justering af panelbeskrivelse",
       templateQuestionTitleLocation: "Tilpasning af spørgsmålets titel",
+      templateQuestionTitleWidth: "Spørgsmålets titelbredde",
       templateErrorLocation: "Justering af fejlmeddelelse",
       newPanelPosition: "Ny panelplacering",
       showRangeInProgress: "Vis statuslinjen",
@@ -568,6 +569,7 @@ export var danishStrings = {
     cellType: "Celletype",
     colCount: "Antal kolonner",
     choicesOrder: "Vælg rækkefølge på valg",
+    allowCustomChoices: "Tillad brugerdefinerede valg",
     visible: "Er synlig?",
     isRequired: "Er påkrævet?",
     markRequired: "Markér efter behov",
@@ -1190,6 +1192,7 @@ export var danishStrings = {
       onPage: "Nulstil på hver side",
       onpanel: "Nulstil på hvert panel",
       onPanel: "Nulstil på hvert panel",
+      recursive: "Rekursiv nummerering",
       onSurvey: "Fortsæt på tværs af undersøgelsen",
       off: "Ingen nummerering"
     },
@@ -1381,6 +1384,7 @@ export var danishStrings = {
       enableIf: "Brug tryllestavsikonet til at indstille en betinget regel, der deaktiverer panelets skrivebeskyttede tilstand.",
       requiredIf: "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar.",
       templateQuestionTitleLocation: "Gælder for alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard).",
+      templateQuestionTitleWidth: "Indstiller ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsfelter. Accepterer CSS-værdier (px, %, in, pt osv.).",
       templateErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til et spørgsmål med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard).",
       errorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til alle spørgsmål i panelet. Indstillingen \"Nedarv\" anvender indstillingen for sideniveau (hvis angivet) eller undersøgelsesniveau.",
       page: "Flytter panelet til slutningen af en markeret side.",
@@ -1516,6 +1520,9 @@ export var danishStrings = {
     timeLimitPerPage: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
     validateVisitedEmptyFields: "Aktivér denne indstilling for at udløse validering, når en bruger fokuserer på et tomt inputfelt og derefter forlader det uden at foretage ændringer.",
     page: {
+      name: "Et side-id, der ikke er synligt for svarpersoner.",
+      description: "Skriv en sideundertitel.",
+      navigationTitle: "En billedtekst, der vises på en navigationsknap på statuslinjen eller indholdsfortegnelsen. Hvis du lader dette felt være tomt, bruger navigationsknappen sidetitlen eller sidenavnet. For at aktivere statuslinjen eller indholdsfortegnelsen skal du gå til \"Undersøgelse\" → \"Navigation\".",
       timeLimit: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
       visibleIf: "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer sidens synlighed.",
       enableIf: "Brug tryllestavsikonet til at angive en betinget regel, der deaktiverer skrivebeskyttet tilstand for siden.",
@@ -1543,6 +1550,7 @@ export var danishStrings = {
     choicesFromQuestionMode: "Vælg mellem: \"Alle\" - kopierer alle valgmuligheder fra det valgte spørgsmål; \"Valgt\" - kopierer dynamisk kun valgte valgindstillinger; \"Ikke valgt\" - kopierer dynamisk kun ikke-valgte valgindstillinger. Indstillingerne \"Ingen\" og \"Andre\" kopieres som standard, hvis de er aktiveret i kildespørgsmålet.",
     choiceValuesFromQuestion: "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal angive id'erne.",
     choiceTextsFromQuestion: "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal indeholde visningsteksterne.",
+    allowCustomChoices: "Vælg for at lade svarpersonerne tilføje deres egne valgmuligheder, hvis den ønskede indstilling ikke er tilgængelig på rullelisten. Brugerdefinerede valg gemmes kun midlertidigt i den aktuelle browsersession.",
     showOtherItem: "Når denne indstilling er valgt, kan brugerne medtage yderligere input i et separat kommentarfelt.",
     separateSpecialChoices: "Viser hver indstilling for særlige valgmuligheder (\"Ingen\", \"Andet\", \"Vælg alle\") på en ny linje, selv når du bruger et layout med flere kolonner.",
     path: "Angiv placeringen i tjenestedatasættet, hvor målmatrixen af objekter er placeret. Lad feltet stå tomt, hvis URL-adressen allerede peger på arrayet.",
@@ -3221,3 +3229,11 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Angiver antallet af viste linjer i tekstområder til spørgsmålskommentarer. Hvis inputtet optager flere linjer, vises rullepanelet."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Standardvisningsværdi for dynamiske tekster"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "En værdi, der vises i HTML-spørgsmål og i de dynamiske titler og beskrivelser af undersøgelseselementer, når spørgsmålsværdien er tom."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekursiv nummerering"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Spørgsmålets titelbredde"
+// pe.allowCustomChoices: "Allow custom choices" => "Tillad brugerdefinerede valg"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Indstiller ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsfelter. Accepterer CSS-værdier (px, %, in, pt osv.)."
+// page.name: "A page ID that is not visible to respondents." => "Et side-id, der ikke er synligt for svarpersoner."
+// page.description: "Type a page subtitle." => "Skriv en sideundertitel."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "En billedtekst, der vises på en navigationsknap på statuslinjen eller indholdsfortegnelsen. Hvis du lader dette felt være tomt, bruger navigationsknappen sidetitlen eller sidenavnet. For at aktivere statuslinjen eller indholdsfortegnelsen skal du gå til \"Undersøgelse\" → \"Navigation\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Vælg for at lade svarpersonerne tilføje deres egne valgmuligheder, hvis den ønskede indstilling ikke er tilgængelig på rullelisten. Brugerdefinerede valg gemmes kun midlertidigt i den aktuelle browsersession."

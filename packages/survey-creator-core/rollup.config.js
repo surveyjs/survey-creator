@@ -82,6 +82,7 @@ module.exports = (options) => {
     output: [
       {
         dir: options.dir,
+        entryFileNames: "[name].mjs",
         format: "esm",
         exports: "named",
         sourcemap: true,

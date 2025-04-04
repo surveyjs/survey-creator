@@ -338,6 +338,7 @@ export let svStrings = {
       titleLocation: "Justering av panelrubrik",
       descriptionLocation: "Justering av panelbeskrivning",
       templateQuestionTitleLocation: "Justering av frågerubrik",
+      templateQuestionTitleWidth: "Bredd på frågetitel",
       templateErrorLocation: "Justering av felmeddelande",
       newPanelPosition: "Ny panelplats",
       showRangeInProgress: "Visa förloppsindikatorn",
@@ -568,6 +569,7 @@ export let svStrings = {
     cellType: "Cell typ",
     colCount: "Antal kolumner",
     choicesOrder: "Välj ordning på valet",
+    allowCustomChoices: "Tillåt anpassade val",
     visible: "Synlig?",
     isRequired: "Nödvändig?",
     markRequired: "Markera efter behov",
@@ -1190,6 +1192,7 @@ export let svStrings = {
       onPage: "Återställ på varje sida",
       onpanel: "Återställ på varje panel",
       onPanel: "Återställ på varje panel",
+      recursive: "Rekursiv numrering",
       onSurvey: "Fortsätt genom undersökningen",
       off: "Ingen numrering"
     },
@@ -1381,6 +1384,7 @@ export let svStrings = {
       enableIf: "Använd trollstavsikonen för att ställa in en villkorsregel som inaktiverar det skrivskyddade läget för panelen.",
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
       templateQuestionTitleLocation: "Gäller alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard).",
+      templateQuestionTitleWidth: "Ställer in konsekvent bredd för frågetitlar när de är justerade till vänster om sina frågerutor. Accepterar CSS-värden (px, %, in, pt, etc.).",
       templateErrorLocation: "Anger platsen för ett felmeddelande i förhållande till en fråga med ogiltiga indata. Välj mellan: \"Överst\" - en feltext placeras högst upp i frågerutan; \"Nederst\" - en feltext placeras längst ner i frågerutan. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard).",
       errorLocation: "Anger platsen för ett felmeddelande i förhållande till alla frågor i panelen. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå.",
       page: "Flyttar panelen till slutet av en markerad sida.",
@@ -1516,6 +1520,9 @@ export let svStrings = {
     timeLimitPerPage: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
     validateVisitedEmptyFields: "Aktivera det här alternativet för att utlösa validering när en användare fokuserar på ett tomt inmatningsfält och sedan lämnar det utan att göra några ändringar.",
     page: {
+      name: "Ett sid-ID som inte är synligt för svarande.",
+      description: "Skriv en underrubrik på sidan.",
+      navigationTitle: "En bildtext som visas på en navigeringsknapp i förloppsindikatorn eller innehållsförteckningen. Om du lämnar det här fältet tomt kommer navigeringsknappen att använda sidans titel eller sidnamn. För att aktivera förloppsindikatorn eller innehållsförteckningen, gå till \"Undersökning\" → \"Navigering\".",
       timeLimit: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
       visibleIf: "Använd trollstavsikonen för att ställa in en villkorsregel som bestämmer sidans synlighet.",
       enableIf: "Använd trollstavsikonen för att ställa in en villkorsregel som inaktiverar det skrivskyddade läget för sidan.",
@@ -1543,6 +1550,7 @@ export let svStrings = {
     choicesFromQuestionMode: "Välj mellan: \"Alla\" - kopierar alla valalternativ från den valda frågan; \"Markerad\" - kopierar dynamiskt endast valda alternativ; \"Omarkerad\" - kopierar endast omarkerade alternativ dynamiskt. Alternativen \"Ingen\" och \"Annat\" kopieras som standard om de är aktiverade i källfrågan.",
     choiceValuesFromQuestion: "I frågetyper med ett eller flera val har varje alternativ ett ID och ett visningsvärde. Den här inställningen anger vilken matriskolumn eller panelfråga som ska ange ID:n.",
     choiceTextsFromQuestion: "I frågetyper med ett eller flera val har varje alternativ ett ID och ett visningsvärde. Den här inställningen anger vilken matris-, kolumn- eller panelfråga som ska tillhandahålla visningstexterna.",
+    allowCustomChoices: "Välj om du vill att de svarande ska kunna lägga till sina egna alternativ om det önskade alternativet inte är tillgängligt i rullgardinsmenyn. Anpassade val kommer endast att lagras tillfälligt under den aktuella webbläsarsessionen.",
     showOtherItem: "När du väljer det här alternativet kan användarna inkludera ytterligare indata i en separat kommentarsruta.",
     separateSpecialChoices: "Visar varje specialalternativ (\"Ingen\", \"Annan\", \"Markera alla\") på en ny rad, även när du använder en layout med flera kolumner.",
     path: "Ange den plats i tjänstdatauppsättningen där målmatrisen med objekt finns. Lämna tomt om URL:en redan pekar på matrisen.",
@@ -3211,3 +3219,11 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Ställer in antalet rader som visas i textområden för frågekommentarer. Om inmatningen tar upp fler rader visas rullningslisten."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Standardvisningsvärde för dynamiska texter"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Ett värde som visas i HTML-frågor och i dynamiska titlar och beskrivningar av undersökningselement när frågevärdet är tomt."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekursiv numrering"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Bredd på frågetitel"
+// pe.allowCustomChoices: "Allow custom choices" => "Tillåt anpassade val"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Ställer in konsekvent bredd för frågetitlar när de är justerade till vänster om sina frågerutor. Accepterar CSS-värden (px, %, in, pt, etc.)."
+// page.name: "A page ID that is not visible to respondents." => "Ett sid-ID som inte är synligt för svarande."
+// page.description: "Type a page subtitle." => "Skriv en underrubrik på sidan."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "En bildtext som visas på en navigeringsknapp i förloppsindikatorn eller innehållsförteckningen. Om du lämnar det här fältet tomt kommer navigeringsknappen att använda sidans titel eller sidnamn. För att aktivera förloppsindikatorn eller innehållsförteckningen, gå till \"Undersökning\" → \"Navigering\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Välj om du vill att de svarande ska kunna lägga till sina egna alternativ om det önskade alternativet inte är tillgängligt i rullgardinsmenyn. Anpassade val kommer endast att lagras tillfälligt under den aktuella webbläsarsessionen."

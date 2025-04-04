@@ -73,6 +73,7 @@ import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
+import { doMachineStringsTranslation } from "./utils/creator-locstrings";
 
 import { iconsV1, iconsV2 } from "./svgbundle";
 import { listComponentCss } from "./components/list-theme";
@@ -202,6 +203,7 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `false`
    * @see activeTab
+   * @see clearTranslationsOnSourceTextChange
    */
   @property({ defaultValue: false }) showTranslationTab: boolean;
   /**
@@ -892,7 +894,6 @@ export class SurveyCreatorModel extends Base
    * 
    * For information on event handler parameters, refer to descriptions within the interface.
    * 
-   * 
    * Within the event handler, you need to pass translation strings and locale information to the translation service API. The service should return an array of translated strings that you need to pass to the `options.callback` function. The following code shows how to integrate the Microsoft Translator service into Survey Creator:
    * 
    * ```js
@@ -938,6 +939,7 @@ export class SurveyCreatorModel extends Base
    * ```
    * 
    * > Survey Creator does not include a machine translation service out of the box. Our component only provides a UI for calling the service API.
+   * @see startMachineTranslationTo
    */
   public onMachineTranslate: EventBase<SurveyCreatorModel, MachineTranslateEvent> = this.addCreatorEvent<SurveyCreatorModel, MachineTranslateEvent>();
 
@@ -2555,7 +2557,7 @@ export class SurveyCreatorModel extends Base
   private animationEnabled = true;
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
-    if (reason !== "designer" && reason !== "preview" && reason !== "theme") {
+    if (reason !== "designer" && reason !== "preview" && reason !== "theme" && reason !== "property-grid" && reason !== "theme-tab:property-grid") {
       survey.fitToContainer = false;
       survey.applyTheme(designTabSurveyThemeJSON);
       survey.gridLayoutEnabled = false;
@@ -2674,8 +2676,46 @@ export class SurveyCreatorModel extends Base
       options.value = options.newValue;
       this.onAfterPropertyChanged.fire(this, options);
     }
+    this.clearLocalizationStrings(options.target, options.name);
     options.type = "PROPERTY_CHANGED";
     this.setModified(options);
+  }
+  private clearLocalizationStrings(el: any, name: string): void {
+    if (this.clearTranslationsOnSourceTextChange) {
+      if ((el.isQuestion || Serializer.isDescendantOf(el.getType(), "matrixdropdowncolumn")) && name === "name") {
+        this.clearNonDefaultLocalesInStrByValue(el.locTitle);
+      } else {
+        if (Serializer.isDescendantOf(el.getType(), "itemvalue") && name === "value") {
+          this.clearNonDefaultLocalesInStrByValue(el.locText);
+        } else {
+          const prop = Serializer.findProperty(el.getType(), name);
+          if (prop && prop.isLocalizable && prop.serializationProperty) {
+            const locStr = el[prop.serializationProperty];
+            this.clearNonDefaultLocalesInStr(locStr);
+          }
+        }
+      }
+    }
+  }
+  private clearNonDefaultLocalesInStrByValue(locStr: LocalizableString): void {
+    if (!locStr.isEmpty && !locStr.getLocaleText("")) {
+      this.clearNonDefaultLocalesInStr(locStr);
+    }
+  }
+  private clearNonDefaultLocalesInStr(locStr: LocalizableString): void {
+    if (locStr) {
+      const loc = locStr.lastChangedLoc;
+      if (!!loc && loc !== surveyLocalization.defaultLocale) return;
+      const ctrl = this.undoRedoController;
+      if (ctrl) ctrl.ignoreChanges = true;
+      const locs = locStr.getLocales();
+      locs.forEach(l => {
+        if (l !== surveyLocalization.defaultLocale && l !== "default") {
+          locStr.setLocaleText(l, "");
+        }
+      });
+      if (ctrl) ctrl.ignoreChanges = false;
+    }
   }
   public notifySurveyItemMoved(options: any): void {
     options.type = "ELEMENT_REORDERED";
@@ -3855,6 +3895,16 @@ export class SurveyCreatorModel extends Base
   }
   translationLocalesOrder: Array<string> = [];
   /**
+   * Starts the translation of survey strings from the default language to one or more specified languages using a machine translation service, such as Google Translate or Microsoft Translator.
+   * 
+   * This method only launches the operation by raising the [`onMachineTranslate`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onMachineTranslate) event. Handle this event to perform the actual translation.
+   * @param locales An array of locale codes that correspond to target languages, for example, `[ "de", "fr" ]`.
+   */
+  public startMachineTranslationTo(locales: Array<string>): void {
+    if (!this.getHasMachineTranslation()) return;
+    doMachineStringsTranslation(this.survey, this, locales);
+  }
+  /**
    * A delay between changing survey settings and saving the survey JSON schema, measured in milliseconds. Applies only when the [`autoSaveEnabled`](#autoSaveEnabled) property is `true`.
    * 
    * Default value: 500 (inherited from `settings.autoSave.delay`)
@@ -4429,6 +4479,13 @@ export class SurveyCreatorModel extends Base
    * Default value: `false`
    */
   public collapseOnDrag: boolean = false;
+  /**
+   * Specifies whether to clear translations to other languages when a source language translation is changed.
+   * 
+   * Default value: `false`
+   * @see showTranslationTab
+   */
+  public clearTranslationsOnSourceTextChange: boolean = false;
 }
 
 export class CreatorBase extends SurveyCreatorModel { }

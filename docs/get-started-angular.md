@@ -665,6 +665,27 @@ export class AppModule { }
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular (linkStyle))
 
+
+## (Optional) Enable Ace Editor in the JSON Editor Tab
+
+The JSON Editor tab enables users to edit survey JSON schemas as text. To make the editing process more convenient, you can integrate the <a href="https://ace.c9.io/" target="_blank">Ace</a> code editor. Install the <a href="https://www.npmjs.com/package/ace-builds" target="_blank">`ace-builds`</a> package to add Ace to your project:
+
+```sh
+npm install ace-builds --save
+```
+
+Import Ace and required extensions in an Angular component that renders Survey Creator. For instance, the following code imports an extension that adds a Find/Replace dialog to Ace:
+
+```js
+// survey-creator.component.ts
+// ...
+import "ace-builds/src-noconflict/ace";
+import "ace-builds/src-noconflict/ext-searchbox";
+// ...
+```
+
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular (linkStyle))
+
 ## Further Reading
 
 - [Localization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)

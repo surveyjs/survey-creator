@@ -338,6 +338,7 @@ export var nbStrings = {
       titleLocation: "Justering av paneltittel",
       descriptionLocation: "Justering av panelbeskrivelse",
       templateQuestionTitleLocation: "Justering av spørsmålstittel",
+      templateQuestionTitleWidth: "Bredde på oppgavetittel",
       templateErrorLocation: "Justering av feilmelding",
       newPanelPosition: "Ny panelplassering",
       showRangeInProgress: "Vis fremdriftslinjen",
@@ -568,6 +569,7 @@ export var nbStrings = {
     cellType: "Celletype",
     colCount: "Antall kolonner",
     choicesOrder: "Velg rekkefølge på valg",
+    allowCustomChoices: "Tillat egendefinerte valg",
     visible: "Er synlig?",
     isRequired: "Er nødvendig?",
     markRequired: "Merk etter behov",
@@ -1190,6 +1192,7 @@ export var nbStrings = {
       onPage: "Tilbakestill på hver side",
       onpanel: "Tilbakestill på hvert panel",
       onPanel: "Tilbakestill på hvert panel",
+      recursive: "Rekursiv nummerering",
       onSurvey: "Fortsett på tvers av undersøkelsen",
       off: "Ingen nummerering"
     },
@@ -1381,6 +1384,7 @@ export var nbStrings = {
       enableIf: "Bruk tryllestavikonet til å angi en betinget regel som deaktiverer skrivebeskyttet modus for panelet.",
       requiredIf: "Bruk tryllestavikonet til å angi en betinget regel som forhindrer innsending av spørreundersøkelser med mindre minst ett nestet spørsmål har et svar.",
       templateQuestionTitleLocation: "Gjelder alle spørsmålene i dette panelet. Hvis du vil overstyre denne innstillingen, definerer du regler for titteljustering for enkeltspørsmål. Alternativet \"Arv\" bruker innstillingen på sidenivå (hvis angitt) eller undersøkelsesnivå (\"Topp\" som standard).",
+      templateQuestionTitleWidth: "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, in, pt, etc.).",
       templateErrorLocation: "Angir plasseringen av en feilmelding i forhold til et spørsmål med ugyldige inndata. Velg mellom: \"Topp\" - en feiltekst plasseres øverst i spørsmålsboksen; \"Bunn\" - en feiltekst er plassert nederst i spørsmålsboksen. Alternativet \"Arv\" bruker innstillingen på sidenivå (hvis angitt) eller undersøkelsesnivå (\"Topp\" som standard).",
       errorLocation: "Angir plasseringen av en feilmelding i forhold til alle spørsmålene i panelet. Alternativet «Arv» bruker innstillingen på sidenivå (hvis angitt) eller undersøkelsesnivå.",
       page: "Flytter panelet til slutten av en merket side.",
@@ -1516,6 +1520,9 @@ export var nbStrings = {
     timeLimitPerPage: "Et tidsintervall i sekunder hvoretter undersøkelsen automatisk går videre til neste side.",
     validateVisitedEmptyFields: "Aktiver dette alternativet for å utløse validering når en bruker fokuserer på et tomt inndatafelt og deretter forlater det uten å gjøre noen endringer.",
     page: {
+      name: "En side-ID som ikke er synlig for respondentene.",
+      description: "Skriv inn en sideundertittel.",
+      navigationTitle: "En bildetekst som vises på en navigasjonsknapp i fremdriftslinjen eller innholdsfortegnelsen. Hvis du lar dette feltet stå tomt, vil navigasjonsknappen bruke sidetittelen eller sidenavnet. For å aktivere fremdriftslinjen eller innholdsfortegnelsen, gå til \"Survey\" → \"Navigation\".",
       timeLimit: "Et tidsintervall i sekunder hvoretter undersøkelsen automatisk går videre til neste side.",
       visibleIf: "Bruk tryllestavikonet til å angi en betinget regel som bestemmer sidens synlighet.",
       enableIf: "Bruk tryllestavikonet til å angi en betinget regel som deaktiverer skrivebeskyttet modus for siden.",
@@ -1543,6 +1550,7 @@ export var nbStrings = {
     choicesFromQuestionMode: "Velg mellom: \"Alle\" - kopierer alle valgalternativer fra det valgte spørsmålet; \"Valgt\" - kopierer dynamisk bare valgte valgalternativer; \"Unselected\" - kopierer dynamisk bare uvalgte valgalternativer. Alternativene \"Ingen\" og \"Annet\" kopieres som standard hvis de er aktivert i kildespørsmålet.",
     choiceValuesFromQuestion: "I spørsmålstyper med ett eller flere valg har hvert valgalternativ en ID og visningsverdi. Denne innstillingen angir hvilken matrisekolonne eller hvilket panelspørsmål som skal gi ID-ene.",
     choiceTextsFromQuestion: "I spørsmålstyper med ett eller flere valg har hvert valgalternativ en ID og visningsverdi. Denne innstillingen angir hvilken matrisekolonne eller hvilket panelspørsmål som skal inneholde visningstekstene.",
+    allowCustomChoices: "Velg dette alternativet for å la respondentene legge til sine egne valg hvis det ønskede alternativet ikke er tilgjengelig i rullegardinlisten. Egendefinerte valg lagres bare midlertidig så lenge den gjeldende nettleserøkten varer.",
     showOtherItem: "Når dette alternativet er valgt, kan brukerne inkludere flere inndata i et eget kommentarfelt.",
     separateSpecialChoices: "Viser hvert spesialvalgalternativ (\"Ingen\", \"Annet\", \"Merk alt\") på en ny linje, selv når du bruker et oppsett med flere kolonner.",
     path: "Angi plasseringen i tjenestedatasettet der målmatrisen med objekter er plassert. La stå tom hvis URL-adressen allerede peker på matrisen.",
@@ -3039,3 +3047,11 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Angir antall linjer som vises i tekstområder for spørsmålskommentarer. Hvis inndataene tar opp flere linjer, vises rullefeltet."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Standard visningsverdi for dynamiske tekster"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "En verdi som vises i HTML-spørsmål og i de dynamiske titlene og beskrivelsene av undersøkelseselementer når spørsmålsverdien er tom."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekursiv nummerering"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Bredde på oppgavetittel"
+// pe.allowCustomChoices: "Allow custom choices" => "Tillat egendefinerte valg"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Angir konsekvent bredde for spørsmålstitler når de er justert til venstre for spørsmålsboksene. Godtar CSS-verdier (px, %, in, pt, etc.)."
+// page.name: "A page ID that is not visible to respondents." => "En side-ID som ikke er synlig for respondentene."
+// page.description: "Type a page subtitle." => "Skriv inn en sideundertittel."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "En bildetekst som vises på en navigasjonsknapp i fremdriftslinjen eller innholdsfortegnelsen. Hvis du lar dette feltet stå tomt, vil navigasjonsknappen bruke sidetittelen eller sidenavnet. For å aktivere fremdriftslinjen eller innholdsfortegnelsen, gå til \"Survey\" → \"Navigation\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Velg dette alternativet for å la respondentene legge til sine egne valg hvis det ønskede alternativet ikke er tilgjengelig i rullegardinlisten. Egendefinerte valg lagres bare midlertidig så lenge den gjeldende nettleserøkten varer."
