@@ -146,6 +146,31 @@ test("creator.onSurveyInstanceCreated from property Grid", () => {
   creator.selectQuestionByName("q2");
   expect(selectedTypes).toStrictEqual(["survey", "text", "radiogroup"]);
 });
+test("creator.onSurveyInstanceSetupHandlers event", () => {
+  const creator = new CreatorTester();
+  let json = undefined;
+  let counter = 0;
+  creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
+    if (options.area === "property-grid") {
+      json = options.survey.toJSON();
+      counter ++;
+    }
+  });
+  creator.JSON = {
+    elements: [
+      { name: "q1", type: "text" },
+      {
+        name: "q2",
+        type: "radiogroup"
+      }
+    ]
+  };
+  expect(counter).toBe(1);
+  creator.selectQuestionByName("q1");
+  creator.selectQuestionByName("q2");
+  expect(json).toStrictEqual({});
+  expect(counter).toBe(3);
+});
 
 test("check tabResponsivenessMode property", () => {
   const creator = new CreatorTester();

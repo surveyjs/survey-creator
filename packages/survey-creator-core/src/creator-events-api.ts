@@ -735,7 +735,7 @@ export interface SurveyInstanceCreatedEvent {
   /**
    * @deprecated Use `options.area` instead.
    */
-  reason: string;
+  reason?: string;
   model?: Base;
 }
 
