@@ -642,9 +642,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
       cssClasses: listComponentCss,
-    });
-    newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
-      if (opt.isVisible) {
+      onShow: () => {
         const listModel = newAction.popupModel.contentComponentData.model;
         options.updateListModel(listModel);
       }
