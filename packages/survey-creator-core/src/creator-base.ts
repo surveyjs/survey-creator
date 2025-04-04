@@ -4129,15 +4129,13 @@ export class SurveyCreatorModel extends Base
       cssClasses: listComponentCss,
       verticalPosition: "bottom",
       horizontalPosition: "center",
-      displayMode: this.isTouch ? "overlay" : "popup"
-    });
-    newAction.popupModel.getTargetCallback = undefined;
-    newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
-      if (opt.isVisible) {
+      displayMode: this.isTouch ? "overlay" : "popup",
+      onShow: () => {
         const listModel = newAction.popupModel.contentComponentData.model;
         listModel.setItems(getActions());
       }
     });
+    newAction.popupModel.getTargetCallback = undefined;
     return newAction;
   }
 

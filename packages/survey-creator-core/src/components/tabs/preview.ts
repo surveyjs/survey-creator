@@ -275,6 +275,10 @@ export class PreviewViewModel extends Base {
           this.survey.pages[i].passed = true;
         }
       },
+      onShow: () => {
+        const listModel = this.selectPageAction.popupModel.contentComponentData.model;
+        listModel.selectedItem = this.getCurrentPageItem();
+      },
       cssClass: "svc-creator-popup",
       cssClasses: listComponentCss,
       verticalPosition: "top",
