@@ -202,7 +202,7 @@ test("check mobile popup in new side bar", async (t) => {
     })();
     await t
       .click(Selector("#svd-settings"))
-      .click(Selector(".spg-dropdown").withAttribute("aria-label", "Select a survey language").find(".sd-dropdown__filter-string-input"))
+      .click(Selector(".spg-question[data-name='locale'] .spg-dropdown").find(".sd-dropdown__filter-string-input"))
       .hover(Selector(".sv-popup").filterVisible(), { offsetX: 0, offsetY: 0 });
     await takeElementScreenshot("mobile-popup-inside-new-pg.png", "", t, comparer);
   });
