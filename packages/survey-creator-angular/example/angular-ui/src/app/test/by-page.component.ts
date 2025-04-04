@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
 import { TestDefaultComponent } from "./default.component";
-import { TestComponent } from "./test.component";
 
 @Component({
   selector: "test-by-page",

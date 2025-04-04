@@ -343,6 +343,11 @@ jobs:
           workingDir: $(Build.SourcesDirectory)/survey-creator
         condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
 
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator
+          npm run postinstall
+        displayName: "install chrome playwright"
+
       # - script: |
       #     cd $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
       #     sed -i 's/"survey-core": .*"/"survey-core": "latest"/g' package.json
@@ -455,7 +460,7 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npm run testcafe:a11y:ci
+          npm run test:a11y:ci
         displayName: "A11Y Functional test CreatorV2 React"
 
       - task: CopyFiles@2
@@ -560,6 +565,11 @@ jobs:
         condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
 
       - script: |
+          cd $(Build.SourcesDirectory)/survey-creator
+          npm run postinstall
+        displayName: "install chrome playwright"
+
+      - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
           npm i
           rm node_modules/survey-angular-ui
@@ -615,13 +625,18 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm run build:example
+          npm run build:example:prod
         displayName: "build example"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
           npm run testcafe:ci
         displayName: "Functional test CreatorV2 Angular"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+          npm run test:a11y:ci
+        displayName: "A11Y Functional test CreatorV2 Angular"
 
       - task: CopyFiles@2
         inputs:
@@ -725,6 +740,11 @@ jobs:
         condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
 
       - script: |
+          cd $(Build.SourcesDirectory)/survey-creator
+          npm run postinstall
+        displayName: "install chrome playwright"
+
+      - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
           npm i
           rm node_modules/survey-vue3-ui
@@ -787,6 +807,11 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
           npm run testcafe:ci
         displayName: "Functional test CreatorV2 Vue"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+          npm run test:a11y:ci
+        displayName: "A11Y Functional test CreatorV2 Vue"
 
       - task: CopyFiles@2
         inputs:
@@ -908,6 +933,11 @@ jobs:
           workingDir: $(Build.SourcesDirectory)/survey-creator
         condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
 
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator
+          npm run postinstall
+        displayName: "install chrome playwright"
+
       # - script: |
       #     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       #     npm install
@@ -1015,7 +1045,7 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-          npm run testcafe:a11y:ci
+          npm run test:a11y:ci
         displayName: "A11Y Functional test CreatorV2 JS"
 
       - task: CopyFiles@2

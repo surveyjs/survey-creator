@@ -13,6 +13,7 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
     return (
       <>
         <input
+          role="spinbutton"
           id={this.question.inputId}
           disabled={this.isDisplayMode}
           className={this.question.cssClasses.control}
@@ -25,10 +26,12 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
           onBeforeInput={event => this.question.onBeforeInput(event.nativeEvent as InputEvent)}
           onKeyUp={(event) => this.question.onKeyUp(event.nativeEvent)}
           onKeyDown={(event) => this.question.onInputKeyDown(event.nativeEvent)}
-          aria-required={this.question.ariaRequired}
-          aria-label={this.question.ariaLabel}
-          aria-invalid={this.question.ariaInvalid}
-          aria-describedby={this.question.ariaDescribedBy}
+          aria-required={this.question.a11y_input_ariaRequired}
+          aria-label={this.question.a11y_input_ariaLabel}
+          aria-labelledby={this.question.a11y_input_ariaLabelledBy}
+          aria-describedby={this.question.a11y_input_ariaDescribedBy}
+          aria-invalid={this.question.a11y_input_ariaInvalid}
+          aria-errormessage={this.question.a11y_input_ariaErrormessage}
         />
       </>
     );
@@ -49,6 +52,7 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
       <span className={this.question.cssClasses.buttonsContainer}>
         <button
           tabIndex={-1}
+          aria-hidden={"true"}
           className={this.question.cssClasses.arrowButton}
           disabled={this.isDisplayMode}
           onClick={this.question.onDownButtonClick}
@@ -61,6 +65,7 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
         </button>
         <button
           tabIndex={-1}
+          aria-hidden={"true"}
           className={this.question.cssClasses.arrowButton}
           disabled={this.isDisplayMode}
           onClick={this.question.onUpButtonClick}

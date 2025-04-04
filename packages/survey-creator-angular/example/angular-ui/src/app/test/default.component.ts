@@ -3,6 +3,8 @@ import { SurveyCreatorModel } from "survey-creator-core";
 import * as SurveyCreatorCore from "survey-creator-core";
 import * as Survey from "survey-core";
 import SurveyThemes from "survey-core/themes";
+import "survey-core/survey.i18n";
+import "survey-creator-core/survey-creator-core.i18n";
 SurveyCreatorCore.registerSurveyTheme(SurveyThemes);
 
 @Component({

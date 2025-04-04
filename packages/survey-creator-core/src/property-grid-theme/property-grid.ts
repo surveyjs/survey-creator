@@ -396,7 +396,8 @@ export var propertyGridCss = {
     control: "spg-color-editor__input spg-input-container__input",
     colorDropdown: "spg-input__edit-button",
     colorDropdownIcon: "icon-drop-down-arrow",
-    swatchIcon: "icon-color-picker"
+    swatchIcon: "icon-color-picker",
+    choicesButtonWrapper: "spg-color-editor__button-wrapper"
   },
   textwithreset: {
     root: "spg-input spg-input-container",

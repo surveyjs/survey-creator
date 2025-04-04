@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "survey-creator-core";
 import * as Survey from "survey-core";
+import "survey-core/survey.i18n";
+import "survey-creator-core/survey-creator-core.i18n";
 
 const json = {
   "logoPosition": "right",
