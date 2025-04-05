@@ -33,9 +33,14 @@
     .spg-table__cell:first-of-type {
       width: calcSize(5);
     }
-
-    .spg-table__cell:nth-of-type(2) {
-      text-align: start;
+    .sd-table__cell--drag,
+    .spg-table__cell--actions {
+      &,
+      & + sv-ng-matrixdropdown-cell {
+        & + .spg-table__cell {
+          width: calcSize(5);
+        }
+      }
     }
 
     .spg-table__question-wrapper {
