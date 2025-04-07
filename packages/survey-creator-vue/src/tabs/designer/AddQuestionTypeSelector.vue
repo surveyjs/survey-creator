@@ -1,5 +1,6 @@
 <template>
-  <button type="button"
+  <button
+    type="button"
     v-on:click="
       (e) => {
         questionTypeSelectorModel.action();
@@ -28,12 +29,12 @@
   </button>
 </template>
 <script lang="ts" setup>
-import { computed } from "vue";
-import type { Action } from "survey-core";
-import type {} from "survey-creator-core";
 import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useBase } from "survey-vue3-ui";
 import { SvComponent } from "survey-vue3-ui";
-const props = defineProps<{ questionTypeSelectorModel: any, renderPopup: any}>();
+const props = defineProps<{
+  questionTypeSelectorModel: any;
+  renderPopup: any;
+}>();
 useBase(() => props.questionTypeSelectorModel);
 </script>

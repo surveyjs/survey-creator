@@ -1324,7 +1324,9 @@ export var enStrings = {
   ts: {
     selectPage: "Select the page to test it",
     showInvisibleElements: "Show invisible elements",
-    hideInvisibleElements: "Hide invisible elements"
+    hideInvisibleElements: "Hide invisible elements",
+    prevPage: "Previous",
+    nextPage: "Next",
   },
   validators: {
     answercountvalidator: "Answer count",

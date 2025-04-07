@@ -31,7 +31,7 @@ export class TabbedMenuComponent extends SurveyElementBase<
   renderElement(): React.JSX.Element {
     const items = this.model.renderedActions.map((item) => <TabbedMenuItemWrapper item={item} key={item.renderedId} />);
     return (
-      <div ref={this.rootRef} className="svc-tabbed-menu">
+      <div ref={this.rootRef} className="svc-tabbed-menu" role="tablist">
         {items}
       </div>
     );

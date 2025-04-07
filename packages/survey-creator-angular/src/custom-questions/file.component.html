@@ -10,12 +10,11 @@
     [title]="model.inputTitle" [accept]="model.acceptedTypes" (change)="model.onFileInputChange($event)" tabindex="-1">
   <div [class]="model.cssClasses.buttonsContainer">
     <button type="button" [class]="model.cssClasses.clearButton" [disabled]="model.getIsClearButtonDisabled()"
-      (click)="model.doClean()" [key2click]>
-      <svg [iconName]="model.cssClasses.clearButtonIcon" size="'auto'" [title]="model.clearButtonCaption"
-        sv-ng-svg-icon></svg>
+      (click)="model.doClean()" [key2click] [title]="model.clearButtonCaption">
+      <svg [iconName]="model.cssClasses.clearButtonIcon" size="'auto'" sv-ng-svg-icon></svg>
     </button>
-    <label role="button" [class]="model.getChooseButtonCss()" [attr.for]="model.inputId"
-      [attr.aria-label]="model.chooseButtonCaption" (click)="model.chooseFiles($event)" [key2click]>
+    <label [class]="model.getChooseButtonCss()" [attr.for]="model.inputId" [attr.aria-label]="model.chooseButtonCaption"
+      (click)="model.chooseFiles($event)" [key2click]>
       <svg [iconName]="model.cssClasses.chooseButtonIcon" size="'auto'" [title]="model.chooseButtonCaption"
         sv-ng-svg-icon></svg>
     </label>
