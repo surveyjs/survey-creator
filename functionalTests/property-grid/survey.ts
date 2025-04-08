@@ -263,3 +263,18 @@ test("Search correctly scrolls to element", async (t) => {
     .wait(500)
     .expect(isElementInViewport()).ok();
 });
+test("Check help description doesn't reset input value", async (t) => {
+  await setJSON({
+    "showTimer": true,
+    "headerView": "advanced"
+  });
+  const quizTab = getPropertyGridCategory("Quiz Mode");
+  const input = Selector("[data-name='timeLimit'] .spg-input");
+  const helpButton = Selector("[data-name='timeLimit'] #property-grid-help");
+  await t
+    .click(quizTab)
+    .click(input)
+    .typeText(input, "100", { paste: true, replace: true })
+    .click(helpButton)
+    .expect(input.value).eql("100");
+});
