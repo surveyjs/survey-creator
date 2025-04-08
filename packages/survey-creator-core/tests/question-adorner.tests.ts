@@ -65,6 +65,7 @@ test("Check question adorners popups display mode", (): any => {
 });
 
 test("Check rating question input type list", (): any => {
+  surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -85,6 +86,7 @@ test("Check rating question input type list", (): any => {
   const list = popup.contentComponentData.model;
 
   expect(list.actions.map(i => i.id)).toEqual(["labels", "stars", "smileys"]);
+  surveySettings.animationEnabled = true;
 });
 
 test("Check question converter with removed subitems", (): any => {
