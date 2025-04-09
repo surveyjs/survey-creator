@@ -22,13 +22,42 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
       rows: 2
     };
   }
-  public clearPropertyValue(
-    obj: Base,
-    prop: JsonObjectProperty,
-    question: Question,
-    options: ISurveyCreatorOptions
-  ): void {
+  public clearPropertyValue(obj: Base, prop: JsonObjectProperty, question: Question, options: ISurveyCreatorOptions): void {
     question.clearValue();
+  }
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
+    question.valueToDataCallback = (val: any): any => {
+      if(!val) return val;
+      return val.replace(/\\n/g, "\n")
+        .replace(/\\r/g, "\r")
+        .replace(/\\t/g, "\t");
+    };
+    question.valueFromDataCallback = (val: any): any => {
+      if(!val) return val;
+      return val.replace(/\n/g, "\\n")
+        .replace(/\r/g, "\\r")
+        .replace(/\t/g, "\\t");
+    };
+    /*
+    question.valueFromDataCallback = (val: any): any => {
+      if(!val) return val;
+      return val.replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'")
+        .replace(/"/g, '\\"')
+        .replace(/\n/g, "\\n")
+        .replace(/\r/g, "\\r")
+        .replace(/\t/g, "\\t");
+    };
+    question.valueToDataCallback = (val: any): any => {
+      if(!val) return val;
+      return val.replace(/\\t/g, "\t")
+        .replace(/\\r/g, "\r")
+        .replace(/\\n/g, "\n")
+        .replace(/\\"/g, '"')
+        .replace(/\\'/g, "'")
+        .replace(/\\\\/g, "\\");
+    };
+    */
   }
 }
 export class PropertyGridEditorCondition extends PropertyGridEditorExpression {
