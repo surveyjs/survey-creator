@@ -42,7 +42,7 @@ import {
   settings
 } from "../../src/creator-settings";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
-import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
+import { PropertyGridEditorCondition, PropertyGridEditorExpression } from "../../src/property-grid/condition";
 import { QuestionLinkValueModel } from "../../src/components/link-value";
 import {
   PropertyGridValueEditor,
@@ -2602,6 +2602,21 @@ test("Show empty rows template if there is no rows", () => {
   expect(propEditorQuestion.renderedTable.showTable).toBeFalsy();
   expect(propEditorQuestion.noRowsText).toEqual("You don't have any choices yet");
   expect(propEditorQuestion.addRowText).toEqual("Add new choice");
+});
+test("Espace new line and tabs, Bug#6818", () => {
+  PropertyGridEditorCollection.register(new PropertyGridEditorExpression());
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" }
+    ]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  let propEditor = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("setValueExpression"));
+  q1.setValueExpression = "{q2} + '\n' + {q4}";
+  expect(propEditor.value).toEqual("{q2} + '\\n' + {q4}");
+  propEditor.value = "{q2} + '\\n' + {q3} + '\\t' + {q4}";
+  expect(q1.setValueExpression).toEqual("{q2} + '\n' + {q3} + '\t' + {q4}");
 });
 test("Different property editors for trigger value", () => {
   const prop = Serializer.findProperty("setvaluetrigger", "setValue");
