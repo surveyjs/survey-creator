@@ -27,5 +27,6 @@ export const pgTabIcons = {
   "rateValues": "icon-pg-specific-24x24",
   "choices": "icon-pg-specific-24x24",
   "choicesByUrl": "icon-pg-webservice-24x24",
+  "numbering": "icon-pg-numbering-24x24",
   "undefined": "icon-pg-undefined-24x24",
 };
