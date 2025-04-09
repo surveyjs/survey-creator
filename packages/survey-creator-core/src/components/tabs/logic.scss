@@ -43,7 +43,10 @@
 }
 
 .sl-table__remove-button .sv-action-bar-item {
-  padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-right-icon-only, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-left-icon-only, var(--sjs-spacing-x1));
+  padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1))
+    var(--ctr-expression-item-padding-right-icon-only, var(--sjs-spacing-x1))
+    var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1))
+    var(--ctr-expression-item-padding-left-icon-only, var(--sjs-spacing-x1));
   cursor: pointer;
   border: none;
   border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
@@ -54,8 +57,11 @@
     fill: var(--ctr-expression-item-icon-color, var(--sjs-semantic-red-background-500, #e50a3eff));
   }
   &:hover:enabled,
-  &.sv-focused--by-key.sv-focused--by-key  {
-    background-color: var(--ctr-expression-item-background-color-remove-button-hovered, var(--sjs-semantic-red-background-10, #e50a3e1a));
+  &.sv-focused--by-key.sv-focused--by-key {
+    background-color: var(
+      --ctr-expression-item-background-color-remove-button-hovered,
+      var(--sjs-semantic-red-background-10, #e50a3e1a)
+    );
     outline: none;
 
     use {
@@ -105,7 +111,7 @@
   border-radius: 0;
   color: var(--lbr-page-header-title-color, var(--sjs-layer-3-foreground-100, #000000e6));
   box-sizing: content-box;
-  max-height: calc(3 * var(--thm-logic-header-max-height));;
+  max-height: calc(3 * var(--thm-logic-header-max-height));
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -203,7 +209,8 @@
     border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
     padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1))
       var(--ctr-expression-item-padding-right-button, var(--sjs-spacing-x4))
-      var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-expression-item-padding-left-button, var(--sjs-spacing-x4));
+      var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1))
+      var(--ctr-expression-item-padding-left-button, var(--sjs-spacing-x4));
 
     display: flex;
     align-items: center;
@@ -212,11 +219,16 @@
 
     user-select: none;
 
-    transition: background-color $creator-transition-duration, color $creator-transition-duration;
+    transition:
+      background-color $creator-transition-duration,
+      color $creator-transition-duration;
   }
 
   button:hover:enabled {
-    background-color: var(--ctr-expression-item-background-color-button-hovered, var(--sjs-primary-background-500, #19b394ff));
+    background-color: var(
+      --ctr-expression-item-background-color-button-hovered,
+      var(--sjs-primary-background-500, #19b394ff)
+    );
     color: var(--ctr-expression-item-text-color-button-hovered, var(--sjs-primary-foreground-100, #ffffffff));
   }
 
@@ -273,7 +285,7 @@
   color: var(--ctr-expression-item-text-color-function, var(--sjs-layer-3-foreground-100, #000000e6));
   margin: 0;
 
-  span+span {
+  span + span {
     display: none;
   }
 }
@@ -310,7 +322,7 @@
   height: calcSize(17);
 }
 .sl-body {
-    @include disableLibraryAnimations;
+  @include disableLibraryAnimations;
 }
 
 $sl-pd-list-fade-in-duration: var(--sl-pd-list-fade-in-duration, 250ms);
@@ -339,6 +351,13 @@ $sl-pd-list-move-out-delay: var(--sl-pd-list-move-out-delay, 100ms);
     animation-timing-function: $reverse-ease-out;
     animation-duration: $sl-pd-list-fade-out-duration, $sl-pd-list-move-out-duration;
     animation-delay: 0s, $sl-pd-list-move-out-delay;
+  }
+}
+.sl-paneldynamic__buttons-container {
+  display: flex;
+  justify-content: start;
+  .sv-action-bar {
+    margin: 0;
   }
 }
 
@@ -477,7 +496,6 @@ $sl-element-move-out-delay: var(--sjs-sl-element-move-out-delay, 100ms);
   animation-duration: $sl-element-fade-out-duration, $sl-element-move-out-duration;
 }
 
-
 .svc-creator--disable-animations {
   .sl-row--enter,
   .sl-row--leave,
@@ -486,8 +504,7 @@ $sl-element-move-out-delay: var(--sjs-sl-element-move-out-delay, 100ms);
   .sl-table__row--enter,
   .sl-table__row--leave,
   .sl-panel-wrapper--leave,
-  .sl-panel-wrapper--enter
-   {
+  .sl-panel-wrapper--enter {
     animation: none;
   }
 }
