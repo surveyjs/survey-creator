@@ -338,6 +338,7 @@ export var fiStrings = {
       titleLocation: "Paneelin otsikon tasaus",
       descriptionLocation: "Paneelin kuvauksen tasaus",
       templateQuestionTitleLocation: "Kysymyksen otsikon tasaus",
+      templateQuestionTitleWidth: "Kysymyksen otsikon leveys",
       templateErrorLocation: "Virhesanoman tasaus",
       newPanelPosition: "Uusi paneelin sijainti",
       showRangeInProgress: "Edistymispalkin näyttäminen",
@@ -568,6 +569,7 @@ export var fiStrings = {
     cellType: "Solutyyppi",
     colCount: "Sarakemäärä",
     choicesOrder: "Valitse valintojen järjestys",
+    allowCustomChoices: "Salli mukautetut valinnat",
     visible: "On näkyvä?",
     isRequired: "On vaadittu?",
     markRequired: "Merkitse pakollisesti",
@@ -1190,6 +1192,7 @@ export var fiStrings = {
       onPage: "Nollaa jokaisella sivulla",
       onpanel: "Nollaa jokaisessa paneelissa",
       onPanel: "Nollaa jokaisessa paneelissa",
+      recursive: "Rekursiivinen numerointi",
       onSurvey: "Jatka kyselyssä",
       off: "Ei numerointia"
     },
@@ -1381,6 +1384,7 @@ export var fiStrings = {
       enableIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka poistaa paneelin vain luku -tilan käytöstä.",
       requiredIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka estää kyselyn lähettämisen, ellei vähintään yhteen sisäkkäiseen kysymykseen ole vastausta.",
       templateQuestionTitleLocation: "Koskee kaikkia tämän paneelin kysymyksiä. Jos haluat ohittaa tämän asetuksen, määritä otsikon tasaussäännöt yksittäisille kysymyksille. Peri-vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta (\"Ylin\" oletuksena).",
+      templateQuestionTitleWidth: "Määrittää kysymysotsikoille yhtenäisen leveyden, kun ne on tasattu kysymysruutujen vasemmalle puolelle. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
       templateErrorLocation: "Määrittää virhesanoman sijainnin suhteessa kysymykseen, jonka syöte on virheellinen. Valitse seuraavista: \"Top\" - virheteksti sijoitetaan kysymysruudun yläosaan; \"Pohja\" - virheteksti sijoitetaan kysymysruudun alaosaan. Peri-vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta (\"Ylin\" oletuksena).",
       errorLocation: "Määrittää virhesanoman sijainnin suhteessa kaikkiin paneelin kysymyksiin. Peri-vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta.",
       page: "Siirtää paneelin valitun sivun loppuun.",
@@ -1516,6 +1520,9 @@ export var fiStrings = {
     timeLimitPerPage: "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle.",
     validateVisitedEmptyFields: "Ota tämä asetus käyttöön, jos haluat käynnistää vahvistuksen, kun käyttäjä keskittyy tyhjään syöttökenttään ja poistuu siitä tekemättä muutoksia.",
     page: {
+      name: "Sivun tunnus, joka ei näy vastaajille.",
+      description: "Kirjoita sivun alaotsikko.",
+      navigationTitle: "Kuvateksti, joka näkyy edistymispalkin tai sisällysluettelon siirtymispainikkeessa. Jos jätät tämän kentän tyhjäksi, navigointipainike käyttää sivun otsikkoa tai nimeä. Ota edistymispalkki tai sisällysluettelo käyttöön siirtymällä kohtaan \"Kysely\" → \"Navigointi\".",
       timeLimit: "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle.",
       visibleIf: "Käytä taikasauvakuvaketta asettaaksesi ehdollisen säännön, joka määrittää sivun näkyvyyden.",
       enableIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka poistaa sivun vain luku -tilan käytöstä.",
@@ -1543,6 +1550,7 @@ export var fiStrings = {
     choicesFromQuestionMode: "Valitse seuraavista: \"Kaikki\" - kopioi kaikki valintavaihtoehdot valitusta kysymyksestä; \"Valittu\" - kopioi dynaamisesti vain valitut valintavaihtoehdot; \"Ei valittu\" - kopioi dynaamisesti vain valitsemattomat valintavaihtoehdot. Vaihtoehdot \"Ei mitään\" ja \"Muut\" kopioidaan oletusarvoisesti, jos ne on otettu käyttöön lähdekysymyksessä.",
     choiceValuesFromQuestion: "Yksi- ja monivalintakysymystyypeissä kullakin valintavaihtoehdolla on tunnus ja näyttöarvo. Tämä asetus määrittää, mikä matriisisarake tai paneelikysymys antaa tunnukset.",
     choiceTextsFromQuestion: "Yksi- ja monivalintakysymystyypeissä kullakin valintavaihtoehdolla on tunnus ja näyttöarvo. Tämä asetus määrittää, mikä matriisisarake tai paneelikysymys sisältää näyttötekstit.",
+    allowCustomChoices: "Valitse tämä, jos haluat, että vastaajat voivat lisätä omia vaihtoehtojaan, jos haluttu vaihtoehto ei ole käytettävissä avattavassa valikossa. Mukautetut valinnat tallennetaan vain väliaikaisesti nykyisen selainistunnon ajaksi.",
     showOtherItem: "Kun tämä on valittuna, käyttäjät voivat lisätä lisätietoja erilliseen kommenttiruutuun.",
     separateSpecialChoices: "Näyttää jokaisen erityisen valintavaihtoehdon (\"Ei mitään\", \"Muu\", \"Valitse kaikki\") uudella rivillä, vaikka käytettäisiin monisarakkeista asettelua.",
     path: "Määritä palvelutietojoukon sijainti, jossa objektien kohderyhmä sijaitsee. Jätä tyhjäksi, jos URL-osoite osoittaa jo matriisiin.",
@@ -3009,3 +3017,11 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Määrittää kysymyskommenttien tekstialueilla näytettävien rivien määrän. Jos syöttö vie enemmän rivejä, vierityspalkki tulee näkyviin."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Dynaamisten tekstien oletusnäyttöarvo"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Arvo, joka näkyy HTML-kysymyksissä ja kyselyn elementtien dynaamisissa otsikoissa ja kuvauksissa, kun kysymyksen arvo on tyhjä."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekursiivinen numerointi"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Kysymyksen otsikon leveys"
+// pe.allowCustomChoices: "Allow custom choices" => "Salli mukautetut valinnat"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Määrittää kysymysotsikoille yhtenäisen leveyden, kun ne on tasattu kysymysruutujen vasemmalle puolelle. Hyväksyy CSS-arvot (px, %, in, pt jne.)."
+// page.name: "A page ID that is not visible to respondents." => "Sivun tunnus, joka ei näy vastaajille."
+// page.description: "Type a page subtitle." => "Kirjoita sivun alaotsikko."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Kuvateksti, joka näkyy edistymispalkin tai sisällysluettelon siirtymispainikkeessa. Jos jätät tämän kentän tyhjäksi, navigointipainike käyttää sivun otsikkoa tai nimeä. Ota edistymispalkki tai sisällysluettelo käyttöön siirtymällä kohtaan \"Kysely\" → \"Navigointi\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Valitse tämä, jos haluat, että vastaajat voivat lisätä omia vaihtoehtojaan, jos haluttu vaihtoehto ei ole käytettävissä avattavassa valikossa. Mukautetut valinnat tallennetaan vain väliaikaisesti nykyisen selainistunnon ajaksi."

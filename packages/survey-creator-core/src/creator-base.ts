@@ -588,8 +588,17 @@ export class SurveyCreatorModel extends Base
    * [Preview Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#preview-mode-survey-instance (linkStyle))
    * 
    * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
+   * @see onSurveyInstanceSetupHandlers
    */
   public onSurveyInstanceCreated: EventBase<SurveyCreatorModel, SurveyInstanceCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, SurveyInstanceCreatedEvent>();
+  /**
+   * An event that lets you attach event handlers to a [survey instance used for displaying a Survey Creator UI element](https://surveyjs.io/survey-creator/documentation/property-grid-customization#add-custom-properties-to-the-property-grid).
+   * 
+   * For information on event handler parameters, refer to descriptions within the interface.
+   * 
+   * > This event is raised *before* the survey instance is initialized with a survey JSON schema. Therefore, you cannot access individual questions, panels, and pages within the event handler. If you need to customize those survey elements, handle the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
+   */
+  public onSurveyInstanceSetupHandlers: EventBase<SurveyCreatorModel, SurveyInstanceCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, SurveyInstanceCreatedEvent>();
 
   /**
    * An event that is raised when Survey Creator obtains a survey element name to display it in the UI.
@@ -2567,8 +2576,10 @@ export class SurveyCreatorModel extends Base
   }
   private animationEnabled = true;
   public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
-    const survey = this.createSurveyCore(json, reason);
-    if (reason !== "designer" && reason !== "preview" && reason !== "theme") {
+    area = area || this.getSurveyInstanceCreatedArea(reason);
+    const element = area === "property-grid" && model ? model.obj : undefined;
+    const survey = this.createSurveyCore(json, area, element);
+    if (reason !== "designer" && reason !== "preview" && reason !== "theme" && reason !== "property-grid" && reason !== "theme-tab:property-grid") {
       survey.fitToContainer = false;
       survey.applyTheme(designTabSurveyThemeJSON);
       survey.gridLayoutEnabled = false;
@@ -2587,8 +2598,6 @@ export class SurveyCreatorModel extends Base
     if (callback) {
       callback(survey);
     }
-    area = area || this.getSurveyInstanceCreatedArea(reason);
-    const element = area === "property-grid" && model ? model.obj : undefined;
     this.onSurveyInstanceCreated.fire(this, {
       survey: survey,
       reason: reason,
@@ -2628,8 +2637,13 @@ export class SurveyCreatorModel extends Base
     const res = hash[reason];
     return !!res ? res : reason;
   }
-  protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
-    return new SurveyModel(json);
+  protected createSurveyCore(json: any = {}, area: string, element: Base): SurveyModel {
+    if (this.onSurveyInstanceSetupHandlers.isEmpty) return new SurveyModel(json);
+    const model = new SurveyModel();
+    const options = { survey: model, area: area, element: element, json: json };
+    this.onSurveyInstanceSetupHandlers.fire(this, options);
+    model.fromJSON(options.json);
+    return model;
   }
   private _stateValue: string;
   /**
@@ -2693,8 +2707,6 @@ export class SurveyCreatorModel extends Base
   }
   private clearLocalizationStrings(el: any, name: string): void {
     if (this.clearTranslationsOnSourceTextChange) {
-      const loc = this.survey.locale;
-      if (!!loc && loc !== surveyLocalization.defaultLocale) return;
       if ((el.isQuestion || Serializer.isDescendantOf(el.getType(), "matrixdropdowncolumn")) && name === "name") {
         this.clearNonDefaultLocalesInStrByValue(el.locTitle);
       } else {
@@ -2717,6 +2729,8 @@ export class SurveyCreatorModel extends Base
   }
   private clearNonDefaultLocalesInStr(locStr: LocalizableString): void {
     if (locStr) {
+      const loc = locStr.lastChangedLoc;
+      if (!!loc && loc !== surveyLocalization.defaultLocale) return;
       const ctrl = this.undoRedoController;
       if (ctrl) ctrl.ignoreChanges = true;
       const locs = locStr.getLocales();

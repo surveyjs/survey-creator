@@ -314,7 +314,7 @@ test("Carryforward banner", async (t) => {
   });
   const choicesTabTitle = Selector("h4").withExactText("Choice Options");
   const generalTabTitle = Selector("h4").withExactText(generalGroupName);
-  const carryForwardEditor = Selector("div[aria-label='Copy choices from the following question']");
+  const carryForwardEditor = Selector("div[data-name='choicesFromQuestion'] .spg-dropdown");
   await t.expect(questions.exists).notOk()
     .hover(getToolboxItemByText("Checkboxes"))
     .click(getToolboxItemByText("Checkboxes"))

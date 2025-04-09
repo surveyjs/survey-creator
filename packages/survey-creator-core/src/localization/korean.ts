@@ -338,6 +338,7 @@ export var koreanStrings = {
       titleLocation: "패널 제목 정렬",
       descriptionLocation: "패널 설명 정렬",
       templateQuestionTitleLocation: "질문 제목 정렬",
+      templateQuestionTitleWidth: "질문 제목 너비",
       templateErrorLocation: "오류 메시지 맞춤",
       newPanelPosition: "새 패널 위치",
       showRangeInProgress: "진행률 표시줄 표시",
@@ -568,6 +569,7 @@ export var koreanStrings = {
     cellType: "셀 유형",
     colCount: "열 개수",
     choicesOrder: "항목 순서 선택",
+    allowCustomChoices: "사용자 지정 선택 허용",
     visible: "보입니까??",
     isRequired: "필수입니까?",
     markRequired: "필요에 따라 표시",
@@ -1190,6 +1192,7 @@ export var koreanStrings = {
       onPage: "각 페이지에서 재설정",
       onpanel: "각 패널에서 재설정",
       onPanel: "각 패널에서 재설정",
+      recursive: "재귀 번호 매기기",
       onSurvey: "설문조사 계속하기",
       off: "번호 매기기 없음"
     },
@@ -1381,6 +1384,7 @@ export var koreanStrings = {
       enableIf: "마술 지팡이 아이콘을 사용하여 패널에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
       templateQuestionTitleLocation: "이 패널 내의 모든 질문에 적용됩니다. 이 설정을 재정의하려면 개별 질문에 대한 제목 정렬 규칙을 정의합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
+      templateQuestionTitleWidth: "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       templateErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"상단\")을 적용합니다.",
       errorLocation: "패널 내의 모든 질문과 관련된 오류 메시지의 위치를 설정합니다. \"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정을 적용합니다.",
       page: "선택한 페이지의 끝으로 패널의 위치를 변경합니다.",
@@ -1516,6 +1520,9 @@ export var koreanStrings = {
     timeLimitPerPage: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
     validateVisitedEmptyFields: "이 옵션을 사용하면 사용자가 빈 입력 필드에 집중한 다음 변경하지 않고 떠날 때 유효성 검사를 트리거합니다.",
     page: {
+      name: "응답자에게 표시되지 않는 페이지 ID입니다.",
+      description: "페이지 부제목을 입력합니다.",
+      navigationTitle: "진행률 표시줄 또는 목차(TOC)의 탐색 단추에 표시되는 캡션입니다. 이 필드를 비워 두면 탐색 버튼에서 페이지 제목 또는 페이지 이름을 사용합니다. 진행률 표시줄 또는 TOC를 활성화하려면 \"설문 조사\" → \"탐색\"으로 이동합니다.",
       timeLimit: "설문조사가 다음 페이지로 자동 넘어가는 시간 간격(초)입니다.",
       visibleIf: "마술 지팡이 아이콘을 사용하여 페이지 표시 여부를 결정하는 조건부 규칙을 설정할 수 있습니다.",
       enableIf: "마술 지팡이 아이콘을 사용하여 페이지에 대해 읽기 전용 모드를 비활성화하는 조건부 규칙을 설정합니다.",
@@ -1543,6 +1550,7 @@ export var koreanStrings = {
     choicesFromQuestionMode: "다음 중에서 선택: \"모두\" - 선택한 질문의 모든 선택 옵션을 복사합니다. \"선택됨\" - 선택한 선택 옵션만 동적으로 복사합니다. \"선택되지 않음\" - 선택되지 않은 선택 옵션만 동적으로 복사합니다. \"없음\" 및 \"기타\" 옵션은 원본 질문에서 활성화된 경우 기본적으로 복사됩니다.",
     choiceValuesFromQuestion: "단일 선택 및 다중 선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정은 ID를 제공해야 하는 행렬 열 또는 패널 질문을 지정합니다.",
     choiceTextsFromQuestion: "단일 선택 및 다중 선택 질문 유형에서 각 선택 옵션에는 ID와 표시 값이 있습니다. 이 설정은 표시 텍스트를 제공해야 하는 행렬 열 또는 패널 질문을 지정합니다.",
+    allowCustomChoices: "드롭다운에서 원하는 옵션을 사용할 수 없는 경우 응답자가 자신의 선택 항목을 추가할 수 있도록 하려면 선택합니다. 사용자 지정 선택 항목은 현재 브라우저 세션 동안 일시적으로만 저장됩니다.",
     showOtherItem: "이 옵션을 선택하면 사용자가 별도의 주석 상자에 추가 입력을 포함할 수 있습니다.",
     separateSpecialChoices: "각 특수 선택 옵션(\"없음\", \"기타\", \"모두 선택\")을 새 줄에 표시합니다(여러 열 레이아웃을 사용하는 경우에도 마찬가지임).",
     path: "서비스 데이터 세트 내에서 대상 객체 배열이 있는 위치를 지정합니다. URL이 이미 배열을 가리키는 경우 비워 둡니다.",
@@ -3241,3 +3249,11 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "질문 주석에 대해 텍스트 영역에 표시되는 줄 수를 설정합니다. 입력이 더 많은 줄을 차지하면 스크롤 막대가 나타납니다."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "동적 텍스트에 대한 기본 표시 값"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML 질문과 설문 요소의 동적 제목 및 설명에 표시되는 값으로, 질문 값이 비어 있을 때 표시됩니다."
+// showQuestionNumbers.recursive: "Recursive numbering" => "재귀 번호 매기기"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "질문 제목 너비"
+// pe.allowCustomChoices: "Allow custom choices" => "사용자 지정 선택 허용"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "질문 제목이 질문 상자의 왼쪽에 정렬될 때 일관된 너비를 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다."
+// page.name: "A page ID that is not visible to respondents." => "응답자에게 표시되지 않는 페이지 ID입니다."
+// page.description: "Type a page subtitle." => "페이지 부제목을 입력합니다."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "진행률 표시줄 또는 목차(TOC)의 탐색 단추에 표시되는 캡션입니다. 이 필드를 비워 두면 탐색 버튼에서 페이지 제목 또는 페이지 이름을 사용합니다. 진행률 표시줄 또는 TOC를 활성화하려면 \"설문 조사\" → \"탐색\"으로 이동합니다."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "드롭다운에서 원하는 옵션을 사용할 수 없는 경우 응답자가 자신의 선택 항목을 추가할 수 있도록 하려면 선택합니다. 사용자 지정 선택 항목은 현재 브라우저 세션 동안 일시적으로만 저장됩니다."

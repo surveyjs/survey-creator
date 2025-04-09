@@ -338,6 +338,7 @@ export var indonesianStrings = {
       titleLocation: "Perataan judul panel",
       descriptionLocation: "Perataan deskripsi panel",
       templateQuestionTitleLocation: "Perataan judul pertanyaan",
+      templateQuestionTitleWidth: "Lebar judul pertanyaan",
       templateErrorLocation: "Perataan pesan kesalahan",
       newPanelPosition: "Lokasi panel baru",
       showRangeInProgress: "Menampilkan bilah kemajuan",
@@ -568,6 +569,7 @@ export var indonesianStrings = {
     cellType: "Jenis sel",
     colCount: "Jumlah kolom",
     choicesOrder: "Tentukan urutan pilihan",
+    allowCustomChoices: "Izinkan pilihan khusus",
     visible: "Terlihat?",
     isRequired: "Wajib?",
     markRequired: "Tandai sesuai kebutuhan",
@@ -1190,6 +1192,7 @@ export var indonesianStrings = {
       onPage: "Setel ulang di setiap halaman",
       onpanel: "Setel ulang pada setiap panel",
       onPanel: "Setel ulang pada setiap panel",
+      recursive: "Penomoran rekursif",
       onSurvey: "Lanjutkan di seluruh survei",
       off: "Tanpa penomoran"
     },
@@ -1381,6 +1384,7 @@ export var indonesianStrings = {
       enableIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menonaktifkan mode baca-saja untuk panel.",
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang mencegah pengiriman survei kecuali setidaknya satu pertanyaan bertingkat memiliki jawaban.",
       templateQuestionTitleLocation: "Berlaku untuk semua pertanyaan dalam panel ini. Jika Anda ingin mengganti setelan ini, tentukan aturan perataan judul untuk masing-masing pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Teratas\" secara default).",
+      templateQuestionTitleWidth: "Mengatur lebar yang konsisten untuk judul pertanyaan saat disejajarkan ke kiri kotak pertanyaan mereka. Menerima nilai CSS (px, %, in, pt, dll.).",
       templateErrorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan pertanyaan dengan input yang tidak valid. Pilih antara: \"Atas\" - teks kesalahan ditempatkan di bagian atas kotak pertanyaan; \"Bawah\" - teks kesalahan ditempatkan di bagian bawah kotak pertanyaan. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Teratas\" secara default).",
       errorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan semua pertanyaan dalam panel. Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei.",
       page: "Memposisikan ulang panel ke akhir halaman yang dipilih.",
@@ -1516,6 +1520,9 @@ export var indonesianStrings = {
     timeLimitPerPage: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya.",
     validateVisitedEmptyFields: "Aktifkan opsi ini untuk memicu validasi saat pengguna berfokus pada bidang input kosong dan kemudian meninggalkannya tanpa membuat perubahan apa pun.",
     page: {
+      name: "ID halaman yang tidak terlihat oleh responden.",
+      description: "Ketik subjudul halaman.",
+      navigationTitle: "Keterangan yang ditampilkan pada tombol navigasi di bilah kemajuan atau daftar isi (TOC). Jika Anda membiarkan bidang ini kosong, tombol navigasi akan menggunakan judul halaman atau nama halaman. Untuk mengaktifkan bilah kemajuan atau TOC, buka \"Survei\" → \"Navigasi\".",
       timeLimit: "Interval waktu dalam hitungan detik setelah survei maju secara otomatis ke halaman berikutnya.",
       visibleIf: "Gunakan ikon tongkat ajaib untuk menetapkan aturan bersyarat yang menentukan visibilitas halaman.",
       enableIf: "Gunakan ikon tongkat ajaib untuk mengatur aturan bersyarat yang menonaktifkan mode baca-saja untuk halaman.",
@@ -1543,6 +1550,7 @@ export var indonesianStrings = {
     choicesFromQuestionMode: "Pilih dari: \"Semua\" - menyalin semua opsi pilihan dari pertanyaan yang dipilih; \"Dipilih\" - secara dinamis menyalin hanya opsi pilihan yang dipilih; \"Tidak dipilih\" - secara dinamis hanya menyalin opsi pilihan yang tidak dipilih. Opsi \"Tidak Ada\" dan \"Lainnya\" disalin secara default jika diaktifkan dalam pertanyaan sumber.",
     choiceValuesFromQuestion: "Dalam jenis pertanyaan pilihan tunggal dan pilihan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Pengaturan ini menentukan kolom matriks atau pertanyaan panel mana yang harus memberikan ID.",
     choiceTextsFromQuestion: "Dalam jenis pertanyaan pilihan tunggal dan pilihan ganda, setiap opsi pilihan memiliki ID dan nilai tampilan. Pengaturan ini menentukan kolom matriks atau pertanyaan panel mana yang harus menyediakan teks tampilan.",
+    allowCustomChoices: "Pilih untuk mengizinkan responden menambahkan pilihan mereka sendiri jika opsi yang diinginkan tidak tersedia di menu drop-down. Pilihan khusus hanya akan disimpan sementara selama sesi browser saat ini.",
     showOtherItem: "Saat dipilih, pengguna dapat menyertakan input tambahan di kotak komentar terpisah.",
     separateSpecialChoices: "Menampilkan setiap opsi pilihan khusus (\"Tidak Ada\", \"Lainnya\", \"Pilih Semua\") pada baris baru, bahkan saat menggunakan tata letak beberapa kolom.",
     path: "Tentukan lokasi dalam himpunan data layanan tempat array objek target berada. Biarkan kosong jika URL sudah menunjuk ke array.",
@@ -3191,3 +3199,11 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Mengatur jumlah baris yang ditampilkan di area teks untuk komentar pertanyaan. Jika input memakan lebih banyak baris, bilah gulir akan muncul."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Nilai tampilan default untuk teks dinamis"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Nilai yang ditampilkan dalam pertanyaan HTML dan dalam judul dinamis dan deskripsi elemen survei saat nilai pertanyaan kosong."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Penomoran rekursif"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Lebar judul pertanyaan"
+// pe.allowCustomChoices: "Allow custom choices" => "Izinkan pilihan khusus"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Mengatur lebar yang konsisten untuk judul pertanyaan saat disejajarkan ke kiri kotak pertanyaan mereka. Menerima nilai CSS (px, %, in, pt, dll.)."
+// page.name: "A page ID that is not visible to respondents." => "ID halaman yang tidak terlihat oleh responden."
+// page.description: "Type a page subtitle." => "Ketik subjudul halaman."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Keterangan yang ditampilkan pada tombol navigasi di bilah kemajuan atau daftar isi (TOC). Jika Anda membiarkan bidang ini kosong, tombol navigasi akan menggunakan judul halaman atau nama halaman. Untuk mengaktifkan bilah kemajuan atau TOC, buka \"Survei\" → \"Navigasi\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Pilih untuk mengizinkan responden menambahkan pilihan mereka sendiri jika opsi yang diinginkan tidak tersedia di menu drop-down. Pilihan khusus hanya akan disimpan sementara selama sesi browser saat ini."

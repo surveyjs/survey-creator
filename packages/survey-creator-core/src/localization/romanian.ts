@@ -338,6 +338,7 @@ export const roStrings = {
       titleLocation: "Alinierea titlului panoului",
       descriptionLocation: "Alinierea descrierii panoului",
       templateQuestionTitleLocation: "Alinierea titlului întrebării",
+      templateQuestionTitleWidth: "Lățimea titlului întrebării",
       templateErrorLocation: "Alinierea mesajului de eroare",
       newPanelPosition: "Locația noului panou",
       showRangeInProgress: "Afișați bara de progres",
@@ -568,6 +569,7 @@ export const roStrings = {
     cellType: "Tip intrare celulă",
     colCount: "Număr de coloane",
     choicesOrder: "Ordinea alegerilor",
+    allowCustomChoices: "Permiteți opțiuni personalizate",
     visible: "Vizibil",
     isRequired: "Obligatoriu",
     markRequired: "Marchează ca obligatoriu",
@@ -1190,6 +1192,7 @@ export const roStrings = {
       onPage: "Resetare pe fiecare pagină",
       onpanel: "Resetare pe fiecare panou",
       onPanel: "Resetare pe fiecare panou",
+      recursive: "Numerotare recursivă",
       onSurvey: "Continuă pe tot chestionarul",
       off: "Fără numerotare"
     },
@@ -1381,6 +1384,7 @@ export const roStrings = {
       enableIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care dezactivează modul doar citire pentru panou.",
       requiredIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
       templateQuestionTitleLocation: "Se aplică tuturor întrebărilor din acest panou. Dacă doriți să înlocuiți această setare, definiți reguli de aliniere a titlului pentru întrebările individuale. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
+      templateQuestionTitleWidth: "Setează lățimea consecventă pentru titlurile întrebărilor atunci când sunt aliniate la stânga casetelor de întrebări. Acceptă valori CSS (px, %, in, pt etc.).",
       templateErrorLocation: "Setează locația unui mesaj de eroare în raport cu o întrebare cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sus” implicit).",
       errorLocation: "Setează locația unui mesaj de eroare în raport cu toate întrebările din panou. Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar.",
       page: "Repoziționează panoul la sfârșitul unei pagini selectate.",
@@ -1516,6 +1520,9 @@ export const roStrings = {
     timeLimitPerPage: "Un interval de timp în secunde după care chestionarul avansează automat la pagina următoare. Ascunde butonul de navigare „Anterior”.",
     validateVisitedEmptyFields: "Activați această opțiune pentru a declanșa validarea atunci când un utilizator se concentrează pe un câmp de introducere gol și apoi îl lasă fără a efectua modificări.",
     page: {
+      name: "Un cod de pagină care nu este vizibil pentru respondenți.",
+      description: "Tastați o subtitrare a paginii.",
+      navigationTitle: "O legendă afișată pe un buton de navigare din bara de progres sau din cuprinsul (TOC). Dacă lăsați acest câmp gol, butonul de navigare va folosi titlul paginii sau numele paginii. Pentru a activa bara de progres sau TOC, accesați \"Sondaj\" → \"Navigare\".",
       timeLimit: "Un interval de timp în secunde după care chestionarul avansează automat la pagina următoare. Ascunde butonul de navigare „Anterior”.",
       visibleIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care determină vizibilitatea paginii.",
       enableIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care dezactivează modul doar citire pentru pagină.",
@@ -1543,6 +1550,7 @@ export const roStrings = {
     choicesFromQuestionMode: "Alegeți dintre: „Toate” - copiază toate opțiunile de alegere din întrebarea selectată; „Selectate” - copiază dinamic doar opțiunile de alegere selectate; „Neselectate” - copiază dinamic doar opțiunile de alegere neselectate. Opțiunile „Niciuna” și „Altele” sunt copiate implicit dacă sunt activate în întrebarea sursă.",
     choiceValuesFromQuestion: "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze ID-urile.",
     choiceTextsFromQuestion: "În tipurile de întrebări cu selecție unică și multiplă, fiecare opțiune de alegere are un ID și o valoare afișată. Această setare specifică ce coloană de matrice sau întrebare de panou ar trebui să furnizeze textele afișate.",
+    allowCustomChoices: "Selectați pentru a permite respondenților să-și adauge propriile opțiuni dacă opțiunea dorită nu este disponibilă în meniul drop-down. Opțiunile personalizate vor fi stocate doar temporar pe durata sesiunii curente a browserului.",
     showOtherItem: "Când este selectat, utilizatorii pot include intrare suplimentară într-o casetă de comentarii separată.",
     separateSpecialChoices: "Afișează fiecare opțiune de alegere specială („Niciuna”, „Altele”, „Selectează toate”) pe un rând nou, chiar și atunci când utilizați un layout pe mai multe coloane.",
     path: "Specificați locația din cadrul setului de date al serviciului unde se află array-ul de obiecte țintă. Lăsați gol dacă URL-ul indică deja către array.",
@@ -1977,3 +1985,11 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Setează numărul de linii afișate în zonele de text pentru comentariile la întrebări. Dacă intrarea ocupă mai multe linii, apare bara de derulare."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Valoarea de afișare implicită pentru textele dinamice"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "O valoare afișată în întrebările HTML și în titlurile și descrierile dinamice ale elementelor chestionarului atunci când valoarea întrebării este goală."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Numerotare recursivă"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Lățimea titlului întrebării"
+// pe.allowCustomChoices: "Allow custom choices" => "Permiteți opțiuni personalizate"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Setează lățimea consecventă pentru titlurile întrebărilor atunci când sunt aliniate la stânga casetelor de întrebări. Acceptă valori CSS (px, %, in, pt etc.)."
+// page.name: "A page ID that is not visible to respondents." => "Un cod de pagină care nu este vizibil pentru respondenți."
+// page.description: "Type a page subtitle." => "Tastați o subtitrare a paginii."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "O legendă afișată pe un buton de navigare din bara de progres sau din cuprinsul (TOC). Dacă lăsați acest câmp gol, butonul de navigare va folosi titlul paginii sau numele paginii. Pentru a activa bara de progres sau TOC, accesați \"Sondaj\" → \"Navigare\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Selectați pentru a permite respondenților să-și adauge propriile opțiuni dacă opțiunea dorită nu este disponibilă în meniul drop-down. Opțiunile personalizate vor fi stocate doar temporar pe durata sesiunii curente a browserului."

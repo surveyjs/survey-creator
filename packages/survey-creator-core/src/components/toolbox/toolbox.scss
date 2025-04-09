@@ -38,14 +38,18 @@
 }
 
 .svc-toolbox {
+  .sv-scroll__wrapper {
+    height: 0;
+    flex-grow: 1;
+  }
 
-  .svc-scroll__scroller {
+  .sv-scroll__scroller {
     padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150))
       var(--ctr-toolbox-padding-bottom, var(--sjs-spacing-x2)) var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150));
     align-items: var(--ctr-toolbox-scroller-align-items, flex-start);
 
   }
-  .svc-scroll__scrollbar {
+  .sv-scroll__scrollbar {
     inset-inline-end: var(--ctr-toolbox-scrollbar-right, 0);
     inset-inline-start: var(--ctr-toolbox-scrollbar-left, "auto");
     padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) 0 var(--ctr-toolbox-padding-bottom, var(--sjs-spacing-x2)) 0;
@@ -62,7 +66,7 @@
     width: var(--toolbox-width-compact);
     min-width: var(--toolbox-width-compact);
   }
-  .svc-scroll__scroller {
+  .sv-scroll__scroller {
     width: 100vw;
     padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) var(--ctr-toolbox-group-padding-right-compact, var(--sjs-spacing-x150))
       var(--ctr-toolbox-padding-bottom, var(--sjs-spacing-x2)) var(--ctr-toolbox-group-padding-left-compact, var(--sjs-spacing-x150));
@@ -158,6 +162,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-bottom: var(--ctr-toolbox-gap, var(--sjs-spacing-x05));
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .svc-toolbox__category-separator {
@@ -201,24 +209,28 @@
 }
 
 .svc-toolbox__category-header-wrapper {
-  padding: var(--ctr-toolbox-group-header-margin-top, var(--sjs-spacing-x1)) var(--ctr-toolbox-group-header-margin-left, 0px)
-    var(--ctr-toolbox-group-header-margin-bottom, var(--sjs-spacing-x1)) var(--ctr-toolbox-group-header-margin-left, 0px);
+  padding: var(--ctr-toolbox-group-header-margin-top, 0px) var(--ctr-toolbox-group-header-margin-left, var(--sjs-spacing-x150))
+    var(--ctr-toolbox-group-header-margin-bottom, 0px) var(--ctr-toolbox-group-header-margin-right, var(--sjs-spacing-x150));
   margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150)));
   margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)));
   align-self: stretch;
 }
 .svc-toolbox__category-header {
+  min-height: var(--ctr-toolbox-group-header-min-height, var(--sjs-spacing-x5));
   padding-top: var(--ctr-toolbox-group-header-padding-top, var(--sjs-spacing-x1));
   padding-inline-end: var(--ctr-toolbox-group-header-padding-right, var(--sjs-spacing-x1));
   padding-bottom: var(--ctr-toolbox-group-header-padding-bottom, var(--sjs-spacing-x1));
-  padding-inline-start: var(--ctr-toolbox-group-header-padding-left, var(--sjs-spacing-x3));
+  padding-inline-start: var(--ctr-toolbox-group-header-padding-left, var(--sjs-spacing-x2));
+
+  border-radius: var(--ctr-toolbox-group-header-corner-radius, var(--sjs-corner-radius-x1));
+  background: var(--ctr-toolbox-group-header-background-color, var(--sjs-layer-1-background-400, #f5f5f5ff));
 
   box-shadow:
     inset 0 var(--ctr-toolbox-group-header-border-width-top, 0px)
       var(--ctr-toolbox-group-header-border-color, var(--sjs-border-25, #d4d4d4ff)),
     inset calc(0px - var(--ctr-toolbox-group-header-border-width-right, 0px)) 0
       var(--ctr-toolbox-group-header-border-color, var(--sjs-border-25, #d4d4d4ff)),
-    inset 0 calc(0px - var(--ctr-toolbox-group-header-border-width-bottom, var(--sjs-stroke-x1)))
+    inset 0 calc(0px - var(--ctr-toolbox-group-header-border-width-bottom, 0px))
       var(--ctr-toolbox-group-header-border-color, var(--sjs-border-25, #d4d4d4ff)),
     inset var(--ctr-toolbox-group-header-border-width-left, 0px) 0
       var(--ctr-toolbox-group-header-border-color, var(--sjs-border-25, #d4d4d4ff));
@@ -228,6 +240,7 @@
   min-width: calcSize(20);
   position: relative;
   display: flex;
+  align-items: center;
 }
 
 .svc-toolbox__category-header--collapsed {
@@ -245,10 +258,12 @@
 .svc-toolbox__category-header__controls {
   inset-inline-end: calcSize(1);
   top: var(--ctr-category-header-controls-top, calcSize(1));
-  display: none;
+  display: flex;
+  opacity: 0;
   align-self: center;
   margin-top: -50%;
   margin-bottom: -50%;
+  transition: opacity $creator-transition-duration;
 }
 
 .svc-toolbox__category-header__button {
@@ -259,7 +274,7 @@
 
 .svc-toolbox__category-header:hover {
   .svc-toolbox__category-header__controls {
-    display: flex;
+    opacity: 1;
   }
 }
 

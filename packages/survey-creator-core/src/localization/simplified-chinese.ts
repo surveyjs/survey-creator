@@ -338,6 +338,7 @@ var simplifiedChineseTranslation = {
       titleLocation: "面板标题对齐方式",
       descriptionLocation: "面板描述对齐方式",
       templateQuestionTitleLocation: "问题标题对齐方式",
+      templateQuestionTitleWidth: "问题标题宽度",
       templateErrorLocation: "错误消息对齐",
       newPanelPosition: "新面板位置",
       showRangeInProgress: "显示进度条",
@@ -568,6 +569,7 @@ var simplifiedChineseTranslation = {
     cellType: "单元格类型",
     colCount: "列数",
     choicesOrder: "设置选项顺序",
+    allowCustomChoices: "允许自定义选项",
     visible: "是否可见?",
     isRequired: "是否为必填项?",
     markRequired: "标记为必填",
@@ -1190,6 +1192,7 @@ var simplifiedChineseTranslation = {
       onPage: "在每个页面上重置",
       onpanel: "在每个面板上重置",
       onPanel: "在每个面板上重置",
+      recursive: "递归编号",
       onSurvey: "在整个调查中继续",
       off: "无编号"
     },
@@ -1381,6 +1384,7 @@ var simplifiedChineseTranslation = {
       enableIf: "使用魔棒图标设置禁用面板只读模式的条件规则。",
       requiredIf: "使用魔杖图标设置条件规则，除非至少有一个嵌套问题有答案，否则该规则将阻止调查提交。",
       templateQuestionTitleLocation: "适用于此面板中的所有问题。如果要覆盖此设置，请为单个问题定义标题对齐规则。“继承”选项应用页面级别（如果已设置）或调查级别设置（默认为“顶部”）。",
+      templateQuestionTitleWidth: "当问题标题与问题框的左侧对齐时，为问题标题设置一致的宽度。接受 CSS 值（px、%、in、pt 等）。",
       templateErrorLocation: "设置与输入无效的问题相关的错误消息的位置。选择：“顶部” - 错误文本放置在问题框的顶部;“底部” - 错误文本放置在问题框的底部。“继承”选项应用页面级别（如果已设置）或调查级别设置（默认为“顶部”）。",
       errorLocation: "设置与面板中所有问题相关的错误消息的位置。“继承”选项应用页面级别（如果已设置）或调查级别设置。",
       page: "将面板重新定位到所选页面的末尾。",
@@ -1516,6 +1520,9 @@ var simplifiedChineseTranslation = {
     timeLimitPerPage: "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到下一页。",
     validateVisitedEmptyFields: "启用此选项可在用户将焦点放在空输入字段上，然后离开该字段而不进行任何更改时触发验证。",
     page: {
+      name: "受访者不可见的页面 ID。",
+      description: "键入页面副标题。",
+      navigationTitle: "显示在进度条或目录 （TOC） 中的导航按钮上的说明。如果将此字段留空，则导航按钮将使用页面标题或页面名称。要启用进度条或 TOC，请转到“调查”→“导航”。",
       timeLimit: "以秒为单位的时间间隔，在此时间间隔之后，调查将自动前进到下一页。",
       visibleIf: "使用魔杖图标设置确定页面可见性的条件规则。",
       enableIf: "使用魔杖图标设置禁用页面只读模式的条件规则。",
@@ -1543,6 +1550,7 @@ var simplifiedChineseTranslation = {
     choicesFromQuestionMode: "从以下选项中选择：“全部” - 复制所选问题中的所有选项;“Selected” - 仅动态复制选定的选项选项;“未选择” - 仅动态复制未选择的选项。默认情况下，如果在源问题中启用了“无”和“其他”选项，则会复制该选项。",
     choiceValuesFromQuestion: "在单选和多选问题类型中，每个选项都有一个 ID 和显示值。此设置指定哪个矩阵、列或面板问题应提供 ID。",
     choiceTextsFromQuestion: "在单选和多选问题类型中，每个选项都有一个 ID 和显示值。此设置指定哪个矩阵列或面板问题应提供显示文本。",
+    allowCustomChoices: "如果下拉列表中没有所需的选项，则选择以允许受访者添加自己的选择。自定义选项将仅在当前浏览器会话期间临时存储。",
     showOtherItem: "选中后，用户可以在单独的注释框中包含其他输入。",
     separateSpecialChoices: "在新行上显示每个特殊选项（“无”、“其他”、“全选”），即使使用多列布局也是如此。",
     path: "指定服务数据集中目标对象数组所在的位置。如果 URL 已指向数组，则留空。",
@@ -3178,3 +3186,11 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "设置问题注释的文本区域中显示的行数。如果输入占用更多行，则会显示滚动条。"
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "动态文本的默认显示值"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "当问题值为空时，显示在 HTML 问题以及调查元素的动态标题和描述中的值。"
+// showQuestionNumbers.recursive: "Recursive numbering" => "递归编号"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "问题标题宽度"
+// pe.allowCustomChoices: "Allow custom choices" => "允许自定义选项"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "当问题标题与问题框的左侧对齐时，为问题标题设置一致的宽度。接受 CSS 值（px、%、in、pt 等）。"
+// page.name: "A page ID that is not visible to respondents." => "受访者不可见的页面 ID。"
+// page.description: "Type a page subtitle." => "键入页面副标题。"
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "显示在进度条或目录 （TOC） 中的导航按钮上的说明。如果将此字段留空，则导航按钮将使用页面标题或页面名称。要启用进度条或 TOC，请转到“调查”→“导航”。"
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "如果下拉列表中没有所需的选项，则选择以允许受访者添加自己的选择。自定义选项将仅在当前浏览器会话期间临时存储。"

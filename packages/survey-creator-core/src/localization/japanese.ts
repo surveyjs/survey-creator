@@ -338,6 +338,7 @@ export var jaStrings = {
       titleLocation: "パネルタイトルの配置",
       descriptionLocation: "パネル記述の位置合わせ",
       templateQuestionTitleLocation: "質問タイトルの配置",
+      templateQuestionTitleWidth: "質問タイトルの幅",
       templateErrorLocation: "エラー・メッセージのアライメント",
       newPanelPosition: "新しいパネルの位置",
       showRangeInProgress: "進行状況バーを表示する",
@@ -568,6 +569,7 @@ export var jaStrings = {
     cellType: "セルタイプ",
     colCount: "行の数",
     choicesOrder: "選択順",
+    allowCustomChoices: "カスタム選択を許可する",
     visible: "表示",
     isRequired: "必須",
     markRequired: "必須としてマーク",
@@ -1190,6 +1192,7 @@ export var jaStrings = {
       onPage: "各ページでリセット",
       onpanel: "各パネルでリセット",
       onPanel: "各パネルでリセット",
+      recursive: "再帰的なナンバリング",
       onSurvey: "調査を続ける",
       off: "ナンバリングなし"
     },
@@ -1381,6 +1384,7 @@ export var jaStrings = {
       enableIf: "魔法の杖アイコンを使用して、パネルの読み取り専用モードを無効にする条件付きルールを設定します。",
       requiredIf: "魔法の杖アイコンを使用して、ネストされた質問に回答が少なくとも1つない限り、調査の送信を禁止する条件付きルールを設定します。",
       templateQuestionTitleLocation: "このパネル内のすべての質問に適用されます。この設定を上書きする場合は、個々の質問のタイトル配置ルールを定義します。「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「上」)を適用します。",
+      templateQuestionTitleWidth: "質問タイトルが問題ボックスの左側に配置されている場合に、質問タイトルの一貫した幅を設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
       templateErrorLocation: "無効な入力を含む質問に関連するエラーメッセージの場所を設定します。次から選択します: \"Top\" - 質問ボックスの上部にエラーテキストが配置されます。\"Bottom\" - 質問ボックスの下部にエラーテキストが配置されます。「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「上」)を適用します。",
       errorLocation: "パネル内のすべての質問に関連するエラーメッセージの位置を設定します。[継承] オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定を適用します。",
       page: "パネルを選択したページの末尾に再配置します。",
@@ -1516,6 +1520,9 @@ export var jaStrings = {
     timeLimitPerPage: "アンケートが次のページに自動進むまでの時間間隔 (秒単位)。",
     validateVisitedEmptyFields: "このオプションを有効にすると、ユーザーが空の入力フィールドに注目し、変更を加えずにそのフィールドを離れたときに検証がトリガーされます。",
     page: {
+      name: "回答者に表示されないページID。",
+      description: "ページのサブタイトルを入力します。",
+      navigationTitle: "進行状況バーまたは目次 (TOC) のナビゲーション ボタンに表示されるキャプション。このフィールドを空のままにすると、ナビゲーション ボタンはページ タイトルまたはページ名を使用します。プログレスバーまたは目次を有効にするには、「アンケート」→「ナビゲーション」に移動します。",
       timeLimit: "アンケートが次のページに自動進むまでの時間間隔 (秒単位)。",
       visibleIf: "魔法の杖アイコンを使用して、ページの表示を決定する条件付きルールを設定します。",
       enableIf: "魔法の杖アイコンを使用して、ページの読み取り専用モードを無効にする条件付きルールを設定します。",
@@ -1543,6 +1550,7 @@ export var jaStrings = {
     choicesFromQuestionMode: "選択元: 「すべて」 - 選択した質問からすべての選択肢をコピーします。\"Selected\" - 選択した選択肢オプションのみを動的にコピーします。「未選択」 - 選択されていない選択肢オプションのみを動的にコピーします。「なし」と「その他」のオプションは、ソースの質問で有効になっている場合、デフォルトでコピーされます。",
     choiceValuesFromQuestion: "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、どの行列列またはパネルの質問がIDを提供するかを指定します。",
     choiceTextsFromQuestion: "単一選択問題タイプと複数選択問題タイプでは、各選択肢オプションにIDと表示値があります。この設定では、表示テキストを提供する行列列またはパネルの質問を指定します。",
+    allowCustomChoices: "選択すると、回答者は、目的のオプションがドロップダウンにない場合に、独自の選択肢を追加できます。カスタム選択は、現在のブラウザセッションの期間中のみ一時的に保存されます。",
     showOtherItem: "選択すると、ユーザーは別のコメント ボックスに追加の入力を含めることができます。",
     separateSpecialChoices: "各特殊選択オプション(「なし」、「その他」、「すべて選択」)を、複数列のレイアウトを使用している場合でも、新しい行に表示します。",
     path: "サービス データセット内で、オブジェクトのターゲット配列が配置されている場所を指定します。URL が既に配列を指している場合は、空のままにします。",
@@ -3036,3 +3044,11 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "質問コメントのテキストエリアに表示される行数を設定します。入力がより多くの行を占める場合は、スクロールバーが表示されます。"
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "ダイナミックテキストのデフォルトの表示値"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML の質問、および質問の値が空の場合にアンケート要素の動的なタイトルと説明に表示される値。"
+// showQuestionNumbers.recursive: "Recursive numbering" => "再帰的なナンバリング"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "質問タイトルの幅"
+// pe.allowCustomChoices: "Allow custom choices" => "カスタム選択を許可する"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "質問タイトルが問題ボックスの左側に配置されている場合に、質問タイトルの一貫した幅を設定します。CSS 値 (px、%、in、pt など) を受け入れます。"
+// page.name: "A page ID that is not visible to respondents." => "回答者に表示されないページID。"
+// page.description: "Type a page subtitle." => "ページのサブタイトルを入力します。"
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "進行状況バーまたは目次 (TOC) のナビゲーション ボタンに表示されるキャプション。このフィールドを空のままにすると、ナビゲーション ボタンはページ タイトルまたはページ名を使用します。プログレスバーまたは目次を有効にするには、「アンケート」→「ナビゲーション」に移動します。"
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "選択すると、回答者は、目的のオプションがドロップダウンにない場合に、独自の選択肢を追加できます。カスタム選択は、現在のブラウザセッションの期間中のみ一時的に保存されます。"

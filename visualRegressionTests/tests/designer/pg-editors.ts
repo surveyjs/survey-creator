@@ -365,7 +365,7 @@ test("Dropdown popup in property grid", async (t) => {
 
     await t
       .click(Selector(".svc-element__add-new-question"))
-      .click(Selector(".spg-dropdown[aria-label='Input type']"));
+      .click(Selector(".spg-question[data-name='inputType'] .spg-dropdown"));
 
     await takeElementScreenshot("pg-dropdown-editor.png", Selector(".svc-side-bar"), t, comparer);
   });
@@ -737,16 +737,16 @@ test("Dropdown input in property grid", async (t) => {
 
     await t
       .click(surveySettingsButtonSelector)
-      .click(Selector(".spg-dropdown[aria-label='Select a survey language']"))
+      .click(Selector(".spg-question[data-name='locale'] .spg-dropdown"))
       .pressKey("a l i");
 
-    await takeElementScreenshot("pg-dropdown-editor-input.png", Selector(".spg-dropdown[aria-label='Select a survey language']"), t, comparer);
+    await takeElementScreenshot("pg-dropdown-editor-input.png", Selector(".spg-question[data-name='locale'] .spg-dropdown"), t, comparer);
   });
 });
 test("Dropdown clean button in property grid", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1240, 870);
-    const dropdownSelector = Selector(".spg-dropdown[aria-label='Select a survey language']");
+    const dropdownSelector = Selector(".spg-question[data-name='locale'] .spg-dropdown");
     await t
       .click(surveySettingsButtonSelector)
       .click(dropdownSelector)
@@ -793,7 +793,7 @@ test("Check property grid mask settings", async (t) => {
     await t
       .click(getPropertyGridCategory(generalGroupName))
       .click(getPropertyGridCategory(inputMaskSettingsGroupName))
-      .click(Selector(".spg-dropdown[aria-label='Input mask type']"))
+      .click(Selector(".spg-question[data-name='maskType'] .spg-dropdown"))
       .click(getListItemByText("Pattern"));
 
     const expandedGroup = Selector(".spg-root-modern .spg-panel.sd-element--expanded");
@@ -853,7 +853,7 @@ test("popup overlay in property grid", async (t) => {
     await t
       .click("div[data-sv-drop-target-survey-element='question1']", { offsetX: 200, offsetY: 30 })
       .click(getQuestionBarItemByTitle("Open settings"))
-      .click(Selector(".spg-dropdown[aria-label='Input type']"));
+      .click(Selector(".spg-question[data-name='inputType'] .spg-dropdown"));
 
     await takeElementScreenshot("pg-overlay-popup.png", getVisibleElement(".sv-popup"), t, comparer);
   });

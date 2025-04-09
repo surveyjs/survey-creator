@@ -37,7 +37,7 @@ const buildPlatformJson = {
     "**/*"
   ],
   main: packageJson.name + ".js",
-  module: "fesm/survey-creator-js.js",
+  module: "fesm/survey-creator-js.mjs",
   repository: {
     type: "git",
     url: "https://github.com/surveyjs/survey-creator.git"
@@ -57,7 +57,7 @@ const buildPlatformJson = {
   exports: {
     ".": {
       "types": "./typings/survey-creator-js/entries/index.d.ts",
-      "import": "./fesm/survey-creator-js.js",
+      "import": "./fesm/survey-creator-js.mjs",
       "require": "./survey-creator-js.js"
     }
   },

@@ -12,11 +12,16 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { SvComponent } from "survey-vue3-ui";
+import { SvComponent, useBase, useComputedArray } from "survey-vue3-ui";
 import type { ListModel } from "survey-core";
 import type { CreatorBase } from "survey-creator-core";
-defineProps<{
+import {
+  computed
+} from "vue";
+const props = defineProps<{
   model: ListModel;
   creator: CreatorBase;
 }>();
+const renderedActions = useComputedArray(() => props.model.renderedActions);
+useBase(() => props.model);
 </script>

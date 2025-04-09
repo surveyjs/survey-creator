@@ -524,6 +524,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.prevPageAction = new Action({
       id: "prevPage",
       iconName: "icon-arrow-left_16x16",
+      title: getLocString("ts.prevPage"),
+      showTitle: false,
       iconSize: "auto",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
@@ -534,6 +536,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.nextPageAction = new Action({
       id: "nextPage",
       iconName: "icon-arrow-right_16x16",
+      showTitle: false,
+      title: getLocString("ts.nextPage"),
       iconSize: "auto",
       visible: false
     });
@@ -892,7 +896,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     return this.getThemeChanges();
   }
   public getThemeChanges() {
-    return getThemeChanges(this.creator.theme);
+    const themeModel = new ThemeModel();
+    themeModel.fromJSON(this.creator.theme);
+    const theme = themeModel.toJSON({ storeDefaults: false });
+    return getThemeChanges(theme);
   }
   /**
    * Indicates whether the selected theme has been modified.

@@ -1,7 +1,7 @@
 import { CreatorTester } from "../creator-tester";
 import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components/results";
-import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, _setIsTouch, Action } from "survey-core";
+import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, _setIsTouch, Action, PopupDropdownViewModel, settings as surveySettings } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 import { SurveySimulatorModel, simulatorDevices } from "../../src/components/simulator";
 import { editorLocalization, getLocString } from "../../src/editorLocalization";
@@ -1148,4 +1148,33 @@ test("Preview tab: use theme palatte corresponding cretor theme palette if theme
   testPlugin.activate();
   expect(testPlugin.model.simulator.survey["themeName"]).toBe("my");
   expect(testPlugin.model.simulator.survey["colorPalette"]).toBe("dark");
+});
+test("Page Selector - The selected element is not updated when navigating between survey pages", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", elements: [{ type: "text", name: "question1" }] },
+      { name: "page2", elements: [{ type: "text", name: "question2" }] },
+      { name: "page3", elements: [{ type: "text", name: "question3" }] },
+      { name: "page4", elements: [{ type: "text", name: "question4" }] }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.switchTab("test");
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  const selectPageAction = model.selectPageAction;
+  const popupViewModel = new PopupDropdownViewModel(selectPageAction.popupModel); // need for popupModel.onShow
+  const listModel = selectPageAction.popupModel.contentComponentData.model as ListModel;
+  expect(model.survey.currentPage.name).toBe("page1");
+
+  model.survey.nextPage();
+  model.survey.nextPage();
+  expect(model.survey.currentPage.name).toBe("page3");
+
+  selectPageAction.action();
+  expect(listModel.selectedItem.id).toBe("page3");
+  expect(listModel.isItemSelected(listModel.actions[2])).toBeTruthy();
+
+  surveySettings.animationEnabled = true;
 });

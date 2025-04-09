@@ -1,6 +1,5 @@
  /* Variables  */
  :root {
-  --ctr-toolbox-group-header-margin-left: 0px;
   --ctr-button-group-item-border-width: 0px;
   --ctr-popup-menu-padding-left: 0px;
   --ctr-popup-menu-padding-right: 0px;
@@ -29,7 +28,6 @@
   --ctr-shadow-x-large-blur: 64px;
   --ctr-shadow-x-large-spread: 0px;
   --ctr-property-grid-placeholder-text-max-width: 320px;
-  --ctr-toolbox-group-header-margin-right: 0px;
   --ctr-property-grid-placeholder-padding-bottom: 0px;
   --ctr-editor-content-text-opacity-disabled: 25px;
   --ctr-editor-label-opacity-disabled: 25px;
@@ -56,6 +54,7 @@
   --ctr-button-text-opacity-disabled: 25px;
   --ctr-property-grid-switcher-toggle-button-border-width-checked: 0px;
   --ctr-property-grid-chapter-caption-text-opacity-disabled: 25px;
+  --ctr-toolbox-group-header-border-width-bottom: 0px;
   --ctr-notification-opacity: 75px;
   --ctr-notification-opacity-error: 100px;
   --ctr-string-table-row-border-width-top: 0px;
@@ -131,6 +130,8 @@
   --ctr-page-navigator-item-opacity-step-2: 50px;
   --ctr-page-navigator-item-opacity-step-3: 25px;
   --ctr-toolbox-search-corner-radius: 0px;
+  --ctr-toolbox-group-header-margin-top: 0px;
+  --ctr-toolbox-group-header-margin-bottom: 0px;
   --lbr-shadow-x-large-offset-x: 0px;
   --lbr-shadow-x-large-offset-y: 32px;
   --lbr-shadow-x-large-blur: 64px;
@@ -331,8 +332,9 @@
   --ctr-toolbox-background-color: var(--sjs-layer-1-background-500);
   --ctr-toolbox-border-color: var(--sjs-border-25);
   --ctr-toolbox-border-width-right: var(--sjs-stroke-x1);
-  --ctr-toolbox-group-header-padding-left: var(--sjs-spacing-x3);
+  --ctr-toolbox-group-header-padding-left: var(--sjs-spacing-x2);
   --ctr-toolbox-group-header-padding-right: var(--sjs-spacing-x1);
+  --ctr-toolbox-group-header-margin-left: var(--sjs-spacing-x150);
   --ctr-menu-toolbar-button-corner-radius: var(--sjs-corner-radius-x1);
   --ctr-menu-toolbar-button-background-color-selected: var(--sjs-primary-background-10);
   --ctr-menu-toolbar-button-icon-color: var(--sjs-layer-1-foreground-75);
@@ -477,6 +479,7 @@
   --ctr-surface-placeholder-max-width: var(--sjs-size-x90);
   --ctr-surface-placeholder-padding-top: var(--sjs-spacing-x4);
   --ctr-surface-placeholder-padding-right: var(--sjs-spacing-x6);
+  --ctr-toolbox-group-header-margin-right: var(--sjs-spacing-x150);
   --ctr-property-grid-tabs-padding-right: var(--sjs-spacing-x150);
   --ctr-property-grid-tabs-padding-top: var(--sjs-spacing-x150);
   --ctr-property-grid-placeholder-padding-right: var(--sjs-spacing-x6);
@@ -788,7 +791,6 @@
   --ctr-toolbox-group-header-padding-top: var(--sjs-spacing-x1);
   --ctr-toolbox-group-header-padding-bottom: var(--sjs-spacing-x1);
   --ctr-toolbox-group-header-border-color: var(--sjs-border-25);
-  --ctr-toolbox-group-header-border-width-bottom: var(--sjs-stroke-x1);
   --ctr-toolbox-group-header-text-color: var(--sjs-layer-1-foreground-100);
   --ctr-toolbox-group-header-expand-button-width: var(--sjs-font-size-x3);
   --ctr-toolbox-group-header-expand-button-height: var(--sjs-font-size-x3);
@@ -1398,8 +1400,6 @@
   --ctr-search-icon-height-small: var(--sjs-font-size-x2);
   --ctr-toolbox-search-icon-color: var(--sjs-primary-background-500);
   --ctr-toolbox-search-clear-button-icon-color-hovered: var(--sjs-semantic-red-background-500);
-  --ctr-toolbox-group-header-margin-top: var(--sjs-spacing-x1);
-  --ctr-toolbox-group-header-margin-bottom: var(--sjs-spacing-x1);
   --ctr-toolbox-separator-max-width-compact: var(--sjs-size-max);
   --ctr-toolbox-separator-padding-left-compact: var(--sjs-spacing-x2);
   --ctr-toolbox-separator-padding-right-compact: var(--sjs-spacing-x2);
@@ -2856,7 +2856,7 @@
   --ctr-survey-question-panel-floating-toolbar-padding-bottom: var(--lbr-spacing-x05);
   --ctr-survey-question-panel-floating-toolbar-gap-items: var(--lbr-spacing-x05);
   --ctr-survey-question-panel-floating-toolbar-corner-radius: var(--lbr-corner-radius-x05);
-  --ctr-survey-question-panel-floating-toolbar-border-color: var(--sjs-border-10);
+  --ctr-survey-question-panel-floating-toolbar-border-color: var(--sjs-border-25-overlay);
   --ctr-survey-question-panel-floating-toolbar-border-width: var(--lbr-stroke-x1);
   --ctr-survey-question-panel-floating-toolbar-background-color: var(--sjs-layer-1-background-500);
   --ctr-survey-question-panel-floating-toolbar-gap-groups: var(--lbr-spacing-x1);
@@ -3452,5 +3452,8 @@
   --lbr-list-item-text-color-action: var(--sjs-primary-background-500);
   --ctr-list-item-icon-width-small: var(--sjs-font-size-x2);
   --ctr-list-item-icon-height-small: var(--sjs-font-size-x2);
+  --ctr-toolbox-group-header-background-color: var(--sjs-layer-1-background-400);
+  --ctr-toolbox-group-header-corner-radius: var(--sjs-corner-radius-x1);
+  --ctr-toolbox-item-max-width: var(--sjs-size-x40);
 }
 

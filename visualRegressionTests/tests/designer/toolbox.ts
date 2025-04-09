@@ -253,6 +253,10 @@ test("Toolbox category collapsed", async (t) => {
     await ClientFunction(() => { window["creator"].toolbox.allowExpandMultipleCategories = true; })();
     await t.expect(Selector(".svc-toolbox__category-header--collapsed").withText("matrix-custom").visible).ok();
     await takeElementScreenshot("toolbox-categories-collapsed.png", toolboxElement, t, comparer);
+    await t.hover(".svc-toolbox__category-header");
+    await takeElementScreenshot("toolbox-category-collapsed-hover.png", Selector(".svc-toolbox__category-header"), t, comparer);
+    await t.click(".svc-toolbox__category-header");
+    await takeElementScreenshot("toolbox-category-hover.png", Selector(".svc-toolbox__category-header"), t, comparer);
   });
 });
 
@@ -294,6 +298,44 @@ test("Toolbox with subtypes (ltr)", async (t) => {
   });
 });
 
+test("Toolbox with custom subtypes set dynamically (ltr)", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const toolboxElement = Selector(".svc-toolbox");
+    const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filterVisible();
+
+    await setJSON({
+      showQuestionNumbers: "on", pages: [{ name: "page1" }]
+    });
+
+    const itemSelector = getToolboxItemByText("Rating Scale").parent(".svc-toolbox__tool");
+    await t.resizeWindow(2560, 1440);
+    await t.expect(itemSelector.visible).ok();
+
+    await ClientFunction(() => {
+      const qTemplate = {
+        type: "rating",
+        name: "question1",
+        title: "Custom Template",
+      };
+      const textItem = window["creator"].toolbox.getItemByName("rating");
+      const questiongroupItem = {
+        name: "my-questions",
+        title: "Sample Rating",
+        json: qTemplate,
+      };
+      textItem.addSubitem(questiongroupItem);
+    })();
+
+    await t
+      .wait(300)
+      .hover(itemSelector);
+
+    await t.hover(itemSelector.find(".svc-toolbox__item-submenu-button"));
+    await t.hover(getToolboxItemByText("Stars"));
+    await takeElementScreenshot("toolbox-left-rating-subtype-custom.png", subtypesPopup, t, comparer);
+  });
+});
+
 test.skip("Toolbox with subtypes (wrap)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const subtypesPopup = Selector(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").nth(1);
@@ -302,7 +344,7 @@ test.skip("Toolbox with subtypes (wrap)", async (t) => {
       showQuestionNumbers: "on", pages: [{ name: "page1" }]
     });
     await t.resizeWindow(1775, 500)
-      .scrollBy(".svc-toolbox .svc-scroll__scroller", 2, 300)
+      .scrollBy(".svc-toolbox .sv-scroll__scroller", 2, 300)
       .hover(getToolboxItemByText("Single-Line Input"))
       .expect(subtypesPopup.visible).ok();
     await takeElementScreenshot("toolbox-wrap-subtypes.png", subtypesPopup, t, comparer);
@@ -453,7 +495,7 @@ test("Toolbox with search", async (t) => {
     await t.typeText(Selector(".svc-toolbox input"), "qwerty");
     await takeElementScreenshot("toolbox-search-placeholder.png", toolboxElement, t, comparer);
     await t.click("#svd-grid-search-close");
-    await ClientFunction(() => (document.querySelector(".svc-toolbox .svc-scroll__scroller") as HTMLDivElement).style.background = "red")();
+    await ClientFunction(() => (document.querySelector(".svc-toolbox .sv-scroll__scroller") as HTMLDivElement).style.background = "red")();
     await takeElementScreenshot("toolbox-search-background.png", toolboxElement, t, comparer);
   });
 });
@@ -572,7 +614,7 @@ test("Toolbox RTL with search compact", async (t) => {
 
 test("Toolbox disabled items", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    const toolboxElement = Selector(".svc-toolbox .svc-scroll__wrapper");
+    const toolboxElement = Selector(".svc-toolbox .sv-scroll__wrapper");
 
     await changeToolboxSearchEnabled(true);
     await setShowAddQuestionButton(false);

@@ -40,6 +40,8 @@ If you want the calculations to happen behind the scenes, you can create a hidde
 For single values ("10 days", "5 months", "6 years"), use the following syntax to estimate duration:
 
 - Days &mdash; `dateDiff({firstDate}, {secondDate}, 'days')`
+- Hours &mdash; `dateDiff({firstDate}, {secondDate}, 'hours')`
+- Minutes &mdash; `dateDiff({firstDate}, {secondDate}, 'minutes')`
 - Months &mdash; `dateDiff({firstDate}, {secondDate}, 'months')`
 - Years &mdash; `dateDiff({firstDate}, {secondDate}, 'years')`
 

@@ -413,10 +413,10 @@ export interface ICreatorOptions {
    * 
    * Accepted values:
    * 
-   * - `"accordion"` (default)        
+   * - `"accordion"`        
    * The Property Grid displays a stacked list of categories that users can expand or collapse to reveal nested properties.
    * 
-   * - `"buttons"`      
+   * - `"buttons"` (default)      
    * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid. 
    */
   propertyGridNavigationMode?: "buttons" | "accordion";

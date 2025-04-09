@@ -338,6 +338,7 @@ var polishStrings = {
       titleLocation: "Wyrównanie tytułu panelu",
       descriptionLocation: "Wyrównanie opisu panelu",
       templateQuestionTitleLocation: "Wyrównanie tytułu pytania",
+      templateQuestionTitleWidth: "Szerokość tytułu pytania",
       templateErrorLocation: "Wyrównanie komunikatu o błędzie",
       newPanelPosition: "Nowa lokalizacja panelu",
       showRangeInProgress: "Pokazywanie paska postępu",
@@ -568,6 +569,7 @@ var polishStrings = {
     cellType: "Typ komórki",
     colCount: "Liczba kolumn",
     choicesOrder: "Kolejność odpowiedzi",
+    allowCustomChoices: "Zezwalaj na niestandardowe wybory",
     visible: "Czy widoczne?",
     isRequired: "Czy wymagalne?",
     markRequired: "Oznacz jako wymagane",
@@ -1190,6 +1192,7 @@ var polishStrings = {
       onPage: "Resetuj na każdej stronie",
       onpanel: "Resetuj na każdym panelu",
       onPanel: "Resetuj na każdym panelu",
+      recursive: "Numeracja rekurencyjna",
       onSurvey: "Kontynuuj badanie",
       off: "Brak numeracji"
     },
@@ -1381,6 +1384,7 @@ var polishStrings = {
       enableIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która wyłącza tryb tylko do odczytu dla panelu.",
       requiredIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która uniemożliwia przesłanie ankiety, chyba że co najmniej jedno zagnieżdżone pytanie ma odpowiedź.",
       templateQuestionTitleLocation: "Dotyczy wszystkich pytań w tym panelu. Jeśli chcesz zastąpić to ustawienie, zdefiniuj reguły wyrównania tytułów dla poszczególnych pytań. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety (domyślnie \"Góra\").",
+      templateQuestionTitleWidth: "Ustawia stałą szerokość tytułów pytań, gdy są one wyrównane do lewej strony pól pytań. Akceptuje wartości CSS (px, %, in, pt itd.).",
       templateErrorLocation: "Ustawia lokalizację komunikatu o błędzie w odniesieniu do pytania z nieprawidłowymi danymi wejściowymi. Wybierz pomiędzy: \"Góra\" - tekst błędu jest umieszczany w górnej części pola pytania; \"Na dole\" — tekst błędu jest umieszczany u dołu pola pytania. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety (domyślnie \"Góra\").",
       errorLocation: "Ustawia lokalizację komunikatu o błędzie w odniesieniu do wszystkich pytań w panelu. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety.",
       page: "Przesuwa panel na koniec zaznaczonej strony.",
@@ -1516,6 +1520,9 @@ var polishStrings = {
     timeLimitPerPage: "Przedział czasu w sekundach, po którym ankieta automatycznie przechodzi do następnej strony.",
     validateVisitedEmptyFields: "Włącz tę opcję, aby wyzwolić walidację, gdy użytkownik skupi się na pustym polu wejściowym, a następnie opuści je bez wprowadzania żadnych zmian.",
     page: {
+      name: "Identyfikator strony, który nie jest widoczny dla respondentów.",
+      description: "Wpisz podtytuł strony.",
+      navigationTitle: "Podpis wyświetlany na przycisku nawigacyjnym na pasku postępu lub w spisie treści. Jeśli pozostawisz to pole puste, przycisk nawigacyjny użyje tytułu lub nazwy strony. Aby włączyć pasek postępu lub spis treści, przejdź do \"Ankieta\" → \"Nawigacja\".",
       timeLimit: "Przedział czasu w sekundach, po którym ankieta automatycznie przechodzi do następnej strony.",
       visibleIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która określa widoczność strony.",
       enableIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która wyłącza tryb tylko do odczytu dla strony.",
@@ -1543,6 +1550,7 @@ var polishStrings = {
     choicesFromQuestionMode: "Wybierz spośród: \"Wszystkie\" - kopiuje wszystkie opcje wyboru z wybranego pytania; \"Wybrane\" - dynamicznie kopiuje tylko wybrane opcje wyboru; \"Niewybrane\" - dynamicznie kopiuje tylko niezaznaczone opcje wyboru. Opcje \"Brak\" i \"Inne\" są domyślnie kopiowane, jeśli są włączone w pytaniu źródłowym.",
     choiceValuesFromQuestion: "W pytaniach jednokrotnego i wielokrotnego wyboru każda opcja wyboru ma identyfikator i wartość wyświetlaną. To ustawienie określa, która kolumna macierzy lub pytanie typu panel powinno zawierać identyfikatory.",
     choiceTextsFromQuestion: "W pytaniach jednokrotnego i wielokrotnego wyboru każda opcja wyboru ma identyfikator i wartość wyświetlaną. To ustawienie określa, która kolumna macierzy lub pytanie typu panel powinno zawierać tekst wyświetlany.",
+    allowCustomChoices: "Zaznacz, aby umożliwić respondentom dodawanie własnych wyborów, jeśli żądana opcja nie jest dostępna na liście rozwijanej. Niestandardowe wybory będą przechowywane tylko tymczasowo na czas trwania bieżącej sesji przeglądarki.",
     showOtherItem: "Po wybraniu tej opcji użytkownicy mogą uwzględnić dodatkowe dane wejściowe w osobnym polu komentarza.",
     separateSpecialChoices: "Wyświetla każdą opcję wyboru specjalnego (\"Brak\", \"Inne\", \"Zaznacz wszystko\") w nowym wierszu, nawet w przypadku korzystania z układu wielokolumnowego.",
     path: "Określ lokalizację w zestawie danych usługi, w której znajduje się docelowa tablica obiektów. Pozostaw puste, jeśli adres URL wskazuje już tablicę.",
@@ -3302,3 +3310,11 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Ustawia liczbę wierszy wyświetlanych w obszarach tekstowych dla komentarzy do pytań. Jeśli dane wejściowe zajmują więcej wierszy, pojawi się pasek przewijania."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Domyślna wartość wyświetlana dla tekstów dynamicznych"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Wartość wyświetlana w pytaniach HTML oraz w dynamicznych tytułach i opisach elementów ankiety, gdy wartość pytania jest pusta."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Numeracja rekurencyjna"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Szerokość tytułu pytania"
+// pe.allowCustomChoices: "Allow custom choices" => "Zezwalaj na niestandardowe wybory"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Ustawia stałą szerokość tytułów pytań, gdy są one wyrównane do lewej strony pól pytań. Akceptuje wartości CSS (px, %, in, pt itd.)."
+// page.name: "A page ID that is not visible to respondents." => "Identyfikator strony, który nie jest widoczny dla respondentów."
+// page.description: "Type a page subtitle." => "Wpisz podtytuł strony."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Podpis wyświetlany na przycisku nawigacyjnym na pasku postępu lub w spisie treści. Jeśli pozostawisz to pole puste, przycisk nawigacyjny użyje tytułu lub nazwy strony. Aby włączyć pasek postępu lub spis treści, przejdź do \"Ankieta\" → \"Nawigacja\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Zaznacz, aby umożliwić respondentom dodawanie własnych wyborów, jeśli żądana opcja nie jest dostępna na liście rozwijanej. Niestandardowe wybory będą przechowywane tylko tymczasowo na czas trwania bieżącej sesji przeglądarki."

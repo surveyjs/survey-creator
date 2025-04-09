@@ -338,6 +338,7 @@ var spanishTranslation = {
       titleLocation: "Alineación del título del panel",
       descriptionLocation: "Alineación de la descripción del panel",
       templateQuestionTitleLocation: "Alineación del título de la pregunta",
+      templateQuestionTitleWidth: "Ancho del título de la pregunta",
       templateErrorLocation: "Alineación de mensajes de error",
       newPanelPosition: "Nueva ubicación del panel",
       showRangeInProgress: "Mostrar la barra de progreso",
@@ -568,6 +569,7 @@ var spanishTranslation = {
     cellType: "Tipo de célula",
     colCount: "Recuento de columnas",
     choicesOrder: "Seleccione el orden de las opciones",
+    allowCustomChoices: "Permitir opciones personalizadas",
     visible: "¿Es visible?",
     isRequired: "¿Se requiere?",
     markRequired: "Marcar según sea necesario",
@@ -1190,6 +1192,7 @@ var spanishTranslation = {
       onPage: "Restablecer en cada página",
       onpanel: "Restablecer en cada panel",
       onPanel: "Restablecer en cada panel",
+      recursive: "Numeración recursiva",
       onSurvey: "Continuar a través de la encuesta",
       off: "Sin numeración"
     },
@@ -1381,6 +1384,7 @@ var spanishTranslation = {
       enableIf: "Utilice el icono de la varita mágica para establecer una regla condicional que desactive el modo de solo lectura para el panel.",
       requiredIf: "Utilice el icono de la varita mágica para establecer una regla condicional que impida el envío de encuestas a menos que al menos una pregunta anidada tenga una respuesta.",
       templateQuestionTitleLocation: "Se aplica a todas las preguntas de este panel. Si desea anular esta configuración, defina reglas de alineación de títulos para preguntas individuales. La opción \"Heredar\" aplica la configuración a nivel de página (si está establecida) o a nivel de encuesta (\"Superior\" de forma predeterminada).",
+      templateQuestionTitleWidth: "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de pregunta. Acepta valores CSS (px, %, in, pt, etc.).",
       templateErrorLocation: "Establece la ubicación de un mensaje de error en relación con una pregunta con entrada no válida. Elija entre: \"Arriba\": se coloca un texto de error en la parte superior del cuadro de pregunta; \"Abajo\": se coloca un texto de error en la parte inferior del cuadro de pregunta. La opción \"Heredar\" aplica la configuración a nivel de página (si está establecida) o a nivel de encuesta (\"Superior\" de forma predeterminada).",
       errorLocation: "Establece la ubicación de un mensaje de error en relación con todas las preguntas del panel. La opción \"Heredar\" aplica la configuración a nivel de página (si se establece) o a nivel de encuesta.",
       page: "Cambia la posición del panel al final de una página seleccionada.",
@@ -1516,6 +1520,9 @@ var spanishTranslation = {
     timeLimitPerPage: "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página siguiente.",
     validateVisitedEmptyFields: "Habilite esta opción para desencadenar la validación cuando un usuario se centre en un campo de entrada vacío y, a continuación, lo abandone sin realizar ningún cambio.",
     page: {
+      name: "Un ID de página que no es visible para los encuestados.",
+      description: "Escribe un subtítulo de página.",
+      navigationTitle: "Un título que se muestra en un botón de navegación en la barra de progreso o en la tabla de contenido (TDC). Si dejas este campo vacío, el botón de navegación utilizará el título o el nombre de la página. Para habilitar la barra de progreso o la tabla de contenido, vaya a \"Encuesta\" → \"Navegación\".",
       timeLimit: "Un intervalo de tiempo en segundos después del cual la encuesta avanza automáticamente a la página siguiente.",
       visibleIf: "Utilice el icono de la varita mágica para establecer una regla condicional que determine la visibilidad de la página.",
       enableIf: "Utilice el icono de la varita mágica para establecer una regla condicional que deshabilite el modo de solo lectura de la página.",
@@ -1543,6 +1550,7 @@ var spanishTranslation = {
     choicesFromQuestionMode: "Elija entre: \"Todas\": copia todas las opciones de elección de la pregunta seleccionada; \"Seleccionado\": copia dinámicamente solo las opciones de elección seleccionadas; \"No seleccionado\": copia dinámicamente solo las opciones de elección no seleccionadas. Las opciones \"Ninguno\" y \"Otro\" se copian de forma predeterminada si están habilitadas en la pregunta de origen.",
     choiceValuesFromQuestion: "En los tipos de preguntas de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Esta configuración especifica qué columna de matriz o pregunta de panel debe proporcionar los identificadores.",
     choiceTextsFromQuestion: "En los tipos de preguntas de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Esta configuración especifica qué columna de matriz o pregunta de panel debe proporcionar los textos de visualización.",
+    allowCustomChoices: "Seleccione esta opción para permitir que los encuestados agreguen sus propias opciones si la opción deseada no está disponible en el menú desplegable. Las opciones personalizadas solo se almacenarán temporalmente durante la sesión actual del navegador.",
     showOtherItem: "Cuando se selecciona, los usuarios pueden incluir entradas adicionales en un cuadro de comentarios independiente.",
     separateSpecialChoices: "Muestra cada opción de opción especial (\"Ninguno\", \"Otro\", \"Seleccionar todo\") en una nueva línea, incluso cuando se utiliza un diseño de varias columnas.",
     path: "Especifique la ubicación dentro del dataset de servicio donde se encuentra la matriz de objetos de destino. Déjelo en vacío si la dirección URL ya apunta a la matriz.",
@@ -2813,3 +2821,11 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Establece el número de líneas mostradas en las áreas de texto para los comentarios de las preguntas. Si la entrada ocupa más líneas, aparece la barra de desplazamiento."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Valor de visualización predeterminado para textos dinámicos"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Un valor que se muestra en las preguntas HTML y en los títulos dinámicos y las descripciones de los elementos de la encuesta cuando el valor de la pregunta está vacío."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Numeración recursiva"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Ancho del título de la pregunta"
+// pe.allowCustomChoices: "Allow custom choices" => "Permitir opciones personalizadas"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Establece un ancho coherente para los títulos de las preguntas cuando están alineados a la izquierda de sus cuadros de pregunta. Acepta valores CSS (px, %, in, pt, etc.)."
+// page.name: "A page ID that is not visible to respondents." => "Un ID de página que no es visible para los encuestados."
+// page.description: "Type a page subtitle." => "Escribe un subtítulo de página."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Un título que se muestra en un botón de navegación en la barra de progreso o en la tabla de contenido (TDC). Si dejas este campo vacío, el botón de navegación utilizará el título o el nombre de la página. Para habilitar la barra de progreso o la tabla de contenido, vaya a \"Encuesta\" → \"Navegación\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Seleccione esta opción para permitir que los encuestados agreguen sus propias opciones si la opción deseada no está disponible en el menú desplegable. Las opciones personalizadas solo se almacenarán temporalmente durante la sesión actual del navegador."
