@@ -86,7 +86,7 @@ export class MatrixCellWrapperViewModel extends Base {
     } else {
       this.isSelected = false;
     }
-  }
+  };
 
   public editQuestion(model: MatrixCellWrapperViewModel, event: MouseEvent) {
     const editSurvey = new MatrixCellWrapperEditSurvey(model.creator, model.question, model.column, this);

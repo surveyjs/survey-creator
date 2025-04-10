@@ -8,7 +8,7 @@ import { SurveyCreatorModel, TabbedMenuItem } from "survey-creator-core";
 })
 export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements AfterViewInit {
   @Input() model!: SurveyCreatorModel;
-  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>
+  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
 
   constructor(changeDetectorRef: ChangeDetectorRef) {
     super(changeDetectorRef);

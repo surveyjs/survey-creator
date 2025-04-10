@@ -1188,7 +1188,7 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   value = await getItemValueByIndex("question1", 2);
   await t.expect(value).eql(expectedValue);
 
-  // disable question edit (https://github.com/surveyjs/survey-creator/issues/4236) 
+  // disable question edit (https://github.com/surveyjs/survey-creator/issues/4236)
   // unfortunately testcafe "drag-drop" can't reproduce the problem due it is probably some kind of emulation...
   // const disableQuestionEdit = ClientFunction((json) => {
   //   window["creator"].onElementAllowOperations.add((sender, options) => {

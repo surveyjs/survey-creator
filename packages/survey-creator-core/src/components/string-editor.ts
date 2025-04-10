@@ -293,7 +293,7 @@ export class StringEditorViewModelBase extends Base {
       return true;
     }
     return false;
-  }
+  };
 
   public setLocString(locString: LocalizableString) {
     this.removeCreatorEvents();

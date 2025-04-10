@@ -40,7 +40,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   }
   private onChangedHandler = (sender: any, options: any) => {
     this.setState({ changed: !!this.state && this.state.changed ? this.state.changed + 1 : 1 });
-  }
+  };
   public componentDidMount() {
     super.componentDidMount();
     if (!this.locString) return;

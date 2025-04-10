@@ -19,7 +19,7 @@ export class SidebarModel extends Base {
 
   @propertyArray() pages: Array<SidebarPageModel>;
   @property({ defaultValue: true }) _visible: boolean;
-  @property({ defaultValue: true }) renderedIsVisible: boolean
+  @property({ defaultValue: true }) renderedIsVisible: boolean;
   @property({ defaultValue: false }) collapsedManually: boolean;
   @property({ defaultValue: false }) expandedManually: boolean;
   @property() hasVisiblePages: boolean;

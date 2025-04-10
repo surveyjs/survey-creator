@@ -14,7 +14,7 @@ export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   @Input() survey!: SurveyModel;
   @Input() creator!: SurveyCreatorModel;
   @Input() isGhost!: boolean;
-  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>
+  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
   public adorner!: PageAdorner;
   protected createModel(): void {
     if(this.adorner) {

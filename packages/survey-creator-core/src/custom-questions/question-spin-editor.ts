@@ -71,34 +71,34 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     this.increase();
     this.clearTimers();
     this.increaseTimer = setTimeout(this.onUpButtonMouseDown, 200);
-  }
+  };
   public onDownButtonMouseDown = () => {
     if (!this.changeValueOnPressing) return;
 
     this.decrease();
     this.clearTimers();
     this.decreaseTimer = setTimeout(this.onDownButtonMouseDown, 200);
-  }
+  };
   public onUpButtonClick = () => {
     if (!this.changeValueOnPressing) {
       this.increase();
     }
-  }
+  };
   public onDownButtonClick = () => {
     if (!this.changeValueOnPressing) {
       this.decrease();
     }
-  }
+  };
   public onButtonMouseLeave = () => {
     if (!this.changeValueOnPressing) return;
 
     this.onButtonMouseUp();
-  }
+  };
   public onButtonMouseUp = () => {
     if (!this.changeValueOnPressing) return;
 
     this.clearTimers();
-  }
+  };
   public onKeyDown = (event: KeyboardEvent) => {
     switch (event.key) {
       case "ArrowUp":
@@ -113,11 +113,11 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
         break;
     }
     this.onTextKeyDownHandler(event);
-  }
+  };
   public onInputKeyDown = (event: KeyboardEvent) => {
     if(event.key == "ArrowUp" || event.key == "ArrowDown")
       this["updateValueOnEvent"](event);
-  }
+  };
   public onBeforeInput(event: InputEvent) {
     const target = <HTMLInputElement>event.target;
     const regex = target.selectionStart == 0 ? /[\d.-]/ : /[\d.]/;
@@ -142,13 +142,13 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
         });
       });
     }
-  }
+  };
   public onBlur = (event: Event) => {
     this._showUnitsInEditor = true;
     if((<any>event.target).tagName == "INPUT") {
       this["updateValueOnEvent"](event);
     }
-  }
+  };
   public getType(): string {
     return "spinedit";
   }

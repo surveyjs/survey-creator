@@ -4,6 +4,7 @@ import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
 import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
 import { DropIndicatorPosition, ElType } from "./drag-drop-enums";
+import { DomDocumentHelper } from "./utils/global_variables_utils";
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
   const rect = dropTargetNode.getBoundingClientRect();
@@ -115,9 +116,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   protected createDraggedElementShortcut(text: string, draggedElementNode?: HTMLElement, event?: PointerEvent): HTMLElement {
-    const draggedElementShortcut = document.createElement("div");
+    const draggedElementShortcut = DomDocumentHelper.createElement("div");
     draggedElementShortcut.style.display = "flex";
-    const textSpan = document.createElement("span");
+    const textSpan = DomDocumentHelper.createElement("span");
 
     textSpan.className = "svc-dragged-element-shortcut__text";
     textSpan.innerText = text;
@@ -130,7 +131,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   protected createDraggedElementIcon(): HTMLElement {
-    const span = document.createElement("span");
+    const span = DomDocumentHelper.createElement("span");
     span.className = "svc-dragged-element-shortcut__icon";
 
     const iconName = getIconNameFromProxy(this.draggedElement.toolboxItemIconName);
@@ -286,7 +287,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   protected doBanDropHere = () => {
     this.removeDragOverMarker(this.dragOverIndicatorElement);
     this.removeDragOverMarker(this.dropTarget);
-  }
+  };
 
   private shouldRestricDragQuestionBetweenPages(dropTarget: any): boolean {
     const oldPage = (<any>this.draggedElement)["page"];
@@ -436,7 +437,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       return;
     }
 
-    if (document && document.elementsFromPoint && this.isDragInsideItself(<Array<HTMLElement>>document.elementsFromPoint(event.clientX, event.clientY))) {
+    const _document = DomDocumentHelper.getDocument();
+    if (_document && _document.elementsFromPoint && this.isDragInsideItself(<Array<HTMLElement>>_document.elementsFromPoint(event.clientX, event.clientY))) {
       this.banDropHere();
       return null;
     }
@@ -594,7 +596,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
     (page.survey as SurveyModel).stopMovingQuestion();
     return dragged;
-  }
+  };
 
   private removeDragOverMarker(dropTarget: SurveyElement): void {
     if (dropTarget) {

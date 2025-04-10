@@ -117,7 +117,7 @@ export class ItemValueWrapperViewModel extends Base {
 
   startDragItemValue = (pointerDownEvent: PointerEvent, currentTarget: any) => {
     this.dragDropHelper.startDrag(pointerDownEvent, this.item, this.question, <HTMLElement>currentTarget);
-  }
+  };
 
   private get dragDropHelper(): DragDropChoices {
     return this.creator.dragDropChoices;

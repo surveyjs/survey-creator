@@ -32,27 +32,27 @@ export type overflowBehaviorType = "hideInMenu" | "scroll";
 
 /**
  * A toolbox item configuration.
- * 
+ *
  * `IQuestionToolboxItem` objects are used in such Toolbox API methods as [`addItem(item, index)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#addItem), [`replaceItem(item)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#replaceItem), [`addSubitem(subitem, index)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem#addSubitem), and others.
- * 
+ *
  * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
  */
 export interface IQuestionToolboxItem extends IAction {
   /**
    * A toolbox item identifier.
-   * 
+   *
    * > Toolbox item names must be unique.
    */
   name: string;
   /**
    * An icon name.
-   * 
+   *
    * [UI Icons](https://surveyjs.io/form-library/documentation/icons (linkStyle))
    */
   iconName?: string;
   /**
    * A JSON object used to create a new question or panel when users click this toolbox item. It must contain the `type` property.
-   * 
+   *
    * [View Toolbox Customization Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-customization/ (linkStyle))
    */
   json: any;
@@ -63,22 +63,22 @@ export interface IQuestionToolboxItem extends IAction {
   className?: string;
   /**
    * A toolbox item tooltip.
-   * 
+   *
    * If `tooltip` is undefined, the [`title`](#title) property value is used instead.
    */
   tooltip?: string;
   isCopied?: boolean;
   /**
    * A category to which this toolbox item belongs.
-   * 
+   *
    * Out-of-the-box categories include `"general"`, `"choice"`, `"text"`, `"containers"`, `"matrix"`, and `"misc"`.
-   * 
+   *
    * Default value: `"general"`
    */
   category?: string;
   /**
    * Specifies whether users can interact with the toolbox item.
-   * 
+   *
    * Default value: `true`
    */
   enabled?: boolean;
@@ -131,7 +131,7 @@ export class QuestionToolboxCategory extends Base {
 }
 /**
  * A toolbox item instance.
- * 
+ *
  * An object of this class is returned by the `QuestionToolbox`'s [`getItemByName(name)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#getItemByName) method.
  */
 export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
@@ -175,7 +175,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   }
   /**
    * Specifies whether users can interact with the toolbox item.
-   * 
+   *
    * Default value: `true`
    */
   public get enabled(): boolean {
@@ -194,34 +194,34 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   }
   /**
    * An icon name.
-   * 
+   *
    * [UI Icons](https://surveyjs.io/form-library/documentation/icons (linkStyle))
    */
   iconName: string;
   /**
    * A toolbox item identifier.
-   * 
+   *
    * > Toolbox item names must be unique.
    */
   name: string;
   /**
    * A JSON object used to create a new question or panel when users click this toolbox item. It must contain the `type` property.
-   * 
+   *
    * [View Toolbox Customization Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-customization/ (linkStyle))
    */
   json: any;
   /**
    * A toolbox item tooltip.
-   * 
+   *
    * If `tooltip` is undefined, the [`title`](#title) property value is used instead.
    */
   tooltip: string;
   isCopied: boolean;
   /**
    * A category to which this toolbox item belongs.
-   * 
+   *
    * Out-of-the-box categories include `"general"`, `"choice"`, `"text"`, `"containers"`, `"matrix"`, and `"misc"`.
-   * 
+   *
    * Default value: `"general"`
    */
   category: string;
@@ -249,7 +249,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
 
   /**
    * Finds a subitem with a specified name in the collection of subitems belonging to this toolbox item.
-   * 
+   *
    * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
    * @param name A subitem [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name).
    * @returns A [`QuestionToolboxItem`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem) object that represents the subitem instance.
@@ -269,7 +269,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   }
   /**
    * Removes all subitems from this toolbox item.
-   * 
+   *
    * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
    * @see removeSubitem
    * @see addSubitem
@@ -283,7 +283,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   }
   /**
    * Adds a subitem to this toolbox item.
-   * 
+   *
    * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
    * @param subitem An [`IQuestionToolboxItem`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem) object that represents a subitem configuration.
    * @param index *(Optional)* A zero-based index at which to insert the subitem. If you do not specify this parameter, the subitem is added to the end.
@@ -306,7 +306,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   }
   /**
    * Removes a specific subitem from this toolbox item.
-   * 
+   *
    * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
    * @param subitem A subitem [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name) or an [`IQuestionToolboxItem`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem) object that represents a subitem configuration.
    * @see clearSubitems
@@ -338,20 +338,20 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
 
 /**
  * An object that enables you to modify Survey Creator's Toolbox. To access this object, use the [`toolbox`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#toolbox) property on a Survey Creator instance:
- * 
+ *
  * ```js
  * const creatorOptions = { ... };
  * const creator = new SurveyCreator.SurveyCreator(creatorOptions);
  * creator.toolbox.settingName = "value";
- * 
+ *
  * // In modular applications:
  * import { SurveyCreatorModel } from "survey-creator-core";
- * 
+ *
  * const creatorOptions = { ... };
  * const creator = new SurveyCreatorModel(creatorOptions);
  * creator.toolbox.settingName = "value";
  * ```
- * 
+ *
  * [Toolbox Customization](https://surveyjs.io/survey-creator/documentation/toolbox-customization (linkStyle))
  */
 export class QuestionToolbox
@@ -367,7 +367,7 @@ export class QuestionToolbox
     containers: ["panel", "paneldynamic"],
     matrix: ["matrix", "matrixdropdown", "matrixdynamic"],
     misc: ["html", "expression", "image", "signaturepad"]
-  }
+  };
   private _orderedQuestions = [
     "radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking",
     "text", "comment", "multipletext",
@@ -418,7 +418,7 @@ export class QuestionToolbox
   //koItems = ko.observableArray();
   /**
    * Contains toolbox categories and allows you to modify them.
-   * 
+   *
    * [View Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcategories (linkStyle))
    * @see defineCategories
    * @see showCategoryTitles
@@ -426,7 +426,7 @@ export class QuestionToolbox
   @propertyArray() categories: Array<QuestionToolboxCategory>;
   /**
    * Gets or sets the currently expanded category. Applies only if [`allowExpandMultipleCategories`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#allowExpandMultipleCategories) and [`keepAllCategoriesExpanded`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#keepAllCategoriesExpanded) are `false` and [`showCategoryTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#showCategoryTitles) is `true`.
-   * 
+   *
    * Default value: `""`
    * @see expandCategory
    * @see collapseCategory
@@ -437,7 +437,7 @@ export class QuestionToolbox
       target.onActiveCategoryChanged(val);
     }
   })
-  activeCategory: string;
+    activeCategory: string;
   @property({ defaultValue: false }) hasCategories: boolean;
   @property({ defaultValue: true }) canCollapseCategories: boolean;
 
@@ -514,9 +514,9 @@ export class QuestionToolbox
   }) isFocused: boolean;
   /**
    * Specifies how the Toolbox behaves when it contains more items than can fit on the screen.
-   * 
+   *
    * Possible values:
-   * 
+   *
    * - `"scroll"` (default) - Enables scrolling to help users reach the items that do not fit on the screen.
    * - `"hideInMenu"` - Hides the overflow items in a three-dot menu.
    */
@@ -528,13 +528,13 @@ export class QuestionToolbox
   }) overflowBehavior: overflowBehaviorType;
   /**
    * Specifies whether the Toolbox should be in compact or full mode.
-   * 
+   *
    * Possible values:
-   * 
+   *
    * - `true` - Toolbox is always in compact mode.
    * - `false` - Toolbox is always in full mode.
    * - `undefined` (default) - Toolbox switches between the full and compact modes automatically based on available width.
-   * 
+   *
    * [View Toolbox Customization Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-customization/ (linkStyle))
    * @see isCompact
    */
@@ -543,7 +543,7 @@ export class QuestionToolbox
 
   /**
    * Specifies whether to display a search field that allows users to find question and panel types within the Toolbox.
-   * 
+   *
    * Default value: `true`
    */
   @property({
@@ -555,9 +555,9 @@ export class QuestionToolbox
 
   /**
    * Specifies whether toolbox items support subitems.
-   * 
+   *
    * Default value: `true`
-   * 
+   *
    * [Manage Toolbox Subitems](https://surveyjs.io/survey-creator/documentation/toolbox-customization#manage-toolbox-subitems (linkStyle))
    */
   @property({ defaultValue: true }) showSubitems: boolean;
@@ -889,9 +889,9 @@ export class QuestionToolbox
   }
   /**
    * Specifies whether more than one category can be in the expanded state at a time. Applies only if [`showCategoryTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#showCategoryTitles) is `true`.
-   * 
+   *
    * If this property is `false`, the currently expanded category collapses when a user expands another category.
-   * 
+   *
    * Default value: `false`
    * @see keepAllCategoriesExpanded
    */
@@ -919,7 +919,7 @@ export class QuestionToolbox
    * Specifies whether to display category titles in the Toolbox.
    *
    * Default value: `false`
-   * 
+   *
    * If this property is disabled, the Toolbox hides the titles but continues to display horizontal lines that divide categories. To remove these lines as well, call the [`removeCategories()`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#removeCategories) method.
    * @see allowExpandMultipleCategories
    * @see keepAllCategoriesExpanded
@@ -1000,11 +1000,11 @@ export class QuestionToolbox
   }
   /**
    * Defines toolbox categories from scratch.
-   * 
+   *
    * This method accepts an array of objects as the `categories` parameter. Each object defines a single category and lists items included into it. Unlisted items can be collected in the Misc category if you pass `true` as the `displayMisc` parameter. Optionally, you can override display titles for individual items.
-   * 
+   *
    * The following code defines two toolbox categories: Dropdowns and Text Input. Items that do not fall into either category are collected in Misc. The `"comment"` item has a custom display title.
-   * 
+   *
    * ```
    * creator.toolbox.defineCategories([{
    *   category: "Dropdowns",
@@ -1021,7 +1021,7 @@ export class QuestionToolbox
    *   ]
    * }], true);
    * ```
-   * 
+   *
    * [View Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-categories/ (linkStyle))
    * @param categories An array of new categories.
    * @param displayMisc Pass `true` if you want to collect unlisted toolbox items in the Misc category. Default value: `false`.
@@ -1111,7 +1111,7 @@ export class QuestionToolbox
   }
   /**
    * Expands a category with a specified name. Applies only if [`showCategoryTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#showCategoryTitles) is `true`.
-   * 
+   *
    * If [`allowExpandMultipleCategories`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#allowExpandMultipleCategories) is `false`, all other categories become collapsed.
    * @param categoryName A category name. Out-of-the-box category names include `"general"`, `"choice"`, `"text"`, `"containers"`, `"matrix"`, and `"misc"`.
    * @see collapseCategory

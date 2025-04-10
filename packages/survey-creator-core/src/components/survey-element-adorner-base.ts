@@ -213,7 +213,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.updateActionsProperties();
     }
   };
-  public surveyElement: T
+  public surveyElement: T;
   get element() {
     return this.surveyElement;
   }

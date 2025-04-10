@@ -13,7 +13,7 @@ import { CreatorModelComponent } from "../creator-model.component";
 export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueWrapperViewModel> implements AfterViewInit {
   @Input() componentName!: string;
   @Input() componentData!: any;
-  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>
+  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
   public adorner!: ItemValueWrapperViewModel;
   private prevItem!: ItemValue;
   private get creator(): SurveyCreatorModel {

@@ -1,5 +1,6 @@
 import { SurveyCreatorModel } from "./creator-base";
 import "./responsivity.scss";
+import { DomWindowHelper } from "./utils/global_variables_utils";
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
   private currentWidth;
@@ -9,7 +10,7 @@ export class CreatorResponsivityManager {
     "l": 1200,
     "m": 900,
     "s": 600,
-  }
+  };
   private getScreenWidth(): string {
     let res;
     Object.keys(CreatorResponsivityManager.screenSizeBreakpoints).forEach((mode: string) => {
@@ -41,8 +42,9 @@ export class CreatorResponsivityManager {
   }
 
   private findCorrectParent(container: HTMLElement) {
-    if (!!window?.getComputedStyle) {
-      if (window.getComputedStyle(container.parentElement).display === "inline") {
+    const _window = DomWindowHelper.getWindow();
+    if (!!_window?.getComputedStyle) {
+      if (_window.getComputedStyle(container.parentElement).display === "inline") {
         return this.findCorrectParent(container.parentElement);
       }
     }
@@ -108,7 +110,8 @@ export class CreatorResponsivityManager {
   public updateSurveyActualWidth() {
     if (!!this.container && !!this.container.querySelector) {
       const surveyContainer = this.container?.querySelector(".svc-tab-designer_content") as HTMLDivElement;
-      if (!!surveyContainer && window && typeof window.getComputedStyle === "function") {
+      const _window = DomWindowHelper.getWindow();
+      if (!!surveyContainer && _window && typeof _window.getComputedStyle === "function") {
         const conputedStyles = getComputedStyle(surveyContainer);
         let paddingLeft = 0;
         let paddingRight = 0;

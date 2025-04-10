@@ -9,4 +9,4 @@ import { QuestionFileEditorModel } from "survey-creator-core";
 export class QuestionFileEditorComponent extends QuestionAngular<QuestionFileEditorModel> {
 }
 
-AngularComponentFactory.Instance.registerComponent("fileedit-question", QuestionFileEditorComponent)
+AngularComponentFactory.Instance.registerComponent("fileedit-question", QuestionFileEditorComponent);

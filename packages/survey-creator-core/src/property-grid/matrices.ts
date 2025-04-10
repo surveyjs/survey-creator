@@ -778,7 +778,7 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
         q.value = Serializer.getObjPropertyValue(editor, q.property.name);
       });
     }
-  } 0
+  } 0;
 }
 
 export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGridEditorMatrix {

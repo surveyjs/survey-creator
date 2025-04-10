@@ -11,7 +11,7 @@ export class ResizeManager {
     "mousedown": { "touch": "touchend", "mouse": "mousedown", "pointer": "pointerdown" },
     "mouseup": { "touch": "touchstart", "mouse": "mouseup", "pointer": "pointerup" },
     "mousemove": { "touch": "touchmove", "mouse": "mousemove", "pointer": "pointermove" },
-  }
+  };
 
   constructor(private container: HTMLElement, handles: string) {
     this.init(container);

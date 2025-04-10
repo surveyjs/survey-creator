@@ -26,7 +26,7 @@ export class PageNavigatorViewModel extends Base {
         this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"];
       }
     }
-  }
+  };
 
   constructor(private pagesController: PagesController, private pageEditMode: string) {
     super();

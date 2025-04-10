@@ -16,13 +16,13 @@ export class DesignerStateManager {
 
   private onQuestionAddedHandler = (sender, opts): void => {
     this.createElementState(opts.question, this.isSuspended);
-  }
+  };
   private onPageAddedHandler = (sender, opts): void => {
     this.createElementState(opts.page, this.isSuspended);
-  }
+  };
   private onPanelAddedHandler = (sender, opts): void => {
     this.createElementState(opts.panel, this.isSuspended);
-  }
+  };
   initForSurvey(survey: SurveyModel) {
     survey.onQuestionAdded.add(this.onQuestionAddedHandler);
     survey.onPageAdded.add(this.onPageAddedHandler);
