@@ -2225,7 +2225,12 @@ export class SurveyCreatorModel extends Base
       isDraggedFromToolbox = !element.parent && !element.isPage;
       if (!!element && !isDraggedFromToolbox && (element.isPage || (this.collapseOnDrag !== false && this.collapseOnDrag !== "none"))) {
         this.designerStateManager?.suspend();
-        this.collapseElementsOnDragStart(element);
+        const adorner = SurveyElementAdornerBase.GetAdorner(element);
+        if (!!adorner) {
+          adorner.saveRelativePosition();
+          this.collapseElementsOnDragStart(element);
+          adorner.restoreRelativePosition();
+        }
       }
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
@@ -2264,7 +2269,7 @@ export class SurveyCreatorModel extends Base
         exeptions.push(current);
         current = current.parent;
       }
-      this.collapseAll(exeptions);
+      this.collapseAll(exeptions, true);
     }
   }
   public getElementExpandCollapseState(element: Question | PageModel | PanelModel, reason: ElementGetExpandCollapseStateEventReason, defaultValue: boolean): boolean {
@@ -4368,16 +4373,16 @@ export class SurveyCreatorModel extends Base
    * @see expandAll
    * @see collapseElement
    */
-  public collapseAll(exceptions?: SurveyElement[]) {
-    this.expandCollapseManager.expandCollapseElements(null, true, undefined, exceptions);
+  public collapseAll(exceptions?: SurveyElement[], blockAnimations = false) {
+    this.expandCollapseManager.expandCollapseElements(null, true, undefined, exceptions, blockAnimations);
   }
   /**
    * Expands all survey elements on the design surface.
    * @see collapseAll
    * @see expandElement
    */
-  public expandAll(exceptions?: SurveyElement[]) {
-    this.expandCollapseManager.expandCollapseElements(null, false, undefined, exceptions);
+  public expandAll(exceptions?: SurveyElement[], blockAnimations = false) {
+    this.expandCollapseManager.expandCollapseElements(null, false, undefined, exceptions, blockAnimations);
   }
   /**
    * Collapses an individual survey element on the design surface.

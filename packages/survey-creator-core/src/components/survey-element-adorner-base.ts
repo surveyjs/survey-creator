@@ -16,7 +16,40 @@ import { DropIndicatorPosition } from "../drag-drop-enums";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
 import { SurveyElementActionContainer } from "./action-container-view-model";
 
+function getOffsetTop(element: HTMLElement, offsetParent: HTMLElement): number {
+  let offsetTop = element.offsetTop;
+  let parent = element.offsetParent as HTMLElement;
+  while (parent && parent !== offsetParent) {
+    offsetTop += parent.offsetTop;
+    parent = parent.offsetParent as HTMLElement;
+  }
+  return offsetTop;
+}
+
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
+  private initialElementOffsetTop = 0;
+  private initialContainerScrollTop = 0;
+  public saveRelativePosition() {
+    if (!!this.rootElement) {
+      const container = this.rootElement.closest<HTMLElement>(".sv-scroll__container");
+      if (!!container) {
+        this.initialElementOffsetTop = getOffsetTop(this.rootElement, container);
+        this.initialContainerScrollTop = container.parentElement.scrollTop;
+      }
+    }
+  }
+  public restoreRelativePosition() {
+    if (!!this.rootElement) {
+      const container = this.rootElement.closest<HTMLElement>(".sv-scroll__container");
+      if (!!container) {
+        setTimeout(() => {
+          const currentOffsetTop = getOffsetTop(this.rootElement, container);
+          const deltaTop = currentOffsetTop - this.initialElementOffsetTop;
+          container.parentElement.scrollTop = this.initialContainerScrollTop + deltaTop;
+        }, 10);
+      }
+    }
+  }
   public static AdornerValueName = "__sjs_creator_adorner";
   protected expandCollapseAction: IAction;
   @property({ defaultValue: true }) allowDragging: boolean;

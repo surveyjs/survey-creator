@@ -8,8 +8,8 @@ export class ExpandCollapseManager {
   constructor(private creator: CreatorBase) {
   }
 
-  public expandCollapseElements(reason: ElementGetExpandCollapseStateEventReason, isCollapsed: boolean, elements: SurveyElement[] = null, exceptions?: SurveyElement[]) {
-    this.updateCollapsed(elements || this.getCollapsableElements(), isCollapsed, reason, exceptions);
+  public expandCollapseElements(reason: ElementGetExpandCollapseStateEventReason, isCollapsed: boolean, elements: SurveyElement[] = null, exceptions?: SurveyElement[], blockAnimations = false) {
+    this.updateCollapsed(elements || this.getCollapsableElements(), isCollapsed, reason, exceptions, blockAnimations);
   }
 
   public get questionsLocked() {
@@ -30,7 +30,7 @@ export class ExpandCollapseManager {
       return a - b;
     });
   }
-  private updateCollapsed(elements: SurveyElement[], value: boolean, reason: ElementGetExpandCollapseStateEventReason, exceptions?: SurveyElement[]) {
+  private updateCollapsed(elements: SurveyElement[], value: boolean, reason: ElementGetExpandCollapseStateEventReason, exceptions?: SurveyElement[], blockAnimations = false) {
     this.sortElements(elements).forEach(element => {
       if (element.isQuestion && this._lockQuestions) return;
       if (exceptions && exceptions.indexOf(element) > -1) return;
@@ -39,7 +39,9 @@ export class ExpandCollapseManager {
       const adorner = SurveyElementAdornerBase.GetAdorner(element);
       if (adorner && adorner.allowExpandCollapse) {
         const newState = this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
+        blockAnimations && adorner.blockAnimations();
         adorner.collapsed = newState;
+        blockAnimations && adorner.releaseAnimations();
       }
     });
   }
