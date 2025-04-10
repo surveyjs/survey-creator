@@ -1,6 +1,8 @@
-node_modules
-dist
-**/*.js
-**/*.d.ts
-packages/survey-creator-angular
-packages/survey-creator-vue
+.vscode/
+.husky/
+node_modules/
+docs/
+eslint-surveyjs/
+.gitignore
+webpack.config.js
+index.js

@@ -4,26 +4,30 @@
         "node_modules": true
     },
     "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
         "editor.codeActionsOnSave": {
             "source.fixAll": "explicit"
-        },
-        "editor.defaultFormatter": "vscode.typescript-language-features"
+        }
     },
     "[typescriptreact]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
-    "[markdown]": {
+    "[vue]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[html]": {
         "editor.formatOnSave": false
     },
-    // "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-    // "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
-    // "typescript.format.insertSpaceBeforeFunctionParenthesis": false,
-    // "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-    // "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
-    "editor.tabSize": 2,
+    "[css]": {
+        "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+    },
     "editor.formatOnSave": true,
     "eslint.format.enable": true,
-    "editor.accessibilitySupport": "off",
-    "testing.openTesting": "neverOpen",
-    "testing.automaticallyOpenTestResults": "neverOpen"
+    "testing.automaticallyOpenTestResults": "neverOpen",
 }

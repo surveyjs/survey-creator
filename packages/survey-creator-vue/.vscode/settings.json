@@ -9,14 +9,11 @@
             "source.fixAll": "explicit"
         }
     },
-    "[javascript]": {
+    "[vue]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
-    "[css]": {
-        "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
-    },
-    "[scss]": {
-        "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "editor.formatOnSave": true,
     "eslint.format.enable": true,

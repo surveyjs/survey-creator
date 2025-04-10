@@ -1,0 +1,5 @@
+.vscode/
+build/
+doc_generator/
+node_modules/
+webpack.config.js
