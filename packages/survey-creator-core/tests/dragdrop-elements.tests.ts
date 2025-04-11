@@ -1734,3 +1734,83 @@ test("drag drop move page shouldn't raise survey onPageAdded", () => {
   expect(p3["draggedFrom"]).toStrictEqual(3);
   expect(pageAddedCounter).toBe(0);
 });
+
+test("collapse pages on element drag start", () => {
+  const json = {
+    "pages": [
+      { "name": "page1", "elements": [{ "type": "text", "name": "q1" }] },
+      { "name": "page2", "elements": [{ "type": "text", "name": "q2" }] },
+      { "name": "page3", "elements": [{ "type": "text", "name": "q3" }] },
+    ]
+  };
+  const creator = new CreatorTester();
+  creator.collapseOnDrag = true;
+  creator.JSON = json;
+  const survey = creator.survey;
+  const [p1, p2, p3] = survey.pages;
+  const [q1, q2, q3] = survey.getAllQuestions();
+  const pa = survey.pages.map(p => new PageAdorner(creator, p));
+  const qa = survey.getAllQuestions().map(q => new QuestionAdornerViewModel(creator, q, null as any));
+
+  const ddHelper: any = creator.dragDropSurveyElements;
+  ddHelper.parentElement = p3;
+  ddHelper.draggedElement = q3;
+
+  ddHelper["createDraggedElementShortcut"] = () => { };
+  ddHelper.dragInit(null, ddHelper.draggedElement, ddHelper.parentElement, document.createElement("div"));
+
+  expect(pa[0].collapsed).toBeTruthy();
+  expect(pa[1].collapsed).toBeTruthy();
+  expect(pa[2].collapsed).toBeFalsy();
+
+  ddHelper.clear();
+
+  expect(pa[0].collapsed).toBeFalsy();
+  expect(pa[1].collapsed).toBeFalsy();
+  expect(pa[2].collapsed).toBeFalsy();
+});
+
+test("collapse all containers except parent on element drag start", () => {
+  const json = {
+    "pages": [
+      { "name": "page1", "elements": [{ "type": "panel", "name": "panel1" }, { "type": "panel", "name": "panel2", "elements": [{ "type": "text", "name": "q1" }] }] },
+      { "name": "page2", "elements": [{ "type": "text", "name": "q2" }] },
+      { "name": "page3", "elements": [{ "type": "panel", "name": "panel3" }, { "type": "panel", "name": "panel4", "elements": [{ "type": "text", "name": "q3" }] }] },
+    ]
+  };
+  const creator = new CreatorTester();
+  creator.collapseOnDrag = true;
+  creator.JSON = json;
+  const survey = creator.survey;
+  const [p1, p2, p3] = survey.pages;
+  const [pn1, pn2, pn3, pn4] = survey.getAllPanels();
+  const [q1, q2, q3] = survey.getAllQuestions();
+  const pa = survey.pages.map(p => new PageAdorner(creator, p));
+  const pna = survey.getAllPanels().map(p => new QuestionAdornerViewModel(creator, p as any, null as any));
+  const qa = survey.getAllQuestions().map(q => new QuestionAdornerViewModel(creator, q, null as any));
+
+  const ddHelper: any = creator.dragDropSurveyElements;
+  ddHelper.parentElement = p3;
+  ddHelper.draggedElement = q3;
+
+  ddHelper["createDraggedElementShortcut"] = () => { };
+  ddHelper.dragInit(null, ddHelper.draggedElement, ddHelper.parentElement, document.createElement("div"));
+
+  expect(pa[0].collapsed).toBeTruthy();
+  expect(pna[0].collapsed).toBeTruthy();
+  expect(pna[1].collapsed).toBeTruthy();
+  expect(pa[1].collapsed).toBeTruthy();
+  expect(pa[2].collapsed).toBeFalsy();
+  expect(pna[2].collapsed).toBeTruthy();
+  expect(pna[3].collapsed).toBeFalsy();
+
+  ddHelper.clear();
+
+  expect(pa[0].collapsed).toBeFalsy();
+  expect(pna[0].collapsed).toBeFalsy();
+  expect(pna[1].collapsed).toBeFalsy();
+  expect(pa[1].collapsed).toBeFalsy();
+  expect(pa[2].collapsed).toBeFalsy();
+  expect(pna[2].collapsed).toBeFalsy();
+  expect(pna[3].collapsed).toBeFalsy();
+});

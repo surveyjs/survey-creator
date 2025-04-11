@@ -338,6 +338,52 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
     return allowOptions.allow;
   }
+  public prevDropTargetPath: ISurveyElement[] = [];
+  updatePathToDragOver(dropTarget: ISurveyElement, prevDropTarget: ISurveyElement) {
+    if (!dropTarget) {
+      this.leaveDragOverElements(this.prevDropTargetPath);
+      this.prevDropTargetPath = [];
+      return;
+    }
+    if (dropTarget !== prevDropTarget) {
+      let dropTargetPath = [];
+      let target = dropTarget;
+      while (!!target) {
+        dropTargetPath.push(target);
+        target = target.parent;
+      }
+      if (!dropTarget.isPage) {
+        dropTargetPath.push((dropTarget as any).page);
+      }
+      dropTargetPath = dropTargetPath.reverse();
+      for (let i = 0; i < this.prevDropTargetPath.length && i < dropTargetPath.length; i++) {
+        if (this.prevDropTargetPath[i] !== dropTargetPath[i]) {
+          this.leaveDragOverElements(this.prevDropTargetPath.slice(i));
+          this.enterDragOverElements(dropTargetPath.slice(i));
+          break;
+        }
+      }
+      this.prevDropTargetPath = dropTargetPath;
+    }
+  }
+  private leaveDragOverElements(elements: ISurveyElement[]) {
+    elements && elements.forEach((element) => {
+      const adorner = SurveyElementAdornerBase.GetAdorner(element as any);
+      if (adorner) {
+        adorner.dropIndicatorPosition = null;
+        adorner.dragLeave();
+      }
+    });
+  }
+  private enterDragOverElements(elements: ISurveyElement[]) {
+    elements && elements.forEach((element) => {
+      const adorner = SurveyElementAdornerBase.GetAdorner(element as any);
+      if (adorner) {
+        adorner.dragEnter();
+      }
+    });
+  }
+
   public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DropIndicatorPosition): void {
     const oldDragOverIndicatorElement = this.dragOverIndicatorElement;
     const oldDropTarget = this.dropTarget;
@@ -346,6 +392,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       return;
     }
     this.dropTarget = dropTarget;
+    this.updatePathToDragOver(dropTarget, oldDropTarget);
+    // this.updatePathToDragOver(null, null);
     this.dragOverLocation = dragOverLocation;
 
     this.parentElement = this.dropTarget.isPage
