@@ -1,15 +1,20 @@
 module.exports = {
-    "extends": [
-      "plugin:react/recommended",
-    ],
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 12,
-      "sourceType": "module"
+  "extends": [
+    "plugin:react/recommended",
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "plugins": [
-      "react",
-    ],
-  };
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+  ],
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
+};

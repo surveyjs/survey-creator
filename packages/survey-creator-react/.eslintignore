@@ -4,4 +4,5 @@ example/
 examples/
 node_modules/
 index.js
+copy-vrt-tests.js
 webpack.config.js
