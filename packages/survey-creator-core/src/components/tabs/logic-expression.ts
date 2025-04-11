@@ -26,8 +26,8 @@ export class SurveyLogicExpressionUpdater {
     return this.operand.toString(strFunc);
   }
   private constToString(op: Const): string {
-    for(var i = 0; i < this.constChanges.length; i ++) {
-      if(this.constChanges[i].op === op) return this.constChanges[i].val;
+    for (var i = 0; i < this.constChanges.length; i ++) {
+      if (this.constChanges[i].op === op) return this.constChanges[i].val;
     }
     return op.toString();
   }
@@ -69,16 +69,16 @@ export class SurveyLogicExpressionUpdater {
     negate: "!",
   };
   private updateOperand(op: Operand, varName: string, oldValue: any, newValue: any): void {
-    if(op.getType() == "binary") {
+    if (op.getType() == "binary") {
       const bOP = <BinaryOperand>op;
-      if(bOP.isConjunction) {
+      if (bOP.isConjunction) {
         this.updateOperand(bOP.leftOperand, varName, oldValue, newValue);
         this.updateOperand(bOP.rightOperand, varName, oldValue, newValue);
       } else {
-        if(this.hasVarName(bOP.leftOperand, varName)) {
+        if (this.hasVarName(bOP.leftOperand, varName)) {
           this.updateOperandConst(bOP.rightOperand, oldValue, newValue);
         } else {
-          if(this.hasVarName(bOP.rightOperand, varName)) {
+          if (this.hasVarName(bOP.rightOperand, varName)) {
             this.updateOperandConst(bOP.leftOperand, oldValue, newValue);
           }
         }
@@ -86,27 +86,27 @@ export class SurveyLogicExpressionUpdater {
     }
   }
   private hasVarName(op: Operand, varName: string): boolean {
-    if(!op || op.getType() !== "variable") return;
+    if (!op || op.getType() !== "variable") return;
     return (<Variable>op).variable.toLowerCase() === varName;
   }
   private updateOperandConst(op: Operand, oldValue: any, newValue: any): void {
-    if(op.getType() === "array") {
+    if (op.getType() === "array") {
       const aOp = <ArrayOperand>op;
-      if(Array.isArray(aOp.values)) {
+      if (Array.isArray(aOp.values)) {
         aOp.values.forEach(item => this.updateOperandConst(item, oldValue, newValue));
       }
     }
-    if(op.getType() !== "const") return;
+    if (op.getType() !== "const") return;
     const cOp = <Const>op;
-    if(Helpers.isTwoValueEquals(cOp.correctValue, oldValue)) {
+    if (Helpers.isTwoValueEquals(cOp.correctValue, oldValue)) {
       newValue = this.getCorrectNewValue(cOp, newValue);
       this.constChanges.push({ op: op, val: newValue });
     }
   }
   private getCorrectNewValue(op: Const, newValue: any): any {
     const str = op.toString();
-    if(!!str && !Helpers.isTwoValueEquals(op.correctValue, str)) {
-      if(str[0] === "\"" || str[0] === "'") {
+    if (!!str && !Helpers.isTwoValueEquals(op.correctValue, str)) {
+      if (str[0] === "\"" || str[0] === "'") {
         return str[0] + newValue + str[0];
       }
     }

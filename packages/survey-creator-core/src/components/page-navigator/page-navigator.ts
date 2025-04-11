@@ -104,7 +104,7 @@ export class PageNavigatorViewModel extends Base {
     this.setItems(items);
   }
   private patchContainerOffset(el: HTMLElement) {
-    while (!!el) {
+    while(!!el) {
       if (el.className.indexOf("svc-tab-designer--with-surface-tools") !== -1) {
         el.offsetParent.scrollTop = 0;
         return;
@@ -153,8 +153,7 @@ export class PageNavigatorViewModel extends Base {
             this.patchContainerOffset(el);
           }, 50);
         }
-      }
-      else {
+      } else {
         el.scrollIntoView({ block: "start" });
         this.patchContainerOffset(el);
         if (isLastPage) {

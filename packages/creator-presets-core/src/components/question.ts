@@ -4,7 +4,7 @@ import { QuestionAdornerViewModel } from "survey-creator-core";
 export class QuestionPresetAdornerViewModel extends QuestionAdornerViewModel {
   protected buildActions(items: Array<Action>): void {
     super.buildActions(items);
-    if(this.element.isQuestion) {
+    if (this.element.isQuestion) {
       const title = "Property name: " + this.element.name + ", property type: " + this.element.getType();
       items.push(new Action({
         id: "svc_property_name",
@@ -14,7 +14,7 @@ export class QuestionPresetAdornerViewModel extends QuestionAdornerViewModel {
         title: title
       }));
     }
-    if(this.element.isPanel) {
+    if (this.element.isPanel) {
       items.push(new Action({
         id: "svc_category_name",
         component: "sv-action-texteditor-item",

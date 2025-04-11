@@ -50,7 +50,7 @@ export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdo
   }
   public override ngAfterViewChecked(): void {
     super.ngAfterViewChecked();
-    if(this.adorner && this.container?.nativeElement) {
+    if (this.adorner && this.container?.nativeElement) {
       this.adorner.rootElement = this.container.nativeElement;
     }
   }

@@ -32,7 +32,7 @@ export class ResizeManager {
     this.eastResizer.style["display"] = isThereEastResizer ? "block" : "none";
   }
   private getStyleValue(element: HTMLElement, style: string): number {
-    if(!window) return 0;
+    if (!window) return 0;
     return parseFloat(window.getComputedStyle(element).getPropertyValue(style).replace("px", ""));
   }
   private isEventSupported(eventName: string) {
@@ -50,11 +50,9 @@ export class ResizeManager {
     if (this.mouseDevice === undefined) {
       if (this.isEventSupported("pointerdown")) {
         this.mouseDevice = "pointer";
-      }
-      else if (this.isEventSupported("touchstart")) {
+      } else if (this.isEventSupported("touchstart")) {
         this.mouseDevice = "touch";
-      }
-      else if (this.isEventSupported("mousedown")) {
+      } else if (this.isEventSupported("mousedown")) {
         this.mouseDevice = "mouse";
       }
     }
@@ -64,7 +62,7 @@ export class ResizeManager {
     return this.events[eventName][this.getEventPrefix()];
   }
   private onMouseDownListener = (e: any) => {
-    if(!window) return;
+    if (!window) return;
     e.preventDefault();
     this.originalWidth = this.getStyleValue(this.container, "width");
     this.originalMouseX = e.pageX;
@@ -88,7 +86,7 @@ export class ResizeManager {
     this.container.style.width = width + "px";
   };
   private stopResize = (e: any) => {
-    if(!window) return;
+    if (!window) return;
     window.removeEventListener(this.getMouseEvent("mousemove"), this.resize);
     window.removeEventListener(this.getMouseEvent("mouseup"), this.stopResize);
   };

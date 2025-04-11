@@ -45,7 +45,7 @@ test("Check custom color question", () => {
 
   let renderValueChangedLog = "";
   question.onPropertyChanged.add((sender, options) => {
-    if(options.name === "_renderedValue") {
+    if (options.name === "_renderedValue") {
       renderValueChangedLog += `-> ${options.newValue}`;
     }
   });
@@ -89,7 +89,7 @@ test("Check custom color question event callbacks", () => {
   expect(question.getSwatchStyle()).toEqual({
     backgroundColor: "#F9F9F9"
   });
-  let preventLog ="";
+  let preventLog = "";
   question.onBeforeInput(<any>{ data: ".", preventDefault: () => {
     preventLog += "->.";
   } });
@@ -227,7 +227,7 @@ test("Do not fire on value changed if color is not changed", () => {
   const q = survey.getQuestionByName("q1");
   let log = "";
   survey.onValueChanged.add((sender, options) => {
-    log+= "->changed";
+    log += "->changed";
   });
   q.value = "#FFF000";
   expect(log).toBe("->changed");

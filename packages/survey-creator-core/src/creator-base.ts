@@ -2269,7 +2269,7 @@ export class SurveyCreatorModel extends Base
       reason: reason,
       collapsed: defaultValue
     };
-    if (reason) this.onElementGetExpandCollapseState.fire(this, options);
+    if (reason)this.onElementGetExpandCollapseState.fire(this, options);
     return options.collapsed;
   }
 
@@ -2407,7 +2407,7 @@ export class SurveyCreatorModel extends Base
   private isObjThisType(obj: Base, typeName: string): boolean {
     var classInfo = Serializer.findClass(obj.getType());
 
-    while (!!classInfo && !!classInfo.parentName) {
+    while(!!classInfo && !!classInfo.parentName) {
       if (classInfo.name === typeName) return true;
       classInfo = Serializer.findClass(classInfo.parentName);
     }
@@ -2509,8 +2509,7 @@ export class SurveyCreatorModel extends Base
         const textWorker = new SurveyTextWorker(value);
         if (textWorker.isJsonCorrect) {
           jsonValue = this.parseJSON(value);
-        }
-        else if (!!textWorker.survey) {
+        } else if (!!textWorker.survey) {
           jsonValue = textWorker.survey.toJSON();
         }
       }
@@ -2847,11 +2846,10 @@ export class SurveyCreatorModel extends Base
     if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
       (<any>selectedElement !== <any>panel)) {
       if (!panel) {
-        while (!!selectedElement.parent && selectedElement.parent.isPanel) {
+        while(!!selectedElement.parent && selectedElement.parent.isPanel) {
           if (!!(<any>selectedElement).parentQuestion) {
             selectedElement = <IElement>(<any>selectedElement).parentQuestion;
-          }
-          else {
+          } else {
             selectedElement = <IElement><any>selectedElement.parent;
           }
         }
@@ -3594,7 +3592,7 @@ export class SurveyCreatorModel extends Base
         break;
       }
       list.push(options.name);
-    } while (!options.isDone);
+    } while(!options.isDone);
     return options.name;
   }
   protected generateUniqueNameCore(options: any): void {
@@ -3608,7 +3606,7 @@ export class SurveyCreatorModel extends Base
     }
   }
   private checkForUniqueName(el: Base, newName: string): string {
-    while (!this.isNameUnique(el, newName, false)) {
+    while(!this.isNameUnique(el, newName, false)) {
       newName = SurveyHelper.generateNewName(newName);
     }
     return newName;
@@ -4560,7 +4558,7 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
 
 function isContentElement(element: any) {
   let current = element;
-  while (!!current) {
+  while(!!current) {
     if (current.isContentElement) {
       return true;
     }

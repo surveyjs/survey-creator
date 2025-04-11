@@ -131,7 +131,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     }
     let control = null;
     if (this.locString.hasHtml) {
-      if(this.htmlValue.__html !== this.locString.renderedHtml) {
+      if (this.htmlValue.__html !== this.locString.renderedHtml) {
         this.htmlValue = { __html: this.locString.renderedHtml };
       }
       control = (

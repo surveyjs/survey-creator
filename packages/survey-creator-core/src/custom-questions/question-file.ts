@@ -4,9 +4,9 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   protected loadedFilesValue: any;
   protected onChangeQuestionValue(newValue: any): void {}
   protected setNewValue(newValue: any): void {
-    if(typeof newValue === "object") {
+    if (typeof newValue === "object") {
       this.stateChanged(this.isEmpty() ? "empty" : "loaded");
-      if(!this.isLoadingFromJson) {
+      if (!this.isLoadingFromJson) {
         this.loadPreview(newValue);
       }
       this.loadedFilesValue = newValue;
@@ -16,7 +16,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
     super.setNewValue(newValue);
   }
   protected loadPreview(newValue: any): void {
-    if(typeof newValue !== "string") {
+    if (typeof newValue !== "string") {
       super.loadPreview(newValue);
     }
   }
@@ -27,13 +27,13 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   public clear(doneCallback?: () => void, shouldClearValue: boolean = true) {
     if (!this.survey) return;
     const callback = () => {
-      if(shouldClearValue) {
+      if (shouldClearValue) {
         this.value = undefined;
       }
       this.errors = [];
       !!doneCallback && doneCallback();
     };
-    if(!!this.loadedFilesValue) {
+    if (!!this.loadedFilesValue) {
       this.containsMultiplyFiles = false;
       this.survey.clearFiles(
         this.loadedFilesValue,
@@ -61,7 +61,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
 
   protected updateRenderedValue(value: string) {
     const matchBase64 = !!value ? value.match(/^data:((?:\w+\/(?:(?!;).)+)?)((?:;[\w\W]*?[^;])*),/) : null;
-    if(matchBase64) {
+    if (matchBase64) {
       this.notEmptyValuePlaceholder = matchBase64[0] + "...";
       this._renderedValue = "";
     } else {
@@ -76,8 +76,8 @@ export class QuestionFileEditorModel extends QuestionFileModel {
 
   protected updateValueFromInputEvent(event: Event) {
     const value = (<HTMLInputElement>event.target).value;
-    if(!!this.notEmptyValuePlaceholder && !value) return;
-    if(!Helpers.isTwoValueEquals(value, this.value)) {
+    if (!!this.notEmptyValuePlaceholder && !value) return;
+    if (!Helpers.isTwoValueEquals(value, this.value)) {
       this.clear(undefined, false);
       this.loadedFilesValue = undefined;
       this.value = (<HTMLInputElement>event.target).value;
@@ -88,7 +88,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
     this.updateRenderedValue(newValue);
   }
   public onInputChange(event: Event) {
-    if(event.target !== document.activeElement) {
+    if (event.target !== document.activeElement) {
       this.updateValueFromInputEvent(event);
     }
   }
@@ -105,19 +105,19 @@ export class QuestionFileEditorModel extends QuestionFileModel {
     return new CssClassBuilder().append(this.cssClasses.chooseButton).append(this.cssClasses.chooseButtonDisabled, this.isInputReadOnly).toString();
   }
   public onKeyDown = (event: KeyboardEvent) => {
-    if((<HTMLElement>event.target).tagName === "INPUT") {
+    if ((<HTMLElement>event.target).tagName === "INPUT") {
       this.onTextKeyDownHandler(event);
     }
   };
   public onFileInputChange = (event: Event) => {
-    if(!this.onChooseFilesCallback) {
+    if (!this.onChooseFilesCallback) {
       this.doChange(event);
       return true;
     }
   };
   public onChooseFilesCallback: (input: HTMLInputElement, callback: (files: File[]) => void) => void;
   chooseFiles(event: Event) {
-    if(this.isInputReadOnly || !this.onChooseFilesCallback) {
+    if (this.isInputReadOnly || !this.onChooseFilesCallback) {
       return true;
     } else {
       event.preventDefault();

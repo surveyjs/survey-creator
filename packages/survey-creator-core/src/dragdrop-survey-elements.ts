@@ -38,16 +38,13 @@ export function calculateDragOverLocation(clientX: number, clientY: number, rect
   if (dy >= tg * dx) {
     if (dy >= - tg * dx + rect.height) {
       return DropIndicatorPosition.Bottom;
-    }
-    else {
+    } else {
       return DropIndicatorPosition.Left;
     }
-  }
-  else {
+  } else {
     if (dy >= - tg * dx + rect.height) {
       return DropIndicatorPosition.Right;
-    }
-    else {
+    } else {
       return DropIndicatorPosition.Top;
     }
   }
@@ -301,7 +298,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const selector = this.dropTargetDataAttributeName;
 
     let result = parent;
-    while (!!parent) {
+    while(!!parent) {
       result = parent;
       parent = parent.querySelector(selector);
     }
@@ -382,8 +379,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         }
       }
     }
-    if (this.dragOverIndicatorElement != oldDragOverIndicatorElement) this.removeDragOverMarker(oldDragOverIndicatorElement);
-    if (this.dropTarget != oldDropTarget) this.removeDragOverMarker(oldDropTarget);
+    if (this.dragOverIndicatorElement != oldDragOverIndicatorElement)this.removeDragOverMarker(oldDragOverIndicatorElement);
+    if (this.dropTarget != oldDropTarget)this.removeDragOverMarker(oldDropTarget);
   }
   private dragDropFindRow(findElement: ISurveyElement, panel: PanelModelBase): QuestionRowModel {
     if (!findElement || findElement.isPage) return null;
@@ -402,7 +399,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
   }
   private isSameElement(target: ISurveyElement): boolean {
-    while (!!target) {
+    while(!!target) {
       if (target === this.draggedElement) return true;
       target = target.parent;
     }
@@ -571,7 +568,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
 
     const convertLocation = () => {
-      switch (this.dragOverLocation) {
+      switch(this.dragOverLocation) {
         case "top": return "top";
         case "bottom": return "bottom";
         case "right": return "right";

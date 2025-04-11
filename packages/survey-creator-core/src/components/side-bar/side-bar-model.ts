@@ -132,8 +132,7 @@ export class SidebarModel extends Base {
         if (!this.flyoutMode) {
           this.collapsedManually = true;
           this.expandedManually = false;
-        }
-        else {
+        } else {
           this.creator.focusElement(this.creator.selectedElement, true);
         }
       }
@@ -198,7 +197,7 @@ export class SidebarModel extends Base {
     if (this._activePage) {
       this.header.title = this._activePage.caption;
       this._activePage.visible = true;
-      if(!!this._activePage.activateCallback) {
+      if (!!this._activePage.activateCallback) {
         this._activePage.activateCallback();
       }
     }

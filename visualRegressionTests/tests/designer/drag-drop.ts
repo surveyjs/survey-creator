@@ -574,8 +574,7 @@ test("Drag Drop to Multiline styles", async (t) => {
         const el = document.querySelectorAll(".svc-question__content")[idx];
         if (remove != "remove") {
           el.classList.add("svc-question__content--" + suffix);
-        }
-        else {
+        } else {
           el.classList.remove("svc-question__content--" + suffix);
         }
       })(idx, suffix, remove);
@@ -634,8 +633,7 @@ test("Drag Drop inside panel dynamic top indicator", async (t) => {
         const el = document.querySelectorAll(".svc-question__content")[idx];
         if (remove != "remove") {
           el.classList.add("svc-question__content--" + suffix);
-        }
-        else {
+        } else {
           el.classList.remove("svc-question__content--" + suffix);
         }
       })(idx, suffix, remove);

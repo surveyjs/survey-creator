@@ -770,8 +770,7 @@ export class QuestionToolbox
   private getOrCreateToolboxItem(item: IQuestionToolboxItem): QuestionToolboxItem {
     if (item instanceof QuestionToolboxItem) {
       return item;
-    }
-    else {
+    } else {
       item.iconName = item.iconName ? item.iconName : QuestionToolbox.defaultIconName;
       const newItem = new QuestionToolboxItem(item);
       this.createSubTypes(newItem);

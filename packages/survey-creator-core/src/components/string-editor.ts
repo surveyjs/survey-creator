@@ -203,8 +203,7 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
     if (items == this.question.columns) {
       let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => new MatrixDropdownColumn(text))).concat(items.slice(startIndex + 1));
       this.question[this.getItemsPropertyName(items)] = newItems;
-    }
-    else {
+    } else {
       super.addNewItems(creator, items, startIndex, itemsToAdd);
     }
   }
@@ -263,7 +262,7 @@ export class StringEditorViewModelBase extends Base {
   };
   public afterRender() {
     if (this.connector.focusOnEditor) {
-      if (this.activate()) this.connector.focusOnEditor = false;
+      if (this.activate())this.connector.focusOnEditor = false;
     }
   }
 
@@ -337,7 +336,7 @@ export class StringEditorViewModelBase extends Base {
     if (this.maxLength > 0) {
       this.characterCounter.updateRemainingCharacterCounter(this.valueBeforeEdit, this.maxLength);
     }
-    if(this.creator) {
+    if (this.creator) {
       this.creator.selectFromStringEditor = true;
     }
 
@@ -353,7 +352,7 @@ export class StringEditorViewModelBase extends Base {
   }
 
   private checkMarkdownToTextConversion(element, name): void {
-    if(!this.creator) return;
+    if (!this.creator) return;
     const options = {
       element: element,
       text: <any>null,
@@ -375,7 +374,7 @@ export class StringEditorViewModelBase extends Base {
     }
     if (this.editAsText && !this.compostionInProgress) {
       const options = { value: event.target?.innerText, cancel: null };
-      if (this.connector) this.connector.onTextChanging.fire(this, options);
+      if (this.connector)this.connector.onTextChanging.fire(this, options);
       if (options.cancel) return;
       if (this.maxLength >= 0 && event.target.innerText.length > this.maxLength) {
         event.target.innerText = event.target.innerText.substring(0, this.maxLength);
@@ -393,8 +392,7 @@ export class StringEditorViewModelBase extends Base {
       this.blurredByEscape = false;
       if (this.locString.hasHtml) {
         event.target.innerHTML = this.valueBeforeEdit;
-      }
-      else {
+      } else {
         event.target.innerText = this.valueBeforeEdit;
       }
       this.errorText = null;
@@ -410,8 +408,7 @@ export class StringEditorViewModelBase extends Base {
       !(!this.locString.text && clearedText == this.locString.calculatedText)) {
       if (!this.errorText) {
         this.setValueIntoLocStr(clearedText, event?.target);
-      }
-      else {
+      } else {
         this.creator?.notify(this.errorText, "error");
         this.focusedProgram = true;
         event.target.innerText = clearedText;
@@ -421,8 +418,7 @@ export class StringEditorViewModelBase extends Base {
     } else {
       if (this.locString.hasHtml) {
         event.target.innerHTML = this.locString.renderedHtml;
-      }
-      else {
+      } else {
         event.target.innerText = this.locString.renderedHtml;
       }
       this.locString.strChanged();
@@ -464,14 +460,14 @@ export class StringEditorViewModelBase extends Base {
       newValue: clearedText,
       doValidation: false
     };
-    if (this.creator) this.creator.onValueChangingCallback(changingOptions);
+    if (this.creator)this.creator.onValueChangingCallback(changingOptions);
     return changingOptions.newValue;
   }
   private getErrorTextOnChanged(clearedText: string): string {
-    if(!this.creator) return "";
+    if (!this.creator) return "";
     const owner = this.locString.owner as any;
     let res = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText);
-    if(!!res || !!clearedText) return res;
+    if (!!res || !!clearedText) return res;
     const propJSON = owner.getPropertyByName && owner.getPropertyByName(this.locString.name);
     if (propJSON && propJSON.isRequired) return editorLocalization.getString("pe.propertyIsEmpty");
     return "";
@@ -497,8 +493,7 @@ export class StringEditorViewModelBase extends Base {
         }
         itemValue.value = clearedText;
       }
-    }
-    else {
+    } else {
       const oldStoreDefaultText = this.locString.storeDefaultText;
       this.locString.storeDefaultText = false;
       this.locString.text = clearedText;
@@ -579,22 +574,22 @@ export class StringEditorViewModelBase extends Base {
   public get placeholder(): string {
     if (this.placeholderValue !== undefined) return this.placeholderValue;
     const propPlaceholder = this.findProperty()?.placeholder;
-    if(!!propPlaceholder) {
+    if (!!propPlaceholder) {
       (<any>this.locString).placeholder = propPlaceholder;
     }
-    if(!(<any>this.locString).placeholder) {
+    if (!(<any>this.locString).placeholder) {
       this.placeholderValue = "";
       return "";
     }
     var re = /\{([^}]+)\}/g;
     this.placeholderValue = <any>new ComputedUpdater<string>(() => {
       let locPlaceholder: any = (<any>this.locString).placeholder;
-      if(typeof locPlaceholder === "function") {
+      if (typeof locPlaceholder === "function") {
         locPlaceholder = locPlaceholder();
       }
       let result = editorLocalization.getString(locPlaceholder);
       let match = re.exec(result);
-      while (match != null) {
+      while(match != null) {
         result = result.replace(re, propertyName => {
           const propertyValue = this.locString.owner && this.locString.owner[match[1]];
           return "" + propertyValue;
@@ -606,7 +601,7 @@ export class StringEditorViewModelBase extends Base {
     return this.placeholderValue;
   }
   public get contentEditable(): boolean {
-    if(!this.creator) return true;
+    if (!this.creator) return true;
     return this.creator.isCanModifyProperty(<any>this.locString.owner, this.locString.name);
   }
   public get showCharacterCounter(): boolean {

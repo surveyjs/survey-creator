@@ -111,7 +111,7 @@ export class PreviewViewModel extends Base {
     });
     const hasSurveyBefore = !!this.simulator.survey;
     this.simulator.survey = newSurvey;
-    if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
+    if (this.onSurveyCreatedCallback)this.onSurveyCreatedCallback(this.survey);
     this.survey.onComplete.add((sender: SurveyModel) => {
       this.isRunning = false;
     });

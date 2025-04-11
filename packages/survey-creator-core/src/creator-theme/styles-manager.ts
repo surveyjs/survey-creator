@@ -29,12 +29,12 @@ export class CreatorStylesManager {
       if (!sheet) {
         sheet = CreatorStylesManager.createSheet(CreatorStylesManager.SurveyJSCreatorStylesSheetId);
       }
-      if(sheet) {
+      if (sheet) {
         if (Object.keys(rules).length) {
           rules.forEach((rule) => {
             try {
               sheet.insertRule(`${rule.selector} { ${rule.styles} }`, 0);
-            } catch (e) { }
+            } catch(e) { }
           });
         }
       }

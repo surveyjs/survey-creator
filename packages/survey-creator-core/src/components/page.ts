@@ -214,8 +214,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       if (model.creator.pageEditMode !== "single") {
         model.creator.selectElement(model.page, undefined, false);
         this.onPageSelected();
-      }
-      else {
+      } else {
         model.creator.selectElement(model.creator.survey, undefined, false);
       }
     }
