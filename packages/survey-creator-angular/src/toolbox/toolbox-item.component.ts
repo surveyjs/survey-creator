@@ -11,7 +11,7 @@ export class ToolboxItemComponent extends BaseAngular<ToolboxToolViewModel> {
   @Input() creator!: SurveyCreatorModel;
   @Input() model!: QuestionToolboxItem;
   @Input() isCompact: boolean = false;
-  @Input() viewModel!: ToolboxToolViewModel
+  @Input() viewModel!: ToolboxToolViewModel;
   protected getModel(): ToolboxToolViewModel {
     return this.viewModel;
   }

@@ -62,11 +62,11 @@ export class SurveyQuestionProperties {
   public getAllVisiblePropertiesNames(includeUnused: boolean): Array<string> {
     const res = [];
     this.tabs.forEach(tab => {
-      if(tab.visible !== false) {
+      if (tab.visible !== false) {
         tab.properties.forEach(prop => res.push(prop.name));
       }
     });
-    if(includeUnused) {
+    if (includeUnused) {
       this.unusedProperties.forEach(prop => res.push(prop.name));
     }
     return res;
@@ -179,7 +179,7 @@ export class SurveyQuestionProperties {
     });
   }
   private setParentTabs(): void {
-    for(let i = this.tabs.length - 1; i >= 0; i --) {
+    for (let i = this.tabs.length - 1; i >= 0; i --) {
       const tab = this.tabs[i];
       if (tab.parentName) {
         const parent = this.getTabByName(tab.parentName);
@@ -221,7 +221,7 @@ export class SurveyQuestionProperties {
       !isString && !!defProperty.category ? defProperty.category : "";
     propertyDefinition.title =
       !isString && !!defProperty.title ? defProperty.title : "";
-    if(!isTab && defProperty.index !== undefined) {
+    if (!isTab && defProperty.index !== undefined) {
       propertyDefinition.definedIndex = defProperty.index;
     }
     propertyDefinition.onSameLine = this.isPropertyOnSameLine(propRes.property.nextToProperty);
@@ -327,20 +327,20 @@ export class SurveyQuestionProperties {
         classes.unshift(prefix + classInfo.name);
         classInfo = !!classInfo.parentName ? Serializer.findClass(classInfo.parentName) : undefined;
       }
-      if(classes.indexOf(className) < 0) {
+      if (classes.indexOf(className) < 0) {
         classes.unshift(className);
       }
-      if(classes.indexOf(prefix + "default") < 0) {
+      if (classes.indexOf(prefix + "default") < 0) {
         classes.unshift(prefix + "default");
       }
       classes.forEach(cl => {
         const def = this.getClassDefintion(cl);
-        if(def) {
+        if (def) {
           result.push(def);
         }
       });
       this.setUsedProperties(result, usedProperties);
-      if(this.isColumnObj) {
+      if (this.isColumnObj) {
         this.getAllDefinitionsByClassCore(this.obj.templateQuestion.getType(), usedProperties, result, undefined, true);
       }
       this.addNonTabProperties(result, usedProperties, true);
@@ -361,7 +361,7 @@ export class SurveyQuestionProperties {
   private getAllDefinitionsByClassCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>, baseClass: string, isColumn?: boolean): boolean {
     let res = false;
     let curClassName = className;
-    while (curClassName && (!baseClass || !Serializer.isDescendantOf(baseClass, curClassName))) {
+    while(curClassName && (!baseClass || !Serializer.isDescendantOf(baseClass, curClassName))) {
       let metaClass = <JsonMetadataClass>(
         Serializer.findClass(curClassName)
       );
@@ -378,7 +378,7 @@ export class SurveyQuestionProperties {
     let columnDef: ISurveyQuestionEditorDefinition = undefined;
     if (classRes.properties) {
       var i = 0;
-      while (i < classRes.properties.length) {
+      while(i < classRes.properties.length) {
         const prop = classRes.properties[i];
         const propName = typeof prop == "string" ? prop : prop.name;
         let tabName = settings.propertyGrid.generalTabName;
@@ -388,15 +388,15 @@ export class SurveyQuestionProperties {
         const jsonProp = !!this.propertiesHash[propName]
           ? this.propertiesHash[propName].property
           : null;
-        if(!isColumn || jsonProp?.availableInMatrixColumn) {
+        if (!isColumn || jsonProp?.availableInMatrixColumn) {
           const jsonPropertyCategory = this.getJsonPropertyCategory(jsonProp);
           if (!!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
             classRes.properties.splice(i, 1);
           } else {
             usedProperties[propName] = true;
           }
-          if(isColumn) {
-            if(!columnDef) {
+          if (isColumn) {
+            if (!columnDef) {
               columnDef = { properties: [], tabs: [] };
             }
             columnDef.properties.push(prop);
@@ -405,8 +405,8 @@ export class SurveyQuestionProperties {
         i++;
       }
     }
-    if(isColumn) {
-      if(!!columnDef) {
+    if (isColumn) {
+      if (!!columnDef) {
         result.unshift(columnDef);
       }
       return res;
@@ -494,7 +494,7 @@ export class SurveyQuestionProperties {
       index ++;
     });
     properties.sort((prop1, prop2): number => {
-      if(prop1.index === prop2.index) return 0;
+      if (prop1.index === prop2.index) return 0;
       return prop1.index < prop2.index ? -1 : 1;
     });
     this.insertProperteisWithVisibleIndex(properties);

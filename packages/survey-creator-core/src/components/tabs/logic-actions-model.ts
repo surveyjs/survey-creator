@@ -12,7 +12,7 @@ export class LogicActionModelBase {
 
   static createActionModel(panel: PanelModel, logicAction: SurveyLogicAction, logicType: SurveyLogicType, selectorElementsHash): LogicActionModelBase {
     if (!!logicType && logicType.hasSelectorChoices) {
-      if(logicType.name.indexOf("_setValue") > -1)
+      if (logicType.name.indexOf("_setValue") > -1)
         return new LogicActionSetValueModel(panel, logicAction, logicType, selectorElementsHash);
       return new LogicActionModel(panel, logicAction, logicType, selectorElementsHash);
     } else {
@@ -93,13 +93,13 @@ export class LogicActionSetValueModel extends LogicActionModel {
   }
   public afterUpdateInitialLogicAction(): void {
     const selectedElement = this.getElementBySelectorName(this.panel);
-    if(!!selectedElement) {
+    if (!!selectedElement) {
       (<any>selectedElement).setValueExpression = this.panel.getQuestionByName("setValueExpression").value;
     }
   }
   private setValueExpressionValue(): void {
     const selectedElement = this.getElementBySelectorName(this.panel);
-    if(!!selectedElement) {
+    if (!!selectedElement) {
       this.getValueIfQuestion().value = (<any>selectedElement).setValueExpression;
     }
   }
@@ -127,14 +127,13 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     propGenerator.setupObjPanel(tempPanel, true, "logic");
     let newQuestion = tempPanel.getQuestionByName(name);
     if (!!newQuestion) {
-      if(!Helpers.isTwoValueEquals(newQuestion.toJSON(), oldQuestion.toJSON())) {
+      if (!Helpers.isTwoValueEquals(newQuestion.toJSON(), oldQuestion.toJSON())) {
         let index = triggerEditorPanel.elements.indexOf(oldQuestion);
         triggerEditorPanel.blockAnimations();
         triggerEditorPanel.addElement(newQuestion, index);
         oldQuestion.delete();
         triggerEditorPanel.releaseAnimations();
-      }
-      else {
+      } else {
         newQuestion = oldQuestion;
       }
       if (newQuestion.name === "setValue") {
@@ -188,14 +187,14 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     }
   }
   public onPanelQuestionValueChanged(panel: PanelModel, qName: string): void {
-    if(this.panelObj) {
+    if (this.panelObj) {
       const prop = Serializer.findProperty(this.panelObj.getType(), qName);
       const depProps = prop?.getDependedProperties();
-      if(Array.isArray(depProps) && depProps.length > 0) {
+      if (Array.isArray(depProps) && depProps.length > 0) {
         depProps.forEach(dp => {
           const dQ = panel.getQuestionByName(dp);
           const dProp = Serializer.findProperty(this.panelObj.getType(), dp);
-          if(!!dQ && !!dProp) {
+          if (!!dQ && !!dProp) {
             PropertyGridEditorCollection.onMasterValueChanged(this.panelObj, dProp, dQ);
           }
         });
@@ -232,12 +231,12 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
       const propsToDelete = [];
       const propsToSet = [];
       destKeys.forEach(key => {
-        if(srcKeys.indexOf(key) < 0) {
+        if (srcKeys.indexOf(key) < 0) {
           propsToDelete.push(key);
         }
       });
       srcKeys.forEach(key => {
-        if(!Helpers.isTwoValueEquals(srcJson[key], destJson[key])) {
+        if (!Helpers.isTwoValueEquals(srcJson[key], destJson[key])) {
           propsToSet.push(key);
         }
       });

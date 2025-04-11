@@ -117,7 +117,7 @@ export class SurveyJSON5 {
     }
 
     // Subsequent characters can contain digits.
-    while (
+    while(
       this.next() &&
       (this.ch === "_" ||
         this.ch === "$" ||
@@ -174,15 +174,15 @@ export class SurveyJSON5 {
       }
     }
 
-    switch (base) {
+    switch(base) {
       case 10:
-        while (this.ch >= "0" && this.ch <= "9") {
+        while(this.ch >= "0" && this.ch <= "9") {
           string += this.ch;
           this.next();
         }
         if (this.ch === ".") {
           string += ".";
-          while (this.next() && this.ch >= "0" && this.ch <= "9") {
+          while(this.next() && this.ch >= "0" && this.ch <= "9") {
             string += this.ch;
           }
         }
@@ -193,14 +193,14 @@ export class SurveyJSON5 {
             string += this.ch;
             this.next();
           }
-          while (this.ch >= "0" && this.ch <= "9") {
+          while(this.ch >= "0" && this.ch <= "9") {
             string += this.ch;
             this.next();
           }
         }
         break;
       case 16:
-        while (
+        while(
           (this.ch >= "0" && this.ch <= "9") ||
           (this.ch >= "A" && this.ch <= "F") ||
           (this.ch >= "a" && this.ch <= "f")
@@ -236,7 +236,7 @@ export class SurveyJSON5 {
 
     if (this.ch === '"' || this.ch === "'") {
       delim = this.ch;
-      while (this.next()) {
+      while(this.next()) {
         if (this.ch === delim) {
           this.next();
           return string;
@@ -289,7 +289,7 @@ export class SurveyJSON5 {
         this.next();
         return;
       }
-    } while (this.ch);
+    } while(this.ch);
   }
   private blockComment() {
     // Skip a block comment, assuming this is one. The current character should be
@@ -303,14 +303,14 @@ export class SurveyJSON5 {
 
     do {
       this.next();
-      while (this.ch === "*") {
+      while(this.ch === "*") {
         this.next("*");
         if (this.ch === "/") {
           this.next("/");
           return;
         }
       }
-    } while (this.ch);
+    } while(this.ch);
 
     this.error("Unterminated block comment");
   }
@@ -338,7 +338,7 @@ export class SurveyJSON5 {
     // This works since regular expressions are not valid JSON(5), but this will
     // break if there are other valid values that begin with a / character!
 
-    while (this.ch) {
+    while(this.ch) {
       if (this.ch === "/") {
         this.comment();
       } else if (SurveyJSON5.ws.indexOf(this.ch) >= 0) {
@@ -351,7 +351,7 @@ export class SurveyJSON5 {
   private word(): any {
     // true, false, or null.
 
-    switch (this.ch) {
+    switch(this.ch) {
       case "t":
         this.next("t");
         this.next("r");
@@ -397,7 +397,7 @@ export class SurveyJSON5 {
     if (this.ch === "[") {
       this.next("[");
       this.white();
-      while (this.ch) {
+      while(this.ch) {
         if (this.ch === "]") {
           this.next("]");
           return array; // Potentially empty array
@@ -436,7 +436,7 @@ export class SurveyJSON5 {
       this.next("{");
       this.white();
       start = this.at - 1;
-      while (this.ch) {
+      while(this.ch) {
         if (this.ch === "}") {
           if (this.parseType > 0) {
             object[SurveyJSON5.positionName].end = start;
@@ -499,7 +499,7 @@ export class SurveyJSON5 {
     // or a word.
 
     this.white();
-    switch (this.ch) {
+    switch(this.ch) {
       case "{":
         return this.object();
       case "[":
@@ -608,7 +608,7 @@ export class SurveyJSON5 {
     }
     var i = 1,
       length = key.length;
-    while (i < length) {
+    while(i < length) {
       if (!this.isWordChar(key[i])) {
         return false;
       }
@@ -704,7 +704,7 @@ export class SurveyJSON5 {
       // don't unbox dates, since will turn it into number
       obj_part = obj_part.valueOf();
     }
-    switch (typeof obj_part) {
+    switch(typeof obj_part) {
       case "boolean":
         return obj_part.toString();
 

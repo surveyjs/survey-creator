@@ -24,21 +24,21 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
 
   private denyUpdate = () => {
     this.denyComponentUpdate();
-  }
+  };
 
   private allowUpdate = () => {
     this.allowComponentUpdate();
-  }
+  };
 
   private addDragDropEvents = () => {
     this.creator.onDragStart.add(this.denyUpdate);
     this.creator.onDragClear.add(this.allowUpdate);
-  }
+  };
 
   private clearDragDropEvents = () => {
     this.creator.onDragStart.remove(this.denyUpdate);
     this.creator.onDragClear.remove(this.allowUpdate);
-  }
+  };
 
   componentDidMount(): void {
     super.componentDidMount();

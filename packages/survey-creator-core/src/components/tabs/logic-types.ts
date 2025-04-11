@@ -71,11 +71,11 @@ export class SurveyLogicType {
     }
   }
   public hasNeededTypes(types: Array<string>): boolean {
-    if(types.indexOf(this.baseClass) < 0) return false;
+    if (types.indexOf(this.baseClass) < 0) return false;
     const inCls = this.logicType.incorrectClasses;
-    if(Array.isArray(inCls)) {
-      for(let i = 0; i < inCls.length; i ++) {
-        if(types.indexOf(inCls[i]) > -1) return false;
+    if (Array.isArray(inCls)) {
+      for (let i = 0; i < inCls.length; i ++) {
+        if (types.indexOf(inCls[i]) > -1) return false;
       }
     }
     return true;
@@ -117,7 +117,7 @@ export class SurveyLogicType {
       (<any>obj).setOwner(this.survey);
     }
     //Do not fire notification about changes to our creator.survey model
-    if(obj instanceof ItemValue || obj instanceof SurveyTrigger) {
+    if (obj instanceof ItemValue || obj instanceof SurveyTrigger) {
       obj["isGhost"] = true;
     }
     return obj;
@@ -256,7 +256,7 @@ export class SurveyLogicTypes {
         const questions = survey.getAllQuestions();
         const addElement = function(el: any) {
           res.push(el);
-          if(el.isPanel) {
+          if (el.isPanel) {
             el.elements.forEach(child => addElement(child));
           }
         };
@@ -453,7 +453,7 @@ export class SurveyLogicTypes {
         formatStr: string,
         lt: SurveyLogicType
       ): string {
-        if(Helpers.isValueEmpty(element["setValue"])) {
+        if (Helpers.isValueEmpty(element["setValue"])) {
           formatStr = getLogicString("trigger_setvalueEmptyText");
         }
         return formatStr["format"](
@@ -582,7 +582,7 @@ export class SurveyLogicTypes {
 function getDisplayTextForSetValueIf(element: Base, formatStr: string, lt: SurveyLogicType): string {
   const name = lt.formatElName(element["name"]);
   let exp = element["setValueExpression"];
-  if(!exp) {
+  if (!exp) {
     return getLogicString("trigger_setvalueEmptyText")["format"](name);
   }
   return formatStr["format"](name, exp);

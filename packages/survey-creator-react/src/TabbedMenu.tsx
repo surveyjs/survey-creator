@@ -94,7 +94,7 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
     super.componentDidMount();
     this.item.updateModeCallback = (mode, callback) => {
       queueMicrotask(() => {
-        if((ReactDOM as any)["flushSync"]) {
+        if ((ReactDOM as any)["flushSync"]) {
           (ReactDOM as any)["flushSync"](() => {
             this.item.mode = mode;
           });

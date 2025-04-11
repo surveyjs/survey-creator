@@ -33,7 +33,7 @@ export class ToolboxToolComponent extends CreatorModelComponent<Action> implemen
     this.item.updateModeCallback = undefined as any;
   }
   ngAfterViewInit(): void {
-    if(this.item) {
+    if (this.item) {
       this.item.updateModeCallback = (mode, callback) => {
         this.item.mode = mode;
         callback(mode, this.container?.nativeElement);

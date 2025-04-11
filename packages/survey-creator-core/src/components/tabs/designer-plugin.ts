@@ -282,7 +282,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
-      if(this.tabControlModel.isTopToolbarCreated) {
+      if (this.tabControlModel.isTopToolbarCreated) {
         this.setupPropertyGridTabActions(this.tabControlModel.topToolbar);
       }
       this.propertyGrid.survey.onCurrentPageChanged.add((sender: SurveyModel, options: CurrentPageChangedEvent) => {
@@ -359,7 +359,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.model = undefined;
     this.propertyGridTab.visible = false;
     this.propertyGridPlaceholderPage.visible = false;
-    if (!!this.themePropertyGridTab) this.themePropertyGridTab.visible = false;
+    if (!!this.themePropertyGridTab)this.themePropertyGridTab.visible = false;
     this.toolboxTab.visible = false;
     this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     this.creator.sidebar.sideAreaComponentName = undefined;

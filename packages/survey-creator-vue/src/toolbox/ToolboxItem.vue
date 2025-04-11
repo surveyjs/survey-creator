@@ -36,7 +36,6 @@ import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { SvComponent } from "survey-vue3-ui";
 import type {
   SurveyCreatorModel,
-  IQuestionToolboxItem,
   ToolboxToolViewModel,
   QuestionToolboxItem,
 } from "survey-creator-core";

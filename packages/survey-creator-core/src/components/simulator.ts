@@ -64,11 +64,11 @@ export class SurveySimulatorModel extends Base {
   public activateZoom = () => {
     document.addEventListener("keydown", this.listenTryToZoom);
     document.addEventListener("wheel", this.listenTryToZoomWithWheel, { passive: false });
-  }
+  };
   public deactivateZoom = () => {
     document.removeEventListener("keydown", this.listenTryToZoom);
     document.removeEventListener("wheel", this.listenTryToZoomWithWheel);
-  }
+  };
   private listenTryToZoomWithWheel = e => this.tryToZoomWithWheel(e, e);
   private tryToZoomWithWheel(data: any, event: any) {
     const diff: number = event.deltaY;

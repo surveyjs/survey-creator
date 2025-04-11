@@ -2,8 +2,8 @@
   <div class="svc-surface-placeholder">
     <div class="svc-surface-placeholder__image" :class="'svc-surface-placeholder__image--' + name"></div>
     <div class="svc-surface-placeholder__text">
-      <div class="svc-surface-placeholder__title">{{placeholderTitleText}}</div>
-      <div class="svc-surface-placeholder__description">{{placeholderDescriptionText}}</div>
+      <div class="svc-surface-placeholder__title">{{props.placeholderTitleText}}</div>
+      <div class="svc-surface-placeholder__description">{{props.placeholderDescriptionText}}</div>
     </div>
   </div>
 </template>

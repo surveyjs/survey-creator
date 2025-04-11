@@ -16,7 +16,7 @@ export class AceJsonEditorComponent extends BaseAngular<AceJsonEditorModel> impl
   }
 
   public ngAfterViewInit(): void {
-    //todo fix ts 
+    //todo fix ts
     this.model.init((<any>window).ace.edit(
       this.inputEl.nativeElement
     ));

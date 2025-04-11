@@ -379,9 +379,9 @@ export class PropertyGridTitleActionsCreator {
   }
   public onValueChanged(obj: any, property: JsonObjectProperty, question: Question): void {
     const editor = PropertyGridEditorCollection.getEditor(property);
-    if(!!editor && !!editor.createPropertyEditorSetup && !!editor.isPropertyEditorSetupEnabled) {
+    if (!!editor && !!editor.createPropertyEditorSetup && !!editor.isPropertyEditorSetupEnabled) {
       const act = question.getTitleToolbar().getActionById("property-grid-setup");
-      if(!!act) {
+      if (!!act) {
         act.enabled = editor.isPropertyEditorSetupEnabled(obj, property, question, this.options);
       }
     }
@@ -876,7 +876,7 @@ export class PropertyGridModel {
   }
   private setObj(value: Base) {
     this.objValue = value;
-    if(this.onSetNewObjectCallback) {
+    if (this.onSetNewObjectCallback) {
       this.onSetNewObjectCallback();
     }
     this.classNameProperty = !!this.obj
@@ -889,7 +889,7 @@ export class PropertyGridModel {
     this.titleActionsCreator = !!this.obj
       ? new PropertyGridTitleActionsCreator(this.obj, this.options)
       : undefined;
-    if(!this.surveyValue) return;
+    if (!this.surveyValue) return;
     this.clearSurveyValue();
     this.createSurveyValue();
   }
@@ -923,7 +923,7 @@ export class PropertyGridModel {
       this.onValueChanging(options);
     });
     this.survey.onValidateQuestion.add((sender, options) => {
-      if(options.errors.length === 0) {
+      if (options.errors.length === 0) {
         this.onValidateQuestion(options);
       }
     });
@@ -1083,7 +1083,7 @@ export class PropertyGridModel {
     this.optionsValue = !!val ? val : new EmptySurveyCreatorOptions();
   }
   public get survey() {
-    if(!this.surveyValue) {
+    if (!this.surveyValue) {
       this.createSurveyValue();
     }
     return this.surveyValue;
@@ -1128,7 +1128,7 @@ export class PropertyGridModel {
     });
   }
   public expandCategoryIfNeeded(): void {
-    if(!this.surveyValue) return;
+    if (!this.surveyValue) return;
     const expandedTabName = creatorSettings.propertyGrid.defaultExpandedTabName;
     if (!!expandedTabName && !this.getPropertyGridExpandedCategory()) {
       const panel = <PanelModel>this.survey.getPanelByName(expandedTabName);
@@ -1800,8 +1800,7 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
       } else {
         if (!prop.isRequired && options.value === "") {
           options.value = undefined;
-        }
-        else {
+        } else {
           options.value = prop.minValue !== undefined && prop.minValue > 0 ? prop.minValue : 0;
         }
       }

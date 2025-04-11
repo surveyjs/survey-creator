@@ -96,7 +96,7 @@ export class PropertyGridViewModel extends Base {
         }
       });
     }
-    if(this.onNewSurveyCreatedCallback) {
+    if (this.onNewSurveyCreatedCallback) {
       this.onNewSurveyCreatedCallback();
     }
   }
@@ -104,7 +104,7 @@ export class PropertyGridViewModel extends Base {
     let titleName = this.getTitle();
     this.selectedElementName = titleName;
     this.objectSelectionAction.tooltip = titleName;
-    if(!this.propertyGridModel.showOneCategoryInPropertyGrid) {
+    if (!this.propertyGridModel.showOneCategoryInPropertyGrid) {
       this.objectSelectionAction.title = titleName;
     }
   }

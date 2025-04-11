@@ -27,13 +27,13 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
     question.valueToDataCallback = (val: any): any => {
-      if(!val) return val;
+      if (!val) return val;
       return val.replace(/\\n/g, "\n")
         .replace(/\\r/g, "\r")
         .replace(/\\t/g, "\t");
     };
     question.valueFromDataCallback = (val: any): any => {
-      if(!val) return val;
+      if (!val) return val;
       return val.replace(/\n/g, "\\n")
         .replace(/\r/g, "\\r")
         .replace(/\t/g, "\\t");
@@ -79,7 +79,7 @@ export class PropertyGridEditorCondition extends PropertyGridEditorExpression {
     return options.allowEditExpressionsInTextEditor !== false;
   }
   public onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
-    if(options.allowEditExpressionsInTextEditor === false) {
+    if (options.allowEditExpressionsInTextEditor === false) {
       question.onKeyDownPreprocess = (event: any) => {
         const allowed = ["Tab", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"];
         if (!event.ctrlKey && allowed.indexOf(event.key) < 0) {

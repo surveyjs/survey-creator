@@ -57,7 +57,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
 
   preventDragHandler = (e) => {
     e.preventDefault();
-  }
+  };
   renderLoadingIndicator() {
     return <div className="svc-image-item-value__loading"><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
   }

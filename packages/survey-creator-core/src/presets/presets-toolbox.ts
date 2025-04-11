@@ -19,12 +19,12 @@ export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
   private applyDefinition(creator: SurveyCreatorModel, definition: Array<ICreatorPresetToolboxItem>): void {
     const toolbox = creator.toolbox;
     toolbox.presetDefaultItems = this.getPresetDefaultItems(definition);
-    if(Array.isArray(definition)) {
+    if (Array.isArray(definition)) {
       definition.forEach(item => {
         const tItem = toolbox.getActionById(item.name);
-        if(tItem) {
+        if (tItem) {
           ["iconName", "title", "tooltip", "json"].forEach(propName => {
-            if(item[propName]) {
+            if (item[propName]) {
               tItem[propName] = item[propName];
             }
           });
@@ -48,7 +48,7 @@ export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
 export class CreatorPresetToolboxConfigurator extends CreatorPresetBase {
   public getPath(): string { return ""; }
   protected applyCore(creator: SurveyCreatorModel): void {
-    if(!this.json) return;
+    if (!this.json) return;
     super.applyCore(creator);
     creator.toolbox.showCategoryTitles = this.json.showCategoryTitles;
     this.applyItems(creator, this.json["items"]);

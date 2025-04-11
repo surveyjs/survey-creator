@@ -18,7 +18,7 @@ export class TabbedMenuItemWrapperComponent extends BaseAngular<TabbedMenuItem> 
     this.model.updateModeCallback = undefined as any;
   }
   ngAfterViewInit(): void {
-    if(this.model) {
+    if (this.model) {
       this.model.updateModeCallback = (mode, callback) => {
         this.model.mode = mode;
         queueMicrotask(() => {

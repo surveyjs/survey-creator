@@ -81,7 +81,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     this.isFileDragging = true;
     event.dataTransfer.dropEffect = "copy";
     event.preventDefault();
-  }
+  };
   onDrop = (event: any) => {
     this.isFileDragging = false;
     event.preventDefault();
@@ -92,10 +92,10 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
       files.push(input.files[i]);
     }
     this.uploadFiles(files);
-  }
+  };
   onDragLeave = (event: any) => {
     this.isFileDragging = false;
-  }
+  };
   get acceptedTypes() {
     return getAcceptedTypesByContentMode(this.question.contentMode);
   }

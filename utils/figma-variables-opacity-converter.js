@@ -20,5 +20,5 @@ var result = themesArray.map((item) => {
   if (isNaN(value) || value < 1) return item;
   item = item.replace(value, "" + (value / 100));
   return item;
-})
-console.dir(result.join('\r\n'))
+});
+console.dir(result.join("\r\n"));

@@ -41,7 +41,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
       try {
         window["ace"]["config"].set("basePath", AceJsonEditorModel.aceBasePath);
         this.aceEditor.session.setMode("ace/mode/json");
-      } catch { }
+      } catch{ }
     }
     const self: AceJsonEditorModel = this;
     this.aceEditor.setShowPrintMargin(false);

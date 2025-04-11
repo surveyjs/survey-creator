@@ -402,8 +402,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         if (this.isPanelSupportContext(panel)) continue;
         if (i === 0 && this.panels.length === 1) {
           panel.getQuestionByName("logicTypeName").clearValue();
-        }
-        else {
+        } else {
           this.panel.removePanel(i);
         }
       }

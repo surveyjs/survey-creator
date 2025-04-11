@@ -4,10 +4,10 @@
  * ```js
  * const creatorOptions = { ... };
  * const creator = new SurveyCreator.SurveyCreator(creatorOptions);
- * 
+ *
  * // In modular applications:
  * import { SurveyCreatorModel } from "survey-creator-core";
- * 
+ *
  * const creatorOptions = { ... };
  * const creator = new SurveyCreatorModel(creatorOptions);
  * ```
@@ -54,13 +54,13 @@ export interface ICreatorOptions {
   showThemeTab?: boolean;
   /**
    * Specifies whether users can modify the [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme). Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#propertyGridNavigationMode) is `"buttons"`.
-   * 
+   *
    * Default value: `true`
    */
   showCreatorThemeSettings?: boolean;
   /**
    * Specifies whether the "Zoom In", "Zoom Out", and "Zoom to 100%" buttons are available.
-   * 
+   *
    * Default value: `true`
    */
   allowZoom?: boolean;
@@ -161,16 +161,16 @@ export interface ICreatorOptions {
    *
    * Accepted values:
    *
-   * - `"auto"` (default)     
+   * - `"auto"` (default)
    * Display the language selector only if the survey is translated into more than one language.
    *
-   * - `true`     
+   * - `true`
    * Always display the language selector regardless of how many languages are used in the survey.
    *
-   * - `false`      
+   * - `false`
    * Never display the language selector.
    *
-   * - `"all"`        
+   * - `"all"`
    * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization).
    *
    * **See also**: [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
@@ -206,9 +206,9 @@ export interface ICreatorOptions {
   useElementTitles?: boolean;
   /**
    * Limits the number of visible choices. Users can click "Show more" to view hidden choices.
-   * 
+   *
    * Set this property to -1 if you do not want to hide any choices.
-   * 
+   *
    * Default value: 10
    */
   maxVisibleChoices?: number;
@@ -288,7 +288,7 @@ export interface ICreatorOptions {
 
   /**
    * Limits the number of nested panels within a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element.
-   * 
+   *
    * Default value: -1 (unlimited)
    */
   maxNestedPanels?: number;
@@ -308,7 +308,7 @@ export interface ICreatorOptions {
    * Specifies a default device for survey preview in the Preview tab.
    *
    * Accepted values:
-   * 
+   *
    * - `"desktop"` (default)
    * - `"iPhoneSE"`
    * - `"iPhone15"`
@@ -322,7 +322,7 @@ export interface ICreatorOptions {
   previewDevice?: string;
   /**
    * Specifies the orientation of the selected device in the Preview tab.
-   * 
+   *
    * Accepted values:
    * - `"landscape"` (default)
    * - `"portrait"`
@@ -330,43 +330,43 @@ export interface ICreatorOptions {
   previewOrientation?: "landscape" | "portrait";
   /**
    * Limits question and panel types available in the Toolbox and Add Question menu.
-   * 
+   *
    * Refer to the [Limit Available Question and Panel Types](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox#limit-available-question-and-panel-types) help topic for more information.
    */
   questionTypes?: Array<string>;
   /**
    * Specifies where to add new questions when users click the "Add Question" button.
-   * 
+   *
    * Accepted values:
-   * 
-   * - `true` (default)       
+   *
+   * - `true` (default)
    * New questions are added to the end of a survey page.
-   * 
-   * - `false`      
+   *
+   * - `false`
    * New questions are added after the currently selected question on the design surface.
    */
   addNewQuestionLast?: boolean;
   /**
    * Specifies how Survey Creator users edit survey pages.
-   * 
+   *
    * Accepted values:
-   * 
-   * - `"standard"` (default)       
+   *
+   * - `"standard"` (default)
    * Questions and panels are divided between pages. Users can scroll the design surface to reach a required page.
-   * 
-   * - `"single"`       
+   *
+   * - `"single"`
    * All questions and panels belong to a single page. Users cannot add or remove pages.
-   * 
-   * - `"bypage"`       
+   *
+   * - `"bypage"`
    * Questions and panels are divided between pages. Users can use the page navigator to switch to a required page.
    */
   pageEditMode?: "standard" | "single" | "bypage";
   enableLinkFileEditor?: boolean;
   /**
    * Specifies the visibility of the buttons that expand and collapse survey elements on the design surface.
-   * 
+   *
    * Accepted values:
-   * 
+   *
    * - `"onhover"` (default) - Displays an expand/collapse button when a survey element is hovered over or selected.
    * - `"always"` - Displays the expand/collapse buttons permanently.
    * - `"never"` - Hides the expand/collapse buttons.
@@ -377,65 +377,65 @@ export interface ICreatorOptions {
 
   /**
    * Specifies whether survey pages appear collapsed on the design surface by default.
-   * 
+   *
    * Default value: `false`
-   * 
+   *
    * [View Demo](https://surveyjs.io/survey-creator/examples/expand-and-collapse-survey-elements/ (linkStyle))
-   * 
+   *
    * This property specifies the expand/collapse state of all survey pages at once. To adjust the state of individual pages, handle the [`onElementGetExpandCollapseState`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementGetExpandCollapseState) event.
    * @see expandCollapseButtonVisibility
    */
   collapsePages?: boolean;
   /**
    * Specifies whether panels appear collapsed on the design surface by default.
-   * 
+   *
    * Default value: `false`
-   * 
+   *
    * [View Demo](https://surveyjs.io/survey-creator/examples/expand-and-collapse-survey-elements/ (linkStyle))
-   * 
+   *
    * This property specifies the expand/collapse state of all panels at once. To adjust the state of individual panels, handle the [`onElementGetExpandCollapseState`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementGetExpandCollapseState) event.
    * @see expandCollapseButtonVisibility
    */
   collapsePanels?: boolean;
   /**
    * Specifies whether survey questions appear collapsed on the design surface by default.
-   * 
+   *
    * Default value: `false`
-   * 
+   *
    * [View Demo](https://surveyjs.io/survey-creator/examples/expand-and-collapse-survey-elements/ (linkStyle))
-   * 
+   *
    * This property specifies the expand/collapse state of all survey questions at once. To adjust the state of individual questions, handle the [`onElementGetExpandCollapseState`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementGetExpandCollapseState) event.
    * @see expandCollapseButtonVisibility
    */
   collapseQuestions?: boolean;
   /**
    * Specifies how users navigate categories in the Property Grid.
-   * 
+   *
    * Accepted values:
-   * 
-   * - `"accordion"`        
+   *
+   * - `"accordion"`
    * The Property Grid displays a stacked list of categories that users can expand or collapse to reveal nested properties.
-   * 
-   * - `"buttons"` (default)      
-   * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid. 
+   *
+   * - `"buttons"` (default)
+   * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid.
    */
   propertyGridNavigationMode?: "buttons" | "accordion";
   /**
    * Specifies whether users can drag and drop pages on the design surface.
-   * 
+   *
    * Default value: `true` if [`pageEditMode`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#pageEditMode) is `"standard"`; `false` otherwise.
    * @see collapseOnDrag
    */
   allowDragPages?: boolean;
   /**
    * Specifies whether to collapse pages on the design surface when users start dragging a survey element.
-   * 
+   *
    * Default value: `true`
    */
   collapseOnDrag?: boolean;
   /**
    * Specifies whether to clear translations to other languages when a source language translation is changed.
-   * 
+   *
    * Default value: `false`
    */
   clearTranslationsOnSourceTextChange?: boolean;

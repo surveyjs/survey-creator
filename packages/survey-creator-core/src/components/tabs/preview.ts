@@ -24,7 +24,7 @@ export class PreviewViewModel extends Base {
       target.simulator.survey.showInvisibleElements = val;
     }
   })
-  showInvisibleElements;
+    showInvisibleElements;
   @property({ defaultValue: true }) showPagesInTestSurveyTab;
   @property({
     defaultValue: true, onSet: (value: boolean, target: PreviewViewModel) => {
@@ -52,7 +52,7 @@ export class PreviewViewModel extends Base {
       target.updatePrevNextPageActionState();
     }
   })
-  activePage: PageModel;
+    activePage: PageModel;
   public get activeLanguage(): string {
     return this.getPropertyValue("activeLanguage", this.survey.locale || surveyLocalization.defaultLocale);
   }
@@ -111,7 +111,7 @@ export class PreviewViewModel extends Base {
     });
     const hasSurveyBefore = !!this.simulator.survey;
     this.simulator.survey = newSurvey;
-    if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
+    if (this.onSurveyCreatedCallback)this.onSurveyCreatedCallback(this.survey);
     this.survey.onComplete.add((sender: SurveyModel) => {
       this.isRunning = false;
     });

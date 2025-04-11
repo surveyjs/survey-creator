@@ -10,7 +10,7 @@ export class PresetItemValue extends ItemValue {
     return !!this.typeName ? this.typeName : "presetitemvalue";
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
-    if(name === "text" && !!oldValue && !newValue && !!this.locText.localizationName) {
+    if (name === "text" && !!oldValue && !newValue && !!this.locText.localizationName) {
       const presetStrs = editorLocalization.presetStrings;
       editorLocalization.presetStrings = undefined;
       this.locText.text = editorLocalization.getString(this.locText.localizationName);
@@ -18,20 +18,20 @@ export class PresetItemValue extends ItemValue {
     }
   }
   public updateModifiedText(locStrs: any): void {
-    if(!this.locText.localizationName) return undefined;
+    if (!this.locText.localizationName) return undefined;
     const text = this.locText.text;
     const presetStrs = editorLocalization.presetStrings;
     editorLocalization.presetStrings = undefined;
-    if(text !== editorLocalization.getString(this.locText.localizationName)) {
+    if (text !== editorLocalization.getString(this.locText.localizationName)) {
       this.saveTextInLocStrs(locStrs, text);
     }
     editorLocalization.presetStrings = presetStrs;
   }
   private saveTextInLocStrs(locStrs: any, text: string): void {
     const paths = this.locText.localizationName.split(".");
-    for(let i = 0; i < paths.length - 1; i ++) {
+    for (let i = 0; i < paths.length - 1; i ++) {
       const path = paths[i];
-      if(!locStrs[path]) {
+      if (!locStrs[path]) {
         locStrs[path] = {};
       }
       locStrs = locStrs[path];
@@ -56,7 +56,7 @@ export class QuestionPresetRankingModel extends QuestionRankingModel {
     return "ranking";
   }
   protected setNewValue(newValue: any): void {
-    if((this.alwaysHasValue &&
+    if ((this.alwaysHasValue &&
       !Array.isArray(newValue) || newValue.length === 0) &&
       this.visibleChoices.length > 0) {
       const val = [];
@@ -66,7 +66,7 @@ export class QuestionPresetRankingModel extends QuestionRankingModel {
     super.setNewValue(newValue);
   }
   public updateModifiedText(locStrs: any): void {
-    if(!this.isVisible) return;
+    if (!this.isVisible) return;
     this.choices.forEach(item => {
       (<PresetItemValue>item).updateModifiedText(locStrs);
     });

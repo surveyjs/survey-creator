@@ -428,7 +428,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     try {
       const res = new SurveyJSON5().parse(text);
       return res;
-    } catch (e) {
+    } catch(e) {
       return undefined;
     }
   }

@@ -447,7 +447,7 @@ test("Modify translation strings survey in a dialog, remove actions", () => {
   };
   creator.onMachineTranslate.add((sender, options) => {});
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if(options.area === "translation-tab:table-header-popup-editor") {
+    if (options.area === "translation-tab:table-header-popup-editor") {
       const actions = options.survey.navigationBar.actions;
       actions.splice(actions.length - 3, 3);
     }

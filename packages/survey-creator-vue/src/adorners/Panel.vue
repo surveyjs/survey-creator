@@ -156,12 +156,5 @@ const addNewQuestion = (event: Event) => {
   event.stopPropagation();
   adorner.value.addNewQuestion();
 };
-const selectQuestionType = (event: any) => {
-  event.stopPropagation();
-  adorner.value.questionTypeSelectorModel?.action(
-    adorner.value.questionTypeSelectorModel,
-    event
-  );
-};
 // svc-panel
 </script>

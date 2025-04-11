@@ -40,21 +40,21 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
   }
   protected getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
     let items = model.getValue(this.nameItems);
-    if(!Array.isArray(items)) return undefined;
+    if (!Array.isArray(items)) return undefined;
     items = [].concat(items);
-    if(Helpers.isArraysEqual(items, creator.getTabNames(), false)) {
+    if (Helpers.isArraysEqual(items, creator.getTabNames(), false)) {
       items = undefined;
     }
     let activeTab = model.getValue(this.nameActiveTab);
-    if(!items && activeTab === creator.activeTab) {
+    if (!items && activeTab === creator.activeTab) {
       activeTab = undefined;
     }
-    if(!items && !activeTab) return undefined;
+    if (!items && !activeTab) return undefined;
     const val: any = { };
-    if(!!items) {
+    if (!!items) {
       val.items = items;
     }
-    if(!!activeTab) {
+    if (!!activeTab) {
       val.activeTab = activeTab;
     }
     return val;
@@ -68,7 +68,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
     let items = json["items"] || [];
-    if(items.length === 0) {
+    if (items.length === 0) {
       items = creator.getTabNames();
     }
     model.setValue(this.allItems, items);
@@ -106,7 +106,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     });
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
-    if(name === this.allItems) {
+    if (name === this.allItems) {
       const val = model.getValue(name) || [];
       model.getQuestionByName(this.nameActiveTab).visible = val.length > 1;
       model.getQuestionByName(this.nameItems).visible = val.length > 1;

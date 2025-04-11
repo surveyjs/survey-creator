@@ -636,10 +636,10 @@ test("Question borders in panels", async (t) => {
 });
 
 /*
-  test("Check question width and position", async (t) => { 
-  await wrapVisualTest(t, async (t, comparer) => { 
+  test("Check question width and position", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
-  
+
     const surveyJSON = {
       "showQuestionNumbers": "off",
       "pages": [
@@ -655,7 +655,7 @@ test("Question borders in panels", async (t) => {
         }
       ]
     };
-  
+
     await setJSON(surveyJSON);
     await takeElementScreenshot("question-in-center", Selector(".svc-tab-designer"), t, comparer);
   }); });

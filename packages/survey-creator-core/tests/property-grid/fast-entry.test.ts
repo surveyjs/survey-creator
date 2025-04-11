@@ -90,7 +90,7 @@ test("options.onFastEntryFastEntryCallback in FastEntry editor", () => {
     lines.forEach(line => {
       const index = line.indexOf("-");
       let val = line;
-      if(index > -1) {
+      if (index > -1) {
         val = line.substring(index + 1);
       }
       res.push(new ItemValue(val, line));

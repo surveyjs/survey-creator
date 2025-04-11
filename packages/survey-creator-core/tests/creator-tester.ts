@@ -30,7 +30,7 @@ export class CreatorTester extends SurveyCreatorModel {
   }
   public selectQuestionByName(name: string): Question {
     const q = this.survey.getQuestionByName(name);
-    if (!!q) this.selectElement(q);
+    if (!!q)this.selectElement(q);
     return q;
   }
   public getActionBarItem(id: string): IAction {

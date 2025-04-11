@@ -8,7 +8,7 @@ import { Action } from "survey-core";
   styles: [":host { display: none }"]
 })
 export class JsonErrorItemComponent extends BaseAngular<Action> {
-  @Input() model!: Action
+  @Input() model!: Action;
   protected override getModel(): Action {
     return this.model;
   }

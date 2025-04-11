@@ -65,7 +65,7 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   }
   onChangeHandler = (): void => {
     this.detectChanges();
-  }
+  };
   public onBlur(event: any): string {
     this.container.nativeElement.spellcheck = false;
     (<any>this.locString).__isEditing = false;

@@ -64,7 +64,7 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
       this.setModeForActions(true);
       return;
     }
-    if(this.visibleActions.length > 1) {
+    if (this.visibleActions.length > 1) {
       this.visibleActions.forEach((item) => {
         if (item.id == "convertTo") {
           item.mode = "small";

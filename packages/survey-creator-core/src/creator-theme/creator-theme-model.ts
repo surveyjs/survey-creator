@@ -19,7 +19,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     "--ctr-spacing-unit": 8,
     "--ctr-corner-radius-unit": 8,
     "--ctr-stroke-unit": 1,
-  }
+  };
 
   @property() themeName: string = CreatorThemeModel.defaultThemeName;
   @property() scale: number;

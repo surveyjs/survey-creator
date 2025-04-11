@@ -10,7 +10,7 @@ export function getFirstNonTextElement(elements: any) {
 
 export function findParentNode(className: string, sourceNode: HTMLElement) {
   var parent = sourceNode;
-  while (!!parent && !parent.classList.contains(className)) {
+  while(!!parent && !parent.classList.contains(className)) {
     parent = parent.parentElement;
   }
   return parent;
@@ -28,7 +28,7 @@ export function getNodesFromKoComponentInfo(componentInfo) {
     return element.childNodes;
   }
 
-  while ((element = element.nextSibling)) {
+  while((element = element.nextSibling)) {
     if (element.nodeType === 3) continue;
     siblings.push(element);
   }
@@ -96,8 +96,7 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) 
       setTimeout(() => {
         setClass(name, nameReady);
       }, timeout);
-    }
-    else {
+    } else {
       setClass(name);
     }
     e[processedFlagName] = true;

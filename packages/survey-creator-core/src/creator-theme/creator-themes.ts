@@ -40,7 +40,7 @@ if (Object.keys(DefaultLightColorCssVariables).length) {
   Object.keys(DefaultLightColorCssVariables).forEach((varName) => {
     try {
       stylesStr += `${varName}: ${DefaultLightColorCssVariables[varName]};`;
-    } catch (e) { }
+    } catch(e) { }
   });
 }
 CreatorStylesManager.insertStylesRulesIntoDocument([{ selector: "survey-creator,.svc-creator", styles: stylesStr }]);

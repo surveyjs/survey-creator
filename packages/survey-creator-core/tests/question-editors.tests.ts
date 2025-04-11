@@ -169,7 +169,7 @@ test("Edit matrix cell question", (): any => {
   let type;
   let columnName;
   creator.onModified.add((sender, options) => {
-    if(options.type === "MATRIX_CELL_EDITOR") {
+    if (options.type === "MATRIX_CELL_EDITOR") {
       modifiedCounter++;
       type = options.type;
       columnName = options.column.name;

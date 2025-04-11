@@ -7,11 +7,11 @@ module.exports = {
   },
   reporters: [
     "default",
-    [ "jest-junit", {
-    "suiteNameTemplate": "{filepath}",
-    "outputDirectory": ".",
-    "outputName": "junit.xml"
-    } ]
+    ["jest-junit", {
+      "suiteNameTemplate": "{filepath}",
+      "outputDirectory": ".",
+      "outputName": "junit.xml"
+    }]
   ],
   collectCoverage: true,
   coverageReporters: ["json", "lcov", "text", "html", "text-summary", "cobertura"],

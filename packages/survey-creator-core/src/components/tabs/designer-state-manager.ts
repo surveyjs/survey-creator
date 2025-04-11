@@ -16,13 +16,13 @@ export class DesignerStateManager {
 
   private onQuestionAddedHandler = (sender, opts): void => {
     this.createElementState(opts.question, this.isSuspended);
-  }
+  };
   private onPageAddedHandler = (sender, opts): void => {
     this.createElementState(opts.page, this.isSuspended);
-  }
+  };
   private onPanelAddedHandler = (sender, opts): void => {
     this.createElementState(opts.panel, this.isSuspended);
-  }
+  };
   initForSurvey(survey: SurveyModel) {
     survey.onQuestionAdded.add(this.onQuestionAddedHandler);
     survey.onPageAdded.add(this.onPageAddedHandler);
@@ -54,13 +54,13 @@ export class DesignerStateManager {
   private createElementState(element: SurveyElement, checkIfExists: boolean): ElementState {
     const stateMap = this.getStateMapForElement(element);
     const name = element.name;
-    if(checkIfExists) {
+    if (checkIfExists) {
       const state = stateMap[name];
       if (state) return state;
     }
     const res = new ElementState();
     stateMap[name] = res;
-    if(this.onInitElementStateCallback) {
+    if (this.onInitElementStateCallback) {
       this.onInitElementStateCallback(element, res);
     }
     return res;

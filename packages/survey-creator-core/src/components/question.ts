@@ -368,7 +368,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const isElementSelected = this.creator.selectedElement === element;
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
     return true;
-  }
+  };
 
   private getConvertToTypes(): Array<QuestionToolboxItem> {
     const availableItems = this.creator.getAvailableToolboxItems(this.element, false);
@@ -726,7 +726,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   addNewQuestion = () => {
     this.creator.addNewQuestionInPage((type) => { }, this.surveyElement instanceof PanelModelBase ? this.surveyElement : null,
       this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
-  }
+  };
   questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel((type) => { this.currentAddQuestionType = type; }, this.surveyElement);
   public get addNewQuestionText(): string {
     if (!this.currentAddQuestionType && this.creator)

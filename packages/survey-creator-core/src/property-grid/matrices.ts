@@ -134,7 +134,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   }
   protected getHasAddButton(): boolean { return true; }
   public onGetQuestionTitleActions(obj: Base, options: any, creator: ISurveyCreatorOptions): void {
-    if(!this.getHasAddButton()) return;
+    if (!this.getHasAddButton()) return;
     const question: QuestionMatrixDynamicModel = options.question;
     options.titleActions.push({
       id: "add-item",
@@ -251,7 +251,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!!prop && !!prop.className) {
       var properties = Serializer.getProperties(prop.className);
       for (var i = 0; i < properties.length; i++) {
-        if(SurveyHelper.isPropertyVisible(undefined, properties[i], undefined, "list")) {
+        if (SurveyHelper.isPropertyVisible(undefined, properties[i], undefined, "list")) {
           res.push(properties[i].name);
         }
       }
@@ -665,7 +665,7 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
     return prop.type == "surveypages";
   }
   protected addItem(creator: ISurveyCreatorOptions, obj: Base, question: QuestionMatrixDynamicModel) {
-    if(creator.canAddPage()) {
+    if (creator.canAddPage()) {
       super.addItem(creator, obj, question);
     }
   }
@@ -778,7 +778,7 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
         q.value = Serializer.getObjPropertyValue(editor, q.property.name);
       });
     }
-  } 0
+  } 0;
 }
 
 export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGridEditorMatrix {

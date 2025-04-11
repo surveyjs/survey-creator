@@ -10,4 +10,4 @@ import { QuestionColorModel } from "survey-creator-core";
 export class QuestionColorComponent extends QuestionAngular<QuestionColorModel> {
 
 }
-AngularComponentFactory.Instance.registerComponent("color-question", QuestionColorComponent)
+AngularComponentFactory.Instance.registerComponent("color-question", QuestionColorComponent);

@@ -2,10 +2,10 @@
 export type ThemesHash<T> = { [index: string]: T | boolean, __surveyjs_internal_themes_hash: boolean };
 export function registerTheme<T>(registerThemeCallback: (theme: T) => void, ...themes: Array<T | ThemesHash<T>>) {
   themes.forEach(theme => {
-    if((theme as ThemesHash<T>).__surveyjs_internal_themes_hash) {
+    if ((theme as ThemesHash<T>).__surveyjs_internal_themes_hash) {
       const themesHash = theme as ThemesHash<T>;
       Object.keys(themesHash).forEach(key => {
-        if(key != "__surveyjs_internal_themes_hash" && key != "default" && typeof themesHash[key] !== "boolean") {
+        if (key != "__surveyjs_internal_themes_hash" && key != "default" && typeof themesHash[key] !== "boolean") {
           registerThemeCallback(themesHash[key]);
         }
       });

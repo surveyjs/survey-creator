@@ -14,10 +14,10 @@ export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   @Input() survey!: SurveyModel;
   @Input() creator!: SurveyCreatorModel;
   @Input() isGhost!: boolean;
-  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>
+  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
   public adorner!: PageAdorner;
   protected createModel(): void {
-    if(this.adorner) {
+    if (this.adorner) {
       this.adorner.dispose();
     }
     if (this.model) {
@@ -27,7 +27,7 @@ export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   }
   override ngDoCheck(): void {
     super.ngDoCheck();
-    if(this.adorner) {
+    if (this.adorner) {
       this.adorner.isGhost = this.isGhost;
     }
   }
@@ -39,7 +39,7 @@ export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   }
   public override ngAfterViewChecked(): void {
     super.ngAfterViewChecked();
-    if(this.adorner && this.container?.nativeElement) {
+    if (this.adorner && this.container?.nativeElement) {
       this.adorner.rootElement = this.container.nativeElement;
     }
   }
