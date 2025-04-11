@@ -1,111 +1,142 @@
-@import "../variables.scss";
+@use "../variables" as *;
 
 .svd-test-results {
-  font-family: $font-family;
-  border-radius: 4px;
-  box-shadow: inset 0px 1px 0px 0px var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16)));
+  border-radius: var(--ctr-string-table-corner-radius, var(--sjs-corner-radius-x05));
+  box-shadow: inset 0px 1px 0px 0px var(--ctr-string-table-shadow-color, var(--sjs-special-shadow, #00000040));
   padding: calc(12 * var(--sjs-base-unit, var(--base-unit, 8px)));
+}
 
-  .svd-test-results__header {
+.svd-test-results__content {
+  box-shadow: var(--ctr-string-table-shadow-offset-x, 0px)
+    var(--ctr-string-table-shadow-offset-y, 1px)
+    var(--ctr-string-table-shadow-blur, 2px)
+    var(--ctr-string-table-shadow-spread, 0px)
+    var(--ctr-string-table-shadow-color, var(--sjs-special-shadow, #00000040));
+}
+
+.svd-test-results__header {
+  @include ctrDefaultFont;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--ctr-string-table-title-padding-top, var(--sjs-spacing-x2))
+    var(--ctr-string-table-title-padding-right, var(--sjs-spacing-x3))
+    var(--ctr-string-table-title-padding-bottom, var(--sjs-spacing-x2))
+    var(--ctr-string-table-title-padding-left, var(--sjs-spacing-x3));
+  color: var(--ctr-string-table-title-caption-color, var(--sjs-layer-1-foreground-50, #00000080));
+  border-bottom: var(--ctr-string-table-title-border-width-bottom, var(--sjs-stroke-x1)) solid
+    var(--ctr-string-table-title-border-color, var(--sjs-border-10, #dcdcdcff));
+  background-color: var(--ctr-string-table-title-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+
+  .svd-test-results__header-text {
+    margin: 0;
+  }
+
+  .svd-test-results__header-types {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: calcSize(2) calcSize(3);
-    font-size: calcSize(2);
-    color: $foreground-light;
-    border-bottom: 2px solid $border-light;
-    background-color: $background;
+    gap: var(--ctr-string-table-title-actionbar-gap, var(--sjs-spacing-x1));
+  }
 
-    .svd-test-results__header-text {
-      margin: 0;
-    }
+  .svc-action-button {
+    color: var(--ctr-actionbar-button-text-color, var(--sjs-primary-background-500, #19b394ff));
+    border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
+    background-color: transparent;
 
-    .svd-test-results__header-types {
-      display: flex;
-      gap: calcSize(1);
+    &:focus, &:hover {
+      background-color: var(--ctr-survey-action-button-background-color-hovered-positive, var(--sjs-primary-background-10, #19b3941a));
+      outline: none;
     }
   }
 
-  .svd-test-results__text {
-    display: flex;
-    padding: calcSize(2) calcSize(3);
-    width: calc(100% - calcSize(6));
-    overflow: auto;
-    user-select: text;
-    white-space: pre-wrap;
-    background-color: $background;
+  .svc-action-button.svc-action-button--selected {
+    border: var(--ctr-actionbar-button-border-width-selected, var(--sjs-stroke-x2)) solid var(--ctr-actionbar-button-border-color-selected, var(--sjs-primary-background-500, #19b394ff));
   }
+}
 
-  .svd-test-results__table {
-    background-color: $background;
+.svd-test-results__text {
+  @include ctrDefaultFont;
+  display: flex;
+  padding: var(--ctr-code-viewer-text-margin-top-results-table, var(--sjs-spacing-x2)) var(--ctr-code-viewer-text-margin-right-results-table, var(--sjs-spacing-x3)) var(--ctr-code-viewer-text-margin-bottom-results-table, var(--sjs-spacing-x2)) var(--ctr-code-viewer-text-margin-left-results-table, var(--sjs-spacing-x3));
+  width: calc(100% - calcSize(6));
+  overflow: auto;
+  user-select: text;
+  white-space: pre-wrap;
+  background: var(--ctr-code-viewer-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  color: var(--ctr-code-viewer-text-color, var(--sjs-code-gray-300, #505050ff));
+}
+
+.svd-test-results__table {
+  width: 100%;
+
+  table {
     width: 100%;
-    box-shadow: $shadow-small;
+    border-collapse: collapse;
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .svd-test-results__marker {
+      position: absolute;
+      top: calcSize(1.5);
 
-      .svd-test-results__marker {
-        position: absolute;
-        top: calcSize(1.5);
+      .sv-svg-icon {
+        transition: transform 0.2s ease-in-out;
 
-        .sv-svg-icon {
-          transition: transform 0.2s ease-in-out;
-
-          use {
-            fill: $foreground-light;
-          }
-        }
-
-        &.svd-test-results__marker--expanded .sv-svg-icon {
-          transform-origin: center;
-          transform: rotate(90deg);
+        use {
+          fill: var(--ctr-string-table-row-expand-button-icon-color-default, var(--sjs-layer-1-foreground-75, #000000bf));
         }
       }
 
-      th {
-        padding: calcSize(1) calcSize(1);
-        background-color: $background-dim;
-        text-align: left;
-        font-weight: 600;
-        font-size: 12px;
-        color: $foreground-light;
+      &.svd-test-results__marker--expanded .sv-svg-icon {
+        transform-origin: center;
+        transform: rotate(90deg);
+      }
+    }
 
-        &:nth-child(1) {
-          padding-left: calcSize(3);
-        }
+    th {
+      @include ctrSmallBoldFont;
+      padding: var(--ctr-string-table-row-padding-top, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-right, var(--sjs-spacing-x3)) var(--ctr-string-table-row-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-left, var(--sjs-spacing-x3));
+      background: var(--ctr-string-table-header-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
+      text-align: left;
+      color: var(--ctr-string-table-header-text-color, var(--sjs-layer-3-foreground-75, #000000bf));
+
+      &:nth-child(1) {
+        padding-left: var(--ctr-string-table-row-padding-left, var(--sjs-spacing-x3));
+      }
+    }
+
+    td {
+      @include ctrDefaultFont;
+      padding: var(--ctr-string-table-row-padding-top, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-right, var(--sjs-spacing-x3)) var(--ctr-string-table-row-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-left, var(--sjs-spacing-x3));
+      max-width: calcSize(50);
+      overflow: auto;
+      border-top: var(--ctr-string-table-row-border-width-bottom, var(--sjs-stroke-x1)) solid var(--ctr-string-table-row-border-color, var(--sjs-border-10, #dcdcdcff));
+      user-select: text;
+      background: var(--ctr-string-table-row-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+
+      &:nth-child(1) {
+        @include ctrDefaultBoldFont;
+        position: relative;
+        width: 50%;
       }
 
-      td {
-        padding: calcSize(1) calcSize(1);
-        max-width: calcSize(50);
-        overflow: auto;
-        border-top: 2px solid $border-light;
-        user-select: text;
-
-        &:nth-child(1) {
-          position: relative;
-          width: 50%;
-          font-weight: 600;
-        }
-
-        &:nth-child(2) {
-          width: 50%;
-          padding-right: calcSize(3);
-        }
+      &:nth-child(2) {
+        width: 50%;
+        padding-right: var(--ctr-string-table-row-padding-right, var(--sjs-spacing-x3));
       }
+    }
 
-      .survey-result-value {
-        word-break: break-all;
-      }
+    .survey-result-value {
+      word-break: break-all;
+    }
 
-      tr {
-        vertical-align: top;
+    tr {
+      vertical-align: top;
 
-        .svd-test-results__node-value {
-          color: $foreground-light;
-        }
+      .svd-test-results__node-value {
+        color: var(--ctr-string-table-row-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
       }
     }
   }
+}
+
+.svd-dark-border-color {
+  color: var(--ctr-string-table-row-text-color-title, var(--sjs-layer-1-foreground-100, #000000e6));
 }

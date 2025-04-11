@@ -1,11 +1,14 @@
 import { CreatorTester } from "../creator-tester";
 import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components/results";
-import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, StylesManager } from "survey-core";
+import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, _setIsTouch, Action, PopupDropdownViewModel, settings as surveySettings } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
-import { SurveySimulatorModel } from "../../src/components/simulator";
-import { editorLocalization } from "../../src/editorLocalization";
-
+import { SurveySimulatorModel, simulatorDevices } from "../../src/components/simulator";
+import { editorLocalization, getLocString } from "../../src/editorLocalization";
+export * from "../../src/localization/german";
+import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
+import SurveyThemes from "survey-core/themes";
+registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
@@ -161,14 +164,14 @@ test("Enable/disable nextPage action on page visibility change and page actions,
   expect(pageList.actions).toHaveLength(2);
   expect(pageList.actions[0].title).toBe("Page 1");
   expect(pageList.actions[1].title).toBe("Page 2");
-  expect(pageList.actions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pageList.actions[1].enabled).toBeFalsy();
   const nextPage: IAction = model.pageActions.filter((item: IAction) => item.id === "nextPage")[0];
   expect(nextPage.enabled).toBeFalsy();
   model.survey.setValue("q1", 2);
   expect(pageList.actions[1].enabled).toBeTruthy();
   expect(nextPage.enabled).toBeTruthy();
   model.survey.setValue("q1", 3);
-  expect(pageList.actions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pageList.actions[1].enabled).toBeFalsy();
   expect(nextPage.enabled).toBeFalsy();
 });
 test("Page action title when the preview shows only, Bug#5277", (): any => {
@@ -198,7 +201,7 @@ test("Page action title when the preview shows only, Bug#5277", (): any => {
       }
     ]
   };
-  expect(creator.activeTab).toEqual("test");
+  expect(creator.activeTab).toEqual("preview");
   const model: TestSurveyTabViewModel = getTestModel(creator);
   const pageSelectorAction = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0];
   expect(pageSelectorAction.title).toEqual("Page 1");
@@ -233,6 +236,35 @@ test("Show/hide device similator", (): any => {
   similatorAction = creator.toolbar.actions.filter((action) => action.id === "deviceSelector")[0];
   expect(similatorAction).toBeFalsy();
 });
+test("Hide similatorAction on mobile devices", (): any => {
+  let creator: CreatorTester = new CreatorTester();
+  creator.isTouch = true;
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.makeNewViewActive("test");
+  let similatorAction = creator.toolbar.actions.filter((action) => action.id === "deviceSelector")[0];
+  expect(similatorAction).toBeTruthy();
+  expect(similatorAction.visible).toBeFalsy();
+
+  let orientationSelectorAction = creator.toolbar.actions.filter((action) => action.id === "orientationSelector")[0];
+  expect(orientationSelectorAction).toBeTruthy();
+  expect(orientationSelectorAction.visible).toBeFalsy();
+});
+test("Check popup viewType", (): any => {
+  _setIsTouch(true);
+  const creator: CreatorTester = new CreatorTester();
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: ["Item1", "Item2", "Item3"] }] };
+  creator.makeNewViewActive("test");
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  const question = <QuestionDropdownModel>model.survey.getAllQuestions()[0];
+  model.survey.onOpenDropdownMenu.add((_, options) => {
+    expect(options.menuType).toEqual("popup");
+  });
+
+  question.dropdownListModel.popupModel.show();
+  expect(question.dropdownListModel.popupModel.isVisible).toBeTruthy();
+  _setIsTouch(false);
+});
 test("pages, PageListItems, makes items enable/disable and do not touch visibility", (): any => {
   var creator = new CreatorTester();
   creator.JSON = {
@@ -248,10 +280,10 @@ test("pages, PageListItems, makes items enable/disable and do not touch visibili
   expect(pagesActions).toHaveLength(3);
   expect(pagesActions[0].enabled).toBeTruthy();
   expect(pagesActions[1].enabled).toBeTruthy();
-  expect(pagesActions[2].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pagesActions[2].enabled).toBeFalsy();
   expect(pagesActions[2].visible).toEqual(true);
   model.survey.pages[1].visible = false;
-  expect(pagesActions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pagesActions[1].enabled).toBeFalsy();
   expect(pagesActions[1].visible).toEqual(true);
   model.survey.pages[1].visible = true;
   expect(pagesActions[1].enabled).toBeTruthy();
@@ -437,6 +469,22 @@ test("invisibleToggleAction title", (): any => {
   const action = creator.getActionBarItem("showInvisible");
   expect(action.title).toEqual("Show invisible elements");
 });
+test("invisibleToggleAction state change", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  creator.makeNewViewActive("test");
+  const action = creator.getActionBarItem("showInvisible") as Action;
+  expect(action.active).toBeFalsy();
+  action.action();
+  expect(action.active).toBeTruthy();
+});
 
 test("Test correct survey results node levels", (): any => {
   const creator: CreatorTester = new CreatorTester();
@@ -549,7 +597,7 @@ test("Show the start page and apply navigation for it", (): any => {
         ]
       }
     ],
-    "firstPageIsStarted": true
+    "firstPageIsStartPage": true
   };
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();
@@ -647,78 +695,31 @@ test("Prev/Next actions enabled/disabled", (): any => {
   expect(model.prevPageAction.enabled).toBeTruthy();
   expect(model.nextPageAction.enabled).toBeFalsy();
 });
-test("Change theme action hidden", (): any => {
-  TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
-  var oldF = StylesManager.getIncludedThemeCss;
-  StylesManager.getIncludedThemeCss = (): Array<any> => { return StylesManager.getAvailableThemes(); };
-  let creator: CreatorTester = new CreatorTester();
-  let testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
-  expect(testPlugin["changeThemeAction"]).toBeDefined();
-  creator = new CreatorTester({ allowChangeThemeInPreview: false });
-  testPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
-  expect(testPlugin["changeThemeAction"]).toBeUndefined();
-
-  StylesManager.getIncludedThemeCss = oldF;
-});
-
-test("Themes switcher list actions", (): any => {
-  TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
-  var oldF = StylesManager.getIncludedThemeCss;
-  StylesManager.getIncludedThemeCss = (): Array<any> => { return StylesManager.getAvailableThemes(); };
-
-  const creator = new CreatorTester();
-  const themeAction = creator.toolbar.getActionById("themeSwitcher");
-  expect(themeAction).toBeTruthy();
-  expect(themeAction.title).toEqual("Default");
-  const listModel = <ListModel>themeAction.popupModel.contentComponentData.model;
-  const actions = listModel.actions;
-  expect(actions).toHaveLength(3);
-  expect(actions[0].title).toEqual("Default");
-  expect(actions[1].title).toEqual("Modern");
-  expect(actions[2].title).toEqual("Default (legacy)");
-
-  StylesManager.getIncludedThemeCss = oldF;
-});
-
-test("Change test themes list actions titles on changing locale", (): any => {
-  TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
-  var oldF = StylesManager.getIncludedThemeCss;
-  StylesManager.getIncludedThemeCss = (): Array<any> => { return StylesManager.getAvailableThemes(); };
-  const deutschStrings: any = {
-    ed: {
-      defaultV2Theme: "Default de",
-      modernTheme: "Modern de"
-    }
+test("isPageToolbarVisible & firstPage is started, #6624", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "q1" }] },
+      { elements: [{ type: "text", name: "q2" }] },
+      { elements: [{ type: "text", name: "q3" }] }
+    ],
+    firstPageIsStartPage: true
   };
-  editorLocalization.locales["de"] = deutschStrings;
-  const creator = new CreatorTester();
-  const themeAction = creator.toolbar.getActionById("themeSwitcher");
-  expect(themeAction).toBeTruthy();
-  expect(themeAction.title).toEqual("Default");
-  const listModel = <ListModel>themeAction.popupModel.contentComponentData.model;
-  const actions = listModel.actions;
-  expect(actions).toHaveLength(3);
-  const modernAction = actions.filter(act => act.id === "modern_themeSwitcher")[0];
-  expect(modernAction.title).toEqual("Modern");
-  creator.locale = "de";
-  expect(themeAction.title).toEqual("Default de");
-  expect(modernAction.getLocale()).toEqual("de");
-  expect(modernAction.title).toEqual("Modern de");
-  creator.locale = "";
-  expect(themeAction.title).toEqual("Default");
-  expect(modernAction.title).toEqual("Modern");
-
-  listModel.onItemClick(modernAction);
-  expect(themeAction.title).toEqual("Modern");
-  creator.locale = "de";
-  expect(themeAction.title).toEqual("Modern de");
-  creator.locale = "";
-  expect(themeAction.title).toEqual("Modern");
-
-  StylesManager.getIncludedThemeCss = oldF;
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  expect(model.pageListItems).toHaveLength(3);
+  expect(model.survey.state).toBe("starting");
+  expect(model.isPageToolbarVisible).toBeTruthy();
+  expect(model.nextPageAction.enabled).toBeTruthy();
+  expect(model.prevPageAction.enabled).toBeFalsy();
+  (<any>model.selectPageAction.popupModel).onSelectionChanged(model.pageListItems[1]);
+  expect(model.survey.state).toBe("running");
+  expect(model.isPageToolbarVisible).toBeTruthy();
+  expect(model.nextPageAction.enabled).toBeTruthy();
+  expect(model.prevPageAction.enabled).toBeTruthy();
 });
+
 test("Default mobile orientation", (): any => {
   const creator: CreatorTester = new CreatorTester();
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
@@ -776,7 +777,7 @@ test("Check that popups inside survey are closed when scrolling container", (): 
 
   const model: TestSurveyTabViewModel = testPlugin.model;
   const question = <QuestionDropdownModel>model.survey.getAllQuestions()[0];
-  question.dropdownListModel.popupModel.toggleVisibility();
+  question.dropdownListModel.popupModel.show();
   expect(model.survey["onScrollCallback"]).toBeDefined();
   expect(question.dropdownListModel.popupModel.isVisible).toBeTruthy();
   model.onScroll();
@@ -794,7 +795,7 @@ test("Creator footer action bar: only preview tab", (): any => {
       { elements: [{ type: "text", name: "question2" }] }
     ]
   };
-  expect(creator.activeTab).toEqual("test");
+  expect(creator.activeTab).toEqual("preview");
 
   creator.isMobileView = true;
   expect(creator.footerToolbar.actions.length).toEqual(7);
@@ -809,7 +810,7 @@ test("Creator footer action bar: only preview tab", (): any => {
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 });
 
-test("Update theme in active test/preview tab", (): any => {
+test("Update theme in active test/preview tab 1", (): any => {
   const creator = new CreatorTester({ showDesignerTab: false, showPreviewTab: true, showJSONEditorTab: false, showThemeTab: false, showLogicTab: false });
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   creator.JSON = {
@@ -823,10 +824,10 @@ test("Update theme in active test/preview tab", (): any => {
       test: "testVarValue"
     },
   };
-  expect(creator.activeTab).toEqual("test");
+  expect(creator.activeTab).toEqual("preview");
   expect(testPlugin.model.survey.themeVariables["test"]).toBe("testVarValue");
 });
-test("Update theme in active test/preview tab", (): any => {
+test("Update theme in active test/preview tab 2", (): any => {
   const creator = new CreatorTester();
   let testBodyCss = "";
   let previewBodyCss = "";
@@ -839,7 +840,7 @@ test("Update theme in active test/preview tab", (): any => {
     previewBodyCss = options.survey.css.body;
   });
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if (options.reason === "test") {
+    if (options.reason === "preview" || options.reason === "test") {
       instanceBodyCss = options.survey.css.body;
       instanceArea = options.area;
     }
@@ -894,4 +895,286 @@ test("showResults with previewShowResults false", (): any => {
 
   model.survey.doComplete();
   expect(model.showResults).toBeFalsy();
+});
+
+test("devices selector dropdown items default order", (): any => {
+  const creator: CreatorTester = new CreatorTester({ previewShowResults: false });
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+
+  const deviceSelectorAction = testPlugin["deviceSelectorAction"];
+  const dropdownDeviceActions = deviceSelectorAction.data.actions as IAction[];
+  expect(dropdownDeviceActions.length).toBe(9);
+  expect(dropdownDeviceActions[0].id).toBe("desktop");
+  expect(dropdownDeviceActions[0].visibleIndex).toBe(Number.MAX_VALUE);
+  expect(dropdownDeviceActions[7].id).toBe("androidTablet");
+  expect(dropdownDeviceActions[7].visibleIndex).toBe(Number.MAX_VALUE);
+  expect(dropdownDeviceActions[8].id).toBe("microsoftSurface");
+  expect(dropdownDeviceActions[8].visibleIndex).toBe(Number.MAX_VALUE);
+});
+test("change devices selector dropdown items order", (): any => {
+  try {
+    simulatorDevices.microsoftSurface.visibleIndex = 0;
+    simulatorDevices.androidTablet.visibleIndex = 1;
+
+    const creator: CreatorTester = new CreatorTester({ previewShowResults: false });
+    creator.JSON = {
+      questions: [
+        {
+          type: "text",
+          name: "q1",
+        }
+      ]
+    };
+    const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+    testPlugin.activate();
+
+    const deviceSelectorAction = testPlugin["deviceSelectorAction"];
+    const dropdownDeviceActions = deviceSelectorAction.data.actions as IAction[];
+    expect(dropdownDeviceActions.length).toBe(9);
+    expect(dropdownDeviceActions[0].id).toBe("microsoftSurface");
+    expect(dropdownDeviceActions[0].visibleIndex).toBe(0);
+    expect(dropdownDeviceActions[1].id).toBe("androidTablet");
+    expect(dropdownDeviceActions[1].visibleIndex).toBe(1);
+    expect(dropdownDeviceActions[2].id).toBe("desktop");
+    expect(dropdownDeviceActions[2].visibleIndex).toBe(Number.MAX_VALUE);
+    expect(dropdownDeviceActions[8].id).toBe("androidPhone");
+    expect(dropdownDeviceActions[8].visibleIndex).toBe(Number.MAX_VALUE);
+  }
+  finally {
+    simulatorDevices.microsoftSurface.visibleIndex = undefined;
+    simulatorDevices.androidTablet.visibleIndex = undefined;
+  }
+});
+test("Mark previous pages as passed if selectPageAction selects non-subsequent page", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      },
+      {
+        name: "page3",
+        elements: [
+          {
+            type: "text",
+            name: "question3"
+          }
+        ]
+      },
+      {
+        name: "page4",
+        elements: [
+          {
+            type: "text",
+            name: "question4"
+          }
+        ]
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.makeNewViewActive("test");
+  const model: TestSurveyTabViewModel = testPlugin.model;
+
+  const selectPageAction = model.selectPageAction;
+  const listModel = selectPageAction.data as ListModel;
+
+  expect(selectPageAction).toBeTruthy();
+  expect(selectPageAction.visible).toBeTruthy();
+  expect(selectPageAction.data.actions.length).toBe(4);
+
+  expect(model.survey.pages[0].passed).toBeFalsy();
+  expect(model.survey.pages[1].passed).toBeFalsy();
+  expect(model.survey.pages[2].passed).toBeFalsy();
+  expect(model.survey.pages[3].passed).toBeFalsy();
+
+  listModel.onItemClick(listModel.actions[3]);
+
+  expect(model.survey.pages[0].passed).toBeTruthy();
+  expect(model.survey.pages[1].passed).toBeTruthy();
+  expect(model.survey.pages[2].passed).toBeTruthy();
+  expect(model.survey.pages[3].passed).toBeFalsy();
+});
+
+test("Suppress NavigateToUrl notification using allow option", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+      }
+    ],
+    "navigateToUrl": "javascript:alert(2)",
+  };
+
+  let allowNavigate = true;
+  let onNavigateToUrlLog = "";
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if (options.area === "theme-tab" || options.area === "preview-tab" || options.area === "design-tab") {
+      options.survey.onNavigateToUrl.add((sender, options) => {
+        onNavigateToUrlLog += "->" + options.url;
+        options.allow = allowNavigate;
+      });
+    }
+  });
+
+  let notificationsLog = "";
+  creator.onNotify.add((sender, options) => {
+    notificationsLog += "->" + options.message;
+  });
+
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  const model: TestSurveyTabViewModel = testPlugin.model;
+
+  expect(onNavigateToUrlLog).toBe("");
+  expect(notificationsLog).toBe("");
+
+  model.survey.doComplete();
+  expect(onNavigateToUrlLog).toBe("->javascript:alert(2)");
+  expect(notificationsLog).toBe("->You had to navigate to 'javascript:alert(2)'.");
+
+  let testAgain = model.testAgainAction;
+  expect(testAgain).toBeTruthy();
+  testAgain.action();
+
+  allowNavigate = false;
+
+  model.survey.doComplete();
+  expect(onNavigateToUrlLog).toBe("->javascript:alert(2)->javascript:alert(2)");
+  expect(notificationsLog).toBe("->You had to navigate to 'javascript:alert(2)'.");
+});
+test("The Preview Survey button text is not translated Bug#6016", (): any => {
+  const deText = "Testumfrage wiederholen";
+  const loc: any = editorLocalization.getLocale("de");
+  expect(loc).toBeTruthy();
+  if (!loc.ed) loc.ed = {};
+  loc.ed.testSurveyAgain = deText;
+  const creator: CreatorTester = new CreatorTester();
+  editorLocalization.currentLocale = "en";
+  expect(creator.locale).toBe("en");
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  expect(testPlugin.model).toBeFalsy();
+  creator.locale = "de";
+  creator.activeTab = "test";
+  expect(creator.locale).toBe("de");
+  expect(editorLocalization.currentLocale).toBe("de");
+  expect(getLocString("ed.testSurveyAgain")).toBe(deText);
+  expect(testPlugin.model.testAgainAction.title).toBe(deText);
+  creator.locale = "";
+});
+test("Preview tab: default device and save current device", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+
+  expect(creator.previewDevice).toBe("desktop");
+  expect(testPlugin.previewDevice).toBe("");
+
+  testPlugin.activate();
+  expect(testPlugin.previewDevice).toBe("desktop");
+  expect(testPlugin.model.simulator.device).toBe("desktop");
+
+  testPlugin.model.simulator.device = "iPhone15";
+  expect(testPlugin.previewDevice).toBe("iPhone15");
+
+  testPlugin.deactivate();
+  expect(testPlugin.previewDevice).toBe("iPhone15");
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.device).toBe("iPhone15");
+  expect(testPlugin.previewDevice).toBe("iPhone15");
+
+  testPlugin.deactivate();
+  testPlugin.previewDevice = "iPhone15Plus";
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.device).toBe("iPhone15Plus");
+});
+
+test("Preview tab: use theme palatte corresponding cretor theme palette if theme is not selected", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+
+  expect(creator.preferredColorPalette).toBe("light");
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.survey["themeName"]).toBe("default");
+  expect(testPlugin.model.simulator.survey["colorPalette"]).toBe("light");
+
+  testPlugin.deactivate();
+  creator.syncTheme({ cssVariables: {} }, false);
+  expect(creator.preferredColorPalette).toBe("dark");
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.survey["themeName"]).toBe("default");
+  expect(testPlugin.model.simulator.survey["colorPalette"]).toBe("dark");
+
+  testPlugin.deactivate();
+  creator.theme = {
+    themeName: "my",
+    colorPalette: "dark",
+    cssVariables: {}
+  };
+  creator.syncTheme({ cssVariables: {} }, true);
+  expect(creator.preferredColorPalette).toBe("light");
+
+  testPlugin.activate();
+  expect(testPlugin.model.simulator.survey["themeName"]).toBe("my");
+  expect(testPlugin.model.simulator.survey["colorPalette"]).toBe("dark");
+});
+test("Page Selector - The selected element is not updated when navigating between survey pages", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", elements: [{ type: "text", name: "question1" }] },
+      { name: "page2", elements: [{ type: "text", name: "question2" }] },
+      { name: "page3", elements: [{ type: "text", name: "question3" }] },
+      { name: "page4", elements: [{ type: "text", name: "question4" }] }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.switchTab("test");
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  const selectPageAction = model.selectPageAction;
+  const popupViewModel = new PopupDropdownViewModel(selectPageAction.popupModel); // need for popupModel.onShow
+  const listModel = selectPageAction.popupModel.contentComponentData.model as ListModel;
+  expect(model.survey.currentPage.name).toBe("page1");
+
+  model.survey.nextPage();
+  model.survey.nextPage();
+  expect(model.survey.currentPage.name).toBe("page3");
+
+  selectPageAction.action();
+  expect(listModel.selectedItem.id).toBe("page3");
+  expect(listModel.isItemSelected(listModel.actions[2])).toBeTruthy();
+
+  surveySettings.animationEnabled = true;
 });

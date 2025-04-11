@@ -1,20 +1,22 @@
 <div [class]="model.cssClasses.root" (keydown)="model.onKeyDown($event)">
-  <input autocomplete="off" [disabled]="model.isInputReadOnly" [attr.id]="model.inputId"
-    [attr.placeholder]="model.renderedPlaceholder" [attr.aria-required]="model.ariaRequired"
-    [attr.aria-label]="model.ariaLabel" [attr.aria-invalid]="model.ariaInvalid"
-    [attr.aria-describedby]="model.ariaDescribedBy" (change)="model.onChange($event)"
-    (keydown)="model.onInputKeyDown($event)" (keyup)="model.onKeyUp($event)" (blur)="model.onBlur($event)"
-    (focus)="model.onFocus($event)" (beforeinput)="model.onBeforeInput($event)" [value]="model.renderedValue"
-    [class]="model.cssClasses.control" />
+  <input autocomplete="off" role="spinbutton" [disabled]="model.isInputReadOnly" [attr.id]="model.inputId"
+    [attr.aria-required]="model.a11y_input_ariaRequired" [attr.aria-label]="model.a11y_input_ariaLabel"
+    [attr.aria-labelledby]="model.a11y_input_ariaLabelledBy" [attr.aria-describedby]="model.a11y_input_ariaDescribedBy"
+    [attr.aria-invalid]="model.a11y_input_ariaInvalid" [attr.aria-errormessage]="model.a11y_input_ariaErrormessage"
+    (change)="model.onChange($event)" (keydown)="model.onInputKeyDown($event)" (keyup)="model.onKeyUp($event)"
+    (blur)="model.onBlur($event)" (focus)="model.onFocus($event)" (beforeinput)="model.onBeforeInput($event)"
+    [value]="model.renderedValue" [class]="model.cssClasses.control" />
   <span [class]="model.cssClasses.buttonsContainer">
-    <button [disabled]="model.isInputReadOnly" [class]="model.cssClasses.arrowButton"
-      (mousedown)="model.onDownButtonMouseDown()" (mouseup)="model.onButtonMouseUp()"
-      (mouseleave)="model.onButtonMouseLeave()" (blur)="model.onBlur($event)" (focus)="model.onFocus($event)" tabindex="-1">
+    <button [disabled]="model.isInputReadOnly" [attr.aria-hidden]="'true'" [class]="model.cssClasses.arrowButton"
+      (click)="model.onDownButtonClick()" (mousedown)="model.onDownButtonMouseDown()"
+      (mouseup)="model.onButtonMouseUp()" (mouseleave)="model.onButtonMouseLeave()" (blur)="model.onBlur($event)"
+      (focus)="model.onFocus($event)" tabindex="-1">
       <svg [iconName]="model.cssClasses.decreaseButtonIcon" [size]="'auto'" sv-ng-svg-icon></svg>
     </button>
-    <button [disabled]="model.isInputReadOnly" [class]="model.cssClasses.arrowButton"
-      (mousedown)="model.onUpButtonMouseDown()" (mouseup)="model.onButtonMouseUp()"
-      (mouseleave)="model.onButtonMouseLeave()" (blur)="model.onBlur($event)" (focus)="model.onFocus($event)" tabindex="-1">
+    <button [disabled]="model.isInputReadOnly" [attr.aria-hidden]="'true'" [class]="model.cssClasses.arrowButton"
+      (click)="model.onUpButtonClick()" (mousedown)="model.onUpButtonMouseDown()" (mouseup)="model.onButtonMouseUp()"
+      (mouseleave)="model.onButtonMouseLeave()" (blur)="model.onBlur($event)" (focus)="model.onFocus($event)"
+      tabindex="-1">
       <svg [iconName]="model.cssClasses.increaseButtonIcon" [size]="'auto'" sv-ng-svg-icon></svg>
     </button>
   </span>

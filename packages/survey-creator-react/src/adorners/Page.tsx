@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Action, Base, IAction, PageModel, SurveyModel } from "survey-core";
 import {
   attachKey2click,
@@ -15,13 +16,13 @@ import {
   SurveyHelper,
   toggleHovered
 } from "survey-creator-core";
-import React from "react";
 import { ReactMouseEvent } from "../events";
 
 interface ICreatorSurveyPageComponentProps {
   creator: SurveyCreatorModel;
   survey: SurveyModel;
   page: PageModel;
+  isGhost: boolean;
 }
 
 export class CreatorSurveyPageComponent extends CreatorModelElement<
@@ -34,11 +35,25 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     super(props);
     this.rootRef = React.createRef();
   }
-  protected createModel(props: any): void {
+  protected createModel(props: ICreatorSurveyPageComponentProps): void {
+    if (this.model) {
+      this.model.attachToUI(props.page, this.rootRef.current);
+    }
     this.model = new PageAdorner(
       props.creator,
-      props.page
+      props.page,
     );
+    this.model.isGhost = this.props.isGhost;
+  }
+  shouldComponentUpdate(nextProps: any, nextState: any): boolean {
+    const res = super.shouldComponentUpdate(nextProps, nextState);
+    if (this.model) {
+      this.model.isGhost = this.props.isGhost;
+    }
+    return res;
+  }
+  public componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "page"];
@@ -48,46 +63,41 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   }
   componentDidMount() {
     super.componentDidMount();
-    this.model.onPageSelectedCallback = () => {
-      if (!!this.rootRef.current) {
-        SurveyHelper.scrollIntoViewIfNeeded(this.rootRef.current);
-      }
-    };
+    this.model.attachToUI(this.props.page, this.rootRef.current);
+    this.model.isGhost = this.props.isGhost;
   }
   componentWillUnmount() {
     super.componentWillUnmount();
-    this.model.onPageSelectedCallback = undefined;
-    this.model.dispose();
+    this.model.detachFromUI();
   }
   protected canRender(): boolean {
-    return (
-      !!this.model &&
-      this.model.isPageLive &&
-      !!this.model.page &&
-      !!this.model.page.survey
-    );
+    return super.canRender();
   }
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     if (!this.props.page) return null;
     return (
       attachKey2click(<div
         ref={this.rootRef}
-        className={"svc-page__content " + this.model.css}
         id={this.props.page.id}
+        data-sv-drop-target-survey-page={this.model.dropTargetName}
+        className={"svc-page__content " + this.model.css}
         onClick={(e) => {
           return this.model.select(this.model, new ReactMouseEvent(e));
         }}
+        onDoubleClick={e => this.model.dblclick(e.nativeEvent)}
         onMouseLeave={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}
         onMouseOver={(e) => this.model.hover(e.nativeEvent, e.currentTarget)}
       >
-        {this.renderHeader()}
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
         {this.renderContent()}
         {this.renderPlaceholder()}
+        {this.renderHeader()}
         {this.renderFooter()}
       </div>)
     );
   }
-  protected renderPlaceholder(): JSX.Element {
+  protected renderPlaceholder(): React.JSX.Element {
     if (!this.model.showPlaceholder) return null;
     return (
       <div className="svc-page__placeholder_frame">
@@ -97,63 +107,31 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
       </div>
     );
   }
-  protected renderContent(): JSX.Element {
+  protected renderContent(): React.JSX.Element {
     return (<SurveyPage page={this.props.page} survey={this.props.survey} creator={this.props.creator} css={this.model.css}></SurveyPage>);
   }
-  protected renderHeader(): JSX.Element {
-    return (<div className="svc-page__content-actions">
+  protected renderHeader(): React.JSX.Element {
+    const actions = (<div className="svc-page__content-actions">
       <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
+      {(this.model.topActionContainer.hasActions ? <SurveyActionBar model={this.model.topActionContainer}></SurveyActionBar> : null)}
     </div>);
+    if (this.model.isGhost || !this.model.allowDragging) {
+      return actions;
+    }
+    return (
+      <div className={"svc-question__drag-area"}
+        onPointerDown={(event: any) => this.model.onPointerDown(event)}
+      >
+        <SvgIcon className="svc-question__drag-element" size={"auto"} iconName={"icon-drag-area-indicator_24x16"}></SvgIcon>
+        {actions}
+      </div>
+    );
   }
-  protected renderFooter(): JSX.Element {
+  protected renderFooter(): React.JSX.Element {
     return <SurveyActionBar model={this.model.footerActionsBar}></SurveyActionBar>;
   }
 }
 
 ReactElementFactory.Instance.registerElement("svc-page", (props) => {
   return React.createElement(CreatorSurveyPageComponent, props);
-});
-
-class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action }, any> {
-  public get model() {
-    return this.props.item.data;
-  }
-  protected renderElement(): JSX.Element {
-    const questionTypeSelectorModel = this.model.questionTypeSelectorModel;
-    return attachKey2click(<div
-      className="svc-page__add-new-question svc-btn"
-      onClick={(e) => {
-        e.stopPropagation();
-        this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
-      }}
-      onMouseOver={(e) => this.model.hoverStopper(e.nativeEvent, e.currentTarget)}
-    >
-      <span className="svc-text svc-text--normal svc-text--bold">
-        {this.model.addNewQuestionText}
-      </span>
-
-      {attachKey2click(<button
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          questionTypeSelectorModel.action();
-        }}
-        className="svc-page__question-type-selector"
-        title={this.model.addNewQuestionText}
-      >
-        <span className="svc-page__question-type-selector-icon">
-          <SvgIcon
-            iconName={questionTypeSelectorModel.iconName}
-            size={24}
-            title={this.model.addNewQuestionText}
-          ></SvgIcon>
-        </span>
-        <Popup model={questionTypeSelectorModel.popupModel}></Popup>
-      </button>)}
-    </div>);
-  }
-}
-
-ReactElementFactory.Instance.registerElement("svc-add-new-question-btn", (props) => {
-  return React.createElement(AddQuestionButtonComponent, props);
 });

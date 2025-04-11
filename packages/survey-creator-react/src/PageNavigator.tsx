@@ -9,7 +9,7 @@ import {
   attachKey2click
 } from "survey-react-ui";
 import { PageNavigatorViewModel, PagesController } from "survey-creator-core";
-import React from "react";
+import * as React from "react";
 import { CreatorModelElement } from "./ModelElement";
 
 interface ISurveyPageNavigatorProps {
@@ -43,52 +43,34 @@ export class SurveyPageNavigator extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
-  private get scrollableContainer(): HTMLElement {
-    const el = this.containerRef.current as HTMLDivElement;
-    if (!!el) {
-      const self = this;
-      return el.parentElement.parentElement.parentElement;
-    }
-    return el;
-  }
   componentDidMount() {
     super.componentDidMount();
     if (this.props.pageEditMode !== "bypage") {
       const el = this.containerRef.current as HTMLDivElement;
-      if (!!el) {
-        const self = this;
-        el.parentElement.parentElement.parentElement.onscroll = function (this: GlobalEventHandlers, ev: Event) {
-          return self.model.onContainerScroll(ev.currentTarget as HTMLDivElement);
-        };
-        self.model.setItemsContainer(el.parentElement as HTMLDivElement);
-        self.model.setScrollableContainer(el.parentElement.parentElement.parentElement as HTMLDivElement);
-      }
+      this.model.attachToUI(el);
     }
   }
   componentWillUnmount() {
     super.componentWillUnmount();
-    const el = this.containerRef.current;
-    if (!!el) {
-      el.parentElement.parentElement.parentElement.onscroll = undefined;
-    }
     this.model.stopItemsContainerHeightObserver();
     this.model.setScrollableContainer(undefined);
   }
-  renderElement(): JSX.Element {
-    let className = "svc-page-navigator__selector";
+  renderElement(): React.JSX.Element {
+    let className = "svc-page-navigator__selector svc-page-navigator__button";
     if (this.model.isPopupOpened)
-      className += " svc-page-navigator__selector--opened";
+      className += " svc-page-navigator__button--pressed";
     return (
       <div className="svc-page-navigator" ref={this.containerRef} style={{ display: this.model.visible ? "flex" : "none" }}>
         {attachKey2click(<div
+          role="button"
           className={className}
           onClick={() => this.model.togglePageSelector()}
           title={this.model.pageSelectorCaption}
         >
           <SvgIcon
-            className="svc-page-navigator__navigator-icon"
+            className="svc-page-navigator__button-icon"
             iconName={this.model.icon}
-            size={24}
+            size={"auto"}
             title={this.model.pageSelectorCaption}
           ></SvgIcon>
 
@@ -113,7 +95,7 @@ export class SurveyPageNavigatorItem extends CreatorModelElement<any, any> {
   protected getStateElement(): Base {
     return this.props.item as Base;
   }
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const item = this.props.item;
     let className: string = "svc-page-navigator-item-content";
     if (unwrap(item.active)) {
@@ -125,16 +107,17 @@ export class SurveyPageNavigatorItem extends CreatorModelElement<any, any> {
     return (
       <div className="svc-page-navigator-item">
         {attachKey2click(<div
+          role="button"
           className={className}
           onClick={(e) => {
             item.action(item);
             e.stopPropagation();
           }}
         >
-          <div className="svc-page-navigator-item__dot" title={item.title}></div>
-          <div className="svc-page-navigator-item__banner svc-item__banner">
-            <span className="svc-text svc-text--small svc-text--bold">{item.title}</span>
-            <span className="svc-page-navigator-item__dot"></span>
+          <div className="svc-page-navigator-item__dot" title={item.title}><div className="svc-page-navigator-item__dot-content"></div></div>
+          <div className="svc-page-navigator-item__banner">
+            <span className="svc-page-navigator-item__text">{item.title}</span>
+            <span className="svc-page-navigator-item__dot"><span className="svc-page-navigator-item__dot-content"></span></span>
           </div>
         </div>)}
       </div>

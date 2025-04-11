@@ -1,11 +1,8 @@
-@import "./variables.scss";
+@use "./variables" as *;
 
 .svc-creator--mobile {
-  .svc-tab-designer {
-    overflow-y: overlay;
-  }
-
-  .sd-root-modern {
+  .sd-root-modern,
+  .sd-container-modern {
     --sd-base-padding: calc(3 * #{$base-unit});
     --sd-base-vertical-padding: calc(2 * #{$base-unit});
     --sd-page-vertical-padding: calc(2 * #{$base-unit});
@@ -36,13 +33,17 @@
     }
   }
 
+  .svc-question__drag-area {
+    height: calcSize(3);
+  }
+
   .svc-question__content--selected {
     .svc-rating-question-controls {
       bottom: calcSize(10);
     }
   }
 
-  .svc-page {
+  .svc-designer-header + .svc-page {
     margin-top: calcSize(1);
   }
 
@@ -60,23 +61,17 @@
         margin: calcSize(2.5) 0 0 0;
       }
     }
-
-    .sd-page {
-      padding: calcSize(1) calcSize(3) calcSize(3);
-    }
-
-    .svc-page__footer {
-      margin-left: calcSize(3);
-      margin-right: calcSize(3);
-    }
   }
 
-  .svc-question__content {
-    padding: calcSize(2) calcSize(3) calcSize(3);
+  .svc-page__footer {
+    margin-left: calcSize(3);
+    margin-right: calcSize(3);
+    margin-top: calcSize(3);
+  }
 
-    &.svc-question__content--selected {
-      padding-top: calcSize(3);
-      padding-bottom: calcSize(8);
+  .svc-designer-placeholder-page {
+    .svc-page__footer {
+      margin-top: 0;
     }
   }
 
@@ -98,9 +93,8 @@
       }
 
       h3 {
+        @include ctrMediumBoldFont;
         margin: 0;
-        font-size: calcSize(3);
-        line-height: calcSize(4);
       }
 
       h5 {
@@ -111,7 +105,6 @@
 
   .svc-tab-designer {
     .sd-container-modern {
-      min-width: calcSize(43);
       padding: 0;
     }
   }
@@ -121,27 +114,10 @@
   }
 
   .svc-question__content-actions {
-    width: calc(100% - 3 * #{$base-unit});
-    left: calcSize(2);
+    width: calc(100% + 3 * #{$base-unit});
 
-    .sv-action-bar-item {
+    .svc-survey-element-toolbar__item {
       border: 0;
-    }
-  }
-
-  .svc-page__content-actions {
-    .sv-action-bar {
-      padding-right: calcSize(1);
-
-      .sv-action {
-        .sv-action__content {
-          padding-right: 0;
-
-          .sv-action-bar-item__title--with-icon {
-            display: none;
-          }
-        }
-      }
     }
   }
 }

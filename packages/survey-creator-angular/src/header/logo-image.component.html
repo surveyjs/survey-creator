@@ -5,7 +5,7 @@
       <ng-container *ngIf="model.allowEdit && !model.isUploading">
         <div class="svc-logo-image-placeholder" (click)="model.chooseFile(model)" [key2click]>
           <svg>
-            <use xlink:href="#icon-logo"></use>
+            <use xlink:href="#icon-image-48x48"></use>
           </svg>
         </div>
       </ng-container>
@@ -15,11 +15,11 @@
         <div class="svc-context-container svc-logo-image-controls">
           <span class="svc-context-button" (click)="model.chooseFile(model)" [key2click] [attr.title]="undefined"
             [attr.aria-label]="undefined">
-            <svg [iconName]="'icon-file'" [size]="24" sv-ng-svg-icon></svg>
+            <svg [iconName]="'icon-choosefile'" [size]="'auto'" sv-ng-svg-icon></svg>
           </span>
           <span class="svc-context-button svc-context-button--danger" (click)="model.remove(model)" [key2click]
             [attr.title]="undefined" [attr.aria-label]="undefined">
-            <svg [iconName]="'icon-clear'" [size]="24" sv-ng-svg-icon></svg>
+            <svg [iconName]="'icon-clear'" [size]="'auto'" sv-ng-svg-icon></svg>
           </span>
         </div>
         <sv-logo-image [data]="survey"></sv-logo-image>

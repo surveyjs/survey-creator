@@ -2,9 +2,19 @@ import { enStrings } from "./localization/english";
 import { capitalize } from "./utils/utils";
 import { surveyLocalization, Serializer } from "survey-core";
 
+const renamedKeys = {};
+renamedKeys["tabs.preview"] = "ed.testSurvey";
+renamedKeys["tabs.theme"] = "ed.themeSurvey";
+renamedKeys["tabs.translation"] = "ed.translation";
+renamedKeys["tabs.designer"] = "ed.designer";
+renamedKeys["tabs.editor"] = "ed.jsonEditor";
+renamedKeys["tabs.json"] = "tabs.editor";
+renamedKeys["tabs.logic"] = "ed.logic";
+
 export class EditorLocalization {
   private defaultLocaleValue: string = "en";
   private currentLocaleValue: string = "";
+  private presetStringsValues: any;
   public camelCaseBreaking = true;
   public locales = {};
   private peByClass = {};
@@ -31,7 +41,15 @@ export class EditorLocalization {
       this.reset();
     }
   }
+  public get presetStrings(): any { return this.presetStringsValues; }
+  public set presetStrings(val: any) {
+    this.presetStringsValues= val;
+    this.reset();
+  }
   public getString(strName: string, locale: string = null): string {
+    if(!strName) return strName;
+    const oldVal = this.getOldKeysString(strName, locale);
+    if(!!oldVal) return oldVal;
     const path = strName.split(".");
     return this.getStringByPath(path, locale);
   }
@@ -47,6 +65,10 @@ export class EditorLocalization {
     }
     if(locs.length === 0 || locs[locs.length - 1] !== defaultLocale) {
       locs.push(defaultLocale);
+    }
+    const presetLoc = this.getPresetLocale(locale);
+    if(!!presetLoc) {
+      locs.unshift(presetLoc);
     }
     for(let i = 0; i < locs.length; i ++) {
       const res = this.getStringByLocale(path, locs[i]);
@@ -66,17 +88,17 @@ export class EditorLocalization {
     }
     return obj;
   }
-  public getLocaleName(loc: string, defaultLocale: string = null): string {
-    let localeNames = surveyLocalization["localeNames"];
+  public getLocaleName(loc: string, defaultLocale: string = null, inEnglish?: boolean): string {
     if (!defaultLocale) {
       defaultLocale = surveyLocalization.defaultLocale;
     }
-    let res = !!loc
-      ? capitalize(localeNames[loc])
-      : editorLocalization
-        .getString("ed.defaultLocale")
-        ["format"](capitalize(localeNames[defaultLocale]));
-    return !!res ? res : loc;
+    let name = surveyLocalization.getLocaleName(loc || defaultLocale, inEnglish);
+    if(name === loc) return name;
+    name = capitalize(name);
+    if(!loc) {
+      name = editorLocalization.getString("ed.defaultLocale")["format"](name);
+    }
+    return name || loc;
   }
   public getPropertyName(strName: string, defaultName: string = null): string {
     var obj = this.getProperty(strName, defaultName);
@@ -119,14 +141,26 @@ export class EditorLocalization {
   private getPropertyHelpInEditorCore(typeName: string, propName: string, data: any, suffix: string): string {
     let str = this.getPropertyInfoInEditorByType(typeName, propName, data, suffix);
     if(!!str) return (str === " ") ? null: str;
-    const loc = this.getLocale();
-    return !!loc && !!loc[suffix] ? loc[suffix][propName] : undefined;
+    const locs = this.getLocalesWithPreset();
+    for(let i = 0; i < locs.length; i ++) {
+      const loc = locs[i];
+      if(!!loc[suffix] && loc[suffix][propName]) return loc[suffix][propName];
+    }
+    return undefined;
   }
   private getPropertyInfoInEditorByType(typeName: string, propName: string, peInfoByClass: any, postFix: string): string {
     if(!typeName) return undefined;
+    const locs = this.getLocalesWithPreset();
+    for(let i = 0; i < locs.length; i ++) {
+      const res = this.getPropertyInfoInEditorByTypeCore(typeName, propName, peInfoByClass, postFix, locs[i]);
+      if(!!res) return res;
+    }
+    return undefined;
+  }
+  private getPropertyInfoInEditorByTypeCore(typeName: string, propName: string, peInfoByClass: any, postFix: string, loc: any): string {
     let peClass = peInfoByClass[typeName];
     if(peClass === undefined) {
-      peClass = this.getObjInEditorByType(typeName, peInfoByClass, postFix);
+      peClass = this.getObjInEditorByTypeCore(typeName, peInfoByClass, postFix, loc);
     }
     while(!!peClass) {
       const res = peClass.props[propName];
@@ -135,16 +169,15 @@ export class EditorLocalization {
     }
     return undefined;
   }
-  private getObjInEditorByType(typeName: string, peInfoByClass: any, postFix: string): any {
+  private getObjInEditorByTypeCore(typeName: string, peInfoByClass: any, postFix: string, loc: any): any {
     if(!typeName) return undefined;
     const peClass = peInfoByClass[typeName];
     if(peClass !== undefined) peClass;
-    const loc: any = this.getLocale();
     const pe = !!loc ? loc[postFix] : undefined;
     if(!pe) return undefined;
     const propIndex = typeName.indexOf("@");
     if(propIndex > -1) {
-      const parentRes = this.getObjInEditorByType(typeName.substring(0, propIndex), peInfoByClass, postFix);
+      const parentRes = this.getObjInEditorByTypeCore(typeName.substring(0, propIndex), peInfoByClass, postFix, loc);
       if(!pe[typeName]) {
         peInfoByClass[typeName] = parentRes;
         return parentRes;
@@ -162,7 +195,7 @@ export class EditorLocalization {
       if(!!res) break;
       classNames.push(tName);
       if(pe[tName]) {
-        res = { props: pe[tName], parent: this.getObjInEditorByType(classInfo.parentName, peInfoByClass, postFix) };
+        res = { props: pe[tName], parent: this.getObjInEditorByTypeCore(classInfo.parentName, peInfoByClass, postFix, loc) };
         break;
       }
       if(!classInfo.parentName) break;
@@ -238,12 +271,35 @@ export class EditorLocalization {
   }
   public getLocale(locale?: string): any {
     if (!locale) locale = this.currentLocale;
-    var strs = locale ? this.locales[locale] : this.getDefaultStrings();
-    if (!strs) strs = this.getDefaultStrings();
-    return strs;
+    return (locale ? this.getLocaleStrings(locale) : this.getDefaultStrings()) || this.getDefaultStrings();
+  }
+  public getLocaleStrings(loc: string): any {
+    if(!loc) loc = this.defaultLocale;
+    if(loc === "en") return defaultStrings;
+    return this.locales[loc];
+  }
+  public setupLocale(loc: string, strings: any): void {
+    this.locales[loc] = strings;
+  }
+  private getPresetLocale(locale?: string): any {
+    if(!this.presetStrings) return undefined;
+    const presetLoc = locale || this.currentLocale || this.defaultLocale;
+    return this.presetStrings[presetLoc];
+  }
+  private getLocalesWithPreset(locale?: string): any {
+    const res = [];
+    const presetLoc = this.getPresetLocale(locale);
+    if(presetLoc) {
+      res.push(presetLoc);
+    }
+    const loc = this.getLocale(locale);
+    if(loc) {
+      res.push(loc);
+    }
+    return res;
   }
   private getValueInternal(value: any, prefix: string, locale: string = null): string {
-    if (value === "" || value === null || value === undefined) return "";
+    if (!value || (value.indexOf && value.indexOf(".") > -1)) return "";
     value = value.toString();
     const res = this.getString(prefix + "." + value, locale);
     if (!!res) return res;
@@ -271,6 +327,13 @@ export class EditorLocalization {
     if(typeof str1 === "function" || typeof str2 === "function") return false;
     return str1 !== str2;
   }
+  private getOldKeysString(str: string, locale: string = null): string {
+    const reNamedVal = renamedKeys[str];
+    if(!reNamedVal) return undefined;
+    const path = reNamedVal.split(".");
+    const res = this.getStringByPath(path, locale);
+    return res !== path[path.length - 1] ? res : undefined;
+  }
 }
 
 export var editorLocalization = new EditorLocalization();
@@ -283,4 +346,11 @@ export function getLocString(strName: string, locale: string = null) {
   return editorLocalization.getString(strName, locale);
 }
 
+export function getLocaleStrings(loc: string): any {
+  return editorLocalization.getLocaleStrings(loc);
+}
+
 export var defaultStrings = enStrings;
+export function setupLocale(localeConfig: { localeCode: string, strings: any }): void {
+  editorLocalization.setupLocale(localeConfig.localeCode, localeConfig.strings);
+}

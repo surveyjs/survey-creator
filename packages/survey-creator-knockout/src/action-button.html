@@ -1,8 +1,0 @@
-<!-- ko if: data.disabled -->
-<span class="svc-action-button svc-action-button--disabled"
-  data-bind="text:data.text, class: data.classes, attr: { title: data.title}"></span>
-<!-- /ko -->
-<!-- ko ifnot: data.disabled -->
-<span role="button" class="svc-action-button"
-  data-bind="text:data.text, click: onClick, key2click, attr: { title: data.title, 'aria-label': data.text }, class: data.classes, css:{'svc-action-button--selected':data.selected}"></span>
-<!-- /ko -->

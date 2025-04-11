@@ -1,6 +1,6 @@
 import {
-  Base, ImageItemValue, ItemValue, Model, QuestionCheckboxModel, JsonObjectProperty,
-  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings, SurveyModel, DragTypeOverMeEnum
+  Base, ImageItemValue, ItemValue, QuestionCheckboxModel, JsonObjectProperty,
+  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, SurveyModel
 } from "survey-core";
 import { ImageItemValueWrapperViewModel } from "../src/components/image-item-value";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
@@ -9,12 +9,10 @@ import { QuestionRatingAdornerViewModel } from "../src/components/question-ratin
 import { CreatorTester } from "./creator-tester";
 import { LogoImageViewModel } from "../src/components/header/logo-image";
 import { imageMimeTypes } from "../src/utils/utils";
-import { calculateDragOverLocation } from "../src/survey-elements";
-import { settings as creatorSettings } from "../src/creator-settings";
+import { calculateDragOverLocation } from "../src/dragdrop-survey-elements";
+import { DropIndicatorPosition } from "../src/drag-drop-enums";
 
 beforeEach(() => { });
-
-settings.supportCreatorV2 = true;
 
 test("item value isNew isDraggable allowRemove", () => {
   const creator = new CreatorTester();
@@ -150,6 +148,32 @@ test("Allow remove for choices and generated choices", () => {
   expect(generatedItemAdorner.allowAdd).toBeFalsy();
   expect(generatedItemAdorner.allowRemove).toBeFalsy();
 });
+test("Allow remove for choices with value equals to 0, Bug#5500", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "dropdown", name: "q1", choices: [0, 1, 2] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+
+  const choiceItem1Adorner = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  const choiceItem2Adorner = new ItemValueWrapperViewModel(creator, question, question.choices[1]);
+  const choiceItem3Adorner = new ItemValueWrapperViewModel(creator, question, question.choices[2]);
+  expect(choiceItem1Adorner.item.value).toBe(0);
+  expect(choiceItem1Adorner.isNew).toBeFalsy();
+  expect(choiceItem1Adorner.allowAdd).toBeFalsy();
+  expect(choiceItem1Adorner.allowRemove).toBeTruthy();
+
+  expect(choiceItem2Adorner.item.value).toBe(1);
+  expect(choiceItem2Adorner.isNew).toBeFalsy();
+  expect(choiceItem2Adorner.allowAdd).toBeFalsy();
+  expect(choiceItem2Adorner.allowRemove).toBeTruthy();
+
+  expect(choiceItem3Adorner.item.value).toBe(2);
+  expect(choiceItem3Adorner.isNew).toBeFalsy();
+  expect(choiceItem3Adorner.allowAdd).toBeFalsy();
+  expect(choiceItem3Adorner.allowRemove).toBeTruthy();
+
+});
 
 test("item value allowRemove on events", () => {
   const creator = new CreatorTester();
@@ -234,6 +258,7 @@ test("item value allowAdd on events", () => {
   expect(noneAdorner.allowAdd).toBeTruthy();
   expect(otherAdorner.allowAdd).toBeFalsy();
   expect(newAdorner.allowAdd).toBeFalsy();
+  expect(newAdorner.item.isVisible).toBeFalsy();
 });
 
 test("item value no pointer down on new or editable", (): any => {
@@ -441,9 +466,9 @@ test("QuestionImageAdornerViewModel pass question into onUploadFile event", () =
   const imageAdorner = new QuestionImageAdornerViewModel(
     creator,
     question,
-    <any>{},
-    rootElement
+    <any>{}
   );
+  imageAdorner.rootElement = rootElement;
 
   let counter = 0;
   creator.onUploadFile.add((s, o) => {
@@ -826,7 +851,8 @@ test("QuestionImageAdornerViewModel isUploading", () => {
     elements: [{ type: "image", name: "q1" }]
   };
   const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
-  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any);
+  imageAdorner.rootElement = { getElementsByClassName: () => [{}] } as any;
   let uploadCount = 0;
   creator.onOpenFileChooser.add((s, o) => {
     o.callback([{}]);
@@ -956,16 +982,16 @@ test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly",
 });
 
 test("calculateDragOverLocation", () => {
-  let location = calculateDragOverLocation(150, 120, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
-  expect(location).toBe(DragTypeOverMeEnum.Left);
-  creatorSettings.dragDrop.allowDragToTheSameLine = false;
-  location = calculateDragOverLocation(150, 120, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
-  expect(location).toBe(DragTypeOverMeEnum.Top);
-  location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
-  expect(location).toBe(DragTypeOverMeEnum.Bottom);
-  creatorSettings.dragDrop.allowDragToTheSameLine = true;
-  location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
-  expect(location).toBe(DragTypeOverMeEnum.Right);
+  let location = calculateDragOverLocation(150, 120, { x: 100, y: 100, width: 300, height: 100 });
+  expect(location).toBe(DropIndicatorPosition.Left);
+  // creatorSettings.dragDrop.allowDragToTheSameLine = false;
+  location = calculateDragOverLocation(150, 120, { x: 100, y: 100, width: 300, height: 100 }, "top-bottom");
+  expect(location).toBe(DropIndicatorPosition.Top);
+  location = calculateDragOverLocation(350, 170, { x: 100, y: 100, width: 300, height: 100 }, "top-bottom");
+  expect(location).toBe(DropIndicatorPosition.Bottom);
+  // creatorSettings.dragDrop.allowDragToTheSameLine = true;
+  location = calculateDragOverLocation(350, 170, { x: 100, y: 100, width: 300, height: 100 });
+  expect(location).toBe(DropIndicatorPosition.Right);
 });
 
 test("ImageItemValueWrapperViewModel pass context to onOpenFileChooser event", () => {
@@ -1044,4 +1070,49 @@ test("QuestionImageAdornerViewModel onOpenFileChooser event is raised", () => {
   expect(lastContext.element).toEqual(question);
   expect(lastContext.elementType).toEqual("image");
   expect(lastContext.propertyName).toEqual("imageLink");
+});
+
+test("QuestionImageAdornerViewModel updated on locale changed", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "locale": "default",
+    "title": {
+      "default": "Default Locale",
+      "fr": "French"
+    },
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "image",
+            "name": "question1",
+            "imageLink": {
+              "fr": "im2fr"
+            },
+          }
+        ]
+      }
+    ]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+
+  expect(imageAdorner.isEmptyImageLink).toBeTruthy();
+
+  creator.survey.locale = "fr";
+  expect(imageAdorner.isEmptyImageLink).toBeFalsy();
+});
+
+test("QuestionImageAdornerViewModel imageLinkValueChangedHandler", () => {
+  const creator = new CreatorTester();
+  const question = new QuestionImageModel("q1");
+  question.imageLink = "test";
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+  expect(imageAdorner.isEmptyImageLink).toBeFalsy();
+  imageAdorner.detachFromUI();
+  expect(imageAdorner.question).toBeUndefined();
+  imageAdorner.imageLinkValueChangedHandler();
+  expect(imageAdorner.isEmptyImageLink).toBeTruthy();
 });

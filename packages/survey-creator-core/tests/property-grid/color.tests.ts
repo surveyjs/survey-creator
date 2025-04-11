@@ -58,20 +58,20 @@ test("Check custom color question with allowEmptyValue:true", () => {
   const question = new QuestionColorModel("q1");
   question.allowEmptyValue = true;
   expect(question.renderedValue).toBe("");
-  expect(question.renderedColorValue).toBe("#FFFFFF");
+  expect(question.renderedColorValue).toBe("#000000");
   expect(question.value).toBe(undefined);
   question.value = undefined;
   expect(question.value).toBe(undefined);
   expect(question.renderedValue).toBe("");
-  expect(question.renderedColorValue).toBe("#FFFFFF");
+  expect(question.renderedColorValue).toBe("#000000");
   question.value = null;
   expect(question.value).toBe(undefined);
   expect(question.renderedValue).toBe("");
-  expect(question.renderedColorValue).toBe("#FFFFFF");
+  expect(question.renderedColorValue).toBe("#000000");
   question.value = "";
   expect(question.value).toBe(undefined);
   expect(question.renderedValue).toBe("");
-  expect(question.renderedColorValue).toBe("#FFFFFF");
+  expect(question.renderedColorValue).toBe("#000000");
 });
 test("Check custom color question event callbacks", () => {
   const question = new QuestionColorModel("q1");
@@ -120,12 +120,14 @@ test("Check custom color question with survey mergeData", () => {
 });
 
 test("Check custom color question popup", () => {
-  const survey = new SurveyModel({ elements: [{
-    type: "color",
-    name: "q1",
-    choices: ["#f1b505", "#359ba7", "#6a3bff"]
-  }] });
-  survey.css = { color: { colorItem: "colorItemTest", colorDropdownIcon: "colorDropdownIconTest", colorDropdown: "colorDropdownTest" } };
+  const survey = new SurveyModel({
+    elements: [{
+      type: "color",
+      name: "q1",
+      choices: ["#f1b505", "#359ba7", "#6a3bff"]
+    }]
+  });
+  survey.css = { color: { colorDropdownIcon: "colorDropdownIconTest", colorDropdown: "colorDropdownTest" } };
   const question = <QuestionColorModel>survey.getAllQuestions()[0];
   question.cssClasses;
   const dropdownAction = question.dropdownAction;
@@ -136,7 +138,6 @@ test("Check custom color question popup", () => {
   expect(dropdownAction.iconName).toBe("colorDropdownIconTest");
   expect(popupModel.setWidthByTarget).toBeTruthy();
   expect(popupModel.positionMode).toBe("fixed");
-  expect(listModel.cssClasses.itemBody).toBe("sv-list__item-body colorItemTest");
 
   expect(listModel.actions.map((item => item.value))).toEqual(["#f1b505", "#359ba7", "#6a3bff"]);
   question.choices = <Array<ItemValue>><unknown>["#94a500", "#6a3bff", "#359ba7"];
@@ -171,7 +172,7 @@ test("QuestionColorModel renderedValue always HEX (value from survey)", () => {
 test("QuestionColorModel renderedValue when _renderedValue and value are empty", () => {
   let q = new QuestionColorModel("q1");
   q._renderedValue = "";
-  expect(q.renderedColorValue).toBe("#FFFFFF");
+  expect(q.renderedColorValue).toBe("#000000");
   q = new QuestionColorModel("q1");
   q._renderedValue = "";
   q.value = "";
@@ -187,8 +188,8 @@ test("Check signature pad color properties", () => {
   expect(backgroundColorQuestion.getType()).toBe("color");
   expect(penColorQuestion.renderedValue).toBe("");
   expect(backgroundColorQuestion.renderedValue).toBe("");
-  expect(penColorQuestion.renderedColorValue).toBe("#FFFFFF");
-  expect(backgroundColorQuestion.renderedColorValue).toBe("#FFFFFF");
+  expect(penColorQuestion.renderedColorValue).toBe("#000000");
+  expect(backgroundColorQuestion.renderedColorValue).toBe("#000000");
   question.penColor = "#f3f3f3";
   expect(penColorQuestion.renderedValue).toBe("#F3F3F3");
   expect(penColorQuestion.renderedColorValue).toBe("#F3F3F3");
@@ -208,8 +209,8 @@ test("Check signature pad color properties", () => {
   expect(backgroundColorQuestion.allowEmptyValue).toBeTruthy();
   expect(penColorQuestion.renderedValue).toBe("");
   expect(backgroundColorQuestion.renderedValue).toBe("");
-  expect(penColorQuestion.renderedColorValue).toBe("#FFFFFF");
-  expect(backgroundColorQuestion.renderedColorValue).toBe("#FFFFFF");
+  expect(penColorQuestion.renderedColorValue).toBe("#000000");
+  expect(backgroundColorQuestion.renderedColorValue).toBe("#000000");
   question.penColor = "#f3f3f3";
   expect(penColorQuestion.renderedValue).toBe("#F3F3F3");
   expect(penColorQuestion.renderedColorValue).toBe("#F3F3F3");

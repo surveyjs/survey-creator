@@ -54,9 +54,9 @@ test("Check spin editor question event callbacks", (done) => {
   question.onBeforeInput(<any>{ data: "-", target: { selectionStart: 1 }, preventDefault: () => { beforeInputlog += "->-"; } });
   expect(beforeInputlog).toBe("->-");
 
-  question.onKeyDown(<any>{ key: "ArrowDown", stopPropagation: () => {}, preventDefault: () => {} });
+  question.onKeyDown(<any>{ key: "ArrowDown", stopPropagation: () => { }, preventDefault: () => { } });
   expect(question.value).toBe(15);
-  question.onKeyDown(<any>{ key: "ArrowUp", stopPropagation: () => {}, preventDefault: () => {} });
+  question.onKeyDown(<any>{ key: "ArrowUp", stopPropagation: () => { }, preventDefault: () => { } });
   expect(question.value).toBe(16);
 
   question.onDownButtonMouseDown();
@@ -84,6 +84,49 @@ test("Check spin editor question event callbacks", (done) => {
       setTimeout(() => {
         question.onButtonMouseUp();
         expect(question.value).toBe(14);
+        done();
+      }, 200);
+    }, 200);
+  }, 200);
+});
+
+test("Check spin editor question event callbacks if changeValueOnPressing is false", (done) => {
+  const question = new QuestionSpinEditorModel("q1");
+  question.changeValueOnPressing = false;
+  question.value = 16;
+
+  question.onDownButtonMouseDown();
+  question.onButtonMouseUp();
+  expect(question.value).toBe(16);
+
+  question.onDownButtonClick();
+  expect(question.value).toBe(15);
+
+  question.onUpButtonMouseDown();
+  question.onButtonMouseUp();
+  expect(question.value).toBe(15);
+
+  question.onUpButtonClick();
+  expect(question.value).toBe(16);
+
+  question.onBlur(<any>{ target: { tagName: "BUTTON", value: "17" } });
+  expect(question.value).toBe(16);
+  question.onBlur(<any>{ target: { tagName: "INPUT", value: "17" } });
+  expect(question.value).toBe(17);
+
+  question.value = 16;
+  question.onDownButtonMouseDown();
+  setTimeout(() => {
+    question.onButtonMouseUp();
+    expect(question.value).toBe(16);
+    question.onUpButtonMouseDown();
+    setTimeout(() => {
+      question.onButtonMouseLeave();
+      expect(question.value).toBe(16);
+      question.onDownButtonMouseDown();
+      setTimeout(() => {
+        question.onButtonMouseUp();
+        expect(question.value).toBe(16);
         done();
       }, 200);
     }, 200);

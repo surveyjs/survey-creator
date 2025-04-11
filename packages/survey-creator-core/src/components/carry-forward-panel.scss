@@ -1,20 +1,21 @@
-@import "../variables.scss";
+@use "../variables" as *;
 
 .svc-carry-forward-panel-wrapper {
   width: 100%;
   container-type: inline-size;
 }
 .svc-carry-forward-panel {
+  @include ctrDefaultFont;
   box-sizing: border-box;
   width: 100%;
-  padding: calcSize(4) calcSize(8);
-  border-radius: calcSize(1);
-  background-color: #F8F8F8;
+  padding: var(--ctr-survey-info-panel-padding-top, var(--lbr-spacing-x4))
+    var(--ctr-survey-info-panel-padding-right, var(--lbr-spacing-x8))
+    var(--ctr-survey-info-panel-padding-bottom, var(--lbr-spacing-x4))
+    var(--ctr-survey-info-panel-padding-left, var(--lbr-spacing-x8));
+  border-radius: var(--ctr-survey-info-panel-corner-radius, var(--lbr-corner-radius-x1));
+  background: var(--ctr-survey-info-panel-background-color, var(--sjs-layer-2-background-500, #f8f8f8ff));
   text-align: center;
-  font-weight: 400;
-  font-size: calcSize(2);
-  line-height: calcSize(3);
-  color: rgba(0, 0, 0, 0.45);
+  color: var(--ctr-survey-info-panel-text-color, var(--sjs-layer-2-foreground-50, #00000080));
 }
   
 @container (max-width: #{$sd-panel-medium-min-width}) {

@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, takeElementScreenshot, wrapVisualTest, urlLocalized_de } from "../../helper";
+import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, takeElementScreenshot, wrapVisualTest, urlLocalized_de, getListItemByText } from "../../helper";
 
 const title = "Translation tab Screenshot";
 
@@ -7,6 +7,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -59,7 +60,7 @@ test("strings view", async (t) => {
 
     await t.resizeWindow(2560, 1440);
     await t.click(getBarItemByTitle("Used Strings Only"));
-    await t.click(Selector(".sv-list__item").withText("All Strings"));
+    await t.click(getListItemByText("All Strings"));
     await takeElementScreenshot("translation-tab-show-all-strings.png", stringsView, t, comparer);
   });
 });
@@ -77,13 +78,14 @@ test("tranlation property grid", async (t) => {
   });
 });
 
-test("tranlation property grid", async (t) => {
+test("tranlation property grid + onMachineTranslate", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
     await ClientFunction(() => {
       (window as any).creator.onMachineTranslate.add((sender, options) => { });
     })();
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -113,5 +115,16 @@ test("tranlation property grid", async (t) => {
       .click(Selector("span").withText("Català"))
       .click(Selector("button[title='Auto-translate All']"));
     await takeElementScreenshot("translation-auto-translate-popup.png", Selector(".st-translation-dialog"), t, comparer);
+    await t.click("button[title='Apply']")
+      .wait(1000)
+      .typeText(Selector("textarea").nth(1), "translated")
+      .click(Selector(".spg-action-button"))
+      .click(Selector("span").withText("Dansk"))
+      .click(Selector("button[title='Auto-translate All']").nth(1));
+    await takeElementScreenshot("translation-auto-translate-popup-enabled-dropdown.png", Selector(".st-translation-dialog"), t, comparer);
+    await t.resizeWindow(1000, 1440);
+    await takeElementScreenshot("translation-auto-translate-popup-medium-screen.png", Selector(".st-translation-dialog"), t, comparer);
+    await t.resizeWindow(800, 1440);
+    await takeElementScreenshot("translation-auto-translate-popup-small-screen.png", Selector(".st-translation-dialog"), t, comparer);
   });
 });

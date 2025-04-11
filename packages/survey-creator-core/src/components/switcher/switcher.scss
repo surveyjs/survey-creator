@@ -1,90 +1,89 @@
-@import "../../variables.scss";
+@use "../../variables" as *;
 
 .svc-switcher.spg-action-button {
   align-items: center;
-  gap: calcSize(1);
+  gap: var(--ctr-property-grid-switcher-gap, var(--sjs-spacing-x1));
   pointer-events: auto;
 }
 
 .svc-switcher__title {
-  color: $foreground-light;
-
-  font-family: $font-family;
-  font-size: calcSize(1.5);
-  font-style: normal;
-  font-weight: 600;
-  line-height: calcSize(1);
+  @include ctrSmallBoldFont;
+  color: var(--ctr-property-grid-switcher-text-color, var(--sjs-layer-1-foreground-75, #000000bf));
 }
 
 .svc-switcher__icon {
-  width: calcSize(2.5);
-  padding: calcSize(0.5);
-  justify-content: center;
-  align-items: center;
-  border-radius: 100px;
-  border: 1px solid $border;
-  background: $background-dim;
+  padding-block-start: var(--ctr-property-grid-switcher-toggle-button-padding-top, var(--sjs-spacing-x05));
+  padding-inline-end: var(--ctr-property-grid-switcher-toggle-button-padding-right, var(--sjs-spacing-x2));
+  padding-block-end: var(--ctr-property-grid-switcher-toggle-button-padding-bottom, var(--sjs-spacing-x05));
+  padding-inline-start: var(--ctr-property-grid-switcher-toggle-button-padding-left, var(--sjs-spacing-x05));
+  border-radius: var(--ctr-property-grid-switcher-toggle-button-corner-radius, var(--sjs-corner-radius-round));
+  border: var(--ctr-property-grid-switcher-toggle-button-border-width, var(--sjs-stroke-x1)) solid
+    var(--ctr-property-grid-switcher-toggle-button-border-color, var(--sjs-border-25, #d4d4d4ff));
+  background: var(
+    --ctr-property-grid-switcher-toggle-button-background-color,
+    var(--sjs-layer-3-background-500, #f4f4f4ff)
+  );
 
   transition-duration: 0.2s;
-  transition-property: background;
+  transition-property: background, padding-inline-start, padding-inline-end;
   transition-timing-function: linear;
 }
 
 .svc-switcher__icon:hover {
-  background: $background;
+  border: 1px solid var(--ctr-property-grid-switcher-toggle-button-border-color, var(--sjs-border-25, #d4d4d4ff));
+  background: var(--ctr-property-grid-switcher-toggle-button-background-color-hovered, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 .svc-switcher__icon:focus {
-  border: calcSize(0.25) solid $primary;
-  background: $background-dim;
+  border: var(--ctr-property-grid-switcher-toggle-button-border-width-focused, var(--sjs-stroke-x2)) solid
+    var(--ctr-property-grid-switcher-toggle-button-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+  background: var(--ctr-property-grid-switcher-toggle-button-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
 }
 
-.svc-switcher__icon:hover:focus {
-  border: calcSize(0.25) solid $primary;
-  background: $background;
+.svc-switcher__icon:focus:hover {
+  border: var(--ctr-property-grid-switcher-toggle-button-border-width-focused, var(--sjs-stroke-x2)) solid
+    var(--ctr-property-grid-switcher-toggle-button-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+  background: var(--ctr-property-grid-switcher-toggle-button-background-color-hovered, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 .svc-switcher__icon--checked,
 .svc-switcher__icon--checked:hover {
   justify-content: center;
   align-items: center;
-  border: unset;
-
-  border-radius: 100px;
-  background-color: $primary;
+  padding-block-start: var(--ctr-property-grid-switcher-toggle-button-padding-top, var(--sjs-spacing-x05));
+  padding-inline-end: var(--ctr-property-grid-switcher-toggle-button-padding-right-checked, var(--sjs-spacing-x05));
+  padding-block-end: var(--ctr-property-grid-switcher-toggle-button-padding-bottom, var(--sjs-spacing-x05));
+  padding-inline-start: var(--ctr-property-grid-switcher-toggle-button-padding-left-checked, var(--sjs-spacing-x2));
+  border: var(--ctr-property-grid-switcher-toggle-button-border-width-checked, 0px) solid
+    var(--ctr-property-grid-switcher-toggle-button-border-color, var(--sjs-border-25, #d4d4d4ff));
+  background: var(--ctr-property-grid-switcher-toggle-button-background-color-checked, var(--sjs-primary-background-500, #19b394ff));
 }
 
 .svc-switcher__icon--checked:focus {
-  border: calcSize(0.25) solid $primary;
-  background-color: $primary-foreground;
+  border: var(--ctr-property-grid-switcher-toggle-button-border-width-focused, var(--sjs-stroke-x2)) solid
+    var(--ctr-property-grid-switcher-toggle-button-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
+  background: var(--ctr-property-grid-switcher-toggle-button-background-color-checked-focused, var(--sjs-primary-foreground-100, #ffffffff));
 }
 
 .svc-switcher__icon-thumb {
-  width: calcSize(1);
-  height: calcSize(1);
-  justify-content: center;
-  align-items: center;
+  width: var(--ctr-property-grid-switcher-toggle-button-thumb-width, var(--sjs-size-x1));
+  height: var(--ctr-property-grid-switcher-toggle-button-thumb-height, var(--sjs-size-x1));
+  border-radius: var(--ctr-property-grid-switcher-toggle-button-thumb-corner-radius, var(--sjs-corner-radius-round));
+  background-color: var(--ctr-property-grid-switcher-toggle-button-thumb-color, var(--sjs-layer-3-foreground-50, #00000080));
 
-  border-radius: 100px;
-  background-color: $foreground-dim-light;
-
-  transform: translateX(0);
-  margin-left: 0%;
   transition-duration: 0.2s;
-  transition-property: margin-left, transform, background-color;
+  transition-property: background-color;
   transition-timing-function: linear;
 }
 
 .svc-switcher__icon--checked .svc-switcher__icon-thumb {
-  background-color: $primary-foreground;
-  margin-left: 100%;
-  transform: translateX(-100%);
+  background-color: var(--ctr-property-grid-switcher-toggle-button-thumb-color-checked, var(--sjs-primary-foreground-100, #ffffffff));
 }
 
 .svc-switcher__icon:focus,
 .svc-switcher__icon:hover:focus,
 .svc-switcher__icon--checked:focus {
   .svc-switcher__icon-thumb {
-    background-color: $primary;
+    background: var(--ctr-property-grid-switcher-toggle-button-thumb-color-focused, var(--sjs-primary-background-500, #19b394ff));
   }
 }

@@ -4,6 +4,7 @@ import {
 } from "survey-core";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
+import { ICreatorTheme } from "./creator-theme/creator-themes";
 
 export interface ElementDeletingEvent {
   /**
@@ -15,12 +16,16 @@ export interface ElementDeletingEvent {
    */
   elementType: string;
   /**
+   * @deprecated Use `options.allow` instead.
+   */
+  allowing?: boolean;
+  /**
    * A Boolean property that you can set to `false` if you want to cancel element deletion.
    */
-  allowing: boolean;
+  allow: boolean;
 }
 
-export interface PropertyGetReadOnlyEvent {
+export interface GetPropertyReadOnlyEvent {
   /**
    * A property whose read-only status you can change.
    */
@@ -30,24 +35,38 @@ export interface PropertyGetReadOnlyEvent {
    */
   parentProperty: JsonObjectProperty;
   /**
-   * A survey element (question, panel, page, or the survey itself) for which you can change the read-only status. 
+   * @deprecated Use `options.element` instead.
    */
-  obj: Base;
+  obj?: Base;
   /**
-   * A survey element that contains `options.parentProperty`. `options.parentObj` has a value only for nested properties.
+   * @deprecated Use `options.parentElement` instead.
    */
-  parentObj: Base;
+  parentObj?: Base;
   /**
    * A Boolean value that specifies the property's read-only status.
    */
   readOnly: boolean;
 }
+export interface PropertyGetReadOnlyEvent extends GetPropertyReadOnlyEvent {
+  /**
+   * A survey element (question, panel, page, or the survey itself) for which you can change the read-only status. 
+   */
+  element: Base;
+  /**
+   * A survey element that contains `options.parentProperty`. `options.parentObj` has a value only for nested properties.
+   */
+  parentElement: Base;
+}
 
 export interface ElementGetDisplayNameEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (survey, page, question, or panel) whose name has been requested.
    */
-  obj: Base;
+  element: Base;
   /**
   * A Survey Creator UI element that requests the display name. Contains one of the following values:
   *   - `"page-selector"` - Page selector on the design surface.
@@ -87,11 +106,31 @@ export interface HtmlToMarkdownEvent {
   text: string;
 }
 
+export type ElementGetExpandCollapseStateEventReason = "loading" | "collapse-all" | "expand-all" | "drag-start" | "drag-end";
+export interface ElementGetExpandCollapseStateEvent {
+  /**
+   * A survey element (question, panel, or page) whose expand/collapse state you can switch. 
+   */
+  element: Question | PanelModel | PageModel;
+  /**
+   * Indicates whether the element is currently collapsed or expanded. Set this parameter to `true` if you want to collapse the element or `false` to expand it.
+   */
+  collapsed: boolean;
+  /**
+   * A value that indicates what caused the event to raise: the loading of a survey JSON schema, a click on the Expand All or Collapse All button, or the beginning or end of a drag and drop operation.
+   */
+  reason: ElementGetExpandCollapseStateEventReason;
+}
+
 export interface ElementAllowOperationsEvent {
   /**
    * A survey element (question or panel) for which you can disable user interactions.
    */
-  obj: Base;
+  element: Base;
+  /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
   /**
    * Allows users to mark the survey element as required.
    */
@@ -115,26 +154,45 @@ export interface ElementAllowOperationsEvent {
   /**
    * Allows users to drag and drop the survey element.
    */
-  allowDragging: boolean;
+  allowDrag: boolean;
+  /**
+   * @deprecated Use `options.allowDrag` instead.
+   */
+  allowDragging?: boolean;
   /**
    * Allows users to edit survey element properties on the design surface. If you disable this property, users can edit the properties only in the Property Grid.
    */
   allowEdit: boolean;
+  /**
+   * Allows users to collapse and expand the survey element on the design surface.
+   */
+  allowExpandCollapse: boolean;
   /**
    * Controls the visibility of the Settings button that allows users to open the Property Grid for survey element configuration. Set this property to `true` or `false` to display or hide the Settings button at all times. The default value `undefined` displays the Settings button only when Survey Creator has small width.
    */
   allowShowSettings: boolean | undefined;
 }
 
-export interface ElementGetActionsEvent {
+export interface DefineElementMenuItemsEvent {
+  /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
+   * @deprecated Use `options.actions` instead.
+   */
+  items?: IAction[];
+}
+
+export interface ElementGetActionsEvent extends DefineElementMenuItemsEvent {
   /**
    * A survey element (question, panel, or page) whose adorners you can customize.
    */
-  obj: Base;
+  element: Base;
   /**
    * An array of adorner actions. You can add, modify, or remove actions from this array.
    */
-  items: IAction[];
+  actions: IAction[];
 }
 export interface PropertyAddingEvent {
   /**
@@ -146,17 +204,31 @@ export interface PropertyAddingEvent {
    */
   parentProperty: JsonObjectProperty;
   /**
-   * A survey element that contains `options.property`: page, panel, question, the survey itself, item value (choice option), matrix column, etc.
+   * @deprecated Use `options.element` instead.
    */
-  obj: Base;
+  obj?: Base;
   /**
-   * A survey element that contains `options.parentProperty`. `options.parentObj` has a value only for nested properties.
+   * @deprecated Use `options.parentElement` instead.
    */
-  parentObj: Base;
+  parentObj?: Base;
+  /**
+   * @deprecated Use `options.show` instead.
+   */
+  canShow?: boolean;
+}
+export interface PropertyShowingEvent extends PropertyAddingEvent {
   /**
    * A Boolean property that you can set to `false` if you do not want to add the property.
    */
-  canShow: boolean;
+  show: boolean;
+  /**
+   * A survey element that contains `options.property`: page, panel, question, the survey itself, item value (choice option), matrix column, etc.
+   */
+  element: Base;
+  /**
+   * A survey element that contains `options.parentProperty`. `options.parentElement` has a value only for nested properties.
+   */
+  parentElement: Base;
 }
 
 export interface PropertyGridSurveyCreatedEvent {
@@ -172,7 +244,7 @@ export interface PropertyGridSurveyCreatedEvent {
 
 export interface PropertyEditorCreatedEvent {
   /**
-   * A property editor. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
+   * A property editor. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/property-grid-customization#add-custom-properties-to-the-property-grid).
    */
   editor: Question;
   /**
@@ -180,18 +252,26 @@ export interface PropertyEditorCreatedEvent {
    */
   property: JsonObjectProperty;
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element being edited in the Property Grid.
    */
-  obj: Base;
+  element: Base;
 }
 
 export interface PropertyEditorUpdateTitleActionsEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element being edited in the Property Grid.
    */
-  obj: Base;
+  element: Base;
   /**
-   * A property editor that contains the title actions. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
+   * A property editor that contains the title actions. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/property-grid-customization#add-custom-properties-to-the-property-grid).
    */
   editor: Question;
   /**
@@ -206,15 +286,19 @@ export interface PropertyEditorUpdateTitleActionsEvent {
 
 export interface PropertyGridShowPopupEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * The instance of a survey element (question or panel) that users are configuring in the Property Grid.
    */
-  obj: Base;
+  element: Base;
   /**
    * A property being edited.
    */
   property: JsonObjectProperty;
   /**
-   * A property editor. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
+   * A property editor. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/property-grid-customization#add-custom-properties-to-the-property-grid).
    */
   editor: Question;
   /**
@@ -229,9 +313,13 @@ export interface PropertyGridShowPopupEvent {
 
 export interface CollectionItemAllowOperationsEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (survey, page, panel, question) that contains the collection to which the target item belongs.
    */
-  obj: Base;
+  element: Base;
   /**
    * A property that contains the collection to which the target item belongs.
    */
@@ -264,9 +352,13 @@ export interface CollectionItemAllowOperationsEvent {
 
 export interface CollectionItemAddedEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (survey, page, panel, question) that contains the collection to which the target item belongs.
    */
-  obj: Base;
+  element: Base;
   /**
    * The property's name: `columns`, `rows`, `choices`, `rateValues`, etc.
    */
@@ -279,6 +371,16 @@ export interface CollectionItemAddedEvent {
    * An array of collection items to which the target item belongs ([`columns`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns) or [`rows`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows) in matrix questions, [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) in select-based questions, etc.).
    */
   itemValues: ItemValue[];
+}
+export interface FastEntryItemsEvent {
+  /**
+   * An array of entered text lines.
+   */
+  lines: string[];
+  /**
+   * An array of collection items that were created based on the entered text lines. Overwrite an item's `value` or `text` property if you want to change the value or display text of this item.
+   */
+  items: ItemValue[];
 }
 
 export interface MatrixColumnAddedEvent {
@@ -297,6 +399,24 @@ export interface MatrixColumnAddedEvent {
 }
 
 export interface TablePropertyEditorOptions {
+  allowAddRemoveItems: boolean;
+  allowRemoveAllItems: boolean;
+  allowBatchEdit: boolean;
+  showTextView?: boolean;
+}
+export interface ConfigureTablePropertyEditorEvent {
+  /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
+   * A survey element (survey, page, panel, question) for which the table property editor is created.
+   */
+  element: Base;
+  /**
+   * The name of the property with which the editor is associated: [`"columns"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns), [`"rows"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows), [`"choices"`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices), etc.
+   */
+  propertyName: string;
   /**
    * A Boolean property that you can set to `false` if you want to disallow users to add and delete table rows.
    */
@@ -309,18 +429,8 @@ export interface TablePropertyEditorOptions {
    * A Boolean property that you can set to `false` if you want to disallow users to edit table content as text in a pop-up window.
    */
   allowBatchEdit: boolean;
-}
-export interface ConfigureTablePropertyEditorEvent {
   /**
-   * A survey element (survey, page, panel, question) for which the table property editor is created.
-   */
-  obj: Base;
-  /**
-   * The name of the property with which the editor is associated: [`"columns"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns), [`"rows"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows), [`"choices"`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices), etc.
-   */
-  propertyName: string;
-  /**
-   * An obejct with table property editor settings that you can modify.
+   * @deprecated Use `options.allowAddRemoveItems`, `options.allowRemoveAllItems`, and `options.allowBatchEdit` instead.
    */
   editorOptions: TablePropertyEditorOptions;
 }
@@ -329,7 +439,11 @@ export interface PropertyDisplayCustomErrorEvent {
   /**
    * A survey element (survey, page, panel, question) whose property is being validated.
    */
-  obj: Base;
+  element: Base;
+  /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
   /**
    * The name of a property being validated.
    */
@@ -346,28 +460,38 @@ export interface PropertyDisplayCustomErrorEvent {
 
 export interface PropertyValueChangingEvent {
   /**
-   * A survey element (question, panel, page, or the survey itself) whose property is being edited.
+   * @deprecated Use `options.element` instead.
    */
-  obj: Base;
+  obj?: Base;
   /**
    * The name of a property being modified.
    */
   propertyName: string;
   /**
-   * An old property value.
+   * @deprecated Use `options.oldValue` instead.
    */
-  value: any;
+  value?: any;
   /**
    * A new property value. Modify this parameter if you want to override the property value.
    */
   newValue: any;
 }
+export interface BeforePropertyChangedEvent extends PropertyValueChangingEvent {
+  /**
+   * A survey element (question, panel, page, or the survey itself) whose property is being edited.
+   */
+  element: Base;
+  /**
+   * An old property value.
+   */
+  oldValue: any;
+}
 
 export interface PropertyValueChangedEvent {
   /**
-   * A survey element (question, panel, page, or the survey itself) whose property has changed.
+   * @deprecated Use `options.element` instead.
    */
-  obj: Base;
+  obj?: Base;
   /**
    * The name of the modified property.
    */
@@ -377,12 +501,22 @@ export interface PropertyValueChangedEvent {
    */
   value: any;
 }
+export interface AfterPropertyChangedEvent extends PropertyValueChangedEvent {
+  /**
+   * A survey element (question, panel, page, or the survey itself) whose property has changed.
+   */
+  element: Base;
+}
 
 export interface ConditionGetQuestionListEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (question, panel, page, or the survey itself) for which the condition editor is displayed.
    */
-  obj: Base;
+  element: Base;
   /**
    * The name of a property being configured: `enableIf`, `requiredIf`, `visibleIf`, etc.
    */
@@ -394,9 +528,13 @@ export interface ConditionGetQuestionListEvent {
   /**
    * A list of questions available for selection.
    */
-  list: any;
+  list: any[];
   /**
-   * The sort order of questions within the list: `"asc"` (default) or `"none"`. Set this property to `"none"` to disable sorting.
+   * A list of [calculated values](https://surveyjs.io/form-library/documentation/design-survey/conditional-logic#calculated-values) and [variables](https://surveyjs.io/form-library/documentation/design-survey/conditional-logic#variables) available for selection.
+   */
+  variables: string[];
+  /**
+   * The sort order of questions within both list: `"asc"` (default) or `"none"`. Set this property to `"none"` to disable sorting.
    */
   sortOrder: string;
 }
@@ -437,28 +575,20 @@ export interface LogicRuleGetDisplayTextEvent {
 
 export interface ModifiedEvent {
   /**
-  * A value that indicates the modification: `"ADDED_FROM_TOOLBOX"`, `"PAGE_ADDED"`, `"PAGE_MOVED"`, `"QUESTION_CONVERTED"`, `"QUESTION_CHANGED_BY_EDITOR"`, `"PROPERTY_CHANGED"`, `"ELEMENT_REORDERED"`, `"OBJECT_DELETED"`, `"VIEW_TYPE_CHANGED"`, `"DO_DROP"`, `"TRANSLATIONS_CHANGED"`, `"JSON_EDITOR"`, `"THEME_MODIFIED"`
+  * A value that indicates the modification: `"ADDED_FROM_TOOLBOX"`, `"ADDED_FROM_PAGEBUTTON"`, `"PAGE_ADDED"`, `"QUESTION_CONVERTED"`, `"ELEMENT_COPIED"`, `"PROPERTY_CHANGED"`, `"ELEMENT_REORDERED"`, `"OBJECT_DELETED"`, `"JSON_EDITOR"`
   * 
   * Depending on the `options.type` value, the `options` object contains parameters listed below:
   * 
-  * `options.type`: `"ADDED_FROM_TOOLBOX"`
-  * - `options.question` - An added question.
+  * `options.type`: `"ADDED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"`
+  * - `options.question` - An added or copied survey element.
   * 
   * `options.type`: `"PAGE_ADDED"`
   * - `options.newValue` - An added page.
-  *
-  * `options.type`: `"PAGE_MOVED"`
-  * - `options.page` - A moved page.
-  * - `options.indexFrom` - A previous index.
-  * - `options.indexTo` - A current index.
   *
   * `options.type`: `"QUESTION_CONVERTED"`
   * - `options.className` - The name of a class to which a question has been converted.
   * - `options.oldValue` - An object of a previous class.
   * - `options.newValue` - An object of a class specified by `options.className`.
-  *
-  * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`
-  * - `options.question` - A question that has been edited in a pop-up editor.
   *
   * `options.type`: `"PROPERTY_CHANGED"`
   * - `options.name` - The name of the changed property.
@@ -475,18 +605,10 @@ export interface ModifiedEvent {
   *
   * `options.type`: `"OBJECT_DELETED"`
   * - `options.target` - A deleted object.
-  *
-  * `options.type`: `"VIEW_TYPE_CHANGED"`
-  * - `options.newType` - A current view: `"editor"` or `"designer"`.
-  *
-  * `options.type`: `"DO_DROP"`
-  * - `options.page` - A parent page of the dragged element.
-  * - `options.source` - A dragged element.
-  * - `options.target` - A drop target.
-  * - `options.newElement` - A new element. This parameter is defined only if users drag a question or panel from the Toolbox.
   */
   type: string;
   question?: Question;
+  name?: string;
 
   oldValue?: any;
   newValue?: any;
@@ -546,6 +668,21 @@ export interface PageAddedEvent {
   page: PageModel;
 }
 
+export interface QuestionConvertingEvent {
+  /**
+   * A question of the previous type.
+   */
+  sourceQuestion: Question;
+  /**
+   * A target [type](https://surveyjs.io/form-library/documentation/api-reference/question#getType).
+   */
+  targetType: string;
+  /**
+   * A JSON object produced by the previous question. You can modify this object to decide which properties should be copied to a new question. Set this parameter to `undefined` if you want to create the new question with a default JSON object.
+   */
+  json: any;
+}
+
 export interface PageGetFooterActionsEvent {
   /**
    * An array of actions. You can add, modify, or remove actions from this array.
@@ -588,9 +725,17 @@ export interface SurveyInstanceCreatedEvent {
    */
   survey: SurveyModel;
   /**
-   * Obsolete. Use `options.area` instead.
+   * @deprecated Use `options.element` instead.
    */
-  reason: string;
+  obj?: Base;
+  /**
+   * A survey element being edited in the Property Grid. Present only if the `options.area` parameter equals `"property-grid"`.
+   */
+  element?: Base;
+  /**
+   * @deprecated Use `options.area` instead.
+   */
+  reason?: string;
   model?: Base;
 }
 
@@ -621,16 +766,28 @@ export interface NotifyEvent {
 
 export interface ElementFocusingEvent {
   /**
-   * An element that is going to be focused.
+   * @deprecated Use `options.element` instead.
    */
-  newSelectedElement: Base;
+  newSelectedElement?: Base;
+}
+export interface ElementSelectingEvent extends ElementFocusingEvent {
+  /**
+   * An element that is going to be selected.
+   */
+  element: Base;
 }
 
 export interface ElementFocusedEvent {
   /**
-   * The [focused element](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#selectedElement).
+   * @deprecated Use `options.element` instead.
    */
-  newSelectedElement: Base;
+  newSelectedElement?: Base;
+}
+export interface ElementSelectedEvent extends ElementFocusedEvent {
+  /**
+   * The [selected element](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#selectedElement).
+   */
+  element: Base;
 }
 
 export interface OpenFileChooserEvent {
@@ -685,18 +842,22 @@ export interface UploadFileEvent {
    * @param status A string value that indicates a successful or failed file upload: `"success"` or `"error"`.
    * @param fileUrl The URL of a successfully uploaded file.
    */
-  callback: (status: string, fileUrl: string) => void;
+  callback: (status: string, fileUrl?: string) => void;
   /**
-   * Obsolete. Use the `options.element` parameter instead.
+   * @deprecated Use `options.element` instead.
    */
   question: Question;
 }
 
 export interface TranslationStringVisibilityEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (survey, page, panel, question) whose string translations are edited in the Translation tab.
    */
-  obj: Base;
+  element: Base;
   /**
    * The name of a property being translated.
    */
@@ -727,9 +888,13 @@ export interface TranslationImportedEvent {
 
 export interface TranslationExportItemEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element (survey, page, panel, question) whose string translations are being exported to CSV.
    */
-  obj: Base;
+  element: Base;
   /**
    * The current locale code (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
    */
@@ -750,9 +915,13 @@ export interface TranslationExportItemEvent {
 
 export interface TranslationItemChangingEvent {
   /**
+   * @deprecated Use `options.element` instead.
+   */
+  obj?: Base;
+  /**
    * A survey element instance (survey, page, panel, question) whose string translation is being changed.
    */
-  obj: Base;
+  element: Base;
   /**
    * The current locale code (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
    */
@@ -817,15 +986,19 @@ export interface DragDropAllowEvent {
    */
   survey?: SurveyModel;
   /**
+   * A Boolean property that you can set to `false` if you want to disallow placing `draggedElement` on the same line with any other survey element.
+   */
+  allowDropNextToAnother?: boolean;
+  /**
    * A Boolean property that you can set to `false` if you want to cancel the drag and drop operation.
    */
   allow: boolean;
   /**
-   * Obsolete. Use `options.draggedElement` instead.
+   * @deprecated Use `options.draggedElement` instead.
    */
   target?: IElement;
   /**
-   * Obsolete. Use `options.toElement` instead.
+   * @deprecated Use `options.toElement` instead.
    */
   source?: IElement;
 }
@@ -851,7 +1024,7 @@ export interface CreateCustomMessagePanelEvent {
 
 export interface ActiveTabChangingEvent {
   /**
-   * A tab that is going to become active: `"designer"`, `"test"`, `"theme"`, `"editor"`, `"logic"`, or `"translation"`. 
+   * A tab that is going to become active: `"designer"`, `"preview"`, `"theme"`, `"json"`, `"logic"`, or `"translation"`. 
    */
   tabName: string;
   /**
@@ -862,7 +1035,7 @@ export interface ActiveTabChangingEvent {
 
 export interface ActiveTabChangedEvent {
   /**
-   * A tab that has become active: `"designer"`, `"test"`, `"theme"`, `"editor"`, `"logic"`, or `"translation"`.
+   * A tab that has become active: `"designer"`, `"preview"`, `"theme"`, `"json"`, `"logic"`, or `"translation"`.
    */
   tabName: string;
   plugin: ICreatorPlugin;
@@ -873,14 +1046,22 @@ export interface BeforeUndoEvent {
   /**
    * A Boolean value that you can set to `false` if you want to prevent the undo operation.
    */
-  canUndo: boolean;
+  allow: boolean;
+  /**
+   * @deprecated Use `options.allow` instead.
+   */
+  canUndo?: boolean;
 }
 
 export interface BeforeRedoEvent {
   /**
    * A Boolean value that you can set to `false` if you want to prevent the redo operation.
    */
-  canRedo: boolean;
+  allow: boolean;
+  /**
+   * @deprecated Use `options.allow` instead.
+   */
+  canRedo?: boolean;
 }
 
 export interface PageAddingEvent {
@@ -907,4 +1088,20 @@ export interface DragStartEndEvent {
    * A survey element to which `draggedElement` is being dragged.
    */
   toElement: IElement;
+}
+export interface CreatorThemePropertyChangedEvent {
+  /**
+   * A property name.
+   */
+  name: string;
+  /**
+   * A new property value.
+   */
+  value: any;
+}
+export interface CreatorThemeSelectedEvent {
+  /**
+   * A selected Survey Creator theme.
+   */
+  theme: ICreatorTheme;
 }

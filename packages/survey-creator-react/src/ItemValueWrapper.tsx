@@ -1,6 +1,5 @@
 import { getLocString, ItemValueWrapperViewModel } from "survey-creator-core";
-import React from "react";
-import { ReactDragEvent } from "src/events";
+import * as React from "react";
 import { QuestionSelectBase, Base, ItemValue } from "survey-core";
 import {
   attachKey2click,
@@ -10,7 +9,7 @@ import {
 import { CreatorModelElement } from "./ModelElement";
 
 interface ItemValueAdornerComponentProps {
-  element: JSX.Element;
+  element: React.JSX.Element;
   componentData: any;
   question: QuestionSelectBase;
   item: ItemValue;
@@ -21,6 +20,11 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
   any
 > {
   model: ItemValueWrapperViewModel;
+  private rootRef: React.RefObject<HTMLDivElement>;
+  constructor(props) {
+    super(props);
+    this.rootRef = React.createRef();
+  }
   protected createModel(props: any): void {
     this.model = new ItemValueWrapperViewModel(
       props.componentData.creator,
@@ -38,10 +42,24 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
     this.model.onFocusOut(event.nativeEvent);
   };
 
-  render(): JSX.Element {
-    // if (this.model.question.isDragged) {
-    //   return null;
-    // }
+  componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    this.props.item.setRootElement(this.rootRef.current);
+    if (prevProps.item !== this.props.item && prevProps.item) {
+      prevProps.item.setRootElement(undefined);
+    }
+  }
+
+  componentDidMount(): void {
+    super.componentDidMount();
+    this.props.item.setRootElement(this.rootRef.current);
+  }
+  componentWillUnmount(): void {
+    super.componentWillUnmount();
+    this.props.item.setRootElement(undefined);
+  }
+
+  render(): React.JSX.Element {
     this.model.item = this.props.item;
     const button = this.model.allowAdd ? (
       attachKey2click(<span
@@ -52,7 +70,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
           this.model.isNew = false;
         }}
       >
-        <SvgIcon size={16} iconName={"icon-add_16x16"} title={this.model.tooltip}></SvgIcon>
+        <SvgIcon size={"auto"} iconName={"icon-add_16x16"} title={this.model.tooltip}></SvgIcon>
       </span>)
     ) : (
       <>
@@ -61,7 +79,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
           <span
             className="svc-item-value-controls__button svc-item-value-controls__drag"
           >
-            <SvgIcon className="svc-item-value-controls__drag-icon" size={24} iconName={"icon-drag-area-indicator"} title={this.model.dragTooltip}></SvgIcon>
+            <SvgIcon className="svc-item-value-controls__drag-icon" size={"auto"} iconName={"icon-drag-24x24"} title={this.model.dragTooltip}></SvgIcon>
           </span>
         ) : null}
         {this.model.allowRemove ? attachKey2click(<span
@@ -69,7 +87,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
           aria-label={this.model.tooltip}
           onClick={() => this.model.remove(this.model)}
         >
-          <SvgIcon size={16} iconName={"icon-remove_16x16"} title={this.model.tooltip}></SvgIcon>
+          <SvgIcon size={"auto"} iconName={"icon-remove_16x16"} title={this.model.tooltip}></SvgIcon>
         </span>) : null}
       </>
     );
@@ -78,6 +96,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
 
     return (
       <div
+        ref={this.rootRef}
         className={
           "svc-item-value-wrapper" +
           (this.model.allowAdd ? " svc-item-value--new" : "") +

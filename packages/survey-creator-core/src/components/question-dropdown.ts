@@ -4,7 +4,7 @@ import { SurveyCreatorModel } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { editorLocalization } from "../editorLocalization";
 
-require("./question-dropdown.scss");
+import "./question-dropdown.scss";
 
 export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
   @property({ defaultValue: true }) private isCollapsed: boolean;
@@ -16,10 +16,6 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
     templateData: SurveyTemplateRendererTemplateData,
   ) {
     super(creator, surveyElement, templateData);
-    this.surveyElement.registerFunctionOnPropertyValueChanged("isSelectedInDesigner",
-      () => {
-        this.leftFocus();
-      }, "dropdownCollapseChecker");
     this.visibleCount = creator.maxVisibleChoices;
     this.isCollapsed = this.isCollapsed && this.needToCollapse;
   }
@@ -58,8 +54,8 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
 
   public getRenderedItems(): ItemValue[] {
     return this.isCollapsed ?
-      this.question.visibleChoices.slice(0, this.visibleCount) :
-      this.question.visibleChoices;
+      this.question.renderedChoices.slice(0, this.visibleCount) :
+      this.question.renderedChoices;
   }
 
   public getButtonText(): string {
@@ -72,9 +68,20 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  public dispose(): void {
-    super.dispose();
-    this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isSelectedInDesigner", "dropdownCollapseChecker");
+  public attachElement(surveyElement: SurveyElement) {
+    super.attachElement(surveyElement);
+    if (!!surveyElement) {
+      surveyElement.registerFunctionOnPropertyValueChanged("isSelectedInDesigner",
+        () => {
+          this.leftFocus();
+        }, "dropdownCollapseChecker");
+    }
+  }
+  public detachElement(surveyElement: SurveyElement): void {
+    if (!!surveyElement) {
+      surveyElement.unRegisterFunctionOnPropertyValueChanged("isSelectedInDesigner", "dropdownCollapseChecker");
+    }
+    super.detachElement(surveyElement);
   }
 
 }

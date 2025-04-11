@@ -21,7 +21,7 @@
 
       <template v-if="!adorner.isNew && !adorner.isUploading">
         <div v-if="!adorner.isNew" class="svc-image-item-value__item">
-          <component :is="componentName" v-bind="componentData"></component>
+          <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
         </div>
         <span
           v-if="adorner.isDraggable && adorner.canRenderControls"
@@ -30,12 +30,16 @@
           :title="undefined"
           :aria-label="undefined"
         >
-          <sv-svg-icon
-            :iconName="'icon-drag-area-indicator'"
-            :size="24"
-          ></sv-svg-icon>
+          <SvComponent
+            :is="'sv-svg-icon'"
+            :iconName="'icon-drag-24x24'"
+            :size="'auto'"
+          ></SvComponent>
         </span>
-        <div v-if="adorner.canRenderControls" class="svc-context-container svc-image-item-value-controls">
+        <div
+          v-if="adorner.canRenderControls"
+          class="svc-context-container svc-image-item-value-controls"
+        >
           <span
             class="svc-context-button"
             @click="adorner.chooseFile(adorner)"
@@ -43,7 +47,13 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon role="button" :iconName="'icon-file'" :size="24" :title="adorner.selectFileTitle"></sv-svg-icon>
+            <SvComponent
+              :is="'sv-svg-icon'"
+              role="button"
+              :iconName="'icon-choosefile'"
+              :size="'auto'"
+              :title="adorner.selectFileTitle"
+            ></SvComponent>
           </span>
           <span
             class="svc-context-button svc-context-button--danger"
@@ -52,7 +62,13 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon role="button" :iconName="'icon-delete'" :size="24" :title="adorner.removeFileTitle"></sv-svg-icon>
+            <SvComponent
+              :is="'sv-svg-icon'"
+              role="button"
+              :iconName="'icon-delete'"
+              :size="'auto'"
+              :title="adorner.removeFileTitle"
+            ></SvComponent>
           </span>
         </div>
       </template>
@@ -71,7 +87,7 @@
                   class="svc-image-item-value__loading"
                   v-if="adorner.isUploading"
                 >
-                  <sv-loading-indicator></sv-loading-indicator>
+                  <SvComponent :is="'sv-loading-indicator'"></SvComponent>
                 </div>
               </div>
             </label>
@@ -90,7 +106,12 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon :iconName="'icon-add-lg'" :size="24"></sv-svg-icon>
+            <SvComponent
+              :is="'sv-svg-icon'"
+              :iconName="'icon-add-lg'"
+              :size="'auto'"
+              :title="adorner.addFileTitle"
+            ></SvComponent>
           </span>
         </div>
       </template>
@@ -98,6 +119,8 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { ImageItemValue, QuestionImagePickerModel } from "survey-core";
 import {
@@ -121,14 +144,19 @@ const question = computed(() => props.componentData.question);
 const item = computed(() => props.componentData.item);
 const root = ref<HTMLDivElement>();
 const adorner = useCreatorModel(
-  () =>
-    new ImageItemValueWrapperViewModel(
+  () => {
+    const viewModel = new ImageItemValueWrapperViewModel(
       creator.value,
       question.value,
       item.value,
       null as any,
       null as any
-    ),
+    );
+    if (root?.value) {
+      viewModel.itemsRoot = root.value;
+    }
+    return viewModel;
+  },
   [() => creator.value, () => question.value, () => item.value],
   (value) => {
     value.dispose();
@@ -142,7 +170,6 @@ const newItemStyle = computed(() => {
     height: needStyle ? question.value.renderedImageHeight + "px" : undefined,
   };
 });
-
 onMounted(() => {
   if (root.value) {
     adorner.value.itemsRoot = root.value;

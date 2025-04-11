@@ -7,7 +7,7 @@ import {
   JsonEditorBaseModel,
   TabJsonEditorBasePlugin
 } from "./json-editor-plugin";
-require("./json-editor-ace.scss");
+import "./json-editor-ace.scss";
 export class AceJsonEditorModel extends JsonEditorBaseModel {
   public static aceBasePath: string = "";
   private aceEditor: any;
@@ -53,6 +53,15 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
       this.aceEditor.session.doc.getNewLineCharacter();
     this.onPluginActivate();
   }
+
+  public onPluginActivate(): void {
+    super.onPluginActivate();
+    this.aceEditor.setFontSize(14);
+    if (this.creator.preferredColorPalette === "dark") {
+      this.aceEditor.setTheme("ace/theme/clouds_midnight");
+    }
+  }
+
   private updateUndoRedoState(): void {
     const undoManager: any = this.aceEditor
       .getSession()
@@ -104,12 +113,7 @@ export class TabJsonEditorAcePlugin
   implements ICreatorPlugin {
   constructor(creator: SurveyCreatorModel) {
     super(creator);
-    creator.addPluginTab(
-      "editor",
-      this,
-      getLocString("ed.jsonEditor"),
-      "svc-tab-json-editor-ace"
-    );
+    creator.addTab({ name: "json", plugin: this, iconName: "icon-codeeditor-24x24", componentName: "svc-tab-json-editor-ace" });
   }
   protected createModel(
     creator: SurveyCreatorModel
@@ -117,6 +121,6 @@ export class TabJsonEditorAcePlugin
     return new AceJsonEditorModel(creator);
   }
   public static hasAceEditor(): boolean {
-    return typeof window["ace"] !== "undefined";
+    return typeof window !== "undefined" && typeof window["ace"] !== "undefined";
   }
 }

@@ -1,5 +1,6 @@
 export interface IPropertyEditorInfo {
   name: string;
+  index?: number;
   title?: string;
   tab?: string;
 }
@@ -49,7 +50,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "setValueExpression", tab: "logic" },
       { name: "page", tab: "layout" },
       { name: "startWithNewLine", tab: "layout" },
-      { name: "hideNumber", tab: "layout" },
+      { name: "showNumber", tab: "layout" },
       { name: "state", tab: "layout" },
       { name: "titleLocation", tab: "layout" },
       { name: "descriptionLocation", tab: "layout" },
@@ -67,10 +68,12 @@ const defaultProperties: ISurveyPropertiesDefinition = {
         name: "maxWidth",
         tab: "layout",
       },
+      { name: "effectiveColSpan", tab: "layout" },
       { name: "valueName", tab: "data" },
       { name: "defaultValue", tab: "data" },
       { name: "correctAnswer", tab: "data" },
       { name: "useDisplayValuesInDynamicTexts", tab: "data" },
+      { name: "defaultDisplayValue", tab: "data" },
       { name: "clearIfInvisible", tab: "data" },
       { name: "validators", tab: "validation" },
       { name: "requiredErrorText", tab: "validation" }
@@ -149,6 +152,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "verticalAlign", tab: "layout" },
       { name: "alternateRows", tab: "layout" },
       { name: "columnsVisibleIf", tab: "logic" },
+      { name: "rowsVisibleIf", tab: "logic" },
       { name: "columnLayout", tab: "layout" },
       { name: "transposeData", tab: "layout" },
       { name: "horizontalScroll", tab: "layout" },
@@ -167,20 +171,20 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       "allowAddRows",
       "allowRemoveRows",
-      "allowRowsDragAndDrop",
+      "allowRowReorder",
       "rowCount",
       "minRowCount",
       "maxRowCount",
-      "addRowLocation",
+      "addRowButtonLocation",
       "addRowText",
       "removeRowText",
       "confirmDelete",
       "confirmDeleteText",
       "placeholder",
       { name: "hideColumnsIfEmpty", tab: "columns" },
-      { name: "emptyRowsText", tab: "columns" },
+      { name: "noRowsText", tab: "columns" },
       { name: "defaultRowValue", tab: "data" },
-      { name: "defaultValueFromLastRow", tab: "data" },
+      { name: "copyDefaultValueFromLastEntry", tab: "data" },
       { name: "keyName", tab: "validation" },
       { name: "keyDuplicationError", tab: "validation" }
     ]
@@ -190,20 +194,19 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "totalText",
       "placeholder",
       { name: "hideIfRowsEmpty", tab: "rows" },
-      { name: "rowsVisibleIf", tab: "logic" },
       { name: "rowTitleWidth", tab: "layout" },
       { name: "keyDuplicationError", tab: "validation" }
     ]
   },
   matrix: {
     properties: [
-      { name: "isAllRowRequired", tab: "validation" },
+      { name: "eachRowRequired", tab: "validation" },
       { name: "eachRowUnique", tab: "validation" },
       { name: "showHeader", tab: "layout" },
       { name: "showColumnHeader", tab: "layout" },
       { name: "verticalAlign", tab: "layout" },
       { name: "alternateRows", tab: "layout" },
-      { name: "rowsOrder", tab: "rows" },
+      { name: "rowOrder", tab: "rows" },
       { name: "hideIfRowsEmpty", tab: "rows" },
       { name: "columnsVisibleIf", tab: "logic" },
       { name: "rowsVisibleIf", tab: "logic" },
@@ -219,7 +222,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   multipletext: {
     properties: [
       { name: "colCount", tab: "layout" },
-      { name: "itemSize", tab: "layout" },
+      { name: "inputSize", tab: "layout" },
       { name: "itemErrorLocation", tab: "layout" }
     ],
     tabs: [{ name: "items", index: 10 }]
@@ -245,6 +248,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choiceValuesFromQuestion", tab: "choices" },
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
+      { name: "allowCustomChoices", tab: "choices" },
       { name: "colCount", tab: "layout" },
       { name: "textWrapEnabled", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
@@ -286,7 +290,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   radiogroup: {
     properties: [
-      { name: "showClearButton", tab: "choices" },
+      { name: "allowClear", tab: "choices" },
       { name: "separateSpecialChoices", tab: "choices" },
     ]
   },
@@ -359,7 +363,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "dataList",
       { name: "minValueExpression", tab: "logic" },
       { name: "maxValueExpression", tab: "logic" },
-      { name: "size", tab: "layout" },
+      { name: "inputSize", tab: "layout" },
+      { name: "inputTextAlignment", tab: "layout" },
       { name: "maxLength", tab: "validation" },
       { name: "minErrorText", tab: "validation" },
       { name: "maxErrorText", tab: "validation" },
@@ -392,6 +397,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "useGrouping"
     ]
   },
+  "panellayoutcolumn": {
+    properties: ["effectiveWidth", "questionTitleWidth"]
+  },
   matrixdropdowncolumn: {
     properties: ["name", "title"]
   },
@@ -418,12 +426,17 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "totalDisplayStyle", tab: "totals" },
       { name: "totalCurrency", tab: "totals" },
       { name: "totalFormat", tab: "totals" },
-      { name: "totalExpression", tab: "totals" }
+      { name: "totalExpression", tab: "totals" },
+      { name: "validators", tab: "validation" },
+      { name: "requiredErrorText", tab: "validation" },
+      { name: "defaultDisplayValue", tab: "data" }
     ],
     tabs: [
       { name: "general", index: 5 },
       { name: "logic", index: 20 },
-      { name: "totals", index: 40 }
+      { name: "data", index: 25 },
+      { name: "totals", index: 40 },
+      { name: "validation", index: 60 }
     ]
   },
   "matrixdropdowncolumn@checkbox": {
@@ -434,6 +447,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
+      { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "colCount", tab: "choices" },
       { name: "showSelectAllItem", tab: "choices" },
@@ -462,6 +476,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
+      { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "colCount", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },
@@ -480,12 +495,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@dropdown": {
     properties: [
+      "placeholder",
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
       { name: "choiceValuesFromQuestion", tab: "choices" },
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
+      { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "optionsCaption", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },
@@ -497,6 +514,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMin", tab: "choices" },
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
+      { name: "allowClear", tab: "choices" },
       { name: "choicesVisibleIf", tab: "logic" },
       { name: "choicesEnableIf", tab: "logic" },
     ],
@@ -507,12 +525,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@tagbox": {
     properties: [
+      "placeholder",
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
       { name: "choiceValuesFromQuestion", tab: "choices" },
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
+      { name: "otherPlaceholder", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "optionsCaption", tab: "choices" },
       { name: "showNoneItem", tab: "choices" },
@@ -524,6 +544,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMin", tab: "choices" },
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
+      { name: "allowClear", tab: "choices" },
       { name: "choicesVisibleIf", tab: "logic" },
       { name: "choicesEnableIf", tab: "logic" },
     ],
@@ -545,13 +566,11 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "maskSettings", tab: "mask" },
     ],
     tabs: [
-      { name: "mask", index: 20 },
-      { name: "validators", index: 25 }
+      { name: "mask", index: 20 }
     ]
   },
   "matrixdropdowncolumn@comment": {
-    properties: ["rows", "placeholder", "maxLength"],
-    tabs: [{ name: "validators", index: 25 }]
+    properties: ["rows", "placeholder ", "maxLength"]
   },
   "matrixdropdowncolumn@boolean": {
     properties: [
@@ -572,7 +591,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "matrixdropdowncolumn@rating": {
     properties: [
-      "rateValues",
       { name: "displayMode", tab: "rateValues" },
       { name: "rateType", tab: "rateValues" },
       { name: "rateCount", tab: "rateValues" },
@@ -582,6 +600,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "rateMin", tab: "rateValues" },
       { name: "rateMax", tab: "rateValues" },
       { name: "rateStep", tab: "rateValues" },
+      { name: "rateValues", tab: "rateValues" },
       { name: "minRateDescription", tab: "rateValues" },
       { name: "maxRateDescription", tab: "rateValues" },
       { name: "rateDescriptionLocation", tab: "rateValues" },
@@ -596,8 +615,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "title",
       "inputType",
       "isRequired",
-      "size",
+      "inputSize",
       "placeholder",
+      "inputTextAlignment",
       { name: "maxLength", tab: "validation" },
       { name: "requiredErrorText", tab: "validation" },
       { name: "validators", tab: "validation" },
@@ -625,7 +645,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   paneldynamic: {
     properties: [
       "renderMode",
+      "displayMode",
       "templateTabTitle",
+      "tabTitlePlaceholder",
       "tabAlign",
       "panelCount",
       "minPanelCount",
@@ -633,22 +655,25 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "panelsState",
       { name: "allowAddPanel" },
       { name: "allowRemovePanel" },
-      "panelAddText",
-      "panelRemoveText",
+      "addPanelText",
+      "removePanelText",
       "templateTitle",
       "templateDescription",
       "noEntriesText",
       "confirmDelete",
       "confirmDeleteText",
-      "panelPrevText",
-      "panelNextText",
+      "prevPanelText",
+      "nextPanelText",
       "showQuestionNumbers",
       "showRangeInProgress",
+      "showProgressBar",
+      "progressBarLocation",
       { name: "defaultPanelValue", tab: "data" },
-      { name: "defaultValueFromLastPanel", tab: "data" },
-      { name: "templateTitleLocation", tab: "questionSettings" },
+      { name: "copyDefaultValueFromLastEntry", tab: "data" },
+      { name: "templateQuestionTitleLocation", tab: "questionSettings" },
+      { name: "templateQuestionTitleWidth", tab: "questionSettings" },
       { name: "templateErrorLocation", tab: "questionSettings" },
-      { name: "panelRemoveButtonLocation", tab: "layout" },
+      { name: "removePanelButtonLocation", tab: "layout" },
       { name: "keyName", tab: "validation" },
       { name: "keyDuplicationError", tab: "validation" }
     ]
@@ -664,11 +689,12 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "enableIf", tab: "logic" },
       { name: "requiredIf", tab: "logic" },
       { name: "questionTitleLocation", tab: "questionSettings" },
-      { name: "questionErrorLocation", tab: "questionSettings" }
+      { name: "questionTitleWidth", tab: "questionSettings" },
+      { name: "questionErrorLocation", tab: "questionSettings" },
+      { name: "gridLayoutColumns", tab: "questionSettings", index: 900 },
     ],
     tabs: [
       { name: "questionSettings", index: 100 },
-      { name: "layout", index: 150 },
       { name: "logic", index: 200 },
       { name: "data", index: 300 },
       { name: "validation", index: 400 }
@@ -677,7 +703,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   panel: {
     properties: [
       "isRequired",
-      { name: "questionsOrder", tab: "questionSettings" },
+      { name: "questionOrder", tab: "questionSettings" },
       { name: "innerIndent", tab: "questionSettings" },
       { name: "requiredErrorText", tab: "validation" },
       { name: "page", tab: "layout" },
@@ -686,47 +712,55 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "width", tab: "layout" },
       { name: "minWidth", tab: "layout" },
       { name: "maxWidth", tab: "layout" },
+      { name: "effectiveColSpan", tab: "layout" },
       { name: "showNumber", tab: "numbering" },
       { name: "showQuestionNumbers", tab: "numbering" },
       { name: "questionStartIndex", tab: "numbering" }
     ],
-    tabs: [{ name: "numbering", index: 350 }]
+    tabs: [
+      { name: "layout", index: 150 },
+      { name: "numbering", index: 350 }
+    ]
   },
   page: {
     properties: [
       "navigationTitle",
       "navigationDescription",
+      "timeLimit",
       "maxTimeToFinish",
-      { name: "questionsOrder", tab: "questionSettings" },
-      { name: "navigationButtonsVisibility", tab: "navigation" }
+      { name: "questionOrder", tab: "questionSettings" },
+      { name: "showNavigationButtons", tab: "navigation" }
     ],
-    tabs: [{ name: "navigation", index: 350 }]
+    tabs: [{ name: "navigation", index: 350 }, { name: "layout", visible: false }]
   },
   survey: {
     properties: [
       "title",
       "description",
       "showTitle",
+      "readOnly",
       "locale",
-      "mode",
       "cookieName",
       "widthMode",
       "width",
       "fitToContainer",
 
       { name: "questionsOnPageMode", tab: "navigation" },
-      { name: "firstPageIsStarted", tab: "navigation" },
-      { name: "goNextPageAutomatic", tab: "navigation" },
-      { name: "allowCompleteSurveyAutomatic", tab: "navigation" },
+      { name: "firstPageIsStartPage", tab: "navigation" },
+      { name: "autoAdvanceEnabled", tab: "navigation" },
+      { name: "autoAdvanceAllowComplete", tab: "navigation" },
       { name: "showNavigationButtons", tab: "navigation" },
+      { name: "navigationButtonsLocation", tab: "navigation" },
       { name: "showPrevButton", tab: "navigation" },
       { name: "showProgressBar", tab: "navigation" },
       { name: "progressBarType", tab: "navigation" },
+      { name: "progressBarLocation", tab: "navigation" },
       { name: "progressBarShowPageTitles", tab: "navigation" },
       { name: "progressBarShowPageNumbers", tab: "navigation" },
       { name: "showTOC", tab: "navigation" },
       { name: "tocLocation", tab: "navigation" },
       { name: "showPreviewBeforeComplete", tab: "navigation" },
+      { name: "previewMode", tab: "navigation" },
       { name: "previewText", tab: "navigation" },
       { name: "editText", tab: "navigation" },
       { name: "startSurveyText", tab: "navigation" },
@@ -734,43 +768,52 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "pageNextText", tab: "navigation" },
       { name: "completeText", tab: "navigation" },
 
-      { name: "questionsOrder", tab: "question" },
+      { name: "questionOrder", tab: "question" },
       { name: "questionTitleLocation", tab: "question" },
       { name: "questionDescriptionLocation", tab: "question" },
       { name: "showQuestionNumbers", tab: "question" },
       { name: "questionTitlePattern", tab: "question" },
-      { name: "requiredText", tab: "question" },
+      { name: "requiredMark", tab: "question" },
       { name: "questionStartIndex", tab: "question" },
       { name: "questionErrorLocation", tab: "question" },
       {
-        name: "focusFirstQuestionAutomatic",
+        name: "autoFocusFirstQuestion",
         tab: "question"
       },
       { name: "maxTextLength", tab: "question" },
-      { name: "maxOthersLength", tab: "question" },
+      { name: "maxCommentLength", tab: "question" },
+      { name: "commentAreaRows", tab: "question" },
       { name: "autoGrowComment", tab: "question" },
       { name: "allowResizeComment", tab: "question" },
       { name: "showPageTitles", tab: "pages" },
       { name: "showPageNumbers", tab: "pages" },
+      { name: "gridLayoutEnabled", tab: "pages" },
 
       { name: "calculatedValues", tab: "logic" },
       { name: "triggers", tab: "logic" },
 
       { name: "clearInvisibleValues", tab: "data" },
       { name: "textUpdateMode", tab: "data" },
-      { name: "sendResultOnPageNext", tab: "data" },
+      { name: "partialSendEnabled", tab: "data" },
       { name: "storeOthersAsComment", tab: "data" },
 
-      { name: "focusOnFirstError", tab: "validation" },
+      { name: "autoFocusFirstError", tab: "validation" },
       { name: "checkErrorsMode", tab: "validation" },
+      { name: "validateVisitedEmptyFields", tab: "validation" },
 
       { name: "navigateToUrl", tab: "showOnCompleted" },
       { name: "navigateToUrlOnCondition", tab: "showOnCompleted" },
-      { name: "showCompletedPage", tab: "showOnCompleted" },
+      { name: "showCompletePage", tab: "showOnCompleted" },
       { name: "completedHtml", tab: "showOnCompleted" },
       { name: "completedHtmlOnCondition", tab: "showOnCompleted" },
       { name: "loadingHtml", tab: "showOnCompleted" },
       { name: "completedBeforeHtml", tab: "showOnCompleted" },
+
+      { name: "showTimer", tab: "timer" },
+      { name: "timerLocation", tab: "timer" },
+      { name: "timeLimit", tab: "timer" },
+      { name: "timeLimitPerPage", tab: "timer" },
+      { name: "timerInfoMode", tab: "timer" },
 
       { name: "maxTimeToFinish", tab: "timer" },
       { name: "maxTimeToFinishPage", tab: "timer" },

@@ -2,8 +2,8 @@ import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashT
 import { editorLocalization } from "../../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
-import { SurveyLogicTypes, SurveyLogicType } from "./logic-types";
-require("./logic.scss");
+import { SurveyLogicTypes, SurveyLogicType, ISurveyLogicType } from "./logic-types";
+import "./logic.scss";
 
 export function initLogicOperator(question: QuestionDropdownModel) {
   question.popupModel.isFocusedContent = true;
@@ -395,10 +395,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       var lt = this.logicTypes[i];
       if (lt.showInUI !== showInUI) continue;
       var expression = element[lt.propertyName];
-      if (
-        types.indexOf(lt.baseClass) > -1 &&
-        !Helpers.isValueEmpty(expression)
-      ) {
+      if (lt.hasNeededTypes(types) && !Helpers.isValueEmpty(expression)) {
         var key = this.getLogicItemHashKey(expression, element);
         var item = hash[key];
         if (!item) {
@@ -438,17 +435,20 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   }
   protected createLogicTypes(): Array<SurveyLogicType> {
     var res = [];
-    var visActions = SurveyLogic.visibleActions;
-    for (var i = 0; i < SurveyLogic.types.length; i++) {
-      if (
-        visActions.length > 0 &&
-        visActions.indexOf(SurveyLogic.types[i].name) < 0
-      )
-        continue;
-      res.push(
-        new SurveyLogicType(SurveyLogic.types[i], this.survey, this.options)
-      );
-    }
+    SurveyLogic.types.forEach(logicType => {
+      if (this.isLogicTypeVisible(logicType)) {
+        res.push(new SurveyLogicType(logicType, this.survey, this.options));
+      }
+    });
     return res;
+  }
+  private isLogicTypeVisible(logicType: ISurveyLogicType): boolean {
+    const visActions = SurveyLogic.visibleActions;
+    if(visActions.length > 0 && visActions.indexOf(logicType.name) < 0) return false;
+    const prefix = "trigger_";
+    if(logicType.name.indexOf(prefix) === 0) {
+      return settings.logic.invisibleTriggers.indexOf(logicType.name.substring(prefix.length)) < 0;
+    }
+    return true;
   }
 }

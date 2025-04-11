@@ -1,12 +1,21 @@
 <ng-template #template>
   <div class="svc-creator-tab__content">
-    <div class="svc-plugin-tab__content svc-logic-tab__content" [class.svc-logic-tab__empty]="!model.hasItems">
-      <survey-content [model]="model.itemsSurvey"></survey-content>
-      <div *ngIf="!model.hasItems" class="svc-logic-tab__content-empty">
-        <span class="svc-text">{{model.emptyTabPlaceholder}}</span>
-      </div>
-      <ng-container *ngIf="!model.readOnly">
-        <svc-tab-logic-add-btn [model]="model.addNewButton"></svc-tab-logic-add-btn>
+    <div class="svc-plugin-tab__content svc-logic-tab__content" [class.svc-logic-tab--empty]="!model.hasItems">
+      <ng-container *ngIf="model.hasItems">
+        <survey-content [model]="model.itemsSurvey"></survey-content>
+        <ng-container *ngIf="!model.readOnly">
+          <svc-tab-logic-add-btn [model]="model.addNewButton"></svc-tab-logic-add-btn>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!model.hasItems">
+        <div class="svc-logic-tab__content-empty">
+          <svc-surface-placeholder [name]="'logic'" [placeholderTitleText]="model.placeholderTitleText"
+            [placeholderDescriptionText]="model.placeholderDescriptionText">
+          </svc-surface-placeholder>
+          <ng-container *ngIf="!model.readOnly">
+            <svc-tab-logic-add-btn [model]="model.addNewButton"></svc-tab-logic-add-btn>
+          </ng-container>
+        </div>
       </ng-container>
     </div>
   </div>

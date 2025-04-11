@@ -8,6 +8,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 });
 
 const json = {
+  showQuestionNumbers: "on",
   "logoPosition": "right",
   "pages": [
     {
@@ -46,6 +47,7 @@ test("Select base editing", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
     await setJSON({
+      showQuestionNumbers: "on",
       "logoPosition": "right",
       "pages": [
         {
@@ -82,7 +84,7 @@ test("Ranking item text overflow", async (t) => {
 
     await t
       .click(Selector(".svc-string-editor").withText("Item 1"))
-      .typeText(Selector(".sv-string-editor").withText("Item 1"), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+      .typeText(Selector(".sv-string-editor").withText("Item 1"), "JavaScript Form Builder Libraries. Building your own form management system has never been easier. Automate forms workflow and retain full ownership of respondent data.");
     await takeElementScreenshot("dropdown-long-item-text.png", question, t, comparer);
   });
 });

@@ -24,6 +24,30 @@ const creatorOptions = {
 const creator = new SurveyCreatorModel(creatorOptions);
 ```
 
+SurveyJS is shipped with a number of [predefined UI themes for surveys](https://surveyjs.io/form-library/documentation/manage-default-themes-and-styles#add-surveyjs-themes-to-your-application). By default, users can customize only the Default theme. To add other themes to Theme Editor, use the following code:
+
+```js
+// In modular applications
+import SurveyTheme from "survey-core/themes"; // An object that contains all theme configurations
+import { registerSurveyTheme } from "survey-creator-core";
+
+registerSurveyTheme(SurveyTheme);
+```
+
+```html
+<!-- In classic script applications -->
+<head>
+    <!-- ... -->
+    <script type="text/javascript" src="https://unpkg.com/survey-core/themes/index.min.js"></script>
+    <!-- ... -->
+</head>
+<body>
+  <script>
+    SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
+  </script>
+</body>
+```
+
 ## Apply a Custom Theme
 
 Theme Editor produces a JSON object with CSS variables and other theme settings. For information on how to obtain this object and apply it to a survey, refer to the following help topic in Form Library documentation: [Create a Custom Theme](/form-library/documentation/manage-default-themes-and-styles#create-a-custom-theme).
@@ -52,7 +76,7 @@ An incremental number of the current change. Since web services are asynchronous
 - `callback`        
 A callback function. Call it and pass `saveNo` as the first argument. Set the second argument to `true` or `false` based on whether the server applied or rejected the change.
 
-The following code shows how to use the `saveThemeFunc` function to save a survey model schema in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
+The following code shows how to use the `saveThemeFunc` function to save a survey model schema in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
 
 ```js
 import { SurveyCreatorModel } from "survey-creator-core";
@@ -64,7 +88,7 @@ const creator = new SurveyCreatorModel(creatorOptions);
 
 creator.saveThemeFunc = (saveNo, callback) => { 
   // If you use localStorage:
-  window.localStorage.setItem("survey-theme-json", creator.theme);
+  window.localStorage.setItem("survey-theme-json", JSON.stringify(creator.theme));
   callback(saveNo, true);
 
   // If you use a web service:
@@ -98,14 +122,26 @@ function saveThemeJson(url, json, saveNo, callback) {
 }
 ```
 
-To load a theme JSON object into Theme Editor, assign the object to Survey Creator's [`theme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#theme) property. The following code takes a theme JSON object from `localStorage`:
-
+To load a theme JSON object into Theme Editor, assign the object to Survey Creator's [`theme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#theme) property. The following code takes a theme JSON object from the `localStorage`:
 
 ```js
-creator.theme = window.localStorage.getItem("survey-theme-json");
+const savedTheme = window.localStorage.getItem("survey-theme-json");
+if (savedTheme) {
+    creator.theme = JSON.parse(savedTheme); 
+}
 ```
+
+You can also add UI elements that allow users to save, apply, and reuse custom themes. To implement this advanced functionality, refer to the following demo:
+
+[View "Add Reusable Themes" Demo](https://surveyjs.io/survey-creator/examples/save-custom-theme/ (linkStyle))
+
+## Customize the Property Grid
+
+Refer to the following demo for details on Theme Editor's Property Grid customization:
+
+[Manage Theme Settings](/survey-creator/examples/theme-editor-modify-settings-panel/ (linkStyle))
 
 ## See Also
 
 - [Themes & Styles](/form-library/documentation/manage-default-themes-and-styles)
-- Save and Load Survey Model Schemas: [Angular](https://surveyjs.io/survey-creator/documentation/get-started-angular#save-and-load-survey-model-schemas) | [Vue](https://surveyjs.io/survey-creator/documentation/get-started-vue#save-and-load-survey-model-schemas) | [React](https://surveyjs.io/survey-creator/documentation/get-started-react#save-and-load-survey-model-schemas) | [Knockout / jQuery](https://surveyjs.io/survey-creator/documentation/get-started-knockout-jquery)
+- Save and Load Survey Model Schemas: [Angular](https://surveyjs.io/survey-creator/documentation/get-started-angular#save-and-load-survey-model-schemas) | [Vue](https://surveyjs.io/survey-creator/documentation/get-started-vue#save-and-load-survey-model-schemas) | [React](https://surveyjs.io/survey-creator/documentation/get-started-react#save-and-load-survey-model-schemas) | [HTML/CSS/JavaScript](https://surveyjs.io//survey-creator/documentation/get-started-html-css-javascript#save-and-load-survey-model-schemas)

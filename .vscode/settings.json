@@ -23,5 +23,7 @@
     "editor.tabSize": 2,
     "editor.formatOnSave": true,
     "eslint.format.enable": true,
-    "editor.accessibilitySupport": "off"
+    "editor.accessibilitySupport": "off",
+    "testing.openTesting": "neverOpen",
+    "testing.automaticallyOpenTestResults": "neverOpen"
 }

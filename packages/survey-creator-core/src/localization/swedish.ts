@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export let svStrings = {
   // survey templates
@@ -15,6 +15,15 @@ export let svStrings = {
     deleteQuestion: "Radera Fråga",
     convertTo: "Konvertera till",
     drag: "Dra element",
+  },
+  // Creator tabs
+  tabs: {
+    preview: "Testa enkät",
+    theme: "Teman",
+    translation: "Översättning",
+    designer: "Enkät Designer",
+    json: "JSON Redigering",
+    logic: "Logik"
   },
   // Question types
   qt: {
@@ -42,6 +51,14 @@ export let svStrings = {
     signaturepad: "Underskrift",
     buttongroup: "Knappgrupp"
   },
+  toolboxCategories: {
+    general: "Generellt",
+    choice: "Frågor om val",
+    text: "Frågor om textinmatning",
+    containers: "Behållare",
+    matrix: "Matris frågor",
+    misc: "Misc"
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Standard ({0})",
@@ -52,6 +69,7 @@ export let svStrings = {
     surveySettingsTooltip: "Inställningar för undersökning",
     themeSettings: "Tema Inställningar",
     themeSettingsTooltip: "Inställningar för tema",
+    creatorSettingTitle: "Inställningar för kreatör",
     showPanel: "Visa panel",
     hidePanel: "Dölj panel",
     prevSelected: "Välj föregående",
@@ -72,30 +90,31 @@ export let svStrings = {
     newPageName: "sida",
     newQuestionName: "fråga",
     newPanelName: "panel",
-    newTextItemName: "SMS",
-    testSurvey: "Test enkät",
-    themeSurvey: "Teman",
+    newTextItemName: "text",
     defaultV2Theme: "Standard",
     modernTheme: "Modern",
     defaultTheme: "Standard (äldre)",
     testSurveyAgain: "Testa enkät igen",
     testSurveyWidth: "Enkät bredd: ",
     navigateToMsg: "Du var tvungen att navigera till",
-    logic: "Logik",
-    embedSurvey: "Integrerad Enkät",
-    translation: "Översättning",
     saveSurvey: "Spara Enkät",
     saveSurveyTooltip: "Spara undersökning",
     saveTheme: "Spara tema",
     saveThemeTooltip: "Spara tema",
-    designer: "Enkät Designer",
-    jsonEditor: "JSON Redigering",
     jsonHideErrors: "Dölj fel",
     jsonShowErrors: "Visa fel",
     undo: "Ångra",
     redo: "Göra om",
     undoTooltip: "Ångra senaste ändring",
     redoTooltip: "Gör om ändringen",
+    expandTooltip: "Expandera",
+    collapseTooltip: "Kollaps",
+    expandAllTooltip: "Expandera alla",
+    collapseAllTooltip: "Komprimera alla",
+    zoomInTooltip: "Zooma in",
+    zoom100Tooltip: "Zooma till 100 %",
+    zoomOutTooltip: "Zooma ut",
+    lockQuestionsTooltip: "Lås expandera/komprimera tillstånd för frågor",
     showMoreChoices: "Visa mer",
     showLessChoices: "Visa mindre",
     copy: "Kopia",
@@ -109,14 +128,12 @@ export let svStrings = {
     generateReadableJSON: "Generera läsbar JSON",
     toolbox: "Verktygslista",
     "property-grid": "Egenskaper",
+    toolboxFilteredTextPlaceholder: "Skriv för att söka...",
+    toolboxNoResultsFound: "Inga resultat hittades",
     propertyGridFilteredTextPlaceholder: "Skriv för att söka...",
     propertyGridNoResultsFound: "Inga resultat hittades",
-    toolboxGeneralCategory: "Generellt",
-    toolboxChoiceCategory: "Frågor om val",
-    toolboxTextCategory: "Frågor om textinmatning",
-    toolboxContainersCategory: "Behållare",
-    toolboxMatrixCategory: "Matris frågor",
-    toolboxMiscCategory: "Misc",
+    propertyGridPlaceholderTitle: "Börja konfigurera formuläret",
+    propertyGridPlaceholderDescription: "Klicka på en kategoriikon för att utforska undersökningsinställningarna. Ytterligare inställningar blir tillgängliga när du lägger till ett undersökningselement på designytan.",
     correctJSON: "Var vänligen korrigera JSON.",
     surveyResults: "Enkät resultat: ",
     surveyResultsTable: "Som tabell",
@@ -132,6 +149,7 @@ export let svStrings = {
     saveError: "Fel! Innehållet i enkäten är inte sparat.",
     translationPropertyGridTitle: "Språkinställningar",
     themePropertyGridTitle: "Tema Inställningar",
+    addLanguageTooltip: "Lägg till språk",
     translationLanguages: "Språk",
     translationDeleteLanguage: "Är du säker på att du vill ta bort alla strängar för det här språket?",
     translationAddLanguage: "Välj språk för oversättning",
@@ -148,6 +166,7 @@ export let svStrings = {
     translationPlaceHolder: "Översättning...",
     translationSource: "Källa: ",
     translationTarget: "Mål: ",
+    translationYouTubeNotSupported: "YouTube-länkar stöds inte.",
     themeExportButton: "Export",
     themeImportButton: "Import",
     surveyJsonExportButton: "Export",
@@ -170,6 +189,22 @@ export let svStrings = {
     surveyPlaceHolder: "Enkäten är tom. Dra ett element från verktygslådan eller klicka på knappen nedan.",
     pagePlaceHolder: "Sidan är tom. Dra ett element från verktygslådan eller klicka på knappen nedan.",
     imagePlaceHolder: "Dra och släpp en bild här eller klicka på knappen nedan och välj en bild att ladda upp",
+    surveyPlaceHolderMobile: "Klicka på knappen \"Lägg till fråga\" nedan för att börja skapa ditt formulär.",
+    surveyPlaceholderTitle: "Formuläret är tomt",
+    surveyPlaceholderTitleMobile: "Formuläret är tomt",
+    surveyPlaceholderDescription: "Dra ett element från verktygslådan eller klicka på knappen nedan.",
+    surveyPlaceholderDescriptionMobile: "Dra ett element från verktygslådan eller klicka på knappen nedan.",
+    previewPlaceholderTitle: "Ingen förhandsgranskning",
+    previewPlaceholderTitleMobile: "Ingen förhandsgranskning",
+    previewPlaceholderDescription: "Undersökningen innehåller inga synliga element.",
+    previewPlaceholderDescriptionMobile: "Undersökningen innehåller inga synliga element.",
+    translationsPlaceholderTitle: "Inga strängar att översätta",
+    translationsPlaceholderTitleMobile: "Inga strängar att översätta",
+    translationsPlaceholderDescription: "Lägg till element i formuläret eller ändra strängfiltret i verktygsfältet.",
+    translationsPlaceholderDescriptionMobile: "Lägg till element i formuläret eller ändra strängfiltret i verktygsfältet.",
+    pagePlaceHolderMobile: "Klicka på knappen \"Lägg till fråga\" nedan för att lägga till ett nytt element på sidan.",
+    panelPlaceHolderMobile: "Klicka på knappen \"Lägg till fråga\" nedan för att lägga till ett nytt element i panelen.",
+    imagePlaceHolderMobile: "Klicka på knappen nedan och välj en bild att ladda upp",
     imageChooseImage: "Välj bild",
     addNewTypeQuestion: "Lägg till {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGOTYP]",
@@ -179,6 +214,10 @@ export let svStrings = {
     lg: {
       addNewItem: "Lägg till ny regel",
       empty_tab: "Skapa en regel för att anpassa undersökningens flöde.",
+      logicPlaceholderTitle: "Inga logiska regler",
+      logicPlaceholderTitleMobile: "Inga logiska regler",
+      logicPlaceholderDescription: "Skapa en regel för att anpassa flödet i undersökningen.",
+      logicPlaceholderDescriptionMobile: "Skapa en regel för att anpassa flödet i undersökningen.",
       page_visibilityName: "Visa (dölj) sida",
       page_enableName: "Aktivera (inaktivera) sida",
       page_requireName: "Gör sidan obligatorisk",
@@ -221,13 +260,13 @@ export let svStrings = {
       question_visibilityText: "Gör frågan {0} synlig", //{0} question name
       question_enableText: "Gör frågan {0} aktivera", //{0} question name
       question_requireText: "Gör frågan {0} krävs", //{0} question name
-      question_resetValueText: "Återställ värde för fråga: {0}",
+      question_resetValueText: "Återställ värde för fråga: {0}", //{0} question name.
       question_setValueText: "Tilldela värde: {1} till fråga: {0}",
       column_visibilityText: "Synliggör kolumn {0} av fråga {1}", //{0} column name, {1} question name
       column_enableText: "Gör kolumn {0} av fråga {1} aktivera", //{0} column name, {1} question name
       column_requireText: "Gör kolumn {0} av fråga {1} krävs", //{0} column name, {1} question name
-      column_resetValueText: "Återställ cellvärde för kolumn: {0}",
-      column_setValueText: "Tilldela cellvärde: {1} till kolumn: {0}",
+      column_resetValueText: "Återställ cellvärde för kolumn: {0}", //{0} column name
+      column_setValueText: "Tilldela cellvärde: {1} till kolumn: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Ett uttryck vars resultat kommer att tilldelas målfrågan.",
       trigger_completeText: "Undersökningen blir slutförd",
       trigger_setvalueText: "ifrågasätts: {0} värde {1}", //{0} question name, {1} setValue
@@ -263,14 +302,18 @@ export let svStrings = {
       description: "Beskrivning av panelen",
       visibleIf: "Gör panelen synlig om",
       requiredIf: "Gör panelen obligatorisk om",
-      questionsOrder: "Frågeordning i panelen",
+      questionOrder: "Frågeordning i panelen",
       page: "Överordnad sida",
       startWithNewLine: "Visa panelen på en ny rad",
       state: "Panelens komprimerade tillstånd",
       width: "Bredd på infogad panel",
       minWidth: "Minsta panelbredd",
       maxWidth: "Maximal panelbredd",
-      showNumber: "Sifferpaneler"
+      showNumber: "Numrera den här panelen"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Effektiv bredd, %",
+      questionTitleWidth: "Frågans titelbredd, px"
     },
     paneldynamic: {
       name: "Panelens namn",
@@ -289,13 +332,16 @@ export let svStrings = {
       templateTitle: "Mönster för panelrubrik",
       noEntriesText: "Tom paneltext",
       templateTabTitle: "Mönster för flikrubrik",
+      tabTitlePlaceholder: "Platshållare för flikrubrik",
       templateVisibleIf: "Gör en enskild panel synlig om",
-      hideNumber: "Dölj panelnumret",
+      showNumber: "Numrera panelen",
       titleLocation: "Justering av panelrubrik",
       descriptionLocation: "Justering av panelbeskrivning",
-      templateTitleLocation: "Justering av frågerubrik",
+      templateQuestionTitleLocation: "Justering av frågerubrik",
+      templateQuestionTitleWidth: "Bredd på frågetitel",
       templateErrorLocation: "Justering av felmeddelande",
       newPanelPosition: "Ny panelplats",
+      showRangeInProgress: "Visa förloppsindikatorn",
       keyName: "Förhindra dubbletter av svar i följande fråga"
     },
     question: {
@@ -306,7 +352,7 @@ export let svStrings = {
       requiredIf: "Gör frågan obligatorisk om",
       page: "Överordnad sida",
       state: "Komprimeringstillstånd för frågeruta",
-      hideNumber: "Dölj frågans nummer",
+      showNumber: "Numrera den här frågan",
       titleLocation: "Justering av frågerubrik",
       descriptionLocation: "Justering av frågebeskrivning",
       errorLocation: "Justering av felmeddelande",
@@ -348,7 +394,8 @@ export let svStrings = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Beskrivning av undersökningen"
+      description: "Beskrivning av undersökningen",
+      readOnly: "Gör undersökningen skrivskyddad"
     },
     page: {
       name: "Sidans namn",
@@ -356,8 +403,8 @@ export let svStrings = {
       description: "Beskrivning av sidan",
       visibleIf: "Gör sidan synlig om",
       requiredIf: "Gör sidan obligatorisk om",
-      maxTimeToFinish: "Tidsgräns för att avsluta sidan (i sekunder)",
-      questionsOrder: "Frågeordning på sidan"
+      timeLimit: "Tidsgräns för att avsluta sidan (i sekunder)",
+      questionOrder: "Frågeordning på sidan"
     },
     matrixdropdowncolumn: {
       name: "Kolumnens namn",
@@ -399,9 +446,13 @@ export let svStrings = {
     imageHeight: "Bild höjd",
     imageWidth: "Bild bredd",
     valueName: "Värde namn",
+    defaultDisplayValue: "Standardvisningsvärde för dynamiska texter",
     rateDescriptionLocation: "Justering av etiketter",
     size: "Inmatningsfältets storlek (i tecken)",
     cellErrorLocation: "Justering av cellfelmeddelande",
+    enabled: "Aktiverat",
+    disabled: "Inaktiverad",
+    inherit: "Ärva",
     apply: "Faställ",
     ok: "OK",
     save: "Spara",
@@ -463,11 +514,13 @@ export let svStrings = {
     listIsEmpty: "Inga objekt har lagts till ännu",
     "listIsEmpty@choices": "Inga alternativ har lagts till ännu",
     "listIsEmpty@columns": "Du har inga kolumner ännu",
+    "listIsEmpty@gridLayoutColumns": "Du har inga layoutkolumner ännu",
     "listIsEmpty@rows": "Du har inga rader ännu",
     "listIsEmpty@validators": "Du har inga valideringsregler ännu",
     "listIsEmpty@calculatedValues": "Du har inga anpassade variabler ännu",
     "listIsEmpty@triggers": "Du har inga utlösare ännu",
     "listIsEmpty@navigateToUrlOnCondition": "Du har inga länkar ännu",
+    "listIsEmpty@pages": "Du har inga sidor ännu",
     "addNew@choices": "Lägg till ett val",
     "addNew@columns": "Lägg till ny kolumn",
     "addNew@rows": "Lägg till ny rad",
@@ -475,6 +528,7 @@ export let svStrings = {
     "addNew@calculatedValues": "Lägg till ny variabel",
     "addNew@triggers": "Lägga till ny utlösare",
     "addNew@navigateToUrlOnCondition": "Lägg till ny URL",
+    "addNew@pages": "Lägg till ny sida",
     expressionIsEmpty: "Uttrycket är tomt",
     value: "Värde",
     text: "Text",
@@ -494,6 +548,7 @@ export let svStrings = {
     titlePlaceholder: "Titel",
     surveyTitlePlaceholder: "Undersökningens titel",
     pageTitlePlaceholder: "Sida {num}",
+    startPageTitlePlaceholder: "Startsida",
     descriptionPlaceholder: "Beskrivning",
     surveyDescriptionPlaceholder: "Beskrivning",
     pageDescriptionPlaceholder: "Beskrivning",
@@ -514,11 +569,12 @@ export let svStrings = {
     cellType: "Cell typ",
     colCount: "Antal kolumner",
     choicesOrder: "Välj ordning på valet",
+    allowCustomChoices: "Tillåt anpassade val",
     visible: "Synlig?",
     isRequired: "Nödvändig?",
     markRequired: "Markera efter behov",
     removeRequiredMark: "Ta bort det obligatoriska märket",
-    isAllRowRequired: "Kräv svar för alla rader",
+    eachRowRequired: "Kräv svar för alla rader",
     eachRowUnique: "Förhindra dubbletter av svar i rader",
     requiredErrorText: "Felmeddelandet \"Obligatoriskt\"",
     startWithNewLine: "Starta på en ny rad?",
@@ -530,7 +586,7 @@ export let svStrings = {
     maxSize: "Max filstorlek i bytes",
     rowCount: "Antal rader",
     columnLayout: "Stil på kolumn",
-    addRowLocation: "Lägg till radknapp plats",
+    addRowButtonLocation: "Lägg till radknapp plats",
     transposeData: "Transponera rader till kolumner",
     addRowText: "Lägg till knapp text",
     removeRowText: "Ta bort rad knapp text",
@@ -566,10 +622,9 @@ export let svStrings = {
     simulator: "Välj enhetstyp",
     landscapeOrientation: "Växla till liggande orientering",
     portraitOrientation: "Växla till stående orientering",
-    mode: "Läge (redigera/läsa enbart)",
     clearInvisibleValues: "Rensa osynliga värden",
     cookieName: "Kaknamn (för att inaktivera kör enkäten två gånger lokalt)",
-    sendResultOnPageNext: "Skicka enkät resultatet till nästa sida",
+    partialSendEnabled: "Skicka enkät resultatet till nästa sida",
     storeOthersAsComment: "Lagra 'andra' värden i ett separat fält",
     showPageTitles: "Visa sidtitel",
     showPageNumbers: "Visa sidnummer",
@@ -580,34 +635,38 @@ export let svStrings = {
     editText: "Text för knappen Redigera svar",
     startSurveyText: "Start knapp text",
     showNavigationButtons: "Visa navigationsknappar (standard navigering)",
+    navigationButtonsLocation: "Justering av navigeringsknappar",
     showPrevButton: "Visa föregående knapp (användaren kan gå återgå till föregående sida)",
-    firstPageIsStarted: "Den första sidan i enkäten är startsidan.",
-    showCompletedPage: "Visa den slutförda sidan på slutet (completedHtml)",
-    goNextPageAutomatic: "Vid besvarande av alla frågor, gå till nästa sida automatiskt",
-    allowCompleteSurveyAutomatic: "Fyll i enkäten automatiskt",
+    firstPageIsStartPage: "Den första sidan i enkäten är startsidan.",
+    showCompletePage: "Visa den slutförda sidan på slutet (completedHtml)",
+    autoAdvanceEnabled: "Vid besvarande av alla frågor, gå till nästa sida automatiskt",
+    autoAdvanceAllowComplete: "Fyll i enkäten automatiskt",
     showProgressBar: "Visa händelsförlopp",
+    progressBarLocation: "Justering av förloppsindikator",
     questionTitleLocation: "Fråga titel placering",
-    requiredText: "Var vänlig skriv en text",
+    questionTitleWidth: "Bredd på frågerubrik",
+    requiredMark: "Var vänlig skriv en text",
     questionTitleTemplate: "Fråga titel mall, standard är: '{no}. {require} {title}'",
     questionErrorLocation: "Fråga fel placerad",
-    focusFirstQuestionAutomatic: "Fokusera på första frågan vid ändring av sidan",
-    questionsOrder: "Element ordning på sidan",
-    maxTimeToFinish: "Max tid för att slutföra enkäten",
-    maxTimeToFinishPage: "Max tid för att göra färdigt en sida i enkäten",
-    showTimerPanel: "Visa tidtagning",
-    showTimerPanelMode: "Visa tidtagning läge",
+    autoFocusFirstQuestion: "Fokusera på första frågan vid ändring av sidan",
+    questionOrder: "Element ordning på sidan",
+    timeLimit: "Max tid för att slutföra enkäten",
+    timeLimitPerPage: "Max tid för att göra färdigt en sida i enkäten",
+    showTimer: "Använd en timer",
+    timerLocation: "Visa tidtagning",
+    timerInfoMode: "Visa tidtagning läge",
     renderMode: "Rendering läge",
     allowAddPanel: "Tillåt att lägga till panel",
     allowRemovePanel: "Tillåt att ta bort panel",
-    panelAddText: "Lägg till panel text",
-    panelRemoveText: "Ta bort panel text",
+    addPanelText: "Lägg till panel text",
+    removePanelText: "Ta bort panel text",
     isSinglePage: "Visa alla element på en sida",
     html: "HTML-kod",
     setValue: "Svar",
     dataFormat: "Bildformat",
     allowAddRows: "Tillåt att rader läggs till",
     allowRemoveRows: "Tillåt borttagning av rader",
-    allowRowsDragAndDrop: "Tillåt dra och släpp rader",
+    allowRowReorder: "Tillåt dra och släpp rader",
     responsiveImageSizeHelp: "Gäller inte om du anger bildens exakta bredd eller höjd.",
     minImageWidth: "Minsta bildbredd",
     maxImageWidth: "Maximal bildbredd",
@@ -615,6 +674,7 @@ export let svStrings = {
     maxImageHeight: "Maximal bildhöjd",
     minValue: "Minsta värde",
     maxValue: "Maximalt värde",
+    caseInsensitive: "Skiftlägesokänsligt",
     minLength: "Minsta längd (i tecken)",
     allowDigits: "Tillåt siffror",
     minCount: "Minsta antal",
@@ -633,20 +693,15 @@ export let svStrings = {
     logo: "Logotyp (URL eller base64-kodad sträng)",
     questionsOnPageMode: "Undersökningens struktur",
     maxTextLength: "Maximal svarslängd (i tecken)",
-    maxOthersLength: "Maximal kommentarslängd (i tecken)",
+    maxCommentLength: "Maximal kommentarslängd (i tecken)",
+    commentAreaRows: "Kommentarsfältets höjd (i rader)",
     autoGrowComment: "Expandera kommentarsområdet automatiskt om det behövs",
     allowResizeComment: "Tillåt användare att ändra storlek på textområden",
     textUpdateMode: "Uppdatera textfrågevärde",
     maskType: "Typ av indatamask",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mönster",
-      numericmask: "Numerisk",
-      datetimemask: "Datum och tid",
-      currencymask: "Valuta"
-    },
-    focusOnFirstError: "Ställ in fokus på det första ogiltiga svaret",
+    autoFocusFirstError: "Ställ in fokus på det första ogiltiga svaret",
     checkErrorsMode: "Kör validering",
+    validateVisitedEmptyFields: "Validera tomma fält vid förlorat fokus",
     navigateToUrl: "Navigera till URL",
     navigateToUrlOnCondition: "Dynamisk URL",
     completedBeforeHtml: "Markering för att visa om användaren redan har fyllt i undersökningen",
@@ -678,10 +733,9 @@ export let svStrings = {
     minPanelCount: "Minsta antal paneler",
     maxPanelCount: "Maximalt antal paneler",
     panelsState: "Expanderingsläge för innerpanelen",
-    panelPrevText: "Knappbeskrivning för föregående panel",
-    panelNextText: "Knappbeskrivning för knappen Nästa panel",
-    showRangeInProgress: "Visa förloppsindikator",
-    panelRemoveButtonLocation: "Ta bort panelknappens placering",
+    prevPanelText: "Knappbeskrivning för föregående panel",
+    nextPanelText: "Knappbeskrivning för knappen Nästa panel",
+    removePanelButtonLocation: "Ta bort panelknappens placering",
     hideIfRowsEmpty: "Dölj frågan om det inte finns några rader",
     hideColumnsIfEmpty: "Dölj kolumner om det inte finns några rader",
     rateValues: "Anpassade prisvärden",
@@ -703,26 +757,28 @@ export let svStrings = {
     keyDuplicationError: "Felmeddelandet \"Icke-unikt nyckelvärde\"",
     minSelectedChoices: "Minsta valda val",
     maxSelectedChoices: "Maximalt antal valda val",
-    showClearButton: "Visa knappen Rensa",
     logoWidth: "Logotypbredd (i CSS-godkända värden)",
     logoHeight: "Logotypens höjd (i CSS-godkända värden)",
     readOnly: "Skrivskyddad",
     enableIf: "Redigerbar om",
-    emptyRowsText: "Meddelandet \"Inga rader\"",
+    noRowsText: "Meddelandet \"Inga rader\"",
     separateSpecialChoices: "Avgränsa specialval (Ingen, Annat, Markera alla)",
     choicesFromQuestion: "Kopiera alternativ från följande fråga",
     choicesFromQuestionMode: "Vilka val ska du kopiera?",
+    choiceValuesFromQuestion: "Använd värden från följande matriskolumn eller panelfråga som val-ID:t",
+    choiceTextsFromQuestion: "Använd värden från följande matriskolumn eller panelfråga som valtexter",
     progressBarShowPageTitles: "Visa sidrubriker i förloppsindikatorn",
     progressBarShowPageNumbers: "Visa sidnummer i förloppsindikatorn",
     showCommentArea: "Visa kommentarsområdet",
     commentPlaceholder: "Platshållare för kommentarsområde",
     displayRateDescriptionsAsExtremeItems: "Visa hastighetsbeskrivningar som extremvärden",
-    rowsOrder: "Radordning",
+    rowOrder: "Radordning",
     columnsLayout: "Kolumnlayout",
     columnColCount: "Kapslat antal kolumner",
     correctAnswer: "Rätt svar",
     defaultPanelValue: "Standardvärden",
     cells: "Cell texter",
+    fileInputPlaceholder: "Välj en fil eller klistra in en fillänk...",
     keyName: "Kolumnen Nyckel",
     itemvalue: {
       visibleIf: "Gör alternativet synligt om",
@@ -745,6 +801,12 @@ export let svStrings = {
       top: "På toppen",
       bottom: "I botten"
     },
+    previewMode: "Förhandsgranska läge",
+    gridLayoutEnabled: "Aktivera rutnätslayouten",
+    gridLayoutColumns: "Kolumner för rutnätslayout",
+    maskSettings: "Inställningar för mask",
+    detailErrorLocation: "Felmeddelande om radexpansion",
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Panelens layout"
@@ -788,6 +850,12 @@ export let svStrings = {
       slider: "Skjutreglage",
       expression: "Uttryck",
       questionSettings: "Inställningar för frågor",
+      header: "Rubrik",
+      background: "Bakgrund",
+      appearance: "Utseende",
+      accentColors: "Accentfärger",
+      surfaceBackground: "Yta Bakgrund",
+      scaling: "Skalning",
       others: "Andra"
     },
     editProperty: "Redigera egenskap '{0}'",
@@ -797,8 +865,7 @@ export let svStrings = {
     columnsEnableIf: "Kolumner visas om",
     rowsEnableIf: "Raderna visas om",
     innerIndent: "Lägga till inre indrag",
-    defaultValueFromLastRow: "Ta standardvärden från den sista raden",
-    defaultValueFromLastPanel: "Ta standardvärden från den sista panelen",
+    copyDefaultValueFromLastEntry: "Använd svar från den senaste posten som standard",
     enterNewValue: "Vänligen skriv in ett värde.",
     noquestions: "Det finns ingen fråga i enkäten.",
     createtrigger: "Vänligen skapa en trigger",
@@ -840,7 +907,52 @@ export let svStrings = {
     minWidth_placeholder: "Ex.: 600px",
     maxWidth_placeholder: "Ex.: 50%",
     imageHeight_placeholder: "bil",
-    imageWidth_placeholder: "bil"
+    imageWidth_placeholder: "bil",
+    itemTitleWidth_placeholder: "Ex.: 100px",
+    theme: {
+      themeName: "Tema",
+      isPanelless: "Frågans utseende",
+      editorPanel: "Bakgrund och hörnradie",
+      questionPanel: "Bakgrund och hörnradie",
+      primaryColor: "Accentfärg",
+      panelBackgroundTransparency: "Opacitet för panelbakgrund",
+      questionBackgroundTransparency: "Opacitet för frågebakgrund",
+      fontSize: "Teckenstorlek",
+      scale: "Skala",
+      cornerRadius: "Hörn radie",
+      advancedMode: "Avancerat läge",
+      pageTitle: "Titel typsnitt",
+      pageDescription: "Beskrivning teckensnitt",
+      questionTitle: "Titel typsnitt",
+      questionDescription: "Beskrivning teckensnitt",
+      editorFont: "Teckensnitt",
+      backgroundOpacity: "Ogenomskinlighet",
+      "--sjs-font-family": "Teckensnitt familj",
+      "--sjs-general-backcolor-dim": "Bakgrundsfärg",
+      "--sjs-primary-backcolor": "Accent bakgrund",
+      "--sjs-primary-forecolor": "Accent förgrund",
+      "--sjs-special-red": "Felmeddelanden",
+      "--sjs-shadow-small": "Skugga effekter",
+      "--sjs-shadow-inner": "Skugga effekter",
+      "--sjs-border-default": "Färger"
+    },
+    "header@header": {
+      headerView: "Utsikt",
+      logoPosition: "Logotypens placering",
+      surveyTitle: "Teckensnitt för undersökningens titel",
+      surveyDescription: "Teckensnitt för undersökningsbeskrivning",
+      headerTitle: "Teckensnitt för undersökningens titel",
+      headerDescription: "Teckensnitt för undersökningsbeskrivning",
+      inheritWidthFrom: "Bredd på innehållsområdet",
+      textAreaWidth: "Textens bredd",
+      backgroundColorSwitch: "Bakgrundsfärg",
+      backgroundImage: "Bakgrundsbild",
+      backgroundImageOpacity: "Ogenomskinlighet",
+      overlapEnabled: "Överlappa",
+      logoPositionX: "Logotypens placering",
+      titlePositionX: "Titel position",
+      descriptionPositionX: "Beskrivning position"
+    }
   },
   // Property values
   pv: {
@@ -869,10 +981,11 @@ export let svStrings = {
     firstExpanded: "firstExpanded",
     off: "off",
     list: "list",
+    carousel: "Karusell",
+    tab: "Flikar",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Flikar",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "top",
@@ -894,7 +1007,7 @@ export let svStrings = {
     password: "lösenord",
     range: "sortiment",
     tel: "Tel",
-    text: "SMS",
+    text: "Text",
     time: "Tid",
     url: "URL",
     week: "vecka",
@@ -925,16 +1038,83 @@ export let svStrings = {
       password: "Lösenord",
       range: "Sortiment",
       tel: "Telefonnummer",
-      text: "SMS",
+      text: "Text",
       time: "Tid",
       url: "URL",
       week: "Vecka"
     },
-    all: "all",
-    page: "page",
-    survey: "survey",
-    onNextPage: "onNextPage",
-    onValueChanged: "onValueChanged",
+    autocomplete: {
+      name: "Fullständigt namn",
+      "honorific-prefix": "Prefix",
+      "given-name": "Förnamn",
+      "additional-name": "Mellannamn",
+      "family-name": "Efternamn",
+      "honorific-suffix": "Suffix",
+      nickname: "Smeknamn",
+      "organization-title": "Befattning",
+      username: "Användarnamn",
+      "new-password": "Nytt lösenord",
+      "current-password": "Aktuellt lösenord",
+      organization: "Organisationens namn",
+      "street-address": "Fullständig gatuadress",
+      "address-line1": "Adress, rad 1",
+      "address-line2": "Adress Rad 2",
+      "address-line3": "Adress: Rad 3",
+      "address-level4": "Nivå 4 Adress",
+      "address-level3": "Nivå 3 Adress",
+      "address-level2": "Nivå 2 Adress",
+      "address-level1": "Nivå 1 Adress",
+      country: "Landskod",
+      "country-name": "Landets namn",
+      "postal-code": "Postnummer",
+      "cc-name": "Kortinnehavarens namn",
+      "cc-given-name": "Kortinnehavarens förnamn",
+      "cc-additional-name": "Kortinnehavarens mellannamn",
+      "cc-family-name": "Kortinnehavarens efternamn",
+      "cc-number": "Kreditkortsnummer",
+      "cc-exp": "Utgångsdatum",
+      "cc-exp-month": "Förfallomånad",
+      "cc-exp-year": "Utgångsdatum",
+      "cc-csc": "Kortets säkerhetskod",
+      "cc-type": "Typ av kreditkort",
+      "transaction-currency": "Transaktionsvalutan",
+      "transaction-amount": "Transaktionens belopp",
+      language: "Önskat språk",
+      bday: "Födelsedag",
+      "bday-day": "Födelsedag",
+      "bday-month": "Födelsedag Månad",
+      "bday-year": "Födelsedag År",
+      sex: "Genus",
+      url: "Webbadress",
+      photo: "Profilbild",
+      tel: "Telefonnummer",
+      "tel-country-code": "Landskod för telefon",
+      "tel-national": "Nationellt telefonnummer",
+      "tel-area-code": "Riktnummer",
+      "tel-local": "Lokalt telefonnummer",
+      "tel-local-prefix": "Prefix för lokal telefon",
+      "tel-local-suffix": "Suffix för lokal telefon",
+      "tel-extension": "Telefonanknytning",
+      email: "E-postadress",
+      impp: "Protokoll för snabbmeddelanden"
+    },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mönster",
+      numeric: "Numerisk",
+      datetime: "Datum och tid",
+      currency: "Valuta"
+    },
+    inputTextAlignment: {
+      auto: "Automatisk",
+      left: "Vänster",
+      right: "Höger"
+    },
+    all: "Alla",
+    page: "Sidan",
+    survey: "Enkät",
+    onNextPage: "På nästa sida",
+    onValueChanged: "På värdeförändring",
     onValueChanging: "Innan ett svar ändras",
     questionsOnPageMode: {
       standard: "Ursprunglig struktur",
@@ -944,6 +1124,8 @@ export let svStrings = {
     noPreview: "Ingen förhandsgranskning",
     showAllQuestions: "Visa alla frågor",
     showAnsweredQuestions: "Visa endast besvarade frågor",
+    allQuestions: "Visa alla frågor",
+    answeredQuestions: "Visa endast besvarade frågor",
     pages: "Avslutade sidor",
     questions: "Besvarade frågor",
     requiredQuestions: "Besvarade obligatoriska frågor",
@@ -955,17 +1137,14 @@ export let svStrings = {
     onTyping: "Medan du skriver",
     underRow: "Under raden",
     underRowSingle: "Under raden syns bara en panel",
-    auto: "Bil",
+    auto: "Automatisk",
     showNavigationButtons: {
       none: "Dold"
     },
-    showTimerPanel: {
-      none: "Dold"
+    timerInfoMode: {
+      combined: "Båda"
     },
-    showTimerPanelMode: {
-      all: "Båda"
-    },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "Beror på matrislayout"
     },
     panelsState: {
@@ -1013,6 +1192,7 @@ export let svStrings = {
       onPage: "Återställ på varje sida",
       onpanel: "Återställ på varje panel",
       onPanel: "Återställ på varje panel",
+      recursive: "Rekursiv numrering",
       onSurvey: "Fortsätt genom undersökningen",
       off: "Ingen numrering"
     },
@@ -1036,16 +1216,19 @@ export let svStrings = {
       percent: "Procent",
       date: "Datum"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "Original"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "Original"
     },
-    showProgressBar: {
-      off: "Dold",
-      aboveHeader: "Ovanför sidhuvudet",
-      belowHeader: "Nedanför rubriken"
+    progressBarLocation: {
+      top: "Topp",
+      bottom: "Botten",
+      topbottom: "Topp och botten",
+      aboveheader: "Ovanför sidhuvudet",
+      belowheader: "Nedanför sidhuvudet",
+      off: "Dold"
     },
     sum: "Summa",
     count: "Räkna",
@@ -1055,6 +1238,42 @@ export let svStrings = {
     searchMode: {
       contains: "Innehåller",
       startsWith: "Börjar med"
+    },
+    backgroundImageFit: {
+      auto: "Automatisk",
+      cover: "Täcka",
+      contain: "Innehålla",
+      fill: "Tänja",
+      tile: "Kakel"
+    },
+    backgroundImageAttachment: {
+      fixed: "Fast",
+      scroll: "Rulla"
+    },
+    headerView: {
+      basic: "Grundläggande",
+      advanced: "Avancerad"
+    },
+    inheritWidthFrom: {
+      survey: "Samma som enkät",
+      container: "Passa till behållare"
+    },
+    backgroundColorSwitch: {
+      none: "Ingen",
+      accentColor: "Accentfärg",
+      custom: "Sed"
+    },
+    colorPalette: {
+      light: "Ljus",
+      dark: "Mörk"
+    },
+    isPanelless: {
+      "false": "Standard",
+      "true": "Utan paneler"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Samma som undersökning",
+      container: "Samma som behållare"
     }
   },
   // Operators
@@ -1129,6 +1348,13 @@ export let svStrings = {
     currencymask: {
       prefix: "Ex.: $",
       suffix: "Ex.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Ex.: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Ex.: 30%",
+      questionTitleWidth: "Ex.: 200px"
     }
   },
   pehelp: {
@@ -1139,13 +1365,17 @@ export let svStrings = {
       enableIf: "Använd trollstavsikonen för att ställa in en villkorsregel som inaktiverar det skrivskyddade läget för panelen.",
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
       questionTitleLocation: "Gäller alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard).",
+      questionTitleWidth: "Anger konsekvent bredd för frågerubriker när de är justerade till vänster om frågerutorna. Accepterar CSS-värden (px, %, in, pt, etc.).",
       questionErrorLocation: "Anger platsen för ett felmeddelande i förhållande till alla frågor i panelen. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå.",
-      questionsOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå.",
+      questionOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå.",
       page: "Flyttar panelen till slutet av en markerad sida.",
       innerIndent: "Lägger till utrymme eller marginal mellan panelinnehållet och panelrutans vänstra kant.",
       startWithNewLine: "Avmarkera om du vill visa panelen på en rad med föregående fråga eller panel. Inställningen gäller inte om panelen är det första elementet i formuläret.",
       state: "Välj mellan: \"Expanderad\" - panelen visas i sin helhet och kan fällas ihop; \"Komprimerad\" - panelen visar endast titel och beskrivning och kan expanderas; \"Låst\" - panelen visas i sin helhet och kan inte fällas ihop.",
-      width: "Ställer in panelens bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.)."
+      width: "Ställer in panelens bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.).",
+      showQuestionNumbers: "Tilldelar nummer till frågor som är kapslade i den här panelen.",
+      effectiveColSpan: "Anger hur många kolumner den här panelen sträcker sig över i rutnätslayouten.",
+      gridLayoutColumns: "I den här tabellen kan du konfigurera varje rutnätskolumn i panelen. Den ställer automatiskt in breddprocenten för varje kolumn baserat på det maximala antalet element i en rad. Om du vill anpassa rutnätslayouten justerar du dessa värden manuellt och definierar rubrikbredden för alla frågor i varje kolumn."
     },
     paneldynamic: {
       name: "Ett panel-ID som inte är synligt för svarande.",
@@ -1153,7 +1383,8 @@ export let svStrings = {
       visibleIf: "Använd trollstavsikonen för att ställa in en villkorsregel som bestämmer panelens synlighet.",
       enableIf: "Använd trollstavsikonen för att ställa in en villkorsregel som inaktiverar det skrivskyddade läget för panelen.",
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
-      templateTitleLocation: "Gäller alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard).",
+      templateQuestionTitleLocation: "Gäller alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard).",
+      templateQuestionTitleWidth: "Ställer in konsekvent bredd för frågetitlar när de är justerade till vänster om sina frågerutor. Accepterar CSS-värden (px, %, in, pt, etc.).",
       templateErrorLocation: "Anger platsen för ett felmeddelande i förhållande till en fråga med ogiltiga indata. Välj mellan: \"Överst\" - en feltext placeras högst upp i frågerutan; \"Nederst\" - en feltext placeras längst ner i frågerutan. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard).",
       errorLocation: "Anger platsen för ett felmeddelande i förhållande till alla frågor i panelen. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå.",
       page: "Flyttar panelen till slutet av en markerad sida.",
@@ -1163,17 +1394,20 @@ export let svStrings = {
       width: "Ställer in panelens bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.).",
       templateTitle: "Skriv in en mall för dynamiska panelrubriker. Använd {panelIndex} för panelens allmänna position och {visiblePanelIndex} för dess ordning bland de synliga panelerna. Infoga dessa platshållare i mönstret för att lägga till automatisk numrering.",
       templateTabTitle: "Skriv in en mall för flikrubriker. Använd {panelIndex} för en panels allmänna position och {visiblePanelIndex} för dess ordning bland synliga paneler. Infoga dessa platshållare i mönstret för att lägga till automatisk numrering.",
+      tabTitlePlaceholder: "En reservtext för flikrubriker som gäller när flikrubrikmönstret inte ger ett meningsfullt värde.",
       templateVisibleIf: "Med den här inställningen kan du styra synligheten för enskilda paneler i den dynamiska panelen. Använd platshållaren {panel} för att referera till den aktuella panelen i uttrycket.",
       titleLocation: "Den här inställningen ärvs automatiskt av alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard).",
       descriptionLocation: "Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Under panelrubriken\" som standard).",
       newPanelPosition: "Definierar placeringen av en nyligen tillagd panel. Som standard läggs nya paneler till i slutet. Välj \"Nästa\" för att infoga en ny panel efter den nuvarande.",
-      defaultValueFromLastPanel: "Duplicerar svar från den sista panelen och tilldelar dem till nästa tillagda dynamiska panel.",
+      copyDefaultValueFromLastEntry: "Duplicerar svar från den sista panelen och tilldelar dem till nästa tillagda dynamiska panel.",
       keyName: "Referera till ett frågenamn för att kräva att en användare anger ett unikt svar för den här frågan i varje panel."
     },
+    copyDefaultValueFromLastEntry: "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad.",
     defaultValueExpression: "Med den här inställningen kan du tilldela ett standardsvarsvärde baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar – {q1_id} + {q2_id}, booleska uttryck, till exempel {age} > 60 och funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Värdet som bestäms av detta uttryck fungerar som det initiala standardvärdet som kan åsidosättas av en svarandes manuella inmatning.",
     resetValueIf: "Använd trollstavsikonen för att ställa in en villkorsregel som avgör när en respondents inmatning återställs till värdet baserat på \"Standardvärdesuttryck\" eller \"Ange värdeuttryck\" eller till värdet \"Standardsvar\" (om något av dem är inställt).",
     setValueIf: "Använd trollstavsikonen för att ställa in en villkorsregel som avgör när \"Ange värdeuttryck\" ska köras och dynamiskt tilldela det resulterande värdet som ett svar.",
     setValueExpression: "Ange ett uttryck som definierar det värde som ska anges när villkoren i regeln \"Ange värde om\" uppfylls. Uttrycket kan innehålla grundläggande beräkningar – {q1_id} + {q2_id}, booleska uttryck, till exempel {age} > 60 och funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Värdet som bestäms av detta uttryck kan åsidosättas av en svarandes manuella inmatning.",
+    gridLayoutEnabled: "Med Survey Creator kan du manuellt justera de infogade bredderna på formulärelement för att styra layouten. Om detta inte ger önskat resultat kan du aktivera rutnätslayouten, som strukturerar bildelement med hjälp av ett kolumnbaserat system. För att konfigurera layoutkolumner, välj en sida eller panel och använd tabellen \"Frågeinställningar\" → \"Rutnätskolumner\". För att justera hur många kolumner en fråga sträcker sig över, markera den och ställ in önskat värde i fältet \"Layout\" → \"Kolumnintervall\".",
     question: {
       name: "Ett fråge-ID som inte är synligt för svarande.",
       description: "Skriv en underrubrik för frågan.",
@@ -1194,7 +1428,8 @@ export let svStrings = {
       textUpdateMode: "Välj mellan: \"Vid förlorat fokus\" - värdet uppdateras när inmatningsfältet tappar fokus; \"Medan du skriver\" - värdet uppdateras i realtid när användarna skriver. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Vid förlorat fokus\" som standard).",
       url: "Du kan använda valfri webbtjänst som datakälla för flervalsfrågor. Om du vill fylla i alternativvärden anger du URL:en för den tjänst som tillhandahåller data.",
       searchMode: "En jämförelseåtgärd som används för att filtrera listrutan.",
-      textWrapEnabled: "Långa texter i valalternativ genererar automatiskt radbrytningar för att passa in i rullgardinsmenyn. Avmarkera om du vill att texterna ska klippas."
+      textWrapEnabled: "Långa texter i valalternativ genererar automatiskt radbrytningar för att passa in i rullgardinsmenyn. Avmarkera om du vill att texterna ska klippas.",
+      effectiveColSpan: "Anger hur många kolumner den här frågan sträcker sig över i rutnätslayouten."
     },
     signaturepad: {
       signatureWidth: "Anger bredden på det visade signaturområdet och den resulterande bilden.",
@@ -1203,7 +1438,8 @@ export let svStrings = {
     },
     file: {
       imageHeight: "Justerar höjden på bilden i undersökningsresultaten.",
-      imageWidth: "Justerar bredden på bilden i undersökningsresultaten."
+      imageWidth: "Justerar bredden på bilden i undersökningsresultaten.",
+      allowImagesPreview: "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."
     },
     image: {
       contentMode: "Alternativet \"Auto\" bestämmer automatiskt vilket läge som är lämpligt för visning - bild, video eller YouTube - baserat på den angivna källadressen."
@@ -1222,7 +1458,8 @@ export let svStrings = {
     },
     // survey templates
     survey: {
-      mode: "Välj mellan: \"Redigerbar\" - gör det möjligt för respondenterna att fylla i din undersökning; \"Skrivskyddad\" - inaktiverar formulärredigering."
+      readOnly: "Välj om du vill hindra respondenterna från att fylla i din undersökning.",
+      progressBarLocation: "Ställer in platsen för förloppsindikatorn. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
     },
     matrixdropdowncolumn: {
       name: "Ett kolumn-ID som inte är synligt för svarande.",
@@ -1231,27 +1468,30 @@ export let svStrings = {
       visibleIf: "Använd trollstavsikonen för att ange en villkorsregel som bestämmer kolumnens synlighet.",
       enableIf: "Använd trollstavsikonen för att ange en villkorsregel som inaktiverar skrivskyddat läge för kolumnen.",
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
-      showInMultipleColumns: "När du väljer det här alternativet skapas en enskild kolumn för varje alternativ."
+      showInMultipleColumns: "När du väljer det här alternativet skapas en enskild kolumn för varje alternativ.",
+      colCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen."
     },
+    caseInsensitive: "Välj om versaler och gemener i det reguljära uttrycket ska behandlas som likvärdiga.",
     widthMode: "Välj mellan: \"Statisk\" - ställer in en fast bredd; \"Responsiv\" - gör att undersökningen upptar hela skärmens bredd; \"Auto\" - gäller någon av de två beroende på vilka frågetyper som används.",
     cookieName: "Cookies hindrar användare från att fylla i samma undersökning två gånger.",
     logo: "Klistra in en bildlänk (inga storleksbegränsningar) eller klicka på mappikonen för att bläddra i en fil från din dator (upp till 64 kB).",
     logoWidth: "Anger en logotypbredd i CSS-enheter (px, %, in, pt, etc.).",
     logoHeight: "Anger en logotyphöjd i CSS-enheter (px, %, in, pt, etc.).",
     logoFit: "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet.",
-    goNextPageAutomatic: "Välj om du vill att undersökningen ska gå vidare till nästa sida automatiskt efter att en svarande har svarat på alla frågor på den aktuella sidan.",
-    allowCompleteSurveyAutomatic: "Välj om du vill att undersökningen ska slutföras automatiskt efter att en svarande har svarat på alla frågor.",
+    autoAdvanceEnabled: "Välj om du vill att undersökningen automatiskt ska gå vidare till nästa sida när en svarande har svarat på alla frågor på den aktuella sidan. Den här funktionen gäller inte om den sista frågan på sidan är öppen eller tillåter flera svar.",
+    autoAdvanceAllowComplete: "Välj om du vill att undersökningen ska slutföras automatiskt efter att en svarande har svarat på alla frågor.",
     showNavigationButtons: "Anger synlighet och placering av navigeringsknappar på en sida.",
-    showProgressBar: "Anger synlighet och plats för en förloppsindikator. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet.",
+    navigationButtonsLocation: "Anger placeringen av navigeringsknapparna på en sida.",
     showPreviewBeforeComplete: "Aktivera förhandsgranskningssidan med alla eller endast besvarade frågor.",
     questionTitleLocation: "Gäller alla frågor i undersökningen. Den här inställningen kan åsidosättas av regler för justering av rubriker på lägre nivåer: panel, sida eller fråga. En inställning på lägre nivå åsidosätter de på en högre nivå.",
-    requiredText: "En symbol eller en sekvens av symboler som anger att ett svar krävs.",
+    requiredMark: "En symbol eller en sekvens av symboler som anger att ett svar krävs.",
     questionStartIndex: "Ange en siffra eller bokstav som du vill börja numrera med.",
     questionErrorLocation: "Anger platsen för ett felmeddelande i förhållande till frågan med ogiltig inmatning. Välj mellan: \"Överst\" - en feltext placeras högst upp i frågerutan; \"Nederst\" - en feltext placeras längst ner i frågerutan.",
-    focusFirstQuestionAutomatic: "Välj om du vill att det första inmatningsfältet på varje sida ska vara klart för textinmatning.",
-    questionsOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Effekten av den här inställningen visas bara på fliken Förhandsgranska.",
+    autoFocusFirstQuestion: "Välj om du vill att det första inmatningsfältet på varje sida ska vara klart för textinmatning.",
+    questionOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Effekten av den här inställningen visas bara på fliken Förhandsgranska.",
     maxTextLength: "Endast för textinmatningsfrågor.",
-    maxOthersLength: "Endast för frågekommentarer.",
+    maxCommentLength: "Endast för frågekommentarer.",
+    commentAreaRows: "Ställer in antalet rader som visas i textområden för frågekommentarer. Om inmatningen tar upp fler rader visas rullningslisten.",
     autoGrowComment: "Välj om du vill att frågekommentarer och långa textfrågor automatiskt ska öka i höjd baserat på den angivna textlängden.",
     allowResizeComment: "Endast för frågekommentarer och långa textfrågor.",
     calculatedValues: "Anpassade variabler fungerar som mellanliggande variabler eller hjälpvariabler som används i formulärberäkningar. De tar svarandes indata som källvärden. Varje anpassad variabel har ett unikt namn och ett uttryck som den baseras på.",
@@ -1265,10 +1505,10 @@ export let svStrings = {
     rowTitleWidth: "Accepterar CSS-värden (px, %, in, pt, etc.).",
     totalText: "Visas bara när minst en kolumn har Total type eller Total uttryck.",
     cellErrorLocation: "Anger platsen för ett felmeddelande i förhållande till en cell med ogiltiga indata. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\".",
+    detailErrorLocation: "Anger platsen för felmeddelanden för frågor som är kapslade i detaljavsnitt. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\".",
     keyDuplicationError: "När egenskapen \"Förhindra dubblettsvar\" är aktiverad kommer en svarande som försöker skicka in en dubblett att få följande felmeddelande.",
     totalExpression: "Gör att du kan beräkna totalvärden baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar ('{q1_id} + {q2_id}'), booleska uttryck ('{age} > 60') och funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
     confirmDelete: "Utlöser en uppmaning där du uppmanas att bekräfta borttagningen av raden.",
-    defaultValueFromLastRow: "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad.",
     keyName: "Om den angivna kolumnen innehåller identiska värden genereras felet \"Icke-unikt nyckelvärde\".",
     description: "Skriv en undertext.",
     locale: "Välj ett språk för att börja skapa din undersökning. Om du vill lägga till en översättning byter du till ett nytt språk och översätter originaltexten här eller på fliken Översättningar.",
@@ -1276,19 +1516,25 @@ export let svStrings = {
     imageFit: "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet.",
     autoGrow: "Ökar gradvis höjden på inmatningsfältet när data matas in. Åsidosätter inställningen \"Inmatningsfältets höjd (i rader)\".",
     allowResize: "Storlekshandtaget (eller greppet) visas i hörnet och kan dras för att ändra storleken på inmatningsfältet.",
-    maxTimeToFinish: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till Tack-sidan.",
-    maxTimeToFinishPage: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
+    timeLimit: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till Tack-sidan.",
+    timeLimitPerPage: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
+    validateVisitedEmptyFields: "Aktivera det här alternativet för att utlösa validering när en användare fokuserar på ett tomt inmatningsfält och sedan lämnar det utan att göra några ändringar.",
     page: {
-      maxTimeToFinish: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
+      name: "Ett sid-ID som inte är synligt för svarande.",
+      description: "Skriv en underrubrik på sidan.",
+      navigationTitle: "En bildtext som visas på en navigeringsknapp i förloppsindikatorn eller innehållsförteckningen. Om du lämnar det här fältet tomt kommer navigeringsknappen att använda sidans titel eller sidnamn. För att aktivera förloppsindikatorn eller innehållsförteckningen, gå till \"Undersökning\" → \"Navigering\".",
+      timeLimit: "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida.",
       visibleIf: "Använd trollstavsikonen för att ställa in en villkorsregel som bestämmer sidans synlighet.",
       enableIf: "Använd trollstavsikonen för att ställa in en villkorsregel som inaktiverar det skrivskyddade läget för sidan.",
       requiredIf: "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar.",
       questionTitleLocation: "Gäller alla frågor på denna sida. Om du vill åsidosätta den här inställningen definierar du regler för titeljustering för enskilda frågor eller paneler. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Topp\" som standard).",
+      questionTitleWidth: "Anger konsekvent bredd för frågerubriker när de är justerade till vänster om frågerutorna. Accepterar CSS-värden (px, %, in, pt, etc.).",
       questionErrorLocation: "Anger platsen för ett felmeddelande i förhållande till frågan med ogiltig inmatning. Välj mellan: \"Överst\" - en feltext placeras högst upp i frågerutan; \"Nederst\" - en feltext placeras längst ner i frågerutan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Topp\" som standard).",
-      questionsOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Original\" som standard). Effekten av den här inställningen visas bara på fliken Förhandsgranska.",
-      navigationButtonsVisibility: "Ställer in synligheten för navigeringsknapparna på sidan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå, som standard är \"Synlig\"."
+      questionOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Original\" som standard). Effekten av den här inställningen visas bara på fliken Förhandsgranska.",
+      showNavigationButtons: "Ställer in synligheten för navigeringsknapparna på sidan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå, som standard är \"Synlig\".",
+      gridLayoutColumns: "I den här tabellen kan du konfigurera varje rutnätskolumn på sidan. Den ställer automatiskt in breddprocenten för varje kolumn baserat på det maximala antalet element i en rad. Om du vill anpassa rutnätslayouten justerar du dessa värden manuellt och definierar rubrikbredden för alla frågor i varje kolumn."
     },
-    showTimerPanel: "Ställer in synligheten och placeringen av en timer på en sida.",
+    timerLocation: "Ställer in platsen för en timer på en sida.",
     panelsState: "Välj mellan: \"Låst\" - användare kan inte expandera eller komprimera paneler; \"Komprimera alla\" - alla paneler börjar i ett komprimerat tillstånd; \"Expandera alla\" - alla paneler börjar i ett expanderat tillstånd; \"Först expanderad\" - endast den första panelen expanderas initialt.",
     imageLinkName: "Ange ett delat egenskapsnamn i matrisen med objekt som innehåller de bild- eller videofils-URL:er som du vill visa i alternativlistan.",
     choices: "Det vänstra värdet fungerar som ett objekt-ID som används i villkorsregler, det högra värdet visas för respondenterna.",
@@ -1298,9 +1544,13 @@ export let svStrings = {
     maxWidth: "Accepterar CSS-värden (px, %, in, pt, etc.).",
     width: "Accepterar CSS-värden (px, %, in, pt, etc.).",
     valueName: "Om du inte anger den här egenskapen lagras svaret i ett fält som anges av egenskapen Name.",
+    defaultDisplayValue: "Ett värde som visas i HTML-frågor och i dynamiska titlar och beskrivningar av undersökningselement när frågevärdet är tomt.",
     useDisplayValuesInDynamicTexts: "I frågetyperna med ett eller flera val har varje alternativ ett ID och ett visningsvärde. När du väljer det här alternativet visar den här inställningen ett visningsvärde i stället för ett ID-värde i HTML-frågor och dynamiska rubriker och beskrivningar av undersökningselement.",
     clearIfInvisible: "Välj om du vill rensa frågevärden som döljs av villkorslogik och när du vill göra det. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"När undersökningen är klar\" som standard).",
     choicesFromQuestionMode: "Välj mellan: \"Alla\" - kopierar alla valalternativ från den valda frågan; \"Markerad\" - kopierar dynamiskt endast valda alternativ; \"Omarkerad\" - kopierar endast omarkerade alternativ dynamiskt. Alternativen \"Ingen\" och \"Annat\" kopieras som standard om de är aktiverade i källfrågan.",
+    choiceValuesFromQuestion: "I frågetyper med ett eller flera val har varje alternativ ett ID och ett visningsvärde. Den här inställningen anger vilken matriskolumn eller panelfråga som ska ange ID:n.",
+    choiceTextsFromQuestion: "I frågetyper med ett eller flera val har varje alternativ ett ID och ett visningsvärde. Den här inställningen anger vilken matris-, kolumn- eller panelfråga som ska tillhandahålla visningstexterna.",
+    allowCustomChoices: "Välj om du vill att de svarande ska kunna lägga till sina egna alternativ om det önskade alternativet inte är tillgängligt i rullgardinsmenyn. Anpassade val kommer endast att lagras tillfälligt under den aktuella webbläsarsessionen.",
     showOtherItem: "När du väljer det här alternativet kan användarna inkludera ytterligare indata i en separat kommentarsruta.",
     separateSpecialChoices: "Visar varje specialalternativ (\"Ingen\", \"Annan\", \"Markera alla\") på en ny rad, även när du använder en layout med flera kolumner.",
     path: "Ange den plats i tjänstdatauppsättningen där målmatrisen med objekt finns. Lämna tomt om URL:en redan pekar på matrisen.",
@@ -1322,8 +1572,9 @@ export let svStrings = {
     needConfirmRemoveFile: "Utlöser en uppmaning om att bekräfta borttagningen av filen.",
     selectToRankEnabled: "Aktivera för att endast rangordna valda alternativ. Användarna drar de valda objekten från urvalslistan för att ordna dem i rangordningsområdet.",
     dataList: "Ange en lista med alternativ som kommer att föreslås för respondenten under inmatningen.",
-    itemSize: "Inställningen ändrar bara storleken på inmatningsfälten och påverkar inte frågerutans bredd.",
-    itemTitleWidth: "Anger konsekvent bredd för alla objektetiketter i pixlar",
+    inputSize: "Inställningen ändrar bara storleken på inmatningsfälten och påverkar inte frågerutans bredd.",
+    itemTitleWidth: "Ställer in konsekvent bredd för alla objektetiketter. Accepterar CSS-värden (px, %, in, pt, etc.).",
+    inputTextAlignment: "Välj hur du vill justera indatavärdet i fältet. Standardinställningen \"Auto\" justerar indatavärdet till höger om valutamaskering eller numerisk maskering används och till vänster om inte.",
     altText: "Fungerar som ersättning när bilden inte kan visas på en användares enhet och i tillgänglighetssyfte.",
     rateColorMode: "Definierar färgen på den valda emojin när typen av betygsikon är inställd på \"Smileys\". Välj mellan: \"Standard\" - den valda emojin visas i standardundersökningsfärgen; \"Skala\" - den valda emojin ärver färg från betygsskalan.",
     expression: {
@@ -1339,6 +1590,7 @@ export let svStrings = {
     filePlaceholder: "Gäller när \"Källtyp\" är \"Lokala filer\" eller när kameran inte är tillgänglig",
     photoPlaceholder: "Gäller när \"Källtyp\" är \"Kamera\".",
     fileOrPhotoPlaceholder: "Gäller när \"Källtyp\" är \"Lokala filer eller kamera\".",
+    colCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad.",
     masksettings: {
       saveMaskedValue: "Välj om du vill lagra frågevärdet med en tillämpad mask i undersökningsresultaten."
     },
@@ -1356,7 +1608,22 @@ export let svStrings = {
     currencymask: {
       prefix: "En eller flera symboler som ska visas före värdet.",
       suffix: "En eller flera symboler som ska visas efter värdet."
-    }
+    },
+    theme: {
+      isPanelless: "Den här inställningen gäller endast för frågor utanför en panel.",
+      primaryColor: "Ställer in en extra färg som framhäver viktiga undersökningselement.",
+      panelBackgroundTransparency: "Justerar transparensen för paneler och frågerutor i förhållande till undersökningens bakgrund.",
+      questionBackgroundTransparency: "Justerar transparensen för indataelement i förhållande till undersökningens bakgrund.",
+      cornerRadius: "Anger hörnradien för alla rektangulära element. Aktivera Avancerat läge om du vill ställa in individuella hörnradievärden för inmatningselement eller paneler och frågerutor.",
+      "--sjs-general-backcolor-dim": "Ställer in undersökningens huvudsakliga bakgrundsfärg."
+    },
+    header: {
+      inheritWidthFrom: "Alternativet \"Samma som behållare\" justerar automatiskt bredden på rubrikens innehållsområde så att det passar in i HTML-elementet som undersökningen placeras i.",
+      textAreaWidth: "Bredden på rubrikområdet som innehåller undersökningens titel och beskrivning, mätt i pixlar.",
+      overlapEnabled: "När det här alternativet är aktiverat täcker den övre delen av undersökningen den nedre delen av sidhuvudet.",
+      mobileHeight: "När värdet är 0 beräknas höjden automatiskt för att passa rubrikens innehåll."
+    },
+    progressBarInheritWidthFrom: "Alternativet \"Samma som behållare\" justerar automatiskt förloppsindikatorns bredd så att den passar in i HTML-elementet som undersökningen är placerad i."
   },
   // Properties
   p: {
@@ -1419,11 +1686,11 @@ export let svStrings = {
     maxValueExpression: "Uttryck för maximalt värde",
     step: "Steg",
     dataList: "Lista över uppgifter",
-    itemSize: "itemSize",
+    inputSize: "inputSize",
     itemTitleWidth: "Bredd på objektetikett (i px)",
+    inputTextAlignment: "Justering av indatavärde",
     elements: "Element",
     content: "Innehåll",
-    navigationButtonsVisibility: "navigationButtonsVisibility",
     navigationTitle: "Navigering titel",
     navigationDescription: "Beskrivning av navigering",
     longTap: "Långt tryck",
@@ -1437,6 +1704,7 @@ export let svStrings = {
     imageFit: "Bildens anpassning",
     altText: "Alt-text",
     height: "Höjd",
+    mobileHeight: "Höjd på smartphones",
     penColor: "Pennans färg",
     backgroundColor: "Bakgrundsfärg",
     templateElements: "Mallelement",
@@ -1459,104 +1727,47 @@ export let svStrings = {
     allowCameraAccess: "Tillåt kameraåtkomst",
     scaleColorMode: "Färgläge för skala",
     rateColorMode: "Betygsätt färgläge",
-    copyDisplayValue: "Kopiera visningsvärde"
+    copyDisplayValue: "Kopiera visningsvärde",
+    effectiveColSpan: "Kolumn spännvidd",
+    progressBarInheritWidthFrom: "Bredd på förloppsindikatorns area"
   },
   theme: {
-    "--background": "Bakgrundsfärg",
-    "--background-dim-light": "Bakgrund svag ljusfärg",
-    "--primary-foreground": "Primär förgrundsfärg",
-    "--foreground": "Förgrundsfärg",
-    "--base-unit": "Basenhet",
     advancedMode: "Avancerat läge",
-    groupGeneral: "Allmänt",
-    groupHeader: "Rubrik",
-    groupBackground: "Bakgrund",
-    groupAppearance: "Utseende",
-    themeName: "Tema",
-    themeMode: "Fråga utseende",
-    themeModePanels: "Standard",
-    themeModeLightweight: "Utan paneler",
-    themePaletteLight: "Ljus",
-    themePaletteDark: "Mörk",
-    primaryColor: "Accentfärg",
+    pageTitle: "Teckensnitt för sidtitel",
+    questionTitle: "Teckensnitt för frågerubrik",
+    editorPanel: "Inmatningselement",
+    lines: "Linjer",
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Sväva",
     primaryLightColor: "Vald",
-    coverTitleForecolor: "Titel förfärg",
-    coverDescriptionForecolor: "Beskrivning förfärg",
-    coverOverlapEnabled: "Överlappa",
     backgroundDimColor: "Bakgrundsfärg",
-    backgroundImage: "Bakgrundsbild",
-    backgroundImageFitAuto: "Bil",
-    backgroundImageFitCover: "Täcka",
-    backgroundImageFitContain: "Innehålla",
-    backgroundImageFitFill: "Tänja",
-    backgroundImageFitTile: "Kakel",
-    backgroundOpacity: "Ogenomskinlighet",
-    backgroundImageAttachmentFixed: "Fast",
-    backgroundImageAttachmentScroll: "Rulla",
-    panelBackgroundTransparency: "Opacitet för panelbakgrund",
-    questionBackgroundTransparency: "Frågans bakgrundsopacitet",
-    questionTitle: "Teckensnitt för frågerubrik",
-    editorPanel: "Inmatningselement",
-    backgroundCornerRadius: "Bakgrund och hörnradie",
+    cornerRadius: "Hörn radie",
     backcolor: "Standardbakgrund",
     hovercolor: "Håll muspekaren bakgrund",
     borderDecoration: "Border dekoration",
-    accentBackground: "Accent bakgrund",
-    accentForeground: "Accent förgrund",
+    fontColor: "Teckenfärg",
+    backgroundColor: "Bakgrundsfärg",
     primaryForecolor: "Standardfärg",
     primaryForecolorLight: "Inaktiverad färg",
-    colorsTitle: "Färger",
     font: "Teckensnitt",
-    lines: "Linjer",
     borderDefault: "Mörkare",
     borderLight: "Tändare",
     fontFamily: "Teckensnitt familj",
-    fontSize: "Teckenstorlek",
-    color: "Färg",
-    placeholderColor: "Färg på platshållare",
-    size: "Storlek",
     fontWeightRegular: "Ordinarie",
     fontWeightHeavy: "Tung",
-    fontWeightSemiBold: "Halvfet",
+    fontWeightSemiBold: "Halvfet stil",
     fontWeightBold: "Djärv",
-    scale: "Skala",
-    cornerRadius: "Hörnradie",
-    surveyTitle: "Teckensnitt för undersökningstitel",
-    surveyDescription: "Teckensnitt för undersökningsbeskrivning",
-    pageTitle: "Teckensnitt för sidtitel",
-    titleFont: "Titel typsnitt",
-    descriptionFont: "Beskrivning teckensnitt",
+    color: "Färg",
+    placeholderColor: "Platshållarens färg",
+    size: "Storlek",
+    opacity: "Ogenomskinlighet",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Lägg till skuggeffekt",
-    opacity: "Ogenomskinlighet",
     boxShadowBlur: "Oskärpa",
     boxShadowSpread: "Sprida",
     boxShadowDrop: "Droppe",
     boxShadowInner: "Inre",
-    shadow: "Skugga effekter",
-    headerView: "Utsikt",
-    headerViewBasic: "Grundläggande",
-    headerViewAdvanced: "Avancerad",
-    coverInheritWidthFrom: "Innehållets bredd",
-    coverInheritWidthFromSurvey: "Samma som undersökning",
-    coverInheritWidthFromContainer: "Passa till behållare",
-    coverTextAreaWidth: "Textens bredd",
-    coverBackgroundColorSwitch: "Bakgrundsfärg",
-    coverBackgroundColorNone: "Ingen",
-    coverBackgroundColorAccentColor: "Accentfärg",
-    coverBackgroundColorCustom: "Sed",
-    horizontalAlignmentLeft: "Vänster",
-    horizontalAlignmentCenter: "Centrum",
-    horizontalAlignmentRight: "Höger",
-    verticalAlignmentTop: "Topp",
-    verticalAlignmentMiddle: "Mitt",
-    verticalAlignmentBottom: "Botten",
-    logoPosition: "Logotypens placering",
-    coverTitlePosition: "Titel position",
-    coverDescriptionPosition: "Beskrivning position",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -1570,17 +1781,33 @@ export let svStrings = {
       contrast: "Kontrast"
     },
     colors: {
-      teal: "Kricka",
+      teal: "Turkos",
       blue: "Blå",
       purple: "Lila",
       orchid: "Orkidé",
       tulip: "Tulpan",
       brown: "Brun",
-      green: "Grön"
+      green: "Grön",
+      gray: "Grå"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Bakgrund på ytan",
+    "--sjs-primary-background-500": "Primär",
+    "--sjs-secondary-background-500": "Sekundär",
+    surfaceScale: "Yta",
+    userInterfaceBaseUnit: "Användargränssnitt",
+    fontScale: "Teckensnitt",
+    names: {
+      sc2020: "Enkät skapare 2020",
+      "default-light": "Ljus",
+      "default-dark": "Mörk",
+      "default-contrast": "Kontrast"
     }
   }
 };
-editorLocalization.locales["sv"] = svStrings;
+
+setupLocale({ localeCode: "sv", strings: svStrings });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
@@ -1605,7 +1832,6 @@ editorLocalization.locales["sv"] = svStrings;
 // ed.panelTypeName: "Panel" => "Panel"
 // ed.questionTypeName: "Question" => "Fråga"
 // ed.columnTypeName: "Column" => "Spalt"
-// ed.newTextItemName: "text" => "SMS"
 // ed.themeSurvey: "Themes" => "Teman"
 // ed.defaultV2Theme: "Default" => "Standard"
 // ed.modernTheme: "Modern" => "Modern"
@@ -1771,7 +1997,7 @@ editorLocalization.locales["sv"] = svStrings;
 // pe.choicesMin: "Minimum value for auto-generated items" => "Minimivärde för automatiskt genererade objekt"
 // pe.choicesMax: "Maximum value for auto-generated items" => "Maximalt värde för automatiskt genererade objekt"
 // pe.choicesStep: "Step for auto-generated items" => "Steg för automatiskt genererade objekt"
-// pe.isAllRowRequired: "Require answer for all rows" => "Kräv svar för alla rader"
+// pe.eachRowRequired: "Require answer for all rows" => "Kräv svar för alla rader"
 // pe.requiredErrorText: "\"Required\" error message" => "Felmeddelandet \"Obligatoriskt\""
 // pe.cols: "Columns" => "Kolumner"
 // pe.rateMin: "Minimum rate value" => "Minsta räntevärde"
@@ -1799,7 +2025,7 @@ editorLocalization.locales["sv"] = svStrings;
 // pe.editText: "Edit Answer button text" => "Text för knappen Redigera svar"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Bildhöjd (i CSS-accepterade värden)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Bildbredd (i CSS-godkända värden)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Tidsgräns för att avsluta sidan (i sekunder)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Tidsgräns för att avsluta sidan (i sekunder)"
 // question.page: "Parent page" => "Överordnad sida"
 // pe.noEntriesText: "Empty entries text" => "Tomma poster text"
 // pe.html: "HTML markup" => "HTML-kod"
@@ -1808,7 +2034,7 @@ editorLocalization.locales["sv"] = svStrings;
 // pe.dataFormat: "Image format" => "Bildformat"
 // pe.allowAddRows: "Allow adding rows" => "Tillåt att rader läggs till"
 // pe.allowRemoveRows: "Allow removing rows" => "Tillåt borttagning av rader"
-// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "Tillåt dra och släpp rader"
+// pe.allowRowReorder: "Allow row drag and drop" => "Tillåt dra och släpp rader"
 // pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "Gäller inte om du anger bildens exakta bredd eller höjd."
 // pe.minImageWidth: "Minimum image width" => "Minsta bildbredd"
 // pe.maxImageWidth: "Maximum image width" => "Maximal bildbredd"
@@ -1832,11 +2058,11 @@ editorLocalization.locales["sv"] = svStrings;
 // pe.logo: "Logo (URL or base64-encoded string)" => "Logotyp (URL eller base64-kodad sträng)"
 // pe.questionsOnPageMode: "Survey structure" => "Undersökningens struktur"
 // pe.maxTextLength: "Maximum answer length (in characters)" => "Maximal svarslängd (i tecken)"
-// pe.maxOthersLength: "Maximum comment length (in characters)" => "Maximal kommentarslängd (i tecken)"
+// pe.maxCommentLength: "Maximum comment length (in characters)" => "Maximal kommentarslängd (i tecken)"
 // pe.autoGrowComment: "Auto-expand comment area if necessary" => "Expandera kommentarsområdet automatiskt om det behövs"
 // pe.allowResizeComment: "Allow users to resize text areas" => "Tillåt användare att ändra storlek på textområden"
 // pe.textUpdateMode: "Update text question value" => "Uppdatera textfrågevärde"
-// pe.focusOnFirstError: "Set focus on the first invalid answer" => "Ställ in fokus på det första ogiltiga svaret"
+// pe.autoFocusFirstError: "Set focus on the first invalid answer" => "Ställ in fokus på det första ogiltiga svaret"
 // pe.checkErrorsMode: "Run validation" => "Kör validering"
 // pe.navigateToUrl: "Navigate to URL" => "Navigera till URL"
 // pe.navigateToUrlOnCondition: "Dynamic URL" => "Dynamisk URL"
@@ -1871,11 +2097,11 @@ editorLocalization.locales["sv"] = svStrings;
 // pe.panelsState: "Inner panel expand state" => "Expanderingsläge för innerpanelen"
 // pe.templateDescription: "Description template" => "Beskrivning mall"
 // pe.templateTitle: "Title template" => "Mall för titel"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Knappbeskrivning för föregående panel"
-// pe.panelNextText: "Next Panel button tooltip" => "Knappbeskrivning för knappen Nästa panel"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Knappbeskrivning för föregående panel"
+// pe.nextPanelText: "Next Panel button tooltip" => "Knappbeskrivning för knappen Nästa panel"
 // pe.showRangeInProgress: "Show progress bar" => "Visa förloppsindikator"
-// pe.templateTitleLocation: "Question title location" => "Plats för frågerubrik"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Ta bort panelknappens placering"
+// pe.templateQuestionTitleLocation: "Question title location" => "Plats för frågerubrik"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Ta bort panelknappens placering"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Dölj frågan om det inte finns några rader"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Dölj kolumner om det inte finns några rader"
 // pe.rateValues: "Custom rate values" => "Anpassade prisvärden"
@@ -1898,13 +2124,12 @@ editorLocalization.locales["sv"] = svStrings;
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Felmeddelandet \"Icke-unikt nyckelvärde\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Minsta valda val"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maximalt antal valda val"
-// pe.showClearButton: "Show the Clear button" => "Visa knappen Rensa"
 // pe.showNumber: "Show panel number" => "Visa panelnummer"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Logotypbredd (i CSS-godkända värden)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Logotypens höjd (i CSS-godkända värden)"
 // pe.readOnly: "Read-only" => "Skrivskyddad"
 // pe.enableIf: "Editable if" => "Redigerbar om"
-// pe.emptyRowsText: "\"No rows\" message" => "Meddelandet \"Inga rader\""
+// pe.noRowsText: "\"No rows\" message" => "Meddelandet \"Inga rader\""
 // pe.size: "Input field size (in characters)" => "Inmatningsfältets storlek (i tecken)"
 // pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "Avgränsa specialval (Ingen, Annat, Markera alla)"
 // pe.choicesFromQuestion: "Copy choices from the following question" => "Kopiera alternativ från följande fråga"
@@ -1912,7 +2137,7 @@ editorLocalization.locales["sv"] = svStrings;
 // pe.showCommentArea: "Show the comment area" => "Visa kommentarsområdet"
 // pe.commentPlaceholder: "Comment area placeholder" => "Platshållare för kommentarsområde"
 // pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "Visa hastighetsbeskrivningar som extremvärden"
-// pe.rowsOrder: "Row order" => "Radordning"
+// pe.rowOrder: "Row order" => "Radordning"
 // pe.columnsLayout: "Column layout" => "Kolumnlayout"
 // pe.columnColCount: "Nested column count" => "Kapslat antal kolumner"
 // pe.state: "Panel expand state" => "Panelens expanderingsläge"
@@ -1951,8 +2176,6 @@ editorLocalization.locales["sv"] = svStrings;
 // pe.indent: "Add indents" => "Lägga till indrag"
 // panel.indent: "Add outer indents" => "Lägga till yttre indrag"
 // pe.innerIndent: "Add inner indents" => "Lägga till inre indrag"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Ta standardvärden från den sista raden"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Ta standardvärden från den sista panelen"
 // pe.titleKeyboardAdornerTip: "Press enter button to edit" => "Tryck på enter-knappen för att redigera"
 // pe.keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item" => "Tryck på enter-knappen för att redigera objektet, tryck på raderingsknappen för att radera objektet, tryck på alt plus pil uppåt eller pil nedåt för att flytta objektet"
 // pe.triggerGotoName: "Go to the question" => "Gå till frågan"
@@ -1991,7 +2214,6 @@ editorLocalization.locales["sv"] = svStrings;
 // pv.password: "password" => "lösenord"
 // pv.range: "range" => "sortiment"
 // pv.tel: "tel" => "Tel"
-// pv.text: "text" => "SMS"
 // pv.time: "time" => "Tid"
 // pv.url: "url" => "URL"
 // pv.week: "week" => "vecka"
@@ -2006,7 +2228,6 @@ editorLocalization.locales["sv"] = svStrings;
 // inputType.password: "Password" => "Lösenord"
 // inputType.range: "Range" => "Sortiment"
 // inputType.tel: "Phone Number" => "Telefonnummer"
-// inputType.text: "Text" => "SMS"
 // inputType.time: "Time" => "Tid"
 // inputType.url: "URL" => "URL"
 // inputType.week: "Week" => "Vecka"
@@ -2033,7 +2254,7 @@ editorLocalization.locales["sv"] = svStrings;
 // showTimerPanel.none: "Hidden" => "Dold"
 // showTimerPanelMode.all: "Both" => "Båda"
 // detailPanelMode.none: "Hidden" => "Dold"
-// addRowLocation.default: "Depends on matrix layout" => "Beror på matrislayout"
+// addRowButtonLocation.default: "Depends on matrix layout" => "Beror på matrislayout"
 // panelsState.default: "Users cannot expand or collapse panels" => "Användare kan inte expandera eller komprimera paneler"
 // panelsState.collapsed: "All panels are collapsed" => "Alla paneler är komprimerade"
 // panelsState.expanded: "All panels are expanded" => "Alla paneler är expanderade"
@@ -2166,12 +2387,11 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Primär förgrundsfärg"
 // theme.--foreground: "Foreground color" => "Förgrundsfärg"
 // theme.--base-unit: "Base unit" => "Basenhet"
-// theme.groupGeneral: "General" => "Allmänt"
 // theme.groupAdvanced: "Advanced" => "Avancerad"
 // theme.themeName: "Theme" => "Tema"
-// theme.themeMode: "Question appearance" => "Fråga utseende"
-// theme.themeModePanels: "Default" => "Standard"
-// theme.themeModeLightweight: "Without Panels" => "Utan paneler"
+// theme.isPanellessss: "Question appearance" => "Fråga utseende"
+// theme.isPanellessPanels: "Default" => "Standard"
+// theme.isPanellessLightweight: "Without Panels" => "Utan paneler"
 // theme.themePaletteLight: "Light" => "Ljus"
 // theme.themePaletteDark: "Dark" => "Mörk"
 // theme.primaryColor: "Accent color" => "Accentfärg"
@@ -2213,7 +2433,7 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.fontWeightBold: "Bold" => "Djärv"
 // theme.scale: "Scale" => "Skala"
 // theme.cornerRadius: "Corner radius" => "Hörnradie"
-// theme.surveyTitle: "Survey title font" => "Teckensnitt för undersökningstitel"
+// theme.surveyTitleFont: "Survey title font" => "Teckensnitt för undersökningstitel"
 // theme.pageTitle: "Page title font" => "Teckensnitt för sidtitel"
 // theme.pageDescription: "Page description font" => "Teckensnitt för sidbeskrivning"
 // theme.boxShadowX: "X" => "X"
@@ -2274,22 +2494,20 @@ editorLocalization.locales["sv"] = svStrings;
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Ange värde om"
-// theme.groupHeader: "Header" => "Rubrik"
-// theme.coverTitleForecolor: "Title forecolor" => "Titel förfärg"
-// theme.coverOverlapEnabled: "Overlap" => "Överlappa"
+// theme.header: "Header" => "Rubrik"
 // theme.backgroundImageFitFill: "Stretch" => "Tänja"
 // theme.backgroundImageFitTile: "Tile" => "Kakel"
 // theme.headerView: "View" => "Utsikt"
 // theme.headerViewBasic: "Basic" => "Grundläggande"
 // theme.headerViewAdvanced: "Advanced" => "Avancerad"
-// theme.coverInheritWidthFrom: "Content area width" => "Innehållets bredd"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Samma som undersökning"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Anpassa till sida"
-// theme.coverTextAreaWidth: "Text width" => "Textens bredd"
-// theme.coverBackgroundColorSwitch: "Background color" => "Bakgrundsfärg"
-// theme.coverBackgroundColorNone: "None" => "Ingen"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Accentfärg"
-// theme.coverBackgroundColorCustom: "Custom" => "Sed"
+// theme.headerInheritWidthFrom: "Content area width" => "Innehållets bredd"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Samma som undersökning"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Anpassa till sida"
+// theme.headerTextAreaWidth: "Text width" => "Textens bredd"
+// theme.headerBackgroundColorSwitch: "Background color" => "Bakgrundsfärg"
+// theme.headerBackgroundColorNone: "None" => "Ingen"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Accentfärg"
+// theme.headerBackgroundColorCustom: "Custom" => "Sed"
 // theme.horizontalAlignmentLeft: "Left" => "Vänster"
 // theme.horizontalAlignmentCenter: "Center" => "Centrum"
 // theme.horizontalAlignmentRight: "Right" => "Höger"
@@ -2310,18 +2528,14 @@ editorLocalization.locales["sv"] = svStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Gäller när \"Källtyp\" är \"Lokala filer\" eller när kameran inte är tillgänglig"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Gäller när \"Källtyp\" är \"Kamera\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Gäller när \"Källtyp\" är \"Lokala filer eller kamera\"."
-// theme.groupBackground: "Background" => "Bakgrund"
-// theme.groupAppearance: "Appearance" => "Utseende"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivning förfärg"
+// theme.background: "Background" => "Bakgrund"
+// theme.appearance: "Appearance" => "Utseende"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vill du verkligen återställa temat? Alla dina anpassningar kommer att gå förlorade."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, återställ temat"
-// theme.groupBackground: "Background" => "Bakgrund"
-// theme.groupAppearance: "Appearance" => "Utseende"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivning förfärg"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Passa till behållare"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Passa till behållare"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Visa platshållaren"
 // signaturepad.placeholder: "Placeholder text" => "Platshållartext"
-// theme.surveyDescription: "Survey description font" => "Teckensnitt för undersökningsbeskrivning"
+// theme.surveyDescriptionFont: "Survey description font" => "Teckensnitt för undersökningsbeskrivning"
 // ed.prevFocus: "Focus previous" => "Fokus föregående"
 // ed.nextFocus: "Focus next" => "Fokus nästa"
 // ed.saveTheme: "Save Theme" => "Spara tema"
@@ -2333,8 +2547,8 @@ editorLocalization.locales["sv"] = svStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Skala signaturområdet automatiskt"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minsta pennbredd"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximal pennbredd"
-// theme.coverTitlePosition: "Title position" => "Titel position"
-// theme.coverDescriptionPosition: "Description position" => "Beskrivning position"
+// theme.headerTitlePosition: "Title position" => "Titel position"
+// theme.headerDescriptionPosition: "Description position" => "Beskrivning position"
 // ed.propertyGridNoResultsFound: "No results found" => "Inga resultat hittades"
 // pv.leftRight: "Left and right" => "Vänster och höger"
 // p.sourceType: "Source type" => "Typ av källa"
@@ -2370,13 +2584,12 @@ editorLocalization.locales["sv"] = svStrings;
 // panel.description: "Panel description" => "Beskrivning av panelen"
 // panel.visibleIf: "Make the panel visible if" => "Gör panelen synlig om"
 // panel.requiredIf: "Make the panel required if" => "Gör panelen obligatorisk om"
-// panel.questionsOrder: "Question order within the panel" => "Frågeordning i panelen"
+// panel.questionOrder: "Question order within the panel" => "Frågeordning i panelen"
 // panel.startWithNewLine: "Display the panel on a new line" => "Visa panelen på en ny rad"
 // panel.state: "Panel collapse state" => "Panelens komprimerade tillstånd"
 // panel.width: "Inline panel width" => "Bredd på infogad panel"
 // panel.minWidth: "Minimum panel width" => "Minsta panelbredd"
 // panel.maxWidth: "Maximum panel width" => "Maximal panelbredd"
-// panel.showNumber: "Number panels" => "Sifferpaneler"
 // paneldynamic.name: "Panel name" => "Panelens namn"
 // paneldynamic.title: "Panel title" => "Panelens titel"
 // paneldynamic.description: "Panel description" => "Beskrivning av panelen"
@@ -2396,7 +2609,7 @@ editorLocalization.locales["sv"] = svStrings;
 // paneldynamic.hideNumber: "Hide the panel number" => "Dölj panelnumret"
 // paneldynamic.titleLocation: "Panel title alignment" => "Justering av panelrubrik"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "Justering av panelbeskrivning"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "Justering av frågerubrik"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "Justering av frågerubrik"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "Justering av felmeddelande"
 // paneldynamic.newPanelPosition: "New panel location" => "Ny panelplats"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "Förhindra dubbletter av svar i följande fråga"
@@ -2429,7 +2642,7 @@ editorLocalization.locales["sv"] = svStrings;
 // page.description: "Page description" => "Beskrivning av sidan"
 // page.visibleIf: "Make the page visible if" => "Gör sidan synlig om"
 // page.requiredIf: "Make the page required if" => "Gör sidan obligatorisk om"
-// page.questionsOrder: "Question order on the page" => "Frågeordning på sidan"
+// page.questionOrder: "Question order on the page" => "Frågeordning på sidan"
 // matrixdropdowncolumn.name: "Column name" => "Kolumnens namn"
 // matrixdropdowncolumn.title: "Column title" => "Kolumnens rubrik"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "Förhindra dubbletter av svar"
@@ -2503,10 +2716,10 @@ editorLocalization.locales["sv"] = svStrings;
 // totalDisplayStyle.currency: "Currency" => "Valuta"
 // totalDisplayStyle.percent: "Percentage" => "Procent"
 // totalDisplayStyle.date: "Date" => "Datum"
-// rowsOrder.initial: "Original" => "Original"
-// questionsOrder.initial: "Original" => "Original"
-// showProgressBar.aboveHeader: "Above the header" => "Ovanför sidhuvudet"
-// showProgressBar.belowHeader: "Below the header" => "Nedanför rubriken"
+// rowOrder.initial: "Original" => "Original"
+// questionOrder.initial: "Original" => "Original"
+// showProgressBar.aboveheader: "Above the header" => "Ovanför sidhuvudet"
+// showProgressBar.belowheader: "Below the header" => "Nedanför rubriken"
 // pv.sum: "Sum" => "Summa"
 // pv.count: "Count" => "Räkna"
 // pv.min: "Min" => "Min"
@@ -2521,7 +2734,7 @@ editorLocalization.locales["sv"] = svStrings;
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Gäller alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard)."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Anger platsen för ett felmeddelande i förhållande till alla frågor i panelen. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå."
 // panel.page: "Repositions the panel to the end of a selected page." => "Flyttar panelen till slutet av en markerad sida."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "Lägger till utrymme eller marginal mellan panelinnehållet och panelrutans vänstra kant."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "Avmarkera om du vill visa panelen på en rad med föregående fråga eller panel. Inställningen gäller inte om panelen är det första elementet i formuläret."
@@ -2532,7 +2745,7 @@ editorLocalization.locales["sv"] = svStrings;
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "Använd trollstavsikonen för att ställa in en villkorsregel som bestämmer panelens synlighet."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "Använd trollstavsikonen för att ställa in en villkorsregel som inaktiverar det skrivskyddade läget för panelen."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Gäller alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard)."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Gäller alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard)."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Anger platsen för ett felmeddelande i förhållande till en fråga med ogiltiga indata. Välj mellan: \"Överst\" - en feltext placeras högst upp i frågerutan; \"Nederst\" - en feltext placeras längst ner i frågerutan. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard)."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Anger platsen för ett felmeddelande i förhållande till alla frågor i panelen. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "Flyttar panelen till slutet av en markerad sida."
@@ -2546,7 +2759,7 @@ editorLocalization.locales["sv"] = svStrings;
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Den här inställningen ärvs automatiskt av alla frågor i den här panelen. Om du vill åsidosätta den här inställningen definierar du regler för rubrikjustering för enskilda frågor. Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Topp\" som standard)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Under panelrubriken\" som standard)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Definierar placeringen av en nyligen tillagd panel. Som standard läggs nya paneler till i slutet. Välj \"Nästa\" för att infoga en ny panel efter den nuvarande."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplicerar svar från den sista panelen och tilldelar dem till nästa tillagda dynamiska panel."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplicerar svar från den sista panelen och tilldelar dem till nästa tillagda dynamiska panel."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Referera till ett frågenamn för att kräva att en användare anger ett unikt svar för den här frågan i varje panel."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Med den här inställningen kan du tilldela ett standardsvarsvärde baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar – {q1_id} + {q2_id}, booleska uttryck, till exempel {age} > 60 och funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Värdet som bestäms av detta uttryck fungerar som det initiala standardvärdet som kan åsidosättas av en svarandes manuella inmatning."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Använd trollstavsikonen för att ställa in en villkorsregel som avgör när en respondents inmatning återställs till värdet baserat på \"Standardvärdesuttryck\" eller \"Ange värdeuttryck\" eller till värdet \"Standardsvar\" (om något av dem är inställt)."
@@ -2592,18 +2805,17 @@ editorLocalization.locales["sv"] = svStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Anger en logotypbredd i CSS-enheter (px, %, in, pt, etc.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Anger en logotyphöjd i CSS-enheter (px, %, in, pt, etc.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Välj om du vill att undersökningen ska gå vidare till nästa sida automatiskt efter att en svarande har svarat på alla frågor på den aktuella sidan."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Anger synlighet och placering av navigeringsknappar på en sida."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Anger synlighet och plats för en förloppsindikator. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Aktivera förhandsgranskningssidan med alla eller endast besvarade frågor."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "Gäller alla frågor i undersökningen. Den här inställningen kan åsidosättas av regler för justering av rubriker på lägre nivåer: panel, sida eller fråga. En inställning på lägre nivå åsidosätter de på en högre nivå."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "En symbol eller en sekvens av symboler som anger att ett svar krävs."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "En symbol eller en sekvens av symboler som anger att ett svar krävs."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "Ange en siffra eller bokstav som du vill börja numrera med."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "Anger platsen för ett felmeddelande i förhållande till frågan med ogiltig inmatning. Välj mellan: \"Överst\" - en feltext placeras högst upp i frågerutan; \"Nederst\" - en feltext placeras längst ner i frågerutan."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "Välj om du vill att det första inmatningsfältet på varje sida ska vara klart för textinmatning."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Effekten av den här inställningen visas bara på fliken Förhandsgranska."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "Välj om du vill att det första inmatningsfältet på varje sida ska vara klart för textinmatning."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Effekten av den här inställningen visas bara på fliken Förhandsgranska."
 // pehelp.maxTextLength: "For text entry questions only." => "Endast för textinmatningsfrågor."
-// pehelp.maxOthersLength: "For question comments only." => "Endast för frågekommentarer."
+// pehelp.maxCommentLength: "For question comments only." => "Endast för frågekommentarer."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "Välj om du vill att frågekommentarer och långa textfrågor automatiskt ska öka i höjd baserat på den angivna textlängden."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "Endast för frågekommentarer och långa textfrågor."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "Anpassade variabler fungerar som mellanliggande variabler eller hjälpvariabler som används i formulärberäkningar. De tar svarandes indata som källvärden. Varje anpassad variabel har ett unikt namn och ett uttryck som den baseras på."
@@ -2619,24 +2831,23 @@ editorLocalization.locales["sv"] = svStrings;
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "När egenskapen \"Förhindra dubblettsvar\" är aktiverad kommer en svarande som försöker skicka in en dubblett att få följande felmeddelande."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Gör att du kan beräkna totalvärden baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar ('{q1_id} + {q2_id}'), booleska uttryck ('{age} > 60') och funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Utlöser en uppmaning där du uppmanas att bekräfta borttagningen av raden."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad."
 // pehelp.description: "Type a subtitle." => "Skriv en undertext."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Välj ett språk för att börja skapa din undersökning. Om du vill lägga till en översättning byter du till ett nytt språk och översätter originaltexten här eller på fliken Översättningar."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Anger platsen för ett detaljavsnitt i förhållande till en rad. Välj mellan: \"Ingen\" - ingen expansion läggs till; \"Under raden\" - en radexpansion placeras under varje rad i matrisen; \"Visa endast en radexpansion under raden\" - en expansion visas endast under en enda rad, de återstående radexpansionerna är komprimerade."
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Ökar gradvis höjden på inmatningsfältet när data matas in. Åsidosätter inställningen \"Inmatningsfältets höjd (i rader)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Storlekshandtaget (eller greppet) visas i hörnet och kan dras för att ändra storleken på inmatningsfältet."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till Tack-sidan."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till Tack-sidan."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Ett tidsintervall i sekunder varefter undersökningen automatiskt går vidare till nästa sida."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Använd trollstavsikonen för att ställa in en villkorsregel som bestämmer sidans synlighet."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Använd trollstavsikonen för att ställa in en villkorsregel som inaktiverar det skrivskyddade läget för sidan."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Använd trollstavsikonen för att ställa in en villkorsregel som förhindrar att undersökningen skickas in om inte minst en kapslad fråga har ett svar."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Gäller alla frågor på denna sida. Om du vill åsidosätta den här inställningen definierar du regler för titeljustering för enskilda frågor eller paneler. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Topp\" som standard)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Anger platsen för ett felmeddelande i förhållande till frågan med ogiltig inmatning. Välj mellan: \"Överst\" - en feltext placeras högst upp i frågerutan; \"Nederst\" - en feltext placeras längst ner i frågerutan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Topp\" som standard)."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Original\" som standard). Effekten av den här inställningen visas bara på fliken Förhandsgranska."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Ställer in synligheten för navigeringsknapparna på sidan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå, som standard är \"Synlig\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Ställer in synligheten och placeringen av en timer på en sida."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Original\" som standard). Effekten av den här inställningen visas bara på fliken Förhandsgranska."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Ställer in synligheten för navigeringsknapparna på sidan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå, som standard är \"Synlig\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Välj mellan: \"Låst\" - användare kan inte expandera eller komprimera paneler; \"Komprimera alla\" - alla paneler börjar i ett komprimerat tillstånd; \"Expandera alla\" - alla paneler börjar i ett expanderat tillstånd; \"Först expanderad\" - endast den första panelen expanderas initialt."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Ange ett delat egenskapsnamn i matrisen med objekt som innehåller de bild- eller videofils-URL:er som du vill visa i alternativlistan."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Det vänstra värdet fungerar som ett objekt-ID som används i villkorsregler, det högra värdet visas för respondenterna."
@@ -2664,7 +2875,7 @@ editorLocalization.locales["sv"] = svStrings;
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "Utlöser en uppmaning om att bekräfta borttagningen av filen."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Aktivera för att endast rangordna valda alternativ. Användarna drar de valda objekten från urvalslistan för att ordna dem i rangordningsområdet."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Ange en lista med alternativ som kommer att föreslås för respondenten under inmatningen."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Inställningen ändrar bara storleken på inmatningsfälten och påverkar inte frågerutans bredd."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Inställningen ändrar bara storleken på inmatningsfälten och påverkar inte frågerutans bredd."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Anger konsekvent bredd för alla objektetiketter i pixlar"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Alternativet \"Auto\" bestämmer automatiskt vilket läge som är lämpligt för visning - bild, video eller YouTube - baserat på den angivna källadressen."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Fungerar som ersättning när bilden inte kan visas på en användares enhet och i tillgänglighetssyfte."
@@ -2677,8 +2888,8 @@ editorLocalization.locales["sv"] = svStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Bredd på objektetikett (i px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Text som ska visas om alla alternativ är markerade"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Platshållartext för rangordningsområdet"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Fyll i enkäten automatiskt"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Välj om du vill att undersökningen ska slutföras automatiskt efter att en svarande har svarat på alla frågor."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Fyll i enkäten automatiskt"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Välj om du vill att undersökningen ska slutföras automatiskt efter att en svarande har svarat på alla frågor."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "Spara maskerat värde i undersökningsresultat"
 // patternmask.pattern: "Value pattern" => "Värdemönster"
 // datetimemask.min: "Minimum value" => "Minsta värde"
@@ -2724,3 +2935,295 @@ editorLocalization.locales["sv"] = svStrings;
 // ed.selectFile: "Select a file" => "Välj en fil"
 // ed.removeFile: "Remove the file" => "Ta bort filen"
 // pe.searchMode: "Search Mode" => "Sökläge"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Klicka på knappen \"Lägg till fråga\" nedan för att börja skapa ditt formulär."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Klicka på knappen \"Lägg till fråga\" nedan för att lägga till ett nytt element på sidan."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Klicka på knappen \"Lägg till fråga\" nedan för att lägga till ett nytt element i panelen."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klicka på knappen nedan och välj en bild att ladda upp"
+// coloralpha.opacity: "Opacity" => "Ogenomskinlighet"
+// font.family: "Font family" => "Teckensnitt familj"
+// font.color: "Color" => "Färg"
+// font.placeholderColor: "Placeholder color" => "Platshållarens färg"
+// font.size: "Size" => "Storlek"
+// theme.themeName: "Theme" => "Tema"
+// theme.isPanelless: "Question appearance" => "Frågans utseende"
+// theme.editorPanel: "Background and corner radius" => "Bakgrund och hörnradie"
+// theme.questionPanel: "Background and corner radius" => "Bakgrund och hörnradie"
+// theme.primaryColor: "Accent color" => "Accentfärg"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Opacitet för panelbakgrund"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Opacitet för frågebakgrund"
+// theme.fontSize: "Font size" => "Teckenstorlek"
+// theme.scale: "Scale" => "Skala"
+// theme.cornerRadius: "Corner radius" => "Hörn radie"
+// theme.pageTitle: "Title font" => "Titel typsnitt"
+// theme.pageDescription: "Description font" => "Beskrivning teckensnitt"
+// theme.questionTitle: "Title font" => "Titel typsnitt"
+// theme.questionDescription: "Description font" => "Beskrivning teckensnitt"
+// theme.editorFont: "Font" => "Teckensnitt"
+// theme.backgroundOpacity: "Opacity" => "Ogenomskinlighet"
+// theme.--sjs-font-family: "Font family" => "Teckensnitt familj"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Bakgrundsfärg"
+// theme.--sjs-primary-backcolor: "Accent background" => "Accent bakgrund"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Accent förgrund"
+// theme.--sjs-shadow-small: "Shadow effects" => "Skugga effekter"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Skugga effekter"
+// theme.--sjs-border-default: "Colors" => "Färger"
+// header@header.headerView: "View" => "Utsikt"
+// header@header.logoPosition: "Logo position" => "Logotypens placering"
+// header@header.surveyTitle: "Survey title font" => "Teckensnitt för undersökningens titel"
+// header@header.surveyDescription: "Survey description font" => "Teckensnitt för undersökningsbeskrivning"
+// header@header.headerTitle: "Survey title font" => "Teckensnitt för undersökningens titel"
+// header@header.headerDescription: "Survey description font" => "Teckensnitt för undersökningsbeskrivning"
+// header@header.inheritWidthFrom: "Content area width" => "Bredd på innehållsområdet"
+// header@header.textAreaWidth: "Text width" => "Textens bredd"
+// header@header.backgroundColorSwitch: "Background color" => "Bakgrundsfärg"
+// header@header.backgroundImage: "Background image" => "Bakgrundsbild"
+// header@header.backgroundImageOpacity: "Opacity" => "Ogenomskinlighet"
+// header@header.overlapEnabled: "Overlap" => "Överlappa"
+// header@header.logoPositionX: "Logo position" => "Logotypens placering"
+// header@header.titlePositionX: "Title position" => "Titel position"
+// header@header.descriptionPositionX: "Description position" => "Beskrivning position"
+// weight.400: "Regular" => "Ordinarie"
+// weight.600: "Heavy" => "Tung"
+// weight.700: "Semi-bold" => "Halvfet stil"
+// weight.800: "Bold" => "Djärv"
+// backgroundImageFit.auto: "Auto" => "Bil"
+// backgroundImageFit.cover: "Cover" => "Täcka"
+// backgroundImageFit.contain: "Contain" => "Innehålla"
+// backgroundImageFit.fill: "Stretch" => "Tänja"
+// backgroundImageFit.tile: "Tile" => "Kakel"
+// backgroundImageAttachment.fixed: "Fixed" => "Fast"
+// backgroundImageAttachment.scroll: "Scroll" => "Rulla"
+// headerView.basic: "Basic" => "Grundläggande"
+// headerView.advanced: "Advanced" => "Avancerad"
+// inheritWidthFrom.survey: "Same as survey" => "Samma som enkät"
+// inheritWidthFrom.container: "Fit to container" => "Passa till behållare"
+// backgroundColorSwitch.none: "None" => "Ingen"
+// backgroundColorSwitch.accentColor: "Accent color" => "Accentfärg"
+// backgroundColorSwitch.custom: "Custom" => "Sed"
+// colorPalette.light: "Light" => "Ljus"
+// colorPalette.dark: "Dark" => "Mörk"
+// isPanelless.false: "Default" => "Standard"
+// isPanelless.true: "Without Panels" => "Utan paneler"
+// theme.cornerRadius: "Corner radius" => "Hörn radie"
+// theme.fontFamily: "Font family" => "Teckensnitt familj"
+// theme.fontWeightRegular: "Regular" => "Ordinarie"
+// theme.fontWeightHeavy: "Heavy" => "Tung"
+// theme.fontWeightSemiBold: "Semi-bold" => "Halvfet stil"
+// theme.fontWeightBold: "Bold" => "Djärv"
+// theme.color: "Color" => "Färg"
+// theme.placeholderColor: "Placeholder color" => "Platshållarens färg"
+// theme.size: "Size" => "Storlek"
+// theme.opacity: "Opacity" => "Ogenomskinlighet"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Skriv för att söka..."
+// ed.toolboxNoResultsFound: "No results found" => "Inga resultat hittades"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Platshållare för flikrubrik"
+// theme.--sjs-special-red: "Error messages" => "Felmeddelanden"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "En reservtext för flikrubriker som gäller när flikrubrikmönstret inte ger ett meningsfullt värde."
+// theme.fontColor: "Font color" => "Teckenfärg"
+// theme.backgroundColor: "Background color" => "Bakgrundsfärg"
+// pe.questionTitleWidth: "Question title width" => "Bredd på frågerubrik"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Välj en fil eller klistra in en fillänk..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Ex.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Anger konsekvent bredd för frågerubriker när de är justerade till vänster om frågerutorna. Accepterar CSS-värden (px, %, in, pt, etc.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Anger konsekvent bredd för frågerubriker när de är justerade till vänster om frågerutorna. Accepterar CSS-värden (px, %, in, pt, etc.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Kommentarsfältets höjd (i rader)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Anger antalet rader som ska visas i textområden för frågekommentarer. I inmatningen tar upp fler rader visas rullningslisten."
+// pe.enabled: "Enabled" => "Aktiverat"
+// pe.disabled: "Disabled" => "Handikappad"
+// pe.inherit: "Inherit" => "Ärva"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Validera tomma fält vid förlorat fokus"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Ex.: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Ex.: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Aktivera det här alternativet för att utlösa validering när en användare fokuserar på ett tomt inmatningsfält och sedan lämnar det utan att göra några ändringar."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Den här inställningen gäller endast för frågor utanför en panel."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Ställer in en extra färg som framhäver viktiga undersökningselement."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Justerar transparensen för paneler och frågerutor i förhållande till undersökningens bakgrund."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Justerar transparensen för indataelement i förhållande till undersökningens bakgrund."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Anger hörnradien för alla rektangulära element. Aktivera Avancerat läge om du vill ställa in individuella hörnradievärden för inmatningselement eller paneler och frågerutor."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Ställer in undersökningens huvudsakliga bakgrundsfärg."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samma som behållare\" justerar automatiskt bredden på rubrikens innehållsområde så att det passar in i HTML-elementet som undersökningen placeras i."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Bredden på rubrikområdet som innehåller undersökningens titel och beskrivning, mätt i pixlar."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepterar värden %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepterar värdena px."
+// p.effectiveColSpan: "Column span" => "Kolumn spännvidd"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Samma som undersökning"
+// progressBarInheritWidthFrom.container: "Same as container" => "Samma som behållare"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Alternativet \"Samma som behållare\" justerar automatiskt förloppsindikatorns bredd så att den passar in i HTML-elementet som undersökningen är placerad i."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Bredd på förloppsindikatorns area"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mönster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Datum och tid"
+// maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Bil"
+// inputTextAlignment.left: "Left" => "Vänster"
+// inputTextAlignment.right: "Right" => "Höger"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Välj hur du vill justera indatavärdet i fältet. Standardinställningen \"Auto\" justerar indatavärdet till höger om valutamaskering eller numerisk maskering används och till vänster om inte."
+// p.inputTextAlignment: "Input value alignment" => "Justering av indatavärde"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Visa förloppsindikatorn"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Visa förloppsindikatorn"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Justering av förloppsindikator"
+// pv.carousel: "Carousel" => "Karusell"
+// progressBarLocation.top: "Top" => "Topp"
+// progressBarLocation.bottom: "Bottom" => "Botten"
+// progressBarLocation.topBottom: "Top and bottom" => "Topp och botten"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-länkar stöds inte."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Börja konfigurera formuläret"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klicka på en kategoriikon för att utforska undersökningsinställningarna. Ytterligare inställningar blir tillgängliga när du lägger till ett undersökningselement på designytan."
+// pe.caseInsensitive: "Case insensitive" => "Skiftlägesokänsligt"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Välj om versaler och gemener i det reguljära uttrycket ska behandlas som likvärdiga."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Formuläret är tomt"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Formuläret är tomt"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Dra ett element från verktygslådan eller klicka på knappen nedan."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Dra ett element från verktygslådan eller klicka på knappen nedan."
+// ed.previewPlaceholderTitle: "No preview" => "Ingen förhandsgranskning"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Ingen förhandsgranskning"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Undersökningen innehåller inga synliga element."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Undersökningen innehåller inga synliga element."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Inga strängar att översätta"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Inga strängar att översätta"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Lägg till element i formuläret eller ändra strängfiltret i verktygsfältet."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Lägg till element i formuläret eller ändra strängfiltret i verktygsfältet."
+// lg.logicPlaceholderTitle: "No logical rules" => "Inga logiska regler"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Inga logiska regler"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Skapa en regel för att anpassa flödet i undersökningen."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Skapa en regel för att anpassa flödet i undersökningen."
+// pe.showTimer: "Use a timer" => "Använd en timer"
+// theme.advancedMode: "Advanced mode" => "Avancerat läge"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Ställer in platsen för en timer på en sida."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "När värdet är 0 beräknas höjden automatiskt för att passa rubrikens innehåll."
+// p.mobileHeight: "Height on smartphones" => "Höjd på smartphones"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "När det här alternativet är aktiverat täcker den övre delen av undersökningen den nedre delen av sidhuvudet."
+// ed.creatorSettingTitle: "Creator Settings" => "Inställningar för kreatör"
+// tabs.accentColors: "Accent colors" => "Accentfärger"
+// tabs.scaling: "Scaling" => "Skalning"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Tilldelar nummer till frågor som är kapslade i den här panelen."
+// creatortheme.--sjs-special-background: "Surface background" => "Bakgrund på ytan"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primär"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundär"
+// creatortheme.surfaceScale: "Surface" => "Yta"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Användargränssnitt"
+// creatortheme.fontScale: "Font" => "Teckensnitt"
+// names.sc2020: "Survey Creator 2020" => "Enkät skapare 2020"
+// names.default-light: "Light" => "Ljus"
+// names.default-dark: "Dark" => "Mörk"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Numrera den här panelen"
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Välj om du vill att undersökningen automatiskt ska gå vidare till nästa sida när en svarande har svarat på alla frågor på den aktuella sidan. Den här funktionen gäller inte om den sista frågan på sidan är öppen eller tillåter flera svar."
+// autocomplete.name: "Full Name" => "Fullständigt namn"
+// autocomplete.honorific-prefix: "Prefix" => "Prefix"
+// autocomplete.given-name: "First Name" => "Förnamn"
+// autocomplete.additional-name: "Middle Name" => "Mellannamn"
+// autocomplete.family-name: "Last Name" => "Efternamn"
+// autocomplete.honorific-suffix: "Suffix" => "Suffix"
+// autocomplete.nickname: "Nickname" => "Smeknamn"
+// autocomplete.organization-title: "Job Title" => "Befattning"
+// autocomplete.username: "User Name" => "Användarnamn"
+// autocomplete.new-password: "New Password" => "Nytt lösenord"
+// autocomplete.current-password: "Current Password" => "Aktuellt lösenord"
+// autocomplete.organization: "Organization Name" => "Organisationens namn"
+// autocomplete.street-address: "Full Street Address" => "Fullständig gatuadress"
+// autocomplete.address-line1: "Address Line 1" => "Adress, rad 1"
+// autocomplete.address-line2: "Address Line 2" => "Adress Rad 2"
+// autocomplete.address-line3: "Address Line 3" => "Adress: Rad 3"
+// autocomplete.address-level4: "Level 4 Address" => "Nivå 4 Adress"
+// autocomplete.address-level3: "Level 3 Address" => "Nivå 3 Adress"
+// autocomplete.address-level2: "Level 2 Address" => "Nivå 2 Adress"
+// autocomplete.address-level1: "Level 1 Address" => "Nivå 1 Adress"
+// autocomplete.country: "Country Code" => "Landskod"
+// autocomplete.country-name: "Country Name" => "Landets namn"
+// autocomplete.postal-code: "Postal Code" => "Postnummer"
+// autocomplete.cc-name: "Cardholder Name" => "Kortinnehavarens namn"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Kortinnehavarens förnamn"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Kortinnehavarens mellannamn"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Kortinnehavarens efternamn"
+// autocomplete.cc-number: "Credit Card Number" => "Kreditkortsnummer"
+// autocomplete.cc-exp: "Expiration Date" => "Utgångsdatum"
+// autocomplete.cc-exp-month: "Expiration Month" => "Förfallomånad"
+// autocomplete.cc-exp-year: "Expiration Year" => "Utgångsdatum"
+// autocomplete.cc-csc: "Card Security Code" => "Kortets säkerhetskod"
+// autocomplete.cc-type: "Credit Card Type" => "Typ av kreditkort"
+// autocomplete.transaction-currency: "Transaction Currency" => "Transaktionsvalutan"
+// autocomplete.transaction-amount: "Transaction Amount" => "Transaktionens belopp"
+// autocomplete.language: "Preferred Language" => "Önskat språk"
+// autocomplete.bday: "Birthday" => "Födelsedag"
+// autocomplete.bday-day: "Birthday Day" => "Födelsedag"
+// autocomplete.bday-month: "Birthday Month" => "Födelsedag Månad"
+// autocomplete.bday-year: "Birthday Year" => "Födelsedag År"
+// autocomplete.sex: "Gender" => "Genus"
+// autocomplete.url: "Website URL" => "Webbadress"
+// autocomplete.photo: "Profile Photo" => "Profilbild"
+// autocomplete.tel: "Telephone Number" => "Telefonnummer"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Landskod för telefon"
+// autocomplete.tel-national: "National Telephone Number" => "Nationellt telefonnummer"
+// autocomplete.tel-area-code: "Area Code" => "Riktnummer"
+// autocomplete.tel-local: "Local Phone Number" => "Lokalt telefonnummer"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Prefix för lokal telefon"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Suffix för lokal telefon"
+// autocomplete.tel-extension: "Phone Extension" => "Telefonanknytning"
+// autocomplete.email: "Email Address" => "E-postadress"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokoll för snabbmeddelanden"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lås expandera/komprimera tillstånd för frågor"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har inga sidor ännu"
+// pe.addNew@pages: "Add new page" => "Lägg till ny sida"
+// ed.zoomInTooltip: "Zoom In" => "Zooma in"
+// ed.zoomOutTooltip: "Zoom Out" => "Zooma ut"
+// tabs.surfaceBackground: "Surface Background" => "Yta Bakgrund"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Använd svar från den senaste posten som standard"
+// colors.gray: "Gray" => "Grå"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Justering av navigeringsknappar"
+// pv.allQuestions: "Show all questions" => "Visa alla frågor"
+// pv.answeredQuestions: "Show answered questions only" => "Visa endast besvarade frågor"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Anger placeringen av navigeringsknapparna på en sida."
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Använd värden från följande matriskolumn eller panelfråga som val-ID:t"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Använd värden från följande matriskolumn eller panelfråga som valtexter"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "I frågetyper med ett eller flera val har varje alternativ ett ID och ett visningsvärde. Den här inställningen anger vilken matriskolumn eller panelfråga som ska ange ID:n."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "I frågetyper med ett eller flera val har varje alternativ ett ID och ett visningsvärde. Den här inställningen anger vilken matris-, kolumn- eller panelfråga som ska tillhandahålla visningstexterna."
+// pe.progressBarLocation: "Progress bar alignment" => "Justering av förloppsindikator"
+// progressBarLocation.topbottom: "Top and bottom" => "Topp och botten"
+// progressBarLocation.aboveheader: "Above the header" => "Ovanför sidhuvudet"
+// progressBarLocation.belowheader: "Below the header" => "Nedanför sidhuvudet"
+// progressBarLocation.off: "Hidden" => "Dold"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Ställer in platsen för förloppsindikatorn. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
+// survey.readOnly: "Make the survey read-only" => "Gör undersökningen skrivskyddad"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Välj om du vill hindra respondenterna från att fylla i din undersökning."
+// paneldynamic.showNumber: "Number the panel" => "Numrera panelen"
+// question.showNumber: "Number this question" => "Numrera den här frågan"
+// pe.previewMode: "Preview mode" => "Förhandsgranska läge"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Aktivera rutnätslayouten"
+// pe.maskSettings: "Mask settings" => "Inställningar för mask"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Felmeddelande om radexpansion"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Anger platsen för felmeddelanden för frågor som är kapslade i detaljavsnitt. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolumner för rutnätslayout"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startsida"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektiv bredd, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Frågans titelbredd, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Du har inga layoutkolumner ännu"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Anger hur många kolumner den här panelen sträcker sig över i rutnätslayouten."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I den här tabellen kan du konfigurera varje rutnätskolumn i panelen. Den ställer automatiskt in breddprocenten för varje kolumn baserat på det maximala antalet element i en rad. Om du vill anpassa rutnätslayouten justerar du dessa värden manuellt och definierar rubrikbredden för alla frågor i varje kolumn."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Med Survey Creator kan du manuellt justera de infogade bredderna på formulärelement för att styra layouten. Om detta inte ger önskat resultat kan du aktivera rutnätslayouten, som strukturerar bildelement med hjälp av ett kolumnbaserat system. För att konfigurera layoutkolumner, välj en sida eller panel och använd tabellen \"Frågeinställningar\" → \"Rutnätskolumner\". För att justera hur många kolumner en fråga sträcker sig över, markera den och ställ in önskat värde i fältet \"Layout\" → \"Kolumnintervall\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Anger hur många kolumner den här frågan sträcker sig över i rutnätslayouten."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I den här tabellen kan du konfigurera varje rutnätskolumn på sidan. Den ställer automatiskt in breddprocenten för varje kolumn baserat på det maximala antalet element i en rad. Om du vill anpassa rutnätslayouten justerar du dessa värden manuellt och definierar rubrikbredden för alla frågor i varje kolumn."
+
+// ed.expandTooltip: "Expand" => "Expandera"
+// ed.collapseTooltip: "Collapse" => "Kollaps"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Ex.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Ställer in konsekvent bredd för alla objektetiketter. Accepterar CSS-värden (px, %, in, pt, etc.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zooma till 100 %"
+// ed.addLanguageTooltip: "Add Language" => "Lägg till språk"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Ställer in antalet rader som visas i textområden för frågekommentarer. Om inmatningen tar upp fler rader visas rullningslisten."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Standardvisningsvärde för dynamiska texter"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Ett värde som visas i HTML-frågor och i dynamiska titlar och beskrivningar av undersökningselement när frågevärdet är tomt."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekursiv numrering"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Bredd på frågetitel"
+// pe.allowCustomChoices: "Allow custom choices" => "Tillåt anpassade val"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Ställer in konsekvent bredd för frågetitlar när de är justerade till vänster om sina frågerutor. Accepterar CSS-värden (px, %, in, pt, etc.)."
+// page.name: "A page ID that is not visible to respondents." => "Ett sid-ID som inte är synligt för svarande."
+// page.description: "Type a page subtitle." => "Skriv en underrubrik på sidan."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "En bildtext som visas på en navigeringsknapp i förloppsindikatorn eller innehållsförteckningen. Om du lämnar det här fältet tomt kommer navigeringsknappen att använda sidans titel eller sidnamn. För att aktivera förloppsindikatorn eller innehållsförteckningen, gå till \"Undersökning\" → \"Navigering\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Välj om du vill att de svarande ska kunna lägga till sina egna alternativ om det önskade alternativet inte är tillgängligt i rullgardinsmenyn. Anpassade val kommer endast att lagras tillfälligt under den aktuella webbläsarsessionen."

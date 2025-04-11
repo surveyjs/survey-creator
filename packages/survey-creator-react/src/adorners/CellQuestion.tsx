@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Base, Question } from "survey-core";
 import {
   attachKey2click,
@@ -27,11 +27,7 @@ export class CellQuestionAdornerComponent extends CreatorModelElement<
   protected getUpdatedModelProps(): string[] {
     return ["question", "componentData"];
   }
-  render(): JSX.Element {
-    if (this.model.isDragged) {
-      return null;
-    }
-
+  render(): React.JSX.Element {
     return (
       <React.Fragment>
         <div

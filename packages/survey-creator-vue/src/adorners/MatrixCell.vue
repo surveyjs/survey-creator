@@ -16,17 +16,26 @@
       class="svc-matrix-cell__question-controls"
     >
       <span
-        class="svc-matrix-cell__question-controls-button"
+        class="svc-matrix-cell__question-controls-button svc-context-button"
         @click="adorner.editQuestion(adorner, $event)"
         v-key2click
       >
-        <sv-svg-icon :iconName="'icon-edit'" :size="24"></sv-svg-icon>
+        <SvComponent
+          :is="'sv-svg-icon'"
+          :iconName="'icon-edit'"
+          :size="'auto'"
+        ></SvComponent>
       </span>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import { SurveyCreatorModel, MatrixCellWrapperViewModel } from "survey-creator-core";
+import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
+import { SvComponent } from "survey-vue3-ui";
+import {
+  SurveyCreatorModel,
+  MatrixCellWrapperViewModel,
+} from "survey-creator-core";
 import type { QuestionSelectBase } from "survey-core";
 import { computed } from "vue";
 import { useCreatorModel } from "@/creator-model";

@@ -30,14 +30,14 @@ export class PropertyGridEditorBindings extends PropertyGridEditor {
   public onCreated(obj: Base, question: QuestionCompositeModel, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
     question.contentPanel.fromJSON({ elements: this.getQuestions(obj, options) });
     question.valueFromDataCallback = (value: any): any => {
-      if(!value && obj.bindings.getNames().length > 0) {
-        const result: { [index: string]: any } = {};
-        for(const bindingName of obj.bindings.getNames()) {
-          result[bindingName] = obj.bindings.getValueNameByPropertyName(bindingName);
+      const keys = obj.bindings.getNames();
+      const result: { [index: string]: any } = {};
+      if(keys.length > 0) {
+        for(const key of keys) {
+          result[key] = !!value ? value[key] : obj.bindings.getValueNameByPropertyName(key);
         }
-        return result;
       }
-      return value;
+      return result;
     };
   }
   private getQuestions(obj: Base, options: ISurveyCreatorOptions): Array<object> {

@@ -2,8 +2,11 @@ import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel,
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
-import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
+import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { Translation, createImportCSVAction, createExportCSVAction } from "./translation";
+import { TabControlModel } from "../side-bar/tab-control-model";
+import { MenuButton } from "../../utils/actions";
+import { listComponentCss } from "../list-theme";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
   private filterStringsAction: Action;
@@ -11,22 +14,45 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private mergeLocaleWithDefaultAction: Action;
   private importCsvAction: Action;
   private exportCsvAction: Action;
-  private sidebarTab: SidebarTabModel;
+  private sidebarTab: SidebarPageModel;
+  private _showOneCategoryInPropertyGrid: boolean = true;
+  private tabControlModel: TabControlModel;
 
   public model: Translation;
 
+  public get showOneCategoryInPropertyGrid(): boolean {
+    return this._showOneCategoryInPropertyGrid;
+  }
+  public set showOneCategoryInPropertyGrid(newValue) {
+    if (this._showOneCategoryInPropertyGrid !== newValue) {
+      this._showOneCategoryInPropertyGrid = newValue;
+      this.creator.sidebar.hideSideBarVisibilityControlActions = newValue;
+      if (this.creator.activeTab === "translation") {
+        this.updateTabControl();
+      }
+    }
+  }
+
+  private updateSettingsSurvey(): void {
+    this.model.settingsSurvey.locale = this.creator.locale;
+    this.model.settingsSurvey.css.root += (this.showOneCategoryInPropertyGrid ? " spg-root--one-category" : "");
+    this.model.settingsSurvey.rootCss += (this.showOneCategoryInPropertyGrid ? " spg-root--one-category" : "");
+  }
+
   constructor(private creator: SurveyCreatorModel) {
-    creator.addPluginTab("translation", this);
-    this.sidebarTab = this.creator.sidebar.addTab("translation");
+    creator.addTab({ name: "translation", plugin: this, iconName: "icon-language" });
+    this.showOneCategoryInPropertyGrid = creator.showOneCategoryInPropertyGrid;
+    this.tabControlModel = new TabControlModel(this.creator.sidebar);
+    this.sidebarTab = this.creator.sidebar.addPage("translation");
     this.sidebarTab.caption = editorLocalization.getString("ed.translationPropertyGridTitle");
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
-    this.model.settingsSurvey.locale = this.creator.locale;
+    this.updateSettingsSurvey();
     this.model.readOnly = this.creator.readOnly;
     this.model.translationStringVisibilityCallback = (obj: Base, propertyName: string, visible: boolean) => {
-      const options = { obj: obj, propertyName: propertyName, visible: visible };
+      const options = { obj: obj, element: obj, propertyName: propertyName, visible: visible };
       !this.creator.onTranslationStringVisibility.isEmpty && this.creator.onTranslationStringVisibility.fire(this.creator, options);
       return options.visible;
     };
@@ -43,9 +69,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.model.importFinishedCallback = (): void => {
       this.creator.onTranslationImported.fire(this.creator, {});
     };
-    this.sidebarTab.model = this.model.settingsSurvey;
+    this.sidebarTab.componentData = this.model.settingsSurvey;
     this.sidebarTab.componentName = "survey-widget";
-    this.creator.sidebar.activeTab = this.sidebarTab.id;
+    this.creator.sidebar.activePage = this.sidebarTab.id;
 
     this.mergeLocaleWithDefaultAction.title = this.createMergeLocaleWithDefaultActionTitleUpdater();
     this.mergeLocaleWithDefaultAction.tooltip = this.createMergeLocaleWithDefaultActionTitleUpdater();
@@ -84,12 +110,15 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
 
     this.model.reset();
+    this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
+    this.updateTabControl();
   }
   public update(): void {
     if (!this.model) return;
     this.model.survey = this.creator.survey;
     this.model.filteredPage = null;
     this.updateFilterPageAction(true);
+    this.updateTabControl();
   }
   public deactivate(): boolean {
     if (!!this.model) {
@@ -104,8 +133,44 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.visible = false;
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
-
+    this.creator.sidebar.hideSideBarVisibilityControlActions = false;
+    this.creator.sidebar.header.reset();
     return true;
+  }
+  private updateTabControl() {
+    if (this.showOneCategoryInPropertyGrid) {
+      this.updateTabControlActions();
+      this.creator.sidebar.sideAreaComponentName = "svc-tab-control";
+      this.creator.sidebar.sideAreaComponentData = this.tabControlModel;
+      this.creator.sidebar.header.componentName = "svc-side-bar-header";
+      this.creator.sidebar.header.componentData = this.creator.sidebar.header;
+    } else {
+      this.creator.sidebar.sideAreaComponentName = "";
+      this.creator.sidebar.sideAreaComponentData = undefined;
+      this.creator.sidebar.header.componentName = "";
+      this.creator.sidebar.header.componentData = undefined;
+    }
+  }
+  private updateTabControlActions() {
+    if (this.showOneCategoryInPropertyGrid) {
+      const languagesString = editorLocalization.getString("ed.translationLanguages");
+      const action = new MenuButton({
+        id: "pg-languages",
+        tooltip: languagesString,
+        iconName: "pg-general-24x24",
+        active: true,
+        pressed: false,
+        action: () => {
+          this.creator.sidebar.expandSidebar();
+          this.creator.sidebar.header.title = languagesString;
+          action.active = true;
+        }
+      });
+
+      this.tabControlModel.topToolbar.setItems([action]);
+      this.creator.sidebar.header.title = languagesString;
+      this.creator.sidebar.header.subTitle = this.sidebarTab.caption;
+    }
   }
   private createMergeLocaleWithDefaultActionTitleUpdater(): any {
     return <any>new ComputedUpdater<string>(() => {
@@ -152,6 +217,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     items.push(this.mergeLocaleWithDefaultAction);
 
     this.importCsvAction = createImportCSVAction(() => { this.model.importFromCSVFileDOM(); }, true);
+    this.importCsvAction.enabled = <any>(new ComputedUpdater(() => !this.creator.readOnly));
     this.importCsvAction.visible = false;
     items.push(this.importCsvAction);
 
@@ -174,7 +240,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       onSelectionChanged: (item: IAction) => {
         this.model.filteredPage = !!item.id ? this.creator.survey.getPageByName(item.id) : null;
       },
-      horizontalPosition: "center"
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
+      cssClasses: listComponentCss,
     });
   }
   private createFilterStringsAction() {
@@ -184,12 +252,14 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       visible: false,
       mode: "small",
     }, {
-      items: [{ id: "show-all-strings", title: this.showAllStringsText }, { id: "show-used-strings-only", title: this.showUsedStringsOnlyText }],
+      items: [{ id: "show-all-strings", locTitleName: "ed.translationShowAllStrings" }, { id: "show-used-strings-only", locTitleName: "ed.translationShowUsedStringsOnly" }],
       allowSelection: true,
       onSelectionChanged: (item: IAction) => {
         this.model.showAllStrings = item.id === "show-all-strings";
       },
-      horizontalPosition: "center"
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
+      cssClasses: listComponentCss,
     });
   }
   private updateFilterStrigsAction(updateSelectedItem: boolean = false) {

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ReactQuestionFactory, SurveyPage, ISurveyCreator, SurveyQuestionElementBase } from "survey-react-ui";
 import { QuestionEmbeddedSurveyModel } from "survey-creator-core";
 
@@ -9,7 +9,7 @@ export class SurveyElementEmbeddedSurvey extends SurveyQuestionElementBase {
   protected get creator(): ISurveyCreator {
     return this.props.creator;
   }
-  public render(): JSX.Element {
+  public render(): React.JSX.Element {
     if (!this.embeddedSurvey) return null;
     const survey = this.embeddedSurvey.embeddedSurvey;
     if (!survey || !survey.currentPage) return null;

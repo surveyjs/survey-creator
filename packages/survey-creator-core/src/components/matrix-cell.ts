@@ -8,13 +8,18 @@ import {
   QuestionMatrixDropdownModelBase,
   Helpers,
   IDialogOptions,
+  PopupBaseViewModel,
+  surveyLocalization,
+  Serializer,
 } from "survey-core";
+import { defaultCss } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
-import { defaultV2Css } from "survey-core";
-import { toggleHovered } from "../utils/utils";
+import { toggleHovered } from "../utils/html-element-utils";
 import { SurveyHelper } from "../survey-helper";
+import { editorLocalization } from "../editorLocalization";
+import designTabSurveyThemeJSON from "../designTabSurveyThemeJSON";
 
-require("./matrix-cell.scss");
+import "./matrix-cell.scss";
 
 export class MatrixCellWrapperEditSurvey {
   private surveyValue: SurveyModel;
@@ -24,7 +29,7 @@ export class MatrixCellWrapperEditSurvey {
     let questionJSON = cellQuestion.toJSON();
     questionJSON.type = cellQuestion.getType();
     this.surveyValue = creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor", model, (survey: SurveyModel): void => {
-      survey.css = defaultV2Css;
+      survey.css = defaultCss;
       survey.setDesignMode(true);
       (<any>survey).isPopupEditorContent = true;
       survey.showQuestionNumbers = "none";
@@ -41,17 +46,25 @@ export class MatrixCellWrapperEditSurvey {
     const column: MatrixDropdownColumn = matrix.getColumnByName(this.cellQuestion.name);
     const columnJSON = column.toJSON();
     const prevCellType = columnJSON["cellType"];
-    const questionJSON = this.survey.getAllQuestions()[0].toJSON();
+    const questionJSON = this.question.toJSON();
+    const qType = this.question.getType();
     if(!!prevCellType) {
       questionJSON.cellType = prevCellType;
     }
     if(Helpers.isTwoValueEquals(questionJSON, columnJSON)) return;
     for(let key in columnJSON) {
-      if(questionJSON[key] === undefined && (columnJSON[key] === true || columnJSON[key] === false)) {
+      if(!!Serializer.findProperty(qType, key) && questionJSON[key] === undefined && (columnJSON[key] === true || columnJSON[key] === false)) {
         questionJSON[key] = !columnJSON[key];
       }
     }
-    column.fromJSON(questionJSON);
+    if(column.cellType === "default") {
+      column.cellType = qType;
+    }
+    for(let key in questionJSON) {
+      if(!Helpers.isTwoValueEquals(questionJSON[key], columnJSON[key])) {
+        column[key] = questionJSON[key];
+      }
+    }
     matrix.onColumnCellTypeChanged(column);
     this.creator.setModified({ type: "MATRIX_CELL_EDITOR", column: column });
   }
@@ -63,7 +76,7 @@ export class MatrixCellWrapperViewModel extends Base {
     // if(!question && !!this.templateData.data) {
     //   this.question = this.templateData.data;
     // }
-    creator.onSelectedElementChanged.add(this.onSelectionChanged);
+    creator.onElementSelected.add(this.onSelectionChanged);
   }
   @property() isSelected: boolean;
 
@@ -78,22 +91,30 @@ export class MatrixCellWrapperViewModel extends Base {
   public editQuestion(model: MatrixCellWrapperViewModel, event: MouseEvent) {
     const editSurvey = new MatrixCellWrapperEditSurvey(model.creator, model.question, model.column, this);
     editSurvey.question.cellOwner = model;
-    settings.showDialog(
+
+    const prevCurrentLocale = surveyLocalization.currentLocale;
+    const locale = editorLocalization.currentLocale;
+    surveyLocalization.currentLocale = locale;
+    const popupModel: PopupBaseViewModel = settings.showDialog(
       <IDialogOptions>{
         componentName: "svc-question-editor-content",
         data: {
           survey: editSurvey.survey,
-          creator: this.creator
+          creator: this.creator,
+          style: designTabSurveyThemeJSON.cssVariables
         },
         onApply: () => {
           editSurvey.apply();
           return true;
         },
-        cssClass: "svc-matrix-cell__popup",
+        cssClass: "svc-matrix-cell__popup svc-creator-popup",
         title: model.question.name,
         displayMode: this.creator.isMobileView ? "overlay" : "popup"
       }, model.creator.rootElement
     );
+    popupModel.locale = locale;
+    surveyLocalization.currentLocale = prevCurrentLocale;
+
     event.stopPropagation();
     model.creator.selectElement(model.column);
   }
@@ -127,7 +148,7 @@ export class MatrixCellWrapperViewModel extends Base {
     }
   }
   public dispose(): void {
-    this.creator.onSelectedElementChanged.remove(this.onSelectionChanged);
+    this.creator.onElementSelected.remove(this.onSelectionChanged);
     super.dispose();
   }
 }

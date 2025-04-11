@@ -749,9 +749,9 @@ test("extended SurveyPropertyItemValue + custom property - process items with cu
   Serializer.removeClass("itemvalues_ex");
 });
 test("SurveyPropertyItemValuesEditor + locale", () => {
-  var survey = new SurveyModel();
-  var p = survey.addNewPage();
-  var question = <QuestionDropdownModel>p.addNewQuestion("dropdown", "q1");
+  const survey = new SurveyModel();
+  const p = survey.addNewPage();
+  const question = <QuestionDropdownModel>p.addNewQuestion("dropdown", "q1");
   question.choices = [1, 2, 3];
   survey.locale = "en";
   question.choices[0].text = "English 1";
@@ -760,14 +760,16 @@ test("SurveyPropertyItemValuesEditor + locale", () => {
   var choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
-  var rows = choicesQuestion.visibleRows;
-  expect(rows[0].cells[1].value).toEqual("English 1");
+  const rows = choicesQuestion.visibleRows;
+  const textQuestion = rows[0].getQuestionByColumnName("text");
+  expect(textQuestion.value).toBeFalsy();
+  expect(textQuestion.placeholder).toEqual("English 1");
   rows[0].cells[1].value = "Deutsch 1";
   survey.locale = "en";
   expect(question.choices[0].text).toEqual("English 1");
   survey.locale = "de";
   expect(question.choices[0].text).toEqual("Deutsch 1");
-  expect(rows[0].cells[1].value).toEqual("Deutsch 1");
+  expect(textQuestion.value).toEqual("Deutsch 1");
   survey.locale = "en";
 });
 test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", () => {
@@ -777,7 +779,6 @@ test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", () => {
     p.addNewQuestion("matrixdynamic", "q1")
   );
   question.addColumn("col1");
-  survey.locale = "en";
   question.columns[0].title = "English 1";
 
   survey.locale = "de";
@@ -785,9 +786,11 @@ test("SurveyPropertyDropdownColumnsEditor + locale, bug#1285", () => {
   var columnsQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("columns")
   );
-  var rows = columnsQuestion.visibleRows;
-  expect(rows[0].getQuestionByColumnName("title").value).toEqual("English 1");
-  rows[0].getQuestionByColumnName("title").value = "Deutsch 1";
+  const rows = columnsQuestion.visibleRows;
+  const titleQuestion = rows[0].getQuestionByColumnName("title");
+  expect(titleQuestion.value).toBeFalsy();
+  expect(titleQuestion.placeholder).toBe("English 1");
+  titleQuestion.value = "Deutsch 1";
   survey.locale = "en";
   expect(question.columns[0].title).toEqual("English 1");
   survey.locale = "de";
@@ -1179,7 +1182,7 @@ test("SurveyPropertyPagesEditor custom loc item for 'add item'.", () => {
   var pagesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("pages")
   );
-  expect(pagesQuestion.addRowText).toEqual("Add New");
+  expect(pagesQuestion.addRowText).toEqual("Add new page");
 
   defaultStrings.pe["addNew@pages"] = "Add New Page";
   propertyGrid = new PropertyGridModelTester(survey);
@@ -1690,16 +1693,16 @@ test("SurveyHelper.applyItemValueArray", () => {
   var q1 = new QuestionDropdownModel("q1");
   var q2 = new QuestionDropdownModel("q1");
   q1.choices = [1];
-  FastEntryEditor.applyItemValueArray(q1.choices, null);
+  new FastEntryEditor([]).applyItemValueArray(q1.choices, null);
   expect(q1.choices).toHaveLength(0);
   q1.choices = [1];
   q2.choices = [];
-  FastEntryEditor.applyItemValueArray(q1.choices, q2.choices);
+  new FastEntryEditor([]).applyItemValueArray(q1.choices, q2.choices);
   expect(q1.choices).toHaveLength(0);
   var testSetFunc = function (val1: Array<any>, val2: Array<any>, num: number) {
     q1.choices = val1;
     q2.choices = val2;
-    FastEntryEditor.applyItemValueArray(q1.choices, q2.choices);
+    new FastEntryEditor([]).applyItemValueArray(q1.choices, q2.choices);
     expect(q1.toJSON()).toEqual(q2.toJSON());
   };
   testSetFunc([1, 2, 3], [1, 2, 4], 1);

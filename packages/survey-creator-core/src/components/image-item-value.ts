@@ -3,7 +3,7 @@ import { SurveyCreatorModel } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 
-require("./image-item-value.scss");
+import "./image-item-value.scss";
 export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   private isChoosingNewFile = false;
   @property({ defaultValue: false }) isFileDragging: boolean;
@@ -36,6 +36,10 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
 
   public get removeFileTitle() {
     return this.creator.getLocString("ed.removeFile");
+  }
+
+  public get addFileTitle() {
+    return this.creator.getLocString("ed.selectFile");
   }
 
   chooseFile(model: ImageItemValueWrapperViewModel) {
@@ -94,5 +98,9 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   }
   get acceptedTypes() {
     return getAcceptedTypesByContentMode(this.question.contentMode);
+  }
+  public dispose(): void {
+    this.itemsRoot = undefined;
+    super.dispose();
   }
 }

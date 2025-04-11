@@ -1,0 +1,8 @@
+<ng-template #template>
+  <button type="button" [key2click] (click)="selectQuestionType($event)" [attr.title]="questionTypeSelectorModel.title"
+    [attr.aria-label]="questionTypeSelectorModel.title" class="svc-element__question-type-selector">
+    <svg class="svc-element__question-type-selector-icon" [iconName]="questionTypeSelectorModel.iconName"
+      [size]="'auto'" sv-ng-svg-icon></svg>
+    <sv-ng-popup *ngIf="renderPopup" [popupModel]="questionTypeSelectorModel.popupModel"></sv-ng-popup>
+  </button>
+</ng-template>

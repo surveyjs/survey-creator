@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Action, Base } from "survey-core";
 import {
   SurveyActionBar,
@@ -9,6 +9,7 @@ import {
 import { TestSurveyTabViewModel } from "survey-creator-core";
 import { SurveySimulator } from "./SurveySimulator";
 import { SurveyResults } from "../Results";
+import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
 
 export class TabPreviewTestSurveyAgainComponent extends SurveyElementBase<any, any> {
   private get model(): Action {
@@ -18,7 +19,7 @@ export class TabPreviewTestSurveyAgainComponent extends SurveyElementBase<any, a
     return this.model;
   }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const buttonClassName = "svc-preview__test-again svc-btn";
     return attachKey2click(<div
       role="button"
@@ -29,7 +30,7 @@ export class TabPreviewTestSurveyAgainComponent extends SurveyElementBase<any, a
       className={buttonClassName}
       title={this.model.title}
     >
-      <span className="svc-text svc-text--normal svc-text--bold">
+      <span className="svc-btn__text">
         {this.model.title}
       </span>
     </div>);
@@ -49,20 +50,26 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
   protected getStateElement(): Base {
     return this.model;
   }
+  renderPlaceholder(): React.JSX.Element {
+    return <SurfacePlaceholder name={"preview"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />;
+  }
+  renderSimulator(): React.JSX.Element {
+    return (<div className="svc-plugin-tab__content">
+      <SurveySimulator model={this.model.simulator}></SurveySimulator>
+      {this.model.showResults ? <SurveyResults survey={this.model.simulator.survey} /> : null}
+    </div>);
+  }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const tabContentClassName = "svc-creator-tab__content svc-test-tab__content" + (this.model.isPageToolbarVisible ? " svc-creator-tab__content--with-toolbar" : "");
     return (
       <div className={tabContentClassName}>
-        <div className="svc-plugin-tab__content">
-          <SurveySimulator model={this.model.simulator}></SurveySimulator>
-          {this.model.showResults ? <SurveyResults survey={this.model.simulator.survey} /> : null}
-        </div>
+        {this.model.simulator.survey.isEmpty ? this.renderPlaceholder() : this.renderSimulator()}
         {this.getBottomToolbar()}
       </div>
     );
   }
-  getBottomToolbar(): JSX.Element {
+  getBottomToolbar(): React.JSX.Element {
     if (this.model.isPageToolbarVisible) {
       return (
         <div className="svc-test-tab__content-actions">
@@ -75,6 +82,6 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
   }
 }
 
-ReactElementFactory.Instance.registerElement("svc-tab-test", (props) => {
+ReactElementFactory.Instance.registerElement("svc-tab-preview", (props) => {
   return React.createElement(TabPreviewSurveyComponent, props);
 });

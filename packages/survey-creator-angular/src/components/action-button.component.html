@@ -1,6 +1,18 @@
 <ng-template #template>
-  <span *ngIf="disabled" class="svc-action-button svc-action-button--disabled"
-    [class]="classes" [attr.title]="title">{{text}}</span>
-  <span *ngIf="!disabled" role="button" class="svc-action-button"
-    (click)="onClick($event)" [key2click] [attr.title]="title" [class.svc-action-button--selected]="selected" [class]="classes">{{text}}</span>
+  <ng-container *ngIf="!iconName">
+    <span *ngIf="disabled" class="svc-action-button svc-action-button--disabled" [class]="classes"
+      [attr.title]="title">{{text}}</span>
+    <span *ngIf="!disabled" role="button" class="svc-action-button" (click)="onClick($event)" [key2click]
+      [attr.title]="title" [class.svc-action-button--selected]="selected" [class]="classes">{{text}}</span>
+  </ng-container>
+  <ng-container *ngIf="iconName">
+    <span *ngIf="disabled" class="svc-action-button svc-action-button--disabled svc-action-button--icon"
+      [class]="classes" [attr.title]="title">
+      <svg [iconName]="iconName" [size]="'auto'" sv-ng-svg-icon></svg>
+    </span>
+    <span *ngIf="!disabled" class="svc-action-button svc-action-button--icon" (click)="onClick($event)" [key2click]
+      [attr.title]="title" [attr.aria-label]="text" [class]="classes" [class.svc-action-button--selected]="selected">
+      <svg [iconName]="iconName" [size]="'auto'" sv-ng-svg-icon></svg>
+    </span>
+  </ng-container>
 </ng-template>

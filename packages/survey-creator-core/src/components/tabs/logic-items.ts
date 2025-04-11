@@ -16,7 +16,7 @@ import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
 import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { settings } from "../../creator-settings";
-import { wrapTextByCurlyBraces } from "../../utils/utils";
+import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 import { SurveyHelper } from "../../survey-helper";
 
 export class SurveyLogicAction {
@@ -44,15 +44,20 @@ export class SurveyLogicAction {
   public apply(expression: string, isRenaming: boolean = false): void {
     if (!!this.element && !!this.logicType) {
       this.element[this.logicType.propertyName] = expression;
-      if (
-        !expression &&
-        Serializer.isDescendantOf(this.element.getType(), "surveytrigger")
-      ) {
-        var index = this.survey.triggers.indexOf(<SurveyTrigger>this.element);
-        if (index > -1) {
-          this.survey.triggers.splice(index, 1);
+      if (!expression) {
+        if(Serializer.isDescendantOf(this.element.getType(), "surveytrigger")) {
+          this.removeElement(this.survey.triggers, this.element);
+        }
+        if(Serializer.isDescendantOf(this.element.getType(), "htmlconditionitem")) {
+          this.removeElement(this.survey.completedHtmlOnCondition, this.element);
         }
       }
+    }
+  }
+  private removeElement(items: Array<any>, element: any): void {
+    var index = items.indexOf(this.element);
+    if (index > -1) {
+      items.splice(index, 1);
     }
   }
   public renameQuestion(oldName: string, newName: string): void {

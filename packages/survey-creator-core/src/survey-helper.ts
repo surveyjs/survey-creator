@@ -11,7 +11,7 @@ import {
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { ISurveyCreatorOptions } from "./creator-settings";
-import { wrapTextByCurlyBraces } from "./utils/utils";
+import { wrapTextByCurlyBraces } from "./utils/creator-utils";
 
 export enum ObjType {
   Unknown = "unknown",
@@ -24,9 +24,9 @@ export enum ObjType {
 export class SurveyHelper {
   public static getNewElementName(el: ISurveyElement): string {
     const survey: SurveyModel = (<any>el).getSurvey();
-    if(!survey) return el.name;
-    if(el.isPage) return this.getNewPageName(survey.pages);
-    if(el.isPanel) return this.getNewPanelName(survey.getAllPanels());
+    if (!survey) return el.name;
+    if (el.isPage) return this.getNewPageName(survey.pages);
+    if (el.isPanel) return this.getNewPanelName(survey.getAllPanels());
     return this.getNewQuestionName(survey.getAllQuestions(false, false, true));
   }
   public static getNewPageName(objs: Array<any>) {
@@ -139,51 +139,31 @@ export class SurveyHelper {
     }
     return result;
   }
-  public static isPropertyVisible(
-    obj: any,
-    property: JsonObjectProperty,
-    options: ISurveyCreatorOptions = null,
-    showMode: string = null,
-    parentObj: any = null,
-    parentProperty: JsonObjectProperty = null
-  ): boolean {
-    if (!property || !property.visible) return false;
-    if (!!showMode && !!property.showMode && showMode !== property.showMode)
-      return false;
-    if (
-      !!property.isVisible &&
-      !!obj.getLayoutType &&
-      !(<any>property["isVisible"])(obj.getLayoutType(), null)
-    )
-      return false;
-    var canShow = !!options
-      ? (object: any, property: JsonObjectProperty) => {
-        return options.onCanShowPropertyCallback(
-          object,
-          property,
-          showMode,
-          parentObj,
-          parentProperty
-        );
-      }
-      : null;
-    if (!!canShow && !canShow(obj, property)) return false;
-    return true;
+  public static isPropertyVisible(obj: any, prop: JsonObjectProperty, options: ISurveyCreatorOptions = null, showMode: string = null, parentObj: any = null, parentProperty: JsonObjectProperty = null): boolean {
+    if (!prop || !prop.visible) return false;
+    if (!!showMode && !!prop.showMode && showMode !== prop.showMode && prop.locationInTable !== "both") return false;
+    return !options || options.onCanShowPropertyCallback(obj, prop, showMode, parentObj, parentProperty);
   }
-  public static scrollIntoViewIfNeeded(el: HTMLElement) {
+  public static isNeedScrollIntoView(el: HTMLElement, scrollIfElementBiggerThanContainer: boolean = false): undefined | "top" | "bottom" {
     if (!el || !el.scrollIntoView) return;
     var rect = el.getBoundingClientRect();
     var scrollableDiv = SurveyHelper.getScrollableDiv(el);
     if (!scrollableDiv) return;
     var height = scrollableDiv.clientHeight;
     if (rect.top < scrollableDiv.offsetTop) {
-      el.scrollIntoView(true);
+      return "top";
     } else {
       let offsetTop = height + scrollableDiv.offsetTop;
-      if (rect.bottom > offsetTop && rect.height < height) {
-        el.scrollIntoView(false);
+      if (rect.bottom > offsetTop && (rect.height < height || scrollIfElementBiggerThanContainer)) {
+        return "bottom";
       }
     }
+  }
+  public static scrollIntoViewIfNeeded(el: HTMLElement, getOptions?: (overTop: boolean) => ScrollIntoViewOptions, scrollIfElementBiggerThanContainer: boolean = false) {
+    const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el, scrollIfElementBiggerThanContainer);
+    if (!isNeedScroll) return;
+    const isNeedScrollToTop = isNeedScroll === "top";
+    el.scrollIntoView(getOptions ? getOptions(isNeedScrollToTop) : isNeedScrollToTop);
   }
   public static getScrollableDiv(el: HTMLElement): HTMLElement {
     while (!!el) {
@@ -269,17 +249,25 @@ export class SurveyHelper {
     delete json["minWidth"];
     delete json["maxWidth"];
   }
+  private static deleteRandomProperties(json: any) {
+    ["choicesOrder", "rowOrder"].forEach(prop => {
+      if (json[prop] === "random") {
+        delete json[prop];
+      }
+    });
+  }
   public static updateQuestionJson(questionJson: any) {
     questionJson.storeOthersAsComment = false;
     delete questionJson.valuePropertyName;
     SurveyHelper.deleteConditionProperties(questionJson);
+    SurveyHelper.deleteRandomProperties(questionJson);
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.choices);
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.rows);
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.columns);
     SurveyHelper.deleteConditionPropertiesFromArray(questionJson.rates);
   }
   private static deleteConditionPropertiesFromArray(jsonArray: Array<any>): void {
-    if(!Array.isArray(jsonArray)) return;
+    if (!Array.isArray(jsonArray)) return;
     jsonArray.forEach(item => {
       SurveyHelper.deleteConditionProperties(item);
     });

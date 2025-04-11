@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getVisibleElement, changeToolboxSearchEnabled, getToolboxItemByAriaLabel, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -8,6 +8,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 test("Properties on the same line", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json = {
+      showQuestionNumbers: "on",
       "elements": [
         {
           "type": "text",
@@ -52,6 +53,7 @@ test("Properties on the same line", async (t) => {
 test("Properties on the same line (date)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json = {
+      showQuestionNumbers: "on",
       "elements": [
         {
           "type": "text",
@@ -96,6 +98,7 @@ test("Properties on the same line (date)", async (t) => {
 test("Values editors, keep them close", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json = {
+      showQuestionNumbers: "on",
       "elements": [
         {
           "type": "text",
@@ -122,6 +125,7 @@ test("Values editors, keep them close", async (t) => {
 test("Check default value editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json = {
+      showQuestionNumbers: "on",
       "elements": [
         {
           "type": "text",
@@ -156,12 +160,12 @@ test("Default value popup", async (t) => {
     const dataTab = Selector("h4").withExactText("Data");
 
     await t
-      .hover(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
-      .click(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
+      .hover(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 })
+      .click(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 })
       .click(generalTab)
       .click(dataTab)
       .click(Selector(".svc-action-button.svc-question-link__set-button").withText("Set Default Answer"));
-    await takeElementScreenshot("pg-default-value-popup.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-default-value-popup.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
   });
 });
 
@@ -187,12 +191,12 @@ test("Custom button into fast entry popup", async (t) => {
     const choicesTab = Selector("h4").withExactText("Choice Options");
 
     await t
-      .hover(getToolboxItemByText("Dropdown"))
-      .click(getToolboxItemByText("Dropdown"))
+      .hover(getToolboxItemByAriaLabel("Dropdown"))
+      .click(getToolboxItemByAriaLabel("Dropdown"))
       .click(generalTab)
       .click(choicesTab)
       .click(Selector(".spg-action-button[title='Edit']"));
-    await takeElementScreenshot("pg-choices-fast-entry-popup.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-choices-fast-entry-popup.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
   });
 });
 
@@ -204,12 +208,12 @@ test("Logic popup", async (t) => {
     const logicTab = Selector("h4").withExactText("Conditions");
 
     await t
-      .hover(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
-      .click(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
+      .hover(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 })
+      .click(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 })
       .click(generalTab)
       .click(logicTab)
       .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"));
-    await takeElementScreenshot("pg-logic-popup.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-logic-popup.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
   });
 });
 
@@ -253,30 +257,24 @@ test("Logic popup with boolean question", async (t) => {
       .click(logicTab)
       .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"))
       .click(Selector(".sd-boolean--checked"));
-    await takeElementScreenshot("pg-logic-popup-boolean.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-logic-popup-boolean.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
     await t.click(Selector("button").withText("Cancel").filterVisible());
     await t.click(Selector(".spg-panel__content div[data-name='enableIf'] button[title='Edit']"));
-    await takeElementScreenshot("pg-logic-popup-rating.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-logic-popup-rating.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
   });
 });
 
 test("Logic popup mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1240, 870);
-    const generalTab = Selector("h4").withExactText("General");
-    const logicTab = Selector("h4").withExactText("Conditions");
-
+    await t.click(getAddNewQuestionButton());
     await t
-      .hover(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
-      .click(getToolboxItemByText("Single-Line Input"), { offsetX: 25 });
-    await t.resizeWindow(500, 870)
-      .click(Selector("button[title='Open settings']").filterVisible(), { offsetX: 25 });
-
-    await t.click(generalTab)
-      .click(logicTab)
-
+      .resizeWindow(500, 870)
+      .click(getQuestionBarItemByTitle("Open settings"))
+      .click(getPropertyGridCategory("General"))
+      .click(getPropertyGridCategory("Conditions"))
       .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"));
-    await takeElementScreenshot("pg-logic-popup-mobile.png", Selector(".sv-popup.sv-property-editor.sv-popup--overlay .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("pg-logic-popup-mobile.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-overlay"), t, comparer);
   });
 });
 
@@ -357,7 +355,7 @@ test("Property grid input all states", async (t) => {
     await takeElementScreenshot("pg-input-focused.png", input, t, comparer);
 
     await setInputProperty("readOnly", true);
-    await takeElementScreenshot("pg-input-disabled.png", input, t, comparer);
+    await takeElementScreenshot("pg-input-readonly.png", input, t, comparer);
   });
 });
 
@@ -366,8 +364,8 @@ test("Dropdown popup in property grid", async (t) => {
     await t.resizeWindow(1240, 870);
 
     await t
-      .click(Selector(".svc-page__add-new-question"))
-      .click(Selector(".spg-dropdown[aria-label='Input type']"));
+      .click(Selector(".svc-element__add-new-question"))
+      .click(Selector(".spg-question[data-name='inputType'] .spg-dropdown"));
 
     await takeElementScreenshot("pg-dropdown-editor.png", Selector(".svc-side-bar"), t, comparer);
   });
@@ -377,6 +375,7 @@ test("rateValues in property grid", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1240, 870);
     await setJSON({
+      showQuestionNumbers: "on",
       "elements": [
         {
           "type": "rating",
@@ -429,10 +428,11 @@ test("Check question with error", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);
     await setJSON({
+      showQuestionNumbers: "on",
       type: "text",
       name: "q1",
     });
-    await addQuestionByAddQuestionButton(t, "Single-Line Input");
+    await addQuestionByAddQuestionButton(t, "Long Text");
     const questionSelector = Selector("div[data-name='name']");
     await t
       .selectText(questionSelector.find("input"))
@@ -625,6 +625,7 @@ test("Check dropdown editor with titleLocation: 'left'", async (t) => {
 test("Check overriding property editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
+      showQuestionNumbers: "on",
       "pages": [
         {
           "name": "page1",
@@ -650,7 +651,7 @@ test("Check overriding property editor", async (t) => {
 
 test("Check comment editor with reset button", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1920);
+    await t.resizeWindow(1920, 900);
     await ClientFunction(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
         name: "test:text",
@@ -693,6 +694,7 @@ test("Check text editor with reset button", async (t) => {
 test("Check accepted file types hint link", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
+      showQuestionNumbers: "on",
       "pages": [
         {
           "name": "page1",
@@ -735,10 +737,25 @@ test("Dropdown input in property grid", async (t) => {
 
     await t
       .click(surveySettingsButtonSelector)
-      .click(Selector(".spg-dropdown[aria-label='Select a survey language']"))
+      .click(Selector(".spg-question[data-name='locale'] .spg-dropdown"))
       .pressKey("a l i");
 
-    await takeElementScreenshot("pg-dropdown-editor-input.png", Selector(".spg-dropdown[aria-label='Select a survey language']"), t, comparer);
+    await takeElementScreenshot("pg-dropdown-editor-input.png", Selector(".spg-question[data-name='locale'] .spg-dropdown"), t, comparer);
+  });
+});
+test("Dropdown clean button in property grid", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1240, 870);
+    const dropdownSelector = Selector(".spg-question[data-name='locale'] .spg-dropdown");
+    await t
+      .click(surveySettingsButtonSelector)
+      .click(dropdownSelector)
+      .pressKey("I t a l i a n o")
+      .pressKey("enter");
+
+    await takeElementScreenshot("pg-dropdown-clean-button.png", dropdownSelector, t, comparer);
+    await t.hover(Selector(".spg-dropdown__clean-button"));
+    await takeElementScreenshot("pg-dropdown-clean-button-hover.png", dropdownSelector, t, comparer);
   });
 });
 
@@ -749,6 +766,7 @@ test("Property grid checkbox with description", async (t) => {
       (window as any).SurveyCreatorCore.localization.getLocale("en").pehelp["visible"] = "Visible property's description";
     })();
     await setJSON({
+      showQuestionNumbers: "on",
       "pages": [
         {
           "name": "page1",
@@ -775,7 +793,7 @@ test("Check property grid mask settings", async (t) => {
     await t
       .click(getPropertyGridCategory(generalGroupName))
       .click(getPropertyGridCategory(inputMaskSettingsGroupName))
-      .click(Selector(".spg-dropdown[aria-label='Input mask type']"))
+      .click(Selector(".spg-question[data-name='maskType'] .spg-dropdown"))
       .click(getListItemByText("Pattern"));
 
     const expandedGroup = Selector(".spg-root-modern .spg-panel.sd-element--expanded");
@@ -795,6 +813,7 @@ test("renderAs works in matrix questions for textwithreset", async (t) => {
       // });
     })();
     const json = {
+      showQuestionNumbers: "on",
       "elements": [
         {
           "type": "text",
@@ -809,5 +828,61 @@ test("renderAs works in matrix questions for textwithreset", async (t) => {
     const expandedGroup = Selector(".spg-root-modern .spg-panel.sd-element--expanded");
     await ClientFunction(() => { document.body.focus(); })();
     await takeElementScreenshot("pg-pages-with-reset.png", expandedGroup, t, comparer);
+  });
+});
+test("popup overlay in property grid", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setShowToolbox(false);
+    await setAllowEditSurveyTitle(false);
+    await setShowAddQuestionButton(false);
+    await t.resizeWindow(900, 900);
+    await ClientFunction(() => {
+      window["Survey"]._setIsTouch(true);
+    })();
+    const json = {
+      showQuestionNumbers: "on",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1"
+        }
+      ]
+    };
+    await setJSON(json);
+
+    await t
+      .click("div[data-sv-drop-target-survey-element='question1']", { offsetX: 200, offsetY: 30 })
+      .click(getQuestionBarItemByTitle("Open settings"))
+      .click(Selector(".spg-question[data-name='inputType'] .spg-dropdown"));
+
+    await takeElementScreenshot("pg-overlay-popup.png", getVisibleElement(".sv-popup"), t, comparer);
+  });
+});
+
+test("Check creator theme settings", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await ClientFunction(() => {
+      (window as any).updateCreatorModel({ showCreatorThemeSettings: true }, {});
+      (window as any).creator.showOneCategoryInPropertyGrid = true;
+    })();
+    await t.drag(Selector(".svc-resizer-west"), -60, 0);
+    await t.click(Selector(".svc-sidebar-tabs__bottom-container .svc-menu-action__button"));
+    await takeElementScreenshot("creator-theme-settings.png", getVisibleElement(".spg-body"), t, comparer);
+  });
+});
+
+test("Helper action not hidden", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1240, 870);
+    const westResizer = Selector(".svc-resizer-west");
+    const questionHeader = getPropertyGridCategory("Conditions").parent(".spg-panel").find(".spg-question__header");
+    const json = { "pages": [{ "name": "page1", "elements": [{ "type": "text", "name": "text", }] }] };
+    await setJSON(json);
+    await t.wait(1000);
+    await t.click(".svc-page", { offsetX: 5, offsetY: 5 });
+    await t.click(getPropertyGridCategory("Conditions"));
+    await t.drag(westResizer, 200, 0);
+    await takeElementScreenshot("helper-action.png", questionHeader, t, comparer);
   });
 });

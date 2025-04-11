@@ -1,0 +1,73 @@
+@use "../variables" as *;
+.svc-search {
+  // TODO remove v2
+  --sjs-general-forecolor: rgba(0, 0, 0, 0.91);
+  --sjs-general-forecolor-light: rgba(0, 0, 0, 0.45);
+}
+
+.svc-search {
+  display: flex;
+  align-items: center;
+}
+
+.svc-search__input {
+  @include textEllipsis;
+  @include ctrSmallBoldFont;
+
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  display: block;
+  background: transparent;
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  width: 0;
+  flex-grow: 1;
+}
+
+.svc-creator--mobile .svc-search__input {
+  $fontSize: var(--ctr-font-small-size, var(--sjs-font-size-x150));
+  font-size: Max(16px, #{$fontSize});
+}
+
+
+.svc-search__toolbar {
+  display: flex;
+  gap: var(--ctr-search-toolbar-gap, var(--sjs-spacing-x05));
+  justify-content: flex-end;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.svc-search__toolbar .sv-action-bar {
+  gap: var(--ctr-search-toolbar-gap, var(--sjs-spacing-x05));
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.svc-search__toolbar .sv-action--hidden {
+  display: none;
+}
+
+.svc-search__toolbar .svc-search__bar-item {
+  height: min-content;
+  margin: 0;
+  border-radius: var(--ctr-search-button-corner-radius, var(--sjs-corner-radius-x05));
+  padding: var(--ctr-search-button-padding-vertical, var(--sjs-spacing-x05))
+    var(--ctr-search-button-padding-horizontal, var(--sjs-spacing-x05)) var(--ctr-search-button-padding-vertical, var(--sjs-spacing-x05))
+    var(--ctr-search-button-padding-horizontal, var(--sjs-spacing-x05));
+
+  .sv-svg-icon {
+    width: var(--ctr-search-button-icon-width, var(--sjs-font-size-x2));
+    height: var(--ctr-search-button-icon-height, var(--sjs-font-size-x2));
+  }
+}
+
+.svc-search__toolbar-counter {
+  @include ctrSmallBoldFont;
+  display: flex;
+  flex-shrink: 0;
+}

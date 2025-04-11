@@ -1,5 +1,7 @@
 <template>
   <div :class="model.cssClasses">
+    <div class="svc-row__drop-indicator svc-row__drop-indicator--top"></div>
+    <div class="svc-row__drop-indicator svc-row__drop-indicator--bottom"></div>
     <slot></slot>
   </div>
 </template>
@@ -7,7 +9,7 @@
 import { useCreatorModel } from "@/creator-model";
 import type { QuestionRowModel } from "survey-core";
 import { SurveyCreatorModel, RowViewModel } from "survey-creator-core";
-import { computed } from "vue";
+import { computed, onMounted, onUnmounted } from "vue";
 
 const props = defineProps<{
   componentData: { creator: SurveyCreatorModel; row: QuestionRowModel };
@@ -23,4 +25,12 @@ const model = useCreatorModel(
     value.dispose();
   }
 );
+
+onMounted(() => {
+  model.value && model.value.subscribeElementChanges();
+});
+onUnmounted(() => {
+  model.value && model.value.unsubscribeElementChanges();
+});
+
 </script>

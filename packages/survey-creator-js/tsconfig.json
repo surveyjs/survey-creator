@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es2015",
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "importHelpers": false,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "baseUrl": ".",
+    "declaration": true,
+    "declarationDir": "./build/typings",
+    "paths": {
+      "survey-core": [
+        "./node_modules/survey-core"
+      ],
+      "survey-creator-core": [
+        "./node_modules/survey-creator-core"
+      ],
+      "survey-react-ui": [
+        "./node_modules/survey-js-ui"
+      ],
+      "react": [
+        "./node_modules/@types/react"
+      ],
+      "react-dom": [
+        "./node_modules/@types/react-dom"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "stories",
+    "examples",
+    ".storybook",
+    "**/node_modules",
+    "**/tests",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ],
+  "include": [
+    "./entries/index.ts",
+  ],
+}

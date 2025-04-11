@@ -12,6 +12,10 @@ export class NoLicenseComponent extends TestDefaultComponent {
   }
   protected override getSlk(): boolean { return false; }
   protected override createCreator(): void {
-    this.creator = new SurveyCreatorModel({ showLogicTab: true, showTranslationTab: true });
+    this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
+    this.creator.tabResponsivenessMode = "menu";
+    this.creator["animationEnabled"] = false;
+    this.creator.showOneCategoryInPropertyGrid = false;
+    this.creator.allowZoom = false;
   }
 }

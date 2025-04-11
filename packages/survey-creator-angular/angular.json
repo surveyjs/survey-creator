@@ -55,6 +55,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "optimization": {
+              "styles": {
+                "inlineCritical": false
+              }
+            },
             "allowedCommonJsDependencies": [
               "survey-core",
               "survey-creator-core"
@@ -71,6 +76,10 @@
               "./example/angular-ui/src/assets",
               "./example/angular-ui/src/testCafe"
             ],
+            "styles": [
+              "./node_modules/survey-core/survey-core.css",
+              "./node_modules/survey-creator-core/survey-creator-core.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -78,9 +87,9 @@
               "buildOptimizer": true,
               "budgets": [
                 {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "10mb"
+                  "type": "allScript",
+                  "maximumWarning": "15mb",
+                  "maximumError": "15mb"
                 },
                 {
                   "type": "anyComponentStyle",

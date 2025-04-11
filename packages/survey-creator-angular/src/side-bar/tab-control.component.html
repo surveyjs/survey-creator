@@ -1,0 +1,22 @@
+<ng-template #template>
+  <div [class]="model.sideBarClassName">
+    <div class="svc-sidebar-tabs__top-container">
+      <div class="svc-sidebar-tabs__collapse-button">
+        <svc-tab-button [model]="model.expandCollapseAction"></svc-tab-button>
+      </div>
+      <div class="svc-sidebar-tabs__separator">
+        <div></div>
+      </div>
+      <sv-scroll>
+        <div class="svc-sidebar-tabs__items">
+          <svc-tabs [model]="model.topToolbar"></svc-tabs>
+        </div>
+      </sv-scroll>
+    </div>
+    <div class="svc-sidebar-tabs__bottom-container">
+      <div class="svc-sidebar-tabs__items">
+        <svc-tabs [model]="model.bottomToolbar"></svc-tabs>
+      </div>
+    </div>
+  </div>
+</ng-template>

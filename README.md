@@ -87,7 +87,7 @@ https://github.com/surveyjs/survey-creator/assets/102306951/afb8a75d-921e-4e5f-8
 - [Angular](https://surveyjs.io/survey-creator/documentation/get-started-angular)
 - [Vue](https://surveyjs.io/survey-creator/documentation/get-started-vue)
 - [React](https://surveyjs.io/survey-creator/documentation/get-started-react)
-- [Knockout / jQuery](https://surveyjs.io/survey-creator/documentation/get-started-knockout-jquery)
+- [HTML/CSS/JavaScript](https://surveyjs.io/survey-creator/documentation/get-started-html-css-javascript)
 
 ## Resources
 

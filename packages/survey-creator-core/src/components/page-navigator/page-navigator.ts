@@ -1,9 +1,10 @@
 import { PagesController } from "../../pages-controller";
 import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater } from "survey-core";
 
-require("./page-navigator.scss");
-require("./page-navigator-item.scss");
+import "./page-navigator.scss";
+import "./page-navigator-item.scss";
 import { getLocString } from "../../editorLocalization";
+import { listComponentCss } from "../list-theme";
 
 export class PageNavigatorViewModel extends Base {
   public icon: string;
@@ -32,15 +33,16 @@ export class PageNavigatorViewModel extends Base {
     this.icon = "icon-select-page";
     this.pagesController.onPagesChanged.add(this.pagesChangedFunc);
     this.pagesController.onCurrentPageChanged.add(this.currentPagesChangedFunc);
-    this.pageListModel = new ListModel(
-      [],
-      (item) => {
+    this.pageListModel = new ListModel({
+      items: [],
+      onSelectionChanged: (item) => {
         this.pagesController.selectPage(item.data);
-        this.popupModel.toggleVisibility();
+        this.popupModel.hide();
       },
-      true
-    );
-    this.popupModel = new PopupModel("sv-list", { model: this.pageListModel });
+      cssClasses: listComponentCss,
+      allowSelection: true
+    });
+    this.popupModel = new PopupModel("sv-list", { model: this.pageListModel }, { cssClass: "svc-creator-popup" });
     !!this.pagesController && (this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"]);
     this.popupModel.onShow = () => {
       this.pageListModel.selectedItem = this.getActionBarByPage(this.pagesController.currentPage);
@@ -103,7 +105,7 @@ export class PageNavigatorViewModel extends Base {
   }
   private patchContainerOffset(el: HTMLElement) {
     while (!!el) {
-      if (el.className.indexOf("svc-tab-designer--with-page-navigator") !== -1) {
+      if (el.className.indexOf("svc-tab-designer--with-surface-tools") !== -1) {
         el.offsetParent.scrollTop = 0;
         return;
       }
@@ -256,6 +258,9 @@ export class PageNavigatorViewModel extends Base {
   @property({ defaultValue: Number.MAX_VALUE }) visibleItemsCount: number;
   private _scrollableContainer: HTMLDivElement;
   public setScrollableContainer(scrollableContainer: HTMLDivElement | any) {
+    if (!!this._scrollableContainer) {
+      this._scrollableContainer.onscroll = undefined;
+    }
     this._scrollableContainer = scrollableContainer;
   }
   private _itemsContainer: HTMLDivElement;
@@ -301,5 +306,16 @@ export class PageNavigatorViewModel extends Base {
       return this.items;
     }
     return this.items.slice(this.visibleItemsStartIndex, this.visibleItemsStartIndex + this.visibleItemsCount);
+  }
+  public attachToUI(el: HTMLDivElement) {
+    if (!!el) {
+      const scrollableContainer = el.parentElement.parentElement.parentElement.parentElement.parentElement as HTMLDivElement;
+      const self = this;
+      scrollableContainer.onscroll = function (this: GlobalEventHandlers, ev: Event) {
+        return self.onContainerScroll(ev.currentTarget as HTMLDivElement);
+      };
+      this.setItemsContainer(el.parentElement as HTMLDivElement);
+      this.setScrollableContainer(scrollableContainer);
+    }
   }
 }

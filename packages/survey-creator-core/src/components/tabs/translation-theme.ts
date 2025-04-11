@@ -32,7 +32,7 @@ export var translationCss = {
     icon: "st-panel__icon",
     iconExpanded: "st-panel__icon--expanded",
     footer: "st-panel__footer",
-    requiredText: "st-panel__required-text"
+    requiredMark: "st-panel__required-text"
   },
   paneldynamic: {
     root: "st-paneldynamic",
@@ -42,8 +42,7 @@ export var translationCss = {
     buttonRemove: "st-paneldynamic__remove-btn",
     buttonAdd: "st-paneldynamic__add-btn",
     progressTop: "st-paneldynamic__progress st-paneldynamic__progress--top",
-    progressBottom:
-        "st-paneldynamic__progress st-paneldynamic__progress--bottom",
+    progressBottom: "st-paneldynamic__progress st-paneldynamic__progress--bottom",
     buttonPrev: "st-paneldynamic__prev-btn",
     buttonNext: "st-paneldynamic__next-btn",
     progressContainer: "st-paneldynamic__progress-container",
@@ -80,7 +79,7 @@ export var translationCss = {
     titleOnAnswer: "st-question__title--answer",
     titleOnError: "st-question__title--error",
     title: "st-title st-question__title",
-    requiredText: "st-question__required-text",
+    requiredMark: "st-question__required-text",
     number: "st-question__num",
     description: "st-description st-question__description",
     descriptionUnderInput: "st-description st-question__description",
@@ -91,7 +90,8 @@ export var translationCss = {
     footer: "st-question__footer",
     formGroup: "st-question__form-group",
     hasError: "",
-    disabled: "st-question--disabled"
+    disabled: "st-question--disabled",
+    confirmDialog: "st-popup--confirm sv-popup--confirm svc-creator-popup"
   },
   image: { root: "st-image", image: "sv_image_image" },
   error: {
@@ -167,6 +167,7 @@ export var translationCss = {
   },
   dropdown: {
     root: "st-selectbase",
+    popup: "st-dropdown-popup svc-creator-popup",
     small: "st-row__question--small",
     control: "st-input st-dropdown",
     other: "st-comment st-question__other",

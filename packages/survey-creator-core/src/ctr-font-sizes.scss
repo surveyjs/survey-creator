@@ -1,0 +1,31 @@
+@use "./ctr-variables.scss" as *;
+
+.svc-creator-popup,
+.svc-creator {
+  --sjs-font-size-x075: calc(#{$font-unit} * 0.75);
+  --sjs-font-size-x1: calc(#{$font-unit} * 1);
+  --sjs-font-size-x150: calc(#{$font-unit} * 1.5);
+  --sjs-font-size-x2: calc(#{$font-unit} * 2);
+  --sjs-font-size-x3: calc(#{$font-unit} * 3);
+  --sjs-font-size-x4: calc(#{$font-unit} * 4);
+  --sjs-font-size-x5: calc(#{$font-unit} * 5);
+  --sjs-font-size-x6: calc(#{$font-unit} * 6);
+  --sjs-font-size-x7: calc(#{$font-unit} * 7);
+  --sjs-font-size-x8: calc(#{$font-unit} * 8);
+  --sjs-line-height-x1: calc(#{$line-height-unit} * 1);
+  --sjs-line-height-x150: calc(#{$line-height-unit} * 1.5);
+  --sjs-line-height-x2: calc(#{$line-height-unit} * 2);
+  --sjs-line-height-x3: calc(#{$line-height-unit} * 3);
+  --sjs-line-height-x4: calc(#{$line-height-unit} * 4);
+  --sjs-line-height-x5: calc(#{$line-height-unit} * 5);
+  --sjs-line-height-x6: calc(#{$line-height-unit} * 6);
+  --sjs-line-height-x7: calc(#{$line-height-unit} * 7);
+  --sjs-line-height-x8: calc(#{$line-height-unit} * 8);
+
+  --sjs-line-height-x250: calc(#{$line-height-unit} * 2.5);
+  --sjs-font-size-x250: calc(#{$font-unit} * 2.5);
+  --sjs-line-height-x075: calc(#{$line-height-unit} * 0.75);
+  --sjs-font-size-x075: calc(#{$font-unit} * 0.75);
+  --sjs-line-height-x05: calc(#{$line-height-unit} * 0.5);
+  --sjs-font-size-x05: calc(#{$font-unit} * 0.5);
+}

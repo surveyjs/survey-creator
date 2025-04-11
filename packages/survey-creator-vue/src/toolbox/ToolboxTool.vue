@@ -1,46 +1,64 @@
 <template>
-  <div
-    class="svc-toolbox__tool"
-    @pointerdown="model?.onPointerDown"
-    :class="toolboxCss"
-  >
-    <div class="sv-action__content">
-      <div
-        class="svc-toolbox__category-separator"
-        v-if="item.needSeparator && !creator.toolbox.showCategoryTitles"
-      ></div>
-      <component
+  <div :class="item.css" ref="root">
+    <div
+      class="svc-toolbox__category-separator"
+      v-if="item.needSeparator && !creator.toolbox.showCategoryTitles"
+    ></div>
+    <div
+      class="svc-toolbox__tool-content sv-action__content"
+      @pointerdown="model?.onPointerDown"
+    >
+      <SvComponent
         :viewModel="model"
-        :is="item.component || 'svc-toolbox-item'"
+        :is="model?.itemComponent"
         :item="item"
         :creator="creator"
         :isCompact="isCompact"
-      ></component>
+      ></SvComponent>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import { ToolboxToolViewModel, type SurveyCreatorModel } from "survey-creator-core";
-import type { Action } from "survey-core";
+import { SvComponent } from "survey-vue3-ui";
+import {
+  QuestionToolboxItem,
+  ToolboxToolViewModel,
+  type SurveyCreatorModel,
+} from "survey-creator-core";
+import type { ActionContainer } from "survey-core";
 import { useCreatorModel } from "@/creator-model";
-import { computed } from "vue";
 import { useBase } from "survey-vue3-ui";
+import { nextTick, onMounted, onUnmounted, ref } from "vue";
 const props = defineProps<{
   creator: SurveyCreatorModel;
-  item: Action;
+  item: QuestionToolboxItem;
+  parentModel: ActionContainer;
   isCompact: boolean;
 }>();
 const model = useCreatorModel(
-  () => new ToolboxToolViewModel(props.item as any, props.creator),
+  () =>
+    new ToolboxToolViewModel(
+      props.item as any,
+      props.creator,
+      props.parentModel
+    ),
   [() => props.creator, () => props.item],
   (model) => {
     model.dispose();
   }
 );
+const root = ref<HTMLDivElement>();
+onMounted(() => {
+  const item = props.item;
+  item.updateModeCallback = (mode, callback) => {
+    item.mode = mode;
+    nextTick(() => callback(mode, root.value as HTMLDivElement));
+  };
+  item.afterRender();
+});
+onUnmounted(() => {
+  const item = props.item;
+  item.updateModeCallback = undefined as any;
+});
 useBase(() => props.item);
-const toolboxCss = computed(
-  () =>
-    ((props.item.css || "") + " " ?? "") +
-    (!props.item.isVisible ? "sv-action--hidden" : "")
-);
 </script>

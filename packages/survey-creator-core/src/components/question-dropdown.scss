@@ -1,5 +1,4 @@
-@import "../variables.scss";
-
+@use "../variables" as *;
 
 .svc-question__dropdown-choices {
   margin-top: calcSize(2);
@@ -32,8 +31,14 @@
   }
 
   .svc-action-button {
-    margin-left: calcSize(6.75);
-    margin-top: calcSize(1);
+    @include lbrDefaultBoldFont;
+    margin-left: var(--ctr-survey-radio-button-group-show-more-button-margin-left, var(--lbr-spacing-x6));
+    margin-top: var(--ctr-survey-radio-button-group-show-more-button-margin-top, var(--lbr-spacing-x05));
+    padding: var(--ctr-survey-action-button-padding-top, var(--lbr-spacing-x1))
+      var(--ctr-survey-action-button-padding-right, var(--lbr-spacing-x3))
+      var(--ctr-survey-action-button-padding-bottom, var(--lbr-spacing-x1))
+      var(--ctr-survey-action-button-padding-left, var(--lbr-spacing-x3));
+    border-radius: var(--ctr-survey-action-button-corner-radius, var(--lbr-corner-radius-x1));
 
     cursor: pointer;
   }

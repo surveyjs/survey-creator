@@ -1,10 +1,11 @@
 <template>
   <div :class="question.cssClasses.root" @keydown="question.onKeyDown">
     <label :class="question.getSwatchCss()" :style="question.getSwatchStyle()">
-      <sv-svg-icon
+      <SvComponent
+        :is="'sv-svg-icon'"
         :iconName="question.cssClasses.swatchIcon"
         :size="'auto'"
-      ></sv-svg-icon>
+      ></SvComponent>
       <input
         type="color"
         :disabled="question.isInputReadOnly"
@@ -12,6 +13,11 @@
         :value="question.renderedColorValue"
         tabindex="-1"
         @change="question.onColorInputChange"
+        :aria-required="question.a11y_input_ariaRequired"
+        :aria-labelledby="question.a11y_input_ariaLabelledBy"
+        :aria-label="question.a11y_input_ariaLabel"
+        :aria-invalid="question.a11y_input_ariaInvalid"
+        :aria-describedby="question.a11y_input_ariaDescribedBy"
       />
     </label>
     <input
@@ -19,10 +25,11 @@
       :disabled="question.isInputReadOnly"
       :id="question.inputId"
       :placeholder="question.renderedPlaceholder"
-      :aria-required="question.ariaRequired"
-      :aria-label="question.ariaLabel"
-      :aria-invalid="question.ariaInvalid"
-      :aria-describedby="question.ariaDescribedBy"
+      :aria-required="question.a11y_input_ariaRequired"
+      :aria-labelledby="question.a11y_input_ariaLabelledBy"
+      :aria-label="question.a11y_input_ariaLabel"
+      :aria-invalid="question.a11y_input_ariaInvalid"
+      :aria-describedby="question.a11y_input_ariaDescribedBy"
       @change="question.onChange"
       @keyup="question.onKeyUp"
       @blur="question.onBlur"
@@ -31,13 +38,22 @@
       :class="question.cssClasses.control"
     />
     <template v-if="question.showDropdownAction">
-      <sv-action-bar-item :item="question.dropdownAction"></sv-action-bar-item>
-      <sv-popup :model="question.dropdownAction.popupModel"></sv-popup>
+      <div aria-hidden="true" :class="question.cssClasses.choicesButtonWrapper">
+        <SvComponent
+          :is="'sv-action-bar-item'"
+          :item="question.dropdownAction"
+        ></SvComponent>
+      </div>
+      <SvComponent
+        :is="'sv-popup'"
+        :model="question.dropdownAction.popupModel"
+      ></SvComponent>
     </template>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { SvComponent } from "survey-vue3-ui";
 import type { QuestionColorModel } from "survey-creator-core";
 import { useQuestion } from "survey-vue3-ui";
 import { ref } from "vue";

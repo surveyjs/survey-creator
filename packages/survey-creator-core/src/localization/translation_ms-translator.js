@@ -2,10 +2,12 @@
 /**
  * Auto translate strings using ms api translate service
  * Example of translating un-translated string in french.ts:
- * node ms_translation french <ms-tranlation-key-32-symbols>
+ * node translation_ms-translator french <ms-tranlation-key-32-symbols>
+ * Example of translating un-translated string in all files:
+ * node translation_ms-translator all <ms-tranlation-key-32-symbols>
  */
 // eslint-disable-next-line no-undef
-const axios = require("axios").default;
+const http = require("https");
 // eslint-disable-next-line no-undef
 const crypto = require("crypto");
 // eslint-disable-next-line no-undef
@@ -29,7 +31,7 @@ if(parameter === "english") {
 }
 let translationKey = arg[3];
 
-const endpoint = "https://api.cognitive.microsofttranslator.com";
+const endpoint = "api.cognitive.microsofttranslator.com";
 const resource_region = "southcentralus";
 const englishJSON = utils.readJson("english");
 if(parameter === "all") {
@@ -105,33 +107,34 @@ function translateStrings(locale, stringsToTranslate, callback) {
   for(let i = 0; i < stringsToTranslate.length; i ++) {
     dataToTranslate.push({ text: stringsToTranslate[i].english });
   }
-  axios({
-    baseURL: endpoint,
-    url: "/translate",
-    method: "post",
+  let data = "";
+  http.request({
+    hostname: endpoint,
+    path: "/translate?api-version=3.0&from=en&to=" + locale,
+    method: "POST",
     headers: {
       "Ocp-Apim-Subscription-Key": translationKey,
       "Ocp-Apim-Subscription-Region": resource_region,
       "Content-type": "application/json",
       "X-ClientTraceId": UUIDGenerator()
     },
-    params: {
-      "api-version": "3.0",
-      "from": "en",
-      "to": locale
-    },
-    data: dataToTranslate,
     responseType: "json"
-  }).then(function(response) {
-    for(let i = 0; i < response.data.length; i ++) {
-      const item = response.data[i];
-      const tr_item = stringsToTranslate[i];
-      tr_item.translation = item.translations[0].text;
-    }
-    callback();
-  }).catch(function (error) {
-    utils.reportMessage("Error to translate: " + locale + ". Error: " + JSON.stringify(error.toJSON(), null, 2));
-  });
+  }, (response) => {
+    response.on("data", function (chunk) {
+      data += chunk;
+    });
+    response.on("end", function () {
+      const translations = JSON.parse(data);
+      for(let i = 0; i < translations.length; i ++) {
+        const item = translations[i];
+        const tr_item = stringsToTranslate[i];
+        tr_item.translation = item.translations[0].text;
+      }
+      callback();
+    });
+  }).on("error", (error) => {
+    utils.reportMessage("Error to translate: " + locale + ". Error: " + JSON.stringify(error, null, 2));
+  }).end(JSON.stringify(dataToTranslate));
 }
 function UUIDGenerator() {
   return crypto.randomBytes(16).toString("hex");

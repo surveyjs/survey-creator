@@ -16,7 +16,9 @@ import {
   QuestionCommentModel,
   QuestionRadiogroupModel,
   SurveyTrigger,
-  Serializer
+  Serializer,
+  settings as surveySettings,
+  PopupDropdownViewModel
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -29,13 +31,15 @@ import { QuestionEmbeddedSurveyModel } from "../../src/components/embedded-surve
 import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
 import { CreatorTester } from "../creator-tester";
 import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
-import { wrapTextByCurlyBraces } from "../../src/utils/utils";
+import { wrapTextByCurlyBraces } from "../../src/utils/creator-utils";
 import { settings } from "../../src/creator-settings";
 import { editorLocalization } from "../../src/editorLocalization";
+import { SurveyLogicType } from "../../src/components/tabs/logic-types";
 
 export * from "../../src/components/link-value";
 export * from "../../src/custom-questions/question-text-with-reset";
 import { QuestionTextWithResetModel } from "../../src/custom-questions/question-text-with-reset";
+import { QuestionLinkValueModel } from "../../src/components/link-value";
 
 const questionLogicTypeLength = 5;
 
@@ -564,7 +568,7 @@ test("SurveyLogicUI: Test creator onLogicItemDisplayText event", () => {
       { type: "text", name: "q5" }
     ]
   };
-  creator.onLogicItemDisplayText.add((sender, options) => {
+  creator.onLogicRuleGetDisplayText.add((sender, options) => {
     let text = options.expressionText;
     text = text.replace(new RegExp("({|})", "gm"), "'");
     options.text = text;
@@ -851,7 +855,32 @@ test("Create setValue trigger in logic", () => {
   expect(getSetToNameQuestion().value).toBeFalsy();
   expect(getSetValueQuestion().value).toBeFalsy();
 });
-
+test("Check logicTypeName is always not requred, Bug#6820", () => {
+  Serializer.findProperty("question", "isRequired").defaultValue = true;
+  const survey = new SurveyModel({
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3] },
+      { type: "text", name: "q2", readOnly: true }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  logic.expressionEditor.text = "{q1} = 1";
+  const panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_setValue";
+  panel.getQuestionByName("elementSelector").value = "q2";
+  panel.getQuestionByName("setValueExpression").value = "{q1} + 1";
+  expect(panel.getQuestionByName("removeAction").isRequired).toBeFalsy();
+  expect((<SurveyModel>panel.survey).validate()).toBeTruthy();
+  expect(logic.saveEditableItem()).toBeTruthy();
+  Serializer.findProperty("question", "isRequired").defaultValue = false;
+});
+test("Check QuestionLinkValueModel doens't have requried errors, Bug#6820", () => {
+  const q = new QuestionLinkValueModel("q1");
+  q.isRequired = true;
+  expect(q.isRequired).toBeTruthy();
+  expect(q.hasErrors()).toBeFalsy();
+});
 test("Setup setValueIf property in logic", () => {
   const survey = new SurveyModel({
     elements: [
@@ -1295,7 +1324,7 @@ test("LogicItemEditorUI: filter by question and addNew", () => {
 
   logic.expressionEditor.text = "{q1} = 4";
   let panel = logic.itemEditor.panels[0];
-  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  panel.getQuestionByName("logicTypeName").value = "question_enable";
   panel.getQuestionByName("elementSelector").value = "q4";
 
   expect(logic.saveEditableItem()).toBeTruthy();
@@ -1309,7 +1338,7 @@ test("LogicItemEditorUI: filter by question and addNew", () => {
 
   logic.expressionEditor.text = "{q1} = 4";
   panel = logic.itemEditor.panels[0];
-  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  panel.getQuestionByName("logicTypeName").value = "question_enable";
   panel.getQuestionByName("elementSelector").value = "q3";
 
   expect(logic.saveEditableItem()).toBeTruthy();
@@ -1502,7 +1531,7 @@ test("LogicItemEditorUI: getUsedActionTypes", () => {
 
   expect(types).toHaveLength(3);
   expect(types[0].name).toEqual("question_visibility");
-  expect(types[0].displayName).toEqual("Show (hide) question");
+  expect(types[0].displayName).toEqual("Show/hide question");
   expect(types[1].name).toEqual("trigger_skip");
   expect(types[1].displayName).toEqual("Skip to question");
   expect(types[2].name).toEqual("trigger_copyvalue");
@@ -1510,6 +1539,7 @@ test("LogicItemEditorUI: getUsedActionTypes", () => {
 });
 
 test("LogicPlugin: question & action types are sorted ", () => {
+  surveySettings.animationEnabled = false;
   const creator = new CreatorTester({ showLogicTab: true });
   creator.JSON = {
     pages: [
@@ -1539,8 +1569,10 @@ test("LogicPlugin: question & action types are sorted ", () => {
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
   const filterActionType = creator.getActionBarItem("svc-logic-filter-actiontype");
   const actionTypes = filterActionType.popupModel.contentComponentData.model.actions;
+  const filterActionTypePopupViewModel = new PopupDropdownViewModel(filterActionType.popupModel); // need for popupModel.onShow
   const filterQuestion = creator.getActionBarItem("svc-logic-filter-question");
   const questions = filterQuestion.popupModel.contentComponentData.model.actions;
+  const filterQuestionTypePopupViewModel = new PopupDropdownViewModel(filterQuestion.popupModel); // need for popupModel.onShow
 
   logicPlugin.activate();
   expect(actionTypes).toHaveLength(1);
@@ -1552,7 +1584,7 @@ test("LogicPlugin: question & action types are sorted ", () => {
   expect(actionTypes).toHaveLength(4);
   expect(actionTypes[0].title).toEqual("All Action Types");
   expect(actionTypes[1].title).toEqual("Copy answer");
-  expect(actionTypes[2].title).toEqual("Show (hide) question");
+  expect(actionTypes[2].title).toEqual("Show/hide question");
   expect(actionTypes[3].title).toEqual("Skip to question");
 
   filterQuestion.action();
@@ -1568,6 +1600,7 @@ test("LogicPlugin: question & action types are sorted ", () => {
   expect(filterActionType.title).toEqual("Copy answer");
 });
 test("LogicPlugin: actions titles support localization", () => {
+  surveySettings.animationEnabled = false;
   const creator = new CreatorTester({ showLogicTab: true });
   creator.JSON = {
     pages: [
@@ -1597,6 +1630,7 @@ test("LogicPlugin: actions titles support localization", () => {
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
   const filterActionType = creator.getActionBarItem("svc-logic-filter-actiontype");
   const actionTypes = filterActionType.popupModel.contentComponentData.model.actions;
+  const filterActionTypePopupViewModel = new PopupDropdownViewModel(filterActionType.popupModel); // need for popupModel.onShow
   const filterActionQuestion = creator.getActionBarItem("svc-logic-filter-question");
 
   logicPlugin.activate();
@@ -1920,7 +1954,7 @@ test("LogicUI: edit matrix column visibleIf", () => {
   const actionPanel = itemEditor.panels[0];
   const logicTypeName = actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("column_visibility");
-  expect(logicTypeName.displayValue).toEqual("Show (hide) column");
+  expect(logicTypeName.displayValue).toEqual("Show/hide column");
   const colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
   expect(colSelector.choices).toHaveLength(3);
   expect(colSelector.choices[0].text).toEqual("q1.col1");
@@ -1976,6 +2010,34 @@ test("LogicUI: edit matrix column visibleIf. Filter selector if there is a conte
   questionName.value = "q2";
   colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
   expect(colSelector.choices).toHaveLength(3 + 2);
+});
+test("A question with name '0' doesn't appear correctly within a condition editor Bug#6430", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "radiogroup", name: "0", choices: ["a", "b", "c", "d"] },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  const expressionEditor = logic.expressionEditor;
+  const firstExpressionPanel = expressionEditor.panel.panels[0];
+  const questionName = <QuestionDropdownModel>firstExpressionPanel.getQuestionByName("questionName");
+  questionName.value = 0;
+  const questionValue = firstExpressionPanel.getQuestionByName("questionValue");
+  expect(questionValue).toBeTruthy();
+  expect(questionValue.isVisible).toBeTruthy();
+  expect(questionValue.getType()).toBe("radiogroup");
+  expect(questionValue.choices).toHaveLength(4);
+  questionValue.value = "d";
+  const itemEditor = logic.itemEditor;
+  let actionPanel = itemEditor.panels[0];
+  actionPanel.getQuestionByName("logicTypeName").value = "question_visibility";
+  actionPanel.getQuestionByName("elementSelector").value = "q2";
+  logic.saveEditableItem();
+  const q2 = survey.getQuestionByName("q2");
+  expect(q2.visibleIf).toEqual("{0} = 'd'");
 });
 test("LogicUI: edit matrix column visibleIf. Filter logic types and delete actions if there is a context", () => {
   const survey = new SurveyModel({
@@ -2097,7 +2159,7 @@ test("LogicUI: edit visibleIf property for panel dynamic question template", () 
   const actionPanel = itemEditor.panels[0];
   const logicTypeName = actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("question_visibility");
-  expect(logicTypeName.displayValue).toEqual("Show (hide) question");
+  expect(logicTypeName.displayValue).toEqual("Show/hide question");
   const colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
   expect(colSelector.choices).toHaveLength(3);
   expect(colSelector.choices[0].text).toEqual("q1.q1_col1");
@@ -2293,7 +2355,7 @@ test("LogicUI: edit visibleIf property for panel dynamic question template when 
   const actionPanel = itemEditor.panels[0];
   const logicTypeName = actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("question_visibility");
-  expect(logicTypeName.displayValue).toEqual("Show (hide) question");
+  expect(logicTypeName.displayValue).toEqual("Show/hide question");
   const colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
   expect(colSelector.choices).toHaveLength(4);
   expect(colSelector.choices[1].text).toEqual("q1.q1_col1");
@@ -3007,7 +3069,7 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   panel.getQuestionByName("elementSelector").value = "q4";
 
   creator.makeNewViewActive("test");
-  expect(creator.activeTab).toBe("test");
+  expect(creator.activeTab).toBe("preview");
 
   const q4 = creator.survey.getQuestionByName("q4");
   expect(q4.enableIf).toBe("{q1} = 4");
@@ -3230,6 +3292,46 @@ test("Test questions css in an action panel", () => {
   checkFunc(3, "completedHtmlOnCondition", "html", false);
 });
 
+test("Run modified on changing runExpression", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ],
+    triggers: [
+      {
+        type: "runexpression",
+        expression: "{q1} = 3",
+        runExpression: "{q1} + 3"
+      }
+    ]
+  });
+  const logic = new SurveyLogic(survey);
+  expect(logic.items).toHaveLength(1);
+  const editor = new LogicItemEditor(logic.items[0]);
+  expect(editor.panels).toHaveLength(1);
+  expect(editor.panels[0].getQuestionByName("elementSelector").visible).toBeFalsy();
+  const panelTrigger = <PanelModel>(editor.panels[0].getElementByName("triggerEditorPanel"));
+  expect(panelTrigger).toBeTruthy();
+  expect(panelTrigger.visible).toBeTruthy();
+  const runExpressionQuestion = panelTrigger.getQuestionByName("runExpression");
+  expect(runExpressionQuestion.value).toEqual("{q1} + 3");
+  const changes = new Array<any>();
+  survey.onPropertyValueChangedCallback = (
+    name: string,
+    oldValue: any,
+    newValue: any
+  ) => {
+    changes.push({ name: name, value: newValue });
+  };
+  runExpressionQuestion.value = "{q1} + 4";
+  expect(changes).toHaveLength(0);
+  editor.apply();
+  expect(changes).toHaveLength(1);
+  expect(changes[0].name).toEqual("runExpression");
+  expect(changes[0].value).toEqual("{q1} + 4");
+});
+
 test("Custom trigger in logic", () => {
   Serializer.addClass(
     "incrementcountertrigger",
@@ -3284,6 +3386,59 @@ test("Custom trigger in logic", () => {
 
   delete SurveyLogic.types["increment_counter"];
   Serializer.removeClass("incrementcountertrigger");
+});
+test("Custom trigger vs depends on in logic, Bug#5937", () => {
+  Serializer.addClass(
+    LocationTrigger.triggerName, LocationTrigger.properties,
+    function () {
+      return new LocationTrigger();
+    },
+    "surveytrigger"
+  );
+  SurveyLogic.types.push({
+    name: LocationTrigger.triggerName,
+    baseClass: LocationTrigger.triggerName,
+    propertyName: "expression"
+  });
+
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ],
+    triggers: [
+      {
+        type: LocationTrigger.triggerName,
+        expression: "{q1} = 1",
+        country: "germany",
+        city: "berlin"
+      }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.matrixItems.visibleRows).toHaveLength(1);
+  const row = logic.matrixItems.visibleRows[0];
+  row.showDetailPanel();
+  const panel = logic.itemEditor.panels[0];
+  expect(panel.getQuestionByName("logicTypeName").value).toBe(LocationTrigger.triggerName);
+  const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
+  const countryQuestion = <QuestionDropdownModel>triggerEditorPanel.getQuestionByName("country");
+  const cityQuestion = <QuestionDropdownModel>triggerEditorPanel.getQuestionByName("city");
+  expect(countryQuestion.value).toBe("germany");
+  expect(countryQuestion.choices).toHaveLength(2);
+  expect(cityQuestion.value).toBe("berlin");
+  expect(cityQuestion.choices).toHaveLength(2);
+  expect(cityQuestion.choices[0].value).toBe("berlin");
+  expect(cityQuestion.choices[1].value).toBe("frankfurt");
+
+  countryQuestion.value = "usa";
+  expect(cityQuestion.value).toBeFalsy();
+  expect(cityQuestion.choices).toHaveLength(2);
+  expect(cityQuestion.choices[0].value).toBe("new-york");
+  expect(cityQuestion.choices[1].value).toBe("los-angeles");
+
+  delete SurveyLogic.types[LocationTrigger.triggerName];
+  Serializer.removeClass(LocationTrigger.triggerName);
 });
 test("SurveyLogicItem,  setValue for paneldynamic, Bug#4824", () => {
   const survey = new SurveyModel({
@@ -3412,3 +3567,106 @@ class IncrementCounterTrigger extends SurveyTrigger {
     this.setPropertyValue("initialNumber", val);
   }
 }
+
+class LocationTrigger extends SurveyTrigger {
+  static countries = [
+    {
+      value: "usa",
+      text: "USA",
+      cities: [
+        { value: "new-york", text: "New York" },
+        { value: "los-angeles", text: "Los Angeles" },
+      ],
+    },
+    {
+      value: "germany",
+      text: "Germany",
+      cities: [
+        { value: "berlin", text: "Berlin" },
+        { value: "frankfurt", text: "Frankfurt" },
+      ],
+    },
+  ];
+  static triggerName = "locationtrigger";
+  static properties = [
+    {
+      type: "dropdown",
+      name: "country",
+      displayName: "Country",
+      choices: LocationTrigger.countries
+    },
+    {
+      type: "dropdown",
+      name: "city",
+      dependsOn: "country",
+      visibleIf: (obj: any) => {
+        return !!obj.country;
+      },
+      choices: (obj, choicesCallback) => {
+        if (!obj.country) choicesCallback([]);
+        const currentCountry = LocationTrigger.countries.find(
+          ({ value }) => value === obj.country
+        );
+        choicesCallback(currentCountry?.cities);
+      },
+    },
+  ];
+
+  getType(): string {
+    return LocationTrigger.triggerName;
+  }
+  get country(): string {
+    return this.getPropertyValue("country", "");
+  }
+  set country(val: string) {
+    this.setPropertyValue("country", val);
+  }
+  get city(): string {
+    return this.getPropertyValue("city", "");
+  }
+  set city(val: string) {
+    this.setPropertyValue("city", val);
+  }
+}
+test("Limit the number of trigger types, #6031", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" },
+      { type: "text", name: "q3" }
+    ]
+  });
+  const hasType = (types: Array<SurveyLogicType>, name: string): boolean => {
+    for (let i = 0; i < types.length; i++) {
+      if (types[i].name === name) return true;
+    }
+    return false;
+  };
+  let logic = new SurveyLogic(survey);
+  expect(hasType(logic.logicTypes, "trigger_skip")).toBeTruthy();
+  expect(hasType(logic.logicTypes, "trigger_complete")).toBeTruthy();
+
+  settings.logic.invisibleTriggers = ["skip", "complete"];
+
+  logic = new SurveyLogic(survey);
+  expect(hasType(logic.logicTypes, "trigger_skip")).toBeFalsy();
+  expect(hasType(logic.logicTypes, "trigger_complete")).toBeFalsy();
+
+  expect(logic.logicTypes.length > 4).toBeTruthy();
+});
+test("SurveyLogic: Delete completedHtmlOnCondition item instead of removing expression only, Bug#6657", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+    ],
+    completedHtmlOnCondition: [
+      { expression: "{q1} = 4", html: "Custom html" },
+    ]
+  });
+  expect(survey.completedHtmlOnCondition).toHaveLength(1);
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(1);
+  logic.removeItem(logic.items[0]);
+  expect(survey.completedHtmlOnCondition).toHaveLength(0);
+});
+

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { QuestionDropdownAdornerViewModel } from "survey-creator-core";
 import { ItemValue, QuestionDropdownModel, QuestionSelectBase, SurveyModel } from "survey-core";
 import { ReactElementFactory, ReactSurveyElementsWrapper } from "survey-react-ui";
@@ -26,7 +26,7 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
     return this.dropdownModel.question as QuestionSelectBase;
   }
 
-  renderElementPlaceholder(): JSX.Element {
+  renderElementPlaceholder(): React.JSX.Element {
     const textStyle = (this.question as any).textStyle;
     return (
       <div

@@ -21,9 +21,7 @@
     "url": "https://github.com/surveyjs/survey-creator.git"
   },
   "peerDependencies": {
-    "vue": "^3.2.41"
-  },
-  "dependencies": {
+    "vue": "^3.2.41",
     "survey-core": "*",
     "survey-creator-core": "*",
     "survey-vue3-ui": "*"

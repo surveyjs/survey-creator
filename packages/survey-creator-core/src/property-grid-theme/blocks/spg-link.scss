@@ -1,3 +1,5 @@
+@use "../../variables.scss" as *;
+
 .spg-link {
   display: flex;
 }
@@ -5,7 +7,7 @@
 .sv-string-viewer {
   .spg-link {
     display: initial;
-    color: $primary;
+    color: var(--ctr-survey-action-button-text-color-positive, var(--sjs-primary-background-500, #19b394ff));
     font-weight: 600;
     text-decoration-line: underline;
   }

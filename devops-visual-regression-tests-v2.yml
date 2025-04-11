@@ -1,0 +1,307 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+resources:
+  repositories:
+    - repository: EmptyRepo
+      type: github
+      endpoint: github.com_surveyjsdeveloper
+      name: surveyjs/azure-pipelines-repo-dont-remove-please
+
+trigger:
+  batch: true
+  branches:
+    exclude:
+      - master
+  tags:
+    exclude:
+      - v*.*.*
+
+pool:
+  vmImage: "windows-latest"
+
+jobs:
+  - job: CreatorV2Core
+    steps:
+      - checkout: self
+      - checkout: EmptyRepo
+        persistCredentials: true
+        clean: true
+
+      - task: NodeTool@0
+        inputs:
+          versionSpec: "16.x"
+        displayName: "Install Node.js"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/"
+          Contents: "package.json"
+          TargetFolder: "$(Build.SourcesDirectory)/Temp/"
+          OverWrite: true
+        displayName: "Copy package.json for cache key"
+
+      - task: Cache@2
+        inputs:
+          key: "npm-cache-creator-core | $(Build.SourcesDirectory)/Temp/package.json"
+          path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules
+          cacheHitVar: NPM_CACHE_RESTORED
+        displayName: Cache NPM Core
+
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: "specific"
+          project: "af2804d2-859a-4705-9ef5-cdf46d1d5d4f"
+          pipeline: "56"
+          specificBuildWithTriggering: true
+          buildVersionToDownload: "latest"
+          downloadType: "single"
+          artifactName: "SurveyJSLibraryBuildCore"
+          downloadPath: "$(System.ArtifactsDirectory)"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core"
+          Contents: "**"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
+          OverWrite: true
+
+      - task: Npm@1
+        displayName: "Npm install survey-creator-core"
+        inputs:
+          command: install
+          verbose: false
+          workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+        condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+      # update 'file' npm dependencies in case of cache
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: $(Build.SourcesDirectory)/survey-library/packages/survey-core/build
+          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules/survey-core"
+          OverWrite: true
+        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+        displayName: "copy survey-core in case of npm cache"
+      # EO update 'file' npm dependencies in case of cache
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+          npm run remove-package-lock
+        displayName: "npm run remove-package-lock"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+          npm run build:i18n
+        displayName: "Build Creator V2 Core i18n"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+          npm run build
+        displayName: "Build Creator V2 Core"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+          npm run build:themes
+        displayName: "Build Creator V2 Core themes"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
+          targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: "$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core"
+          ArtifactName: "SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)"
+          publishLocation: "Container"
+
+  - job: CreatorV2React
+    dependsOn: CreatorV2Core
+    steps:
+      - checkout: self
+      - checkout: EmptyRepo
+        persistCredentials: true
+        clean: true
+
+      - task: PowerShell@2
+        displayName: "update Google Chrome to latest"
+        inputs:
+          targetType: "inline"
+          script: '$Path = $env:TEMP; $Installer = ''chrome_installer.exe''; Invoke-WebRequest -Uri ''http://dl.google.com/chrome/install/375.126/chrome_installer.exe'' -OutFile $Path\$Installer; Start-Process -FilePath $Path\$Installer -Args ''/silent /install'' -Verb RunAs -Wait; Remove-Item -Path $Path\$Installer'
+
+      - task: NodeTool@0
+        inputs:
+          versionSpec: "16.x"
+        displayName: "Install Node.js"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/"
+          Contents: "package.json"
+          TargetFolder: "$(Build.SourcesDirectory)/Temp/react/"
+          OverWrite: true
+        displayName: "Copy package.json for cache key (react)"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/"
+          Contents: "package.json"
+          TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
+          OverWrite: true
+        displayName: "Copy package.json for cache key (root)"
+      - task: Cache@2
+        inputs:
+          key: "npm-cache-creator-react | $(Build.SourcesDirectory)/Temp/react/package.json"
+          path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules
+          cacheHitVar: NPM_CACHE_RESTORED
+        displayName: Cache NPM
+
+      - task: Cache@2
+        inputs:
+          key: "npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json"
+          path: $(Build.SourcesDirectory)/survey-creator/node_modules
+          cacheHitVar: NPM_CACHE_RESTORED_ROOT
+        displayName: Cache NPM
+
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: "specific"
+          project: "af2804d2-859a-4705-9ef5-cdf46d1d5d4f"
+          pipeline: "56"
+          specificBuildWithTriggering: true
+          buildVersionToDownload: "latest"
+          downloadType: "single"
+          artifactName: "SurveyJSLibraryBuildReact"
+          downloadPath: "$(System.ArtifactsDirectory)"
+
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: "specific"
+          project: "af2804d2-859a-4705-9ef5-cdf46d1d5d4f"
+          pipeline: "56"
+          specificBuildWithTriggering: true
+          buildVersionToDownload: "latest"
+          downloadType: "single"
+          artifactName: "SurveyJSLibraryBuildCore"
+          downloadPath: "$(System.ArtifactsDirectory)"
+
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: "current"
+          downloadType: "single"
+          artifactName: "SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)"
+          downloadPath: "$(System.ArtifactsDirectory)"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core"
+          Contents: "**"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
+          OverWrite: true
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(System.ArtifactsDirectory)/SurveyJSLibraryBuildReact/packages/survey-react-ui"
+          Contents: "**"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-react-ui/build"
+          OverWrite: true
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
+          Contents: "**"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
+
+      # - script: |
+      #     cd $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
+      #     sed -i 's/"survey-core": .*"/"survey-core": "latest"/g' package.json
+      #   displayName: "Change survey-core dependency version from release next ver to local dependency"
+
+      - task: Npm@1
+        displayName: "Npm install root"
+        inputs:
+          command: install
+          verbose: false
+          workingDir: $(Build.SourcesDirectory)/survey-creator
+        condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+          npx puppeteer browsers install chrome
+        displayName: "install chrome"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator
+          npm run lint
+        displayName: "check lint"
+
+      - task: Npm@1
+        displayName: "Npm install survey-creator-react"
+        inputs:
+          command: install
+          verbose: false
+          workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+        condition: ne(variables.NPM_CACHE_RESTORED, 'true')
+
+      # update 'file' npm dependencies in case of cache
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCore/packages/survey-core
+          Contents: "**"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core"
+          OverWrite: true
+        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+        displayName: "copy survey-core in case of npm cache"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildReact/packages/survey-react-ui
+          Contents: "**"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui"
+          OverWrite: true
+        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+        displayName: "copy survey-react-ui in case of npm cache"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
+          Contents: "**"
+          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-creator-core"
+          OverWrite: true
+        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+        displayName: "copy survey-creator-core in case of npm cache"
+      # EO update 'file' npm dependencies in case of cache
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+          npm run remove-package-lock
+        displayName: "npm run remove-package-lock"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+          npm run build
+        displayName: "Build CreatorV2 React"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+          npm run vrt:v2:ci
+        displayName: "Visual Regression Tests V2 Creator React"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/visualRegressionTests-V2"
+          Contents: "**"
+          TargetFolder: "$(Build.ArtifactStagingDirectory)/Creator_React_VRT-V2"
+          OverWrite: true
+        condition: always()
+        displayName: "copy vrt v2 react artifacts"
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: "$(Build.ArtifactStagingDirectory)/Creator_React_VRT-V2/"
+          ArtifactName: "Creator_React_VRT-V2"
+          publishLocation: "Container"
+        condition: always()
+        displayName: "publish vrt v2 react artifacts"

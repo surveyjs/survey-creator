@@ -19,7 +19,9 @@ If you are looking for a quick-start application that includes all SurveyJS comp
 
 > In this guide, the terms "Form Builder" and "Survey Creator" are used interchangeably and both refer to the SurveyJS form building component for Angular.
 
-## Install the `survey-creator-angular` npm Package
+<div id="install-the-survey-creator-angular-npm-package"></div>
+
+## Install the Angular Form Builder npm Package
 
 Survey Creator for Angular consists of two npm packages: [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) (platform-independent code) and [`survey-creator-angular`](https://www.npmjs.com/package/survey-creator-angular) (rendering code). Run the following command to install `survey-creator-angular`. The `survey-creator-core` package will be installed automatically as a dependency.
 
@@ -33,7 +35,7 @@ npm install survey-creator-angular --save
 > npm install @angular/cdk@^12.0.0 --save
 > ```
 >
-> Earlier Angular versions are supported by the [`survey-creator`](https://www.npmjs.com/package/survey-creator) package. It depends on Knockout and is now obsolete. However, you can use it in your Angular v8&ndash;v11 projects. Refer to the following examples on GitHub for more information:
+> Earlier Angular versions are supported by the [`survey-creator-knockout`](https://www.npmjs.com/package/survey-creator-knockout) package. It depends on Knockout and is now obsolete. However, you can use it in your Angular v8&ndash;v11 projects. Refer to the following examples on GitHub for more information:
 > 
 > - [Add SurveyJS Form Library to an Angular v8&ndash;v11 Application](https://github.com/surveyjs/code-examples/tree/main/legacy-angular/form-library)
 > - [Add Survey Creator to an Angular v8&ndash;v11 Application](https://github.com/surveyjs/code-examples/tree/main/legacy-angular/survey-creator).
@@ -57,7 +59,7 @@ Open the `angular.json` file and reference Survey Creator and SurveyJS Form Libr
             // ...
             "styles": [
               "src/styles.css",
-              "node_modules/survey-core/defaultV2.min.css",
+              "node_modules/survey-core/survey-core.min.css",
               "node_modules/survey-creator-core/survey-creator-core.min.css"
             ],
             // ...
@@ -69,20 +71,28 @@ Open the `angular.json` file and reference Survey Creator and SurveyJS Form Libr
 }
 ```
 
+When [using standalone components](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular-standalone-components), import the style sheets directly in the component file:
+
+```js
+// survey-creator.component.ts
+import "survey-core/survey-core.min.css";
+import "survey-creator-core/survey-creator-core.min.css";
+```
+
 ## Configure Survey Creator
 
 To configure the Survey Creator component, specify [its properties](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions) in a configuration object. In this tutorial, the object enables the following properties:
 
-- [`showLogicTab`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showLogicTab)        
-Displays the Logic tab in the tab panel.
-
-- [`isAutoSave`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#isAutoSave)        
+- [`autoSaveEnabled`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#autoSaveEnabled)        
 Automatically saves the survey JSON schema on every change.
+
+- [`collapseOnDrag`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#collapseOnDrag)        
+Collapses pages on the design surface when users start dragging a survey element.
 
 ```js
 const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 ```
 
@@ -114,8 +124,8 @@ import { Component, OnInit } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
 
 const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 
 @Component({
@@ -135,7 +145,7 @@ export class SurveyCreatorComponent implements OnInit {
 
 ## Render Survey Creator
 
-Before you render the survey, you need to import the module that integrates Survey Creator with Angular. Open your NgModule class (usually resides in the `app.module.ts` file), import the `SurveyCreatorModule` from `survey-creator-angular`, and list it in the `imports` array.
+Before you render the survey, you need to import the module that integrates Survey Creator with Angular. Open your `NgModule` class (usually resides in the `app.module.ts` file), import the `SurveyCreatorModule` from `survey-creator-angular`, and list it in the `imports` array.
 
 ```js
 // app.module.ts
@@ -152,7 +162,24 @@ import { SurveyCreatorModule } from 'survey-creator-angular';
   bootstrap: [ ... ]
 })
 export class AppModule { }
+```
 
+When [using standalone components](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular-standalone-components), import the `SurveyCreatorModule` and add it to the `imports` array directly in the component file:
+
+```js
+// survey-creator.component.ts
+// ...
+import { SurveyCreatorModule } from 'survey-angular-ui';
+
+@Component({
+  // ...
+  standalone: true,
+  imports: [ SurveyCreatorModule ],
+  // ...
+})
+export class SurveyCreatorComponent implements OnInit {
+  // ...
+}
 ```
 
 To render Survey Creator, add a `<survey-creator>` element to your component template and bind the element's `model` attribute to the model instance you created in the previous step:
@@ -185,8 +212,8 @@ import { Component, OnInit } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
 
 const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 
 @Component({
@@ -236,9 +263,23 @@ export class AppModule { }
 ```
 </details>
 
+## Activate a SurveyJS License
+
+Survey Creator is not available for free commercial use. To integrate it into your application, you must purchase a [commercial license](https://surveyjs.io/licensing) for the software developer(s) who will be working with the Survey Creator APIs and implementing the integration. If you use Survey Creator without a license, an alert banner will appear at the bottom of the interface:
+
+<img src="./images/alert-banner.png" alt="Survey Creator: Alert banner" width="1544" height="824">
+
+After purchasing a license, follow the steps below to activate it and remove the alert banner:
+
+1. [Log in](https://surveyjs.io/login) to the SurveyJS website using your email address and password. If you've forgotten your password, [request a reset](https://surveyjs.io/reset-password) and check your inbox for the reset link.
+2. Open the following page: [How to Remove the Alert Banner](https://surveyjs.io/remove-alert-banner). You can also access it by clicking **Set up your license key** in the alert banner itself.
+3. Follow the instructions on that page.
+
+Once you've completed the setup correctly, the alert banner will no longer appear.
+
 ## Save and Load Survey Model Schemas
 
-Survey Creator produces survey model schemas as JSON objects. You can persist these objects on your server: save updates and restore previously saved schemas. To save a JSON object, implement the `saveSurveyFunc` function. It accepts two arguments:
+Survey Creator produces survey model schemas as JSON objects. You can persist these objects on your server: save updates and restore previously saved schemas. To save a JSON object, implement the [`saveSurveyFunc`](/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) function. It accepts two arguments:
 
 - `saveNo`      
 An incremental number of the current change. Since web services are asynchronous, you cannot guarantee that the service receives the changes in the same order as the client sends them. For example, change #11 may arrive to the server faster than change #10. In your web service code, update the storage only if you receive changes with a higher `saveNo`.
@@ -246,7 +287,7 @@ An incremental number of the current change. Since web services are asynchronous
 - `callback`        
 A callback function. Call it and pass `saveNo` as the first argument. Set the second argument to `true` or `false` based on whether the server applied or rejected the change.
 
-The following code shows how to use the `saveSurveyFunc` function to save a survey model schema in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
+The following code shows how to use the `saveSurveyFunc` function to save a survey model schema in the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
 
 
 ```js
@@ -296,6 +337,8 @@ function saveSurveyJson(url: string | URL, json: object, saveNo: number, callbac
 }
 ```
 
+[View Demo](/survey-creator/examples/set-how-survey-configuration-changes-are-saved/ (linkStyle))
+
 If you are running a NodeJS server, you can check a survey JSON schema before saving it. On the server, create a `SurveyModel` and call its [`toJSON()`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#toJSON) method. This method deletes unknown properties and incorrect property values from the survey JSON schema:
 
 ```js
@@ -310,7 +353,7 @@ const correctSurveyJson = survey.toJSON();
 // ...
 ```
 
-To load a survey model schema JSON into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
+To load a survey model schema into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
 
 ```js
 const defaultJson = {
@@ -357,8 +400,8 @@ import { Component, OnInit } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
 
 const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 
 const defaultJson = {
@@ -494,6 +537,8 @@ export class SurveyCreatorComponent implements OnInit {
 }
 ```
 
+[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/angular (linkStyle))
+
 To view the application, run `ng serve` in a command line and open [http://localhost:4200/](http://localhost:4200/) in your browser.
 
 <details>
@@ -512,8 +557,8 @@ import { Component, OnInit } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
 
 const creatorOptions = {
-  showLogicTab: true,
-  isAutoSave: true
+  autoSaveEnabled: true,
+  collapseOnDrag: true
 };
 
 const defaultJson = {
@@ -632,7 +677,26 @@ export class AppModule { }
 ```
 </details>
 
-[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/angular (linkStyle))
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular (linkStyle))
+
+
+## (Optional) Enable Ace Editor in the JSON Editor Tab
+
+The JSON Editor tab enables users to edit survey JSON schemas as text. To make the editing process more convenient, you can integrate the <a href="https://ace.c9.io/" target="_blank">Ace</a> code editor. Install the <a href="https://www.npmjs.com/package/ace-builds" target="_blank">`ace-builds`</a> package to add Ace to your project:
+
+```sh
+npm install ace-builds --save
+```
+
+Import Ace and required extensions in an Angular component that renders Survey Creator. For instance, the following code imports an extension that adds a Find/Replace dialog to Ace:
+
+```js
+// survey-creator.component.ts
+// ...
+import "ace-builds/src-noconflict/ace";
+import "ace-builds/src-noconflict/ext-searchbox";
+// ...
+```
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular (linkStyle))
 

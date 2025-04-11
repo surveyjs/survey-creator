@@ -4,48 +4,68 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://unpkg.com/react@latest/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
-  <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/defaultV2.css" />
+  <script defer type="module">
+    import React from "https://esm.sh/react@19/?dev";
+    import ReactDOMClient from "https://esm.sh/react-dom@19/client?dev";
+    import ReactDOM from "https://esm.sh/react-dom@19?dev";
+    window.ReactDOMClient = ReactDOMClient;
+    window.React = React;
+    window.ReactDOM = ReactDOM;
+  </script>
+  <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/survey-core.css" />
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/survey-creator-core.css" />
   <!-- <link rel="stylesheet" type="text/css" href="../build/survey-creator-react.min.css" /> -->
-  <script src="../node_modules/survey-core/survey.core.js"></script>
-  <script src="../node_modules/survey-core/survey.i18n.js"></script>
-  <script src="../node_modules/survey-creator-core/survey-creator-core.js"></script>
-  <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js"></script>
-  <script src="../node_modules/survey-react-ui/survey-react-ui.js"></script>
-  <script src="../build/survey-creator-react.js"></script>
-  <script src="./sc.js"></script>
+  <script src="../node_modules/survey-core/survey.core.js" defer></script>
+  <script src="../node_modules/survey-core/survey.i18n.js" defer></script>
+  <script src="../node_modules/survey-core/themes/index.js" defer></script>
+  <script src="../node_modules/survey-creator-core/survey-creator-core.js" defer></script>
+  <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js" defer></script>
+  <script src="../node_modules/survey-react-ui/survey-react-ui.js" defer></script>
+  <script src="../build/survey-creator-react.js" defer></script>
+  <script src="./sc.js" defer></script>
 </head>
 
-<body>
+<body spellcheck="false">
   <div id="survey-creator" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;"></div>
 </body>
 <script>
-  window.surveyJSFramework = "react";
-  const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
-  window.creator = creator;
+  window.addEventListener("DOMContentLoaded", () => {
+    window.surveyJSFramework = "react";
+    SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
+    const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
+    window.creator = creator;
+    creator.tabResponsivenessMode = "menu";
+    creator["animationEnabled"] = false;
+    creator.showOneCategoryInPropertyGrid = false;
+    creator.allowZoom = false;
 
-  class SurveyCreatorRenderComponent extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = { creator: creator };
-      window.updateCreatorModel = (options, json) => {
-        window.prevCreator = window.creator;
-        const creator = new SurveyCreator.SurveyCreator(options);
-        creator.JSON = json;
-        this.setState({ creator });
-        window.creator = creator;
+    class SurveyCreatorRenderComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { creator: creator };
+        window.updateCreatorModel = (options, json) => {
+          window.prevCreator = window.creator;
+          const creator = new SurveyCreator.SurveyCreator(options);
+          creator.JSON = json;
+          this.setState({ creator });
+          creator.tabResponsivenessMode = "menu";
+          creator["animationEnabled"] = false;
+          creator.showOneCategoryInPropertyGrid = false;
+          creator.allowZoom = false;
+          window.creator = creator;
+        }
+      }
+      render() {
+        return React.createElement(SurveyCreator.SurveyCreatorComponent, { creator: this.state.creator });
       }
     }
-    render() {
-      return React.createElement(SurveyCreator.SurveyCreatorComponent, { creator: this.state.creator });
-    }
-  }
-  const root = ReactDOM.createRoot(document.getElementById("survey-creator"));
-  root.render(React.createElement(
-    SurveyCreatorRenderComponent
-  ));
+    const root = ReactDOMClient.createRoot(document.getElementById("survey-creator"));
+    root.render(React.createElement(React.StrictMode, {
+      children: React.createElement(
+        SurveyCreatorRenderComponent
+      )
+    }))
+  });
 </script>
 
 </html>

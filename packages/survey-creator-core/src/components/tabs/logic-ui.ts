@@ -13,7 +13,7 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { QuestionEmbeddedSurveyModel } from "../embedded-survey";
 import { updateMatrixLogicRemoveAction, updateMatrixLogicExpandAction } from "../../utils/actions";
 
-require("./logic-ui.scss");
+import "./logic-ui.scss";
 
 import { logicCss } from "./logic-theme";
 
@@ -39,7 +39,6 @@ export class SurveyLogicUI extends SurveyLogic {
     super(survey, options);
     if (!this.options) this.options = new EmptySurveyCreatorOptions();
     this.setupToolbarItems();
-    this.update();
   }
   public update(
     survey: SurveyModel = null,
@@ -92,7 +91,9 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   public addNewUI() {
     if (this.items.length == 0 || !this.items[this.items.length - 1].isNew) {
+      this.matrixItems["lockResetRenderedTable"] = true;
       this.addNew();
+      this.matrixItems["lockResetRenderedTable"] = false;
     }
     const rows = this.matrixItems.visibleRows;
     rows[rows.length - 1].showDetailPanel();
@@ -110,39 +111,39 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   private getUnsavedItems(): Array<SurveyLogicItem> {
     const res = [];
-    for(var i = 0; i < this.visibleItems.length; i ++) {
+    for (var i = 0; i < this.visibleItems.length; i++) {
       const item = this.visibleItems[i];
       const itemUI = this.findLogicItemUI(item);
-      if(!itemUI) continue;
-      if(item.isNew) {
-        if(!itemUI.expressionEditor.isEmpty() || !itemUI.itemEditor.isEmpty()) {
+      if (!itemUI) continue;
+      if (item.isNew) {
+        if (!itemUI.expressionEditor.isEmpty() || !itemUI.itemEditor.isEmpty()) {
           res.push(item);
         }
       } else {
-        if(item.isModified) {
+        if (item.isModified) {
           res.push(item);
         }
       }
     }
     return res;
   }
-  private getErroredItem(items: Array<SurveyLogicItem>) : SurveyLogicItem {
-    for(let i = 0; i < items.length; i ++) {
+  private getErroredItem(items: Array<SurveyLogicItem>): SurveyLogicItem {
+    for (let i = 0; i < items.length; i++) {
       const item = items[i];
-      if(this.isErroredItem(item)) return item;
+      if (this.isErroredItem(item)) return item;
     }
     return null;
   }
-  private isErroredItem(item : SurveyLogicItem): boolean {
+  private isErroredItem(item: SurveyLogicItem): boolean {
     const itemUI = this.findLogicItemUI(item);
-    if(!itemUI) return false;
+    if (!itemUI) return false;
     return itemUI.expressionEditor.hasErrors() || itemUI.itemEditor.hasErrors();
   }
   private showErroredItem(item: SurveyLogicItem): void {
     const index = this.visibleItems.indexOf(item);
     const rows = this.matrixItems.visibleRows;
     const row = index > -1 && index < rows.length ? rows[index] : null;
-    if(!!row) {
+    if (!!row) {
       rows.forEach(r => r.hideDetailPanel());
       this.mode = "view";
       row.showDetailPanel();
@@ -150,15 +151,15 @@ export class SurveyLogicUI extends SurveyLogic {
     }
   }
   private saveItem(item: SurveyLogicItem): void {
-    if(this.isErroredItem(item)) return;
+    if (this.isErroredItem(item)) return;
     !!this.options && this.options.startUndoRedoTransaction();
     this.doItemApply(item);
     !!this.options && this.options.stopUndoRedoTransaction();
   }
-  public tryLeaveUI(resultFunc?: (res: boolean) => void): boolean|undefined {
+  public tryLeaveUI(resultFunc?: (res: boolean) => void): boolean | undefined {
     this.updateEditableItemIsModifiedState();
     const unsavedItems = this.getUnsavedItems();
-    if(unsavedItems.length === 0) {
+    if (unsavedItems.length === 0) {
       !!resultFunc && resultFunc(true);
       return true;
     }
@@ -167,7 +168,7 @@ export class SurveyLogicUI extends SurveyLogic {
       unsavedItems.forEach(item => this.saveItem(item));
       !!resultFunc && resultFunc(true);
     };
-    if(!erroredItem) {
+    if (!erroredItem) {
       onLeavingFunc();
       return true;
     }
@@ -175,7 +176,7 @@ export class SurveyLogicUI extends SurveyLogic {
       this.showErroredItem(erroredItem);
       !!resultFunc && resultFunc(false);
     };
-    if(this.confirmLeavingOnError(onLeavingFunc, onStayingFunc)) {
+    if (this.confirmLeavingOnError(onLeavingFunc, onStayingFunc)) {
       return undefined;
     }
     onStayingFunc();
@@ -196,6 +197,7 @@ export class SurveyLogicUI extends SurveyLogic {
         onStaying();
         return true;
       },
+      cssClass: "svc-creator-popup",
       title: this.getLocString("ed.lg.uncompletedRule_title"),
       displayMode: "popup"
     }, this.options.rootElement);
@@ -296,9 +298,9 @@ export class SurveyLogicUI extends SurveyLogic {
       this.updateItemsSurveyData();
     }
   }
-  private doItemApply(item : SurveyLogicItem): void {
+  private doItemApply(item: SurveyLogicItem): void {
     const itemUI = this.findLogicItemUI(item);
-    if(!itemUI) return;
+    if (!itemUI) return;
     itemUI.expressionEditor.apply();
     itemUI.itemEditor.apply();
     item.apply(itemUI.expressionEditor.text);
@@ -512,4 +514,15 @@ export class SurveyLogicUI extends SurveyLogic {
   public get emptyTabPlaceholder(): string {
     return getLogicString("empty_tab");
   }
+  public get placeholderTitleText(): string {
+    if (this.options.isMobileView)
+      return getLogicString("logicPlaceholderTitleMobile");
+    return getLogicString("logicPlaceholderTitle");
+  }
+  public get placeholderDescriptionText(): string {
+    if (this.options.isMobileView)
+      return getLogicString("logicPlaceholderDescriptionMobile");
+    return getLogicString("logicPlaceholderDescription");
+  }
+
 }

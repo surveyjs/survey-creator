@@ -2,7 +2,10 @@ import {
   QuestionMatrixDynamicModel,
   IAction,
   MatrixDynamicRowModel,
-  MatrixDropdownRowModelBase
+  MatrixDropdownRowModelBase,
+  Action,
+  property,
+  CssClassBuilder
 } from "survey-core";
 
 export function findAction(actions: Array<IAction>, id: string): IAction {
@@ -21,7 +24,7 @@ export function updateMatrixLogicExpandAction(question: QuestionMatrixDynamicMod
   action.component = "sv-action-bar-item";
   action.iconName = "icon-logic-expand";
   action.innerCss = "sl-table__action-button sl-table__detail-button";
-  action.iconSize = 48;
+  action.iconSize = "auto";
   action.showTitle = false;
   action.action = () => {
     row.showHideDetailPanelClick();
@@ -35,6 +38,7 @@ export function updateMatrixLogicRemoveAction(question: QuestionMatrixDynamicMod
   updateMatrixRemoveAction(question, actions, row);
   const action = findAction(actions, "remove-row");
   if (!action) return;
+  action.iconSize = "auto";
   action.css = "sl-table__action-button sl-table__remove-button";
 }
 export function updateMatrixRemoveAction(
@@ -46,6 +50,7 @@ export function updateMatrixRemoveAction(
   if (!action) return;
   action.component = "sv-action-bar-item";
   action.iconName = "icon-delete";
+  action.iconSize = "auto";
   action.innerCss = "spg-action-button spg-action-button--danger";
   action.title = question.removeRowText;
   action.showTitle = false;
@@ -58,4 +63,17 @@ export function updateMatixActionsClasses(actions: Array<IAction>) {
   actions.forEach(action => {
     action.innerCss = `${action.innerCss || ""} spg-action-button--muted`;
   });
+}
+
+export class MenuButton extends Action {
+  @property({ defaultValue: "icon" }) contentType: "icon" | "text-description-vertical";
+
+  public get buttonClassName(): string {
+    return new CssClassBuilder()
+      .append("svc-menu-action__button")
+      .append("svc-menu-action__button--with-subtitle", this.contentType === "text-description-vertical")
+      .append("svc-menu-action__button--pressed", this.pressed)
+      .append("svc-menu-action__button--selected", !!this.active)
+      .toString();
+  }
 }

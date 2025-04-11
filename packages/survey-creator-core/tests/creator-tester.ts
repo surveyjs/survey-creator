@@ -8,11 +8,10 @@ import { QuestionLinkValueModel } from "../src/components/link-value";
 const dummyQuestion = new QuestionLinkValueModel("q1");
 
 export class CreatorTester extends SurveyCreatorModel {
-  constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions, setOldDefaultNewSurveyJSON = true) {
-    if (setOldDefaultNewSurveyJSON) {
-      creatorSetting.defaultNewSurveyJSON = { pages: [{ name: "page1" }] };
-    }
+  constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
+    //Reset the locale to the default one from the previous tests
+    this.locale = "";
     this.autoSaveDelay = 0;
     this.onSurveyInstanceCreated.add((creator, options) => {
       options.survey.getRendererForString = (element: Base, name: string): any => {
@@ -31,7 +30,7 @@ export class CreatorTester extends SurveyCreatorModel {
   }
   public selectQuestionByName(name: string): Question {
     const q = this.survey.getQuestionByName(name);
-    if(!!q) this.selectElement(q);
+    if (!!q) this.selectElement(q);
     return q;
   }
   public getActionBarItem(id: string): IAction {

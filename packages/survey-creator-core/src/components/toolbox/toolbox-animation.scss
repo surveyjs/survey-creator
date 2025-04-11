@@ -1,0 +1,134 @@
+@use "../../variables" as *;
+$svc-toolbox-fade-in-duration: var(--sjs-svc-toolbox-fade-in-duration, 250ms);
+$svc-toolbox-move-in-duration: var(--sjs-svc-toolbox-move-in-duration, 250ms);
+$svc-toolbox-fade-in-delay: var(--sjs-svc-toolbox-fade-in-delay, 100ms);
+$svc-toolbox-fade-out-duration: var(--sjs-svc-toolbox-fade-out-duration, 250ms);
+$svc-toolbox-move-out-duration: var(--sjs-svc-toolbox-move-out-duration, 250ms);
+$svc-toolbox-move-out-delay: var(--sjs-svc-toolbox-move-out-delay, 0ms);
+
+$cubic-ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+$reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
+
+@keyframes toolboxFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes toolboxMoveIn {
+  from {
+    width: var(--toolbox-width-compact);
+    overflow: hidden;
+  }
+
+  to {
+    width: var(--animation-width);
+    overflow: hidden;
+  }
+}
+
+@keyframes toolboxSeparatorSearchMoveIn {
+  from {
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, var(--sjs-spacing-x2));
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, var(--sjs-spacing-x2));
+
+    overflow: hidden;
+  }
+
+  to {
+    padding-inline-end: 0;
+    padding-inline-start: 0;
+    overflow: hidden;
+  }
+}
+
+@keyframes toolboxSeparatorMoveIn {
+  from {
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, var(--sjs-spacing-x2));
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, var(--sjs-spacing-x2));
+    overflow: hidden;
+  }
+
+  to {
+    padding-inline-end: var(--ctr-toolbox-separator-padding-right, 0px);
+    padding-inline-start: var(--ctr-toolbox-separator-padding-left, var(--sjs-spacing-x2));
+    overflow: hidden;
+  }
+}
+
+.svc-toolbox__panel--enter,
+.svc-toolbox__panel--leave {
+  animation-fill-mode: forwards;
+  animation-duration: var(--move-animation-duration), var(--animation-duration);
+  animation-delay: var(--move-animation-delay), 0s;
+  animation-direction: var(--animation-direction);
+  animation-timing-function: var(--animation-timing-function);
+  animation-name: toolboxMoveIn, empty;
+  animation-fill-mode: forwards;
+  min-width: 0;
+
+  .svc-toolbox__category-separator {
+    animation-duration: var(--move-animation-duration);
+    animation-delay: var(--move-animation-delay);
+    animation-direction: var(--animation-direction);
+    animation-timing-function: var(--animation-timing-function);
+    animation-name: toolboxSeparatorMoveIn;
+    animation-fill-mode: forwards;
+  }
+
+  .svc-toolbox__category-separator--search {
+    animation-name: toolboxSeparatorSearchMoveIn;
+  }
+
+  .svc-toolbox__item-submenu-button,
+  .svc-toolbox__item-title,
+  .svc-search__input {
+    animation-duration: var(--fade-animation-duration);
+    animation-delay: var(--fade-animation-delay);
+    animation-direction: var(--animation-direction);
+    animation-timing-function: var(--animation-timing-function);
+    animation-name: toolboxFadeIn;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    text-overflow: initial;
+  }
+}
+
+.svc-toolbox__panel--enter {
+  --fade-animation-duration: #{$svc-toolbox-fade-in-duration};
+  --move-animation-duration: #{$svc-toolbox-move-in-duration};
+  --fade-animation-delay: #{$svc-toolbox-fade-in-delay};
+  --move-animation-delay: 0s;
+  --animation-direction: normal;
+  --animation-duration: calc(var(--fade-animation-delay) + var(--fade-animation-duration));
+  --animation-timing-function: #{$cubic-ease-out};
+}
+
+.svc-toolbox__panel--leave {
+  --fade-animation-duration: #{$svc-toolbox-fade-out-duration};
+  --move-animation-duration: #{$svc-toolbox-move-out-duration};
+  --fade-animation-delay: 0s;
+  --move-animation-delay: #{$svc-toolbox-move-out-delay};
+  --animation-direction: reverse;
+  --animation-duration: 0s;
+  --animation-timing-function: #{$reverse-cubic-ease-out};
+}
+
+.svc-toolbox--flyout-to-compact-running {
+  width: var(--toolbox-width-compact);
+  margin-inline-end: var(--ctr-toolbox-margin-left-compact, 0);
+  z-index: 200;
+  border-inline-end: var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1)) solid transparent;
+}
+
+.svc-creator--disable-animations {
+
+  .svc-toolbox__panel--enter,
+  .svc-toolbox__panel--leave {
+    animation: none;
+  }
+}

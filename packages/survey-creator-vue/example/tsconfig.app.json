@@ -1,13 +1,33 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
-  "exclude": ["src/**/__tests__/*"],
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue"
+  ],
+  "exclude": [
+    "src/**/__tests__/*"
+  ],
   "compilerOptions": {
     "composite": true,
     "noImplicitAny": false,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "survey-core": [
+        "./node_modules/survey-core"
+      ],
+      "survey-creator-core": [
+        "./node_modules/survey-creator-core"
+      ],
+      "survey-vue3-ui": [
+        "./node_modules/survey-vue3-ui"
+      ],
+      "vue": [
+        "./node_modules/vue"
+      ]
     }
   }
 }

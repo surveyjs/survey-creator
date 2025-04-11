@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@use "../variables" as *;
 
 .svc-image-item-value-wrapper {
   display: inline-block;
@@ -11,14 +11,21 @@
 
   .sd-imagepicker__image {
     box-sizing: border-box;
-    border: 1px dashed $border;
+    border-radius: var(--lbr-image-corner-radius, var(--lbr-corner-radius-x05));
+    border: var(--ctr-survey-image-picker-item-border-width-placeholder, var(--lbr-stroke-x1)) dashed
+      var(--ctr-survey-image-picker-item-border-color-placeholder, var(--sjs-border-25, #d4d4d4ff));
   }
 }
 
 .svc-image-item-value--file-dragging {
   .sd-imagepicker__image {
-    border: 2px solid $primary;
-    background-color: $primary-light;
+    border-radius: var(--lbr-image-corner-radius, var(--lbr-corner-radius-x05));
+    border: var(--ctr-survey-image-picker-item-border-width-hovered-placeholder, var(--lbr-stroke-x2)) solid
+      var(--ctr-survey-image-picker-item-border-color-hovered-placeholder, var(--sjs-primary-background-500, #19b394ff));
+    background: var(
+      --ctr-survey-image-picker-item-background-color-hovered-placeholder,
+      var(--sjs-primary-background-10, #19b3941a)
+    );
   }
 
   .svc-image-item-value__item {
@@ -45,18 +52,28 @@
 
 .svc-image-item-value--new .svc-image-item-value-controls__button {
   background-color: transparent;
+  transition: background-color $creator-transition-duration;
 }
 
 .svc-image-item-value-controls__add {
-  background-color: transparent;
+  border-radius: var(--ctr-survey-contextual-button-corner-radius, var(--lbr-corner-radius-round));
+  background: var(--ctr-survey-contextual-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  transition: background-color $creator-transition-duration;
 
   use {
-    fill: $primary;
+    fill: var(--ctr-survey-contextual-button-icon-color-positive, var(--sjs-primary-background-500, #19b394ff));
+    transition: fill $creator-transition-duration;
   }
 
   &:hover,
   &:focus {
-    background-color: $primary-light;
+    border-radius: var(--ctr-survey-contextual-button-corner-radius, var(--lbr-corner-radius-round));
+    background: linear-gradient(
+        0deg,
+        var(--ctr-survey-contextual-button-background-color-hovered-positive, var(--sjs-primary-background-10, #19b3941a)) 0%,
+        var(--ctr-survey-contextual-button-background-color-hovered-positive, var(--sjs-primary-background-10, #19b3941a)) 100%
+      ),
+      var(--ctr-survey-contextual-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   }
 }
 
@@ -100,7 +117,8 @@
 
 .svc-image-item-value-wrapper__ghost {
   display: none;
-  background: $background-dim;
+  border-radius: var(--lbr-image-corner-radius, var(--lbr-corner-radius-x05));
+  background: var(--ctr-survey-image-picker-drop-spot-color, var(--sjs-layer-2-background-500, #f8f8f8ff));
 }
 
 .svc-image-item-value--single {

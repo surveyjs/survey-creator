@@ -12,7 +12,10 @@ export class DefaultValueEditor extends PropertyEditorSetupValue {
   ) {
     super(options, false);
     this.setupSurvey();
-    this.question.value = this.getQuestionValue();
+    const oldValue = this.getQuestionValue();
+    if(oldValue !== undefined) {
+      this.question.value = oldValue;
+    }
   }
   public get question(): Question {
     return this.editSurvey.getQuestionByName("question");
@@ -92,6 +95,7 @@ export class DefaultMatrixRowValueEditor extends DefaultArrayValueEditor {
     json.minRowCount = 1;
     json.maxRowCount = 1;
     json.columnsLocation = "vertical";
+    delete json.defaultValue;
     return json;
   }
 }

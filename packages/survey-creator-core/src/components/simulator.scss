@@ -1,4 +1,4 @@
-﻿@import "../variables.scss";
+﻿@use "../variables" as *;
 
 .svd-simulator {
   position: relative;
@@ -11,18 +11,23 @@
   top: 50%;
   left: 50%;
   transform: scale(1.26) translate(-50%, -50%);
-  overflow: overlay;
-  border: 2px solid $border-inside;
+
+  border: var(--ctr-preview-device-frame-border-width, var(--sjs-stroke-x2)) solid
+    var(--ctr-preview-device-frame-border-color, var(--sjs-border-25, #d4d4d4ff));
+  background: var(--ctr-preview-device-frame-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
 }
 
 .svd-simulator-wrapper {
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  border-radius: 32px;
-  border: 4px solid $background-dim;
-  background: $background;
-  box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.10), 0px 4px 16px 0px rgba(0, 0, 0, 0.05);
+  border-radius: var(--ctr-preview-device-corner-radius, var(--sjs-corner-radius-x4));
+  box-shadow:
+    0px 2px 6px 0px rgba(0, 0, 0, 0.1),
+    0px 8px 16px 0px var(--ctr-preview-device-shadow-2-color, var(--sjs-special-glow, #004c441a));
+  border: var(--ctr-preview-device-border-width, var(--sjs-stroke-x4)) solid
+    var(--ctr-preview-device-border-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
+  background: var(--ctr-preview-device-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 }
 
 .svd-simulator-main {
@@ -48,7 +53,7 @@
   .sd-root-modern {
     min-height: 100%;
 
-    .sv-popup:not(.sv-popup--overlay):not(.sv-popup--modal) {
+    .sv-popup--menu-popup {
       width: auto;
       right: 0;
     }
@@ -60,15 +65,12 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  // border-bottom: 1px solid $border-inside;
-  box-shadow: inset 0px -1px 0px 0px $border-inside;
   position: relative;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-
-  ::i-block-chrome,
-  .svd-simulator-content {
-    overflow-y: scroll;
+.svd-simulator {
+  .sv-popup--menu-phone,
+  .sv-popup--menu-tablet {
+    --sv-popup-overlay-height: 100%;
   }
 }

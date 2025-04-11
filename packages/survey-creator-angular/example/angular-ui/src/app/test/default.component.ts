@@ -2,6 +2,10 @@ import { Component, NgZone, OnInit, ViewEncapsulation } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
 import * as SurveyCreatorCore from "survey-creator-core";
 import * as Survey from "survey-core";
+import SurveyThemes from "survey-core/themes";
+import "survey-core/survey.i18n";
+import "survey-creator-core/survey-creator-core.i18n";
+SurveyCreatorCore.registerSurveyTheme(SurveyThemes);
 
 @Component({
   selector: "test-default",
@@ -21,6 +25,8 @@ export class TestDefaultComponent implements OnInit {
       this.zone && this.zone.run(() => {
         (<any>window).prevCreator = this.creator;
         this.creator = new SurveyCreatorModel(options);
+        this.creator.showOneCategoryInPropertyGrid = false;
+        this.creator.allowZoom = false;
         this.creator.JSON = json;
         (<any>window).creator = this.creator;
       });
@@ -32,6 +38,10 @@ export class TestDefaultComponent implements OnInit {
   }
   protected getSlk(): boolean { return true; }
   protected createCreator(): void {
-    this.creator = new SurveyCreatorModel({ showLogicTab: true, showTranslationTab: true });
+    this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
+    this.creator.tabResponsivenessMode = "menu";
+    this.creator["animationEnabled"] = false;
+    this.creator.showOneCategoryInPropertyGrid = false;
+    this.creator.allowZoom = false;
   }
 }

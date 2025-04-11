@@ -1,4 +1,4 @@
-import { editorLocalization } from "survey-creator-core";
+import { setupLocale } from "survey-creator-core";
 
 export var danishStrings = {
   // survey templates
@@ -15,6 +15,15 @@ export var danishStrings = {
     deleteQuestion: "Slet spørgsmål",
     convertTo: "Konverter til",
     drag: "Træk element",
+  },
+  // Creator tabs
+  tabs: {
+    preview: "Afprøv undersøgelse",
+    theme: "Temaer",
+    translation: "Oversættelse",
+    designer: "Undersøgelsesdesigner",
+    json: "JSON Editor",
+    logic: "Logik"
   },
   // Question types
   qt: {
@@ -42,6 +51,14 @@ export var danishStrings = {
     signaturepad: "Underskrift",
     buttongroup: "Knap gruppe"
   },
+  toolboxCategories: {
+    general: "Generelt",
+    choice: "Spørgsmål om valg",
+    text: "Spørgsmål om tekstinput",
+    containers: "Containere",
+    matrix: "Matrix spørgsmål",
+    misc: "Misc"
+  },
   // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Standard ({0})",
@@ -52,6 +69,7 @@ export var danishStrings = {
     surveySettingsTooltip: "Indstillinger for undersøgelse",
     themeSettings: "Temaindstillinger",
     themeSettingsTooltip: "Temaindstillinger",
+    creatorSettingTitle: "Indstillinger for skabere",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
     prevSelected: "Vælg forrige",
@@ -73,29 +91,30 @@ export var danishStrings = {
     newQuestionName: "spørgsmål",
     newPanelName: "panel",
     newTextItemName: "Tekst",
-    testSurvey: "Afprøv undersøgelse",
-    themeSurvey: "Temaer",
     defaultV2Theme: "Standard",
     modernTheme: "Moderne",
     defaultTheme: "Standard (ældre)",
     testSurveyAgain: "Afprøv undersøgelse igen",
     testSurveyWidth: "Bredde af undersøgelse: ",
     navigateToMsg: "Du var nødt til at navigere til",
-    logic: "Logik",
-    embedSurvey: "Indlejr undersøgelse",
-    translation: "Oversættelse",
     saveSurvey: "Gem undersøgelse",
     saveSurveyTooltip: "Gem undersøgelse",
     saveTheme: "Gem tema",
     saveThemeTooltip: "Gem tema",
-    designer: "Undersøgelsesdesigner",
-    jsonEditor: "JSON Editor",
     jsonHideErrors: "Skjul fejl",
     jsonShowErrors: "Vis fejl",
     undo: "Fortryd",
     redo: "Annuller fortryd",
     undoTooltip: "Fortryd seneste ændring",
     redoTooltip: "Fortryd ændringen",
+    expandTooltip: "Ekspandere",
+    collapseTooltip: "Sammenbrud",
+    expandAllTooltip: "Udvid alle",
+    collapseAllTooltip: "Skjul alle",
+    zoomInTooltip: "Zoom ind",
+    zoom100Tooltip: "Zoom til 100 %",
+    zoomOutTooltip: "Zoom ud",
+    lockQuestionsTooltip: "Lås udvid/skjul tilstand for spørgsmål",
     showMoreChoices: "Vis mere",
     showLessChoices: "Vis mindre",
     copy: "Eksemplar",
@@ -109,14 +128,12 @@ export var danishStrings = {
     generateReadableJSON: "Generer læsbar JSON",
     toolbox: "Værktøjskasse",
     "property-grid": "Egenskaber",
+    toolboxFilteredTextPlaceholder: "Skriv for at søge...",
+    toolboxNoResultsFound: "Ingen resultater fundet",
     propertyGridFilteredTextPlaceholder: "Skriv for at søge...",
     propertyGridNoResultsFound: "Ingen resultater fundet",
-    toolboxGeneralCategory: "Generelt",
-    toolboxChoiceCategory: "Spørgsmål om valg",
-    toolboxTextCategory: "Spørgsmål om tekstinput",
-    toolboxContainersCategory: "Containere",
-    toolboxMatrixCategory: "Matrix spørgsmål",
-    toolboxMiscCategory: "Misc",
+    propertyGridPlaceholderTitle: "Begynd at konfigurere formularen",
+    propertyGridPlaceholderDescription: "Klik på et kategoriikon for at udforske undersøgelsesindstillinger. Yderligere indstillinger bliver tilgængelige, når du føjer et undersøgelseselement til designoverfladen.",
     correctJSON: "Ret venligst JSON.",
     surveyResults: "Undersøgelsesresultat: ",
     surveyResultsTable: "Som tabel",
@@ -132,6 +149,7 @@ export var danishStrings = {
     saveError: "Fejl! Undersøgelsen er ikke blevet gemt.",
     translationPropertyGridTitle: "Sprogindstillinger",
     themePropertyGridTitle: "Temaindstillinger",
+    addLanguageTooltip: "Tilføj sprog",
     translationLanguages: "Sprog",
     translationDeleteLanguage: "Er du sikker på, at du ønsker at slette alle strenge for dette sprog?",
     translationAddLanguage: "Vælg et sprog at oversætte",
@@ -148,6 +166,7 @@ export var danishStrings = {
     translationPlaceHolder: "Oversættelse...",
     translationSource: "Kilde: ",
     translationTarget: "Mål: ",
+    translationYouTubeNotSupported: "YouTube-links understøttes ikke.",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
     surveyJsonExportButton: "Eksport",
@@ -170,6 +189,22 @@ export var danishStrings = {
     surveyPlaceHolder: "Undersøgelsen er tom. Træk et element fra værktøjskassen, eller klik på knappen nedenfor.",
     pagePlaceHolder: "Siden er tom. Træk et element fra værktøjskassen, eller klik på knappen nedenfor.",
     imagePlaceHolder: "Træk og slip et billede her, eller klik på knappen nedenfor, og vælg et billede, der skal uploades",
+    surveyPlaceHolderMobile: "Klik på knappen \"Tilføj spørgsmål\" nedenfor for at begynde at oprette din formular.",
+    surveyPlaceholderTitle: "Din formular er tom",
+    surveyPlaceholderTitleMobile: "Din formular er tom",
+    surveyPlaceholderDescription: "Træk et element fra værktøjskassen, eller klik på knappen nedenfor.",
+    surveyPlaceholderDescriptionMobile: "Træk et element fra værktøjskassen, eller klik på knappen nedenfor.",
+    previewPlaceholderTitle: "Ingen forhåndsvisning",
+    previewPlaceholderTitleMobile: "Ingen forhåndsvisning",
+    previewPlaceholderDescription: "Undersøgelsen indeholder ingen synlige elementer.",
+    previewPlaceholderDescriptionMobile: "Undersøgelsen indeholder ingen synlige elementer.",
+    translationsPlaceholderTitle: "Ingen forpligtelser at oversætte",
+    translationsPlaceholderTitleMobile: "Ingen forpligtelser at oversætte",
+    translationsPlaceholderDescription: "Føj elementer til formularen, eller skift filteret for strenge på værktøjslinjen.",
+    translationsPlaceholderDescriptionMobile: "Føj elementer til formularen, eller skift filteret for strenge på værktøjslinjen.",
+    pagePlaceHolderMobile: "Klik på knappen \"Tilføj spørgsmål\" nedenfor for at tilføje et nyt element til siden.",
+    panelPlaceHolderMobile: "Klik på knappen \"Tilføj spørgsmål\" nedenfor for at tilføje et nyt element til panelet.",
+    imagePlaceHolderMobile: "Klik på knappen nedenfor, og vælg et billede, der skal uploades",
     imageChooseImage: "Vælg billede",
     addNewTypeQuestion: "Tilføj {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
@@ -179,6 +214,10 @@ export var danishStrings = {
     lg: {
       addNewItem: "Tilføj ny regel",
       empty_tab: "Opret en regel for at tilpasse undersøgelsens flow.",
+      logicPlaceholderTitle: "Ingen logiske regler",
+      logicPlaceholderTitleMobile: "Ingen logiske regler",
+      logicPlaceholderDescription: "Opret en regel for at tilpasse undersøgelsens flow.",
+      logicPlaceholderDescriptionMobile: "Opret en regel for at tilpasse undersøgelsens flow.",
       page_visibilityName: "Vis (skjul) side",
       page_enableName: "Aktivér (deaktiver) side",
       page_requireName: "Gør siden påkrævet",
@@ -221,13 +260,13 @@ export var danishStrings = {
       question_visibilityText: "Gør spørgsmål {0} synlige", //{0} question name
       question_enableText: "Foretag spørgsmål{0} aktiver", //{0} question name
       question_requireText: "Gør spørgsmål {0} påkrævet", //{0} question name
-      question_resetValueText: "Nulstil værdi for spørgsmål: {0}",
+      question_resetValueText: "Nulstil værdi for spørgsmål: {0}", //{0} question name.
       question_setValueText: "Tildel værdi: {1} til spørgsmål: {0}",
       column_visibilityText: "Gør kolonne {0} af spørgsmål {1} synlig", //{0} column name, {1} question name
       column_enableText: "Få kolonne {0} af spørgsmål {1} aktivere", //{0} column name, {1} question name
       column_requireText: "Gøre kolonne {0} af spørgsmål {1} påkrævet", //{0} column name, {1} question name
-      column_resetValueText: "Nulstil celleværdi for kolonne: {0}",
-      column_setValueText: "Tildel celleværdi: {1} til kolonne: {0}",
+      column_resetValueText: "Nulstil celleværdi for kolonne: {0}", //{0} column name
+      column_setValueText: "Tildel celleværdi: {1} til kolonne: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: " Et udtryk, hvis resultat vil blive tildelt målspørgsmålet.",
       trigger_completeText: "Undersøgelsen bliver afsluttet",
       trigger_setvalueText: "Sæt spørgsmålstegn ved: {0} værdi {1}", //{0} question name, {1} setValue
@@ -263,14 +302,18 @@ export var danishStrings = {
       description: "Beskrivelse af panelet",
       visibleIf: "Gør panelet synligt, hvis",
       requiredIf: "Gør panelet påkrævet, hvis",
-      questionsOrder: "Spørgsmålsrækkefølge i panelet",
+      questionOrder: "Spørgsmålsrækkefølge i panelet",
       page: "Overordnet side",
       startWithNewLine: "Få vist panelet på en ny linje",
       state: "Panelets sammenbrudstilstand",
       width: "Indlejret panelbredde",
       minWidth: "Mindste panelbredde",
       maxWidth: "Maksimal panelbredde",
-      showNumber: "Paneler med tal"
+      showNumber: "Nummerer dette panel"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Effektiv bredde, %",
+      questionTitleWidth: "Spørgsmålets titelbredde, px"
     },
     paneldynamic: {
       name: "Panelets navn",
@@ -289,13 +332,16 @@ export var danishStrings = {
       templateTitle: "Panelets titelmønster",
       noEntriesText: "Tom paneltekst",
       templateTabTitle: "Fanetitel mønster",
+      tabTitlePlaceholder: "Pladsholder til fanetitel",
       templateVisibleIf: "Gør et individuelt panel synligt, hvis",
-      hideNumber: "Skjul panelnummeret",
+      showNumber: "Nummerer panelet",
       titleLocation: "Justering af paneltitel",
       descriptionLocation: "Justering af panelbeskrivelse",
-      templateTitleLocation: "Tilpasning af spørgsmålets titel",
+      templateQuestionTitleLocation: "Tilpasning af spørgsmålets titel",
+      templateQuestionTitleWidth: "Spørgsmålets titelbredde",
       templateErrorLocation: "Justering af fejlmeddelelse",
       newPanelPosition: "Ny panelplacering",
+      showRangeInProgress: "Vis statuslinjen",
       keyName: "Undgå dublerede svar i følgende spørgsmål"
     },
     question: {
@@ -306,7 +352,7 @@ export var danishStrings = {
       requiredIf: "Foretag spørgsmålet påkrævet, hvis",
       page: "Overordnet side",
       state: "Tilstand for sammenbrud af spørgsmålsfelt",
-      hideNumber: "Skjul spørgsmålsnummeret",
+      showNumber: "Nummerer dette spørgsmål",
       titleLocation: "Tilpasning af spørgsmålets titel",
       descriptionLocation: "Tilpasning af spørgsmålsbeskrivelse",
       errorLocation: "Justering af fejlmeddelelse",
@@ -348,7 +394,8 @@ export var danishStrings = {
     // survey templates
     survey: {
       title: "Titel",
-      description: "Beskrivelse af undersøgelsen"
+      description: "Beskrivelse af undersøgelsen",
+      readOnly: "Gør undersøgelsen skrivebeskyttet"
     },
     page: {
       name: "Sidenavn",
@@ -356,8 +403,8 @@ export var danishStrings = {
       description: "Sidebeskrivelse",
       visibleIf: "Gør siden synlig, hvis",
       requiredIf: "Gør siden påkrævet, hvis",
-      maxTimeToFinish: "Tidsgrænse for at afslutte siden (i sekunder)",
-      questionsOrder: "Spørgsmålsrækkefølge på siden"
+      timeLimit: "Tidsgrænse for at afslutte siden (i sekunder)",
+      questionOrder: "Spørgsmålsrækkefølge på siden"
     },
     matrixdropdowncolumn: {
       name: "Kolonnens navn",
@@ -399,9 +446,13 @@ export var danishStrings = {
     imageHeight: "Billedhøjde",
     imageWidth: "Billedbredde",
     valueName: "Værdiens navn",
+    defaultDisplayValue: "Standardvisningsværdi for dynamiske tekster",
     rateDescriptionLocation: "Justering af etiketter",
-    size: "Inputfeltstørrelse (i tegn)",
+    size: "Bredde på inputfelt (i tegn)",
     cellErrorLocation: "Justering af cellefejlmeddelelse",
+    enabled: "Aktiveret",
+    disabled: "Handicappet",
+    inherit: "Arve",
     apply: "Anvend",
     ok: "OK",
     save: "Spare",
@@ -463,11 +514,13 @@ export var danishStrings = {
     listIsEmpty: "Der er endnu ikke tilføjet nogen varer",
     "listIsEmpty@choices": "Der er endnu ikke tilføjet nogen valgmuligheder",
     "listIsEmpty@columns": "Du har ikke nogen kolonner endnu",
+    "listIsEmpty@gridLayoutColumns": "Du har ikke layoutkolonner endnu",
     "listIsEmpty@rows": "Du har ingen rækker endnu",
     "listIsEmpty@validators": "Du har endnu ingen valideringsregler",
     "listIsEmpty@calculatedValues": "Du har endnu ingen tilpassede variabler",
     "listIsEmpty@triggers": "Du har ingen udløsere endnu",
     "listIsEmpty@navigateToUrlOnCondition": "Du har ingen links endnu",
+    "listIsEmpty@pages": "Du har ingen sider endnu",
     "addNew@choices": "Tilføj et valg",
     "addNew@columns": "Tilføj ny kolonne",
     "addNew@rows": "Tilføj ny række",
@@ -475,6 +528,7 @@ export var danishStrings = {
     "addNew@calculatedValues": "Tilføj ny variabel",
     "addNew@triggers": "Tilføj ny udløser",
     "addNew@navigateToUrlOnCondition": "Tilføj ny webadresse",
+    "addNew@pages": "Tilføj ny side",
     expressionIsEmpty: "Udtrykket er tomt",
     value: "Værdi",
     text: "Tekst",
@@ -494,6 +548,7 @@ export var danishStrings = {
     titlePlaceholder: "Titel",
     surveyTitlePlaceholder: "Undersøgelsens titel",
     pageTitlePlaceholder: "Side {num}",
+    startPageTitlePlaceholder: "Startside",
     descriptionPlaceholder: "Beskrivelse",
     surveyDescriptionPlaceholder: "Beskrivelse",
     pageDescriptionPlaceholder: "Beskrivelse",
@@ -514,11 +569,12 @@ export var danishStrings = {
     cellType: "Celletype",
     colCount: "Antal kolonner",
     choicesOrder: "Vælg rækkefølge på valg",
+    allowCustomChoices: "Tillad brugerdefinerede valg",
     visible: "Er synlig?",
     isRequired: "Er påkrævet?",
     markRequired: "Markér efter behov",
     removeRequiredMark: "Fjern det påkrævede mærke",
-    isAllRowRequired: "Kræv svar for alle rækker",
+    eachRowRequired: "Kræv svar for alle rækker",
     eachRowUnique: "Undgå dublerede svar i rækker",
     requiredErrorText: "Fejlmeddelelsen \"Påkrævet\"",
     startWithNewLine: "Skal starte med ny linie?",
@@ -530,7 +586,7 @@ export var danishStrings = {
     maxSize: "Maksimal filstørrelse i bytes",
     rowCount: "Antal rækker",
     columnLayout: "Kolonnelayout",
-    addRowLocation: "Tilføj række knapplacering",
+    addRowButtonLocation: "Tilføj række knapplacering",
     transposeData: "Transponere rækker til kolonner",
     addRowText: "Tilføj række knaptekst",
     removeRowText: "Fjern række knaptekst",
@@ -566,10 +622,9 @@ export var danishStrings = {
     simulator: "Vælg enhedstype",
     landscapeOrientation: "Skift til liggende retning",
     portraitOrientation: "Skift til stående format",
-    mode: "Mode (rediger/skrivebeskyttet)",
     clearInvisibleValues: "Fjern usynlige værdier",
     cookieName: "Cookienavn (for at undgå at afvikle undersøgelsen to gange lokalt)",
-    sendResultOnPageNext: "Send undersøgelsesresultatet ved næste side",
+    partialSendEnabled: "Send undersøgelsesresultatet ved næste side",
     storeOthersAsComment: "Gem 'others' værdien i et seperat felt",
     showPageTitles: "Vis sidetitler",
     showPageNumbers: "Vis sidenumre",
@@ -580,34 +635,38 @@ export var danishStrings = {
     editText: "Tekst til knappen Rediger svar",
     startSurveyText: "Start knaptekst",
     showNavigationButtons: "Vis navigationsknapper (standard navigation)",
+    navigationButtonsLocation: "Justering af navigationsknapper",
     showPrevButton: "Vis forrige knap (brugeren må gå tilbage til forrige side)",
-    firstPageIsStarted: "Den første side in undersøgelsen er starten på undersøgelsen.",
-    showCompletedPage: "Vis afslutningssiden til slut (completedHtml)",
-    goNextPageAutomatic: "Gå til næste side automatisk når alle spørgsmål er besvaret",
-    allowCompleteSurveyAutomatic: "Udfyld undersøgelsen automatisk",
+    firstPageIsStartPage: "Den første side in undersøgelsen er starten på undersøgelsen.",
+    showCompletePage: "Vis afslutningssiden til slut (completedHtml)",
+    autoAdvanceEnabled: "Gå til næste side automatisk når alle spørgsmål er besvaret",
+    autoAdvanceAllowComplete: "Udfyld undersøgelsen automatisk",
     showProgressBar: "Vis fremdriftslinje",
+    progressBarLocation: "Justering af statuslinje",
     questionTitleLocation: "Spørgsmålstitel placering",
-    requiredText: "Påkrævet spørgsmålssymbol(er)",
+    questionTitleWidth: "Spørgsmålets titelbredde",
+    requiredMark: "Påkrævet spørgsmålssymbol(er)",
     questionTitleTemplate: "Spørgsmålstitel template, standard er: '{no}. {require} {title}'",
     questionErrorLocation: "Spørgsmålsfejl placering",
-    focusFirstQuestionAutomatic: "Fokusér første spørgsmål ved sideskift",
-    questionsOrder: "Rækkefølge af spørgsmål på siden",
-    maxTimeToFinish: "Maximal tid til at gennemføre undersøgelsen",
-    maxTimeToFinishPage: "Maximal tid til at gennemføre en side i undersøgelsen",
-    showTimerPanel: "Vis tidspanel",
-    showTimerPanelMode: "Vis tidspanel tilstand",
+    autoFocusFirstQuestion: "Fokusér første spørgsmål ved sideskift",
+    questionOrder: "Rækkefølge af spørgsmål på siden",
+    timeLimit: "Maximal tid til at gennemføre undersøgelsen",
+    timeLimitPerPage: "Maximal tid til at gennemføre en side i undersøgelsen",
+    showTimer: "Brug en timer",
+    timerLocation: "Vis tidspanel",
+    timerInfoMode: "Vis tidspanel tilstand",
     renderMode: "Renderingstilstand",
     allowAddPanel: "Tillad at tilføje et panel",
     allowRemovePanel: "Tillad at fjerne et panel",
-    panelAddText: "Tilføj panel tekst",
-    panelRemoveText: "Fjern panel tekst",
+    addPanelText: "Tilføj panel tekst",
+    removePanelText: "Fjern panel tekst",
     isSinglePage: "Vis alle elementer på én side",
     html: "HTML-markering",
     setValue: "Svare",
     dataFormat: "Billedformat",
     allowAddRows: "Tillad tilføjelse af rækker",
     allowRemoveRows: "Tillad fjernelse af rækker",
-    allowRowsDragAndDrop: "Tillad træk og slip af rækker",
+    allowRowReorder: "Tillad træk og slip af rækker",
     responsiveImageSizeHelp: "Gælder ikke, hvis du angiver den nøjagtige billedbredde eller -højde.",
     minImageWidth: "Mindste billedbredde",
     maxImageWidth: "Maksimal billedbredde",
@@ -615,6 +674,7 @@ export var danishStrings = {
     maxImageHeight: "Maksimal billedhøjde",
     minValue: "Mindste værdi",
     maxValue: "Maksimal værdi",
+    caseInsensitive: "Der skelnes ikke mellem store og små bogstaver",
     minLength: "Mindste længde (med bogstaver)",
     allowDigits: "Tillad cifre",
     minCount: "Mindste antal",
@@ -633,20 +693,15 @@ export var danishStrings = {
     logo: "Logo (URL eller base64-kodet streng)",
     questionsOnPageMode: "Undersøgelsens opbygning",
     maxTextLength: "Maksimal svarlængde (med tegn)",
-    maxOthersLength: "Maksimal kommentarlængde (i tegn)",
+    maxCommentLength: "Maksimal kommentarlængde (i tegn)",
+    commentAreaRows: "Højde på kommentarområdet (i linjer)",
     autoGrowComment: "Udvid automatisk kommentarområdet, hvis det er nødvendigt",
     allowResizeComment: "Tillad brugere at ændre størrelsen på tekstområder",
     textUpdateMode: "Opdater værdi for tekstspørgsmål",
     maskType: "Type af inputmaske",
-    maskTypes: {
-      none: "Ingen",
-      patternmask: "Mønster",
-      numericmask: "Numerisk",
-      datetimemask: "Dato og klokkeslæt",
-      currencymask: "Valuta"
-    },
-    focusOnFirstError: "Sæt fokus på det første ugyldige svar",
+    autoFocusFirstError: "Sæt fokus på det første ugyldige svar",
     checkErrorsMode: "Kør validering",
+    validateVisitedEmptyFields: "Validere tomme felter ved mistet fokus",
     navigateToUrl: "Naviger til URL",
     navigateToUrlOnCondition: "Dynamisk webadresse",
     completedBeforeHtml: "Markering for at vise, om brugeren allerede har udfyldt denne undersøgelse",
@@ -678,10 +733,9 @@ export var danishStrings = {
     minPanelCount: "Mindste antal paneler",
     maxPanelCount: "Maksimalt antal paneler",
     panelsState: "Udvid tilstand for indvendigt panel",
-    panelPrevText: "Forrige værktøjstip til panelknap",
-    panelNextText: "Værktøjstip til knappen Næste panel",
-    showRangeInProgress: "Vis statuslinje",
-    panelRemoveButtonLocation: "Fjern placering af panelknap",
+    prevPanelText: "Forrige værktøjstip til panelknap",
+    nextPanelText: "Værktøjstip til knappen Næste panel",
+    removePanelButtonLocation: "Fjern placering af panelknap",
     hideIfRowsEmpty: "Skjul spørgsmålet, hvis der ikke er nogen rækker",
     hideColumnsIfEmpty: "Skjule kolonner, hvis der ikke er nogen rækker",
     rateValues: "Tilpassede satsværdier",
@@ -703,26 +757,28 @@ export var danishStrings = {
     keyDuplicationError: "Fejlmeddelelsen \"Ikke-entydig nøgleværdi\"",
     minSelectedChoices: "Minimum valgte valg",
     maxSelectedChoices: "Maksimalt antal valgte valg",
-    showClearButton: "Vis knappen Ryd",
     logoWidth: "Logobredde (i CSS-accepterede værdier)",
     logoHeight: "Logohøjde (i CSS-accepterede værdier)",
     readOnly: "Skrivebeskyttet",
     enableIf: "Redigerbar, hvis",
-    emptyRowsText: "Meddelelsen \"Ingen rækker\"",
+    noRowsText: "Meddelelsen \"Ingen rækker\"",
     separateSpecialChoices: "Adskil særlige valg (Ingen, Andet, Vælg alle)",
     choicesFromQuestion: "Kopiér valg fra følgende spørgsmål",
     choicesFromQuestionMode: "Hvilke valgmuligheder skal kopieres?",
+    choiceValuesFromQuestion: "Bruge værdier fra følgende matrixkolonne eller panelspørgsmål som valg-id'er",
+    choiceTextsFromQuestion: "Brug værdier fra følgende matrixkolonne eller panelspørgsmål som valgtekster",
     progressBarShowPageTitles: "Vis sidetitler på statuslinjen",
     progressBarShowPageNumbers: "Vis sidetal på statuslinjen",
     showCommentArea: "Vis kommentarområdet",
     commentPlaceholder: "Pladsholder til kommentarområde",
     displayRateDescriptionsAsExtremeItems: "Beskrivelser af visningshastighed som ekstreme værdier",
-    rowsOrder: "Rækkefølge af rækker",
+    rowOrder: "Rækkefølge af rækker",
     columnsLayout: "Kolonnelayout",
     columnColCount: "Antal indlejrede kolonner",
     correctAnswer: "Korrekt svar",
     defaultPanelValue: "Standardværdier",
     cells: "Celle tekster",
+    fileInputPlaceholder: "Vælg en fil, eller indsæt et fillink...",
     keyName: "Nøglekolonne",
     itemvalue: {
       visibleIf: "Gør indstillingen synlig, hvis",
@@ -745,6 +801,12 @@ export var danishStrings = {
       top: "På toppen",
       bottom: "I bunden"
     },
+    previewMode: "Forhåndsvisning tilstand",
+    gridLayoutEnabled: "Aktivere gitterlayoutet",
+    gridLayoutColumns: "Kolonner med gitterlayout",
+    maskSettings: "Indstillinger for maske",
+    detailErrorLocation: "Justering af fejlmeddelelse om rækkeudvidelse",
+    // Creator tabs
     tabs: {
       panel: {
         layout: "Panel Layout"
@@ -788,6 +850,12 @@ export var danishStrings = {
       slider: "Skyderen",
       expression: "Udtryk",
       questionSettings: "Indstillinger for spørgsmål",
+      header: "Header",
+      background: "Baggrund",
+      appearance: "Udseende",
+      accentColors: "Accentfarver",
+      surfaceBackground: "Overflade baggrund",
+      scaling: "Skalering",
       others: "Andre"
     },
     editProperty: "Rediger egenskab '{0}'",
@@ -797,8 +865,7 @@ export var danishStrings = {
     columnsEnableIf: "Kolonner er synlige, hvis",
     rowsEnableIf: "Rækker er synlige, hvis",
     innerIndent: "Tilføj indre indrykninger",
-    defaultValueFromLastRow: "Tag standardværdier fra den sidste række",
-    defaultValueFromLastPanel: "Tag standardværdier fra det sidste panel",
+    copyDefaultValueFromLastEntry: "Brug svar fra sidste post som standard",
     enterNewValue: "Indtast værdien.",
     noquestions: "Der er ingen spørgsmål i undersøgelsen.",
     createtrigger: "Opret en trigger",
@@ -840,7 +907,52 @@ export var danishStrings = {
     minWidth_placeholder: "Eks.: 600px",
     maxWidth_placeholder: "Eks.: 50%",
     imageHeight_placeholder: "auto",
-    imageWidth_placeholder: "auto"
+    imageWidth_placeholder: "auto",
+    itemTitleWidth_placeholder: "Eks.: 100px",
+    theme: {
+      themeName: "Tema",
+      isPanelless: "Spørgsmål udseende",
+      editorPanel: "Baggrund og hjørneradius",
+      questionPanel: "Baggrund og hjørneradius",
+      primaryColor: "Accent farve",
+      panelBackgroundTransparency: "Opacitet af panelets baggrund",
+      questionBackgroundTransparency: "Spørgsmål baggrundsuigennemsigtighed",
+      fontSize: "Skrifttypestørrelse",
+      scale: "Skæl",
+      cornerRadius: "Hjørne radius",
+      advancedMode: "Avanceret tilstand",
+      pageTitle: "Titel skrifttype",
+      pageDescription: "Beskrivelse skrifttype",
+      questionTitle: "Titel skrifttype",
+      questionDescription: "Beskrivelse skrifttype",
+      editorFont: "Skrifttype",
+      backgroundOpacity: "Opacitet",
+      "--sjs-font-family": "Skrifttypefamilie",
+      "--sjs-general-backcolor-dim": "Baggrundsfarve",
+      "--sjs-primary-backcolor": "Accent baggrund",
+      "--sjs-primary-forecolor": "Accent forgrund",
+      "--sjs-special-red": "Fejlmeddelelser",
+      "--sjs-shadow-small": "Skyggeeffekter",
+      "--sjs-shadow-inner": "Skyggeeffekter",
+      "--sjs-border-default": "Farver"
+    },
+    "header@header": {
+      headerView: "Udsigt",
+      logoPosition: "Logo position",
+      surveyTitle: "Skrifttype for undersøgelsestitel",
+      surveyDescription: "Skrifttype til undersøgelsesbeskrivelse",
+      headerTitle: "Skrifttype for undersøgelsestitel",
+      headerDescription: "Skrifttype til undersøgelsesbeskrivelse",
+      inheritWidthFrom: "Bredde på indholdsområde",
+      textAreaWidth: "Tekstbredde",
+      backgroundColorSwitch: "Baggrundsfarve",
+      backgroundImage: "Baggrundsbillede",
+      backgroundImageOpacity: "Opacitet",
+      overlapEnabled: "Overlapning",
+      logoPositionX: "Logo position",
+      titlePositionX: "Titel position",
+      descriptionPositionX: "Beskrivelse position"
+    }
   },
   // Property values
   pv: {
@@ -869,10 +981,11 @@ export var danishStrings = {
     firstExpanded: "firstExpanded",
     off: "off",
     list: "list",
+    carousel: "Karrusel",
+    tab: "Faner",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
-    tab: "Faner",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "top",
@@ -930,6 +1043,73 @@ export var danishStrings = {
       url: "URL-adresse",
       week: "Uge"
     },
+    autocomplete: {
+      name: "Fulde navn",
+      "honorific-prefix": "Præfiks",
+      "given-name": "Fornavn",
+      "additional-name": "Mellemnavn",
+      "family-name": "Efternavn",
+      "honorific-suffix": "Suffiks",
+      nickname: "Kælenavn",
+      "organization-title": "Stillingsbetegnelse",
+      username: "Brugernavn",
+      "new-password": "Ny adgangskode",
+      "current-password": "Nuværende adgangskode",
+      organization: "Organisationens navn",
+      "street-address": "Fuld gadeadresse",
+      "address-line1": "Adresse Linje 1",
+      "address-line2": "Adresselinje 2",
+      "address-line3": "Adresselinje 3",
+      "address-level4": "Niveau 4-adresse",
+      "address-level3": "Niveau 3-adresse",
+      "address-level2": "Niveau 2-adresse",
+      "address-level1": "Niveau 1-adresse",
+      country: "Landekode",
+      "country-name": "Landets navn",
+      "postal-code": "Postnummer",
+      "cc-name": "Kortindehaverens navn",
+      "cc-given-name": "Kortholder Fornavn",
+      "cc-additional-name": "Kortholder mellemnavn",
+      "cc-family-name": "Kortholderens efternavn",
+      "cc-number": "Kreditkortnummer",
+      "cc-exp": "Udløbsdato",
+      "cc-exp-month": "Udløbsmåned",
+      "cc-exp-year": "Udløbsår",
+      "cc-csc": "Kortets sikkerhedskode",
+      "cc-type": "Kreditkort type",
+      "transaction-currency": "Transaktionens valuta",
+      "transaction-amount": "Posteringsbeløb",
+      language: "Foretrukket sprog",
+      bday: "Fødselsdag",
+      "bday-day": "Fødselsdag",
+      "bday-month": "Fødselsdag måned",
+      "bday-year": "Fødselsdag År",
+      sex: "Køn",
+      url: "URL-adresse til websted",
+      photo: "Profilfoto",
+      tel: "Telefonnummer",
+      "tel-country-code": "Landekode til telefon",
+      "tel-national": "Nationalt telefonnummer",
+      "tel-area-code": "Områdenummer",
+      "tel-local": "Lokalt telefonnummer",
+      "tel-local-prefix": "Lokalt telefonpræfiks",
+      "tel-local-suffix": "Lokalt telefonsuffiks",
+      "tel-extension": "Telefon Lokalnummer",
+      email: "E-mailadresse",
+      impp: "Protokol til onlinemeddelelser"
+    },
+    maskType: {
+      none: "Ingen",
+      pattern: "Mønster",
+      numeric: "Numerisk",
+      datetime: "Dato og klokkeslæt",
+      currency: "Valuta"
+    },
+    inputTextAlignment: {
+      auto: "Auto",
+      left: "Venstre",
+      right: "Højre"
+    },
     all: "all",
     page: "page",
     survey: "survey",
@@ -944,6 +1124,8 @@ export var danishStrings = {
     noPreview: "Ingen forhåndsvisning",
     showAllQuestions: "Vis alle spørgsmål",
     showAnsweredQuestions: "Vis kun besvarede spørgsmål",
+    allQuestions: "Vis alle spørgsmål",
+    answeredQuestions: "Vis kun besvarede spørgsmål",
     pages: "Afsluttede sider",
     questions: "Besvarede spørgsmål",
     requiredQuestions: "Besvarede nødvendige spørgsmål",
@@ -959,13 +1141,10 @@ export var danishStrings = {
     showNavigationButtons: {
       none: "Skjult"
     },
-    showTimerPanel: {
-      none: "Skjult"
+    timerInfoMode: {
+      combined: "Begge"
     },
-    showTimerPanelMode: {
-      all: "Begge"
-    },
-    addRowLocation: {
+    addRowButtonLocation: {
       default: "Afhænger af matrixlayout"
     },
     panelsState: {
@@ -1013,6 +1192,7 @@ export var danishStrings = {
       onPage: "Nulstil på hver side",
       onpanel: "Nulstil på hvert panel",
       onPanel: "Nulstil på hvert panel",
+      recursive: "Rekursiv nummerering",
       onSurvey: "Fortsæt på tværs af undersøgelsen",
       off: "Ingen nummerering"
     },
@@ -1036,16 +1216,19 @@ export var danishStrings = {
       percent: "Procentdel",
       date: "Dato"
     },
-    rowsOrder: {
+    rowOrder: {
       initial: "Oprindelig"
     },
-    questionsOrder: {
+    questionOrder: {
       initial: "Oprindelig"
     },
-    showProgressBar: {
-      off: "Skjult",
-      aboveHeader: "Over overskriften",
-      belowHeader: "Under overskriften"
+    progressBarLocation: {
+      top: "Top",
+      bottom: "Bund",
+      topbottom: "Top og bund",
+      aboveheader: "Over overskriften",
+      belowheader: "Under overskriften",
+      off: "Skjult"
     },
     sum: "Sum",
     count: "Tælle",
@@ -1055,6 +1238,42 @@ export var danishStrings = {
     searchMode: {
       contains: "Indeholder",
       startsWith: "Begynder med"
+    },
+    backgroundImageFit: {
+      auto: "Auto",
+      cover: "Dække",
+      contain: "Indeholde",
+      fill: "Stræk",
+      tile: "Flise"
+    },
+    backgroundImageAttachment: {
+      fixed: "Fast",
+      scroll: "Rulle"
+    },
+    headerView: {
+      basic: "Grundlæggende",
+      advanced: "Avanceret"
+    },
+    inheritWidthFrom: {
+      survey: "Samme som undersøgelse",
+      container: "Passer til beholder"
+    },
+    backgroundColorSwitch: {
+      none: "Ingen",
+      accentColor: "Accent farve",
+      custom: "Sædvane"
+    },
+    colorPalette: {
+      light: "Lys",
+      dark: "Mørk"
+    },
+    isPanelless: {
+      "false": "Standard",
+      "true": "Uden paneler"
+    },
+    progressBarInheritWidthFrom: {
+      survey: "Samme som undersøgelse",
+      container: "Samme som container"
     }
   },
   // Operators
@@ -1129,6 +1348,13 @@ export var danishStrings = {
     currencymask: {
       prefix: "Ex.: $",
       suffix: "Ex.: USD"
+    },
+    panelbase: {
+      questionTitleWidth: "Eks.: 200px"
+    },
+    panellayoutcolumn: {
+      effectiveWidth: "Eks.: 30%",
+      questionTitleWidth: "Eks.: 200px"
     }
   },
   pehelp: {
@@ -1139,13 +1365,17 @@ export var danishStrings = {
       enableIf: "Brug tryllestavsikonet til at indstille en betinget regel, der deaktiverer panelets skrivebeskyttede tilstand.",
       requiredIf: "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar.",
       questionTitleLocation: "Gælder for alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard).",
+      questionTitleWidth: "Angiver ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsbokse. Accepterer CSS-værdier (px, %, in, pt osv.).",
       questionErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til alle spørgsmål i panelet. Indstillingen \"Nedarv\" anvender indstillingen for sideniveau (hvis angivet) eller undersøgelsesniveau.",
-      questionsOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Nedarv\" anvender indstillingen for sideniveau (hvis angivet) eller undersøgelsesniveau.",
+      questionOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Nedarv\" anvender indstillingen for sideniveau (hvis angivet) eller undersøgelsesniveau.",
       page: "Flytter panelet til slutningen af en markeret side.",
       innerIndent: "Tilføjer mellemrum eller margen mellem panelindholdet og panelboksens venstre kant.",
       startWithNewLine: "Fjern markeringen for at få vist panelet på én linje med det forrige spørgsmål eller panel. Indstillingen gælder ikke, hvis panelet er det første element i formularen.",
       state: "Vælg mellem: \"Udvidet\" - panelet vises fuldt ud og kan skjules; \"Skjult\" - panelet viser kun titlen og beskrivelsen og kan udvides; \"Låst\" - panelet vises fuldt ud og kan ikke skjules.",
-      width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.)."
+      width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.).",
+      showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i dette panel.",
+      effectiveColSpan: "Angiver, hvor mange kolonner dette panel strækker sig over i gitterlayoutet.",
+      gridLayoutColumns: "Denne tabel giver dig mulighed for at konfigurere hver gitterkolonne i panelet. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
     },
     paneldynamic: {
       name: "Et panel-id, der ikke er synligt for svarpersonerne.",
@@ -1153,7 +1383,8 @@ export var danishStrings = {
       visibleIf: "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer panelets synlighed.",
       enableIf: "Brug tryllestavsikonet til at indstille en betinget regel, der deaktiverer panelets skrivebeskyttede tilstand.",
       requiredIf: "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar.",
-      templateTitleLocation: "Gælder for alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard).",
+      templateQuestionTitleLocation: "Gælder for alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard).",
+      templateQuestionTitleWidth: "Indstiller ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsfelter. Accepterer CSS-værdier (px, %, in, pt osv.).",
       templateErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til et spørgsmål med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard).",
       errorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til alle spørgsmål i panelet. Indstillingen \"Nedarv\" anvender indstillingen for sideniveau (hvis angivet) eller undersøgelsesniveau.",
       page: "Flytter panelet til slutningen af en markeret side.",
@@ -1163,17 +1394,20 @@ export var danishStrings = {
       width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.).",
       templateTitle: "Indtast en skabelon til dynamiske paneltitler. Brug {panelIndex} til panelets generelle placering og {visiblePanelIndex} til dets rækkefølge blandt synlige paneler. Indsæt disse pladsholdere i mønsteret for at tilføje automatisk nummerering.",
       templateTabTitle: "Indtast en skabelon til fanetitler. Brug {panelIndex} til et panels generelle placering og {visiblePanelIndex} til dets rækkefølge blandt synlige paneler. Indsæt disse pladsholdere i mønsteret for at tilføje automatisk nummerering.",
+      tabTitlePlaceholder: "En reservetekst til fanetitler, der gælder, når fanetitelmønsteret ikke giver en meningsfuld værdi.",
       templateVisibleIf: "Denne indstilling giver dig mulighed for at styre synligheden af individuelle paneler i det dynamiske panel. Brug pladsholderen '{panel}' til at referere til det aktuelle panel i dit udtryk.",
       titleLocation: "Denne indstilling nedarves automatisk af alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard).",
       descriptionLocation: "Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Under paneltitlen\" som standard).",
       newPanelPosition: "Definerer placeringen af et nyligt tilføjet panel. Som standard tilføjes nye paneler til slutningen. Vælg \"Næste\" for at indsætte et nyt panel efter det aktuelle.",
-      defaultValueFromLastPanel: "Duplikerer svar fra det sidste panel og tildeler dem til det næste tilføjede dynamiske panel.",
+      copyDefaultValueFromLastEntry: "Duplikerer svar fra det sidste panel og tildeler dem til det næste tilføjede dynamiske panel.",
       keyName: "Henvis til et spørgsmålsnavn for at kræve, at en bruger giver et entydigt svar på dette spørgsmål i hvert panel."
     },
+    copyDefaultValueFromLastEntry: "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række.",
     defaultValueExpression: "Med denne indstilling kan du tildele en standardsvarværdi baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger - '{q1_id} + {q2_id}', booleske udtryk, såsom '{alder} > 60' og funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Den værdi, der bestemmes af dette udtryk, fungerer som den oprindelige standardværdi, der kan tilsidesættes af svarpersonens manuelle input.",
     resetValueIf: "Brug tryllestavsikonet til at angive en betinget regel, der bestemmer, hvornår en svarpersons input nulstilles til værdien baseret på værdien \"Standardværdiudtryk\" eller \"Angiv værdiudtryk\" eller til værdien \"Standardsvar\" (hvis en af dem er angivet).",
     setValueIf: "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer, hvornår \"Indstil værdiudtryk\" skal køres, og tildele den resulterende værdi dynamisk som et svar.",
     setValueExpression: "Angiv et udtryk, der definerer den værdi, der skal angives, når betingelserne i reglen \"Angiv værdi hvis\" er opfyldt. Udtrykket kan omfatte grundlæggende beregninger - '{q1_id} + {q2_id}', booleske udtryk, såsom '{alder} > 60' og funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Den værdi, der bestemmes af dette udtryk, kan tilsidesættes af svarpersonens manuelle input.",
+    gridLayoutEnabled: "Survey Creator giver dig mulighed for manuelt at justere de indbyggede bredder af formularelementer for at styre layoutet. Hvis dette ikke giver det ønskede resultat, kan du aktivere gitterlayoutet, som strukturerer formularelementer ved hjælp af et kolonnebaseret system. For at konfigurere layoutkolonner skal du vælge en side eller et panel og bruge tabellen \"Spørgsmålsindstillinger\" → \"Gitterkolonner\". For at justere, hvor mange kolonner et spørgsmål strækker sig over, skal du vælge det og indstille den ønskede værdi i feltet \"Layout\" → \"Kolonnespænd\".",
     question: {
       name: "Et spørgsmåls-id, der ikke er synligt for svarpersonerne.",
       description: "Skriv et spørgsmåls undertitel.",
@@ -1194,7 +1428,8 @@ export var danishStrings = {
       textUpdateMode: "Vælg mellem: \"Ved tabt fokus\" - værdien opdateres, når indtastningsfeltet mister fokus; \"Mens du skriver\" - værdien opdateres i realtid, da brugerne skriver. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Ved mistet fokus\" som standard).",
       url: "Du kan bruge enhver webtjeneste som datakilde til multiple choice-spørgsmål. Hvis du vil udfylde valgværdier, skal du angive URL-adressen på den tjeneste, der leverer dataene.",
       searchMode: "En sammenligningshandling, der bruges til at filtrere rullelisten.",
-      textWrapEnabled: "Lange tekster i valgmuligheder genererer automatisk linjeskift, så de passer ind i rullemenuen. Fjern markeringen, hvis teksterne skal klippes."
+      textWrapEnabled: "Lange tekster i valgmuligheder genererer automatisk linjeskift, så de passer ind i rullemenuen. Fjern markeringen, hvis teksterne skal klippes.",
+      effectiveColSpan: "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet."
     },
     signaturepad: {
       signatureWidth: "Indstiller bredden på det viste signaturområde og det resulterende billede.",
@@ -1203,7 +1438,8 @@ export var danishStrings = {
     },
     file: {
       imageHeight: "Justerer billedets højde i undersøgelsesresultaterne.",
-      imageWidth: "Justerer billedets bredde i undersøgelsesresultaterne."
+      imageWidth: "Justerer billedets bredde i undersøgelsesresultaterne.",
+      allowImagesPreview: "Viser miniaturebilleder for uploadede filer, når det er muligt. Fjern markeringen, hvis du vil vise filikoner i stedet."
     },
     image: {
       contentMode: "Indstillingen \"Auto\" bestemmer automatisk den passende tilstand til visning - Billede, Video eller YouTube - baseret på den angivne kilde-URL."
@@ -1222,7 +1458,8 @@ export var danishStrings = {
     },
     // survey templates
     survey: {
-      mode: "Vælg mellem: \"Redigerbar\" - gør det muligt for respondenter at udfylde din undersøgelse; \"Skrivebeskyttet\" - deaktiverer formularredigering."
+      readOnly: "Vælg, hvis du vil forhindre respondenter i at udfylde din undersøgelse.",
+      progressBarLocation: "Angiver placeringen af statuslinjen. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
     },
     matrixdropdowncolumn: {
       name: "Et kolonne-id, der ikke er synligt for svarpersoner.",
@@ -1231,27 +1468,30 @@ export var danishStrings = {
       visibleIf: "Brug tryllestavsikonet til at angive en betinget regel, der bestemmer kolonnesynligheden.",
       enableIf: "Brug tryllestavsikonet til at angive en betinget regel, der deaktiverer skrivebeskyttet tilstand for kolonnen.",
       requiredIf: "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar.",
-      showInMultipleColumns: "Når denne indstilling er valgt, oprettes der en individuel kolonne for hver valgmulighed."
+      showInMultipleColumns: "Når denne indstilling er valgt, oprettes der en individuel kolonne for hver valgmulighed.",
+      colCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Når den er angivet til -1, nedarves den faktiske værdi fra egenskaben \"Antal indlejrede kolonner\" for den overordnede matrix."
     },
+    caseInsensitive: "Vælg, om store og små bogstaver i det regulære udtryk skal behandles som ækvivalente.",
     widthMode: "Vælg mellem: \"Statisk\" - indstiller en fast bredde; \"Responsive\" - får undersøgelsen til at optage skærmens fulde bredde; \"Auto\" - gælder for en af de to afhængigt af de anvendte spørgsmålstyper.",
     cookieName: "Cookies forhindrer brugere i at udfylde den samme undersøgelse to gange.",
     logo: "Indsæt et billedlink (ingen størrelsesbegrænsninger), eller klik på mappeikonet for at gennemse en fil fra din computer (op til 64 KB).",
     logoWidth: "Indstiller en logobredde i CSS-enheder (px, %, in, pt osv.).",
     logoHeight: "Indstiller en logohøjde i CSS-enheder (px, %, i, pt osv.).",
     logoFit: "Vælg mellem: \"Ingen\" - billedet bevarer sin oprindelige størrelse; \"Contain\" - billedet ændres til at passe, samtidig med at dets billedformat opretholdes; \"Cover\" - billedet fylder hele kassen, samtidig med at billedformatet opretholdes; \"Fyld\" - billedet strækkes for at udfylde boksen uden at opretholde dets billedformat.",
-    goNextPageAutomatic: "Vælg, om undersøgelsen automatisk skal gå videre til næste side, når en svarperson har besvaret alle spørgsmål på den aktuelle side.",
-    allowCompleteSurveyAutomatic: "Vælg, om undersøgelsen skal fuldføres automatisk, når svarpersonen har besvaret alle spørgsmål.",
+    autoAdvanceEnabled: "Vælg, om undersøgelsen automatisk skal gå videre til næste side, når en svarperson har besvaret alle spørgsmål på den aktuelle side. Denne funktion gælder ikke, hvis det sidste spørgsmål på siden er åbent eller tillader flere svar.",
+    autoAdvanceAllowComplete: "Vælg, om undersøgelsen skal fuldføres automatisk, når svarpersonen har besvaret alle spørgsmål.",
     showNavigationButtons: "Angiver synligheden og placeringen af navigationsknapper på en side.",
-    showProgressBar: "Indstiller synligheden og placeringen af en statuslinje. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften.",
+    navigationButtonsLocation: "Angiver placeringen af navigationsknapper på en side.",
     showPreviewBeforeComplete: "Aktivér eksempelsiden med alle eller kun besvarede spørgsmål.",
     questionTitleLocation: "Gælder for alle spørgsmål i undersøgelsen. Denne indstilling kan tilsidesættes af titeljusteringsregler på lavere niveauer: panel, side eller spørgsmål. En indstilling på lavere niveau tilsidesætter dem på et højere niveau.",
-    requiredText: "Et symbol eller en sekvens af symboler, der angiver, at et svar er påkrævet.",
+    requiredMark: "Et symbol eller en sekvens af symboler, der angiver, at et svar er påkrævet.",
     questionStartIndex: "Indtast et tal eller bogstav, som du vil starte nummereringen med.",
     questionErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til spørgsmålet med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet.",
-    focusFirstQuestionAutomatic: "Vælg, om det første indtastningsfelt på hver side skal være klar til indtastning af tekst.",
-    questionsOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Effekten af denne indstilling er kun synlig under fanen Eksempel.",
+    autoFocusFirstQuestion: "Vælg, om det første indtastningsfelt på hver side skal være klar til indtastning af tekst.",
+    questionOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Effekten af denne indstilling er kun synlig under fanen Eksempel.",
     maxTextLength: "Kun til spørgsmål om indtastning af tekst.",
-    maxOthersLength: "Kun til kommentarer til spørgsmål.",
+    maxCommentLength: "Kun til kommentarer til spørgsmål.",
+    commentAreaRows: "Angiver antallet af viste linjer i tekstområder til spørgsmålskommentarer. Hvis inputtet optager flere linjer, vises rullepanelet.",
     autoGrowComment: "Vælg, om spørgsmålskommentarer og lange tekstspørgsmål automatisk skal vokse i højden baseret på den indtastede tekstlængde.",
     allowResizeComment: "Kun til spørgsmålskommentarer og lange tekstspørgsmål.",
     calculatedValues: "Brugerdefinerede variabler fungerer som mellemliggende eller hjælpevariabler, der bruges i formularberegninger. De tager respondentinput som kildeværdier. Hver brugerdefineret variabel har et entydigt navn og et udtryk, den er baseret på.",
@@ -1265,10 +1505,10 @@ export var danishStrings = {
     rowTitleWidth: "Accepterer CSS-værdier (px, %, in, pt osv.).",
     totalText: "Kun synlig, når mindst én kolonne har typen Total eller Totaludtryk.",
     cellErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til en celle med ugyldigt input. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelse\".",
+    detailErrorLocation: "Angiver placeringen af fejlmeddelelser for spørgsmål, der er indlejret i detaljerede afsnit. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelser\".",
     keyDuplicationError: "Når egenskaben \"Undgå dublerede svar\" er aktiveret, modtager en svarperson, der forsøger at sende en dubletpost, følgende fejlmeddelelse.",
     totalExpression: "Giver dig mulighed for at beregne samlede værdier baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger ('{q1_id} + {q2_id}'), booleske udtryk ('{alder} > 60') og funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv.).",
     confirmDelete: "Udløser en prompt, der beder om at bekræfte sletningen af rækken.",
-    defaultValueFromLastRow: "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række.",
     keyName: "Hvis den angivne kolonne indeholder identiske værdier, kaster undersøgelsen fejlen \"Ikke-unik nøgleværdi\".",
     description: "Skriv en undertekst.",
     locale: "Vælg et sprog for at begynde at oprette undersøgelsen. Hvis du vil tilføje en oversættelse, skal du skifte til et nyt sprog og oversætte den oprindelige tekst her eller på fanen Oversættelser.",
@@ -1276,19 +1516,25 @@ export var danishStrings = {
     imageFit: "Vælg mellem: \"Ingen\" - billedet bevarer sin oprindelige størrelse; \"Contain\" - billedet ændres til at passe, samtidig med at dets billedformat opretholdes; \"Cover\" - billedet fylder hele kassen, samtidig med at billedformatet opretholdes; \"Fyld\" - billedet strækkes for at udfylde boksen uden at opretholde dets billedformat.",
     autoGrow: "Øger gradvist inputfeltets højde, efterhånden som data indtastes. Tilsidesætter indstillingen \"Inputfelthøjde (i linjer)\".",
     allowResize: "Størrelseshåndtaget (eller grebet) vises i hjørnet og kan trækkes for at ændre størrelsen på indtastningsfeltet.",
-    maxTimeToFinish: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til siden Tak.",
-    maxTimeToFinishPage: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
+    timeLimit: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til siden Tak.",
+    timeLimitPerPage: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
+    validateVisitedEmptyFields: "Aktivér denne indstilling for at udløse validering, når en bruger fokuserer på et tomt inputfelt og derefter forlader det uden at foretage ændringer.",
     page: {
-      maxTimeToFinish: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
+      name: "Et side-id, der ikke er synligt for svarpersoner.",
+      description: "Skriv en sideundertitel.",
+      navigationTitle: "En billedtekst, der vises på en navigationsknap på statuslinjen eller indholdsfortegnelsen. Hvis du lader dette felt være tomt, bruger navigationsknappen sidetitlen eller sidenavnet. For at aktivere statuslinjen eller indholdsfortegnelsen skal du gå til \"Undersøgelse\" → \"Navigation\".",
+      timeLimit: "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side.",
       visibleIf: "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer sidens synlighed.",
       enableIf: "Brug tryllestavsikonet til at angive en betinget regel, der deaktiverer skrivebeskyttet tilstand for siden.",
       requiredIf: "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar.",
       questionTitleLocation: "Gælder for alle spørgsmål på denne side. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål eller paneler. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard).",
+      questionTitleWidth: "Angiver ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsbokse. Accepterer CSS-værdier (px, %, in, pt osv.).",
       questionErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til spørgsmålet med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard).",
-      questionsOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau (\"Original\" som standard). Effekten af denne indstilling er kun synlig under fanen Eksempel.",
-      navigationButtonsVisibility: "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
+      questionOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau (\"Original\" som standard). Effekten af denne indstilling er kun synlig under fanen Eksempel.",
+      showNavigationButtons: "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\".",
+      gridLayoutColumns: "I denne tabel kan du konfigurere hver gitterkolonne på siden. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
     },
-    showTimerPanel: "Indstiller synligheden og placeringen af en timer på en side.",
+    timerLocation: "Indstiller placeringen af en timer på en side.",
     panelsState: "Vælg mellem: \"Låst\" - brugere kan ikke udvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Udvid alle\" - alle paneler starter i udvidet tilstand; \"Først udvidet\" - kun det første panel udvides oprindeligt.",
     imageLinkName: "Angiv et delt egenskabsnavn i den række objekter, der indeholder de URL-adresser til billeder eller videofiler, du vil have vist på valglisten.",
     choices: "Den venstre værdi fungerer som et vare-id, der bruges i betingede regler, den rigtige værdi vises for respondenterne.",
@@ -1298,9 +1544,13 @@ export var danishStrings = {
     maxWidth: "Accepterer CSS-værdier (px, %, in, pt osv.).",
     width: "Accepterer CSS-værdier (px, %, in, pt osv.).",
     valueName: "Hvis du ikke angiver denne egenskab, gemmes svaret i et felt, der er angivet af egenskaben Navn.",
+    defaultDisplayValue: "En værdi, der vises i HTML-spørgsmål og i de dynamiske titler og beskrivelser af undersøgelseselementer, når spørgsmålsværdien er tom.",
     useDisplayValuesInDynamicTexts: "I spørgsmålstyper med et enkelt og flere valg har hver valgmulighed et id og en visningsværdi. Når denne indstilling er valgt, vises der en visningsværdi i stedet for en id-værdi i HTML-spørgsmål og dynamiske titler og beskrivelser af undersøgelseselementer.",
     clearIfInvisible: "Vælg, om du vil rydde spørgsmålsværdier, der er skjult af betinget logik, og hvornår det skal gøres. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Ved afslutning af undersøgelsen\" som standard).",
     choicesFromQuestionMode: "Vælg mellem: \"Alle\" - kopierer alle valgmuligheder fra det valgte spørgsmål; \"Valgt\" - kopierer dynamisk kun valgte valgindstillinger; \"Ikke valgt\" - kopierer dynamisk kun ikke-valgte valgindstillinger. Indstillingerne \"Ingen\" og \"Andre\" kopieres som standard, hvis de er aktiveret i kildespørgsmålet.",
+    choiceValuesFromQuestion: "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal angive id'erne.",
+    choiceTextsFromQuestion: "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal indeholde visningsteksterne.",
+    allowCustomChoices: "Vælg for at lade svarpersonerne tilføje deres egne valgmuligheder, hvis den ønskede indstilling ikke er tilgængelig på rullelisten. Brugerdefinerede valg gemmes kun midlertidigt i den aktuelle browsersession.",
     showOtherItem: "Når denne indstilling er valgt, kan brugerne medtage yderligere input i et separat kommentarfelt.",
     separateSpecialChoices: "Viser hver indstilling for særlige valgmuligheder (\"Ingen\", \"Andet\", \"Vælg alle\") på en ny linje, selv når du bruger et layout med flere kolonner.",
     path: "Angiv placeringen i tjenestedatasættet, hvor målmatrixen af objekter er placeret. Lad feltet stå tomt, hvis URL-adressen allerede peger på arrayet.",
@@ -1322,8 +1572,9 @@ export var danishStrings = {
     needConfirmRemoveFile: "Udløser en prompt, der beder om at bekræfte filsletningen.",
     selectToRankEnabled: "Aktivér for kun at rangere valgte valg. Brugere trækker valgte elementer fra valglisten for at sortere dem inden for rangeringsområdet.",
     dataList: "Angiv en liste over valgmuligheder, der vil blive foreslået svarpersonen under input.",
-    itemSize: "Indstillingen ændrer kun størrelsen på inputfelterne og påvirker ikke bredden af spørgsmålsfeltet.",
-    itemTitleWidth: "Angiver ensartet bredde for alle vareetiketter i pixel",
+    inputSize: "Indstillingen ændrer kun størrelsen på inputfelterne og påvirker ikke bredden af spørgsmålsfeltet.",
+    itemTitleWidth: "Indstiller ensartet bredde for alle elementetiketter. Accepterer CSS-værdier (px, %, in, pt osv.).",
+    inputTextAlignment: "Vælg, hvordan inputværdien skal justeres i feltet. Standardindstillingen \"Auto\" justerer inputværdien til højre, hvis der anvendes valuta- eller numerisk maskering, og til venstre, hvis ikke.",
     altText: "Fungerer som erstatning, når billedet ikke kan vises på en brugers enhed og af tilgængelighedshensyn.",
     rateColorMode: "Definerer farven på den valgte emoji, når ikontypen Vurdering er indstillet til \"Smileys\". Vælg mellem: \"Standard\" - den valgte emoji vises i standard undersøgelsesfarve; \"Skala\" - den valgte emoji arver farve fra vurderingsskalaen.",
     expression: {
@@ -1339,6 +1590,7 @@ export var danishStrings = {
     filePlaceholder: "Gælder, når \"Kildetype\" er \"Lokale filer\", eller når kameraet ikke er tilgængeligt",
     photoPlaceholder: "Gælder, når \"Kildetype\" er \"Kamera\".",
     fileOrPhotoPlaceholder: "Gælder, når \"Kildetype\" er \"Lokale filer eller kamera\".",
+    colCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje.",
     masksettings: {
       saveMaskedValue: "Vælg, om du vil gemme spørgsmålsværdien med en anvendt maske i undersøgelsesresultater."
     },
@@ -1356,7 +1608,22 @@ export var danishStrings = {
     currencymask: {
       prefix: "Et eller flere symboler, der skal vises før værdien.",
       suffix: "Et eller flere symboler, der skal vises efter værdien."
-    }
+    },
+    theme: {
+      isPanelless: "Denne indstilling gælder kun for spørgsmål uden for et panel.",
+      primaryColor: "Indstiller en supplerende farve, der fremhæver vigtige undersøgelseselementer.",
+      panelBackgroundTransparency: "Justerer gennemsigtigheden af paneler og spørgsmålsfelter i forhold til undersøgelsesbaggrunden.",
+      questionBackgroundTransparency: "Justerer gennemsigtigheden af inputelementer i forhold til undersøgelsesbaggrunden.",
+      cornerRadius: "Indstiller hjørneradius for alle rektangulære elementer. Aktiver Avanceret tilstand, hvis du vil indstille individuelle hjørneradiusværdier for inputelementer eller paneler og spørgsmålsfelter.",
+      "--sjs-general-backcolor-dim": "Indstiller undersøgelsens primære baggrundsfarve."
+    },
+    header: {
+      inheritWidthFrom: "Indstillingen \"Samme som beholder\" justerer automatisk bredden på sidehovedindholdsområdet, så den passer ind i det HTML-element, som undersøgelsen er placeret i.",
+      textAreaWidth: "Bredden af det sidehovedområde, der indeholder undersøgelsens titel og beskrivelse, målt i pixel.",
+      overlapEnabled: "Når den er aktiveret, overlejres toppen af undersøgelsen bunden af sidehovedet.",
+      mobileHeight: "Når den er indstillet til 0, beregnes højden automatisk for at rumme sidehovedets indhold."
+    },
+    progressBarInheritWidthFrom: "Indstillingen \"Samme som beholder\" justerer automatisk bredden på statuslinjens område, så den passer ind i det HTML-element, som undersøgelsen er placeret i."
   },
   // Properties
   p: {
@@ -1419,11 +1686,11 @@ export var danishStrings = {
     maxValueExpression: "Maks. værdiudtryk",
     step: "Skridt",
     dataList: "Dataliste",
-    itemSize: "itemSize",
+    inputSize: "inputSize",
     itemTitleWidth: "Bredde på vareetiket (i px)",
+    inputTextAlignment: "Justering af inputværdi",
     elements: "Elementer",
     content: "Indhold",
-    navigationButtonsVisibility: "navigationButtonsVisibility",
     navigationTitle: "Navigation titel",
     navigationDescription: "Beskrivelse af navigation",
     longTap: "Langt tryk",
@@ -1437,6 +1704,7 @@ export var danishStrings = {
     imageFit: "Billede passer",
     altText: "Alternativ tekst",
     height: "Højde",
+    mobileHeight: "Højde på smartphones",
     penColor: "Pen farve",
     backgroundColor: "Baggrundsfarve",
     templateElements: "Skabelon elementer",
@@ -1459,104 +1727,47 @@ export var danishStrings = {
     allowCameraAccess: "Tillad kameraadgang",
     scaleColorMode: "Skaler farvetilstand",
     rateColorMode: "Bedøm farvetilstand",
-    copyDisplayValue: "Kopiér visningsværdi"
+    copyDisplayValue: "Kopiér visningsværdi",
+    effectiveColSpan: "Søjlespænd",
+    progressBarInheritWidthFrom: "Bredde på statuslinjeområde"
   },
   theme: {
-    "--background": "Baggrundsfarve",
-    "--background-dim-light": "Baggrund svag lys farve",
-    "--primary-foreground": "Primær forgrundsfarve",
-    "--foreground": "Forgrundsfarve",
-    "--base-unit": "Basisenhed",
     advancedMode: "Avanceret tilstand",
-    groupGeneral: "Generel",
-    groupHeader: "Header",
-    groupBackground: "Baggrund",
-    groupAppearance: "Udseende",
-    themeName: "Tema",
-    themeMode: "Spørgsmål udseende",
-    themeModePanels: "Standard",
-    themeModeLightweight: "Uden paneler",
-    themePaletteLight: "Lys",
-    themePaletteDark: "Mørk",
-    primaryColor: "Accent farve",
+    pageTitle: "Sidetitel skrifttype",
+    questionTitle: "Skrifttype for spørgsmålstitel",
+    editorPanel: "Input element",
+    lines: "Linjer",
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Hover",
     primaryLightColor: "Valgte",
-    coverTitleForecolor: "Titel forfarve",
-    coverDescriptionForecolor: "Beskrivelse forfarve",
-    coverOverlapEnabled: "Overlapning",
     backgroundDimColor: "Baggrundsfarve",
-    backgroundImage: "Baggrundsbillede",
-    backgroundImageFitAuto: "Auto",
-    backgroundImageFitCover: "Dække",
-    backgroundImageFitContain: "Indeholde",
-    backgroundImageFitFill: "Stræk",
-    backgroundImageFitTile: "Flise",
-    backgroundOpacity: "Opacitet",
-    backgroundImageAttachmentFixed: "Fast",
-    backgroundImageAttachmentScroll: "Rulle",
-    panelBackgroundTransparency: "Opacitet af panelets baggrund",
-    questionBackgroundTransparency: "Spørgsmål baggrundsuigennemsigtighed",
-    questionTitle: "Skrifttype for spørgsmålstitel",
-    editorPanel: "Input element",
-    backgroundCornerRadius: "Baggrund og hjørneradius",
+    cornerRadius: "Hjørne radius",
     backcolor: "Standard baggrund",
     hovercolor: "Hold markøren over baggrunden",
     borderDecoration: "Kant dekoration",
-    accentBackground: "Accent baggrund",
-    accentForeground: "Accent forgrund",
+    fontColor: "Skriftfarve",
+    backgroundColor: "Baggrundsfarve",
     primaryForecolor: "Standardfarve",
     primaryForecolorLight: "Deaktiveret farve",
-    colorsTitle: "Farver",
     font: "Skrifttype",
-    lines: "Linjer",
     borderDefault: "Mørkere",
     borderLight: "Lighter",
     fontFamily: "Skrifttypefamilie",
-    fontSize: "Skrifttypestørrelse",
-    color: "Farve",
-    placeholderColor: "Pladsholderfarve",
-    size: "Størrelse",
     fontWeightRegular: "Regelmæssig",
     fontWeightHeavy: "Tung",
     fontWeightSemiBold: "Halvfed skrift",
     fontWeightBold: "Modig",
-    scale: "Skæl",
-    cornerRadius: "Hjørne radius",
-    surveyTitle: "Skrifttype for undersøgelsestitel",
-    surveyDescription: "Skrifttype til undersøgelsesbeskrivelse",
-    pageTitle: "Sidetitel skrifttype",
-    titleFont: "Titel skrifttype",
-    descriptionFont: "Beskrivelse skrifttype",
+    color: "Farve",
+    placeholderColor: "Pladsholderfarve",
+    size: "Størrelse",
+    opacity: "Opacitet",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Tilføj skyggeeffekt",
-    opacity: "Opacitet",
     boxShadowBlur: "Sløring",
     boxShadowSpread: "Spredning",
     boxShadowDrop: "Dråbe",
     boxShadowInner: "Indre",
-    shadow: "Skyggeeffekter",
-    headerView: "Udsigt",
-    headerViewBasic: "Grundlæggende",
-    headerViewAdvanced: "Avanceret",
-    coverInheritWidthFrom: "Bredde på indholdsområde",
-    coverInheritWidthFromSurvey: "Samme som undersøgelse",
-    coverInheritWidthFromContainer: "Passer til beholder",
-    coverTextAreaWidth: "Tekstbredde",
-    coverBackgroundColorSwitch: "Baggrundsfarve",
-    coverBackgroundColorNone: "Ingen",
-    coverBackgroundColorAccentColor: "Accent farve",
-    coverBackgroundColorCustom: "Sædvane",
-    horizontalAlignmentLeft: "Venstre",
-    horizontalAlignmentCenter: "Midte",
-    horizontalAlignmentRight: "Højre",
-    verticalAlignmentTop: "Top",
-    verticalAlignmentMiddle: "Midte",
-    verticalAlignmentBottom: "Bund",
-    logoPosition: "Logo position",
-    coverTitlePosition: "Titel position",
-    coverDescriptionPosition: "Beskrivelse position",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -1576,12 +1787,26 @@ export var danishStrings = {
       orchid: "Orkide",
       tulip: "Tulipan",
       brown: "Brun",
-      green: "Grøn"
+      green: "Grøn",
+      gray: "Grå"
+    }
+  },
+  creatortheme: {
+    "--sjs-special-background": "Overflade baggrund",
+    "--sjs-primary-background-500": "Primær",
+    "--sjs-secondary-background-500": "Sekundær",
+    surfaceScale: "Overflade",
+    userInterfaceBaseUnit: "Brugergrænseflade",
+    fontScale: "Skrifttype",
+    names: {
+      sc2020: "Skaberen af spørgeundersøgelsen 2020",
+      "default-light": "Lys",
+      "default-dark": "Mørk",
+      "default-contrast": "Kontrast"
     }
   }
 };
-
-editorLocalization.locales["da"] = danishStrings;
+setupLocale({ localeCode: "da", strings: danishStrings });
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
@@ -1778,7 +2003,7 @@ editorLocalization.locales["da"] = danishStrings;
 // pe.choicesMin: "Minimum value for auto-generated items" => "Minimumsværdi for automatisk genererede varer"
 // pe.choicesMax: "Maximum value for auto-generated items" => "Maksimal værdi for automatisk genererede varer"
 // pe.choicesStep: "Step for auto-generated items" => "Trin for automatisk genererede elementer"
-// pe.isAllRowRequired: "Require answer for all rows" => "Kræv svar for alle rækker"
+// pe.eachRowRequired: "Require answer for all rows" => "Kræv svar for alle rækker"
 // pe.requiredErrorText: "\"Required\" error message" => "Fejlmeddelelsen \"Påkrævet\""
 // pe.cols: "Columns" => "Kolonner"
 // pe.rateMin: "Minimum rate value" => "Mindste sats værdi"
@@ -1806,7 +2031,7 @@ editorLocalization.locales["da"] = danishStrings;
 // pe.editText: "Edit Answer button text" => "Tekst til knappen Rediger svar"
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Billedhøjde (i CSS-accepterede værdier)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Billedbredde (i CSS-accepterede værdier)"
-// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Tidsgrænse for at afslutte siden (i sekunder)"
+// page.timeLimit: "Time limit to finish the page (in seconds)" => "Tidsgrænse for at afslutte siden (i sekunder)"
 // question.page: "Parent page" => "Overordnet side"
 // pe.noEntriesText: "Empty entries text" => "Tekst til tomme poster"
 // pe.html: "HTML markup" => "HTML-markering"
@@ -1815,7 +2040,7 @@ editorLocalization.locales["da"] = danishStrings;
 // pe.dataFormat: "Image format" => "Billedformat"
 // pe.allowAddRows: "Allow adding rows" => "Tillad tilføjelse af rækker"
 // pe.allowRemoveRows: "Allow removing rows" => "Tillad fjernelse af rækker"
-// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "Tillad træk og slip af rækker"
+// pe.allowRowReorder: "Allow row drag and drop" => "Tillad træk og slip af rækker"
 // pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "Gælder ikke, hvis du angiver den nøjagtige billedbredde eller -højde."
 // pe.minImageWidth: "Minimum image width" => "Mindste billedbredde"
 // pe.maxImageWidth: "Maximum image width" => "Maksimal billedbredde"
@@ -1839,11 +2064,11 @@ editorLocalization.locales["da"] = danishStrings;
 // pe.logo: "Logo (URL or base64-encoded string)" => "Logo (URL eller base64-kodet streng)"
 // pe.questionsOnPageMode: "Survey structure" => "Undersøgelsens opbygning"
 // pe.maxTextLength: "Maximum answer length (in characters)" => "Maksimal svarlængde (med tegn)"
-// pe.maxOthersLength: "Maximum comment length (in characters)" => "Maksimal kommentarlængde (i tegn)"
+// pe.maxCommentLength: "Maximum comment length (in characters)" => "Maksimal kommentarlængde (i tegn)"
 // pe.autoGrowComment: "Auto-expand comment area if necessary" => "Udvid automatisk kommentarområdet, hvis det er nødvendigt"
 // pe.allowResizeComment: "Allow users to resize text areas" => "Tillad brugere at ændre størrelsen på tekstområder"
 // pe.textUpdateMode: "Update text question value" => "Opdater værdi for tekstspørgsmål"
-// pe.focusOnFirstError: "Set focus on the first invalid answer" => "Sæt fokus på det første ugyldige svar"
+// pe.autoFocusFirstError: "Set focus on the first invalid answer" => "Sæt fokus på det første ugyldige svar"
 // pe.checkErrorsMode: "Run validation" => "Kør validering"
 // pe.navigateToUrl: "Navigate to URL" => "Naviger til URL"
 // pe.navigateToUrlOnCondition: "Dynamic URL" => "Dynamisk webadresse"
@@ -1878,11 +2103,11 @@ editorLocalization.locales["da"] = danishStrings;
 // pe.panelsState: "Inner panel expand state" => "Udvid tilstand for indvendigt panel"
 // pe.templateDescription: "Description template" => "Beskrivelse skabelon"
 // pe.templateTitle: "Title template" => "Titel skabelon"
-// pe.panelPrevText: "Previous Panel button tooltip" => "Forrige værktøjstip til panelknap"
-// pe.panelNextText: "Next Panel button tooltip" => "Værktøjstip til knappen Næste panel"
+// pe.prevPanelText: "Previous Panel button tooltip" => "Forrige værktøjstip til panelknap"
+// pe.nextPanelText: "Next Panel button tooltip" => "Værktøjstip til knappen Næste panel"
 // pe.showRangeInProgress: "Show progress bar" => "Vis statuslinje"
-// pe.templateTitleLocation: "Question title location" => "Placering af spørgsmålets titel"
-// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Fjern placering af panelknap"
+// pe.templateQuestionTitleLocation: "Question title location" => "Placering af spørgsmålets titel"
+// pe.removePanelButtonLocation: "Remove Panel button location" => "Fjern placering af panelknap"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Skjul spørgsmålet, hvis der ikke er nogen rækker"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Skjule kolonner, hvis der ikke er nogen rækker"
 // pe.rateValues: "Custom rate values" => "Tilpassede satsværdier"
@@ -1905,13 +2130,12 @@ editorLocalization.locales["da"] = danishStrings;
 // pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Fejlmeddelelsen \"Ikke-entydig nøgleværdi\""
 // pe.minSelectedChoices: "Minimum selected choices" => "Minimum valgte valg"
 // pe.maxSelectedChoices: "Maximum selected choices" => "Maksimalt antal valgte valg"
-// pe.showClearButton: "Show the Clear button" => "Vis knappen Ryd"
 // pe.showNumber: "Show panel number" => "Vis panelnummer"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Logobredde (i CSS-accepterede værdier)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Logohøjde (i CSS-accepterede værdier)"
 // pe.readOnly: "Read-only" => "Skrivebeskyttet"
 // pe.enableIf: "Editable if" => "Redigerbar, hvis"
-// pe.emptyRowsText: "\"No rows\" message" => "Meddelelsen \"Ingen rækker\""
+// pe.noRowsText: "\"No rows\" message" => "Meddelelsen \"Ingen rækker\""
 // pe.size: "Input field size (in characters)" => "Inputfeltstørrelse (i tegn)"
 // pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "Adskil særlige valg (Ingen, Andet, Vælg alle)"
 // pe.choicesFromQuestion: "Copy choices from the following question" => "Kopiér valg fra følgende spørgsmål"
@@ -1919,7 +2143,7 @@ editorLocalization.locales["da"] = danishStrings;
 // pe.showCommentArea: "Show the comment area" => "Vis kommentarområdet"
 // pe.commentPlaceholder: "Comment area placeholder" => "Pladsholder til kommentarområde"
 // pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "Beskrivelser af visningshastighed som ekstreme værdier"
-// pe.rowsOrder: "Row order" => "Rækkefølge af rækker"
+// pe.rowOrder: "Row order" => "Rækkefølge af rækker"
 // pe.columnsLayout: "Column layout" => "Kolonnelayout"
 // pe.columnColCount: "Nested column count" => "Antal indlejrede kolonner"
 // pe.state: "Panel expand state" => "Panel udvide tilstand"
@@ -1958,8 +2182,6 @@ editorLocalization.locales["da"] = danishStrings;
 // pe.indent: "Add indents" => "Tilføj indrykninger"
 // panel.indent: "Add outer indents" => "Tilføj ydre indrykninger"
 // pe.innerIndent: "Add inner indents" => "Tilføj indre indrykninger"
-// pe.defaultValueFromLastRow: "Take default values from the last row" => "Tag standardværdier fra den sidste række"
-// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Tag standardværdier fra det sidste panel"
 // pe.titleKeyboardAdornerTip: "Press enter button to edit" => "Tryk på enter-knappen for at redigere"
 // pe.keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item" => "Tryk på enter-knappen for at redigere elementet, tryk på slet-knappen for at slette elementet, tryk på alt plus pil op eller pil ned for at flytte elementet"
 // pe.triggerGotoName: "Go to the question" => "Gå til spørgsmålet"
@@ -2040,7 +2262,7 @@ editorLocalization.locales["da"] = danishStrings;
 // showTimerPanel.none: "Hidden" => "Skjult"
 // showTimerPanelMode.all: "Both" => "Begge"
 // detailPanelMode.none: "Hidden" => "Skjult"
-// addRowLocation.default: "Depends on matrix layout" => "Afhænger af matrixlayout"
+// addRowButtonLocation.default: "Depends on matrix layout" => "Afhænger af matrixlayout"
 // panelsState.default: "Users cannot expand or collapse panels" => "Brugere kan ikke udvide eller skjule paneler"
 // panelsState.collapsed: "All panels are collapsed" => "Alle paneler er skjult"
 // panelsState.expanded: "All panels are expanded" => "Alle paneler er udvidet"
@@ -2174,12 +2396,11 @@ editorLocalization.locales["da"] = danishStrings;
 // theme.--primary-foreground: "Primary foreground color" => "Primær forgrundsfarve"
 // theme.--foreground: "Foreground color" => "Forgrundsfarve"
 // theme.--base-unit: "Base unit" => "Basisenhed"
-// theme.groupGeneral: "General" => "Generel"
 // theme.groupAdvanced: "Advanced" => "Avanceret"
 // theme.themeName: "Theme" => "Tema"
-// theme.themeMode: "Question appearance" => "Spørgsmål udseende"
-// theme.themeModePanels: "Default" => "Standard"
-// theme.themeModeLightweight: "Without Panels" => "Uden paneler"
+// theme.isPanellessss: "Question appearance" => "Spørgsmål udseende"
+// theme.isPanellessPanels: "Default" => "Standard"
+// theme.isPanellessLightweight: "Without Panels" => "Uden paneler"
 // theme.themePaletteLight: "Light" => "Lys"
 // theme.themePaletteDark: "Dark" => "Mørk"
 // theme.primaryColor: "Accent color" => "Accent farve"
@@ -2221,7 +2442,7 @@ editorLocalization.locales["da"] = danishStrings;
 // theme.fontWeightBold: "Bold" => "Modig"
 // theme.scale: "Scale" => "Skæl"
 // theme.cornerRadius: "Corner radius" => "Hjørne radius"
-// theme.surveyTitle: "Survey title font" => "Skrifttype for undersøgelsestitel"
+// theme.surveyTitleFont: "Survey title font" => "Skrifttype for undersøgelsestitel"
 // theme.pageTitle: "Page title font" => "Sidetitel skrifttype"
 // theme.pageDescription: "Page description font" => "Sidebeskrivelse skrifttype"
 // theme.boxShadowX: "X" => "X"
@@ -2282,22 +2503,20 @@ editorLocalization.locales["da"] = danishStrings;
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Angiv værdi, hvis"
-// theme.groupHeader: "Header" => "Header"
-// theme.coverTitleForecolor: "Title forecolor" => "Titel forfarve"
-// theme.coverOverlapEnabled: "Overlap" => "Overlapning"
+// theme.header: "Header" => "Header"
 // theme.backgroundImageFitFill: "Stretch" => "Stræk"
 // theme.backgroundImageFitTile: "Tile" => "Flise"
 // theme.headerView: "View" => "Udsigt"
 // theme.headerViewBasic: "Basic" => "Grundlæggende"
 // theme.headerViewAdvanced: "Advanced" => "Avanceret"
-// theme.coverInheritWidthFrom: "Content area width" => "Bredde på indholdsområde"
-// theme.coverInheritWidthFromSurvey: "Same as survey" => "Samme som undersøgelse"
-// theme.coverInheritWidthFromPage: "Fit to page" => "Tilpas til side"
-// theme.coverTextAreaWidth: "Text width" => "Tekstbredde"
-// theme.coverBackgroundColorSwitch: "Background color" => "Baggrundsfarve"
-// theme.coverBackgroundColorNone: "None" => "Ingen"
-// theme.coverBackgroundColorAccentColor: "Accent color" => "Accent farve"
-// theme.coverBackgroundColorCustom: "Custom" => "Sædvane"
+// theme.headerInheritWidthFrom: "Content area width" => "Bredde på indholdsområde"
+// theme.headerInheritWidthFromSurvey: "Same as survey" => "Samme som undersøgelse"
+// theme.headerInheritWidthFromPage: "Fit to page" => "Tilpas til side"
+// theme.headerTextAreaWidth: "Text width" => "Tekstbredde"
+// theme.headerBackgroundColorSwitch: "Background color" => "Baggrundsfarve"
+// theme.headerBackgroundColorNone: "None" => "Ingen"
+// theme.headerBackgroundColorAccentColor: "Accent color" => "Accent farve"
+// theme.headerBackgroundColorCustom: "Custom" => "Sædvane"
 // theme.horizontalAlignmentLeft: "Left" => "Venstre"
 // theme.horizontalAlignmentCenter: "Center" => "Midte"
 // theme.horizontalAlignmentRight: "Right" => "Højre"
@@ -2317,18 +2536,14 @@ editorLocalization.locales["da"] = danishStrings;
 // pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Gælder, når \"Kildetype\" er \"Lokale filer\", eller når kameraet ikke er tilgængeligt"
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Gælder, når \"Kildetype\" er \"Kamera\"."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Gælder, når \"Kildetype\" er \"Lokale filer eller kamera\"."
-// theme.groupBackground: "Background" => "Baggrund"
-// theme.groupAppearance: "Appearance" => "Udseende"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivelse forfarve"
+// theme.background: "Background" => "Baggrund"
+// theme.appearance: "Appearance" => "Udseende"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vil du virkelig nulstille temaet? Alle dine tilpasninger går tabt."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, nulstil temaet"
-// theme.groupBackground: "Background" => "Baggrund"
-// theme.groupAppearance: "Appearance" => "Udseende"
-// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivelse forfarve"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Passer til beholder"
+// theme.headerInheritWidthFromContainer: "Fit to container" => "Passer til beholder"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Vis pladsholderen"
 // signaturepad.placeholder: "Placeholder text" => "Pladsholdertekst"
-// theme.surveyDescription: "Survey description font" => "Skrifttype til undersøgelsesbeskrivelse"
+// theme.surveyDescriptionFont: "Survey description font" => "Skrifttype til undersøgelsesbeskrivelse"
 // ed.prevFocus: "Focus previous" => "Fokus forrige"
 // ed.nextFocus: "Focus next" => "Fokuser næste"
 // ed.saveTheme: "Save Theme" => "Gem tema"
@@ -2341,8 +2556,8 @@ editorLocalization.locales["da"] = danishStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Mindste bredde på pennen"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maksimal bredde på pennen"
 // theme.logoPosition: "Logo position" => "Logo position"
-// theme.coverTitlePosition: "Title position" => "Titel position"
-// theme.coverDescriptionPosition: "Description position" => "Beskrivelse position"
+// theme.headerTitlePosition: "Title position" => "Titel position"
+// theme.headerDescriptionPosition: "Description position" => "Beskrivelse position"
 // ed.propertyGridNoResultsFound: "No results found" => "Ingen resultater fundet"
 // pv.leftRight: "Left and right" => "Venstre og højre"
 // p.sourceType: "Source type" => "Kilde type"
@@ -2378,13 +2593,12 @@ editorLocalization.locales["da"] = danishStrings;
 // panel.description: "Panel description" => "Beskrivelse af panelet"
 // panel.visibleIf: "Make the panel visible if" => "Gør panelet synligt, hvis"
 // panel.requiredIf: "Make the panel required if" => "Gør panelet påkrævet, hvis"
-// panel.questionsOrder: "Question order within the panel" => "Spørgsmålsrækkefølge i panelet"
+// panel.questionOrder: "Question order within the panel" => "Spørgsmålsrækkefølge i panelet"
 // panel.startWithNewLine: "Display the panel on a new line" => "Få vist panelet på en ny linje"
 // panel.state: "Panel collapse state" => "Panelets sammenbrudstilstand"
 // panel.width: "Inline panel width" => "Indlejret panelbredde"
 // panel.minWidth: "Minimum panel width" => "Mindste panelbredde"
 // panel.maxWidth: "Maximum panel width" => "Maksimal panelbredde"
-// panel.showNumber: "Number panels" => "Paneler med tal"
 // paneldynamic.name: "Panel name" => "Panelets navn"
 // paneldynamic.title: "Panel title" => "Panelets titel"
 // paneldynamic.description: "Panel description" => "Beskrivelse af panelet"
@@ -2404,7 +2618,7 @@ editorLocalization.locales["da"] = danishStrings;
 // paneldynamic.hideNumber: "Hide the panel number" => "Skjul panelnummeret"
 // paneldynamic.titleLocation: "Panel title alignment" => "Justering af paneltitel"
 // paneldynamic.descriptionLocation: "Panel description alignment" => "Justering af panelbeskrivelse"
-// paneldynamic.templateTitleLocation: "Question title alignment" => "Tilpasning af spørgsmålets titel"
+// paneldynamic.templateQuestionTitleLocation: "Question title alignment" => "Tilpasning af spørgsmålets titel"
 // paneldynamic.templateErrorLocation: "Error message alignment" => "Justering af fejlmeddelelse"
 // paneldynamic.newPanelPosition: "New panel location" => "Ny panelplacering"
 // paneldynamic.keyName: "Prevent duplicate responses in the following question" => "Undgå dublerede svar i følgende spørgsmål"
@@ -2437,7 +2651,7 @@ editorLocalization.locales["da"] = danishStrings;
 // page.description: "Page description" => "Sidebeskrivelse"
 // page.visibleIf: "Make the page visible if" => "Gør siden synlig, hvis"
 // page.requiredIf: "Make the page required if" => "Gør siden påkrævet, hvis"
-// page.questionsOrder: "Question order on the page" => "Spørgsmålsrækkefølge på siden"
+// page.questionOrder: "Question order on the page" => "Spørgsmålsrækkefølge på siden"
 // matrixdropdowncolumn.name: "Column name" => "Kolonnens navn"
 // matrixdropdowncolumn.title: "Column title" => "Kolonnens titel"
 // matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "Undgå dublerede svar"
@@ -2511,10 +2725,10 @@ editorLocalization.locales["da"] = danishStrings;
 // totalDisplayStyle.currency: "Currency" => "Valuta"
 // totalDisplayStyle.percent: "Percentage" => "Procentdel"
 // totalDisplayStyle.date: "Date" => "Dato"
-// rowsOrder.initial: "Original" => "Oprindelig"
-// questionsOrder.initial: "Original" => "Oprindelig"
-// showProgressBar.aboveHeader: "Above the header" => "Over overskriften"
-// showProgressBar.belowHeader: "Below the header" => "Under overskriften"
+// rowOrder.initial: "Original" => "Oprindelig"
+// questionOrder.initial: "Original" => "Oprindelig"
+// showProgressBar.aboveheader: "Above the header" => "Over overskriften"
+// showProgressBar.belowheader: "Below the header" => "Under overskriften"
 // pv.sum: "Sum" => "Sum"
 // pv.count: "Count" => "Tælle"
 // pv.min: "Min" => "Min."
@@ -2529,7 +2743,7 @@ editorLocalization.locales["da"] = danishStrings;
 // panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar."
 // panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Gælder for alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard)."
 // panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Angiver placeringen af en fejlmeddelelse i forhold til alle spørgsmål i panelet. Indstillingen \"Nedarv\" anvender indstillingen for sideniveau (hvis angivet) eller undersøgelsesniveau."
-// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Nedarv\" anvender indstillingen for sideniveau (hvis angivet) eller undersøgelsesniveau."
+// panel.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Nedarv\" anvender indstillingen for sideniveau (hvis angivet) eller undersøgelsesniveau."
 // panel.page: "Repositions the panel to the end of a selected page." => "Flytter panelet til slutningen af en markeret side."
 // panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "Tilføjer mellemrum eller margen mellem panelindholdet og panelboksens venstre kant."
 // panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "Fjern markeringen for at få vist panelet på én linje med det forrige spørgsmål eller panel. Indstillingen gælder ikke, hvis panelet er det første element i formularen."
@@ -2540,7 +2754,7 @@ editorLocalization.locales["da"] = danishStrings;
 // paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer panelets synlighed."
 // paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "Brug tryllestavsikonet til at indstille en betinget regel, der deaktiverer panelets skrivebeskyttede tilstand."
 // paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar."
-// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Gælder for alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard)."
+// paneldynamic.templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Gælder for alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard)."
 // paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Angiver placeringen af en fejlmeddelelse i forhold til et spørgsmål med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard)."
 // paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "Angiver placeringen af en fejlmeddelelse i forhold til alle spørgsmål i panelet. Indstillingen \"Nedarv\" anvender indstillingen for sideniveau (hvis angivet) eller undersøgelsesniveau."
 // paneldynamic.page: "Repositions the panel to the end of a selected page." => "Flytter panelet til slutningen af en markeret side."
@@ -2554,7 +2768,7 @@ editorLocalization.locales["da"] = danishStrings;
 // paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "Denne indstilling nedarves automatisk af alle spørgsmål i dette panel. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål. Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Top\" som standard)."
 // paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Under paneltitlen\" som standard)."
 // paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "Definerer placeringen af et nyligt tilføjet panel. Som standard tilføjes nye paneler til slutningen. Vælg \"Næste\" for at indsætte et nyt panel efter det aktuelle."
-// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplikerer svar fra det sidste panel og tildeler dem til det næste tilføjede dynamiske panel."
+// paneldynamic.copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "Duplikerer svar fra det sidste panel og tildeler dem til det næste tilføjede dynamiske panel."
 // paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "Henvis til et spørgsmålsnavn for at kræve, at en bruger giver et entydigt svar på dette spørgsmål i hvert panel."
 // pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "Med denne indstilling kan du tildele en standardsvarværdi baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger - '{q1_id} + {q2_id}', booleske udtryk, såsom '{alder} > 60' og funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Den værdi, der bestemmes af dette udtryk, fungerer som den oprindelige standardværdi, der kan tilsidesættes af svarpersonens manuelle input."
 // pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "Brug tryllestavsikonet til at angive en betinget regel, der bestemmer, hvornår en svarpersons input nulstilles til værdien baseret på værdien \"Standardværdiudtryk\" eller \"Angiv værdiudtryk\" eller til værdien \"Standardsvar\" (hvis en af dem er angivet)."
@@ -2600,18 +2814,17 @@ editorLocalization.locales["da"] = danishStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Indstiller en logobredde i CSS-enheder (px, %, in, pt osv.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Indstiller en logohøjde i CSS-enheder (px, %, i, pt osv.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vælg mellem: \"Ingen\" - billedet bevarer sin oprindelige størrelse; \"Contain\" - billedet ændres til at passe, samtidig med at dets billedformat opretholdes; \"Cover\" - billedet fylder hele kassen, samtidig med at billedformatet opretholdes; \"Fyld\" - billedet strækkes for at udfylde boksen uden at opretholde dets billedformat."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Vælg, om undersøgelsen automatisk skal gå videre til næste side, når en svarperson har besvaret alle spørgsmål på den aktuelle side."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Angiver synligheden og placeringen af navigationsknapper på en side."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Indstiller synligheden og placeringen af en statuslinje. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Aktivér eksempelsiden med alle eller kun besvarede spørgsmål."
 // pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "Gælder for alle spørgsmål i undersøgelsen. Denne indstilling kan tilsidesættes af titeljusteringsregler på lavere niveauer: panel, side eller spørgsmål. En indstilling på lavere niveau tilsidesætter dem på et højere niveau."
-// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "Et symbol eller en sekvens af symboler, der angiver, at et svar er påkrævet."
+// pehelp.requiredMark: "A symbol or a sequence of symbols indicating that an answer is required." => "Et symbol eller en sekvens af symboler, der angiver, at et svar er påkrævet."
 // pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "Indtast et tal eller bogstav, som du vil starte nummereringen med."
 // pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "Angiver placeringen af en fejlmeddelelse i forhold til spørgsmålet med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet."
-// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "Vælg, om det første indtastningsfelt på hver side skal være klar til indtastning af tekst."
-// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Effekten af denne indstilling er kun synlig under fanen Eksempel."
+// pehelp.autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry." => "Vælg, om det første indtastningsfelt på hver side skal være klar til indtastning af tekst."
+// pehelp.questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Effekten af denne indstilling er kun synlig under fanen Eksempel."
 // pehelp.maxTextLength: "For text entry questions only." => "Kun til spørgsmål om indtastning af tekst."
-// pehelp.maxOthersLength: "For question comments only." => "Kun til kommentarer til spørgsmål."
+// pehelp.maxCommentLength: "For question comments only." => "Kun til kommentarer til spørgsmål."
 // pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "Vælg, om spørgsmålskommentarer og lange tekstspørgsmål automatisk skal vokse i højden baseret på den indtastede tekstlængde."
 // pehelp.allowResizeComment: "For question comments and Long Text questions only." => "Kun til spørgsmålskommentarer og lange tekstspørgsmål."
 // pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "Brugerdefinerede variabler fungerer som mellemliggende eller hjælpevariabler, der bruges i formularberegninger. De tager respondentinput som kildeværdier. Hver brugerdefineret variabel har et entydigt navn og et udtryk, den er baseret på."
@@ -2627,24 +2840,23 @@ editorLocalization.locales["da"] = danishStrings;
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Når egenskaben \"Undgå dublerede svar\" er aktiveret, modtager en svarperson, der forsøger at sende en dubletpost, følgende fejlmeddelelse."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Giver dig mulighed for at beregne samlede værdier baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger ('{q1_id} + {q2_id}'), booleske udtryk ('{alder} > 60') og funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv.)."
 // pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Udløser en prompt, der beder om at bekræfte sletningen af rækken."
-// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række."
+// pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række."
 // pehelp.description: "Type a subtitle." => "Skriv en undertekst."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Vælg et sprog for at begynde at oprette undersøgelsen. Hvis du vil tilføje en oversættelse, skal du skifte til et nyt sprog og oversætte den oprindelige tekst her eller på fanen Oversættelser."
 // pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "Angiver placeringen af en detaljesektion i forhold til en række. Vælg mellem: \"Ingen\" - ingen udvidelse tilføjes; \"Under rækken\" - en rækkeudvidelse placeres under hver række i matrixen; \"Vis kun én rækkeudvidelse under rækken\" - en udvidelse vises kun under en enkelt række, de resterende rækkeudvidelser skjules."
 // pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vælg mellem: \"Ingen\" - billedet bevarer sin oprindelige størrelse; \"Contain\" - billedet ændres til at passe, samtidig med at dets billedformat opretholdes; \"Cover\" - billedet fylder hele kassen, samtidig med at billedformatet opretholdes; \"Fyld\" - billedet strækkes for at udfylde boksen uden at opretholde dets billedformat."
 // pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "Øger gradvist inputfeltets højde, efterhånden som data indtastes. Tilsidesætter indstillingen \"Inputfelthøjde (i linjer)\"."
 // pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "Størrelseshåndtaget (eller grebet) vises i hjørnet og kan trækkes for at ændre størrelsen på indtastningsfeltet."
-// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til siden Tak."
-// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side."
-// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side."
+// pehelp.timeLimit: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til siden Tak."
+// pehelp.timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page." => "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side."
+// page.timeLimit: "A time interval in seconds after which the survey auto-advances to the next page." => "Et tidsinterval i sekunder, hvorefter undersøgelsen automatisk går videre til næste side."
 // page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "Brug tryllestavsikonet til at indstille en betinget regel, der bestemmer sidens synlighed."
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Brug tryllestavsikonet til at angive en betinget regel, der deaktiverer skrivebeskyttet tilstand for siden."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Gælder for alle spørgsmål på denne side. Hvis du vil tilsidesætte denne indstilling, skal du definere regler for titeljustering for individuelle spørgsmål eller paneler. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard)."
 // page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Angiver placeringen af en fejlmeddelelse i forhold til spørgsmålet med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet. Indstillingen \"Nedarv\" anvender indstillingen på undersøgelsesniveau (\"Top\" som standard)."
-// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau (\"Original\" som standard). Effekten af denne indstilling er kun synlig under fanen Eksempel."
-// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
-// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Indstiller synligheden og placeringen af en timer på en side."
+// page.questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau (\"Original\" som standard). Effekten af denne indstilling er kun synlig under fanen Eksempel."
+// page.showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\"."
 // pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "Vælg mellem: \"Låst\" - brugere kan ikke udvide eller skjule paneler; \"Skjul alle\" - alle paneler starter i kollapset tilstand; \"Udvid alle\" - alle paneler starter i udvidet tilstand; \"Først udvidet\" - kun det første panel udvides oprindeligt."
 // pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "Angiv et delt egenskabsnavn i den række objekter, der indeholder de URL-adresser til billeder eller videofiler, du vil have vist på valglisten."
 // pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "Den venstre værdi fungerer som et vare-id, der bruges i betingede regler, den rigtige værdi vises for respondenterne."
@@ -2672,7 +2884,7 @@ editorLocalization.locales["da"] = danishStrings;
 // pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "Udløser en prompt, der beder om at bekræfte filsletningen."
 // pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "Aktivér for kun at rangere valgte valg. Brugere trækker valgte elementer fra valglisten for at sortere dem inden for rangeringsområdet."
 // pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "Angiv en liste over valgmuligheder, der vil blive foreslået svarpersonen under input."
-// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Indstillingen ændrer kun størrelsen på inputfelterne og påvirker ikke bredden af spørgsmålsfeltet."
+// pehelp.inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "Indstillingen ændrer kun størrelsen på inputfelterne og påvirker ikke bredden af spørgsmålsfeltet."
 // pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "Angiver ensartet bredde for alle vareetiketter i pixel"
 // pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "Indstillingen \"Auto\" bestemmer automatisk den passende tilstand til visning - Billede, Video eller YouTube - baseret på den angivne kilde-URL."
 // pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "Fungerer som erstatning, når billedet ikke kan vises på en brugers enhed og af tilgængelighedshensyn."
@@ -2685,8 +2897,8 @@ editorLocalization.locales["da"] = danishStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Bredde på vareetiket (i px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst, der viser, om alle indstillinger er markeret"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Pladsholdertekst for rangeringsområdet"
-// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Udfyld undersøgelsen automatisk"
-// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Vælg, om undersøgelsen skal fuldføres automatisk, når svarpersonen har besvaret alle spørgsmål."
+// pe.autoAdvanceAllowComplete: "Complete the survey automatically" => "Udfyld undersøgelsen automatisk"
+// pehelp.autoAdvanceAllowComplete: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Vælg, om undersøgelsen skal fuldføres automatisk, når svarpersonen har besvaret alle spørgsmål."
 // masksettings.saveMaskedValue: "Save masked value in survey results" => "Gem maskeret værdi i undersøgelsesresultater"
 // patternmask.pattern: "Value pattern" => "Værdimønster"
 // datetimemask.min: "Minimum value" => "Mindste værdi"
@@ -2732,3 +2944,296 @@ editorLocalization.locales["da"] = danishStrings;
 // ed.selectFile: "Select a file" => "Vælg en fil"
 // ed.removeFile: "Remove the file" => "Fjern filen"
 // pe.searchMode: "Search Mode" => "Søgetilstand"
+// ed.surveyPlaceHolderMobile: "Click the \"Add Question\" button below to start creating your form." => "Klik på knappen \"Tilføj spørgsmål\" nedenfor for at begynde at oprette din formular."
+// ed.pagePlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the page." => "Klik på knappen \"Tilføj spørgsmål\" nedenfor for at tilføje et nyt element til siden."
+// ed.panelPlaceHolderMobile: "Click the \"Add Question\" button below to add a new element to the panel." => "Klik på knappen \"Tilføj spørgsmål\" nedenfor for at tilføje et nyt element til panelet."
+// ed.imagePlaceHolderMobile: "Click the button below and choose an image to upload" => "Klik på knappen nedenfor, og vælg et billede, der skal uploades"
+// coloralpha.opacity: "Opacity" => "Opacitet"
+// font.family: "Font family" => "Skrifttypefamilie"
+// font.color: "Color" => "Farve"
+// font.placeholderColor: "Placeholder color" => "Pladsholderfarve"
+// font.size: "Size" => "Størrelse"
+// theme.themeName: "Theme" => "Tema"
+// theme.isPanelless: "Question appearance" => "Spørgsmål udseende"
+// theme.editorPanel: "Background and corner radius" => "Baggrund og hjørneradius"
+// theme.questionPanel: "Background and corner radius" => "Baggrund og hjørneradius"
+// theme.primaryColor: "Accent color" => "Accent farve"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Opacitet af panelets baggrund"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Spørgsmål baggrundsuigennemsigtighed"
+// theme.fontSize: "Font size" => "Skrifttypestørrelse"
+// theme.scale: "Scale" => "Skæl"
+// theme.cornerRadius: "Corner radius" => "Hjørne radius"
+// theme.pageTitle: "Title font" => "Titel skrifttype"
+// theme.pageDescription: "Description font" => "Beskrivelse skrifttype"
+// theme.questionTitle: "Title font" => "Titel skrifttype"
+// theme.questionDescription: "Description font" => "Beskrivelse skrifttype"
+// theme.editorFont: "Font" => "Skrifttype"
+// theme.backgroundOpacity: "Opacity" => "Opacitet"
+// theme.--sjs-font-family: "Font family" => "Skrifttypefamilie"
+// theme.--sjs-general-backcolor-dim: "Background color" => "Baggrundsfarve"
+// theme.--sjs-primary-backcolor: "Accent background" => "Accent baggrund"
+// theme.--sjs-primary-forecolor: "Accent foreground" => "Accent forgrund"
+// theme.--sjs-shadow-small: "Shadow effects" => "Skyggeeffekter"
+// theme.--sjs-shadow-inner: "Shadow effects" => "Skyggeeffekter"
+// theme.--sjs-border-default: "Colors" => "Farver"
+// header@header.headerView: "View" => "Udsigt"
+// header@header.logoPosition: "Logo position" => "Logo position"
+// header@header.surveyTitle: "Survey title font" => "Skrifttype for undersøgelsestitel"
+// header@header.surveyDescription: "Survey description font" => "Skrifttype til undersøgelsesbeskrivelse"
+// header@header.headerTitle: "Survey title font" => "Skrifttype for undersøgelsestitel"
+// header@header.headerDescription: "Survey description font" => "Skrifttype til undersøgelsesbeskrivelse"
+// header@header.inheritWidthFrom: "Content area width" => "Bredde på indholdsområde"
+// header@header.textAreaWidth: "Text width" => "Tekstbredde"
+// header@header.backgroundColorSwitch: "Background color" => "Baggrundsfarve"
+// header@header.backgroundImage: "Background image" => "Baggrundsbillede"
+// header@header.backgroundImageOpacity: "Opacity" => "Opacitet"
+// header@header.overlapEnabled: "Overlap" => "Overlapning"
+// header@header.logoPositionX: "Logo position" => "Logo position"
+// header@header.titlePositionX: "Title position" => "Titel position"
+// header@header.descriptionPositionX: "Description position" => "Beskrivelse position"
+// weight.400: "Regular" => "Regelmæssig"
+// weight.600: "Heavy" => "Tung"
+// weight.700: "Semi-bold" => "Halvfed skrift"
+// weight.800: "Bold" => "Modig"
+// backgroundImageFit.auto: "Auto" => "Auto"
+// backgroundImageFit.cover: "Cover" => "Dække"
+// backgroundImageFit.contain: "Contain" => "Indeholde"
+// backgroundImageFit.fill: "Stretch" => "Stræk"
+// backgroundImageFit.tile: "Tile" => "Flise"
+// backgroundImageAttachment.fixed: "Fixed" => "Fast"
+// backgroundImageAttachment.scroll: "Scroll" => "Rulle"
+// headerView.basic: "Basic" => "Grundlæggende"
+// headerView.advanced: "Advanced" => "Avanceret"
+// inheritWidthFrom.survey: "Same as survey" => "Samme som undersøgelse"
+// inheritWidthFrom.container: "Fit to container" => "Passer til beholder"
+// backgroundColorSwitch.none: "None" => "Ingen"
+// backgroundColorSwitch.accentColor: "Accent color" => "Accent farve"
+// backgroundColorSwitch.custom: "Custom" => "Sædvane"
+// colorPalette.light: "Light" => "Lys"
+// colorPalette.dark: "Dark" => "Mørk"
+// isPanelless.false: "Default" => "Standard"
+// isPanelless.true: "Without Panels" => "Uden paneler"
+// theme.cornerRadius: "Corner radius" => "Hjørne radius"
+// theme.fontFamily: "Font family" => "Skrifttypefamilie"
+// theme.fontWeightRegular: "Regular" => "Regelmæssig"
+// theme.fontWeightHeavy: "Heavy" => "Tung"
+// theme.fontWeightSemiBold: "Semi-bold" => "Halvfed skrift"
+// theme.fontWeightBold: "Bold" => "Modig"
+// theme.color: "Color" => "Farve"
+// theme.placeholderColor: "Placeholder color" => "Pladsholderfarve"
+// theme.size: "Size" => "Størrelse"
+// theme.opacity: "Opacity" => "Opacitet"
+// ed.toolboxFilteredTextPlaceholder: "Type to search..." => "Skriv for at søge..."
+// ed.toolboxNoResultsFound: "No results found" => "Ingen resultater fundet"
+// paneldynamic.tabTitlePlaceholder: "Tab title placeholder" => "Pladsholder til fanetitel"
+// theme.--sjs-special-red: "Error messages" => "Fejlmeddelelser"
+// paneldynamic.tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value." => "En reservetekst til fanetitler, der gælder, når fanetitelmønsteret ikke giver en meningsfuld værdi."
+// theme.fontColor: "Font color" => "Skriftfarve"
+// theme.backgroundColor: "Background color" => "Baggrundsfarve"
+// pe.questionTitleWidth: "Question title width" => "Spørgsmålets titelbredde"
+// pe.fileInputPlaceholder: "Select a file or paste a file link..." => "Vælg en fil, eller indsæt et fillink..."
+// panelbase.questionTitleWidth: "Ex.: 200px" => "Eks.: 200px"
+// panel.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Angiver ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsbokse. Accepterer CSS-værdier (px, %, in, pt osv.)."
+// page.questionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Angiver ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsbokse. Accepterer CSS-værdier (px, %, in, pt osv.)."
+// pe.commentAreaRows: "Comment area height (in lines)" => "Højde på kommentarområdet (i linjer)"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. In the input takes up more lines, the scroll bar appears." => "Angiver antallet af viste linjer i tekstområder for spørgsmålskommentarer. I indgangen optager flere linjer, rullepanelet vises."
+// pe.enabled: "Enabled" => "Aktiveret"
+// pe.disabled: "Disabled" => "Handicappet"
+// pe.inherit: "Inherit" => "Arve"
+// pe.validateVisitedEmptyFields: "Validate empty fields on lost focus" => "Validere tomme felter ved mistet fokus"
+// panellayoutcolumn.effectiveWidth: "Ex.: 30%" => "Eks.: 30%"
+// panellayoutcolumn.questionTitleWidth: "Ex.: 200px" => "Eks.: 200px"
+// pehelp.validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes." => "Aktivér denne indstilling for at udløse validering, når en bruger fokuserer på et tomt inputfelt og derefter forlader det uden at foretage ændringer."
+// pehelp.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line." => "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje."
+// theme.isPanelless: "This setting applies only to questions outside of a panel." => "Denne indstilling gælder kun for spørgsmål uden for et panel."
+// theme.primaryColor: "Sets a supplementary color that highlights key survey elements." => "Indstiller en supplerende farve, der fremhæver vigtige undersøgelseselementer."
+// theme.panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background." => "Justerer gennemsigtigheden af paneler og spørgsmålsfelter i forhold til undersøgelsesbaggrunden."
+// theme.questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background." => "Justerer gennemsigtigheden af inputelementer i forhold til undersøgelsesbaggrunden."
+// theme.cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes." => "Indstiller hjørneradius for alle rektangulære elementer. Aktiver Avanceret tilstand, hvis du vil indstille individuelle hjørneradiusværdier for inputelementer eller paneler og spørgsmålsfelter."
+// theme.--sjs-general-backcolor-dim: "Sets the main background color of the survey." => "Indstiller undersøgelsens primære baggrundsfarve."
+// header.inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in." => "Indstillingen \"Samme som beholder\" justerer automatisk bredden på sidehovedindholdsområdet, så den passer ind i det HTML-element, som undersøgelsen er placeret i."
+// header.textAreaWidth: "The width of the header area that contains the survey title and description, measured in pixels." => "Bredden af det sidehovedområde, der indeholder undersøgelsens titel og beskrivelse, målt i pixel."
+// panellayoutcolumn.effectiveWidth: "Accepts values %." => "Accepterer værdier %."
+// panellayoutcolumn.questionTitleWidth: "Accepts values px." => "Accepterer værdier px."
+// p.effectiveColSpan: "Column span" => "Søjlespænd"
+// progressBarInheritWidthFrom.survey: "Same as survey" => "Samme som undersøgelse"
+// progressBarInheritWidthFrom.container: "Same as container" => "Samme som container"
+// file.allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead." => "Viser miniaturebilleder for uploadede filer, når det er muligt. Fjern markeringen, hvis du vil vise filikoner i stedet."
+// pehelp.progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in." => "Indstillingen \"Samme som beholder\" justerer automatisk bredden på statuslinjens område, så den passer ind i det HTML-element, som undersøgelsen er placeret i."
+// p.progressBarInheritWidthFrom: "Progress bar area width" => "Bredde på statuslinjeområde"
+// maskType.none: "None" => "Ingen"
+// maskType.pattern: "Pattern" => "Mønster"
+// maskType.numeric: "Numeric" => "Numerisk"
+// maskType.datetime: "Date and Time" => "Dato og klokkeslæt"
+// maskType.currency: "Currency" => "Valuta"
+
+// inputTextAlignment.auto: "Auto" => "Auto"
+// inputTextAlignment.left: "Left" => "Venstre"
+// inputTextAlignment.right: "Right" => "Højre"
+// pehelp.inputTextAlignment: "Select how to align input value within the field. The default setting \"Auto\" aligns the input value to the right if currency or numeric masking is applied and to the left if not." => "Vælg, hvordan inputværdien skal justeres i feltet. Standardindstillingen \"Auto\" justerer inputværdien til højre, hvis der anvendes valuta- eller numerisk maskering, og til venstre, hvis ikke."
+// p.inputTextAlignment: "Input value alignment" => "Justering af inputværdi"
+// paneldynamic.showRangeInProgress: "Show the progress bar" => "Vis statuslinjen"
+// paneldynamic.showProgressBar: "Show the progress bar" => "Vis statuslinjen"
+// paneldynamic.progressBarLocation: "Progress bar alignment" => "Justering af statuslinje"
+// pv.carousel: "Carousel" => "Karrusel"
+// progressBarLocation.top: "Top" => "Top"
+// progressBarLocation.bottom: "Bottom" => "Bund"
+// progressBarLocation.topBottom: "Top and bottom" => "Top og bund"
+// matrixdropdowncolumn.colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix." => "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Når den er angivet til -1, nedarves den faktiske værdi fra egenskaben \"Antal indlejrede kolonner\" for den overordnede matrix."
+// ed.translationYouTubeNotSupported: "YouTube links are not supported." => "YouTube-links understøttes ikke."
+// ed.propertyGridPlaceholderTitle: "Start configuring your form" => "Begynd at konfigurere formularen"
+// ed.propertyGridPlaceholderDescription: "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface." => "Klik på et kategoriikon for at udforske undersøgelsesindstillinger. Yderligere indstillinger bliver tilgængelige, når du føjer et undersøgelseselement til designoverfladen."
+// pe.caseInsensitive: "Case insensitive" => "Der skelnes ikke mellem store og små bogstaver"
+// pehelp.caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent." => "Vælg, om store og små bogstaver i det regulære udtryk skal behandles som ækvivalente."
+
+// ed.surveyPlaceholderTitle: "Your form is empty" => "Din formular er tom"
+// ed.surveyPlaceholderTitleMobile: "Your form is empty" => "Din formular er tom"
+// ed.surveyPlaceholderDescription: "Drag an element from the toolbox or click the button below." => "Træk et element fra værktøjskassen, eller klik på knappen nedenfor."
+// ed.surveyPlaceholderDescriptionMobile: "Drag an element from the toolbox or click the button below." => "Træk et element fra værktøjskassen, eller klik på knappen nedenfor."
+// ed.previewPlaceholderTitle: "No preview" => "Ingen forhåndsvisning"
+// ed.previewPlaceholderTitleMobile: "No preview" => "Ingen forhåndsvisning"
+// ed.previewPlaceholderDescription: "The survey doesn't contain any visible elements." => "Undersøgelsen indeholder ingen synlige elementer."
+// ed.previewPlaceholderDescriptionMobile: "The survey doesn't contain any visible elements." => "Undersøgelsen indeholder ingen synlige elementer."
+// ed.translationsPlaceholderTitle: "No strings to translate" => "Ingen forpligtelser at oversætte"
+// ed.translationsPlaceholderTitleMobile: "No strings to translate" => "Ingen forpligtelser at oversætte"
+// ed.translationsPlaceholderDescription: "Add elements to your form or change the strings filter in the toolbar." => "Føj elementer til formularen, eller skift filteret for strenge på værktøjslinjen."
+// ed.translationsPlaceholderDescriptionMobile: "Add elements to your form or change the strings filter in the toolbar." => "Føj elementer til formularen, eller skift filteret for strenge på værktøjslinjen."
+// lg.logicPlaceholderTitle: "No logical rules" => "Ingen logiske regler"
+// lg.logicPlaceholderTitleMobile: "No logical rules" => "Ingen logiske regler"
+// lg.logicPlaceholderDescription: "Create a rule to customize the flow of the survey." => "Opret en regel for at tilpasse undersøgelsens flow."
+// lg.logicPlaceholderDescriptionMobile: "Create a rule to customize the flow of the survey." => "Opret en regel for at tilpasse undersøgelsens flow."
+// pe.showTimer: "Use a timer" => "Brug en timer"
+// theme.advancedMode: "Advanced mode" => "Avanceret tilstand"
+// pehelp.timerLocation: "Sets the location of a timer on a page." => "Indstiller placeringen af en timer på en side."
+// header.mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content." => "Når den er indstillet til 0, beregnes højden automatisk for at rumme sidehovedets indhold."
+// p.mobileHeight: "Height on smartphones" => "Højde på smartphones"
+// header.overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header." => "Når den er aktiveret, overlejres toppen af undersøgelsen bunden af sidehovedet."
+// ed.creatorSettingTitle: "Creator Settings" => "Indstillinger for skabere"
+// tabs.accentColors: "Accent colors" => "Accentfarver"
+// tabs.scaling: "Scaling" => "Skalering"
+// panel.showQuestionNumbers: "Assigns numbers to questions nested within this panel." => "Tildeler numre til spørgsmål, der er indlejret i dette panel."
+// creatortheme.--sjs-special-background: "Surface background" => "Overflade baggrund"
+// creatortheme.--sjs-primary-background-500: "Primary" => "Primær"
+// creatortheme.--sjs-secondary-background-500: "Secondary" => "Sekundær"
+// creatortheme.surfaceScale: "Surface" => "Overflade"
+// creatortheme.userInterfaceBaseUnit: "User interface" => "Brugergrænseflade"
+// creatortheme.fontScale: "Font" => "Skrifttype"
+// names.sc2020: "Survey Creator 2020" => "Skaberen af spørgeundersøgelsen 2020"
+// names.default-light: "Light" => "Lys"
+// names.default-dark: "Dark" => "Mørk"
+// names.default-contrast: "Contrast" => "Kontrast"
+// panel.showNumber: "Number this panel" => "Nummerer dette panel"
+// pehelp.autoAdvanceEnabled: "Select if you want the survey to auto-advance to the next page once a respondent has answered all questions on the current page. This feature won't apply if the last question on the page is open-ended or allows multiple answers." => "Vælg, om undersøgelsen automatisk skal gå videre til næste side, når en svarperson har besvaret alle spørgsmål på den aktuelle side. Denne funktion gælder ikke, hvis det sidste spørgsmål på siden er åbent eller tillader flere svar."
+// autocomplete.name: "Full Name" => "Fulde navn"
+// autocomplete.honorific-prefix: "Prefix" => "Præfiks"
+// autocomplete.given-name: "First Name" => "Fornavn"
+// autocomplete.additional-name: "Middle Name" => "Mellemnavn"
+// autocomplete.family-name: "Last Name" => "Efternavn"
+// autocomplete.honorific-suffix: "Suffix" => "Suffiks"
+// autocomplete.nickname: "Nickname" => "Kælenavn"
+// autocomplete.organization-title: "Job Title" => "Stillingsbetegnelse"
+// autocomplete.username: "User Name" => "Brugernavn"
+// autocomplete.new-password: "New Password" => "Ny adgangskode"
+// autocomplete.current-password: "Current Password" => "Nuværende adgangskode"
+// autocomplete.organization: "Organization Name" => "Organisationens navn"
+// autocomplete.street-address: "Full Street Address" => "Fuld gadeadresse"
+// autocomplete.address-line1: "Address Line 1" => "Adresse Linje 1"
+// autocomplete.address-line2: "Address Line 2" => "Adresselinje 2"
+// autocomplete.address-line3: "Address Line 3" => "Adresselinje 3"
+// autocomplete.address-level4: "Level 4 Address" => "Niveau 4-adresse"
+// autocomplete.address-level3: "Level 3 Address" => "Niveau 3-adresse"
+// autocomplete.address-level2: "Level 2 Address" => "Niveau 2-adresse"
+// autocomplete.address-level1: "Level 1 Address" => "Niveau 1-adresse"
+// autocomplete.country: "Country Code" => "Landekode"
+// autocomplete.country-name: "Country Name" => "Landets navn"
+// autocomplete.postal-code: "Postal Code" => "Postnummer"
+// autocomplete.cc-name: "Cardholder Name" => "Kortindehaverens navn"
+// autocomplete.cc-given-name: "Cardholder First Name" => "Kortholder Fornavn"
+// autocomplete.cc-additional-name: "Cardholder Middle Name" => "Kortholder mellemnavn"
+// autocomplete.cc-family-name: "Cardholder Last Name" => "Kortholderens efternavn"
+// autocomplete.cc-number: "Credit Card Number" => "Kreditkortnummer"
+// autocomplete.cc-exp: "Expiration Date" => "Udløbsdato"
+// autocomplete.cc-exp-month: "Expiration Month" => "Udløbsmåned"
+// autocomplete.cc-exp-year: "Expiration Year" => "Udløbsår"
+// autocomplete.cc-csc: "Card Security Code" => "Kortets sikkerhedskode"
+// autocomplete.cc-type: "Credit Card Type" => "Kreditkort type"
+// autocomplete.transaction-currency: "Transaction Currency" => "Transaktionens valuta"
+// autocomplete.transaction-amount: "Transaction Amount" => "Posteringsbeløb"
+// autocomplete.language: "Preferred Language" => "Foretrukket sprog"
+// autocomplete.bday: "Birthday" => "Fødselsdag"
+// autocomplete.bday-day: "Birthday Day" => "Fødselsdag"
+// autocomplete.bday-month: "Birthday Month" => "Fødselsdag måned"
+// autocomplete.bday-year: "Birthday Year" => "Fødselsdag År"
+// autocomplete.sex: "Gender" => "Køn"
+// autocomplete.url: "Website URL" => "URL-adresse til websted"
+// autocomplete.photo: "Profile Photo" => "Profilfoto"
+// autocomplete.tel: "Telephone Number" => "Telefonnummer"
+// autocomplete.tel-country-code: "Country Code for Phone" => "Landekode til telefon"
+// autocomplete.tel-national: "National Telephone Number" => "Nationalt telefonnummer"
+// autocomplete.tel-area-code: "Area Code" => "Områdenummer"
+// autocomplete.tel-local: "Local Phone Number" => "Lokalt telefonnummer"
+// autocomplete.tel-local-prefix: "Local Phone Prefix" => "Lokalt telefonpræfiks"
+// autocomplete.tel-local-suffix: "Local Phone Suffix" => "Lokalt telefonsuffiks"
+// autocomplete.tel-extension: "Phone Extension" => "Telefon Lokalnummer"
+// autocomplete.email: "Email Address" => "E-mailadresse"
+// autocomplete.impp: "Instant Messaging Protocol" => "Protokol til onlinemeddelelser"
+// ed.lockQuestionsTooltip: "Lock expand/collapse state for questions" => "Lås udvid/skjul tilstand for spørgsmål"
+// pe.listIsEmpty@pages: "You don't have any pages yet" => "Du har ingen sider endnu"
+// pe.addNew@pages: "Add new page" => "Tilføj ny side"
+// ed.zoomInTooltip: "Zoom In" => "Zoom ind"
+// ed.zoomOutTooltip: "Zoom Out" => "Zoom ud"
+// tabs.surfaceBackground: "Surface Background" => "Overflade baggrund"
+// pe.copyDefaultValueFromLastEntry: "Use answers from the last entry as default" => "Brug svar fra sidste post som standard"
+// colors.gray: "Gray" => "Grå"
+// pe.navigationButtonsLocation: "Navigation buttons alignment" => "Justering af navigationsknapper"
+// pv.allQuestions: "Show all questions" => "Vis alle spørgsmål"
+// pv.answeredQuestions: "Show answered questions only" => "Vis kun besvarede spørgsmål"
+// pehelp.navigationButtonsLocation: "Sets the location of navigation buttons on a page." => "Angiver placeringen af navigationsknapper på en side."
+// pe.size: "Input field width (in characters)" => "Bredde på inputfelt (i tegn)"
+// pe.choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs" => "Bruge værdier fra følgende matrixkolonne eller panelspørgsmål som valg-id'er"
+// pe.choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts" => "Brug værdier fra følgende matrixkolonne eller panelspørgsmål som valgtekster"
+// pehelp.choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs." => "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal angive id'erne."
+// pehelp.choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts." => "I enkelt- og flervalgsspørgsmålstyper har hver valgmulighed et id og en visningsværdi. Denne indstilling angiver, hvilken matrixkolonne eller hvilket panelspørgsmål der skal indeholde visningsteksterne."
+// pe.progressBarLocation: "Progress bar alignment" => "Justering af statuslinje"
+// progressBarLocation.topbottom: "Top and bottom" => "Top og bund"
+// progressBarLocation.aboveheader: "Above the header" => "Over overskriften"
+// progressBarLocation.belowheader: "Below the header" => "Under overskriften"
+// progressBarLocation.off: "Hidden" => "Skjult"
+// survey.progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Angiver placeringen af statuslinjen. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
+// survey.readOnly: "Make the survey read-only" => "Gør undersøgelsen skrivebeskyttet"
+// survey.readOnly: "Select if you want to prevent respondents from filling out your survey." => "Vælg, hvis du vil forhindre respondenter i at udfylde din undersøgelse."
+// paneldynamic.showNumber: "Number the panel" => "Nummerer panelet"
+// question.showNumber: "Number this question" => "Nummerer dette spørgsmål"
+// pe.previewMode: "Preview mode" => "Forhåndsvisning tilstand"
+// pe.gridLayoutEnabled: "Enable the grid layout" => "Aktivere gitterlayoutet"
+// pe.maskSettings: "Mask settings" => "Indstillinger for maske"
+// pe.detailErrorLocation: "Row expansion error message alignment" => "Justering af fejlmeddelelse om rækkeudvidelse"
+// pehelp.detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angiver placeringen af fejlmeddelelser for spørgsmål, der er indlejret i detaljerede afsnit. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelser\"."
+// pe.gridLayoutColumns: "Grid layout columns" => "Kolonner med gitterlayout"
+// pe.startPageTitlePlaceholder: "Start Page" => "Startside"
+// panellayoutcolumn.effectiveWidth: "Effective width, %" => "Effektiv bredde, %"
+// panellayoutcolumn.questionTitleWidth: "Question title width, px" => "Spørgsmålets titelbredde, px"
+// pe.listIsEmpty@gridLayoutColumns: "You don't have layout columns yet" => "Du har ikke layoutkolonner endnu"
+// panel.effectiveColSpan: "Specifies how many columns this panel spans within the grid layout." => "Angiver, hvor mange kolonner dette panel strækker sig over i gitterlayoutet."
+// panel.gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "Denne tabel giver dig mulighed for at konfigurere hver gitterkolonne i panelet. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
+// pehelp.gridLayoutEnabled: "Survey Creator allows you to manually adjust the inline widths of form elements to control the layout. If this doesn't produce the desired outcome, you can enable the grid layout, which structures form elements using a column-based system. To configure layout columns, select a page or panel and use the \"Question Settings\" → \"Grid columns\" table. To adjust how many columns a question spans, select it and set the desired value in the \"Layout\" → \"Column span\" field." => "Survey Creator giver dig mulighed for manuelt at justere de indbyggede bredder af formularelementer for at styre layoutet. Hvis dette ikke giver det ønskede resultat, kan du aktivere gitterlayoutet, som strukturerer formularelementer ved hjælp af et kolonnebaseret system. For at konfigurere layoutkolonner skal du vælge en side eller et panel og bruge tabellen \"Spørgsmålsindstillinger\" → \"Gitterkolonner\". For at justere, hvor mange kolonner et spørgsmål strækker sig over, skal du vælge det og indstille den ønskede værdi i feltet \"Layout\" → \"Kolonnespænd\"."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet."
+// page.gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column." => "I denne tabel kan du konfigurere hver gitterkolonne på siden. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
+
+// ed.expandTooltip: "Expand" => "Ekspandere"
+// ed.collapseTooltip: "Collapse" => "Sammenbrud"
+// pe.itemTitleWidth_placeholder: "Ex.: 100px" => "Eks.: 100px"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels. Accepts CSS values (px, %, in, pt, etc.)." => "Indstiller ensartet bredde for alle elementetiketter. Accepterer CSS-værdier (px, %, in, pt osv.)."
+// ed.zoom100Tooltip: "Zoom to 100%" => "Zoom til 100 %"
+// ed.addLanguageTooltip: "Add Language" => "Tilføj sprog"
+// pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Angiver antallet af viste linjer i tekstområder til spørgsmålskommentarer. Hvis inputtet optager flere linjer, vises rullepanelet."
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Standardvisningsværdi for dynamiske tekster"
+// pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "En værdi, der vises i HTML-spørgsmål og i de dynamiske titler og beskrivelser af undersøgelseselementer, når spørgsmålsværdien er tom."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekursiv nummerering"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Spørgsmålets titelbredde"
+// pe.allowCustomChoices: "Allow custom choices" => "Tillad brugerdefinerede valg"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Indstiller ensartet bredde for spørgsmålstitler, når de er justeret til venstre for deres spørgsmålsfelter. Accepterer CSS-værdier (px, %, in, pt osv.)."
+// page.name: "A page ID that is not visible to respondents." => "Et side-id, der ikke er synligt for svarpersoner."
+// page.description: "Type a page subtitle." => "Skriv en sideundertitel."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "En billedtekst, der vises på en navigationsknap på statuslinjen eller indholdsfortegnelsen. Hvis du lader dette felt være tomt, bruger navigationsknappen sidetitlen eller sidenavnet. For at aktivere statuslinjen eller indholdsfortegnelsen skal du gå til \"Undersøgelse\" → \"Navigation\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Vælg for at lade svarpersonerne tilføje deres egne valgmuligheder, hvis den ønskede indstilling ikke er tilgængelig på rullelisten. Brugerdefinerede valg gemmes kun midlertidigt i den aktuelle browsersession."

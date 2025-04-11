@@ -1,13 +1,15 @@
 <template>
-  <div class="svc-tabbed-menu" ref="container">
-    <template v-for="action in model.renderedActions" :key="action.id">
-      <svc-tabbed-menu-item-wrapper
+  <div class="svc-tabbed-menu" ref="container" role="tablist">
+    <template v-for="action in model.renderedActions" :key="action.renderedId">
+      <SvComponent
+        :is="'svc-tabbed-menu-item-wrapper'"
         :item="action"
-      ></svc-tabbed-menu-item-wrapper>
+      ></SvComponent>
     </template>
   </div>
 </template>
 <script setup lang="ts">
+import { SvComponent } from "survey-vue3-ui";
 import { ResponsivityManager } from "survey-core";
 import type { TabbedMenuContainer } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
@@ -17,13 +19,10 @@ let responsivityManager: ResponsivityManager = undefined as any;
 const container = ref();
 useBase(() => props.model);
 onMounted(() => {
-  responsivityManager = new ResponsivityManager(
-    container.value,
-    props.model,
-    ".svc-tabbed-menu-item-container:not(.sv-dots)>.sv-action__content"
-  );
+  responsivityManager = new ResponsivityManager(container.value, props.model);
 });
 onUnmounted(() => {
   responsivityManager.dispose();
+  responsivityManager = undefined as any;
 });
 </script>

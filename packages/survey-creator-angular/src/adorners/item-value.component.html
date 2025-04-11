@@ -1,19 +1,20 @@
 <ng-template #template>
   <div class="svc-item-value-wrapper" (pointerdown)="adorner.onPointerDown($event)"
     [attr.data-sv-drop-target-item-value]="adorner.isDraggable ? item.value : null"
-    [ngClass]="{'svc-item-value--new': adorner.isNew, 'svc-item-value--dragging': adorner.isDragging, 'svc-item-value--ghost': adorner.isDragDropGhost, 'svc-item-value--movedown': adorner.isDragDropMoveDown, 'svc-item-value--moveup': adorner.isDragDropMoveUp}">
+    [ngClass]="{'svc-item-value--new': adorner.isNew, 'svc-item-value--dragging': adorner.isDragging, 'svc-item-value--ghost': adorner.isDragDropGhost, 'svc-item-value--movedown': adorner.isDragDropMoveDown, 'svc-item-value--moveup': adorner.isDragDropMoveUp}"
+    #container>
     <div class="svc-item-value__ghost"></div>
     <div class="svc-item-value-controls">
       <span *ngIf="adorner.isDraggable" class="svc-item-value-controls__button svc-item-value-controls__drag">
-        <svg class="svc-item-value-controls__drag-icon" [iconName]="'icon-drag-area-indicator'" [size]="24"
+        <svg class="svc-item-value-controls__drag-icon" [iconName]="'icon-drag-24x24'" [size]="'auto'"
           [attr.title]="adorner.dragTooltip" sv-ng-svg-icon></svg>
       </span>
       <span *ngIf="adorner.allowAdd" class="svc-item-value-controls__button svc-item-value-controls__add" [key2click]
-        (click)="adorner.add(adorner)" [attr.aria-label]="undefined"><svg [iconName]="'icon-add_16x16'" [size]="16"
+        (click)="adorner.add(adorner)" [attr.aria-label]="undefined"><svg [iconName]="'icon-add_16x16'" [size]="'auto'"
           [attr.title]="undefined" sv-ng-svg-icon></svg></span>
       <span *ngIf="adorner.allowRemove" class="svc-item-value-controls__button svc-item-value-controls__remove"
         [key2click] (click)="adorner.remove(adorner)" (blur)="onBlur($event)" [attr.aria-label]="undefined"><svg
-          [iconName]="'icon-remove_16x16'" [size]="16" [attr.title]="undefined" sv-ng-svg-icon></svg></span>
+          [iconName]="'icon-remove_16x16'" [size]="'auto'" [attr.title]="undefined" sv-ng-svg-icon></svg></span>
     </div>
 
     <div class="svc-item-value__item" (click)="adorner.select(adorner, $event)">

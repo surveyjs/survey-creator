@@ -1,7 +1,7 @@
 <ng-template #template>
   <div role="button" class="svc-logic-tab__content-action svc-btn"
         (click)="onClick($event)" [key2click] [class.svc-logic-tab__content-action--disabled]="model.enabled !== undefined && !model.enabled">
-        <span class="svc-text svc-text--normal svc-text--bold">
+        <span class="svc-btn__text">
           {{model.title}}
         </span>
   </div>

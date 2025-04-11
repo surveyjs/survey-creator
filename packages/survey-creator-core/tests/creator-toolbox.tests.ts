@@ -1,4 +1,4 @@
-import { SurveyModel, QuestionTextModel, QuestionRatingModel, CustomWidgetCollection, Serializer, SurveyElement } from "survey-core";
+import { SurveyModel, QuestionTextModel, QuestionRatingModel, CustomWidgetCollection, Serializer, SurveyElement, Action, settings as surveySettings, PopupDropdownViewModel } from "survey-core";
 import { ToolboxToolViewModel } from "../src/components/toolbox/toolbox-tool";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
@@ -30,7 +30,7 @@ test("Reason of question Added from toolbox, onclicking add question button, on 
   expect(reason[4]).toEqual("ELEMENT_COPIED");
   expect(reason[5]).toEqual("ELEMENT_COPIED");
 
-  const toolboxViwer = new ToolboxToolViewModel(creator.toolbox.items[0], creator);
+  const toolboxViwer = new ToolboxToolViewModel(creator.toolbox.items[0], creator, creator.toolbox);
   toolboxViwer.click({});
   expect(reason).toHaveLength(7);
   expect(reason[6]).toEqual("ADDED_FROM_TOOLBOX");
@@ -43,7 +43,7 @@ test("Reason of question Added from toolbox, onclicking add question button, on 
   expect(reason).toHaveLength(9);
   expect(reason[8]).toEqual("ELEMENT_CONVERTED");
 });
-test("Click on toolbox and cancel survey.lazyRendering", (): any => {
+test("Click on toolbox and cancel survey.lazyRenderEnabled", (): any => {
   const creator = new CreatorTester();
   expect(creator.survey.isLazyRendering).toEqual(true);
   creator.clickToolboxItem({ type: "text" });
@@ -51,6 +51,7 @@ test("Click on toolbox and cancel survey.lazyRendering", (): any => {
 });
 test("Click on toolbox and insert into correct index", (): any => {
   const creator = new CreatorTester();
+  creator.addNewQuestionLast = false;
   creator.JSON = {
     elements: [
       { type: "text", name: "question1" },
@@ -61,6 +62,20 @@ test("Click on toolbox and insert into correct index", (): any => {
   creator.clickToolboxItem({ type: "text" });
   expect(creator.selectedElementName).toEqual("question3");
   expect(creator.survey.currentPage.elements[1].name).toEqual("question3");
+});
+test("Try to use name property from JSON", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "question1" },
+      { type: "text", name: "question2" }
+    ]
+  };
+  creator.selectElement(creator.survey.getQuestionByName("question1"));
+  creator.clickToolboxItem({ type: "text", name: "text1" });
+  expect(creator.selectedElementName).toEqual("text1");
+  creator.clickToolboxItem({ type: "text", name: "text1" });
+  expect(creator.selectedElementName).toEqual("question3");
 });
 test("Convert checkbox into rating", (): any => {
   const creator = new CreatorTester();
@@ -94,6 +109,7 @@ test("Add question based on json in toolbox", (): any => {
   delete toolboxItem.json.placeholder;
 });
 test("Has one item type in convertTo", (): any => {
+  surveySettings.animationEnabled = false;
   CustomWidgetCollection.Instance.add({
     name: "text",
     title: "Single-Line Input",
@@ -120,7 +136,8 @@ test("Has one item type in convertTo", (): any => {
   const items = questionModel.getConvertToTypesActions();
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
-  popup.toggleVisibility();
+  const popupViewModel = new PopupDropdownViewModel(popup);
+  popup.show();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   counter = 0;
@@ -207,6 +224,7 @@ test("Add-remove toolbox items, #5067", (): any => {
   expect(adorner.getConvertToTypesActions()).toHaveLength(0);
 });
 test("Doesn't duplicate custom toolbox items with built-in ones in convertTo", (): any => {
+  surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
   creator.toolbox.addItem({
     name: "country",
@@ -241,7 +259,8 @@ test("Doesn't duplicate custom toolbox items with built-in ones in convertTo", (
 
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
-  popup.toggleVisibility();
+  const popupViewModel = new PopupDropdownViewModel(popup);
+  popup.show();
   const list = popup.contentComponentData.model;
   expect(list).toBeTruthy();
   counter = 0;
@@ -249,4 +268,22 @@ test("Doesn't duplicate custom toolbox items with built-in ones in convertTo", (
     if (item.id === "dropdown") counter++;
   });
   expect(counter).toEqual(1);
+});
+test("Check convertTo action with subitems", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  let question = creator.survey.getQuestionByName("q1");
+  expect(question.getType()).toBe("text");
+
+  creator.selectElement(question);
+  const questionModel = new QuestionAdornerViewModel(creator, question, undefined as any);
+
+  const items = questionModel.getConvertToTypesActions();
+  const ratingItem = items.filter(i => i.id == "rating")[0] as Action;
+  expect(ratingItem.hasSubItems).toBeTruthy();
+
+  ratingItem.items[2].action();
+  question = creator.survey.getQuestionByName("q1") as QuestionRatingModel;
+  expect(question.getType()).toBe("rating");
+  expect(question.rateType).toBe("smileys");
 });

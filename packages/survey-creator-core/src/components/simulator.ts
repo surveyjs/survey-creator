@@ -1,9 +1,19 @@
 import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
+import { SurveyCreatorModel } from "../creator-base";
 
-require("./simulator.scss");
+import "./simulator.scss";
 
 export class SurveySimulatorModel extends Base {
-  constructor() {
+  private surveyChanged() {
+    const _this = this;
+    this.survey.onOpenDropdownMenu.add((_, options) => {
+      if (this.surveyProvider.isTouch) return;
+      const device = simulatorDevices[_this.activeDevice];
+      options.menuType = device.deviceType === "desktop" ? "dropdown" : (device.deviceType == "tablet" ? "popup" : "overlay");
+    });
+  }
+
+  constructor(private surveyProvider: SurveyCreatorModel) {
     super();
     // if (!!_toolbarHolder) {
     //   this.simulatorOptions.survey = this._toolbarHolder.koSurvey;
@@ -37,7 +47,9 @@ export class SurveySimulatorModel extends Base {
   }
 
   @property({ defaultValue: true }) landscape: boolean;
-  @property() survey: SurveyModel;
+  @property({
+    onSet: (newVal: SurveyModel, target: SurveySimulatorModel) => { target.surveyChanged(); }
+  }) survey: SurveyModel;
   @property({ defaultValue: "desktop" }) device: string;
   @property({ defaultValue: "l" }) orientation: string;
   @property({ defaultValue: true }) considerDPI: boolean;
@@ -158,7 +170,18 @@ export class SurveySimulatorModel extends Base {
 }
 
 export var DEFAULT_MONITOR_DPI = (typeof window !== "undefined" ? window.devicePixelRatio : 1) * 96;
-export var simulatorDevices = {
+export var simulatorDevices: {
+  [index: string]: {
+    cssPixelRatio?: number,
+    ppi?: number,
+    width?: number,
+    height?: number,
+    deviceType: string,
+    title: string,
+    cssClass?: string,
+    visibleIndex?: number,
+  },
+} = {
   desktop: {
     deviceType: "desktop",
     title: "Desktop",
@@ -349,13 +372,13 @@ export var simulatorDevices = {
   //   title: "Windows 10 Phone",
   //   cssClass: "svd-simulator-win10phone",
   // },
-  msSurface: {
+  microsoftSurface: {
     cssPixelRatio: 1,
     ppi: 148,
     width: 768,
     height: 1366,
     deviceType: "tablet",
-    title: "MS Surface",
+    title: "Microsoft Surface",
     cssClass: "svd-simulator-mssurface",
   },
   genericPhone: {

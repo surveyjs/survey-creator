@@ -1,4 +1,5 @@
 import { defaultActionBarCss } from "survey-core";
+import { listComponentCss } from "../list-theme";
 
 export var logicCss = {
   root: "",
@@ -23,6 +24,8 @@ export var logicCss = {
     edit: ""
   },
   panel: {
+    enter: "sl-element-wrapper--enter",
+    leave: "sl-element-wrapper--leave",
     title: "",
     titleExpandable: "",
     titleOnExpand: "",
@@ -33,7 +36,7 @@ export var logicCss = {
     icon: "",
     iconExpanded: "",
     footer: "sl-panel__footer",
-    requiredText: "sl-panel__required-text"
+    requiredMark: "sl-panel__required-text"
   },
   paneldynamic: {
     mainRoot: "",
@@ -52,10 +55,13 @@ export var logicCss = {
     progressBar: "",
     progressText: "",
     separator: "sv-hidden",
-    panelWrapper: "",
+    panelWrapper: "sl-panel-wrapper",
+    content: "sl-paneldynamic__content",
     panelsContainer: "",
-    panelWrapperList: "",
-    panelWrapperInRow: "sl-panel-wrapper--in-row"
+    panelWrapperList: "sl-panel-wrapper--list",
+    panelWrapperInRow: "sl-panel-wrapper--in-row",
+    panelWrapperEnter: "sl-panel-wrapper--enter",
+    panelWrapperLeave: "sl-panel-wrapper--leave"
   },
   progress: "",
   progressBar: "",
@@ -69,6 +75,9 @@ export var logicCss = {
   pageTitle: "",
   pageDescription: "",
   row: "sl-row",
+  rowEnter: "sl-row--enter",
+  rowLeave: "sl-row--leave",
+  rowDelayedEnter: "sl-row--delayed-enter",
   rowMultiple: "sl-row--multiple",
   question: {
     mainRoot: "sl-question",
@@ -83,8 +92,10 @@ export var logicCss = {
     titleLeftRoot: "",
     titleOnAnswer: "",
     titleOnError: "",
+    enter: "sl-element-wrapper--enter",
+    leave: "sl-element-wrapper--leave",
     title: "sl-question__title",
-    requiredText: "sl-question__required-text",
+    requiredMark: "sl-question__required-text",
     number: "",
     description: "",
     descriptionUnderInput: "",
@@ -95,7 +106,8 @@ export var logicCss = {
     footer: "",
     formGroup: "",
     hasError: "",
-    disabled: ""
+    disabled: "",
+    confirmDialog: "sl-popup--confirm sv-popup--confirm svc-creator-popup"
   },
   image: { root: "" },
   error: {
@@ -171,7 +183,7 @@ export var logicCss = {
   },
   dropdown: {
     root: "",
-    popup: "",
+    popup: "svc-creator-popup",
     small: "",
     control: "sl-dropdown",
     selectWrapper: "",
@@ -245,7 +257,9 @@ export var logicCss = {
     cell: "sl-table__cell",
     headerCell: "sl-table__cell st-table__cell--header",
     button: "sl-btn",
-    detailRow: "sl-table__row st-table__row--detail",
+    detailRow: "sl-table__row sl-table__row--detail st-table__row--detail",
+    rowEnter: "sl-table__row--enter",
+    rowLeave: "sl-table__row--leave",
     detailButton: "sl-table__cell--detail-button",
     detailButtonExpanded: "sl-table__cell--detail-button--expanded",
     detailIcon: "sl-detail-panel__icon",
@@ -316,10 +330,7 @@ export var logicCss = {
       buttonCollapsed: ""
     }
   },
-  list: {
-    root: "sv-list__container sl-list",
-    itemBody: "sv-list__item-body sd-list__item-body sl-list__item-body"
-  },
+  list: JSON.parse(JSON.stringify(listComponentCss)),
   embeddedsurvey: {
     mainRoot: "sl-embedded-survey"
   },

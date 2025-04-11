@@ -6,13 +6,13 @@ import {
   JsonEditorBaseModel,
   TabJsonEditorBasePlugin
 } from "./json-editor-plugin";
-require("./json-editor-textarea.scss");
+import "./json-editor-textarea.scss";
 
 export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   @property({ defaultValue: "", onSet: (_, target) => target.onTextChanged() })
   protected _text: string;
   @propertyArray() private _errors: any[];
-  public ariaLabel: string = getLocString("ed.jsonEditor");
+  public ariaLabel: string = getLocString("tabs.json");
   public textElement: HTMLTextAreaElement;
   @property({ defaultValue: false }) canShowErrors: boolean;
 
@@ -30,7 +30,7 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
       textareaElement.value = textareaElement.value.substring(0, start) +
         "\t" + textareaElement.value.substring(end);
       textareaElement.selectionStart =
-      textareaElement.selectionEnd = start + 1;
+        textareaElement.selectionEnd = start + 1;
       e.stopPropagation();
     }
     return true;
@@ -45,7 +45,7 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
     this.isProcessingImmediately = false;
   }
   protected gotoError(at: number, row: number, column: number): void {
-    if(!this.textElement) return;
+    if (!this.textElement) return;
     const el = this.textElement;
     el.selectionStart = at;
     el.selectionEnd = at;
@@ -86,16 +86,10 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
 
 export class TabJsonEditorTextareaPlugin
   extends TabJsonEditorBasePlugin
-  implements ICreatorPlugin
-{
+  implements ICreatorPlugin {
   constructor(creator: SurveyCreatorModel) {
     super(creator);
-    creator.addPluginTab(
-      "editor",
-      this,
-      getLocString("ed.jsonEditor"),
-      "svc-tab-json-editor-textarea"
-    );
+    creator.addTab({ name: "json", plugin: this, iconName: "icon-codeeditor-24x24", componentName: "svc-tab-json-editor-textarea" });
   }
   protected createModel(
     creator: SurveyCreatorModel

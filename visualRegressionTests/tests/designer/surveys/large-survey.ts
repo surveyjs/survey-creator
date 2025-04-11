@@ -613,7 +613,7 @@ export const largeSurvey = {
                 }
               ],
               "panelCount": 1,
-              "panelAddText": "Add marriage"
+              "addPanelText": "Add marriage"
             },
             {
               "type": "panel",
@@ -832,7 +832,7 @@ export const largeSurvey = {
             }
           ],
           "panelCount": 1,
-          "panelAddText": "Add Family Member"
+          "addPanelText": "Add Family Member"
         },
         {
           "type": "comment",
@@ -1350,7 +1350,7 @@ export const largeSurvey = {
             "Do relatives/friends worry or complain about your alcohol consumption?",
             "Have you been physically, sexually, or emotionally abused?"
           ],
-          "isAllRowRequired": true
+          "eachRowRequired": true
         },
         {
           "type": "radiogroup",
@@ -1593,7 +1593,7 @@ export const largeSurvey = {
             "Using Toilet",
             "Housekeeping"
           ],
-          "isAllRowRequired": true
+          "eachRowRequired": true
         },
         {
           "type": "radiogroup",
@@ -1684,7 +1684,7 @@ export const largeSurvey = {
       "title": "Educational Needs"
     }
   ],
-  "sendResultOnPageNext": true,
+  "partialSendEnabled": true,
   "showQuestionNumbers": "off",
   "questionErrorLocation": "bottom",
   "showProgressBar": "top"

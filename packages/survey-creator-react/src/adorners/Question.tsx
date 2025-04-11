@@ -1,19 +1,21 @@
 import { QuestionAdornerViewModel, toggleHovered } from "survey-creator-core";
-import React from "react";
+import * as React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
-import { Base, Question } from "survey-core";
+import { Base, PanelModel, Question, SurveyElementCore } from "survey-core";
 import {
   SurveyActionBar,
   ReactElementFactory,
   SurveyQuestion,
   attachKey2click,
   SvgIcon,
-  Popup
+  Popup,
+  SurveyElementBase,
+  TitleElement
 } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
 
 export interface QuestionAdornerComponentProps {
-  element: JSX.Element;
+  element: React.JSX.Element;
   question: Question;
   componentData: any;
 }
@@ -24,12 +26,16 @@ export class QuestionAdornerComponent extends CreatorModelElement<
 > {
   private modelValue: QuestionAdornerViewModel;
   protected rootRef: React.RefObject<HTMLDivElement>;
-
-  protected createModel(props: any): void {
-    if (this.modelValue) {
-      this.modelValue.dispose();
+  constructor(props: QuestionAdornerComponentProps) {
+    super(props);
+    this.rootRef = React.createRef();
+  }
+  protected createModel(props: QuestionAdornerComponentProps): void {
+    if (this.model) {
+      this.model.attachToUI(props.question, this.rootRef.current);
+    } else {
+      this.modelValue = this.createQuestionViewModel(props);
     }
-    this.modelValue = this.createQuestionViewModel(props);
   }
   protected createQuestionViewModel(props: any): QuestionAdornerViewModel {
     return new QuestionAdornerViewModel(
@@ -47,22 +53,22 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
-  protected canRender(): boolean {
-    return super.canRender() && !this.model.isDragged;
-  }
 
-  renderElement(): JSX.Element {
+  renderElement(): React.JSX.Element {
     const allowInteractions = this.model.element
       .isInteractiveDesignElement;
+    const titleForCollapsedState = this.renderQuestionTitle();
     const content = this.renderContent(allowInteractions);
     return (
       <div
         ref={this.rootRef}
         data-sv-drop-target-survey-element={this.model.element.name || null}
-        className={"svc-question__adorner" + this.model.rootCss()}
-        onMouseOut={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
+        className={this.model.rootCss()}
+        onDoubleClick={e => { allowInteractions && this.model.dblclick(e.nativeEvent); e.stopPropagation(); }}
+        onMouseLeave={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
         onMouseOver={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
       >
+        {titleForCollapsedState}
         {content}
       </div>
     );
@@ -70,33 +76,58 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   protected disableTabStop() {
     return true;
   }
-  protected renderContent(allowInteractions: boolean): JSX.Element {
-    var content = this.renderElementContent();
+  protected renderContent(allowInteractions: boolean): React.JSX.Element {
+    var content = this.model.needToRenderContent ? this.renderElementContent() : null;
     //if (!allowInteractions) return <>{content}{this.renderFooter()}</>;
     return attachKey2click(
       <div
         className={this.model.css()}
         onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
       >
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--left"></div>
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--right"></div>
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
+        <div className="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
         {allowInteractions ? this.renderHeader() : null}
         {content}
-        {this.renderFooter()}
+        {this.model.needToRenderContent ? this.renderFooter() : null}
       </div>,
       undefined, { disableTabStop: this.disableTabStop() });
   }
-  protected renderHeader(): JSX.Element {
+  protected renderHeader(): React.JSX.Element {
     return ReactElementFactory.Instance.createElement("svc-question-header", { model: this.model });
   }
-  protected renderFooter(): JSX.Element {
+  protected renderFooter(): React.JSX.Element {
     const allowInteractions = this.model.element
       .isInteractiveDesignElement;
     return allowInteractions ? ReactElementFactory.Instance.createElement("svc-question-footer", { className: "svc-question__content-actions", model: this.model }) : null;
   }
-  protected renderCarryForwardBanner(): JSX.Element {
+  protected renderCarryForwardBanner(): React.JSX.Element {
     if (!this.model.isBannerShowing) return null;
     return ReactElementFactory.Instance.createElement("svc-question-banner", this.model.createBannerParams());
   }
-  protected renderElementContent(): JSX.Element {
+
+  protected renderQuestionTitle(): React.JSX.Element {
+    if (!this.model.showHiddenTitle) return null;
+    const element = this.model.element as Question | PanelModel;
+    return (
+      <div
+        ref={node => node && (!this.model.renderedCollapsed ?
+          node.setAttribute("inert", "") : node.removeAttribute("inert")
+        )} className={this.model.cssCollapsedHiddenHeader} >
+        {(
+          element.hasTitle ?
+            <TitleElement element={element}></TitleElement> :
+            <div
+              className={this.model.cssCollapsedHiddenTitle} >
+              <span className="svc-fake-title">{element.name}</span>
+            </div>
+        )}
+      </div>
+    );
+  }
+
+  protected renderElementContent(): React.JSX.Element {
     return (
       <>
         {this.props.element}
@@ -105,7 +136,11 @@ export class QuestionAdornerComponent extends CreatorModelElement<
       </>
     );
   }
-  renderElementPlaceholder(): JSX.Element {
+  componentDidMount() {
+    super.componentDidMount();
+    this.model.attachToUI(this.props.question, this.rootRef.current);
+  }
+  renderElementPlaceholder(): React.JSX.Element {
     if (!this.model.isEmptyElement) {
       return null;
     }
@@ -118,6 +153,10 @@ export class QuestionAdornerComponent extends CreatorModelElement<
         </div>
       </div>
     );
+  }
+  componentWillUnmount(): void {
+    super.componentWillUnmount();
+    this.model.detachFromUI();
   }
 }
 
