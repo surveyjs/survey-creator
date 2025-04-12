@@ -259,6 +259,7 @@ test("Logic popup with boolean question", async (t) => {
       .click(Selector(".sd-boolean--checked"));
     await takeElementScreenshot("pg-logic-popup-boolean.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
     await t.click(Selector("button").withText("Cancel").filterVisible());
+    await t.wait(1000);
     await t.click(Selector(".spg-panel__content div[data-name='enableIf'] button[title='Edit']"));
     await takeElementScreenshot("pg-logic-popup-rating.png", Selector(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), t, comparer);
   });

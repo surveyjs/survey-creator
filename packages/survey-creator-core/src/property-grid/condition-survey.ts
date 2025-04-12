@@ -983,6 +983,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       assignDefaultClasses(cssClasses, question.getType());
       cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
       cssClasses.error.root = "svc-logic-operator__error";
+      if (question.getType() == "boolean" || question.getType() == "rating") {
+        cssClasses.root = (cssClasses.root as string).replace("sd-scrollable-container", "");
+      }
     }
     if (question.name === "panel") {
       cssClasses.root += " svc-logic-paneldynamic";
