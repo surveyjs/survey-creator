@@ -10,6 +10,18 @@
     margin: 0;
     height: calcSize(1);
   }
+  .spg-paneldynamic__footer {
+    .spg-paneldynamic__separator {
+      display: none;
+    }
+  }
+  .spg-paneldynamic__buttons-container {
+    display: flex;
+    justify-content: center;
+    .spg-action-bar {
+      margin: 0;
+    }
+  }
 
   .spg-panel__footer {
     justify-content: center;
@@ -55,7 +67,6 @@
     overflow: hidden;
   }
 
-
   //2 level nested
   .spg-panel-by-page,
   .spg-nested-panel {
@@ -73,15 +84,15 @@
     }
   }
 
-  .spg-panel-by-page__content>.spg-row:first-of-type,
-  .spg-nested-panel__content>.spg-row:first-of-type {
+  .spg-panel-by-page__content > .spg-row:first-of-type,
+  .spg-nested-panel__content > .spg-row:first-of-type {
     margin-top: 0;
   }
 
   .spg-panel-by-page.spg-panel--hidden-border,
-  .spg-row:last-of-type>div>.spg-panel-by-page,
-  .spg-paneldynamic__panel-wrapper>.spg-nested-panel,
-  .spg-row:last-of-type>div>.spg-nested-panel {
+  .spg-row:last-of-type > div > .spg-panel-by-page,
+  .spg-paneldynamic__panel-wrapper > .spg-nested-panel,
+  .spg-row:last-of-type > div > .spg-nested-panel {
     padding-bottom: 0;
 
     &::after {
@@ -92,7 +103,7 @@
   .spg-panel-by-page.spg-panel--padding {
     padding-top: calcSize(2);
     padding-bottom: calcSize(3);
-}
+  }
 
   .spg-theme-group-caption {
     @include ctrDefaultBoldFont;
