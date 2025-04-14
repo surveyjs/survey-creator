@@ -143,7 +143,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this._renderedCollapsed = !val;
   }, () => !this.renderedCollapsed);
   public set renderedCollapsed(val: boolean) {
-    if (this.animationAllowed && val !== this.renderedCollapsed) this.expandCollapseAnimationRunning = true;
+    if (this.animationAllowed && val !== this.renderedCollapsed)this.expandCollapseAnimationRunning = true;
     this.animationCollapsed.sync(!val);
   }
   public get renderedCollapsed(): boolean {
@@ -203,7 +203,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   public dblclick(event) {
     if (this.allowExpandCollapseByDblClick(event.target)) {
-      if (this.allowExpandCollapse) this.collapsed = !this.collapsed;
+      if (this.allowExpandCollapse)this.collapsed = !this.collapsed;
     }
     event.stopPropagation();
   }
@@ -213,7 +213,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.updateActionsProperties();
     }
   };
-  public surveyElement: T
+  public surveyElement: T;
   get element() {
     return this.surveyElement;
   }

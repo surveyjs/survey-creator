@@ -28,7 +28,7 @@ export class HeaderModel extends Base implements IHeader {
 
   fromJSON(json: any, options?: ILoadFromJSONOptions): void {
     super.fromJSON(json, options);
-    if (!!json["backgroundImageOpacity"]) this.backgroundImageOpacity = json["backgroundImageOpacity"] * 100;
+    if (!!json["backgroundImageOpacity"])this.backgroundImageOpacity = json["backgroundImageOpacity"] * 100;
   }
 
   public setCssVariables(cssVariables?: { [index: string]: string }) {
@@ -274,7 +274,7 @@ Serializer.addClass(
       visibleIf: (obj) => obj.headerView === "advanced",
       defaultFunc: () => {
         const defaultValue = Serializer.getProperty("cover", "backgroundImageOpacity").defaultValue;
-        if(defaultValue !== undefined && defaultValue !== null) {
+        if (defaultValue !== undefined && defaultValue !== null) {
           return defaultValue * 100;
         }
         return defaultValue;

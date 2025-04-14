@@ -948,8 +948,7 @@ test("change devices selector dropdown items order", (): any => {
     expect(dropdownDeviceActions[2].visibleIndex).toBe(Number.MAX_VALUE);
     expect(dropdownDeviceActions[8].id).toBe("androidPhone");
     expect(dropdownDeviceActions[8].visibleIndex).toBe(Number.MAX_VALUE);
-  }
-  finally {
+  } finally {
     simulatorDevices.microsoftSurface.visibleIndex = undefined;
     simulatorDevices.androidTablet.visibleIndex = undefined;
   }

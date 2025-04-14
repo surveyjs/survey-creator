@@ -13,7 +13,7 @@ export class DefaultValueEditor extends PropertyEditorSetupValue {
     super(options, false);
     this.setupSurvey();
     const oldValue = this.getQuestionValue();
-    if(oldValue !== undefined) {
+    if (oldValue !== undefined) {
       this.question.value = oldValue;
     }
   }

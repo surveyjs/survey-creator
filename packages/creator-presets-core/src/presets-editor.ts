@@ -74,7 +74,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.setPropertyValue("activeTab", val);
   }
   public setActiveTab(val: string): boolean {
-    if(this.activeTab === "preset" && !this.model.validate(true, true)) return false;
+    if (this.activeTab === "preset" && !this.model.validate(true, true)) return false;
     this.activeTab = val;
     return true;
   }
@@ -92,7 +92,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     return JSON.stringify(this.json, null, 2);
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any): void {
-    if(name === "activeTab" && oldValue === "preset") {
+    if (name === "activeTab" && oldValue === "preset") {
       this.applyFromSurveyModel();
     }
   }
@@ -121,7 +121,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     });
     const nextButton = model.navigationBar.getActionById("sv-nav-next");
     nextButton.action = (): void => {
-      if(!model.isLastPage) {
+      if (!model.isLastPage) {
         model.nextPageUIClick();
       } else {
         model.currentPageNo = 0;
@@ -135,13 +135,13 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       editablePresets.forEach(item => item.setupOnCurrentPage(model, this.creator));
     });
     model.onValueChanging.add((sender, options) => {
-      if(options.name === "languages_creator") {
+      if (options.name === "languages_creator") {
         this.applyFromSurveyModel(true);
       }
     });
     model.onValueChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnValueChanged(model, options.name));
-      if(options.name === "languages_creator") {
+      if (options.name === "languages_creator") {
         editorLocalization.currentLocale = options.value;
         editablePresets.forEach(item => item.onLocaleChanged(model, json[item.path], this.creator));
       }
@@ -163,7 +163,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.showQuestionNumbers = false;
     model.width = "900px";
     model.onGetQuestionTitleActions.add((sender, options) => {
-      if(options.question.name === "json") {
+      if (options.question.name === "json") {
         const question = options.question;
         options.titleActions.push({
           id: "json_copy",
@@ -241,8 +241,8 @@ preset.apply(creator);</div></pre></code></div>
     this.resultModelValue.getQuestionByName("json").value = this.jsonText;
   }
   public applyFromSurveyModel(reCreateCretor: boolean = true): boolean {
-    if(!this.validateEditableModel(this.model)) return false;
-    if(reCreateCretor) {
+    if (!this.validateEditableModel(this.model)) return false;
+    if (reCreateCretor) {
       const json = this.creator?.JSON || {};
       this.creatorValue = this.createCreator({});
       this.creator.JSON = json;
@@ -256,7 +256,7 @@ preset.apply(creator);</div></pre></code></div>
     const res: ICreatorPresetData = {};
     this.model.editablePresets.forEach(preset => {
       const val = preset.getJsonValue(this.model, this.creator);
-      if(!!val) {
+      if (!!val) {
         res[preset.path] = val;
       }
     });
@@ -268,21 +268,21 @@ preset.apply(creator);</div></pre></code></div>
     this.model.editablePresets.forEach(preset => {
       preset.setJsonLocalizationStrings(this.model, locStrs);
     });
-    if(this.json && !!this.json.localization) {
+    if (this.json && !!this.json.localization) {
       res.localization = JSON.parse(JSON.stringify(this.json.localization));
     }
     const locale = this.getLocale();
-    if(Object.keys(locStrs).length > 0) {
-      if(!res.localization) {
+    if (Object.keys(locStrs).length > 0) {
+      if (!res.localization) {
         res.localization = {};
       }
       res.localization[locale] = locStrs;
     } else {
-      if(res.localization) {
-        if(res.localization[locale]) {
+      if (res.localization) {
+        if (res.localization[locale]) {
           delete res.localization[locale];
         }
-        if(Object.keys(res.localization).length === 0) {
+        if (Object.keys(res.localization).length === 0) {
           delete res.localization;
         }
       }
@@ -297,27 +297,27 @@ preset.apply(creator);</div></pre></code></div>
     });
   }
   private validateEditableModel(model: SurveyModel): boolean {
-    if(!model.validate(true, true)) return false;
+    if (!model.validate(true, true)) return false;
     const editablePresets = model.editablePresets;
-    for(let i = 0; i < editablePresets.length; i ++) {
-      if(!editablePresets[i].validate(model)) return false;
+    for (let i = 0; i < editablePresets.length; i ++) {
+      if (!editablePresets[i].validate(model)) return false;
     }
     return true;
   }
   private createEditableCore(preset: CreatorPreset, fullPath: string): CreatorPresetEditableBase {
-    if(fullPath === "languages") return new CreatorPresetEditableLanguages(preset);
-    if(fullPath === "tabs") return new CreatorPresetEditableTabs(preset);
-    if(fullPath === "toolbox") return new CreatorPresetEditableToolboxConfigurator(preset);
-    if(fullPath === "propertyGrid") return new CreatorEditablePresetPropertyGrid(preset);
-    if(fullPath === "propertyGrid_definition") return new CreatorPresetEditablePropertyGridDefinition(preset);
+    if (fullPath === "languages") return new CreatorPresetEditableLanguages(preset);
+    if (fullPath === "tabs") return new CreatorPresetEditableTabs(preset);
+    if (fullPath === "toolbox") return new CreatorPresetEditableToolboxConfigurator(preset);
+    if (fullPath === "propertyGrid") return new CreatorEditablePresetPropertyGrid(preset);
+    if (fullPath === "propertyGrid_definition") return new CreatorPresetEditablePropertyGridDefinition(preset);
     return undefined;
   }
   private createEditable(preset: CreatorPreset, parent: CreatorPresetEditableBase, fullPath: string): CreatorPresetEditableBase {
     const editable = this.createEditableCore(preset, fullPath);
-    if(editable) {
+    if (editable) {
       preset.children.forEach(item => {
         const child = this.createEditable(<CreatorPreset>item, editable, fullPath + "_" + item.getPath());
-        if(child) {
+        if (child) {
           editable.children.push(child);
           child.parent = editable;
         }

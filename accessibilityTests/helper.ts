@@ -21,7 +21,7 @@ export async function setJSON(page: Page, json?: any) {
 export async function updateCreatorModel(page: Page, options?: any, json?: any) {
   await page.evaluate(([options, json]) => {
     (window as any).updateCreatorModel(options, json);
-    if(!!options) {
+    if (!!options) {
       Object.keys(options).forEach(key => {
         (window as any).creator[key] = options[key];
       });

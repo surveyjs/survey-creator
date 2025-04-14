@@ -43,15 +43,15 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     const creatorLocale = model.getValue(this.creatorLocaleName);
     const useEnglishNames = model.getValue(this.surveyUseEnglishNames) === true;
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
-    if(!creatorLocale && question.isAllSelected && !useEnglishNames) return undefined;
+    if (!creatorLocale && question.isAllSelected && !useEnglishNames) return undefined;
     const res: any = {};
-    if(creatorLocale) {
+    if (creatorLocale) {
       res.creator = creatorLocale;
     }
-    if(useEnglishNames) {
+    if (useEnglishNames) {
       res.useEnglishNames = true;
     }
-    if(!question.isAllSelected && Array.isArray(question.value)) {
+    if (!question.isAllSelected && Array.isArray(question.value)) {
       res.surveyLocales = [];
       question.value.forEach(val => res.surveyLocales.push(val));
     }
@@ -64,14 +64,14 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
     this.updateLocaleNames(model);
     const question = <QuestionCheckboxModel>model.getQuestionByName(this.surveyLocalesName);
     const locales = json.surveyLocales;
-    if(Array.isArray(locales) && locales.length > 0) {
+    if (Array.isArray(locales) && locales.length > 0) {
       question.valule = locales;
     } else {
       question.selectAll();
     }
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
-    if(name === this.surveyUseEnglishNames) {
+    if (name === this.surveyUseEnglishNames) {
       this.updateLocaleNames(model);
     }
   }
@@ -88,13 +88,13 @@ export class CreatorPresetEditableLanguages extends CreatorPresetEditableBase {
   private getLocaleItemValues(locales: Array<string>, addEnLocale: boolean): Array<ItemValue> {
     const res = [];
     locales.forEach(locale => {
-      if(!locale || locale === "en") return;
+      if (!locale || locale === "en") return;
       const name = editorLocalization.getLocaleName(locale);
-      if(!!name && name !== locale) {
+      if (!!name && name !== locale) {
         res.push(new ItemValue(locale, name));
       }
     });
-    if(addEnLocale) {
+    if (addEnLocale) {
       res.unshift(new ItemValue("en", editorLocalization.getLocaleName("en")));
     }
     return res;

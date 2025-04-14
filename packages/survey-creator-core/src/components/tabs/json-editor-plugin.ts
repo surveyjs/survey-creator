@@ -54,7 +54,7 @@ export abstract class JsonEditorBaseModel extends Base {
         items: [],
         onSelectionChanged: (action: Action) => {
           const error: SurveyTextWorkerError = action.data.error;
-          if (!!error) this.gotoError(error.at, error.rowAt, error.columnAt);
+          if (!!error)this.gotoError(error.at, error.rowAt, error.columnAt);
         },
         allowSelection: false,
         searchEnabled: false

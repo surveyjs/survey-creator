@@ -74,7 +74,7 @@ export class ToolboxToolViewModel extends Base {
     this.hidePopup();
     this.toolboxItem.isPressed = false;
     document.removeEventListener("pointerup", this.onPointerUp);
-  }
+  };
 
   private startDragToolboxItem = (pointerDownEvent, currentTarget) => {
     var json = this.creator.getJSONForNewElement(this.item.json);

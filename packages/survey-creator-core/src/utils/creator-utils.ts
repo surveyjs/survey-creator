@@ -83,15 +83,14 @@ export function getNextValue(prefix: string, values: any[], isText?: boolean): s
     do {
       if (isNumber) {
         newValue = ++num;
-      }
-      else {
+      } else {
         var newNum = (num++).toString();
-        while (numStr.length > newNum.length) {
+        while(numStr.length > newNum.length) {
           newNum = "0" + newNum;
         }
         newValue = str.substring(0, numStrIndex) + newNum + str.substring(numStrIndex + numStr.length);
       }
-    } while (hasValueInArray(values, newValue));
+    } while(hasValueInArray(values, newValue));
     return newValue;
   }
   if (!prefix) {

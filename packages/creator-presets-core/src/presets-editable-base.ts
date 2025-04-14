@@ -15,7 +15,7 @@ export class CreatorPresetEditableBase {
   protected getJsonPath(model: SurveyModel): string { return this.path; }
   public get fullPath() {
     let prefix = this.parent ? this.parent.fullPath : "";
-    if(this.path && prefix) {
+    if (this.path && prefix) {
       prefix += "_";
     }
     return prefix + this.path;
@@ -24,21 +24,21 @@ export class CreatorPresetEditableBase {
   public createPages(): Array<any> {
     const res = [];
     const mainPage = this.createMainPage();
-    if(mainPage) {
+    if (mainPage) {
       res.push(mainPage);
     }
     this.children.forEach(item => {
       const pages = item.createPages();
-      if(Array.isArray(pages)) {
+      if (Array.isArray(pages)) {
         pages.forEach(page => res.push(page));
       }
     });
     return res;
   }
   public validate(model: SurveyModel): boolean {
-    if(!this.validateCore(model)) return false;
-    for(let i = 0; i < this.children.length; i ++) {
-      if(!this.children[i].validate(model)) return false;
+    if (!this.validateCore(model)) return false;
+    for (let i = 0; i < this.children.length; i ++) {
+      if (!this.children[i].validate(model)) return false;
     }
     return true;
   }
@@ -47,13 +47,13 @@ export class CreatorPresetEditableBase {
   }
   protected createMainPage(): any {
     const res = this.createMainPageCore();
-    if(res) {
+    if (res) {
       res.name = this.pageName;
     }
     return res;
   }
   protected getBoolVisibleIf(name: string, isTrue: boolean = true): string { return "{" + name + "}=" + (isTrue ? "true" : "false"); }
-  protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val +"'"; }
+  protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val + "'"; }
   protected getNotEmptyVisibleIf(name: string): string { return "{" + name + "} notempty"; }
   protected createMainPageCore(): any { return undefined; }
   public getJsonValue(model: SurveyModel, creator: SurveyCreatorModel): any {
@@ -63,7 +63,7 @@ export class CreatorPresetEditableBase {
     const res = hasValue ? core : {};
     this.children.forEach(item => {
       const val = item.getJsonValue(model, creator);
-      if(!!val) {
+      if (!!val) {
         hasValue = true;
         res[item.getJsonPath(model)] = val;
       }
@@ -89,7 +89,7 @@ export class CreatorPresetEditableBase {
     });
   }
   public setupOnCurrentPage(model: SurveyModel, creator: SurveyCreatorModel): void {
-    if(model.currentPage.name === this.pageName) {
+    if (model.currentPage.name === this.pageName) {
       this.setupOnCurrentPageCore(model, creator);
     }
     this.children.forEach(item => {
@@ -111,13 +111,13 @@ export class CreatorPresetEditableBase {
   public setupQuestionsValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.setupQuestionsValueCore(model, json, creator);
     this.children.forEach(item => {
-      item.setupQuestionsValue(model, !!json ? json[item.path]: undefined, creator);
+      item.setupQuestionsValue(model, !!json ? json[item.path] : undefined, creator);
     });
   }
   public onLocaleChanged(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.onLocaleChangedCore(model, json, creator);
     this.children.forEach(item => {
-      item.setupQuestionsValue(model, !!json ? json[item.path]: undefined, creator);
+      item.setupQuestionsValue(model, !!json ? json[item.path] : undefined, creator);
     });
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void { }

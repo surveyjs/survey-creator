@@ -12,7 +12,7 @@ import { CreatorModelComponent } from "./creator-model.component";
 export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdornerViewModel> {
   @Input() componentName!: string;
   @Input() componentData!: any;
-  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>
+  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
   public adorner!: QuestionAdornerViewModel;
   protected get creator(): SurveyCreatorModel {
     return this.componentData.data;
@@ -50,7 +50,7 @@ export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdo
   }
   public override ngAfterViewChecked(): void {
     super.ngAfterViewChecked();
-    if(this.adorner && this.container?.nativeElement) {
+    if (this.adorner && this.container?.nativeElement) {
       this.adorner.rootElement = this.container.nativeElement;
     }
   }

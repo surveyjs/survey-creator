@@ -44,11 +44,9 @@ export const imageMimeTypes = "image/png, image/gif, image/jpeg, image/apng, ima
 export function getAcceptedTypesByContentMode(contentMode: string) {
   if (["auto", "image"].indexOf(contentMode) > -1) {
     return imageMimeTypes;
-  }
-  else if (contentMode == "video") {
+  } else if (contentMode == "video") {
     return "video/*";
-  }
-  else {
+  } else {
     return "";
   }
 }

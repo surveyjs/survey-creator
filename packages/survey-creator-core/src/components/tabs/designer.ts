@@ -26,7 +26,7 @@ export class TabDesignerViewModel extends Base {
     "--lbr-spacing-unit": 8,
     "--lbr-corner-radius-unit": 8,
     "--lbr-stroke-unit": 1,
-  }
+  };
 
   @property() newPage: PageModel;
   @property({ defaultValue: false }) showNewPage: boolean;
@@ -368,7 +368,7 @@ export class TabDesignerViewModel extends Base {
   private pagesAnimation = new AnimationGroup(this.getPagesAnimationOptions(), (val) => {
     this._pages = val;
     this._pages.forEach(page => delete page["draggedFrom"]);
-  }, () => this._pages)
+  }, () => this._pages);
 
   private getPagesAnimationOptions(): IAnimationGroupConsumer<PageModel> {
     return {

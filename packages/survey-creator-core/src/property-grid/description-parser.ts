@@ -4,16 +4,16 @@ export class DescriptionMardownParser {
   private static codeRegEx;
   private static linkRegEx;
   public parse(text: string): string {
-    if(!DescriptionMardownParser.boldRegEx) {
+    if (!DescriptionMardownParser.boldRegEx) {
       DescriptionMardownParser.boldRegEx = /\*{2}(.*?)\*{2}/gm;
       DescriptionMardownParser.italicRegEx = /\_(.*?)\_/gm;
       DescriptionMardownParser.codeRegEx = /\`(.*?)\`/gm;
       DescriptionMardownParser.linkRegEx = /\[(.+)\]\(([^ ]+?)( "(.+)")?\)/;
     }
     const createSpan = (text: string, str: string, className: string, chars: string): string => {
-      if(!str) return text;
+      if (!str) return text;
       const index = text.indexOf(str);
-      if(checkIfLink(text, index)) return text;
+      if (checkIfLink(text, index)) return text;
       let innerStr = str.substring(chars.length, str.length);
       innerStr = innerStr.substring(0, innerStr.length - chars.length);
       const newStr = "<span class='" + className + "'>" + innerStr + "</span>";
@@ -21,17 +21,17 @@ export class DescriptionMardownParser {
     };
     const checkIfLink = (text: string, index: number): boolean => {
       let isBracket = false;
-      for(let i = index - 1; i > 0; i --) {
-        if(text[i] === " " || text[i] === "\n") return false;
-        if(text[i] === "]" && isBracket) return true;
+      for (let i = index - 1; i > 0; i --) {
+        if (text[i] === " " || text[i] === "\n") return false;
+        if (text[i] === "]" && isBracket) return true;
         isBracket = text[i] === "(";
       }
       return false;
     };
     const createLink = (text: string, str: string, className: string, chars: string): string => {
-      if(!str) return text;
+      if (!str) return text;
       const index = str.indexOf("](");
-      if(index < 0) return text;
+      if (index < 0) return text;
 
       const contentStr = str.substring(1, index);
       const linkStr = str.substring(index + 2, str.length - 1);
@@ -47,15 +47,15 @@ export class DescriptionMardownParser {
   }
   private replace(re: RegExp, text: string, className: string, chars: string, replaceFunc: (text: string, str: string, className: string, chars: string) => string): string {
     const rArray = text.match(re);
-    if(!Array.isArray(rArray) || rArray.length == 0) return text;
-    for(var i = 0; i < rArray.length; i ++) {
+    if (!Array.isArray(rArray) || rArray.length == 0) return text;
+    for (var i = 0; i < rArray.length; i ++) {
       text = replaceFunc(text, rArray[i], className, chars);
     }
     return text;
   }
   private addLineBreaks(text: string): string {
     const br = "\n";
-    if(text.indexOf(br) < 0) return text;
+    if (text.indexOf(br) < 0) return text;
     const strs = text.split(br);
     return strs.join("<br/>");
   }

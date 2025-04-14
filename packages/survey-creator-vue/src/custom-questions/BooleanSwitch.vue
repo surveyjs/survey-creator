@@ -8,7 +8,7 @@
     :aria-labelledby="question.a11y_input_ariaLabelledBy"
     :aria-invalid="question.a11y_input_ariaInvalid"
     :aria-errormessage="question.a11y_input_ariaErrormessage"
-    @click="question.value = !question.value"
+    @click="renderedValue = !renderedValue"
   >
     <div
       class="spg-boolean-switch__button"
@@ -36,7 +36,7 @@
 </template>
 <script lang="ts" setup>
 import { RendererFactory } from "survey-core";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import {
   useQuestion,
   SvComponent,
@@ -46,6 +46,16 @@ defineOptions({ inheritAttrs: false });
 const props = defineProps<{ question: any }>();
 const root = ref(null);
 useQuestion(props, root);
+
+const renderedValue = computed({
+  get() {
+    return props.question.value;
+  },
+  set(val) {
+    const question = props.question;
+    question.value = val;
+  },
+});
 </script>
 
 <script lang="ts">
