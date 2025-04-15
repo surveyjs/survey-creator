@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.5](https://github.com/surveyjs/survey-creator/compare/v2.0.4...v2.0.5) (2025-04-15)
+
+
+### Bug Fixes
+
+* access global window safely ([#6763](https://github.com/surveyjs/survey-creator/issues/6763)) ([4a63812](https://github.com/surveyjs/survey-creator/commit/4a63812b8207c8290b57f40ed07d5a2c1144322c))
+
 ### [2.0.4](https://github.com/surveyjs/survey-creator/compare/v2.0.3...v2.0.4) (2025-04-08)
 
 ### [2.0.3](https://github.com/surveyjs/survey-creator/compare/v2.0.2...v2.0.3) (2025-04-02)
