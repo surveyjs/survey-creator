@@ -163,6 +163,8 @@
 
 .spg-question__erbox {
   @include ctrDefaultFont;
+  width: 100%;
+  box-sizing: border-box;
   padding: var(--ctr-error-message-padding-top, var(--sjs-spacing-x1)) var(--ctr-error-message-padding-right, var(--sjs-spacing-x150))
     var(--ctr-error-message-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-error-message-padding-left, var(--sjs-spacing-x150));
 
@@ -195,7 +197,7 @@ sv-question-error {
   }
 }
 
-.spg-question__erbox--location--bottom {
+.spg-question__erbox--below-question {
   margin-top: calcSize(1);
 }
 

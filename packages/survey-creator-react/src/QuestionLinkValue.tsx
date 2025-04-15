@@ -20,8 +20,7 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
           text={editorLocalization.getString("pe.clear")}
         ></ActionButton>
       );
-    }
-    else {
+    } else {
       return null;
     }
   }

@@ -19,9 +19,9 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
     (this.editSurvey.getQuestionByName("question") as QuestionTextBase).placeholder =
       editorLocalization.getString("pe.fastEntryPlaceholder");
     this.editSurvey.onValidateQuestion.add((sender, options) => {
-      if(options.errors.length > 0) return;
+      if (options.errors.length > 0) return;
       const minChoiceCount = this.options.minimumChoicesCount;
-      if(minChoiceCount > 0) {
+      if (minChoiceCount > 0) {
         const choicesCount = this.getChoicesCount();
         if (minChoiceCount > choicesCount) {
           options.error = editorLocalization
@@ -197,10 +197,10 @@ export class FastEntryEditor extends FastEntryEditorBase {
     return this.applyCore();
   }
   public applyItemValueArray(dest: Array<ItemValue>, src: Array<ItemValue>, names: Array<string> = []): void {
-    if(!Array.isArray(src)) src = [];
-    for(let i = 0; i < src.length; i++) {
+    if (!Array.isArray(src)) src = [];
+    for (let i = 0; i < src.length; i++) {
       const item = ItemValue.getItemByValue(dest, src[i].value);
-      if(item) {
+      if (item) {
         item.text = src[i].text;
         names.forEach((name) => {
           if (name !== "value") {

@@ -9,7 +9,7 @@ export class ResetValueAdorner extends Base {
   @property() public allowResetValue: boolean;
 
   public resetValue() {
-    if(this.resetValueCallback) {
+    if (this.resetValueCallback) {
       this.resetValueCallback();
     }
   }

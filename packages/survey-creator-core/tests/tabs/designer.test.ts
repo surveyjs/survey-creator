@@ -67,8 +67,7 @@ test("StringEditorViewModelBase maxLength", () => {
     survey = new SurveyModel({});
     editor = new StringEditorViewModelBase(survey.locTitle, null);
     expect(editor.maxLength).toBe(4);
-  }
-  finally {
+  } finally {
     Serializer.findProperty("survey", "title").maxLength = -1;
   }
 });

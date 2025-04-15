@@ -21,7 +21,8 @@
     "watch:prod": "webpack --env buildType=prod --watch",
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
     "remove-package-lock": "rimraf package-lock.json",
-    "lint": "eslint ./src"
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --max-warnings=0 --fix"
   },
   "dependencies": {
     "survey-core": "../../../survey-library/packages/survey-core/build"
@@ -36,11 +37,14 @@
     "@types/node": "7.0.4",
     "@types/papaparse": "^5.0.4",
     "@types/qunit": "2.0.31",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
     "ace-builds": "1.2.2",
     "autoprefixer": "^10.4.17",
     "concurrently": "^5.2.0",
     "copy-webpack-plugin": "^6.3.1",
     "css-loader": "^7.1.2",
+    "eslint": "^8.57.0",
     "fast-glob": "^3.3.3",
     "html-loader": "^5.0.0",
     "http-server": "^14.1.1",

@@ -42,9 +42,9 @@ export class TabControlModel extends Base {
     return !!this.topToolbarValue;
   }
   public get topToolbar(): ActionContainer<MenuButton> {
-    if(!this.topToolbarValue) {
+    if (!this.topToolbarValue) {
       this.topToolbarValue = new ActionContainer<MenuButton>();
-      if(!!this.onTopToolbarItemCreated) {
+      if (!!this.onTopToolbarItemCreated) {
         this.onTopToolbarItemCreated(this.topToolbarValue);
       }
     }

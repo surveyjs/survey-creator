@@ -22,6 +22,8 @@ export var translationCss = {
     edit: "st-btn st-footer__edit-btn"
   },
   panel: {
+    nested: "",
+    withFrame: "",
     title: "st-title st-panel__title",
     titleExpandable: "st-panel__title--expandable",
     titleOnExpand: "st-panel__title--expanded",
@@ -35,6 +37,7 @@ export var translationCss = {
     requiredMark: "st-panel__required-text"
   },
   paneldynamic: {
+    nested: "",
     root: "st-paneldynamic",
     navigation: "st-paneldynamic__navigation",
     title: "st-title st-question__title",
@@ -66,6 +69,8 @@ export var translationCss = {
   pageDescription: "st-description st-page__description",
   row: "st-row st-clearfix",
   question: {
+    nested: "",
+    withFrame: "",
     mainRoot: "st-element st-question st-row__question",
     flowRoot: "st-element st-question st-row__question st-row__question--flow",
     asCell: "st-table__cell",

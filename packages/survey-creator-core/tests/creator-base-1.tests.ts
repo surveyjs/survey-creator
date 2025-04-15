@@ -2785,7 +2785,7 @@ test("Set readOnly option", (): any => {
   try {
     const creator = new CreatorTester({ readOnly: true });
     expect(creator.readOnly).toBeTruthy();
-  } catch (e) {
+  } catch(e) {
     expect(e).toBeNull();
   }
 });

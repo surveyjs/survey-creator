@@ -26,30 +26,30 @@ const keysToUpdate = [
 
 // eslint-disable-next-line no-undef
 let arg = process.argv;
-if(!Array.isArray(arg)) return;
-if(arg.length < 3) {
+if (!Array.isArray(arg)) return;
+if (arg.length < 3) {
   utils.reportMessage("You should pass file name as parameter or 'all'");
   return;
 }
 let parameter = arg[2].toLocaleLowerCase();
-if(parameter === "english") {
+if (parameter === "english") {
   return;
 }
 const englishJSON = utils.readJson("english");
-if(parameter === "all") {
+if (parameter === "all") {
   fs.readdir(".", function (err, files) {
     if (err) {
       utils.reportMessage("Unable to scan directory: " + err);
       return;
     }
     files.forEach(function (file) {
-      if(file.indexOf(".ts") > 0 && file !== "english.ts") {
+      if (file.indexOf(".ts") > 0 && file !== "english.ts") {
         updateTranslation(file);
       }
     });
   });
 } else {
-  if(!utils.isTranslationExists(parameter)) {
+  if (!utils.isTranslationExists(parameter)) {
     utils.reportMessage("There is no translation file: " + utils.getTranslationFileName(parameter));
     return;
   }
@@ -59,7 +59,7 @@ if(parameter === "all") {
 function updateTranslation(name) {
   const json = utils.readJson(name);
   const newJson = name === "english" ? englishJSON : {};
-  if(name !== "english") {
+  if (name !== "english") {
     updateJsonKeys(newJson, json, englishJSON);
   }
   let counter = 0;
@@ -77,32 +77,32 @@ function updateTranslation(name) {
 function updateJsonKeys(newJson, json, english) {
   const keys = Object.keys(english);
   keys.forEach(key => {
-    if(utils.isObject(english, key)) {
+    if (utils.isObject(english, key)) {
       newJson[key] = json[key] || {};
       updateJsonKeys(newJson[key], newJson[key], english[key]);
     }
   });
 }
 function moveKeys(json, src, dest) {
-  if(!src) return false;
+  if (!src) return false;
   let path = src.split(".");
   const srcObj = getObjFromPath(json, path);
   let strName = path[path.length - 1];
   const val = !!srcObj ? srcObj[strName] : undefined;
-  if(!val) return false;
+  if (!val) return false;
   delete srcObj[strName];
-  if(!dest) return true;
+  if (!dest) return true;
   path = dest.split(".");
   const destObj = getObjFromPath(json, path);
-  if(!!destObj) {
+  if (!!destObj) {
     strName = path[path.length - 1];
     destObj[strName] = val;
   }
   return true;
 }
 function getObjFromPath(json, path) {
-  for(let i = 0; i < path.length - 1; i ++) {
-    if(!json) return undefined;
+  for (let i = 0; i < path.length - 1; i ++) {
+    if (!json) return undefined;
     json = json[path[i]];
   }
   return json;

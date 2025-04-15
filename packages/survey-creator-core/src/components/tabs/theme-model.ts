@@ -380,8 +380,7 @@ export class ThemeModel extends Base implements ITheme {
 
       this.initializeColorCalculator(effectiveTheme.cssVariables);
       this.fromJSON(effectiveTheme);
-    }
-    finally {
+    } finally {
       this.blockThemeChangedNotifications -= 1;
     }
   }
@@ -523,7 +522,7 @@ export class ThemeModel extends Base implements ITheme {
       this.scale = !!this["--sjs-base-unit"] ? roundTo2Decimals(parseFloat(this["--sjs-base-unit"]) * 100 / 8) : undefined;
       this.fontSize = !!this["--sjs-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs-font-size"]) * 100 / 16) : undefined;
       this.cornerRadius = this["--sjs-corner-radius"] ? roundTo2Decimals(parseFloat(this["--sjs-corner-radius"])) : undefined;
-      if (!!json["backgroundOpacity"]) this.backgroundOpacity = json["backgroundOpacity"] * 100;
+      if (!!json["backgroundOpacity"])this.backgroundOpacity = json["backgroundOpacity"] * 100;
 
       this["questionPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("questionPanel"), json.cssVariables, "--sjs-general-backcolor", "--sjs-general-backcolor-dark", this.cornerRadius);
       this["editorPanel"] = backgroundCornerRadiusFromCssVariable(this.getPropertyByName("editorPanel"), json.cssVariables, "--sjs-general-backcolor-dim-light", "--sjs-general-backcolor-dim-dark", this.cornerRadius);
