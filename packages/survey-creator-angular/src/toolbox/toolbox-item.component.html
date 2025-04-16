@@ -2,13 +2,13 @@
   <div role="button" [attr.aria-label]="this.item.tooltip" [class]="this.item.renderedCss"
     (click)="viewModel.click($event)" [key2click]>
     <span class="svc-toolbox__item-container">
-      <svg *ngIf="item.iconName" [iconName]="item.iconName" [size]="'auto'" class="svc-toolbox__item-icon" [title]="this.item.tooltip"
+      <svg *ngIf="item.iconName" [title]="item.tooltip || item.title" [iconName]="item.iconName" [size]="'auto'" class="svc-toolbox__item-icon"
         sv-ng-svg-icon></svg>
     </span>
     <span *ngIf="!isCompact" class="svc-toolbox__item-title">{{item.title}}</span>
     </div>
   <span *ngIf="isCompact" class="svc-toolbox__item-banner" (click)="viewModel.click($event)">
-    <svg *ngIf="item.iconName" [iconName]="item.iconName" [size]="'auto'" class="svc-toolbox__item-icon"
+    <svg *ngIf="item.iconName" [title]="item.tooltip || item.title" [iconName]="item.iconName" [size]="'auto'" class="svc-toolbox__item-icon"
       sv-ng-svg-icon></svg>
     <span>{{item.title}}</span>
     </span>
