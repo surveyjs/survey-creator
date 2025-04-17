@@ -10,6 +10,7 @@
   >
     <span class="svc-toolbox__item-container">
       <SvComponent
+        :title="item.title"
         :is="'sv-svg-icon'"
         v-if="item.iconName"
         :iconName="item.iconName"
@@ -23,6 +24,7 @@
   </div>
   <span v-if="isCompact" class="svc-toolbox__item-banner" @click="viewModel.click($event)">
       <SvComponent
+        :title="item.title"
         :is="'sv-svg-icon'"
         :iconName="item.iconName"
         :size="24"
