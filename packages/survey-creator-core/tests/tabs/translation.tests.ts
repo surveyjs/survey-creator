@@ -1237,6 +1237,60 @@ test("init placeholders for dialects", () => {
   expect(cellQuestion3.placeholder).toEqual("Question 11");
   expect(cellQuestion4.placeholder).toEqual("Question pt1");
 });
+test("init placeholders for for itemvalue array, Bug#6839", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "radiogroup",
+        name: "question1",
+        choices: ["item1"]
+      },
+      {
+        type: "matrix",
+        name: "question2",
+        columns: ["col1"],
+        rows: ["row1"]
+      }
+    ]
+  });
+  const getPlaceholder = (question: QuestionMatrixDropdownModel, cellIndex): string => {
+    return question.visibleRows[0].cells[cellIndex].question.placeholder;
+  };
+  const translation = new Translation(survey);
+  translation.reset();
+  translation.addLocale("de");
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(1);
+  const pagePanel = <PanelModel>page.elements[0];
+  expect(pagePanel.elements).toHaveLength(2);
+  expect(pagePanel.elements[0].name).toEqual("question1");
+  expect(pagePanel.elements[1].name).toEqual("question2");
+  const question1 = <PanelModel>pagePanel.elements[0];
+  expect(question1.elements).toHaveLength(2);
+  expect(question1.elements[1].getType()).toEqual("panel");
+  const question1Choices = <QuestionMatrixDropdownModel>(<PanelModel>question1.elements[1]).questions[0];
+  expect(question1Choices.name).toEqual("question1_choices0");
+  expect(question1Choices.columns).toHaveLength(2);
+  expect(question1Choices.columns[0].name).toEqual("default");
+  expect(question1Choices.columns[1].name).toEqual("de");
+  expect(question1Choices.rows).toHaveLength(1);
+  expect(question1Choices.rows[0].value).toEqual("item1");
+  expect(getPlaceholder(question1Choices, 0)).toEqual("item1");
+  expect(getPlaceholder(question1Choices, 1)).toEqual("item1");
+
+  const question2 = <PanelModel>pagePanel.elements[1];
+  expect(question1.elements).toHaveLength(2);
+  expect(question1.elements[1].getType()).toEqual("panel");
+  const question2Columns = <QuestionMatrixDropdownModel>(<PanelModel>question2.elements[1]).questions[0];
+  const question3Rows = <QuestionMatrixDropdownModel>(<PanelModel>question2.elements[2]).questions[0];
+  expect(question2Columns.rows[0].value).toEqual("col1");
+  expect(getPlaceholder(question2Columns, 0)).toEqual("col1");
+  expect(getPlaceholder(question2Columns, 1)).toEqual("col1");
+  expect(question3Rows.rows[0].value).toEqual("row1");
+  expect(getPlaceholder(question3Rows, 0)).toEqual("row1");
+  expect(getPlaceholder(question3Rows, 1)).toEqual("row1");
+});
 
 test("Test settings.translation.maximumSelectedLocales", () => {
   const oldMaximumSelectedLocales = settings.translation.maximumSelectedLocales;
