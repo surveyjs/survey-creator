@@ -176,19 +176,7 @@ export class SurveyCreator extends SurveyCreatorModel {
     super(options, options2);
   }
   public render(target: string | HTMLElement) {
-    let node: HTMLElement = target as HTMLElement;
-    if (typeof target === "string") {
-      node = document.getElementById(target);
-    }
-    /* eslint-disable react/no-deprecated */
-    ReactDOM.unmountComponentAtNode(node);
-    ReactDOM.render(
-      <React.StrictMode>
-        <SurveyCreatorComponent creator={this} />
-      </React.StrictMode>,
-      node
-    );
-    /* eslint-enable react/no-deprecated */
+    console.error("The render method is deprecated. Use SurveyCreatorComponent instead.");
   }
 
   //ISurveyCreator
