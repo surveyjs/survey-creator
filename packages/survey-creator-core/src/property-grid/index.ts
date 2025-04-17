@@ -137,7 +137,7 @@ export interface IPropertyGridEditor {
     property: JsonObjectProperty,
     question: Question,
     options: ISurveyCreatorOptions
-  ) => IPropertyEditorSetup;
+  ) => void;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions,
     propGridDefinition?: ISurveyPropertyGridDefinition) => void;
   onSetup?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
@@ -414,18 +414,6 @@ export class PropertyGridTitleActionsCreator {
       }
     };
   }
-  private showModalPropertyEditor(
-    editor: IPropertyGridEditor,
-    property: JsonObjectProperty,
-    question: Question
-  ) {
-    return editor.showModalPropertyEditor(
-      editor,
-      property,
-      question,
-      this.options
-    );
-  }
 
   private createEditorSetupAction(
     editor: IPropertyGridEditor,
@@ -441,7 +429,12 @@ export class PropertyGridTitleActionsCreator {
       title: getLocString("pe.edit"),
       showTitle: false,
       action: () => {
-        return this.showModalPropertyEditor(editor, property, question);
+        editor.showModalPropertyEditor(
+          editor,
+          property,
+          question,
+          this.options
+        );
       }
     };
     return setupAction;
@@ -1431,7 +1424,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     question: Question,
     options: ISurveyCreatorOptions,
     onClose?: (reason: "apply" | "cancel") => void
-  ): IPropertyEditorSetup {
+  ): void {
     const obj = (<any>question).obj;
     const surveyPropertyEditor = editor.createPropertyEditorSetup(
       obj,
@@ -1439,11 +1432,10 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       question,
       options
     );
-    if (!surveyPropertyEditor) return null;
+    if (!surveyPropertyEditor || !settings.showDialog) return;
     if (question.isReadOnly) {
       surveyPropertyEditor.editSurvey.mode = "display";
     }
-    if (!settings.showDialog) return surveyPropertyEditor;
     const prevCurrentLocale = surveyLocalization.currentLocale;
     const locale = editorLocalization.currentLocale;
     surveyLocalization.currentLocale = locale;
@@ -1477,7 +1469,6 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     surveyLocalization.currentLocale = prevCurrentLocale;
     this.onModalPropertyEditorShown(editor, property, question, options);
     options.onPropertyGridShowModalCallback(obj, property, question, surveyPropertyEditor, popupModel);
-    return surveyPropertyEditor;
   }
   protected onModalPropertyEditorShown(editor: IPropertyGridEditor,
     property: JsonObjectProperty, question: Question,
