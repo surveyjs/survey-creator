@@ -590,6 +590,7 @@ export var jaStrings = {
     transposeData: "行を列に転置する",
     addRowText: "行ボタンのテキストを追加",
     removeRowText: "行ボタンのテキストを削除",
+    singleInputTitleTemplate: "入力フィールドのタイトルパターン",
     rateMin: "最小レート",
     rateMax: "最大レート",
     rateStep: "レートステップ",
@@ -1119,7 +1120,8 @@ export var jaStrings = {
     questionsOnPageMode: {
       standard: "元の構造",
       singlePage: "すべての質問を 1 ページに表示する",
-      questionPerPage: "1ページにつき1つの質問を表示する"
+      questionPerPage: "1ページにつき1つの質問を表示する",
+      inputPerPage: "ページごとに 1 つの入力フィールドを表示"
     },
     noPreview: "プレビューなし",
     showAllQuestions: "すべての質問を含むプレビューを表示",
@@ -1320,7 +1322,9 @@ export var jaStrings = {
   ts: {
     selectPage: "それをテストするためのページを選択:",
     showInvisibleElements: "不可視エレメントを表示",
-    hideInvisibleElements: "非表示の要素を非表示にする"
+    hideInvisibleElements: "非表示の要素を非表示にする",
+    prevPage: "先の",
+    nextPage: "次に"
   },
   validators: {
     answercountvalidator: "答えの数",
@@ -1623,7 +1627,8 @@ export var jaStrings = {
       overlapEnabled: "有効にすると、調査の上部がヘッダーの下部に重なります。",
       mobileHeight: "0 に設定すると、ヘッダーのコンテンツに合わせて高さが自動的に計算されます。"
     },
-    progressBarInheritWidthFrom: "「コンテナと同じ」オプションは、調査が配置されているHTML要素に収まるようにプログレスバーの領域幅を自動調整します。"
+    progressBarInheritWidthFrom: "「コンテナと同じ」オプションは、調査が配置されているHTML要素に収まるようにプログレスバーの領域幅を自動調整します。",
+    singleInputTitleTemplate: "「調査レイアウト」が「1ページにつき1つの入力フィールド」に設定されている場合に使用されます。このレイアウトでは、各入力フィールドが別々のページに表示されるようにマトリックスが分割されています。{rowIndex} プレースホルダーを使用して自動番号を挿入し、{rowTitle} または {rowName} を使用して行のタイトルまたは ID を参照し、{row.columnid} を使用して特定の行列列の値を含めます。"
   },
   // Properties
   p: {
@@ -3052,3 +3057,8 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // page.description: "Type a page subtitle." => "ページのサブタイトルを入力します。"
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "進行状況バーまたは目次 (TOC) のナビゲーション ボタンに表示されるキャプション。このフィールドを空のままにすると、ナビゲーション ボタンはページ タイトルまたはページ名を使用します。プログレスバーまたは目次を有効にするには、「アンケート」→「ナビゲーション」に移動します。"
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "選択すると、回答者は、目的のオプションがドロップダウンにない場合に、独自の選択肢を追加できます。カスタム選択は、現在のブラウザセッションの期間中のみ一時的に保存されます。"
+// pe.singleInputTitleTemplate: "Input field title pattern" => "入力フィールドのタイトルパターン"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "ページごとに 1 つの入力フィールドを表示"
+// ts.prevPage: "Previous" => "先の"
+// ts.nextPage: "Next" => "次に"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "「調査レイアウト」が「1ページにつき1つの入力フィールド」に設定されている場合に使用されます。このレイアウトでは、各入力フィールドが別々のページに表示されるようにマトリックスが分割されています。{rowIndex} プレースホルダーを使用して自動番号を挿入し、{rowTitle} または {rowName} を使用して行のタイトルまたは ID を参照し、{row.columnid} を使用して特定の行列列の値を含めます。"

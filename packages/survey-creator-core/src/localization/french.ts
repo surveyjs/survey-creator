@@ -590,6 +590,7 @@ var frenchTranslation = {
     transposeData: "Transposer des lignes en colonnes",
     addRowText: "Texte bouton \"Ajouter une ligne\"",
     removeRowText: "Texte bouton \"Supprimer une ligne\"",
+    singleInputTitleTemplate: "Modèle de titre du champ de saisie",
     rateMin: "Note minimum",
     rateMax: "Note maximum",
     rateStep: "Intervalle des notes",
@@ -1119,7 +1120,8 @@ var frenchTranslation = {
     questionsOnPageMode: {
       standard: "Structure d’origine",
       singlePage: "Afficher toutes les questions sur une seule page",
-      questionPerPage: "Afficher une seule question par page"
+      questionPerPage: "Afficher une seule question par page",
+      inputPerPage: "Afficher un seul champ de saisie par page"
     },
     noPreview: "Pas d’aperçu",
     showAllQuestions: "Afficher toutes les questions",
@@ -1320,7 +1322,9 @@ var frenchTranslation = {
   ts: {
     selectPage: "Sélectionner une page pour la tester",
     showInvisibleElements: "Afficher les éléments invisibles",
-    hideInvisibleElements: "Masquer les éléments invisibles"
+    hideInvisibleElements: "Masquer les éléments invisibles",
+    prevPage: "Précédent",
+    nextPage: "Prochain"
   },
   validators: {
     answercountvalidator: "Total de réponses",
@@ -1623,7 +1627,8 @@ var frenchTranslation = {
       overlapEnabled: "Lorsque cette option est activée, la partie supérieure de l’enquête se superpose au bas de l’en-tête.",
       mobileHeight: "Lorsqu’elle est définie sur 0, la hauteur est calculée automatiquement pour s’adapter au contenu de l’en-tête."
     },
-    progressBarInheritWidthFrom: "L’option « Identique au conteneur » ajuste automatiquement la largeur de la zone de la barre de progression pour s’adapter à l’élément HTML dans lequel l’enquête est placée."
+    progressBarInheritWidthFrom: "L’option « Identique au conteneur » ajuste automatiquement la largeur de la zone de la barre de progression pour s’adapter à l’élément HTML dans lequel l’enquête est placée.",
+    singleInputTitleTemplate: "Utilisé lorsque la « mise en page de l’enquête » est définie sur « Champ de saisie unique par page ». Dans cette disposition, la matrice est divisée de sorte que chaque champ de saisie apparaisse sur une page distincte. Utilisez l’espace réservé {rowIndex} pour insérer la numérotation automatique, {rowTitle} ou {rowName} pour référencer le titre ou l’ID de la ligne, et {row.columnid} pour inclure la valeur d’une colonne de matrice spécifique."
   },
   // Properties
   p: {
@@ -3112,3 +3117,8 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // page.description: "Type a page subtitle." => "Tapez un sous-titre de page."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Une légende affichée sur un bouton de navigation dans la barre de progression ou la table des matières (TOC). Si vous laissez ce champ vide, le bouton de navigation utilisera le titre ou le nom de la page. Pour activer la barre de progression ou la table des matières, allez dans Sondage → Navigation."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Sélectionnez cette option pour permettre aux personnes interrogées d’ajouter leurs propres choix si l’option souhaitée n’est pas disponible dans la liste déroulante. Les choix personnalisés ne seront stockés que temporairement pour la durée de la session de navigation en cours."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Modèle de titre du champ de saisie"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Afficher un seul champ de saisie par page"
+// ts.prevPage: "Previous" => "Précédent"
+// ts.nextPage: "Next" => "Prochain"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Utilisé lorsque la « mise en page de l’enquête » est définie sur « Champ de saisie unique par page ». Dans cette disposition, la matrice est divisée de sorte que chaque champ de saisie apparaisse sur une page distincte. Utilisez l’espace réservé {rowIndex} pour insérer la numérotation automatique, {rowTitle} ou {rowName} pour référencer le titre ou l’ID de la ligne, et {row.columnid} pour inclure la valeur d’une colonne de matrice spécifique."

@@ -590,6 +590,7 @@ export var huStrings = {
     transposeData: "Sorok átültetése oszlopokba",
     addRowText: "'Új sor felvétele' gomb szövege",
     removeRowText: "'Sor eltávolítása' gomb szövege",
+    singleInputTitleTemplate: "Beviteli mező címmintája",
     rateMin: "Legkisebb szorzó",
     rateMax: "Legnagyobb szorzó",
     rateStep: "Szorzó lépésköze",
@@ -1119,7 +1120,8 @@ export var huStrings = {
     questionsOnPageMode: {
       standard: "Eredeti szerkezet",
       singlePage: "Az összes kérdés megjelenítése egy oldalon",
-      questionPerPage: "Egyetlen kérdés megjelenítése oldalanként"
+      questionPerPage: "Egyetlen kérdés megjelenítése oldalanként",
+      inputPerPage: "Egyetlen beviteli mező megjelenítése oldalanként"
     },
     noPreview: "Nincs előnézet",
     showAllQuestions: "Az összes kérdés megjelenítése",
@@ -1320,7 +1322,9 @@ export var huStrings = {
   ts: {
     selectPage: "Válassza ki a tesztelni kívánt lapot:",
     showInvisibleElements: "Nemlátható elemek megjelnítése",
-    hideInvisibleElements: "Láthatatlan elemek elrejtése"
+    hideInvisibleElements: "Láthatatlan elemek elrejtése",
+    prevPage: "Előző",
+    nextPage: "Következő"
   },
   validators: {
     answercountvalidator: "válaszok száma",
@@ -1623,7 +1627,8 @@ export var huStrings = {
       overlapEnabled: "Ha engedélyezve van, a felmérés teteje átfedi a fejléc alját.",
       mobileHeight: "Ha 0-ra van állítva, a magasság automatikusan kiszámításra kerül, hogy elférjen a fejléc tartalma."
     },
-    progressBarInheritWidthFrom: "Az \"Ugyanaz, mint a tároló\" opció automatikusan beállítja a folyamatjelző sáv területének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül."
+    progressBarInheritWidthFrom: "Az \"Ugyanaz, mint a tároló\" opció automatikusan beállítja a folyamatjelző sáv területének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül.",
+    singleInputTitleTemplate: "Akkor használatos, ha a \"Felmérés elrendezése\" beállítása \"Egyetlen beviteli mező oldalanként\". Ebben az elrendezésben a mátrix fel van osztva, így minden beviteli mező külön oldalon jelenik meg. A {rowIndex} helyőrzővel szúrja be az automatikus számozást, a {rowTitle} vagy a {rowName} használatával hivatkozzon a sor címére vagy azonosítójára, a {row.columnid} pedig egy adott mátrixoszlop értékét foglalja bele."
   },
   // Properties
   p: {
@@ -3204,3 +3209,8 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // page.description: "Type a page subtitle." => "Írjon be egy oldalfeliratot."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "A folyamatjelző sáv vagy a tartalomjegyzék navigációs gombján megjelenő felirat. Ha üresen hagyja ezt a mezőt, a navigációs gomb az oldal címét vagy nevét fogja használni. A folyamatjelző sáv vagy a tartalomjegyzék engedélyezéséhez lépjen a \"Felmérés\" → a \"Navigáció\" menüpontra."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Válassza ki, ha a válaszadók hozzáadhatják saját választási lehetőségeiket, ha a kívánt beállítás nem érhető el a legördülő menüben. Az egyéni beállításokat csak ideiglenesen tárolja a rendszer az aktuális böngésző munkamenet időtartamára."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Beviteli mező címmintája"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Egyetlen beviteli mező megjelenítése oldalanként"
+// ts.prevPage: "Previous" => "Előző"
+// ts.nextPage: "Next" => "Következő"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Akkor használatos, ha a \"Felmérés elrendezése\" beállítása \"Egyetlen beviteli mező oldalanként\". Ebben az elrendezésben a mátrix fel van osztva, így minden beviteli mező külön oldalon jelenik meg. A {rowIndex} helyőrzővel szúrja be az automatikus számozást, a {rowTitle} vagy a {rowName} használatával hivatkozzon a sor címére vagy azonosítójára, a {row.columnid} pedig egy adott mátrixoszlop értékét foglalja bele."

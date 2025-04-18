@@ -590,6 +590,7 @@ export var fiStrings = {
     transposeData: "Rivien transponointi sarakkeisiin",
     addRowText: "Lisää rivipainikkeen teksti",
     removeRowText: "Poista rivipainikkeen teksti",
+    singleInputTitleTemplate: "Syöttökentän otsikkomalli",
     rateMin: "Vähimmäismäärä",
     rateMax: "Enimmäismäärä",
     rateStep: "Arvostele askel",
@@ -1119,7 +1120,8 @@ export var fiStrings = {
     questionsOnPageMode: {
       standard: "Alkuperäinen rakenne",
       singlePage: "Näytä kaikki kysymykset yhdellä sivulla",
-      questionPerPage: "Näytä yksittäinen kysymys sivua kohden"
+      questionPerPage: "Näytä yksittäinen kysymys sivua kohden",
+      inputPerPage: "Näytä yksi syöttökenttä sivua kohden"
     },
     noPreview: "Ei esikatselua",
     showAllQuestions: "Näytä esikatselu kaikilla kysymyksillä",
@@ -1320,7 +1322,9 @@ export var fiStrings = {
   ts: {
     selectPage: "Valitse sivu testataksesi sitä:",
     showInvisibleElements: "Näytä näkymätön elementti",
-    hideInvisibleElements: "Piilota näkymättömät elementit"
+    hideInvisibleElements: "Piilota näkymättömät elementit",
+    prevPage: "Edellinen",
+    nextPage: "Seuraava"
   },
   validators: {
     answercountvalidator: "vastausten määrä",
@@ -1623,7 +1627,8 @@ export var fiStrings = {
       overlapEnabled: "Kun tämä asetus on käytössä, kyselyn yläosa peittää otsikon alaosan.",
       mobileHeight: "Kun arvoksi on määritetty 0, korkeus lasketaan automaattisesti otsikon sisällön mukaan."
     },
-    progressBarInheritWidthFrom: "Sama kuin säilö -vaihtoehto säätää edistymispalkin alueen leveyttä automaattisesti sopimaan HTML-elementtiin, johon kysely sijoitetaan."
+    progressBarInheritWidthFrom: "Sama kuin säilö -vaihtoehto säätää edistymispalkin alueen leveyttä automaattisesti sopimaan HTML-elementtiin, johon kysely sijoitetaan.",
+    singleInputTitleTemplate: "Käytetään, kun \"Kyselyn asettelu\" -asetuksena on \"Yksi syöttökenttä sivulla\". Tässä asettelussa matriisi on jaettu siten, että jokainen syöttökenttä näkyy erillisellä sivulla. Käytä {rowIndex}-paikkamerkkiä automaattisen numeroinnin lisäämiseen, {rowTitle} tai {rowName} viittaamaan rivin otsikkoon tai tunnukseen ja {row.columnid} sisällyttääksesi tietyn matriisisarakkeen arvon."
   },
   // Properties
   p: {
@@ -3025,3 +3030,8 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // page.description: "Type a page subtitle." => "Kirjoita sivun alaotsikko."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Kuvateksti, joka näkyy edistymispalkin tai sisällysluettelon siirtymispainikkeessa. Jos jätät tämän kentän tyhjäksi, navigointipainike käyttää sivun otsikkoa tai nimeä. Ota edistymispalkki tai sisällysluettelo käyttöön siirtymällä kohtaan \"Kysely\" → \"Navigointi\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Valitse tämä, jos haluat, että vastaajat voivat lisätä omia vaihtoehtojaan, jos haluttu vaihtoehto ei ole käytettävissä avattavassa valikossa. Mukautetut valinnat tallennetaan vain väliaikaisesti nykyisen selainistunnon ajaksi."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Syöttökentän otsikkomalli"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Näytä yksi syöttökenttä sivua kohden"
+// ts.prevPage: "Previous" => "Edellinen"
+// ts.nextPage: "Next" => "Seuraava"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Käytetään, kun \"Kyselyn asettelu\" -asetuksena on \"Yksi syöttökenttä sivulla\". Tässä asettelussa matriisi on jaettu siten, että jokainen syöttökenttä näkyy erillisellä sivulla. Käytä {rowIndex}-paikkamerkkiä automaattisen numeroinnin lisäämiseen, {rowTitle} tai {rowName} viittaamaan rivin otsikkoon tai tunnukseen ja {row.columnid} sisällyttääksesi tietyn matriisisarakkeen arvon."

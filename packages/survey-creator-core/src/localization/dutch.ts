@@ -590,6 +590,7 @@ export var nlStrings = {
     transposeData: "Rijen transponeren naar kolommen",
     addRowText: "Voeg tekst van de rijknop toe",
     removeRowText: "Verwijder de tekst van de rijknop",
+    singleInputTitleTemplate: "Titelpatroon invoerveld",
     rateMin: "Minimumtarief",
     rateMax: "Maximaal tarief",
     rateStep: "Beoordeel stap",
@@ -1119,7 +1120,8 @@ export var nlStrings = {
     questionsOnPageMode: {
       standard: "Oorspronkelijke structuur",
       singlePage: "Toon alle vragen op één pagina",
-      questionPerPage: "Toon één vraag per pagina"
+      questionPerPage: "Toon één vraag per pagina",
+      inputPerPage: "Toon enkel invoerveld per pagina"
     },
     noPreview: "Geen preview",
     showAllQuestions: "Toon voorbeeld met alle vragen",
@@ -1320,7 +1322,9 @@ export var nlStrings = {
   ts: {
     selectPage: "Selecteer de pagina om deze te testen:",
     showInvisibleElements: "Toon onzichtbare elementen",
-    hideInvisibleElements: "Onzichtbare elementen verbergen"
+    hideInvisibleElements: "Onzichtbare elementen verbergen",
+    prevPage: "Vorig",
+    nextPage: "Volgend"
   },
   validators: {
     answercountvalidator: "Aantal antwoorden",
@@ -1623,7 +1627,8 @@ export var nlStrings = {
       overlapEnabled: "Als deze optie is ingeschakeld, overlapt de bovenkant van de enquête de onderkant van de koptekst.",
       mobileHeight: "Als deze optie is ingesteld op 0, wordt de hoogte automatisch berekend om de inhoud van de koptekst te accommoderen."
     },
-    progressBarInheritWidthFrom: "Met de optie \"Zelfde als container\" wordt de breedte van het gebied van de voortgangsbalk automatisch aangepast aan het HTML-element waarin de enquête is geplaatst."
+    progressBarInheritWidthFrom: "Met de optie \"Zelfde als container\" wordt de breedte van het gebied van de voortgangsbalk automatisch aangepast aan het HTML-element waarin de enquête is geplaatst.",
+    singleInputTitleTemplate: "Wordt gebruikt wanneer de 'Enquête-indeling' is ingesteld op 'Enkel invoerveld per pagina'. In deze lay-out wordt de matrix gesplitst zodat elk invoerveld op een aparte pagina verschijnt. Gebruik de tijdelijke aanduiding {rowIndex} om automatische nummering in te voegen, {rowTitle} of {rowName} om te verwijzen naar de titel of id van de rij en {row.columnid} om de waarde van een specifieke matrixkolom op te nemen."
   },
   // Properties
   p: {
@@ -3031,3 +3036,8 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // page.description: "Type a page subtitle." => "Typ een pagina-ondertitel."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Een bijschrift dat wordt weergegeven op een navigatieknop in de voortgangsbalk of inhoudsopgave (TOC). Als u dit veld leeg laat, gebruikt de navigatieknop de paginatitel of paginanaam. Om de voortgangsbalk of inhoudsopgave in te schakelen, ga je naar \"Enquête\" → \"Navigatie\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Selecteer deze optie om respondenten hun eigen keuzes te laten toevoegen als de gewenste optie niet beschikbaar is in de vervolgkeuzelijst. Aangepaste keuzes worden slechts tijdelijk opgeslagen voor de duur van de huidige browsersessie."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Titelpatroon invoerveld"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Toon enkel invoerveld per pagina"
+// ts.prevPage: "Previous" => "Vorig"
+// ts.nextPage: "Next" => "Volgend"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Wordt gebruikt wanneer de 'Enquête-indeling' is ingesteld op 'Enkel invoerveld per pagina'. In deze lay-out wordt de matrix gesplitst zodat elk invoerveld op een aparte pagina verschijnt. Gebruik de tijdelijke aanduiding {rowIndex} om automatische nummering in te voegen, {rowTitle} of {rowName} om te verwijzen naar de titel of id van de rij en {row.columnid} om de waarde van een specifieke matrixkolom op te nemen."

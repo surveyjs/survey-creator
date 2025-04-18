@@ -590,6 +590,7 @@ var spanishTranslation = {
     transposeData: "Transponer filas a columnas",
     addRowText: "Añadir texto de botón de fila",
     removeRowText: "Eliminar el texto del botón de fila",
+    singleInputTitleTemplate: "Patrón de título de campo de entrada",
     rateMin: "Valor mínimo",
     rateMax: "Valor máximo",
     rateStep: "Rango de los valores",
@@ -1119,7 +1120,8 @@ var spanishTranslation = {
     questionsOnPageMode: {
       standard: "Estructura original",
       singlePage: "Mostrar todas las preguntas en una sola página",
-      questionPerPage: "Mostrar una sola pregunta por página"
+      questionPerPage: "Mostrar una sola pregunta por página",
+      inputPerPage: "Mostrar un solo campo de entrada por página"
     },
     noPreview: "sin vista previa",
     showAllQuestions: "Mostrar vista previa con todas las preguntas",
@@ -1320,7 +1322,9 @@ var spanishTranslation = {
   ts: {
     selectPage: "Seleccione la página para probarlo:",
     showInvisibleElements: "Mostrar elementos invisibles",
-    hideInvisibleElements: "Ocultar elementos invisibles"
+    hideInvisibleElements: "Ocultar elementos invisibles",
+    prevPage: "Anterior",
+    nextPage: "Próximo"
   },
   validators: {
     answercountvalidator: "Cantidad de respuestas",
@@ -1623,7 +1627,8 @@ var spanishTranslation = {
       overlapEnabled: "Cuando se habilita, la parte superior de la encuesta se superpone a la parte inferior del encabezado.",
       mobileHeight: "Cuando se establece en 0, la altura se calcula automáticamente para acomodar el contenido del encabezado."
     },
-    progressBarInheritWidthFrom: "La opción \"Igual que el contenedor\" ajusta automáticamente el ancho del área de la barra de progreso para que quepa en el elemento HTML en el que se coloca la encuesta."
+    progressBarInheritWidthFrom: "La opción \"Igual que el contenedor\" ajusta automáticamente el ancho del área de la barra de progreso para que quepa en el elemento HTML en el que se coloca la encuesta.",
+    singleInputTitleTemplate: "Se utiliza cuando el 'Diseño de encuesta' se establece en 'Campo de entrada único por página'. En este diseño, la matriz se divide para que cada campo de entrada aparezca en una página separada. Use el marcador de posición {rowIndex} para insertar la numeración automática, {rowTitle} o {rowName} para hacer referencia al título o identificador de la fila y {row.columnid} para incluir el valor de una columna de matriz específica."
   },
   // Properties
   p: {
@@ -2829,3 +2834,8 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // page.description: "Type a page subtitle." => "Escribe un subtítulo de página."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Un título que se muestra en un botón de navegación en la barra de progreso o en la tabla de contenido (TDC). Si dejas este campo vacío, el botón de navegación utilizará el título o el nombre de la página. Para habilitar la barra de progreso o la tabla de contenido, vaya a \"Encuesta\" → \"Navegación\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Seleccione esta opción para permitir que los encuestados agreguen sus propias opciones si la opción deseada no está disponible en el menú desplegable. Las opciones personalizadas solo se almacenarán temporalmente durante la sesión actual del navegador."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Patrón de título de campo de entrada"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Mostrar un solo campo de entrada por página"
+// ts.prevPage: "Previous" => "Anterior"
+// ts.nextPage: "Next" => "Próximo"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Se utiliza cuando el 'Diseño de encuesta' se establece en 'Campo de entrada único por página'. En este diseño, la matriz se divide para que cada campo de entrada aparezca en una página separada. Use el marcador de posición {rowIndex} para insertar la numeración automática, {rowTitle} o {rowName} para hacer referencia al título o identificador de la fila y {row.columnid} para incluir el valor de una columna de matriz específica."
