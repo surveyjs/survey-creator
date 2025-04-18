@@ -590,6 +590,7 @@ export var arStrings = {
     transposeData: "تبديل موضع الصفوف إلى أعمدة",
     addRowText: "نص زر إضافة صف",
     removeRowText: "نص زر حذف صف",
+    singleInputTitleTemplate: "نمط عنوان حقل الإدخال",
     rateMin: "أصغر معدل",
     rateMax: "أكبر معدل",
     rateStep: "خطوات المعدل",
@@ -1119,7 +1120,8 @@ export var arStrings = {
     questionsOnPageMode: {
       standard: "الهيكل الأصلي",
       singlePage: "إظهار جميع الأسئلة في صفحة واحدة",
-      questionPerPage: "إظهار سؤال واحد لكل صفحة"
+      questionPerPage: "إظهار سؤال واحد لكل صفحة",
+      inputPerPage: "إظهار حقل إدخال واحد لكل صفحة"
     },
     noPreview: "بلا عرض",
     showAllQuestions: "المعاينة مع جميع الأسئلة",
@@ -1320,7 +1322,9 @@ export var arStrings = {
   ts: {
     selectPage: "Select the page to test it:",
     showInvisibleElements: "إظهار العناصر المخفية",
-    hideInvisibleElements: "إخفاء العناصر غير المرئية"
+    hideInvisibleElements: "إخفاء العناصر غير المرئية",
+    prevPage: "سابق",
+    nextPage: "مقبل"
   },
   validators: {
     answercountvalidator: "answer count",
@@ -1623,7 +1627,8 @@ export var arStrings = {
       overlapEnabled: "عند التمكين، يقوم الجزء العلوي من الاستطلاع بتراكب الجزء السفلي من الرأس.",
       mobileHeight: "عند التعيين إلى 0 ، يتم حساب الارتفاع تلقائيا لاستيعاب محتوى الرأس."
     },
-    progressBarInheritWidthFrom: "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه."
+    progressBarInheritWidthFrom: "يقوم خيار \"نفس الحاوية\" بضبط عرض منطقة شريط التقدم تلقائيا ليلائم عنصر HTML الذي يتم وضع الاستطلاع فيه.",
+    singleInputTitleTemplate: "يستخدم عند تعيين \"تخطيط الاستطلاع\" إلى \"حقل إدخال واحد لكل صفحة\". في هذا التخطيط، يتم تقسيم المصفوفة بحيث يظهر كل حقل إدخال في صفحة منفصلة. استخدم العنصر النائب {rowIndex} لإدراج الترقيم التلقائي و{rowTitle} أو {rowName} للإشارة إلى عنوان الصف أو معرفه، و{row.columnid} لتضمين قيمة عمود مصفوفة معين."
   },
   // Properties
   p: {
@@ -2967,3 +2972,8 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // page.description: "Type a page subtitle." => "اكتب عنوانا فرعيا للصفحة."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "تسمية توضيحية معروضة على زر التنقل في شريط التقدم أو جدول المحتويات (TOC). إذا تركت هذا الحقل فارغا، فسيستخدم زر التنقل عنوان الصفحة أو اسم الصفحة. لتمكين شريط التقدم أو جدول المحتويات، انتقل إلى \"استطلاع\" → \"التنقل\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "حدد للسماح للمستجيبين بإضافة خياراتهم الخاصة إذا لم يكن الخيار المطلوب متاحا في القائمة المنسدلة. سيتم تخزين الخيارات المخصصة مؤقتا فقط طوال مدة جلسة المتصفح الحالية."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "نمط عنوان حقل الإدخال"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "إظهار حقل إدخال واحد لكل صفحة"
+// ts.prevPage: "Previous" => "سابق"
+// ts.nextPage: "Next" => "مقبل"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "يستخدم عند تعيين \"تخطيط الاستطلاع\" إلى \"حقل إدخال واحد لكل صفحة\". في هذا التخطيط، يتم تقسيم المصفوفة بحيث يظهر كل حقل إدخال في صفحة منفصلة. استخدم العنصر النائب {rowIndex} لإدراج الترقيم التلقائي و{rowTitle} أو {rowName} للإشارة إلى عنوان الصف أو معرفه، و{row.columnid} لتضمين قيمة عمود مصفوفة معين."

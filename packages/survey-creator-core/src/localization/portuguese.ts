@@ -590,6 +590,7 @@ var portugueseTranslation = {
     transposeData: "Transpor linhas para colunas",
     addRowText: "Texto do botão para adicionar linhas",
     removeRowText: "Texto do botão para remover linhas",
+    singleInputTitleTemplate: "Padrão de título do campo de entrada",
     rateMin: "Valor mínimo do valor",
     rateMax: "Valor máximo do valor",
     rateStep: "Etapa de taxa",
@@ -1119,7 +1120,8 @@ var portugueseTranslation = {
     questionsOnPageMode: {
       standard: "Estrutura original",
       singlePage: "Mostrar todas as perguntas em uma página",
-      questionPerPage: "Mostrar uma única pergunta por página"
+      questionPerPage: "Mostrar uma única pergunta por página",
+      inputPerPage: "Mostrar campo de entrada único por página"
     },
     noPreview: "Sem pré-visualização",
     showAllQuestions: "Mostrar todas as questões",
@@ -1320,7 +1322,9 @@ var portugueseTranslation = {
   ts: {
     selectPage: "Selecione a página para testar:",
     showInvisibleElements: "Mostrar elementos invisíveis",
-    hideInvisibleElements: "Esconder elementos invisíveis"
+    hideInvisibleElements: "Esconder elementos invisíveis",
+    prevPage: "Anterior",
+    nextPage: "Próximo"
   },
   validators: {
     answercountvalidator: "contador de respostas",
@@ -1623,7 +1627,8 @@ var portugueseTranslation = {
       overlapEnabled: "Quando ativado, a parte superior da pesquisa se sobrepõe à parte inferior do cabeçalho.",
       mobileHeight: "Quando definido como 0, a altura é calculada automaticamente para acomodar o conteúdo do cabeçalho."
     },
-    progressBarInheritWidthFrom: "A opção \"Igual ao contêiner\" ajusta automaticamente a largura da área da barra de progresso para caber no elemento HTML em que a pesquisa é colocada."
+    progressBarInheritWidthFrom: "A opção \"Igual ao contêiner\" ajusta automaticamente a largura da área da barra de progresso para caber no elemento HTML em que a pesquisa é colocada.",
+    singleInputTitleTemplate: "Usado quando o 'Layout da pesquisa' está definido como 'Campo de entrada único por página'. Nesse layout, a matriz é dividida para que cada campo de entrada apareça em uma página separada. Use o espaço reservado {rowIndex} para inserir numeração automática, {rowTitle} ou {rowName} para fazer referência ao título ou ID da linha e {row.columnid} para incluir o valor de uma coluna de matriz específica."
   },
   // Properties
   p: {
@@ -2721,3 +2726,8 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // page.description: "Type a page subtitle." => "Digite um subtítulo de página."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Uma legenda exibida em um botão de navegação na barra de progresso ou sumário. Se você deixar esse campo vazio, o botão de navegação usará o título ou o nome da página. Para ativar a barra de progresso ou sumário, vá para \"Pesquisa\" → \"Navegação\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Selecione para permitir que os respondentes adicionem suas próprias opções se a opção desejada não estiver disponível na lista suspensa. As opções personalizadas serão armazenadas apenas temporariamente durante a sessão atual do navegador."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Padrão de título do campo de entrada"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Mostrar campo de entrada único por página"
+// ts.prevPage: "Previous" => "Anterior"
+// ts.nextPage: "Next" => "Próximo"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Usado quando o 'Layout da pesquisa' está definido como 'Campo de entrada único por página'. Nesse layout, a matriz é dividida para que cada campo de entrada apareça em uma página separada. Use o espaço reservado {rowIndex} para inserir numeração automática, {rowTitle} ou {rowName} para fazer referência ao título ou ID da linha e {row.columnid} para incluir o valor de uma coluna de matriz específica."

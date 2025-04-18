@@ -590,6 +590,7 @@ export var nbStrings = {
     transposeData: "Transponere rader til kolonner",
     addRowText: "Legg til rad knapp-tekst",
     removeRowText: "Fjern rad knapp-tekst",
+    singleInputTitleTemplate: "Tittelmønster for inndatafelt",
     rateMin: "Minimum sats",
     rateMax: "Maksimum sats",
     rateStep: "Sats steg",
@@ -1119,7 +1120,8 @@ export var nbStrings = {
     questionsOnPageMode: {
       standard: "Opprinnelig struktur",
       singlePage: "Vis alle spørsmål på én side",
-      questionPerPage: "Vis ett spørsmål per side"
+      questionPerPage: "Vis ett spørsmål per side",
+      inputPerPage: "Vis enkelt inndatafelt per side"
     },
     noPreview: "no preview",
     showAllQuestions: "show preview with all questions",
@@ -1320,7 +1322,9 @@ export var nbStrings = {
   ts: {
     selectPage: "Velg side:",
     showInvisibleElements: "Vis usynlige elementer",
-    hideInvisibleElements: "Skjule usynlige elementer"
+    hideInvisibleElements: "Skjule usynlige elementer",
+    prevPage: "Foregående",
+    nextPage: "Neste"
   },
   validators: {
     answercountvalidator: "antall svar",
@@ -1623,7 +1627,8 @@ export var nbStrings = {
       overlapEnabled: "Når den er aktivert, overlapper toppen av evalueringen bunnen av overskriften.",
       mobileHeight: "Når den er satt til 0, beregnes høyden automatisk for å få plass til overskriftens innhold."
     },
-    progressBarInheritWidthFrom: "Alternativet \"Samme som beholder\" justerer automatisk fremdriftslinjens områdebredde slik at den passer inn i HTML-elementet undersøkelsen er plassert i."
+    progressBarInheritWidthFrom: "Alternativet \"Samme som beholder\" justerer automatisk fremdriftslinjens områdebredde slik at den passer inn i HTML-elementet undersøkelsen er plassert i.",
+    singleInputTitleTemplate: "Brukes når 'Undersøkelsesoppsett' er satt til 'Enkelt inndatafelt per side'. I dette oppsettet er matrisen delt slik at hvert inndatafelt vises på en egen side. Bruk plassholderen {rowIndex} til å sette inn automatisk nummerering, {rowTitle} eller {rowName} for å referere til radens tittel eller ID, og {row.columnid} for å inkludere verdien for en bestemt matrisekolonne."
   },
   // Properties
   p: {
@@ -3055,3 +3060,8 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // page.description: "Type a page subtitle." => "Skriv inn en sideundertittel."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "En bildetekst som vises på en navigasjonsknapp i fremdriftslinjen eller innholdsfortegnelsen. Hvis du lar dette feltet stå tomt, vil navigasjonsknappen bruke sidetittelen eller sidenavnet. For å aktivere fremdriftslinjen eller innholdsfortegnelsen, gå til \"Survey\" → \"Navigation\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Velg dette alternativet for å la respondentene legge til sine egne valg hvis det ønskede alternativet ikke er tilgjengelig i rullegardinlisten. Egendefinerte valg lagres bare midlertidig så lenge den gjeldende nettleserøkten varer."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Tittelmønster for inndatafelt"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Vis enkelt inndatafelt per side"
+// ts.prevPage: "Previous" => "Foregående"
+// ts.nextPage: "Next" => "Neste"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Brukes når 'Undersøkelsesoppsett' er satt til 'Enkelt inndatafelt per side'. I dette oppsettet er matrisen delt slik at hvert inndatafelt vises på en egen side. Bruk plassholderen {rowIndex} til å sette inn automatisk nummerering, {rowTitle} eller {rowName} for å referere til radens tittel eller ID, og {row.columnid} for å inkludere verdien for en bestemt matrisekolonne."

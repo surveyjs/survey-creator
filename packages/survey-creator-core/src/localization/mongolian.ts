@@ -590,6 +590,7 @@ export var mnStrings = {
     transposeData: "Багануудад транспозын эгнээ",
     addRowText: "Мөр нэмэх",
     removeRowText: "Мөр устгах",
+    singleInputTitleTemplate: "Оролт талбайн гарчгийн загвар",
     rateMin: "Хамгийн бага утга",
     rateMax: "Хамгийн их утга",
     rateStep: "Алхам",
@@ -1119,7 +1120,8 @@ export var mnStrings = {
     questionsOnPageMode: {
       standard: "Оригинал бүтэц",
       singlePage: "Бүх асуултыг нэг хуудсан дээр харуул",
-      questionPerPage: "Хуудас тус бүрт ганц асуултыг харуул"
+      questionPerPage: "Хуудас тус бүрт ганц асуултыг харуул",
+      inputPerPage: "Хуудас бүрт нэг оролт талбарыг үзүүлэх"
     },
     noPreview: "Урьдчилан харах боломжгүй",
     showAllQuestions: "Бүх асуултыг харуулах.",
@@ -1320,7 +1322,9 @@ export var mnStrings = {
   ts: {
     selectPage: "Тест хийх хуудсыг сонгох.",
     showInvisibleElements: "Харагдахгүй элементүүдийг харуулах.",
-    hideInvisibleElements: "Харагдахгүй элементүүдийг нуух."
+    hideInvisibleElements: "Харагдахгүй элементүүдийг нуух.",
+    prevPage: "Өмнөх",
+    nextPage: "Дараагийн"
   },
   validators: {
     answercountvalidator: "Хариултын тоо",
@@ -1623,7 +1627,8 @@ export var mnStrings = {
       overlapEnabled: "Идэвхжүүлбэл судалгааны дээд хэсэг нь header-ийн доод хэсгийг давхарладаг.",
       mobileHeight: "0 гэж тохируулбал өндөрийг гарчгийн агуулгад тохируулахын тулд автоматаар тооцоолдог."
     },
-    progressBarInheritWidthFrom: "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг."
+    progressBarInheritWidthFrom: "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг.",
+    singleInputTitleTemplate: "'Survey layout' нь 'Single input field per page' болгож тохируулсан үед ашиглана. Энэ загварт матриц хуваагдан оролт талбар бүр тусдаа хуудас дээр харагдана. Автомат дугаарлалт оруулахын тулд {rowIndex} placeholder, мөрийн гарчиг эсвэл ID-г эш татахын тулд {rowTitle} эсвэл {rowName}, тодорхой матрицын баганын үнэ цэнийг оруулахын тулд {row.columnid} ашигла."
   },
   // Properties
   p: {
@@ -2708,3 +2713,8 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // page.description: "Type a page subtitle." => "Хуудасны дэд гарчиг гэж бич."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Progress bar эсвэл table of contents (TOC) дахь навигацийн товчлуур дээр харагдах тайлбар. Энэ талбарыг хоосон үлдээвэл навигацийн товчлуур хуудасны гарчиг эсвэл хуудасны нэрийг ашиглана. Progress bar эсвэл TOC-г идэвхжүүлэхийн тулд \"Survey\" → \"Navigation\" руу орно."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Хэрэв хүссэн хувилбар нь доош хаягдалд байхгүй бол оролцогчдод өөрсдийн сонголтыг нэмж оруулах боломжийг олго. Custom сонголтууд нь тухайн браузерын хуралдааны туршид зөвхөн түр хугацаагаар хадгалагдах болно."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Оролт талбайн гарчгийн загвар"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Хуудас бүрт нэг оролт талбарыг үзүүлэх"
+// ts.prevPage: "Previous" => "Өмнөх"
+// ts.nextPage: "Next" => "Дараагийн"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "'Survey layout' нь 'Single input field per page' болгож тохируулсан үед ашиглана. Энэ загварт матриц хуваагдан оролт талбар бүр тусдаа хуудас дээр харагдана. Автомат дугаарлалт оруулахын тулд {rowIndex} placeholder, мөрийн гарчиг эсвэл ID-г эш татахын тулд {rowTitle} эсвэл {rowName}, тодорхой матрицын баганын үнэ цэнийг оруулахын тулд {row.columnid} ашигла."

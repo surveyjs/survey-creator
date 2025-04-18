@@ -590,6 +590,7 @@ var germanTranslation = {
     transposeData: "Transponieren von Zeilen in Spalten",
     addRowText: "Text für die Schaltfläche \"Zeile hinzufügen\"",
     removeRowText: "Text für die Schaltfläche \"Zeile entfernen\"",
+    singleInputTitleTemplate: "Muster für den Titel des Eingabefelds",
     rateMin: "Minimum",
     rateMax: "Maximum",
     rateStep: "Schritt Bewertung",
@@ -1119,7 +1120,8 @@ var germanTranslation = {
     questionsOnPageMode: {
       standard: "Ursprüngliche Struktur",
       singlePage: "Alle Fragen auf einer Seite anzeigen",
-      questionPerPage: "Eine Frage pro Seite anzeigen"
+      questionPerPage: "Eine Frage pro Seite anzeigen",
+      inputPerPage: "Einzelnes Eingabefeld pro Seite anzeigen"
     },
     noPreview: "Keine Vorschau",
     showAllQuestions: "Vorschau mit allen Fragen anzeigen",
@@ -1320,7 +1322,9 @@ var germanTranslation = {
   ts: {
     selectPage: "Seite:",
     showInvisibleElements: "Unsichtbare Elemente anzeigen",
-    hideInvisibleElements: "Unsichtbare Elemente ausblenden"
+    hideInvisibleElements: "Unsichtbare Elemente ausblenden",
+    prevPage: "Vorhergehend",
+    nextPage: "Nächster"
   },
   validators: {
     answercountvalidator: "Antwortanzahl",
@@ -1623,7 +1627,8 @@ var germanTranslation = {
       overlapEnabled: "Wenn diese Option aktiviert ist, überlagert der obere Rand der Umfrage den unteren Rand der Kopfzeile.",
       mobileHeight: "Wenn der Wert auf 0 gesetzt ist, wird die Höhe automatisch berechnet, um den Inhalt der Kopfzeile aufzunehmen."
     },
-    progressBarInheritWidthFrom: "Die Option \"Wie Container\" passt die Breite des Fortschrittsbalkenbereichs automatisch an das HTML-Element an, in dem die Umfrage platziert wird."
+    progressBarInheritWidthFrom: "Die Option \"Wie Container\" passt die Breite des Fortschrittsbalkenbereichs automatisch an das HTML-Element an, in dem die Umfrage platziert wird.",
+    singleInputTitleTemplate: "Wird verwendet, wenn das \"Umfragelayout\" auf \"Einzeleingabefeld pro Seite\" eingestellt ist. In diesem Layout wird die Matrix so aufgeteilt, dass jedes Eingabefeld auf einer separaten Seite erscheint. Verwenden Sie den Platzhalter {rowIndex}, um die automatische Nummerierung einzufügen, {rowTitle} oder {rowName}, um auf den Titel oder die ID der Zeile zu verweisen, und {row.columnid}, um den Wert einer bestimmten Matrixspalte einzuschließen."
   },
   // Properties
   p: {
@@ -2765,3 +2770,8 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // page.description: "Type a page subtitle." => "Geben Sie einen Seitenuntertitel ein."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Eine Beschriftung, die auf einer Navigationsschaltfläche in der Fortschrittsleiste oder im Inhaltsverzeichnis angezeigt wird. Wenn Sie dieses Feld leer lassen, verwendet die Navigationsschaltfläche den Seitentitel oder den Seitennamen. Um den Fortschrittsbalken oder das Inhaltsverzeichnis zu aktivieren, gehen Sie zu \"Umfrage\" → \"Navigation\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Wählen Sie diese Option aus, damit die Befragten ihre eigenen Auswahlmöglichkeiten hinzufügen können, wenn die gewünschte Option nicht in der Dropdown-Liste verfügbar ist. Benutzerdefinierte Auswahlmöglichkeiten werden nur für die Dauer der aktuellen Browsersitzung vorübergehend gespeichert."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Muster für den Titel des Eingabefelds"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Einzelnes Eingabefeld pro Seite anzeigen"
+// ts.prevPage: "Previous" => "Vorhergehend"
+// ts.nextPage: "Next" => "Nächster"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Wird verwendet, wenn das \"Umfragelayout\" auf \"Einzeleingabefeld pro Seite\" eingestellt ist. In diesem Layout wird die Matrix so aufgeteilt, dass jedes Eingabefeld auf einer separaten Seite erscheint. Verwenden Sie den Platzhalter {rowIndex}, um die automatische Nummerierung einzufügen, {rowTitle} oder {rowName}, um auf den Titel oder die ID der Zeile zu verweisen, und {row.columnid}, um den Wert einer bestimmten Matrixspalte einzuschließen."

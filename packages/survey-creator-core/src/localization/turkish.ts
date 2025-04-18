@@ -590,6 +590,7 @@ export var turkishStrings = {
     transposeData: "Satırları sütunlara dönüştürme",
     addRowText: "Satır butonu yazısı ekle",
     removeRowText: "Satır butonu yazısını kaldır",
+    singleInputTitleTemplate: "Giriş alanı başlık deseni",
     rateMin: "Minimum oran",
     rateMax: "Maksimum oran",
     rateStep: "Oylama adımı",
@@ -1119,7 +1120,8 @@ export var turkishStrings = {
     questionsOnPageMode: {
       standard: "Orijinal yapı",
       singlePage: "Tüm soruları tek bir sayfada göster",
-      questionPerPage: "Sayfa başına tek bir soru göster"
+      questionPerPage: "Sayfa başına tek bir soru göster",
+      inputPerPage: "Sayfa başına tek giriş alanı göster"
     },
     noPreview: "Önizleme yok",
     showAllQuestions: "Tüm soruları göster",
@@ -1320,7 +1322,9 @@ export var turkishStrings = {
   ts: {
     selectPage: "Test edilecek sayfayı seçin:",
     showInvisibleElements: "Görünmez öğeleri göster",
-    hideInvisibleElements: "Görünmez öğeleri gizleme"
+    hideInvisibleElements: "Görünmez öğeleri gizleme",
+    prevPage: "Önceki",
+    nextPage: "Önümüzdeki"
   },
   validators: {
     answercountvalidator: "cevap sayısı",
@@ -1623,7 +1627,8 @@ export var turkishStrings = {
       overlapEnabled: "Etkinleştirildiğinde, anketin üst kısmı başlığın alt kısmıyla kaplanır.",
       mobileHeight: "0 olarak ayarlandığında, üstbilginin içeriğine uyum sağlamak için yükseklik otomatik olarak hesaplanır."
     },
-    progressBarInheritWidthFrom: "\"Kapsayıcı ile aynı\" seçeneği, ilerleme çubuğu alan genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar."
+    progressBarInheritWidthFrom: "\"Kapsayıcı ile aynı\" seçeneği, ilerleme çubuğu alan genişliğini anketin yerleştirildiği HTML öğesine sığacak şekilde otomatik olarak ayarlar.",
+    singleInputTitleTemplate: "'Anket düzeni' 'Sayfa başına tek giriş alanı' olarak ayarlandığında kullanılır. Bu düzende matris, her giriş alanı ayrı bir sayfada görünecek şekilde bölünür. Otomatik numaralandırma eklemek için {rowIndex} yer tutucusunu, satırın başlığına veya kimliğine başvurmak için {rowTitle} veya {rowName} ve belirli bir matris sütununun değerini eklemek için {row.columnid} yer tutucusunu kullanın."
   },
   // Properties
   p: {
@@ -3048,3 +3053,8 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // page.description: "Type a page subtitle." => "Bir sayfa alt başlığı yazın."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "İlerleme çubuğundaki veya içindekiler tablosundaki (TOC) bir gezinti düğmesinde görüntülenen resim yazısı. Bu alanı boş bırakırsanız, gezinme düğmesi sayfa başlığını veya sayfa adını kullanır. İlerleme çubuğunu veya İçindekiler'i etkinleştirmek için \"Anket\" → \"Gezinme\"ye gidin."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "İstenen seçenek açılır menüde mevcut değilse, yanıtlayanların kendi seçimlerini eklemesine izin vermek için bunu seçin. Özel seçimler yalnızca geçerli tarayıcı oturumu süresince geçici olarak saklanacaktır."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Giriş alanı başlık deseni"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Sayfa başına tek giriş alanı göster"
+// ts.prevPage: "Previous" => "Önceki"
+// ts.nextPage: "Next" => "Önümüzdeki"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "'Anket düzeni' 'Sayfa başına tek giriş alanı' olarak ayarlandığında kullanılır. Bu düzende matris, her giriş alanı ayrı bir sayfada görünecek şekilde bölünür. Otomatik numaralandırma eklemek için {rowIndex} yer tutucusunu, satırın başlığına veya kimliğine başvurmak için {rowTitle} veya {rowName} ve belirli bir matris sütununun değerini eklemek için {row.columnid} yer tutucusunu kullanın."

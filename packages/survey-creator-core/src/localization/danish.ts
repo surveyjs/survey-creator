@@ -590,6 +590,7 @@ export var danishStrings = {
     transposeData: "Transponere rækker til kolonner",
     addRowText: "Tilføj række knaptekst",
     removeRowText: "Fjern række knaptekst",
+    singleInputTitleTemplate: "Titelmønster for inputfelt",
     rateMin: "Mindste sats værdi",
     rateMax: "Maksimal sats værdi",
     rateStep: "Sats trin",
@@ -1119,7 +1120,8 @@ export var danishStrings = {
     questionsOnPageMode: {
       standard: "Oprindelig struktur",
       singlePage: "Vis alle spørgsmål på én side",
-      questionPerPage: "Vis et enkelt spørgsmål pr. side"
+      questionPerPage: "Vis et enkelt spørgsmål pr. side",
+      inputPerPage: "Vis et enkelt indtastningsfelt pr. side"
     },
     noPreview: "Ingen forhåndsvisning",
     showAllQuestions: "Vis alle spørgsmål",
@@ -1320,7 +1322,9 @@ export var danishStrings = {
   ts: {
     selectPage: "Vælg siden for at teste den:",
     showInvisibleElements: "Vis usynlige elementer",
-    hideInvisibleElements: "Skjul usynlige elementer"
+    hideInvisibleElements: "Skjul usynlige elementer",
+    prevPage: "Tidligere",
+    nextPage: "Næste"
   },
   validators: {
     answercountvalidator: "answer count",
@@ -1623,7 +1627,8 @@ export var danishStrings = {
       overlapEnabled: "Når den er aktiveret, overlejres toppen af undersøgelsen bunden af sidehovedet.",
       mobileHeight: "Når den er indstillet til 0, beregnes højden automatisk for at rumme sidehovedets indhold."
     },
-    progressBarInheritWidthFrom: "Indstillingen \"Samme som beholder\" justerer automatisk bredden på statuslinjens område, så den passer ind i det HTML-element, som undersøgelsen er placeret i."
+    progressBarInheritWidthFrom: "Indstillingen \"Samme som beholder\" justerer automatisk bredden på statuslinjens område, så den passer ind i det HTML-element, som undersøgelsen er placeret i.",
+    singleInputTitleTemplate: "Bruges, når 'Undersøgelseslayout' er indstillet til 'Enkelt indtastningsfelt pr. side'. I dette layout er matrixen opdelt, så hvert inputfelt vises på en separat side. Brug pladsholderen {rowIndex} til at indsætte automatisk nummerering, {rowTitle} eller {rowName} til at referere til rækkens titel eller id, og {row.columnid} til at medtage værdien af en bestemt matrixkolonne."
   },
   // Properties
   p: {
@@ -3237,3 +3242,8 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // page.description: "Type a page subtitle." => "Skriv en sideundertitel."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "En billedtekst, der vises på en navigationsknap på statuslinjen eller indholdsfortegnelsen. Hvis du lader dette felt være tomt, bruger navigationsknappen sidetitlen eller sidenavnet. For at aktivere statuslinjen eller indholdsfortegnelsen skal du gå til \"Undersøgelse\" → \"Navigation\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Vælg for at lade svarpersonerne tilføje deres egne valgmuligheder, hvis den ønskede indstilling ikke er tilgængelig på rullelisten. Brugerdefinerede valg gemmes kun midlertidigt i den aktuelle browsersession."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Titelmønster for inputfelt"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Vis et enkelt indtastningsfelt pr. side"
+// ts.prevPage: "Previous" => "Tidligere"
+// ts.nextPage: "Next" => "Næste"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Bruges, når 'Undersøgelseslayout' er indstillet til 'Enkelt indtastningsfelt pr. side'. I dette layout er matrixen opdelt, så hvert inputfelt vises på en separat side. Brug pladsholderen {rowIndex} til at indsætte automatisk nummerering, {rowTitle} eller {rowName} til at referere til rækkens titel eller id, og {row.columnid} til at medtage værdien af en bestemt matrixkolonne."

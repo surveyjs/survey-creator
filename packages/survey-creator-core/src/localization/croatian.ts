@@ -590,6 +590,7 @@ export var hrStrings = {
     transposeData: "Transponiranje redaka u stupce",
     addRowText: "Dodavanje teksta gumba redak",
     removeRowText: "Uklanjanje teksta gumba redaka",
+    singleInputTitleTemplate: "Uzorak naslova polja za unos",
     rateMin: "Minimalna stopa",
     rateMax: "Maksimalna stopa",
     rateStep: "Korak stope",
@@ -1119,7 +1120,8 @@ export var hrStrings = {
     questionsOnPageMode: {
       standard: "Izvorna struktura",
       singlePage: "Pokaži sva pitanja na jednoj stranici",
-      questionPerPage: "Pokaži jedno pitanje po stranici"
+      questionPerPage: "Pokaži jedno pitanje po stranici",
+      inputPerPage: "Prikaz jednog polja za unos po stranici"
     },
     noPreview: "no preview",
     showAllQuestions: "show preview with all questions",
@@ -1320,7 +1322,9 @@ export var hrStrings = {
   ts: {
     selectPage: "Odaberite stranicu da biste je testirali:",
     showInvisibleElements: "Pokaži nevidljive elemente",
-    hideInvisibleElements: "Sakrij nevidljive elemente"
+    hideInvisibleElements: "Sakrij nevidljive elemente",
+    prevPage: "Prethodan",
+    nextPage: "Sljedeći"
   },
   validators: {
     answercountvalidator: "broj odgovora",
@@ -1623,7 +1627,8 @@ export var hrStrings = {
       overlapEnabled: "Kada je omogućeno, vrh upitnika prekriva dno zaglavlja.",
       mobileHeight: "Kada je postavljena na 0, visina se automatski izračunava kako bi se prilagodio sadržaju zaglavlja."
     },
-    progressBarInheritWidthFrom: "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja trake napretka kako bi se uklopila u HTML element u koji je upitnik postavljen."
+    progressBarInheritWidthFrom: "Opcija \"Isto kao spremnik\" automatski prilagođava širinu područja trake napretka kako bi se uklopila u HTML element u koji je upitnik postavljen.",
+    singleInputTitleTemplate: "Koristi se kada je 'Izgled upitnika' postavljen na 'Jedno polje za unos po stranici'. U ovom izgledu matrica je podijeljena tako da se svako polje za unos prikazuje na zasebnoj stranici. Upotrijebite rezervirano mjesto {rowIndex} za umetanje automatskog numeriranja, {rowTitle} ili {rowName} za referencu na naslov ili ID retka, a {row.columnid} za uključivanje vrijednosti određenog stupca matrice."
   },
   // Properties
   p: {
@@ -3047,3 +3052,8 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // page.description: "Type a page subtitle." => "Upišite podnaslov stranice."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Opis prikazan na navigacijskom gumbu na traci napretka ili kazalu sadržaja. Ako ovo polje ostavite prazno, navigacijski gumb koristit će naslov stranice ili naziv stranice. Da biste omogućili traku napretka ili sadržaj, idite na \"Anketa\" → \"Navigacija\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Odaberite da biste ispitanicima omogućili dodavanje vlastitih izbora ako željena opcija nije dostupna na padajućem izborniku. Prilagođeni odabiri bit će pohranjeni samo privremeno za vrijeme trajanja trenutne sesije preglednika."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Uzorak naslova polja za unos"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Prikaz jednog polja za unos po stranici"
+// ts.prevPage: "Previous" => "Prethodan"
+// ts.nextPage: "Next" => "Sljedeći"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Koristi se kada je 'Izgled upitnika' postavljen na 'Jedno polje za unos po stranici'. U ovom izgledu matrica je podijeljena tako da se svako polje za unos prikazuje na zasebnoj stranici. Upotrijebite rezervirano mjesto {rowIndex} za umetanje automatskog numeriranja, {rowTitle} ili {rowName} za referencu na naslov ili ID retka, a {row.columnid} za uključivanje vrijednosti određenog stupca matrice."

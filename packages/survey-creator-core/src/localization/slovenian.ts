@@ -590,6 +590,7 @@ export var slStrings = {
     transposeData: "Zamenjaj vrstice s stolpci",
     addRowText: "Besedilo gumba \"Dodaj vrstico\"",
     removeRowText: "Besedilo gumba \"Odstrani vrstico\"",
+    singleInputTitleTemplate: "Vzorec naslova vnosnega polja",
     rateMin: "Minimalna vrednost ocene",
     rateMax: "Maksimalna vrednost ocene",
     rateStep: "Korak vrednosti",
@@ -1119,7 +1120,8 @@ export var slStrings = {
     questionsOnPageMode: {
       standard: "Původní struktura",
       singlePage: "Zobrazit všechny otázky na jedné stránce",
-      questionPerPage: "Zobrazit jednu otázku na stránce"
+      questionPerPage: "Zobrazit jednu otázku na stránce",
+      inputPerPage: "Prikaz enega vnosnega polja na stran"
     },
     noPreview: "Žádný náhled",
     showAllQuestions: "Zobrazit všechny otázky",
@@ -1320,7 +1322,9 @@ export var slStrings = {
   ts: {
     selectPage: "Izberi stran za testiranje",
     showInvisibleElements: "Prikaži nevidne elemente",
-    hideInvisibleElements: "Skrij nevidne elemente"
+    hideInvisibleElements: "Skrij nevidne elemente",
+    prevPage: "Prejšnji",
+    nextPage: "Naslednji"
   },
   validators: {
     answercountvalidator: "Število odgovorov",
@@ -1623,7 +1627,8 @@ export var slStrings = {
       overlapEnabled: "Ko je omogočeno, zgornji del ankete prekrije spodnji del glave.",
       mobileHeight: "Ko je nastavljeno na 0, se višina samodejno izračuna, da sprejme vsebino glave."
     },
-    progressBarInheritWidthFrom: "\"Enako kot kontejner\" možnost samodejno prilagodi širino območja napredka, da se prilega HTML elementu, v katerega je anketa vstavljena."
+    progressBarInheritWidthFrom: "\"Enako kot kontejner\" možnost samodejno prilagodi širino območja napredka, da se prilega HTML elementu, v katerega je anketa vstavljena.",
+    singleInputTitleTemplate: "Uporablja se, ko je \"Postavitev ankete\" nastavljena na \"Eno vnosno polje na stran\". V tej postavitvi je matrika razdeljena tako, da je vsako vnosno polje prikazano na ločeni strani. Označbo mesta {rowIndex} uporabite za vstavljanje samodejnega oštevilčenja, {rowTitle} ali {rowName} za sklicevanje na naslov ali ID vrstice in {row.columnid} za vključitev vrednosti določenega stolpca matrike."
   },
   // Properties
   p: {
@@ -1827,3 +1832,8 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // page.description: "Type a page subtitle." => "Vnesite podnaslov strani."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Napis, prikazan na gumbu za krmarjenje v vrstici napredovanja ali kazalu. Če pustite to polje prazno, bo gumb za krmarjenje uporabil naslov ali ime strani. Če želite omogočiti vrstico napredovanja ali TOC, pojdite na »Anketa« → »Krmarjenje«."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Izberite, če želite respondentom omogočiti, da dodajo svoje izbire, če želena možnost ni na voljo v spustnem meniju. Izbire po meri bodo shranjene le začasno za čas trajanja trenutne seje brskalnika."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Vzorec naslova vnosnega polja"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Prikaz enega vnosnega polja na stran"
+// ts.prevPage: "Previous" => "Prejšnji"
+// ts.nextPage: "Next" => "Naslednji"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Uporablja se, ko je \"Postavitev ankete\" nastavljena na \"Eno vnosno polje na stran\". V tej postavitvi je matrika razdeljena tako, da je vsako vnosno polje prikazano na ločeni strani. Označbo mesta {rowIndex} uporabite za vstavljanje samodejnega oštevilčenja, {rowTitle} ali {rowName} za sklicevanje na naslov ali ID vrstice in {row.columnid} za vključitev vrednosti določenega stolpca matrike."

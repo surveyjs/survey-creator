@@ -590,6 +590,7 @@ var traditionalChineseTranslation = {
     transposeData: "將行轉置為列",
     addRowText: "添加條目按鈕文本",
     removeRowText: "刪除條目按鈕文本",
+    singleInputTitleTemplate: "輸入欄位標題模式",
     rateMin: "最低速率值",
     rateMax: "最大速率值",
     rateStep: "速率步長",
@@ -1119,7 +1120,8 @@ var traditionalChineseTranslation = {
     questionsOnPageMode: {
       standard: "原始結構",
       singlePage: "在一個頁面上顯示所有問題",
-      questionPerPage: "每頁顯示一個問題"
+      questionPerPage: "每頁顯示一個問題",
+      inputPerPage: "每頁顯示單個輸入欄位"
     },
     noPreview: "無預覽",
     showAllQuestions: "顯示所有問題",
@@ -1320,7 +1322,9 @@ var traditionalChineseTranslation = {
   ts: {
     selectPage: "選擇要測試的頁面",
     showInvisibleElements: "顯示不可見元素",
-    hideInvisibleElements: "隱藏不可見元素"
+    hideInvisibleElements: "隱藏不可見元素",
+    prevPage: "以前",
+    nextPage: "下一個"
   },
   validators: {
     answercountvalidator: "數量檢查",
@@ -1623,7 +1627,8 @@ var traditionalChineseTranslation = {
       overlapEnabled: "啟用后，調查的頂部將覆蓋頁眉的底部。",
       mobileHeight: "設置為 0 時，將自動計算高度以適應標題的內容。"
     },
-    progressBarInheritWidthFrom: "“與容器相同”選項會自動調整進度條區域的寬度，以適應放置調查的 HTML 元素。"
+    progressBarInheritWidthFrom: "“與容器相同”選項會自動調整進度條區域的寬度，以適應放置調查的 HTML 元素。",
+    singleInputTitleTemplate: "當「調查佈局」設置為「每頁單個輸入欄位」時使用。在此佈局中，矩陣被拆分，以便每個輸入欄位都顯示在單獨的頁面上。使用 {rowIndex} 占位符插入自動編號，使用 {rowTitle} 或 {rowName} 引用行的標題或 ID，使用 {row.columnid} 包含特定矩陣列的值。"
   },
   // Properties
   p: {
@@ -3323,3 +3328,8 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // page.description: "Type a page subtitle." => "鍵入頁面副標題。"
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "顯示在進度條或目錄 （TOC） 中的導航按鈕上的說明。如果將此欄位留空，則導航按鈕將使用頁面標題或頁面名稱。要啟用進度條或 TOC，請轉到“調查”→“導航”。"
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "如果下拉清單中沒有所需的選項，則選擇以允許受訪者添加自己的選擇。自訂選項將僅在當前瀏覽器會話期間臨時存儲。"
+// pe.singleInputTitleTemplate: "Input field title pattern" => "輸入欄位標題模式"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "每頁顯示單個輸入欄位"
+// ts.prevPage: "Previous" => "以前"
+// ts.nextPage: "Next" => "下一個"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "當「調查佈局」設置為「每頁單個輸入欄位」時使用。在此佈局中，矩陣被拆分，以便每個輸入欄位都顯示在單獨的頁面上。使用 {rowIndex} 占位符插入自動編號，使用 {rowTitle} 或 {rowName} 引用行的標題或 ID，使用 {row.columnid} 包含特定矩陣列的值。"

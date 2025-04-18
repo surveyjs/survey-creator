@@ -592,6 +592,7 @@ export var enStrings = {
     transposeData: "Transpose rows to columns",
     addRowText: "\"Add Row\" button text",
     removeRowText: "\"Remove Row\" button text",
+    singleInputTitleTemplate: "Input field title pattern",
     rateMin: "Minimum rating value",
     rateMax: "Maximum rating value",
     rateStep: "Step value",
@@ -1123,7 +1124,8 @@ export var enStrings = {
     questionsOnPageMode: {
       standard: "Original structure",
       singlePage: "Show all questions on one page",
-      questionPerPage: "Show single question per page"
+      questionPerPage: "Show single question per page",
+      inputPerPage: "Show single input field per page"
     },
     noPreview: "No preview",
     showAllQuestions: "Show all questions",
@@ -1633,7 +1635,8 @@ export var enStrings = {
       overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header.",
       mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content.",
     },
-    progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in."
+    progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in.",
+    singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column."
   },
   // Properties
   p: {

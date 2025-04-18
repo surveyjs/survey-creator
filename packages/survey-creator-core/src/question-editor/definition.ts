@@ -147,6 +147,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "optionsCaption",
       "detailPanelMode",
       "detailPanelShowOnAdding",
+      "singleInputTitleTemplate",
       { name: "showHeader", tab: "layout" },
       { name: "showColumnHeader", tab: "layout" },
       { name: "verticalAlign", tab: "layout" },

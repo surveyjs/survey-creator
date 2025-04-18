@@ -590,6 +590,7 @@ export var koreanStrings = {
     transposeData: "행을 열로 바꾸기",
     addRowText: "행 버튼 텍스트 추가",
     removeRowText: "행 버튼 텍스트 제거",
+    singleInputTitleTemplate: "입력 필드 제목 패턴",
     rateMin: "최소 요금 값",
     rateMax: "최대 속도 값",
     rateStep: "속도 단계",
@@ -1119,7 +1120,8 @@ export var koreanStrings = {
     questionsOnPageMode: {
       standard: "원래 구조",
       singlePage: "모든 질문을 한 페이지에 표시",
-      questionPerPage: "페이지당 단일 질문 표시"
+      questionPerPage: "페이지당 단일 질문 표시",
+      inputPerPage: "페이지당 단일 입력 필드 표시"
     },
     noPreview: "미리보기 없음",
     showAllQuestions: "모든 질문 표시",
@@ -1320,7 +1322,9 @@ export var koreanStrings = {
   ts: {
     selectPage: "테스트 할 페이지를 선택하십시오:",
     showInvisibleElements: "보이지 않는 요소 표시",
-    hideInvisibleElements: "보이지 않는 요소 숨기기"
+    hideInvisibleElements: "보이지 않는 요소 숨기기",
+    prevPage: "이전의",
+    nextPage: "다음"
   },
   validators: {
     answercountvalidator: "답 개수",
@@ -1623,7 +1627,8 @@ export var koreanStrings = {
       overlapEnabled: "활성화하면 설문조사의 상단이 헤더의 하단에 오버레이됩니다.",
       mobileHeight: "0으로 설정하면 헤더의 내용을 수용하기 위해 높이가 자동으로 계산됩니다."
     },
-    progressBarInheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다."
+    progressBarInheritWidthFrom: "\"컨테이너와 동일\" 옵션은 설문조사가 배치된 HTML 요소에 맞게 진행률 표시줄 영역 너비를 자동으로 조정합니다.",
+    singleInputTitleTemplate: "'설문조사 레이아웃'이 '페이지당 단일 입력 필드'로 설정된 경우에 사용됩니다. 이 레이아웃에서는 각 입력 필드가 별도의 페이지에 표시되도록 행렬이 분할됩니다. {rowIndex} 자리 표시자를 사용하여 자동 번호 매기기를 삽입하고, {rowTitle} 또는 {rowName}을 사용하여 행의 제목 또는 ID를 참조하고, {row.columnid}를 사용하여 특정 행렬 열의 값을 포함합니다."
   },
   // Properties
   p: {
@@ -3257,3 +3262,8 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // page.description: "Type a page subtitle." => "페이지 부제목을 입력합니다."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "진행률 표시줄 또는 목차(TOC)의 탐색 단추에 표시되는 캡션입니다. 이 필드를 비워 두면 탐색 버튼에서 페이지 제목 또는 페이지 이름을 사용합니다. 진행률 표시줄 또는 TOC를 활성화하려면 \"설문 조사\" → \"탐색\"으로 이동합니다."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "드롭다운에서 원하는 옵션을 사용할 수 없는 경우 응답자가 자신의 선택 항목을 추가할 수 있도록 하려면 선택합니다. 사용자 지정 선택 항목은 현재 브라우저 세션 동안 일시적으로만 저장됩니다."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "입력 필드 제목 패턴"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "페이지당 단일 입력 필드 표시"
+// ts.prevPage: "Previous" => "이전의"
+// ts.nextPage: "Next" => "다음"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "'설문조사 레이아웃'이 '페이지당 단일 입력 필드'로 설정된 경우에 사용됩니다. 이 레이아웃에서는 각 입력 필드가 별도의 페이지에 표시되도록 행렬이 분할됩니다. {rowIndex} 자리 표시자를 사용하여 자동 번호 매기기를 삽입하고, {rowTitle} 또는 {rowName}을 사용하여 행의 제목 또는 ID를 참조하고, {row.columnid}를 사용하여 특정 행렬 열의 값을 포함합니다."

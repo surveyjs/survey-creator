@@ -590,6 +590,7 @@ var polishStrings = {
     transposeData: "Transponowanie wierszy do kolumn",
     addRowText: "Add row button text",
     removeRowText: "Remove row button text",
+    singleInputTitleTemplate: "Wzorzec tytułu pola wejściowego",
     rateMin: "Minimalna wartość stawki",
     rateMax: "Maksymalna wartość stawki",
     rateStep: "Krok stawki",
@@ -1119,7 +1120,8 @@ var polishStrings = {
     questionsOnPageMode: {
       standard: "Oryginalna struktura",
       singlePage: "Pokaż wszystkie pytania na jednej stronie",
-      questionPerPage: "Pokaż pojedyncze pytanie na stronie"
+      questionPerPage: "Pokaż pojedyncze pytanie na stronie",
+      inputPerPage: "Pokaż pojedyncze pole wejściowe na stronę"
     },
     noPreview: "Brak podglądu",
     showAllQuestions: "Pokaż wszystkie pytania",
@@ -1320,7 +1322,9 @@ var polishStrings = {
   ts: {
     selectPage: "Wybierz stronę, aby ją przetestować:",
     showInvisibleElements: "Pokaż niewidoczne elementy",
-    hideInvisibleElements: "Ukryj niewidoczne elementy"
+    hideInvisibleElements: "Ukryj niewidoczne elementy",
+    prevPage: "Poprzedni",
+    nextPage: "Następny"
   },
   validators: {
     answercountvalidator: "answer count",
@@ -1623,7 +1627,8 @@ var polishStrings = {
       overlapEnabled: "Gdy ta opcja jest włączona, górna krawędź ankiety nakłada się na dolną część nagłówka.",
       mobileHeight: "Po ustawieniu wartości 0 wysokość jest obliczana automatycznie, aby pomieścić zawartość nagłówka."
     },
-    progressBarInheritWidthFrom: "Opcja \"Tak samo jak kontener\" automatycznie dostosowuje szerokość obszaru paska postępu, aby pasowała do elementu HTML, w którym umieszczona jest ankieta."
+    progressBarInheritWidthFrom: "Opcja \"Tak samo jak kontener\" automatycznie dostosowuje szerokość obszaru paska postępu, aby pasowała do elementu HTML, w którym umieszczona jest ankieta.",
+    singleInputTitleTemplate: "Używane, gdy opcja \"Układ ankiety\" jest ustawiona na \"Pojedyncze pole wprowadzania danych na stronę\". W tym układzie macierz jest podzielona w taki sposób, że każde pole wejściowe pojawia się na osobnej stronie. Użyj symbolu zastępczego {rowIndex}, aby wstawić numerację automatyczną, {rowTitle} lub {rowName}, aby odwołać się do tytułu lub identyfikatora wiersza, oraz {row.columnid}, aby uwzględnić wartość określonej kolumny macierzy."
   },
   // Properties
   p: {
@@ -3318,3 +3323,8 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // page.description: "Type a page subtitle." => "Wpisz podtytuł strony."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Podpis wyświetlany na przycisku nawigacyjnym na pasku postępu lub w spisie treści. Jeśli pozostawisz to pole puste, przycisk nawigacyjny użyje tytułu lub nazwy strony. Aby włączyć pasek postępu lub spis treści, przejdź do \"Ankieta\" → \"Nawigacja\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Zaznacz, aby umożliwić respondentom dodawanie własnych wyborów, jeśli żądana opcja nie jest dostępna na liście rozwijanej. Niestandardowe wybory będą przechowywane tylko tymczasowo na czas trwania bieżącej sesji przeglądarki."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Wzorzec tytułu pola wejściowego"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Pokaż pojedyncze pole wejściowe na stronę"
+// ts.prevPage: "Previous" => "Poprzedni"
+// ts.nextPage: "Next" => "Następny"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Używane, gdy opcja \"Układ ankiety\" jest ustawiona na \"Pojedyncze pole wprowadzania danych na stronę\". W tym układzie macierz jest podzielona w taki sposób, że każde pole wejściowe pojawia się na osobnej stronie. Użyj symbolu zastępczego {rowIndex}, aby wstawić numerację automatyczną, {rowTitle} lub {rowName}, aby odwołać się do tytułu lub identyfikatora wiersza, oraz {row.columnid}, aby uwzględnić wartość określonej kolumny macierzy."

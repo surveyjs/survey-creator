@@ -590,6 +590,7 @@ export var ruStrings = {
     transposeData: "Транспонирование строк в столбцы",
     addRowText: "Добавить текст кнопки строки",
     removeRowText: "Удалить кнопку строки текста",
+    singleInputTitleTemplate: "Шаблон заголовка поля ввода",
     rateMin: "Минимальный рейтинг",
     rateMax: "Максимальный рейтинг",
     rateStep: "Шаг рейтинга",
@@ -1119,7 +1120,8 @@ export var ruStrings = {
     questionsOnPageMode: {
       standard: "Оригинальная структура",
       singlePage: "Показать все вопросы на одной странице",
-      questionPerPage: "Показывать один вопрос на странице"
+      questionPerPage: "Показывать один вопрос на странице",
+      inputPerPage: "Показывать одно поле ввода на странице"
     },
     noPreview: "Без предварительного просмотра",
     showAllQuestions: "Показать все вопросы",
@@ -1320,7 +1322,9 @@ export var ruStrings = {
   ts: {
     selectPage: "Выберите страницу, чтобы проверить это",
     showInvisibleElements: "Показывать скрытые элементы",
-    hideInvisibleElements: "Скрыть невидимые элементы"
+    hideInvisibleElements: "Скрыть невидимые элементы",
+    prevPage: "Предыдущий",
+    nextPage: "Следующий"
   },
   validators: {
     answercountvalidator: "Количество ответов",
@@ -1623,7 +1627,8 @@ export var ruStrings = {
       overlapEnabled: "Когда этот параметр включен, верхняя часть опроса накладывается на нижнюю часть заголовка.",
       mobileHeight: "Если задано значение 0, высота вычисляется автоматически для размещения содержимого заголовка."
     },
-    progressBarInheritWidthFrom: "Опция \"То же, что и контейнер\" автоматически настраивает ширину области индикатора выполнения в соответствии с HTML-элементом, в который помещается опрос."
+    progressBarInheritWidthFrom: "Опция \"То же, что и контейнер\" автоматически настраивает ширину области индикатора выполнения в соответствии с HTML-элементом, в который помещается опрос.",
+    singleInputTitleTemplate: "Используется, когда для параметра «Макет опроса» задано значение «Одно поле ввода на странице». В этом макете матрица разделена таким образом, что каждое поле ввода отображается на отдельной странице. Используйте заполнитель {rowIndex} для вставки автоматической нумерации, {rowTitle} или {rowName} для ссылки на заголовок или идентификатор строки, а {row.columnid} для включения значения определенного столбца матрицы."
   },
   // Properties
   p: {
@@ -3108,3 +3113,8 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // page.description: "Type a page subtitle." => "Введите подзаголовок страницы."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Подпись, отображаемая на кнопке навигации на индикаторе выполнения или в оглавлении (TOC). Если оставить это поле пустым, кнопка навигации будет использовать заголовок страницы или название страницы. Чтобы включить индикатор выполнения или оглавление, перейдите в раздел «Обзор» → «Навигация»."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Выберите, чтобы разрешить респондентам добавлять свои собственные варианты, если нужный вариант недоступен в раскрывающемся списке. Пользовательские варианты будут храниться только временно в течение текущего сеанса браузера."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Шаблон заголовка поля ввода"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Показывать одно поле ввода на странице"
+// ts.prevPage: "Previous" => "Предыдущий"
+// ts.nextPage: "Next" => "Следующий"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Используется, когда для параметра «Макет опроса» задано значение «Одно поле ввода на странице». В этом макете матрица разделена таким образом, что каждое поле ввода отображается на отдельной странице. Используйте заполнитель {rowIndex} для вставки автоматической нумерации, {rowTitle} или {rowName} для ссылки на заголовок или идентификатор строки, а {row.columnid} для включения значения определенного столбца матрицы."

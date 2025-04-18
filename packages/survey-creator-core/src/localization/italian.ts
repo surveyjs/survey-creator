@@ -590,6 +590,7 @@ var italianTranslation = {
     transposeData: "Trasponi righe in colonne",
     addRowText: "Testo del tasto per aggiungere una nuova riga",
     removeRowText: "Testo del tasto per eliminare una riga",
+    singleInputTitleTemplate: "Modello del titolo del campo di input",
     rateMin: "Valore minimo",
     rateMax: "Valore massimo",
     rateStep: "Distanza tra i valori",
@@ -1119,7 +1120,8 @@ var italianTranslation = {
     questionsOnPageMode: {
       standard: "Struttura originale",
       singlePage: "Mostra tutte le domande in un'unica pagina",
-      questionPerPage: "Mostra una singola domanda per pagina"
+      questionPerPage: "Mostra una singola domanda per pagina",
+      inputPerPage: "Mostra un singolo campo di input per pagina"
     },
     noPreview: "No anteprima",
     showAllQuestions: "Mostra tutte le domande",
@@ -1320,7 +1322,9 @@ var italianTranslation = {
   ts: {
     selectPage: "Seleziona la pagina da testare:",
     showInvisibleElements: "Mostra elementi nascosti",
-    hideInvisibleElements: "Nascondi elementi invisibili"
+    hideInvisibleElements: "Nascondi elementi invisibili",
+    prevPage: "Precedente",
+    nextPage: "Prossimo"
   },
   validators: {
     answercountvalidator: "Numero risposte",
@@ -1623,7 +1627,8 @@ var italianTranslation = {
       overlapEnabled: "Se abilitata, la parte superiore del sondaggio si sovrappone alla parte inferiore dell'intestazione.",
       mobileHeight: "Se impostata su 0, l'altezza viene calcolata automaticamente per adattarsi al contenuto dell'intestazione."
     },
-    progressBarInheritWidthFrom: "L'opzione \"Uguale al contenitore\" regola automaticamente la larghezza dell'area della barra di avanzamento per adattarla all'elemento HTML in cui è posizionato il sondaggio."
+    progressBarInheritWidthFrom: "L'opzione \"Uguale al contenitore\" regola automaticamente la larghezza dell'area della barra di avanzamento per adattarla all'elemento HTML in cui è posizionato il sondaggio.",
+    singleInputTitleTemplate: "Utilizzato quando il \"Layout indagine\" è impostato su \"Singolo campo di input per pagina\". In questo layout, la matrice viene suddivisa in modo che ogni campo di input appaia su una pagina separata. Utilizza il segnaposto {rowIndex} per inserire la numerazione automatica, {rowTitle} o {rowName} per fare riferimento al titolo o all'ID della riga e {row.columnid} per includere il valore di una colonna matrice specifica."
   },
   // Properties
   p: {
@@ -2814,3 +2819,8 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // page.description: "Type a page subtitle." => "Digita un sottotitolo della pagina."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Didascalia visualizzata su un pulsante di navigazione nella barra di avanzamento o nel sommario. Se si lascia vuoto questo campo, il pulsante di navigazione utilizzerà il titolo o il nome della pagina. Per abilitare la barra di avanzamento o il sommario, vai su \"Sondaggio\" → \"Navigazione\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Seleziona questa opzione per consentire ai rispondenti di aggiungere le proprie scelte se l'opzione desiderata non è disponibile nel menu a discesa. Le scelte personalizzate verranno memorizzate solo temporaneamente per la durata della sessione corrente del browser."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Modello del titolo del campo di input"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Mostra un singolo campo di input per pagina"
+// ts.prevPage: "Previous" => "Precedente"
+// ts.nextPage: "Next" => "Prossimo"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Utilizzato quando il \"Layout indagine\" è impostato su \"Singolo campo di input per pagina\". In questo layout, la matrice viene suddivisa in modo che ogni campo di input appaia su una pagina separata. Utilizza il segnaposto {rowIndex} per inserire la numerazione automatica, {rowTitle} o {rowName} per fare riferimento al titolo o all'ID della riga e {row.columnid} per includere il valore di una colonna matrice specifica."

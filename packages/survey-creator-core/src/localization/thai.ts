@@ -590,6 +590,7 @@ export const thStrings = {
     transposeData: "สลับแถวเป็นคอลัมน์",
     addRowText: "ข้อความปุ่ม \"เพิ่มแถว\"",
     removeRowText: "ข้อความปุ่ม \"ลบแถว\"",
+    singleInputTitleTemplate: "รูปแบบชื่อฟิลด์อินพุต",
     rateMin: "ค่าการให้คะแนนขั้นต่ำ",
     rateMax: "ค่าการให้คะแนนสูงสุด",
     rateStep: "ค่าขั้นตอนการให้คะแนน",
@@ -1119,7 +1120,8 @@ export const thStrings = {
     questionsOnPageMode: {
       standard: "โครงสร้างดั้งเดิม",
       singlePage: "แสดงคำถามทั้งหมดในหน้าหนึ่ง",
-      questionPerPage: "แสดงคำถามเดียวต่อหน้า"
+      questionPerPage: "แสดงคำถามเดียวต่อหน้า",
+      inputPerPage: "แสดงช่องป้อนข้อมูลเดียวต่อหน้า"
     },
     noPreview: "ไม่มีการแสดงตัวอย่าง",
     showAllQuestions: "แสดงคำถามทั้งหมด",
@@ -1320,7 +1322,9 @@ export const thStrings = {
   ts: {
     selectPage: "เลือกหน้าที่จะทดสอบ",
     showInvisibleElements: "แสดงองค์ประกอบที่ซ่อนอยู่",
-    hideInvisibleElements: "ซ่อนองค์ประกอบที่ซ่อนอยู่"
+    hideInvisibleElements: "ซ่อนองค์ประกอบที่ซ่อนอยู่",
+    prevPage: "ก่อน",
+    nextPage: "ต่อไป"
   },
   validators: {
     answercountvalidator: "จำนวนคำตอบ",
@@ -1623,7 +1627,8 @@ export const thStrings = {
       overlapEnabled: "เมื่อเปิดใช้งาน ด้านบนของแบบสํารวจจะซ้อนทับด้านล่างของส่วนหัว",
       mobileHeight: "เมื่อตั้งค่าเป็น 0 ความสูงจะถูกคํานวณโดยอัตโนมัติเพื่อรองรับเนื้อหาของส่วนหัว"
     },
-    progressBarInheritWidthFrom: "ตัวเลือก \"เหมือนกับคอนเทนเนอร์\" จะปรับความกว้างของพื้นที่แถบความคืบหน้าโดยอัตโนมัติเพื่อให้พอดีกับองค์ประกอบ HTML ที่วางแบบสํารวจ"
+    progressBarInheritWidthFrom: "ตัวเลือก \"เหมือนกับคอนเทนเนอร์\" จะปรับความกว้างของพื้นที่แถบความคืบหน้าโดยอัตโนมัติเพื่อให้พอดีกับองค์ประกอบ HTML ที่วางแบบสํารวจ",
+    singleInputTitleTemplate: "ใช้เมื่อตั้งค่า 'เค้าโครงแบบสํารวจ' เป็น 'ช่องป้อนข้อมูลเดียวต่อหน้า' ในเค้าโครงนี้ เมทริกซ์จะถูกแยกเพื่อให้แต่ละฟิลด์อินพุตปรากฏบนหน้าแยกต่างหาก ใช้ตัวยึด {rowIndex} เพื่อแทรกการกําหนดหมายเลขอัตโนมัติ {rowTitle} หรือ {rowName} เพื่ออ้างอิงชื่อหรือรหัสของแถว และ {row.columnid} เพื่อรวมค่าของคอลัมน์เมทริกซ์ที่เฉพาะเจาะจง"
   },
   // Properties
   p: {
@@ -1993,3 +1998,8 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // page.description: "Type a page subtitle." => "พิมพ์คําบรรยายของหน้า"
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "คําอธิบายภาพที่แสดงบนปุ่มนําทางในแถบความคืบหน้าหรือสารบัญ (TOC) หากคุณปล่อยให้ช่องนี้ว่างไว้ ปุ่มนําทางจะใช้ชื่อหน้าหรือชื่อหน้า หากต้องการเปิดใช้งานแถบความคืบหน้าหรือสารบัญ ให้ไปที่ \"แบบสํารวจ\" → \"การนําทาง\""
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "เลือกเพื่อให้ผู้ตอบแบบสอบถามเพิ่มตัวเลือกของตนเองหากตัวเลือกที่ต้องการไม่พร้อมใช้งานในดรอปดาวน์ ตัวเลือกที่กําหนดเองจะถูกจัดเก็บไว้ชั่วคราวในช่วงเวลาของเซสชันเบราว์เซอร์ปัจจุบันเท่านั้น"
+// pe.singleInputTitleTemplate: "Input field title pattern" => "รูปแบบชื่อฟิลด์อินพุต"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "แสดงช่องป้อนข้อมูลเดียวต่อหน้า"
+// ts.prevPage: "Previous" => "ก่อน"
+// ts.nextPage: "Next" => "ต่อไป"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "ใช้เมื่อตั้งค่า 'เค้าโครงแบบสํารวจ' เป็น 'ช่องป้อนข้อมูลเดียวต่อหน้า' ในเค้าโครงนี้ เมทริกซ์จะถูกแยกเพื่อให้แต่ละฟิลด์อินพุตปรากฏบนหน้าแยกต่างหาก ใช้ตัวยึด {rowIndex} เพื่อแทรกการกําหนดหมายเลขอัตโนมัติ {rowTitle} หรือ {rowName} เพื่ออ้างอิงชื่อหรือรหัสของแถว และ {row.columnid} เพื่อรวมค่าของคอลัมน์เมทริกซ์ที่เฉพาะเจาะจง"
