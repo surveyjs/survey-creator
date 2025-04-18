@@ -176,6 +176,7 @@ export class SurveyCreator extends SurveyCreatorModel {
     super(options, options2);
   }
   public render(target: string | HTMLElement) {
+    // eslint-disable-next-line no-console
     console.error("The render method is deprecated. Use SurveyCreatorComponent instead.");
   }
 
