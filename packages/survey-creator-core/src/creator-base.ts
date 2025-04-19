@@ -4105,7 +4105,9 @@ export class SurveyCreatorModel extends Base
     return this.getAddNewQuestionText();
   }
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
-    const res: Array<QuestionToolboxItem> = [].concat(this.toolbox.items);
+    const res: Array<QuestionToolboxItem> = [];
+    this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) res.push(item); });
+
     if (!element || this.maxNestedPanels < 0) return res;
     if (!isAddNew && element.isPanel) return res;
 

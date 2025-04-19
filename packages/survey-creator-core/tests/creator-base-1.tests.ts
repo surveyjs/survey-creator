@@ -2446,6 +2446,26 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
 });
 
+test("ConvertTo & addNewQuestion for panel & toolboxitem.showInToolboxOnly attribute", (): any => {
+  const creator = new CreatorTester();
+  const itemCount = creator.getAvailableToolboxItems().length;
+  creator.toolbox.addItem({
+    name: "text2",
+    title: "Text2",
+    iconName: "icon-text",
+    json: { type: "text", name: "question1" }
+  });
+  expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount + 1);
+  creator.toolbox.addItem({
+    name: "text3",
+    title: "Text3",
+    iconName: "icon-text",
+    showInToolboxOnly: true,
+    json: { type: "text", name: "question1" }
+  });
+  expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount + 1);
+});
+
 test("ConvertTo & addNewQuestion refresh items", (): any => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();
