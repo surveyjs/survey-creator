@@ -590,6 +590,7 @@ export const roStrings = {
     transposeData: "Transpune rândurile în coloane",
     addRowText: "Textul butonului „Adaugă rând”",
     removeRowText: "Textul butonului „Elimină rând”",
+    singleInputTitleTemplate: "Modelul de titlu al câmpului de intrare",
     rateMin: "Valoarea minimă a evaluării",
     rateMax: "Valoarea maximă a evaluării",
     rateStep: "Valoarea pasului",
@@ -1119,7 +1120,8 @@ export const roStrings = {
     questionsOnPageMode: {
       standard: "Structură originală",
       singlePage: "Afișați toate întrebările pe o singură pagină",
-      questionPerPage: "Afișați o singură întrebare pe pagină"
+      questionPerPage: "Afișați o singură întrebare pe pagină",
+      inputPerPage: "Afișează un singur câmp de introducere pe pagină"
     },
     noPreview: "Fără previzualizare",
     showAllQuestions: "Afișați toate întrebările",
@@ -1320,7 +1322,9 @@ export const roStrings = {
   ts: {
     selectPage: "Selectați pagina pentru a o testa",
     showInvisibleElements: "Afișează elementele invizibile",
-    hideInvisibleElements: "Ascunde elementele invizibile"
+    hideInvisibleElements: "Ascunde elementele invizibile",
+    prevPage: "Precedent",
+    nextPage: "Următor"
   },
   validators: {
     answercountvalidator: "Număr de răspunsuri",
@@ -1623,7 +1627,8 @@ export const roStrings = {
       overlapEnabled: "Când este activată, partea de sus a chestionarului se suprapune cu partea de jos a antetului.",
       mobileHeight: "Când este setată la 0, înălțimea este calculată automat pentru a găzdui conținutul antetului."
     },
-    progressBarInheritWidthFrom: "Opțiunea \"La fel ca containerul\" ajustează automat lățimea zonei barei de progres pentru a se potrivi cu elementul HTML în care este plasat sondajul."
+    progressBarInheritWidthFrom: "Opțiunea \"La fel ca containerul\" ajustează automat lățimea zonei barei de progres pentru a se potrivi cu elementul HTML în care este plasat sondajul.",
+    singleInputTitleTemplate: "Folosit atunci când \"Aspectul sondajului\" este setat la \"Un singur câmp de intrare pe pagină\". În acest aspect, matricea este împărțită astfel încât fiecare câmp de intrare să apară pe o pagină separată. Utilizați substituentul {rowIndex} pentru a insera numerotarea automată, {rowTitle} sau {rowName} pentru a face referire la titlul sau ID-ul rândului și {row.columnid} pentru a include valoarea unei anumite coloane de matrice."
   },
   // Properties
   p: {
@@ -1993,3 +1998,8 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // page.description: "Type a page subtitle." => "Tastați o subtitrare a paginii."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "O legendă afișată pe un buton de navigare din bara de progres sau din cuprinsul (TOC). Dacă lăsați acest câmp gol, butonul de navigare va folosi titlul paginii sau numele paginii. Pentru a activa bara de progres sau TOC, accesați \"Sondaj\" → \"Navigare\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Selectați pentru a permite respondenților să-și adauge propriile opțiuni dacă opțiunea dorită nu este disponibilă în meniul drop-down. Opțiunile personalizate vor fi stocate doar temporar pe durata sesiunii curente a browserului."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Modelul de titlu al câmpului de intrare"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Afișează un singur câmp de introducere pe pagină"
+// ts.prevPage: "Previous" => "Precedent"
+// ts.nextPage: "Next" => "Următor"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Folosit atunci când \"Aspectul sondajului\" este setat la \"Un singur câmp de intrare pe pagină\". În acest aspect, matricea este împărțită astfel încât fiecare câmp de intrare să apară pe o pagină separată. Utilizați substituentul {rowIndex} pentru a insera numerotarea automată, {rowTitle} sau {rowName} pentru a face referire la titlul sau ID-ul rândului și {row.columnid} pentru a include valoarea unei anumite coloane de matrice."

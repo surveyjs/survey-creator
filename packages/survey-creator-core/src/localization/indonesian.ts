@@ -590,6 +590,7 @@ export var indonesianStrings = {
     transposeData: "Mengubah urutan baris menjadi kolom",
     addRowText: "Teks tambah tombol baris",
     removeRowText: "Teks hapus tombol baris",
+    singleInputTitleTemplate: "Pola judul bidang input",
     rateMin: "Nilai tarif minimum",
     rateMax: "Nilai tarif maksimum",
     rateStep: "Langkah tingkat",
@@ -1119,7 +1120,8 @@ export var indonesianStrings = {
     questionsOnPageMode: {
       standard: "Struktur asli",
       singlePage: "Tampilkan semua pertanyaan di satu halaman",
-      questionPerPage: "Tampilkan pertanyaan tunggal per halaman"
+      questionPerPage: "Tampilkan pertanyaan tunggal per halaman",
+      inputPerPage: "Tampilkan satu bidang input per halaman"
     },
     noPreview: "Tidak ada pratinjau",
     showAllQuestions: "Tampilkan semua pertanyaan",
@@ -1320,7 +1322,9 @@ export var indonesianStrings = {
   ts: {
     selectPage: "Pilih halaman untuk dicoba:",
     showInvisibleElements: "Tampilkan elemen tak terlihat",
-    hideInvisibleElements: "Sembunyikan elemen tak terlihat"
+    hideInvisibleElements: "Sembunyikan elemen tak terlihat",
+    prevPage: "Mantan",
+    nextPage: "Depan"
   },
   validators: {
     answercountvalidator: "jumlah jawaban",
@@ -1623,7 +1627,8 @@ export var indonesianStrings = {
       overlapEnabled: "Saat diaktifkan, bagian atas survei melapisi bagian bawah header.",
       mobileHeight: "Saat diatur ke 0, tinggi dihitung secara otomatis untuk mengakomodasi konten header."
     },
-    progressBarInheritWidthFrom: "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area bilah kemajuan agar sesuai dengan elemen HTML tempat survei ditempatkan."
+    progressBarInheritWidthFrom: "Opsi \"Sama seperti wadah\" secara otomatis menyesuaikan lebar area bilah kemajuan agar sesuai dengan elemen HTML tempat survei ditempatkan.",
+    singleInputTitleTemplate: "Digunakan saat 'Tata letak survei' diatur ke 'Bidang input tunggal per halaman'. Dalam tata letak ini, matriks dipisahkan sehingga setiap bidang input muncul di halaman terpisah. Gunakan placeholder {rowIndex} untuk menyisipkan penomoran otomatis, {rowTitle} atau {rowName} untuk mereferensikan judul atau ID baris, dan {row.columnid} untuk menyertakan nilai kolom matriks tertentu."
   },
   // Properties
   p: {
@@ -3207,3 +3212,8 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // page.description: "Type a page subtitle." => "Ketik subjudul halaman."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Keterangan yang ditampilkan pada tombol navigasi di bilah kemajuan atau daftar isi (TOC). Jika Anda membiarkan bidang ini kosong, tombol navigasi akan menggunakan judul halaman atau nama halaman. Untuk mengaktifkan bilah kemajuan atau TOC, buka \"Survei\" → \"Navigasi\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Pilih untuk mengizinkan responden menambahkan pilihan mereka sendiri jika opsi yang diinginkan tidak tersedia di menu drop-down. Pilihan khusus hanya akan disimpan sementara selama sesi browser saat ini."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Pola judul bidang input"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Tampilkan satu bidang input per halaman"
+// ts.prevPage: "Previous" => "Mantan"
+// ts.nextPage: "Next" => "Depan"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Digunakan saat 'Tata letak survei' diatur ke 'Bidang input tunggal per halaman'. Dalam tata letak ini, matriks dipisahkan sehingga setiap bidang input muncul di halaman terpisah. Gunakan placeholder {rowIndex} untuk menyisipkan penomoran otomatis, {rowTitle} atau {rowName} untuk mereferensikan judul atau ID baris, dan {row.columnid} untuk menyertakan nilai kolom matriks tertentu."

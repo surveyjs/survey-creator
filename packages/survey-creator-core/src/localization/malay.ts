@@ -590,6 +590,7 @@ export var msStrings = {
     transposeData: "Mengubah urutan baris kepada lajur",
     addRowText: "Tambahkan teks butang baris",
     removeRowText: "Alih keluar teks butang baris",
+    singleInputTitleTemplate: "Corak tajuk medan input",
     rateMin: "Kadar minimum",
     rateMax: "Kadar maksimum",
     rateStep: "Langkah kadar",
@@ -1119,7 +1120,8 @@ export var msStrings = {
     questionsOnPageMode: {
       standard: "Struktur asal",
       singlePage: "Tunjukkan semua soalan pada satu halaman",
-      questionPerPage: "Menunjukkan soalan tunggal bagi setiap halaman"
+      questionPerPage: "Menunjukkan soalan tunggal bagi setiap halaman",
+      inputPerPage: "Tunjukkan medan input tunggal setiap halaman"
     },
     noPreview: "tiada pratonton",
     showAllQuestions: "tunjukkan pratonton dengan semua soalan",
@@ -1320,7 +1322,9 @@ export var msStrings = {
   ts: {
     selectPage: "Pilih halaman untuk mengujinya:",
     showInvisibleElements: "Pilih elemen tersembunyi",
-    hideInvisibleElements: "Sembunyikan unsur tidak kelihatan"
+    hideInvisibleElements: "Sembunyikan unsur tidak kelihatan",
+    prevPage: "Sebelumnya",
+    nextPage: "Seterusnya"
   },
   validators: {
     answercountvalidator: "kiraan jawapan",
@@ -1623,7 +1627,8 @@ export var msStrings = {
       overlapEnabled: "Apabila didayakan, bahagian atas tinjauan menindih bahagian bawah pengepala.",
       mobileHeight: "Apabila ditetapkan kepada 0, ketinggian dikira secara automatik untuk menampung kandungan pengepala."
     },
-    progressBarInheritWidthFrom: "Pilihan \"Sama seperti bekas\" melaraskan lebar kawasan bar kemajuan secara automatik agar sesuai dengan elemen HTML yang diletakkan dalam tinjauan."
+    progressBarInheritWidthFrom: "Pilihan \"Sama seperti bekas\" melaraskan lebar kawasan bar kemajuan secara automatik agar sesuai dengan elemen HTML yang diletakkan dalam tinjauan.",
+    singleInputTitleTemplate: "Digunakan apabila 'Susun atur tinjauan' ditetapkan kepada 'Medan input tunggal setiap halaman'. Dalam susun atur ini, matriks dibahagikan supaya setiap medan input muncul pada halaman yang berasingan. Gunakan ruang letak {rowIndex} untuk memasukkan penomboran automatik, {rowTitle} atau {rowName} untuk merujuk tajuk atau ID baris dan {row.columnid} untuk memasukkan nilai lajur matriks tertentu."
   },
   // Properties
   p: {
@@ -3007,3 +3012,8 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // page.description: "Type a page subtitle." => "Taipkan sari kata halaman."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Kapsyen yang dipaparkan pada butang navigasi dalam bar kemajuan atau jadual kandungan (TOC). Jika anda membiarkan medan ini kosong, butang navigasi akan menggunakan tajuk halaman atau nama halaman. Untuk mendayakan bar kemajuan atau TOC, pergi ke \"Tinjauan\" → \"Navigasi\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Pilih untuk membenarkan responden menambah pilihan mereka sendiri jika pilihan yang dikehendaki tidak tersedia dalam menu lungsur. Pilihan tersuai hanya akan disimpan buat sementara waktu sepanjang sesi penyemak imbas semasa."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Corak tajuk medan input"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Tunjukkan medan input tunggal setiap halaman"
+// ts.prevPage: "Previous" => "Sebelumnya"
+// ts.nextPage: "Next" => "Seterusnya"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Digunakan apabila 'Susun atur tinjauan' ditetapkan kepada 'Medan input tunggal setiap halaman'. Dalam susun atur ini, matriks dibahagikan supaya setiap medan input muncul pada halaman yang berasingan. Gunakan ruang letak {rowIndex} untuk memasukkan penomboran automatik, {rowTitle} atau {rowName} untuk merujuk tajuk atau ID baris dan {row.columnid} untuk memasukkan nilai lajur matriks tertentu."

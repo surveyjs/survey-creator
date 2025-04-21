@@ -590,6 +590,7 @@ export let svStrings = {
     transposeData: "Transponera rader till kolumner",
     addRowText: "Lägg till knapp text",
     removeRowText: "Ta bort rad knapp text",
+    singleInputTitleTemplate: "Titelmönster för inmatningsfält",
     rateMin: "Minsta räntevärde",
     rateMax: "Högsta taxa",
     rateStep: "Betygsätt steg",
@@ -1119,7 +1120,8 @@ export let svStrings = {
     questionsOnPageMode: {
       standard: "Ursprunglig struktur",
       singlePage: "Visa alla frågor på en sida",
-      questionPerPage: "Visa en fråga per sida"
+      questionPerPage: "Visa en fråga per sida",
+      inputPerPage: "Visa ett enskilt inmatningsfält per sida"
     },
     noPreview: "Ingen förhandsgranskning",
     showAllQuestions: "Visa alla frågor",
@@ -1320,7 +1322,9 @@ export let svStrings = {
   ts: {
     selectPage: "Välj sida för att testa den:",
     showInvisibleElements: "Visa osynliga element",
-    hideInvisibleElements: "Dölj osynliga element"
+    hideInvisibleElements: "Dölj osynliga element",
+    prevPage: "Föregående",
+    nextPage: "Nästa"
   },
   validators: {
     answercountvalidator: "answer count",
@@ -1623,7 +1627,8 @@ export let svStrings = {
       overlapEnabled: "När det här alternativet är aktiverat täcker den övre delen av undersökningen den nedre delen av sidhuvudet.",
       mobileHeight: "När värdet är 0 beräknas höjden automatiskt för att passa rubrikens innehåll."
     },
-    progressBarInheritWidthFrom: "Alternativet \"Samma som behållare\" justerar automatiskt förloppsindikatorns bredd så att den passar in i HTML-elementet som undersökningen är placerad i."
+    progressBarInheritWidthFrom: "Alternativet \"Samma som behållare\" justerar automatiskt förloppsindikatorns bredd så att den passar in i HTML-elementet som undersökningen är placerad i.",
+    singleInputTitleTemplate: "Används när 'Undersökningslayout' är inställt på 'Enskilt inmatningsfält per sida'. I den här layouten är matrisen uppdelad så att varje inmatningsfält visas på en separat sida. Använd platshållaren {rowIndex} för att infoga automatisk numrering, {rowTitle} eller {rowName} för att referera till radens rubrik eller ID och {row.columnid} för att inkludera värdet för en specifik matriskolumn."
   },
   // Properties
   p: {
@@ -3227,3 +3232,8 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // page.description: "Type a page subtitle." => "Skriv en underrubrik på sidan."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "En bildtext som visas på en navigeringsknapp i förloppsindikatorn eller innehållsförteckningen. Om du lämnar det här fältet tomt kommer navigeringsknappen att använda sidans titel eller sidnamn. För att aktivera förloppsindikatorn eller innehållsförteckningen, gå till \"Undersökning\" → \"Navigering\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Välj om du vill att de svarande ska kunna lägga till sina egna alternativ om det önskade alternativet inte är tillgängligt i rullgardinsmenyn. Anpassade val kommer endast att lagras tillfälligt under den aktuella webbläsarsessionen."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Titelmönster för inmatningsfält"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Visa ett enskilt inmatningsfält per sida"
+// ts.prevPage: "Previous" => "Föregående"
+// ts.nextPage: "Next" => "Nästa"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Används när 'Undersökningslayout' är inställt på 'Enskilt inmatningsfält per sida'. I den här layouten är matrisen uppdelad så att varje inmatningsfält visas på en separat sida. Använd platshållaren {rowIndex} för att infoga automatisk numrering, {rowTitle} eller {rowName} för att referera till radens rubrik eller ID och {row.columnid} för att inkludera värdet för en specifik matriskolumn."

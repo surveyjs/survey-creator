@@ -590,6 +590,7 @@ export var bgStrings = {
     transposeData: "Транспониране на редове в колони",
     addRowText: "Добавяне на текст на бутона за ред",
     removeRowText: "Премахване на текста на бутона за ред",
+    singleInputTitleTemplate: "Шаблон за заглавие на полето за въвеждане",
     rateMin: "Минимална стойност на оценката",
     rateMax: "Максимална стойност на оценката",
     rateStep: "Стъпка на оценката",
@@ -1119,7 +1120,8 @@ export var bgStrings = {
     questionsOnPageMode: {
       standard: "Оригинална структура",
       singlePage: "Показване на всички въпроси на една страница",
-      questionPerPage: "Показване на единичен въпрос на страница"
+      questionPerPage: "Показване на единичен въпрос на страница",
+      inputPerPage: "Показване на едно поле за въвеждане на страница"
     },
     noPreview: "Без визуализация",
     showAllQuestions: "Показване на всички въпроси",
@@ -1320,7 +1322,9 @@ export var bgStrings = {
   ts: {
     selectPage: "Избери страницата, за да я тестваш.",
     showInvisibleElements: "Показване на невидими елементи",
-    hideInvisibleElements: "Скриване на невидими елементи"
+    hideInvisibleElements: "Скриване на невидими елементи",
+    prevPage: "Предишен",
+    nextPage: "Следващ"
   },
   validators: {
     answercountvalidator: "Брой отговори",
@@ -1623,7 +1627,8 @@ export var bgStrings = {
       overlapEnabled: "Когато е разрешено, горната част на проучването се наслагва върху долната част на заглавката.",
       mobileHeight: "Когато е зададена на 0, височината се изчислява автоматично, за да побере съдържанието на заглавката."
     },
-    progressBarInheritWidthFrom: "Опцията \"Същото като контейнер\" автоматично регулира ширината на областта на лентата за напредъка, за да се побере в HTML елемента, в който е поставена анкетата."
+    progressBarInheritWidthFrom: "Опцията \"Същото като контейнер\" автоматично регулира ширината на областта на лентата за напредъка, за да се побере в HTML елемента, в който е поставена анкетата.",
+    singleInputTitleTemplate: "Използва се, когато \"Оформление на проучването\" е зададено на \"Едно поле за въвеждане на страница\". В това оформление матрицата е разделена така, че всяко поле за въвеждане да се показва на отделна страница. Използвайте контейнера {rowIndex}, за да вмъкнете автоматично номериране, {rowTitle} или {rowName}, за да препратите към заглавието или ИД на реда, и {row.columnid}, за да включите стойността на конкретна колона на матрицата."
   },
   // Properties
   p: {
@@ -2616,3 +2621,8 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // page.description: "Type a page subtitle." => "Въведете подзаглавие на страницата."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Надпис, показан на бутон за навигация в лентата за напредъка или съдържанието (TOC). Ако оставите това поле празно, бутонът за навигация ще използва заглавието на страницата или името на страницата. За да активирате лентата за напредъка или съдържанието, отидете на \"Проучване\" → \"Навигация\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Изберете, за да позволите на респондентите да добавят свои собствени избори, ако желаната опция не е налична в падащото меню. Персонализираните избори ще се съхраняват само временно за продължителността на текущата сесия на браузъра."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Шаблон за заглавие на полето за въвеждане"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Показване на едно поле за въвеждане на страница"
+// ts.prevPage: "Previous" => "Предишен"
+// ts.nextPage: "Next" => "Следващ"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Използва се, когато \"Оформление на проучването\" е зададено на \"Едно поле за въвеждане на страница\". В това оформление матрицата е разделена така, че всяко поле за въвеждане да се показва на отделна страница. Използвайте контейнера {rowIndex}, за да вмъкнете автоматично номериране, {rowTitle} или {rowName}, за да препратите към заглавието или ИД на реда, и {row.columnid}, за да включите стойността на конкретна колона на матрицата."
