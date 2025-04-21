@@ -590,6 +590,7 @@ export var czStrings = {
     transposeData: "Transponování řádků do sloupců",
     addRowText: "Přidat text tlačítka řádku",
     removeRowText: "Odebrat text tlačítka řádku",
+    singleInputTitleTemplate: "Vzor názvu vstupního pole",
     rateMin: "Minimální frekvence",
     rateMax: "Maximální frekvence",
     rateStep: "Krok frekvence",
@@ -1119,7 +1120,8 @@ export var czStrings = {
     questionsOnPageMode: {
       standard: "Původní struktura",
       singlePage: "Zobrazit všechny otázky na jedné stránce",
-      questionPerPage: "Zobrazit jednu otázku na stránku"
+      questionPerPage: "Zobrazit jednu otázku na stránku",
+      inputPerPage: "Zobrazit jedno vstupní pole na stránku"
     },
     noPreview: "bez náhledu",
     showAllQuestions: "zobrazit náhled se všemi otázkami",
@@ -1320,7 +1322,9 @@ export var czStrings = {
   ts: {
     selectPage: "Vyberte stránku a otestujte ji:",
     showInvisibleElements: "Zobrazit neviditelné prvky",
-    hideInvisibleElements: "Skrýt neviditelné prvky"
+    hideInvisibleElements: "Skrýt neviditelné prvky",
+    prevPage: "Předchozí",
+    nextPage: "Další"
   },
   validators: {
     answercountvalidator: "počet odpovědí",
@@ -1623,7 +1627,8 @@ export var czStrings = {
       overlapEnabled: "Pokud je tato možnost povolena, horní část průzkumu překrývá spodní část záhlaví.",
       mobileHeight: "Při nastavení na 0 se výška vypočítá automaticky tak, aby se přizpůsobila obsahu záhlaví."
     },
-    progressBarInheritWidthFrom: "Možnost \"Stejné jako kontejner\" automaticky upraví šířku oblasti indikátoru průběhu tak, aby se vešla do prvku HTML, do kterého je průzkum umístěn."
+    progressBarInheritWidthFrom: "Možnost \"Stejné jako kontejner\" automaticky upraví šířku oblasti indikátoru průběhu tak, aby se vešla do prvku HTML, do kterého je průzkum umístěn.",
+    singleInputTitleTemplate: "Používá se, když je \"Rozvržení průzkumu\" nastaveno na \"Jedno vstupní pole na stránku\". V tomto rozvržení je matice rozdělena tak, aby se každé vstupní pole zobrazilo na samostatné stránce. Pomocí zástupného symbolu {rowIndex} vložte automatické číslování, pomocí {rowTitle} nebo {rowName} odkazujte na název nebo ID řádku a pomocí {row.columnid} zahrňte hodnotu konkrétního sloupce matice."
   },
   // Properties
   p: {
@@ -2630,3 +2635,8 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // page.description: "Type a page subtitle." => "Zadejte podnadpis stránky."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Titulek zobrazený na navigačním tlačítku na ukazateli průběhu nebo v obsahu. Pokud toto pole ponecháte prázdné, navigační tlačítko použije název stránky nebo název stránky. Chcete-li aktivovat ukazatel průběhu nebo obsah, přejděte na \"Průzkum\" → \"Navigace\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Zaškrtnutím umožníte respondentům přidat vlastní volby, pokud požadovaná možnost není v rozbalovací nabídce k dispozici. Vlastní volby budou uloženy pouze dočasně po dobu trvání aktuální relace prohlížeče."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Vzor názvu vstupního pole"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Zobrazit jedno vstupní pole na stránku"
+// ts.prevPage: "Previous" => "Předchozí"
+// ts.nextPage: "Next" => "Další"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Používá se, když je \"Rozvržení průzkumu\" nastaveno na \"Jedno vstupní pole na stránku\". V tomto rozvržení je matice rozdělena tak, aby se každé vstupní pole zobrazilo na samostatné stránce. Pomocí zástupného symbolu {rowIndex} vložte automatické číslování, pomocí {rowTitle} nebo {rowName} odkazujte na název nebo ID řádku a pomocí {row.columnid} zahrňte hodnotu konkrétního sloupce matice."
