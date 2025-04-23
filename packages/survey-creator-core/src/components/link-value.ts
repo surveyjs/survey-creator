@@ -50,6 +50,7 @@ export class QuestionLinkValueModel extends Question {
   public getType(): string {
     return "linkvalue";
   }
+  public hasRequiredError(): boolean { return false; }
   public doLinkClick() {
     if (!!this.linkClickCallback) {
       this.linkClickCallback();

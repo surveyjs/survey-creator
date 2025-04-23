@@ -2,11 +2,13 @@
   <div
     class="spg-boolean-switch"
     role="checkbox"
-    :aria-required="question.ariaRequired"
-    :aria-label="question.ariaLabel"
-    :aria-invalid="question.ariaInvalid"
-    :aria-errormessage="question.ariaErrormessage"
-    @click="question.value = !question.value"
+    :aria-checked="question.booleanValue || false"
+    :aria-required="question.a11y_input_ariaRequired"
+    :aria-label="question.a11y_input_ariaLabel"
+    :aria-labelledby="question.a11y_input_ariaLabelledBy"
+    :aria-invalid="question.a11y_input_ariaInvalid"
+    :aria-errormessage="question.a11y_input_ariaErrormessage"
+    @click="renderedValue = !renderedValue"
   >
     <div
       class="spg-boolean-switch__button"
@@ -26,7 +28,7 @@
       </div>
     </div>
     <div class="spg-boolean-switch__caption">
-      <div class="spg-boolean-switch__title">
+      <div class="spg-boolean-switch__title" :id="question.labelRenderedAriaID">
         <SvComponent :is="'survey-string'" :locString="question.locTitle" />
       </div>
     </div>
@@ -34,7 +36,7 @@
 </template>
 <script lang="ts" setup>
 import { RendererFactory } from "survey-core";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import {
   useQuestion,
   SvComponent,
@@ -44,6 +46,16 @@ defineOptions({ inheritAttrs: false });
 const props = defineProps<{ question: any }>();
 const root = ref(null);
 useQuestion(props, root);
+
+const renderedValue = computed({
+  get() {
+    return props.question.value;
+  },
+  set(val) {
+    const question = props.question;
+    question.value = val;
+  },
+});
 </script>
 
 <script lang="ts">

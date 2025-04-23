@@ -339,6 +339,7 @@
   --lbr-button-icon-opacity-disabled: 25px;
   --ctr-list-corner-radius: 0px;
   --lbr-popup-toolbar-close-button-opacity-pressed: 50px;
+  --ctr-toolbox-group-header-corner-radius: 0px;
 }
 
  /* Aliases  */
@@ -2788,8 +2789,8 @@
   --lbr-step-progress-bar-padding-right-fit-to-survey-with-number: var(--lbr-spacing-x1n);
   --lbr-step-progress-bar-width: var(--lbr-size-x80);
   --ctr-toolbox-min-width: var(--sjs-size-x20);
-  --ctr-popup-menu-margin-top-tablet: var(--sjs-spacing-x8);
-  --ctr-popup-menu-margin-bottom-tablet: var(--sjs-spacing-x8);
+  --ctr-popup-menu-margin-top-tablet: var(--sjs-spacing-x3);
+  --ctr-popup-menu-margin-bottom-tablet: var(--sjs-spacing-x3);
   --ctr-popup-menu-margin-left-tablet: var(--sjs-spacing-x3);
   --ctr-popup-menu-margin-right-tablet: var(--sjs-spacing-x3);
   --ctr-popup-menu-max-width-tablet: var(--sjs-size-x40);
@@ -2867,7 +2868,7 @@
   --ctr-survey-question-panel-floating-toolbar-padding-bottom: var(--lbr-spacing-x05);
   --ctr-survey-question-panel-floating-toolbar-gap-items: var(--lbr-spacing-x05);
   --ctr-survey-question-panel-floating-toolbar-corner-radius: var(--lbr-corner-radius-x05);
-  --ctr-survey-question-panel-floating-toolbar-border-color: var(--sjs-border-10);
+  --ctr-survey-question-panel-floating-toolbar-border-color: var(--sjs-border-25-overlay);
   --ctr-survey-question-panel-floating-toolbar-border-width: var(--lbr-stroke-x1);
   --ctr-survey-question-panel-floating-toolbar-background-color: var(--sjs-layer-1-background-500);
   --ctr-survey-question-panel-floating-toolbar-gap-groups: var(--lbr-spacing-x1);
@@ -2875,7 +2876,7 @@
   --lbr-page-loading-padding-bottom: var(--lbr-spacing-x8);
   --lbr-page-loading-loading-icon-width: var(--lbr-size-x12);
   --lbr-page-loading-loading-icon-height: var(--lbr-size-x12);
-  --lbr-page-loading-loading-icon-circle-color: var(--sjs-layer-1-foreground-100);
+  --lbr-page-loading-loading-icon-circle-color: var(--sjs-layer-3-foreground-100);
   --lbr-page-loading-loading-icon-circle-color-spin: var(--sjs-primary-background-500);
   --lbr-page-loading-title-color: var(--sjs-layer-3-foreground-100);
   --lbr-page-loading-padding-top: var(--lbr-spacing-x3);
@@ -3447,5 +3448,12 @@
   --ctr-info-panel-padding-bottom: var(--sjs-spacing-x3);
   --ctr-info-panel-corner-radius: var(--sjs-corner-radius-x1);
   --ctr-info-panel-text-color-primary: var(--sjs-layer-3-foreground-100);
+  --ctr-surface-placeholder-image-max-width: var(--sjs-size-x43);
+  --lbr-popup-menu-background-color-global: var(--sjs-layer-3-background-500);
+  --lbr-list-item-text-color-action: var(--sjs-primary-background-500);
+  --ctr-list-item-icon-width-small: var(--sjs-font-size-x2);
+  --ctr-list-item-icon-height-small: var(--sjs-font-size-x2);
+  --ctr-toolbox-group-header-background-color: var(--sjs-layer-3-background-500);
+  --ctr-toolbox-item-max-width: var(--sjs-size-x40);
 }
 

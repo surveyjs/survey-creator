@@ -157,6 +157,20 @@ const creator = new SurveyCreatorModel(creatorOptions);
 ```
 </details>
 
+## Activate a SurveyJS License
+
+Survey Creator is not available for free commercial use. To integrate it into your application, you must purchase a [commercial license](https://surveyjs.io/licensing) for the software developer(s) who will be working with the Survey Creator APIs and implementing the integration. If you use Survey Creator without a license, an alert banner will appear at the bottom of the interface:
+
+<img src="./images/alert-banner.png" alt="Survey Creator: Alert banner" width="1544" height="824">
+
+After purchasing a license, follow the steps below to activate it and remove the alert banner:
+
+1. [Log in](https://surveyjs.io/login) to the SurveyJS website using your email address and password. If you've forgotten your password, [request a reset](https://surveyjs.io/reset-password) and check your inbox for the reset link.
+2. Open the following page: [How to Remove the Alert Banner](https://surveyjs.io/remove-alert-banner). You can also access it by clicking **Set up your license key** in the alert banner itself.
+3. Follow the instructions on that page.
+
+Once you've completed the setup correctly, the alert banner will no longer appear.
+
 ## Save and Load Survey Model Schemas
 
 Survey Creator produces survey model schemas as JSON objects. You can persist these objects on your server: save updates and restore previously saved schemas. To save a JSON object, implement the [`saveSurveyFunc`](/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) function. It accepts two arguments:

@@ -1,53 +1,4 @@
-
-export class DomDocumentHelper {
-  public static isAvailable(): boolean {
-    return "undefined" !== typeof document;
-  }
-  public static getBody(): HTMLElement {
-    if (!DomDocumentHelper.isAvailable()) return;
-    return document.body;
-  }
-  public static getDocumentElement(): HTMLElement {
-    if (!DomDocumentHelper.isAvailable()) return;
-    return document.documentElement;
-  }
-  public static getDocument(): Document {
-    if (!DomDocumentHelper.isAvailable()) return;
-    return document;
-  }
-  public static getCookie(): string {
-    if (!DomDocumentHelper.isAvailable()) return;
-    return document.cookie;
-  }
-  public static setCookie(newCookie: string): void {
-    if (!DomDocumentHelper.isAvailable()) return;
-    document.cookie = newCookie;
-  }
-  public static activeElementBlur(): Document {
-    if (!DomDocumentHelper.isAvailable()) return;
-
-    const activeElement = document.activeElement;
-    if (!!activeElement && !!(<any>activeElement).blur) {
-      (<any>activeElement).blur();
-    }
-  }
-  public static createElement(tagName: string): HTMLElement {
-    if (!DomDocumentHelper.isAvailable()) return;
-    return document.createElement(tagName);
-  }
-  public static getComputedStyle(elt: Element): CSSStyleDeclaration {
-    if (!DomDocumentHelper.isAvailable()) return new CSSStyleDeclaration();
-    return document.defaultView.getComputedStyle(elt);
-  }
-  public static addEventListener(type: string, listener: (e?: any) => void): void {
-    if (!DomDocumentHelper.isAvailable()) return;
-    document.addEventListener(type, listener);
-  }
-  public static removeEventListener(type: string, listener: (e?: any) => void): void {
-    if (!DomDocumentHelper.isAvailable()) return;
-    document.removeEventListener(type, listener);
-  }
-}
+import { DomDocumentHelper } from "../utils/global_variables_utils";
 
 export class CreatorStylesManager {
   private static SurveyJSCreatorStylesSheetId = "surveyjs-creator-styles";
@@ -78,12 +29,12 @@ export class CreatorStylesManager {
       if (!sheet) {
         sheet = CreatorStylesManager.createSheet(CreatorStylesManager.SurveyJSCreatorStylesSheetId);
       }
-      if(sheet) {
+      if (sheet) {
         if (Object.keys(rules).length) {
           rules.forEach((rule) => {
             try {
               sheet.insertRule(`${rule.selector} { ${rule.styles} }`, 0);
-            } catch (e) { }
+            } catch(e) { }
           });
         }
       }

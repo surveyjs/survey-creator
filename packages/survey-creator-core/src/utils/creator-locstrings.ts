@@ -11,24 +11,25 @@ export function doMachineStringsTranslation(survey: SurveyModel, creatorOptions:
       const defaultStrs = new Array<string>();
       locStrs.forEach(locStr => {
         let text = locStr.getLocaleText("");
-        if(!text && locStr.onGetTextCallback) {
+        if (!text && locStr.onGetTextCallback) {
           text = locStr.onGetTextCallback("");
-          if(isTextNonTranslated(text)) {
+          if (isTextNonTranslated(text)) {
             text = undefined;
           }
         }
-        if(!!text) {
-          if(!locStrsHash[text]) {
+        if (!!text) {
+          if (!locStrsHash[text]) {
             locStrsHash[text] = [];
             defaultStrs.push(text);
           }
           locStrsHash[text].push(locStr);
         }
       });
+      if (defaultStrs.length === 0) return;
       creatorOptions.doMachineTranslation(surveyLocalization.defaultLocale, loc, defaultStrs, (translated: Array<string>) => {
         if (!!translated && translated.length === defaultStrs.length) {
           creatorOptions.startUndoRedoTransaction("Translate to " + loc);
-          for(let i = 0; i < defaultStrs.length; i++) {
+          for (let i = 0; i < defaultStrs.length; i++) {
             locStrsHash[defaultStrs[i]].forEach(locStr => locStr.setLocaleText(loc, translated[i]));
           }
           creatorOptions.stopUndoRedoTransaction();
@@ -52,7 +53,9 @@ function getUnlocalizedStrings(survey: SurveyModel, creatorOptions: ISurveyCreat
       return isShowing && (!locStr || !locStr?.isEmpty) || !!defaultValue;
     },
     onAddLocalizedString: (obj: Base, property: JsonObjectProperty, locStr: LocalizableString, translatedObj: any): void => {
-      res.push(locStr);
+      if (!locStr.getLocaleText(loc)) {
+        res.push(locStr);
+      }
     },
     onCreateNewTranslateObj: (obj: Base, property: JsonObjectProperty, translateObj: any): any => {
       return undefined;
@@ -102,9 +105,9 @@ function isItemValueArray(val: any): boolean {
 }
 function addLocalizationItem(obj: any, options: ICollectLocalizableStringsOptions, property: JsonObjectProperty, translateObj: any): void {
   const locStr = getLocalizableStr(obj, property);
-  if(!locStr) return;
+  if (!locStr) return;
   const defaultValue = getDefaultValue(obj, property);
-  if(canShowProperty("add-locsr", options, obj, property, !locStr.isEmpty, defaultValue)) {
+  if (canShowProperty("add-locsr", options, obj, property, !locStr.isEmpty, defaultValue)) {
     options.onAddLocalizedString(obj, property, locStr, translateObj);
   }
 }
@@ -117,14 +120,14 @@ function createItemValuesLocale(obj: any, options: ICollectLocalizableStringsOpt
 }
 function addPropertiesForItemValue(itemValue: any, options: ICollectLocalizableStringsOptions, translateObj: any) {
   const locProperties = getLocalizedProperties(itemValue, options, false);
-  for(let i = 0; i < locProperties.length; i++) {
+  for (let i = 0; i < locProperties.length; i++) {
     const prop = locProperties[i];
     const isText = prop.name === "text";
     const reason = isText ? "itemvalue-text" : "itemvalue-customprop";
     const defValue = isText ? itemValue.value : undefined;
     const canshow = canShowProperty(reason, options, itemValue, prop, true, defValue);
-    if(!canshow && isText) break;
-    if(canshow) {
+    if (!canshow && isText) break;
+    if (canshow) {
       options.onAddLocalizedString(itemValue, prop, getLocalizableStr(itemValue, prop), translateObj);
     }
   }
@@ -167,7 +170,7 @@ function createGroup(options: ICollectLocalizableStringsOptions, obj: any, prope
   }
 }
 function canShowProperty(reason: string, options: ICollectLocalizableStringsOptions, obj: Base, property: JsonObjectProperty, isShowing: boolean, defaultValue?: any): boolean {
-  if(options.canShowProperty) {
+  if (options.canShowProperty) {
     return options.canShowProperty(reason, obj, property, getLocalizableStr(obj, property), isShowing, defaultValue);
   }
   return isShowing;
@@ -198,7 +201,7 @@ function createMatrixCellsGroupCore(options: ICollectLocalizableStringsOptions, 
 }
 function getDefaultValue(obj: any, prop: JsonObjectProperty): string {
   const locStr = getLocalizableStr(obj, prop);
-  if(!locStr) return "";
+  if (!locStr) return "";
   if (prop.name == "title") {
     if (!!locStr && !obj.isPage && !obj.isPanel && !!locStr.onGetTextCallback)
       return obj["name"];
@@ -206,7 +209,7 @@ function getDefaultValue(obj: any, prop: JsonObjectProperty): string {
   return "";
 }
 function isTextNonTranslated(text: string): boolean {
-  if(!text) return true;
-  if(Helpers.isNumber(text)) return true;
+  if (!text) return true;
+  if (Helpers.isNumber(text)) return true;
   return text.length < 2;
 }

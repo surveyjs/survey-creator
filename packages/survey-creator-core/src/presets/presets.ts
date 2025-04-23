@@ -42,13 +42,13 @@ export class CreatorPreset extends CreatorPresetBase {
   public apply(creator?: SurveyCreatorModel): void {
     super.apply(creator);
     this.applyLocalization();
-    if(!!creator) {
+    if (!!creator) {
       creator.updateLocalizedStrings();
     }
   }
   protected applyLocalization(): void {
     const strs = this.json?.localization;
-    if(!!strs) {
+    if (!!strs) {
       editorLocalization.presetStrings = JSON.parse(JSON.stringify(strs));
     } else {
       editorLocalization.presetStrings = undefined;

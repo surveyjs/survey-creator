@@ -231,7 +231,7 @@ export class TranslationItem extends TranslationItemBase {
     if (!(this.context instanceof PageModel) && this.name === "title") {
       return this.getPlaceholderText(locale) || this.context.name;
     }
-    if (this.context.ownerPropertyName === "choices" && this.context.getType() === "itemvalue") {
+    if (Serializer.isDescendantOf(this.context.getType(), "itemvalue")) {
       return this.getPlaceholderText(locale) || this.getItemValuePlaceholderText() || placeholderText;
     }
     return placeholderText;
@@ -651,7 +651,7 @@ export class Translation extends Base implements ITranslationLocales {
     private hasUI: boolean = true
   ) {
     super();
-    if (!this.options) this.options = new EmptySurveyCreatorOptions();
+    if (!this.options)this.options = new EmptySurveyCreatorOptions();
     var self = this;
     this.exportToCSVFileUI = function () {
       self.exportToSCVFile(settings.translation.exportFileName);
@@ -1316,7 +1316,7 @@ export class Translation extends Base implements ITranslationLocales {
       this.updateItemWithStrings(name, item, row, locales);
     });
     this.reset();
-    if (this.importFinishedCallback) this.importFinishedCallback();
+    if (this.importFinishedCallback)this.importFinishedCallback();
   }
 
   public exportToSCVFile(fileName: string) {

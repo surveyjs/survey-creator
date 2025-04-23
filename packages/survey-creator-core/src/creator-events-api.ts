@@ -49,7 +49,7 @@ export interface GetPropertyReadOnlyEvent {
 }
 export interface PropertyGetReadOnlyEvent extends GetPropertyReadOnlyEvent {
   /**
-   * A survey element (question, panel, page, or the survey itself) for which you can change the read-only status. 
+   * A survey element (question, panel, page, or the survey itself) for which you can change the read-only status.
    */
   element: Base;
   /**
@@ -109,7 +109,7 @@ export interface HtmlToMarkdownEvent {
 export type ElementGetExpandCollapseStateEventReason = "loading" | "collapse-all" | "expand-all" | "drag-start" | "drag-end";
 export interface ElementGetExpandCollapseStateEvent {
   /**
-   * A survey element (question, panel, or page) whose expand/collapse state you can switch. 
+   * A survey element (question, panel, or page) whose expand/collapse state you can switch.
    */
   element: Question | PanelModel | PageModel;
   /**
@@ -556,7 +556,7 @@ export interface GetConditionOperatorEvent {
 
 export interface LogicRuleGetDisplayTextEvent {
   /**
-   * A logical expression associated with the logic rule. 
+   * A logical expression associated with the logic rule.
    */
   expression: string;
   /**
@@ -576,12 +576,12 @@ export interface LogicRuleGetDisplayTextEvent {
 export interface ModifiedEvent {
   /**
   * A value that indicates the modification: `"ADDED_FROM_TOOLBOX"`, `"ADDED_FROM_PAGEBUTTON"`, `"PAGE_ADDED"`, `"QUESTION_CONVERTED"`, `"ELEMENT_COPIED"`, `"PROPERTY_CHANGED"`, `"ELEMENT_REORDERED"`, `"OBJECT_DELETED"`, `"JSON_EDITOR"`
-  * 
+  *
   * Depending on the `options.type` value, the `options` object contains parameters listed below:
-  * 
+  *
   * `options.type`: `"ADDED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"`
   * - `options.question` - An added or copied survey element.
-  * 
+  *
   * `options.type`: `"PAGE_ADDED"`
   * - `options.newValue` - An added page.
   *
@@ -714,7 +714,7 @@ export interface SurveyInstanceCreatedEvent {
    *   - `"translation-tab:language-list"` - A survey that displays the language list in the Translations tab.
    *   - `"translation-tab:table"` - A survey that displays the translation table in the Translations tab.
    *   - `"translation-tab:table-header"` - A survey that displays the header of the translation table in the Translations tab.
-   *   - `"translation-tab:table-popup-editor"` - A survey that displays a translation table for an individual language in a pop-up window. 
+   *   - `"translation-tab:table-popup-editor"` - A survey that displays a translation table for an individual language in a pop-up window.
    *   - `"table-values-popup-editor"` - A survey that allows you to edit values of a table (Choices, Rows, Columns, etc.) in a pop-up window.
    *   - `"matrix-cell-values-popup-editor"` - A survey that allows you to [specify cell texts of a Single-Select Matrix](https://surveyjs.io/form-library/examples/scoring-rubric-example/) in a pop-up window.
    *   - `"matrix-cell-question-popup-editor"` - A survey that allows you to configure a question within a cell of a [Multi-Select](https://surveyjs.io/form-library/examples/multi-select-matrix-question/) or [Dynamic Matrix](https://surveyjs.io/form-library/examples/dynamic-matrix-add-new-rows/) in a pop-up window.
@@ -735,7 +735,7 @@ export interface SurveyInstanceCreatedEvent {
   /**
    * @deprecated Use `options.area` instead.
    */
-  reason: string;
+  reason?: string;
   model?: Base;
 }
 
@@ -1024,7 +1024,7 @@ export interface CreateCustomMessagePanelEvent {
 
 export interface ActiveTabChangingEvent {
   /**
-   * A tab that is going to become active: `"designer"`, `"preview"`, `"theme"`, `"json"`, `"logic"`, or `"translation"`. 
+   * A tab that is going to become active: `"designer"`, `"preview"`, `"theme"`, `"json"`, `"logic"`, or `"translation"`.
    */
   tabName: string;
   /**

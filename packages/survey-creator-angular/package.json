@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-angular",
-  "version": "2.0.2",
+  "version": "2.0.5",
   "description": "Use SurveyJS Creator to create or edit JSON for SurveyJS Form Library.",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "https://surveyjs.io/Licenses#SurveyCreator",
@@ -44,6 +44,8 @@
     "@types/express": "4.17.1",
     "@types/mime": "3.0.4",
     "@types/express-serve-static-core": "4.17.30",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
     "http-server": "^14.1.1",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -55,6 +57,7 @@
     "commit-and-tag-version": "^11.0.0",
     "jasmine-core": "~3.8.0",
     "jasmine": "^4.1.0",
+    "eslint": "^8.57.0",
     "karma-html2js-preprocessor": "^1.1.0",
     "ng-packagr": "^12.0.0",
     "rxjs": "~6.6.0",
@@ -67,15 +70,19 @@
   },
   "scripts": {
     "build": "ng build && node ./update-version.js",
-    "serve:example": "ng serve",
+    "build:example:prod": "ng build  angular-ui",
+    "serve:example:dev": "ng serve",
+    "serve:example:prod": "http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint ./ --max-warnings=0 --fix",
     "testcafe": "testcafe ../../functionalTests/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --env=angular --config-file .testcaferc.dev.js",
     "testcafe:ci": "testcafe ../../functionalTests/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal --env=angular",
-    "serve:example:aot": "http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080",
-    "build:example": "ng build  angular-ui",
     "test": "ng test survey-creator-angular",
     "visual-regression-tests:ci": "testcafe --disable-font-subpixel-positioning ../../visualRegressionTests/  --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
     "visual-regression-tests": "testcafe ../../visualRegressionTests/  --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --screenshots ../../ --selector-timeout 1500 --config-file .testcaferc.dev.js",
     "test:single": "ng test --watch=false --browsers=ChromeHeadless survey-creator-angular",
-    "release": "standard-version --message \"Release: %s [azurepipelines skip]\" "
+    "release": "standard-version --message \"Release: %s [azurepipelines skip]\" ",
+    "test:a11y": "playwright test --project a11y --ui",
+    "test:a11y:ci": "playwright test --project a11y --reporter dot --quiet"
   }
 }

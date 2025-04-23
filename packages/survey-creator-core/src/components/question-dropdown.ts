@@ -66,7 +66,7 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
 
   public switchCollapse = (): void => {
     this.isCollapsed = !this.isCollapsed;
-  }
+  };
 
   public attachElement(surveyElement: SurveyElement) {
     super.attachElement(surveyElement);

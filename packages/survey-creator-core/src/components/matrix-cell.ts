@@ -48,20 +48,20 @@ export class MatrixCellWrapperEditSurvey {
     const prevCellType = columnJSON["cellType"];
     const questionJSON = this.question.toJSON();
     const qType = this.question.getType();
-    if(!!prevCellType) {
+    if (!!prevCellType) {
       questionJSON.cellType = prevCellType;
     }
-    if(Helpers.isTwoValueEquals(questionJSON, columnJSON)) return;
-    for(let key in columnJSON) {
-      if(!!Serializer.findProperty(qType, key) && questionJSON[key] === undefined && (columnJSON[key] === true || columnJSON[key] === false)) {
+    if (Helpers.isTwoValueEquals(questionJSON, columnJSON)) return;
+    for (let key in columnJSON) {
+      if (!!Serializer.findProperty(qType, key) && questionJSON[key] === undefined && (columnJSON[key] === true || columnJSON[key] === false)) {
         questionJSON[key] = !columnJSON[key];
       }
     }
-    if(column.cellType === "default") {
+    if (column.cellType === "default") {
       column.cellType = qType;
     }
-    for(let key in questionJSON) {
-      if(!Helpers.isTwoValueEquals(questionJSON[key], columnJSON[key])) {
+    for (let key in questionJSON) {
+      if (!Helpers.isTwoValueEquals(questionJSON[key], columnJSON[key])) {
         column[key] = questionJSON[key];
       }
     }
@@ -86,7 +86,7 @@ export class MatrixCellWrapperViewModel extends Base {
     } else {
       this.isSelected = false;
     }
-  }
+  };
 
   public editQuestion(model: MatrixCellWrapperViewModel, event: MouseEvent) {
     const editSurvey = new MatrixCellWrapperEditSurvey(model.creator, model.question, model.column, this);
@@ -139,7 +139,7 @@ export class MatrixCellWrapperViewModel extends Base {
     event.stopPropagation();
   }
   public get isSupportCellEditor(): boolean {
-    if(!this.question || !this.question.getType) return false;
+    if (!this.question || !this.question.getType) return false;
     return SurveyHelper.isSupportCellEditor(this.question.getType());
   }
   public hover(event: MouseEvent, element: HTMLElement | any) {

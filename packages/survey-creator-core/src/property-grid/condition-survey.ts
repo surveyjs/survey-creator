@@ -247,7 +247,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   public static isClassContains(qType: string, contains: Array<string>, notContains: Array<string>): boolean {
     let classInfo = Serializer.findClass(qType);
-    while (!!classInfo) {
+    while(!!classInfo) {
       if (contains.indexOf(classInfo.name) > -1) return true;
       if (notContains.indexOf(classInfo.name) > -1) return false;
       classInfo = !!classInfo.parentName ? Serializer.findClass(classInfo.parentName) : null;
@@ -983,6 +983,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       assignDefaultClasses(cssClasses, question.getType());
       cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
       cssClasses.error.root = "svc-logic-operator__error";
+      if (question.getType() == "boolean" || question.getType() == "rating") {
+        cssClasses.root = (cssClasses.root as string).replace("sd-scrollable-container", "");
+      }
     }
     if (question.name === "panel") {
       cssClasses.root += " svc-logic-paneldynamic";

@@ -6,7 +6,7 @@ export class QuestionEmbeddedSurveyModel extends QuestionNonValue {
   public embeddedSurveyValue: SurveyModel;
   public onEmbeddedSurveyValueChanged = () => { };
   public set embeddedSurvey(val: SurveyModel) {
-    if(val === this.embeddedSurvey) return;
+    if (val === this.embeddedSurvey) return;
     this.setPropertyValue("embeddedSurvey", val);
     this.onEmbeddedSurveyValueChanged();
   }

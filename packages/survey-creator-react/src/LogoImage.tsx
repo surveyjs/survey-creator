@@ -73,11 +73,9 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
     let content: React.JSX.Element = null;
     if (this.model.survey.locLogo.renderedHtml && !this.model.isUploading) {
       content = this.renderImage();
-    }
-    else if (this.model.isUploading) {
+    } else if (this.model.isUploading) {
       content = this.renderLoadingIndicator();
-    }
-    else {
+    } else {
       content = this.renderPlaceHolder();
     }
     return (

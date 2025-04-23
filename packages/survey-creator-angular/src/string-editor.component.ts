@@ -65,7 +65,7 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   }
   onChangeHandler = (): void => {
     this.detectChanges();
-  }
+  };
   public onBlur(event: any): string {
     this.container.nativeElement.spellcheck = false;
     (<any>this.locString).__isEditing = false;
@@ -104,6 +104,9 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
     this.baseModel.dispose();
     this.locString?.onStringChanged.remove(this.onChangeHandler);
     super.ngOnDestroy();
+  }
+  get ariaLabel(): string {
+    return this.placeholder || "content editable";
   }
 }
 

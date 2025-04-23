@@ -338,6 +338,7 @@ export var huStrings = {
       titleLocation: "Panelcím igazítása",
       descriptionLocation: "Panel leírás igazítása",
       templateQuestionTitleLocation: "Kérdés címének igazítása",
+      templateQuestionTitleWidth: "Kérdés címének szélessége",
       templateErrorLocation: "Hibaüzenetek igazítása",
       newPanelPosition: "Új panel helye",
       showRangeInProgress: "A folyamatjelző sáv megjelenítése",
@@ -568,6 +569,7 @@ export var huStrings = {
     cellType: "Cellatípus",
     colCount: "Oszlopok száma",
     choicesOrder: "Válassza ki a lehetőséget rendezését",
+    allowCustomChoices: "Egyéni választások engedélyezése",
     visible: "Látható?",
     isRequired: "Kötelező?",
     markRequired: "Megjelölés kötelezőként",
@@ -588,6 +590,7 @@ export var huStrings = {
     transposeData: "Sorok átültetése oszlopokba",
     addRowText: "'Új sor felvétele' gomb szövege",
     removeRowText: "'Sor eltávolítása' gomb szövege",
+    singleInputTitleTemplate: "Beviteli mező címmintája",
     rateMin: "Legkisebb szorzó",
     rateMax: "Legnagyobb szorzó",
     rateStep: "Szorzó lépésköze",
@@ -1117,7 +1120,8 @@ export var huStrings = {
     questionsOnPageMode: {
       standard: "Eredeti szerkezet",
       singlePage: "Az összes kérdés megjelenítése egy oldalon",
-      questionPerPage: "Egyetlen kérdés megjelenítése oldalanként"
+      questionPerPage: "Egyetlen kérdés megjelenítése oldalanként",
+      inputPerPage: "Egyetlen beviteli mező megjelenítése oldalanként"
     },
     noPreview: "Nincs előnézet",
     showAllQuestions: "Az összes kérdés megjelenítése",
@@ -1190,6 +1194,7 @@ export var huStrings = {
       onPage: "Visszaállítás minden oldalon",
       onpanel: "Visszaállítás az egyes paneleken",
       onPanel: "Visszaállítás az egyes paneleken",
+      recursive: "Rekurzív számozás",
       onSurvey: "Folytassa a felmérést",
       off: "Nincs számozás"
     },
@@ -1317,7 +1322,9 @@ export var huStrings = {
   ts: {
     selectPage: "Válassza ki a tesztelni kívánt lapot:",
     showInvisibleElements: "Nemlátható elemek megjelnítése",
-    hideInvisibleElements: "Láthatatlan elemek elrejtése"
+    hideInvisibleElements: "Láthatatlan elemek elrejtése",
+    prevPage: "Előző",
+    nextPage: "Következő"
   },
   validators: {
     answercountvalidator: "válaszok száma",
@@ -1381,6 +1388,7 @@ export var huStrings = {
       enableIf: "A varázspálca ikonnal állítson be egy feltételes szabályt, amely letiltja a panel írásvédett módját.",
       requiredIf: "A varázspálca ikonnal állítson be egy feltételes szabályt, amely megakadályozza a felmérés elküldését, kivéve, ha legalább egy beágyazott kérdésre van válasz.",
       templateQuestionTitleLocation: "A panelen található összes kérdésre vonatkozik. Ha felül szeretné bírálni ezt a beállítást, határozzon meg címigazítási szabályokat az egyes kérdésekhez. Az \"Öröklés\" opció az oldalszintű (ha be van állítva) vagy a felmérés szintű beállítást (\"Alapértelmezetten felül\") alkalmazza.",
+      templateQuestionTitleWidth: "Egységes szélességet állít be a kérdéscímekhez, ha azok a kérdésmezők bal oldalához vannak igazítva. Elfogadja a CSS értékeket (px, %, in, pt stb.).",
       templateErrorLocation: "Beállítja egy érvénytelen bevitelű kérdéssel kapcsolatos hibaüzenet helyét. Válasszon a következők közül: \"Felső\" - egy hibaüzenet kerül a kérdésmező tetejére; \"Alsó\" - egy hibaüzenet kerül a kérdésmező aljára. Az \"Öröklés\" opció az oldalszintű (ha be van állítva) vagy a felmérés szintű beállítást (\"Alapértelmezetten felül\") alkalmazza.",
       errorLocation: "Beállítja a hibaüzenet helyét a panelen belüli összes kérdéssel kapcsolatban. Az \"Öröklés\" opció az oldalszintű (ha be van állítva) vagy a felmérés szintű beállítást alkalmazza.",
       page: "A kijelölt oldal végére helyezi a panelt.",
@@ -1516,6 +1524,9 @@ export var huStrings = {
     timeLimitPerPage: "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a következő oldalra.",
     validateVisitedEmptyFields: "Engedélyezze ezt a beállítást, ha érvényesítést indít el, amikor a felhasználó egy üres beviteli mezőre összpontosít, majd módosítás nélkül elhagyja azt.",
     page: {
+      name: "A válaszadók számára nem látható oldalazonosító.",
+      description: "Írjon be egy oldalfeliratot.",
+      navigationTitle: "A folyamatjelző sáv vagy a tartalomjegyzék navigációs gombján megjelenő felirat. Ha üresen hagyja ezt a mezőt, a navigációs gomb az oldal címét vagy nevét fogja használni. A folyamatjelző sáv vagy a tartalomjegyzék engedélyezéséhez lépjen a \"Felmérés\" → a \"Navigáció\" menüpontra.",
       timeLimit: "Az az időintervallum másodpercben, amely után a felmérés automatikusan továbblép a következő oldalra.",
       visibleIf: "A varázspálca ikonnal állítson be egy feltételes szabályt, amely meghatározza az oldal láthatóságát.",
       enableIf: "A varázspálca ikonnal állítson be egy feltételes szabályt, amely letiltja az oldal írásvédett módját.",
@@ -1543,6 +1554,7 @@ export var huStrings = {
     choicesFromQuestionMode: "Válasszon a következők közül: \"Összes\" - átmásolja az összes választási lehetőséget a kiválasztott kérdésből; \"Kiválasztott\" - dinamikusan másolja csak a kiválasztott választási lehetőségeket; \"Nem kiválasztott\" - dinamikusan csak a nem kiválasztott választási lehetőségeket másolja. A \"Nincs\" és az \"Egyéb\" opciók alapértelmezés szerint másolásra kerülnek, ha engedélyezve vannak a forráskérdésben.",
     choiceValuesFromQuestion: "Az egyszeres és többszörös kijelölésű kérdéstípusokban minden választási lehetőség rendelkezik azonosítóval és megjelenített értékkel. Ez a beállítás határozza meg, hogy melyik mátrixoszlop vagy panelkérdés adja meg az azonosítókat.",
     choiceTextsFromQuestion: "Az egyszeres és többszörös kijelölésű kérdéstípusokban minden választási lehetőség rendelkezik azonosítóval és megjelenített értékkel. Ez a beállítás határozza meg, hogy melyik mátrixoszlop vagy panelkérdés jelenítse meg a megjelenített szövegeket.",
+    allowCustomChoices: "Válassza ki, ha a válaszadók hozzáadhatják saját választási lehetőségeiket, ha a kívánt beállítás nem érhető el a legördülő menüben. Az egyéni beállításokat csak ideiglenesen tárolja a rendszer az aktuális böngésző munkamenet időtartamára.",
     showOtherItem: "Ha be van jelölve, a felhasználók további bevitelt adhatnak meg egy külön megjegyzésmezőben.",
     separateSpecialChoices: "Minden speciális választási lehetőséget (\"Nincs\", \"Egyéb\", \"Összes kijelölése\") új sorban jelenít meg, még akkor is, ha többoszlopos elrendezést használ.",
     path: "Adja meg azt a helyet a szolgáltatás adatkészletén belül, ahol az objektumok céltömbje található. Hagyja üresen, ha az URL-cím már a tömbre mutat.",
@@ -1615,7 +1627,8 @@ export var huStrings = {
       overlapEnabled: "Ha engedélyezve van, a felmérés teteje átfedi a fejléc alját.",
       mobileHeight: "Ha 0-ra van állítva, a magasság automatikusan kiszámításra kerül, hogy elférjen a fejléc tartalma."
     },
-    progressBarInheritWidthFrom: "Az \"Ugyanaz, mint a tároló\" opció automatikusan beállítja a folyamatjelző sáv területének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül."
+    progressBarInheritWidthFrom: "Az \"Ugyanaz, mint a tároló\" opció automatikusan beállítja a folyamatjelző sáv területének szélességét, hogy illeszkedjen ahhoz a HTML-elemhez, amelybe a felmérés kerül.",
+    singleInputTitleTemplate: "Akkor használatos, ha a \"Felmérés elrendezése\" beállítása \"Egyetlen beviteli mező oldalanként\". Ebben az elrendezésben a mátrix fel van osztva, így minden beviteli mező külön oldalon jelenik meg. A {rowIndex} helyőrzővel szúrja be az automatikus számozást, a {rowTitle} vagy a {rowName} használatával hivatkozzon a sor címére vagy azonosítójára, a {row.columnid} pedig egy adott mátrixoszlop értékét foglalja bele."
   },
   // Properties
   p: {
@@ -3188,3 +3201,16 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Beállítja a szövegterületeken megjelenített sorok számát a kérdésmegjegyzésekhez. Ha a bevitel több sort foglal el, megjelenik a görgetősáv."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Dinamikus szövegek alapértelmezett megjelenítési értéke"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "A HTML-kérdésekben, valamint a felmérési elemek dinamikus címeiben és leírásaiban megjelenő érték, ha a kérdés értéke üres."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekurzív számozás"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Kérdés címének szélessége"
+// pe.allowCustomChoices: "Allow custom choices" => "Egyéni választások engedélyezése"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Egységes szélességet állít be a kérdéscímekhez, ha azok a kérdésmezők bal oldalához vannak igazítva. Elfogadja a CSS értékeket (px, %, in, pt stb.)."
+// page.name: "A page ID that is not visible to respondents." => "A válaszadók számára nem látható oldalazonosító."
+// page.description: "Type a page subtitle." => "Írjon be egy oldalfeliratot."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "A folyamatjelző sáv vagy a tartalomjegyzék navigációs gombján megjelenő felirat. Ha üresen hagyja ezt a mezőt, a navigációs gomb az oldal címét vagy nevét fogja használni. A folyamatjelző sáv vagy a tartalomjegyzék engedélyezéséhez lépjen a \"Felmérés\" → a \"Navigáció\" menüpontra."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Válassza ki, ha a válaszadók hozzáadhatják saját választási lehetőségeiket, ha a kívánt beállítás nem érhető el a legördülő menüben. Az egyéni beállításokat csak ideiglenesen tárolja a rendszer az aktuális böngésző munkamenet időtartamára."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Beviteli mező címmintája"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Egyetlen beviteli mező megjelenítése oldalanként"
+// ts.prevPage: "Previous" => "Előző"
+// ts.nextPage: "Next" => "Következő"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Akkor használatos, ha a \"Felmérés elrendezése\" beállítása \"Egyetlen beviteli mező oldalanként\". Ebben az elrendezésben a mátrix fel van osztva, így minden beviteli mező külön oldalon jelenik meg. A {rowIndex} helyőrzővel szúrja be az automatikus számozást, a {rowTitle} vagy a {rowName} használatával hivatkozzon a sor címére vagy azonosítójára, a {row.columnid} pedig egy adott mátrixoszlop értékét foglalja bele."

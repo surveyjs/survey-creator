@@ -42,18 +42,20 @@ export class TabLogicPlugin implements ICreatorPlugin {
   private createFilterTypeTitleUpdater(): any {
     return <any>new ComputedUpdater<string>(() => {
       let loc = this.creator.locale;
-      if(!loc) loc = "en";
+      if (!loc) loc = "en";
       const type = this.model.actionTypeFilter;
       const allType = this.showAllActionTypesText;
-      return !!type ? this.model.getTypeByName(type).displayName : allType; });
+      return !!type ? this.model.getTypeByName(type).displayName : allType;
+    });
   }
   private createFilterQuestionTitleUpdater(): any {
     return <any>new ComputedUpdater<string>(() => {
       let loc = this.creator.locale;
-      if(!loc) loc = "en";
+      if (!loc) loc = "en";
       const questionFilter = this.model.questionFilter;
       const allQuestions = this.showAllQuestionsText;
-      return !!questionFilter ? questionFilter : allQuestions; });
+      return !!questionFilter ? questionFilter : allQuestions;
+    });
   }
   public update(): void {
     if (!this.model) return;
@@ -62,7 +64,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
   public canDeactivateAsync(onSuccess: () => void): void {
     if (!!this.model) {
       this.model.tryLeaveUI((res) => {
-        if(!res) {
+        if (!res) {
           this.creator.notify(editorLocalization.getString("ed.lg.expressionInvalid"), "error");
         } else {
           onSuccess();

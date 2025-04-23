@@ -13,7 +13,7 @@ import { CreatorModelComponent } from "../creator-model.component";
 export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueWrapperViewModel> implements AfterViewInit {
   @Input() componentName!: string;
   @Input() componentData!: any;
-  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>
+  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
   public adorner!: ItemValueWrapperViewModel;
   private prevItem!: ItemValue;
   private get creator(): SurveyCreatorModel {
@@ -35,7 +35,7 @@ export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueW
     }
   }
   private cleanContainer(item: ItemValue) {
-    if(!!item) {
+    if (!!item) {
       item.setRootElement(undefined as any);
     }
   }
@@ -43,7 +43,7 @@ export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueW
   protected createModel(): void {
     if (this.componentData) {
       this.adorner = new ItemValueWrapperViewModel(this.creator, this.question, this.item);
-      if(this.prevItem !== this.item) {
+      if (this.prevItem !== this.item) {
         this.setupContainer();
         this.cleanContainer(this.prevItem);
         this.prevItem = this.item;

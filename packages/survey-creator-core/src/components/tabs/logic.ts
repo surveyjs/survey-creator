@@ -60,7 +60,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     public options: ISurveyCreatorOptions = null
   ) {
     super();
-    if (!this.options) this.options = new EmptySurveyCreatorOptions();
+    if (!this.options)this.options = new EmptySurveyCreatorOptions();
     this.readOnly = this.optionsReadOnly;
     this.update();
   }
@@ -423,7 +423,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     var types = [];
     var type = element.getType();
     types.push(type);
-    while (!!type && type != "base") {
+    while(!!type && type != "base") {
       var cl = Serializer.findClass(type);
       if (!cl) break;
       type = cl.parentName;
@@ -444,9 +444,9 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   }
   private isLogicTypeVisible(logicType: ISurveyLogicType): boolean {
     const visActions = SurveyLogic.visibleActions;
-    if(visActions.length > 0 && visActions.indexOf(logicType.name) < 0) return false;
+    if (visActions.length > 0 && visActions.indexOf(logicType.name) < 0) return false;
     const prefix = "trigger_";
-    if(logicType.name.indexOf(prefix) === 0) {
+    if (logicType.name.indexOf(prefix) === 0) {
       return settings.logic.invisibleTriggers.indexOf(logicType.name.substring(prefix.length)) < 0;
     }
     return true;

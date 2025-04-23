@@ -35,9 +35,9 @@
       }
     }
 
-    .sv-popup__scrolling-content {
-      overflow: visible;
-    }
+    // .sv-popup__scrolling-content {
+    //   overflow: visible;
+    // }
   }
   &.sv-popup--modal-overlay {
     background: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));

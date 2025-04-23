@@ -56,11 +56,9 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
   renderButton(): React.JSX.Element {
     if (!this.toolbox.canCollapseCategories) return null;
 
-    const iconName = this.category.collapsed ? "arrow-down" : "arrow-up";
-    const suffixName = this.category.collapsed ? "expand" : "collapse";
-    const svgIconClassName = "svc-toolbox__category-header__button svc-string-editor__button--" + suffixName;
+    const iconName = this.category.iconName;
     return (<div className="svc-toolbox__category-header__controls">
-      <SvgIcon className={svgIconClassName} iconName={"icon-" + iconName} size={"auto"}></SvgIcon>
+      <SvgIcon className={this.category.iconClassName} iconName={iconName} size={"auto"}></SvgIcon>
     </div>);
   }
 

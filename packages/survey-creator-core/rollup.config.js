@@ -20,10 +20,10 @@ var banner = [
 
 module.exports = (options) => {
   options = options ?? {};
-  if(!options.tsconfig) {
+  if (!options.tsconfig) {
     options.tsconfig = path.resolve(__dirname, "./tsconfig.fesm.json");
   }
-  if(!options.dir) {
+  if (!options.dir) {
     options.dir = path.resolve(__dirname, "./build/fesm");
   }
   const iconsMap = {
@@ -55,7 +55,7 @@ module.exports = (options) => {
       {
         name: "remove-scss-imports",
         load: (id) => {
-          if(id.match(/\.scss$/)) return "";
+          if (id.match(/\.scss$/)) return "";
         }
       },
       //force take correct .js file for papaparse dependency
@@ -82,6 +82,7 @@ module.exports = (options) => {
     output: [
       {
         dir: options.dir,
+        entryFileNames: "[name].mjs",
         format: "esm",
         exports: "named",
         sourcemap: true,

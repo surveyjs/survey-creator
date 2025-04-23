@@ -631,6 +631,9 @@ test("Confirm dialog on leaving tab with an incorrect rule", async (t) => {
     .expect(logicActionSelector.exists).ok();
 });
 test("Logic Tab - The Search option is available", async (t) => {
+  await ClientFunction(() => {
+    (<any>window).Survey.ListModel.MINELEMENTCOUNT = 2;
+  })();
   await setJSON({
     "pages": [
       {

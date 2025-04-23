@@ -61,7 +61,7 @@ export class SurveyHelper {
   }
   public static generateNewName(name: string): string {
     var pos = name.length;
-    while (pos > 0 && name[pos - 1] >= "0" && name[pos - 1] <= "9") {
+    while(pos > 0 && name[pos - 1] >= "0" && name[pos - 1] <= "9") {
       pos--;
     }
     var base = name.substring(0, pos);
@@ -78,7 +78,7 @@ export class SurveyHelper {
       hash[objs[i].name] = true;
     }
     var num = 1;
-    while (true) {
+    while(true) {
       if (!hash[baseName + num.toString()]) break;
       num++;
     }
@@ -166,7 +166,7 @@ export class SurveyHelper {
     el.scrollIntoView(getOptions ? getOptions(isNeedScrollToTop) : isNeedScrollToTop);
   }
   public static getScrollableDiv(el: HTMLElement): HTMLElement {
-    while (!!el) {
+    while(!!el) {
       if (!!el.id && el.id.indexOf("scrollableDiv") > -1) return el;
       if (!el.offsetParent) return null;
       el = <HTMLElement>el.offsetParent;
@@ -322,7 +322,7 @@ export class SurveyHelper {
   public static sortItems(items: Array<any>, propertyName = "text") {
     const getNumber = (str: string, index): number => {
       let strNum = "";
-      while (index < str.length && str[index] >= "0" && str[index] <= "9") {
+      while(index < str.length && str[index] >= "0" && str[index] <= "9") {
         strNum += str[index];
         index++;
       }
@@ -332,9 +332,9 @@ export class SurveyHelper {
       const aVal = !!a[propertyName] ? a[propertyName] : "";
       const bVal = !!b[propertyName] ? b[propertyName] : "";
       let index = 0;
-      while (index < aVal.length && index < bVal.length && aVal[index] === bVal[index]) index++;
+      while(index < aVal.length && index < bVal.length && aVal[index] === bVal[index]) index++;
       if (index < aVal.length && index < bVal.length) {
-        while (index > 0 && (aVal[index - 1] >= "0" && aVal[index - 1] <= "9")) index--;
+        while(index > 0 && (aVal[index - 1] >= "0" && aVal[index - 1] <= "9")) index--;
         const aNum = getNumber(aVal, index);
         const bNum = getNumber(bVal, index);
         if (aNum < bNum) return -1;
@@ -361,7 +361,7 @@ export class SurveyHelper {
   }
   public static getElementDeepLength(element: SurveyElement): number {
     let res: number = 0;
-    while (!!element) {
+    while(!!element) {
       if (element.isPanel) res++;
       element = <SurveyElement><any>element.parent;
     }

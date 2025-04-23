@@ -338,6 +338,7 @@ var traditionalChineseTranslation = {
       titleLocation: "面板標題對齊方式",
       descriptionLocation: "面板描述對齊方式",
       templateQuestionTitleLocation: "問題標題對齊方式",
+      templateQuestionTitleWidth: "問題標題寬度",
       templateErrorLocation: "錯誤消息對齊",
       newPanelPosition: "新面板位置",
       showRangeInProgress: "顯示進度條",
@@ -568,6 +569,7 @@ var traditionalChineseTranslation = {
     cellType: "單元格類型",
     colCount: "列數",
     choicesOrder: "設置選項順序",
+    allowCustomChoices: "允許自訂選項",
     visible: "是否可見?",
     isRequired: "是否為必填項?",
     markRequired: "標記為必填",
@@ -588,6 +590,7 @@ var traditionalChineseTranslation = {
     transposeData: "將行轉置為列",
     addRowText: "添加條目按鈕文本",
     removeRowText: "刪除條目按鈕文本",
+    singleInputTitleTemplate: "輸入欄位標題模式",
     rateMin: "最低速率值",
     rateMax: "最大速率值",
     rateStep: "速率步長",
@@ -1117,7 +1120,8 @@ var traditionalChineseTranslation = {
     questionsOnPageMode: {
       standard: "原始結構",
       singlePage: "在一個頁面上顯示所有問題",
-      questionPerPage: "每頁顯示一個問題"
+      questionPerPage: "每頁顯示一個問題",
+      inputPerPage: "每頁顯示單個輸入欄位"
     },
     noPreview: "無預覽",
     showAllQuestions: "顯示所有問題",
@@ -1190,6 +1194,7 @@ var traditionalChineseTranslation = {
       onPage: "在每個頁面上重置",
       onpanel: "在每個面板上重置",
       onPanel: "在每個面板上重置",
+      recursive: "遞歸編號",
       onSurvey: "在整個調查中繼續",
       off: "無編號"
     },
@@ -1317,7 +1322,9 @@ var traditionalChineseTranslation = {
   ts: {
     selectPage: "選擇要測試的頁面",
     showInvisibleElements: "顯示不可見元素",
-    hideInvisibleElements: "隱藏不可見元素"
+    hideInvisibleElements: "隱藏不可見元素",
+    prevPage: "以前",
+    nextPage: "下一個"
   },
   validators: {
     answercountvalidator: "數量檢查",
@@ -1381,6 +1388,7 @@ var traditionalChineseTranslation = {
       enableIf: "使用魔棒圖示設置禁用面板唯讀模式的條件規則。",
       requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
       templateQuestionTitleLocation: "適用於此面板中的所有問題。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
+      templateQuestionTitleWidth: "當問題標題與問題框的左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。",
       templateErrorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
       errorLocation: "設置與面板中所有問題相關的錯誤消息的位置。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。",
       page: "將面板重新置放到選頁面的末尾。",
@@ -1516,6 +1524,9 @@ var traditionalChineseTranslation = {
     timeLimitPerPage: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。",
     validateVisitedEmptyFields: "啟用此選項可在使用者將焦點放在空輸入欄位上，然後離開該欄位而不進行任何更改時觸發驗證。",
     page: {
+      name: "受訪者不可見的頁面ID。",
+      description: "鍵入頁面副標題。",
+      navigationTitle: "顯示在進度條或目錄 （TOC） 中的導航按鈕上的說明。如果將此欄位留空，則導航按鈕將使用頁面標題或頁面名稱。要啟用進度條或 TOC，請轉到“調查”→“導航”。",
       timeLimit: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。",
       visibleIf: "使用魔杖圖示設置確定頁面可見性的條件規則。",
       enableIf: "使用魔杖圖示設置禁用頁面只讀模式的條件規則。",
@@ -1543,6 +1554,7 @@ var traditionalChineseTranslation = {
     choicesFromQuestionMode: "從以下選項中選擇：「全部」 - 複製所選問題中的所有選項;“Selected” - 僅動態複製選定的選項選項;“未選擇” - 僅動態複製未選擇的選項。默認情況下，如果在源問題中啟用了“無”和“其他”選項，則會複製該選項。",
     choiceValuesFromQuestion: "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣、列或面板問題應提供ID。",
     choiceTextsFromQuestion: "在單選和多選問題類型中，每個選項都有一個ID和顯示值。此設置指定哪個矩陣列或面板問題應提供顯示文本。",
+    allowCustomChoices: "如果下拉清單中沒有所需的選項，則選擇以允許受訪者添加自己的選擇。自訂選項將僅在當前瀏覽器會話期間臨時存儲。",
     showOtherItem: "選取後，使用者可以在單獨的註釋框中包含其他輸入。",
     separateSpecialChoices: "在新行上顯示每個特殊選項（“無”、“其他”、“全選”），即使使用多列佈局也是如此。",
     path: "指定服務數據集中目標物件陣列所在的位置。如果 URL 已指向陣列，則留空。",
@@ -1615,7 +1627,8 @@ var traditionalChineseTranslation = {
       overlapEnabled: "啟用后，調查的頂部將覆蓋頁眉的底部。",
       mobileHeight: "設置為 0 時，將自動計算高度以適應標題的內容。"
     },
-    progressBarInheritWidthFrom: "“與容器相同”選項會自動調整進度條區域的寬度，以適應放置調查的 HTML 元素。"
+    progressBarInheritWidthFrom: "“與容器相同”選項會自動調整進度條區域的寬度，以適應放置調查的 HTML 元素。",
+    singleInputTitleTemplate: "當「調查佈局」設置為「每頁單個輸入欄位」時使用。在此佈局中，矩陣被拆分，以便每個輸入欄位都顯示在單獨的頁面上。使用 {rowIndex} 占位符插入自動編號，使用 {rowTitle} 或 {rowName} 引用行的標題或 ID，使用 {row.columnid} 包含特定矩陣列的值。"
   },
   // Properties
   p: {
@@ -3307,3 +3320,16 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "設置問題註釋的文字區域中顯示的行數。如果輸入佔用更多行，則會顯示滾動條。"
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "動態文字的預設顯示值"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "當問題值為空時，顯示在 HTML 問題以及調查元素的動態標題和描述中的值。"
+// showQuestionNumbers.recursive: "Recursive numbering" => "遞歸編號"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "問題標題寬度"
+// pe.allowCustomChoices: "Allow custom choices" => "允許自訂選項"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "當問題標題與問題框的左側對齊時，為問題標題設置一致的寬度。接受 CSS 值（px、%、in、pt 等）。"
+// page.name: "A page ID that is not visible to respondents." => "受訪者不可見的頁面ID。"
+// page.description: "Type a page subtitle." => "鍵入頁面副標題。"
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "顯示在進度條或目錄 （TOC） 中的導航按鈕上的說明。如果將此欄位留空，則導航按鈕將使用頁面標題或頁面名稱。要啟用進度條或 TOC，請轉到“調查”→“導航”。"
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "如果下拉清單中沒有所需的選項，則選擇以允許受訪者添加自己的選擇。自訂選項將僅在當前瀏覽器會話期間臨時存儲。"
+// pe.singleInputTitleTemplate: "Input field title pattern" => "輸入欄位標題模式"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "每頁顯示單個輸入欄位"
+// ts.prevPage: "Previous" => "以前"
+// ts.nextPage: "Next" => "下一個"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "當「調查佈局」設置為「每頁單個輸入欄位」時使用。在此佈局中，矩陣被拆分，以便每個輸入欄位都顯示在單獨的頁面上。使用 {rowIndex} 占位符插入自動編號，使用 {rowTitle} 或 {rowName} 引用行的標題或 ID，使用 {row.columnid} 包含特定矩陣列的值。"

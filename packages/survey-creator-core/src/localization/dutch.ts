@@ -338,6 +338,7 @@ export var nlStrings = {
       titleLocation: "Uitlijning van paneeltitels",
       descriptionLocation: "Uitlijning van paneelbeschrijving",
       templateQuestionTitleLocation: "Uitlijning van vraagtitels",
+      templateQuestionTitleWidth: "Breedte van de vraagtitel",
       templateErrorLocation: "Uitlijning van foutmeldingen",
       newPanelPosition: "Nieuwe paneellocatie",
       showRangeInProgress: "De voortgangsbalk weergeven",
@@ -568,6 +569,7 @@ export var nlStrings = {
     cellType: "Celtype",
     colCount: "Kolom tellen",
     choicesOrder: "Volgorde opties",
+    allowCustomChoices: "Aangepaste keuzes toestaan",
     visible: "Is zichtbaar?",
     isRequired: "Is verplicht?",
     markRequired: "Markeren zoals vereist",
@@ -588,6 +590,7 @@ export var nlStrings = {
     transposeData: "Rijen transponeren naar kolommen",
     addRowText: "Voeg tekst van de rijknop toe",
     removeRowText: "Verwijder de tekst van de rijknop",
+    singleInputTitleTemplate: "Titelpatroon invoerveld",
     rateMin: "Minimumtarief",
     rateMax: "Maximaal tarief",
     rateStep: "Beoordeel stap",
@@ -1117,7 +1120,8 @@ export var nlStrings = {
     questionsOnPageMode: {
       standard: "Oorspronkelijke structuur",
       singlePage: "Toon alle vragen op één pagina",
-      questionPerPage: "Toon één vraag per pagina"
+      questionPerPage: "Toon één vraag per pagina",
+      inputPerPage: "Toon enkel invoerveld per pagina"
     },
     noPreview: "Geen preview",
     showAllQuestions: "Toon voorbeeld met alle vragen",
@@ -1190,6 +1194,7 @@ export var nlStrings = {
       onPage: "Reset op elke pagina",
       onpanel: "Reset op elk paneel",
       onPanel: "Reset op elk paneel",
+      recursive: "Recursieve nummering",
       onSurvey: "Doorgaan in de enquête",
       off: "Geen nummering"
     },
@@ -1317,7 +1322,9 @@ export var nlStrings = {
   ts: {
     selectPage: "Selecteer de pagina om deze te testen:",
     showInvisibleElements: "Toon onzichtbare elementen",
-    hideInvisibleElements: "Onzichtbare elementen verbergen"
+    hideInvisibleElements: "Onzichtbare elementen verbergen",
+    prevPage: "Vorig",
+    nextPage: "Volgend"
   },
   validators: {
     answercountvalidator: "Aantal antwoorden",
@@ -1381,6 +1388,7 @@ export var nlStrings = {
       enableIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen die de alleen-lezen modus voor het deelvenster uitschakelt.",
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
       templateQuestionTitleLocation: "Geldt voor alle vragen binnen dit panel. Als u deze instelling wilt overschrijven, definieert u regels voor titeluitlijning voor afzonderlijke vragen. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
+      templateQuestionTitleWidth: "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, %, in, pt, enz.).",
       templateErrorLocation: "Hiermee stelt u de locatie in van een foutmelding met betrekking tot een vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau (\"Standaard bovenaan\") toe.",
       errorLocation: "Hiermee stelt u de locatie van een foutmelding in met betrekking tot alle vragen in het panel. De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe.",
       page: "Hiermee verplaatst u het deelvenster naar het einde van een geselecteerde pagina.",
@@ -1516,6 +1524,9 @@ export var nlStrings = {
     timeLimitPerPage: "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de volgende pagina.",
     validateVisitedEmptyFields: "Schakel deze optie in om validatie te activeren wanneer een gebruiker zich richt op een leeg invoerveld en dit vervolgens verlaat zonder wijzigingen aan te brengen.",
     page: {
+      name: "Een pagina-ID die niet zichtbaar is voor respondenten.",
+      description: "Typ een pagina-ondertitel.",
+      navigationTitle: "Een bijschrift dat wordt weergegeven op een navigatieknop in de voortgangsbalk of inhoudsopgave (TOC). Als u dit veld leeg laat, gebruikt de navigatieknop de paginatitel of paginanaam. Om de voortgangsbalk of inhoudsopgave in te schakelen, ga je naar \"Enquête\" → \"Navigatie\".",
       timeLimit: "Een tijdsinterval in seconden, waarna de enquête automatisch doorgaat naar de volgende pagina.",
       visibleIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die de zichtbaarheid van de pagina bepaalt.",
       enableIf: "Gebruik het pictogram van de toverstaf om een voorwaardelijke regel in te stellen waarmee de alleen-lezen modus voor de pagina wordt uitgeschakeld.",
@@ -1543,6 +1554,7 @@ export var nlStrings = {
     choicesFromQuestionMode: "Kies uit: \"Alle\" - kopieert alle keuzemogelijkheden van de geselecteerde vraag; \"Geselecteerd\" - kopieert dynamisch alleen geselecteerde keuzeopties; \"Niet geselecteerd\" - kopieert dynamisch alleen niet-geselecteerde keuzeopties. De opties \"Geen\" en \"Overig\" worden standaard gekopieerd als deze zijn ingeschakeld in de bronvraag.",
     choiceValuesFromQuestion: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de ID's moeten bevatten.",
     choiceTextsFromQuestion: "In vraagtypen met enkelvoudige en meervoudige selectie heeft elke keuzeoptie een ID en weergavewaarde. Deze instelling geeft aan welke matrixkolom of paneelvraag de weergaveteksten moet opleveren.",
+    allowCustomChoices: "Selecteer deze optie om respondenten hun eigen keuzes te laten toevoegen als de gewenste optie niet beschikbaar is in de vervolgkeuzelijst. Aangepaste keuzes worden slechts tijdelijk opgeslagen voor de duur van de huidige browsersessie.",
     showOtherItem: "Als deze optie is geselecteerd, kunnen gebruikers extra invoer invullen in een apart invulveld.",
     separateSpecialChoices: "Geeft elke speciale keuzeoptie ('Geen', 'Overig', 'Alles selecteren') weer op een nieuwe regel, zelfs bij gebruik van een lay-out met meerdere kolommen.",
     path: "Geef de locatie binnen de servicegegevensset op waar de doelmatrix met objecten zich bevindt. Laat leeg als de URL al naar de array verwijst.",
@@ -1615,7 +1627,8 @@ export var nlStrings = {
       overlapEnabled: "Als deze optie is ingeschakeld, overlapt de bovenkant van de enquête de onderkant van de koptekst.",
       mobileHeight: "Als deze optie is ingesteld op 0, wordt de hoogte automatisch berekend om de inhoud van de koptekst te accommoderen."
     },
-    progressBarInheritWidthFrom: "Met de optie \"Zelfde als container\" wordt de breedte van het gebied van de voortgangsbalk automatisch aangepast aan het HTML-element waarin de enquête is geplaatst."
+    progressBarInheritWidthFrom: "Met de optie \"Zelfde als container\" wordt de breedte van het gebied van de voortgangsbalk automatisch aangepast aan het HTML-element waarin de enquête is geplaatst.",
+    singleInputTitleTemplate: "Wordt gebruikt wanneer de 'Enquête-indeling' is ingesteld op 'Enkel invoerveld per pagina'. In deze lay-out wordt de matrix gesplitst zodat elk invoerveld op een aparte pagina verschijnt. Gebruik de tijdelijke aanduiding {rowIndex} om automatische nummering in te voegen, {rowTitle} of {rowName} om te verwijzen naar de titel of id van de rij en {row.columnid} om de waarde van een specifieke matrixkolom op te nemen."
   },
   // Properties
   p: {
@@ -3015,3 +3028,16 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Hiermee stelt u het aantal weergegeven regels in tekstgebieden in voor opmerkingen bij vragen. Als de invoer meer regels in beslag neemt, wordt de schuifbalk weergegeven."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Standaardweergavewaarde voor dynamische teksten"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Een waarde die wordt weergegeven in HTML-vragen en in de dynamische titels en beschrijvingen van enquête-elementen wanneer de vraagwaarde leeg is."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Recursieve nummering"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Breedte van de vraagtitel"
+// pe.allowCustomChoices: "Allow custom choices" => "Aangepaste keuzes toestaan"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Hiermee stelt u een consistente breedte in voor vraagtitels wanneer deze links van de vraagvakken zijn uitgelijnd. Accepteert CSS-waarden (px, %, %, in, pt, enz.)."
+// page.name: "A page ID that is not visible to respondents." => "Een pagina-ID die niet zichtbaar is voor respondenten."
+// page.description: "Type a page subtitle." => "Typ een pagina-ondertitel."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Een bijschrift dat wordt weergegeven op een navigatieknop in de voortgangsbalk of inhoudsopgave (TOC). Als u dit veld leeg laat, gebruikt de navigatieknop de paginatitel of paginanaam. Om de voortgangsbalk of inhoudsopgave in te schakelen, ga je naar \"Enquête\" → \"Navigatie\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Selecteer deze optie om respondenten hun eigen keuzes te laten toevoegen als de gewenste optie niet beschikbaar is in de vervolgkeuzelijst. Aangepaste keuzes worden slechts tijdelijk opgeslagen voor de duur van de huidige browsersessie."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Titelpatroon invoerveld"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Toon enkel invoerveld per pagina"
+// ts.prevPage: "Previous" => "Vorig"
+// ts.nextPage: "Next" => "Volgend"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Wordt gebruikt wanneer de 'Enquête-indeling' is ingesteld op 'Enkel invoerveld per pagina'. In deze lay-out wordt de matrix gesplitst zodat elk invoerveld op een aparte pagina verschijnt. Gebruik de tijdelijke aanduiding {rowIndex} om automatische nummering in te voegen, {rowTitle} of {rowName} om te verwijzen naar de titel of id van de rij en {row.columnid} om de waarde van een specifieke matrixkolom op te nemen."

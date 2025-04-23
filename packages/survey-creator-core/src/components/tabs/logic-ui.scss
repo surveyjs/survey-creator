@@ -148,10 +148,15 @@
 
 
 .svc-logic-operator.svc-logic-operator--error {
-  background-color: var(--ctr-expression-item-background-color-parameter-error, var(--sjs-layer-1-background-500, #ffffffff));
-  color: var(--ctr-expression-item-text-color-parameter-error, var(--sjs-semantic-red-background-500, #e50a3eff));
   box-shadow: inset 0 0 0 2px
-    var(--ctr-expression-item-text-color-parameter-error, var(--sjs-semantic-red-background-500, #e50a3eff));
+    var(--ctr-expression-item-border-color-error, var(--sjs-semantic-red-background-500, #e50a3eff));
+  &:hover,
+  &:focus {
+    box-shadow: inset 0 0 0 2px
+      var(--ctr-expression-item-border-color-error, var(--sjs-semantic-red-background-500, #e50a3eff));
+    background-color: var(--ctr-expression-item-background-color-parameter-error, var(--sjs-layer-1-background-500, #ffffffff));
+    color: var(--ctr-expression-item-text-color-parameter-error, var(--sjs-semantic-red-background-500, #e50a3eff));
+  }
 }
 
 .svc-logic-operator__error {

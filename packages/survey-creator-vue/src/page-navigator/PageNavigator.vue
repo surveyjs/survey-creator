@@ -51,12 +51,13 @@ onMounted(() => {
   if (props.pageEditMode !== "bypage") {
     const el = root.value;
     const modelValue = model.value;
-    modelValue.attachToUI(el);
+    if(el) {
+      modelValue.attachToUI(el);
+    }
   }
 });
 
 onBeforeUnmount(() => {
-  const el = root.value;
   const modelValue = model.value;
   modelValue.stopItemsContainerHeightObserver();
   modelValue.setScrollableContainer(undefined as any);

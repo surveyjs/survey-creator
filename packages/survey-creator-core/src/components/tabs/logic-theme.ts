@@ -24,6 +24,8 @@ export var logicCss = {
     edit: ""
   },
   panel: {
+    withFrame: "",
+    nested: "",
     enter: "sl-element-wrapper--enter",
     leave: "sl-element-wrapper--leave",
     title: "",
@@ -61,7 +63,8 @@ export var logicCss = {
     panelWrapperList: "sl-panel-wrapper--list",
     panelWrapperInRow: "sl-panel-wrapper--in-row",
     panelWrapperEnter: "sl-panel-wrapper--enter",
-    panelWrapperLeave: "sl-panel-wrapper--leave"
+    panelWrapperLeave: "sl-panel-wrapper--leave",
+    footerButtonsContainer: "sl-paneldynamic__buttons-container",
   },
   progress: "",
   progressBar: "",
@@ -80,6 +83,8 @@ export var logicCss = {
   rowDelayedEnter: "sl-row--delayed-enter",
   rowMultiple: "sl-row--multiple",
   question: {
+    withFrame: "",
+    nested: "",
     mainRoot: "sl-question",
     flowRoot: "",
     asCell: "",

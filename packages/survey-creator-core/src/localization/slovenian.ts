@@ -338,6 +338,7 @@ export var slStrings = {
       titleLocation: "Poravnava naslova plošče",
       descriptionLocation: "Poravnava opisa plošče",
       templateQuestionTitleLocation: "Poravnava naslova vprašanja",
+      templateQuestionTitleWidth: "Širina naslova vprašanja",
       templateErrorLocation: "Poravnava sporočila o napaki",
       newPanelPosition: "Nova lokacija plošče",
       showRangeInProgress: "Prikaži vrstico napredka",
@@ -568,6 +569,7 @@ export var slStrings = {
     cellType: "Vrsta vnosa v celici",
     colCount: "Število stolpcev",
     choicesOrder: "Vrsta izbire",
+    allowCustomChoices: "Omogočanje izbir po meri",
     visible: "Vidno",
     isRequired: "Obvezno",
     markRequired: "Označi kot obvezno",
@@ -588,6 +590,7 @@ export var slStrings = {
     transposeData: "Zamenjaj vrstice s stolpci",
     addRowText: "Besedilo gumba \"Dodaj vrstico\"",
     removeRowText: "Besedilo gumba \"Odstrani vrstico\"",
+    singleInputTitleTemplate: "Vzorec naslova vnosnega polja",
     rateMin: "Minimalna vrednost ocene",
     rateMax: "Maksimalna vrednost ocene",
     rateStep: "Korak vrednosti",
@@ -1117,7 +1120,8 @@ export var slStrings = {
     questionsOnPageMode: {
       standard: "Původní struktura",
       singlePage: "Zobrazit všechny otázky na jedné stránce",
-      questionPerPage: "Zobrazit jednu otázku na stránce"
+      questionPerPage: "Zobrazit jednu otázku na stránce",
+      inputPerPage: "Prikaz enega vnosnega polja na stran"
     },
     noPreview: "Žádný náhled",
     showAllQuestions: "Zobrazit všechny otázky",
@@ -1190,6 +1194,7 @@ export var slStrings = {
       onPage: "Resetuj na svakoj stranici",
       onpanel: "Resetuj na svakom panelu",
       onPanel: "Resetuj na svakom panelu",
+      recursive: "Rekurzivno številčenje",
       onSurvey: "Nastavi kroz anketu",
       off: "Bez numerisanja"
     },
@@ -1317,7 +1322,9 @@ export var slStrings = {
   ts: {
     selectPage: "Izberi stran za testiranje",
     showInvisibleElements: "Prikaži nevidne elemente",
-    hideInvisibleElements: "Skrij nevidne elemente"
+    hideInvisibleElements: "Skrij nevidne elemente",
+    prevPage: "Prejšnji",
+    nextPage: "Naslednji"
   },
   validators: {
     answercountvalidator: "Število odgovorov",
@@ -1381,6 +1388,7 @@ export var slStrings = {
       enableIf: "Uporabite ikono čarobne paličice za nastavitev pogojnega pravila, ki onemogoči način samo za branje za panel.",
       requiredIf: "Uporabite ikono čarobne paličice za nastavitev pogojnega pravila, ki prepreči oddajo ankete, razen če je vsaj eno vprašanje znotraj panela odgovorjeno.",
       templateQuestionTitleLocation: "Velja za vsa vprašanja znotraj tega panela. Če želite prekiniti to nastavitev, določite pravila za poravnavo naslovov za posamezna vprašanja. Možnost \"Dedovanje\" uporabi nastavitev na ravni strani (če je nastavljeno) ali na ravni ankete (\"Na vrhu\" privzeto).",
+      templateQuestionTitleWidth: "Nastavi dosledno širino naslovov vprašanj, ko so poravnani levo od polj z vprašanji. Sprejema vrednosti CSS (px, %, in, pt itd.).",
       templateErrorLocation: "Določi lokacijo sporočila o napaki v zvezi z vprašanjem z neveljavnim vnosom. Izberite med: \"Na vrhu\" - sporočilo o napaki je postavljeno na vrh okvira vprašanja; \"Na dnu\" - sporočilo o napaki je postavljeno na dno okvira vprašanja. Možnost \"Dedovanje\" uporabi nastavitev na ravni strani (če je nastavljeno) ali na ravni ankete.",
       errorLocation: "Določi lokacijo sporočila o napaki v zvezi z vsemi vprašanji znotraj panela. Možnost \"Dedovanje\" uporabi nastavitev na ravni strani (če je nastavljeno) ali na ravni ankete.",
       page: "Premakne panel na konec izbrane strani.",
@@ -1516,6 +1524,9 @@ export var slStrings = {
     timeLimitPerPage: "Časovni interval v sekundah, po katerem se anketa samodejno premakne na naslednjo stran. Skrije gumb za krmarjenje »Prejšnji«. Če je nastavljena na 0, šteje čas, porabljen na trenutni strani.",
     validateVisitedEmptyFields: "Omogočite to možnost, da sprožite preverjanje, ko uporabnik klikne na prazno vnosno polje in ga nato zapusti brez sprememb",
     page: {
+      name: "ID strani, ki ni viden anketirancem.",
+      description: "Vnesite podnaslov strani.",
+      navigationTitle: "Napis, prikazan na gumbu za krmarjenje v vrstici napredovanja ali kazalu. Če pustite to polje prazno, bo gumb za krmarjenje uporabil naslov ali ime strani. Če želite omogočiti vrstico napredovanja ali TOC, pojdite na »Anketa« → »Krmarjenje«.",
       timeLimit: "Časovni interval v sekundah, po katerem anketa samodejno preide na naslednjo stran. Skrije navigacijski gumb Prejšnja. Ko je nastavljeno na 0, šteje čas preživet na trenutni strani",
       visibleIf: "Uporabite ikono čarobne palice za nastavitev pogoja, ki določa vidnost strani",
       enableIf: "Uporabite ikono čarobne palice za nastavitev pogoja, ki onemogoči način samo za branje na strani",
@@ -1543,6 +1554,7 @@ export var slStrings = {
     choicesFromQuestionMode: "Izberite med: Vse - kopira vse možnosti izbranega vprašanja, Izbrano - dinamično kopira samo izbrane možnosti, Neizbrano - dinamično kopira samo neizbrane možnosti. Možnosti Nobena in Drugo se kopirajo privzeto, če so omogočene v izvornih vprašanjih",
     choiceValuesFromQuestion: "Pri vprašanjih z eno ali več izbirami ima vsaka možnost ID in prikazano vrednost. Ta nastavitev določa, kateri stolpec matrike ali vprašanje panela naj zagotovi ID-je",
     choiceTextsFromQuestion: "Pri vprašanjih z eno ali več izbirami ima vsaka možnost ID in prikazano vrednost. Ta nastavitev določa, kateri stolpec matrike ali vprašanje panela naj zagotovi prikazana besedila",
+    allowCustomChoices: "Izberite, če želite respondentom omogočiti, da dodajo svoje izbire, če želena možnost ni na voljo v spustnem meniju. Izbire po meri bodo shranjene le začasno za čas trajanja trenutne seje brskalnika.",
     showOtherItem: "Ko je izbrano, lahko uporabniki vnesejo dodatni vnos v ločeno polje za komentar",
     separateSpecialChoices: "Vsako posebno možnost (Nobena, Drugo, Izberi vse) prikaže v novi vrstici, tudi pri uporabi večstolpčne postavitve",
     path: "Določite lokacijo znotraj niza podatkov storitve, kjer se nahaja ciljni niz objektov. Pustite prazno, če URL že kaže na niz",
@@ -1615,7 +1627,8 @@ export var slStrings = {
       overlapEnabled: "Ko je omogočeno, zgornji del ankete prekrije spodnji del glave.",
       mobileHeight: "Ko je nastavljeno na 0, se višina samodejno izračuna, da sprejme vsebino glave."
     },
-    progressBarInheritWidthFrom: "\"Enako kot kontejner\" možnost samodejno prilagodi širino območja napredka, da se prilega HTML elementu, v katerega je anketa vstavljena."
+    progressBarInheritWidthFrom: "\"Enako kot kontejner\" možnost samodejno prilagodi širino območja napredka, da se prilega HTML elementu, v katerega je anketa vstavljena.",
+    singleInputTitleTemplate: "Uporablja se, ko je \"Postavitev ankete\" nastavljena na \"Eno vnosno polje na stran\". V tej postavitvi je matrika razdeljena tako, da je vsako vnosno polje prikazano na ločeni strani. Označbo mesta {rowIndex} uporabite za vstavljanje samodejnega oštevilčenja, {rowTitle} ali {rowName} za sklicevanje na naslov ali ID vrstice in {row.columnid} za vključitev vrednosti določenega stolpca matrike."
   },
   // Properties
   p: {
@@ -1811,3 +1824,16 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Nastavi število prikazanih vrstic v besedilnih območjih za komentarje vprašanj. Če vnos zavzame več vrstic, se prikaže drsni trak."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Privzeta prikazana vrednost za dinamična besedila"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Vrednost, prikazana v vprašanjih HTML ter v dinamičnih naslovih in opisih elementov ankete, ko je vrednost vprašanja prazna."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekurzivno številčenje"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Širina naslova vprašanja"
+// pe.allowCustomChoices: "Allow custom choices" => "Omogočanje izbir po meri"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Nastavi dosledno širino naslovov vprašanj, ko so poravnani levo od polj z vprašanji. Sprejema vrednosti CSS (px, %, in, pt itd.)."
+// page.name: "A page ID that is not visible to respondents." => "ID strani, ki ni viden anketirancem."
+// page.description: "Type a page subtitle." => "Vnesite podnaslov strani."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Napis, prikazan na gumbu za krmarjenje v vrstici napredovanja ali kazalu. Če pustite to polje prazno, bo gumb za krmarjenje uporabil naslov ali ime strani. Če želite omogočiti vrstico napredovanja ali TOC, pojdite na »Anketa« → »Krmarjenje«."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Izberite, če želite respondentom omogočiti, da dodajo svoje izbire, če želena možnost ni na voljo v spustnem meniju. Izbire po meri bodo shranjene le začasno za čas trajanja trenutne seje brskalnika."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Vzorec naslova vnosnega polja"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Prikaz enega vnosnega polja na stran"
+// ts.prevPage: "Previous" => "Prejšnji"
+// ts.nextPage: "Next" => "Naslednji"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Uporablja se, ko je \"Postavitev ankete\" nastavljena na \"Eno vnosno polje na stran\". V tej postavitvi je matrika razdeljena tako, da je vsako vnosno polje prikazano na ločeni strani. Označbo mesta {rowIndex} uporabite za vstavljanje samodejnega oštevilčenja, {rowTitle} ali {rowName} za sklicevanje na naslov ali ID vrstice in {row.columnid} za vključitev vrednosti določenega stolpca matrike."

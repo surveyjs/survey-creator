@@ -34,7 +34,7 @@
     />
     <div :class="question.cssClasses.buttonsContainer">
       <button
-        type="button"
+        :title="question.clearButtonCaption"
         :class="question.cssClasses.clearButton"
         v-key2click
         :disabled="question.getIsClearButtonDisabled()"
@@ -44,11 +44,9 @@
           :is="'sv-svg-icon'"
           :iconName="question.cssClasses.clearButtonIcon"
           :size="'auto'"
-          :title="question.clearButtonCaption"
         ></SvComponent>
       </button>
       <label
-        role="button"
         :class="question.getChooseButtonCss()"
         :for="question.inputId"
         :aria-label="question.chooseButtonCaption"

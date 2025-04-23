@@ -32,8 +32,8 @@ export class PropertyGridEditorBindings extends PropertyGridEditor {
     question.valueFromDataCallback = (value: any): any => {
       const keys = obj.bindings.getNames();
       const result: { [index: string]: any } = {};
-      if(keys.length > 0) {
-        for(const key of keys) {
+      if (keys.length > 0) {
+        for (const key of keys) {
           result[key] = !!value ? value[key] : obj.bindings.getValueNameByPropertyName(key);
         }
       }
