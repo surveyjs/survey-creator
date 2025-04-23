@@ -10,7 +10,7 @@
   >
     <input
       type="text"
-      :disabled="question.isInputReadOnly"
+      :disabled="question.isTextInputReadOnly"
       :class="question.cssClasses.control"
       :value="question.renderedValue || ''"
       @change="question.onInputChange"

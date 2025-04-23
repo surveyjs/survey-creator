@@ -16,7 +16,7 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
     return (
       <>
         <input
-          disabled={this.isDisplayMode}
+          disabled={this.question.isTextInputReadOnly}
           className={this.questionFile.cssClasses.control}
           placeholder={this.questionFile.renderedPlaceholder}
           ref={(input) => (this.setControl(input))}
