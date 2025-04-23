@@ -33,9 +33,6 @@ export class PropertyGridComponent extends SurveyElementBase<IPropertyGridCompon
   }
 }
 
-ReactQuestionFactory.Instance.registerQuestion("buttongroup", (props) => {
-  return React.createElement(SurveyQuestionButtonGroup, props);
-});
 
 export default PropertyGridComponent;
 

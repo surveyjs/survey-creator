@@ -212,7 +212,7 @@ export var propertyGridCss = {
     controlReadOnly: "sd-input--disabled sd-input--readonly"
   },
   buttongroup: {
-    root: "spg-button-group",
+    root: "sd-button-group-scrollable-container spg-button-group",
     item: "spg-button-group__item",
     itemIcon: "spg-button-group__item-icon",
     itemDecorator: "spg-button-group__item-decorator",
@@ -221,7 +221,21 @@ export var propertyGridCss = {
     itemSelected: "spg-button-group__item--selected",
     itemDisabled: "spg-button-group__item--disabled",
     itemControl: "sv-visuallyhidden",
-    readOnly: "spg-question--disabled"
+    readOnly: "spg-question--disabled",
+
+    rootDropdown: "sd-button-group-scrollable-container sd-scrollable-container--compact sd-selectbase",
+    selectWrapper: "sv-dropdown_select-wrapper spg-dropdown_select-wrapper",
+    control: "spg-input spg-dropdown sd-input sd-dropdown",
+    controlEmpty: "spg-dropdown--empty sd-dropdown--empty",
+    controlValue: "spg-dropdown__value sd-dropdown__value",
+    controlDisabled: "spg-input--disabled sd-input--disabled",
+    controlReadOnly: "spg-input--readonly sd-input--readonly",
+    controlPreview: "spg-input--preview sd-input--preview",
+    filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
+    chevronButton: "sd-dropdown_chevron-button spg-dropdown_chevron-button",
+    chevronButtonSvg: "sd-dropdown_chevron-button-svg spg-dropdown_chevron-button-svg",
+    chevronButtonIconId: "icon-chevron",
+    popup: "spg-dropdown-popup svc-creator-popup",
   },
   imagepicker: {
     root: "spg-imagepicker",
