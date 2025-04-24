@@ -26,17 +26,15 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     return !!this.unit && this._showUnitsInEditor;
   }
   private correctValue(newValue: string | number): number {
-    if(newValue == undefined || newValue == null) return <number>newValue;
+    if (newValue == undefined || newValue == null) return <number>newValue;
     let renderedMax = Number(this.renderedMax);
     let renderedMin = Number(this.renderedMin);
-    newValue = typeof newValue === "string" ? parseFloat(newValue): newValue;
-    if(isNaN(newValue)) {
+    newValue = typeof newValue === "string" ? parseFloat(newValue) : newValue;
+    if (isNaN(newValue)) {
       newValue = isNaN(renderedMin) ? 0 : renderedMin;
-    }
-    else if(newValue > renderedMax) {
+    } else if (newValue > renderedMax) {
       newValue = renderedMax;
-    }
-    else if(newValue < renderedMin) {
+    } else if (newValue < renderedMin) {
       newValue = renderedMin;
     }
     newValue = Math.round(newValue * 1000) / 1000;
@@ -47,7 +45,7 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
   }
   public get renderedValue(): string {
     let renderedValue: string = (this.value ?? this.renderedMin ?? 0).toString();
-    if(this.showUnitsInEditor) {
+    if (this.showUnitsInEditor) {
       renderedValue += this.unit;
     }
     return renderedValue;
@@ -71,36 +69,36 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     this.increase();
     this.clearTimers();
     this.increaseTimer = setTimeout(this.onUpButtonMouseDown, 200);
-  }
+  };
   public onDownButtonMouseDown = () => {
     if (!this.changeValueOnPressing) return;
 
     this.decrease();
     this.clearTimers();
     this.decreaseTimer = setTimeout(this.onDownButtonMouseDown, 200);
-  }
+  };
   public onUpButtonClick = () => {
     if (!this.changeValueOnPressing) {
       this.increase();
     }
-  }
+  };
   public onDownButtonClick = () => {
     if (!this.changeValueOnPressing) {
       this.decrease();
     }
-  }
+  };
   public onButtonMouseLeave = () => {
     if (!this.changeValueOnPressing) return;
 
     this.onButtonMouseUp();
-  }
+  };
   public onButtonMouseUp = () => {
     if (!this.changeValueOnPressing) return;
 
     this.clearTimers();
-  }
+  };
   public onKeyDown = (event: KeyboardEvent) => {
-    switch (event.key) {
+    switch(event.key) {
       case "ArrowUp":
         this.increase();
         event.stopPropagation();
@@ -113,20 +111,20 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
         break;
     }
     this.onTextKeyDownHandler(event);
-  }
+  };
   public onInputKeyDown = (event: KeyboardEvent) => {
-    if(event.key == "ArrowUp" || event.key == "ArrowDown")
+    if (event.key == "ArrowUp" || event.key == "ArrowDown")
       this["updateValueOnEvent"](event);
-  }
+  };
   public onBeforeInput(event: InputEvent) {
     const target = <HTMLInputElement>event.target;
     const regex = target.selectionStart == 0 ? /[\d.-]/ : /[\d.]/;
-    if(!!event.data && !regex.test(event.data)) {
+    if (!!event.data && !regex.test(event.data)) {
       event.preventDefault();
     }
   }
   public onFocus = (event: Event) => {
-    if((<HTMLElement>event.target).tagName == "INPUT") {
+    if ((<HTMLElement>event.target).tagName == "INPUT") {
       queueMicrotask(() => {
         const inputElement = <HTMLInputElement>event.target;
         const selectStart = inputElement.selectionStart;
@@ -134,7 +132,7 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
         const selectDirection = inputElement.selectionDirection;
         this._showUnitsInEditor = false;
         queueMicrotask(() => {
-          if(Math.abs(selectEnd - selectStart) > 0) {
+          if (Math.abs(selectEnd - selectStart) > 0) {
             inputElement.setSelectionRange(0, this.renderedValue.length, selectDirection);
           } else {
             inputElement.setSelectionRange(this.renderedValue.length, this.renderedValue.length);
@@ -142,13 +140,13 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
         });
       });
     }
-  }
+  };
   public onBlur = (event: Event) => {
     this._showUnitsInEditor = true;
-    if((<any>event.target).tagName == "INPUT") {
+    if ((<any>event.target).tagName == "INPUT") {
       this["updateValueOnEvent"](event);
     }
-  }
+  };
   public getType(): string {
     return "spinedit";
   }

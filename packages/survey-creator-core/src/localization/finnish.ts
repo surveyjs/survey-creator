@@ -338,6 +338,7 @@ export var fiStrings = {
       titleLocation: "Paneelin otsikon tasaus",
       descriptionLocation: "Paneelin kuvauksen tasaus",
       templateQuestionTitleLocation: "Kysymyksen otsikon tasaus",
+      templateQuestionTitleWidth: "Kysymyksen otsikon leveys",
       templateErrorLocation: "Virhesanoman tasaus",
       newPanelPosition: "Uusi paneelin sijainti",
       showRangeInProgress: "Edistymispalkin näyttäminen",
@@ -568,6 +569,7 @@ export var fiStrings = {
     cellType: "Solutyyppi",
     colCount: "Sarakemäärä",
     choicesOrder: "Valitse valintojen järjestys",
+    allowCustomChoices: "Salli mukautetut valinnat",
     visible: "On näkyvä?",
     isRequired: "On vaadittu?",
     markRequired: "Merkitse pakollisesti",
@@ -588,6 +590,7 @@ export var fiStrings = {
     transposeData: "Rivien transponointi sarakkeisiin",
     addRowText: "Lisää rivipainikkeen teksti",
     removeRowText: "Poista rivipainikkeen teksti",
+    singleInputTitleTemplate: "Syöttökentän otsikkomalli",
     rateMin: "Vähimmäismäärä",
     rateMax: "Enimmäismäärä",
     rateStep: "Arvostele askel",
@@ -1117,7 +1120,8 @@ export var fiStrings = {
     questionsOnPageMode: {
       standard: "Alkuperäinen rakenne",
       singlePage: "Näytä kaikki kysymykset yhdellä sivulla",
-      questionPerPage: "Näytä yksittäinen kysymys sivua kohden"
+      questionPerPage: "Näytä yksittäinen kysymys sivua kohden",
+      inputPerPage: "Näytä yksi syöttökenttä sivua kohden"
     },
     noPreview: "Ei esikatselua",
     showAllQuestions: "Näytä esikatselu kaikilla kysymyksillä",
@@ -1190,6 +1194,7 @@ export var fiStrings = {
       onPage: "Nollaa jokaisella sivulla",
       onpanel: "Nollaa jokaisessa paneelissa",
       onPanel: "Nollaa jokaisessa paneelissa",
+      recursive: "Rekursiivinen numerointi",
       onSurvey: "Jatka kyselyssä",
       off: "Ei numerointia"
     },
@@ -1317,7 +1322,9 @@ export var fiStrings = {
   ts: {
     selectPage: "Valitse sivu testataksesi sitä:",
     showInvisibleElements: "Näytä näkymätön elementti",
-    hideInvisibleElements: "Piilota näkymättömät elementit"
+    hideInvisibleElements: "Piilota näkymättömät elementit",
+    prevPage: "Edellinen",
+    nextPage: "Seuraava"
   },
   validators: {
     answercountvalidator: "vastausten määrä",
@@ -1381,6 +1388,7 @@ export var fiStrings = {
       enableIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka poistaa paneelin vain luku -tilan käytöstä.",
       requiredIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka estää kyselyn lähettämisen, ellei vähintään yhteen sisäkkäiseen kysymykseen ole vastausta.",
       templateQuestionTitleLocation: "Koskee kaikkia tämän paneelin kysymyksiä. Jos haluat ohittaa tämän asetuksen, määritä otsikon tasaussäännöt yksittäisille kysymyksille. Peri-vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta (\"Ylin\" oletuksena).",
+      templateQuestionTitleWidth: "Määrittää kysymysotsikoille yhtenäisen leveyden, kun ne on tasattu kysymysruutujen vasemmalle puolelle. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
       templateErrorLocation: "Määrittää virhesanoman sijainnin suhteessa kysymykseen, jonka syöte on virheellinen. Valitse seuraavista: \"Top\" - virheteksti sijoitetaan kysymysruudun yläosaan; \"Pohja\" - virheteksti sijoitetaan kysymysruudun alaosaan. Peri-vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta (\"Ylin\" oletuksena).",
       errorLocation: "Määrittää virhesanoman sijainnin suhteessa kaikkiin paneelin kysymyksiin. Peri-vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta.",
       page: "Siirtää paneelin valitun sivun loppuun.",
@@ -1516,6 +1524,9 @@ export var fiStrings = {
     timeLimitPerPage: "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle.",
     validateVisitedEmptyFields: "Ota tämä asetus käyttöön, jos haluat käynnistää vahvistuksen, kun käyttäjä keskittyy tyhjään syöttökenttään ja poistuu siitä tekemättä muutoksia.",
     page: {
+      name: "Sivun tunnus, joka ei näy vastaajille.",
+      description: "Kirjoita sivun alaotsikko.",
+      navigationTitle: "Kuvateksti, joka näkyy edistymispalkin tai sisällysluettelon siirtymispainikkeessa. Jos jätät tämän kentän tyhjäksi, navigointipainike käyttää sivun otsikkoa tai nimeä. Ota edistymispalkki tai sisällysluettelo käyttöön siirtymällä kohtaan \"Kysely\" → \"Navigointi\".",
       timeLimit: "Sekunteina ilmaistu aikaväli, jonka jälkeen kysely siirtyy automaattisesti seuraavalle sivulle.",
       visibleIf: "Käytä taikasauvakuvaketta asettaaksesi ehdollisen säännön, joka määrittää sivun näkyvyyden.",
       enableIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka poistaa sivun vain luku -tilan käytöstä.",
@@ -1543,6 +1554,7 @@ export var fiStrings = {
     choicesFromQuestionMode: "Valitse seuraavista: \"Kaikki\" - kopioi kaikki valintavaihtoehdot valitusta kysymyksestä; \"Valittu\" - kopioi dynaamisesti vain valitut valintavaihtoehdot; \"Ei valittu\" - kopioi dynaamisesti vain valitsemattomat valintavaihtoehdot. Vaihtoehdot \"Ei mitään\" ja \"Muut\" kopioidaan oletusarvoisesti, jos ne on otettu käyttöön lähdekysymyksessä.",
     choiceValuesFromQuestion: "Yksi- ja monivalintakysymystyypeissä kullakin valintavaihtoehdolla on tunnus ja näyttöarvo. Tämä asetus määrittää, mikä matriisisarake tai paneelikysymys antaa tunnukset.",
     choiceTextsFromQuestion: "Yksi- ja monivalintakysymystyypeissä kullakin valintavaihtoehdolla on tunnus ja näyttöarvo. Tämä asetus määrittää, mikä matriisisarake tai paneelikysymys sisältää näyttötekstit.",
+    allowCustomChoices: "Valitse tämä, jos haluat, että vastaajat voivat lisätä omia vaihtoehtojaan, jos haluttu vaihtoehto ei ole käytettävissä avattavassa valikossa. Mukautetut valinnat tallennetaan vain väliaikaisesti nykyisen selainistunnon ajaksi.",
     showOtherItem: "Kun tämä on valittuna, käyttäjät voivat lisätä lisätietoja erilliseen kommenttiruutuun.",
     separateSpecialChoices: "Näyttää jokaisen erityisen valintavaihtoehdon (\"Ei mitään\", \"Muu\", \"Valitse kaikki\") uudella rivillä, vaikka käytettäisiin monisarakkeista asettelua.",
     path: "Määritä palvelutietojoukon sijainti, jossa objektien kohderyhmä sijaitsee. Jätä tyhjäksi, jos URL-osoite osoittaa jo matriisiin.",
@@ -1615,7 +1627,8 @@ export var fiStrings = {
       overlapEnabled: "Kun tämä asetus on käytössä, kyselyn yläosa peittää otsikon alaosan.",
       mobileHeight: "Kun arvoksi on määritetty 0, korkeus lasketaan automaattisesti otsikon sisällön mukaan."
     },
-    progressBarInheritWidthFrom: "Sama kuin säilö -vaihtoehto säätää edistymispalkin alueen leveyttä automaattisesti sopimaan HTML-elementtiin, johon kysely sijoitetaan."
+    progressBarInheritWidthFrom: "Sama kuin säilö -vaihtoehto säätää edistymispalkin alueen leveyttä automaattisesti sopimaan HTML-elementtiin, johon kysely sijoitetaan.",
+    singleInputTitleTemplate: "Käytetään, kun \"Kyselyn asettelu\" -asetuksena on \"Yksi syöttökenttä sivulla\". Tässä asettelussa matriisi on jaettu siten, että jokainen syöttökenttä näkyy erillisellä sivulla. Käytä {rowIndex}-paikkamerkkiä automaattisen numeroinnin lisäämiseen, {rowTitle} tai {rowName} viittaamaan rivin otsikkoon tai tunnukseen ja {row.columnid} sisällyttääksesi tietyn matriisisarakkeen arvon."
   },
   // Properties
   p: {
@@ -3009,3 +3022,16 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Määrittää kysymyskommenttien tekstialueilla näytettävien rivien määrän. Jos syöttö vie enemmän rivejä, vierityspalkki tulee näkyviin."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Dynaamisten tekstien oletusnäyttöarvo"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Arvo, joka näkyy HTML-kysymyksissä ja kyselyn elementtien dynaamisissa otsikoissa ja kuvauksissa, kun kysymyksen arvo on tyhjä."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekursiivinen numerointi"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Kysymyksen otsikon leveys"
+// pe.allowCustomChoices: "Allow custom choices" => "Salli mukautetut valinnat"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Määrittää kysymysotsikoille yhtenäisen leveyden, kun ne on tasattu kysymysruutujen vasemmalle puolelle. Hyväksyy CSS-arvot (px, %, in, pt jne.)."
+// page.name: "A page ID that is not visible to respondents." => "Sivun tunnus, joka ei näy vastaajille."
+// page.description: "Type a page subtitle." => "Kirjoita sivun alaotsikko."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Kuvateksti, joka näkyy edistymispalkin tai sisällysluettelon siirtymispainikkeessa. Jos jätät tämän kentän tyhjäksi, navigointipainike käyttää sivun otsikkoa tai nimeä. Ota edistymispalkki tai sisällysluettelo käyttöön siirtymällä kohtaan \"Kysely\" → \"Navigointi\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Valitse tämä, jos haluat, että vastaajat voivat lisätä omia vaihtoehtojaan, jos haluttu vaihtoehto ei ole käytettävissä avattavassa valikossa. Mukautetut valinnat tallennetaan vain väliaikaisesti nykyisen selainistunnon ajaksi."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Syöttökentän otsikkomalli"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Näytä yksi syöttökenttä sivua kohden"
+// ts.prevPage: "Previous" => "Edellinen"
+// ts.nextPage: "Next" => "Seuraava"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Käytetään, kun \"Kyselyn asettelu\" -asetuksena on \"Yksi syöttökenttä sivulla\". Tässä asettelussa matriisi on jaettu siten, että jokainen syöttökenttä näkyy erillisellä sivulla. Käytä {rowIndex}-paikkamerkkiä automaattisen numeroinnin lisäämiseen, {rowTitle} tai {rowName} viittaamaan rivin otsikkoon tai tunnukseen ja {row.columnid} sisällyttääksesi tietyn matriisisarakkeen arvon."

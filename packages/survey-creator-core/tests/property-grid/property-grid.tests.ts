@@ -42,7 +42,7 @@ import {
   settings
 } from "../../src/creator-settings";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
-import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
+import { PropertyGridEditorCondition, PropertyGridEditorExpression } from "../../src/property-grid/condition";
 import { QuestionLinkValueModel } from "../../src/components/link-value";
 import {
   PropertyGridValueEditor,
@@ -2552,31 +2552,33 @@ test("We should not have 'Others' category in our objects", () => {
 });
 test("expression editor in trigger expression", () => {
   PropertyGridEditorCollection.register(new PropertyGridEditorCondition());
-  var survey = new SurveyModel({
+  const creator = new CreatorTester();
+  creator.JSON = {
     elements: [
       { type: "text", name: "q1" }
     ]
+  };
+  creator.onPropertyGridShowPopup.add((_, options) => {
+    const conditionEditor = <ConditionEditor>options.popupEditor;
+    expect(conditionEditor).toBeTruthy();
+    expect(conditionEditor.survey).toEqual(survey);
+    expect(conditionEditor.object).toEqual(survey.triggers[0]);
+    conditionEditor.text = "{q1} = 1";
+    conditionEditor.apply();
+    expect(survey.triggers[0].expression).toEqual("{q1} = 1");
   });
+  const survey = creator.survey;
   survey.triggers.push(new SurveyTriggerRunExpression());
-  var propertyGrid = new PropertyGridModelTester(survey);
-  var triggersQuestion = <QuestionMatrixDynamicModel>(
-    propertyGrid.survey.getQuestionByName("triggers")
-  );
+  const triggersQuestion = <QuestionMatrixDynamicModel>(creator.propertyGrid.getQuestionByName("triggers"));
   expect(triggersQuestion).toBeTruthy(); //visibleIf is here
   expect(triggersQuestion.visibleRows).toHaveLength(1);
   triggersQuestion.visibleRows[0].showDetailPanel();
-  var expressionQuestion = triggersQuestion.visibleRows[0].detailPanel.getQuestionByName("expression");
+  const expressionQuestion = triggersQuestion.visibleRows[0].detailPanel.getQuestionByName("expression");
   expect(expressionQuestion.isVisible).toBeTruthy();
-  var actions = expressionQuestion.getTitleActions();
-  var setupAction = findSetupAction(actions);
+  const actions = expressionQuestion.getTitleActions();
+  const setupAction = findSetupAction(actions);
   expect(setupAction).toBeTruthy();
-  var conditionEditor = <ConditionEditor>setupAction.action();
-  expect(conditionEditor).toBeTruthy();
-  expect(conditionEditor.survey).toEqual(survey);
-  expect(conditionEditor.object).toEqual(survey.triggers[0]);
-  conditionEditor.text = "{q1} = 1";
-  conditionEditor.apply();
-  expect(survey.triggers[0].expression).toEqual("{q1} = 1");
+  setupAction.action();
 });
 test("Show empty rows template if there is no rows", () => {
   PropertyGridEditorCollection.register(new PropertyGridEditorCondition());
@@ -2602,6 +2604,21 @@ test("Show empty rows template if there is no rows", () => {
   expect(propEditorQuestion.renderedTable.showTable).toBeFalsy();
   expect(propEditorQuestion.noRowsText).toEqual("You don't have any choices yet");
   expect(propEditorQuestion.addRowText).toEqual("Add new choice");
+});
+test("Espace new line and tabs, Bug#6818", () => {
+  PropertyGridEditorCollection.register(new PropertyGridEditorExpression());
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" }
+    ]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  let propEditor = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("setValueExpression"));
+  q1.setValueExpression = "{q2} + '\n' + {q4}";
+  expect(propEditor.value).toEqual("{q2} + '\\n' + {q4}");
+  propEditor.value = "{q2} + '\\n' + {q3} + '\\t' + {q4}";
+  expect(q1.setValueExpression).toEqual("{q2} + '\n' + {q3} + '\t' + {q4}");
 });
 test("Different property editors for trigger value", () => {
   const prop = Serializer.findProperty("setvaluetrigger", "setValue");

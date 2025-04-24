@@ -338,6 +338,7 @@ export var mnStrings = {
       titleLocation: "Панел цолны зохицуулалт",
       descriptionLocation: "Панел дүрслэлийн зохицуулалт",
       templateQuestionTitleLocation: "Асуулт нэрийн уялдаа",
+      templateQuestionTitleWidth: "Асуултын гарчгийн өргөн",
       templateErrorLocation: "Алдааны мессежийн зохицуулалт",
       newPanelPosition: "Шинэ панелийн байршил",
       showRangeInProgress: "Хөгжил дэвшлийн барыг харуул",
@@ -568,6 +569,7 @@ export var mnStrings = {
     cellType: "Нүдний төрөл",
     colCount: "Баганы тоо",
     choicesOrder: "Сонголтыг эрэмбэлэх дараалал",
+    allowCustomChoices: "Өөрийн сонголтыг хийх боломж олгох",
     visible: "Харагдана",
     isRequired: "Заавал бөглөх",
     markRequired: "Шаардлагын дагуу тэмдэглэгээ хийх",
@@ -588,6 +590,7 @@ export var mnStrings = {
     transposeData: "Багануудад транспозын эгнээ",
     addRowText: "Мөр нэмэх",
     removeRowText: "Мөр устгах",
+    singleInputTitleTemplate: "Оролт талбайн гарчгийн загвар",
     rateMin: "Хамгийн бага утга",
     rateMax: "Хамгийн их утга",
     rateStep: "Алхам",
@@ -1117,7 +1120,8 @@ export var mnStrings = {
     questionsOnPageMode: {
       standard: "Оригинал бүтэц",
       singlePage: "Бүх асуултыг нэг хуудсан дээр харуул",
-      questionPerPage: "Хуудас тус бүрт ганц асуултыг харуул"
+      questionPerPage: "Хуудас тус бүрт ганц асуултыг харуул",
+      inputPerPage: "Хуудас бүрт нэг оролт талбарыг үзүүлэх"
     },
     noPreview: "Урьдчилан харах боломжгүй",
     showAllQuestions: "Бүх асуултыг харуулах.",
@@ -1190,6 +1194,7 @@ export var mnStrings = {
       onPage: "Хуудас бүр дээр дахин тохируулах",
       onpanel: "Тавиур бүр дээр дахин тавих",
       onPanel: "Тавиур бүр дээр дахин тавих",
+      recursive: "Рекурсив дугаарлалт",
       onSurvey: "Судалгааг үргэлжлүүлэн хийх",
       off: "Дугаарлахгүй"
     },
@@ -1317,7 +1322,9 @@ export var mnStrings = {
   ts: {
     selectPage: "Тест хийх хуудсыг сонгох.",
     showInvisibleElements: "Харагдахгүй элементүүдийг харуулах.",
-    hideInvisibleElements: "Харагдахгүй элементүүдийг нуух."
+    hideInvisibleElements: "Харагдахгүй элементүүдийг нуух.",
+    prevPage: "Өмнөх",
+    nextPage: "Дараагийн"
   },
   validators: {
     answercountvalidator: "Хариултын тоо",
@@ -1381,6 +1388,7 @@ export var mnStrings = {
       enableIf: "Зөвхөн унших хэв маягийг хаах нөхцөлтэй дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
       requiredIf: "Наад зах нь нэг үүрээ засах асуулт хариулт байхгүй л бол судалгаа явуулахаас сэргийлдэг нөхцөлийн дүрмийг тогтоохын тулд шидэт туузны зургыг ашигла.",
       templateQuestionTitleLocation: "Энэ хэлэлцүүлгийн бүх асуултад хамаарна. Хэрэв та энэ тохиргоог хүчингүй болгохыг хүсвэл хувь хүний асуултуудад зориулсан нэрийн зохицуулах дүрмүүдийг тодорхойл. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг.",
+      templateQuestionTitleWidth: "Асуултын гарчгийг асуултын хайрцгийн зүүн тийш байрлуулсан үед ижил өргөнийг тогтооно. CSS-ийн үнэ цэнийг (px, %, in, pt гэх мэт) хүлээн авна.",
       templateErrorLocation: "Алдааны мессежийн байршлыг хүчингүй оруулсан асуулттай холбон тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Top\" нь default-аар) хэрэгжүүлдэг.",
       errorLocation: "Хяналтын шатны бүх асуулттай холбогдуулан алдааны мессежийн байршлыг тогтооно. \"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
       page: "Сонгосон хуудасны төгсгөлд панелийг дахин байршуулах.",
@@ -1516,6 +1524,9 @@ export var mnStrings = {
     timeLimitPerPage: "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа.",
     validateVisitedEmptyFields: "Хэрэглэгч хоосон оролтын талбар дээр төвлөрч, дараа нь ямар нэгэн өөрчлөлт хийхгүйгээр орхих үед баталгаажуулалтыг өдөөх боломжийг энэ боломжийг олго.",
     page: {
+      name: "Оролцогчдод харагдахгүй хуудасны ID.",
+      description: "Хуудасны дэд гарчиг гэж бич.",
+      navigationTitle: "Progress bar эсвэл table of contents (TOC) дахь навигацийн товчлуур дээр харагдах тайлбар. Энэ талбарыг хоосон үлдээвэл навигацийн товчлуур хуудасны гарчиг эсвэл хуудасны нэрийг ашиглана. Progress bar эсвэл TOC-г идэвхжүүлэхийн тулд \"Survey\" → \"Navigation\" руу орно.",
       timeLimit: "Судалгааны автоматаар дараагийн хуудас руу урагшлах секундын дотор цаг хугацаа.",
       visibleIf: "Илбийн wand icon-ийг ашиглан хуудасны харагдах байдлыг тодорхойлох нөхцөлтэй дүрэм тогтооно.",
       enableIf: "Зөвхөн хуудсанд зориулсан унших хэв маягийг хаах нөхцөлтэй дүрмийг тогтоохын тулд шидэт wand зургыг ашигла.",
@@ -1543,6 +1554,7 @@ export var mnStrings = {
     choicesFromQuestionMode: "Сонгоно уу: \"Бүгд\" - сонгосон асуултаас сонголт хийх бүх сонголтыг хуулбарласан; \"Сонгосон\" - динамикаар зөвхөн сонгосон сонголтын хувилбаруудыг хуулбарласан; \"Сонгогдоогүй\" - динамикаар зөвхөн сонгогдоогүй сонголтыг хувилдаг. \"None\" болон \"Бусад\" сонголтууд нь эх сурвалжийн асуулгад боломжтой бол default-ээр хуулагддаг.",
     choiceValuesFromQuestion: "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт ID-г өгөхийг тодорхойлдог.",
     choiceTextsFromQuestion: "Нэг болон олон сонголттой асуултын төрлүүдэд сонголт бүр ID болон display value-тэй байдаг. Энэ тохиргоо нь ямар матрицын багана эсвэл панелийн асуулт үзүүлбэрийн текстийг хангахыг тодорхойлдог.",
+    allowCustomChoices: "Хэрэв хүссэн хувилбар нь доош хаягдалд байхгүй бол оролцогчдод өөрсдийн сонголтыг нэмж оруулах боломжийг олго. Custom сонголтууд нь тухайн браузерын хуралдааны туршид зөвхөн түр хугацаагаар хадгалагдах болно.",
     showOtherItem: "Сонгогдсон тохиолдолд хэрэглэгчид тусад нь тайлбарын хайрцагт нэмэлт оруулах боломжтой.",
     separateSpecialChoices: "Тусгай сонголт бүрийг (\"None\", \"Other\", \"Select All\") шинэ мөр дээр, бүр олон баганатай загварыг ашиглахдаа ч үзүүлдэг.",
     path: "Зорилтот олон тооны объект байрладаг үйлчилгээний мэдээллийн сан доторх байршлыг тодорхойл. URL аль хэдийн багц руу зааж байгаа бол хоосон орхи.",
@@ -1615,7 +1627,8 @@ export var mnStrings = {
       overlapEnabled: "Идэвхжүүлбэл судалгааны дээд хэсэг нь header-ийн доод хэсгийг давхарладаг.",
       mobileHeight: "0 гэж тохируулбал өндөрийг гарчгийн агуулгад тохируулахын тулд автоматаар тооцоолдог."
     },
-    progressBarInheritWidthFrom: "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг."
+    progressBarInheritWidthFrom: "\"As as container\" сонголт автоматаар судалгаанд байрлуулсан HTML элементэд тохируулахын тулд progress bar area өргөнийг тохируулдаг.",
+    singleInputTitleTemplate: "'Survey layout' нь 'Single input field per page' болгож тохируулсан үед ашиглана. Энэ загварт матриц хуваагдан оролт талбар бүр тусдаа хуудас дээр харагдана. Автомат дугаарлалт оруулахын тулд {rowIndex} placeholder, мөрийн гарчиг эсвэл ID-г эш татахын тулд {rowTitle} эсвэл {rowName}, тодорхой матрицын баганын үнэ цэнийг оруулахын тулд {row.columnid} ашигла."
   },
   // Properties
   p: {
@@ -2692,3 +2705,16 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Асуултын тайлбар бичвэрийн хэсэгт харагдах мөрийн тоог тогтооно. Хэрвээ оролт илүү олон мөр эзэлбэл гүйлгэх бар гарч ирнэ."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Динамик текстүүдийн стандарт үзүүлэлтийн үнэ"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "HTML асуулт болон асуултын үнэ хоосон үед судалгааны элементүүдийн динамик гарчиг болон тайлбарт харагдах утга."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Рекурсив дугаарлалт"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Асуултын гарчгийн өргөн"
+// pe.allowCustomChoices: "Allow custom choices" => "Өөрийн сонголтыг хийх боломж олгох"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Асуултын гарчгийг асуултын хайрцгийн зүүн тийш байрлуулсан үед ижил өргөнийг тогтооно. CSS-ийн үнэ цэнийг (px, %, in, pt гэх мэт) хүлээн авна."
+// page.name: "A page ID that is not visible to respondents." => "Оролцогчдод харагдахгүй хуудасны ID."
+// page.description: "Type a page subtitle." => "Хуудасны дэд гарчиг гэж бич."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Progress bar эсвэл table of contents (TOC) дахь навигацийн товчлуур дээр харагдах тайлбар. Энэ талбарыг хоосон үлдээвэл навигацийн товчлуур хуудасны гарчиг эсвэл хуудасны нэрийг ашиглана. Progress bar эсвэл TOC-г идэвхжүүлэхийн тулд \"Survey\" → \"Navigation\" руу орно."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Хэрэв хүссэн хувилбар нь доош хаягдалд байхгүй бол оролцогчдод өөрсдийн сонголтыг нэмж оруулах боломжийг олго. Custom сонголтууд нь тухайн браузерын хуралдааны туршид зөвхөн түр хугацаагаар хадгалагдах болно."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Оролт талбайн гарчгийн загвар"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Хуудас бүрт нэг оролт талбарыг үзүүлэх"
+// ts.prevPage: "Previous" => "Өмнөх"
+// ts.nextPage: "Next" => "Дараагийн"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "'Survey layout' нь 'Single input field per page' болгож тохируулсан үед ашиглана. Энэ загварт матриц хуваагдан оролт талбар бүр тусдаа хуудас дээр харагдана. Автомат дугаарлалт оруулахын тулд {rowIndex} placeholder, мөрийн гарчиг эсвэл ID-г эш татахын тулд {rowTitle} эсвэл {rowName}, тодорхой матрицын баганын үнэ цэнийг оруулахын тулд {row.columnid} ашигла."

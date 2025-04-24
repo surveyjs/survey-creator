@@ -10,7 +10,7 @@
   >
     <input
       type="text"
-      :disabled="question.isInputReadOnly"
+      :disabled="question.isTextInputReadOnly"
       :class="question.cssClasses.control"
       :value="question.renderedValue || ''"
       @change="question.onInputChange"
@@ -34,7 +34,7 @@
     />
     <div :class="question.cssClasses.buttonsContainer">
       <button
-        type="button"
+        :title="question.clearButtonCaption"
         :class="question.cssClasses.clearButton"
         v-key2click
         :disabled="question.getIsClearButtonDisabled()"
@@ -44,11 +44,9 @@
           :is="'sv-svg-icon'"
           :iconName="question.cssClasses.clearButtonIcon"
           :size="'auto'"
-          :title="question.clearButtonCaption"
         ></SvComponent>
       </button>
       <label
-        role="button"
         :class="question.getChooseButtonCss()"
         :for="question.inputId"
         :aria-label="question.chooseButtonCaption"

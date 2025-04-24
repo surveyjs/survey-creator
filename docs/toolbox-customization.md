@@ -7,7 +7,7 @@ description: Learn to switch between full and compact modes, limit available que
 
 The Toolbox contains available question and panel types. Users can click questions and panels or drag and drop them onto the design surface to add them to the survey. This help topic describes how you can customize the Toolbox.
 
-<img src="./images/survey-creator-toolbox-full.png" alt="Survey Creator - Toolbox in full mode" width="50%">
+<img src="./images/survey-creator-toolbox-full.png" alt="Survey Creator - Toolbox in full mode" width="1544" height="772">
 
 - [Full and Compact Modes](#full-and-compact-modes)
 - [Limit Available Question and Panel Types](#limit-available-question-and-panel-types)
@@ -20,7 +20,7 @@ The Toolbox contains available question and panel types. Users can click questio
 
 The Toolbox supports full mode (illustrated above) and compact mode. In compact mode, element names are hidden. To see an individual element name, a user should move the mouse pointer over the element icon.
 
-<img src="./images/survey-creator-toolbox-compact.png" alt="Survey Creator - Toolbox in compact mode" width="50%">
+<img src="./images/survey-creator-toolbox-compact.png" alt="Survey Creator - Toolbox in compact mode" width="1544" height="776">
 
 The Toolbox switches between the modes automatically based on available width. Specify the [`forceCompact`](https://surveyjs.io/Documentation/Survey-Creator?id=questiontoolbox#forceCompact) property if you want the Toolbox to always use a specific mode:
 
@@ -140,7 +140,7 @@ creator.toolbox
 
 Toolbox items can have nested items, or "subitems". They appear when users hover over a toolbox item. Subitems help you create more specific configurations of a broader survey element type and group them. For example, the Single-Line Input toolbox item includes a number of subitems that create [Single-Line Input](https://surveyjs.io/form-library/documentation/api-reference/text-entry-question-model) questions with different [`inputType`](https://surveyjs.io/form-library/documentation/api-reference/text-entry-question-model#inputType) property values.
 
-<img src="./images/toolbox-subitems.png" alt="Survey Creator: Toolbox subitems" width="953" height="690">
+<img src="./images/toolbox-subitems.png" alt="Survey Creator: Toolbox subitems" width="1544" height="808">
 
 ### Create Subitems
 
@@ -177,7 +177,7 @@ telSubitem.json["maskSettings"] = { "pattern": "+1(999)999-99-99" };
 
 ### Remove Subitems
 
-If you want to remove a specific subitem, call the [`removeSubitem(subitem)`](/survey-creator/documentation/api-reference/questiontoolboxitem#removeSubitem) method on a toolbox item instance. You can also remove all subitems of a toolbox item by calling the [`clearSubitems()`](/survey-creator/documentation/api-reference/questiontoolboxitem#clearSubitems) method:
+To remove a specific subitem, call the [`removeSubitem(subitem)`](/survey-creator/documentation/api-reference/questiontoolboxitem#removeSubitem) method on a toolbox item instance. You can also remove all subitems of a toolbox item by calling the [`clearSubitems()`](/survey-creator/documentation/api-reference/questiontoolboxitem#clearSubitems) method:
 
 ```js
 // Remove the Labels subitem of the Rating Scale toolbox item
@@ -189,7 +189,9 @@ const singleLineInputItem = creator.toolbox.getItemByName("text");
 singleLineInputItem.clearSubitems();
 ```
 
-If you want to completely deactivate the subitems feature, disable the Toolbox's [`showSubitems`](/survey-creator/documentation/api-reference/questiontoolbox#showSubitems) property:
+> Toolbox subitems act like shortcuts for creating certain question configurations. Removing a subitem doesn't remove the associated properties from the Property Grid. If you need to prevent users from editing them, [hide those properties explicitly](/survey-creator/documentation/property-grid-customization#hide-properties-from-the-property-grid).
+
+You can completely deactivate the subitems feature by disabling the Toolbox's [`showSubitems`](/survey-creator/documentation/api-reference/questiontoolbox#showSubitems) property:
 
 ```js
 creator.toolbox.showSubitems = false;
@@ -204,59 +206,3 @@ Since the Toolbox is meant to contain question and panel types, to add a new ele
 - [Integrate Third-Party Angular Components](https://surveyjs.io/form-library/documentation/customize-question-types/third-party-component-integration-angular)
 - [Integrate Third-Party React Components](https://surveyjs.io/form-library/documentation/customize-question-types/third-party-component-integration-react)
 - [Integrate Third-Party Vue 3 Components](/form-library/documentation/customize-question-types/third-party-component-integration-vue)
-
-<!--
-
-WE HAVEN'T COME UP WITH A VERSION FOR REACT YET
-
-    ### Integrate Third-Party Components as Question Editors
-
-    Survey Creator supports integration with the following third-party components out of the box:
-
-    %LIST%
-
-    To enable the integration with one of these components, reference or import the [surveyjs-widgets](https://github.com/surveyjs/custom-widgets) library next to the third-party component sources:
-
-    ```html
-    <script src="https://unpkg.com/surveyjs-widgets/surveyjs-widgets.min.js"></script>
-    ```
-
-    ```js
-    import "survey-creator-core/survey-creator-core.i18n";
-    ```
-
-    If you did not find the desired component in the list above, refer to the following help topic for instructions on how to integrate any third-party component into Survey Creator: [Create Custom Widget](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget).
--->
-
-<!--  
-
-NEW SURVEY CREATOR DOESN'T HAVE THE ADD TO TOOLBOX ADORNER YET 
-
-    ### Save User-Defined Elements in the Toolbox
-
-    By default, there is a “Add to Toolbox” button on an element (question/panel) in the designer. Your end-user may customize question/panel as he/she wants, add it into toolbox and then drop it on another page.
-
-    You may go even further and persist the current Toolbox state, so the user may use these custom toolbox items for building other surveys.
-
-    Let’s talk here about available options that you have.
-
-    By default, a user may add only 3 elements from the designer. If there are already 3 custom/copied elements on the Toolbox, then on adding a new one, the first added element will be removed. To change the number of copied elements your user may have, you must set this property to the value you need:
-    ```js
-    creator.toolbox.copiedItemMaxCount = 10;
-    ```
-    To disable the ability of adding an element from designer into toolbox you will have to use **onElementAllowOperations** event. Here is the example:
-
-    ```js
-    creator.onElementAllowOperations.add(function(sender, options){
-        options.allowAddToToolbox = false;
-    });
-    ```
-    If you want to persist the copied items on the Toolbox for your end-user for another session or another survey, then you must use the copiedJsonText properties:
-
-    ```js
-    var savedItems = creator.toolbox.copiedJsonText; //save into localstorage or your database
-    //....
-    //Restored savedItems from localstorage or your database.
-    creator.toolbox.copiedJsonText = savedItems;
-    ```
--->

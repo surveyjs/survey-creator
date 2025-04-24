@@ -1,14 +1,17 @@
 <template>
   <div :class="question.cssClasses.root" @keydown="question.onKeyDown">
     <input
+      role="spinbutton"
       autocomplete="off"
       :disabled="question.isInputReadOnly"
       :id="question.inputId"
       :placeholder="question.renderedPlaceholder"
-      :aria-required="question.ariaRequired"
-      :aria-label="question.ariaLabel"
-      :aria-invalid="question.ariaInvalid"
-      :aria-describedby="question.ariaDescribedBy"
+      :aria-required="question.a11y_input_ariaRequired"
+      :aria-label="question.a11y_input_ariaLabel"
+      :aria-labelledby="question.a11y_input_ariaLabelledBy"
+      :aria-describedby="question.a11y_input_ariaDescribedBy"
+      :aria-invalid="question.a11y_input_ariaInvalid"
+      :aria-errormessage="question.a11y_input_ariaErrormessage"
       @change="question.onChange"
       @keydown="question.onInputKeyDown"
       @keyup="question.onKeyUp"
@@ -20,6 +23,7 @@
     />
     <span :class="question.cssClasses.buttonsContainer">
       <button
+        :aria-hidden="'true'"
         :disabled="question.isInputReadOnly"
         :class="question.cssClasses.arrowButton"
         @click="question.onDownButtonClick"
@@ -37,6 +41,7 @@
         ></SvComponent>
       </button>
       <button
+        :aria-hidden="'true'"
         :disabled="question.isInputReadOnly"
         :class="question.cssClasses.arrowButton"
         @click="question.onUpButtonClick"

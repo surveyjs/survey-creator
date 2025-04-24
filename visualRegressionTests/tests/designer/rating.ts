@@ -366,5 +366,10 @@ test("Rating labels location", async (t) => {
     await takeElementScreenshot("rating-top-labels.png", question.nth(0), t, comparer);
     await takeElementScreenshot("rating-bottom-labels.png", question.nth(1), t, comparer);
     await takeElementScreenshot("rating-top-bottom-labels.png", question.nth(2), t, comparer);
+
+    await t.resizeWindow(500, 1000);
+    await takeElementScreenshot("rating-top-labels-mobile.png", question.nth(0), t, comparer);
+    await takeElementScreenshot("rating-bottom-labels-mobile.png", question.nth(1), t, comparer);
+    await takeElementScreenshot("rating-top-bottom-labels-mobile.png", question.nth(2), t, comparer);
   });
 });

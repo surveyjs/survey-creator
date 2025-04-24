@@ -199,7 +199,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (selectCurrentPage) {
       this.creator.selectElement(currentPage);
     }
-  }
+  };
 
   addNewQuestion = (model: PageAdorner, event: IPortableMouseEvent, type?: string) => {
     const isGhost = this.isGhost;
@@ -208,14 +208,13 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this.addGhostPage(false);
       this.creator.survey.currentPage = this.page;
     }, null, type || this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
-  }
+  };
   select(model: PageAdorner, event: IPortableMouseEvent) {
     if (!model.isGhost) {
       if (model.creator.pageEditMode !== "single") {
         model.creator.selectElement(model.page, undefined, false);
         this.onPageSelected();
-      }
-      else {
+      } else {
         model.creator.selectElement(model.creator.survey, undefined, false);
       }
     }
@@ -258,7 +257,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (options.name === "isMobileView" && this.isActionContainerCreated) {
       this.actionContainer.alwaysShrink = options.newValue;
     }
-  }
+  };
   public hoverStopper(event: MouseEvent, element: HTMLElement | any) {
     event["__svc_question_processed"] = true;
   }
@@ -323,7 +322,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     const isElementSelected = this.creator.selectedElement === element;
     this.dragDropHelper.startDragSurveyElement(event, element, isElementSelected);
     return true;
-  }
+  };
   get dropTargetName(): string {
     if (!this.isGhost && !!this.page) {
       return this.page.name;

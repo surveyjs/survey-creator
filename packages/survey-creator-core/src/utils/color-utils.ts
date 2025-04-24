@@ -92,8 +92,7 @@ export function parseColor(value: string = ""): { color: string, opacity: number
       return res + (hex.length == 1 ? "0" + hex : hex);
     }, "#");
     return { color, opacity: roundTo2Decimals(opacity * 100) };
-  }
-  else {
+  } else {
     return { color: value, opacity: 100 };
   }
 }

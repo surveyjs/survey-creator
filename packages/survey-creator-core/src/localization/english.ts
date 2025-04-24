@@ -16,7 +16,7 @@ export var enStrings = {
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
     drag: "Drag element",
-    license: "To use our library, a <a href='https://surveyjs.io/licensing'>developer license</a> is required. If you have an active license, <a href='https://surveyjs.io/remove-alert-banner'>set up your license key</a> and ensure you're using the latest version."
+    license: "To use our library, a <a href='https://surveyjs.io/licensing' target='_blank'>developer license</a> is required. If you have an active license, <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up your license key</a> and ensure you're using the latest version."
   },
   // Creator tabs
   tabs: {
@@ -340,6 +340,7 @@ export var enStrings = {
       titleLocation: "Panel title alignment",
       descriptionLocation: "Panel description alignment",
       templateQuestionTitleLocation: "Question title alignment",
+      templateQuestionTitleWidth: "Question title width",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New panel location",
       showRangeInProgress: "Show the progress bar",
@@ -570,6 +571,7 @@ export var enStrings = {
     cellType: "Cell input type",
     colCount: "Column count",
     choicesOrder: "Choice order",
+    allowCustomChoices: "Allow custom choices",
     visible: "Visible",
     isRequired: "Required",
     markRequired: "Mark as required",
@@ -590,6 +592,7 @@ export var enStrings = {
     transposeData: "Transpose rows to columns",
     addRowText: "\"Add Row\" button text",
     removeRowText: "\"Remove Row\" button text",
+    singleInputTitleTemplate: "Input field title pattern",
     rateMin: "Minimum rating value",
     rateMax: "Maximum rating value",
     rateStep: "Step value",
@@ -1121,7 +1124,8 @@ export var enStrings = {
     questionsOnPageMode: {
       standard: "Original structure",
       singlePage: "Show all questions on one page",
-      questionPerPage: "Show single question per page"
+      questionPerPage: "Show single question per page",
+      inputPerPage: "Show single input field per page"
     },
     noPreview: "No preview",
     showAllQuestions: "Show all questions",
@@ -1194,6 +1198,7 @@ export var enStrings = {
       onPage: "Reset on each page",
       onpanel: "Reset on each panel",
       onPanel: "Reset on each panel",
+      recursive: "Recursive numbering",
       onSurvey: "Continue across the survey",
       off: "No numbering"
     },
@@ -1321,7 +1326,9 @@ export var enStrings = {
   ts: {
     selectPage: "Select the page to test it",
     showInvisibleElements: "Show invisible elements",
-    hideInvisibleElements: "Hide invisible elements"
+    hideInvisibleElements: "Hide invisible elements",
+    prevPage: "Previous",
+    nextPage: "Next",
   },
   validators: {
     answercountvalidator: "Answer count",
@@ -1387,6 +1394,7 @@ export var enStrings = {
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
       templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
+      templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
       errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       // questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
@@ -1554,6 +1562,7 @@ export var enStrings = {
     choicesFromQuestionMode: "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question.",
     choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs.",
     choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts.",
+    allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session.",
     showOtherItem: "When selected, users can include additional input in a separate comment box.",
     separateSpecialChoices: "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout.",
     path: "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array.",
@@ -1626,7 +1635,8 @@ export var enStrings = {
       overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header.",
       mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content.",
     },
-    progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in."
+    progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in.",
+    singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column."
   },
   // Properties
   p: {

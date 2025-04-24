@@ -253,6 +253,8 @@ export class TabTestPlugin implements ICreatorPlugin {
       id: "prevPage",
       iconName: "icon-arrow-left_16x16",
       iconSize: "auto",
+      title: getLocString("ts.prevPage"),
+      showTitle: false,
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
       }),
@@ -263,6 +265,8 @@ export class TabTestPlugin implements ICreatorPlugin {
       id: "nextPage",
       iconName: "icon-arrow-right_16x16",
       iconSize: "auto",
+      title: getLocString("ts.nextPage"),
+      showTitle: false,
       visible: false
     });
     return items;

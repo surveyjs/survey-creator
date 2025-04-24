@@ -343,22 +343,22 @@ test("All properties should be in English translation", () => {
   const errors = new Array<any>();
   const englishStrings = enStrings;
   const checkPropertyDisplayName = (className: string, propertyName: string): void => {
-    if(!!englishStrings.p[propertyName]) return;
-    if(!!englishStrings.pe[propertyName]) return;
+    if (!!englishStrings.p[propertyName]) return;
+    if (!!englishStrings.pe[propertyName]) return;
     let cl: any = Serializer.findClass(className);
-    if(cl.parentName) {
-      if(!!cl.parentName && Serializer.findProperty(cl.parentName, propertyName)) return;
+    if (cl.parentName) {
+      if (!!cl.parentName && Serializer.findProperty(cl.parentName, propertyName)) return;
     }
     while(!!cl) {
       const tClass = englishStrings.pe[cl.name];
-      if(tClass && !!tClass[propertyName]) return;
+      if (tClass && !!tClass[propertyName]) return;
       cl = !!cl.parentName ? Serializer.findClass(cl.parentName) : undefined;
     }
     errors.push({ className: className, propertyName: propertyName });
   };
   classes.forEach((className) => {
     Serializer.getProperties(className).forEach((prop) => {
-      if(prop.visible !== false) {
+      if (prop.visible !== false) {
         checkPropertyDisplayName(className, prop.name);
       }
     });

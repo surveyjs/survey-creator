@@ -16,7 +16,7 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
     return (
       <>
         <input
-          disabled={this.isDisplayMode}
+          disabled={this.question.isTextInputReadOnly}
           className={this.questionFile.cssClasses.control}
           placeholder={this.questionFile.renderedPlaceholder}
           ref={(input) => (this.setControl(input))}
@@ -55,18 +55,19 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
   }
   protected renderClearButton(): React.JSX.Element {
     return attachKey2click((
-      <button type="button"
+      <button
         className={this.questionFile.cssClasses.clearButton}
+        title={this.questionFile.clearButtonCaption}
         disabled={this.questionFile.getIsClearButtonDisabled()}
         onClick={this.questionFile.doClean}>
-        <SvgIcon iconName={this.questionFile.cssClasses.clearButtonIcon} size={"auto"} title={this.questionFile.clearButtonCaption}></SvgIcon>
+        <SvgIcon iconName={this.questionFile.cssClasses.clearButtonIcon} size={"auto"}></SvgIcon>
       </button>
     ));
   }
   protected renderChooseButton(): React.JSX.Element {
     return (
       attachKey2click(
-        <label role="button"
+        <label
           onClick={event => this.questionFile.chooseFiles(event.nativeEvent)}
           className={this.questionFile.getChooseButtonCss()}
           htmlFor={this.questionFile.inputId}

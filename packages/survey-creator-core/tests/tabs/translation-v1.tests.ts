@@ -707,6 +707,6 @@ test("check LocalizableStrings/dataList property", () => {
 test("Do not translate url properties", () => {
   const survey = new SurveyModel();
   const group: TranslationGroup = new TranslationGroup("root", survey);
-  const logo =group.items.find(item => item.name === "logo");
+  const logo = group.items.find(item => item.name === "logo");
   expect(logo).toBeFalsy();
 });

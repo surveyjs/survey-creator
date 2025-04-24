@@ -10,25 +10,38 @@
     "version": "0.0.1",
     "scripts": {
         "dev": "concurrently \"npm run dev --prefix ../survey-library\" \"http-server -p 7777 --silent\" \"npm run watch:dev --prefix packages/survey-creator-core\" \"npm run watch:prod --prefix packages/survey-creator-core\" \"npm run watch:dev --prefix packages/survey-creator-knockout\" \"npm run watch:prod --prefix packages/survey-creator-knockout\" \"npm run watch:dev --prefix packages/survey-creator-react\" \"npm run watch:prod --prefix packages/survey-creator-react\" ",
-        "lint": "eslint ./packages --quiet && eslint ./functionalTests --quiet && eslint ./visualRegressionTests --quiet",
+        "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --max-warnings=0",
+        "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --max-warnings=0 --fix",
         "pre-push-check": "npm run lint",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "postinstall": "playwright install chromium"
     },
     "devDependencies": {
-        "axe-core": "^3.5.6",
-        "axe-testcafe": "3.0.0",
+        "@commitlint/cli": "^19.8.0",
+        "@commitlint/config-conventional": "^19.8.0",
+        "@playwright/test": "^1.51.1",
+        "@rushstack/eslint-patch": "^1.1.4",
         "@types/lodash": "4.14.186",
-        "@typescript-eslint/eslint-plugin": "^5.41.0",
-        "@typescript-eslint/parser": "^5.41.0",
+        "@typescript-eslint/eslint-plugin": "^7.2.0",
+        "@typescript-eslint/parser": "^7.2.0",
+        "@vue/eslint-config-typescript": "^11.0.0",
+        "axe-playwright": "^2.1.0",
         "concurrently": "^7",
         "devextreme-screenshot-comparer": "^2.0.11",
-        "eslint": "^7.32.0",
-        "eslint-cli": "^1.1.1",
+        "lint-staged": "^15.4.3",
+        "eslint": "^8.57.0",
         "eslint-plugin-surveyjs": "file:eslint-surveyjs",
-        "eslint-plugin-react": "^7.25.1",
-        "husky": "^7.0.4",
-        "testcafe": "3.3.0",
+        "eslint-plugin-react": "^7.33.0",
+        "eslint-plugin-vue": "^9.3.0",
         "get-func-name": "2.0.0",
-        "puppeteer": "22.13.1"
+        "husky": "^9.1.7",
+        "playwright": "^1.51.1",
+        "puppeteer": "22.13.1",
+        "testcafe": "3.3.0"
+    },
+    "lint-staged": {
+        "**/*.{vue,js,jsx,cjs,mjs,ts,tsx,cts,mts}": [
+            "eslint --fix"
+        ]
     }
 }

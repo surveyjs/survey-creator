@@ -39,6 +39,7 @@ import { SurveyLogicType } from "../../src/components/tabs/logic-types";
 export * from "../../src/components/link-value";
 export * from "../../src/custom-questions/question-text-with-reset";
 import { QuestionTextWithResetModel } from "../../src/custom-questions/question-text-with-reset";
+import { QuestionLinkValueModel } from "../../src/components/link-value";
 
 const questionLogicTypeLength = 5;
 
@@ -854,7 +855,32 @@ test("Create setValue trigger in logic", () => {
   expect(getSetToNameQuestion().value).toBeFalsy();
   expect(getSetValueQuestion().value).toBeFalsy();
 });
-
+test("Check logicTypeName is always not requred, Bug#6820", () => {
+  Serializer.findProperty("question", "isRequired").defaultValue = true;
+  const survey = new SurveyModel({
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3] },
+      { type: "text", name: "q2", readOnly: true }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  logic.expressionEditor.text = "{q1} = 1";
+  const panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_setValue";
+  panel.getQuestionByName("elementSelector").value = "q2";
+  panel.getQuestionByName("setValueExpression").value = "{q1} + 1";
+  expect(panel.getQuestionByName("removeAction").isRequired).toBeFalsy();
+  expect((<SurveyModel>panel.survey).validate()).toBeTruthy();
+  expect(logic.saveEditableItem()).toBeTruthy();
+  Serializer.findProperty("question", "isRequired").defaultValue = false;
+});
+test("Check QuestionLinkValueModel doens't have requried errors, Bug#6820", () => {
+  const q = new QuestionLinkValueModel("q1");
+  q.isRequired = true;
+  expect(q.isRequired).toBeTruthy();
+  expect(q.hasErrors()).toBeFalsy();
+});
 test("Setup setValueIf property in logic", () => {
   const survey = new SurveyModel({
     elements: [

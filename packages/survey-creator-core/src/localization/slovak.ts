@@ -338,6 +338,7 @@ export var skStrings = {
       titleLocation: "Zarovnanie názvu panela",
       descriptionLocation: "Zarovnanie popisu panela",
       templateQuestionTitleLocation: "Zarovnanie názvu otázky",
+      templateQuestionTitleWidth: "Šírka názvu otázky",
       templateErrorLocation: "Zarovnanie chybových hlásení",
       newPanelPosition: "Nové umiestnenie panela",
       showRangeInProgress: "Zobrazenie indikátora priebehu",
@@ -568,6 +569,7 @@ export var skStrings = {
     cellType: "Typ bunky",
     colCount: "Počet stĺpcov",
     choicesOrder: "Poradie vybratých možností",
+    allowCustomChoices: "Povolenie vlastných volieb",
     visible: "Je viditeľné?",
     isRequired: "Vyžaduje sa?",
     markRequired: "Označiť podľa potreby",
@@ -588,6 +590,7 @@ export var skStrings = {
     transposeData: "Transponovanie riadkov do stĺpcov",
     addRowText: "Text tlačidla na pridanie riadka",
     removeRowText: "Text tlačidla na odstránenie riadka",
+    singleInputTitleTemplate: "Vzor názvu vstupného poľa",
     rateMin: "Minimálne hodnotenie",
     rateMax: "Maximálne hodnotenie",
     rateStep: "Krok hodnotenia",
@@ -1117,7 +1120,8 @@ export var skStrings = {
     questionsOnPageMode: {
       standard: "Pôvodná štruktúra",
       singlePage: "Zobraziť všetky otázky na jednej stránke",
-      questionPerPage: "Zobraziť jednu otázku na stránku"
+      questionPerPage: "Zobraziť jednu otázku na stránku",
+      inputPerPage: "Zobraziť jedno vstupné pole na stranu"
     },
     noPreview: "žiadna ukážka",
     showAllQuestions: "zobraziť ukážku so všetkými otázkami",
@@ -1190,6 +1194,7 @@ export var skStrings = {
       onPage: "Obnoviť na každej stránke",
       onpanel: "Resetovať na každom paneli",
       onPanel: "Resetovať na každom paneli",
+      recursive: "Rekurzívne číslovanie",
       onSurvey: "Pokračujte v prieskume",
       off: "Bez číslovania"
     },
@@ -1317,7 +1322,9 @@ export var skStrings = {
   ts: {
     selectPage: "Vybrať stránku na testovanie:",
     showInvisibleElements: "Zobraziť neviditeľné prvky",
-    hideInvisibleElements: "Skryť neviditeľné prvky"
+    hideInvisibleElements: "Skryť neviditeľné prvky",
+    prevPage: "Predchádzajúci",
+    nextPage: "Budúci"
   },
   validators: {
     answercountvalidator: "počet odpovedí",
@@ -1381,6 +1388,7 @@ export var skStrings = {
       enableIf: "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre panel.",
       requiredIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď.",
       templateQuestionTitleLocation: "Vzťahuje sa na všetky otázky v tomto paneli. Ak chcete toto nastavenie prepísať, definujte pravidlá zarovnania názvu pre jednotlivé otázky. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\").",
+      templateQuestionTitleWidth: "Nastaví konzistentnú šírku názvov otázok, keď sú zarovnané naľavo od polí otázok. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
       templateErrorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text. Možnosť Dediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene navrchu\").",
       errorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu ku všetkým otázkam v paneli. Možnosť Zdediť použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu.",
       page: "Premiestni panel na koniec vybratej strany.",
@@ -1516,6 +1524,9 @@ export var skStrings = {
     timeLimitPerPage: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
     validateVisitedEmptyFields: "Povoľte túto možnosť, ak chcete spustiť overenie, keď sa používateľ zameria na prázdne vstupné pole a potom ho opustí bez vykonania akýchkoľvek zmien.",
     page: {
+      name: "Identifikátor stránky, ktorý nie je viditeľný pre respondentov.",
+      description: "Zadajte podnadpis strany.",
+      navigationTitle: "Titulok zobrazený na navigačnom tlačidle na indikátore priebehu alebo obsahu. Ak toto pole necháte prázdne, navigačné tlačidlo použije názov stránky alebo názov stránky. Ak chcete povoliť indikátor priebehu alebo obsah, prejdite na \"Prieskum\" → \"Navigácia\".",
       timeLimit: "Časový interval v sekundách, po ktorom prieskum automaticky prejde na ďalšiu stránku.",
       visibleIf: "Pomocou ikony čarovnej paličky nastavte podmienené pravidlo, ktoré určuje viditeľnosť stránky.",
       enableIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré vypne režim iba na čítanie pre stránku.",
@@ -1543,6 +1554,7 @@ export var skStrings = {
     choicesFromQuestionMode: "Vyberte si z: \"Všetko\" - skopíruje všetky možnosti výberu z vybranej otázky; \"Vybraté\" - dynamicky kopíruje iba vybrané možnosti výberu; \"Nevybraté\" - dynamicky kopíruje iba nevybraté možnosti výberu. Možnosti \"Žiadne\" a \"Iné\" sa predvolene kopírujú, ak sú povolené v otázke zdroja.",
     choiceValuesFromQuestion: "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo panelová otázka má poskytnúť ID.",
     choiceTextsFromQuestion: "V typoch otázok s jedným a viacerými výbermi má každá možnosť výberu ID a zobrazenú hodnotu. Toto nastavenie určuje, ktorý stĺpec matice alebo otázka panela by mala poskytovať zobrazované texty.",
+    allowCustomChoices: "Vyberte, ak chcete respondentom umožniť pridať vlastné možnosti, ak požadovaná možnosť nie je k dispozícii v rozbaľovacej ponuke. Vlastné voľby sa budú ukladať iba dočasne počas trvania aktuálnej relácie prehliadača.",
     showOtherItem: "Ak je táto voľba vybratá, používatelia môžu zahrnúť ďalšie vstupy do samostatného poľa komentára.",
     separateSpecialChoices: "Zobrazí každú možnosť špeciálnej voľby (\"Žiadne\", \"Iné\", \"Vybrať všetko\") na novom riadku, a to aj pri použití rozloženia s viacerými stĺpcami.",
     path: "Zadajte umiestnenie v množine údajov služby, kde sa nachádza cieľové pole objektov. Ak URL adresa už odkazuje na pole, nechajte prázdne.",
@@ -1615,7 +1627,8 @@ export var skStrings = {
       overlapEnabled: "Ak je táto možnosť povolená, horná časť prieskumu prekrýva spodnú časť hlavičky.",
       mobileHeight: "Ak je nastavená hodnota 0, výška sa vypočíta automaticky, aby sa prispôsobila obsahu hlavičky."
     },
-    progressBarInheritWidthFrom: "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti indikátora priebehu tak, aby sa zmestila do prvku HTML, v ktorom je prieskum umiestnený."
+    progressBarInheritWidthFrom: "Možnosť \"Rovnaké ako kontajner\" automaticky upraví šírku oblasti indikátora priebehu tak, aby sa zmestila do prvku HTML, v ktorom je prieskum umiestnený.",
+    singleInputTitleTemplate: "Používa sa, keď je \"Rozloženie prieskumu\" nastavené na \"Jedno vstupné pole na stranu\". V tomto rozložení je matica rozdelená tak, aby sa každé vstupné pole zobrazilo na samostatnej strane. Zástupný symbol {rowIndex} použite na vloženie automatického číslovania, {rowTitle} alebo {rowName} na odkazovanie na názov alebo ID riadka a {row.columnid} na zahrnutie hodnoty konkrétneho stĺpca matice."
   },
   // Properties
   p: {
@@ -2990,3 +3003,16 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Nastaví počet zobrazených riadkov v textových oblastiach pre komentáre k otázkam. Ak vstup zaberie viac riadkov, zobrazí sa posúvač."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Predvolená zobrazená hodnota pre dynamické texty"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Hodnota zobrazená v otázkach HTML a v dynamických názvoch a popisoch prvkov prieskumu, keď je hodnota otázky prázdna."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekurzívne číslovanie"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Šírka názvu otázky"
+// pe.allowCustomChoices: "Allow custom choices" => "Povolenie vlastných volieb"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Nastaví konzistentnú šírku názvov otázok, keď sú zarovnané naľavo od polí otázok. Akceptuje hodnoty CSS (px, %, in, pt atď.)."
+// page.name: "A page ID that is not visible to respondents." => "Identifikátor stránky, ktorý nie je viditeľný pre respondentov."
+// page.description: "Type a page subtitle." => "Zadajte podnadpis strany."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Titulok zobrazený na navigačnom tlačidle na indikátore priebehu alebo obsahu. Ak toto pole necháte prázdne, navigačné tlačidlo použije názov stránky alebo názov stránky. Ak chcete povoliť indikátor priebehu alebo obsah, prejdite na \"Prieskum\" → \"Navigácia\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Vyberte, ak chcete respondentom umožniť pridať vlastné možnosti, ak požadovaná možnosť nie je k dispozícii v rozbaľovacej ponuke. Vlastné voľby sa budú ukladať iba dočasne počas trvania aktuálnej relácie prehliadača."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Vzor názvu vstupného poľa"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Zobraziť jedno vstupné pole na stranu"
+// ts.prevPage: "Previous" => "Predchádzajúci"
+// ts.nextPage: "Next" => "Budúci"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Používa sa, keď je \"Rozloženie prieskumu\" nastavené na \"Jedno vstupné pole na stranu\". V tomto rozložení je matica rozdelená tak, aby sa každé vstupné pole zobrazilo na samostatnej strane. Zástupný symbol {rowIndex} použite na vloženie automatického číslovania, {rowTitle} alebo {rowName} na odkazovanie na názov alebo ID riadka a {row.columnid} na zahrnutie hodnoty konkrétneho stĺpca matice."

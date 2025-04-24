@@ -23,10 +23,11 @@ export class SurveyQuestionColor extends SurveyQuestionText {
           onBlur={(event) => this.question.onBlur(event.nativeEvent)}
           onChange={this.question.onChange}
           onBeforeInput={event => this.question.onBeforeInput(event.nativeEvent as InputEvent)}
-          aria-required={this.question.ariaRequired}
-          aria-label={this.question.ariaLabel}
-          aria-invalid={this.question.ariaInvalid}
-          aria-describedby={this.question.ariaDescribedBy}
+          aria-required={this.question.a11y_input_ariaRequired}
+          aria-labelledby={this.question.a11y_input_ariaLabelledBy}
+          aria-label={this.question.a11y_input_ariaLabel}
+          aria-invalid={this.question.a11y_input_ariaInvalid}
+          aria-describedby={this.question.a11y_input_ariaDescribedBy}
         />
       </>
     );
@@ -46,13 +47,25 @@ export class SurveyQuestionColor extends SurveyQuestionText {
   protected renderColorSwatch(): React.JSX.Element {
     return <label className={this.question.getSwatchCss()} style={this.question.getSwatchStyle()}>
       <SvgIcon iconName={this.question.cssClasses.swatchIcon} size={"auto"}></SvgIcon>
-      <input type="color" disabled={this.isDisplayMode} value={this.question.renderedColorValue} className={this.question.cssClasses.colorInput} onChange={(event) => this.question.onColorInputChange(event.nativeEvent)} tabIndex={-1} />
+      <input type="color"
+        disabled={this.isDisplayMode}
+        value={this.question.renderedColorValue}
+        className={this.question.cssClasses.colorInput}
+        onChange={(event) => this.question.onColorInputChange(event.nativeEvent)}
+        tabIndex={-1}
+        aria-required={this.question.a11y_input_ariaRequired}
+        aria-labelledby={this.question.a11y_input_ariaLabelledBy}
+        aria-label={this.question.a11y_input_ariaLabel}
+        aria-invalid={this.question.a11y_input_ariaInvalid}
+        aria-describedby={this.question.a11y_input_ariaDescribedBy} />
     </label>;
   }
   protected renderDropdownAction(): React.JSX.Element {
     return (
       <>
-        {ReactElementFactory.Instance.createElement("sv-action-bar-item", { item: this.question.dropdownAction })}
+        <div aria-hidden="true" className={this.question.cssClasses.choicesButtonWrapper}>
+          {ReactElementFactory.Instance.createElement("sv-action-bar-item", { item: this.question.dropdownAction })}
+        </div>
         {this.renderPopup()}
       </>
     );

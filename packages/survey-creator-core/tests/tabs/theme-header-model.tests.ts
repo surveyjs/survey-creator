@@ -20,7 +20,7 @@ registerSurveyTheme(SurveyThemes);
 
 test("IHeader de/serialization", (): any => {
   const themeModel = new ThemeModel();
-  expect(themeModel.toJSON().header).toBe(undefined);
+  expect(themeModel.toJSON().header).toStrictEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
 
   const themeJson = <ITheme>{
     themeName: "custom",
@@ -31,6 +31,7 @@ test("IHeader de/serialization", (): any => {
       "height": 300,
       "inheritWidthFrom": "container",
       "textAreaWidth": 600,
+      "mobileHeight": 0,
       "overlapEnabled": true,
       "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
       "backgroundImageOpacity": 0.5,
@@ -77,7 +78,7 @@ test("set headerViewContainer basic", (): any => {
   expect(currentThemeCssVariables["--sjs-font-surveydescription-size"]).toBe("21px");
 
   const result = themeModel.toJSON();
-  expect(result.header).toBeUndefined();
+  expect(result.header).toStrictEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
 });
 
 test("set headerViewContainer advanced", (): any => {
@@ -121,6 +122,7 @@ test("set headerViewContainer advanced", (): any => {
     "height": 300,
     "inheritWidthFrom": "container",
     "textAreaWidth": 600,
+    "mobileHeight": 0,
     "overlapEnabled": true,
     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
     "backgroundImageOpacity": 0.5,
@@ -351,16 +353,30 @@ test("set backgroundImage into header", (): any => {
 
   const result = themeModel.toJSON();
   expect(result).toStrictEqual({
-    backgroundImage: "",
-    backgroundImageAttachment: "scroll",
-    backgroundImageFit: "cover",
-    backgroundOpacity: 1,
-    headerView: "advanced",
-    header: {
-      backgroundImage: "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
-      backgroundImageOpacity: 0.5,
-      backgroundImageFit: "contain",
+    "backgroundImage": "",
+    "backgroundImageAttachment": "scroll",
+    "backgroundImageFit": "cover",
+    "backgroundOpacity": 1,
+    "cssVariables": {
+      "--sjs-font-family": "Open Sans",
+      "--sjs-font-size": "16px",
     },
-    cssVariables: {}
+    "header": {
+      "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
+      "backgroundImageFit": "contain",
+      "backgroundImageOpacity": 0.5,
+      "descriptionPositionX": "left",
+      "descriptionPositionY": "bottom",
+      "height": 0,
+      "inheritWidthFrom": "survey",
+      "logoPositionX": "left",
+      "logoPositionY": "top",
+      "mobileHeight": 0,
+      "overlapEnabled": false,
+      "textAreaWidth": 0,
+      "titlePositionX": "left",
+      "titlePositionY": "bottom",
+    },
+    "headerView": "advanced",
   });
 });

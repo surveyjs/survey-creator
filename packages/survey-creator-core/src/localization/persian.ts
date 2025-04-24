@@ -107,14 +107,14 @@ var persianStrings = {
     redo: "بازانجام",
     undoTooltip: "بازگرداندن آخرین تغییر",
     redoTooltip: "انجام دادن تغییر",
-    expandTooltip: "گسترش",
-    collapseTooltip: "سقوط",
-    expandAllTooltip: "گسترش همه",
+    expandTooltip: "باز کردن",
+    collapseTooltip: "جمع کردن",
+    expandAllTooltip: "باز کردن همه",
     collapseAllTooltip: "جمع کردن همه",
     zoomInTooltip: "بزرگنمایی",
     zoom100Tooltip: "بزرگنمایی تا 100٪",
     zoomOutTooltip: "کوچک نمایی",
-    lockQuestionsTooltip: "قفل کردن وضعیت expand/collapse برای سوالات",
+    lockQuestionsTooltip: "قفل کردن وضعیت باز/بست برای سوالات",
     showMoreChoices: "نمایش بیشتر",
     showLessChoices: "نمایش کمتر",
     copy: "کپی",
@@ -338,6 +338,7 @@ var persianStrings = {
       titleLocation: "ترازبندی عنوان پنل",
       descriptionLocation: "ترازبندی توضیحات پنل",
       templateQuestionTitleLocation: "هم ترازی عنوان پرسش",
+      templateQuestionTitleWidth: "عرض عنوان سوال",
       templateErrorLocation: "همترازسازی پیام خطا",
       newPanelPosition: "محل جدید پنل",
       showRangeInProgress: "نمایش نوار پیشرفت",
@@ -568,6 +569,7 @@ var persianStrings = {
     cellType: "نوع سلول",
     colCount: "تعداد ستون",
     choicesOrder: "ترتیب گزینه را انتخاب کنید",
+    allowCustomChoices: "اجازه دادن به انتخاب های سفارشی",
     visible: "نمایش داده شود؟",
     isRequired: "ضروری است؟",
     markRequired: "علامت گذاری به عنوان مورد نیاز",
@@ -588,6 +590,7 @@ var persianStrings = {
     transposeData: "جابهجا کردن سطرها به ستونها",
     addRowText: "متن دکمه درج سطر",
     removeRowText: "متن دکمه حذف سطر",
+    singleInputTitleTemplate: "الگوی عنوان فیلد ورودی",
     rateMin: "حداقل میزان",
     rateMax: "حداکثر میزان",
     rateStep: "میزان مراحل",
@@ -1117,7 +1120,8 @@ var persianStrings = {
     questionsOnPageMode: {
       standard: "ساختار اصلی",
       singlePage: "نمایش تمام سوالات در یک صفحه",
-      questionPerPage: "نمایش یک سؤال در هر صفحه"
+      questionPerPage: "نمایش یک سؤال در هر صفحه",
+      inputPerPage: "نمایش یک فیلد ورودی در هر صفحه"
     },
     noPreview: "پیش نمایش ندارد",
     showAllQuestions: "فعال سازی پیش نمایش با تمام سوالات",
@@ -1147,8 +1151,8 @@ var persianStrings = {
     },
     panelsState: {
       default: "کاربران نمی توانند پانل ها را گسترش یا سقوط کنند",
-      collapsed: "تمام پانل ها سقوط می کنند",
-      expanded: "تمام پانل ها گسترش یافته اند",
+      collapsed: "تمام پانل ها جمع شوند",
+      expanded: "تمام پانل ها باز شوند",
       firstExpanded: "اولین گسترش"
     },
     widthMode: {
@@ -1190,6 +1194,7 @@ var persianStrings = {
       onPage: "بازنشانی در هر صفحه",
       onpanel: "بازنشانی در هر پنل",
       onPanel: "بازنشانی در هر پنل",
+      recursive: "شماره گذاری بازگشتی",
       onSurvey: "ادامه در سراسر نظرسنجی",
       off: "بدون شماره"
     },
@@ -1317,7 +1322,9 @@ var persianStrings = {
   ts: {
     selectPage: "صفحه ای را برای آزمایش انتخاب کنید:",
     showInvisibleElements: "نمایش المان های مخفی",
-    hideInvisibleElements: "مخفی کردن عناصر نامرئی"
+    hideInvisibleElements: "مخفی کردن عناصر نامرئی",
+    prevPage: "قبلی",
+    nextPage: "بعدی"
   },
   validators: {
     answercountvalidator: "تعداد پاسخ",
@@ -1381,6 +1388,7 @@ var persianStrings = {
       enableIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که حالت فقط خواندنی را برای پانل غیرفعال می کند.",
       requiredIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد.",
       templateQuestionTitleLocation: "برای تمام سوالات در این پنل اعمال می شود. اگر می خواهید این تنظیم را لغو کنید، قوانین تراز عنوان را برای سوالات فردی تعریف کنید. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند).",
+      templateQuestionTitleWidth: "عرض ثابتی را برای عناوین سؤال زمانی تنظیم می کند که در سمت چپ کادرهای سؤال آنها تراز شوند. مقادیر CSS (px، ٪، in، pt و غیره) را می پذیرد.",
       templateErrorLocation: "محل یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم میکند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد. گزینه \"Inherit\" به طور پیش فرض تنظیم سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی (\"بالا\" را اعمال می کند).",
       errorLocation: "مکان یک پیام خطا را در رابطه با تمام سوالات درون پانل تنظیم می کند. گزینه \"Inherit\" شامل تنظیمات سطح صفحه (در صورت تنظیم) یا سطح نظرسنجی است.",
       page: "پانل را به انتهای صفحه انتخاب شده تغییر می دهد.",
@@ -1516,6 +1524,9 @@ var persianStrings = {
     timeLimitPerPage: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود.",
     validateVisitedEmptyFields: "این گزینه را فعال کنید تا زمانی که کاربر روی یک فیلد ورودی خالی تمرکز می کند و سپس بدون ایجاد هیچ تغییری آن را ترک می کند، اعتبارسنجی را فعال کنید.",
     page: {
+      name: "شناسه صفحه ای که برای پاسخ دهندگان قابل مشاهده نیست.",
+      description: "زیرنویس صفحه را تایپ کنید.",
+      navigationTitle: "عنوانی که روی دکمه پیمایش در نوار پیشرفت یا فهرست مطالب (TOC) نمایش داده می شود. اگر این فیلد را خالی بگذارید، دکمه پیمایش از عنوان صفحه یا نام صفحه استفاده می کند. برای فعال کردن نوار پیشرفت یا TOC، به \"نظرسنجی\" → \"ناوبری\" بروید.",
       timeLimit: "یک فاصله زمانی در ثانیه که پس از ان نظرسنجی به طور خودکار به صفحه بعدی پیش می رود.",
       visibleIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که دید صفحه را تعیین می کند.",
       enableIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که حالت فقط خواندنی را برای صفحه غیرفعال می کند.",
@@ -1543,6 +1554,7 @@ var persianStrings = {
     choicesFromQuestionMode: "انتخاب از: \"همه\" - کپی تمام گزینه های انتخاب از سوال انتخاب شده؛ \"انتخاب شده\" - به صورت پویا فقط گزینه های انتخاب شده را کپی می کند؛ \"Unselected\" - به صورت پویا تنها گزینه های انتخاب نشده را کپی می کند. گزینه های \"None\" و \"Other\" در صورت فعال شدن در سؤال منبع به طور پیش فرض کپی می شوند.",
     choiceValuesFromQuestion: "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید شناسه ها را ارائه دهد.",
     choiceTextsFromQuestion: "در انواع سوالات تک و چند گزینه، هر گزینه انتخابی دارای یک شناسه و مقدار نمایشی است. این تنظیم مشخص می کند که کدام ستون ماتریس یا سوال پانل باید متون نمایش داده شده را ارائه دهد.",
+    allowCustomChoices: "انتخاب کنید تا به پاسخ دهندگان اجازه دهید انتخاب های خود را اضافه کنند اگر گزینه مورد نظر در منوی کشویی موجود نیست. گزینه های سفارشی فقط به طور موقت برای مدت زمان جلسه مرورگر فعلی ذخیره می شوند.",
     showOtherItem: "هنگامی که انتخاب می شوند، کاربران می توانند ورودی های اضافی را در یک جعبه نظر جداگانه قرار دهند.",
     separateSpecialChoices: "نمایش هر گزینه انتخاب خاص (\"هیچ\"، \"دیگر\"، \"انتخاب همه\") در یک خط جدید، حتی در هنگام استفاده از یک طرح چند ستون.",
     path: "مشخص کردن محل در مجموعه داده های سرویس که در ان ارایه هدف از اشیاء واقع شده است. ترک خالی اگر URL در حال حاضر به ارایه اشاره می کند.",
@@ -1615,7 +1627,8 @@ var persianStrings = {
       overlapEnabled: "هنگامی که فعال باشد، بالای نظرسنجی پایین هدر را همپوشانی می کند.",
       mobileHeight: "هنگامی که روی 0 تنظیم می شود، ارتفاع به طور خودکار محاسبه می شود تا محتوای هدر را در خود جای دهد."
     },
-    progressBarInheritWidthFrom: "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه نوار پیشرفت را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد."
+    progressBarInheritWidthFrom: "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه نوار پیشرفت را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد.",
+    singleInputTitleTemplate: "زمانی استفاده می شود که \"طرح نظرسنجی\" روی \"فیلد ورودی واحد در هر صفحه\" تنظیم شده باشد. در این چیدمان، ماتریس تقسیم می شود تا هر فیلد ورودی در یک صفحه جداگانه ظاهر شود. از مکان نگهدارنده {rowIndex} برای درج شماره گذاری خودکار، {rowTitle} یا {rowName} برای ارجاع به عنوان یا شناسه ردیف و {row.columnid} برای درج مقدار یک ستون ماتریس خاص استفاده کنید."
   },
   // Properties
   p: {
@@ -2992,3 +3005,16 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "تعداد خطوط نمایش داده شده در قسمت های متنی را برای نظرات سؤال تنظیم می کند. اگر ورودی خطوط بیشتری را اشغال کند، نوار اسکرول ظاهر می شود."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "مقدار نمایش پیش فرض برای متون پویا"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "مقداری که در سؤالات HTML و در عناوین پویا و توضیحات عناصر نظرسنجی زمانی که مقدار سوال خالی است، نمایش داده می شود."
+// showQuestionNumbers.recursive: "Recursive numbering" => "شماره گذاری بازگشتی"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "عرض عنوان سوال"
+// pe.allowCustomChoices: "Allow custom choices" => "اجازه دادن به انتخاب های سفارشی"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "عرض ثابتی را برای عناوین سؤال زمانی تنظیم می کند که در سمت چپ کادرهای سؤال آنها تراز شوند. مقادیر CSS (px، ٪، in، pt و غیره) را می پذیرد."
+// page.name: "A page ID that is not visible to respondents." => "شناسه صفحه ای که برای پاسخ دهندگان قابل مشاهده نیست."
+// page.description: "Type a page subtitle." => "زیرنویس صفحه را تایپ کنید."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "عنوانی که روی دکمه پیمایش در نوار پیشرفت یا فهرست مطالب (TOC) نمایش داده می شود. اگر این فیلد را خالی بگذارید، دکمه پیمایش از عنوان صفحه یا نام صفحه استفاده می کند. برای فعال کردن نوار پیشرفت یا TOC، به \"نظرسنجی\" → \"ناوبری\" بروید."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "انتخاب کنید تا به پاسخ دهندگان اجازه دهید انتخاب های خود را اضافه کنند اگر گزینه مورد نظر در منوی کشویی موجود نیست. گزینه های سفارشی فقط به طور موقت برای مدت زمان جلسه مرورگر فعلی ذخیره می شوند."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "الگوی عنوان فیلد ورودی"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "نمایش یک فیلد ورودی در هر صفحه"
+// ts.prevPage: "Previous" => "قبلی"
+// ts.nextPage: "Next" => "بعدی"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "زمانی استفاده می شود که \"طرح نظرسنجی\" روی \"فیلد ورودی واحد در هر صفحه\" تنظیم شده باشد. در این چیدمان، ماتریس تقسیم می شود تا هر فیلد ورودی در یک صفحه جداگانه ظاهر شود. از مکان نگهدارنده {rowIndex} برای درج شماره گذاری خودکار، {rowTitle} یا {rowName} برای ارجاع به عنوان یا شناسه ردیف و {row.columnid} برای درج مقدار یک ستون ماتریس خاص استفاده کنید."

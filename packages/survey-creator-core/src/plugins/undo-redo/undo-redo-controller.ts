@@ -66,10 +66,10 @@ export class UndoRedoController extends Base {
     }
     this.undoRedoManager = new UndoRedoManager();
     this.undoRedoManager.changesFinishedCallback = (actions: UndoRedoAction[], isUndo: boolean) => {
-      if(this.notifySurveyMoveItem(actions, isUndo)) return;
-      for(let i = actions.length - 1; i >= 0; i--) {
+      if (this.notifySurveyMoveItem(actions, isUndo)) return;
+      for (let i = actions.length - 1; i >= 0; i--) {
         const action = actions[i];
-        if(!!action) {
+        if (!!action) {
           const changes = action.getChanges(isUndo);
           this.creator.notifySurveyPropertyChanged({
             name: changes.propertyName,
@@ -86,22 +86,22 @@ export class UndoRedoController extends Base {
     this.updateUndeRedoActions();
   }
   private notifySurveyMoveItem(actions: UndoRedoAction[], isUndo: boolean): boolean {
-    if(actions.length !== 2) false;
+    if (actions.length !== 2) false;
     const act1 = actions[0];
     const act2 = actions[1];
-    if(!act1 || !act2) return false;
+    if (!act1 || !act2) return false;
     const changes1 = act1.getChanges(isUndo);
     const changes2 = act2.getChanges(isUndo);
-    if(changes1.object !== changes2.object || changes1.propertyName !== changes2.propertyName) return false;
+    if (changes1.object !== changes2.object || changes1.propertyName !== changes2.propertyName) return false;
     const act1Del = act1.getDeletedElement(isUndo);
     const act1Ins = act1.getInsertedElement(isUndo);
     const act2Del = act2.getDeletedElement(isUndo);
     const act2Ins = act2.getInsertedElement(isUndo);
-    if(act1Del === act1Ins || (act1Del !== act2Ins && act1Ins !== act2Del)) return false;
+    if (act1Del === act1Ins || (act1Del !== act2Ins && act1Ins !== act2Del)) return false;
     const indexFrom = act1Del ? act1.getIndex() : act2.getIndex();
     const indexTo = act1Ins ? act1.getIndex() : act2.getIndex();
-    if(indexFrom === indexTo && !!act1Del && !!act2Ins && !act1Ins && !act2Del) {
-      this.creator.notifySurveyItemConverted(!isUndo ? act2Ins: act1Del, !isUndo ? act1Del : act2Ins);
+    if (indexFrom === indexTo && !!act1Del && !!act2Ins && !act1Ins && !act2Del) {
+      this.creator.notifySurveyItemConverted(!isUndo ? act2Ins : act1Del, !isUndo ? act1Del : act2Ins);
     } else {
       this.creator.notifySurveyItemMoved({
         arrayName: changes1.propertyName,
@@ -188,7 +188,7 @@ export class UndoRedoController extends Base {
     return items;
   }
   private updateUndeRedoActions() {
-    if(!!this.undoAction) {
+    if (!!this.undoAction) {
       this.undoAction.enabled = this.undoRedoManager.canUndo();
       this.redoAction.enabled = this.undoRedoManager.canRedo();
     }

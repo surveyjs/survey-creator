@@ -15,7 +15,7 @@ import { SidebarDefaultHeaderComponent } from "./side-bar/side-bar-default-heade
 import { TabButtonComponent } from "./side-bar/tab-button.component";
 import { TabsComponent } from "./side-bar/tabs.component";
 import { TabControlComponent } from "./side-bar/tab-control.component";
-import { SidebarPropertyGridHeaderComponent } from "./side-bar/side-bar-property-grid-header.component"
+import { SidebarPropertyGridHeaderComponent } from "./side-bar/side-bar-property-grid-header.component";
 import { PropertyGridPlaceholderComponent } from "./side-bar/property-grid-placeholder.component";
 import { SidebarHeaderComponent } from "./side-bar/side-bar-header.component";
 

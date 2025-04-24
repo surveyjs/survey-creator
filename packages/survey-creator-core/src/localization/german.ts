@@ -338,6 +338,7 @@ var germanTranslation = {
       titleLocation: "Ausrichtung des Panel-Titels",
       descriptionLocation: "Ausrichtung der Panelbeschreibung",
       templateQuestionTitleLocation: "Ausrichtung des Fragetitels",
+      templateQuestionTitleWidth: "Breite des Fragetitels",
       templateErrorLocation: "Ausrichtung von Fehlermeldungen",
       newPanelPosition: "Neue Panel-Position",
       showRangeInProgress: "Zeigen Sie den Fortschrittsbalken an",
@@ -568,6 +569,7 @@ var germanTranslation = {
     cellType: "Zellentyp",
     colCount: "Spaltenanzahl",
     choicesOrder: "Auswahlreihenfolge",
+    allowCustomChoices: "Benutzerdefinierte Auswahlmöglichkeiten zulassen",
     visible: "Sichtbar?",
     isRequired: "Erforderlich?",
     markRequired: "Als erforderlich markieren",
@@ -588,6 +590,7 @@ var germanTranslation = {
     transposeData: "Transponieren von Zeilen in Spalten",
     addRowText: "Text für die Schaltfläche \"Zeile hinzufügen\"",
     removeRowText: "Text für die Schaltfläche \"Zeile entfernen\"",
+    singleInputTitleTemplate: "Muster für den Titel des Eingabefelds",
     rateMin: "Minimum",
     rateMax: "Maximum",
     rateStep: "Schritt Bewertung",
@@ -1117,7 +1120,8 @@ var germanTranslation = {
     questionsOnPageMode: {
       standard: "Ursprüngliche Struktur",
       singlePage: "Alle Fragen auf einer Seite anzeigen",
-      questionPerPage: "Eine Frage pro Seite anzeigen"
+      questionPerPage: "Eine Frage pro Seite anzeigen",
+      inputPerPage: "Einzelnes Eingabefeld pro Seite anzeigen"
     },
     noPreview: "Keine Vorschau",
     showAllQuestions: "Vorschau mit allen Fragen anzeigen",
@@ -1190,6 +1194,7 @@ var germanTranslation = {
       onPage: "Auf jeder Seite zurücksetzen",
       onpanel: "Bei jedem Panel zurücksetzen",
       onPanel: "Bei jedem Panel zurücksetzen",
+      recursive: "Rekursive Nummerierung",
       onSurvey: "Weiter in der Umfrage",
       off: "Keine Nummerierung"
     },
@@ -1317,7 +1322,9 @@ var germanTranslation = {
   ts: {
     selectPage: "Seite:",
     showInvisibleElements: "Unsichtbare Elemente anzeigen",
-    hideInvisibleElements: "Unsichtbare Elemente ausblenden"
+    hideInvisibleElements: "Unsichtbare Elemente ausblenden",
+    prevPage: "Vorhergehend",
+    nextPage: "Nächster"
   },
   validators: {
     answercountvalidator: "Antwortanzahl",
@@ -1381,6 +1388,7 @@ var germanTranslation = {
       enableIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die den schreibgeschützten Modus für das Panel deaktiviert.",
       requiredIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Übermittlung von Umfragen verhindert, es sei denn, mindestens eine verschachtelte Frage enthält eine Antwort.",
       templateQuestionTitleLocation: "Gilt für alle Fragen in diesem Bereich. Wenn Sie diese Einstellung außer Kraft setzen möchten, definieren Sie Regeln für die Titelausrichtung für einzelne Fragen. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\").",
+      templateQuestionTitleWidth: "Legt die einheitliche Breite für Fragetitel fest, wenn sie links von den Fragefeldern ausgerichtet sind. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
       templateErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf eine Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig \"Oben\").",
       errorLocation: "Legt die Position einer Fehlermeldung in Bezug auf alle Fragen innerhalb des Bereichs fest. Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an.",
       page: "Positioniert das Panel am Ende einer ausgewählten Seite.",
@@ -1516,6 +1524,9 @@ var germanTranslation = {
     timeLimitPerPage: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt.",
     validateVisitedEmptyFields: "Aktivieren Sie diese Option, um die Validierung auszulösen, wenn sich ein Benutzer auf ein leeres Eingabefeld konzentriert und es dann verlässt, ohne Änderungen vorzunehmen.",
     page: {
+      name: "Eine Seiten-ID, die für die Befragten nicht sichtbar ist.",
+      description: "Geben Sie einen Seitenuntertitel ein.",
+      navigationTitle: "Eine Beschriftung, die auf einer Navigationsschaltfläche in der Fortschrittsleiste oder im Inhaltsverzeichnis angezeigt wird. Wenn Sie dieses Feld leer lassen, verwendet die Navigationsschaltfläche den Seitentitel oder den Seitennamen. Um den Fortschrittsbalken oder das Inhaltsverzeichnis zu aktivieren, gehen Sie zu \"Umfrage\" → \"Navigation\".",
       timeLimit: "Ein Zeitintervall in Sekunden, nach dem die Umfrage automatisch zur nächsten Seite wechselt.",
       visibleIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die die Sichtbarkeit der Seite bestimmt.",
       enableIf: "Verwenden Sie das Zauberstabsymbol, um eine bedingte Regel festzulegen, die den schreibgeschützten Modus für die Seite deaktiviert.",
@@ -1543,6 +1554,7 @@ var germanTranslation = {
     choicesFromQuestionMode: "Wählen Sie aus: \"Alle\" - kopiert alle Auswahloptionen aus der ausgewählten Frage; \"Ausgewählt\" - kopiert dynamisch nur ausgewählte Auswahloptionen; \"Nicht ausgewählt\" - kopiert dynamisch nur nicht ausgewählte Auswahloptionen. Die Optionen \"Keine\" und \"Sonstiges\" werden standardmäßig kopiert, wenn sie in der Quellfrage aktiviert sind.",
     choiceValuesFromQuestion: "Bei Fragetypen mit Einzel- und Mehrfachauswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Diese Einstellung gibt an, welche Matrixspalten- oder Bereichsfrage die IDs bereitstellen soll.",
     choiceTextsFromQuestion: "Bei Fragetypen mit Einzel- und Mehrfachauswahl verfügt jede Auswahloption über eine ID und einen Anzeigewert. Diese Einstellung legt fest, welche Matrix-, Spalten- oder Bereichsfrage die Anzeigetexte bereitstellen soll.",
+    allowCustomChoices: "Wählen Sie diese Option aus, damit die Befragten ihre eigenen Auswahlmöglichkeiten hinzufügen können, wenn die gewünschte Option nicht in der Dropdown-Liste verfügbar ist. Benutzerdefinierte Auswahlmöglichkeiten werden nur für die Dauer der aktuellen Browsersitzung vorübergehend gespeichert.",
     showOtherItem: "Wenn diese Option ausgewählt ist, können Benutzer zusätzliche Eingaben in ein separates Kommentarfeld einfügen.",
     separateSpecialChoices: "Zeigt jede spezielle Auswahloption (\"Keine\", \"Andere\", \"Alle auswählen\") in einer neuen Zeile an, auch wenn ein mehrspaltiges Layout verwendet wird.",
     path: "Geben Sie die Position innerhalb des Service-Datasets an, an der sich das Ziel-Array von Objekten befindet. Lassen Sie das Feld leer, wenn die URL bereits auf das Array verweist.",
@@ -1615,7 +1627,8 @@ var germanTranslation = {
       overlapEnabled: "Wenn diese Option aktiviert ist, überlagert der obere Rand der Umfrage den unteren Rand der Kopfzeile.",
       mobileHeight: "Wenn der Wert auf 0 gesetzt ist, wird die Höhe automatisch berechnet, um den Inhalt der Kopfzeile aufzunehmen."
     },
-    progressBarInheritWidthFrom: "Die Option \"Wie Container\" passt die Breite des Fortschrittsbalkenbereichs automatisch an das HTML-Element an, in dem die Umfrage platziert wird."
+    progressBarInheritWidthFrom: "Die Option \"Wie Container\" passt die Breite des Fortschrittsbalkenbereichs automatisch an das HTML-Element an, in dem die Umfrage platziert wird.",
+    singleInputTitleTemplate: "Wird verwendet, wenn das \"Umfragelayout\" auf \"Einzeleingabefeld pro Seite\" eingestellt ist. In diesem Layout wird die Matrix so aufgeteilt, dass jedes Eingabefeld auf einer separaten Seite erscheint. Verwenden Sie den Platzhalter {rowIndex}, um die automatische Nummerierung einzufügen, {rowTitle} oder {rowName}, um auf den Titel oder die ID der Zeile zu verweisen, und {row.columnid}, um den Wert einer bestimmten Matrixspalte einzuschließen."
   },
   // Properties
   p: {
@@ -2749,3 +2762,16 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // pehelp.commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears." => "Legt die Anzahl der angezeigten Zeilen in Textbereichen für Fragenkommentare fest. Wenn die Eingabe mehr Zeilen einnimmt, wird die Bildlaufleiste angezeigt."
 // pe.defaultDisplayValue: "Default display value for dynamic texts" => "Voreingestellter Anzeigewert für dynamische Texte"
 // pehelp.defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty." => "Ein Wert, der in HTML-Fragen und in den dynamischen Titeln und Beschreibungen von Umfrageelementen angezeigt wird, wenn der Fragewert leer ist."
+// showQuestionNumbers.recursive: "Recursive numbering" => "Rekursive Nummerierung"
+// paneldynamic.templateQuestionTitleWidth: "Question title width" => "Breite des Fragetitels"
+// pe.allowCustomChoices: "Allow custom choices" => "Benutzerdefinierte Auswahlmöglichkeiten zulassen"
+// paneldynamic.templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)." => "Legt die einheitliche Breite für Fragetitel fest, wenn sie links von den Fragefeldern ausgerichtet sind. Akzeptiert CSS-Werte (px, %, in, pt usw.)."
+// page.name: "A page ID that is not visible to respondents." => "Eine Seiten-ID, die für die Befragten nicht sichtbar ist."
+// page.description: "Type a page subtitle." => "Geben Sie einen Seitenuntertitel ein."
+// page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "Eine Beschriftung, die auf einer Navigationsschaltfläche in der Fortschrittsleiste oder im Inhaltsverzeichnis angezeigt wird. Wenn Sie dieses Feld leer lassen, verwendet die Navigationsschaltfläche den Seitentitel oder den Seitennamen. Um den Fortschrittsbalken oder das Inhaltsverzeichnis zu aktivieren, gehen Sie zu \"Umfrage\" → \"Navigation\"."
+// pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "Wählen Sie diese Option aus, damit die Befragten ihre eigenen Auswahlmöglichkeiten hinzufügen können, wenn die gewünschte Option nicht in der Dropdown-Liste verfügbar ist. Benutzerdefinierte Auswahlmöglichkeiten werden nur für die Dauer der aktuellen Browsersitzung vorübergehend gespeichert."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Muster für den Titel des Eingabefelds"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Einzelnes Eingabefeld pro Seite anzeigen"
+// ts.prevPage: "Previous" => "Vorhergehend"
+// ts.nextPage: "Next" => "Nächster"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Wird verwendet, wenn das \"Umfragelayout\" auf \"Einzeleingabefeld pro Seite\" eingestellt ist. In diesem Layout wird die Matrix so aufgeteilt, dass jedes Eingabefeld auf einer separaten Seite erscheint. Verwenden Sie den Platzhalter {rowIndex}, um die automatische Nummerierung einzufügen, {rowTitle} oder {rowName}, um auf den Titel oder die ID der Zeile zu verweisen, und {row.columnid}, um den Wert einer bestimmten Matrixspalte einzuschließen."
