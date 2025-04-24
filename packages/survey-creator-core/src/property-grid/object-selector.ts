@@ -8,11 +8,12 @@ export class ObjectSelectorItem extends Action {
 
   constructor(
     id: number,
-    public data: Base,
+    data: Base,
     title: string,
     public level: number
   ) {
     super({ id: "sv_item_selector_" + id.toString(), title: title });
+    this.data = data;
   }
   public hasText(filteredTextInLow: string): boolean {
     if (!filteredTextInLow) return true;
