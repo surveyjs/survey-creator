@@ -471,8 +471,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       !!column &&
       column.isVisible &&
       !column.readOnly &&
-      !this.hasMultipleLanguage(items) &&
-      !this.hasVisibleIfOrEnableIf(items)
+      !this.hasMultipleLanguage(items)
     );
   }
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
@@ -482,7 +481,15 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     question: Question,
     options: ISurveyCreatorOptions
   ): IPropertyEditorSetup {
-    var names = (<any>question).columns.filter(c => !c.readOnly).map(c => c.name);
+    const names = (<any>question).columns.filter(c => !c.readOnly).map(c => c.name);
+    const visibleIfProp = Serializer.findProperty("itemvalue", "visibleIf");
+    if (visibleIfProp && visibleIfProp.visible) {
+      names.push("visibleIf");
+      const enableIfProp = Serializer.findProperty("itemvalue", "enableIf");
+      if (enableIfProp && enableIfProp.visible) {
+        names.push("enableIf");
+      }
+    }
     return new FastEntryEditor(obj[prop.name], options, prop.className, names);
   }
   public canClearPropertyValue(
@@ -538,17 +545,6 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     }
     for (var i = 0; i < items.length; i++) {
       if (items[i].locText.hasNonDefaultText()) {
-        return true;
-      }
-    }
-    return false;
-  }
-  private hasVisibleIfOrEnableIf(items: Array<ItemValue>): boolean {
-    if (!items || !Array.isArray(items)) {
-      return false;
-    }
-    for (var i = 0; i < items.length; i++) {
-      if (!!items[i].visibleIf || items[i].enableIf) {
         return true;
       }
     }
