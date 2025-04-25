@@ -2,6 +2,7 @@
 .husky/
 node_modules/
 build/
+dist/
 docs/
 eslint-surveyjs/
 example/

@@ -128,3 +128,41 @@ test("Check file editor key navigation", async (t) => {
     .pressKey("enter")
     .expect(colorInputSelector.value).eql("");
 });
+test("Check file editor with disable input", async (t) => {
+  await t.resizeWindow(1920, 1920);
+  await ClientFunction(() => {
+    (<any>window).Survey.Serializer.addProperty("survey", {
+      name: "image",
+      category: "general",
+      visibleIndex: 0,
+      default: "some_url"
+    });
+    (<any>window).SurveyCreatorCore.PropertyGridEditorCollection.register({
+      fit: function (prop) {
+        return prop.name === "image";
+      },
+      getJSON: function (obj, prop, options) {
+        return { type: "fileedit", disableInput: true };
+      }
+    });
+  })();
+  const textSelector = Selector("div[data-name='image'] input[type='text']");
+  const fileSelector = Selector("div[data-name='image'] input[type='file']");
+  await setJSON({});
+  await t
+    .click(Selector("h4[aria-label=General]"))
+    .expect(textSelector.hasAttribute("disabled")).ok();
+  await t.expect(fileSelector.hasAttribute("disabled")).notOk();
+  await ClientFunction(() => { (window as any).creator.propertyGrid.getQuestionByName("image").disableInput = false; })();
+  await t.expect(textSelector.hasAttribute("disabled")).notOk();
+  await t.expect(fileSelector.hasAttribute("disabled")).notOk();
+  await ClientFunction(() => { (window as any).creator.propertyGrid.getQuestionByName("image").readOnly = true; })();
+  await t.expect(textSelector.hasAttribute("disabled")).ok();
+  await t.expect(fileSelector.hasAttribute("disabled")).ok();
+  await ClientFunction(() => {
+    (window as any).creator.propertyGrid.getQuestionByName("image").readOnly = false;
+    (window as any).creator.propertyGrid.getQuestionByName("image").disableInput = true;
+  })();
+  await t.expect(textSelector.hasAttribute("disabled")).ok();
+  await t.expect(fileSelector.hasAttribute("disabled")).notOk();
+});
