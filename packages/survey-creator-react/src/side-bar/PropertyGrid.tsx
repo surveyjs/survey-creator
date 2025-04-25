@@ -33,7 +33,6 @@ export class PropertyGridComponent extends SurveyElementBase<IPropertyGridCompon
   }
 }
 
-
 export default PropertyGridComponent;
 
 ReactElementFactory.Instance.registerElement("svc-property-grid", (props) => {
