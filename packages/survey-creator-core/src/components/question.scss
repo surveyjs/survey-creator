@@ -979,20 +979,35 @@ svc-question,
   .svc-question__content {
     border-radius: 0;
     box-shadow: none;
-    outline: var(--ctr-survey-question-panel-border-width-nested, var(--lbr-stroke-x1)) dashed var(--ctr-survey-question-panel-border-color-nested, var(--sjs-border-25, #d4d4d4ff));
-    outline-offset: calc(-1 * var(--ctr-survey-question-panel-border-width-nested, var(--lbr-stroke-x1)));
+    &::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      outline: var(--ctr-survey-question-panel-border-width-nested, var(--lbr-stroke-x1)) dashed var(--ctr-survey-question-panel-border-color-nested, var(--sjs-border-25, #d4d4d4ff));
+      outline-offset: calc(-1 * var(--ctr-survey-question-panel-border-width-nested, var(--lbr-stroke-x1)));
+      z-index: 10;
+    }
   }
 
   .svc-hovered > .svc-question__content:not(.svc-question__content--dragged) {
-    box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-hovered, var(--lbr-stroke-x2))
-      var(--ctr-survey-question-panel-border-color-hovered, var(--sjs-secondary-background-25, #19b39440)) inset;
-    outline: none;
+    &::after {
+      box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-hovered, var(--lbr-stroke-x2))
+        var(--ctr-survey-question-panel-border-color-hovered, var(--sjs-secondary-background-25, #19b39440)) inset;
+      outline: none;
+    }
+
   }
 
   .svc-question__content.svc-question__content--selected:not(.svc-question__content--dragged) {
-    box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-selected, var(--lbr-stroke-x2))
-      var(--ctr-survey-question-panel-border-color-selected, var(--sjs-secondary-background-500, #19b394ff)) inset;
-    outline: none;
+    &::after {
+      box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-selected, var(--lbr-stroke-x2))
+        var(--ctr-survey-question-panel-border-color-selected, var(--sjs-secondary-background-500, #19b394ff)) inset;
+      outline: none;
+    }
   }
 }
 

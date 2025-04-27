@@ -635,6 +635,60 @@ test("Question borders in panels", async (t) => {
   });
 });
 
+test("Matrix borders in panels", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1767, 1500);
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel1",
+              "elements": [
+                {
+                  "type": "matrixdropdown",
+                  "name": "question1",
+                  "columns": [
+                    {
+                      "name": "Column 1"
+                    },
+                    {
+                      "name": "Column 2"
+                    },
+                    {
+                      "name": "Column 3"
+                    }
+                  ],
+                  "cellType": "text",
+                  "rows": [
+                    "Row 1",
+                    "Row 2"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "widthMode": "static"
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+
+    const qContent = Selector("[data-name=question1]");
+    const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
+    await takeElementScreenshot("question-panel-content-matrix.png", pageContent, t, comparer);
+    await t.hover(qContent, { offsetX: 5, offsetY: 5 }).wait(300);
+    await takeElementScreenshot("question-panel-content-matrix-hover.png", pageContent, t, comparer);
+    await t.click(qContent, { offsetX: 5, offsetY: 5 }).wait(300);
+    await takeElementScreenshot("question-panel-content-matrix-selected.png", pageContent, t, comparer);
+  });
+});
+
 /*
   test("Check question width and position", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
