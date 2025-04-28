@@ -1247,13 +1247,17 @@ export class SurveyCreatorModel extends Base
     return this._theme;
   }
   public set theme(newTheme: ITheme) {
-    this._theme = newTheme;
+    this.applyTheme(newTheme);
+  }
+
+  public applyTheme(surveyTheme: ITheme): void {
+    this._theme = surveyTheme;
     this.hasPendingThemeChanges = true;
     if (this.activeTab !== "theme") {
       this.updatePlugin(this.activeTab);
     }
-    if (!!newTheme && newTheme.headerView) {
-      this.survey.headerView = newTheme.headerView;
+    if (!!surveyTheme && surveyTheme.headerView) {
+      this.survey.headerView = surveyTheme.headerView;
     }
   }
 
