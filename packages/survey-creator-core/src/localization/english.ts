@@ -744,6 +744,9 @@ export var enStrings = {
     rateValues: "Custom rating values",
     rateCount: "Rating count",
     autoGenerate: "Rating configuration",
+    slider: {
+      autoGenerate: "Scale configuration"
+    },
     hideIfChoicesEmpty: "Hide the question if it has no choices",
     minWidth: "Minimum width",
     maxWidth: "Maximum width",
