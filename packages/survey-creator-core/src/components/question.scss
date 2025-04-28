@@ -995,11 +995,11 @@ svc-question,
 
   .svc-hovered > .svc-question__content:not(.svc-question__content--dragged) {
     &::after {
-      box-shadow: 0 0 0 var(--ctr-survey-question-panel-border-width-hovered, var(--lbr-stroke-x2))
-        var(--ctr-survey-question-panel-border-color-hovered, var(--sjs-secondary-background-25, #19b39440)) inset;
+      box-shadow:  0 0 0 var(--ctr-survey-question-panel-border-width-hovered, var(--lbr-stroke-x2))
+        var(--ctr-survey-question-panel-border-color-hovered, var(--sjs-secondary-background-25, #19b39440)) inset, 0 0 0 var(--ctr-survey-question-panel-border-width-hovered, var(--lbr-stroke-x2))
+        var(--lbr-question-panel-background-color, var(--sjs-layer-1-background-500, #ffffffff)) inset;
       outline: none;
     }
-
   }
 
   .svc-question__content.svc-question__content--selected:not(.svc-question__content--dragged) {
