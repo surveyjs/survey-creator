@@ -25,14 +25,14 @@ test("Check styles", async (t) => {
   });
 });
 
-test("Check long texts", async (t) => {
+test("Button group responsivity", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await ClientFunction(() => window["creator"].showOneCategoryInPropertyGrid = true)();
     await t.resizeWindow(1920, 1080);
 
     await t.click(Selector('[title="Logo in the Survey Header"]'));
     await t.drag(Selector(".svc-resizer-west"), 200, 0);
-    const buttongroup = Selector('[data-name="logoFit"] .spg-button-group').filterVisible();
-    await takeElementScreenshot("button-group-ellipsis.png", buttongroup, t, comparer);
+    const buttongroup = Selector('[data-name="logoFit"] .spg-question__content').filterVisible();
+    await takeElementScreenshot("button-group-responsivity.png", buttongroup, t, comparer);
   });
 });

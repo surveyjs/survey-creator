@@ -1577,8 +1577,9 @@ export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
       { value: "true", text: editorLocalization.getString("pe.enabled") },
     ];
 
+    const _renderAsButtonGroup = creatorSettings.propertyGrid.useButtonGroup;
     const res: any = {
-      type: "buttongroup",
+      type: _renderAsButtonGroup ? "buttongroup" : "dropdown",
       choices: choices,
       showOptionsCaption: false
     };
@@ -1892,10 +1893,9 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   ): any {
     var choices = this.getChoices(obj, prop);
 
+    const _renderAsButtonGroup = this.renderAsButtonGroup(prop, choices);
     var json: any = {
-      type: this.renderAsButtonGroup(prop, choices)
-        ? "buttongroup"
-        : "dropdown",
+      type: _renderAsButtonGroup ? "buttongroup" : "dropdown",
       choices: choices,
       showOptionsCaption: false
     };
