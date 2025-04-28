@@ -99,8 +99,8 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
         </div>
 
         {this.model.allowAdd && !this.model.isUploading ?
-          <div className="svc-image-item-value-controls" >
-            this.renderNewItemControls()
+          <div className="svc-image-item-value-controls">
+            {this.renderNewItemControls()}
           </div>
           : null}
       </>);
