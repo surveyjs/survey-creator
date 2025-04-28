@@ -1443,7 +1443,7 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
   expect(actions[1].enabled).toBeFalsy();
   expect(updater()).toBeFalsy();
 });
-test("property-grid-setup action dynamic enabled property Bug#6751", () => {
+test.skip("We decided to support editing visibleIf/enableIf. property-grid-setup action dynamic enabled property Bug#6751", () => {
   const question1 = new QuestionDropdownModel("q1");
   question1.choices = [1, 2, 3];
   const propertyGrid = new PropertyGridModelTester(question1);
@@ -1460,6 +1460,17 @@ test("property-grid-setup action dynamic enabled property Bug#6751", () => {
   expect(action.enabled).toBeFalsy();
   visibleIfQuestion.value = "";
   expect(action.enabled).toBeTruthy();
+});
+test("property-grid-setup disable for multiple", () => {
+  const question1 = new QuestionDropdownModel("q1");
+  question1.choices = [1, { value: 2, text: { default: "t1", de: "t2" } }, 3];
+  const propertyGrid = new PropertyGridModelTester(question1);
+  const choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const action = choicesQuestion.getTitleToolbar().getActionById("property-grid-setup");
+  expect(action).toBeTruthy();
+  expect(action.enabled).toBeFalsy();
 });
 test("options.onSetPropertyEditorOptionsCallback - allowBatchEdit", () => {
   const options = new EmptySurveyCreatorOptions();
