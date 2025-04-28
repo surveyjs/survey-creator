@@ -829,6 +829,7 @@ export var enStrings = {
       enableIf: "Editable If",
       requiredIf: "Required If",
       rateValues: "Rating Values",
+      sliderSettings: "Slider Settings",
       choicesByUrl: "Choices from a Web Service",
       matrixChoices: "Default Choices",
       multipleTextItems: "Text Inputs",
