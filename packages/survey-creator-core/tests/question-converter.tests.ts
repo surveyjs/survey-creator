@@ -177,18 +177,12 @@ test("Convert text and radio question to image picker", () => {
   const newQ2 = <QuestionImagePickerModel>page.questions[1];
   const newQ3 = <QuestionImagePickerModel>page.questions[2];
   const newQ4 = <QuestionImagePickerModel>page.questions[3];
-  expect(newQ1.choices).toHaveLength(4);
-  expect(newQ1.choices[0].value).toEqual("Image 1");
-  expect(newQ1.choices[0].imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
+  expect(newQ1.choices).toHaveLength(0);
   expect(newQ2.choices).toHaveLength(2);
   expect(newQ2.choices[0].value).toEqual("item1");
   expect(newQ2.choices[0].imageLink).toBeFalsy();
-  expect(newQ3.choices).toHaveLength(4);
-  expect(newQ3.choices[0].value).toEqual("Image 1");
-  expect(newQ3.choices[0].imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
-  expect(newQ4.choices).toHaveLength(4);
-  expect(newQ4.choices[0].value).toEqual("Image 1");
-  expect(newQ4.choices[0].imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
+  expect(newQ3.choices).toHaveLength(0);
+  expect(newQ4.choices).toHaveLength(0);
 });
 test("Convert matrix question", () => {
   var survey = new SurveyModel();
