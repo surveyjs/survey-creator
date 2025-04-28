@@ -2620,6 +2620,16 @@ test("Espace new line and tabs, Bug#6818", () => {
   propEditor.value = "{q2} + '\\n' + {q3} + '\\t' + {q4}";
   expect(q1.setValueExpression).toEqual("{q2} + '\n' + {q3} + '\t' + {q4}");
 });
+test("Do not modify expression value on showing it, Bug#6860", () => {
+  const question = new QuestionTextModel("q1");
+  question.resetValueIf = "{a} = 1\nand\n{b} =2";
+  const propertyGrid = new PropertyGridModelTester(question);
+  const propEditor = propertyGrid.survey.getQuestionByName("resetValueIf");
+  expect(propEditor.value).toEqual("{a} = 1\nand\n{b} =2");
+  propEditor.value = "{a}=3\nor\n{c}<4";
+  expect(question.resetValueIf).toEqual("{a}=3\nor\n{c}<4");
+});
+
 test("Different property editors for trigger value", () => {
   const prop = Serializer.findProperty("setvaluetrigger", "setValue");
   expect(prop).toBeTruthy();
