@@ -1461,7 +1461,7 @@ test.skip("We decided to support editing visibleIf/enableIf. property-grid-setup
   visibleIfQuestion.value = "";
   expect(action.enabled).toBeTruthy();
 });
-test.skip("property-grid-setup disable for multiple", () => {
+test("property-grid-setup disable for multiple", () => {
   const question1 = new QuestionDropdownModel("q1");
   question1.choices = [1, { value: 2, text: { default: "t1", de: "t2" } }, 3];
   const propertyGrid = new PropertyGridModelTester(question1);
