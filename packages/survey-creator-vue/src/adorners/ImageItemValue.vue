@@ -98,18 +98,19 @@
         <div
           class="svc-image-item-value-controls"
           @pointerdown="(event) => event.stopPropagation()"
+          v-if="adorner.allowAdd && !adorner.isUploading"
         >
-        <span class="svc-image-item-value__placeholder" v-if="adorner.showPlaceholder">{{adorner.placeholderText}}</span>
-        <span :class="adorner.addButtonCss" @click="adorner.chooseNewFile(adorner)" v-key2click>
-            <SvComponent
-              :is="'sv-svg-icon'"
-              :iconName="'icon-add-lg'"
-              :size="'auto'"
-              :title="adorner.addFileTitle"
-              v-if="adorner.showChooseButtonAsIcon"
-            />
-            <span v-else>{{adorner.chooseImageText}}</span>
-        </span>
+          <span class="svc-image-item-value__placeholder" v-if="adorner.showPlaceholder">{{adorner.placeholderText}}</span>
+          <span :class="adorner.addButtonCss" @click="adorner.chooseNewFile(adorner)" v-key2click>
+              <SvComponent
+                :is="'sv-svg-icon'"
+                :iconName="'icon-add-lg'"
+                :size="'auto'"
+                :title="adorner.addFileTitle"
+                v-if="adorner.showChooseButtonAsIcon"
+              />
+              <span v-else>{{adorner.chooseImageText}}</span>
+          </span>
         </div>
       </template>
     </div>

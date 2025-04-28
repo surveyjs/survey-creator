@@ -46,7 +46,7 @@
             </label>
           </div>
         </div>
-        <div class="svc-image-item-value-controls">
+        <div class="svc-image-item-value-controls" *ngIf="adorner.allowAdd && !adorner.isUploading">
           <span class="svc-image-item-value__placeholder"
             *ngIf="adorner.showPlaceholder">{{adorner.placeholderText}}</span>
           <span [class]="adorner.addButtonCss" (click)="adorner.chooseNewFile(adorner)" [key2click]="{}">
