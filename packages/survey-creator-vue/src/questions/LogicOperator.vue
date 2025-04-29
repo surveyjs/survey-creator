@@ -18,10 +18,9 @@
         <div :class="question.cssClasses.controlValue">
           <SvComponent
             :is="'survey-string'"
-            v-if="question.selectedItemLocText"
-            :locString="question.selectedItemLocText"
+            v-if="question.locReadOnlyText"
+            :locString="question.locReadOnlyText"
           ></SvComponent>
-          <div>{{ question.readOnlyText }}</div>
         </div>
         <div
           v-if="question.allowClear && question.cssClasses.cleanButtonIconId"
@@ -48,10 +47,9 @@
     >
       <SvComponent
         :is="'survey-string'"
-        v-if="question.selectedItemLocText"
-        :locString="question.selectedItemLocText"
+        v-if="question.locReadOnlyText"
+        :locString="question.locReadOnlyText"
       ></SvComponent>
-      <div>{{ question.readOnlyText }}</div>
     </div>
   </div>
 </template>
