@@ -4463,7 +4463,7 @@ export class SurveyCreatorModel extends Base
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
-    if (designerPlugin) {
+    if (designerPlugin && designerPlugin.model) {
       designerPlugin.model.updateSurfaceCssVariables();
     }
     this.themeVariables = newCssVariable;
