@@ -45,7 +45,7 @@
 
     & > .sv-popup__container {
       width: 100vw;
-      max-height: calc(100vh- var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2)));
+      max-height: calc(100vh - var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2)));
       height: calc(100vh - var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2)));
 
       display: flex;
@@ -189,7 +189,6 @@
   //styles for dropdown overlay
   &.sv-popup--menu-phone,
   &.sv-popup--menu-tablet {
-
     .sv-menu-popup__button {
       @include ctrDefaultBoldFont;
       color: var(--ctr-actionbar-button-text-color, var(--sjs-primary-background-500, #19b394ff));
