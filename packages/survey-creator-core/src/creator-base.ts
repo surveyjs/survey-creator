@@ -1250,6 +1250,15 @@ export class SurveyCreatorModel extends Base
     this.applyTheme(newTheme);
   }
 
+  /**
+   * Applies a [theme](https://surveyjs.io/form-library/documentation/api-reference/itheme) to the survey being configured.
+   *
+   * [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor (linkStyle))
+   * @param surveyTheme An [`ITheme`](https://surveyjs.io/form-library/documentation/api-reference/itheme) object with theme settings.
+   * @see theme
+   * @see themeEditor
+   * @see saveThemeFunc
+   */
   public applyTheme(surveyTheme: ITheme): void {
     this._theme = surveyTheme;
     this.hasPendingThemeChanges = true;
