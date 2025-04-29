@@ -128,25 +128,7 @@ export var settings = {
         choices: ["Item 1", "Item 2", "Item 3"]
       },
       imagepicker: {
-        imageFit: "cover",
-        choices: [
-          {
-            value: "Image 1",
-            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
-          },
-          {
-            value: "Image 2",
-            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
-          },
-          {
-            value: "Image 3",
-            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
-          },
-          {
-            value: "Image 4",
-            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
-          }
-        ]
+        imageFit: "cover"
       },
       image: {
         imageFit: "cover",

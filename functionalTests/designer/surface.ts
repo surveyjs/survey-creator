@@ -75,10 +75,35 @@ test("Check scrollbar is not appear when width mode is responsive", async (t) =>
 
 test("Check imagepicker add/delete items not raises errors and works fine: #3203", async (t) => {
   await t.resizeWindow(1920, 1080);
-  await setJSON({});
+  await setJSON({
+    elements: [
+      {
+        name: "q1",
+        type: "imagepicker",
+        choices: [
+          {
+            value: "Image 1",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+          },
+          {
+            value: "Image 2",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+          },
+          {
+            value: "Image 3",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+          },
+          {
+            value: "Image 4",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+          }
+        ]
+      }
+    ]
+  });
   await explicitErrorHandler();
   await t
-    .click(".svc-toolbox__item--icon-imagepicker")
+    .click(".svc-question__content")
     .click(".spg-panel__title--expandable[aria-label='Choice Options']")
     .click(".spg-action-button[title='Add new choice']")
     .click(".spg-matrixdynamic tr:last-of-type .spg-action-button--danger")

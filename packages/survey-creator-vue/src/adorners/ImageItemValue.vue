@@ -4,6 +4,11 @@
     :class="adorner.getRootCss()"
     :data-sv-drop-target-item-value="adorner.isDraggable ? item.value : null"
     ref="root"
+    @dragstart="preventDragHandler"
+    @dragenter="adorner.onDragEnter($event)"
+    @dragover="adorner.onDragOver($event)"
+    @dragleave="adorner.onDragLeave($event)"
+    @drop="adorner.onDrop($event)"
   >
     <div
       class="svc-image-item-value-wrapper__ghost"
@@ -72,13 +77,9 @@
           </span>
         </div>
       </template>
-
-      <template v-if="adorner.isNew || adorner.isUploading">
+      <template v-else>
         <div
           class="svc-image-item-value__item"
-          @dragover="adorner.onDragOver($event)"
-          @dragleave="adorner.onDragLeave($event)"
-          @drop="adorner.onDrop($event)"
         >
           <div class="sd-imagepicker__item sd-imagepicker__item--inline">
             <label class="sd-imagepicker__label">
@@ -97,21 +98,18 @@
         <div
           class="svc-image-item-value-controls"
           @pointerdown="(event) => event.stopPropagation()"
+          v-if="adorner.allowAdd && !adorner.isUploading"
         >
-          <span
-            class="svc-context-button svc-image-item-value-controls__add"
-            v-if="adorner.allowAdd && !adorner.isUploading"
-            v-key2click
-            @click="adorner.chooseNewFile(adorner)"
-            :title="undefined"
-            :aria-label="undefined"
-          >
-            <SvComponent
-              :is="'sv-svg-icon'"
-              :iconName="'icon-add-lg'"
-              :size="'auto'"
-              :title="adorner.addFileTitle"
-            ></SvComponent>
+          <span class="svc-image-item-value__placeholder" v-if="adorner.showPlaceholder">{{adorner.placeholderText}}</span>
+          <span :class="adorner.addButtonCss" @click="adorner.chooseNewFile(adorner)" v-key2click>
+              <SvComponent
+                :is="'sv-svg-icon'"
+                :iconName="'icon-add-lg'"
+                :size="'auto'"
+                :title="adorner.addFileTitle"
+                v-if="adorner.showChooseButtonAsIcon"
+              />
+              <span v-else>{{adorner.chooseImageText}}</span>
           </span>
         </div>
       </template>
@@ -162,7 +160,9 @@ const adorner = useCreatorModel(
     value.dispose();
   }
 );
-
+const preventDragHandler = (e: Event) => {
+  e.preventDefault();
+}
 const newItemStyle = computed(() => {
   const needStyle = !adorner.value.getIsNewItemSingle();
   return {
