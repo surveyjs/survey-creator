@@ -1,11 +1,21 @@
 import {
   AdaptiveActionContainer,
-  Action
+  Action,
+  ResponsivityManager
 } from "survey-core";
 import { listComponentCss } from "./list-theme";
-
+class SurveyElementResponsivityManager extends ResponsivityManager {
+  constructor(container: HTMLDivElement, model: AdaptiveActionContainer, private onGetAllowResponsivenessCallback?: () => boolean) {
+    super(container, model);
+  }
+  shouldProcessResponsiveness():boolean {
+    return super.shouldProcessResponsiveness() && (!this.onGetAllowResponsivenessCallback || this.onGetAllowResponsivenessCallback());
+  }
+}
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   public alwaysShrink = false;
+  protected responsivityManager: SurveyElementResponsivityManager;
+
   private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
     return (item.innerItem.location == "start" && shrinkTypeConverterAction || item.innerItem.location != "start");
   }
@@ -82,5 +92,15 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
     }
 
     this.hiddenItemsListModel.setItems(items.filter(i => i.mode == "popup").map(i => i.innerItem));
+  }
+  private allowResponsiveness: boolean = false;
+  initResponsiveness() {
+    if (!this.allowResponsiveness) {
+      this.allowResponsiveness = true;
+      this.updateCallback && this.updateCallback(true);
+    }
+  }
+  protected createResponsivityManager(container: HTMLDivElement): ResponsivityManager {
+    return new SurveyElementResponsivityManager(container, this, () => this.allowResponsiveness);
   }
 }
