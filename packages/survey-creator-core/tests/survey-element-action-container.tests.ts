@@ -241,11 +241,11 @@ test("Check actions container responsiveness doesn't run when invisible", () => 
   jest.spyOn(container, "offsetWidth", "get").mockImplementation(() => {
     return 100;
   });
-  expect(q1ActionsContainer["allowResponsiveness"]).toBeTruthy();
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   q1ActionsContainer.initResponsivityManager(container);
   expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
 
-  expect(q2Adapter.actionContainer["allowResponsiveness"]).toBeFalsy();
+  expect(q2Adapter.actionContainer["isResponsivenessAllowed"]).toBeFalsy();
   q2ActionsContainer.initResponsivityManager(container);
   let q2Log = "";
   q2ActionsContainer.updateCallback = (isResetInitialized) => {
@@ -253,7 +253,7 @@ test("Check actions container responsiveness doesn't run when invisible", () => 
   };
   expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
 
-  expect(q3Adapter.actionContainer["allowResponsiveness"]).toBeFalsy();
+  expect(q3Adapter.actionContainer["isResponsivenessAllowed"]).toBeFalsy();
   q3ActionsContainer.initResponsivityManager(container);
   let q3Log = "";
   q3ActionsContainer.updateCallback = (isResetInitialized) => {
@@ -262,42 +262,42 @@ test("Check actions container responsiveness doesn't run when invisible", () => 
   expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
 
   creator.selectElement(q2);
-  expect(q1ActionsContainer["allowResponsiveness"]).toBeTruthy();
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
-  expect(q2ActionsContainer["allowResponsiveness"]).toBeTruthy();
+  expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
-  expect(q3ActionsContainer["allowResponsiveness"]).toBeFalsy();
+  expect(q3ActionsContainer["isResponsivenessAllowed"]).toBeFalsy();
   expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
   expect(q2Log).toBe("->raised:true");
   expect(q3Log).toBe("");
 
   creator.selectElement(q1);
   creator.selectElement(q2);
-  expect(q1ActionsContainer["allowResponsiveness"]).toBeTruthy();
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
-  expect(q2ActionsContainer["allowResponsiveness"]).toBeTruthy();
+  expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
-  expect(q3ActionsContainer["allowResponsiveness"]).toBeFalsy();
+  expect(q3ActionsContainer["isResponsivenessAllowed"]).toBeFalsy();
   expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
   expect(q2Log).toBe("->raised:true");
   expect(q3Log).toBe("");
 
   q3Adapter.hover(new Event("") as any, null);
-  expect(q1ActionsContainer["allowResponsiveness"]).toBeTruthy();
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
-  expect(q2ActionsContainer["allowResponsiveness"]).toBeTruthy();
+  expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
-  expect(q3ActionsContainer["allowResponsiveness"]).toBeTruthy();
+  expect(q3ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
   expect(q2Log).toBe("->raised:true");
   expect(q3Log).toBe("->raised:true");
 
   q3Adapter.hover(new Event("") as any, null);
-  expect(q1ActionsContainer["allowResponsiveness"]).toBeTruthy();
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
-  expect(q2ActionsContainer["allowResponsiveness"]).toBeTruthy();
+  expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
-  expect(q3ActionsContainer["allowResponsiveness"]).toBeTruthy();
+  expect(q3ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
   expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
   expect(q2Log).toBe("->raised:true");
   expect(q3Log).toBe("->raised:true");

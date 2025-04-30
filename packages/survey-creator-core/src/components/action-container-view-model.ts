@@ -93,14 +93,14 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 
     this.hiddenItemsListModel.setItems(items.filter(i => i.mode == "popup").map(i => i.innerItem));
   }
-  private allowResponsiveness: boolean = false;
-  initResponsiveness() {
-    if (!this.allowResponsiveness) {
-      this.allowResponsiveness = true;
+  private isResponsivenessAllowed: boolean = false;
+  allowResponsiveness() {
+    if (!this.isResponsivenessAllowed) {
+      this.isResponsivenessAllowed = true;
       this.updateCallback && this.updateCallback(true);
     }
   }
   protected createResponsivityManager(container: HTMLDivElement): ResponsivityManager {
-    return new SurveyElementResponsivityManager(container, this, () => this.allowResponsiveness);
+    return new SurveyElementResponsivityManager(container, this, () => this.isResponsivenessAllowed);
   }
 }
