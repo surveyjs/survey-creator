@@ -135,15 +135,11 @@ export interface ICreatorOptions {
    */
   showPagesInPreviewTab?: boolean;
   /**
-   * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
-   *
-   * Accepted values: `"default"`
-   *
-   * Default value: `"default"`
+   * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
    */
   previewTheme?: string;
   /**
-   * @deprecated Use the [`previewTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewTheme) property instead.
+   * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
    */
   themeForPreview?: string;
   /**
@@ -293,15 +289,11 @@ export interface ICreatorOptions {
    */
   maxNestedPanels?: number;
   /**
-   * Specifies whether users can switch between UI themes in the Preview tab.
-   *
-   * Default value: `true`
-   *
-   * [View Demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
+   * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
    */
   previewAllowSelectTheme?: boolean;
   /**
-   * @deprecated Use the [`previewAllowSelectTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectTheme) property instead.
+   * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
    */
   allowChangeThemeInPreview?: boolean;
   /**

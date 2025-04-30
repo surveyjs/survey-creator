@@ -1193,16 +1193,11 @@ export class SurveyCreatorModel extends Base
   public get showSimulatorInPreviewTab(): boolean { return this.showSimulatorInTestSurveyTab; }
   public set showSimulatorInPreviewTab(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
   /**
-   * A [UI theme](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles) used to display the survey in the Preview tab.
-   *
-   * Accepted values: `"default"`
-   *
-   * Default value: `"default"`
-   * @see previewAllowSelectTheme
+   * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
    */
   public previewTheme: string = "default";
   /**
-   * @deprecated Use the [`previewTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewTheme) property instead.
+   * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
    */
   public get themeForPreview() { return this.previewTheme; }
   public set themeForPreview(val) { this.previewTheme = val; }
@@ -1247,13 +1242,26 @@ export class SurveyCreatorModel extends Base
     return this._theme;
   }
   public set theme(newTheme: ITheme) {
-    this._theme = newTheme;
+    this.applyTheme(newTheme);
+  }
+
+  /**
+   * Applies a [theme](https://surveyjs.io/form-library/documentation/api-reference/itheme) to the survey being configured.
+   *
+   * [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor (linkStyle))
+   * @param surveyTheme An [`ITheme`](https://surveyjs.io/form-library/documentation/api-reference/itheme) object with theme settings.
+   * @see theme
+   * @see themeEditor
+   * @see saveThemeFunc
+   */
+  public applyTheme(surveyTheme: ITheme): void {
+    this._theme = surveyTheme;
     this.hasPendingThemeChanges = true;
     if (this.activeTab !== "theme") {
       this.updatePlugin(this.activeTab);
     }
-    if (!!newTheme && newTheme.headerView) {
-      this.survey.headerView = newTheme.headerView;
+    if (!!surveyTheme && surveyTheme.headerView) {
+      this.survey.headerView = surveyTheme.headerView;
     }
   }
 
@@ -1352,16 +1360,11 @@ export class SurveyCreatorModel extends Base
   public set showInvisibleElementsInPreviewTab(val: boolean) { this.showInvisibleElementsInTestSurveyTab = val; }
 
   /**
-   * Specifies whether users can switch between UI themes in the Preview tab.
-   *
-   * Default value: `true`
-   *
-   * [View Demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
-   * @see previewTheme
+   * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
    */
   public previewAllowSelectTheme = true;
   /**
-   * @deprecated Use the [`previewAllowSelectTheme`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#previewAllowSelectTheme) property instead.
+   * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
    */
   get allowChangeThemeInPreview() { return this.previewAllowSelectTheme; }
   set allowChangeThemeInPreview(val) { this.previewAllowSelectTheme = val; }
@@ -4463,7 +4466,7 @@ export class SurveyCreatorModel extends Base
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables);
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
-    if (designerPlugin) {
+    if (designerPlugin && designerPlugin.model) {
       designerPlugin.model.updateSurfaceCssVariables();
     }
     this.themeVariables = newCssVariable;
