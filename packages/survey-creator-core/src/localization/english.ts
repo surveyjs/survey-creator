@@ -745,7 +745,6 @@ export var enStrings = {
     rateCount: "Rating count",
     autoGenerate: "Rating configuration",
     slider: {
-      autoGenerate: "Scale configuration",
       showLabels: "Show scale labels",
       segmentCount: "Segments",
       tooltipVisibility: "Show tooltips",
