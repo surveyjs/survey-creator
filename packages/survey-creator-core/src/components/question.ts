@@ -480,22 +480,24 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   private jsonsAreCompatible(objJson: any, json: any): boolean {
-    const question = QuestionFactory.Instance.createQuestion(objJson.type, "question") || this.element;
-    return this.jsonsAreCompatibleByElement(question, json);
-  }
-  private jsonsAreCompatibleByElement(question: SurveyElement<any>, json: any): boolean {
-    if (!question) return false;
+    let question = this.element;
+    if (!!objJson && !!objJson.type && question.getType() !== objJson.type) {
+      question = QuestionFactory.Instance.createQuestion(objJson.type, "question") || this.element;
+    }
     const keys = Object.keys(json);
     for (let i = 0; i < keys.length; i++) {
       const p = keys[i];
-      if (p == "type") continue;
-      const propertyValue = question[p];
+      if (!objJson && p === "type") continue;
+      let propertyValue = !!objJson ? objJson[p] : question.getPropertyValue(p);
+      if (!!objJson && propertyValue === undefined) {
+        propertyValue = p === "type" ? question.getType() : question.getDefaultPropertyValue(p);
+      }
       if (!Helpers.isTwoValueEquals(json[p], propertyValue)) return false;
     }
     return true;
   }
   private jsonIsCorresponded(json: any) {
-    return this.jsonsAreCompatibleByElement(this.element, json);
+    return this.jsonsAreCompatible(undefined, json);
   }
 
   private toolboxItemIsCorresponded(toolboxItem: QuestionToolboxItem, someItemSelectedAlready: boolean) {
