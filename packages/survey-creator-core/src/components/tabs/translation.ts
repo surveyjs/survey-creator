@@ -1578,6 +1578,7 @@ export class TranslationEditor {
   }
   private setupNavigationButtons(survey: SurveyModel): void {
     const navigationBar = new SurveyElementActionContainer();
+    navigationBar.allowResponsiveness();
     survey["navigationBarValue"] = navigationBar;
     survey.findLayoutElement("buttons-navigation").data = navigationBar;
     navigationBar.locOwner = survey;

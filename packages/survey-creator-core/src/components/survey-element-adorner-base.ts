@@ -82,6 +82,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.hoverTimeout = undefined;
       this.isHovered = false;
     }
+    this.actionContainer.allowResponsiveness();
   }
 
   private getExpandCollapseAnimationOptions(): IAnimationConsumer {
@@ -291,6 +292,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         }, "questionSelected"
       );
       this.restoreState();
+      if (surveyElement.getPropertyValue("isSelectedInDesigner")) {
+        this.actionContainer.allowResponsiveness();
+      }
       this.updateActionsContainer(surveyElement);
       this.updateActionsProperties();
       surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, this);
@@ -345,6 +349,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
     this.updateActionsProperties();
+    this.actionContainer.allowResponsiveness();
   }
   protected getExpandCollapseAction(): IAction {
     const collapseIcon = "icon-collapsepanel-16x16";
