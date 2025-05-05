@@ -91,6 +91,24 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
   }
 }
 
+function debounce(func, delay) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+
+const updateRowsVisibility = debounce((target: SurveyElementAdornerBase) => {
+  if (target.creator.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) {
+    updateRowsVisibility(target);
+  } else {
+    target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
+    target.creator.survey.getAllPanels().forEach(p => p.ensureRowsVisibility());
+  }
+}, 50);
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public static AdornerValueName = "__sjs_creator_adorner";
   public actionContainer: ActionContainer;
@@ -105,16 +123,15 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({ defaultValue: true }) needToRenderContent: boolean;
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
-    onSet: (val, target: SurveyElementAdornerBase<T>) => {
+    onSet: (val, target: SurveyElementAdornerBase<T>, prevVal) => {
       target.renderedCollapsed = val;
       if (!val) target.needToRenderContent = true;
       if (target.creator.designerStateManager && !target.creator.designerStateManager.isSuspended && target.surveyElement) {
         target.creator.designerStateManager.getElementState(target.surveyElement).collapsed = val;
       }
-      setTimeout(() => {
-        target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
-        target.creator.survey.getAllPanels().forEach(p => p.ensureRowsVisibility());
-      }, 50);
+      if (!!val !== !!prevVal) {
+        updateRowsVisibility(target);
+      }
     }
   }) collapsed: boolean;
   @property() private _renderedCollapsed: boolean;
@@ -291,7 +308,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.attachToUI(surveyElement);
   }
   private creatorOnLocaleChanged: (sender: Base, options: any) => void = (_, options) => {
-    if(this.surveyElement) {
+    if (this.surveyElement) {
       this.updateActionsContainer(this.surveyElement);
       this.updateActionsProperties();
     }
