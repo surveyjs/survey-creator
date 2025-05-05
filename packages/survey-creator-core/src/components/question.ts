@@ -479,17 +479,23 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return newAction;
   }
 
-  private jsonsAreCompatible(objJson, json) {
-    let jsonIsCorresponded = true;
-    Object.keys(json).forEach(p => {
-      const question = QuestionFactory.Instance.createQuestion(objJson.type, "question") || this.element;
-      const propertyValue = objJson[p] === undefined ? question.getDefaultPropertyValue(p) : objJson[p];
-      if (p != "type" && !Helpers.isTwoValueEquals(json[p], propertyValue)) jsonIsCorresponded = false;
-    });
-    return jsonIsCorresponded;
+  private jsonsAreCompatible(objJson: any, json: any): boolean {
+    const question = QuestionFactory.Instance.createQuestion(objJson.type, "question") || this.element;
+    return this.jsonsAreCompatibleByElement(question, json);
+  }
+  private jsonsAreCompatibleByElement(question: SurveyElement<any>, json: any): boolean {
+    if (!question) return false;
+    const keys = Object.keys(json);
+    for (let i = 0; i < keys.length; i++) {
+      const p = keys[i];
+      if (p == "type") continue;
+      const propertyValue = question[p];
+      if (!Helpers.isTwoValueEquals(json[p], propertyValue)) return false;
+    }
+    return true;
   }
   private jsonIsCorresponded(json: any) {
-    return this.jsonsAreCompatible(this.element.toJSON(), json);
+    return this.jsonsAreCompatibleByElement(this.element, json);
   }
 
   private toolboxItemIsCorresponded(toolboxItem: QuestionToolboxItem, someItemSelectedAlready: boolean) {
