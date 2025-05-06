@@ -223,3 +223,83 @@ test("actions and creator.onPropertyValueChanging", () => {
   q1Adapter.actionContainer.getActionById("isrequired").action();
   expect(q1.isRequired).toBeTruthy();
 });
+
+test("Check actions container responsiveness doesn't run when invisible", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }, { type: "text", name: "q3" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  const q3 = creator.survey.getQuestionByName("q3");
+  creator.selectElement(q1);
+  const q1Adapter = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  const q2Adapter = new QuestionAdornerViewModel(creator, q2, <any>undefined);
+  const q3Adapter = new QuestionAdornerViewModel(creator, q3, <any>undefined);
+  const q1ActionsContainer = q1Adapter.actionContainer;
+  const q2ActionsContainer = q2Adapter.actionContainer;
+  const q3ActionsContainer = q3Adapter.actionContainer;
+  const container = document.createElement("div");
+  jest.spyOn(container, "offsetWidth", "get").mockImplementation(() => {
+    return 100;
+  });
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  q1ActionsContainer.initResponsivityManager(container);
+  expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+
+  expect(q2Adapter.actionContainer["isResponsivenessAllowed"]).toBeFalsy();
+  q2ActionsContainer.initResponsivityManager(container);
+  let q2Log = "";
+  q2ActionsContainer.updateCallback = (isResetInitialized) => {
+    q2Log += `->raised:${isResetInitialized}`;
+  };
+  expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
+
+  expect(q3Adapter.actionContainer["isResponsivenessAllowed"]).toBeFalsy();
+  q3ActionsContainer.initResponsivityManager(container);
+  let q3Log = "";
+  q3ActionsContainer.updateCallback = (isResetInitialized) => {
+    q3Log += `->raised:${isResetInitialized}`;
+  };
+  expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
+
+  creator.selectElement(q2);
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q3ActionsContainer["isResponsivenessAllowed"]).toBeFalsy();
+  expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
+  expect(q2Log).toBe("->raised:true");
+  expect(q3Log).toBe("");
+
+  creator.selectElement(q1);
+  creator.selectElement(q2);
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q3ActionsContainer["isResponsivenessAllowed"]).toBeFalsy();
+  expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeFalsy();
+  expect(q2Log).toBe("->raised:true");
+  expect(q3Log).toBe("");
+
+  q3Adapter.hover(new Event("") as any, null);
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q3ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q2Log).toBe("->raised:true");
+  expect(q3Log).toBe("->raised:true");
+
+  q3Adapter.hover(new Event("") as any, null);
+  expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q1ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q2ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q2ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q3ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();
+  expect(q3ActionsContainer["responsivityManager"].shouldProcessResponsiveness()).toBeTruthy();
+  expect(q2Log).toBe("->raised:true");
+  expect(q3Log).toBe("->raised:true");
+});
+
