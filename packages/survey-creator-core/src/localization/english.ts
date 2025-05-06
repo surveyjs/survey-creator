@@ -744,6 +744,12 @@ export var enStrings = {
     rateValues: "Custom rating values",
     rateCount: "Rating count",
     autoGenerate: "Rating configuration",
+    slider: {
+      showLabels: "Show scale labels",
+      segmentCount: "Segments",
+      tooltipVisibilityPG: "Show tooltips",
+      allowSwap: "Allow swap thumbs"
+    },
     hideIfChoicesEmpty: "Hide the question if it has no choices",
     minWidth: "Minimum width",
     maxWidth: "Maximum width",
@@ -826,6 +832,7 @@ export var enStrings = {
       enableIf: "Editable If",
       requiredIf: "Required If",
       rateValues: "Rating Values",
+      sliderSettings: "Slider Settings",
       choicesByUrl: "Choices from a Web Service",
       matrixChoices: "Default Choices",
       multipleTextItems: "Text Inputs",

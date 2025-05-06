@@ -242,6 +242,30 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ],
     tabs: [{ name: "rateValues", index: 10 }]
   },
+  slider: {
+    properties: [
+      { name: "sliderType", tab: "sliderSettings" },
+      { name: "min", tab: "sliderSettings" },
+      { name: "max", tab: "sliderSettings" },
+      { name: "step", tab: "sliderSettings" },
+      { name: "segmentCount", tab: "sliderSettings" },
+      { name: "minValueExpression", tab: "sliderSettings" },
+      { name: "maxValueExpression", tab: "sliderSettings" },
+      { name: "minRangeLength", tab: "sliderSettings" },
+      { name: "maxRangeLength", tab: "sliderSettings" },
+      { name: "customLabels", tab: "sliderSettings" },
+      { name: "showLabels", tab: "sliderSettings" },
+      { name: "tooltipVisibilityPG", tab: "sliderSettings" },
+      { name: "labelFormat", tab: "sliderSettings" },
+      { name: "tooltipFormat", tab: "sliderSettings" },
+      { name: "allowDragRange", tab: "sliderSettings" },
+      { name: "allowSwap", tab: "sliderSettings" },
+      { name: "showEdgeLabels", tab: "sliderSettings" },
+      { name: "labelCount", tab: "sliderSettings" },
+      { name: "allowClear", tab: "sliderSettings" },
+    ],
+    tabs: [{ name: "sliderSettings", index: 10 }]
+  },
   selectbase: {
     properties: [
       { name: "choicesFromQuestion", tab: "choices" },
