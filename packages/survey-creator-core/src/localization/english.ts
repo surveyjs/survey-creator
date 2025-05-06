@@ -747,7 +747,7 @@ export var enStrings = {
     slider: {
       showLabels: "Show scale labels",
       segmentCount: "Segments",
-      tooltipVisibility: "Show tooltips",
+      tooltipVisibilityPG: "Show tooltips",
       allowSwap: "Allow swap thumbs"
     },
     hideIfChoicesEmpty: "Hide the question if it has no choices",
