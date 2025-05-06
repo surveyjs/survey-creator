@@ -590,6 +590,7 @@ export var hebrewStrings = {
     transposeData: "ביצוע חילוף שורות לעמודות",
     addRowText: "טקסט לכפתור הוסף שורה",
     removeRowText: "טקסט לכפתור הסר שורה",
+    singleInputTitleTemplate: "תבנית כותרת של שדה קלט",
     rateMin: "ערך מינימלי לדרגה",
     rateMax: "ערך מקסימלי לדרגה",
     rateStep: "צעד דרגה",
@@ -1119,7 +1120,8 @@ export var hebrewStrings = {
     questionsOnPageMode: {
       standard: "מבנה מקורי",
       singlePage: "הצג את כל השאלות בעמוד אחד",
-      questionPerPage: "הצגת שאלה בודדת בכל עמוד"
+      questionPerPage: "הצגת שאלה בודדת בכל עמוד",
+      inputPerPage: "הצגת שדה קלט יחיד בכל עמוד"
     },
     noPreview: "אין תצוגה מקדימה",
     showAllQuestions: "הצג את כל השאלות",
@@ -1320,7 +1322,9 @@ export var hebrewStrings = {
   ts: {
     selectPage: "בחר את העמוד לבדיקה",
     showInvisibleElements: "הצג רכיבים בלתי נראים",
-    hideInvisibleElements: "הסתר רכיבים בלתי נראים"
+    hideInvisibleElements: "הסתר רכיבים בלתי נראים",
+    prevPage: "הקודמת",
+    nextPage: "הבא"
   },
   validators: {
     answercountvalidator: "מספר תשובות",
@@ -1623,7 +1627,8 @@ export var hebrewStrings = {
       overlapEnabled: "כאשר אפשרות זו מופעלת, החלק העליון של הסקר מכסה את החלק התחתון של הכותרת.",
       mobileHeight: "כאשר הוא מוגדר ל- 0, הגובה מחושב באופן אוטומטי כדי להתאים לתוכן הכותרת."
     },
-    progressBarInheritWidthFrom: "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור מד ההתקדמות כך שיתאים לרכיב HTML שבו ממוקם הסקר."
+    progressBarInheritWidthFrom: "האפשרות \"זהה לגורם מכיל\" מתאימה אוטומטית את רוחב אזור מד ההתקדמות כך שיתאים לרכיב HTML שבו ממוקם הסקר.",
+    singleInputTitleTemplate: "משמש כאשר 'פריסת הסקר' מוגדרת ל'שדה קלט יחיד לכל עמוד'. בפריסה זו, המטריצה מפוצלת כך שכל שדה קלט מופיע בעמוד נפרד. השתמש במציין המיקום {rowIndex} כדי להוסיף מספור אוטומטי, ב- {rowTitle} או ב- {rowName} כדי להפנות לכותרת או למזהה של השורה, וב- {row.columnid} כדי לכלול את הערך של עמודת מטריצה ספציפית."
   },
   // Properties
   p: {
@@ -2620,3 +2625,8 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // page.description: "Type a page subtitle." => "הקלד כותרת משנה של דף."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "כיתוב המוצג בלחצן ניווט בסרגל ההתקדמות או בתוכן העניינים (TOC). אם תשאיר שדה זה ריק, לחצן הניווט ישתמש בכותרת הדף או בשם הדף. כדי להפעיל את מד ההתקדמות או תוכן העניינים, עבור אל \"סקר\" →\"ניווט\"."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "בחר כדי לאפשר למשיבים להוסיף אפשרויות משלהם אם האפשרות הרצויה אינה זמינה ברשימה הנפתחת. אפשרויות מותאמות אישית יאוחסנו באופן זמני בלבד למשך הפעלת הדפדפן הנוכחית."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "תבנית כותרת של שדה קלט"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "הצגת שדה קלט יחיד בכל עמוד"
+// ts.prevPage: "Previous" => "הקודמת"
+// ts.nextPage: "Next" => "הבא"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "משמש כאשר 'פריסת הסקר' מוגדרת ל'שדה קלט יחיד לכל עמוד'. בפריסה זו, המטריצה מפוצלת כך שכל שדה קלט מופיע בעמוד נפרד. השתמש במציין המיקום {rowIndex} כדי להוסיף מספור אוטומטי, ב- {rowTitle} או ב- {rowName} כדי להפנות לכותרת או למזהה של השורה, וב- {row.columnid} כדי לכלול את הערך של עמודת מטריצה ספציפית."

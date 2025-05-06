@@ -629,10 +629,34 @@ test("Image picker question inplace editor", async (t) => {
   await explicitErrorHandler();
   const chooseButtonSelector = ".svc-image-item-value-controls .svc-context-button:not(.svc-context-buttton--danger):not(.svc-image-item-value-controls__add)";
   const deleteButtonSelector = ".svc-image-item-value-controls .svc-context-button--danger";
+  await setJSON({
+    elements: [
+      {
+        name: "q1",
+        type: "imagepicker",
+        choices: [
+          {
+            value: "Image 1",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+          },
+          {
+            value: "Image 2",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+          },
+          {
+            value: "Image 3",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+          },
+          {
+            value: "Image 4",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+          }
+        ]
+      }
+    ]
+  });
   await t
-    .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("Image Picker"), { speed: 0.5 })
-    .click(getToolboxItemByText("Image Picker"), { speed: 0.5 })
+    .click(Selector(".svc-question__content"))
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(imageItems.count).eql(5)
     .expect(imageItems.nth(0).hasClass("svc-item-value--new")).notOk()
@@ -666,10 +690,34 @@ test("Image picker question inplace editor", async (t) => {
 
 test("Image picker question inplace editor - add new item", async (t) => {
   await explicitErrorHandler();
+  await setJSON({
+    elements: [
+      {
+        name: "q1",
+        type: "imagepicker",
+        choices: [
+          {
+            value: "Image 1",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+          },
+          {
+            value: "Image 2",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+          },
+          {
+            value: "Image 3",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+          },
+          {
+            value: "Image 4",
+            imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+          }
+        ]
+      }
+    ]
+  });
   await t
-    .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("Image Picker"), { speed: 0.5 })
-    .click(getToolboxItemByText("Image Picker"), { speed: 0.5 })
+    .click(Selector(".svc-question__content"))
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(imageItems.count).eql(5)
 

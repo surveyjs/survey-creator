@@ -19,12 +19,31 @@ import { SurveyElementActionContainer } from "./action-container-view-model";
 function getOffsetTop(element: HTMLElement, offsetParent: HTMLElement): number {
   let offsetTop = element.offsetTop;
   let parent = element.offsetParent as HTMLElement;
-  while (parent && parent !== offsetParent) {
+  while(parent && parent !== offsetParent) {
     offsetTop += parent.offsetTop;
     parent = parent.offsetParent as HTMLElement;
   }
   return offsetTop;
 }
+
+function debounce(func, delay) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+
+const updateRowsVisibility = debounce((target: SurveyElementAdornerBase) => {
+  if (target.creator.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) {
+    updateRowsVisibility(target);
+  } else {
+    target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
+    target.creator.survey.getAllPanels().forEach(p => p.ensureRowsVisibility());
+  }
+}, 50);
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   private initialElementOffsetTop = 0;
@@ -62,16 +81,15 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   @property({ defaultValue: true }) needToRenderContent: boolean;
   @property({ defaultValue: true }) allowExpandCollapse: boolean;
   @property({
-    onSet: (val, target: SurveyElementAdornerBase<T>) => {
+    onSet: (val, target, prevVal) => {
       target.renderedCollapsed = val;
       if (!val) target.needToRenderContent = true;
       if (target.creator.designerStateManager && target.surveyElement) {
         target.creator.designerStateManager.setElementCollapsed(target.surveyElement, val);
       }
-      setTimeout(() => {
-        target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
-        target.creator.survey.getAllPanels().forEach(p => p.ensureRowsVisibility());
-      }, 50);
+      if (!!val !== !!prevVal) {
+        updateRowsVisibility(target);
+      }
     }
   }) collapsed: boolean;
   @property() private _renderedCollapsed: boolean;
@@ -115,6 +133,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.hoverTimeout = undefined;
       this.isHovered = false;
     }
+    this.actionContainer.allowResponsiveness();
   }
 
   private getExpandCollapseAnimationOptions(): IAnimationConsumer {
@@ -350,6 +369,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         }, "questionSelected"
       );
       this.restoreState();
+      if (surveyElement.getPropertyValue("isSelectedInDesigner")) {
+        this.actionContainer.allowResponsiveness();
+      }
       this.updateActionsContainer(surveyElement);
       this.updateActionsProperties();
       surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, this);
@@ -404,6 +426,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
     this.updateActionsProperties();
+    this.actionContainer.allowResponsiveness();
   }
   protected getExpandCollapseAction(): IAction {
     const collapseIcon = "icon-collapsepanel-16x16";

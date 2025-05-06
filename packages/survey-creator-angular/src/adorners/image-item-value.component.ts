@@ -53,6 +53,9 @@ export class ImageItemValueDesignerComponent extends CreatorModelComponent<Image
   public ngAfterViewInit() {
     this.adorner.itemsRoot = this.container.nativeElement;
   }
+  preventDragHandler(e: Event) {
+    e.preventDefault();
+  }
 }
 
 AngularComponentFactory.Instance.registerComponent("svc-image-item-value", ImageItemValueDesignerComponent);

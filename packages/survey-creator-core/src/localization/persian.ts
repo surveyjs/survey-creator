@@ -107,14 +107,14 @@ var persianStrings = {
     redo: "بازانجام",
     undoTooltip: "بازگرداندن آخرین تغییر",
     redoTooltip: "انجام دادن تغییر",
-    expandTooltip: "گسترش",
-    collapseTooltip: "سقوط",
-    expandAllTooltip: "گسترش همه",
+    expandTooltip: "باز کردن",
+    collapseTooltip: "جمع کردن",
+    expandAllTooltip: "باز کردن همه",
     collapseAllTooltip: "جمع کردن همه",
     zoomInTooltip: "بزرگنمایی",
     zoom100Tooltip: "بزرگنمایی تا 100٪",
     zoomOutTooltip: "کوچک نمایی",
-    lockQuestionsTooltip: "قفل کردن وضعیت expand/collapse برای سوالات",
+    lockQuestionsTooltip: "قفل کردن وضعیت باز/بست برای سوالات",
     showMoreChoices: "نمایش بیشتر",
     showLessChoices: "نمایش کمتر",
     copy: "کپی",
@@ -590,6 +590,7 @@ var persianStrings = {
     transposeData: "جابهجا کردن سطرها به ستونها",
     addRowText: "متن دکمه درج سطر",
     removeRowText: "متن دکمه حذف سطر",
+    singleInputTitleTemplate: "الگوی عنوان فیلد ورودی",
     rateMin: "حداقل میزان",
     rateMax: "حداکثر میزان",
     rateStep: "میزان مراحل",
@@ -1119,7 +1120,8 @@ var persianStrings = {
     questionsOnPageMode: {
       standard: "ساختار اصلی",
       singlePage: "نمایش تمام سوالات در یک صفحه",
-      questionPerPage: "نمایش یک سؤال در هر صفحه"
+      questionPerPage: "نمایش یک سؤال در هر صفحه",
+      inputPerPage: "نمایش یک فیلد ورودی در هر صفحه"
     },
     noPreview: "پیش نمایش ندارد",
     showAllQuestions: "فعال سازی پیش نمایش با تمام سوالات",
@@ -1149,8 +1151,8 @@ var persianStrings = {
     },
     panelsState: {
       default: "کاربران نمی توانند پانل ها را گسترش یا سقوط کنند",
-      collapsed: "تمام پانل ها سقوط می کنند",
-      expanded: "تمام پانل ها گسترش یافته اند",
+      collapsed: "تمام پانل ها جمع شوند",
+      expanded: "تمام پانل ها باز شوند",
       firstExpanded: "اولین گسترش"
     },
     widthMode: {
@@ -1320,7 +1322,9 @@ var persianStrings = {
   ts: {
     selectPage: "صفحه ای را برای آزمایش انتخاب کنید:",
     showInvisibleElements: "نمایش المان های مخفی",
-    hideInvisibleElements: "مخفی کردن عناصر نامرئی"
+    hideInvisibleElements: "مخفی کردن عناصر نامرئی",
+    prevPage: "قبلی",
+    nextPage: "بعدی"
   },
   validators: {
     answercountvalidator: "تعداد پاسخ",
@@ -1623,7 +1627,8 @@ var persianStrings = {
       overlapEnabled: "هنگامی که فعال باشد، بالای نظرسنجی پایین هدر را همپوشانی می کند.",
       mobileHeight: "هنگامی که روی 0 تنظیم می شود، ارتفاع به طور خودکار محاسبه می شود تا محتوای هدر را در خود جای دهد."
     },
-    progressBarInheritWidthFrom: "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه نوار پیشرفت را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد."
+    progressBarInheritWidthFrom: "گزینه \"همان کانتینر\" به طور خودکار عرض ناحیه نوار پیشرفت را تنظیم می کند تا در عنصر HTML که نظرسنجی در آن قرار می گیرد قرار گیرد.",
+    singleInputTitleTemplate: "زمانی استفاده می شود که \"طرح نظرسنجی\" روی \"فیلد ورودی واحد در هر صفحه\" تنظیم شده باشد. در این چیدمان، ماتریس تقسیم می شود تا هر فیلد ورودی در یک صفحه جداگانه ظاهر شود. از مکان نگهدارنده {rowIndex} برای درج شماره گذاری خودکار، {rowTitle} یا {rowName} برای ارجاع به عنوان یا شناسه ردیف و {row.columnid} برای درج مقدار یک ستون ماتریس خاص استفاده کنید."
   },
   // Properties
   p: {
@@ -3008,3 +3013,8 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // page.description: "Type a page subtitle." => "زیرنویس صفحه را تایپ کنید."
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "عنوانی که روی دکمه پیمایش در نوار پیشرفت یا فهرست مطالب (TOC) نمایش داده می شود. اگر این فیلد را خالی بگذارید، دکمه پیمایش از عنوان صفحه یا نام صفحه استفاده می کند. برای فعال کردن نوار پیشرفت یا TOC، به \"نظرسنجی\" → \"ناوبری\" بروید."
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "انتخاب کنید تا به پاسخ دهندگان اجازه دهید انتخاب های خود را اضافه کنند اگر گزینه مورد نظر در منوی کشویی موجود نیست. گزینه های سفارشی فقط به طور موقت برای مدت زمان جلسه مرورگر فعلی ذخیره می شوند."
+// pe.singleInputTitleTemplate: "Input field title pattern" => "الگوی عنوان فیلد ورودی"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "نمایش یک فیلد ورودی در هر صفحه"
+// ts.prevPage: "Previous" => "قبلی"
+// ts.nextPage: "Next" => "بعدی"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "زمانی استفاده می شود که \"طرح نظرسنجی\" روی \"فیلد ورودی واحد در هر صفحه\" تنظیم شده باشد. در این چیدمان، ماتریس تقسیم می شود تا هر فیلد ورودی در یک صفحه جداگانه ظاهر شود. از مکان نگهدارنده {rowIndex} برای درج شماره گذاری خودکار، {rowTitle} یا {rowName} برای ارجاع به عنوان یا شناسه ردیف و {row.columnid} برای درج مقدار یک ستون ماتریس خاص استفاده کنید."

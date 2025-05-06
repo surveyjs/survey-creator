@@ -11,7 +11,7 @@ export class SurveyLogicOpertor extends SurveyQuestionDropdown {
   protected renderInput(): React.JSX.Element {
     const q = this.question as QuestionDropdownModel;
     initLogicOperator(q);
-    const text = (q.selectedItemLocText) ? this.renderLocString(q.selectedItemLocText) : "";
+    const text = (q.locReadOnlyText) ? this.renderLocString(q.locReadOnlyText) : "";
 
     return (<div
       id={this.question.inputId}
@@ -34,7 +34,6 @@ export class SurveyLogicOpertor extends SurveyQuestionDropdown {
     >
       <div className={this.question.cssClasses.controlValue}>
         {text}
-        <div>{q.readOnlyText}</div>
       </div>
       {this.createClearButton()}
     </div>);

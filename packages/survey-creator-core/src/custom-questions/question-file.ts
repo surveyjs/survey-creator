@@ -54,11 +54,15 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   @property() private _renderedValue: string = "";
   @property() private notEmptyValuePlaceholder: string = "";
   @property() public placeholder: string;
+  @property() public disableInput: boolean;
 
   public get renderedPlaceholder() {
     return this.notEmptyValuePlaceholder || this.placeholder;
   }
 
+  public get isTextInputReadOnly(): boolean {
+    return this.disableInput || this.isReadOnly;
+  }
   protected updateRenderedValue(value: string) {
     const matchBase64 = !!value ? value.match(/^data:((?:\w+\/(?:(?!;).)+)?)((?:;[\w\W]*?[^;])*),/) : null;
     if (matchBase64) {
@@ -129,8 +133,12 @@ export class QuestionFileEditorModel extends QuestionFileModel {
     }
   }
 }
-Serializer.addClass("fileedit", ["placeholder:string"], () => new QuestionFileEditorModel(""), "file");
-
+Serializer.addClass("fileedit",
+  [
+    "placeholder:string",
+    { name: "disableInput:boolean", default: false },
+  ]
+  , () => new QuestionFileEditorModel(""), "file");
 QuestionFactory.Instance.registerQuestion("fileedit", name => {
   return new QuestionFileEditorModel(name);
 }, false);

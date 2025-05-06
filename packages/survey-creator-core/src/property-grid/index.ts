@@ -137,7 +137,7 @@ export interface IPropertyGridEditor {
     property: JsonObjectProperty,
     question: Question,
     options: ISurveyCreatorOptions
-  ) => IPropertyEditorSetup;
+  ) => void;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions,
     propGridDefinition?: ISurveyPropertyGridDefinition) => void;
   onSetup?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
@@ -414,18 +414,6 @@ export class PropertyGridTitleActionsCreator {
       }
     };
   }
-  private showModalPropertyEditor(
-    editor: IPropertyGridEditor,
-    property: JsonObjectProperty,
-    question: Question
-  ) {
-    return editor.showModalPropertyEditor(
-      editor,
-      property,
-      question,
-      this.options
-    );
-  }
 
   private createEditorSetupAction(
     editor: IPropertyGridEditor,
@@ -441,7 +429,12 @@ export class PropertyGridTitleActionsCreator {
       title: getLocString("pe.edit"),
       showTitle: false,
       action: () => {
-        return this.showModalPropertyEditor(editor, property, question);
+        editor.showModalPropertyEditor(
+          editor,
+          property,
+          question,
+          this.options
+        );
       }
     };
     return setupAction;
@@ -463,13 +456,6 @@ export class PropertyGridTitleActionsCreator {
         action.iconName = this.getHelpActionIconName(question);
       }
     });
-    const baseOnMouseDown = action.doMouseDown;
-    action.doMouseDown = (args: any) => {
-      baseOnMouseDown.call(action);
-      const evt = !!args.originalEvent ? args.originalEvent : args;
-      evt.preventDefault();
-      evt.stopPropagation();
-    };
     return action;
   }
   private getHelpActionIconName(question: Question): string {
@@ -1431,7 +1417,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     question: Question,
     options: ISurveyCreatorOptions,
     onClose?: (reason: "apply" | "cancel") => void
-  ): IPropertyEditorSetup {
+  ): void {
     const obj = (<any>question).obj;
     const surveyPropertyEditor = editor.createPropertyEditorSetup(
       obj,
@@ -1439,11 +1425,10 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       question,
       options
     );
-    if (!surveyPropertyEditor) return null;
+    if (!surveyPropertyEditor || !settings.showDialog) return;
     if (question.isReadOnly) {
       surveyPropertyEditor.editSurvey.mode = "display";
     }
-    if (!settings.showDialog) return surveyPropertyEditor;
     const prevCurrentLocale = surveyLocalization.currentLocale;
     const locale = editorLocalization.currentLocale;
     surveyLocalization.currentLocale = locale;
@@ -1477,7 +1462,6 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     surveyLocalization.currentLocale = prevCurrentLocale;
     this.onModalPropertyEditorShown(editor, property, question, options);
     options.onPropertyGridShowModalCallback(obj, property, question, surveyPropertyEditor, popupModel);
-    return surveyPropertyEditor;
   }
   protected onModalPropertyEditorShown(editor: IPropertyGridEditor,
     property: JsonObjectProperty, question: Question,
@@ -1593,8 +1577,9 @@ export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
       { value: "true", text: editorLocalization.getString("pe.enabled") },
     ];
 
+    const _renderAsButtonGroup = creatorSettings.propertyGrid.useButtonGroup;
     const res: any = {
-      type: "buttongroup",
+      type: _renderAsButtonGroup ? "buttongroup" : "dropdown",
       choices: choices,
       showOptionsCaption: false
     };
@@ -1908,10 +1893,9 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   ): any {
     var choices = this.getChoices(obj, prop);
 
+    const _renderAsButtonGroup = this.renderAsButtonGroup(prop, choices);
     var json: any = {
-      type: this.renderAsButtonGroup(prop, choices)
-        ? "buttongroup"
-        : "dropdown",
+      type: _renderAsButtonGroup ? "buttongroup" : "dropdown",
       choices: choices,
       showOptionsCaption: false
     };

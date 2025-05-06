@@ -11,8 +11,10 @@ The `dateDiff()` function allows you to calculate the difference between two dat
 
 ## Supported Types of Duration
 
-SurveyJS Form Builder supports three built-in duration types:
+SurveyJS Form Builder supports five built-in duration types:
 
+- Minutes
+- Hours
 - Days
 - Months
 - Years
@@ -40,8 +42,8 @@ If you want the calculations to happen behind the scenes, you can create a hidde
 For single values ("10 days", "5 months", "6 years"), use the following syntax to estimate duration:
 
 - Days &mdash; `dateDiff({firstDate}, {secondDate}, 'days')`
-- Hours &mdash; `dateDiff({firstDate}, {secondDate}, 'hours')`
-- Minutes &mdash; `dateDiff({firstDate}, {secondDate}, 'minutes')`
+- Hours &mdash; `dateDiff({firstDateTime}, {secondDateTime}, 'hours')`
+- Minutes &mdash; `dateDiff({firstDateTime}, {secondDateTime}, 'minutes')`
 - Months &mdash; `dateDiff({firstDate}, {secondDate}, 'months')`
 - Years &mdash; `dateDiff({firstDate}, {secondDate}, 'years')`
 
@@ -53,6 +55,10 @@ Combined values are commonly used when you want your duration estimate to be pre
 
 - Incomplete year in days &mdash; `dateDiff({firstDate}, {secondDate}, 'days') % 365` 
 - Incomplete year in months &mdash; `dateDiff({firstDate}, {secondDate}, 'months') % 12`
+
+If you need to calculate the number of minutes in an incomplete hour, use the following syntax:
+
+- Incomplete hour in minutes &mdash; `dateDiff({firstDateTime}, {secondDateTime}, 'hours') % 60`
 
 ## Outcome
 

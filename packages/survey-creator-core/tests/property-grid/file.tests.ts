@@ -284,3 +284,20 @@ test("Check onOpenFileChooser called and onUploadFile context exists", () => {
   expect(lastUploadOptions.elementType).toEqual("image");
   expect(lastUploadOptions.propertyName).toEqual("imageLink");
 });
+
+test("Check isTextInputReadOnly", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = creator.survey.getAllQuestions()[0];
+  const propertyGrid = new PropertyGridModelTester(question, creator);
+  const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
+  expect(questionEditor.isTextInputReadOnly).toBe(false);
+  questionEditor.disableInput = true;
+  expect(questionEditor.isTextInputReadOnly).toBe(true);
+  questionEditor.disableInput = false;
+  expect(questionEditor.isTextInputReadOnly).toBe(false);
+  questionEditor.readOnly = true;
+  expect(questionEditor.isTextInputReadOnly).toBe(true);
+});

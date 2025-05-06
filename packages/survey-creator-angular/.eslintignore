@@ -1,4 +1,5 @@
 .vscode/
 build/
 example/
+dist/
 node_modules/

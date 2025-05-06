@@ -590,6 +590,7 @@ var simplifiedChineseTranslation = {
     transposeData: "将行转置为列",
     addRowText: "添加条目按钮文本",
     removeRowText: "删除条目按钮文本",
+    singleInputTitleTemplate: "输入字段标题模式",
     rateMin: "最小评分",
     rateMax: "最大评分",
     rateStep: "评分间隔",
@@ -1119,7 +1120,8 @@ var simplifiedChineseTranslation = {
     questionsOnPageMode: {
       standard: "原始结构",
       singlePage: "在一个页面上显示所有问题",
-      questionPerPage: "每页显示一个问题"
+      questionPerPage: "每页显示一个问题",
+      inputPerPage: "每页显示单个输入字段"
     },
     noPreview: "无预览",
     showAllQuestions: "显示所有问题",
@@ -1320,7 +1322,9 @@ var simplifiedChineseTranslation = {
   ts: {
     selectPage: "选择测试页",
     showInvisibleElements: "显示隐藏元件",
-    hideInvisibleElements: "隐藏不可见元素"
+    hideInvisibleElements: "隐藏不可见元素",
+    prevPage: "以前",
+    nextPage: "下一个"
   },
   validators: {
     answercountvalidator: "数量检查",
@@ -1623,7 +1627,8 @@ var simplifiedChineseTranslation = {
       overlapEnabled: "启用后，调查的顶部将覆盖页眉的底部。",
       mobileHeight: "设置为 0 时，将自动计算高度以适应标题的内容。"
     },
-    progressBarInheritWidthFrom: "“与容器相同”选项会自动调整进度条区域的宽度，以适应放置调查的 HTML 元素。"
+    progressBarInheritWidthFrom: "“与容器相同”选项会自动调整进度条区域的宽度，以适应放置调查的 HTML 元素。",
+    singleInputTitleTemplate: "当“调查布局”设置为“每页单个输入字段”时使用。在此布局中，矩阵被拆分，以便每个输入字段都显示在单独的页面上。使用 {rowIndex} 占位符插入自动编号，使用 {rowTitle} 或 {rowName} 引用行的标题或 ID，使用 {row.columnid} 包含特定矩阵列的值。"
   },
   // Properties
   p: {
@@ -3194,3 +3199,8 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // page.description: "Type a page subtitle." => "键入页面副标题。"
 // page.navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\"." => "显示在进度条或目录 （TOC） 中的导航按钮上的说明。如果将此字段留空，则导航按钮将使用页面标题或页面名称。要启用进度条或 TOC，请转到“调查”→“导航”。"
 // pehelp.allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session." => "如果下拉列表中没有所需的选项，则选择以允许受访者添加自己的选择。自定义选项将仅在当前浏览器会话期间临时存储。"
+// pe.singleInputTitleTemplate: "Input field title pattern" => "输入字段标题模式"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "每页显示单个输入字段"
+// ts.prevPage: "Previous" => "以前"
+// ts.nextPage: "Next" => "下一个"
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "当“调查布局”设置为“每页单个输入字段”时使用。在此布局中，矩阵被拆分，以便每个输入字段都显示在单独的页面上。使用 {rowIndex} 占位符插入自动编号，使用 {rowTitle} 或 {rowName} 引用行的标题或 ID，使用 {row.columnid} 包含特定矩阵列的值。"

@@ -1443,7 +1443,7 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
   expect(actions[1].enabled).toBeFalsy();
   expect(updater()).toBeFalsy();
 });
-test("property-grid-setup action dynamic enabled property Bug#6751", () => {
+test.skip("We decided to support editing visibleIf/enableIf. property-grid-setup action dynamic enabled property Bug#6751", () => {
   const question1 = new QuestionDropdownModel("q1");
   question1.choices = [1, 2, 3];
   const propertyGrid = new PropertyGridModelTester(question1);
@@ -1460,6 +1460,17 @@ test("property-grid-setup action dynamic enabled property Bug#6751", () => {
   expect(action.enabled).toBeFalsy();
   visibleIfQuestion.value = "";
   expect(action.enabled).toBeTruthy();
+});
+test("property-grid-setup disable for multiple", () => {
+  const question1 = new QuestionDropdownModel("q1");
+  question1.choices = [1, { value: 2, text: { default: "t1", de: "t2" } }, 3];
+  const propertyGrid = new PropertyGridModelTester(question1);
+  const choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const action = choicesQuestion.getTitleToolbar().getActionById("property-grid-setup");
+  expect(action).toBeTruthy();
+  expect(action.enabled).toBeFalsy();
 });
 test("options.onSetPropertyEditorOptionsCallback - allowBatchEdit", () => {
   const options = new EmptySurveyCreatorOptions();
@@ -2552,31 +2563,33 @@ test("We should not have 'Others' category in our objects", () => {
 });
 test("expression editor in trigger expression", () => {
   PropertyGridEditorCollection.register(new PropertyGridEditorCondition());
-  var survey = new SurveyModel({
+  const creator = new CreatorTester();
+  creator.JSON = {
     elements: [
       { type: "text", name: "q1" }
     ]
+  };
+  creator.onPropertyGridShowPopup.add((_, options) => {
+    const conditionEditor = <ConditionEditor>options.popupEditor;
+    expect(conditionEditor).toBeTruthy();
+    expect(conditionEditor.survey).toEqual(survey);
+    expect(conditionEditor.object).toEqual(survey.triggers[0]);
+    conditionEditor.text = "{q1} = 1";
+    conditionEditor.apply();
+    expect(survey.triggers[0].expression).toEqual("{q1} = 1");
   });
+  const survey = creator.survey;
   survey.triggers.push(new SurveyTriggerRunExpression());
-  var propertyGrid = new PropertyGridModelTester(survey);
-  var triggersQuestion = <QuestionMatrixDynamicModel>(
-    propertyGrid.survey.getQuestionByName("triggers")
-  );
+  const triggersQuestion = <QuestionMatrixDynamicModel>(creator.propertyGrid.getQuestionByName("triggers"));
   expect(triggersQuestion).toBeTruthy(); //visibleIf is here
   expect(triggersQuestion.visibleRows).toHaveLength(1);
   triggersQuestion.visibleRows[0].showDetailPanel();
-  var expressionQuestion = triggersQuestion.visibleRows[0].detailPanel.getQuestionByName("expression");
+  const expressionQuestion = triggersQuestion.visibleRows[0].detailPanel.getQuestionByName("expression");
   expect(expressionQuestion.isVisible).toBeTruthy();
-  var actions = expressionQuestion.getTitleActions();
-  var setupAction = findSetupAction(actions);
+  const actions = expressionQuestion.getTitleActions();
+  const setupAction = findSetupAction(actions);
   expect(setupAction).toBeTruthy();
-  var conditionEditor = <ConditionEditor>setupAction.action();
-  expect(conditionEditor).toBeTruthy();
-  expect(conditionEditor.survey).toEqual(survey);
-  expect(conditionEditor.object).toEqual(survey.triggers[0]);
-  conditionEditor.text = "{q1} = 1";
-  conditionEditor.apply();
-  expect(survey.triggers[0].expression).toEqual("{q1} = 1");
+  setupAction.action();
 });
 test("Show empty rows template if there is no rows", () => {
   PropertyGridEditorCollection.register(new PropertyGridEditorCondition());
@@ -2618,6 +2631,16 @@ test("Espace new line and tabs, Bug#6818", () => {
   propEditor.value = "{q2} + '\\n' + {q3} + '\\t' + {q4}";
   expect(q1.setValueExpression).toEqual("{q2} + '\n' + {q3} + '\t' + {q4}");
 });
+test("Do not modify expression value on showing it, Bug#6860", () => {
+  const question = new QuestionTextModel("q1");
+  question.resetValueIf = "{a} = 1\nand\n{b} =2";
+  const propertyGrid = new PropertyGridModelTester(question);
+  const propEditor = propertyGrid.survey.getQuestionByName("resetValueIf");
+  expect(propEditor.value).toEqual("{a} = 1\nand\n{b} =2");
+  propEditor.value = "{a}=3\nor\n{c}<4";
+  expect(question.resetValueIf).toEqual("{a}=3\nor\n{c}<4");
+});
+
 test("Different property editors for trigger value", () => {
   const prop = Serializer.findProperty("setvaluetrigger", "setValue");
   expect(prop).toBeTruthy();

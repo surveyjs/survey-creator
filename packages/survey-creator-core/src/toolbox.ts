@@ -82,6 +82,7 @@ export interface IQuestionToolboxItem extends IAction {
    * Default value: `true`
    */
   enabled?: boolean;
+  showInToolboxOnly?: boolean;
   getArea?: (el: HTMLElement) => HTMLElement;
   clearSubitems?(): void;
   addSubitem?(subitem: IQuestionToolboxItem, index: number): void;
@@ -137,6 +138,7 @@ export class QuestionToolboxCategory extends Base {
 export class QuestionToolboxItem extends Action implements IQuestionToolboxItem {
   public propName: string;
   public propValue: string;
+  public showInToolboxOnly: boolean = false;
   static getItemClassNames(iconName?: string): string {
     return new CssClassBuilder()
       .append("svc-toolbox__item")
@@ -149,7 +151,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     if (!this.id) {
       this.id = this.name;
     }
-
+    this.showInToolboxOnly = item.showInToolboxOnly === true;
     const originalCss = this.css;
     this.css = new ComputedUpdater(() => {
       return new CssClassBuilder()

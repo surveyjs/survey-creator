@@ -15,8 +15,7 @@
         [attr.aria-expanded]="model.ariaExpanded"
       >
         <div [class]="model.cssClasses.controlValue">
-          <sv-ng-string *ngIf="model.selectedItemLocText" [model]="model.selectedItemLocText"></sv-ng-string>
-          <div>{{model.readOnlyText}}</div>
+          <sv-ng-string *ngIf="model.locReadOnlyText" [model]="model.locReadOnlyText"></sv-ng-string>
         </div>
         <div *ngIf="model.allowClear && model.cssClasses.cleanButtonIconId" [class]="model.cssClasses.cleanButton" (click)="clear($event)" [visible]="!model.isEmpty()">
           <svg [class]="model.cssClasses.cleanButtonSvg" [iconName]="model.cssClasses.cleanButtonIconId" [size]="'auto'" [title]="model.clearCaption" sv-ng-svg-icon></svg>
@@ -25,8 +24,7 @@
         <sv-ng-popup [popupModel]="model.popupModel"></sv-ng-popup>
     </ng-container>
     <div disabled *ngIf="model.isReadOnly" [class]="model.getControlClass()" [attr.id]="model.inputId">
-      <sv-ng-string *ngIf="model.selectedItemLocText" [model]="model.selectedItemLocText"></sv-ng-string>
-      <div>{{model.readOnlyText}}</div>
+      <sv-ng-string *ngIf="model.locReadOnlyText" [model]="model.locReadOnlyText"></sv-ng-string>
     </div>
   </div>
 </ng-template>
