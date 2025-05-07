@@ -157,7 +157,6 @@ test("Scrollbar theming", async (t) => {
 
     const expandedGroup = Selector(".spg-theme-builder-root .spg-panel.sd-element--expanded");
     await t
-      .click(getPropertyGridCategory("General"))
       .click(expandedGroup.find(".spg-button-group__item-caption").withText("Dark"))
       .hover(Selector(".svd-simulator-main"));
 
