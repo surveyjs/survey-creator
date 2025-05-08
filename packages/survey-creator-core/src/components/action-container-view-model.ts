@@ -5,11 +5,11 @@ import {
 } from "survey-core";
 import { listComponentCss } from "./list-theme";
 class SurveyElementResponsivityManager extends ResponsivityManager {
-  constructor(container: HTMLDivElement, model: AdaptiveActionContainer, private onGetAllowResponsivenessCallback?: () => boolean) {
+  constructor(container: HTMLDivElement, model: SurveyElementActionContainer) {
     super(container, model);
   }
   shouldProcessResponsiveness():boolean {
-    return super.shouldProcessResponsiveness() && (!this.onGetAllowResponsivenessCallback || this.onGetAllowResponsivenessCallback());
+    return (this["model"] as SurveyElementActionContainer).isResponsivenessAllowed && super.shouldProcessResponsiveness();
   }
 }
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
@@ -93,14 +93,17 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
 
     this.hiddenItemsListModel.setItems(items.filter(i => i.mode == "popup").map(i => i.innerItem));
   }
-  private isResponsivenessAllowed: boolean = false;
+  private _isResponsivenessAllowed: boolean = false;
   allowResponsiveness() {
-    if (!this.isResponsivenessAllowed) {
-      this.isResponsivenessAllowed = true;
+    if (!this._isResponsivenessAllowed) {
+      this._isResponsivenessAllowed = true;
       this.updateCallback && this.updateCallback(true);
     }
   }
+  public get isResponsivenessAllowed() {
+    return this._isResponsivenessAllowed;
+  }
   protected createResponsivityManager(container: HTMLDivElement): ResponsivityManager {
-    return new SurveyElementResponsivityManager(container, this, () => this.isResponsivenessAllowed);
+    return new SurveyElementResponsivityManager(container, this);
   }
 }
