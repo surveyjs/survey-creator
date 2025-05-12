@@ -139,6 +139,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public propName: string;
   public propValue: string;
   public showInToolboxOnly: boolean = false;
+  public needDefaultSubitem: boolean = false;
   static getItemClassNames(iconName?: string): string {
     return new CssClassBuilder()
       .append("svc-toolbox__item")
