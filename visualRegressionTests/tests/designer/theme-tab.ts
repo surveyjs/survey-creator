@@ -135,3 +135,31 @@ test("Reset theme popup dialog view", async (t) => {
     await takeElementScreenshot("theme-tab-reset-popup-dialog.png", Selector(".sv-popup__body-content").filterVisible(), t, comparer);
   });
 });
+
+test("Scrollbar theming", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1280, 900);
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "html",
+              "name": "question1",
+              "html": "<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>"
+            }
+          ]
+        }
+      ]
+    });
+    await t.click(getTabbedMenuItemByText(creatorTabThemeName));
+
+    const expandedGroup = Selector(".spg-theme-builder-root .spg-panel.sd-element--expanded");
+    await t
+      .click(expandedGroup.find(".spg-button-group__item-caption").withText("Dark"))
+      .hover(Selector(".svd-simulator-main"));
+
+    await takeElementScreenshot("theme-tab-scrollbar.png", Selector(".svd-simulator-main").filterVisible(), t, comparer);
+  });
+});
