@@ -748,7 +748,7 @@ export var enStrings = {
       showLabels: "Show scale labels",
       segmentCount: "Segments",
       tooltipVisibilityPG: "Show tooltips",
-      allowSwap: "Allow swap thumbs"
+      allowSwap: "Allow thumb crossing"
     },
     hideIfChoicesEmpty: "Hide the question if it has no choices",
     minWidth: "Minimum width",

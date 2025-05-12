@@ -259,7 +259,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "labelFormat", tab: "sliderSettings" },
       { name: "tooltipFormat", tab: "sliderSettings" },
       { name: "allowSwap", tab: "sliderSettings" },
-      { name: "showEdgeLabels", tab: "sliderSettings" },
       { name: "labelCount", tab: "sliderSettings" },
       { name: "allowClear", tab: "sliderSettings" },
     ],
