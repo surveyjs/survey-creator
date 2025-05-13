@@ -15,37 +15,40 @@
 export interface ICreatorOptions {
   [index: string]: any;
   /**
-   * Specifies whether to display the Designer tab.
+   * Specifies whether to display the [Designer](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#designer-tab) tab.
    *
    * Default value: `true`
    */
   showDesignerTab?: boolean;
   /**
-   * Specifies whether to display the Preview tab.
+   * Specifies whether to display the [Preview](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#preview-tab) tab.
    *
    * Default value: `true`
    */
   showPreviewTab?: boolean;
   /**
-   * Specifies whether to display the JSON Editor tab.
+   * Specifies whether to display the [JSON Editor](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#json-editor-tab) tab.
    *
    * Default value: `true`
    */
   showJSONEditorTab?: boolean;
   /**
-   * Specifies whether to display the Logic tab.
+   * Specifies whether to display the [Logic](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#logic-tab) tab.
    *
    * Default value: `true`
    */
   showLogicTab?: boolean;
   /**
-   * Specifies whether to display the Translation tab.
+   * Specifies whether to display the [Translation](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#translation-tab) tab.
    *
    * Default value: `false`
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/create-multilingual-forms/ (linkStyle))
+   * @see clearTranslationsOnSourceTextChange
    */
   showTranslationTab?: boolean;
   /**
-   * Specifies whether to display the Themes tab.
+   * Specifies whether to display the [Themes](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#themes-tab) tab.
    *
    * Default value: `false`
    *
@@ -62,6 +65,8 @@ export interface ICreatorOptions {
    * Specifies whether the "Zoom In", "Zoom Out", and "Zoom to 100%" buttons are available.
    *
    * Default value: `true`
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/expand-and-collapse-survey-elements/ (linkStyle))
    */
   allowZoom?: boolean;
   /**
@@ -198,6 +203,8 @@ export interface ICreatorOptions {
    * Specifies whether Survey Creator UI elements display survey, page, and question titles instead of their names.
    *
    * Default value: `false`
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/dynamically-modify-newly-added-questions/ (linkStyle))
    */
   useElementTitles?: boolean;
   /**
@@ -324,6 +331,8 @@ export interface ICreatorOptions {
    * Limits question and panel types available in the Toolbox and Add Question menu.
    *
    * Refer to the [Limit Available Question and Panel Types](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox#limit-available-question-and-panel-types) help topic for more information.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-customization/ (linkStyle))
    */
   questionTypes?: Array<string>;
   /**
@@ -351,6 +360,8 @@ export interface ICreatorOptions {
    *
    * - `"bypage"`
    * Questions and panels are divided between pages. Users can use the page navigator to switch to a required page.
+   *
+   * [View Page-By-Page Mode Demo](https://surveyjs.io/survey-creator/examples/page-level-editing/ (linkStyle))
    */
   pageEditMode?: "standard" | "single" | "bypage";
   enableLinkFileEditor?: boolean;
@@ -362,6 +373,8 @@ export interface ICreatorOptions {
    * - `"onhover"` (default) - Displays an expand/collapse button when a survey element is hovered over or selected.
    * - `"always"` - Displays the expand/collapse buttons permanently.
    * - `"never"` - Hides the expand/collapse buttons.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/expand-and-collapse-survey-elements/ (linkStyle))
    * @see [SurveyCreatorModel.onElementGetExpandCollapseState](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementGetExpandCollapseState)
    * @see collapseOnDrag
    */
@@ -410,6 +423,10 @@ export interface ICreatorOptions {
    *
    * - `"buttons"` (default)
    * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid.
+   *
+   * [Accordion Mode Demo](https://surveyjs.io/survey-creator/examples/property-grid-accordion-view/ (linkStyle))
+   *
+   * [Buttons Mode Demo](https://surveyjs.io/survey-creator/examples/free-nps-survey-template/ (linkStyle))
    */
   propertyGridNavigationMode?: "buttons" | "accordion";
   /**
@@ -429,6 +446,9 @@ export interface ICreatorOptions {
    * Specifies whether to clear translations to other languages when a source language translation is changed.
    *
    * Default value: `false`
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/ai-translation/ (linkStyle))
+   * @see showTranslationTab
    */
   clearTranslationsOnSourceTextChange?: boolean;
 }
