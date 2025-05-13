@@ -480,7 +480,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   public static checkForNeedDefaultSubitems(items: QuestionToolboxItem[]) {
-    items.forEach((item: QuestionToolboxItem) => {
+    items.filter(i => i.needDefaultSubitem === undefined).forEach((item: QuestionToolboxItem) => {
       item.needDefaultSubitem = false;
       if (item.items?.length > 0) {
         item.needDefaultSubitem = true;

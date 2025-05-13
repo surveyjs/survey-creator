@@ -139,7 +139,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public propName: string;
   public propValue: string;
   public showInToolboxOnly: boolean = false;
-  public needDefaultSubitem: boolean = false;
+  public needDefaultSubitem: boolean = undefined;
   static getItemClassNames(iconName?: string): string {
     return new CssClassBuilder()
       .append("svc-toolbox__item")
@@ -279,6 +279,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
    */
   public clearSubitems(): void {
     if (this.hasSubItems) {
+      this.needDefaultSubitem = undefined;
       this.items = [];
       this.component = "";
       this.popupModel.dispose();
@@ -295,6 +296,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
    */
   public addSubitem(subitem: IQuestionToolboxItem, index: number = -1): void {
     if (!subitem) return;
+    this.needDefaultSubitem = undefined;
     const newItem: QuestionToolboxItem = new QuestionToolboxItem(subitem);
     newItem.iconName = "";
     if (!newItem.className) newItem.className = QuestionToolboxItem.getItemClassNames(newItem.iconName);
@@ -317,7 +319,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
    */
   public removeSubitem(subitem: IQuestionToolboxItem | string): void {
     if (!this.hasSubItems || !subitem) return;
-
+    this.needDefaultSubitem = undefined;
     const id: string = (subitem as IQuestionToolboxItem)?.id || subitem as string;
     if (!id) return;
 
