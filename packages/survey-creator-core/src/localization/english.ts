@@ -47,6 +47,7 @@ export var enStrings = {
     paneldynamic: "Dynamic Panel",
     radiogroup: "Radio Button Group",
     rating: "Rating Scale",
+    slider: "Slider",
     text: "Single-Line Input",
     boolean: "Yes/No (Boolean)",
     expression: "Expression (read-only)",
