@@ -425,4 +425,8 @@ export class TabDesignerViewModel extends Base {
     rootCss += " svc-tab-designer--" + this.creator.pageEditMode + "-mode";
     return rootCss;
   }
+
+  public setHasScroll = (hasScroll: boolean) => {
+    this.creator.hasScroll = hasScroll;
+  };
 }
