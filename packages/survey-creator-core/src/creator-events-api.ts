@@ -190,7 +190,7 @@ export interface ElementGetActionsEvent extends DefineElementMenuItemsEvent {
    */
   element: Base;
   /**
-   * An array of adorner actions. You can add, modify, or remove actions from this array.
+   * An array of adorner actions. You can add, modify, or remove actions from this array. Refer to the [`IAction`](https://surveyjs.io/form-library/documentation/api-reference/iaction) interface description for information about the properties of an action object.
    */
   actions: IAction[];
 }
@@ -279,7 +279,7 @@ export interface PropertyEditorUpdateTitleActionsEvent {
    */
   property: JsonObjectProperty;
   /**
-   * A list of title actions.
+   * A list of title actions. Refer to the [`IAction`](https://surveyjs.io/form-library/documentation/api-reference/iaction) interface description for information about the properties of an action object.
    */
   titleActions: IAction[];
 }
@@ -685,7 +685,7 @@ export interface QuestionConvertingEvent {
 
 export interface PageGetFooterActionsEvent {
   /**
-   * An array of actions. You can add, modify, or remove actions from this array.
+   * An array of actions. You can add, modify, or remove actions from this array. Refer to the [`IAction`](https://surveyjs.io/form-library/documentation/api-reference/iaction) interface description for information about the properties of an action object.
    */
   actions: IAction[];
   /**
