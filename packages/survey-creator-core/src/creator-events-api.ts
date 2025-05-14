@@ -190,7 +190,7 @@ export interface ElementGetActionsEvent extends DefineElementMenuItemsEvent {
    */
   element: Base;
   /**
-   * An array of adorner actions. You can add, modify, or remove actions from this array.
+   * An array of adorner actions. You can add, modify, or remove actions from this array. Refer to the [`IAction`](https://surveyjs.io/form-library/documentation/api-reference/iaction) interface description for information about the properties of an action object.
    */
   actions: IAction[];
 }
@@ -279,7 +279,7 @@ export interface PropertyEditorUpdateTitleActionsEvent {
    */
   property: JsonObjectProperty;
   /**
-   * A list of title actions.
+   * A list of title actions. Refer to the [`IAction`](https://surveyjs.io/form-library/documentation/api-reference/iaction) interface description for information about the properties of an action object.
    */
   titleActions: IAction[];
 }
@@ -685,7 +685,7 @@ export interface QuestionConvertingEvent {
 
 export interface PageGetFooterActionsEvent {
   /**
-   * An array of actions. You can add, modify, or remove actions from this array.
+   * An array of actions. You can add, modify, or remove actions from this array. Refer to the [`IAction`](https://surveyjs.io/form-library/documentation/api-reference/iaction) interface description for information about the properties of an action object.
    */
   actions: IAction[];
   /**
@@ -702,9 +702,9 @@ export interface PageGetFooterActionsEvent {
 export interface SurveyInstanceCreatedEvent {
   /**
    * A Survey Creator UI element for which a survey is instantiated. Contains one of the following values:
-   *   - `"designer-tab"` - A preview survey in the Designer tab.
-   *   - `"preview-tab"` - A preview survey in the Preview tab.
-   *   - `"property-grid"` - A survey that represents the Property Grid.
+   *   - `"designer-tab"` - A preview survey in the Designer tab. [View Demo](https://surveyjs.io/survey-creator/examples/customize-form-builder-ui/)
+   *   - `"preview-tab"` - A preview survey in the Preview tab. [View Demo](https://surveyjs.io/survey-creator/examples/customize-form-builder-ui/)
+   *   - `"property-grid"` - A survey that represents the Property Grid. [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/)
    *   - `"default-value-popup-editor"` - A survey that allows you to specify the default or correct value (for quizzes) in a pop-up window.
    *   - `"logic-rule:condition-editor"` - A survey that allows you to configure conditions in a logic rule.
    *   - `"logic-rule:action-editor"` - A survey that allows you to configure actions in a logic rule.
