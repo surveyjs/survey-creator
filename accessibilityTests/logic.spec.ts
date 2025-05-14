@@ -44,7 +44,7 @@ test.describe("logic a11y", () => {
       ],
     });
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
-    await page.locator("button[title='Edit']").nth(0).click();
+    await page.locator("button[title='Show Details']").nth(0).click();
     await checkA11y(page, ".svc-creator", { axeOptions });
   });
 });

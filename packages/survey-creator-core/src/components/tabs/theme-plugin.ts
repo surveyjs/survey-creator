@@ -923,6 +923,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    * A `ThemeTabPlugin` instance that raised the event.
    * - `options.theme`: [`ITheme`](https://surveyjs.io/form-library/documentation/api-reference/itheme)\
    * A selected theme.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/save-custom-theme/ (linkStyle))
    * @see availableThemes
    * @see addTheme
    * @see removeTheme

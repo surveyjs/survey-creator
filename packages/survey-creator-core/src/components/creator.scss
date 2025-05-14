@@ -19,36 +19,38 @@ survey-creator,
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
 
-  @-moz-document url-prefix() {
-    scrollbar-width: thin;
-    scrollbar-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026)) transparent;
-  }
+  :not(.svd-simulator-main *) {
+    @-moz-document url-prefix() {
+      scrollbar-width: thin;
+      scrollbar-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026)) transparent;
+    }
 
-  ::-webkit-scrollbar {
-    width: var(--ctr-scrollbar-width, var(--sjs-size-x150));
-    height: var(--ctr-scrollbar-width, var(--sjs-size-x150));
-    background-color: transparent;
-  }
+    &::-webkit-scrollbar {
+      width: var(--ctr-scrollbar-width, var(--sjs-size-x150));
+      height: var(--ctr-scrollbar-width, var(--sjs-size-x150));
+      background-color: transparent;
+    }
 
-  ::-webkit-scrollbar-thumb {
-    border: var(--ctr-scrollbar-padding-vertical, var(--sjs-spacing-x05)) solid rgba(0, 0, 0, 0);
-    background-clip: padding-box;
-    border-radius: 1024px;
-    background-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026));
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    border: var(--ctr-scrollbar-padding-vertical-hovered, var(--sjs-spacing-x025)) solid rgba(0, 0, 0, 0);
-    background-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026));
-  }
-
-  .sv-popup .sv-popup__scrolling-content {
-    ::-webkit-scrollbar-thumb:hover {
+    &::-webkit-scrollbar-thumb {
+      border: var(--ctr-scrollbar-padding-vertical, var(--sjs-spacing-x05)) solid rgba(0, 0, 0, 0);
+      background-clip: padding-box;
+      border-radius: 1024px;
       background-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026));
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      border: var(--ctr-scrollbar-padding-vertical-hovered, var(--sjs-spacing-x025)) solid rgba(0, 0, 0, 0);
+      background-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026));
+    }
+
+    .sv-popup .sv-popup__scrolling-content {
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026));
+      }
     }
   }
 }
