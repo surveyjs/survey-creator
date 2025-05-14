@@ -289,6 +289,11 @@ jobs:
           npm run visual-regression-tests:ci
         displayName: "Visual Regression Tests CreatorV2 React"
 
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+          npm run test:scr:ci
+        displayName: "Screenshot Tests CreatorV2 React"
+
       - task: CopyFiles@2
         inputs:
           SourceFolder: "$(Build.SourcesDirectory)/survey-creator/visualRegressionTests"
@@ -440,6 +445,11 @@ jobs:
           npm run visual-regression-tests:ci
         displayName: "Visual Regression Tests CreatorV2 Angular"
 
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+          npm run test:scr:ci
+        displayName: "Screenshot Tests CreatorV2 Angular"
+
       - task: CopyFiles@2
         inputs:
           SourceFolder: "$(Build.SourcesDirectory)/survey-creator/visualRegressionTests"
@@ -590,6 +600,11 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
           npm run visual-regression-tests:ci
         displayName: "Visual Regression Tests CreatorV2 Vue"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+          npm run test:scr:ci
+        displayName: "Screenshot Tests CreatorV2 Vue"
 
       - task: CopyFiles@2
         inputs:
@@ -778,6 +793,11 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
           npm run visual-regression-tests:ci
         displayName: "Visual Regression Tests CreatorV2 JS"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
+          npm run test:scr:ci
+        displayName: "Screenshot Tests CreatorV2 JS"
 
       - task: CopyFiles@2
         inputs:
