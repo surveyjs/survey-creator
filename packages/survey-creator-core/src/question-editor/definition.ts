@@ -253,6 +253,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "maxValueExpression", tab: "sliderSettings" },
       { name: "minRangeLength", tab: "sliderSettings" },
       { name: "maxRangeLength", tab: "sliderSettings" },
+      { name: "autoGenerate", tab: "sliderSettings" },
       { name: "customLabels", tab: "sliderSettings" },
       { name: "showLabels", tab: "sliderSettings" },
       { name: "tooltipVisibilityPG", tab: "sliderSettings" },
