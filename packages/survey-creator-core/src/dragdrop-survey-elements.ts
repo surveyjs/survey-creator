@@ -346,7 +346,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (dropTarget !== prevDropTarget) {
       let dropTargetPath = [];
       let target = dropTarget;
-      while (!!target) {
+      while(!!target) {
         dropTargetPath.push(target);
         target = target.parent;
       }
