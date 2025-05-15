@@ -19,7 +19,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   private dragOrClickHelper: DragOrClickHelper;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
 
-  private updateShowPlaceholder(visibleRows?: Array<QuestionRowModel>) {
+  protected updateShowPlaceholder(visibleRows?: Array<QuestionRowModel>) {
     this.showPlaceholder = !this.isGhost && (visibleRows || this.page.visibleRows).length === 0;
   }
 

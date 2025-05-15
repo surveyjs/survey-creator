@@ -390,7 +390,7 @@ test("Preset edit model, property grid, apply", () => {
   const creator = editor.creator;
   creator.JSON = { pages: [{ name: "page1" }] };
   creator.selectElement(creator.survey.pages[0]);
-  const panels2 = creator.propertyGrid.getAllPanels();
+  const panels2 = creator.propertyGrid.pages;
   expect(panels2).toHaveLength(1);
   expect(panels2[0].elements).toHaveLength(3);
 });
