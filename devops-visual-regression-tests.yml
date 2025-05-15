@@ -311,6 +311,25 @@ jobs:
         condition: always()
         displayName: "publish vrt react artifacts"
 
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator_react/test-results"
+          ArtifactName: "Creator_React_SCR"
+          publishLocation: "Container"
+        condition: always()
+        displayName: "Publish scr test artifacts"
+
+      - task: PublishTestResults@2
+        displayName: "Publish scr test results"
+        inputs:
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator_react/test-results"
+          testResultsFormat: "JUnit"
+          testResultsFiles: "e2e-junit-results.xml"
+          mergeTestResults: true
+          failTaskOnFailedTests: true
+          testRunTitle: "Creator React SCR Tests"
+        condition: always()
+
   # ======================= CreatorV2Angular ======================= #
   - job: CreatorV2Angular
     dependsOn: CreatorV2Core
