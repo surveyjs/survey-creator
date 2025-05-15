@@ -313,7 +313,7 @@ jobs:
 
       - task: PublishBuildArtifacts@1
         inputs:
-          PathtoPublish: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator_react/test-results"
+          PathtoPublish: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/test-results"
           ArtifactName: "Creator_React_SCR"
           publishLocation: "Container"
         condition: always()
@@ -322,7 +322,7 @@ jobs:
       - task: PublishTestResults@2
         displayName: "Publish scr test results"
         inputs:
-          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator_react/test-results"
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/test-results"
           testResultsFormat: "JUnit"
           testResultsFiles: "e2e-junit-results.xml"
           mergeTestResults: true
@@ -485,6 +485,25 @@ jobs:
           publishLocation: "Container"
         condition: always()
         displayName: "publish vrt angular artifacts"
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/test-results"
+          ArtifactName: "Creator_Angular_SCR"
+          publishLocation: "Container"
+        condition: always()
+        displayName: "Publish scr test artifacts"
+
+      - task: PublishTestResults@2
+        displayName: "Publish scr test results"
+        inputs:
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/test-results"
+          testResultsFormat: "JUnit"
+          testResultsFiles: "e2e-junit-results.xml"
+          mergeTestResults: true
+          failTaskOnFailedTests: true
+          testRunTitle: "Creator Angular SCR Tests"
+        condition: always()
 
   # ======================= CreatorV2Vue ======================= #
   - job: CreatorV2Vue
