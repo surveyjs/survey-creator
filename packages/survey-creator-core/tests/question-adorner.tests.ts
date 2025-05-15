@@ -1137,3 +1137,36 @@ test("Check question converter subitems", (): any => {
 
   surveySettings.animationEnabled = true;
 });
+
+test("Check question converter subitems", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+
+  // create subitems from new items (the same type, different json)
+  const text = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
+  const number = text.getSubitem("number");
+
+  expect(text.needDefaultSubitem).toBeUndefined();
+  QuestionAdornerViewModel.checkForNeedDefaultSubitems(creator.toolbox.items);
+  expect(text.needDefaultSubitem).toBeFalsy();
+
+  text.needDefaultSubitem = true;
+  QuestionAdornerViewModel.checkForNeedDefaultSubitems(creator.toolbox.items);
+  expect(text.needDefaultSubitem).toBeTruthy(); // needDefaultSubitem is not recalculated
+
+  text.removeSubitem(number);
+  QuestionAdornerViewModel.checkForNeedDefaultSubitems(creator.toolbox.items);
+  expect(text.needDefaultSubitem).toBeFalsy(); // needDefaultSubitem is recalculated after removeSubitem
+
+  text.needDefaultSubitem = true;
+  text.addSubitem(number);
+  QuestionAdornerViewModel.checkForNeedDefaultSubitems(creator.toolbox.items);
+  expect(text.needDefaultSubitem).toBeFalsy(); // needDefaultSubitem is recalculated after addSubitem
+
+  text.needDefaultSubitem = true;
+  text.clearSubitems();
+  QuestionAdornerViewModel.checkForNeedDefaultSubitems(creator.toolbox.items);
+  expect(text.needDefaultSubitem).toBeFalsy(); // needDefaultSubitem is recalculated after clearSubitems
+
+  surveySettings.animationEnabled = true;
+});
