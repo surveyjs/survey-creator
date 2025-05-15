@@ -79,7 +79,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
 
   private hoverTimeout: any;
-  @property({ defaultValue: false }) private isHovered: boolean;
 
   protected get hoverDelay(): number {
     return this.creator.pageHoverDelay;
@@ -90,7 +89,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     if (!e[processedFlagName] && e.type === "mouseover") {
       if (!this.hoverTimeout) {
         this.hoverTimeout = setTimeout(() => {
-          this.isHovered = true;
+          element.classList.add("svc-hovered");
           this.hoverTimeout = undefined;
         }, this.hoverDelay);
       }
@@ -98,7 +97,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     } else {
       clearTimeout(this.hoverTimeout);
       this.hoverTimeout = undefined;
-      this.isHovered = false;
+      element.classList.remove("svc-hovered");
     }
     this.actionContainer.allowResponsiveness();
   }
@@ -523,6 +522,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.creator.deleteElement(this.surveyElement);
   }
   protected getCss(): string {
-    return new CssClassBuilder().append("svc-hovered svc-hovered-ready", this.isHovered).toString();
+    return "";
+    //return new CssClassBuilder().append("svc-hovered svc-hovered-ready", this.isHovered).toString();
   }
 }
