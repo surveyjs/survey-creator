@@ -89,7 +89,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     if (!e[processedFlagName] && e.type === "mouseover") {
       if (!this.hoverTimeout) {
         this.hoverTimeout = setTimeout(() => {
-          element.classList.add("svc-hovered");
+          if (element) element.classList.add("svc-hovered");
           this.hoverTimeout = undefined;
         }, this.hoverDelay);
       }
@@ -97,7 +97,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     } else {
       clearTimeout(this.hoverTimeout);
       this.hoverTimeout = undefined;
-      element.classList.remove("svc-hovered");
+      if (element) element.classList.remove("svc-hovered");
     }
     this.actionContainer.allowResponsiveness();
   }
