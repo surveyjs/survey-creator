@@ -3073,7 +3073,7 @@ export class SurveyCreatorModel extends Base
   protected deleteObjectCore(obj: any) {
     if (obj.isPage) {
       var newPage = this.getNextPage(obj);
-      this.survey.removePage(obj);
+      obj.delete(false);
       this.selectElement(!!newPage ? newPage : this.survey);
     } else {
       if (this.survey.pageCount === 1) {

@@ -420,7 +420,9 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.onPageAdded.add((sender, options) => {
       const page = options.page;
       page.name = SurveyHelper.getNewName(creator.survey.pages, "category");
-      page.title = "New Category";
+      if (!page.title) {
+        page.title = "New Category";
+      }
       page.updateRows();
     });
     creator.onQuestionAdded.add((sender, options) => {
