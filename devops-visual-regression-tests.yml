@@ -234,6 +234,11 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator
+          npm run postinstall
+        displayName: "install chrome playwright"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator
           npm run lint
         displayName: "check lint"
 
@@ -432,6 +437,11 @@ jobs:
         displayName: "install chrome"
 
       - script: |
+          cd $(Build.SourcesDirectory)/survey-creator
+          npm run postinstall
+        displayName: "install chrome playwright"
+
+      - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
           rmdir node_modules\survey-angular-ui
         displayName: "delete survey-angular-ui symlink"
@@ -605,6 +615,11 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
           npx puppeteer browsers install chrome
         displayName: "install chrome"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator
+          npm run postinstall
+        displayName: "install chrome playwright"
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
@@ -787,6 +802,11 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
           npx puppeteer browsers install chrome
         displayName: "install chrome"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator
+          npm run postinstall
+        displayName: "install chrome playwright"
 
       # update 'file' npm dependencies in case of cache
       - task: CopyFiles@2
