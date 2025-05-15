@@ -61,3 +61,4 @@ packages/survey-creator-core/src/themes/index.ts
 packages/survey-creator-core/src/themes/sc2020.ts
 
 **/test-results/
+**/playwright-report/
