@@ -39,11 +39,11 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     if (this.model) {
       this.model.attachToUI(props.page, this.rootRef.current);
     }
-    this.model = new PageAdorner(
-      props.creator,
-      props.page,
-    );
+    this.model = this.createPageAdorner(props.creator, props.page);
     this.model.isGhost = this.props.isGhost;
+  }
+  protected createPageAdorner(creator: SurveyCreatorModel, page: PageModel): PageAdorner {
+    return new PageAdorner(creator, page);
   }
   shouldComponentUpdate(nextProps: any, nextState: any): boolean {
     const res = super.shouldComponentUpdate(nextProps, nextState);
