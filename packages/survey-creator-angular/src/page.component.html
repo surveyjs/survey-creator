@@ -5,7 +5,11 @@
   [id]="adorner.page.id" [attr.data-sv-drop-target-survey-page]="adorner.dropTargetName" #container>
   <div class="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
   <div class="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
-  <page [model]="model" [survey]="survey"></page>
+  <svc-page-element-content 
+    [model]="model" 
+    [survey]="survey" 
+    [creator]="creator">
+  </svc-page-element-content>
   <div *ngIf="adorner.showPlaceholder" class="svc-page__placeholder_frame">
     <div class="svc-panel__placeholder_frame">
       <div class="svc-panel__placeholder">{{adorner.placeholderText}}</div>
