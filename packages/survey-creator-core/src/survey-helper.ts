@@ -245,6 +245,10 @@ export class SurveyHelper {
     delete json["valueName"];
     delete json["choicesVisibleIf"];
     delete json["choicesEnableIf"];
+    delete json["columnsVisibleIf"];
+    delete json["columnsEnableIf"];
+    delete json["rowsVisibleIf"];
+    delete json["rowsEnableIf"];
     delete json["width"];
     delete json["minWidth"];
     delete json["maxWidth"];
