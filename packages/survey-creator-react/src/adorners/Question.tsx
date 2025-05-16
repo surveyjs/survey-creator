@@ -20,6 +20,13 @@ export interface QuestionAdornerComponentProps {
   componentData: any;
 }
 
+function QuestionElementContentFunc(props: { element: React.JSX.Element }): React.ReactElement {
+  return props.element;
+}
+
+const QuestionElementContent = React.memo(QuestionElementContentFunc);
+QuestionElementContent.displayName = "QuestionElementContent";
+
 export class QuestionAdornerComponent extends CreatorModelElement<
   QuestionAdornerComponentProps,
   any
@@ -130,7 +137,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   protected renderElementContent(): React.JSX.Element {
     return (
       <>
-        {this.props.element}
+        <QuestionElementContent element={this.props.element} />
         {this.renderElementPlaceholder()}
         {this.renderCarryForwardBanner()}
       </>
