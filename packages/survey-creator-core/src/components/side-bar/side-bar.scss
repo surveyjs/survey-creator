@@ -134,6 +134,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1)) + var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1)) + var(--ctr-menu-toolbar-button-icon-width, var(--sjs-font-size-x3)) + var(--ctr-property-grid-tabs-padding-left, var(--sjs-spacing-x150)) + var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150)));
 
 .svc-side-bar--flyout {
+  z-index: 1000;
   .svc-side-bar__shadow {
     background-color: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));
     position: absolute;
@@ -160,7 +161,6 @@ $tabs-width: calc(var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-
   .svc-sidebar-tabs {
     z-index: 1;
   }
-  z-index: 1000;
 }
 
 .svc-side-bar--mobile {
