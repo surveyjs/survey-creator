@@ -11,6 +11,7 @@ export function initLogicOperator(question: QuestionDropdownModel) {
   question.popupModel.positionMode = "flex";
   question.popupModel.showPointer = true;
   question.dropdownListModel["listModel"].searchEnabled = question.searchEnabled;
+  question.dropdownListModel["editorButtonsIsVisible"] = false;
 }
 
 export class LogicEvent extends EventBase<SurveyLogic, any> { }
