@@ -178,6 +178,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       iconName: "gear-24x24",
       iconSize: "auto",
       pressed: false,
+      visible: new ComputedUpdater(() => { return this.creator.showCreatorThemeSettings; }),
       action: () => {
         if (settingsAction.active) {
           this.closeCreatorThemeSettings();

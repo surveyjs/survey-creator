@@ -4,7 +4,8 @@ import { CreatorPresetEditorModel } from "../src/presets-editor";
 export * from "../src/preset-question-ranking";
 import { PresetItemValue } from "../src/preset-question-ranking";
 import { SurveyModel, Question } from "survey-core";
-import { SurveyCreatorModel, ICreatorPresetData, QuestionToolbox, editorLocalization } from "survey-creator-core";
+import { SurveyCreatorModel, ICreatorPresetData, QuestionToolbox, editorLocalization,
+  TabDesignerViewModel, PageAdorner } from "survey-creator-core";
 import { QuestionPresetAdornerViewModel } from "../src/components/question";
 export * from "../src/components/embedded-creator";
 //import "survey-creator-core/i18n/german";
@@ -321,8 +322,8 @@ test("Preset edit model, property grid, setup", () => {
   expect(panel.isVisible).toBeTruthy();
   const propGridSurvey = getPropGridSurvey(survey);
   expect(propGridSurvey).toBeTruthy();
-  expect(propGridSurvey.getAllPanels()).toHaveLength(10);
-  expect(propGridSurvey.getAllPanels()[0].name).toEqual("general");
+  expect(propGridSurvey.pages).toHaveLength(10);
+  expect(propGridSurvey.pages[0].name).toEqual("general");
 });
 test("Preset edit model, property grid, apply", () => {
   Serializer.findProperty("survey", "title").visible = true;
@@ -333,16 +334,16 @@ test("Preset edit model, property grid, apply", () => {
   survey.setValue("propertyGrid_definition_selector", "survey");
   let propGridCreator = getPropGridCreator(survey);
   propGridCreator.JSON = {
-    elements: [
+    pages: [
       {
-        type: "panel", "name": "general",
+        "name": "general",
         elements: [
           { type: "text", name: "locale" },
           { type: "comment", name: "title" },
         ]
       },
       {
-        type: "panel", "name": "second1",
+        "name": "second1",
         elements: [
           { type: "matrixdynamic", name: "pages" },
           { type: "matrixdynamic", name: "triggers" },
@@ -350,27 +351,27 @@ test("Preset edit model, property grid, apply", () => {
       }
     ]
   };
-  propGridCreator.survey.getPanelByName("second1").name = "second";
+  propGridCreator.survey.getPageByName("second1").name = "second";
   expect(editor.applyFromSurveyModel()).toBeTruthy();
-  const propDef = editor.preset.getJson().propertyGrid?.definition;
+  let propDef = editor.preset.getJson().propertyGrid?.definition;
   const surveyProps = propDef?.classes["survey"];
   expect(propDef?.autoGenerateProperties).toStrictEqual(false);
   expect(surveyProps?.tabs).toHaveLength(2);
   expect(surveyProps?.properties).toHaveLength(4);
 
   const propGridSurvey = getPropGridSurvey(survey);
-  const panels = propGridSurvey.getAllPanels();
-  expect(panels).toHaveLength(2);
-  expect(panels[0].name).toBe("general");
-  expect(panels[1].name).toBe("second");
-  expect(panels[0].elements).toHaveLength(2);
-  expect(panels[1].elements).toHaveLength(2);
+  const pages = propGridSurvey.pages;
+  expect(pages).toHaveLength(2);
+  expect(pages[0].name).toBe("general");
+  expect(pages[1].name).toBe("second");
+  expect(pages[0].elements).toHaveLength(2);
+  expect(pages[1].elements).toHaveLength(2);
 
   survey.setValue("propertyGrid_definition_selector", "page");
   propGridCreator.JSON = {
-    elements: [
+    pages: [
       {
-        type: "panel", "name": "general",
+        "name": "general",
         elements: [
           { type: "text", name: "name" },
           { type: "comment", name: "title" },
@@ -381,6 +382,7 @@ test("Preset edit model, property grid, apply", () => {
   };
   propGridCreator.survey.getQuestionByName("name").title = "Name 1";
   expect(editor.applyFromSurveyModel()).toBeTruthy();
+  propDef = editor.preset.getJson().propertyGrid?.definition;
   const pageProps = propDef?.classes["page"];
   expect(pageProps?.tabs).toHaveLength(0);
   expect(pageProps?.properties).toHaveLength(0);
@@ -390,9 +392,9 @@ test("Preset edit model, property grid, apply", () => {
   const creator = editor.creator;
   creator.JSON = { pages: [{ name: "page1" }] };
   creator.selectElement(creator.survey.pages[0]);
-  const panels2 = creator.propertyGrid.getAllPanels();
-  expect(panels2).toHaveLength(1);
-  expect(panels2[0].elements).toHaveLength(3);
+  const pages2 = creator.propertyGrid.visiblePages;
+  expect(pages2).toHaveLength(1);
+  expect(pages2[0].elements).toHaveLength(3);
 });
 test("Preset edit model, make general tab as second tab", () => {
   const editor = new CreatorPresetEditorModel();
@@ -447,9 +449,9 @@ test("Preset edit model, edit matrixdropdowncolumn@default", () => {
   survey.setValue("propertyGrid_definition_selector", "matrixdropdowncolumn@default");
   const propGridCreator = getPropGridCreator(survey);
   const creatorSurvey = propGridCreator.survey;
-  expect(creatorSurvey.getAllPanels()).toHaveLength(5);
-  expect(creatorSurvey.getAllPanels()[0].elements).toHaveLength(10);
-  expect(creatorSurvey.getAllPanels()[1].elements).toHaveLength(7);
+  expect(creatorSurvey.pages).toHaveLength(5);
+  expect(creatorSurvey.pages[0].elements).toHaveLength(10);
+  expect(creatorSurvey.pages[1].elements).toHaveLength(7);
 });
 test("Preset edit model, property grid & matrixdropdowncolumn@checkbox", () => {
   const editor = new CreatorPresetEditorModel();
@@ -626,14 +628,14 @@ test("Preset edit model, Keep description on deleting the question", () => {
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "text");
   const propGridCreator = getPropGridCreator(survey);
-  expect(propGridCreator.toolbox.items).toHaveLength(1);
+  expect(propGridCreator.toolbox.items).toHaveLength(0);
   const q = propGridCreator.survey.getQuestionByName("name");
   expect(q).toBeTruthy();
   propGridCreator.selectElement(q);
   propGridCreator.deleteCurrentElement();
   expect(propGridCreator.survey.getQuestionByName("name")).toBeFalsy();
-  expect(propGridCreator.toolbox.items).toHaveLength(2);
-  const json = propGridCreator.toolbox.items[1].json;
+  expect(propGridCreator.toolbox.items).toHaveLength(1);
+  const json = propGridCreator.toolbox.items[0].json;
   expect(json.description).toEqual("A question ID that is not visible to respondents.");
   expect(json.descriptionLocation).toBeFalsy();
 });
@@ -692,7 +694,7 @@ test("Preset edit model, Change localization strings title&description", () => {
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "text");
   const propGridCreator = getPropGridCreator(survey);
-  propGridCreator.survey.getPanelByName("general").title = "General Edit";
+  propGridCreator.survey.getPageByName("general").title = "General Edit";
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   const loc = editor.json.localization;
   expect(loc).toBeTruthy();
@@ -703,7 +705,7 @@ test("Preset edit model, Change localization strings title&description", () => {
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.selectElement(creator.survey.getQuestionByName("q1"));
   const propGridSurvey = getPropGridSurvey(survey);
-  expect(propGridSurvey.getPanelByName("general").title).toEqual("General Edit");
+  expect(propGridSurvey.getPageByName("general").title).toEqual("General Edit");
 });
 test("Change localization strings and then change locale for tabs", () => {
   addLocales();
@@ -726,24 +728,33 @@ test("Preset edit model, Property grid toolbox", () => {
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "survey");
   const propGridCreator = getPropGridCreator(survey);
-  expect(propGridCreator.toolbox.actions).toHaveLength(1);
-  const valPanel = propGridCreator.survey.getPanelByName("validation");
-  expect(valPanel).toBeTruthy();
-  propGridCreator.deleteElement(valPanel);
-  expect(propGridCreator.toolbox.actions).toHaveLength(4);
-  propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
-  propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("panel").json);
-  propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("panel").json);
-  const newPanel1 = propGridCreator.survey.getPanelByName("category1");
-  const newPanel2 = propGridCreator.survey.getPanelByName("category2");
-  expect(newPanel1).toBeTruthy();
-  expect(newPanel2).toBeTruthy();
-  expect(newPanel1.title).toEqual("New Category");
-  propGridCreator.selectElement(newPanel2);
-  propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("autoFocusFirstError").json);
-  expect(newPanel2.elements).toHaveLength(1);
-  expect(newPanel2.questions[0].name).toEqual("autoFocusFirstError");
+  expect(propGridCreator.toolbox.actions).toHaveLength(0);
+  const valPage = propGridCreator.survey.getPageByName("validation");
+  expect(valPage).toBeTruthy();
+  propGridCreator.deleteElement(valPage);
+  expect(propGridCreator.survey.getPageByName("validation")).toBeFalsy();
   expect(propGridCreator.toolbox.actions).toHaveLength(3);
+  propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
+
+  const pagesCount = propGridCreator.survey.pages.length;
+  const desigerTab = propGridCreator.getPlugin("designer").model as TabDesignerViewModel;
+  new PageAdorner(propGridCreator, desigerTab.newPage).isGhost = true;
+  desigerTab.newPage.title = "New Category 1";
+  expect(propGridCreator.survey.pages).toHaveLength(pagesCount + 1);
+  new PageAdorner(propGridCreator, desigerTab.newPage).isGhost = true;
+  desigerTab.newPage.title = "New Category 2";
+  expect(propGridCreator.survey.pages).toHaveLength(pagesCount + 2);
+
+  const newPage1 = propGridCreator.survey.getPageByName("category1");
+  const newPage2 = propGridCreator.survey.getPageByName("category2");
+  expect(newPage1).toBeTruthy();
+  expect(newPage2).toBeTruthy();
+  expect(newPage1.title).toEqual("New Category 1");
+  propGridCreator.selectElement(newPage2);
+  propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("autoFocusFirstError").json);
+  expect(newPage2.elements).toHaveLength(1);
+  expect(newPage2.questions[0].name).toEqual("autoFocusFirstError");
+  expect(propGridCreator.toolbox.actions).toHaveLength(2);
 });
 test("Preset edit model, Property grid change the new category name", () => {
   const editor = new CreatorPresetEditorModel();
@@ -751,32 +762,25 @@ test("Preset edit model, Property grid change the new category name", () => {
   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
   survey.setValue("propertyGrid_definition_selector", "survey");
   const propGridCreator = getPropGridCreator(survey);
-  expect(propGridCreator.toolbox.actions).toHaveLength(1);
-  const valPanel = propGridCreator.survey.getPanelByName("validation");
+  expect(propGridCreator.toolbox.actions).toHaveLength(0);
+  const valPanel = propGridCreator.survey.getPageByName("validation");
   expect(valPanel).toBeTruthy();
   propGridCreator.deleteElement(valPanel);
-  expect(propGridCreator.toolbox.actions).toHaveLength(4);
+  expect(propGridCreator.toolbox.actions).toHaveLength(3);
   propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
-  propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("panel").json);
-  const newPanel1 = propGridCreator.survey.getPanelByName("category1");
-  expect(newPanel1).toBeTruthy();
-  const panel1Adorner = new QuestionPresetAdornerViewModel(editor.creator, newPanel1, null);
-  const action1 = panel1Adorner.actionContainer.getActionById("svc_category_name");
-  expect(action1).toBeTruthy();
-  const locCategoryName1 = action1.locTitle;
-  expect(locCategoryName1.text).toBe("category1");
-  expect(action1.enabled).toBeTruthy();
-  locCategoryName1.text = "my_new_category";
-  expect(locCategoryName1.text).toBe("my_new_category");
-  expect(newPanel1.name).toBe("my_new_category");
 
-  const newPanel2 = propGridCreator.survey.getPanelByName("general");
-  const panel2Adorner = new QuestionPresetAdornerViewModel(editor.creator, newPanel2, null);
-  const action2 = panel2Adorner.actionContainer.getActionById("svc_category_name");
-  expect(action2).toBeTruthy();
-  const locCategoryName2 = action2.locTitle;
-  expect(locCategoryName2.text).toBe("general");
-  expect(action2.enabled).toBeFalsy();
+  const desigerTab = propGridCreator.getPlugin("designer").model as TabDesignerViewModel;
+  new PageAdorner(propGridCreator, desigerTab.newPage).isGhost = true;
+  desigerTab.newPage.title = "New Category 1";
+  const newPage1 = propGridCreator.survey.getPageByName("category1");
+  expect(newPage1).toBeTruthy();
+  expect(newPage1.name).toBe("category1");
+  newPage1.name = "my_new_category";
+
+  const newPage2 = propGridCreator.survey.getPageByName("general");
+  const nameQuestion: Question = newPage2["getElementsForRows"]()[0];
+  expect(nameQuestion.value).toBe("general");
+  expect(nameQuestion.isReadOnly).toBeTruthy();
 });
 test("Preset edit model, Property grid change the new category title and then name", () => {
   const editor = new CreatorPresetEditorModel();
@@ -785,25 +789,25 @@ test("Preset edit model, Property grid change the new category title and then na
   survey.setValue("propertyGrid_definition_selector", "survey");
   const propGridCreator = getPropGridCreator(survey);
   propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
-  propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("panel").json);
-  const newPanel = propGridCreator.survey.getPanelByName("category1");
-  newPanel.title = "My Category";
+  const desigerTab = propGridCreator.getPlugin("designer").model as TabDesignerViewModel;
+  new PageAdorner(propGridCreator, desigerTab.newPage).isGhost = true;
+  desigerTab.newPage.title = "New Category 1";
+
+  const newPage = propGridCreator.survey.getPageByName("category1");
+  newPage.title = "My Category";
 
   let propGridSurvey = getPropGridSurvey(survey);
-  let categoryPanel = propGridSurvey.getPanelByName("category1");
-  expect(categoryPanel).toBeTruthy();
-  expect(categoryPanel.title).toBe("My Category");
+  let categoryPage = propGridSurvey.getPageByName("category1");
+  expect(categoryPage).toBeTruthy();
+  expect(categoryPage.title).toBe("My Category");
 
-  const panel1Adorner = new QuestionPresetAdornerViewModel(editor.creator, newPanel, null);
-  const action1 = panel1Adorner.actionContainer.getActionById("svc_category_name");
-  expect(action1).toBeTruthy();
-  const locCategoryName1 = action1.locTitle;
-  locCategoryName1.text = "my_new_category";
+  const nameQuestion: Question = newPage["getElementsForRows"]()[0];
+  nameQuestion.value = "my_new_category";
   propGridSurvey = getPropGridSurvey(survey);
   expect(propGridSurvey.getPanelByName("category1")).toBeFalsy();
-  categoryPanel = propGridSurvey.getPanelByName("my_new_category");
-  expect(categoryPanel).toBeTruthy();
-  expect(categoryPanel.title).toBe("My Category");
+  categoryPage = propGridSurvey.getPageByName("my_new_category");
+  expect(categoryPage).toBeTruthy();
+  expect(categoryPage.title).toBe("My Category");
 });
 function addLocale(name: string): void {
   if (!surveyLocalization.locales[name]) {

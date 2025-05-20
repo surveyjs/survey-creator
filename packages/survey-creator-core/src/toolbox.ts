@@ -139,6 +139,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public propName: string;
   public propValue: string;
   public showInToolboxOnly: boolean = false;
+  public needDefaultSubitem: boolean = undefined;
   static getItemClassNames(iconName?: string): string {
     return new CssClassBuilder()
       .append("svc-toolbox__item")
@@ -278,6 +279,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
    */
   public clearSubitems(): void {
     if (this.hasSubItems) {
+      this.needDefaultSubitem = undefined;
       this.items = [];
       this.component = "";
       this.popupModel.dispose();
@@ -294,6 +296,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
    */
   public addSubitem(subitem: IQuestionToolboxItem, index: number = -1): void {
     if (!subitem) return;
+    this.needDefaultSubitem = undefined;
     const newItem: QuestionToolboxItem = new QuestionToolboxItem(subitem);
     newItem.iconName = "";
     if (!newItem.className) newItem.className = QuestionToolboxItem.getItemClassNames(newItem.iconName);
@@ -316,7 +319,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
    */
   public removeSubitem(subitem: IQuestionToolboxItem | string): void {
     if (!this.hasSubItems || !subitem) return;
-
+    this.needDefaultSubitem = undefined;
     const id: string = (subitem as IQuestionToolboxItem)?.id || subitem as string;
     if (!id) return;
 
@@ -811,6 +814,8 @@ export class QuestionToolbox
   }
   /**
    * Adds a new item to the Toolbox.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/page-break-and-page-merge/ (linkStyle))
    * @param item A [toolbox item configuration](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem).
    * @param index *(Optional)* A zero-based index at which to insert the item. If you do not specify this parameter, the item is added to the end.
    * @see removeItem
@@ -880,6 +885,8 @@ export class QuestionToolbox
   }
   /**
    * Returns a [toolbox item](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem) with a specified name.
+   *
+   * [View Toolbox Customization Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-customization/ (linkStyle))
    * @param name A toolbox item's [`name`](https://surveyjs.io/survey-creator/documentation/api-reference/iquestiontoolboxitem#name).
    * @returns A toolbox item or `null` if a toolbox item with the specified name isn't found.
    */
@@ -894,6 +901,8 @@ export class QuestionToolbox
    * If this property is `false`, the currently expanded category collapses when a user expands another category.
    *
    * Default value: `false`
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-categories/ (linkStyle))
    * @see keepAllCategoriesExpanded
    */
   public get allowExpandMultipleCategories(): boolean {
@@ -905,6 +914,8 @@ export class QuestionToolbox
   }
   /**
    * Specifies whether to expand all categories without the capability to collapse any of them. Applies only if [`showCategoryTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#showCategoryTitles) is `true`.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-categories/ (linkStyle))
    * @see allowExpandMultipleCategories
    */
   public get keepAllCategoriesExpanded(): boolean {
@@ -921,7 +932,9 @@ export class QuestionToolbox
    *
    * Default value: `false`
    *
-   * If this property is disabled, the Toolbox hides the titles but continues to display horizontal lines that divide categories. To remove these lines as well, call the [`removeCategories()`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#removeCategories) method.
+   * [View Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-categories/ (linkStyle))
+   *
+   * > If this property is disabled, the Toolbox hides the titles but continues to display horizontal lines that divide categories. To remove these lines as well, call the [`removeCategories()`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#removeCategories) method.
    * @see allowExpandMultipleCategories
    * @see keepAllCategoriesExpanded
    */
@@ -1093,6 +1106,8 @@ export class QuestionToolbox
 
   /**
    * Removes all categories from the Toolbox.
+   *
+   * [View Toolbox Customization Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-customization/ (linkStyle))
    */
   public removeCategories() {
     const allTypes: string[] = ElementFactory.Instance.getAllToolboxTypes();

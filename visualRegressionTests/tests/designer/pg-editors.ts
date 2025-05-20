@@ -419,7 +419,7 @@ test("Check triggers question", async (t) => {
       .click(Selector("h4[aria-label=Conditions]"))
       .click(Selector("div[data-name='triggers'] .spg-action-button--icon[title='Add new trigger']"));
     await takeElementScreenshot("triggers-editor.png", Selector("div[data-name='triggers']"), t, comparer);
-    await ClientFunction(() => (<any>document).querySelector("[aria-label='row 1, column triggerType'] input").focus())();
+    await ClientFunction(() => (<any>document).querySelector("[aria-label='row 1, column triggerType']").focus())();
     await resetHoverToCreator(t);
     await takeElementScreenshot("triggers-editor-focused.png", Selector("div[data-name='triggers']"), t, comparer);
   });

@@ -76,3 +76,5 @@ export * from "./custom-questions/file.component";
 export * from "./custom-questions/text-with-reset.component";
 export * from "./custom-questions/boolean-switch.component";
 export * from "./question-banner.component";
+export * from "./question-element-content.component";
+export * from "./page-element-content.component";

@@ -716,6 +716,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "questionTitleWidth", tab: "questionSettings" },
       { name: "questionErrorLocation", tab: "questionSettings" },
       { name: "gridLayoutColumns", tab: "questionSettings", index: 900 },
+      { name: "questionOrder", tab: "questionSettings" },
     ],
     tabs: [
       { name: "questionSettings", index: 100 },
@@ -727,7 +728,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   panel: {
     properties: [
       "isRequired",
-      { name: "questionOrder", tab: "questionSettings" },
       { name: "innerIndent", tab: "questionSettings" },
       { name: "requiredErrorText", tab: "validation" },
       { name: "page", tab: "layout" },
@@ -752,7 +752,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "navigationDescription",
       "timeLimit",
       "maxTimeToFinish",
-      { name: "questionOrder", tab: "questionSettings" },
       { name: "showNavigationButtons", tab: "navigation" }
     ],
     tabs: [{ name: "navigation", index: 350 }, { name: "layout", visible: false }]

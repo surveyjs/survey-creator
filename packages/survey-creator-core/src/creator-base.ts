@@ -148,7 +148,7 @@ export class SurveyCreatorModel extends Base
   public getProcessedText(text: string): string { return text; }
   public getLocale(): string { return this.locale; }
   /**
-   * Specifies whether to display the Designer tab.
+   * Specifies whether to display the [Designer](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#designer-tab) tab.
    *
    * Default value: `true`
    * @see activeTab
@@ -156,7 +156,7 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: true }) showDesignerTab: boolean;
   /**
-   * Specifies whether to display the JSON Editor tab.
+   * Specifies whether to display the [JSON Editor](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#json-editor-tab) tab.
    *
    * Default value: `true`
    * @see activeTab
@@ -165,7 +165,7 @@ export class SurveyCreatorModel extends Base
 
   @property({ defaultValue: true }) showTestSurveyTab: boolean;
   /**
-   * Specifies whether to display the Preview tab.
+   * Specifies whether to display the [Preview](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#preview-tab) tab.
    *
    * Default value: `true`
    * @see activeTab
@@ -174,11 +174,13 @@ export class SurveyCreatorModel extends Base
   public get showPreviewTab(): boolean { return this.showTestSurveyTab; }
   public set showPreviewTab(val: boolean) { this.showTestSurveyTab = val; }
   /**
-   * Specifies whether to display the Themes tab.
+   * Specifies whether to display the [Themes](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#themes-tab) tab.
    *
    * Default value: `false`
    *
    * Use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) object to manage UI themes available in the Themes tab.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/change-form-theme/ (linkStyle))
    * @see activeTab
    * @see saveThemeFunc
    */
@@ -200,15 +202,17 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: true }) allowZoom: boolean;
   /**
-   * Specifies whether to display the Translation tab.
+   * Specifies whether to display the [Translation](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#translation-tab) tab.
    *
    * Default value: `false`
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/create-multilingual-forms/ (linkStyle))
    * @see activeTab
    * @see clearTranslationsOnSourceTextChange
    */
   @property({ defaultValue: false }) showTranslationTab: boolean;
   /**
-   * Specifies whether to display the Logic tab.
+   * Specifies whether to display the [Logic](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#logic-tab) tab.
    *
    * Default value: `true`
    * @see activeTab
@@ -265,6 +269,10 @@ export class SurveyCreatorModel extends Base
    *
    * - `"buttons"` (default)
    * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid.
+   *
+   * [Accordion Mode Demo](https://surveyjs.io/survey-creator/examples/property-grid-accordion-view/ (linkStyle))
+   *
+   * [Buttons Mode Demo](https://surveyjs.io/survey-creator/examples/free-nps-survey-template/ (linkStyle))
    */
   get propertyGridNavigationMode(): "buttons" | "accordion" {
     return this.showOneCategoryInPropertyGrid ? "buttons" : "accordion";
@@ -320,6 +328,8 @@ export class SurveyCreatorModel extends Base
    * Default value: `false`
    *
    * If you enable this property, Survey Creator calls the [`saveSurveyFunc`](#saveSurveyFunc) or [`saveThemeFunc`](#saveThemeFunc) function to save the survey or theme JSON schema. The schemas are saved with a 500-millisecond delay after users change settings. You can specify the [`autoSaveDelay`](#autoSaveDelay) property to increase or decrease the delay.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/set-how-survey-configuration-changes-are-saved/ (linkStyle))
    */
   @property({ defaultValue: false }) autoSaveEnabled: boolean;
   /**
@@ -397,6 +407,8 @@ export class SurveyCreatorModel extends Base
    *
    * - `"bypage"`
    * Questions and panels are divided between pages. Users can use the page navigator to switch to a required page.
+   *
+   * [View Page-By-Page Mode Demo](https://surveyjs.io/survey-creator/examples/page-level-editing/ (linkStyle))
    * @see allowModifyPages
    */
   public get pageEditMode(): "standard" | "single" | "bypage" {
@@ -654,11 +666,11 @@ export class SurveyCreatorModel extends Base
    */
   public onDefineElementMenuItems: EventBase<SurveyCreatorModel, DefineElementMenuItemsEvent> = this.onElementGetActions;
   /**
-   * An event that is raised when Survey Creator adds properties to a survey element selected on the design surface. Handle this event if you cancel the addition of certain properties and thus [hide them from the Property Grid](https://surveyjs.io/survey-creator/documentation/property-grid-customization#hide-properties-from-the-property-grid).
+   * An event that is raised when Survey Creator adds properties to a survey element selected on the design surface. Handle this event if you want to cancel the addition of certain properties and thus [hide them from the Property Grid](https://surveyjs.io/survey-creator/documentation/property-grid-customization#hide-properties-from-the-property-grid).
    *
    * For information on event handler parameters, refer to descriptions within the interface.
    *
-   * [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/ (linkStyle))
+   * [View Demo](https://surveyjs.io/survey-creator/examples/remove-properties-from-property-grid/ (linkStyle))
    */
   public onPropertyShowing: EventBase<SurveyCreatorModel, PropertyShowingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyShowingEvent>();
   public onCanShowProperty: EventBase<SurveyCreatorModel, any> = this.onPropertyShowing;
@@ -677,7 +689,11 @@ export class SurveyCreatorModel extends Base
    */
   public onPropertyEditorCreated: EventBase<SurveyCreatorModel, PropertyEditorCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyEditorCreatedEvent>();
   /**
-   * An event that is raised when title actions are added to a property editor. Title actions are most often used to reveal hints for properties configured by users. Handle this event you want to add, remove, or modify the title actions.
+   * An event that is raised when title actions are added to a property editor. Title actions are most often used to reveal property hints. Handle this event you want to add, remove, or modify the title actions.
+   *
+   * For information on event handler parameters, refer to descriptions within the interface.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPropertyEditorUpdateTitleActions (linkStyle))
    */
   public onPropertyEditorUpdateTitleActions: EventBase<SurveyCreatorModel, PropertyEditorUpdateTitleActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyEditorUpdateTitleActionsEvent>();
   /**
@@ -948,6 +964,10 @@ export class SurveyCreatorModel extends Base
    * });
    * ```
    *
+   * [Multilingual Form Demo](https://surveyjs.io/survey-creator/examples/create-multilingual-forms/ (linkStyle))
+   *
+   * [AI-Powered Translation Demo](https://surveyjs.io/survey-creator/examples/ai-translation/ (linkStyle))
+   *
    * > Survey Creator does not include a machine translation service out of the box. Our component only provides a UI for calling the service API.
    * @see startMachineTranslationTo
    */
@@ -967,6 +987,10 @@ export class SurveyCreatorModel extends Base
 
   /**
    * An event that is raised when users drag and drop survey elements within the design surface. Use this event to control drag and drop operations.
+   *
+   * For information on event handler parameters, refer to descriptions within the interface.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/page-break-and-page-merge/ (linkStyle))
    * @see onDragStart
    * @see onDragEnd
    */
@@ -1067,6 +1091,8 @@ export class SurveyCreatorModel extends Base
    * Specifies whether Survey Creator UI elements display survey, page, and question titles instead of their names.
    *
    * Default value: `false`
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/dynamically-modify-newly-added-questions/ (linkStyle))
    * @see onElementGetDisplayName
    */
   public useElementTitles = false;
@@ -1206,6 +1232,8 @@ export class SurveyCreatorModel extends Base
 
   /**
    * An object that enables you to manage UI themes. Refer to the following API section for information on available properties, methods, and events: [`ThemeTabPlugin`](https://surveyjs.io/survey-creator/documentation/api-reference/themetabplugin).
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/save-custom-theme/ (linkStyle))
    * @see showThemeTab
    * @see saveThemeFunc
    */
@@ -1217,6 +1245,8 @@ export class SurveyCreatorModel extends Base
    * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#autoSaveEnabled) is triggered to save a theme JSON object.
    *
    * For more information, refer to the [Save and Load Custom Themes](https://surveyjs.io/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/change-form-theme/ (linkStyle))
    * @see showThemeTab
    * @see themeEditor
    * @see saveSurveyFunc
@@ -1642,6 +1672,8 @@ export class SurveyCreatorModel extends Base
    * Specifies whether to show the sidebar that displays the Property Grid.
    *
    * Default value: `true`
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/customize-property-editors/ (linkStyle))
    * @see sidebarLocation
    */
   public get showSidebar(): boolean {
@@ -3073,7 +3105,7 @@ export class SurveyCreatorModel extends Base
   protected deleteObjectCore(obj: any) {
     if (obj.isPage) {
       var newPage = this.getNextPage(obj);
-      this.survey.removePage(obj);
+      obj.delete(false);
       this.selectElement(!!newPage ? newPage : this.survey);
     } else {
       if (this.survey.pageCount === 1) {
@@ -3249,6 +3281,8 @@ export class SurveyCreatorModel extends Base
 
   /**
    * Activates a specified category in Property Grid. Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#propertyGridNavigationMode) is `"buttons"`.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/add-properties-to-property-grid/ (linkStyle))
    * @param name A [category name](https://surveyjs.io/form-library/documentation/customize-question-types/add-custom-properties-to-a-form#category).
    */
   public activatePropertyGridCategory(name: string): void {
@@ -3914,6 +3948,8 @@ export class SurveyCreatorModel extends Base
    * Starts the translation of survey strings from the default language to one or more specified languages using a machine translation service, such as Google Translate or Microsoft Translator.
    *
    * This method only launches the operation by raising the [`onMachineTranslate`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onMachineTranslate) event. Handle this event to perform the actual translation.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/ai-translation/ (linkStyle))
    * @param locales An array of locale codes that correspond to target languages, for example, `[ "de", "fr" ]`.
    */
   public startMachineTranslationTo(locales: Array<string>): void {
@@ -4072,6 +4108,8 @@ export class SurveyCreatorModel extends Base
    * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#autoSaveEnabled) is triggered to save a survey JSON schema.
    *
    * For more information, refer to the Save and Load Survey Model Schemas help topic for your framework: [Angular](https://surveyjs.io/survey-creator/documentation/get-started-angular#save-and-load-survey-model-schemas) | [Vue](https://surveyjs.io/survey-creator/documentation/get-started-vue#save-and-load-survey-model-schemas) | [React](https://surveyjs.io/survey-creator/documentation/get-started-react#save-and-load-survey-model-schemas) | [HTML/CSS/JavaScript](https://surveyjs.io/survey-creator/documentation/get-started-html-css-javascript#save-and-load-survey-model-schemas).
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/set-how-survey-configuration-changes-are-saved/ (linkStyle))
    * @see saveThemeFunc
    */
   public get saveSurveyFunc() {
@@ -4501,6 +4539,8 @@ export class SurveyCreatorModel extends Base
    * Specifies whether to clear translations to other languages when a source language translation is changed.
    *
    * Default value: `false`
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/ai-translation/ (linkStyle))
    * @see showTranslationTab
    */
   public clearTranslationsOnSourceTextChange: boolean = false;

@@ -1,8 +1,8 @@
 import {
   JsonObjectProperty, ItemValue, QuestionDropdownModel,
-  Base, Serializer, SurveyModel, matrixDropdownColumnTypes,
-  PanelModel, PanelModelBase, SurveyElement
-} from "survey-core";
+  Base, Serializer, SurveyModel, matrixDropdownColumnTypes, PageModel,
+  LocalizableString,
+  Question } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import {
   SurveyCreatorModel, defaultPropertyGridDefinition, ISurveyPropertyGridDefinition, ISurveyPropertiesDefinition,
@@ -54,8 +54,14 @@ export class SurveyQuestionPresetPropertiesDetail {
     if (this.classes.indexOf(className) < 0) {
       this.classes.push(className);
     }
-    this.propertyGridValue = new PropertyGridModel(obj, undefined, this.currentJson);
-    this.propertyGridDefaultValue = new PropertyGridModel(obj);
+    this.propertyGridValue = this.createPropertyGrid(obj, this.currentJson);
+    this.propertyGridDefaultValue = this.createPropertyGrid(obj);
+  }
+  private createPropertyGrid(obj: Base, json?: ISurveyPropertyGridDefinition): PropertyGridModel {
+    const res = new PropertyGridModel(undefined, undefined, json);
+    res.showOneCategoryInPropertyGrid = true;
+    res.obj = obj;
+    return res;
   }
   private createObj(): Base {
     if (this.className === "survey") return new SurveyModel();
@@ -197,9 +203,9 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       showJSONEditorTab: false,
       showLogicTab: false,
       showPreviewTab: false,
-      pageEditMode: "single",
-      allowModifyPages: false,
       showSurveyTitle: false,
+      collapsePages: true,
+      collapseQuestions: true,
       propertyGridNavigationMode: "accordion"
     };
     const oldSearchValue = settings.propertyGrid.enableSearch;
@@ -289,9 +295,9 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   private getPropertiesArray(): Array<any> {
     const survey = this.propCreator.survey;
     const res = [];
-    survey.getAllPanels().forEach(panel => {
-      const item = { name: panel.name, items: [] };
-      (<PanelModelBase><any>panel).questions.forEach(question => {
+    survey.pages.forEach(page => {
+      const item = { name: page.name, items: [] };
+      page.questions.forEach(question => {
         item.items.push(question.name);
       });
       res.push(item);
@@ -338,7 +344,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
             this.changePropTitleAndDescription("pehelp", name, options.newValue);
           }
         }
-        if ((<any>options.target)?.isPanel) {
+        if ((<any>options.target)?.isPage) {
           if (options.name === "title") {
             this.ensureLocalizationPath("pe.tabs");
             this.localeStrings.pe.tabs[name] = options.newValue;
@@ -352,40 +358,43 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     creator.allowCollapseSidebar = false;
     creator.toolbar.setItems([]);
     creator.showAddQuestionButton = false;
-    creator.expandCollapseButtonVisibility = "always";
     creator.toolbox.forceCompact = false;
     creator.showSidebar = false;
-    const designer = <TabDesignerPlugin>creator.getPlugin("designer");
-    designer.designerStateManager.onInitElementStateCallback = (element: SurveyElement, state: any): void => {
-      if (element.isPanel || element.isQuestion) {
-        state.collapsed = true;
-      }
-    };
-    creator.onSurveyInstanceCreated.add((sender, options) => {
-      if (options.reason === "designer") {
+    creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
+      if (options.area === "designer-tab") {
         const model = options.survey;
-        model.getAllPanels().forEach(panel => {
-          this.addCategoryNamePropIntoPanel(<PanelModel>panel, creator);
-        });
-        model.onPanelAdded.add((sender, options) => {
-          this.addCategoryNamePropIntoPanel(options.panel, creator);
-        });
-        model.onElementWrapperComponentName.add((sender, options) => {
-          const el = options.element;
-          const compName = options.componentName;
-          if (el.isQuestion && (compName === "svc-dropdown-question" || compName === "svc-question")) {
-            options.componentName = "svc-preset-question";
-          }
-          if (el.isPanel && compName === "svc-panel") {
-            options.componentName = "svc-preset-panel";
-          }
+        model.onPageAdded.add((sender, options) => {
+          this.addCategoryNamePropIntoPage(options.page, creator);
         });
       }
     });
-    creator.onSelectedElementChanging.add((sender, options) => {
-      const el = <any>options.newSelectedElement;
-      if (!!el && (el.isPage || el === creator.survey)) {
-        options.newSelectedElement = creator.selectedElement;
+    creator.onSurveyInstanceCreated.add((sender, options) => {
+      if (options.area === "designer-tab") {
+        const model = options.survey;
+        model.onElementWrapperComponentName.add((sender, options) => {
+          const el = options.element;
+          if (this.isCategoryElement(el)) {
+            options.componentName = el.getType();
+          } else {
+            const compName = options.componentName;
+            if (el.isQuestion && (compName === "svc-dropdown-question" || compName === "svc-question")) {
+              options.componentName = "svc-preset-question";
+            }
+            if (el.isPage) {
+              options.componentName = "svc-preset-page";
+            }
+          }
+        });
+        const prev_getRendererContextForString = model.getRendererContextForString;
+        const prev_getRendererForString = model.getRendererForString;
+        model.getRendererForString = (element: Base, name: string): string => {
+          if (this.isCategoryElement(element)) return undefined;
+          return prev_getRendererForString.call(model, element, name);
+        };
+        model.getRendererContextForString = (element: Base, locStr: LocalizableString): any => {
+          if (this.isCategoryElement(element)) return locStr;
+          return prev_getRendererContextForString.call(model, element, locStr);
+        };
       }
     });
     creator.onElementAllowOperations.add((sender, options) => {
@@ -396,7 +405,6 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       options.allowShowSettings = false;
       options.allowDelete = true;
       options.allowEdit = true;
-      options.allowExpandCollapse = !(<SurveyElement>options.obj).isPage;
     });
     creator.onCollectionItemAllowOperations.add((sender, options) => {
       options.allowEdit = false;
@@ -409,66 +417,40 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       }
     });
     creator.getElementAddornerCssCallback = (obj: Base, className: string): string => { return className + " preset_pg_question"; };
-    creator.onPanelAdded.add((sender, options) => {
-      const pnl = options.panel;
-      if (pnl.parent.isPanel) {
-        const parent = pnl.parent;
-        parent.removeElement(pnl);
-        const page = creator.survey.pages[0];
-        const index = page.elements.indexOf(<any>parent);
-        page.addElement(pnl, index + 1);
+    creator.onPageAdded.add((sender, options) => {
+      const page = options.page;
+      page.name = SurveyHelper.getNewName(creator.survey.pages, "category");
+      if (!page.title) {
+        page.title = "New Category";
       }
-      pnl.name = SurveyHelper.getNewName(creator.survey.getAllPanels(), "category");
-      pnl.setLocalizableStringText("categoryName", pnl.name);
-      pnl.title = "New Category";
+      page.updateRows();
     });
     creator.onQuestionAdded.add((sender, options) => {
-      const q = options.question;
-      if (!q.parent || !q.parent.isPanel) {
-        let sel = creator.selectedElement;
-        let index: number = undefined;
-        if (!sel || (<any>sel).isPage || sel.getType() === "survey") {
-          if (creator.survey.getAllPanels().length === 0) {
-            creator.clickToolboxItem(creator.toolbox.getItemByName("panel").json);
-          }
-          sel = <any>creator.survey.getAllPanels()[0];
-        }
-        if ((<any>sel).isQuestion) {
-          const panel = (<any>sel).parent;
-          index = panel.elements.indexOf(sel) + 1;
-          sel = panel;
-        }
-        (<PanelModelBase>sel).addElement(q, index);
-      }
       this.setupCreatorToolbox(sender);
-    });
-    creator.onDragOverLocationCalculating.add((sender, options) => {
-      if (options.draggedSurveyElement?.isPanel && options.insideElement) {
-        options.insideElement = false;
-        options.dragOverLocation = calculateDragOverLocation(options.clientX, options.clientY, options.dragOverRect, "top-bottom");
-      }
-      if (options.draggedSurveyElement?.isQuestion && options.dragOverSurveyElement?.isPanel) {
-        options.insideElement = true;
-      }
     });
     creator.onDragDropAllow.add((sender, options) => {
       options.allowDropNextToAnother = false;
-      const target: any = options.target;
-      const src: any = options.draggedElement;
-      if (!!target && src?.isQuestion) {
-        const adorner = PageAdorner.GetAdorner(target);
-        options.allow = !target.isPage && (!target.isPanel || adorner.collapsed);
+    });
+    creator.onCanShowProperty.add((sender, options) => {
+      if (options.obj.isPage && options.propertyName === "description") {
+        options.canShow = false;
       }
     });
   }
+  private isCategoryElement(el: any): boolean {
+    return el.isCategoryElement === true;
+  }
   private updateCreatorJSON(json: any): any {
-    if (!json || !json.pages || !json.pages[0] || !json.pages[0].elements) return;
+    if (!json || !json.pages) return;
     json.widthMode = "static";
     json.width = "800px";
-    this.updateCreatorJSONElements(json.pages[0].elements);
+    json.pages.forEach((page: any) => {
+      this.updateCreatorJSONElements(page.elements);
+    });
     return json;
   }
   private updateCreatorJSONElements(elements: Array<any>): void {
+    if (!Array.isArray(elements)) return;
     for (let i = elements.length - 1; i >= 0; i--) {
       const el = elements[i];
       if (!!el.name && el.name.indexOf("overridingProperty") > -1) {
@@ -500,7 +482,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     }
   }
   private setupCreatorToolbox(creator: SurveyCreatorModel): void {
-    const elements: IQuestionToolboxItem[] = [{ name: "panel", title: "New Category", className: "panel", json: { type: "panel" }, iconName: "icon-panel" }];
+    const elements: IQuestionToolboxItem[] = [];
     const hiddenProperties = ["progressBarInheritWidthFrom"]; //TODO
     const propGrid = this.currentProperties.propertyGridDefault.survey;
     const survey = this.propCreator.survey;
@@ -525,21 +507,39 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
 
     creator.toolbox.addItems(elements, true);
   }
-  private addCategoryNamePropIntoPanel(panel: PanelModel, creator: SurveyCreatorModel): void {
-    const locStr = panel.createCustomLocalizableObj("categoryName");
-    locStr.text = panel.name;
-    (<any>panel).isDefaultPanel = this.isDefaultPanelName(panel.name);
-    (<any>locStr).locStr = locStr;
-    (<any>locStr).creator = creator;
-    locStr.onStrChanged = (oldValue: string, newValue: string): void => {
-      if (!!newValue) {
-        panel.name = newValue;
-      }
+  private addCategoryNamePropIntoPage(page: PageModel, creator: SurveyCreatorModel): void {
+    page.showDescription = false;
+    (<any>page).isPropertyGridCategory = true;
+    const qCategoryName: Question = Serializer.createClass("text");
+    qCategoryName.name = "page_categoryName";
+    qCategoryName.value = page.name;
+    qCategoryName.valueChangedCallback = () => {
+      page.name = qCategoryName.value;
+    };
+    qCategoryName.title = "Category Name"; //TODO
+    qCategoryName.titleLocation = "left";
+    qCategoryName.readOnly = this.isDefaultCategoryName(page.name);
+    const qCatetoryIcon = Serializer.createClass("text");
+    qCategoryName.name = "page_categoryIcon";
+    qCatetoryIcon.title = "Category Icon"; //TODO
+    qCatetoryIcon.titleLocation = "left";
+    qCatetoryIcon.startWithNewLine = false;
+    [qCategoryName, qCatetoryIcon].forEach(el => {
+      el.getSurvey = () => { return page.survey; };
+      Object.defineProperty(el, "isDesignMode", { get() { return false; } });
+      el.isCategoryElement = true;
+      el.onFirstRendering();
+    });
+    (<any>page)["getElementsForRows"] = () => {
+      const res = [].concat(page.elements);
+      res.unshift(qCatetoryIcon);
+      res.unshift(qCategoryName);
+      return res;
     };
   }
-  private isDefaultPanelName(name: string): boolean {
+  private isDefaultCategoryName(name: string): boolean {
     if (!name) return true;
-    return !!this.currentProperties.propertyGridDefault.survey.getPanelByName(name);
+    return !!this.currentProperties.propertyGridDefault.survey.getPageByName(name);
   }
 }
 export class CreatorEditablePresetPropertyGrid extends CreatorPresetEditableBase {

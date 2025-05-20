@@ -277,3 +277,14 @@ test("Creator theme model isLight de/serialization", (): any => {
   themeModelJson = themeModel.toJSON();
   expect(themeModelJson).toStrictEqual(lightThemeJson);
 });
+test("creator.showCreatorThemeSettings", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
+  const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
+  const tabControlModelBottomToolbar = designerPlugin["tabControlModel"].bottomToolbar;
+
+  expect(tabControlModelBottomToolbar.actions).toHaveLength(1);
+  expect(tabControlModelBottomToolbar.actions[0].isVisible).toEqual(true);
+
+  creator.showCreatorThemeSettings = false;
+  expect(tabControlModelBottomToolbar.actions[0].isVisible).toEqual(false);
+});

@@ -24,6 +24,14 @@ interface ICreatorSurveyPageComponentProps {
   page: PageModel;
   isGhost: boolean;
 }
+const PageElementContent = React.memo(({ page, survey, creator }: {
+  page: PageModel,
+  survey: SurveyModel,
+  creator: SurveyCreatorModel,
+}) => {
+  return <SurveyPage page={page} survey={survey} creator={creator} />;
+});
+PageElementContent.displayName = "PageElementContent";
 
 export class CreatorSurveyPageComponent extends CreatorModelElement<
   ICreatorSurveyPageComponentProps,
@@ -39,11 +47,11 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     if (this.model) {
       this.model.attachToUI(props.page, this.rootRef.current);
     }
-    this.model = new PageAdorner(
-      props.creator,
-      props.page,
-    );
+    this.model = this.createPageAdorner(props.creator, props.page);
     this.model.isGhost = this.props.isGhost;
+  }
+  protected createPageAdorner(creator: SurveyCreatorModel, page: PageModel): PageAdorner {
+    return new PageAdorner(creator, page);
   }
   shouldComponentUpdate(nextProps: any, nextState: any): boolean {
     const res = super.shouldComponentUpdate(nextProps, nextState);
@@ -108,7 +116,13 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     );
   }
   protected renderContent(): React.JSX.Element {
-    return (<SurveyPage page={this.props.page} survey={this.props.survey} creator={this.props.creator} css={this.model.css}></SurveyPage>);
+    return (
+      <PageElementContent
+        page={this.props.page}
+        survey={this.props.survey}
+        creator={this.props.creator}
+      />
+    );
   }
   protected renderHeader(): React.JSX.Element {
     const actions = (<div className="svc-page__content-actions">
