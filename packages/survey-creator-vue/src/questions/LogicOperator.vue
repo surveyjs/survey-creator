@@ -9,33 +9,20 @@
         :required="question.isRequired"
         :tabindex="question.isInputReadOnly ? undefined : 0"
         :disabled="question.isInputReadOnly"
-        :role="question.ariaRole"
-        :aria-required="question.ariaRequired"
-        :aria-label="question.ariaLabel"
-        :aria-labelledby="question.ariaLabelledBy"
-        :aria-invalid="question.ariaInvalid"
-        :aria-errormessage="question.ariaErrormessage"
-        :aria-expanded="question.ariaExpanded"
+        :role="dropdownModel.ariaQuestionRole"
+        :aria-required="dropdownModel.ariaQuestionRequired"
+        :aria-invalid="dropdownModel.ariaQuestionInvalid"
+        :aria-errormessage="dropdownModel.ariaQuestionErrorMessage" 
+        :aria-expanded="dropdownModel.ariaQuestionExpanded"
+        :aria-label="dropdownModel.ariaQuestionLabel" 
+        :aria-labelledby="dropdownModel.ariaQuestionLabelledby"
+        :aria-controls="dropdownModel.ariaQuestionControls"
       >
         <div :class="question.cssClasses.controlValue">
           <SvComponent
             :is="'survey-string'"
             v-if="question.locReadOnlyText"
             :locString="question.locReadOnlyText"
-          ></SvComponent>
-        </div>
-        <div
-          v-if="question.allowClear && question.cssClasses.cleanButtonIconId"
-          :class="question.cssClasses.cleanButton"
-          @click="clear"
-          v-show="!question.isEmpty()"
-        >
-          <SvComponent
-            :is="'sv-svg-icon'"
-            :class="question.cssClasses.cleanButtonSvg"
-            :iconName="question.cssClasses.cleanButtonIconId"
-            :size="'auto'"
-            :title="question.clearCaption"
           ></SvComponent>
         </div>
       </div>
@@ -73,9 +60,6 @@ useQuestion(props, root, (newValue) => {
 });
 const click = (event: Event) => {
   dropdownModel.value?.onClick(event);
-};
-const clear = (event: Event) => {
-  dropdownModel.value?.onClear(event);
 };
 const keyup = (event: Event) => {
   dropdownModel.value?.keyHandler(event);
