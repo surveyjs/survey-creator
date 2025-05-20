@@ -16,9 +16,6 @@ export class LogicOperatorComponent extends QuestionAngular<QuestionDropdownMode
   click(event: any) {
     this.dropdownListModel?.onClick(event);
   }
-  clear(event: any) {
-    this.dropdownListModel?.onClear(event);
-  }
   keyup(event: any) {
     this.dropdownListModel?.keyHandler(event);
   }
