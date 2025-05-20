@@ -19,7 +19,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   private dragOrClickHelper: DragOrClickHelper;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   @property({ defaultValue: false }) isVisibleInViewPort: boolean;
-  @property({ defaultValue: false }) needRenderContent: boolean;
+  @property({ defaultValue: !settings.pageContentLazyRendering }) needRenderContent: boolean;
 
   protected updateShowPlaceholder(visibleRows?: Array<QuestionRowModel>) {
     this.showPlaceholder = !this.isGhost && (visibleRows || this.page.visibleRows).length === 0;
@@ -111,7 +111,11 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   public detachFromUI() {
     this.isVisibleInViewPort = false;
-    this.visibilityObserver.unobserve(this.rootElement);
+    if (!!this.visibilityObserver) {
+      this.visibilityObserver.unobserve(this.rootElement);
+      this.visibilityObserver.disconnect();
+      this.visibilityObserver = null;
+    }
     super.detachFromUI();
     this.needRenderContent = false;
   }

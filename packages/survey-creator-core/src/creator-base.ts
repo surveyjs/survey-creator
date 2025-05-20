@@ -3199,7 +3199,7 @@ export class SurveyCreatorModel extends Base
     const elementPage = this.getPageByElement(selEl);
     if (!!elementPage) {
       const pageAdorner = SurveyElementAdornerBase.GetAdorner(elementPage) as PageAdorner;
-      if (!pageAdorner.needRenderContent) {
+      if (!!pageAdorner && !pageAdorner.needRenderContent) {
         pageAdorner.needRenderContent = true;
       }
     }
