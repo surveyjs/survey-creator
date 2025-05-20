@@ -249,8 +249,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "max", tab: "sliderSettings" },
       { name: "step", tab: "sliderSettings" },
       { name: "segmentCount", tab: "sliderSettings" },
-      { name: "minValueExpression", tab: "sliderSettings" },
-      { name: "maxValueExpression", tab: "sliderSettings" },
       { name: "minRangeLength", tab: "sliderSettings" },
       { name: "maxRangeLength", tab: "sliderSettings" },
       { name: "autoGenerate", tab: "sliderSettings" },
@@ -262,6 +260,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "allowSwap", tab: "sliderSettings" },
       { name: "labelCount", tab: "sliderSettings" },
       { name: "allowClear", tab: "sliderSettings" },
+      { name: "minValueExpression", tab: "logic" },
+      { name: "maxValueExpression", tab: "logic" },
     ],
     tabs: [{ name: "sliderSettings", index: 10 }]
   },
