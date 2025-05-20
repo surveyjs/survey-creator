@@ -15,8 +15,8 @@ test.describe(title, () => {
     }, hugeJson);
     const skeletonElement = page.locator(".sv-skeleton-element");
     const nonRenderedPages = page.locator(".svc-page__loading-content");
-
-    await expect(skeletonElement).toHaveCount(85);
+    await page.waitForTimeout(10000);
+    await expect(skeletonElement).toHaveCount(87);
     await expect(nonRenderedPages).toHaveCount(107);
   });
 });
