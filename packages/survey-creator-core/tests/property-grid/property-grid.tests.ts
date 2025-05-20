@@ -1703,6 +1703,27 @@ test("DefaultValue editor & readOnly", () => {
   expect(valueQuestion.value).toEqual(2);
   defaultValueProp.readOnly = false;
 });
+test("DefaultValue editor & matrix dropdown vs rowsVisibleIf, Bug#6902", () => {
+  PropertyGridEditorCollection.register(new PropertyGridValueEditor());
+  const question = new QuestionMatrixDropdownModel("q1");
+  question.rows = [1, 2, 3, 4, 5];
+  question.rowsVisibleIf = "{item} = 1";
+  var propertyGrid = new PropertyGridModelTester(question);
+  const editQuestion = <QuestionLinkValueModel>propertyGrid.survey.getQuestionByName("defaultValue");
+  const property = <JsonObjectProperty>(<any>editQuestion).property;
+  const editor = <PropertyGridValueEditor>(
+  PropertyGridEditorCollection.getEditor(property)
+  );
+  const valueEditor = editor.createPropertyEditorSetup(
+    question,
+    property,
+    editQuestion,
+    new EmptySurveyCreatorOptions()
+  );
+  var valueQuestion = valueEditor.editSurvey.getQuestionByName("question");
+  expect(valueQuestion).toBeTruthy();
+  expect(valueQuestion.rowsVisibleIf).toBeFalsy();
+});
 test("DefaultRowValue editor", () => {
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");
