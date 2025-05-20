@@ -97,6 +97,14 @@ svc-page {
   }
 }
 
+.svc-page__loading-content {
+  padding: calcSize(5);
+  text-align: center;
+  .sd-loading-indicator {
+    display: inline-block;
+  }
+}
+
 .svc-question__drag-area > .svc-page__content-actions {
   inset-inline-start: 50%;
 }

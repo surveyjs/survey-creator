@@ -28,7 +28,14 @@
       :is="'survey-page'"
       :survey="model.creator.survey"
       :page="model.page"
+      v-if="model.needRenderContent"
     />
+    <div
+      class="svc-page__loading-content"
+      v-if="!model.needRenderContent"
+    >
+      <SvComponent :is="'sv-loading-indicator'" />
+    </div>
     <div v-if="model.showPlaceholder" class="svc-page__placeholder_frame">
       <div class="svc-panel__placeholder_frame">
         <div class="svc-panel__placeholder">{{ model.placeholderText }}</div>
