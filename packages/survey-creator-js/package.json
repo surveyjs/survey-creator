@@ -34,6 +34,8 @@
     "lint": "eslint ./src",
     "test:a11y": "playwright test --project a11y --ui",
     "test:a11y:ci": "playwright test --project a11y --reporter dot --quiet",
+    "e2e": "playwright test --project e2e --ui",
+    "e2e:ci": "playwright test --project e2e",
     "test:scr": "playwright test --project scr --ui",
     "test:scr:ci": "playwright test --project scr"
   },
