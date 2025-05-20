@@ -31,7 +31,7 @@ test("Change title of text question", async (t) => {
     .pressKey("I space a m space c h a n g e d")
 
     .click(getTabbedMenuItemByText(creatorTabDesignerName))
-    .expect(Selector("h5").withText("I am changed").exists).ok();
+    .expect(Selector("div[id$=ariaTitle][id^=sq]").withText("I am changed").exists).ok();
 });
 test("Check show/hide errors list visibility", async (t) => {
   await setJSON(json);
@@ -70,7 +70,7 @@ test("Check deactivating other tabs when json has errros", async (t) => {
     .pressKey("I space a m space e r r o r space s t r i n g )")
 
     .click(getTabbedMenuItemByText(creatorTabDesignerName))
-    .expect(Selector("h5").withText("Change me").exists).notOk();
+    .expect(Selector("div[id$=ariaTitle][id^=sq]").withText("Change me").exists).notOk();
 });
 test("Check search", async (t) => {
   await setJSON(json);

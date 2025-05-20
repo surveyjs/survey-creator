@@ -31,7 +31,7 @@ test("Check color editor key navigation", async (t) => {
   })();
   await setJSON({});
   await t
-    .click(Selector("h4[aria-label=General]"))
+    .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"))
     .click(".spg-input-container__input")
     .pressKey("tab")
     .expect(t.eval(() => document.activeElement?.tagName)).eql("INPUT")
@@ -78,7 +78,7 @@ test("Check spinedit editor key navigation", async (t) => {
   await setJSON({});
   const firstSpinInputSelector = Selector("[data-name='fontSize1'] .spg-input-container__input");
   await t
-    .click(Selector("h4[aria-label=General]"))
+    .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"))
     .click(".spg-input-container__input")
     .expect(t.eval(() => (<HTMLInputElement>document.activeElement).selectionStart)).eql(2)
     .expect(t.eval(() => (<HTMLInputElement>document.activeElement).selectionEnd)).eql(2)
@@ -118,7 +118,7 @@ test("Check file editor key navigation", async (t) => {
   const colorInputSelector = Selector("div[data-name='image'] .spg-input-container__input");
   await setJSON({});
   await t
-    .click(Selector("h4[aria-label=General]"))
+    .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"))
     .click(colorInputSelector)
     .expect(colorInputSelector.value).eql("some_url")
     .pressKey("tab")
@@ -150,7 +150,7 @@ test("Check file editor with disable input", async (t) => {
   const fileSelector = Selector("div[data-name='image'] input[type='file']");
   await setJSON({});
   await t
-    .click(Selector("h4[aria-label=General]"))
+    .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"))
     .expect(textSelector.hasAttribute("disabled")).ok();
   await t.expect(fileSelector.hasAttribute("disabled")).notOk();
   await ClientFunction(() => { (window as any).creator.propertyGrid.getQuestionByName("image").disableInput = false; })();
