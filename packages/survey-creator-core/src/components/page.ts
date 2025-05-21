@@ -70,7 +70,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         (<any>surveyElement.locTitle).placeholder = () => { return surveyElement.isStartPage ? "pe.startPageTitlePlaceholder" : "pe.pageTitlePlaceholder"; };
         (<any>surveyElement.locDescription).placeholder = "pe.pageDescriptionPlaceholder";
       }
-      this.needRenderContent = !surveyElement.survey || surveyElement.survey.pages.length <= 5;
+      this.needRenderContent = this.creator.pageEditMode !== "standard" || !surveyElement.survey || surveyElement.survey.pages.length <= 5;
     }
   }
 
