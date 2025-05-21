@@ -351,7 +351,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         target = target.parent;
       }
       if (!dropTarget.isPage) {
-        dropTargetPath.push((dropTarget as any).page);
+        dropTargetPath.push((dropTarget as any).page || (dropTarget as any).__page); // TODO: remove __page
       }
       dropTargetPath = dropTargetPath.reverse();
       for (let i = 0; i < this.prevDropTargetPath.length && i < dropTargetPath.length; i++) {
