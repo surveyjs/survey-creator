@@ -2262,11 +2262,9 @@ export class SurveyCreatorModel extends Base
       if (!!element && !isDraggedFromToolbox && (element.isPage || (this.collapseOnDrag !== false && this.collapseOnDrag !== "none"))) {
         this.designerStateManager?.suspend();
         const adorner = SurveyElementAdornerBase.GetAdorner(element);
-        if (!!adorner) {
-          adorner.saveRelativePosition();
-          this.collapseElementsOnDragStart(element);
-          adorner.restoreRelativePosition();
-        }
+        adorner?.saveRelativePosition();
+        this.collapseElementsOnDragStart(element);
+        adorner?.restoreRelativePosition();
       }
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
@@ -2284,8 +2282,11 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragClear.add((sender, options) => {
       this.stopUndoRedoTransaction();
       if (!!options.draggedElement && !isDraggedFromToolbox && (options.draggedElement.isPage || (this.collapseOnDrag !== false && this.collapseOnDrag !== "none"))) {
+        const adorner = SurveyElementAdornerBase.GetAdorner(options.draggedElement);
+        adorner?.saveRelativePosition();
         this.designerStateManager?.release();
         this.restoreElementsStateOnDragEnd();
+        adorner?.restoreRelativePosition();
       }
       isDraggedFromToolbox = false;
       this.onDragClear.fire(this, options);
@@ -2336,14 +2337,10 @@ export class SurveyCreatorModel extends Base
   }
   public restoreElementsStateOnDragEnd(): void {
     this.expandCollapseManager?.getCollapsableElements().forEach(element => {
-      if (element["draggedFrom"] !== undefined) {
-        const adorner = SurveyElementAdornerBase.GetAdorner(element);
-        adorner?.blockAnimations();
-        this.restoreState(element);
-        adorner?.releaseAnimations();
-      } else {
-        this.restoreState(element);
-      }
+      const adorner = SurveyElementAdornerBase.GetAdorner(element);
+      adorner?.blockAnimations();
+      this.restoreState(element);
+      adorner?.releaseAnimations();
     });
   }
   private initDragDropChoices() {
