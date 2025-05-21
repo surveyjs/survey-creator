@@ -479,17 +479,27 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return newAction;
   }
 
-  private jsonsAreCompatible(objJson: any, json: any): boolean {
-    let question = this.element;
-    if (!!objJson && !!objJson.type && question.getType() !== objJson.type) {
-      question = QuestionFactory.Instance.createQuestion(objJson.type, "question") || this.element;
-    }
+  public static checkForNeedDefaultSubitems(items: QuestionToolboxItem[]) {
+    items.filter(i => i.needDefaultSubitem === undefined).forEach((item: QuestionToolboxItem) => {
+      item.needDefaultSubitem = false;
+      if (item.items?.length > 0) {
+        item.needDefaultSubitem = true;
+        item.items.forEach(subitem => {
+          const question = QuestionFactory.Instance.createQuestion(item.json.type, "question");
+          if (QuestionAdornerViewModel.jsonsAreCompatible(question, subitem.json)) item.needDefaultSubitem = false;
+        });
+      }
+    });
+  }
+
+  private static jsonsAreCompatible(element: SurveyElement, json: any): boolean {
+    let question = element;
     const keys = Object.keys(json);
     for (let i = 0; i < keys.length; i++) {
       const p = keys[i];
-      if (!objJson && p === "type") continue;
-      let propertyValue = !!objJson ? objJson[p] : question.getPropertyValue(p);
-      if (!!objJson && propertyValue === undefined) {
+      if (p === "type") continue;
+      let propertyValue = question.getPropertyValue(p);
+      if (propertyValue === undefined) {
         propertyValue = p === "type" ? question.getType() : question.getDefaultPropertyValue(p);
       }
       if (!Helpers.isTwoValueEquals(json[p], propertyValue)) return false;
@@ -497,7 +507,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return true;
   }
   private jsonIsCorresponded(json: any) {
-    return this.jsonsAreCompatible(undefined, json);
+    return QuestionAdornerViewModel.jsonsAreCompatible(this.element, json);
   }
 
   private toolboxItemIsCorresponded(toolboxItem: QuestionToolboxItem, someItemSelectedAlready: boolean) {
@@ -525,6 +535,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   protected updateQuestionTypeOrSubtypeListModel(listModel: ListModel, subtypeOnly: boolean) {
     const availableItems = this.getConvertToTypes();
+    QuestionAdornerViewModel.checkForNeedDefaultSubitems(availableItems);
     const defaultJsons = this.buildDefaultJsonMap(availableItems);
     const newItems: Array<IAction> = [];
     let lastItem: QuestionToolboxItem;
@@ -548,14 +559,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       if (item.items?.length > 0 && this.creator.toolbox.showSubitems) {
         const subactions = [];
         let selectedSubactionLocal: IAction = undefined;
-        let allChildsAreCompatibleToParent = false;
         item.items.forEach(subitem => {
           const subaction = toolboxItemToAction(subitem,);
           if (this.toolboxItemIsCorresponded(subitem, !!selectedAction)) selectedSubactionLocal = subitem;
-          if (this.jsonsAreCompatible(item.json, subitem.json)) allChildsAreCompatibleToParent = true;
           subactions.push(subaction);
         });
-        if (!allChildsAreCompatibleToParent && subactions.length > 0) {
+        if (item.needDefaultSubitem && subactions.length > 0) {
           const defaultSubaction = toolboxItemToAction(item);
           defaultSubaction.id = action.id + "-default";
           defaultSubaction.iconName = undefined;

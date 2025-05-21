@@ -196,6 +196,33 @@ test("set property grid defintion: make general tab not the first one", () => {
   expect(panels[0].elements).toHaveLength(2);
   expect(panels[1].elements).toHaveLength(3);
 });
+test("set property grid defintion: just one tab for page", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const preset = new CreatorPreset({
+    propertyGrid: {
+      definition: {
+        autoGenerateProperties: false,
+        classes: {
+          panelbase: {
+            properties: [
+              "name",
+              "title",
+              "description"
+            ]
+          },
+        }
+      }
+    }
+  });
+  preset.apply(creator);
+  creator.selectElement(creator.survey.pages[0]);
+  const survey = creator.propertyGrid;
+  const pages = survey.pages;
+  expect(pages).toHaveLength(1);
+  expect(pages[0].name).toBe("general");
+  expect(pages[0].elements).toHaveLength(3);
+});
 test("apply localization for tabs", () => {
   expect(editorLocalization.presetStrings).toBeFalsy();
   expect(editorLocalization.getString("tabs.logic")).toEqual("Logic");

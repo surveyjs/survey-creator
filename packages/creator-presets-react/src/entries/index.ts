@@ -5,7 +5,7 @@ export * from "../CreatorPresetEditor";
 export * from "../PresetRanking";
 export * from "../QuestionEmbeddedCreator";
 export * from "../Question";
-export * from "../Panel";
+export * from "../Page";
 export * from "../ActionTextEditorItem";
 
 import { checkLibraryVersion } from "survey-core";

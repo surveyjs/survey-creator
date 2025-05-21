@@ -10,6 +10,7 @@
   padding-inline-end: var(--ctr-toolbox-item-padding-right, var(--sjs-spacing-x2));
   padding-inline-start: var(--ctr-toolbox-item-padding-left, var(--sjs-spacing-x150));
   border-radius: var(--ctr-toolbox-item-corner-radius, var(--sjs-corner-radius-x1));
+  cursor: pointer;
 }
 .svc-toolbox__item-icon {
   display: block;
