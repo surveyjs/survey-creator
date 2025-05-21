@@ -70,6 +70,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         (<any>surveyElement.locTitle).placeholder = () => { return surveyElement.isStartPage ? "pe.startPageTitlePlaceholder" : "pe.pageTitlePlaceholder"; };
         (<any>surveyElement.locDescription).placeholder = "pe.pageDescriptionPlaceholder";
       }
+      this.needRenderContent = !surveyElement.survey || surveyElement.survey.pages.length <= 5;
     }
   }
 
@@ -93,25 +94,20 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     super.attachToUI(surveyElement, rootElement);
     if (!!rootElement) {
       this.rootElement = rootElement;
-      if (!!surveyElement && surveyElement.survey && surveyElement.survey.pages.length > 5) {
-        this.needRenderContent = false;
-        this.visibilityObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              this.isVisibleInViewPort = true;
-              if ((!this.element.survey || !(this.element.survey as SurveyModel).isLazyRenderingSuspended) && !this.needRenderContent) {
-                setTimeout(() => this.needRenderContent = true, 1);
-              }
-            } else {
-              this.isVisibleInViewPort = false;
+      this.visibilityObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.isVisibleInViewPort = true;
+            if ((!this.element.survey || !(this.element.survey as SurveyModel).isLazyRenderingSuspended) && !this.needRenderContent) {
+              setTimeout(() => this.needRenderContent = true, 1);
             }
-          });
-        },
-        { root: null, });
-        this.visibilityObserver.observe(this.rootElement);
-      } else {
-        this.needRenderContent = true;
-      }
+          } else {
+            this.isVisibleInViewPort = false;
+          }
+        });
+      },
+      { root: null, });
+      this.visibilityObserver.observe(this.rootElement);
     }
   }
   public detachFromUI() {
