@@ -197,8 +197,8 @@ test("Matrix dropdown with vertical layout and and selecting rows", async (t) =>
 
   await t.click(Selector(".sv-string-editor").withText("Row 1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
-    .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
-    .expect(Selector("h5.spg-title").withText("Rows").visible).ok();
+    .expect(Selector("div[id$=ariaTitle][id^=sq].spg-title").withText("Columns").visible).notOk()
+    .expect(Selector("div[id$=ariaTitle][id^=sq].spg-title").withText("Rows").visible).ok();
 });
 
 test("Matrix dropdown with detail panel", async (t) => {
@@ -312,8 +312,8 @@ test("Carryforward banner", async (t) => {
   const getSelectedElementName = ClientFunction(() => {
     return window["creator"].selectedElement.name;
   });
-  const choicesTabTitle = Selector("h4").withExactText("Choice Options");
-  const generalTabTitle = Selector("h4").withExactText(generalGroupName);
+  const choicesTabTitle = Selector("div[id$=ariaTitle][id^=sp]").withExactText("Choice Options");
+  const generalTabTitle = Selector("div[id$=ariaTitle][id^=sp]").withExactText(generalGroupName);
   const carryForwardEditor = Selector("div[data-name='choicesFromQuestion'] .spg-dropdown");
   await t.expect(questions.exists).notOk()
     .hover(getToolboxItemByText("Checkboxes"))

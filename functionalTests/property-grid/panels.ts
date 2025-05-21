@@ -43,7 +43,7 @@ test("Panel stay focused on question change", async (t) => {
 
   await t
     .click(question1)
-    .click(Selector("h4").withExactText("Layout"))
+    .click(Selector("div[id$=ariaTitle][id^=sp]").withExactText("Layout"))
     .click(question2)
     .expect(Selector("span").withExactText("Display the question on a new line").parent().find("input").visible).ok()
     .click(Selector("div [data-name=\"minWidth\"] input"))
