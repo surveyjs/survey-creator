@@ -746,10 +746,17 @@ export var enStrings = {
     rateCount: "Rating count",
     autoGenerate: "Rating configuration",
     slider: {
+      min: "Min value",
+      max: "Max value",
+      step: "Step value",
       showLabels: "Show scale labels",
-      segmentCount: "Segments",
+      segmentCount: "Number of segments",
       tooltipVisibilityPG: "Show tooltips",
-      allowSwap: "Allow thumb crossing"
+      allowSwap: "Allow thumb crossing",
+      labelCount: "Number of auto-generated labels",
+      minValueExpression: "Min value expression",
+      maxValueExpression: "Max value expression",
+      autoGenerate: "Scale labels configuration"
     },
     hideIfChoicesEmpty: "Hide the question if it has no choices",
     minWidth: "Minimum width",
@@ -1055,6 +1062,10 @@ export var enStrings = {
       time: "Time",
       url: "URL",
       week: "Week"
+    },
+    sliderType: {
+      single: "Single-Value",
+      range: "Range"
     },
     autocomplete: {
       "name": "Full Name",
