@@ -2682,6 +2682,28 @@ test("Rename the name for detail panel in matrix dynamic", () => {
   expect((<Question>question1.detailElements[1]).visibleIf).toEqual("{row.question5} = 'a'");
   expect(question1.columns[0].visibleIf).toEqual("{row.question5} = 'a'");
 });
+test("Rename the name for matrix dropdown rows, bug#6910", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      {
+        type: "matrix",
+        name: "q2",
+        columns: [{ value: "col1", visibleIf: "{q1} = 3" }],
+        rows: [
+          { value: "row1", visibleIf: "{q1} = 1" },
+          { value: "row2", enableIf: "{q1} = 2" }
+        ]
+      }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  var matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("q2");
+  logic.renameQuestion("q1", "question1");
+  expect(matrix.columns[0].visibleIf).toEqual("{question1} = 3");
+  expect(matrix.rows[0].visibleIf).toEqual("{question1} = 1");
+  expect(matrix.rows[1].enableIf).toEqual("{question1} = 2");
+});
 test("Do not reacreate logic for updating expressions for every change", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
