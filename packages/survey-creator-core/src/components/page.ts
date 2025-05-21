@@ -90,24 +90,28 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   private visibilityObserver: IntersectionObserver;
+  public setRootElement(rootElement: HTMLElement) {
+    this.rootElement = rootElement;
+    this.visibilityObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.isVisibleInViewPort = true;
+          if ((!this.element.survey || !(this.element.survey as SurveyModel).isLazyRenderingSuspended) && !this.needRenderContent) {
+            setTimeout(() => this.needRenderContent = true, 1);
+          }
+        } else {
+          this.isVisibleInViewPort = false;
+        }
+      });
+    },
+    { root: null, });
+    this.visibilityObserver.observe(this.rootElement);
+  }
+
   public attachToUI(surveyElement: PageModel, rootElement?: HTMLElement) {
     super.attachToUI(surveyElement, rootElement);
     if (!!rootElement) {
-      this.rootElement = rootElement;
-      this.visibilityObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            this.isVisibleInViewPort = true;
-            if ((!this.element.survey || !(this.element.survey as SurveyModel).isLazyRenderingSuspended) && !this.needRenderContent) {
-              setTimeout(() => this.needRenderContent = true, 1);
-            }
-          } else {
-            this.isVisibleInViewPort = false;
-          }
-        });
-      },
-      { root: null, });
-      this.visibilityObserver.observe(this.rootElement);
+      this.setRootElement(rootElement);
     }
   }
   public detachFromUI() {

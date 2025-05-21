@@ -128,7 +128,7 @@ onUpdated(() => {
 });
 onMounted(() => {
   if (root.value && model.value) {
-    model.value.rootElement = root.value;
+    model.value.setRootElement(root.value);
   }
 });
 const hover = (event: MouseEvent) => {
