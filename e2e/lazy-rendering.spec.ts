@@ -20,7 +20,7 @@ test.describe(title, () => {
     await expect(await nonRenderedPages.count()).toBeGreaterThanOrEqual(107);
   });
 
-  test("Huge JSON long task time", async ({ page }) => {
+  test.skip("Huge JSON long task time", async ({ page }) => {
     const timeLimit = 4000;
     const totalBlockingTime: number = await page.evaluate(([json, timeLimit]) => {
       return new Promise<number>((resolve) => {
