@@ -372,13 +372,22 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     var questions = this.survey.getAllQuestions();
     for (var i = 0; i < questions.length; i++) {
       var q = questions[i];
-      var choices = q["choices"];
-      if (!choices) continue;
-      var prop = Serializer.findProperty(q.getType(), "choices");
-      if (!prop || prop.type !== "itemvalue[]") continue;
-      this.AddElements(choices, res);
+      ["choices", "columns", "rows"].forEach(propName => this.addItemValuesCore(q, propName, res));
     }
     return res;
+  }
+  private addItemValuesCore(q: Question, propName: string, res: Array<Base>) {
+    var itemValues = q[propName];
+    if (!itemValues) return;
+    var prop = Serializer.findProperty(q.getType(), propName);
+    if (!prop || prop.type !== "itemvalue[]") return;
+    for (var i = 0; i < itemValues.length; i++) {
+      var itemValue = itemValues[i];
+      if (itemValue instanceof ItemValue) {
+        res.push(itemValue);
+      }
+    }
+    this.AddElements(itemValues, res);
   }
   private AddElements(src: Array<any>, dest: Array<any>) {
     for (var i = 0; i < src.length; i++) {

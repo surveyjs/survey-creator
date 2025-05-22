@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-vue",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
@@ -26,6 +26,8 @@
     "testcafe": "testcafe ../../functionalTests/ --app \"npm run serve:example:prod\" --selector-timeout 1500 --config-file .testcaferc.dev.js",
     "test:a11y": "playwright test --project a11y --ui",
     "test:a11y:ci": "playwright test --project a11y --reporter dot --quiet",
+    "e2e": "playwright test --project e2e --ui",
+    "e2e:ci": "playwright test --project e2e",
     "test:scr": "playwright test --project scr --ui",
     "test:scr:ci": "playwright test --project scr"
   },

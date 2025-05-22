@@ -33,3 +33,4 @@ import "../localization/thai";
 import "../localization/traditional-chinese";
 import "../localization/turkish";
 import "../localization/haitian-creole";
+import "../localization/greek";

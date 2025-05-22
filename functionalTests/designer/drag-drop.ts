@@ -1262,7 +1262,7 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   const Question1 = Selector("[data-name=\"question1\"]");
   await t.click(Question1, { speed: 0.5 });
 
-  const ChoicesTab = Selector("h4").withExactText("Choice Options");
+  const ChoicesTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("Choice Options");
   await t.click(ChoicesTab);
 
   const Item1 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
@@ -1325,7 +1325,7 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
   };
   await setJSON(json);
 
-  const PagesTab = Selector("h4").withExactText("Pages");
+  const PagesTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("Pages");
   await t
     .click(surveySettingsButtonSelector, { speed: 0.5 })
     .click(PagesTab);

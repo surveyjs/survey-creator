@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-angular",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Use SurveyJS Creator to create or edit JSON for SurveyJS Form Library.",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "https://surveyjs.io/Licenses#SurveyCreator",
@@ -84,6 +84,8 @@
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\" ",
     "test:a11y": "playwright test --project a11y --ui",
     "test:a11y:ci": "playwright test --project a11y --reporter dot --quiet",
+    "e2e": "playwright test --project e2e --ui",
+    "e2e:ci": "playwright test --project e2e",
     "test:scr": "playwright test --project scr --ui",
     "test:scr:ci": "playwright test --project scr"
   }

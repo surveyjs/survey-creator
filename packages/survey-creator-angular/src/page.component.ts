@@ -40,7 +40,7 @@ export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   public override ngAfterViewChecked(): void {
     super.ngAfterViewChecked();
     if (this.adorner && this.container?.nativeElement) {
-      this.adorner.rootElement = this.container.nativeElement;
+      this.adorner.setRootElement(this.container.nativeElement);
     }
   }
   override ngOnDestroy(): void {

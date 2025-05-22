@@ -168,7 +168,8 @@ export var settings = {
     indentation: 2,
     exportFileName: "survey.json"
   },
-  useLegacyIcons: false
+  useLegacyIcons: false,
+  pageContentLazyRendering: true,
 };
 export interface ICollectionItemAllowOperations {
   allowDelete: boolean;

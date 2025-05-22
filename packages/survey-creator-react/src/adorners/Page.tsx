@@ -7,7 +7,7 @@ import {
   ReactElementFactory,
   SurveyPage,
   SvgIcon,
-  SurveyElementBase
+  LoadingIndicatorComponent
 } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
 import {
@@ -24,6 +24,14 @@ interface ICreatorSurveyPageComponentProps {
   page: PageModel;
   isGhost: boolean;
 }
+const PageElementContent = React.memo(({ page, survey, creator }: {
+  page: PageModel,
+  survey: SurveyModel,
+  creator: SurveyCreatorModel,
+}) => {
+  return <SurveyPage page={page} survey={survey} creator={creator} />;
+});
+PageElementContent.displayName = "PageElementContent";
 
 export class CreatorSurveyPageComponent extends CreatorModelElement<
   ICreatorSurveyPageComponentProps,
@@ -108,7 +116,16 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     );
   }
   protected renderContent(): React.JSX.Element {
-    return (<SurveyPage page={this.props.page} survey={this.props.survey} creator={this.props.creator} css={this.model.css}></SurveyPage>);
+    if (!this.model.needRenderContent) {
+      return <div className={"svc-page__loading-content"}><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
+    }
+    return (
+      <PageElementContent
+        page={this.props.page}
+        survey={this.props.survey}
+        creator={this.props.creator}
+      />
+    );
   }
   protected renderHeader(): React.JSX.Element {
     const actions = (<div className="svc-page__content-actions">

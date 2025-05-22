@@ -34,8 +34,8 @@ test("visibleIf property in de localization", async (t) => {
   await setDELocale();
 
   const question1 = Selector("[data-name=\"question1\"]");
-  const generalTab = Selector("h4").withExactText("Allgemein");
-  const logicTab = Selector("h4").withExactText("Logik");
+  const generalTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("Allgemein");
+  const logicTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("Logik");
   const editVisibleIf = Selector("button").withExactText("Bearbeiten");
   const popup = Selector(".sv-popup__body-content");
   const chooseQuestion = popup.find(".sl-dropdown__value");
