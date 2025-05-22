@@ -5,10 +5,14 @@
   [id]="adorner.page.id" [attr.data-sv-drop-target-survey-page]="adorner.dropTargetName" #container>
   <div class="svc-question__drop-indicator svc-question__drop-indicator--top"></div>
   <div class="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
-  <svc-page-element-content 
+  <svc-page-element-content
+    *ngIf="adorner.needRenderContent" 
     [model]="adorner.page" 
     [survey]="survey">
   </svc-page-element-content>
+  <div *ngIf="!adorner.needRenderContent" class="svc-page__loading-content">
+    <sv-ng-loading-indicator></sv-ng-loading-indicator>
+  </div>
   <div *ngIf="adorner.showPlaceholder" class="svc-page__placeholder_frame">
     <div class="svc-panel__placeholder_frame">
       <div class="svc-panel__placeholder">{{adorner.placeholderText}}</div>

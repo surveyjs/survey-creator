@@ -7,7 +7,7 @@ import {
   ReactElementFactory,
   SurveyPage,
   SvgIcon,
-  SurveyElementBase
+  LoadingIndicatorComponent
 } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
 import {
@@ -116,6 +116,9 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     );
   }
   protected renderContent(): React.JSX.Element {
+    if (!this.model.needRenderContent) {
+      return <div className={"svc-page__loading-content"}><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
+    }
     return (
       <PageElementContent
         page={this.props.page}
