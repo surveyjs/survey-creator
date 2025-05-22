@@ -42,7 +42,7 @@ import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
 import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
-import { DragDropSurveyElements } from "./dragdrop-survey-elements";
+import { DragDropSurveyElements, getPathToRootPageElement } from "./dragdrop-survey-elements";
 import { PageAdorner } from "./components/page";
 import {
   ElementDeletingEvent, PropertyGetReadOnlyEvent, ElementGetDisplayNameEvent, ElementAllowOperationsEvent,
@@ -2282,11 +2282,13 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements.onDragClear.add((sender, options) => {
       this.stopUndoRedoTransaction();
       if (!!options.draggedElement && !isDraggedFromToolbox && (options.draggedElement.isPage || (this.collapseOnDrag !== false && this.collapseOnDrag !== "none"))) {
-        const adorner = SurveyElementAdornerBase.GetAdorner(options.draggedElement);
-        adorner?.saveRelativePosition();
-        this.designerStateManager?.release();
-        this.restoreElementsStateOnDragEnd();
-        adorner?.restoreRelativePosition();
+        setTimeout(() => {
+          const adorner = SurveyElementAdornerBase.GetAdorner(options.draggedElement);
+          adorner?.saveRelativePosition();
+          this.designerStateManager?.release();
+          this.restoreElementsStateOnDragEnd();
+          adorner?.restoreRelativePosition();
+        }, 0);
       }
       isDraggedFromToolbox = false;
       this.onDragClear.fire(this, options);
@@ -2300,12 +2302,7 @@ export class SurveyCreatorModel extends Base
     if (element.isPage || this.collapseOnDrag === "pages") {
       this.expandCollapseManager.expandCollapseElements("drag-start", true, this.survey.pages.filter(p => !element || element.isPage || p !== (element as any).page));
     } else if (this.collapseOnDrag === true || this.collapseOnDrag === "all" || this.collapseOnDrag === "adaptive" && this.hasScroll) {
-      const exeptions = [(element as any).page];
-      var current: any = element;
-      while(current.parent) {
-        exeptions.push(current);
-        current = current.parent;
-      }
+      const exeptions = getPathToRootPageElement(element);
       this.collapseAll(exeptions, true);
     }
   }

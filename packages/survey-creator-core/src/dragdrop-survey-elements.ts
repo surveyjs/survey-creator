@@ -50,6 +50,27 @@ export function calculateDragOverLocation(clientX: number, clientY: number, rect
   }
 }
 
+export function getPathToRootPageElement(element: ISurveyElement) {
+  let path = [];
+  let target: any = element;
+  let lastTarget = element;
+  while(!!target) {
+    if (target.isInteractiveDesignElement) {
+      path.push(target);
+      lastTarget = target;
+    }
+    let parent = target.parent || target.parentQuestion;
+    if (!parent && target.data && target.data.data && target.data.data.getType && target.data.data.getType() === "matrixdropdown") {
+      parent = target.data.data;
+    }
+    target = parent;
+  }
+  if (!lastTarget.isPage) {
+    path.push((element as any).page || (element as any).__page); // TODO: remove __page
+  }
+  return path;
+}
+
 export class DragDropSurveyElements extends DragDropCore<any> {
   public static newGhostPage: PageModel = null;
   public static restrictDragQuestionBetweenPages: boolean = false;
@@ -344,15 +365,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       return;
     }
     if (dropTarget !== prevDropTarget) {
-      let dropTargetPath = [];
-      let target = dropTarget;
-      while(!!target) {
-        dropTargetPath.push(target);
-        target = target.parent;
-      }
-      if (!dropTarget.isPage) {
-        dropTargetPath.push((dropTarget as any).page || (dropTarget as any).__page); // TODO: remove __page
-      }
+      let dropTargetPath = getPathToRootPageElement(dropTarget);
       dropTargetPath = dropTargetPath.reverse();
       for (let i = 0; i < this.prevDropTargetPath.length && i < dropTargetPath.length; i++) {
         if (this.prevDropTargetPath[i] !== dropTargetPath[i]) {
