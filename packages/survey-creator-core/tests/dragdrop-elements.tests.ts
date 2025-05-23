@@ -1735,7 +1735,7 @@ test("drag drop move page shouldn't raise survey onPageAdded", () => {
   expect(pageAddedCounter).toBe(0);
 });
 
-test("collapse pages on element drag start", () => {
+test("collapse pages on element drag start", async () => {
   const json = {
     "pages": [
       { "name": "page1", "elements": [{ "type": "text", "name": "q1" }] },
@@ -1763,14 +1763,20 @@ test("collapse pages on element drag start", () => {
   expect(pa[1].collapsed).toBeTruthy();
   expect(pa[2].collapsed).toBeFalsy();
 
+  const promise = new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 10);
+  });
   ddHelper.clear();
+  await promise;
 
   expect(pa[0].collapsed).toBeFalsy();
   expect(pa[1].collapsed).toBeFalsy();
   expect(pa[2].collapsed).toBeFalsy();
 });
 
-test("collapse all containers except parent on element drag start", () => {
+test("collapse all containers except parent on element drag start", async () => {
   const json = {
     "pages": [
       { "name": "page1", "elements": [{ "type": "panel", "name": "panel1" }, { "type": "panel", "name": "panel2", "elements": [{ "type": "text", "name": "q1" }] }] },
@@ -1793,7 +1799,7 @@ test("collapse all containers except parent on element drag start", () => {
   ddHelper.parentElement = p3;
   ddHelper.draggedElement = q3;
 
-  ddHelper["createDraggedElementShortcut"] = () => { };
+  ddHelper["createDraggedElementShortcut"] = async () => { };
   ddHelper.dragInit(null, ddHelper.draggedElement, ddHelper.parentElement, document.createElement("div"));
 
   expect(pa[0].collapsed).toBeTruthy();
@@ -1804,7 +1810,13 @@ test("collapse all containers except parent on element drag start", () => {
   expect(pna[2].collapsed).toBeTruthy();
   expect(pna[3].collapsed).toBeFalsy();
 
+  const promise = new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 10);
+  });
   ddHelper.clear();
+  await promise;
 
   expect(pa[0].collapsed).toBeFalsy();
   expect(pna[0].collapsed).toBeFalsy();
