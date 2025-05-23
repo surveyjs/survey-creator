@@ -74,11 +74,11 @@ test("Language switcher", async (t) => {
   await t
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(getBarItemByTitle("English").visible).ok()
-    .expect(Selector(".sd-title .sd-header__text h3").textContent).contains("My Survey")
+    .expect(Selector(".sd-title .sd-header__text div").textContent).contains("My Survey")
     .click(getBarItemByTitle("English"))
     .expect(getListItemByText("Deutsch").visible).ok()
     .click(getListItemByText("Deutsch"))
-    .expect(Selector(".sd-title .sd-header__text h3").textContent).contains("Meine Umfrage")
+    .expect(Selector(".sd-title .sd-header__text div").textContent).contains("Meine Umfrage")
     .expect(getBarItemByTitle("Deutsch").visible).ok();
 });
 

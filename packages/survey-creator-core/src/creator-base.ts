@@ -3206,6 +3206,13 @@ export class SurveyCreatorModel extends Base
   public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
     if (!selEl) return;
+    const elementPage = this.getPageByElement(selEl);
+    if (!!elementPage) {
+      const pageAdorner = SurveyElementAdornerBase.GetAdorner(elementPage) as PageAdorner;
+      if (!!pageAdorner && !pageAdorner.needRenderContent) {
+        pageAdorner.needRenderContent = true;
+      }
+    }
     clearInterval(this.currentFocusInterval);
     clearTimeout(this.currentFocusTimeout);
     this.currentFocusTimeout = setTimeout(() => {
@@ -3217,7 +3224,6 @@ export class SurveyCreatorModel extends Base
           if (!!el) {
             const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el.parentElement ?? el, true);
             if (!!isNeedScroll) {
-              const elementPage = this.getPageByElement(selEl);
               const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
               if (!!elementPage) {
                 this.survey.scrollElementToTop(selEl, undefined, elementPage, selEl.id, true, scrollIntoViewOptions, this.rootElement);

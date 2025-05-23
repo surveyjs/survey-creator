@@ -74,16 +74,16 @@ test("Matrix question", async (t) => {
 
     .click(Selector("span[aria-placeholder='Survey Title']"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
-    .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
+    .expect(Selector("div[id$=ariaTitle][id^=sq].spg-title").withText("Columns").visible).notOk()
 
     .click(Selector(".sv-string-editor").withText("Column 1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
-    .expect(Selector("h5.spg-title").withText("Columns").visible).ok()
+    .expect(Selector("div[id$=ariaTitle][id^=sq].spg-title").withText("Columns").visible).ok()
 
     .click(Selector(".sv-string-editor").withText("Row 1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
-    .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
-    .expect(Selector("h5.spg-title").withText("Rows").visible).ok();
+    .expect(Selector("div[id$=ariaTitle][id^=sq].spg-title").withText("Columns").visible).notOk()
+    .expect(Selector("div[id$=ariaTitle][id^=sq].spg-title").withText("Rows").visible).ok();
 });
 
 test("Matrix dropdown question", async (t) => {
@@ -98,12 +98,12 @@ test("Matrix dropdown question", async (t) => {
 
     .click(Selector(".sv-string-editor").withText("Column 1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Column 1")
-    .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
+    .expect(Selector("div[id$=ariaTitle][id^=sq].spg-title").withText("Columns").visible).notOk()
 
     .click(Selector(".sv-string-editor").withText("Row 1"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
-    .expect(Selector("h5.spg-title").withText("Columns").visible).notOk()
-    .expect(Selector("h5.spg-title").withText("Rows").visible).ok();
+    .expect(Selector("div[id$=ariaTitle][id^=sq].spg-title").withText("Columns").visible).notOk()
+    .expect(Selector("div[id$=ariaTitle][id^=sq].spg-title").withText("Rows").visible).ok();
 });
 
 test("Matrix dropdown question select column", async (t) => {

@@ -35,10 +35,10 @@ test("Check section", async (t) => {
     await setJSON(json);
     // await t.click(Selector(".svd-grid-expand"));
     await t.click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
-    await t.click(Selector("h4[aria-label=General]"));
-    await t.click(Selector("h4[aria-label='Choice Options']"));
+    await t.click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"));
+    await t.click(Selector("div[id$=ariaTitle][id^=sp]").withText("Choice Options"));
 
-    const sectionContentElement = Selector("h4[aria-label='Choice Options']").parent().nextSibling();
+    const sectionContentElement = Selector("div[id$=ariaTitle][id^=sp]").withText("Choice Options").parent().nextSibling();
     await t.expect(sectionContentElement.visible).ok();
     await takeElementScreenshot("choices-section-default.png", sectionContentElement, t, comparer);
     await ClientFunction(() => (<any>document).querySelector("[data-name='choices'] .spg-input").focus())();
@@ -78,10 +78,10 @@ test("Check items empty", async (t) => {
     await setJSON(checkBoxEmptyItemsSurvey);
     await t
       .click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 })
-      .click(Selector("h4[aria-label=General]"))
-      .click(Selector("h4[aria-label='Choice Options']"));
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"))
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("Choice Options"));
 
-    const sectionContentElement = Selector("h4[aria-label='Choice Options']").parent().nextSibling();
+    const sectionContentElement = Selector("div[id$=ariaTitle][id^=sp]").withText("Choice Options").parent().nextSibling();
     await takeElementScreenshot("choices-empty-items.png", sectionContentElement, t, comparer);
 
     await t.hover(sectionContentElement.find(".spg-matrixdynamic__add-btn"));
@@ -118,11 +118,11 @@ test("Collection editor headers", async (t) => {
     await t
       .click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
     await t
-      .click(Selector("h4[aria-label=General]"));
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"));
     await t
-      .click(Selector("h4[aria-label='Choice Options']"));
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("Choice Options"));
 
-    const sectionContentElement = Selector("h4[aria-label='Choice Options']").parent().nextSibling();
+    const sectionContentElement = Selector("div[id$=ariaTitle][id^=sp]").withText("Choice Options").parent().nextSibling();
     await takeElementScreenshot("collection-editor-header.png", sectionContentElement, t, comparer);
   });
 });
@@ -154,8 +154,8 @@ test("Check choices editor with narrow property grid", async (t) => {
     await t
       .drag(westResizer, 100, 0)
       .click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 })
-      .click(Selector("h4[aria-label=General]"))
-      .click(Selector("h4[aria-label='Choice Options']"))
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"))
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("Choice Options"))
       .click(questionSelector.find("td .spg-action-button").nth(0));
 
     await takeElementScreenshot("choices-editor-narrow-pg.png", questionSelector, t, comparer);

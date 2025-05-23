@@ -11,7 +11,7 @@ const makeCreatorReadOnly = ClientFunction(() => {
 });
 
 const question1 = Selector("[data-name=\"question1\"]");
-const dataTab = Selector("h4").withExactText("Data");
+const dataTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("Data");
 
 test("Default value", async (t) => {
   const json = {
@@ -36,7 +36,7 @@ test("Default value", async (t) => {
   await setJSON(json);
 
   const question1 = Selector("[data-name=\"question1\"]");
-  const dataTab = Selector("h4").withExactText("Data");
+  const dataTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("Data");
   const item1PGEditorInput = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
 
   await t

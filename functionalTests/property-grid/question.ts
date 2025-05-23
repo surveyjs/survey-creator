@@ -41,7 +41,7 @@ test("Change rating auto-generate", async (t) => {
   await setJSON(json);
 
   const question1 = Selector("[data-name=\"question1\"]");
-  const choicesTab = Selector("h4").withExactText("Rating Values");
+  const choicesTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("Rating Values");
   const items = Selector("[data-name=\"rateValues\"]");
 
   await t

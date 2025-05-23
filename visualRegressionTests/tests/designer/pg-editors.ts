@@ -156,8 +156,8 @@ test("Default value popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1240, 870);
 
-    const generalTab = Selector("h4").withExactText("General");
-    const dataTab = Selector("h4").withExactText("Data");
+    const generalTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("General");
+    const dataTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("Data");
 
     await t
       .hover(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 })
@@ -187,8 +187,8 @@ test("Custom button into fast entry popup", async (t) => {
       });
     })();
 
-    const generalTab = Selector("h4").withExactText("General");
-    const choicesTab = Selector("h4").withExactText("Choice Options");
+    const generalTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("General");
+    const choicesTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("Choice Options");
 
     await t
       .hover(getToolboxItemByAriaLabel("Dropdown"))
@@ -204,8 +204,8 @@ test("Logic popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1240, 870);
 
-    const generalTab = Selector("h4").withExactText("General");
-    const logicTab = Selector("h4").withExactText("Conditions");
+    const generalTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("General");
+    const logicTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("Conditions");
 
     await t
       .hover(getToolboxItemByAriaLabel("Single-Line Input"), { offsetX: 25 })
@@ -248,8 +248,8 @@ test("Logic popup with boolean question", async (t) => {
       "showQuestionNumbers": "off"
     });
 
-    const generalTab = Selector("h4").withExactText("General");
-    const logicTab = Selector("h4").withExactText("Conditions");
+    const generalTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("General");
+    const logicTab = Selector("div[id$=ariaTitle][id^=sp]").withExactText("Conditions");
 
     await t
       .click(Selector(".svc-question__content .sd-question__title"))
@@ -406,8 +406,8 @@ test("Check bindings question", async (t) => {
     await t.resizeWindow(1920, 1920);
     await addQuestionByAddQuestionButton(t, "Dynamic Matrix");
     await t
-      .click(Selector("h4[aria-label=General]"))
-      .click(Selector("h4[aria-label=Conditions]"));
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"))
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("Conditions"));
 
     await takeElementScreenshot("bindings-editor.png", Selector(".spg-question[data-name='bindings']"), t, comparer);
   });
@@ -416,7 +416,7 @@ test("Check triggers question", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);
     await t
-      .click(Selector("h4[aria-label=Conditions]"))
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("Conditions"))
       .click(Selector("div[data-name='triggers'] .spg-action-button--icon[title='Add new trigger']"));
     await takeElementScreenshot("triggers-editor.png", Selector("div[data-name='triggers']"), t, comparer);
     await ClientFunction(() => (<any>document).querySelector("[aria-label='row 1, column triggerType']").focus())();
@@ -467,7 +467,7 @@ test("Check color editor", async (t) => {
     })();
     await setJSON({});
     await t
-      .click(Selector("h4[aria-label=General]"));
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"));
     const questionSelector = Selector("div[data-name='fontColor']");
     await takeElementScreenshot("color-editor-disabled.png", questionSelector, t, comparer);
     await ClientFunction(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = false)();
@@ -513,7 +513,7 @@ test("Check color editor with empty value", async (t) => {
     })();
     await setJSON({});
     await t
-      .click(Selector("h4[aria-label=General]"));
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"));
     const questionSelector = Selector("div[data-name='fontColor']");
     await takeElementScreenshot("color-editor-empty.png", questionSelector, t, comparer);
     await ClientFunction(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = true)();
@@ -542,7 +542,7 @@ test("Check spinedit editor", async (t) => {
     })();
     await setJSON({});
     await t
-      .click(Selector("h4[aria-label=General]"));
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"));
     const questionSelector = Selector("div[data-name='fontSize']");
     await takeElementScreenshot("spin-editor-disabled.png", questionSelector, t, comparer);
     await ClientFunction(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = false)();
@@ -581,7 +581,7 @@ test("Check file editor", async (t) => {
     })();
     await setJSON({});
     await t
-      .click(Selector("h4[aria-label=General]"));
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"));
     const questionSelector = Selector("div[data-name='image']");
     await takeElementScreenshot("file-editor-disabled.png", questionSelector, t, comparer);
     await ClientFunction(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = false)();
@@ -615,7 +615,7 @@ test("Check dropdown editor with titleLocation: 'left'", async (t) => {
     })();
     await setJSON({});
     await t
-      .click(Selector("h4[aria-label=General]"));
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"));
     const questionSelector = Selector("div[data-name='fontFamily']");
     await takeElementScreenshot("dropdown-editor-title-location-left.png", questionSelector, t, comparer);
     await t.click(questionSelector.find("input"));
@@ -663,7 +663,7 @@ test("Check comment editor with reset button", async (t) => {
     })();
     await setJSON({});
     await t
-      .click(Selector("h4[aria-label=General]"));
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"));
     const questionSelector = Selector("div[data-name='test']");
     await takeElementScreenshot("comment-with-reset-disabled-button.png", questionSelector, t, comparer);
     await t.typeText(questionSelector.find("textarea"), "value", { replace: true });
@@ -684,7 +684,7 @@ test("Check text editor with reset button", async (t) => {
     })();
     await setJSON({});
     await t
-      .click(Selector("h4[aria-label=General]"));
+      .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"));
     const questionSelector = Selector("div[data-name='test']");
     await takeElementScreenshot("text-with-reset-disabled-button.png", questionSelector, t, comparer);
     await t.typeText(questionSelector.find("input"), "value", { replace: true });
@@ -718,7 +718,7 @@ test("Check property grid panel' header states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({});
     await t.resizeWindow(1920, 1920);
-    const headerSelector = Selector("h4[aria-label=General]").nth(0);
+    const headerSelector = Selector("div[id$=ariaTitle][id^=sp]").withText("General").nth(0);
     await t
       .click(headerSelector);
     await takeElementScreenshot("pg-panel-header-expanded-focused.png", headerSelector, t, comparer);
