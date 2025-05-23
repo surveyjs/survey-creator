@@ -39,6 +39,10 @@ export class SurveyLogicOpertor extends SurveyQuestionDropdown {
       </div>
     </div>);
   }
+
+  protected renderEditorButtons(): React.JSX.Element | null {
+    return null;
+  }
 }
 
 ReactQuestionFactory.Instance.registerQuestion("sv-logic-operator", (props) => {
