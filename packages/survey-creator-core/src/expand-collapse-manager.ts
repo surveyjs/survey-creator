@@ -8,8 +8,8 @@ export class ExpandCollapseManager {
   constructor(private creator: CreatorBase) {
   }
 
-  public expandCollapseElements(reason: ElementGetExpandCollapseStateEventReason, isCollapsed: boolean, elements: SurveyElement[] = null) {
-    this.updateCollapsed(elements || this.getCollapsableElements(), isCollapsed, reason);
+  public expandCollapseElements(reason: ElementGetExpandCollapseStateEventReason, isCollapsed: boolean, elements: SurveyElement[] = null, exceptions?: SurveyElement[], blockAnimations = false) {
+    this.updateCollapsed(elements || this.getCollapsableElements(), isCollapsed, reason, exceptions, blockAnimations);
   }
 
   public get questionsLocked() {
@@ -18,7 +18,7 @@ export class ExpandCollapseManager {
   public lockQuestions(locked: boolean) {
     this._lockQuestions = locked;
   }
-  private getCollapsableElements() {
+  public getCollapsableElements() {
     return (this.creator.survey.pages as SurveyElement[])
       .concat(this.creator.survey.getAllPanels() as unknown as SurveyElement[])
       .concat(this.creator.survey.getAllQuestions() as SurveyElement[]);
@@ -30,15 +30,18 @@ export class ExpandCollapseManager {
       return a - b;
     });
   }
-  private updateCollapsed(elements: SurveyElement[], value: boolean, reason: ElementGetExpandCollapseStateEventReason) {
+  private updateCollapsed(elements: SurveyElement[], value: boolean, reason: ElementGetExpandCollapseStateEventReason, exceptions?: SurveyElement[], blockAnimations = false) {
     this.sortElements(elements).forEach(element => {
       if (element.isQuestion && this._lockQuestions) return;
+      if (exceptions && exceptions.indexOf(element) > -1) return;
       const collapsed = this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
       this.creator.designerStateManager?.setElementCollapsed(element, collapsed);
       const adorner = SurveyElementAdornerBase.GetAdorner(element);
       if (adorner && adorner.allowExpandCollapse) {
         const newState = this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
+        blockAnimations && adorner.blockAnimations();
         adorner.collapsed = newState;
+        blockAnimations && adorner.releaseAnimations();
       }
     });
   }
