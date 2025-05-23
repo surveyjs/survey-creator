@@ -11,6 +11,7 @@ export interface IPropertyTabInfo {
   title?: string;
   visible?: boolean;
   parent?: string;
+  iconName?: string;
 }
 
 export interface ISurveyQuestionEditorDefinition {

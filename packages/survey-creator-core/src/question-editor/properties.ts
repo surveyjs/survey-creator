@@ -231,7 +231,7 @@ export class SurveyQuestionProperties {
     return true;
   }
   private setTabProperties(defProperty: any): void {
-    let tab = this.getTabOrCreate(defProperty.name);
+    let tab = this.getTabOrCreate(defProperty.name, defProperty.iconName);
     if (defProperty.index > 0) {
       tab.index = defProperty.index;
     }
@@ -290,13 +290,13 @@ export class SurveyQuestionProperties {
     }
     return null;
   }
-  private getTabOrCreate(tabName: string): SurveyQuestionEditorTabDefinition {
+  private getTabOrCreate(tabName: string, iconName?: string): SurveyQuestionEditorTabDefinition {
     for (var i = 0; i < this.tabs.length; i++) {
       if (this.tabs[i].name == tabName) return this.tabs[i];
     }
     var res = new SurveyQuestionEditorTabDefinition();
     res.name = tabName;
-    res.iconName = pgTabIcons[tabName] || pgTabIcons["undefined"];
+    res.iconName = iconName || pgTabIcons[tabName] || pgTabIcons["undefined"];
     if (tabName == settings.propertyGrid.generalTabName) {
       res.index = -1;
     }
