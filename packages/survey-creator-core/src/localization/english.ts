@@ -750,7 +750,7 @@ export var enStrings = {
       max: "Max value",
       step: "Step value",
       showLabels: "Show scale labels",
-      segmentCount: "Number of segments",
+      // segmentCount: "Number of segments",
       tooltipVisibilityPG: "Show tooltips",
       allowSwap: "Allow thumb crossing",
       labelCount: "Number of auto-generated labels",

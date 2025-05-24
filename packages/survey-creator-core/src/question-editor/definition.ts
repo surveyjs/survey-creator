@@ -248,7 +248,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "min", tab: "sliderSettings" },
       { name: "max", tab: "sliderSettings" },
       { name: "step", tab: "sliderSettings" },
-      { name: "segmentCount", tab: "sliderSettings" },
+      // { name: "segmentCount", tab: "sliderSettings" },
       { name: "minRangeLength", tab: "sliderSettings" },
       { name: "maxRangeLength", tab: "sliderSettings" },
       { name: "showLabels", tab: "sliderSettings" },
