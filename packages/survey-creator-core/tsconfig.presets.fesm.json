@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.presets.json",
+  "compilerOptions": {
+    "target": "ES6"
+  }
+}

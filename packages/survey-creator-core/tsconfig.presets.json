@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": false,
+    "declarationDir": null,
+    "paths": {
+      "survey-core": [
+        "../../../survey-library/packages/survey-core/build/typings"
+      ],
+      "survey-creator-core": [
+        "./build"
+      ]
+    }
+  },
+  "include": [
+    "./src/presets/**/*.ts"
+  ]
+}
