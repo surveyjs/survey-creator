@@ -2203,10 +2203,6 @@ export class SurveyCreatorModel extends Base
       this.existingPages[options.page.id] = true;
       this.doOnPageAdded(options.page);
     });
-    survey.onDragDropAllow.add((sender, options) => {
-      (<any>options).survey = sender;
-      this.onDragDropAllow.fire(this, options);
-    });
 
     this.setSurvey(survey);
     this.expandCollapseManager.expandCollapseElements("loading", false);
@@ -2265,6 +2261,10 @@ export class SurveyCreatorModel extends Base
       }
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
+    });
+    this.dragDropSurveyElements.onDragDropAllow.add((sender, options) => {
+      (<any>options).survey = this.survey;
+      this.onDragDropAllow.fire(this, options);
     });
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();

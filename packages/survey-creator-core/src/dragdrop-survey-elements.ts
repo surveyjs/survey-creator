@@ -1,4 +1,4 @@
-import { DragDropAllowEvent, DragDropCore, getIconNameFromProxy, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, Serializer, SurveyElement, SurveyModel } from "survey-core";
+import { DragDropAllowEvent, DragDropCore, EventBase, getIconNameFromProxy, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, Serializer, SurveyElement, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
@@ -305,8 +305,14 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     return <HTMLElement>result;
   }
+
+  /**
+   * An event that is raised when users drag and drop survey elements while designing the survey in [Survey Creator](https://surveyjs.io/survey-creator/documentation/overview). Use this event to control drag and drop operations.
+   */
+  public onDragDropAllow: EventBase<DragDropCore<any>, DragDropAllowEvent> = new EventBase<DragDropCore<any>, DragDropAllowEvent>();
+
   private isAllowDragOver(dropTarget: ISurveyElement, dragOverLocation: DropIndicatorPosition): boolean {
-    if (!this.survey || this.survey.onDragDropAllow.isEmpty) return true;
+    if (this.onDragDropAllow.isEmpty) return true;
     const allowOptions: DragDropAllowEvent = {
       allow: true,
       parent: this.parentElement,
@@ -325,7 +331,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (dragOverLocation === DropIndicatorPosition.Top || dragOverLocation === DropIndicatorPosition.Left) {
       allowOptions.insertBefore = <IElement>dropTarget;
     }
-    this.survey.onDragDropAllow.fire(this.survey, allowOptions);
+    this.onDragDropAllow.fire(this, allowOptions);
     if (!allowOptions.allowDropNextToAnother) {
       if (dragOverLocation === DropIndicatorPosition.Left) {
         this.dragOverLocation = DropIndicatorPosition.Top;
