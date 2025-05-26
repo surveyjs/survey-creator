@@ -833,7 +833,7 @@ test("Matrix dropdown question inplace row header editor #2553", async (t) => {
     // .click(Selector("button[title='ShowPanel']"))
     .click(Selector(".sd-table__row .svc-matrix-cell .sv-string-editor"))
     .typeText(Selector(".sd-table__row .svc-matrix-cell .sv-string-editor"), "Row header")
-    .click(Selector("h4.spg-title"))
+    .click(Selector("div[id$=ariaTitle][id^=sp].spg-title"))
     .click(Selector("input.spg-input"))
     .pressKey("ctrl+a delete 3 0 0 p x")
     .expect(Selector("input.spg-input").value).eql("300px");

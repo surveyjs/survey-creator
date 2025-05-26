@@ -1,4 +1,4 @@
-import { ActionContainer, classesToSelector, ComputedUpdater, CssClassBuilder, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, settings as SurveySettings } from "survey-core";
+import { ActionContainer, classesToSelector, ComputedUpdater, CssClassBuilder, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, SurveyModel, settings as SurveySettings } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementActionContainer } from "./action-container-view-model";
@@ -18,6 +18,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   public questionTypeSelectorModel: any;
   private dragOrClickHelper: DragOrClickHelper;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
+  @property({ defaultValue: false }) isVisibleInViewPort: boolean;
+  @property({ defaultValue: !settings.pageContentLazyRendering }) needRenderContent: boolean;
 
   protected updateShowPlaceholder(visibleRows?: Array<QuestionRowModel>) {
     this.showPlaceholder = !this.isGhost && (visibleRows || this.page.visibleRows).length === 0;
@@ -68,6 +70,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         (<any>surveyElement.locTitle).placeholder = () => { return surveyElement.isStartPage ? "pe.startPageTitlePlaceholder" : "pe.pageTitlePlaceholder"; };
         (<any>surveyElement.locDescription).placeholder = "pe.pageDescriptionPlaceholder";
       }
+      this.needRenderContent = this.creator.pageEditMode !== "standard" || !surveyElement.survey || surveyElement.survey.pages.length <= 5;
     }
   }
 
@@ -84,6 +87,42 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (!this.isDisposed) {
       this.dropIndicatorPosition = null;
     }
+  }
+
+  private visibilityObserver: IntersectionObserver;
+  public setRootElement(rootElement: HTMLElement) {
+    this.rootElement = rootElement;
+    this.visibilityObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.isVisibleInViewPort = true;
+          if ((!this.element.survey || !(this.element.survey as SurveyModel).isLazyRenderingSuspended) && !this.needRenderContent) {
+            setTimeout(() => this.needRenderContent = true, 1);
+          }
+        } else {
+          this.isVisibleInViewPort = false;
+        }
+      });
+    },
+    { root: null, });
+    this.visibilityObserver.observe(this.rootElement);
+  }
+
+  public attachToUI(surveyElement: PageModel, rootElement?: HTMLElement) {
+    super.attachToUI(surveyElement, rootElement);
+    if (!!rootElement) {
+      this.setRootElement(rootElement);
+    }
+  }
+  public detachFromUI() {
+    this.isVisibleInViewPort = false;
+    if (!!this.visibilityObserver) {
+      this.visibilityObserver.unobserve(this.rootElement);
+      this.visibilityObserver.disconnect();
+      this.visibilityObserver = null;
+    }
+    super.detachFromUI();
+    this.needRenderContent = false;
   }
 
   protected onElementSelectedChanged(isSelected: boolean) {

@@ -26,7 +26,7 @@ test("Check spinedit editor applies value on enter", async (t) => {
   })();
   await setJSON({});
   await t
-    .click(Selector("h4[aria-label=General]"))
+    .click(Selector("div[id$=ariaTitle][id^=sp]").withText("General"))
     .typeText(Selector(".spg-spin-editor__input"), "24", { replace: true })
     .pressKey("enter")
     .expect(ClientFunction(() => (<any>window).creator.survey.fontSize)()).eql(24)
