@@ -9,6 +9,7 @@ import * as presetsEditableBase from "../presets-editable-base";
 import * as presetsTabs from "../presets-tabs";
 import * as presetsLanguages from "../presets-languages";
 import * as presetsProperties from "../presets-properties";
+import * as presetsRanking from "../preset-question-ranking";
 import { checkLibraryVersion } from "survey-core";
 
 export let Version: string;
@@ -27,7 +28,8 @@ const SurveyCreatorPresets = {
   ...presetsEditableBase,
   ...presetsTabs,
   ...presetsLanguages,
-  ...presetsProperties
+  ...presetsProperties,
+  ...presetsRanking
 };
 
 checkLibraryVersion(`${process.env.VERSION}`, "creator-presets-core");

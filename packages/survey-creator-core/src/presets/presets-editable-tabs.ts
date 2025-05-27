@@ -19,7 +19,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
               name: this.allItems
             },
             {
-              type: "ranking",
+              type: "presetranking",
               name: this.nameItems,
               choicesVisibleIf: namesChoicesVisibleIf,
               title: "Tab order and titles",

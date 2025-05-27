@@ -1,5 +1,7 @@
-import { SurveyCreatorModel, editorLocalization, ICreatorOptions } from "survey-creator-core";
-import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
+import { SurveyCreatorModel } from "../creator-base";
+import { editorLocalization } from "../editorLocalization";
+import { ICreatorOptions } from "../creator-options";
+import { CreatorPreset, ICreatorPresetData } from "./presets";
 import { ActionContainer, Base, ComputedUpdater, LocalizableString, SurveyModel, createDropdownActionModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
