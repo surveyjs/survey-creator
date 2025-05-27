@@ -62,7 +62,7 @@ export class CreatorResponsivityManager {
     }
   }
 
-  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSidebar: boolean) {
+  private _process(toolboxIsCompact: boolean, toolboxVisible: boolean, flyoutSidebar: boolean, narrowSidebar: boolean) {
     this.creator.updateToolboxIsCompact(toolboxIsCompact);
     this.procesShowToolbox(toolboxVisible);
     this.procesShowPageNavigator(toolboxVisible);
@@ -78,7 +78,7 @@ export class CreatorResponsivityManager {
       this.creator.sidebar.expandSidebar();
     }
     this.creator.sidebar.flyoutMode = flyoutSidebar;
-
+    this.creator.sidebar.narrowMode = narrowSidebar;
   }
   public process(isFirst: boolean = false) {
     if (isFirst) {
@@ -88,13 +88,13 @@ export class CreatorResponsivityManager {
     this.updateSurveyActualWidth();
     this.currentWidth = this.getScreenWidth();
     if (this.currentWidth === "xl" || this.currentWidth === "xxl") {
-      this._process(false, true, false);
+      this._process(false, true, false, false);
     } else if (this.currentWidth === "l") {
-      this._process(true, true, false);
+      this._process(true, true, false, true);
     } else if (this.currentWidth === "m") {
-      this._process(true, true, true);
+      this._process(true, true, true, false);
     } else {
-      this._process(true, false, true);
+      this._process(true, false, true, false);
     }
 
     if (this.currentWidth == "xs") {
