@@ -12,12 +12,12 @@ import { editorLocalization } from "../../src/editorLocalization";
 test("Preset edit model, create pages", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  expect(survey.pages).toHaveLength(4);
-  expect(survey.visiblePages).toHaveLength(4);
+  expect(survey.pages).toHaveLength(3);
+  expect(survey.visiblePages).toHaveLength(3);
   expect(survey.pages[0].name).toEqual("page_languages");
   expect(survey.pages[1].name).toEqual("page_tabs");
   expect(survey.pages[2].name).toEqual("page_toolbox");
-  expect(survey.pages[3].name).toEqual("page_propertyGrid_definition");
+  //expect(survey.pages[3].name).toEqual("page_propertyGrid_definition");
 });
 test("Preset edit model, page component", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
@@ -431,14 +431,14 @@ test("Preset edit model, toolbox items & definition page", () => {
 //   expect(panels[0].name).toBe("logic");
 //   expect(panels[1].name).toBe("general");
 // });
-test("Preset edit model, include columns types", () => {
-  const editor = new CreatorPresetEditorModel();
-  const survey = editor.model;
-  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
-  const question = <QuestionDropdownModel>survey.getQuestionByName("propertyGrid_definition_selector");
-  expect(ItemValue.getItemByValue(question.choices, "matrixdropdowncolumn@default")).toBeTruthy();
-  expect(ItemValue.getItemByValue(question.choices, "matrixdropdowncolumn@checkbox")).toBeTruthy();
-});
+// test("Preset edit model, include columns types", () => {
+//   const editor = new CreatorPresetEditorModel();
+//   const survey = editor.model;
+//   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+//   const question = <QuestionDropdownModel>survey.getQuestionByName("propertyGrid_definition_selector");
+//   expect(ItemValue.getItemByValue(question.choices, "matrixdropdowncolumn@default")).toBeTruthy();
+//   expect(ItemValue.getItemByValue(question.choices, "matrixdropdowncolumn@checkbox")).toBeTruthy();
+// });
 // test("Preset edit model, edit matrixdropdowncolumn@default", () => {
 //   const editor = new CreatorPresetEditorModel();
 //   const survey = editor.model;

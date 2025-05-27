@@ -1,6 +1,7 @@
 import { Helpers, ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
+import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
 
 const LocCategoriesName = "toolboxCategories";
 
@@ -334,7 +335,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return editorLocalization.getString(LocCategoriesName + "." + name);
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
-    (<QuestionRankingModel>this.getQuestionItems(model)).updateModifiedText(locStrs);
+    (<QuestionPresetRankingModel>this.getQuestionItems(model)).updateModifiedText(locStrs);
     const matrix = this.getQuestionCategories(model);
     if (matrix.isVisible) {
       matrix.visibleRows.forEach(row => {
@@ -345,7 +346,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           }
           locStrs[LocCategoriesName][category] = row.getValue("title");
         }
-        const q = <QuestionRankingModel>row.getQuestionByName("items");
+        const q = <QuestionPresetRankingModel>row.getQuestionByName("items");
         if (!!q) {
           q.updateModifiedText(locStrs);
         }
@@ -391,7 +392,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return res;
   }
   private createItemValue(val: string, title: string): ItemValue {
-    return new ItemValue(val, title);
+    return new PresetItemValue(val, title);
   }
   private getRankingChoices(row: MatrixDropdownRowModelBase): Array<ItemValue> {
     const res = [];

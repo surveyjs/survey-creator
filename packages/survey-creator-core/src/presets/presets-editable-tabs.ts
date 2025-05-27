@@ -1,6 +1,7 @@
-import { Helpers, ItemValue, QuestionRankingModel, SurveyModel } from "survey-core";
+import { Helpers, ItemValue, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { SurveyCreatorModel } from "survey-creator-core";
+import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
 
 export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
@@ -59,7 +60,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     return val;
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
-    (<QuestionRankingModel>model.getQuestionByName(this.nameItems)).updateModifiedText(locStrs);
+    (<QuestionPresetRankingModel>model.getQuestionByName(this.nameItems)).updateModifiedText(locStrs);
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     this.setupPageQuestions(model, creatorSetup.creator);
@@ -80,13 +81,13 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
   }
   protected setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
     const tabs = creator.getAvailableTabNames();
-    const presetItems: Array<ItemValue> = [];
+    const presetItems: Array<PresetItemValue> = [];
     const allQ = model.getQuestionByName(this.allItems);
     const activeQ = model.getQuestionByName(this.nameActiveTab);
     const selectedQ = model.getQuestionByName(this.nameItems);
     selectedQ.alwaysHasValue = true;
     tabs.forEach(tab => {
-      const item = new ItemValue(tab);
+      const item = new PresetItemValue(tab);
       item.locText.localizationName = "tabs." + tab;
       presetItems.push(item);
     });
