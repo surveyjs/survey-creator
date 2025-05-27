@@ -60,7 +60,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               detailPanelMode: "underRowSingle",
               detailElements: [
                 {
-                  type: "presetranking",
+                  type: "ranking",
                   name: "items",
                   titleLocation: "hidden",
                   selectToRankEnabled: true,
@@ -73,7 +73,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               ]
             },
             {
-              type: "presetranking",
+              type: "ranking",
               name: this.nameItems,
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
               choicesEnableIf: getRankingItemEnableIf(this.nameItems),
