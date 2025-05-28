@@ -1,7 +1,7 @@
 import { setupLocale } from "survey-creator-core";
 
 export var fiStrings = {
-    // survey templates
+  // survey templates
   survey: {
     edit: "Muokkaa",
     externalHelpLink: "Katso ja opi luomaan kyselyjä",
@@ -649,7 +649,7 @@ export var fiStrings = {
     questionTitleTemplate: "Kysymyksen otsikkomalli, oletusarvo: '{no}. {require} {title}'",
     questionErrorLocation: "Kysymyksen virheen sijainti",
     autoFocusFirstQuestion: "Fokusoi ensimmäiseen kysymykseen sivun vaihtuessa",
-    questionOrder: "Kysymysten järjestys sivulla",    
+    questionOrder: "Kysymysten järjestys sivulla",
     timeLimit: "Enimmäisaika saada kysely täytettyä",
     timeLimitPerPage: "Enimmäisaika kyselyn sivun täyttämiseen",
     showTimer: "Käytä ajastinta",
@@ -766,7 +766,7 @@ export var fiStrings = {
     choicesFromQuestion: "Kopioi valinnat seuraavasta kysymyksestä",
     choicesFromQuestionMode: "Mitkä vaihtoehdot kopioidaan?",
     choiceValuesFromQuestion: "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintatunnuksina",
-    choiceTextsFromQuestion: "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintateksteinä",    
+    choiceTextsFromQuestion: "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintateksteinä",
     progressBarShowPageTitles: "Sivujen otsikoiden näyttäminen edistymispalkissa",
     progressBarShowPageNumbers: "Sivunumeroiden näyttäminen edistymispalkissa",
     showCommentArea: "Näytä kommenttialue",
@@ -1023,10 +1023,10 @@ export var fiStrings = {
     onHidden: "Piilotettaessa",
     onHiddenContainer: "Kun kysymys tai sen paneeli/sivu piilotetaan",
     clearInvisibleValues: {
-       none: "Ei koskaan"
+      none: "Ei koskaan"
     },
     clearIfInvisible: {
-        none: "Ei koskaan"
+      none: "Ei koskaan"
     },
     inputType: {
       color: "Väri",
