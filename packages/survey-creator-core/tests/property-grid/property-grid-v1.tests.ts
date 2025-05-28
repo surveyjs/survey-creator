@@ -331,6 +331,7 @@ test("SurveyPropertyItemValue", () => {
 
   choicesQuestion.addRow();
   expect(question.choices).toHaveLength(3);
+  expect(question.choices[2].getType()).toEqual("checkboxitem");
   expect(rows[2].cells[0].value).toEqual(4);
   rows[2].cells[1].value = "item4";
   expect(rows[2].cells[1].value).toEqual("item4");
@@ -360,6 +361,7 @@ test("SurveyPropertyItemValue different view type", () => {
   valueQuestion.value = "1|item1\n\n2|item2\n3\ni4";
   valueEditor.apply();
   expect(question.choices).toHaveLength(4);
+  expect(question.choices[0].getType()).toBe("checkboxitem");
 
   var rows = choicesQuestion.visibleRows;
   expect(rows).toHaveLength(4);
