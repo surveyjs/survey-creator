@@ -1,7 +1,7 @@
 import { setupLocale } from "survey-creator-core";
 
 export var fiStrings = {
-  // survey templates
+    // survey templates
   survey: {
     edit: "Muokkaa",
     externalHelpLink: "Katso ja opi luomaan kyselyjä",
@@ -19,11 +19,11 @@ export var fiStrings = {
   // Creator tabs
   tabs: {
     preview: "Testaa kysely",
-    theme: "Teemoja",
-    translation: "Käännös",
+    theme: "Teemat",
+    translation: "Käännökset",
     designer: "Kyselyn suunnittelija",
-    json: "JSON Editori",
-    logic: "Kyselyn logiikka"
+    editor: "JSON Editori",
+    logic: "Kyselyn säännöstö"
   },
   // Question types
   qt: {
@@ -37,9 +37,9 @@ export var fiStrings = {
     tagbox: "Avattava monivalintavalikko",
     file: "Tiedosto",
     html: "Html",
-    matrix: "Matrix (yksi valinta)",
-    matrixdropdown: "Matrix (monivalinta)",
-    matrixdynamic: "Matrix (dynaamiset rivit)",
+    matrix: "Matriisi (yksi valinta)",
+    matrixdropdown: "Matriisi (monivalinta)",
+    matrixdynamic: "Matriisi (dynaamiset rivit)",
     multipletext: "Useita tekstejä",
     panel: "Paneeli",
     paneldynamic: "Paneeli (dynaamiset paneelit)",
@@ -69,7 +69,7 @@ export var fiStrings = {
     surveySettingsTooltip: "Kyselyn asetukset",
     themeSettings: "Teeman asetukset",
     themeSettingsTooltip: "Teeman asetukset",
-    creatorSettingTitle: "Sisällöntuottajan asetukset",
+    creatorSettingTitle: "Luontiasetukset",
     showPanel: "Näytä Paneeli",
     hidePanel: "Piilota Paneeli",
     prevSelected: "Valitse edellinen",
@@ -87,15 +87,15 @@ export var fiStrings = {
     deletePage: "Poista sivu",
     editPage: "Muokkaa sivua",
     edit: "Muokkaa",
-    newPageName: "Sivu",
+    newPageName: "sivu",
     newQuestionName: "kysymys",
-    newPanelName: "Paneeli",
-    newTextItemName: "Teksti",
+    newPanelName: "paneeli",
+    newTextItemName: "teksti",
     defaultV2Theme: "Oletus",
     modernTheme: "Moderni",
     defaultTheme: "Oletus (vanha)",
     testSurveyAgain: "Testaa kysely uudestaan",
-    testSurveyWidth: "Kyselyn leveys: ",
+    testSurveyWidth: "Kyselyn laajuus: ",
     navigateToMsg: "Sinun piti navigoida:",
     saveSurvey: "Tallenna kysely",
     saveSurveyTooltip: "Tallenna kysely",
@@ -107,12 +107,12 @@ export var fiStrings = {
     redo: "Tee uudelleen",
     undoTooltip: "Kumoa viimeinen muutos",
     redoTooltip: "Tee muutos uudelleen",
-    expandTooltip: "Laajentaa",
-    collapseTooltip: "Romahdus",
+    expandTooltip: "Laajenna",
+    collapseTooltip: "Tiivistä",
     expandAllTooltip: "Laajenna kaikki",
     collapseAllTooltip: "Kutista kaikki",
     zoomInTooltip: "Lähennä",
-    zoom100Tooltip: "Zoomaa 100 %:iin",
+    zoom100Tooltip: "100% kokoon",
     zoomOutTooltip: "Loitonna",
     lockQuestionsTooltip: "Lukitse laajenna/kutista tila kysymyksiä varten",
     showMoreChoices: "Näytä lisää",
@@ -302,7 +302,7 @@ export var fiStrings = {
       description: "Paneelin kuvaus",
       visibleIf: "Tee paneeli näkyväksi, jos",
       requiredIf: "Tee paneeli pakolliseksi, jos",
-      questionOrder: "Kyselyjärjestys paneelissa",
+      questionOrder: "Kysymysjärjestys paneelissa",
       page: "Pääsivu",
       startWithNewLine: "Näytä paneeli uudella rivillä",
       state: "Paneelin tiivistystila",
@@ -404,7 +404,7 @@ export var fiStrings = {
       visibleIf: "Tee sivusta näkyvä, jos",
       requiredIf: "Tee sivusta pakollinen, jos",
       timeLimit: "Sivun viimeistelyn aikaraja (sekunteina)",
-      questionOrder: "Kyselyjärjestys sivulla"
+      questionOrder: "Kysymysjärjestys sivulla"
     },
     matrixdropdowncolumn: {
       name: "Sarakkeen nimi",
@@ -422,7 +422,7 @@ export var fiStrings = {
       title: "Otsikko"
     },
     masksettings: {
-      saveMaskedValue: "Peittoarvon tallentaminen kyselyn tuloksiin"
+      saveMaskedValue: "Peitetyn arvon tallentaminen kyselyn tuloksiin"
     },
     patternmask: {
       pattern: "Arvon kuvio"
@@ -446,7 +446,6 @@ export var fiStrings = {
     imageHeight: "Kuvan korkeus",
     imageWidth: "Kuvan leveys",
     valueName: "Arvon nimi",
-    defaultDisplayValue: "Dynaamisten tekstien oletusnäyttöarvo",
     rateDescriptionLocation: "Otsikon tasaus",
     size: "Syöttökentän leveys (merkkeinä)",
     cellErrorLocation: "Solun virhesanoman tasaus",
@@ -456,10 +455,10 @@ export var fiStrings = {
     apply: "Käytä",
     ok: "OK",
     save: "Tallenna",
-    clear: "Selvä",
+    clear: "Tyhjennä",
     saveTooltip: "Tallenna",
     cancel: "Peruuta",
-    set: "Joukko",
+    set: "Aseta",
     reset: "Nollaa",
     change: "Muuttaa",
     refresh: "Päivitä",
@@ -570,10 +569,10 @@ export var fiStrings = {
     colCount: "Sarakemäärä",
     choicesOrder: "Valitse valintojen järjestys",
     allowCustomChoices: "Salli mukautetut valinnat",
-    visible: "On näkyvä?",
-    isRequired: "On vaadittu?",
+    visible: "Näkyvissä",
+    isRequired: "Pakollinen",
     markRequired: "Merkitse pakollisesti",
-    removeRequiredMark: "Poista vaadittu merkki",
+    removeRequiredMark: "Poista pakollisuusmerkintä",
     eachRowRequired: "Vaadi vastaus kaikille riveille",
     eachRowUnique: "Estä päällekkäiset vastaukset riveillä",
     requiredErrorText: "Vaadittu virheteksti",
@@ -640,17 +639,17 @@ export var fiStrings = {
     showPrevButton: "Näytä edellinen -painike (käyttäjä voi palata edelliselle sivulle)",
     firstPageIsStartPage: "Kyselyn ensimmäinen sivu on aloitussivu.",
     showCompletePage: "Näytä valmis sivu lopussa (completeHtml)",
-    autoAdvanceEnabled: "Kun vastaat kaikkiin kysymyksiin, siirry seuraavalle sivulle automaattisesti",
+    autoAdvanceEnabled: "Kun vastaat kaikkiin kysymyksiin, siirryt seuraavalle sivulle automaattisesti",
     autoAdvanceAllowComplete: "Vastaa kyselyyn automaattisesti",
     showProgressBar: "Näytä edistymispalkki",
-    progressBarLocation: "Edistymispalkin tasaus",
+    progressBarLocation: "Edistymispalkin sijainti",
     questionTitleLocation: "Kysymyksen otsikon sijainti",
     questionTitleWidth: "Kysymyksen otsikon leveys",
-    requiredMark: "Kysymys vaadittu symboli (t)",
+    requiredMark: "Kysymys vaadittu symboli(t)",
     questionTitleTemplate: "Kysymyksen otsikkomalli, oletusarvo: '{no}. {require} {title}'",
     questionErrorLocation: "Kysymyksen virheen sijainti",
     autoFocusFirstQuestion: "Fokusoi ensimmäiseen kysymykseen sivun vaihtuessa",
-    questionOrder: "Elementtien järjestys sivulla",
+    questionOrder: "Kysymysten järjestys sivulla",    
     timeLimit: "Enimmäisaika saada kysely täytettyä",
     timeLimitPerPage: "Enimmäisaika kyselyn sivun täyttämiseen",
     showTimer: "Käytä ajastinta",
@@ -667,7 +666,7 @@ export var fiStrings = {
     dataFormat: "Kuvan muoto",
     allowAddRows: "Salli rivien lisääminen",
     allowRemoveRows: "Salli rivien poistaminen",
-    allowRowReorder: "Salli rivin vetäminen ja pudottaminen",
+    allowRowReorder: "Salli rivin siirtäminen ja pudottaminen",
     responsiveImageSizeHelp: "Ei sovelleta, jos määrität kuvan tarkan leveyden tai korkeuden.",
     minImageWidth: "Kuvan vähimmäisleveys",
     maxImageWidth: "Kuvan enimmäisleveys",
@@ -733,15 +732,15 @@ export var fiStrings = {
     panelCount: "Paneelien alkuperäinen määrä",
     minPanelCount: "Paneelien vähimmäismäärä",
     maxPanelCount: "Paneelien enimmäismäärä",
-    panelsState: "Sisäpaneelin laajennustila",
-    prevPanelText: "Edellinen paneeli -painikkeen työkaluvihje",
-    nextPanelText: "Seuraava paneeli -painikkeen työkaluvihje",
+    panelsState: "Paneelin tila",
+    prevPanelText: "Edellinen paneeli-painikkeen teksti",
+    nextPanelText: "Seuraava paneeli-painikkeen teksti",
     removePanelButtonLocation: "Poista paneelipainikkeen sijainti",
     hideIfRowsEmpty: "Piilota kysymys, jos rivejä ei ole",
     hideColumnsIfEmpty: "Piilota sarakkeet, jos rivejä ei ole",
-    rateValues: "Muokatut hinta-arvot",
-    rateCount: "Hintojen määrä",
-    autoGenerate: "Miten korkoarvot määritetään?",
+    rateValues: "Muokatut vastausarvot",
+    rateCount: "Valintojen määrä",
+    autoGenerate: "Miten vastausvaihtoehtojen arvot määritetään?",
     hideIfChoicesEmpty: "Piilota kysymys, jos se ei sisällä vaihtoehtoja",
     minWidth: "Vähimmäisleveys (CSS-hyväksyttyinä arvoina)",
     maxWidth: "Suurin leveys (CSS-hyväksytyissä arvoissa)",
@@ -767,7 +766,7 @@ export var fiStrings = {
     choicesFromQuestion: "Kopioi valinnat seuraavasta kysymyksestä",
     choicesFromQuestionMode: "Mitkä vaihtoehdot kopioidaan?",
     choiceValuesFromQuestion: "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintatunnuksina",
-    choiceTextsFromQuestion: "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintateksteinä",
+    choiceTextsFromQuestion: "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintateksteinä",    
     progressBarShowPageTitles: "Sivujen otsikoiden näyttäminen edistymispalkissa",
     progressBarShowPageNumbers: "Sivunumeroiden näyttäminen edistymispalkissa",
     showCommentArea: "Näytä kommenttialue",
@@ -866,7 +865,7 @@ export var fiStrings = {
     columnsEnableIf: "Sarakkeet ovat näkyvissä, jos",
     rowsEnableIf: "Rivit ovat näkyvissä, jos",
     innerIndent: "Sisäisten sisennysten lisääminen",
-    copyDefaultValueFromLastEntry: "Käytä viimeisen merkinnän vastauksia oletuksena",
+    copyDefaultValueFromLastEntry: "Käytä viimeisimmän merkinnän arvoja oletuksena",
     enterNewValue: "Anna arvo.",
     noquestions: "Kyselyssä ei ole yhtään kysymystä.",
     createtrigger: "Luo triggeri",
@@ -957,30 +956,30 @@ export var fiStrings = {
   },
   // Property values
   pv: {
-    "true": "Tosi",
-    "false": "Epätosi",
+    "true": "tosi",
+    "false": "epätosi",
     file: "Paikalliset tiedostot",
     camera: "Kamera",
     "file-camera": "Paikalliset tiedostot tai kamera",
     inherit: "Peri",
     show: "Näytä",
     hide: "Piilota",
-    default: "Oletus",
-    initial: "Alkuperäinen",
+    default: "Oletusarvo",
+    initial: "Alkuarvo",
     random: "Satunnainen",
-    collapsed: "Pienennetty",
-    expanded: "Laajennettu",
-    none: "Ei mitään",
+    collapsed: "Tiivistä",
+    expanded: "Laajenna",
+    none: "Ei mikään",
     asc: "Nouseva",
     desc: "Laskeva",
-    indeterminate: "Määrittämätön",
+    indeterminate: "Ei määritelty",
     selected: "Valittu",
     unselected: "Valitsematta",
-    decimal: "Desimaali",
-    currency: "Valuutta",
-    percent: "Prosentti",
+    decimal: "desimaali",
+    currency: "valuutta",
+    percent: "prosentti",
     firstExpanded: "Ensimmäinen laajennettu",
-    off: "Pois",
+    off: "Pois päältä",
     list: "Lista",
     carousel: "Karuselli",
     tab: "Välilehdet",
@@ -995,9 +994,9 @@ export var fiStrings = {
     both: "Molemmat",
     left: "Vasen",
     right: "Oikea",
-    center: "Keskellä",
+    center: "Keskitetty",
     leftRight: "Vasen ja oikea",
-    middle: "Keskimmäinen",
+    middle: "Keskellä",
     color: "Väri",
     date: "Päivämäärä",
     datetime: "Päivämäärä ja aika",
@@ -1011,7 +1010,7 @@ export var fiStrings = {
     text: "Tekstiviesti",
     time: "Aika",
     url: "URL",
-    week: "Viikko",
+    week: "viikko",
     hidden: "Piilotettu",
     edit: "Muokkaa",
     display: "Näytä",
@@ -1024,10 +1023,10 @@ export var fiStrings = {
     onHidden: "Piilotettaessa",
     onHiddenContainer: "Kun kysymys tai sen paneeli/sivu piilotetaan",
     clearInvisibleValues: {
-      none: "Ei mitään"
+       none: "Ei koskaan"
     },
     clearIfInvisible: {
-      none: "Ei mitään"
+        none: "Ei koskaan"
     },
     inputType: {
       color: "Väri",
@@ -1141,7 +1140,7 @@ export var fiStrings = {
     underRowSingle: "Rivin alla näkyy vain yksi paneeli",
     auto: "Automaattinen",
     showNavigationButtons: {
-      none: "Ei mitään"
+      none: "Piilotettu"
     },
     timerInfoMode: {
       combined: "Molemmat"
@@ -1177,7 +1176,7 @@ export var fiStrings = {
       colored: "Värillinen"
     },
     autoGenerate: {
-      "true": "Tosi",
+      "true": "Luo automaattisesti",
       "false": "Kirjoita manuaalisesti"
     },
     rateType: {
@@ -1230,27 +1229,27 @@ export var fiStrings = {
       topbottom: "Ylhäällä ja alhaalla",
       aboveheader: "Otsikon yläpuolella",
       belowheader: "Otsikon alapuolella",
-      off: "Piilevä"
+      off: "Piilotettu"
     },
     sum: "Summa",
-    count: "Laske",
-    min: "Min",
-    max: "Max",
-    avg: "ka",
+    count: "Lukumäärä",
+    min: "Min.",
+    max: "Maks.",
+    avg: "Keskiarvo",
     searchMode: {
       contains: "Sisältää",
       startsWith: "Alkaa"
     },
     backgroundImageFit: {
-      auto: "Auto",
+      auto: "Automaattinen",
       cover: "Peittää",
       contain: "Sisältää",
-      fill: "Venyä",
+      fill: "Venyy",
       tile: "Laatta"
     },
     backgroundImageAttachment: {
       fixed: "Kiinteä",
-      scroll: "Vierittää"
+      scroll: "Vieritetty"
     },
     headerView: {
       basic: "Perus",
@@ -1258,19 +1257,19 @@ export var fiStrings = {
     },
     inheritWidthFrom: {
       survey: "Sama kuin kyselyssä",
-      container: "Sovita konttiin"
+      container: "Sovita säiliöön"
     },
     backgroundColorSwitch: {
-      none: "Ei mitään",
+      none: "Ei lainkaan",
       accentColor: "Korostusväri",
-      custom: "Tapa"
+      custom: "Kustomoitu"
     },
     colorPalette: {
       light: "Vaalea",
       dark: "Tumma"
     },
     isPanelless: {
-      "false": "Oletus",
+      "false": "Paneelit",
       "true": "Ilman paneeleja"
     },
     progressBarInheritWidthFrom: {
@@ -1282,16 +1281,16 @@ export var fiStrings = {
   op: {
     empty: "on tyhjä",
     notempty: "ei ole tyhjä",
-    equal: "yhtäsuurikuin",
-    notequal: "ei ole yhtäsuurikuin",
+    equal: "yhtä suuri kuin",
+    notequal: "ei ole yhtä suuri kuin",
     contains: "sisältää",
     notcontains: "ei sisällä",
     anyof: "mikä tahansa",
     allof: "kaikki",
     greater: "suurempi",
     less: "vähemmän",
-    greaterorequal: "suurempi tai yhtäsuurikuin",
-    lessorequal: "vähemmän tai yhtäsuurikuin",
+    greaterorequal: "suurempi tai yhtä suuri kuin",
+    lessorequal: "vähemmän tai yhtä suuri kuin",
     and: "ja",
     or: "tai"
   },
@@ -1350,8 +1349,8 @@ export var fiStrings = {
       pattern: "Esimerkki: kk/pp/v"
     },
     currencymask: {
-      prefix: "Esimerkki: $",
-      suffix: "Esimerkki: USD"
+      prefix: "Esimerkki: €",
+      suffix: "Esimerkki: EUR"
     },
     panelbase: {
       questionTitleWidth: "Esimerkki: 200px"
@@ -1656,7 +1655,7 @@ export var fiStrings = {
     questionDescriptionLocation: "Kysymyksen kuvauksen sijainti",
     progressBarType: "Edistymispalkin tyyppi",
     showTOC: "Näytä sisällysluettelo",
-    tocLocation: "Toc-sijainti",
+    tocLocation: "Sisällysluettelon sijainti",
     questionTitlePattern: "Kysymyksen otsikkomalli",
     widthMode: "Leveys-tila",
     showBrandInfo: "Näytä brändin tiedot",
@@ -1671,7 +1670,7 @@ export var fiStrings = {
     renderAs: "Hahmonna muodossa",
     attachOriginalItems: "Alkuperäisten kohteiden liittäminen",
     choices: "Valinnat",
-    choicesByUrl: "choicesByUrl",
+    choicesByUrl: "Valintoja verkosta",
     currency: "Valuutta",
     cellHint: "Solun vihje",
     totalMaximumFractionDigits: "Murtolukujen enimmäismäärä yhteensä",
@@ -1685,8 +1684,8 @@ export var fiStrings = {
     choicesLazyLoadPageSize: "Valinnat laiska lataussivun koko",
     inputFieldComponent: "Syöttökentän komponentti",
     itemComponent: "Kohteen osa",
-    min: "Min",
-    max: "Max",
+    min: "Min.",
+    max: "Maks.",
     minValueExpression: "Pienin arvon lauseke",
     maxValueExpression: "Enimmäisarvon lauseke",
     step: "Askel",
