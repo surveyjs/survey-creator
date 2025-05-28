@@ -57,7 +57,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   private initializePlaceholder(rowObj: any, cellQuestion: Question, propertyName: string) {
     const objType = typeof rowObj.getType === "function" && rowObj.getType();
     if (cellQuestion.getType() === "text" && !!objType) {
-      if (propertyName === "text" && objType === "itemvalue") {
+      if (propertyName === "text" && Serializer.isDescendantOf(objType, "itemvalue")) {
         (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => {
           return rowObj.locText.getPlaceholder();
         });
