@@ -193,7 +193,7 @@ test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with logo i
   expect(lastUploadOptions.propertyName).toEqual("logo");
 });
 
-test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
+test("Check PropertyGridLinkFileEditor acceptedTypes for matrix cell", () => {
   const creator = new SurveyCreatorModel({ enableLinkFileEditor: true });
   const question = new QuestionImagePickerModel("q1");
   question.choices = [{ value: "lion" }];
