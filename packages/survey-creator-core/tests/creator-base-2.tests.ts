@@ -93,6 +93,7 @@ test("json editor default indent", (): any => {
   expect(settings.jsonEditor.indentation).toBe(2);
   expect(creator.text).toBe("{\n  \"pages\": [\n    {\n      \"name\": \"page1\"\n    }\n  ]\n}");
 });
+
 test("onSetPropertyEditorOptions -> onConfigureTablePropertyEditor", (): any => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: [1, 2] }] };
@@ -123,6 +124,7 @@ test("onSetPropertyEditorOptions -> onConfigureTablePropertyEditor", (): any => 
   creator.onSetPropertyEditorOptionsCallback("choices", question, callBackOptions);
   expect(callBackOptions.allowBatchEdit).toBeFalsy();
 });
+
 test("creator.onSurveyInstanceCreated from property Grid", () => {
   const creator = new CreatorTester();
   const selectedTypes = new Array<string>();
@@ -146,6 +148,7 @@ test("creator.onSurveyInstanceCreated from property Grid", () => {
   creator.selectQuestionByName("q2");
   expect(selectedTypes).toStrictEqual(["survey", "text", "radiogroup"]);
 });
+
 test("creator.onSurveyInstanceSetupHandlers event", () => {
   const creator = new CreatorTester();
   let json = undefined;
@@ -189,6 +192,7 @@ test("check tabResponsivenessMode property", () => {
   creator.tabResponsivenessMode = "menu";
   expect(creator.tabbedMenu.actions.every((action) => action.disableShrink)).toBeTruthy();
 });
+
 test("onModified options, on adding page and on copying page", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -480,6 +484,7 @@ test("creator set theme should update headerView survey property", (): any => {
   creator.theme = { headerView: "basic" };
   expect(creator.survey.headerView).toBe("basic");
 });
+
 test("creator set theme should update headerView survey property", (): any => {
   const creator = new CreatorTester({
     clearTranslationsOnSourceTextChange: true
@@ -553,4 +558,83 @@ test("creator set theme should update headerView survey property", (): any => {
   expect(q2.locTitle.getJson()).toStrictEqual({
     de: "de: my question_new"
   });
+});
+
+test("ConvertTo and addNewQuestion for panel with maxNestingLevel set", (): any => {
+  const creator = new CreatorTester({ maxNestingLevel: 0 });
+  creator.JSON = {
+    elements: [
+      {
+        type: "panel", name: "panel1",
+        elements: [
+          {
+            type: "panel", name: "panel3",
+            elements: [
+              { type: "panel", name: "panel5" },
+              { type: "paneldynamic", name: "panel6" }
+            ]
+          },
+          { type: "paneldynamic", name: "panel4" }
+        ]
+      },
+      { type: "paneldynamic", name: "panel2" }
+    ]
+  };
+  expect(creator.maxNestedPanels).toBe(-1);
+  expect(creator.maxNestingLevel).toBe(0);
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(-1);
+  expect(creator.dragDropSurveyElements.maxNestingLevel).toBe(0);
+  creator.maxNestingLevel = -1;
+  expect(creator.dragDropSurveyElements.maxNestingLevel).toBe(-1);
+  const panel1 = creator.survey.getPanelByName("panel1");
+  const panel2 = creator.survey.getQuestionByName("panel2");
+  const panel3 = creator.survey.getPanelByName("panel3");
+  const panel4 = creator.survey.getQuestionByName("panel4");
+  const panel5 = creator.survey.getPanelByName("panel5");
+  const panel6 = creator.survey.getQuestionByName("panel6");
+  const itemCount = creator.getAvailableToolboxItems().length;
+  expect(itemCount).toBe(21);
+  const panel6Model = new QuestionAdornerViewModel(creator, panel6, undefined);
+  const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
+  creator.maxNestingLevel = 3;
+  expect(creator.dragDropSurveyElements.maxNestingLevel).toBe(3);
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
+  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  creator.maxNestingLevel = 2;
+  expect(creator.dragDropSurveyElements.maxNestingLevel).toBe(2);
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
+  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
+  creator.maxNestingLevel = 1;
+  expect(creator.dragDropSurveyElements.maxNestingLevel).toBe(1);
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
+  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
+  creator.maxNestingLevel = 0;
+  expect(creator.dragDropSurveyElements.maxNestingLevel).toBe(0);
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 2);
+  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
 });

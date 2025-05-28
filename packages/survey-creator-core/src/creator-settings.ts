@@ -217,7 +217,10 @@ export interface ISurveyCreatorOptions {
   maximumChoicesCount: number;
   maximumRowsCount: number;
   maximumRateValues: number;
+
   maxNestedPanels: number;
+  maxNestingLevel: number;
+
   enableLinkFileEditor: boolean;
   inplaceEditForValues: boolean;
   rootElement?: HTMLElement;
@@ -367,7 +370,10 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   maximumRateValues: number = settings.propertyGrid.maximumRateValues;
   machineTranslationValue: boolean = false;
   inplaceEditForValues: boolean = false;
+
   maxNestedPanels: number = -1;
+  maxNestingLevel: number = -1;
+
   showOneCategoryInPropertyGrid: boolean;
 
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {

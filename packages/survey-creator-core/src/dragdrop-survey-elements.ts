@@ -81,11 +81,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
   protected isDraggedElementSelected: boolean = false;
   public onGetMaxNestedPanels: () => number;
+  public onGetMaxNestedLevel: () => number;
   public onDragOverLocationCalculating: (options: any) => void;
   public get maxNestedPanels(): number { return this.onGetMaxNestedPanels ? this.onGetMaxNestedPanels() : -1; }
-
-  // private isRight: boolean;
-  // protected prevIsRight: boolean;
+  public get maxNestingLevel(): number { return this.onGetMaxNestedLevel ? this.onGetMaxNestedLevel() : -1; }
 
   public startDragToolboxItem(
     event: PointerEvent,
@@ -160,10 +159,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     var newElement = Serializer.createClass(json["type"]);
     new JsonObject().toObject(json, newElement);
     return newElement;
-  }
-
-  private isPanelDynamic(element: ISurveyElement) {
-    return element instanceof QuestionPanelDynamicModel;
   }
 
   protected findDropTargetNodeByDragOverNode(dragOverNode: HTMLElement): HTMLElement {
@@ -246,17 +241,21 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (!dropTarget) return false;
     if (dropTarget === this.draggedElement) return false;
 
-    if (this.draggedElement.getType() === "paneldynamic" && dropTarget === this.draggedElement.template) {
+    if (SurveyHelper.isPanelDynamic(this.draggedElement) && dropTarget === this.draggedElement.template) {
       return false;
     }
-    if (this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
-      const pnl: any = <PanelModel>this.draggedElement;
-      if (pnl.deepNested === undefined) {
-        pnl.deepNested = this.getMaximumNestedPanelCount(pnl, 0);
-      }
+    if (this.maxNestingLevel >= 0 && (this.draggedElement.isPanel || SurveyHelper.isPanelDynamic(this.draggedElement))) {
+      const pnl: any = this.draggedElement as PanelModel;
+      const childPanelsMaxNesting = SurveyHelper.getMaximumNestedPanelDepth(pnl, 0);
+      let len = SurveyHelper.getElementParentContainers(dropTarget, false).length;
+      if (dragOverLocation !== DropIndicatorPosition.Inside && dropTarget.isPanel) len--;
+      if (this.maxNestingLevel < len + childPanelsMaxNesting) return false;
+    } else if (this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
+      const pnl: any = this.draggedElement as PanelModel;
+      const childPanelsMaxNesting = SurveyHelper.getMaximumNestedPanelDepth(pnl, 0);
       let len = SurveyHelper.getElementDeepLength(dropTarget);
       if (dragOverLocation !== DropIndicatorPosition.Inside && dropTarget.isPanel) len--;
-      if (this.maxNestedPanels < len + pnl.deepNested) return false;
+      if (this.maxNestedPanels < len + childPanelsMaxNesting) return false;
     }
 
     if (
@@ -267,18 +266,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
 
     return true;
-  }
-  private getMaximumNestedPanelCount(panel: PanelModel, deep: number): number {
-    let max = deep;
-    panel.elements.forEach(el => {
-      if (el.isPanel) {
-        const pDeep = this.getMaximumNestedPanelCount(<PanelModel>el, deep + 1);
-        if (pDeep > max) {
-          max = pDeep;
-        }
-      }
-    });
-    return max;
   }
 
   protected doBanDropHere = () => {
@@ -458,7 +445,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const calcDirection = !settings.dragDrop.allowDragToTheSameLine || (!!this.draggedElement && this.draggedElement.isPage) ? "top-bottom" : null;
     let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetRect, calcDirection);
 
-    if (!this.draggedElement.isPage && dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || this.isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
+    if (!this.draggedElement.isPage && dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || SurveyHelper.isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
       if (dropTarget.isPage || this.insideElement) {
         dragOverLocation = DropIndicatorPosition.Inside;
       }
@@ -468,38 +455,13 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       dragOverLocation = DropIndicatorPosition.Inside;
     }
 
-    if ((dropTarget.isPanel || this.isPanelDynamic(dropTarget)) && this.insideElement && dropTargetAdorner.collapsed) {
+    if ((dropTarget.isPanel || SurveyHelper.isPanelDynamic(dropTarget)) && this.insideElement && dropTargetAdorner.collapsed) {
       dragOverLocation = DropIndicatorPosition.Inside;
     }
 
     if (!this.draggedElement.isPage && dropTarget.isPage && dropTarget.elements.length !== 0 && !dropTargetAdorner.collapsed) {
       dragOverLocation = null;
     }
-
-    // const dropTargetType = this.getDragDropElementType(dropTarget);
-    // const draggedElementType = this.getDragDropElementType(this.draggedElement);
-    // switch (dropTargetType) {
-    //   case ElType.Page: {
-    //     console.log("dropTargetType", dropTargetType);
-    //     break;
-    //   }
-    //   case ElType.Panel: {
-    //     console.log("dropTargetType", dropTargetType);
-    //     break;
-    //   }
-    //   case ElType.DynamicPanel: {
-    //     console.log("dropTargetType", dropTargetType);
-    //     break;
-    //   }
-    //   case ElType.Question: {
-    //     console.log("dropTargetType", dropTargetType);
-    //     break;
-    //   }
-    //   // case ElType.EmptySurvey: {
-    //   //   console.log("dropTargetType", dropTargetType);
-    //   //   break;
-    //   // }
-    // }
 
     const options = {
       survey: this.survey,
@@ -591,7 +553,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     let dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
 
     if (this.dragOverLocation === DropIndicatorPosition.Inside) {
-      if (this.isPanelDynamic(dest)) dest = dest.template;
+      if (SurveyHelper.isPanelDynamic(dest)) dest = dest.template;
       (<PanelModelBase>dest).insertElement(src);
     } else {
       const destParent = dest.parent || dest.page;

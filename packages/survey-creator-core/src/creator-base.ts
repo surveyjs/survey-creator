@@ -1191,6 +1191,8 @@ export class SurveyCreatorModel extends Base
    */
   public maxNestedPanels: number = -1;
 
+  public maxNestingLevel: number = -1;
+
   public showPagesInTestSurveyTab = true;
   /**
    * Specifies whether to show a page selector at the bottom of the Preview tab.
@@ -2250,6 +2252,7 @@ export class SurveyCreatorModel extends Base
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     this.dragDropSurveyElements.onGetMaxNestedPanels = (): number => { return this.maxNestedPanels; };
+    this.dragDropSurveyElements.onGetMaxNestedLevel = (): number => { return this.maxNestingLevel; };
     this.dragDropSurveyElements.onDragOverLocationCalculating = (options) => { this.onDragOverLocationCalculating.fire(this, options); };
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
@@ -4155,10 +4158,16 @@ export class SurveyCreatorModel extends Base
     const res: Array<QuestionToolboxItem> = [];
     this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) res.push(item); });
 
-    if (!element || this.maxNestedPanels < 0) return res;
-    if (!isAddNew && element.isPanel) return res;
+    if (!element) return res;
+    if (!isAddNew && (element.isPanel || SurveyHelper.isPanelDynamic(element))) return res;
 
-    if (this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
+    if (this.maxNestingLevel >= 0 && this.maxNestingLevel < SurveyHelper.getElementParentContainers(element).length) {
+      for (let i = res.length - 1; i >= 0; i--) {
+        if (res[i].isPanel || Serializer.isDescendantOf(res[i].typeName, "paneldynamic")) {
+          res.splice(i, 1);
+        }
+      }
+    } else if (this.maxNestedPanels >= 0 && this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
       for (let i = res.length - 1; i >= 0; i--) {
         if (res[i].isPanel) {
           res.splice(i, 1);
