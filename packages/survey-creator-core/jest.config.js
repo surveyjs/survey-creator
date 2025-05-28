@@ -24,7 +24,7 @@ module.exports = {
     "survey-core/themes": "<rootDir>/node_modules/survey-core/themes/index.js",
     "survey.i18n": "<rootDir>/node_modules/survey-core/survey.i18n.js",
     "survey-creator-core/themes": "<rootDir>/src/themes/index.ts",
-    "survey-creator-core": "<rootDir>/src/editorLocalization.ts",
+    "survey-creator-core": "<rootDir>/src/entries/index.ts",
     "survey-core": "<rootDir>/node_modules/survey-core/survey.core.js",
     "tslib": "<rootDir>/node_modules/tslib",
     "svgbundle": "<rootDir>/tests/empty-module.js",

@@ -12,7 +12,7 @@ module.exports = (env) => {
     mode: isProd ? "production" : "development",
     devtool: isProd ? "source-map" : "eval-source-map",
     entry: {
-      "survey-creator-core-presets": "./src/presets/entries/index.ts"
+      "survey-creator-core-presets": path.resolve(__dirname, "./src/entries/presets.ts"),
     },
     output: {
       path: path.resolve(__dirname, "build"),
