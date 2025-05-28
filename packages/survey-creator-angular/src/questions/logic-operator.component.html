@@ -6,19 +6,17 @@
         [attr.required]="model.isRequired" 
         [attr.tabindex]= "model.isInputReadOnly ? undefined : 0"
         [attr.disabled]="model.isInputReadOnly"
-        [attr.role]="model.ariaRole"
-        [attr.aria-required]="model.ariaRequired"
-        [attr.aria-label]="model.ariaLabel"
-        [attr.aria-labelledby]="model.ariaLabelledBy"
-        [attr.aria-invalid]="model.ariaInvalid"
-        [attr.aria-errormessage]="model.ariaErrormessage"
-        [attr.aria-expanded]="model.ariaExpanded"
+        [attr.role]="dropdownModel.ariaQuestionRole"
+        [attr.aria-required]="dropdownModel.ariaQuestionRequired"
+        [attr.aria-invalid]="dropdownModel.ariaQuestionInvalid"
+        [attr.aria-errormessage]="dropdownModel.ariaQuestionErrorMessage" 
+        [attr.aria-expanded]="dropdownModel.ariaQuestionExpanded"
+        [attr.aria-label]="dropdownModel.ariaQuestionLabel" 
+        [attr.aria-labelledby]="dropdownModel.ariaQuestionLabelledby"
+        [attr.aria-controls]="dropdownModel.ariaQuestionControls"
       >
         <div [class]="model.cssClasses.controlValue">
           <sv-ng-string *ngIf="model.locReadOnlyText" [model]="model.locReadOnlyText"></sv-ng-string>
-        </div>
-        <div *ngIf="model.allowClear && model.cssClasses.cleanButtonIconId" [class]="model.cssClasses.cleanButton" (click)="clear($event)" [visible]="!model.isEmpty()">
-          <svg [class]="model.cssClasses.cleanButtonSvg" [iconName]="model.cssClasses.cleanButtonIconId" [size]="'auto'" [title]="model.clearCaption" sv-ng-svg-icon></svg>
         </div>
       </div>
         <sv-ng-popup [popupModel]="model.popupModel"></sv-ng-popup>

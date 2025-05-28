@@ -10,14 +10,14 @@ import { initLogicOperator } from "survey-creator-core";
 })
 export class LogicOperatorComponent extends QuestionAngular<QuestionDropdownModel> {
   private dropdownListModel?: DropdownListModel;
-  get dropdownModel(): DropdownListModel | undefined {
+  get dropdownModel(): DropdownListModel {
+    if (!this.dropdownListModel) {
+      this.dropdownListModel = new DropdownListModel(this.model);
+    }
     return this.dropdownListModel;
   }
   click(event: any) {
     this.dropdownListModel?.onClick(event);
-  }
-  clear(event: any) {
-    this.dropdownListModel?.onClear(event);
   }
   keyup(event: any) {
     this.dropdownListModel?.keyHandler(event);
