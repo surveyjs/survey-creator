@@ -205,7 +205,7 @@ test("Preset edit model, toolbox items, default value and apply", () => {
   const question = survey.getQuestionByName("toolbox_items");
   expect(question).toBeTruthy();
   const defaultItems = new QuestionToolbox().getDefaultItems([], false, true, true);
-  expect(question.choices).toHaveLength(defaultItems.length);
+  expect(question.visibleRows).toHaveLength(defaultItems.length);
   expect(question.value).toHaveLength(defaultItems.length);
   question.value = ["boolean", "text", "checkbox"];
   expect(editor.applyFromSurveyModel()).toBeTruthy();
@@ -265,7 +265,7 @@ test("Preset edit model, toolbox items & definition page", () => {
   survey.currentPage = survey.getPageByName("page_toolbox");
   expect(survey.currentPage.name).toEqual("page_toolbox");
   survey.setValue("toolbox_mode", "categories");
-  const itemsQuestion = survey.getQuestionByName("toolbox_items");
+  const itemsQuestion = survey.getQuestionByName("toolbox_items") as QuestionMatrixDynamicModel;
   const defaultItems = new QuestionToolbox().getDefaultItems([], false, true, true);
   expect(itemsQuestion.choices).toHaveLength(defaultItems.length);
   expect(itemsQuestion.value).toHaveLength(defaultItems.length);
@@ -552,7 +552,7 @@ test("Change localization strings for toolbox (no categories)", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   survey.setValue("toolbox_mode", "items");
-  const question = <QuestionRankingModel>survey.getQuestionByName("toolbox_items");
+  const question = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_items");
   expect(question.isVisible).toBeTruthy();
   const textItem = ItemValue.getItemByValue(question.choices, "text");
   textItem.text = "Text item";
@@ -568,7 +568,7 @@ test("Change localization strings for toolbox (categories)", () => {
   survey.setValue("toolbox_mode", "categories");
   const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
   matrix.visibleRows[0].showDetailPanel();
-  const question = <QuestionRankingModel>matrix.visibleRows[0].detailPanel.getQuestionByName("items");
+  const question = <QuestionMatrixDynamicModel>matrix.visibleRows[0].detailPanel.getQuestionByName("items");
   const textItem = ItemValue.getItemByValue(question.choices, "radiogroup");
   textItem.text = "Radio item";
   editor.applyFromSurveyModel();

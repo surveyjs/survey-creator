@@ -1,13 +1,14 @@
-import { Helpers, ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
+import { Helpers, ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, Serializer, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
+import { ICreatorPresetToolboxItem } from "./presets-toolbox";
 
 const LocCategoriesName = "toolboxCategories";
 
 export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEditableBase {
   private defaultItems = {};
-  private allItems: ItemValue[];
+  private allItems: ICreatorPresetToolboxItem[];
 
   public createMainPageCore(): any {
     const getRankingItemEnableIf = (name: string): string => {
@@ -61,29 +62,51 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               detailPanelMode: "underRowSingle",
               detailElements: [
                 {
-                  type: "presetranking",
+                  type: "matrixdynamic",
                   name: "items",
                   titleLocation: "hidden",
-                  selectToRankEnabled: true,
-                  minSelectedChoices: 1,
-                  choicesEnableIf: getRankingItemEnableIf("row.items"),
-                  selectToRankAreasLayout: "horizontal",
-                  selectToRankEmptyRankedAreaText: "Drag toolbox items here to hide them",
-                  selectToRankEmptyUnrankedAreaText: " Drag toolbox items here to show them"
+                  allowRowReorder: true,
+                  cellType: "text",
+                  showHeader: false,
+                  columns: [
+                    {
+                      "name": "name"
+                    },
+                    {
+                      "name": "iconName"
+                    },
+                    {
+                      "name": "title"
+                    },
+                    {
+                      "name": "toolTip"
+                    }
+                  ],
                 }
               ]
             },
             {
-              type: "presetranking",
+              type: "matrix",
               name: this.nameItems,
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
-              choicesEnableIf: getRankingItemEnableIf(this.nameItems),
               titleLocation: "hidden",
-              selectToRankEnabled: true,
-              minSelectedChoices: 1,
-              selectToRankAreasLayout: "horizontal",
-              selectToRankEmptyRankedAreaText: "Drag toolbox items here to hide them",
-              selectToRankEmptyUnrankedAreaText: " Drag toolbox items here to show them"
+              allowRowReorder: true,
+              cellType: "text",
+              showHeader: false,
+              columns: [
+                {
+                  "name": "name"
+                },
+                {
+                  "name": "iconName"
+                },
+                {
+                  "name": "title"
+                },
+                {
+                  "name": "toolTip"
+                }
+              ],
             }
           ]
         },
@@ -201,7 +224,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
     this.setupDefaultItems(creator);
     this.setupItemsDefinition(model, creator);
-    this.setQuestionItemsChoices(model);
+    this.setQuestionItemsRows(model);
   }
   protected validateCore(model: SurveyModel): boolean {
     const matrix = this.getMatrix(model);
@@ -238,24 +261,24 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     iconNameColumn["dataList"] = iconNames;
   }
 
-  private setQuestionItemsChoices(model: SurveyModel): void {
+  private setQuestionItemsRows(model: SurveyModel): void {
     this.allItems = this.getDefaultToolboxItems(model);
     const q = this.getQuestionItems(model);
-    if (!this.isItemValuesEqual(q.choices, this.allItems)) {
-      q.choices = this.allItems;
-      this.updateRankingLocalizationName(q);
-      const items = this.getQuestionCategories(model);
-      items.visibleRows.forEach(row => row.hideDetailPanel());
-    }
+    //if (!this.isItemValuesEqual(q.value, this.allItems)) {
+    q.value = this.allItems;
+    //this.updateRankingLocalizationName(q);
+    const items = this.getQuestionCategories(model);
+    items.visibleRows.forEach(row => row.hideDetailPanel());
+    //}
   }
-  private isItemValuesEqual(a: Array<ItemValue>, b: Array<ItemValue>): boolean {
+  private isItemValuesEqual(a: Array<ICreatorPresetToolboxItem>, b: Array<ICreatorPresetToolboxItem>): boolean {
     if (a.length !== b.length) return false;
     for (let i = 0; i < a.length; i++) {
-      if (a[i].value !== b[i].value || a[i].title !== b[i].title) return false;
+      if (a[i].name !== b[i].name || a[i].title !== b[i].title) return false;
     }
     return true;
   }
-  private updateRankingLocalizationName(question: QuestionRankingModel): void {
+  private updateRankingLocalizationName(question: QuestionMatrixDynamicModel): void {
     question.choices.forEach(item => {
       item.locText.localizationName = "qt." + item.value;
     });
@@ -309,7 +332,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if (name === this.nameMatrix) {
-      this.setQuestionItemsChoices(model);
+      this.setQuestionItemsRows(model);
     }
     if (name === this.nameShowCategoryTitles) {
       this.updateShowCategoriesTitlesElements(model);
@@ -335,7 +358,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return editorLocalization.getString(LocCategoriesName + "." + name);
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
-    (<QuestionPresetRankingModel>this.getQuestionItems(model)).updateModifiedText(locStrs);
+    //(<QuestionPresetRankingModel>this.getQuestionItems(model)).updateModifiedText(locStrs);
     const matrix = this.getQuestionCategories(model);
     if (matrix.isVisible) {
       matrix.visibleRows.forEach(row => {
@@ -348,20 +371,20 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         }
         const q = <QuestionPresetRankingModel>row.getQuestionByName("items");
         if (!!q) {
-          q.updateModifiedText(locStrs);
+          //q.updateModifiedText(locStrs);
         }
       });
     }
   }
-  private getQuestionItems(model: SurveyModel): QuestionRankingModel {
-    return <QuestionRankingModel>model.getQuestionByName(this.nameItems);
+  private getQuestionItems(model: SurveyModel): QuestionMatrixDynamicModel {
+    return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameItems);
   }
   private getQuestionCategories(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameCategories); }
   private onDetailPanelShowingChanged(row: MatrixDropdownRowModelBase): void {
     if (!row.isDetailPanelShowing) return;
-    const q = <QuestionRankingModel>row.getQuestionByName("items");
+    const q = <QuestionMatrixDynamicModel>row.getQuestionByName("items");
     q.choices = this.getRankingChoices(row);
-    this.updateRankingLocalizationName(q);
+    //this.updateRankingLocalizationName(q);
   }
   private setupDefaultItems(creator: SurveyCreatorModel): void {
     const items = {};
@@ -370,7 +393,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     });
     this.defaultItems = items;
   }
-  private getDefaultToolboxItems(model: SurveyModel): ItemValue[] {
+  private getDefaultToolboxItems(model: SurveyModel): ICreatorPresetToolboxItem[] {
     const items = {};
     for (let key in this.defaultItems) {
       items[key] = this.defaultItems[key];
@@ -384,18 +407,18 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         }
       });
     }
-    const res = [];
+    const res: ICreatorPresetToolboxItem[] = [];
     for (let key in items) {
       res.push(this.createItemValue(key, items[key]));
     }
 
     return res;
   }
-  private createItemValue(val: string, title: string): ItemValue {
-    return new PresetItemValue(val, title);
+  private createItemValue(name: string, title: string | undefined): ICreatorPresetToolboxItem {
+    return <ICreatorPresetToolboxItem> { name, title };
   }
-  private getRankingChoices(row: MatrixDropdownRowModelBase): Array<ItemValue> {
-    const res = [];
+  private getRankingChoices(row: MatrixDropdownRowModelBase): Array<ICreatorPresetToolboxItem> {
+    const res: ICreatorPresetToolboxItem[] = [];
     const model = <SurveyModel>row.getSurvey();
     const matrix = this.getQuestionCategories(<SurveyModel>model);
     if (!Array.isArray(this.allItems)) return res;
@@ -410,8 +433,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       }
     }
     this.allItems.forEach(item => {
-      if (!usedItems[item.id]) {
-        res.push(this.createItemValue(item.id, item.title));
+      if (!usedItems[item.name]) {
+        res.push(this.createItemValue(item.name, item.title));
       }
     });
     return res;
