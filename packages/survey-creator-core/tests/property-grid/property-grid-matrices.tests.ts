@@ -2,7 +2,8 @@ import {
   CalculatedValue, ExpressionValidator, HtmlConditionItem, QuestionCheckboxBase, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionMatrixDynamicModel,
   QuestionMatrixModel, QuestionMultipleTextModel, QuestionRatingModel, QuestionTextModel, QuestionBooleanModel, Serializer, SurveyModel,
   SurveyTriggerRunExpression, UrlConditionItem, settings as surveySettings,
-  ItemValue
+  ItemValue,
+  QuestionCheckboxModel
 } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
@@ -455,6 +456,19 @@ test("QuestionMultipleTextModel items property editor + validators editor", () =
   row.hideDetailPanel();
   expect(cell.question.value).toBeFalsy();
   expect(cell.question.placeholder).toBe("item1");
+});
+test("QuestionCheckbox choices placeholder", () => {
+  const question = new QuestionCheckboxModel("q1");
+  question.choices = ["item1", "item2", "item3"];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion).toBeTruthy();
+  const row = choicesQuestion.visibleRows[0];
+  expect(row.getQuestionByName("text").placeholder).toBe("item1");
+  row.getQuestionByName("value").value = "item111";
+  expect(row.getQuestionByName("text").placeholder).toBe("item111");
 });
 test("Triggers property editor, Bug #4454", () => {
   var survey = new SurveyModel();
