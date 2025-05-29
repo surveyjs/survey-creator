@@ -39,4 +39,22 @@ test.describe("designer a11y", () => {
     await page.click(".svc-sidebar__header-content .svc-menu-action__button");
     await checkA11y(page, ".svc-sidebar__header", { axeOptions });
   });
+  test("Check radiogroup and rating", async ({ page }) => {
+    await setJSON(page, {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "radiogroup",
+              "name": "question1",
+              "choices": ["Item 1", "Item 2", "Item 3"]
+            },
+            { "type": "rating", "name": "question2" }
+          ]
+        }
+      ],
+    });
+    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+  });
 });
