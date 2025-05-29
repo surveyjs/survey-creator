@@ -11,7 +11,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   position: relative;
   width: var(--ctr-property-grid-width, var(--sjs-size-x60));
   min-width: var(--ctr-property-grid-min-width, var(--sjs-size-x40));
-  max-width: var(--ctr-property-grid-max-width, var(--sjs-size-x90));
+  max-width: var(--sjs-size-x90);
   height: 100%;
   background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
   border-inline-start: var(--ctr-property-grid-border-width-left, var(--sjs-stroke-x1)) solid
@@ -20,7 +20,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 .svc-side-bar--narrow {
   .svc-side-bar__container {
-    max-width: var(--ctr-property-grid-max-width, var(--sjs-size-x64));
+    max-width: var(--sjs-size-x64);
   }
 }
 

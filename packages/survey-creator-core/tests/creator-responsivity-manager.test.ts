@@ -2,7 +2,6 @@ import { QuestionAdornerViewModel } from "../src/components/question";
 import { SurveyCreatorModel, toolboxLocationType as toolboxLocationType } from "../src/creator-base";
 import { CreatorResponsivityManager } from "../src/creator-responsivity-manager";
 import { CreatorTester } from "./creator-tester";
-import { expect } from "@jest/globals";
 
 class SimpleContainer {
   clientRects = [{ x: 0, y: 0, height: 20, width: 20 }];
