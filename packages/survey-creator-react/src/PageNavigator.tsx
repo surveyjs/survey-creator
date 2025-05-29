@@ -73,12 +73,11 @@ export class SurveyPageNavigator extends CreatorModelElement<
             size={"auto"}
             title={this.model.pageSelectorCaption}
           ></SvgIcon>
-
-          <Popup
-            model={this.model.popupModel}
-          //className="svc-page-navigator__popup"
-          ></Popup>
         </div>)}
+        <Popup
+          model={this.model.popupModel}
+          //className="svc-page-navigator__popup"
+        ></Popup>
         <div>
           {this.model.visibleItems.map((item) => (
             <SurveyPageNavigatorItem
