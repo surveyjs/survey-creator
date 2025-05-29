@@ -624,7 +624,7 @@ export class PropertyJSONGenerator {
     const propName = this.getClasPropName();
     if (!!propName) {
       className = this.obj.getType();
-      if (this.obj.isDescendantOf("itemvalue") && className !== "imageitemvalue") className += "[]";
+      if (this.obj.isDescendantOf("itemvalue")) className += "[]";
       className += "@" + propName;
     }
     var properties = new SurveyQuestionProperties(this.obj, null,

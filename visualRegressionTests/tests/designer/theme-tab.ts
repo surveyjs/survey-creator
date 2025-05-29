@@ -60,7 +60,7 @@ test("theme setting property grid", async (t) => {
   const expandedGroup = Selector(".spg-theme-builder-root .spg-panel.sd-element--expanded");
 
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1280, 4000);
+    await t.resizeWindow(1580, 4000);
     await setJSON({
       showQuestionNumbers: "on",
       title: "Title",

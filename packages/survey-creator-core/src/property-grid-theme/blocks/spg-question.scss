@@ -38,6 +38,10 @@
   cursor: pointer;
 }
 
+.spg-question--disabled .spg-question__content {
+  cursor: default;
+}
+
 .spg-text__content,
 .spg-comment__content {
   position: relative;

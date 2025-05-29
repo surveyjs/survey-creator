@@ -24,6 +24,7 @@ export class SidebarModel extends Base {
   @property({ defaultValue: false }) expandedManually: boolean;
   @property() hasVisiblePages: boolean;
   @property({ defaultValue: false }) flyoutMode: boolean;
+  @property({ defaultValue: false }) narrowMode: boolean;
   @property() hideSideBarVisibilityControlActions: boolean;
 
   @property() sideAreaComponentName: string;
@@ -34,6 +35,7 @@ export class SidebarModel extends Base {
     return new CssClassBuilder()
       .append("svc-side-bar")
       .append("svc-side-bar--flyout", this.flyoutPanelMode)
+      .append("svc-side-bar--narrow", this.narrowMode)
       .append("svc-side-bar--mobile", this.creator.isMobileView)
       .append("svc-side-bar--side-area", !!this.sideAreaComponentName)
       .toString();
