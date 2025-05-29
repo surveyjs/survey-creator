@@ -231,3 +231,40 @@ test("Toggle for Creator Settings", () => {
   expect(creatorSettingAction.active).toBe(false);
   expect(creator.sidebar.activePage).toEqual("propertyGrid");
 });
+
+test("Sidebar rootCss: should apply classes based on state changes", () => {
+  const creator = new CreatorTester();
+  const sidebar = creator.sidebar;
+  sidebar.sideAreaComponentName = "";
+
+  expect(sidebar.rootCss).toBe("svc-side-bar");
+
+  sidebar.flyoutMode = true;
+  expect(sidebar.rootCss).toBe("svc-side-bar svc-side-bar--flyout");
+
+  // Test narrow mode
+  sidebar.flyoutMode = false;
+  sidebar.narrowMode = true;
+  expect(sidebar.rootCss).toBe("svc-side-bar svc-side-bar--narrow");
+
+  // Test mobile view
+  sidebar.narrowMode = false;
+  creator.isMobileView = true;
+  expect(sidebar.rootCss).toBe("svc-side-bar svc-side-bar--mobile");
+
+  // Test side area component
+  sidebar.sideAreaComponentName = "test-component";
+  expect(sidebar.rootCss).toBe("svc-side-bar svc-side-bar--mobile svc-side-bar--side-area");
+
+  // Test disabling flyout mode
+  sidebar["allowFlyoutMode"] = false;
+  expect(sidebar.rootCss).toBe("svc-side-bar svc-side-bar--mobile svc-side-bar--side-area");
+
+  // Reset all states
+  sidebar.flyoutMode = false;
+  sidebar.narrowMode = false;
+  creator.isMobileView = false;
+  sidebar.sideAreaComponentName = "";
+  sidebar["allowFlyoutMode"] = true;
+  expect(sidebar.rootCss).toBe("svc-side-bar");
+});

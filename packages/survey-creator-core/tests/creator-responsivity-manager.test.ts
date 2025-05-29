@@ -48,9 +48,10 @@ test("CreatorResponsivityManager getScreenWidth", (): any => {
 
 interface expectedValues {
   showToolbox: boolean;
-  toolboxLocation: toolboxLocationType;
+  toolboxLocation: string;
   toolboxIsCompact: boolean;
   sidebarFlyoutMode: boolean;
+  sidebarNarrowMode: boolean;
   showPageNavigator: boolean;
 }
 function checkCreatorLayoutPropertiesByWidth(creator: SurveyCreatorModel, newOffsetWidth: number, options: expectedValues) {
@@ -64,6 +65,7 @@ function checkCreatorLayoutPropertiesByWidth(creator: SurveyCreatorModel, newOff
   expect(creator.toolbox.isCompact).toEqual(options.toolboxIsCompact);
   expect(creator.showPageNavigator).toEqual(options.showPageNavigator);
   expect(creator.sidebar.flyoutMode).toEqual(options.sidebarFlyoutMode);
+  expect(creator.sidebar.narrowMode).toEqual(options.sidebarNarrowMode);
 }
 
 test("CreatorResponsivityManager process screenWidth is greater xxl ", (): any => {
@@ -71,38 +73,80 @@ test("CreatorResponsivityManager process screenWidth is greater xxl ", (): any =
   expect(creator.toolboxLocation).toEqual("left");
   expect(creator.toolbox.isCompact).toBeFalsy();
 
-  const expectedValues = <expectedValues>{ showToolbox: true, toolboxLocation: "left", toolboxIsCompact: false, sidebarFlyoutMode: false, showPageNavigator: true };
+  const expectedValues = <expectedValues>{
+    showToolbox: true,
+    toolboxLocation: "left",
+    toolboxIsCompact: false,
+    sidebarFlyoutMode: false,
+    sidebarNarrowMode: false,
+    showPageNavigator: true
+  };
 
   checkCreatorLayoutPropertiesByWidth(creator, 2000, expectedValues);
   checkCreatorLayoutPropertiesByWidth(creator, 1801, expectedValues);
 });
 test("CreatorResponsivityManager process screenWidth is [xl; xxl)", (): any => {
   const creator = new CreatorTester();
-  const expectedValues = <expectedValues>{ showToolbox: true, toolboxLocation: "left", toolboxIsCompact: false, sidebarFlyoutMode: false, showPageNavigator: true };
+  const expectedValues = <expectedValues>{
+    showToolbox: true,
+    toolboxLocation: "left",
+    toolboxIsCompact: false,
+    sidebarFlyoutMode: false,
+    sidebarNarrowMode: false,
+    showPageNavigator: true
+  };
   checkCreatorLayoutPropertiesByWidth(creator, 1799, expectedValues);
   checkCreatorLayoutPropertiesByWidth(creator, 1501, expectedValues);
 });
 test("CreatorResponsivityManager process screenWidth is [l; xl)", (): any => {
   const creator = new CreatorTester();
-  const expectedValues = <expectedValues>{ showToolbox: true, toolboxLocation: "left", toolboxIsCompact: true, sidebarFlyoutMode: false, showPageNavigator: true };
+  const expectedValues = <expectedValues>{
+    showToolbox: true,
+    toolboxLocation: "left",
+    toolboxIsCompact: true,
+    sidebarFlyoutMode: false,
+    sidebarNarrowMode: true,
+    showPageNavigator: true
+  };
   checkCreatorLayoutPropertiesByWidth(creator, 1499, expectedValues);
   checkCreatorLayoutPropertiesByWidth(creator, 1201, expectedValues);
 });
 test("CreatorResponsivityManager process screenWidth is [m; l)", (): any => {
   const creator = new CreatorTester();
-  const expectedValues = <expectedValues>{ showToolbox: true, toolboxLocation: "left", toolboxIsCompact: true, sidebarFlyoutMode: true, showPageNavigator: true };
+  const expectedValues = <expectedValues>{
+    showToolbox: true,
+    toolboxLocation: "left",
+    toolboxIsCompact: true,
+    sidebarFlyoutMode: true,
+    sidebarNarrowMode: false,
+    showPageNavigator: true
+  };
   checkCreatorLayoutPropertiesByWidth(creator, 1199, expectedValues);
   checkCreatorLayoutPropertiesByWidth(creator, 901, expectedValues);
 });
 test("CreatorResponsivityManager process screenWidth is [s; m)", (): any => {
   const creator = new CreatorTester();
-  const expectedValues = <expectedValues>{ showToolbox: false, toolboxLocation: "left", toolboxIsCompact: true, sidebarFlyoutMode: true, showPageNavigator: false };
+  const expectedValues = <expectedValues>{
+    showToolbox: false,
+    toolboxLocation: "left",
+    toolboxIsCompact: true,
+    sidebarFlyoutMode: true,
+    sidebarNarrowMode: false,
+    showPageNavigator: false
+  };
   checkCreatorLayoutPropertiesByWidth(creator, 899, expectedValues);
   checkCreatorLayoutPropertiesByWidth(creator, 601, expectedValues);
 });
 test("CreatorResponsivityManager process screenWidth is [0; s)", (): any => {
   const creator = new CreatorTester();
-  const expectedValues = <expectedValues>{ showToolbox: false, toolboxLocation: "left", toolboxIsCompact: true, sidebarFlyoutMode: true, showPageNavigator: false };
+  const expectedValues = <expectedValues>{
+    showToolbox: false,
+    toolboxLocation: "left",
+    toolboxIsCompact: true,
+    sidebarFlyoutMode: true,
+    sidebarNarrowMode: false,
+    showPageNavigator: false
+  };
   checkCreatorLayoutPropertiesByWidth(creator, 599, expectedValues);
   checkCreatorLayoutPropertiesByWidth(creator, 200, expectedValues);
 });
@@ -115,7 +159,14 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
   expect(creator.toolboxLocation).toEqual("right");
   expect(creator.toolbox.isCompact).toBeFalsy();
 
-  const expectedValues = <expectedValues>{ showToolbox: true, toolboxLocation: "right", toolboxIsCompact: false, sidebarFlyoutMode: false, showPageNavigator: true };
+  const expectedValues = <expectedValues>{
+    showToolbox: true,
+    toolboxLocation: "right",
+    toolboxIsCompact: false,
+    sidebarFlyoutMode: false,
+    sidebarNarrowMode: false,
+    showPageNavigator: true
+  };
   checkCreatorLayoutPropertiesByWidth(creator, 2000, expectedValues);
   checkCreatorLayoutPropertiesByWidth(creator, 1801, expectedValues);
 });
@@ -124,7 +175,14 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
   creator.toolboxLocation = "right";
   creator.showSidebar = false;
 
-  const expectedValues = <expectedValues>{ showToolbox: true, toolboxLocation: "right", toolboxIsCompact: false, sidebarFlyoutMode: false, showPageNavigator: true };
+  const expectedValues = <expectedValues>{
+    showToolbox: true,
+    toolboxLocation: "right",
+    toolboxIsCompact: false,
+    sidebarFlyoutMode: false,
+    sidebarNarrowMode: false,
+    showPageNavigator: true
+  };
   checkCreatorLayoutPropertiesByWidth(creator, 1799, expectedValues);
   checkCreatorLayoutPropertiesByWidth(creator, 1501, expectedValues);
 });
@@ -133,7 +191,14 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
   creator.toolboxLocation = "right";
   creator.showSidebar = false;
 
-  const expectedValues = <expectedValues>{ showToolbox: true, toolboxLocation: "right", toolboxIsCompact: true, sidebarFlyoutMode: false, showPageNavigator: true };
+  const expectedValues = <expectedValues>{
+    showToolbox: true,
+    toolboxLocation: "right",
+    toolboxIsCompact: true,
+    sidebarFlyoutMode: false,
+    sidebarNarrowMode: true,
+    showPageNavigator: true
+  };
   checkCreatorLayoutPropertiesByWidth(creator, 1499, expectedValues);
   checkCreatorLayoutPropertiesByWidth(creator, 1201, expectedValues);
 });
@@ -143,7 +208,12 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
   creator.showSidebar = false;
 
   const expectedValues = <expectedValues>{
-    showToolbox: true, toolboxLocation: "right", toolboxIsCompact: true, sidebarFlyoutMode: true, showPageNavigator: true
+    showToolbox: true,
+    toolboxLocation: "right",
+    toolboxIsCompact: true,
+    sidebarFlyoutMode: true,
+    sidebarNarrowMode: false,
+    showPageNavigator: true
   };
   checkCreatorLayoutPropertiesByWidth(creator, 1199, expectedValues);
   checkCreatorLayoutPropertiesByWidth(creator, 901, expectedValues);
@@ -153,7 +223,14 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
   creator.toolboxLocation = "right";
   creator.showSidebar = false;
 
-  const expectedValues = <expectedValues>{ showToolbox: false, toolboxLocation: "right", toolboxIsCompact: true, sidebarFlyoutMode: true, showPageNavigator: false };
+  const expectedValues = <expectedValues>{
+    showToolbox: false,
+    toolboxLocation: "right",
+    toolboxIsCompact: true,
+    sidebarFlyoutMode: true,
+    sidebarNarrowMode: false,
+    showPageNavigator: false
+  };
   checkCreatorLayoutPropertiesByWidth(creator, 899, expectedValues);
   checkCreatorLayoutPropertiesByWidth(creator, 601, expectedValues);
 });
@@ -162,7 +239,14 @@ test("CreatorResponsivityManager toolboxLocation is right and propertygrid is hi
   creator.toolboxLocation = "right";
   creator.showSidebar = false;
 
-  const expectedValues = <expectedValues>{ showToolbox: false, toolboxLocation: "right", toolboxIsCompact: true, sidebarFlyoutMode: true, showPageNavigator: false };
+  const expectedValues = <expectedValues>{
+    showToolbox: false,
+    toolboxLocation: "right",
+    toolboxIsCompact: true,
+    sidebarFlyoutMode: true,
+    sidebarNarrowMode: false,
+    showPageNavigator: false
+  };
   checkCreatorLayoutPropertiesByWidth(creator, 599, expectedValues);
   checkCreatorLayoutPropertiesByWidth(creator, 200, expectedValues);
 });
@@ -179,6 +263,7 @@ test("CreatorResponsivityManager process if Sidebar, PageNavigator and Toolbox i
   const checkInitialValues = () => {
     expect(creator.showSidebar).toEqual(false);
     expect(creator.sidebar.flyoutMode).toEqual(false);
+    expect(creator.sidebar.narrowMode).toEqual(false);
     expect(creator.showPageNavigator).toEqual(false);
     expect(creator.showToolbox).toEqual(false);
     expect(creator.toolboxLocation).toEqual("right");
