@@ -47,6 +47,7 @@ export var enStrings = {
     paneldynamic: "Dynamic Panel",
     radiogroup: "Radio Button Group",
     rating: "Rating Scale",
+    slider: "Slider",
     text: "Single-Line Input",
     boolean: "Yes/No (Boolean)",
     expression: "Expression (read-only)",
@@ -744,6 +745,19 @@ export var enStrings = {
     rateValues: "Custom rating values",
     rateCount: "Rating count",
     autoGenerate: "Rating configuration",
+    slider: {
+      min: "Min value",
+      max: "Max value",
+      step: "Step value",
+      showLabels: "Show scale labels",
+      // segmentCount: "Number of segments",
+      tooltipVisibilityPG: "Show tooltips",
+      allowSwap: "Allow thumb crossing",
+      labelCount: "Number of auto-generated labels",
+      minValueExpression: "Min value expression",
+      maxValueExpression: "Max value expression",
+      autoGenerate: "Scale labels configuration"
+    },
     hideIfChoicesEmpty: "Hide the question if it has no choices",
     minWidth: "Minimum width",
     maxWidth: "Maximum width",
@@ -826,6 +840,7 @@ export var enStrings = {
       enableIf: "Editable If",
       requiredIf: "Required If",
       rateValues: "Rating Values",
+      sliderSettings: "Slider Settings",
       choicesByUrl: "Choices from a Web Service",
       matrixChoices: "Default Choices",
       multipleTextItems: "Text Inputs",
@@ -1047,6 +1062,10 @@ export var enStrings = {
       time: "Time",
       url: "URL",
       week: "Week"
+    },
+    sliderType: {
+      single: "Single-Value",
+      range: "Range"
     },
     autocomplete: {
       "name": "Full Name",

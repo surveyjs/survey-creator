@@ -95,9 +95,23 @@ export class SurveyQuestionProperties {
     }
     return true;
   }
-  private getClassDefintion(name: string): ISurveyQuestionEditorDefinition {
+  private getClassDefintion(name: string, includingParents?: boolean): ISurveyQuestionEditorDefinition {
     if (!this.propertyGridDefinition || !this.propertyGridDefinition.classes) return undefined;
-    return this.propertyGridDefinition.classes[name];
+    let res = this.propertyGridDefinition.classes[name];
+    while(!res && includingParents && name) {
+      const names = name.split("@");
+      const hasBrackets = names[0].indexOf("[]") > 0;
+      const cl = Serializer.findClass(names[0].replace("[]", ""));
+      name = cl?.parentName;
+      if (name && names.length) {
+        if (hasBrackets) {
+          name += "[]";
+        }
+        name += "@" + names[1];
+      }
+      res = this.propertyGridDefinition.classes[name];
+    }
+    return res;
   }
   private fillPropertiesHash() {
     this.propertiesHash = {};
@@ -318,7 +332,7 @@ export class SurveyQuestionProperties {
   ): Array<ISurveyQuestionEditorDefinition> {
     var result = [];
     var usedProperties = {};
-    if (className.indexOf("@") > -1 && this.getClassDefintion(className)) {
+    if (className.indexOf("@") > -1 && this.getClassDefintion(className, true)) {
       const prefix = className.substring(0, className.indexOf("@") + 1);
       const clName = className.substring(prefix.length);
       const classes = [];

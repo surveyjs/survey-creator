@@ -1,5 +1,5 @@
 {
-  "version": "2.0.10",
+  "version": "2.1.0",
   "name": "survey-creator-core",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "SEE LICENSE IN LICENSE",
@@ -17,6 +17,9 @@
     "test:cov": "jest --coverage",
     "test:watch": "jest --watch",
     "test:postcss": "postcss build/survey-creator-core.css --silent  -u postcss-calc -u autoprefixer -u postcss-fail-on-warn -u postcss-import -o survey-creator-core.postcss.css && rimraf survey-creator-core.postcss.css",
+    "test:presets": "jest --config jest.presets.config.js",
+    "test:presets:watch": "jest --config jest.presets.config.js --watch",
+    "test:presets:cov": "jest --config jest.presets.config.js --coverage",
     "doc_gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
     "watch:dev": "concurrently \"webpack --env buildType=dev --watch --env emitDeclarations --env emitStyles\" \"rollup -c -w\" ",
     "watch:prod": "webpack --env buildType=prod --watch",

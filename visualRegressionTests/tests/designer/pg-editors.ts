@@ -755,7 +755,7 @@ test("Dropdown clean button in property grid", async (t) => {
       .pressKey("enter");
 
     await takeElementScreenshot("pg-dropdown-clean-button.png", dropdownSelector, t, comparer);
-    await t.hover(Selector(".spg-dropdown__clean-button"));
+    await t.hover(Selector(".sd-editor-button-item[title='Clear']"));
     await takeElementScreenshot("pg-dropdown-clean-button-hover.png", dropdownSelector, t, comparer);
   });
 });
