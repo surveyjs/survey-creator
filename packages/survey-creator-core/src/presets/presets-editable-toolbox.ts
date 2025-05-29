@@ -86,7 +86,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               ]
             },
             {
-              type: "matrix",
+              type: "matrixdynamic",
               name: this.nameItems,
               visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
               titleLocation: "hidden",
