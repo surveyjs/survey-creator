@@ -220,6 +220,7 @@ export interface ISurveyCreatorOptions {
 
   maxNestedPanels: number;
   maxNestingLevel: number;
+  forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
   enableLinkFileEditor: boolean;
   inplaceEditForValues: boolean;
@@ -373,6 +374,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
 
   maxNestedPanels: number = -1;
   maxNestingLevel: number = -1;
+  forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
   showOneCategoryInPropertyGrid: boolean;
 

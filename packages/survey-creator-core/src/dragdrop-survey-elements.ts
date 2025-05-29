@@ -85,6 +85,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   public onDragOverLocationCalculating: (options: any) => void;
   public get maxNestedPanels(): number { return this.onGetMaxNestedPanels ? this.onGetMaxNestedPanels() : -1; }
   public get maxNestingLevel(): number { return this.onGetMaxNestedLevel ? this.onGetMaxNestedLevel() : -1; }
+  public isAllowedToAdd: (elementType: string, container: SurveyElement) => boolean = (elementType: string, container: SurveyElement): boolean => true;
 
   public startDragToolboxItem(
     event: PointerEvent,
@@ -242,6 +243,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (dropTarget === this.draggedElement) return false;
 
     if (SurveyHelper.isPanelDynamic(this.draggedElement) && dropTarget === this.draggedElement.template) {
+      return false;
+    }
+    if (!this.isAllowedToAdd(this.draggedElement && this.draggedElement.getType && this.draggedElement.getType(), dropTarget)) {
       return false;
     }
     if (this.maxNestingLevel >= 0 && (this.draggedElement.isPanel || SurveyHelper.isPanelDynamic(this.draggedElement))) {

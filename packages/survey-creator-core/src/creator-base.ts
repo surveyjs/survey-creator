@@ -1193,6 +1193,8 @@ export class SurveyCreatorModel extends Base
 
   public maxNestingLevel: number = -1;
 
+  public forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
+
   public showPagesInTestSurveyTab = true;
   /**
    * Specifies whether to show a page selector at the bottom of the Preview tab.
@@ -2251,6 +2253,7 @@ export class SurveyCreatorModel extends Base
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
+    this.dragDropSurveyElements.isAllowedToAdd = this.isAllowedToAdd;
     this.dragDropSurveyElements.onGetMaxNestedPanels = (): number => { return this.maxNestedPanels; };
     this.dragDropSurveyElements.onGetMaxNestedLevel = (): number => { return this.maxNestingLevel; };
     this.dragDropSurveyElements.onDragOverLocationCalculating = (options) => { this.onDragOverLocationCalculating.fire(this, options); };
@@ -4162,27 +4165,37 @@ export class SurveyCreatorModel extends Base
     if (!element) return true;
     return this.maxNestedPanels < 0 || this.maxNestedPanels >= childNesting + SurveyHelper.getElementDeepLength(element);
   }
+  public isAllowedToAdd: (elementType: string, container: SurveyElement) => boolean = (elementType: string, container: SurveyElement) => {
+    if (!this.forbiddenNestedElements || !elementType || !container) return true;
+    const forbiddenElements = this.forbiddenNestedElements[container.getType()];
+    if (!forbiddenElements || forbiddenElements.length === 0) return true;
+    return !forbiddenElements.some((forbiddenElement) => {
+      return Serializer.isDescendantOf(elementType, forbiddenElement);
+    });
+  };
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
-    const res: Array<QuestionToolboxItem> = [];
-    this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) res.push(item); });
+    const availableToolboxItems: Array<QuestionToolboxItem> = [];
+    this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) availableToolboxItems.push(item); });
 
-    if (!element) return res;
-    if (!isAddNew && (element.isPanel || SurveyHelper.isPanelDynamic(element))) return res;
+    if (!element) return availableToolboxItems;
+    if (!isAddNew && (element.isPanel || SurveyHelper.isPanelDynamic(element))) {
+      return availableToolboxItems.filter((item) => this.isAllowedToAdd(item.typeName, element));
+    }
 
     if (!this.isAllowedNestingLevel(element)) {
-      for (let i = res.length - 1; i >= 0; i--) {
-        if (res[i].isPanel || Serializer.isDescendantOf(res[i].typeName, "paneldynamic")) {
-          res.splice(i, 1);
+      for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
+        if (availableToolboxItems[i].isPanel || Serializer.isDescendantOf(availableToolboxItems[i].typeName, "paneldynamic")) {
+          availableToolboxItems.splice(i, 1);
         }
       }
     } else if (!this.isAllowedNestedPanels(element)) {
-      for (let i = res.length - 1; i >= 0; i--) {
-        if (res[i].isPanel) {
-          res.splice(i, 1);
+      for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
+        if (availableToolboxItems[i].isPanel) {
+          availableToolboxItems.splice(i, 1);
         }
       }
     }
-    return res;
+    return availableToolboxItems;
   }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;

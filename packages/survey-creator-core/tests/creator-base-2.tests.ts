@@ -638,3 +638,23 @@ test("ConvertTo and addNewQuestion for panel with maxNestingLevel set", (): any 
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
 });
+
+test("isAllowedToAdd forbiddenNestedElements", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "panel", name: "panel1" },
+      { type: "paneldynamic", name: "panel2" }
+    ]
+  };
+  expect(creator.forbiddenNestedElements).toBe(undefined);
+  const panel1 = creator.survey.getPanelByName("panel1");
+  const panel2 = creator.survey.getQuestionByName("panel2");
+  const itemCount = creator.getAvailableToolboxItems().length;
+  expect(itemCount).toBe(21);
+  creator.forbiddenNestedElements = { "panel": ["expression"], "paneldynamic": ["file", "radiogroup"] };
+  expect(creator.getAvailableToolboxItems(panel1, false)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
+});
