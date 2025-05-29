@@ -10,7 +10,7 @@ module.exports = {
   ],
   collectCoverage: true,
   coverageReporters: ["json", "lcov", "text", "html", "text-summary", "cobertura"],
-  roots: ["tests/presets"],
+  roots: ["tests-presets"],
   transform: {
     "^.+\\.(t|j)sx?$": ["ts-jest", {
       diagnostics: false,
