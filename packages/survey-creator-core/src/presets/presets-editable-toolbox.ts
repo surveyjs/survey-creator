@@ -286,7 +286,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.setupQuestionsValueDefinition(model, json);
     const val = [];
-    creator.toolbox.items.forEach(item => val.push(item.id));
+    creator.toolbox.items.forEach(item => val.push(this.createToolboxItemRow(item)));
     this.getQuestionItems(model).value = val;
     const nameCategories = {};
     const categories = [];
@@ -294,11 +294,11 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       const category = item.category;
       if (!!category) {
         if (!nameCategories[category]) {
-          const row = { category: category, items: [item.name] };
+          const row = { category: category, items: [this.createToolboxItemRow(item)] };
           nameCategories[category] = row;
           categories.push(row);
         } else {
-          nameCategories[category].items.push(item.name);
+          nameCategories[category].items.push(this.createToolboxItemRow(item));
         }
       }
     });
@@ -389,7 +389,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private setupDefaultItems(creator: SurveyCreatorModel): void {
     const items = {};
     creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
-      items[item.id] = item.title;
+      this.createToolboxItemRow(item);
     });
     this.defaultItems = items;
   }
@@ -403,19 +403,19 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       definitionVal.forEach(item => {
         const key = item.name;
         if (!!key && !items[key] || !!item.title) {
-          items[key] = item.title || key;
+          items[key] = this.createToolboxItemRow(item);
         }
       });
     }
     const res: ICreatorPresetToolboxItem[] = [];
     for (let key in items) {
-      res.push(this.createItemValue(key, items[key]));
+      res.push({ ...items[key] });
     }
 
     return res;
   }
-  private createItemValue(name: string, title: string | undefined): ICreatorPresetToolboxItem {
-    return <ICreatorPresetToolboxItem> { name, title };
+  private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
+    return <ICreatorPresetToolboxItem> { name: item.name, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: item.json };
   }
   private getRankingChoices(row: MatrixDropdownRowModelBase): Array<ICreatorPresetToolboxItem> {
     const res: ICreatorPresetToolboxItem[] = [];
@@ -434,7 +434,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
     this.allItems.forEach(item => {
       if (!usedItems[item.name]) {
-        res.push(this.createItemValue(item.name, item.title));
+        res.push({ ...item });
       }
     });
     return res;
