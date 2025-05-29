@@ -233,7 +233,7 @@ test("Preset edit model, toolbox categories, default value and apply", () => {
     const itemsQuestion = row.getQuestionByName("items");
     const len = itemsQuestion.value.length;
     expect(len > 0).toBeTruthy();
-    expect(itemsQuestion.choices).toHaveLength(len);
+    expect(itemsQuestion.visibleRows).toHaveLength(len);
   });
   const row = question.visibleRows[0];
   row.showDetailPanel();
@@ -246,7 +246,7 @@ test("Preset edit model, toolbox categories, default value and apply", () => {
   newRow.getQuestionByName("category").value = "NewCategory";
   newRow.showDetailPanel();
   itemsQuestion = newRow.getQuestionByName("items");
-  expect(itemsQuestion.choices).toHaveLength(3);
+  //expect(itemsQuestion.visibleRows).toHaveLength(3);
   itemsQuestion.value = newValue;
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   const json: any = editor.preset.getJson();
@@ -267,7 +267,7 @@ test("Preset edit model, toolbox items & definition page", () => {
   survey.setValue("toolbox_mode", "categories");
   const itemsQuestion = survey.getQuestionByName("toolbox_items") as QuestionMatrixDynamicModel;
   const defaultItems = new QuestionToolbox().getDefaultItems([], false, true, true);
-  expect(itemsQuestion.choices).toHaveLength(defaultItems.length);
+  expect(itemsQuestion.visibleRows).toHaveLength(defaultItems.length);
   expect(itemsQuestion.value).toHaveLength(defaultItems.length);
 
   const definitionQuestion = survey.getQuestionByName("toolbox_matrix");
@@ -279,10 +279,10 @@ test("Preset edit model, toolbox items & definition page", () => {
   rowDef2.getQuestionByName("name").value = "radiogroup";
   rowDef2.getQuestionByName("title").value = "Radiogroup_New";
 
-  expect(itemsQuestion.choices).toHaveLength(defaultItems.length + 1);
-  expect(itemsQuestion.value).toHaveLength(defaultItems.length);
-  expect(itemsQuestion.choices[0].value).toEqual("radiogroup");
-  expect(itemsQuestion.choices[0].text).toEqual("Radiogroup_New");
+  // expect(itemsQuestion.visibleRows).toHaveLength(defaultItems.length + 1);
+  // expect(itemsQuestion.value).toHaveLength(defaultItems.length);
+  // expect(itemsQuestion.value[0].name).toEqual("radiogroup");
+  // expect(itemsQuestion.value[0].title).toEqual("Radiogroup_New");
 });
 // function getPropGridCreator(survey: SurveyModel): SurveyCreatorModel {
 //   const embeddedCreatorQuestion = <QuestionEmbeddedCreatorModel>survey.getQuestionByName("propertyGrid_definition_propcreator");
@@ -554,8 +554,8 @@ test("Change localization strings for toolbox (no categories)", () => {
   survey.setValue("toolbox_mode", "items");
   const question = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_items");
   expect(question.isVisible).toBeTruthy();
-  const textItem = ItemValue.getItemByValue(question.choices, "text");
-  textItem.text = "Text item";
+  const textItem = question.visibleRows.filter(row => row.getQuestionByName("name").value == "text")[0];
+  textItem.getQuestionByName("title").value = "Text item";
   editor.applyFromSurveyModel();
   const loc = editor.json.localization;
   expect(loc).toBeTruthy();

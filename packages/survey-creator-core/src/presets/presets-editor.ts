@@ -341,4 +341,25 @@ preset.apply(creator);</div></pre></code></div>
     });
     return modelJson;
   }
+
+  public static updateModifiedText(locStrs: any, text: string, localizationName: string): void {
+    if (!localizationName) return undefined;
+    const presetStrs = editorLocalization.presetStrings;
+    editorLocalization.presetStrings = undefined;
+    if (text !== editorLocalization.getString(localizationName)) {
+      CreatorPresetEditorModel.saveTextInLocStrs(locStrs, text, localizationName);
+    }
+    editorLocalization.presetStrings = presetStrs;
+  }
+  private static saveTextInLocStrs(locStrs: any, text: string, localizationName: string): void {
+    const paths = localizationName.split(".");
+    for (let i = 0; i < paths.length - 1; i ++) {
+      const path = paths[i];
+      if (!locStrs[path]) {
+        locStrs[path] = {};
+      }
+      locStrs = locStrs[path];
+    }
+    locStrs[paths[paths.length - 1]] = text;
+  }
 }
