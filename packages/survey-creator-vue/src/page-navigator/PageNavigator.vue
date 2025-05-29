@@ -1,21 +1,23 @@
 <template>
   <div class="svc-page-navigator" v-show="model.visible" ref="root">
-    <div
-      role="button"
-      class="svc-page-navigator__selector svc-page-navigator__button"
-      @click="model.togglePageSelector($event)"
-      v-key2click
-      :title="model.pageSelectorCaption"
-      :class="{ 'svc-page-navigator__button--pressed': model.isPopupOpened }"
-    >
-      <SvComponent
-        :is="'sv-svg-icon'"
-        class="svc-page-navigator__button-icon"
-        :iconName="model.icon"
-        :size="'auto'"
-      ></SvComponent>
+    <div>
+      <div
+        role="button"
+        class="svc-page-navigator__selector svc-page-navigator__button"
+        @click="model.togglePageSelector($event)"
+        v-key2click
+        :title="model.pageSelectorCaption"
+        :class="{ 'svc-page-navigator__button--pressed': model.isPopupOpened }"
+      >
+        <SvComponent
+          :is="'sv-svg-icon'"
+          class="svc-page-navigator__button-icon"
+          :iconName="model.icon"
+          :size="'auto'"
+        ></SvComponent>
+      </div>
+      <SvComponent :is="'sv-popup'" :model="model.popupModel"></SvComponent>
     </div>
-    <SvComponent :is="'sv-popup'" :model="model.popupModel"></SvComponent>
     <div>
       <SvComponent
         :is="'svc-page-navigator-item'"
