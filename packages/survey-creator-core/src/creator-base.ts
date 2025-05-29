@@ -4154,6 +4154,14 @@ export class SurveyCreatorModel extends Base
   public get addNewQuestionText() {
     return this.getAddNewQuestionText();
   }
+  public isAllowedNestingLevel(element: SurveyElement, childNesting = 0): boolean {
+    if (!element) return true;
+    return this.maxNestingLevel < 0 || this.maxNestingLevel >= childNesting + SurveyHelper.getElementParentContainers(element).length;
+  }
+  public isAllowedNestedPanels(element: SurveyElement, childNesting = 0): boolean {
+    if (!element) return true;
+    return this.maxNestedPanels < 0 || this.maxNestedPanels >= childNesting + SurveyHelper.getElementDeepLength(element);
+  }
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
     const res: Array<QuestionToolboxItem> = [];
     this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) res.push(item); });
@@ -4161,13 +4169,13 @@ export class SurveyCreatorModel extends Base
     if (!element) return res;
     if (!isAddNew && (element.isPanel || SurveyHelper.isPanelDynamic(element))) return res;
 
-    if (this.maxNestingLevel >= 0 && this.maxNestingLevel < SurveyHelper.getElementParentContainers(element).length) {
+    if (!this.isAllowedNestingLevel(element)) {
       for (let i = res.length - 1; i >= 0; i--) {
         if (res[i].isPanel || Serializer.isDescendantOf(res[i].typeName, "paneldynamic")) {
           res.splice(i, 1);
         }
       }
-    } else if (this.maxNestedPanels >= 0 && this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
+    } else if (!this.isAllowedNestedPanels(element)) {
       for (let i = res.length - 1; i >= 0; i--) {
         if (res[i].isPanel) {
           res.splice(i, 1);
