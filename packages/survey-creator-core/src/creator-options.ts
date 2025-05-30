@@ -295,6 +295,11 @@ export interface ICreatorOptions {
    * Default value: -1 (unlimited)
    */
   maxNestedPanels?: number;
+
+  maxNestingLevel?: number;
+
+  forbiddenNestedElements?: { panel: string[], paneldynamic: string[] };
+
   /**
    * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
    */

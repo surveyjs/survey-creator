@@ -1191,6 +1191,10 @@ export class SurveyCreatorModel extends Base
    */
   public maxNestedPanels: number = -1;
 
+  public maxNestingLevel: number = -1;
+
+  public forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
+
   public showPagesInTestSurveyTab = true;
   /**
    * Specifies whether to show a page selector at the bottom of the Preview tab.
@@ -2203,10 +2207,6 @@ export class SurveyCreatorModel extends Base
       this.existingPages[options.page.id] = true;
       this.doOnPageAdded(options.page);
     });
-    survey.onDragDropAllow.add((sender, options) => {
-      (<any>options).survey = sender;
-      this.onDragDropAllow.fire(this, options);
-    });
 
     this.setSurvey(survey);
     this.expandCollapseManager.expandCollapseElements("loading", false);
@@ -2253,7 +2253,9 @@ export class SurveyCreatorModel extends Base
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
+    this.dragDropSurveyElements.isAllowedToAdd = this.isAllowedToAdd;
     this.dragDropSurveyElements.onGetMaxNestedPanels = (): number => { return this.maxNestedPanels; };
+    this.dragDropSurveyElements.onGetMaxNestedLevel = (): number => { return this.maxNestingLevel; };
     this.dragDropSurveyElements.onDragOverLocationCalculating = (options) => { this.onDragOverLocationCalculating.fire(this, options); };
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
@@ -2265,6 +2267,10 @@ export class SurveyCreatorModel extends Base
       }
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
+    });
+    this.dragDropSurveyElements.onDragDropAllow.add((sender, options) => {
+      (<any>options).survey = this.survey;
+      this.onDragDropAllow.fire(this, options);
     });
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
@@ -4151,21 +4157,45 @@ export class SurveyCreatorModel extends Base
   public get addNewQuestionText() {
     return this.getAddNewQuestionText();
   }
+  public isAllowedNestingLevel(element: SurveyElement, childNesting = 0): boolean {
+    if (!element) return true;
+    return this.maxNestingLevel < 0 || this.maxNestingLevel >= childNesting + SurveyHelper.getElementParentContainers(element).length;
+  }
+  public isAllowedNestedPanels(element: SurveyElement, childNesting = 0): boolean {
+    if (!element) return true;
+    return this.maxNestedPanels < 0 || this.maxNestedPanels >= childNesting + SurveyHelper.getElementDeepLength(element);
+  }
+  public isAllowedToAdd: (elementType: string, container: SurveyElement) => boolean = (elementType: string, container: SurveyElement) => {
+    if (!this.forbiddenNestedElements || !elementType || !container) return true;
+    const forbiddenElements = this.forbiddenNestedElements[container.getType()];
+    if (!forbiddenElements || forbiddenElements.length === 0) return true;
+    return !forbiddenElements.some((forbiddenElement) => {
+      return Serializer.isDescendantOf(elementType, forbiddenElement);
+    });
+  };
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
-    const res: Array<QuestionToolboxItem> = [];
-    this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) res.push(item); });
+    const availableToolboxItems: Array<QuestionToolboxItem> = [];
+    this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) availableToolboxItems.push(item); });
 
-    if (!element || this.maxNestedPanels < 0) return res;
-    if (!isAddNew && element.isPanel) return res;
+    if (!element) return availableToolboxItems;
+    if (!isAddNew && (element.isPanel || SurveyHelper.isPanelDynamic(element))) {
+      return availableToolboxItems.filter((item) => this.isAllowedToAdd(item.typeName, element));
+    }
 
-    if (this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
-      for (let i = res.length - 1; i >= 0; i--) {
-        if (res[i].isPanel) {
-          res.splice(i, 1);
+    if (!this.isAllowedNestingLevel(element)) {
+      for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
+        if (availableToolboxItems[i].isPanel || Serializer.isDescendantOf(availableToolboxItems[i].typeName, "paneldynamic")) {
+          availableToolboxItems.splice(i, 1);
+        }
+      }
+    } else if (!this.isAllowedNestedPanels(element)) {
+      for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
+        if (availableToolboxItems[i].isPanel) {
+          availableToolboxItems.splice(i, 1);
         }
       }
     }
-    return res;
+    return availableToolboxItems;
   }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;

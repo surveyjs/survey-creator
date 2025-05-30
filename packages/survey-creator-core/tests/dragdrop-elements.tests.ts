@@ -1,4 +1,4 @@
-import { Question, QuestionTextModel, SurveyModel } from "survey-core";
+import { PanelModel, Question, QuestionPanelDynamicModel, QuestionTextModel, SurveyModel } from "survey-core";
 import { DragDropSurveyElements, calculateDragOverLocation, calculateIsEdge, calculateIsSide } from "../src/dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../src/drag-drop-enums";
 import { CreatorTester } from "./creator-tester";
@@ -1733,4 +1733,51 @@ test("drag drop move page shouldn't raise survey onPageAdded", () => {
   ddHelper.doDrop();
   expect(p3["draggedFrom"]).toStrictEqual(3);
   expect(pageAddedCounter).toBe(0);
+});
+
+test("SurveyElements: isDropTargetValid && forbiddenNestedElements", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "panel", name: "panel1",
+        elements: [
+          {
+            type: "panel", name: "panel3",
+            elements: [
+              { type: "panel", name: "panel5" },
+              { type: "paneldynamic", name: "panel6" }
+            ]
+          },
+          { type: "paneldynamic", name: "panel4" }
+        ]
+      },
+      { type: "paneldynamic", name: "panel2" },
+      { type: "expression", name: "question1" },
+      { type: "file", name: "question2" },
+      { type: "text", name: "question3" }
+    ]
+  };
+  creator.forbiddenNestedElements = { "panel": ["expression"], "paneldynamic": ["file", "radiogroup"] };
+  const panel6 = creator.survey.getQuestionByName("panel6") as QuestionPanelDynamicModel;
+  const panel5 = creator.survey.getPanelByName("panel5") as PanelModel;
+  const question1 = creator.survey.getQuestionByName("question1");
+  const question2 = creator.survey.getQuestionByName("question2");
+  const question3 = creator.survey.getQuestionByName("question3");
+  const ddHelper: any = creator.dragDropSurveyElements;
+
+  ddHelper.draggedElement = question1;
+  expect(ddHelper.isDropTargetValid(panel6, undefined, DropIndicatorPosition.Top)).toBe(false);
+  expect(ddHelper.isDropTargetValid(panel6.template, undefined, DropIndicatorPosition.Inside)).toBe(true);
+  expect(ddHelper.isDropTargetValid(panel5, undefined, DropIndicatorPosition.Inside)).toBe(false);
+
+  ddHelper.draggedElement = question2;
+  expect(ddHelper.isDropTargetValid(panel6, undefined, DropIndicatorPosition.Top)).toBe(true);
+  expect(ddHelper.isDropTargetValid(panel6.template, undefined, DropIndicatorPosition.Inside)).toBe(false);
+  expect(ddHelper.isDropTargetValid(panel5, undefined, DropIndicatorPosition.Inside)).toBe(true);
+
+  ddHelper.draggedElement = question3;
+  expect(ddHelper.isDropTargetValid(panel6, undefined, DropIndicatorPosition.Top)).toBe(true);
+  expect(ddHelper.isDropTargetValid(panel6.template, undefined, DropIndicatorPosition.Inside)).toBe(true);
+  expect(ddHelper.isDropTargetValid(panel5, undefined, DropIndicatorPosition.Inside)).toBe(true);
 });
