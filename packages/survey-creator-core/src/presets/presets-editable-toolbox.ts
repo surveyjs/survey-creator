@@ -71,7 +71,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                   showHeader: false,
                   columns: [
                     {
-                      "name": "name"
+                      "name": "name",
+                      visible: false
                     },
                     {
                       "name": "iconName"
@@ -96,7 +97,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               showHeader: false,
               columns: [
                 {
-                  "name": "name"
+                  "name": "name",
+                  visible: false
                 },
                 {
                   "name": "iconName"
