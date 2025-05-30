@@ -291,7 +291,7 @@ creator.saveSurveyFunc = (no, callback) => {
   }, 1000);
 };
 
-const editor = new SurveyCreatorPresets.CreatorPresetEditorModel();
+const editor = new SurveyCreatorCorePresets.CreatorPresetEditorModel();
 window.editor = editor;
 class PresetsTabComponent extends React.Component {
   render() {
@@ -318,7 +318,7 @@ creator.addTab({
   plugin: presetsPlugin,
   title: "Presets",
   componentName: "svc-tab-presets",
-  index: 0
+  index: 100
 });
 
 
