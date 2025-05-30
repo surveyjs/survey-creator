@@ -1,10 +1,14 @@
 <ng-template #template>
   <div class="svc-rating-question-content">
     <div [class]="adorner.controlsClassNames">
-      <svg *ngIf="adorner.allowRemove" [iconName]="'icon-remove_16x16'" [size]="'auto'" [key2click] (click)="adorner.removeItem(adorner)"
-      [class]="adorner.removeClassNames" [attr.title]="adorner.removeTooltip" [attr.aria-label]="adorner.removeTooltip" sv-ng-svg-icon></svg>
-      <svg *ngIf="adorner.allowAdd" [iconName]="'icon-add_16x16'" [size]="'auto'" [key2click] (click)="adorner.addItem(adorner)"
-      [class]="adorner.addClassNames" [attr.title]="adorner.addTooltip" [attr.aria-label]="adorner.addTooltip"sv-ng-svg-icon></svg>
+      <span *ngIf="adorner.allowRemove" [class]="adorner.removeClassNames" [key2click] 
+      (click)="adorner.removeItem(adorner)" role="button" [attr.aria-label]="adorner.removeTooltip">
+        <svg [iconName]="'icon-remove_16x16'" [size]="'auto'" [attr.title]="adorner.removeTooltip" sv-ng-svg-icon></svg>
+      </span>
+      <span *ngIf="adorner.allowAdd" [class]="adorner.addClassNames" [key2click]
+      (click)="adorner.addItem(adorner)" role="button" [attr.aria-label]="adorner.addTooltip">
+        <svg [iconName]="'icon-add_16x16'" [size]="'auto'" [attr.title]="adorner.addTooltip" sv-ng-svg-icon></svg>
+      </span>
     </div>
     <ng-container *ngTemplateOutlet="contentTempl"></ng-container>
   </div>

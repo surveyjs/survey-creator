@@ -31,12 +31,13 @@
         class="svc-item-value-controls__button svc-item-value-controls__add"
         v-key2click
         @click="adorner.add(adorner)"
-        :aria-label="undefined"
+        role="button"
+        :aria-label="adorner.tooltip"
         ><SvComponent
           :is="'sv-svg-icon'"
           :iconName="'icon-add_16x16'"
           :size="'auto'"
-          :title="undefined"
+          :title="adorner.tooltip"
         ></SvComponent
       ></span>
       <span
@@ -45,12 +46,13 @@
         v-key2click
         @click="adorner.remove(adorner)"
         @blur="adorner.onFocusOut($event)"
-        :aria-label="undefined"
+        role="button"
+        :aria-label="adorner.tooltip"
         ><SvComponent
           :is="'sv-svg-icon'"
           :iconName="'icon-remove_16x16'"
           :size="'auto'"
-          :title="undefined"
+          :title="adorner.tooltip"
         ></SvComponent
       ></span>
     </div>

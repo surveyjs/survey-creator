@@ -41,8 +41,14 @@ export class QuestionLinkValueModel extends Question {
     this.setPropertyValue("isClickable", !this.isReadOnly || (!!this.isClickableCallback && this.isClickableCallback()));
   }
   public get ariaRole(): string {
-    return "button";
+    return "presentation";
   }
+  public get ariaLabel(): string { return null; }
+  public get ariaRequired() { return null; }
+  public get ariaInvalid() { return null; }
+  public get ariaLabelledBy() { return null; }
+  public get ariaDescribedBy() { return null; }
+  public get ariaErrormessage() { return null; }
 
   public get tooltip() {
     return this.showTooltip ? this.linkValueText : undefined;

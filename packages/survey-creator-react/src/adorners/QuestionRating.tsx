@@ -36,6 +36,7 @@ export class QuestionRatingAdornerComponent extends CreatorModelElement<Question
       <div className="svc-rating-question-content">
         <div className={model.controlsClassNames}>
           {model.allowRemove ? attachKey2click(<span
+            role="button"
             className={model.removeClassNames}
             aria-label={model.removeTooltip}
             onClick={() => model.removeItem(model)}
@@ -43,6 +44,7 @@ export class QuestionRatingAdornerComponent extends CreatorModelElement<Question
             <SvgIcon size={"auto"} iconName={"icon-remove_16x16"} title={model.removeTooltip}></SvgIcon>
           </span>) : null}
           {model.allowAdd ? attachKey2click(<span
+            role="button"
             className={model.addClassNames}
             aria-label={model.addTooltip}
             onClick={() => model.addItem(model)}
