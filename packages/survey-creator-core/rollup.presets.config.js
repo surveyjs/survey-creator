@@ -1,40 +1,44 @@
-import resolve from "@rollup/plugin-node-resolve";
+import nodeResolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
+import bannerPlugin from "rollup-plugin-license";
 import replace from "@rollup/plugin-replace";
-import license from "rollup-plugin-license";
 import path from "path";
 
-const pkg = require("./package.json");
-
+const VERSION = require("./package.json").version;
+var banner = [
+  "SurveyJS Creator v" + VERSION,
+  "(c) 2015-" + new Date().getFullYear() + " Devsoft Baltic OÜ - http://surveyjs.io/",
+  "Github: https://github.com/surveyjs/survey-creator",
+  "License: https://surveyjs.io/Licenses#SurveyCreator",
+].join("\n");
 export default {
-  input: "build/survey-creator-core-presets.js",
+  input: path.resolve(__dirname, "./src/entries/presets.ts"),
   output: {
-    file: "build/survey-creator-core-presets.esm.js",
+    file: "build/survey-creator-core-presets.mjs",
     format: "es",
+    exports: "named",
     sourcemap: true
   },
   external: ["survey-core", "survey-creator-core"],
   plugins: [
+    nodeResolve(),
+    commonjs(),
+    typescript({ inlineSources: true, sourceMap: true, tsconfig: path.resolve(__dirname, "./tsconfig.presets.fesm.json"), compilerOptions: {
+      declaration: false,
+      declarationDir: null
+    } }),
     replace({
-      preventAssignment: true,
+      preventAssignment: false,
       values: {
-        "process.env.NODE_ENV": JSON.stringify("production")
+        "process.env.RELEASE_DATE": JSON.stringify(new Date().toISOString().slice(0, 10)),
+        "process.env.VERSION": JSON.stringify(VERSION),
       }
     }),
-    resolve(),
-    commonjs(),
-    typescript({
-      tsconfig: "./tsconfig.presets.fesm.json",
-      sourceMap: true,
-      declaration: false
-    }),
-    license({
+    bannerPlugin({
       banner: {
-        content: {
-          file: path.join(__dirname, "LICENSE"),
-          encoding: "utf-8"
-        }
+        content: banner,
+        commentStyle: "ignored",
       }
     })
   ]

@@ -1,37 +1,19 @@
-import * as presets from "../presets/presets";
-import * as presetsBase from "../presets/presets-base";
-import * as presetsToolbox from "../presets/presets-toolbox";
-import * as presetsEditableToolbox from "../presets/presets-editable-toolbox";
-import * as presetsEditor from "../presets/presets-editor";
-import * as presetsEditableLanguages from "../presets/presets-editable-languages";
-import * as presetsEditableTabs from "../presets/presets-editable-tabs";
-import * as presetsEditableBase from "../presets/presets-editable-base";
-import * as presetsTabs from "../presets/presets-tabs";
-import * as presetsLanguages from "../presets/presets-languages";
-import * as presetsProperties from "../presets/presets-properties";
-import * as presetsRanking from "../presets/preset-question-ranking";
+// export * from "../presets/presets";
+// export * from "../presets/presets-base";
+// export * from "../presets/presets-toolbox";
+export * from "../presets/presets-editable-toolbox";
+export * from "../presets/presets-editor";
+export * from "../presets/presets-editable-languages";
+export * from "../presets/presets-editable-tabs";
+export * from "../presets/presets-editable-base";
+//export * from "../presets/presets-tabs";
+//export * from "../presets/presets-languages";
+//export * from "../presets/presets-properties";
+export * from "../presets/preset-question-ranking";
 import { checkLibraryVersion } from "survey-core";
 
 export let Version: string;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
 Version = `${process.env.VERSION}`;
-
-// Create a single export object
-const SurveyCreatorPresets = {
-  Version,
-  ...presets,
-  ...presetsBase,
-  ...presetsToolbox,
-  ...presetsEditableToolbox,
-  ...presetsEditor,
-  ...presetsEditableLanguages,
-  ...presetsEditableTabs,
-  ...presetsEditableBase,
-  ...presetsTabs,
-  ...presetsLanguages,
-  ...presetsProperties,
-  ...presetsRanking
-};
-
-checkLibraryVersion(`${process.env.VERSION}`, "creator-presets-core");
-
-export default SurveyCreatorPresets;
+checkLibraryVersion(Version, "survey-creator-core-presets");

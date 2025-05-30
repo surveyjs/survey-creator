@@ -292,6 +292,7 @@ creator.saveSurveyFunc = (no, callback) => {
 };
 
 const editor = new SurveyCreatorPresets.CreatorPresetEditorModel();
+window.editor = editor;
 class PresetsTabComponent extends React.Component {
   render() {
     return (
