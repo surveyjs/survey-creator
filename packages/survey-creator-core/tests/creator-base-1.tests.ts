@@ -263,6 +263,7 @@ test("PageNavigatorViewModel", (): any => {
       }
     ]
   };
+  expect(model.popupModel.focusFirstInputSelector).toEqual(".svc-list__item--selected");
   expect(model.items).toHaveLength(2);
   expect(model.items[0].active).toBeTruthy();
   expect(model.items[1].active).toBeFalsy();
