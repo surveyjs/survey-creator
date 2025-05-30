@@ -2375,7 +2375,7 @@ test("ConvertTo, show it for a panel", (): any => {
   creator.convertCurrentQuestion("paneldynamic");
   expect((<any>creator.selectedElement).getType()).toEqual("paneldynamic");
 });
-test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
+test("ConvertTo & addNewQuestion for panel & maxNestedPanels", (): any => {
   const creator = new CreatorTester({ maxNestedPanels: 0 });
   creator.JSON = {
     elements: [
@@ -2406,6 +2406,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   const panel5 = creator.survey.getPanelByName("panel5");
   const panel6 = creator.survey.getQuestionByName("panel6");
   const itemCount = creator.getAvailableToolboxItems().length;
+  expect(itemCount).toBe(21);
   const panel6Model = new QuestionAdornerViewModel(creator, panel6, undefined);
   const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
@@ -2437,8 +2438,8 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(0);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
-  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 1);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(21);
+  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 1);
