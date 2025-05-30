@@ -344,6 +344,7 @@ preset.apply(creator);</div></pre></code></div>
 
   public static updateModifiedText(locStrs: any, text: string, localizationName: string): void {
     if (!localizationName) return undefined;
+    if (!text) return;
     const presetStrs = editorLocalization.presetStrings;
     editorLocalization.presetStrings = undefined;
     if (text !== editorLocalization.getString(localizationName)) {

@@ -2,7 +2,8 @@ import { Helpers, ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicMo
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
-import { ICreatorPresetToolboxItem } from "./presets-toolbox";
+import { ICreatorPresetToolboxItem } from "survey-creator-core";
+import { CreatorPresetEditorModel } from "./presets-editor";
 
 const LocCategoriesName = "toolboxCategories";
 
@@ -158,8 +159,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const toolbox = creator.toolbox;
     if (mode === "items") {
       const items = model.getValue(this.nameItems);
-      const toolboxItems = [];
-      toolbox.items.forEach(item => toolboxItems.push(item.name));
+      const toolboxItems = toolbox.items.map(item => item.name);
       if (Array.isArray(items) && items.length > 0 && (toolbox.hasCategories || !Helpers.isTwoValueEquals(items, toolboxItems, true))) {
         res.items = items;
       }
@@ -180,9 +180,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     for (let i = 0; i < categories.length; i++) {
       if (categories[i].category !== toolboxCategories[i].name) return false;
       if (categories[i].title !== toolboxCategories[i].title) return false;
-      const toolboxItems = [];
-      toolboxCategories[i].items.forEach(item => toolboxItems.push(item.name));
-      if (!Helpers.isTwoValueEquals(categories[i].items, toolboxItems, true)) return false;
+      const toolboxItems = toolboxCategories[i].items.map(item => item.name);
+      const categoryItems = categories[i].items.map(item => item.name);
+      if (!Helpers.isTwoValueEquals(categoryItems, toolboxItems, true)) return false;
     }
     return true;
   }
@@ -264,15 +264,15 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private setQuestionItemsRows(model: SurveyModel): void {
     this.allItems = this.getDefaultToolboxItems(model);
     const q = this.getQuestionItems(model);
-    //if (!this.isItemValuesEqual(q.value, this.allItems)) {
-    q.value = this.allItems;
-    //this.updateRankingLocalizationName(q);
-    const items = this.getQuestionCategories(model);
-    items.visibleRows.forEach(row => row.hideDetailPanel());
-    //}
+    if (!this.isItemValuesEqual(q.value, this.allItems)) {
+      q.value = this.allItems;
+      //this.updateRankingLocalizationName(q);
+      const items = this.getQuestionCategories(model);
+      items.visibleRows.forEach(row => row.hideDetailPanel());
+    }
   }
   private isItemValuesEqual(a: Array<ICreatorPresetToolboxItem>, b: Array<ICreatorPresetToolboxItem>): boolean {
-    if (a.length !== b.length) return false;
+    if (!a || !b || a.length !== b.length) return false;
     for (let i = 0; i < a.length; i++) {
       if (a[i].name !== b[i].name || a[i].title !== b[i].title) return false;
     }
@@ -358,7 +358,16 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return editorLocalization.getString(LocCategoriesName + "." + name);
   }
   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
-    //(<QuestionPresetRankingModel>this.getQuestionItems(model)).updateModifiedText(locStrs);
+    function updateTextFromQuestion(matrix: QuestionMatrixDynamicModel, locStrs: any) {
+      if (!matrix) return;
+      const rows = matrix.visibleRows;
+      rows.forEach(r => {
+        CreatorPresetEditorModel.updateModifiedText(locStrs, r.getValue("title"), "qt." + r.getValue("name"));
+      });
+
+    }
+    updateTextFromQuestion(this.getQuestionItems(model), locStrs);
+
     const matrix = this.getQuestionCategories(model);
     if (matrix.isVisible) {
       matrix.visibleRows.forEach(row => {
@@ -369,10 +378,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           }
           locStrs[LocCategoriesName][category] = row.getValue("title");
         }
-        const q = <QuestionPresetRankingModel>row.getQuestionByName("items");
-        if (!!q) {
-          //q.updateModifiedText(locStrs);
-        }
+        updateTextFromQuestion(<QuestionMatrixDynamicModel>row.getQuestionByName("items"), locStrs);
       });
     }
   }
@@ -384,7 +390,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     if (!row.isDetailPanelShowing) return;
     const q = <QuestionMatrixDynamicModel>row.getQuestionByName("items");
     q.choices = this.getRankingChoices(row);
-    //this.updateRankingLocalizationName(q);
   }
   private setupDefaultItems(creator: SurveyCreatorModel): void {
     const items = {};

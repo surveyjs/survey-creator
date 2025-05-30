@@ -569,8 +569,8 @@ test("Change localization strings for toolbox (categories)", () => {
   const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
   matrix.visibleRows[0].showDetailPanel();
   const question = <QuestionMatrixDynamicModel>matrix.visibleRows[0].detailPanel.getQuestionByName("items");
-  const textItem = ItemValue.getItemByValue(question.choices, "radiogroup");
-  textItem.text = "Radio item";
+  const textItem = question.visibleRows.filter(row => row.getQuestionByName("name").value == "radiogroup")[0];
+  textItem.getQuestionByName("title").value = "Radio item";
   editor.applyFromSurveyModel();
   const loc = editor.json.localization;
   expect(loc).toBeTruthy();
