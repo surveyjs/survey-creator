@@ -245,7 +245,11 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (SurveyHelper.isPanelDynamic(this.draggedElement) && dropTarget === this.draggedElement.template) {
       return false;
     }
-    if (!this.isAllowedToAdd(this.draggedElement && this.draggedElement.getType && this.draggedElement.getType(), dropTarget)) {
+    let container = !dropTarget.isPage && dragOverLocation === DropIndicatorPosition.Inside ? dropTarget : dropTarget.parent;
+    if (container && !container.isInteractiveDesignElement) {
+      container = container.parent || container.parentQuestion;
+    }
+    if (!this.isAllowedToAdd(this.draggedElement && this.draggedElement.getType && this.draggedElement.getType(), container || dropTarget)) {
       return false;
     }
     if (this.maxNestingLevel >= 0 && (this.draggedElement.isPanel || SurveyHelper.isPanelDynamic(this.draggedElement))) {
