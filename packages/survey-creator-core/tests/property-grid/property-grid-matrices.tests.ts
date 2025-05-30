@@ -3,7 +3,8 @@ import {
   QuestionMatrixModel, QuestionMultipleTextModel, QuestionRatingModel, QuestionTextModel, QuestionBooleanModel, Serializer, SurveyModel,
   SurveyTriggerRunExpression, UrlConditionItem, settings as surveySettings,
   ItemValue,
-  QuestionCheckboxModel
+  QuestionCheckboxModel,
+  QuestionImagePickerModel
 } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
@@ -469,6 +470,24 @@ test("QuestionCheckbox choices placeholder", () => {
   expect(row.getQuestionByName("text").placeholder).toBe("item1");
   row.getQuestionByName("value").value = "item111";
   expect(row.getQuestionByName("text").placeholder).toBe("item111");
+});
+test("ImagePicker choices columns & detail panel", () => {
+  const question = new QuestionImagePickerModel("q1");
+  question.choices = ["item1"];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion).toBeTruthy();
+  expect(choicesQuestion.columns).toHaveLength(3);
+  expect(choicesQuestion.columns[0].name).toBe("value");
+  expect(choicesQuestion.columns[1].name).toBe("text");
+  expect(choicesQuestion.columns[2].name).toBe("imageLink");
+  const row = choicesQuestion.visibleRows[0];
+  row.showDetailPanel();
+  expect(row.detailPanel.questions).toHaveLength(5);
+  const imageLinkQuestion = row.detailPanel.getQuestionByName("imageLink");
+  expect(imageLinkQuestion).toBeTruthy();
 });
 test("Triggers property editor, Bug #4454", () => {
   var survey = new SurveyModel();

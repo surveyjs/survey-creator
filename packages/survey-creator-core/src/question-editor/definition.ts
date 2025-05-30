@@ -369,6 +369,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [{ name: "visibleIf" }, { name: "enableIf" }],
     tabs: [{ name: "general" }]
   },
+  "imageitemvalue[]@choices": {
+    properties: ["value", "text", "visibleIf", "enableIf", "imageLink"]
+  },
   "itemvalue[]@rows": {
     properties: [{ name: "visibleIf" }, { name: "enableIf" }],
     tabs: [{ name: "general" }]
