@@ -1,6 +1,6 @@
 import { ItemValue, QuestionBooleanModel, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
-import { ICreatorPresetData } from "../src/presets/presets";
+import { ICreatorPresetData } from "../src/presets-creator/presets";
 import { SurveyModel, Question } from "survey-core";
 import { QuestionToolbox } from "../src/toolbox";
 import { SurveyCreatorModel } from "../src/creator-base";
