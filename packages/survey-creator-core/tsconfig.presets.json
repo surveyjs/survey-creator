@@ -1,18 +1,15 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "declaration": false,
-    "declarationDir": null,
+    "declaration": true,
+    "declarationDir": "./build/typings-presets",
     "paths": {
-      "survey-core": [
-        "../../../survey-library/packages/survey-core/build/typings"
-      ],
       "survey-creator-core": [
         "./build"
       ]
     }
   },
   "include": [
-    "./src/presets/**/*.ts"
+    "./src/entries/presets.ts"
   ]
 }

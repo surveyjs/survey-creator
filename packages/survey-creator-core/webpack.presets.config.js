@@ -6,8 +6,11 @@ const RemoveEmptyScriptsPlugin = require("webpack-remove-empty-scripts");
 
 module.exports = (env) => {
   const isProd = env.buildType === "prod";
-  const emitDeclarations = env.emitDeclarations;
-
+  const emitDeclarations = !!env.emitDeclarations;
+  const compilerOptions = emitDeclarations ? {} : {
+    declaration: false,
+    declarationDir: null
+  };
   return {
     mode: isProd ? "production" : "development",
     devtool: isProd ? "source-map" : "eval-source-map",
@@ -18,18 +21,16 @@ module.exports = (env) => {
       path: path.resolve(__dirname, "build"),
       filename: isProd ? "[name].min.js" : "[name].js",
       library: {
-        name: "SurveyCreatorPresets",
-        type: "umd",
-        export: "default",
-        umdNamedDefine: true
+        root: "SurveyCreatorCorePresets",
+        amd: "[dashedname]",
+        commonjs: "[dashedname]",
       },
-      globalObject: "this"
+      libraryTarget: "umd",
+      globalObject: "this",
+      umdNamedDefine: true
     },
     resolve: {
-      extensions: [".ts", ".js", ".json", ".css", ".scss"],
-      alias: {
-        "survey-core": path.resolve(__dirname, "../../../survey-library/packages/survey-core/build")
-      }
+      extensions: [".ts", ".js", ".json", ".css", ".scss"]
     },
     externals: {
       "survey-core": {
@@ -54,10 +55,7 @@ module.exports = (env) => {
               loader: "ts-loader",
               options: {
                 configFile: path.resolve(__dirname, "./tsconfig.presets.json"),
-                compilerOptions: {
-                  declaration: true,
-                  declarationDir: "./build/typings-presets"
-                }
+                compilerOptions
               }
             }
           ],
