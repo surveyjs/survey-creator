@@ -1652,7 +1652,13 @@ test("getElementWrapperComponentName for inner component elements", () => {
           {
             "type": "text",
             "name": "question3"
-          }
+          },
+          {
+            type: "panel",
+            name: "panel4",
+            title: "Panel",
+            elements: [],
+          },
         ]
       }
     });
@@ -1669,11 +1675,13 @@ test("getElementWrapperComponentName for inner component elements", () => {
 
   const panel = q.panels[0] as PanelModel;
   const question = panel.questions[0] as QuestionTextModel;
+  const innerPanel = panel.elements[1] as PanelModel;
 
   expect(getElementWrapperComponentName(qCustom, "", false)).toEqual("svc-question");
   expect(getElementWrapperComponentName(q, "", false)).toEqual(undefined);
   expect(getElementWrapperComponentName(panel, "", false)).toEqual(undefined);
   expect(getElementWrapperComponentName(question, "", false)).toEqual(undefined);
+  expect(getElementWrapperComponentName(innerPanel, "", false)).toEqual(undefined);
   ComponentCollection.Instance.clear();
 });
 

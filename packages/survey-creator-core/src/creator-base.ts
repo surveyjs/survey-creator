@@ -4613,7 +4613,7 @@ function isContentElement(element: any) {
     if (current.isContentElement) {
       return true;
     }
-    current = current.parentQuestion;
+    current = current.parent || current.parentQuestion;
   }
   return false;
 }
