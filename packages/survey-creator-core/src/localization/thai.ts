@@ -45,6 +45,7 @@ export const thStrings = {
     paneldynamic: "แผงไดนามิก",
     radiogroup: "กลุ่มปุ่มวิทยุ",
     rating: "มาตรวัดคะแนน",
+    slider: "แถบ เลื่อน",
     text: "อินพุตบรรทัดเดียว",
     boolean: "ใช่/ไม่ใช่ (บูลีน)",
     expression: "นิพจน์ (อ่านอย่างเดียว)",
@@ -443,6 +444,7 @@ export const thStrings = {
       prefix: "คำนำหน้าสกุลเงิน",
       suffix: "คำต่อท้ายสกุลเงิน"
     },
+    isExclusive: "ล้างรายการอื่นเมื่อเลือก",
     imageHeight: "ความสูงของพื้นที่แสดงผล",
     imageWidth: "ความกว้างของพื้นที่แสดงผล",
     valueName: "ตัวระบุที่เชื่อมต่อ",
@@ -742,6 +744,18 @@ export const thStrings = {
     rateValues: "ค่าการให้คะแนนที่กำหนดเอง",
     rateCount: "จำนวนการให้คะแนน",
     autoGenerate: "การกำหนดค่าการให้คะแนน",
+    slider: {
+      min: "ค่าต่ําสุด",
+      max: "ค่าสูงสุด",
+      step: "ค่าขั้นตอน",
+      showLabels: "แสดงป้ายชื่อมาตราส่วน",
+      tooltipVisibilityPG: "แสดงคําแนะนําเครื่องมือ",
+      allowSwap: "อนุญาตให้ข้ามนิ้วหัวแม่มือ",
+      labelCount: "จํานวนป้ายกํากับที่สร้างขึ้นโดยอัตโนมัติ",
+      minValueExpression: "นิพจน์ค่าต่ําสุด",
+      maxValueExpression: "นิพจน์ค่าสูงสุด",
+      autoGenerate: "การกําหนดค่าป้ายชื่อมาตราส่วน"
+    },
     hideIfChoicesEmpty: "ซ่อนคำถามหากไม่มีตัวเลือก",
     minWidth: "ความกว้างขั้นต่ำ",
     maxWidth: "ความกว้างสูงสุด",
@@ -823,6 +837,7 @@ export const thStrings = {
       enableIf: "สามารถแก้ไขได้ถ้า",
       requiredIf: "จำเป็นถ้า",
       rateValues: "ค่าการให้คะแนน",
+      sliderSettings: "การตั้งค่าตัวเลื่อน",
       choicesByUrl: "ตัวเลือกจากบริการเว็บ",
       matrixChoices: "ตัวเลือกเริ่มต้น",
       multipleTextItems: "อินพุตข้อความ",
@@ -1043,6 +1058,10 @@ export const thStrings = {
       time: "เวลา",
       url: "URL",
       week: "สัปดาห์"
+    },
+    sliderType: {
+      single: "ค่าเดียว",
+      range: "เทือก"
     },
     autocomplete: {
       name: "ชื่อ-นามสกุล",
@@ -1475,6 +1494,7 @@ export const thStrings = {
       showInMultipleColumns: "เมื่อเลือก จะสร้างคอลัมน์แยกสำหรับตัวเลือกแต่ละตัว",
       colCount: "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก"
     },
+    isExclusive: "ทําให้ตัวเลือกนี้พิเศษ เมื่อเลือกโดยผู้ใช้ ระบบจะยกเลิกการเลือกตัวเลือกอื่นๆ ทั้งหมดในคําถามโดยอัตโนมัติ",
     caseInsensitive: "เลือกว่าตัวพิมพ์ใหญ่และตัวพิมพ์เล็กในนิพจน์ทั่วไปต้องถือว่าเทียบเท่าหรือไม่",
     widthMode: "เลือกจาก: \"คงที่\" - ตั้งค่าความกว้างคงที่; \"ตอบสนอง\" - ทำให้แบบสำรวจเต็มความกว้างของหน้าจอ; \"อัตโนมัติ\" - ใช้ค่าใดค่าหนึ่งในสองค่าตามประเภทคำถามที่ใช้",
     cookieName: "กำหนดค่า cookie ที่ไม่ซ้ำกันสำหรับแบบสำรวจของคุณ Cookie จะถูกตั้งค่าในเบราว์เซอร์ของผู้ตอบเมื่อแบบสำรวจเสร็จสมบูรณ์เพื่อป้องกันการส่งแบบสำรวจซ้ำ",
@@ -2003,3 +2023,19 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // ts.prevPage: "Previous" => "ก่อน"
 // ts.nextPage: "Next" => "ต่อไป"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "ใช้เมื่อตั้งค่า 'เค้าโครงแบบสํารวจ' เป็น 'ช่องป้อนข้อมูลเดียวต่อหน้า' ในเค้าโครงนี้ เมทริกซ์จะถูกแยกเพื่อให้แต่ละฟิลด์อินพุตปรากฏบนหน้าแยกต่างหาก ใช้ตัวยึด {rowIndex} เพื่อแทรกการกําหนดหมายเลขอัตโนมัติ {rowTitle} หรือ {rowName} เพื่ออ้างอิงชื่อหรือรหัสของแถว และ {row.columnid} เพื่อรวมค่าของคอลัมน์เมทริกซ์ที่เฉพาะเจาะจง"
+// qt.slider: "Slider" => "แถบ เลื่อน"
+// pe.isExclusive: "Clear others when selected" => "ล้างรายการอื่นเมื่อเลือก"
+// slider.min: "Min value" => "ค่าต่ําสุด"
+// slider.max: "Max value" => "ค่าสูงสุด"
+// slider.step: "Step value" => "ค่าขั้นตอน"
+// slider.showLabels: "Show scale labels" => "แสดงป้ายชื่อมาตราส่วน"
+// slider.tooltipVisibilityPG: "Show tooltips" => "แสดงคําแนะนําเครื่องมือ"
+// slider.allowSwap: "Allow thumb crossing" => "อนุญาตให้ข้ามนิ้วหัวแม่มือ"
+// slider.labelCount: "Number of auto-generated labels" => "จํานวนป้ายกํากับที่สร้างขึ้นโดยอัตโนมัติ"
+// slider.minValueExpression: "Min value expression" => "นิพจน์ค่าต่ําสุด"
+// slider.maxValueExpression: "Max value expression" => "นิพจน์ค่าสูงสุด"
+// slider.autoGenerate: "Scale labels configuration" => "การกําหนดค่าป้ายชื่อมาตราส่วน"
+// tabs.sliderSettings: "Slider Settings" => "การตั้งค่าตัวเลื่อน"
+// sliderType.single: "Single-Value" => "ค่าเดียว"
+// sliderType.range: "Range" => "เทือก"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "ทําให้ตัวเลือกนี้พิเศษ เมื่อเลือกโดยผู้ใช้ ระบบจะยกเลิกการเลือกตัวเลือกอื่นๆ ทั้งหมดในคําถามโดยอัตโนมัติ"

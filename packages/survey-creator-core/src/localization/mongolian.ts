@@ -45,6 +45,7 @@ export var mnStrings = {
     paneldynamic: "Динамик панел",
     radiogroup: "Radiogroup",
     rating: "Үнэлэх",
+    slider: "Слайдер",
     text: "Богино хариулттай ",
     boolean: "Тийм/Үгүй",
     expression: "Илэрхийлэл (зөвхөн унших)",
@@ -443,6 +444,7 @@ export var mnStrings = {
       prefix: "Валютын ханш",
       suffix: "Валютын suffix"
     },
+    isExclusive: "Сонгогдсон үедээ бусдыг цэвэрлэ",
     imageHeight: "Зургийн өндөр",
     imageWidth: "Зургийн өргөн",
     valueName: "Хариултыг дараагийн JSON талбарт хадгалах",
@@ -742,6 +744,18 @@ export var mnStrings = {
     rateValues: "Хэрэглэгчийн үнэлгээний утгууд",
     rateCount: "Үнэ тогтоох",
     autoGenerate: "Үнэ цэнийг хэрхэн тодорхойлох вэ?",
+    slider: {
+      min: "Хамгийн бага үнэ",
+      max: "Дээд хэмжээний хэмжээ",
+      step: "Алхамын үнэ цэнэ",
+      showLabels: "Жинлүүрийн шошгыг үзүүлэх",
+      tooltipVisibilityPG: "Tooltips",
+      allowSwap: "Эрхий хуруугаа гаталахыг зөвшөөрөх",
+      labelCount: "Автоматаар үүсгэсэн шошгоны тоо",
+      minValueExpression: "Хамгийн бага илэрхийлэл",
+      maxValueExpression: "Хамгийн их хэмжээний илэрхийлэл",
+      autoGenerate: "Шошгоны тохиргоог хэмжих"
+    },
     hideIfChoicesEmpty: "Сонголтгүй бол асуултыг нуух",
     minWidth: "Хамгийн бага өргөн (CSS хүлээн зөвшөөрсөн утга)",
     maxWidth: "Хамгийн их өргөн (CSS хүлээн зөвшөөрсөн утга)",
@@ -823,6 +837,7 @@ export var mnStrings = {
       enableIf: "Засварлаж болно хэрэв",
       requiredIf: "Заавал бөглөх болох хэрэв",
       rateValues: "Утгыг үнэлэх",
+      sliderSettings: "Слайдерын тохиргоо",
       choicesByUrl: "RESTful сервисийн сонголтууд",
       matrixChoices: "Үндсэн сонголтууд",
       multipleTextItems: "Текст оролт",
@@ -1043,6 +1058,10 @@ export var mnStrings = {
       time: "Цаг хугацаа",
       url: "URL",
       week: "Долоо хоног"
+    },
+    sliderType: {
+      single: "Ганц үнэ цэнэтэй",
+      range: "Диапазон"
     },
     autocomplete: {
       name: "Бүтэн нэр",
@@ -1475,6 +1494,7 @@ export var mnStrings = {
       showInMultipleColumns: "Сонгогдсон тохиолдолд сонголт бүрд зориулж багана үүсгэнэ.",
       colCount: "Сонголт хийх сонголтуудыг олон баганатай загвараар зохион байгуулна. 0-д тавихад сонголтуудыг нэг мөр харуулдаг. -1-д тавихад бодит үнэ цэнэ нь эцэг эхийн матрицын \"Nested column count\" өмчөөс өвлөгддөг."
     },
+    isExclusive: "Энэ сонголтыг онцгой болгодог. Хэрэглэгч сонговол асуултын бусад бүх сонголтыг автоматаар хасна.",
     caseInsensitive: "Тогтмол илэрхийлэлд байгаа uppercase болон lowercase үсгийг эн тэнцүү гэж үзэх ёстой эсэхийг сонгоно уу.",
     widthMode: "Сонгоно уу: \"Статик\" - тогтмол өргөнийг тогтоох; \"Responsive\" - судалгааг дэлгэцийн бүрэн өргөнийг эзэлдэг болгодог; \"Авто\" - ашигласан асуултын төрлөөс хамааран аль нэгийг нь хэрэглэнэ.",
     cookieName: "Хэрэглэгч нэг судалгааг хоёр удаа бөглөхөөс Күүки сэргийлнэ.",
@@ -2718,3 +2738,19 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // ts.prevPage: "Previous" => "Өмнөх"
 // ts.nextPage: "Next" => "Дараагийн"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "'Survey layout' нь 'Single input field per page' болгож тохируулсан үед ашиглана. Энэ загварт матриц хуваагдан оролт талбар бүр тусдаа хуудас дээр харагдана. Автомат дугаарлалт оруулахын тулд {rowIndex} placeholder, мөрийн гарчиг эсвэл ID-г эш татахын тулд {rowTitle} эсвэл {rowName}, тодорхой матрицын баганын үнэ цэнийг оруулахын тулд {row.columnid} ашигла."
+// qt.slider: "Slider" => "Слайдер"
+// pe.isExclusive: "Clear others when selected" => "Сонгогдсон үедээ бусдыг цэвэрлэ"
+// slider.min: "Min value" => "Хамгийн бага үнэ"
+// slider.max: "Max value" => "Дээд хэмжээний хэмжээ"
+// slider.step: "Step value" => "Алхамын үнэ цэнэ"
+// slider.showLabels: "Show scale labels" => "Жинлүүрийн шошгыг үзүүлэх"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Tooltips"
+// slider.allowSwap: "Allow thumb crossing" => "Эрхий хуруугаа гаталахыг зөвшөөрөх"
+// slider.labelCount: "Number of auto-generated labels" => "Автоматаар үүсгэсэн шошгоны тоо"
+// slider.minValueExpression: "Min value expression" => "Хамгийн бага илэрхийлэл"
+// slider.maxValueExpression: "Max value expression" => "Хамгийн их хэмжээний илэрхийлэл"
+// slider.autoGenerate: "Scale labels configuration" => "Шошгоны тохиргоог хэмжих"
+// tabs.sliderSettings: "Slider Settings" => "Слайдерын тохиргоо"
+// sliderType.single: "Single-Value" => "Ганц үнэ цэнэтэй"
+// sliderType.range: "Range" => "Диапазон"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Энэ сонголтыг онцгой болгодог. Хэрэглэгч сонговол асуултын бусад бүх сонголтыг автоматаар хасна."

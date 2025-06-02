@@ -5,7 +5,7 @@ export var grStrings = {
   survey: {
     edit: "Επεξεργασία",
     externalHelpLink: "Παρακολουθήστε και μάθετε πώς να δημιουργείτε ερωτηματολόγια",
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber", // stays the same
+    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "Σύρετε εδώ μια ερώτηση από την εργαλειοθήκη.",
     addLogicItem: "Δημιουργήστε έναν κανόνα για να προσαρμόσετε τη ροή του ερωτηματολογίου.",
     copy: "Αντιγραφή",
@@ -15,7 +15,6 @@ export var grStrings = {
     deleteQuestion: "Διαγραφή Ερώτησης",
     convertTo: "Μετατροπή σε",
     drag: "Σύρετε το στοιχείο",
-    license: "Για να χρησιμοποιήσετε τη βιβλιοθήκη μας, απαιτείται <a href='https://surveyjs.io/licensing' target='_blank'>άδεια προγραμματιστή</a>. Εάν έχετε ενεργή άδεια, <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>ρυθμίστε το κλειδί άδειας</a> και βεβαιωθείτε ότι χρησιμοποιείτε την πιο πρόσφατη έκδοση."
   },
   // Creator tabs
   tabs: {
@@ -26,7 +25,7 @@ export var grStrings = {
     json: "Επεξεργασία JSON",
     logic: "Λογική"
   },
-
+  // Question types
   qt: {
     default: "Προεπιλογή",
     checkbox: "Πολλαπλές Επιλογές",
@@ -46,6 +45,7 @@ export var grStrings = {
     paneldynamic: "Δυναμικός Πίνακας",
     radiogroup: "Ομάδα Επιλογών (Radio)",
     rating: "Κλίμακα Αξιολόγησης",
+    slider: "Ρυθμιστικό",
     text: "Μονής Γραμμής",
     boolean: "Ναι/Όχι (Boolean)",
     expression: "Έκφραση (μόνο για ανάγνωση)",
@@ -128,7 +128,7 @@ export var grStrings = {
     generateValidJSON: "Δημιουργία Έγκυρου JSON",
     generateReadableJSON: "Δημιουργία Αναγνώσιμου JSON",
     toolbox: "Εργαλειοθήκη",
-    propertygrid: "Ιδιότητες",
+    "property-grid": "Καταλύματα",
     toolboxFilteredTextPlaceholder: "Πληκτρολογήστε για αναζήτηση...",
     toolboxNoResultsFound: "Δεν βρέθηκαν αποτελέσματα",
     propertyGridFilteredTextPlaceholder: "Πληκτρολογήστε για αναζήτηση...",
@@ -207,7 +207,7 @@ export var grStrings = {
     panelPlaceHolderMobile: "Πατήστε το κουμπί «Προσθήκη Ερώτησης» για να προσθέσετε νέο στοιχείο στον πίνακα.",
     imagePlaceHolderMobile: "Πατήστε το παρακάτω κουμπί και επιλέξτε εικόνα προς αποστολή",
     imageChooseImage: "Επιλογή Εικόνας",
-    addNewTypeQuestion: "Προσθήκη {0}",
+    addNewTypeQuestion: "Προσθήκη {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[ΛΟΓΟΤΥΠΟ]",
     choices_Item: "Στοιχείο ",
     selectFile: "Επιλέξτε αρχείο",
@@ -253,29 +253,29 @@ export var grStrings = {
       trigger_skipDescription: "Όταν η λογική έκφραση είναι αληθής, η φόρμα μεταβαίνει στην καθορισμένη ερώτηση.",
       trigger_runExpressionDescription: "Όταν η λογική έκφραση είναι αληθής, εκτελείται μια άλλη έκφραση και προαιρετικά η τιμή της μπορεί να αποδοθεί σε μια ερώτηση.",
       completedHtmlOnConditionDescription: "Εάν η λογική έκφραση είναι αληθής, η σελίδα \"Ευχαριστούμε\" εμφανίζει το καθορισμένο περιεχόμενο.",
-      itemExpressionText: "Όταν η έκφραση: '{0}' είναι αληθής",
+      itemExpressionText: "Όταν η έκφραση: '{0}' είναι αληθής", //{0} - the expression
       itemEmptyExpressionText: "Νέος κανόνας",
-      page_visibilityText: "κάνε τη σελίδα {0} ορατή",
-      panel_visibilityText: "κάνε το πλαίσιο {0} ορατό",
-      panel_enableText: "κάνε το πλαίσιο {0} ενεργό",
-      question_visibilityText: "κάνε την ερώτηση {0} ορατή",
-      question_enableText: "κάνε την ερώτηση {0} ενεργή",
-      question_requireText: "κάνε την ερώτηση {0} υποχρεωτική",
-      question_resetValueText: "επαναφορά τιμής για την ερώτηση: {0}",
+      page_visibilityText: "κάνε τη σελίδα {0} ορατή", //{0} page name
+      panel_visibilityText: "κάνε το πλαίσιο {0} ορατό", //{0} panel name
+      panel_enableText: "κάνε το πλαίσιο {0} ενεργό", //{0} panel name
+      question_visibilityText: "κάνε την ερώτηση {0} ορατή", //{0} question name
+      question_enableText: "κάνε την ερώτηση {0} ενεργή", //{0} question name
+      question_requireText: "κάνε την ερώτηση {0} υποχρεωτική", //{0} question name
+      question_resetValueText: "επαναφορά τιμής για την ερώτηση: {0}", //{0} question name.
       question_setValueText: "ορισμός τιμής: {1} στην ερώτηση: {0}",
-      column_visibilityText: "κάνε τη στήλη {0} της ερώτησης {1} ορατή",
-      column_enableText: "κάνε τη στήλη {0} της ερώτησης {1} ενεργή",
-      column_requireText: "κάνε τη στήλη {0} της ερώτησης {1} υποχρεωτική",
-      column_resetValueText: "επαναφορά τιμής για τη στήλη: {0}",
-      column_setValueText: "ορισμός τιμής: {1} για τη στήλη: {0}",
+      column_visibilityText: "κάνε τη στήλη {0} της ερώτησης {1} ορατή", //{0} column name, {1} question name
+      column_enableText: "κάνε τη στήλη {0} της ερώτησης {1} ενεργή", //{0} column name, {1} question name
+      column_requireText: "κάνε τη στήλη {0} της ερώτησης {1} υποχρεωτική", //{0} column name, {1} question name
+      column_resetValueText: "επαναφορά τιμής για τη στήλη: {0}", //{0} column name
+      column_setValueText: "ορισμός τιμής: {1} για τη στήλη: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "Μια έκφραση της οποίας το αποτέλεσμα θα αποδοθεί στην επιλεγμένη ερώτηση.",
       trigger_completeText: "το ερωτηματολόγιο ολοκληρώνεται",
-      trigger_setvalueText: "ορισμός τιμής {1} στην ερώτηση: {0}",
-      trigger_setvalueEmptyText: "εκκαθάριση τιμής για την ερώτηση: {0}",
-      trigger_copyvalueText: "αντιγραφή τιμής από την ερώτηση {1} στην ερώτηση: {0}",
-      trigger_skipText: "μετάβαση στην ερώτηση {0}",
-      trigger_runExpressionText1: "εκτέλεση έκφρασης: '{0}'",
-      trigger_runExpressionText2: " και απόδοση του αποτελέσματος στην ερώτηση: {0}",
+      trigger_setvalueText: "ορισμός τιμής {1} στην ερώτηση: {0}", //{0} question name, {1} setValue
+      trigger_setvalueEmptyText: "εκκαθάριση τιμής για την ερώτηση: {0}", //{0} question name
+      trigger_copyvalueText: "αντιγραφή τιμής από την ερώτηση {1} στην ερώτηση: {0}", //{0} and {1} question names
+      trigger_skipText: "μετάβαση στην ερώτηση {0}", //{0} question name
+      trigger_runExpressionText1: "εκτέλεση έκφρασης: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " και απόδοση του αποτελέσματος στην ερώτηση: {0}", //{0} question name
       completedHtmlOnConditionText: "εμφάνιση προσαρμοσμένου κειμένου στη σελίδα \"Ευχαριστούμε\"",
       showAllQuestions: "Όλες οι Ερωτήσεις",
       showAllActionTypes: "Όλοι οι Τύποι Ενεργειών",
@@ -392,6 +392,7 @@ export var grStrings = {
     calculatedvalue: {
       expression: "Έκφραση"
     },
+    // survey templates
     survey: {
       title: "Τίτλος ερωτηματολογίου",
       description: "Περιγραφή ερωτηματολογίου",
@@ -443,6 +444,7 @@ export var grStrings = {
       prefix: "Πρόθεμα νομίσματος",
       suffix: "Επίθεμα νομίσματος"
     },
+    isExclusive: "Απαλοιφή άλλων όταν είναι επιλεγμένο",
     imageHeight: "Ύψος περιοχής εμφάνισης",
     imageWidth: "Πλάτος περιοχής εμφάνισης",
     valueName: "Αναγνωριστικό συσχέτισης",
@@ -742,6 +744,18 @@ export var grStrings = {
     rateValues: "Προσαρμοσμένες τιμές αξιολόγησης",
     rateCount: "Αριθμός αξιολογήσεων",
     autoGenerate: "Διαμόρφωση αξιολόγησης",
+    slider: {
+      min: "Ελάχιστη τιμή",
+      max: "Μέγιστη τιμή",
+      step: "Τιμή βήματος",
+      showLabels: "Εμφάνιση ετικετών κλίμακας",
+      tooltipVisibilityPG: "Εμφάνιση συμβουλών εργαλείων",
+      allowSwap: "Να επιτρέπεται η διέλευση του αντίχειρα",
+      labelCount: "Αριθμός ετικετών που δημιουργούνται αυτόματα",
+      minValueExpression: "Παράσταση ελάχιστης τιμής",
+      maxValueExpression: "Έκφραση μέγιστης τιμής",
+      autoGenerate: "Διαμόρφωση ετικετών κλίμακας"
+    },
     hideIfChoicesEmpty: "Απόκρυψη ερώτησης αν δεν υπάρχουν επιλογές",
     minWidth: "Ελάχιστο πλάτος",
     maxWidth: "Μέγιστο πλάτος",
@@ -800,7 +814,7 @@ export var grStrings = {
       left: "Αριστερά",
       right: "Δεξιά",
       top: "Επάνω",
-      bottom: "Κάτω",
+      bottom: "Κάτω"
     },
     previewMode: "Λειτουργία προεπισκόπησης",
     gridLayoutEnabled: "Ενεργοποίηση διάταξης πλέγματος",
@@ -812,7 +826,6 @@ export var grStrings = {
       panel: {
         layout: "Διάταξη Πάνελ"
       },
-
       general: "Γενικά",
       fileOptions: "Επιλογές",
       html: "Επεξεργαστής HTML",
@@ -824,6 +837,7 @@ export var grStrings = {
       enableIf: "Επεξεργάσιμο αν",
       requiredIf: "Υποχρεωτικό αν",
       rateValues: "Τιμές Αξιολόγησης",
+      sliderSettings: "Ρυθμίσεις ρυθμιστικού",
       choicesByUrl: "Επιλογές από Web Service",
       matrixChoices: "Προεπιλεγμένες Επιλογές",
       multipleTextItems: "Κείμενα Εισαγωγής",
@@ -928,8 +942,7 @@ export var grStrings = {
       questionTitle: "Γραμματοσειρά τίτλου ερώτησης",
       questionDescription: "Γραμματοσειρά περιγραφής ερώτησης",
       editorFont: "Γραμματοσειρά επεξεργαστή",
-      backgroundOpacity: "Διαφάνεια", // Auto-generated string
-
+      backgroundOpacity: "Διαφάνεια",
       "--sjs-font-family": "Γραμματοσειρά έρευνας",
       "--sjs-general-backcolor-dim": "Χρώμα φόντου",
       "--sjs-primary-backcolor": "Χρώματα φόντου αντίθεσης",
@@ -937,7 +950,7 @@ export var grStrings = {
       "--sjs-special-red": "Χρώματα μηνυμάτων σφάλματος",
       "--sjs-shadow-small": "Εφέ σκιάς",
       "--sjs-shadow-inner": "Εφέ σκιάς",
-      "--sjs-border-default": "Χρώματα",
+      "--sjs-border-default": "Χρώματα"
     },
     "header@header": {
       headerView: "Προβολή",
@@ -954,7 +967,7 @@ export var grStrings = {
       overlapEnabled: "Επικάλυψη",
       logoPositionX: "Στοίχιση λογότυπου",
       titlePositionX: "Στοίχιση τίτλου έρευνας",
-      descriptionPositionX: "Στοίχιση περιγραφής έρευνας",
+      descriptionPositionX: "Στοίχιση περιγραφής έρευνας"
     }
   },
   // Property values
@@ -1046,19 +1059,23 @@ export var grStrings = {
       url: "Διεύθυνση URL",
       week: "Εβδομάδα"
     },
+    sliderType: {
+      single: "Μία τιμή",
+      range: "Έκταση"
+    },
     autocomplete: {
-      "name": "Πλήρες Όνομα",
+      name: "Πλήρες Όνομα",
       "honorific-prefix": "Πρόθεμα",
       "given-name": "Όνομα",
       "additional-name": "Μεσαίο Όνομα",
       "family-name": "Επώνυμο",
       "honorific-suffix": "Επίθημα",
-      "nickname": "Παρατσούκλι",
+      nickname: "Παρατσούκλι",
       "organization-title": "Τίτλος Εργασίας",
-      "username": "Όνομα χρήστη",
+      username: "Όνομα χρήστη",
       "new-password": "Νέος Κωδικός Πρόσβασης",
       "current-password": "Τρέχων Κωδικός Πρόσβασης",
-      "organization": "Όνομα Οργανισμού",
+      organization: "Όνομα Οργανισμού",
       "street-address": "Πλήρης Διεύθυνση Οδού",
       "address-line1": "Γραμμή Διεύθυνσης 1",
       "address-line2": "Γραμμή Διεύθυνσης 2",
@@ -1067,7 +1084,7 @@ export var grStrings = {
       "address-level3": "Διεύθυνση Επίπεδο 3",
       "address-level2": "Διεύθυνση Επίπεδο 2",
       "address-level1": "Διεύθυνση Επίπεδο 1",
-      "country": "Κωδικός Χώρας",
+      country: "Κωδικός Χώρας",
       "country-name": "Όνομα Χώρας",
       "postal-code": "Ταχυδρομικός Κωδικός",
       "cc-name": "Όνομα Κατόχου Κάρτας",
@@ -1082,15 +1099,15 @@ export var grStrings = {
       "cc-type": "Τύπος Πιστωτικής Κάρτας",
       "transaction-currency": "Νόμισμα Συναλλαγής",
       "transaction-amount": "Ποσό Συναλλαγής",
-      "language": "Προτιμώμενη Γλώσσα",
-      "bday": "Ημερομηνία Γέννησης",
+      language: "Προτιμώμενη Γλώσσα",
+      bday: "Ημερομηνία Γέννησης",
       "bday-day": "Ημέρα Γέννησης",
       "bday-month": "Μήνας Γέννησης",
       "bday-year": "Έτος Γέννησης",
-      "sex": "Φύλο",
-      "url": "Διεύθυνση Ιστοσελίδας",
-      "photo": "Φωτογραφία Προφίλ",
-      "tel": "Αριθμός Τηλεφώνου",
+      sex: "Φύλο",
+      url: "Διεύθυνση Ιστοσελίδας",
+      photo: "Φωτογραφία Προφίλ",
+      tel: "Αριθμός Τηλεφώνου",
       "tel-country-code": "Κωδικός Χώρας για Τηλέφωνο",
       "tel-national": "Εθνικός Αριθμός Τηλεφώνου",
       "tel-area-code": "Κωδικός Περιοχής",
@@ -1098,8 +1115,8 @@ export var grStrings = {
       "tel-local-prefix": "Πρόθεμα Τοπικού Τηλεφώνου",
       "tel-local-suffix": "Επίθημα Τοπικού Τηλεφώνου",
       "tel-extension": "Επέκταση Τηλεφώνου",
-      "email": "Διεύθυνση Ηλεκτρονικού Ταχυδρομείου",
-      "impp": "Πρωτόκολλο Άμεσων Μηνυμάτων"
+      email: "Διεύθυνση Ηλεκτρονικού Ταχυδρομείου",
+      impp: "Πρωτόκολλο Άμεσων Μηνυμάτων"
     },
     maskType: {
       none: "Κανένα",
@@ -1272,8 +1289,8 @@ export var grStrings = {
       dark: "Σκοτεινό"
     },
     isPanelless: {
-      false: "Προεπιλογή",
-      true: "Χωρίς Πάνελ"
+      "false": "Προεπιλογή",
+      "true": "Χωρίς Πάνελ"
     },
     progressBarInheritWidthFrom: {
       survey: "Ίδιο με την έρευνα",
@@ -1367,7 +1384,6 @@ export var grStrings = {
     panel: {
       name: "Ένα ID πάνελ που δεν είναι ορατό στους συμμετέχοντες.",
       description: "Πληκτρολογήστε έναν υπότιτλο πάνελ.",
-      // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Χρησιμοποιήστε το εικονίδιο μαγικού ραβδιού για να ρυθμίσετε έναν κανόνα συνθήκης που καθορίζει την ορατότητα του πάνελ.",
       enableIf: "Χρησιμοποιήστε το εικονίδιο μαγικού ραβδιού για να ρυθμίσετε έναν κανόνα συνθήκης που απενεργοποιεί τη λειτουργία μόνο για ανάγνωση για το πάνελ.",
       requiredIf: "Χρησιμοποιήστε το εικονίδιο μαγικού ραβδιού για να ρυθμίσετε έναν κανόνα συνθήκης που αποτρέπει την υποβολή της έρευνας εκτός αν τουλάχιστον μία ερώτηση έχει απάντηση.",
@@ -1387,7 +1403,6 @@ export var grStrings = {
     paneldynamic: {
       name: "Ένα ID πάνελ που δεν είναι ορατό στους συμμετέχοντες.",
       description: "Πληκτρολογήστε έναν υπότιτλο πάνελ.",
-      // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Χρησιμοποιήστε το εικονίδιο μαγικού ραβδιού για να ρυθμίσετε έναν κανόνα συνθήκης που καθορίζει την ορατότητα του πάνελ.",
       enableIf: "Χρησιμοποιήστε το εικονίδιο μαγικού ραβδιού για να ρυθμίσετε έναν κανόνα συνθήκης που απενεργοποιεί τη λειτουργία μόνο για ανάγνωση για το πάνελ.",
       requiredIf: "Χρησιμοποιήστε το εικονίδιο μαγικού ραβδιού για να ρυθμίσετε έναν κανόνα συνθήκης που αποτρέπει την υποβολή της έρευνας εκτός αν τουλάχιστον μία ερώτηση έχει απάντηση.",
@@ -1395,14 +1410,13 @@ export var grStrings = {
       templateQuestionTitleWidth: "Ορίζει το σταθερό πλάτος για τους τίτλους των ερωτήσεων όταν είναι στοίχισμένοι αριστερά από τα κουτιά ερωτήσεων. Δέχεται τιμές CSS (px, %, in, pt, κλπ).",
       templateErrorLocation: "Ορίζει την τοποθεσία ενός μηνύματος σφάλματος σε σχέση με μια ερώτηση με μη έγκυρη είσοδο. Επιλέξτε ανάμεσα σε: \"Πάνω\" - το κείμενο σφάλματος τοποθετείται στην κορυφή του κουτιού ερώτησης; \"Κάτω\" - το κείμενο σφάλματος τοποθετείται στο κάτω μέρος του κουτιού ερώτησης. Η επιλογή \"Κληρονομία\" εφαρμόζει τη ρύθμιση σε επίπεδο σελίδας (αν έχει ρυθμιστεί) ή σε επίπεδο έρευνας (\"Πάνω\" από προεπιλογή).",
       errorLocation: "Ορίζει την τοποθεσία ενός μηνύματος σφάλματος σε σχέση με όλες τις ερωτήσεις εντός του πάνελ. Η επιλογή \"Κληρονομία\" εφαρμόζει τη ρύθμιση σε επίπεδο σελίδας (αν έχει ρυθμιστεί) ή σε επίπεδο έρευνας.",
-      // questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       page: "Μετακινεί το πάνελ στο τέλος μιας επιλεγμένης σελίδας.",
       innerIndent: "Προσθέτει χώρο ή περιθώριο μεταξύ του περιεχομένου του πάνελ και της αριστερής πλευράς του κουτιού του πάνελ.",
       startWithNewLine: "Αποεπιλέξτε για να εμφανίσετε το πάνελ σε μία γραμμή με την προηγούμενη ερώτηση ή πάνελ. Η ρύθμιση δεν ισχύει αν το πάνελ είναι το πρώτο στοιχείο στη φόρμα σας.",
       state: "Επιλέξτε από: \"Αναπτυγμένο\" - το πάνελ εμφανίζεται πλήρως και μπορεί να συμπτυχθεί; \"Συμπτυγμένο\" - το πάνελ εμφανίζει μόνο τον τίτλο και την περιγραφή και μπορεί να αναπτυχθεί; \"Κλειδωμένο\" - το πάνελ εμφανίζεται πλήρως και δεν μπορεί να συμπτυχθεί.",
       width: "Ορίζει το πλάτος του πάνελ σε σχέση με άλλα στοιχεία έρευνας στην ίδια γραμμή. Δέχεται τιμές CSS (px, %, in, pt, κλπ).",
-      templateTitle: "Πληκτρολογήστε ένα πρότυπο για τους τίτλους των δυναμικών πάνελ. Χρησιμοποιήστε \{panelIndex}\ για τη γενική θέση του πάνελ και \{visiblePanelIndex}\ για τη σειρά του μεταξύ των ορατών πάνελ. Εισαγάγετε αυτούς τους χώρους κράτησης στο μοτίβο για αυτόματη αρίθμηση.",
-      templateTabTitle: "Πληκτρολογήστε ένα πρότυπο για τους τίτλους των καρτελών. Χρησιμοποιήστε \{panelIndex}\ για τη γενική θέση του πάνελ και \{visiblePanelIndex}\ για τη σειρά του μεταξύ των ορατών πάνελ. Εισαγάγετε αυτούς τους χώρους κράτησης στο μοτίβο για αυτόματη αρίθμηση.",
+      templateTitle: "Πληκτρολογήστε ένα πρότυπο για τους τίτλους των δυναμικών πάνελ. Χρησιμοποιήστε {panelIndex} για τη γενική θέση του πάνελ και {visiblePanelIndex} για τη σειρά του μεταξύ των ορατών πάνελ. Εισαγάγετε αυτούς τους χώρους κράτησης στο μοτίβο για αυτόματη αρίθμηση.",
+      templateTabTitle: "Πληκτρολογήστε ένα πρότυπο για τους τίτλους των καρτελών. Χρησιμοποιήστε {panelIndex} για τη γενική θέση του πάνελ και {visiblePanelIndex} για τη σειρά του μεταξύ των ορατών πάνελ. Εισαγάγετε αυτούς τους χώρους κράτησης στο μοτίβο για αυτόματη αρίθμηση.",
       tabTitlePlaceholder: "Κείμενο εφεδρείας για τους τίτλους των καρτελών που ισχύει όταν το μοτίβο τίτλου καρτέλας δεν παράγει έγκυρη τιμή.",
       templateVisibleIf: "Αυτή η ρύθμιση σας επιτρέπει να ελέγξετε την ορατότητα των μεμονωμένων πάνελ εντός του δυναμικού πάνελ. Χρησιμοποιήστε το χώρο κράτησης `{panel}` για να αναφέρετε το τρέχον πάνελ στην έκφρασή σας.",
       titleLocation: "Αυτή η ρύθμιση κληρονομείται αυτόματα από όλες τις ερωτήσεις εντός αυτού του πάνελ. Αν θέλετε να παρακάμψετε αυτήν την ρύθμιση, ορίστε κανόνες στοίχισης τίτλων για κάθε μεμονωμένη ερώτηση. Η επιλογή \"Κληρονομία\" εφαρμόζει τη ρύθμιση σε επίπεδο σελίδας (αν έχει ρυθμιστεί) ή σε επίπεδο έρευνας (\"Πάνω\" από προεπιλογή).",
@@ -1480,6 +1494,7 @@ export var grStrings = {
       showInMultipleColumns: "Όταν επιλεγεί, δημιουργεί μια ατομική στήλη για κάθε επιλογή.",
       colCount: "Διατάσσει τις επιλογές επιλογής σε διάταξη πολλαπλών στηλών. Όταν οριστεί σε 0, οι επιλογές εμφανίζονται σε μία γραμμή. Όταν οριστεί σε -1, η πραγματική τιμή κληρονομείται από την ιδιότητα \"Αριθμός εισχωρημένων στηλών\" του γονικού πίνακα."
     },
+    isExclusive: "Κάνει αυτή την επιλογή αποκλειστική. Όταν επιλεγεί από έναν χρήστη, θα αποεπιλέξει αυτόματα όλες τις άλλες επιλογές στην ερώτηση.",
     caseInsensitive: "Επιλέξτε αν τα κεφαλαία και πεζά γράμματα στην κανονική έκφραση πρέπει να αντιμετωπίζονται ως ισοδύναμα.",
     widthMode: "Επιλέξτε από: \"Στατικό\" - ορίζει σταθερό πλάτος; \"Ανταποκρινόμενο\" - κάνει την έρευνα να καταλαμβάνει το πλήρες πλάτος της οθόνης; \"Αυτόματα\" - εφαρμόζει οποιοδήποτε από τα δύο, ανάλογα με τους τύπους ερωτήσεων που χρησιμοποιούνται.",
     cookieName: "Αναθέστε μια μοναδική τιμή cookie για την έρευνά σας. Το cookie θα οριστεί στον περιηγητή του συμμετέχοντα μετά την ολοκλήρωση της έρευνας για να αποτραπεί η επανυποβολή της ίδιας έρευνας.",
@@ -1533,7 +1548,6 @@ export var grStrings = {
       description: "Πληκτρολογήστε έναν υπότιτλο σελίδας.",
       navigationTitle: "Ένας τίτλος που εμφανίζεται σε ένα κουμπί πλοήγησης στη γραμμή προόδου ή στο περιεχόμενο (TOC). Αν αφήσετε αυτό το πεδίο κενό, το κουμπί πλοήγησης θα χρησιμοποιήσει τον τίτλο της σελίδας ή το όνομα της σελίδας. Για να ενεργοποιήσετε τη γραμμή προόδου ή το TOC, μεταβείτε στο \"Έρευνα\" → \"Πλοήγηση\".",
       timeLimit: "Ένα χρονικό διάστημα σε δευτερόλεπτα μετά το οποίο η έρευνα προχωρά αυτόματα στην επόμενη σελίδα. Κρύβει το κουμπί πλοήγησης \"Προηγούμενη\". Όταν οριστεί σε 0, μετράει τον χρόνο που πέρασε στην τρέχουσα σελίδα.",
-      // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Χρησιμοποιήστε το εικονίδιο του μαγικού ραβδιού για να ρυθμίσετε έναν κανόνα συνθήκης που καθορίζει την ορατότητα της σελίδας.",
       enableIf: "Χρησιμοποιήστε το εικονίδιο του μαγικού ραβδιού για να ρυθμίσετε έναν κανόνα συνθήκης που απενεργοποιεί τη λειτουργία μόνο για ανάγνωση για τη σελίδα.",
       requiredIf: "Χρησιμοποιήστε το εικονίδιο του μαγικού ραβδιού για να ρυθμίσετε έναν κανόνα συνθήκης που αποτρέπει την υποβολή της έρευνας εκτός και αν τουλάχιστον μία ερώτηση έχει απάντηση.",
@@ -1650,97 +1664,97 @@ export var grStrings = {
     sourceType: "Τύπος πηγής αρχείου",
     fitToContainer: "Προσαρμογή στο κοντέινερ",
     setValueExpression: "Έκφραση καθορισμού τιμής",
-    description: "Περιγραφή", // Auto-generated string
+    description: "Περιγραφή",
     logoFit: "Προσαρμογή λογότυπου",
-    pages: "Σελίδες", // Auto-generated string
-    questions: "Ερωτήσεις", // Auto-generated string
+    pages: "Σελίδες",
+    questions: "Ερωτήσεις",
     triggers: "Ενεργοποιητές",
     calculatedValues: "Προσαρμοσμένες μεταβλητές",
-    surveyId: "ID έρευνας", // Auto-generated string
-    surveyPostId: "ID ανάρτησης έρευνας", // Auto-generated string
+    surveyId: "ID έρευνας",
+    surveyPostId: "ID ανάρτησης έρευνας",
     surveyShowDataSaving: "Εμφάνιση αποθήκευσης δεδομένων έρευνας",
     questionDescriptionLocation: "Στοίχιση περιγραφής ερώτησης",
-    progressBarType: "Τύπος γραμμής προόδου", // Auto-generated string
+    progressBarType: "Τύπος γραμμής προόδου",
     showTOC: "Εμφάνιση πίνακα περιεχομένων (TOC)",
     tocLocation: "Στοίχιση TOC",
-    questionTitlePattern: "Πρότυπο τίτλου ερώτησης", // Auto-generated string
+    questionTitlePattern: "Πρότυπο τίτλου ερώτησης",
     widthMode: "Λειτουργία πλάτους έρευνας",
-    showBrandInfo: "Εμφάνιση πληροφοριών μάρκας", // Auto-generated string
+    showBrandInfo: "Εμφάνιση πληροφοριών μάρκας",
     useDisplayValuesInDynamicTexts: "Χρησιμοποιήστε τις τιμές εμφάνισης στα δυναμικά κείμενα",
-    visibleIf: "Ορατό αν", // Auto-generated string
+    visibleIf: "Ορατό αν",
     defaultValueExpression: "Έκφραση προεπιλεγμένης τιμής",
-    requiredIf: "Απαιτείται αν", // Auto-generated string
+    requiredIf: "Απαιτείται αν",
     resetValueIf: "Επαναφορά τιμής αν",
     setValueIf: "Ορισμός τιμής αν",
     validators: "Κανόνες επικύρωσης",
-    bindings: "Συνδέσεις", // Auto-generated string
-    renderAs: "Απόδοση ως", // Auto-generated string
-    attachOriginalItems: "Επισύναψη αρχικών στοιχείων", // Auto-generated string
+    bindings: "Συνδέσεις",
+    renderAs: "Απόδοση ως",
+    attachOriginalItems: "Επισύναψη αρχικών στοιχείων",
     choices: "Επιλογές",
-    choicesByUrl: "Επιλογές μέσω url", // Auto-generated string
-    currency: "Νόμισμα", // Auto-generated string
-    cellHint: "Υπόδειξη κελιού", // Auto-generated string
-    totalMaximumFractionDigits: "Μέγιστος αριθμός δεκαδικών ψηφίων", // Auto-generated string
-    totalMinimumFractionDigits: "Ελάχιστος αριθμός δεκαδικών ψηφίων", // Auto-generated string
-    columns: "Στήλες", // Auto-generated string
-    detailElements: "Στοιχεία λεπτομέρειας", // Auto-generated string
-    allowAdaptiveActions: "Επιτρέψτε προσαρμοστικές ενέργειες", // Auto-generated string
-    defaultRowValue: "Προεπιλεγμένη τιμή σειράς", // Auto-generated string
-    detailPanelShowOnAdding: "Εμφάνιση πάνελ λεπτομέρειας κατά την προσθήκη", // Auto-generated string
-    choicesLazyLoadEnabled: "Ενεργοποίηση φόρτωσης επιλογών με καθυστέρηση", // Auto-generated string
-    choicesLazyLoadPageSize: "Μέγεθος σελίδας φόρτωσης επιλογών με καθυστέρηση", // Auto-generated string
-    inputFieldComponent: "Συστατικό πεδίου εισαγωγής", // Auto-generated string
-    itemComponent: "Συστατικό στοιχείου", // Auto-generated string
-    min: "Ελάχιστο", // Auto-generated string
-    max: "Μέγιστο", // Auto-generated string
-    minValueExpression: "Έκφραση ελάχιστης τιμής", // Auto-generated string
-    maxValueExpression: "Έκφραση μέγιστης τιμής", // Auto-generated string
-    step: "Βήμα", // Auto-generated string
+    choicesByUrl: "Επιλογές μέσω url",
+    currency: "Νόμισμα",
+    cellHint: "Υπόδειξη κελιού",
+    totalMaximumFractionDigits: "Μέγιστος αριθμός δεκαδικών ψηφίων",
+    totalMinimumFractionDigits: "Ελάχιστος αριθμός δεκαδικών ψηφίων",
+    columns: "Στήλες",
+    detailElements: "Στοιχεία λεπτομέρειας",
+    allowAdaptiveActions: "Επιτρέψτε προσαρμοστικές ενέργειες",
+    defaultRowValue: "Προεπιλεγμένη τιμή σειράς",
+    detailPanelShowOnAdding: "Εμφάνιση πάνελ λεπτομέρειας κατά την προσθήκη",
+    choicesLazyLoadEnabled: "Ενεργοποίηση φόρτωσης επιλογών με καθυστέρηση",
+    choicesLazyLoadPageSize: "Μέγεθος σελίδας φόρτωσης επιλογών με καθυστέρηση",
+    inputFieldComponent: "Συστατικό πεδίου εισαγωγής",
+    itemComponent: "Συστατικό στοιχείου",
+    min: "Ελάχιστο",
+    max: "Μέγιστο",
+    minValueExpression: "Έκφραση ελάχιστης τιμής",
+    maxValueExpression: "Έκφραση μέγιστης τιμής",
+    step: "Βήμα",
     dataList: "Στοιχεία για αυτόματη πρόταση",
     inputSize: "Πλάτος πεδίου εισαγωγής (σε χαρακτήρες)",
     itemTitleWidth: "Πλάτος ετικέτας στοιχείου",
     inputTextAlignment: "Στοίχιση τιμής εισόδου",
-    elements: "Στοιχεία", // Auto-generated string
-    content: "Περιεχόμενο", // Auto-generated string
-    navigationTitle: "Τίτλος πλοήγησης", // Auto-generated string
-    navigationDescription: "Περιγραφή πλοήγησης", // Auto-generated string
-    longTap: "Παράταση πατήματος", // Auto-generated string
+    elements: "Στοιχεία",
+    content: "Περιεχόμενο",
+    navigationTitle: "Τίτλος πλοήγησης",
+    navigationDescription: "Περιγραφή πλοήγησης",
+    longTap: "Παράταση πατήματος",
     autoGrow: "Αυτόματη ανάπτυξη πεδίου εισαγωγής",
     allowResize: "Ενεργοποίηση χειριστηρίου αλλαγής μεγέθους",
-    acceptCarriageReturn: "Αποδοχή επιστροφής καροτσιού", // Auto-generated string
+    acceptCarriageReturn: "Αποδοχή επιστροφής καροτσιού",
     displayMode: "Λειτουργία εμφάνισης",
-    rateType: "Τύπος αξιολόγησης", // Auto-generated string
-    label: "Ετικέτα", // Auto-generated string
+    rateType: "Τύπος αξιολόγησης",
+    label: "Ετικέτα",
     contentMode: "Λειτουργία περιεχομένου",
     imageFit: "Προσαρμογή εικόνας και μικρογραφίας",
     altText: "Εναλλακτικό κείμενο",
-    height: "Ύψος", // Auto-generated string
+    height: "Ύψος",
     mobileHeight: "Ύψος σε κινητά τηλέφωνα",
-    penColor: "Χρώμα πένας", // Auto-generated string
+    penColor: "Χρώμα πένας",
     backgroundColor: "Χρώμα φόντου",
-    templateElements: "Στοιχεία προτύπου", // Auto-generated string
-    operator: "Τελεστής", // Auto-generated string
-    isVariable: "Είναι μεταβλητή", // Auto-generated string
-    runExpression: "Εκτέλεση έκφρασης", // Auto-generated string
-    showCaption: "Εμφάνιση λεζάντας", // Auto-generated string
-    iconName: "Όνομα εικονιδίου", // Auto-generated string
-    iconSize: "Μέγεθος εικονιδίου", // Auto-generated string
-    precision: "Ακρίβεια", // Auto-generated string
-    matrixDragHandleArea: "Περιοχή χειριστηρίου μεταφοράς πίνακα", // Auto-generated string
+    templateElements: "Στοιχεία προτύπου",
+    operator: "Τελεστής",
+    isVariable: "Είναι μεταβλητή",
+    runExpression: "Εκτέλεση έκφρασης",
+    showCaption: "Εμφάνιση λεζάντας",
+    iconName: "Όνομα εικονιδίου",
+    iconSize: "Μέγεθος εικονιδίου",
+    precision: "Ακρίβεια",
+    matrixDragHandleArea: "Περιοχή χειριστηρίου μεταφοράς πίνακα",
     backgroundImage: "Εικόνα φόντου",
-    backgroundImageFit: "Προσαρμογή εικόνας φόντου", // Auto-generated string
-    backgroundImageAttachment: "Συνημμένο εικόνας φόντου", // Auto-generated string
-    backgroundOpacity: "Διαφάνεια φόντου", // Auto-generated string
+    backgroundImageFit: "Προσαρμογή εικόνας φόντου",
+    backgroundImageAttachment: "Συνημμένο εικόνας φόντου",
+    backgroundOpacity: "Διαφάνεια φόντου",
     selectToRankEnabled: "Επιτρέψτε την επιλεκτική κατάταξη",
     selectToRankAreasLayout: "Στοίχιση περιοχής κατάταξης",
     selectToRankEmptyRankedAreaText: "Κείμενο που εμφανίζεται αν έχουν επιλεγεί όλες οι επιλογές",
     selectToRankEmptyUnrankedAreaText: "Κείμενο τοποθεσίας για την περιοχή κατάταξης",
-    allowCameraAccess: "Επιτρέψτε την πρόσβαση στην κάμερα", // Auto-generated string
+    allowCameraAccess: "Επιτρέψτε την πρόσβαση στην κάμερα",
     scaleColorMode: "Χρωματική κλίμακα για το εικονίδιο αξιολόγησης",
     rateColorMode: "Χρωματική κλίμακα χαμογελαστών προσώπων",
-    copyDisplayValue: "Αντιγραφή τιμής εμφάνισης", // Auto-generated string
+    copyDisplayValue: "Αντιγραφή τιμής εμφάνισης",
     effectiveColSpan: "Εύρος στήλης",
-    progressBarInheritWidthFrom: "Πλάτος περιοχής γραμμής προόδου",
+    progressBarInheritWidthFrom: "Πλάτος περιοχής γραμμής προόδου"
   },
   theme: {
     advancedMode: "Λειτουργία για προχωρημένους",
@@ -1748,26 +1762,21 @@ export var grStrings = {
     questionTitle: "Κουτί ερώτησης",
     editorPanel: "Στοιχείο εισαγωγής",
     lines: "Γραμμές",
-
     primaryDefaultColor: "Προεπιλογή",
     primaryDarkColor: "Επιλογή hover",
     primaryLightColor: "Επιλεγμένο",
     backgroundDimColor: "Χρώμα φόντου",
-
     cornerRadius: "Ακτίνα γωνίας",
     backcolor: "Προεπιλεγμένο φόντο",
     hovercolor: "Φόντο hover",
     borderDecoration: "Διακόσμηση ορίου",
-
     fontColor: "Χρώμα γραμματοσειράς",
     backgroundColor: "Χρώμα φόντου",
-
     primaryForecolor: "Προεπιλεγμένο χρώμα",
     primaryForecolorLight: "Χρώμα ανενεργό",
     font: "Γραμματοσειρά",
     borderDefault: "Σκοτεινότερο",
     borderLight: "Πιο ανοιχτό",
-
     fontFamily: "Οικογένεια γραμματοσειρών",
     fontWeightRegular: "Κανονικό",
     fontWeightHeavy: "Βαρύ",
@@ -1776,7 +1785,6 @@ export var grStrings = {
     color: "Χρώμα",
     placeholderColor: "Χρώμα κειμένου πλακίδας",
     size: "Μέγεθος",
-
     opacity: "Διαφάνεια",
     boxShadowX: "X",
     boxShadowY: "Y",
@@ -1785,7 +1793,6 @@ export var grStrings = {
     boxShadowSpread: "Απλωσιά",
     boxShadowDrop: "Πτώση",
     boxShadowInner: "Εσωτερικό",
-
     names: {
       default: "Προεπιλογή",
       sharp: "Αιχμηρό",
@@ -1807,23 +1814,42 @@ export var grStrings = {
       brown: "Καφέ",
       green: "Πράσινο",
       gray: "Γκρί"
-    },
+    }
   },
   creatortheme: {
     "--sjs-special-background": "Φόντο επιφάνειας",
     "--sjs-primary-background-500": "Πρωτεύον",
     "--sjs-secondary-background-500": "Δευτερεύον",
-    "surfaceScale": "Επιφάνεια",
-    "userInterfaceBaseUnit": "Στοιχεία UI",
-    "fontScale": "Γραμματοσειρά",
-
+    surfaceScale: "Επιφάνεια",
+    userInterfaceBaseUnit: "Στοιχεία UI",
+    fontScale: "Γραμματοσειρά",
     names: {
-      "sc2020": "Δημιουργός Έρευνας 2020",
+      sc2020: "Δημιουργός Έρευνας 2020",
       "default-light": "Φωτεινό",
       "default-dark": "Σκοτεινό",
       "default-contrast": "Αντίθεση"
-    },
+    }
   }
 };
 
 setupLocale({ localeCode: "gr", strings: grStrings });
+
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually
+// qt.slider: "Slider" => "Ρυθμιστικό"
+// ed.property-grid: "Properties" => "Καταλύματα"
+// pe.isExclusive: "Clear others when selected" => "Απαλοιφή άλλων όταν είναι επιλεγμένο"
+// slider.min: "Min value" => "Ελάχιστη τιμή"
+// slider.max: "Max value" => "Μέγιστη τιμή"
+// slider.step: "Step value" => "Τιμή βήματος"
+// slider.showLabels: "Show scale labels" => "Εμφάνιση ετικετών κλίμακας"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Εμφάνιση συμβουλών εργαλείων"
+// slider.allowSwap: "Allow thumb crossing" => "Να επιτρέπεται η διέλευση του αντίχειρα"
+// slider.labelCount: "Number of auto-generated labels" => "Αριθμός ετικετών που δημιουργούνται αυτόματα"
+// slider.minValueExpression: "Min value expression" => "Παράσταση ελάχιστης τιμής"
+// slider.maxValueExpression: "Max value expression" => "Έκφραση μέγιστης τιμής"
+// slider.autoGenerate: "Scale labels configuration" => "Διαμόρφωση ετικετών κλίμακας"
+// tabs.sliderSettings: "Slider Settings" => "Ρυθμίσεις ρυθμιστικού"
+// sliderType.single: "Single-Value" => "Μία τιμή"
+// sliderType.range: "Range" => "Έκταση"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Κάνει αυτή την επιλογή αποκλειστική. Όταν επιλεγεί από έναν χρήστη, θα αποεπιλέξει αυτόματα όλες τις άλλες επιλογές στην ερώτηση."

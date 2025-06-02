@@ -45,6 +45,7 @@ export const roStrings = {
     paneldynamic: "Panou dinamic",
     radiogroup: "Grup de butoane radio",
     rating: "Scală de evaluare",
+    slider: "Glisorul",
     text: "Intrare pe un singur rând",
     boolean: "Da/Nu (Boolean)",
     expression: "Expresie (doar citire)",
@@ -443,6 +444,7 @@ export const roStrings = {
       prefix: "Prefix valutar",
       suffix: "Sufix valutar"
     },
+    isExclusive: "Ștergeți altele când este selectat",
     imageHeight: "Înălțimea zonei de afișare",
     imageWidth: "Lățimea zonei de afișare",
     valueName: "Identificator de îmbinare",
@@ -742,6 +744,18 @@ export const roStrings = {
     rateValues: "Valori personalizate de evaluare",
     rateCount: "Număr de evaluări",
     autoGenerate: "Configurare evaluare",
+    slider: {
+      min: "Valoarea minimă",
+      max: "Valoarea maximă",
+      step: "Valoarea pasului",
+      showLabels: "Afișarea etichetelor de scară",
+      tooltipVisibilityPG: "Afișarea sfaturilor ecran",
+      allowSwap: "Permiteți încrucișarea degetului mare",
+      labelCount: "Numărul de etichete generate automat",
+      minValueExpression: "Expresia valorii minime",
+      maxValueExpression: "Expresie valoare maximă",
+      autoGenerate: "Configurarea etichetelor de scară"
+    },
     hideIfChoicesEmpty: "Ascunde întrebarea dacă nu are alegeri",
     minWidth: "Lățime minimă",
     maxWidth: "Lățime maximă",
@@ -823,6 +837,7 @@ export const roStrings = {
       enableIf: "Editabil dacă",
       requiredIf: "Obligatoriu dacă",
       rateValues: "Valori evaluare",
+      sliderSettings: "Setări glisor",
       choicesByUrl: "Alegeri dintr-un serviciu web",
       matrixChoices: "Alegeri implicite",
       multipleTextItems: "Câmpuri de text",
@@ -1043,6 +1058,10 @@ export const roStrings = {
       time: "Ora",
       url: "URL",
       week: "Săptămână"
+    },
+    sliderType: {
+      single: "Valoare unică",
+      range: "Gama"
     },
     autocomplete: {
       name: "Nume complet",
@@ -1475,6 +1494,7 @@ export const roStrings = {
       showInMultipleColumns: "Când este selectat, creează o coloană individuală pentru fiecare opțiune de alegere.",
       colCount: "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte."
     },
+    isExclusive: "Face ca această alegere să fie exclusivă. Când este selectat de un utilizator, acesta va deselecta automat toate celelalte opțiuni din întrebare.",
     caseInsensitive: "Selectați dacă literele mari și mici din expresia regulată trebuie tratate ca echivalente.",
     widthMode: "Alegeți dintre: „Static” - setează o lățime fixă; „Responsive” - face ca chestionarul să ocupe întreaga lățime a ecranului; „Auto” - aplică una dintre cele două în funcție de tipurile de întrebări utilizate.",
     cookieName: "Atribuiți o valoare unică cookie-ului pentru chestionarul dvs. Cookie-ul va fi setat în browserul unui respondent la finalizarea chestionarului pentru a preveni trimiterea repetată a chestionarului.",
@@ -2003,3 +2023,19 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // ts.prevPage: "Previous" => "Precedent"
 // ts.nextPage: "Next" => "Următor"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Folosit atunci când \"Aspectul sondajului\" este setat la \"Un singur câmp de intrare pe pagină\". În acest aspect, matricea este împărțită astfel încât fiecare câmp de intrare să apară pe o pagină separată. Utilizați substituentul {rowIndex} pentru a insera numerotarea automată, {rowTitle} sau {rowName} pentru a face referire la titlul sau ID-ul rândului și {row.columnid} pentru a include valoarea unei anumite coloane de matrice."
+// qt.slider: "Slider" => "Glisorul"
+// pe.isExclusive: "Clear others when selected" => "Ștergeți altele când este selectat"
+// slider.min: "Min value" => "Valoarea minimă"
+// slider.max: "Max value" => "Valoarea maximă"
+// slider.step: "Step value" => "Valoarea pasului"
+// slider.showLabels: "Show scale labels" => "Afișarea etichetelor de scară"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Afișarea sfaturilor ecran"
+// slider.allowSwap: "Allow thumb crossing" => "Permiteți încrucișarea degetului mare"
+// slider.labelCount: "Number of auto-generated labels" => "Numărul de etichete generate automat"
+// slider.minValueExpression: "Min value expression" => "Expresia valorii minime"
+// slider.maxValueExpression: "Max value expression" => "Expresie valoare maximă"
+// slider.autoGenerate: "Scale labels configuration" => "Configurarea etichetelor de scară"
+// tabs.sliderSettings: "Slider Settings" => "Setări glisor"
+// sliderType.single: "Single-Value" => "Valoare unică"
+// sliderType.range: "Range" => "Gama"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Face ca această alegere să fie exclusivă. Când este selectat de un utilizator, acesta va deselecta automat toate celelalte opțiuni din întrebare."

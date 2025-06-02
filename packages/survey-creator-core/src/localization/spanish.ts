@@ -45,6 +45,7 @@ var spanishTranslation = {
     paneldynamic: "Panel (paneles dinámicos)",
     radiogroup: "Grupo de radio",
     rating: "Clasificación",
+    slider: "Slider",
     text: "Entrada única",
     boolean: "Booleano",
     expression: "Expresión (solo lectura)",
@@ -443,6 +444,7 @@ var spanishTranslation = {
       prefix: "Prefijo de moneda",
       suffix: "Sufijo de moneda"
     },
+    isExclusive: "Borrar otros cuando se selecciona",
     imageHeight: "Altura de imagen",
     imageWidth: "Ancho de la imagen",
     valueName: "Nombre de valor",
@@ -742,6 +744,18 @@ var spanishTranslation = {
     rateValues: "Valores de tarifa personalizados",
     rateCount: "Recuento de tarifas",
     autoGenerate: "¿Cómo especificar valores de tasa?",
+    slider: {
+      min: "Valor mínimo",
+      max: "Valor máximo",
+      step: "Valor del paso",
+      showLabels: "Mostrar etiquetas de escala",
+      tooltipVisibilityPG: "Mostrar información sobre herramientas",
+      allowSwap: "Permitir el cruce de pulgares",
+      labelCount: "Número de etiquetas generadas automáticamente",
+      minValueExpression: "Expresión de valor mínimo",
+      maxValueExpression: "Expresión de valor máximo",
+      autoGenerate: "Configuración de etiquetas de escala"
+    },
     hideIfChoicesEmpty: "Ocultar la pregunta si no contiene opciones",
     minWidth: "Anchura mímima (en valores aceptados CSS)",
     maxWidth: "Anchura máxima (en valores aceptados CSS)",
@@ -823,6 +837,7 @@ var spanishTranslation = {
       enableIf: "Habilitar si",
       requiredIf: "Requerido si",
       rateValues: "Valores de la tasa",
+      sliderSettings: "Configuración del control deslizante",
       choicesByUrl: "Opciones de la web",
       matrixChoices: "Opciones predeterminadas",
       multipleTextItems: "Entradas de texto",
@@ -1043,6 +1058,10 @@ var spanishTranslation = {
       time: "Hora",
       url: "URL",
       week: "Semana"
+    },
+    sliderType: {
+      single: "Valor único",
+      range: "Gama"
     },
     autocomplete: {
       name: "Nombre completo",
@@ -1475,6 +1494,7 @@ var spanishTranslation = {
       showInMultipleColumns: "Cuando se selecciona, crea una columna individual para cada opción de opción.",
       colCount: "Organiza las opciones de elección en un diseño de varias columnas. Cuando se establece en 0, las opciones se muestran en una sola línea. Cuando se establece en -1, el valor real se hereda de la propiedad \"Recuento de columnas anidadas\" de la matriz principal."
     },
+    isExclusive: "Hace que esta elección sea exclusiva. Cuando un usuario lo selecciona, anulará automáticamente la selección de todas las demás opciones de la pregunta.",
     caseInsensitive: "Seleccione si las letras mayúsculas y minúsculas de la expresión regular deben tratarse como equivalentes.",
     widthMode: "Elija entre: \"Estático\": establece un ancho fijo; \"Responsivo\": hace que la encuesta ocupe todo el ancho de la pantalla; \"Auto\": aplica cualquiera de los dos dependiendo de los tipos de preguntas utilizados.",
     cookieName: "Las cookies impiden que los usuarios completen la misma encuesta dos veces.",
@@ -2839,3 +2859,19 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // ts.prevPage: "Previous" => "Anterior"
 // ts.nextPage: "Next" => "Próximo"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Se utiliza cuando el 'Diseño de encuesta' se establece en 'Campo de entrada único por página'. En este diseño, la matriz se divide para que cada campo de entrada aparezca en una página separada. Use el marcador de posición {rowIndex} para insertar la numeración automática, {rowTitle} o {rowName} para hacer referencia al título o identificador de la fila y {row.columnid} para incluir el valor de una columna de matriz específica."
+// qt.slider: "Slider" => "Slider"
+// pe.isExclusive: "Clear others when selected" => "Borrar otros cuando se selecciona"
+// slider.min: "Min value" => "Valor mínimo"
+// slider.max: "Max value" => "Valor máximo"
+// slider.step: "Step value" => "Valor del paso"
+// slider.showLabels: "Show scale labels" => "Mostrar etiquetas de escala"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Mostrar información sobre herramientas"
+// slider.allowSwap: "Allow thumb crossing" => "Permitir el cruce de pulgares"
+// slider.labelCount: "Number of auto-generated labels" => "Número de etiquetas generadas automáticamente"
+// slider.minValueExpression: "Min value expression" => "Expresión de valor mínimo"
+// slider.maxValueExpression: "Max value expression" => "Expresión de valor máximo"
+// slider.autoGenerate: "Scale labels configuration" => "Configuración de etiquetas de escala"
+// tabs.sliderSettings: "Slider Settings" => "Configuración del control deslizante"
+// sliderType.single: "Single-Value" => "Valor único"
+// sliderType.range: "Range" => "Gama"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Hace que esta elección sea exclusiva. Cuando un usuario lo selecciona, anulará automáticamente la selección de todas las demás opciones de la pregunta."
