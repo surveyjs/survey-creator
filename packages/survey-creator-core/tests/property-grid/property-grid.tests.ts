@@ -2715,6 +2715,24 @@ test("Different property editors for trigger value in panel", () => {
   expect(question).toBeTruthy();
   expect(question.getType()).toEqual("dropdown");
 });
+test("Show baseselect logic properties after question logic properties, Bug#6936", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3, 4, 5] }
+    ]
+  });
+  const q1 = <QuestionDropdownModel>survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  const panel = <PanelModel>propertyGrid.survey.getPanelByName("logic");
+  const getIndex = (name: string): number => {
+    const question = panel.getQuestionByName(name);
+    return panel.questions.indexOf(question);
+  };
+  const questionCount = panel.questions.length;
+  expect(getIndex("hideIfChoicesEmpty")).toBe(questionCount - 3);
+  expect(getIndex("choicesVisibleIf")).toBe(questionCount - 2);
+  expect(getIndex("choicesEnableIf")).toBe(questionCount - 1);
+});
 test("AllowRowsDragDrop and property readOnly", () => {
   const question = new QuestionDropdownModel("q1");
   question.choices = [1, 2, 3];
