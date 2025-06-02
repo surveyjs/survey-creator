@@ -108,6 +108,12 @@ export class CreatorPresetEditableBase {
       item.updateOnMatrixDetailPanelVisibleChanged(model, creator, options);
     });
   }
+  public onGetMatrixRowActions(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
+    this.onGetMatrixRowActionsCore(model, creator, options);
+    this.children.forEach(item => {
+      item.onGetMatrixRowActions(model, creator, options);
+    });
+  }
   public setupQuestionsValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.setupQuestionsValueCore(model, json, creator);
     this.children.forEach(item => {
@@ -130,6 +136,7 @@ export class CreatorPresetEditableBase {
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {}
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {}
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}
+  protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}
   protected copyJson(json: any): any {
     return Helpers.getUnbindValue(json);
   }

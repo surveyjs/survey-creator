@@ -173,6 +173,20 @@ test("Preset edit model, toolbox definition page, default values", () => {
   expect(json2).toEqual(definition[1].json);
   expect(val[2]["json"]).toBeFalsy();
 });
+
+test("Preset edit model, toolbox definition page, matrix actions", () => {
+  const editor = new CreatorPresetEditorModel({});
+  const survey = editor.model;
+  const row = survey.getQuestionByName("toolbox_categories").visibleRows[0];
+  row.showDetailPanel();
+  const matrixQuestionInner = row.getQuestionByName("items");
+  expect(matrixQuestionInner.renderedTable.rows[1].cells[1].item.getData().actions[0].iconName).toEqual("icon-radiogroup");
+
+  survey.setValue("toolbox_mode", "items");
+  const matrixQuestion = survey.getQuestionByName("toolbox_items") as QuestionMatrixDynamicModel;
+  expect(matrixQuestion.renderedTable.rows[1].cells[1].item.getData().actions[0].iconName).toEqual("icon-radiogroup");
+});
+
 test("Preset edit model, toolbox definition page, apply", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
