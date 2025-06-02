@@ -57,10 +57,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               addRowText: "Add new category",
               showHeader: false,
               columns: [
-                { cellType: "text", name: "category", isUnique: true, isRequired: true },
+                { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
                 { cellType: "text", name: "title" }
               ],
-              detailPanelMode: "underRowSingle",
+              detailPanelMode: "underRow",
               detailElements: [
                 {
                   type: "matrixdynamic",
@@ -80,9 +80,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                     },
                     {
                       "name": "title"
-                    },
-                    {
-                      "name": "toolTip"
                     }
                   ],
                 }
@@ -107,9 +104,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                 },
                 {
                   "name": "title"
-                },
-                {
-                  "name": "toolTip"
                 }
               ],
             }
@@ -118,6 +112,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         {
           type: "panel",
           name: "panel_toolbox_definition",
+          startWithNewLine: false,
           description: "Create a new toolbox item or customize one of the predefined toolbox items.",
           elements: [
             {
@@ -136,6 +131,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               ],
               detailPanelMode: "underRow",
               detailElements: [
+                { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
+                { cellType: "text", name: "iconName", placeholder: "Icon name" },
                 { type: "text", name: "tooltip", title: "Tooltip" },
                 { type: "comment", name: "json", title: "JSON object to apply when users select this toolbox item", rows: 15 }
               ]
@@ -232,6 +229,28 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         enabled: false
       });
     }
+    if (options.question.name === this.nameCategories) {
+      options.actions.push({
+        id: "reset-to-default",
+        iconName: "icon-reset",
+        location: "end",
+        visibleIndex: 15
+      });
+      options.actions.forEach(a => {
+        if (a.id == "show-detail") {
+          a.location = "end";
+          a.iconName = "icon-expand-24x24",
+          a.visibleIndex = 10;
+        }
+        if (a.id == "remove-row") a.visibleIndex = 20;
+      });
+
+    }
+  }
+  public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
+    if (options.fromMatrix.name === "items" && options.toMatrix.name === "items") {
+      options.allow = true;
+    }
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     this.setupPageQuestions(model, creatorSetup.creator);
@@ -279,12 +298,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private setQuestionItemsRows(model: SurveyModel): void {
     this.allItems = this.getDefaultToolboxItems(model);
     const q = this.getQuestionItems(model);
-    if (!this.isItemValuesEqual(q.value, this.allItems)) {
-      q.value = this.allItems;
-      //this.updateRankingLocalizationName(q);
-      const items = this.getQuestionCategories(model);
-      items.visibleRows.forEach(row => row.hideDetailPanel());
-    }
+    q.value = this.allItems.filter(i => !i.category);
   }
   private isItemValuesEqual(a: Array<ICreatorPresetToolboxItem>, b: Array<ICreatorPresetToolboxItem>): boolean {
     if (!a || !b || a.length !== b.length) return false;
@@ -356,7 +370,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private updateShowCategoriesTitlesElements(model: SurveyModel): void {
     const val = model.getValue(this.nameShowCategoryTitles) === true;
     const matrix = this.getQuestionCategories(model);
-    matrix.getColumnByName("title").visible = val;
     matrix.visibleRows.forEach(row => {
       const category = row.getValue("category");
       const defaultTitle = this.getCategoryTitle(category);
@@ -409,7 +422,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private setupDefaultItems(creator: SurveyCreatorModel): void {
     const items = {};
     creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
-      this.createToolboxItemRow(item);
+      items[item.name] = this.createToolboxItemRow(item);
     });
     this.defaultItems = items;
   }
@@ -435,7 +448,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return res;
   }
   private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
-    return <ICreatorPresetToolboxItem> { name: item.name, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: item.json };
+    return <ICreatorPresetToolboxItem> { name: item.name, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: item.json, category: item.category };
   }
   private getRankingChoices(row: MatrixDropdownRowModelBase): Array<ICreatorPresetToolboxItem> {
     const res: ICreatorPresetToolboxItem[] = [];

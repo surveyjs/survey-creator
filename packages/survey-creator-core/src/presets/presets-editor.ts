@@ -150,6 +150,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onGetMatrixRowActions.add((sender, options) => {
       editablePresets.forEach(item => item.onGetMatrixRowActions(model, this.creator, options));
     });
+    model.onMatrixRowDragOver.add((sender, options) => {
+      editablePresets.forEach(item => item.onMatrixRowDragOver(model, this.creator, options));
+    });
     return model;
   }
   protected createResultModel(): SurveyModel {

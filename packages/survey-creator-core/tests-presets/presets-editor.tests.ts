@@ -615,12 +615,12 @@ test("Toolbox categories, show header and showcolumn title column if show catego
   survey.setValue("toolbox_mode", "categories");
   const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories");
   expect(matrix.showHeader).toBeFalsy();
-  expect(matrix.getColumnByName("title").visible).toBeFalsy();
+  expect(matrix.getColumnByName("title").visible).toBeTruthy();
   survey.setValue("toolbox_showCategoryTitles", true);
   expect(matrix.showHeader).toBeFalsy();
   expect(matrix.getColumnByName("title").visible).toBeTruthy();
   survey.setValue("toolbox_showCategoryTitles", false);
-  expect(matrix.getColumnByName("title").visible).toBeFalsy();
+  expect(matrix.getColumnByName("title").visible).toBeTruthy();
 });
 // test("Preset edit model, Set question name title&description", () => {
 //   const editor = new CreatorPresetEditorModel();

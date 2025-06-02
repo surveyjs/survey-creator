@@ -114,6 +114,7 @@ export class CreatorPresetEditableBase {
       item.onGetMatrixRowActions(model, creator, options);
     });
   }
+  public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any): void { }
   public setupQuestionsValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.setupQuestionsValueCore(model, json, creator);
     this.children.forEach(item => {
