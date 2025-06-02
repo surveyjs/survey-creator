@@ -4566,7 +4566,7 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
       opt.componentName = getQuestionContentWrapperComponentName(opt.element);
     }
     if (opt.wrapperName === "row") {
-      opt.componentName = "svc-row";
+      opt.componentName = getRowWrapperComponentName(opt.element);
     }
     if (Serializer.isDescendantOf(opt.wrapperName, "itemvalue")) {
       opt.componentName = getItemValueWrapperComponentName(opt.item, opt.element);
@@ -4579,7 +4579,7 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
       opt.data = getElementWrapperComponentData(opt.element, opt.reason, creator);
     }
     if (opt.wrapperName === "row") {
-      opt.data = { creator: creator, row: opt.element };
+      opt.data = getRowWrapperComponentData(opt.element, creator);
     }
     if (Serializer.isDescendantOf(opt.wrapperName, "itemvalue")) {
       opt.data = getItemValueWrapperComponentData(opt.item, opt.element, creator);
@@ -4656,11 +4656,23 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   }
   return undefined;
 }
+export function getRowWrapperComponentName(row: QuestionRowModel): string {
+  if (isContentElement(row.panel)) {
+    return undefined;
+  }
+  return "svc-row";
+}
 export function getQuestionContentWrapperComponentName(element) {
   if (element.isDescendantOf("rating") && !isContentElement(element)) {
     return "svc-rating-question-content";
   }
   return undefined;
+}
+export function getRowWrapperComponentData(row: QuestionRowModel, creator: SurveyCreatorModel) {
+  if (isContentElement(row.panel)) {
+    return row;
+  }
+  return { creator: creator, row: row };
 }
 export function getElementWrapperComponentData(
   element: any,

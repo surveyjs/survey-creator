@@ -38,7 +38,7 @@ import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin"
 import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
-import { isTextInput } from "../src/creator-base";
+import { getRowWrapperComponentData, getRowWrapperComponentName, isTextInput } from "../src/creator-base";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 
 import {
@@ -1657,7 +1657,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
             type: "panel",
             name: "panel4",
             title: "Panel",
-            elements: [],
+            elements: [{ "type": "text", "name": "question5" }],
           },
         ]
       }
@@ -1682,6 +1682,14 @@ test("getElementWrapperComponentName for inner component elements", () => {
   expect(getElementWrapperComponentName(panel, "", false)).toEqual(undefined);
   expect(getElementWrapperComponentName(question, "", false)).toEqual(undefined);
   expect(getElementWrapperComponentName(innerPanel, "", false)).toEqual(undefined);
+  expect(panel.rows.length).toEqual(2);
+  expect(getElementWrapperComponentName(panel.rows[0], "", false)).toEqual(undefined);
+  expect(getRowWrapperComponentName(panel.rows[0])).toEqual(undefined);
+  expect(getRowWrapperComponentData(panel.rows[0], creator)).toEqual(panel.rows[0]);
+  expect(innerPanel.rows.length).toEqual(1);
+  expect(getElementWrapperComponentName(innerPanel.rows[0], "", false)).toEqual(undefined);
+  expect(getRowWrapperComponentName(innerPanel.rows[0])).toEqual(undefined);
+  expect(getRowWrapperComponentData(innerPanel.rows[0], creator)).toEqual(innerPanel.rows[0]);
   ComponentCollection.Instance.clear();
 });
 
