@@ -45,6 +45,7 @@ export var koreanStrings = {
     paneldynamic: "패널 (동적 패널)",
     radiogroup: "라디오 그룹",
     rating: "등급",
+    slider: "슬라이더",
     text: "텍스트 상자",
     boolean: "불린(boolean)",
     expression: "표현식",
@@ -443,6 +444,7 @@ export var koreanStrings = {
       prefix: "통화 접두사",
       suffix: "통화 접미사"
     },
+    isExclusive: "선택하면 다른 항목 지우기",
     imageHeight: "이미지 높이",
     imageWidth: "이미지 너비",
     valueName: "값 이름",
@@ -742,6 +744,18 @@ export var koreanStrings = {
     rateValues: "사용자 지정 요금 값",
     rateCount: "비율 개수",
     autoGenerate: "비율 값을 지정하는 방법은 무엇입니까?",
+    slider: {
+      min: "최소값",
+      max: "최대값",
+      step: "단계 값",
+      showLabels: "축척 레이블 표시",
+      tooltipVisibilityPG: "툴팁 표시",
+      allowSwap: "엄지 교차점 허용",
+      labelCount: "자동 생성된 레이블의 수",
+      minValueExpression: "최소값 표현식",
+      maxValueExpression: "최대 값 표현식",
+      autoGenerate: "레이블 구성 크기 조정"
+    },
     hideIfChoicesEmpty: "선택 항목이 없는 경우 질문 숨기기",
     minWidth: "최소 너비(CSS에서 허용하는 값)",
     maxWidth: "최대 너비(CSS에서 허용하는 값)",
@@ -823,6 +837,7 @@ export var koreanStrings = {
       enableIf: "조건 충족시 허용",
       requiredIf: "다음과 같은 경우 필수입니다.",
       rateValues: "길이 값",
+      sliderSettings: "슬라이더 설정",
       choicesByUrl: "웹에서 선택",
       matrixChoices: "기본 선택",
       multipleTextItems: "텍스트 입력",
@@ -1043,6 +1058,10 @@ export var koreanStrings = {
       time: "시간",
       url: "URL (영문)",
       week: "주"
+    },
+    sliderType: {
+      single: "단일 값",
+      range: "레인지"
     },
     autocomplete: {
       name: "성명",
@@ -1475,6 +1494,7 @@ export var koreanStrings = {
       showInMultipleColumns: "이 옵션을 선택하면 각 선택 옵션에 대한 개별 열이 만들어집니다.",
       colCount: "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."
     },
+    isExclusive: "이 선택은 배타적입니다. 사용자가 선택하면 질문의 다른 모든 옵션이 자동으로 선택 해제됩니다.",
     caseInsensitive: "정규식에서 대문자와 소문자를 동등하게 취급해야 하는 경우 선택합니다.",
     widthMode: "다음 중에서 선택합니다. \"정적\" - 고정 너비를 설정합니다. \"반응형\" - 설문조사가 화면의 전체 너비를 차지하도록 합니다. \"자동\" - 사용된 질문 유형에 따라 둘 중 하나를 적용합니다.",
     cookieName: "쿠키는 사용자가 동일한 설문조사를 두 번 작성하는 것을 방지합니다.",
@@ -3267,3 +3287,19 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // ts.prevPage: "Previous" => "이전의"
 // ts.nextPage: "Next" => "다음"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "'설문조사 레이아웃'이 '페이지당 단일 입력 필드'로 설정된 경우에 사용됩니다. 이 레이아웃에서는 각 입력 필드가 별도의 페이지에 표시되도록 행렬이 분할됩니다. {rowIndex} 자리 표시자를 사용하여 자동 번호 매기기를 삽입하고, {rowTitle} 또는 {rowName}을 사용하여 행의 제목 또는 ID를 참조하고, {row.columnid}를 사용하여 특정 행렬 열의 값을 포함합니다."
+// qt.slider: "Slider" => "슬라이더"
+// pe.isExclusive: "Clear others when selected" => "선택하면 다른 항목 지우기"
+// slider.min: "Min value" => "최소값"
+// slider.max: "Max value" => "최대값"
+// slider.step: "Step value" => "단계 값"
+// slider.showLabels: "Show scale labels" => "축척 레이블 표시"
+// slider.tooltipVisibilityPG: "Show tooltips" => "툴팁 표시"
+// slider.allowSwap: "Allow thumb crossing" => "엄지 교차점 허용"
+// slider.labelCount: "Number of auto-generated labels" => "자동 생성된 레이블의 수"
+// slider.minValueExpression: "Min value expression" => "최소값 표현식"
+// slider.maxValueExpression: "Max value expression" => "최대 값 표현식"
+// slider.autoGenerate: "Scale labels configuration" => "레이블 구성 크기 조정"
+// tabs.sliderSettings: "Slider Settings" => "슬라이더 설정"
+// sliderType.single: "Single-Value" => "단일 값"
+// sliderType.range: "Range" => "레인지"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "이 선택은 배타적입니다. 사용자가 선택하면 질문의 다른 모든 옵션이 자동으로 선택 해제됩니다."

@@ -45,6 +45,7 @@ export var czStrings = {
     paneldynamic: "Panel (dynamické panely)",
     radiogroup: "Přepínač",
     rating: "Hodnocení",
+    slider: "Běhoun",
     text: "Jeden vstup",
     boolean: "Přepínač (Ano/Ne)",
     expression: "Výraz (pouze pro čtení)",
@@ -443,6 +444,7 @@ export var czStrings = {
       prefix: "Předpona měny",
       suffix: "Přípona měny"
     },
+    isExclusive: "Vymazat ostatní při výběru",
     imageHeight: "Výška obrázku",
     imageWidth: "Šířka obrázku",
     valueName: "Název hodnoty",
@@ -742,6 +744,18 @@ export var czStrings = {
     rateValues: "Vlastní hodnoty kurzu",
     rateCount: "Počet kurzů",
     autoGenerate: "Jak určit hodnoty kurzu?",
+    slider: {
+      min: "Min hodnota",
+      max: "Maximální hodnota",
+      step: "Hodnota kroku",
+      showLabels: "Zobrazit štítky měřítka",
+      tooltipVisibilityPG: "Zobrazit popisky nástrojů",
+      allowSwap: "Povolit křížení palců",
+      labelCount: "Počet automaticky generovaných štítků",
+      minValueExpression: "Výraz minimální hodnoty",
+      maxValueExpression: "Výraz maximální hodnoty",
+      autoGenerate: "Konfigurace popisků měřítka"
+    },
     hideIfChoicesEmpty: "Skrýt otázku, pokud neobsahuje žádné volby",
     minWidth: "Minimální šířka (v hodnotách akceptovaných CSS)",
     maxWidth: "Maximální šířka (v hodnotách akceptovaných CSS)",
@@ -823,6 +837,7 @@ export var czStrings = {
       enableIf: "Povolená, pokud",
       requiredIf: "Povinná, pokud",
       rateValues: "Hodnoty sazeb",
+      sliderSettings: "Nastavení posuvníku",
       choicesByUrl: "Volby z webu",
       matrixChoices: "Výchozí volby",
       multipleTextItems: "Textové vstupy",
@@ -1043,6 +1058,10 @@ export var czStrings = {
       time: "Čas",
       url: "URL",
       week: "Týden"
+    },
+    sliderType: {
+      single: "Jedna hodnota",
+      range: "Rozmezí"
     },
     autocomplete: {
       name: "Celé jméno",
@@ -1475,6 +1494,7 @@ export var czStrings = {
       showInMultipleColumns: "Pokud je tato možnost vybraná, vytvoří samostatný sloupec pro každou možnost volby.",
       colCount: "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice."
     },
+    isExclusive: "Díky tomu je tato volba exkluzivní. Když je vybrán uživatelem, automaticky zruší výběr všech ostatních možností v otázce.",
     caseInsensitive: "Vyberte, zda mají být velká a malá písmena v regulárním výrazu považována za ekvivalentní.",
     widthMode: "Vyberte si z: \"Statické\" - nastaví pevnou šířku; \"Responzivní\" - způsobí, že průzkum bude zabírat celou šířku obrazovky; \"Auto\" – použije jednu z těchto dvou možností v závislosti na použitých typech otázek.",
     cookieName: "Cookies brání uživatelům vyplnit průzkum vícekrát.",
@@ -2640,3 +2660,19 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // ts.prevPage: "Previous" => "Předchozí"
 // ts.nextPage: "Next" => "Další"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Používá se, když je \"Rozvržení průzkumu\" nastaveno na \"Jedno vstupní pole na stránku\". V tomto rozvržení je matice rozdělena tak, aby se každé vstupní pole zobrazilo na samostatné stránce. Pomocí zástupného symbolu {rowIndex} vložte automatické číslování, pomocí {rowTitle} nebo {rowName} odkazujte na název nebo ID řádku a pomocí {row.columnid} zahrňte hodnotu konkrétního sloupce matice."
+// qt.slider: "Slider" => "Běhoun"
+// pe.isExclusive: "Clear others when selected" => "Vymazat ostatní při výběru"
+// slider.min: "Min value" => "Min hodnota"
+// slider.max: "Max value" => "Maximální hodnota"
+// slider.step: "Step value" => "Hodnota kroku"
+// slider.showLabels: "Show scale labels" => "Zobrazit štítky měřítka"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Zobrazit popisky nástrojů"
+// slider.allowSwap: "Allow thumb crossing" => "Povolit křížení palců"
+// slider.labelCount: "Number of auto-generated labels" => "Počet automaticky generovaných štítků"
+// slider.minValueExpression: "Min value expression" => "Výraz minimální hodnoty"
+// slider.maxValueExpression: "Max value expression" => "Výraz maximální hodnoty"
+// slider.autoGenerate: "Scale labels configuration" => "Konfigurace popisků měřítka"
+// tabs.sliderSettings: "Slider Settings" => "Nastavení posuvníku"
+// sliderType.single: "Single-Value" => "Jedna hodnota"
+// sliderType.range: "Range" => "Rozmezí"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Díky tomu je tato volba exkluzivní. Když je vybrán uživatelem, automaticky zruší výběr všech ostatních možností v otázce."

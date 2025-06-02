@@ -45,6 +45,7 @@ export var arStrings = {
     paneldynamic: "لوحة ديناميكية",
     radiogroup: "إختيار فردي",
     rating: "تقييم",
+    slider: "شريط التمرير",
     text: "مٌدخل فردي",
     boolean: "قيمة منطقية",
     expression: "عملية حسابية (للقرائة فقط)",
@@ -443,6 +444,7 @@ export var arStrings = {
       prefix: "بادئة العملة",
       suffix: "لاحقة العملة"
     },
+    isExclusive: "مسح الآخرين عند تحديده",
     imageHeight: "طول الصورة",
     imageWidth: "عرض الصورة",
     valueName: "اسم القيمة",
@@ -742,6 +744,18 @@ export var arStrings = {
     rateValues: "قيم الأسعار المخصصة",
     rateCount: "عدد الأسعار",
     autoGenerate: "كيفية تحديد قيم المعدل؟",
+    slider: {
+      min: "الحد الأدنى للقيمة",
+      max: "القيمة القصوى",
+      step: "قيمة الخطوة",
+      showLabels: "إظهار تسميات المقياس",
+      tooltipVisibilityPG: "عرض تلميحات الأدوات",
+      allowSwap: "السماح بعبور الإبهام",
+      labelCount: "عدد التصنيفات التي يتم إنشاؤها تلقائيا",
+      minValueExpression: "الحد الأدنى للقيمة",
+      maxValueExpression: "تعبير القيمة القصوى",
+      autoGenerate: "تكوين تسميات المقياس"
+    },
     hideIfChoicesEmpty: "إخفاء السؤال إذا لم يكن يحتوي على خيارات",
     minWidth: "الحد الأدنى للعرض (بالقيم المقبولة في CSS)",
     maxWidth: "الحد الأقصى للعرض (بالقيم المقبولة من CSS)",
@@ -823,6 +837,7 @@ export var arStrings = {
       enableIf: "مفعل عندما",
       requiredIf: "مطلوب عندما",
       rateValues: "قيم التقييم",
+      sliderSettings: "إعدادات شريط التمرير",
       choicesByUrl: "خيارات من الإنترنت",
       matrixChoices: "Default Choices",
       multipleTextItems: "Text Inputs",
@@ -1043,6 +1058,10 @@ export var arStrings = {
       time: "الوقت",
       url: "الرابط",
       week: "أسبوع"
+    },
+    sliderType: {
+      single: "قيمة واحدة",
+      range: "نطاق"
     },
     autocomplete: {
       name: "الاسم الكامل",
@@ -1475,6 +1494,7 @@ export var arStrings = {
       showInMultipleColumns: "عند تحديده، ينشئ عمود منفرد لكل خيار اختيار.",
       colCount: "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
     },
+    isExclusive: "يجعل هذا الاختيار حصريا. عند تحديده من قبل مستخدم، سيتم إلغاء تحديد جميع الخيارات الأخرى في السؤال تلقائيا.",
     caseInsensitive: "حدد ما إذا كان يجب التعامل مع الأحرف الكبيرة والصغيرة في التعبير العادي على أنها مكافئة.",
     widthMode: "اختر من بين: \"ثابت\" - يحدد عرضا ثابتا ؛ \"متجاوب\" - يجعل الاستطلاع يشغل العرض الكامل للشاشة ؛ \"تلقائي\" - ينطبق على أي من الاثنين اعتمادا على أنواع الأسئلة المستخدمة.",
     cookieName: "تمنع ملفات تعريف الارتباط المستخدمين من ملء نفس الاستبيان مرتين.",
@@ -2977,3 +2997,19 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // ts.prevPage: "Previous" => "سابق"
 // ts.nextPage: "Next" => "مقبل"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "يستخدم عند تعيين \"تخطيط الاستطلاع\" إلى \"حقل إدخال واحد لكل صفحة\". في هذا التخطيط، يتم تقسيم المصفوفة بحيث يظهر كل حقل إدخال في صفحة منفصلة. استخدم العنصر النائب {rowIndex} لإدراج الترقيم التلقائي و{rowTitle} أو {rowName} للإشارة إلى عنوان الصف أو معرفه، و{row.columnid} لتضمين قيمة عمود مصفوفة معين."
+// qt.slider: "Slider" => "شريط التمرير"
+// pe.isExclusive: "Clear others when selected" => "مسح الآخرين عند تحديده"
+// slider.min: "Min value" => "الحد الأدنى للقيمة"
+// slider.max: "Max value" => "القيمة القصوى"
+// slider.step: "Step value" => "قيمة الخطوة"
+// slider.showLabels: "Show scale labels" => "إظهار تسميات المقياس"
+// slider.tooltipVisibilityPG: "Show tooltips" => "عرض تلميحات الأدوات"
+// slider.allowSwap: "Allow thumb crossing" => "السماح بعبور الإبهام"
+// slider.labelCount: "Number of auto-generated labels" => "عدد التصنيفات التي يتم إنشاؤها تلقائيا"
+// slider.minValueExpression: "Min value expression" => "الحد الأدنى للقيمة"
+// slider.maxValueExpression: "Max value expression" => "تعبير القيمة القصوى"
+// slider.autoGenerate: "Scale labels configuration" => "تكوين تسميات المقياس"
+// tabs.sliderSettings: "Slider Settings" => "إعدادات شريط التمرير"
+// sliderType.single: "Single-Value" => "قيمة واحدة"
+// sliderType.range: "Range" => "نطاق"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "يجعل هذا الاختيار حصريا. عند تحديده من قبل مستخدم، سيتم إلغاء تحديد جميع الخيارات الأخرى في السؤال تلقائيا."
