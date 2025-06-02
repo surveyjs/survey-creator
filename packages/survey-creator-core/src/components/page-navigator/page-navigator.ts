@@ -40,7 +40,9 @@ export class PageNavigatorViewModel extends Base {
         this.popupModel.hide();
       },
       cssClasses: listComponentCss,
-      allowSelection: true
+      allowSelection: true,
+      listRole: "menu",
+      listItemRole: "menuitemradio"
     });
     this.popupModel = new PopupModel("sv-list", { model: this.pageListModel }, { cssClass: "svc-creator-popup" });
     this.popupModel.focusFirstInputSelector = ".svc-list__item--selected";
@@ -299,7 +301,7 @@ export class PageNavigatorViewModel extends Base {
     // this._updateVisibility();
     setTimeout(() => {
       this._updateVisibility();
-    }, 10);
+    }, 100);
   }
   public get visibleItems() {
     if (this.items.length <= this.visibleItemsCount) {
