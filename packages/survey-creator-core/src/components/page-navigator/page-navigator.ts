@@ -301,7 +301,7 @@ export class PageNavigatorViewModel extends Base {
     // this._updateVisibility();
     setTimeout(() => {
       this._updateVisibility();
-    }, 10);
+    }, 100);
   }
   public get visibleItems() {
     if (this.items.length <= this.visibleItemsCount) {
