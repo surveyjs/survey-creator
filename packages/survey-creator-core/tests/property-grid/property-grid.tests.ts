@@ -412,8 +412,6 @@ test("itemvalue[] custom dropdown property", () => {
   Serializer.removeProperty("itemvalue", "prop1");
 });
 test("itemvalue[] custom dropdown property add showMode as 'form'", () => {
-  Serializer.findProperty("checkboxitem", "isExclusive").visible = true; //TODO:isExclusive
-  Serializer.findProperty("checkboxitem", "isExclusive").locationInTable = "detail";
   Serializer.addProperty("itemvalue", { name: "prop1", category: "general", choices: ["item1", "item2", "item3", "item4", "item5"], showMode: "form" });
 
   var question = new QuestionCheckboxModel("q1");
@@ -435,9 +433,6 @@ test("itemvalue[] custom dropdown property add showMode as 'form'", () => {
   Serializer.removeProperty("itemvalue", "prop1");
 });
 test("itemvalue[] custom add showMode as 'form', create in general category by default", () => {
-  Serializer.findProperty("checkboxitem", "isExclusive").visible = true; //TODO:isExclusive
-  Serializer.findProperty("checkboxitem", "isExclusive").locationInTable = "detail";
-
   Serializer.addProperty("itemvalue", { name: "prop1", showMode: "form" });
 
   var question = new QuestionCheckboxModel("q1");
@@ -456,9 +451,6 @@ test("itemvalue[] custom add showMode as 'form', create in general category by d
   Serializer.removeProperty("itemvalue", "prop1");
 });
 test("itemvalue[] custom properties with dependsOn", () => {
-  Serializer.findProperty("checkboxitem", "isExclusive").visible = true; //TODO:isExclusive
-  Serializer.findProperty("checkboxitem", "isExclusive").locationInTable = "detail";
-
   Serializer.addProperty("itemvalue", { name: "prop1", choices: ["item1", "item2"] });
   Serializer.addProperty("itemvalue", { name: "prop2", dependsOn: "prop1", visibleIf: (obj: any) => { return obj.prop1 == "item1"; } });
 

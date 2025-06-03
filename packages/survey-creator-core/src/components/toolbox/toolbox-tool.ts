@@ -76,7 +76,7 @@ export class ToolboxToolViewModel extends Base {
     document.removeEventListener("pointerup", this.onPointerUp);
   };
 
-  private startDragToolboxItem = (pointerDownEvent, currentTarget) => {
+  private startDragToolboxItem = (pointerDownEvent: PointerEvent) => {
     var json = this.creator.getJSONForNewElement(this.item.json);
     this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, this.item);
     return true;
