@@ -31,6 +31,7 @@ test.describe("designer a11y", () => {
   });
   test("Check page navigator", async ({ page }) => {
     await setJSON(page, jsonWithMultiplePages);
+    await page.click(".svc-page__content--new .svc-add-new-question-action");
     await page.click(".svc-page-navigator__selector");
     await checkA11y(page, ".svc-tab-designer__page-navigator", { axeOptions });
   });
