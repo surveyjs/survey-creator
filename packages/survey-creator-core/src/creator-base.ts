@@ -3238,7 +3238,7 @@ export class SurveyCreatorModel extends Base
 
   private getHtmlElementForScroll(element: any): HTMLElement {
     const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.id : element.id;
-    return DomDocumentHelper.getDocument().getElementById(id);
+    return this.rootElement?.querySelector(`#${id}`);
   }
 
   private getSelectedSurveyElement(): IElement {
