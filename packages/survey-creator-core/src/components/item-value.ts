@@ -7,7 +7,8 @@ import {
   Serializer,
   JsonObjectProperty,
   DragOrClickHelper,
-  Helpers
+  Helpers,
+  ITargets
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { DragDropChoices } from "survey-core";
@@ -115,8 +116,8 @@ export class ItemValueWrapperViewModel extends Base {
     return false;
   }
 
-  startDragItemValue = (pointerDownEvent: PointerEvent, currentTarget: any) => {
-    this.dragDropHelper.startDrag(pointerDownEvent, this.item, this.question, <HTMLElement>currentTarget);
+  startDragItemValue = (pointerDownEvent: PointerEvent, targets: ITargets) => {
+    this.dragDropHelper.startDrag(pointerDownEvent, this.item, this.question, targets.currentTarget);
   };
 
   private get dragDropHelper(): DragDropChoices {
