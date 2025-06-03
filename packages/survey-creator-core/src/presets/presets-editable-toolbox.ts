@@ -120,6 +120,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               name: this.nameMatrix,
               titleLocation: "hidden",
               rowCount: 0,
+              allowRowReorder: true,
               addRowText: "Add new toolbox item",
               showHeader: false,
               hideColumnsIfEmpty: true,
@@ -129,7 +130,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                 { cellType: "text", name: "iconName", placeholder: "Icon name", visible: false },
                 { cellType: "text", name: "title", placeholder: "Title" }
               ],
-              detailPanelMode: "none",
+              detailPanelMode: "underRow",
               detailElements: [
                 { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
                 { cellType: "text", name: "iconName", placeholder: "Icon name" },
@@ -248,7 +249,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
   }
   public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-    if (options.fromMatrix.name === "items" && options.toMatrix.name === "items") {
+    const matrices = ["items", this.nameMatrix];
+    if (matrices.indexOf(options.fromMatrix.name) >= 0 && matrices.indexOf(options.toMatrix.name) >= 0) {
       options.allow = true;
     }
   }
@@ -308,23 +310,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     //this.setupQuestionsValueDefinition(model, json);
-    const val = [];
-    creator.toolbox.items.forEach(item => val.push(this.createToolboxItemRow(item)));
-    this.getQuestionItems(model).value = val;
-    const nameCategories = {};
-    const categories = [];
-    creator.toolbox.items.forEach(item => {
-      const category = item.category;
-      if (!!category) {
-        if (!nameCategories[category]) {
-          const row = { category: category, items: [this.createToolboxItemRow(item)] };
-          nameCategories[category] = row;
-          categories.push(row);
-        } else {
-          nameCategories[category].items.push(this.createToolboxItemRow(item));
-        }
-      }
-    });
+    this.getQuestionItems(model).value = creator.toolbox.items.forEach(i => this.createToolboxItemRow(i));
+    const categories = creator.toolbox.categories.map(c => ({ category: c.name, items: c.items.map(i => this.createToolboxItemRow(i)) }));
     model.setValue(this.nameCategories, categories);
     this.getQuestionCategories(model).visibleRows.forEach(row => {
       row.onDetailPanelShowingChanged = () => {
@@ -442,7 +429,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return res;
   }
   private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
-    return <ICreatorPresetToolboxItem> { name: item.name, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: item.json, category: item.category };
+    return <ICreatorPresetToolboxItem> { name: item.name, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: JSON.stringify(item.json), category: item.category };
   }
   private getRankingChoices(row: MatrixDropdownRowModelBase): Array<ICreatorPresetToolboxItem> {
     const res: ICreatorPresetToolboxItem[] = [];

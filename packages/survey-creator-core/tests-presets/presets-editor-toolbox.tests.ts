@@ -1,0 +1,31 @@
+import { ItemValue, QuestionBooleanModel, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization } from "survey-core";
+import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
+import { ICreatorPresetData } from "../src/presets-creator/presets";
+import { SurveyModel, Question } from "survey-core";
+import { QuestionToolbox } from "../src/toolbox";
+import { SurveyCreatorModel } from "../src/creator-base";
+import { editorLocalization } from "../src/editorLocalization";
+//import "survey-creator-core/i18n/german";
+//import "survey-creator-core/i18n/italian";
+//import "survey-creator-core/i18n/french";
+
+test("Preset edit, toolbox - remove item", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  expect(editor.json.toolbox).toBeUndefined();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
+  expect(matrixQuestion.visibleRows).toHaveLength(0);
+  expect(categQuestion.visibleRows).toHaveLength(5);
+  const row = categQuestion.visibleRows[1];
+  row.showDetailPanel();
+  const itemsQuestion = row.getQuestionByName("items");
+  expect(itemsQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "comment", "multipletext"]);
+  itemsQuestion.removeRow(1);
+  expect(itemsQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "multipletext"]);
+  expect(matrixQuestion.visibleRows).toHaveLength(1);
+  expect(matrixQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["comment"]);
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  expect(editor.json.toolbox).toBeDefined();
+});
