@@ -61,24 +61,25 @@ export class SurveyPageNavigator extends CreatorModelElement<
       className += " svc-page-navigator__button--pressed";
     return (
       <div className="svc-page-navigator" ref={this.containerRef} style={{ display: this.model.visible ? "flex" : "none" }}>
-        {attachKey2click(<div
-          role="button"
-          className={className}
-          onClick={() => this.model.togglePageSelector()}
-          title={this.model.pageSelectorCaption}
-        >
-          <SvgIcon
-            className="svc-page-navigator__button-icon"
-            iconName={this.model.icon}
-            size={"auto"}
+        <div>
+          {attachKey2click(<div
+            role="button"
+            className={className}
+            onClick={() => this.model.togglePageSelector()}
             title={this.model.pageSelectorCaption}
-          ></SvgIcon>
-
+          >
+            <SvgIcon
+              className="svc-page-navigator__button-icon"
+              iconName={this.model.icon}
+              size={"auto"}
+              title={this.model.pageSelectorCaption}
+            ></SvgIcon>
+          </div>)}
           <Popup
             model={this.model.popupModel}
           //className="svc-page-navigator__popup"
           ></Popup>
-        </div>)}
+        </div>
         <div>
           {this.model.visibleItems.map((item) => (
             <SurveyPageNavigatorItem
