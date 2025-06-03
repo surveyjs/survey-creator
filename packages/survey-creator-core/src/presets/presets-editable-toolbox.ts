@@ -125,11 +125,11 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               hideColumnsIfEmpty: true,
               noRowsText: "Click the button below to add a new toolbox item.",
               columns: [
-                { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
-                { cellType: "text", name: "iconName", placeholder: "Icon name" },
+                { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true, visible: false },
+                { cellType: "text", name: "iconName", placeholder: "Icon name", visible: false },
                 { cellType: "text", name: "title", placeholder: "Title" }
               ],
-              detailPanelMode: "underRow",
+              detailPanelMode: "none",
               detailElements: [
                 { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
                 { cellType: "text", name: "iconName", placeholder: "Icon name" },
@@ -252,12 +252,22 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       options.allow = true;
     }
   }
+  public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
+    if (options.question.name == "items") {
+      const rowData = options.question.value[options.rowIndex];
+      const hiddenItems = this.getMatrix(model);
+      const value = hiddenItems.value ? [...hiddenItems.value] : [];
+      value.push(rowData);
+      hiddenItems.value = value;
+    } else {
+      options.allow = false;
+    }
+  }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     this.setupPageQuestions(model, creatorSetup.creator);
   }
   private setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
     this.setupDefaultItems(creator);
-    this.setupItemsDefinition(model, creator);
     this.setQuestionItemsRows(model);
   }
   protected validateCore(model: SurveyModel): boolean {
@@ -279,26 +289,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
     return true;
   }
-  private setupItemsDefinition(model: SurveyModel, creator: SurveyCreatorModel): void {
-    const matrix = this.getMatrix(model);
-    const nameColumn = matrix.getColumnByName("name");
-    const iconNameColumn = matrix.getColumnByName("iconName");
-    const names = [];
-    const iconNames = [];
-    creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
-      names.push(item.id);
-      iconNames.push(item.iconName || ("icon-" + item.id));
-    });
-    names.sort();
-    iconNames.sort();
-    nameColumn["dataList"] = names;
-    iconNameColumn["dataList"] = iconNames;
-  }
-
   private setQuestionItemsRows(model: SurveyModel): void {
-    this.allItems = this.getDefaultToolboxItems(model);
-    const q = this.getQuestionItems(model);
-    q.value = this.allItems.filter(i => !i.category);
+    //this.allItems = this.getDefaultToolboxItems(model);
+    //const q = this.getMatrix(model);
+    //q.value = this.allItems.filter(i => !i.category);
   }
   private isItemValuesEqual(a: Array<ICreatorPresetToolboxItem>, b: Array<ICreatorPresetToolboxItem>): boolean {
     if (!a || !b || a.length !== b.length) return false;
@@ -313,7 +307,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     });
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-    this.setupQuestionsValueDefinition(model, json);
+    //this.setupQuestionsValueDefinition(model, json);
     const val = [];
     creator.toolbox.items.forEach(item => val.push(this.createToolboxItemRow(item)));
     this.getQuestionItems(model).value = val;
