@@ -1,4 +1,4 @@
-import { Helpers, ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, Serializer, SurveyModel } from "survey-core";
+import { Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
@@ -225,6 +225,22 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if (options.question.name === this.nameCategories) {
       this.onDetailPanelShowingChanged(options.row);
+    }
+    if (options.question.name === "items") {
+      options.row.hideDetailPanel();
+
+      const popupModel = settings.showDialog(<IDialogOptions>{
+        componentName: "panel",
+        data: { survey: model, element: options.detailPanel }, //TODO fix in library
+        onApply: () => {
+          return true;
+        },
+        onCancel: () => {
+          return true;
+        },
+        title: "Detail",
+        displayMode: "popup"
+      }, model.rootElement);
     }
   }
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
