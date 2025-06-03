@@ -82,6 +82,13 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                       "name": "title"
                     }
                   ],
+                  detailPanelMode: "underRow",
+                  detailElements: [
+                    { type: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
+                    { type: "text", name: "iconName", placeholder: "Icon name" },
+                    { type: "text", name: "tooltip", title: "Tooltip" },
+                    { type: "comment", name: "json", title: "JSON object to apply when users select this toolbox item", rows: 15 }
+                  ]
                 }
               ]
             },
@@ -132,8 +139,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               ],
               detailPanelMode: "underRow",
               detailElements: [
-                { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
-                { cellType: "text", name: "iconName", placeholder: "Icon name" },
+                { type: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
+                { type: "text", name: "iconName", placeholder: "Icon name" },
                 { type: "text", name: "tooltip", title: "Tooltip" },
                 { type: "comment", name: "json", title: "JSON object to apply when users select this toolbox item", rows: 15 }
               ]
@@ -429,7 +436,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return res;
   }
   private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
-    return <ICreatorPresetToolboxItem> { name: item.name, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: JSON.stringify(item.json), category: item.category };
+    return <ICreatorPresetToolboxItem> { name: item.name, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: item.json, category: item.category };
   }
   private getRankingChoices(row: MatrixDropdownRowModelBase): Array<ICreatorPresetToolboxItem> {
     const res: ICreatorPresetToolboxItem[] = [];
