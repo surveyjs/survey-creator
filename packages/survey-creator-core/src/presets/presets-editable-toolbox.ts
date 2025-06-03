@@ -421,7 +421,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   }
   private setupDefaultItems(creator: SurveyCreatorModel): void {
     const items = {};
-    creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
+    creator.toolbox.getDefaultItems([], true, true, true).forEach(item => {
       items[item.name] = this.createToolboxItemRow(item);
     });
     this.defaultItems = items;
