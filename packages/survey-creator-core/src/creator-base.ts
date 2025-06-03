@@ -344,7 +344,16 @@ export class SurveyCreatorModel extends Base
   @property() showOptions: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
-  @property({ defaultValue: "" }) currentAddQuestionType: string;
+  @property({ defaultValue: "" }) _currentAddQuestionType: string;
+  rememberLastAddedQuestionType: boolean = true;
+  get currentAddQuestionType(): string {
+    return this._currentAddQuestionType;
+  }
+  set currentAddQuestionType(val: string) {
+    if (this.rememberLastAddedQuestionType) {
+      this._currentAddQuestionType = val;
+    }
+  }
   /**
    * Specifies a default device for survey preview in the Preview tab.
    *

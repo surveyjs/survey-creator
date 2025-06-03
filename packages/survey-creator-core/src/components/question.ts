@@ -44,7 +44,15 @@ export interface QuestionBannerParams {
 }
 
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
-  @property({ defaultValue: "" }) currentAddQuestionType: string;
+  @property({ defaultValue: "" }) _currentAddQuestionType: string;
+  get currentAddQuestionType(): string {
+    return this._currentAddQuestionType;
+  }
+  set currentAddQuestionType(val: string) {
+    if (!this.creator || this.creator.rememberLastAddedQuestionType) {
+      this._currentAddQuestionType = val;
+    }
+  }
 
   placeholderComponent: string;
   placeholderComponentData: any;

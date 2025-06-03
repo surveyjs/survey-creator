@@ -17,7 +17,16 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property() showPlaceholder: boolean;
   public questionTypeSelectorModel: any;
   private dragOrClickHelper: DragOrClickHelper;
-  @property({ defaultValue: "" }) currentAddQuestionType: string;
+  @property({ defaultValue: "" }) _currentAddQuestionType: string;
+  get currentAddQuestionType(): string {
+    return this._currentAddQuestionType;
+  }
+  set currentAddQuestionType(val: string) {
+    if (!this.creator || this.creator.rememberLastAddedQuestionType) {
+      this._currentAddQuestionType = val;
+    }
+  }
+
   @property({ defaultValue: false }) isVisibleInViewPort: boolean;
   @property({ defaultValue: !settings.pageContentLazyRendering }) needRenderContent: boolean;
 
