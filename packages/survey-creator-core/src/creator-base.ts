@@ -4566,7 +4566,11 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
       opt.componentName = getQuestionContentWrapperComponentName(opt.element);
     }
     if (opt.wrapperName === "row") {
-      opt.componentName = "svc-row";
+      if (opt.element.panel.isContentElement) {
+        return undefined;
+      } else {
+        opt.componentName = "svc-row";
+      }
     }
     if (Serializer.isDescendantOf(opt.wrapperName, "itemvalue")) {
       opt.componentName = getItemValueWrapperComponentName(opt.item, opt.element);

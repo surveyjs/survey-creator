@@ -141,6 +141,7 @@
   }
 }
 
+.svc-row .sd-composite .sd-row.sd-row--multiple,
 .sd-panel .svc-row > .sd-row.sd-row--multiple {
   width: calc(100% + #{$base-unit});
   padding-left: 0;

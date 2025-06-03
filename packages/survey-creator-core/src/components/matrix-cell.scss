@@ -12,8 +12,8 @@
   position: relative;
 }
 
-.svc-question__adorner {
-  .sd-table .sd-table__cell--column-title {
+.svc-question__content {
+  & > .sd-question--table .sd-table > .sd-table__cell--column-title {
     padding: 0 calcSize(1);
 
     .svc-matrix-cell {
