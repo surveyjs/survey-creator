@@ -45,6 +45,7 @@ export var turkishStrings = {
     paneldynamic: "Panel (dinamik panel)",
     radiogroup: "Seçim Grubu",
     rating: "Değerlendirme",
+    slider: "Kaydırıcı",
     text: "Tek Girdi",
     boolean: "Mantıksal İfade",
     expression: "İfade (düzenlenemez)",
@@ -443,6 +444,7 @@ export var turkishStrings = {
       prefix: "Para birimi öneki",
       suffix: "Para birimi son eki"
     },
+    isExclusive: "Seçildiğinde diğerlerini temizleme",
     imageHeight: "Resim yüksekliği",
     imageWidth: "Resim genişliği",
     valueName: "Değer adı",
@@ -742,6 +744,18 @@ export var turkishStrings = {
     rateValues: "Özel fiyat değerleri",
     rateCount: "Oran sayısı",
     autoGenerate: "Fiyat değerleri nasıl belirlenir?",
+    slider: {
+      min: "Minimum değer",
+      max: "Maksimum değer",
+      step: "Adım değeri",
+      showLabels: "Ölçek etiketlerini göster",
+      tooltipVisibilityPG: "Araç ipuçlarını göster",
+      allowSwap: "Başparmak geçişine izin ver",
+      labelCount: "Otomatik olarak oluşturulan etiketlerin sayısı",
+      minValueExpression: "Minimum değer ifadesi",
+      maxValueExpression: "Maksimum değer ifadesi",
+      autoGenerate: "Ölçek etiketleri yapılandırması"
+    },
     hideIfChoicesEmpty: "Seçenek içermiyorsa soruyu gizleme",
     minWidth: "Minimum genişlik (CSS tarafından kabul edilen değerlerde)",
     maxWidth: "Maksimum genişlik (CSS tarafından kabul edilen değerlerde)",
@@ -823,6 +837,7 @@ export var turkishStrings = {
       enableIf: "Pasifleştir Eğer",
       requiredIf: "Zorunlu Eğer",
       rateValues: "Oran değerleri",
+      sliderSettings: "Kaydırıcı Ayarları",
       choicesByUrl: "Webten seçenekler",
       matrixChoices: "Varsayılan seçenekler",
       multipleTextItems: "Yazı girdileri",
@@ -1043,6 +1058,10 @@ export var turkishStrings = {
       time: "Saat",
       url: "URL",
       week: "Hafta"
+    },
+    sliderType: {
+      single: "Tek Değer",
+      range: "Aralık"
     },
     autocomplete: {
       name: "Adınız ve Soyadınız",
@@ -1475,6 +1494,7 @@ export var turkishStrings = {
       showInMultipleColumns: "Seçildiğinde, her seçim seçeneği için ayrı bir sütun oluşturur.",
       colCount: "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır."
     },
+    isExclusive: "Bu seçimi özel kılar. Bir kullanıcı tarafından seçildiğinde, sorudaki diğer tüm seçeneklerin seçimi otomatik olarak kaldırılır.",
     caseInsensitive: "Normal ifadedeki büyük ve küçük harflerin eşdeğer olarak kabul edilmesi gerekip gerekmediğini seçin.",
     widthMode: "Şunlar arasından seçim yapın: \"Statik\" - sabit bir genişlik ayarlar; \"Duyarlı\" - anketin ekranın tüm genişliğini kaplamasını sağlar; \"Otomatik\" - kullanılan soru türlerine bağlı olarak ikisinden birini uygular.",
     cookieName: "Çerezler, kullanıcıların aynı anketi iki kez doldurmasını engeller.",
@@ -3058,3 +3078,19 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // ts.prevPage: "Previous" => "Önceki"
 // ts.nextPage: "Next" => "Önümüzdeki"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "'Anket düzeni' 'Sayfa başına tek giriş alanı' olarak ayarlandığında kullanılır. Bu düzende matris, her giriş alanı ayrı bir sayfada görünecek şekilde bölünür. Otomatik numaralandırma eklemek için {rowIndex} yer tutucusunu, satırın başlığına veya kimliğine başvurmak için {rowTitle} veya {rowName} ve belirli bir matris sütununun değerini eklemek için {row.columnid} yer tutucusunu kullanın."
+// qt.slider: "Slider" => "Kaydırıcı"
+// pe.isExclusive: "Clear others when selected" => "Seçildiğinde diğerlerini temizleme"
+// slider.min: "Min value" => "Minimum değer"
+// slider.max: "Max value" => "Maksimum değer"
+// slider.step: "Step value" => "Adım değeri"
+// slider.showLabels: "Show scale labels" => "Ölçek etiketlerini göster"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Araç ipuçlarını göster"
+// slider.allowSwap: "Allow thumb crossing" => "Başparmak geçişine izin ver"
+// slider.labelCount: "Number of auto-generated labels" => "Otomatik olarak oluşturulan etiketlerin sayısı"
+// slider.minValueExpression: "Min value expression" => "Minimum değer ifadesi"
+// slider.maxValueExpression: "Max value expression" => "Maksimum değer ifadesi"
+// slider.autoGenerate: "Scale labels configuration" => "Ölçek etiketleri yapılandırması"
+// tabs.sliderSettings: "Slider Settings" => "Kaydırıcı Ayarları"
+// sliderType.single: "Single-Value" => "Tek Değer"
+// sliderType.range: "Range" => "Aralık"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Bu seçimi özel kılar. Bir kullanıcı tarafından seçildiğinde, sorudaki diğer tüm seçeneklerin seçimi otomatik olarak kaldırılır."

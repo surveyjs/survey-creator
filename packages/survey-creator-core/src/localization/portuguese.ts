@@ -45,6 +45,7 @@ var portugueseTranslation = {
     paneldynamic: "Painel (painéis dinâmicos)",
     radiogroup: "Grupo de rádio",
     rating: "Avaliação",
+    slider: "Controle deslizante",
     text: "Texto único",
     boolean: "Boleano",
     expression: "Expressão",
@@ -443,6 +444,7 @@ var portugueseTranslation = {
       prefix: "Prefixo da moeda",
       suffix: "Sufixo de moeda"
     },
+    isExclusive: "Limpar outros quando selecionado",
     imageHeight: "Altura da imagem",
     imageWidth: "Largura da imagem",
     valueName: "Nome do valor",
@@ -742,6 +744,18 @@ var portugueseTranslation = {
     rateValues: "Valores de taxa personalizados",
     rateCount: "Contagem de taxas",
     autoGenerate: "Como especificar valores de taxa?",
+    slider: {
+      min: "Valor mínimo",
+      max: "Valor máximo",
+      step: "Valor da etapa",
+      showLabels: "Mostrar rótulos de escala",
+      tooltipVisibilityPG: "Mostrar dicas de ferramentas",
+      allowSwap: "Permitir o cruzamento do polegar",
+      labelCount: "Número de rótulos gerados automaticamente",
+      minValueExpression: "Expressão de valor mínimo",
+      maxValueExpression: "Expressão de valor máximo",
+      autoGenerate: "Configuração de rótulos de escala"
+    },
     hideIfChoicesEmpty: "Oculte a pergunta se ela não contiver opções",
     minWidth: "Largura mínima (em valores aceitos pelo CSS)",
     maxWidth: "Largura máxima (em valores aceitos pelo CSS)",
@@ -823,6 +837,7 @@ var portugueseTranslation = {
       enableIf: "Habilitar se",
       requiredIf: "Obrigatório se",
       rateValues: "Valores de qualificação",
+      sliderSettings: "Configurações do controle deslizante",
       choicesByUrl: "Opções com origem na Web",
       matrixChoices: "Opções padrão",
       multipleTextItems: "Entradas de texto",
@@ -1043,6 +1058,10 @@ var portugueseTranslation = {
       time: "Hora",
       url: "URL",
       week: "Semana"
+    },
+    sliderType: {
+      single: "Valor único",
+      range: "Gama"
     },
     autocomplete: {
       name: "Nome completo",
@@ -1475,6 +1494,7 @@ var portugueseTranslation = {
       showInMultipleColumns: "Quando selecionada, cria uma coluna individual para cada opção de escolha.",
       colCount: "Organiza as opções de escolha em um layout de várias colunas. Quando definido como 0, as opções são exibidas em uma única linha. Quando definido como -1, o valor real é herdado da propriedade \"Contagem de colunas aninhadas\" da matriz pai."
     },
+    isExclusive: "Torna esta escolha exclusiva. Quando selecionado por um usuário, ele desmarcará automaticamente todas as outras opções na pergunta.",
     caseInsensitive: "Selecione se letras maiúsculas e minúsculas na expressão regular devem ser tratadas como equivalentes.",
     widthMode: "Escolha entre: \"Estático\" - define uma largura fixa; \"Responsivo\" - faz com que a pesquisa ocupe toda a largura da tela; \"Auto\" - aplica-se a qualquer um dos dois, dependendo dos tipos de pergunta usados.",
     cookieName: "Os cookies impedem que os usuários preencham a mesma pesquisa duas vezes.",
@@ -2731,3 +2751,19 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // ts.prevPage: "Previous" => "Anterior"
 // ts.nextPage: "Next" => "Próximo"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Usado quando o 'Layout da pesquisa' está definido como 'Campo de entrada único por página'. Nesse layout, a matriz é dividida para que cada campo de entrada apareça em uma página separada. Use o espaço reservado {rowIndex} para inserir numeração automática, {rowTitle} ou {rowName} para fazer referência ao título ou ID da linha e {row.columnid} para incluir o valor de uma coluna de matriz específica."
+// qt.slider: "Slider" => "Controle deslizante"
+// pe.isExclusive: "Clear others when selected" => "Limpar outros quando selecionado"
+// slider.min: "Min value" => "Valor mínimo"
+// slider.max: "Max value" => "Valor máximo"
+// slider.step: "Step value" => "Valor da etapa"
+// slider.showLabels: "Show scale labels" => "Mostrar rótulos de escala"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Mostrar dicas de ferramentas"
+// slider.allowSwap: "Allow thumb crossing" => "Permitir o cruzamento do polegar"
+// slider.labelCount: "Number of auto-generated labels" => "Número de rótulos gerados automaticamente"
+// slider.minValueExpression: "Min value expression" => "Expressão de valor mínimo"
+// slider.maxValueExpression: "Max value expression" => "Expressão de valor máximo"
+// slider.autoGenerate: "Scale labels configuration" => "Configuração de rótulos de escala"
+// tabs.sliderSettings: "Slider Settings" => "Configurações do controle deslizante"
+// sliderType.single: "Single-Value" => "Valor único"
+// sliderType.range: "Range" => "Gama"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Torna esta escolha exclusiva. Quando selecionado por um usuário, ele desmarcará automaticamente todas as outras opções na pergunta."

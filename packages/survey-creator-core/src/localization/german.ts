@@ -45,6 +45,7 @@ var germanTranslation = {
     paneldynamic: "Panel (dynamisch)",
     radiogroup: "Option",
     rating: "Bewertung",
+    slider: "Schieberegler",
     text: "Text",
     boolean: "Wahrheitswert",
     expression: "Ausdruck (schreibgeschützt)",
@@ -443,6 +444,7 @@ var germanTranslation = {
       prefix: "Währungs-Präfix",
       suffix: "Währungs-Suffix"
     },
+    isExclusive: "Andere löschen, wenn ausgewählt",
     imageHeight: "Bildhöhe",
     imageWidth: "Bildbreite",
     valueName: "Name der Antwort",
@@ -742,6 +744,18 @@ var germanTranslation = {
     rateValues: "Benutzerdefinierte Bewertungswerte",
     rateCount: "Anzahl der Bewertung",
     autoGenerate: "Bewertung konfigurieren",
+    slider: {
+      min: "Min. Wert",
+      max: "Maximaler Wert",
+      step: "Schritt-Wert",
+      showLabels: "Anzeigen von Skalenbeschriftungen",
+      tooltipVisibilityPG: "Tooltips anzeigen",
+      allowSwap: "Daumen kreuzen erlauben",
+      labelCount: "Anzahl der automatisch generierten Beschriftungen",
+      minValueExpression: "Min-Wert-Ausdruck",
+      maxValueExpression: "Ausdruck des Max. Werts",
+      autoGenerate: "Konfiguration von Skalenbeschriftungen"
+    },
     hideIfChoicesEmpty: "Frage ausblenden, wenn sie keine Auswahlmöglichkeiten enthält",
     minWidth: "Minimale Breite",
     maxWidth: "Maximale Breite",
@@ -823,6 +837,7 @@ var germanTranslation = {
       enableIf: "Aktiviert wenn ...",
       requiredIf: "Erforderlich wenn ...",
       rateValues: "Bewertungsskala",
+      sliderSettings: "Schieberegler-Einstellungen",
       choicesByUrl: "Auswahlmöglichkeiten aus dem Internet",
       matrixChoices: "Standardauswahl",
       multipleTextItems: "Texteingabe",
@@ -1043,6 +1058,10 @@ var germanTranslation = {
       time: "Zeit",
       url: "Web-URL",
       week: "Woche"
+    },
+    sliderType: {
+      single: "Einzelwertig",
+      range: "Bereich"
     },
     autocomplete: {
       name: "Vollständiger Name",
@@ -1475,6 +1494,7 @@ var germanTranslation = {
       showInMultipleColumns: "Wenn diese Option aktiviert ist, wird für jede Auswahloption eine eigene Spalte erstellt.",
       colCount: "Ordnet die Auswahloptionen in einem mehrspaltigen Layout an. Wenn der Wert auf 0 gesetzt ist, werden die Optionen in einer einzigen Zeile angezeigt. Wenn dieser Wert auf -1 festgelegt ist, wird der tatsächliche Wert von der Eigenschaft \"Anzahl der geschachtelten Spalten\" der übergeordneten Matrix geerbt."
     },
+    isExclusive: "Macht diese Wahl exklusiv. Wenn sie von einem Benutzer ausgewählt wird, werden automatisch alle anderen Optionen in der Frage abgewählt.",
     caseInsensitive: "Wählen Sie diese Option aus, wenn Groß- und Kleinbuchstaben im regulären Ausdruck als gleichwertig behandelt werden müssen.",
     widthMode: "Wählen Sie aus: \"Statisch\" - legt eine feste Breite fest; \"Responsive\" - lässt die Umfrage die gesamte Breite des Bildschirms einnehmen; \"Auto\" - wendet je nach verwendetem Fragetyp einen der beiden an.",
     cookieName: "Cookies verhindern, dass Benutzer dieselbe Umfrage zweimal ausfüllen.",
@@ -2775,3 +2795,19 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // ts.prevPage: "Previous" => "Vorhergehend"
 // ts.nextPage: "Next" => "Nächster"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Wird verwendet, wenn das \"Umfragelayout\" auf \"Einzeleingabefeld pro Seite\" eingestellt ist. In diesem Layout wird die Matrix so aufgeteilt, dass jedes Eingabefeld auf einer separaten Seite erscheint. Verwenden Sie den Platzhalter {rowIndex}, um die automatische Nummerierung einzufügen, {rowTitle} oder {rowName}, um auf den Titel oder die ID der Zeile zu verweisen, und {row.columnid}, um den Wert einer bestimmten Matrixspalte einzuschließen."
+// qt.slider: "Slider" => "Schieberegler"
+// pe.isExclusive: "Clear others when selected" => "Andere löschen, wenn ausgewählt"
+// slider.min: "Min value" => "Min. Wert"
+// slider.max: "Max value" => "Maximaler Wert"
+// slider.step: "Step value" => "Schritt-Wert"
+// slider.showLabels: "Show scale labels" => "Anzeigen von Skalenbeschriftungen"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Tooltips anzeigen"
+// slider.allowSwap: "Allow thumb crossing" => "Daumen kreuzen erlauben"
+// slider.labelCount: "Number of auto-generated labels" => "Anzahl der automatisch generierten Beschriftungen"
+// slider.minValueExpression: "Min value expression" => "Min-Wert-Ausdruck"
+// slider.maxValueExpression: "Max value expression" => "Ausdruck des Max. Werts"
+// slider.autoGenerate: "Scale labels configuration" => "Konfiguration von Skalenbeschriftungen"
+// tabs.sliderSettings: "Slider Settings" => "Schieberegler-Einstellungen"
+// sliderType.single: "Single-Value" => "Einzelwertig"
+// sliderType.range: "Range" => "Bereich"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Macht diese Wahl exklusiv. Wenn sie von einem Benutzer ausgewählt wird, werden automatisch alle anderen Optionen in der Frage abgewählt."

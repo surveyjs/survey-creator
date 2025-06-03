@@ -156,7 +156,9 @@ export class ObjectSelectorModel extends Base {
         onSelectionChanged: (item: IAction) => { onClose(item.data); },
         allowSelection: true,
         cssClasses: listComponentCss,
-        selectedItem: selectedItem
+        selectedItem: selectedItem,
+        listRole: "menu",
+        listItemRole: "menuitemradio"
       });
       this.listModelValue.setOnFilterStringChangedCallback((text: string) => { this.selector.filterByText(text); });
     } else {

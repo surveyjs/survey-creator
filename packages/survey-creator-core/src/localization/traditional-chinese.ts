@@ -45,6 +45,7 @@ var traditionalChineseTranslation = {
     paneldynamic: "面板(動態)",
     radiogroup: "單項選擇",
     rating: "評分",
+    slider: "滑塊",
     text: "文本框",
     boolean: "布林選項",
     expression: "表達式",
@@ -443,6 +444,7 @@ var traditionalChineseTranslation = {
       prefix: "貨幣前綴",
       suffix: "貨幣後綴"
     },
+    isExclusive: "選中時清除其他",
     imageHeight: "圖片高度",
     imageWidth: "圖片寬度",
     valueName: "Value name",
@@ -742,6 +744,18 @@ var traditionalChineseTranslation = {
     rateValues: "自定義費率值",
     rateCount: "速率計數",
     autoGenerate: "如何指定速率值？",
+    slider: {
+      min: "最小值",
+      max: "最大值",
+      step: "步長值",
+      showLabels: "顯示刻度標籤",
+      tooltipVisibilityPG: "顯示工具提示",
+      allowSwap: "允許 Thumb Crossing",
+      labelCount: "自動生成的標籤數量",
+      minValueExpression: "最小值表達式",
+      maxValueExpression: "最大值表達式",
+      autoGenerate: "刻度標籤配置"
+    },
     hideIfChoicesEmpty: "如果問題不包含任何選項，則隱藏問題",
     minWidth: "最小寬度（以 CSS 接受的值為單位）",
     maxWidth: "最大寬度（以 CSS 接受的值為單位）",
@@ -823,6 +837,7 @@ var traditionalChineseTranslation = {
       enableIf: "Enable If",
       requiredIf: "如果",
       rateValues: "設置評分值",
+      sliderSettings: "滑塊設置",
       choicesByUrl: "通過 URL 導入選項",
       matrixChoices: "默認選項",
       multipleTextItems: "文本輸入",
@@ -1043,6 +1058,10 @@ var traditionalChineseTranslation = {
       time: "時間",
       url: "網址",
       week: "周"
+    },
+    sliderType: {
+      single: "單值",
+      range: "範圍"
     },
     autocomplete: {
       name: "全名",
@@ -1475,6 +1494,7 @@ var traditionalChineseTranslation = {
       showInMultipleColumns: "選取後，為每個選項創建一個單獨的列。",
       colCount: "在多列佈局中排列選項。設置為 0 時，選項將以單行顯示。當設置為 -1 時，實際值繼承自父矩陣的 “Nested column count” 屬性。"
     },
+    isExclusive: "將此選擇設為獨佔。當用戶選擇時，它將自動取消選擇問題中的所有其他選項。",
     caseInsensitive: "如果必須將正則表示式中的大寫字母和小寫字母視為等效字母，請選擇此項。",
     widthMode: "從以下選項中選擇： 「靜態」 - 設置固定寬度;“回應式” - 使調查佔據螢幕的整個寬度;“自動” - 根據所使用的問題類型應用兩者中的任何一個。",
     cookieName: "Cookie 可防止使用者兩次填寫同一調查問卷。",
@@ -3333,3 +3353,19 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // ts.prevPage: "Previous" => "以前"
 // ts.nextPage: "Next" => "下一個"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "當「調查佈局」設置為「每頁單個輸入欄位」時使用。在此佈局中，矩陣被拆分，以便每個輸入欄位都顯示在單獨的頁面上。使用 {rowIndex} 占位符插入自動編號，使用 {rowTitle} 或 {rowName} 引用行的標題或 ID，使用 {row.columnid} 包含特定矩陣列的值。"
+// qt.slider: "Slider" => "滑塊"
+// pe.isExclusive: "Clear others when selected" => "選中時清除其他"
+// slider.min: "Min value" => "最小值"
+// slider.max: "Max value" => "最大值"
+// slider.step: "Step value" => "步長值"
+// slider.showLabels: "Show scale labels" => "顯示刻度標籤"
+// slider.tooltipVisibilityPG: "Show tooltips" => "顯示工具提示"
+// slider.allowSwap: "Allow thumb crossing" => "允許 Thumb Crossing"
+// slider.labelCount: "Number of auto-generated labels" => "自動生成的標籤數量"
+// slider.minValueExpression: "Min value expression" => "最小值表達式"
+// slider.maxValueExpression: "Max value expression" => "最大值表達式"
+// slider.autoGenerate: "Scale labels configuration" => "刻度標籤配置"
+// tabs.sliderSettings: "Slider Settings" => "滑塊設置"
+// sliderType.single: "Single-Value" => "單值"
+// sliderType.range: "Range" => "範圍"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "將此選擇設為獨佔。當用戶選擇時，它將自動取消選擇問題中的所有其他選項。"

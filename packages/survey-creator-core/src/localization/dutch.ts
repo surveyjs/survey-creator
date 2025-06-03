@@ -45,6 +45,7 @@ export var nlStrings = {
     paneldynamic: "Paneel (dynamische panelen)",
     radiogroup: "Meerkeuzevraag",
     rating: "Beoordeling",
+    slider: "Schuifregelaar",
     text: "Tekstvak",
     boolean: "Yes/No (Boolean)",
     expression: "Berekening",
@@ -443,6 +444,7 @@ export var nlStrings = {
       prefix: "Valuta voorvoegsel",
       suffix: "Valuta achtervoegsel"
     },
+    isExclusive: "Anderen wissen wanneer geselecteerd",
     imageHeight: "Afbeelding hoogte",
     imageWidth: "Afbeelding breedte",
     valueName: "Waardenaam",
@@ -742,6 +744,18 @@ export var nlStrings = {
     rateValues: "Aangepaste tariefwaarden",
     rateCount: "Aantal tarieven",
     autoGenerate: "Hoe geef ik tariefwaarden op?",
+    slider: {
+      min: "Minimale waarde",
+      max: "Maximale waarde",
+      step: "Stap waarde",
+      showLabels: "Schaallabels weergeven",
+      tooltipVisibilityPG: "Toon tooltips",
+      allowSwap: "Duimkruising toestaan",
+      labelCount: "Aantal automatisch gegenereerde labels",
+      minValueExpression: "Minimale waarde-expressie",
+      maxValueExpression: "Maximale waarde expressie",
+      autoGenerate: "Configuratie van schaallabels"
+    },
     hideIfChoicesEmpty: "Verberg de vraag als deze geen keuzes bevat",
     minWidth: "Minimale breedte (in css-geaccepteerde waarden)",
     maxWidth: "Maximale breedte (in css-geaccepteerde waarden)",
@@ -823,6 +837,7 @@ export var nlStrings = {
       enableIf: "Schakel If in",
       requiredIf: "Vereist als",
       rateValues: "Beoordeel waarden",
+      sliderSettings: "Instellingen voor schuifregelaars",
       choicesByUrl: "Keuzes van internet",
       matrixChoices: "Standaardkeuzes",
       multipleTextItems: "Tekstinvoer",
@@ -1043,6 +1058,10 @@ export var nlStrings = {
       time: "Tijd",
       url: "Url",
       week: "Week"
+    },
+    sliderType: {
+      single: "Enkele waarde",
+      range: "Bereik"
     },
     autocomplete: {
       name: "Voor- en achternaam",
@@ -1475,6 +1494,7 @@ export var nlStrings = {
       showInMultipleColumns: "Als deze optie is geselecteerd, wordt er een afzonderlijke kolom gemaakt voor elke keuzeoptie.",
       colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Als deze optie op 0 staat, worden ze op één regel weergegeven. Wanneer deze is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap \"Aantal geneste kolommen\" van de bovenliggende matrix."
     },
+    isExclusive: "Maakt deze keuze exclusief. Wanneer een gebruiker deze selecteert, worden automatisch alle andere opties in de vraag gedeselecteerd.",
     caseInsensitive: "Selecteer of hoofdletters en kleine letters in de reguliere expressie als gelijkwaardig moeten worden behandeld.",
     widthMode: "Kies uit: \"Statisch\" - stelt een vaste breedte in; \"Responsief\" - zorgt ervoor dat de enquête de volledige breedte van het scherm in beslag neemt; \"Auto\" - past een van de twee toe, afhankelijk van de gebruikte vraagtypen.",
     cookieName: "Cookies voorkomen dat gebruikers dezelfde enquête twee keer invullen.",
@@ -3041,3 +3061,19 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // ts.prevPage: "Previous" => "Vorig"
 // ts.nextPage: "Next" => "Volgend"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Wordt gebruikt wanneer de 'Enquête-indeling' is ingesteld op 'Enkel invoerveld per pagina'. In deze lay-out wordt de matrix gesplitst zodat elk invoerveld op een aparte pagina verschijnt. Gebruik de tijdelijke aanduiding {rowIndex} om automatische nummering in te voegen, {rowTitle} of {rowName} om te verwijzen naar de titel of id van de rij en {row.columnid} om de waarde van een specifieke matrixkolom op te nemen."
+// qt.slider: "Slider" => "Schuifregelaar"
+// pe.isExclusive: "Clear others when selected" => "Anderen wissen wanneer geselecteerd"
+// slider.min: "Min value" => "Minimale waarde"
+// slider.max: "Max value" => "Maximale waarde"
+// slider.step: "Step value" => "Stap waarde"
+// slider.showLabels: "Show scale labels" => "Schaallabels weergeven"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Toon tooltips"
+// slider.allowSwap: "Allow thumb crossing" => "Duimkruising toestaan"
+// slider.labelCount: "Number of auto-generated labels" => "Aantal automatisch gegenereerde labels"
+// slider.minValueExpression: "Min value expression" => "Minimale waarde-expressie"
+// slider.maxValueExpression: "Max value expression" => "Maximale waarde expressie"
+// slider.autoGenerate: "Scale labels configuration" => "Configuratie van schaallabels"
+// tabs.sliderSettings: "Slider Settings" => "Instellingen voor schuifregelaars"
+// sliderType.single: "Single-Value" => "Enkele waarde"
+// sliderType.range: "Range" => "Bereik"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Maakt deze keuze exclusief. Wanneer een gebruiker deze selecteert, worden automatisch alle andere opties in de vraag gedeselecteerd."

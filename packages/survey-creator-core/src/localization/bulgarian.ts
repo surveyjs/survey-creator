@@ -45,6 +45,7 @@ export var bgStrings = {
     paneldynamic: "Динамичен панел",
     radiogroup: "Група радиобутони",
     rating: "Рейтингова скала",
+    slider: "Плъзгач",
     text: "Едноредов вход",
     boolean: "Да/Не (булеви стойности)",
     expression: "Израз (само за четене)",
@@ -443,6 +444,7 @@ export var bgStrings = {
       prefix: "Валутен префикс",
       suffix: "Валутен суфикс"
     },
+    isExclusive: "Изчистване на другите, когато е избрано",
     imageHeight: "Височина на изображението",
     imageWidth: "Широчина на изображението",
     valueName: "Съхранявай отговорите в следното JSON поле.",
@@ -742,6 +744,18 @@ export var bgStrings = {
     rateValues: "Персонализирани стойности на оценката",
     rateCount: "Брой на оценките",
     autoGenerate: "Как се задават стойности на оценката?",
+    slider: {
+      min: "Минимална стойност",
+      max: "Максимална стойност",
+      step: "Стойност на стъпка",
+      showLabels: "Показване на етикети на мащаба",
+      tooltipVisibilityPG: "Показване на подсказки",
+      allowSwap: "Разрешаване на кръстосване на палеца",
+      labelCount: "Брой автоматично генерирани етикети",
+      minValueExpression: "Минимален израз на стойност",
+      maxValueExpression: "Израз на максимална стойност",
+      autoGenerate: "Конфигурация на етикети в мащаба"
+    },
     hideIfChoicesEmpty: "Показване въпроса, ако не съдържа избор",
     minWidth: "Минимална широчина (в CSS-допустими стойности)",
     maxWidth: "Максимална широчина (в CSS-допустими стойности)",
@@ -823,6 +837,7 @@ export var bgStrings = {
       enableIf: "Редактируем",
       requiredIf: "Задължителен",
       rateValues: "Оценяване на стойностите",
+      sliderSettings: "Настройки на плъзгача",
       choicesByUrl: "Избор от услугата RESTful",
       matrixChoices: "Избор по подразбиране",
       multipleTextItems: "Въвеждане на текст",
@@ -1043,6 +1058,10 @@ export var bgStrings = {
       time: "Време",
       url: "URL",
       week: "Седмица"
+    },
+    sliderType: {
+      single: "Единична стойност",
+      range: "Диапазон"
     },
     autocomplete: {
       name: "Пълно име",
@@ -1475,6 +1494,7 @@ export var bgStrings = {
       showInMultipleColumns: "Когато е избрано, създава отделна колона за всяка опция за избор.",
       colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица."
     },
+    isExclusive: "Прави този избор изключителен. Когато бъде избран от потребител, той автоматично ще отмени избора на всички други опции във въпроса.",
     caseInsensitive: "Изберете дали главните и малките букви в регулярния израз трябва да се третират като еквивалентни.",
     widthMode: "Изберете от: \"Статичен\" - задава фиксирана ширина; \"Responsive\" - прави проучването да заема цялата ширина на екрана; \"Auto\" - прилага се всеки от двата в зависимост от използваните типове въпроси.",
     cookieName: "Бисквитките не позволяват на потребителите да попълнят една и съща анкета два пъти.",
@@ -2626,3 +2646,19 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // ts.prevPage: "Previous" => "Предишен"
 // ts.nextPage: "Next" => "Следващ"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Използва се, когато \"Оформление на проучването\" е зададено на \"Едно поле за въвеждане на страница\". В това оформление матрицата е разделена така, че всяко поле за въвеждане да се показва на отделна страница. Използвайте контейнера {rowIndex}, за да вмъкнете автоматично номериране, {rowTitle} или {rowName}, за да препратите към заглавието или ИД на реда, и {row.columnid}, за да включите стойността на конкретна колона на матрицата."
+// qt.slider: "Slider" => "Плъзгач"
+// pe.isExclusive: "Clear others when selected" => "Изчистване на другите, когато е избрано"
+// slider.min: "Min value" => "Минимална стойност"
+// slider.max: "Max value" => "Максимална стойност"
+// slider.step: "Step value" => "Стойност на стъпка"
+// slider.showLabels: "Show scale labels" => "Показване на етикети на мащаба"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Показване на подсказки"
+// slider.allowSwap: "Allow thumb crossing" => "Разрешаване на кръстосване на палеца"
+// slider.labelCount: "Number of auto-generated labels" => "Брой автоматично генерирани етикети"
+// slider.minValueExpression: "Min value expression" => "Минимален израз на стойност"
+// slider.maxValueExpression: "Max value expression" => "Израз на максимална стойност"
+// slider.autoGenerate: "Scale labels configuration" => "Конфигурация на етикети в мащаба"
+// tabs.sliderSettings: "Slider Settings" => "Настройки на плъзгача"
+// sliderType.single: "Single-Value" => "Единична стойност"
+// sliderType.range: "Range" => "Диапазон"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Прави този избор изключителен. Когато бъде избран от потребител, той автоматично ще отмени избора на всички други опции във въпроса."

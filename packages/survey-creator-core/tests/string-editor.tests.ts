@@ -125,20 +125,20 @@ test("Test string editor select questions items readonly", (): any => {
   Serializer.getProperty("dropdown", "choices").readOnly = false;
 
   creator.onGetPropertyReadOnly.add(function (editor, options) {
-    if (options.obj.getType() === "dropdown" && options.propertyName == "choices")
+    if (options.obj?.isDescendantOf("dropdown") && options.propertyName == "choices")
       options.readOnly = true;
   });
   expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
 
   creator.onGetPropertyReadOnly.add(function (editor, options) {
-    if (options.obj.typeName === "itemvalue" && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
+    if (options.obj?.isDescendantOf("itemvalue") && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
       options.readOnly = false;
   });
   expect(checkItemEdit()).toEqual([false, false, false, false, true, true]);
   creator.onGetPropertyReadOnly.clear();
 
   creator.onGetPropertyReadOnly.add(function (editor, options) {
-    if (options.obj.typeName === "itemvalue" && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
+    if (options.obj?.isDescendantOf("itemvalue") && options.parentObj && options.parentObj.name == "q0" && options.parentObj.choices.indexOf(options.obj) == 0)
       options.readOnly = true;
   });
   expect(checkItemEdit()).toEqual([false, true, true, true, true, true]);
