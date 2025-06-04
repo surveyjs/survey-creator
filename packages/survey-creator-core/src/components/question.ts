@@ -20,7 +20,8 @@ import {
   PanelModel,
   classesToSelector,
   QuestionFactory,
-  PopupModel
+  PopupModel,
+  QuestionCompositeModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -117,6 +118,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
     let result: string = new CssClassBuilder()
       .append("svc-question__content")
+      .append("svc-question__content--composite-question", this.surveyElement instanceof QuestionCompositeModel)
       .append("svc-question__content--" + this.surveyElement.getType(), typeof this.surveyElement.getType === "function")
       .append("svc-question__content--selected", !!this.creator.isElementSelected(this.surveyElement))
       .append("svc-question__content--empty", this.isEmptyElement)
