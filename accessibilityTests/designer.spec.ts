@@ -40,7 +40,7 @@ test.describe("designer a11y", () => {
     await page.click(".svc-sidebar__header-content .svc-menu-action__button");
     await checkA11y(page, ".svc-sidebar__header", { axeOptions });
   });
-  test("Check radiogroup and rating", async ({ page }) => {
+  test("Check radiogroup, rating and checkbox", async ({ page }) => {
     await setJSON(page, {
       "pages": [
         {
@@ -51,11 +51,47 @@ test.describe("designer a11y", () => {
               "name": "question1",
               "choices": ["Item 1", "Item 2", "Item 3"]
             },
-            { "type": "rating", "name": "question2" }
+            { "type": "rating", "name": "question2" },
+            {
+              "type": "checkbox", "name": "question3",
+              "choices": ["Item 1", "Item 2", "Item 3"]
+            }
           ]
         }
       ],
     });
     await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
   });
+
+  test("Check dropdown and tagbox", async ({ page }) => {
+    await setJSON(page, {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            { "type": "dropdown", "name": "question1", "choices": ["Item 1", "Item 2", "Item 3"] },
+            { "type": "tagbox", "name": "question2", "choices": ["Item 1", "Item 2", "Item 3"] }
+          ]
+        }
+      ],
+    });
+    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+  });
+
+  test("Check boolean, file, imagepicker and ranking", async ({ page }) => {
+    await setJSON(page, {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            { "type": "boolean", "name": "question1" },
+            { "type": "file", "name": "question2" },
+            { "type": "imagepicker", "name": "question3", "imageFit": "cover" },
+            { "type": "ranking", "name": "question4", "choices": ["Item 1", "Item 2", "Item 3"] }]
+        }
+      ],
+    });
+    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+  });
+
 });
