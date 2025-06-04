@@ -210,7 +210,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const items = (mode === "items") ? model.getValue(this.nameItems) : model.getValue(this.nameCategories).map(c => c.items).flat();
     let differs = false;
     items.forEach(item => {
-      if (this.cleanIfNotDiffers(item, this.defaultItems.find(i => i.name == item.name))) differs = true;
+      if (this.cleanIfNotDiffers(item, this.defaultItems.filter(i => i.name == item.name)[0])) differs = true;
     });
     if (!differs && !Helpers.isTwoValueEquals(items.map(i=>i.name), this.defaultItems.map(i=>i.name))) differs = true;
     return differs ? items : undefined;
@@ -221,20 +221,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       this.onDetailPanelShowingChanged(options.row);
     }
     if (options.question.name === "items") {
-      options.row.hideDetailPanel();
-      const survey = new SurveyModel(options.detailPanel.toJSON());
-      const popupModel = settings.showDialog(<IDialogOptions>{
-        componentName: "survey",
-        data: { survey: survey, model: survey },
-        onApply: () => {
-          return true;
-        },
-        onCancel: () => {
-          return true;
-        },
-        title: "Detail",
-        displayMode: "popup"
-      }, model.rootElement);
+      this.showDetailPanelInPopup(options.row, model.rootElement);
     }
   }
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {

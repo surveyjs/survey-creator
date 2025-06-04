@@ -1,4 +1,4 @@
-import { Helpers, SurveyModel } from "survey-core";
+import { Helpers, IDialogOptions, MatrixDynamicRowModel, settings, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
 
 export interface ICreatorPresetEditorSetup {
@@ -143,7 +143,22 @@ export class CreatorPresetEditableBase {
     return Helpers.getUnbindValue(json);
   }
 
-  protected showDetailPanelInPopup() {
-
+  protected showDetailPanelInPopup(row: MatrixDynamicRowModel, rootElement: HTMLElement) {
+    row.hideDetailPanel();
+    const survey = new SurveyModel(row.detailPanel.toJSON());
+    survey.data = row.value;
+    const popupModel = settings.showDialog(<IDialogOptions>{
+      componentName: "survey",
+      data: { survey: survey, model: survey },
+      onApply: () => {
+        row.value = survey.data;
+        return true;
+      },
+      onCancel: () => {
+        return true;
+      },
+      title: "Detail",
+      displayMode: "popup"
+    }, rootElement);
   }
 }
