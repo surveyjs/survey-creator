@@ -95,9 +95,23 @@ export class SurveyQuestionProperties {
     }
     return true;
   }
-  private getClassDefintion(name: string): ISurveyQuestionEditorDefinition {
+  private getClassDefintion(name: string, includingParents?: boolean): ISurveyQuestionEditorDefinition {
     if (!this.propertyGridDefinition || !this.propertyGridDefinition.classes) return undefined;
-    return this.propertyGridDefinition.classes[name];
+    let res = this.propertyGridDefinition.classes[name];
+    while(!res && includingParents && name) {
+      const names = name.split("@");
+      const hasBrackets = names[0].indexOf("[]") > 0;
+      const cl = Serializer.findClass(names[0].replace("[]", ""));
+      name = cl?.parentName;
+      if (name && names.length) {
+        if (hasBrackets) {
+          name += "[]";
+        }
+        name += "@" + names[1];
+      }
+      res = this.propertyGridDefinition.classes[name];
+    }
+    return res;
   }
   private fillPropertiesHash() {
     this.propertiesHash = {};
@@ -231,7 +245,7 @@ export class SurveyQuestionProperties {
     return true;
   }
   private setTabProperties(defProperty: any): void {
-    let tab = this.getTabOrCreate(defProperty.name);
+    let tab = this.getTabOrCreate(defProperty.name, defProperty.iconName);
     if (defProperty.index > 0) {
       tab.index = defProperty.index;
     }
@@ -290,13 +304,13 @@ export class SurveyQuestionProperties {
     }
     return null;
   }
-  private getTabOrCreate(tabName: string): SurveyQuestionEditorTabDefinition {
+  private getTabOrCreate(tabName: string, iconName?: string): SurveyQuestionEditorTabDefinition {
     for (var i = 0; i < this.tabs.length; i++) {
       if (this.tabs[i].name == tabName) return this.tabs[i];
     }
     var res = new SurveyQuestionEditorTabDefinition();
     res.name = tabName;
-    res.iconName = pgTabIcons[tabName] || pgTabIcons["undefined"];
+    res.iconName = iconName || pgTabIcons[tabName] || pgTabIcons["undefined"];
     if (tabName == settings.propertyGrid.generalTabName) {
       res.index = -1;
     }
@@ -318,7 +332,7 @@ export class SurveyQuestionProperties {
   ): Array<ISurveyQuestionEditorDefinition> {
     var result = [];
     var usedProperties = {};
-    if (className.indexOf("@") > -1 && this.getClassDefintion(className)) {
+    if (className.indexOf("@") > -1 && this.getClassDefintion(className, true)) {
       const prefix = className.substring(0, className.indexOf("@") + 1);
       const clName = className.substring(prefix.length);
       const classes = [];

@@ -1,5 +1,5 @@
 import { CreatorTester } from "./creator-tester";
-import { CreatorPreset, ICreatorPresetData } from "../src/presets/presets";
+import { CreatorPreset, ICreatorPresetData } from "../src/presets-creator/presets";
 import { editorLocalization } from "../src/editorLocalization";
 import { surveyLocalization } from "survey-core";
 export * from "../src/localization/german";
@@ -222,6 +222,43 @@ test("set property grid defintion: just one tab for page", () => {
   expect(pages).toHaveLength(1);
   expect(pages[0].name).toBe("general");
   expect(pages[0].elements).toHaveLength(3);
+});
+test("set property grid defintion & icons", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.selectQuestionByName("q1");
+  const preset = new CreatorPreset({
+    propertyGrid: {
+      definition: {
+        autoGenerateProperties: false,
+        classes: {
+          question: {
+            properties: [
+              "name",
+              "title",
+              "indent",
+              { name: "visibleIf", tab: "logic" },
+              { name: "enableIf", tab: "logic" },
+            ],
+            tabs: [
+              { name: "general", iconName: "general!" },
+              { name: "logic", index: 15, iconName: "logic!" }
+            ]
+          },
+        }
+      }
+    }
+  });
+  preset.apply(creator);
+  const survey = creator.propertyGrid;
+  const pages = survey.pages;
+  expect(pages).toHaveLength(2);
+  expect(pages[0].name).toBe("general");
+  expect(pages[0]["iconName"]).toEqual("general!");
+  expect(pages[1].name).toBe("logic");
+  expect(pages[1]["iconName"]).toEqual("logic!");
+  expect(pages[0].elements).toHaveLength(3);
+  expect(pages[1].elements).toHaveLength(2);
 });
 test("apply localization for tabs", () => {
   expect(editorLocalization.presetStrings).toBeFalsy();

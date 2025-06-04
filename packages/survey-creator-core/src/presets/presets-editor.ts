@@ -4,9 +4,7 @@ import { ActionContainer, Base, ComputedUpdater, LocalizableString, SurveyModel,
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
-import { CreatorEditablePresetPropertyGrid, CreatorPresetEditablePropertyGridDefinition } from "./presets-editable-properties";
 import { CreatorPresetEditableLanguages } from "./presets-editable-languages";
-require("./presets-header.scss");
 
 export class NavigationBar extends ActionContainer {
   constructor() {
@@ -308,8 +306,6 @@ preset.apply(creator);</div></pre></code></div>
     if (fullPath === "languages") return new CreatorPresetEditableLanguages(preset);
     if (fullPath === "tabs") return new CreatorPresetEditableTabs(preset);
     if (fullPath === "toolbox") return new CreatorPresetEditableToolboxConfigurator(preset);
-    if (fullPath === "propertyGrid") return new CreatorEditablePresetPropertyGrid(preset);
-    if (fullPath === "propertyGrid_definition") return new CreatorPresetEditablePropertyGridDefinition(preset);
     return undefined;
   }
   private createEditable(preset: CreatorPreset, parent: CreatorPresetEditableBase, fullPath: string): CreatorPresetEditableBase {

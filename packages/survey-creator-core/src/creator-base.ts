@@ -2744,7 +2744,7 @@ export class SurveyCreatorModel extends Base
       if ((el.isQuestion || Serializer.isDescendantOf(el.getType(), "matrixdropdowncolumn")) && name === "name") {
         this.clearNonDefaultLocalesInStrByValue(el.locTitle);
       } else {
-        if (Serializer.isDescendantOf(el.getType(), "itemvalue") && name === "value") {
+        if (el.isDescendantOf("itemvalue") && name === "value") {
           this.clearNonDefaultLocalesInStrByValue(el.locText);
         } else {
           const prop = Serializer.findProperty(el.getType(), name);
@@ -3248,7 +3248,7 @@ export class SurveyCreatorModel extends Base
 
   private getHtmlElementForScroll(element: any): HTMLElement {
     const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.id : element.id;
-    return DomDocumentHelper.getDocument().getElementById(id);
+    return this.rootElement?.querySelector(`#${id}`);
   }
 
   private getSelectedSurveyElement(): IElement {
@@ -4579,7 +4579,7 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
     if (opt.wrapperName === "row") {
       opt.componentName = "svc-row";
     }
-    if (opt.wrapperName === "itemvalue") {
+    if (Serializer.isDescendantOf(opt.wrapperName, "itemvalue")) {
       opt.componentName = getItemValueWrapperComponentName(opt.item, opt.element);
     }
     opt.componentName = opt.componentName || compName;
@@ -4592,7 +4592,7 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
     if (opt.wrapperName === "row") {
       opt.data = { creator: creator, row: opt.element };
     }
-    if (opt.wrapperName === "itemvalue") {
+    if (Serializer.isDescendantOf(opt.wrapperName, "itemvalue")) {
       opt.data = getItemValueWrapperComponentData(opt.item, opt.element, creator);
     }
     opt.data = opt.data || data;

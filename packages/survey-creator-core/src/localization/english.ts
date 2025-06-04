@@ -47,6 +47,7 @@ export var enStrings = {
     paneldynamic: "Dynamic Panel",
     radiogroup: "Radio Button Group",
     rating: "Rating Scale",
+    slider: "Slider",
     text: "Single-Line Input",
     boolean: "Yes/No (Boolean)",
     expression: "Expression (read-only)",
@@ -445,6 +446,7 @@ export var enStrings = {
       prefix: "Currency prefix",
       suffix: "Currency suffix"
     },
+    isExclusive: "Clear others when selected",
     imageHeight: "Display area height",
     imageWidth: "Display area width",
     valueName: "Join identifier",
@@ -744,6 +746,19 @@ export var enStrings = {
     rateValues: "Custom rating values",
     rateCount: "Rating count",
     autoGenerate: "Rating configuration",
+    slider: {
+      min: "Min value",
+      max: "Max value",
+      step: "Step value",
+      showLabels: "Show scale labels",
+      // segmentCount: "Number of segments",
+      tooltipVisibilityPG: "Show tooltips",
+      allowSwap: "Allow thumb crossing",
+      labelCount: "Number of auto-generated labels",
+      minValueExpression: "Min value expression",
+      maxValueExpression: "Max value expression",
+      autoGenerate: "Scale labels configuration"
+    },
     hideIfChoicesEmpty: "Hide the question if it has no choices",
     minWidth: "Minimum width",
     maxWidth: "Maximum width",
@@ -826,6 +841,7 @@ export var enStrings = {
       enableIf: "Editable If",
       requiredIf: "Required If",
       rateValues: "Rating Values",
+      sliderSettings: "Slider Settings",
       choicesByUrl: "Choices from a Web Service",
       matrixChoices: "Default Choices",
       multipleTextItems: "Text Inputs",
@@ -1047,6 +1063,10 @@ export var enStrings = {
       time: "Time",
       url: "URL",
       week: "Week"
+    },
+    sliderType: {
+      single: "Single-Value",
+      range: "Range"
     },
     autocomplete: {
       "name": "Full Name",
@@ -1482,6 +1502,7 @@ export var enStrings = {
       showInMultipleColumns: "When selected, creates an individual column for each choice option.",
       colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix.",
     },
+    isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question.",
     caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent.",
     widthMode: "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used.",
     cookieName: "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions.",

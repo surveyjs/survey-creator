@@ -209,7 +209,7 @@ export class TabDesignerViewModel extends Base {
     this.surfaceToolbar.setItems(surfaceToolbarItems);
   }
   private forceLazyRendering() {
-    this.creator.survey.pages.forEach(page => activateLazyRenderingChecks(page.id));
+    this.creator.survey.pages.forEach(page => activateLazyRenderingChecks(this.creator.rootElement?.querySelector(`#${page.id}`)));
   }
 
   private scaleSurface(scaleFactor: number): void {

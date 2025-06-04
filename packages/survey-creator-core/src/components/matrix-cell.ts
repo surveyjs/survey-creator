@@ -131,7 +131,7 @@ export class MatrixCellWrapperViewModel extends Base {
       return;
     }
     const contextType = model.context.getType();
-    if (contextType === "itemvalue") {
+    if (Serializer.isDescendantOf(contextType, "itemvalue")) {
       model.creator.selectElement(model.context.locOwner, model.context.ownerPropertyName, false);
     } else {
       model.creator.selectElement(model.context);
@@ -143,7 +143,7 @@ export class MatrixCellWrapperViewModel extends Base {
     return SurveyHelper.isSupportCellEditor(this.question.getType());
   }
   public hover(event: MouseEvent, element: HTMLElement | any) {
-    if (!this.row && this.context && this.context.getPropertyValue && this.context.getType && this.context.getType() !== "itemvalue") {
+    if (!this.row && this.context && this.context.getPropertyValue && this.context.getType && !this.context.isDescendantOf("itemvalue")) {
       toggleHovered(event, element);
     }
   }

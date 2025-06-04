@@ -362,19 +362,19 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
 export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox {
-  public static MINELEMENTCOUNT: number = 10;
+  public static MINELEMENTCOUNT = 10;
   static defaultIconName = "icon-default";
   static defaultItemComponent = "svc-toolbox-item";
   static defaultItemGroupComponent = "svc-toolbox-item-group";
   static defaultCategories = {
-    choice: ["radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],
+    choice: ["radiogroup", "rating", "slider", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],
     text: ["text", "comment", "multipletext"],
     containers: ["panel", "paneldynamic"],
     matrix: ["matrix", "matrixdropdown", "matrixdynamic"],
     misc: ["html", "expression", "image", "signaturepad"]
   };
   private _orderedQuestions = [
-    "radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking",
+    "radiogroup", "rating", "slider", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking",
     "text", "comment", "multipletext",
     "panel", "paneldynamic",
     "matrix", "matrixdropdown", "matrixdynamic",
@@ -609,13 +609,13 @@ export class QuestionToolbox
 
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
-    this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
+    this.dragOrClickHelper = new DragOrClickHelper<IQuestionToolboxItem>((pointerDownEvent, _targets, itemModel) => {
       const json = this.creator.getJSONForNewElement(itemModel.json);
       this.dotsItem.popupModel.hide();
       this.creator?.onDragDropItemStart();
       this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel);
     });
-    this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
+    this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: IQuestionToolboxItem) => {
       if (!this.creator.readOnly) {
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
       }

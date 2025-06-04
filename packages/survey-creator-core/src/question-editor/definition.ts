@@ -11,6 +11,7 @@ export interface IPropertyTabInfo {
   title?: string;
   visible?: boolean;
   parent?: string;
+  iconName?: string;
 }
 
 export interface ISurveyQuestionEditorDefinition {
@@ -40,14 +41,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "showCommentArea",
       "commentText",
       "commentPlaceholder",
-      { name: "visibleIf", tab: "logic" },
-      { name: "enableIf", tab: "logic" },
-      { name: "requiredIf", tab: "logic" },
-      { name: "bindings", tab: "logic" },
-      { name: "defaultValueExpression", tab: "logic" },
-      { name: "resetValueIf", tab: "logic" },
-      { name: "setValueIf", tab: "logic" },
-      { name: "setValueExpression", tab: "logic" },
+      { name: "visibleIf", tab: "logic", index: 100 },
+      { name: "enableIf", tab: "logic", index: 200 },
+      { name: "requiredIf", tab: "logic", index: 300 },
+      { name: "bindings", tab: "logic", index: 400 },
+      { name: "defaultValueExpression", tab: "logic", index: 500 },
+      { name: "resetValueIf", tab: "logic", index: 600 },
+      { name: "setValueIf", tab: "logic", index: 700 },
+      { name: "setValueExpression", tab: "logic", index: 800 },
       { name: "page", tab: "layout" },
       { name: "startWithNewLine", tab: "layout" },
       { name: "showNumber", tab: "layout" },
@@ -152,8 +153,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showColumnHeader", tab: "layout" },
       { name: "verticalAlign", tab: "layout" },
       { name: "alternateRows", tab: "layout" },
-      { name: "columnsVisibleIf", tab: "logic" },
-      { name: "rowsVisibleIf", tab: "logic" },
+      { name: "columnsVisibleIf", tab: "logic", index: 1000 },
+      { name: "rowsVisibleIf", tab: "logic", index: 1100 },
       { name: "columnLayout", tab: "layout" },
       { name: "transposeData", tab: "layout" },
       { name: "horizontalScroll", tab: "layout" },
@@ -209,8 +210,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "alternateRows", tab: "layout" },
       { name: "rowOrder", tab: "rows" },
       { name: "hideIfRowsEmpty", tab: "rows" },
-      { name: "columnsVisibleIf", tab: "logic" },
-      { name: "rowsVisibleIf", tab: "logic" },
+      { name: "columnsVisibleIf", tab: "logic", index: 1000 },
+      { name: "rowsVisibleIf", tab: "logic", index: 1100 },
       { name: "columnMinWidth", tab: "layout" },
       { name: "rowTitleWidth", tab: "layout" }
     ],
@@ -242,6 +243,29 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ],
     tabs: [{ name: "rateValues", index: 10 }]
   },
+  slider: {
+    properties: [
+      { name: "sliderType", tab: "sliderSettings" },
+      { name: "min", tab: "sliderSettings" },
+      { name: "max", tab: "sliderSettings" },
+      { name: "step", tab: "sliderSettings" },
+      // { name: "segmentCount", tab: "sliderSettings" },
+      { name: "minRangeLength", tab: "sliderSettings" },
+      { name: "maxRangeLength", tab: "sliderSettings" },
+      { name: "showLabels", tab: "sliderSettings" },
+      { name: "autoGenerate", tab: "sliderSettings" },
+      { name: "labelCount", tab: "sliderSettings" },
+      { name: "customLabels", tab: "sliderSettings" },
+      { name: "labelFormat", tab: "sliderSettings" },
+      { name: "tooltipVisibilityPG", tab: "sliderSettings" },
+      { name: "tooltipFormat", tab: "sliderSettings" },
+      { name: "allowSwap", tab: "sliderSettings" },
+      { name: "allowClear", tab: "sliderSettings" },
+      { name: "minValueExpression", tab: "logic", index: 410 },
+      { name: "maxValueExpression", tab: "logic", index: 420 },
+    ],
+    tabs: [{ name: "sliderSettings", index: 10 }]
+  },
   selectbase: {
     properties: [
       { name: "choicesFromQuestion", tab: "choices" },
@@ -261,9 +285,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "refuseText", tab: "choices" },
       { name: "showDontKnowItem", tab: "choices" },
       { name: "dontKnowText", tab: "choices" },
-      { name: "hideIfChoicesEmpty", tab: "logic" },
-      { name: "choicesVisibleIf", tab: "logic" },
-      { name: "choicesEnableIf", tab: "logic" },
+      { name: "hideIfChoicesEmpty", tab: "logic", index: 1000 },
+      { name: "choicesVisibleIf", tab: "logic", index: 1100 },
+      { name: "choicesEnableIf", tab: "logic", index: 1200 },
       { name: "otherErrorText", tab: "validation" },
       { name: "separateSpecialChoices", tab: "choices" },
     ],
@@ -345,6 +369,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [{ name: "visibleIf" }, { name: "enableIf" }],
     tabs: [{ name: "general" }]
   },
+  "imageitemvalue[]@choices": {
+    properties: ["value", "text", "visibleIf", "enableIf", "imageLink"]
+  },
   "itemvalue[]@rows": {
     properties: [{ name: "visibleIf" }, { name: "enableIf" }],
     tabs: [{ name: "general" }]
@@ -362,8 +389,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "placeholder",
       "autocomplete",
       "dataList",
-      { name: "minValueExpression", tab: "logic" },
-      { name: "maxValueExpression", tab: "logic" },
+      { name: "minValueExpression", tab: "logic", index: 1000 },
+      { name: "maxValueExpression", tab: "logic", index: 1100 },
       { name: "inputSize", tab: "layout" },
       { name: "inputTextAlignment", tab: "layout" },
       { name: "maxLength", tab: "validation" },
@@ -622,9 +649,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "maxLength", tab: "validation" },
       { name: "requiredErrorText", tab: "validation" },
       { name: "validators", tab: "validation" },
-      { name: "defaultValueExpression", tab: "logic" },
-      { name: "minValueExpression", tab: "logic" },
-      { name: "maxValueExpression", tab: "logic" },
+      { name: "defaultValueExpression", tab: "logic", index: 1000 },
+      { name: "minValueExpression", tab: "logic", index: 1100 },
+      { name: "maxValueExpression", tab: "logic", index: 1200 },
       { name: "maskType", tab: "mask" },
       { name: "maskSettings", tab: "mask" },
     ],

@@ -45,6 +45,7 @@ export var hebrewStrings = {
     paneldynamic: "לוח דינמי",
     radiogroup: "קבוצת כפתורי רדיו",
     rating: "סולם דירוג",
+    slider: "המחוון",
     text: "קלט בשורה אחת",
     boolean: "כן/לא (בוליאני)",
     expression: "ביטוי (קריאה בלבד)",
@@ -443,6 +444,7 @@ export var hebrewStrings = {
       prefix: "קידומת מטבע",
       suffix: "סיומת מטבע"
     },
+    isExclusive: "נקה אחרים כאשר בוחרים באפשרות זו",
     imageHeight: "גובה התמונה",
     imageWidth: "רוחב התמונה",
     valueName: "אחסן תשובות בשדה JSON הבא",
@@ -742,6 +744,18 @@ export var hebrewStrings = {
     rateValues: "ערכי דירוג מותאמים אישית",
     rateCount: "כמות הדירוגים",
     autoGenerate: "איך לציין ערכי דירוג?",
+    slider: {
+      min: "ערך מינימלי",
+      max: "ערך מקסימלי",
+      step: "ערך שלב",
+      showLabels: "הצגת תוויות קנה מידה",
+      tooltipVisibilityPG: "הצגת תיאורי כלים",
+      allowSwap: "אפשר חציית אגודל",
+      labelCount: "מספר התוויות שנוצרו באופן אוטומטי",
+      minValueExpression: "ביטוי ערך מינימלי",
+      maxValueExpression: "ביטוי ערך מקסימלי",
+      autoGenerate: "שינוי קנה מידה של תצורת תוויות"
+    },
     hideIfChoicesEmpty: "הסתר את השאלה אם אין בה בחירות",
     minWidth: "רוחב מינימלי (בערכים שמקובלים ב- CSS)",
     maxWidth: "רוחב מקסימלי (בערכים שמקובלים ב- CSS)",
@@ -823,6 +837,7 @@ export var hebrewStrings = {
       enableIf: "ניתן לערוך אם",
       requiredIf: "חובה אם",
       rateValues: "ערכי דירוג",
+      sliderSettings: "הגדרות מחוון",
       choicesByUrl: "בחירות משירות RESTful",
       matrixChoices: "בחירות דיפולטיות",
       multipleTextItems: "קלטי טקסט",
@@ -1043,6 +1058,10 @@ export var hebrewStrings = {
       time: "שעה",
       url: "כתובת URL",
       week: "שבוע"
+    },
+    sliderType: {
+      single: "ערך יחיד",
+      range: "טווח"
     },
     autocomplete: {
       name: "שם מלא",
@@ -1475,6 +1494,7 @@ export var hebrewStrings = {
       showInMultipleColumns: "כשבוחרים באפשרות זו, יוצר עמודה נפרדת לכל אחת מאפשרויות הבחירה.",
       colCount: "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננת\" של מטריצת האב."
     },
+    isExclusive: "הופך את הבחירה הזו לבלעדית. כאשר הוא נבחר על ידי משתמש, הוא יבטל אוטומטית את הבחירה בכל האפשרויות האחרות בשאלה.",
     caseInsensitive: "בחר אם יש להתייחס לאותיות רישיות וקטנות בביטוי הרגיל כשוות ערך.",
     widthMode: "בחר מתוך: \"סטטי\" - קובע רוחב קבוע; \"מגיב\" - עושה את הסקר לתפוס את מלוא רוחב המסך; \"אוטומטי\" - חל על כל אחד מהשניים בהתאם לסוגי השאלות המשמשים.",
     cookieName: "עוגיות מונעות ממשתמשים למלא את אותו סקר פעמיים.",
@@ -2630,3 +2650,19 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // ts.prevPage: "Previous" => "הקודמת"
 // ts.nextPage: "Next" => "הבא"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "משמש כאשר 'פריסת הסקר' מוגדרת ל'שדה קלט יחיד לכל עמוד'. בפריסה זו, המטריצה מפוצלת כך שכל שדה קלט מופיע בעמוד נפרד. השתמש במציין המיקום {rowIndex} כדי להוסיף מספור אוטומטי, ב- {rowTitle} או ב- {rowName} כדי להפנות לכותרת או למזהה של השורה, וב- {row.columnid} כדי לכלול את הערך של עמודת מטריצה ספציפית."
+// qt.slider: "Slider" => "המחוון"
+// pe.isExclusive: "Clear others when selected" => "נקה אחרים כאשר בוחרים באפשרות זו"
+// slider.min: "Min value" => "ערך מינימלי"
+// slider.max: "Max value" => "ערך מקסימלי"
+// slider.step: "Step value" => "ערך שלב"
+// slider.showLabels: "Show scale labels" => "הצגת תוויות קנה מידה"
+// slider.tooltipVisibilityPG: "Show tooltips" => "הצגת תיאורי כלים"
+// slider.allowSwap: "Allow thumb crossing" => "אפשר חציית אגודל"
+// slider.labelCount: "Number of auto-generated labels" => "מספר התוויות שנוצרו באופן אוטומטי"
+// slider.minValueExpression: "Min value expression" => "ביטוי ערך מינימלי"
+// slider.maxValueExpression: "Max value expression" => "ביטוי ערך מקסימלי"
+// slider.autoGenerate: "Scale labels configuration" => "שינוי קנה מידה של תצורת תוויות"
+// tabs.sliderSettings: "Slider Settings" => "הגדרות מחוון"
+// sliderType.single: "Single-Value" => "ערך יחיד"
+// sliderType.range: "Range" => "טווח"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "הופך את הבחירה הזו לבלעדית. כאשר הוא נבחר על ידי משתמש, הוא יבטל אוטומטית את הבחירה בכל האפשרויות האחרות בשאלה."

@@ -45,6 +45,7 @@ export var msStrings = {
     paneldynamic: "Panel (panel dinamik)",
     radiogroup: "Kumpulan radio",
     rating: "Penarafan",
+    slider: "Penggelongsor",
     text: "Input Tunggal",
     boolean: "Yes/No (Boolean)",
     expression: "Ekspresi (baca sahaja)",
@@ -443,6 +444,7 @@ export var msStrings = {
       prefix: "Awalan mata wang",
       suffix: "Akhiran mata wang"
     },
+    isExclusive: "Kosongkan yang lain apabila dipilih",
     imageHeight: "Tinggi imej",
     imageWidth: "Lebar imej",
     valueName: "Nama nilai",
@@ -742,6 +744,18 @@ export var msStrings = {
     rateValues: "Nilai kadar tersuai",
     rateCount: "Kiraan kadar",
     autoGenerate: "Bagaimana untuk menentukan nilai kadar?",
+    slider: {
+      min: "Nilai minimum",
+      max: "Nilai maksimum",
+      step: "Nilai langkah",
+      showLabels: "Tunjukkan label skala",
+      tooltipVisibilityPG: "Tunjukkan petua alat",
+      allowSwap: "Benarkan lintasan ibu jari",
+      labelCount: "Bilangan label yang dijana secara automatik",
+      minValueExpression: "Ungkapan nilai min",
+      maxValueExpression: "Ungkapan nilai maksimum",
+      autoGenerate: "Konfigurasi label skala"
+    },
     hideIfChoicesEmpty: "Sembunyikan soalan jika ia tidak mengandungi pilihan",
     minWidth: "Lebar minimum (dalam nilai diterima CSS)",
     maxWidth: "Lebar maksimum (dalam nilai diterima CSS)",
@@ -823,6 +837,7 @@ export var msStrings = {
       enableIf: "Dayakan Jika",
       requiredIf: "Diperlukan Jika",
       rateValues: "Nilai Kadar",
+      sliderSettings: "Tetapan Gelangsar",
       choicesByUrl: "Pilihan daripada Web",
       matrixChoices: "Pilihan Lalai",
       multipleTextItems: "Input Teks",
@@ -1043,6 +1058,10 @@ export var msStrings = {
       time: "Masa",
       url: "URL",
       week: "Minggu"
+    },
+    sliderType: {
+      single: "Nilai Tunggal",
+      range: "Pelbagai"
     },
     autocomplete: {
       name: "Nama Penuh",
@@ -1475,6 +1494,7 @@ export var msStrings = {
       showInMultipleColumns: "Apabila dipilih, cipta lajur individu untuk setiap opsyen pilihan.",
       colCount: "Mengatur pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" bagi matriks induk."
     },
+    isExclusive: "Menjadikan pilihan ini eksklusif. Apabila dipilih oleh pengguna, ia akan menyahpilih semua pilihan lain dalam soalan secara automatik.",
     caseInsensitive: "Pilih jika huruf besar dan huruf kecil dalam ungkapan biasa mesti dianggap sebagai setara.",
     widthMode: "Pilih daripada: \"Statik\" - menetapkan lebar tetap; \"Responsif\" - membuat tinjauan menduduki lebar penuh skrin; \"Auto\" - terpakai salah satu daripada kedua-duanya bergantung kepada jenis soalan yang digunakan.",
     cookieName: "Kuki menghalang pengguna daripada mengisi tinjauan yang sama dua kali.",
@@ -3017,3 +3037,19 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // ts.prevPage: "Previous" => "Sebelumnya"
 // ts.nextPage: "Next" => "Seterusnya"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Digunakan apabila 'Susun atur tinjauan' ditetapkan kepada 'Medan input tunggal setiap halaman'. Dalam susun atur ini, matriks dibahagikan supaya setiap medan input muncul pada halaman yang berasingan. Gunakan ruang letak {rowIndex} untuk memasukkan penomboran automatik, {rowTitle} atau {rowName} untuk merujuk tajuk atau ID baris dan {row.columnid} untuk memasukkan nilai lajur matriks tertentu."
+// qt.slider: "Slider" => "Penggelongsor"
+// pe.isExclusive: "Clear others when selected" => "Kosongkan yang lain apabila dipilih"
+// slider.min: "Min value" => "Nilai minimum"
+// slider.max: "Max value" => "Nilai maksimum"
+// slider.step: "Step value" => "Nilai langkah"
+// slider.showLabels: "Show scale labels" => "Tunjukkan label skala"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Tunjukkan petua alat"
+// slider.allowSwap: "Allow thumb crossing" => "Benarkan lintasan ibu jari"
+// slider.labelCount: "Number of auto-generated labels" => "Bilangan label yang dijana secara automatik"
+// slider.minValueExpression: "Min value expression" => "Ungkapan nilai min"
+// slider.maxValueExpression: "Max value expression" => "Ungkapan nilai maksimum"
+// slider.autoGenerate: "Scale labels configuration" => "Konfigurasi label skala"
+// tabs.sliderSettings: "Slider Settings" => "Tetapan Gelangsar"
+// sliderType.single: "Single-Value" => "Nilai Tunggal"
+// sliderType.range: "Range" => "Pelbagai"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Menjadikan pilihan ini eksklusif. Apabila dipilih oleh pengguna, ia akan menyahpilih semua pilihan lain dalam soalan secara automatik."
