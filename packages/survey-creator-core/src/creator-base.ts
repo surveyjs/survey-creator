@@ -3196,16 +3196,16 @@ export class SurveyCreatorModel extends Base
   public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
     if (!selEl) return;
-    const elementPage = this.getPageByElement(selEl);
-    if (!!elementPage) {
-      const pageAdorner = SurveyElementAdornerBase.GetAdorner(elementPage) as PageAdorner;
-      if (!!pageAdorner && !pageAdorner.needRenderContent) {
-        pageAdorner.needRenderContent = true;
-      }
-    }
     clearInterval(this.currentFocusInterval);
     clearTimeout(this.currentFocusTimeout);
     this.currentFocusTimeout = setTimeout(() => {
+      const elementPage = this.getPageByElement(selEl);
+      if (!!elementPage) {
+        const pageAdorner = SurveyElementAdornerBase.GetAdorner(elementPage) as PageAdorner;
+        if (!!pageAdorner && !pageAdorner.needRenderContent) {
+          pageAdorner.needRenderContent = true;
+        }
+      }
       this.currentFocusInterval = setInterval(() => {
         let el = this.getHtmlElementForScroll(selEl);
         if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
