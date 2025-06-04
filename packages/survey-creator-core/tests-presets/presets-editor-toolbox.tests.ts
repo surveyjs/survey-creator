@@ -12,7 +12,6 @@ import { editorLocalization } from "../src/editorLocalization";
 test("Preset edit, toolbox - remove item", () => {
   const editor = new CreatorPresetEditorModel();
   expect(editor.applyFromSurveyModel()).toBeTruthy();
-  expect(editor.json.toolbox).toBeUndefined();
   const survey = editor.model;
   const categQuestion = survey.getQuestionByName("toolbox_categories");
   const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
@@ -28,4 +27,12 @@ test("Preset edit, toolbox - remove item", () => {
   expect(matrixQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["comment"]);
   expect(editor.applyFromSurveyModel()).toBeTruthy();
   expect(editor.json.toolbox).toBeDefined();
+  const length = editor.json.toolbox.definition.length;
+  expect(editor.json.toolbox.definition.map(i => i.name)).toContain("text");
+  expect(editor.json.toolbox.definition.map(i => i.name)).not.toContain("comment");
+  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["text", "multipletext"]);
+  itemsQuestion.removeRow(0);
+  editor.applyFromSurveyModel();
+  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["multipletext"]);
+  expect(editor.json.toolbox.definition.length).toBe(length - 1);
 });

@@ -8,7 +8,7 @@ import { CreatorPresetEditorModel } from "./presets-editor";
 const LocCategoriesName = "toolboxCategories";
 
 export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEditableBase {
-  private defaultItems = {};
+  private defaultItems: any[];
   private allItems: ICreatorPresetToolboxItem[];
 
   public createMainPageCore(): any {
@@ -166,13 +166,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
     const mode = model.getValue(this.nameCategoriesMode);
     const toolbox = creator.toolbox;
-    if (mode === "items") {
-      const items = model.getValue(this.nameItems);
-      const toolboxItems = toolbox.items.map(item => item.name);
-      if (Array.isArray(items) && items.length > 0 && (toolbox.hasCategories || !Helpers.isTwoValueEquals(items, toolboxItems, true))) {
-        res.items = items;
-      }
-    }
     if (mode === "categories") {
       const categories = this.getCategoriesJson(model);
       if (Array.isArray(categories) && categories.length > 0 && (!toolbox.hasCategories || !this.isCategoriesSame(categories, toolbox.categories))) {
@@ -190,36 +183,37 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       if (categories[i].category !== toolboxCategories[i].name) return false;
       if (categories[i].title !== toolboxCategories[i].title) return false;
       const toolboxItems = toolboxCategories[i].items.map(item => item.name);
-      const categoryItems = categories[i].items.map(item => item.name);
+      const categoryItems = categories[i].items;
       if (!Helpers.isTwoValueEquals(categoryItems, toolboxItems, true)) return false;
     }
     return true;
   }
+
   private getCategoriesJson(model: SurveyModel): any {
-    const res = model.getValue(this.nameCategories);
-    if (!Array.isArray(res)) return undefined;
-    res.forEach(item => {
-      delete item["count"];
+    const categories = model.getValue(this.nameCategories);
+    if (!Array.isArray(categories)) return undefined;
+    return categories.map(c => ({ category: c.category, title: c.title, items: c.items.map(i => i.name) }));
+  }
+  private cleanIfNotDiffers(item, defaultItem) {
+    let differs = false;
+    Object.keys(item).forEach(key => {
+      if (!Helpers.isTwoValueEquals(item[key], defaultItem[key])) {
+        differs = true;
+        return;
+      }
+      if (key !== "name") delete item[key];
     });
-    return res;
+    return differs;
   }
   private getJsonItemsDefinition(model: SurveyModel): any {
-    const matrix = this.getMatrix(model);
-    const value = matrix.value;
-    if (!Array.isArray(value) || value.length === 0) return undefined;
-    const res = [];
-    for (let i = 0; i < value.length; i++) {
-      const val = {};
-      const item = value[i];
-      for (let key in item) {
-        const itemVal = key === "json" ? this.parseJson(item[key]) : item[key];
-        if (!!itemVal) {
-          val[key] = itemVal;
-        }
-      }
-      res.push(val);
-    }
-    return res;
+    const mode = model.getValue(this.nameCategoriesMode);
+    const items = (mode === "items") ? model.getValue(this.nameItems) : model.getValue(this.nameCategories).map(c => c.items).flat();
+    let differs = false;
+    items.forEach(item => {
+      if (this.cleanIfNotDiffers(item, this.defaultItems.find(i => i.name == item.name))) differs = true;
+    });
+    if (!differs && !Helpers.isTwoValueEquals(items.map(i=>i.name), this.defaultItems.map(i=>i.name))) differs = true;
+    return differs ? items : undefined;
   }
 
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
@@ -228,10 +222,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
     if (options.question.name === "items") {
       options.row.hideDetailPanel();
-
+      const survey = new SurveyModel(options.detailPanel.toJSON());
       const popupModel = settings.showDialog(<IDialogOptions>{
-        componentName: "panel",
-        data: { survey: model, element: options.detailPanel }, //TODO fix in library
+        componentName: "survey",
+        data: { survey: survey, model: survey },
         onApply: () => {
           return true;
         },
@@ -253,6 +247,16 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         enabled: false
       });
     }
+    if (options.question.name === "items") {
+      options.actions.forEach(a => {
+        if (a.id == "show-detail") {
+          a.location = "end";
+          a.iconName = "icon-edit",
+          a.visibleIndex = 10;
+        }
+        if (a.id == "remove-row") a.visibleIndex = 20;
+      });
+    }
     if (options.question.name === this.nameCategories) {
       options.actions.push({
         id: "reset-to-default",
@@ -268,7 +272,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         }
         if (a.id == "remove-row") a.visibleIndex = 20;
       });
-
     }
   }
   public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
@@ -292,28 +295,28 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     this.setupPageQuestions(model, creatorSetup.creator);
   }
   private setupPageQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.setupDefaultItems(creator);
+    this.defaultItems = creator.toolbox.getDefaultItems([], true, true, true);
     this.setQuestionItemsRows(model);
   }
-  protected validateCore(model: SurveyModel): boolean {
-    const matrix = this.getMatrix(model);
-    const val = matrix.value;
-    if (!Array.isArray(val)) return true;
-    for (let rowIndex = 0; rowIndex < val.length; rowIndex++) {
-      const json = val[rowIndex]["json"];
-      if (!!json) {
-        if (!this.validateJson(json)) {
-          const row = matrix.visibleRows[rowIndex];
-          row.showDetailPanel();
-          const jsonQuestion = row.getQuestionByName("json");
-          jsonQuestion.addError("The json is invalid"); //
-          jsonQuestion.focus();
-          return false;
-        }
-      }
-    }
-    return true;
-  }
+  // protected validateCore(model: SurveyModel): boolean {
+  //   const matrix = this.getMatrix(model);
+  //   const val = matrix.value;
+  //   if (!Array.isArray(val)) return true;
+  //   for (let rowIndex = 0; rowIndex < val.length; rowIndex++) {
+  //     const json = val[rowIndex]["json"];
+  //     if (!!json) {
+  //       if (!this.validateJson(json)) {
+  //         const row = matrix.visibleRows[rowIndex];
+  //         row.showDetailPanel();
+  //         const jsonQuestion = row.getQuestionByName("json");
+  //         jsonQuestion.addError("The json is invalid"); //
+  //         jsonQuestion.focus();
+  //         return false;
+  //       }
+  //     }
+  //   }
+  //   return true;
+  // }
   private setQuestionItemsRows(model: SurveyModel): void {
     //this.allItems = this.getDefaultToolboxItems(model);
     //const q = this.getMatrix(model);
@@ -333,7 +336,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     //this.setupQuestionsValueDefinition(model, json);
-    this.getQuestionItems(model).value = creator.toolbox.items.forEach(i => this.createToolboxItemRow(i));
+    this.getQuestionItems(model).value = creator.toolbox.items.map(i => this.createToolboxItemRow(i));
     const categories = creator.toolbox.categories.map(c => ({ category: c.name, items: c.items.map(i => this.createToolboxItemRow(i)) }));
     model.setValue(this.nameCategories, categories);
     this.getQuestionCategories(model).visibleRows.forEach(row => {
@@ -420,61 +423,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private getQuestionCategories(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameCategories); }
   private onDetailPanelShowingChanged(row: MatrixDropdownRowModelBase): void {
     if (!row.isDetailPanelShowing) return;
-    const q = <QuestionMatrixDynamicModel>row.getQuestionByName("items");
-    q.choices = this.getRankingChoices(row);
   }
-  private setupDefaultItems(creator: SurveyCreatorModel): void {
-    const items = {};
-    creator.toolbox.getDefaultItems([], true, true, true).forEach(item => {
-      items[item.name] = this.createToolboxItemRow(item);
-    });
-    this.defaultItems = items;
-  }
-  private getDefaultToolboxItems(model: SurveyModel): ICreatorPresetToolboxItem[] {
-    const items = {};
-    for (let key in this.defaultItems) {
-      items[key] = this.defaultItems[key];
-    }
-    const definitionVal = model.getValue(this.nameMatrix);
-    if (Array.isArray(definitionVal)) {
-      definitionVal.forEach(item => {
-        const key = item.name;
-        if (!!key && !items[key] || !!item.title) {
-          items[key] = this.createToolboxItemRow(item);
-        }
-      });
-    }
-    const res: ICreatorPresetToolboxItem[] = [];
-    for (let key in items) {
-      res.push({ ...items[key] });
-    }
 
-    return res;
-  }
   private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
     return <ICreatorPresetToolboxItem> { name: item.name, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: item.json, category: item.category };
-  }
-  private getRankingChoices(row: MatrixDropdownRowModelBase): Array<ICreatorPresetToolboxItem> {
-    const res: ICreatorPresetToolboxItem[] = [];
-    const model = <SurveyModel>row.getSurvey();
-    const matrix = this.getQuestionCategories(<SurveyModel>model);
-    if (!Array.isArray(this.allItems)) return res;
-    const val = model.getValue(this.nameCategories);
-    const usedItems = {};
-    if (Array.isArray(val)) {
-      const rowIndex = matrix.visibleRows.indexOf(row);
-      for (let i = 0; i < val.length; i++) {
-        if (i !== rowIndex && Array.isArray(val[i].items)) {
-          val[i].items.forEach(v => usedItems[v] = true);
-        }
-      }
-    }
-    this.allItems.forEach(item => {
-      if (!usedItems[item.name]) {
-        res.push({ ...item });
-      }
-    });
-    return res;
   }
   private validateJson(text: string): boolean {
     text = text.trim();

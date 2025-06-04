@@ -142,4 +142,8 @@ export class CreatorPresetEditableBase {
   protected copyJson(json: any): any {
     return Helpers.getUnbindValue(json);
   }
+
+  protected showDetailPanelInPopup() {
+
+  }
 }

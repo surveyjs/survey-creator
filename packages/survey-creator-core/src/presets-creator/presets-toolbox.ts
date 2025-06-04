@@ -8,7 +8,6 @@ export interface ICreatorPresetToolboxItem {
   json?: any;
   title?: string;
   tooltip?: string;
-  category?: string;
 }
 
 export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
