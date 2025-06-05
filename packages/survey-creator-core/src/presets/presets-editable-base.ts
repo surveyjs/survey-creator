@@ -146,17 +146,24 @@ export class CreatorPresetEditableBase {
   protected showDetailPanelInPopup(row: MatrixDynamicRowModel, rootElement: HTMLElement) {
     row.hideDetailPanel();
     const survey = new SurveyModel(row.detailPanel.toJSON());
+    survey.fitToContainer = false;
+    survey.showNavigationButtons = false;
     survey.data = row.value;
     const popupModel = settings.showDialog(<IDialogOptions>{
       componentName: "survey",
       data: { survey: survey, model: survey },
       onApply: () => {
-        row.value = survey.data;
-        return true;
+        if (survey.validate()) {
+          row.value = survey.data;
+          return true;
+        } else {
+          return false;
+        }
       },
       onCancel: () => {
         return true;
       },
+      cssClass: "svc-property-editor svc-creator-popup",
       title: "Detail",
       displayMode: "popup"
     }, rootElement);

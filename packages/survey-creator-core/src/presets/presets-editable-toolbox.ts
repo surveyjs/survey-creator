@@ -11,6 +11,47 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private defaultItems: any[];
   private allItems: ICreatorPresetToolboxItem[];
 
+  private createItemsMatrixJSON(props: any): any {
+    const defaultJSON = {
+      type: "matrixdynamic",
+      name: "items",
+      titleLocation: "hidden",
+      allowRowReorder: true,
+      cellType: "text",
+      showHeader: false,
+      rowCount: 0,
+      allowAddRows: false,
+      addRowButtonLocation: "top",
+      addRowText: "Add Custom Item",
+      columns: [
+        {
+          "name": "name",
+          visible: false
+        },
+        {
+          "name": "iconName",
+          visible: false
+        },
+        {
+          "name": "title"
+        }
+      ],
+      detailPanelMode: "underRow",
+      detailElements: [
+        {
+          "type": "panel",
+          "name": "detailPanel",
+          "elements": [
+            { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
+            { type: "text", name: "iconName", title: "Icon name" },
+            { type: "text", name: "tooltip", title: "Tooltip" }
+          ]
+        },
+        { type: "presetjson", name: "json", startWithNewLine: false, renderAs: "default-comment", title: "JSON object to apply when users select this toolbox item", rows: 15 }
+      ]
+    };
+    return { ...defaultJSON, ...props };
+  }
   public createMainPageCore(): any {
     const getRankingItemEnableIf = (name: string): string => {
       return "{" + name + ".length} > 1 or {" + name + "} notcontains {item}";
@@ -19,10 +60,45 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       title: "Set Up the Toolbox",
       navigationTitle: "Toolbox",
       elements: [
+
+        {
+          type: "matrixdynamic",
+          name: this.nameCategories,
+          titleLocation: "hidden",
+          visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
+          minRowCount: 1,
+          allowRowReorder: true,
+          addRowButtonLocation: "top",
+          addRowText: "Add Custom Category",
+          showHeader: false,
+          columns: [
+            { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
+            { cellType: "text", name: "title" }
+          ],
+          detailPanelMode: "underRow",
+          detailElements: [
+            this.createItemsMatrixJSON({
+              name: "items"
+            })
+          ]
+        },
+        this.createItemsMatrixJSON({
+          name: this.nameItems,
+          startWithNewLine: false,
+          visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
+        }),
+        this.createItemsMatrixJSON({
+          allowAddRows: true,
+          addRowButtonLocation: "top",
+          addRowText: "Add Custom Item",
+          startWithNewLine: false,
+          name: this.nameMatrix,
+          "descriptionLocation": "underInput",
+          description: "Drag an item from this column to the left one — it will appear visible in the toolbox. You can also move them, using plus and minus buttons near the item."
+        }),
         {
           type: "panel",
-          name: "panel_toolbox_items",
-          description: "Select the toolbox items you want to show, group them into categories, rename them, and change their order if required.",
+          name: "panel_toolbox_controls",
           elements: [
             {
               type: "boolean",
@@ -46,106 +122,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               clearIfInvisible: "onHidden",
               startWithNewLine: false,
               renderAs: "checkbox"
-            },
-            {
-              type: "matrixdynamic",
-              name: this.nameCategories,
-              titleLocation: "hidden",
-              visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
-              minRowCount: 1,
-              allowRowReorder: true,
-              addRowText: "Add new category",
-              showHeader: false,
-              columns: [
-                { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
-                { cellType: "text", name: "title" }
-              ],
-              detailPanelMode: "underRow",
-              detailElements: [
-                {
-                  type: "matrixdynamic",
-                  name: "items",
-                  titleLocation: "hidden",
-                  allowRowReorder: true,
-                  cellType: "text",
-                  showHeader: false,
-                  columns: [
-                    {
-                      "name": "name",
-                      visible: false
-                    },
-                    {
-                      "name": "iconName",
-                      visible: false
-                    },
-                    {
-                      "name": "title"
-                    }
-                  ],
-                  detailPanelMode: "underRow",
-                  detailElements: [
-                    { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
-                    { type: "text", name: "iconName", title: "Icon name" },
-                    { type: "text", name: "tooltip", title: "Tooltip" },
-                    { type: "presetjson", name: "json", renderAs: "default-comment", title: "JSON object to apply when users select this toolbox item", rows: 15 }
-                  ]
-                }
-              ]
-            },
-            {
-              type: "matrixdynamic",
-              name: this.nameItems,
-              visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
-              titleLocation: "hidden",
-              allowRowReorder: true,
-              cellType: "text",
-              showHeader: false,
-              columns: [
-                {
-                  "name": "name",
-                  visible: false
-                },
-                {
-                  "name": "iconName",
-                  visible: false
-                },
-                {
-                  "name": "title"
-                }
-              ],
-            }
-          ]
-        },
-        {
-          type: "panel",
-          name: "panel_toolbox_definition",
-          startWithNewLine: false,
-          description: "Create a new toolbox item or customize one of the predefined toolbox items.",
-          elements: [
-            {
-              type: "matrixdynamic",
-              name: this.nameMatrix,
-              titleLocation: "hidden",
-              rowCount: 0,
-              allowRowReorder: true,
-              addRowText: "Add new toolbox item",
-              showHeader: false,
-              hideColumnsIfEmpty: true,
-              noRowsText: "Click the button below to add a new toolbox item.",
-              columns: [
-                { cellType: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true, visible: false },
-                { cellType: "text", name: "iconName", placeholder: "Icon name", visible: false },
-                { cellType: "text", name: "title", placeholder: "Title" }
-              ],
-              detailPanelMode: "underRow",
-              detailElements: [
-                { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
-                { type: "text", name: "iconName", title: "Icon name" },
-                { type: "text", name: "tooltip", title: "Tooltip" },
-                { type: "comment", name: "presetjson", title: "JSON object to apply when users select this toolbox item", rows: 15 }
-              ]
-            }
-          ]
+            }]
         }
       ]
     };
@@ -220,12 +197,17 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     if (options.question.name === this.nameCategories) {
       this.onDetailPanelShowingChanged(options.row);
     }
-    if (options.question.name === "items") {
+    if (this.isItemsMatrix(options.question)) {
       this.showDetailPanelInPopup(options.row, model.rootElement);
     }
   }
+
+  private isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
+    return question.name === this.nameItems || question.name === this.nameMatrix || question.name === "items";
+  }
+
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
-    if (options.question.name === this.nameItems || options.question.name === "items") {
+    if (this.isItemsMatrix(options.question)) {
       const iconName = options.row.getValue("iconName");
       options.actions.push({
         id: iconName,
@@ -233,8 +215,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         location: "start",
         enabled: false
       });
-    }
-    if (options.question.name === "items") {
+
       options.actions.forEach(a => {
         if (a.id == "show-detail") {
           a.location = "end";
@@ -262,8 +243,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
   }
   public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-    const matrices = ["items", this.nameMatrix];
-    if (matrices.indexOf(options.fromMatrix.name) >= 0 && matrices.indexOf(options.toMatrix.name) >= 0) {
+    if (this.isItemsMatrix(options.fromMatrix) && this.isItemsMatrix(options.toMatrix)) {
       options.allow = true;
     }
   }
