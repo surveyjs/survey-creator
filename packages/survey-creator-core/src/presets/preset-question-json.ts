@@ -1,4 +1,5 @@
 import { QuestionCommentModel, ItemValue, Serializer, ElementFactory, ITextArea, Helpers, RendererFactory, TextAreaModel, CustomError, SurveyError } from "survey-core";
+import { SurveyJSON5 } from "survey-creator-core";
 
 export class QuestionPresetJsonModel extends QuestionCommentModel {
   private jsonAreaModelValue: TextAreaModel;
@@ -12,6 +13,22 @@ export class QuestionPresetJsonModel extends QuestionCommentModel {
   protected getCssType(): string {
     return "comment";
   }
+  private validateJson(text: string): boolean {
+    text = text.trim();
+    if (!text) return true;
+    const json = this.parseJson(text);
+    if (!json || !json.type) return false;
+    const obj = Serializer.createClass(json.type, json);
+    return !!obj;
+  }
+  private parseJson(text: string): any {
+    try {
+      const res = new SurveyJSON5().parse(text);
+      return res;
+    } catch(e) {
+      return undefined;
+    }
+  }
 
   public get textAreaModel(): TextAreaModel {
     if (!this.jsonAreaModelValue) {
@@ -19,10 +36,10 @@ export class QuestionPresetJsonModel extends QuestionCommentModel {
       const _this = this;
       const updateQuestionValue = (newValue: any) => {
         if (!Helpers.isTwoValueEquals(JSON.stringify(_this.value, null, 2), newValue, false, true, false)) {
-          try {
-            _this.value = JSON.parse(newValue);
+          if (this.validateJson(newValue)) {
+            _this.value = this.parseJson(newValue);
             this.jsonError = false;
-          } catch{
+          } else {
             this.jsonError = true;
           }
         } else {

@@ -395,20 +395,4 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
     return <ICreatorPresetToolboxItem> { name: item.name, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: item.json, category: item.category };
   }
-  private validateJson(text: string): boolean {
-    text = text.trim();
-    if (!text) return true;
-    const json = this.parseJson(text);
-    if (!json || !json.type) return false;
-    const obj = Serializer.createClass(json.type, json);
-    return !!obj;
-  }
-  private parseJson(text: string): any {
-    try {
-      const res = new SurveyJSON5().parse(text);
-      return res;
-    } catch(e) {
-      return undefined;
-    }
-  }
 }

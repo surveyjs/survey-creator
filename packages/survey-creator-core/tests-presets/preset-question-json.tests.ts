@@ -37,7 +37,7 @@ describe("QuestionPresetJsonModel", () => {
   });
 
   test("Should handle text area changes with valid JSON", () => {
-    const validJson = { test: "value" };
+    const validJson = { type: "text" };
     question.textAreaModel.onTextAreaChange({ target: { value: JSON.stringify(validJson) } } as any);
     expect(question.value).toEqual(validJson);
   });
@@ -57,9 +57,24 @@ describe("QuestionPresetJsonModel", () => {
     expect(errors[0].text).toBe("JSON error");
   });
 
+  test("Should add error when JSON is valid but incorrect for SurveyJS", () => {
+    const errors: any[] = [];
+    question.textAreaModel.onTextAreaChange({ target: { value: "{\"valid\": \"json\"}" } } as any);
+    question.onCheckForErrors(errors, false, true);
+    expect(errors.length).toBe(1);
+    expect(errors[0].text).toBe("JSON error");
+  });
+
   test("Should not add error when JSON is valid", () => {
     const errors: any[] = [];
-    question.textAreaModel.onTextAreaChange({ target: { value: '{"valid": "json"}' } } as any);
+    question.textAreaModel.onTextAreaChange({ target: { value: '{"type": "text"}' } } as any);
+    question.onCheckForErrors(errors, false, true);
+    expect(errors.length).toBe(0);
+  });
+
+  test("Should not add error when JSON is valid JSON5", () => {
+    const errors: any[] = [];
+    question.textAreaModel.onTextAreaChange({ target: { value: '{type: "text"}' } } as any);
     question.onCheckForErrors(errors, false, true);
     expect(errors.length).toBe(0);
   });
