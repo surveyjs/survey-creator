@@ -22,7 +22,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return this._currentAddQuestionType;
   }
   set currentAddQuestionType(val: string) {
-    if (!this.creator || this.creator.rememberLastAddedQuestionType) {
+    if (!this.creator || this.creator.rememberLastQuestionType) {
       this._currentAddQuestionType = val;
     }
   }

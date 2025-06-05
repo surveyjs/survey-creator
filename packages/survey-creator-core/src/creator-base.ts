@@ -345,12 +345,18 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
-  rememberLastAddedQuestionType: boolean = true;
+  /**
+   * Specifies whether the "Add Question" button remembers the type of the most recently added question and uses it for subsequent questions.
+   *
+   * Default value: `true`
+   * @see addNewQuestionLast
+   */
+  rememberLastQuestionType: boolean = true;
   get currentAddQuestionType(): string {
     return this._currentAddQuestionType;
   }
   set currentAddQuestionType(val: string) {
-    if (this.rememberLastAddedQuestionType) {
+    if (this.rememberLastQuestionType) {
       this._currentAddQuestionType = val;
     }
   }
@@ -2864,11 +2870,9 @@ export class SurveyCreatorModel extends Base
    *
    * Accepted values:
    *
-   * - `true` (default)
-   * New questions are added to the end of a survey page.
-   *
-   * - `false`
-   * New questions are added after the currently selected question on the design surface.
+   * - `true` (default) - New questions are added to the end of a survey page.
+   * - `false` - New questions are added after the currently selected question on the design surface.
+   * @see rememberLastQuestionType
    */
   public addNewQuestionLast: boolean = true;
   protected doClickQuestionCore(

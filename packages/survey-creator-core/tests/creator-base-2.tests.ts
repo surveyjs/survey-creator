@@ -564,7 +564,7 @@ test("Preserve defaultAddQuestionType", (): any => {
   };
   const survey: SurveyModel = creator.survey;
   settings.designer.defaultAddQuestionType = "radiogroup";
-  creator.rememberLastAddedQuestionType = false;
+  creator.rememberLastQuestionType = false;
   const pageAdorner = new PageAdorner(creator, survey.pages[0]);
   const questionTypeSelectorListModel = pageAdorner.questionTypeSelectorModel.popupModel.contentComponentData.model as ListModel;
   const actionPopupViewModel = new PopupDropdownViewModel(pageAdorner.questionTypeSelectorModel.popupModel); // need for popupModel.onShow
