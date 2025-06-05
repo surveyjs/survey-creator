@@ -36,3 +36,51 @@ test("Preset edit, toolbox - remove item", () => {
   expect(editor.json.toolbox.categories[1].items).toStrictEqual(["multipletext"]);
   expect(editor.json.toolbox.definition.length).toBe(length - 1);
 });
+
+test("Preset edit, toolbox - change item", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const row = categQuestion.visibleRows[1];
+  row.showDetailPanel();
+  const itemsQuestion = row.getQuestionByName("items");
+  itemsQuestion.visibleRows[1].setValue("iconName", "icon-test");
+  editor.applyFromSurveyModel();
+  expect(editor.json.toolbox.definition.filter(i => i.name == "comment")[0].iconName).toEqual("icon-test");
+  expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].iconName).toBeUndefined();
+  expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].tooltip).toBeUndefined();
+  itemsQuestion.visibleRows[0].showDetailPanel();
+  itemsQuestion.visibleRows[0].getQuestionByName("tooltip").value = "tooltip-test";
+  editor.applyFromSurveyModel();
+  expect(editor.json.toolbox.definition.filter(i => i.name == "text")[0].tooltip).toEqual("tooltip-test");
+});
+
+test("Preset edit, toolbox - change category", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  expect(editor.json.toolbox).toBeUndefined();
+  const row = categQuestion.visibleRows[1];
+  row.showDetailPanel();
+
+  const row2 = categQuestion.visibleRows[2];
+  row2.showDetailPanel();
+
+  const itemsQuestion = row.getQuestionByName("items");
+  const itemsQuestion2 = row2.getQuestionByName("items");
+
+  const value = [...itemsQuestion.value];
+  const value2 = [...itemsQuestion2.value];
+
+  value.push({ ...value2[0] });
+  value2.splice(0, 1);
+
+  itemsQuestion.value = value;
+  itemsQuestion2.value = value2;
+  editor.applyFromSurveyModel();
+
+  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["text", "comment", "multipletext", "panel"]);
+  expect(editor.json.toolbox.categories[2].items).toStrictEqual(["paneldynamic"]);
+});

@@ -149,7 +149,7 @@ export class CreatorPresetEditableBase {
     survey.fitToContainer = false;
     survey.showNavigationButtons = false;
     survey.data = row.value;
-    const popupModel = settings.showDialog(<IDialogOptions>{
+    const popupModel = settings.showDialog?.(<IDialogOptions>{
       componentName: "survey",
       data: { survey: survey, model: survey },
       onApply: () => {
