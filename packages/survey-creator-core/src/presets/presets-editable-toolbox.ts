@@ -84,10 +84,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
                   ],
                   detailPanelMode: "underRow",
                   detailElements: [
-                    { type: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
-                    { type: "text", name: "iconName", placeholder: "Icon name" },
+                    { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
+                    { type: "text", name: "iconName", title: "Icon name" },
                     { type: "text", name: "tooltip", title: "Tooltip" },
-                    { type: "comment", name: "json", title: "JSON object to apply when users select this toolbox item", rows: 15 }
+                    { type: "presetjson", name: "json", renderAs: "default-comment", title: "JSON object to apply when users select this toolbox item", rows: 15 }
                   ]
                 }
               ]
@@ -139,10 +139,10 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
               ],
               detailPanelMode: "underRow",
               detailElements: [
-                { type: "text", name: "name", placeholder: "Name", isUnique: true, isRequired: true },
-                { type: "text", name: "iconName", placeholder: "Icon name" },
+                { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
+                { type: "text", name: "iconName", title: "Icon name" },
                 { type: "text", name: "tooltip", title: "Tooltip" },
-                { type: "comment", name: "json", title: "JSON object to apply when users select this toolbox item", rows: 15 }
+                { type: "comment", name: "presetjson", title: "JSON object to apply when users select this toolbox item", rows: 15 }
               ]
             }
           ]
