@@ -209,7 +209,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const question = this.creator.survey.getQuestionByName(name);
     if (!question) return null;
     return {
-      actionText: question.name,
+      actionText: SurveyHelper.getObjectName(question, this.creator.useElementTitles),
       text: this.creator.getLocString("ed.carryForwardChoicesCopied"),
       onClick: () => { this.creator.selectElement(question); }
     };
