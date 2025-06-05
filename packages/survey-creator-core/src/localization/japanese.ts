@@ -45,6 +45,7 @@ export var jaStrings = {
     paneldynamic: "パネル（動的パネル）",
     radiogroup: "ラジオグループ",
     rating: "評価",
+    slider: "スライダー",
     text: "単一入力",
     boolean: "二者択一",
     expression: "式（読み取り専用）",
@@ -443,6 +444,7 @@ export var jaStrings = {
       prefix: "通貨接頭辞",
       suffix: "通貨の接尾辞"
     },
+    isExclusive: "選択時に他のユーザーをクリアする",
     imageHeight: "イメージの高さ",
     imageWidth: "イメージの幅",
     valueName: "値名",
@@ -742,6 +744,18 @@ export var jaStrings = {
     rateValues: "カスタムレート値",
     rateCount: "レート数",
     autoGenerate: "レート値を指定する方法は?",
+    slider: {
+      min: "最小値",
+      max: "最大値",
+      step: "ステップ値",
+      showLabels: "縮尺ラベルの表示",
+      tooltipVisibilityPG: "ツールチップを表示する",
+      allowSwap: "親指の交差を許可する",
+      labelCount: "自動生成されたラベルの数",
+      minValueExpression: "最小値式",
+      maxValueExpression: "最大値の式",
+      autoGenerate: "スケール ラベルの構成"
+    },
     hideIfChoicesEmpty: "選択肢がない場合は質問を非表示にする",
     minWidth: "最小幅 (CSS で受け入れられる値)",
     maxWidth: "最大幅 (CSS で受け入れられる値)",
@@ -823,6 +837,7 @@ export var jaStrings = {
       enableIf: "以下の場合、有効にする：",
       requiredIf: "以下の場合、必須：",
       rateValues: "レート値",
+      sliderSettings: "スライダー設定",
       choicesByUrl: "ウェブの選択",
       matrixChoices: "デフォルトの選択",
       multipleTextItems: "テキスト入力",
@@ -1043,6 +1058,10 @@ export var jaStrings = {
       time: "時間",
       url: "リンク",
       week: "週"
+    },
+    sliderType: {
+      single: "単一値",
+      range: "範囲"
     },
     autocomplete: {
       name: "フルネーム",
@@ -1475,6 +1494,7 @@ export var jaStrings = {
       showInMultipleColumns: "選択すると、選択肢オプションごとに個別の列が作成されます。",
       colCount: "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。-1 に設定すると、実際の値は親行列の \"Nested column count\" プロパティから継承されます。"
     },
+    isExclusive: "この選択肢を排他的にします。ユーザーが選択すると、質問内の他のすべてのオプションの選択が自動的に解除されます。",
     caseInsensitive: "正規表現の大文字と小文字を同等に扱う必要がある場合に選択します。",
     widthMode: "次から選択します: \"Static\" - 固定幅を設定します。「レスポンシブ」 - アンケートを画面の全幅に表示します。「自動」 - 使用する質問タイプに応じて、2つのいずれかを適用します。",
     cookieName: "Cookieは、ユーザーが同じアンケートに2回記入するのを防ぎます。",
@@ -3062,3 +3082,19 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // ts.prevPage: "Previous" => "先の"
 // ts.nextPage: "Next" => "次に"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "「調査レイアウト」が「1ページにつき1つの入力フィールド」に設定されている場合に使用されます。このレイアウトでは、各入力フィールドが別々のページに表示されるようにマトリックスが分割されています。{rowIndex} プレースホルダーを使用して自動番号を挿入し、{rowTitle} または {rowName} を使用して行のタイトルまたは ID を参照し、{row.columnid} を使用して特定の行列列の値を含めます。"
+// qt.slider: "Slider" => "スライダー"
+// pe.isExclusive: "Clear others when selected" => "選択時に他のユーザーをクリアする"
+// slider.min: "Min value" => "最小値"
+// slider.max: "Max value" => "最大値"
+// slider.step: "Step value" => "ステップ値"
+// slider.showLabels: "Show scale labels" => "縮尺ラベルの表示"
+// slider.tooltipVisibilityPG: "Show tooltips" => "ツールチップを表示する"
+// slider.allowSwap: "Allow thumb crossing" => "親指の交差を許可する"
+// slider.labelCount: "Number of auto-generated labels" => "自動生成されたラベルの数"
+// slider.minValueExpression: "Min value expression" => "最小値式"
+// slider.maxValueExpression: "Max value expression" => "最大値の式"
+// slider.autoGenerate: "Scale labels configuration" => "スケール ラベルの構成"
+// tabs.sliderSettings: "Slider Settings" => "スライダー設定"
+// sliderType.single: "Single-Value" => "単一値"
+// sliderType.range: "Range" => "範囲"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "この選択肢を排他的にします。ユーザーが選択すると、質問内の他のすべてのオプションの選択が自動的に解除されます。"

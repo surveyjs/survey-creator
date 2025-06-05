@@ -1,4 +1,3 @@
-// Uncomment the line below if you create a custom dictionary
 import { setupLocale } from "survey-creator-core";
 
 export var htStrings = {
@@ -16,7 +15,6 @@ export var htStrings = {
     deleteQuestion: "Efase Kesyon",
     convertTo: "Konvèti an",
     drag: "Trennen eleman",
-    license: "Pou itilize bibliyotèk nou an, gen yon <a href='https://surveyjs.io/licensing' target='_blank'>lisans pwomotè</a>. Si ou gen yon lisans aktif, <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>konfime kle lisans ou</a> epi asire w ap itilize dènye vèsyon an."
   },
   // Creator tabs
   tabs: {
@@ -47,6 +45,7 @@ export var htStrings = {
     paneldynamic: "Panèl dinamik",
     radiogroup: "Gwoup bouton radyo",
     rating: "Echèl Rating",
+    slider: "Glise",
     text: "Yon sèl-liy Antre",
     boolean: "Wi/Non (Boolean)",
     expression: "Ekspresyon (li sèlman)",
@@ -208,7 +207,7 @@ export var htStrings = {
     panelPlaceHolderMobile: "Klike sou bouton \"Ajoute Kesyon\" ki anba a pou ajoute yon nouvo eleman nan panèl la.",
     imagePlaceHolderMobile: "Klike sou bouton ki anba a epi chwazi yon imaj pou w telechaje",
     imageChooseImage: "Chwazi Imaj",
-    addNewTypeQuestion: "Ajoute {0}",
+    addNewTypeQuestion: "Ajoute {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     choices_Item: "Atik",
     selectFile: "Chwazi yon fichye",
@@ -254,29 +253,29 @@ export var htStrings = {
       trigger_skipDescription: "Lè ekspresyon lojik la evalye a vre, sondaj la konsantre/sote sou kesyon yo chwazi a.",
       trigger_runExpressionDescription: "Lè ekspresyon lojik la evalye a vre, sondaj la evalye yon lòt ekspresyon. Opsyonèlman, rezilta dènye ekspresyon an ka bay kòm yon valè nan kesyon yo chwazi a",
       completedHtmlOnConditionDescription: "Si ekspresyon lojik la evalye vre, paj \"Mèsi\" montre kontni espesifye a.",
-      itemExpressionText: "Lè ekspresyon: '{0}' retounen vre",
+      itemExpressionText: "Lè ekspresyon: '{0}' retounen vre", //{0} - the expression
       itemEmptyExpressionText: "Nouvo règ",
-      page_visibilityText: "fè paj {0} vizib",
-      panel_visibilityText: "fè panèl {0} vizib",
-      panel_enableText: "fè panèl {0} pèmèt",
-      question_visibilityText: "fè kesyon {0} vizib",
-      question_enableText: "fè kesyon {0} pèmèt",
-      question_requireText: "fè kesyon {0} obligatwa",
-      question_resetValueText: "Reyajiste valè pou kesyon: {0}",
+      page_visibilityText: "fè paj {0} vizib", //{0} page name
+      panel_visibilityText: "fè panèl {0} vizib", //{0} panel name
+      panel_enableText: "fè panèl {0} pèmèt", //{0} panel name
+      question_visibilityText: "fè kesyon {0} vizib", //{0} question name
+      question_enableText: "fè kesyon {0} pèmèt", //{0} question name
+      question_requireText: "fè kesyon {0} obligatwa", //{0} question name
+      question_resetValueText: "Reyajiste valè pou kesyon: {0}", //{0} question name.
       question_setValueText: "bay valè: {1} poze kesyon: {0}",
-      column_visibilityText: "fè kolòn {0} nan kesyon {1} vizib",
-      column_enableText: "fè kolòn {0} nan kesyon {1} pèmèt",
-      column_requireText: "fè kolòn {0} nan kesyon {1} obligatwa",
-      column_resetValueText: "Reyajiste valè selilè pou kolòn: {0}",
-      column_setValueText: "bay valè selilè: {1} nan kolòn: {0}",
+      column_visibilityText: "fè kolòn {0} nan kesyon {1} vizib", //{0} column name, {1} question name
+      column_enableText: "fè kolòn {0} nan kesyon {1} pèmèt", //{0} column name, {1} question name
+      column_requireText: "fè kolòn {0} nan kesyon {1} obligatwa", //{0} column name, {1} question name
+      column_resetValueText: "Reyajiste valè selilè pou kolòn: {0}", //{0} column name
+      column_setValueText: "bay valè selilè: {1} nan kolòn: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "Yon ekspresyon ki gen rezilta yo pral asiyen nan kesyon sib la.",
       trigger_completeText: "sondaj la fini",
-      trigger_setvalueText: "mete an kesyon: {0} valè {1}",
-      trigger_setvalueEmptyText: "valè kesyon klè: {0}",
-      trigger_copyvalueText: "kopye nan kesyon: {0} valè nan kesyon an {1}",
-      trigger_skipText: "sondaj ale nan kesyon an {0}",
-      trigger_runExpressionText1: "kouri ekspresyon: '{0}'",
-      trigger_runExpressionText2: "epi mete rezilta li an kesyon: {0}",
+      trigger_setvalueText: "mete an kesyon: {0} valè {1}", //{0} question name, {1} setValue
+      trigger_setvalueEmptyText: "valè kesyon klè: {0}", //{0} question name
+      trigger_copyvalueText: "kopye nan kesyon: {0} valè nan kesyon an {1}", //{0} and {1} question names
+      trigger_skipText: "sondaj ale nan kesyon an {0}", //{0} question name
+      trigger_runExpressionText1: "kouri ekspresyon: '{0}'", //{0} the expression
+      trigger_runExpressionText2: "epi mete rezilta li an kesyon: {0}", //{0} question name
       completedHtmlOnConditionText: "montre tèks koutim pou paj \"Mèsi\".",
       showAllQuestions: "Tout Kesyon",
       showAllActionTypes: "Tout kalite aksyon",
@@ -294,7 +293,7 @@ export var htStrings = {
       uncompletedRule_text: "Ou poko ranpli kèk nan règ lojik yo. Si ou kite tab la kounye a, chanjman yo pral pèdi. Èske ou toujou vle kite tab la san w pa konplete chanjman yo?",
       uncompletedRule_apply: "Wi",
       uncompletedRule_cancel: "Non, mwen vle ranpli règ yo"
-    },
+    }
   },
   // Property Editors
   pe: {
@@ -393,7 +392,7 @@ export var htStrings = {
     calculatedvalue: {
       expression: "Ekspresyon"
     },
-
+    // survey templates
     survey: {
       title: "Tit sondaj la",
       description: "Deskripsyon sondaj la",
@@ -424,7 +423,7 @@ export var htStrings = {
       title: "Tit"
     },
     masksettings: {
-      saveMaskedValue: "Sove valè maske nan rezilta sondaj yo",
+      saveMaskedValue: "Sove valè maske nan rezilta sondaj yo"
     },
     patternmask: {
       pattern: "Modèl valè"
@@ -445,6 +444,7 @@ export var htStrings = {
       prefix: "Prefiks lajan",
       suffix: "Sifiks lajan"
     },
+    isExclusive: "Klè lòt moun lè yo chwazi yo",
     imageHeight: "Montre wotè zòn nan",
     imageWidth: "Montre lajè zòn nan",
     valueName: "Antre nan idantifyan",
@@ -592,6 +592,7 @@ export var htStrings = {
     transposeData: "Transpoze ranje nan kolòn",
     addRowText: "Tèks bouton \"Ajoute Ranje\".",
     removeRowText: "Tèks bouton \"Retire Ranje\".",
+    singleInputTitleTemplate: "Input jaden modèl",
     rateMin: "Valè evalyasyon minimòm",
     rateMax: "Maksimòm valè Rating",
     rateStep: "Valè etap la",
@@ -743,6 +744,18 @@ export var htStrings = {
     rateValues: "Valè evalyasyon koutim",
     rateCount: "Kantite evalyasyon",
     autoGenerate: "Evalyasyon konfigirasyon",
+    slider: {
+      min: "Valè min",
+      max: "Valè maks",
+      step: "Valè etap",
+      showLabels: "Montre etikèt echèl",
+      tooltipVisibilityPG: "Montre zouti",
+      allowSwap: "Pèmèt travèse gwo pous",
+      labelCount: "Nimewo nan etikèt oto-pwodwi",
+      minValueExpression: "Min ekspresyon",
+      maxValueExpression: "Max ekspresyon valè",
+      autoGenerate: "Echèl etikèt konfigirasyon"
+    },
     hideIfChoicesEmpty: "Kache kesyon an si li pa gen chwa",
     minWidth: "Lajè minimòm",
     maxWidth: "Maksimòm lajè",
@@ -811,9 +824,8 @@ export var htStrings = {
     // Creator tabs
     tabs: {
       panel: {
-        layout: "Layout panèl",
+        layout: "Layout panèl"
       },
-
       general: "Jeneral",
       fileOptions: "Opsyon",
       html: "Editè HTML",
@@ -825,6 +837,7 @@ export var htStrings = {
       enableIf: "Editab Si",
       requiredIf: "Obligatwa Si",
       rateValues: "Valè Rating",
+      sliderSettings: "Anviwònman koulis",
       choicesByUrl: "Chwa nan yon sèvis entènèt",
       matrixChoices: "Chwa Default",
       multipleTextItems: "Antre tèks",
@@ -930,7 +943,6 @@ export var htStrings = {
       questionDescription: "Deskripsyon font",
       editorFont: "Font",
       backgroundOpacity: "Opakite",
-
       "--sjs-font-family": "Fanmi font sondaj",
       "--sjs-general-backcolor-dim": "Koulè background",
       "--sjs-primary-backcolor": "Aksan koulè background",
@@ -956,7 +968,7 @@ export var htStrings = {
       logoPositionX: "Logo aliyman",
       titlePositionX: "Aliyman tit sondaj la",
       descriptionPositionX: "Sondaj deskripsyon aliyman"
-    },
+    }
   },
   // Property values
   pv: {
@@ -1047,6 +1059,10 @@ export var htStrings = {
       url: "URL",
       week: "Semèn"
     },
+    sliderType: {
+      single: "Yon sèl-Valè",
+      range: "Pòte"
+    },
     autocomplete: {
       name: "Non konplè",
       "honorific-prefix": "Prefiks",
@@ -1054,12 +1070,12 @@ export var htStrings = {
       "additional-name": "Mwayen Non",
       "family-name": "Siyati",
       "honorific-suffix": "Sifiks",
-      "nickname": "Ti non",
+      nickname: "Ti non",
       "organization-title": "Tit travay",
-      "username": "Non itilizatè",
+      username: "Non itilizatè",
       "new-password": "Nouvo Modpas",
       "current-password": "Modpas aktyèl la",
-      "organization": "Non òganizasyon an",
+      organization: "Non òganizasyon an",
       "street-address": "Adrès Ri konplè",
       "address-line1": "Liy adrès 1",
       "address-line2": "Liy adrès 2",
@@ -1068,7 +1084,7 @@ export var htStrings = {
       "address-level3": "Adrès Nivo 3",
       "address-level2": "Adrès Nivo 2",
       "address-level1": "Adrès Nivo 1",
-      "country": "Kòd Peyi",
+      country: "Kòd Peyi",
       "country-name": "Non Peyi a",
       "postal-code": "Kòd Postal",
       "cc-name": "Non moun ki gen kat la",
@@ -1083,15 +1099,15 @@ export var htStrings = {
       "cc-type": "Kalite kat kredi",
       "transaction-currency": "Tranzaksyon Lajan",
       "transaction-amount": "Kantite Tranzaksyon",
-      "language": "Lang Prefere",
-      "bday": "anivèsè nesans",
+      language: "Lang Prefere",
+      bday: "anivèsè nesans",
       "bday-day": "Jou anivèsè nesans",
       "bday-month": "Mwa anivèsè nesans",
       "bday-year": "Ane anivèsè nesans",
-      "sex": "Sèks",
-      "url": "URL sit entènèt",
-      "photo": "Foto pwofil",
-      "tel": "Nimewo Telefòn",
+      sex: "Sèks",
+      url: "URL sit entènèt",
+      photo: "Foto pwofil",
+      tel: "Nimewo Telefòn",
       "tel-country-code": "Kòd Peyi pou Telefòn",
       "tel-national": "Nimewo Telefòn Nasyonal",
       "tel-area-code": "Kòd zòn",
@@ -1099,8 +1115,8 @@ export var htStrings = {
       "tel-local-prefix": "Prefiks telefòn lokal yo",
       "tel-local-suffix": "Sifiks telefòn lokal yo",
       "tel-extension": "Ekstansyon Telefòn",
-      "email": "Adrès Imèl",
-      "impp": "Pwotokòl Instant Messaging"
+      email: "Adrès Imèl",
+      impp: "Pwotokòl Instant Messaging"
     },
     maskType: {
       none: "Okenn",
@@ -1123,7 +1139,8 @@ export var htStrings = {
     questionsOnPageMode: {
       standard: "Estrikti orijinal la",
       singlePage: "Montre tout kesyon sou yon paj",
-      questionPerPage: "Montre yon sèl kesyon pou chak paj"
+      questionPerPage: "Montre yon sèl kesyon pou chak paj",
+      inputPerPage: "Montre jaden sèl pou chak paj"
     },
     noPreview: "Pa gen preview",
     showAllQuestions: "Montre tout kesyon yo",
@@ -1367,7 +1384,6 @@ export var htStrings = {
     panel: {
       name: "Yon ID panèl ki pa vizib pou moun ki reponn yo.",
       description: "Tape yon sous-titre panèl.",
-      // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Sèvi ak icon ralonj majik la pou mete yon règ kondisyonèl ki detèmine vizibilite panèl la.",
       enableIf: "Sèvi ak icon ralonj majik la pou mete yon règ kondisyonèl ki enfim mòd lekti sèlman pou panèl la.",
       requiredIf: "Sèvi ak icon ralonj majik la pou mete yon règ kondisyonèl ki anpeche soumèt sondaj sof si omwen yon kesyon anbrike gen yon repons.",
@@ -1387,7 +1403,6 @@ export var htStrings = {
     paneldynamic: {
       name: "Yon ID panèl ki pa vizib pou moun ki reponn yo.",
       description: "Tape yon sous-titre panèl.",
-      // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Sèvi ak icon ralonj majik la pou mete yon règ kondisyonèl ki detèmine vizibilite panèl la.",
       enableIf: "Sèvi ak icon ralonj majik la pou mete yon règ kondisyonèl ki enfim mòd lekti sèlman pou panèl la.",
       requiredIf: "Sèvi ak icon ralonj majik la pou mete yon règ kondisyonèl ki anpeche soumèt sondaj sòf si omwen yon kesyon anbrike gen yon repons.",
@@ -1396,7 +1411,6 @@ export var htStrings = {
       templateErrorLocation: "Mete kote yon mesaj erè an relasyon ak yon kesyon ki pa valab. Chwazi ant: \"Top\" - yo mete yon tèks erè nan tèt bwat kesyon an; \"Anba\" - yo mete yon tèks erè nan pati anba bwat kesyon an. Opsyon \"Eritye\" aplike nivo paj (si yo mete) oswa nivo sondaj (\"Top\" pa default).",
       errorLocation: "Mete kote yon mesaj erè an relasyon ak tout kesyon ki nan panèl la. Opsyon \"Eritite\" aplike paramèt nivo paj (si yo tabli) oswa nivo sondaj la.",
       page: "Repositionne panèl la nan fen yon paj chwazi.",
-      // questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       innerIndent: "Ajoute espas oswa maj ant kontni panèl la ak fwontyè gòch bwat panèl la.",
       startWithNewLine: "Deseleksyone pou montre panèl la nan yon liy ak kesyon oswa panèl anvan an. Anviwònman an pa aplike si panèl la se premye eleman nan fòm ou a.",
       state: "Chwazi nan: \"Elaji\" - panèl la parèt an antye epi yo ka tonbe; \"Efondre\" - panèl la montre sèlman tit la ak deskripsyon epi li ka elaji; \"Kloke\" - panèl la parèt an antye epi yo pa ka tonbe.",
@@ -1430,15 +1444,15 @@ export var htStrings = {
       descriptionLocation: "Opsyon \"Eritye\" aplike anviwònman nivo sondaj la (\"Anba tit kesyon an\" pa default).",
       errorLocation: "Mete kote yon mesaj erè an relasyon ak kesyon an ki pa valab. Chwazi ant: \"Top\" - yo mete yon tèks erè nan tèt bwat kesyon an; \"Anba\" - yo mete yon tèks erè nan pati anba bwat kesyon an. Opsyon \"Eritite\" aplike anviwònman nivo sondaj la (\"Top\" pa default).",
       indent: "Ajoute espas oswa maj ant kontni kesyon an ak fwontyè gòch bwat kesyon an.",
-      width: "Mete lajè kesyon an nan pwopòsyon ak lòt eleman sondaj nan menm liy lan. Aksepte valè CSS (px, %, in, pt, elatriye)."
-    },
-    surveyvalidator: {
-      expression: "Sèvi ak icon ralonj majik la pou mete yon règ validasyon pou kesyon an.",
-      textUpdateMode: "Chwazi nan: \"On lost focus\" - valè a mete ajou lè jaden an antre pèdi konsantre; \"Pandan w ap tape\" - valè a mete ajou an tan reyèl, jan itilizatè yo ap tape. Opsyon \"Eritye\" aplike anviwònman nivo sondaj la (\"Sou pèdi konsantre\" pa default).",
-      url: "Ou ka itilize nenpòt sèvis entènèt kòm yon sous done pou kesyon chwa miltip. Pou ranpli valè chwa, antre adrès entènèt sèvis ki bay done yo.",
-      searchMode: "Yon operasyon konparezon itilize pou filtre lis drop-down la.",
-      textWrapEnabled: "Tèks long nan opsyon chwa yo pral otomatikman jenere kase liy yo anfòm nan meni an dewoule. Dezeleksyone si ou vle tèks yo koupe.",
-      effectiveColSpan: "Espesifye konbyen kolòn kesyon sa a kouvri nan layout kadriyaj la."
+      width: "Mete lajè kesyon an nan pwopòsyon ak lòt eleman sondaj nan menm liy lan. Aksepte valè CSS (px, %, in, pt, elatriye).",
+      surveyvalidator: {
+        expression: "Sèvi ak icon majik la pou mete yon règ validasyon pou kesyon an."
+      },
+      textUpdateMode: "Chwazi nan: \"Sou pèdi konsantre\" - valè a mete ajou lè jaden an opinyon konsantre; \"Pandan ke tape\" - valè a mete ajou nan tan reyèl, kòm itilizatè yo ap tape. Opsyon \"Eritaj\" aplike anviwònman an sondaj-nivo (\"Sou pèdi konsantre\" pa default).",
+      url: "Ou ka itilize nenpòt sèvis entènèt kòm yon sous done pou kesyon chwa miltip. Pou popilasyon valè chwa, antre nan URL la nan sèvis la bay done yo.",
+      searchMode: "Yon operasyon konparezon itilize pou filtre lis la gout-desann.",
+      textWrapEnabled: "Long tèks nan opsyon chwa pral otomatikman jenere liy liy yo anfòm nan meni an gout-desann. Sòf si ou vle tèks yo klip.",
+      effectiveColSpan: "Espesifye konbyen kolòn kesyon sa a kouvri nan layout la kadriyaj."
     },
     signaturepad: {
       signatureWidth: "Mete lajè zòn siyati ki parèt la ak imaj ki kapab lakòz.",
@@ -1480,6 +1494,7 @@ export var htStrings = {
       showInMultipleColumns: "Lè yo chwazi, kreye yon kolòn endividyèl pou chak opsyon chwa.",
       colCount: "Fè aranjman pou chwa chwa nan yon layout milti-kolòn. Lè yo mete sou 0, opsyon yo parèt sou yon sèl liy. Lè yo mete sou -1, valè aktyèl la eritye nan pwopriyete \"Konte kolòn ki nichye\" nan matris paran an."
     },
+    isExclusive: "Fè chwa sa a san konte. Lè chwazi pa yon itilizatè, li pral otomatikman deselere tout lòt opsyon nan kesyon an.",
     caseInsensitive: "Chwazi si lèt majiskil ak miniskil nan ekspresyon regilye a dwe trete kòm ekivalan.",
     widthMode: "Chwazi nan: \"Static\" - fikse yon lajè fiks; \"Reponsive\" - fè sondaj la okipe tout lajè ekran an; \"Oto\" - aplike youn nan de yo depann de kalite kesyon yo itilize yo.",
     cookieName: "Bay yon valè bonbon inik pou sondaj ou a. Yo pral mete bonbon an nan navigatè yon moun ki reponn lè sondaj fini pou anpeche soumèt sondaj repete.",
@@ -1533,7 +1548,6 @@ export var htStrings = {
       description: "Tape yon sous-titre paj.",
       navigationTitle: "tit ki parèt sou yon bouton navigasyon nan ba pwogrè oswa tab matyè (TOC). Si ou kite jaden sa a vid, bouton navigasyon an pral sèvi ak tit paj la oswa non paj la. Pou pèmèt ba pwogrè oswa TOC, ale nan \"Sondaj\" → \"Navigasyon\".",
       timeLimit: "Yon entèval tan an segonn apre sondaj la ap avanse otomatikman nan pwochen paj la. Kache bouton navigasyon \"Previous\". Lè mete a 0, konte tan ki pase sou paj aktyèl la.",
-      // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Sèvi ak icon ralonj majik la pou mete yon règ kondisyonèl ki detèmine vizibilite paj la.",
       enableIf: "Sèvi ak icon ralonj majik la pou mete yon règ kondisyonèl ki enfim mòd lekti sèlman pou paj la.",
       requiredIf: "Sèvi ak icon ralonj majik la pou mete yon règ kondisyonèl ki anpeche soumèt sondaj sòf si omwen yon kesyon anbrike gen yon repons.",
@@ -1565,11 +1579,11 @@ export var htStrings = {
     separateSpecialChoices: "Montre chak opsyon chwa espesyal (\"Okenn\", \"Lòt\", \"Chwazi tout\") sou yon nouvo liy, menm lè w ap itilize yon layout plizyè kolòn.",
     path: "Espesifye kote yo ye nan seri done sèvis la kote etalaj sib objè yo ye. Kite vid si URL la deja lonje dwèt sou etalaj la.",
     choicesbyurl: {
-      valueName: "Antre yon non pwopriyete inifòm nan etalaj la nan objè ki gen valè yo pral estoke kòm yon repons nan rezilta sondaj la.",
-      titleName: "Antre yon non pwopriyete inifòm nan etalaj la nan objè ki gen valè yo ou vle montre nan lis chwa a.",
-      allowEmptyResponse: "Chwazi pou pèmèt sèvis la retounen yon repons vid oswa yon etalaj.",
-      choicesVisibleIf: "Sèvi ak icon ralonj majik la pou mete yon règ kondisyonèl ki detèmine vizibilite tout opsyon chwa yo."
+      valueName: "Antre yon non pwopriyete inifòm nan etalaj la nan objè ki gen valè yo pral estoke kòm yon repons nan rezilta sondaj la."
     },
+    titleName: "Antre nan yon non pwopriyete inifòm nan etalaj la nan objè ki gen valè ou vle montre nan lis la chwa.",
+    allowEmptyResponse: "Chwazi pou pèmèt sèvis la retounen yon repons vid oswa etalaj.",
+    choicesVisibleIf: "Sèvi ak icon nan majik yo mete yon règ kondisyonèl ki detèmine vizibilite a nan tout opsyon chwa.",
     rateValues: "Valè gòch la sèvi kòm yon ID atik yo itilize nan règ kondisyonèl, valè dwat la parèt pou moun ki repond yo.",
     rating: {
       displayMode: "\"Oto\" chwazi ant mòd \"Bouton\" ak \"Dropdown\" ki baze sou lajè ki disponib. Lè lajè a pa ase pou montre bouton, kesyon an montre yon deroulan."
@@ -1633,7 +1647,8 @@ export var htStrings = {
       overlapEnabled: "Lè yo aktive, tèt sondaj la kouvri anba header la.",
       mobileHeight: "Lè yo mete a 0, wotè a kalkile otomatikman pou akomode kontni header la."
     },
-    progressBarInheritWidthFrom: "Opsyon \"Menm ak kontenè\" ajiste otomatikman lajè zòn ba pwogrè a pou l anfòm nan eleman HTML kote sondaj la mete."
+    progressBarInheritWidthFrom: "Opsyon \"Menm ak kontenè\" ajiste otomatikman lajè zòn ba pwogrè a pou l anfòm nan eleman HTML kote sondaj la mete.",
+    singleInputTitleTemplate: "Itilize lè 'Layout sondaj la' mete nan 'yon sèl jaden opinyon pou chak paj'. Nan kouman sa a, matris la se divize pou chak jaden opinyon parèt sou yon paj separe. Use {rowIndex} placeholder to insert auto nimewo, {rowTitle} or {rowName} to referans la row a oswa ID, ak {row.columnid} to include valè a nan yon kolòn matris espesifik."
   },
   // Properties
   p: {
@@ -1747,26 +1762,21 @@ export var htStrings = {
     questionTitle: "Bwat kesyon",
     editorPanel: "Eleman Antre",
     lines: "Liy",
-
     primaryDefaultColor: "Default",
     primaryDarkColor: "Hover",
     primaryLightColor: "Chwazi",
     backgroundDimColor: "Koulè background",
-
     cornerRadius: "Reyon kwen",
     backcolor: "Default background",
     hovercolor: "Hover background",
     borderDecoration: "Dekorasyon fwontyè",
-
     fontColor: "Koulè font",
     backgroundColor: "Koulè background",
-
     primaryForecolor: "Koulè default",
     primaryForecolorLight: "Koulè andikape",
     font: "Font",
     borderDefault: "Pi fonse",
     borderLight: "Pi lejè",
-
     fontFamily: "Fanmi font",
     fontWeightRegular: "Regilye",
     fontWeightHeavy: "Lou",
@@ -1775,7 +1785,6 @@ export var htStrings = {
     color: "Koulè",
     placeholderColor: "Koulè placeholder",
     size: "Gwosè",
-
     opacity: "Opakite",
     boxShadowX: "X",
     boxShadowY: "Y",
@@ -1784,7 +1793,6 @@ export var htStrings = {
     boxShadowSpread: "Gaye",
     boxShadowDrop: "Drop",
     boxShadowInner: "Enteryè",
-
     names: {
       default: "Defo",
       sharp: "Byen file",
@@ -1806,22 +1814,21 @@ export var htStrings = {
       brown: "Brown",
       green: "Green",
       gray: "Gray"
-    },
+    }
   },
   creatortheme: {
     "--sjs-special-background": "Fond sifas",
     "--sjs-primary-background-500": "Prensipal",
     "--sjs-secondary-background-500": "Segondè",
-    "surfaceScale": "Sifas",
-    "userInterfaceBaseUnit": "Eleman UI",
-    "fontScale": "Font",
-
+    surfaceScale: "Sifas",
+    userInterfaceBaseUnit: "Eleman UI",
+    fontScale: "Font",
     names: {
-      "sc2020": "Sondaj Kreyatè 2020",
+      sc2020: "Sondaj Kreyatè 2020",
       "default-light": "Limyè",
       "default-dark": "Fè nwa",
       "default-contrast": "Kontras"
-    },
+    }
   }
 };
 
@@ -1829,3 +1836,34 @@ export var htStrings = {
 // Replace "en" with a custom locale code (for example, "fr" or "de"),
 // Replace `enStrings` with the name of the variable that contains the custom dictionary.
 setupLocale({ localeCode: "ht", strings: htStrings });
+
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually
+// qt.slider: "Slider" => "Glise"
+// pe.isExclusive: "Clear others when selected" => "Klè lòt moun lè yo chwazi yo"
+// pe.singleInputTitleTemplate: "Input field title pattern" => "Input jaden modèl"
+// slider.min: "Min value" => "Valè min"
+// slider.max: "Max value" => "Valè maks"
+// slider.step: "Step value" => "Valè etap"
+// slider.showLabels: "Show scale labels" => "Montre etikèt echèl"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Montre zouti"
+// slider.allowSwap: "Allow thumb crossing" => "Pèmèt travèse gwo pous"
+// slider.labelCount: "Number of auto-generated labels" => "Nimewo nan etikèt oto-pwodwi"
+// slider.minValueExpression: "Min value expression" => "Min ekspresyon"
+// slider.maxValueExpression: "Max value expression" => "Max ekspresyon valè"
+// slider.autoGenerate: "Scale labels configuration" => "Echèl etikèt konfigirasyon"
+// tabs.sliderSettings: "Slider Settings" => "Anviwònman koulis"
+// sliderType.single: "Single-Value" => "Yon sèl-Valè"
+// sliderType.range: "Range" => "Pòte"
+// questionsOnPageMode.inputPerPage: "Show single input field per page" => "Montre jaden sèl pou chak paj"
+// surveyvalidator.expression: "Use the magic wand icon to set a validation rule for the question." => "Sèvi ak icon majik la pou mete yon règ validasyon pou kesyon an."
+// question.textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default)." => "Chwazi nan: \"Sou pèdi konsantre\" - valè a mete ajou lè jaden an opinyon konsantre; \"Pandan ke tape\" - valè a mete ajou nan tan reyèl, kòm itilizatè yo ap tape. Opsyon \"Eritaj\" aplike anviwònman an sondaj-nivo (\"Sou pèdi konsantre\" pa default)."
+// question.url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data." => "Ou ka itilize nenpòt sèvis entènèt kòm yon sous done pou kesyon chwa miltip. Pou popilasyon valè chwa, antre nan URL la nan sèvis la bay done yo."
+// question.searchMode: "A comparison operation used to filter the drop-down list." => "Yon operasyon konparezon itilize pou filtre lis la gout-desann."
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Long tèks nan opsyon chwa pral otomatikman jenere liy liy yo anfòm nan meni an gout-desann. Sòf si ou vle tèks yo klip."
+// question.effectiveColSpan: "Specifies how many columns this question spans within the grid layout." => "Espesifye konbyen kolòn kesyon sa a kouvri nan layout la kadriyaj."
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Fè chwa sa a san konte. Lè chwazi pa yon itilizatè, li pral otomatikman deselere tout lòt opsyon nan kesyon an."
+// pehelp.titleName: "Enter a uniform property name within the array of objects that contains the values you want to display in the choice list." => "Antre nan yon non pwopriyete inifòm nan etalaj la nan objè ki gen valè ou vle montre nan lis la chwa."
+// pehelp.allowEmptyResponse: "Select to allow the service to return an empty response or array." => "Chwazi pou pèmèt sèvis la retounen yon repons vid oswa etalaj."
+// pehelp.choicesVisibleIf: "Use the magic wand icon to set a conditional rule that determines the visibility of all choice options." => "Sèvi ak icon nan majik yo mete yon règ kondisyonèl ki detèmine vizibilite a nan tout opsyon chwa."
+// pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Itilize lè 'Layout sondaj la' mete nan 'yon sèl jaden opinyon pou chak paj'. Nan kouman sa a, matris la se divize pou chak jaden opinyon parèt sou yon paj separe. Use {rowIndex} placeholder to insert auto nimewo, {rowTitle} or {rowName} to referans la row a oswa ID, ak {row.columnid} to include valè a nan yon kolòn matris espesifik."

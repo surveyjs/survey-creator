@@ -1272,6 +1272,8 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   await t
     .hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem2)
     .dragToElement(DragZoneItem2, Item1, {
+      destinationOffsetX: 5,
+      destinationOffsetY: 5,
       offsetX: 5,
       offsetY: 5,
       speed: 0.5
@@ -1282,7 +1284,8 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   await t.expect(value).eql(expectedValue);
 
   DragZoneItem2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find(".spg-drag-element__svg");
-  await t.dragToElement(DragZoneItem2, Item3, { offsetX: 5, offsetY: 5, speed: 0.5 });
+  await t.dragToElement(DragZoneItem2, Item3, { destinationOffsetX: 5,
+    destinationOffsetY: -5, offsetX: 5, offsetY: 5, speed: 0.5 });
 
   value = await getItemValueByIndex("question1", 2);
   await t.expect(value).eql(expectedValue);
@@ -1337,6 +1340,8 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
   await t
     .hover(Page1).hover(Page2).hover(Page3).hover(DragZonePage2)
     .dragToElement(DragZonePage2, Page1, {
+      destinationOffsetX: 5,
+      destinationOffsetY: 5,
       offsetX: 5,
       offsetY: 5,
       speed: 0.5

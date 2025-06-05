@@ -65,7 +65,7 @@ test("On the right side opened popup", async (t) => {
     await t.click(".svc-page-navigator__selector");
     await t.click(".svc-page-navigator__selector");
     await t.click(".svc-page-navigator__selector");
-    await takeElementScreenshot("page-navigator-popup.png", Selector(".svc-page-navigator__selector .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("page-navigator-popup.png", Selector(".svc-page-navigator .sv-popup__container"), t, comparer);
     await takeElementScreenshot("page-navigator-with-popup.png", Selector(".svc-creator-tab"), t, comparer);
   });
 });

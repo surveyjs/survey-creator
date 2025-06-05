@@ -162,19 +162,19 @@ export interface ICreatorOptions {
    *
    * Accepted values:
    *
-   * - `"auto"` (default)
+   * - `"auto"` (default)\
    * Display the language selector only if the survey is translated into more than one language.
    *
-   * - `true`
+   * - `true`\
    * Always display the language selector regardless of how many languages are used in the survey.
    *
-   * - `false`
+   * - `false`\
    * Never display the language selector.
    *
-   * - `"all"`
+   * - `"all"`\
    * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization).
    *
-   * **See also**: [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
+   * [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
    */
   previewAllowSelectLanguage?: boolean | string;
   /**
@@ -345,11 +345,8 @@ export interface ICreatorOptions {
    *
    * Accepted values:
    *
-   * - `true` (default)
-   * New questions are added to the end of a survey page.
-   *
-   * - `false`
-   * New questions are added after the currently selected question on the design surface.
+   * - `true` (default) - New questions are added to the end of a survey page.
+   * - `false` - New questions are added after the currently selected question on the design surface.
    */
   addNewQuestionLast?: boolean;
   /**
@@ -357,13 +354,13 @@ export interface ICreatorOptions {
    *
    * Accepted values:
    *
-   * - `"standard"` (default)
+   * - `"standard"` (default)\
    * Questions and panels are divided between pages. Users can scroll the design surface to reach a required page.
    *
-   * - `"single"`
+   * - `"single"`\
    * All questions and panels belong to a single page. Users cannot add or remove pages.
    *
-   * - `"bypage"`
+   * - `"bypage"`\
    * Questions and panels are divided between pages. Users can use the page navigator to switch to a required page.
    *
    * [View Page-By-Page Mode Demo](https://surveyjs.io/survey-creator/examples/page-level-editing/ (linkStyle))
@@ -423,10 +420,10 @@ export interface ICreatorOptions {
    *
    * Accepted values:
    *
-   * - `"accordion"`
+   * - `"accordion"`\
    * The Property Grid displays a stacked list of categories that users can expand or collapse to reveal nested properties.
    *
-   * - `"buttons"` (default)
+   * - `"buttons"` (default)\
    * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid.
    *
    * [Accordion Mode Demo](https://surveyjs.io/survey-creator/examples/property-grid-accordion-view/ (linkStyle))

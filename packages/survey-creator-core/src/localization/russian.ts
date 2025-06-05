@@ -45,6 +45,7 @@ export var ruStrings = {
     paneldynamic: "Панель (динамические панели)",
     radiogroup: "Единичный выбор",
     rating: "Рейтинг (шкала)",
+    slider: "Ползун",
     text: "Текстовый ввод",
     boolean: "Булиевое значение",
     expression: "Выражение (только для чтения)",
@@ -443,6 +444,7 @@ export var ruStrings = {
       prefix: "Префикс валюты",
       suffix: "Суффикс валюты"
     },
+    isExclusive: "Удалить другие при выборе",
     imageHeight: "Высота изображения",
     imageWidth: "Ширина изображения",
     valueName: "Название пункта",
@@ -742,6 +744,18 @@ export var ruStrings = {
     rateValues: "Пользовательские значения тарифов",
     rateCount: "Количество ставок",
     autoGenerate: "Как указать значения тарифов?",
+    slider: {
+      min: "Минимальная стоимость",
+      max: "Максимальное значение",
+      step: "Значение шага",
+      showLabels: "Отображение меток шкалы",
+      tooltipVisibilityPG: "Показать всплывающие подсказки",
+      allowSwap: "Разрешить скрещивание больших пальцев",
+      labelCount: "Количество автоматически сгенерированных меток",
+      minValueExpression: "Выражение минимального значения",
+      maxValueExpression: "Выражение максимального значения",
+      autoGenerate: "Настройка этикеток шкалы"
+    },
     hideIfChoicesEmpty: "Скрыть вопрос, если он не содержит вариантов",
     minWidth: "Минимальная ширина (в значениях, принимаемых CSS)",
     maxWidth: "Максимальная ширина (в значениях, принимаемых CSS)",
@@ -823,6 +837,7 @@ export var ruStrings = {
       enableIf: "Доступен, если",
       requiredIf: "Обязателен для заполнения, если",
       rateValues: "Оценить важность(вес) вопроса",
+      sliderSettings: "Настройки слайдера",
       choicesByUrl: "Выбор из Интернета",
       matrixChoices: "Выбор по умолчанию",
       multipleTextItems: "Ввод нескольких текстовых полей",
@@ -1043,6 +1058,10 @@ export var ruStrings = {
       time: "Время",
       url: "URL-адрес",
       week: "Неделя"
+    },
+    sliderType: {
+      single: "Однозначный",
+      range: "Диапазон"
     },
     autocomplete: {
       name: "Полное имя",
@@ -1475,6 +1494,7 @@ export var ruStrings = {
       showInMultipleColumns: "При выборе этого параметра создается отдельный столбец для каждого варианта выбора.",
       colCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы."
     },
+    isExclusive: "Делает этот выбор эксклюзивным. Когда пользователь выбирает этот вариант, выбор будет автоматически отменен во всех остальных вариантах вопроса.",
     caseInsensitive: "Выберите, если прописные и строчные буквы в регулярном выражении должны рассматриваться как эквивалентные.",
     widthMode: "Выберите один из: \"Статический\" - задает фиксированную ширину; «Отзывчивый» - заставляет опрос занимать всю ширину экрана; \"Авто\" - применяет любой из двух вариантов в зависимости от используемых типов вопросов.",
     cookieName: "Файлы cookie не позволяют пользователям заполнять один и тот же опрос дважды.",
@@ -3118,3 +3138,19 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // ts.prevPage: "Previous" => "Предыдущий"
 // ts.nextPage: "Next" => "Следующий"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Используется, когда для параметра «Макет опроса» задано значение «Одно поле ввода на странице». В этом макете матрица разделена таким образом, что каждое поле ввода отображается на отдельной странице. Используйте заполнитель {rowIndex} для вставки автоматической нумерации, {rowTitle} или {rowName} для ссылки на заголовок или идентификатор строки, а {row.columnid} для включения значения определенного столбца матрицы."
+// qt.slider: "Slider" => "Ползун"
+// pe.isExclusive: "Clear others when selected" => "Удалить другие при выборе"
+// slider.min: "Min value" => "Минимальная стоимость"
+// slider.max: "Max value" => "Максимальное значение"
+// slider.step: "Step value" => "Значение шага"
+// slider.showLabels: "Show scale labels" => "Отображение меток шкалы"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Показать всплывающие подсказки"
+// slider.allowSwap: "Allow thumb crossing" => "Разрешить скрещивание больших пальцев"
+// slider.labelCount: "Number of auto-generated labels" => "Количество автоматически сгенерированных меток"
+// slider.minValueExpression: "Min value expression" => "Выражение минимального значения"
+// slider.maxValueExpression: "Max value expression" => "Выражение максимального значения"
+// slider.autoGenerate: "Scale labels configuration" => "Настройка этикеток шкалы"
+// tabs.sliderSettings: "Slider Settings" => "Настройки слайдера"
+// sliderType.single: "Single-Value" => "Однозначный"
+// sliderType.range: "Range" => "Диапазон"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Делает этот выбор эксклюзивным. Когда пользователь выбирает этот вариант, выбор будет автоматически отменен во всех остальных вариантах вопроса."

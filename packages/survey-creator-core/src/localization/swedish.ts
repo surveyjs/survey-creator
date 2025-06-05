@@ -45,6 +45,7 @@ export let svStrings = {
     paneldynamic: "Panel (dynamisk panel)",
     radiogroup: "Radiogrupper",
     rating: "Rankning",
+    slider: "Skjutreglage",
     text: "Enkel text",
     boolean: "Yes/No (Boolean)",
     expression: "Formel",
@@ -443,6 +444,7 @@ export let svStrings = {
       prefix: "Prefix för valuta",
       suffix: "Valutasuffix"
     },
+    isExclusive: "Rensa andra när du väljer det här alternativet",
     imageHeight: "Bild höjd",
     imageWidth: "Bild bredd",
     valueName: "Värde namn",
@@ -742,6 +744,18 @@ export let svStrings = {
     rateValues: "Anpassade prisvärden",
     rateCount: "Antal priser",
     autoGenerate: "Hur anger jag hastighetsvärden?",
+    slider: {
+      min: "Minsta värde",
+      max: "Max värde",
+      step: "Steg-värde",
+      showLabels: "Visa skaletiketter",
+      tooltipVisibilityPG: "Visa verktygstips",
+      allowSwap: "Tillåt tumkorsning",
+      labelCount: "Antal automatiskt genererade etiketter",
+      minValueExpression: "Uttryck för minsta värde",
+      maxValueExpression: "Uttryck för maximalt värde",
+      autoGenerate: "Konfiguration av skalningsetiketter"
+    },
     hideIfChoicesEmpty: "Dölj frågan om den inte innehåller några alternativ",
     minWidth: "Minsta bredd (i CSS-godkända värden)",
     maxWidth: "Maximal bredd (i CSS-godkända värden)",
@@ -823,6 +837,7 @@ export let svStrings = {
       enableIf: "Tillgänlig",
       requiredIf: "Obligatoriskt om",
       rateValues: "Ordna värden",
+      sliderSettings: "Inställningar för skjutreglage",
       choicesByUrl: "Välj från webben",
       matrixChoices: "Standard val",
       multipleTextItems: "Text indata",
@@ -1043,6 +1058,10 @@ export let svStrings = {
       time: "Tid",
       url: "URL",
       week: "Vecka"
+    },
+    sliderType: {
+      single: "Enkelt värde",
+      range: "Sortiment"
     },
     autocomplete: {
       name: "Fullständigt namn",
@@ -1475,6 +1494,7 @@ export let svStrings = {
       showInMultipleColumns: "När du väljer det här alternativet skapas en enskild kolumn för varje alternativ.",
       colCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen."
     },
+    isExclusive: "Gör detta val exklusivt. När den väljs av en användare kommer den automatiskt att avmarkera alla andra alternativ i frågan.",
     caseInsensitive: "Välj om versaler och gemener i det reguljära uttrycket ska behandlas som likvärdiga.",
     widthMode: "Välj mellan: \"Statisk\" - ställer in en fast bredd; \"Responsiv\" - gör att undersökningen upptar hela skärmens bredd; \"Auto\" - gäller någon av de två beroende på vilka frågetyper som används.",
     cookieName: "Cookies hindrar användare från att fylla i samma undersökning två gånger.",
@@ -3237,3 +3257,19 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // ts.prevPage: "Previous" => "Föregående"
 // ts.nextPage: "Next" => "Nästa"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Används när 'Undersökningslayout' är inställt på 'Enskilt inmatningsfält per sida'. I den här layouten är matrisen uppdelad så att varje inmatningsfält visas på en separat sida. Använd platshållaren {rowIndex} för att infoga automatisk numrering, {rowTitle} eller {rowName} för att referera till radens rubrik eller ID och {row.columnid} för att inkludera värdet för en specifik matriskolumn."
+// qt.slider: "Slider" => "Skjutreglage"
+// pe.isExclusive: "Clear others when selected" => "Rensa andra när du väljer det här alternativet"
+// slider.min: "Min value" => "Minsta värde"
+// slider.max: "Max value" => "Max värde"
+// slider.step: "Step value" => "Steg-värde"
+// slider.showLabels: "Show scale labels" => "Visa skaletiketter"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Visa verktygstips"
+// slider.allowSwap: "Allow thumb crossing" => "Tillåt tumkorsning"
+// slider.labelCount: "Number of auto-generated labels" => "Antal automatiskt genererade etiketter"
+// slider.minValueExpression: "Min value expression" => "Uttryck för minsta värde"
+// slider.maxValueExpression: "Max value expression" => "Uttryck för maximalt värde"
+// slider.autoGenerate: "Scale labels configuration" => "Konfiguration av skalningsetiketter"
+// tabs.sliderSettings: "Slider Settings" => "Inställningar för skjutreglage"
+// sliderType.single: "Single-Value" => "Enkelt värde"
+// sliderType.range: "Range" => "Sortiment"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Gör detta val exklusivt. När den väljs av en användare kommer den automatiskt att avmarkera alla andra alternativ i frågan."

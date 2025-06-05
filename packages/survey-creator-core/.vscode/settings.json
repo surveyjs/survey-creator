@@ -22,4 +22,14 @@
     "eslint.format.enable": true,
     "endOfLine": "crlf",
     "testing.automaticallyOpenTestResults": "neverOpen",
+    "jest.virtualFolders": [
+        {
+            "name": "tests"
+        },
+        {
+            "name": "tests-preset",
+            "runMode": "on-demand",
+            "jestCommandLine": "npm run test:presets --"
+        }
+    ]
 }

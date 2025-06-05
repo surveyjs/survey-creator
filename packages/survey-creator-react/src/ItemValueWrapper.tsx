@@ -63,6 +63,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
     this.model.item = this.props.item;
     const button = this.model.allowAdd ? (
       attachKey2click(<span
+        role="button"
         className="svc-item-value-controls__button svc-item-value-controls__add"
         aria-label={this.model.tooltip}
         onClick={() => {
@@ -83,6 +84,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
           </span>
         ) : null}
         {this.model.allowRemove ? attachKey2click(<span
+          role="button"
           className="svc-item-value-controls__button svc-item-value-controls__remove"
           aria-label={this.model.tooltip}
           onClick={() => this.model.remove(this.model)}

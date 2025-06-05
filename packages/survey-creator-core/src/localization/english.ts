@@ -446,6 +446,7 @@ export var enStrings = {
       prefix: "Currency prefix",
       suffix: "Currency suffix"
     },
+    isExclusive: "Clear others when selected",
     imageHeight: "Display area height",
     imageWidth: "Display area width",
     valueName: "Join identifier",
@@ -1501,6 +1502,7 @@ export var enStrings = {
       showInMultipleColumns: "When selected, creates an individual column for each choice option.",
       colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix.",
     },
+    isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question.",
     caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent.",
     widthMode: "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used.",
     cookieName: "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions.",
