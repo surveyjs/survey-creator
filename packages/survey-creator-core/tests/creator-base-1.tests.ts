@@ -3749,6 +3749,21 @@ test("Carry-forward banner", (): any => {
   params.onClick();
   expect(creator.selectedElementName).toBe("q11");
 });
+test("Carry-forward banner, if useElementTitles is true", (): any => {
+  const creator = new CreatorTester({ useElementTitles: true });
+  creator.JSON = {
+    elements: [
+      { type: "dropdown", name: "714a02f5d68d", title: "Question 1", choices: [1, 2, 3, 4, 5] },
+      { type: "dropdown", name: "q2", title: "Title 2", choicesFromQuestion: "714a02f5d68d" },
+    ]
+  };
+  const q2 = creator.survey.getQuestionByName("q2");
+  const q2AdornerModel = new QuestionAdornerViewModel(creator, q2, undefined);
+  expect(q2AdornerModel.isBannerShowing).toBeTruthy();
+
+  const params = q2AdornerModel.createBannerParams();
+  expect(params.actionText).toBe("Question 1");
+});
 test("Choices restful banner", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
