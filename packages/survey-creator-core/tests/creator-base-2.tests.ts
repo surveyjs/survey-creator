@@ -480,6 +480,7 @@ test("creator set theme should update headerView survey property", (): any => {
   creator.theme = { headerView: "basic" };
   expect(creator.survey.headerView).toBe("basic");
 });
+
 test("creator set theme should update headerView survey property", (): any => {
   const creator = new CreatorTester({
     clearTranslationsOnSourceTextChange: true
@@ -553,4 +554,41 @@ test("creator set theme should update headerView survey property", (): any => {
   expect(q2.locTitle.getJson()).toStrictEqual({
     de: "de: my question_new"
   });
+});
+
+test("Preserve defaultAddQuestionType", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [{ name: "page1" }]
+  };
+  const survey: SurveyModel = creator.survey;
+  settings.designer.defaultAddQuestionType = "radiogroup";
+  creator.rememberLastQuestionType = false;
+  const pageAdorner = new PageAdorner(creator, survey.pages[0]);
+  const questionTypeSelectorListModel = pageAdorner.questionTypeSelectorModel.popupModel.contentComponentData.model as ListModel;
+  const actionPopupViewModel = new PopupDropdownViewModel(pageAdorner.questionTypeSelectorModel.popupModel); // need for popupModel.onShow
+  pageAdorner.questionTypeSelectorModel.popupModel.show();
+
+  expect(pageAdorner.currentAddQuestionType).toEqual("");
+  expect(creator.currentAddQuestionType).toEqual("");
+  pageAdorner.addNewQuestion(pageAdorner, undefined as any);
+  const question1 = <QuestionRadiogroupModel>survey.getAllQuestions()[0];
+  expect(question1.getType()).toEqual("radiogroup");
+  expect(creator.addNewQuestionText).toEqual("Add Question");
+
+  expect(questionTypeSelectorListModel.actions[9].id).toEqual("text");
+  questionTypeSelectorListModel.onItemClick(questionTypeSelectorListModel.actions[9]);
+  const question2 = <QuestionRadiogroupModel>survey.getAllQuestions()[1];
+  expect(question2.getType()).toEqual("text");
+  expect(pageAdorner.currentAddQuestionType).toEqual("");
+  expect(creator.currentAddQuestionType).toEqual("");
+  expect(creator.addNewQuestionText).toEqual("Add Question");
+
+  pageAdorner.addNewQuestion(pageAdorner, undefined as any);
+  const question3 = <QuestionRadiogroupModel>survey.getAllQuestions()[2];
+  expect(question3.getType()).toEqual("radiogroup");
+  expect(pageAdorner.currentAddQuestionType).toEqual("");
+  expect(creator.currentAddQuestionType).toEqual("");
+  expect(creator.addNewQuestionText).toEqual("Add Question");
 });
