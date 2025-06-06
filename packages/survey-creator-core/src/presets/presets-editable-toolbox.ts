@@ -53,9 +53,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return { ...defaultJSON, ...props };
   }
   public createMainPageCore(): any {
-    const getRankingItemEnableIf = (name: string): string => {
-      return "{" + name + ".length} > 1 or {" + name + "} notcontains {item}";
-    };
     return {
       title: "Set Up the Toolbox",
       navigationTitle: "Toolbox",
@@ -289,28 +286,23 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     //const q = this.getMatrix(model);
     //q.value = this.allItems.filter(i => !i.category);
   }
-  private isItemValuesEqual(a: Array<ICreatorPresetToolboxItem>, b: Array<ICreatorPresetToolboxItem>): boolean {
-    if (!a || !b || a.length !== b.length) return false;
-    for (let i = 0; i < a.length; i++) {
-      if (a[i].name !== b[i].name || a[i].title !== b[i].title) return false;
-    }
-    return true;
-  }
-  private updateRankingLocalizationName(question: QuestionMatrixDynamicModel): void {
-    question.choices.forEach(item => {
-      item.locText.localizationName = "qt." + item.value;
-    });
-  }
+  // private isItemValuesEqual(a: Array<ICreatorPresetToolboxItem>, b: Array<ICreatorPresetToolboxItem>): boolean {
+  //   if (!a || !b || a.length !== b.length) return false;
+  //   for (let i = 0; i < a.length; i++) {
+  //     if (a[i].name !== b[i].name || a[i].title !== b[i].title) return false;
+  //   }
+  //   return true;
+  // }
+  // private updateRankingLocalizationName(question: QuestionMatrixDynamicModel): void {
+  //   question.choices.forEach(item => {
+  //     item.locText.localizationName = "qt." + item.value;
+  //   });
+  // }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     //this.setupQuestionsValueDefinition(model, json);
     this.getQuestionItems(model).value = creator.toolbox.items.map(i => this.createToolboxItemRow(i));
     const categories = creator.toolbox.categories.map(c => ({ category: c.name, items: c.items.map(i => this.createToolboxItemRow(i)) }));
     model.setValue(this.nameCategories, categories);
-    this.getQuestionCategories(model).visibleRows.forEach(row => {
-      row.onDetailPanelShowingChanged = () => {
-        this.onDetailPanelShowingChanged(row);
-      };
-    });
     this.updateShowCategoriesTitlesElements(model);
   }
   protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
@@ -319,23 +311,33 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     this.setupPageQuestions(model, newCreator);
     this.setupQuestionsValueCore(model, json, newCreator);
   }
-  private setupQuestionsValueDefinition(model: SurveyModel, json: any): void {
-    json = json || {};
-    const question = this.getMatrix(model);
-    const value = [];
-    const definition = json.definition || [];
-    definition.forEach(item => {
-      const val = {};
-      for (let key in item) {
-        val[key] = key === "json" ? JSON.stringify(item[key], null, 2) : item[key];
-      }
-      value.push(val);
-    });
-    question.value = value;
+  // private setupQuestionsValueDefinition(model: SurveyModel, json: any): void {
+  //   json = json || {};
+  //   const question = this.getMatrix(model);
+  //   const value = [];
+  //   const definition = json.definition || [];
+  //   definition.forEach(item => {
+  //     const val = {};
+  //     for (let key in item) {
+  //       val[key] = key === "json" ? JSON.stringify(item[key], null, 2) : item[key];
+  //     }
+  //     value.push(val);
+  //   });
+  //   question.value = value;
+  // }
+  private updateItemsFromCategories(model: SurveyModel) {
+    this.getQuestionItems(model).value = this.getQuestionCategories(model).value.map(r => [...r.items]).flat();
+  }
+  private updateCategoriesFromItems(model: SurveyModel) {
+    //TODO: Implement
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
-    if (name === this.nameMatrix) {
-      this.setQuestionItemsRows(model);
+    if (name === this.nameCategoriesMode) {
+      if (model.getValue(this.nameCategoriesMode) == "items") {
+        this.updateItemsFromCategories(model);
+      } else {
+        this.updateCategoriesFromItems(model);
+      }
     }
     if (name === this.nameShowCategoryTitles) {
       this.updateShowCategoriesTitlesElements(model);

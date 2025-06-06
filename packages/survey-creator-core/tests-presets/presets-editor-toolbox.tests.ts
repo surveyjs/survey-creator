@@ -84,3 +84,23 @@ test("Preset edit, toolbox - change category", () => {
   expect(editor.json.toolbox.categories[1].items).toStrictEqual(["text", "comment", "multipletext", "panel"]);
   expect(editor.json.toolbox.categories[2].items).toStrictEqual(["paneldynamic"]);
 });
+
+test("Preset edit, toolbox - switch to items mode", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const row = categQuestion.visibleRows[1];
+  row.showDetailPanel();
+  const itemsQuestion = row.getQuestionByName("items");
+  itemsQuestion.visibleRows[1].setValue("iconName", "icon-test");
+
+  survey.getQuestionByName("toolbox_mode").value = "items";
+  const allItemsQuestion = survey.getQuestionByName("toolbox_items");
+  const itemRow = allItemsQuestion.visibleRows.filter(r => r.getValue("name") == "comment")[0];
+  expect(itemRow.getValue("iconName")).toBe("icon-test");
+
+  itemRow.getQuestionByName("iconName").value = "icon-test2";
+  editor.applyFromSurveyModel();
+  expect(editor.json.toolbox.definition.filter(i => i.name == "comment")[0].iconName).toEqual("icon-test2");
+});
