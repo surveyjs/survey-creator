@@ -290,14 +290,48 @@ export interface ICreatorOptions {
   maxLogicItemsInCondition?: number;
 
   /**
-   * Limits the number of nested panels within a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element.
-   *
-   * Default value: -1 (unlimited)
+   * @deprecated Use the [`maxPanelNestingLevel`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxPanelNestingLevel) property instead.
    */
   maxNestedPanels?: number;
 
+  /**
+   * Specifies the maximum depth allowed for nested [Panels](https://surveyjs.io/form-library/documentation/api-reference/panel-model) and [Dynamic Panels](https://surveyjs.io/form-library/documentation/api-reference/dynamic-panel-model) in the survey.
+   *
+   * This property behaves as follows:
+   *
+   * - A value of -1 applies no restriction on nesting depth.
+   * - A value of 0 means that Panels and Dynamic Panels cannot contain other panels&mdash;only questions are allowed.
+   * - Positive integers specify the maximum nesting level.
+   *
+   * Default value: -1 (unlimited)
+   *
+   * If you don't want users to nest certain element types within panels, specify the [`forbiddenNestedElements`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#forbiddenNestedElements) property.
+   */
   maxPanelNestingLevel?: number;
 
+  /**
+   * Specifies which element types are forbidden from being nested inside [Panels](https://surveyjs.io/form-library/documentation/api-reference/panel-model) and [Dynamic Panels](https://surveyjs.io/form-library/documentation/api-reference/dynamic-panel-model).
+   *
+   * This property is an object with the following structure:
+   *
+   * - `panel`: An array of element types that cannot be nested within a regular panel.
+   * - `paneldynamic`: An array of element types that cannot be nested within a dynamic panel.
+   *
+   * In the following example, dynamic panels are disallowed inside regular panels, and both regular and dynamic panels are disallowed inside a dynamic panel:
+   *
+   * ```js
+   * import { SurveyCreatorModel } from "survey-creator-core";
+   * const creatorOptions = {
+   *   // ...
+   *   forbiddenNestedElements: {
+   *     panel: [ "paneldynamic" ],
+   *     paneldynamic: [ "panel", "paneldynamic" ]
+   *   }
+   * };
+   * const creator = new SurveyCreatorModel(creatorOptions);
+   * ```
+   * @see maxPanelNestingLevel
+   */
   forbiddenNestedElements?: { panel: string[], paneldynamic: string[] };
 
   /**
