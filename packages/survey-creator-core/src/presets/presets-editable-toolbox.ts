@@ -184,6 +184,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return categories.map(c => ({ category: c.category, title: c.title, items: c.items.map(i => i.name) }));
   }
   private cleanIfNotDiffers(item, defaultItem) {
+    if (!defaultItem) return true;
     let differs = false;
     Object.keys(item).forEach(key => {
       if (!Helpers.isTwoValueEquals(item[key], defaultItem[key])) {
@@ -220,7 +221,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
 
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if (this.isItemsMatrix(options.question)) {
-      const iconName = options.question.value.filter(v => v.name == options.row.getValue("name"))[0].iconName;
+      const iconName = options.question.value?.filter(v => v.name == options.row.getValue("name"))[0]?.iconName;
       options.actions.push({
         id: iconName,
         iconName: iconName,
@@ -260,15 +261,32 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     }
   }
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-    if (options.question.name == "items") {
+    if (options.question.name == "items" || options.question.name == this.nameItems) {
       const rowData = options.question.value[options.rowIndex];
       const hiddenItems = this.getMatrix(model);
       const value = hiddenItems.value ? [...hiddenItems.value] : [];
       value.push(rowData);
       hiddenItems.value = value;
-    } else {
-      options.allow = false;
+      return;
     }
+    if (options.question.name == this.nameMatrix) {
+      const rowData = options.question.value[options.rowIndex];
+      const mode = model.getValue(this.nameCategoriesMode);
+      if (mode === "items") {
+        const items = this.getQuestionItems(model);
+        const value = items.value ? [...items.value] : [];
+        value.push(rowData);
+        items.value = value;
+      } else {
+        const categories = this.getQuestionCategories(model);
+        const catValue = categories.value;
+        const general = this.findOrCreateGeneralCategory(catValue);
+        general.items.push(rowData);
+        categories.value = catValue;
+      }
+      return;
+    }
+    options.allow = false;
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     this.setupPageQuestions(model, creatorSetup.creator);
@@ -343,8 +361,34 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private updateItemsFromCategories(model: SurveyModel) {
     this.getQuestionItems(model).value = this.getQuestionCategories(model).value.map(r => [...r.items]).flat();
   }
+  private findOrCreateGeneralCategory(categories: any) {
+    let generalCategory = categories.filter(c => c.category == "general")[0];
+    if (!generalCategory) {
+      generalCategory = { category: "general", title: "General", items: [] };
+      categories.push(generalCategory);
+    }
+    return generalCategory;
+  }
   private updateCategoriesFromItems(model: SurveyModel) {
-    //TODO: Implement
+    const categories = this.getQuestionCategories(model).value;
+    const items = [...this.getQuestionItems(model).value];
+    const itemsObject = items.reduce((acc, item) => {
+      acc[item.name] = item;
+      return acc;
+    }, {});
+    categories.forEach(category => {
+      category.items = category.items.map(item => {
+        const res = itemsObject[item.name];
+        delete itemsObject[item.name];
+        return res;
+      }).filter(i => !!i);
+    });
+    const unsortedNames = Object.keys(itemsObject);
+    if (unsortedNames.length > 0) {
+      let generalCategory = this.findOrCreateGeneralCategory(categories);
+      generalCategory.items = generalCategory.items.concat(unsortedNames.map(name => this.createToolboxItemRow(itemsObject[name])));
+    }
+    this.getQuestionCategories(model).value = categories;
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if (name === this.nameCategoriesMode) {

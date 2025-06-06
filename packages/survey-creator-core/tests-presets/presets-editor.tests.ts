@@ -187,30 +187,33 @@ test("Preset edit model, toolbox definition page, matrix actions", () => {
   expect(matrixQuestion.renderedTable.rows[1].cells[1].item.getData().actions[0].iconName).toEqual("icon-radiogroup");
 });
 
-test("Preset edit model, toolbox definition page, apply", () => {
+test("Preset edit model, custom items, apply", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
+  survey.setValue("toolbox_mode", "items");
   const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
   matrixQuestion.addRow();
   const row = matrixQuestion.visibleRows[0];
+  row.showDetailPanel();
   const nameQuestion = row.getQuestionByName("name");
   nameQuestion.value = "name1";
-  row.showDetailPanel();
-  const jsonQuestion = row.getQuestionByName("json");
-  jsonQuestion.value = "{ type: \"text\", inputType: \"date\" }";
-  expect(editor.applyFromSurveyModel()).toBeTruthy();
-  const etalon: ICreatorPresetData = {
-    toolbox: {
-      definition: [
-        {
-          name: "name1",
-          json: { type: "text", inputType: "date" }
-        }
-      ]
-    }
+  const tooltipQuestion = row.getQuestionByName("tooltip");
+  tooltipQuestion.value = "tooltip1";
+  const value = matrixQuestion.value;
+  value[0].json = { type: "text" };
+  matrixQuestion.value = value;
+
+  matrixQuestion.removeRow(0);
+
+  const etalon = {
+    name: "name1",
+    tooltip: "tooltip1",
+    json: { type: "text" }
   };
+
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
   const testJson = editor.preset.getJson();
-  expect(testJson).toEqual(etalon);
+  expect(testJson.toolbox.definition.filter(d => d.name == "name1")[0]).toEqual(etalon);
 });
 test("Preset edit model, toolbox items, default value and apply", () => {
   const editor = new CreatorPresetEditorModel();
