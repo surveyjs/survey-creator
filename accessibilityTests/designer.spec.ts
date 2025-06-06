@@ -124,7 +124,7 @@ test.describe("designer a11y", () => {
         }
       ],
     });
-    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(500);
     await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
   });
 
@@ -256,7 +256,7 @@ test.describe("designer a11y", () => {
         }
       ],
     });
-    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(500);
     await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
   });
 
@@ -276,7 +276,7 @@ test.describe("designer a11y", () => {
         }
       ],
     });
-    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(500);
     await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
   });
 });
