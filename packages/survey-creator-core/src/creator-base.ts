@@ -4208,6 +4208,11 @@ export class SurveyCreatorModel extends Base
     if (!element) return availableToolboxItems;
     if (element.isPanel || SurveyHelper.isPanelDynamic(element)) {
       availableToolboxItems = availableToolboxItems.filter((item) => this.isAllowedToAdd(item.typeName, element));
+    } else {
+      const parentContainers = SurveyHelper.getElementParentContainers(element, false);
+      if (!!parentContainers[0]) {
+        availableToolboxItems = availableToolboxItems.filter((item) => this.isAllowedToAdd(item.typeName, parentContainers[0]));
+      }
     }
 
     return availableToolboxItems;
