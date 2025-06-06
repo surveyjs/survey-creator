@@ -45,6 +45,7 @@ export var skStrings = {
     paneldynamic: "Panel (dynamické panely)",
     radiogroup: "Skupina tlačidiel",
     rating: "Hodnotenie",
+    slider: "Jazdec",
     text: "Jeden vstup",
     boolean: "Yes/No (Boolean)",
     expression: "Výraz (iba na čítanie)",
@@ -443,6 +444,7 @@ export var skStrings = {
       prefix: "Predčíslievanie meny",
       suffix: "Prípona meny"
     },
+    isExclusive: "Vymažte ostatné, keď sú vybraté",
     imageHeight: "Výška obrázka",
     imageWidth: "Šírka obrázka",
     valueName: "Názov hodnoty",
@@ -742,6 +744,18 @@ export var skStrings = {
     rateValues: "Vlastné hodnoty sadzieb",
     rateCount: "Počet sadzieb",
     autoGenerate: "Ako určiť hodnoty sadzieb?",
+    slider: {
+      min: "Minimálna hodnota",
+      max: "Maximálna hodnota",
+      step: "Hodnota kroku",
+      showLabels: "Zobrazenie štítkov mierky",
+      tooltipVisibilityPG: "Zobraziť popisy",
+      allowSwap: "Povoliť prekríženie palca",
+      labelCount: "Počet automaticky vygenerovaných štítkov",
+      minValueExpression: "Výraz minimálnej hodnoty",
+      maxValueExpression: "Vyjadrenie maximálnej hodnoty",
+      autoGenerate: "Konfigurácia štítkov váhy"
+    },
     hideIfChoicesEmpty: "Skryť otázku, ak neobsahuje žiadne možnosti",
     minWidth: "Minimálna šírka (v hodnotách akceptovaných CSS)",
     maxWidth: "Maximálna šírka (v hodnotách akceptovaných CSS)",
@@ -823,6 +837,7 @@ export var skStrings = {
       enableIf: "Povoliť ak",
       requiredIf: "Povinné ak",
       rateValues: "Hodnoty hodnotenia",
+      sliderSettings: "Nastavenia posuvníka",
       choicesByUrl: "Možnosti z webu",
       matrixChoices: "Predvolené možnosti",
       multipleTextItems: "Zadania textu",
@@ -1043,6 +1058,10 @@ export var skStrings = {
       time: "Čas",
       url: "URL adresa",
       week: "Týždeň"
+    },
+    sliderType: {
+      single: "Jedna hodnota",
+      range: "Rozsah"
     },
     autocomplete: {
       name: "Celé meno",
@@ -1475,6 +1494,7 @@ export var skStrings = {
       showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu.",
       colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
     },
+    isExclusive: "Vďaka tomu je táto voľba exkluzívna. Keď používateľ vyberie, automaticky zruší výber všetkých ostatných možností v otázke.",
     caseInsensitive: "Vyberte, či sa veľké a malé písmená v regulárnom výraze musia považovať za ekvivalentné.",
     widthMode: "Vyberte si z: \"Statický\" - nastavuje pevnú šírku; \"Responzívny\" - spôsobuje, že prieskum zaberá celú šírku obrazovky; \"Auto\" - použije ktorýkoľvek z týchto dvoch v závislosti od použitých typov otázok.",
     cookieName: "Súbory cookie zabraňujú používateľom vyplniť ten istý prieskum dvakrát.",
@@ -3016,3 +3036,19 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // ts.prevPage: "Previous" => "Predchádzajúci"
 // ts.nextPage: "Next" => "Budúci"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Používa sa, keď je \"Rozloženie prieskumu\" nastavené na \"Jedno vstupné pole na stranu\". V tomto rozložení je matica rozdelená tak, aby sa každé vstupné pole zobrazilo na samostatnej strane. Zástupný symbol {rowIndex} použite na vloženie automatického číslovania, {rowTitle} alebo {rowName} na odkazovanie na názov alebo ID riadka a {row.columnid} na zahrnutie hodnoty konkrétneho stĺpca matice."
+// qt.slider: "Slider" => "Jazdec"
+// pe.isExclusive: "Clear others when selected" => "Vymažte ostatné, keď sú vybraté"
+// slider.min: "Min value" => "Minimálna hodnota"
+// slider.max: "Max value" => "Maximálna hodnota"
+// slider.step: "Step value" => "Hodnota kroku"
+// slider.showLabels: "Show scale labels" => "Zobrazenie štítkov mierky"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Zobraziť popisy"
+// slider.allowSwap: "Allow thumb crossing" => "Povoliť prekríženie palca"
+// slider.labelCount: "Number of auto-generated labels" => "Počet automaticky vygenerovaných štítkov"
+// slider.minValueExpression: "Min value expression" => "Výraz minimálnej hodnoty"
+// slider.maxValueExpression: "Max value expression" => "Vyjadrenie maximálnej hodnoty"
+// slider.autoGenerate: "Scale labels configuration" => "Konfigurácia štítkov váhy"
+// tabs.sliderSettings: "Slider Settings" => "Nastavenia posuvníka"
+// sliderType.single: "Single-Value" => "Jedna hodnota"
+// sliderType.range: "Range" => "Rozsah"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Vďaka tomu je táto voľba exkluzívna. Keď používateľ vyberie, automaticky zruší výber všetkých ostatných možností v otázke."

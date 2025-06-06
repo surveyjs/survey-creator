@@ -1177,3 +1177,40 @@ test("Page Selector - The selected element is not updated when navigating betwee
 
   surveySettings.animationEnabled = true;
 });
+
+test("Check css variable sv-popup-overlay-height", (): any => {
+  const rootElement = document.createElement("div");
+  try {
+    rootElement.style.setProperty("width", "1200px");
+    rootElement.style.setProperty("height", "800px");
+    const simulatorElement = document.createElement("div");
+    simulatorElement.className = "svd-simulator-content";
+    rootElement.appendChild(simulatorElement);
+
+    const creator: CreatorTester = new CreatorTester();
+    creator.setRootElement(rootElement);
+    const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+    creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: ["Item1", "Item2", "Item3"] }] };
+    creator.switchTab("test");
+    const simulator: SurveySimulatorModel = testPlugin.model.simulator;
+    expect(simulatorElement.style.getPropertyValue("--sv-popup-overlay-height")).toBeFalsy();
+
+    simulator.device = "iPhone15";
+    expect(simulatorElement.style.getPropertyValue("--sv-popup-overlay-height")).toBe("100%");
+
+    simulator.landscape = true;
+    expect(simulatorElement.style.getPropertyValue("--sv-popup-overlay-height")).toBe("100%");
+
+    simulator.device = "iPadMini";
+    expect(simulatorElement.style.getPropertyValue("--sv-popup-overlay-height")).toBe("614.4px");
+
+    simulator.landscape = false;
+    expect(simulatorElement.style.getPropertyValue("--sv-popup-overlay-height")).toBe("819.2px");
+
+    simulator.device = "desktop";
+    expect(simulatorElement.style.getPropertyValue("--sv-popup-overlay-height")).toBeFalsy();
+
+  } finally {
+    rootElement.remove();
+  }
+});

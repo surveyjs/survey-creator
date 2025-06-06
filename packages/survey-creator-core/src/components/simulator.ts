@@ -12,6 +12,26 @@ export class SurveySimulatorModel extends Base {
       options.menuType = device.deviceType === "desktop" ? "dropdown" : (device.deviceType == "tablet" ? "popup" : "overlay");
     });
   }
+  private updateSimulatorStyle(): void {
+    const device = simulatorDevices[this.activeDevice];
+    const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
+
+    const simulator = this.surveyProvider.rootElement?.getElementsByClassName("svd-simulator-content")[0] as HTMLElement;
+    if (!!simulator) {
+      let overlayHeight = undefined;
+      if (device.deviceType === "tablet") {
+        overlayHeight = `${deviceHeight * this.scale}px`;
+      } else if (device.deviceType === "phone") {
+        overlayHeight = "100%";
+      }
+
+      if (!!overlayHeight) {
+        simulator.style.setProperty("--sv-popup-overlay-height", overlayHeight);
+      } else {
+        simulator.style.removeProperty("--sv-popup-overlay-height");
+      }
+    }
+  }
 
   constructor(private surveyProvider: SurveyCreatorModel) {
     super();
@@ -46,11 +66,19 @@ export class SurveySimulatorModel extends Base {
     // }
   }
 
-  @property({ defaultValue: true }) landscape: boolean;
+  @property({ defaultValue: true,
+    onSet: (newVal:string, targer: SurveySimulatorModel) => {
+      targer.updateSimulatorStyle();
+    }
+  }) landscape: boolean;
   @property({
     onSet: (newVal: SurveyModel, target: SurveySimulatorModel) => { target.surveyChanged(); }
   }) survey: SurveyModel;
-  @property({ defaultValue: "desktop" }) device: string;
+  @property({ defaultValue: "desktop",
+    onSet: (newVal:string, targer: SurveySimulatorModel) => {
+      targer.updateSimulatorStyle();
+    }
+  }) device: string;
   @property({ defaultValue: "l" }) orientation: string;
   @property({ defaultValue: true }) considerDPI: boolean;
   @property({ defaultValue: true }) isRunning: boolean;
@@ -127,6 +155,10 @@ export class SurveySimulatorModel extends Base {
   //   this.landscape = isLanscape;
   // }
 
+  get scale(): number {
+    return 1;//DEFAULT_MONITOR_DPI / device.ppi
+  }
+
   public get hasFrame(): boolean {
     var device = simulatorDevices[this.activeDevice];
     return this.simulatorEnabled && device.deviceType !== "desktop";
@@ -137,7 +169,7 @@ export class SurveySimulatorModel extends Base {
       return undefined;
     }
     const device = simulatorDevices[this.activeDevice];
-    const scale = 1;//DEFAULT_MONITOR_DPI / device.ppi;
+    const scale = this.scale;
 
     const deviceWidth = (this.landscapeOrientation ? device.height : device.width) / device.cssPixelRatio;
     const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;

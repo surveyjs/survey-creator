@@ -423,7 +423,7 @@ test("itemvalue[] custom dropdown property add showMode as 'form'", () => {
   expect(choicesQuestion.columns).toHaveLength(2);
   const row = choicesQuestion.visibleRows[0];
   row.showDetailPanel();
-  expect(row.detailPanel.elements).toHaveLength(3);
+  expect(row.detailPanel.elements).toHaveLength(4);
   const thirdElement = row.detailPanel.elements[2];
   expect(thirdElement.name).toEqual("prop1");
   expect(thirdElement.getType()).toEqual("dropdown");
@@ -444,7 +444,7 @@ test("itemvalue[] custom add showMode as 'form', create in general category by d
   expect(choicesQuestion.columns).toHaveLength(2);
   const row = choicesQuestion.visibleRows[0];
   row.showDetailPanel();
-  expect(row.detailPanel.elements).toHaveLength(3);
+  expect(row.detailPanel.elements).toHaveLength(4);
   const thirdElement = row.detailPanel.elements[2];
   expect(thirdElement.name).toEqual("prop1");
 
@@ -2714,6 +2714,24 @@ test("Different property editors for trigger value in panel", () => {
   question = panel.getQuestionByName("setValue");
   expect(question).toBeTruthy();
   expect(question.getType()).toEqual("dropdown");
+});
+test("Show baseselect logic properties after question logic properties, Bug#6936", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3, 4, 5] }
+    ]
+  });
+  const q1 = <QuestionDropdownModel>survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  const panel = <PanelModel>propertyGrid.survey.getPanelByName("logic");
+  const getIndex = (name: string): number => {
+    const question = panel.getQuestionByName(name);
+    return panel.questions.indexOf(question);
+  };
+  const questionCount = panel.questions.length;
+  expect(getIndex("hideIfChoicesEmpty")).toBe(questionCount - 3);
+  expect(getIndex("choicesVisibleIf")).toBe(questionCount - 2);
+  expect(getIndex("choicesEnableIf")).toBe(questionCount - 1);
 });
 test("AllowRowsDragDrop and property readOnly", () => {
   const question = new QuestionDropdownModel("q1");

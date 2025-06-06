@@ -45,6 +45,7 @@ var italianTranslation = {
     paneldynamic: "Pannello dinamico",
     radiogroup: "Opzione multipla",
     rating: "Valutazione",
+    slider: "Cursore",
     text: "Testo semplice",
     boolean: "Booleano",
     expression: "Espressione (sola lettura)",
@@ -443,6 +444,7 @@ var italianTranslation = {
       prefix: "Prefisso di valuta",
       suffix: "Suffisso valuta"
     },
+    isExclusive: "Cancella gli altri quando selezionato",
     imageHeight: "Altezza immagine",
     imageWidth: "Larghezza immagine",
     valueName: "Nome Valore",
@@ -742,6 +744,18 @@ var italianTranslation = {
     rateValues: "Valori personalizzati",
     rateCount: "Conteggio delle tariffe",
     autoGenerate: "Come specificare i valori dei tassi?",
+    slider: {
+      min: "Valore minimo",
+      max: "Valore massimo",
+      step: "Valore del passo",
+      showLabels: "Mostra le etichette della scala",
+      tooltipVisibilityPG: "Mostra descrizioni comandi",
+      allowSwap: "Consenti l'incrocio del pollice",
+      labelCount: "Numero di etichette generate automaticamente",
+      minValueExpression: "Espressione del valore minimo",
+      maxValueExpression: "Espressione del valore massimo",
+      autoGenerate: "Configurazione delle etichette della bilancia"
+    },
     hideIfChoicesEmpty: "Nascondi la domanda se non ci sono scelte",
     minWidth: "Larghezza minima (in valori accettati da CSS)",
     maxWidth: "Larghezza massima (in valori accettati da CSS)",
@@ -823,6 +837,7 @@ var italianTranslation = {
       enableIf: "Editabile se",
       requiredIf: "Obbligatoria se",
       rateValues: "Valori della classifica",
+      sliderSettings: "Impostazioni del dispositivo di scorrimento",
       choicesByUrl: "Opzioni da URL",
       matrixChoices: "Opzioni predefinite",
       multipleTextItems: "Voci di testo",
@@ -1043,6 +1058,10 @@ var italianTranslation = {
       time: "Ore",
       url: "URL",
       week: "Settimana"
+    },
+    sliderType: {
+      single: "Valore singolo",
+      range: "Gamma"
     },
     autocomplete: {
       name: "Nome completo",
@@ -1475,6 +1494,7 @@ var italianTranslation = {
       showInMultipleColumns: "Quando questa opzione è selezionata, crea una singola colonna per ogni opzione di scelta.",
       colCount: "Dispone le opzioni di scelta in un layout a più colonne. Se impostato su 0, le opzioni vengono visualizzate in una singola riga. Se impostato su -1, il valore effettivo viene ereditato dalla proprietà \"Conteggio colonne nidificate\" della matrice padre."
     },
+    isExclusive: "Rende questa scelta esclusiva. Quando viene selezionato da un utente, deseleziona automaticamente tutte le altre opzioni nella domanda.",
     caseInsensitive: "Selezionare se le lettere maiuscole e minuscole nell'espressione regolare devono essere considerate equivalenti.",
     widthMode: "Scegli tra: \"Statico\" - imposta una larghezza fissa; \"Responsive\" - fa sì che il sondaggio occupi l'intera larghezza dello schermo; \"Auto\": applica uno dei due a seconda del tipo di domanda utilizzato.",
     cookieName: "I cookie impediscono agli utenti di compilare due volte lo stesso sondaggio.",
@@ -2824,3 +2844,19 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // ts.prevPage: "Previous" => "Precedente"
 // ts.nextPage: "Next" => "Prossimo"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Utilizzato quando il \"Layout indagine\" è impostato su \"Singolo campo di input per pagina\". In questo layout, la matrice viene suddivisa in modo che ogni campo di input appaia su una pagina separata. Utilizza il segnaposto {rowIndex} per inserire la numerazione automatica, {rowTitle} o {rowName} per fare riferimento al titolo o all'ID della riga e {row.columnid} per includere il valore di una colonna matrice specifica."
+// qt.slider: "Slider" => "Cursore"
+// pe.isExclusive: "Clear others when selected" => "Cancella gli altri quando selezionato"
+// slider.min: "Min value" => "Valore minimo"
+// slider.max: "Max value" => "Valore massimo"
+// slider.step: "Step value" => "Valore del passo"
+// slider.showLabels: "Show scale labels" => "Mostra le etichette della scala"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Mostra descrizioni comandi"
+// slider.allowSwap: "Allow thumb crossing" => "Consenti l'incrocio del pollice"
+// slider.labelCount: "Number of auto-generated labels" => "Numero di etichette generate automaticamente"
+// slider.minValueExpression: "Min value expression" => "Espressione del valore minimo"
+// slider.maxValueExpression: "Max value expression" => "Espressione del valore massimo"
+// slider.autoGenerate: "Scale labels configuration" => "Configurazione delle etichette della bilancia"
+// tabs.sliderSettings: "Slider Settings" => "Impostazioni del dispositivo di scorrimento"
+// sliderType.single: "Single-Value" => "Valore singolo"
+// sliderType.range: "Range" => "Gamma"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Rende questa scelta esclusiva. Quando viene selezionato da un utente, deseleziona automaticamente tutte le altre opzioni nella domanda."

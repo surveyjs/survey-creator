@@ -45,6 +45,7 @@ export var huStrings = {
     paneldynamic: "Panel (dinamikus)",
     radiogroup: "Választógomb",
     rating: "Értékelés",
+    slider: "Csúszka",
     text: "Egysoros szöveg",
     boolean: "Igaz-hamis",
     expression: "Kifejezés (csak olvasható)",
@@ -443,6 +444,7 @@ export var huStrings = {
       prefix: "Pénznem előtag",
       suffix: "Pénznem utótagja"
     },
+    isExclusive: "Mások törlése, ha ki van jelölve",
     imageHeight: "Kép magassága",
     imageWidth: "Kép szélessége",
     valueName: "Érték megnevezése",
@@ -742,6 +744,18 @@ export var huStrings = {
     rateValues: "Egyéni díjértékek",
     rateCount: "Árak száma",
     autoGenerate: "Hogyan lehet megadni a díjértékeket?",
+    slider: {
+      min: "Minimális érték",
+      max: "Maximális érték",
+      step: "Lépés értéke",
+      showLabels: "Léptékfeliratok megjelenítése",
+      tooltipVisibilityPG: "Eszköztippek megjelenítése",
+      allowSwap: "Hüvelykujj keresztezésének engedélyezése",
+      labelCount: "Automatikusan generált címkék száma",
+      minValueExpression: "Minimális érték kifejezés",
+      maxValueExpression: "Maximális érték kifejezés",
+      autoGenerate: "Méretezési címkék konfigurálása"
+    },
     hideIfChoicesEmpty: "A kérdés elrejtése, ha nem tartalmaz választási lehetőségeket",
     minWidth: "Minimális szélesség (CSS által elfogadott értékekben)",
     maxWidth: "Maximális szélesség (CSS által elfogadott értékekben)",
@@ -823,6 +837,7 @@ export var huStrings = {
       enableIf: "Engedélyezve ha",
       requiredIf: "Kötelező ha",
       rateValues: "Szorzó értékek",
+      sliderSettings: "Csúszka beállításai",
       choicesByUrl: "Lehetőségek a webről",
       matrixChoices: "Alapértelmezett lehetőségek",
       multipleTextItems: "Szövegmezők",
@@ -1043,6 +1058,10 @@ export var huStrings = {
       time: "Idő",
       url: "URL",
       week: "Hét"
+    },
+    sliderType: {
+      single: "Egyértékű",
+      range: "Tartomány"
     },
     autocomplete: {
       name: "Teljes név",
@@ -1475,6 +1494,7 @@ export var huStrings = {
       showInMultipleColumns: "Ha be van jelölve, minden választási lehetőséghez külön oszlopot hoz létre.",
       colCount: "Az adatválaszték-beállításokat többoszlopos elrendezésbe rendezi. Ha 0-ra van állítva, a beállítások egyetlen sorban jelennek meg. Ha -1 értékre van állítva, a tényleges érték a szülőmátrix \"Beágyazott oszlopok száma\" tulajdonságából öröklődik."
     },
+    isExclusive: "Kizárólagossá teszi ezt a választást. Ha egy felhasználó kiválasztja, automatikusan törli a kérdés összes többi beállításának kijelölését.",
     caseInsensitive: "Válassza ki, hogy a reguláris kifejezés kis- és nagybetűit egyenértékűként kell-e kezelni.",
     widthMode: "Válasszon a következők közül: \"Statikus\" - rögzített szélességet állít be; \"Reszponzív\" - a felmérés a képernyő teljes szélességét elfoglalja; \"Automatikus\" - a használt kérdéstípusoktól függően a kettő egyikét alkalmazza.",
     cookieName: "A cookie-k megakadályozzák, hogy a felhasználók kétszer töltsék ki ugyanazt a felmérést.",
@@ -3214,3 +3234,19 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // ts.prevPage: "Previous" => "Előző"
 // ts.nextPage: "Next" => "Következő"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Akkor használatos, ha a \"Felmérés elrendezése\" beállítása \"Egyetlen beviteli mező oldalanként\". Ebben az elrendezésben a mátrix fel van osztva, így minden beviteli mező külön oldalon jelenik meg. A {rowIndex} helyőrzővel szúrja be az automatikus számozást, a {rowTitle} vagy a {rowName} használatával hivatkozzon a sor címére vagy azonosítójára, a {row.columnid} pedig egy adott mátrixoszlop értékét foglalja bele."
+// qt.slider: "Slider" => "Csúszka"
+// pe.isExclusive: "Clear others when selected" => "Mások törlése, ha ki van jelölve"
+// slider.min: "Min value" => "Minimális érték"
+// slider.max: "Max value" => "Maximális érték"
+// slider.step: "Step value" => "Lépés értéke"
+// slider.showLabels: "Show scale labels" => "Léptékfeliratok megjelenítése"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Eszköztippek megjelenítése"
+// slider.allowSwap: "Allow thumb crossing" => "Hüvelykujj keresztezésének engedélyezése"
+// slider.labelCount: "Number of auto-generated labels" => "Automatikusan generált címkék száma"
+// slider.minValueExpression: "Min value expression" => "Minimális érték kifejezés"
+// slider.maxValueExpression: "Max value expression" => "Maximális érték kifejezés"
+// slider.autoGenerate: "Scale labels configuration" => "Méretezési címkék konfigurálása"
+// tabs.sliderSettings: "Slider Settings" => "Csúszka beállításai"
+// sliderType.single: "Single-Value" => "Egyértékű"
+// sliderType.range: "Range" => "Tartomány"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Kizárólagossá teszi ezt a választást. Ha egy felhasználó kiválasztja, automatikusan törli a kérdés összes többi beállításának kijelölését."

@@ -45,6 +45,7 @@ export var danishStrings = {
     paneldynamic: "Panel (dynamiske paneler)",
     radiogroup: "Alternativknap",
     rating: "Vurdering",
+    slider: "Skyderen",
     text: "Tekstfelt",
     boolean: "Sandt/falsk",
     expression: "Udtryk",
@@ -443,6 +444,7 @@ export var danishStrings = {
       prefix: "Valutapræfiks",
       suffix: "Suffiks for valuta"
     },
+    isExclusive: "Ryd andre, når det er valgt",
     imageHeight: "Billedhøjde",
     imageWidth: "Billedbredde",
     valueName: "Værdiens navn",
@@ -742,6 +744,18 @@ export var danishStrings = {
     rateValues: "Tilpassede satsværdier",
     rateCount: "Antal satser",
     autoGenerate: "Hvordan angives satsværdier?",
+    slider: {
+      min: "Min. værdi",
+      max: "Maks. værdi",
+      step: "Trinværdi",
+      showLabels: "Vis skalaetiketter",
+      tooltipVisibilityPG: "Vis værktøjstip",
+      allowSwap: "Tillad tommelfingerkrydsning",
+      labelCount: "Antal automatisk genererede etiketter",
+      minValueExpression: "Udtryk for min. værdi",
+      maxValueExpression: "Udtryk for maks. værdi",
+      autoGenerate: "Konfiguration af skaleringsetiketter"
+    },
     hideIfChoicesEmpty: "Skjul spørgsmålet, hvis det ikke indeholder nogen valgmuligheder",
     minWidth: "Minimumbredde (i CSS-accepterede værdier)",
     maxWidth: "Maksimal bredde (i CSS-accepterede værdier)",
@@ -823,6 +837,7 @@ export var danishStrings = {
       enableIf: "Aktiv hvis",
       requiredIf: "Påkrævet, hvis",
       rateValues: "Bedøm-værdier",
+      sliderSettings: "Indstillinger for skyder",
       choicesByUrl: "Valgmuligheder fra Web",
       matrixChoices: "Standard valgmuligheder",
       multipleTextItems: "Tekst inputmuligheder",
@@ -1043,6 +1058,10 @@ export var danishStrings = {
       time: "Tidspunkt",
       url: "URL-adresse",
       week: "Uge"
+    },
+    sliderType: {
+      single: "Enkelt værdi",
+      range: "Interval"
     },
     autocomplete: {
       name: "Fulde navn",
@@ -1475,6 +1494,7 @@ export var danishStrings = {
       showInMultipleColumns: "Når denne indstilling er valgt, oprettes der en individuel kolonne for hver valgmulighed.",
       colCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Når den er angivet til -1, nedarves den faktiske værdi fra egenskaben \"Antal indlejrede kolonner\" for den overordnede matrix."
     },
+    isExclusive: "Gør dette valg eksklusivt. Når den vælges af en bruger, fravælger den automatisk alle andre muligheder i spørgsmålet.",
     caseInsensitive: "Vælg, om store og små bogstaver i det regulære udtryk skal behandles som ækvivalente.",
     widthMode: "Vælg mellem: \"Statisk\" - indstiller en fast bredde; \"Responsive\" - får undersøgelsen til at optage skærmens fulde bredde; \"Auto\" - gælder for en af de to afhængigt af de anvendte spørgsmålstyper.",
     cookieName: "Cookies forhindrer brugere i at udfylde den samme undersøgelse to gange.",
@@ -3247,3 +3267,19 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // ts.prevPage: "Previous" => "Tidligere"
 // ts.nextPage: "Next" => "Næste"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Bruges, når 'Undersøgelseslayout' er indstillet til 'Enkelt indtastningsfelt pr. side'. I dette layout er matrixen opdelt, så hvert inputfelt vises på en separat side. Brug pladsholderen {rowIndex} til at indsætte automatisk nummerering, {rowTitle} eller {rowName} til at referere til rækkens titel eller id, og {row.columnid} til at medtage værdien af en bestemt matrixkolonne."
+// qt.slider: "Slider" => "Skyderen"
+// pe.isExclusive: "Clear others when selected" => "Ryd andre, når det er valgt"
+// slider.min: "Min value" => "Min. værdi"
+// slider.max: "Max value" => "Maks. værdi"
+// slider.step: "Step value" => "Trinværdi"
+// slider.showLabels: "Show scale labels" => "Vis skalaetiketter"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Vis værktøjstip"
+// slider.allowSwap: "Allow thumb crossing" => "Tillad tommelfingerkrydsning"
+// slider.labelCount: "Number of auto-generated labels" => "Antal automatisk genererede etiketter"
+// slider.minValueExpression: "Min value expression" => "Udtryk for min. værdi"
+// slider.maxValueExpression: "Max value expression" => "Udtryk for maks. værdi"
+// slider.autoGenerate: "Scale labels configuration" => "Konfiguration af skaleringsetiketter"
+// tabs.sliderSettings: "Slider Settings" => "Indstillinger for skyder"
+// sliderType.single: "Single-Value" => "Enkelt værdi"
+// sliderType.range: "Range" => "Interval"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Gør dette valg eksklusivt. Når den vælges af en bruger, fravælger den automatisk alle andre muligheder i spørgsmålet."

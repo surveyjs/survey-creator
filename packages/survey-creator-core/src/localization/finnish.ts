@@ -22,7 +22,7 @@ export var fiStrings = {
     theme: "Teemat",
     translation: "Käännökset",
     designer: "Kyselyn suunnittelija",
-    editor: "JSON Editori",
+    json: "JSON-editori",
     logic: "Kyselyn säännöstö"
   },
   // Question types
@@ -45,6 +45,7 @@ export var fiStrings = {
     paneldynamic: "Paneeli (dynaamiset paneelit)",
     radiogroup: "Radiopainikeryhmä",
     rating: "Luokitus",
+    slider: "Liukusäädin",
     text: "Teksti",
     boolean: "Totuusarvomuuttuja",
     expression: "Lauseke(vain luku)",
@@ -443,9 +444,11 @@ export var fiStrings = {
       prefix: "Valuutan etuliite",
       suffix: "Valuutan jälkiliite"
     },
+    isExclusive: "Poista muut, kun se on valittuna",
     imageHeight: "Kuvan korkeus",
     imageWidth: "Kuvan leveys",
     valueName: "Arvon nimi",
+    defaultDisplayValue: "Dynaamisten tekstien oletusnäyttöarvo",
     rateDescriptionLocation: "Otsikon tasaus",
     size: "Syöttökentän leveys (merkkeinä)",
     cellErrorLocation: "Solun virhesanoman tasaus",
@@ -741,6 +744,18 @@ export var fiStrings = {
     rateValues: "Muokatut vastausarvot",
     rateCount: "Valintojen määrä",
     autoGenerate: "Miten vastausvaihtoehtojen arvot määritetään?",
+    slider: {
+      min: "Minimiarvo",
+      max: "Suurin arvo",
+      step: "Vaiheen arvo",
+      showLabels: "Näytä asteikon otsikot",
+      tooltipVisibilityPG: "Näytä työkaluvihjeet",
+      allowSwap: "Salli peukalon ylitys",
+      labelCount: "Automaattisesti luotujen tarrojen määrä",
+      minValueExpression: "Minimiarvon lauseke",
+      maxValueExpression: "Maksimiarvon lauseke",
+      autoGenerate: "Skaalausotsikoiden määritys"
+    },
     hideIfChoicesEmpty: "Piilota kysymys, jos se ei sisällä vaihtoehtoja",
     minWidth: "Vähimmäisleveys (CSS-hyväksyttyinä arvoina)",
     maxWidth: "Suurin leveys (CSS-hyväksytyissä arvoissa)",
@@ -822,6 +837,7 @@ export var fiStrings = {
       enableIf: "Käytössä jos",
       requiredIf: "Vaadittu jos",
       rateValues: "Järjestä arvot",
+      sliderSettings: "Liukusäätimen asetukset",
       choicesByUrl: "Valintoja verkosta",
       matrixChoices: "Oletusvalinnat",
       multipleTextItems: "Tekstinsyötöt",
@@ -1042,6 +1058,10 @@ export var fiStrings = {
       time: "Aika",
       url: "URL",
       week: "Viikko"
+    },
+    sliderType: {
+      single: "Yksittäinen arvo",
+      range: "Etäisyys"
     },
     autocomplete: {
       name: "Koko nimi",
@@ -1474,6 +1494,7 @@ export var fiStrings = {
       showInMultipleColumns: "Kun tämä asetus on valittuna, kullekin vaihtoehdolle luodaan oma sarake.",
       colCount: "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, asetukset näytetään yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin sisäkkäisten sarakkeiden määrä -ominaisuudesta."
     },
+    isExclusive: "Tekee tästä valinnasta eksklusiivisen. Kun käyttäjä valitsee sen, se poistaa automaattisesti kaikkien muiden kysymyksen vaihtoehtojen valinnan.",
     caseInsensitive: "Valitse, onko säännöllisen lausekkeen isoja ja pieniä kirjaimia käsiteltävä vastaavina.",
     widthMode: "Valitse seuraavista: \"Staattinen\" - asettaa kiinteän leveyden; \"Reagoiva\" - tekee kyselystä koko näytön leveyden; \"Auto\" - soveltaa jompaakumpaa näistä kahdesta riippuen käytetyistä kysymystyypeistä.",
     cookieName: "Evästeet estävät käyttäjiä täyttämästä samaa kyselyä kahdesti.",
@@ -3034,3 +3055,21 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // ts.prevPage: "Previous" => "Edellinen"
 // ts.nextPage: "Next" => "Seuraava"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Käytetään, kun \"Kyselyn asettelu\" -asetuksena on \"Yksi syöttökenttä sivulla\". Tässä asettelussa matriisi on jaettu siten, että jokainen syöttökenttä näkyy erillisellä sivulla. Käytä {rowIndex}-paikkamerkkiä automaattisen numeroinnin lisäämiseen, {rowTitle} tai {rowName} viittaamaan rivin otsikkoon tai tunnukseen ja {row.columnid} sisällyttääksesi tietyn matriisisarakkeen arvon."
+// tabs.json: "JSON Editor" => "JSON-editori"
+// qt.slider: "Slider" => "Liukusäädin"
+// pe.isExclusive: "Clear others when selected" => "Poista muut, kun se on valittuna"
+// pe.defaultDisplayValue: "Default display value for dynamic texts" => "Dynaamisten tekstien oletusnäyttöarvo"
+// slider.min: "Min value" => "Minimiarvo"
+// slider.max: "Max value" => "Suurin arvo"
+// slider.step: "Step value" => "Vaiheen arvo"
+// slider.showLabels: "Show scale labels" => "Näytä asteikon otsikot"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Näytä työkaluvihjeet"
+// slider.allowSwap: "Allow thumb crossing" => "Salli peukalon ylitys"
+// slider.labelCount: "Number of auto-generated labels" => "Automaattisesti luotujen tarrojen määrä"
+// slider.minValueExpression: "Min value expression" => "Minimiarvon lauseke"
+// slider.maxValueExpression: "Max value expression" => "Maksimiarvon lauseke"
+// slider.autoGenerate: "Scale labels configuration" => "Skaalausotsikoiden määritys"
+// tabs.sliderSettings: "Slider Settings" => "Liukusäätimen asetukset"
+// sliderType.single: "Single-Value" => "Yksittäinen arvo"
+// sliderType.range: "Range" => "Etäisyys"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Tekee tästä valinnasta eksklusiivisen. Kun käyttäjä valitsee sen, se poistaa automaattisesti kaikkien muiden kysymyksen vaihtoehtojen valinnan."

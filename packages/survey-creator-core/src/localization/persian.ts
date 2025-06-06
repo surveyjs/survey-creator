@@ -45,6 +45,7 @@ var persianStrings = {
     paneldynamic: "پنل (پنل های داینامیک)",
     radiogroup: "تک انتخابی",
     rating: "رتبه بندی",
+    slider: "لغزنده",
     text: "متن تک خطی",
     boolean: "صحیح و غلط",
     expression: "توصیفی",
@@ -443,6 +444,7 @@ var persianStrings = {
       prefix: "پیشوند ارز",
       suffix: "پسوند ارز"
     },
+    isExclusive: "هنگام انتخاب دیگران را پاک کنید",
     imageHeight: "ارتفاع تصویر",
     imageWidth: "عرض تصویر",
     valueName: "نام مقدار",
@@ -742,6 +744,18 @@ var persianStrings = {
     rateValues: "مقادیر نرخ سفارشی",
     rateCount: "شمارش نرخ",
     autoGenerate: "چگونه مقادیر نرخ را مشخص کنیم؟",
+    slider: {
+      min: "حداقل مقدار",
+      max: "حداکثر مقدار",
+      step: "ارزش گام",
+      showLabels: "نمایش برچسب های مقیاس",
+      tooltipVisibilityPG: "نمایش نکات ابزار",
+      allowSwap: "اجازه عبور از انگشت شست",
+      labelCount: "تعداد برچسب های تولید شده به صورت خودکار",
+      minValueExpression: "بیان حداقل مقدار",
+      maxValueExpression: "بیان حداکثر مقدار",
+      autoGenerate: "پیکربندی برچسب های مقیاس بندی"
+    },
     hideIfChoicesEmpty: "مخفی کردن سؤال در صورتی که هیچ انتخابی نداشته باشد",
     minWidth: "حداقل عرض (در مقادیر پذیرفته شده CSS)",
     maxWidth: "حداکثر عرض (در مقادیر پذیرفته شده CSS)",
@@ -823,6 +837,7 @@ var persianStrings = {
       enableIf: "فعال اگر",
       requiredIf: "مورد نیاز ااگر",
       rateValues: "مقادیر رتبه بندی",
+      sliderSettings: "تنظیمات نوار لغزنده",
       choicesByUrl: "انتخاب ها از وب",
       matrixChoices: "انتخاب های پیشفرض",
       multipleTextItems: "فیلدهای متنی",
@@ -1043,6 +1058,10 @@ var persianStrings = {
       time: "زمان",
       url: "آدرس",
       week: "هفته"
+    },
+    sliderType: {
+      single: "تک مقدار",
+      range: "محدوده"
     },
     autocomplete: {
       name: "نام و نام خانوادگی",
@@ -1475,6 +1494,7 @@ var persianStrings = {
       showInMultipleColumns: "هنگامی که انتخاب می شود، یک ستون فردی برای هر گزینه انتخاب ایجاد می کند.",
       colCount: "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. هنگامی که روی -1 تنظیم می شود، مقدار واقعی از ویژگی \"تعداد ستون های تو در تو\" ماتریس والد به ارث می رسد."
     },
+    isExclusive: "این انتخاب را منحصر به فرد می کند. هنگامی که توسط یک کاربر انتخاب می شود، به طور خودکار همه گزینه های دیگر در سوال را لغو انتخاب می کند.",
     caseInsensitive: "انتخاب کنید که آیا حروف بزرگ و کوچک در عبارت منظم باید معادل در نظر گرفته شوند.",
     widthMode: "را انتخاب کنید از: \"استاتیک\" - مجموعه عرض ثابت؛ \"پاسخگو\" - باعث می شود نظرسنجی عرض کامل صفحه نمایش را اشغال کند؛ \"Auto\" - هر یک از این دو را بسته به نوع سوال مورد استفاده اعمال می کند.",
     cookieName: "کوکی ها کاربران را از پر کردن همان نظرسنجی دو بار جلوگیری می کند.",
@@ -3018,3 +3038,19 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // ts.prevPage: "Previous" => "قبلی"
 // ts.nextPage: "Next" => "بعدی"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "زمانی استفاده می شود که \"طرح نظرسنجی\" روی \"فیلد ورودی واحد در هر صفحه\" تنظیم شده باشد. در این چیدمان، ماتریس تقسیم می شود تا هر فیلد ورودی در یک صفحه جداگانه ظاهر شود. از مکان نگهدارنده {rowIndex} برای درج شماره گذاری خودکار، {rowTitle} یا {rowName} برای ارجاع به عنوان یا شناسه ردیف و {row.columnid} برای درج مقدار یک ستون ماتریس خاص استفاده کنید."
+// qt.slider: "Slider" => "لغزنده"
+// pe.isExclusive: "Clear others when selected" => "هنگام انتخاب دیگران را پاک کنید"
+// slider.min: "Min value" => "حداقل مقدار"
+// slider.max: "Max value" => "حداکثر مقدار"
+// slider.step: "Step value" => "ارزش گام"
+// slider.showLabels: "Show scale labels" => "نمایش برچسب های مقیاس"
+// slider.tooltipVisibilityPG: "Show tooltips" => "نمایش نکات ابزار"
+// slider.allowSwap: "Allow thumb crossing" => "اجازه عبور از انگشت شست"
+// slider.labelCount: "Number of auto-generated labels" => "تعداد برچسب های تولید شده به صورت خودکار"
+// slider.minValueExpression: "Min value expression" => "بیان حداقل مقدار"
+// slider.maxValueExpression: "Max value expression" => "بیان حداکثر مقدار"
+// slider.autoGenerate: "Scale labels configuration" => "پیکربندی برچسب های مقیاس بندی"
+// tabs.sliderSettings: "Slider Settings" => "تنظیمات نوار لغزنده"
+// sliderType.single: "Single-Value" => "تک مقدار"
+// sliderType.range: "Range" => "محدوده"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "این انتخاب را منحصر به فرد می کند. هنگامی که توسط یک کاربر انتخاب می شود، به طور خودکار همه گزینه های دیگر در سوال را لغو انتخاب می کند."

@@ -45,6 +45,7 @@ export var slStrings = {
     paneldynamic: "Dinamična plošča",
     radiogroup: "Skupina radijskih gumbov",
     rating: "Ocenjevalna lestvica",
+    slider: "Drsnik",
     text: "Enovrstični vnos",
     boolean: "Da/Ne (logično)",
     expression: "Izraz (samo za branje)",
@@ -443,6 +444,7 @@ export var slStrings = {
       prefix: "Predpona valute",
       suffix: "Zaimek valute"
     },
+    isExclusive: "Brisanje drugih, ko so izbrane",
     imageHeight: "Višina območja za prikaz",
     imageWidth: "Širina območja za prikaz",
     valueName: "Povezovalni identifikator",
@@ -742,6 +744,18 @@ export var slStrings = {
     rateValues: "Prilagojene vrednosti ocene",
     rateCount: "Število ocen",
     autoGenerate: "Konfiguracija ocene",
+    slider: {
+      min: "Najmanjša vrednost",
+      max: "Največja vrednost",
+      step: "Vrednost koraka",
+      showLabels: "Prikaz oznak merila",
+      tooltipVisibilityPG: "Pokaži opise orodij",
+      allowSwap: "Dovoli prekrižanje palca",
+      labelCount: "Število samodejno ustvarjenih nalepk",
+      minValueExpression: "Izraz najmanjše vrednosti",
+      maxValueExpression: "Izraz največje vrednosti",
+      autoGenerate: "Konfiguracija nalepk merila"
+    },
     hideIfChoicesEmpty: "Skrij vprašanje, če nima možnosti",
     minWidth: "Najmanjša širina",
     maxWidth: "Največja širina",
@@ -823,6 +837,7 @@ export var slStrings = {
       enableIf: "Omogočeno, če",
       requiredIf: "Zahtevano, če",
       rateValues: "Vrednosti ocene",
+      sliderSettings: "Nastavitve drsnika",
       choicesByUrl: "Možnosti iz spletne storitve",
       matrixChoices: "Privzete možnosti",
       multipleTextItems: "Vnos besedila",
@@ -1043,6 +1058,10 @@ export var slStrings = {
       time: "Čas",
       url: "URL",
       week: "Týden"
+    },
+    sliderType: {
+      single: "Enojna vrednost",
+      range: "Razpon"
     },
     autocomplete: {
       name: "Celé jméno",
@@ -1475,6 +1494,7 @@ export var slStrings = {
       showInMultipleColumns: "Ko je izbrano, ustvari posamezen stolpec za vsako izbiro.",
       colCount: "Razvrsti možnosti izbire v postavitev z več stolpci. Ko je nastavljeno na 0, so možnosti prikazane v eni sami vrstici. Ko je nastavljeno na -1, se dejanska vrednost podeduje iz lastnosti \"Število gnezdenih stolpcev\" nadrejenega matriksa."
     },
+    isExclusive: "Zaradi tega je ta izbira ekskluzivna. Ko uporabnik izbere, bo samodejno preklical izbiro vseh drugih možnosti v vprašanju.",
     caseInsensitive: "Izberite, če naj bodo velike in male črke v regularnem izrazu obravnavane kot enake",
     widthMode: "Izberite med Statistična - nastavi fiksno širino, Responsive - naredi anketo, da zasede celotno širino zaslona, Auto - uporabi eno izmed dveh možnosti glede na vrsto vprašanj",
     cookieName: "Dodelite edinstveno vrednost piškotka za vašo anketo. Piškotek bo nastavljen v brskalniku anketiranca ob zaključku ankete, da se prepreči ponovljeno oddajanje ankete",
@@ -1837,3 +1857,19 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // ts.prevPage: "Previous" => "Prejšnji"
 // ts.nextPage: "Next" => "Naslednji"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Uporablja se, ko je \"Postavitev ankete\" nastavljena na \"Eno vnosno polje na stran\". V tej postavitvi je matrika razdeljena tako, da je vsako vnosno polje prikazano na ločeni strani. Označbo mesta {rowIndex} uporabite za vstavljanje samodejnega oštevilčenja, {rowTitle} ali {rowName} za sklicevanje na naslov ali ID vrstice in {row.columnid} za vključitev vrednosti določenega stolpca matrike."
+// qt.slider: "Slider" => "Drsnik"
+// pe.isExclusive: "Clear others when selected" => "Brisanje drugih, ko so izbrane"
+// slider.min: "Min value" => "Najmanjša vrednost"
+// slider.max: "Max value" => "Največja vrednost"
+// slider.step: "Step value" => "Vrednost koraka"
+// slider.showLabels: "Show scale labels" => "Prikaz oznak merila"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Pokaži opise orodij"
+// slider.allowSwap: "Allow thumb crossing" => "Dovoli prekrižanje palca"
+// slider.labelCount: "Number of auto-generated labels" => "Število samodejno ustvarjenih nalepk"
+// slider.minValueExpression: "Min value expression" => "Izraz najmanjše vrednosti"
+// slider.maxValueExpression: "Max value expression" => "Izraz največje vrednosti"
+// slider.autoGenerate: "Scale labels configuration" => "Konfiguracija nalepk merila"
+// tabs.sliderSettings: "Slider Settings" => "Nastavitve drsnika"
+// sliderType.single: "Single-Value" => "Enojna vrednost"
+// sliderType.range: "Range" => "Razpon"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Zaradi tega je ta izbira ekskluzivna. Ko uporabnik izbere, bo samodejno preklical izbiro vseh drugih možnosti v vprašanju."

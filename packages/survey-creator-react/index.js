@@ -291,6 +291,39 @@ creator.saveSurveyFunc = (no, callback) => {
   }, 1000);
 };
 
+const editor = new SurveyCreatorCorePresets.CreatorPresetEditorModel();
+window.editor = editor;
+class PresetsTabComponent extends React.Component {
+  render() {
+    return (
+      <SurveyReact.Survey model={editor.model} />
+    );
+  }
+}
+
+const presetsPlugin = {
+  // Do nothing when the tab is activated or deactivated
+  activate: () => { },
+  deactivate: () => { return true; }
+};
+
+SurveyReact.ReactElementFactory.Instance.registerElement(
+  "svc-tab-presets",
+  (props) => {
+      return React.createElement(PresetsTabComponent, props);
+  }
+);
+creator.addTab({
+  name: "presets",
+  plugin: presetsPlugin,
+  title: "Presets",
+  componentName: "svc-tab-presets",
+  index: 100
+});
+
+
+
+
 ReactDOM.render(
   <React.StrictMode>
     <SurveyCreator.SurveyCreatorComponent creator={creator} />

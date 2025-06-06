@@ -10,11 +10,11 @@
           [attr.title]="adorner.dragTooltip" sv-ng-svg-icon></svg>
       </span>
       <span *ngIf="adorner.allowAdd" class="svc-item-value-controls__button svc-item-value-controls__add" [key2click]
-        (click)="adorner.add(adorner)" [attr.aria-label]="undefined"><svg [iconName]="'icon-add_16x16'" [size]="'auto'"
-          [attr.title]="undefined" sv-ng-svg-icon></svg></span>
+        (click)="adorner.add(adorner)" role="button" [attr.aria-label]="adorner.tooltip"><svg [iconName]="'icon-add_16x16'" [size]="'auto'"
+          [attr.title]="adorner.tooltip" sv-ng-svg-icon></svg></span>
       <span *ngIf="adorner.allowRemove" class="svc-item-value-controls__button svc-item-value-controls__remove"
-        [key2click] (click)="adorner.remove(adorner)" (blur)="onBlur($event)" [attr.aria-label]="undefined"><svg
-          [iconName]="'icon-remove_16x16'" [size]="'auto'" [attr.title]="undefined" sv-ng-svg-icon></svg></span>
+        [key2click] (click)="adorner.remove(adorner)" (blur)="onBlur($event)" role="button" [attr.aria-label]="adorner.tooltip"><svg
+          [iconName]="'icon-remove_16x16'" [size]="'auto'" [attr.title]="adorner.tooltip" sv-ng-svg-icon></svg></span>
     </div>
 
     <div class="svc-item-value__item" (click)="adorner.select(adorner, $event)">

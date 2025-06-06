@@ -45,6 +45,7 @@ export var nbStrings = {
     paneldynamic: "Panel (dynamiske paneler)",
     radiogroup: "Radiogruppe",
     rating: "Rangering",
+    slider: "Glidebryter",
     text: "Enkel tekst",
     boolean: "Yes/No (Boolean)",
     expression: "Formel",
@@ -443,6 +444,7 @@ export var nbStrings = {
       prefix: "Prefiks for valuta",
       suffix: "Valutasuffiks"
     },
+    isExclusive: "Fjern andre når det er valgt",
     imageHeight: "Bildehøyde",
     imageWidth: "Bildebredde",
     valueName: "Verdinavn",
@@ -742,6 +744,18 @@ export var nbStrings = {
     rateValues: "Egendefinerte frekvensverdier",
     rateCount: "Antall priser",
     autoGenerate: "Hvordan spesifisere renteverdier?",
+    slider: {
+      min: "Min verdi",
+      max: "Maks verdi",
+      step: "Trinn verdi",
+      showLabels: "Vis skalaetiketter",
+      tooltipVisibilityPG: "Vis verktøytips",
+      allowSwap: "Tillat tommelkryssing",
+      labelCount: "Antall automatisk genererte etiketter",
+      minValueExpression: "Uttrykk for minste verdi",
+      maxValueExpression: "Uttrykk for maksverdi",
+      autoGenerate: "Konfigurasjon av skaleringsetiketter"
+    },
     hideIfChoicesEmpty: "Skjul spørsmålet hvis det ikke inneholder noen valg",
     minWidth: "Minimumsbredde (i CSS-godkjente verdier)",
     maxWidth: "Maksimal bredde (i CSS-godkjente verdier)",
@@ -823,6 +837,7 @@ export var nbStrings = {
       enableIf: "Tilgjengelig hvis",
       requiredIf: "Nødvendig hvis",
       rateValues: "Rangering verdier",
+      sliderSettings: "Innstillinger for glidebryter",
       choicesByUrl: "Valg fra web",
       matrixChoices: "Standardvalg",
       multipleTextItems: "Tekst inndata",
@@ -1043,6 +1058,10 @@ export var nbStrings = {
       time: "Tid",
       url: "URL",
       week: "Uke"
+    },
+    sliderType: {
+      single: "Enkelt verdi",
+      range: "Rekkevidde"
     },
     autocomplete: {
       name: "Fullt navn",
@@ -1475,6 +1494,7 @@ export var nbStrings = {
       showInMultipleColumns: "Når dette alternativet er valgt, opprettes det én kolonne for hvert valgalternativ.",
       colCount: "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen."
     },
+    isExclusive: "Gjør dette valget eksklusivt. Når den velges av en bruker, vil den automatisk velge bort alle andre alternativer i spørsmålet.",
     caseInsensitive: "Velg om store og små bokstaver i det regulære uttrykket må behandles som likeverdige.",
     widthMode: "Velg mellom: \"Statisk\" - setter en fast bredde; \"Responsive\" - gjør at undersøkelsen opptar hele bredden på skjermen; \"Auto\" - gjelder en av de to avhengig av spørsmålstypene som brukes.",
     cookieName: "Informasjonskapsler hindrer brukere i å fylle ut den samme undersøkelsen to ganger.",
@@ -3065,3 +3085,19 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // ts.prevPage: "Previous" => "Foregående"
 // ts.nextPage: "Next" => "Neste"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Brukes når 'Undersøkelsesoppsett' er satt til 'Enkelt inndatafelt per side'. I dette oppsettet er matrisen delt slik at hvert inndatafelt vises på en egen side. Bruk plassholderen {rowIndex} til å sette inn automatisk nummerering, {rowTitle} eller {rowName} for å referere til radens tittel eller ID, og {row.columnid} for å inkludere verdien for en bestemt matrisekolonne."
+// qt.slider: "Slider" => "Glidebryter"
+// pe.isExclusive: "Clear others when selected" => "Fjern andre når det er valgt"
+// slider.min: "Min value" => "Min verdi"
+// slider.max: "Max value" => "Maks verdi"
+// slider.step: "Step value" => "Trinn verdi"
+// slider.showLabels: "Show scale labels" => "Vis skalaetiketter"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Vis verktøytips"
+// slider.allowSwap: "Allow thumb crossing" => "Tillat tommelkryssing"
+// slider.labelCount: "Number of auto-generated labels" => "Antall automatisk genererte etiketter"
+// slider.minValueExpression: "Min value expression" => "Uttrykk for minste verdi"
+// slider.maxValueExpression: "Max value expression" => "Uttrykk for maksverdi"
+// slider.autoGenerate: "Scale labels configuration" => "Konfigurasjon av skaleringsetiketter"
+// tabs.sliderSettings: "Slider Settings" => "Innstillinger for glidebryter"
+// sliderType.single: "Single-Value" => "Enkelt verdi"
+// sliderType.range: "Range" => "Rekkevidde"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Gjør dette valget eksklusivt. Når den velges av en bruker, vil den automatisk velge bort alle andre alternativer i spørsmålet."

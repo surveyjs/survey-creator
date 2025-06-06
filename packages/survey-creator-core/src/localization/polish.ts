@@ -45,6 +45,7 @@ var polishStrings = {
     paneldynamic: "Panel (dynamiczne panele)",
     radiogroup: "Jednokrotny wybór",
     rating: "Ocena",
+    slider: "Suwak",
     text: "Pojedyncza odpowiedź",
     boolean: "Prawda/Fałsz",
     expression: "Wyrażenie",
@@ -443,6 +444,7 @@ var polishStrings = {
       prefix: "Prefiks waluty",
       suffix: "Sufiks waluty"
     },
+    isExclusive: "Wyczyść inne po wybraniu",
     imageHeight: "Image height",
     imageWidth: "Image width",
     valueName: "Value name",
@@ -742,6 +744,18 @@ var polishStrings = {
     rateValues: "Niestandardowe wartości stawek",
     rateCount: "Liczba stawek",
     autoGenerate: "Jak określić wartości stawek?",
+    slider: {
+      min: "Wartość minimalna",
+      max: "Wartość maksymalna",
+      step: "Wartość kroku",
+      showLabels: "Pokazywanie etykiet skali",
+      tooltipVisibilityPG: "Pokaż podpowiedzi",
+      allowSwap: "Zezwalaj na krzyżowanie kciuka",
+      labelCount: "Liczba automatycznie wygenerowanych etykiet",
+      minValueExpression: "Wyrażenie wartości minimalnej",
+      maxValueExpression: "Wyrażenie wartości maksymalnej",
+      autoGenerate: "Konfiguracja etykiet skalowania"
+    },
     hideIfChoicesEmpty: "Ukryj pytanie, jeśli nie zawiera opcji wyboru",
     minWidth: "Minimalna szerokość (w wartościach akceptowanych przez CSS)",
     maxWidth: "Maksymalna szerokość (w wartościach akceptowanych przez CSS)",
@@ -823,6 +837,7 @@ var polishStrings = {
       enableIf: "Enable If",
       requiredIf: "Wymagane, jeśli",
       rateValues: "Wartość oceny",
+      sliderSettings: "Ustawienia suwaka",
       choicesByUrl: "Odpowiedzi z webserwisu",
       matrixChoices: "Default Choices",
       multipleTextItems: "Text Inputs",
@@ -1043,6 +1058,10 @@ var polishStrings = {
       time: "Godzina",
       url: "Adres URL",
       week: "Tydzień"
+    },
+    sliderType: {
+      single: "Pojedyncza wartość",
+      range: "Zakres"
     },
     autocomplete: {
       name: "Imię i nazwisko",
@@ -1475,6 +1494,7 @@ var polishStrings = {
       showInMultipleColumns: "Gdy ta opcja jest zaznaczona, tworzy osobną kolumnę dla każdej opcji wyboru.",
       colCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej."
     },
+    isExclusive: "To sprawia, że ten wybór jest wyjątkowy. Po wybraniu przez użytkownika automatycznie odznaczy wszystkie inne opcje w pytaniu.",
     caseInsensitive: "Wybierz, czy wielkie i małe litery w wyrażeniu regularnym mają być traktowane jako równoważne.",
     widthMode: "Do wyboru: \"Statyczny\" - ustawia stałą szerokość; \"Responsywny\" - sprawia, że ankieta zajmuje całą szerokość ekranu; \"Auto\" – stosuje jedną z tych dwóch opcji w zależności od użytych typów pytań.",
     cookieName: "Pliki cookie uniemożliwiają użytkownikom dwukrotne wypełnienie tej samej ankiety.",
@@ -3328,3 +3348,19 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // ts.prevPage: "Previous" => "Poprzedni"
 // ts.nextPage: "Next" => "Następny"
 // pehelp.singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column." => "Używane, gdy opcja \"Układ ankiety\" jest ustawiona na \"Pojedyncze pole wprowadzania danych na stronę\". W tym układzie macierz jest podzielona w taki sposób, że każde pole wejściowe pojawia się na osobnej stronie. Użyj symbolu zastępczego {rowIndex}, aby wstawić numerację automatyczną, {rowTitle} lub {rowName}, aby odwołać się do tytułu lub identyfikatora wiersza, oraz {row.columnid}, aby uwzględnić wartość określonej kolumny macierzy."
+// qt.slider: "Slider" => "Suwak"
+// pe.isExclusive: "Clear others when selected" => "Wyczyść inne po wybraniu"
+// slider.min: "Min value" => "Wartość minimalna"
+// slider.max: "Max value" => "Wartość maksymalna"
+// slider.step: "Step value" => "Wartość kroku"
+// slider.showLabels: "Show scale labels" => "Pokazywanie etykiet skali"
+// slider.tooltipVisibilityPG: "Show tooltips" => "Pokaż podpowiedzi"
+// slider.allowSwap: "Allow thumb crossing" => "Zezwalaj na krzyżowanie kciuka"
+// slider.labelCount: "Number of auto-generated labels" => "Liczba automatycznie wygenerowanych etykiet"
+// slider.minValueExpression: "Min value expression" => "Wyrażenie wartości minimalnej"
+// slider.maxValueExpression: "Max value expression" => "Wyrażenie wartości maksymalnej"
+// slider.autoGenerate: "Scale labels configuration" => "Konfiguracja etykiet skalowania"
+// tabs.sliderSettings: "Slider Settings" => "Ustawienia suwaka"
+// sliderType.single: "Single-Value" => "Pojedyncza wartość"
+// sliderType.range: "Range" => "Zakres"
+// pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "To sprawia, że ten wybór jest wyjątkowy. Po wybraniu przez użytkownika automatycznie odznaczy wszystkie inne opcje w pytaniu."

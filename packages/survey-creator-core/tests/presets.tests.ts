@@ -1,5 +1,5 @@
 import { CreatorTester } from "./creator-tester";
-import { CreatorPreset, ICreatorPresetData } from "../src/presets/presets";
+import { CreatorPreset, ICreatorPresetData } from "../src/presets-creator/presets";
 import { editorLocalization } from "../src/editorLocalization";
 import { surveyLocalization } from "survey-core";
 export * from "../src/localization/german";
