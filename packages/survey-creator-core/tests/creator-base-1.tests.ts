@@ -1685,11 +1685,11 @@ test("getElementWrapperComponentName for inner component elements", () => {
   expect(panel.rows.length).toEqual(2);
   expect(getElementWrapperComponentName(panel.rows[0], "", false)).toEqual(undefined);
   expect(getRowWrapperComponentName(panel.rows[0])).toEqual(undefined);
-  expect(getRowWrapperComponentData(panel.rows[0], creator)).toEqual(panel.rows[0]);
+  expect(getRowWrapperComponentData(panel.rows[0], creator)).toEqual(null);
   expect(innerPanel.rows.length).toEqual(1);
   expect(getElementWrapperComponentName(innerPanel.rows[0], "", false)).toEqual(undefined);
   expect(getRowWrapperComponentName(innerPanel.rows[0])).toEqual(undefined);
-  expect(getRowWrapperComponentData(innerPanel.rows[0], creator)).toEqual(innerPanel.rows[0]);
+  expect(getRowWrapperComponentData(innerPanel.rows[0], creator)).toEqual(null);
   ComponentCollection.Instance.clear();
 });
 
