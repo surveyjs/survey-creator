@@ -1200,11 +1200,48 @@ export class SurveyCreatorModel extends Base
   public set maximumRateValues(val) { this.maxRateValues = val; }
 
   /**
-   * Limits the number of nested panels within a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element.
-   *
-   * Default value: -1 (unlimited)
+   * @deprecated Use the [`maxPanelNestingLevel`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#maxPanelNestingLevel) property instead.
    */
   public maxNestedPanels: number = -1;
+
+  /**
+   * Specifies the maximum depth allowed for nested [Panels](https://surveyjs.io/form-library/documentation/api-reference/panel-model) and [Dynamic Panels](https://surveyjs.io/form-library/documentation/api-reference/dynamic-panel-model) in the survey.
+   *
+   * This property behaves as follows:
+   *
+   * - A value of -1 applies no restriction on nesting depth.
+   * - A value of 0 means that Panels and Dynamic Panels cannot contain other panels&mdash;only questions are allowed.
+   * - Positive integers specify the maximum nesting level.
+   *
+   * Default value: -1 (unlimited)
+   *
+   * If you don't want users to nest certain element types within panels, specify the [`forbiddenNestedElements`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#forbiddenNestedElements) property.
+   */
+  public maxPanelNestingLevel: number = -1;
+
+  /**
+   * Specifies which element types are forbidden from being nested inside [Panels](https://surveyjs.io/form-library/documentation/api-reference/panel-model) and [Dynamic Panels](https://surveyjs.io/form-library/documentation/api-reference/dynamic-panel-model).
+   *
+   * This property is an object with the following structure:
+   *
+   * - `panel`: An array of element types that cannot be nested within a regular panel.
+   * - `paneldynamic`: An array of element types that cannot be nested within a dynamic panel.
+   *
+   * In the following example, dynamic panels are disallowed inside regular panels, and both regular and dynamic panels are disallowed inside a dynamic panel:
+   *
+   * ```js
+   * import { SurveyCreatorModel } from "survey-creator-core";
+   * const creatorOptions = { ... };
+   * const creator = new SurveyCreatorModel(creatorOptions);
+   *
+   * creator.forbiddenNestedElements = {
+   *   panel: [ "paneldynamic" ],
+   *   paneldynamic: [ "panel", "paneldynamic" ]
+   * };
+   * ```
+   * @see maxPanelNestingLevel
+   */
+  public forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
   public showPagesInTestSurveyTab = true;
   /**
@@ -2218,10 +2255,6 @@ export class SurveyCreatorModel extends Base
       this.existingPages[options.page.id] = true;
       this.doOnPageAdded(options.page);
     });
-    survey.onDragDropAllow.add((sender, options) => {
-      (<any>options).survey = sender;
-      this.onDragDropAllow.fire(this, options);
-    });
 
     this.setSurvey(survey);
     this.expandCollapseManager.expandCollapseElements("loading", false);
@@ -2268,7 +2301,9 @@ export class SurveyCreatorModel extends Base
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
+    this.dragDropSurveyElements.isAllowedToAdd = this.isAllowedToAdd;
     this.dragDropSurveyElements.onGetMaxNestedPanels = (): number => { return this.maxNestedPanels; };
+    this.dragDropSurveyElements.onGetMaxPanelNestingLevel = (): number => { return this.maxPanelNestingLevel; };
     this.dragDropSurveyElements.onDragOverLocationCalculating = (options) => { this.onDragOverLocationCalculating.fire(this, options); };
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
@@ -2280,6 +2315,10 @@ export class SurveyCreatorModel extends Base
       }
       this.onDragStart.fire(this, options);
       this.startUndoRedoTransaction("drag drop");
+    });
+    this.dragDropSurveyElements.onDragDropAllow.add((sender, options) => {
+      (<any>options).survey = this.survey;
+      this.onDragDropAllow.fire(this, options);
     });
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
@@ -4164,21 +4203,51 @@ export class SurveyCreatorModel extends Base
   public get addNewQuestionText() {
     return this.getAddNewQuestionText();
   }
+  public isAllowedNestingLevel(element: SurveyElement, childNesting = 0): boolean {
+    const parentNesting = !!element ? SurveyHelper.getElementParentContainers(element, false).length : 0;
+    return this.maxPanelNestingLevel < 0 || this.maxPanelNestingLevel >= childNesting + parentNesting;
+  }
+  public isAllowedNestedPanels(element: SurveyElement, childNesting = 0): boolean {
+    if (!element) return true;
+    return this.maxNestedPanels < 0 || this.maxNestedPanels >= childNesting + SurveyHelper.getElementDeepLength(element);
+  }
+  public isAllowedToAdd: (elementType: string, container: SurveyElement) => boolean = (elementType: string, container: SurveyElement) => {
+    if (!this.forbiddenNestedElements || !elementType || !container) return true;
+    const forbiddenElements = this.forbiddenNestedElements[container.getType()];
+    if (!forbiddenElements || forbiddenElements.length === 0) return true;
+    return !forbiddenElements.some((forbiddenElement) => {
+      return Serializer.isDescendantOf(elementType, forbiddenElement);
+    });
+  };
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
-    const res: Array<QuestionToolboxItem> = [];
-    this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) res.push(item); });
+    let availableToolboxItems: Array<QuestionToolboxItem> = [];
+    this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) availableToolboxItems.push(item); });
 
-    if (!element || this.maxNestedPanels < 0) return res;
-    if (!isAddNew && element.isPanel) return res;
-
-    if (this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
-      for (let i = res.length - 1; i >= 0; i--) {
-        if (res[i].isPanel) {
-          res.splice(i, 1);
+    if (!this.isAllowedNestingLevel(element)) {
+      for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
+        if (availableToolboxItems[i].isPanel || Serializer.isDescendantOf(availableToolboxItems[i].typeName, "paneldynamic")) {
+          availableToolboxItems.splice(i, 1);
+        }
+      }
+    } else if (!this.isAllowedNestedPanels(element)) {
+      for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
+        if (availableToolboxItems[i].isPanel) {
+          availableToolboxItems.splice(i, 1);
         }
       }
     }
-    return res;
+
+    if (!element) return availableToolboxItems;
+    if (element.isPanel || SurveyHelper.isPanelDynamic(element)) {
+      availableToolboxItems = availableToolboxItems.filter((item) => this.isAllowedToAdd(item.typeName, element));
+    } else {
+      const parentContainers = SurveyHelper.getElementParentContainers(element, false);
+      if (!!parentContainers[0]) {
+        availableToolboxItems = availableToolboxItems.filter((item) => this.isAllowedToAdd(item.typeName, parentContainers[0]));
+      }
+    }
+
+    return availableToolboxItems;
   }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;
