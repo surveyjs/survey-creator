@@ -2439,8 +2439,8 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels", (): any => {
   expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(0);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
-  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 1);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 1);

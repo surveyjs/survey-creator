@@ -4172,8 +4172,8 @@ export class SurveyCreatorModel extends Base
     return this.getAddNewQuestionText();
   }
   public isAllowedNestingLevel(element: SurveyElement, childNesting = 0): boolean {
-    if (!element) return true;
-    return this.maxPanelNestingLevel < 0 || this.maxPanelNestingLevel >= childNesting + SurveyHelper.getElementParentContainers(element).length;
+    const parentNesting = !!element ? SurveyHelper.getElementParentContainers(element, false).length : 0;
+    return this.maxPanelNestingLevel < 0 || this.maxPanelNestingLevel >= childNesting + parentNesting;
   }
   public isAllowedNestedPanels(element: SurveyElement, childNesting = 0): boolean {
     if (!element) return true;
@@ -4188,13 +4188,8 @@ export class SurveyCreatorModel extends Base
     });
   };
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
-    const availableToolboxItems: Array<QuestionToolboxItem> = [];
+    let availableToolboxItems: Array<QuestionToolboxItem> = [];
     this.toolbox.items.forEach((item) => { if (!item.showInToolboxOnly) availableToolboxItems.push(item); });
-
-    if (!element) return availableToolboxItems;
-    if (!isAddNew && (element.isPanel || SurveyHelper.isPanelDynamic(element))) {
-      return availableToolboxItems.filter((item) => this.isAllowedToAdd(item.typeName, element));
-    }
 
     if (!this.isAllowedNestingLevel(element)) {
       for (let i = availableToolboxItems.length - 1; i >= 0; i--) {
@@ -4209,6 +4204,12 @@ export class SurveyCreatorModel extends Base
         }
       }
     }
+
+    if (!element) return availableToolboxItems;
+    if (element.isPanel || SurveyHelper.isPanelDynamic(element)) {
+      availableToolboxItems = availableToolboxItems.filter((item) => this.isAllowedToAdd(item.typeName, element));
+    }
+
     return availableToolboxItems;
   }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {

@@ -606,8 +606,8 @@ test("ConvertTo and addNewQuestion for panel with maxPanelNestingLevel set", ():
   expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
   creator.maxPanelNestingLevel = 2;
   expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(2);
-  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 2);
-  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
@@ -619,23 +619,23 @@ test("ConvertTo and addNewQuestion for panel with maxPanelNestingLevel set", ():
   expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(1);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 2);
-  expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 2);
-  expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
-  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 2);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
   creator.maxPanelNestingLevel = 0;
   expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(0);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 2);
-  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 2);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 2);
-  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 2);
-  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount - 2);
+  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
 });
 
@@ -655,8 +655,8 @@ test("isAllowedToAdd forbiddenNestedElements", (): any => {
   creator.forbiddenNestedElements = { "panel": ["expression"], "paneldynamic": ["file", "radiogroup"] };
   expect(creator.getAvailableToolboxItems(panel1, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount - 2);
-  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
-  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount - 2);
 });
 
 test("Preserve defaultAddQuestionType", (): any => {

@@ -259,7 +259,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       }
       const childPanelsMaxNesting = SurveyHelper.getMaximumNestedPanelDepth(draggedPanel, 0);
       let len = SurveyHelper.getElementParentContainers(dropTarget, false).length;
-      if (dragOverLocation !== DropIndicatorPosition.Inside && dropTarget.isPanel) len--;
+      if (dragOverLocation === DropIndicatorPosition.Inside && (dropTarget.isPanel || SurveyHelper.isPanelDynamic(dropTarget))) len++;
       if (this.maxPanelNestingLevel < len + childPanelsMaxNesting) return false;
     } else if (this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
       const draggedPanel = this.draggedElement as PanelModel;
