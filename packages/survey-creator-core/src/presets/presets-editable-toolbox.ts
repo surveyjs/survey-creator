@@ -36,10 +36,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           visible: false
         },
         {
-          "name": "iconName",
-          visible: false
-        },
-        {
           "name": "title"
         }
       ],
@@ -55,7 +51,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           ]
         },
         {
-          type: "comment",
+          type: "presetjson",
           name: "json",
           startWithNewLine: false,
           renderAs: "default-comment",
@@ -214,7 +210,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       this.onDetailPanelShowingChanged(options.row);
     }
     if (this.isItemsMatrix(options.question)) {
-      this.showDetailPanelInPopup(options.row, model.rootElement);
+      this.showDetailPanelInPopup(options.question, options.row, model.rootElement);
     }
   }
 
@@ -224,7 +220,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
 
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if (this.isItemsMatrix(options.question)) {
-      const iconName = options.row.getValue("iconName");
+      const iconName = options.question.value.filter(v => v.name == options.row.getValue("name"))[0].iconName;
       options.actions.push({
         id: iconName,
         iconName: iconName,

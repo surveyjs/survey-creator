@@ -94,14 +94,31 @@ test("Preset edit, toolbox - switch to items mode", () => {
   const row = categQuestion.visibleRows[1];
   row.showDetailPanel();
   const itemsQuestion = row.getQuestionByName("items");
-  itemsQuestion.visibleRows[1].setValue("iconName", "icon-test");
+  const innerRow = itemsQuestion.visibleRows[1];
+  innerRow.showDetailPanel();
+  innerRow.detailPanel.getQuestionByName("iconName").value = "icon-test";
 
   survey.getQuestionByName("toolbox_mode").value = "items";
   const allItemsQuestion = survey.getQuestionByName("toolbox_items");
   const itemRow = allItemsQuestion.visibleRows.filter(r => r.getValue("name") == "comment")[0];
+  itemRow.showDetailPanel();
   expect(itemRow.getValue("iconName")).toBe("icon-test");
 
   itemRow.getQuestionByName("iconName").value = "icon-test2";
   editor.applyFromSurveyModel();
   expect(editor.json.toolbox.definition.filter(i => i.name == "comment")[0].iconName).toEqual("icon-test2");
 });
+
+// test("Preset edit, toolbox - validate json", () => {
+//   const editor = new CreatorPresetEditorModel();
+//   const survey = editor.model;
+//   survey.getQuestionByName("toolbox_mode").value = "items";
+
+//   const allItemsQuestion = survey.getQuestionByName("toolbox_items");
+//   const itemRow = allItemsQuestion.visibleRows.filter(r => r.getValue("name") == "comment")[0];
+//   itemRow.showDetailPanel();
+//   (itemRow.getQuestionByName("json") as QuestionPresetJsonModel).value = { invalid: "json" };
+//   expect(survey.validate()).toBeFalsy();
+//   (itemRow.getQuestionByName("json") as QuestionPresetJsonModel).value = { type: "text" };
+//   expect(survey.validate()).toBeTruthy();
+// });

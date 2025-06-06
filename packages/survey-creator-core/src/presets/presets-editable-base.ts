@@ -1,4 +1,4 @@
-import { Helpers, IDialogOptions, MatrixDynamicRowModel, settings, SurveyModel } from "survey-core";
+import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
 
 export interface ICreatorPresetEditorSetup {
@@ -143,7 +143,7 @@ export class CreatorPresetEditableBase {
     return Helpers.getUnbindValue(json);
   }
 
-  protected showDetailPanelInPopup(row: MatrixDynamicRowModel, rootElement: HTMLElement) {
+  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement) {
     if (settings.showDialog) {
       row.hideDetailPanel();
       const survey = new SurveyModel(row.detailPanel.toJSON());
@@ -155,7 +155,10 @@ export class CreatorPresetEditableBase {
         data: { survey: survey, model: survey },
         onApply: () => {
           if (survey.validate()) {
-            row.value = survey.data;
+            const newValue = [...matrix.value];
+            const newRowValue = { ...row.value, ...survey.data };
+            newValue[row.index] = newRowValue;
+            matrix.value = newValue;
             return true;
           } else {
             return false;
