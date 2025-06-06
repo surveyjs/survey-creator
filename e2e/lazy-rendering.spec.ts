@@ -1,5 +1,4 @@
-import { url, compareScreenshot } from "./helper";
-import { test, expect } from "@playwright/test";
+import { url, test, expect } from "./helper";
 import { json as hugeJson } from "./questions_4114";
 
 const title = "Design Surface Lazy Rendering";
@@ -16,8 +15,8 @@ test.describe(title, () => {
     const skeletonElement = page.locator(".sv-skeleton-element");
     const nonRenderedPages = page.locator(".svc-page__loading-content");
     await page.waitForTimeout(10000);
-    await expect(await skeletonElement.count()).toBeGreaterThanOrEqual(85);
-    await expect(await nonRenderedPages.count()).toBeGreaterThanOrEqual(107);
+    expect(await skeletonElement.count()).toBeGreaterThanOrEqual(85);
+    expect(await nonRenderedPages.count()).toBeGreaterThanOrEqual(107);
   });
 
   test.skip("Huge JSON long task time", async ({ page }) => {
@@ -40,6 +39,6 @@ test.describe(title, () => {
 
     // eslint-disable-next-line no-console
     console.log("totalBlockingTime: " + totalBlockingTime.toString() + "ms");
-    await expect(totalBlockingTime).toBeLessThan(timeLimit);
+    expect(totalBlockingTime).toBeLessThan(timeLimit);
   });
 });
