@@ -5,6 +5,7 @@ import { SurveyModel, Question } from "survey-core";
 import { QuestionToolbox } from "../src/toolbox";
 import { SurveyCreatorModel } from "../src/creator-base";
 import { editorLocalization } from "../src/editorLocalization";
+import { QuestionPresetJsonModel } from "../src/presets/preset-question-json";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";

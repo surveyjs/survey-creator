@@ -1,4 +1,4 @@
-import { Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
+import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
@@ -7,6 +7,13 @@ import { CreatorPresetEditorModel } from "./presets-editor";
 
 const LocCategoriesName = "toolboxCategories";
 
+function validateToolboxJson (params) {
+  const value = params[0];
+  if (!value || !value.type) return false;
+  const obj = Serializer.createClass(value.type, value);
+  return !!obj;
+}
+FunctionFactory.Instance.register("validateToolboxJson", validateToolboxJson);
 export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEditableBase {
   private defaultItems: any[];
   private allItems: ICreatorPresetToolboxItem[];
@@ -40,14 +47,26 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       detailElements: [
         {
           "type": "panel",
-          "name": "detailPanel",
+          "name": "details",
           "elements": [
             { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
             { type: "text", name: "iconName", title: "Icon name" },
             { type: "text", name: "tooltip", title: "Tooltip" }
           ]
         },
-        { type: "presetjson", name: "json", startWithNewLine: false, renderAs: "default-comment", title: "JSON object to apply when users select this toolbox item", rows: 15 }
+        {
+          type: "comment",
+          name: "json",
+          startWithNewLine: false,
+          renderAs: "default-comment",
+          title: "JSON object to apply when users select this toolbox item",
+          validators: [{
+            type: "expression",
+            text: "JSON should be correct",
+            expression: "validateToolboxJson({json})"
+          }],
+          rows: 15
+        }
       ]
     };
     return { ...defaultJSON, ...props };
