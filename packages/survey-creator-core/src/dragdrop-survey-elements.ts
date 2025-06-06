@@ -81,10 +81,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
   protected isDraggedElementSelected: boolean = false;
   public onGetMaxNestedPanels: () => number;
-  public onGetMaxNestedLevel: () => number;
+  public onGetMaxPanelNestingLevel: () => number;
   public onDragOverLocationCalculating: (options: any) => void;
   public get maxNestedPanels(): number { return this.onGetMaxNestedPanels ? this.onGetMaxNestedPanels() : -1; }
-  public get maxNestingLevel(): number { return this.onGetMaxNestedLevel ? this.onGetMaxNestedLevel() : -1; }
+  public get maxPanelNestingLevel(): number { return this.onGetMaxPanelNestingLevel ? this.onGetMaxPanelNestingLevel() : -1; }
   public isAllowedToAdd: (elementType: string, container: SurveyElement) => boolean = (elementType: string, container: SurveyElement): boolean => true;
 
   public startDragToolboxItem(
@@ -252,12 +252,12 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (!this.isAllowedToAdd(this.draggedElement && this.draggedElement.getType && this.draggedElement.getType(), container || dropTarget)) {
       return false;
     }
-    if (this.maxNestingLevel >= 0 && (this.draggedElement.isPanel || SurveyHelper.isPanelDynamic(this.draggedElement))) {
+    if (this.maxPanelNestingLevel >= 0 && (this.draggedElement.isPanel || SurveyHelper.isPanelDynamic(this.draggedElement))) {
       const pnl: any = this.draggedElement as PanelModel;
       const childPanelsMaxNesting = SurveyHelper.getMaximumNestedPanelDepth(pnl, 0);
       let len = SurveyHelper.getElementParentContainers(dropTarget, false).length;
       if (dragOverLocation !== DropIndicatorPosition.Inside && dropTarget.isPanel) len--;
-      if (this.maxNestingLevel < len + childPanelsMaxNesting) return false;
+      if (this.maxPanelNestingLevel < len + childPanelsMaxNesting) return false;
     } else if (this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
       const pnl: any = this.draggedElement as PanelModel;
       const childPanelsMaxNesting = SurveyHelper.getMaximumNestedPanelDepth(pnl, 0);

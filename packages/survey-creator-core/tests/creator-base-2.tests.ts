@@ -560,8 +560,8 @@ test("creator set theme should update headerView survey property", (): any => {
   });
 });
 
-test("ConvertTo and addNewQuestion for panel with maxNestingLevel set", (): any => {
-  const creator = new CreatorTester({ maxNestingLevel: 0 });
+test("ConvertTo and addNewQuestion for panel with maxPanelNestingLevel set", (): any => {
+  const creator = new CreatorTester({ maxPanelNestingLevel: 0 });
   creator.JSON = {
     elements: [
       {
@@ -581,11 +581,11 @@ test("ConvertTo and addNewQuestion for panel with maxNestingLevel set", (): any 
     ]
   };
   expect(creator.maxNestedPanels).toBe(-1);
-  expect(creator.maxNestingLevel).toBe(0);
+  expect(creator.maxPanelNestingLevel).toBe(0);
   expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(-1);
-  expect(creator.dragDropSurveyElements.maxNestingLevel).toBe(0);
-  creator.maxNestingLevel = -1;
-  expect(creator.dragDropSurveyElements.maxNestingLevel).toBe(-1);
+  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(0);
+  creator.maxPanelNestingLevel = -1;
+  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(-1);
   const panel1 = creator.survey.getPanelByName("panel1");
   const panel2 = creator.survey.getQuestionByName("panel2");
   const panel3 = creator.survey.getPanelByName("panel3");
@@ -598,14 +598,14 @@ test("ConvertTo and addNewQuestion for panel with maxNestingLevel set", (): any 
   const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
-  creator.maxNestingLevel = 3;
-  expect(creator.dragDropSurveyElements.maxNestingLevel).toBe(3);
+  creator.maxPanelNestingLevel = 3;
+  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(3);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
   expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
-  creator.maxNestingLevel = 2;
-  expect(creator.dragDropSurveyElements.maxNestingLevel).toBe(2);
+  creator.maxPanelNestingLevel = 2;
+  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(2);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount);
@@ -615,8 +615,8 @@ test("ConvertTo and addNewQuestion for panel with maxNestingLevel set", (): any 
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
   expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
-  creator.maxNestingLevel = 1;
-  expect(creator.dragDropSurveyElements.maxNestingLevel).toBe(1);
+  creator.maxPanelNestingLevel = 1;
+  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(1);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 2);
@@ -626,8 +626,8 @@ test("ConvertTo and addNewQuestion for panel with maxNestingLevel set", (): any 
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
   expect(panel5Model.getConvertToTypesActions()).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
-  creator.maxNestingLevel = 0;
-  expect(creator.dragDropSurveyElements.maxNestingLevel).toBe(0);
+  creator.maxPanelNestingLevel = 0;
+  expect(creator.dragDropSurveyElements.maxPanelNestingLevel).toBe(0);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 2);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 2);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);

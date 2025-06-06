@@ -1203,10 +1203,11 @@ export class SurveyCreatorModel extends Base
    * Limits the number of nested panels within a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element.
    *
    * Default value: -1 (unlimited)
+   * @deprecated
    */
   public maxNestedPanels: number = -1;
 
-  public maxNestingLevel: number = -1;
+  public maxPanelNestingLevel: number = -1;
 
   public forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
@@ -2270,7 +2271,7 @@ export class SurveyCreatorModel extends Base
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     this.dragDropSurveyElements.isAllowedToAdd = this.isAllowedToAdd;
     this.dragDropSurveyElements.onGetMaxNestedPanels = (): number => { return this.maxNestedPanels; };
-    this.dragDropSurveyElements.onGetMaxNestedLevel = (): number => { return this.maxNestingLevel; };
+    this.dragDropSurveyElements.onGetMaxPanelNestingLevel = (): number => { return this.maxPanelNestingLevel; };
     this.dragDropSurveyElements.onDragOverLocationCalculating = (options) => { this.onDragOverLocationCalculating.fire(this, options); };
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
@@ -4172,7 +4173,7 @@ export class SurveyCreatorModel extends Base
   }
   public isAllowedNestingLevel(element: SurveyElement, childNesting = 0): boolean {
     if (!element) return true;
-    return this.maxNestingLevel < 0 || this.maxNestingLevel >= childNesting + SurveyHelper.getElementParentContainers(element).length;
+    return this.maxPanelNestingLevel < 0 || this.maxPanelNestingLevel >= childNesting + SurveyHelper.getElementParentContainers(element).length;
   }
   public isAllowedNestedPanels(element: SurveyElement, childNesting = 0): boolean {
     if (!element) return true;

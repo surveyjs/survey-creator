@@ -296,7 +296,7 @@ export interface ICreatorOptions {
    */
   maxNestedPanels?: number;
 
-  maxNestingLevel?: number;
+  maxPanelNestingLevel?: number;
 
   forbiddenNestedElements?: { panel: string[], paneldynamic: string[] };
 
