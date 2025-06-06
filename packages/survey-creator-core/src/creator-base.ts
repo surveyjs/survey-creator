@@ -4683,7 +4683,7 @@ export function getQuestionContentWrapperComponentName(element) {
 }
 export function getRowWrapperComponentData(row: QuestionRowModel, creator: SurveyCreatorModel) {
   if (isContentElement(row.panel)) {
-    return row;
+    return null;
   }
   return { creator: creator, row: row };
 }
