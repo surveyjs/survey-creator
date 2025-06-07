@@ -328,7 +328,7 @@ test("All properties should be in English translation", () => {
   const addClasses = (baseClassName: string): void => {
     classes.push(baseClassName);
     Serializer.getChildrenClasses(baseClassName, true).forEach((qType) => {
-      if (["linkvalue", "color", "slider"].indexOf(qType.name) < 0) {
+      if (["linkvalue", "color"].indexOf(qType.name) < 0) {
         classes.push(qType.name);
       }
     });
