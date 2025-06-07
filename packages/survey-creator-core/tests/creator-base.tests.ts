@@ -38,7 +38,7 @@ import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin"
 import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
-import { isTextInput } from "../src/creator-base";
+import { getRowWrapperComponentData, getRowWrapperComponentName, isTextInput } from "../src/creator-base";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 
 import {
@@ -1644,7 +1644,13 @@ test("getElementWrapperComponentName for inner component elements", () => {
           {
             "type": "text",
             "name": "question3"
-          }
+          },
+          {
+            type: "panel",
+            name: "panel4",
+            title: "Panel",
+            elements: [{ "type": "text", "name": "question5" }],
+          },
         ]
       }
     });
@@ -1661,11 +1667,21 @@ test("getElementWrapperComponentName for inner component elements", () => {
 
   const panel = q.panels[0] as PanelModel;
   const question = panel.questions[0] as QuestionTextModel;
+  const innerPanel = panel.elements[1] as PanelModel;
 
   expect(getElementWrapperComponentName(qCustom, "", false)).toEqual("svc-question");
   expect(getElementWrapperComponentName(q, "", false)).toEqual(undefined);
   expect(getElementWrapperComponentName(panel, "", false)).toEqual(undefined);
   expect(getElementWrapperComponentName(question, "", false)).toEqual(undefined);
+  expect(getElementWrapperComponentName(innerPanel, "", false)).toEqual(undefined);
+  expect(panel.rows.length).toEqual(2);
+  expect(getElementWrapperComponentName(panel.rows[0], "", false)).toEqual(undefined);
+  expect(getRowWrapperComponentName(panel.rows[0])).toEqual(undefined);
+  expect(getRowWrapperComponentData(panel.rows[0], creator)).toEqual(null);
+  expect(innerPanel.rows.length).toEqual(1);
+  expect(getElementWrapperComponentName(innerPanel.rows[0], "", false)).toEqual(undefined);
+  expect(getRowWrapperComponentName(innerPanel.rows[0])).toEqual(undefined);
+  expect(getRowWrapperComponentData(innerPanel.rows[0], creator)).toEqual(null);
   ComponentCollection.Instance.clear();
 });
 

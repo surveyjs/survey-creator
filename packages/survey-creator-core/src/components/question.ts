@@ -24,7 +24,8 @@ import {
   PanelModel,
   classesToSelector,
   QuestionFactory,
-  PopupModel
+  PopupModel,
+  QuestionCompositeModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -118,6 +119,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     result += typeof this.surveyElement.getType === "function" ? (" svc-question__content--" + this.surveyElement.getType()) : "";
     if (this.creator.isElementSelected(this.surveyElement)) {
       result += " svc-question__content--selected";
+    }
+    if (this.surveyElement instanceof QuestionCompositeModel) {
+      result += " svc-question__content--composite-question";
     }
 
     if (this.isEmptyElement) {
@@ -688,7 +692,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       cssClasses: listComponentCss,
     });
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
-      if(opt.isVisible) {
+      if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         options.updateListModel(listModel);
       }
