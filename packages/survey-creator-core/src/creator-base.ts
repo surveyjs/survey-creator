@@ -2530,8 +2530,8 @@ export class SurveyCreatorModel extends Base
     const pType = this.isCopyingPage ? "ELEMENT_COPIED" : "PAGE_ADDED";
     this.setModified({ type: pType, newValue: options.page });
   }
-  private getPageByElement(obj: Base): PageModel {
-    return this.survey.getPageByElement(<IElement>(<any>obj));
+  private getPageByElement(surveyElement: IElement): PageModel {
+    return !!surveyElement && surveyElement.isPage ? surveyElement as PageModel : this.survey.getPageByElement(<IElement>(<any>surveyElement));
   }
 
   private getDefaultSurveyJson(): any {
@@ -3243,49 +3243,63 @@ export class SurveyCreatorModel extends Base
       this.focusElement(element, focus, selEl, propertyName, startEdit);
     }
   }
+  private ensurePagesVisibility(): void {
+    this.survey.pages.forEach(page => {
+      const pageAdorner = SurveyElementAdornerBase.GetAdorner(page) as PageAdorner;
+      if (!!pageAdorner && !pageAdorner.needRenderContent) {
+        pageAdorner.forceCheckVisibility();
+      }
+    });
+  }
   private currentFocusInterval: any;
   private currentFocusTimeout: any;
+  private renderPageTimeout: any;
   public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
     if (!selEl) return;
     const elementPage = this.getPageByElement(selEl);
-    if (!!elementPage) {
-      const pageAdorner = SurveyElementAdornerBase.GetAdorner(elementPage) as PageAdorner;
-      if (!!pageAdorner && !pageAdorner.needRenderContent) {
-        pageAdorner.needRenderContent = true;
-      }
-    }
     clearInterval(this.currentFocusInterval);
     clearTimeout(this.currentFocusTimeout);
-    this.currentFocusTimeout = setTimeout(() => {
-      this.currentFocusInterval = setInterval(() => {
-        let el = this.getHtmlElementForScroll(selEl);
-        if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
-          if (!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
-          clearInterval(this.currentFocusInterval);
-          if (!!el) {
-            const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el.parentElement ?? el, true);
-            if (!!isNeedScroll) {
-              const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
-              if (!!elementPage) {
-                this.survey.scrollElementToTop(selEl, undefined, elementPage, selEl.id, true, scrollIntoViewOptions, this.rootElement);
-              } else {
-                SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
+    clearTimeout(this.renderPageTimeout);
+    this.renderPageTimeout = setTimeout(() => {
+      if (!!elementPage) {
+        const pageAdorner = SurveyElementAdornerBase.GetAdorner(elementPage) as PageAdorner;
+        if (!!pageAdorner && !pageAdorner.needRenderContent) {
+          pageAdorner.needRenderContent = true;
+        }
+      }
+      this.currentFocusTimeout = setTimeout(() => {
+        this.currentFocusInterval = setInterval(() => {
+          let el = this.getHtmlElementForScroll(selEl);
+          if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
+            if (!el || this.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) return;
+            clearInterval(this.currentFocusInterval);
+            if (!!el) {
+              const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el.parentElement ?? el, true);
+              if (!!isNeedScroll) {
+                const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
+                if (!!elementPage) {
+                  this.survey.scrollElementToTop(selEl, undefined, elementPage, selEl.id, true, scrollIntoViewOptions, this.rootElement, () => {
+                    this.ensurePagesVisibility();
+                  });
+                } else {
+                  SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
+                }
+              }
+              if (!propertyName && el.parentElement && selEl.getType() !== "matrixdropdowncolumn") {
+                let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
+                elToFocus && elToFocus.focus({ preventScroll: true });
               }
             }
-            if (!propertyName && el.parentElement && selEl.getType() !== "matrixdropdowncolumn") {
-              let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
-              elToFocus && elToFocus.focus({ preventScroll: true });
-            }
+          } else {
+            clearInterval(this.currentFocusInterval);
           }
-        } else {
-          clearInterval(this.currentFocusInterval);
-        }
-        if (startEdit && !!element) {
-          StringEditorConnector.get((element as Question).locTitle).activateEditor();
-        }
-      }, 1);
-    }, 100);
+          if (startEdit && !!element) {
+            StringEditorConnector.get((element as Question).locTitle).activateEditor();
+          }
+        }, 1);
+      }, 100);
+    }, 50);
   }
 
   private getHtmlElementForScroll(element: any): HTMLElement {
