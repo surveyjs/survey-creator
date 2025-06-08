@@ -1,4 +1,4 @@
-import { DragDropAllowEvent, DragDropCore, getIconNameFromProxy, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, Serializer, SurveyElement, SurveyModel } from "survey-core";
+import { DragDropAllowEvent, DragDropCore, EventBase, getIconNameFromProxy, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModel, PanelModelBase, QuestionPanelDynamicModel, QuestionRowModel, Serializer, SurveyElement, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 import { SurveyHelper } from "./survey-helper";
@@ -102,11 +102,11 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
   protected isDraggedElementSelected: boolean = false;
   public onGetMaxNestedPanels: () => number;
+  public onGetMaxPanelNestingLevel: () => number;
   public onDragOverLocationCalculating: (options: any) => void;
   public get maxNestedPanels(): number { return this.onGetMaxNestedPanels ? this.onGetMaxNestedPanels() : -1; }
-
-  // private isRight: boolean;
-  // protected prevIsRight: boolean;
+  public get maxPanelNestingLevel(): number { return this.onGetMaxPanelNestingLevel ? this.onGetMaxPanelNestingLevel() : -1; }
+  public isAllowedToAdd: (elementType: string, container: SurveyElement) => boolean = (elementType: string, container: SurveyElement): boolean => true;
 
   public startDragToolboxItem(
     event: PointerEvent,
@@ -181,10 +181,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     var newElement = Serializer.createClass(json["type"]);
     new JsonObject().toObject(json, newElement);
     return newElement;
-  }
-
-  private isPanelDynamic(element: ISurveyElement) {
-    return element instanceof QuestionPanelDynamicModel;
   }
 
   protected findDropTargetNodeByDragOverNode(dragOverNode: HTMLElement): HTMLElement {
@@ -267,17 +263,31 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (!dropTarget) return false;
     if (dropTarget === this.draggedElement) return false;
 
-    if (this.draggedElement.getType() === "paneldynamic" && dropTarget === this.draggedElement.template) {
+    if (SurveyHelper.isPanelDynamic(this.draggedElement) && dropTarget === this.draggedElement.template) {
       return false;
     }
-    if (this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
-      const pnl: any = <PanelModel>this.draggedElement;
-      if (pnl.deepNested === undefined) {
-        pnl.deepNested = this.getMaximumNestedPanelCount(pnl, 0);
+    let container = !dropTarget.isPage && dragOverLocation === DropIndicatorPosition.Inside ? dropTarget : dropTarget.parent;
+    if (container && !container.isInteractiveDesignElement) {
+      container = container.parent || container.parentQuestion;
+    }
+    if (!this.isAllowedToAdd(this.draggedElement && this.draggedElement.getType && this.draggedElement.getType(), container || dropTarget)) {
+      return false;
+    }
+    if (this.maxPanelNestingLevel >= 0 && (this.draggedElement.isPanel || SurveyHelper.isPanelDynamic(this.draggedElement))) {
+      let draggedPanel = this.draggedElement as PanelModel;
+      if (SurveyHelper.isPanelDynamic(this.draggedElement)) {
+        draggedPanel = (<QuestionPanelDynamicModel>this.draggedElement).template;
       }
+      const childPanelsMaxNesting = SurveyHelper.getMaximumNestedPanelDepth(draggedPanel, 0);
+      let len = SurveyHelper.getElementParentContainers(dropTarget, false).length;
+      if (dragOverLocation === DropIndicatorPosition.Inside && (dropTarget.isPanel || SurveyHelper.isPanelDynamic(dropTarget))) len++;
+      if (this.maxPanelNestingLevel < len + childPanelsMaxNesting) return false;
+    } else if (this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
+      const draggedPanel = this.draggedElement as PanelModel;
+      const childPanelsMaxNesting = SurveyHelper.getMaximumNestedPanelDepth(draggedPanel, 0);
       let len = SurveyHelper.getElementDeepLength(dropTarget);
       if (dragOverLocation !== DropIndicatorPosition.Inside && dropTarget.isPanel) len--;
-      if (this.maxNestedPanels < len + pnl.deepNested) return false;
+      if (this.maxNestedPanels < len + childPanelsMaxNesting) return false;
     }
 
     if (
@@ -288,18 +298,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
 
     return true;
-  }
-  private getMaximumNestedPanelCount(panel: PanelModel, deep: number): number {
-    let max = deep;
-    panel.elements.forEach(el => {
-      if (el.isPanel) {
-        const pDeep = this.getMaximumNestedPanelCount(<PanelModel>el, deep + 1);
-        if (pDeep > max) {
-          max = pDeep;
-        }
-      }
-    });
-    return max;
   }
 
   protected doBanDropHere = () => {
@@ -326,8 +324,14 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     return <HTMLElement>result;
   }
+
+  /**
+   * An event that is raised when users drag and drop survey elements while designing the survey in [Survey Creator](https://surveyjs.io/survey-creator/documentation/overview). Use this event to control drag and drop operations.
+   */
+  public onDragDropAllow: EventBase<DragDropCore<any>, DragDropAllowEvent> = new EventBase<DragDropCore<any>, DragDropAllowEvent>();
+
   private isAllowDragOver(dropTarget: ISurveyElement, dragOverLocation: DropIndicatorPosition): boolean {
-    if (!this.survey || this.survey.onDragDropAllow.isEmpty) return true;
+    if (this.onDragDropAllow.isEmpty) return true;
     const allowOptions: DragDropAllowEvent = {
       allow: true,
       parent: this.parentElement,
@@ -346,7 +350,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (dragOverLocation === DropIndicatorPosition.Top || dragOverLocation === DropIndicatorPosition.Left) {
       allowOptions.insertBefore = <IElement>dropTarget;
     }
-    this.survey.onDragDropAllow.fire(this.survey, allowOptions);
+    this.onDragDropAllow.fire(this, allowOptions);
     if (!allowOptions.allowDropNextToAnother) {
       if (dragOverLocation === DropIndicatorPosition.Left) {
         this.dragOverLocation = DropIndicatorPosition.Top;
@@ -513,7 +517,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const calcDirection = !settings.dragDrop.allowDragToTheSameLine || (!!this.draggedElement && this.draggedElement.isPage) ? "top-bottom" : null;
     let dragOverLocation = calculateDragOverLocation(event.clientX, event.clientY, dropTargetRect, calcDirection);
 
-    if (!this.draggedElement.isPage && dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || this.isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
+    if (!this.draggedElement.isPage && dropTarget && ((dropTarget.isPanel || dropTarget.isPage) && dropTarget.elements.length === 0 || SurveyHelper.isPanelDynamic(dropTarget) && dropTarget.template.elements.length == 0)) {
       if (dropTarget.isPage || this.insideElement) {
         dragOverLocation = DropIndicatorPosition.Inside;
       }
@@ -523,38 +527,13 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       dragOverLocation = DropIndicatorPosition.Inside;
     }
 
-    if ((dropTarget.isPanel || this.isPanelDynamic(dropTarget)) && this.insideElement && dropTargetAdorner.collapsed) {
+    if ((dropTarget.isPanel || SurveyHelper.isPanelDynamic(dropTarget)) && this.insideElement && dropTargetAdorner.collapsed) {
       dragOverLocation = DropIndicatorPosition.Inside;
     }
 
     if (!this.draggedElement.isPage && dropTarget.isPage && dropTarget.elements.length !== 0 && !dropTargetAdorner.collapsed) {
       dragOverLocation = null;
     }
-
-    // const dropTargetType = this.getDragDropElementType(dropTarget);
-    // const draggedElementType = this.getDragDropElementType(this.draggedElement);
-    // switch (dropTargetType) {
-    //   case ElType.Page: {
-    //     console.log("dropTargetType", dropTargetType);
-    //     break;
-    //   }
-    //   case ElType.Panel: {
-    //     console.log("dropTargetType", dropTargetType);
-    //     break;
-    //   }
-    //   case ElType.DynamicPanel: {
-    //     console.log("dropTargetType", dropTargetType);
-    //     break;
-    //   }
-    //   case ElType.Question: {
-    //     console.log("dropTargetType", dropTargetType);
-    //     break;
-    //   }
-    //   // case ElType.EmptySurvey: {
-    //   //   console.log("dropTargetType", dropTargetType);
-    //   //   break;
-    //   // }
-    // }
 
     const options = {
       survey: this.survey,
@@ -646,7 +625,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     let dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
 
     if (this.dragOverLocation === DropIndicatorPosition.Inside) {
-      if (this.isPanelDynamic(dest)) dest = dest.template;
+      if (SurveyHelper.isPanelDynamic(dest)) dest = dest.template;
       (<PanelModelBase>dest).insertElement(src);
     } else {
       const destParent = dest.parent || dest.page;
