@@ -132,7 +132,7 @@ const root = ref();
 
 const model = useCreatorModel(
   () => props.createModel(),
-  [() => props.componentName, () => props.componentData],
+  [() => props.componentName, () => props.componentData.data, () => props.componentData.element],
   (value) => {
     value.dispose();
   }

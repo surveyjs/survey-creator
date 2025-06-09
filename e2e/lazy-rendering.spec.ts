@@ -15,12 +15,12 @@ test.describe(title, () => {
     const skeletonElement = page.locator(".sv-skeleton-element");
     const nonRenderedPages = page.locator(".svc-page__loading-content");
     await page.waitForTimeout(10000);
-    expect(await skeletonElement.count()).toBeGreaterThanOrEqual(85);
-    expect(await nonRenderedPages.count()).toBeGreaterThanOrEqual(107);
+    await expect(await skeletonElement.count()).toBeGreaterThanOrEqual(85);
+    await expect(await nonRenderedPages.count()).toBeGreaterThanOrEqual(106);
   });
 
-  test.skip("Huge JSON long task time", async ({ page }) => {
-    const timeLimit = 4000;
+  test("Huge JSON long task time", async ({ page }) => {
+    const timeLimit = 10000;
     const totalBlockingTime: number = await page.evaluate(([json, timeLimit]) => {
       return new Promise<number>((resolve) => {
         let totalBlockingTime = 0;

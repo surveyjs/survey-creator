@@ -79,7 +79,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         (<any>surveyElement.locTitle).placeholder = () => { return surveyElement.isStartPage ? "pe.startPageTitlePlaceholder" : "pe.pageTitlePlaceholder"; };
         (<any>surveyElement.locDescription).placeholder = "pe.pageDescriptionPlaceholder";
       }
-      this.needRenderContent = this.creator.pageEditMode !== "standard" || !surveyElement.survey || surveyElement.survey.pages.length <= 5;
+      this.needRenderContent = this.isGhost || this.creator.pageEditMode !== "standard" || !surveyElement.survey || surveyElement.survey.pages.length <= 5;
     }
   }
 
@@ -115,6 +115,12 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     },
     { root: null, });
     this.visibilityObserver.observe(this.rootElement);
+  }
+  public forceCheckVisibility() {
+    if (!!this.visibilityObserver && !!this.rootElement) {
+      this.visibilityObserver.unobserve(this.rootElement);
+      this.visibilityObserver.observe(this.rootElement);
+    }
   }
 
   public attachToUI(surveyElement: PageModel, rootElement?: HTMLElement) {
@@ -160,6 +166,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         target.updateActionsProperties();
         if (val && target.surveyElement) {
           target.addGhostPageSubsribes(target.surveyElement);
+          target.needRenderContent = true;
         }
       }
     },
