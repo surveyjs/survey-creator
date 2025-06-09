@@ -228,6 +228,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         location: "start",
         enabled: false
       });
+      options.question.cssClasses.detailIconExpandedId = "icon-edit";
+      options.question.cssClasses.detailIconId = "icon-edit";
 
       options.actions.forEach(a => {
         if (a.id == "show-detail") {
@@ -235,10 +237,16 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           a.iconName = "icon-edit",
           a.visibleIndex = 10;
         }
-        if (a.id == "remove-row") a.visibleIndex = 20;
+        if (a.id == "remove-row") {
+          a.visibleIndex = 20;
+          a.iconName = options.question.name == this.nameMatrix ? "icon-add_16x16" : "icon-remove_16x16";
+        }
       });
     }
     if (options.question.name === this.nameCategories) {
+      options.question.cssClasses.detailIconExpandedId = "icon-collapse-24x24";
+      options.question.cssClasses.detailIconId = "icon-expand-24x24";
+
       options.actions.push({
         id: "reset-to-default",
         iconName: "icon-reset",
