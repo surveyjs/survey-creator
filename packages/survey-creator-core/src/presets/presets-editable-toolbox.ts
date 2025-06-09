@@ -277,6 +277,13 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       hiddenItems.value = value;
       return;
     }
+    if (options.question.name == this.nameCategories) {
+      const items = options.question.value[options.rowIndex].items;
+      const hiddenItems = this.getMatrix(model);
+      const value = hiddenItems.value ? hiddenItems.value.concat(items) : items;
+      hiddenItems.value = value;
+      return;
+    }
     if (options.question.name == this.nameMatrix) {
       const rowData = options.question.value[options.rowIndex];
       const mode = model.getValue(this.nameCategoriesMode);

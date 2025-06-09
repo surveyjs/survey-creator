@@ -38,6 +38,22 @@ test("Preset edit, toolbox - remove item from categories", () => {
   expect(editor.json.toolbox.definition.length).toBe(length - 1);
 });
 
+test("Preset edit, toolbox - remove whole category from categories", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
+  expect(matrixQuestion.visibleRows).toHaveLength(0);
+  expect(categQuestion.visibleRows).toHaveLength(5);
+  const row = categQuestion.visibleRows[1];
+  categQuestion.removeRow(1);
+  expect(matrixQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "comment", "multipletext"]);
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  expect(editor.json.toolbox).toBeDefined();
+  expect(editor.json.toolbox.categories.length).toBe(4);
+});
+
 test("Preset edit, toolbox - remove item from flat items", () => {
   const editor = new CreatorPresetEditorModel();
   expect(editor.applyFromSurveyModel()).toBeTruthy();
