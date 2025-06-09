@@ -30,6 +30,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       allowAddRows: false,
       addRowButtonLocation: "top",
       addRowText: "Add Custom Item",
+      "hideColumnsIfEmpty": true,
+      "noRowsText": "There are no items",
       columns: [
         {
           "name": "name",
