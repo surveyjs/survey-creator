@@ -8,7 +8,7 @@
     --sd-page-vertical-padding: calc(2 * #{$base-unit});
   }
 
-  .svc-question__content {
+  .svc-question__content:not(.svc-question__content--composite-question) {
     .sd-question__content {
       margin-left: calcSize(-3);
       margin-right: calcSize(-3);

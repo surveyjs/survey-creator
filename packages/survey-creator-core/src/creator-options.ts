@@ -162,19 +162,19 @@ export interface ICreatorOptions {
    *
    * Accepted values:
    *
-   * - `"auto"` (default)
+   * - `"auto"` (default)\
    * Display the language selector only if the survey is translated into more than one language.
    *
-   * - `true`
+   * - `true`\
    * Always display the language selector regardless of how many languages are used in the survey.
    *
-   * - `false`
+   * - `false`\
    * Never display the language selector.
    *
-   * - `"all"`
+   * - `"all"`\
    * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization).
    *
-   * **See also**: [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
+   * [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
    */
   previewAllowSelectLanguage?: boolean | string;
   /**
@@ -290,11 +290,50 @@ export interface ICreatorOptions {
   maxLogicItemsInCondition?: number;
 
   /**
-   * Limits the number of nested panels within a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element.
-   *
-   * Default value: -1 (unlimited)
+   * @deprecated Use the [`maxPanelNestingLevel`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxPanelNestingLevel) property instead.
    */
   maxNestedPanels?: number;
+
+  /**
+   * Specifies the maximum depth allowed for nested [Panels](https://surveyjs.io/form-library/documentation/api-reference/panel-model) and [Dynamic Panels](https://surveyjs.io/form-library/documentation/api-reference/dynamic-panel-model) in the survey.
+   *
+   * This property behaves as follows:
+   *
+   * - A value of -1 applies no restriction on nesting depth.
+   * - A value of 0 means that Panels and Dynamic Panels cannot contain other panels&mdash;only questions are allowed.
+   * - Positive integers specify the maximum nesting level.
+   *
+   * Default value: -1 (unlimited)
+   *
+   * If you don't want users to nest certain element types within panels, specify the [`forbiddenNestedElements`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#forbiddenNestedElements) property.
+   */
+  maxPanelNestingLevel?: number;
+
+  /**
+   * Specifies which element types are forbidden from being nested inside [Panels](https://surveyjs.io/form-library/documentation/api-reference/panel-model) and [Dynamic Panels](https://surveyjs.io/form-library/documentation/api-reference/dynamic-panel-model).
+   *
+   * This property is an object with the following structure:
+   *
+   * - `panel`: An array of element types that cannot be nested within a regular panel.
+   * - `paneldynamic`: An array of element types that cannot be nested within a dynamic panel.
+   *
+   * In the following example, dynamic panels are disallowed inside regular panels, and both regular and dynamic panels are disallowed inside a dynamic panel:
+   *
+   * ```js
+   * import { SurveyCreatorModel } from "survey-creator-core";
+   * const creatorOptions = {
+   *   // ...
+   *   forbiddenNestedElements: {
+   *     panel: [ "paneldynamic" ],
+   *     paneldynamic: [ "panel", "paneldynamic" ]
+   *   }
+   * };
+   * const creator = new SurveyCreatorModel(creatorOptions);
+   * ```
+   * @see maxPanelNestingLevel
+   */
+  forbiddenNestedElements?: { panel: string[], paneldynamic: string[] };
+
   /**
    * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
    */
@@ -340,11 +379,8 @@ export interface ICreatorOptions {
    *
    * Accepted values:
    *
-   * - `true` (default)
-   * New questions are added to the end of a survey page.
-   *
-   * - `false`
-   * New questions are added after the currently selected question on the design surface.
+   * - `true` (default) - New questions are added to the end of a survey page.
+   * - `false` - New questions are added after the currently selected question on the design surface.
    */
   addNewQuestionLast?: boolean;
   /**
@@ -352,13 +388,13 @@ export interface ICreatorOptions {
    *
    * Accepted values:
    *
-   * - `"standard"` (default)
+   * - `"standard"` (default)\
    * Questions and panels are divided between pages. Users can scroll the design surface to reach a required page.
    *
-   * - `"single"`
+   * - `"single"`\
    * All questions and panels belong to a single page. Users cannot add or remove pages.
    *
-   * - `"bypage"`
+   * - `"bypage"`\
    * Questions and panels are divided between pages. Users can use the page navigator to switch to a required page.
    *
    * [View Page-By-Page Mode Demo](https://surveyjs.io/survey-creator/examples/page-level-editing/ (linkStyle))
@@ -418,10 +454,10 @@ export interface ICreatorOptions {
    *
    * Accepted values:
    *
-   * - `"accordion"`
+   * - `"accordion"`\
    * The Property Grid displays a stacked list of categories that users can expand or collapse to reveal nested properties.
    *
-   * - `"buttons"` (default)
+   * - `"buttons"` (default)\
    * The Property Grid displays the properties of a currently selected category. Users can switch between categories using buttons on the right side of the Property Grid.
    *
    * [Accordion Mode Demo](https://surveyjs.io/survey-creator/examples/property-grid-accordion-view/ (linkStyle))

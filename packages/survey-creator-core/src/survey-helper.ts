@@ -8,6 +8,7 @@ import {
   Serializer,
   SurveyModel,
   PageModel,
+  PanelModel,
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { ISurveyCreatorOptions } from "./creator-settings";
@@ -370,5 +371,31 @@ export class SurveyHelper {
       element = <SurveyElement><any>element.parent;
     }
     return res;
+  }
+  public static getMaximumNestedPanelDepth(panel: PanelModel, currentDepth: number): number {
+    let maxDepth = currentDepth;
+    panel.elements.forEach(el => {
+      if (el.isPanel) {
+        const pDeep = SurveyHelper.getMaximumNestedPanelDepth(<PanelModel>el, currentDepth + 1);
+        if (pDeep > maxDepth) {
+          maxDepth = pDeep;
+        }
+      }
+    });
+    return maxDepth;
+  }
+  public static getElementParentContainers(element: SurveyElement, includingPage = true): SurveyElement[] {
+    const containers: SurveyElement[] = [];
+    let current = (element.parent || element.parentQuestion) as SurveyElement;
+    while(!!current) {
+      if (current.isInteractiveDesignElement && (!current.isPage || includingPage)) {
+        containers.push(current);
+      }
+      current = (current.parent || current.parentQuestion) as SurveyElement;
+    }
+    return containers;
+  }
+  public static isPanelDynamic(element: any) {
+    return !!element && (element as Base).isDescendantOf("paneldynamic");
   }
 }

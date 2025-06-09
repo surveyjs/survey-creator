@@ -20,7 +20,8 @@ import {
   PanelModel,
   classesToSelector,
   QuestionFactory,
-  PopupModel
+  PopupModel,
+  QuestionCompositeModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -44,7 +45,15 @@ export interface QuestionBannerParams {
 }
 
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
-  @property({ defaultValue: "" }) currentAddQuestionType: string;
+  @property({ defaultValue: "" }) _currentAddQuestionType: string;
+  get currentAddQuestionType(): string {
+    return this._currentAddQuestionType;
+  }
+  set currentAddQuestionType(val: string) {
+    if (!this.creator || this.creator.rememberLastQuestionType) {
+      this._currentAddQuestionType = val;
+    }
+  }
 
   placeholderComponent: string;
   placeholderComponentData: any;
@@ -117,6 +126,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
     let result: string = new CssClassBuilder()
       .append("svc-question__content")
+      .append("svc-question__content--composite-question", this.surveyElement instanceof QuestionCompositeModel)
       .append("svc-question__content--" + this.surveyElement.getType(), typeof this.surveyElement.getType === "function")
       .append("svc-question__content--selected", !!this.creator.isElementSelected(this.surveyElement))
       .append("svc-question__content--empty", this.isEmptyElement)
@@ -207,7 +217,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const question = this.creator.survey.getQuestionByName(name);
     if (!question) return null;
     return {
-      actionText: question.name,
+      actionText: SurveyHelper.getObjectName(question, this.creator.useElementTitles),
       text: this.creator.getLocString("ed.carryForwardChoicesCopied"),
       onClick: () => { this.creator.selectElement(question); }
     };
