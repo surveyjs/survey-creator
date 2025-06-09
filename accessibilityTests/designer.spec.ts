@@ -25,6 +25,10 @@ test.describe("designer a11y", () => {
   test("Check designer tab empty", async ({ page }) => {
     await checkA11y(page, ".svc-creator", { axeOptions });
   });
+  test("Check designer compact toolbox", async ({ page }) => {
+    await page.setViewportSize({ width: 1200, height: 1080 });
+    await checkA11y(page, ".svc-creator", { axeOptions });
+  });
   test("Check designer tab with multiple pages", async ({ page }) => {
     await setJSON(page, jsonWithMultiplePages);
     await checkA11y(page, ".svc-creator", { axeOptions });
