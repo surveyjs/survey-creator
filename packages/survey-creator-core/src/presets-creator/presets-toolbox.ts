@@ -51,7 +51,7 @@ export class CreatorPresetToolboxConfigurator extends CreatorPresetBase {
     if (!this.json) return;
     super.applyCore(creator);
     creator.toolbox.showCategoryTitles = this.json.showCategoryTitles;
-    this.applyItems(creator, this.json["items"]);
+    this.applyItems(creator, this.json["definition"]?.map(i => i.name));
     this.applyCategories(creator, this.json["categories"]);
   }
   private applyItems(creator: SurveyCreatorModel, items: Array<string>): void {

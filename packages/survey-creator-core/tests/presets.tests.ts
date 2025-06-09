@@ -76,7 +76,7 @@ test("set toolbox items", () => {
   const creator = new CreatorTester();
   const preset = new CreatorPreset({
     toolbox: {
-      items: ["text", "dropdown", "matrix"],
+      definition: [{ name: "text" }, { name: "dropdown" }, { name: "matrix" }],
     }
   });
   preset.apply(creator);
@@ -91,9 +91,10 @@ test("set toolbox definition", () => {
     toolbox: {
       definition: [
         { name: "text-number", title: "Number", json: { type: "text", inputType: "number" } },
-        { name: "text-date", title: "Date", json: { type: "text", inputType: "date" } }
-      ],
-      items: ["text-number", "text-date", "dropdown", "matrix"],
+        { name: "text-date", title: "Date", json: { type: "text", inputType: "date" } },
+        { name: "dropdown" },
+        { name: "matrix" },
+      ]
     }
   });
   preset.apply(creator);
