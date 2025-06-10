@@ -1,5 +1,4 @@
-import { url, compareScreenshot } from "./helper";
-import { test, expect } from "@playwright/test";
+import { url, test, expect } from "./helper";
 import { json as hugeJson } from "./questions_4114";
 
 const title = "Design Surface Lazy Rendering";
@@ -40,6 +39,6 @@ test.describe(title, () => {
 
     // eslint-disable-next-line no-console
     console.log("totalBlockingTime: " + totalBlockingTime.toString() + "ms");
-    await expect(totalBlockingTime).toBeLessThan(timeLimit);
+    expect(totalBlockingTime).toBeLessThan(timeLimit);
   });
 });

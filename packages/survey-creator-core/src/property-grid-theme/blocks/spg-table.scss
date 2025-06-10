@@ -24,9 +24,6 @@
 .spg-table__cell {
   padding: 0;
 
-  .spg-checkbox {
-    margin: 0 calcSize(2);
-  }
 }
 
 .spg-table__cell--detail-panel {
@@ -34,6 +31,11 @@
 
   .spg-panel__content {
     box-shadow: none;
+  }
+}
+.spg-table__cell:where(:not(.spg-table__cell--detail-panel)) {
+  .spg-checkbox {
+    margin: 0 calcSize(2);
   }
 }
 
