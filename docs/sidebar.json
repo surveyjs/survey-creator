@@ -149,6 +149,10 @@
             {
               "Name": "end-user-guide-reposition-form-elements",
               "Title": "Reposition Form Elements"
+            },
+            {
+              "Name": "end-user-guide-loop-and-merge-multi-select-dropdown-and-dynamic-matrix",
+              "Title": "Loop and Merge"
             }
           ]
         },
