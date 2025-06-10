@@ -20,3 +20,24 @@ export async function compareScreenshot(page: Page, elementSelector: string | un
     });
   }
 }
+export const test = baseTest.extend<{page: void, skipJSErrors: boolean}>({
+  skipJSErrors: [false, { option: false }],
+  page: async ({ page, skipJSErrors }, use) => {
+    const errors: Array<Error> = [];
+    page.addListener("pageerror", (error) => {
+      errors.push(error);
+    });
+    await use(page);
+    if (!skipJSErrors) {
+      expect(errors).toHaveLength(0);
+    }
+  }
+});
+
+export const setJSON = async (page: Page, json: object) => {
+  await page.evaluate((json) => {
+    window["creator"].text = JSON.stringify(json);
+  }, json);
+};
+
+export { expect };

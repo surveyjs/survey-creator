@@ -587,7 +587,8 @@ export class QuestionToolbox
       iconName: "icon-search",
       iconSize: "auto",
       component: "sv-action-bar-item",
-      tooltip: surveyLocalization.getString("search"),
+      title: surveyLocalization.getString("ed.toolboxSearch"),
+      showTitle: false,
       action: () => {
         (this.rootElement.querySelector("input") as HTMLInputElement).focus();
         this.isFocused = true;

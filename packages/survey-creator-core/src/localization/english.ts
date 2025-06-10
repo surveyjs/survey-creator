@@ -131,6 +131,7 @@ export var enStrings = {
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
     "property-grid": "Properties",
+    toolboxSearch: "Search",
     toolboxFilteredTextPlaceholder: "Type to search...",
     toolboxNoResultsFound: "No results found",
     propertyGridFilteredTextPlaceholder: "Type to search...",
@@ -758,6 +759,10 @@ export var enStrings = {
       minValueExpression: "Min value expression",
       maxValueExpression: "Max value expression",
       autoGenerate: "Scale labels configuration"
+    },
+    file: {
+      imageHeight: "Image height",
+      imageWidth: "Image width"
     },
     hideIfChoicesEmpty: "Hide the question if it has no choices",
     minWidth: "Minimum width",
@@ -1468,8 +1473,8 @@ export var enStrings = {
       signatureAutoScaleEnabled: "Select if you want the signature area to fill all available space within the question box while maintaining the default 3:2 aspect ratio. When custom width and height values are set, the setting will keep the aspect ratio of these dimensions."
     },
     file: {
-      imageHeight: "Adjusts the height of the image in the survey results.",
-      imageWidth: "Adjusts the width of the image in the survey results.",
+      imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area.",
+      imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area.",
       allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead.",
     },
     image: {
