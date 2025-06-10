@@ -129,6 +129,7 @@ export var slStrings = {
     generateReadableJSON: "Ustvari berljiv JSON",
     toolbox: "Orodjarna",
     "property-grid": "Lastnosti",
+    toolboxSearch: "Iskanje",
     toolboxFilteredTextPlaceholder: "Vnesite za iskanje...",
     toolboxNoResultsFound: "Ni najdenih rezultatov",
     propertyGridFilteredTextPlaceholder: "Vnesite za iskanje...",
@@ -755,6 +756,10 @@ export var slStrings = {
       minValueExpression: "Izraz najmanjše vrednosti",
       maxValueExpression: "Izraz največje vrednosti",
       autoGenerate: "Konfiguracija nalepk merila"
+    },
+    file: {
+      imageHeight: "Višina slike",
+      imageWidth: "Širina slike"
     },
     hideIfChoicesEmpty: "Skrij vprašanje, če nima možnosti",
     minWidth: "Najmanjša širina",
@@ -1460,8 +1465,8 @@ export var slStrings = {
       signatureAutoScaleEnabled: "Izberite, če želite, da se območje podpisa zapolni z vsem razpoložljivim prostorom v polju vprašanja ob ohranjanju privzetega razmerja stranic 3:2. Ko so nastavljene prilagojene vrednosti širine in višine, bo nastavitev ohranila razmerje teh dimenzij."
     },
     file: {
-      imageHeight: "Prilagodi višino slike v rezultatih ankete.",
-      imageWidth: "Prilagodi širino slike v rezultatih ankete.",
+      imageHeight: "Določa višino prikaza prenesenih slik v predogledu in dejansko višino slik, posnetih s fotoaparatom. V načinu nalaganja ene datoteke je višina zaslona omejena z območjem predogleda; V načinu nalaganja več datotek je omejen z območjem sličic.",
+      imageWidth: "Določa širino prikaza prenesenih slik v predogledu in dejansko širino slik, posnetih s fotoaparatom. V načinu nalaganja ene datoteke je širina prikaza omejena z območjem predogleda; V načinu nalaganja več datotek je omejen z območjem sličic.",
       allowImagesPreview: "Prikaže sličice naloženih datotek, kadar je to mogoče. Odznačite, če želite namesto tega prikazati ikone datotek."
     },
     image: {
@@ -1493,6 +1498,21 @@ export var slStrings = {
       requiredIf: "Uporabite ikono čarobne palice za nastavitev pogojnega pravila, ki prepreči oddajo ankete, če vsaj eno vprašanju v tem stolpcu ni bilo odgovorjeno.",
       showInMultipleColumns: "Ko je izbrano, ustvari posamezen stolpec za vsako izbiro.",
       colCount: "Razvrsti možnosti izbire v postavitev z več stolpci. Ko je nastavljeno na 0, so možnosti prikazane v eni sami vrstici. Ko je nastavljeno na -1, se dejanska vrednost podeduje iz lastnosti \"Število gnezdenih stolpcev\" nadrejenega matriksa."
+    },
+    slider: {
+      min: "Najnižja številka, ki jo lahko izberejo uporabniki.",
+      max: "Najvišja številka, ki jo lahko izberejo uporabniki.",
+      step: "Interval med izbranimi vrednostmi merila. Na primer, korak 5 bo uporabnikom omogočil, da izberejo 0, 5, 10 itd.",
+      minRangeLength: "Najmanjša razdalja med palci drsnika, ki jo lahko nastavi uporabnik.",
+      maxRangeLength: "Največja razdalja med palci drsnika, ki jo lahko nastavi uporabnik.",
+      labelCount: "Določa, koliko oznak merila je treba ustvariti. Vrednost -1 pomeni, da se število izračuna samodejno na podlagi vrednosti »Min« in »Največja«.",
+      labelFormat: "Uporabite »{0}« kot označbo mesta za dejansko vrednost.",
+      customLabels: "Omogoča določanje oznak po meri pri določenih vrednostih in jim po želji dodelite ustrezno besedilo (npr. 0 = »Slabo«, 100 = »Odlično«).",
+      tooltipFormat: "Uporabite »{0}« kot označbo mesta za dejansko vrednost.",
+      allowSwap: "Uporabnikom omogoča, da premaknejo en palec mimo drugega.",
+      allowClear: "Prikaže gumb, ki počisti izbrano vrednost drsnika in jo nastavi na nedoločeno.",
+      minValueExpression: "Dinamično določa najmanjšo vrednost drsnika z uporabo izraza. Podpira osnovne izračune (npr. '{q1_id} + {q2_id}'), logično logiko (npr. '{age} > 60') in funkcije, kot so 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' in še več.",
+      maxValueExpression: "Dinamično določa največjo vrednost drsnika z uporabo izraza. Podpira osnovne izračune (npr. '{q1_id} + {q2_id}'), logično logiko (npr. '{age} > 60') in funkcije, kot so 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' in še več."
     },
     isExclusive: "Zaradi tega je ta izbira ekskluzivna. Ko uporabnik izbere, bo samodejno preklical izbiro vseh drugih možnosti v vprašanju.",
     caseInsensitive: "Izberite, če naj bodo velike in male črke v regularnem izrazu obravnavane kot enake",
@@ -1873,3 +1893,21 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // sliderType.single: "Single-Value" => "Enojna vrednost"
 // sliderType.range: "Range" => "Razpon"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Zaradi tega je ta izbira ekskluzivna. Ko uporabnik izbere, bo samodejno preklical izbiro vseh drugih možnosti v vprašanju."
+// ed.toolboxSearch: "Search" => "Iskanje"
+// file.imageHeight: "Image height" => "Višina slike"
+// file.imageWidth: "Image width" => "Širina slike"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Določa višino prikaza prenesenih slik v predogledu in dejansko višino slik, posnetih s fotoaparatom. V načinu nalaganja ene datoteke je višina zaslona omejena z območjem predogleda; V načinu nalaganja več datotek je omejen z območjem sličic."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Določa širino prikaza prenesenih slik v predogledu in dejansko širino slik, posnetih s fotoaparatom. V načinu nalaganja ene datoteke je širina prikaza omejena z območjem predogleda; V načinu nalaganja več datotek je omejen z območjem sličic."
+// slider.min: "The lowest number that users can select." => "Najnižja številka, ki jo lahko izberejo uporabniki."
+// slider.max: "The highest number that users can select." => "Najvišja številka, ki jo lahko izberejo uporabniki."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Interval med izbranimi vrednostmi merila. Na primer, korak 5 bo uporabnikom omogočil, da izberejo 0, 5, 10 itd."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Najmanjša razdalja med palci drsnika, ki jo lahko nastavi uporabnik."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Največja razdalja med palci drsnika, ki jo lahko nastavi uporabnik."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Določa, koliko oznak merila je treba ustvariti. Vrednost -1 pomeni, da se število izračuna samodejno na podlagi vrednosti »Min« in »Največja«."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Uporabite »{0}« kot označbo mesta za dejansko vrednost."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Omogoča določanje oznak po meri pri določenih vrednostih in jim po želji dodelite ustrezno besedilo (npr. 0 = »Slabo«, 100 = »Odlično«)."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Uporabite »{0}« kot označbo mesta za dejansko vrednost."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Uporabnikom omogoča, da premaknejo en palec mimo drugega."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Prikaže gumb, ki počisti izbrano vrednost drsnika in jo nastavi na nedoločeno."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dinamično določa najmanjšo vrednost drsnika z uporabo izraza. Podpira osnovne izračune (npr. '{q1_id} + {q2_id}'), logično logiko (npr. '{age} > 60') in funkcije, kot so 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' in še več."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dinamično določa največjo vrednost drsnika z uporabo izraza. Podpira osnovne izračune (npr. '{q1_id} + {q2_id}'), logično logiko (npr. '{age} > 60') in funkcije, kot so 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' in še več."

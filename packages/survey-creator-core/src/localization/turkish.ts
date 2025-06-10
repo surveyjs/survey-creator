@@ -129,6 +129,7 @@ export var turkishStrings = {
     generateReadableJSON: "Okunabilir JSON oluştur",
     toolbox: "Araç Kutusu",
     "property-grid": "Özellikler",
+    toolboxSearch: "Aramak",
     toolboxFilteredTextPlaceholder: "Aramak için yazın...",
     toolboxNoResultsFound: "Sonuç bulunamadı",
     propertyGridFilteredTextPlaceholder: "Aramak için yazın...",
@@ -755,6 +756,10 @@ export var turkishStrings = {
       minValueExpression: "Minimum değer ifadesi",
       maxValueExpression: "Maksimum değer ifadesi",
       autoGenerate: "Ölçek etiketleri yapılandırması"
+    },
+    file: {
+      imageHeight: "Görüntü yüksekliği",
+      imageWidth: "Görüntü genişliği"
     },
     hideIfChoicesEmpty: "Seçenek içermiyorsa soruyu gizleme",
     minWidth: "Minimum genişlik (CSS tarafından kabul edilen değerlerde)",
@@ -1460,8 +1465,8 @@ export var turkishStrings = {
       signatureAutoScaleEnabled: "İmza alanının, varsayılan 3:2 en boy oranını korurken soru kutusundaki tüm kullanılabilir alanı doldurmasını isteyip istemediğinizi seçin. Özel genişlik ve yükseklik değerleri ayarlandığında, ayar bu boyutların en boy oranını korur."
     },
     file: {
-      imageHeight: "Anket sonuçlarındaki görüntünün yüksekliğini ayarlar.",
-      imageWidth: "Anket sonuçlarındaki görüntünün genişliğini ayarlar.",
+      imageHeight: "Önizlemede yüklenen görüntülerin görüntülenme yüksekliğini ve fotoğraf makinesiyle çekilen görüntülerin gerçek yüksekliğini belirtir. Tek dosya yükleme modunda, ekran yüksekliği önizleme alanıyla sınırlıdır; Çoklu dosya yükleme modunda, küçük resim alanı ile sınırlıdır.",
+      imageWidth: "Önizlemede yüklenen görüntülerin görüntülenme genişliğini ve fotoğraf makinesiyle çekilen görüntülerin gerçek genişliğini belirtir. Tek dosya yükleme modunda, görüntüleme genişliği önizleme alanıyla sınırlıdır; Çoklu dosya yükleme modunda, küçük resim alanı ile sınırlıdır.",
       allowImagesPreview: "Mümkün olduğunda karşıya yüklenen dosyalar için küçük resim önizlemelerini görüntüler. Bunun yerine dosya simgelerini göstermek istiyorsanız seçimi kaldırın."
     },
     image: {
@@ -1493,6 +1498,21 @@ export var turkishStrings = {
       requiredIf: "En az bir iç içe geçmiş sorunun yanıtı olmadığı sürece anket gönderimini engelleyen koşullu bir kural ayarlamak için sihirli değnek simgesini kullanın.",
       showInMultipleColumns: "Seçildiğinde, her seçim seçeneği için ayrı bir sütun oluşturur.",
       colCount: "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır."
+    },
+    slider: {
+      min: "Kullanıcıların seçebileceği en düşük sayı.",
+      max: "Kullanıcıların seçebileceği en yüksek sayı.",
+      step: "Seçilebilir ölçek değerleri arasındaki aralık. Örneğin, 5'lik bir adım, kullanıcıların 0, 5, 10 vb. seçmesine olanak tanır.",
+      minRangeLength: "Bir kullanıcının ayarlayabileceği kaydırıcı başparmaklar arasındaki minimum mesafe.",
+      maxRangeLength: "Bir kullanıcının ayarlayabileceği kaydırıcı başparmakları arasındaki maksimum mesafe.",
+      labelCount: "Kaç ölçek etiketinin oluşturulacağını belirtir. -1 değeri, sayının Minimum değer ve Maks değerine göre otomatik olarak hesaplandığı anlamına gelir.",
+      labelFormat: "Gerçek değer için yer tutucu olarak '{0}' kullanın.",
+      customLabels: "Belirli değerlerde özel etiketler tanımlamanıza ve isteğe bağlı olarak bunlara karşılık gelen metni atamanıza olanak tanır (örneğin, 0 = \"Zayıf\", 100 = \"Mükemmel\").",
+      tooltipFormat: "Gerçek değer için yer tutucu olarak '{0}' kullanın.",
+      allowSwap: "Kullanıcıların bir başparmağını diğerinin yanından geçirmesine izin verir.",
+      allowClear: "Seçili kaydırıcı değerini temizleyen ve tanımsız olarak ayarlayan bir düğme görüntüler.",
+      minValueExpression: "Bir ifade kullanarak kaydırıcının minimum değerini dinamik olarak tanımlar. Temel hesaplamaları (ör. '{q1_id} + {q2_id}'), Boole mantığını (ör. '{age} > 60') ve 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ve daha fazlası gibi işlevleri destekler.",
+      maxValueExpression: "Bir ifade kullanarak kaydırıcının maksimum değerini dinamik olarak tanımlar. Temel hesaplamaları (ör. '{q1_id} + {q2_id}'), Boole mantığını (ör. '{age} > 60') ve 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ve daha fazlası gibi işlevleri destekler."
     },
     isExclusive: "Bu seçimi özel kılar. Bir kullanıcı tarafından seçildiğinde, sorudaki diğer tüm seçeneklerin seçimi otomatik olarak kaldırılır.",
     caseInsensitive: "Normal ifadedeki büyük ve küçük harflerin eşdeğer olarak kabul edilmesi gerekip gerekmediğini seçin.",
@@ -3094,3 +3114,21 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // sliderType.single: "Single-Value" => "Tek Değer"
 // sliderType.range: "Range" => "Aralık"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Bu seçimi özel kılar. Bir kullanıcı tarafından seçildiğinde, sorudaki diğer tüm seçeneklerin seçimi otomatik olarak kaldırılır."
+// ed.toolboxSearch: "Search" => "Aramak"
+// file.imageHeight: "Image height" => "Görüntü yüksekliği"
+// file.imageWidth: "Image width" => "Görüntü genişliği"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Önizlemede yüklenen görüntülerin görüntülenme yüksekliğini ve fotoğraf makinesiyle çekilen görüntülerin gerçek yüksekliğini belirtir. Tek dosya yükleme modunda, ekran yüksekliği önizleme alanıyla sınırlıdır; Çoklu dosya yükleme modunda, küçük resim alanı ile sınırlıdır."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Önizlemede yüklenen görüntülerin görüntülenme genişliğini ve fotoğraf makinesiyle çekilen görüntülerin gerçek genişliğini belirtir. Tek dosya yükleme modunda, görüntüleme genişliği önizleme alanıyla sınırlıdır; Çoklu dosya yükleme modunda, küçük resim alanı ile sınırlıdır."
+// slider.min: "The lowest number that users can select." => "Kullanıcıların seçebileceği en düşük sayı."
+// slider.max: "The highest number that users can select." => "Kullanıcıların seçebileceği en yüksek sayı."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Seçilebilir ölçek değerleri arasındaki aralık. Örneğin, 5'lik bir adım, kullanıcıların 0, 5, 10 vb. seçmesine olanak tanır."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Bir kullanıcının ayarlayabileceği kaydırıcı başparmaklar arasındaki minimum mesafe."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Bir kullanıcının ayarlayabileceği kaydırıcı başparmakları arasındaki maksimum mesafe."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Kaç ölçek etiketinin oluşturulacağını belirtir. -1 değeri, sayının Minimum değer ve Maks değerine göre otomatik olarak hesaplandığı anlamına gelir."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Gerçek değer için yer tutucu olarak '{0}' kullanın."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Belirli değerlerde özel etiketler tanımlamanıza ve isteğe bağlı olarak bunlara karşılık gelen metni atamanıza olanak tanır (örneğin, 0 = \"Zayıf\", 100 = \"Mükemmel\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Gerçek değer için yer tutucu olarak '{0}' kullanın."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Kullanıcıların bir başparmağını diğerinin yanından geçirmesine izin verir."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Seçili kaydırıcı değerini temizleyen ve tanımsız olarak ayarlayan bir düğme görüntüler."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Bir ifade kullanarak kaydırıcının minimum değerini dinamik olarak tanımlar. Temel hesaplamaları (ör. '{q1_id} + {q2_id}'), Boole mantığını (ör. '{age} > 60') ve 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ve daha fazlası gibi işlevleri destekler."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Bir ifade kullanarak kaydırıcının maksimum değerini dinamik olarak tanımlar. Temel hesaplamaları (ör. '{q1_id} + {q2_id}'), Boole mantığını (ör. '{age} > 60') ve 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ve daha fazlası gibi işlevleri destekler."

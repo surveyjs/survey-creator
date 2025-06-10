@@ -129,6 +129,7 @@ export var bgStrings = {
     generateReadableJSON: "Генериране на четим JSON",
     toolbox: "Кутия с инструменти",
     "property-grid": "Свойства",
+    toolboxSearch: "Търсене",
     toolboxFilteredTextPlaceholder: "Въведете за търсене...",
     toolboxNoResultsFound: "Няма намерени резултати",
     propertyGridFilteredTextPlaceholder: "Въведи за търсене...",
@@ -755,6 +756,10 @@ export var bgStrings = {
       minValueExpression: "Минимален израз на стойност",
       maxValueExpression: "Израз на максимална стойност",
       autoGenerate: "Конфигурация на етикети в мащаба"
+    },
+    file: {
+      imageHeight: "Височина на изображението",
+      imageWidth: "Ширина на изображението"
     },
     hideIfChoicesEmpty: "Показване въпроса, ако не съдържа избор",
     minWidth: "Минимална широчина (в CSS-допустими стойности)",
@@ -1460,8 +1465,8 @@ export var bgStrings = {
       signatureAutoScaleEnabled: "Изберете дали искате областта за подпис да запълни цялото налично пространство в полето за въпроси, като същевременно запазите съотношението по подразбиране 3:2. Когато са зададени стойности за ширина и височина по избор, настройката ще запази пропорциите на тези размери."
     },
     file: {
-      imageHeight: "Регулира височината на изображението в резултатите от проучването.",
-      imageWidth: "Регулира ширината на изображението в резултатите от проучването.",
+      imageHeight: "Указва височината на показване на качените изображения във визуализацията и действителната височина на изображенията, направени с фотоапарата. В режим на качване на един файл височината на дисплея е ограничена от областта за визуализация; В режим на качване на множество файлове той е ограничен от областта на миниатюрите.",
+      imageWidth: "Указва ширината на показване на качените изображения във визуализацията и действителната ширина на изображенията, направени с фотоапарата. В режим на качване на един файл ширината на дисплея е ограничена от областта за визуализация; В режим на качване на множество файлове той е ограничен от областта на миниатюрите.",
       allowImagesPreview: "Показва визуализации на миниатюри за качени файлове, когато е възможно. Премахнете отметката, ако вместо това искате да показвате икони на файлове."
     },
     image: {
@@ -1493,6 +1498,21 @@ export var bgStrings = {
       requiredIf: "Използвайте иконата на магическа пръчка, за да зададете условно правило, което не позволява подаване на проучване, освен ако поне един вложен въпрос няма отговор.",
       showInMultipleColumns: "Когато е избрано, създава отделна колона за всяка опция за избор.",
       colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица."
+    },
+    slider: {
+      min: "Най-ниското число, което потребителите могат да изберат.",
+      max: "Най-големият брой, който потребителите могат да изберат.",
+      step: "Интервалът между избираемите стойности на мащаба. Например, стъпка от 5 ще позволи на потребителите да изберат 0, 5, 10 и т.н.",
+      minRangeLength: "Минималното разстояние между палците на плъзгача, които потребителят може да зададе.",
+      maxRangeLength: "Максималното разстояние между палците на плъзгача, което потребителят може да зададе.",
+      labelCount: "Указва колко етикета на мащаба да генерирате. Стойност -1 означава, че числото се изчислява автоматично въз основа на минималната стойност и максималната стойност.",
+      labelFormat: "Използвайте \"{0}\" като контейнер за действителната стойност.",
+      customLabels: "Позволява ви да дефинирате персонализирани етикети с конкретни стойности и по желание да им присвоите съответстващ текст (напр. 0 = \"Лошо\", 100 = \"Отлично\").",
+      tooltipFormat: "Използвайте \"{0}\" като контейнер за действителната стойност.",
+      allowSwap: "Позволява на потребителите да движат единия палец покрай другия.",
+      allowClear: "Показва бутон, кой��о изчиства избраната стойност на плъзгача и я задава на undefined.",
+      minValueExpression: "Определя минималната стойност на плъзгача динамично с помощта на израз. Поддържа основни изчисления (напр. '{q1_id} + {q2_id}'), булева логика (напр. '{age} > 60') и функции като 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др.",
+      maxValueExpression: "Определя максималната стойност на плъзгача динамично с помощта на израз. Поддържа основни изчисления (напр. '{q1_id} + {q2_id}'), булева логика (напр. '{age} > 60') и функции като 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др."
     },
     isExclusive: "Прави този избор изключителен. Когато бъде избран от потребител, той автоматично ще отмени избора на всички други опции във въпроса.",
     caseInsensitive: "Изберете дали главните и малките букви в регулярния израз трябва да се третират като еквивалентни.",
@@ -2662,3 +2682,21 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // sliderType.single: "Single-Value" => "Единична стойност"
 // sliderType.range: "Range" => "Диапазон"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Прави този избор изключителен. Когато бъде избран от потребител, той автоматично ще отмени избора на всички други опции във въпроса."
+// ed.toolboxSearch: "Search" => "Търсене"
+// file.imageHeight: "Image height" => "Височина на изображението"
+// file.imageWidth: "Image width" => "Ширина на изображението"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Указва височината на показване на качените изображения във визуализацията и действителната височина на изображенията, направени с фотоапарата. В режим на качване на един файл височината на дисплея е ограничена от областта за визуализация; В режим на качване на множество файлове той е ограничен от областта на миниатюрите."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Указва ширината на показване на качените изображения във визуализацията и действителната ширина на изображенията, направени с фотоапарата. В режим на качване на един файл ширината на дисплея е ограничена от областта за визуализация; В режим на качване на множество файлове той е ограничен от областта на миниатюрите."
+// slider.min: "The lowest number that users can select." => "Най-ниското число, което потребителите могат да изберат."
+// slider.max: "The highest number that users can select." => "Най-големият брой, който потребителите могат да изберат."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Интервалът между избираемите стойности на мащаба. Например, стъпка от 5 ще позволи на потребителите да изберат 0, 5, 10 и т.н."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Минималното разстояние между палците на плъзгача, които потребителят може да зададе."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Максималното разстояние между палците на плъзгача, което потребителят може да зададе."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Указва колко етикета на мащаба да генерирате. Стойност -1 означава, че числото се изчислява автоматично въз основа на минималната стойност и максималната стойност."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Използвайте \"{0}\" като контейнер за действителната стойност."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Позволява ви да дефинирате персонализирани етикети с конкретни стойности и по желание да им присвоите съответстващ текст (напр. 0 = \"Лошо\", 100 = \"Отлично\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Използвайте \"{0}\" като контейнер за действителната стойност."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Позволява на потребителите да движат единия палец покрай другия."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Показва бутон, кой��о изчиства избраната стойност на плъзгача и я задава на undefined."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Определя минималната стойност на плъзгача динамично с помощта на израз. Поддържа основни изчисления (напр. '{q1_id} + {q2_id}'), булева логика (напр. '{age} > 60') и функции като 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Определя максималната стойност на плъзгача динамично с помощта на израз. Поддържа основни изчисления (напр. '{q1_id} + {q2_id}'), булева логика (напр. '{age} > 60') и функции като 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др."

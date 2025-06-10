@@ -129,6 +129,7 @@ export var jaStrings = {
     generateReadableJSON: "読み取り可能なJSONを生成する",
     toolbox: "ツールボックス",
     "property-grid": "プロパティ",
+    toolboxSearch: "捜索",
     toolboxFilteredTextPlaceholder: "「検索」...",
     toolboxNoResultsFound: "結果が見つかりませんでした",
     propertyGridFilteredTextPlaceholder: "検索するタイプ...",
@@ -755,6 +756,10 @@ export var jaStrings = {
       minValueExpression: "最小値式",
       maxValueExpression: "最大値の式",
       autoGenerate: "スケール ラベルの構成"
+    },
+    file: {
+      imageHeight: "画像の高さ",
+      imageWidth: "画像の幅"
     },
     hideIfChoicesEmpty: "選択肢がない場合は質問を非表示にする",
     minWidth: "最小幅 (CSS で受け入れられる値)",
@@ -1460,8 +1465,8 @@ export var jaStrings = {
       signatureAutoScaleEnabled: "デフォルトの3:2の縦横比を維持したまま、質問ボックス内の使用可能なすべてのスペースを署名領域に埋める場合に選択します。カスタムの幅と高さの値が設定されている場合、設定ではこれらの寸法の縦横比が維持されます。"
     },
     file: {
-      imageHeight: "アンケート結果の画像の高さを調整します。",
-      imageWidth: "アンケート結果の画像の幅を調整します。",
+      imageHeight: "プレビューでアップロードした画像の表示高さと、カメラで撮影した画像の実際の高さを指定します。単一ファイルのアップロード モードでは、表示の高さはプレビュー領域によって制限されます。複数ファイルのアップロードモードでは、サムネイル領域によって制限されます。",
+      imageWidth: "プレビューでアップロードした画像の表示幅と、カメラで撮影した画像の実際の幅を指定します。単一ファイルのアップロード モードでは、表示幅はプレビュー領域によって制限されます。複数ファイルのアップロードモードでは、サムネイル領域によって制限されます。",
       allowImagesPreview: "可能な場合は、アップロードされたファイルのサムネイル プレビューを表示します。代わりにファイルアイコンを表示する場合は、選択を解除します。"
     },
     image: {
@@ -1493,6 +1498,21 @@ export var jaStrings = {
       requiredIf: "魔法の杖アイコンを使用して、ネストされた質問に回答が少なくとも1つない限り、調査の送信を禁止する条件付きルールを設定します。",
       showInMultipleColumns: "選択すると、選択肢オプションごとに個別の列が作成されます。",
       colCount: "選択オプションを複数列のレイアウトで配置します。0 に設定すると、オプションは 1 行で表示されます。-1 に設定すると、実際の値は親行列の \"Nested column count\" プロパティから継承されます。"
+    },
+    slider: {
+      min: "ユーザーが選択できる最小の数値。",
+      max: "ユーザーが選択できる最大数。",
+      step: "選択可能なスケール値の間隔。たとえば、ステップを 5 にすると、ユーザーは 0、5、10 などを選択できます。",
+      minRangeLength: "ユーザーが設定できるスライダーの親指間の最小距離。",
+      maxRangeLength: "ユーザーが設定できるスライダーのつまみ間の最大距離。",
+      labelCount: "生成する縮尺ラベルの数を指定します。値 -1 は、数値が [最小] 値と [最大値] に基づいて自動的に計算されることを意味します。",
+      labelFormat: "実際の値のプレースホルダーとして「{0}」を使用します。",
+      customLabels: "特定の値でカスタムラベルを定義し、オプションで対応するテキストを割り当てることができます(例:0 = \"Poor\"、100 = \"Excellent\")。",
+      tooltipFormat: "実際の値のプレースホルダーとして「{0}」を使用します。",
+      allowSwap: "ユーザーは、一方の親指をもう一方の親指を超えて移動できます。",
+      allowClear: "選択したスライダーの値をクリアし、未定義に設定するボタンを表示します。",
+      minValueExpression: "スライダの最小値を式を使用して動的に定義します。基本的な計算 (例: '{q1_id} + {q2_id}')、ブール論理 (例: '{age} > 60')、および 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などの関数をサポートします。",
+      maxValueExpression: "スライダの最大値を式を使用して動的に定義します。基本的な計算 (例: '{q1_id} + {q2_id}')、ブール論理 (例: '{age} > 60')、および 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などの関数をサポートします。"
     },
     isExclusive: "この選択肢を排他的にします。ユーザーが選択すると、質問内の他のすべてのオプションの選択が自動的に解除されます。",
     caseInsensitive: "正規表現の大文字と小文字を同等に扱う必要がある場合に選択します。",
@@ -3098,3 +3118,21 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // sliderType.single: "Single-Value" => "単一値"
 // sliderType.range: "Range" => "範囲"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "この選択肢を排他的にします。ユーザーが選択すると、質問内の他のすべてのオプションの選択が自動的に解除されます。"
+// ed.toolboxSearch: "Search" => "捜索"
+// file.imageHeight: "Image height" => "画像の高さ"
+// file.imageWidth: "Image width" => "画像の幅"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "プレビューでアップロードした画像の表示高さと、カメラで撮影した画像の実際の高さを指定します。単一ファイルのアップロード モードでは、表示の高さはプレビュー領域によって制限されます。複数ファイルのアップロードモードでは、サムネイル領域によって制限されます。"
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "プレビューでアップロードした画像の表示幅と、カメラで撮影した画像の実際の幅を指定します。単一ファイルのアップロード モードでは、表示幅はプレビュー領域によって制限されます。複数ファイルのアップロードモードでは、サムネイル領域によって制限されます。"
+// slider.min: "The lowest number that users can select." => "ユーザーが選択できる最小の数値。"
+// slider.max: "The highest number that users can select." => "ユーザーが選択できる最大数。"
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "選択可能なスケール値の間隔。たとえば、ステップを 5 にすると、ユーザーは 0、5、10 などを選択できます。"
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "ユーザーが設定できるスライダーの親指間の最小距離。"
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "ユーザーが設定できるスライダーのつまみ間の最大距離。"
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "生成する縮尺ラベルの数を指定します。値 -1 は、数値が [最小] 値と [最大値] に基づいて自動的に計算されることを意味します。"
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "実際の値のプレースホルダーとして「{0}」を使用します。"
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "特定の値でカスタムラベルを定義し、オプションで対応するテキストを割り当てることができます(例:0 = \"Poor\"、100 = \"Excellent\")。"
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "実際の値のプレースホルダーとして「{0}」を使用します。"
+// slider.allowSwap: "Allows users to move one thumb past the other." => "ユーザーは、一方の親指をもう一方の親指を超えて移動できます。"
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "選択したスライダーの値をクリアし、未定義に設定するボタンを表示します。"
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "スライダの最小値を式を使用して動的に定義します。基本的な計算 (例: '{q1_id} + {q2_id}')、ブール論理 (例: '{age} > 60')、および 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などの関数をサポートします。"
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "スライダの最大値を式を使用して動的に定義します。基本的な計算 (例: '{q1_id} + {q2_id}')、ブール論理 (例: '{age} > 60')、および 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などの関数をサポートします。"

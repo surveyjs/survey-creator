@@ -129,6 +129,7 @@ export var koreanStrings = {
     generateReadableJSON: "생성 JSON 데이터 읽기",
     toolbox: "도구상자",
     "property-grid": "속성",
+    toolboxSearch: "검색",
     toolboxFilteredTextPlaceholder: "검색하려면 입력...",
     toolboxNoResultsFound: "결과를 찾을 수 없습니다.",
     propertyGridFilteredTextPlaceholder: "검색하려면 입력...",
@@ -755,6 +756,10 @@ export var koreanStrings = {
       minValueExpression: "최소값 표현식",
       maxValueExpression: "최대 값 표현식",
       autoGenerate: "레이블 구성 크기 조정"
+    },
+    file: {
+      imageHeight: "이미지 높이",
+      imageWidth: "이미지 너비"
     },
     hideIfChoicesEmpty: "선택 항목이 없는 경우 질문 숨기기",
     minWidth: "최소 너비(CSS에서 허용하는 값)",
@@ -1460,8 +1465,8 @@ export var koreanStrings = {
       signatureAutoScaleEnabled: "기본 3:2 종횡비를 유지하면서 서명 영역이 질문 상자 내의 사용 가능한 모든 공간을 채우도록 하려면 선택합니다. 사용자 지정 너비 및 높이 값을 설정하면 설정은 이러한 치수의 가로 세로 비율을 유지합니다."
     },
     file: {
-      imageHeight: "현장조사 결과에서 이미지의 높이를 조정합니다.",
-      imageWidth: "현장조사 결과에서 이미지의 너비를 조정합니다.",
+      imageHeight: "미리보기에 업로드된 이미지의 표시 높이와 카메라로 촬영한 이미지의 실제 높이를 지정합니다. 단일 파일 업로드 모드에서는 디스플레이 높이가 미리보기 영역에 의해 제한됩니다. 다중 파일 업로드 모드에서는 썸네일 영역에 의해 제한됩니다.",
+      imageWidth: "미리보기에 업로드된 이미지의 표시 너비와 카메라로 촬영한 이미지의 실제 너비를 지정합니다. 단일 파일 업로드 모드에서는 디스플레이 너비가 미리보기 영역에 의해 제한됩니다. 다중 파일 업로드 모드에서는 썸네일 영역에 의해 제한됩니다.",
       allowImagesPreview: "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."
     },
     image: {
@@ -1493,6 +1498,21 @@ export var koreanStrings = {
       requiredIf: "마술 지팡이 아이콘을 사용하여 하나 이상의 중첩된 질문에 답변이 없는 한 설문조사 제출을 금지하는 조건부 규칙을 설정합니다.",
       showInMultipleColumns: "이 옵션을 선택하면 각 선택 옵션에 대한 개별 열이 만들어집니다.",
       colCount: "선택 옵션을 여러 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩 열 수\" 속성에서 상속됩니다."
+    },
+    slider: {
+      min: "사용자가 선택할 수 있는 가장 낮은 숫자입니다.",
+      max: "사용자가 선택할 수 있는 가장 높은 숫자입니다.",
+      step: "선택 가능한 배율 값 사이의 간격입니다. 예를 들어 5단계를 통해 사용자는 0, 5, 10 등을 선택할 수 있습니다.",
+      minRangeLength: "사용자가 설정할 수 있는 슬라이더 엄지 단추 사이의 최소 거리입니다.",
+      maxRangeLength: "사용자가 설정할 수 있는 슬라이더 썸 사이의 최대 거리입니다.",
+      labelCount: "생성할 축척 레이블 수를 지정합니다. 값이 -1이면 숫자가 Min 값과 Max 값을 기준으로 자동으로 계산됩니다.",
+      labelFormat: "'{0}'를 실제 값의 자리 표시자로 사용합니다.",
+      customLabels: "특정 값에서 사용자 지정 레이블을 정의하고 선택적으로 해당 텍스트를 할당할 수 있습니다(예: 0 = \"나쁨\", 100 = \"우수\").",
+      tooltipFormat: "'{0}'를 실제 값의 자리 표시자로 사용합니다.",
+      allowSwap: "사용자가 한 엄지 손가락을 다른 엄지 손가락 뒤로 이동할 수 있습니다.",
+      allowClear: "선택한 슬라이더 값을 지우고 undefined로 설정하는 버튼을 표시합니다.",
+      minValueExpression: "표현식을 사용하여 슬라이더의 최소값을 동적���로 정의합니다. 기본 계산(예: '{q1_id} + {q2_id}'), 부울 논리(예: '{age} > 60') 및 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등과 같은 함수를 지원합니다.",
+      maxValueExpression: "표현식을 사용하여 슬라이더의 최대값을 동적으로 정의합니다. 기본 계산(예: '{q1_id} + {q2_id}'), 부울 논리(예: '{age} > 60') 및 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등과 같은 함수를 지원합니다."
     },
     isExclusive: "이 선택은 배타적입니다. 사용자가 선택하면 질문의 다른 모든 옵션이 자동으로 선택 해제됩니다.",
     caseInsensitive: "정규식에서 대문자와 소문자를 동등하게 취급해야 하는 경우 선택합니다.",
@@ -3303,3 +3323,21 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // sliderType.single: "Single-Value" => "단일 값"
 // sliderType.range: "Range" => "레인지"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "이 선택은 배타적입니다. 사용자가 선택하면 질문의 다른 모든 옵션이 자동으로 선택 해제됩니다."
+// ed.toolboxSearch: "Search" => "검색"
+// file.imageHeight: "Image height" => "이미지 높이"
+// file.imageWidth: "Image width" => "이미지 너비"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "미리보기에 업로드된 이미지의 표시 높이와 카메라로 촬영한 이미지의 실제 높이를 지정합니다. 단일 파일 업로드 모드에서는 디스플레이 높이가 미리보기 영역에 의해 제한됩니다. 다중 파일 업로드 모드에서는 썸네일 영역에 의해 제한됩니다."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "미리보기에 업로드된 이미지의 표시 너비와 카메라로 촬영한 이미지의 실제 너비를 지정합니다. 단일 파일 업로드 모드에서는 디스플레이 너비가 미리보기 영역에 의해 제한됩니다. 다중 파일 업로드 모드에서는 썸네일 영역에 의해 제한됩니다."
+// slider.min: "The lowest number that users can select." => "사용자가 선택할 수 있는 가장 낮은 숫자입니다."
+// slider.max: "The highest number that users can select." => "사용자가 선택할 수 있는 가장 높은 숫자입니다."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "선택 가능한 배율 값 사이의 간격입니다. 예를 들어 5단계를 통해 사용자는 0, 5, 10 등을 선택할 수 있습니다."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "사용자가 설정할 수 있는 슬라이더 엄지 단추 사이의 최소 거리입니다."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "사용자가 설정할 수 있는 슬라이더 썸 사이의 최대 거리입니다."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "생성할 축척 레이블 수를 지정합니다. 값이 -1이면 숫자가 Min 값과 Max 값을 기준으로 자동으로 계산됩니다."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "'{0}'를 실제 값의 자리 표시자로 사용합니다."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "특정 값에서 사용자 지정 레이블을 정의하고 선택적으로 해당 텍스트를 할당할 수 있습니다(예: 0 = \"나쁨\", 100 = \"우수\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "'{0}'를 실제 값의 자리 표시자로 사용합니다."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "사용자가 한 엄지 손가락을 다른 엄지 손가락 뒤로 이동할 수 있습니다."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "선택한 슬라이더 값을 지우고 undefined로 설정하는 버튼을 표시합니다."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "표현식을 사용하여 슬라이더의 최소값을 동적���로 정의합니다. 기본 계산(예: '{q1_id} + {q2_id}'), 부울 논리(예: '{age} > 60') 및 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등과 같은 함수를 지원합니다."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "표현식을 사용하여 슬라이더의 최대값을 동적으로 정의합니다. 기본 계산(예: '{q1_id} + {q2_id}'), 부울 논리(예: '{age} > 60') 및 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등과 같은 함수를 지원합니다."

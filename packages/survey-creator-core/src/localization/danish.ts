@@ -129,6 +129,7 @@ export var danishStrings = {
     generateReadableJSON: "Generer læsbar JSON",
     toolbox: "Værktøjskasse",
     "property-grid": "Egenskaber",
+    toolboxSearch: "Søge",
     toolboxFilteredTextPlaceholder: "Skriv for at søge...",
     toolboxNoResultsFound: "Ingen resultater fundet",
     propertyGridFilteredTextPlaceholder: "Skriv for at søge...",
@@ -755,6 +756,10 @@ export var danishStrings = {
       minValueExpression: "Udtryk for min. værdi",
       maxValueExpression: "Udtryk for maks. værdi",
       autoGenerate: "Konfiguration af skaleringsetiketter"
+    },
+    file: {
+      imageHeight: "Billedets højde",
+      imageWidth: "Billedets bredde"
     },
     hideIfChoicesEmpty: "Skjul spørgsmålet, hvis det ikke indeholder nogen valgmuligheder",
     minWidth: "Minimumbredde (i CSS-accepterede værdier)",
@@ -1460,8 +1465,8 @@ export var danishStrings = {
       signatureAutoScaleEnabled: "Vælg, om signaturområdet skal udfylde al tilgængelig plads i spørgsmålsfeltet, samtidig med at standardformatet 3:2 bevares. Når brugerdefinerede bredde- og højdeværdier er angivet, bevarer indstillingen højde-bredde-forholdet for disse dimensioner."
     },
     file: {
-      imageHeight: "Justerer billedets højde i undersøgelsesresultaterne.",
-      imageWidth: "Justerer billedets bredde i undersøgelsesresultaterne.",
+      imageHeight: "Angiver visningshøjden for uploadede billeder i eksemplet og den faktiske højde for billeder, der er taget med kameraet. I enkeltfiloverførselstilstand er visningshøjden begrænset af forhåndsvisningsområdet; I multifiloverførselstilstand er den begrænset af miniatureområdet.",
+      imageWidth: "Angiver visningsbredden for uploadede billeder i forhåndsvisningen og den faktiske bredde af billeder, der er taget med kameraet. I enkeltfiloverførselstilstand er visningsbredden begrænset af forhåndsvisningsområdet; I multifiloverførselstilstand er den begrænset af miniatureområdet.",
       allowImagesPreview: "Viser miniaturebilleder for uploadede filer, når det er muligt. Fjern markeringen, hvis du vil vise filikoner i stedet."
     },
     image: {
@@ -1493,6 +1498,21 @@ export var danishStrings = {
       requiredIf: "Brug tryllestavsikonet til at angive en betinget regel, der forhindrer indsendelse af undersøgelser, medmindre mindst ét indlejret spørgsmål har et svar.",
       showInMultipleColumns: "Når denne indstilling er valgt, oprettes der en individuel kolonne for hver valgmulighed.",
       colCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Når den er angivet til -1, nedarves den faktiske værdi fra egenskaben \"Antal indlejrede kolonner\" for den overordnede matrix."
+    },
+    slider: {
+      min: "Det laveste tal, som brugerne kan vælge.",
+      max: "Det højeste tal, som brugerne kan vælge.",
+      step: "Intervallet mellem valgbare skalaværdier. For eksempel vil et trin på 5 give brugerne mulighed for at vælge 0, 5, 10 osv.",
+      minRangeLength: "Den mindste afstand mellem skyderen, en bruger kan indstille.",
+      maxRangeLength: "Den maksimale afstand mellem skyderens tommelfingre, som en bruger kan indstille.",
+      labelCount: "Angiver, hvor mange skaleringsetiketter der skal genereres. En værdi på -1 betyder, at tallet beregnes automatisk baseret på Min-værdien og Max-værdien.",
+      labelFormat: "Brug \"{0}\" som pladsholder for den faktiske værdi.",
+      customLabels: "Giver dig mulighed for at definere brugerdefinerede etiketter ved bestemte værdier og eventuelt tildele dem tilsvarende tekst (f.eks. 0 = \"Dårlig\", 100 = \"Fremragende\").",
+      tooltipFormat: "Brug \"{0}\" som pladsholder for den faktiske værdi.",
+      allowSwap: "Giver brugerne mulighed for at flytte den ene tommelfinger forbi den anden.",
+      allowClear: "Viser en knap, der rydder den valgte skyderværdi og indstiller den til udefineret.",
+      minValueExpression: "Definerer skyderens minimumværdi dynamisk ved hjælp af et udtryk. Understøtter grundlæggende beregninger (f.eks. '{q1_id} + {q2_id}'), boolsk logik (f.eks. '{age} > 60') og funktioner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' og mere.",
+      maxValueExpression: "Definerer skyderens maksimumværdi dynamisk ved hjælp af et udtryk. Understøtter grundlæggende beregninger (f.eks. '{q1_id} + {q2_id}'), boolsk logik (f.eks. '{age} > 60') og funktioner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' og mere."
     },
     isExclusive: "Gør dette valg eksklusivt. Når den vælges af en bruger, fravælger den automatisk alle andre muligheder i spørgsmålet.",
     caseInsensitive: "Vælg, om store og små bogstaver i det regulære udtryk skal behandles som ækvivalente.",
@@ -3283,3 +3303,21 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // sliderType.single: "Single-Value" => "Enkelt værdi"
 // sliderType.range: "Range" => "Interval"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Gør dette valg eksklusivt. Når den vælges af en bruger, fravælger den automatisk alle andre muligheder i spørgsmålet."
+// ed.toolboxSearch: "Search" => "Søge"
+// file.imageHeight: "Image height" => "Billedets højde"
+// file.imageWidth: "Image width" => "Billedets bredde"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Angiver visningshøjden for uploadede billeder i eksemplet og den faktiske højde for billeder, der er taget med kameraet. I enkeltfiloverførselstilstand er visningshøjden begrænset af forhåndsvisningsområdet; I multifiloverførselstilstand er den begrænset af miniatureområdet."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Angiver visningsbredden for uploadede billeder i forhåndsvisningen og den faktiske bredde af billeder, der er taget med kameraet. I enkeltfiloverførselstilstand er visningsbredden begrænset af forhåndsvisningsområdet; I multifiloverførselstilstand er den begrænset af miniatureområdet."
+// slider.min: "The lowest number that users can select." => "Det laveste tal, som brugerne kan vælge."
+// slider.max: "The highest number that users can select." => "Det højeste tal, som brugerne kan vælge."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Intervallet mellem valgbare skalaværdier. For eksempel vil et trin på 5 give brugerne mulighed for at vælge 0, 5, 10 osv."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Den mindste afstand mellem skyderen, en bruger kan indstille."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Den maksimale afstand mellem skyderens tommelfingre, som en bruger kan indstille."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Angiver, hvor mange skaleringsetiketter der skal genereres. En værdi på -1 betyder, at tallet beregnes automatisk baseret på Min-værdien og Max-værdien."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Brug \"{0}\" som pladsholder for den faktiske værdi."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Giver dig mulighed for at definere brugerdefinerede etiketter ved bestemte værdier og eventuelt tildele dem tilsvarende tekst (f.eks. 0 = \"Dårlig\", 100 = \"Fremragende\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Brug \"{0}\" som pladsholder for den faktiske værdi."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Giver brugerne mulighed for at flytte den ene tommelfinger forbi den anden."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Viser en knap, der rydder den valgte skyderværdi og indstiller den til udefineret."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definerer skyderens minimumværdi dynamisk ved hjælp af et udtryk. Understøtter grundlæggende beregninger (f.eks. '{q1_id} + {q2_id}'), boolsk logik (f.eks. '{age} > 60') og funktioner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' og mere."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definerer skyderens maksimumværdi dynamisk ved hjælp af et udtryk. Understøtter grundlæggende beregninger (f.eks. '{q1_id} + {q2_id}'), boolsk logik (f.eks. '{age} > 60') og funktioner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' og mere."

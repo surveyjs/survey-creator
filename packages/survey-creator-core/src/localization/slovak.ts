@@ -129,6 +129,7 @@ export var skStrings = {
     generateReadableJSON: "Vygenerovať načítateľný JSON",
     toolbox: "Súprava nástrojov",
     "property-grid": "Vlastnosti",
+    toolboxSearch: "Hľadať",
     toolboxFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
     toolboxNoResultsFound: "Nenašli sa žiadne výsledky",
     propertyGridFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
@@ -755,6 +756,10 @@ export var skStrings = {
       minValueExpression: "Výraz minimálnej hodnoty",
       maxValueExpression: "Vyjadrenie maximálnej hodnoty",
       autoGenerate: "Konfigurácia štítkov váhy"
+    },
+    file: {
+      imageHeight: "Výška obrázka",
+      imageWidth: "Šírka obrázka"
     },
     hideIfChoicesEmpty: "Skryť otázku, ak neobsahuje žiadne možnosti",
     minWidth: "Minimálna šírka (v hodnotách akceptovaných CSS)",
@@ -1460,8 +1465,8 @@ export var skStrings = {
       signatureAutoScaleEnabled: "Vyberte, či chcete, aby oblasť podpisu vyplnila všetok dostupný priestor v poli otázky pri zachovaní predvoleného pomeru strán 3:2. Keď sú nastavené vlastné hodnoty šírky a výšky, nastavenie zachová pomer strán týchto rozmerov."
     },
     file: {
-      imageHeight: "Upraví výšku obrázka vo výsledkoch prieskumu.",
-      imageWidth: "Upraví šírku obrázka vo výsledkoch prieskumu.",
+      imageHeight: "Určuje výšku zobrazenia nahraných snímok v náhľade a skutočnú výšku snímok zhotovených fotoaparátom. V režime nahrávania jedného súboru je výška zobrazenia obmedzená oblasťou ukážky. V režime nahrávania viacerých súborov je obmedzený oblasťou miniatúr.",
+      imageWidth: "Určuje šírku zobrazenia nahraných snímok v náhľade a skutočnú šírku snímok zhotovených fotoaparátom. V režime nahrávania jedného súboru je šírka zobrazenia obmedzená oblasťou ukážky. V režime nahrávania viacerých súborov je obmedzený oblasťou miniatúr.",
       allowImagesPreview: "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov."
     },
     image: {
@@ -1493,6 +1498,21 @@ export var skStrings = {
       requiredIf: "Pomocou ikony čarovného prútika nastavte podmienené pravidlo, ktoré zabráni odoslaniu prieskumu, pokiaľ aspoň jedna vnorená otázka nemá odpoveď.",
       showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu.",
       colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
+    },
+    slider: {
+      min: "Najnižšie číslo, ktoré môžu používatelia vybrať.",
+      max: "Najvyššie číslo, ktoré môžu používatelia vybrať.",
+      step: "Interval medzi voliteľnými hodnotami stupnice. Napríklad krok 5 umožní používateľom vybrať 0, 5, 10 atď.",
+      minRangeLength: "Minimálna vzdialenosť medzi posuvnými palcami, ktorú môže používateľ nastaviť.",
+      maxRangeLength: "Maximálna vzdialenosť medzi palcami posúvača, ktorú môže používateľ nastaviť.",
+      labelCount: "Určuje, koľko označení mierky sa má vygenerovať. Hodnota -1 znamená, že číslo sa vypočíta automaticky na základe hodnoty Min a Max. hodnoty.",
+      labelFormat: "Použite \"{0}\" ako zástupný symbol pre skutočnú hodnotu.",
+      customLabels: "Umožňuje definovať vlastné štítky pri konkrétnych hodnotách a voliteľne im priradiť zodpovedajúci text (napr. 0 = \"Slabý\", 100 = \"Vynikajúci\").",
+      tooltipFormat: "Použite \"{0}\" ako zástupný symbol pre skutočnú hodnotu.",
+      allowSwap: "Umožňuje používateľom pohybovať jedným palcom za druhým.",
+      allowClear: "Zobrazí tlačidlo, ktoré vymaže vybratú hodnotu jazdca a nastaví ju na nedefinované.",
+      minValueExpression: "Definuje minimálnu hodnotu jazdca dynamicky pomocou výrazu. Podporuje základné výpočty (napr. '{q1_id} + {q2_id}'), booleovskú logiku (napr. '{age} > 60') a funkcie ako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a ďalšie.",
+      maxValueExpression: "Dynamicky definuje maximálnu hodnotu jazdca pomocou výrazu. Podporuje základné výpočty (napr. '{q1_id} + {q2_id}'), booleovskú logiku (napr. '{age} > 60') a funkcie ako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a ďalšie."
     },
     isExclusive: "Vďaka tomu je táto voľba exkluzívna. Keď používateľ vyberie, automaticky zruší výber všetkých ostatných možností v otázke.",
     caseInsensitive: "Vyberte, či sa veľké a malé písmená v regulárnom výraze musia považovať za ekvivalentné.",
@@ -3052,3 +3072,21 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // sliderType.single: "Single-Value" => "Jedna hodnota"
 // sliderType.range: "Range" => "Rozsah"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Vďaka tomu je táto voľba exkluzívna. Keď používateľ vyberie, automaticky zruší výber všetkých ostatných možností v otázke."
+// ed.toolboxSearch: "Search" => "Hľadať"
+// file.imageHeight: "Image height" => "Výška obrázka"
+// file.imageWidth: "Image width" => "Šírka obrázka"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Určuje výšku zobrazenia nahraných snímok v náhľade a skutočnú výšku snímok zhotovených fotoaparátom. V režime nahrávania jedného súboru je výška zobrazenia obmedzená oblasťou ukážky. V režime nahrávania viacerých súborov je obmedzený oblasťou miniatúr."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Určuje šírku zobrazenia nahraných snímok v náhľade a skutočnú šírku snímok zhotovených fotoaparátom. V režime nahrávania jedného súboru je šírka zobrazenia obmedzená oblasťou ukážky. V režime nahrávania viacerých súborov je obmedzený oblasťou miniatúr."
+// slider.min: "The lowest number that users can select." => "Najnižšie číslo, ktoré môžu používatelia vybrať."
+// slider.max: "The highest number that users can select." => "Najvyššie číslo, ktoré môžu používatelia vybrať."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Interval medzi voliteľnými hodnotami stupnice. Napríklad krok 5 umožní používateľom vybrať 0, 5, 10 atď."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Minimálna vzdialenosť medzi posuvnými palcami, ktorú môže používateľ nastaviť."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Maximálna vzdialenosť medzi palcami posúvača, ktorú môže používateľ nastaviť."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Určuje, koľko označení mierky sa má vygenerovať. Hodnota -1 znamená, že číslo sa vypočíta automaticky na základe hodnoty Min a Max. hodnoty."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Použite \"{0}\" ako zástupný symbol pre skutočnú hodnotu."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Umožňuje definovať vlastné štítky pri konkrétnych hodnotách a voliteľne im priradiť zodpovedajúci text (napr. 0 = \"Slabý\", 100 = \"Vynikajúci\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Použite \"{0}\" ako zástupný symbol pre skutočnú hodnotu."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Umožňuje používateľom pohybovať jedným palcom za druhým."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Zobrazí tlačidlo, ktoré vymaže vybratú hodnotu jazdca a nastaví ju na nedefinované."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definuje minimálnu hodnotu jazdca dynamicky pomocou výrazu. Podporuje základné výpočty (napr. '{q1_id} + {q2_id}'), booleovskú logiku (napr. '{age} > 60') a funkcie ako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a ďalšie."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dynamicky definuje maximálnu hodnotu jazdca pomocou výrazu. Podporuje základné výpočty (napr. '{q1_id} + {q2_id}'), booleovskú logiku (napr. '{age} > 60') a funkcie ako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a ďalšie."

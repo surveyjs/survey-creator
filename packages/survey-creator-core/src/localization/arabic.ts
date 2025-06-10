@@ -129,6 +129,7 @@ export var arStrings = {
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Toolbox",
     "property-grid": "Properties",
+    toolboxSearch: "بحث",
     toolboxFilteredTextPlaceholder: "اكتب للبحث...",
     toolboxNoResultsFound: "لم يتم العثور على نتائج",
     propertyGridFilteredTextPlaceholder: "Type to search...",
@@ -755,6 +756,10 @@ export var arStrings = {
       minValueExpression: "الحد الأدنى للقيمة",
       maxValueExpression: "تعبير القيمة القصوى",
       autoGenerate: "تكوين تسميات المقياس"
+    },
+    file: {
+      imageHeight: "ارتفاع الصورة",
+      imageWidth: "عرض الصورة"
     },
     hideIfChoicesEmpty: "إخفاء السؤال إذا لم يكن يحتوي على خيارات",
     minWidth: "الحد الأدنى للعرض (بالقيم المقبولة في CSS)",
@@ -1460,8 +1465,8 @@ export var arStrings = {
       signatureAutoScaleEnabled: "حدد ما إذا كنت تريد أن تملأ منطقة التوقيع كل المساحة المتوفرة داخل مربع السؤال مع الحفاظ على نسبة العرض إلى الارتفاع الافتراضية 3:2. عند تعيين قيم العرض والارتفاع المخصصة، سيحتفظ الإعداد بنسبة العرض إلى الارتفاع لهذه الأبعاد."
     },
     file: {
-      imageHeight: "يضبط ارتفاع الصورة في نتائج الاستطلاع.",
-      imageWidth: "يضبط عرض الصورة في نتائج الاستطلاع.",
+      imageHeight: "يحدد ارتفاع عرض الصور التي تم تحميلها في المعاينة والارتفاع الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون ارتفاع العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة.",
+      imageWidth: "يحدد عرض عرض الصور التي تم تحميلها في المعاينة والعرض الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون عرض العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة.",
       allowImagesPreview: "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
     },
     image: {
@@ -1493,6 +1498,21 @@ export var arStrings = {
       requiredIf: "استخدم أيقونة العصا السحرية لتعيين قاعدة شرطية تمنع إرسال الاستطلاع ما لم يكن لسؤال واحد متداخل على الأقل إجابة.",
       showInMultipleColumns: "عند تحديده، ينشئ عمود منفرد لكل خيار اختيار.",
       colCount: "يرتب خيارات التحديد في تخطيط متعدد الأعمدة. عند التعيين على 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من خاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصل."
+    },
+    slider: {
+      min: "أقل رقم يمكن للمستخدمين تحديده.",
+      max: "أعلى رقم يمكن للمستخدمين تحديده.",
+      step: "الفاصل الزمني بين قيم المقياس القابلة للتحديد. على سبيل المثال ، ستسمح الخطوة 5 للمستخدمين بتحديد 0 و 5 و 10 وما إلى ذلك.",
+      minRangeLength: "الحد الأدنى للمسافة بين إبهام شريط التمرير الذي يمكن للمستخدم تعيينه.",
+      maxRangeLength: "الحد الأقصى للمسافة بين إبهام شريط التمرير الذي يمكن للمستخدم تعيينه.",
+      labelCount: "يحدد عدد تسميات المقياس المطلوب إنشاؤها. تعني القيمة -1 أن الرقم يتم حسابه تلقائيا بناء على القيمة الدنيا والقيمة القصوى.",
+      labelFormat: "استخدم \"{0}\" كعنصر نائب للقيمة الفعلية.",
+      customLabels: "يسمح لك بتحديد تسميات مخصصة بقيم محددة وتعيين النص المقابل لها اختياريا (على سبيل المثال، 0 = \"ضعيف\"، 100 = \"ممتاز\").",
+      tooltipFormat: "استخدم \"{0}\" كعنصر نائب للقيمة الفعلية.",
+      allowSwap: "يسمح للمستخدمين بتحريك إبهام واحد إلى ما بعد الآخر.",
+      allowClear: "يعرض زرا يقوم بمسح قيمة شريط التمرير المحددة وتعيينها إلى غير محدد.",
+      minValueExpression: "يحدد الحد الأدنى لقيمة شريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنطقي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد.",
+      maxValueExpression: "يحدد القيمة القصوى لشريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنط��ي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد."
     },
     isExclusive: "يجعل هذا الاختيار حصريا. عند تحديده من قبل مستخدم، سيتم إلغاء تحديد جميع الخيارات الأخرى في السؤال تلقائيا.",
     caseInsensitive: "حدد ما إذا كان يجب التعامل مع الأحرف الكبيرة والصغيرة في التعبير العادي على أنها مكافئة.",
@@ -3013,3 +3033,21 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // sliderType.single: "Single-Value" => "قيمة واحدة"
 // sliderType.range: "Range" => "نطاق"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "يجعل هذا الاختيار حصريا. عند تحديده من قبل مستخدم، سيتم إلغاء تحديد جميع الخيارات الأخرى في السؤال تلقائيا."
+// ed.toolboxSearch: "Search" => "بحث"
+// file.imageHeight: "Image height" => "ارتفاع الصورة"
+// file.imageWidth: "Image width" => "عرض الصورة"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "يحدد ارتفاع عرض الصور التي تم تحميلها في المعاينة والارتفاع الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون ارتفاع العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "يحدد عرض عرض الصور التي تم تحميلها في المعاينة والعرض الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون عرض العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة."
+// slider.min: "The lowest number that users can select." => "أقل رقم يمكن للمستخدمين تحديده."
+// slider.max: "The highest number that users can select." => "أعلى رقم يمكن للمستخدمين تحديده."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "الفاصل الزمني بين قيم المقياس القابلة للتحديد. على سبيل المثال ، ستسمح الخطوة 5 للمستخدمين بتحديد 0 و 5 و 10 وما إلى ذلك."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "الحد الأدنى للمسافة بين إبهام شريط التمرير الذي يمكن للمستخدم تعيينه."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "الحد الأقصى للمسافة بين إبهام شريط التمرير الذي يمكن للمستخدم تعيينه."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "يحدد عدد تسميات المقياس المطلوب إنشاؤها. تعني القيمة -1 أن الرقم يتم حسابه تلقائيا بناء على القيمة الدنيا والقيمة القصوى."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "استخدم \"{0}\" كعنصر نائب للقيمة الفعلية."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "يسمح لك بتحديد تسميات مخصصة بقيم محددة وتعيين النص المقابل لها اختياريا (على سبيل المثال، 0 = \"ضعيف\"، 100 = \"ممتاز\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "استخدم \"{0}\" كعنصر نائب للقيمة الفعلية."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "يسمح للمستخدمين بتحريك إبهام واحد إلى ما بعد الآخر."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "يعرض زرا يقوم بمسح قيمة شريط التمرير المحددة وتعيينها إلى غير محدد."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "يحدد الحد الأدنى لقيمة شريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنطقي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "يحدد القيمة القصوى لشريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنط��ي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد."

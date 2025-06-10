@@ -129,6 +129,7 @@ export var czStrings = {
     generateReadableJSON: "Generovat čitelný JSON",
     toolbox: "Sada nástrojů",
     "property-grid": "Vlastnosti",
+    toolboxSearch: "Hledání",
     toolboxFilteredTextPlaceholder: "Chcete-li hledat, zadejte jej...",
     toolboxNoResultsFound: "Nebyly nalezeny žádné výsledky",
     propertyGridFilteredTextPlaceholder: "Zadejte hledaný text...",
@@ -755,6 +756,10 @@ export var czStrings = {
       minValueExpression: "Výraz minimální hodnoty",
       maxValueExpression: "Výraz maximální hodnoty",
       autoGenerate: "Konfigurace popisků měřítka"
+    },
+    file: {
+      imageHeight: "Výška obrazu",
+      imageWidth: "Šířka obrazu"
     },
     hideIfChoicesEmpty: "Skrýt otázku, pokud neobsahuje žádné volby",
     minWidth: "Minimální šířka (v hodnotách akceptovaných CSS)",
@@ -1460,8 +1465,8 @@ export var czStrings = {
       signatureAutoScaleEnabled: "Vyberte, zda chcete, aby oblast podpisu vyplnila veškerý dostupný prostor v poli pro otázky při zachování výchozího poměru stran 3:2. Pokud jsou nastaveny vlastní hodnoty šířky a výšky, nastavení zachová poměr stran těchto rozměrů."
     },
     file: {
-      imageHeight: "Upraví výšku obrázku ve výsledcích měření.",
-      imageWidth: "Upraví šířku obrázku ve výsledcích měření.",
+      imageHeight: "Určuje výšku zobrazení odeslaných obrazů v náhledu a skutečnou výšku obrazů pořízených fotoaparátem. V režimu odesílání jednoho souboru je výška zobrazení omezena oblastí náhledu; V režimu odesílání více souborů je omezena oblastí miniatur.",
+      imageWidth: "Určuje šířku zobrazení odeslaných obrazů v náhledu a skutečnou šířku obrazů pořízených fotoaparátem. V režimu odesílání jednoho souboru je šířka zobrazení omezena oblastí náhledu; V režimu odesílání více souborů je omezena oblastí miniatur.",
       allowImagesPreview: "Pokud je to možné, zobrazuje náhledy miniatur pro nahrané soubory. Zrušte výběr, pokud chcete místo toho zobrazit ikony souborů."
     },
     image: {
@@ -1493,6 +1498,21 @@ export var czStrings = {
       requiredIf: "Pomocí ikony kouzelné hůlky nastavte podmíněné pravidlo, které zabrání odeslání průzkumu, pokud alespoň jedna vnořená otázka nemá odpověď.",
       showInMultipleColumns: "Pokud je tato možnost vybraná, vytvoří samostatný sloupec pro každou možnost volby.",
       colCount: "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice."
+    },
+    slider: {
+      min: "Nejnižší číslo, které mohou uživatelé vybrat.",
+      max: "Nejvyšší číslo, které mohou uživatelé vybrat.",
+      step: "Interval mezi volitelnými hodnotami stupnice. Například krok 5 umožní uživatelům vybrat 0, 5, 10 atd.",
+      minRangeLength: "Minimální vzdálenost mezi palci posuvníku, kterou může uživatel nastavit.",
+      maxRangeLength: "Maximální vzdálenost mezi palci posuvníku, kterou může uživatel nastavit.",
+      labelCount: "Určuje, kolik popisů stupnice se má vygenerovat. Hodnota -1 znamená, že číslo se vypočítá automaticky na základě minimální hodnoty a maximální hodnoty.",
+      labelFormat: "Použijte '{0}' jako zástupný symbol pro skutečnou hodnotu.",
+      customLabels: "Umožňuje definovat vlastní popisky na konkrétních hodnotách a volitelně k nim přiřadit odpovídající text (např. 0 = \"Špatný\", 100 = \"Vynikající\").",
+      tooltipFormat: "Použijte '{0}' jako zástupný symbol pro skutečnou hodnotu.",
+      allowSwap: "Umožňuje uživatelům posouvat jeden palec přes druhý.",
+      allowClear: "Zobrazí tlačítko, které vymaže vybranou hodnotu jezdce a nastaví ji na nedefinovanou.",
+      minValueExpression: "Dynamicky definuje minimální hodnotu jezdce pomocí výrazu. Podporuje základní výpočty (např. '{q1_id} + {q2_id}'), booleovskou logiku (např. '{age} > 60') a funkce jako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a další.",
+      maxValueExpression: "Dynamicky definuje maximální hodnotu jezdce pomocí výrazu. Podporuje základní výpočty (např. '{q1_id} + {q2_id}'), booleovskou logiku (např. '{age} > 60') a funkce jako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a další."
     },
     isExclusive: "Díky tomu je tato volba exkluzivní. Když je vybrán uživatelem, automaticky zruší výběr všech ostatních možností v otázce.",
     caseInsensitive: "Vyberte, zda mají být velká a malá písmena v regulárním výrazu považována za ekvivalentní.",
@@ -2676,3 +2696,21 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // sliderType.single: "Single-Value" => "Jedna hodnota"
 // sliderType.range: "Range" => "Rozmezí"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Díky tomu je tato volba exkluzivní. Když je vybrán uživatelem, automaticky zruší výběr všech ostatních možností v otázce."
+// ed.toolboxSearch: "Search" => "Hledání"
+// file.imageHeight: "Image height" => "Výška obrazu"
+// file.imageWidth: "Image width" => "Šířka obrazu"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Určuje výšku zobrazení odeslaných obrazů v náhledu a skutečnou výšku obrazů pořízených fotoaparátem. V režimu odesílání jednoho souboru je výška zobrazení omezena oblastí náhledu; V režimu odesílání více souborů je omezena oblastí miniatur."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Určuje šířku zobrazení odeslaných obrazů v náhledu a skutečnou šířku obrazů pořízených fotoaparátem. V režimu odesílání jednoho souboru je šířka zobrazení omezena oblastí náhledu; V režimu odesílání více souborů je omezena oblastí miniatur."
+// slider.min: "The lowest number that users can select." => "Nejnižší číslo, které mohou uživatelé vybrat."
+// slider.max: "The highest number that users can select." => "Nejvyšší číslo, které mohou uživatelé vybrat."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Interval mezi volitelnými hodnotami stupnice. Například krok 5 umožní uživatelům vybrat 0, 5, 10 atd."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Minimální vzdálenost mezi palci posuvníku, kterou může uživatel nastavit."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Maximální vzdálenost mezi palci posuvníku, kterou může uživatel nastavit."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Určuje, kolik popisů stupnice se má vygenerovat. Hodnota -1 znamená, že číslo se vypočítá automaticky na základě minimální hodnoty a maximální hodnoty."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Použijte '{0}' jako zástupný symbol pro skutečnou hodnotu."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Umožňuje definovat vlastní popisky na konkrétních hodnotách a volitelně k nim přiřadit odpovídající text (např. 0 = \"Špatný\", 100 = \"Vynikající\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Použijte '{0}' jako zástupný symbol pro skutečnou hodnotu."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Umožňuje uživatelům posouvat jeden palec přes druhý."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Zobrazí tlačítko, které vymaže vybranou hodnotu jezdce a nastaví ji na nedefinovanou."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dynamicky definuje minimální hodnotu jezdce pomocí výrazu. Podporuje základní výpočty (např. '{q1_id} + {q2_id}'), booleovskou logiku (např. '{age} > 60') a funkce jako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a další."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dynamicky definuje maximální hodnotu jezdce pomocí výrazu. Podporuje základní výpočty (např. '{q1_id} + {q2_id}'), booleovskou logiku (např. '{age} > 60') a funkce jako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a další."

@@ -129,6 +129,7 @@ var persianStrings = {
     generateReadableJSON: "تولید کد خوانا JSON",
     toolbox: "جعبه ابزار",
     "property-grid": "ویژگی ها",
+    toolboxSearch: "جستجو",
     toolboxFilteredTextPlaceholder: "تایپ برای جستجو...",
     toolboxNoResultsFound: "نتیجه ای یافت نشد",
     propertyGridFilteredTextPlaceholder: "جستجو...",
@@ -755,6 +756,10 @@ var persianStrings = {
       minValueExpression: "بیان حداقل مقدار",
       maxValueExpression: "بیان حداکثر مقدار",
       autoGenerate: "پیکربندی برچسب های مقیاس بندی"
+    },
+    file: {
+      imageHeight: "ارتفاع تصویر",
+      imageWidth: "عرض تصویر"
     },
     hideIfChoicesEmpty: "مخفی کردن سؤال در صورتی که هیچ انتخابی نداشته باشد",
     minWidth: "حداقل عرض (در مقادیر پذیرفته شده CSS)",
@@ -1460,8 +1465,8 @@ var persianStrings = {
       signatureAutoScaleEnabled: "اگر می خواهید منطقه امضا برای پر کردن تمام فضای موجود در جعبه سوال در حالی که حفظ پیش فرض 3: 2 نسبت ابعاد را انتخاب کنید. هنگامی که عرض سفارشی و مقادیر ارتفاع تنظیم می شود، تنظیم نسبت ابعاد این ابعاد را حفظ می کند."
     },
     file: {
-      imageHeight: "ارتفاع تصویر را در نتایج نظرسنجی تنظیم می کند.",
-      imageWidth: "عرض تصویر را در نتایج نظرسنجی تنظیم می کند.",
+      imageHeight: "ارتفاع نمایش تصاویر آپلود شده در پیش نمایش و ارتفاع واقعی تصاویر گرفته شده با دوربین را مشخص می کند. در حالت آپلود تک فایل، ارتفاع صفحه نمایش توسط ناحیه پیش نمایش محدود می شود. در حالت آپلود چند فایل، توسط ناحیه تصویر کوچک محدود می شود.",
+      imageWidth: "عرض نمایش تصاویر آپلود شده در پیش نمایش و عرض واقعی تصاویر گرفته شده با دوربین را مشخص می کند. در حالت آپلود تک فایل، عرض نمایشگر توسط ناحیه پیش نمایش محدود می شود. در حالت آپلود چند فایل، توسط ناحیه تصویر کوچک محدود می شود.",
       allowImagesPreview: "در صورت امکان، پیش نمایش تصاویر کوچک را برای فایل های آپلود شده نمایش می دهد. اگر می خواهید به جای آن نمادهای فایل را نشان دهید، انتخاب را لغو کنید."
     },
     image: {
@@ -1493,6 +1498,21 @@ var persianStrings = {
       requiredIf: "از نماد چوب جادویی برای تنظیم یک قانون شرطی استفاده کنید که مانع از ارسال نظرسنجی می شود مگر اینکه حداقل یک سوال تو در تو پاسخ داشته باشد.",
       showInMultipleColumns: "هنگامی که انتخاب می شود، یک ستون فردی برای هر گزینه انتخاب ایجاد می کند.",
       colCount: "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. هنگامی که روی -1 تنظیم می شود، مقدار واقعی از ویژگی \"تعداد ستون های تو در تو\" ماتریس والد به ارث می رسد."
+    },
+    slider: {
+      min: "کمترین عددی که کاربران می توانند انتخاب کنند.",
+      max: "بالاترین عددی که کاربران می توانند انتخاب کنند.",
+      step: "فاصله بین مقادیر مقیاس قابل انتخاب. به عنوان مثال، یک مرحله 5 به کاربران اجازه می دهد 0، 5، 10 و غیره را انتخاب کنند.",
+      minRangeLength: "حداقل فاصله بین انگشت شست لغزنده که کاربر می تواند تنظیم کند.",
+      maxRangeLength: "حداکثر فاصله بین انگشت شست لغزنده که کاربر می تواند تنظیم کند.",
+      labelCount: "مشخص می کند که چند برچسب مقیاس برای تولید ایجاد شود. مقدار -1 به این معنی است که عدد به طور خودکار بر اساس مقدار حداقل و مقدار حداکثر محاسبه می شود.",
+      labelFormat: "از «{0}» به عنوان مکان نگهدارنده برای مقدار واقعی استفاده کنید.",
+      customLabels: "به شما امکان می دهد برچسب های سفارشی را در مقادیر خاص تعریف کنید و به صورت اختیاری متن مربوطه را به آنها اختصاص دهید (به عنوان مثال، 0 = \"ضعیف\"، 100 = \"عالی\").",
+      tooltipFormat: "از «{0}» به عنوان مکان نگهدارنده برای مقدار واقعی استفاده کنید.",
+      allowSwap: "به کاربران اجازه می دهد تا یک انگشت شست را از انگشت دیگر عبور دهند.",
+      allowClear: "دکمه ای را نمایش می دهد که مقدار نوار لغزنده انتخاب شده را پاک می کند و آن را روی undefined تنظیم می کند.",
+      minValueExpression: "حداقل مقدار نوار لغزنده را به صورت پویا با استفاده از یک عبارت تعریف می کند. از محاسبات اولیه (به عنوان مثال، '{q1_id} + {q2_id}')، منطق بولین (به عنوان مثال، '{age} > 60') و توابعی مانند 'iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()' و موارد دیگر پشتیبانی م�� کند.",
+      maxValueExpression: "حداکثر مقدا�� نوار لغزنده را به صورت پویا با استفاده از یک عبارت تعریف می کند. از محاسبات اولیه (به عنوان مثال، '{q1_id} + {q2_id}')، منطق بولین (به عنوان مثال، '{age} > 60') و توابعی مانند 'iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()' و موارد دیگر پشتیبانی می کند."
     },
     isExclusive: "این انتخاب را منحصر به فرد می کند. هنگامی که توسط یک کاربر انتخاب می شود، به طور خودکار همه گزینه های دیگر در سوال را لغو انتخاب می کند.",
     caseInsensitive: "انتخاب کنید که آیا حروف بزرگ و کوچک در عبارت منظم باید معادل در نظر گرفته شوند.",
@@ -3054,3 +3074,21 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // sliderType.single: "Single-Value" => "تک مقدار"
 // sliderType.range: "Range" => "محدوده"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "این انتخاب را منحصر به فرد می کند. هنگامی که توسط یک کاربر انتخاب می شود، به طور خودکار همه گزینه های دیگر در سوال را لغو انتخاب می کند."
+// ed.toolboxSearch: "Search" => "جستجو"
+// file.imageHeight: "Image height" => "ارتفاع تصویر"
+// file.imageWidth: "Image width" => "عرض تصویر"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "ارتفاع نمایش تصاویر آپلود شده در پیش نمایش و ارتفاع واقعی تصاویر گرفته شده با دوربین را مشخص می کند. در حالت آپلود تک فایل، ارتفاع صفحه نمایش توسط ناحیه پیش نمایش محدود می شود. در حالت آپلود چند فایل، توسط ناحیه تصویر کوچک محدود می شود."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "عرض نمایش تصاویر آپلود شده در پیش نمایش و عرض واقعی تصاویر گرفته شده با دوربین را مشخص می کند. در حالت آپلود تک فایل، عرض نمایشگر توسط ناحیه پیش نمایش محدود می شود. در حالت آپلود چند فایل، توسط ناحیه تصویر کوچک محدود می شود."
+// slider.min: "The lowest number that users can select." => "کمترین عددی که کاربران می توانند انتخاب کنند."
+// slider.max: "The highest number that users can select." => "بالاترین عددی که کاربران می توانند انتخاب کنند."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "فاصله بین مقادیر مقیاس قابل انتخاب. به عنوان مثال، یک مرحله 5 به کاربران اجازه می دهد 0، 5، 10 و غیره را انتخاب کنند."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "حداقل فاصله بین انگشت شست لغزنده که کاربر می تواند تنظیم کند."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "حداکثر فاصله بین انگشت شست لغزنده که کاربر می تواند تنظیم کند."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "مشخص می کند که چند برچسب مقیاس برای تولید ایجاد شود. مقدار -1 به این معنی است که عدد به طور خودکار بر اساس مقدار حداقل و مقدار حداکثر محاسبه می شود."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "از «{0}» به عنوان مکان نگهدارنده برای مقدار واقعی استفاده کنید."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "به شما امکان می دهد برچسب های سفارشی را در مقادیر خاص تعریف کنید و به صورت اختیاری متن مربوطه را به آنها اختصاص دهید (به عنوان مثال، 0 = \"ضعیف\"، 100 = \"عالی\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "از «{0}» به عنوان مکان نگهدارنده برای مقدار واقعی استفاده کنید."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "به کاربران اجازه می دهد تا یک انگشت شست را از انگشت دیگر عبور دهند."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "دکمه ای را نمایش می دهد که مقدار نوار لغزنده انتخاب شده را پاک می کند و آن را روی undefined تنظیم می کند."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "حداقل مقدار نوار لغزنده را به صورت پویا با استفاده از یک عبارت تعریف می کند. از محاسبات اولیه (به عنوان مثال، '{q1_id} + {q2_id}')، منطق بولین (به عنوان مثال، '{age} > 60') و توابعی مانند 'iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()' و موارد دیگر پشتیبانی م�� کند."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "حداکثر مقدا�� نوار لغزنده را به صورت پویا با استفاده از یک عبارت تعریف می کند. از محاسبات اولیه (به عنوان مثال، '{q1_id} + {q2_id}')، منطق بولین (به عنوان مثال، '{age} > 60') و توابعی مانند 'iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()' و موارد دیگر پشتیبانی می کند."

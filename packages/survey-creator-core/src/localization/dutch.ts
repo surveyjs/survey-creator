@@ -129,6 +129,7 @@ export var nlStrings = {
     generateReadableJSON: "Genereer leesbare JSON",
     toolbox: "Gereedschap",
     "property-grid": "Eigenschappen",
+    toolboxSearch: "Zoeken",
     toolboxFilteredTextPlaceholder: "Typ om te zoeken...",
     toolboxNoResultsFound: "Geen resultaten gevonden",
     propertyGridFilteredTextPlaceholder: "Typ om te zoeken...",
@@ -755,6 +756,10 @@ export var nlStrings = {
       minValueExpression: "Minimale waarde-expressie",
       maxValueExpression: "Maximale waarde expressie",
       autoGenerate: "Configuratie van schaallabels"
+    },
+    file: {
+      imageHeight: "Hoogte afbeelding",
+      imageWidth: "Breedte afbeelding"
     },
     hideIfChoicesEmpty: "Verberg de vraag als deze geen keuzes bevat",
     minWidth: "Minimale breedte (in css-geaccepteerde waarden)",
@@ -1460,8 +1465,8 @@ export var nlStrings = {
       signatureAutoScaleEnabled: "Selecteer of u wilt dat het handtekeninggebied alle beschikbare ruimte in het vraagvak vult met behoud van de standaardverhouding van 3:2. Wanneer aangepaste breedte- en hoogtewaarden zijn ingesteld, blijft de hoogte-breedteverhouding van deze afmetingen behouden."
     },
     file: {
-      imageHeight: "Hiermee past u de hoogte van de afbeelding in de enquêteresultaten aan.",
-      imageWidth: "Hiermee past u de breedte van de afbeelding in de enquêteresultaten aan.",
+      imageHeight: "Hiermee geeft u de weergavehoogte op van geüploade afbeeldingen in het voorbeeld en de werkelijke hoogte van de foto's die met de camera zijn gemaakt. In de uploadmodus voor één bestand wordt de weergavehoogte beperkt door het voorbeeldgebied; In de modus voor het uploaden van meerdere bestanden wordt dit beperkt door het miniatuurgebied.",
+      imageWidth: "Hiermee geeft u de weergavebreedte op van geüploade afbeeldingen in het voorbeeld en de werkelijke breedte van de foto's die met de camera zijn gemaakt. In de uploadmodus voor één bestand wordt de weergavebreedte beperkt door het voorbeeldgebied; In de modus voor het uploaden van meerdere bestanden wordt dit beperkt door het miniatuurgebied.",
       allowImagesPreview: "Geeft indien mogelijk miniatuurvoorbeelden weer voor geüploade bestanden. Schakel de selectie uit als u in plaats daarvan bestandspictogrammen wilt weergeven."
     },
     image: {
@@ -1493,6 +1498,21 @@ export var nlStrings = {
       requiredIf: "Gebruik het toverstafpictogram om een voorwaardelijke regel in te stellen die het verzenden van enquêtes verhindert, tenzij ten minste één geneste vraag een antwoord heeft.",
       showInMultipleColumns: "Als deze optie is geselecteerd, wordt er een afzonderlijke kolom gemaakt voor elke keuzeoptie.",
       colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Als deze optie op 0 staat, worden ze op één regel weergegeven. Wanneer deze is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap \"Aantal geneste kolommen\" van de bovenliggende matrix."
+    },
+    slider: {
+      min: "Het laagste getal dat gebruikers kunnen selecteren.",
+      max: "Het hoogste aantal dat gebruikers kunnen selecteren.",
+      step: "Het interval tussen selecteerbare schaalwaarden. Met een stap van 5 kunnen gebruikers bijvoorbeeld 0, 5, 10, enz. selecteren.",
+      minRangeLength: "De minimale afstand tussen de schuifknoppen die een gebruiker kan instellen.",
+      maxRangeLength: "De maximale afstand tussen de schuifknoppen die een gebruiker kan instellen.",
+      labelCount: "Geeft aan hoeveel schaallabels moeten worden gegenereerd. Een waarde van -1 betekent dat het getal automatisch wordt berekend op basis van de Min-waarde en de Max-waarde.",
+      labelFormat: "Gebruik '{0}' als tijdelijke aanduiding voor de werkelijke waarde.",
+      customLabels: "Hiermee kunt u aangepaste labels met specifieke waarden definiëren en er optioneel overeenkomstige tekst aan toewijzen (bijv. 0 = \"Slecht\", 100 = \"Uitstekend\").",
+      tooltipFormat: "Gebruik '{0}' als tijdelijke aanduiding voor de werkelijke waarde.",
+      allowSwap: "Hiermee kunnen gebruikers de ene duim langs de andere bewegen.",
+      allowClear: "Geeft een knop weer waarmee de geselecteerde schuifregelaarwaarde wordt gewist en op niet-gedefinieerd wordt gezet.",
+      minValueExpression: "Definieert de minimumwaarde van de schuifregelaar dynamisch met behulp van een expressie. Ondersteunt basisberekeningen (bijv. '{q1_id} + {q2_id}'), Booleaanse logica (bijv. '{age} > 60') en functies zoals 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' en meer.",
+      maxValueExpression: "Definieert de maximale waarde van de schuifregelaar dynamisch met behulp van een expressie. Ondersteunt basisberekeningen (bijv. '{q1_id} + {q2_id}'), Booleaanse logica (bijv. '{age} > 60') en functies zoals 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' en meer."
     },
     isExclusive: "Maakt deze keuze exclusief. Wanneer een gebruiker deze selecteert, worden automatisch alle andere opties in de vraag gedeselecteerd.",
     caseInsensitive: "Selecteer of hoofdletters en kleine letters in de reguliere expressie als gelijkwaardig moeten worden behandeld.",
@@ -3077,3 +3097,21 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // sliderType.single: "Single-Value" => "Enkele waarde"
 // sliderType.range: "Range" => "Bereik"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Maakt deze keuze exclusief. Wanneer een gebruiker deze selecteert, worden automatisch alle andere opties in de vraag gedeselecteerd."
+// ed.toolboxSearch: "Search" => "Zoeken"
+// file.imageHeight: "Image height" => "Hoogte afbeelding"
+// file.imageWidth: "Image width" => "Breedte afbeelding"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Hiermee geeft u de weergavehoogte op van geüploade afbeeldingen in het voorbeeld en de werkelijke hoogte van de foto's die met de camera zijn gemaakt. In de uploadmodus voor één bestand wordt de weergavehoogte beperkt door het voorbeeldgebied; In de modus voor het uploaden van meerdere bestanden wordt dit beperkt door het miniatuurgebied."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Hiermee geeft u de weergavebreedte op van geüploade afbeeldingen in het voorbeeld en de werkelijke breedte van de foto's die met de camera zijn gemaakt. In de uploadmodus voor één bestand wordt de weergavebreedte beperkt door het voorbeeldgebied; In de modus voor het uploaden van meerdere bestanden wordt dit beperkt door het miniatuurgebied."
+// slider.min: "The lowest number that users can select." => "Het laagste getal dat gebruikers kunnen selecteren."
+// slider.max: "The highest number that users can select." => "Het hoogste aantal dat gebruikers kunnen selecteren."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Het interval tussen selecteerbare schaalwaarden. Met een stap van 5 kunnen gebruikers bijvoorbeeld 0, 5, 10, enz. selecteren."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "De minimale afstand tussen de schuifknoppen die een gebruiker kan instellen."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "De maximale afstand tussen de schuifknoppen die een gebruiker kan instellen."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Geeft aan hoeveel schaallabels moeten worden gegenereerd. Een waarde van -1 betekent dat het getal automatisch wordt berekend op basis van de Min-waarde en de Max-waarde."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Gebruik '{0}' als tijdelijke aanduiding voor de werkelijke waarde."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Hiermee kunt u aangepaste labels met specifieke waarden definiëren en er optioneel overeenkomstige tekst aan toewijzen (bijv. 0 = \"Slecht\", 100 = \"Uitstekend\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Gebruik '{0}' als tijdelijke aanduiding voor de werkelijke waarde."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Hiermee kunnen gebruikers de ene duim langs de andere bewegen."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Geeft een knop weer waarmee de geselecteerde schuifregelaarwaarde wordt gewist en op niet-gedefinieerd wordt gezet."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definieert de minimumwaarde van de schuifregelaar dynamisch met behulp van een expressie. Ondersteunt basisberekeningen (bijv. '{q1_id} + {q2_id}'), Booleaanse logica (bijv. '{age} > 60') en functies zoals 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' en meer."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definieert de maximale waarde van de schuifregelaar dynamisch met behulp van een expressie. Ondersteunt basisberekeningen (bijv. '{q1_id} + {q2_id}'), Booleaanse logica (bijv. '{age} > 60') en functies zoals 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' en meer."
