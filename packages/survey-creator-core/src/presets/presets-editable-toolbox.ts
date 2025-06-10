@@ -1,4 +1,4 @@
-import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
+import { FunctionFactory, Helpers, IDialogOptions, ItemValue, MatrixDropdownRowModelBase, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, SurveyJSON5, editorLocalization } from "survey-creator-core";
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
@@ -220,7 +220,12 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
     return question.name === this.nameItems || question.name === this.nameMatrix || question.name === "items";
   }
-
+  private resetCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
+    const category = row.getValue("category");
+    const defaultItems = this.defaultItems.filter(i => i.category == category);
+    const value = this.getQuestionCategories(model);
+    value.filter(v => v.category == category)[0].items = defaultItems;
+  }
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if (this.isItemsMatrix(options.question)) {
       const iconName = options.question.value?.filter(v => v.name == options.row.getValue("name"))[0]?.iconName;
@@ -253,7 +258,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         id: "reset-to-default",
         iconName: "icon-reset",
         location: "end",
-        visibleIndex: 15
+        visibleIndex: 15,
+        action: ()=>{ this.resetCategory(model, options.row); }
       });
       options.actions.forEach(a => {
         if (a.id == "show-detail") {
