@@ -593,7 +593,7 @@ test("ConvertTo and addNewQuestion for panel with maxPanelNestingLevel set", ():
   const panel5 = creator.survey.getPanelByName("panel5");
   const panel6 = creator.survey.getQuestionByName("panel6");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(21);
+  expect(itemCount).toBe(22);
   const panel6Model = new QuestionAdornerViewModel(creator, panel6, undefined);
   const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
@@ -653,7 +653,7 @@ test("getAvailableToolboxItems isAllowedToAdd forbiddenNestedElements", (): any 
   const question1 = creator.survey.getQuestionByName("question1");
   const question2 = panel2.template.getQuestionByName("question2");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(21);
+  expect(itemCount).toBe(22);
   creator.forbiddenNestedElements = { "panel": ["expression"], "paneldynamic": ["file", "radiogroup"] };
   expect(creator.getAvailableToolboxItems(panel1, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount - 2);
@@ -686,8 +686,8 @@ test("Preserve defaultAddQuestionType", (): any => {
   expect(question1.getType()).toEqual("radiogroup");
   expect(creator.addNewQuestionText).toEqual("Add Question");
 
-  expect(questionTypeSelectorListModel.actions[9].id).toEqual("text");
-  questionTypeSelectorListModel.onItemClick(questionTypeSelectorListModel.actions[9]);
+  expect(questionTypeSelectorListModel.actions[10].id).toEqual("text");
+  questionTypeSelectorListModel.onItemClick(questionTypeSelectorListModel.actions[10]);
   const question2 = <QuestionRadiogroupModel>survey.getAllQuestions()[1];
   expect(question2.getType()).toEqual("text");
   expect(pageAdorner.currentAddQuestionType).toEqual("");
