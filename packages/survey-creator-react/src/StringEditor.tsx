@@ -61,6 +61,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     super.componentDidUpdate(prevProps, prevState);
     this.baseModel.setLocString(this.locString);
     this.baseModel.afterRender();
+    this.locString.onStringChanged.add(this.onChangedHandler);
   }
   public componentWillUnmount() {
     super.componentWillUnmount();
