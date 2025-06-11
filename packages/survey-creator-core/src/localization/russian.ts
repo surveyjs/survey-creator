@@ -129,6 +129,7 @@ export var ruStrings = {
     generateReadableJSON: "Сформировать читаемый JSON",
     toolbox: "Панель инструментов",
     "property-grid": "Свойства",
+    toolboxSearch: "Искать",
     toolboxFilteredTextPlaceholder: "Введите для поиска...",
     toolboxNoResultsFound: "Никаких результатов не найдено",
     propertyGridFilteredTextPlaceholder: "Введите для поиска...",
@@ -754,7 +755,17 @@ export var ruStrings = {
       labelCount: "Количество автоматически сгенерированных меток",
       minValueExpression: "Выражение минимального значения",
       maxValueExpression: "Выражение максимального значения",
-      autoGenerate: "Настройка этикеток шкалы"
+      autoGenerate: "Настройка этикеток шкалы",
+      sliderType: "Тип слайдера",
+      minRangeLength: "Минимальная длина диапазона",
+      maxRangeLength: "Максимальная длина диапазона",
+      customLabels: "Пользовательские этикетки",
+      labelFormat: "Формат этикетки",
+      tooltipFormat: "Формат всплывающей подсказки"
+    },
+    file: {
+      imageHeight: "Высота изображения",
+      imageWidth: "Ширина изображения"
     },
     hideIfChoicesEmpty: "Скрыть вопрос, если он не содержит вариантов",
     minWidth: "Минимальная ширина (в значениях, принимаемых CSS)",
@@ -1460,8 +1471,8 @@ export var ruStrings = {
       signatureAutoScaleEnabled: "Выберите, хотите ли вы, чтобы область подписи занимала все доступное пространство в поле вопроса, сохраняя при этом соотношение сторон по умолчанию 3:2. Если заданы пользовательские значения ширины и высоты, при этом будет сохранено соотношение сторон этих размеров."
     },
     file: {
-      imageHeight: "Настройка высоты изображения в результатах съемки.",
-      imageWidth: "Настройка ширины изображения в результатах съемки.",
+      imageHeight: "Указывает высоту отображения загруженных изображений в окне предварительного просмотра и фактическую высоту изображений, сделанных камерой. В режиме загрузки одного файла высота отображения ограничена областью предварительного просмотра; В режиме загрузки нескольких файлов он ограничен областью эскизов.",
+      imageWidth: "Указывает ширину отображения загруженных изображений в окне предварительного просмотра и фактическую ширину изображений, сделанных камерой. В режиме загрузки одного файла ширина отображения ограничена областью предварительного просмотра; В режиме загрузки нескольких файлов он ограничен областью эскизов.",
       allowImagesPreview: "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов."
     },
     image: {
@@ -1493,6 +1504,21 @@ export var ruStrings = {
       requiredIf: "Используйте значок волшебной палочки, чтобы задать условное правило, которое запрещает отправку опроса, если хотя бы один вложенный вопрос не содержит ответа.",
       showInMultipleColumns: "При выборе этого параметра создается отдельный столбец для каждого варианта выбора.",
       colCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы."
+    },
+    slider: {
+      min: "Наименьшее число, которое могут выбрать пользователи.",
+      max: "Максимальное число, которое могут выбрать пользователи.",
+      step: "Интервал между выбираемыми значениями масштаба. Например, шаг 5 позволит пользователям выбрать 0, 5, 10 и т. д.",
+      minRangeLength: "Минимальное расстояние между ползунками, которое может установить пользователь.",
+      maxRangeLength: "Максимальное расстояние между ползунками, которое может установить пользователь.",
+      labelCount: "Указывает, сколько меток шкалы необходимо создать. Значение -1 означает, что число вычисляется автоматически на основе значений Min и Max.",
+      labelFormat: "Используйте '{0}' в качестве заполнителя для фактического значения.",
+      customLabels: "Позволяет определять пользовательские метки с определенными значениями и при необходимости назначать им соответствующий текст (например, 0 = \"Плохо\", 100 = \"Отлично\").",
+      tooltipFormat: "Используйте '{0}' в качестве заполнителя для фактического значения.",
+      allowSwap: "Позволяет пользователям перемещать один большой палец мимо другого.",
+      allowClear: "Отображает кнопку, которая очищает выбранное значение ползунка и устанавливает его в неопределенное положение.",
+      minValueExpression: "Динамически определяет минимальное значение ползунка с помощью выражения. Поддерживает базовые вычисления (например, '{q1_id} + {q2_id}'), булеву логику (например, '{age} > 60') и функции, такие как 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и другие.",
+      maxValueExpression: "Динамически определяет максимальное значение ползунка с помощью выражения. Поддерживает базовые вычисления (например, '{q1_id} + {q2_id}'), булеву логику (например, '{age} > 60') и функции, такие как 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и другие."
     },
     isExclusive: "Делает этот выбор эксклюзивным. Когда пользователь выбирает этот вариант, выбор будет автоматически отменен во всех остальных вариантах вопроса.",
     caseInsensitive: "Выберите, если прописные и строчные буквы в регулярном выражении должны рассматриваться как эквивалентные.",
@@ -3154,3 +3180,27 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // sliderType.single: "Single-Value" => "Однозначный"
 // sliderType.range: "Range" => "Диапазон"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Делает этот выбор эксклюзивным. Когда пользователь выбирает этот вариант, выбор будет автоматически отменен во всех остальных вариантах вопроса."
+// ed.toolboxSearch: "Search" => "Искать"
+// file.imageHeight: "Image height" => "Высота изображения"
+// file.imageWidth: "Image width" => "Ширина изображения"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Указывает высоту отображения загруженных изображений в окне предварительного просмотра и фактическую высоту изображений, сделанных камерой. В режиме загрузки одного файла высота отображения ограничена областью предварительного просмотра; В режиме загрузки нескольких файлов он ограничен областью эскизов."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Указывает ширину отображения загруженных изображений в окне предварительного просмотра и фактическую ширину изображений, сделанных камерой. В режиме загрузки одного файла ширина отображения ограничена областью предварительного просмотра; В режиме загрузки нескольких файлов он ограничен областью эскизов."
+// slider.min: "The lowest number that users can select." => "Наименьшее число, которое могут выбрать пользователи."
+// slider.max: "The highest number that users can select." => "Максимальное число, которое могут выбрать пользователи."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Интервал между выбираемыми значениями масштаба. Например, шаг 5 позволит пользователям выбрать 0, 5, 10 и т. д."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Минимальное расстояние между ползунками, которое может установить пользователь."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Максимальное расстояние между ползунками, которое может установить пользователь."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Указывает, сколько меток шкалы необходимо создать. Значение -1 означает, что число вычисляется автоматически на основе значений Min и Max."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Используйте '{0}' в качестве заполнителя для фактического значения."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Позволяет определять пользовательские метки с определенными значениями и при необходимости назначать им соответствующий текст (например, 0 = \"Плохо\", 100 = \"Отлично\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Используйте '{0}' в качестве заполнителя для фактического значения."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Позволяет пользователям перемещать один большой палец мимо другого."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Отображает кнопку, которая очищает выбранное значение ползунка и устанавливает его в неопределенное положение."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Динамически определяет минимальное значение ползунка с помощью выражения. Поддерживает базовые вычисления (например, '{q1_id} + {q2_id}'), булеву логику (например, '{age} > 60') и функции, такие как 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и другие."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Динамически определяет максимальное значение ползунка с помощью выражения. Поддерживает базовые вычисления (например, '{q1_id} + {q2_id}'), булеву логику (например, '{age} > 60') и функции, такие как 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и другие."
+// slider.sliderType: "Slider type" => "Тип слайдера"
+// slider.minRangeLength: "Min range length" => "Минимальная длина диапазона"
+// slider.maxRangeLength: "Max range length" => "Максимальная длина диапазона"
+// slider.customLabels: "Custom labels" => "Пользовательские этикетки"
+// slider.labelFormat: "Label format" => "Формат этикетки"
+// slider.tooltipFormat: "Tooltip format" => "Формат всплывающей подсказки"

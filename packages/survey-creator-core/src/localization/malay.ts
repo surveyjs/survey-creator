@@ -129,6 +129,7 @@ export var msStrings = {
     generateReadableJSON: "Jana JSON yang Boleh Dibaca",
     toolbox: "Kotak Alat",
     "property-grid": "Ciri",
+    toolboxSearch: "Carian",
     toolboxFilteredTextPlaceholder: "Taip untuk mencari...",
     toolboxNoResultsFound: "Tiada keputusan ditemui",
     propertyGridFilteredTextPlaceholder: "Taip untuk mencari...",
@@ -754,7 +755,17 @@ export var msStrings = {
       labelCount: "Bilangan label yang dijana secara automatik",
       minValueExpression: "Ungkapan nilai min",
       maxValueExpression: "Ungkapan nilai maksimum",
-      autoGenerate: "Konfigurasi label skala"
+      autoGenerate: "Konfigurasi label skala",
+      sliderType: "Jenis gelangsar",
+      minRangeLength: "Panjang julat minimum",
+      maxRangeLength: "Panjang julat maksimum",
+      customLabels: "Label tersuai",
+      labelFormat: "Format label",
+      tooltipFormat: "Format petua alat"
+    },
+    file: {
+      imageHeight: "Ketinggian imej",
+      imageWidth: "Lebar imej"
     },
     hideIfChoicesEmpty: "Sembunyikan soalan jika ia tidak mengandungi pilihan",
     minWidth: "Lebar minimum (dalam nilai diterima CSS)",
@@ -1460,8 +1471,8 @@ export var msStrings = {
       signatureAutoScaleEnabled: "Pilih jika anda inginkan kawasan tandatangan mengisi semua ruang yang tersedia dalam kotak soalan sambil mengekalkan nisbah aspek 3:2 lalai. Apabila nilai lebar dan ketinggian tersuai ditetapkan, seting akan mengekalkan nisbah aspek dimensi ini."
     },
     file: {
-      imageHeight: "Melaraskan ketinggian imej dalam hasil tinjauan.",
-      imageWidth: "Melaraskan lebar imej dalam hasil tinjauan.",
+      imageHeight: "Menentukan ketinggian paparan imej yang dimuat naik dalam pratonton dan ketinggian sebenar imej yang diambil dengan kamera. Dalam mod muat naik fail tunggal, ketinggian paparan dihadkan oleh kawasan pratonton; Dalam mod muat naik berbilang fail, ia dihadkan oleh kawasan lakaran kecil.",
+      imageWidth: "Menentukan lebar paparan imej yang dimuat naik dalam pratonton dan lebar sebenar imej yang diambil dengan kamera. Dalam mod muat naik fail tunggal, lebar paparan dihadkan oleh kawasan pratonton; Dalam mod muat naik berbilang fail, ia dihadkan oleh kawasan lakaran kecil.",
       allowImagesPreview: "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail."
     },
     image: {
@@ -1493,6 +1504,21 @@ export var msStrings = {
       requiredIf: "Gunakan ikon tongkat ajaib untuk menetapkan peraturan bersyarat yang menghalang penyerahan tinjauan melainkan sekurang-kurangnya satu soalan tersarang mempunyai jawapan.",
       showInMultipleColumns: "Apabila dipilih, cipta lajur individu untuk setiap opsyen pilihan.",
       colCount: "Mengatur pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" bagi matriks induk."
+    },
+    slider: {
+      min: "Nombor terendah yang boleh dipilih oleh pengguna.",
+      max: "Nombor tertinggi yang boleh dipilih oleh pengguna.",
+      step: "Selang antara nilai skala yang boleh dipilih. Sebagai contoh, langkah 5 akan membolehkan pengguna memilih 0, 5, 10, dsb.",
+      minRangeLength: "Jarak minimum antara ibu jari gelangsar yang boleh ditetapkan oleh pengguna.",
+      maxRangeLength: "Jarak maksimum antara ibu jari gelangsar yang boleh ditetapkan oleh pengguna.",
+      labelCount: "Menentukan bilangan label skala untuk dijana. Nilai -1 bermakna nombor dikira secara automatik berdasarkan nilai Min dan nilai Maks.",
+      labelFormat: "Gunakan '{0}' sebagai ruang letak untuk nilai sebenar.",
+      customLabels: "Membolehkan anda mentakrifkan label tersuai pada nilai tertentu dan secara pilihan menetapkan teks yang sepadan kepada mereka (cth., 0 = \"Miskin\", 100 = \"Cemerlang\").",
+      tooltipFormat: "Gunakan '{0}' sebagai ruang letak untuk nilai sebenar.",
+      allowSwap: "Membolehkan pengguna menggerakkan satu ibu jari melepasi yang lain.",
+      allowClear: "Memaparkan butang yang mengosongkan nilai gelangsar yang dipilih dan menetapkannya kepada tidak ditentukan.",
+      minValueExpression: "Mentakrifkan nilai minimum gelangsar secara dinamik menggunakan ungkapan. Menyokong pengiraan asas (cth, '{q1_id} + {q2_id}'), logik Boolean (cth., '{age} > 60'), dan fungsi seperti 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dan banyak lagi.",
+      maxValueExpression: "Mentakrifkan nilai maksimum gelangsar secara dinamik menggunakan ungkapan. Menyokong pengiraan asas (cth, '{q1_id} + {q2_id}'), logik Boolean (cth., '{age} > 60'), dan fungsi seperti 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dan banyak lagi."
     },
     isExclusive: "Menjadikan pilihan ini eksklusif. Apabila dipilih oleh pengguna, ia akan menyahpilih semua pilihan lain dalam soalan secara automatik.",
     caseInsensitive: "Pilih jika huruf besar dan huruf kecil dalam ungkapan biasa mesti dianggap sebagai setara.",
@@ -3053,3 +3079,27 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // sliderType.single: "Single-Value" => "Nilai Tunggal"
 // sliderType.range: "Range" => "Pelbagai"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Menjadikan pilihan ini eksklusif. Apabila dipilih oleh pengguna, ia akan menyahpilih semua pilihan lain dalam soalan secara automatik."
+// ed.toolboxSearch: "Search" => "Carian"
+// file.imageHeight: "Image height" => "Ketinggian imej"
+// file.imageWidth: "Image width" => "Lebar imej"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Menentukan ketinggian paparan imej yang dimuat naik dalam pratonton dan ketinggian sebenar imej yang diambil dengan kamera. Dalam mod muat naik fail tunggal, ketinggian paparan dihadkan oleh kawasan pratonton; Dalam mod muat naik berbilang fail, ia dihadkan oleh kawasan lakaran kecil."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Menentukan lebar paparan imej yang dimuat naik dalam pratonton dan lebar sebenar imej yang diambil dengan kamera. Dalam mod muat naik fail tunggal, lebar paparan dihadkan oleh kawasan pratonton; Dalam mod muat naik berbilang fail, ia dihadkan oleh kawasan lakaran kecil."
+// slider.min: "The lowest number that users can select." => "Nombor terendah yang boleh dipilih oleh pengguna."
+// slider.max: "The highest number that users can select." => "Nombor tertinggi yang boleh dipilih oleh pengguna."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Selang antara nilai skala yang boleh dipilih. Sebagai contoh, langkah 5 akan membolehkan pengguna memilih 0, 5, 10, dsb."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Jarak minimum antara ibu jari gelangsar yang boleh ditetapkan oleh pengguna."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Jarak maksimum antara ibu jari gelangsar yang boleh ditetapkan oleh pengguna."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Menentukan bilangan label skala untuk dijana. Nilai -1 bermakna nombor dikira secara automatik berdasarkan nilai Min dan nilai Maks."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Gunakan '{0}' sebagai ruang letak untuk nilai sebenar."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Membolehkan anda mentakrifkan label tersuai pada nilai tertentu dan secara pilihan menetapkan teks yang sepadan kepada mereka (cth., 0 = \"Miskin\", 100 = \"Cemerlang\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Gunakan '{0}' sebagai ruang letak untuk nilai sebenar."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Membolehkan pengguna menggerakkan satu ibu jari melepasi yang lain."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Memaparkan butang yang mengosongkan nilai gelangsar yang dipilih dan menetapkannya kepada tidak ditentukan."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Mentakrifkan nilai minimum gelangsar secara dinamik menggunakan ungkapan. Menyokong pengiraan asas (cth, '{q1_id} + {q2_id}'), logik Boolean (cth., '{age} > 60'), dan fungsi seperti 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dan banyak lagi."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Mentakrifkan nilai maksimum gelangsar secara dinamik menggunakan ungkapan. Menyokong pengiraan asas (cth, '{q1_id} + {q2_id}'), logik Boolean (cth., '{age} > 60'), dan fungsi seperti 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dan banyak lagi."
+// slider.sliderType: "Slider type" => "Jenis gelangsar"
+// slider.minRangeLength: "Min range length" => "Panjang julat minimum"
+// slider.maxRangeLength: "Max range length" => "Panjang julat maksimum"
+// slider.customLabels: "Custom labels" => "Label tersuai"
+// slider.labelFormat: "Label format" => "Format label"
+// slider.tooltipFormat: "Tooltip format" => "Format petua alat"

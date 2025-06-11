@@ -61,7 +61,7 @@ test("Responsive creator: toolbox & page navigator", async (t) => {
       }
     ]
   });
-  const toolboxItemCount = 21;
+  const toolboxItemCount = 22;
   await t
     .resizeWindow(1920, 1200)
     .click(collapseButtonSelector)

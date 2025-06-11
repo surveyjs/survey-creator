@@ -129,6 +129,7 @@ var frenchTranslation = {
     generateReadableJSON: "Générer un JSON lisible",
     toolbox: "Boîte à outils",
     "property-grid": "Propriétés",
+    toolboxSearch: "Rechercher",
     toolboxFilteredTextPlaceholder: "Tapez pour rechercher...",
     toolboxNoResultsFound: "Aucun résultat trouvé",
     propertyGridFilteredTextPlaceholder: "Tapez pour rechercher...",
@@ -754,7 +755,17 @@ var frenchTranslation = {
       labelCount: "Nombre d’étiquettes générées automatiquement",
       minValueExpression: "Expression de la valeur min",
       maxValueExpression: "Expression de la valeur maximale",
-      autoGenerate: "Configuration des étiquettes d’échelle"
+      autoGenerate: "Configuration des étiquettes d’échelle",
+      sliderType: "Type de curseur",
+      minRangeLength: "Longueur minimale de la plage",
+      maxRangeLength: "Longueur maximale de la portée",
+      customLabels: "Étiquettes personnalisées",
+      labelFormat: "Format de l’étiquette",
+      tooltipFormat: "Format de l’infobulle"
+    },
+    file: {
+      imageHeight: "Hauteur de l’image",
+      imageWidth: "Largeur de l’image"
     },
     hideIfChoicesEmpty: "Masquer la question si elle ne contient pas de choix",
     minWidth: "Largeur minimale (en valeurs acceptées par CSS)",
@@ -1460,8 +1471,8 @@ var frenchTranslation = {
       signatureAutoScaleEnabled: "Sélectionnez cette option si vous souhaitez que la zone de signature occupe tout l’espace disponible dans la zone de question tout en conservant le format d’image 3 :2 par défaut. Lorsque des valeurs de largeur et de hauteur personnalisées sont définies, le paramètre conserve les proportions de ces dimensions."
     },
     file: {
-      imageHeight: "Ajuste la hauteur de l’image dans les résultats de l’enquête.",
-      imageWidth: "Ajuste la largeur de l’image dans les résultats de l’enquête.",
+      imageHeight: "Spécifie la hauteur d’affichage des images téléchargées dans l’aperçu et la hauteur réelle des images prises avec l’appareil photo. En mode de téléchargement d’un seul fichier, la hauteur d’affichage est limitée par la zone de prévisualisation ; En mode de téléchargement de plusieurs fichiers, il est limité par la zone des vignettes.",
+      imageWidth: "Spécifie la largeur d’affichage des images téléchargées dans l’aperçu et la largeur réelle des images prises avec l’appareil photo. En mode de téléchargement de fichier unique, la largeur d’affichage est limitée par la zone de prévisualisation ; En mode de téléchargement de plusieurs fichiers, il est limité par la zone des vignettes.",
       allowImagesPreview: "Affiche des aperçus miniatures pour les fichiers téléchargés lorsque cela est possible. Désélectionnez si vous souhaitez afficher les icônes de fichier à la place."
     },
     image: {
@@ -1493,6 +1504,21 @@ var frenchTranslation = {
       requiredIf: "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui empêche l’envoi d’un sondage à moins qu’au moins une question imbriquée n’ait une réponse.",
       showInMultipleColumns: "Lorsque cette option est sélectionnée, une colonne individuelle est créée pour chaque option de choix.",
       colCount: "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. Lorsqu’elle est définie sur -1, la valeur réelle est héritée de la propriété « Nombre de colonnes imbriquées » de la matrice parente."
+    },
+    slider: {
+      min: "Le nombre le plus bas que les utilisateurs peuvent sélectionner.",
+      max: "Le nombre le plus élevé que les utilisateurs peuvent sélectionner.",
+      step: "Intervalle entre les valeurs d’échelle sélectionnables. Par exemple, une étape de 5 permettra aux utilisateurs de sélectionner 0, 5, 10, etc.",
+      minRangeLength: "Distance minimale entre les curseurs qu’un utilisateur peut définir.",
+      maxRangeLength: "Distance maximale entre les curseurs qu’un utilisateur peut définir.",
+      labelCount: "Spécifie le nombre d’étiquettes d’échelle à générer. Une valeur de -1 signifie que le nombre est calculé automatiquement en fonction de la valeur minimale et de la valeur maximale.",
+      labelFormat: "Utilisez « {0} » comme espace réservé pour la valeur réelle.",
+      customLabels: "Vous permet de définir des libellés personnalisés à des valeurs spécifiques et éventuellement de leur attribuer le texte correspondant (par exemple, 0 = « Médiocre », 100 = « Excellent »).",
+      tooltipFormat: "Utilisez « {0} » comme espace réservé pour la valeur réelle.",
+      allowSwap: "Permet aux utilisateurs de passer d’un pouce sur l’autre.",
+      allowClear: "Affiche un bouton qui efface la valeur du curseur sélectionnée et la définit sur undefined.",
+      minValueExpression: "Définit la valeur minimale du curseur de manière dynamique à l’aide d’une expression. Prend en charge les calculs de base (par exemple, '{q1_id} + {q2_id}'), la logique booléenne (par exemple, '{age} > 60'), et des fonctions telles que 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.",
+      maxValueExpression: "Définit la valeur maximale du curseur de manière dynamique à l’aide d’une expression. Prend en charge les calculs de base (par exemple, '{q1_id} + {q2_id}'), la logique booléenne (par exemple, '{age} > 60'), et des fonctions telles que 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc."
     },
     isExclusive: "Rend ce choix exclusif. Lorsqu’il est sélectionné par un utilisateur, il désélectionne automatiquement toutes les autres options de la question.",
     caseInsensitive: "Indiquez si les lettres majuscules et minuscules de l’expression régulière doivent être traitées comme équivalentes.",
@@ -3158,3 +3184,27 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // sliderType.single: "Single-Value" => "Valeur unique"
 // sliderType.range: "Range" => "Gamme"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Rend ce choix exclusif. Lorsqu’il est sélectionné par un utilisateur, il désélectionne automatiquement toutes les autres options de la question."
+// ed.toolboxSearch: "Search" => "Rechercher"
+// file.imageHeight: "Image height" => "Hauteur de l’image"
+// file.imageWidth: "Image width" => "Largeur de l’image"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Spécifie la hauteur d’affichage des images téléchargées dans l’aperçu et la hauteur réelle des images prises avec l’appareil photo. En mode de téléchargement d’un seul fichier, la hauteur d’affichage est limitée par la zone de prévisualisation ; En mode de téléchargement de plusieurs fichiers, il est limité par la zone des vignettes."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Spécifie la largeur d’affichage des images téléchargées dans l’aperçu et la largeur réelle des images prises avec l’appareil photo. En mode de téléchargement de fichier unique, la largeur d’affichage est limitée par la zone de prévisualisation ; En mode de téléchargement de plusieurs fichiers, il est limité par la zone des vignettes."
+// slider.min: "The lowest number that users can select." => "Le nombre le plus bas que les utilisateurs peuvent sélectionner."
+// slider.max: "The highest number that users can select." => "Le nombre le plus élevé que les utilisateurs peuvent sélectionner."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Intervalle entre les valeurs d’échelle sélectionnables. Par exemple, une étape de 5 permettra aux utilisateurs de sélectionner 0, 5, 10, etc."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Distance minimale entre les curseurs qu’un utilisateur peut définir."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Distance maximale entre les curseurs qu’un utilisateur peut définir."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Spécifie le nombre d’étiquettes d’échelle à générer. Une valeur de -1 signifie que le nombre est calculé automatiquement en fonction de la valeur minimale et de la valeur maximale."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Utilisez « {0} » comme espace réservé pour la valeur réelle."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Vous permet de définir des libellés personnalisés à des valeurs spécifiques et éventuellement de leur attribuer le texte correspondant (par exemple, 0 = «Médiocre», 100 = «Excellent»)."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Utilisez « {0} » comme espace réservé pour la valeur réelle."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Permet aux utilisateurs de passer d’un pouce sur l’autre."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Affiche un bouton qui efface la valeur du curseur sélectionnée et la définit sur undefined."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Définit la valeur minimale du curseur de manière dynamique à l’aide d’une expression. Prend en charge les calculs de base (par exemple, '{q1_id} + {q2_id}'), la logique booléenne (par exemple, '{age} > 60'), et des fonctions telles que 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Définit la valeur maximale du curseur de manière dynamique à l’aide d’une expression. Prend en charge les calculs de base (par exemple, '{q1_id} + {q2_id}'), la logique booléenne (par exemple, '{age} > 60'), et des fonctions telles que 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc."
+// slider.sliderType: "Slider type" => "Type de curseur"
+// slider.minRangeLength: "Min range length" => "Longueur minimale de la plage"
+// slider.maxRangeLength: "Max range length" => "Longueur maximale de la portée"
+// slider.customLabels: "Custom labels" => "Étiquettes personnalisées"
+// slider.labelFormat: "Label format" => "Format de l’étiquette"
+// slider.tooltipFormat: "Tooltip format" => "Format de l’infobulle"

@@ -129,6 +129,7 @@ var polishStrings = {
     generateReadableJSON: "Generate Readable JSON",
     toolbox: "Paleta",
     "property-grid": "Właściwości",
+    toolboxSearch: "Szukać",
     toolboxFilteredTextPlaceholder: "Wpisz, aby wyszukać...",
     toolboxNoResultsFound: "Nie znaleziono wyników",
     propertyGridFilteredTextPlaceholder: "Wpisz, aby wyszukać...",
@@ -754,7 +755,17 @@ var polishStrings = {
       labelCount: "Liczba automatycznie wygenerowanych etykiet",
       minValueExpression: "Wyrażenie wartości minimalnej",
       maxValueExpression: "Wyrażenie wartości maksymalnej",
-      autoGenerate: "Konfiguracja etykiet skalowania"
+      autoGenerate: "Konfiguracja etykiet skalowania",
+      sliderType: "Typ suwaka",
+      minRangeLength: "Minimalna długość zakresu",
+      maxRangeLength: "Maksymalna długość zasięgu",
+      customLabels: "Etykiety niestandardowe",
+      labelFormat: "Format etykiety",
+      tooltipFormat: "Format podpowiedzi"
+    },
+    file: {
+      imageHeight: "Wysokość obrazu",
+      imageWidth: "Szerokość obrazu"
     },
     hideIfChoicesEmpty: "Ukryj pytanie, jeśli nie zawiera opcji wyboru",
     minWidth: "Minimalna szerokość (w wartościach akceptowanych przez CSS)",
@@ -1460,8 +1471,8 @@ var polishStrings = {
       signatureAutoScaleEnabled: "Wybierz, czy chcesz, aby obszar podpisu wypełniał całą dostępną przestrzeń w polu pytania, zachowując domyślny współczynnik proporcji 3:2. Po ustawieniu niestandardowych wartości szerokości i wysokości ustawienie zachowa proporcje tych wymiarów."
     },
     file: {
-      imageHeight: "Dostosowuje wysokość obrazu w wynikach ankiety.",
-      imageWidth: "Dostosowuje szerokość obrazu w wynikach ankiety.",
+      imageHeight: "Określa wysokość wyświetlania przesyłanych obrazów w podglądzie oraz rzeczywistą wysokość zdjęć wykonanych aparatem. W trybie przesyłania pojedynczego pliku wysokość wyświetlania jest ograniczona przez obszar podglądu; W trybie przesyłania wielu plików jest on ograniczony przez obszar miniatur.",
+      imageWidth: "Określa szerokość wyświetlania przesyłanych obrazów w podglądzie oraz rzeczywistą szerokość zdjęć wykonanych aparatem. W trybie przesyłania pojedynczego pliku szerokość wyświetlania jest ograniczona przez obszar podglądu; W trybie przesyłania wielu plików jest on ograniczony przez obszar miniatur.",
       allowImagesPreview: "Wyświetla podgląd miniatur przesłanych plików, jeśli to możliwe. Usuń zaznaczenie, jeśli zamiast tego chcesz wyświetlać ikony plików."
     },
     image: {
@@ -1493,6 +1504,21 @@ var polishStrings = {
       requiredIf: "Użyj ikony magicznej różdżki, aby ustawić regułę warunkową, która uniemożliwia przesłanie ankiety, chyba że co najmniej jedno zagnieżdżone pytanie ma odpowiedź.",
       showInMultipleColumns: "Gdy ta opcja jest zaznaczona, tworzy osobną kolumnę dla każdej opcji wyboru.",
       colCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej."
+    },
+    slider: {
+      min: "Najniższa liczba, jaką mogą wybrać użytkownicy.",
+      max: "Najwyższa liczba, jaką mogą wybrać użytkownicy.",
+      step: "Interwał między możliwymi do wybrania wartościami skali. Na przykład krok 5 pozwoli użytkownikom wybrać 0, 5, 10 itd.",
+      minRangeLength: "Minimalna odległość między kciukami suwaka, jaką może ustawić użytkownik.",
+      maxRangeLength: "Maksymalna odległość między kciukami suwaka, jaką może ustawić użytkownik.",
+      labelCount: "Określa, ile etykiet skali ma zostać wygenerowanych. Wartość -1 oznacza, że liczba jest obliczana automatycznie na podstawie wartości Min. i Wartości Max.",
+      labelFormat: "Użyj \"{0}\" jako symbolu zastępczego dla rzeczywistej wartości.",
+      customLabels: "Umożliwia definiowanie etykiet niestandardowych o określonych wartościach i opcjonalnie przypisywanie do nich odpowiedniego tekstu (np. 0 = \"Słaby\", 100 = \"Doskonały\").",
+      tooltipFormat: "Użyj \"{0}\" jako symbolu zastępczego dla rzeczywistej wartości.",
+      allowSwap: "Umożliwia użytkownikom przesuwanie jednego kciuka obok drugiego.",
+      allowClear: "Wyświetla przycisk, który czyści wybraną wartość suwaka i ustawia ją na niezdefiniowaną.",
+      minValueExpression: "Dynamicznie definiuje minimalną wartość suwaka za pomocą wyrażenia. Obsługuje podstawowe obliczenia (np. '{q1_id} + {q2_id}'), logikę logiczną (np. '{wiek} > 60') oraz funkcje takie jak 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i inne.",
+      maxValueExpression: "Dynamicznie definiuje maksymalną wartość suwaka za pomocą wyrażenia. Obsługuje podstawowe obliczenia (np. '{q1_id} + {q2_id}'), logikę logiczną (np. '{wiek} > 60') oraz funkcje takie jak 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i inne."
     },
     isExclusive: "To sprawia, że ten wybór jest wyjątkowy. Po wybraniu przez użytkownika automatycznie odznaczy wszystkie inne opcje w pytaniu.",
     caseInsensitive: "Wybierz, czy wielkie i małe litery w wyrażeniu regularnym mają być traktowane jako równoważne.",
@@ -3364,3 +3390,27 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // sliderType.single: "Single-Value" => "Pojedyncza wartość"
 // sliderType.range: "Range" => "Zakres"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "To sprawia, że ten wybór jest wyjątkowy. Po wybraniu przez użytkownika automatycznie odznaczy wszystkie inne opcje w pytaniu."
+// ed.toolboxSearch: "Search" => "Szukać"
+// file.imageHeight: "Image height" => "Wysokość obrazu"
+// file.imageWidth: "Image width" => "Szerokość obrazu"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Określa wysokość wyświetlania przesyłanych obrazów w podglądzie oraz rzeczywistą wysokość zdjęć wykonanych aparatem. W trybie przesyłania pojedynczego pliku wysokość wyświetlania jest ograniczona przez obszar podglądu; W trybie przesyłania wielu plików jest on ograniczony przez obszar miniatur."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Określa szerokość wyświetlania przesyłanych obrazów w podglądzie oraz rzeczywistą szerokość zdjęć wykonanych aparatem. W trybie przesyłania pojedynczego pliku szerokość wyświetlania jest ograniczona przez obszar podglądu; W trybie przesyłania wielu plików jest on ograniczony przez obszar miniatur."
+// slider.min: "The lowest number that users can select." => "Najniższa liczba, jaką mogą wybrać użytkownicy."
+// slider.max: "The highest number that users can select." => "Najwyższa liczba, jaką mogą wybrać użytkownicy."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Interwał między możliwymi do wybrania wartościami skali. Na przykład krok 5 pozwoli użytkownikom wybrać 0, 5, 10 itd."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Minimalna odległość między kciukami suwaka, jaką może ustawić użytkownik."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Maksymalna odległość między kciukami suwaka, jaką może ustawić użytkownik."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Określa, ile etykiet skali ma zostać wygenerowanych. Wartość -1 oznacza, że liczba jest obliczana automatycznie na podstawie wartości Min. i Wartości Max."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Użyj \"{0}\" jako symbolu zastępczego dla rzeczywistej wartości."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Umożliwia definiowanie etykiet niestandardowych o określonych wartościach i opcjonalnie przypisywanie do nich odpowiedniego tekstu (np. 0 = \"Słaby\", 100 = \"Doskonały\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Użyj \"{0}\" jako symbolu zastępczego dla rzeczywistej wartości."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Umożliwia użytkownikom przesuwanie jednego kciuka obok drugiego."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Wyświetla przycisk, który czyści wybraną wartość suwaka i ustawia ją na niezdefiniowaną."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dynamicznie definiuje minimalną wartość suwaka za pomocą wyrażenia. Obsługuje podstawowe obliczenia (np. '{q1_id} + {q2_id}'), logikę logiczną (np. '{wiek} > 60') oraz funkcje takie jak 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i inne."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dynamicznie definiuje maksymalną wartość suwaka za pomocą wyrażenia. Obsługuje podstawowe obliczenia (np. '{q1_id} + {q2_id}'), logikę logiczną (np. '{wiek} > 60') oraz funkcje takie jak 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i inne."
+// slider.sliderType: "Slider type" => "Typ suwaka"
+// slider.minRangeLength: "Min range length" => "Minimalna długość zakresu"
+// slider.maxRangeLength: "Max range length" => "Maksymalna długość zasięgu"
+// slider.customLabels: "Custom labels" => "Etykiety niestandardowe"
+// slider.labelFormat: "Label format" => "Format etykiety"
+// slider.tooltipFormat: "Tooltip format" => "Format podpowiedzi"

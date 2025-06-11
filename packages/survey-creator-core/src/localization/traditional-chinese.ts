@@ -129,6 +129,7 @@ var traditionalChineseTranslation = {
     generateReadableJSON: "生成易讀的 JSON",
     toolbox: "工具箱",
     "property-grid": "性能",
+    toolboxSearch: "搜索",
     toolboxFilteredTextPlaceholder: "鍵入以搜尋...",
     toolboxNoResultsFound: "未找到結果",
     propertyGridFilteredTextPlaceholder: "鍵入以搜尋...",
@@ -754,7 +755,17 @@ var traditionalChineseTranslation = {
       labelCount: "自動生成的標籤數量",
       minValueExpression: "最小值表達式",
       maxValueExpression: "最大值表達式",
-      autoGenerate: "刻度標籤配置"
+      autoGenerate: "刻度標籤配置",
+      sliderType: "滑塊類型",
+      minRangeLength: "最小範圍長度",
+      maxRangeLength: "最大範圍長度",
+      customLabels: "自訂標籤",
+      labelFormat: "標籤格式",
+      tooltipFormat: "工具提示格式"
+    },
+    file: {
+      imageHeight: "圖像高度",
+      imageWidth: "圖像寬度"
     },
     hideIfChoicesEmpty: "如果問題不包含任何選項，則隱藏問題",
     minWidth: "最小寬度（以 CSS 接受的值為單位）",
@@ -1460,8 +1471,8 @@ var traditionalChineseTranslation = {
       signatureAutoScaleEnabled: "選擇是否希望簽名區域填充問題框中的所有可用空間，同時保持預設的 3：2 縱橫比。設置自定義寬度和高度值后，該設置將保留這些尺寸的縱橫比。"
     },
     file: {
-      imageHeight: "調整調查結果中圖像的高度。",
-      imageWidth: "調整調查結果中圖像的寬度。",
+      imageHeight: "指定預覽中上傳圖像的顯示高度以及使用相機拍攝的圖像的實際高度。在單個檔上傳模式下，顯示高度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。",
+      imageWidth: "指定預覽中上傳圖像的顯示寬度以及使用相機拍攝的圖像的實際寬度。在單個檔上傳模式下，顯示寬度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。",
       allowImagesPreview: "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。"
     },
     image: {
@@ -1493,6 +1504,21 @@ var traditionalChineseTranslation = {
       requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
       showInMultipleColumns: "選取後，為每個選項創建一個單獨的列。",
       colCount: "在多列佈局中排列選項。設置為 0 時，選項將以單行顯示。當設置為 -1 時，實際值繼承自父矩陣的 “Nested column count” 屬性。"
+    },
+    slider: {
+      min: "用戶可以選擇的最小數位。",
+      max: "用戶可以選擇的最大數位。",
+      step: "可選刻度值之間的間隔。例如，步長 5 將允許使用者選擇 0、5、10 等。",
+      minRangeLength: "用戶可以設置的滑塊塊之間的最小距離。",
+      maxRangeLength: "用戶可以設置滑塊滑塊之間的最大距離。",
+      labelCount: "指定要生成的刻度標籤數量。值 -1 表示該數位是根據 最小值 和 最大值 自動計算的。",
+      labelFormat: "使用 『{0}』 作為實際值的佔位元。",
+      customLabels: "允許您定義特定值的自定義標籤，並可選擇為其分配相應的文本（例如，0 = “差”，100 = “優秀”）。",
+      tooltipFormat: "使用 『{0}』 作為實際值的佔位元。",
+      allowSwap: "允許使用者將一個滑塊移過另一個滑塊。",
+      allowClear: "顯示一個按鈕，用於清除選定的滑塊值並將其設置為 undefined。",
+      minValueExpression: "使用表達式動態定義滑塊的最小值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。",
+      maxValueExpression: "使用表達式動態定義滑塊的最大值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。"
     },
     isExclusive: "將此選擇設為獨佔。當用戶選擇時，它將自動取消選擇問題中的所有其他選項。",
     caseInsensitive: "如果必須將正則表示式中的大寫字母和小寫字母視為等效字母，請選擇此項。",
@@ -3369,3 +3395,27 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // sliderType.single: "Single-Value" => "單值"
 // sliderType.range: "Range" => "範圍"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "將此選擇設為獨佔。當用戶選擇時，它將自動取消選擇問題中的所有其他選項。"
+// ed.toolboxSearch: "Search" => "搜索"
+// file.imageHeight: "Image height" => "圖像高度"
+// file.imageWidth: "Image width" => "圖像寬度"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "指定預覽中上傳圖像的顯示高度以及使用相機拍攝的圖像的實際高度。在單個檔上傳模式下，顯示高度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。"
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "指定預覽中上傳圖像的顯示寬度以及使用相機拍攝的圖像的實際寬度。在單個檔上傳模式下，顯示寬度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。"
+// slider.min: "The lowest number that users can select." => "用戶可以選擇的最小數位。"
+// slider.max: "The highest number that users can select." => "用戶可以選擇的最大數位。"
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "可選刻度值之間的間隔。例如，步長 5 將允許使用者選擇 0、5、10 等。"
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "用戶可以設置的滑塊塊之間的最小距離。"
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "用戶可以設置滑塊滑塊之間的最大距離。"
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "指定要生成的刻度標籤數量。值 -1 表示該數位是根據 最小值 和 最大值 自動計算的。"
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "使用 『{0}』 作為實際值的佔位元。"
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "允許您定義特定值的自定義標籤，並可選擇為其分配相應的文本（例如，0 = “差”，100 = “優秀”）。"
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "使用 『{0}』 作為實際值的佔位元。"
+// slider.allowSwap: "Allows users to move one thumb past the other." => "允許使用者將一個滑塊移過另一個滑塊。"
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "顯示一個按鈕，用於清除選定的滑塊值並將其設置為 undefined。"
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "使用表達式動態定義滑塊的最小值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。"
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "使用表達式動態定義滑塊的最大值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。"
+// slider.sliderType: "Slider type" => "滑塊類型"
+// slider.minRangeLength: "Min range length" => "最小範圍長度"
+// slider.maxRangeLength: "Max range length" => "最大範圍長度"
+// slider.customLabels: "Custom labels" => "自訂標籤"
+// slider.labelFormat: "Label format" => "標籤格式"
+// slider.tooltipFormat: "Tooltip format" => "工具提示格式"

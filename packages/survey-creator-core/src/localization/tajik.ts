@@ -45,6 +45,7 @@ export var tgStrings = {
     paneldynamic: "Баста (бастаҳои динамикӣ)",
     radiogroup: "Интихоби танҳо",
     rating: "Рейтинг (миқёс)",
+    // slider: "Slider",
     text: "Воридкунии матнӣ",
     boolean: "Қиммати булӣ",
     expression: "Ифода (танҳо барои хондан)",
@@ -128,6 +129,7 @@ export var tgStrings = {
     generateReadableJSON: "Сохтани JSON-и мехондагӣ",
     toolbox: "Бастаи асбобҳо",
     // "property-grid": "Properties",
+    // toolboxSearch: "Search",
     // toolboxFilteredTextPlaceholder: "Type to search...",
     // toolboxNoResultsFound: "No results found",
     // propertyGridFilteredTextPlaceholder: "Type to search...",
@@ -338,6 +340,7 @@ export var tgStrings = {
       // titleLocation: "Panel title alignment",
       // descriptionLocation: "Panel description alignment",
       // templateQuestionTitleLocation: "Question title alignment",
+      // templateQuestionTitleWidth: "Question title width",
       // templateErrorLocation: "Error message alignment",
       // newPanelPosition: "New panel location",
       // showRangeInProgress: "Show the progress bar",
@@ -442,9 +445,11 @@ export var tgStrings = {
       // prefix: "Currency prefix",
       // suffix: "Currency suffix"
     },
+    // isExclusive: "Clear others when selected",
     // imageHeight: "Display area height",
     // imageWidth: "Display area width",
     valueName: "Номи нуқта",
+    // defaultDisplayValue: "Default display value for dynamic texts",
     // rateDescriptionLocation: "Label alignment",
     // size: "Input field width (in characters)",
     // cellErrorLocation: "Cell error message alignment",
@@ -567,6 +572,7 @@ export var tgStrings = {
     cellType: "Намдуи катакча",
     // colCount: "Column count",
     choicesOrder: "Интихоб кардани фармоиши интихоб",
+    // allowCustomChoices: "Allow custom choices",
     visible: "Нишон додан?",
     isRequired: "Ҳатмӣ?",
     // markRequired: "Mark as required",
@@ -587,6 +593,7 @@ export var tgStrings = {
     // transposeData: "Transpose rows to columns",
     addRowText: "Илова кардани матни тугмаи сатр",
     removeRowText: "Нест кардани тугмаи матн",
+    // singleInputTitleTemplate: "Input field title pattern",
     rateMin: "Рейтинги минималӣ",
     rateMax: "Рейтинги максималӣ",
     rateStep: "Қадами рейтинг",
@@ -738,6 +745,22 @@ export var tgStrings = {
     // rateValues: "Custom rating values",
     // rateCount: "Rating count",
     // autoGenerate: "Rating configuration",
+    slider: {
+      // min: "Min value",
+      // max: "Max value",
+      // step: "Step value",
+      // showLabels: "Show scale labels",
+      // tooltipVisibilityPG: "Show tooltips",
+      // allowSwap: "Allow thumb crossing",
+      // labelCount: "Number of auto-generated labels",
+      // minValueExpression: "Min value expression",
+      // maxValueExpression: "Max value expression",
+      // autoGenerate: "Scale labels configuration"
+    },
+    file: {
+      // imageHeight: "Image height",
+      // imageWidth: "Image width"
+    },
     // hideIfChoicesEmpty: "Hide the question if it has no choices",
     // minWidth: "Minimum width",
     // maxWidth: "Maximum width",
@@ -819,6 +842,7 @@ export var tgStrings = {
       enableIf: "Дастрас аст, агар",
       requiredIf: "Ҳатмӣ барои пуркунӣ, агар",
       rateValues: "Баҳодиҳии қимматбаҳои савол",
+      // sliderSettings: "Slider Settings",
       choicesByUrl: "Интихоб аз интернет",
       matrixChoices: "Интихоби нобаён",
       multipleTextItems: "Дохилкунии якчанд майдончаҳои матнӣ",
@@ -1040,6 +1064,10 @@ export var tgStrings = {
       // url: "URL",
       // week: "Week"
     },
+    sliderType: {
+      // single: "Single-Value",
+      // range: "Range"
+    },
     autocomplete: {
       // name: "Full Name",
       // "honorific-prefix": "Prefix",
@@ -1116,7 +1144,8 @@ export var tgStrings = {
     questionsOnPageMode: {
       // standard: "Original structure",
       // singlePage: "Show all questions on one page",
-      // questionPerPage: "Show single question per page"
+      // questionPerPage: "Show single question per page",
+      // inputPerPage: "Show single input field per page"
     },
     // noPreview: "No preview",
     // showAllQuestions: "Show all questions",
@@ -1189,6 +1218,7 @@ export var tgStrings = {
       // onPage: "Reset on each page",
       // onpanel: "Reset on each panel",
       // onPanel: "Reset on each panel",
+      // recursive: "Recursive numbering",
       // onSurvey: "Continue across the survey",
       // off: "No numbering"
     },
@@ -1316,7 +1346,9 @@ export var tgStrings = {
   ts: {
     selectPage: "Саҳифаро интихоб кунед, барои санҷидани ин:",
     showInvisibleElements: "Нишон додани элементҳои пинҳон",
-    // hideInvisibleElements: "Hide invisible elements"
+    // hideInvisibleElements: "Hide invisible elements",
+    // prevPage: "Previous",
+    // nextPage: "Next"
   },
   validators: {
     answercountvalidator: "Шумораи ҷавобҳо",
@@ -1380,6 +1412,7 @@ export var tgStrings = {
       // enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel.",
       // requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
       // templateQuestionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
+      // templateQuestionTitleWidth: "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.).",
       // templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
       // errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       // page: "Repositions the panel to the end of a selected page.",
@@ -1432,8 +1465,8 @@ export var tgStrings = {
       // signatureAutoScaleEnabled: "Select if you want the signature area to fill all available space within the question box while maintaining the default 3:2 aspect ratio. When custom width and height values are set, the setting will keep the aspect ratio of these dimensions."
     },
     file: {
-      // imageHeight: "Adjusts the height of the image in the survey results.",
-      // imageWidth: "Adjusts the width of the image in the survey results.",
+      // imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area.",
+      // imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area.",
       // allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
     },
     image: {
@@ -1466,6 +1499,22 @@ export var tgStrings = {
       // showInMultipleColumns: "When selected, creates an individual column for each choice option.",
       // colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
     },
+    slider: {
+      // min: "The lowest number that users can select.",
+      // max: "The highest number that users can select.",
+      // step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc.",
+      // minRangeLength: "The minimum distance between the slider thumbs a user can set.",
+      // maxRangeLength: "The maximum distance between the slider thumbs a user can set.",
+      // labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value.",
+      // labelFormat: "Use `{0}` as a placeholder for the actual value.",
+      // customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\").",
+      // tooltipFormat: "Use `{0}` as a placeholder for the actual value.",
+      // allowSwap: "Allows users to move one thumb past the other.",
+      // allowClear: "Displays a button that clears the selected slider value and sets it to undefined.",
+      // minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more.",
+      // maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more."
+    },
+    // isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question.",
     // caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent.",
     // widthMode: "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used.",
     // cookieName: "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions.",
@@ -1486,6 +1535,7 @@ export var tgStrings = {
     // questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab.",
     // maxTextLength: "For text entry questions only.",
     // maxCommentLength: "For question comments only.",
+    // commentAreaRows: "Sets the number of displayed lines in text areas for question comments. If the input takes up more lines, the scroll bar appears.",
     // autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length.",
     // allowResizeComment: "For question comments and Long Text questions only.",
     // calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on.",
@@ -1514,6 +1564,9 @@ export var tgStrings = {
     // timeLimitPerPage: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page.",
     // validateVisitedEmptyFields: "Enable this option to trigger validation when a user focuses on an empty input field and then leaves it without making any changes.",
     page: {
+      // name: "A page ID that is not visible to respondents.",
+      // description: "Type a page subtitle.",
+      // navigationTitle: "A caption displayed on a navigation button in the progress bar or table of contents (TOC). If you leave this field empty, the navigation button will use the page title or page name. To enable the progress bar or TOC, go to \"Survey\" → \"Navigation\".",
       // timeLimit: "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page.",
       // visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility.",
       // enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page.",
@@ -1535,11 +1588,13 @@ export var tgStrings = {
     // maxWidth: "Accepts CSS values (px, %, in, pt, etc.).",
     // width: "Accepts CSS values (px, %, in, pt, etc.).",
     // valueName: "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name.",
+    // defaultDisplayValue: "A value displayed in HTML questions and in the dynamic titles and descriptions of survey elements when the question value is empty.",
     // useDisplayValuesInDynamicTexts: "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements.",
     // clearIfInvisible: "Choose whether or not to clear question values hidden by conditional logic and when to do it. The \"Inherit\" option applies the survey-level setting (\"Upon survey completion\" by default).",
     // choicesFromQuestionMode: "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question.",
     // choiceValuesFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs.",
     // choiceTextsFromQuestion: "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts.",
+    // allowCustomChoices: "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session.",
     // showOtherItem: "When selected, users can include additional input in a separate comment box.",
     // separateSpecialChoices: "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout.",
     // path: "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array.",
@@ -1612,7 +1667,8 @@ export var tgStrings = {
       // overlapEnabled: "When enabled, the top of the survey overlays the bottom of the header.",
       // mobileHeight: "When set to 0, the height is calculated automatically to accommodate the header's content."
     },
-    // progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in."
+    // progressBarInheritWidthFrom: "The \"Same as container\" option auto-adjusts the progress bar area width to fit into the HTML element the survey is placed in.",
+    // singleInputTitleTemplate: "Used when the 'Survey layout' is set to 'Single input field per page'. In this layout, the matrix is split so that each input field appears on a separate page. Use the {rowIndex} placeholder to insert auto numbering, {rowTitle} or {rowName} to reference the row's title or ID, and {row.columnid} to include the value of a specific matrix column."
   },
   // Properties
   p: {

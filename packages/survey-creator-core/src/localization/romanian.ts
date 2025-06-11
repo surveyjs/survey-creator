@@ -129,6 +129,7 @@ export const roStrings = {
     generateReadableJSON: "Generează JSON lizibil",
     toolbox: "Cutia de instrumente",
     "property-grid": "Proprietăți",
+    toolboxSearch: "Căutare",
     toolboxFilteredTextPlaceholder: "Tastați pentru a căuta...",
     toolboxNoResultsFound: "Nu au fost găsite rezultate",
     propertyGridFilteredTextPlaceholder: "Tastați pentru a căuta...",
@@ -754,7 +755,17 @@ export const roStrings = {
       labelCount: "Numărul de etichete generate automat",
       minValueExpression: "Expresia valorii minime",
       maxValueExpression: "Expresie valoare maximă",
-      autoGenerate: "Configurarea etichetelor de scară"
+      autoGenerate: "Configurarea etichetelor de scară",
+      sliderType: "Tip glisor",
+      minRangeLength: "Lungimea minimă a intervalului",
+      maxRangeLength: "Lungimea maximă a intervalului",
+      customLabels: "Etichete personalizate",
+      labelFormat: "Formatul etichetei",
+      tooltipFormat: "Formatul sfatului ecran"
+    },
+    file: {
+      imageHeight: "Înălțimea imaginii",
+      imageWidth: "Lățimea imaginii"
     },
     hideIfChoicesEmpty: "Ascunde întrebarea dacă nu are alegeri",
     minWidth: "Lățime minimă",
@@ -1460,8 +1471,8 @@ export const roStrings = {
       signatureAutoScaleEnabled: "Selectați dacă doriți ca zona de semnătură să umple tot spațiul disponibil din caseta întrebării menținând aspectul implicit 3:2. Când sunt setate valori de lățime și înălțime personalizate, setarea va menține aspectul acestor dimensiuni."
     },
     file: {
-      imageHeight: "Reglează înălțimea imaginii în rezultatele chestionarului.",
-      imageWidth: "Reglează lățimea imaginii în rezultatele chestionarului.",
+      imageHeight: "Specifică înălțimea de afișare a imaginilor încărcate în previzualizare și înălțimea reală a imaginilor realizate cu aparatul foto. În modul de încărcare a unui singur fișier, înălțimea afișajului este limitată de zona de previzualizare; În modul de încărcare a mai multor fișiere, este limitat de zona de miniaturi.",
+      imageWidth: "Specifică lățimea de afișare a imaginilor încărcate în previzualizare și lățimea reală a imaginilor realizate cu camera. În modul de încărcare a unui singur fișier, lățimea afișării este limitată de zona de previzualizare; În modul de încărcare a mai multor fișiere, este limitat de zona de miniaturi.",
       allowImagesPreview: "Afișează previzualizări în miniatură pentru fișierele încărcate atunci când este posibil. Deselectați dacă doriți să afișați pictogramele fișierelor."
     },
     image: {
@@ -1493,6 +1504,21 @@ export const roStrings = {
       requiredIf: "Utilizați pictograma bagheta magică pentru a seta o regulă condițională care împiedică trimiterea chestionarului dacă cel puțin o întrebare inclusă nu are un răspuns.",
       showInMultipleColumns: "Când este selectat, creează o coloană individuală pentru fiecare opțiune de alegere.",
       colCount: "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte."
+    },
+    slider: {
+      min: "Cel mai mic număr pe care îl pot selecta utilizatorii.",
+      max: "Cel mai mare număr pe care îl pot selecta utilizatorii.",
+      step: "Intervalul dintre valorile scalei selectabile. De exemplu, un pas de 5 va permite utilizatorilor să selecteze 0, 5, 10 etc.",
+      minRangeLength: "Distanța minimă dintre degetele glisante pe care le poate seta un utilizator.",
+      maxRangeLength: "Distanța maximă dintre degetele glisante pe care le poate seta un utilizator.",
+      labelCount: "Specifică câte etichete de scară să genereze. O valoare de -1 înseamnă că numărul este calculat automat pe baza valorii minime și a valorii maxime.",
+      labelFormat: "Utilizați \"{0}\" ca substituent pentru valoarea reală.",
+      customLabels: "Vă permite să definiți etichete personalizate la anumite valori și, opțional, să le atribuiți textul corespunzător (de exemplu, 0 = \"Slab\", 100 = \"Excelent\").",
+      tooltipFormat: "Utilizați \"{0}\" ca substituent pentru valoarea reală.",
+      allowSwap: "Permite utilizatorilor să treacă cu degetul mare pe lângă celălalt.",
+      allowClear: "Afișează un buton care șterge valoarea glisorului selectată și o setează la nedefinită.",
+      minValueExpression: "Definește valoarea minimă a glisorului în mod dinamic folosind o expresie. Suportă calcule de bază (de exemplu, '{q1_id} + {q2_id}'), logică booleană (de exemplu, '{age} > 60') și funcții precum 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' și multe altele.",
+      maxValueExpression: "Definește valoarea maximă a glisorului în mod dinamic folosind o expresie. Suportă calcule de bază (de exemplu, '{q1_id} + {q2_id}'), logică booleană (de exemplu, '{age} > 60') și funcții precum 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' și multe altele."
     },
     isExclusive: "Face ca această alegere să fie exclusivă. Când este selectat de un utilizator, acesta va deselecta automat toate celelalte opțiuni din întrebare.",
     caseInsensitive: "Selectați dacă literele mari și mici din expresia regulată trebuie tratate ca echivalente.",
@@ -2039,3 +2065,27 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // sliderType.single: "Single-Value" => "Valoare unică"
 // sliderType.range: "Range" => "Gama"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Face ca această alegere să fie exclusivă. Când este selectat de un utilizator, acesta va deselecta automat toate celelalte opțiuni din întrebare."
+// ed.toolboxSearch: "Search" => "Căutare"
+// file.imageHeight: "Image height" => "Înălțimea imaginii"
+// file.imageWidth: "Image width" => "Lățimea imaginii"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Specifică înălțimea de afișare a imaginilor încărcate în previzualizare și înălțimea reală a imaginilor realizate cu aparatul foto. În modul de încărcare a unui singur fișier, înălțimea afișajului este limitată de zona de previzualizare; În modul de încărcare a mai multor fișiere, este limitat de zona de miniaturi."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Specifică lățimea de afișare a imaginilor încărcate în previzualizare și lățimea reală a imaginilor realizate cu camera. În modul de încărcare a unui singur fișier, lățimea afișării este limitată de zona de previzualizare; În modul de încărcare a mai multor fișiere, este limitat de zona de miniaturi."
+// slider.min: "The lowest number that users can select." => "Cel mai mic număr pe care îl pot selecta utilizatorii."
+// slider.max: "The highest number that users can select." => "Cel mai mare număr pe care îl pot selecta utilizatorii."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Intervalul dintre valorile scalei selectabile. De exemplu, un pas de 5 va permite utilizatorilor să selecteze 0, 5, 10 etc."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Distanța minimă dintre degetele glisante pe care le poate seta un utilizator."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Distanța maximă dintre degetele glisante pe care le poate seta un utilizator."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Specifică câte etichete de scară să genereze. O valoare de -1 înseamnă că numărul este calculat automat pe baza valorii minime și a valorii maxime."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Utilizați \"{0}\" ca substituent pentru valoarea reală."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Vă permite să definiți etichete personalizate la anumite valori și, opțional, să le atribuiți textul corespunzător (de exemplu, 0 = \"Slab\", 100 = \"Excelent\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Utilizați \"{0}\" ca substituent pentru valoarea reală."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Permite utilizatorilor să treacă cu degetul mare pe lângă celălalt."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Afișează un buton care șterge valoarea glisorului selectată și o setează la nedefinită."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definește valoarea minimă a glisorului în mod dinamic folosind o expresie. Suportă calcule de bază (de exemplu, '{q1_id} + {q2_id}'), logică booleană (de exemplu, '{age} > 60') și funcții precum 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' și multe altele."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definește valoarea maximă a glisorului în mod dinamic folosind o expresie. Suportă calcule de bază (de exemplu, '{q1_id} + {q2_id}'), logică booleană (de exemplu, '{age} > 60') și funcții precum 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' și multe altele."
+// slider.sliderType: "Slider type" => "Tip glisor"
+// slider.minRangeLength: "Min range length" => "Lungimea minimă a intervalului"
+// slider.maxRangeLength: "Max range length" => "Lungimea maximă a intervalului"
+// slider.customLabels: "Custom labels" => "Etichete personalizate"
+// slider.labelFormat: "Label format" => "Formatul etichetei"
+// slider.tooltipFormat: "Tooltip format" => "Formatul sfatului ecran"

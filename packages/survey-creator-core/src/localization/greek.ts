@@ -129,6 +129,7 @@ export var grStrings = {
     generateReadableJSON: "Δημιουργία Αναγνώσιμου JSON",
     toolbox: "Εργαλειοθήκη",
     "property-grid": "Καταλύματα",
+    toolboxSearch: "Αναζήτηση",
     toolboxFilteredTextPlaceholder: "Πληκτρολογήστε για αναζήτηση...",
     toolboxNoResultsFound: "Δεν βρέθηκαν αποτελέσματα",
     propertyGridFilteredTextPlaceholder: "Πληκτρολογήστε για αναζήτηση...",
@@ -754,7 +755,17 @@ export var grStrings = {
       labelCount: "Αριθμός ετικετών που δημιουργούνται αυτόματα",
       minValueExpression: "Παράσταση ελάχιστης τιμής",
       maxValueExpression: "Έκφραση μέγιστης τιμής",
-      autoGenerate: "Διαμόρφωση ετικετών κλίμακας"
+      autoGenerate: "Διαμόρφωση ετικετών κλίμακας",
+      sliderType: "Τύπος ρυθμιστικού",
+      minRangeLength: "Ελάχιστο μήκος εύρους",
+      maxRangeLength: "Μέγιστο μήκος εύρους",
+      customLabels: "Προσαρμοσμένες ετικέτες",
+      labelFormat: "Μορφή ετικέτας",
+      tooltipFormat: "Μορφή συμβουλής εργαλείου"
+    },
+    file: {
+      imageHeight: "Ύψος εικόνας",
+      imageWidth: "Πλάτος εικόνας"
     },
     hideIfChoicesEmpty: "Απόκρυψη ερώτησης αν δεν υπάρχουν επιλογές",
     minWidth: "Ελάχιστο πλάτος",
@@ -1460,8 +1471,8 @@ export var grStrings = {
       signatureAutoScaleEnabled: "Επιλέξτε αν θέλετε η περιοχή υπογραφής να γεμίζει όλο τον διαθέσιμο χώρο μέσα στο κουτί της ερώτησης, διατηρώντας την προεπιλεγμένη αναλογία 3:2. Όταν οριστούν προσαρμοσμένες τιμές πλάτους και ύψους, η ρύθμιση θα διατηρήσει την αναλογία αυτών των διαστάσεων."
     },
     file: {
-      imageHeight: "Προσαρμόζει το ύψος της εικόνας στα αποτελέσματα της έρευνας.",
-      imageWidth: "Προσαρμόζει το πλάτος της εικόνας στα αποτελέσματα της έρευνας.",
+      imageHeight: "Καθορίζει το ύψος εμφάνισης των μεταφορτωμένων εικόνων στην προεπισκόπηση και το πραγματικό ύψος των εικόνων που λαμβάνονται με την κάμερα. Στη λειτουργία μεταφόρτωσης ενός αρχείου, το ύψος της οθόνης περιορίζεται από την περιοχή προεπισκόπησης. Στη λειτουργία μεταφόρτωσης πολλαπλών αρχείων, περιορίζεται από την περιοχή μικρογραφιών.",
+      imageWidth: "Καθορίζει το πλάτος εμφάνισης των μεταφορτωμένων εικόνων στην προεπισκόπηση και το πραγματικό πλάτος των εικόνων που λαμβάνονται με την κάμερα. Στη λειτουργία μεταφόρτωσης ενός αρχείου, το πλάτος της οθόνης περιορίζεται από την περιοχή προεπισκόπησης. Στη λειτουργία μεταφόρτωσης πολλαπλών αρχείων, περιορίζεται από την περιοχή μικρογραφιών.",
       allowImagesPreview: "Εμφανίζει προεπισκοπήσεις μικρογραφιών για ανεβασμένα αρχεία όταν είναι δυνατόν. Αποεπιλέξτε αν θέλετε να εμφανίζονται τα εικονίδια αρχείων αντ' αυτού."
     },
     image: {
@@ -1493,6 +1504,21 @@ export var grStrings = {
       requiredIf: "Χρησιμοποιήστε το εικονίδιο του μαγικού ραβδιού για να ρυθμίσετε έναν κανόνα συνθήκης που αποτρέπει την υποβολή της έρευνας εκτός και αν τουλάχιστον μία ερώτηση έχει απάντηση.",
       showInMultipleColumns: "Όταν επιλεγεί, δημιουργεί μια ατομική στήλη για κάθε επιλογή.",
       colCount: "Διατάσσει τις επιλογές επιλογής σε διάταξη πολλαπλών στηλών. Όταν οριστεί σε 0, οι επιλογές εμφανίζονται σε μία γραμμή. Όταν οριστεί σε -1, η πραγματική τιμή κληρονομείται από την ιδιότητα \"Αριθμός εισχωρημένων στηλών\" του γονικού πίνακα."
+    },
+    slider: {
+      min: "Ο χαμηλότερος αριθμός που μπορούν να επιλέξουν οι χρήστες.",
+      max: "Ο μεγαλύτερος αριθμός που μπορούν να επιλέξουν οι χρήστες.",
+      step: "Το διάστημα μεταξύ των επιλέξιμων τιμών κλίμακας. Για παράδειγμα, ένα βήμα 5 θα επιτρέψει στους χρήστες να επιλέξουν 0, 5, 10 κ.λπ.",
+      minRangeLength: "Η ελάχιστη απόσταση μεταξύ των αντίχειρων του ρυθμιστικού που μπορεί να ορίσει ένας χρήστης.",
+      maxRangeLength: "Η μέγιστη απόσταση μεταξύ των αντίχειρων του ρυθμιστικού που μπορεί να ορίσει ένας χρήστης.",
+      labelCount: "Καθορίζει πόσες ετικέτες κλίμακας θα δημιουργηθούν. Η τιμή -1 σημαίνει ότι ο αριθμός υπολογίζεται αυτόματα με βάση την τιμή Min και την τιμή Max.",
+      labelFormat: "Χρησιμοποιήστε το '{0}' ως σύμβολο κράτησης θέσης για την πραγματική τιμή.",
+      customLabels: "Σας επιτρέπει να ορίσετε προσαρμοσμένες ετικέτες σε συγκεκριμένες τιμές και προαιρετικά να αντιστοιχίσετε αντίστοιχο κείμενο σε αυτές (π.χ. 0 = \"Κακή\", 100 = \"Εξαιρετική\").",
+      tooltipFormat: "Χρησιμοποιήστε το '{0}' ως σύμβολο κράτησης θέσης για την πραγματική τιμή.",
+      allowSwap: "Επιτρέπει στους χρήστες να μετακινούν τον έ��αν αντίχειρα πέρα από τον άλλο.",
+      allowClear: "Εμφανίζει ένα κουμπί που απαλείφει την επιλεγμένη τιμή ρυθμιστικού και την ορίζει ως απροσδιόριστη.",
+      minValueExpression: "Ορίζει δυναμικά την ελάχιστη τιμή του ρυθμιστικού χρησιμοποιώντας μια έκφραση. Υποστηρίζει βασικούς υπολογισμούς (π.χ., '{q1_id} + {q2_id}'), λογική Boolean (π.χ., '{age} > 60') και συναρτήσεις όπως 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' και άλλα.",
+      maxValueExpression: "Ορίζει δυναμικά τη μέγιστη τιμή του ρυθμιστικού χρησιμοποιώντας μια έκφραση. Υποστηρίζει βασικούς υπολογισμούς (π.χ., '{q1_id} + {q2_id}'), λογική Boolean (π.χ., '{age} > 60') και συναρτήσεις όπως 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' και άλλα."
     },
     isExclusive: "Κάνει αυτή την επιλογή αποκλειστική. Όταν επιλεγεί από έναν χρήστη, θα αποεπιλέξει αυτόματα όλες τις άλλες επιλογές στην ερώτηση.",
     caseInsensitive: "Επιλέξτε αν τα κεφαλαία και πεζά γράμματα στην κανονική έκφραση πρέπει να αντιμετωπίζονται ως ισοδύναμα.",
@@ -1853,3 +1879,27 @@ setupLocale({ localeCode: "gr", strings: grStrings });
 // sliderType.single: "Single-Value" => "Μία τιμή"
 // sliderType.range: "Range" => "Έκταση"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Κάνει αυτή την επιλογή αποκλειστική. Όταν επιλεγεί από έναν χρήστη, θα αποεπιλέξει αυτόματα όλες τις άλλες επιλογές στην ερώτηση."
+// ed.toolboxSearch: "Search" => "Αναζήτηση"
+// file.imageHeight: "Image height" => "Ύψος εικόνας"
+// file.imageWidth: "Image width" => "Πλάτος εικόνας"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Καθορίζει το ύψος εμφάνισης των μεταφορτωμένων εικόνων στην προεπισκόπηση και το πραγματικό ύψος των εικόνων που λαμβάνονται με την κάμερα. Στη λειτουργία μεταφόρτωσης ενός αρχείου, το ύψος της οθόνης περιορίζεται από την περιοχή προεπισκόπησης. Στη λειτουργία μεταφόρτωσης πολλαπλών αρχείων, περιορίζεται από την περιοχή μικρογραφιών."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Καθορίζει το πλάτος εμφάνισης των μεταφορτωμένων εικόνων στην προεπισκόπηση και το πραγματικό πλάτος των εικόνων που λαμβάνονται με την κάμερα. Στη λειτουργία μεταφόρτωσης ενός αρχείου, το πλάτος της οθόνης περιορίζεται από την περιοχή προεπισκόπησης. Στη λειτουργία μεταφόρτωσης πολλαπλών αρχείων, περιορίζεται από την περιοχή μικρογραφιών."
+// slider.min: "The lowest number that users can select." => "Ο χαμηλότερος αριθμός που μπορούν να επιλέξουν οι χρήστες."
+// slider.max: "The highest number that users can select." => "Ο μεγαλύτερος αριθμός που μπορούν να επιλέξουν οι χρήστες."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Το διάστημα μεταξύ των επιλέξιμων τιμών κλίμακας. Για παράδειγμα, ένα βήμα 5 θα επιτρέψει στους χρήστες να επιλέξουν 0, 5, 10 κ.λπ."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Η ελάχιστη απόσταση μεταξύ των αντίχειρων του ρυθμιστικού που μπορεί να ορίσει ένας χρήστης."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Η μέγιστη απόσταση μεταξύ των αντίχειρων του ρυθμιστικού που μπορεί να ορίσει ένας χρήστης."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Καθορίζει πόσες ετικέτες κλίμακας θα δημιουργηθούν. Η τιμή -1 σημαίνει ότι ο αριθμός υπολογίζεται αυτόματα με βάση την τιμή Min και την τιμή Max."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Χρησιμοποιήστε το '{0}' ως σύμβολο κράτησης θέσης για την πραγματική τιμή."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Σας επιτρέπει να ορίσετε προσαρμοσμένες ετικέτες σε συγκεκριμένες τιμές και προαιρετικά να αντιστοιχίσετε αντίστοιχο κείμενο σε αυτές (π.χ. 0 = \"Κακή\", 100 = \"Εξαιρετική\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Χρησιμοποιήστε το '{0}' ως σύμβολο κράτησης θέσης για την πραγματική τιμή."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Επιτρέπει στους χρήστες να μετακινούν τον έ��αν αντίχειρα πέρα από τον άλλο."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Εμφανίζει ένα κουμπί που απαλείφει την επιλεγμένη τιμή ρυθμιστικού και την ορίζει ως απροσδιόριστη."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Ορίζει δυναμικά την ελάχιστη τιμή του ρυθμιστικού χρησιμοποιώντας μια έκφραση. Υποστηρίζει βασικούς υπολογισμούς (π.χ., '{q1_id} + {q2_id}'), λογική Boolean (π.χ., '{age} > 60') και συναρτήσεις όπως 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' και άλλα."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Ορίζει δυναμικά τη μέγιστη τιμή του ρυθμιστικού χρησιμοποιώντας μια έκφραση. Υποστηρίζει βασικούς υπολογισμούς (π.χ., '{q1_id} + {q2_id}'), λογική Boolean (π.χ., '{age} > 60') και συναρτήσεις όπως 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' και άλλα."
+// slider.sliderType: "Slider type" => "Τύπος ρυθμιστικού"
+// slider.minRangeLength: "Min range length" => "Ελάχιστο μήκος εύρους"
+// slider.maxRangeLength: "Max range length" => "Μέγιστο μήκος εύρους"
+// slider.customLabels: "Custom labels" => "Προσαρμοσμένες ετικέτες"
+// slider.labelFormat: "Label format" => "Μορφή ετικέτας"
+// slider.tooltipFormat: "Tooltip format" => "Μορφή συμβουλής εργαλείου"

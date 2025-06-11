@@ -129,6 +129,7 @@ export var hebrewStrings = {
     generateReadableJSON: "צור JSON קריא",
     toolbox: "ארגז הכלים",
     "property-grid": "מאפיינים",
+    toolboxSearch: "חיפוש",
     toolboxFilteredTextPlaceholder: "הקלד כדי לחפש...",
     toolboxNoResultsFound: "לא נמצאו תוצאות",
     propertyGridFilteredTextPlaceholder: "הקלד כדי לחפש...",
@@ -754,7 +755,17 @@ export var hebrewStrings = {
       labelCount: "מספר התוויות שנוצרו באופן אוטומטי",
       minValueExpression: "ביטוי ערך מינימלי",
       maxValueExpression: "ביטוי ערך מקסימלי",
-      autoGenerate: "שינוי קנה מידה של תצורת תוויות"
+      autoGenerate: "שינוי קנה מידה של תצורת תוויות",
+      sliderType: "סוג מחוון",
+      minRangeLength: "אורך טווח מינימלי",
+      maxRangeLength: "אורך טווח מקסימלי",
+      customLabels: "תוויות מותאמות אישית",
+      labelFormat: "תבנית תווית",
+      tooltipFormat: "תבנית תיאור כלי"
+    },
+    file: {
+      imageHeight: "גובה תמונה",
+      imageWidth: "רוחב תמונה"
     },
     hideIfChoicesEmpty: "הסתר את השאלה אם אין בה בחירות",
     minWidth: "רוחב מינימלי (בערכים שמקובלים ב- CSS)",
@@ -1460,8 +1471,8 @@ export var hebrewStrings = {
       signatureAutoScaleEnabled: "בחר אם ברצונך שאזור החתימה ימלא את כל השטח הזמין בתיבת השאלה תוך שמירה על יחס הרוחב-גובה המוגדר כברירת מחדל של 3:2. כאשר מוגדרים ערכי רוחב וגובה מותאמים אישית, ההגדרה תשמור על יחס הרוחב-גובה של ממדים אלה."
     },
     file: {
-      imageHeight: "התאמת גובה התמונה בתוצאות הסקר.",
-      imageWidth: "התאמת רוחב התמונה בתוצאות הסקר.",
+      imageHeight: "מציין את גובה התצוגה של תמונות שהועלו בתצוגה המקדימה ואת הגובה בפועל של תמונות שצולמו במצלמה. במצב העלאת קובץ יחיד, גובה התצוגה מוגבל על ידי אזור התצוגה המקדימה; במצב העלאת קבצים מרובים, הוא מוגבל על ידי אזור התמונות הממוזערות.",
+      imageWidth: "מציין את רוחב התצוגה של תמונות שהועלו בתצוגה המקדימה ואת הרוחב בפועל של תמונות שצולמו במצלמה. במצב העלאת קובץ יחיד, רוחב התצוגה מוגבל על ידי אזור התצוגה המקדימה; במצב העלאת קבצים מרובים, הוא מוגבל על ידי אזור התמונות הממוזערות.",
       allowImagesPreview: "מציג תצוגות מקדימות של תמונות ממוזערות עבור קבצים שהועלו במידת האפשר. בטל את הבחירה אם ברצונך להציג סמלי קבצים במקום זאת."
     },
     image: {
@@ -1493,6 +1504,21 @@ export var hebrewStrings = {
       requiredIf: "השתמש בסמל מטה הקסם כדי להגדיר כלל תנאי המונע שליחת סקר, אלא אם לשאלה מקוננת אחת לפחות יש תשובה.",
       showInMultipleColumns: "כשבוחרים באפשרות זו, יוצר עמודה נפרדת לכל אחת מאפשרויות הבחירה.",
       colCount: "מסדר אפשרויות בחירה בפריסה מרובת עמודות. כאשר הן מוגדרות על 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננת\" של מטריצת האב."
+    },
+    slider: {
+      min: "המספר הנמוך ביותר שמשתמשים יכולים לבחור.",
+      max: "המספר הגבוה ביותר שמשתמשים יכולים לבחור.",
+      step: "המרווח בין ערכי קנה המידה הניתנים לבחירה. לדוגמה, שלב של 5 יאפשר למשתמשים לבחור 0, 5, 10 וכו'.",
+      minRangeLength: "המרחק המינימלי בין אגודלי המחוון שמשתמש יכול להגדיר.",
+      maxRangeLength: "המרחק המרבי בין אגודלי המחוון שמשתמש יכול להגדיר.",
+      labelCount: "מציין כמה תוויות קנה מידה יש ליצור. ערך של -1 פירושו שהמספר מחושב באופן אוטומטי בהתבסס על ערך המינימום והערך המקסימלי.",
+      labelFormat: "השתמש ב-'{0}' כמציין מיקום עבור הערך בפועל.",
+      customLabels: "מאפשר לך להגדיר תוויות מותאמות אישית בערכים ספציפיים ולהקצות להן טקסט מתאים (לדוגמה, 0 = \"גרוע\", 100 = \"מצוין\").",
+      tooltipFormat: "השתמש ב-'{0}' כמציין מיקום עבור הערך בפועל.",
+      allowSwap: "מאפשר למשתמשים להזיז אגודל אחד מעבר לשני.",
+      allowClear: "מציג לחצן שמנקה את ערך המחוון שנבחר ומגדיר אותו כלא מוגדר.",
+      minValueExpression: "מגדיר את הערך המינימלי של המחוון באופן דינמי באמצעות ביטוי. תומך בחישובים בסיסיים (למשל, '{q1_id} + {q2_id}'), לוגיקה בוליאנית (למשל, '{age} > 60'), ופונקציות כמו 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ועוד.",
+      maxValueExpression: "מגדיר את הערך המרבי של המחוון באופן דינמי באמצעות ביטוי. תומך בחישובים בסיסיים (למשל, '{q1_id} + {q2_id}'), לוגיקה בוליאנית (למשל, '{age} > 60'), ופונקציות כמו 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ועוד."
     },
     isExclusive: "הופך את הבחירה הזו לבלעדית. כאשר הוא נבחר על ידי משתמש, הוא יבטל אוטומטית את הבחירה בכל האפשרויות האחרות בשאלה.",
     caseInsensitive: "בחר אם יש להתייחס לאותיות רישיות וקטנות בביטוי הרגיל כשוות ערך.",
@@ -2666,3 +2692,27 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // sliderType.single: "Single-Value" => "ערך יחיד"
 // sliderType.range: "Range" => "טווח"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "הופך את הבחירה הזו לבלעדית. כאשר הוא נבחר על ידי משתמש, הוא יבטל אוטומטית את הבחירה בכל האפשרויות האחרות בשאלה."
+// ed.toolboxSearch: "Search" => "חיפוש"
+// file.imageHeight: "Image height" => "גובה תמונה"
+// file.imageWidth: "Image width" => "רוחב תמונה"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "מציין את גובה התצוגה של תמונות שהועלו בתצוגה המקדימה ואת הגובה בפועל של תמונות שצולמו במצלמה. במצב העלאת קובץ יחיד, גובה התצוגה מוגבל על ידי אזור התצוגה המקדימה; במצב העלאת קבצים מרובים, הוא מוגבל על ידי אזור התמונות הממוזערות."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "מציין את רוחב התצוגה של תמונות שהועלו בתצוגה המקדימה ואת הרוחב בפועל של תמונות שצולמו במצלמה. במצב העלאת קובץ יחיד, רוחב התצוגה מוגבל על ידי אזור התצוגה המקדימה; במצב העלאת קבצים מרובים, הוא מוגבל על ידי אזור התמונות הממוזערות."
+// slider.min: "The lowest number that users can select." => "המספר הנמוך ביותר שמשתמשים יכולים לבחור."
+// slider.max: "The highest number that users can select." => "המספר הגבוה ביותר שמשתמשים יכולים לבחור."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "המרווח בין ערכי קנה המידה הניתנים לבחירה. לדוגמה, שלב של 5 יאפשר למשתמשים לבחור 0, 5, 10 וכו'."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "המרחק המינימלי בין אגודלי המחוון שמשתמש יכול להגדיר."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "המרחק המרבי בין אגודלי המחוון שמשתמש יכול להגדיר."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "מציין כמה תוויות קנה מידה יש ליצור. ערך של -1 פירושו שהמספר מחושב באופן אוטומטי בהתבסס על ערך המינימום והערך המקסימלי."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "השתמש ב-'{0}' כמציין מיקום עבור הערך בפועל."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "מאפשר לך להגדיר תוויות מותאמות אישית בערכים ספציפיים ולהקצות להן טקסט מתאים (לדוגמה, 0 = \"גרוע\", 100 = \"מצוין\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "השתמש ב-'{0}' כמציין מיקום עבור הערך בפועל."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "מאפשר למשתמשים להזיז אגודל אחד מעבר לשני."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "מציג לחצן שמנקה את ערך המחוון שנבחר ומגדיר אותו כלא מוגדר."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "מגדיר את הערך המינימלי של המחוון באופן דינמי באמצעות ביטוי. תומך בחישובים בסיסיים (למשל, '{q1_id} + {q2_id}'), לוגיקה בוליאנית (למשל, '{age} > 60'), ופונקציות כמו 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ועוד."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "מגדיר את הערך המרבי של המחוון באופן דינמי באמצעות ביטוי. תומך בחישובים בסיסיים (למשל, '{q1_id} + {q2_id}'), לוגיקה בוליאנית (למשל, '{age} > 60'), ופונקציות כמו 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ועוד."
+// slider.sliderType: "Slider type" => "סוג מחוון"
+// slider.minRangeLength: "Min range length" => "אורך טווח מינימלי"
+// slider.maxRangeLength: "Max range length" => "אורך טווח מקסימלי"
+// slider.customLabels: "Custom labels" => "תוויות מותאמות אישית"
+// slider.labelFormat: "Label format" => "תבנית תווית"
+// slider.tooltipFormat: "Tooltip format" => "תבנית תיאור כלי"

@@ -129,6 +129,7 @@ var italianTranslation = {
     generateReadableJSON: "Genera JSON Leggibile",
     toolbox: "Toolbox",
     "property-grid": "Proprietà",
+    toolboxSearch: "Ricerca",
     toolboxFilteredTextPlaceholder: "Digita per cercare...",
     toolboxNoResultsFound: "Nessun risultato trovato",
     propertyGridFilteredTextPlaceholder: "Digita per cercare...",
@@ -754,7 +755,17 @@ var italianTranslation = {
       labelCount: "Numero di etichette generate automaticamente",
       minValueExpression: "Espressione del valore minimo",
       maxValueExpression: "Espressione del valore massimo",
-      autoGenerate: "Configurazione delle etichette della bilancia"
+      autoGenerate: "Configurazione delle etichette della bilancia",
+      sliderType: "Tipo di cursore",
+      minRangeLength: "Lunghezza minima dell'intervallo",
+      maxRangeLength: "Lunghezza massima della portata",
+      customLabels: "Etichette personalizzate",
+      labelFormat: "Formato etichetta",
+      tooltipFormat: "Formato della descrizione comando"
+    },
+    file: {
+      imageHeight: "Altezza dell'immagine",
+      imageWidth: "Larghezza dell'immagine"
     },
     hideIfChoicesEmpty: "Nascondi la domanda se non ci sono scelte",
     minWidth: "Larghezza minima (in valori accettati da CSS)",
@@ -1460,8 +1471,8 @@ var italianTranslation = {
       signatureAutoScaleEnabled: "Selezionare questa opzione se si desidera che l'area della firma occupi tutto lo spazio disponibile all'interno della casella della domanda, mantenendo le proporzioni 3:2 predefinite. Quando vengono impostati valori di larghezza e altezza personalizzati, l'impostazione manterrà le proporzioni di queste dimensioni."
     },
     file: {
-      imageHeight: "Regola l'altezza dell'immagine nei risultati del rilevamento.",
-      imageWidth: "Regola la larghezza dell'immagine nei risultati del rilevamento.",
+      imageHeight: "Specifica l'altezza di visualizzazione delle immagini caricate nell'anteprima e l'altezza effettiva delle immagini scattate con la fotocamera. Nella modalità di caricamento di un singolo file, l'altezza di visualizzazione è limitata dall'area di anteprima; Nella modalità di caricamento di più file, è limitato dall'area delle miniature.",
+      imageWidth: "Specifica la larghezza di visualizzazione delle immagini caricate nell'anteprima e la larghezza effettiva delle immagini scattate con la fotocamera. Nella modalità di caricamento di un singolo file, la larghezza di visualizzazione è limitata dall'area di anteprima; Nella modalità di caricamento di più file, è limitato dall'area delle miniature.",
       allowImagesPreview: "Visualizza le anteprime in miniatura per i file caricati, quando possibile. Deseleziona se desideri mostrare le icone dei file."
     },
     image: {
@@ -1493,6 +1504,21 @@ var italianTranslation = {
       requiredIf: "Utilizza l'icona della bacchetta magica per impostare una regola condizionale che impedisca l'invio dell'indagine a meno che almeno una domanda nidificata non abbia una risposta.",
       showInMultipleColumns: "Quando questa opzione è selezionata, crea una singola colonna per ogni opzione di scelta.",
       colCount: "Dispone le opzioni di scelta in un layout a più colonne. Se impostato su 0, le opzioni vengono visualizzate in una singola riga. Se impostato su -1, il valore effettivo viene ereditato dalla proprietà \"Conteggio colonne nidificate\" della matrice padre."
+    },
+    slider: {
+      min: "Il numero più basso che gli utenti possono selezionare.",
+      max: "Il numero più alto che gli utenti possono selezionare.",
+      step: "L'intervallo tra i valori di scala selezionabili. Ad esempio, un passo di 5 consentirà agli utenti di selezionare 0, 5, 10, ecc.",
+      minRangeLength: "La distanza minima tra i pollici del dispositivo di scorrimento che un utente può impostare.",
+      maxRangeLength: "La distanza massima tra i pollici del dispositivo di scorrimento che un utente può impostare.",
+      labelCount: "Specifica il numero di etichette di scala da generare. Un valore di -1 significa che il numero viene calcolato automaticamente in base al valore Min e al valore Max.",
+      labelFormat: "Utilizza \"{0}\" come segnaposto per il valore effettivo.",
+      customLabels: "Consente di definire etichette personalizzate con valori specifici e di assegnare loro facoltativamente il testo corrispondente (ad esempio, 0 = \"Scarso\", 100 = \"Eccellente\").",
+      tooltipFormat: "Utilizza \"{0}\" come segnaposto per il valore effettivo.",
+      allowSwap: "Consente agli utenti di spostare un pollice oltre l'altro.",
+      allowClear: "Visualizza un pulsante che cancella il valore del dispositivo di scorrimento selezionato e lo imposta su non definito.",
+      minValueExpression: "Definisce il valore minimo del dispositivo di scorrimento in modo dinamico utilizzando un'espressione. Supporta calcoli di base (ad esempio, '{q1_id} + {q2_id}'), logica booleana (ad esempio, '{age} > 60') e funzioni come 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' e altro ancora.",
+      maxValueExpression: "Definisce il valore massimo del dispositivo di scorrimento in modo dinamico utilizzando un'espressione. Supporta calcoli di base (ad esempio, '{q1_id} + {q2_id}'), logica booleana (ad esempio, '{age} > 60') e funzioni come 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' e altro ancora."
     },
     isExclusive: "Rende questa scelta esclusiva. Quando viene selezionato da un utente, deseleziona automaticamente tutte le altre opzioni nella domanda.",
     caseInsensitive: "Selezionare se le lettere maiuscole e minuscole nell'espressione regolare devono essere considerate equivalenti.",
@@ -2860,3 +2886,27 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // sliderType.single: "Single-Value" => "Valore singolo"
 // sliderType.range: "Range" => "Gamma"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Rende questa scelta esclusiva. Quando viene selezionato da un utente, deseleziona automaticamente tutte le altre opzioni nella domanda."
+// ed.toolboxSearch: "Search" => "Ricerca"
+// file.imageHeight: "Image height" => "Altezza dell'immagine"
+// file.imageWidth: "Image width" => "Larghezza dell'immagine"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Specifica l'altezza di visualizzazione delle immagini caricate nell'anteprima e l'altezza effettiva delle immagini scattate con la fotocamera. Nella modalità di caricamento di un singolo file, l'altezza di visualizzazione è limitata dall'area di anteprima; Nella modalità di caricamento di più file, è limitato dall'area delle miniature."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Specifica la larghezza di visualizzazione delle immagini caricate nell'anteprima e la larghezza effettiva delle immagini scattate con la fotocamera. Nella modalità di caricamento di un singolo file, la larghezza di visualizzazione è limitata dall'area di anteprima; Nella modalità di caricamento di più file, è limitato dall'area delle miniature."
+// slider.min: "The lowest number that users can select." => "Il numero più basso che gli utenti possono selezionare."
+// slider.max: "The highest number that users can select." => "Il numero più alto che gli utenti possono selezionare."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "L'intervallo tra i valori di scala selezionabili. Ad esempio, un passo di 5 consentirà agli utenti di selezionare 0, 5, 10, ecc."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "La distanza minima tra i pollici del dispositivo di scorrimento che un utente può impostare."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "La distanza massima tra i pollici del dispositivo di scorrimento che un utente può impostare."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Specifica il numero di etichette di scala da generare. Un valore di -1 significa che il numero viene calcolato automaticamente in base al valore Min e al valore Max."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Utilizza \"{0}\" come segnaposto per il valore effettivo."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Consente di definire etichette personalizzate con valori specifici e di assegnare loro facoltativamente il testo corrispondente (ad esempio, 0 = \"Scarso\", 100 = \"Eccellente\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Utilizza \"{0}\" come segnaposto per il valore effettivo."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Consente agli utenti di spostare un pollice oltre l'altro."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Visualizza un pulsante che cancella il valore del dispositivo di scorrimento selezionato e lo imposta su non definito."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definisce il valore minimo del dispositivo di scorrimento in modo dinamico utilizzando un'espressione. Supporta calcoli di base (ad esempio, '{q1_id} + {q2_id}'), logica booleana (ad esempio, '{age} > 60') e funzioni come 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' e altro ancora."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definisce il valore massimo del dispositivo di scorrimento in modo dinamico utilizzando un'espressione. Supporta calcoli di base (ad esempio, '{q1_id} + {q2_id}'), logica booleana (ad esempio, '{age} > 60') e funzioni come 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' e altro ancora."
+// slider.sliderType: "Slider type" => "Tipo di cursore"
+// slider.minRangeLength: "Min range length" => "Lunghezza minima dell'intervallo"
+// slider.maxRangeLength: "Max range length" => "Lunghezza massima della portata"
+// slider.customLabels: "Custom labels" => "Etichette personalizzate"
+// slider.labelFormat: "Label format" => "Formato etichetta"
+// slider.tooltipFormat: "Tooltip format" => "Formato della descrizione comando"

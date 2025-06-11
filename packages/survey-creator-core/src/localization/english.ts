@@ -758,7 +758,13 @@ export var enStrings = {
       labelCount: "Number of auto-generated labels",
       minValueExpression: "Min value expression",
       maxValueExpression: "Max value expression",
-      autoGenerate: "Scale labels configuration"
+      autoGenerate: "Scale labels configuration",
+      sliderType: "Slider type",
+      minRangeLength: "Min range length",
+      maxRangeLength: "Max range length",
+      customLabels: "Custom labels",
+      labelFormat: "Label format",
+      tooltipFormat: "Tooltip format"
     },
     file: {
       imageHeight: "Image height",
@@ -1506,6 +1512,21 @@ export var enStrings = {
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
       showInMultipleColumns: "When selected, creates an individual column for each choice option.",
       colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix.",
+    },
+    slider: {
+      min: "The lowest number that users can select.",
+      max: "The highest number that users can select.",
+      step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc.",
+      minRangeLength: "The minimum distance between the slider thumbs a user can set.",
+      maxRangeLength: "The maximum distance between the slider thumbs a user can set.",
+      labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value.",
+      labelFormat: "Use `{0}` as a placeholder for the actual value.",
+      customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\").",
+      tooltipFormat: "Use `{0}` as a placeholder for the actual value.",
+      allowSwap: "Allows users to move one thumb past the other.",
+      allowClear: "Displays a button that clears the selected slider value and sets it to undefined.",
+      minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more.",
+      maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more."
     },
     isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question.",
     caseInsensitive: "Select if uppercase and lowercase letters in the regular expression must be treated as equivalent.",

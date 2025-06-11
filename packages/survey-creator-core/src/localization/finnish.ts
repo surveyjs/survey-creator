@@ -129,6 +129,7 @@ export var fiStrings = {
     generateReadableJSON: "Luo luettava JSON",
     toolbox: "Työkalupakki",
     "property-grid": "Ominaisuudet",
+    toolboxSearch: "Etsiä",
     toolboxFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
     toolboxNoResultsFound: "Tuloksia ei löytynyt",
     propertyGridFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
@@ -754,7 +755,17 @@ export var fiStrings = {
       labelCount: "Automaattisesti luotujen tarrojen määrä",
       minValueExpression: "Minimiarvon lauseke",
       maxValueExpression: "Maksimiarvon lauseke",
-      autoGenerate: "Skaalausotsikoiden määritys"
+      autoGenerate: "Skaalausotsikoiden määritys",
+      sliderType: "Liukusäätimen tyyppi",
+      minRangeLength: "Alueen vähimmäispituus",
+      maxRangeLength: "Suurin kantaman pituus",
+      customLabels: "Mukautetut tunnisteet",
+      labelFormat: "Etiketin muoto",
+      tooltipFormat: "Työkaluvihjeen muoto"
+    },
+    file: {
+      imageHeight: "Kuvan korkeus",
+      imageWidth: "Kuvan leveys"
     },
     hideIfChoicesEmpty: "Piilota kysymys, jos se ei sisällä vaihtoehtoja",
     minWidth: "Vähimmäisleveys (CSS-hyväksyttyinä arvoina)",
@@ -1460,8 +1471,8 @@ export var fiStrings = {
       signatureAutoScaleEnabled: "Valitse tämä, jos haluat, että allekirjoitusalue täyttää kaiken kysymysruudussa käytettävissä olevan tilan säilyttäen oletusarvoisen 3:2-kuvasuhteen. Kun mukautetut leveys- ja korkeusarvot on määritetty, asetus säilyttää näiden mittojen kuvasuhteen."
     },
     file: {
-      imageHeight: "Säätää kuvan korkeutta kyselyn tuloksissa.",
-      imageWidth: "Säätää kuvan leveyttä kyselyn tuloksissa.",
+      imageHeight: "Määrittää ladattujen kuvien näyttökorkeuden esikatselussa ja kameralla otettujen kuvien todellisen korkeuden. Yhden tiedoston lataustilassa esikatselualue rajoittaa näytön korkeutta. Usean tiedoston lataustilassa sitä rajoittaa pikkukuva-alue.",
+      imageWidth: "Määrittää ladattujen kuvien näyttöleveyden esikatselussa ja kameralla otettujen kuvien todellisen leveyden. Yhden tiedoston lataustilassa esikatselualue rajoittaa näytön leveyttä. Usean tiedoston lataustilassa sitä rajoittaa pikkukuva-alue.",
       allowImagesPreview: "Näyttää ladattujen tiedostojen pikkukuvien esikatselut, kun mahdollista. Poista valinta, jos haluat näyttää tiedostokuvakkeet sen sijaan."
     },
     image: {
@@ -1493,6 +1504,21 @@ export var fiStrings = {
       requiredIf: "Määritä taikasauvakuvakkeen avulla ehdollinen sääntö, joka estää kyselyn lähettämisen, ellei vähintään yhteen sisäkkäiseen kysymykseen ole vastausta.",
       showInMultipleColumns: "Kun tämä asetus on valittuna, kullekin vaihtoehdolle luodaan oma sarake.",
       colCount: "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, asetukset näytetään yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin sisäkkäisten sarakkeiden määrä -ominaisuudesta."
+    },
+    slider: {
+      min: "Pienin luku, jonka käyttäjät voivat valita.",
+      max: "Suurin luku, jonka käyttäjät voivat valita.",
+      step: "Valittavissa olevien asteikkoarvojen välinen aikaväli. Esimerkiksi vaihe 5 antaa käyttäjille mahdollisuuden valita 0, 5, 10 jne.",
+      minRangeLength: "Liukusäätimen peukaoiden välinen vähimmäisetäisyys, jonka käyttäjä voi asettaa.",
+      maxRangeLength: "Käyttäjän asettamien liukusäätimien peukaloiden välinen enimmäisetäisyys.",
+      labelCount: "Määrittää, kuinka monta asteikon otsikkoa luodaan. Arvo -1 tarkoittaa, että luku lasketaan automaattisesti minimi- ja maksimiarvojen perusteella.",
+      labelFormat: "Käytä \"{0}\" todellisen arvon paikkamerkkinä.",
+      customLabels: "Voit määrittää mukautettuja otsikoita tietyillä arvoilla ja halutessasi määrittää niille vastaavan tekstin (esim. 0 = \"Huono\", 100 = \"Erinomainen\").",
+      tooltipFormat: "Käytä \"{0}\" todellisen arvon paikkamerkkinä.",
+      allowSwap: "Antaa käyttäjien siirtää peukalon toisen ohi.",
+      allowClear: "Näyttää painikkeen, joka tyhjentää valitun liukusäätimen arvon ja asettaa sen määrittämättömäksi.",
+      minValueExpression: "Määrittää liukusäätimen vähimmäisarvon dynaamisesti lausekkeen avulla. Tukee peruslaskutoimituksia (esim. '{q1_id} + {q2_id}'), Boolen logiikkaa (esim. '{age} > 60') ja funktioita, kuten 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ja paljon muuta.",
+      maxValueExpression: "Määrittää liukusäätimen enimmäisarvon dynaamisesti lausekkeen avulla. Tukee peruslaskutoimituksia (esim. '{q1_id} + {q2_id}'), Boolen logiikkaa (esim. '{age} > 60') ja funktioita, kuten 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ja paljon muuta."
     },
     isExclusive: "Tekee tästä valinnasta eksklusiivisen. Kun käyttäjä valitsee sen, se poistaa automaattisesti kaikkien muiden kysymyksen vaihtoehtojen valinnan.",
     caseInsensitive: "Valitse, onko säännöllisen lausekkeen isoja ja pieniä kirjaimia käsiteltävä vastaavina.",
@@ -3073,3 +3099,27 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // sliderType.single: "Single-Value" => "Yksittäinen arvo"
 // sliderType.range: "Range" => "Etäisyys"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Tekee tästä valinnasta eksklusiivisen. Kun käyttäjä valitsee sen, se poistaa automaattisesti kaikkien muiden kysymyksen vaihtoehtojen valinnan."
+// ed.toolboxSearch: "Search" => "Etsiä"
+// file.imageHeight: "Image height" => "Kuvan korkeus"
+// file.imageWidth: "Image width" => "Kuvan leveys"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Määrittää ladattujen kuvien näyttökorkeuden esikatselussa ja kameralla otettujen kuvien todellisen korkeuden. Yhden tiedoston lataustilassa esikatselualue rajoittaa näytön korkeutta. Usean tiedoston lataustilassa sitä rajoittaa pikkukuva-alue."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Määrittää ladattujen kuvien näyttöleveyden esikatselussa ja kameralla otettujen kuvien todellisen leveyden. Yhden tiedoston lataustilassa esikatselualue rajoittaa näytön leveyttä. Usean tiedoston lataustilassa sitä rajoittaa pikkukuva-alue."
+// slider.min: "The lowest number that users can select." => "Pienin luku, jonka käyttäjät voivat valita."
+// slider.max: "The highest number that users can select." => "Suurin luku, jonka käyttäjät voivat valita."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Valittavissa olevien asteikkoarvojen välinen aikaväli. Esimerkiksi vaihe 5 antaa käyttäjille mahdollisuuden valita 0, 5, 10 jne."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Liukusäätimen peukaoiden välinen vähimmäisetäisyys, jonka käyttäjä voi asettaa."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Käyttäjän asettamien liukusäätimien peukaloiden välinen enimmäisetäisyys."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Määrittää, kuinka monta asteikon otsikkoa luodaan. Arvo -1 tarkoittaa, että luku lasketaan automaattisesti minimi- ja maksimiarvojen perusteella."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Käytä \"{0}\" todellisen arvon paikkamerkkinä."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Voit määrittää mukautettuja otsikoita tietyillä arvoilla ja halutessasi määrittää niille vastaavan tekstin (esim. 0 = \"Huono\", 100 = \"Erinomainen\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Käytä \"{0}\" todellisen arvon paikkamerkkinä."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Antaa käyttäjien siirtää peukalon toisen ohi."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Näyttää painikkeen, joka tyhjentää valitun liukusäätimen arvon ja asettaa sen määrittämättömäksi."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Määrittää liukusäätimen vähimmäisarvon dynaamisesti lausekkeen avulla. Tukee peruslaskutoimituksia (esim. '{q1_id} + {q2_id}'), Boolen logiikkaa (esim. '{age} > 60') ja funktioita, kuten 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ja paljon muuta."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Määrittää liukusäätimen enimmäisarvon dynaamisesti lausekkeen avulla. Tukee peruslaskutoimituksia (esim. '{q1_id} + {q2_id}'), Boolen logiikkaa (esim. '{age} > 60') ja funktioita, kuten 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ja paljon muuta."
+// slider.sliderType: "Slider type" => "Liukusäätimen tyyppi"
+// slider.minRangeLength: "Min range length" => "Alueen vähimmäispituus"
+// slider.maxRangeLength: "Max range length" => "Suurin kantaman pituus"
+// slider.customLabels: "Custom labels" => "Mukautetut tunnisteet"
+// slider.labelFormat: "Label format" => "Etiketin muoto"
+// slider.tooltipFormat: "Tooltip format" => "Työkaluvihjeen muoto"

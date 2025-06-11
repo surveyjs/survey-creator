@@ -129,6 +129,7 @@ export var hrStrings = {
     generateReadableJSON: "Generiranje čitljivog JSON",
     toolbox: "Alatni okvir",
     "property-grid": "Svojstva",
+    toolboxSearch: "Pretraživanje",
     toolboxFilteredTextPlaceholder: "Upišite za pretraživanje...",
     toolboxNoResultsFound: "Nisu pronađeni rezultati",
     propertyGridFilteredTextPlaceholder: "Upišite za pretraživanje...",
@@ -754,7 +755,17 @@ export var hrStrings = {
       labelCount: "Broj automatski generiranih naljepnica",
       minValueExpression: "Izraz minimalne vrijednosti",
       maxValueExpression: "Izraz maksimalne vrijednosti",
-      autoGenerate: "Konfiguracija naljepnica vage"
+      autoGenerate: "Konfiguracija naljepnica vage",
+      sliderType: "Vrsta klizača",
+      minRangeLength: "Minimalna duljina raspona",
+      maxRangeLength: "Maksimalna duljina dometa",
+      customLabels: "Prilagođene naljepnice",
+      labelFormat: "Format naljepnice",
+      tooltipFormat: "Format opisa alata"
+    },
+    file: {
+      imageHeight: "Visina slike",
+      imageWidth: "Širina slike"
     },
     hideIfChoicesEmpty: "Sakrij pitanje ako ne sadrži izbora",
     minWidth: "Minimalna širina (u CSS-prihvaćenim vrijednostima)",
@@ -1460,8 +1471,8 @@ export var hrStrings = {
       signatureAutoScaleEnabled: "Odaberite želite li da područje potpisa ispuni sav raspoloživi prostor unutar okvira pitanja uz zadržavanje zadanog omjera slike 3:2. Kada su postavljene prilagođene vrijednosti širine i visine, postavka će zadržati omjer slike tih dimenzija."
     },
     file: {
-      imageHeight: "Podešava visinu slike u rezultatima upitnika.",
-      imageWidth: "Podešava širinu slike u rezultatima upitnika.",
+      imageHeight: "Određuje visinu prikaza prenesenih slika u pregledu i stvarnu visinu slika snimljenih fotoaparatom. U načinu prijenosa jedne datoteke, visina prikaza ograničena je područjem pregleda; U načinu prijenosa više datoteka ograničen je područjem sličica.",
+      imageWidth: "Određuje širinu prikaza prenesenih slika u pregledu i stvarnu širinu slika snimljenih fotoaparatom. U načinu prijenosa jedne datoteke, širina prikaza ograničena je područjem pregleda; U načinu prijenosa više datoteka ograničen je područjem sličica.",
       allowImagesPreview: "Prikazuje pretpreglede minijatura za prenesene datoteke kada je to moguće. Poništite odabir želite li umjesto toga prikazati ikone datoteka."
     },
     image: {
@@ -1493,6 +1504,21 @@ export var hrStrings = {
       requiredIf: "Pomoću ikone čarobnog štapića postavite uvjetno pravilo koje sprječava slanje upitnika, osim ako barem jedno ugniježđeno pitanje nema odgovor.",
       showInMultipleColumns: "Kada je odabrano, stvara pojedinačni stupac za svaku mogućnost izbora.",
       colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
+    },
+    slider: {
+      min: "Najniži broj koji korisnici mogu odabrati.",
+      max: "Najveći broj koji korisnici mogu odabrati.",
+      step: "Interval između vrijednosti ljestvice koje se mogu odabrati. Na primjer, korak od 5 omogućit će korisnicima da odaberu 0, 5, 10 itd.",
+      minRangeLength: "Minimalna udaljenost između palčeva klizača koje korisnik može postaviti.",
+      maxRangeLength: "Maksimalna udaljenost između palčeva klizača koje korisnik može postaviti.",
+      labelCount: "Određuje koliko oznaka ljestvice treba generirati. Vrijednost -1 znači da se broj izračunava automatski na temelju vrijednosti Min i Max vrijednosti.",
+      labelFormat: "Upotrijebite '{0}' kao rezervirano mjesto za stvarnu vrijednost.",
+      customLabels: "Omogućuje vam definiranje prilagođenih oznaka na određenim vrijednostima i opcionalno im dodijelite odgovarajući tekst (npr. 0 = \"Loše\", 100 = \"Izvrsno\").",
+      tooltipFormat: "Upotrijebite '{0}' kao rezervirano mjesto za stvarnu vrijednost.",
+      allowSwap: "Omogućuje korisnicima pomicanje jednog palca preko drugog.",
+      allowClear: "Prikazuje gumb koji briše odabranu vrijednost klizača i postavlja je na nedefinirano.",
+      minValueExpression: "Dinamički definira minimalnu vrijednost klizača pomoću izraza. Podržava osnovne izračune (npr. '{q1_id} + {q2_id}'), Booleovu logiku (npr. '{age} > 60') i funkcije kao što su 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i još mnogo toga.",
+      maxValueExpression: "Dinamički definira maksimalnu vrijednost klizača pomoću izraza. Podržava osnovne izračune (npr. '{q1_id} + {q2_id}'), Booleovu logiku (npr. '{age} > 60') i funkcije kao što su 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i još mnogo toga."
     },
     isExclusive: "Čini ovaj izbor ekskluzivnim. Kada korisnik odabere, automatski će poništiti odabir svih ostalih opcija u pitanju.",
     caseInsensitive: "Odaberite ako se velika i mala slova u regularnom izrazu moraju tretirati kao ekvivalentna.",
@@ -3093,3 +3119,27 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // sliderType.single: "Single-Value" => "Jedna vrijednost"
 // sliderType.range: "Range" => "Domet"
 // pehelp.isExclusive: "Makes this choice exclusive. When selected by a user, it will automatically deselect all other options in the question." => "Čini ovaj izbor ekskluzivnim. Kada korisnik odabere, automatski će poništiti odabir svih ostalih opcija u pitanju."
+// ed.toolboxSearch: "Search" => "Pretraživanje"
+// file.imageHeight: "Image height" => "Visina slike"
+// file.imageWidth: "Image width" => "Širina slike"
+// file.imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Određuje visinu prikaza prenesenih slika u pregledu i stvarnu visinu slika snimljenih fotoaparatom. U načinu prijenosa jedne datoteke, visina prikaza ograničena je područjem pregleda; U načinu prijenosa više datoteka ograničen je područjem sličica."
+// file.imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area." => "Određuje širinu prikaza prenesenih slika u pregledu i stvarnu širinu slika snimljenih fotoaparatom. U načinu prijenosa jedne datoteke, širina prikaza ograničena je područjem pregleda; U načinu prijenosa više datoteka ograničen je područjem sličica."
+// slider.min: "The lowest number that users can select." => "Najniži broj koji korisnici mogu odabrati."
+// slider.max: "The highest number that users can select." => "Najveći broj koji korisnici mogu odabrati."
+// slider.step: "The interval between selectable scale values. For example, a step of 5 will allow users to select 0, 5, 10, etc." => "Interval između vrijednosti ljestvice koje se mogu odabrati. Na primjer, korak od 5 omogućit će korisnicima da odaberu 0, 5, 10 itd."
+// slider.minRangeLength: "The minimum distance between the slider thumbs a user can set." => "Minimalna udaljenost između palčeva klizača koje korisnik može postaviti."
+// slider.maxRangeLength: "The maximum distance between the slider thumbs a user can set." => "Maksimalna udaljenost između palčeva klizača koje korisnik može postaviti."
+// slider.labelCount: "Specifies how many scale labels to generate. A value of -1 means the number is calculated automatically based on the Min value and Max value." => "Određuje koliko oznaka ljestvice treba generirati. Vrijednost -1 znači da se broj izračunava automatski na temelju vrijednosti Min i Max vrijednosti."
+// slider.labelFormat: "Use `{0}` as a placeholder for the actual value." => "Upotrijebite '{0}' kao rezervirano mjesto za stvarnu vrijednost."
+// slider.customLabels: "Allows you to define custom labels at specific values and optionally assign corresponding text to them (e.g., 0 = \"Poor\", 100 = \"Excellent\")." => "Omogućuje vam definiranje prilagođenih oznaka na određenim vrijednostima i opcionalno im dodijelite odgovarajući tekst (npr. 0 = \"Loše\", 100 = \"Izvrsno\")."
+// slider.tooltipFormat: "Use `{0}` as a placeholder for the actual value." => "Upotrijebite '{0}' kao rezervirano mjesto za stvarnu vrijednost."
+// slider.allowSwap: "Allows users to move one thumb past the other." => "Omogućuje korisnicima pomicanje jednog palca preko drugog."
+// slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Prikazuje gumb koji briše odabranu vrijednost klizača i postavlja je na nedefinirano."
+// slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dinamički definira minimalnu vrijednost klizača pomoću izraza. Podržava osnovne izračune (npr. '{q1_id} + {q2_id}'), Booleovu logiku (npr. '{age} > 60') i funkcije kao što su 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i još mnogo toga."
+// slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dinamički definira maksimalnu vrijednost klizača pomoću izraza. Podržava osnovne izračune (npr. '{q1_id} + {q2_id}'), Booleovu logiku (npr. '{age} > 60') i funkcije kao što su 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i još mnogo toga."
+// slider.sliderType: "Slider type" => "Vrsta klizača"
+// slider.minRangeLength: "Min range length" => "Minimalna duljina raspona"
+// slider.maxRangeLength: "Max range length" => "Maksimalna duljina dometa"
+// slider.customLabels: "Custom labels" => "Prilagođene naljepnice"
+// slider.labelFormat: "Label format" => "Format naljepnice"
+// slider.tooltipFormat: "Tooltip format" => "Format opisa alata"
