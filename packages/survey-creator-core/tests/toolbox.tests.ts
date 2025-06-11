@@ -157,7 +157,7 @@ test("toolbox default categories actions separator", (): any => {
 test("toolbox default categories", (): any => {
   var toolbox = new QuestionToolbox(undefined, undefined, true);
   expect(toolbox.categories.length).toBe(5);
-  expect(toolbox.categories[0].items.length).toBe(9);
+  expect(toolbox.categories[0].items.length).toBe(10);
   expect(toolbox.categories[1].items.length).toBe(3);
   expect(toolbox.categories[2].items.length).toBe(2);
   expect(toolbox.categories[3].items.length).toBe(3);
