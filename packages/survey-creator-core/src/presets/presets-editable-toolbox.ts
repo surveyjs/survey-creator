@@ -223,8 +223,33 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private resetCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
     const category = row.getValue("category");
     const defaultItems = this.defaultItems.filter(i => i.category == category);
-    const value = this.getQuestionCategories(model);
-    value.filter(v => v.category == category)[0].items = defaultItems;
+    const categoriesQuestion = this.getQuestionCategories(model);
+    const hiddenItemsQuestion = this.getMatrix(model);
+    const hiddenValue = hiddenItemsQuestion.value || [];
+    const value = categoriesQuestion.value;
+    const categoryRow = value.filter(v => v.category == category)[0];
+    categoryRow.items.forEach(i => {
+      if (!defaultItems.some(di => di.name == i.name)) {
+        hiddenValue.push(i);
+      }
+    });
+    categoryRow.items = defaultItems;
+    function clearItemFromDefault(items: any) {
+      if (!items) return;
+      defaultItems.forEach(di => {
+        const index = items.findIndex(i => i.name == di.name);
+        if (index >= 0) items.splice(index, 1);
+      });
+    }
+    value.filter(v => v.category != category).forEach(v => {
+      defaultItems.forEach(di => {
+        clearItemFromDefault(v.items);
+      });
+    });
+    clearItemFromDefault(hiddenValue);
+
+    hiddenItemsQuestion.value = hiddenValue;
+    categoriesQuestion.value = value;
   }
   protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if (this.isItemsMatrix(options.question)) {

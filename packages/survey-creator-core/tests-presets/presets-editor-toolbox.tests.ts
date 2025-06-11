@@ -200,3 +200,29 @@ test("Preset edit, toolbox - switch to categories mode", () => {
   survey.getQuestionByName("toolbox_mode").value = "categories";
   expect(categQuestion.value.filter(с => с.category == "general")[0].items.map(i => i.name)).toStrictEqual(["custom", "custom2"]);
 });
+
+test("Preset edit, toolbox - reset category", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+  const hiddenQuestion = survey.getQuestionByName("toolbox_matrix");
+  const categValue = categQuestion.value;
+
+  categValue.filter(c => c.category == "containers")[0].items = [{ name: "matrix" }, { name: "panel" }];
+  categValue.filter(c => c.category == "matrix")[0].items = [{ name: "paneldynamic" }, { name: "matrixdynamic" }];
+  categValue.filter(c => c.category == "text")[0].items = [{ name: "text" }, { name: "multipletext" }];
+
+  hiddenQuestion.value = [{ name: "comment" }, { name: "matrixdropdown" }];
+
+  const row = categQuestion.visibleRows.filter(r => r.getValue("category") == "matrix")[0];
+  const renderedRow = categQuestion.renderedTable.rows.filter(r => r.row == row)[0];
+  renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "reset-to-default")[0].action();
+
+  const categValue2 = categQuestion.value;
+
+  expect(categValue2.filter(c => c.category == "containers")[0].items.map(i => i.name)).toEqual(["panel"]);
+  expect(categValue2.filter(c => c.category == "matrix")[0].items.map(i => i.name)).toEqual(["matrix", "matrixdropdown", "matrixdynamic"]);
+  expect(categValue2.filter(c => c.category == "text")[0].items.map(i => i.name)).toEqual(["text", "multipletext"]);
+
+  expect(hiddenQuestion.value.map(i => i.name)).toEqual(["comment", "paneldynamic"]);
+});
