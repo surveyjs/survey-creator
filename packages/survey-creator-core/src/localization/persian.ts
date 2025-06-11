@@ -755,7 +755,13 @@ var persianStrings = {
       labelCount: "تعداد برچسب های تولید شده به صورت خودکار",
       minValueExpression: "بیان حداقل مقدار",
       maxValueExpression: "بیان حداکثر مقدار",
-      autoGenerate: "پیکربندی برچسب های مقیاس بندی"
+      autoGenerate: "پیکربندی برچسب های مقیاس بندی",
+      sliderType: "نوع کشویی",
+      minRangeLength: "حداقل طول محدوده",
+      maxRangeLength: "حداکثر طول برد",
+      customLabels: "برچسب های سفارشی",
+      labelFormat: "فرمت برچسب",
+      tooltipFormat: "فرمت راهنمای ابزار"
     },
     file: {
       imageHeight: "ارتفاع تصویر",
@@ -3092,3 +3098,9 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "دکمه ای را نمایش می دهد که مقدار نوار لغزنده انتخاب شده را پاک می کند و آن را روی undefined تنظیم می کند."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "حداقل مقدار نوار لغزنده را به صورت پویا با استفاده از یک عبارت تعریف می کند. از محاسبات اولیه (به عنوان مثال، '{q1_id} + {q2_id}')، منطق بولین (به عنوان مثال، '{age} > 60') و توابعی مانند 'iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()' و موارد دیگر پشتیبانی م�� کند."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "حداکثر مقدا�� نوار لغزنده را به صورت پویا با استفاده از یک عبارت تعریف می کند. از محاسبات اولیه (به عنوان مثال، '{q1_id} + {q2_id}')، منطق بولین (به عنوان مثال، '{age} > 60') و توابعی مانند 'iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()' و موارد دیگر پشتیبانی می کند."
+// slider.sliderType: "Slider type" => "نوع کشویی"
+// slider.minRangeLength: "Min range length" => "حداقل طول محدوده"
+// slider.maxRangeLength: "Max range length" => "حداکثر طول برد"
+// slider.customLabels: "Custom labels" => "برچسب های سفارشی"
+// slider.labelFormat: "Label format" => "فرمت برچسب"
+// slider.tooltipFormat: "Tooltip format" => "فرمت راهنمای ابزار"

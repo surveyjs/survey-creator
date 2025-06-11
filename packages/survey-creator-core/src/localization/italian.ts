@@ -755,7 +755,13 @@ var italianTranslation = {
       labelCount: "Numero di etichette generate automaticamente",
       minValueExpression: "Espressione del valore minimo",
       maxValueExpression: "Espressione del valore massimo",
-      autoGenerate: "Configurazione delle etichette della bilancia"
+      autoGenerate: "Configurazione delle etichette della bilancia",
+      sliderType: "Tipo di cursore",
+      minRangeLength: "Lunghezza minima dell'intervallo",
+      maxRangeLength: "Lunghezza massima della portata",
+      customLabels: "Etichette personalizzate",
+      labelFormat: "Formato etichetta",
+      tooltipFormat: "Formato della descrizione comando"
     },
     file: {
       imageHeight: "Altezza dell'immagine",
@@ -2898,3 +2904,9 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Visualizza un pulsante che cancella il valore del dispositivo di scorrimento selezionato e lo imposta su non definito."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definisce il valore minimo del dispositivo di scorrimento in modo dinamico utilizzando un'espressione. Supporta calcoli di base (ad esempio, '{q1_id} + {q2_id}'), logica booleana (ad esempio, '{age} > 60') e funzioni come 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' e altro ancora."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definisce il valore massimo del dispositivo di scorrimento in modo dinamico utilizzando un'espressione. Supporta calcoli di base (ad esempio, '{q1_id} + {q2_id}'), logica booleana (ad esempio, '{age} > 60') e funzioni come 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' e altro ancora."
+// slider.sliderType: "Slider type" => "Tipo di cursore"
+// slider.minRangeLength: "Min range length" => "Lunghezza minima dell'intervallo"
+// slider.maxRangeLength: "Max range length" => "Lunghezza massima della portata"
+// slider.customLabels: "Custom labels" => "Etichette personalizzate"
+// slider.labelFormat: "Label format" => "Formato etichetta"
+// slider.tooltipFormat: "Tooltip format" => "Formato della descrizione comando"

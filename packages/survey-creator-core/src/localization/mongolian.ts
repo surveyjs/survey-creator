@@ -755,7 +755,13 @@ export var mnStrings = {
       labelCount: "Автоматаар үүсгэсэн шошгоны тоо",
       minValueExpression: "Хамгийн бага илэрхийлэл",
       maxValueExpression: "Хамгийн их хэмжээний илэрхийлэл",
-      autoGenerate: "Шошгоны тохиргоог хэмжих"
+      autoGenerate: "Шошгоны тохиргоог хэмжих",
+      sliderType: "Слайдерын төрөл",
+      minRangeLength: "Хамгийн бага диапазонын урт",
+      maxRangeLength: "Хамгийн их зайны урт",
+      customLabels: "Custom labels",
+      labelFormat: "Шошгоны хэлбэр",
+      tooltipFormat: "Tooltip формат"
     },
     file: {
       imageHeight: "Зургийн өндөр",
@@ -2792,3 +2798,9 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Сонгосон слайдерын утгыг цэвэрлэж undefined болгох товчлуурыг харуулна."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Слайдерын хамгийн бага үнэ цэнийг илэрхийлэл ашиглан динамик байдлаар тодорхойлно. Үндсэн тооцоолол (жишээ нь, '{q1_id} + {q2_id}'), Boolean logic (жишээ нь, '{age} > 60'), мөн 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' зэрэг функц��удыг дэмждэг."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Слайдерын хамгийн их үнэ цэнийг илэрхийлэл ашиглан динамик байдлаар тодорхойлно. Үндсэн тооцоолол (жишээ нь, '{q1_id} + {q2_id}'), Boolean logic (жишээ нь, '{age} > 60'), мөн 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' зэрэг функцуудыг дэмждэг."
+// slider.sliderType: "Slider type" => "Слайдерын төрөл"
+// slider.minRangeLength: "Min range length" => "Хамгийн бага диапазонын урт"
+// slider.maxRangeLength: "Max range length" => "Хамгийн их зайны урт"
+// slider.customLabels: "Custom labels" => "Custom labels"
+// slider.labelFormat: "Label format" => "Шошгоны хэлбэр"
+// slider.tooltipFormat: "Tooltip format" => "Tooltip формат"

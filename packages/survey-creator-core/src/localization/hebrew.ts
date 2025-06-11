@@ -755,7 +755,13 @@ export var hebrewStrings = {
       labelCount: "מספר התוויות שנוצרו באופן אוטומטי",
       minValueExpression: "ביטוי ערך מינימלי",
       maxValueExpression: "ביטוי ערך מקסימלי",
-      autoGenerate: "שינוי קנה מידה של תצורת תוויות"
+      autoGenerate: "שינוי קנה מידה של תצורת תוויות",
+      sliderType: "סוג מחוון",
+      minRangeLength: "אורך טווח מינימלי",
+      maxRangeLength: "אורך טווח מקסימלי",
+      customLabels: "תוויות מותאמות אישית",
+      labelFormat: "תבנית תווית",
+      tooltipFormat: "תבנית תיאור כלי"
     },
     file: {
       imageHeight: "גובה תמונה",
@@ -2704,3 +2710,9 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "מציג לחצן שמנקה את ערך המחוון שנבחר ומגדיר אותו כלא מוגדר."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "מגדיר את הערך המינימלי של המחוון באופן דינמי באמצעות ביטוי. תומך בחישובים בסיסיים (למשל, '{q1_id} + {q2_id}'), לוגיקה בוליאנית (למשל, '{age} > 60'), ופונקציות כמו 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ועוד."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "מגדיר את הערך המרבי של המחוון באופן דינמי באמצעות ביטוי. תומך בחישובים בסיסיים (למשל, '{q1_id} + {q2_id}'), לוגיקה בוליאנית (למשל, '{age} > 60'), ופונקציות כמו 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ועוד."
+// slider.sliderType: "Slider type" => "סוג מחוון"
+// slider.minRangeLength: "Min range length" => "אורך טווח מינימלי"
+// slider.maxRangeLength: "Max range length" => "אורך טווח מקסימלי"
+// slider.customLabels: "Custom labels" => "תוויות מותאמות אישית"
+// slider.labelFormat: "Label format" => "תבנית תווית"
+// slider.tooltipFormat: "Tooltip format" => "תבנית תיאור כלי"

@@ -755,7 +755,13 @@ export const thStrings = {
       labelCount: "จํานวนป้ายกํากับที่สร้างขึ้นโดยอัตโนมัติ",
       minValueExpression: "นิพจน์ค่าต่ําสุด",
       maxValueExpression: "นิพจน์ค่าสูงสุด",
-      autoGenerate: "การกําหนดค่าป้ายชื่อมาตราส่วน"
+      autoGenerate: "การกําหนดค่าป้ายชื่อมาตราส่วน",
+      sliderType: "ประเภทตัวเลื่อน",
+      minRangeLength: "ความยาวช่วงต่ําสุด",
+      maxRangeLength: "ความยาวช่วงสูงสุด",
+      customLabels: "ป้ายกํากับที่กําหนดเอง",
+      labelFormat: "รูปแบบฉลาก",
+      tooltipFormat: "รูปแบบคําแนะนําเครื่องมือ"
     },
     file: {
       imageHeight: "ความสูงของภาพ",
@@ -2077,3 +2083,9 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "แสดงปุ่มที่ล้างค่าแถบเลื่อนที่เลือกและตั้งค่าเป็น undefined"
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "กําหนดค่าต่ําสุดของแถบเลื่อนแบบไดนามิกโดยใช้นิพจน์ รองรับการคํานวณพื้นฐาน (เช่น '{q1_id} + {q2_id}') ตรรกะบูลีน (เช่น '{age} > 60') และฟังก์ชันต่างๆ เช่น 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' และอื่นๆ"
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "กําหนดค่าสูงสุดของแถบเลื่อนแบบไดนามิกโดยใช้นิพจน์ รองรับการคํานวณพื้นฐาน (เช่น '{q1_id} + {q2_id}') ตรรกะบูลีน (เช่น '{age} > 60') และฟังก์ชันต่างๆ เช่น 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' และอื่นๆ"
+// slider.sliderType: "Slider type" => "ประเภทตัวเลื่อน"
+// slider.minRangeLength: "Min range length" => "ความยาวช่วงต่ําสุด"
+// slider.maxRangeLength: "Max range length" => "ความยาวช่วงสูงสุด"
+// slider.customLabels: "Custom labels" => "ป้ายกํากับที่กําหนดเอง"
+// slider.labelFormat: "Label format" => "รูปแบบฉลาก"
+// slider.tooltipFormat: "Tooltip format" => "รูปแบบคําแนะนําเครื่องมือ"

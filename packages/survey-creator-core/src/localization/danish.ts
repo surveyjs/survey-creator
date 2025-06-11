@@ -755,7 +755,13 @@ export var danishStrings = {
       labelCount: "Antal automatisk genererede etiketter",
       minValueExpression: "Udtryk for min. værdi",
       maxValueExpression: "Udtryk for maks. værdi",
-      autoGenerate: "Konfiguration af skaleringsetiketter"
+      autoGenerate: "Konfiguration af skaleringsetiketter",
+      sliderType: "Skyder type",
+      minRangeLength: "Min. rækkevidde længde",
+      maxRangeLength: "Maks. rækkevidde længde",
+      customLabels: "Brugerdefinerede etiketter",
+      labelFormat: "Etiket format",
+      tooltipFormat: "Værktøjstip-format"
     },
     file: {
       imageHeight: "Billedets højde",
@@ -3321,3 +3327,9 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Viser en knap, der rydder den valgte skyderværdi og indstiller den til udefineret."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definerer skyderens minimumværdi dynamisk ved hjælp af et udtryk. Understøtter grundlæggende beregninger (f.eks. '{q1_id} + {q2_id}'), boolsk logik (f.eks. '{age} > 60') og funktioner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' og mere."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definerer skyderens maksimumværdi dynamisk ved hjælp af et udtryk. Understøtter grundlæggende beregninger (f.eks. '{q1_id} + {q2_id}'), boolsk logik (f.eks. '{age} > 60') og funktioner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' og mere."
+// slider.sliderType: "Slider type" => "Skyder type"
+// slider.minRangeLength: "Min range length" => "Min. rækkevidde længde"
+// slider.maxRangeLength: "Max range length" => "Maks. rækkevidde længde"
+// slider.customLabels: "Custom labels" => "Brugerdefinerede etiketter"
+// slider.labelFormat: "Label format" => "Etiket format"
+// slider.tooltipFormat: "Tooltip format" => "Værktøjstip-format"

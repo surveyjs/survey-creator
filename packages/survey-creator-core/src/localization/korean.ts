@@ -755,7 +755,13 @@ export var koreanStrings = {
       labelCount: "자동 생성된 레이블의 수",
       minValueExpression: "최소값 표현식",
       maxValueExpression: "최대 값 표현식",
-      autoGenerate: "레이블 구성 크기 조정"
+      autoGenerate: "레이블 구성 크기 조정",
+      sliderType: "슬라이더 유형",
+      minRangeLength: "최소 범위 길이",
+      maxRangeLength: "최대 범위 길이",
+      customLabels: "사용자 지정 레이블",
+      labelFormat: "라벨 형식",
+      tooltipFormat: "툴팁 형식"
     },
     file: {
       imageHeight: "이미지 높이",
@@ -3341,3 +3347,9 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "선택한 슬라이더 값을 지우고 undefined로 설정하는 버튼을 표시합니다."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "표현식을 사용하여 슬라이더의 최소값을 동적���로 정의합니다. 기본 계산(예: '{q1_id} + {q2_id}'), 부울 논리(예: '{age} > 60') 및 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등과 같은 함수를 지원합니다."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "표현식을 사용하여 슬라이더의 최대값을 동적으로 정의합니다. 기본 계산(예: '{q1_id} + {q2_id}'), 부울 논리(예: '{age} > 60') 및 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등과 같은 함수를 지원합니다."
+// slider.sliderType: "Slider type" => "슬라이더 유형"
+// slider.minRangeLength: "Min range length" => "최소 범위 길이"
+// slider.maxRangeLength: "Max range length" => "최대 범위 길이"
+// slider.customLabels: "Custom labels" => "사용자 지정 레이블"
+// slider.labelFormat: "Label format" => "라벨 형식"
+// slider.tooltipFormat: "Tooltip format" => "툴팁 형식"

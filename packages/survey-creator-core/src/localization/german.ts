@@ -755,7 +755,13 @@ var germanTranslation = {
       labelCount: "Anzahl der automatisch generierten Beschriftungen",
       minValueExpression: "Min-Wert-Ausdruck",
       maxValueExpression: "Ausdruck des Max. Werts",
-      autoGenerate: "Konfiguration von Skalenbeschriftungen"
+      autoGenerate: "Konfiguration von Skalenbeschriftungen",
+      sliderType: "Typ des Schiebereglers",
+      minRangeLength: "Länge des Min. Bereichs",
+      maxRangeLength: "Maximale Reichweitenlänge",
+      customLabels: "Benutzerdefinierte Etiketten",
+      labelFormat: "Format der Beschriftung",
+      tooltipFormat: "Tooltip-Format"
     },
     file: {
       imageHeight: "Bildhöhe",
@@ -2849,3 +2855,9 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Zeigt eine Schaltfläche an, die den ausgewählten Schiebereglerwert löscht und auf undefined setzt."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definiert den Mindestwert des Schiebereglers dynamisch mithilfe eines Ausdrucks. Unterstützt grundlegende Berechnungen (z. B. '{q1_id} + {q2_id}'), boolesche Logik (z. B. '{age} > 60') und Funktionen wie 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' und mehr."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definiert den Maximalwert des Schiebereglers dynamisch mithilfe eines Ausdrucks. Unterstützt grundlegende Berechnungen (z. B. '{q1_id} + {q2_id}'), boolesche Logik (z. B. '{age} > 60') und Funktionen wie 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' und mehr."
+// slider.sliderType: "Slider type" => "Typ des Schiebereglers"
+// slider.minRangeLength: "Min range length" => "Länge des Min. Bereichs"
+// slider.maxRangeLength: "Max range length" => "Maximale Reichweitenlänge"
+// slider.customLabels: "Custom labels" => "Benutzerdefinierte Etiketten"
+// slider.labelFormat: "Label format" => "Format der Beschriftung"
+// slider.tooltipFormat: "Tooltip format" => "Tooltip-Format"

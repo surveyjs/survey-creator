@@ -755,7 +755,13 @@ export let svStrings = {
       labelCount: "Antal automatiskt genererade etiketter",
       minValueExpression: "Uttryck för minsta värde",
       maxValueExpression: "Uttryck för maximalt värde",
-      autoGenerate: "Konfiguration av skalningsetiketter"
+      autoGenerate: "Konfiguration av skalningsetiketter",
+      sliderType: "Typ av skjutreglage",
+      minRangeLength: "Minsta räckviddslängd",
+      maxRangeLength: "Maximal räckviddslängd",
+      customLabels: "Anpassade etiketter",
+      labelFormat: "Etikettens format",
+      tooltipFormat: "Format för knappbeskrivningar"
     },
     file: {
       imageHeight: "Bildens höjd",
@@ -3311,3 +3317,9 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Visar en knapp som rensar det valda skjutreglagets värde och ställer in det på odefinierat."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definierar skjutreglagets minimivärde dynamiskt med hjälp av ett uttryck. Stöder grundläggande beräkningar (t.ex. {q1_id} + {q2_id}), boolesk logik (t.ex. {age} > 60') och funktioner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' med mera."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definierar skjutreglagets maximala värde dynamiskt med hjälp av ett uttryck. Stöder grundläggande beräkningar (t.ex. {q1_id} + {q2_id}), boolesk logik (t.ex. {age} > 60') och funktioner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' med mera."
+// slider.sliderType: "Slider type" => "Typ av skjutreglage"
+// slider.minRangeLength: "Min range length" => "Minsta räckviddslängd"
+// slider.maxRangeLength: "Max range length" => "Maximal räckviddslängd"
+// slider.customLabels: "Custom labels" => "Anpassade etiketter"
+// slider.labelFormat: "Label format" => "Etikettens format"
+// slider.tooltipFormat: "Tooltip format" => "Format för knappbeskrivningar"

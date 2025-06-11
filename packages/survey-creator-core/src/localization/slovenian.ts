@@ -755,7 +755,13 @@ export var slStrings = {
       labelCount: "Število samodejno ustvarjenih nalepk",
       minValueExpression: "Izraz najmanjše vrednosti",
       maxValueExpression: "Izraz največje vrednosti",
-      autoGenerate: "Konfiguracija nalepk merila"
+      autoGenerate: "Konfiguracija nalepk merila",
+      sliderType: "Vrsta drsnika",
+      minRangeLength: "Najmanjša dolžina razpona",
+      maxRangeLength: "Največja dolžina območja",
+      customLabels: "Oznake po meri",
+      labelFormat: "Oblika nalepke",
+      tooltipFormat: "Oblika opisa orodja"
     },
     file: {
       imageHeight: "Višina slike",
@@ -1911,3 +1917,9 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Prikaže gumb, ki počisti izbrano vrednost drsnika in jo nastavi na nedoločeno."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dinamično določa najmanjšo vrednost drsnika z uporabo izraza. Podpira osnovne izračune (npr. '{q1_id} + {q2_id}'), logično logiko (npr. '{age} > 60') in funkcije, kot so 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' in še več."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dinamično določa največjo vrednost drsnika z uporabo izraza. Podpira osnovne izračune (npr. '{q1_id} + {q2_id}'), logično logiko (npr. '{age} > 60') in funkcije, kot so 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' in še več."
+// slider.sliderType: "Slider type" => "Vrsta drsnika"
+// slider.minRangeLength: "Min range length" => "Najmanjša dolžina razpona"
+// slider.maxRangeLength: "Max range length" => "Največja dolžina območja"
+// slider.customLabels: "Custom labels" => "Oznake po meri"
+// slider.labelFormat: "Label format" => "Oblika nalepke"
+// slider.tooltipFormat: "Tooltip format" => "Oblika opisa orodja"

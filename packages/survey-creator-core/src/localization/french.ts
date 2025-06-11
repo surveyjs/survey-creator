@@ -755,7 +755,13 @@ var frenchTranslation = {
       labelCount: "Nombre d’étiquettes générées automatiquement",
       minValueExpression: "Expression de la valeur min",
       maxValueExpression: "Expression de la valeur maximale",
-      autoGenerate: "Configuration des étiquettes d’échelle"
+      autoGenerate: "Configuration des étiquettes d’échelle",
+      sliderType: "Type de curseur",
+      minRangeLength: "Longueur minimale de la plage",
+      maxRangeLength: "Longueur maximale de la portée",
+      customLabels: "Étiquettes personnalisées",
+      labelFormat: "Format de l’étiquette",
+      tooltipFormat: "Format de l’infobulle"
     },
     file: {
       imageHeight: "Hauteur de l’image",
@@ -3196,3 +3202,9 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Affiche un bouton qui efface la valeur du curseur sélectionnée et la définit sur undefined."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Définit la valeur minimale du curseur de manière dynamique à l’aide d’une expression. Prend en charge les calculs de base (par exemple, '{q1_id} + {q2_id}'), la logique booléenne (par exemple, '{age} > 60'), et des fonctions telles que 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Définit la valeur maximale du curseur de manière dynamique à l’aide d’une expression. Prend en charge les calculs de base (par exemple, '{q1_id} + {q2_id}'), la logique booléenne (par exemple, '{age} > 60'), et des fonctions telles que 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc."
+// slider.sliderType: "Slider type" => "Type de curseur"
+// slider.minRangeLength: "Min range length" => "Longueur minimale de la plage"
+// slider.maxRangeLength: "Max range length" => "Longueur maximale de la portée"
+// slider.customLabels: "Custom labels" => "Étiquettes personnalisées"
+// slider.labelFormat: "Label format" => "Format de l’étiquette"
+// slider.tooltipFormat: "Tooltip format" => "Format de l’infobulle"

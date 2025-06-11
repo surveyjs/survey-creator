@@ -755,7 +755,13 @@ export const roStrings = {
       labelCount: "Numărul de etichete generate automat",
       minValueExpression: "Expresia valorii minime",
       maxValueExpression: "Expresie valoare maximă",
-      autoGenerate: "Configurarea etichetelor de scară"
+      autoGenerate: "Configurarea etichetelor de scară",
+      sliderType: "Tip glisor",
+      minRangeLength: "Lungimea minimă a intervalului",
+      maxRangeLength: "Lungimea maximă a intervalului",
+      customLabels: "Etichete personalizate",
+      labelFormat: "Formatul etichetei",
+      tooltipFormat: "Formatul sfatului ecran"
     },
     file: {
       imageHeight: "Înălțimea imaginii",
@@ -2077,3 +2083,9 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Afișează un buton care șterge valoarea glisorului selectată și o setează la nedefinită."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definește valoarea minimă a glisorului în mod dinamic folosind o expresie. Suportă calcule de bază (de exemplu, '{q1_id} + {q2_id}'), logică booleană (de exemplu, '{age} > 60') și funcții precum 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' și multe altele."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definește valoarea maximă a glisorului în mod dinamic folosind o expresie. Suportă calcule de bază (de exemplu, '{q1_id} + {q2_id}'), logică booleană (de exemplu, '{age} > 60') și funcții precum 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' și multe altele."
+// slider.sliderType: "Slider type" => "Tip glisor"
+// slider.minRangeLength: "Min range length" => "Lungimea minimă a intervalului"
+// slider.maxRangeLength: "Max range length" => "Lungimea maximă a intervalului"
+// slider.customLabels: "Custom labels" => "Etichete personalizate"
+// slider.labelFormat: "Label format" => "Formatul etichetei"
+// slider.tooltipFormat: "Tooltip format" => "Formatul sfatului ecran"

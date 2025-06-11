@@ -755,7 +755,13 @@ export var jaStrings = {
       labelCount: "自動生成されたラベルの数",
       minValueExpression: "最小値式",
       maxValueExpression: "最大値の式",
-      autoGenerate: "スケール ラベルの構成"
+      autoGenerate: "スケール ラベルの構成",
+      sliderType: "スライダータイプ",
+      minRangeLength: "最小範囲の長さ",
+      maxRangeLength: "最大範囲の長さ",
+      customLabels: "カスタムラベル",
+      labelFormat: "ラベル形式",
+      tooltipFormat: "ツールチップの形式"
     },
     file: {
       imageHeight: "画像の高さ",
@@ -3136,3 +3142,9 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "選択したスライダーの値をクリアし、未定義に設定するボタンを表示します。"
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "スライダの最小値を式を使用して動的に定義します。基本的な計算 (例: '{q1_id} + {q2_id}')、ブール論理 (例: '{age} > 60')、および 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などの関数をサポートします。"
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "スライダの最大値を式を使用して動的に定義します。基本的な計算 (例: '{q1_id} + {q2_id}')、ブール論理 (例: '{age} > 60')、および 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などの関数をサポートします。"
+// slider.sliderType: "Slider type" => "スライダータイプ"
+// slider.minRangeLength: "Min range length" => "最小範囲の長さ"
+// slider.maxRangeLength: "Max range length" => "最大範囲の長さ"
+// slider.customLabels: "Custom labels" => "カスタムラベル"
+// slider.labelFormat: "Label format" => "ラベル形式"
+// slider.tooltipFormat: "Tooltip format" => "ツールチップの形式"

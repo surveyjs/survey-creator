@@ -755,7 +755,13 @@ export var ruStrings = {
       labelCount: "Количество автоматически сгенерированных меток",
       minValueExpression: "Выражение минимального значения",
       maxValueExpression: "Выражение максимального значения",
-      autoGenerate: "Настройка этикеток шкалы"
+      autoGenerate: "Настройка этикеток шкалы",
+      sliderType: "Тип слайдера",
+      minRangeLength: "Минимальная длина диапазона",
+      maxRangeLength: "Максимальная длина диапазона",
+      customLabels: "Пользовательские этикетки",
+      labelFormat: "Формат этикетки",
+      tooltipFormat: "Формат всплывающей подсказки"
     },
     file: {
       imageHeight: "Высота изображения",
@@ -3192,3 +3198,9 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Отображает кнопку, которая очищает выбранное значение ползунка и устанавливает его в неопределенное положение."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Динамически определяет минимальное значение ползунка с помощью выражения. Поддерживает базовые вычисления (например, '{q1_id} + {q2_id}'), булеву логику (например, '{age} > 60') и функции, такие как 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и другие."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Динамически определяет максимальное значение ползунка с помощью выражения. Поддерживает базовые вычисления (например, '{q1_id} + {q2_id}'), булеву логику (например, '{age} > 60') и функции, такие как 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и другие."
+// slider.sliderType: "Slider type" => "Тип слайдера"
+// slider.minRangeLength: "Min range length" => "Минимальная длина диапазона"
+// slider.maxRangeLength: "Max range length" => "Максимальная длина диапазона"
+// slider.customLabels: "Custom labels" => "Пользовательские этикетки"
+// slider.labelFormat: "Label format" => "Формат этикетки"
+// slider.tooltipFormat: "Tooltip format" => "Формат всплывающей подсказки"

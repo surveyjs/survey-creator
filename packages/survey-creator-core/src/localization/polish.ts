@@ -755,7 +755,13 @@ var polishStrings = {
       labelCount: "Liczba automatycznie wygenerowanych etykiet",
       minValueExpression: "Wyrażenie wartości minimalnej",
       maxValueExpression: "Wyrażenie wartości maksymalnej",
-      autoGenerate: "Konfiguracja etykiet skalowania"
+      autoGenerate: "Konfiguracja etykiet skalowania",
+      sliderType: "Typ suwaka",
+      minRangeLength: "Minimalna długość zakresu",
+      maxRangeLength: "Maksymalna długość zasięgu",
+      customLabels: "Etykiety niestandardowe",
+      labelFormat: "Format etykiety",
+      tooltipFormat: "Format podpowiedzi"
     },
     file: {
       imageHeight: "Wysokość obrazu",
@@ -3402,3 +3408,9 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Wyświetla przycisk, który czyści wybraną wartość suwaka i ustawia ją na niezdefiniowaną."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dynamicznie definiuje minimalną wartość suwaka za pomocą wyrażenia. Obsługuje podstawowe obliczenia (np. '{q1_id} + {q2_id}'), logikę logiczną (np. '{wiek} > 60') oraz funkcje takie jak 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i inne."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dynamicznie definiuje maksymalną wartość suwaka za pomocą wyrażenia. Obsługuje podstawowe obliczenia (np. '{q1_id} + {q2_id}'), logikę logiczną (np. '{wiek} > 60') oraz funkcje takie jak 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i inne."
+// slider.sliderType: "Slider type" => "Typ suwaka"
+// slider.minRangeLength: "Min range length" => "Minimalna długość zakresu"
+// slider.maxRangeLength: "Max range length" => "Maksymalna długość zasięgu"
+// slider.customLabels: "Custom labels" => "Etykiety niestandardowe"
+// slider.labelFormat: "Label format" => "Format etykiety"
+// slider.tooltipFormat: "Tooltip format" => "Format podpowiedzi"

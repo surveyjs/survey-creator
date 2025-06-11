@@ -758,7 +758,13 @@ export var enStrings = {
       labelCount: "Number of auto-generated labels",
       minValueExpression: "Min value expression",
       maxValueExpression: "Max value expression",
-      autoGenerate: "Scale labels configuration"
+      autoGenerate: "Scale labels configuration",
+      sliderType: "Slider type",
+      minRangeLength: "Min range length",
+      maxRangeLength: "Max range length",
+      customLabels: "Custom labels",
+      labelFormat: "Label format",
+      tooltipFormat: "Tooltip format"
     },
     file: {
       imageHeight: "Image height",

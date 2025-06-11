@@ -755,7 +755,13 @@ var traditionalChineseTranslation = {
       labelCount: "自動生成的標籤數量",
       minValueExpression: "最小值表達式",
       maxValueExpression: "最大值表達式",
-      autoGenerate: "刻度標籤配置"
+      autoGenerate: "刻度標籤配置",
+      sliderType: "滑塊類型",
+      minRangeLength: "最小範圍長度",
+      maxRangeLength: "最大範圍長度",
+      customLabels: "自訂標籤",
+      labelFormat: "標籤格式",
+      tooltipFormat: "工具提示格式"
     },
     file: {
       imageHeight: "圖像高度",
@@ -3407,3 +3413,9 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "顯示一個按鈕，用於清除選定的滑塊值並將其設置為 undefined。"
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "使用表達式動態定義滑塊的最小值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。"
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "使用表達式動態定義滑塊的最大值。支援基本計算（例如 '{q1_id} + {q2_id}'）、布爾邏輯（例如 '{age} > 60'），以及 'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等函數。"
+// slider.sliderType: "Slider type" => "滑塊類型"
+// slider.minRangeLength: "Min range length" => "最小範圍長度"
+// slider.maxRangeLength: "Max range length" => "最大範圍長度"
+// slider.customLabels: "Custom labels" => "自訂標籤"
+// slider.labelFormat: "Label format" => "標籤格式"
+// slider.tooltipFormat: "Tooltip format" => "工具提示格式"

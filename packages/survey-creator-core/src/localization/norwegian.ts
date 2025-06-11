@@ -755,7 +755,13 @@ export var nbStrings = {
       labelCount: "Antall automatisk genererte etiketter",
       minValueExpression: "Uttrykk for minste verdi",
       maxValueExpression: "Uttrykk for maksverdi",
-      autoGenerate: "Konfigurasjon av skaleringsetiketter"
+      autoGenerate: "Konfigurasjon av skaleringsetiketter",
+      sliderType: "Type glidebryter",
+      minRangeLength: "Min rekkevidde lengde",
+      maxRangeLength: "Maks rekkevidde lengde",
+      customLabels: "Tilpassede etiketter",
+      labelFormat: "Etikett format",
+      tooltipFormat: "Format for verktøytips"
     },
     file: {
       imageHeight: "Høyde på bildet",
@@ -3139,3 +3145,9 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Viser en knapp som fjerner den valgte glidebryterverdien og setter den til udefinert."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definerer glidebryterens minimumsverdi dynamisk ved hjelp av et uttrykk. Støtter grunnleggende beregninger (f.eks. '{q1_id} + {q2_id}'), boolsk logikk (f.eks. '{age} > 60'), og funksjoner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' og mer."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definerer glidebryterens maksimumsverdi dynamisk ved hjelp av et uttrykk. Støtter grunnleggende beregninger (f.eks. '{q1_id} + {q2_id}'), boolsk logikk (f.eks. '{age} > 60'), og funksjoner som 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' og mer."
+// slider.sliderType: "Slider type" => "Type glidebryter"
+// slider.minRangeLength: "Min range length" => "Min rekkevidde lengde"
+// slider.maxRangeLength: "Max range length" => "Maks rekkevidde lengde"
+// slider.customLabels: "Custom labels" => "Tilpassede etiketter"
+// slider.labelFormat: "Label format" => "Etikett format"
+// slider.tooltipFormat: "Tooltip format" => "Format for verktøytips"

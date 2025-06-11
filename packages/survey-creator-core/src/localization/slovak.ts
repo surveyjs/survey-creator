@@ -755,7 +755,13 @@ export var skStrings = {
       labelCount: "Počet automaticky vygenerovaných štítkov",
       minValueExpression: "Výraz minimálnej hodnoty",
       maxValueExpression: "Vyjadrenie maximálnej hodnoty",
-      autoGenerate: "Konfigurácia štítkov váhy"
+      autoGenerate: "Konfigurácia štítkov váhy",
+      sliderType: "Typ posúvača",
+      minRangeLength: "Minimálna dĺžka rozsahu",
+      maxRangeLength: "Maximálna dĺžka dosahu",
+      customLabels: "Vlastné štítky",
+      labelFormat: "Formát štítku",
+      tooltipFormat: "Formát popisu"
     },
     file: {
       imageHeight: "Výška obrázka",
@@ -3090,3 +3096,9 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Zobrazí tlačidlo, ktoré vymaže vybratú hodnotu jazdca a nastaví ju na nedefinované."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definuje minimálnu hodnotu jazdca dynamicky pomocou výrazu. Podporuje základné výpočty (napr. '{q1_id} + {q2_id}'), booleovskú logiku (napr. '{age} > 60') a funkcie ako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a ďalšie."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dynamicky definuje maximálnu hodnotu jazdca pomocou výrazu. Podporuje základné výpočty (napr. '{q1_id} + {q2_id}'), booleovskú logiku (napr. '{age} > 60') a funkcie ako 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' a ďalšie."
+// slider.sliderType: "Slider type" => "Typ posúvača"
+// slider.minRangeLength: "Min range length" => "Minimálna dĺžka rozsahu"
+// slider.maxRangeLength: "Max range length" => "Maximálna dĺžka dosahu"
+// slider.customLabels: "Custom labels" => "Vlastné štítky"
+// slider.labelFormat: "Label format" => "Formát štítku"
+// slider.tooltipFormat: "Tooltip format" => "Formát popisu"

@@ -755,7 +755,13 @@ export var arStrings = {
       labelCount: "عدد التصنيفات التي يتم إنشاؤها تلقائيا",
       minValueExpression: "الحد الأدنى للقيمة",
       maxValueExpression: "تعبير القيمة القصوى",
-      autoGenerate: "تكوين تسميات المقياس"
+      autoGenerate: "تكوين تسميات المقياس",
+      sliderType: "نوع شريط التمرير",
+      minRangeLength: "الحد الأدنى لطول النطاق",
+      maxRangeLength: "أقصى طول النطاق",
+      customLabels: "تسميات مخصصة",
+      labelFormat: "تنسيق التسمية",
+      tooltipFormat: "تنسيق تلميح الأداة"
     },
     file: {
       imageHeight: "ارتفاع الصورة",
@@ -3051,3 +3057,9 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "يعرض زرا يقوم بمسح قيمة شريط التمرير المحددة وتعيينها إلى غير محدد."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "يحدد الحد الأدنى لقيمة شريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنطقي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "يحدد القيمة القصوى لشريط التمرير ديناميكيا باستخدام تعبير. يدعم العمليات الحسابية الأساسية (على سبيل المثال ، '{q1_id} + {q2_id}') ، والمنطق المنط��ي (على سبيل المثال ، '{age} > 60') ، ووظائف مثل 'iif ()' و 'today ()' و 'age ()' و 'min ()' و 'max()' و 'avg ()' والمزيد."
+// slider.sliderType: "Slider type" => "نوع شريط التمرير"
+// slider.minRangeLength: "Min range length" => "الحد الأدنى لطول النطاق"
+// slider.maxRangeLength: "Max range length" => "أقصى طول النطاق"
+// slider.customLabels: "Custom labels" => "تسميات مخصصة"
+// slider.labelFormat: "Label format" => "تنسيق التسمية"
+// slider.tooltipFormat: "Tooltip format" => "تنسيق تلميح الأداة"

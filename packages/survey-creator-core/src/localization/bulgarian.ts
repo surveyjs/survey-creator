@@ -755,7 +755,13 @@ export var bgStrings = {
       labelCount: "Брой автоматично генерирани етикети",
       minValueExpression: "Минимален израз на стойност",
       maxValueExpression: "Израз на максимална стойност",
-      autoGenerate: "Конфигурация на етикети в мащаба"
+      autoGenerate: "Конфигурация на етикети в мащаба",
+      sliderType: "Тип плъзгач",
+      minRangeLength: "Минимална дължина на диапазона",
+      maxRangeLength: "Максимална дължина на обхвата",
+      customLabels: "Персонализирани етикети",
+      labelFormat: "Формат на етикета",
+      tooltipFormat: "Формат на подсказката"
     },
     file: {
       imageHeight: "Височина на изображението",
@@ -2700,3 +2706,9 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Показва бутон, кой��о изчиства избраната стойност на плъзгача и я задава на undefined."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Определя минималната стойност на плъзгача динамично с помощта на израз. Поддържа основни изчисления (напр. '{q1_id} + {q2_id}'), булева логика (напр. '{age} > 60') и функции като 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Определя максималната стойност на плъзгача динамично с помощта на израз. Поддържа основни изчисления (напр. '{q1_id} + {q2_id}'), булева логика (напр. '{age} > 60') и функции като 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др."
+// slider.sliderType: "Slider type" => "Тип плъзгач"
+// slider.minRangeLength: "Min range length" => "Минимална дължина на диапазона"
+// slider.maxRangeLength: "Max range length" => "Максимална дължина на обхвата"
+// slider.customLabels: "Custom labels" => "Персонализирани етикети"
+// slider.labelFormat: "Label format" => "Формат на етикета"
+// slider.tooltipFormat: "Tooltip format" => "Формат на подсказката"

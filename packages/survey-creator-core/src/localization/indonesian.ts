@@ -755,7 +755,13 @@ export var indonesianStrings = {
       labelCount: "Jumlah label yang dibuat secara otomatis",
       minValueExpression: "Ekspresi nilai min",
       maxValueExpression: "Ekspresi nilai maks",
-      autoGenerate: "Konfigurasi label skala"
+      autoGenerate: "Konfigurasi label skala",
+      sliderType: "Jenis penggeser",
+      minRangeLength: "Panjang rentang min",
+      maxRangeLength: "Panjang rentang maks",
+      customLabels: "Label khusus",
+      labelFormat: "Format label",
+      tooltipFormat: "Format tooltip"
     },
     file: {
       imageHeight: "Tinggi gambar",
@@ -3291,3 +3297,9 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Menampilkan tombol yang menghapus nilai penggeser yang dipilih dan mengaturnya ke tidak ditentukan."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Menentukan nilai minimum penggeser secara dinamis menggunakan ekspresi. Mendukung perhitungan dasar (misalnya, '{q1_id} + {q2_id}'), logika Boolean (misalnya, '{age} > 60'), dan fungsi seperti 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dan banyak lagi."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Menentukan nilai maksimum penggeser secara dinamis menggunakan ekspresi. Mendukung perhitungan dasar (misalnya, '{q1_id} + {q2_id}'), logika Boolean (misalnya, '{age} > 60'), dan fungsi seperti 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dan banyak lagi."
+// slider.sliderType: "Slider type" => "Jenis penggeser"
+// slider.minRangeLength: "Min range length" => "Panjang rentang min"
+// slider.maxRangeLength: "Max range length" => "Panjang rentang maks"
+// slider.customLabels: "Custom labels" => "Label khusus"
+// slider.labelFormat: "Label format" => "Format label"
+// slider.tooltipFormat: "Tooltip format" => "Format tooltip"

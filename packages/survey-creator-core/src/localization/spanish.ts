@@ -755,7 +755,13 @@ var spanishTranslation = {
       labelCount: "Número de etiquetas generadas automáticamente",
       minValueExpression: "Expresión de valor mínimo",
       maxValueExpression: "Expresión de valor máximo",
-      autoGenerate: "Configuración de etiquetas de escala"
+      autoGenerate: "Configuración de etiquetas de escala",
+      sliderType: "Tipo de control deslizante",
+      minRangeLength: "Longitud mínima del rango",
+      maxRangeLength: "Longitud máxima del rango",
+      customLabels: "Etiquetas personalizadas",
+      labelFormat: "Formato de etiqueta",
+      tooltipFormat: "Formato de información sobre herramientas"
     },
     file: {
       imageHeight: "Altura de la imagen",
@@ -2913,3 +2919,9 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Muestra un botón que borra el valor del control deslizante seleccionado y lo establece en indefinido."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Define el valor mínimo del control deslizante de forma dinámica mediante una expresión. Admite cálculos básicos (por ejemplo, '{q1_id} + {q2_id}'), lógica booleana (por ejemplo, '{edad} > 60') y funciones como 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' y más."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Define el valor máximo del control deslizante de forma dinámica mediante una expresión. Admite cálculos básicos (por ejemplo, '{q1_id} + {q2_id}'), lógica booleana (por ejemplo, '{edad} > 60') y funciones como 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' y más."
+// slider.sliderType: "Slider type" => "Tipo de control deslizante"
+// slider.minRangeLength: "Min range length" => "Longitud mínima del rango"
+// slider.maxRangeLength: "Max range length" => "Longitud máxima del rango"
+// slider.customLabels: "Custom labels" => "Etiquetas personalizadas"
+// slider.labelFormat: "Label format" => "Formato de etiqueta"
+// slider.tooltipFormat: "Tooltip format" => "Formato de información sobre herramientas"

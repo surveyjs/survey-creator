@@ -755,7 +755,13 @@ export var huStrings = {
       labelCount: "Automatikusan generált címkék száma",
       minValueExpression: "Minimális érték kifejezés",
       maxValueExpression: "Maximális érték kifejezés",
-      autoGenerate: "Méretezési címkék konfigurálása"
+      autoGenerate: "Méretezési címkék konfigurálása",
+      sliderType: "Csúszka típusa",
+      minRangeLength: "Minimális tartomány hossza",
+      maxRangeLength: "Maximális hatótávolság",
+      customLabels: "Egyéni címkék",
+      labelFormat: "Címke formátuma",
+      tooltipFormat: "Elemleírás formátuma"
     },
     file: {
       imageHeight: "Kép magassága",
@@ -3288,3 +3294,9 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Megjelenít egy gombot, amely törli a kijelölt csúszka értékét, és nem definiált értékre állítja."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dinamikusan határozza meg a csúszka minimális értékét egy kifejezés segítségével. Támogatja az alapvető számításokat (pl. '{q1_id} + {q2_id}'), a logikai logikát (pl. '{age} > 60'), valamint az olyan függvényeket, mint 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' és még sok más."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dinamikusan határozza meg a csúszka maximális értékét egy kifejezés segítségével. Támogatja az alapvető számításokat (pl. '{q1_id} + {q2_id}'), a logikai logikát (pl. '{age} > 60'), valamint az olyan függvényeket, mint 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' és még sok más."
+// slider.sliderType: "Slider type" => "Csúszka típusa"
+// slider.minRangeLength: "Min range length" => "Minimális tartomány hossza"
+// slider.maxRangeLength: "Max range length" => "Maximális hatótávolság"
+// slider.customLabels: "Custom labels" => "Egyéni címkék"
+// slider.labelFormat: "Label format" => "Címke formátuma"
+// slider.tooltipFormat: "Tooltip format" => "Elemleírás formátuma"

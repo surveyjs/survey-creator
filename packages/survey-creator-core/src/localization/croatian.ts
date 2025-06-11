@@ -755,7 +755,13 @@ export var hrStrings = {
       labelCount: "Broj automatski generiranih naljepnica",
       minValueExpression: "Izraz minimalne vrijednosti",
       maxValueExpression: "Izraz maksimalne vrijednosti",
-      autoGenerate: "Konfiguracija naljepnica vage"
+      autoGenerate: "Konfiguracija naljepnica vage",
+      sliderType: "Vrsta klizača",
+      minRangeLength: "Minimalna duljina raspona",
+      maxRangeLength: "Maksimalna duljina dometa",
+      customLabels: "Prilagođene naljepnice",
+      labelFormat: "Format naljepnice",
+      tooltipFormat: "Format opisa alata"
     },
     file: {
       imageHeight: "Visina slike",
@@ -3131,3 +3137,9 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Prikazuje gumb koji briše odabranu vrijednost klizača i postavlja je na nedefinirano."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dinamički definira minimalnu vrijednost klizača pomoću izraza. Podržava osnovne izračune (npr. '{q1_id} + {q2_id}'), Booleovu logiku (npr. '{age} > 60') i funkcije kao što su 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i još mnogo toga."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Dinamički definira maksimalnu vrijednost klizača pomoću izraza. Podržava osnovne izračune (npr. '{q1_id} + {q2_id}'), Booleovu logiku (npr. '{age} > 60') i funkcije kao što su 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' i još mnogo toga."
+// slider.sliderType: "Slider type" => "Vrsta klizača"
+// slider.minRangeLength: "Min range length" => "Minimalna duljina raspona"
+// slider.maxRangeLength: "Max range length" => "Maksimalna duljina dometa"
+// slider.customLabels: "Custom labels" => "Prilagođene naljepnice"
+// slider.labelFormat: "Label format" => "Format naljepnice"
+// slider.tooltipFormat: "Tooltip format" => "Format opisa alata"

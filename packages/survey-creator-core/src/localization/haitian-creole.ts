@@ -755,7 +755,13 @@ export var htStrings = {
       labelCount: "Nimewo nan etikèt oto-pwodwi",
       minValueExpression: "Min ekspresyon",
       maxValueExpression: "Max ekspresyon valè",
-      autoGenerate: "Echèl etikèt konfigirasyon"
+      autoGenerate: "Echèl etikèt konfigirasyon",
+      sliderType: "kalite koulis",
+      minRangeLength: "Longè ranje min",
+      maxRangeLength: "Max ranje longè",
+      customLabels: "Etikèt koutim",
+      labelFormat: "Fòma etikèt",
+      tooltipFormat: "Fòma zouti"
     },
     file: {
       imageHeight: "Wotè imaj",
@@ -1905,3 +1911,9 @@ setupLocale({ localeCode: "ht", strings: htStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Montre yon bouton ki klè valè a glise chwazi epi li etabli li nan defini."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Defini valè minimòm slider a dinamikman lè l sèvi avèk yon ekspresyon. Sipòte kalkil debaz (e.g, '{q1_id} + {q2_id}'), Boolean lojik (tankou g., '{laj} > 60'), ak fonksyon tankou 'iif(), 'jodi a(), 'laj(), 'min(),', 'max(), 'avg(), 'avg(), ak plis ankò."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Defini valè maksimòm slider a dinamikman lè l sèvi avèk yon ekspresyon. Sipòte kalkil debaz (e.g, '{q1_id} + {q2_id}'), Boolean lojik (tankou g., '{laj} > 60'), ak fonksyon tankou 'iif(), 'jodi a(), 'laj(), 'min(),', 'max(), 'avg(), 'avg(), ak plis ankò."
+// slider.sliderType: "Slider type" => "kalite koulis"
+// slider.minRangeLength: "Min range length" => "Longè ranje min"
+// slider.maxRangeLength: "Max range length" => "Max ranje longè"
+// slider.customLabels: "Custom labels" => "Etikèt koutim"
+// slider.labelFormat: "Label format" => "Fòma etikèt"
+// slider.tooltipFormat: "Tooltip format" => "Fòma zouti"

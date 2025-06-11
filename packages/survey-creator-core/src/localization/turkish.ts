@@ -755,7 +755,13 @@ export var turkishStrings = {
       labelCount: "Otomatik olarak oluşturulan etiketlerin sayısı",
       minValueExpression: "Minimum değer ifadesi",
       maxValueExpression: "Maksimum değer ifadesi",
-      autoGenerate: "Ölçek etiketleri yapılandırması"
+      autoGenerate: "Ölçek etiketleri yapılandırması",
+      sliderType: "Kaydırıcı türü",
+      minRangeLength: "Minimum aralık uzunluğu",
+      maxRangeLength: "Maksimum aralık uzunluğu",
+      customLabels: "Özel etiketler",
+      labelFormat: "Etiket biçimi",
+      tooltipFormat: "Araç ipucu biçimi"
     },
     file: {
       imageHeight: "Görüntü yüksekliği",
@@ -3132,3 +3138,9 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Seçili kaydırıcı değerini temizleyen ve tanımsız olarak ayarlayan bir düğme görüntüler."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Bir ifade kullanarak kaydırıcının minimum değerini dinamik olarak tanımlar. Temel hesaplamaları (ör. '{q1_id} + {q2_id}'), Boole mantığını (ör. '{age} > 60') ve 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ve daha fazlası gibi işlevleri destekler."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Bir ifade kullanarak kaydırıcının maksimum değerini dinamik olarak tanımlar. Temel hesaplamaları (ör. '{q1_id} + {q2_id}'), Boole mantığını (ör. '{age} > 60') ve 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' ve daha fazlası gibi işlevleri destekler."
+// slider.sliderType: "Slider type" => "Kaydırıcı türü"
+// slider.minRangeLength: "Min range length" => "Minimum aralık uzunluğu"
+// slider.maxRangeLength: "Max range length" => "Maksimum aralık uzunluğu"
+// slider.customLabels: "Custom labels" => "Özel etiketler"
+// slider.labelFormat: "Label format" => "Etiket biçimi"
+// slider.tooltipFormat: "Tooltip format" => "Araç ipucu biçimi"

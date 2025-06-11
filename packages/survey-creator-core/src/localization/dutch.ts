@@ -755,7 +755,13 @@ export var nlStrings = {
       labelCount: "Aantal automatisch gegenereerde labels",
       minValueExpression: "Minimale waarde-expressie",
       maxValueExpression: "Maximale waarde expressie",
-      autoGenerate: "Configuratie van schaallabels"
+      autoGenerate: "Configuratie van schaallabels",
+      sliderType: "Type schuifregelaar",
+      minRangeLength: "Min. bereik lengte",
+      maxRangeLength: "Maximale bereiklengte",
+      customLabels: "Aangepaste labels",
+      labelFormat: "Etiket formaat",
+      tooltipFormat: "Tooltip formaat"
     },
     file: {
       imageHeight: "Hoogte afbeelding",
@@ -3115,3 +3121,9 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // slider.allowClear: "Displays a button that clears the selected slider value and sets it to undefined." => "Geeft een knop weer waarmee de geselecteerde schuifregelaarwaarde wordt gewist en op niet-gedefinieerd wordt gezet."
 // slider.minValueExpression: "Defines the slider's minimum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definieert de minimumwaarde van de schuifregelaar dynamisch met behulp van een expressie. Ondersteunt basisberekeningen (bijv. '{q1_id} + {q2_id}'), Booleaanse logica (bijv. '{age} > 60') en functies zoals 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' en meer."
 // slider.maxValueExpression: "Defines the slider's maximum value dynamically using an expression. Supports basic calculations (e.g, `{q1_id} + {q2_id}`), Boolean logic (e.g., `{age} > 60`), and functions like `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, and more." => "Definieert de maximale waarde van de schuifregelaar dynamisch met behulp van een expressie. Ondersteunt basisberekeningen (bijv. '{q1_id} + {q2_id}'), Booleaanse logica (bijv. '{age} > 60') en functies zoals 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' en meer."
+// slider.sliderType: "Slider type" => "Type schuifregelaar"
+// slider.minRangeLength: "Min range length" => "Min. bereik lengte"
+// slider.maxRangeLength: "Max range length" => "Maximale bereiklengte"
+// slider.customLabels: "Custom labels" => "Aangepaste labels"
+// slider.labelFormat: "Label format" => "Etiket formaat"
+// slider.tooltipFormat: "Tooltip format" => "Tooltip formaat"
