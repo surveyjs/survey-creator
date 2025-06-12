@@ -350,6 +350,7 @@ export var skStrings = {
       name: "Názov otázky",
       title: "Názov otázky",
       description: "Opis otázky",
+      showTitle: "Zobraziť názov a popis",
       visibleIf: "Zviditeľnite otázku, ak",
       requiredIf: "Urobte otázku povinnou, ak",
       page: "Nadradená stránka",
@@ -3102,3 +3103,4 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // slider.customLabels: "Custom labels" => "Vlastné štítky"
 // slider.labelFormat: "Label format" => "Formát štítku"
 // slider.tooltipFormat: "Tooltip format" => "Formát popisu"
+// question.showTitle: "Show the title and description" => "Zobraziť názov a popis"

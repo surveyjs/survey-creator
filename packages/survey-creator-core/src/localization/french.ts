@@ -350,6 +350,7 @@ var frenchTranslation = {
       name: "Nom de la question",
       title: "Titre de la question",
       description: "Description de la question",
+      showTitle: "Afficher le titre et la description",
       visibleIf: "Rendez la question visible si",
       requiredIf: "Faites en sorte que la question soit obligatoire si",
       page: "Page parent",
@@ -3208,3 +3209,4 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // slider.customLabels: "Custom labels" => "Étiquettes personnalisées"
 // slider.labelFormat: "Label format" => "Format de l’étiquette"
 // slider.tooltipFormat: "Tooltip format" => "Format de l’infobulle"
+// question.showTitle: "Show the title and description" => "Afficher le titre et la description"

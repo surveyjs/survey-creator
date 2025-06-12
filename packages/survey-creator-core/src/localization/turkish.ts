@@ -350,6 +350,7 @@ export var turkishStrings = {
       name: "Soru adı",
       title: "Soru başlığı",
       description: "Soru açıklaması",
+      showTitle: "Başlığı ve açıklamayı gösterme",
       visibleIf: "Aşağıdaki durumlarda soruyu görünür hale getirin",
       requiredIf: "Aşağıdaki durumlarda soruyu gerekli hale getirin",
       page: "Ana sayfa",
@@ -3144,3 +3145,4 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // slider.customLabels: "Custom labels" => "Özel etiketler"
 // slider.labelFormat: "Label format" => "Etiket biçimi"
 // slider.tooltipFormat: "Tooltip format" => "Araç ipucu biçimi"
+// question.showTitle: "Show the title and description" => "Başlığı ve açıklamayı gösterme"

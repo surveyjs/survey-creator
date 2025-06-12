@@ -350,6 +350,7 @@ var germanTranslation = {
       name: "Name der Frage",
       title: "Titel der Frage",
       description: "Beschreibung der Frage",
+      showTitle: "Zeigen Sie den Titel und die Beschreibung an",
       visibleIf: "Frage sichtbar machen, wenn",
       requiredIf: "Frage erforderlich machen, wenn",
       page: "Frage auf die Seite verschieben",
@@ -2861,3 +2862,4 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // slider.customLabels: "Custom labels" => "Benutzerdefinierte Etiketten"
 // slider.labelFormat: "Label format" => "Format der Beschriftung"
 // slider.tooltipFormat: "Tooltip format" => "Tooltip-Format"
+// question.showTitle: "Show the title and description" => "Zeigen Sie den Titel und die Beschreibung an"

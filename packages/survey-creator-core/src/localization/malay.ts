@@ -350,6 +350,7 @@ export var msStrings = {
       name: "Nama soalan",
       title: "Tajuk soalan",
       description: "Penerangan soalan",
+      showTitle: "Tunjukkan tajuk dan perihalan",
       visibleIf: "Jadikan soalan kelihatan jika",
       requiredIf: "Jadikan soalan diperlukan jika",
       page: "Halaman induk",
@@ -3103,3 +3104,4 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // slider.customLabels: "Custom labels" => "Label tersuai"
 // slider.labelFormat: "Label format" => "Format label"
 // slider.tooltipFormat: "Tooltip format" => "Format petua alat"
+// question.showTitle: "Show the title and description" => "Tunjukkan tajuk dan perihalan"

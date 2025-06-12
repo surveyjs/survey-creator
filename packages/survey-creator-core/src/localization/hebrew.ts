@@ -350,6 +350,7 @@ export var hebrewStrings = {
       name: "שם שאלה",
       title: "כותרת השאלה",
       description: "תיאור השאלה",
+      showTitle: "הצגת הכותרת והתיאור",
       visibleIf: "הפוך את השאלה לגלויה אם",
       requiredIf: "הפוך את השאלה לנדרשת אם",
       page: "עמוד הורה",
@@ -2716,3 +2717,4 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // slider.customLabels: "Custom labels" => "תוויות מותאמות אישית"
 // slider.labelFormat: "Label format" => "תבנית תווית"
 // slider.tooltipFormat: "Tooltip format" => "תבנית תיאור כלי"
+// question.showTitle: "Show the title and description" => "הצגת הכותרת והתיאור"

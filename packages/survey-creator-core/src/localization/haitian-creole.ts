@@ -350,6 +350,7 @@ export var htStrings = {
       name: "Non kesyon an",
       title: "Tit kesyon an",
       description: "Deskripsyon kesyon",
+      showTitle: "Montre la ak deskripsyon an",
       visibleIf: "Fè kesyon an vizib si",
       requiredIf: "Fè kesyon an mande si",
       page: "Deplase kesyon an nan paj la",
@@ -1917,3 +1918,4 @@ setupLocale({ localeCode: "ht", strings: htStrings });
 // slider.customLabels: "Custom labels" => "Etikèt koutim"
 // slider.labelFormat: "Label format" => "Fòma etikèt"
 // slider.tooltipFormat: "Tooltip format" => "Fòma zouti"
+// question.showTitle: "Show the title and description" => "Montre la ak deskripsyon an"

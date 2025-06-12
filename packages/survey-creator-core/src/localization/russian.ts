@@ -350,6 +350,7 @@ export var ruStrings = {
       name: "Название вопроса",
       title: "Заголовок вопроса",
       description: "Описание вопроса",
+      showTitle: "Показать название и описание",
       visibleIf: "Сделайте вопрос видимым, если",
       requiredIf: "Сделайте вопрос обязательным, если",
       page: "Родительская страница",
@@ -3204,3 +3205,4 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // slider.customLabels: "Custom labels" => "Пользовательские этикетки"
 // slider.labelFormat: "Label format" => "Формат этикетки"
 // slider.tooltipFormat: "Tooltip format" => "Формат всплывающей подсказки"
+// question.showTitle: "Show the title and description" => "Показать название и описание"

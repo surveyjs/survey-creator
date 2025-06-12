@@ -350,6 +350,7 @@ export var bgStrings = {
       name: "Име на въпрос",
       title: "Заглавие на въпроса",
       description: "Описание на въпроса",
+      showTitle: "Показване на заглавието и описанието",
       visibleIf: "Направете въпроса видим, ако",
       requiredIf: "Задайте въпроса, който е необходим, ако",
       page: "Родителска страница",
@@ -2712,3 +2713,4 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // slider.customLabels: "Custom labels" => "Персонализирани етикети"
 // slider.labelFormat: "Label format" => "Формат на етикета"
 // slider.tooltipFormat: "Tooltip format" => "Формат на подсказката"
+// question.showTitle: "Show the title and description" => "Показване на заглавието и описанието"

@@ -350,6 +350,7 @@ export var koreanStrings = {
       name: "질문 이름",
       title: "질문 제목",
       description: "질문 설명",
+      showTitle: "제목 및 설명 표시",
       visibleIf: "다음과 같은 경우 질문을 표시합니다.",
       requiredIf: "다음과 같은 경우 질문을 필수로 만듭니다.",
       page: "상위 페이지",
@@ -3353,3 +3354,4 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // slider.customLabels: "Custom labels" => "사용자 지정 레이블"
 // slider.labelFormat: "Label format" => "라벨 형식"
 // slider.tooltipFormat: "Tooltip format" => "툴팁 형식"
+// question.showTitle: "Show the title and description" => "제목 및 설명 표시"

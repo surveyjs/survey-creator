@@ -350,6 +350,7 @@ var polishStrings = {
       name: "Nazwa pytania",
       title: "Tytuł pytania",
       description: "Opis pytania",
+      showTitle: "Pokaż tytuł i opis",
       visibleIf: "Uwidocznij pytanie, jeśli",
       requiredIf: "Zadbaj o to, aby pytanie było wymagane, jeśli",
       page: "Strona nadrzędna",
@@ -3414,3 +3415,4 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // slider.customLabels: "Custom labels" => "Etykiety niestandardowe"
 // slider.labelFormat: "Label format" => "Format etykiety"
 // slider.tooltipFormat: "Tooltip format" => "Format podpowiedzi"
+// question.showTitle: "Show the title and description" => "Pokaż tytuł i opis"

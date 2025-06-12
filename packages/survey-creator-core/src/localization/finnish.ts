@@ -350,6 +350,7 @@ export var fiStrings = {
       name: "Kysymyksen nimi",
       title: "Kysymyksen otsikko",
       description: "Kysymyksen kuvaus",
+      showTitle: "Näytä otsikko ja kuvaus",
       visibleIf: "Tee kysymys näkyväksi, jos",
       requiredIf: "Tee kysymys pakolliseksi, jos",
       page: "Pääsivu",
@@ -3123,3 +3124,4 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // slider.customLabels: "Custom labels" => "Mukautetut tunnisteet"
 // slider.labelFormat: "Label format" => "Etiketin muoto"
 // slider.tooltipFormat: "Tooltip format" => "Työkaluvihjeen muoto"
+// question.showTitle: "Show the title and description" => "Näytä otsikko ja kuvaus"

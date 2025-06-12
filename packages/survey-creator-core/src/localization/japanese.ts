@@ -350,6 +350,7 @@ export var jaStrings = {
       name: "質問名",
       title: "質問のタイトル",
       description: "質問の説明",
+      showTitle: "タイトルと説明を表示する",
       visibleIf: "次の場合に質問を表示します。",
       requiredIf: "次の場合は質問を必須にします",
       page: "親ページ",
@@ -3148,3 +3149,4 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // slider.customLabels: "Custom labels" => "カスタムラベル"
 // slider.labelFormat: "Label format" => "ラベル形式"
 // slider.tooltipFormat: "Tooltip format" => "ツールチップの形式"
+// question.showTitle: "Show the title and description" => "タイトルと説明を表示する"

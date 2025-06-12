@@ -350,6 +350,7 @@ export var indonesianStrings = {
       name: "Nama pertanyaan",
       title: "Judul pertanyaan",
       description: "Deskripsi pertanyaan",
+      showTitle: "Tampilkan judul dan deskripsi",
       visibleIf: "Buat pertanyaan terlihat jika",
       requiredIf: "Buat pertanyaan diperlukan jika",
       page: "Halaman induk",
@@ -3303,3 +3304,4 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // slider.customLabels: "Custom labels" => "Label khusus"
 // slider.labelFormat: "Label format" => "Format label"
 // slider.tooltipFormat: "Tooltip format" => "Format tooltip"
+// question.showTitle: "Show the title and description" => "Tampilkan judul dan deskripsi"

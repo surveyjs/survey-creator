@@ -350,6 +350,7 @@ export var czStrings = {
       name: "Název otázky",
       title: "Název otázky",
       description: "Popis otázky",
+      showTitle: "Zobrazit název a popis",
       visibleIf: "Zviditelněte otázku, pokud",
       requiredIf: "Otázku povinně zjišťte, pokud",
       page: "Nadřazená stránka",
@@ -2726,3 +2727,4 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // slider.customLabels: "Custom labels" => "Vlastní štítky"
 // slider.labelFormat: "Label format" => "Formát štítku"
 // slider.tooltipFormat: "Tooltip format" => "Formát popisku nástroje"
+// question.showTitle: "Show the title and description" => "Zobrazit název a popis"

@@ -350,6 +350,7 @@ export const thStrings = {
       name: "ชื่อคำถาม",
       title: "ชื่อคำถาม",
       description: "คำอธิบายคำถาม",
+      showTitle: "แสดงชื่อและคําอธิบาย",
       visibleIf: "ทำให้คำถามมองเห็นได้ถ้า",
       requiredIf: "ทำให้คำถามจำเป็นถ้า",
       page: "ย้ายคำถามไปที่หน้า",
@@ -2089,3 +2090,4 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // slider.customLabels: "Custom labels" => "ป้ายกํากับที่กําหนดเอง"
 // slider.labelFormat: "Label format" => "รูปแบบฉลาก"
 // slider.tooltipFormat: "Tooltip format" => "รูปแบบคําแนะนําเครื่องมือ"
+// question.showTitle: "Show the title and description" => "แสดงชื่อและคําอธิบาย"

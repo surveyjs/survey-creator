@@ -350,6 +350,7 @@ export var slStrings = {
       name: "Ime vprašanja",
       title: "Naslov vprašanja",
       description: "Opis vprašanja",
+      showTitle: "Pokažite naslov in opis",
       visibleIf: "Naredi vprašanje vidno, če",
       requiredIf: "Naredi vprašanje obvezno, če",
       page: "Premakni vprašanje na stran",
@@ -1923,3 +1924,4 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // slider.customLabels: "Custom labels" => "Oznake po meri"
 // slider.labelFormat: "Label format" => "Oblika nalepke"
 // slider.tooltipFormat: "Tooltip format" => "Oblika opisa orodja"
+// question.showTitle: "Show the title and description" => "Pokažite naslov in opis"

@@ -350,6 +350,7 @@ export var arStrings = {
       name: "اسم السؤال",
       title: "عنوان السؤال",
       description: "وصف السؤال",
+      showTitle: "إظهار العنوان والوصف",
       visibleIf: "اجعل السؤال مرئيا إذا",
       requiredIf: "اجعل السؤال مطلوبا إذا",
       page: "الصفحة الرئيسية",
@@ -3063,3 +3064,4 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // slider.customLabels: "Custom labels" => "تسميات مخصصة"
 // slider.labelFormat: "Label format" => "تنسيق التسمية"
 // slider.tooltipFormat: "Tooltip format" => "تنسيق تلميح الأداة"
+// question.showTitle: "Show the title and description" => "إظهار العنوان والوصف"

@@ -350,6 +350,7 @@ var simplifiedChineseTranslation = {
       name: "问题名称",
       title: "问题标题",
       description: "问题描述",
+      showTitle: "显示标题和描述",
       visibleIf: "如果出现以下情况，请使问题可见",
       requiredIf: "如果出现以下情况，则将问题设为必填项",
       page: "父页面",
@@ -3290,3 +3291,4 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // slider.customLabels: "Custom labels" => "自定义标签"
 // slider.labelFormat: "Label format" => "标签格式"
 // slider.tooltipFormat: "Tooltip format" => "工具提示格式"
+// question.showTitle: "Show the title and description" => "显示标题和描述"

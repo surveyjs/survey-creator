@@ -350,6 +350,7 @@ export var huStrings = {
       name: "Kérdés neve",
       title: "Kérdés címe",
       description: "Kérdés leírása",
+      showTitle: "A cím és a leírás megjelenítése",
       visibleIf: "Tegye láthatóvá a kérdést, ha",
       requiredIf: "Tegye kötelezővé a kérdést, ha",
       page: "Szülőoldal",
@@ -3300,3 +3301,4 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // slider.customLabels: "Custom labels" => "Egyéni címkék"
 // slider.labelFormat: "Label format" => "Címke formátuma"
 // slider.tooltipFormat: "Tooltip format" => "Elemleírás formátuma"
+// question.showTitle: "Show the title and description" => "A cím és a leírás megjelenítése"
