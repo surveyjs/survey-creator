@@ -38,6 +38,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "visible",
       "readOnly",
       "isRequired",
+      "showTitle",
       "showCommentArea",
       "commentText",
       "commentPlaceholder",
@@ -409,7 +410,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "label",
       "labelTrue",
       "labelFalse",
-      "showTitle",
       { name: "valueTrue", tab: "data" },
       { name: "valueFalse", tab: "data" }
     ]

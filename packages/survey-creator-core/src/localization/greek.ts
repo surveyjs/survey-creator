@@ -350,6 +350,7 @@ export var grStrings = {
       name: "Όνομα ερώτησης",
       title: "Τίτλος ερώτησης",
       description: "Περιγραφή ερώτησης",
+      showTitle: "Εμφάνιση του τίτλου και της περιγραφής",
       visibleIf: "Εμφάνιση ερώτησης εάν",
       requiredIf: "Υποχρεωτική ερώτηση εάν",
       page: "Μετακίνηση ερώτησης στη σελίδα",
@@ -1903,3 +1904,4 @@ setupLocale({ localeCode: "gr", strings: grStrings });
 // slider.customLabels: "Custom labels" => "Προσαρμοσμένες ετικέτες"
 // slider.labelFormat: "Label format" => "Μορφή ετικέτας"
 // slider.tooltipFormat: "Tooltip format" => "Μορφή συμβουλής εργαλείου"
+// question.showTitle: "Show the title and description" => "Εμφάνιση του τίτλου και της περιγραφής"

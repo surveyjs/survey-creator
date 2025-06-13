@@ -350,6 +350,7 @@ var traditionalChineseTranslation = {
       name: "問題名稱",
       title: "問題標題",
       description: "問題描述",
+      showTitle: "顯示標題和描述",
       visibleIf: "如果出現以下情況，請使問題可見",
       requiredIf: "如果出現以下情況，則將問題設為必填項",
       page: "父頁面",
@@ -3419,3 +3420,4 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // slider.customLabels: "Custom labels" => "自訂標籤"
 // slider.labelFormat: "Label format" => "標籤格式"
 // slider.tooltipFormat: "Tooltip format" => "工具提示格式"
+// question.showTitle: "Show the title and description" => "顯示標題和描述"

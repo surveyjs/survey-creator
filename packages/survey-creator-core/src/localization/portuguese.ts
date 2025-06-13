@@ -350,6 +350,7 @@ var portugueseTranslation = {
       name: "Nome da pergunta",
       title: "Título da pergunta",
       description: "Descrição da pergunta",
+      showTitle: "Mostrar o título e a descrição",
       visibleIf: "Torne a pergunta visível se",
       requiredIf: "Faça a pergunta obrigatória se",
       page: "Página principal",
@@ -2817,3 +2818,4 @@ setupLocale({ localeCode: "pt", strings: portugueseTranslation });
 // slider.customLabels: "Custom labels" => "Rótulos personalizados"
 // slider.labelFormat: "Label format" => "Formato do rótulo"
 // slider.tooltipFormat: "Tooltip format" => "Formato da dica de ferramenta"
+// question.showTitle: "Show the title and description" => "Mostrar o título e a descrição"

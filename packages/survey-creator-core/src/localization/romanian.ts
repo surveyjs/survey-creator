@@ -350,6 +350,7 @@ export const roStrings = {
       name: "Numele întrebării",
       title: "Titlul întrebării",
       description: "Descrierea întrebării",
+      showTitle: "Afișați titlul și descrierea",
       visibleIf: "Fă întrebarea vizibilă dacă",
       requiredIf: "Fă întrebarea obligatorie dacă",
       page: "Mută întrebarea la pagina",
@@ -2089,3 +2090,4 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // slider.customLabels: "Custom labels" => "Etichete personalizate"
 // slider.labelFormat: "Label format" => "Formatul etichetei"
 // slider.tooltipFormat: "Tooltip format" => "Formatul sfatului ecran"
+// question.showTitle: "Show the title and description" => "Afișați titlul și descrierea"

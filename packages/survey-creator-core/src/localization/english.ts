@@ -352,6 +352,7 @@ export var enStrings = {
       name: "Question name",
       title: "Question title",
       description: "Question description",
+      showTitle: "Show the title and description",
       visibleIf: "Make the question visible if",
       requiredIf: "Make the question required if",
       page: "Move the question to page",

@@ -350,6 +350,7 @@ var spanishTranslation = {
       name: "Nombre de la pregunta",
       title: "Título de la pregunta",
       description: "Descripción de la pregunta",
+      showTitle: "Mostrar el título y la descripción",
       visibleIf: "Haz que la pregunta sea visible si",
       requiredIf: "Haga que la pregunta sea obligatoria si:",
       page: "Página padre",
@@ -2925,3 +2926,4 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // slider.customLabels: "Custom labels" => "Etiquetas personalizadas"
 // slider.labelFormat: "Label format" => "Formato de etiqueta"
 // slider.tooltipFormat: "Tooltip format" => "Formato de información sobre herramientas"
+// question.showTitle: "Show the title and description" => "Mostrar el título y la descripción"

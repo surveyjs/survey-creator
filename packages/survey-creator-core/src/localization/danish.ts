@@ -350,6 +350,7 @@ export var danishStrings = {
       name: "Navn på spørgsmål",
       title: "Spørgsmålets titel",
       description: "Beskrivelse af spørgsmål",
+      showTitle: "Vis titel og beskrivelse",
       visibleIf: "Gør spørgsmålet synligt, hvis",
       requiredIf: "Foretag spørgsmålet påkrævet, hvis",
       page: "Overordnet side",
@@ -3333,3 +3334,4 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // slider.customLabels: "Custom labels" => "Brugerdefinerede etiketter"
 // slider.labelFormat: "Label format" => "Etiket format"
 // slider.tooltipFormat: "Tooltip format" => "Værktøjstip-format"
+// question.showTitle: "Show the title and description" => "Vis titel og beskrivelse"

@@ -350,6 +350,7 @@ export var nlStrings = {
       name: "Naam van de vraag",
       title: "Titel van de vraag",
       description: "Beschrijving van de vraag",
+      showTitle: "Toon de titel en beschrijving",
       visibleIf: "Maak de vraag zichtbaar als",
       requiredIf: "Maak de vraag verplicht als",
       page: "Bovenliggende pagina",
@@ -3127,3 +3128,4 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // slider.customLabels: "Custom labels" => "Aangepaste labels"
 // slider.labelFormat: "Label format" => "Etiket formaat"
 // slider.tooltipFormat: "Tooltip format" => "Tooltip formaat"
+// question.showTitle: "Show the title and description" => "Toon de titel en beschrijving"

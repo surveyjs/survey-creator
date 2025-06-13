@@ -350,6 +350,7 @@ export let svStrings = {
       name: "Frågans namn",
       title: "Frågans rubrik",
       description: "Beskrivning av frågan",
+      showTitle: "Visa titel och beskrivning",
       visibleIf: "Gör frågan synlig om",
       requiredIf: "Gör frågan obligatorisk om",
       page: "Överordnad sida",
@@ -3323,3 +3324,4 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // slider.customLabels: "Custom labels" => "Anpassade etiketter"
 // slider.labelFormat: "Label format" => "Etikettens format"
 // slider.tooltipFormat: "Tooltip format" => "Format för knappbeskrivningar"
+// question.showTitle: "Show the title and description" => "Visa titel och beskrivning"

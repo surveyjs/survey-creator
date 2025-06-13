@@ -350,6 +350,7 @@ var persianStrings = {
       name: "نام سوال",
       title: "عنوان سوال",
       description: "توضیحات سوال",
+      showTitle: "نمایش عنوان و توضیحات",
       visibleIf: "سؤال را قابل مشاهده کنید اگر",
       requiredIf: "سؤال مورد نیاز را مطرح کنید اگر",
       page: "صفحه اصلی",
@@ -3104,3 +3105,4 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // slider.customLabels: "Custom labels" => "برچسب های سفارشی"
 // slider.labelFormat: "Label format" => "فرمت برچسب"
 // slider.tooltipFormat: "Tooltip format" => "فرمت راهنمای ابزار"
+// question.showTitle: "Show the title and description" => "نمایش عنوان و توضیحات"

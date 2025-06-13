@@ -350,6 +350,7 @@ export var mnStrings = {
       name: "Асуулт нэр",
       title: "Асуулт гарчиг",
       description: "Асуултын тодорхойлолт",
+      showTitle: "Гарчиг, тайлбарыг харуул",
       visibleIf: "Асуултыг ил тод болгох",
       requiredIf: "Шаардлагатай асуултыг тавих",
       page: "Эх хуудас",
@@ -2804,3 +2805,4 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // slider.customLabels: "Custom labels" => "Custom labels"
 // slider.labelFormat: "Label format" => "Шошгоны хэлбэр"
 // slider.tooltipFormat: "Tooltip format" => "Tooltip формат"
+// question.showTitle: "Show the title and description" => "Гарчиг, тайлбарыг харуул"

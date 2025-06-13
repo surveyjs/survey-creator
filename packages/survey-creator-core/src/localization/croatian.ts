@@ -350,6 +350,7 @@ export var hrStrings = {
       name: "Naziv pitanja",
       title: "Naslov pitanja",
       description: "Opis pitanja",
+      showTitle: "Pokažite naslov i opis",
       visibleIf: "Učinite pitanje vidljivim ako",
       requiredIf: "Neka pitanje bude potrebno ako:",
       page: "Nadređena stranica",
@@ -3143,3 +3144,4 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // slider.customLabels: "Custom labels" => "Prilagođene naljepnice"
 // slider.labelFormat: "Label format" => "Format naljepnice"
 // slider.tooltipFormat: "Tooltip format" => "Format opisa alata"
+// question.showTitle: "Show the title and description" => "Pokažite naslov i opis"

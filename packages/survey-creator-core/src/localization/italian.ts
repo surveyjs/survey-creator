@@ -350,6 +350,7 @@ var italianTranslation = {
       name: "Nome della domanda",
       title: "Titolo della domanda",
       description: "Descrizione della domanda",
+      showTitle: "Mostra il titolo e la descrizione",
       visibleIf: "Rendi visibile la domanda se",
       requiredIf: "Rendi la domanda richiesta se",
       page: "Pagina principale",
@@ -2910,3 +2911,4 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // slider.customLabels: "Custom labels" => "Etichette personalizzate"
 // slider.labelFormat: "Label format" => "Formato etichetta"
 // slider.tooltipFormat: "Tooltip format" => "Formato della descrizione comando"
+// question.showTitle: "Show the title and description" => "Mostra il titolo e la descrizione"

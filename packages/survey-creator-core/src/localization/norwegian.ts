@@ -350,6 +350,7 @@ export var nbStrings = {
       name: "Spørsmål navn",
       title: "Spørsmål tittel",
       description: "Beskrivelse av spørsmål",
+      showTitle: "Vis tittelen og beskrivelsen",
       visibleIf: "Gjør spørsmålet synlig hvis",
       requiredIf: "Gjør spørsmålet nødvendig hvis",
       page: "Overordnet side",
@@ -3151,3 +3152,4 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // slider.customLabels: "Custom labels" => "Tilpassede etiketter"
 // slider.labelFormat: "Label format" => "Etikett format"
 // slider.tooltipFormat: "Tooltip format" => "Format for verktøytips"
+// question.showTitle: "Show the title and description" => "Vis tittelen og beskrivelsen"
