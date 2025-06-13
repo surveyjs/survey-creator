@@ -400,10 +400,10 @@ export class TabDesignerViewModel extends Base {
           options.reorderedItems = [];
           options.addedItems = [droppedPage];
           const ghostPage = new PageModel();
-          ghostPage.setSurveyImpl(droppedPage.survey as SurveyModel);
           ghostPage.title = droppedPage.title;
           ghostPage.num = droppedPage.num;
           ghostPage["isGhost"] = true;
+          ghostPage.setSurveyImpl(droppedPage.survey as SurveyModel);
           options.deletedItems = [ghostPage];
           options.mergedItems.splice(droppedPage["draggedFrom"], 0, ghostPage);
         }

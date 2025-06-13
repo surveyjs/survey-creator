@@ -9,6 +9,7 @@ import { PageAdorner } from "../../src/components/page";
 import { QuestionAdornerViewModel } from "../../src/components/question";
 import { TabDesignerViewModel } from "../../src/components/tabs/designer";
 import { TabControlModel } from "../../src/components/side-bar/tab-control-model";
+import { send } from "process";
 export * from "../../src/property-grid/matrices";
 
 test("Survey/page title/description placeholders text", () => {
@@ -472,6 +473,46 @@ test("check pages animation", () => {
   expect(options.addedItems).toEqual([]);
   expect(options.deletedItems).toEqual([]);
   expect(options.mergedItems).toEqual([p1, p2]);
+});
+test("Do not send notification on animation onCompareArrays arrays, Bug#6966", () => {
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "onhover";
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        title: "Test page",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1"
+          }
+        ]
+      }
+    ]
+  };
+
+  const designer = new TabDesignerViewModel(creator);
+  const [p1, p2] = creator.survey.pages;
+  const animationOptions = designer["getPagesAnimationOptions"]() as Required<IAnimationGroupConsumer<PageModel>>;
+  let counter = 0;
+  creator.onModified.add((sender, options) => {
+    counter++;
+  });
+
+  p1["draggedFrom"] = 0;
+  let options = { deletedItems: [], reorderedItems: [{ item: p1, movedForward: true }, { item: p2, movedForward: false }], addedItems: [], mergedItems: [p2, p1] };
+  animationOptions.onCompareArrays(options);
+  expect(counter).toBe(0);
 });
 test("expand/collapse event - loading", () => {
   surveySettings.animationEnabled = false;
