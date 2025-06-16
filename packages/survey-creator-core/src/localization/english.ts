@@ -331,7 +331,7 @@ export var enStrings = {
       width: "Inline panel width",
       minWidth: "Minimum panel width",
       maxWidth: "Maximum panel width",
-      confirmDelete: "Confirm panel deletion",
+      confirmDelete: "Confirm panel removal",
       templateDescription: "Panel description pattern",
       templateTitle: "Panel title pattern",
       noEntriesText: "Empty panel text",
@@ -734,7 +734,7 @@ export var enStrings = {
     detailPanelMode: "Row expansion alignment",
     minRowCount: "Minimum row count",
     maxRowCount: "Maximum row count",
-    confirmDelete: "Confirm row deletion",
+    confirmDelete: "Confirm row removal",
     confirmDeleteText: "Confirmation message",
     panelCount: "Initial panel count",
     minPanelCount: "Minimum panel count",
@@ -1443,7 +1443,11 @@ export var enStrings = {
       descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default).",
       newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one.",
       copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel.",
-      keyName: "Reference a question name to require a user to provide a unique response for this question in each panel."
+      keyName: "Reference a question name to require a user to provide a unique response for this question in each panel.",
+      confirmDelete: "Triggers a confirmation prompt before removing a panel.",
+    },
+    matrixdynamic: {
+      confirmDelete: "Triggers a confirmation prompt before removing a row."
     },
     copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row.",
     defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input.",
@@ -1567,7 +1571,6 @@ export var enStrings = {
     detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
     keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message.",
     totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
-    confirmDelete: "Triggers a prompt asking to confirm the row deletion.",
     keyName: "Reference a column ID to require a user to provide a unique response for each question within the specified column.",
     description: "Type a subtitle.",
     locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab.",
