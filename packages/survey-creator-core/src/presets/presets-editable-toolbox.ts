@@ -4,17 +4,18 @@ import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, Surve
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
 import { ICreatorPresetToolboxItem } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
+import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
 
 const LocCategoriesName = "toolboxCategories";
 
 function validateToolboxJson (params) {
   const value = params[0];
-  if (!value || !value.type) return false;
+  if (!value || !value.type) return true;
   const obj = Serializer.createClass(value.type, value);
   return !!obj;
 }
 FunctionFactory.Instance.register("validateToolboxJson", validateToolboxJson);
-export abstract class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPresetEditableBase {
+export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEditableCaregorizedListConfigurator {
   private defaultItems: any[];
   private allItems: ICreatorPresetToolboxItem[];
 
@@ -68,7 +69,78 @@ export abstract class CreatorPresetEditableCaregorizedListConfigurator extends C
     };
     return { ...defaultJSON, ...props };
   }
-  public abstract createMainPageCore();
+  public createMainPageCore(): any {
+    return {
+      title: "Set Up the Toolbox",
+      navigationTitle: "Toolbox",
+      elements: [
+
+        {
+          type: "matrixdynamic",
+          name: this.nameCategories,
+          titleLocation: "hidden",
+          visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
+          minRowCount: 1,
+          allowRowReorder: true,
+          addRowButtonLocation: "top",
+          addRowText: "Add Custom Category",
+          showHeader: false,
+          columns: [
+            { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
+            { cellType: "text", name: "title" }
+          ],
+          detailPanelMode: "underRow",
+          detailElements: [
+            this.createItemsMatrixJSON({
+              name: "items"
+            })
+          ]
+        },
+        this.createItemsMatrixJSON({
+          name: this.nameItems,
+          startWithNewLine: false,
+          visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
+        }),
+        this.createItemsMatrixJSON({
+          allowAddRows: true,
+          addRowButtonLocation: "top",
+          addRowText: "Add Custom Item",
+          startWithNewLine: false,
+          name: this.nameMatrix,
+          "descriptionLocation": "underInput",
+          description: "Drag an item from this column to the left one — it will appear visible in the toolbox. You can also move them, using plus and minus buttons near the item."
+        }),
+        {
+          type: "panel",
+          name: "panel_toolbox_controls",
+          elements: [
+            {
+              type: "boolean",
+              name: this.nameCategoriesMode,
+              title: "Enable grouping",
+              titleLocation: "hidden",
+              defaultValue: "categories",
+              valueTrue: "categories",
+              valueFalse: "items",
+              clearIfInvisible: "onHidden",
+              startWithNewLine: false,
+              renderAs: "checkbox"
+            },
+            {
+              type: "boolean",
+              name: this.nameShowCategoryTitles,
+              title: "Show category titles",
+              defaultValue: false,
+              titleLocation: "hidden",
+              visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
+              clearIfInvisible: "onHidden",
+              startWithNewLine: false,
+              renderAs: "checkbox"
+            }]
+        }
+      ]
+    };
+  }
   public get nameCategoriesMode() { return this.fullPath + "_mode"; }
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
   protected get nameItems() { return this.fullPath + "_items"; }
@@ -382,7 +454,7 @@ export abstract class CreatorPresetEditableCaregorizedListConfigurator extends C
       if (!matrix) return;
       const rows = matrix.visibleRows;
       rows.forEach(r => {
-        CreatorPresetEditorModel.updateModifiedText(locStrs, r.getValue("title"), "qt." + r.getValue("name"));
+        CreatorPresetEditableBase.updateModifiedText(locStrs, r.getValue("title"), "qt." + r.getValue("name"));
       });
 
     }
@@ -405,87 +477,12 @@ export abstract class CreatorPresetEditableCaregorizedListConfigurator extends C
   private getQuestionItems(model: SurveyModel): QuestionMatrixDynamicModel {
     return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameItems);
   }
-  private getQuestionCategories(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameCategories); }
+  protected getQuestionCategories(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameCategories); }
   private onDetailPanelShowingChanged(row: MatrixDropdownRowModelBase): void {
     if (!row.isDetailPanelShowing) return;
   }
 
   private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
     return <ICreatorPresetToolboxItem> { name: item.name, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: item.json, category: item.category };
-  }
-}
-
-export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEditableCaregorizedListConfigurator {
-  public createMainPageCore(): any {
-    return {
-      title: "Set Up the Toolbox",
-      navigationTitle: "Toolbox",
-      elements: [
-
-        {
-          type: "matrixdynamic",
-          name: this.nameCategories,
-          titleLocation: "hidden",
-          visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
-          minRowCount: 1,
-          allowRowReorder: true,
-          addRowButtonLocation: "top",
-          addRowText: "Add Custom Category",
-          showHeader: false,
-          columns: [
-            { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
-            { cellType: "text", name: "title" }
-          ],
-          detailPanelMode: "underRow",
-          detailElements: [
-            this.createItemsMatrixJSON({
-              name: "items"
-            })
-          ]
-        },
-        this.createItemsMatrixJSON({
-          name: this.nameItems,
-          startWithNewLine: false,
-          visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "items"),
-        }),
-        this.createItemsMatrixJSON({
-          allowAddRows: true,
-          addRowButtonLocation: "top",
-          addRowText: "Add Custom Item",
-          startWithNewLine: false,
-          name: this.nameMatrix,
-          "descriptionLocation": "underInput",
-          description: "Drag an item from this column to the left one — it will appear visible in the toolbox. You can also move them, using plus and minus buttons near the item."
-        }),
-        {
-          type: "panel",
-          name: "panel_toolbox_controls",
-          elements: [
-            {
-              type: "boolean",
-              name: this.nameCategoriesMode,
-              title: "Enable grouping",
-              titleLocation: "hidden",
-              defaultValue: "categories",
-              valueTrue: "categories",
-              valueFalse: "items",
-              clearIfInvisible: "onHidden",
-              startWithNewLine: false,
-              renderAs: "checkbox"
-            },
-            {
-              type: "boolean",
-              name: this.nameShowCategoryTitles,
-              title: "Show category titles",
-              defaultValue: false,
-              titleLocation: "hidden",
-              visibleIf: this.getTextVisibleIf(this.nameCategoriesMode, "categories"),
-              clearIfInvisible: "onHidden",
-              startWithNewLine: false,
-              renderAs: "checkbox"
-            }]
-        }
-      ]
-    };
   }
 }

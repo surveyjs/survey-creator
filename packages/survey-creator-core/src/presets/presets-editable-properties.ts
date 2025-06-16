@@ -12,6 +12,51 @@
 // import { QuestionEmbeddedCreatorModel } from "./components/embedded-creator";
 // require("./presets-editable-properties.scss");
 
+import { ElementFactory, QuestionMatrixDynamicModel, QuestionPanelDynamicModel, SurveyModel } from "survey-core";
+import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
+import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
+import { SurveyCreatorModel } from "survey-creator-core";
+
+export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCaregorizedListConfigurator {
+  private allTypes: string[];
+  private onGetDynamicPanelTabTitle = (_, options: any) => {
+    if (options.question.name == this.namePanel) {
+      options.title = this.allTypes[options.visiblePanelIndex];
+    }
+  };
+  protected getPanel(model: SurveyModel): QuestionPanelDynamicModel {
+    return (<QuestionPanelDynamicModel>model.getQuestionByName(this.namePanel));
+  }
+
+  protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
+    this.allTypes = ElementFactory.Instance.getAllToolboxTypes();
+    model.onGetDynamicPanelTabTitle.add(this.onGetDynamicPanelTabTitle);
+    this.getPanel(model).panelCount = this.allTypes.length;
+  }
+  protected get namePanel() {
+    return this.fullPath + "_dynamicpanel";
+  }
+  public createMainPageCore(): any {
+    return {
+      title: "Set Up the Property Grid",
+      navigationTitle: "Property Grid",
+      elements: [
+        {
+          "type": "paneldynamic",
+          "displayMode": "tab",
+          "name": this.namePanel,
+          "templateElements": [
+            {
+              type: "text",
+              name: "what",
+            }
+          ]
+        }
+      ]
+    };
+  }
+}
+
 // export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
 //   constructor(obj: any, className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
 //     super(obj, null, className, null, null, null, propertyGridDefinition);
@@ -540,10 +585,5 @@
 //   private isDefaultCategoryName(name: string): boolean {
 //     if (!name) return true;
 //     return !!this.currentProperties.propertyGridDefault.survey.getPageByName(name);
-//   }
-// }
-// export class CreatorEditablePresetPropertyGrid extends CreatorPresetEditableBase {
-//   protected onLocaleChangedCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-//     model.clearValue("propertyGrid_definition_selector");
 //   }
 // }

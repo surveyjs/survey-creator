@@ -1,5 +1,5 @@
 import { Helpers, IDialogOptions, MatrixDynamicRowModel, QuestionMatrixDynamicModel, settings, SurveyModel } from "survey-core";
-import { SurveyCreatorModel, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
+import { SurveyCreatorModel, editorLocalization, CreatorPresetBase, ICreatorOptions } from "survey-creator-core";
 
 export interface ICreatorPresetEditorSetup {
   creator: SurveyCreatorModel;
@@ -172,5 +172,26 @@ export class CreatorPresetEditableBase {
         displayMode: "popup"
       }, rootElement);
     }
+  }
+  public static updateModifiedText(locStrs: any, text: string, localizationName: string): void {
+    if (!localizationName) return undefined;
+    if (!text) return;
+    const presetStrs = editorLocalization.presetStrings;
+    editorLocalization.presetStrings = undefined;
+    if (text !== editorLocalization.getString(localizationName)) {
+      CreatorPresetEditableBase.saveTextInLocStrs(locStrs, text, localizationName);
+    }
+    editorLocalization.presetStrings = presetStrs;
+  }
+  private static saveTextInLocStrs(locStrs: any, text: string, localizationName: string): void {
+    const paths = localizationName.split(".");
+    for (let i = 0; i < paths.length - 1; i ++) {
+      const path = paths[i];
+      if (!locStrs[path]) {
+        locStrs[path] = {};
+      }
+      locStrs = locStrs[path];
+    }
+    locStrs[paths[paths.length - 1]] = text;
   }
 }

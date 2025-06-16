@@ -3,6 +3,7 @@ import { CreatorPreset, ICreatorPresetData } from "survey-creator-core";
 import { ActionContainer, Base, ComputedUpdater, LocalizableString, SurveyModel, createDropdownActionModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
+import { CreatorPresetEditablePropertyGrid } from "./presets-editable-properties";
 import { CreatorPresetEditableTabs } from "./presets-editable-tabs";
 import { CreatorPresetEditableLanguages } from "./presets-editable-languages";
 
@@ -315,6 +316,7 @@ preset.apply(creator);</div></pre></code></div>
     if (fullPath === "languages") return new CreatorPresetEditableLanguages(preset);
     if (fullPath === "tabs") return new CreatorPresetEditableTabs(preset);
     if (fullPath === "toolbox") return new CreatorPresetEditableToolboxConfigurator(preset);
+    if (fullPath === "propertyGrid") return new CreatorPresetEditablePropertyGrid(preset);
     return undefined;
   }
   private createEditable(preset: CreatorPreset, parent: CreatorPresetEditableBase, fullPath: string): CreatorPresetEditableBase {
@@ -349,27 +351,5 @@ preset.apply(creator);</div></pre></code></div>
       }
     });
     return modelJson;
-  }
-
-  public static updateModifiedText(locStrs: any, text: string, localizationName: string): void {
-    if (!localizationName) return undefined;
-    if (!text) return;
-    const presetStrs = editorLocalization.presetStrings;
-    editorLocalization.presetStrings = undefined;
-    if (text !== editorLocalization.getString(localizationName)) {
-      CreatorPresetEditorModel.saveTextInLocStrs(locStrs, text, localizationName);
-    }
-    editorLocalization.presetStrings = presetStrs;
-  }
-  private static saveTextInLocStrs(locStrs: any, text: string, localizationName: string): void {
-    const paths = localizationName.split(".");
-    for (let i = 0; i < paths.length - 1; i ++) {
-      const path = paths[i];
-      if (!locStrs[path]) {
-        locStrs[path] = {};
-      }
-      locStrs = locStrs[path];
-    }
-    locStrs[paths[paths.length - 1]] = text;
   }
 }
