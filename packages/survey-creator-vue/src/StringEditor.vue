@@ -27,6 +27,7 @@
           :aria-placeholder="placeholder"
           :aria-label="placeholder || 'content editable'"
           :contenteditable="contentEditable"
+          :tabindex="baseModel.tabIndex"
           ref="root"
         ></span>
         <span
@@ -45,6 +46,7 @@
           :aria-placeholder="placeholder"
           :aria-label="placeholder || 'content editable'"
           :contenteditable="contentEditable"
+          :tabindex="baseModel.tabIndex"
           v-html="renderedHtml"
           ref="root"
         ></span>

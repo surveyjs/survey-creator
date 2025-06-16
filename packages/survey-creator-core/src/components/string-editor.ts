@@ -346,7 +346,6 @@ export class StringEditorViewModelBase extends Base {
 
     event.target.parentElement.click();
     event.target.spellcheck = true;
-    event.target.setAttribute("tabindex", -1);
     this.focused = true;
     this.justFocused = true;
   }
@@ -387,7 +386,6 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onBlur(event: any): void {
-    event.target.removeAttribute("tabindex");
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
       if (this.locString.hasHtml) {
@@ -603,6 +601,9 @@ export class StringEditorViewModelBase extends Base {
   public get contentEditable(): boolean {
     if (!this.creator) return true;
     return this.creator.isCanModifyProperty(<any>this.locString.owner, this.locString.name);
+  }
+  public get tabIndex(): number {
+    return this.contentEditable ? 0 : null;
   }
   public get showCharacterCounter(): boolean {
     return this.maxLength !== -1;
