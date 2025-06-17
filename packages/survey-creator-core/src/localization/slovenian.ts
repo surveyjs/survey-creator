@@ -1435,7 +1435,12 @@ export var slStrings = {
       descriptionLocation: "Možnost \"Dedovanje\" uporabi nastavitev na ravni strani (če je nastavljeno) ali na ravni ankete (\"Pod naslovom panela\" privzeto).",
       newPanelPosition: "Določi pozicijo novega panela. Privzeto se novi paneli dodajo na konec. Izberite \"Naslednji\", da vstavite nov panel po trenutnem.",
       copyDefaultValueFromLastEntry: "Podvoji odgovore iz zadnjega panela in jih dodeli naslednjemu dodanemu dinamičnemu panelu.",
-      keyName: "Sklicujte se na ime vprašanja, da zahteva od uporabnika, da za to vprašanje v vsakem panelu poda edinstven odgovor."
+      keyName: "Sklicujte se na ime vprašanja, da zahteva od uporabnika, da za to vprašanje v vsakem panelu poda edinstven odgovor.",
+      confirmDelete: "Sproži potrditveni poziv pred odstranitvijo plošče."
+    },
+    matrixdynamic: {
+      confirmDelete: "Sproži potrditveni poziv pred odstranitvijo vrstice.",
+      detailPanelShowOnAdding: "Samodejno razširi razdelek s podrobnostmi, ko je v matriko dodana nova vrstica."
     },
     copyDefaultValueFromLastEntry: "Podvoji odgovore iz zadnje vrstice in jih dodeli naslednji dinamično dodani vrstici.",
     defaultValueExpression: "Ta nastavitev vam omogoča dodelitev privzetega odgovora na podlagi izraza. Izraz lahko vključuje osnovne izračune - `{q1_id} + {q2_id}`, Booleove izraze, kot je `{age} > 60`, in funkcije: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, itd. Vrednost, določena z tem izrazom, služi kot začetna privzeta vrednost, ki jo lahko respondent prekine z ročnim vnosom.",
@@ -1559,7 +1564,6 @@ export var slStrings = {
     detailErrorLocation: "Nastavi lokacijo sporočil o napakah za vprašanja, gnezdena v podrobnostnih razdelkih. Nastavitev Podedovano uporablja nastavitev iz lastnosti: Poravnava sporočila o napaki",
     keyDuplicationError: "Ko je omogočena lastnost Prepreči podvojene odgovore, bo anketiranec, ki bo poskušal oddati podvojen vnos, prejel naslednje sporočilo o napaki",
     totalExpression: "Omogoča izračun skupnih vrednosti na podlagi izraza. Izraz lahko vključuje: osnovne izračune ({q1_id} + {q2_id}), Booleove izraze ({age} > 60) in funkcije (iif(), today(), age(), min(), max(), avg() itd.)",
-    confirmDelete: "Sproži poziv za potrditev brisanja vrstice",
     keyName: "Sklicujte se na ID stolpca, da zahtevate od uporabnika, da zagotovi edinstven odgovor za vsako vprašanje znotraj določenega stolpca",
     description: "Vnesite podnaslov",
     locale: "Izberite jezik za začetek ustvarjanja vaše ankete. Če želite dodati prevod, preklopite na nov jezik in prevedite izvirno besedilo tukaj ali na zavihku Prevod",
@@ -1727,7 +1731,7 @@ export var slStrings = {
     detailElements: "Podrobnosti elementov",
     allowAdaptiveActions: "Dovoli prilagodljive akcije",
     defaultRowValue: "Privzeta vrednost vrstice",
-    detailPanelShowOnAdding: "Prikaz panela podrobnosti ob dodajanju",
+    detailPanelShowOnAdding: "Samodejna razširitev podrobnosti nove vrstice",
     choicesLazyLoadEnabled: "Omogoči počasno nalaganje izbir",
     choicesLazyLoadPageSize: "Velikost strani za počasno nalaganje izbir",
     inputFieldComponent: "Komponenta vhodnega polja",
@@ -1925,3 +1929,7 @@ setupLocale({ localeCode: "sl", strings: slStrings });
 // slider.labelFormat: "Label format" => "Oblika nalepke"
 // slider.tooltipFormat: "Tooltip format" => "Oblika opisa orodja"
 // question.showTitle: "Show the title and description" => "Pokažite naslov in opis"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Sproži potrditveni poziv pred odstranitvijo plošče."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Sproži potrditveni poziv pred odstranitvijo vrstice."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Samodejno razširi razdelek s podrobnostmi, ko je v matriko dodana nova vrstica."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Samodejna razširitev podrobnosti nove vrstice"

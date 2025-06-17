@@ -1435,7 +1435,12 @@ export var danishStrings = {
       descriptionLocation: "Indstillingen \"Nedarv\" anvender indstillingen på sideniveau (hvis angivet) eller undersøgelsesniveau (\"Under paneltitlen\" som standard).",
       newPanelPosition: "Definerer placeringen af et nyligt tilføjet panel. Som standard tilføjes nye paneler til slutningen. Vælg \"Næste\" for at indsætte et nyt panel efter det aktuelle.",
       copyDefaultValueFromLastEntry: "Duplikerer svar fra det sidste panel og tildeler dem til det næste tilføjede dynamiske panel.",
-      keyName: "Henvis til et spørgsmålsnavn for at kræve, at en bruger giver et entydigt svar på dette spørgsmål i hvert panel."
+      keyName: "Henvis til et spørgsmålsnavn for at kræve, at en bruger giver et entydigt svar på dette spørgsmål i hvert panel.",
+      confirmDelete: "Udløser en bekræftelsesprompt, før du fjerner et panel."
+    },
+    matrixdynamic: {
+      confirmDelete: "Udløser en bekræftelsesprompt, før en række fjernes.",
+      detailPanelShowOnAdding: "Udvider automatisk detaljesektionen, når en ny række føjes til matrixen."
     },
     copyDefaultValueFromLastEntry: "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række.",
     defaultValueExpression: "Med denne indstilling kan du tildele en standardsvarværdi baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger - '{q1_id} + {q2_id}', booleske udtryk, såsom '{alder} > 60' og funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Den værdi, der bestemmes af dette udtryk, fungerer som den oprindelige standardværdi, der kan tilsidesættes af svarpersonens manuelle input.",
@@ -1559,7 +1564,6 @@ export var danishStrings = {
     detailErrorLocation: "Angiver placeringen af fejlmeddelelser for spørgsmål, der er indlejret i detaljerede afsnit. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelser\".",
     keyDuplicationError: "Når egenskaben \"Undgå dublerede svar\" er aktiveret, modtager en svarperson, der forsøger at sende en dubletpost, følgende fejlmeddelelse.",
     totalExpression: "Giver dig mulighed for at beregne samlede værdier baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger ('{q1_id} + {q2_id}'), booleske udtryk ('{alder} > 60') og funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv.).",
-    confirmDelete: "Udløser en prompt, der beder om at bekræfte sletningen af rækken.",
     keyName: "Hvis den angivne kolonne indeholder identiske værdier, kaster undersøgelsen fejlen \"Ikke-unik nøgleværdi\".",
     description: "Skriv en undertekst.",
     locale: "Vælg et sprog for at begynde at oprette undersøgelsen. Hvis du vil tilføje en oversættelse, skal du skifte til et nyt sprog og oversætte den oprindelige tekst her eller på fanen Oversættelser.",
@@ -1727,7 +1731,7 @@ export var danishStrings = {
     detailElements: "Detaljeelementer",
     allowAdaptiveActions: "Tillad adaptive handlinger",
     defaultRowValue: "defaultRowValue",
-    detailPanelShowOnAdding: "Panelet Detaljer vises ved tilføjelse",
+    detailPanelShowOnAdding: "Udvid automatisk nye rækkedetaljer",
     choicesLazyLoadEnabled: "Valg doven belastning aktiveret",
     choicesLazyLoadPageSize: "Valg doven indlæsningssidestørrelse",
     inputFieldComponent: "Inputfeltkomponent",
@@ -2146,9 +2150,9 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pe.detailPanelMode: "Detail panel location" => "Placering af panelet Detaljer"
 // pe.minRowCount: "Minimum row count" => "Mindste antal rækker"
 // pe.maxRowCount: "Maximum row count" => "Maksimalt antal rækker"
-// pe.confirmDelete: "Confirm row deletion" => "Bekræft sletning af række"
+// pe.confirmDelete: "Confirm row removal" => "Bekræft sletning af række"
 // pe.confirmDeleteText: "Confirmation message" => "Bekræftelsesmeddelelse"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Bekræft sletning af panel"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Bekræft sletning af panel"
 // pe.panelCount: "Initial panel count" => "Indledende antal paneler"
 // pe.minPanelCount: "Minimum panel count" => "Mindste antal paneler"
 // pe.maxPanelCount: "Maximum panel count" => "Maksimalt antal paneler"
@@ -2891,7 +2895,7 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angiver placeringen af en fejlmeddelelse i forhold til en celle med ugyldigt input. Indstillingen \"Arv\" anvender indstillingen fra egenskaben \"Justering af fejlmeddelelse\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Når egenskaben \"Undgå dublerede svar\" er aktiveret, modtager en svarperson, der forsøger at sende en dubletpost, følgende fejlmeddelelse."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Giver dig mulighed for at beregne samlede værdier baseret på et udtryk. Udtrykket kan omfatte grundlæggende beregninger ('{q1_id} + {q2_id}'), booleske udtryk ('{alder} > 60') og funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Udløser en prompt, der beder om at bekræfte sletningen af rækken."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Udløser en prompt, der beder om at bekræfte sletningen af rækken."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række."
 // pehelp.description: "Type a subtitle." => "Skriv en undertekst."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Vælg et sprog for at begynde at oprette undersøgelsen. Hvis du vil tilføje en oversættelse, skal du skifte til et nyt sprog og oversætte den oprindelige tekst her eller på fanen Oversættelser."
@@ -3335,3 +3339,7 @@ setupLocale({ localeCode: "da", strings: danishStrings });
 // slider.labelFormat: "Label format" => "Etiket format"
 // slider.tooltipFormat: "Tooltip format" => "Værktøjstip-format"
 // question.showTitle: "Show the title and description" => "Vis titel og beskrivelse"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Udløser en bekræftelsesprompt, før du fjerner et panel."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Udløser en bekræftelsesprompt, før en række fjernes."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Udvider automatisk detaljesektionen, når en ny række føjes til matrixen."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Udvid automatisk nye rækkedetaljer"

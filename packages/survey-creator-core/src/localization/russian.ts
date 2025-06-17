@@ -1435,7 +1435,12 @@ export var ruStrings = {
       descriptionLocation: "Опция «Наследовать» применяет настройку на уровне страницы (если задано) или на уровне опроса («Под заголовком панели» по умолчанию).",
       newPanelPosition: "Определяет положение вновь добавляемой панели. По умолчанию новые панели добавляются в конец. Выберите «Далее», чтобы вставить новую панель после текущей.",
       copyDefaultValueFromLastEntry: "Дублирует ответы с последней панели и назначает их следующей добавленной динамической панели.",
-      keyName: "Укажите имя вопроса, чтобы пользователь мог предоставить уникальный ответ на этот вопрос на каждой панели."
+      keyName: "Укажите имя вопроса, чтобы пользователь мог предоставить уникальный ответ на этот вопрос на каждой панели.",
+      confirmDelete: "Запускает запрос на подтверждение перед удалением панели."
+    },
+    matrixdynamic: {
+      confirmDelete: "Запускает запрос на подтверждение перед удалением строки.",
+      detailPanelShowOnAdding: "Автоматически разворачивает раздел сведений при добавлении в матрицу новой строки."
     },
     copyDefaultValueFromLastEntry: "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке.",
     defaultValueExpression: "Этот параметр позволяет назначить значение ответа по умолчанию на основе выражения. Выражение может включать в себя базовые вычисления - '{q1_id} + {q2_id}', логические выражения, такие как '{age} > 60', и функции: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д. Значение, определяемое этим выражением, служит начальным значением по умолчанию, которое может быть переопределено ручным вводом респондентом.",
@@ -1559,7 +1564,6 @@ export var ruStrings = {
     detailErrorLocation: "Задает расположение сообщений об ошибках для вопросов, вложенных в подробные разделы. Опция \"Наследовать\" применяет настройку из свойства \"Выравнивание сообщения об ошибке\".",
     keyDuplicationError: "Если включено свойство «Не допускать дублирования ответов», респондент, пытающийся отправить дублирующуюся запись, получит следующее сообщение об ошибке.",
     totalExpression: "Позволяет вычислять итоговые значения на основе выражения. Выражение может включать базовые вычисления ('{q1_id} + {q2_id}'), логические выражения ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д.).",
-    confirmDelete: "Запускает запрос на подтверждение удаления строки.",
     keyName: "Если указанный столбец содержит одинаковые значения, опрос выдает ошибку «Неуникальное значение ключа».",
     description: "Введите субтитры.",
     locale: "Выберите язык, чтобы начать создание опроса. Чтобы добавить перевод, переключитесь на новый язык и переведите исходный текст здесь или во вкладке «Переводы».",
@@ -1727,7 +1731,7 @@ export var ruStrings = {
     detailElements: "Детализация элементов",
     allowAdaptiveActions: "Разрешить адаптивные действия",
     defaultRowValue: "Значение строки по умолчанию",
-    detailPanelShowOnAdding: "Панель сведений, отображаемая при добавлении",
+    detailPanelShowOnAdding: "Автоматическое раскрытие сведений о новой строке",
     choicesLazyLoadEnabled: "Выбор отложенной загрузки включен",
     choicesLazyLoadPageSize: "Выбор ленивой загрузки размера страницы",
     inputFieldComponent: "Компонент поля ввода",
@@ -2048,9 +2052,9 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pe.detailPanelMode: "Detail panel location" => "Расположение панели сведений"
 // pe.minRowCount: "Minimum row count" => "Минимальное количество строк"
 // pe.maxRowCount: "Maximum row count" => "Максимальное количество строк"
-// pe.confirmDelete: "Confirm row deletion" => "Подтверждение удаления строки"
+// pe.confirmDelete: "Confirm row removal" => "Подтверждение удаления строки"
 // pe.confirmDeleteText: "Confirmation message" => "Подтверждающее сообщение"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Подтвердите удаление панели"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Подтвердите удаление панели"
 // pe.panelCount: "Initial panel count" => "Начальное количество панелей"
 // pe.minPanelCount: "Minimum panel count" => "Минимальное количество панелей"
 // pe.maxPanelCount: "Maximum panel count" => "Максимальное количество панелей"
@@ -2767,7 +2771,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Задает местоположение сообщения об ошибке по отношению к ячейке с недопустимыми входными данными. Опция «Наследовать» применяет настройку из свойства «Выравнивание сообщений об ошибках»."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Если включено свойство «Не допускать дублирования ответов», респондент, пытающийся отправить дублирующуюся запись, получит следующее сообщение об ошибке."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Позволяет вычислять итоговые значения на основе выражения. Выражение может включать базовые вычисления ('{q1_id} + {q2_id}'), логические выражения ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.д.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Запускает запрос на подтверждение удаления строки."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Запускает запрос на подтверждение удаления строки."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке."
 // pehelp.description: "Type a subtitle." => "Введите субтитры."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Выберите язык, чтобы начать создание опроса. Чтобы добавить перевод, переключитесь на новый язык и переведите исходный текст здесь или во вкладке «Переводы»."
@@ -3206,3 +3210,7 @@ setupLocale({ localeCode: "ru", strings: ruStrings });
 // slider.labelFormat: "Label format" => "Формат этикетки"
 // slider.tooltipFormat: "Tooltip format" => "Формат всплывающей подсказки"
 // question.showTitle: "Show the title and description" => "Показать название и описание"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Запускает запрос на подтверждение перед удалением панели."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Запускает запрос на подтверждение перед удалением строки."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Автоматически разворачивает раздел сведений при добавлении в матрицу новой строки."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Автоматическое раскрытие сведений о новой строке"

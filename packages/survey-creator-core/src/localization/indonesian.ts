@@ -1435,7 +1435,12 @@ export var indonesianStrings = {
       descriptionLocation: "Opsi \"Warisi\" menerapkan setelan tingkat halaman (jika ditetapkan) atau tingkat survei (\"Di bawah judul panel\" secara default).",
       newPanelPosition: "Menentukan posisi panel yang baru ditambahkan. Secara default, panel baru ditambahkan ke akhir. Pilih \"Next\" untuk memasukkan panel baru setelah yang sekarang.",
       copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari panel terakhir dan menetapkannya ke panel dinamis tambahan berikutnya.",
-      keyName: "Rujuk nama pertanyaan untuk mengharuskan pengguna memberikan respons unik untuk pertanyaan ini di setiap panel."
+      keyName: "Rujuk nama pertanyaan untuk mengharuskan pengguna memberikan respons unik untuk pertanyaan ini di setiap panel.",
+      confirmDelete: "Memicu perintah konfirmasi sebelum menghapus panel."
+    },
+    matrixdynamic: {
+      confirmDelete: "Memicu perintah konfirmasi sebelum menghapus baris.",
+      detailPanelShowOnAdding: "Secara otomatis memperluas bagian detail saat baris baru ditambahkan ke matriks."
     },
     copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari baris terakhir dan menetapkannya ke baris dinamis berikutnya yang ditambahkan.",
     defaultValueExpression: "Pengaturan ini memungkinkan Anda menetapkan nilai jawaban default berdasarkan ekspresi. Ekspresi dapat mencakup perhitungan dasar - '{q1_id} + {q2_id}', ekspresi Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll. Nilai yang ditentukan oleh ekspresi ini berfungsi sebagai nilai default awal yang dapat ditimpa oleh input manual responden.",
@@ -1559,7 +1564,6 @@ export var indonesianStrings = {
     detailErrorLocation: "Mengatur lokasi pesan kesalahan untuk pertanyaan yang bertumpuk di bagian detail. Opsi \"Wariskan\" menerapkan pengaturan dari properti \"Perataan pesan kesalahan\".",
     keyDuplicationError: "Ketika properti \"mencegah duplikat respons\" diaktifkan, responden mencoba untuk mengirimkan entri duplikat akan menerima pesan galat berikut.",
     totalExpression: "Memungkinkan Anda menghitung nilai total berdasarkan ekspresi. Ekspresi dapat mencakup perhitungan dasar ('{q1_id} + {q2_id}'), ekspresi Boolean ('{age} > 60') dan fungsi ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll.).",
-    confirmDelete: "Memicu prompt yang meminta konfirmasi penghapusan baris.",
     keyName: "Jika kolom yang ditentukan berisi nilai yang identik, survei akan memunculkan kesalahan \"Nilai kunci tidak unik\".",
     description: "Ketik subtitle.",
     locale: "Pilih bahasa untuk mulai membuat survei. Untuk menambahkan terjemahan, beralihlah ke bahasa baru dan terjemahkan teks asli di sini atau di tab Terjemahan.",
@@ -1727,7 +1731,7 @@ export var indonesianStrings = {
     detailElements: "Elemen detail",
     allowAdaptiveActions: "Izinkan tindakan adaptif",
     defaultRowValue: "nilai baris default",
-    detailPanelShowOnAdding: "Panel detail menunjukkan pada menambahkan",
+    detailPanelShowOnAdding: "Perluas detail baris baru secara otomatis",
     choicesLazyLoadEnabled: "Pilihan lazy load diaktifkan",
     choicesLazyLoadPageSize: "Pilihan malas memuat ukuran halaman",
     inputFieldComponent: "Komponen bidang input",
@@ -2120,9 +2124,9 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pe.detailPanelMode: "Detail panel location" => "Lokasi panel detail"
 // pe.minRowCount: "Minimum row count" => "Jumlah baris minimum"
 // pe.maxRowCount: "Maximum row count" => "Jumlah baris maksimum"
-// pe.confirmDelete: "Confirm row deletion" => "Mengonfirmasi penghapusan baris"
+// pe.confirmDelete: "Confirm row removal" => "Mengonfirmasi penghapusan baris"
 // pe.confirmDeleteText: "Confirmation message" => "Pesan konfirmasi"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Konfirmasi penghapusan panel"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Konfirmasi penghapusan panel"
 // pe.panelCount: "Initial panel count" => "Jumlah panel awal"
 // pe.minPanelCount: "Minimum panel count" => "Jumlah panel minimum"
 // pe.maxPanelCount: "Maximum panel count" => "Jumlah panel maksimum"
@@ -2861,7 +2865,7 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Mengatur lokasi pesan kesalahan dalam kaitannya dengan sel dengan input yang tidak valid. Opsi \"Warisi\" menerapkan pengaturan dari properti \"Perataan pesan kesalahan\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Ketika properti \"mencegah duplikat respons\" diaktifkan, responden mencoba untuk mengirimkan entri duplikat akan menerima pesan galat berikut."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Memungkinkan Anda menghitung nilai total berdasarkan ekspresi. Ekspresi dapat mencakup perhitungan dasar ('{q1_id} + {q2_id}'), ekspresi Boolean ('{age} > 60') dan fungsi ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', dll.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Memicu prompt yang meminta konfirmasi penghapusan baris."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Memicu prompt yang meminta konfirmasi penghapusan baris."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Menduplikasi jawaban dari baris terakhir dan menetapkannya ke baris dinamis berikutnya yang ditambahkan."
 // pehelp.description: "Type a subtitle." => "Ketik subtitle."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Pilih bahasa untuk mulai membuat survei. Untuk menambahkan terjemahan, beralihlah ke bahasa baru dan terjemahkan teks asli di sini atau di tab Terjemahan."
@@ -3305,3 +3309,7 @@ setupLocale({ localeCode: "id", strings: indonesianStrings });
 // slider.labelFormat: "Label format" => "Format label"
 // slider.tooltipFormat: "Tooltip format" => "Format tooltip"
 // question.showTitle: "Show the title and description" => "Tampilkan judul dan deskripsi"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Memicu perintah konfirmasi sebelum menghapus panel."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Memicu perintah konfirmasi sebelum menghapus baris."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Secara otomatis memperluas bagian detail saat baris baru ditambahkan ke matriks."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Perluas detail baris baru secara otomatis"

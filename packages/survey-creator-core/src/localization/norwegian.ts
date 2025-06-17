@@ -1435,7 +1435,12 @@ export var nbStrings = {
       descriptionLocation: "Alternativet \"Arv\" bruker innstillingen på sidenivå (hvis angitt) eller innstilling på undersøkelsesnivå (\"Under paneltittelen\" som standard).",
       newPanelPosition: "Definerer posisjonen til et nylig lagt til-panel. Som standard legges nye paneler til slutten. Velg \"Neste\" for å sette inn et nytt panel etter det nåværende.",
       copyDefaultValueFromLastEntry: "Dupliserer svar fra det siste panelet og tilordner dem til det neste dynamiske panelet som er lagt til.",
-      keyName: "Referer til et spørsmålsnavn for å kreve at en bruker gir et unikt svar på dette spørsmålet i hvert panel."
+      keyName: "Referer til et spørsmålsnavn for å kreve at en bruker gir et unikt svar på dette spørsmålet i hvert panel.",
+      confirmDelete: "Utløser en bekreftelsesmelding før du fjerner et panel."
+    },
+    matrixdynamic: {
+      confirmDelete: "Utløser en bekreftelsesmelding før du fjerner en rad.",
+      detailPanelShowOnAdding: "Utvider automatisk detaljdelen når en ny rad legges til i matrisen."
     },
     copyDefaultValueFromLastEntry: "Dupliserer svar fra den siste raden og tilordner dem til den neste dynamiske raden som er lagt til.",
     defaultValueExpression: "Med denne innstillingen kan du tilordne en standard svarverdi basert på et uttrykk. Uttrykket kan inneholde grunnleggende beregninger - '{q1_id} + {q2_id}', boolske uttrykk, for eksempel '{alder} > 60', og funksjoner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. Verdien som bestemmes av dette uttrykket, fungerer som den opprinnelige standardverdien som kan overstyres av en respondents manuelle inndata.",
@@ -1559,7 +1564,6 @@ export var nbStrings = {
     detailErrorLocation: "Angir plasseringen av feilmeldinger for spørsmål som er nestet i detaljdeler. Alternativet \"Arv\" bruker innstillingen fra egenskapen \"Feilmeldingsjustering\".",
     keyDuplicationError: "Når egenskapen \"Forhindre dupliserte svar\" er aktivert, får en svarperson som prøver å sende inn en duplikatoppføring, følgende feilmelding.",
     totalExpression: "Lar deg beregne totalverdier basert på et uttrykk. Uttrykket kan omfatte grunnleggende beregninger ('{q1_id} + {q2_id}'), boolske uttrykk ('{alder} > 60') og funksjoner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
-    confirmDelete: "Utløser en melding som ber om å bekrefte radslettingen.",
     keyName: "Hvis den angitte kolonnen inneholder identiske verdier, gir undersøkelsen feilen \"Ikke-unik nøkkelverdi\".",
     description: "Skriv inn en undertekst.",
     locale: "Velg et språk for å begynne å opprette evalueringen. Hvis du vil legge til en oversettelse, bytter du til et nytt språk og oversetter originalteksten her eller i Oversettelser-fanen.",
@@ -1727,7 +1731,7 @@ export var nbStrings = {
     detailElements: "Detaljelementer",
     allowAdaptiveActions: "Tillat adaptive handlinger",
     defaultRowValue: "defaultRowValue",
-    detailPanelShowOnAdding: "Detaljpanelet vises når du legger til",
+    detailPanelShowOnAdding: "Utvid nye raddetaljer automatisk",
     choicesLazyLoadEnabled: "Valg lat belastning aktivert",
     choicesLazyLoadPageSize: "Valg lat lastesidestørrelse",
     inputFieldComponent: "Komponent for inntastingsfelt",
@@ -2004,9 +2008,9 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pe.detailPanelMode: "Detail panel location" => "Plassering av detaljpanelet"
 // pe.minRowCount: "Minimum row count" => "Minimum radantall"
 // pe.maxRowCount: "Maximum row count" => "Maksimalt radantall"
-// pe.confirmDelete: "Confirm row deletion" => "Bekreft radsletting"
+// pe.confirmDelete: "Confirm row removal" => "Bekreft radsletting"
 // pe.confirmDeleteText: "Confirmation message" => "Bekreftelsesmelding"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Bekreft sletting av panel"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Bekreft sletting av panel"
 // pe.panelCount: "Initial panel count" => "Innledende panelopptelling"
 // pe.minPanelCount: "Minimum panel count" => "Minimum antall paneler"
 // pe.maxPanelCount: "Maximum panel count" => "Maksimalt antall paneler"
@@ -2710,7 +2714,7 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Angir plasseringen til en feilmelding i forhold til en celle med ugyldige inndata. Alternativet \"Arv\" bruker innstillingen fra egenskapen \"Justering av feilmelding\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Når egenskapen \"Forhindre dupliserte svar\" er aktivert, får en svarperson som prøver å sende inn en duplikatoppføring, følgende feilmelding."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Lar deg beregne totalverdier basert på et uttrykk. Uttrykket kan omfatte grunnleggende beregninger ('{q1_id} + {q2_id}'), boolske uttrykk ('{alder} > 60') og funksjoner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Utløser en melding som ber om å bekrefte radslettingen."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Utløser en melding som ber om å bekrefte radslettingen."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Dupliserer svar fra den siste raden og tilordner dem til den neste dynamiske raden som er lagt til."
 // pehelp.description: "Type a subtitle." => "Skriv inn en undertekst."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Velg et språk for å begynne å opprette evalueringen. Hvis du vil legge til en oversettelse, bytter du til et nytt språk og oversetter originalteksten her eller i Oversettelser-fanen."
@@ -3153,3 +3157,7 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // slider.labelFormat: "Label format" => "Etikett format"
 // slider.tooltipFormat: "Tooltip format" => "Format for verktøytips"
 // question.showTitle: "Show the title and description" => "Vis tittelen og beskrivelsen"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Utløser en bekreftelsesmelding før du fjerner et panel."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Utløser en bekreftelsesmelding før du fjerner en rad."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Utvider automatisk detaljdelen når en ny rad legges til i matrisen."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Utvid nye raddetaljer automatisk"

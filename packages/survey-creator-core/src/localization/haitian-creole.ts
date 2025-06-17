@@ -1435,7 +1435,12 @@ export var htStrings = {
       descriptionLocation: "Opsyon \"Eritite\" aplike nivo paj la (si yo tabli) oswa nivo sondaj (\"Anba tit panèl la\" pa default).",
       newPanelPosition: "Defini pozisyon yon panèl ki fèk ajoute. Pa default, nouvo panno yo ajoute nan fen an. Chwazi \"Next\" pou mete yon nouvo panèl apre youn aktyèl la.",
       copyDefaultValueFromLastEntry: "Duplike repons ki soti nan dènye panèl la epi asiyen yo nan pwochen panèl dinamik ajoute a.",
-      keyName: "Referans yon non kesyon pou mande pou yon itilizatè bay yon repons inik pou kesyon sa a nan chak panèl."
+      keyName: "Referans yon non kesyon pou mande pou yon itilizatè bay yon repons inik pou kesyon sa a nan chak panèl.",
+      confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon panèl."
+    },
+    matrixdynamic: {
+      confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon ranje.",
+      detailPanelShowOnAdding: "Otomatikman ogmante seksyon an detay lè yon nouvo ranje ajoute nan matris la."
     },
     copyDefaultValueFromLastEntry: "Duplike repons ki soti nan dènye ranje a epi asiyen yo nan pwochen ranje dinamik ajoute a.",
     defaultValueExpression: "Anviwònman sa a pèmèt ou bay yon valè repons default ki baze sou yon ekspresyon. Ekspresyon an ka gen ladan kalkil debaz - `{q1_id} + {q2_id}`, ekspresyon Boolean, tankou `{age} > 60`, ak fonksyon: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, elatriye. Valè ki detèmine pa ekspresyon sa a sèvi kòm valè defo inisyal ki ka pase sou plas pa manyèl yon moun ki reponn.",
@@ -1559,7 +1564,6 @@ export var htStrings = {
     detailErrorLocation: "Fikse kote mesaj erè yo pou kesyon ki enbrike nan seksyon detay yo. Opsyon \"Eritye\" aplike paramèt ki soti nan pwopriyete \"Aliyman mesaj erè\".",
     keyDuplicationError: "Lè pwopriyete \"Anpeche repons kopi\" yo aktive, yon moun ki reponn ap eseye soumèt yon kopi kopi ap resevwa mesaj erè sa a.",
     totalExpression: "Pèmèt ou kalkile valè total ki baze sou yon ekspresyon. Ekspresyon an ka gen ladan kalkil debaz (`{q1_id} + {q2_id}`), ekspresyon booleyen (`{age} > 60`) ak fonksyon ('iif()`, `jodi a ()`, `age ()`, `min()`, `max()`, `avg()`, elatriye).",
-    confirmDelete: "Deklanche yon èd memwa ki mande konfime sipresyon ranje a.",
     keyName: "Referans yon ID kolòn pou mande pou yon itilizatè bay yon repons inik pou chak kesyon nan kolòn espesifye a.",
     description: "Tape yon sous-titre.",
     locale: "Chwazi yon lang pou kòmanse kreye sondaj ou a. Pou ajoute yon tradiksyon, chanje nan yon nouvo lang epi tradui tèks orijinal la isit la oswa nan tab la Tradiksyon.",
@@ -1727,7 +1731,7 @@ export var htStrings = {
     detailElements: "Eleman detay",
     allowAdaptiveActions: "Pèmèt aksyon adaptasyon",
     defaultRowValue: "Valè ranje default",
-    detailPanelShowOnAdding: "Panèl detay montre sou ajoute",
+    detailPanelShowOnAdding: "Oto-elaji nouvo detay ranje",
     choicesLazyLoadEnabled: "Chwa chaj parese pèmèt",
     choicesLazyLoadPageSize: "Chwa gwosè paj chaj parese",
     inputFieldComponent: "Antre eleman jaden",
@@ -1919,3 +1923,7 @@ setupLocale({ localeCode: "ht", strings: htStrings });
 // slider.labelFormat: "Label format" => "Fòma etikèt"
 // slider.tooltipFormat: "Tooltip format" => "Fòma zouti"
 // question.showTitle: "Show the title and description" => "Montre la ak deskripsyon an"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Deklanche yon konfimasyon pouse anvan ou retire yon panèl."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Deklanche yon konfimasyon pouse anvan ou retire yon ranje."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Otomatikman ogmante seksyon an detay lè yon nouvo ranje ajoute nan matris la."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Oto-elaji nouvo detay ranje"

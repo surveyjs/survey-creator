@@ -1435,7 +1435,12 @@ var spanishTranslation = {
       descriptionLocation: "La opción \"Heredar\" aplica la configuración a nivel de página (si está establecida) o a nivel de encuesta (\"Debajo del título del panel\" de forma predeterminada).",
       newPanelPosition: "Define la posición de un panel recién añadido. De forma predeterminada, los nuevos paneles se agregan al final. Seleccione \"Siguiente\" para insertar un nuevo panel después del actual.",
       copyDefaultValueFromLastEntry: "Duplica las respuestas del último panel y las asigna al siguiente panel dinámico agregado.",
-      keyName: "Haga referencia a un nombre de pregunta para requerir que un usuario proporcione una respuesta única para esta pregunta en cada panel."
+      keyName: "Haga referencia a un nombre de pregunta para requerir que un usuario proporcione una respuesta única para esta pregunta en cada panel.",
+      confirmDelete: "Activa un mensaje de confirmación antes de quitar un panel."
+    },
+    matrixdynamic: {
+      confirmDelete: "Desencadena un mensaje de confirmación antes de quitar una fila.",
+      detailPanelShowOnAdding: "Expande automáticamente la sección de detalles cuando se agrega una nueva fila a la matriz."
     },
     copyDefaultValueFromLastEntry: "Duplica las respuestas de la última fila y las asigna a la siguiente fila dinámica agregada.",
     defaultValueExpression: "Esta configuración le permite asignar un valor de respuesta predeterminado basado en una expresión. La expresión puede incluir cálculos básicos: '{q1_id} + {q2_id}', expresiones booleanas, como '{edad} > 60', y funciones: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. El valor determinado por esta expresión sirve como el valor predeterminado inicial que puede ser anulado por la entrada manual de un encuestado.",
@@ -1559,7 +1564,6 @@ var spanishTranslation = {
     detailErrorLocation: "Establece la ubicación de los mensajes de error para las preguntas anidadas en secciones de detalle. La opción \"Heredar\" aplica la configuración de la propiedad \"Alineación de mensajes de error\".",
     keyDuplicationError: "Cuando la propiedad \"Evitar respuestas duplicadas\" está habilitada, un encuestado que intente enviar una entrada duplicada recibirá el siguiente mensaje de error.",
     totalExpression: "Permite calcular los valores totales en función de una expresión. La expresión puede incluir cálculos básicos ('{q1_id} + {q2_id}'), expresiones booleanas ('{edad} > 60') y funciones ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
-    confirmDelete: "Activa un mensaje en el que se le pide que confirme la eliminación de filas.",
     keyName: "Si la columna especificada contiene valores idénticos, la encuesta arroja el error \"Valor de clave no única\".",
     description: "Escribe un subtítulo.",
     locale: "Elige un idioma para comenzar a crear tu encuesta. Para agregar una traducción, cambie a un nuevo idioma y traduzca el texto original aquí o en la pestaña Traducciones.",
@@ -1727,7 +1731,7 @@ var spanishTranslation = {
     detailElements: "Elementos de detalle",
     allowAdaptiveActions: "Permitir acciones adaptables",
     defaultRowValue: "Valor por defecto Fila",
-    detailPanelShowOnAdding: "Panel de detalles mostrar sobre la adición",
+    detailPanelShowOnAdding: "Expandir automáticamente los detalles de una nueva fila",
     choicesLazyLoadEnabled: "Opciones de carga diferida habilitadas",
     choicesLazyLoadPageSize: "Opciones de tamaño de página de carga diferida",
     inputFieldComponent: "Componente de campo de entrada",
@@ -2484,7 +2488,7 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Establece la ubicación de un mensaje de error en relación con una celda con entrada no válida. La opción \"Heredar\" aplica la configuración de la propiedad \"Alineación de mensajes de error\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Cuando la propiedad \"Evitar respuestas duplicadas\" está habilitada, un encuestado que intente enviar una entrada duplicada recibirá el siguiente mensaje de error."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Permite calcular los valores totales en función de una expresión. La expresión puede incluir cálculos básicos ('{q1_id} + {q2_id}'), expresiones booleanas ('{edad} > 60') y funciones ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Activa un mensaje en el que se le pide que confirme la eliminación de filas."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Activa un mensaje en el que se le pide que confirme la eliminación de filas."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplica las respuestas de la última fila y las asigna a la siguiente fila dinámica agregada."
 // pehelp.description: "Type a subtitle." => "Escribe un subtítulo."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Elige un idioma para comenzar a crear tu encuesta. Para agregar una traducción, cambie a un nuevo idioma y traduzca el texto original aquí o en la pestaña Traducciones."
@@ -2927,3 +2931,7 @@ setupLocale({ localeCode: "es", strings: spanishTranslation });
 // slider.labelFormat: "Label format" => "Formato de etiqueta"
 // slider.tooltipFormat: "Tooltip format" => "Formato de información sobre herramientas"
 // question.showTitle: "Show the title and description" => "Mostrar el título y la descripción"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Activa un mensaje de confirmación antes de quitar un panel."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Desencadena un mensaje de confirmación antes de quitar una fila."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Expande automáticamente la sección de detalles cuando se agrega una nueva fila a la matriz."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Expandir automáticamente los detalles de una nueva fila"

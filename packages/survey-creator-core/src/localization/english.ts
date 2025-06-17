@@ -331,7 +331,7 @@ export var enStrings = {
       width: "Inline panel width",
       minWidth: "Minimum panel width",
       maxWidth: "Maximum panel width",
-      confirmDelete: "Confirm panel deletion",
+      confirmDelete: "Confirm panel removal",
       templateDescription: "Panel description pattern",
       templateTitle: "Panel title pattern",
       noEntriesText: "Empty panel text",
@@ -731,10 +731,10 @@ export var enStrings = {
     acceptedTypes: "Accepted file types",
     waitForUpload: "Wait for upload to complete",
     needConfirmRemoveFile: "Confirm file deletion",
-    detailPanelMode: "Row expansion alignment",
+    detailPanelMode: "Row details alignment",
     minRowCount: "Minimum row count",
     maxRowCount: "Maximum row count",
-    confirmDelete: "Confirm row deletion",
+    confirmDelete: "Confirm row removal",
     confirmDeleteText: "Confirmation message",
     panelCount: "Initial panel count",
     minPanelCount: "Minimum panel count",
@@ -835,7 +835,7 @@ export var enStrings = {
     gridLayoutEnabled: "Enable grid layout",
     gridLayoutColumns: "Grid columns",
     maskSettings: "Mask settings",
-    detailErrorLocation: "Row expansion error message alignment",
+    detailErrorLocation: "Row details error message alignment",
     // Creator tabs
     tabs: {
       panel: {
@@ -1174,7 +1174,7 @@ export var enStrings = {
     onBlur: "On lost focus",
     onTyping: "While typing",
     underRow: "Under the row",
-    underRowSingle: "Under the row, display one row expansion only",
+    underRowSingle: "Under the row, display one section only",
     auto: "Auto",
     showNavigationButtons: {
       none: "Hidden"
@@ -1443,7 +1443,12 @@ export var enStrings = {
       descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default).",
       newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one.",
       copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel.",
-      keyName: "Reference a question name to require a user to provide a unique response for this question in each panel."
+      keyName: "Reference a question name to require a user to provide a unique response for this question in each panel.",
+      confirmDelete: "Triggers a confirmation prompt before removing a panel.",
+    },
+    matrixdynamic: {
+      confirmDelete: "Triggers a confirmation prompt before removing a row.",
+      detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix."
     },
     copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row.",
     defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input.",
@@ -1567,11 +1572,10 @@ export var enStrings = {
     detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
     keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message.",
     totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
-    confirmDelete: "Triggers a prompt asking to confirm the row deletion.",
     keyName: "Reference a column ID to require a user to provide a unique response for each question within the specified column.",
     description: "Type a subtitle.",
     locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab.",
-    detailPanelMode: "Sets the location of a detail section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed.",
+    detailPanelMode: "Sets the location of a detail section in relation to a row. Choose from: \"None\" - no detail section is added; \"Under the row\" - a detail section is placed under each row of the matrix; \"Under the row, display one detail section only\" - a detail section is displayed under a single row only, the remaining sections are collapsed.",
     imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
     autoGrow: "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default).",
     allowResize: "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default).",
@@ -1736,7 +1740,7 @@ export var enStrings = {
     detailElements: "Detail elements", // Auto-generated string
     allowAdaptiveActions: "Allow adaptive actions", // Auto-generated string
     defaultRowValue: "Default row value", // Auto-generated string
-    detailPanelShowOnAdding: "Detail panel show on adding", // Auto-generated string
+    detailPanelShowOnAdding: "Auto-expand new row details",
     choicesLazyLoadEnabled: "Choices lazy load enabled", // Auto-generated string
     choicesLazyLoadPageSize: "Choices lazy load page size", // Auto-generated string
     inputFieldComponent: "Input field component", // Auto-generated string

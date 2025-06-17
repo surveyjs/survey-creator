@@ -1435,7 +1435,12 @@ export var hrStrings = {
       descriptionLocation: "Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Pod naslovom ploče\" prema zadanim postavkama).",
       newPanelPosition: "Definira položaj novododane ploče. Prema zadanim postavkama na kraj se dodaju nove ploče. Odaberite \"Dalje\" da biste umetnuli novu ploču nakon trenutne.",
       copyDefaultValueFromLastEntry: "Duplicira odgovore s posljednje ploče i dodjeljuje ih sljedećoj dodanoj dinamičkoj ploči.",
-      keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči."
+      keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči.",
+      confirmDelete: "Aktivira upit za potvrdu prije uklanjanja ploče."
+    },
+    matrixdynamic: {
+      confirmDelete: "Aktivira upit za potvrdu prije uklanjanja retka.",
+      detailPanelShowOnAdding: "Automatski proširuje odjeljak s detaljima kada se u matricu doda novi redak."
     },
     copyDefaultValueFromLastEntry: "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku.",
     defaultValueExpression: "Ova postavka omogućuje dodjeljivanje zadane vrijednosti odgovora na temelju izraza. Izraz može uključivati osnovne izračune - '{q1_id} + {q2_id}', Booleove izraze, kao što su '{age} > 60', i funkcije: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd. Vrijednost određena ovim izrazom služi kao početna zadana vrijednost koja se može nadjačati ručnim unosom ispitanika.",
@@ -1559,7 +1564,6 @@ export var hrStrings = {
     detailErrorLocation: "Postavlja mjesto poruka o pogreškama za pitanja ugniježđena u detaljnim odjeljcima. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\".",
     keyDuplicationError: "Kada je omogućeno svojstvo \"Spriječi duplicirane odgovore\", ispitanik koji pokuša poslati duplikat unosa primit će sljedeću poruku o pogrešci.",
     totalExpression: "Omogućuje izračunavanje ukupnih vrijednosti na temelju izraza. Izraz može uključivati osnovne izračune ('{q1_id} + {q2_id}'), Booleove izraze ('{age} > 60') i funkcije ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd.).",
-    confirmDelete: "Pokreće upit u kojem se traži potvrda brisanja retka.",
     keyName: "Ako navedeni stupac sadrži identične vrijednosti, anketa odbacuje pogrešku \"Nejedinstvena vrijednost ključa\".",
     description: "Upišite podnaslov.",
     locale: "Odaberite jezik za početak stvaranja upitnika. Da biste dodali prijevod, prijeđite na novi jezik i prevedite izvorni tekst ovdje ili na kartici Prijevodi.",
@@ -1727,7 +1731,7 @@ export var hrStrings = {
     detailElements: "Elementi detalja",
     allowAdaptiveActions: "Dopusti prilagodljive radnje",
     defaultRowValue: "defaultRowValue",
-    detailPanelShowOnAdding: "Prikaži na ploči s detaljima prilikom dodavanja",
+    detailPanelShowOnAdding: "Automatsko proširenje pojedinosti o novom retku",
     choicesLazyLoadEnabled: "Omogućeno lijeno opterećenje izbora",
     choicesLazyLoadPageSize: "Odabiri lijeno učitavanje veličine stranice",
     inputFieldComponent: "Komponenta polja za unos",
@@ -2002,9 +2006,9 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pe.detailPanelMode: "Detail panel location" => "Mjesto ploče s detaljima"
 // pe.minRowCount: "Minimum row count" => "Najmanji broj redaka"
 // pe.maxRowCount: "Maximum row count" => "Maksimalan broj redaka"
-// pe.confirmDelete: "Confirm row deletion" => "Potvrda brisanja retka"
+// pe.confirmDelete: "Confirm row removal" => "Potvrda brisanja retka"
 // pe.confirmDeleteText: "Confirmation message" => "Potvrdna poruka"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Potvrda brisanja ploče"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Potvrda brisanja ploče"
 // pe.panelCount: "Initial panel count" => "Početni broj ploča"
 // pe.minPanelCount: "Minimum panel count" => "Najmanji broj ploča"
 // pe.maxPanelCount: "Maximum panel count" => "Maksimalan broj ploča"
@@ -2701,7 +2705,7 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Postavlja mjesto poruke o pogrešci u odnosu na ćeliju s unosom koji nije valjan. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Kada je omogućeno svojstvo \"Spriječi duplicirane odgovore\", ispitanik koji pokuša poslati duplikat unosa primit će sljedeću poruku o pogrešci."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Omogućuje izračunavanje ukupnih vrijednosti na temelju izraza. Izraz može uključivati osnovne izračune ('{q1_id} + {q2_id}'), Booleove izraze ('{age} > 60') i funkcije ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Pokreće upit u kojem se traži potvrda brisanja retka."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Pokreće upit u kojem se traži potvrda brisanja retka."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku."
 // pehelp.description: "Type a subtitle." => "Upišite podnaslov."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Odaberite jezik za početak stvaranja upitnika. Da biste dodali prijevod, prijeđite na novi jezik i prevedite izvorni tekst ovdje ili na kartici Prijevodi."
@@ -3145,3 +3149,7 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // slider.labelFormat: "Label format" => "Format naljepnice"
 // slider.tooltipFormat: "Tooltip format" => "Format opisa alata"
 // question.showTitle: "Show the title and description" => "Pokažite naslov i opis"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Aktivira upit za potvrdu prije uklanjanja ploče."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Aktivira upit za potvrdu prije uklanjanja retka."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automatski proširuje odjeljak s detaljima kada se u matricu doda novi redak."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Automatsko proširenje pojedinosti o novom retku"
