@@ -1435,7 +1435,12 @@ var frenchTranslation = {
       descriptionLocation: "L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête (« Sous le titre du panneau » par défaut).",
       newPanelPosition: "Définit la position d’un panneau nouvellement ajouté. Par défaut, de nouveaux panneaux sont ajoutés à la fin. Sélectionnez « Suivant » pour insérer un nouveau panneau après le panneau actuel.",
       copyDefaultValueFromLastEntry: "Duplique les réponses du dernier panneau et les attribue au panneau dynamique suivant.",
-      keyName: "Faites référence à un nom de question pour demander à un utilisateur de fournir une réponse unique à cette question dans chaque panneau."
+      keyName: "Faites référence à un nom de question pour demander à un utilisateur de fournir une réponse unique à cette question dans chaque panneau.",
+      confirmDelete: "Déclenche une invite de confirmation avant de supprimer un panneau."
+    },
+    matrixdynamic: {
+      confirmDelete: "Déclenche une invite de confirmation avant de supprimer une ligne.",
+      detailPanelShowOnAdding: "Développe automatiquement la section de détail lorsqu’une nouvelle ligne est ajoutée à la matrice."
     },
     copyDefaultValueFromLastEntry: "Duplique les réponses de la dernière ligne et les attribue à la ligne dynamique suivante ajoutée.",
     defaultValueExpression: "Ce paramètre vous permet d’attribuer une valeur de réponse par défaut en fonction d’une expression. L’expression peut inclure des calculs de base - '{q1_id} + {q2_id}', des expressions booléennes, telles que '{age} > 60', et des fonctions : 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. La valeur déterminée par cette expression sert de valeur par défaut initiale qui peut être remplacée par la saisie manuelle d’une personne interrogée.",
@@ -1559,7 +1564,6 @@ var frenchTranslation = {
     detailErrorLocation: "Définit l’emplacement des messages d’erreur pour les questions imbriquées dans les sections de détails. L’option « Hériter » applique le paramètre de la propriété « Alignement du message d’erreur ».",
     keyDuplicationError: "Lorsque la propriété « Empêcher les réponses en double » est activée, un répondant qui tente de soumettre une entrée en double recevra le message d’erreur suivant.",
     totalExpression: "Permet de calculer des valeurs totales en fonction d’une expression. L’expression peut inclure des calculs de base ('{q1_id} + {q2_id}'), des expressions booléennes ('{age} > 60') et des fonctions ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
-    confirmDelete: "Déclenche une invite vous demandant de confirmer la suppression de ligne.",
     keyName: "Si la colonne spécifiée contient des valeurs identiques, le sondage renvoie l’erreur « Valeur de clé non unique ».",
     description: "Saisissez un sous-titre.",
     locale: "Choisissez une langue pour commencer à créer votre sondage. Pour ajouter une traduction, passez à une nouvelle langue et traduisez le texte original ici ou dans l’onglet Traductions.",
@@ -1727,7 +1731,7 @@ var frenchTranslation = {
     detailElements: "Détails de l'élément",
     allowAdaptiveActions: "Autoriser les actions adaptatives",
     defaultRowValue: "Valeur de ligne par défaut",
-    detailPanelShowOnAdding: "Affichage des détails de la section lors de l’ajout",
+    detailPanelShowOnAdding: "Développer automatiquement les détails d’une nouvelle ligne",
     choicesLazyLoadEnabled: "Choix de chargement paresseux activé",
     choicesLazyLoadPageSize: "Choix de taille de page de chargement paresseux",
     inputFieldComponent: "Composant du champ de saisie",
@@ -3210,3 +3214,7 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // slider.labelFormat: "Label format" => "Format de l’étiquette"
 // slider.tooltipFormat: "Tooltip format" => "Format de l’infobulle"
 // question.showTitle: "Show the title and description" => "Afficher le titre et la description"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Déclenche une invite de confirmation avant de supprimer un panneau."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Déclenche une invite de confirmation avant de supprimer une ligne."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Développe automatiquement la section de détail lorsqu’une nouvelle ligne est ajoutée à la matrice."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Développer automatiquement les détails d’une nouvelle ligne"

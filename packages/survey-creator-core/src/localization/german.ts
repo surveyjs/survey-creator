@@ -1435,7 +1435,12 @@ var germanTranslation = {
       descriptionLocation: "Die Option \"Vererben\" wendet die Einstellung auf Seitenebene (falls gesetzt) oder auf Umfrageebene an (standardmäßig unter dem Panel-Titel).",
       newPanelPosition: "Definiert die Position eines neu hinzugefügten Panels. Standardmäßig werden neue Panele am Ende hinzugefügt. Wählen Sie \"Weiter\", um ein neues Panel nach dem aktuellen einzufügen.",
       copyDefaultValueFromLastEntry: "Dupliziert die Antworten aus dem letzten Bereich und weist sie dem nächsten hinzugefügten dynamischen Bereich zu.",
-      keyName: "Verweisen Sie auf einen Fragenamen, um einen Benutzer aufzufordern, in jedem Bereich eine eindeutige Antwort auf diese Frage zu geben."
+      keyName: "Verweisen Sie auf einen Fragenamen, um einen Benutzer aufzufordern, in jedem Bereich eine eindeutige Antwort auf diese Frage zu geben.",
+      confirmDelete: "Löst eine Bestätigungsaufforderung aus, bevor ein Bereich entfernt wird."
+    },
+    matrixdynamic: {
+      confirmDelete: "Löst eine Bestätigungsaufforderung aus, bevor eine Zeile entfernt wird.",
+      detailPanelShowOnAdding: "Erweitert den Detailabschnitt automatisch, wenn der Matrix eine neue Zeile hinzugefügt wird."
     },
     copyDefaultValueFromLastEntry: "Dupliziert Antworten aus der letzten Zeile und weist sie der nächsten hinzugefügten dynamischen Zeile zu.",
     defaultValueExpression: "Mit dieser Einstellung können Sie einen Standardantwortwert basierend auf einem Ausdruck zuweisen. Der Ausdruck kann grundlegende Berechnungen enthalten - '{q1_id} + {q2_id}', boolesche Ausdrücke wie '{age} > 60' und Funktionen: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw. Der durch diesen Ausdruck ermittelte Wert dient als anfänglicher Standardwert, der durch die manuelle Eingabe eines Befragten überschrieben werden kann.",
@@ -1559,7 +1564,6 @@ var germanTranslation = {
     detailErrorLocation: "Legt die Position von Fehlermeldungen für Fragen fest, die in Detailabschnitten verschachtelt sind. Die Option \"Vererben\" wendet die Einstellung aus der Eigenschaft \"Ausrichtung der Fehlermeldung\" an.",
     keyDuplicationError: "Wenn die Eigenschaft \"Doppelte Beantwortungen verhindern\" aktiviert ist, erhält ein Befragter, der versucht, einen doppelten Beitrag einzureichen, die folgende Fehlermeldung.",
     totalExpression: "Hiermit können Sie Gesamtwerte basierend auf einem Ausdruck berechnen. Der Ausdruck kann grundlegende Berechnungen ('{q1_id} + {q2_id}'), boolesche Ausdrücke ('{age} > 60') und Funktionen ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' usw.) enthalten.",
-    confirmDelete: "Löst eine Eingabeaufforderung aus, in der Sie aufgefordert werden, das Löschen der Zeile zu bestätigen.",
     keyName: "Wenn die angegebene Spalte identische Werte enthält, löst die Umfrage den Fehler \"Nicht eindeutiger Schlüsselwert\" aus.",
     description: "Geben Sie einen Untertitel ein.",
     locale: "Wählen Sie eine Sprache aus, um mit der Erstellung Ihrer Umfrage zu beginnen. Um eine Übersetzung hinzuzufügen, wechseln Sie in eine neue Sprache und übersetzen Sie den Originaltext hier oder auf dem Tab \"Übersetzungen\".",
@@ -1727,7 +1731,7 @@ var germanTranslation = {
     detailElements: "Detail-Elemente",
     allowAdaptiveActions: "Adaptive Aktionen zulassen",
     defaultRowValue: "Standardwert für Zeilen",
-    detailPanelShowOnAdding: "Panel für Details beim Hinzufügen anzeigen",
+    detailPanelShowOnAdding: "Neue Zeilendetails automatisch erweitern",
     choicesLazyLoadEnabled: "Auswahlmöglichkeiten Lazy Load aktiviert",
     choicesLazyLoadPageSize: "Auswahlmöglichkeiten Lazy Load-Seitengröße",
     inputFieldComponent: "Eingabefeld-Komponente",
@@ -2863,3 +2867,7 @@ setupLocale({ localeCode: "de", strings: germanTranslation });
 // slider.labelFormat: "Label format" => "Format der Beschriftung"
 // slider.tooltipFormat: "Tooltip format" => "Tooltip-Format"
 // question.showTitle: "Show the title and description" => "Zeigen Sie den Titel und die Beschreibung an"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Löst eine Bestätigungsaufforderung aus, bevor ein Bereich entfernt wird."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Löst eine Bestätigungsaufforderung aus, bevor eine Zeile entfernt wird."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Erweitert den Detailabschnitt automatisch, wenn der Matrix eine neue Zeile hinzugefügt wird."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Neue Zeilendetails automatisch erweitern"

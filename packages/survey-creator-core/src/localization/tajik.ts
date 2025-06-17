@@ -350,6 +350,7 @@ export var tgStrings = {
       // name: "Question name",
       // title: "Question title",
       // description: "Question description",
+      // showTitle: "Show the title and description",
       // visibleIf: "Make the question visible if",
       // requiredIf: "Make the question required if",
       // page: "Move the question to page",
@@ -728,7 +729,7 @@ export var tgStrings = {
     // acceptedTypes: "Accepted file types",
     // waitForUpload: "Wait for upload to complete",
     // needConfirmRemoveFile: "Confirm file deletion",
-    // detailPanelMode: "Row expansion alignment",
+    // detailPanelMode: "Row details alignment",
     // minRowCount: "Minimum row count",
     // maxRowCount: "Maximum row count",
     // confirmDelete: "Confirm row removal",
@@ -755,7 +756,13 @@ export var tgStrings = {
       // labelCount: "Number of auto-generated labels",
       // minValueExpression: "Min value expression",
       // maxValueExpression: "Max value expression",
-      // autoGenerate: "Scale labels configuration"
+      // autoGenerate: "Scale labels configuration",
+      // sliderType: "Slider type",
+      // minRangeLength: "Min range length",
+      // maxRangeLength: "Max range length",
+      // customLabels: "Custom labels",
+      // labelFormat: "Label format",
+      // tooltipFormat: "Tooltip format"
     },
     file: {
       // imageHeight: "Image height",
@@ -825,7 +832,7 @@ export var tgStrings = {
     // gridLayoutEnabled: "Enable grid layout",
     // gridLayoutColumns: "Grid columns",
     // maskSettings: "Mask settings",
-    // detailErrorLocation: "Row expansion error message alignment",
+    // detailErrorLocation: "Row details error message alignment",
     // Creator tabs
     tabs: {
       panel: {
@@ -1162,7 +1169,7 @@ export var tgStrings = {
     // onBlur: "On lost focus",
     // onTyping: "While typing",
     // underRow: "Under the row",
-    // underRowSingle: "Under the row, display one row expansion only",
+    // underRowSingle: "Under the row, display one section only",
     // auto: "Auto",
     showNavigationButtons: {
       // none: "Hidden"
@@ -1428,7 +1435,12 @@ export var tgStrings = {
       // descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default).",
       // newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one.",
       // copyDefaultValueFromLastEntry: "Duplicates answers from the last panel and assigns them to the next added dynamic panel.",
-      // keyName: "Reference a question name to require a user to provide a unique response for this question in each panel."
+      // keyName: "Reference a question name to require a user to provide a unique response for this question in each panel.",
+      // confirmDelete: "Triggers a confirmation prompt before removing a panel."
+    },
+    matrixdynamic: {
+      // confirmDelete: "Triggers a confirmation prompt before removing a row.",
+      // detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix."
     },
     // copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row.",
     // defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input.",
@@ -1552,11 +1564,10 @@ export var tgStrings = {
     // detailErrorLocation: "Sets the location of error messages for questions nested in detail sections. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
     // keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message.",
     // totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
-    // confirmDelete: "Triggers a prompt asking to confirm the row removal.",
     // keyName: "Reference a column ID to require a user to provide a unique response for each question within the specified column.",
     // description: "Type a subtitle.",
     // locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab.",
-    // detailPanelMode: "Sets the location of a detail section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed.",
+    // detailPanelMode: "Sets the location of a detail section in relation to a row. Choose from: \"None\" - no detail section is added; \"Under the row\" - a detail section is placed under each row of the matrix; \"Under the row, display one detail section only\" - a detail section is displayed under a single row only, the remaining sections are collapsed.",
     // imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
     // autoGrow: "The \"Inherit\" option applies a survey-level setting (\"Disabled\" by default).",
     // allowResize: "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default).",
@@ -1720,7 +1731,7 @@ export var tgStrings = {
     // detailElements: "Detail elements",
     // allowAdaptiveActions: "Allow adaptive actions",
     defaultRowValue: "Қимматҳои сатри нобаён",
-    // detailPanelShowOnAdding: "Detail panel show on adding",
+    // detailPanelShowOnAdding: "Auto-expand new row details",
     // choicesLazyLoadEnabled: "Choices lazy load enabled",
     // choicesLazyLoadPageSize: "Choices lazy load page size",
     // inputFieldComponent: "Input field component",

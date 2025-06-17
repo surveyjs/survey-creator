@@ -1435,7 +1435,12 @@ export var skStrings = {
       descriptionLocation: "Možnosť \"Dediť\" použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene pod názvom panela\").",
       newPanelPosition: "Definuje pozíciu novo pridaného panela. V predvolenom nastavení sa na koniec pridávajú nové panely. Výberom položky \"Ďalej\" vložíte nový panel za aktuálny.",
       copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného panela a priradí ich ďalšiemu pridanému dynamickému panelu.",
-      keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli."
+      keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli.",
+      confirmDelete: "Spustí výzvu na potvrdenie pred odstránením panela."
+    },
+    matrixdynamic: {
+      confirmDelete: "Spustí výzvu na potvrdenie pred odstránením riadka.",
+      detailPanelShowOnAdding: "Automaticky rozbalí sekciu podrobností, keď sa do matice pridá nový riadok."
     },
     copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku.",
     defaultValueExpression: "Toto nastavenie vám umožňuje priradiť predvolenú hodnotu odpovede na základe výrazu. Výraz môže obsahovať základné výpočty - '{q1_id} + {q2_id}', boolovské výrazy, ako napríklad '{age} > 60', a funkcie: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atď. Hodnota určená týmto výrazom slúži ako počiatočná predvolená hodnota, ktorú je možné prepísať manuálnym vstupom respondenta.",
@@ -1559,7 +1564,6 @@ export var skStrings = {
     detailErrorLocation: "Nastaví umiestnenie chybových hlásení pre otázky vnorené do podrobných sekcií. Možnosť \"Zdediť\" použije nastavenie z vlastnosti \"Zarovnanie chybového hlásenia\".",
     keyDuplicationError: "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie.",
     totalExpression: "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.).",
-    confirmDelete: "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka.",
     keyName: "Ak zadaný stĺpec obsahuje rovnaké hodnoty, prieskum vyhodí chybu \"Nejedinečná hodnota kľúča\".",
     description: "Zadajte podnadpis.",
     locale: "Vyberte jazyk a začnite vytvárať prieskum. Ak chcete pridať preklad, prepnite na nový jazyk a preložte pôvodný text tu alebo na karte Preklady.",
@@ -1727,7 +1731,7 @@ export var skStrings = {
     detailElements: "Detailné prvky",
     allowAdaptiveActions: "Povolenie adaptívnych akcií",
     defaultRowValue: "Predvolená hodnota riadka",
-    detailPanelShowOnAdding: "panel s podrobnosťami – zobrazenie pri pridávaní",
+    detailPanelShowOnAdding: "Automatické rozbalenie podrobností nového riadka",
     choicesLazyLoadEnabled: "Možnosti lenivého zaťaženia povolené",
     choicesLazyLoadPageSize: "Možnosti lenivé načítať veľkosť stránky",
     inputFieldComponent: "Súčasť vstupného poľa",
@@ -3104,3 +3108,7 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // slider.labelFormat: "Label format" => "Formát štítku"
 // slider.tooltipFormat: "Tooltip format" => "Formát popisu"
 // question.showTitle: "Show the title and description" => "Zobraziť názov a popis"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Spustí výzvu na potvrdenie pred odstránením panela."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Spustí výzvu na potvrdenie pred odstránením riadka."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automaticky rozbalí sekciu podrobností, keď sa do matice pridá nový riadok."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Automatické rozbalenie podrobností nového riadka"

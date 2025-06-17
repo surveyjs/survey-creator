@@ -1435,7 +1435,12 @@ export var jaStrings = {
       descriptionLocation: "「継承」オプションは、ページレベル(設定されている場合)またはアンケートレベルの設定(デフォルトでは「パネルタイトルの下」)を適用します。",
       newPanelPosition: "新しく追加されたパネルの位置を定義します。デフォルトでは、新しいパネルが最後に追加されます。「次へ」を選択して、現在のパネルの後に新しいパネルを挿入します。",
       copyDefaultValueFromLastEntry: "最後のパネルから回答を複製し、次に追加された動的パネルに割り当てます。",
-      keyName: "質問名を参照して、各パネルでこの質問に対して一意の回答を提供するようユーザーに要求します。"
+      keyName: "質問名を参照して、各パネルでこの質問に対して一意の回答を提供するようユーザーに要求します。",
+      confirmDelete: "パネルを削除する前に確認プロンプトをトリガーします。"
+    },
+    matrixdynamic: {
+      confirmDelete: "行を削除する前に確認プロンプトをトリガーします。",
+      detailPanelShowOnAdding: "新しい行がマトリックスに追加されると、詳細セクションが自動的に展開されます。"
     },
     copyDefaultValueFromLastEntry: "最後の行から回答を複製し、次に追加された動的行に割り当てます。",
     defaultValueExpression: "この設定では、式に基づいてデフォルトの回答値を割り当てることができます。式には、基本的な計算 - '{q1_id} + {q2_id}'、'{age} > 60' などのブール式、関数 'iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' などを含めることができます。この式によって決定される値は、回答者の手動入力で上書きできる初期デフォルト値として機能します。",
@@ -1559,7 +1564,6 @@ export var jaStrings = {
     detailErrorLocation: "詳細セクションにネストされた質問のエラーメッセージの場所を設定します。「継承」オプションは、「エラーメッセージの配置」プロパティの設定を適用します。",
     keyDuplicationError: "「重複回答の防止」プロパティが有効な場合、重複したエントリを送信しようとする回答者は、次のエラーメッセージを受け取ります。",
     totalExpression: "式に基づいて合計値を計算できます。式には、基本的な計算 ('{q1_id} + {q2_id}')、ブール式 ('{age} > 60')、関数 ('iif()'、'today()'、'age()'、'min()'、'max()'、'avg()' など) を含めることができます。",
-    confirmDelete: "行の削除を確認するプロンプトをトリガーします。",
     keyName: "指定した列に同じ値が含まれている場合、調査は「一意でないキー値」エラーをスローします。",
     description: "字幕を入力します。",
     locale: "言語を選択してアンケートの作成を開始します。翻訳を追加するには、新しい言語に切り替えて、ここまたは [翻訳] タブで元のテキストを翻訳します。",
@@ -1727,7 +1731,7 @@ export var jaStrings = {
     detailElements: "詳細要素",
     allowAdaptiveActions: "アダプティブアクションを許可する",
     defaultRowValue: "既定の行の値",
-    detailPanelShowOnAdding: "追加時の詳細パネル表示",
+    detailPanelShowOnAdding: "新しい行の詳細を自動展開する",
     choicesLazyLoadEnabled: "遅延読み込みの選択肢が有効",
     choicesLazyLoadPageSize: "選択肢遅延読み込みページ・サイズ",
     inputFieldComponent: "入力フィールドコンポーネント",
@@ -3150,3 +3154,7 @@ setupLocale({ localeCode: "ja", strings: jaStrings });
 // slider.labelFormat: "Label format" => "ラベル形式"
 // slider.tooltipFormat: "Tooltip format" => "ツールチップの形式"
 // question.showTitle: "Show the title and description" => "タイトルと説明を表示する"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "パネルを削除する前に確認プロンプトをトリガーします。"
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "行を削除する前に確認プロンプトをトリガーします。"
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "新しい行がマトリックスに追加されると、詳細セクションが自動的に展開されます。"
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "新しい行の詳細を自動展開する"

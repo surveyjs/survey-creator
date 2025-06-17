@@ -1435,7 +1435,12 @@ export var czStrings = {
       descriptionLocation: "Možnost \"Zdědit\" použije nastavení na úrovni stránky (pokud je nastaveno) nebo na úrovni průzkumu (ve výchozím nastavení \"Pod názvem panelu\").",
       newPanelPosition: "Definuje polohu nově přidaného panelu. Ve výchozím nastavení se nové panely přidávají na konec. Výběrem možnosti \"Další\" vložíte nový panel za aktuální.",
       copyDefaultValueFromLastEntry: "Duplikuje odpovědi z posledního panelu a přiřadí je dalšímu přidanému dynamickému panelu.",
-      keyName: "Odkazujte na název otázky, chcete-li vyžadovat, aby uživatel na tuto otázku v každém panelu poskytl jedinečnou odpověď."
+      keyName: "Odkazujte na název otázky, chcete-li vyžadovat, aby uživatel na tuto otázku v každém panelu poskytl jedinečnou odpověď.",
+      confirmDelete: "Spustí výzvu k potvrzení před odstraněním panelu."
+    },
+    matrixdynamic: {
+      confirmDelete: "Spustí výzvu k potvrzení před odstraněním řádku.",
+      detailPanelShowOnAdding: "Automaticky rozbalí podrobnou část, když je do matice přidán nový řádek."
     },
     copyDefaultValueFromLastEntry: "Duplikuje odpovědi z posledního řádku a přiřadí je k dalšímu přidanému dynamickému řádku.",
     defaultValueExpression: "Toto nastavení umožňuje přiřadit výchozí hodnotu odpovědi na základě výrazu. Výraz může obsahovat základní výpočty - '{q1_id} + {q2_id}', logické výrazy, například '{age} > 60', a funkce: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atd. Hodnota určená tímto výrazem slouží jako počáteční výchozí hodnota, kterou lze přepsat ručním zadáním respondenta.",
@@ -1559,7 +1564,6 @@ export var czStrings = {
     detailErrorLocation: "Nastavuje umístění chybových zpráv pro otázky vnořené do podrobných oddílů. Volba \"Zdědit\" aplikuje nastavení z vlastnosti \"Zarovnání chybové zprávy\".",
     keyDuplicationError: "Pokud je povolena vlastnost \"Zabránit duplicitním odpovědím\", respondentovi, který se pokouší odeslat duplicitní záznam, se zobrazí následující chybová zpráva.",
     totalExpression: "Umožňuje vypočítat celkové hodnoty na základě výrazu. Výraz může obsahovat základní výpočty ('{q1_id} + {q2_id}'), logické výrazy ('{age} > 60') a funkce ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atd.).",
-    confirmDelete: "Spustí výzvu s žádostí o potvrzení odstranění řádku.",
     keyName: "Pokud zadaný sloupec obsahuje totožné hodnoty, průzkum vyhodí chybu „Klíč není unikátní“.",
     description: "Zadejte titulky.",
     locale: "Vyberte jazyk a začněte vytvářet průzkum. Chcete-li přidat překlad, přepněte do nového jazyka a přeložte původní text zde nebo na kartě Překlady.",
@@ -1727,7 +1731,7 @@ export var czStrings = {
     detailElements: "Podrobné prvky",
     allowAdaptiveActions: "Povolit adaptivní akce",
     defaultRowValue: "Výchozí hodnota řádku",
-    detailPanelShowOnAdding: "Detailní zobrazení panelu při přidání",
+    detailPanelShowOnAdding: "Automatické rozbalení podrobností o novém řádku",
     choicesLazyLoadEnabled: "Povolit lazy loading voleb",
     choicesLazyLoadPageSize: "Počet voleb na jednu stránku",
     inputFieldComponent: "Komponenta vstupního pole",
@@ -2728,3 +2732,7 @@ setupLocale({ localeCode: "cs", strings: czStrings });
 // slider.labelFormat: "Label format" => "Formát štítku"
 // slider.tooltipFormat: "Tooltip format" => "Formát popisku nástroje"
 // question.showTitle: "Show the title and description" => "Zobrazit název a popis"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Spustí výzvu k potvrzení před odstraněním panelu."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Spustí výzvu k potvrzení před odstraněním řádku."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automaticky rozbalí podrobnou část, když je do matice přidán nový řádek."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Automatické rozbalení podrobností o novém řádku"

@@ -1435,7 +1435,12 @@ export var arStrings = {
       descriptionLocation: "يطبق خيار \"الوراثة\" الإعداد على مستوى الصفحة (إذا تم تعيينه) أو على مستوى الاستطلاع (\"تحت عنوان اللوحة\" افتراضيا).",
       newPanelPosition: "يحدد موضع اللوحة المضافة حديثا. بشكل افتراضي ، تتم إضافة لوحات جديدة إلى النهاية. حدد \"التالي\" لإدراج لوحة جديدة بعد اللوحة الحالية.",
       copyDefaultValueFromLastEntry: "يضاعف الإجابات من اللوحة الأخيرة ويعينها إلى اللوحة الديناميكية المضافة التالية.",
-      keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة."
+      keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة.",
+      confirmDelete: "تشغيل مطالبة تأكيد قبل إزالة اللوحة."
+    },
+    matrixdynamic: {
+      confirmDelete: "يؤدي إلى تشغيل مطالبة تأكيد قبل إزالة صف.",
+      detailPanelShowOnAdding: "يوسع قسم التفاصيل تلقائيا عند إضافة صف جديد إلى المصفوفة."
     },
     copyDefaultValueFromLastEntry: "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي.",
     defaultValueExpression: "يسمح لك هذا الإعداد بتعيين قيمة إجابة افتراضية استنادا إلى تعبير. يمكن أن يتضمن التعبير حسابات أساسية - '{q1_id} + {q2_id}' ، والتعبيرات المنطقية ، مثل '{age} > 60' ، والدوالات: 'iif ()' ، 'today ()' ، 'age ()' ، 'min ()' ، 'max ()' ، 'avg ()' ، إلخ. تعمل القيمة التي يحددها هذا التعبير كقيمة افتراضية أولية يمكن تجاوزها بواسطة الإدخال اليدوي للمستجيب.",
@@ -1559,7 +1564,6 @@ export var arStrings = {
     detailErrorLocation: "تعيين موقع رسائل الخطأ للأسئلة المتداخلة في أقسام التفاصيل. يطبق خيار \"الوراثة\" الإعداد من خاصية \"محاذاة رسالة الخطأ\".",
     keyDuplicationError: "عند تمكين الخاصية \"منع الاستجابات المكررة\"، سيتلقى مستجيب يحاول إرسال إدخال مكرر رسالة الخطأ التالية.",
     totalExpression: "يسمح لك بحساب القيم الإجمالية استنادا إلى تعبير. يمكن أن يتضمن التعبير العمليات الحسابية الأساسية ('{q1_id} + {q2_id}') والتعبيرات المنطقية ('{age} > 60') والوظائف ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', إلخ).",
-    confirmDelete: "يؤدي إلى تشغيل مطالبة تطلب تأكيد حذف الصف.",
     keyName: "إذا كان العمود المحدد يحتوي على قيم متطابقة ، فإن الاستطلاع يلقي الخطأ \"قيمة مفتاح غير فريدة\".",
     description: "اكتب عنوانا فرعيا.",
     locale: "اختر لغة لبدء إنشاء الاستطلاع. لإضافة ترجمة، قم بالتبديل إلى لغة جديدة وترجمة النص الأصلي هنا أو في علامة التبويب الترجمات.",
@@ -1727,7 +1731,7 @@ export var arStrings = {
     detailElements: "عناصر التفاصيل",
     allowAdaptiveActions: "السماح بالإجراءات التكيفية",
     defaultRowValue: "قيمة الصف الإفتراضية",
-    detailPanelShowOnAdding: "detailPanelShowOnAdding",
+    detailPanelShowOnAdding: "تفاصيل الصف الجديد للتوسيع التلقائي",
     choicesLazyLoadEnabled: "تمكين التحميل البطيء للاختيارات",
     choicesLazyLoadPageSize: "اختيارات كسول تحميل حجم الصفحة",
     inputFieldComponent: "مكون حقل الإدخال",
@@ -3065,3 +3069,7 @@ setupLocale({ localeCode: "ar", strings: arStrings });
 // slider.labelFormat: "Label format" => "تنسيق التسمية"
 // slider.tooltipFormat: "Tooltip format" => "تنسيق تلميح الأداة"
 // question.showTitle: "Show the title and description" => "إظهار العنوان والوصف"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "تشغيل مطالبة تأكيد قبل إزالة اللوحة."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "يؤدي إلى تشغيل مطالبة تأكيد قبل إزالة صف."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "يوسع قسم التفاصيل تلقائيا عند إضافة صف جديد إلى المصفوفة."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "تفاصيل الصف الجديد للتوسيع التلقائي"

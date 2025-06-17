@@ -1435,7 +1435,12 @@ var italianTranslation = {
       descriptionLocation: "L'opzione \"Eredita\" applica l'impostazione a livello di pagina (se impostata) o a livello di indagine (\"Sotto il titolo del pannello\" per impostazione predefinita).",
       newPanelPosition: "Definisce la posizione di un pannello appena aggiunto. Per impostazione predefinita, i nuovi pannelli vengono aggiunti alla fine. Selezionare \"Avanti\" per inserire un nuovo pannello dopo quello corrente.",
       copyDefaultValueFromLastEntry: "Duplica le risposte dall'ultimo pannello e le assegna al successivo pannello dinamico aggiunto.",
-      keyName: "Fai riferimento al nome di una domanda per richiedere a un utente di fornire una risposta univoca per questa domanda in ogni pannello."
+      keyName: "Fai riferimento al nome di una domanda per richiedere a un utente di fornire una risposta univoca per questa domanda in ogni pannello.",
+      confirmDelete: "Attiva una richiesta di conferma prima di rimuovere un pannello."
+    },
+    matrixdynamic: {
+      confirmDelete: "Attiva una richiesta di conferma prima di rimuovere una riga.",
+      detailPanelShowOnAdding: "Espande automaticamente la sezione dei dettagli quando viene aggiunta una nuova riga alla matrice."
     },
     copyDefaultValueFromLastEntry: "Duplica le risposte dell'ultima riga e le assegna alla successiva riga dinamica aggiunta.",
     defaultValueExpression: "Questa impostazione consente di assegnare un valore di risposta predefinito in base a un'espressione. L'espressione può includere calcoli di base: '{q1_id} + {q2_id}', espressioni booleane, come '{age} > 60' e funzioni: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', ecc. Il valore determinato da questa espressione funge da valore predefinito iniziale che può essere sostituito dall'input manuale di un rispondente.",
@@ -1559,7 +1564,6 @@ var italianTranslation = {
     detailErrorLocation: "Imposta la posizione dei messaggi di errore per le domande nidificate nelle sezioni di dettaglio. L'opzione \"Eredita\" applica l'impostazione della proprietà \"Allineamento messaggio di errore\".",
     keyDuplicationError: "Quando la proprietà \"Impedisci risposte duplicate\" è abilitata, un rispondente che tenta di inviare una voce duplicata riceverà il seguente messaggio di errore.",
     totalExpression: "Consente di calcolare i valori totali in base a un'espressione. L'espressione può includere calcoli di base ('{q1_id} + {q2_id}'), espressioni booleane ('{age} > 60') e funzioni ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', ecc.).",
-    confirmDelete: "Attiva un prompt che chiede di confermare l'eliminazione della riga.",
     keyName: "Se la colonna specificata contiene valori identici, il sondaggio produce l'errore \"Valore chiave non univoco\".",
     description: "Digita un sottotitolo.",
     locale: "Scegli una lingua per iniziare a creare la tua indagine. Per aggiungere una traduzione, passa a una nuova lingua e traduci il testo originale qui o nella scheda Traduzioni.",
@@ -1727,7 +1731,7 @@ var italianTranslation = {
     detailElements: "Elementi di dettaglio",
     allowAdaptiveActions: "Consenti azioni adattive",
     defaultRowValue: "Valore predefinito Riga",
-    detailPanelShowOnAdding: "Dettaglio Mostra Pannello su Aggiunta",
+    detailPanelShowOnAdding: "Espansione automatica dei dettagli delle nuove righe",
     choicesLazyLoadEnabled: "Scelte lazy load abilitate",
     choicesLazyLoadPageSize: "Scelte lazy load dimensione della pagina",
     inputFieldComponent: "Componente del campo di input",
@@ -2912,3 +2916,7 @@ setupLocale({ localeCode: "it", strings: italianTranslation });
 // slider.labelFormat: "Label format" => "Formato etichetta"
 // slider.tooltipFormat: "Tooltip format" => "Formato della descrizione comando"
 // question.showTitle: "Show the title and description" => "Mostra il titolo e la descrizione"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Attiva una richiesta di conferma prima di rimuovere un pannello."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Attiva una richiesta di conferma prima di rimuovere una riga."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Espande automaticamente la sezione dei dettagli quando viene aggiunta una nuova riga alla matrice."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Espansione automatica dei dettagli delle nuove righe"

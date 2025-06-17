@@ -1435,7 +1435,12 @@ export var hrStrings = {
       descriptionLocation: "Opcija \"Naslijedi\" primjenjuje postavku na razini stranice (ako je postavljena) ili na razini upitnika (\"Pod naslovom ploče\" prema zadanim postavkama).",
       newPanelPosition: "Definira položaj novododane ploče. Prema zadanim postavkama na kraj se dodaju nove ploče. Odaberite \"Dalje\" da biste umetnuli novu ploču nakon trenutne.",
       copyDefaultValueFromLastEntry: "Duplicira odgovore s posljednje ploče i dodjeljuje ih sljedećoj dodanoj dinamičkoj ploči.",
-      keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči."
+      keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči.",
+      confirmDelete: "Aktivira upit za potvrdu prije uklanjanja ploče."
+    },
+    matrixdynamic: {
+      confirmDelete: "Aktivira upit za potvrdu prije uklanjanja retka.",
+      detailPanelShowOnAdding: "Automatski proširuje odjeljak s detaljima kada se u matricu doda novi redak."
     },
     copyDefaultValueFromLastEntry: "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku.",
     defaultValueExpression: "Ova postavka omogućuje dodjeljivanje zadane vrijednosti odgovora na temelju izraza. Izraz može uključivati osnovne izračune - '{q1_id} + {q2_id}', Booleove izraze, kao što su '{age} > 60', i funkcije: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd. Vrijednost određena ovim izrazom služi kao početna zadana vrijednost koja se može nadjačati ručnim unosom ispitanika.",
@@ -1559,7 +1564,6 @@ export var hrStrings = {
     detailErrorLocation: "Postavlja mjesto poruka o pogreškama za pitanja ugniježđena u detaljnim odjeljcima. Mogućnost \"Naslijedi\" primjenjuje postavku iz svojstva \"Poravnanje poruke o pogrešci\".",
     keyDuplicationError: "Kada je omogućeno svojstvo \"Spriječi duplicirane odgovore\", ispitanik koji pokuša poslati duplikat unosa primit će sljedeću poruku o pogrešci.",
     totalExpression: "Omogućuje izračunavanje ukupnih vrijednosti na temelju izraza. Izraz može uključivati osnovne izračune ('{q1_id} + {q2_id}'), Booleove izraze ('{age} > 60') i funkcije ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', itd.).",
-    confirmDelete: "Pokreće upit u kojem se traži potvrda brisanja retka.",
     keyName: "Ako navedeni stupac sadrži identične vrijednosti, anketa odbacuje pogrešku \"Nejedinstvena vrijednost ključa\".",
     description: "Upišite podnaslov.",
     locale: "Odaberite jezik za početak stvaranja upitnika. Da biste dodali prijevod, prijeđite na novi jezik i prevedite izvorni tekst ovdje ili na kartici Prijevodi.",
@@ -1727,7 +1731,7 @@ export var hrStrings = {
     detailElements: "Elementi detalja",
     allowAdaptiveActions: "Dopusti prilagodljive radnje",
     defaultRowValue: "defaultRowValue",
-    detailPanelShowOnAdding: "Prikaži na ploči s detaljima prilikom dodavanja",
+    detailPanelShowOnAdding: "Automatsko proširenje pojedinosti o novom retku",
     choicesLazyLoadEnabled: "Omogućeno lijeno opterećenje izbora",
     choicesLazyLoadPageSize: "Odabiri lijeno učitavanje veličine stranice",
     inputFieldComponent: "Komponenta polja za unos",
@@ -3145,3 +3149,7 @@ setupLocale({ localeCode: "hr", strings: hrStrings });
 // slider.labelFormat: "Label format" => "Format naljepnice"
 // slider.tooltipFormat: "Tooltip format" => "Format opisa alata"
 // question.showTitle: "Show the title and description" => "Pokažite naslov i opis"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Aktivira upit za potvrdu prije uklanjanja ploče."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Aktivira upit za potvrdu prije uklanjanja retka."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automatski proširuje odjeljak s detaljima kada se u matricu doda novi redak."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Automatsko proširenje pojedinosti o novom retku"

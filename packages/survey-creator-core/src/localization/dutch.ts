@@ -1435,7 +1435,12 @@ export var nlStrings = {
       descriptionLocation: "De optie \"Overnemen\" past de instelling op paginaniveau (indien ingesteld) of enquêteniveau toe (\"Standaard onder de paneeltitel\").",
       newPanelPosition: "Definieert de positie van een nieuw toegevoegd deelvenster. Standaard worden er nieuwe panelen aan het einde toegevoegd. Selecteer \"Volgende\" om een nieuw paneel in te voegen na het huidige.",
       copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit het laatste deelvenster en wijst ze toe aan het volgende toegevoegde dynamische deelvenster.",
-      keyName: "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag."
+      keyName: "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag.",
+      confirmDelete: "Activeert een bevestigingsprompt voordat een paneel wordt verwijderd."
+    },
+    matrixdynamic: {
+      confirmDelete: "Activeert een bevestigingsprompt voordat een rij wordt verwijderd.",
+      detailPanelShowOnAdding: "Breidt de detailsectie automatisch uit wanneer een nieuwe rij aan de matrix wordt toegevoegd."
     },
     copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij.",
     defaultValueExpression: "Met deze instelling kunt u een standaardantwoordwaarde toewijzen op basis van een expressie. De expressie kan basisberekeningen bevatten - '{q1_id} + {q2_id}', Booleaanse expressies, zoals '{age} > 60', en functies: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', enz. De waarde die door deze expressie wordt bepaald, dient als de oorspronkelijke standaardwaarde die kan worden overschreven door de handmatige invoer van een respondent.",
@@ -1559,7 +1564,6 @@ export var nlStrings = {
     detailErrorLocation: "Hiermee stelt u de locatie in van foutmeldingen voor vragen die zijn genest in detailsecties. De optie \"Overerven\" past de instelling van de eigenschap \"Uitlijning van foutmeldingen\" toe.",
     keyDuplicationError: "Wanneer de eigenschap 'Dubbele antwoorden voorkomen' is ingeschakeld, ontvangt een respondent die een dubbele vermelding probeert in te dienen, het volgende foutbericht.",
     totalExpression: "Hiermee kunt u totale waarden berekenen op basis van een expressie. De expressie kan basisberekeningen ('{q1_id} + {q2_id}'), Booleaanse expressies ('{age} > 60') en functies ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.) bevatten.",
-    confirmDelete: "Hiermee wordt gevraagd om het verwijderen van de rij te bevestigen.",
     keyName: "Als de opgegeven kolom identieke waarden bevat, genereert de enquête de fout 'Niet-unieke sleutelwaarde'.",
     description: "Typ een ondertitel.",
     locale: "Kies een taal om te beginnen met het maken van uw enquête. Als u een vertaling wilt toevoegen, schakelt u over naar een nieuwe taal en vertaalt u de originele tekst hier of op het tabblad Vertalingen.",
@@ -1727,7 +1731,7 @@ export var nlStrings = {
     detailElements: "Detailelementen",
     allowAdaptiveActions: "Adaptieve acties toestaan",
     defaultRowValue: "Standaard rijwaarde",
-    detailPanelShowOnAdding: "Detailpaneel weergeven bij toevoegen",
+    detailPanelShowOnAdding: "Nieuwe rijdetails automatisch uitvouwen",
     choicesLazyLoadEnabled: "Keuzes lazy load ingeschakeld",
     choicesLazyLoadPageSize: "Keuzes lui laad paginaformaat",
     inputFieldComponent: "Component invoerveld",
@@ -3129,3 +3133,7 @@ setupLocale({ localeCode: "nl", strings: nlStrings });
 // slider.labelFormat: "Label format" => "Etiket formaat"
 // slider.tooltipFormat: "Tooltip format" => "Tooltip formaat"
 // question.showTitle: "Show the title and description" => "Toon de titel en beschrijving"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Activeert een bevestigingsprompt voordat een paneel wordt verwijderd."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Activeert een bevestigingsprompt voordat een rij wordt verwijderd."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Breidt de detailsectie automatisch uit wanneer een nieuwe rij aan de matrix wordt toegevoegd."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Nieuwe rijdetails automatisch uitvouwen"

@@ -1435,7 +1435,12 @@ export let svStrings = {
       descriptionLocation: "Alternativet \"Ärv\" tillämpar inställningen på sidnivå (om den är inställd) eller på undersökningsnivå (\"Under panelrubriken\" som standard).",
       newPanelPosition: "Definierar placeringen av en nyligen tillagd panel. Som standard läggs nya paneler till i slutet. Välj \"Nästa\" för att infoga en ny panel efter den nuvarande.",
       copyDefaultValueFromLastEntry: "Duplicerar svar från den sista panelen och tilldelar dem till nästa tillagda dynamiska panel.",
-      keyName: "Referera till ett frågenamn för att kräva att en användare anger ett unikt svar för den här frågan i varje panel."
+      keyName: "Referera till ett frågenamn för att kräva att en användare anger ett unikt svar för den här frågan i varje panel.",
+      confirmDelete: "Utlöser en bekräftelseprompt innan en panel tas bort."
+    },
+    matrixdynamic: {
+      confirmDelete: "Utlöser en bekräftelseprompt innan en rad tas bort.",
+      detailPanelShowOnAdding: "Expanderar automatiskt detaljavsnittet när en ny rad läggs till i matrisen."
     },
     copyDefaultValueFromLastEntry: "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad.",
     defaultValueExpression: "Med den här inställningen kan du tilldela ett standardsvarsvärde baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar – {q1_id} + {q2_id}, booleska uttryck, till exempel {age} > 60 och funktioner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' osv. Värdet som bestäms av detta uttryck fungerar som det initiala standardvärdet som kan åsidosättas av en svarandes manuella inmatning.",
@@ -1559,7 +1564,6 @@ export let svStrings = {
     detailErrorLocation: "Anger platsen för felmeddelanden för frågor som är kapslade i detaljavsnitt. Alternativet \"Ärv\" tillämpar inställningen från egenskapen \"Justering av felmeddelande\".",
     keyDuplicationError: "När egenskapen \"Förhindra dubblettsvar\" är aktiverad kommer en svarande som försöker skicka in en dubblett att få följande felmeddelande.",
     totalExpression: "Gör att du kan beräkna totalvärden baserat på ett uttryck. Uttrycket kan innehålla grundläggande beräkningar ('{q1_id} + {q2_id}'), booleska uttryck ('{age} > 60') och funktioner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
-    confirmDelete: "Utlöser en uppmaning där du uppmanas att bekräfta borttagningen av raden.",
     keyName: "Om den angivna kolumnen innehåller identiska värden genereras felet \"Icke-unikt nyckelvärde\".",
     description: "Skriv en undertext.",
     locale: "Välj ett språk för att börja skapa din undersökning. Om du vill lägga till en översättning byter du till ett nytt språk och översätter originaltexten här eller på fliken Översättningar.",
@@ -1727,7 +1731,7 @@ export let svStrings = {
     detailElements: "Detaljelement",
     allowAdaptiveActions: "Tillåt anpassningsbara åtgärder",
     defaultRowValue: "defaultRowValue",
-    detailPanelShowOnAdding: "Detaljpanel visar när du lägger till",
+    detailPanelShowOnAdding: "Expandera automatiskt information om ny rad",
     choicesLazyLoadEnabled: "Val lat belastning aktiverad",
     choicesLazyLoadPageSize: "Val lat ladda sidstorlek",
     inputFieldComponent: "Komponent för inmatningsfält",
@@ -3325,3 +3329,7 @@ setupLocale({ localeCode: "sv", strings: svStrings });
 // slider.labelFormat: "Label format" => "Etikettens format"
 // slider.tooltipFormat: "Tooltip format" => "Format för knappbeskrivningar"
 // question.showTitle: "Show the title and description" => "Visa titel och beskrivning"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Utlöser en bekräftelseprompt innan en panel tas bort."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Utlöser en bekräftelseprompt innan en rad tas bort."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Expanderar automatiskt detaljavsnittet när en ny rad läggs till i matrisen."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Expandera automatiskt information om ny rad"
