@@ -58,7 +58,7 @@
     "postcss-calc": "9.0.1",
     "postcss-cli": "10.1.0",
     "postcss-fail-on-warn": "0.2.1",
-    "postcss-import": "^16.1.0",
+    "postcss-import": "16.1.0",
     "puppeteer": "^1.19.0",
     "qunitjs": "2.2.0",
     "replace-in-file": "^3.4.3",
