@@ -279,3 +279,12 @@ test("Default Editor Value for panel dynamic with preset panel count", () => {
   panel.panels[0].getQuestionByName("q2").value = 1;
   expect(panel.panels).toHaveLength(2);
 });
+test("Default Editor Value & survey locale", () => {
+  const survey = new SurveyModel({
+    locale: "de",
+    "elements": [{ "type": "text", "name": "q1", }]
+  });
+  let question = survey.getQuestionByName("q1");
+  let editor = new DefaultValueEditor(question, "defaultValue");
+  expect(editor.editSurvey.locale).toBe("de");
+});
