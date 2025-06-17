@@ -1435,7 +1435,12 @@ export var koreanStrings = {
       descriptionLocation: "\"상속\" 옵션은 페이지 수준(설정된 경우) 또는 설문조사 수준 설정(기본적으로 \"패널 제목 아래\")을 적용합니다.",
       newPanelPosition: "새로 추가된 패널의 위치를 정의합니다. 기본적으로 새 패널이 끝에 추가됩니다. \"다음\"을 선택하여 현재 패널 뒤에 새 패널을 삽입합니다.",
       copyDefaultValueFromLastEntry: "마지막 패널의 답변을 복제하여 다음에 추가된 동적 패널에 할당합니다.",
-      keyName: "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다."
+      keyName: "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다.",
+      confirmDelete: "패널을 제거하기 전에 확인 프롬프트를 트리거합니다."
+    },
+    matrixdynamic: {
+      confirmDelete: "행을 제거하기 전에 확인 프롬프트를 트리거합니다.",
+      detailPanelShowOnAdding: "행렬에 새 행이 추가될 때 세부 정보 섹션을 자동으로 확장합니다."
     },
     copyDefaultValueFromLastEntry: "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다.",
     defaultValueExpression: "이 설정을 사용하면 표현식에 따라 기본 답안 값을 할당할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식(예: '{age} > 60') 및 함수 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등이 포함될 수 있습니다. 이 표현식에 의해 결정된 값은 응답자의 수동 입력으로 재정의할 수 있는 초기 기본값으로 사용됩니다.",
@@ -1559,7 +1564,6 @@ export var koreanStrings = {
     detailErrorLocation: "세부 섹션에 중첩된 질문에 대한 오류 메시지의 위치를 설정합니다. \"Inherit\" 옵션은 \"Error message alignment\" 속성의 설정을 적용합니다.",
     keyDuplicationError: "\"중복 응답 방지\" 속성이 활성화된 경우, 중복 항목을 제출하려는 응답자는 다음과 같은 오류 메시지를 받게 됩니다.",
     totalExpression: "표현식을 기준으로 합계 값을 계산할 수 있습니다. 표현식에는 기본 계산('{q1_id} + {q2_id}'), 부울 표현식('{age} > 60') 및 함수('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' 등)이 포함될 수 있습니다.",
-    confirmDelete: "행 삭제를 확인하라는 프롬프트를 트리거합니다.",
     keyName: "지정된 열에 동일한 값이 포함되어 있으면 현장조사에서 \"고유하지 않은 키 값\" 오류가 발생합니다.",
     description: "자막을 입력합니다.",
     locale: "설문조사 만들기를 시작할 언어를 선택합니다. 번역을 추가하려면 새 언어로 전환하고 여기 또는 번역 탭에서 원본 텍스트를 번역합니다.",
@@ -1727,7 +1731,7 @@ export var koreanStrings = {
     detailElements: "세부 요소",
     allowAdaptiveActions: "적응형 작업 허용",
     defaultRowValue: "기본 행 값",
-    detailPanelShowOnAdding: "추가 시 세부 정보 패널 표시",
+    detailPanelShowOnAdding: "새 행 세부 정보 자동 확장",
     choicesLazyLoadEnabled: "선택 지연 로드 사용",
     choicesLazyLoadPageSize: "선택 지연 로드 페이지 크기",
     inputFieldComponent: "입력 필드 구성 요소",
@@ -3355,3 +3359,7 @@ setupLocale({ localeCode: "ko", strings: koreanStrings });
 // slider.labelFormat: "Label format" => "라벨 형식"
 // slider.tooltipFormat: "Tooltip format" => "툴팁 형식"
 // question.showTitle: "Show the title and description" => "제목 및 설명 표시"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "패널을 제거하기 전에 확인 프롬프트를 트리거합니다."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "행을 제거하기 전에 확인 프롬프트를 트리거합니다."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "행렬에 새 행이 추가될 때 세부 정보 섹션을 자동으로 확장합니다."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "새 행 세부 정보 자동 확장"

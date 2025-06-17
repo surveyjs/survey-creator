@@ -1435,7 +1435,12 @@ export const roStrings = {
       descriptionLocation: "Opțiunea „Moștenește” aplică setarea de la nivel de pagină (dacă este setată) sau setarea de la nivel de chestionar („Sub titlul panoului” implicit).",
       newPanelPosition: "Definește poziția unui panou nou adăugat. În mod implicit, panourile noi sunt adăugate la sfârșit. Selectați „Următor” pentru a introduce un nou panou după cel curent.",
       copyDefaultValueFromLastEntry: "Duplică răspunsurile din ultimul panou și le atribuie următorului panou dinamic adăugat.",
-      keyName: "Faceți referire la un nume de întrebare pentru a solicita unui utilizator să furnizeze un răspuns unic pentru această întrebare în fiecare panou."
+      keyName: "Faceți referire la un nume de întrebare pentru a solicita unui utilizator să furnizeze un răspuns unic pentru această întrebare în fiecare panou.",
+      confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un panou."
+    },
+    matrixdynamic: {
+      confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un rând.",
+      detailPanelShowOnAdding: "Extinde automat secțiunea de detalii atunci când se adaugă un rând nou la matrice."
     },
     copyDefaultValueFromLastEntry: "Duplică răspunsurile din ultimul rând și le atribuie următorului rând dinamic adăugat.",
     defaultValueExpression: "Această setare vă permite să atribuiți o valoare implicită a răspunsului pe baza unei expresii. Expresia poate include calcule de bază - `{q1_id} + {q2_id}`, expresii booleene, cum ar fi `{age} > 60`, și funcții: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. Valoarea determinată de această expresie servește ca valoare implicită inițială care poate fi suprascrisă de o intrare manuală a respondentului.",
@@ -1559,7 +1564,6 @@ export const roStrings = {
     detailErrorLocation: "Setează locația mesajelor de eroare pentru întrebările imbricate în secțiunile de detaliu. Opțiunea \"Moștenire\" aplică setarea din proprietatea \"Alinierea mesajului de eroare\".",
     keyDuplicationError: "Când proprietatea „Împiedică răspunsurile duplicate” este activată, un respondent care încearcă să trimită o intrare duplicat va primi următorul mesaj de eroare.",
     totalExpression: "Vă permite să calculați valorile totale pe baza unei expresii. Expresia poate include calcule de bază (`{q1_id} + {q2_id}`), expresii booleene (`{age} > 60`) și funcții (`iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
-    confirmDelete: "Declanșează un prompt care solicită confirmarea ștergerii rândului.",
     keyName: "Faceți referire la un ID al coloanei pentru a solicita unui utilizator să furnizeze un răspuns unic pentru fiecare întrebare din coloana specificată.",
     description: "Introduceți un subtitlu.",
     locale: "Alegeți o limbă pentru a începe să creați chestionarul. Pentru a adăuga o traducere, comutați la o limbă nouă și traduceți textul original aici sau în fila Traduceri.",
@@ -1727,7 +1731,7 @@ export const roStrings = {
     detailElements: "Elemente detaliate",
     allowAdaptiveActions: "Permite acțiuni adaptive",
     defaultRowValue: "Valoarea implicită a rândului",
-    detailPanelShowOnAdding: "Afișează panoul detaliat la adăugare",
+    detailPanelShowOnAdding: "Extinderea automată a detaliilor noului rând",
     choicesLazyLoadEnabled: "Încărcare întârziată activată pentru opțiuni",
     choicesLazyLoadPageSize: "Dimensiunea paginii pentru încărcarea întârziată a opțiunilor",
     inputFieldComponent: "Componenta câmpului de intrare",
@@ -2091,3 +2095,7 @@ setupLocale({ localeCode: "ro", strings: roStrings });
 // slider.labelFormat: "Label format" => "Formatul etichetei"
 // slider.tooltipFormat: "Tooltip format" => "Formatul sfatului ecran"
 // question.showTitle: "Show the title and description" => "Afișați titlul și descrierea"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Declanșează o solicitare de confirmare înainte de a elimina un panou."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Declanșează o solicitare de confirmare înainte de a elimina un rând."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Extinde automat secțiunea de detalii atunci când se adaugă un rând nou la matrice."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Extinderea automată a detaliilor noului rând"

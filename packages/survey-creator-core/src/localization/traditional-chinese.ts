@@ -1435,7 +1435,12 @@ var traditionalChineseTranslation = {
       descriptionLocation: "“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“在面板標題下”）。",
       newPanelPosition: "定義新添加的面板的位置。默認情況下，新面板將添加到末尾。選擇「下一步」以在當前面板之後插入新面板。",
       copyDefaultValueFromLastEntry: "複製上一個面板中的答案，並將其分配給下一個添加的動態面板。",
-      keyName: "引用問題名稱以要求使用者在每個面板中為此問題提供唯一的答案。"
+      keyName: "引用問題名稱以要求使用者在每個面板中為此問題提供唯一的答案。",
+      confirmDelete: "在刪除面板之前觸發確認提示。"
+    },
+    matrixdynamic: {
+      confirmDelete: "在刪除行之前觸發確認提示。",
+      detailPanelShowOnAdding: "在向矩陣添加新行時自動展開詳細資訊部分。"
     },
     copyDefaultValueFromLastEntry: "複製最後一行的答案，並將其分配給下一個添加的動態行。",
     defaultValueExpression: "此設定允許您根據表示式分配預設答案值。表達式可以包括基本計算 - '{q1_id} + {q2_id}'、布爾表達式，例如 '{age} > 60'，以及函數：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。此表達式確定的值用作初始預設值，可由回應者的手動輸入覆蓋。",
@@ -1559,7 +1564,6 @@ var traditionalChineseTranslation = {
     detailErrorLocation: "設置嵌套在詳細資訊部分中的問題的錯誤消息的位置。“Inherit” 選項應用“Error message alignment” 屬性中的設置。",
     keyDuplicationError: "啟用「防止重複響應」屬性後，嘗試提交重複條目的受訪者將收到以下錯誤消息。",
     totalExpression: "允許您根據表達式計算總值。表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、布爾表達式 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
-    confirmDelete: "觸發提示，要求確認刪除行。",
     keyName: "如果指定的列包含相同的值，則調查將引發「非唯一鍵值」錯誤。",
     description: "鍵入副標題。",
     locale: "選擇一種語言以開始創建調查。要添加翻譯，請切換到新語言，然後在此處或“翻譯”選項卡中翻譯原始文本。",
@@ -1727,7 +1731,7 @@ var traditionalChineseTranslation = {
     detailElements: "細節元素",
     allowAdaptiveActions: "允許自適應操作",
     defaultRowValue: "預設行值",
-    detailPanelShowOnAdding: "添加時顯示的詳細資訊面板",
+    detailPanelShowOnAdding: "自動展開新行詳細資訊",
     choicesLazyLoadEnabled: "選項延遲載入已啟用",
     choicesLazyLoadPageSize: "選擇延遲載入頁面大小",
     inputFieldComponent: "輸入欄位元件",
@@ -3421,3 +3425,7 @@ setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });
 // slider.labelFormat: "Label format" => "標籤格式"
 // slider.tooltipFormat: "Tooltip format" => "工具提示格式"
 // question.showTitle: "Show the title and description" => "顯示標題和描述"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "在刪除面板之前觸發確認提示。"
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "在刪除行之前觸發確認提示。"
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "在向矩陣添加新行時自動展開詳細資訊部分。"
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "自動展開新行詳細資訊"

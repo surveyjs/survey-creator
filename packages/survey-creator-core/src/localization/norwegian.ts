@@ -1435,7 +1435,12 @@ export var nbStrings = {
       descriptionLocation: "Alternativet \"Arv\" bruker innstillingen på sidenivå (hvis angitt) eller innstilling på undersøkelsesnivå (\"Under paneltittelen\" som standard).",
       newPanelPosition: "Definerer posisjonen til et nylig lagt til-panel. Som standard legges nye paneler til slutten. Velg \"Neste\" for å sette inn et nytt panel etter det nåværende.",
       copyDefaultValueFromLastEntry: "Dupliserer svar fra det siste panelet og tilordner dem til det neste dynamiske panelet som er lagt til.",
-      keyName: "Referer til et spørsmålsnavn for å kreve at en bruker gir et unikt svar på dette spørsmålet i hvert panel."
+      keyName: "Referer til et spørsmålsnavn for å kreve at en bruker gir et unikt svar på dette spørsmålet i hvert panel.",
+      confirmDelete: "Utløser en bekreftelsesmelding før du fjerner et panel."
+    },
+    matrixdynamic: {
+      confirmDelete: "Utløser en bekreftelsesmelding før du fjerner en rad.",
+      detailPanelShowOnAdding: "Utvider automatisk detaljdelen når en ny rad legges til i matrisen."
     },
     copyDefaultValueFromLastEntry: "Dupliserer svar fra den siste raden og tilordner dem til den neste dynamiske raden som er lagt til.",
     defaultValueExpression: "Med denne innstillingen kan du tilordne en standard svarverdi basert på et uttrykk. Uttrykket kan inneholde grunnleggende beregninger - '{q1_id} + {q2_id}', boolske uttrykk, for eksempel '{alder} > 60', og funksjoner: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. Verdien som bestemmes av dette uttrykket, fungerer som den opprinnelige standardverdien som kan overstyres av en respondents manuelle inndata.",
@@ -1559,7 +1564,6 @@ export var nbStrings = {
     detailErrorLocation: "Angir plasseringen av feilmeldinger for spørsmål som er nestet i detaljdeler. Alternativet \"Arv\" bruker innstillingen fra egenskapen \"Feilmeldingsjustering\".",
     keyDuplicationError: "Når egenskapen \"Forhindre dupliserte svar\" er aktivert, får en svarperson som prøver å sende inn en duplikatoppføring, følgende feilmelding.",
     totalExpression: "Lar deg beregne totalverdier basert på et uttrykk. Uttrykket kan omfatte grunnleggende beregninger ('{q1_id} + {q2_id}'), boolske uttrykk ('{alder} > 60') og funksjoner ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
-    confirmDelete: "Utløser en melding som ber om å bekrefte radslettingen.",
     keyName: "Hvis den angitte kolonnen inneholder identiske verdier, gir undersøkelsen feilen \"Ikke-unik nøkkelverdi\".",
     description: "Skriv inn en undertekst.",
     locale: "Velg et språk for å begynne å opprette evalueringen. Hvis du vil legge til en oversettelse, bytter du til et nytt språk og oversetter originalteksten her eller i Oversettelser-fanen.",
@@ -1727,7 +1731,7 @@ export var nbStrings = {
     detailElements: "Detaljelementer",
     allowAdaptiveActions: "Tillat adaptive handlinger",
     defaultRowValue: "defaultRowValue",
-    detailPanelShowOnAdding: "Detaljpanelet vises når du legger til",
+    detailPanelShowOnAdding: "Utvid nye raddetaljer automatisk",
     choicesLazyLoadEnabled: "Valg lat belastning aktivert",
     choicesLazyLoadPageSize: "Valg lat lastesidestørrelse",
     inputFieldComponent: "Komponent for inntastingsfelt",
@@ -3153,3 +3157,7 @@ setupLocale({ localeCode: "nb", strings: nbStrings });
 // slider.labelFormat: "Label format" => "Etikett format"
 // slider.tooltipFormat: "Tooltip format" => "Format for verktøytips"
 // question.showTitle: "Show the title and description" => "Vis tittelen og beskrivelsen"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Utløser en bekreftelsesmelding før du fjerner et panel."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Utløser en bekreftelsesmelding før du fjerner en rad."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Utvider automatisk detaljdelen når en ny rad legges til i matrisen."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Utvid nye raddetaljer automatisk"

@@ -1435,7 +1435,12 @@ var polishStrings = {
       descriptionLocation: "Opcja \"Dziedzicz\" stosuje ustawienie na poziomie strony (jeśli jest ustawione) lub na poziomie ankiety (domyślnie \"Pod tytułem panelu\").",
       newPanelPosition: "Określa położenie nowo dodanego panelu. Domyślnie nowe panele są dodawane na końcu. Wybierz \"Dalej\", aby wstawić nowy panel po bieżącym.",
       copyDefaultValueFromLastEntry: "Duplikuje odpowiedzi z ostatniego panelu i przypisuje je do następnego dodanego panelu dynamicznego.",
-      keyName: "Odwołaj się do nazwy pytania, aby wymagać od użytkownika podania unikatowej odpowiedzi na to pytanie w każdym panelu."
+      keyName: "Odwołaj się do nazwy pytania, aby wymagać od użytkownika podania unikatowej odpowiedzi na to pytanie w każdym panelu.",
+      confirmDelete: "Powoduje wyświetlenie monitu o potwierdzenie przed usunięciem panelu."
+    },
+    matrixdynamic: {
+      confirmDelete: "Powoduje wyzwolenie monitu o potwierdzenie przed usunięciem wiersza.",
+      detailPanelShowOnAdding: "Automatycznie rozwija sekcję szczegółów po dodaniu nowego wiersza do macierzy."
     },
     copyDefaultValueFromLastEntry: "Duplikuje odpowiedzi z ostatniego wiersza i przypisuje je do następnego dodanego wiersza dynamicznego.",
     defaultValueExpression: "To ustawienie umożliwia przypisanie domyślnej wartości odpowiedzi na podstawie wyrażenia. Wyrażenie może zawierać podstawowe obliczenia - '{q1_id} + {q2_id}', wyrażenia logiczne, takie jak '{wiek} > 60' oraz funkcje: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' itp. Wartość określona przez to wyrażenie służy jako początkowa wartość domyślna, która może zostać zastąpiona przez ręczne wprowadzanie danych przez respondenta.",
@@ -1559,7 +1564,6 @@ var polishStrings = {
     detailErrorLocation: "Ustawia lokalizację komunikatów o błędach dla pytań zagnieżdżonych w sekcjach szczegółowych. Opcja \"Dziedzicz\" stosuje ustawienie z właściwości \"Wyrównanie komunikatu o błędzie\".",
     keyDuplicationError: "Gdy właściwość \"Zapobiegaj zduplikowanym odpowiedziom\" jest włączona, respondent próbujący przesłać zduplikowany wpis otrzyma następujący komunikat o błędzie.",
     totalExpression: "Umożliwia obliczanie wartości całkowitych na podstawie wyrażenia. Wyrażenie może zawierać podstawowe obliczenia ('{q1_id} + {q2_id}'), wyrażenia logiczne ('{age} > 60') i funkcje ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' itp.).",
-    confirmDelete: "Wyzwala monit z prośbą o potwierdzenie usunięcia wiersza.",
     keyName: "Jeśli określona kolumna zawiera identyczne wartości, ankieta zgłasza błąd \"Nieunikalna wartość klucza\".",
     description: "Wpisz napisy.",
     locale: "Wybierz język, aby rozpocząć tworzenie ankiety. Aby dodać tłumaczenie, przełącz się na nowy język i przetłumacz oryginalny tekst tutaj lub na karcie Tłumaczenia.",
@@ -1727,7 +1731,7 @@ var polishStrings = {
     detailElements: "Elementy szczegółowe",
     allowAdaptiveActions: "Zezwalaj na działania adaptacyjne",
     defaultRowValue: "Domyślna wartość wiersza",
-    detailPanelShowOnAdding: "Panel szczegółów pokazuje się po dodaniu",
+    detailPanelShowOnAdding: "Automatyczne rozwijanie szczegółów nowego wiersza",
     choicesLazyLoadEnabled: "Opcje: leniwe ładowanie włączone",
     choicesLazyLoadPageSize: "Opcje: leniwy rozmiar strony ładowania",
     inputFieldComponent: "Składnik pola wejściowego",
@@ -3416,3 +3420,7 @@ setupLocale({ localeCode: "pl", strings: polishStrings });
 // slider.labelFormat: "Label format" => "Format etykiety"
 // slider.tooltipFormat: "Tooltip format" => "Format podpowiedzi"
 // question.showTitle: "Show the title and description" => "Pokaż tytuł i opis"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Powoduje wyświetlenie monitu o potwierdzenie przed usunięciem panelu."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Powoduje wyzwolenie monitu o potwierdzenie przed usunięciem wiersza."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automatycznie rozwija sekcję szczegółów po dodaniu nowego wiersza do macierzy."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Automatyczne rozwijanie szczegółów nowego wiersza"

@@ -1435,7 +1435,12 @@ export var mnStrings = {
       descriptionLocation: "\"Өв залгамжлах\" сонголт нь хуудасны түвшин (хэрэв set) эсвэл судалгааны түвшний тохиргоог (\"Under the panel title\" -ийг default-аар) хэрэгжүүлдэг.",
       newPanelPosition: "Шинээр нэмэгдсэн панелийн байр суурийг тодорхойлно. Default-ээр төгсгөл рүү шинэ панелуудыг нэмдэг. Одоогийн панел дараа нь шинэ панел оруулахын тулд \"Next\"-ийг сонго.",
       copyDefaultValueFromLastEntry: "Сүүлийн панелын хариултыг хувилж, дараагийн нэмэлт динамик хавтанд хуваарилна.",
-      keyName: "Энэ асуултад хэрэглэгчээс панел бүрт өвөрмөц хариулт өгөхийг шаардахын тулд асуултын нэрийг эш тат."
+      keyName: "Энэ асуултад хэрэглэгчээс панел бүрт өвөрмөц хариулт өгөхийг шаардахын тулд асуултын нэрийг эш тат.",
+      confirmDelete: "Панелийг зайлуулахын өмнө баталгааны өдөөлт үүсгэнэ."
+    },
+    matrixdynamic: {
+      confirmDelete: "Мөрийг арилгахаас өмнө баталгааны хүсэлтийг өдөөнө.",
+      detailPanelShowOnAdding: "Матрицад шинэ мөр нэмэх үед нарийвчилсан хэсгийг автоматаар өргөжүүлнэ."
     },
     copyDefaultValueFromLastEntry: "Сүүлийн мөрнөөс хариултуудыг хуулбарлаж, дараагийн нэмэлт динамик мөрөнд хуваарилна.",
     defaultValueExpression: "Энэ тохиргоо нь илэрхийллийн үндсэн дээр дефолт хариултын үнэ цэнийг даалгах боломжийг олгодог. Илэрхийлэл нь үндсэн тооцоо - '{q1_id} + {q2_id}', Бөүлийн илэрхийллүүд, тухайлбал '{age} > 60', функц: 'iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м. Энэ илэрхийлэлээр тодорхойлогддог үнэ цэнэ нь хариулагчийн гарын авлагын оролтоор давхардуулан авч болох анхны дефолтын үнэ цэнэ болж өгдөг.",
@@ -1559,7 +1564,6 @@ export var mnStrings = {
     detailErrorLocation: "Нарийвчилсан хэсгүүдэд байрласан асуултуудын алдааны мессежүүдийн байршлыг тохируулна. \"Inherit\" сонголт нь \"Error message alignment\" шинж чанарын тохиргоог хэрэглэнэ.",
     keyDuplicationError: "\"Хуулбарласан хариу арга хэмжээ авахаас урьдчилан сэргийлье\" өмчийг боломжтой болгоход хуулбарлан оруулахыг оролдсон хариулагч дараах алдааны мэдээг хүлээн авна.",
     totalExpression: "Илэрхийллийн үндсэн дээр нийт үнэт зүйлсийг тооцох боломжийг танд олгож байна. Илэрхийлэл нь үндсэн тооцоо ('{q1_id} + {q2_id}'), Бөүлийн илэрхийллүүд ('{нас} > 60') функцууд ('iif()', 'өнөөдөр()', 'мин()', 'мин()', 'max()', 'avg()', г.м.",
-    confirmDelete: "Дарааллыг арилгахыг батлахыг хүссэн өдөөлтийг өдөөв.",
     keyName: "Хэрэв өгөгдсөн багана адил утгатай бол санал асуулга \"Давтагдсан утга\" гэсэн алдааг харуулна.",
     description: "Дэд гарчиг бичнэ.",
     locale: "Судалгаагаа хийж эхлэх хэл сонго. Орчуулга нэмэхийн тулд шинэ хэл рүү шилжиж, эх бичвэрийг энд эсвэл Translations tab-д орчуулна.",
@@ -1727,7 +1731,7 @@ export var mnStrings = {
     detailElements: "Дэлгэрэнгүй элементүүд",
     allowAdaptiveActions: "Дасан зохицох үйлдлийг зөвшөөрөх",
     defaultRowValue: "Үндсэн мөрийн утга",
-    detailPanelShowOnAdding: "Нэмэж байх үед нарийвчилсан панел харуулах",
+    detailPanelShowOnAdding: "Шинэ мөрийн нарийн ширийн зүйлсийг автоматаар тэлэх",
     choicesLazyLoadEnabled: "Choices lazy load enabled",
     choicesLazyLoadPageSize: "Choices lazy load page size",
     inputFieldComponent: "Оролтын утгын бүрэлдэхүүн",
@@ -2806,3 +2810,7 @@ setupLocale({ localeCode: "mn", strings: mnStrings });
 // slider.labelFormat: "Label format" => "Шошгоны хэлбэр"
 // slider.tooltipFormat: "Tooltip format" => "Tooltip формат"
 // question.showTitle: "Show the title and description" => "Гарчиг, тайлбарыг харуул"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Панелийг зайлуулахын өмнө баталгааны өдөөлт үүсгэнэ."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Мөрийг арилгахаас өмнө баталгааны хүсэлтийг өдөөнө."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Матрицад шинэ мөр нэмэх үед нарийвчилсан хэсгийг автоматаар өргөжүүлнэ."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Шинэ мөрийн нарийн ширийн зүйлсийг автоматаар тэлэх"

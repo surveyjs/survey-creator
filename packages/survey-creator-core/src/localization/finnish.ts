@@ -1435,7 +1435,12 @@ export var fiStrings = {
       descriptionLocation: "\"Peri\" -vaihtoehto käyttää sivutason (jos määritetty) tai kyselytason asetusta (\"Paneelin otsikon alla\" oletuksena).",
       newPanelPosition: "Määrittää juuri lisätyn paneelin sijainnin. Oletuksena uudet paneelit lisätään loppuun. Valitse \"Seuraava\" lisätäksesi uuden paneelin nykyisen jälkeen.",
       copyDefaultValueFromLastEntry: "Monistaa edellisen paneelin vastaukset ja määrittää ne seuraavaan lisättyyn dynaamiseen paneeliin.",
-      keyName: "Viittaa kysymyksen nimeen, jos haluat edellyttää, että käyttäjä antaa yksilöllisen vastauksen tähän kysymykseen kussakin paneelissa."
+      keyName: "Viittaa kysymyksen nimeen, jos haluat edellyttää, että käyttäjä antaa yksilöllisen vastauksen tähän kysymykseen kussakin paneelissa.",
+      confirmDelete: "Käynnistää vahvistuskehotteen ennen paneelin poistamista."
+    },
+    matrixdynamic: {
+      confirmDelete: "Käynnistää vahvistuskehotteen ennen rivin poistamista.",
+      detailPanelShowOnAdding: "Laajentaa tieto-osan automaattisesti, kun matriisiin lisätään uusi rivi."
     },
     copyDefaultValueFromLastEntry: "Monistaa vastaukset viimeiseltä riviltä ja määrittää ne seuraavalle lisätylle dynaamiselle riville.",
     defaultValueExpression: "Tämän asetuksen avulla voit määrittää oletusarvoisen vastausarvon lausekkeen perusteella. Lauseke voi sisältää peruslaskutoimituksia - '{q1_id} + {q2_id}', totuusarvolausekkeita, kuten '{age} > 60', ja funktioita: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' jne. Tämän lausekkeen määrittämä arvo toimii alkuperäisenä oletusarvona, jonka vastaajan manuaalinen syöttö voi ohittaa.",
@@ -1559,7 +1564,6 @@ export var fiStrings = {
     detailErrorLocation: "Määrittää tieto-osiin sisältyvien kysymysten virhesanomien sijainnin. \"Peri\" -vaihtoehto käyttää asetusta \"Virheilmoituksen kohdistus\" -ominaisuudesta.",
     keyDuplicationError: "Kun Estä päällekkäiset vastaukset -ominaisuus on käytössä, vastaaja, joka yrittää lähettää merkinnän kaksoiskappaleen, saa seuraavan virhesanoman.",
     totalExpression: "Voit laskea kokonaisarvot lausekkeen perusteella. Lauseke voi sisältää peruslaskutoimituksia ('{q1_id} + {q2_id}'), totuusarvolausekkeita ('{age} > 60') ja funktioita ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' jne.).",
-    confirmDelete: "Käynnistää kehotteen, jossa pyydetään vahvistamaan rivin poisto.",
     keyName: "Jos määritetty sarake sisältää samat arvot, kysely heittää \"Ei-yksilöllinen avainarvo\" -virheen.",
     description: "Kirjoita tekstitys.",
     locale: "Aloita kyselyn luominen valitsemalla kieli. Jos haluat lisätä käännöksen, vaihda uuteen kieleen ja käännä alkuperäinen teksti täällä tai Käännökset-välilehdessä.",
@@ -1727,7 +1731,7 @@ export var fiStrings = {
     detailElements: "Yksityiskohtaiset elementit",
     allowAdaptiveActions: "Salli mukautuvat toiminnot",
     defaultRowValue: "Rivin oletusarvo",
-    detailPanelShowOnAdding: "Tietopaneeli näyttää lisäyksen yhteydessä",
+    detailPanelShowOnAdding: "Laajenna uuden rivin tiedot automaattisesti",
     choicesLazyLoadEnabled: "Valinnat laiska kuorma käytössä",
     choicesLazyLoadPageSize: "Valinnat laiska lataussivun koko",
     inputFieldComponent: "Syöttökentän komponentti",
@@ -3125,3 +3129,7 @@ setupLocale({ localeCode: "fi", strings: fiStrings });
 // slider.labelFormat: "Label format" => "Etiketin muoto"
 // slider.tooltipFormat: "Tooltip format" => "Työkaluvihjeen muoto"
 // question.showTitle: "Show the title and description" => "Näytä otsikko ja kuvaus"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Käynnistää vahvistuskehotteen ennen paneelin poistamista."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Käynnistää vahvistuskehotteen ennen rivin poistamista."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Laajentaa tieto-osan automaattisesti, kun matriisiin lisätään uusi rivi."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Laajenna uuden rivin tiedot automaattisesti"
