@@ -18,8 +18,7 @@ FunctionFactory.Instance.register("validateToolboxJson", validateToolboxJson);
 export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEditableCaregorizedListConfigurator {
   private defaultItems: any[];
   private allItems: ICreatorPresetToolboxItem[];
-
-  protected createItemsMatrixJSON(props: any): any {
+  private createItemsMatrixJSON(props: any): any {
     const defaultJSON = {
       type: "matrixdynamic",
       name: "items",
@@ -69,6 +68,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     };
     return { ...defaultJSON, ...props };
   }
+
   public createMainPageCore(): any {
     return {
       title: "Set Up the Toolbox",
@@ -92,7 +92,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           detailPanelMode: "underRow",
           detailElements: [
             this.createItemsMatrixJSON({
-              name: "items"
+              name: this.nameInnerMatrix,
+              valueName: "items"
             })
           ]
         },
@@ -142,13 +143,9 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     };
   }
   public get nameCategoriesMode() { return this.fullPath + "_mode"; }
-  protected get nameMatrix() { return this.fullPath + "_matrix"; }
   protected get nameItems() { return this.fullPath + "_items"; }
-  protected get nameCategories() { return this.fullPath + "_categories"; }
   protected get nameShowCategoryTitles() { return this.fullPath + "_showCategoryTitles"; }
-  private getMatrix(model: SurveyModel): QuestionMatrixDynamicModel {
-    return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameMatrix);
-  }
+
   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
     const res: any = {};
     const definition = this.getJsonItemsDefinition(model);
@@ -207,133 +204,23 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     if (!differs && !Helpers.isTwoValueEquals(items.map(i=>i.name), this.defaultItems.map(i=>i.name))) differs = true;
     return differs ? items : undefined;
   }
-
-  protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
-    if (options.question.name === this.nameCategories) {
-      this.onDetailPanelShowingChanged(options.row);
-    }
-    if (this.isItemsMatrix(options.question)) {
-      this.showDetailPanelInPopup(options.question, options.row, model.rootElement);
-    }
-  }
-
-  private isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
-    return question.name === this.nameItems || question.name === this.nameMatrix || question.name === "items";
-  }
-  private resetCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
-    const category = row.getValue("category");
-    const defaultItems = this.defaultItems.filter(i => i.category == category);
-    const categoriesQuestion = this.getQuestionCategories(model);
-    const hiddenItemsQuestion = this.getMatrix(model);
-    const hiddenValue = hiddenItemsQuestion.value || [];
-    const value = categoriesQuestion.value;
-    const categoryRow = value.filter(v => v.category == category)[0];
-    categoryRow.items.forEach(i => {
-      if (!defaultItems.some(di => di.name == i.name)) {
-        hiddenValue.push(i);
-      }
-    });
-    categoryRow.items = defaultItems;
-    function clearItemFromDefault(items: any) {
-      if (!items) return;
-      defaultItems.forEach(di => {
-        const index = items.findIndex(i => i.name == di.name);
-        if (index >= 0) items.splice(index, 1);
-      });
-    }
-    value.filter(v => v.category != category).forEach(v => {
-      defaultItems.forEach(di => {
-        clearItemFromDefault(v.items);
-      });
-    });
-    clearItemFromDefault(hiddenValue);
-
-    hiddenItemsQuestion.value = hiddenValue;
-    categoriesQuestion.value = value;
-  }
-  protected onGetMatrixRowActionsCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
-    if (this.isItemsMatrix(options.question)) {
-      const iconName = options.question.value?.filter(v => v.name == options.row.getValue("name"))[0]?.iconName;
-      options.actions.push({
-        id: iconName,
-        iconName: iconName,
-        location: "start",
-        enabled: false
-      });
-      options.question.cssClasses.detailIconExpandedId = "icon-edit";
-      options.question.cssClasses.detailIconId = "icon-edit";
-
-      options.actions.forEach(a => {
-        if (a.id == "show-detail") {
-          a.location = "end";
-          a.iconName = "icon-edit",
-          a.visibleIndex = 10;
-        }
-        if (a.id == "remove-row") {
-          a.visibleIndex = 20;
-          a.iconName = options.question.name == this.nameMatrix ? "icon-add_16x16" : "icon-remove_16x16";
-        }
-      });
-    }
-    if (options.question.name === this.nameCategories) {
-      options.question.cssClasses.detailIconExpandedId = "icon-collapse-24x24";
-      options.question.cssClasses.detailIconId = "icon-expand-24x24";
-
-      options.actions.push({
-        id: "reset-to-default",
-        iconName: "icon-reset",
-        location: "end",
-        visibleIndex: 15,
-        action: ()=>{ this.resetCategory(model, options.row); }
-      });
-      options.actions.forEach(a => {
-        if (a.id == "show-detail") {
-          a.location = "end";
-          a.iconName = "icon-expand-24x24",
-          a.visibleIndex = 10;
-        }
-        if (a.id == "remove-row") a.visibleIndex = 20;
-      });
-    }
-  }
-  public onMatrixRowDragOver(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-    if (this.isItemsMatrix(options.fromMatrix) && this.isItemsMatrix(options.toMatrix)) {
-      options.allow = true;
-    }
+  protected isItemsMatrix(question: QuestionMatrixDynamicModel): boolean {
+    return question.name === this.nameItems || super.isItemsMatrix(question);
   }
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-    if (options.question.name == "items" || options.question.name == this.nameItems) {
-      const rowData = options.question.value[options.rowIndex];
-      const hiddenItems = this.getMatrix(model);
-      const value = hiddenItems.value ? [...hiddenItems.value] : [];
-      value.push(rowData);
-      hiddenItems.value = value;
-      return;
-    }
-    if (options.question.name == this.nameCategories) {
-      const items = options.question.value[options.rowIndex].items;
-      const hiddenItems = this.getMatrix(model);
-      const value = hiddenItems.value ? hiddenItems.value.concat(items) : items;
-      hiddenItems.value = value;
-      return;
-    }
+
     if (options.question.name == this.nameMatrix) {
-      const rowData = options.question.value[options.rowIndex];
       const mode = model.getValue(this.nameCategoriesMode);
       if (mode === "items") {
+        const rowData = options.question.value[options.rowIndex];
         const items = this.getQuestionItems(model);
         const value = items.value ? [...items.value] : [];
         value.push(rowData);
         items.value = value;
-      } else {
-        const categories = this.getQuestionCategories(model);
-        const catValue = categories.value;
-        const general = this.findOrCreateGeneralCategory(catValue);
-        general.items.push(rowData);
-        categories.value = catValue;
       }
       return;
     }
+    super.onMatrixRowRemoving(model, creator, options);
     options.allow = false;
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
@@ -390,14 +277,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private updateItemsFromCategories(model: SurveyModel) {
     this.getQuestionItems(model).value = this.getQuestionCategories(model).value.map(r => [...r.items]).flat();
   }
-  private findOrCreateGeneralCategory(categories: any) {
-    let generalCategory = categories.filter(c => c.category == "general")[0];
-    if (!generalCategory) {
-      generalCategory = { category: "general", title: "General", items: [] };
-      categories.push(generalCategory);
-    }
-    return generalCategory;
-  }
+
   private updateCategoriesFromItems(model: SurveyModel) {
     const categories = this.getQuestionCategories(model).value;
     const items = [...this.getQuestionItems(model).value];
@@ -477,11 +357,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   private getQuestionItems(model: SurveyModel): QuestionMatrixDynamicModel {
     return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameItems);
   }
-  protected getQuestionCategories(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameCategories); }
-  private onDetailPanelShowingChanged(row: MatrixDropdownRowModelBase): void {
-    if (!row.isDetailPanelShowing) return;
-  }
-
   private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
     return <ICreatorPresetToolboxItem> { name: item.name, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: item.json, category: item.category };
   }
