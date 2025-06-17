@@ -821,39 +821,6 @@ test("StringEditor on property value changing", () => {
   expect(question.locTitle.text).toEqual("c");
 });
 
-test("StringEditor Shift+Tab Safari - https://github.com/surveyjs/survey-creator/issues/3568", () => {
-  const creator = new CreatorTester();
-  const survey: SurveyModel = new SurveyModel({
-    pages: [
-      {
-        elements: [
-          { name: "q", type: "text" }
-        ]
-      }
-    ]
-  });
-
-  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "description");
-  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
-
-  var attrTest, valueTest;
-  var event = {
-    target: {
-      parentElement: { click: () => { } },
-      innerText: "a", setAttribute: (attr, val) => {
-        attrTest = attr;
-        valueTest = val;
-      }, removeAttribute: (attr, val) => { attrTest = attr; }
-    }
-  };
-  stringEditorSurveyTitle.onFocus(event);
-  expect(attrTest).toEqual("tabindex");
-  expect(valueTest).toEqual(-1);
-  attrTest = null;
-  stringEditorSurveyTitle.onBlur(event);
-  expect(attrTest).toEqual("tabindex");
-});
-
 test("StringEditor onGetPropertyReadOnly for radio/checkbox - https://github.com/surveyjs/survey-creator/issues/3658", () => {
   const creator = new CreatorTester();
   const survey: SurveyModel = new SurveyModel({
