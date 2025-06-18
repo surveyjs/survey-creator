@@ -1,7 +1,7 @@
 import {
   Base, IAction, ItemValue,
   JsonObjectProperty, MatrixDropdownColumn, Question,
-  SurveyModel, ILocalizableString, PopupBaseViewModel, PageModel, ILocalizableOwner
+  SurveyModel, ILocalizableString, PopupBaseViewModel, PageModel, ILocalizableOwner, LocalizableString
 } from "survey-core";
 
 /**
