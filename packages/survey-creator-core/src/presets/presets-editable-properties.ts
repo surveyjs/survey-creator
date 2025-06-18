@@ -108,7 +108,7 @@ export class SurveyQuestionPresetPropertiesDetail {
         name: p.name,
         title: p.title,
         iconName: p.iconName,
-        items: p.elements?.map(e => ({
+        properties: p.elements?.map(e => ({
           name: e.name,
           title: e.title,
           description: e.description,
@@ -206,6 +206,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   //       this.propCreatorValue = undefined;
   //     }
   //   }
+  protected get nameInnerMatrix() { return "properties"; }
   protected createItemsMatrixJSON(props: any): any {
     const defaultJSON = {
       type: "matrixdynamic",
@@ -263,7 +264,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               addRowText: "Add Custom Category",
               showHeader: false,
               columns: [
-                { cellType: "text", name: "name", isUnique: true, isRequired: true, visible: false },
+                { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
                 { cellType: "text", name: "title" }
               ],
               detailPanelMode: "underRow",
@@ -274,9 +275,9 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               ]
             },
             this.createItemsMatrixJSON({
-              allowAddRows: true,
-              addRowButtonLocation: "top",
-              addRowText: "Add Custom Item",
+              //allowAddRows: true,
+              //addRowButtonLocation: "top",
+              //addRowText: "Add Custom Item",
               startWithNewLine: false,
               name: this.nameMatrix,
               "descriptionLocation": "underInput",
@@ -296,15 +297,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   //   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     this.getSelector(model).choices = this.getSelectorChoices(creatorSetup.creator);
-    const options: ICreatorOptions = {
-      showJSONEditorTab: false,
-      showLogicTab: false,
-      showPreviewTab: false,
-      showSurveyTitle: false,
-      collapsePages: true,
-      collapseQuestions: true,
-      propertyGridNavigationMode: "accordion"
-    };
     const oldSearchValue = settings.propertyGrid.enableSearch;
     settings.propertyGrid.enableSearch = false;
     // this.propCreatorValue = creatorSetup.createCreator(options);
@@ -337,6 +329,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     if (!this.currentClassName) return;
     this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
     const categories = this.currentProperties.getInitialJson();
+    this.defaultItems = [];
     model.setValue(this.nameCategories, categories);
     //this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
     //this.setupCreatorToolbox(this.propCreator);

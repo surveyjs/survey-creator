@@ -185,7 +185,7 @@ test("Preset edit, toolbox - switch to categories mode", () => {
   expect(categQuestion.value.filter(с => с.category == "text")[0].items.filter(i => i.name == "comment")[0].iconName).toEqual("icon-test");
 
   survey.getQuestionByName("toolbox_mode").value = "items";
-  allItemsValue.splice(0, 7);
+  allItemsValue.splice(0, 8);
   allItemsQuestion.value = allItemsValue;
   survey.getQuestionByName("toolbox_mode").value = "categories";
   expect(categQuestion.value.filter(с => с.category == "choice")[0].items.map(i => i.name)).toStrictEqual(["imagepicker", "ranking"]);

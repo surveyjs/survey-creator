@@ -7,8 +7,9 @@ import { CreatorPresetEditorModel } from "./presets-editor";
 
 export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPresetEditableBase {
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
-  protected get nameInnerMatrix() { return this.fullPath + "_inner_items"; }
+  protected get nameInnerMatrix() { return "items"; }
   protected get nameCategories() { return this.fullPath + "_categories"; }
+  protected defaultItems: any[];
 
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if (this.isItemsMatrix(options.question)) {
@@ -24,40 +25,40 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     return question.name === this.nameMatrix || question.name === this.nameInnerMatrix;
   }
   private resetCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
-    // const category = row.getValue("category");
-    // const defaultItems = this.defaultItems.filter(i => i.category == category);
-    // const categoriesQuestion = this.getQuestionCategories(model);
-    // const hiddenItemsQuestion = this.getMatrix(model);
-    // const hiddenValue = hiddenItemsQuestion.value || [];
-    // const value = categoriesQuestion.value;
-    // const categoryRow = value.filter(v => v.category == category)[0];
-    // categoryRow.items.forEach(i => {
-    //   if (!defaultItems.some(di => di.name == i.name)) {
-    //     hiddenValue.push(i);
-    //   }
-    // });
-    // categoryRow.items = defaultItems;
-    // function clearItemFromDefault(items: any) {
-    //   if (!items) return;
-    //   defaultItems.forEach(di => {
-    //     const index = items.findIndex(i => i.name == di.name);
-    //     if (index >= 0) items.splice(index, 1);
-    //   });
-    // }
-    // value.filter(v => v.category != category).forEach(v => {
-    //   defaultItems.forEach(di => {
-    //     clearItemFromDefault(v.items);
-    //   });
-    // });
-    // clearItemFromDefault(hiddenValue);
+    const category = row.getValue("category");
+    const defaultItems = this.defaultItems.filter(i => i.category == category);
+    const categoriesQuestion = this.getQuestionCategories(model);
+    const hiddenItemsQuestion = this.getMatrix(model);
+    const hiddenValue = hiddenItemsQuestion.value || [];
+    const value = categoriesQuestion.value;
+    const categoryRow = value.filter(v => v.category == category)[0];
+    categoryRow[this.nameInnerMatrix].forEach(i => {
+      if (!defaultItems.some(di => di.name == i.name)) {
+        hiddenValue.push(i);
+      }
+    });
+    categoryRow[this.nameInnerMatrix] = defaultItems;
+    function clearItemFromDefault(items: any) {
+      if (!items) return;
+      defaultItems.forEach(di => {
+        const index = items.findIndex(i => i.name == di.name);
+        if (index >= 0) items.splice(index, 1);
+      });
+    }
+    value.filter(v => v.category != category).forEach(v => {
+      defaultItems.forEach(di => {
+        clearItemFromDefault(v[this.nameInnerMatrix]);
+      });
+    });
+    clearItemFromDefault(hiddenValue);
 
-    // hiddenItemsQuestion.value = hiddenValue;
-    // categoriesQuestion.value = value;
+    hiddenItemsQuestion.value = hiddenValue;
+    categoriesQuestion.value = value;
   }
   protected findOrCreateGeneralCategory(categories: any) {
     let generalCategory = categories.filter(c => c.category == "general")[0];
     if (!generalCategory) {
-      generalCategory = { category: "general", title: "General", items: [] };
+      generalCategory = { category: "general", title: "General", [this.nameInnerMatrix]: [] };
       categories.push(generalCategory);
     }
     return generalCategory;
@@ -119,24 +120,20 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       const value = hiddenItems.value ? [...hiddenItems.value] : [];
       value.push(rowData);
       hiddenItems.value = value;
-      return;
     }
     if (options.question.name == this.nameCategories) {
-      const items = options.question.value[options.rowIndex].items;
+      const items = options.question.value[options.rowIndex][this.nameInnerMatrix];
       const hiddenItems = this.getMatrix(model);
       const value = hiddenItems.value ? hiddenItems.value.concat(items) : items;
       hiddenItems.value = value;
-      return;
     }
     if (options.question.name == this.nameMatrix) {
       const rowData = options.question.value[options.rowIndex];
       const categories = this.getQuestionCategories(model);
       const catValue = categories.value;
       const general = this.findOrCreateGeneralCategory(catValue);
-      general.items.push(rowData);
+      general[this.nameInnerMatrix].push(rowData);
       categories.value = catValue;
-      return;
     }
-    options.allow = false;
   }
 }

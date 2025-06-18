@@ -16,7 +16,6 @@ function validateToolboxJson (params) {
 }
 FunctionFactory.Instance.register("validateToolboxJson", validateToolboxJson);
 export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEditableCaregorizedListConfigurator {
-  private defaultItems: any[];
   private allItems: ICreatorPresetToolboxItem[];
   private createItemsMatrixJSON(props: any): any {
     const defaultJSON = {
@@ -208,7 +207,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return question.name === this.nameItems || super.isItemsMatrix(question);
   }
   public onMatrixRowRemoving(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
-
     if (options.question.name == this.nameMatrix) {
       const mode = model.getValue(this.nameCategoriesMode);
       if (mode === "items") {
@@ -218,10 +216,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         value.push(rowData);
         items.value = value;
       }
-      return;
     }
     super.onMatrixRowRemoving(model, creator, options);
-    options.allow = false;
   }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     this.setupPageQuestions(model, creatorSetup.creator);
