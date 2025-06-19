@@ -108,7 +108,7 @@ export class SurveyQuestionPresetPropertiesDetail {
         name: p.name,
         title: p.title,
         iconName: p.iconName,
-        properties: p.elements?.map(e => ({
+        properties: p.elements?.filter(e => e.name && e.name.indexOf("overridingProperty") == -1).map(e => ({
           name: e.name,
           title: e.title,
           description: e.description,
