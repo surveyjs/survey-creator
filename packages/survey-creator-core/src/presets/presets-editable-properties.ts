@@ -290,11 +290,11 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     };
   }
 
-  //   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
-  //     if (!this.isModified) return undefined;
-  //     this.updateCurrentJson(model);
-  //     return this.currentJson;
-  //   }
+  public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
+    //if (!this.isModified) return undefined;
+    this.updateCurrentJson(model);
+    return { definition: this.currentJson };
+  }
   protected setupQuestionsCore(model: SurveyModel, creatorSetup: ICreatorPresetEditorSetup): void {
     this.getSelector(model).choices = this.getSelectorChoices(creatorSetup.creator);
     const oldSearchValue = settings.propertyGrid.enableSearch;
@@ -320,7 +320,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   //   private isPropCreatorChanged: boolean;
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if (name !== this.nameSelector) return;
-    //this.updateCurrentJson(model);
+    this.updateCurrentJson(model);
     if (this.currentProperties) {
       this.currentProperties = undefined;
     }
@@ -378,25 +378,17 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     const postFix = !name ? "default" : this.getSelectorItemTitle(name);
     return columnTitle + ": " + postFix;
   }
-  //   private updateCurrentJson(model: SurveyModel): void {
-  //     if (!this.isPropCreatorChanged) return;
-  //     this.isPropCreatorChanged = false;
-  //     if (this.currentProperties) {
-  //       this.currentProperties.updateCurrentJson(this.getPropertiesArray());
-  //     }
-  //   }
-  //   private getPropertiesArray(): Array<any> {
-  //     const survey = this.propCreator.survey;
-  //     const res = [];
-  //     survey.pages.forEach(page => {
-  //       const item = { name: page.name, items: [] };
-  //       page.questions.forEach(question => {
-  //         item.items.push(question.name);
-  //       });
-  //       res.push(item);
-  //     });
-  //     return res;
-  //   }
+  private updateCurrentJson(model: SurveyModel): void {
+    //if (!this.isPropCreatorChanged) return;
+    //this.isPropCreatorChanged = false;
+    if (this.currentProperties) {
+      this.currentProperties.updateCurrentJson(this.getPropertiesArray(model));
+    }
+  }
+  private getPropertiesArray(model: SurveyModel): Array<any> {
+    const categories = this.getQuestionCategories(model).value;
+    return categories?.map(c => ({ name: c.name, items: c.properties?.map(p => p.name) }));
+  }
   //   private changePropTitleAndDescription(path: string, propName: string, val: string): void {
   //     this.ensureLocalizationPath(path);
   //     const strs = this.localeStrings[path];
