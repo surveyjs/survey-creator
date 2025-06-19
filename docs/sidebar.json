@@ -219,6 +219,10 @@
               "Title": "Image and Video Choice Questions"
             },
             {
+              "Name": "end-user-guide-sync-range-slider-with-input-fields-javascript",
+              "Title": "Sync a Range Slider with Input Fields"
+            },
+            {
               "Name": "end-user-guide-dynamic-tab-title-format",
               "Title": "Dynamic Panel: Configure Dynamic Tab Titles"
             }
