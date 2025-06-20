@@ -1,7 +1,7 @@
 import {
   Base, IAction, ItemValue,
   JsonObjectProperty, MatrixDropdownColumn, Question,
-  SurveyModel, ILocalizableString, PopupBaseViewModel, PageModel
+  SurveyModel, ILocalizableString, PopupBaseViewModel, PageModel, ILocalizableOwner, LocalizableString
 } from "survey-core";
 
 /**
@@ -343,7 +343,7 @@ export interface ISurveyCreatorOptions {
   canAddPage(pageToAdd?: PageModel): boolean;
 }
 
-export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
+export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocalizableOwner {
   previewShowResults: boolean;
   rootElement: HTMLElement;
   enableLinkFileEditor: boolean;
@@ -507,4 +507,21 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void { }
   translationLocalesOrder: Array<string> = [];
   canAddPage(pageToAdd?: PageModel): boolean { return true; }
+
+  // ILocalizableOwner implemented
+  getLocale(): string {
+    return "";
+  }
+  getMarkdownHtml(text: string, name: string, item?: any): string {
+    return text;
+  }
+  getProcessedText(text: string): string {
+    return text;
+  }
+  getRenderer(name: string): string {
+    return name;
+  }
+  getRendererContext(locStr: LocalizableString) {
+    return locStr;
+  }
 }

@@ -167,7 +167,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         cssClasses: listComponentCss,
         onHide: () => { this.deviceSelectorAction.enabled = true; },
         onShow: () => { this.deviceSelectorAction.enabled = false; }
-      });
+      }, this.creator);
       items.push(this.deviceSelectorAction);
 
       this.orientationSelectorAction = new Action({
@@ -225,7 +225,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       cssClasses: listComponentCss,
       onHide: () => { this.languageSelectorAction.enabled = true; },
       onShow: () => { this.languageSelectorAction.enabled = false; }
-    });
+    }, this.creator);
     items.push(this.languageSelectorAction);
 
     this.designerAction = new Action({

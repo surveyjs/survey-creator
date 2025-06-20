@@ -1099,7 +1099,7 @@ export class Translation extends Base implements ITranslationLocales {
       onSelectionChanged: (item: IAction) => {
         this.addLocale(item.id);
       }
-    });
+    }, this.options as any);
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
@@ -1642,7 +1642,8 @@ export class TranslationEditor {
         action.title = this.getActionTranslateFromText(id);
       },
       cssClasses: listComponentCss,
-      allowSelection: true
+      allowSelection: true,
+      locOwner: this.options as any
     }, {
       verticalPosition: "bottom",
       horizontalPosition: "center",
