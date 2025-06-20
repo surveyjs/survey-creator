@@ -615,7 +615,7 @@ export class QuestionToolbox
       this.dotsItem.popupModel.hide();
       this.creator?.onDragDropItemStart();
       this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel);
-    });
+    }, false);
     this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: IQuestionToolboxItem) => {
       if (!this.creator.readOnly) {
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
