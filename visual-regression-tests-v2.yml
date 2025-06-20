@@ -289,6 +289,11 @@ jobs:
           npm run vrt:v2:ci
         displayName: "Visual Regression Tests V2 Creator React"
 
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+          npm run test:scr:legacy:ci
+        displayName: "Screenshot Tests V2 Creator React"
+
       - task: CopyFiles@2
         inputs:
           SourceFolder: "$(Build.SourcesDirectory)/survey-creator/visualRegressionTests-V2"

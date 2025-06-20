@@ -1,5 +1,4 @@
-import { url, compareScreenshot, test } from "../e2e/helper";
-import { setJSON } from "../e2e/helper";
+import { url, compareScreenshot, test, setJSON } from "./helper";
 const title = "Design Surface Screenshot";
 
 test.describe(title, () => {
