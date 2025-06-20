@@ -436,11 +436,10 @@ test("Preset edit model, make general tab as second tab", () => {
   const creator = editor.creator;
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.selectElement(creator.survey.getQuestionByName("q1"));
-  // const propGridSurvey = getPropGridSurvey(survey);
-  // const panels = propGridSurvey.getAllPanels();
-  // expect(panels).toHaveLength(2);
-  // expect(panels[0].name).toBe("logic");
-  // expect(panels[1].name).toBe("general");
+  const panels = creator.propertyGrid.visiblePages;
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("logic");
+  expect(panels[1].name).toBe("general");
 });
 test("Preset edit model, include columns types", () => {
   const editor = new CreatorPresetEditorModel();
@@ -461,46 +460,42 @@ test("Preset edit model, edit matrixdropdowncolumn@default", () => {
   expect(categories[0].properties).toHaveLength(10);
   expect(categories[1].properties).toHaveLength(7);
 });
-// test("Preset edit model, property grid & matrixdropdowncolumn@checkbox", () => {
-//   const editor = new CreatorPresetEditorModel();
-//   const survey = editor.model;
-//   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
-//   survey.setValue("propertyGrid_definition_selector", "matrixdropdowncolumn@checkbox");
-//   const propGridCreator = getPropGridCreator(survey);
-//   propGridCreator.JSON = {
-//     elements: [
-//       {
-//         type: "panel", "name": "general",
-//         elements: [
-//           { type: "text", name: "name" },
-//           { type: "comment", name: "title" }
-//         ]
-//       },
-//       {
-//         type: "panel", "name": "choices",
-//         elements: [
-//           { type: "matrixdynamic", name: "choices" },
-//           { type: "boolean", name: "showSelectAllItem" }
-//         ]
-//       }
-//     ]
-//   };
-//   propGridCreator.survey.getQuestionByName("name").title = "Name 1";
-//   expect(editor.applyFromSurveyModel()).toBeTruthy();
-//   const creator = editor.creator;
-//   creator.JSON = { elements: [{ type: "matrixdynamic", name: "q1", columns: [{ name: "col1", cellType: "checkbox" }] }] };
-//   creator.selectElement(creator.survey.getQuestionByName("q1").columns[0]);
-//   const propGridSurvey = getPropGridSurvey(survey);
-//   let panels = propGridSurvey.getAllPanels();
-//   expect(panels).toHaveLength(2);
-//   expect(panels[0].name).toBe("general");
-//   expect(panels[0].elements).toHaveLength(2);
-//   expect(panels[0].elements[0].name).toBe("name");
-//   expect(panels[0].elements[1].name).toBe("title");
-//   expect(panels[1].elements).toHaveLength(2);
-//   expect(panels[1].elements[0].name).toBe("choices");
-//   expect(panels[1].elements[1].name).toBe("showSelectAllItem");
-// });
+test("Preset edit model, property grid & matrixdropdowncolumn@checkbox", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid");
+  survey.setValue("propertyGrid_selector", "matrixdropdowncolumn@checkbox");
+  let propGridCategories = survey.getQuestionByName("propertyGrid_categories");
+  propGridCategories.value = [
+    {
+      title: "General", "name": "general",
+      properties: [
+        { title: "Name", name: "name" },
+        { title: "Title", name: "title" }
+      ]
+    },
+    {
+      title: "Choices", "name": "choices",
+      properties: [
+        { title: "Choices", name: "choices" },
+        { title: "Show Select All Item", name: "showSelectAllItem" }
+      ]
+    }
+  ];
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const creator = editor.creator;
+  creator.JSON = { elements: [{ type: "matrixdynamic", name: "q1", columns: [{ name: "col1", cellType: "checkbox" }] }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1").columns[0]);
+  let panels = creator.propertyGrid.visiblePages;
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("general");
+  expect(panels[0].elements).toHaveLength(2);
+  expect(panels[0].elements[0].name).toBe("name");
+  expect(panels[0].elements[1].name).toBe("title");
+  expect(panels[1].elements).toHaveLength(2);
+  expect(panels[1].elements[0].name).toBe("choices");
+  expect(panels[1].elements[1].name).toBe("showSelectAllItem");
+});
 test("Editor: activeTab & navigationBar", () => {
   const editor = new CreatorPresetEditorModel();
   expect(editor.activeTab).toEqual("preset");
@@ -619,102 +614,108 @@ test("Toolbox categories, show header and showcolumn title column if show catego
   survey.setValue("toolbox_showCategoryTitles", false);
   expect(matrix.getColumnByName("title").visible).toBeTruthy();
 });
-// test("Preset edit model, Set question name title&description", () => {
-//   const editor = new CreatorPresetEditorModel();
-//   const survey = editor.model;
-//   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
-//   survey.setValue("propertyGrid_definition_selector", "text");
-//   const propGridCreator = getPropGridCreator(survey);
-//   const q = propGridCreator.survey.getQuestionByName("name");
-//   expect(q).toBeTruthy();
-//   expect(q.title).toBe("Question name");
-//   expect(q.description).toBe("A question ID that is not visible to respondents.");
-// });
-// test("Preset edit model, Keep description on deleting the question", () => {
-//   const editor = new CreatorPresetEditorModel();
-//   const survey = editor.model;
-//   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
-//   survey.setValue("propertyGrid_definition_selector", "text");
-//   const propGridCreator = getPropGridCreator(survey);
-//   expect(propGridCreator.toolbox.items).toHaveLength(0);
-//   const q = propGridCreator.survey.getQuestionByName("name");
-//   expect(q).toBeTruthy();
-//   propGridCreator.selectElement(q);
-//   propGridCreator.deleteCurrentElement();
-//   expect(propGridCreator.survey.getQuestionByName("name")).toBeFalsy();
-//   expect(propGridCreator.toolbox.items).toHaveLength(1);
-//   const json = propGridCreator.toolbox.items[0].json;
-//   expect(json.description).toEqual("A question ID that is not visible to respondents.");
-//   expect(json.descriptionLocation).toBeFalsy();
-// });
-// test("Preset edit model, Change localization strings title&description", () => {
-//   const editor = new CreatorPresetEditorModel();
-//   const survey = editor.model;
-//   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
-//   survey.setValue("propertyGrid_definition_selector", "text");
-//   const propGridCreator = getPropGridCreator(survey);
-//   propGridCreator.JSON = {
-//     elements: [
-//       {
-//         type: "panel", "name": "general",
-//         elements: [
-//           { type: "text", name: "name" },
-//           { type: "dropdown", name: "inputType" },
-//           { type: "comment", name: "title" },
-//           { type: "text", name: "placeholder" },
-//           { type: "comment", name: "description" }
-//         ]
-//       }
-//     ]
-//   };
-//   propGridCreator.survey.getQuestionByName("name").title = "My Name";
-//   propGridCreator.survey.getQuestionByName("inputType").title = "My Input Type";
-//   propGridCreator.survey.getQuestionByName("inputType").description = "My Input Type description";
-//   expect(editor.applyFromSurveyModel()).toBeTruthy();
-//   const loc = editor.json.localization;
-//   expect(loc).toBeTruthy();
-//   expect(loc.en.pe.question).toBeTruthy();
-//   expect(loc.en.pe.text).toBeTruthy();
-//   expect(loc.en.pe.panel).toBeFalsy();
-//   expect(loc.en.pe.question.name).toEqual("My Name");
-//   expect(loc.en.pe.text.inputType).toEqual("My Input Type");
-//   expect(loc.en.pehelp.text).toBeTruthy();
-//   expect(loc.en.pehelp.text.inputType).toEqual("My Input Type description");
+test("Preset edit model, Set question name title&description", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid");
+  survey.setValue("propertyGrid_selector", "text");
+  const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
+  const row = propGridCategories.value.filter(r => r.category == "general")[0].properties.filter(r => r.name == "name")[0];
+  expect(row).toBeTruthy();
+  expect(row.title).toBe("Question name");
+  expect(row.description).toBe("A question ID that is not visible to respondents.");
+});
+test("Preset edit model, Keep description on deleting the question", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid");
+  survey.setValue("propertyGrid_selector", "text");
+  const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
+  const propGridHidden = survey.getQuestionByName("propertyGrid_matrix");
+  expect(propGridHidden.value).toBeFalsy();
+  propGridCategories.visibleRows[0].showDetailPanel();
+  const qItems = propGridCategories.visibleRows[0].detailPanel.getQuestionByName("properties");
+  const itemIndex = qItems.value.findIndex(r => r.name == "name");
+  expect(itemIndex >= 0).toBeTruthy();
+  qItems.removeRow(itemIndex);
+  expect(propGridHidden.value).toHaveLength(1);
+  const json = propGridHidden.value[0];
+  expect(json.description).toEqual("A question ID that is not visible to respondents.");
+  expect(json.descriptionLocation).toBeFalsy();
+});
+test("Preset edit model, Change localization strings title&description", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid");
+  survey.setValue("propertyGrid_selector", "text");
+  const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
 
-//   const creator = editor.creator;
-//   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
-//   creator.selectElement(creator.survey.getQuestionByName("q1"));
-//   const propGridSurvey = getPropGridSurvey(survey);
-//   const panels = propGridSurvey.getAllPanels();
-//   expect(panels).toHaveLength(1);
-//   expect(panels[0].name).toBe("general");
-//   const elements = panels[0].elements;
-//   expect(elements).toHaveLength(5);
-//   expect(elements[0].name).toBe("name");
-//   expect(elements[1].name).toBe("inputType");
-//   expect((<Question>elements[0]).title).toEqual("My Name");
-//   expect((<Question>elements[1]).title).toEqual("My Input Type");
-//   expect((<Question>elements[1]).description).toEqual("My Input Type description");
-// });
-// test("Preset edit model, Change localization strings title&description", () => {
-//   const editor = new CreatorPresetEditorModel();
-//   const survey = editor.model;
-//   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
-//   survey.setValue("propertyGrid_definition_selector", "text");
-//   const propGridCreator = getPropGridCreator(survey);
-//   propGridCreator.survey.getPageByName("general").title = "General Edit";
-//   expect(editor.applyFromSurveyModel()).toBeTruthy();
-//   const loc = editor.json.localization;
-//   expect(loc).toBeTruthy();
-//   expect(loc.en.pe.tabs).toBeTruthy();
-//   expect(loc.en.pe.tabs.general).toEqual("General Edit");
+  propGridCategories.value = [
+    {
+      title: "General", "name": "general",
+      properties: [
+        { title: "Name", name: "name" },
+        { title: "Input Type", name: "inputType" },
+        { title: "Title", name: "title" },
+        { title: "Placeholder", name: "placeholder" },
+        { title: "Description", name: "description" }
+      ]
+    }
+  ];
 
-//   const creator = editor.creator;
-//   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
-//   creator.selectElement(creator.survey.getQuestionByName("q1"));
-//   const propGridSurvey = getPropGridSurvey(survey);
-//   expect(propGridSurvey.getPageByName("general").title).toEqual("General Edit");
-// });
+  propGridCategories.visibleRows[0].showDetailPanel();
+  const properties = propGridCategories.visibleRows[0].detailPanel.getQuestionByName("properties");
+  properties.visibleRows[0].showDetailPanel();
+  properties.visibleRows[0].detailPanel.getQuestionByName("title").value = "My Name";
+  properties.visibleRows[1].showDetailPanel();
+  properties.visibleRows[1].detailPanel.getQuestionByName("title").value = "My Input Type";
+  properties.visibleRows[1].detailPanel.getQuestionByName("description").value = "My Input Type description";
+
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const loc = editor.json.localization;
+  expect(loc).toBeTruthy();
+  expect(loc.en.pe.question).toBeTruthy();
+  expect(loc.en.pe.text).toBeTruthy();
+  expect(loc.en.pe.panel).toBeFalsy();
+  expect(loc.en.pe.question.name).toEqual("My Name");
+  expect(loc.en.pe.text.inputType).toEqual("My Input Type");
+  expect(loc.en.pehelp.text).toBeTruthy();
+  expect(loc.en.pehelp.text.inputType).toEqual("My Input Type description");
+
+  // const creator = editor.creator;
+  // creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  // creator.selectElement(creator.survey.getQuestionByName("q1"));
+  // const propGridSurvey = getPropGridSurvey(survey);
+  // const panels = propGridSurvey.getAllPanels();
+  // expect(panels).toHaveLength(1);
+  // expect(panels[0].name).toBe("general");
+  // const elements = panels[0].elements;
+  // expect(elements).toHaveLength(5);
+  // expect(elements[0].name).toBe("name");
+  // expect(elements[1].name).toBe("inputType");
+  // expect((<Question>elements[0]).title).toEqual("My Name");
+  // expect((<Question>elements[1]).title).toEqual("My Input Type");
+  // expect((<Question>elements[1]).description).toEqual("My Input Type description");
+});
+test("Preset edit model, Change localization strings title&description", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid");
+  survey.setValue("propertyGrid_selector", "text");
+  const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
+  propGridCategories.visibleRows.filter(r => r.getQuestionByName("category").value === "general")[0].getQuestionByName("title").value = "General Edit";
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const loc = editor.json.localization;
+  expect(loc).toBeTruthy();
+  expect(loc.en.pe.tabs).toBeTruthy();
+  expect(loc.en.pe.tabs.general).toEqual("General Edit");
+
+  const creator = editor.creator;
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  const propGridSurvey = creator.propertyGrid;
+  expect(propGridSurvey.getPageByName("general").title).toEqual("General Edit");
+});
 test("Change localization strings and then change locale for tabs", () => {
   addLocales();
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
@@ -730,93 +731,42 @@ test("Change localization strings and then change locale for tabs", () => {
   itemsQuestion = editor.model.getQuestionByName("tabs_items");
   expect(itemsQuestion.choices[0].text).toEqual("Designer");
 });
-// test("Preset edit model, Property grid toolbox", () => {
-//   const editor = new CreatorPresetEditorModel();
-//   const survey = editor.model;
-//   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
-//   survey.setValue("propertyGrid_definition_selector", "survey");
-//   const propGridCreator = getPropGridCreator(survey);
-//   expect(propGridCreator.toolbox.actions).toHaveLength(0);
-//   const valPage = propGridCreator.survey.getPageByName("validation");
-//   expect(valPage).toBeTruthy();
-//   propGridCreator.deleteElement(valPage);
-//   expect(propGridCreator.survey.getPageByName("validation")).toBeFalsy();
-//   expect(propGridCreator.toolbox.actions).toHaveLength(3);
-//   propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
+test("Preset edit model, Property grid change the new category title and then name", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid");
+  survey.setValue("propertyGrid_selector", "survey");
 
-//   const pagesCount = propGridCreator.survey.pages.length;
-//   const desigerTab = propGridCreator.getPlugin("designer").model as TabDesignerViewModel;
-//   new PageAdorner(propGridCreator, desigerTab.newPage).isGhost = true;
-//   desigerTab.newPage.title = "New Category 1";
-//   expect(propGridCreator.survey.pages).toHaveLength(pagesCount + 1);
-//   new PageAdorner(propGridCreator, desigerTab.newPage).isGhost = true;
-//   desigerTab.newPage.title = "New Category 2";
-//   expect(propGridCreator.survey.pages).toHaveLength(pagesCount + 2);
+  let propGridCategories = survey.getQuestionByName("propertyGrid_categories");
+  propGridCategories.addRow();
+  const newRow = propGridCategories.visibleRows[propGridCategories.rowCount - 1];
+  expect(newRow.getQuestionByName("category").value).toBe("category1");
+  newRow.getQuestionByName("title").value = "My Category";
+  newRow.showDetailPanel();
+  newRow.detailPanel.getQuestionByName("properties").value = [{ name: "widthMode", title: "widthMode" }];
 
-//   const newPage1 = propGridCreator.survey.getPageByName("category1");
-//   const newPage2 = propGridCreator.survey.getPageByName("category2");
-//   expect(newPage1).toBeTruthy();
-//   expect(newPage2).toBeTruthy();
-//   expect(newPage1.title).toEqual("New Category 1");
-//   propGridCreator.selectElement(newPage2);
-//   propGridCreator.clickToolboxItem(propGridCreator.toolbox.getItemByName("autoFocusFirstError").json);
-//   expect(newPage2.elements).toHaveLength(1);
-//   expect(newPage2.questions[0].name).toEqual("autoFocusFirstError");
-//   expect(propGridCreator.toolbox.actions).toHaveLength(2);
-// });
-// test("Preset edit model, Property grid change the new category name", () => {
-//   const editor = new CreatorPresetEditorModel();
-//   const survey = editor.model;
-//   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
-//   survey.setValue("propertyGrid_definition_selector", "survey");
-//   const propGridCreator = getPropGridCreator(survey);
-//   expect(propGridCreator.toolbox.actions).toHaveLength(0);
-//   const valPanel = propGridCreator.survey.getPageByName("validation");
-//   expect(valPanel).toBeTruthy();
-//   propGridCreator.deleteElement(valPanel);
-//   expect(propGridCreator.toolbox.actions).toHaveLength(3);
-//   propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const json = editor.json;
+  const creator = editor.creator;
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.selectElement(creator.survey);
+  let pages = creator.propertyGrid.visiblePages;
 
-//   const desigerTab = propGridCreator.getPlugin("designer").model as TabDesignerViewModel;
-//   new PageAdorner(propGridCreator, desigerTab.newPage).isGhost = true;
-//   desigerTab.newPage.title = "New Category 1";
-//   const newPage1 = propGridCreator.survey.getPageByName("category1");
-//   expect(newPage1).toBeTruthy();
-//   expect(newPage1.name).toBe("category1");
-//   newPage1.name = "my_new_category";
+  // let propGridSurvey = getPropGridSurvey(survey);
+  let categoryPage = pages.filter(p=>p.name === "category1")[0];
+  expect(categoryPage).toBeTruthy();
+  //expect(categoryPage.title).toBe("My Category");
 
-//   const newPage2 = propGridCreator.survey.getPageByName("general");
-//   const nameQuestion: Question = newPage2["getElementsForRows"]()[0];
-//   expect(nameQuestion.value).toBe("general");
-//   expect(nameQuestion.isReadOnly).toBeTruthy();
-// });
-// test("Preset edit model, Property grid change the new category title and then name", () => {
-//   const editor = new CreatorPresetEditorModel();
-//   const survey = editor.model;
-//   survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
-//   survey.setValue("propertyGrid_definition_selector", "survey");
-//   const propGridCreator = getPropGridCreator(survey);
-//   propGridCreator.selectElement(propGridCreator.survey.getQuestionByName("title"));
-//   const desigerTab = propGridCreator.getPlugin("designer").model as TabDesignerViewModel;
-//   new PageAdorner(propGridCreator, desigerTab.newPage).isGhost = true;
-//   desigerTab.newPage.title = "New Category 1";
-
-//   const newPage = propGridCreator.survey.getPageByName("category1");
-//   newPage.title = "My Category";
-
-//   let propGridSurvey = getPropGridSurvey(survey);
-//   let categoryPage = propGridSurvey.getPageByName("category1");
-//   expect(categoryPage).toBeTruthy();
-//   expect(categoryPage.title).toBe("My Category");
-
-//   const nameQuestion: Question = newPage["getElementsForRows"]()[0];
-//   nameQuestion.value = "my_new_category";
-//   propGridSurvey = getPropGridSurvey(survey);
-//   expect(propGridSurvey.getPanelByName("category1")).toBeFalsy();
-//   categoryPage = propGridSurvey.getPageByName("my_new_category");
-//   expect(categoryPage).toBeTruthy();
-//   expect(categoryPage.title).toBe("My Category");
-// });
+  newRow.getQuestionByName("category").value = "my_new_category";
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  creator.selectElement(null);
+  creator.selectElement(creator.survey);
+  pages = creator.propertyGrid.visiblePages;
+  expect(pages.filter(p=>p.name === "category1")[0]).toBeFalsy();
+  categoryPage = pages.filter(p=>p.name === "my_new_category")[0];
+  expect(categoryPage).toBeTruthy();
+  // expect(categoryPage.title).toBe("My Category");
+});
 function addLocale(name: string): void {
   if (!surveyLocalization.locales[name]) {
     surveyLocalization.locales[name] = {};

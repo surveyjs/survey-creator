@@ -4,6 +4,7 @@ import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, Surve
 import { PresetItemValue, QuestionPresetRankingModel } from "./preset-question-ranking";
 import { ICreatorPresetToolboxItem } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
+import { SurveyHelper } from "../survey-helper";
 
 export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPresetEditableBase {
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
@@ -134,6 +135,11 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       const general = this.findOrCreateGeneralCategory(catValue);
       general[this.nameInnerMatrix].push(rowData);
       categories.value = catValue;
+    }
+  }
+  public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
+    if (options.question.name == this.nameCategories) {
+      options.row.getQuestionByName("category").value = SurveyHelper.getNewName(options.question.value.map(r => ({ name: r.category })), "category");
     }
   }
 }

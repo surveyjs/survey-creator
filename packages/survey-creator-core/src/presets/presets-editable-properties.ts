@@ -36,7 +36,7 @@ import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-edit
 //     model.setValue(this.nameCategories, categories);
 //   }
 // }
-
+const LocCategoriesName = "tabs";
 export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
   constructor(obj: any, className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
     super(obj, null, className, null, null, null, propertyGridDefinition);
@@ -105,7 +105,7 @@ export class SurveyQuestionPresetPropertiesDetail {
     const pgJSON = this.propertyGridValue.survey.toJSON();
     return pgJSON.pages.map(p => {
       return {
-        name: p.name,
+        category: p.name,
         title: p.title,
         iconName: p.iconName,
         properties: p.elements?.filter(e => e.name && e.name.indexOf("overridingProperty") == -1).map(e => ({
@@ -194,7 +194,7 @@ export class SurveyQuestionPresetPropertiesDetail {
 
 export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCaregorizedListConfigurator {
   private currentJson: ISurveyPropertyGridDefinition;
-  //   private localeStrings: any;
+  private localeStrings: any;
   private currentProperties?: SurveyQuestionPresetPropertiesDetail;
   private currentClassName: string;
   //   private propCreatorValue: SurveyCreatorModel;
@@ -304,21 +304,54 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     // this.getPropertyCreatorQuestion(model).embeddedCreator = this.propCreator;
     settings.propertyGrid.enableSearch = oldSearchValue;
   }
-  //   private setJSONForTitlesAndDescriptions(locStrs: any, name: string): void {
-  //     const strs = this.localeStrings[name];
-  //     if (Object.keys(strs).length > 0) {
-  //       locStrs[name] = strs;
-  //     }
-  //   }
-  //   protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
-  //     this.setJSONForTitlesAndDescriptions(locStrs, "pe");
-  //     this.setJSONForTitlesAndDescriptions(locStrs, "pehelp");
-  //   }
-  //   protected updateJsonLocalizationStringsCore(locStrs: any): void {
-  //     this.localeStrings = { pe: locStrs.pe || {}, pehelp: locStrs.pehelp || {} };
-  //   }
+  private setJSONForTitlesAndDescriptions(locStrs: any, name: string): void {
+    const strs = this.localeStrings[name];
+    if (Object.keys(strs).length > 0) {
+      locStrs[name] = strs;
+    }
+  }
+  protected setJsonLocalizationStringsCore(model: SurveyModel, locStrs: any): void {
+    this.setJSONForTitlesAndDescriptions(locStrs, "pe");
+    this.setJSONForTitlesAndDescriptions(locStrs, "pehelp");
+  }
+  protected updateJsonLocalizationStringsCore(locStrs: any): void {
+    this.localeStrings = { pe: locStrs.pe || {}, pehelp: locStrs.pehelp || {} };
+  }
   //   private isPropCreatorChanged: boolean;
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
+    if (name == this.nameCategories) {
+      const matrix = this.getQuestionCategories(model);
+      if (matrix.isVisible) {
+        matrix.value?.forEach(row => {
+          const category = row.category;
+          const title = row.title;
+          if (row.title !== editorLocalization.getString("pe.tabs." + category)) {
+            this.ensureLocalizationPath("pe.tabs");
+            this.localeStrings.pe.tabs[category] = title;
+          }
+          row.properties.forEach(p => {
+            if (p.title !== editorLocalization.getString("pe." + p.name)) {
+              this.changePropTitleAndDescription("pe", p.name, p.title);
+            }
+          });
+        });
+      }
+    }
+    // if ((<any>options.target)?.isQuestion) {
+    //   if (options.name === "title") {
+    //     this.changePropTitleAndDescription("pe", name, options.newValue);
+    //   }
+    //   if (options.name === "description") {
+    //     this.changePropTitleAndDescription("pehelp", name, options.newValue);
+    //   }
+    // }
+    // if ((<any>options.target)?.isPage) {
+    //   if (options.name === "title") {
+    //     this.ensureLocalizationPath("pe.tabs");
+    //     this.localeStrings.pe.tabs[name] = options.newValue;
+    //   }
+    // }
+
     if (name !== this.nameSelector) return;
     this.updateCurrentJson(model);
     if (this.currentProperties) {
@@ -387,31 +420,31 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   }
   private getPropertiesArray(model: SurveyModel): Array<any> {
     const categories = this.getQuestionCategories(model).value;
-    return categories?.map(c => ({ name: c.name, items: c.properties?.map(p => p.name) }));
+    return categories?.map(c => ({ name: c.category, items: c.properties?.map(p => p.name) }));
   }
-  //   private changePropTitleAndDescription(path: string, propName: string, val: string): void {
-  //     this.ensureLocalizationPath(path);
-  //     const strs = this.localeStrings[path];
-  //     const className = this.currentProperties.getPropertyClassName(propName);
-  //     if (!!className) {
-  //       if (!strs[className]) {
-  //         strs[className] = {};
-  //       }
-  //       strs[className][propName] = val;
-  //     }
-  //   }
-  //   private ensureLocalizationPath(path: string): void {
-  //     if (!this.localeStrings) {
-  //       this.localeStrings = {};
-  //     }
-  //     const names = path.split(".");
-  //     let strs = this.localeStrings;
-  //     for (let i = 0; i < names.length; i++) {
-  //       const name = names[i];
-  //       if (!strs[name]) strs[name] = {};
-  //       strs = strs[name];
-  //     }
-  //   }
+  private changePropTitleAndDescription(path: string, propName: string, val: string): void {
+    this.ensureLocalizationPath(path);
+    const strs = this.localeStrings[path];
+    const className = this.currentProperties.getPropertyClassName(propName);
+    if (!!className) {
+      if (!strs[className]) {
+        strs[className] = {};
+      }
+      strs[className][propName] = val;
+    }
+  }
+  private ensureLocalizationPath(path: string): void {
+    if (!this.localeStrings) {
+      this.localeStrings = {};
+    }
+    const names = path.split(".");
+    let strs = this.localeStrings;
+    for (let i = 0; i < names.length; i++) {
+      const name = names[i];
+      if (!strs[name]) strs[name] = {};
+      strs = strs[name];
+    }
+  }
   //   private setupPropertyCreator(): void {
   //     const creator = this.propCreator;
   //     creator.maxNestedPanels = 0;

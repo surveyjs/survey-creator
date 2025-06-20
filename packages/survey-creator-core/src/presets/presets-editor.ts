@@ -157,6 +157,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     model.onMatrixRowRemoving.add((sender, options) => {
       editablePresets.forEach(item => item.onMatrixRowRemoving(model, this.creator, options));
     });
+    model.onMatrixRowAdded.add((sender, options) => {
+      editablePresets.forEach(item => item.onMatrixRowAdded(model, this.creator, options));
+    });
     return model;
   }
   protected createResultModel(): SurveyModel {
