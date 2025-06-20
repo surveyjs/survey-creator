@@ -11,9 +11,11 @@ examples/
 webpack.config.js
 index.js
 copy-vrt-tests.js
+copy-src-tests.js
 creator-themes-import.js
 creator-themes-update-fallback.js
 figma-variables-opacity-converter.js
 visualRegressionTests-V2/tests/
 **/test-results/
 **/playwright-report/
+**/screenshotLegacyTests/*.ts
