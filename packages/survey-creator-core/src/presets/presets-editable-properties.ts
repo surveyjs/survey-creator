@@ -291,7 +291,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   }
 
   public getJsonValueCore(model: SurveyModel, creator: SurveyCreatorModel): any {
-    //if (!this.isModified) return undefined;
+    if (!this.isModified) return undefined;
     this.updateCurrentJson(model);
     return { definition: this.currentJson };
   }
@@ -318,8 +318,10 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     this.localeStrings = { pe: locStrs.pe || {}, pehelp: locStrs.pehelp || {} };
   }
   //   private isPropCreatorChanged: boolean;
+  private firstTimeLoading = false;
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
     if (name == this.nameCategories) {
+      if (!this.firstTimeLoading)this.isModified = true;
       const matrix = this.getQuestionCategories(model);
       if (matrix.isVisible) {
         matrix.value?.forEach(row => {
@@ -329,9 +331,12 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
             this.ensureLocalizationPath("pe.tabs");
             this.localeStrings.pe.tabs[category] = title;
           }
-          row.properties.forEach(p => {
+          row.properties?.forEach(p => {
             if (p.title !== editorLocalization.getString("pe." + p.name)) {
               this.changePropTitleAndDescription("pe", p.name, p.title);
+            }
+            if (p.description !== editorLocalization.getString("pehelp." + p.name)) {
+              this.changePropTitleAndDescription("pehelp", p.name, p.description);
             }
           });
         });
@@ -353,6 +358,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     // }
 
     if (name !== this.nameSelector) return;
+    this.firstTimeLoading = true;
     this.updateCurrentJson(model);
     if (this.currentProperties) {
       this.currentProperties = undefined;
@@ -364,6 +370,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     const categories = this.currentProperties.getInitialJson();
     this.defaultItems = [];
     model.setValue(this.nameCategories, categories);
+    this.firstTimeLoading = false;
     //this.propCreator.JSON = this.updateCreatorJSON(this.currentProperties.propertyGrid.survey.toJSON());
     //this.setupCreatorToolbox(this.propCreator);
   }

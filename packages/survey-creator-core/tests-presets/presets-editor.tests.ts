@@ -339,7 +339,7 @@ test("Preset edit model, property grid, setup", () => {
   expect(propGridCategories).toBeTruthy();
   const categories = propGridCategories.value;
   expect(categories).toHaveLength(10);
-  expect(categories[0].name).toEqual("general");
+  expect(categories[0].category).toEqual("general");
 });
 test("Preset edit model, property grid, apply", () => {
   Serializer.findProperty("survey", "title").visible = true;
@@ -682,20 +682,19 @@ test("Preset edit model, Change localization strings title&description", () => {
   expect(loc.en.pehelp.text).toBeTruthy();
   expect(loc.en.pehelp.text.inputType).toEqual("My Input Type description");
 
-  // const creator = editor.creator;
-  // creator.JSON = { elements: [{ type: "text", name: "q1" }] };
-  // creator.selectElement(creator.survey.getQuestionByName("q1"));
-  // const propGridSurvey = getPropGridSurvey(survey);
-  // const panels = propGridSurvey.getAllPanels();
-  // expect(panels).toHaveLength(1);
-  // expect(panels[0].name).toBe("general");
-  // const elements = panels[0].elements;
-  // expect(elements).toHaveLength(5);
-  // expect(elements[0].name).toBe("name");
-  // expect(elements[1].name).toBe("inputType");
-  // expect((<Question>elements[0]).title).toEqual("My Name");
-  // expect((<Question>elements[1]).title).toEqual("My Input Type");
-  // expect((<Question>elements[1]).description).toEqual("My Input Type description");
+  const creator = editor.creator;
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  const panels = creator.propertyGrid.visiblePages;
+  expect(panels).toHaveLength(1);
+  expect(panels[0].name).toBe("general");
+  const elements = panels[0].elements;
+  expect(elements).toHaveLength(5);
+  expect(elements[0].name).toBe("name");
+  expect(elements[1].name).toBe("inputType");
+  expect((<Question>elements[0]).title).toEqual("My Name");
+  expect((<Question>elements[1]).title).toEqual("My Input Type");
+  expect((<Question>elements[1]).description).toEqual("My Input Type description");
 });
 test("Preset edit model, Change localization strings title&description", () => {
   const editor = new CreatorPresetEditorModel();
