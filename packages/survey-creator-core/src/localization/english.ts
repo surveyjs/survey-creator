@@ -1796,6 +1796,7 @@ export var enStrings = {
     copyDisplayValue: "Copy display value", // Auto-generated string
     effectiveColSpan: "Column span",
     progressBarInheritWidthFrom: "Progress bar area width",
+    themeName: "Theme name",
   },
   theme: {
     advancedMode: "Advanced mode",
