@@ -87,6 +87,24 @@ test.describe("designer a11y", () => {
     await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
   });
 
+  test("Check dropdown and tagbox questions with defaults", async ({ page }) => {
+    await page.evaluate(() => {
+      window["creator"].allowEditSurveyTitle = false;
+    });
+    await setJSON(page, {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            { "type": "dropdown", "name": "question1", "defaultValue": "Item 1", "choices": ["Item 1", "Item 2", "Item 3"] },
+            { "type": "tagbox", "name": "question2", "defaultValue": ["Item 1", "Item 3"], "choices": ["Item 1", "Item 2", "Item 3"] }
+          ]
+        }
+      ],
+    });
+    await checkA11y(page, ".svc-tab-designer_content", { axeOptions });
+  });
+
   test("Check boolean, file and ranking questions", async ({ page }) => {
     await page.evaluate(() => {
       window["creator"].allowEditSurveyTitle = false;
