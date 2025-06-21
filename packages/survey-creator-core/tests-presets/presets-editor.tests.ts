@@ -351,7 +351,7 @@ test("Preset edit model, property grid, apply", () => {
   let propGridCategories = survey.getQuestionByName("propertyGrid_categories");
   propGridCategories.value = [
     {
-      "name": "general",
+      "category": "general",
       "title": "General",
       properties: [
         { title: "Locale", name: "locale" },
@@ -359,7 +359,7 @@ test("Preset edit model, property grid, apply", () => {
       ]
     },
     {
-      "name": "second1",
+      "category": "second1",
       "title": "Second1",
       properties: [
         { title: "Pages", name: "pages" },
@@ -378,7 +378,7 @@ test("Preset edit model, property grid, apply", () => {
   survey.setValue("propertyGrid_selector", "page");
   propGridCategories.value = [
     {
-      "name": "general",
+      "category": "general",
       "title": "General",
       properties: [
         { title: "Name", name: "name" },
@@ -412,7 +412,7 @@ test("Preset edit model, make general tab as second tab", () => {
   let propGridCategories = survey.getQuestionByName("propertyGrid_categories");
   propGridCategories.value = [
     {
-      "name": "logic",
+      "category": "logic",
       "title": "Logic",
       properties: [
         { title: "Visible If", name: "visibleIf" },
@@ -420,7 +420,7 @@ test("Preset edit model, make general tab as second tab", () => {
       ]
     },
     {
-      "name": "general",
+      "category": "general",
       "title": "General",
       properties: [
         { title: "Name", name: "name" },
@@ -468,14 +468,14 @@ test("Preset edit model, property grid & matrixdropdowncolumn@checkbox", () => {
   let propGridCategories = survey.getQuestionByName("propertyGrid_categories");
   propGridCategories.value = [
     {
-      title: "General", "name": "general",
+      title: "General", "category": "general",
       properties: [
         { title: "Name", name: "name" },
         { title: "Title", name: "title" }
       ]
     },
     {
-      title: "Choices", "name": "choices",
+      title: "Choices", "category": "choices",
       properties: [
         { title: "Choices", name: "choices" },
         { title: "Show Select All Item", name: "showSelectAllItem" }
@@ -652,7 +652,7 @@ test("Preset edit model, Change localization strings title&description", () => {
 
   propGridCategories.value = [
     {
-      title: "General", "name": "general",
+      title: "General", "category": "general",
       properties: [
         { title: "Name", name: "name" },
         { title: "Input Type", name: "inputType" },
