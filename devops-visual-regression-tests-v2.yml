@@ -322,7 +322,7 @@ jobs:
           PathtoPublish: "$(Build.SourcesDirectory)/packages/survey-creator-react/test-results"
           ArtifactName: "Creator_React_SCR_Legacy"
           publishLocation: "Container"
-        condition: always()
+        condition: succeededOrFailed()
 
       - task: PublishTestResults@2
         displayName: "Publish SCR test results"
