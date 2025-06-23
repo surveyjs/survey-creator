@@ -35,7 +35,12 @@ export class TabbedMenuComponent extends SurveyElementBase<
       </div>
     );
   }
-
+  componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    const container: HTMLDivElement = this.rootRef.current;
+    if (!container) return;
+    this.model.initResponsivityManager(container);
+  }
   componentDidMount() {
     super.componentDidMount();
     const container: HTMLDivElement = this.rootRef.current;

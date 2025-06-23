@@ -16,6 +16,12 @@ export class TabbledMenuComponent extends BaseAngular<TabbedMenuContainer> imple
   ngAfterViewInit(): void {
     this.model.initResponsivityManager(this.container.nativeElement);
   }
+  override ngAfterViewChecked(): void {
+    super.ngAfterViewChecked();
+    if (this.container?.nativeElement) {
+      this.model.initResponsivityManager(this.container.nativeElement);
+    }
+  }
   override ngOnDestroy(): void {
     super.ngOnDestroy();
     this.model.resetResponsivityManager();

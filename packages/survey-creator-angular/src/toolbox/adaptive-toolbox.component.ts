@@ -10,7 +10,7 @@ import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 })
 export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> implements AfterViewInit {
   @Input() model!: SurveyCreatorModel;
-  @ViewChild("container") container!: ElementRef<HTMLElement>;
+  @ViewChild("container") container!: ElementRef<HTMLDivElement>;
   public get toolbox() {
     return this.model.toolbox;
   }
@@ -21,7 +21,13 @@ export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> imple
     return this.toolbox.searchItem as Action;
   }
   ngAfterViewInit() {
-    this.toolbox.afterRender(this.container.nativeElement as HTMLDivElement);
+    this.toolbox.afterRender(this.container.nativeElement);
+  }
+  override ngAfterViewChecked(): void {
+    super.ngAfterViewChecked();
+    if (this.container?.nativeElement) {
+      this.model.initResponsivityManager(this.container.nativeElement);
+    }
   }
   protected getModel(): QuestionToolbox {
     return this.toolbox;

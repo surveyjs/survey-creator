@@ -1439,7 +1439,7 @@ export class QuestionToolbox
   }
   public afterRender(container: HTMLDivElement) {
     this.setRootElement(container);
-    this.initResponsivityManager(container);
+    this.initResponsivityManager(this.containerElement as HTMLDivElement);
   }
   public beforeDestroy() {
     this.setRootElement(undefined);

@@ -12,10 +12,13 @@
 import { SvComponent } from "survey-vue3-ui";
 import type { TabbedMenuContainer } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, onUpdated, ref } from "vue";
 const props = defineProps<{ model: TabbedMenuContainer }>();
 const container = ref();
 useBase(() => props.model);
+onUpdated(() => {
+  props.model.initResponsivityManager(container.value)
+});
 onMounted(() => {
   props.model.initResponsivityManager(container.value)
 });

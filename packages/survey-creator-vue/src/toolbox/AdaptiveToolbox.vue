@@ -54,7 +54,7 @@
 import { SvComponent } from "survey-vue3-ui";
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, onUpdated, ref } from "vue";
 const props = defineProps<{ model: SurveyCreatorModel }>();
 const toolbox = computed(() => {
   return props.model.toolbox;
@@ -63,6 +63,9 @@ const toolbox = computed(() => {
 const root = ref<HTMLDivElement>();
 
 useBase(() => toolbox.value);
+onUpdated(() => {
+  toolbox.value.afterRender(root.value as HTMLDivElement);
+})
 onMounted(() => {
   toolbox.value.afterRender(root.value as HTMLDivElement);
 });

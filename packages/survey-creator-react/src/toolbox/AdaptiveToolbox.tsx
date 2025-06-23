@@ -16,6 +16,14 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
     this.rootRef = React.createRef();
   }
 
+  componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    const container = this.rootRef.current;
+    if (container) {
+      this.toolbox.afterRender(container);
+    }
+  }
+
   componentDidMount() {
     super.componentDidMount();
     const container = this.rootRef.current;
