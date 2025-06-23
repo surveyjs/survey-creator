@@ -83,6 +83,7 @@ import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "./utils/global_variables_utils";
+import { deprecate } from "util";
 
 addIconsToThemeSet("v1", iconsV1);
 addIconsToThemeSet("v2", iconsV2);
@@ -1758,6 +1759,9 @@ export class SurveyCreatorModel extends Base
   }
   //#region Obsolete properties and functins
   public onShowPropertyGridVisiblityChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  /**
+  * @deprecated showPropertyGrid is deprecated, use showSidebar instead.
+  */
   public get showPropertyGrid(): boolean {
     SurveyHelper.warnNonSupported("showPropertyGrid", "showSidebar");
     return this.showSidebar;
