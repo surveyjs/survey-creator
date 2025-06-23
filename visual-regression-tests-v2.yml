@@ -234,6 +234,11 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator
+          npm run postinstall
+        displayName: "install chrome playwright"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator
           npm run lint
         displayName: "check lint"
 
@@ -283,6 +288,39 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
           npm run build
         displayName: "Build CreatorV2 React"
+
+      - script: |
+          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
+          npm run test:scr:legacy:ci
+        displayName: "Screenshot Tests V2 Creator React"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/test-results/"
+          Contents: "**"
+          TargetFolder: "$(Build.ArtifactStagingDirectory)/Creator_React_SCR"
+          OverWrite: true
+        condition: always()
+        displayName: "copy scr artifacts"
+        
+      - task: PublishBuildArtifacts@1
+        displayName: "Publish SCR artifacts"
+        inputs:
+          PathtoPublish: "$(Build.ArtifactStagingDirectory)/Creator_React_SCR/"
+          ArtifactName: "Creator_React_SCR_Legacy"
+          publishLocation: "Container"
+        condition: succeededOrFailed()
+
+      - task: PublishTestResults@2
+        displayName: "Publish SCR test results"
+        inputs:
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/test-results"
+          testResultsFormat: "JUnit"
+          testResultsFiles: "e2e-junit-results.xml"
+          mergeTestResults: true
+          failTaskOnFailedTests: true
+          testRunTitle: "Creator React SCR Tests"
+        condition: succeededOrFailed()
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react

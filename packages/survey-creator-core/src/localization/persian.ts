@@ -1435,7 +1435,12 @@ var persianStrings = {
       descriptionLocation: "گزینه \"Inherit\" سطح صفحه (در صورت تنظیم) یا تنظیم سطح نظرسنجی (\"زیر عنوان پانل\" به طور پیش فرض) اعمال می شود.",
       newPanelPosition: "موقعیت یک پانل تازه اضافه شده را تعریف می کند. به طور پیش فرض، پانل های جدید به پایان اضافه می شوند. \"Next\" را انتخاب کنید تا یک پانل جدید پس از پانل فعلی وارد شود.",
       copyDefaultValueFromLastEntry: "پاسخ ها را از اخرین پانل تکرار می کند و انها را به پانل پویا اضافه شده بعدی اختصاص می دهد.",
-      keyName: "مرجع یک نام سوال نیاز به یک کاربر برای ارائه یک پاسخ منحصر به فرد برای این سوال در هر پانل."
+      keyName: "مرجع یک نام سوال نیاز به یک کاربر برای ارائه یک پاسخ منحصر به فرد برای این سوال در هر پانل.",
+      confirmDelete: "قبل از حذف پانل، یک اعلان تأیید را فعال می کند."
+    },
+    matrixdynamic: {
+      confirmDelete: "قبل از حذف ردیف، یک اعلان تأیید را فعال می کند.",
+      detailPanelShowOnAdding: "هنگامی که یک ردیف جدید به ماتریس اضافه می شود، به طور خودکار بخش جزئیات را گسترش می دهد."
     },
     copyDefaultValueFromLastEntry: "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند.",
     defaultValueExpression: "این تنظیم به شما اجازه می دهد تا یک مقدار پاسخ پیش فرض را بر اساس یک عبارت اختصاص دهید. این عبارت می تواند شامل محاسبات اساسی - \"{q1_id} + {q2_id}'، عبارات بولی مانند \"{age} > 60\" و توابع: \"iif()\"، \"today()\"، \"age()\"، \"min()\"، \"max()\"، \"avg()\" و غیره باشد. مقدار تعیین شده توسط این عبارت به عنوان مقدار پیش فرض اولیه عمل می کند که می تواند توسط ورودی دستی پاسخ دهنده لغو شود.",
@@ -1559,7 +1564,6 @@ var persianStrings = {
     detailErrorLocation: "مکان پیام های خطا را برای سؤالات تودرتو در بخش های جزئیات تنظیم می کند. گزینه \"وراثت\" تنظیمات را از ویژگی \"تراز پیام خطا\" اعمال می کند.",
     keyDuplicationError: "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند.",
     totalExpression: "به شما اجازه می دهد تا مقادیر کل را بر اساس یک عبارت محاسبه کنید. این عبارت می تواند شامل محاسبات اساسی ('{q1_id} + {q2_id}')، عبارات بولی ('{age} > 60') و توابع ('iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()'، و غیره باشد.",
-    confirmDelete: "یک درخواست فوری برای تایید حذف ردیف ایجاد می کند.",
     keyName: "اگر ستون مشخص شده حاوی مقادیر یکسان باشد، نظرسنجی خطای \"مقدار کلیدی غیر منحصر به فرد\" را پرتاب می کند.",
     description: "یک زیرنویس تایپ کنید.",
     locale: "یک زبان را برای شروع ایجاد نظرسنجی خود انتخاب کنید. برای اضافه کردن ترجمه، به یک زبان جدید بروید و متن اصلی را در اینجا یا در زبانه ترجمه ترجمه ترجمه کنید.",
@@ -1727,7 +1731,7 @@ var persianStrings = {
     detailElements: "عناصر جزئیات",
     allowAdaptiveActions: "اجازه دادن به کنشهای انطباقی",
     defaultRowValue: "مقدار پیش فرض سطر",
-    detailPanelShowOnAdding: "پانل جزئیات در اضافه کردن نشان می دهد",
+    detailPanelShowOnAdding: "گسترش خودکار جزئیات ردیف جدید",
     choicesLazyLoadEnabled: "انتخاب بار تنبل فعال است",
     choicesLazyLoadPageSize: "انتخاب تنبل بار اندازه صفحه",
     inputFieldComponent: "مؤلفه فیلد ورودی",
@@ -1963,9 +1967,9 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pe.detailPanelMode: "Detail panel location" => "جزئیات محل پانل"
 // pe.minRowCount: "Minimum row count" => "حداقل تعداد سطرها"
 // pe.maxRowCount: "Maximum row count" => "حداکثر تعداد سطرها"
-// pe.confirmDelete: "Confirm row deletion" => "تایید حذف سطر"
+// pe.confirmDelete: "Confirm row removal" => "تایید حذف سطر"
 // pe.confirmDeleteText: "Confirmation message" => "پیام تایید"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "تایید حذف پانل"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "تایید حذف پانل"
 // pe.panelCount: "Initial panel count" => "شمارش اولیه پانل"
 // pe.minPanelCount: "Minimum panel count" => "حداقل تعداد پانل"
 // pe.maxPanelCount: "Maximum panel count" => "حداکثر تعداد پانل"
@@ -2663,7 +2667,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "محل یک پیام خطا را در رابطه با یک سلول با ورودی نامعتبر تنظیم می کند. گزینه \"Inherit\" تنظیمات را از ویژگی \"Error message alignment\" اعمال می کند."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "هنگامی که ویژگی \"جلوگیری از پاسخ های تکراری\" فعال می شود، پاسخ دهنده ای که سعی در ارسال یک ورودی تکراری دارد، پیام خطای زیر را دریافت می کند."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "به شما اجازه می دهد تا مقادیر کل را بر اساس یک عبارت محاسبه کنید. این عبارت می تواند شامل محاسبات اساسی ('{q1_id} + {q2_id}')، عبارات بولی ('{age} > 60') و توابع ('iif()'، 'today()'، 'age()'، 'min()'، 'max()'، 'avg()'، و غیره باشد."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "یک درخواست فوری برای تایید حذف ردیف ایجاد می کند."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "یک درخواست فوری برای تایید حذف ردیف ایجاد می کند."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند."
 // pehelp.description: "Type a subtitle." => "یک زیرنویس تایپ کنید."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "یک زبان را برای شروع ایجاد نظرسنجی خود انتخاب کنید. برای اضافه کردن ترجمه، به یک زبان جدید بروید و متن اصلی را در اینجا یا در زبانه ترجمه ترجمه ترجمه کنید."
@@ -3106,3 +3110,7 @@ setupLocale({ localeCode: "fa", strings: persianStrings });
 // slider.labelFormat: "Label format" => "فرمت برچسب"
 // slider.tooltipFormat: "Tooltip format" => "فرمت راهنمای ابزار"
 // question.showTitle: "Show the title and description" => "نمایش عنوان و توضیحات"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "قبل از حذف پانل، یک اعلان تأیید را فعال می کند."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "قبل از حذف ردیف، یک اعلان تأیید را فعال می کند."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "هنگامی که یک ردیف جدید به ماتریس اضافه می شود، به طور خودکار بخش جزئیات را گسترش می دهد."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "گسترش خودکار جزئیات ردیف جدید"

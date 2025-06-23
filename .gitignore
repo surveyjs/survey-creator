@@ -48,6 +48,8 @@ visualRegressionTests-V2/screenshots
 visualRegressionTests-V2/artifacts
 visualRegressionTests-V2/**/*.ts
 !visualRegressionTests-V2/helper.ts
+screenshotLegacyTests/*.ts
+!screenshotLegacyTests/helper.ts
 
 .angular
 

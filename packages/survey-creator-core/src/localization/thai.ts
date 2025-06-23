@@ -1435,7 +1435,12 @@ export const thStrings = {
       descriptionLocation: "ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับหน้า (ถ้ามี) หรือการตั้งค่าระดับแบบสำรวจ (ค่าเริ่มต้นคือ \"ใต้ชื่อแผง\")",
       newPanelPosition: "กำหนดตำแหน่งของแผงที่เพิ่มใหม่ โดยค่าเริ่มต้นแผงใหม่จะถูกเพิ่มไปที่ท้าย เลือก \"ถัดไป\" เพื่อแทรกแผงใหม่หลังจากแผงปัจจุบัน",
       copyDefaultValueFromLastEntry: "คัดลอกคำตอบจากแผงสุดท้ายและตั้งเป็นค่าเริ่มต้นสำหรับแผงไดนามิกถัดไป",
-      keyName: "อ้างอิงชื่อคำถามเพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันในแต่ละแผง"
+      keyName: "อ้างอิงชื่อคำถามเพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันในแต่ละแผง",
+      confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง"
+    },
+    matrixdynamic: {
+      confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนที่จะลบแถว",
+      detailPanelShowOnAdding: "ขยายส่วนรายละเอียดโดยอัตโนมัติเมื่อมีการเพิ่มแถวใหม่ลงในเมทริส"
     },
     copyDefaultValueFromLastEntry: "คัดลอกคำตอบจากแถวสุดท้ายและตั้งเป็นค่าเริ่มต้นสำหรับแถวไดนามิกถัดไป",
     defaultValueExpression: "การตั้งค่านี้ช่วยให้คุณตั้งค่าคำตอบเริ่มต้นตามนิพจน์ นิพจน์สามารถประกอบด้วยการคำนวณพื้นฐาน {q1_id} + {q2_id}, นิพจน์บูลีน เช่น {age} > 60, และฟังก์ชัน: iif(), today(), age(), min(), max(), avg() เป็นต้น ค่าที่กำหนดโดยนิพจน์นี้จะเป็นค่าเริ่มต้นที่สามารถถูกแทนที่ได้โดยการป้อนของผู้ตอบ",
@@ -1559,7 +1564,6 @@ export const thStrings = {
     detailErrorLocation: "ตั้งค่าตําแหน่งของข้อความแสดงข้อผิดพลาดสําหรับคําถามที่ซ้อนกันในส่วนรายละเอียด ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าจากคุณสมบัติ \"การจัดตําแหน่งข้อความแสดงข้อผิดพลาด\"",
     keyDuplicationError: "เมื่อเปิดใช้คุณสมบัติ \"ป้องกันคำตอบซ้ำกัน\" ผู้ตอบที่พยายามส่งการตอบซ้ำจะได้รับข้อความข้อผิดพลาดต่อไปนี้",
     totalExpression: "ช่วยให้คุณคำนวณค่ารวมตามนิพจน์ นิพจน์สามารถประกอบด้วยการคำนวณพื้นฐาน ({q1_id} + {q2_id}), นิพจน์บูลีน ({age} > 60) และฟังก์ชัน ('iif(), today(), age(), min(), max(), avg(), ฯลฯ)",
-    confirmDelete: "เรียกใช้งานพร้อมท์เพื่อยืนยันการลบแถว",
     keyName: "อ้างอิง ID คอลัมน์เพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันสำหรับแต่ละคำถามในคอลัมน์ที่ระบุ",
     description: "พิมพ์คำบรรยาย",
     locale: "เลือกภาษาสำหรับการสร้างแบบสำรวจของคุณ ในการเพิ่มการแปล สลับไปยังภาษาใหม่และแปลข้อความดั้งเดิมที่นี่หรือในแท็บการแปล",
@@ -1727,7 +1731,7 @@ export const thStrings = {
     detailElements: "องค์ประกอบรายละเอียด",
     allowAdaptiveActions: "อนุญาตการดำเนินการที่ปรับตัวได้",
     defaultRowValue: "ค่าเริ่มต้นของแถว",
-    detailPanelShowOnAdding: "แสดงแผงรายละเอียดเมื่อเพิ่ม",
+    detailPanelShowOnAdding: "ขยายรายละเอียดแถวใหม่โดยอัตโนมัติ",
     choicesLazyLoadEnabled: "เปิดใช้งานการโหลดตัวเลือกอย่างขี้เกียจ",
     choicesLazyLoadPageSize: "ขนาดหน้าการโหลดตัวเลือกขี้เกียจ",
     inputFieldComponent: "ส่วนประกอบช่องป้อนข้อมูล",
@@ -2091,3 +2095,7 @@ setupLocale({ localeCode: "th", strings: thStrings });
 // slider.labelFormat: "Label format" => "รูปแบบฉลาก"
 // slider.tooltipFormat: "Tooltip format" => "รูปแบบคําแนะนําเครื่องมือ"
 // question.showTitle: "Show the title and description" => "แสดงชื่อและคําอธิบาย"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง"
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนที่จะลบแถว"
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "ขยายส่วนรายละเอียดโดยอัตโนมัติเมื่อมีการเพิ่มแถวใหม่ลงในเมทริส"
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "ขยายรายละเอียดแถวใหม่โดยอัตโนมัติ"

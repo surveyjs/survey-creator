@@ -1435,7 +1435,12 @@ export var bgStrings = {
       descriptionLocation: "Опцията \"Наследяване\" прилага настройката за ниво на страница (ако е зададена) или ниво проучване (\"Под заглавието на панела\" по подразбиране).",
       newPanelPosition: "Определя позицията на новодобавен панел. По подразбиране в края се добавят нови панели. Изберете \"Напред\", за да вмъкнете нов панел след текущия.",
       copyDefaultValueFromLastEntry: "Дублира отговорите от последния панел и ги присвоява на следващия добавен динамичен панел.",
-      keyName: "Препратка към име на въпрос, за да се изисква от потребителя да предостави уникален отговор на този въпрос във всеки панел."
+      keyName: "Препратка към име на въпрос, за да се изисква от потребителя да предостави уникален отговор на този въпрос във всеки панел.",
+      confirmDelete: "Задейства подкана за потвърждение преди премахване на панел."
+    },
+    matrixdynamic: {
+      confirmDelete: "Задейства подкана за потвърждение, преди да премахнете ред.",
+      detailPanelShowOnAdding: "Автоматично разширява раздела с подробности, когато се добави нов ред към матрицата."
     },
     copyDefaultValueFromLastEntry: "Дублира отговорите от последния ред и ги присвоява на следващия добавен динамичен ред.",
     defaultValueExpression: "Тази настройка ви позволява да присвоите стойност за отговор по подразбиране на базата на израз. Изразът може да включва основни изчисления - '{q1_id} + {q2_id}', булеви изрази, като '{age} > 60', и функции: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и др. Стойността, определена от този израз, служи като начална стойност по подразбиране, която може да бъде заместена от ръчното въвеждане на респондента.",
@@ -1559,7 +1564,6 @@ export var bgStrings = {
     detailErrorLocation: "Задава местоположението на съобщенията за грешки за въпроси, вложени в подробни раздели. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщенията за грешки\".",
     keyDuplicationError: "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено, респондентът, който се опитва да подаде дублиран запис, ще получи следното съобщение за грешка.",
     totalExpression: "Позволява ви да изчислявате общи стойности на базата на израз. Изразът може да включва основни изчисления ('{q1_id} + {q2_id}'), булеви изрази ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.н.).",
-    confirmDelete: "Задейства подкана с молба за потвърждаване на изтриването на реда.",
     keyName: "Ако указаната колона съдържа идентични стойности, анкетата отговаря с \"Неуникална стойност на ключ\" грешка.",
     description: "Въведете субтитри.",
     locale: "Изберете език, за да започнете да създавате проучването си. За да добавите превод, превключете на нов език и преведете оригиналния текст тук или в раздела Преводи.",
@@ -1727,7 +1731,7 @@ export var bgStrings = {
     detailElements: "Детайлни елементи",
     allowAdaptiveActions: "Позволи адаптивни действия",
     defaultRowValue: "Стойност на реда по подразбиране",
-    detailPanelShowOnAdding: "Панелът с подробности се показва при добавяне.",
+    detailPanelShowOnAdding: "Автоматично разгъване на подробности за нов ред",
     choicesLazyLoadEnabled: "Отложеното зареждане на избора е активирано.",
     choicesLazyLoadPageSize: "Избор на размер на страницата за отложено зареждане",
     inputFieldComponent: "Компонент на полето за въвеждане",
@@ -2270,7 +2274,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Задава местоположението на съобщение за грешка по отношение на клетка с невалиден вход. Опцията \"Наследяване\" прилага настройката от свойството \"Подравняване на съобщение за грешка\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Когато свойството \"Предотвратяване на дублиращи се отговори\" е разрешено, респондентът, който се опитва да подаде дублиран запис, ще получи следното съобщение за грешка."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Позволява ви да изчислявате общи стойности на базата на израз. Изразът може да включва основни изчисления ('{q1_id} + {q2_id}'), булеви изрази ('{age} > 60') и функции ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' и т.н.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Задейства подкана с молба за потвърждаване на изтриването на реда."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Задейства подкана с молба за потвърждаване на изтриването на реда."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Дублира отговорите от последния ред и ги присвоява на следващия добавен динамичен ред."
 // pehelp.description: "Type a subtitle." => "Въведете субтитри."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Изберете език, за да започнете да създавате проучването си. За да добавите превод, превключете на нов език и преведете оригиналния текст тук или в раздела Преводи."
@@ -2714,3 +2718,7 @@ setupLocale({ localeCode: "bg", strings: bgStrings });
 // slider.labelFormat: "Label format" => "Формат на етикета"
 // slider.tooltipFormat: "Tooltip format" => "Формат на подсказката"
 // question.showTitle: "Show the title and description" => "Показване на заглавието и описанието"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Задейства подкана за потвърждение преди премахване на панел."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Задейства подкана за потвърждение, преди да премахнете ред."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Автоматично разширява раздела с подробности, когато се добави нов ред към матрицата."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Автоматично разгъване на подробности за нов ред"

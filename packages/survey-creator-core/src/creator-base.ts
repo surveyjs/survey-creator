@@ -8,7 +8,8 @@ import {
   CssClassBuilder,
   SvgRegistry,
   addIconsToThemeSet,
-  SvgThemeSets
+  SvgThemeSets,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale } from "./editorLocalization";
@@ -82,6 +83,7 @@ import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "./utils/global_variables_utils";
+import { deprecate } from "util";
 
 addIconsToThemeSet("v1", iconsV1);
 addIconsToThemeSet("v2", iconsV2);
@@ -1757,6 +1759,9 @@ export class SurveyCreatorModel extends Base
   }
   //#region Obsolete properties and functins
   public onShowPropertyGridVisiblityChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  /**
+  * @deprecated showPropertyGrid is deprecated, use showSidebar instead.
+  */
   public get showPropertyGrid(): boolean {
     SurveyHelper.warnNonSupported("showPropertyGrid", "showSidebar");
     return this.showSidebar;
@@ -4263,6 +4268,14 @@ export class SurveyCreatorModel extends Base
 
     return availableToolboxItems;
   }
+  _getActualElementToAddNewElements(element: SurveyElement<any>) {
+    if (!element || !element.isPanel) return element;
+    const parentQuestion = (element as PanelModel).parentQuestion;
+    if (parentQuestion && Serializer.isDescendantOf(parentQuestion.getType(), "paneldynamic") && (parentQuestion as QuestionPanelDynamicModel).template === element) {
+      return parentQuestion;
+    }
+    return element;
+  }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;
     const onSelectQuestionType = (questionType: string, json?: any) => {
@@ -4271,7 +4284,8 @@ export class SurveyCreatorModel extends Base
       newAction.popupModel.hide();
     };
     const getActions = () => {
-      const availableTypes = this.getAvailableToolboxItems(element).map((item) => {
+      const ownerElement = this._getActualElementToAddNewElements(element);
+      const availableTypes = this.getAvailableToolboxItems(ownerElement).map((item) => {
         return this.createIActionBarItemByClass(item, item.needSeparator, onSelectQuestionType);
       });
       return availableTypes;
@@ -4288,7 +4302,7 @@ export class SurveyCreatorModel extends Base
       verticalPosition: "bottom",
       horizontalPosition: "center",
       displayMode: this.isTouch ? "overlay" : "popup"
-    });
+    }, this);
     newAction.popupModel.getTargetCallback = undefined;
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
       if (opt.isVisible) {

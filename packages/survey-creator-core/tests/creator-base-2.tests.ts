@@ -665,6 +665,28 @@ test("getAvailableToolboxItems isAllowedToAdd forbiddenNestedElements", (): any 
   expect(creator.getAvailableToolboxItems(question2)).toHaveLength(itemCount - 2);
 });
 
+test("getAvailableToolboxItems isAllowedToAdd forbiddenNestedElements #6973", (): any => {
+  const creator = new CreatorTester();
+  creator.forbiddenNestedElements = {
+    panel: ["panel"],
+    paneldynamic: ["panel", "paneldynamic"],
+  };
+  creator.JSON = {
+    elements: [
+      { type: "panel", name: "panel1", elements: [{ type: "text", name: "question1" }] },
+      { type: "paneldynamic", name: "panel2", templateElements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  const itemCount = creator.getAvailableToolboxItems().length;
+  expect(itemCount).toBe(22);
+  const panel2 = creator.survey.getQuestionByName("panel2");
+  expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount - 2);
+  const innerPanel = panel2.template;
+  const ownerElement = creator._getActualElementToAddNewElements(innerPanel);
+  expect(ownerElement).toBe(panel2);
+  expect(creator.getAvailableToolboxItems(ownerElement, false)).toHaveLength(itemCount - 2);
+});
+
 test("Preserve defaultAddQuestionType", (): any => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();

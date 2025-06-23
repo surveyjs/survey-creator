@@ -1435,7 +1435,12 @@ export var hebrewStrings = {
       descriptionLocation: "האפשרות \"הירושה\" מחילה את ההגדרה ברמת העמוד (אם הוגדרה) או ברמת הסקר (\"תחת כותרת החלונית\" כברירת מחדל).",
       newPanelPosition: "מגדיר את המיקום של חלונית חדשה שנוספה. כברירת מחדל, חלוניות חדשות מתווספות לסוף. בחר \"הבא\" כדי להוסיף חלונית חדשה אחרי הנוכחית.",
       copyDefaultValueFromLastEntry: "משכפל תשובות מהחלונית האחרונה ומקצה אותן לחלונית הדינמית הבאה שנוספה.",
-      keyName: "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית."
+      keyName: "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית.",
+      confirmDelete: "מפעיל בקשת אישור לפני הסרת חלונית."
+    },
+    matrixdynamic: {
+      confirmDelete: "מפעיל בקשת אישור לפני הסרת שורה.",
+      detailPanelShowOnAdding: "מרחיב אוטומטית את מקטע הפירוט בעת הוספת שורה חדשה למטריצה."
     },
     copyDefaultValueFromLastEntry: "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה.",
     defaultValueExpression: "הגדרה זו מאפשרת לך להקצות ערך ברירת מחדל לתשובה בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים - '{q1_id} + {q2_id}', ביטויים בוליאניים, כגון '{age} > 60', ופונקציות: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו'. הערך שנקבע על-ידי ביטוי זה משמש כערך ברירת המחדל הראשוני שניתן לעקוף באמצעות קלט ידני של משיב.",
@@ -1559,7 +1564,6 @@ export var hebrewStrings = {
     detailErrorLocation: "הגדרת המיקום של הודעות שגיאה עבור שאלות המקוננות במקטעים מפורטים. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\".",
     keyDuplicationError: "כאשר המאפיין \"מנע תגובות כפולות\" מופעל, משיב שינסה לשלוח ערך כפול יקבל את הודעת השגיאה הבאה.",
     totalExpression: "מאפשר לחשב ערכים כוללים בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים ('{q1_id} + {q2_id}'), ביטויים בוליאניים ('{age} > 60') ופונקציות ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו').",
-    confirmDelete: "מפעיל בקשה המבקשת לאשר את מחיקת השורות.",
     keyName: "אם העמודה שצוינה מכילה ערכים זהים, הסקר יזרוק את השגיאה \"ערך מפתח לא ייחודי\".",
     description: "הקלד כותרת משנה.",
     locale: "בחר שפה כדי להתחיל ליצור את הסקר. כדי להוסיף תרגום, עבור לשפה חדשה ותרגם את הטקסט המקורי כאן או בכרטיסיה תרגומים.",
@@ -1727,7 +1731,7 @@ export var hebrewStrings = {
     detailElements: "רכיבי פרטים",
     allowAdaptiveActions: "אפשר פעולות מותאמות",
     defaultRowValue: "ערך ברירת מחדל לשורה",
-    detailPanelShowOnAdding: "הצג פאנל פרטים בעת הוספה",
+    detailPanelShowOnAdding: "הרחבה אוטומטית של פרטי שורה חדשה",
     choicesLazyLoadEnabled: "אפשר טעינת רשימות עם פריטים עצלים",
     choicesLazyLoadPageSize: "גודל עמוד בטעינת רשימות",
     inputFieldComponent: "רכיב שדה קלט",
@@ -2275,7 +2279,7 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "הגדרת המיקום של הודעת שגיאה ביחס לתא עם קלט לא חוקי. האפשרות \"ירושה\" מחילה את ההגדרה מהמאפיין \"יישור הודעת שגיאה\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "כאשר המאפיין \"מנע תגובות כפולות\" מופעל, משיב שינסה לשלוח ערך כפול יקבל את הודעת השגיאה הבאה."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "מאפשר לחשב ערכים כוללים בהתבסס על ביטוי. הביטוי יכול לכלול חישובים בסיסיים ('{q1_id} + {q2_id}'), ביטויים בוליאניים ('{age} > 60') ופונקציות ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' וכו')."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "מפעיל בקשה המבקשת לאשר את מחיקת השורות."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "מפעיל בקשה המבקשת לאשר את מחיקת השורות."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה."
 // pehelp.description: "Type a subtitle." => "הקלד כותרת משנה."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "בחר שפה כדי להתחיל ליצור את הסקר. כדי להוסיף תרגום, עבור לשפה חדשה ותרגם את הטקסט המקורי כאן או בכרטיסיה תרגומים."
@@ -2718,3 +2722,7 @@ setupLocale({ localeCode: "he", strings: hebrewStrings });
 // slider.labelFormat: "Label format" => "תבנית תווית"
 // slider.tooltipFormat: "Tooltip format" => "תבנית תיאור כלי"
 // question.showTitle: "Show the title and description" => "הצגת הכותרת והתיאור"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "מפעיל בקשת אישור לפני הסרת חלונית."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "מפעיל בקשת אישור לפני הסרת שורה."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "מרחיב אוטומטית את מקטע הפירוט בעת הוספת שורה חדשה למטריצה."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "הרחבה אוטומטית של פרטי שורה חדשה"

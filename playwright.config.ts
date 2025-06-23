@@ -18,6 +18,10 @@ export default defineConfig({
       testDir: resolve(__dirname, "./screenshotTests")
     },
     {
+      name: "scr_legacy",
+      testDir: resolve(__dirname, "./screenshotLegacyTests")
+    },
+    {
       name: "e2e",
       testDir: resolve(__dirname, "./e2e")
     }

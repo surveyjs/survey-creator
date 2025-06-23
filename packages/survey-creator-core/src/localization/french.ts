@@ -1435,7 +1435,12 @@ var frenchTranslation = {
       descriptionLocation: "L’option « Hériter » applique le paramètre au niveau de la page (s’il est défini) ou au niveau de l’enquête (« Sous le titre du panneau » par défaut).",
       newPanelPosition: "Définit la position d’un panneau nouvellement ajouté. Par défaut, de nouveaux panneaux sont ajoutés à la fin. Sélectionnez « Suivant » pour insérer un nouveau panneau après le panneau actuel.",
       copyDefaultValueFromLastEntry: "Duplique les réponses du dernier panneau et les attribue au panneau dynamique suivant.",
-      keyName: "Faites référence à un nom de question pour demander à un utilisateur de fournir une réponse unique à cette question dans chaque panneau."
+      keyName: "Faites référence à un nom de question pour demander à un utilisateur de fournir une réponse unique à cette question dans chaque panneau.",
+      confirmDelete: "Déclenche une invite de confirmation avant de supprimer un panneau."
+    },
+    matrixdynamic: {
+      confirmDelete: "Déclenche une invite de confirmation avant de supprimer une ligne.",
+      detailPanelShowOnAdding: "Développe automatiquement la section de détail lorsqu’une nouvelle ligne est ajoutée à la matrice."
     },
     copyDefaultValueFromLastEntry: "Duplique les réponses de la dernière ligne et les attribue à la ligne dynamique suivante ajoutée.",
     defaultValueExpression: "Ce paramètre vous permet d’attribuer une valeur de réponse par défaut en fonction d’une expression. L’expression peut inclure des calculs de base - '{q1_id} + {q2_id}', des expressions booléennes, telles que '{age} > 60', et des fonctions : 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc. La valeur déterminée par cette expression sert de valeur par défaut initiale qui peut être remplacée par la saisie manuelle d’une personne interrogée.",
@@ -1559,7 +1564,6 @@ var frenchTranslation = {
     detailErrorLocation: "Définit l’emplacement des messages d’erreur pour les questions imbriquées dans les sections de détails. L’option « Hériter » applique le paramètre de la propriété « Alignement du message d’erreur ».",
     keyDuplicationError: "Lorsque la propriété « Empêcher les réponses en double » est activée, un répondant qui tente de soumettre une entrée en double recevra le message d’erreur suivant.",
     totalExpression: "Permet de calculer des valeurs totales en fonction d’une expression. L’expression peut inclure des calculs de base ('{q1_id} + {q2_id}'), des expressions booléennes ('{age} > 60') et des fonctions ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.).",
-    confirmDelete: "Déclenche une invite vous demandant de confirmer la suppression de ligne.",
     keyName: "Si la colonne spécifiée contient des valeurs identiques, le sondage renvoie l’erreur « Valeur de clé non unique ».",
     description: "Saisissez un sous-titre.",
     locale: "Choisissez une langue pour commencer à créer votre sondage. Pour ajouter une traduction, passez à une nouvelle langue et traduisez le texte original ici ou dans l’onglet Traductions.",
@@ -1727,7 +1731,7 @@ var frenchTranslation = {
     detailElements: "Détails de l'élément",
     allowAdaptiveActions: "Autoriser les actions adaptatives",
     defaultRowValue: "Valeur de ligne par défaut",
-    detailPanelShowOnAdding: "Affichage des détails de la section lors de l’ajout",
+    detailPanelShowOnAdding: "Développer automatiquement les détails d’une nouvelle ligne",
     choicesLazyLoadEnabled: "Choix de chargement paresseux activé",
     choicesLazyLoadPageSize: "Choix de taille de page de chargement paresseux",
     inputFieldComponent: "Composant du champ de saisie",
@@ -2040,9 +2044,9 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pe.detailPanelMode: "Detail panel location" => "Emplacement du panneau de détails"
 // pe.minRowCount: "Minimum row count" => "Nombre minimal de lignes"
 // pe.maxRowCount: "Maximum row count" => "Nombre maximal de lignes"
-// pe.confirmDelete: "Confirm row deletion" => "Confirmer la suppression de lignes"
+// pe.confirmDelete: "Confirm row removal" => "Confirmer la suppression de lignes"
 // pe.confirmDeleteText: "Confirmation message" => "Message de confirmation"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Confirmer la suppression du panneau"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Confirmer la suppression du panneau"
 // pe.panelCount: "Initial panel count" => "Nombre initial de panels"
 // pe.minPanelCount: "Minimum panel count" => "Nombre minimal de panneaux"
 // pe.maxPanelCount: "Maximum panel count" => "Nombre maximal de panneaux"
@@ -2765,7 +2769,7 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Définit l’emplacement d’un message d’erreur par rapport à une cellule dont l’entrée n’est pas valide. L’option « Hériter » applique le paramètre de la propriété « Alignement du message d’erreur »."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Lorsque la propriété « Empêcher les réponses en double » est activée, un répondant qui tente de soumettre une entrée en double recevra le message d’erreur suivant."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Permet de calculer des valeurs totales en fonction d’une expression. L’expression peut inclure des calculs de base ('{q1_id} + {q2_id}'), des expressions booléennes ('{age} > 60') et des fonctions ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()', etc.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Déclenche une invite vous demandant de confirmer la suppression de ligne."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Déclenche une invite vous demandant de confirmer la suppression de ligne."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplique les réponses de la dernière ligne et les attribue à la ligne dynamique suivante ajoutée."
 // pehelp.description: "Type a subtitle." => "Saisissez un sous-titre."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Choisissez une langue pour commencer à créer votre sondage. Pour ajouter une traduction, passez à une nouvelle langue et traduisez le texte original ici ou dans l’onglet Traductions."
@@ -3210,3 +3214,7 @@ setupLocale({ localeCode: "fr", strings: frenchTranslation });
 // slider.labelFormat: "Label format" => "Format de l’étiquette"
 // slider.tooltipFormat: "Tooltip format" => "Format de l’infobulle"
 // question.showTitle: "Show the title and description" => "Afficher le titre et la description"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Déclenche une invite de confirmation avant de supprimer un panneau."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Déclenche une invite de confirmation avant de supprimer une ligne."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Développe automatiquement la section de détail lorsqu’une nouvelle ligne est ajoutée à la matrice."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Développer automatiquement les détails d’une nouvelle ligne"

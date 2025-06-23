@@ -145,6 +145,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           aria-placeholder={this.placeholder}
           aria-label={this.placeholder || "content editable"}
           suppressContentEditableWarning={true}
+          tabIndex={this.baseModel.tabIndex}
           // style={this.style}
           dangerouslySetInnerHTML={this.htmlValue}
           onBlur={this.onBlur}
@@ -161,6 +162,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           ref={this.svStringEditorRef}
           className="sv-string-editor"
           contentEditable={this.contentEditable}
+          tabIndex={this.baseModel.tabIndex}
           spellCheck={false}
           aria-placeholder={this.placeholder}
           aria-label={this.placeholder || "content editable"}

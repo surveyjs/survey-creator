@@ -1435,7 +1435,12 @@ export var turkishStrings = {
       descriptionLocation: "\"Devral\" seçeneği, sayfa düzeyi (ayarlanmışsa) veya anket düzeyi ayarını (varsayılan olarak \"Panel başlığı altında\") uygular.",
       newPanelPosition: "Yeni eklenen panelin konumunu tanımlar. Varsayılan olarak, sonuna yeni paneller eklenir. Geçerli panelden sonra yeni bir panel eklemek için \"İleri\" yi seçin.",
       copyDefaultValueFromLastEntry: "Son paneldeki yanıtları çoğaltır ve bir sonraki eklenen dinamik panele atar.",
-      keyName: "Kullanıcının her panelde bu soruya benzersiz bir yanıt vermesini zorunlu kılmak için bir soru adına başvurun."
+      keyName: "Kullanıcının her panelde bu soruya benzersiz bir yanıt vermesini zorunlu kılmak için bir soru adına başvurun.",
+      confirmDelete: "Paneli kaldırmadan önce bir onay istemini tetikler."
+    },
+    matrixdynamic: {
+      confirmDelete: "Bir satırı kaldırmadan önce bir onay istemini tetikler.",
+      detailPanelShowOnAdding: "Matrise yeni bir satır eklendiğinde ayrıntı bölümünü otomatik olarak genişletir."
     },
     copyDefaultValueFromLastEntry: "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar.",
     defaultValueExpression: "Bu ayar, bir ifadeye göre varsayılan bir yanıt değeri atamanıza olanak tanır. İfade temel hesaplamaları içerebilir - '{q1_id} + {q2_id}', '{age} > 60' gibi Boole ifadeleri ve işlevler: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb. Bu ifade tarafından belirlenen değer, yanıtlayanın manuel girişi tarafından geçersiz kılınabilecek ilk varsayılan değer olarak işlev görür.",
@@ -1559,7 +1564,6 @@ export var turkishStrings = {
     detailErrorLocation: "Ayrıntı bölümlerinde iç içe geçmiş sorular için hata mesajlarının konumunu ayarlar. \"Devral\" seçeneği, \"Hata mesajı hizalaması\" özelliğindeki ayarı uygular.",
     keyDuplicationError: "\"Yinelenen yanıtları engelle\" özelliği etkinleştirildiğinde, yinelenen bir girdi göndermeye çalışan yanıtlayan aşağıdaki hata iletisini alır.",
     totalExpression: "Bir ifadeye dayalı olarak toplam değerleri hesaplamanıza olanak tanır. İfade, temel hesaplamaları ('{q1_id} + {q2_id}'), Boole ifadelerini ('{age} > 60') ve işlevleri ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb.) içerebilir.",
-    confirmDelete: "Satır silme işlemini onaylamanızı isteyen bir istemi tetikler.",
     keyName: "Belirtilen sütun aynı değerleri içeriyorsa, anket \"Benzersiz olmayan anahtar değeri\" hatasını atar.",
     description: "Bir altyazı yazın.",
     locale: "Anketinizi oluşturmaya başlamak için bir dil seçin. Çeviri eklemek için yeni bir dile geçin ve orijinal metni buradan veya Çeviriler sekmesinden çevirin.",
@@ -1727,7 +1731,7 @@ export var turkishStrings = {
     detailElements: "Ayrıntı öğeleri",
     allowAdaptiveActions: "Uyarlamalı eylemlere izin ver",
     defaultRowValue: "Varsayılan satır değeri",
-    detailPanelShowOnAdding: "Ekleme sırasında ayrıntı paneli gösterisi",
+    detailPanelShowOnAdding: "Yeni satır ayrıntılarını otomatik genişletme",
     choicesLazyLoadEnabled: "Tembel yükün etkin olduğu seçenekler",
     choicesLazyLoadPageSize: "Seçenekler tembel yükleme sayfası boyutu",
     inputFieldComponent: "Giriş alanı bileşeni",
@@ -2011,9 +2015,9 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pe.detailPanelMode: "Detail panel location" => "Ayrıntı paneli konumu"
 // pe.minRowCount: "Minimum row count" => "Minimum satır sayısı"
 // pe.maxRowCount: "Maximum row count" => "Maksimum satır sayısı"
-// pe.confirmDelete: "Confirm row deletion" => "Satır silme işlemini onaylama"
+// pe.confirmDelete: "Confirm row removal" => "Satır silme işlemini onaylama"
 // pe.confirmDeleteText: "Confirmation message" => "Onay mesajı"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Panel silme işlemini onaylama"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Panel silme işlemini onaylama"
 // pe.panelCount: "Initial panel count" => "İlk panel sayısı"
 // pe.minPanelCount: "Minimum panel count" => "Minimum panel sayısı"
 // pe.maxPanelCount: "Maximum panel count" => "Maksimum panel sayısı"
@@ -2703,7 +2707,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Geçersiz girişi olan bir hücreyle ilgili olarak bir hata iletisinin konumunu ayarlar. \"Devral\" seçeneği, ayarı \"Hata iletisi hizalaması\" özelliğinden uygular."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "\"Yinelenen yanıtları engelle\" özelliği etkinleştirildiğinde, yinelenen bir girdi göndermeye çalışan yanıtlayan aşağıdaki hata iletisini alır."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Bir ifadeye dayalı olarak toplam değerleri hesaplamanıza olanak tanır. İfade, temel hesaplamaları ('{q1_id} + {q2_id}'), Boole ifadelerini ('{age} > 60') ve işlevleri ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' vb.) içerebilir."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Satır silme işlemini onaylamanızı isteyen bir istemi tetikler."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Satır silme işlemini onaylamanızı isteyen bir istemi tetikler."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar."
 // pehelp.description: "Type a subtitle." => "Bir altyazı yazın."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Anketinizi oluşturmaya başlamak için bir dil seçin. Çeviri eklemek için yeni bir dile geçin ve orijinal metni buradan veya Çeviriler sekmesinden çevirin."
@@ -3146,3 +3150,7 @@ setupLocale({ localeCode: "tr", strings: turkishStrings });
 // slider.labelFormat: "Label format" => "Etiket biçimi"
 // slider.tooltipFormat: "Tooltip format" => "Araç ipucu biçimi"
 // question.showTitle: "Show the title and description" => "Başlığı ve açıklamayı gösterme"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Paneli kaldırmadan önce bir onay istemini tetikler."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Bir satırı kaldırmadan önce bir onay istemini tetikler."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Matrise yeni bir satır eklendiğinde ayrıntı bölümünü otomatik olarak genişletir."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Yeni satır ayrıntılarını otomatik genişletme"

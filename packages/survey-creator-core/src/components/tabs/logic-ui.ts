@@ -371,7 +371,6 @@ export class SurveyLogicUI extends SurveyLogic {
           type: "matrixdynamic",
           name: "items",
           titleLocation: "hidden",
-          showColumnHeader: false,
           detailPanelMode: "underRowSingle",
           allowAddRows: false,
           allowAdaptiveActions: false,

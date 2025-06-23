@@ -1435,7 +1435,12 @@ export var skStrings = {
       descriptionLocation: "Možnosť \"Dediť\" použije nastavenie na úrovni stránky (ak je nastavená) alebo na úrovni prieskumu (\"Predvolene pod názvom panela\").",
       newPanelPosition: "Definuje pozíciu novo pridaného panela. V predvolenom nastavení sa na koniec pridávajú nové panely. Výberom položky \"Ďalej\" vložíte nový panel za aktuálny.",
       copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného panela a priradí ich ďalšiemu pridanému dynamickému panelu.",
-      keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli."
+      keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli.",
+      confirmDelete: "Spustí výzvu na potvrdenie pred odstránením panela."
+    },
+    matrixdynamic: {
+      confirmDelete: "Spustí výzvu na potvrdenie pred odstránením riadka.",
+      detailPanelShowOnAdding: "Automaticky rozbalí sekciu podrobností, keď sa do matice pridá nový riadok."
     },
     copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku.",
     defaultValueExpression: "Toto nastavenie vám umožňuje priradiť predvolenú hodnotu odpovede na základe výrazu. Výraz môže obsahovať základné výpočty - '{q1_id} + {q2_id}', boolovské výrazy, ako napríklad '{age} > 60', a funkcie: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' atď. Hodnota určená týmto výrazom slúži ako počiatočná predvolená hodnota, ktorú je možné prepísať manuálnym vstupom respondenta.",
@@ -1559,7 +1564,6 @@ export var skStrings = {
     detailErrorLocation: "Nastaví umiestnenie chybových hlásení pre otázky vnorené do podrobných sekcií. Možnosť \"Zdediť\" použije nastavenie z vlastnosti \"Zarovnanie chybového hlásenia\".",
     keyDuplicationError: "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie.",
     totalExpression: "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.).",
-    confirmDelete: "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka.",
     keyName: "Ak zadaný stĺpec obsahuje rovnaké hodnoty, prieskum vyhodí chybu \"Nejedinečná hodnota kľúča\".",
     description: "Zadajte podnadpis.",
     locale: "Vyberte jazyk a začnite vytvárať prieskum. Ak chcete pridať preklad, prepnite na nový jazyk a preložte pôvodný text tu alebo na karte Preklady.",
@@ -1727,7 +1731,7 @@ export var skStrings = {
     detailElements: "Detailné prvky",
     allowAdaptiveActions: "Povolenie adaptívnych akcií",
     defaultRowValue: "Predvolená hodnota riadka",
-    detailPanelShowOnAdding: "panel s podrobnosťami – zobrazenie pri pridávaní",
+    detailPanelShowOnAdding: "Automatické rozbalenie podrobností nového riadka",
     choicesLazyLoadEnabled: "Možnosti lenivého zaťaženia povolené",
     choicesLazyLoadPageSize: "Možnosti lenivé načítať veľkosť stránky",
     inputFieldComponent: "Súčasť vstupného poľa",
@@ -2000,9 +2004,9 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pe.detailPanelMode: "Detail panel location" => "Umiestnenie panela s podrobnosťami"
 // pe.minRowCount: "Minimum row count" => "Minimálny počet riadkov"
 // pe.maxRowCount: "Maximum row count" => "Maximálny počet riadkov"
-// pe.confirmDelete: "Confirm row deletion" => "Potvrdenie odstránenia riadka"
+// pe.confirmDelete: "Confirm row removal" => "Potvrdenie odstránenia riadka"
 // pe.confirmDeleteText: "Confirmation message" => "Potvrdzovacia správa"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Potvrdenie odstránenia panela"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Potvrdenie odstránenia panela"
 // pe.panelCount: "Initial panel count" => "Počiatočný počet panelov"
 // pe.minPanelCount: "Minimum panel count" => "Minimálny počet panelov"
 // pe.maxPanelCount: "Maximum panel count" => "Maximálny počet panelov"
@@ -2661,7 +2665,7 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Nastaví umiestnenie chybového hlásenia vo vzťahu k bunke s neplatným vstupom. Možnosť Zdediť použije nastavenie z vlastnosti Zarovnanie chybového hlásenia."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Keď je povolená vlastnosť Zabrániť duplicitným odpovediam, respondentovi, ktorý sa pokúša odoslať duplicitný záznam, sa zobrazí nasledujúce chybové hlásenie."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Umožňuje vypočítať celkové hodnoty na základe výrazu. Výraz môže obsahovať základné výpočty (\"{q1_id} + {q2_id}\"), boolovské výrazy (\"{age} > 60') a funkcie (\"iif()\", \"today()\", \"age()\", \"min()\", \"max()\", \"avg()\" atď.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Spustí výzvu so žiadosťou o potvrdenie odstránenia riadka."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku."
 // pehelp.description: "Type a subtitle." => "Zadajte podnadpis."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Vyberte jazyk a začnite vytvárať prieskum. Ak chcete pridať preklad, prepnite na nový jazyk a preložte pôvodný text tu alebo na karte Preklady."
@@ -3104,3 +3108,7 @@ setupLocale({ localeCode: "sk", strings: skStrings });
 // slider.labelFormat: "Label format" => "Formát štítku"
 // slider.tooltipFormat: "Tooltip format" => "Formát popisu"
 // question.showTitle: "Show the title and description" => "Zobraziť názov a popis"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Spustí výzvu na potvrdenie pred odstránením panela."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Spustí výzvu na potvrdenie pred odstránením riadka."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automaticky rozbalí sekciu podrobností, keď sa do matice pridá nový riadok."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Automatické rozbalenie podrobností nového riadka"

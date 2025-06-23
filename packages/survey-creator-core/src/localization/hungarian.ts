@@ -1435,7 +1435,12 @@ export var huStrings = {
       descriptionLocation: "Az \"Öröklés\" opció az oldalszintű (ha be van állítva) vagy a felmérés szintű beállítást alkalmazza (\"Alapértelmezés szerint a panel címe alatt\").",
       newPanelPosition: "Az újonnan hozzáadott panel helyét határozza meg. Alapértelmezés szerint az új panelek hozzáadódnak a végéhez. Válassza a \"Tovább\" lehetőséget, ha új panelt szeretne beilleszteni az aktuális után.",
       copyDefaultValueFromLastEntry: "Megkettőzi a válaszokat az utolsó panelről, és hozzárendeli őket a következő hozzáadott dinamikus panelhez.",
-      keyName: "Hivatkozzon egy kérdés nevére, hogy a felhasználónak egyedi választ kell adnia erre a kérdésre minden panelen."
+      keyName: "Hivatkozzon egy kérdés nevére, hogy a felhasználónak egyedi választ kell adnia erre a kérdésre minden panelen.",
+      confirmDelete: "Megerősítő üzenetet indít el a panel eltávolítása előtt."
+    },
+    matrixdynamic: {
+      confirmDelete: "Megerősítő kérést indít el a sor eltávolítása előtt.",
+      detailPanelShowOnAdding: "Automatikusan kibontja a részletszakaszt, amikor új sort ad hozzá a mátrixhoz."
     },
     copyDefaultValueFromLastEntry: "Megkettőzi a válaszokat az utolsó sorból, és hozzárendeli őket a következő hozzáadott dinamikus sorhoz.",
     defaultValueExpression: "Ezzel a beállítással alapértelmezett válaszértéket rendelhet hozzá egy kifejezés alapján. A kifejezés tartalmazhat alapvető számításokat - '{q1_id} + {q2_id}', logikai kifejezéseket, például \"{age} > 60\" és függvényeket: 'iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb. A kifejezés által meghatározott érték a kezdeti alapértelmezett érték, amelyet a válaszadó kézi bevitele felülbírálhat.",
@@ -1559,7 +1564,6 @@ export var huStrings = {
     detailErrorLocation: "Beállítja a hibaüzenetek helyét a részletes szakaszokba ágyazott kérdésekhez. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza.",
     keyDuplicationError: "Ha az \"Ismétlődő válaszok megakadályozása\" tulajdonság engedélyezve van, az ismétlődő bejegyzést beküldeni próbáló válaszadó a következő hibaüzenetet kapja.",
     totalExpression: "Lehetővé teszi az összesített értékek kiszámítását egy kifejezés alapján. A kifejezés tartalmazhat alapvető számításokat ('{q1_id} + {q2_id}'), logikai kifejezéseket ('{age} > 60') és függvényeket ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb.).",
-    confirmDelete: "Elindít egy kérést, amely a sor törlésének megerősítését kéri.",
     keyName: "Ha a megadott oszlop azonos értékeket tartalmaz, a felmérés a \"Nem egyedi kulcsérték\" hibát adja vissza.",
     description: "Írjon be egy feliratot.",
     locale: "Válassza ki a nyelvet a felmérés létrehozásának megkezdéséhez. Fordítás hozzáadásához váltson új nyelvre, és fordítsa le az eredeti szöveget itt vagy a Fordítások lapon.",
@@ -1727,7 +1731,7 @@ export var huStrings = {
     detailElements: "Részletelemek",
     allowAdaptiveActions: "Adaptív műveletek engedélyezése",
     defaultRowValue: "Sor alapértelmezett értéke",
-    detailPanelShowOnAdding: "A részletek panel megjelenítése hozzáadáskor",
+    detailPanelShowOnAdding: "Új sor részleteinek automatikus kibontása",
     choicesLazyLoadEnabled: "Választási lehetőségek lusta betöltés engedélyezve",
     choicesLazyLoadPageSize: "Választási lehetőségek lusta betöltési oldalméret",
     inputFieldComponent: "Beviteli mező összetevő",
@@ -2118,9 +2122,9 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pe.detailPanelMode: "Detail panel location" => "A részletek panel helye"
 // pe.minRowCount: "Minimum row count" => "Sorszám minimális száma"
 // pe.maxRowCount: "Maximum row count" => "Sorszám maximális száma"
-// pe.confirmDelete: "Confirm row deletion" => "Sor törlésének megerősítése"
+// pe.confirmDelete: "Confirm row removal" => "Sor törlésének megerősítése"
 // pe.confirmDeleteText: "Confirmation message" => "Megerősítő üzenet"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Panel törlésének megerősítése"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Panel törlésének megerősítése"
 // pe.panelCount: "Initial panel count" => "Kezdeti panelszám"
 // pe.minPanelCount: "Minimum panel count" => "Panelek minimális száma"
 // pe.maxPanelCount: "Maximum panel count" => "Panelek maximális száma"
@@ -2858,7 +2862,7 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Beállítja a hibaüzenet helyét egy érvénytelen bevitelű cellával kapcsolatban. Az \"Öröklés\" opció a \"Hibaüzenetek igazítása\" tulajdonság beállítását alkalmazza."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Ha az \"Ismétlődő válaszok megakadályozása\" tulajdonság engedélyezve van, az ismétlődő bejegyzést beküldeni próbáló válaszadó a következő hibaüzenetet kapja."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Lehetővé teszi az összesített értékek kiszámítását egy kifejezés alapján. A kifejezés tartalmazhat alapvető számításokat ('{q1_id} + {q2_id}'), logikai kifejezéseket ('{age} > 60') és függvényeket ('iif()', 'today()', 'age()', 'min()', 'max()', 'avg()' stb.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Elindít egy kérést, amely a sor törlésének megerősítését kéri."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Elindít egy kérést, amely a sor törlésének megerősítését kéri."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Megkettőzi a válaszokat az utolsó sorból, és hozzárendeli őket a következő hozzáadott dinamikus sorhoz."
 // pehelp.description: "Type a subtitle." => "Írjon be egy feliratot."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Válassza ki a nyelvet a felmérés létrehozásának megkezdéséhez. Fordítás hozzáadásához váltson új nyelvre, és fordítsa le az eredeti szöveget itt vagy a Fordítások lapon."
@@ -3302,3 +3306,7 @@ setupLocale({ localeCode: "hu", strings: huStrings });
 // slider.labelFormat: "Label format" => "Címke formátuma"
 // slider.tooltipFormat: "Tooltip format" => "Elemleírás formátuma"
 // question.showTitle: "Show the title and description" => "A cím és a leírás megjelenítése"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Megerősítő üzenetet indít el a panel eltávolítása előtt."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Megerősítő kérést indít el a sor eltávolítása előtt."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Automatikusan kibontja a részletszakaszt, amikor új sort ad hozzá a mátrixhoz."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Új sor részleteinek automatikus kibontása"

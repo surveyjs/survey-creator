@@ -1435,7 +1435,12 @@ export var msStrings = {
       descriptionLocation: "Opsyen \"Warisan\" menggunakan aras halaman (jika ditetapkan) atau seting aras tinjauan (\"Di bawah tajuk panel\" secara lalai).",
       newPanelPosition: "Mentakrifkan kedudukan panel yang baru ditambah. Secara lalai, panel baru ditambahkan ke hujungnya. Pilih \"Seterusnya\" untuk memasukkan panel baru selepas yang semasa.",
       copyDefaultValueFromLastEntry: "Pendua jawapan daripada panel terakhir dan memberikannya kepada panel dinamik tambahan seterusnya.",
-      keyName: "Rujukan nama soalan untuk memerlukan pengguna memberikan jawapan yang unik untuk soalan ini dalam setiap panel."
+      keyName: "Rujukan nama soalan untuk memerlukan pengguna memberikan jawapan yang unik untuk soalan ini dalam setiap panel.",
+      confirmDelete: "Mencetuskan gesaan pengesahan sebelum mengalih keluar panel."
+    },
+    matrixdynamic: {
+      confirmDelete: "Mencetuskan gesaan pengesahan sebelum mengalih keluar baris.",
+      detailPanelShowOnAdding: "Mengembangkan bahagian butiran secara automatik apabila baris baharu ditambah pada matriks."
     },
     copyDefaultValueFromLastEntry: "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya.",
     defaultValueExpression: "Seting ini membolehkan anda memperuntukkan nilai jawapan lalai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas - '{q1_id} + {q2_id}', ungkapan Boolean, seperti '{age} > 60', dan fungsi: 'iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dsb. Nilai yang ditentukan oleh ungkapan ini berfungsi sebagai nilai lalai awal yang boleh diubah oleh input manual responden.",
@@ -1559,7 +1564,6 @@ export var msStrings = {
     detailErrorLocation: "Menetapkan lokasi mesej ralat untuk soalan yang bersarang dalam bahagian terperinci. Pilihan \"Mewarisi\" menggunakan tetapan daripada sifat \"Penjajaran mesej ralat\".",
     keyDuplicationError: "Apabila sifat \"Mencegah respons pendua\" didayakan, responden yang cuba menyerahkan entri pendua akan menerima mesej ralat berikut.",
     totalExpression: "Membolehkan anda mengira jumlah nilai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), Ungkapan Boolean ('{age} > 60') dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dll.).",
-    confirmDelete: "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman baris.",
     keyName: "Jika lajur yang ditentukan mengandungi nilai yang sama, tinjauan akan membuang ralat \"Nilai kunci bukan unik\".",
     description: "Taipkan sari kata.",
     locale: "Pilih bahasa untuk mula mencipta tinjauan anda. Untuk menambah terjemahan, tukar kepada bahasa baru dan terjemahkan teks asal di sini atau dalam tab Terjemahan.",
@@ -1727,7 +1731,7 @@ export var msStrings = {
     detailElements: "Unsur terperinci",
     allowAdaptiveActions: "Benarkan tindakan penyesuaian",
     defaultRowValue: "Nilai baris lalai",
-    detailPanelShowOnAdding: "Butiran panel tunjukkan pada penambahan",
+    detailPanelShowOnAdding: "Kembangkan butiran baris baharu secara automatik",
     choicesLazyLoadEnabled: "Pilihan beban malas didayakan",
     choicesLazyLoadPageSize: "Pilihan malas memuatkan saiz halaman",
     inputFieldComponent: "Komponen medan input",
@@ -2000,9 +2004,9 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pe.detailPanelMode: "Detail panel location" => "Lokasi panel terperinci"
 // pe.minRowCount: "Minimum row count" => "Kiraan baris minimum"
 // pe.maxRowCount: "Maximum row count" => "Kiraan baris maksimum"
-// pe.confirmDelete: "Confirm row deletion" => "Sahkan pemadaman baris"
+// pe.confirmDelete: "Confirm row removal" => "Sahkan pemadaman baris"
 // pe.confirmDeleteText: "Confirmation message" => "Mesej pengesahan"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "Sahkan penghapusan panel"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "Sahkan penghapusan panel"
 // pe.panelCount: "Initial panel count" => "Kiraan panel awal"
 // pe.minPanelCount: "Minimum panel count" => "Kiraan panel minimum"
 // pe.maxPanelCount: "Maximum panel count" => "Kiraan panel maksimum"
@@ -2661,7 +2665,7 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "Mengesetkan lokasi mesej ralat berhubung dengan sel dengan input tidak sah. Opsyen \"Warisan\" menggunakan seting daripada sifat \"Penjajaran mesej ralat\"."
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "Apabila sifat \"Mencegah respons pendua\" didayakan, responden yang cuba menyerahkan entri pendua akan menerima mesej ralat berikut."
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "Membolehkan anda mengira jumlah nilai berdasarkan ungkapan. Ungkapan ini boleh termasuk pengiraan asas ('{q1_id} + {q2_id}'), Ungkapan Boolean ('{age} > 60') dan fungsi ('iif()', 'hari ini()', 'umur()', 'min()', 'max()', 'avg()', dll.)."
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman baris."
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman baris."
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya."
 // pehelp.description: "Type a subtitle." => "Taipkan sari kata."
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "Pilih bahasa untuk mula mencipta tinjauan anda. Untuk menambah terjemahan, tukar kepada bahasa baru dan terjemahkan teks asal di sini atau dalam tab Terjemahan."
@@ -3105,3 +3109,7 @@ setupLocale({ localeCode: "ms", strings: msStrings });
 // slider.labelFormat: "Label format" => "Format label"
 // slider.tooltipFormat: "Tooltip format" => "Format petua alat"
 // question.showTitle: "Show the title and description" => "Tunjukkan tajuk dan perihalan"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "Mencetuskan gesaan pengesahan sebelum mengalih keluar panel."
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "Mencetuskan gesaan pengesahan sebelum mengalih keluar baris."
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "Mengembangkan bahagian butiran secara automatik apabila baris baharu ditambah pada matriks."
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "Kembangkan butiran baris baharu secara automatik"

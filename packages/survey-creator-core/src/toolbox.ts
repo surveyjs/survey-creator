@@ -616,13 +616,14 @@ export class QuestionToolbox
       this.dotsItem.popupModel.hide();
       this.creator?.onDragDropItemStart();
       this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel);
-    });
+    }, false);
     this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: IQuestionToolboxItem) => {
       if (!this.creator.readOnly) {
         this.dragOrClickHelper.onPointerDown(pointerDownEvent, item);
       }
     };
     this.dotsItem.popupModel.cssClass += " svc-toolbox-popup svc-creator-popup";
+    this.dotsItem.data.locOwner = this.creator;
     this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
   private getDefaultQuestionCategories() {

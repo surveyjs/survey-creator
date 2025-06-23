@@ -1435,7 +1435,12 @@ var simplifiedChineseTranslation = {
       descriptionLocation: "“继承”选项应用页面级别（如果已设置）或调查级别设置（默认为“在面板标题下”）。",
       newPanelPosition: "定义新添加的面板的位置。默认情况下，新面板将添加到末尾。选择“下一步”以在当前面板之后插入新面板。",
       copyDefaultValueFromLastEntry: "复制上一个面板中的答案，并将其分配给下一个添加的动态面板。",
-      keyName: "引用问题名称以要求用户在每个面板中为此问题提供唯一的答案。"
+      keyName: "引用问题名称以要求用户在每个面板中为此问题提供唯一的答案。",
+      confirmDelete: "在删除面板之前触发确认提示。"
+    },
+    matrixdynamic: {
+      confirmDelete: "在删除行之前触发确认提示。",
+      detailPanelShowOnAdding: "在向矩阵添加新行时自动展开详细信息部分。"
     },
     copyDefaultValueFromLastEntry: "复制最后一行的答案，并将其分配给下一个添加的动态行。",
     defaultValueExpression: "此设置允许您根据表达式分配默认答案值。表达式可以包括基本计算 - '{q1_id} + {q2_id}'、布尔表达式，例如 '{age} > 60'，以及函数：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。此表达式确定的值用作初始默认值，可由响应者的手动输入覆盖。",
@@ -1559,7 +1564,6 @@ var simplifiedChineseTranslation = {
     detailErrorLocation: "设置嵌套在详细信息部分中的问题的错误消息的位置。“Inherit” 选项应用“Error message alignment” 属性中的设置。",
     keyDuplicationError: "启用“防止重复响应”属性后，尝试提交重复条目的受访者将收到以下错误消息。",
     totalExpression: "允许您根据表达式计算总值。表达式可以包括基本计算 （'{q1_id} + {q2_id}'）、布尔表达式 （'{age} > 60'） 和函数 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
-    confirmDelete: "触发提示，要求确认删除行。",
     keyName: "如果指定的列包含相同的值，则调查将引发“非唯一键值”错误。",
     description: "键入副标题。",
     locale: "选择一种语言以开始创建调查。要添加翻译，请切换到新语言，然后在此处或“翻译”选项卡中翻译原始文本。",
@@ -1727,7 +1731,7 @@ var simplifiedChineseTranslation = {
     detailElements: "细节元素",
     allowAdaptiveActions: "允许自适应操作",
     defaultRowValue: "默认行值",
-    detailPanelShowOnAdding: "添加时显示的详细信息面板",
+    detailPanelShowOnAdding: "自动展开新行详细信息",
     choicesLazyLoadEnabled: "选项延迟加载已启用",
     choicesLazyLoadPageSize: "选择延迟加载页面大小",
     inputFieldComponent: "输入字段组件",
@@ -2105,9 +2109,9 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pe.detailPanelMode: "Detail panel location" => "详细信息面板位置"
 // pe.minRowCount: "Minimum row count" => "最小行数"
 // pe.maxRowCount: "Maximum row count" => "最大行数"
-// pe.confirmDelete: "Confirm row deletion" => "确认删除行"
+// pe.confirmDelete: "Confirm row removal" => "确认删除行"
 // pe.confirmDeleteText: "Confirmation message" => "确认消息"
-// paneldynamic.confirmDelete: "Confirm panel deletion" => "确认面板删除"
+// paneldynamic.confirmDelete: "Confirm panel removal" => "确认面板删除"
 // pe.panelCount: "Initial panel count" => "初始面板计数"
 // pe.minPanelCount: "Minimum panel count" => "最小面板数"
 // pe.maxPanelCount: "Maximum panel count" => "最大面板数"
@@ -2849,7 +2853,7 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "设置与输入无效的单元格相关的错误消息的位置。“继承”选项应用“错误消息对齐”属性中的设置。"
 // pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "启用“防止重复响应”属性后，尝试提交重复条目的受访者将收到以下错误消息。"
 // pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "允许您根据表达式计算总值。表达式可以包括基本计算 （'{q1_id} + {q2_id}'）、布尔表达式 （'{age} > 60'） 和函数 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。"
-// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "触发提示，要求确认删除行。"
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row removal." => "触发提示，要求确认删除行。"
 // pehelp.copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "复制最后一行的答案，并将其分配给下一个添加的动态行。"
 // pehelp.description: "Type a subtitle." => "键入副标题。"
 // pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "选择一种语言以开始创建调查。要添加翻译，请切换到新语言，然后在此处或“翻译”选项卡中翻译原始文本。"
@@ -3292,3 +3296,7 @@ setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });
 // slider.labelFormat: "Label format" => "标签格式"
 // slider.tooltipFormat: "Tooltip format" => "工具提示格式"
 // question.showTitle: "Show the title and description" => "显示标题和描述"
+// paneldynamic.confirmDelete: "Triggers a confirmation prompt before removing a panel." => "在删除面板之前触发确认提示。"
+// matrixdynamic.confirmDelete: "Triggers a confirmation prompt before removing a row." => "在删除行之前触发确认提示。"
+// matrixdynamic.detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix." => "在向矩阵添加新行时自动展开详细信息部分。"
+// p.detailPanelShowOnAdding: "Auto-expand new row details" => "自动展开新行详细信息"
