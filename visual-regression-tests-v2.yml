@@ -296,7 +296,7 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/packages/survey-creator-react/test-results/"
+          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/test-results/"
           Contents: "**"
           TargetFolder: "$(Build.ArtifactStagingDirectory)/Creator_React_SCR"
           OverWrite: true
@@ -314,7 +314,7 @@ jobs:
       - task: PublishTestResults@2
         displayName: "Publish SCR test results"
         inputs:
-          searchFolder: "$(Build.SourcesDirectory)/packages/survey-creator-react/test-results"
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/test-results"
           testResultsFormat: "JUnit"
           testResultsFiles: "e2e-junit-results.xml"
           mergeTestResults: true
