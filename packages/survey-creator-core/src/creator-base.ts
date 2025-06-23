@@ -8,7 +8,8 @@ import {
   CssClassBuilder,
   SvgRegistry,
   addIconsToThemeSet,
-  SvgThemeSets
+  SvgThemeSets,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale } from "./editorLocalization";
@@ -4263,6 +4264,14 @@ export class SurveyCreatorModel extends Base
 
     return availableToolboxItems;
   }
+  _getActualElementToAddNewElements(element: SurveyElement<any>) {
+    if (!element || !element.isPanel) return element;
+    const parentQuestion = (element as PanelModel).parentQuestion;
+    if (parentQuestion && Serializer.isDescendantOf(parentQuestion.getType(), "paneldynamic") && (parentQuestion as QuestionPanelDynamicModel).template === element) {
+      return parentQuestion;
+    }
+    return element;
+  }
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
     let panel = !!element && element.isPanel ? <PanelModel>element : null;
     const onSelectQuestionType = (questionType: string, json?: any) => {
@@ -4271,7 +4280,8 @@ export class SurveyCreatorModel extends Base
       newAction.popupModel.hide();
     };
     const getActions = () => {
-      const availableTypes = this.getAvailableToolboxItems(element).map((item) => {
+      const ownerElement = this._getActualElementToAddNewElements(element);
+      const availableTypes = this.getAvailableToolboxItems(ownerElement).map((item) => {
         return this.createIActionBarItemByClass(item, item.needSeparator, onSelectQuestionType);
       });
       return availableTypes;
