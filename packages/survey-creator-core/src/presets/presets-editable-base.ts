@@ -144,13 +144,14 @@ export class CreatorPresetEditableBase {
     return Helpers.getUnbindValue(json);
   }
 
-  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement) {
+  protected showDetailPanelInPopup(matrix: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rootElement: HTMLElement, hideDetailPanel = true) {
     if (settings.showDialog) {
-      row.hideDetailPanel();
-      const survey = new SurveyModel(row.detailPanel.toJSON());
+      const data = matrix.value[(matrix.visibleRows as any).findIndex(r => r === row)];
+      if (hideDetailPanel) row.hideDetailPanel();
+      const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
       survey.fitToContainer = false;
       survey.showNavigationButtons = false;
-      survey.data = row.value;
+      survey.data = data;
       const popupModel = settings.showDialog?.(<IDialogOptions>{
         componentName: "survey",
         data: { survey: survey, model: survey },
@@ -172,6 +173,7 @@ export class CreatorPresetEditableBase {
         title: "Detail",
         displayMode: "popup"
       }, rootElement);
+      return survey;
     }
   }
   public static updateModifiedText(locStrs: any, text: string, localizationName: string): void {

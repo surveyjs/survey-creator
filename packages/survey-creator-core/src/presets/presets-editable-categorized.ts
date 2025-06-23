@@ -7,16 +7,49 @@ import { CreatorPresetEditorModel } from "./presets-editor";
 import { SurveyHelper } from "../survey-helper";
 
 export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPresetEditableBase {
+  //private replaceNonLettersWithDash(inputString) {
+  //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
+  //}
+
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
   protected get nameInnerMatrix() { return "items"; }
   protected get nameCategories() { return this.fullPath + "_categories"; }
   protected defaultItems: any[];
-
+  //private fillAutoName(question: QuestionMatrixDynamicModel, propName: string) {
+  //   question.value?.filter(v =>v.isDefault === false && !v[propName]).forEach(v => v[propName] = this.replaceNonLettersWithDash(v.title));
+  //}
+  protected updateOnValueChangedCore(model: SurveyModel, name: string) {
+    // if (name == this.nameCategories) {
+    //   this.fillAutoName(this.getQuestionCategories(model), "category");
+    // }
+    // if (name == this.nameMatrix) {
+    //   this.fillAutoName(this.getMatrix(model), "name");
+    // }
+  }
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if (this.isItemsMatrix(options.question)) {
-      this.showDetailPanelInPopup(options.question, options.row, model.rootElement);
+      const survey = this.showDetailPanelInPopup(options.question, options.row, model.rootElement);
+      if (survey) {
+        const name = survey.getQuestionByName("name");
+        const isDefault = survey.getQuestionByName("isDefault");
+        if (name && isDefault) name.readOnly = isDefault.value;
+      }
     }
   }
+  private editCategory(model: SurveyModel, row: MatrixDynamicRowModel) {
+    const survey = this.showDetailPanelInPopup(this.getQuestionCategories(model), row, model.rootElement, false);
+    if (survey) {
+      const category = survey.getQuestionByName("category");
+      const isDefault = row.getQuestionByName("isDefault");
+
+      if (category) {
+        category.visible = true;
+        if (isDefault) category.readOnly = isDefault.value;
+      }
+      survey.getAllQuestions().forEach(q => q.visible = q.name != this.nameInnerMatrix);
+    }
+  }
+
   private getMatrix(model: SurveyModel): QuestionMatrixDynamicModel {
     return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameMatrix);
   }
@@ -92,12 +125,30 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       options.question.cssClasses.detailIconExpandedId = "icon-collapse-24x24";
       options.question.cssClasses.detailIconId = "icon-expand-24x24";
 
+      const iconName = options.question.value?.filter(v => v.category == options.row.getValue("category"))[0]?.iconName;
+      if (iconName) {
+        options.actions.push({
+          id: iconName,
+          iconName: iconName,
+          location: "start",
+          enabled: false
+        });
+      }
+
       options.actions.push({
         id: "reset-to-default",
         iconName: "icon-reset",
         location: "end",
         visibleIndex: 15,
         action: ()=>{ this.resetCategory(model, options.row); }
+      });
+
+      options.actions.push({
+        id: "edit-category",
+        iconName: "icon-edit",
+        location: "end",
+        visibleIndex: 13,
+        action: ()=>{ this.editCategory(model, options.row); }
       });
       options.actions.forEach(a => {
         if (a.id == "show-detail") {
@@ -139,7 +190,10 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   }
   public onMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any) {
     if (options.question.name == this.nameCategories) {
-      options.row.getQuestionByName("category").value = SurveyHelper.getNewName(options.question.value.map(r => ({ name: r.category })), "category");
+      options.row.getQuestionByName("category").value = SurveyHelper.getNewName((options.question.value || []).map(r => ({ name: r.category })), "category");
+    }
+    if (options.question.name == this.nameMatrix) {
+      options.row.getQuestionByName("name").value = SurveyHelper.getNewName((options.question.value || []).map(r => ({ name: r.name })), "name");
     }
   }
 }

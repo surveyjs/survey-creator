@@ -1,4 +1,4 @@
-import { ItemValue, QuestionBooleanModel, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization } from "survey-core";
+import { ItemValue, QuestionBooleanModel, QuestionCheckboxBase, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, surveyLocalization, settings, MatrixDynamicRowModel } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/presets/presets-editor";
 import { ICreatorPresetData } from "../src/presets-creator/presets";
 import { SurveyModel, Question } from "survey-core";
@@ -6,6 +6,7 @@ import { QuestionToolbox } from "../src/toolbox";
 import { SurveyCreatorModel } from "../src/creator-base";
 import { editorLocalization } from "../src/editorLocalization";
 import { QuestionPresetJsonModel } from "../src/presets/preset-question-json";
+import { CreatorPresetEditableCaregorizedListConfigurator } from "../src/presets/presets-editable-categorized";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
@@ -225,4 +226,119 @@ test("Preset edit, toolbox - reset category", () => {
   expect(categValue2.filter(c => c.category == "text")[0].items.map(i => i.name)).toEqual(["text", "multipletext"]);
 
   expect(hiddenQuestion.value.map(i => i.name)).toEqual(["comment", "paneldynamic"]);
+});
+
+test("Preset edit, toolbox - default names in categories", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const survey = editor.model;
+  const categoriesQuestion = survey.getQuestionByName("toolbox_categories");
+  categoriesQuestion.value = categoriesQuestion.value.filter(v => ["text", "containers"].indexOf(v.category) >= 0);
+  expect(categoriesQuestion.visibleRows).toHaveLength(2);
+  categoriesQuestion.addRow();
+  categoriesQuestion.visibleRows[categoriesQuestion.visibleRows.length - 1].getQuestionByName("title").value = "New Title 1";
+
+  expect(categoriesQuestion.value[0].isDefault).toBeTruthy();
+  expect(categoriesQuestion.value[1].isDefault).toBeTruthy();
+  expect(categoriesQuestion.value[2].isDefault).toBeFalsy();
+
+  expect(categoriesQuestion.value[2].category).toBe("category1");
+});
+
+test("Preset edit, toolbox - default names in items", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const survey = editor.model;
+  const categoriesQuestion = survey.getQuestionByName("toolbox_categories");
+  const itemsQuestion = survey.getQuestionByName("toolbox_matrix");
+  expect(itemsQuestion.visibleRows).toHaveLength(0);
+  categoriesQuestion.visibleRows[0].showDetailPanel();
+  categoriesQuestion.visibleRows[0].detailPanel.getQuestionByName("items").removeRow(0);
+
+  expect(itemsQuestion.visibleRows).toHaveLength(1);
+  itemsQuestion.addRow();
+  itemsQuestion.visibleRows[itemsQuestion.visibleRows.length - 1].getQuestionByName("title").value = "New Title 1";
+
+  expect(itemsQuestion.value[0].isDefault).toBeTruthy();
+  expect(itemsQuestion.value[1].isDefault).toBeFalsy();
+
+  expect(itemsQuestion.value[1].name).toBe("name1");
+});
+
+test("Preset edit, toolbox - edit category", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const survey = editor.model;
+  const categQuestion = survey.getQuestionByName("toolbox_categories");
+
+  const renderedRow = categQuestion.renderedTable.rows.filter(r => r.row == categQuestion.visibleRows[0])[0];
+  const editCategoryAction = renderedRow.cells[renderedRow.cells.length - 1].item.value.actions.filter(a => a.id == "edit-category")[0];
+
+  const originalShowDialog = settings.showDialog;
+  let popupSurvey: SurveyModel | undefined;
+
+  settings.showDialog = (options: any) => {
+    popupSurvey = options.data.survey;
+    return { dispose: jest.fn() };
+  };
+
+  try {
+    editCategoryAction.action();
+
+    const allQuestions = popupSurvey!.getAllQuestions();
+    expect(allQuestions.length).toBeGreaterThan(0);
+
+    allQuestions.forEach(question => {
+      if (question.name !== "items") {
+        expect(question.visible).toBeTruthy();
+      } else {
+        expect(question.visible).toBeFalsy();
+      }
+    });
+
+    expect(popupSurvey!.getQuestionByName("category").readOnly).toBeTruthy();
+
+    renderedRow.row.getQuestionByName("isDefault").value = false;
+    editCategoryAction.action();
+    expect(popupSurvey!.getQuestionByName("category").readOnly).toBeFalsy();
+  } finally {
+    settings.showDialog = originalShowDialog;
+  }
+});
+
+test("Preset edit, toolbox - edit item", () => {
+  const editor = new CreatorPresetEditorModel();
+  expect(editor.applyFromSurveyModel()).toBeTruthy();
+  const survey = editor.model;
+  const matrixQuestion = survey.getQuestionByName("toolbox_matrix") as QuestionMatrixDynamicModel;
+
+  const originalShowDialog = settings.showDialog;
+  let popupSurvey: SurveyModel | undefined;
+  settings.showDialog = (options: any) => {
+    popupSurvey = options.data.survey;
+    return { dispose: jest.fn() };
+  };
+
+  try {
+    const categoriesQuestion = survey.getQuestionByName("toolbox_categories");
+    const itemsQuestion = survey.getQuestionByName("toolbox_matrix");
+    expect(itemsQuestion.visibleRows).toHaveLength(0);
+    categoriesQuestion.visibleRows[0].showDetailPanel();
+    categoriesQuestion.visibleRows[0].detailPanel.getQuestionByName("items").removeRow(0);
+
+    expect(itemsQuestion.visibleRows).toHaveLength(1);
+    itemsQuestion.addRow();
+    expect(itemsQuestion.visibleRows).toHaveLength(2);
+
+    matrixQuestion.visibleRows[0].showDetailPanel();
+    const nameQuestion = popupSurvey!.getQuestionByName("name");
+    expect(nameQuestion.readOnly).toBeTruthy();
+
+    matrixQuestion.visibleRows[1].showDetailPanel();
+    const nameQuestion2 = popupSurvey!.getQuestionByName("name");
+    expect(nameQuestion2.readOnly).toBeFalsy();
+
+  } finally {
+    settings.showDialog = originalShowDialog;
+  }
 });

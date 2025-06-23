@@ -37,7 +37,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         },
         {
           "name": "title"
-        }
+        },
+        { name: "isDefault", type: "boolean", defaultValue: false, visible: false }
       ],
       detailPanelMode: "underRow",
       detailElements: [
@@ -47,7 +48,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           "elements": [
             { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
             { type: "text", name: "iconName", title: "Icon name" },
-            { type: "text", name: "tooltip", title: "Tooltip" }
+            { type: "text", name: "tooltip", title: "Tooltip" },
           ]
         },
         {
@@ -86,10 +87,13 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
           showHeader: false,
           columns: [
             { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
+            { name: "isDefault", type: "boolean", defaultValue: false, visible: false },
             { cellType: "text", name: "title" }
           ],
           detailPanelMode: "underRow",
           detailElements: [
+            { type: "text", name: "category", isRequired: true, visible: false },
+            { type: "text", name: "tooltip", visible: false },
             this.createItemsMatrixJSON({
               name: this.nameInnerMatrix,
               valueName: "items"
@@ -246,7 +250,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     //this.setupQuestionsValueDefinition(model, json);
     this.getQuestionItems(model).value = creator.toolbox.items.map(i => this.createToolboxItemRow(i));
-    const categories = creator.toolbox.categories.map(c => ({ category: c.name, items: c.items.map(i => this.createToolboxItemRow(i)) }));
+    const categories = creator.toolbox.categories.map(c => ({ category: c.name, isDefault: true, items: c.items.map(i => this.createToolboxItemRow(i)) }));
     model.setValue(this.nameCategories, categories);
     this.updateShowCategoriesTitlesElements(model);
   }
@@ -296,6 +300,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     this.getQuestionCategories(model).value = categories;
   }
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
+    super.updateOnValueChangedCore(model, name);
     if (name === this.nameCategoriesMode) {
       if (model.getValue(this.nameCategoriesMode) == "items") {
         this.updateItemsFromCategories(model);
@@ -354,6 +359,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameItems);
   }
   private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
-    return <ICreatorPresetToolboxItem> { name: item.name, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: item.json, category: item.category };
+    return <ICreatorPresetToolboxItem> { name: item.name, isDefault: true, title: item.title, iconName: item.iconName, tooltip: item.tooltip, json: item.json, category: item.category };
   }
 }

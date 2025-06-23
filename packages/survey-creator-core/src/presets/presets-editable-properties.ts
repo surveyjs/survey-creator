@@ -112,6 +112,7 @@ export class SurveyQuestionPresetPropertiesDetail {
           name: e.name,
           title: e.title,
           description: e.description,
+          isDefault: true
         }))
       };
     });
@@ -232,7 +233,8 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
       detailElements: [
         { type: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
         { type: "text", name: "title", title: "Title", isUnique: true, isRequired: true },
-        { type: "comment", name: "description", title: "Description" }
+        { type: "comment", name: "description", title: "Description" },
+        { name: "isDefault", type: "boolean", defaultValue: false, visible: false }
       ]
     };
     return { ...defaultJSON, ...props };
@@ -265,10 +267,13 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
               showHeader: false,
               columns: [
                 { cellType: "text", name: "category", isUnique: true, isRequired: true, visible: false },
-                { cellType: "text", name: "title" }
+                { type: "boolean", name: "isDefault", visible: false },
+                { cellType: "text", name: "title" },
               ],
               detailPanelMode: "underRow",
               detailElements: [
+                { type: "text", name: "category", title: "Category", isRequired: true, visible: false },
+                { type: "text", name: "iconName", title: "Icon Name", visible: false },
                 this.createItemsMatrixJSON({
                   name: this.nameInnerMatrix,
                 })
@@ -320,6 +325,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
   //   private isPropCreatorChanged: boolean;
   private firstTimeLoading = false;
   protected updateOnValueChangedCore(model: SurveyModel, name: string): void {
+    super.updateOnValueChangedCore(model, name);
     if (name == this.nameCategories) {
       if (!this.firstTimeLoading)this.isModified = true;
       const matrix = this.getQuestionCategories(model);

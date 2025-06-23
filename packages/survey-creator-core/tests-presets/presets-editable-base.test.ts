@@ -1,4 +1,4 @@
-import { MatrixDynamicRowModel, SurveyModel, settings } from "survey-core";
+import { MatrixDropdownRowModel, MatrixDynamicRowModel, SurveyModel, settings } from "survey-core";
 import { CreatorPresetEditableBase } from "../src/presets/presets-editable-base";
 import { CreatorPresetBase } from "../src/presets-creator/presets-base";
 import { QuestionMatrixDynamicModel } from "survey-core";
@@ -41,18 +41,13 @@ describe("CreatorPresetEditableBase", () => {
       ]
     });
 
-    // Create mock row
-    mockRow = {
-      hideDetailPanel: jest.fn(),
-      detailPanel: mockDetailPanel,
-      value: { question1: "initial value" },
-      index: 0
-    } as unknown as MatrixDynamicRowModel;
-
     // Create mock matrix
-    mockMatrix = {
-      value: [mockRow.value]
-    } as unknown as QuestionMatrixDynamicModel;
+    mockMatrix = new QuestionMatrixDynamicModel("matrix");
+    mockMatrix.fromJSON({
+      detailElements: [{ type: "text", name: "question1", isRequired: true }]
+    });
+    mockMatrix.value = [{ question1: "initial value" }];
+    mockRow = mockMatrix.visibleRows[0] as any;
 
     // Create mock root element
     mockRootElement = document.createElement("div");
@@ -74,7 +69,7 @@ describe("CreatorPresetEditableBase", () => {
       base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement);
 
       // Assert
-      expect(mockRow.hideDetailPanel).toHaveBeenCalled();
+      expect(mockRow.isDetailPanelShowing).toBeFalsy();
       expect(mockShowDialog).toHaveBeenCalledWith(
         expect.objectContaining({
           componentName: "survey",
@@ -97,7 +92,7 @@ describe("CreatorPresetEditableBase", () => {
       expect(survey).toBeInstanceOf(SurveyModel);
       expect(survey.fitToContainer).toBeFalsy();
       expect(survey.showNavigationButtons).toBeFalsy();
-      expect(survey.data).toEqual(mockRow.value);
+      expect(survey.data).toEqual(mockMatrix.value[0]);
     });
 
     it("should update row value when applying valid data", () => {
