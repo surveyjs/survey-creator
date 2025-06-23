@@ -29,9 +29,9 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if (this.isItemsMatrix(options.question)) {
       const survey = this.showDetailPanelInPopup(options.question, options.row, model.rootElement);
+      const isDefault = options.row.getQuestionByName("isDefault");
       if (survey) {
         const name = survey.getQuestionByName("name");
-        const isDefault = survey.getQuestionByName("isDefault");
         if (name && isDefault) name.readOnly = isDefault.value;
       }
     }

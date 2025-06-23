@@ -199,7 +199,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
   }
   private getJsonItemsDefinition(model: SurveyModel): any {
     const mode = model.getValue(this.nameCategoriesMode);
-    const items = (mode === "items") ? model.getValue(this.nameItems) : model.getValue(this.nameCategories).map(c => c.items).flat();
+    const itemsRaw = (mode === "items") ? model.getValue(this.nameItems) : model.getValue(this.nameCategories).map(c => c.items).flat();
+    const items = itemsRaw.map(i => ({ ...i, isDefault: undefined }));
     let differs = false;
     items.forEach(item => {
       if (this.cleanIfNotDiffers(item, this.defaultItems.filter(i => i.name == item.name)[0])) differs = true;
