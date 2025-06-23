@@ -119,7 +119,7 @@ export class ToolbarActionContainer extends FooterToolbarActionContainer {
     super();
   }
   protected getRenderedActions(): Array<Action> {
-    let actions = this.actions;
+    let actions = this.visibleActions;
     const expandAction = this.creator.sidebar.getExpandAction();
     var index = actions.indexOf(expandAction);
     if (index !== -1) {

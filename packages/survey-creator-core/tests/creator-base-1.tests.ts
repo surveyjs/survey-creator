@@ -2033,7 +2033,7 @@ test("Hide property grid is always visible in flyoutMode", (): any => {
 });
 
 test("Check property grid expand action is always last", (): any => {
-  const creator = new CreatorTester();
+  const creator = new CreatorTester({ propertyGridNavigationMode: "accordion" });
   creator.JSON = {
     pages: [
       {
@@ -2047,6 +2047,7 @@ test("Check property grid expand action is always last", (): any => {
     ]
   };
 
+  creator.setShowSidebar(false);
   const index = creator.toolbar.renderedActions.length - 1;
   expect(creator.toolbar.renderedActions[index].id).toEqual("svd-grid-expand");
   creator.toolbarItems.push(new Action({

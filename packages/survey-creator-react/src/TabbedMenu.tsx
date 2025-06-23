@@ -12,7 +12,6 @@ export class TabbedMenuComponent extends SurveyElementBase<
   ITabbedMenuComponentProps,
   any
 > {
-  private manager: ResponsivityManager;
   private rootRef: React.RefObject<HTMLDivElement>;
 
   private get model() {
@@ -31,7 +30,7 @@ export class TabbedMenuComponent extends SurveyElementBase<
   renderElement(): React.JSX.Element {
     const items = this.model.renderedActions.map((item) => <TabbedMenuItemWrapper item={item} key={item.renderedId} />);
     return (
-      <div ref={this.rootRef} className="svc-tabbed-menu" role="tablist">
+      <div ref={this.rootRef} className="svc-tabbed-menu" role="tablist" style={this.model.getRootStyle()}>
         {items}
       </div>
     );
@@ -41,13 +40,10 @@ export class TabbedMenuComponent extends SurveyElementBase<
     super.componentDidMount();
     const container: HTMLDivElement = this.rootRef.current;
     if (!container) return;
-    this.manager = new ResponsivityManager(
-      container,
-      this.model
-    );
+    this.model.initResponsivityManager(container);
   }
   componentWillUnmount() {
-    this.manager && (this.manager.dispose());
+    this.model.resetResponsivityManager();
     super.componentWillUnmount();
   }
 }
