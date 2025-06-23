@@ -296,7 +296,7 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/packages/survey-react-ui/test-results/"
+          SourceFolder: "$(Build.SourcesDirectory)/packages/survey-creator-react/test-results/"
           Contents: "**"
           TargetFolder: "$(Build.ArtifactStagingDirectory)/Creator_React_SCR"
           OverWrite: true

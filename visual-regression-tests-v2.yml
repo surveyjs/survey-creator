@@ -296,7 +296,7 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/packages/survey-react-ui/test-results/"
+          SourceFolder: "$(Build.SourcesDirectory)/packages/survey-creator-react/test-results/"
           Contents: "**"
           TargetFolder: "$(Build.ArtifactStagingDirectory)/Creator_React_SCR"
           OverWrite: true
@@ -321,7 +321,7 @@ jobs:
           failTaskOnFailedTests: true
           testRunTitle: "Creator React SCR Tests"
         condition: succeededOrFailed()
-        
+
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
           npm run vrt:v2:ci
