@@ -70,7 +70,6 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
   }
 
   render(): React.JSX.Element {
-    if (!this.toolbox.hasVisibleActions) return null;
     const search = this.toolbox.showSearch ? this.renderSearch() : null;
     const placeholder = this.toolbox.showPlaceholder ? <div className="svc-toolbox__placeholder">{this.toolbox.toolboxNoResultsFound}</div> : null;
     return (

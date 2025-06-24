@@ -1237,6 +1237,12 @@ export class QuestionToolbox
   protected createCategory(): QuestionToolboxCategory {
     return new QuestionToolboxCategory(this);
   }
+  protected getRenderedActions(): Array<QuestionToolboxItem> {
+    const actions = this.actions;
+    if (actions.length === 1 && !!actions[0].iconName)
+      return actions;
+    return actions.concat([<QuestionToolboxItem>this.dotsItem]);
+  }
   private indexOf(name: string) {
     for (var i = 0; i < this.actions.length; i++) {
       if (this.actions[i].name == name) return i;
