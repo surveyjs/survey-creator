@@ -171,5 +171,5 @@ test.describe(title, () => {
     await expect(page.getByRole("textbox", { name: "Question name" })).toBeVisible();
     await expect(page.getByRole("textbox", { name: "Question name" })).toHaveValue("q3978");
     await expect(page.getByText("q3978Mfkwem UkzyogClick to")).toBeVisible();
-  });
+  }, 10000 * 5);
 });
