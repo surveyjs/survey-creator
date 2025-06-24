@@ -26,7 +26,7 @@ export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> imple
   override ngAfterViewChecked(): void {
     super.ngAfterViewChecked();
     if (this.container?.nativeElement) {
-      this.model.initResponsivityManager(this.container.nativeElement);
+      this.toolbox.afterRender(this.container.nativeElement);
     }
   }
   protected getModel(): QuestionToolbox {
