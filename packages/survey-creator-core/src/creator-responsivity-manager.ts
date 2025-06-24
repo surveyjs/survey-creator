@@ -53,7 +53,11 @@ export class CreatorResponsivityManager {
 
   constructor(protected container: HTMLDivElement, private creator: SurveyCreatorModel) {
     if (typeof ResizeObserver !== "undefined") {
-      this.resizeObserver = new ResizeObserver((_) => this.process());
+      this.resizeObserver = new ResizeObserver((_) => {
+        DomWindowHelper.requestAnimationFrame(() => {
+          this.process();
+        });
+      });
       this.resizeObserver.observe(this.findCorrectParent(this.container));
       this.process(true);
       if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {

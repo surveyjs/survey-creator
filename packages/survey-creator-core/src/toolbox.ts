@@ -19,7 +19,8 @@ import {
   surveyLocalization,
   ComputedUpdater,
   AnimationBoolean,
-  IAnimationConsumer
+  IAnimationConsumer,
+  VerticalResponsivityManager
 } from "survey-core";
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
@@ -1236,6 +1237,12 @@ export class QuestionToolbox
   protected createCategory(): QuestionToolboxCategory {
     return new QuestionToolboxCategory(this);
   }
+  protected getRenderedActions(): Array<QuestionToolboxItem> {
+    const actions = this.actions;
+    if (actions.length === 1 && !!actions[0].iconName)
+      return actions;
+    return actions.concat([<QuestionToolboxItem>this.dotsItem]);
+  }
   private indexOf(name: string) {
     for (var i = 0; i < this.actions.length; i++) {
       if (this.actions[i].name == name) return i;
@@ -1432,6 +1439,17 @@ export class QuestionToolbox
         questions.push(name);
     }
     return questions;
+  }
+  public createResponsivityManager(container: HTMLDivElement): VerticalResponsivityManager {
+    return new VerticalResponsivityManager(container, this);
+  }
+  public afterRender(container: HTMLDivElement) {
+    this.setRootElement(container);
+    this.initResponsivityManager(this.containerElement as HTMLDivElement);
+  }
+  public beforeDestroy() {
+    this.setRootElement(undefined);
+    this.resetResponsivityManager();
   }
   //public dispose(): void { } Don't we need to dispose toolbox?
 }

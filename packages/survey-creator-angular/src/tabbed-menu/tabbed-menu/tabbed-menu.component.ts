@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
-import { ResponsivityManager } from "survey-core";
 import { TabbedMenuContainer, TabbedMenuItem } from "survey-creator-core";
 
 @Component({
@@ -11,18 +10,23 @@ import { TabbedMenuContainer, TabbedMenuItem } from "survey-creator-core";
 export class TabbledMenuComponent extends BaseAngular<TabbedMenuContainer> implements AfterViewInit {
   @Input() model!: TabbedMenuContainer;
   @ViewChild("container") container!: ElementRef<HTMLDivElement>;
-  private responsivityManager!: ResponsivityManager;
   protected getModel(): TabbedMenuContainer {
     return this.model;
   }
   ngAfterViewInit(): void {
-    this.responsivityManager = new ResponsivityManager(
-      this.container.nativeElement,
-      this.model);
+    if (this.container?.nativeElement) {
+      this.model.initResponsivityManager(this.container.nativeElement);
+    }
+  }
+  override ngAfterViewChecked(): void {
+    super.ngAfterViewChecked();
+    if (this.container?.nativeElement) {
+      this.model.initResponsivityManager(this.container.nativeElement);
+    }
   }
   override ngOnDestroy(): void {
     super.ngOnDestroy();
-    this.responsivityManager.dispose();
+    this.model.resetResponsivityManager();
   }
   trackItemBy(_: number, item: TabbedMenuItem) {
     return item.renderedId;

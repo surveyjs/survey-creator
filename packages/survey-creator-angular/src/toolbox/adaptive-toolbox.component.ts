@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { SurveyCreatorModel, QuestionToolbox, QuestionToolboxItem } from "survey-creator-core";
-import { Action, VerticalResponsivityManager } from "survey-core";
+import { Action } from "survey-core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 
 @Component({
@@ -10,8 +10,7 @@ import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 })
 export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> implements AfterViewInit {
   @Input() model!: SurveyCreatorModel;
-  @ViewChild("container") container!: ElementRef<HTMLElement>;
-  private responsivityManager: VerticalResponsivityManager | undefined;
+  @ViewChild("container") container!: ElementRef<HTMLDivElement>;
   public get toolbox() {
     return this.model.toolbox;
   }
@@ -22,17 +21,22 @@ export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> imple
     return this.toolbox.searchItem as Action;
   }
   ngAfterViewInit() {
-    this.toolbox.setRootElement(this.container.nativeElement as HTMLDivElement);
-    this.responsivityManager =
-        new VerticalResponsivityManager(this.toolbox.containerElement as HTMLDivElement,
-          this.toolbox);
+    this.toolbox.afterRender(this.container.nativeElement);
+    if (this.container?.nativeElement) {
+      this.toolbox.afterRender(this.container.nativeElement);
+    }
+  }
+  override ngAfterViewChecked(): void {
+    super.ngAfterViewChecked();
+    if (this.container?.nativeElement) {
+      this.toolbox.afterRender(this.container.nativeElement);
+    }
   }
   protected getModel(): QuestionToolbox {
     return this.toolbox;
   }
   override ngOnDestroy(): void {
-    this.responsivityManager?.dispose();
-    this.toolbox.setRootElement(undefined as any);
+    this.toolbox.beforeDestroy();
     super.ngOnDestroy();
   }
   trackItemBy(_: number, item: QuestionToolboxItem) {

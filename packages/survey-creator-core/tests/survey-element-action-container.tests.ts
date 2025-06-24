@@ -227,18 +227,23 @@ test("actions and creator.onPropertyValueChanging", () => {
 test("Check actions container responsiveness doesn't run when invisible", () => {
   const creator = new CreatorTester();
   class ResizeObserver {
-    observe() { }
+    constructor(protected callback: () => void) {}
+    observe() {
+      this.callback();
+    }
     disconnect() { }
   }
   const oldResizeObserver = window.ResizeObserver;
+  const oldRequestAnimationFrame = window.requestAnimationFrame;
   window.ResizeObserver = <any>ResizeObserver;
+  window.requestAnimationFrame = (callback) => { callback(1); return 1; };
   creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }, { type: "text", name: "q3" }] };
   const q1 = creator.survey.getQuestionByName("q1");
   const q2 = creator.survey.getQuestionByName("q2");
   const q3 = creator.survey.getQuestionByName("q3");
   creator.selectElement(q1);
 
-  const spy = jest.spyOn(ResponsivityManager.prototype as any, "process");
+  const spy = jest.spyOn(ResponsivityManager.prototype as any, "updateItemsDimensions");
   const q1Adapter = new QuestionAdornerViewModel(creator, q1, <any>undefined);
   const q2Adapter = new QuestionAdornerViewModel(creator, q2, <any>undefined);
   const q3Adapter = new QuestionAdornerViewModel(creator, q3, <any>undefined);
@@ -313,6 +318,7 @@ test("Check actions container responsiveness doesn't run when invisible", () => 
   expect(q2Log).toBe("->raised:true");
   expect(q3Log).toBe("->raised:true");
   window.ResizeObserver = oldResizeObserver;
+  window.requestAnimationFrame = oldRequestAnimationFrame;
   spy.mockRestore();
 });
 
